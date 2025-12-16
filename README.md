@@ -11,6 +11,7 @@ A private, local-first emotional AI companion with integrated voice interface.
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -18,8 +19,10 @@ A private, local-first emotional AI companion with integrated voice interface.
 ### 2. Run the Application
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -56,6 +59,7 @@ pip install -r requirements.txt
 
 # Run Streamlit app
 ```text
+```text
 ```
 
 
@@ -79,6 +83,7 @@ pip install -r requirements.txt
 ## Project Structure (Post-Reorganization)
 
 ```
+
 saoriverse-console/
 ├── app.py                 # Single Streamlit entry point
 ├── requirements.txt       # Dependencies
@@ -89,8 +94,10 @@ saoriverse-console/
 ├── data/                 # Data files (glyphs, lexicons)
 ├── scripts/              # Utility scripts (organized)
 ├── docs/                 # Documentation
+
 ```text
 ```
+
 
 
 
@@ -112,6 +119,7 @@ pytest tests/integration/
 
 # With coverage report
 ```text
+```text
 ```
 
 
@@ -122,14 +130,17 @@ pytest tests/integration/
 ### Text-to-Response Pipeline
 
 ```
+
 ```text
 ```
+
 
 
 
 ### Voice Pipeline (Optional)
 
 ```
+```text
 ```text
 ```
 
@@ -138,8 +149,10 @@ pytest tests/integration/
 ### Learning System
 
 ```
+
 ```text
 ```
+
 
 
 ##
@@ -207,6 +220,7 @@ kill -9 <PID>
 
 # Then restart
 ```text
+```text
 ```
 
 
@@ -215,6 +229,7 @@ kill -9 <PID>
 
 ```bash
 
+
 # Ensure you're in the project root
 cd saoriverse-console
 
@@ -222,8 +237,10 @@ cd saoriverse-console
 python -c "import sys; print(sys.path)"
 
 # Reinstall dependencies
+
 ```text
 ```
+
 
 
 
@@ -237,6 +254,7 @@ python -m pytest --version
 # Run with verbose output
 pytest tests/ -v
 ```
+
 
 
 ##

@@ -3,8 +3,10 @@
 ## 🎯 Integration at a Glance
 
 Your Velinor game now uses FirstPerson to make NPC dialogue **emotionally responsive**. Here's what happens:
+
 ```text
 ```
+
 You type: "I'm overwhelmed by all of this"
            ↓
 FirstPerson analyzes:
@@ -17,6 +19,7 @@ NPC adapts response:
   - Opening acknowledges weight: "I hear the weight in that"
   - Connects to theme: "The burden can feel immense"
   - Invites exploration: "What needs to be said about it?"
+
 ```
 
 
@@ -52,6 +55,7 @@ FirstPerson tracks across turns:
 
 ### Conversation Memory
 ```text
+```text
 ```
 Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6
 Turn 2: "It's like I've lost them" → Theme: grief, Valence: -0.8
@@ -63,11 +67,15 @@ Turn 3: "But maybe there's hope"  → Theme: grief, Valence: -0.1
 
 
 
+
 ### NPC Responds to Pattern
+
 ```text
 ```
+
 Turn 3 NPC: "I'm noticing a shift in what you're saying.
 What's helping you see this differently?"
+
 ```
 
 
@@ -96,6 +104,7 @@ What's helping you see this differently?"
 
 ```python
 
+
 # FirstPerson initialized on startup
 st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(...)
 
@@ -103,8 +112,10 @@ st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(...)
 orchestrator = VelinorTwineOrchestrator(
     first_person_module=firstperson_orchestrator,
     ...
+
 ```text
 ```
+
 
 
 
@@ -122,6 +133,7 @@ npc_dialogue = self._generate_npc_dialogue(
     npc_name='Keeper',
     context=updated_state  # Contains player_analysis
 ```text
+```text
 ```
 
 
@@ -133,6 +145,7 @@ npc_dialogue = self._generate_npc_dialogue(
 ### Scenario 1: Heavy Emotional Weight
 
 ```
+
 You: "Everything feels too heavy. I don't know if I can go on."
 
 FirstPerson Analysis:
@@ -146,8 +159,10 @@ FirstPerson Analysis:
 Keeper's Response:
 "I hear the weight in that. The gravity of what you're carrying—
 I feel it too. What needs to be said about it? Sometimes naming it
+
 ```text
 ```
+
 
 
 
@@ -173,6 +188,7 @@ Keeper's Response:
 "I hear the weight in that. And I'm noticing grief keeps coming
 back to you—it's sitting heavy. That tells me something. What do
 ```text
+```text
 ```
 
 
@@ -180,6 +196,7 @@ back to you—it's sitting heavy. That tells me something. What do
 ### Scenario 3: Emotional Improvement
 
 ```
+
 You: "Maybe there's something I can learn from this pain..."
 
 FirstPerson Analysis:
@@ -195,8 +212,10 @@ FirstPerson Analysis:
 
 Keeper's Response:
 "There's something to sit with there. I'm also noticing a shift
+
 ```text
 ```
+
 
 
 
@@ -208,6 +227,7 @@ Keeper's Response:
 
 # Just run it—integration works automatically!
 ```text
+```text
 ```
 
 
@@ -218,10 +238,13 @@ No configuration needed. FirstPerson analysis happens client-side.
 The terminal shows debug info (if logging enabled):
 
 ```
+
 [Player Input] "I'm struggling with loss"
 [FirstPerson] tone='heavy', theme='grief', valence=-0.7, intensity=0.8
+
 ```text
 ```
+
 
 
 
@@ -241,6 +264,7 @@ response_openings = {
 theme_acknowledgments = {
     'grief': "Your custom grief acknowledgment",
     ...
+```text
 ```text
 ```
 
@@ -265,13 +289,16 @@ theme_acknowledgments = {
 ### Turn Tracking
 
 ```python
+
 self.memory.record_turn(
     user_input="I feel lost",
     affect={valence: -0.7, intensity: 0.8, tone: 'heavy'},
     theme='general',
     glyph_name=None
+
 ```text
 ```
+
 
 
 
@@ -287,6 +314,7 @@ memory.repeated_patterns = ['grief']
 
 # Next NPC response includes:
 ```text
+```text
 ```
 
 
@@ -294,10 +322,12 @@ memory.repeated_patterns = ['grief']
 ### Emotional Trajectory
 
 ```python
+
 Valence history: [-0.8, -0.7, -0.6, -0.4, -0.2]
 → Trend: 'improving'
 
 NPC: "I'm also noticing a shift. What's helping?"
+
 ```
 
 

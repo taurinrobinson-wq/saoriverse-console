@@ -24,6 +24,7 @@ from emotional_os.core import (
 ```
 
 
+
 ##
 
 ## 📚 Common Tasks
@@ -43,6 +44,7 @@ print(result["signals"])  # Emotional signals detected
 print(result["gates"])    # Activated ECM gates
 print(result["glyphs"])   # Matched glyphs
 ```
+
 
 
 
@@ -71,6 +73,7 @@ print(f"Learned {stats['learned_lexicon_size']} new words")
 
 
 
+
 ### Access Constants
 
 ```python
@@ -88,6 +91,7 @@ for gate, signals in ECM_GATES.items():
 patterns = EMOTIONAL_PATTERNS
 feeling_exprs = patterns["feeling_expressions"]
 ```
+
 
 
 
@@ -110,6 +114,7 @@ pm.ensure_dir(poetry_dir)
 ```
 
 
+
 ##
 
 ## 🔄 Backward Compatibility
@@ -130,6 +135,7 @@ from emotional_os.core import parse_input, LexiconLearner
 ```
 
 
+
 ##
 
 ## 📁 File Organization
@@ -142,6 +148,7 @@ emotional_os/core/
 ├── signal_parser.py         # Emotional signal extraction & glyph matching
 └── lexicon_learner.py       # Learn patterns from conversations
 ```
+
 
 
 
@@ -162,6 +169,7 @@ from emotional_os.core import (
 
 
 
+
 **`constants.py`** - All configuration
 
 ```python
@@ -174,6 +182,7 @@ EMOTIONAL_PATTERNS = {'feeling_expressions': [...], ...}
 
 
 
+
 **`paths.py`** - Smart path resolution
 
 ```python
@@ -183,6 +192,7 @@ learned_lexicon_path()  # Returns path to learned lexicon
 
 # ... handles migration/multiple locations seamlessly
 ```
+
 
 
 
@@ -199,6 +209,7 @@ fetch_glyphs()  # Get matching glyphs
 
 
 
+
 **`lexicon_learner.py`** - Learning system
 
 ```python
@@ -209,6 +220,7 @@ update_lexicon_from_learning()  # Add new words to lexicon
 
 # ... all learning functionality
 ```
+
 
 
 ##
@@ -231,6 +243,7 @@ from emotional_os.core import SIGNALS
 
 
 
+
 ### 6 ECM Gates
 
 ```python
@@ -243,6 +256,7 @@ Gate 6:  α, Ω, ε             # Devotion + Recognition + Insight
 Gate 9:  α, β, γ, δ, ε, Ω    # Multiple signals
 Gate 10: θ                    # Grief alone
 ```
+
 
 
 ##
@@ -258,6 +272,7 @@ learner = LexiconLearner(
     base_lexicon_path="/path/to/custom/signals.json"
 )
 ```
+
 
 
 
@@ -283,6 +298,7 @@ for user_input in inputs:
 
 
 
+
 ### Get Learning Statistics
 
 ```python
@@ -299,6 +315,7 @@ print(f"Top learned words: {stats['top_learned_words']}")
 ```
 
 
+
 ##
 
 ## 🐛 Troubleshooting
@@ -313,6 +330,7 @@ from emotional_os.core import parse_input  # ✅ Correct
 # Not:
 from emotional_os.glyphs.signal_parser import parse_input  # ❌ Works but outdated
 ```
+
 
 
 
@@ -336,6 +354,7 @@ print(f"Exists: {path.exists()}")
 
 
 
+
 ### Lexicon Not Updating?
 
 ```python
@@ -349,6 +368,7 @@ learner.update_lexicon_from_learning(results)
 from emotional_os.core.paths import learned_lexicon_path
 print(learned_lexicon_path())
 ```
+
 
 
 ##

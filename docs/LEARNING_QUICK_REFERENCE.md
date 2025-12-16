@@ -1,8 +1,10 @@
 # Dynamic Learning System - Quick Reference
 
 ## The Big Picture
+
 ```text
 ```
+
 Playwright writes dialogue scenes
         ↓
 Organizer extracts rules and principles
@@ -14,6 +16,7 @@ Responses are logged and analyzed
 System learns new patterns
         ↓
 Library grows, responses improve
+
 ```
 
 
@@ -22,6 +25,7 @@ Library grows, responses improve
 
 ### 1. Archetype Library
 **Stores learned patterns**
+```text
 ```text
 ```
 What you need: Library of conversation archetypes
@@ -45,10 +49,13 @@ Example archetype:
 
 
 
+
 ### 2. Response Generator
 **Applies principles to generate responses**
+
 ```sql
 ```
+
 What you need: Generate fresh responses from principles
 File: emotional_os/learning/archetype_response_generator.py
 What it does:
@@ -62,12 +69,14 @@ Archetype: ReliefToGratitude
 Principles: [Validate warmly, Balance emotions, Ask gentle question]
 Output: "That takes courage. Sounds like something shifted.
          What helped you get there?"
+
 ```
 
 
 
 ### 3. Conversation Learner
 **Extracts patterns from conversations**
+```sql
 ```sql
 ```
 What you need: Auto-extract new archetypes from successful conversations
@@ -91,6 +100,7 @@ Output: New archetype added to library
 
 
 
+
 ## Quick Start Code
 
 ### Generate a Response
@@ -104,6 +114,7 @@ response = generator.generate_archetype_aware_response(
     prior_context="Yesterday was really overwhelming",
 )
 ```sql
+```sql
 ```
 
 
@@ -111,6 +122,7 @@ response = generator.generate_archetype_aware_response(
 ### Learn from a Conversation
 
 ```python
+
 from emotional_os.learning import get_conversation_learner
 
 learner = get_conversation_learner()
@@ -125,8 +137,10 @@ new_archetype = learner.learn_from_conversation(
     turns=conversation_turns,
     user_rating=0.95,  # 1.0 = excellent
 )
+
 ```text
 ```
+
 
 
 
@@ -150,6 +164,7 @@ matches = library.get_all_matches(
     threshold=0.3
 )
 for archetype, score in matches:
+```text
 ```text
 ```
 
@@ -180,6 +195,7 @@ Your dialogue scene → System extracted this archetype
 ### Step 1: Write a Dialogue Scene
 
 ```
+
 User: "I've been so stressed about my performance review,
        but I just found out I got the raise."
 
@@ -189,8 +205,10 @@ User: "Like I can finally breathe. But now I feel guilty
        that it took this to relax."
 
 System: "The relief and the guilt can coexist. What's underneath
+
 ```text
 ```
+
 
 
 
@@ -198,6 +216,7 @@ System: "The relief and the guilt can coexist. What's underneath
 
 ```
 Conversation → Learner analyzes → New archetype created
+```text
 ```text
 ```
 
@@ -211,6 +230,7 @@ Next similar input automatically uses learned principles
 Every archetype has these components:
 
 ```json
+
 {
   "name": "ArchetypeName",
   "entry_cues": ["keyword1", "keyword2", "..."],
@@ -234,8 +254,10 @@ Every archetype has these components:
   "success_weight": 0.95,
   "usage_count": 5,
   "success_count": 5
+
 ```text
 ```
+
 
 
 
@@ -270,6 +292,7 @@ resp = gen.generate_archetype_aware_response(
 print(resp)
 "
 ```
+
 
 
 

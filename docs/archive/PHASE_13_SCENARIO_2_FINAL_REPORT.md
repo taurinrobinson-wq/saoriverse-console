@@ -72,12 +72,14 @@ BAD: Responses feel mechanical, vary unpredictably
 
 
 
+
 Now implemented (new approach):
 
 ```
 NEW: Match archetype → Extract learned principles → Generate unique response
 GOOD: Each response fresh but follows learned rules, naturally coherent
 ```
+
 
 
 
@@ -127,12 +129,14 @@ meetings and impossible deadlines."
 
 
 
+
 **Turn 1 - System response (via OverwhelmToReflection):**
 
 ```
 "I hear you. Sounds like you're holding a lot right now. What's one thing
 about that you want to sit with?"
 ```
+
 
 
 
@@ -151,12 +155,14 @@ I'm just grinding through."
 
 
 
+
 **Turn 3 - System response (via OverwhelmToReflection):**
 
 ```
 "That weight is real. So underneath the work stress is a question about what
 it all means. That's important. What's one thing about that you want to sit with?"
 ```
+
 
 
 
@@ -175,6 +181,7 @@ supposed to be focused on the work."
 
 
 
+
 **Turn 5 - System response (via OverwhelmToReflection):**
 
 ```
@@ -182,6 +189,7 @@ supposed to be focused on the work."
 it, but there's this creative part too. What's one thing about that you want to
 sit with?"
 ```
+
 
 
 
@@ -281,6 +289,7 @@ Analysis: Holds complexity (both/and) → Bridges professional to personal → E
 
 
 
+
 ### Scenario 2 Test (test_overwhelm_to_reflection_scenario.py)
 
 ```
@@ -313,6 +322,7 @@ Analysis: Holds complexity (both/and) → Bridges professional to personal → E
      - Successfully reloaded
      - OverwhelmToReflection confirmed in reloaded library
 ```
+
 
 
 ##
@@ -362,6 +372,7 @@ Successful Response Recorded
 ConversationLearner
     └─ (Next phase) Extract new patterns for library growth
 ```
+
 
 
 ##

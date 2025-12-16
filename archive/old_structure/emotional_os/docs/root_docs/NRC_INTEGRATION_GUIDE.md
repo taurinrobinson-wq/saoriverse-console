@@ -34,6 +34,7 @@ Sadness:    10% (3 words)  - Minor
 
 
 
+
 **Observation**: NRC emphasizes positive/neutral emotions (joy, fear are survival-critical). Sadness is underrepresented compared to SaoriVerse's 20.5% grief/sorrow focus.
 ##
 
@@ -130,6 +131,7 @@ Sadness:    10% (3 words)  - Minor
 
 
 
+
 ### Option B: Hybrid Layered Approach
 **Action**: Use NRC for emotional intensity modulation, keep current for semantic precision
 
@@ -148,6 +150,7 @@ Sadness:    10% (3 words)  - Minor
   }
 }
 ```
+
 
 
 
@@ -267,6 +270,7 @@ Sadness:    10% (3 words)  - Minor
 
 
 
+
 ### For lexicon_enhanced.json
 
 ```json
@@ -283,6 +287,7 @@ Sadness:    10% (3 words)  - Minor
   }
 }
 ```
+
 
 
 ##

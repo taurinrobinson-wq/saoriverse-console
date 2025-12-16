@@ -55,6 +55,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # 4. Chat with FirstPerson!
 
 ```text
+```text
 ```
 
 
@@ -64,6 +65,7 @@ Done! That's it. Three commands.
 ## 🏗️ How It Works
 
 ```
+
 User Message
     ↓
 Try Local Glyph Analysis
@@ -74,8 +76,10 @@ Try Ollama Local LLM
     ├─ Available? → Generate response + Tier Processing → Response
     └─ Not available? ↓
     ↓
+
 ```text
 ```
+
 
 
 
@@ -89,6 +93,7 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 client = get_ollama_client_singleton()
 client.is_available()                    # Check if running
 client.get_available_models()            # List models
+```text
 ```text
 ```
 
@@ -105,10 +110,13 @@ client.get_available_models()            # List models
 Automatically initialized on app load:
 
 ```python
+
 st.session_state["ollama_client"]     # Client instance
 st.session_state["ollama_available"]  # True/False
+
 ```text
 ```
+
 
 
 
@@ -118,6 +126,7 @@ For testing, use **orca-mini** (1.3GB, fast):
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -125,8 +134,10 @@ For testing, use **orca-mini** (1.3GB, fast):
 For best quality, use **llama3** (4.7GB):
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -136,6 +147,7 @@ For best quality, use **llama3** (4.7GB):
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -143,15 +155,19 @@ For best quality, use **llama3** (4.7GB):
 ### View logs
 
 ```bash
+
 docker-compose -f docker-compose.local.yml logs -f ollama    # Ollama logs
+
 ```text
 ```
+
 
 
 
 ### List models
 
 ```bash
+```text
 ```text
 ```
 
@@ -160,14 +176,17 @@ docker-compose -f docker-compose.local.yml logs -f ollama    # Ollama logs
 ### Stop services
 
 ```bash
+
 ```bash
 ```
+
 
 
 
 ### Test directly (curl)
 
 ```bash
+```text
 ```text
 ```
 
@@ -178,8 +197,10 @@ docker-compose -f docker-compose.local.yml logs -f ollama    # Ollama logs
 Run the test suite:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -193,6 +214,7 @@ Expected output:
 ✅ FirstPerson Client
 
 5/5 checks passed
+```text
 ```text
 ```
 
@@ -346,10 +368,12 @@ You now have a **complete, production-grade Ollama integration** for FirstPerson
 Everything is ready to use. Just run:
 
 ```bash
+
 docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # Open http://localhost:8501
+
 ```
 
 

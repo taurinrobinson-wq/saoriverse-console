@@ -23,6 +23,7 @@ Main class for analyzing vocal emotion from acoustic features.
 
 ```python
 ```text
+```text
 ```
 
 
@@ -42,6 +43,7 @@ Analyzes acoustic features to determine vocal emotion.
 **Example**:
 
 ```python
+
 features = AcousticFeatures(
     fundamental_frequency=150,
     intensity=75,
@@ -54,8 +56,10 @@ features = AcousticFeatures(
     mel_frequency_coefficients=[1.0] * 13,
     duration=5.0,
 )
+
 ```text
 ```
+
 
 
 
@@ -90,6 +94,7 @@ Compares voice emotion against text emotion to detect incongruences.
     "is_suppression": True,
     "explanation": "Calm/hesitant voice with excited text suggests suppression",
 ```text
+```text
 ```
 
 
@@ -116,6 +121,7 @@ Input data for voice analysis.
 **Fields**:
 
 ```python
+
 @dataclass
 class AcousticFeatures:
     fundamental_frequency: float      # Hz, typically 80-250 Hz
@@ -127,8 +133,10 @@ class AcousticFeatures:
     energy_variance: float            # dB^2, measure of intensity fluctuation
     formant_frequencies: List[float]  # Hz, typically 3 values [F1, F2, F3]
     mel_frequency_coefficients: List[float]  # 13 MFCCs
+
 ```text
 ```
+
 
 
 
@@ -158,6 +166,7 @@ class VoiceAnalysis:
     stress_indicator: float                  # 0-1
     emotional_state: Dict[str, float]        # All 8 tones with confidences
 ```text
+```text
 ```
 
 
@@ -176,8 +185,10 @@ Main class for analyzing facial emotion from landmarks.
 ##### `__init__()`
 
 ```python
+
 ```text
 ```
+
 
 
 
@@ -207,6 +218,7 @@ landmarks = FaceLandmarks(
 )
 analysis = detector.analyze(landmarks)
 print(f"Expression: {analysis.expression}")
+```text
 ```text
 ```
 
@@ -253,6 +265,7 @@ Input data for facial analysis (68 points normalized to 0-1 range).
 **Fields**:
 
 ```python
+
 @dataclass
 class FaceLandmarks:
     contour: List[Tuple[float, float]]              # 17 points
@@ -261,8 +274,10 @@ class FaceLandmarks:
     nose: List[Tuple[float, float]]                 # 9 points
     right_eye: List[Tuple[float, float]]            # 6 points
     left_eye: List[Tuple[float, float]]             # 6 points
+
 ```text
 ```
+
 
 
 
@@ -283,6 +298,7 @@ class EyeMetrics:
     blink_rate: float                   # blinks per minute (0-30 typical)
     gaze_direction: str                 # "left", "center", "right"
 ```text
+```text
 ```
 
 
@@ -295,13 +311,16 @@ Mouth-related measurements from facial landmarks.
 **Fields**:
 
 ```python
+
 @dataclass
 class MouthMetrics:
     smile_intensity: float              # 0-1, no smile to full smile
     mouth_openness: float               # 0-1, closed to wide open
     lip_tension: float                  # 0-1, relaxed to tense
+
 ```text
 ```
+
 
 
 ##
@@ -326,6 +345,7 @@ class FacialAnalysis:
     dominance: float                             # 0-1, submissive to assertive
     attention: float                             # 0-1, distracted to focused
 ```text
+```text
 ```
 
 
@@ -344,8 +364,10 @@ Fuses text, voice, and facial data into unified emotional understanding.
 ##### `__init__()`
 
 ```python
+
 ```text
 ```
+
 
 
 
@@ -379,6 +401,7 @@ print(f"Congruence: {result.congruence_type}")
 if result.incongruences:
     for inc in result.incongruences:
 ```text
+```text
 ```
 
 
@@ -403,13 +426,16 @@ Confidence scores for each modality and combined result.
 **Fields**:
 
 ```python
+
 @dataclass
 class ModularityConfidence:
     text_confidence: float               # 0-1
     voice_confidence: float              # 0-1
     facial_confidence: float             # 0-1
+
 ```text
 ```
+
 
 
 ##
@@ -430,6 +456,7 @@ class EmotionalDimensions:
     valence_source: str                  # "text", "voice", "facial"
     dominance_source: str                # "text", "voice", "facial"
 ```text
+```text
 ```
 
 
@@ -442,6 +469,7 @@ Complete output of multimodal fusion.
 **Fields**:
 
 ```python
+
 @dataclass
 class MultimodalAnalysis:
     primary_emotion: str                        # Dominant emotion
@@ -451,8 +479,10 @@ class MultimodalAnalysis:
     dimensions: EmotionalDimensions
     confidence: ModularityConfidence
     comparison: ModularityComparison            # Detailed modality breakdown
+
 ```text
 ```
+
 
 
 ##
@@ -469,6 +499,7 @@ Container for all 11 Action Unit measurements.
 @dataclass
 class ActionUnitIntensities:
     intensities: Dict[str, float]  # Keys: "AU1_inner_brow_raiser", "AU2_outer_brow_raiser", etc.
+```text
 ```text
 ```
 
@@ -496,6 +527,7 @@ Detailed comparison of each modality's analysis.
 **Fields**:
 
 ```python
+
 @dataclass
 class ModularityComparison:
     text_details: str           # Summary of text emotion
@@ -503,8 +535,10 @@ class ModularityComparison:
     facial_details: str         # Summary of facial expression
     text_voice_alignment: float # 0-1
     voice_facial_alignment: float # 0-1
+
 ```text
 ```
+
 
 
 ##
@@ -515,6 +549,7 @@ class ModularityComparison:
 
 ```python
 ```text
+```text
 ```
 
 
@@ -522,14 +557,17 @@ class ModularityComparison:
 ### FacialExpression
 
 ```python
+
 ```text
 ```
+
 
 
 
 ### ActionUnit
 
 ```python
+```text
 ```text
 ```
 
@@ -538,9 +576,12 @@ class ModularityComparison:
 ### CongruenceType
 
 ```python
+
 FULL_AGREEMENT, PARTIAL_AGREEMENT, MODALITY_CONFLICT,
+
 ```text
 ```
+
 
 
 ##
@@ -556,6 +597,7 @@ detector = VoiceAffectDetector()
 features = AcousticFeatures(...)
 analysis = detector.analyze(features)
 ```text
+```text
 ```
 
 
@@ -563,6 +605,7 @@ analysis = detector.analyze(features)
 ### Pattern 2: Facial Expression with Authenticity
 
 ```python
+
 from emotional_os.core.firstperson import FacialExpressionDetector, FaceLandmarks
 
 detector = FacialExpressionDetector()
@@ -572,8 +615,10 @@ analysis = detector.analyze(landmarks)
 if analysis.authenticity > 0.7:
     print("Genuine expression")
 else:
+
 ```text
 ```
+
 
 
 
@@ -588,6 +633,7 @@ result = engine.fuse(text_tone, voice_analysis, facial_analysis)
 print(f"Emotion: {result.primary_emotion}")
 print(f"Confidence: {result.confidence.overall_confidence:.2%}")
 ```text
+```text
 ```
 
 
@@ -595,10 +641,13 @@ print(f"Confidence: {result.confidence.overall_confidence:.2%}")
 ### Pattern 4: Sarcasm Detection
 
 ```python
+
 if result.congruence_type == "TEXT_POSITIVE_VOICE_NEGATIVE":
     print("⚠️  Possible sarcasm detected")
+
 ```text
 ```
+
 
 
 
@@ -609,6 +658,7 @@ if result.congruence_type == "SUPPRESSION":
     print("⚠️  Possible emotion suppression")
     print(f"Stress level: {result.dimensions.stress_level:.2%}")
 ```
+
 
 
 ##

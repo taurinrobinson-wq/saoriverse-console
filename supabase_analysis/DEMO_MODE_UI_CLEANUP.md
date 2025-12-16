@@ -27,6 +27,7 @@ try:
         st.rerun()
 except Exception:
 ```text
+```text
 ```
 
 
@@ -35,6 +36,7 @@ except Exception:
 
 ```python
 
+
 # Only show for authenticated users (requires data persistence)
 if st.session_state.get('authenticated'):
     try:
@@ -42,8 +44,10 @@ if st.session_state.get('authenticated'):
             st.session_state.show_personal_log = True
             st.rerun()
     except Exception:
+
 ```text
 ```
+
 
 
 
@@ -61,6 +65,7 @@ try:
         auth.logout()
 except Exception:
 ```text
+```text
 ```
 
 
@@ -68,6 +73,7 @@ except Exception:
 **After**:
 
 ```python
+
 
 # Only show for authenticated users
 if st.session_state.get('authenticated'):
@@ -77,8 +83,10 @@ if st.session_state.get('authenticated'):
             auth = SaoynxAuthentication()
             auth.logout()
     except Exception:
+
 ```text
 ```
+
 
 
 
@@ -97,6 +105,7 @@ st.session_state['persist_history'] = st.checkbox(
     value=persist_default,
     help="Automatically save conversations for later retrieval"
 ```text
+```text
 ```
 
 
@@ -104,6 +113,7 @@ st.session_state['persist_history'] = st.checkbox(
 **After**:
 
 ```python
+
 
 # Persist history toggle - only show for authenticated users
 
@@ -115,6 +125,7 @@ if st.session_state.get('authenticated'):
         value=persist_default,
         help="Automatically save conversations for later retrieval"
     )
+
 ```
 
 

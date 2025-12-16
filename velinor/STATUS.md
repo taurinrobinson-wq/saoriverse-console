@@ -68,8 +68,10 @@ Velinor is a text-based narrative game with innovative mechanics:
 ##
 
 ## Architecture
+
 ```text
 ```
+
 PLAYER INPUT (Text or Choice)
         ↓
 VelinorTwineOrchestrator (Game Loop)
@@ -87,6 +89,7 @@ FORMATTED GAME STATE
         └─ Dice Results
         ↓
 UI LAYER (Streamlit, Web, CLI, etc.)
+
 ```
 
 
@@ -150,6 +153,7 @@ UI LAYER (Streamlit, Web, CLI, etc.)
 
 ## File Structure
 ```text
+```text
 ```
 velinor/
 ├── engine/
@@ -184,6 +188,7 @@ velinor/
 ```
 
 
+
 ##
 
 ## Running the System
@@ -200,6 +205,7 @@ orchestrator = VelinorTwineOrchestrator(
 )
 
 ```text
+```text
 ```
 
 
@@ -207,6 +213,7 @@ orchestrator = VelinorTwineOrchestrator(
 ### Process Input
 
 ```python
+
 
 # Choice-based
 state = orchestrator.process_player_action(
@@ -218,8 +225,10 @@ state = orchestrator.process_player_action(
 state = orchestrator.process_player_action(
     player_input="I approach cautiously",
     player_id="player_1"
+
 ```text
 ```
+
 
 
 
@@ -229,6 +238,7 @@ state = orchestrator.process_player_action(
 orchestrator.save_game("saves/game_001.json")
 orchestrator.load_game("saves/game_001.json")
 ```
+
 
 
 ##

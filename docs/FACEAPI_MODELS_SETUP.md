@@ -14,6 +14,7 @@ First, install face-api.js:
 ```bash
 cd firstperson-web
 ```sql
+```sql
 ```
 
 
@@ -22,12 +23,15 @@ Then copy models from node_modules:
 
 ```bash
 
+
 # Windows PowerShell
 Copy-Item node_modules/face-api.js/dist/models -Destination public/models -Recurse -Force
 
 # macOS/Linux
+
 ```text
 ```
+
 
 
 
@@ -53,6 +57,7 @@ public/models/
 ├── face_expression_model-weights_shard_1
 ├── face_expression_model.json
 ```text
+```text
 ```
 
 
@@ -61,12 +66,15 @@ public/models/
 
 ```bash
 
+
 # Windows PowerShell
 Get-ChildItem -Path "firstperson-web/public/models" -File
 
 # macOS/Linux
+
 ```text
 ```
+
 
 
 
@@ -87,6 +95,7 @@ const nextConfig = {
 };
 
 ```text
+```text
 ```
 
 
@@ -98,6 +107,7 @@ Usually this is already configured by default in Next.js 13+.
 Add a simple test in your app to verify models load:
 
 ```typescript
+
 // pages/api/test-models.ts
 import * as faceapi from "face-api.js";
 
@@ -116,14 +126,17 @@ export default async function handler(req: any, res: any) {
       error: error.message
     });
   }
+
 ```text
 ```
+
 
 
 
 Then test:
 
 ```bash
+```text
 ```text
 ```
 
@@ -132,11 +145,14 @@ Then test:
 Expected response:
 
 ```json
+
 {
   "success": true,
   "message": "Models loaded successfully"
+
 ```text
 ```
+
 
 
 
@@ -169,6 +185,7 @@ export async function loadFaceApiModels() {
 
 export function areModelsLoaded() {
   return modelsLoaded;
+```text
 ```text
 ```
 
@@ -226,12 +243,14 @@ export function areModelsLoaded() {
 **Tip:** Users only need to download models once. Use service workers for offline support:
 
 ```typescript
+
 // In your service worker registration
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
     .then(reg => console.log('Service Worker registered'))
     .catch(err => console.log('SW registration failed'));
 }
+
 ```
 
 

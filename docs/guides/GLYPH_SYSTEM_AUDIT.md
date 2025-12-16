@@ -39,8 +39,10 @@ Your glyph system contains **6,434 glyphs** organized across **63 primary catego
 ## The Translation Problem
 
 ### Current Flow (3 layers)
+
 ```text
 ```
+
 User Input: "I'm exhausted"
     ↓
 AffectParser: tone=sad, arousal=0.3, valence=-0.9
@@ -50,6 +52,7 @@ ResponseRotator: "sadness" category →
     ↓
 Glyph System: "Which glyph represents this?"
     (System doesn't know - needs manual interpretation)
+
 ```
 
 
@@ -100,6 +103,7 @@ Benefits:
 
 New flow (2 layers instead of 3):
 ```text
+```text
 ```
 User Input: "I'm exhausted"
     ↓
@@ -111,6 +115,7 @@ ResponseRotator + Glyph System (integrated):
     - Glyph anchors available: Grief, Loss, Mourning, Ache
     - Response can use glyph directly: "That's real *grief*."
 ```
+
 
 
 ##
@@ -176,6 +181,7 @@ AFFECT_TO_GLYPH = {
     ("warm", 0.7, 0.8): "Connection",   # High arousal + positive
     ("grateful", 0.4, 0.9): "Acceptance", # Low-medium + very positive
 ```text
+```text
 ```
 
 
@@ -185,11 +191,14 @@ AFFECT_TO_GLYPH = {
 **Before** (current):
 
 ```python
+
 brief_responses = [
     "I hear the sadness in this. It feels heavy.",
     "I can sense the sorrow. It's real.",
+
 ```text
 ```
+
 
 
 
@@ -202,6 +211,7 @@ brief_responses = [
     "That's real *Loss*. Where does it land for you?",
 ]
 ```
+
 
 
 ##

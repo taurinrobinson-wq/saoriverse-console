@@ -36,6 +36,7 @@ export PROJECT_JWT_SECRET="your-jwt-secret"
 # (optional) override other test vars
 export TEST_CUSTOM_TOKEN="..."
 ```text
+```text
 ```
 
 
@@ -48,6 +49,8 @@ fallbacks and perform real network calls against your Supabase instance.
 To restore a file to the main tree:
 
 ```bash
+
 git mv dev_archive/<path> <original/path>
 git commit -m "chore: restore <file> from dev_archive"
+
 ```

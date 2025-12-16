@@ -8,6 +8,7 @@
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -15,8 +16,10 @@ cd /Users/taurinrobinson/saoriverse-console
 Or directly:
 
 ```bash
+
 ```text
 ```
+
 
 
 ##
@@ -24,6 +27,7 @@ Or directly:
 ## 📊 Monitor Progress
 
 ```bash
+```text
 ```text
 ```
 
@@ -33,8 +37,10 @@ Or directly:
 ## 📈 View Results
 
 ```bash
+
 ```text
 ```
+
 
 
 ##
@@ -48,6 +54,7 @@ Or directly:
 ├── gutenberg_poetry/          (8 collections)
 ├── gutenberg_learning.log     (processing log)
 ```text
+```text
 ```
 
 
@@ -55,12 +62,15 @@ Or directly:
 **Code (Hard Drive)**
 
 ```
+
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py
 ├── bulk_text_processor.py
 ├── run_gutenberg_learning.sh
+
 ```text
 ```
+
 
 
 ##
@@ -80,6 +90,7 @@ Edit `gutenberg_fetcher.py` line ~50 and add URLs:
 ```python
 "shakespeare_sonnets": "https://www.gutenberg.org/ebooks/1041",
 ```
+
 
 
 

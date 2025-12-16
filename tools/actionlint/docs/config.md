@@ -18,6 +18,7 @@ with `-init-config` flag.
 ```sh
 actionlint -init-config
 ```text
+```text
 ```
 
 
@@ -25,6 +26,7 @@ actionlint -init-config
 Currently only one item can be configured.
 
 ```yaml
+
 self-hosted-runner:
   # Labels of self-hosted runner in array of string
   labels:
@@ -37,6 +39,7 @@ config-variables:
   - DEFAULT_RUNNER
   - JOB_NAME
   - ENVIRONMENT_STAGE
+
 ```
 
 

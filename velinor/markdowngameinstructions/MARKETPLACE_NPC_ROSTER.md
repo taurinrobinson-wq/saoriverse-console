@@ -339,8 +339,10 @@ Each marketplace visit can feel fresh:
 ##
 
 ## Marketplace Sphere Map (Visual Reference)
+
 ```text
 ```
+
                      Ravi (0.8) ← → Nima
                      /  \              /  \
                  (0.4)/   \(0.2)  (0.5)/   \(0.3)
@@ -357,6 +359,7 @@ Each marketplace visit can feel fresh:
 
             WANDERERS:
             Dalen (0.7 within wanderer sphere, 0.3 to marketplace)
+
 ```
 
 

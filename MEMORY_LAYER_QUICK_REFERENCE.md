@@ -3,8 +3,10 @@
 ## What It Does
 
 Tracks user's emotional state across multiple messages and builds understanding.
+
 ```text
 ```
+
 Message 1: "I'm stressed"
               ↓
 Message 2: "Too much on my mind at work"
@@ -12,6 +14,7 @@ Message 2: "Too much on my mind at work"
 Message 3: "5 projects, Thursday deadline"
               ↓
 SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
+
 ```
 
 
@@ -22,6 +25,7 @@ SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
 ### ConversationMemory (Main)
 
 ```python
+
 memory = ConversationMemory()
 
 # After each user message:
@@ -37,8 +41,10 @@ memory.add_turn(
 memory.get_emotional_profile_brief()  # "HIGH: stress, overload (in work)"
 memory.get_causal_narrative()  # "work → cognitive flooding → paralysis"
 memory.get_next_clarifications()  # ["What triggered?", "How many things?"]
+
 ```text
 ```
+
 
 
 
@@ -57,6 +63,7 @@ parsed = SemanticParsing(
     action_capacity="paralyzed",
     raw_input="...",
 ```text
+```text
 ```
 
 
@@ -65,6 +72,7 @@ parsed = SemanticParsing(
 ## Integration Example
 
 ```python
+
 from src.emotional_os_glyphs.conversation_memory import ConversationMemory, SemanticParsing
 from src.emotional_os_glyphs.dynamic_response_composer import DynamicResponseComposer
 
@@ -108,6 +116,7 @@ response = composer.compose_response_with_memory(
 ```
 
 
+
 ##
 
 ## Response Composition
@@ -137,6 +146,7 @@ def compose_response_with_memory(
 
     # 5. Combine
 ```text
+```text
 ```
 
 
@@ -160,10 +170,13 @@ def compose_response_with_memory(
 ## Confidence Progression
 
 ```
+
 Turn 1: 0.7 (emotion stated, cause unknown)
 Turn 2: 0.85 (mechanism revealed: work → flooding → paralysis)
+
 ```text
 ```
+
 
 
 ##
@@ -173,6 +186,7 @@ Turn 2: 0.85 (mechanism revealed: work → flooding → paralysis)
 ```
 Turn 1: [Still Insight]
 Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
+```text
 ```text
 ```
 
@@ -214,6 +228,7 @@ Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
 ## Example Conversation
 
 ```
+
 USER: "I'm feeling so stressed today"
 
 SYSTEM (with memory):
@@ -236,8 +251,10 @@ SYSTEM (full context):
   parsed: 5 items, Thursday deadline, client, unstarted
   learns: exact problem, most urgent item, blocker
   stored: confident in specifics, confidence 0.95
+
 ```text
 ```
+
 
 
 ##
@@ -298,6 +315,7 @@ response = composer.compose_response_with_memory(
     conversation_memory=memory,
 )
 ```
+
 
 
 ##

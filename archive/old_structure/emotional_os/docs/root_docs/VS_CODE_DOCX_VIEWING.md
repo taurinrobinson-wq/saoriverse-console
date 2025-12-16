@@ -49,6 +49,7 @@ python3 docx_web_viewer.py document.docx
 
 
 
+
 ## 📋 What Each Method Does
 
 | Method | Best For | How |

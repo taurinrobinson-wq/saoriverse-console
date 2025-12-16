@@ -29,6 +29,7 @@ From the root directory:
 
 # Install dependencies
 ```text
+```text
 ```
 
 
@@ -37,6 +38,7 @@ From the root directory:
 ## Folder Layout (After)
 
 ```
+
 saoriverse-console/
 │
 ├── README.md                    # Main entry point
@@ -69,8 +71,10 @@ saoriverse-console/
 ├── velinor-web/                 # Next.js web version
 ├── firstperson-web/             # FirstPerson web UI
 ├── tests/                       # Unit tests
+
 ```text
 ```
+
 
 
 ##
@@ -88,6 +92,7 @@ Commit 3: PHASE_1_SUMMARY.md (auto-generated)
 Commit 4: BUG_FIX_REPORT.md (auto-generated)
 Commit 5: Fix actual issue
 ```text
+```text
 ```
 
 
@@ -95,14 +100,17 @@ Commit 5: Fix actual issue
 ### After
 
 ```
+
 git log --oneline | head -20
 
 Commit 1: Implementation phase 1
 Commit 2: Fix: Player choice processing
 Commit 3: Add: Glyph collection UI
 Commit 4: Chore: Organize project structure
+
 ```text
 ```
+
 
 
 ##
@@ -185,6 +193,7 @@ ls docs/PROJECT_STRUCTURE.md
 
 # Should exist ✅
 ```
+
 
 
 ##

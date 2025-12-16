@@ -24,6 +24,7 @@ docker compose -f docker-compose.dev.yml up --build
 # to stop:
 ctrl+c
 ```text
+```text
 ```
 
 
@@ -43,6 +44,7 @@ PowerShell commands:
 
 ```powershell
 
+
 # build and run production-like container (may take longer)
 docker compose up --build
 
@@ -52,8 +54,10 @@ docker compose up --build
 
 # to stop:
 ctrl+c
+
 ```text
 ```
+
 
 
 
@@ -75,6 +79,7 @@ docker logs -f saoriverse-console-local
 # or for dev containers
 docker logs -f <container_name>
 ```
+
 
 
 

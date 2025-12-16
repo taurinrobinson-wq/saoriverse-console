@@ -65,6 +65,7 @@ When installing with yarn 4, you need to disable experimental fetch with the fol
 ```
 
 
+
 NODE_OPTIONS=--no-experimental-fetch yarn add supabase
 
 ```
@@ -188,6 +189,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
 ```bash
 
 
+
 supabase bootstrap
 
 ```
@@ -195,6 +197,7 @@ supabase bootstrap
 Or using npx:
 
 ```bash
+
 
 
 npx supabase bootstrap
@@ -218,6 +221,7 @@ However, due to dependencies on other service images, we cannot guarantee that s
 To run from source:
 
 ```sh
+
 
 
 

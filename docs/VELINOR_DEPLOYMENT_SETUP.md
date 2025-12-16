@@ -8,6 +8,7 @@
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 bash setup.sh
 ```text
+```text
 ```
 
 
@@ -18,6 +19,7 @@ bash setup.sh
 
 ```bash
 
+
 # Create virtual environment
 python3 -m venv venv
 source venv/bin/activate
@@ -26,8 +28,10 @@ source venv/bin/activate
 pip install streamlit pillow
 
 # Run the game
+
 ```text
 ```
+
 
 
 ##
@@ -57,6 +61,7 @@ orchestrator = VelinorTwineOrchestrator(
     first_person_module=FirstPersonOrchestrator("game_npc", "velinor_session"),  # ← Add this
     npc_system=npc_system
 ```text
+```text
 ```
 
 
@@ -65,6 +70,7 @@ orchestrator = VelinorTwineOrchestrator(
 For Streamlit Cloud deployment, add to `.streamlit/secrets.toml`:
 
 ```toml
+
 
 # .streamlit/secrets.toml
 [firstperson]
@@ -79,8 +85,10 @@ glyph_collection_enabled = true
 
 [deployment]
 environment = "production"  # or "development"
+
 ```text
 ```
+
 
 
 
@@ -109,6 +117,7 @@ streamlit run velinor_app.py
 # App runs at http://localhost:8501
 
 ```text
+```text
 ```
 
 
@@ -117,9 +126,12 @@ streamlit run velinor_app.py
 
 ```bash
 
+
 # If FirstPerson is enabled, additional debug info will show
+
 ```text
 ```
+
 
 
 ##
@@ -162,6 +174,7 @@ streamlit run velinor_app.py
 ```bash
 docker build -t velinor-game .
 ```text
+```text
 ```
 
 
@@ -193,6 +206,7 @@ Add to `.streamlit/secrets.toml`:
 
 ```toml
 
+
 # Glyph persistence
 [glyph]
 supabase_url = "https://your-project.supabase.co"
@@ -205,8 +219,10 @@ session_scope = "velinor_game"
 
 # Optional: Analytics
 [analytics]
+
 ```text
 ```
+
 
 
 ##
@@ -256,6 +272,7 @@ saoriverse-console/
         └── deploy/
             └── core/
 ```text
+```text
 ```
 
 
@@ -264,6 +281,7 @@ saoriverse-console/
 ## Quick Commands
 
 ```bash
+
 
 # Setup
 bash setup.sh
@@ -284,8 +302,10 @@ streamlit --version
 rm -rf ~/.streamlit
 
 # Deactivate venv
+
 ```text
 ```
+
 
 
 ##
@@ -303,6 +323,7 @@ ls -la velinor/backgrounds/
 ls -la velinor/npcs/
 
 # Test game imports
+```text
 ```text
 ```
 
@@ -343,9 +364,11 @@ When ready to integrate your emotional resonance system:
 **To Start Playing Right Now:**
 
 ```bash
+
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 bash setup.sh
 bash run.sh
+
 ```
 
 

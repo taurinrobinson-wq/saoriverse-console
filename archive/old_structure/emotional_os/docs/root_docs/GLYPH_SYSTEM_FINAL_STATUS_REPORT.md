@@ -78,6 +78,7 @@ Production JSON ✓
 
 
 
+
 ### Data Structure (Per Glyph)
 
 ```json
@@ -95,6 +96,7 @@ Production JSON ✓
 
 
 
+
 Factorial glyphs additionally have:
 
 ```json
@@ -108,6 +110,7 @@ Factorial glyphs additionally have:
   }
 }
 ```
+
 
 
 ##
@@ -170,6 +173,7 @@ Factorial glyphs additionally have:
 
 # After: 6,434 glyphs (only quality ones)
 ```
+
 
 
 

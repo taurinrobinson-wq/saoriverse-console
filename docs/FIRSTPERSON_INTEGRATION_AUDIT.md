@@ -8,8 +8,10 @@ Bad news: **Voice interface (STT/TTS) and multimodal features are built but NOT 
 ## ✅ FIRSTPERSON ORCHESTRATOR - FULLY INTEGRATED
 
 ### Code Path
+
 ```text
 ```
+
 app.py (entry point)
   └─> ui_refactored.py (main UI orchestration)
       └─> session_manager.py (initialize_session_state)
@@ -17,6 +19,7 @@ app.py (entry point)
               ├─ create_orchestrator() - creates orchestrator instance
               ├─ create_affect_parser() - creates parser instance
               └─ Stored in st.session_state["firstperson_orchestrator"]
+
 ```
 
 
@@ -30,6 +33,7 @@ app.py (entry point)
 
 ```python
 
+
 # From session_manager.py
 if "firstperson_orchestrator" not in st.session_state:
     try:
@@ -37,8 +41,10 @@ if "firstperson_orchestrator" not in st.session_state:
         orchestrator = create_orchestrator(user_id, conversation_id)
         if orchestrator:
             orchestrator.initialize_session()
+
 ```text
 ```
+
 
 
 
@@ -53,6 +59,7 @@ if "firstperson_orchestrator" not in st.session_state:
 fp_orch = st.session_state.get("firstperson_orchestrator")
 if fp_orch:
 ```text
+```text
 ```
 
 
@@ -64,6 +71,7 @@ if fp_orch:
 
 ```python
 
+
 # From response_handler.py
 fp_orch = st.session_state.get("firstperson_orchestrator")
 firstperson_response = fp_orch.handle_conversation_turn(user_input)
@@ -71,6 +79,7 @@ if isinstance(firstperson_response, dict):
     local_analysis["firstperson_insights"] = {
         "detected_theme": firstperson_response.get("detected_theme"),
         "memory_context_injected": firstperson_response.get("memory_context_injected"),
+
 ```
 
 

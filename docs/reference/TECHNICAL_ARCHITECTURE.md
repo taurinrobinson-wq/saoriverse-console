@@ -1,8 +1,11 @@
 # FirstPerson: Technical Architecture for Sovereign Local Mode
 
 ## System Overview
+
+<!-- md013:ignore -->
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────────┐
 │                     FIRSTPERSON LOCAL MODE                      │
 │                   (100% Private, No External APIs)              │
@@ -67,6 +70,7 @@
                     ├─ Rituals       │
                     ├─ User History  │
                     └────────────────┘
+
 ```
 
 
@@ -75,28 +79,23 @@
 ## Data Flow: Complete Example
 
 ### User Input
+
+<!-- md013:ignore -->
 ```text
-```
 "I keep replaying that moment over and over, and it hurts"
 ```
-
-
 
 ### Stage 1: Tokenization & POS Tagging
 
 ```python
 Using NLTK (already integrated):
 
-Tokens: ["I", "keep", "replaying", "that", "moment",
-         "over", "and", "over", "and", "it", "hurts"]
+Tokens: ["I", "keep", "replaying", "that", "moment", "over", "and", "over", "and", "it", "hurts"]
 
-POS Tags: ["PRP", "VBP", "VBG", "DT", "NN",
-           "RB", "CC", "RB", "CC", "PRP", "VBZ"]
+POS Tags: ["PRP", "VBP", "VBG", "DT", "NN", "RB", "CC", "RB", "CC", "PRP", "VBZ"]
 
 ```text
 ```
-
-
 
 ### Stage 2: NRC Emotion Lexicon Lookup
 
@@ -109,8 +108,6 @@ replaying → [negative, sadness] moment → [negative, sadness] hurts → [nega
 Result Emotions: { 'sadness': 4, 'negative': 5, 'fear': 1
 ```text
 ```
-
-
 
 ### Stage 3: Entity Extraction (spaCy)
 
@@ -126,8 +123,6 @@ Context Interpretation:
 - Repetitive pattern (recursive signal)
 ```text
 ```
-
-
 
 ### Stage 4: Semantic Analysis
 
@@ -151,31 +146,20 @@ WordNet (semantic relationships):
 ```text
 ```
 
-
-
 ### Stage 5: Signal Mapping
 
 ```
 Emotion → Voltage Signal Mapping:
 
-Emotion: sadness
-  → NRC score: 4
-  → Map to voltage: γ (ache/grief)
-  → Intensity: 4
+Emotion: sadness → NRC score: 4 → Map to voltage: γ (ache/grief) → Intensity: 4
 
-Semantic concepts: recursion, looping, dwelling
-  → These map to γ as well (recursive ache)
-  → Reinforces γ signal
+Semantic concepts: recursion, looping, dwelling → These map to γ as well (recursive ache) →
+Reinforces γ signal
 
-Fear component:
-  → Could be β (anticipatory fear)
-  → But context suggests pain, not fear
-  → γ dominates
+Fear component: → Could be β (anticipatory fear) → But context suggests pain, not fear → γ dominates
 
 ```text
 ```
-
-
 
 ### Stage 6: Gate Activation
 
@@ -191,8 +175,6 @@ Candidate glyphs by gate:
 ```text
 ```
 
-
-
 ### Stage 7: Glyph Scoring & Selection
 
 ```
@@ -203,24 +185,22 @@ Recursive Ache:
   - Semantic match (recursion/looping): +8.5
   - Context match (repetitive replaying): +9.2
   - User history (if exists): +variable
-  → Total: 26.7/30 → 89% match
+→ Total: 26.7/30 → 89% match
 
 Spiral Ache:
   - Signal match (γ): +9.0
   - Semantic match (spiral/descent): +7.0
   - Context match (emotion descending): +6.5
-  → Total: 22.5/30 → 75% match
+→ Total: 22.5/30 → 75% match
 
 Recognized Ache:
   - Signal match (γ): +9.0
   - Semantic match (recognition): +4.0
   - Context match (self-aware pain): +5.0
-  → Total: 18.0/30 → 60% match
+→ Total: 18.0/30 → 60% match
 
 ```text
 ```
-
-
 
 ### Stage 8: Poetry & Metaphor Enrichment
 
@@ -245,45 +225,33 @@ Rituals for acknowledgment:
 ```text
 ```
 
-
-
 ### Stage 9: Response Generation
 
 ```
 Template: [Validation] + [Glyph] + [Poetry] + [Metaphor] + [Ritual]
 
-Validation: "That moment keeps spiraling back—not because
-             you're trapped, but because it's teaching you
-             something."
+Validation: "That moment keeps spiraling back—not because you're trapped, but because it's teaching
+you something."
 
-Glyph: "This is the Recursive Ache—the one that refines
-        through repetition."
+Glyph: "This is the Recursive Ache—the one that refines through repetition."
 
-Poetry: "Emily Dickinson knew this spiral: 'The Ache remains,
-         returning again and again.' She found in that return
-         a kind of knowing."
+Poetry: "Emily Dickinson knew this spiral: 'The Ache remains, returning again and again.' She found
+in that return a kind of knowing."
 
 Metaphor: "Like a spiral, each loop brings you deeper."
 
-Ritual: "What if, instead of trying to escape the loop,
-         we honored what each return reveals?"
+Ritual: "What if, instead of trying to escape the loop, we honored what each return reveals?"
 
-FINAL OUTPUT:
-─────────────────────────────────────────────────────────
-"That moment keeps spiraling back—not because you're trapped,
-but because it's teaching you something. Like a spiral, each
-loop brings you deeper. This is the Recursive Ache—the one
-that refines through repetition.
+FINAL OUTPUT: ───────────────────────────────────────────────────────── "That moment keeps spiraling
+back—not because you're trapped, but because it's teaching you something. Like a spiral, each loop
+brings you deeper. This is the Recursive Ache—the one that refines through repetition.
 
-Emily Dickinson knew this spiral: 'The Ache remains, returning
-again and again.' She found in that return a kind of knowing.
+Emily Dickinson knew this spiral: 'The Ache remains, returning again and again.' She found in that
+return a kind of knowing.
 
-What if, instead of trying to escape the loop, we honored what
-each return reveals?"
+What if, instead of trying to escape the loop, we honored what each return reveals?"
 ```text
 ```
-
-
 
 ### Stage 10: Learning & Personalization
 
@@ -305,7 +273,6 @@ Over time (100+ interactions):
 ```text
 ```
 
-
 ##
 
 ## Database Schema
@@ -314,36 +281,19 @@ Over time (100+ interactions):
 
 ```sql
 -- 292 Glyphs from VELŌNIX system
-CREATE TABLE glyph_lexicon (
-    id INTEGER PRIMARY KEY,
-    voltage_pair TEXT,  -- e.g., "γ-δ"
-    glyph_name TEXT,    -- e.g., "Recursive Ache"
-    description TEXT,
-    gate INTEGER,
-    activation_signals TEXT  -- comma-separated keywords
-);
+CREATE TABLE glyph_lexicon ( id INTEGER PRIMARY KEY, voltage_pair TEXT,  -- e.g., "γ-δ" glyph_name
+TEXT,    -- e.g., "Recursive Ache" description TEXT, gate INTEGER, activation_signals TEXT  --
+comma-separated keywords );
 
 -- Signal keywords (152 currently, expandable to 14k)
-CREATE TABLE signal_lexicon (
-    id INTEGER PRIMARY KEY,
-    keyword TEXT,
-    voltage_signal TEXT,  -- α,β,γ,δ,ε,θ,λ,Ω
-    intensity FLOAT
-);
+CREATE TABLE signal_lexicon ( id INTEGER PRIMARY KEY, keyword TEXT, voltage_signal TEXT,  --
+α,β,γ,δ,ε,θ,λ,Ω intensity FLOAT );
 
 -- User interaction history (local only)
-CREATE TABLE interactions (
-    id INTEGER PRIMARY KEY,
-    timestamp DATETIME,
-    user_input TEXT,
-    glyph_id INTEGER,
-    response TEXT,
-    feedback TEXT,
-    processing_time_ms INTEGER
+CREATE TABLE interactions ( id INTEGER PRIMARY KEY, timestamp DATETIME, user_input TEXT, glyph_id
+INTEGER, response TEXT, feedback TEXT, processing_time_ms INTEGER
 ```text
 ```
-
-
 
 ### Enrichment Tables (New)
 
@@ -374,7 +324,6 @@ most_helpful_poetry TEXT, effectiveness_score FLOAT
 ```text
 ```
 
-
 ##
 
 ## Processing Layers
@@ -390,8 +339,6 @@ sia = SentimentIntensityAnalyzer()
 ```text
 ```
 
-
-
 ### Layer 2: Linguistic Understanding (1-5ms)
 
 ```python
@@ -404,8 +351,6 @@ emotions = nrc.analyze_text(text)  # 14,182 word database
 ```text
 ```
 
-
-
 ### Layer 3: Semantic Understanding (5-20ms)
 
 ```python
@@ -413,14 +358,11 @@ emotions = nrc.analyze_text(text)  # 14,182 word database
 # Entity extraction + semantic relationships
 import spacy
 
-nlp = spacy.load("en_core_web_sm")
-doc = nlp(text)
+nlp = spacy.load("en_core_web_sm") doc = nlp(text)
 
 entities = [(ent.text, ent.label_) for ent in doc.ents]
 ```text
 ```
-
-
 
 ### Layer 4: Signal Mapping (1-2ms)
 
@@ -441,20 +383,15 @@ signals = parse_input(text)
 ```text
 ```
 
-
-
 ### Layer 5: Enrichment (5-10ms)
 
 ```python
 
 # Fetch poetry, metaphors, rituals
-glyph_id = fetch_glyph_id("Recursive Ache")
-poetry = fetch_glyph_poetry(glyph_id)
-metaphors = fetch_glyph_metaphors(glyph_id)
+glyph_id = fetch_glyph_id("Recursive Ache") poetry = fetch_glyph_poetry(glyph_id) metaphors =
+fetch_glyph_metaphors(glyph_id)
 ```text
 ```
-
-
 
 ### Layer 6: Response Generation (10-50ms)
 
@@ -466,10 +403,9 @@ rituals=rituals, user_message=text
 ```text
 ```
 
-
-
 **Total Latency: 25-100ms (typically 50-80ms)**
 **vs OpenAI API: 1-2 seconds**
+
 ##
 
 ## File Structure
@@ -521,18 +457,19 @@ saoriverse-console/
 ```text
 ```
 
-
 ##
 
 ## Performance Targets
 
 ### Latency
+
 - **First message**: 0.5-1.0s (models load)
 - **Subsequent messages**: 50-150ms (local processing)
 - **Comparison**: OpenAI API 1-2s (network + processing)
 - **Advantage**: 10-20x faster after warmup
 
 ### Memory
+
 - **spaCy model**: ~100MB
 - **NRC lexicon**: ~50MB
 - **Word2Vec**: ~300MB (optional, lazy load)
@@ -541,11 +478,13 @@ saoriverse-console/
 - **System requirement**: Any modern laptop
 
 ### Privacy
+
 - **Network calls**: 0 (all local)
 - **Data transmission**: 0 bytes
 - **External dependencies**: 0
 - **Corporate tracking**: 0
 - **Encryption**: Optional, available
+
 ##
 
 ## Key Advantages of Local Mode
@@ -561,6 +500,7 @@ saoriverse-console/
 | **Personalization** | Progressive | Limited |
 | **Deterministic** | Yes | No |
 | **Controllable** | Yes | No |
+
 ##
 
 ## Deployment
@@ -587,17 +527,13 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 ```text
 ```
 
-
-
 ### For Developers
 
 ```bash
 
 # Setup dev environment
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
+python -m venv venv source venv/bin/activate pip install -r requirements.txt pip install -r
+requirements-dev.txt
 
 # Download poetry (optional for enrichment)
 python data_preparation/poetry_downloader.py
@@ -609,32 +545,36 @@ pytest tests/
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=debug
 ```
 
-
 ##
 
 ## Security Considerations
 
 ### Data At Rest
+
 - SQLite database on local machine
 - Optional encryption: `pip install cryptography`
 - User controls backup and deletion
 
 ### Data In Transit
+
 - **Nothing transmitted** in local mode
 - No network calls = no interception risk
 - Verification script ensures this
 
 ### Data By Scope
+
 - **Local mode**: Only user data, all private
 - **User storage**: `~/.firstperson/` or custom location
 - **No cloud sync** unless explicitly enabled
 
 ### Third-party Dependencies
+
 - All open source (MIT, Apache, GPL-compatible licenses)
 - NLTK: BSD License
 - spaCy: MIT License
 - SQLite: Public domain
 - Project Gutenberg: Public domain texts
+
 ##
 
 ## Next Steps for Implementation
@@ -670,9 +610,10 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=deb
    - [ ] Quality assurance
 
 **Total effort: 10-15 hours to full sovereignty**
+
 ##
 
-## This is the future we're building.
+## This is the future we're building
 
 A system that respects human dignity.
 

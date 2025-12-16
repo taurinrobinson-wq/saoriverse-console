@@ -118,6 +118,7 @@ python3 test_e2e_simple.py        # Integration tests (3 exchanges)
 
 
 
+
 ### Key Changes
 - **REMOVED**: Raw `user_input` from logging
 - **REMOVED**: Raw `ai_response` from logging

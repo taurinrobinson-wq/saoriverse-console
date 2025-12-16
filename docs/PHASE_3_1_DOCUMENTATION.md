@@ -49,6 +49,7 @@ predict_upcoming_themes(lookahead_hours=4)
 # Quality metrics
 get_session_coherence()
 ```text
+```text
 ```
 
 
@@ -56,6 +57,7 @@ get_session_coherence()
 **Data Structures:**
 
 ```
+
 UserEmotionalProfile:
   ├── primary_tones: {EmotionalTone -> count}
   ├── tone_transitions: {(from_tone, to_tone) -> count}
@@ -63,8 +65,10 @@ UserEmotionalProfile:
   ├── time_patterns: {theme -> TimePatterns}
   ├── preferred_glyph_types: {glyph -> effectiveness_score}
   ├── snapshots: [EmotionalSnapshot]
+
 ```text
 ```
+
 
 
 ##
@@ -92,6 +96,7 @@ end_session(user_satisfaction)
 # Analysis
 get_coherence_report()  # Comprehensive metrics
 ```text
+```text
 ```
 
 
@@ -107,12 +112,15 @@ get_coherence_report()  # Comprehensive metrics
 **Session Quality Levels:**
 
 ```
+
 EXCELLENT    (coherence ≥ 0.85): High coherence, user satisfied
 GOOD         (coherence ≥ 0.70): Solid coherence, mostly on-track
 ADEQUATE     (coherence ≥ 0.50): Some coherence, minor deviations
 POOR         (coherence ≥ 0.30): Low coherence, user frustrated
+
 ```text
 ```
+
 
 
 ##
@@ -146,6 +154,7 @@ predict_preference_trajectory(pref, days_ahead=30)
 
 # Clustering
 ```text
+```text
 ```
 
 
@@ -163,6 +172,7 @@ predict_preference_trajectory(pref, days_ahead=30)
 Bridges all three components with existing Phase 1-2 infrastructure.
 
 ```python
+
 orchestrator = Phase3IntegrationOrchestrator(user_id)
 
 # Session lifecycle
@@ -177,8 +187,10 @@ summary = orchestrator.end_session(session_id, overall_satisfaction)
 # Insights and recommendations
 insights = orchestrator.get_user_insights()
 recommendations = orchestrator.get_session_recommendations(session_id)
+
 ```text
 ```
+
 
 
 
@@ -212,6 +224,7 @@ Record to all Phase 3.1 components:
 Generate Insights & Recommendations
     ↓
 ```text
+```text
 ```
 
 
@@ -221,6 +234,7 @@ Generate Insights & Recommendations
 ### Building a User Profile
 
 ```python
+
 manager = EmotionalProfileManager("user_123")
 
 # After each interaction...
@@ -235,8 +249,10 @@ manager.record_interaction(
 # After multiple interactions, query patterns
 dominant = manager.get_dominant_themes(limit=5)
 trajectory = manager.get_emotional_trajectory(days=30)
+
 ```text
 ```
+
 
 
 
@@ -259,6 +275,7 @@ session.record_turn(
 coherence = session.end_session(user_satisfaction=0.8)
 report = session.get_coherence_report()
 ```text
+```text
 ```
 
 
@@ -266,6 +283,7 @@ report = session.get_coherence_report()
 ### Monitoring Preference Evolution
 
 ```python
+
 tracker = PreferenceEvolutionTracker("user_123")
 
 # Record preferences
@@ -275,8 +293,10 @@ tracker.record_preference(PreferenceType.THEME, "grounding", 0.7)
 # After 30+ days...
 emerging = tracker.get_emerging_preferences(days=30)
 fading = tracker.get_fading_preferences(days=30)
+
 ```text
 ```
+
 
 
 
@@ -379,6 +399,7 @@ fading = tracker.get_fading_preferences(days=30)
     "breakthrough_markers": [5],
     "user_satisfaction": 0.8,
 ```text
+```text
 ```
 
 
@@ -386,6 +407,7 @@ fading = tracker.get_fading_preferences(days=30)
 ### User Insights
 
 ```python
+
 {
     "dominant_themes": [
         {"theme": "grounding", "occurrences": 47},
@@ -410,8 +432,10 @@ fading = tracker.get_fading_preferences(days=30)
         {"theme": "grounding", "probability": 0.73},
         {"theme": "morning_anxiety", "probability": 0.41},
     ],
+
 ```text
 ```
+
 
 
 
@@ -497,6 +521,7 @@ Total Phase 3.1: 2,451 lines of code
 New Tests: 34 (all passing)
 Integration Status: Complete
 ```
+
 
 
 

@@ -1,8 +1,10 @@
 # Memory Layer: Visual Architecture
 
 ## Data Flow Diagram
+
 ```text
 ```
+
 
 # USER INPUT FLOW
 
@@ -102,12 +104,14 @@ Turn 3: "5 projects due this week, client presentation Thursday, deck not starte
         |
         v
     SYSTEM UNDERSTANDS COMPLETE PROBLEM
+
 ```
 
 
 ##
 
 ## Memory State Evolution
+```text
 ```text
 ```
 
@@ -234,11 +238,14 @@ With Memory (Progressive):
 ```
 
 
+
 ##
 
 ## System Architecture
+
 ```text
 ```
+
 
 # CONVERSATION MEMORY LAYER
 
@@ -325,12 +332,14 @@ With Memory (Progressive):
                  │
                  v
             System Response
+
 ```
 
 
 ##
 
 ## Information Integration Logic
+```text
 ```text
 ```
 INCOMING MESSAGE                MEMORY STATE (before)
@@ -398,11 +407,14 @@ INCOMING MESSAGE                MEMORY STATE (before)
 ```
 
 
+
 ##
 
 ## Turn Sequence State Machine
+
 ```text
 ```
+
 INITIAL STATE (no memory)
         │
         ├─> App starts
@@ -454,12 +466,14 @@ TURN 3+ (Later messages)
         │       └─> Glyph set stabilizes
         │
         └─> RESPONSE: Action-oriented + specific
+
 ```
 
 
 ##
 
 ## Quality Metrics
+```text
 ```text
 ```
 Response Quality Baseline: WITHOUT Memory

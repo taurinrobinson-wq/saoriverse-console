@@ -33,13 +33,16 @@ Start here based on what you need:
 - Runs on `http://localhost:3000`
 
 ### How They Talk
+
 ```text
 ```
+
 Frontend (http://localhost:3000)
     ↓ (HTTP)
 FastAPI Backend (http://localhost:8000)
     ↓ (Python)
 Velinor Game Engine
+
 ```
 
 
@@ -50,9 +53,12 @@ Velinor Game Engine
 **Terminal 1:**
 
 ```bash
+
 cd d:\saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -60,6 +66,7 @@ cd d:\saoriverse-console
 
 ```bash
 cd d:\saoriverse-console\velinor-web
+```text
 ```text
 ```
 
@@ -82,6 +89,7 @@ That's it! You should see the splash screen.
 ## File Structure
 
 ```
+
 d:\saoriverse-console\
 ├── Backend
 │   └── velinor_api.py                     ← Start this first
@@ -112,8 +120,10 @@ d:\saoriverse-console\
     ├── VELINOR_WEB_QUICK_START.md         ← Start here
     ├── RUN_VELINOR_WEB.md                 ← Detailed guide
     ├── VELINOR_WEB_SETUP_COMPLETE.md      ← Full status
+
 ```text
 ```
+
 
 
 ##
@@ -167,6 +177,7 @@ d:\saoriverse-console\
 ```
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
+
 
 
 

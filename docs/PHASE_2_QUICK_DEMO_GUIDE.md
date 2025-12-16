@@ -6,6 +6,7 @@
 cd firstperson-web
 npm install --legacy-peer-deps
 ```text
+```text
 ```
 
 
@@ -17,11 +18,14 @@ Then visit `http://localhost:3000`
 ### 1. Landing Page (Home)
 
 ```
+
 URL: http://localhost:3000/
 Time: 0-3 seconds
 Show: Animated beautiful homepage
+
 ```text
 ```
+
 
 
 
@@ -38,6 +42,7 @@ Show: Animated beautiful homepage
 ```
 URL: http://localhost:3000/chat
 Time: Interactive experience
+```text
 ```text
 ```
 
@@ -81,10 +86,13 @@ Time: Interactive experience
 ### 3. Settings Page
 
 ```
+
 URL: http://localhost:3000/settings
 Time: Configuration interface
+
 ```text
 ```
+
 
 
 
@@ -190,6 +198,7 @@ Time: Configuration interface
    → Button scales (0.95x) briefly
    → Message bubble appears
 ```text
+```text
 ```
 
 
@@ -197,6 +206,7 @@ Time: Configuration interface
 ### Recording Process
 
 ```
+
 1. Click microphone button
    → Button color changes to red
    → Button pulses continuously
@@ -214,8 +224,10 @@ Time: Configuration interface
 4. Transcription happens
    → Status: "📝 Transcribing..."
    → Your message bubble appears
+
 ```text
 ```
+
 
 
 
@@ -230,6 +242,7 @@ Time: Configuration interface
    - Floating hearts
    - Pulsing rings
    - "That's Amazing!" text
+```text
 ```text
 ```
 
@@ -264,9 +277,12 @@ Time: Configuration interface
 ### Scenario 1: Happy Conversation
 
 ```
+
 User: "Tell me something amazing!"
+
 ```text
 ```
+
 
 
 
@@ -275,6 +291,7 @@ User: "Tell me something amazing!"
 ```
 User: "How does AI work?"
 ```text
+```text
 ```
 
 
@@ -282,9 +299,12 @@ User: "How does AI work?"
 ### Scenario 3: Excited Reaction
 
 ```
+
 User: "That's fantastic!"
+
 ```text
 ```
+
 
 
 
@@ -294,6 +314,7 @@ User: "That's fantastic!"
 1. Use microphone to record
 2. Check transcription accuracy
 3. Verify emotion detection
+```text
 ```text
 ```
 
@@ -315,6 +336,7 @@ User: "That's fantastic!"
 ### Page Flow Map
 
 ```
+
 ┌─────────────┐
 │   HOME      │
 │  Beautiful  │
@@ -332,8 +354,10 @@ User: "That's fantastic!"
 ┌──────────────  ┌──────────────┐
 │  SETTINGS     │  BACK HOME   │
 │  Controls     │  (Header)    │
+
 ```text
 ```
+
 
 
 
@@ -382,6 +406,7 @@ App Root
     └── Voice Sliders
         ├── Pitch
         ├── Rate
+```text
 ```text
 ```
 
@@ -443,6 +468,7 @@ App Root
 ### Demo Script
 
 ```
+
 "This is FirstPerson - an AI chat with emotion awareness.
 Watch the beautiful animations as I interact:
 
@@ -452,6 +478,7 @@ Watch the beautiful animations as I interact:
 4. AI response with emotion tags
 5. Dance mode celebration when discussing exciting topics
 6. Customizable settings for voice and behavior"
+
 ```
 
 

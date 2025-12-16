@@ -24,6 +24,7 @@ Files added:
 
 # dry-run (no network writes)
 ```sql
+```sql
 ```
 
 
@@ -31,11 +32,13 @@ Files added:
 3. When you're satisfied, provide credentials and apply the upsert from a safe environment (Codespace or CI) where the service-role key is available as an environment variable. Example (Codespace or local):
 
 ```bash
+
 export SUPABASE_URL=https://<your>.supabase.co
 export SUPABASE_KEY=<your-service-role-key>
 
 # apply in conservative batches
 python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_plan_<ts>.json --apply --batch-size 200
+
 ```
 
 

@@ -15,11 +15,14 @@
 ## Verification
 
 All tests passing:
+
 ```text
 ```
+
 ✓ Core modules compile without errors
 ✓ Integration functional
 ✓ End-to-end response generation working
+
 ```
 
 
@@ -39,8 +42,10 @@ All tests passing:
 **Test locally:**
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -51,6 +56,7 @@ from emotional_os.glyphs.signal_parser import parse_input
 
 result = parse_input("I feel overwhelmed", "emotional_os/glyphs/lexicon.db")
 ```text
+```text
 ```
 
 
@@ -58,6 +64,7 @@ result = parse_input("I feel overwhelmed", "emotional_os/glyphs/lexicon.db")
 ## Architecture
 
 ```
+
 User Input
     ↓
 signal_parser.parse_input()
@@ -65,6 +72,7 @@ signal_parser.parse_input()
 Generate Response (fallback templates)
     ↓
 Return response to user
+
 ```
 
 

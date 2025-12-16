@@ -25,6 +25,7 @@ npm i supabase --save-dev
 
 
 
+
 To install the beta release channel:
 
 ```bash
@@ -33,11 +34,13 @@ npm i supabase@beta --save-dev
 
 
 
+
 When installing with yarn 4, you need to disable experimental fetch with the following nodejs config.
 
 ```
 NODE_OPTIONS=--no-experimental-fetch yarn add supabase
 ```
+
 
 
 
@@ -163,11 +166,13 @@ supabase bootstrap
 
 
 
+
 Or using npx:
 
 ```bash
 npx supabase bootstrap
 ```
+
 
 
 

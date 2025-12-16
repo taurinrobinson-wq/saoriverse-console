@@ -60,6 +60,7 @@ jobs:
       - run: echo hello
         # ERROR: `shell:` must be in lower case
 ```text
+```text
 ```
 
 
@@ -67,6 +68,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:6:5: unexpected key "default" for "job" section. expected one of "concurrency", "container", "continue-on-error", "defaults", "env", "environment", "if", "name", "needs", "outputs", "permissions", "runs-on", "secrets", "services", "steps", "strategy", "timeout-minutes", "uses", "with" [syntax-check]
   |
 6 |     default:
@@ -74,8 +76,10 @@ test.yaml:6:5: unexpected key "default" for "job" section. expected one of "conc
 test.yaml:12:9: unexpected key "Shell" for "step" section. expected one of "continue-on-error", "env", "id", "if", "name", "run", "shell", "timeout-minutes", "uses", "with", "working-directory" [syntax-check]
    |
 12 |         Shell: bash
+
 ```json
 ```
+
 
 
 
@@ -107,6 +111,7 @@ jobs:
     # ERROR: runs-on is missing
     steps:
 ```text
+```text
 ```
 
 
@@ -114,6 +119,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:3:3: "runs-on" section is missing in job "test" [syntax-check]
   |
 3 |   test:
@@ -121,8 +127,10 @@ test.yaml:3:3: "runs-on" section is missing in job "test" [syntax-check]
 test.yaml:8:9: key "version_name" is duplicated in "matrix" section. previously defined at line:7,col:9. note that key names are case insensitive [syntax-check]
   |
 8 |         VERSION_NAME: [V1, V2]
+
 ```json
 ```
+
 
 
 
@@ -144,6 +152,7 @@ Example input:
 ```yaml
 on: push
 ```text
+```text
 ```
 
 
@@ -151,11 +160,14 @@ on: push
 Output:
 
 ```
+
 test.yaml:2:6: "jobs" section should not be empty. please remove this section if it's unnecessary [syntax-check]
   |
 2 | jobs:
+
 ```json
 ```
+
 
 
 
@@ -186,6 +198,7 @@ jobs:
       - run: sleep 200
         # ERROR: Float value is expected
 ```text
+```text
 ```
 
 
@@ -193,6 +206,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:6:18: expecting a single ${{...}} expression or boolean literal "true" or "false", but found plain text node [syntax-check]
   |
 6 |       fail-fast: off
@@ -204,8 +218,10 @@ test.yaml:8:21: expected scalar node for integer value but found scalar node wit
 test.yaml:13:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]
    |
 13 |         timeout-minutes: two minutes
+
 ```json
 ```
+
 
 
 
@@ -237,6 +253,7 @@ jobs:
       - run: echo "${{ toJson(hashFiles('**/lock', '**/cache/') }}"
       # unexpected end of input
 ```text
+```text
 ```
 
 
@@ -244,6 +261,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:7:24: got unexpected character '"' while lexing expression, expecting 'a'..'z', 'A'..'Z', '_', '0'..'9', ''', '}', '(', ')', '[', ']', '.', '!', '<', '>', '=', '&', '|', '*', ',', ' '. do you mean string literals? only single quotes are available for string delimiter [expression]
   |
 7 |       - run: echo '${{ "hello" }}'
@@ -259,8 +277,10 @@ test.yaml:11:65: unexpected end of input while parsing arguments of function cal
 test.yaml:13:38: unexpected end of input while parsing object property dereference like 'a.b' or array element dereference like 'a.*'. expecting "IDENT", "*" [expression]
    |
 13 |       - run: echo '${{ github.event. }}'
+
 ```json
 ```
+
 
 
 
@@ -310,6 +330,7 @@ jobs:
       - run: echo '${{ github.repository.owner }}'
       # ERROR: Objects, arrays and null should not be evaluated at ${{ }} since the outputs are useless
 ```text
+```text
 ```
 
 
@@ -317,6 +338,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:7:28: property access of object must be type of string but got "number" [expression]
   |
 7 |       - run: echo '${{ env[0] }}'
@@ -332,8 +354,10 @@ test.yaml:11:24: receiver of object dereference "owner" must be type of object b
 test.yaml:13:20: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type {string => string} [expression]
    |
 13 |       - run: echo '${{ env }}'
+
 ```json
 ```
+
 
 
 
@@ -350,6 +374,7 @@ object or array, use `toJSON()` function.
 
 ```
 ```text
+```text
 ```
 
 
@@ -365,6 +390,7 @@ As special case of `${{ }}`, it can be used for expanding object and array value
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -383,8 +409,10 @@ jobs:
         env: ${{ matrix.env_object }}
       # ERROR: String value cannot be expanded as object
       - run: echo "$FOO"
+
 ```text
 ```
+
 
 
 
@@ -394,6 +422,7 @@ Output:
 test.yaml:19:14: type of expression at "env" must be object but found type string [expression]
    |
 19 |         env: ${{ matrix.env_string }}
+```json
 ```json
 ```
 
@@ -410,6 +439,7 @@ In above example, environment variables mapping is expanded at `env:` section. a
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -429,8 +459,10 @@ jobs:
       - run: echo "${{ contains('hello, world', 'lo,') }}"
       - run: echo "${{ contains(github.event.labels.*.name, 'enhancement') }}"
       # format() has a special check for formatting string
+
 ```text
 ```
+
 
 
 
@@ -461,6 +493,7 @@ test.yaml:20:24: format string "{0}{1}" does not contain placeholder {2}. remove
    |
 20 |       - run: echo "${{ format('{0}{1}', 1, 2, 3) }}"
 ```json
+```json
 ```
 
 
@@ -489,6 +522,7 @@ Note that context names and function names are case insensitive. For example, `t
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -510,8 +544,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ERROR: Access undefined step outputs. Step objects are job-local
+
 ```text
 ```
+
 
 
 
@@ -525,6 +561,7 @@ test.yaml:10:24: property "get_value" is not defined in object type {} [expressi
 test.yaml:22:24: property "get_value" is not defined in object type {} [expression]
    |
 22 |       - run: echo '${{ steps.get_value.outputs.name }}'
+```json
 ```json
 ```
 
@@ -545,6 +582,7 @@ When the outputs are set by popular actions, the outputs object is more strictly
 Example input:
 
 ```yaml
+
 on: push
 
 jobs:
@@ -562,8 +600,10 @@ jobs:
       # OK
       - run: echo ${{ steps.cache.outputs.cache-hit }}
       # ERROR: Typo at output name
+
 ```text
 ```
+
 
 
 
@@ -577,6 +617,7 @@ test.yaml:8:23: property "cache" is not defined in object type {} [expression]
 test.yaml:18:23: property "cache_hit" is not defined in object type {cache-hit: string} [expression]
    |
 18 |       - run: echo ${{ steps.cache.outputs.cache_hit }}
+```json
 ```json
 ```
 
@@ -593,6 +634,7 @@ name. actionlint can check it because properties of `steps.cache.outputs` are ty
 This strict typing for outputs is also applied to local actions. Let's say we have the following local action.
 
 ```yaml
+
 name: 'My action with output'
 author: 'rhysd <https://rhysd.github.io>'
 description: 'my action with outputs'
@@ -603,8 +645,10 @@ outputs:
 
 runs:
   using: 'node14'
+
 ```text
 ```
+
 
 
 
@@ -626,6 +670,7 @@ jobs:
       - run: echo ${{ steps.my_action.outputs.some_value }}
       # ERROR: No output named 'some-value' (typo)
 ```text
+```text
 ```
 
 
@@ -633,6 +678,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:8:23: property "my_action" is not defined in object type {} [expression]
   |
 8 |       - run: echo ${{ steps.my_action.outputs.some_value }}
@@ -640,8 +686,10 @@ test.yaml:8:23: property "my_action" is not defined in object type {} [expressio
 test.yaml:15:23: property "some-value" is not defined in object type {some_value: string} [expression]
    |
 15 |       - run: echo ${{ steps.my_action.outputs.some-value }}
+
 ```text
 ```
+
 
 
 
@@ -689,6 +737,7 @@ jobs:
     steps:
       # Matrix values in other job is not accessible
 ```text
+```text
 ```
 
 
@@ -696,6 +745,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:19:24: property "platform" is not defined in object type {os: string; node: number; package: {name: string; optional: bool}; npm: string} [expression]
    |
 19 |       - run: echo '${{ matrix.platform }}'
@@ -707,8 +757,10 @@ test.yaml:21:24: property "dev" is not defined in object type {name: string; opt
 test.yaml:34:24: property "os" is not defined in object type {} [expression]
    |
 34 |       - run: echo '${{ matrix.os }}'
+
 ```json
 ```
+
 
 
 
@@ -737,6 +789,7 @@ steps:
   - run: echo ${{ matrix.foo }}
   # matrix.bar is array<any> type value
 ```text
+```text
 ```
 
 
@@ -748,6 +801,7 @@ steps:
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   install:
@@ -780,8 +834,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ERROR: Cannot access outputs across jobs
+
 ```text
 ```
+
 
 
 
@@ -804,6 +860,7 @@ test.yaml:33:24: property "build" is not defined in object type {} [expression]
    |
 33 |       - run: echo '${{ needs.build.outputs.built }}'
 ```json
+```json
 ```
 
 
@@ -822,6 +879,7 @@ actionlint defines a type of `needs` variable contextually by looking at each jo
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -836,8 +894,10 @@ jobs:
       - run: echo $FOO
       # This script is run with bash due to 'shell:' configuration
       - run: echo $FOO
+
 ```text
 ```
+
 
 
 
@@ -851,6 +911,7 @@ test.yaml:6:9: shellcheck reported issue in this script: SC2086:info:1:6: Double
 test.yaml:14:9: shellcheck reported issue in this script: SC2086:info:1:6: Double quote to prevent globbing and word splitting [shellcheck]
    |
 14 |       - run: echo $FOO
+```json
 ```json
 ```
 
@@ -883,6 +944,7 @@ Some shellcheck rules conflict with the `${{ }}` expression syntax. To avoid err
 When what shell is used cannot be determined statically, actionlint assumes `shell: bash` optimistically. For example,
 
 ```yaml
+
 strategy:
   matrix:
     os: [ubuntu-latest, macos-latest, windows-latest]
@@ -890,8 +952,10 @@ runs-on: ${{ matrix.os }}
 steps:
   - name: Show file content
     run: Get-Content -Path xxx\yyy.txt
+
 ```text
 ```
+
 
 
 
@@ -904,6 +968,7 @@ false positives can be avoided by showing the shell name explicitly. It is also 
   run: Get-Content -Path xxx\yyy.txt
   if: ${{ matrix.os == 'windows-latest' }}
 ```text
+```text
 ```
 
 
@@ -915,6 +980,7 @@ false positives can be avoided by showing the shell name explicitly. It is also 
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   linux:
@@ -939,8 +1005,10 @@ jobs:
             print(sys)
       - run: |
           from time import sleep
+
 ```text
 ```
+
 
 
 
@@ -958,6 +1026,7 @@ test.yaml:19:9: pyflakes reported issue in this script: 2:5: import 'sys' from l
 test.yaml:23:9: pyflakes reported issue in this script: 1:1: 'time.sleep' imported but unused [pyflakes]
    |
 23 |       - run: |
+```text
 ```text
 ```
 
@@ -987,6 +1056,7 @@ actionlint replaces `${{ }}` with underscores. For example `print('${{ matrix.os
 Example input:
 
 ```yaml
+
 name: Test
 on: pull_request
 
@@ -1008,8 +1078,10 @@ jobs:
           script: console.log('${{ github.event.head_commit.author.name }}')
       - name: Get comments
         # ERROR: Accessing untrusted inputs via `.*` object filter; bodies of comment, review, and review_comment
+
 ```text
 ```
+
 
 
 
@@ -1028,6 +1100,7 @@ test.yaml:22:31: object filter extracts potentially untrusted properties "github
    |
 22 |         run: echo '${{ toJSON(github.event.*.body) }}'
 ```json
+```json
 ```
 
 
@@ -1038,8 +1111,10 @@ Since `${{ }}` placeholders are evaluated and replaced directly by GitHub Action
 inline scripts at `run:`. For example, if we have step as follows,
 
 ```yaml
+
 ```text
 ```
+
 
 
 
@@ -1050,6 +1125,7 @@ inputs via environment variables. See [the official document][security-doc] for 
 ```yaml
 - run: echo "issue ${TITLE}"
   env:
+```text
 ```text
 ```
 
@@ -1084,9 +1160,12 @@ of `github.event` as array. Those properties include untrusted inputs like `gith
 
 ```sh
 
+
 # Echo list of github.event.comment.body, github.event.pull_request.body, ...
+
 ```text
 ```
+
 
 
 
@@ -1095,6 +1174,7 @@ Instead, you should store the JSON string in an environment variable:
 ```sh
 - run: echo "${BODIES}"
   env:
+```text
 ```text
 ```
 
@@ -1110,6 +1190,7 @@ checks the input.
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   prepare:
@@ -1126,8 +1207,10 @@ jobs:
     needs: [install]
     runs-on: ubuntu-latest
     steps:
+
 ```text
 ```
+
 
 
 
@@ -1137,6 +1220,7 @@ Output:
 test.yaml:8:3: cyclic dependencies in "needs" configurations of jobs are detected. detected cycle is "install" -> "prepare", "prepare" -> "build", "build" -> "install" [job-needs]
   |
 8 |   install:
+```json
 ```json
 ```
 
@@ -1152,6 +1236,7 @@ actionlint also detects undefined jobs and duplicate jobs in `needs:` section.
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   foo:
@@ -1163,8 +1248,10 @@ jobs:
     needs: [unknown]
     runs-on: ubuntu-latest
     steps:
+
 ```text
 ```
+
 
 
 
@@ -1179,6 +1266,7 @@ test.yaml:8:3: job "bar" needs job "unknown" which does not exist in this workfl
   |
 8 |   bar:
 ```json
+```json
 ```
 
 
@@ -1192,6 +1280,7 @@ test.yaml:8:3: job "bar" needs job "unknown" which does not exist in this workfl
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -1206,8 +1295,10 @@ jobs:
             platform: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
+
 ```text
 ```
+
 
 
 
@@ -1225,6 +1316,7 @@ test.yaml:9:19: value "13" in "exclude" does not match in matrix "node" combinat
 test.yaml:12:13: "platform" in "exclude" section does not exist in matrix. available matrix configurations are "node", "os" [matrix]
    |
 12 |             platform: ubuntu-latest
+```json
 ```json
 ```
 
@@ -1245,6 +1337,7 @@ combination of matrix values. actionlint checks
 Example input:
 
 ```yaml
+
 on:
   push:
     # ERROR: Incorrect filter. 'branches' is correct
@@ -1265,8 +1358,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
 ```text
 ```
+
 
 
 
@@ -1292,6 +1387,7 @@ test.yaml:13:5: "tags" filter is not available for release event. it is only for
 test.yaml:15:3: unknown Webhook event "pullreq". see https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]
    |
 15 |   pullreq:
+```json
 ```json
 ```
 
@@ -1332,6 +1428,7 @@ by [a script][generate-webhook-events] and kept to the latest by CI workflow tri
 Example input:
 
 ```yaml
+
 on:
   workflow_dispatch:
     inputs:
@@ -1370,8 +1467,10 @@ jobs:
       # ERROR: Number value is not available for object key
       - run: echo "${{ env[inputs.age] }}"
       # ERROR: `github.event.inputs` is also not defined
+
 ```text
 ```
+
 
 
 
@@ -1414,6 +1513,7 @@ test.yaml:39:24: property "massage" is not defined in object type {age: string; 
    |
 39 |       - run: echo "${{ github.event.inputs.massage }}"
 ```json
+```json
 ```
 
 
@@ -1437,6 +1537,7 @@ In addition, `github.event.inputs` and `inputs` objects are typed based on the i
 For example,
 
 ```yaml
+
 inputs:
   string_input:
     type: string
@@ -1449,8 +1550,10 @@ inputs:
     type: number
   env_input:
     type: environment
+
 ```sql
 ```
+
 
 
 
@@ -1465,6 +1568,7 @@ inputs:
   "env_input": string;
   "no_type_input": any;
 ```text
+```text
 ```
 
 
@@ -1472,6 +1576,7 @@ inputs:
 `github.event.inputs` is typed as follows since all properties of it are strings unlike `inputs`:
 
 ```
+
 {
   "string_input": string;
   "choice_input": string;
@@ -1479,8 +1584,10 @@ inputs:
   "num_input": string;
   "env_input": string;
   "no_type_input": string;
+
 ```text
 ```
+
 
 
 
@@ -1508,6 +1615,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 ```text
+```text
 ```
 
 
@@ -1515,6 +1623,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:6:10: character '^' is invalid for branch and tag names. ref name cannot contain spaces, ~, ^, :, [, ?, *. see `man git-check-ref-format` for more details. note that regular expression is unavailable. note: filter pattern syntax is explained at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet [glob]
   |
 6 |       - '^foo-'
@@ -1526,8 +1635,10 @@ test.yaml:9:12: invalid glob pattern. unexpected character '+' while checking sp
 test.yaml:11:14: invalid glob pattern. unexpected character '1' while checking character range in []. start of range '9' (57) is larger than end of range '1' (49). note: filter pattern syntax is explained at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet [glob]
    |
 11 |       - 'v[9-1]'
+
 ```json
 ```
+
 
 
 
@@ -1565,6 +1676,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 ```text
+```text
 ```
 
 
@@ -1572,6 +1684,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:4:13: invalid CRON format "0 */3 * *" in schedule event: expected exactly 5 fields, found 4: [0 */3 * *] [events]
   |
 4 |     - cron: '0 */3 * *'
@@ -1579,8 +1692,10 @@ test.yaml:4:13: invalid CRON format "0 */3 * *" in schedule event: expected exac
 test.yaml:6:13: scheduled job runs too frequently. it runs once per 60 seconds. the shortest interval is once every 5 minutes [events]
   |
 6 |     - cron: '* */3 * * *'
+
 ```json
 ```
+
 
 
 
@@ -1626,6 +1741,7 @@ jobs:
     runs-on: macos-10.13
     steps:
 ```text
+```text
 ```
 
 
@@ -1633,6 +1749,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:10:13: label "linux-latest" is unknown. available labels are "windows-latest", "windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
    |
 10 |           - linux-latest
@@ -1644,8 +1761,10 @@ test.yaml:16:13: label "gpu" is unknown. available labels are "windows-latest", 
 test.yaml:23:14: label "macos-10.13" is unknown. available labels are "windows-latest", "windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
    |
 23 |     runs-on: macos-10.13
+
 ```json
 ```
+
 
 
 
@@ -1674,6 +1793,7 @@ jobs:
     runs-on: [ubuntu-latest, windows-latest]
     steps:
 ```text
+```text
 ```
 
 
@@ -1681,11 +1801,14 @@ jobs:
 Output:
 
 ```
+
 test.yaml:4:30: label "windows-latest" conflicts with label "ubuntu-latest" defined at line:4,col:15. note: to run your job on each worker, use matrix [runner-label]
   |
 4 |     runs-on: [ubuntu-latest, windows-latest]
+
 ```json
 ```
+
 
 
 
@@ -1714,6 +1837,7 @@ jobs:
       - uses: 'docker://image:'
       # ERROR: local action must start with './'
 ```text
+```text
 ```
 
 
@@ -1721,6 +1845,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:7:15: specifying action "actions/checkout" in invalid format because ref is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
   |
 7 |       - uses: actions/checkout
@@ -1736,8 +1861,10 @@ test.yaml:11:15: tag of Docker action should not be empty: "docker://image" [act
 test.yaml:13:15: specifying action ".github/my-actions/do-something" in invalid format because ref is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
    |
 13 |       - uses: .github/my-actions/do-something
+
 ```json
 ```
+
 
 
 
@@ -1780,6 +1907,7 @@ inputs:
 runs:
   using: 'node14'
 ```text
+```text
 ```
 
 
@@ -1787,6 +1915,7 @@ runs:
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -1799,8 +1928,10 @@ jobs:
         with:
           name: rhysd
           message: hello
+
 ```text
 ```
+
 
 
 
@@ -1814,6 +1945,7 @@ test.yaml:7:15: missing input "message" which is required by action "My action" 
 test.yaml:13:11: input "additions" is not defined in action "My action" defined at "./.github/actions/my-action". available inputs are "addition", "message", "name" [action]
    |
 13 |           additions: foo, bar
+```text
 ```text
 ```
 
@@ -1829,6 +1961,7 @@ validates inputs at `with:` in the workflow are correct. Missing required inputs
 Example input:
 
 ```yaml
+
 on: push
 
 jobs:
@@ -1841,8 +1974,10 @@ jobs:
             ${{ hashFiles('**/*.lock') }}
             ${{ hashFiles('**/*.cache') }}
           path: ./packages
+
 ```text
 ```
+
 
 
 
@@ -1856,6 +1991,7 @@ test.yaml:7:15: missing input "key" which is required by action "actions/cache@v
 test.yaml:9:11: input "keys" is not defined in action "actions/cache@v3". available inputs are "key", "path", "restore-keys", "upload-chunk-size" [action]
   |
 9 |           keys: |
+```json
 ```json
 ```
 
@@ -1885,6 +2021,7 @@ make a request [as an issue][issue-form].
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   linux:
@@ -1914,8 +2051,10 @@ jobs:
         shell: sh
       - run: echo 'hello'
         # OK: 'powershell' is only available on Windows
+
 ```text
 ```
+
 
 
 
@@ -1942,6 +2081,7 @@ test.yaml:30:16: shell name "sh" is invalid on Windows. available names are "bas
    |
 30 |         shell: sh
 ```json
+```json
 ```
 
 
@@ -1958,6 +2098,7 @@ configuration are properly using the available shells.
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -1974,8 +2115,10 @@ jobs:
     steps:
       - run: echo 'hello'
         # OK. Step ID uniqueness is job-local
+
 ```text
 ```
+
 
 
 
@@ -1989,6 +2132,7 @@ test.yaml:10:13: step ID "STEP_ID" duplicates. previously defined at line:7,col:
 test.yaml:12:3: key "TEST" is duplicated in "jobs" section. previously defined at line:3,col:3. note that key names are case insensitive [syntax-check]
    |
 12 |   TEST:
+```json
 ```json
 ```
 
@@ -2006,6 +2150,7 @@ and step IDs, and reports errors when some IDs duplicate.
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -2024,8 +2169,10 @@ jobs:
           # ERROR: Hardcoded password
           password: pass
     steps:
+
 ```text
 ```
+
 
 
 
@@ -2039,6 +2186,7 @@ test.yaml:10:19: "password" section in "container" section should be specified v
 test.yaml:17:21: "password" section in "redis" service should be specified via secrets. do not put password value directly [credentials]
    |
 17 |           password: pass
+```json
 ```json
 ```
 
@@ -2057,6 +2205,7 @@ them as an error.
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   test:
@@ -2065,8 +2214,10 @@ jobs:
       FOO=BAR: foo
       FOO BAR: foo
     steps:
+
 ```text
 ```
+
 
 
 
@@ -2080,6 +2231,7 @@ test.yaml:6:7: environment variable name "FOO=BAR" is invalid. '&', '=' and spac
 test.yaml:7:7: environment variable name "FOO BAR" is invalid. '&', '=' and spaces should not be contained [env-var]
   |
 7 |       FOO BAR: foo
+```json
 ```json
 ```
 
@@ -2099,6 +2251,7 @@ actionlint checks environment variable names are correct in `env:` configuration
 Example input:
 
 ```yaml
+
 on: push
 
 # ERROR: Available values for whole permissions are "write-all", "read-all" or "none"
@@ -2113,8 +2266,10 @@ jobs:
       # ERROR: Available values are "read", "write" or "none"
       issues: readable
     steps:
+
 ```text
 ```
+
 
 
 
@@ -2132,6 +2287,7 @@ test.yaml:11:7: unknown permission scope "check". all available permission scope
 test.yaml:13:15: "readable" is invalid for permission of scope "issues". available values are "read", "write" or "none" [permissions]
    |
 13 |       issues: readable
+```json
 ```json
 ```
 
@@ -2165,6 +2321,7 @@ These checks are described in this section.
 Example input:
 
 ```yaml
+
 on:
   workflow_call:
     inputs:
@@ -2195,8 +2352,10 @@ jobs:
   do:
     runs-on: ubuntu-latest
     steps:
+
 ```text
 ```
+
 
 
 
@@ -2215,6 +2374,7 @@ test.yaml:25:18: input "path" of workflow_call event has the default value "", b
    |
 25 |         default: ''
 ```json
+```json
 ```
 
 
@@ -2229,6 +2389,7 @@ values are correctly typed. For more details, see [the official document][create
 Example input:
 
 ```yaml
+
 on: push
 jobs:
   job1:
@@ -2247,8 +2408,10 @@ jobs:
       - run: echo hello
   job4:
     # ERROR: This workflow does not exist
+
 ```text
 ```
+
 
 
 
@@ -2270,6 +2433,7 @@ test.yaml:12:5: "with" is only available for a reusable workflow call with "uses
 test.yaml:19:11: could not read reusable workflow file for "./.github/workflows/not-existing.yml": open /path/to/.github/workflows/not-existing.yml: no such file or directory [workflow-call]
    |
 19 |     uses: ./.github/workflows/not-existing.yml
+```json
 ```json
 ```
 
@@ -2293,6 +2457,7 @@ actionlint reports an error when it does not exist.
 Example input:
 
 ```yaml
+
 on:
   workflow_call:
     inputs:
@@ -2315,8 +2480,10 @@ jobs:
         run: curl ${{ inputs.uri }} -d ${{ inputs.lucky_number }}
         env:
           # ERROR: credentials is typo of credential
+
 ```text
 ```
+
 
 
 
@@ -2330,6 +2497,7 @@ test.yaml:20:23: property "uri" is not defined in object type {url: string; luck
 test.yaml:23:22: property "credentials" is not defined in object type {credential: string} [expression]
    |
 23 |           TOKEN: ${{ secrets.credentials }}
+```json
 ```json
 ```
 
@@ -2349,11 +2517,14 @@ allow keys at `on.workflow_call.inputs` and their values are typed based on `on.
 declares to inherit all secrets.
 
 ```yaml
+
 jobs:
   pass-secrets-to-workflow:
     uses: ./.github/workflows/called-workflow.yml
+
 ```text
 ```
+
 
 
 
@@ -2375,6 +2546,7 @@ jobs:
     steps:
       # OK: This reports no error. FOO is assumed to be inherited from caller
 ```text
+```text
 ```
 
 
@@ -2382,6 +2554,7 @@ jobs:
 this workflow causes no error. And
 
 ```yaml
+
 on:
   workflow_call:
     secrets:
@@ -2391,8 +2564,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ERROR: Secret FOO is not defined
+
 ```text
 ```
+
 
 
 
@@ -2418,6 +2593,7 @@ jobs:
     steps:
       - run: ./output_image_tag.sh
 ```text
+```text
 ```
 
 
@@ -2425,11 +2601,14 @@ jobs:
 Output:
 
 ```
+
 test.yaml:6:20: property "imagetag" is not defined in object type {image_tag: string} [expression]
   |
 6 |         value: ${{ jobs.gen-image-version.outputs.imagetag }}
+
 ```json
 ```
+
 
 
 
@@ -2465,6 +2644,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 ```text
+```text
 ```
 
 
@@ -2472,6 +2652,7 @@ jobs:
 Example input:
 
 ```yaml
+
 on: push
 
 jobs:
@@ -2497,8 +2678,10 @@ jobs:
       # ERROR: Cannot assign null to string input. If you want to pass string "null", use ${{ 'null' }}
       message: null
     secrets:
+
 ```text
 ```
+
 
 
 
@@ -2529,6 +2712,7 @@ test.yaml:24:16: input "message" is typed as string by reusable workflow "./.git
    |
 24 |       message: null
 ```text
+```text
 ```
 
 
@@ -2548,6 +2732,7 @@ Example reusable workflow:
 
 ```yaml
 
+
 # .github/workflows/get-build-info.yaml
 on:
   workflow_call:
@@ -2563,8 +2748,10 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
     steps:
       - run: ...
+
 ```text
 ```
+
 
 
 
@@ -2584,6 +2771,7 @@ jobs:
       - run: echo '${{ needs.get_build_info.outputs.version }}'
       # ERROR: `tag` is not defined in the reusable workflow
 ```text
+```text
 ```
 
 
@@ -2591,11 +2779,14 @@ jobs:
 Output:
 
 ```
+
 test.yaml:13:24: property "tag" is not defined in object type {version: string} [expression]
    |
 13 |       - run: echo '${{ needs.get_build_info.outputs.tag }}'
+
 ```text
 ```
+
 
 
 
@@ -2635,6 +2826,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 ```text
+```text
 ```
 
 
@@ -2642,6 +2834,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:5:3: invalid job ID "foo-v1.2.3". job ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]
   |
 5 |   foo-v1.2.3:
@@ -2657,8 +2850,10 @@ test.yaml:12:3: invalid job ID "-hello-world-". job ID must start with a letter 
 test.yaml:17:3: invalid job ID "2d-game". job ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]
    |
 17 |   2d-game:
+
 ```json
 ```
+
 
 
 
@@ -2700,6 +2895,7 @@ jobs:
         run: echo 'Success? ${{ success() }}'
         # OK: 'success()' function is available here
 ```text
+```text
 ```
 
 
@@ -2707,6 +2903,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:14:17: context "runner" is not allowed here. available contexts are "github", "inputs", "needs", "vars". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]
    |
 14 |           - ${{ runner.temp }}
@@ -2718,8 +2915,10 @@ test.yaml:18:17: context "env" is not allowed here. available contexts are "gith
 test.yaml:24:33: calling function "success" is not allowed here. "success" is only available in "jobs.<job_id>.if", "jobs.<job_id>.steps.if". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]
    |
 24 |         run: echo 'Success? ${{ success() }}'
+
 ```json
 ```
+
 
 
 
@@ -2763,6 +2962,7 @@ jobs:
       - run: echo "foo=bar" >> "$GITHUB_OUTPUT"
       # OK: 'debug' command is not deprecated
 ```text
+```text
 ```
 
 
@@ -2770,11 +2970,14 @@ jobs:
 Output:
 
 ```
+
 test.yaml:8:14: workflow command "set-output" was deprecated. use `echo "{name}={value}" >> $GITHUB_OUTPUT` instead: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions [deprecated-commands]
   |
 8 |       - run: echo '::set-output name=foo::bar'
+
 ```json
 ```
+
 
 
 
@@ -2823,6 +3026,7 @@ jobs:
       - run: echo 'Commit is pushed to main'
         # ERROR: It is always evaluated to true
 ```text
+```text
 ```
 
 
@@ -2830,6 +3034,7 @@ jobs:
 Output:
 
 ```
+
 test.yaml:16:13: if: condition "${{ github.event_name == 'push' }}\n" is always evaluated to true because extra characters are around ${{ }} [if-cond]
    |
 16 |         if: |
@@ -2841,8 +3046,10 @@ test.yaml:20:13: if: condition "${{ github.event_name == 'push' }} " is always e
 test.yaml:26:13: if: condition "${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main' }}" is always evaluated to true because extra characters are around ${{ }} [if-cond]
    |
 26 |         if: ${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main' }}
+
 ```json
 ```
+
 
 
 
@@ -2858,6 +3065,7 @@ Multi-line string inserts newline character at end of each line.
 ```yaml
 if: |
 ```text
+```text
 ```
 
 
@@ -2865,8 +3073,10 @@ if: |
 is equivalent to
 
 ```yaml
+
 ```text
 ```
+
 
 
 
@@ -2876,6 +3086,7 @@ Unlike using `${{ }}`, putting an expression directly ignores white spaces aroun
 if: |
   false
 ```
+
 
 
 

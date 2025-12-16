@@ -68,8 +68,10 @@ A **fully integrated dynamic glyph generation system** that automatically create
 ## How It Works
 
 ### The Pipeline
+
 ```text
 ```
+
 User Input: "I feel vulnerable but loved"
     ↓
 Adaptive Signal Extraction
@@ -95,11 +97,13 @@ New Glyph Available
     ├─ Displayed in UI sidebar
     ├─ Persisted to learning/conversation_glyphs.json
     └─ Ready for system use
+
 ```
 
 
 
 ### Pattern Recognition Example
+```text
 ```text
 ```
 Turn 1: love (0.9) + intimacy (0.8) = co-occurrence
@@ -114,6 +118,7 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
     Response: "Recognize the deep closeness being shared"
     Story: "A story of two souls finding each other"
 ```
+
 
 
 ##
@@ -178,14 +183,17 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
 | `main_v2.py` | +51 lines | Sidebar glyph display & export |
 
 ### Configuration Files (Generated Automatically)
+
 ```text
 ```
+
 learning/
 ├── conversation_glyphs.json          # Glyph registry
 ├── generated_glyphs/                 # Exported glyphs directory
 ├── user_overrides/
 │   └── {user_id}_lexicon.json       # Per-user vocabulary
 └── hybrid_learning_log.jsonl         # Learning log
+
 ```
 
 
@@ -249,13 +257,16 @@ learning/
 
 ```python
 
+
 # In dynamic_glyph_evolution.py
 evolution = DynamicGlyphEvolution(
     min_frequency_for_glyph=300,  # Default
     # Lower = glyphs appear faster
     # Higher = only very strong patterns
+
 ```text
 ```
+
 
 
 
@@ -269,6 +280,7 @@ self.emotion_symbols = {
     "vulnerability": "🌱",
     # Add more
 ```text
+```text
 ```
 
 
@@ -277,12 +289,15 @@ self.emotion_symbols = {
 
 ```python
 
+
 # In dynamic_glyph_evolution.py, _create_pattern_name()
 name_map = {
     ("love", "vulnerability"): "Open-Hearted Love",
     # Customize as needed
+
 ```text
 ```
+
 
 
 ##
@@ -304,6 +319,7 @@ streamlit run main_v2.py
 # Have meaningful conversations
 
 ```text
+```text
 ```
 
 
@@ -311,6 +327,7 @@ streamlit run main_v2.py
 ### Accessing Glyphs Programmatically
 
 ```python
+
 from hybrid_processor_with_evolution import create_integrated_processor
 
 processor = create_integrated_processor(learner, extractor, user_id)
@@ -328,8 +345,10 @@ new_glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated
 processor.export_session_glyphs("output.json")
 
 # Print summary
+
 ```text
 ```
+
 
 
 
@@ -345,6 +364,7 @@ cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 
 # View learning log
 ```text
+```text
 ```
 
 
@@ -355,8 +375,10 @@ cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 ### Automated Verification
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -385,6 +407,7 @@ result = processor.process_user_message(
 )
 
 print('Success!' if result['status'] == 'success' else 'Failed')
+```text
 ```text
 ```
 
@@ -418,6 +441,7 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 ## Architecture Diagram
 
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                  main_v2.py (Streamlit)                     │
 │              User Chat + Sidebar Display                     │
@@ -461,8 +485,10 @@ print('Success!' if result['status'] == 'success' else 'Failed')
                   │ Display  │  │ Store in     │  │ Persist to   │
                   │ in UI    │  │ Session      │  │ JSON files   │
                   │ Sidebar  │  │ State        │  │              │
+
 ```text
 ```
+
 
 
 ##
@@ -534,6 +560,7 @@ streamlit run main_v2.py        # ← Then run this
 
 # Select "hybrid" mode and start chatting!
 ```
+
 
 
 

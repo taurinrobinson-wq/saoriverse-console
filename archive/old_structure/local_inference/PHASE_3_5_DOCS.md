@@ -54,6 +54,7 @@ Phase 3.5 implements a complete **glyph-controlled local LLM system** for fine-t
 
 
 
+
 ## 1. Glyph Schema & Registry
 
 ### Glyph Structure
@@ -72,6 +73,7 @@ class Glyph:
 
 
 
+
 ### Glyph Attributes
 
 Each glyph encodes:
@@ -86,6 +88,7 @@ class GlyphAttributes:
     primary_family: str               # Ache, Joy, Awe, Connection, etc.
     related_emotions: List[str] = None
 ```
+
 
 
 
@@ -118,6 +121,7 @@ stats = registry.get_statistics()
 
 
 
+
 ## 2. Gate Policies
 
 Gates enforce safety constraints on responses:
@@ -137,6 +141,7 @@ class GatePolicy:
             return False
         return True
 ```
+
 
 
 
@@ -166,6 +171,7 @@ Glyphs are encoded as XML-like tags in the prompt:
 
 
 
+
 The complete control prefix looks like:
 
 ```xml
@@ -178,6 +184,7 @@ The complete control prefix looks like:
 
 User: How are you feeling today?
 ```
+
 
 
 
@@ -199,6 +206,7 @@ cleaned, removed = detector.remove_risk_phrases(text)
 
 
 
+
 ### Uncanniness Enforcement
 
 Removes content that dissolves boundaries when gate disables it:
@@ -212,6 +220,7 @@ cleaned, count = enforcer.remove_uncanny_content(text)
 
 # Removed: "dissolves", "edges soften"
 ```
+
 
 
 
@@ -232,6 +241,7 @@ suggestions = enforcer.suggest_rhythm_improvements(text, target_rhythm="slow")
 
 
 
+
 ### Metaphor Density Metering
 
 Measures and adjusts metaphor usage:
@@ -245,6 +255,7 @@ density_lit = meter.measure_density(literal)        # ~0.1
 poetic = "Like water, emotions flow through being"
 density_poet = meter.measure_density(poetic)        # ~0.7
 ```
+
 
 
 
@@ -268,6 +279,7 @@ print(result.processed_text)              # Cleaned version
 print(result.safety_violations_fixed)     # Count of issues fixed
 print(result.detailed_changes)            # List of all changes
 ```
+
 
 
 
@@ -306,6 +318,7 @@ example = TrainingExample(
 
 
 
+
 ### Corpus Builder
 
 ```python
@@ -338,6 +351,7 @@ builder.export_to_jsonl("training_corpus.jsonl")
 
 
 
+
 ### Curriculum Learning
 
 ```python
@@ -361,6 +375,7 @@ examples = builder.add_curriculum_progression(curriculum, gate_schedule)
 
 
 
+
 ## Workflow: End-to-End Response Generation
 
 ### Step 1: Prepare Control Context
@@ -373,6 +388,7 @@ glyphs = [
 gate = GatePolicy(uncanny_ok=False, safety_bias=0.9)
 style = StyleDirective(register="warm", rhythm="slow")
 ```
+
 
 
 
@@ -400,6 +416,7 @@ prefix = ControlTagRenderer.render_control_prefix(glyphs, gate, style)
 
 
 
+
 ### Step 3: Send to Local LLM
 
 ```python
@@ -415,6 +432,7 @@ full_prompt = f"{prefix}\n\nUser: {user_prompt}\nAssistant:"
 # Generate
 raw_response = adapter.generate(full_prompt, max_tokens=150)
 ```
+
 
 
 
@@ -439,6 +457,7 @@ print(f"Issues fixed: {processing_details.safety_violations_fixed}")
 
 
 
+
 ### Step 5: Capture Training Data
 
 ```python
@@ -452,6 +471,7 @@ builder.add_from_interaction(
     context="User emotional state: anxious"
 )
 ```
+
 
 
 
@@ -469,6 +489,7 @@ local_inference/
 ├── test_phase_3_5.py             # Comprehensive test suite (31 tests)
 └── __init__.py
 ```
+
 
 
 
@@ -521,6 +542,7 @@ python -m pytest test_phase_3_5.py -v
 
 # - End-to-end integration
 ```
+
 
 
 

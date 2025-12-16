@@ -117,6 +117,7 @@
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -299,6 +300,7 @@ Results:
 ## Architecture Summary
 
 ```
+
 User Dialogue (Streamlit)
         ↓
 ui.py (line 573)
@@ -322,8 +324,10 @@ UI Display (main_v2.py)
 Data Persistence
 ├─ Session state
 ├─ JSON files
+
 ```text
 ```
+
 
 
 ##
@@ -346,6 +350,7 @@ streamlit run main_v2.py
 
 # Select "hybrid" mode and start chatting!
 ```
+
 
 
 

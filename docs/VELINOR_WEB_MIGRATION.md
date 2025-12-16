@@ -27,6 +27,7 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
 cd velinor-web
 ```text
+```text
 ```
 
 
@@ -37,10 +38,13 @@ From the root, copy the prepared files into the Next.js project:
 
 ```bash
 
+
 # From root of saoriverse-console
 cp frontend_lib_api.ts velinor-web/lib/api.ts
+
 ```text
 ```
+
 
 
 
@@ -137,6 +141,7 @@ export default function Home() {
     </main>
   );
 ```text
+```text
 ```
 
 
@@ -144,6 +149,7 @@ export default function Home() {
 #### Game Scene (`velinor-web/app/game/[sessionId]/page.tsx`)
 
 ```typescript
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -214,8 +220,10 @@ export default function GamePage({ params }: { params: { sessionId: string } }) 
       />
     </div>
   );
+
 ```text
 ```
+
 
 
 
@@ -233,6 +241,7 @@ cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 
 # Create overlays folder (for dust, fog, glyphs)
 ```text
+```text
 ```
 
 
@@ -242,6 +251,7 @@ cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 **Terminal 1 - Backend:**
 
 ```bash
+
 cd d:\saoriverse-console
 python velinor_api.py
 
@@ -252,12 +262,14 @@ python velinor_api.py
 
 
 
+
 **Terminal 2 - Frontend:**
 
 ```bash
 cd velinor-web
 npm run dev
 
+```text
 ```text
 ```
 
@@ -274,6 +286,7 @@ Test the game flow:
 
 ```bash
 
+
 # Add and commit everything
 git add .
 git commit -m "feat: Complete Next.js + FastAPI Velinor game"
@@ -286,6 +299,7 @@ git push origin main
 
 
 
+
 ## API Reference
 
 ### POST /api/game/start
@@ -295,6 +309,7 @@ Start a new game session.
 
 ```json
 ```text
+```text
 ```
 
 
@@ -302,6 +317,7 @@ Start a new game session.
 **Response:**
 
 ```json
+
 {
   "session_id": "uuid-here",
   "state": {
@@ -313,8 +329,10 @@ Start a new game session.
       { "text": "Explore", "id": "choice_2" }
     ]
   }
+
 ```text
 ```
+
 
 
 
@@ -327,6 +345,7 @@ Process player action.
 { "choice_index": 0 }
 // or
 ```text
+```text
 ```
 
 
@@ -336,6 +355,7 @@ Process player action.
 ## Architecture Diagram
 
 ```
+
 ┌─────────────────────────────────────────────────────┐
 │                    User Browser                      │
 │                  (Next.js Frontend)                  │
@@ -366,6 +386,7 @@ Process player action.
 │  │  ▪ Dice rolls & stats                        │  │
 │  └──────────────────────────────────────────────┘  │
 └────────────────────────────────────────────────────┘
+
 ```
 
 

@@ -25,8 +25,10 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
 ## Marketplace Sphere of Influence
 
 ### Network Map
+
 ```text
 ```
+
                     Ravi (0.8) ← → Nima
                     /  \              /  \
               (0.4)/    \(0.2)    (0.5)/   \(0.3)
@@ -39,6 +41,7 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
         Kaelen (Cloaked)*
 
 * Hidden sphere: Thieves' Gang (0.6 counter-sphere with Veynar)
+
 ```
 
 

@@ -45,6 +45,7 @@ log_glyph_usage(glyph_name, user_hash, input_text, relevance_score)
 
 promote_candidate_to_production(glyph_name)
 ```text
+```text
 ```
 
 
@@ -52,6 +53,7 @@ promote_candidate_to_production(glyph_name)
 **Example Flow**:
 
 ```
+
 User: "I feel caught between who I pretend to be and who I really am"
   ↓
 GlyphLearner.analyze_input_for_glyph_generation()
@@ -63,8 +65,10 @@ GlyphLearner.analyze_input_for_glyph_generation()
   ├─ Map gates: [Gate 4 (high intensity), Gate 5 (medium)]
   └─ Confidence: 0.75
   ↓
+
 ```text
 ```
+
 
 
 ##
@@ -95,6 +99,7 @@ GlyphLearner.analyze_input_for_glyph_generation()
 
 "insight" patterns:
 ```text
+```text
 ```
 
 
@@ -102,6 +107,7 @@ GlyphLearner.analyze_input_for_glyph_generation()
 **Example Response**:
 
 ```
+
 User input: "I feel caught between who I pretend to be and who I really am"
 Generator crafts:
   "You're doing something quiet but powerful: maintaining distance between
@@ -117,8 +123,10 @@ What this does:
   ✓ Reinforces: "caught between", "tension", "authenticity"
   ✓ Names the glyph implicitly
   ✓ Validates the emotional pattern
+
 ```text
 ```
+
 
 
 
@@ -135,6 +143,7 @@ craft_insufficient_glyph_response(partial_glyph, existing_glyphs, input)
   → When glyph is incomplete, bridges with existing patterns
 
 create_training_response(glyph_candidate, original_input, signals, emotional_analysis)
+```text
 ```text
 ```
 
@@ -156,6 +165,7 @@ create_training_response(glyph_candidate, original_input, signals, emotional_ana
 #### Database Schema:
 
 ```
+
 glyph_versions (evolution)
   ├─ glyph_name
   ├─ version_num (1, 2, 3...)
@@ -185,8 +195,10 @@ emotional_territory (coverage mapping)
   ├─ emotional_area
   ├─ primary_glyphs
   ├─ coverage_quality (CRITICAL, POOR, FAIR, STRONG)
+
 ```text
 ```
+
 
 
 
@@ -211,6 +223,7 @@ get_glyphs_for_user(user_hash="user_002", emotional_signal="β", gates=["Gate 4"
     2. Consensus adoption (same as A, global)
     3. Quality score (same as A)
 ```text
+```text
 ```
 
 
@@ -218,6 +231,7 @@ get_glyphs_for_user(user_hash="user_002", emotional_signal="β", gates=["Gate 4"
 **Key Functions**:
 
 ```python
+
 get_glyphs_for_user(user_hash, emotional_signal, gates, top_k=5)
   → Glyphs for THIS user, ordered by adoption + consensus
 
@@ -240,8 +254,10 @@ recommend_new_glyphs_for_gaps()
   → Guide future glyph generation based on gaps
 
 get_system_health_report()
+
 ```text
 ```
+
 
 
 ##
@@ -258,6 +274,7 @@ User Input
   ├─ Fetch matching glyphs
   ├─ Select best glyph + contextual response
 ```text
+```text
 ```
 
 
@@ -265,6 +282,7 @@ User Input
 ### New Flow (Phase 2):
 
 ```
+
 User Input
   ↓ signal_parser.parse_input()
   ├─ Detect signals (3-phase: exact → NRC → fuzzy)
@@ -289,8 +307,10 @@ User Input
   │       User sees PERSONALIZED response (never generic)
   │       System records adoption in shared_glyph_manager
   │
+
 ```text
 ```
+
 
 
 ##
@@ -369,6 +389,7 @@ INSERT INTO glyph_usage_log
 UPDATE emotional_territory
   SET primary_glyphs = [..., "Fractured Identity"]
 ```text
+```text
 ```
 
 
@@ -376,6 +397,7 @@ UPDATE emotional_territory
 Later, when User 002 experiences similar emotion:
 
 ```python
+
 
 # Query returns to User 002:
 get_glyphs_for_user("user_002_hash", signal="β", gates=["Gate 4"])
@@ -391,8 +413,10 @@ record_glyph_adoption("user_002_hash", "Fractured Identity", rating=1)
 glyph gets promoted to production glyph_lexicon
 promote_candidate_to_production("Fractured Identity")
   → Moves from candidates to core glyphs
+
 ```text
 ```
+
 
 
 ##
@@ -414,6 +438,7 @@ Recommendations:
   ⚠️ Generate 3-4 more glyphs for "identity territory"
   ⚠️ Generate 5+ new glyphs for "shame territory"
 ```text
+```text
 ```
 
 
@@ -424,6 +449,7 @@ This guides the next round of glyph generation.
 ## User Experience Segregation (Concrete Example)
 
 ```
+
 SHARED DATABASE:
   glyph_lexicon contains ~284 glyphs (for everyone)
 
@@ -449,8 +475,10 @@ SYSTEM'S EXPERIENCE:
   - All three users in same shared database
   - Every adoption, every feedback improves system
   - Most-adopted glyphs surface to top for new users
+
 ```text
 ```
+
 
 
 ##
@@ -478,6 +506,7 @@ def parse_input(text, user_hash):
         shared_mgr.record_glyph_adoption(user_hash, candidate['glyph_name'])
         return response
 ```
+
 
 
 

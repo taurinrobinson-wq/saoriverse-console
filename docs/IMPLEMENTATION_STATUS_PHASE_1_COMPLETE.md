@@ -57,6 +57,7 @@ Zustand-based central state store providing:
 ```typescript
 import { useGameStore } from '@/lib/gameStore';
 ```text
+```text
 ```
 
 
@@ -79,11 +80,14 @@ Real-time monitoring widget (bottom-right corner):
 **Glyphs (4 Musical Memories):**
 
 ```
+
 glyph_joy         → Empathy ≥ 60
 glyph_longing     → Observation ≥ 65 AND Trust ≥ 55
 glyph_chain       → Narrative Presence ≥ 70 AND Observation ≥ 60
+
 ```text
 ```
+
 
 
 
@@ -95,6 +99,7 @@ glyph_chain       → Narrative Presence ≥ 70 AND Observation ≥ 60
 3. Hidden Knowledge      → Observation ≥ 90 AND Trust ≥ 60
 4. Lonely Ending         → Trust ≤ 30 AND Empathy ≤ 30
 5. Power Corruption      → Observation ≥ 70 AND Empathy ≤ 35
+```text
 ```text
 ```
 
@@ -125,6 +130,7 @@ The foundation is complete. Phase 2 implementation guide included (`PHASE_2_DIAL
 ### Quick Start Template for Dialogue Choice
 
 ```typescript
+
 // In dialogue handler
 const choice = {
   text: 'Show genuine empathy',
@@ -137,8 +143,10 @@ const choice = {
 
 // When chosen:
 updateToneStats(...choice.toneChanges);
+
 ```text
 ```
+
 
 
 
@@ -153,6 +161,7 @@ if (toneStats.observation >= 75) {
 
 if (toneStats.trust >= 80) {
   // Show vulnerable confession
+```text
 ```text
 ```
 
@@ -171,6 +180,7 @@ if (toneStats.trust >= 80) {
 ## File Structure Summary
 
 ```
+
 /workspaces/saoriverse-console/
 ├── velinor/
 │   ├── markdowngameinstructions/
@@ -203,8 +213,10 @@ if (toneStats.trust >= 80) {
 │
 ├── PHASE_1_TONE_SYSTEM_COMPLETE.md          (✅ Complete guide)
 ├── PHASE_2_DIALOGUE_SYSTEM_GUIDE.md         (✅ Implementation roadmap)
+
 ```text
 ```
+
 
 
 ##
@@ -271,6 +283,7 @@ Commit 6543b0c
 Phase 1: TONE Stat System Implementation - Complete Game Architecture
  9 files changed, 225 insertions(+)
 ```
+
 
 
 

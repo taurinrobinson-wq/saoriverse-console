@@ -46,6 +46,7 @@ jobs:
           key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }}
         if: ${{ github.repository.permissions.admin == true }}
 ```text
+```text
 ```
 
 
@@ -53,6 +54,7 @@ jobs:
 **actionlint reports 7 errors:**
 
 ```
+
 test.yaml:3:5: unexpected key "branch" for "push" section. expected one of "branches", "branches-ignore", "paths", "paths-ignore", "tags", "tags-ignore", "types", "workflows" [syntax-check]
   |
 3 |     branch: main
@@ -80,8 +82,10 @@ test.yaml:21:20: property "platform" is not defined in object type {os: string} 
 test.yaml:22:17: receiver of object dereference "permissions" must be type of object but got "string" [expression]
    |
 22 |         if: ${{ github.repository.permissions.admin == true }}
+
 ```text
 ```
+
 
 
 
@@ -105,6 +109,7 @@ or run via Docker container.
 
 ```sh
 ```text
+```text
 ```
 
 
@@ -114,7 +119,9 @@ checks errors. actionlint focuses on finding out mistakes. It tries to catch err
 as minimal as possible.
 
 ```sh
+
 actionlint
+
 ```
 
 

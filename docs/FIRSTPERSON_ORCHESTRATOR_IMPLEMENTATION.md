@@ -21,8 +21,10 @@ Result: Same input often got identical responses, or responses felt pre-written 
 ### The Solution: Glyph-as-Constraint Architecture
 
 Instead of glyphs generating responses, glyphs **inform** response generation:
+
 ```text
 ```
+
 User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator → Fresh Response
                                                     ↓
                                           Glyph provides constraints:
@@ -32,6 +34,7 @@ User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator �
 
                                           But response is generated fresh
                                           specific to THIS input
+
 ```
 
 
@@ -43,6 +46,7 @@ User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator �
 Analyzes emotional tone, intensity, and valence of user input.
 
 ```python
+
 affect = parser.analyze_affect("I'm grieving the loss of my job")
 
 # Returns: {
@@ -53,6 +57,7 @@ affect = parser.analyze_affect("I'm grieving the loss of my job")
 
 ```text
 ```
+
 
 
 
@@ -109,6 +114,7 @@ closing = "There's no rush. Move at your own pace."  (theme="grief" specific)
 
 FINAL: "I hear the weight of grief. What's underneath? What do you need?
 ```text
+```text
 ```
 
 
@@ -127,10 +133,13 @@ FINAL: "I hear the weight of grief. What's underneath? What do you need?
 `session_manager.py` initializes the orchestrator:
 
 ```python
+
 orchestrator = create_orchestrator(user_id, conversation_id)
 orchestrator.initialize_session()
+
 ```text
 ```
+
 
 
 
@@ -140,6 +149,7 @@ orchestrator.initialize_session()
 ```python
 fp_orch = st.session_state.get("firstperson_orchestrator")
 if fp_orch and best_glyph:
+```text
 ```text
 ```
 
@@ -221,6 +231,7 @@ This implementation restores your **original vision** for the glyph system:
 ## Architecture Diagram
 
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │ User Input: "I'm grieving the loss of my job"             │
 └────────────────┬────────────────────────────────────────────┘
@@ -258,6 +269,7 @@ This implementation restores your **original vision** for the glyph system:
 │  What do you need? There's no rush.                         │
 │  Move at your own pace."                                    │
 └─────────────────────────────────────────────────────────────┘
+
 ```
 
 

@@ -56,6 +56,7 @@ class ConversationManager:
 
 
 
+
 #### 2. Glyph Detection System (`signal_parser.py`)
 
 ```python
@@ -63,6 +64,7 @@ def parse_input(input_text: str, lexicon_path: str, ...) -> Dict
 def parse_signals(input_text: str, signal_map: Dict) -> List[str]
 def evaluate_gates(signals: List[str], gates: Dict) -> Dict[str, float]
 ```
+
 
 
 
@@ -109,6 +111,7 @@ CREATE TABLE conversation_messages (
 
 
 
+
 );
 
 ```
@@ -140,6 +143,7 @@ Examples from `data/glyph_lexicon_rows.json`:
 ```bash
 
 
+
 SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  # Required for RLS bypass
 
@@ -148,6 +152,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  # Required for RLS bypass
 ### Streamlit Secrets
 
 ```toml
+
 
 
 [supabase]

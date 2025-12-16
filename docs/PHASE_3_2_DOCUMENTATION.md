@@ -42,11 +42,14 @@ Analyzes acoustic features of speech to detect emotional tone using Voice Activi
 - Confidence score (0-1)
 
 **Processing**:
+
 ```text
 ```
+
 AcousticFeatures → [Arousal, Valence, Dominance] → Primary Tone → Emotional State
                    ↓
                   Stress Indicator (pitch variance + pauses + energy variance)
+
 ```
 
 
@@ -98,6 +101,7 @@ Detects emotional expression from facial landmarks using Facial Action Coding Sy
 
 **Processing**:
 ```text
+```text
 ```
 FaceLandmarks → [AU1-AU26 Intensities] → Expression Classification
                  ↓
@@ -105,6 +109,7 @@ FaceLandmarks → [AU1-AU26 Intensities] → Expression Classification
                  ↓
                 Authenticity (AU consistency) & Attention (eye openness)
 ```
+
 
 
 
@@ -146,8 +151,10 @@ Combines text, voice, and facial data into unified emotional understanding.
 - Detailed modality-by-modality comparison
 
 **Processing**:
+
 ```text
 ```
+
 Text Tone + Voice Analysis + Facial Analysis
     ↓
 Emotion Matching & Congruence Assessment
@@ -161,6 +168,7 @@ Incongruence Detection:
     - Mismatch: voice vs. facial disagreement
     ↓
 Primary Emotion Determination & Confidence Calculation
+
 ```
 
 
@@ -170,6 +178,7 @@ Primary Emotion Determination & Confidence Calculation
 ### Voice Analysis
 
 ```python
+
 from emotional_os.core.firstperson import VoiceAffectDetector, AcousticFeatures
 
 detector = VoiceAffectDetector()
@@ -192,8 +201,10 @@ analysis = detector.analyze(features)
 print(f"Detected tone: {analysis.detected_tone}")  # EXCITED
 print(f"Arousal: {analysis.arousal:.2f}")         # ~0.625
 print(f"Valence: {analysis.valence:.2f}")         # ~0.63
+
 ```text
 ```
+
 
 
 
@@ -221,6 +232,7 @@ print(f"Expression: {analysis.expression}")     # HAPPY or SURPRISED
 print(f"AU12 (smile): {analysis.action_units.intensities['AU12_lip_corner_puller']:.2f}")
 print(f"AU6 (cheek): {analysis.action_units.intensities['AU6_cheek_raiser']:.2f}")
 ```text
+```text
 ```
 
 
@@ -228,6 +240,7 @@ print(f"AU6 (cheek): {analysis.action_units.intensities['AU6_cheek_raiser']:.2f}
 ### Multimodal Fusion
 
 ```python
+
 from emotional_os.core.firstperson import MultimodalFusionEngine
 
 engine = MultimodalFusionEngine()
@@ -254,8 +267,10 @@ if analysis.incongruences:
 dims = analysis.dimensions
 print(f"Fused arousal: {dims.arousal:.2f} (from {dims.arousal_source})")
 print(f"Fused valence: {dims.valence:.2f} (from {dims.valence_source})")
+
 ```text
 ```
+
 
 
 
@@ -272,6 +287,7 @@ Text + Voice + Facial (Phase 3.2)
               ↓
     EmotionalProfileManager (Phase 3.1)
               ↓
+```text
 ```text
 ```
 
@@ -290,13 +306,16 @@ Text + Voice + Facial (Phase 3.2)
 ### Sarcasm Detection
 
 ```
+
 Text: "Oh great, just wonderful"  (positive words)
 Voice: Low pitch, slow rate, high pauses (negative valence)
 Facial: Lowered mouth corners, inner brow raise (sad)
 
 Result: TEXT_POSITIVE_VOICE_NEGATIVE
+
 ```text
 ```
+
 
 
 
@@ -309,6 +328,7 @@ Facial: Low eye contact, lip tension
 
 Result: SUPPRESSION
 ```text
+```text
 ```
 
 
@@ -316,6 +336,7 @@ Result: SUPPRESSION
 ### Consistent Authenticity
 
 ```
+
 Text: "I'm happy"
 Voice: High pitch, fast rate, minimal pauses
 Facial: AU12 + AU6 = Duchenne smile, high authenticity
@@ -324,6 +345,7 @@ All modalities agree with high confidence
 Result: FULL_AGREEMENT
 Primary emotion: happy
 Confidence: 0.88
+
 ```
 
 

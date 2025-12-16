@@ -37,6 +37,7 @@ End of Day
 ```
 
 
+
 ##
 
 ## 1. User Login Flow (Encryption Setup)
@@ -202,6 +203,7 @@ class UserAuthenticationManager:
 ```
 
 
+
 ##
 
 ## 2. Conversation Storage Flow (Encryption on Save)
@@ -309,6 +311,7 @@ class ConversationStorageManager:
         except Exception as e:
             logger.warning(f"Failed to log audit: {e}")
 ```
+
 
 
 ##
@@ -441,6 +444,7 @@ class PrivacyMaintenanceTasks:
 ```
 
 
+
 ##
 
 ## 4. Alternative: Dream Summary from Live Data
@@ -513,6 +517,7 @@ class ConversationStorageManager:
 
 
 
+
 Then in scheduled task:
 
 ```python
@@ -559,6 +564,7 @@ def generate_daily_dreams(self):
         "date", yesterday.isoformat()
     ).execute()
 ```
+
 
 
 ##
@@ -653,6 +659,7 @@ async def get_conversation_history(
         }
     ]
 ```
+
 
 
 ##

@@ -21,8 +21,10 @@ Your Velinor game is now **emotionally intelligent**. NPC responses adapt in rea
 - Modified `process_player_action()` to attach analysis to game state
 
 ### Emotional Analysis Pipeline
+
 ```text
 ```
+
 Player Input
     ↓
 FirstPerson Orchestrator
@@ -41,6 +43,7 @@ NPC Response Generator
     └─ Closing: Invites appropriate depth
     ↓
 Chat Display (Light Theme)
+
 ```
 
 
@@ -75,6 +78,7 @@ Chat Display (Light Theme)
 
 **Your Input:** "I'm feeling overwhelmed by everything"
 ```text
+```text
 ```
 Analysis: { tone: 'heavy', valence: -0.8, intensity: 0.9 }
 NPC:      "I hear the weight in that. The gravity of what
@@ -84,12 +88,16 @@ NPC:      "I hear the weight in that. The gravity of what
 
 
 
+
 **Your Input:** "I'm curious about what comes next"
+
 ```text
 ```
+
 Analysis: { tone: 'curious', valence: 0.3, intensity: 0.4 }
 NPC:      "Tell me more about that. I'm curious where that
            leading. What would you like to explore?"
+
 ```
 
 
@@ -98,6 +106,7 @@ NPC:      "Tell me more about that. I'm curious where that
 
 **Turn 1:** "I keep thinking about loss"
 ```text
+```text
 ```
 Analysis: { theme: 'grief', frequency: 1 }
 NPC:      "Loss shapes us in ways words can't reach..."
@@ -105,12 +114,16 @@ NPC:      "Loss shapes us in ways words can't reach..."
 
 
 
+
 **Turn 3:** "The grief is still with me"
+
 ```text
 ```
+
 Analysis: { theme: 'grief', frequency: 2, is_recurring: true }
 NPC:      "I hear the weight in that. And I'm noticing grief
            keeps coming back to you. That tells me something."
+
 ```
 
 
@@ -119,16 +132,21 @@ NPC:      "I hear the weight in that. And I'm noticing grief
 
 **Turns 1-2:** Valence: -0.8 → -0.9 (worsening)
 ```text
+```text
 ```
 NPC:      "I'm noticing the weight increasing. What's happening?"
 ```
 
 
 
+
 **Turns 2-3:** Valence: -0.9 → -0.2 (improving)
+
 ```text
 ```
+
 NPC:      "I'm also noticing a shift. What's helping?"
+
 ```
 
 
@@ -153,8 +171,10 @@ NPC:      "I'm also noticing a shift. What's helping?"
 ### Launch the Game
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -163,6 +183,7 @@ That's it! FirstPerson integration is automatic. Just play normally and notice h
 ### Validate the Integration
 
 ```bash
+```text
 ```text
 ```
 
@@ -253,6 +274,7 @@ All pushed to GitHub main branch ✅
 **FirstPerson Analysis:**
 
 ```
+
 {
   emotional_tone: 'reflective',
   detected_theme: 'general',
@@ -262,8 +284,10 @@ All pushed to GitHub main branch ✅
     has_context: false,  // First turn
     emotional_trend: 'stable'
   }
+
 ```text
 ```
+
 
 
 
@@ -291,6 +315,7 @@ All pushed to GitHub main branch ✅
     }
   }
 ```text
+```text
 ```
 
 
@@ -304,6 +329,7 @@ All pushed to GitHub main branch ✅
 **FirstPerson Analysis:**
 
 ```
+
 {
   emotional_tone: 'reflective',
   detected_theme: 'grief',
@@ -319,8 +345,10 @@ All pushed to GitHub main branch ✅
     },
     recurring_themes: ['grief']
   }
+
 ```text
 ```
+
 
 
 
@@ -369,6 +397,7 @@ All pushed to GitHub main branch ✅
 streamlit run velinor_app.py
 
 ```text
+```text
 ```
 
 
@@ -376,9 +405,11 @@ streamlit run velinor_app.py
 ### Validation
 
 ```bash
+
 python3 FIRSTPERSON_INTEGRATION_TEST.py
 
 # All 5 tests pass ✓
+
 ```
 
 

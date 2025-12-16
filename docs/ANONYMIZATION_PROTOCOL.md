@@ -45,8 +45,10 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 ## 🔐 Symbolic Glyphs
 
 ### Family Roles
+
 ```text
 ```
+
 mother/parent        → the Lightkeeper
 father/guardian      → the Steward / the Guardian
 son/child            → the Bearer / the Seedling
@@ -57,11 +59,13 @@ therapist/counselor  → the Witness
 doctor               → the Steward of Medicine
 boss/authority       → the Authority
 friend/companion     → the Companion
+
 ```
 
 
 
 ### Emotional States & Medical Terms
+```text
 ```text
 ```
 depression           → the Depths
@@ -77,15 +81,19 @@ diagnosis            → the Recognition
 
 
 
+
 ### Locations
+
 ```text
 ```
+
 California           → West Coast
 New York             → East Coast
 Texas                → South
 Chicago              → Midwest
 Seattle              → Pacific Northwest
 Denver               → Rocky Mountain
+
 ```
 
 
@@ -124,6 +132,7 @@ Denver               → Rocky Mountain
 ### Basic Anonymization
 
 ```python
+
 from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
 
 # Create protocol
@@ -145,6 +154,7 @@ print(anonymized["text"])
 
 
 
+
 ### With Consent (Medical Details Preserved)
 
 ```python
@@ -157,6 +167,7 @@ anonymized, anonmap = anon_with_medical.anonymize_entry(entry, "user_123")
 print(anonymized["text"])
 
 ```text
+```text
 ```
 
 
@@ -164,6 +175,7 @@ print(anonymized["text"])
 ### Consent Request for Sharing
 
 ```python
+
 
 # Generate consent request for therapist sharing
 consent = anon.create_consent_request("user_123", "therapy_sharing")
@@ -184,6 +196,7 @@ print(consent["options"])
 
 
 
+
 ### Transparency Report
 
 ```python
@@ -193,6 +206,7 @@ report = anon.generate_anonymization_report(entry, anonmap)
 
 print(f"Identifiers replaced: {report['changes_made']['identifiers_replaced']}")
 print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
+```text
 ```text
 ```
 
@@ -229,10 +243,13 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 **1. Therapy Sharing**
 
 ```
+
 "Would you like to share this with your therapist?"
 → "Yes, reveal my identity for clinical review"
+
 ```text
 ```
+
 
 
 
@@ -242,6 +259,7 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 "Include this in your personal legacy archive?"
 → "Yes, with my real name"
 ```text
+```text
 ```
 
 
@@ -249,10 +267,13 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 **3. Research Contribution**
 
 ```
+
 "Would you like to contribute to emotional research?"
 → "Yes, but keep me anonymous"
+
 ```text
 ```
+
 
 
 
@@ -262,6 +283,7 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 "Allow medical team to review with your actual identity?"
 → "Yes, only for this medical issue"
 ```text
+```text
 ```
 
 
@@ -270,6 +292,7 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 ## 🔄 Data Flow
 
 ```
+
 User Entry (Raw)
     ↓
     [Anonymization Decision]
@@ -296,8 +319,10 @@ User Entry (Raw)
     [Optional: Consent Request]
     ├─ Ask user: "Share this?"
     ├─ If yes → Un-anonymize
+
 ```text
 ```
+
 
 
 ##
@@ -333,6 +358,7 @@ User Entry (Raw)
     "CA": "West Coast"
   }
 ```text
+```text
 ```
 
 
@@ -343,6 +369,7 @@ User Entry (Raw)
 ### 1. Hybrid Learner (emotional_os/learning/hybrid_learner_v2.py)
 
 ```python
+
 
 # Before logging an exchange:
 from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
@@ -360,8 +387,10 @@ anonymized, anonmap = anon.anonymize_entry(entry, user_id)
 _log_exchange(anonymized)
 
 # Store map for potential de-anonymization
+
 ```text
 ```
+
 
 
 
@@ -387,6 +416,7 @@ with col3:
     if st.button("No, keep this private"):
         # Don't store at all
 ```text
+```text
 ```
 
 
@@ -394,6 +424,7 @@ with col3:
 ### 3. Export/Archive (emotional_os/glyphs/velonix_reaction_engine.py)
 
 ```python
+
 
 # When exporting emotional archives:
 
@@ -406,6 +437,7 @@ with col3:
 # - Anonymized (glyphs, relative dates)
 
 # - Clinical (medical details preserved, names hidden)
+
 ```
 
 

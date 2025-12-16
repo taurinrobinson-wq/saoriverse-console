@@ -18,14 +18,17 @@ The marketplace is a **trust economy** where NPCs vary in openness, but all requ
 - **Shrine Keeper**: Skeptical of outsiders seeking sacred knowledge
 
 ### Dialogue Pattern: First Encounter
+
 ```sql
 ```
+
 NPC: "You're not from here. Outsiders take more than they give."
 
 Player Options:
 A) "I've lost too much to take more."  → Shows vulnerability
 B) "I'll prove I can give back."       → Shows commitment
 C) "Then don't trust me yet. Just watch." → Shows respect for caution
+
 ```
 
 
@@ -57,6 +60,7 @@ C) "Then don't trust me yet. Just watch." → Shows respect for caution
 
 ### Dialogue Pattern: First Encounter
 ```text
+```text
 ```
 NPC: "I'd welcome you with open arms, but too many hands here have stolen."
 
@@ -65,6 +69,7 @@ A) "I'm not here to steal. I'm here to listen."   → Shows purpose alignment
 B) "I know what it's like to lose trust."        → Mirrors their experience
 C) "Then let me earn it, slowly."                → Respects their process
 ```
+
 
 
 
@@ -102,8 +107,10 @@ C) "Then let me earn it, slowly."                → Respects their process
 ##
 
 ## Trust Meter (Optional Implementation)
+
 ```text
 ```
+
 Per NPC:
 [==========] Mistrusting NPC (10 points to unlock mid-tier dialogue)
 [======    ] Welcoming NPC (8 points to unlock mid-tier dialogue)
@@ -114,6 +121,7 @@ Actions:
 - Help with task: +3 points
 - Resolve crime: +5 points
 - Challenge or ignore advice: -2 points
+
 ```
 
 
@@ -129,12 +137,14 @@ Actions:
 
 ### Example:
 ```text
+```text
 ```
 Player helps Nima (mistrusting guard) find stolen goods
 → Nima tells Ravi (welcoming NPC) the player is reliable
 → Ravi becomes even more welcoming
 → But Nima's rival, a black market trader, becomes wary
 ```
+
 
 
 ##

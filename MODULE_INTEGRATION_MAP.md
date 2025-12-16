@@ -21,6 +21,7 @@ def handle_response_pipeline(user_input, context):
     5. encoding.encode_conversation()              # ← emotional_os_privacy
     6. learner.learn_from_exchange()               # ← emotional_os_learning
 ```text
+```text
 ```
 
 
@@ -31,6 +32,7 @@ def handle_response_pipeline(user_input, context):
 ### In response_handler.py or new integrated_pipeline.py:
 
 ```python
+
 
 # Safety
 from src.emotional_os_safety.sanctuary import Sanctuary, is_sensitive_input, ensure_sanctuary_response
@@ -57,8 +59,10 @@ from src.emotional_os_privacy.dream_engine import DreamEngine
 from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtocol
 
 # Memory
+
 ```text
 ```
+
 
 
 ##
@@ -97,6 +101,7 @@ class SessionState:
 
         self.user_id = None
 ```text
+```text
 ```
 
 
@@ -107,6 +112,7 @@ class SessionState:
 ### 1. SAFETY CHECK
 
 ```python
+
 
 # Input: user_input = "I'm suicidal"
 
@@ -121,6 +127,7 @@ consent_prompt = build_consent_prompt(risk_level)
 
 ```text
 ```
+
 
 
 
@@ -144,6 +151,7 @@ signals = adaptive_extractor.extract_signals(user_input)
 poetry_signals = poetry_extractor.extract_signals(user_input)
 
 ```text
+```text
 ```
 
 
@@ -151,6 +159,7 @@ poetry_signals = poetry_extractor.extract_signals(user_input)
 ### 3. ARCHETYPE MATCHING
 
 ```python
+
 
 # Input: user_input, prior_context = [previous turns]
 
@@ -166,6 +175,7 @@ best_archetype = archetype_library.get_best_match(
 
 ```text
 ```
+
 
 
 
@@ -185,6 +195,7 @@ response = archetype_gen.generate_archetype_aware_response(
 # If no archetype match, fallback:
 if not response:
 ```text
+```text
 ```
 
 
@@ -193,6 +204,7 @@ if not response:
 
 ```python
 
+
 # If sensitive input detected, wrap response
 if is_sensitive:
     response = ensure_sanctuary_response(
@@ -200,8 +212,10 @@ if is_sensitive:
         base_response=response,
         tone="gentle"
     )
+
 ```text
 ```
+
 
 
 
@@ -221,6 +235,7 @@ encoded = encoding.encode_conversation(
 )
 
 ```text
+```text
 ```
 
 
@@ -228,6 +243,7 @@ encoded = encoding.encode_conversation(
 ### 7. LEARNING
 
 ```python
+
 
 # Learn from this exchange
 learner_result = hybrid_learner.learn_from_exchange(
@@ -253,8 +269,10 @@ if is_end_of_day:
         date="2024-12-04",
         conversations=[day's conversations],
         glyph_effectiveness={...}
+
 ```text
 ```
+
 
 
 ##
@@ -345,6 +363,7 @@ CREATE TABLE daily_summaries (
 ALTER TABLE conversations ADD COLUMN encoded_version JSON;
 ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
 ```text
+```text
 ```
 
 
@@ -355,6 +374,7 @@ ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
 ### Config File (config/system_integration.json)
 
 ```json
+
 {
   "learning": {
     "enabled": true,
@@ -391,8 +411,10 @@ ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
     "include_crisis_resources": false,
     "user_controlled_escalation": true
   }
+
 ```text
 ```
+
 
 
 ##
@@ -425,6 +447,7 @@ try:
 except Exception as e:
     logger.error(f"Encoding failed: {e}")
 ```text
+```text
 ```
 
 
@@ -435,6 +458,7 @@ except Exception as e:
 ### Unit Tests Needed
 
 ```python
+
 
 # test_safety_integration.py
 def test_sensitive_input_detection(): ...
@@ -463,8 +487,10 @@ def test_dream_engine(): ...
 
 # test_pipeline_integration.py
 def test_full_request_pipeline(): ...
+
 ```text
 ```
+
 
 
 ##
@@ -502,6 +528,7 @@ metrics = {
     "privacy_encoding_success": True,
     "response_generation_time_ms": 0.0,
 ```text
+```text
 ```
 
 
@@ -509,6 +536,7 @@ metrics = {
 ### Track These Per-Day:
 
 ```python
+
 daily_metrics = {
     "total_sessions": 0,
     "total_exchanges": 0,
@@ -519,4 +547,5 @@ daily_metrics = {
     "quality_exchanges": 0,
     "system_errors": 0,
 }
+
 ```

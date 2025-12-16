@@ -7,8 +7,10 @@ This document contains all test messages used to verify the anti-dash system, al
 ## Test Message Set 1: Core Emotional States
 
 ### Message 1.1: Overwhelm & Anxiety
+
 ```text
 ```
+
 Input: "I'm feeling overwhelmed and anxious"
 Time: 0.043s
 Source: dynamic_composer
@@ -24,11 +26,13 @@ Analysis:
 ✅ Period separators (appropriate for Grounded pool)
 ✅ Conversational and inviting
 ✅ Under 100 characters (concise)
+
 ```
 
 
 
 ### Message 1.2: Grief
+```text
 ```text
 ```
 Input: "I'm grieving the loss of my job"
@@ -50,9 +54,12 @@ Analysis:
 
 
 
+
 ### Message 1.3: Cognitive Block
+
 ```text
 ```
+
 Input: "I'm blocked on this math problem"
 Time: 0.009s
 Source: dynamic_composer
@@ -73,6 +80,7 @@ Analysis:
 ✅ Reframes block as mismatch, not failure
 ✅ Ends with exploratory question
 ✅ Longer, more substantive response (appropriate for complex issue)
+
 ```
 
 
@@ -81,6 +89,7 @@ Analysis:
 ## Test Message Set 2: Diversity Testing (Same Input, Multiple Runs)
 
 ### Message 2.1: Repeated Input Test
+```text
 ```text
 ```
 Input (repeated 4 times): "I'm feeling anxious and overwhelmed"
@@ -112,13 +121,16 @@ Uniqueness Analysis:
 ```
 
 
+
 ##
 
 ## Test Message Set 3: Edge Cases
 
 ### Message 3.1: Very Short Input
+
 ```text
 ```
+
 Input: "sad"
 Time: 0.002s
 Source: fallback_message|conversationalized
@@ -131,11 +143,13 @@ Analysis:
 ✅ Appropriate for minimal input
 ✅ Conversational despite brevity
 ✅ Validating tone
+
 ```
 
 
 
 ### Message 3.2: Complex Multi-Issue Input
+```text
 ```text
 ```
 Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining
@@ -163,9 +177,12 @@ Analysis:
 
 
 
+
 ### Message 3.3: Greeting Input
+
 ```text
 ```
+
 Input: "hi"
 Time: <0.001s
 Source: greeting
@@ -178,6 +195,7 @@ Analysis:
 ✅ Warm greeting
 ✅ Invitational
 ✅ Minimal but appropriate
+
 ```
 
 
@@ -186,6 +204,7 @@ Analysis:
 ## Test Message Set 4: Punctuation Rule Verification
 
 ### Message 4.1: Grounded Pool (Sentence Split)
+```text
 ```text
 ```
 Tone Pool: Grounded
@@ -200,9 +219,12 @@ Status: ✅ CORRECT
 
 
 
+
 ### Message 4.2: Reflective Pool (Colon Emphasis)
+
 ```text
 ```
+
 Tone Pool: Reflective
 Glyph: Recursive Ache
 
@@ -212,11 +234,13 @@ After: "The ache you're naming: that deserves recognition."
 Rule Applied: `: ` (colon + space)
 Status: ✅ CORRECT
 Emotional Effect: More contemplative, layered
+
 ```
 
 
 
 ### Message 4.3: Empathetic Pool (Comma Join)
+```text
 ```text
 ```
 Tone Pool: Empathetic
@@ -231,23 +255,28 @@ Emotional Effect: Warmer, more connective
 ```
 
 
+
 ##
 
 ## Test Message Set 5: Glyph-to-Pool Mapping
 
 ### Message 5.1: Containment → Grounded
+
 ```text
 ```
+
 Glyph Name: "Spiral Containment"
 Keyword Match: "containment"
 Mapped Pool: Grounded
 Punctuation Style: Sentence split (`. `)
 Status: ✅ CORRECT
+
 ```
 
 
 
 ### Message 5.2: Ache → Reflective
+```text
 ```text
 ```
 Glyph Name: "Recursive Ache"
@@ -259,19 +288,24 @@ Status: ✅ CORRECT
 
 
 
+
 ### Message 5.3: Recognition → Empathetic
+
 ```text
 ```
+
 Glyph Name: "Still Recognition"
 Keyword Match: "recognition"
 Mapped Pool: Empathetic
 Punctuation Style: Comma join (`, `)
 Status: ✅ CORRECT
+
 ```
 
 
 
 ### Message 5.4: Multiple Keywords (Priority)
+```text
 ```text
 ```
 Glyph Name: "Grief of Recognition"
@@ -283,23 +317,28 @@ Status: ✅ CORRECT (first match wins)
 ```
 
 
+
 ##
 
 ## Test Message Set 6: Performance Verification
 
 ### Message 6.1: Initial Load (Cold Start)
+
 ```text
 ```
+
 Input: "I'm feeling overwhelmed"
 First Call: 0.043s (includes lexicon load)
 Subsequent Calls: 0.009-0.012s (cached)
 
 Status: ✅ ACCEPTABLE (cold start is expected)
+
 ```
 
 
 
 ### Message 6.2: Repeated Calls
+```text
 ```text
 ```
 Call 1: 0.043s (cold start)
@@ -314,15 +353,19 @@ Status: ✅ EXCELLENT (consistent sub-15ms)
 
 
 
+
 ### Message 6.3: Cleaner Overhead
+
 ```text
 ```
+
 Response Generation: ~5ms
 Punctuation Cleaning: ~1ms
 Diversification: ~1ms
 Total Overhead: ~2ms
 
 Status: ✅ NEGLIGIBLE (undetectable to user)
+
 ```
 
 
@@ -331,6 +374,7 @@ Status: ✅ NEGLIGIBLE (undetectable to user)
 ## Test Message Set 7: Error Handling
 
 ### Message 7.1: Missing Style Matrix File
+```text
 ```text
 ```
 Scenario: style_matrix.json deleted
@@ -343,20 +387,25 @@ Status: ✅ PASS (graceful degradation)
 
 
 
+
 ### Message 7.2: Invalid Glyph Name (None)
+
 ```text
 ```
+
 Input: Glyph name is None
 Behavior: System uses default Grounded pool
 Response Generated: Yes
 Quality: Normal
 
 Status: ✅ PASS (defensive handling)
+
 ```
 
 
 
 ### Message 7.3: Exception During Cleaning
+```text
 ```text
 ```
 Scenario: Hypothetical cleaner exception
@@ -366,13 +415,16 @@ Status: ✅ PASS (error caught, logged, handled)
 ```
 
 
+
 ##
 
 ## Test Message Set 8: Emotional Tone Matching
 
 ### Message 8.1: Containment Tone
+
 ```text
 ```
+
 Input: "I need to hold steady through this difficult time"
 Detected Tone Pool: Grounded
 Response Characteristics:
@@ -382,11 +434,13 @@ Response Characteristics:
   - Grounded in present reality
 
 Status: ✅ CORRECT TONE MATCH
+
 ```
 
 
 
 ### Message 8.2: Ache Tone
+```text
 ```text
 ```
 Input: "I'm carrying something that feels heavy"
@@ -402,9 +456,12 @@ Status: ✅ CORRECT TONE MATCH
 
 
 
+
 ### Message 8.3: Recognition Tone
+
 ```text
 ```
+
 Input: "I feel so alone and unseen"
 Detected Tone Pool: Empathetic
 Response Characteristics:
@@ -414,6 +471,7 @@ Response Characteristics:
   - Builds connection
 
 Status: ✅ CORRECT TONE MATCH
+
 ```
 
 

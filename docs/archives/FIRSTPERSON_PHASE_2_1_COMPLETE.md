@@ -104,6 +104,7 @@ Lightweight keyword-based affect detection for emotional attunement.
 ```
 
 
+
 ##
 
 ## Pipeline Architecture (Updated)
@@ -145,6 +146,7 @@ Store in session history + Supabase
 ```
 
 
+
 ##
 
 ## Test Results
@@ -165,6 +167,7 @@ Phase 2.1 (Affect Parser):       61 tests ✅
 ────────────────────────────────
 TOTAL:                          198 tests ✅
 ```
+
 
 
 
@@ -272,6 +275,7 @@ if HAS_AFFECT_PARSER:
 else:
     # Continue without affect analysis
 ```
+
 
 
 

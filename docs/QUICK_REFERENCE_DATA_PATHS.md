@@ -107,6 +107,7 @@ for fname, paths in files_to_check.items():
             break
     if not found:
 ```text
+```text
 ```
 
 
@@ -155,6 +156,7 @@ When the app starts, these files are loaded in this order:
 
 ```bash
 
+
 # Create missing directory structure
 mkdir -p emotional_os/glyphs
 mkdir -p emotional_os/core
@@ -171,6 +173,7 @@ cp src/emotional_os_parser/runtime_fallback_lexicon.json emotional_os/parser/
 cp src/emotional_os_lexicon/word_centric_emotional_lexicon_expanded.json emotional_os/lexicon/
 cp src/emotional_os_safety/trauma_lexicon.json emotional_os/safety/
 cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
+
 ```
 
 

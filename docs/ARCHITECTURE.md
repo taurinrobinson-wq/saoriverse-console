@@ -10,8 +10,10 @@ SaoriVerse Console is a modular emotional AI system built with clean separation 
 ##
 
 ## Directory Structure
+
 ```text
 ```
+
 saoriverse-console/
 ├── app.py                    # Single Streamlit entry point
 ├── requirements.txt          # Python dependencies
@@ -79,6 +81,7 @@ saoriverse-console/
 └── archive/             # Old code and documentation
     ├── old_structure/   # Original directories
     └── old_modules/     # Original scripts
+
 ```
 
 
@@ -87,6 +90,7 @@ saoriverse-console/
 ## Core Module Interactions
 
 ### Text-to-Response Pipeline
+```text
 ```text
 ```
 user_input (text)
@@ -109,9 +113,12 @@ response (text) → Streamlit UI
 
 
 
+
 ### Voice Pipeline
+
 ```text
 ```
+
 audio_input (mp3/wav)
     ↓
 audio_pipeline.py           STT (speech-to-text)
@@ -125,11 +132,13 @@ prosody_planner.py          Glyph → prosody mapping
 streaming_tts.py            Text-to-speech
     ↓
 audio_output (mp3/wav)
+
 ```
 
 
 
 ### Learning Pipeline
+```text
 ```text
 ```
 user_input + response + feedback
@@ -140,6 +149,7 @@ local_learner.py            Store learned patterns
     ↓
 relational_memory.py        Persist patterns
 ```
+
 
 
 ##
@@ -183,6 +193,7 @@ from src import (
     DynamicResponseComposer,
     VoiceInterface,
 ```text
+```text
 ```
 
 
@@ -190,9 +201,12 @@ from src import (
 ### In internal modules:
 
 ```python
+
 from src.signal_parser import parse_input
+
 ```text
 ```
+
 
 
 
@@ -227,6 +241,7 @@ from src.signal_parser import parse_input
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -234,10 +249,12 @@ from src.signal_parser import parse_input
 ### Environment Setup:
 
 ```bash
+
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 streamlit run app.py
+
 ```
 
 

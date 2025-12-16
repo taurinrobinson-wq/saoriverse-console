@@ -65,13 +65,16 @@ Activates when no existing glyph matches:
 6. Logs to database with full metadata
 
 **Example:**
+
 ```text
 ```
+
 Input: "I feel caught between who I pretend to be and who I really am"
 Output: Candidate glyph "Fractured Identity"
         Signal: β (boundary)
         Gates: [Gate 4, Gate 5] (high + medium intensity)
         Confidence: 0.75
+
 ```
 
 
@@ -87,6 +90,7 @@ Crafts responses that simultaneously:
 
 **Response Template Example (Containment tone):**
 ```text
+```text
 ```
 "You're doing something quiet but powerful: holding space for complexity.
 That tension—it's evidence of your integrity, even when it aches.
@@ -95,6 +99,7 @@ That tension—it's evidence of your integrity, even when it aches.
 
 When you feel known, what opens?"
 ```
+
 
 
 
@@ -112,8 +117,10 @@ User never knows they're teaching the system. Training is invisible.
 Solves the "shared learning + personal experience" problem:
 
 **Architecture:**
+
 ```text
 ```
+
 SHARED DATABASE (one for all users)
           ↓
     get_glyphs_for_user(user_id="A", signal="β", gates=[4,5])
@@ -139,6 +146,7 @@ SAME DATABASE:
 KEY: Different ordering per user, but SAME database
      Personal adoption helps other users
      System learns globally, feels personal
+
 ```
 
 
@@ -174,14 +182,17 @@ KEY: Different ordering per user, but SAME database
 ### Step 1: Add Imports to signal_parser.py
 
 ```python
+
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.learning_response_generator import LearningResponseGenerator
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 
 _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
+
 ```text
 ```
+
 
 
 
@@ -200,6 +211,7 @@ else:
 
     response = _learning_response_gen.generate_learning_response(...)
 ```text
+```text
 ```
 
 
@@ -207,6 +219,7 @@ else:
 ### Step 3: Add Helper
 
 ```python
+
 def _determine_emotional_tone(signals):
     tone_map = {
         "grief": "grief",
@@ -218,8 +231,10 @@ def _determine_emotional_tone(signals):
         "recognition": "recognition",
         "unknown": "unknown"
     }
+
 ```text
 ```
+
 
 
 
@@ -259,6 +274,7 @@ emotional_territory
 ├─ primary_glyphs
 ├─ coverage_quality (CRITICAL, POOR, FAIR, STRONG)
 ```text
+```text
 ```
 
 
@@ -284,6 +300,7 @@ emotional_territory
 
 ```bash
 
+
 # Copy new files
 cp emotional_os/glyphs/glyph_learner.py [target]
 cp emotional_os/glyphs/learning_response_generator.py [target]
@@ -298,6 +315,7 @@ python test_glyph_learning_pipeline.py
 git add .
 git commit -m "Phase 2: Real-time glyph learning system"
 git push
+
 ```
 
 

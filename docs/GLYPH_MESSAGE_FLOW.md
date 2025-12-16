@@ -131,6 +131,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
   "voltage": "high",
   "tone": "grief"
 ```sql
+```sql
 ```
 
 
@@ -138,14 +139,17 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 - Glyph row (from `fetch_glyphs` / DB):
 
 ```json
+
 {
   "glyph_name": "Still Recognition",
   "description": "A practice of naming the ache and letting it be held.",
   "gate": "Gate 5",
   "display_name": "Still Recognition",
   "response_template": "I hear the ache you’re describing..."
+
 ```text
 ```
+
 
 
 
@@ -162,6 +166,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
   "debug_glyph_rows": [ ... ]
 }
 ```
+
 
 
 ##

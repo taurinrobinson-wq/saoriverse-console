@@ -43,6 +43,7 @@ python -m spacy download en_core_web_md
 
 # Verify
 ```text
+```text
 ```
 
 
@@ -53,6 +54,7 @@ python -m spacy download en_core_web_md
 ### 1. spaCy (Industrial NLP)
 
 ```python
+
 import spacy
 nlp = spacy.load("en_core_web_md")
 
@@ -72,8 +74,10 @@ for chunk in doc.noun_chunks:
 # Get word vectors (semantic meaning)
 word1 = nlp("anxiety")
 word2 = nlp("worry")
+
 ```text
 ```
+
 
 
 
@@ -95,6 +99,7 @@ nrc.analyze_text("I have a mental block on math")
 #   "frustration": 0.8
 
 ```text
+```text
 ```
 
 
@@ -105,6 +110,7 @@ nrc.analyze_text("I have a mental block on math")
 ### 3. Poetry Database (Public Domain)
 
 ```python
+
 from parser.poetry_database import PoetryDatabase
 
 db = PoetryDatabase()
@@ -114,6 +120,7 @@ poems = db.POETRY_COLLECTION["grief"]  # Get poems for grief emotion
 
 ```text
 ```
+
 
 
 
@@ -135,6 +142,7 @@ scores = sia.polarity_scores("I'm FURIOUS about the math requirement!!!")
 #   'compound': -0.88  # Overall intensity (-1 to 1)
 
 ```text
+```text
 ```
 
 
@@ -147,12 +155,15 @@ scores = sia.polarity_scores("I'm FURIOUS about the math requirement!!!")
 ### OLD: Keyword-Based
 
 ```python
+
 if 'anxiety' in keywords and 'michelle' in keywords:
     return TEMPLATE_ANXIETY_MICHELLE
 
 if 'block' in keywords:
+
 ```text
 ```
+
 
 
 
@@ -172,6 +183,7 @@ features = {
 
 # Compose response by layering features
 ```text
+```text
 ```
 
 
@@ -184,9 +196,12 @@ features = {
 ### User Says
 
 ```
+
 "Michelle explains things in a way that only she can follow,
+
 ```text
 ```
+
 
 
 
@@ -196,6 +211,7 @@ features = {
 ✗ Detected: "Michelle" (name) + "follows" (verb)
 ✗ Matched: TEMPLATE_CLARITY → "I can feel the clarity you're seeking..."
 ```text
+```text
 ```
 
 
@@ -203,6 +219,7 @@ features = {
 ### NEW System (Feature-Based Composition)
 
 ```
+
 ✓ Extracted:
   - Person: "Michelle"
   - Entities: "explains", "isolation", "communication"
@@ -218,8 +235,10 @@ features = {
   it creates this strange isolation—you're supposed to understand,
   but the system itself is opaque. That's not a failing on your part.
   That's a communication breakdown. What would help you feel actually
+
 ```text
 ```
+
 
 
 ##
@@ -298,6 +317,7 @@ for i, msg in enumerate(messages, 1):
     print(f"Feedback: {res.get('feedback', {})}")
 PY
 ```
+
 
 
 

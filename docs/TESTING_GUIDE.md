@@ -9,6 +9,7 @@
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -16,14 +17,17 @@
 ### Run Only Unit Tests
 
 ```bash
+
 ```text
 ```
+
 
 
 
 ### Run Only Integration Tests
 
 ```bash
+```text
 ```text
 ```
 
@@ -32,8 +36,10 @@
 ### Run Specific Test File
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -42,6 +48,7 @@
 ```bash
 pytest tests/ --cov=src --cov-report=html
 
+```text
 ```text
 ```
 
@@ -97,6 +104,7 @@ Shared pytest configuration:
 ### Example Fixtures
 
 ```python
+
 @pytest.fixture
 def sample_signal():
     return {
@@ -107,8 +115,10 @@ def sample_signal():
 
 @pytest.fixture
 def sample_user_input():
+
 ```text
 ```
+
 
 
 
@@ -117,6 +127,7 @@ def sample_user_input():
 ```python
 def test_parser(sample_user_input):
     result = parse_input(sample_user_input)
+```text
 ```text
 ```
 
@@ -128,6 +139,7 @@ def test_parser(sample_user_input):
 ### Unit Test Template
 
 ```python
+
 """Tests for src/my_module.py"""
 
 import pytest
@@ -150,8 +162,10 @@ class TestMyFunction:
     def test_error_handling(self):
         """Test error handling."""
         with pytest.raises(ValueError):
+
 ```text
 ```
+
 
 
 
@@ -177,6 +191,7 @@ def test_full_pipeline():
     response = process_user_input(user_input)
     assert response is not None
 ```text
+```text
 ```
 
 
@@ -187,6 +202,7 @@ def test_full_pipeline():
 ### Mocking External Dependencies
 
 ```python
+
 from unittest.mock import Mock, patch
 
 def test_with_mock():
@@ -194,8 +210,10 @@ def test_with_mock():
         mock_func.return_value = "mocked"
         result = my_function()
         assert result == "mocked"
+
 ```text
 ```
+
 
 
 
@@ -211,6 +229,7 @@ def test_file_operations(temp_data_dir):
     """Test with temporary directory."""
     file_path = temp_data_dir / "test.json"
 ```text
+```text
 ```
 
 
@@ -218,6 +237,7 @@ def test_file_operations(temp_data_dir):
 ### Parametrized Tests
 
 ```python
+
 @pytest.mark.parametrize("input,expected", [
     ("happy", "positive"),
     ("sad", "negative"),
@@ -225,8 +245,10 @@ def test_file_operations(temp_data_dir):
 ])
 def test_emotion_detection(input, expected):
     result = detect_emotion(input)
+
 ```text
 ```
+
 
 
 ##
@@ -238,6 +260,7 @@ def test_emotion_detection(input, expected):
 ```bash
 pytest tests/unit/              # All unit tests
 ```text
+```text
 ```
 
 
@@ -245,9 +268,12 @@ pytest tests/unit/              # All unit tests
 ### By Module
 
 ```bash
+
 pytest tests/ -k signal_parser  # Tests mentioning "signal_parser"
+
 ```text
 ```
+
 
 
 
@@ -258,6 +284,7 @@ pytest tests/ -k signal_parser  # Tests mentioning "signal_parser"
 # Define in test: @pytest.mark.slow
 pytest tests/ -m slow           # Only marked tests
 ```text
+```text
 ```
 
 
@@ -265,8 +292,10 @@ pytest tests/ -m slow           # Only marked tests
 ### Specific Test
 
 ```bash
+
 ```text
 ```
+
 
 
 ##
@@ -292,6 +321,7 @@ pytest tests/unit/ --tb=short
 
 # If all pass:
 ```text
+```text
 ```
 
 
@@ -302,10 +332,13 @@ pytest tests/unit/ --tb=short
 ### Verbose Output
 
 ```bash
+
 pytest tests/ -v                # Show all test names
 pytest tests/ -vv               # Even more detail
+
 ```text
 ```
+
 
 
 
@@ -316,6 +349,7 @@ def test_something():
     result = my_function()
     print(f"Result: {result}")  # Will show with -s flag
 ```text
+```text
 ```
 
 
@@ -323,9 +357,12 @@ def test_something():
 Run with:
 
 ```bash
+
 pytest tests/ -s                # Show print() output
+
 ```text
 ```
+
 
 
 
@@ -333,6 +370,7 @@ pytest tests/ -s                # Show print() output
 
 ```bash
 pytest tests/ -l                # Show locals on failure
+```text
 ```text
 ```
 
@@ -344,8 +382,10 @@ pytest tests/ -l                # Show locals on failure
 ### Generate Coverage
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -354,6 +394,7 @@ pytest tests/ -l                # Show locals on failure
 ```bash
 pytest tests/ --cov=src --cov-report=html
 ```text
+```text
 ```
 
 
@@ -361,7 +402,9 @@ pytest tests/ --cov=src --cov-report=html
 ### Coverage by Module
 
 ```bash
+
 pytest tests/ --cov=src.response_generator
+
 ```
 
 

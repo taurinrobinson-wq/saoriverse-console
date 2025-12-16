@@ -54,6 +54,7 @@ New glyphs are automatically:
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -69,6 +70,7 @@ This shows you exactly how the system works!
 ### Step 3: Integrate with Your Conversation Flow
 
 ```python
+
 from evolving_glyph_integrator import EvolvingGlyphIntegrator
 
 # Initialize the evolving system
@@ -88,8 +90,10 @@ result = integrator.process_conversation_with_evolution(
 
 # Access both normal response AND evolution info:
 saori_reply = result['saori_response'].reply
+
 ```text
 ```
+
 
 
 
@@ -125,6 +129,7 @@ print(f"Conversations processed: {stats['conversations_processed']}")
 print(f"Patterns detected: {stats['detected_patterns_count']}")
 print(f"Next evolution check in: {stats['next_evolution_check']} conversations")
 ```
+
 
 
 

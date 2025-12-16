@@ -12,8 +12,10 @@ The glyph system should work **invisibly**—informing quality without appearing
 ## Architecture: Visible vs. Invisible Glyphs
 
 ### ❌ OLD ARCHITECTURE (Visible Glyph System)
+
 ```text
 ```
+
 User: "I have math anxiety"
      ↓
 Glyph Selected: Still Containment
@@ -22,11 +24,13 @@ Response: "There's something in what you're describing—boundaries that hold wi
 a sanctuary of quiet care. You're not alone—many brilliant people..."
 
 ❌ Problem: User feels categorized, system feels mechanical
+
 ```
 
 
 
 ### ✅ NEW ARCHITECTURE (Invisible Glyph System)
+```text
 ```text
 ```
 User: "I have math anxiety"
@@ -46,6 +50,7 @@ especially when it's presented in a way that doesn't match how their mind natura
 ✓ Glyph system works invisibly in background
 ✓ Response is compositionally fresh but coherent
 ```
+
 
 
 
@@ -106,6 +111,7 @@ else:
 
 # OUTPUT feels personal, not categorical
 ```text
+```text
 ```
 
 
@@ -116,6 +122,7 @@ else:
 
 ```python
 
+
 # Direct response to message features (math_frustration, inherited_pattern, etc.)
 if message_content.get("math_frustration"):
     parts.append("You're not alone—many brilliant people have genuine friction...")
@@ -124,8 +131,10 @@ if message_content.get("math_frustration"):
 if intensity >= 8:
     parts.append("I'm here to work through this with you.")
 else:
+
 ```text
 ```
+
 
 
 
@@ -158,6 +167,7 @@ especially when it's presented in a way that doesn't match how their mind natura
 Mental blocks are usually where the concept structure doesn't match your natural thinking pattern.
 That's not fixed—it's just a mismatch to navigate.
 ```text
+```text
 ```
 
 
@@ -173,9 +183,12 @@ That's not fixed—it's just a mismatch to navigate.
 **Response:**
 
 ```
+
 I appreciate you saying that. I want to make sure I'm actually hearing you,
+
 ```text
 ```
+
 
 
 
@@ -222,6 +235,7 @@ Day 3: "That's not what I meant about Michelle"
   → Response shows they're actually listening ✓
 
 ```text
+```text
 ```
 
 
@@ -229,11 +243,13 @@ Day 3: "That's not what I meant about Michelle"
 ### System's Perspective:
 
 ```
+
 Day 1: Glyph=Still Containment, Gates=[Gate 2] → tone: gentle, closing: permission
 Day 2: Glyph=None, fallback → generic validation
 Day 3: Glyph=Still Containment, feedback=misalignment → tone: corrective, closing: commitment
 
 Overall: Glyph system provided coherence without being visible
+
 ```
 
 

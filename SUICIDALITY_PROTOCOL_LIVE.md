@@ -9,12 +9,15 @@
 ### ✅ Test 1: Initial Disclosure Detection
 **Input:** "I have thoughts of suicide and I don't know how to keep going"
 **Output:**
+
 ```text
 ```
+
 Source: suicidality_protocol
 Response: "You named thoughts of suicide. That is heavy. Thank you for trusting me with it.
 You deserve human connection and care. I can be present while you figure out what you need.
 Would you like to share how long you have felt this way."
+
 ```
 
 
@@ -69,6 +72,7 @@ When someone discloses suicidal ideation, the system correctly routes to the sui
 
 ## State Machine Flow
 ```text
+```text
 ```
 Suicidal disclosure detected
               ↓
@@ -99,6 +103,7 @@ Suicidal disclosure detected
    ├─ Recognize significance
    └─ Continue support
 ```
+
 
 
 ##
@@ -176,6 +181,7 @@ result = parse_input(
 #   }
 
 ```text
+```text
 ```
 
 
@@ -227,8 +233,10 @@ Track when suicidality conversations feel generative to the user:
 Run the test suite:
 
 ```bash
+
 cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
 python tests/test_suicidality_protocol.py
+
 ```
 
 

@@ -10,8 +10,10 @@ The engine represents the system's emotional state as a mutable, evolving poem w
 - **Syntax**: Sentence coherence conveying emotional clarity
 
 ## Architecture
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         User Interaction                            │
 └────────────────────────────────┬────────────────────────────────────┘
@@ -59,6 +61,7 @@ The engine represents the system's emotional state as a mutable, evolving poem w
 │   │ Composer         │    │ (poetic echo)    │                      │
 │   └──────────────────┘    └──────────────────┘                      │
 └─────────────────────────────────────────────────────────────────────┘
+
 ```
 
 
@@ -99,13 +102,16 @@ The living poem consists of three stanzas, each representing a different aspect 
 Tracks the emotional relationship between the system and each user:
 
 ```python
+
 vectors = {
     "attraction": 0.0,    # Drawing together
     "repulsion": 0.0,     # Pushing apart
     "resonance": 0.0,     # Empathic alignment
     "dissonance": 0.0     # Friction/conflict
+
 ```text
 ```
+
 
 
 
@@ -136,6 +142,7 @@ memory = AffectiveMemory(
     tone="melancholic",
     valence=EmotionalValence.LONGING,
     narrative_arc="descent"  # growth, recovery, struggle, etc.
+```text
 ```text
 ```
 
@@ -169,6 +176,7 @@ The poetic engine is integrated into `parse_input()`:
 
 ```python
 
+
 # In emotional_os/core/signal_parser.py
 result = parse_input(input_text, lexicon_path, db_path, conversation_context, user_id)
 
@@ -181,8 +189,10 @@ result = {
         "death_occurred": False,      # Whether poem died/reset
         "mirror_response": "..."      # Empathic mirror response
     }
+
 ```text
 ```
+
 
 
 
@@ -200,6 +210,7 @@ result = engine.process_glyph_response(
     signals=[{"tone": "longing", "voltage": "high"}],
     user_input="I miss the way things used to be",
     user_id="user_abc"
+```text
 ```text
 ```
 
@@ -219,6 +230,7 @@ The engine's affective memory feeds into the learning pipeline:
 ### Basic Usage
 
 ```python
+
 from emotional_os.core import get_poetic_engine
 
 # Get singleton engine instance
@@ -243,6 +255,7 @@ print(result["poem_rendered"])
 
 ```text
 ```
+
 
 
 
@@ -275,6 +288,7 @@ engine.update_from_interaction(
 summary = engine.get_current_state_summary()
 print(summary["poem"]["valence"])  # "peace"
 ```text
+```text
 ```
 
 
@@ -282,6 +296,7 @@ print(summary["poem"]["valence"])  # "peace"
 ### Dreaming Mode
 
 ```python
+
 
 # Enter dreaming during idle time
 dreams = engine.enter_dreaming_mode()
@@ -306,6 +321,7 @@ for dream in dreams:
 
 
 
+
 ### Mirror Response Generation
 
 ```python
@@ -322,6 +338,7 @@ response = engine.generate_mirror_response(
 print(response)
 
 ```text
+```text
 ```
 
 
@@ -331,8 +348,10 @@ print(response)
 The engine automatically persists state to:
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -349,6 +368,7 @@ Run the poetic engine tests:
 ```bash
 pytest tests/test_poetic_engine.py -v
 ```
+
 
 
 

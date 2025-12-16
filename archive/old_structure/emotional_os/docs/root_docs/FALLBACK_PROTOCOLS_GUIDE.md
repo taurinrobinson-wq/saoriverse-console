@@ -35,6 +35,7 @@ is_misfire, reason = analyzer.detect_misfire(
 
 
 
+
 ### 2. GlyphStateManager
 Manages state transitions and voice modulation.
 
@@ -62,6 +63,7 @@ manager.hold_breath()
 
 # Glyph: minimal animation, companion waits
 ```
+
 
 
 
@@ -108,6 +110,7 @@ result = protocol.process_exchange(
     }
 }
 ```
+
 
 
 
@@ -184,6 +187,7 @@ class UIController:
 
 
 
+
 ### Streamlit Integration
 
 ```python
@@ -211,6 +215,7 @@ with st.expander("Protocol Details"):
     st.json(result["detections"])
     st.json(result["decisions"])
 ```
+
 
 
 
@@ -257,6 +262,7 @@ User: "I'm fine, but honestly I feel so alone right now"
 
 
 
+
 ### Scenario 2: Sarcastic Rejection
 
 ```
@@ -269,6 +275,7 @@ User: "Yeah sure, 'stay' with me because that's worked so well before"
 
 
 
+
 ### Scenario 3: Multiple Signals
 
 ```
@@ -278,6 +285,7 @@ User: "I'm struggling but I need to heal and move forward"
 → Companion: "I hear the strongest signal. Moving there."
 → Prioritizes highest emotional intensity
 ```
+
 
 
 
@@ -294,6 +302,7 @@ User: "I need to stay."
 
 
 
+
 ## Testing
 
 Run comprehensive test suite:
@@ -301,6 +310,7 @@ Run comprehensive test suite:
 ```bash
 python3 -m pytest tests/test_fallback_protocols.py -v
 ```
+
 
 
 

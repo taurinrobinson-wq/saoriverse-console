@@ -160,8 +160,10 @@ The player must choose between six fundamentally different endings:
 ##
 
 ## File Structure (markdowngameinstructions folder)
+
 ```text
 ```
+
 markdowngameinstructions/
 ├── TONE_STAT_SYSTEM.md
 ├── NPC_SPHERE_SYSTEM.md
@@ -176,6 +178,7 @@ markdowngameinstructions/
 ├── npcs.md (existing, update with roster)
 ├── story_arcs.md (existing, update with endings)
 └── ... (other existing files)
+
 ```
 
 

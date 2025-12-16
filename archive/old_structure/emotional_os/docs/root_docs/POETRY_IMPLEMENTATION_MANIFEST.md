@@ -243,6 +243,7 @@ python poetry_data_pipeline.py --process
 
 
 
+
 ### Step 2: Verify
 
 ```bash
@@ -250,6 +251,7 @@ python poetry_data_pipeline.py --status
 
 # Expected: All 8 collections marked as validated
 ```
+
 
 
 
@@ -271,6 +273,7 @@ for name, text in data.items():
 
 
 
+
 ## File Locations
 
 **Implementation**:
@@ -282,6 +285,7 @@ for name, text in data.items():
   ├── poetry_data_hub.py
   └── poetry_glyph_generator.py
 ```
+
 
 
 
@@ -297,6 +301,7 @@ for name, text in data.items():
 
 
 
+
 **Documentation**:
 
 ```
@@ -307,6 +312,7 @@ for name, text in data.items():
   ├── POETRY_DATA_INTEGRATION_GUIDE.md
   └── POETRY_INTEGRATION_EXAMPLES.md
 ```
+
 
 
 
@@ -349,6 +355,7 @@ data = adapter.for_your_mode()
 for name, text in data.items():
     your_processing_function(text)
 ```
+
 
 
 

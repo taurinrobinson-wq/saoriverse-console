@@ -51,6 +51,7 @@ measurement = LatencyMeasurement(
 
 
 
+
 #### `PerformanceProfiler`
 
 Main profiling engine for measuring operation latency.
@@ -71,6 +72,7 @@ summary = profiler.get_summary()
 # Export results
 profiler.save_results("profile_results.json")
 ```
+
 
 
 
@@ -96,6 +98,7 @@ model = ModelPerformanceBenchmark.get_tts_recommendation(target_latency_ms=150)
 
 # Returns: "glow-tts" or "glow-tts-tiny"
 ```
+
 
 
 
@@ -131,6 +134,7 @@ recommendations = optimizer.analyze_measurements()
 
 
 
+
 **Optimization Suggestions:**
 
 - Reduce model size (e.g., "tiny" instead of "medium")
@@ -161,6 +165,7 @@ results = profile_tts_pipeline(
 
 
 
+
 ### Integration Points
 
 Add to `voice_interface.py`:
@@ -180,6 +185,7 @@ if summary["avg_latency_ms"] > 500:
     # Recommend faster model
     faster_model = ModelPerformanceBenchmark.get_whisper_recommendation(200)
 ```
+
 
 
 
@@ -216,6 +222,7 @@ class BreathStyle(Enum):
 
 
 
+
 #### `EmphasisType`
 
 Describes the type of emphasis to apply at word level.
@@ -227,6 +234,7 @@ class EmphasisType(Enum):
     EMOTIONAL = "emotional"        # Emotional emphasis (feeling)
     CONTRASTIVE = "contrastive"    # Contrast with previous (comparison)
 ```
+
 
 
 
@@ -246,6 +254,7 @@ class EmphasisPoint:
 
 
 
+
 #### `MicroPause`
 
 Strategic silence for effect.
@@ -257,6 +266,7 @@ class MicroPause:
     duration_ms: int         # Pause length (100-300ms typical)
     purpose: str             # "sentence_boundary", "clause", "dramatic"
 ```
+
 
 
 
@@ -280,6 +290,7 @@ class AdvancedProsodyPlan:
 
 
 
+
 ### Core Classes
 
 #### `AdvancedProsodyPlanner`
@@ -297,6 +308,7 @@ plan = planner.plan_advanced_prosody(
     certainty=0.8          # Confidence (0-1)
 )
 ```
+
 
 
 
@@ -379,6 +391,7 @@ consistency = tracker.get_emotional_continuity_score()
 
 
 
+
 **Metrics:**
 
 - Consistency Score: How stable is emotional state across session?
@@ -417,6 +430,7 @@ sad_plan = planner.plan_advanced_prosody(
 
 
 
+
 ### Integration Points
 
 Add to `streaming_tts.py`:
@@ -436,6 +450,7 @@ if response_tone in ["excited", "sad", "empathetic"]:
     )
     # Use prosody.pitch_contour, energy_contour, emphasis_points, etc.
 ```
+
 
 
 
@@ -485,6 +500,7 @@ class InteractionEvent:
 
 
 
+
 ##### `SessionSummary`
 
 High-level statistics for a conversation session.
@@ -502,6 +518,7 @@ class SessionSummary:
     dominant_tones: List[str]        # Most common tones
     conversation_quality: float      # Overall quality score (0-1)
 ```
+
 
 
 
@@ -540,6 +557,7 @@ path = logger.save_session()
 
 # Saves JSON with full history
 ```
+
 
 
 
@@ -588,6 +606,7 @@ agg_metrics = analyzer.get_aggregate_metrics()
 
 
 
+
 ### Part 2: Voice UI Enhancements (350 lines)
 
 #### Purpose
@@ -606,6 +625,7 @@ class EdgeCaseHandler:
     min_confidence_threshold: float = 0.3 # Accept 30% confidence minimum
     max_silence_ratio: float = 0.7        # Allow 70% silence max
 ```
+
 
 
 
@@ -634,6 +654,7 @@ has_silence, msg = manager.handle_silence_in_audio(audio_bytes)
 
 # Returns: (True, "Audio is mostly silence") or (False, "")
 ```
+
 
 
 
@@ -670,6 +691,7 @@ fig = visualizer.render_emotional_timeline(
 )
 plt.show()
 ```
+
 
 
 
@@ -721,6 +743,7 @@ enhancements.render_performance_metrics(
 
 
 
+
 **Performance Indicator Colors:**
 
 - 🟢 Green: <200ms latency, >0.8 confidence
@@ -761,6 +784,7 @@ session_logger.log_assistant_message(response, emotional_state=emotional_state)
 ui_enhancements.render_performance_metrics(latency_ms=250, confidence=confidence)
 ui_enhancements.render_glyph_visualization(session_metrics=...)
 ```
+
 
 
 
@@ -826,6 +850,7 @@ TestVoiceUIEnhancements: 3 tests
 
 ============================== 24 passed in 0.52s ==============================
 ```
+
 
 
 ##

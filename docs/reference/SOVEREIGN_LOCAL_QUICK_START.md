@@ -14,6 +14,7 @@ pip install spacy
 
 # Download English model for NER, tokenization, etc.
 ```text
+```text
 ```
 
 
@@ -21,6 +22,7 @@ pip install spacy
 ### 1.2 Download NRC Emotion Lexicon
 
 ```bash
+
 
 # Create folder
 mkdir -p data/lexicons
@@ -36,6 +38,7 @@ mkdir -p data/lexicons
 
 
 
+
 ### 1.3 Verify NLTK is loaded
 
 ```python
@@ -47,6 +50,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 # Should work - NLTK already integrated
 sia = SentimentIntensityAnalyzer()
 ```text
+```text
 ```
 
 
@@ -57,6 +61,7 @@ sia = SentimentIntensityAnalyzer()
 Create a new file: `parser/nrc_lexicon_loader.py`
 
 ```python
+
 """
 Load NRC Emotion Lexicon for local emotional processing.
 14,182 words mapped to 10 emotion categories + sentiment.
@@ -141,8 +146,10 @@ if __name__ == "__main__":
     # Test
     emotions = nrc.analyze_text("I feel happy and grateful for this moment")
     print("Emotions found:", emotions)
+
 ```text
 ```
+
 
 
 ##
@@ -206,6 +213,7 @@ def enhanced_parse_signals(text: str) -> dict:
         'signal_strength': len(voltage_signals),
         'primary_emotions': list(nrc_emotions.keys())
 ```text
+```text
 ```
 
 
@@ -216,6 +224,7 @@ def enhanced_parse_signals(text: str) -> dict:
 Create: `data_preparation/extract_poetry.py`
 
 ```python
+
 """
 Extract poetry from Project Gutenberg for emotional enrichment.
 
@@ -367,8 +376,10 @@ def populate_poetry():
             print(f"✓ Added poetry to {glyph_name}")
 
 if __name__ == "__main__":
+
 ```text
 ```
+
 
 
 ##
@@ -420,6 +431,7 @@ if USE_LOCAL_ONLY:
 else:
     # Hybrid/Cloud mode (existing code)
 ```text
+```text
 ```
 
 
@@ -430,6 +442,7 @@ else:
 Create: `test_local_mode.py`
 
 ```python
+
 """
 Test that local mode works end-to-end with no external API calls.
 """
@@ -498,14 +511,17 @@ def test_local_processing():
 
 if __name__ == "__main__":
     success = test_local_processing()
+
 ```text
 ```
+
 
 
 
 Run it:
 
 ```bash
+```text
 ```text
 ```
 
@@ -515,6 +531,7 @@ Run it:
 ## PART 7: DOWNLOAD PROJECT GUTENBERG POETRY (Optional, 30 min - 2 hours)
 
 ```bash
+
 
 # Option A: Download pre-curated poetry collection
 curl -o data/poetry/gutenberg_poetry.zip \
@@ -533,8 +550,10 @@ os.makedirs('data/poetry', exist_ok=True)
 url = 'https://www.gutenberg.org/cache/epub/1638/pg1638.txt'
 urllib.request.urlretrieve(url, 'data/poetry/dickinson.txt')
 print('✓ Downloaded Emily Dickinson poems')
+
 ```text
 ```
+
 
 
 ##
@@ -561,6 +580,7 @@ if mode == "Local Mode (Recommended)":
         response_data = parse_input(user_message)
         # If we get here without exception, we're truly local!
 ```text
+```text
 ```
 
 
@@ -584,6 +604,7 @@ if mode == "Local Mode (Recommended)":
 
 ```bash
 
+
 # Start the app in local mode
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
@@ -593,6 +614,7 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 ```text
 ```
+
 
 
 ##
@@ -646,6 +668,7 @@ except:
 print('✅ Local mode verified - no external API calls possible')
 "
 ```
+
 
 
 ##

@@ -8,6 +8,7 @@ With no argument, actionlint finds all workflow files in the current repository 
 
 ```sh
 ```text
+```text
 ```
 
 
@@ -15,14 +16,17 @@ With no argument, actionlint finds all workflow files in the current repository 
 When paths to YAML workflow files are given as arguments, actionlint checks them.
 
 ```sh
+
 ```sql
 ```
+
 
 
 
 When `-` argument is given, actionlint reads inputs from stdin and checks it as workflow source.
 
 ```sh
+```text
 ```text
 ```
 
@@ -36,8 +40,10 @@ To ignore some errors, `-ignore` option offers to filter errors by messages usin
 The regular expression syntax is the same as [RE2][re2].
 
 ```sh
+
 ```text
 ```
+
 
 
 
@@ -46,6 +52,7 @@ The regular expression syntax is the same as [RE2][re2].
 processes.
 
 ```sh
+```text
 ```text
 ```
 
@@ -62,14 +69,17 @@ Before explaining the formatting details, let's see some examples.
 #### Example: Serialized into JSON
 
 ```sh
+
 ```text
 ```
+
 
 
 
 Output:
 
 ```
+```text
 ```text
 ```
 
@@ -78,8 +88,10 @@ Output:
 #### Example: Markdown
 
 ````sh
+
 ````text
 ````
+
 
 
 
@@ -91,12 +103,14 @@ Output:
 
 property "platform" is not defined in object type {os: string}
 ```text
+```text
 ```
 
 
           key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }}
                    ^~~~~~~~~~~~~~~
 
+````text
 ````text
 ````
 
@@ -105,7 +119,9 @@ property "platform" is not defined in object type {os: string}
 #### Example: Serialized in [JSON Lines][jsonl]
 
 ```sh
+
 actionlint -format '{{range $err := .}}{{json $err}}{{end}}'
+
 ```
 
 
@@ -113,9 +129,11 @@ actionlint -format '{{range $err := .}}{{json $err}}{{end}}'
 Output:
 
 ```
+
 {"message":"unexpected key \"branch\" for ...
 {"message":"character '\\' is invalid for branch ...
 {"message":"label \"linux-latest\" is unknown. ...
+
 ```
 
 
@@ -123,7 +141,9 @@ Output:
 #### Example: [Error annotation][ga-annotate-error] on GitHub Actions
 
 ````sh
+
 actionlint -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace $err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' -ignore 'SC2016:'
+
 ````
 
 
@@ -155,7 +175,9 @@ objects.
 The sequence can be traversed with `range` action, which is like `for ... = range ... {}` in Go.
 
 ```
+
 {{range $err := .}} this part iterates error objects with the iteration variable $err {{end}}
+
 ```
 
 
@@ -194,7 +216,9 @@ The kind object returned from `allKinds` action has the following fields.
 For example, the following simple iteration body
 
 ```
+
 line is {{$err.Line}}, col is {{$err.Column}}, message is {{$err.Message | printf "%q"}}
+
 ```
 
 
@@ -202,7 +226,9 @@ line is {{$err.Line}}, col is {{$err.Column}}, message is {{$err.Message | print
 will produce output like below.
 
 ```
+
 line is 21, col is 20, message is "property \"platform\" is not defined in object type {os: string}"
+
 ```
 
 
@@ -235,6 +261,7 @@ Here is an example of simple workflow to run actionlint on GitHub Actions. Pleas
 shell for Windows runners is `pwsh`.
 
 ```yaml
+
 name: Lint GitHub Actions workflows
 on: [push, pull_request]
 
@@ -250,6 +277,7 @@ jobs:
       - name: Check workflow files
         run: ${{ steps.get_actionlint.outputs.executable }} -color
         shell: bash
+
 ```
 
 
@@ -257,11 +285,13 @@ jobs:
 Or simply download the executable and run it in one step:
 
 ```yaml
+
 - name: Check workflow files
   run: |
     bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
     ./actionlint -color
   shell: bash
+
 ```
 
 
@@ -278,6 +308,7 @@ If you want to [annotate errors][ga-annotate-error] from actionlint on GitHub, c
 If you prefer Docker image to running a downloaded executable, using [actionlint Docker image](#docker) is another option.
 
 ```yaml
+
 name: Lint GitHub Actions workflows
 on: [push, pull_request]
 
@@ -290,6 +321,7 @@ jobs:
         uses: docker://rhysd/actionlint:latest
         with:
           args: -color
+
 ```
 
 
@@ -319,7 +351,9 @@ Available tags are:
 Just run the image with `docker run`:
 
 ```sh
+
 docker run --rm rhysd/actionlint:latest -version
+
 ```
 
 
@@ -328,7 +362,9 @@ To check all workflows in your repository, mount your repository's root director
 directory. When you are at a root directory of your repository:
 
 ```sh
+
 docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
+
 ```
 
 
@@ -336,7 +372,9 @@ docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
 To check a file with actionlint in a Docker container, pass the file content via stdin and use `-` argument:
 
 ```sh
+
 cat /path/to/workflow.yml | docker run --rm -i rhysd/actionlint:latest -color -
+
 ```
 
 
@@ -344,7 +382,9 @@ cat /path/to/workflow.yml | docker run --rm -i rhysd/actionlint:latest -color -
 Or mount the workflows directory and pass the paths as arguments:
 
 ```sh
+
 docker run --rm -v /path/to/workflows:/workflows rhysd/actionlint:latest -color /workflows/ci.yml
+
 ```
 
 
@@ -366,6 +406,7 @@ You can check errors from actionlint easily with inline review comments at pull 
 The usage is easy. Run `reviewdog/action-actionlint` action in your workflow as follows.
 
 ```yaml
+
 name: reviewdog
 on: [pull_request]
 jobs:
@@ -374,6 +415,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: reviewdog/action-actionlint@v1
+
 ```
 
 
@@ -389,12 +431,14 @@ Copy [actionlint-matcher.json][actionlint-matcher] to `.github/actionlint-matche
 Then enable the matcher using `add-matcher` command before running `actionlint` in the step of your workflow.
 
 ```yaml
+
 - name: Check workflow files
   run: |
     echo "::add-matcher::.github/actionlint-matcher.json"
     bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
     ./actionlint -color
   shell: bash
+
 ```
 
 
@@ -426,6 +470,7 @@ repos:
       - id: actionlint
 
 ```
+
 
 As alternatives to `actionlint` hook, `actionlint-docker` or `actionlint-system` hooks are available.
 
@@ -460,6 +505,7 @@ trunk check enable actionlint
 
 ```
 
+
 or if you'd like a specific version:
 
 ```bash
@@ -468,6 +514,7 @@ or if you'd like a specific version:
 trunk check enable actionlint@1.6.23
 
 ```
+
 
 or modify `.trunk/trunk.yaml` in your repo to contain:
 
@@ -480,6 +527,7 @@ lint:
 
 ```
 
+
 Then just run:
 
 ```bash
@@ -488,6 +536,7 @@ Then just run:
 trunk check
 
 ```
+
 
 and it will check your modified files via actionlint, if applicable, and show you the results. Trunk also will detect preexisting
 issues and highlight only the newly added actionlint issues. For more information, check the [trunk docs][trunk-docs].

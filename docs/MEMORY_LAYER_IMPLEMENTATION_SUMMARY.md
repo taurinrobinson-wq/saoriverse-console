@@ -33,18 +33,22 @@ New methods added to DynamicResponseComposer:
 ## How It Works: Three-Turn Example
 
 ### Turn 1: User reveals emotional state
+
 ```text
 ```
+
 Input:  "I'm feeling so stressed today"
 Parse:  stress, present-tense, today-bound, emphasis "so"
 Store:  primary_affect=[stress], confidence=0.7
 Glyph:  Still Insight
 Ask:    "What triggered this?"
+
 ```
 
 
 
 ### Turn 2: User reveals root cause & mechanism
+```text
 ```text
 ```
 Input:  "I have so much on my mind at work that I can't make one step forward"
@@ -58,9 +62,12 @@ Ask:    "How many distinct things compete?"  (now specific!)
 
 
 
+
 ### Turn 3: User provides specificity
+
 ```text
 ```
+
 Input:  "5 projects due this week, client presentation Thursday, deck not started"
 Parse:  5 competing items, Thursday deadline, unstarted blocker, client-critical
 Store:  + specific context, + client-domain, + temporal urgency
@@ -68,6 +75,7 @@ Learn:  Exact problem: "5 items -> client deck most urgent -> not started"
 Update: confidence = 0.95
 Glyphs: Add The Threshold
 Ask:    "Which of these 5 could wait?"  (now action-oriented!)
+
 ```
 
 
@@ -92,6 +100,7 @@ Ask:    "Which of these 5 could wait?"  (now action-oriented!)
 
 **Without Memory** (isolated responses):
 ```text
+```text
 ```
 "What's causing that stress?"
 "That sounds overwhelming. What's the main thing?"
@@ -101,14 +110,18 @@ Problem: Redundant, doesn't build on prior messages
 
 
 
+
 **With Memory** (contextual responses):
+
 ```text
 ```
+
 Turn 1: "I hear you're feeling stress today."
 Turn 2: "I hear you - work has flooded your mind with competing
          demands that even one step feels impossible."
 Turn 3: "Which of these 5 could we push back?"
 Benefit: Each response builds, gets smarter and more actionable
+
 ```
 
 
@@ -117,6 +130,7 @@ Benefit: Each response builds, gets smarter and more actionable
 ## Causal Chain Recognition
 
 The memory layer builds understanding of the causal chain:
+```text
 ```text
 ```
 Root Trigger
@@ -135,6 +149,7 @@ Result
     ↓
 Stuck unable to start the most critical task
 ```
+
 
 
 
@@ -186,6 +201,7 @@ integrated_state: IntegratedEmotionalState
 causal_understanding: CausalUnderstanding
 system_knowledge: SystemKnowledge
 ```text
+```text
 ```
 
 
@@ -193,13 +209,16 @@ system_knowledge: SystemKnowledge
 ### IntegratedEmotionalState
 
 ```python
+
 primary_affects: List[str]  # ["stress", "cognitive_overload", "pressure"]
 secondary_affects: List[str]  # ["paralysis", "anxiety", "overwhelm"]
 intensity: str  # "high"
 primary_domains: List[str]  # ["work", "client work"]
 temporal_scope: str  # "today (acute) + ongoing (chronic)"
+
 ```text
 ```
+
 
 
 
@@ -209,6 +228,7 @@ temporal_scope: str  # "today (acute) + ongoing (chronic)"
 root_triggers: List[str]  # ["work", "client work"]
 mechanisms: List[str]  # ["cognitive flooding"]
 manifestations: List[str]  # ["paralysis", "anxiety"]
+```text
 ```text
 ```
 
@@ -284,6 +304,7 @@ manifestations: List[str]  # ["paralysis", "anxiety"]
 
 ```python
 
+
 # Old
 response = composer.compose_response(input_text, glyph)
 
@@ -293,8 +314,10 @@ response = composer.compose_response_with_memory(
     input_text,
     conversation_memory=memory,
     glyph=glyph
+
 ```text
 ```
+
 
 
 ##
@@ -355,6 +378,7 @@ TURN 3: "5 projects due this week, client presentation Thursday, deck not starte
 → Confidence: 0.95 | Glyphs: [Still Insight, Quiet Revelation, Fragmentation, The Threshold]
 → Next Need: "Which could wait?" (action-oriented)
 ```
+
 
 
 ##

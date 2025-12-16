@@ -84,6 +84,7 @@ def handle_response_pipeline(user_input, session):
     })
 
 ```text
+```text
 ```
 
 
@@ -104,6 +105,7 @@ def handle_response_pipeline(user_input, session):
 
 ```python
 
+
 # In handle_response_pipeline, after response generated:
 
 from src.emotional_os_learning.lexicon_learner import get_lexicon_learner
@@ -114,8 +116,10 @@ learner.learn_from_exchange(
     detected_signals=signals,
     ai_response=response,
     user_id=session.user_id
+
 ```text
 ```
+
 
 
 
@@ -157,6 +161,7 @@ if is_sensitive_input(user_input):
     )
 
 ```text
+```text
 ```
 
 
@@ -169,6 +174,7 @@ if is_sensitive_input(user_input):
 **Step 1: Update response_handler.py** (15 min)
 
 ```python
+
 
 # File: src/emotional_os/deploy/modules/ui_components/response_handler.py
 
@@ -254,6 +260,7 @@ def handle_response_pipeline(user_input, context, session):
 
 
 
+
 **Step 2: Update ui_refactored.py** (10 min)
 
 ```python
@@ -271,6 +278,7 @@ class SessionState:
         self.conversation = []
         self.session_id = str(uuid.uuid4())
 ```text
+```text
 ```
 
 
@@ -278,6 +286,7 @@ class SessionState:
 **Step 3: Create test file** (15 min)
 
 ```python
+
 
 # File: test_tier1_foundation.py
 
@@ -343,8 +352,10 @@ def test_response_time():
     elapsed = (time.time() - start) * 1000  # ms
 
     assert elapsed < 100, f"Response took {elapsed}ms (should be < 100ms)"
+
 ```text
 ```
+
 
 
 
@@ -366,6 +377,7 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 
 # - Responses feel more compassionate
 
+```text
 ```text
 ```
 
@@ -401,6 +413,7 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 
 ```python
 
+
 # In response_handler.py:
 
 from src.emotional_os.core.presence_integration import PresenceIntegration
@@ -421,6 +434,7 @@ def handle_response_pipeline(user_input, context, session):
 
 ```text
 ```
+
 
 
 
@@ -461,6 +475,7 @@ def handle_response_pipeline(user_input, context, session):
     )
 
 ```text
+```text
 ```
 
 
@@ -480,6 +495,7 @@ def handle_response_pipeline(user_input, context, session):
 **Integration Points:**
 
 ```python
+
 
 # In response_handler.py:
 
@@ -514,6 +530,7 @@ def handle_response_pipeline(user_input, context, session):
 
 ```text
 ```
+
 
 
 
@@ -577,6 +594,7 @@ class PresenceIntegration:
             return response.replace(". ", ". ... ")
         else:
 ```text
+```text
 ```
 
 
@@ -584,6 +602,7 @@ class PresenceIntegration:
 **Step 2: Create EmotionalReciprocity** (30 min)
 
 ```python
+
 
 # File: src/emotional_os/core/emotional_reciprocity.py
 
@@ -634,8 +653,10 @@ class EmotionalReciprocity:
             "channeling": "understanding",
             "safety": "empowering",
         }
+
 ```text
 ```
+
 
 
 
@@ -681,6 +702,7 @@ class EmbodiedSimulation:
     def reset(self):
         """Reset cycle (new conversation)"""
 ```sql
+```sql
 ```
 
 
@@ -688,6 +710,7 @@ class EmbodiedSimulation:
 **Step 4: Update response_handler.py with Tier 2** (20 min)
 
 ```python
+
 
 # Add to imports
 from src.emotional_os.core.presence_integration import PresenceIntegration
@@ -729,6 +752,7 @@ def handle_response_pipeline(user_input, context, session):
 
 ```text
 ```
+
 
 
 
@@ -783,6 +807,7 @@ def test_tier2_response_time():
     import time
 
     # [Similar to Tier 1 test, verify time]
+```text
 ```text
 ```
 
@@ -854,6 +879,7 @@ After all Tiers 1-3 stable and tested
 
 ```python
 
+
 # ✅ DO: Use local systems
 - NRC (emotion lexicon)
 - Spacy (NLP, entity recognition)
@@ -863,8 +889,10 @@ After all Tiers 1-3 stable and tested
 # ❌ DON'T: External APIs
 - No OpenAI calls
 - No remote LLMs
+
 ```text
 ```
+
 
 
 
@@ -882,6 +910,7 @@ After all Tiers 1-3 stable and tested
 - Large language models
 - Complex neural networks
 ```text
+```text
 ```
 
 
@@ -889,6 +918,7 @@ After all Tiers 1-3 stable and tested
 ### Decision 3: Pre-computation & Caching
 
 ```python
+
 
 # ✅ DO: Cache what you can
 - Emotion lexicon loaded once per session
@@ -898,8 +928,10 @@ After all Tiers 1-3 stable and tested
 # ❌ DON'T: Recompute each turn
 - Reparse lexicon files
 - Recompile patterns
+
 ```text
 ```
+
 
 
 
@@ -916,6 +948,7 @@ After all Tiers 1-3 stable and tested
 - Sentiment analysis on every word
 - Complex ML models
 ```text
+```text
 ```
 
 
@@ -928,6 +961,7 @@ After all Tiers 1-3 stable and tested
 **Per-Response:**
 
 ```python
+
 metrics = {
     "total_time_ms": 0,
     "breakdown": {
@@ -939,8 +973,10 @@ metrics = {
         "sanctuary_wrap": 0,
         "memory_update": 0,
     }
+
 ```text
 ```
+
 
 
 
@@ -954,6 +990,7 @@ session_metrics = {
     "turns_completed": 0,
     "error_count": 0,
 ```text
+```text
 ```
 
 
@@ -961,6 +998,7 @@ session_metrics = {
 ### Instrumentation Code
 
 ```python
+
 
 # In response_handler.py
 
@@ -1009,6 +1047,7 @@ def handle_response_pipeline(user_input, context, session):
 ```
 
 
+
 ##
 
 ## TESTING STRATEGY
@@ -1019,6 +1058,7 @@ def handle_response_pipeline(user_input, context, session):
 pytest test_tier1_foundation.py -v
 
 ```text
+```text
 ```
 
 
@@ -1026,10 +1066,12 @@ pytest test_tier1_foundation.py -v
 ### Tier 2 Tests (Week 2)
 
 ```bash
+
 pytest test_tier2_aliveness.py -v
 
 ```text
 ```
+
 
 
 
@@ -1039,6 +1081,7 @@ pytest test_tier2_aliveness.py -v
 pytest test_tier3_depth.py -v
 
 ```text
+```text
 ```
 
 
@@ -1046,10 +1089,12 @@ pytest test_tier3_depth.py -v
 ### Integration Test (All Tiers)
 
 ```bash
+
 pytest test_integration_full_pipeline.py -v
 
 ```text
 ```
+
 
 
 
@@ -1060,6 +1105,7 @@ pytest test_performance.py -v
 
 # Verify: All responses < 100ms
 ```
+
 
 
 ##

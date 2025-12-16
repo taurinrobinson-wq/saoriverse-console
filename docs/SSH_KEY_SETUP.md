@@ -6,6 +6,7 @@ First, try connecting with password authentication:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -19,6 +20,7 @@ If you see a password prompt, enter your DigitalOcean root password.
 
 ```bash
 
+
 # Generate SSH key (press Enter to accept defaults)
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean_key -N ""
 
@@ -28,6 +30,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean_key -N ""
 
 ```text
 ```
+
 
 
 
@@ -43,6 +46,7 @@ cat ~/.ssh/digitalocean_key.pub
 # 1. ssh root@161.35.227.49
 
 ```text
+```text
 ```
 
 
@@ -50,8 +54,10 @@ cat ~/.ssh/digitalocean_key.pub
 Or do it in one command (if you can SSH):
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -71,6 +77,7 @@ Host 161.35.227.49
 EOF
 
 # Then just use:
+```text
 ```text
 ```
 
@@ -124,10 +131,13 @@ If you created the key on your Ubuntu machine at home:
 Once you can connect (any method), run:
 
 ```bash
+
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
+
 ```text
 ```
+
 
 
 ##
@@ -142,6 +152,7 @@ cd saoriverse-console
 ~/droplet_key              # In home directory
 ~/keys/do_key              # In keys folder
 ```
+
 
 
 

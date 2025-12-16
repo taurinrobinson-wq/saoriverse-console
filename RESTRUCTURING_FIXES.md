@@ -14,6 +14,7 @@ Added `src/` to `sys.path` so Python can find the modules:
 
 ```python
 ```sql
+```sql
 ```
 
 
@@ -25,13 +26,16 @@ This ensures that when `from emotional_os.deploy.modules.ui_refactored import ma
 **pyproject.toml**: Changed from flat package layout to src-layout
 
 ```toml
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
 ```text
 ```
+
 
 
 
@@ -42,6 +46,7 @@ where = ["src"]
 package_dir = {= src}
 
 [options.packages.find]
+```text
 ```text
 ```
 
@@ -69,13 +74,16 @@ Example for `src/emotional_os/glyphs/__init__.py`:
 
 ```python
 
+
 # Register all submodules from the sibling in sys.modules
 for key, module in list(sys.modules.items()):
     if key.startswith('emotional_os_glyphs'):
         # Map emotional_os_glyphs.X to emotional_os.glyphs.X
         new_key = key.replace('emotional_os_glyphs', 'emotional_os.glyphs')
+
 ```sql
 ```
+
 
 
 
@@ -101,6 +109,7 @@ All critical imports now work:
 cd d:\saoriverse-console
 streamlit run app.py
 ```
+
 
 
 

@@ -78,6 +78,7 @@ This is a cleaned, human-readable summary and implementation checklist distilled
     "ripple": {"Nima": -0.1}
   }
 ```text
+```text
 ```
 
 
@@ -85,6 +86,7 @@ This is a cleaned, human-readable summary and implementation checklist distilled
 ### Example resonance application (Python stub)
 
 ```python
+
 def apply_tone_to_remnants(npc_profile: dict, tone_effects: dict, correlation: dict) -> dict:
     for tone_stat, delta in tone_effects.items():
         if tone_stat in correlation:
@@ -93,6 +95,7 @@ def apply_tone_to_remnants(npc_profile: dict, tone_effects: dict, correlation: d
             for trait in correlation[tone_stat]['lower']:
                 npc_profile[trait] = npc_profile.get(trait, 0) - delta
     return npc_profile
+
 ```
 
 

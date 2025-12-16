@@ -17,8 +17,10 @@ Previously, the system learned lexicon data but **never used it to generate bett
 ## How It Works
 
 ### Architecture
+
 ```text
 ```
+
 User Message
     ↓
 LexiconAwareResponseGenerator.generate_response()
@@ -37,6 +39,7 @@ LexiconAwareResponseGenerator.generate_response()
         (shows learned patterns, asks contextual questions)
     ↓
 Nuanced Response that feels personal, not canned
+
 ```
 
 
@@ -48,6 +51,7 @@ Nuanced Response that feels personal, not canned
 - Falls back to well-crafted generic responses
 - Starts learning for next time
 ```text
+```text
 ```
 User: "I'm struggling with something"
 Response: "That lands somewhere real for you. What does it feel like when you say that?"
@@ -55,15 +59,19 @@ Response: "That lands somewhere real for you. What does it feel like when you sa
 
 
 
+
 #### Level 2: Low (2-3 Learned Keywords)
 - System recognizes some keywords
 - Shows it understands their patterns
 - Builds connection
+
 ```text
 ```
+
 User: "Michelle and I are struggling with this communication thing"
 Response: "I recognize that when you mention 'Michelle', it touches frustration and communication_gap.
 There's something connecting them in your experience. What would change if this dynamic shifted?"
+
 ```
 
 
@@ -73,6 +81,7 @@ There's something connecting them in your experience. What would change if this 
 - Responses are highly contextual and appropriate
 - Feels like genuine understanding, not scripted
 ```text
+```text
 ```
 User: "I'm struggling with Michelle but also feeling like I inherited this block"
 Response: "I recognize that when you mention 'Michelle', it touches frustration and communication_gap.
@@ -80,6 +89,7 @@ The fact that 'michelle' and 'inherited' appear together for you—that's a real
 There's something connecting them in your experience. When you feel this frustration about 'Michelle'—
 what part of it asks for something from you?"
 ```
+
 
 
 
@@ -109,6 +119,7 @@ print(personalization_data)
 #     "confidence": 0.6
 
 ```text
+```text
 ```
 
 
@@ -118,6 +129,7 @@ print(personalization_data)
 For **local mode** (no API calls), use the lexicon-aware generator directly:
 
 ```python
+
 from lexicon_aware_response_generator import LexiconAwareResponseGenerator
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 
@@ -135,8 +147,10 @@ result = generator.generate_response(
 # Use the personalized response
 print(result["response"])  # Nuanced, personal response
 print(result["personalization_level"])  # How personalized is it?
+
 ```text
 ```
+
 
 
 
@@ -168,6 +182,7 @@ if user_message:
             response=ai_response,
             quality_score=0.9
 ```text
+```text
 ```
 
 
@@ -179,6 +194,7 @@ if user_message:
 Stored in `learning/user_overrides/{user_id}_lexicon.json`:
 
 ```json
+
 {
   "learned_associations": {
     "michelle": {
@@ -197,8 +213,10 @@ Stored in `learning/user_overrides/{user_id}_lexicon.json`:
       "context": "generational patterns"
     }
   }
+
 ```text
 ```
+
 
 
 
@@ -214,6 +232,7 @@ Stored in `learning/response_quality_log.jsonl`:
   "response": "I recognize that when you mention 'michelle'...",
   "feedback": "This really resonates",
   "quality_score": 0.95
+```text
 ```text
 ```
 
@@ -244,10 +263,13 @@ Stored in `learning/response_quality_log.jsonl`:
 ### Session 1
 
 ```
+
 User: "struggling with my mother-in-law"
 System: Generic response (no learned data)
+
 ```text
 ```
+
 
 
 
@@ -258,6 +280,7 @@ User: "michelle is being difficult"
 System: RECOGNIZES "michelle" from lexicon
 System: Generates personalized response acknowledging pattern
 ```text
+```text
 ```
 
 
@@ -265,12 +288,15 @@ System: Generates personalized response acknowledging pattern
 ### Session 3+
 
 ```
+
 User: "the michelle thing plus inherited patterns"
 System: RECOGNIZES both "michelle" AND "inherited"
 System: Sees they co-occur, generates response showing understanding
 System learns: These two are connected for this user
+
 ```text
 ```
+
 
 
 
@@ -291,6 +317,7 @@ generator = LexiconAwareResponseGenerator()
 
 # if len(learned_contexts) >= 1:  # Lower threshold = more responsive
 ```text
+```text
 ```
 
 
@@ -300,11 +327,14 @@ generator = LexiconAwareResponseGenerator()
 Override `_build_acknowledgment`, `_build_exploration`, `_build_question`:
 
 ```python
+
 class CustomLexiconGenerator(LexiconAwareResponseGenerator):
     def _build_acknowledgment(self, learned_contexts, emotional_core):
         # Your custom acknowledgment logic
+
 ```text
 ```
+
 
 
 
@@ -323,6 +353,7 @@ generator.log_response_quality(
 # Get personalization stats
 stats = generator.get_personalization_stats(user_id)
 print(f"Average response quality: {stats['average_quality_score']}")
+```text
 ```text
 ```
 
@@ -347,6 +378,7 @@ This transforms local mode from a "lite" version to a **genuinely personalized e
 ## Testing
 
 ```python
+
 
 # Quick test
 from lexicon_aware_response_generator import LexiconAwareResponseGenerator
@@ -373,6 +405,7 @@ result = generator.generate_response(
 )
 print(f"Level: {result['personalization_level']}")  # "medium" or "high"
 print(f"Response: {result['response']}")  # Shows learned pattern
+
 ```
 
 

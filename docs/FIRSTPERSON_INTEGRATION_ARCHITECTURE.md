@@ -3,8 +3,10 @@
 ## Overview
 
 Your Velinor game is now **emotionally intelligent**. Every NPC interaction adapts in real-time to your emotional state through FirstPerson integration.
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    VELINOR GAME                             │
 │                  Streamlit Web UI                           │
@@ -85,6 +87,7 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
               │    Chat Display         │
               │ (Light Theme Streamlit) │
               └─────────────────────────┘
+
 ```
 
 
@@ -95,6 +98,7 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
 
 ```python
 
+
 # Lines 28-30
 from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
@@ -104,8 +108,10 @@ if 'firstperson_orchestrator' not in st.session_state:
         user_id='velinor_player',
         conversation_id='velinor_game'
     )
+
 ```text
 ```
+
 
 
 
@@ -125,6 +131,7 @@ orchestrator = VelinorTwineOrchestrator(
     first_person_module=firstperson_orchestrator,  # ← Connected here
     npc_system=None
 ```text
+```text
 ```
 
 
@@ -133,13 +140,16 @@ orchestrator = VelinorTwineOrchestrator(
 
 ```python
 
+
 # Lines 177-210
 def _summarize_player_intent(self, player_input, player_id):
     # Analyzes emotional tone, theme, valence, intensity
     # Returns: {original_input, emotional_tone, detected_theme, ...}
     analysis = self.first_person.handle_conversation_turn(player_input)
+
 ```text
 ```
+
 
 
 
@@ -155,6 +165,7 @@ def _generate_emotionally_aware_response(self, npc_name, player_input,
     # - Theme + memory context
     # - Intensity level
 ```text
+```text
 ```
 
 
@@ -162,6 +173,7 @@ def _generate_emotionally_aware_response(self, npc_name, player_input,
 ### 5️⃣ State Flow (`process_player_action()`)
 
 ```python
+
 
 # Lines 140-150
 player_analysis = self._summarize_player_intent(player_input, player_id)
@@ -173,8 +185,10 @@ if updated_state.get('npc_name'):
     updated_state['npc_dialogue'] = self._generate_npc_dialogue(
         npc_name=updated_state['npc_name'],
         context=updated_state,  # ← Contains player_analysis
+
 ```text
 ```
+
 
 
 
@@ -203,6 +217,7 @@ Analysis: { tone: 'heavy', theme: 'general', valence: -0.7, intensity: 0.6 }
 Memory:   { turns: 1, emotional_trajectory: [-0.7], themes: {'general': 1} }
 NPC:      "I hear the weight in that. What you're naming has weight.
 ```text
+```text
 ```
 
 
@@ -210,12 +225,15 @@ NPC:      "I hear the weight in that. What you're naming has weight.
 ### Turn 2
 
 ```
+
 Input:    "It's like I've lost something important"
 Analysis: { tone: 'heavy', theme: 'grief', valence: -0.8, intensity: 0.7 }
 Memory:   { turns: 2, emotional_trajectory: [-0.7, -0.8], themes: {'general': 1, 'grief': 1} }
 NPC:      "I hear the weight in that. Loss shapes us in ways words
+
 ```text
 ```
+
 
 
 
@@ -230,6 +248,7 @@ Memory:   { turns: 3, emotional_trajectory: [-0.7, -0.8, -0.1],
             recurring_themes: ['grief'] }
 NPC:      "There's something to sit with there. I'm noticing grief
            keeps coming back to you—that tells me something. And I'm
+```text
 ```text
 ```
 
@@ -248,10 +267,13 @@ NPC:      "There's something to sit with there. I'm noticing grief
 ## Commits to Main
 
 ```
+
 f90cccf - Feat: FirstPerson integration for emotionally-aware NPC responses
 a3de8fe - Docs: Add FirstPerson + Velinor quick reference guide
+
 ```text
 ```
+
 
 
 
@@ -289,6 +311,7 @@ python3 FIRSTPERSON_INTEGRATION_TEST.py
 
 # - Or use FastAPI backend from main branch
 ```
+
 
 
 

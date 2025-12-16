@@ -33,6 +33,7 @@ cd /workspaces/saoriverse-console
 python3 scripts/migrate_supabase.py
 
 ```text
+```text
 ```
 
 
@@ -42,8 +43,10 @@ python3 scripts/migrate_supabase.py
 After creating tables, verify they were created:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -53,6 +56,7 @@ You should see:
 ✅ conversations table EXISTS
 ✅ conversation_metadata table EXISTS
 ```text
+```text
 ```
 
 
@@ -60,8 +64,10 @@ You should see:
 Then start your app:
 
 ```bash
+
 ```text
 ```
+
 
 
 ##
@@ -75,6 +81,7 @@ Then start your app:
 url = "https://gyqzyuvuuyfjxnramkfq.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```text
+```text
 ```
 
 
@@ -87,6 +94,7 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ### In the Sidebar
 
 ```
+
 📚 Previous Conversations
 ├── 💬 "Feeling anxious about work"
 │   ├── ✏️ Rename
@@ -96,6 +104,7 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 
 ```text
 ```
+
 
 
 
@@ -124,6 +133,7 @@ streamlit run app.py
 # 4. Refresh browser (F5)
 
 ```text
+```text
 ```
 
 
@@ -145,6 +155,7 @@ streamlit run app.py
 ## File Structure
 
 ```
+
 saoriverse-console/
 ├── .streamlit/
 │   └── secrets.toml                    ✅ Configured with your Supabase credentials
@@ -158,8 +169,10 @@ saoriverse-console/
 ├── SUPABASE_SETUP.md                   📘 Step-by-step setup guide
 ├── CONVERSATION_STORAGE.md             📚 Complete documentation
 ├── QUICKSTART_CONVERSATION_STORAGE.md  🚀 Quick reference
+
 ```text
 ```
+
 
 
 ##
@@ -177,6 +190,7 @@ python3 scripts/migrate_supabase.py
 
 # Paste into Supabase SQL editor
 
+```text
 ```text
 ```
 
@@ -211,6 +225,7 @@ python3 scripts/migrate_supabase.py
 ### On First Message
 
 ```
+
 User: "I'm feeling anxious"
   ↓
 Parse first message → Extract title
@@ -225,8 +240,10 @@ Store: {
     title: "Feeling anxious",
     messages: [...],
     created_at: "2024-11-04T23:20:00Z"
+
 ```text
 ```
+
 
 
 
@@ -246,6 +263,7 @@ Displays in sidebar
 Session state restored from Supabase
   ↓
 ```text
+```text
 ```
 
 
@@ -253,6 +271,7 @@ Session state restored from Supabase
 ### On Rename
 
 ```
+
 User clicks ✏️ pencil icon
   ↓
 Inline input appears
@@ -267,8 +286,10 @@ Supabase updates row
   ↓
 Sidebar refreshes
   ↓
+
 ```text
 ```
+
 
 
 ##
@@ -332,6 +353,7 @@ python3 scripts/migrate_supabase.py --verify
 
 # View recent commits
 ```text
+```text
 ```
 
 
@@ -347,6 +369,7 @@ python3 scripts/migrate_supabase.py --verify
 
 ```bash
 
+
 # View app logs
 streamlit run app.py
 
@@ -355,8 +378,10 @@ python3 -c "from emotional_os.deploy.modules.conversation_manager import Convers
 
 # Git status
 git status
+
 ```text
 ```
+
 
 
 ##
@@ -385,6 +410,7 @@ Your persistent conversation storage is now live. **Start the app and begin savi
 ```bash
 streamlit run app.py
 ```
+
 
 
 

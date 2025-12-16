@@ -45,6 +45,7 @@ def compose_response(self, input_text: str, glyph_name: str = "", ...)
 
 # NEW
 ```text
+```text
 ```
 
 
@@ -58,6 +59,7 @@ def compose_response(self, input_text: str, glyph_name: str = "", ...)
 **Created `_build_glyph_aware_response()` with 5 layers:**
 
 ```python
+
 def _build_glyph_aware_response(self, glyph, entities, emotions, feedback_type, ...):
     # LAYER 1: Glyph Description Anchor
     opening = f"There's something in what you're describing—{glyph.description.lower()}"
@@ -78,8 +80,10 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, feedback_type, 
     intensity_level = len(gates) if isinstance(gates, list) else 1
     closing_move = "permission" if intensity_level <= 1 else \
                    "commitment" if intensity_level >= 9 else \
+
 ```text
 ```
+
 
 
 
@@ -103,6 +107,7 @@ def compose_message_aware_response(self, input_text, message_content, glyph=None
     # Generated message-specific content only
     if message_content.get("math_frustration"):
 ```text
+```text
 ```
 
 
@@ -110,6 +115,7 @@ def compose_message_aware_response(self, input_text, message_content, glyph=None
 **After:**
 
 ```python
+
 def compose_message_aware_response(self, input_text, message_content, glyph=None):
     # FIRST: Establish glyph anchor
     if glyph and glyph.get("description"):
@@ -118,8 +124,10 @@ def compose_message_aware_response(self, input_text, message_content, glyph=None
 
     # THEN: Layer message-specific content
     if message_content.get("math_frustration"):
+
 ```sql
 ```
+
 
 
 
@@ -142,6 +150,7 @@ composed = _response_composer.compose_response(
     glyph=glyph,  # Pass full dict
     ...
 ```text
+```text
 ```
 
 
@@ -156,13 +165,16 @@ Updated both:
 
 ```python
 
+
 # OLD - inconsistent tuple structure
 return None, "I can sense there's something..."
 
 # NEW - consistent tuple: (best_glyph, (response, feedback_data))
 return None, ("I can sense there's something...",
+
 ```text
 ```
+
 
 
 
@@ -178,6 +190,7 @@ return None, ("I can sense there's something...",
 gate_data = glyph.get("gates") or glyph.get("gate")
 gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
 ```text
+```text
 ```
 
 
@@ -190,8 +203,10 @@ gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
 **Input:**
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -208,6 +223,7 @@ with math, especially when it's presented in a way that doesn't match how their 
 naturally works. Mental blocks are usually where the concept structure doesn't match
 your natural thinking pattern. That's not fixed—it's just a mismatch to navigate.
 ```text
+```text
 ```
 
 
@@ -223,8 +239,10 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 **Input:**
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -240,6 +258,7 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 ```
 "That's not quite what I meant. Michelle is my mother-in-law and my boss, and
 ```text
+```text
 ```
 
 
@@ -251,9 +270,12 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 **Response Generated:**
 
 ```
+
 "...I appreciate you saying that. I want to make sure I'm actually hearing you,
+
 ```text
 ```
+
 
 
 
@@ -282,6 +304,7 @@ DynamicResponseComposer
        └─ Ignores glyph metadata
        └─ Generic compositional response
 ```text
+```text
 ```
 
 
@@ -289,6 +312,7 @@ DynamicResponseComposer
 ### After: Glyph-Aware Architecture
 
 ```
+
 Signal Parser
     ↓
 Fetch Glyphs (with description, gates, emotional_signal)
@@ -310,6 +334,7 @@ DynamicResponseComposer [GLYPH-AWARE]
         ├─ Glyph anchor (description)
         ├─ Message-specific content
         └─ Intensity-informed closing
+
 ```
 
 

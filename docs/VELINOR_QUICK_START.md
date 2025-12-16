@@ -8,6 +8,7 @@
 bash setup.sh
 source venv/bin/activate
 ```text
+```text
 ```
 
 
@@ -15,11 +16,14 @@ source venv/bin/activate
 ### Windows
 
 ```cmd
+
 python -m venv venv
 venv\Scripts\activate.bat
 pip install streamlit pillow
+
 ```text
 ```
+
 
 
 
@@ -112,6 +116,7 @@ saoriverse-console/
     ├── STATUS.md               # Current status
     ├── TWINE_INTEGRATION_GUIDE.md
 ```text
+```text
 ```
 
 
@@ -129,14 +134,17 @@ saoriverse-console/
 ### Option 2: Programmatically
 
 ```python
+
 from velinor.engine import StoryBuilder
 
 story = StoryBuilder("My Adventure")
 story.add_passage("start", "You awake in a strange place...", is_start=True)
 story.add_choice("start", "Look around", "examine")
 story.add_choice("start", "Move forward", "walk")
+
 ```text
 ```
+
 
 
 
@@ -149,6 +157,7 @@ story.add_choice("start", "Move forward", "walk")
 {multiplayer: true}      # Adapt for group
 [[Choice text->passage]] # Link to next passage
 ```text
+```text
 ```
 
 
@@ -160,9 +169,12 @@ story.add_choice("start", "Move forward", "walk")
 **Fix:** Run from project root:
 
 ```bash
+
 cd /path/to/saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -173,6 +185,7 @@ cd /path/to/saoriverse-console
 ls velinor/backgrounds/    # Should see 15+ images
 ls velinor/npcs/           # Should see 7+ images
 ```text
+```text
 ```
 
 
@@ -181,8 +194,10 @@ ls velinor/npcs/           # Should see 7+ images
 **Try different port:**
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -192,6 +207,7 @@ ls velinor/npcs/           # Should see 7+ images
 ```bash
 deactivate  # if in a venv
 rm -rf venv/
+```text
 ```text
 ```
 
@@ -203,10 +219,13 @@ rm -rf venv/
 ### Conda Environment (Alternative)
 
 ```bash
+
 conda create -n velinor python=3.11
 conda activate velinor
+
 ```text
 ```
+
 
 
 
@@ -218,14 +237,18 @@ WORKDIR /app
 COPY . .
 RUN pip install streamlit pillow
 ```text
+```text
 ```
 
 
 
 ```bash
+
 docker build -t velinor .
+
 ```text
 ```
+
 
 
 
@@ -242,6 +265,7 @@ docker build -t velinor .
 ```bash
 git push heroku main
 ```
+
 
 
 ##

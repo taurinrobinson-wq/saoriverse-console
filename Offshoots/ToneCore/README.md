@@ -9,6 +9,7 @@ Quick start (local devcontainer / machine):
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -16,8 +17,10 @@ Quick start (local devcontainer / machine):
 2. Install Python deps:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -28,6 +31,7 @@ Quick start (local devcontainer / machine):
 # Example: run on port 8502 to avoid conflicts with other apps
 streamlit run Offshoots/ToneCore/streamlit_app.py --server.port 8502
 ```
+
 
 
 

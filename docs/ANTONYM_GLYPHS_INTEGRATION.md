@@ -19,8 +19,10 @@ Antonym glyphs are symbolic representations of emotional opposites, matched with
 - **Description**: Emotional context and meaning
 
 ### Example Antonym Glyphs
+
 ```text
 ```
+
 Comfort (ζ × α) - "Gentle Holding"
 "The feeling of being emotionally cradled, soothed without sedation"
 
@@ -29,6 +31,7 @@ Joy (λ × α) - "Joyful Witness"
 
 Grief (Ω × β) - "Vital Ache"
 "Sacred sorrow, mourning that honors what was loved"
+
 ```
 
 
@@ -46,6 +49,7 @@ Grief (Ω × β) - "Vital Ache"
 
 ### Data Flow
 ```text
+```text
 ```
 antonym_glyphs.txt
     ↓
@@ -57,6 +61,7 @@ antonym_glyphs.py (provides API)
     ↓
 [Your Code] (uses via simple function calls)
 ```
+
 
 
 
@@ -80,6 +85,7 @@ results = search_antonyms("joy")
 
 # Find by voltage pair
 ```text
+```text
 ```
 
 
@@ -102,11 +108,14 @@ Find antonym glyph by base emotion name.
 **Example:**
 
 ```python
+
 comfort = find_antonym_by_emotion("comfort")
 if comfort:
     print(f"{comfort['Base Emotion']}: {comfort['Name']}")
+
 ```text
 ```
+
 
 
 
@@ -127,6 +136,7 @@ Find antonym by voltage pair notation.
 antonym = find_antonym_by_voltage_pair("γ × γ")
 if antonym:
 ```text
+```text
 ```
 
 
@@ -144,10 +154,13 @@ Search antonym glyphs by any text field (emotion, name, description, pairing).
 **Example:**
 
 ```python
+
 results = search_antonyms("joy")
 for antonym in results:
+
 ```text
 ```
+
 
 
 
@@ -162,6 +175,7 @@ Get the emotional opposite of a given emotion.
 ```python
 opposite = suggest_emotional_opposite("grief")
 if opposite:
+```text
 ```text
 ```
 
@@ -217,11 +231,13 @@ Format an antonym glyph for UI display.
 **Example:**
 
 ```python
+
 antonym = find_antonym_by_emotion("comfort")
 display_text = format_antonym_for_display(antonym)
 
 ```text
 ```
+
 
 
 
@@ -250,6 +266,7 @@ if antonym:
     with col2:
         st.markdown("### Emotional Opposite")
 ```text
+```text
 ```
 
 
@@ -257,6 +274,7 @@ if antonym:
 ### Example 2: Search for Related Emotions
 
 ```python
+
 from emotional_os.glyphs.antonym_glyphs import search_antonyms
 
 search_query = st.text_input("Search emotions:")
@@ -265,8 +283,10 @@ if search_query:
 
     st.write(f"Found {len(results)} emotion(s):")
     for antonym in results:
+
 ```text
 ```
+
 
 
 
@@ -286,6 +306,7 @@ opposite = suggest_emotional_opposite(user_emotion)
 if opposite:
     st.info(f"💡 Consider also: {opposite['Name']}")
 ```text
+```text
 ```
 
 
@@ -293,6 +314,7 @@ if opposite:
 ### Example 4: Build an Antonym Glyph Browser
 
 ```python
+
 from emotional_os.glyphs.antonym_glyphs import (
     list_antonym_emotions,
     find_antonym_by_emotion,
@@ -305,8 +327,10 @@ selected_emotion = st.selectbox("Choose an emotion:", emotions)
 if selected_emotion:
     antonym = find_antonym_by_emotion(selected_emotion)
     if antonym:
+
 ```text
 ```
+
 
 
 
@@ -335,6 +359,7 @@ if selected_emotion:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -344,6 +369,7 @@ if selected_emotion:
 All 22 tests passing (100% pass rate):
 
 ```
+
 ✓ Antonym glyphs load
 ✓ Expected count range
 ✓ Metadata available
@@ -365,8 +391,10 @@ All 22 tests passing (100% pass rate):
 ✓ All emotions accessible
 ✓ All pairings accessible
 ✓ Sample emotions are findable
+
 ```text
 ```
+
 
 
 
@@ -379,6 +407,7 @@ The antonym glyphs are indexed for fast lookup. To regenerate the index:
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -390,13 +419,16 @@ This creates `/workspaces/saoriverse-console/emotional_os/glyphs/antonym_glyphs_
 Antonym glyphs are stored in JSON with this structure:
 
 ```json
+
 {
   "Base Emotion": "Comfort",
   "Pairing": "ζ × α",
   "Name": "Gentle Holding",
   "Description": "The feeling of being emotionally cradled, soothed without sedation"
+
 ```text
 ```
+
 
 
 
@@ -439,6 +471,7 @@ If you get "Antonym glyphs index not found" error:
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -448,8 +481,10 @@ cd /workspaces/saoriverse-console
 Run the test suite to diagnose issues:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -482,6 +517,7 @@ results = search_antonyms("sorrow")
 # Get all emotions
 emotions = list_antonym_emotions()
 ```
+
 
 
 

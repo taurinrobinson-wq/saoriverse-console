@@ -35,8 +35,10 @@ Your system now has **three distinct layers** working together:
 ##
 
 ## 📊 Integration Architecture
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                       app.py (Entry)                         │
 └──────────────────────┬──────────────────────────────────────┘
@@ -77,12 +79,14 @@ Your system now has **three distinct layers** working together:
 │ - Frequency reflections      │   │ - Transcribed text     │
 │ - Emotional trajectory       │   │ - Synthesized audio    │
 └──────────────────────────────┘   └────────────────────────┘
+
 ```
 
 
 ##
 
 ## 🔄 Response Flow (With Voice)
+```text
 ```text
 ```
 1. USER SENDS MESSAGE
@@ -118,11 +122,14 @@ Your system now has **three distinct layers** working together:
 ```
 
 
+
 ##
 
 ## 🗂️ File Structure
+
 ```text
 ```
+
 src/emotional_os/deploy/
 ├── core/
 │   ├── firstperson.py          [NEW] Orchestrator + Memory
@@ -149,6 +156,7 @@ src/emotional_os/deploy/
 │       └── [existing utilities]
 │
 └── app.py                      [ENTRY POINT - unchanged]
+
 ```
 
 
@@ -159,8 +167,10 @@ src/emotional_os/deploy/
 ### Step 1: Push to GitHub
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -172,6 +182,7 @@ src/emotional_os/deploy/
 
 # No additional setup needed
 ```
+
 
 
 

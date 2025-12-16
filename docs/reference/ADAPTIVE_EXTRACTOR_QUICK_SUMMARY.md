@@ -2,8 +2,10 @@
 
 ## THE PROBLEM YOU IDENTIFIED ✓
 
+<!-- md013:ignore -->
 > "Why is it only mapping to 8 emotional dimensions which are the same ones that it derived from my poem?"
 
+<!-- md013:ignore -->
 **Answer**: It was hardcoded! The original system could only recognize the 8 dimensions discovered in your initial poem.
 
 ##
@@ -30,39 +32,6 @@ AFTER (Adaptive System)
 │   wonder, resilience, solitude)
 │
 └─ N Dynamically Learned Dimensions
-
-# 📊 Emotional Dimension Expansion: Before & After
-
-## THE PROBLEM YOU IDENTIFIED ✓
-
-> "Why is it only mapping to 8 emotional dimensions which are the same ones that it derived from my poem?"
-
-**Answer**: It was hardcoded! The original system could only recognize the 8 dimensions discovered in your initial poem.
-
-##
-
-## THE SOLUTION ✨
-
-### Timeline of Expansion
-
-```text
-BEFORE (Original System)
-└─ 8 Dimensions Only
-   (hardcoded from your poem)
-   - Love, Intimacy, Vulnerability,
-     Transformation, Admiration, Joy,
-     Sensuality, Nature
-
-AFTER (Adaptive System)
-├─ 8 Base Dimensions (your poem)
-├─ 10 Pre-discovered Dimensions
-│  (nostalgia, melancholy, transcendence,
-│   longing, despair, serenity, rebellion,
-│   wonder, resilience, solitude)
-│
-└─ N Dynamically Learned Dimensions
-   (discovered during poetry processing!)
-```
 
 ## WHAT CHANGED
 

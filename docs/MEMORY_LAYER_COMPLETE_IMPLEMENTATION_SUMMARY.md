@@ -56,8 +56,10 @@ Four complementary documentation files:
 ## The Problem It Solves
 
 ### Before Memory Layer
+
 ```text
 ```
+
 User Turn 1: "I'm stressed"
 System: "What's causing that stress?"
 
@@ -72,11 +74,13 @@ System: "Have you prioritized them?"
 Problem: Each response treats message in isolation
          Questions repeat
          System seems not to understand root cause
+
 ```
 
 
 
 ### After Memory Layer
+```text
 ```text
 ```
 User Turn 1: "I'm stressed"
@@ -98,13 +102,16 @@ Benefit: Progressive understanding, targeted questions, clear demonstration of c
 ```
 
 
+
 ##
 
 ## Information Flow: Three-Message Example
 
 ### Turn 1: Emotional State Revealed
+
 ```text
 ```
+
 User says: "I'm feeling so stressed today"
 
 System extracts:
@@ -122,11 +129,13 @@ Memory stores:
 └─ Glyphs: [Still Insight]
 
 Response: "I hear you're feeling stress today."
+
 ```
 
 
 
 ### Turn 2: Root Cause & Mechanism Revealed
+```text
 ```text
 ```
 User says: "I have so much on my mind at work that I can't take a step forward"
@@ -156,9 +165,12 @@ Response: "I hear you - work has flooded your mind with so many competing
 
 
 
+
 ### Turn 3: Specificity & Context Revealed
+
 ```text
 ```
+
 User says: "5 projects due this week - client presentation Thursday,
            haven't even started the deck"
 
@@ -184,6 +196,7 @@ Memory integrates (COMPLETE PICTURE):
 
 Response: "I hear you - work has flooded your mind with competing demands...
           Which of these 5 could potentially wait?"
+
 ```
 
 
@@ -267,12 +280,15 @@ Response: "I hear you - work has flooded your mind with competing demands...
 
 ```python
 
+
 # Per user message:
 1. Parse semantically → SemanticParsing object
 2. Add to memory → memory.add_turn(input, parsed, glyphs, needs)
 3. Memory integrates → updates integrated_state, causal_understanding
+
 ```text
 ```
+
 
 
 
@@ -291,6 +307,7 @@ SemanticParsing(
     action_capacity="can/cannot act?",
     raw_input="full message",
 ```text
+```text
 ```
 
 
@@ -298,6 +315,7 @@ SemanticParsing(
 ### Memory State Structure
 
 ```python
+
 ConversationMemory:
 ├─ turns: [Turn1, Turn2, Turn3, ...]
 ├─ integrated_state:
@@ -318,6 +336,7 @@ ConversationMemory:
 │  ├─ high_confidence_needs: [...]
 │  └─ assumptions: [...]
 └─ glyph_evolution: [[Still Insight], [+ Quiet Revelation, Fragmentation], ...]
+
 ```
 
 

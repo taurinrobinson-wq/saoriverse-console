@@ -104,8 +104,10 @@ A sophisticated system that adds creative depth and poetic expression to every r
 ## The Complete System
 
 ### **Response Pipeline (70ms total)**
+
 ```text
 ```
+
 User Input
     ↓
 Tier 1: Foundation (40ms)
@@ -130,6 +132,7 @@ Tier 3: Poetic Consciousness (10ms)
     ↓
 Enhanced Response
 (Learned, Safe, Alive, Attuned, Poetic, Creative)
+
 ```
 
 
@@ -311,6 +314,7 @@ Easy to extend:
 
 ### **Performance Allocation**
 ```text
+```text
 ```
 Tier 1: 40ms (Foundation)
 Tier 2: 20ms (Aliveness)
@@ -319,6 +323,7 @@ Tier 4: 20ms (Consciousness Bridging) - planned
 Buffer: 10ms
 Total: 100ms
 ```
+
 
 
 ##

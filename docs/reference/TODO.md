@@ -27,6 +27,7 @@ Next recommended actions when you resume:
 Set-Location -Path "C:\Users\Admin\OneDrive\Desktop\Deleted_Emotional_OS_Folder\Emotional OS"
 & ".\.venv\Scripts\Activate.ps1"  # if needed
 ```text
+```text
 ```
 
 
@@ -34,7 +35,9 @@ Set-Location -Path "C:\Users\Admin\OneDrive\Desktop\Deleted_Emotional_OS_Folder\
 3. If tests fail, run the single failing test to iterate faster:
 
 ```powershell
+
 & ".\.venv\Scripts\python.exe" -m pytest -q test_ritual_processor.py::test_glyph_creation -k test_glyph_creation -q
+
 ```
 
 

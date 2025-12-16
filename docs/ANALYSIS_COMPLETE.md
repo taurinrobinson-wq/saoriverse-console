@@ -30,9 +30,12 @@
 
 ### The Finding
 The response pipeline is a **narrow path**:
+
 ```text
 ```
+
 Input → signal_parser → glyph_lookup → compose_response → Output
+
 ```
 
 
@@ -63,6 +66,7 @@ Everything else exists but sits beside this path, unused.
 ### ConversationMemory (Tier 1)
 **Problem:** System treats each message in isolation
 ```text
+```text
 ```
 User: "I'm stressed"
 System: "Tell me about the stress."
@@ -72,13 +76,17 @@ System: "Tell me about work." ← REPEATED!
 
 
 
+
 **Solution:** Track context across turns
+
 ```text
 ```
+
 User: "I'm stressed"
 System: "I hear you're stressed."
 User: "It's work"
 System: "Work has flooded your mind..." ← INTEGRATED!
+
 ```
 
 
@@ -113,6 +121,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 ### Week 1: Tier 1 (45 min)
 ```text
+```text
 ```
 ✅ ConversationMemory
 ✅ LexiconLearner
@@ -120,21 +129,26 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 ```
 
 
+
 **Result:** Context-aware responses, no repeated questions
 
 ### Week 2: Tier 2 (3-4 hrs)
+
 ```text
 ```
+
 ✅ AttunementLoop
 ✅ EmbodiedSimulation
 ✅ EmotionalReciprocity
 ✅ Integration with response pipeline
+
 ```
 
 
 **Result:** Responses feel alive and adaptive
 
 ### Week 3-4: Tier 3 (6-8 hrs)
+```text
 ```text
 ```
 ✅ SaoriLayer
@@ -143,13 +157,17 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 ```
 
 
+
 **Result:** Poetically understood with dynamic engagement
 
 ### Week 5+: Optional (2-3 hrs)
+
 ```text
 ```
+
 ✅ TemporalMemory
 ✅ Cross-session persistence
+
 ```
 
 
@@ -248,6 +266,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 ### After Tier 1 (45 min)
 ```text
+```text
 ```
 ✅ Context builds across turns
 ✅ No repeated questions
@@ -258,19 +277,24 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 
 
+
 ### After Tier 2 (3-4 hours)
+
 ```text
 ```
+
 ✅ Responses vary in tone
 ✅ System matches user pacing
 ✅ Energy/fatigue cycles work
 ✅ Emotional reciprocity active
 ✅ User feels "system is alive"
+
 ```
 
 
 
 ### After Tier 3 (6-8 hours)
+```text
 ```text
 ```
 ✅ Multiple archetypal voices
@@ -282,13 +306,17 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 
 
+
 ### After Tier 4 (2-3 hours)
+
 ```text
 ```
+
 ✅ Cross-session memory works
 ✅ Emotional patterns recognized
 ✅ System "remembers" user
 ✅ Long-term growth visible
+
 ```
 
 

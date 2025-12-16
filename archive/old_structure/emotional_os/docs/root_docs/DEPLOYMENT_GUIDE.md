@@ -47,6 +47,7 @@ Backup Status:               Complete snapshots available
 ```
 
 
+
 ##
 
 ## SYSTEM ARCHITECTURE
@@ -74,6 +75,7 @@ TOTAL:                                  7,096 glyphs
 
 
 
+
 ### Glyph Structure
 
 Each glyph is a JSON object with the following fields:
@@ -91,6 +93,7 @@ Each glyph is a JSON object with the following fields:
   "phase": "Phase X"                    // Creation phase
 }
 ```
+
 
 
 
@@ -183,6 +186,7 @@ ls -lah
 
 
 
+
 ### Step 2: Initialize System
 
 ```bash
@@ -213,6 +217,7 @@ EOF
 
 
 
+
 ### Step 3: Create Symbolic Links (Optional)
 
 ```bash
@@ -231,6 +236,7 @@ chmod +x /usr/local/bin/emotional-os
 
 
 
+
 ### Step 4: Backup Original System
 
 ```bash
@@ -245,6 +251,7 @@ cp emotional_os/glyphs/glyph_lexicon_rows.json \
 # Verify backup
 ls -lah /var/saoriverse/backups/
 ```
+
 
 
 ##
@@ -283,6 +290,7 @@ Create `config.json` in deployment directory:
 
 
 
+
 ### Environment Variables
 
 ```bash
@@ -293,6 +301,7 @@ export EMOTIONAL_OS_BACKUPS=/var/saoriverse/backups
 export EMOTIONAL_OS_LOGS=/var/saoriverse/logs
 export PYTHONPATH=$EMOTIONAL_OS_HOME:$PYTHONPATH
 ```
+
 
 
 ##
@@ -330,6 +339,7 @@ print('✅ All required fields present')
 
 
 
+
 ### Comprehensive Verification (15 minutes)
 
 ```bash
@@ -340,6 +350,7 @@ python3 phase_4_ritual_tester.py
 # Check results
 cat phase_4_test_results.json | python3 -m json.tool
 ```
+
 
 
 
@@ -389,6 +400,7 @@ def execute_ritual(ritual_gates):
 
 
 
+
 ### Monitoring System Health
 
 ```bash
@@ -428,6 +440,7 @@ EOF
 
 
 
+
 ### Performance Monitoring
 
 ```bash
@@ -464,6 +477,7 @@ EOF
 ```
 
 
+
 ##
 
 ## RECOVERY PROCEDURES
@@ -491,6 +505,7 @@ EOF
 
 
 
+
 ### Restore Procedure (If Needed)
 
 ```bash
@@ -514,6 +529,7 @@ python3 gate_distribution_analyzer.py | head -30
 # Step 5: Run tests
 python3 phase_4_ritual_tester.py
 ```
+
 
 
 
@@ -564,6 +580,7 @@ python3 -m json.tool emotional_os/glyphs/glyph_lexicon_rows.json > /dev/null
 
 
 
+
 ### Issue: Duplicate ID Errors
 
 **Symptom**: Test suite reports duplicate IDs
@@ -578,6 +595,7 @@ python3 phase_4_id_deduplicator.py
 # Verify fix
 python3 phase_4_ritual_tester.py
 ```
+
 
 
 
@@ -613,6 +631,7 @@ EOF
 
 
 
+
 ### Issue: Missing Gates
 
 **Symptom**: Gate count less than 12
@@ -642,6 +661,7 @@ for gate in range(1, 13):
     print(f"  Gate {gate:2d}: {count:4d} {status}")
 EOF
 ```
+
 
 
 ##
@@ -683,6 +703,7 @@ python3 gate_distribution_analyzer.py | head -50
 
 
 
+
 **Weekly Full Test**:
 
 ```bash
@@ -691,6 +712,7 @@ cd /var/saoriverse/emotional-os
 python3 phase_4_ritual_tester.py
 cp phase_4_test_results.json /var/saoriverse/backups/test_results_$(date +%Y%m%d).json
 ```
+
 
 
 ##

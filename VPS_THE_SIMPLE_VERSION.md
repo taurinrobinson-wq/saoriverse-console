@@ -19,10 +19,13 @@ What I created:
 ## What is DigitalOcean?
 
 Think of it like this:
+
 ```text
 ```
+
 Railway = Rental apartment where the landlord keeps breaking things
 DigitalOcean = Renting a small VPS where YOU have full control
+
 ```
 
 
@@ -77,6 +80,7 @@ DigitalOcean = Renting a small VPS where YOU have full control
 
 When you click "Play" at `https://velinor.firstperson.chat`, here's what happens:
 ```text
+```text
 ```
 1. Your browser sends request to velinor.firstperson.chat
    ↓
@@ -96,6 +100,7 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
    ↓
 8. You play! 🎮
 ```
+
 
 
 ##
@@ -147,8 +152,10 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 **What it does**: Automatically updates your site when you push code to GitHub
 
 **How it works**:
+
 ```text
 ```
+
 You make a change to Velinor code
     ↓ (git push origin main)
 GitHub gets the update
@@ -162,6 +169,7 @@ Runs deploy script on VPS
 Pull latest code, rebuild Docker, restart
     ↓
 Your site is updated!
+
 ```
 
 
@@ -276,11 +284,13 @@ A:
 
 **Comparison**:
 ```text
+```text
 ```
 Option       | Cost/mo | Reliability | Control | Support
 Railway      | $5-50+  | 😢😢😢      | 😞     | 😞
 DigitalOcean | $6      | 😊😊😊      | 😊     | 😊
 ```
+
 
 
 ##
@@ -293,6 +303,7 @@ DigitalOcean | $6      | 😊😊😊      | 😊     | 😊
 cd d:\saoriverse-console
 git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
+```text
 ```text
 ```
 
@@ -343,14 +354,17 @@ All of these are in the full guides with detailed solutions!
 You went from:
 
 ```
+
 ```text
 ```
+
 
 
 
 To:
 
 ```
+```text
 ```text
 ```
 
@@ -359,11 +373,13 @@ To:
 With:
 
 ```
+
 ✅ Production Docker setup (verified working)
 ✅ SSL/HTTPS (encrypted and secure)
 ✅ Auto-deployment (push code → site updates automatically)
 ✅ Full documentation (5 different guides)
 ✅ Peace of mind (99.9% uptime)
+
 ```
 
 

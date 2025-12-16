@@ -46,8 +46,10 @@
 ## TARGET STATE
 
 ### Directory Structure (Clean & Logical)
+
 ```text
 ```
+
 saoriverse-console/
 │
 ├── app.py                          ← SINGLE Streamlit entry point (30 lines)
@@ -144,6 +146,7 @@ saoriverse-console/
 └── .github/                        ← CI/CD
     └── workflows/
         └── tests.yml               ← Test workflow
+
 ```
 
 
@@ -154,6 +157,7 @@ saoriverse-console/
 ### 1.1 Audit Current State
 
 ```bash
+
 
 # Count tests
 find . -name "test_*.py" -type f | wc -l
@@ -173,6 +177,7 @@ grep -l "if __name__ == '__main__'" *.py
 
 
 
+
 ### 1.2 Create Backup
 
 ```bash
@@ -181,6 +186,7 @@ grep -l "if __name__ == '__main__'" *.py
 git checkout -b refactor/reorganization-master
 
 # Tag current state
+```text
 ```text
 ```
 
@@ -201,6 +207,7 @@ Create a dependency map showing:
 
 ```bash
 
+
 # Create src/ with flat structure
 mkdir -p src/
 touch src/__init__.py
@@ -216,8 +223,10 @@ touch src/voice_interface.py       # Voice orchestration
 touch src/audio_pipeline.py        # STT pipeline
 touch src/multimodal_fusion.py     # Multimodal analysis
 touch src/privacy_layer.py         # Privacy/encryption
+
 ```text
 ```
+
 
 
 
@@ -234,6 +243,7 @@ mkdir -p tests/fixtures/
 touch tests/__init__.py
 touch tests/conftest.py             # Pytest configuration
 ```text
+```text
 ```
 
 
@@ -242,6 +252,7 @@ touch tests/conftest.py             # Pytest configuration
 
 ```bash
 
+
 # Consolidate data files
 mkdir -p data/lexicons/
 mkdir -p data/models/
@@ -249,8 +260,10 @@ mkdir -p data/fixtures/
 
 # Move all glyph/lexicon data to data/
 mv glyphs.db data/
+
 ```text
 ```
+
 
 
 
@@ -268,6 +281,7 @@ mv docs/LEXICON_*.md docs/archive/
 touch docs/ARCHITECTURE.md
 touch docs/TESTING_GUIDE.md
 ```text
+```text
 ```
 
 
@@ -281,6 +295,7 @@ touch docs/TESTING_GUIDE.md
 
 ```bash
 
+
 # Find all emotional_os related files
 find . -type f -name "*.py" -exec grep -l "emotional_os" {} \; | grep -v __pycache__ | sort
 
@@ -288,8 +303,10 @@ find . -type f -name "*.py" -exec grep -l "emotional_os" {} \; | grep -v __pycac
 find . -type f -name "*response*" -o -name "*generator*" | grep -v __pycache__
 
 # Find all voice code
+
 ```text
 ```
+
 
 
 
@@ -388,6 +405,7 @@ __all__ = [
     "decrypt_signals",
     "LearningSystem",
 ```text
+```text
 ```
 
 
@@ -399,9 +417,12 @@ __all__ = [
 
 ```bash
 
+
 # Move all test_*.py from root to tests/
+
 ```text
 ```
+
 
 
 
@@ -422,6 +443,7 @@ tests/unit/
 ├── test_privacy_layer.py
 ├── test_learning.py
 ```text
+```text
 ```
 
 
@@ -429,6 +451,7 @@ tests/unit/
 ### 4.3 Create conftest.py
 
 ```python
+
 
 # tests/conftest.py
 import pytest
@@ -455,8 +478,10 @@ def sample_signal():
         "attunement": 0.7,
         "certainty": 0.5,
         "valence": 0.3
+
 ```sql
 ```
+
 
 
 
@@ -471,6 +496,7 @@ python_files = test_*.py
 python_classes = Test*
 python_functions = test_*
 ```text
+```text
 ```
 
 
@@ -483,6 +509,7 @@ python_functions = test_*
 **app.py** (at root)
 
 ```python
+
 """
 SaoriVerse Console - FirstPerson
 Streamlit entry point for emotional AI system with voice interface.
@@ -542,8 +569,10 @@ def main():
         # Voice UI would go here
 
 if __name__ == "__main__":
+
 ```text
 ```
+
 
 
 
@@ -554,6 +583,7 @@ if __name__ == "__main__":
 # Remove old entry points (after backup)
 rm main_v2.py
 rm main_v2_simple.py
+```text
 ```text
 ```
 
@@ -566,6 +596,7 @@ rm main_v2_simple.py
 
 ```markdown
 
+
 # Scripts Directory
 
 Organization:
@@ -577,8 +608,10 @@ Usage:
 cd scripts/
 python -m data.download_nrc_lexicon
 python -m setup.init_db
+
 ```text
 ```
+
 
 
 
@@ -603,6 +636,7 @@ mv scripts/init_test_db.py scripts/setup/
 mv scripts/inspect_glyphs.py scripts/debug/
 
 ```text
+```text
 ```
 
 
@@ -615,6 +649,7 @@ mv scripts/inspect_glyphs.py scripts/debug/
 Create `tools/import_checker.py`:
 
 ```python
+
 """Verify all imports work correctly."""
 import sys
 from pathlib import Path
@@ -632,14 +667,17 @@ def test_imports():
 
 if __name__ == "__main__":
     success = test_imports()
+
 ```text
 ```
+
 
 
 
 Run it:
 
 ```bash
+```text
 ```text
 ```
 
@@ -649,6 +687,7 @@ Run it:
 
 ```bash
 
+
 # Run specific test module
 pytest tests/unit/test_emotional_os.py -v
 
@@ -656,8 +695,10 @@ pytest tests/unit/test_emotional_os.py -v
 pytest tests/unit/ -v
 
 # Run with coverage
+
 ```text
 ```
+
 
 
 
@@ -670,6 +711,7 @@ pytest tests/integration/test_full_e2e.py -v
 
 # All integration tests
 ```text
+```text
 ```
 
 
@@ -678,6 +720,7 @@ pytest tests/integration/test_full_e2e.py -v
 
 ```bash
 
+
 # Should work with single entry point
 streamlit run app.py
 
@@ -685,6 +728,7 @@ streamlit run app.py
 
 ```text
 ```
+
 
 
 ##
@@ -707,6 +751,7 @@ mv local_inference archive/old_structure/
 mv *.md archive/old_docs/ 2>/dev/null || true
 
 ```sql
+```sql
 ```
 
 
@@ -716,6 +761,7 @@ mv *.md archive/old_docs/ 2>/dev/null || true
 **requirements.txt** - Clean list of all dependencies:
 
 ```
+
 streamlit>=1.28.0
 faster-whisper>=0.10.0
 librosa>=0.10.0
@@ -725,6 +771,7 @@ python-dotenv>=1.0
 
 ```text
 ```
+
 
 
 
@@ -742,6 +789,7 @@ htmlcov/
 build/
 dist/
 ```text
+```text
 ```
 
 
@@ -749,8 +797,10 @@ dist/
 ### 8.3 Verify No Broken Imports
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -769,6 +819,7 @@ git commit -m "refactor: Complete codebase reorganization
 - All tests passing, all modules importable
 - Ready for efficient development and deployment"
 
+```text
 ```text
 ```
 
@@ -850,12 +901,14 @@ If something breaks during reorganization:
 
 ```bash
 
+
 # Revert to backup
 git checkout pre-reorganization
 
 # Or reset current branch
 git reset --hard origin/main
 git branch -D refactor/reorganization-master
+
 ```
 
 

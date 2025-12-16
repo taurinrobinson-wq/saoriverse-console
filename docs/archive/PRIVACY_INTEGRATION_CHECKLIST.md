@@ -31,6 +31,7 @@ grep -r "conversation" emotional_os/core/signal_parser.py
 
 
 
+
 - [ ] Create a list: `STORAGE_LOCATIONS.txt`
 - [ ] Example format:
   ```
@@ -92,6 +93,7 @@ db.table("conversations").insert({
 
 
 
+
 **After:**
 
 ```python
@@ -113,6 +115,7 @@ if not success:
 else:
     logger.info(f"Stored encoded conversation: {record_id}")
 ```
+
 
 
 
@@ -186,6 +189,7 @@ CREATE POLICY "Users can view own conversations"
 
 
 
+
 - [ ] Execute SQL
 - [ ] Verify table created: Check "Tables" in Supabase dashboard
 - [ ] Confirm indexes created: Check "Indexes" section
@@ -212,6 +216,7 @@ VALUES (
     'Migrated to anonymized schema for GDPR/CCPA/HIPAA compliance'
 );
 ```
+
 
 
 
@@ -242,6 +247,7 @@ python emotional_os/privacy/verify_privacy_encoding.py
 
 
 
+
 Expected output:
 
 ```
@@ -250,6 +256,7 @@ Expected output:
 ✓ All required fields present
 READY FOR INTEGRATION
 ```
+
 
 
 
@@ -300,6 +307,7 @@ if encoded:
 
 
 
+
 - [ ] Run test script
 - [ ] Verify: Success = True
 - [ ] Verify: No raw text in output
@@ -329,6 +337,7 @@ report = verifier.run_monthly_compliance_check(db_staging)
 
 # Check report.k_value >= 5
 ```
+
 
 
 
@@ -382,6 +391,7 @@ python emotional_os/privacy/verify_privacy_encoding.py
 
 
 
+
 - [ ] Code deployed
 - [ ] Database table created in production
 - [ ] Verification test passed
@@ -411,6 +421,7 @@ python emotional_os/privacy/verify_privacy_encoding.py
 
 
 
+
 - [ ] No errors ✓
 - [ ] Rows being added ✓
 - [ ] K-anonymity verified ✓
@@ -433,6 +444,7 @@ python emotional_os/privacy/arx_integration.py  # Or your runner
 
 # Generates: compliance_reports/[YYYY-MM-DD]_compliance_report.json
 ```
+
 
 
 
@@ -473,6 +485,7 @@ assert "glyphs" in result
 
 
 
+
 - [ ] Verify parse_input returns expected keys
 - [ ] Check signal format
 
@@ -487,6 +500,7 @@ SELECT COUNT(*) FROM conversation_logs_anonymized;
 -- Check if connection is correct
 -- Verify table name in code
 ```
+
 
 
 
@@ -514,6 +528,7 @@ SELECT COUNT(*) FROM conversation_logs_anonymized;
 
 
 
+
 - [ ] Check test data volume
 - [ ] Review bucket configuration
 - [ ] Consult IMPLEMENTATION_GUIDE.md
@@ -528,6 +543,7 @@ SELECT COUNT(*) FROM conversation_logs_anonymized;
 SELECT * FROM conversation_logs_anonymized
 WHERE user_id_hashed LIKE '%@%' OR encoded_signals LIKE '%I%';
 ```
+
 
 
 
@@ -588,6 +604,7 @@ ALTER TABLE conversations_archived RENAME TO conversations;
 git revert <commit>
 git push origin main
 ```
+
 
 
 

@@ -13,6 +13,7 @@ If you have `supabase-cli` installed:
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -38,6 +39,7 @@ cd /workspaces/saoriverse-console
 ## SQL Schema (Paste into Supabase SQL Editor)
 
 ```sql
+
 -- SQL DDL for conversations table
 -- Persistent conversation storage with metadata and auto-naming
 -- Intended for Supabase (Postgres)
@@ -116,8 +118,10 @@ DROP TRIGGER IF EXISTS conversations_update_updated_at ON public.conversations;
 CREATE TRIGGER conversations_update_updated_at
 BEFORE UPDATE ON public.conversations
 FOR EACH ROW
+
 ```text
 ```
+
 
 
 ##
@@ -129,6 +133,7 @@ After running the SQL, verify the tables were created:
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -136,10 +141,13 @@ cd /workspaces/saoriverse-console
 You should see:
 
 ```
+
 ✅ conversations table EXISTS
 ✅ conversation_metadata table EXISTS
+
 ```text
 ```
+
 
 
 ##
@@ -156,6 +164,7 @@ You should see:
 
 ```sql
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
+```text
 ```text
 ```
 
@@ -188,14 +197,17 @@ You should see policies for:
 Your `.streamlit/secrets.toml` is already configured with:
 
 ```toml
+
 [supabase]
 url = "https://gyqzyuvuuyfjxnramkfq.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8"
 service_role_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTQ2NzIwMCwiZXhwIjoyMDcxMDQzMjAwfQ.sILcK31ECwM0IUECL0NklBdv4WREIxToqtCdsMYKWqo"
 auth_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth-manager"
 saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori"
+
 ```text
 ```
+
 
 
 
@@ -205,6 +217,7 @@ saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth
 ## Step 6: Restart Your App
 
 ```bash
+```text
 ```text
 ```
 
@@ -238,7 +251,9 @@ You should now see:
 Run the migration script again:
 
 ```bash
+
 python3 scripts/migrate_supabase.py --verify
+
 ```
 
 

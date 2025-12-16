@@ -29,6 +29,7 @@ if summary["avg_latency_ms"] > 300:
 
 
 
+
 ### 2. Advanced Prosody
 
 ```python
@@ -51,6 +52,7 @@ print(f"Emphasis points: {plan.emphasis_points}")
 print(f"Breath style: {plan.breath_style}")
 print(f"Breathiness: {plan.breathiness}")
 ```
+
 
 
 
@@ -81,6 +83,7 @@ logger.save_session()
 
 
 
+
 ### 4. Edge Case Handling & UI
 
 ```python
@@ -106,6 +109,7 @@ if not is_valid:
 # Display metrics
 enhancements.render_performance_metrics(latency_ms=250, confidence=0.95)
 ```
+
 
 
 
@@ -200,6 +204,7 @@ def generate_voice_response(response_text, emotional_state):
 
 
 
+
 ### In Streamlit UI (`voice_ui.py`)
 
 ```python
@@ -224,6 +229,7 @@ with st.sidebar:
         session_path = logger.save_session()
         st.success(f"Session saved: {session_path}")
 ```
+
 
 
 
@@ -282,6 +288,7 @@ edge_case_handling:
 
 
 
+
 Then load in Python:
 
 ```python
@@ -293,6 +300,7 @@ with open("config/sprint5.yaml") as f:
 if config["performance_profiling"]["enabled"]:
     profiler = PerformanceProfiler()
 ```
+
 
 
 

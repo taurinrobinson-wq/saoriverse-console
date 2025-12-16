@@ -46,8 +46,10 @@
 ## Why They're Disconnected
 
 ### The Problem in One Diagram
+
 ```text
 ```
+
 User Input
     ↓
 [signal_parser] ✅ ACTIVE
@@ -66,6 +68,7 @@ MISSING:
 - Memory context
 - Learning feedback
 - Session continuity
+
 ```
 
 
@@ -94,6 +97,7 @@ MISSING:
 
 **Before:**
 ```text
+```text
 ```
 User: "I'm stressed"
 System: "Tell me about the stress."
@@ -104,14 +108,18 @@ System: "Tell me about work." ← REPEATED PATTERN
 
 
 
+
 **After:**
+
 ```text
 ```
+
 User: "I'm stressed"
 System: "I hear you're stressed."
 
 User: "My work is overwhelming"
 System: "Work has flooded your mind with competing demands..." ← CONTEXT AWARE
+
 ```
 
 
@@ -128,6 +136,7 @@ System: "Work has flooded your mind with competing demands..." ← CONTEXT AWARE
 
 **Before:**
 ```text
+```text
 ```
 System always responds with same tone/energy
 Responses feel robotic/predictable
@@ -137,13 +146,17 @@ System never seems "tired" or "engaged"
 
 
 
+
 **After:**
+
 ```text
 ```
+
 System adapts to user's pacing (fast/slow/paused)
 Responses vary in energy (crisp when engaged, sparse when tired)
 System feels alive and responsive
 Different emotional modes come through
+
 ```
 
 
@@ -160,6 +173,7 @@ Different emotional modes come through
 
 **Before:**
 ```text
+```text
 ```
 Single consistent voice
 Literal acknowledgment
@@ -168,13 +182,17 @@ Predictable response patterns
 
 
 
+
 **After:**
+
 ```text
 ```
+
 Multiple archetypal voices (Witness, Trickster, Oracle)
 Creative reframing ("broken" becomes "opening")
 Surprise and productive tension
 Feels genuinely creative
+
 ```
 
 
@@ -285,6 +303,7 @@ When integration is working:
 
 ## Estimated Timeline
 ```text
+```text
 ```
 NOW
 │
@@ -308,6 +327,7 @@ NOW
 └─ WEEK 5+
    └─ Deployment + monitoring
 ```
+
 
 
 

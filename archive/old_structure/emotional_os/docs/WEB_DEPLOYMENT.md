@@ -132,6 +132,7 @@ python fastapi_app.py
 
 
 
+
 Visit <http://localhost:8000> to test your app.
 
 ## 📊 Benefits of Custom Domain
@@ -152,6 +153,7 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_KEY=your_anon_key_here
 SECRET_KEY=generated_32_character_hex_string
 ```
+
 
 
 
@@ -184,6 +186,7 @@ How to wire it up
 <meta name="edge-function-url" content="https://<REGION>.functions.supabase.co/saori-fixed">
 <meta name="validate-session-url" content="https://admin.firstperson.chat/api/validate-session">
 ```
+
 
 
 

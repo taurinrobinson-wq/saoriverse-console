@@ -17,8 +17,10 @@
 ##
 
 ## Project Structure
+
 ```text
 ```
+
 firstperson/
 ├── App.js                          # Main entry point with navigation setup
 ├── index.js                        # Expo app entry
@@ -41,6 +43,7 @@ firstperson/
 │       ├── StorageService.js      # 🆕 Local persistence layer
 │       └── SyncService.js         # 🆕 Offline-first sync
 └── assets/                         # Icons, images, splash screens
+
 ```
 
 
@@ -68,6 +71,7 @@ Manages all local data using `@react-native-async-storage/async-storage`.
 
 **Storage Keys:**
 ```text
+```text
 ```
 fp_conversations         # All conversations and messages
 fp_memory_capsules      # Relational context snapshots
@@ -75,6 +79,7 @@ fp_user_prefs           # User preferences (theme, notifications, etc)
 fp_sync_queue           # Messages queued during offline
 fp_onboarding_complete  # Onboarding completion marker
 ```
+
 
 
 ##
@@ -107,6 +112,7 @@ Handles all backend communication with prosody parsing and offline detection.
     { name: "Ember", score: 0.92, symbol: "🔥", description: "..." },
     { name: "Echo", score: 0.78, symbol: "📍", description: "..." }
   ]
+```text
 ```text
 ```
 
@@ -197,6 +203,7 @@ Displays individual messages with optional prosody metadata.
 **Props:**
 
 ```javascript
+
 {
   message: {
     role: "user" | "assistant",
@@ -205,8 +212,10 @@ Displays individual messages with optional prosody metadata.
     timestamp?: ISO string,
   },
   theme: "light" | "dark"
+
 ```text
 ```
+
 
 
 
@@ -250,6 +259,7 @@ ChatScreen.handleSendMessage()
 ├─ Display assistant response with prosody
 ├─ Store assistant message locally
 ```text
+```text
 ```
 
 
@@ -257,6 +267,7 @@ ChatScreen.handleSendMessage()
 ### Offline Sync Flow
 
 ```
+
 Network Offline
     ↓
 ApiService detects network error
@@ -274,8 +285,10 @@ SyncService.performSync() triggered
 ├─ Save successful responses to conversation
 └─ Clear sync queue
     ↓
+
 ```text
 ```
+
 
 
 ##
@@ -294,6 +307,7 @@ npm install -g expo-cli
 
 # Install EAS CLI (for building)
 ```text
+```text
 ```
 
 
@@ -301,6 +315,7 @@ npm install -g expo-cli
 ### Quick Start
 
 ```bash
+
 cd /workspaces/saoriverse-console/firstperson
 
 # Install dependencies
@@ -326,6 +341,7 @@ npm start
 
 
 
+
 ### Environment Setup
 
 ```bash
@@ -335,6 +351,7 @@ REACT_APP_SAOYNX_API_URL=http://192.168.1.100:8000  # Replace with your IP
 
 # Or in environment:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
+```text
 ```text
 ```
 
@@ -346,6 +363,7 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 **Added for this MVP:**
 
 ```json
+
 {
   "@react-native-async-storage/async-storage": "^1.21.0",    // Local storage
   "@react-native-community/netinfo": "^11.0.2",              // Network detection
@@ -358,8 +376,10 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
   "react-navigation-bottom-tabs": "^6.4.0",                  // Bottom tab nav
   "react-navigation-native": "^6.1.9",                       // Navigation native
   "react-navigation-stack": "^6.3.20"                        // Stack navigation
+
 ```text
 ```
+
 
 
 ##
@@ -439,6 +459,7 @@ curl http://localhost:8000/health
 # For device on same WiFi: use computer's LAN IP, not localhost
 ipconfig getifaddr en0  # macOS
 ```text
+```text
 ```
 
 
@@ -447,13 +468,16 @@ ipconfig getifaddr en0  # macOS
 
 ```bash
 
+
 # Ensure package is installed
 npm list @react-native-async-storage/async-storage
 
 # Clear cache and reinstall
 rm -rf node_modules
+
 ```text
 ```
+
 
 
 
@@ -467,6 +491,7 @@ npm install @react-navigation/native @react-navigation/bottom-tabs
 # Clear Expo cache
 expo start -c
 ```
+
 
 
 ##

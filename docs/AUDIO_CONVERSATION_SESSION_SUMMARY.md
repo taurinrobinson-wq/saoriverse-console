@@ -82,8 +82,10 @@ Enhanced main orchestrator with prosody support and non-blocking playback.
    - State callbacks for real-time UI updates
 
 **Architecture**:
+
 ```text
 ```
+
 Record Audio (AudioRecorder)
     ↓
 Transcribe (Whisper via faster-whisper)
@@ -99,6 +101,7 @@ Synthesize (pyttsx3, local TTS)
 Play Non-Blocking (sounddevice)
     ↓
 Store Turn (ConversationTurn) → Loop or Stop
+
 ```
 
 
@@ -110,11 +113,14 @@ PortAudio support now included for audio recording:
 
 ```dockerfile
 
+
 # Audio dependencies
 portaudio19-dev  # PortAudio development headers
 libsndfile1      # Sound file I/O
+
 ```text
 ```
+
 
 
 
@@ -150,6 +156,7 @@ libsndfile1      # Sound file I/O
 Chunk 1: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 Chunk 2: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 ```text
+```text
 ```
 
 
@@ -157,14 +164,17 @@ Chunk 2: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 **After** (Non-Blocking with 0.9x overlap):
 
 ```
+
 Chunk 1: Synthesize (1.0s)
          ├─ Play (1.8s, non-blocking) ─────────────────→
          └─ Sleep (1.8s overlap)
 Chunk 2:                    Synthesize (1.0s)
                            ├─ Play (1.8s, overlaps with Chunk 1)
                            └─ Sleep (1.8s)
+
 ```text
 ```
+
 
 
 
@@ -202,6 +212,7 @@ glyph_intent = {
 
 # Result: Fast speech, high pitch, loud volume →
 ```text
+```text
 ```
 
 
@@ -209,6 +220,7 @@ glyph_intent = {
 **Example: Low-Voltage Negative Response**
 
 ```python
+
 glyph_intent = {
     "voltage": "low",          # Subdued, introspective
     "tone": "negative",        # Concerned, sad
@@ -229,6 +241,7 @@ glyph_intent = {
 
 # Result: Slow speech, low pitch, soft volume, pauses →
 #         User hears: concerned, uncertain, introspective FirstPerson
+
 ```
 
 

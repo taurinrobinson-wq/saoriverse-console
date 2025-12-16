@@ -36,6 +36,7 @@ create index if not exists emotions_log_user_time_idx
 -- Create index for conversation context queries
 create index if not exists emotions_log_context_idx
 ```text
+```text
 ```
 
 
@@ -55,6 +56,7 @@ This table stores per-user emotion detection thresholds calculated by `train_emo
 ### SQL to create the table:
 
 ```sql
+
 -- Create emotion_thresholds table
 create table if not exists public.emotion_thresholds (
   id uuid primary key default gen_random_uuid(),
@@ -67,8 +69,10 @@ create table if not exists public.emotion_thresholds (
 
 -- Create index for faster lookups
 create index if not exists emotion_thresholds_user_idx
+
 ```text
 ```
+
 
 
 
@@ -125,6 +129,7 @@ create policy "Users can view own emotion thresholds"
   with check (
     auth.uid()::text = user_id
 ```text
+```text
 ```
 
 
@@ -146,6 +151,7 @@ Ensure your backend has these environment variables set:
 
 ```bash
 
+
 # .env.local (Next.js)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
@@ -153,8 +159,10 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # Keep private!
 
 # For train_emotion_model.py
 export SUPABASE_URL="https://your-project.supabase.co"
+
 ```text
 ```
+
 
 
 ##
@@ -189,6 +197,7 @@ export SUPABASE_URL="https://your-project.supabase.co"
 ```sql
 insert into public.emotions_log (user_id, emotion, confidence, conversation_context)
 ```text
+```text
 ```
 
 
@@ -196,14 +205,17 @@ insert into public.emotions_log (user_id, emotion, confidence, conversation_cont
 ### Test 2: Verify frontend can fetch thresholds
 
 ```bash
+
 ```text
 ```
+
 
 
 
 ### Test 3: Run training script
 
 ```bash
+```text
 ```text
 ```
 
@@ -215,12 +227,15 @@ insert into public.emotions_log (user_id, emotion, confidence, conversation_cont
 ### Check emotion logs by user:
 
 ```sql
+
 select emotion, confidence, timestamp
 from public.emotions_log
 where user_id = 'your_user_id'
 order by timestamp desc
+
 ```text
 ```
+
 
 
 
@@ -231,6 +246,7 @@ select emotion, threshold, updated_at
 from public.emotion_thresholds
 where user_id = 'your_user_id'
 ```text
+```text
 ```
 
 
@@ -238,8 +254,10 @@ where user_id = 'your_user_id'
 ### Delete old logs (optional cleanup):
 
 ```sql
+
 delete from public.emotions_log
 where timestamp < now() - interval '90 days';
+
 ```
 
 

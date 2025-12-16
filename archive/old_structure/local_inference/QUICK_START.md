@@ -15,6 +15,7 @@ from training_corpus import TrainingCorpusBuilder, TrainingExample
 
 
 
+
 ### 2. Select Glyphs & Gates
 
 ```python
@@ -42,6 +43,7 @@ style = StyleDirective(
 
 
 
+
 ### 3. Render Control Prefix
 
 ```python
@@ -64,6 +66,7 @@ prefix = ControlTagRenderer.render_control_prefix(glyphs, gate, style)
 
 
 
+
 ### 4. Add to LLM Prompt
 
 ```python
@@ -74,6 +77,7 @@ full_prompt = f"""{prefix}
 User: {user_input}
 Assistant:"""
 ```
+
 
 
 
@@ -109,6 +113,7 @@ print(f"Issues fixed: {result.safety_violations_fixed}")
 
 
 
+
 ### 6. Capture Training Data
 
 ```python
@@ -128,6 +133,7 @@ example = builder.add_from_interaction(
 # Export later
 builder.export_to_jsonl("training_data.jsonl")
 ```
+
 
 
 
@@ -157,6 +163,7 @@ gate = GatePolicy(
 
 
 
+
 ### Balanced & Poetic
 
 ```python
@@ -170,6 +177,7 @@ gate = GatePolicy(
 
 
 
+
 ### Slightly Experimental
 
 ```python
@@ -180,6 +188,7 @@ gate = GatePolicy(
     metaphor_density_max=0.8
 )
 ```
+
 
 
 
@@ -197,6 +206,7 @@ style = StyleDirective(
 
 
 
+
 ### Cool & Direct
 
 ```python
@@ -206,6 +216,7 @@ style = StyleDirective(
     metaphor_density=0.3
 )
 ```
+
 
 
 
@@ -221,6 +232,7 @@ style = StyleDirective(
 
 
 
+
 ## Running Tests
 
 ```bash
@@ -229,6 +241,7 @@ python -m pytest test_phase_3_5.py -v
 
 # 31 tests pass in ~0.4 seconds
 ```
+
 
 
 
@@ -275,6 +288,7 @@ User Input
 
 
 
+
 ## Next Steps
 
 1. **Integrate with Local LLM**: Hook `llama.cpp` or Ollama
@@ -294,6 +308,7 @@ print(registry.list_by_family("Ache"))
 
 
 
+
 ### See what control tags look like
 
 ```python
@@ -301,6 +316,7 @@ print(ControlTagRenderer.render_glyphs(glyphs, gate))
 print(ControlTagRenderer.render_gates(gate))
 print(ControlTagRenderer.render_style(style))
 ```
+
 
 
 
@@ -314,6 +330,7 @@ print(result.detailed_changes)  # See all modifications
 
 
 
+
 ### Check corpus statistics
 
 ```python
@@ -322,6 +339,7 @@ print(f"Examples: {stats['total_examples']}")
 print(f"Avg satisfaction: {stats['avg_user_satisfaction']:.2f}")
 print(f"Glyphs used: {len(stats['glyphs_by_frequency'])}")
 ```
+
 
 
 

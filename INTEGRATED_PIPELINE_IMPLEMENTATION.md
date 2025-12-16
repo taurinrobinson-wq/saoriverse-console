@@ -9,8 +9,10 @@
 
 ### Created: `src/firstperson_integrated_pipeline.py`
 A new orchestrator that wires ALL your built response systems together:
+
 ```text
 ```
+
 User Input
     ↓
 [Tier 1: Foundation]
@@ -37,6 +39,7 @@ User Input
 └─ Metadata enrichment
     ↓
 FINAL RESPONSE (~85-90ms total)
+
 ```
 
 
@@ -64,6 +67,7 @@ FINAL RESPONSE (~85-90ms total)
 
 ### BEFORE (Current)
 ```text
+```text
 ```
 /chat endpoint
     → generate_empathetic_response()
@@ -72,11 +76,14 @@ FINAL RESPONSE (~85-90ms total)
 
 
 
+
 **Problem:** Generic responses, no emotional attunement, missing safety layers
 
 ### AFTER (New)
+
 ```text
 ```
+
 /chat endpoint
     → generate_empathetic_response() [BASE]
     → INTEGRATED_PIPELINE.process_response()
@@ -85,6 +92,7 @@ FINAL RESPONSE (~85-90ms total)
         → Tier 3: Poetic (metaphor + aesthetics + tension)
         → Composition (affect + templates)
     → return enhanced response
+
 ```
 
 
@@ -181,11 +189,14 @@ If ANY component fails:
 
 ```bash
 
+
 # Kill current process (Ctrl+C in terminal if running)
 
 # Then start fresh:
+
 ```text
 ```
+
 
 
 
@@ -200,6 +211,7 @@ If ANY component fails:
 ✓ Response Templates initialized
 ✓ Affect Parser initialized
 ✓ Context Selector initialized
+```text
 ```text
 ```
 
@@ -271,11 +283,13 @@ AFTER (Context-Aware + Aliveness):
 ## Files Modified
 
 ```
+
 d:\saoriverse-console\
 ├── src/
 │   ├── firstperson_integrated_pipeline.py      [NEW - 350 lines]
 │   └── firstperson_backend.py                  [MODIFIED - added pipeline integration]
 └── (all tier files remain unchanged, just imported)
+
 ```
 
 

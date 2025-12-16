@@ -118,6 +118,7 @@ All other user-data tables need RLS policies applied:
 # Run the script
 
 ```text
+```text
 ```
 
 
@@ -126,10 +127,12 @@ All other user-data tables need RLS policies applied:
 
 ```bash
 
+
 # Copy final_cleanup.sql to Supabase SQL Editor
 
 ```text
 ```
+
 
 
 
@@ -140,6 +143,7 @@ All other user-data tables need RLS policies applied:
 # Find emotional_tags_rows.sql or create tags
 
 ```text
+```text
 ```
 
 
@@ -147,6 +151,7 @@ All other user-data tables need RLS policies applied:
 ### 4. Test the System
 
 ```bash
+
 
 # Start your application
 
@@ -156,8 +161,10 @@ All other user-data tables need RLS policies applied:
 #   - Message processes successfully
 #   - Glyphs are matched
 #   - Response is generated
+
 ```text
 ```
+
 
 
 
@@ -182,6 +189,7 @@ SUPABASE_SERVICE_ROLE_KEY=configured
 CURRENT_SAORI_URL=configured (demo mode)
 OPENAI_API_KEY=configured
 ```
+
 
 
 

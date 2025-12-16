@@ -49,6 +49,7 @@ emotional_os/lexicon/lexicon_loader.py
 
 
 
+
 ### New Lexicon Data
 
 ```
@@ -62,6 +63,7 @@ emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json (142.7 KB)
   • 484 words (457 + 27 expanded)
   • Ready for signal refinement
 ```
+
 
 
 
@@ -80,6 +82,7 @@ lexicon_reorganizer.py
   • Gate mapping generation
   • One-time use tool (can re-run on new data)
 ```
+
 
 
 ##

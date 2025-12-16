@@ -6,8 +6,10 @@ You're ditching **Streamlit** and moving to a proper **web stack** because Strea
 ##
 
 ## New Architecture
+
 ```text
 ```
+
 Your Computer (Dev)          Railway Server (Production)
 ═══════════════════          ════════════════════════════
 
@@ -21,6 +23,7 @@ http://localhost:3000        https://your-domain.up.railway.app
 
 Game Engine:                 Game Engine:
 Velinor (Python)             Velinor (Python) - embedded in backend
+
 ```
 
 
@@ -57,10 +60,13 @@ Velinor (Python)             Velinor (Python) - embedded in backend
 ### Step 1: Create Next.js App
 
 ```bash
+
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 cd velinor-web
+
 ```text
 ```
+
 
 
 
@@ -70,6 +76,7 @@ cd velinor-web
 
 # From repo root
 cp frontend_lib_api.ts velinor-web/lib/api.ts
+```text
 ```text
 ```
 
@@ -83,6 +90,7 @@ cp frontend_lib_api.ts velinor-web/lib/api.ts
 
 ```bash
 
+
 # Terminal 1
 python velinor_api.py
 
@@ -94,6 +102,7 @@ cd velinor-web && npm run dev
 
 
 
+
 ### Step 5: Deploy
 
 ```bash
@@ -101,6 +110,7 @@ git add .
 git commit -m "feat: Next.js + FastAPI Velinor game"
 git push origin main
 
+```text
 ```text
 ```
 
@@ -123,6 +133,7 @@ git push origin main
 ## File Organization
 
 ```
+
 saoriverse-console/
 ├── velinor/                         ← Game engine (unchanged)
 │   ├── engine/
@@ -152,8 +163,10 @@ saoriverse-console/
     │   ├── backgrounds/             ← Copy from velinor/backgrounds/
     │   ├── overlays/                ← NEW: dust, fog, glyphs
     │   └── npcs/                    ← Copy from velinor/npcs/
+
 ```text
 ```
+
 
 
 ##
@@ -169,6 +182,7 @@ st.image(splash_img)  # Shows image
 st.button("Start")    # Shows below, not on top
 
 ```text
+```text
 ```
 
 
@@ -176,13 +190,16 @@ st.button("Start")    # Shows below, not on top
 ### After (Next.js - Works)
 
 ```jsx
+
 <div style={{ position: 'relative' }}>
   <img src="background" style={{ position: 'absolute' }} />
   <button style={{ position: 'absolute', bottom: '20px' }}>
     Start  {/* Button is truly on top */}
   </button>
+
 ```text
 ```
+
 
 
 ##
@@ -233,6 +250,7 @@ START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
   ├─→ RAILWAY_DEPLOYMENT.md (production deploy)
   ├─→ VELINOR_WEB_QUICK_REFERENCE.md (commands)
 ```text
+```text
 ```
 
 
@@ -241,6 +259,7 @@ START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
 ## Commands You'll Need
 
 ```bash
+
 
 # Create Next.js project (one time)
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
@@ -260,6 +279,7 @@ cd velinor-web && npm run dev
 git add .
 git commit -m "your message"
 git push origin main
+
 ```
 
 

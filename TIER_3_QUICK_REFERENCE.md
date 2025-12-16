@@ -3,8 +3,10 @@
 ## Overview
 
 Tier 3 adds **Poetic Consciousness** to responses through four integrated components:
+
 ```text
 ```
+
 Response Input
     ↓
 Tier 1: Foundation (Learning + Safety) → 40ms
@@ -14,6 +16,7 @@ Tier 2: Aliveness (Presence + Adaptivity) → 20ms
 Tier 3: Poetic Consciousness (Poetry + Aesthetics + Tension + Mythology) → 10ms
     ↓
 Enhanced Response (70ms total, 100ms budget)
+
 ```
 
 
@@ -34,6 +37,7 @@ Enhanced Response (70ms total, 100ms budget)
 **Purpose:** Generate metaphors and symbolic language
 
 ```python
+
 engine = PoetryEngine()
 metaphor = engine.find_metaphor("growth", "joy")
 
@@ -47,6 +51,7 @@ bridge = engine.bridge_concepts("growth", "challenge")
 
 ```text
 ```
+
 
 
 
@@ -79,6 +84,7 @@ subtle = saori.apply_yugen("Here's the insight")
 transient = saori.apply_mono_no_aware("This moment")
 
 ```text
+```text
 ```
 
 
@@ -94,6 +100,7 @@ transient = saori.apply_mono_no_aware("This moment")
 **Purpose:** Create generative tension for creative exploration
 
 ```python
+
 tension = TensionManager()
 
 # Introduce tension at different levels
@@ -111,6 +118,7 @@ paradox = tension.balance_paradox("strength", "vulnerability")
 
 ```text
 ```
+
 
 
 
@@ -148,6 +156,7 @@ enhanced = weaver.add_mythological_element(response, myth)
 narrative = weaver.build_personal_narrative(history)
 
 ```text
+```text
 ```
 
 
@@ -162,6 +171,7 @@ narrative = weaver.build_personal_narrative(history)
 **Purpose:** Coordinate all components
 
 ```python
+
 tier3 = Tier3PoeticConsciousness()
 
 # Process response for poetry
@@ -185,8 +195,10 @@ print(metrics)
 # }
 
 # Get latest metrics anytime
+
 ```text
 ```
+
 
 
 
@@ -210,6 +222,7 @@ if tier3:
         response = poetry_response
     except Exception as e:
 ```text
+```text
 ```
 
 
@@ -217,6 +230,7 @@ if tier3:
 ### In session_manager.py
 
 ```python
+
 
 # Called during initialize_session_state()
 _ensure_tier3_poetic_consciousness()
@@ -229,8 +243,10 @@ def _ensure_tier3_poetic_consciousness():
             st.session_state["tier3_poetic_consciousness"] = tier3
         except Exception as e:
             logger.warning(f"Failed to initialize Tier 3: {e}")
+
 ```text
 ```
+
 
 
 
@@ -258,6 +274,7 @@ Phase 4: Mythology Weaver (2-3ms)
   • Add mythological elements
   ↓
 Output: enhanced response string, metrics dict
+```text
 ```text
 ```
 
@@ -290,6 +307,7 @@ Output: enhanced response string, metrics dict
 
 ```bash
 
+
 # Tier 3 only
 pytest tests/test_tier3_poetic_consciousness.py -v
 
@@ -301,6 +319,7 @@ pytest tests/test_tier3_poetic_consciousness.py --tb=no -q
 
 ```text
 ```
+
 
 
 
@@ -327,6 +346,7 @@ if random.random() > 0.6:  # 40% chance
 # In MythologyWeaver
 if myth.get("themes"):  # Only if themes extracted
 ```text
+```text
 ```
 
 
@@ -337,10 +357,13 @@ To increase poetry intensity (in any component):
 
 ```python
 
+
 # Lower probability threshold (e.g., 0.5 → 0.3 = 70% chance)
 if random.random() > 0.3:  # was 0.5
+
 ```text
 ```
+
 
 
 
@@ -351,6 +374,7 @@ To decrease poetry intensity:
 # Raise probability threshold (e.g., 0.5 → 0.8 = 20% chance)
 if random.random() > 0.8:  # was 0.5
 ```text
+```text
 ```
 
 
@@ -360,6 +384,7 @@ if random.random() > 0.8:  # was 0.5
 ### Graceful Degradation
 
 ```
+
 If Tier 3 initialization fails:
   → Falls back to Tier 2 response
   → Warning logged
@@ -368,8 +393,10 @@ If Tier 3 initialization fails:
 If Tier 3 processing fails:
   → Uses previous tier's response
   → Warning logged
+
 ```text
 ```
+
 
 
 
@@ -384,6 +411,7 @@ try:
 except Exception as e:
     logger.warning(f"Component failed: {e}")
 ```text
+```text
 ```
 
 
@@ -394,10 +422,13 @@ except Exception as e:
 
 ```python
 
+
 # Just enhance response, don't care about metrics
 poetic, _ = tier3.process_for_poetry(response)
+
 ```text
 ```
+
 
 
 
@@ -408,6 +439,7 @@ poetic, metrics = tier3.process_for_poetry(response)
 if metrics.get("processing_time_ms", 0) > 15:
     logger.warning("Tier 3 slow")
 ```text
+```text
 ```
 
 
@@ -415,14 +447,17 @@ if metrics.get("processing_time_ms", 0) > 15:
 ### Pattern 3: Full Context Awareness
 
 ```python
+
 context = {
     "messages": conversation_history,
     "theme": "growth"
 }
 poetic, metrics = tier3.process_for_poetry(response, context)
 logger.info(f"Applied {metrics['aesthetic_applied']} aesthetic")
+
 ```text
 ```
+
 
 
 
@@ -436,6 +471,7 @@ logger.info(f"Applied {metrics['aesthetic_applied']} aesthetic")
 if "tier3_poetic_consciousness" in st.session_state:
     tier3 = st.session_state["tier3_poetic_consciousness"]
 ```text
+```text
 ```
 
 
@@ -445,11 +481,13 @@ if "tier3_poetic_consciousness" in st.session_state:
 **Solution:** Check metrics
 
 ```python
+
 _, metrics = tier3.process_for_poetry(response)
 print(f"Time: {metrics.get('processing_time_ms')}ms")
 
 ```text
 ```
+
 
 
 
@@ -464,6 +502,7 @@ import random
 random.seed(42)
 poetic, _ = tier3.process_for_poetry(response)
 ```
+
 
 
 

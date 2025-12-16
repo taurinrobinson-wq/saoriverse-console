@@ -7,10 +7,13 @@
 ## 📊 Complete Project File Map
 
 ### Root Level (2 Files - Clean!)
+
 ```text
 ```
+
 README.md                      Project overview & getting started
 CONTRIBUTING.md                Contribution guidelines
+
 ```
 
 
@@ -21,6 +24,7 @@ CONTRIBUTING.md                Contribution guidelines
 ## 🔧 Core Application (core/)
 
 **Purpose**: All essential Python files that power the application
+```text
 ```text
 ```
 core/
@@ -39,6 +43,7 @@ core/
 
 
 
+
 **Total**: 11 core Python files
 **Status**: ✅ All imports verified and working
 ##
@@ -46,8 +51,10 @@ core/
 ## 📚 Documentation (docs/)
 
 ### guides/ - Design & Reference Documents
+
 ```text
 ```
+
 docs/guides/
 ├── MODULARIZATION_COMPLETE.md      ⭐ PRIMARY - Complete architecture guide (13 KB)
 ├── DELIVERABLES.md                 Project completion summary (9.1 KB)
@@ -59,6 +66,7 @@ docs/guides/
 ├── UI_MODULARIZATION_ANALYSIS.md  UI component organization analysis
 ├── VOICE_INTERFACE_IMPLEMENTATION.md  Voice interface implementation
 └── phase_modulator.md             Phase detection specs
+
 ```
 
 
@@ -67,6 +75,7 @@ docs/guides/
 **Purpose**: Architecture, design, and project references
 
 ### reports/ - Analysis & Reports
+```text
 ```text
 ```
 docs/reports/
@@ -87,12 +96,15 @@ docs/reports/
 
 
 
+
 **Total**: 13 analysis and test reports
 **Purpose**: Test results, analysis outputs, audit trails
 
 ### archives/ - Phase & Sprint History
+
 ```text
 ```
+
 docs/archives/
 ├── FIRSTPERSON_PHASE_1_6_INTEGRATION.md
 ├── FIRSTPERSON_PHASE_1_COMPLETE.md
@@ -113,6 +125,7 @@ docs/archives/
 ├── SPRINT5_IMPLEMENTATION_GUIDE.md
 ├── SPRINT5_INTEGRATION_GUIDE.md
 └── SPRINT5_QUICK_REFERENCE.md
+
 ```
 
 
@@ -122,9 +135,11 @@ docs/archives/
 
 ### INDEX.md - Navigation Guide
 ```text
+```text
 ```
 docs/INDEX.md                 ⭐ START HERE - Complete documentation index & navigation
 ```
+
 
 
 
@@ -135,8 +150,10 @@ docs/INDEX.md                 ⭐ START HERE - Complete documentation index & na
 ## 📊 Data (data/)
 
 ### glyphs/ - Glyph Generation & Validation
+
 ```text
 ```
+
 data/glyphs/
 ├── phase_1_complete_glyphs.json
 ├── phase_1_new_glyphs.json
@@ -148,6 +165,7 @@ data/glyphs/
 ├── glyph_lexicon_rows_before_phase3.json
 ├── temp_phase_1_validate.json
 └── glyphs_rows.sql
+
 ```
 
 
@@ -156,6 +174,7 @@ data/glyphs/
 **Purpose**: Glyph generation, validation, and database
 
 ### lexicons/ - NLP Lexicon Data
+```text
 ```text
 ```
 data/lexicons/
@@ -167,14 +186,18 @@ data/lexicons/
 
 
 
+
 **Total**: 4 lexicon files
 **Purpose**: NLP processing and antonym mapping
 
 ### analysis/ - Analysis Outputs
+
 ```text
 ```
+
 data/analysis/
 └── [Analysis output files go here]
+
 ```
 
 
@@ -183,6 +206,7 @@ data/analysis/
 
 ### exports/ - Export Files
 ```text
+```text
 ```
 data/exports/
 └── [Export files go here]
@@ -190,12 +214,15 @@ data/exports/
 
 
 
+
 **Purpose**: Expansion directory for exported data
 ##
 
 ## ⚙️ Configuration (config/)
+
 ```text
 ```
+
 config/
 ├── package.json              Node.js dependencies
 ├── package-lock.json         Locked dependency versions
@@ -204,6 +231,7 @@ config/
 ├── requirements-nlp.txt      NLP-specific dependencies
 ├── requirements-voice.txt    Voice interface dependencies
 └── runtime.txt               Python runtime specification
+
 ```
 
 
@@ -214,6 +242,7 @@ config/
 
 ## 📜 Scripts (scripts/)
 ```text
+```text
 ```
 scripts/
 ├── deploy.sh                 Production deployment script
@@ -222,19 +251,23 @@ scripts/
 
 
 
+
 **Total**: 2 shell scripts
 **Purpose**: Automation for deployment and local setup
 ##
 
 ## 🔍 Logs (logs/)
+
 ```text
 ```
+
 logs/
 ├── debug_chat.log
 ├── fastapi.log
 ├── glyph_generation.log
 ├── streamlit.log
 └── streamlit_tonecore.log
+
 ```
 
 
@@ -245,10 +278,12 @@ logs/
 
 ## 🎨 Frontend (frontend/)
 ```text
+```text
 ```
 frontend/
 └── test.js                   Frontend test file
 ```
+
 
 
 
@@ -259,12 +294,15 @@ frontend/
 ## 🏛️ Modularized Application (emotional_os/)
 
 ### emotional_os/utils/
+
 ```text
 ```
+
 emotional_os/utils/
 ├── svg_loader.py
 ├── css_injector.py
 └── styling_utils.py
+
 ```
 
 
@@ -273,6 +311,7 @@ emotional_os/utils/
 
 ### emotional_os/session/
 ```text
+```text
 ```
 emotional_os/session/
 └── session_manager.py        Session state management
@@ -280,16 +319,20 @@ emotional_os/session/
 
 
 
+
 **Purpose**: User session handling
 
 ### emotional_os/ui/
+
 ```text
 ```
+
 emotional_os/ui/
 ├── ui_refactored.py          Consolidated UI module (~200 lines)
 ├── header_ui.py              Header rendering
 ├── sidebar_ui.py             Sidebar navigation
 └── chat_display.py           Chat message display
+
 ```
 
 
@@ -297,6 +340,7 @@ emotional_os/ui/
 **Purpose**: UI component organization
 
 ### emotional_os/response/
+```text
 ```text
 ```
 emotional_os/response/
@@ -306,16 +350,20 @@ emotional_os/response/
 
 
 
+
 **Purpose**: Response processing logic
 
 ### emotional_os/features/
+
 ```text
 ```
+
 emotional_os/features/
 ├── document_processor.py
 ├── learning_tracker.py
 ├── journal_center.py
 └── theme_manager.py
+
 ```
 
 
@@ -323,6 +371,7 @@ emotional_os/features/
 **Purpose**: Optional feature modules
 
 ### emotional_os/glyphs/
+```text
 ```text
 ```
 emotional_os/glyphs/
@@ -334,13 +383,17 @@ emotional_os/glyphs/
 
 
 
+
 **Purpose**: Glyph system implementation
 
 ### emotional_os/parser/
+
 ```text
 ```
+
 emotional_os/parser/
 └── [NLP parsing modules]
+
 ```
 
 
@@ -349,6 +402,7 @@ emotional_os/parser/
 
 ### emotional_os/learning/
 ```text
+```text
 ```
 emotional_os/learning/
 └── [Learning system modules]
@@ -356,13 +410,17 @@ emotional_os/learning/
 
 
 
+
 **Purpose**: Learning and memory management
 
 ### emotional_os/core/
+
 ```text
 ```
+
 emotional_os/core/
 └── [Core system modules]
+
 ```
 
 
@@ -374,6 +432,7 @@ emotional_os/core/
 
 ### tools/analysis/
 ```text
+```text
 ```
 tools/analysis/
 ├── gate_distribution_analyzer.py
@@ -384,16 +443,20 @@ tools/analysis/
 
 
 
+
 **Purpose**: Analysis and reporting utilities
 
 ### tools/document_processing/
+
 ```text
 ```
+
 tools/document_processing/
 ├── docx_reader.py
 ├── docx_viewer.py
 ├── docx_web_viewer.py
 └── __init__.py
+
 ```
 
 
@@ -401,6 +464,7 @@ tools/document_processing/
 **Purpose**: Document handling utilities
 
 ### tools/glyph_testing/
+```text
 ```text
 ```
 tools/glyph_testing/
@@ -411,14 +475,17 @@ tools/glyph_testing/
 
 
 
+
 **Purpose**: Glyph testing and validation
 ##
 
 ## 📦 Organized Archives (archive/)
 
 ### archive/phase_infrastructure/
+
 ```text
 ```
+
 archive/phase_infrastructure/
 ├── phase_1_generator.py
 ├── phase_2_pruner.py
@@ -428,6 +495,7 @@ archive/phase_infrastructure/
 ├── phase_4_ritual_tester.py
 ├── phase_modulator.py
 └── __init__.py
+
 ```
 
 
@@ -436,6 +504,7 @@ archive/phase_infrastructure/
 ##
 
 ## 🧪 Tests (tests/)
+```text
 ```text
 ```
 tests/
@@ -446,6 +515,7 @@ tests/
 │   └── sprint5_integration.py
 └── [Other test modules]
 ```
+
 
 
 

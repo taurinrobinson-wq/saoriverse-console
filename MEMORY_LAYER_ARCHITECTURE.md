@@ -12,14 +12,17 @@ The conversation memory layer transforms the system from responding to isolated 
 ### Turn 1: "I'm feeling so stressed today"
 
 **What we extract:**
+
 ```text
 ```
+
 actor: I
 primary_affects: [stress]
 tense: present
 emphasis: so (high intensity)
 temporal_scope: today
 glyph: Still Insight
+
 ```
 
 
@@ -36,6 +39,7 @@ glyph: Still Insight
 **Memory stores:**
 
 ```json
+
 {
   "primary_affects": ["stress"],
   "intensity": "medium",
@@ -46,8 +50,10 @@ glyph: Still Insight
     "How does it manifest?",
     "What have you tried?"
   ]
+
 ```text
 ```
+
 
 
 ##
@@ -63,6 +69,7 @@ secondary_affects: [paralysis, immobility] <- NEW MANIFESTATIONS
 thought_patterns: [flooding, incomplete thinking]
 action_capacity: paralyzed <- CRITICAL: unable to move forward
 ```text
+```text
 ```
 
 
@@ -70,11 +77,14 @@ action_capacity: paralyzed <- CRITICAL: unable to move forward
 **The causal chain emerges:**
 
 ```
+
 Work demands
   → too much on mind (cognitive flooding)
   → cannot prioritize (fragmentation)
+
 ```text
 ```
+
 
 
 
@@ -114,6 +124,7 @@ Work demands
     "How long has this been building?"
   ]
 ```text
+```text
 ```
 
 
@@ -124,12 +135,15 @@ Work demands
 **What this message adds:**
 
 ```
+
 specificity: 5 projects (QUANTIFIED)
 priority: client presentation (TIME-CRITICAL: Thursday)
 state: unstarted deck (BLOCKING FACTOR)
 domains: work + client work (CLIENT WORK IS PRIMARY)
+
 ```text
 ```
+
 
 
 
@@ -140,6 +154,7 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
   → Client deck is due Thursday (most urgent)
   → Deck not started yet (blocking progress)
   → Cannot prioritize/act (cognitive paralysis)
+```text
 ```text
 ```
 
@@ -154,6 +169,7 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
 **Memory final state:**
 
 ```json
+
 {
   "primary_affects": ["stress", "cognitive_overload", "pressure", "urgency"],
   "secondary_affects": ["paralysis", "immobility", "anxiety", "overwhelm"],
@@ -178,8 +194,10 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
     "What's minimum viable deck?",
     "Who can help prepare?"
   ]
+
 ```text
 ```
+
 
 
 ##
@@ -198,6 +216,7 @@ Turn 2: "Too much on my mind"
 Turn 3: "5 projects, Thursday deadline"
         Response: "Have you prioritized them?"
 ```text
+```text
 ```
 
 
@@ -205,6 +224,7 @@ Turn 3: "5 projects, Thursday deadline"
 **WITH Memory (contextual understanding):**
 
 ```
+
 Turn 1: "I'm stressed"
         Response: "I hear you're feeling stress today."
         Memory: Confidence 0.7, needs causation
@@ -219,8 +239,10 @@ Turn 3: "5 projects, Thursday deadline"
         Response: "I hear you - work has flooded your mind with so many
                   competing demands that even one step forward feels impossible.
                   Which of these 5 could potentially wait?"
+
 ```sql
 ```
+
 
 
 
@@ -272,6 +294,7 @@ class SystemKnowledge:
     high_confidence_needs: List[str]  # What we need to know most
     low_confidence_needs: List[str]  # What would be nice to know
 ```text
+```text
 ```
 
 
@@ -308,6 +331,7 @@ class SystemKnowledge:
 ## Implementation in Dynamic Response Composer
 
 ```python
+
 class DynamicResponseComposer:
     def compose_response_with_memory(
         self,
@@ -336,8 +360,10 @@ class DynamicResponseComposer:
         clarification = "Which of these could wait?"
 
         # 5. Combine
+
 ```text
 ```
+
 
 
 ##
@@ -350,6 +376,7 @@ class DynamicResponseComposer:
 Turn 1: 1 fact (stressed)
 Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinking)
 ```text
+```text
 ```
 
 
@@ -357,10 +384,13 @@ Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinki
 ### Confidence Progression
 
 ```
+
 0.7 (isolated emotion)
   → 0.85 (causal mechanism revealed)
+
 ```text
 ```
+
 
 
 
@@ -371,6 +401,7 @@ Still Insight (stress is emerging/becoming clear)
   → Add Quiet Revelation (thoughts arriving without organization)
   → Add Fragmentation (unable to prioritize/integrate)
 ```text
+```text
 ```
 
 
@@ -378,9 +409,11 @@ Still Insight (stress is emerging/becoming clear)
 ### Response Quality Jump
 
 ```
+
 "I hear you're stressed."
   → "Work has flooded your mind with competing demands."
   → "Which of these 5 could we push back?"
+
 ```
 
 

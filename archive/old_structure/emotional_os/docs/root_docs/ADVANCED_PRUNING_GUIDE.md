@@ -34,6 +34,7 @@ LOW SIGNAL: "Generic Feeling"
 
 
 
+
 ### 2. **Trace Role Redundancy**
 - **Metric:** `redundancy_score` (0-1, inverse)
 - **Logic:** Glyphs with identical trace roles are redundant
@@ -66,6 +67,7 @@ DISTINCT:
 
 
 
+
 ### 3. **Usage Frequency & Match History**
 - **Metric:** `activation_score` (0-1)
 - **Data:** Glyphs that match user inputs or appear in harness runs
@@ -87,6 +89,7 @@ INACTIVE: Never matched
 
 
 
+
 **Integration Point:** You'll need to log glyph matches:
 
 ```python
@@ -96,6 +99,7 @@ match_history[glyph_id] = match_history.get(glyph_id, 0) + 1
 
 # Save periodically to match_history.json
 ```
+
 
 
 
@@ -121,6 +125,7 @@ PRUNING DECISION:
   - Hallowed glyph: tone_score = 1 - 0.15 = 0.85 (good)
   - Velvet glyph: tone_score = 1 - 0.03 = 0.97 (excellent) ✓ PROTECT
 ```
+
 
 
 
@@ -156,6 +161,7 @@ ISOLATED (0.0):
 ```
 
 
+
 ##
 
 ## 📊 Scoring Formula
@@ -181,6 +187,7 @@ score < 0.25  → CANDIDATE FOR PRUNING (confidence: 70%)
 ```
 
 
+
 ##
 
 ## 🔧 Optional Enhancements
@@ -199,6 +206,7 @@ families = {
 
 # Prune semantic duplicates
 ```
+
 
 
 
@@ -231,6 +239,7 @@ archive = {
 
 
 
+
 ### 3. **Pruning Confidence Scoring**
 Auditability with confidence in each decision:
 
@@ -255,6 +264,7 @@ pruned_glyph = {
 
 # Low confidence (< 0.70): Should review manually
 ```
+
 
 
 ##
@@ -293,6 +303,7 @@ report = engine.create_pruning_report(
 
 
 
+
 ### Integration with Factorial Engine
 
 ```python
@@ -323,6 +334,7 @@ factorial_engine.sync_to_json(approved_combos)
 
 
 
+
 ### With Match History
 
 To track which glyphs are actually used:
@@ -343,6 +355,7 @@ pruning_engine = AdvancedPruningEngine(
     match_history_path="emotional_os/glyphs/glyph_match_history.json"
 )
 ```
+
 
 
 ##
@@ -388,6 +401,7 @@ Comprehensive report with all evaluations and statistics:
 
 
 
+
 ### pruned_glyphs_overgrowth_control_*.json
 Archive of pruned glyphs for potential resurrection.
 ##
@@ -420,6 +434,7 @@ Archive of pruned glyphs for potential resurrection.
 │  │  └─ YES → KEEP (protected)
 │  └─ NO → PRUNE (candidate for archival)
 ```
+
 
 
 ##

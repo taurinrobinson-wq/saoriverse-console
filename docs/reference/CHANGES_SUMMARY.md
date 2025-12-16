@@ -73,6 +73,7 @@ if new_glyphs:
     st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
     for glyph in new_glyphs:
 ```text
+```text
 ```
 
 
@@ -84,6 +85,7 @@ if new_glyphs:
 **What Changed**: Added sidebar section to display discovered glyphs
 
 ```python
+
 
 # NEW: Sidebar expander showing discovered glyphs
 with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
@@ -97,8 +99,10 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 
         # NEW: Export button
         if st.button("📥 Export Discovered Glyphs"):
+
 ```text
 ```
+
 
 
 
@@ -113,6 +117,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 learning/
 ├── generated_glyphs/              # (created by verify_integration.sh)
 ```text
+```text
 ```
 
 
@@ -120,6 +125,7 @@ learning/
 ### New JSON Files (created during runtime)
 
 ```
+
 learning/
 ├── conversation_glyphs.json       # Registry of all discovered glyphs
 │   {
@@ -143,8 +149,10 @@ learning/
 │       "total_discovered": 5,
 │       "last_updated": "2025-11-03T..."
 │     }
+
 ```text
 ```
+
 
 
 ##
@@ -175,6 +183,7 @@ Match to Fixed Glyphs
 Return Response
   ↓
 ```text
+```text
 ```
 
 
@@ -182,6 +191,7 @@ Return Response
 ### After (New)
 
 ```
+
 User Message
   ↓
 Hybrid Processor Activated (if hybrid mode)
@@ -204,8 +214,10 @@ UI Shows:
 Data Persisted:
   • learning/conversation_glyphs.json
   • learning/user_overrides/{user_id}_lexicon.json
+
 ```text
 ```
+
 
 
 ##
@@ -242,6 +254,7 @@ st.session_state['new_glyphs_this_session']  (Session Memory)
 learning/conversation_glyphs.json            (Persistent)
   ↓
 ```text
+```text
 ```
 
 
@@ -254,8 +267,10 @@ All in `dynamic_glyph_evolution.py`:
 ### Frequency Threshold (Line ~82)
 
 ```python
+
 ```text
 ```
+
 
 
 - Lower value = glyphs appear faster but with less certainty
@@ -270,6 +285,7 @@ emotion_symbols = {
     "vulnerability": "🌱",
     # ... customize as needed
 ```text
+```text
 ```
 
 
@@ -277,12 +293,15 @@ emotion_symbols = {
 ### Glyph Naming (Method `_create_pattern_name`)
 
 ```python
+
 name_map = {
     ("love", "intimacy"): "Intimate Connection",
     ("love", "vulnerability"): "Open-Hearted Love",
     # ... add your own patterns
+
 ```text
 ```
+
 
 
 ##
@@ -312,6 +331,7 @@ name_map = {
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -326,6 +346,7 @@ Verifies:
 ### Manual Check
 
 ```python
+
 from hybrid_processor_with_evolution import create_integrated_processor
 
 # Should import successfully
@@ -341,6 +362,7 @@ result = processor.process_user_message(
 
 ```text
 ```
+
 
 
 ##
@@ -398,6 +420,7 @@ streamlit run main_v2.py
 # 6. Check persistence
 cat learning/conversation_glyphs.json
 ```
+
 
 
 ##

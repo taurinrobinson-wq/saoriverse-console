@@ -16,6 +16,7 @@ Welcome to SaoriVerse Console! This guide helps you find what you need quickly.
 python core/main_v2.py        # Start Streamlit dev app
 bash scripts/run_local.sh      # Run with full setup
 ```text
+```text
 ```
 
 
@@ -104,8 +105,10 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 **Start the application**
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -125,6 +128,7 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -132,8 +136,10 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 **Set up locally**
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -164,6 +170,7 @@ saoriverse-console/
 ├── tools/                    ← Analysis and testing tools
 ├── tests/                    ← Test suites
 ```text
+```text
 ```
 
 
@@ -183,6 +190,7 @@ saoriverse-console/
 Everything working? Run this:
 
 ```bash
+
 python -c "
 import sys
 from pathlib import Path
@@ -190,6 +198,7 @@ sys.path.insert(0, str(Path.cwd()))
 from core.main_response_engine import translate_emotional_response
 print('✅ All systems operational!')
 "
+
 ```
 
 

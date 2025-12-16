@@ -72,6 +72,7 @@ export const dialogueDatabase: Record<string, DialogueNode> = {
   },
   // More dialogue nodes...
 ```sql
+```sql
 ```
 
 
@@ -83,11 +84,14 @@ export const dialogueDatabase: Record<string, DialogueNode> = {
 Add support for tracking which choice was made:
 
 ```typescript
+
 interface GameSceneProps {
   // ... existing props
   onChoiceClick: (choiceId: string, choiceIndex: number) => void;
+
 ```text
 ```
+
 
 
 
@@ -140,6 +144,7 @@ export function useDialogue() {
 
   return { handleDialogueChoice, dialogueDatabase };
 ```text
+```text
 ```
 
 
@@ -149,6 +154,7 @@ export function useDialogue() {
 **File to create**: `velinor-web/src/components/DialogueRenderer.tsx`
 
 ```typescript
+
 import { useGameStore } from '@/lib/gameStore';
 import { useDialogue } from '@/lib/useDialogue';
 import GameScene from './GameScene';
@@ -181,8 +187,10 @@ export default function DialogueRenderer() {
       }}
     />
   );
+
 ```sql
 ```
+
 
 
 
@@ -204,6 +212,7 @@ Replace the hardcoded GameScene with DialogueRenderer:
 
 // New:
 ```text
+```text
 ```
 
 
@@ -213,6 +222,7 @@ Replace the hardcoded GameScene with DialogueRenderer:
 **File to create**: `velinor-web/src/lib/npcData.ts`
 
 ```typescript
+
 interface NPC {
   id: string;
   name: string;
@@ -237,8 +247,10 @@ export const NPCDatabase: Record<string, NPC> = {
     ]
   },
   // ... more NPCs
+
 ```text
 ```
+
 
 
 
@@ -327,6 +339,7 @@ velinor-web/src/
     └── game/[sessionId]/
         └── page.tsx           (Updated - use DialogueRenderer)
 ```
+
 
 
 

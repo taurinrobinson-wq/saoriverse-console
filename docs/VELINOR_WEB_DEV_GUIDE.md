@@ -15,6 +15,7 @@ cd "/Volumes/My Passport for Mac/saoriverse-console"
 
 # Run the dev server
 ```text
+```text
 ```
 
 
@@ -22,9 +23,12 @@ cd "/Volumes/My Passport for Mac/saoriverse-console"
 Or manually:
 
 ```bash
+
 cd velinor-web
+
 ```text
 ```
+
 
 
 
@@ -63,6 +67,7 @@ velinor-web/
 ├── package.json
 ├── next.config.ts
 ├── tsconfig.json
+```text
 ```text
 ```
 
@@ -104,6 +109,7 @@ The dev server automatically reloads when you save files—just edit and refresh
 
 ```bash
 
+
 # Start dev server (3000)
 npm run dev
 
@@ -114,8 +120,10 @@ npm run build
 npm start
 
 # Lint code
+
 ```text
 ```
+
 
 
 
@@ -125,6 +133,7 @@ Styling uses Tailwind CSS v4. Add classes directly to JSX elements:
 ```tsx
 <div className="bg-slate-900 text-white p-8 rounded-lg">
   <h1 className="text-3xl font-bold">Game Title</h1>
+```text
 ```text
 ```
 
@@ -181,11 +190,14 @@ The FastAPI backend is in `velinor_api.py` (295 lines). To use it:
 
 ```bash
 
+
 # Make sure nvm is loaded
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
+
 ```text
 ```
+
 
 
 
@@ -197,6 +209,7 @@ source "$NVM_DIR/nvm.sh"
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
 # Or use a different port
+```text
 ```text
 ```
 
@@ -236,12 +249,15 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 ### Display a background image
 
 ```tsx
+
 <img
   src="/assets/backgrounds/city_market(16-9).png"
   alt="Market Ruins"
   className="w-full h-96 object-cover rounded-lg"
+
 ```text
 ```
+
 
 
 
@@ -253,6 +269,7 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
   alt="Keeper"
   className="h-96 object-contain"
 ```text
+```text
 ```
 
 
@@ -260,6 +277,7 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 ### Create choice buttons
 
 ```tsx
+
 {choices.map((choice) => (
   <button
     key={choice.id}
@@ -268,8 +286,10 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
   >
     {choice.text}
   </button>
+
 ```text
 ```
+
 
 
 
@@ -289,6 +309,7 @@ const makeAction = async (input: string) => {
   }
 };
 ```
+
 
 
 ##

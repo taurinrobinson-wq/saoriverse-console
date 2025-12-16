@@ -51,6 +51,7 @@ Stage 5: STORAGE
 
 
 
+
 ## Files Involved
 
 ### New Files (Created)
@@ -100,6 +101,7 @@ grep -r "\.table\(" emotional_os/
 
 
 
+
 Typical locations:
 - REST API endpoints (FastAPI/Flask)
 - Background workers
@@ -121,6 +123,7 @@ db.table("conversations").insert({
     "signals": result["signals"],
 }).execute()
 ```
+
 
 
 
@@ -147,6 +150,7 @@ if not success:
     logger.error(f"Failed to store encoded conversation: {record_id}")
     # Handle error appropriately
 ```
+
 
 
 
@@ -184,6 +188,7 @@ CREATE INDEX idx_timestamp_week ON conversation_logs_anonymized(timestamp_week);
 
 
 
+
 **Migrate existing data (if needed):**
 
 ```sql
@@ -204,6 +209,7 @@ VALUES (
     'Migrated to anonymized schema for GDPR/CCPA/HIPAA compliance'
 );
 ```
+
 
 
 
@@ -282,6 +288,7 @@ class TestDataEncoding(unittest.TestCase):
 
 
 
+
 ### Step 5: Verify K-Anonymity
 
 **Monthly compliance check:**
@@ -295,6 +302,7 @@ verifier.run_monthly_compliance_check(db_connection)
 
 # Generates report in: compliance_reports/[date]_compliance_report.json
 ```
+
 
 
 
@@ -315,6 +323,7 @@ verifier.run_monthly_compliance_check(db_connection)
 
 
 
+
 ### STORED (Encoded/Generalized)
 
 ```
@@ -329,6 +338,7 @@ verifier.run_monthly_compliance_check(db_connection)
 
 
 
+
 ## Encryption & Security
 
 ### In Transit (TLS 1.3)
@@ -337,6 +347,7 @@ verifier.run_monthly_compliance_check(db_connection)
 User Client ─────[TLS 1.3]────→ FirstPerson API ─────[TLS 1.3]────→ Supabase
               All data encrypted
 ```
+
 
 
 
@@ -352,6 +363,7 @@ Database: Supabase
     └─ encoded_gates: Codes (no personal info)
     └─ glyph_ids: IDs only (no content)
 ```
+
 
 
 
@@ -382,6 +394,7 @@ def export_user_data(user_id: str):
 
 
 
+
 ### User Data Deletion
 
 ```python
@@ -401,6 +414,7 @@ def delete_user_data(user_id: str):
 
     return {"status": "deleted", "timestamp": datetime.now().isoformat()}
 ```
+
 
 
 
@@ -430,6 +444,7 @@ All data access is logged:
   ip_address: 192.168.1.100
   mfa_verified: true
 ```
+
 
 
 
@@ -506,6 +521,7 @@ python emotional_os/privacy/run_compliance_check.py
 
 
 
+
 ## Monitoring & Alerts
 
 ### Alert Conditions
@@ -527,6 +543,7 @@ User Message → parse_input() → Response
 
 
 
+
 **After Integration:**
 
 ```
@@ -539,6 +556,7 @@ User Message → parse_input() → Response
    Only anonymized data → Supabase ✓
    Raw text discarded (never stored)
 ```
+
 
 
 

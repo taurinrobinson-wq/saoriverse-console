@@ -3,8 +3,10 @@
 Organized test suite for the FirstPerson / Emotional OS system.
 
 ## Structure
+
 ```text
 ```
+
 tests/
 ├── conftest.py                 # Pytest configuration (shared fixtures)
 ├── run_tests.py               # Test runner script
@@ -24,6 +26,7 @@ tests/
 └── performance/               # Performance & evolution tests
     ├── test_evolution_trigger.py
     └── test_evolving_glyphs.py
+
 ```
 
 
@@ -33,6 +36,7 @@ tests/
 ### Using the test runner script
 
 ```bash
+
 
 # Run all tests
 python tests/run_tests.py
@@ -47,8 +51,10 @@ python tests/run_tests.py integration
 python tests/run_tests.py performance
 
 # Run with verbose output
+
 ```text
 ```
+
 
 
 
@@ -74,6 +80,7 @@ pytest tests/unit/test_signal_matching.py::test_signal_matching
 pytest -v tests/
 
 # Run with markers
+```text
 ```text
 ```
 
@@ -107,9 +114,12 @@ Tests focused on system evolution and performance:
 ### Prerequisites
 
 ```bash
+
 pip install -r requirements.txt
+
 ```text
 ```
+
 
 
 
@@ -117,6 +127,7 @@ pip install -r requirements.txt
 
 ```bash
 cd /workspaces/saoriverse-console
+```text
 ```text
 ```
 
@@ -148,9 +159,12 @@ Some integration tests require local database setup:
 
 ```bash
 
+
 # Initialize glyphs database
+
 ```text
 ```
+
 
 
 
@@ -174,6 +188,7 @@ def test_something():
     from emotional_os.glyphs import some_function
     result = some_function()
 ```text
+```text
 ```
 
 
@@ -185,8 +200,10 @@ def test_something():
 For GitHub Actions or other CI systems:
 
 ```yaml
+
 - name: Run tests
   run: python tests/run_tests.py
+
 ```
 
 

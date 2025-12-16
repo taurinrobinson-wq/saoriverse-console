@@ -22,6 +22,7 @@ Store Learning Data → Build Local Vocabulary
 
 
 
+
 ## 🚀 **Current Performance + Learning:**
 
 - **Learned Responses**: <0.5s (eventual OpenAI replacement)
@@ -59,6 +60,7 @@ After deployment, the system will:
 
 
 
+
 ## 🎯 **End Goal:**
 
 **Month 1**: OpenAI calls for everything (current fast 2.65s)
@@ -84,6 +86,7 @@ CREATE TABLE response_learning (
   last_updated TEXT
 );
 ```
+
 
 
 

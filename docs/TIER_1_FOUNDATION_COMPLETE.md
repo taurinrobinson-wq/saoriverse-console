@@ -40,8 +40,10 @@ Tests cover:
 - Component availability
 
 ## Architecture: 7-Stage Pipeline
+
 ```text
 ```
+
 Stage 1: Memory Tracking (0-3ms)
 ├─ Add turn to ConversationMemory for context tracking
 ├─ Falls back gracefully if not available
@@ -75,6 +77,7 @@ Stage 6: Compassion Wrapping (25-35ms)
 Stage 7: Final Memory Update (35-38ms)
 ├─ Update memory with wrapped response
 └─ Perf: ~1-2ms
+
 ```
 
 
@@ -82,6 +85,7 @@ Stage 7: Final Memory Update (35-38ms)
 **Total Target:** <100ms (currently achieving ~35-40ms in tests)
 
 ## Performance Results
+```text
 ```text
 ```
 ✓ Initialization:        0.41s (one-time)
@@ -92,6 +96,7 @@ Stage 7: Final Memory Update (35-38ms)
 
 Performance headroom: ~60ms available for future stages
 ```
+
 
 
 
@@ -111,6 +116,7 @@ enhanced_response, metrics = self.tier1.process_response(
     base_response=generated_response,
     context=session_context,
 ```text
+```text
 ```
 
 
@@ -119,12 +125,15 @@ enhanced_response, metrics = self.tier1.process_response(
 
 ```python
 
+
 # In Streamlit session initialization
 if "tier1_foundation" not in st.session_state:
     st.session_state.tier1_foundation = Tier1Foundation(
         conversation_memory=st.session_state.conversation_memory
+
 ```text
 ```
+
 
 
 
@@ -237,6 +246,7 @@ Available for Tiers 2-4: ~60ms (60%)
 ├─ Depth (Tier 3):      20ms
 ├─ Memory (Tier 4):     15ms
 ```text
+```text
 ```
 
 
@@ -244,6 +254,7 @@ Available for Tiers 2-4: ~60ms (60%)
 ## File Structure
 
 ```
+
 src/emotional_os/
 ├─ tier1_foundation.py      (220 lines) - Main implementation
 ├─ core/
@@ -254,6 +265,7 @@ src/emotional_os/
 
 tests/
 └─ test_tier1_foundation.py (220 lines) - Test suite
+
 ```
 
 

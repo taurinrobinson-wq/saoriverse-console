@@ -25,6 +25,7 @@ python main_v2_simple.py
 
 # or
 ```text
+```text
 ```
 
 
@@ -32,8 +33,10 @@ python main_v2_simple.py
 **After:**
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -45,6 +48,7 @@ pytest tests/
 pytest .                # Also ran root tests
 
 ```text
+```text
 ```
 
 
@@ -52,10 +56,13 @@ pytest .                # Also ran root tests
 **After:**
 
 ```bash
+
 pytest tests/           # All tests
 pytest tests/unit/      # Just unit tests
+
 ```text
 ```
+
 
 
 
@@ -66,6 +73,7 @@ pytest tests/unit/      # Just unit tests
 find . -name "*response*" | grep -v __pycache__
 
 ```text
+```text
 ```
 
 
@@ -73,12 +81,14 @@ find . -name "*response*" | grep -v __pycache__
 **After:**
 
 ```bash
+
 ls src/
 
 # response_generator.py, response_adapter.py, response_selector.py
 
 ```text
 ```
+
 
 
 
@@ -90,6 +100,7 @@ ls src/
 2. Update imports in 5+ places
 3. Add test somewhere unclear
 ```text
+```text
 ```
 
 
@@ -97,11 +108,14 @@ ls src/
 **After:**
 
 ```
+
 1. Add code to src/your_module.py
 2. Add test to tests/unit/test_your_module.py
 3. Run: pytest tests/unit/test_your_module.py
+
 ```text
 ```
+
 
 
 
@@ -114,6 +128,7 @@ from parser.signal_parser import parse_input  # Which one?
 from src.signal_parser import parse_input
 
 ```text
+```text
 ```
 
 
@@ -121,8 +136,10 @@ from src.signal_parser import parse_input
 **After:**
 
 ```python
+
 ```text
 ```
+
 
 
 ##
@@ -156,6 +173,7 @@ saoriverse-console/
 │   ├── fixtures/
 │   └── ...
 ```text
+```text
 ```
 
 
@@ -163,6 +181,7 @@ saoriverse-console/
 ### New Structure (Clear)
 
 ```
+
 saoriverse-console/
 ├── app.py                    (single entry point)
 ├── README.md
@@ -197,8 +216,10 @@ saoriverse-console/
 │
 └── archive/                  (old code for reference)
     ├── old_structure/
+
 ```text
 ```
+
 
 
 ##
@@ -250,6 +271,7 @@ pytest tests/
 # - Hard to run specific tests
 
 ```text
+```text
 ```
 
 
@@ -257,11 +279,14 @@ pytest tests/
 ### After
 
 ```bash
+
 pytest tests/           # All tests
 pytest tests/unit/      # Fast unit tests (< 1 sec)
 pytest tests/integration/  # Slower integration tests (< 10 sec)
+
 ```text
 ```
+
 
 
 ##
@@ -276,6 +301,7 @@ pytest tests/integration/  # Slower integration tests (< 10 sec)
 from emotional_os.core.signal_parser import parse_input
 from parser.signal_parser import parse_input
 ```text
+```text
 ```
 
 
@@ -284,9 +310,12 @@ from parser.signal_parser import parse_input
 
 ```python
 
+
 # Clear single source of truth:
+
 ```text
 ```
+
 
 
 ##
@@ -320,6 +349,7 @@ git checkout pre-reorganization
 
 # Or: git reset --hard pre-reorganization
 
+```text
 ```text
 ```
 
@@ -374,6 +404,7 @@ Run these to verify everything works:
 
 ```bash
 
+
 # 1. App launches
 streamlit run app.py
 
@@ -398,6 +429,7 @@ python -c "from src import process_user_input; print('OK')"
 ls -1 *.py
 
 # Should show: app.py only
+
 ```
 
 

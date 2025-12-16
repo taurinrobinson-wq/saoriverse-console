@@ -2,8 +2,10 @@
 
 ## The Problem
 The backend was returning a generic, template-based response that didn't acknowledge the user's specific emotional experience:
+
 ```text
 ```
+
 User: "Lately, I wake up already exhausted, like my body is carrying a weight
 I can't set down. Even small tasks — answering emails, making breakfast for
 the kids — feel like climbing a mountain. I catch myself staring out the window,
@@ -15,6 +17,7 @@ OLD RESPONSE:
 "I hear you saying: '[full message repeated]'. That's significant enough to
 bring here. Can you tell me more about what's behind that? What's the weight
 underneath those words?"
+
 ```
 
 
@@ -33,6 +36,7 @@ Updated `generate_empathetic_response()` in `firstperson_backend.py` to:
 ### 1. **Detect Specific Emotional Patterns**
 
 ```python
+
 has_exhaustion = any(word in message_lower for word in
     ["exhausted", "exhaustion", "tired", "weary", "drained", "weight",
      "carrying", "burden", "heavy"])
@@ -42,8 +46,10 @@ has_momentum_loss = any(word in message_lower for word in
      "rushing by"])
 
 requests_presence = any(phrase in message_lower for phrase in
+
 ```text
 ```
+
 
 
 
@@ -64,6 +70,7 @@ if (has_exhaustion or themes["fatigue"]) and has_momentum_loss and requests_pres
 
         I'm sitting with you in this. You don't need to move right now. What does
         this exhaustion feel like in your body right now?"
+```text
 ```text
 ```
 
@@ -99,13 +106,16 @@ if (has_exhaustion or themes["fatigue"]) and has_momentum_loss and requests_pres
 The response now returns a more accurate glyph_intent:
 
 ```python
+
 {
     "voltage": "low",           # Quiet, not urgent
     "tone": "negative",         # Acknowledges the difficulty
     "attunement": "holding_space",  # NEW: Sitting with, not solving
     "certainty": "confident"    # Clear understanding of their need
+
 ```text
 ```
+
 
 
 
@@ -138,6 +148,7 @@ The function was also updated to handle:
 "There's something deep in what you just shared. Grief, loss, something being
 taken from you. I'm here with that. Not to make it better, but to acknowledge
 ```text
+```text
 ```
 
 
@@ -145,9 +156,12 @@ taken from you. I'm here with that. Not to make it better, but to acknowledge
 **Joy detection:**
 
 ```
+
 "There's light in what you're sharing. Something that matters, something worth
+
 ```text
 ```
+
 
 
 
@@ -157,6 +171,7 @@ taken from you. I'm here with that. Not to make it better, but to acknowledge
 "I hear the significance in what you just shared. There's something real there.
 What's the most important part of that for you to tell me about?"
 ```
+
 
 
 ##

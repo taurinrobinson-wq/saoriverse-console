@@ -621,8 +621,10 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 ##
 
 ## Critical Path Dependencies
+
 ```text
 ```
+
 TONE System
     ↓
 NPC Resonance
@@ -643,6 +645,7 @@ Marketplace NPCs
                     └── Final Chamber
                             ├── Saori & Velinor
                             └── 6 Ending Paths
+
 ```
 
 

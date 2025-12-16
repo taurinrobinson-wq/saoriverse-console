@@ -71,6 +71,7 @@ User Input → AffectParser
 ```
 
 
+
 ##
 
 ## Key Features
@@ -99,6 +100,7 @@ warm → joy category
 confused → confused category
 neutral → calm category
 ```
+
 
 
 
@@ -185,6 +187,7 @@ neutral → calm category
 ```
 
 
+
 ##
 
 ## Response Examples
@@ -201,6 +204,7 @@ Length: 91 chars (conversational)
 
 
 
+
 ### Example 2: Anxiety
 
 ```
@@ -213,6 +217,7 @@ Length: 82 chars
 
 
 
+
 ### Example 3: Anger
 
 ```
@@ -222,6 +227,7 @@ Glyph: Fire
 Response: "I feel that Fire. The anger is burning. What's fueling it most?"
 Length: 65 chars
 ```
+
 
 
 ##
@@ -307,6 +313,7 @@ Length: 65 chars
    - 21 new tests, all passing
    - Total: 219/219 tests passing
 ```
+
 
 
 ##

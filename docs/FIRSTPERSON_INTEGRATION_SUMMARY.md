@@ -7,15 +7,19 @@ Your Velinor game now has **emotionally-aware NPC responses** through FirstPerso
 ## 🎯 The Integration
 
 ### Before
+
 ```text
 ```
+
 Player: "I'm overwhelmed"
 NPC:    "I see. What would you like to do?"
+
 ```
 
 
 
 ### After (With FirstPerson)
+```text
 ```text
 ```
 Player: "I'm overwhelmed"
@@ -29,6 +33,7 @@ NPC:    "I hear the weight in that. The burden you're carrying—
          I feel it. What needs to be said about it? Sometimes
          the weight lessens when we name it."
 ```
+
 
 
 
@@ -66,9 +71,12 @@ NPC:    "I hear the weight in that. The burden you're carrying—
 ## 🧠 How It Works
 
 ### 1. Player Input
+
 ```text
 ```
+
 "I'm not sure I can handle this responsibility"
+
 ```
 
 
@@ -76,6 +84,7 @@ NPC:    "I hear the weight in that. The burden you're carrying—
 ### 2. FirstPerson Analysis
 
 ```python
+
 affect_parser.analyze_affect(input)
 → {
     'tone': 'heavy',
@@ -87,8 +96,10 @@ affect_parser.analyze_affect(input)
 memory.record_turn(input, affect, theme)
 → Tracks conversation history
 → Detects patterns across turns
+
 ```text
 ```
+
 
 
 
@@ -99,6 +110,7 @@ orchestrator.process_player_action(player_input)
 → Applies emotional analysis
 → Updates game state
 ```text
+```text
 ```
 
 
@@ -106,6 +118,7 @@ orchestrator.process_player_action(player_input)
 ### 4. NPC Response
 
 ```python
+
 _generate_emotionally_aware_response(
     emotional_tone='heavy',
     detected_theme='general',
@@ -113,8 +126,10 @@ _generate_emotionally_aware_response(
     memory_context={...}
 )
 → "I hear the weight in that. The path of responsibility
+
 ```text
 ```
+
 
 
 
@@ -122,6 +137,7 @@ _generate_emotionally_aware_response(
 
 ```
 NPC: "I hear the weight in that. The path of responsibility
+```text
 ```text
 ```
 
@@ -164,10 +180,13 @@ NPC: "I hear the weight in that. The path of responsibility
 ### Moment 1: Initial Contact
 
 ```
+
 You:   "I don't know if I'm ready for this"
 NPC:   "I hear the uncertainty in that. That's real.
+
 ```text
 ```
+
 
 
 
@@ -178,6 +197,7 @@ You:   "I keep coming back to my doubts"
 NPC:   "I'm hearing doubt come up again. That tells me
         something. What's beneath it?"
 ```text
+```text
 ```
 
 
@@ -185,12 +205,15 @@ NPC:   "I'm hearing doubt come up again. That tells me
 ### Moment 3: Emotional Shift
 
 ```
+
 You:   "But maybe I'm stronger than I thought"
 NPC:   "There's something to sit with there. I'm also
         noticing a shift in what you're saying.
         What's helping?"
+
 ```text
 ```
+
 
 
 
@@ -230,6 +253,7 @@ streamlit run velinor_app.py
 # FirstPerson automatically analyzes your inputs
 
 ```text
+```text
 ```
 
 
@@ -237,10 +261,12 @@ streamlit run velinor_app.py
 ### Validating the Integration
 
 ```bash
+
 python3 FIRSTPERSON_INTEGRATION_TEST.py
 
 ```text
 ```
+
 
 
 
@@ -296,6 +322,7 @@ NPC responds with personalized, emotionally-aware dialogue →
 Conversation memory tracks themes and patterns →
 Your emotional journey is reflected and honored in the game
 ```
+
 
 
 ##

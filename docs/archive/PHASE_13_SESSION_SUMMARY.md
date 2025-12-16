@@ -45,6 +45,7 @@ NEW: Match archetype → Extract principles → Generate unique response
 
 
 
+
 ### Sample Response Across Emotional Arc
 **Turn 1 (Overwhelm)**:
 - User: "I feel fragile... work has been relentless... pummeled by meetings"
@@ -82,6 +83,7 @@ NEW: Match archetype → Extract principles → Generate unique response
 
 
 
+
 ### Scenario 2 Dialogue Test
 
 ```
@@ -91,6 +93,7 @@ NEW: Match archetype → Extract principles → Generate unique response
 ✓ Continuity: Bridges maintained context across turns (turns 4 & 6 connected prior context)
 ✓ Persistence: Archetype library correctly saved and reloaded
 ```
+
 
 
 ##
@@ -116,6 +119,7 @@ LAYER 3: Conversation Learner
   ├─ Extracts new patterns (cues, principles, bridges, tone)
   └─ Creates new archetypes for library
 ```
+
 
 
 ##

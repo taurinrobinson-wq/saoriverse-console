@@ -27,6 +27,7 @@ ReliefToGratitude archetype contains:
 
 
 
+
 **Key Classes**:
 - `ConversationArchetype`: Single pattern (name, cues, principles, bridges, tone)
 - `ArchetypeLibrary`: Collection management (add, match, persist)
@@ -57,6 +58,7 @@ Extracts principles:
 Generates: "That moment with your child sounds genuinely special.
            What does that connection feel like for you?"
 ```
+
 
 
 
@@ -105,6 +107,7 @@ Extracts:
 
 New or refined archetype added to library
 ```
+
 
 
 
@@ -182,6 +185,7 @@ Sample Results:
 ## API Summary
 
 ```python
+
 
 
 
@@ -301,6 +305,7 @@ The playwright/organizer workflow (you write scenes, system extracts rules) keep
 ## Testing the System
 
 ```bash
+
 
 
 

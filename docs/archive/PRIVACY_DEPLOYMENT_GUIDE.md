@@ -83,6 +83,7 @@ Search for where conversations are stored:
 ```bash
 
 
+
 grep -r "supabase" emotional_os/core/signal_parser.py
 grep -r "\.insert\(" emotional_os/core/
 grep -r "conversation" emotional_os/core/signal_parser.py
@@ -93,6 +94,7 @@ grep -r "conversation" emotional_os/core/signal_parser.py
 
 **Current Flow (WRONG):**
 ```python
+
 
 
 
@@ -109,6 +111,7 @@ db.table("conversations").insert({
 
 **Fixed Flow (PRIVACY-FIRST):**
 ```python
+
 
 
 
@@ -140,6 +143,7 @@ else:
 **New table for anonymized data:**
 
 ```sql
+
 
 
 -- Create anonymized conversation storage
@@ -174,6 +178,7 @@ CREATE INDEX idx_timestamp_week ON conversation_logs_anonymized(timestamp_week);
 ### Step 4: Test in Development
 
 ```bash
+
 
 
 
@@ -231,6 +236,7 @@ print(f'Record: {record_id}')
 ```
 
 
+
 User: "I'm having thoughts of suicide"
       ↓
 [Received in memory - NOT stored]
@@ -251,6 +257,7 @@ Raw text DESTROYED (not persisted) ✓
 
 ### Database
 ```
+
 
 
 Raw text: ❌ NOT STORED
@@ -334,6 +341,7 @@ User cannot be re-identified:
 
 
 
+
 # Monthly compliance check
 from emotional_os.privacy.arx_integration import ARXAnonymityVerifier
 
@@ -356,6 +364,7 @@ verifier.run_monthly_compliance_check(db_connection)
 
 ### What to Track
 ```python
+
 
 
 
@@ -393,6 +402,7 @@ verifier.run_monthly_compliance_check(db_connection)
 If issues occur:
 
 ```sql
+
 
 
 -- Disable new encoding temporarily

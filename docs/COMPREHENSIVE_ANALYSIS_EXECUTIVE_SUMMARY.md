@@ -134,8 +134,10 @@ Complete safety and crisis infrastructure:
 ##
 
 ## HOW IT CURRENTLY WORKS (Not Integrated)
+
 ```text
 ```
+
 User Input
     ↓
 Basic signal parser (emotional_os.core) ← ONLY THIS RUNS
@@ -145,12 +147,14 @@ Glyph lookup
 Compose response ← TEMPLATE-BASED
     ↓
 Response
+
 ```
 
 
 ##
 
 ## HOW IT SHOULD WORK (Fully Integrated)
+```text
 ```text
 ```
 User Input
@@ -189,6 +193,7 @@ Learning & Growth
     ↓
 Response to User
 ```
+
 
 
 ##

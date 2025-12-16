@@ -117,6 +117,7 @@ from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
 
 
 
+
 ### Root-level modules:
 
 ```python
@@ -124,6 +125,7 @@ from parser.signal_parser import parse_input
 from learning.lexicon_learner import LexiconLearner
 from em_trace.trace_engine import save_trace_json
 ```
+
 
 
 
@@ -140,6 +142,7 @@ from emotional_os import ...
 
 
 
+
 ## Running the Application
 
 ```bash
@@ -150,6 +153,7 @@ streamlit run main_v2.py
 # Via startup script (production)
 python3 start.py
 ```
+
 
 
 

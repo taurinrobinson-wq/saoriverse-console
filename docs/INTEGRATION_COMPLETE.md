@@ -33,6 +33,7 @@ result = learner.learn_from_exchange(
 )
 
 ```text
+```text
 ```
 
 
@@ -47,6 +48,7 @@ result = learner.learn_from_exchange(
 **What users see:**
 
 ```
+
 📋 Memory & Sharing
 
 Your Identity:        Medical Details:    Sharing:
@@ -56,6 +58,7 @@ Your Identity:        Medical Details:    Sharing:
 
 ```text
 ```
+
 
 
 
@@ -125,6 +128,7 @@ User History Updated
     ├─ Visible to user
     ├─ Searchable
 ```text
+```text
 ```
 
 
@@ -135,6 +139,7 @@ User History Updated
 ### Basic: Use with All Defaults
 
 ```python
+
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 
 learner = HybridLearnerWithUserOverrides()  # Anonymization enabled by default
@@ -157,6 +162,7 @@ result = learner.learn_from_exchange(
 
 
 
+
 ### Advanced: Custom Anonymization Settings
 
 ```python
@@ -167,6 +173,7 @@ learner = HybridLearnerWithUserOverrides(
     allow_medical_details=True,  # Keep "depression" as-is
     allow_names=False  # Anonymize "Michelle" → "The Thread"
 ```text
+```text
 ```
 
 
@@ -174,6 +181,7 @@ learner = HybridLearnerWithUserOverrides(
 ### Streamlit: User Consent Flow
 
 ```python
+
 
 # In main_v2.py, after response:
 from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
@@ -184,6 +192,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 
 ```text
 ```
+
 
 
 ##
@@ -228,6 +237,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 
 📋 Memory & Sharing
 ```text
+```text
 ```
 
 
@@ -235,13 +245,16 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 ### 2. **Sidebar: Privacy & Consent**
 
 ```
+
 🛡️ Privacy & Consent
 ├─ Store names by default [toggle]
 ├─ Store medical details [toggle]
 ├─ View My Data Privacy Report [button]
 ├─ Delete All My Data [button]
+
 ```text
 ```
+
 
 
 
@@ -250,6 +263,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 ```python
 st.session_state['consent_allow_names'] = False
 st.session_state['consent_allow_medical'] = False
+```text
 ```text
 ```
 
@@ -296,6 +310,7 @@ To verify integration is working:
 
 ```bash
 
+
 # Test anonymization protocol
 python3 emotional_os/safety/anonymization_protocol.py
 
@@ -316,6 +331,7 @@ print('✅ Consent UI components available')
 streamlit run main_v2.py
 
 # Try making a query and look for consent widget after response
+
 ```
 
 

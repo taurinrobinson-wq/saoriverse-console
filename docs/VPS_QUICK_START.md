@@ -7,6 +7,7 @@ Copy-paste commands to get Velinor running on DigitalOcean.
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -42,8 +43,10 @@ Click **Save** and wait 5-10 minutes.
 ## 4️⃣ VPS: Run Setup Script
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -91,6 +94,7 @@ certbot certonly --standalone \
 docker compose -f docker-compose.prod.yml restart nginx-ssl
 
 ```text
+```text
 ```
 
 
@@ -99,8 +103,10 @@ docker compose -f docker-compose.prod.yml restart nginx-ssl
 ## 5️⃣ Test It
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -116,6 +122,7 @@ To deploy automatically on `git push main`:
 ```bash
 ssh root@YOUR_DROPLET_IP
 ssh-keygen -t ed25519 -f /root/.ssh/velinor_deploy -C "velinor-deploy" -N ""
+```text
 ```text
 ```
 
@@ -133,6 +140,7 @@ Copy the output.
 ### C. Create deploy script on VPS:
 
 ```bash
+
 ssh root@YOUR_DROPLET_IP
 
 cat > /opt/velinor/deploy.sh << 'EOF'
@@ -160,6 +168,7 @@ EOF
 
 
 
+
 ### D. Add GitHub Secrets:
 
 **Repo → Settings → Secrets and variables → Actions**
@@ -176,6 +185,7 @@ The `.github/workflows/deploy.yml` file is already in your repo and will auto-tr
 ```bash
 ssh root@YOUR_DROPLET_IP
 ```text
+```text
 ```
 
 
@@ -190,8 +200,10 @@ ssh root@YOUR_DROPLET_IP
 **Site shows nginx error**: Check containers are running with command above, or view logs:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -200,6 +212,7 @@ ssh root@YOUR_DROPLET_IP
 ```bash
 ls /etc/letsencrypt/live/velinor.firstperson.chat/
 ```
+
 
 
 

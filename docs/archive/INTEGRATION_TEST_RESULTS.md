@@ -31,6 +31,7 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
 
 
 
+
 **Fix Applied:**
 - Added 50+ crisis/mortality keywords to emotional detection
 - Added CRISIS_DETECTION check before greeting logic
@@ -71,6 +72,7 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
 
 
 
+
 **Problem:** Responses don't contain these words
 - "I hear that you're in real pain" ← contains "now"? No
 - "You're in territory without a map" ← contains urgency words? No
@@ -92,6 +94,7 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
 [fetch_glyphs] Gates: ['Gate 4', 'Gate 5', 'Gate 9']
 [fetch_glyphs] SQL: SELECT glyph_name ... FROM glyph_lexicon WHERE gate IN (?,?,?)
 ```
+
 
 
 But then: `glyphs: []`

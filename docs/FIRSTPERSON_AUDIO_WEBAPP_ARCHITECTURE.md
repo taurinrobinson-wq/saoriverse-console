@@ -7,8 +7,10 @@
 ## Current State
 
 ### What's Running
+
 ```text
 ```
+
 Digital Ocean VPS:
 ├── velinor.firstperson.chat (Next.js 16 + FastAPI backend)
 │   ├── Port 8000: FastAPI (velinor_api.py)
@@ -17,6 +19,7 @@ Digital Ocean VPS:
 │
 └── Docker Compose (docker-compose.prod.yml)
     └── Orchestrates: velinor API + nginx-ssl
+
 ```
 
 
@@ -30,6 +33,7 @@ Digital Ocean VPS:
 ## New Architecture: FirstPerson Audio App
 
 ### Proposed Setup
+```text
 ```text
 ```
 firstperson.chat (NEW subdomain):
@@ -61,6 +65,7 @@ firstperson.chat (NEW subdomain):
 
 
 
+
 ### Docker Compose Structure (Updated)
 
 ```yaml
@@ -89,6 +94,7 @@ services:
     depends_on:
       - velinor_api
 ```text
+```text
 ```
 
 
@@ -97,14 +103,17 @@ services:
 
 ```nginx
 
+
 # Existing
 server_name velinor.firstperson.chat;
 location / { proxy_pass http://velinor_api:8000; }
 
 # NEW
 server_name firstperson.chat;
+
 ```text
 ```
+
 
 
 
@@ -168,6 +177,7 @@ from emotional_os.deploy.modules.audio_conversation_orchestrator import AudioCon
 from emotional_os.deploy.modules.prosody_planner import ProsodyPlanner
 from emotional_os.deploy.modules.nlp_init import warmup_nlp
 ```sql
+```sql
 ```
 
 
@@ -175,6 +185,7 @@ from emotional_os.deploy.modules.nlp_init import warmup_nlp
 ### Architecture Pattern (Copy from Velinor)
 
 ```python
+
 
 # velinor_api.py structure
 FastAPI app
@@ -185,6 +196,7 @@ FastAPI app
 
 ```text
 ```
+
 
 
 
@@ -209,6 +221,7 @@ POST /api/chat
 POST /api/synthesize
 { text: "...", glyph_intent: {...} }
 ```text
+```text
 ```
 
 
@@ -216,6 +229,7 @@ POST /api/synthesize
 ### Streaming (WebSocket)
 
 ```javascript
+
 // Real-time conversation
 ws.send({ type: 'transcribe_start' })
 // User speaks...
@@ -224,8 +238,10 @@ ws.send({ type: 'transcribe_end' })
 ← { type: 'transcript', text: '...' }
 ← { type: 'response_start' }
 ← { type: 'response_chunk', text: '...', audio: <chunk> }
+
 ```text
 ```
+
 
 
 
@@ -295,6 +311,7 @@ saoriverse-console/
 ├── nginx.prod.conf                # UPDATED - dual domain routing
 └── [existing files]
 ```
+
 
 
 

@@ -11,8 +11,10 @@ The previous implementation incorrectly made glyphs the PRIMARY driver of respon
 ### 1. Parse User's Message Semantically
 
 Extract linguistic elements:
+
 ```text
 ```
+
 User Input: "I'm feeling so stressed today"
 
 1. ACTOR: "I" → personal, visceral, felt
@@ -21,6 +23,7 @@ User Input: "I'm feeling so stressed today"
 4. ADVERB: "so" → emphasis/intensity marker
 5. ADJECTIVE: "stressed" → primary emotional state
 6. TEMPORAL: "today" → specific day, not past/future anxiety
+
 ```
 
 
@@ -28,6 +31,7 @@ User Input: "I'm feeling so stressed today"
 ### 2. Analyze What's Missing
 
 System identifies gaps in the message:
+```text
 ```text
 ```
 User said "I'm feeling so stressed today" but didn't say:
@@ -40,11 +44,14 @@ User said "I'm feeling so stressed today" but didn't say:
 
 
 
+
 ### 3. Build Response Structure
 
 **Acknowledgment** → Glyph Validation → Clarifying Question
+
 ```text
 ```
+
 Acknowledgment:
   "You're feeling stress right now—and you're emphasizing how much this is present."
   (Recognizes: present tense, emphasis, immediacy)
@@ -56,6 +63,7 @@ Glyph Validation:
 Clarifying Question:
   "What's creating this pressure right now?"
   (Targets missing context, emotionally themed)
+
 ```
 
 
@@ -63,6 +71,7 @@ Clarifying Question:
 ### 4. Generate Targeted Clarification
 
 Questions are specific to what's missing, not generic:
+```text
 ```text
 ```
 Missing Element                  Clarifying Question
@@ -76,11 +85,14 @@ Agency/attempt                  "What have you tried?"
 
 
 
+
 ## Examples
 
 ### Example 1: Minimal Information
+
 ```text
 ```
+
 User: "I'm sad"
 
 System Analysis:
@@ -95,11 +107,13 @@ Why this works:
   ✓ Acknowledges emotional state immediately
   ✓ Validates with glyph (without replacing user's message)
   ✓ Asks specific question about missing context (what's the loss)
+
 ```
 
 
 
 ### Example 2: Present Tense + Emphasis + Temporal
+```text
 ```text
 ```
 User: "I'm feeling so stressed today"
@@ -124,9 +138,12 @@ Why this works:
 
 
 
+
 ### Example 3: Continuous Past + No Specifics
+
 ```text
 ```
+
 User: "I've been feeling anxious lately"
 
 System Analysis:
@@ -143,11 +160,13 @@ Why this works:
   ✓ Recognizes ongoing nature (not just now)
   ✓ Uses glyph that addresses boundary/containment for anxiety
   ✓ Asks specific question about trigger (what are you worried about)
+
 ```
 
 
 
 ### Example 4: Rich Context
+```text
 ```text
 ```
 User: "I feel really overwhelmed with all the work and family responsibilities right now"
@@ -169,6 +188,7 @@ Why this works:
   ✓ Uses glyph about complexity/patterns
   ✓ Still asks clarifications (but about different missing elements)
 ```
+
 
 
 
@@ -227,19 +247,24 @@ Why this works:
    - Emotionally themed based on primary affect
 
 ### Response Structure
+
 ```json
 ```
+
 {acknowledgment}. {glyph_validation}. {clarifying_question}
+
 ```
 
 
 
 Example breakdown:
 ```text
+```text
 ```
 "You're feeling stress right now—and you're emphasizing how much this is present.
 What you're describing has a quality of quiet revelation. What's creating this pressure?"
 ```
+
 
 
 
@@ -277,6 +302,7 @@ python SEMANTIC_PARSING_WALKTHROUGH.py         # Detailed walkthrough
 python test_semantic_parsing.py                # Multiple cases
 python test_full_e2e_user_driven.py           # Full pipeline
 ```
+
 
 
 

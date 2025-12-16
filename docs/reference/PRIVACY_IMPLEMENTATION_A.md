@@ -21,6 +21,7 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
   "emotional_signals": [...],
   "glyphs": [...]
 ```text
+```text
 ```
 
 
@@ -36,6 +37,7 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
 **After (Privacy Safe):**
 
 ```json
+
 {
   "timestamp": "2025-11-03T07:45:08.298103",
   "user_id_hash": "c71a9a78e4dabef0",
@@ -44,8 +46,10 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
   "glyph_names": ["Recursive Grief", "Overwhelm Pattern"],
   "ai_response_length": 245,
   "exchange_quality": "logged"
+
 ```text
 ```
+
 
 
 
@@ -77,6 +81,7 @@ log_entry = {
     "emotional_signals": emotional_signals,
     "glyphs": glyphs,
 ```text
+```text
 ```
 
 
@@ -84,6 +89,7 @@ log_entry = {
 **After (Privacy Safe):**
 
 ```python
+
 log_entry = {
     "timestamp": datetime.now().isoformat(),
     "user_id_hash": user_id,  # Already hashed
@@ -94,8 +100,10 @@ log_entry = {
     "exchange_quality": "logged",
     # REMOVED: "user_input" (raw text)
     # REMOVED: "ai_response" (content)
+
 ```text
 ```
+
 
 
 
@@ -110,6 +118,7 @@ log_entry = {
 ```python
 entry = user_overrides["signals"][signal]
 ```text
+```text
 ```
 
 
@@ -117,14 +126,17 @@ entry = user_overrides["signals"][signal]
 **After (Privacy Safe):**
 
 ```python
+
 entry = user_overrides["signals"][signal]
 entry["example_contexts"].append({
     "keyword": keyword,
     "associated_signals": [...],  # Which signals co-occur
     "gates": [...],  # Which gates activate
     # NO user_input stored
+
 ```text
 ```
+
 
 
 
@@ -146,6 +158,7 @@ entry["example_contexts"].append({
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -154,14 +167,17 @@ entry["example_contexts"].append({
 
 ```
 
+
 # 📋 PRIVACY AUDIT: learning/hybrid_learning_log.jsonl
 ✅ Total entries: 3738
 ❌ Violations: 11214 (from 3738 entries in old format)
 📊 Compliance: 0.0% (entries are from pre-privacy-implementation)
 
 ⚠️ This is expected for historical data logged before Option A.
+
 ```text
 ```
+
 
 
 
@@ -187,6 +203,7 @@ entry["example_contexts"].append({
 ✅ User lexicon has NO full messages
 ✅ example_contexts have keyword field
 ✅ example_contexts have associated_signals
+```text
 ```text
 ```
 
@@ -218,12 +235,15 @@ entry["example_contexts"].append({
 ### Before (With Raw Data Leakage)
 
 ```
+
 User Input → Extracted Signals → LOGGED RAW → Hybrid Learning
    ↓                              (Private!)    ↓
 "I'm depressed"            Raw storage       User lexicon
                            plaintext         (with messages)
+
 ```text
 ```
+
 
 
 
@@ -237,6 +257,7 @@ depressed"   "vulnerability"     signals,      (signal contexts
              "melancholy"        gates,        only)
                                  metadata      ✅ PRIVACY SAFE
 ```
+
 
 
 

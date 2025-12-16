@@ -133,6 +133,7 @@ User Input → AffectParser → Glyph Lookup → Response Composition → Respon
 
 
 
+
 ### Key Components
 
 **1. Affect Parser** (Phase 2.1)
@@ -182,6 +183,7 @@ Length: 91 characters ✓
 
 
 
+
 ### Anxiety + Breaking
 
 ```
@@ -195,6 +197,7 @@ Length: 82 characters ✓
 
 
 
+
 ### Anger + Fire
 
 ```
@@ -205,6 +208,7 @@ Glyph: Fire
 Response: "I feel that Fire. The anger is burning. What's fueling it most?"
 Length: 65 characters ✓
 ```
+
 
 
 ##
@@ -264,6 +268,7 @@ Quality: Too long, too poetic, glyph system underutilized
 
 
 
+
 ### After Phase 2.2.2
 
 ```
@@ -271,6 +276,7 @@ User: "I'm feeling so exhausted today"
 System: "I feel the weight. It's Loss layered with fatigue. Tell me more about what you're carrying."
 Quality: 91 characters, conversational, glyph embedded naturally
 ```
+
 
 
 
@@ -424,6 +430,7 @@ if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affe
 
 
 
+
 ### Testing
 
 ```bash
@@ -434,6 +441,7 @@ pytest emotional_os/core/firstperson/test_glyph_response_composer.py -v
 # Run full suite
 pytest emotional_os/core/firstperson/test_*.py -v
 ```
+
 
 
 
@@ -470,6 +478,7 @@ Edit `GLYPH_AWARE_RESPONSES` in `glyph_response_composer.py` to customize respon
 
 
 
+
 ### Git History
 
 ```
@@ -482,6 +491,7 @@ Edit `GLYPH_AWARE_RESPONSES` in `glyph_response_composer.py` to customize respon
 To https://github.com/taurinrobinson-wq/saoriverse-console.git
    8daabd2..1dc7c87  chore/mypy-triage -> chore/mypy-triage
 ```
+
 
 
 

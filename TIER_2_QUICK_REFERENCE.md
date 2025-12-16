@@ -20,6 +20,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 # Detected tone: "joyful"
 
 ```text
+```text
 ```
 
 
@@ -38,6 +39,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```python
 
+
 # Input: "This is AMAZING!!!!"
 
 # Measured intensity: 0.85 (high)
@@ -50,6 +52,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```text
 ```
+
 
 
 
@@ -75,6 +78,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 # Joyful: "I'm present with your excitement"
 
 ```text
+```text
 ```
 
 
@@ -92,6 +96,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 **What it does:** Manages conversation energy and prevents fatigue
 
 ```python
+
 
 # Conversation phases:
 
@@ -111,6 +116,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```text
 ```
+
 
 
 ##
@@ -148,6 +154,7 @@ print(metrics)
 #   "processing_time_ms": 22.5
 
 ```text
+```text
 ```
 
 
@@ -157,6 +164,7 @@ print(metrics)
 If you're using the response pipeline:
 
 ```python
+
 
 # In response_handler.py:
 
@@ -170,6 +178,7 @@ If you're using the response pipeline:
 
 ```text
 ```
+
 
 
 ##
@@ -193,6 +202,7 @@ try:
 except Exception as e:
     logger.warning(f"Failed: {e}")
 ```text
+```text
 ```
 
 
@@ -203,6 +213,7 @@ If entire Tier 2 fails, returns base response (no crash).
 ## Performance
 
 ```
+
 ┌─────────────────────────────────────┐
 │ Response Pipeline Timing            │
 ├─────────────────────────────────────┤
@@ -212,8 +223,10 @@ If entire Tier 2 fails, returns base response (no crash).
 │ Total:                     60ms    │
 │ Budget:                   100ms    │
 │ Headroom:                  40ms    │
+
 ```text
 ```
+
 
 
 
@@ -227,6 +240,7 @@ Well under 100ms budget: **✅**
 ```
 Tier 2: 43/43 tests passing ✅
 Tier 1: 10/10 tests passing ✅
+```text
 ```text
 ```
 
@@ -263,6 +277,7 @@ Each component has:
 In `session_manager.py`:
 
 ```python
+
 def _ensure_tier2_aliveness():
     """Initialize Tier 2 for session."""
     if "tier2_aliveness" not in st.session_state:
@@ -271,6 +286,7 @@ def _ensure_tier2_aliveness():
 
 ```text
 ```
+
 
 
 
@@ -292,6 +308,7 @@ metrics = {
     "momentum": "building",        # Building/sustaining/winding
     "fatigue_detected": False,     # Is user getting tired?
     "processing_time_ms": 22.5     # How long it took
+```text
 ```text
 ```
 
@@ -324,6 +341,7 @@ To adjust Tier 2 behavior:
 
 ```python
 
+
 # In tier2_aliveness.py:
 
 # Change tone markers
@@ -337,6 +355,7 @@ pacing = tracker.calculate_optimal_pacing("deepening")
 
 ```text
 ```
+
 
 
 
@@ -360,6 +379,7 @@ Tier 2: ~20ms
 Tier 3: ~20ms (estimate)
 Total: ~80ms (still under 100ms budget!)
 ```
+
 
 
 ##

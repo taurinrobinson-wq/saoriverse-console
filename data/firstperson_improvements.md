@@ -59,6 +59,7 @@ Response Orchestration Layer
 Output Layer
 ├─ Empathy Rituals (practices for users)
 ```text
+```text
 ```
 
 
@@ -409,6 +410,7 @@ Each module gets:
 ### Conversations Table
 
 ```sql
+
 create table conversations (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references users(id) on delete cascade,
@@ -426,8 +428,10 @@ create table conversations (
 -- Indexes for fast queries
 create index idx_conversations_user_created on conversations(user_id, created_at desc);
 create index idx_conversations_theme on conversations(theme);
+
 ```text
 ```
+
 
 
 
@@ -441,6 +445,7 @@ from conversations
 where user_id = $1
 order by created_at desc
 ```text
+```text
 ```
 
 
@@ -448,12 +453,15 @@ order by created_at desc
 **Count theme frequency:**
 
 ```sql
+
 select theme, count(*) as frequency
 from conversations
 where user_id = $1 and created_at > now() - interval '30 days'
 group by theme
+
 ```text
 ```
+
 
 
 
@@ -465,6 +473,7 @@ from conversations
 where user_id = $1
 group by hour_of_day
 ```text
+```text
 ```
 
 
@@ -475,6 +484,7 @@ group by hour_of_day
 ### Memory Rehydration Hook
 
 ```javascript
+
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 
@@ -501,8 +511,10 @@ export function useConversationMemory(userId) {
   }, [userId]);
 
   return memory;
+
 ```text
 ```
+
 
 
 
@@ -515,6 +527,7 @@ function handleUserInput(input, memory) {
   displayResponse(response);
 }
 ```
+
 
 
 ##

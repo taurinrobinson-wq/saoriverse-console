@@ -7,8 +7,10 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 ## 🎨 What You Get
 
 ### 🌟 Landing Page
+
 ```text
 ```
+
 ┌─────────────────────────────────────────┐
 │    ✨ Animated Background Orbs       │
 │                                         │
@@ -25,11 +27,13 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 │  ✨ Memory & context                    │
 │  ... and more                          │
 └─────────────────────────────────────────┘
+
 ```
 
 
 
 ### 💬 Chat Interface
+```text
 ```text
 ```
 ┌──────────────────────────────────────────┐
@@ -56,9 +60,12 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 
 
 
+
 ### ⚙️ Settings Page
+
 ```text
 ```
+
 ┌──────────────────────────────────────────┐
 │  ← Settings                             │
 ├──────────────────────────────────────────┤
@@ -80,6 +87,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 │                                          │
 │              [✓ Settings saved!]        │
 └──────────────────────────────────────────┘
+
 ```
 
 
@@ -127,6 +135,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 
 ## 🚀 Tech Stack
 ```text
+```text
 ```
 Frontend:
 ├── Next.js 16 (Framework)
@@ -147,6 +156,7 @@ Backend (Coming Next):
 
 
 
+
 ## 📊 Implementation Statistics
 
 - **Components Created**: 5 new
@@ -161,8 +171,10 @@ Backend (Coming Next):
 ## 🎨 Design Highlights
 
 ### Color Scheme
+
 ```text
 ```
+
 Primary Colors:
 - Indigo-600: from-indigo-600 (#4F46E5)
 - Blue-600: to-blue-600 (#2563EB)
@@ -180,6 +192,7 @@ Text:
 - White: Primary text
 - Indigo-400: Headings (gradient)
 - Slate-400: Secondary text
+
 ```
 
 
@@ -215,6 +228,7 @@ Text:
 5. Adjusts settings as needed
 
 ## 🔄 Animation Flow Example
+```text
 ```text
 ```
 User speaks:
@@ -262,6 +276,7 @@ User speaks:
 │  Smooth scroll to bottom    │
 └─────────────────────────────┘
 ```
+
 
 
 

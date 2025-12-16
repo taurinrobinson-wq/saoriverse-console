@@ -10,6 +10,7 @@ This document describes how to install [actionlint](../docs).
 
 ```powershell
 ```text
+```text
 ```
 
 
@@ -19,8 +20,10 @@ This document describes how to install [actionlint](../docs).
 [`actionlint` package][scoop] is available in the main bucket:
 
 ```powershell
+
 ```text
 ```
+
 
 
 
@@ -29,6 +32,7 @@ This document describes how to install [actionlint](../docs).
 [`actionlint` package][winget] is available in the winget-pkgs repo:
 
 ```powershell
+```text
 ```text
 ```
 
@@ -41,8 +45,10 @@ This document describes how to install [actionlint](../docs).
 [`actionlint` package][aur] is available in the AUR:
 
 ```sh
+
 ```text
 ```
+
 
 
 
@@ -54,6 +60,7 @@ On NixOS:
 
 ```sh
 ```text
+```text
 ```
 
 
@@ -61,8 +68,10 @@ On NixOS:
 On Non NixOS:
 
 ```sh
+
 ```text
 ```
+
 
 
 
@@ -74,6 +83,7 @@ On Non NixOS:
 
 ```sh
 ```text
+```text
 ```
 
 
@@ -82,9 +92,12 @@ And rhysd/actionlint repository also provides its own Homebrew package, which is
 If you prefer it, tap the repository before running `brew install`.
 
 ```sh
+
 brew tap "rhysd/actionlint" "https://github.com/rhysd/actionlint"
+
 ```text
 ```
+
 
 
 
@@ -112,6 +125,7 @@ directory automatically. This is a recommended way if you install actionlint in 
 
 ```sh
 ```text
+```text
 ```
 
 
@@ -120,8 +134,10 @@ When you need to install specific version of actionlint, please give the version
 example installs v1.6.17.
 
 ```sh
+
 ```text
 ```
+
 
 
 
@@ -130,6 +146,7 @@ the downloaded binary to some other directory, please give the directory path to
 example installs the latest version to `/usr/bin`.
 
 ```sh
+```text
 ```text
 ```
 
@@ -149,6 +166,7 @@ installed, run these commands to install actionlint:
 
 ```bash
 
+
 # Add actionlint plugin
 asdf plugin add actionlint
 
@@ -159,8 +177,10 @@ asdf list-all actionlint
 asdf install actionlint latest
 
 # Set a version globally (on your ~/.tool-versions file)
+
 ```sql
 ```
+
 
 
 
@@ -176,6 +196,7 @@ go install github.com/rhysd/actionlint/cmd/actionlint@latest
 # Install the head of main branch
 go install github.com/rhysd/actionlint/cmd/actionlint
 ```
+
 
 
 ##

@@ -35,6 +35,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Verify installation
 ```text
+```text
 ```
 
 
@@ -43,6 +44,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 ```bash
 
+
 # Allow running docker without sudo
 sudo usermod -aG docker $USER
 
@@ -50,8 +52,10 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Verify you can run docker without sudo
+
 ```text
 ```
+
 
 
 
@@ -67,6 +71,7 @@ sudo systemctl start docker
 
 # Check status
 ```text
+```text
 ```
 
 
@@ -76,6 +81,7 @@ sudo systemctl start docker
 
 ```bash
 
+
 # Check if docker-compose already installed
 docker compose version
 
@@ -84,8 +90,10 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Verify
+
 ```text
 ```
+
 
 
 ##
@@ -128,6 +136,7 @@ EXPOSE 8000
 
 # Run FastAPI server
 ```text
+```text
 ```
 
 
@@ -135,6 +144,7 @@ EXPOSE 8000
 #### 3b. Create `Dockerfile.frontend` (Frontend - React/Expo)
 
 ```dockerfile
+
 FROM node:18-alpine
 
 WORKDIR /app
@@ -154,8 +164,10 @@ COPY firstperson/*.json ./
 EXPOSE 3000
 
 # Start Expo
+
 ```bash
 ```
+
 
 
 
@@ -215,6 +227,7 @@ services:
 networks:
   saoriverse:
 ```text
+```text
 ```
 
 
@@ -222,6 +235,7 @@ networks:
 #### 3d. Create `.dockerignore`
 
 ```
+
 .git
 .gitignore
 .venv
@@ -234,8 +248,10 @@ node_modules
 .env.local
 .DS_Store
 .idea
+
 ```text
 ```
+
 
 
 ##
@@ -252,6 +268,7 @@ ssh root@161.35.227.49
 # Clone the repository
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
+```text
 ```
 
 
@@ -260,12 +277,15 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 
 ```bash
 
+
 # Create .env file from template
 cp .env.example .env
 
 # Edit with your settings
+
 ```sql
 ```
+
 
 
 
@@ -285,6 +305,7 @@ FRONTEND_URL=http://161.35.227.49
 DATABASE_URL=sqlite:///./data_local/app.db
 
 ```text
+```text
 ```
 
 
@@ -292,6 +313,7 @@ DATABASE_URL=sqlite:///./data_local/app.db
 ### 4c: Build and Start Containers
 
 ```bash
+
 
 # Build images
 docker compose build
@@ -309,8 +331,10 @@ docker compose logs -f
 docker compose logs -f backend
 
 # View frontend logs only
+
 ```text
 ```
+
 
 
 
@@ -326,6 +350,7 @@ curl http://161.35.227.49:3000
 
 # Check container health
 ```text
+```text
 ```
 
 
@@ -336,6 +361,7 @@ curl http://161.35.227.49:3000
 Update `deploy/nginx.conf` to route traffic:
 
 ```nginx
+
 upstream backend {
     server backend:8000;
 }
@@ -367,8 +393,10 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
     }
+
 ```text
 ```
+
 
 
 ##
@@ -412,6 +440,7 @@ docker compose exec backend bash
 
 # Check resource usage
 ```text
+```text
 ```
 
 
@@ -423,6 +452,7 @@ docker compose exec backend bash
 
 ```bash
 
+
 # Pull latest changes
 git pull origin main
 
@@ -430,8 +460,10 @@ git pull origin main
 docker compose build
 
 # Restart with new code
+
 ```text
 ```
+
 
 
 
@@ -444,6 +476,7 @@ docker compose logs -f
 
 # Last 100 lines
 ```text
+```text
 ```
 
 
@@ -452,13 +485,16 @@ docker compose logs -f
 
 ```bash
 
+
 # Backup SQLite database
 docker compose exec backend cp data_local/app.db data_local/app.db.backup
 
 # Or tar everything
 docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
+
 ```text
 ```
+
 
 
 ##
@@ -475,6 +511,7 @@ docker compose logs backend
 # Rebuild and restart
 docker compose down
 ```text
+```text
 ```
 
 
@@ -483,12 +520,15 @@ docker compose down
 
 ```bash
 
+
 # Check what's using port 8000
 sudo netstat -tlnp | grep 8000
 
 # Kill process (if needed)
+
 ```text
 ```
+
 
 
 
@@ -503,6 +543,7 @@ docker network inspect saoriverse-console_saoriverse
 # Rebuild network
 docker compose down
 ```text
+```text
 ```
 
 
@@ -511,12 +552,15 @@ docker compose down
 
 ```bash
 
+
 # Check disk usage
 docker system df
 
 # Clean up unused images/containers/networks
+
 ```text
 ```
+
 
 
 ##
@@ -537,6 +581,7 @@ sudo certbot certonly --standalone -d 161.35.227.49
 
 # Then: docker compose restart nginx
 ```
+
 
 
 ##

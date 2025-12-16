@@ -53,8 +53,10 @@ This solves your exact requirement: *"Make a system where in real time the syste
 ### The Three-Layer Architecture
 
 **Layer 1: Glyph Learning Engine** (glyph_learner.py)
+
 ```text
 ```
+
 User Input (no matching glyph)
   ↓
 Extract emotional language patterns
@@ -65,11 +67,13 @@ Map signals to gates (1-9)
 Calculate confidence score
   ↓
 Return: Complete glyph candidate with metadata
+
 ```
 
 
 
 **Layer 2: Learning Response Generator** (learning_response_generator.py)
+```text
 ```text
 ```
 New glyph candidate
@@ -85,9 +89,12 @@ Return: Response that answers user emotionally AND trains system
 
 
 
+
 **Layer 3: Shared Glyph Manager** (shared_glyph_manager.py)
+
 ```text
 ```
+
 Record adoption in shared database
   ↓
 Update consensus (how many users adopted)
@@ -98,6 +105,7 @@ Analyze coverage gaps (what's missing)
 Per-user queries return DIFFERENT ORDERING from SAME database
   (User A gets personalized, User B gets personalized)
   (But both contribute to global system learning)
+
 ```
 
 
@@ -108,6 +116,7 @@ Per-user queries return DIFFERENT ORDERING from SAME database
 > "I need to store glyph data where it builds the system overall, not just for that user. But I don't know how to keep the user experience segregated while also building up the system overall."
 
 **Solution Implemented:**
+```text
 ```text
 ```
 ONE SHARED DATABASE (all users contribute):
@@ -136,6 +145,7 @@ Result:
   SAME glyphs in database (global learning)
   DIFFERENT ranking per user (personal experience)
 ```
+
 
 
 
@@ -169,6 +179,7 @@ from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
 ```text
+```text
 ```
 
 
@@ -176,6 +187,7 @@ _learning_response_gen = LearningResponseGenerator()
 ### Step 2: Modify parse_input() Function
 
 ```python
+
 glyphs = fetch_glyphs(gates)
 if glyphs:
     # EXISTING CODE: Return existing glyph
@@ -187,8 +199,10 @@ else:
     _shared_glyph_manager.create_glyph_version(...)
     _shared_glyph_manager.record_glyph_adoption(user_hash, candidate['glyph_name'])
     response = _learning_response_gen.generate_learning_response(...)
+
 ```text
 ```
+
 
 
 
@@ -197,6 +211,7 @@ else:
 ```python
 def _determine_emotional_tone(signals):
     tone_map = {...}
+```text
 ```text
 ```
 
@@ -222,6 +237,7 @@ No modifications to existing tables. Pure additive.
 **Output shows:**
 
 ```
+
 [Test 1] Identity fragmentation
   → Glyph: "Fractured Identity" (Confidence: 75%)
   → Response: [empathetic, trains without being obvious]
@@ -238,6 +254,7 @@ No modifications to existing tables. Pure additive.
   ✓ 3 unique users contributed
   ✓ Coverage improving
   ⚠️ CRITICAL gap: shame (0 glyphs) → Recommendation
+
 ```
 
 

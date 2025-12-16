@@ -7,8 +7,10 @@ Status: ✅ ALL TESTS PASSED
 ## Test Suite 1: Em Dash Removal
 
 ### Test 1a: Simple Overwhelm Response
+
 ```text
 ```
+
 Glyph: Spiral Containment
 Tone Pool: Grounded
 
@@ -17,11 +19,13 @@ Raw Response (before cleaner): "What does that feel like for you? The only way f
 Cleaned Response: "What does that feel like for you? The only way forward is the way through. You get to take this at your own pace with this."
 Em Dashes Found: 0
 Status: ✓ PASS (no dashes to remove, response clean)
+
 ```
 
 
 
 ### Test 1b: Complex Math Response
+```text
 ```text
 ```
 Glyph: Recursive Ache
@@ -36,9 +40,12 @@ Status: ✓ PASS (em dashes properly converted to colons)
 
 
 
+
 ### Test 1c: Grief Response
+
 ```text
 ```
+
 Glyph: Recursive Ache
 Tone Pool: Reflective
 
@@ -46,6 +53,7 @@ Input Message: "I'm grieving the loss of my job"
 Cleaned Response: "I'm here with you on what you're experiencing. You're traversing something real. There's no rush with this."
 Em Dashes Found: 0
 Status: ✓ PASS (response clean, natural flow)
+
 ```
 
 
@@ -54,6 +62,7 @@ Status: ✓ PASS (response clean, natural flow)
 ## Test Suite 2: Tone Pool Detection
 
 ### Test 2a: Keyword Mapping
+```text
 ```text
 ```
 Glyph Name: "Spiral Containment"
@@ -65,19 +74,24 @@ Status: ✓ PASS
 
 
 
+
 ### Test 2b: Keyword Mapping (Reflective)
+
 ```text
 ```
+
 Glyph Name: "Recursive Ache"
 Mapping: "ache" → Reflective pool
 Detection Result: REFLECTIVE
 Punctuation Rule: Colon emphasis (": ")
 Status: ✓ PASS
+
 ```
 
 
 
 ### Test 2c: Keyword Mapping (Empathetic)
+```text
 ```text
 ```
 Glyph Name: "Still Recognition"
@@ -88,23 +102,28 @@ Status: ✓ PASS
 ```
 
 
+
 ##
 
 ## Test Suite 3: Punctuation Substitution
 
 ### Test 3a: Sentence Split (Grounded)
+
 ```text
 ```
+
 Original: "You're moving through this—there's no wrong way."
 Pool: Grounded
 Expected: "You're moving through this. There's no wrong way."
 Actual: "You're moving through this. There's no wrong way."
 Status: ✓ PASS
+
 ```
 
 
 
 ### Test 3b: Colon Emphasis (Reflective)
+```text
 ```text
 ```
 Original: "The difficulty you feel—it's not a flaw."
@@ -116,14 +135,18 @@ Status: ✓ PASS
 
 
 
+
 ### Test 3c: Comma Join (Empathetic)
+
 ```text
 ```
+
 Original: "The alone you're feeling—it belongs to the unknown."
 Pool: Empathetic
 Expected: "The alone you're feeling, it belongs to the unknown."
 Actual: "The alone you're feeling, it belongs to the unknown."
 Status: ✓ PASS
+
 ```
 
 
@@ -132,6 +155,7 @@ Status: ✓ PASS
 ## Test Suite 4: Rotation Bank Diversity
 
 ### Test 4a: Four Identical Inputs, Different Outputs
+```text
 ```text
 ```
 Input (repeated 4 times): "I'm feeling anxious and overwhelmed"
@@ -155,9 +179,12 @@ Status: ✓ PASS (excellent diversity from rotation bank)
 
 
 
+
 ### Test 4b: Opening Phrase Variety
+
 ```text
 ```
+
 Opening phrases across 4 runs:
   - "I hear you about..."
   - "What does that feel like..."
@@ -166,11 +193,13 @@ Opening phrases across 4 runs:
 
 Variation Coefficient: High (different semantic patterns)
 Status: ✓ PASS
+
 ```
 
 
 
 ### Test 4c: Movement Language Variety
+```text
 ```text
 ```
 Movement phrases in responses:
@@ -184,13 +213,16 @@ Status: ✓ PASS
 ```
 
 
+
 ##
 
 ## Test Suite 5: Performance Impact
 
 ### Test 5a: Response Time Overhead
+
 ```text
 ```
+
 Input: "I'm feeling overwhelmed and anxious"
 
 Before Cleaner Integration:
@@ -201,11 +233,13 @@ After Cleaner Integration:
 
 Overhead: ~0ms (undetectable)
 Status: ✓ PASS (no performance regression)
+
 ```
 
 
 
 ### Test 5b: Multiple Sequential Calls
+```text
 ```text
 ```
 4 identical inputs, sequential processing:
@@ -220,23 +254,28 @@ Status: ✓ PASS (consistent and fast)
 ```
 
 
+
 ##
 
 ## Test Suite 6: Error Handling
 
 ### Test 6a: Missing Style Matrix
+
 ```text
 ```
+
 File deleted: style_matrix.json
 Behavior: System loads minimal default pools
 Responses: Still generated correctly
 Fallback Pool: "Grounded"
 Status: ✓ PASS (graceful degradation)
+
 ```
 
 
 
 ### Test 6b: Invalid Glyph Name
+```text
 ```text
 ```
 Glyph Name: None or empty
@@ -247,13 +286,17 @@ Status: ✓ PASS (defensive handling)
 
 
 
+
 ### Test 6c: Cleaning Exception
+
 ```text
 ```
+
 Scenario: Cleaner raises exception
 Behavior: Original response returned unchanged
 User Experience: No disruption
 Status: ✓ PASS (exception caught, no crash)
+
 ```
 
 
@@ -262,6 +305,7 @@ Status: ✓ PASS (exception caught, no crash)
 ## Test Suite 7: Integration Testing
 
 ### Test 7a: Full Pipeline (UI to Response)
+```text
 ```text
 ```
 User Input: "I'm grieving"
@@ -281,9 +325,12 @@ Status: ✓ PASS (full integration successful)
 
 
 
+
 ### Test 7b: Streamlit App Integration
+
 ```text
 ```
+
 App File: main_v2.py
 Entry Point: Working
 Chat Display: Rendering responses correctly
@@ -292,6 +339,7 @@ Punctuation Cleaner: Automatically applied
 Visual Verification: No em dashes visible in UI
 
 Status: ✓ PASS (live app running successfully)
+
 ```
 
 
@@ -315,6 +363,7 @@ Status: ✓ PASS (live app running successfully)
 
 ### Edge Case 1: Very Short Input
 ```text
+```text
 ```
 Input: "sad"
 Response: "It's okay not to know. That's part of the process."
@@ -324,18 +373,23 @@ Status: ✓ PASS
 
 
 
+
 ### Edge Case 2: Very Long Input
+
 ```text
 ```
+
 Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining things in a way I don't understand and it's creating real isolation in my family and I'm starting to doubt myself"
 Response: Generated successfully, ~250 characters
 Em Dashes: 0
 Status: ✓ PASS
+
 ```
 
 
 
 ### Edge Case 3: Multiple Rapid Calls
+```text
 ```text
 ```
 5 rapid sequential calls to same input
@@ -346,14 +400,18 @@ Status: ✓ PASS
 
 
 
+
 ### Edge Case 4: Glyph with Multiple Keyword Matches
+
 ```text
 ```
+
 Glyph: "Grief of Recognition"
 Keywords: "grief" (Reflective) + "recognition" (Empathetic)
 Resolution: Uses first match in priority order → Reflective
 Punctuation: Colons applied correctly
 Status: ✓ PASS (first keyword wins, deterministic)
+
 ```
 
 
@@ -362,6 +420,7 @@ Status: ✓ PASS (first keyword wins, deterministic)
 ## Test Suite 10: Compatibility
 
 ### Backward Compatibility
+```text
 ```text
 ```
 Existing code calling compose_response():
@@ -376,6 +435,7 @@ Existing code calling compose_message_aware_response():
 
 Status: ✓ PASS (100% backward compatible)
 ```
+
 
 
 ##
