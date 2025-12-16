@@ -33,34 +33,41 @@ def build_velinor_story():
     # Scene: Market Arrival
     story.add_passage(
         name="market_arrival",
-        text="""You emerge from the collapsed underpass into what was once the Market District of Velhara. The air is thick with silence—not the silence of absence, but of waiting. Crumbling vendor stalls line the plaza, their surfaces worn by time and weather. Vines creep up shattered display windows, and bioluminescent fungi cast a faint glow on the stone.
-
-A dust plume hangs in the air ahead. Two figures move within it.""",
-        is_start=True,
+        text="""*They're staring at me. What should I do?*""",
         background="market_ruins",
+        npcs=["Ravi", "Nima"],
+        is_start=True,
         tags=["marketplace", "act1"]
     )
     
     # First choice node - sets initial TONE baseline
     story.add_choice(
         from_passage_name="market_arrival",
-        choice_text="Push forward boldly",
-        to_passage_name="meet_ravi_nima"
+        choice_text="Step toward the figures",
+        to_passage_name="meet_ravi_nima",
+        tone_effects={"courage": 0.2, "narrative_presence": 0.15},
+        npc_resonance={"Ravi": 0.1, "Nima": -0.1}
     )
     story.add_choice(
         from_passage_name="market_arrival",
         choice_text="Retreat toward the underpass (safer)",
-        to_passage_name="meet_ravi_nima"
+        to_passage_name="meet_ravi_nima",
+        tone_effects={"wisdom": 0.2, "courage": -0.1},
+        npc_resonance={"Ravi": -0.1, "Nima": 0.15}
     )
     story.add_choice(
         from_passage_name="market_arrival",
         choice_text="Call out to them",
-        to_passage_name="meet_ravi_nima"
+        to_passage_name="meet_ravi_nima",
+        tone_effects={"empathy": 0.15, "narrative_presence": 0.1},
+        npc_resonance={"Ravi": 0.15, "Nima": 0.05}
     )
     story.add_choice(
         from_passage_name="market_arrival",
         choice_text="Stay still and observe",
-        to_passage_name="meet_ravi_nima"
+        to_passage_name="meet_ravi_nima",
+        tone_effects={"observation": 0.2, "wisdom": 0.1},
+        npc_resonance={"Ravi": 0.05, "Nima": 0.15}
     )
     
     # Scene: Meet Ravi & Nima
@@ -83,17 +90,23 @@ Ravi steps forward, less cautious. "Welcome. The Market District doesn't often r
     story.add_choice(
         from_passage_name="meet_ravi_nima",
         choice_text="Step toward them openly",
-        to_passage_name="ravi_dialogue"
+        to_passage_name="ravi_dialogue",
+        tone_effects={"courage": 0.15, "narrative_presence": 0.1},
+        npc_resonance={"Ravi": 0.2, "Nima": -0.05}
     )
     story.add_choice(
         from_passage_name="meet_ravi_nima",
         choice_text="Keep distance and ask questions first",
-        to_passage_name="nima_dialogue"
+        to_passage_name="nima_dialogue",
+        tone_effects={"wisdom": 0.15, "observation": 0.1},
+        npc_resonance={"Ravi": -0.05, "Nima": 0.2}
     )
     story.add_choice(
         from_passage_name="meet_ravi_nima",
         choice_text="Ask what they mean by 'resonance'",
-        to_passage_name="ravi_nima_resonance"
+        to_passage_name="ravi_nima_resonance",
+        tone_effects={"empathy": 0.15, "observation": 0.15},
+        npc_resonance={"Ravi": 0.1, "Nima": 0.1}
     )
     
     # Ravi path
@@ -116,12 +129,16 @@ Nima nods slightly, a small gesture of acknowledgment.
     story.add_choice(
         from_passage_name="ravi_dialogue",
         choice_text="Tell them your name",
-        to_passage_name="established_in_market"
+        to_passage_name="established_in_market",
+        tone_effects={"empathy": 0.1},
+        npc_resonance={"Ravi": 0.15, "Nima": 0.1}
     )
     story.add_choice(
         from_passage_name="ravi_dialogue",
         choice_text="Ask them first who they were before the collapse",
-        to_passage_name="ravi_backstory"
+        to_passage_name="ravi_backstory",
+        tone_effects={"empathy": 0.2, "observation": 0.1},
+        npc_resonance={"Ravi": 0.25, "Nima": 0.05}
     )
     
     # Nima path
@@ -144,12 +161,16 @@ Ravi adds, "The Market District used to be the heart of Velhara. Now it's just..
     story.add_choice(
         from_passage_name="nima_dialogue",
         choice_text="Ask what they're looking for",
-        to_passage_name="nima_quest_reveal"
+        to_passage_name="nima_quest_reveal",
+        tone_effects={"empathy": 0.15},
+        npc_resonance={"Ravi": 0.05, "Nima": 0.2}
     )
     story.add_choice(
         from_passage_name="nima_dialogue",
         choice_text="Ask about the resonance they mentioned",
-        to_passage_name="ravi_nima_resonance"
+        to_passage_name="ravi_nima_resonance",
+        tone_effects={"observation": 0.15, "wisdom": 0.1},
+        npc_resonance={"Ravi": 0.1, "Nima": 0.15}
     )
     
     # Shared resonance explanation
@@ -172,12 +193,16 @@ Nima adds, more cautiously: "It also means the city will know you're here. That 
     story.add_choice(
         from_passage_name="ravi_nima_resonance",
         choice_text="Ask to learn more",
-        to_passage_name="established_in_market"
+        to_passage_name="established_in_market",
+        tone_effects={"observation": 0.1, "wisdom": 0.1},
+        npc_resonance={"Ravi": 0.1, "Nima": 0.1}
     )
     story.add_choice(
         from_passage_name="ravi_nima_resonance",
         choice_text="Ask what kind of attention",
-        to_passage_name="nima_warning"
+        to_passage_name="nima_warning",
+        tone_effects={"wisdom": 0.15, "observation": 0.15},
+        npc_resonance={"Ravi": 0.05, "Nima": 0.2}
     )
     
     # Warning path
@@ -198,12 +223,16 @@ Ravi adds quietly, "Kaelen is one of them. A thief, or so they call him. He's be
     story.add_choice(
         from_passage_name="nima_warning",
         choice_text="Ask where you can find Kaelen",
-        to_passage_name="kaelen_location"
+        to_passage_name="kaelen_location",
+        tone_effects={"courage": 0.1, "narrative_presence": 0.15},
+        npc_resonance={"Ravi": -0.1, "Nima": -0.05}
     )
     story.add_choice(
         from_passage_name="nima_warning",
         choice_text="Ask if Ravi and Nima can help you",
-        to_passage_name="established_in_market"
+        to_passage_name="established_in_market",
+        tone_effects={"empathy": 0.15},
+        npc_resonance={"Ravi": 0.15, "Nima": 0.15}
     )
     
     # Kaelen location
@@ -222,12 +251,16 @@ The choice hangs in the market air between you.""",
     story.add_choice(
         from_passage_name="kaelen_location",
         choice_text="Go to the Thieves' Cache now",
-        to_passage_name="thieves_cache_entrance"
+        to_passage_name="thieves_cache_entrance",
+        tone_effects={"courage": 0.2, "narrative_presence": 0.15},
+        npc_resonance={"Ravi": -0.15, "Nima": -0.1}
     )
     story.add_choice(
         from_passage_name="kaelen_location",
         choice_text="Ask Ravi and Nima to help you prepare",
-        to_passage_name="market_preparation"
+        to_passage_name="market_preparation",
+        tone_effects={"wisdom": 0.2},
+        npc_resonance={"Ravi": 0.2, "Nima": 0.2}
     )
     
     # Established in market (neutral path)
@@ -250,12 +283,16 @@ The day is ending. The bioluminescent fungi grow brighter as the sun sets beyond
     story.add_choice(
         from_passage_name="established_in_market",
         choice_text="Go to the shelter and rest",
-        to_passage_name="marketplace_shelter"
+        to_passage_name="marketplace_shelter",
+        tone_effects={"empathy": 0.05},
+        npc_resonance={"Ravi": 0.1, "Nima": 0.1}
     )
     story.add_choice(
         from_passage_name="established_in_market",
         choice_text="Ask to visit the shrines before nightfall",
-        to_passage_name="shrine_visit_evening"
+        to_passage_name="shrine_visit_evening",
+        tone_effects={"courage": 0.15, "observation": 0.1},
+        npc_resonance={"Ravi": 0.15, "Nima": 0.1}
     )
     
     # Placeholder endings (to be expanded)

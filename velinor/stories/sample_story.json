@@ -5,7 +5,7 @@
     {
       "pid": "1",
       "name": "market_arrival",
-      "text": "{background: market_ruins}\n\nYou emerge from the collapsed underpass into what was once the Market District of Velhara. The air is thick with silence\u2014not the silence of absence, but of waiting. Crumbling vendor stalls line the plaza, their surfaces worn by time and weather. Vines creep up shattered display windows, and bioluminescent fungi cast a faint glow on the stone.\n\nA dust plume hangs in the air ahead. Two figures move within it.\n\n[[Push forward boldly->meet_ravi_nima]]\n\n[[Retreat toward the underpass (safer)->meet_ravi_nima]]\n\n[[Call out to them->meet_ravi_nima]]\n\n[[Stay still and observe->meet_ravi_nima]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\n*They're staring at me. What should I do?*\n\n[[Step toward the figures->meet_ravi_nima]]\n\n[[Retreat toward the underpass (safer)->meet_ravi_nima]]\n\n[[Call out to them->meet_ravi_nima]]\n\n[[Stay still and observe->meet_ravi_nima]]",
       "tags": [
         "marketplace",
         "act1"
@@ -20,8 +20,61 @@
       ],
       "_metadata": {
         "background": "market_ruins",
-        "npcs": []
-      }
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      },
+      "choices": [
+        {
+          "text": "Step toward the figures",
+          "target": "meet_ravi_nima",
+          "tone_effects": {
+            "courage": 0.2,
+            "narrative_presence": 0.15
+          },
+          "npc_resonance": {
+            "Ravi": 0.1,
+            "Nima": -0.1
+          }
+        },
+        {
+          "text": "Retreat toward the underpass (safer)",
+          "target": "meet_ravi_nima",
+          "tone_effects": {
+            "wisdom": 0.2,
+            "courage": -0.1
+          },
+          "npc_resonance": {
+            "Ravi": -0.1,
+            "Nima": 0.15
+          }
+        },
+        {
+          "text": "Call out to them",
+          "target": "meet_ravi_nima",
+          "tone_effects": {
+            "empathy": 0.15,
+            "narrative_presence": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.15,
+            "Nima": 0.05
+          }
+        },
+        {
+          "text": "Stay still and observe",
+          "target": "meet_ravi_nima",
+          "tone_effects": {
+            "observation": 0.2,
+            "wisdom": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.05,
+            "Nima": 0.15
+          }
+        }
+      ]
     },
     {
       "pid": "2",
@@ -46,7 +99,45 @@
           "Ravi",
           "Nima"
         ]
-      }
+      },
+      "choices": [
+        {
+          "text": "Step toward them openly",
+          "target": "ravi_dialogue",
+          "tone_effects": {
+            "courage": 0.15,
+            "narrative_presence": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.2,
+            "Nima": -0.05
+          }
+        },
+        {
+          "text": "Keep distance and ask questions first",
+          "target": "nima_dialogue",
+          "tone_effects": {
+            "wisdom": 0.15,
+            "observation": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": -0.05,
+            "Nima": 0.2
+          }
+        },
+        {
+          "text": "Ask what they mean by 'resonance'",
+          "target": "ravi_nima_resonance",
+          "tone_effects": {
+            "empathy": 0.15,
+            "observation": 0.15
+          },
+          "npc_resonance": {
+            "Ravi": 0.1,
+            "Nima": 0.1
+          }
+        }
+      ]
     },
     {
       "pid": "3",
@@ -71,7 +162,32 @@
           "Ravi",
           "Nima"
         ]
-      }
+      },
+      "choices": [
+        {
+          "text": "Tell them your name",
+          "target": "established_in_market",
+          "tone_effects": {
+            "empathy": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.15,
+            "Nima": 0.1
+          }
+        },
+        {
+          "text": "Ask them first who they were before the collapse",
+          "target": "ravi_backstory",
+          "tone_effects": {
+            "empathy": 0.2,
+            "observation": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.25,
+            "Nima": 0.05
+          }
+        }
+      ]
     },
     {
       "pid": "4",
@@ -96,7 +212,32 @@
           "Ravi",
           "Nima"
         ]
-      }
+      },
+      "choices": [
+        {
+          "text": "Ask what they're looking for",
+          "target": "nima_quest_reveal",
+          "tone_effects": {
+            "empathy": 0.15
+          },
+          "npc_resonance": {
+            "Ravi": 0.05,
+            "Nima": 0.2
+          }
+        },
+        {
+          "text": "Ask about the resonance they mentioned",
+          "target": "ravi_nima_resonance",
+          "tone_effects": {
+            "observation": 0.15,
+            "wisdom": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.1,
+            "Nima": 0.15
+          }
+        }
+      ]
     },
     {
       "pid": "5",
@@ -121,7 +262,33 @@
           "Ravi",
           "Nima"
         ]
-      }
+      },
+      "choices": [
+        {
+          "text": "Ask to learn more",
+          "target": "established_in_market",
+          "tone_effects": {
+            "observation": 0.1,
+            "wisdom": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.1,
+            "Nima": 0.1
+          }
+        },
+        {
+          "text": "Ask what kind of attention",
+          "target": "nima_warning",
+          "tone_effects": {
+            "wisdom": 0.15,
+            "observation": 0.15
+          },
+          "npc_resonance": {
+            "Ravi": 0.05,
+            "Nima": 0.2
+          }
+        }
+      ]
     },
     {
       "pid": "6",
@@ -146,7 +313,32 @@
           "Ravi",
           "Nima"
         ]
-      }
+      },
+      "choices": [
+        {
+          "text": "Ask where you can find Kaelen",
+          "target": "kaelen_location",
+          "tone_effects": {
+            "courage": 0.1,
+            "narrative_presence": 0.15
+          },
+          "npc_resonance": {
+            "Ravi": -0.1,
+            "Nima": -0.05
+          }
+        },
+        {
+          "text": "Ask if Ravi and Nima can help you",
+          "target": "established_in_market",
+          "tone_effects": {
+            "empathy": 0.15
+          },
+          "npc_resonance": {
+            "Ravi": 0.15,
+            "Nima": 0.15
+          }
+        }
+      ]
     },
     {
       "pid": "7",
@@ -171,7 +363,32 @@
           "Ravi",
           "Nima"
         ]
-      }
+      },
+      "choices": [
+        {
+          "text": "Go to the Thieves' Cache now",
+          "target": "thieves_cache_entrance",
+          "tone_effects": {
+            "courage": 0.2,
+            "narrative_presence": 0.15
+          },
+          "npc_resonance": {
+            "Ravi": -0.15,
+            "Nima": -0.1
+          }
+        },
+        {
+          "text": "Ask Ravi and Nima to help you prepare",
+          "target": "market_preparation",
+          "tone_effects": {
+            "wisdom": 0.2
+          },
+          "npc_resonance": {
+            "Ravi": 0.2,
+            "Nima": 0.2
+          }
+        }
+      ]
     },
     {
       "pid": "8",
@@ -196,7 +413,32 @@
           "Ravi",
           "Nima"
         ]
-      }
+      },
+      "choices": [
+        {
+          "text": "Go to the shelter and rest",
+          "target": "marketplace_shelter",
+          "tone_effects": {
+            "empathy": 0.05
+          },
+          "npc_resonance": {
+            "Ravi": 0.1,
+            "Nima": 0.1
+          }
+        },
+        {
+          "text": "Ask to visit the shrines before nightfall",
+          "target": "shrine_visit_evening",
+          "tone_effects": {
+            "courage": 0.15,
+            "observation": 0.1
+          },
+          "npc_resonance": {
+            "Ravi": 0.15,
+            "Nima": 0.1
+          }
+        }
+      ]
     },
     {
       "pid": "9",
