@@ -151,6 +151,7 @@ influence_map = {
 **Kaelen** (shifty thief):
 - → Tovren: -0.1 (mistrust spreads to practical folk)
 - → Korrin: +0.05 (gossip and thieves share rumors)
+- → Drossel: +0.2 (thief nature aligns with gang leader)
 
 **Mariel** (bridge figure):
 - → Ravi: +0.1 (wisdom strengthens)
@@ -158,6 +159,15 @@ influence_map = {
 
 **Sera** (healer):
 - → Mariel: +0.15 (trust reciprocates)
+
+**Drossel** (thieves' leader) — THE DARK INFLUENCE:
+- → Kaelen: +0.15 (respects criminal nature)
+- → Korrin: -0.1 (mistrusts even allies, gossips are loose cannons)
+- → Tovren: -0.2 (presence darkens merchants' suspicion)
+- → Ravi: -0.25 (criminality erodes community trust)
+- → Nima: +0.05 (her suspicion resonates with his distrust)
+
+**Narrative:** Drossel's presence creates a **shadow ripple** across the marketplace. Where Ravi and Mariel build trust, Drossel corrodes it. His influence is strongest on pragmatists (Tovren) and merchants (Ravi), weakest on those who already distrust (Nima actually aligns with him slightly).
 
 ---
 
@@ -218,6 +228,20 @@ resolve: 0.4, empathy: 0.3, memory: 0.8, nuance: 0.7,
 authority: 0.3, need: 0.5, trust: 0.3, skepticism: 0.8
 ```
 **Type:** Sharp memory, high skepticism, loves gossip and information.
+
+### Drossel — Thieves' Leader, Charming Yet Dangerous
+```
+resolve: 0.8, empathy: 0.2, memory: 0.9, nuance: 0.9,
+authority: 0.9, need: 0.3, trust: 0.1, skepticism: 0.95
+```
+**Type:** Master manipulator with Slavic-French cadence. Firm, commanding, absolutely mistrusts everyone. Appears caring but emotionally cold. Sharp recall of grudges and betrayals. Reads subtle cues to exploit vulnerability.
+
+**Threat Profile:**
+- High Authority & Resolve → Commands gang, firm in convictions
+- High Nuance & Memory → Dangerous manipulator, remembers all slights
+- Low Trust & High Skepticism → Distrusts by default, sees threats everywhere
+- Low Empathy → Charming facade hides internal coldness
+- Low Need → Self-sufficient, relies on no one
 
 ---
 

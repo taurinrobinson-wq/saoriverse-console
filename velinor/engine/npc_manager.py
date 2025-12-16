@@ -345,6 +345,18 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "need": 0.5,
             "trust": 0.3,
             "skepticism": 0.8
+        }),
+        
+        # Drossel: Thieves' Leader - Charming yet Dangerous
+        NPCProfile("Drossel", {
+            "resolve": 0.8,       # Firm in his convictions, steady as leader
+            "empathy": 0.2,       # Appears caring but internally cold
+            "memory": 0.9,        # Sharp recall of betrayals, grudges
+            "nuance": 0.9,        # Master manipulator, reads subtle cues
+            "authority": 0.9,     # Commands gang with iron presence
+            "need": 0.3,          # Self-sufficient, relies on no one
+            "trust": 0.1,         # Trusts no one, distrusts by default
+            "skepticism": 0.95    # Extreme distrust, sees threats everywhere
         })
     ]
     
@@ -369,7 +381,8 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
         },
         "Kaelen": {
             "Tovren": -0.1,     # Kaelen's shifty presence worries merchants
-            "Korrin": 0.05      # Gossip and thieves circulate rumors
+            "Korrin": 0.05,     # Gossip and thieves circulate rumors
+            "Drossel": 0.2      # Kaelen's thief nature aligns with Drossel's authority
         },
         "Tovren": {
             "Ravi": 0.05        # Practical caution spreads to merchants
@@ -380,5 +393,12 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
         "Mariel": {
             "Ravi": 0.1,        # Mariel's respect strengthens Ravi
             "Nima": 0.1         # Mariel's wisdom calms Nima's skepticism
+        },
+        "Drossel": {
+            "Kaelen": 0.15,     # Drossel respects Kaelen's criminality
+            "Korrin": -0.1,     # Drossel mistrusts even allies; gossips are loose cannons
+            "Tovren": -0.2,     # Drossel's presence darkens merchants' suspicion
+            "Ravi": -0.25,      # Drossel's criminality erodes Ravi's trust in community
+            "Nima": 0.05        # Nima's suspicion resonates with Drossel's distrust
         }
     }
