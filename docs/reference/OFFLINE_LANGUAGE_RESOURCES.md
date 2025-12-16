@@ -19,7 +19,7 @@ Your system is now using **compositional response generation** instead of canned
 
 # Install (one-time)
 pip install spacy
-python -m spacy download en_core_web_sm
+```text
 ```
 
 
@@ -62,7 +62,7 @@ from gensim.models import KeyedVectors
 vectors = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
 similar_words = vectors.most_similar('anxiety', topn=5)
 
-# Output: [('worried', 0.87), ('nervousness', 0.85), ('stress', 0.82), ...]
+```text
 ```
 
 
@@ -85,7 +85,7 @@ linguistic_patterns = TextCollection([
 ])
 
 # Generate realistic-sounding next phrases based on learned patterns
-next_words = linguistic_patterns.conditional_freq_dist
+```sql
 ```
 
 
@@ -117,7 +117,7 @@ for token in doc:
 
 # way -> prep_in -> explains
 
-# follow -> advcl -> explains
+```text
 ```
 
 
@@ -147,7 +147,7 @@ extracted = self.semantic_engine.extract_entities(text)
 people = extracted["people"]  # ["Michelle"]
 if people:
     person = people[0]
-    # Generate: "Michelle's communication style..." instead of generic response
+```text
 ```
 
 
@@ -191,7 +191,7 @@ class DynamicResponseComposer:
         closing = self._dynamic_closing(extracted["entities"])
 
         # Return composed response (never identical)
-        return " ".join([opening, poetry_line, movement, closing])
+```text
 ```
 
 
@@ -204,7 +204,7 @@ class DynamicResponseComposer:
 ```
 RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 
-# Every similar input gets the SAME structure filled differently
+```text
 ```
 
 

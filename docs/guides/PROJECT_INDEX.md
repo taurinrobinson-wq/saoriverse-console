@@ -80,7 +80,7 @@
 ##
 
 ## Root Directory After Modularization (11 Files)
-
+```text
 ```
 Essential Entry Points:
   ✅ start.py                    (Railway deployment)
@@ -160,7 +160,7 @@ Integration and test files:
 ✅ from response_adapter import translate_emotional_response
 ✅ from tone_adapters import generate_archetypal_response
 ✅ from relational_memory import RelationalMemoryCapsule
-✅ from symbolic_tagger import tag_input
+```text
 ```
 
 
@@ -169,7 +169,7 @@ Integration and test files:
 
 ```python
 ✅ from phase_modulator import detect_phase
-✅ from glyph_generator import GlyphGenerator
+```text
 ```
 
 
@@ -179,7 +179,7 @@ Integration and test files:
 ```python
 ✅ from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
 ✅ from tools.document_processing.docx_reader import read_docx
-✅ from archive.phase_infrastructure.phase_modulator import detect_phase
+```text
 ```
 
 
@@ -193,7 +193,7 @@ Integration and test files:
 
 # Old imports - still work via shims
 from glyph_generator import GlyphGenerator
-from phase_modulator import detect_phase
+```text
 ```
 
 
@@ -209,7 +209,7 @@ from response_adapter import translate_emotional_response
 # Reorganized tools - use full paths
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
 from tools.document_processing.docx_reader import read_docx
-from archive.phase_infrastructure.phase_1_generator import GlyphPhase1Generator
+```text
 ```
 
 
@@ -294,7 +294,7 @@ from main_response_engine import process_user_input
 from response_adapter import translate_emotional_response
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
 print('✅ All imports working!')
-"
+```text
 ```
 
 
@@ -302,7 +302,7 @@ print('✅ All imports working!')
 ### View Root Directory
 
 ```bash
-ls -1 /workspaces/saoriverse-console/*.py
+```text
 ```
 
 
@@ -310,7 +310,7 @@ ls -1 /workspaces/saoriverse-console/*.py
 ### View Organized Directories
 
 ```bash
-tree -L 1 /workspaces/saoriverse-console/{archive,tools,tests}
+```text
 ```
 
 

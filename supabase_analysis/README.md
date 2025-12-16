@@ -3,7 +3,7 @@
 This directory contains exported data and schemas from your Supabase database for analysis.
 
 ## Directory Structure
-
+```text
 ```
 supabase_analysis/
 ├── tables/          # Place exported table data (CSV, JSON, or SQL dumps)
@@ -58,7 +58,7 @@ SELECT
   column_default
 FROM information_schema.columns
 WHERE table_schema = 'public'
-ORDER BY table_name, ordinal_position;
+```text
 ```
 
 

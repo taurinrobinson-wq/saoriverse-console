@@ -26,7 +26,7 @@ Tier 1 Foundation is a 7-stage response enhancement pipeline that:
 **Step 1: Add import at top**
 
 ```python
-from src.emotional_os.tier1_foundation import Tier1Foundation
+```text
 ```
 
 
@@ -40,7 +40,7 @@ def __init__(self, ...):
     # Add this after other initializations
     self.tier1 = Tier1Foundation(
         conversation_memory=kwargs.get("conversation_memory")
-    )
+```text
 ```
 
 
@@ -62,7 +62,7 @@ if perf_metrics.get("total") > 0.1:
     logger.warning(f"Tier 1 slow: {perf_metrics['total']:.3f}s")
 
 # Return enhanced response instead of base
-return enhanced_response  # Changed from: return base_response
+```text
 ```
 
 
@@ -73,7 +73,7 @@ return enhanced_response  # Changed from: return base_response
 
 # In logging/monitoring section
 self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
-self.metrics["tier1_safety_triggered"] = perf_metrics.get("safety_check", 0) > 0.005
+```text
 ```
 
 
@@ -86,7 +86,7 @@ self.metrics["tier1_safety_triggered"] = perf_metrics.get("safety_check", 0) > 0
 **Step 1: Add import**
 
 ```python
-from src.emotional_os.tier1_foundation import Tier1Foundation
+```text
 ```
 
 
@@ -105,7 +105,7 @@ def setup_session():
         conversation_memory = st.session_state.get("conversation_memory")
         st.session_state.tier1_foundation = Tier1Foundation(
             conversation_memory=conversation_memory
-        )
+```text
 ```
 
 
@@ -126,7 +126,7 @@ if show_debug_metrics:
     with col2:
         st.metric("Safety Check", f"{metrics['safety_check']*1000:.1f}ms")
     with col3:
-        st.metric("Learning", f"{metrics['learning']*1000:.1f}ms")
+```text
 ```
 
 
@@ -145,7 +145,7 @@ python -m pytest tests/test_tier1_foundation.py -v
 python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_performance_under_100ms -v
 
 # Manual test script
-python test_tier1_manual.py
+```text
 ```
 
 
@@ -172,7 +172,7 @@ class ResponseHandler:
     def handle_response(self, ...):
 -       return base_response
 +       enhanced_response, metrics = self.tier1.process_response(...)
-+       return enhanced_response
+```text
 ```
 
 

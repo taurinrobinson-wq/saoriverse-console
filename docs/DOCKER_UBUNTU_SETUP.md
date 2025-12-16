@@ -34,7 +34,7 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Verify installation
-docker --version
+```text
 ```
 
 
@@ -50,7 +50,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Verify you can run docker without sudo
-docker ps
+```text
 ```
 
 
@@ -66,7 +66,7 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 # Check status
-sudo systemctl status docker
+```text
 ```
 
 
@@ -84,7 +84,7 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Verify
-docker compose version
+```text
 ```
 
 
@@ -127,7 +127,7 @@ RUN mkdir -p /app/data_local
 EXPOSE 8000
 
 # Run FastAPI server
-CMD ["uvicorn", "core.start:app", "--host", "0.0.0.0", "--port", "8000"]
+```text
 ```
 
 
@@ -154,7 +154,7 @@ COPY firstperson/*.json ./
 EXPOSE 3000
 
 # Start Expo
-CMD ["npx", "expo", "start", "--web"]
+```bash
 ```
 
 
@@ -214,7 +214,7 @@ services:
 
 networks:
   saoriverse:
-    driver: bridge
+```text
 ```
 
 
@@ -234,7 +234,7 @@ node_modules
 .env.local
 .DS_Store
 .idea
-.vscode
+```text
 ```
 
 
@@ -251,7 +251,7 @@ ssh root@161.35.227.49
 
 # Clone the repository
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
-cd saoriverse-console
+```text
 ```
 
 
@@ -264,7 +264,7 @@ cd saoriverse-console
 cp .env.example .env
 
 # Edit with your settings
-nano .env
+```sql
 ```
 
 
@@ -284,7 +284,7 @@ FRONTEND_URL=http://161.35.227.49
 # Database (if needed)
 DATABASE_URL=sqlite:///./data_local/app.db
 
-# Other configs as needed from your .env.example
+```text
 ```
 
 
@@ -309,7 +309,7 @@ docker compose logs -f
 docker compose logs -f backend
 
 # View frontend logs only
-docker compose logs -f frontend
+```text
 ```
 
 
@@ -325,7 +325,7 @@ curl http://161.35.227.49:8000/health
 curl http://161.35.227.49:3000
 
 # Check container health
-docker compose ps
+```text
 ```
 
 
@@ -367,7 +367,7 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
     }
-}
+```text
 ```
 
 
@@ -411,7 +411,7 @@ docker compose logs -f
 docker compose exec backend bash
 
 # Check resource usage
-docker stats
+```text
 ```
 
 
@@ -430,7 +430,7 @@ git pull origin main
 docker compose build
 
 # Restart with new code
-docker compose up -d
+```text
 ```
 
 
@@ -443,7 +443,7 @@ docker compose up -d
 docker compose logs -f
 
 # Last 100 lines
-docker compose logs --tail 100
+```text
 ```
 
 
@@ -457,7 +457,7 @@ docker compose exec backend cp data_local/app.db data_local/app.db.backup
 
 # Or tar everything
 docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
-docker cp <container_id>:/tmp/backup.tar.gz ./backup.tar.gz
+```text
 ```
 
 
@@ -474,7 +474,7 @@ docker compose logs backend
 
 # Rebuild and restart
 docker compose down
-docker compose up --build
+```text
 ```
 
 
@@ -487,7 +487,7 @@ docker compose up --build
 sudo netstat -tlnp | grep 8000
 
 # Kill process (if needed)
-sudo kill -9 <PID>
+```text
 ```
 
 
@@ -502,7 +502,7 @@ docker network inspect saoriverse-console_saoriverse
 
 # Rebuild network
 docker compose down
-docker compose up -d --remove-orphans
+```text
 ```
 
 
@@ -515,7 +515,7 @@ docker compose up -d --remove-orphans
 docker system df
 
 # Clean up unused images/containers/networks
-docker system prune -a
+```text
 ```
 
 

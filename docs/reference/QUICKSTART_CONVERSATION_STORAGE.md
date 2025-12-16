@@ -29,7 +29,7 @@ Make sure `.streamlit/secrets.toml` has:
 ```toml
 [supabase]
 url = "https://your-project.supabase.co"
-key = "your-anon-key"
+```text
 ```
 
 
@@ -37,7 +37,7 @@ key = "your-anon-key"
 ### 3. Restart Your App
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 
@@ -54,7 +54,7 @@ On the left sidebar, you'll see:
 │   ├── ✏️                             ← Click to rename
 │   └── 🗑️                             ← Click to delete
 ├── 💬 "Weekend plans"
-└── ➕ New Conversation                ← Start fresh
+```text
 ```
 
 
@@ -73,7 +73,7 @@ When you start a new conversation, the first message is used to auto-generate a 
 ```
 You: "I've been feeling really overwhelmed lately"
        ↓
-Title: "Feeling really overwhelmed lately"
+```text
 ```
 
 
@@ -117,7 +117,7 @@ Example:
   ],
   "created_at": "2024-01-15T10:30:00Z",
   "updated_at": "2024-01-15T10:35:00Z"
-}
+```text
 ```
 
 
@@ -171,7 +171,7 @@ Example:
 # 5. Verify conversation appears in sidebar
 
 # Check Supabase:
-SELECT * FROM conversations WHERE user_id = 'test-user';
+```text
 ```
 
 
@@ -201,7 +201,7 @@ print(conv['messages'])
 success, msg = manager.rename_conversation("conv-uuid", "New Title")
 
 # Delete
-success, msg = manager.delete_conversation("conv-uuid")
+```text
 ```
 
 

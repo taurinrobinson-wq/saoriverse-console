@@ -8,7 +8,7 @@
 ## 📁 File Structure
 
 ### Audio Components (Reorganized)
-
+```text
 ```
 src/emotional_os/deploy/modules/ui_components/audio/
 ├── __init__.py                 # Audio module exports
@@ -59,7 +59,7 @@ src/emotional_os/deploy/modules/ui_components/
 ## 🔧 How It Works
 
 ### Audio Output Pipeline (Currently Working)
-
+```text
 ```
 User sends message
   ↓
@@ -85,7 +85,7 @@ Message displayed with audio player
 
 
 ### Audio Input Pipeline (Ready but Requires Recording Component)
-
+```text
 ```
 User clicks "🎙️ Start Recording"
   ↓
@@ -118,7 +118,7 @@ pip install faster-whisper librosa soundfile
 pip install TTS
 
 # Optional: GPU acceleration
-pip install torch torchvision torchaudio  # For faster inference
+```text
 ```
 
 
@@ -157,7 +157,7 @@ audio_bytes = synthesize_response_audio(
 )
 
 # Display playback widget
-render_audio_playback(audio_bytes, label="🔊 Listen")
+```text
 ```
 
 
@@ -182,7 +182,7 @@ def get_audio_pipeline():
         # Only loads if actually used
         from .audio_pipeline import AudioPipeline
         _audio_pipeline = AudioPipeline()
-    return _audio_pipeline
+```text
 ```
 
 

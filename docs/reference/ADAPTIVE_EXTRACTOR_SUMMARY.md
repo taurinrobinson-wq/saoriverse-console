@@ -45,7 +45,7 @@ Example: If the corpus shows "time", "memory", "before", "forgotten" recurring t
 ## How It Works
 
 ### During Processing:
-
+```text
 ```
 Gutenberg Poetry Downloads
     ↓
@@ -63,7 +63,7 @@ Report: Shows all dimensions discovered
 
 
 ### Example Output:
-
+```json
 ```
 [DIMENSIONS] Emotional Dimension Summary:
   Base dimensions: 8 (your original poem)
@@ -110,7 +110,7 @@ The system can now:
 The system automatically uses the adaptive extractor. To disable it:
 
 ```python
-processor = BulkTextProcessor(use_adaptive_extractor=False)
+```text
 ```
 
 

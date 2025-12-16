@@ -51,7 +51,7 @@ Instead of trying to populate 1844 response templates:
 ## Validation
 
 All tests passing ✅:
-
+```json
 ```
 [✓] Direct method works (_craft_glyph_grounded_response)
 [✓] Full pipeline integration (compose_response)
@@ -68,7 +68,7 @@ All tests passing ✅:
 ## Results
 
 ### Example 1: Stress + Still Insight
-
+```text
 ```
 Input: "I'm feeling stressed about work piling up"
 Before: "I hear you. What's the feeling underneath all that?"
@@ -84,7 +84,7 @@ After:  "That's a real thing you're carrying. Even in what feels active or
 ✓ Different from other glyphs
 
 ### Example 2: Grief + Ache of Recognition
-
+```text
 ```
 Input: "I've been feeling this deep sadness"
 Before: "That sadness is real. I'm here with you in it. What do you need?"

@@ -42,7 +42,7 @@ pip install --upgrade spacy
 python -m spacy download en_core_web_md
 
 # Verify
-python -c "import spacy; nlp = spacy.load('en_core_web_md'); print('✓ Ready')"
+```text
 ```
 
 
@@ -72,7 +72,7 @@ for chunk in doc.noun_chunks:
 # Get word vectors (semantic meaning)
 word1 = nlp("anxiety")
 word2 = nlp("worry")
-print(word1.similarity(word2))  # 0.87 (high similarity)
+```text
 ```
 
 
@@ -94,7 +94,7 @@ nrc.analyze_text("I have a mental block on math")
 #   "fear": 0.7,
 #   "frustration": 0.8
 
-# }
+```text
 ```
 
 
@@ -112,7 +112,7 @@ poems = db.POETRY_COLLECTION["grief"]  # Get poems for grief emotion
 
 # Current usage: Pick one randomly and weave it in
 
-# "As someone once wrote: 'Because I could not stop for Death...'"
+```text
 ```
 
 
@@ -134,7 +134,7 @@ scores = sia.polarity_scores("I'm FURIOUS about the math requirement!!!")
 #   'pos': 0.00,   # Positive
 #   'compound': -0.88  # Overall intensity (-1 to 1)
 
-# }
+```text
 ```
 
 
@@ -151,7 +151,7 @@ if 'anxiety' in keywords and 'michelle' in keywords:
     return TEMPLATE_ANXIETY_MICHELLE
 
 if 'block' in keywords:
-    return TEMPLATE_LEARNING_BLOCK
+```text
 ```
 
 
@@ -171,7 +171,7 @@ features = {
 }
 
 # Compose response by layering features
-response = composer.compose_message_aware_response(features)
+```text
 ```
 
 
@@ -185,7 +185,7 @@ response = composer.compose_message_aware_response(features)
 
 ```
 "Michelle explains things in a way that only she can follow,
-and it creates real isolation for me."
+```text
 ```
 
 
@@ -195,7 +195,7 @@ and it creates real isolation for me."
 ```
 ✗ Detected: "Michelle" (name) + "follows" (verb)
 ✗ Matched: TEMPLATE_CLARITY → "I can feel the clarity you're seeking..."
-✗ Result: Completely missed the point (it's about FRICTION, not clarity)
+```text
 ```
 
 
@@ -218,7 +218,7 @@ and it creates real isolation for me."
   it creates this strange isolation—you're supposed to understand,
   but the system itself is opaque. That's not a failing on your part.
   That's a communication breakdown. What would help you feel actually
-  *understood* rather than just accommodating her style?"
+```text
 ```
 
 

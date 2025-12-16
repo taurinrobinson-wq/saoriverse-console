@@ -83,7 +83,7 @@ def handle_response_pipeline(user_input, session):
         "timestamp": datetime.now()
     })
 
-    return response
+```text
 ```
 
 
@@ -114,7 +114,7 @@ learner.learn_from_exchange(
     detected_signals=signals,
     ai_response=response,
     user_id=session.user_id
-)
+```text
 ```
 
 
@@ -156,7 +156,7 @@ if is_sensitive_input(user_input):
         tone="gentle"
     )
 
-return response
+```text
 ```
 
 
@@ -249,7 +249,7 @@ def handle_response_pipeline(user_input, context, session):
         "timestamp": datetime.now()
     })
 
-    return response
+```sql
 ```
 
 
@@ -270,7 +270,7 @@ class SessionState:
         # Keep existing state...
         self.conversation = []
         self.session_id = str(uuid.uuid4())
-        self.user_id = None
+```text
 ```
 
 
@@ -343,7 +343,7 @@ def test_response_time():
     elapsed = (time.time() - start) * 1000  # ms
 
     assert elapsed < 100, f"Response took {elapsed}ms (should be < 100ms)"
-    assert len(response) > 0
+```text
 ```
 
 
@@ -366,7 +366,7 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 
 # - Responses feel more compassionate
 
-# - Check response times in console
+```text
 ```
 
 
@@ -419,7 +419,7 @@ def handle_response_pipeline(user_input, context, session):
         pacing=pacing_score
     )
 
-    return response
+```text
 ```
 
 
@@ -460,7 +460,7 @@ def handle_response_pipeline(user_input, context, session):
         emotional_tone=complementary_tone
     )
 
-    return response
+```text
 ```
 
 
@@ -512,7 +512,7 @@ def handle_response_pipeline(user_input, context, session):
     # Update system state (cycle through turns)
     session.embodied.update_state()
 
-    return response
+```text
 ```
 
 
@@ -576,7 +576,7 @@ class PresenceIntegration:
             # Lengthen, add pauses and reflection
             return response.replace(". ", ". ... ")
         else:
-            return response
+```text
 ```
 
 
@@ -634,7 +634,7 @@ class EmotionalReciprocity:
             "channeling": "understanding",
             "safety": "empowering",
         }
-        return variations.get(approach, "reflective")
+```text
 ```
 
 
@@ -680,7 +680,7 @@ class EmbodiedSimulation:
 
     def reset(self):
         """Reset cycle (new conversation)"""
-        self.turn_count = 0
+```sql
 ```
 
 
@@ -727,7 +727,7 @@ def handle_response_pipeline(user_input, context, session):
     # Apply energy state modulation to response...
     session.embodied.update_state()
 
-    return response
+```text
 ```
 
 
@@ -783,7 +783,7 @@ def test_tier2_response_time():
     import time
 
     # [Similar to Tier 1 test, verify time]
-    pass
+```text
 ```
 
 
@@ -863,7 +863,7 @@ After all Tiers 1-3 stable and tested
 # ❌ DON'T: External APIs
 - No OpenAI calls
 - No remote LLMs
-- No network roundtrips
+```text
 ```
 
 
@@ -881,7 +881,7 @@ After all Tiers 1-3 stable and tested
 # ❌ DON'T: Heavy models
 - Large language models
 - Complex neural networks
-- Slow inference pipelines
+```text
 ```
 
 
@@ -898,7 +898,7 @@ After all Tiers 1-3 stable and tested
 # ❌ DON'T: Recompute each turn
 - Reparse lexicon files
 - Recompile patterns
-- Rebuild profiles
+```text
 ```
 
 
@@ -915,7 +915,7 @@ After all Tiers 1-3 stable and tested
 # ❌ DON'T: Complex approaches
 - Sentiment analysis on every word
 - Complex ML models
-- Deep NLP parsing
+```text
 ```
 
 
@@ -939,7 +939,7 @@ metrics = {
         "sanctuary_wrap": 0,
         "memory_update": 0,
     }
-}
+```text
 ```
 
 
@@ -953,7 +953,7 @@ session_metrics = {
     "min_response_time": 0,
     "turns_completed": 0,
     "error_count": 0,
-}
+```text
 ```
 
 
@@ -1005,7 +1005,7 @@ def handle_response_pipeline(user_input, context, session):
     if total_elapsed > 100:
         logger.warning(f"Response time {total_elapsed}ms > 100ms target")
 
-    return response
+```text
 ```
 
 
@@ -1018,7 +1018,7 @@ def handle_response_pipeline(user_input, context, session):
 ```bash
 pytest test_tier1_foundation.py -v
 
-# Verify: Context tracking, learning, safety
+```text
 ```
 
 
@@ -1028,7 +1028,7 @@ pytest test_tier1_foundation.py -v
 ```bash
 pytest test_tier2_aliveness.py -v
 
-# Verify: Pacing detection, reciprocity, energy cycles
+```text
 ```
 
 
@@ -1038,7 +1038,7 @@ pytest test_tier2_aliveness.py -v
 ```bash
 pytest test_tier3_depth.py -v
 
-# Verify: Poetic understanding, archetypes, tension
+```text
 ```
 
 
@@ -1048,7 +1048,7 @@ pytest test_tier3_depth.py -v
 ```bash
 pytest test_integration_full_pipeline.py -v
 
-# Verify: All modules work together, no conflicts
+```text
 ```
 
 

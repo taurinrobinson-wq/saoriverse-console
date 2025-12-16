@@ -123,7 +123,7 @@ You wanted a system rooted in **presence, dignity, and listening**—especially 
 crisis_keywords = ["suicidal", "suicide", "kill myself", ...]
 is_crisis = any(keyword in lower_input for keyword in crisis_keywords)
 if is_crisis:
-    return {generic_crisis_response}
+```text
 ```
 
 
@@ -152,7 +152,7 @@ if suicidality_protocol.should_use_protocol(lower_input):
         "voltage_response": response,
         "suicidality_state": state_info,
         ...
-    }
+```text
 ```
 
 
@@ -171,7 +171,7 @@ if suicidality_protocol.should_use_protocol(lower_input):
 ```
 Input: "I have thoughts of suicide"
 Output: "You named thoughts of suicide. That is heavy.
-Thank you for trusting me with it."
+```text
 ```
 
 

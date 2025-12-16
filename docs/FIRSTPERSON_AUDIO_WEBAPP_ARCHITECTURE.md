@@ -7,7 +7,7 @@
 ## Current State
 
 ### What's Running
-
+```text
 ```
 Digital Ocean VPS:
 ├── velinor.firstperson.chat (Next.js 16 + FastAPI backend)
@@ -30,7 +30,7 @@ Digital Ocean VPS:
 ## New Architecture: FirstPerson Audio App
 
 ### Proposed Setup
-
+```text
 ```
 firstperson.chat (NEW subdomain):
 ├── Frontend (Next.js)
@@ -88,7 +88,7 @@ services:
     ports: [80:80, 443:443]
     depends_on:
       - velinor_api
-      - firstperson_api
+```text
 ```
 
 
@@ -103,7 +103,7 @@ location / { proxy_pass http://velinor_api:8000; }
 
 # NEW
 server_name firstperson.chat;
-location / { proxy_pass http://firstperson_api:8001; }
+```text
 ```
 
 
@@ -167,7 +167,7 @@ location / { proxy_pass http://firstperson_api:8001; }
 from emotional_os.deploy.modules.audio_conversation_orchestrator import AudioConversationOrchestrator
 from emotional_os.deploy.modules.prosody_planner import ProsodyPlanner
 from emotional_os.deploy.modules.nlp_init import warmup_nlp
-from firstperson import FirstPersonOrchestrator
+```sql
 ```
 
 
@@ -183,7 +183,7 @@ FastAPI app
 ├── Route handlers (POST, GET, WebSocket)
 └── Integration logic
 
-# We'll follow exact same pattern for firstperson_api.py
+```text
 ```
 
 
@@ -208,7 +208,7 @@ POST /api/chat
 # Synthesize audio
 POST /api/synthesize
 { text: "...", glyph_intent: {...} }
-→ { audio_url: "audio.wav", prosody_markup: "<prosody...>" }
+```text
 ```
 
 
@@ -224,7 +224,7 @@ ws.send({ type: 'transcribe_end' })
 ← { type: 'transcript', text: '...' }
 ← { type: 'response_start' }
 ← { type: 'response_chunk', text: '...', audio: <chunk> }
-← { type: 'response_end' }
+```text
 ```
 
 

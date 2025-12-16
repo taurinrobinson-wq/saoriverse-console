@@ -260,7 +260,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 ## Column Analysis
 
 ### users table - ✅ Looks Good
-
+```text
 ```
 id, username, email, password_hash, salt, created_at,
 last_login, is_active, updated_at, first_name, last_name
@@ -274,7 +274,7 @@ last_login, is_active, updated_at, first_name, last_name
 ### glyph_lexicon - Need to verify columns match local DB
 
 Expected columns from local `glyphs.db`:
-
+```text
 ```
 id, voltage_pair, glyph_name, description, gate,
 activation_signals, display_name, response_template

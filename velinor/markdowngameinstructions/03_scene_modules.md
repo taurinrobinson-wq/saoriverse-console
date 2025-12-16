@@ -12,7 +12,7 @@ A standardized structure for building **modular NPC encounter scenes** with:
 ## Template Structure
 
 ### Scene Metadata
-
+```text
 ```
 Scene ID:             Unique identifier (e.g., market_intro_velinor_01)
 Background Image:     Path to background asset
@@ -45,7 +45,7 @@ NPC Name:             Primary character in scene
 [Wind, music, marketplace sounds, chimes, etc.]
 
 **Glyph Glow**:
-[Esḧ] (sacred witness) — Player begins to perceive
+```text
 ```
 
 
@@ -79,7 +79,7 @@ NPC Name:             Primary character in scene
 [Establish tone: reverent, challenging, mysterious, warm]
 
 **Glyph Glow**:
-[Cinarä̈], [Brethielï̈], [Thalen̈] — NPC's emotional signature
+```text
 ```
 
 
@@ -112,7 +112,7 @@ NPC Name:             Primary character in scene
 **Option C: [Dialogue Choice 3 — Silence/Observation]**
 - Glyph Trigger: [Aelitḧ] (stillness, witness)
 - NPC Response: [NPC reacts to player's silence]
-- Foreground Shift: [Static or NPC's reading of the moment]
+```text
 ```
 
 
@@ -135,7 +135,7 @@ Foreground Image:     velinor_priestess_distant.png (Scene 1)
                       velinor_priestess_close.png (Scene 2)
 Ambient Sound:        wind_through_ruins.mp3 + faint_chimes.mp3
 Glyph Triggers:       [Esḧ], [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈], [Aelitḧ]
-NPC Name:             Velinor
+```text
 ```
 
 
@@ -158,7 +158,7 @@ She appears to be some kind of priestess… or something older.
 
 **Ambient Sound**: Wind through broken towers, faint chime resonance
 
-**Glyph Glow**: [Esḧ] pulses softly — sacred witness
+```text
 ```
 
 
@@ -184,7 +184,7 @@ Before you have a chance to speak, she does.
 "I see you. Not just your shape… but your ache."
 "I am Velinor. And you are not lost — only unremembered."
 
-**Glyph Glow**: [Cinarä̈] (invoked beloved) and [Brethielï̈] (breath as guide) shimmer
+```text
 ```
 
 
@@ -205,7 +205,7 @@ Before you have a chance to speak, she does.
 **Option C**: [Remain silent]
 - Glyph: [Aelitḧ] (stillness) glows
 - Velinor Response: "Good. You know when to listen. That is rare."
-- Foreground: Velinor nods slowly, respect in her gaze
+```text
 ```
 
 

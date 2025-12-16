@@ -81,7 +81,7 @@
   "ai_response": "I understand. These feelings are valid...",
   "emotional_signals": [...],
   "glyphs": [...]
-}
+```text
 ```
 
 
@@ -97,7 +97,7 @@
   "glyph_names": ["Recursive Grief"],
   "ai_response_length": 245,
   "exchange_quality": "logged"
-}
+```text
 ```
 
 
@@ -168,7 +168,7 @@
 ✅ User lexicon has NO full messages
 ✅ example_contexts have keyword field
 ✅ example_contexts have associated_signals
-✅ example_contexts have gates
+```text
 ```
 
 
@@ -179,7 +179,7 @@
 ✅ Tool detects violations correctly
 ✅ Reports compliance percentage
 ✅ Shows compliant entry format
-ℹ️  3,738 pre-existing entries in old format (expected)
+```text
 ```
 
 
@@ -193,7 +193,7 @@
 ✅ 0/3 entries have raw ai_response
 ✅ 9/9 signals preserved
 ✅ 9/9 gates preserved
-✅ All metadata preserved
+```text
 ```
 
 
@@ -307,7 +307,7 @@
 cd /Users/taurinrobinson/saoriverse-console
 python3 test_privacy_masking.py     # Unit tests
 python3 test_e2e_simple.py          # Integration tests
-python3 privacy_monitor.py          # Audit current logs
+```text
 ```
 
 

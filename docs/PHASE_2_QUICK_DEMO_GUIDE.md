@@ -5,7 +5,7 @@
 ```bash
 cd firstperson-web
 npm install --legacy-peer-deps
-npm run dev
+```text
 ```
 
 
@@ -20,7 +20,7 @@ Then visit `http://localhost:3000`
 URL: http://localhost:3000/
 Time: 0-3 seconds
 Show: Animated beautiful homepage
-Do: Click "Start Chatting" button
+```text
 ```
 
 
@@ -38,7 +38,7 @@ Do: Click "Start Chatting" button
 ```
 URL: http://localhost:3000/chat
 Time: Interactive experience
-Show: Main conversation interface
+```text
 ```
 
 
@@ -83,7 +83,7 @@ Show: Main conversation interface
 ```
 URL: http://localhost:3000/settings
 Time: Configuration interface
-Show: Controls and preferences
+```text
 ```
 
 
@@ -189,7 +189,7 @@ Show: Controls and preferences
 3. Press Enter
    → Button scales (0.95x) briefly
    → Message bubble appears
-   → Chat scrolls to bottom automatically
+```text
 ```
 
 
@@ -214,7 +214,7 @@ Show: Controls and preferences
 4. Transcription happens
    → Status: "📝 Transcribing..."
    → Your message bubble appears
-   → Chat continues
+```text
 ```
 
 
@@ -230,7 +230,7 @@ Show: Controls and preferences
    - Floating hearts
    - Pulsing rings
    - "That's Amazing!" text
-5. Enjoy the moment!
+```text
 ```
 
 
@@ -265,7 +265,7 @@ Show: Controls and preferences
 
 ```
 User: "Tell me something amazing!"
-Expected: Response + Dance mode activation 💃
+```text
 ```
 
 
@@ -274,7 +274,7 @@ Expected: Response + Dance mode activation 💃
 
 ```
 User: "How does AI work?"
-Expected: Regular response, no dance mode
+```text
 ```
 
 
@@ -283,7 +283,7 @@ Expected: Regular response, no dance mode
 
 ```
 User: "That's fantastic!"
-Expected: Response celebrates your excitement
+```text
 ```
 
 
@@ -294,7 +294,7 @@ Expected: Response celebrates your excitement
 1. Use microphone to record
 2. Check transcription accuracy
 3. Verify emotion detection
-4. Test audio playback
+```text
 ```
 
 
@@ -332,7 +332,7 @@ Expected: Response celebrates your excitement
 ┌──────────────  ┌──────────────┐
 │  SETTINGS     │  BACK HOME   │
 │  Controls     │  (Header)    │
-└──────────────  └──────────────┘
+```text
 ```
 
 
@@ -382,7 +382,7 @@ App Root
     └── Voice Sliders
         ├── Pitch
         ├── Rate
-        └── Volume
+```text
 ```
 
 

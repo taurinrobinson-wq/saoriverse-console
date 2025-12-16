@@ -19,7 +19,7 @@ What I created:
 ## What is DigitalOcean?
 
 Think of it like this:
-
+```text
 ```
 Railway = Rental apartment where the landlord keeps breaking things
 DigitalOcean = Renting a small VPS where YOU have full control
@@ -76,7 +76,7 @@ DigitalOcean = Renting a small VPS where YOU have full control
 ## What's Inside the Magic Box (Docker)
 
 When you click "Play" at `https://velinor.firstperson.chat`, here's what happens:
-
+```text
 ```
 1. Your browser sends request to velinor.firstperson.chat
    ↓
@@ -147,7 +147,7 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 **What it does**: Automatically updates your site when you push code to GitHub
 
 **How it works**:
-
+```text
 ```
 You make a change to Velinor code
     ↓ (git push origin main)
@@ -275,7 +275,7 @@ A:
 - Peace of mind 😊
 
 **Comparison**:
-
+```text
 ```
 Option       | Cost/mo | Reliability | Control | Support
 Railway      | $5-50+  | 😢😢😢      | 😞     | 😞
@@ -293,7 +293,7 @@ DigitalOcean | $6      | 😊😊😊      | 😊     | 😊
 cd d:\saoriverse-console
 git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
-git push origin main
+```text
 ```
 
 
@@ -343,7 +343,7 @@ All of these are in the full guides with detailed solutions!
 You went from:
 
 ```
-😞 Using Railway (broken, unreliable, going away)
+```text
 ```
 
 
@@ -351,7 +351,7 @@ You went from:
 To:
 
 ```
-😊 Using DigitalOcean (simple, cheap, reliable, full control)
+```text
 ```
 
 

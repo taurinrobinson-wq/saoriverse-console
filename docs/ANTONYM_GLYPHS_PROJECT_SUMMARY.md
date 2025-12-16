@@ -96,7 +96,7 @@ Test Coverage:
 | Test Pass Rate | 100% |
 
 ## File Structure
-
+```text
 ```
 /workspaces/saoriverse-console/
 ├── antonym_glyphs.txt (source - 126 lines)
@@ -126,7 +126,7 @@ from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion
 
 # Find the opposite of "comfort"
 antonym = find_antonym_by_emotion("comfort")
-print(antonym["Name"])  # Output: "Gentle Holding"
+```text
 ```
 
 
@@ -143,7 +143,7 @@ emotion = st.selectbox("Select emotion:", [
 
 opposite = find_antonym_by_emotion(emotion)
 if opposite:
-    st.info(f"**Opposite**: {opposite['Name']}")
+```text
 ```
 
 
@@ -155,7 +155,7 @@ from emotional_os.glyphs.antonym_glyphs import search_antonyms
 
 results = search_antonyms("love")
 for r in results:
-    print(f"{r['Base Emotion']}: {r['Name']}")
+```text
 ```
 
 
@@ -192,7 +192,7 @@ Strength (γ × γ) - "Quiet Power"
 "Not force, but rootedness and capacity"
 
 Fulfillment (Ω × λ) - "Sacred Arrival"
-"The thing longed for has arrived and integrated"
+```text
 ```
 
 
@@ -212,7 +212,7 @@ Test Categories:
 
 Integration Tests:
   [EMOTION RANGE TEST] - All emotions found ✓
-  [PAIRING CONSISTENCY TEST] - All pairings accessible ✓
+```text
 ```
 
 

@@ -9,7 +9,7 @@ This document describes how to install [actionlint](../docs).
 [`actionlint` package][chocolatey] is available in the community repo:
 
 ```powershell
-choco install actionlint
+```text
 ```
 
 
@@ -19,7 +19,7 @@ choco install actionlint
 [`actionlint` package][scoop] is available in the main bucket:
 
 ```powershell
-scoop install actionlint
+```text
 ```
 
 
@@ -29,7 +29,7 @@ scoop install actionlint
 [`actionlint` package][winget] is available in the winget-pkgs repo:
 
 ```powershell
-winget install actionlint
+```text
 ```
 
 
@@ -41,7 +41,7 @@ winget install actionlint
 [`actionlint` package][aur] is available in the AUR:
 
 ```sh
-paru -S actionlint
+```text
 ```
 
 
@@ -53,7 +53,7 @@ paru -S actionlint
 On NixOS:
 
 ```sh
-nix-env -iA nixos.actionlint
+```text
 ```
 
 
@@ -61,7 +61,7 @@ nix-env -iA nixos.actionlint
 On Non NixOS:
 
 ```sh
-nix-env -iA nixpkgs.actionlint
+```text
 ```
 
 
@@ -73,7 +73,7 @@ nix-env -iA nixpkgs.actionlint
 [`actionlint`][formula] formula is provided by Homebrew officially.
 
 ```sh
-brew install actionlint
+```text
 ```
 
 
@@ -83,7 +83,7 @@ If you prefer it, tap the repository before running `brew install`.
 
 ```sh
 brew tap "rhysd/actionlint" "https://github.com/rhysd/actionlint"
-brew install actionlint
+```text
 ```
 
 
@@ -111,7 +111,7 @@ It downloads the latest version of actionlint (`actionlint.exe` on Windows and `
 directory automatically. This is a recommended way if you install actionlint in some shell script.
 
 ```sh
-bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+```text
 ```
 
 
@@ -120,7 +120,7 @@ When you need to install specific version of actionlint, please give the version
 example installs v1.6.17.
 
 ```sh
-bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) 1.6.17
+```text
 ```
 
 
@@ -130,7 +130,7 @@ the downloaded binary to some other directory, please give the directory path to
 example installs the latest version to `/usr/bin`.
 
 ```sh
-bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) latest /usr/bin
+```text
 ```
 
 
@@ -159,7 +159,7 @@ asdf list-all actionlint
 asdf install actionlint latest
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global actionlint latest
+```sql
 ```
 
 

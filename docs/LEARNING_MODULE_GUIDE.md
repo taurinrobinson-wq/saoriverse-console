@@ -5,7 +5,7 @@
 You've just built a **three-layer system** that enables the saoriverse console to learn from lived dialogue and evolve dynamically. This is a fundamental shift from template-based responses to principle-driven, adaptive conversation.
 
 ### The Three Layers
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. ARCHETYPE LIBRARY                                        │
@@ -55,7 +55,7 @@ You've just built a **three-layer system** that enables the saoriverse console t
 
 ### Phase 1: Playwright (You Write Dialogue)
 You create a conversational scene showing how the system should respond:
-
+```text
 ```
 User: Yesterday was so heavy, but today my child hugged me
       and I felt like everything melted away for a moment.
@@ -90,7 +90,7 @@ The learner automatically extracts principles:
     "Gentle pacing with validation first",
     "Mirror user's metaphors"
   ]
-}
+```text
 ```
 
 
@@ -146,7 +146,7 @@ new_archetype = learner.learn_from_conversation(
         # ... more turns
     ],
     user_rating=0.9,  # 1.0 = excellent, 0.0 = poor
-)
+```text
 ```
 
 
@@ -167,7 +167,7 @@ best_match = library.get_best_match(
 )
 
 # Record success for learning
-library.record_usage("ReliefToGratitude", success=True)
+```text
 ```
 
 

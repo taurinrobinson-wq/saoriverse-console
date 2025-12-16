@@ -33,7 +33,7 @@ Start here based on what you need:
 - Runs on `http://localhost:3000`
 
 ### How They Talk
-
+```text
 ```
 Frontend (http://localhost:3000)
     ↓ (HTTP)
@@ -51,7 +51,7 @@ Velinor Game Engine
 
 ```bash
 cd d:\saoriverse-console
-python velinor_api.py
+```text
 ```
 
 
@@ -60,7 +60,7 @@ python velinor_api.py
 
 ```bash
 cd d:\saoriverse-console\velinor-web
-npm run dev
+```text
 ```
 
 
@@ -112,7 +112,7 @@ d:\saoriverse-console\
     ├── VELINOR_WEB_QUICK_START.md         ← Start here
     ├── RUN_VELINOR_WEB.md                 ← Detailed guide
     ├── VELINOR_WEB_SETUP_COMPLETE.md      ← Full status
-    └── VELINOR_WEB_MIGRATION.md           ← Architecture
+```text
 ```
 
 

@@ -117,7 +117,7 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
    - Ollama functions automatically available through standard initialization flow
 
 ## 🏗️ Architecture Diagram
-
+```text
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                     Docker Network: firstperson_network           │
@@ -157,7 +157,7 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
 
 
 ## 🔄 Response Pipeline
-
+```text
 ```
 1. USER INPUT arrives in Streamlit
         │
@@ -212,7 +212,7 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
 ## 🚀 Execution Flow
 
 ### Starting Up
-
+```bash
 ```
 $ docker-compose -f docker-compose.local.yml up -d
     ↓
@@ -277,7 +277,7 @@ POST http://ollama:11434/api/generate
     "top_k": 40,
     "num_predict": 512,
     "system": "You are FirstPerson, a warm, empathetic AI companion..."
-}
+```text
 ```
 
 
@@ -297,7 +297,7 @@ POST http://ollama:11434/api/generate
     "prompt_eval_duration": 1000000000,
     "eval_count": 32,
     "eval_duration": 1000000000
-}
+```text
 ```
 
 
@@ -318,7 +318,7 @@ st.session_state = {
     # Can be accessed in UI
     if st.session_state["ollama_available"]:
         st.info(f"🦙 Using local Ollama: {st.session_state['ollama_models']}")
-}
+```text
 ```
 
 
@@ -336,7 +336,7 @@ def _ensure_ollama_client():
         client = get_ollama_client_singleton()  # Create or retrieve cached instance
         st.session_state["ollama_client"] = client
         st.session_state["ollama_available"] = client.is_available()
-        st.session_state["ollama_models"] = client.get_available_models()
+```text
 ```
 
 
@@ -359,7 +359,7 @@ def _get_ollama_fallback_response(user_input, conversation_context):
         model=models[0] if models else "llama3",
         system_prompt="You are FirstPerson..."
     )
-    return response
+```text
 ```
 
 
@@ -383,7 +383,7 @@ def handle_response_pipeline(user_input, conversation_context):
     response = strip_prosody_metadata(response)
     # ... more processing ...
 
-    return response, processing_time
+```text
 ```
 
 
@@ -395,7 +395,7 @@ def handle_response_pipeline(user_input, conversation_context):
 ```bash
 $ python test_ollama_integration.py
 Check: docker-compose.local.yml exists
-✅ PASS
+```text
 ```
 
 
@@ -405,7 +405,7 @@ Check: docker-compose.local.yml exists
 ```bash
 Check: Ollama service responding
 curl http://localhost:11434/api/tags
-✅ PASS (200 OK)
+```text
 ```
 
 
@@ -415,7 +415,7 @@ curl http://localhost:11434/api/tags
 ```bash
 Check: Models available
 curl http://localhost:11434/api/tags | jq '.models'
-✅ PASS (["llama3"])
+```text
 ```
 
 
@@ -426,7 +426,7 @@ curl http://localhost:11434/api/tags | jq '.models'
 Check: Can generate response
 curl -X POST http://localhost:11434/api/generate \
   -d '{"model":"llama3","prompt":"test","stream":false}'
-✅ PASS (response received)
+```text
 ```
 
 
@@ -439,7 +439,7 @@ from ollama_client import get_ollama_client_singleton
 client = get_ollama_client_singleton()
 client.is_available()  → True
 client.get_available_models()  → ["llama3"]
-✅ PASS
+```text
 ```
 
 
@@ -454,7 +454,7 @@ Available in container environment:
 OLLAMA_BASE_URL=http://ollama:11434        # Endpoint (auto-set in Docker)
 STREAMLIT_SERVER_HEADLESS=true              # Headless mode
 STREAMLIT_SERVER_PORT=8501                  # Port
-STREAMLIT_LOGGER_LEVEL=info                 # Logging level
+```text
 ```
 
 
@@ -510,7 +510,7 @@ STREAMLIT_LOGGER_LEVEL=info                 # Logging level
 
 ```python
 if not ollama.is_available():
-    return "I'm here to listen..."  # Generic fallback
+```text
 ```
 
 
@@ -521,7 +521,7 @@ if not ollama.is_available():
 models = ollama.get_available_models()
 if not models:
     logger.warning("No models available")
-    return "I'm here to listen..."
+```text
 ```
 
 
@@ -533,7 +533,7 @@ try:
     response = ollama.generate(prompt, timeout=120)
 except requests.Timeout:
     logger.error("Generation timeout")
-    return "That's a lot to carry..."
+```text
 ```
 
 

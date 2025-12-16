@@ -18,7 +18,7 @@ This guide explains how to integrate the privacy-first encoding pipeline into Fi
 ## Architecture
 
 ### 5-Stage Encoding Pipeline
-
+```text
 ```
 Stage 1: INPUT CAPTURE
 ├─ User sends message (raw text received in memory)
@@ -95,7 +95,7 @@ Find all places where conversation data goes to the database:
 # Search for database writes
 grep -r "\.insert\(" emotional_os/
 grep -r "supabase\." emotional_os/
-grep -r "\.table\(" emotional_os/
+```text
 ```
 
 
@@ -119,7 +119,7 @@ db.table("conversations").insert({
     "user_message": user_input,  # ❌ Raw text!
     "system_response": response,  # ❌ Raw text!
     "signals": result["signals"],
-}).execute()
+```text
 ```
 
 
@@ -145,7 +145,7 @@ success, record_id, encoded_data = encode_and_store_conversation(
 
 if not success:
     logger.error(f"Failed to store encoded conversation: {record_id}")
-    # Handle error appropriately
+```text
 ```
 
 
@@ -179,7 +179,7 @@ CREATE TABLE conversation_logs_anonymized (
 
 CREATE INDEX idx_user_id_hashed ON conversation_logs_anonymized(user_id_hashed);
 CREATE INDEX idx_session_id ON conversation_logs_anonymized(session_id);
-CREATE INDEX idx_timestamp_week ON conversation_logs_anonymized(timestamp_week);
+```text
 ```
 
 
@@ -202,7 +202,7 @@ INSERT INTO data_migration_audit (rows_archived, note)
 VALUES (
     (SELECT COUNT(*) FROM conversations_archived),
     'Migrated to anonymized schema for GDPR/CCPA/HIPAA compliance'
-);
+```text
 ```
 
 
@@ -277,7 +277,7 @@ class TestDataEncoding(unittest.TestCase):
         # Timestamp should be week format, not exact time
         self.assertIn("timestamp_week", result)
         timestamp_week = result["timestamp_week"]
-        self.assertRegex(timestamp_week, r"\d{4}-W\d{2}")
+```text
 ```
 
 
@@ -293,7 +293,7 @@ from emotional_os.privacy.arx_integration import ARXAnonymityVerifier
 verifier = ARXAnonymityVerifier(k_threshold=5)
 verifier.run_monthly_compliance_check(db_connection)
 
-# Generates report in: compliance_reports/[date]_compliance_report.json
+```text
 ```
 
 
@@ -310,7 +310,7 @@ verifier.run_monthly_compliance_check(db_connection)
 ❌ user_name               "Alice"
 ❌ user_phone              "+1-555-0123"
 ❌ conversation_text       Full message
-❌ identifying_phrases     Any unique content
+```text
 ```
 
 
@@ -324,7 +324,7 @@ verifier.run_monthly_compliance_check(db_connection)
 ✓ glyph_ids                [42, 183]
 ✓ message_length_bucket    "100-200_chars"
 ✓ timestamp_week           "2025-W02"
-✓ response_source          "signal_parser"
+```text
 ```
 
 
@@ -335,7 +335,7 @@ verifier.run_monthly_compliance_check(db_connection)
 
 ```
 User Client ─────[TLS 1.3]────→ FirstPerson API ─────[TLS 1.3]────→ Supabase
-              All data encrypted
+```text
 ```
 
 
@@ -350,7 +350,7 @@ Database: Supabase
     └─ user_id_hashed: Already one-way hash
     └─ encoded_signals: Codes (no personal info)
     └─ encoded_gates: Codes (no personal info)
-    └─ glyph_ids: IDs only (no content)
+```text
 ```
 
 
@@ -377,7 +377,7 @@ def export_user_data(user_id: str):
         "signals_detected": [...],
         "retention_policy": "90 days",
         "note": "Data is anonymized; raw messages not stored"
-    }
+```text
 ```
 
 
@@ -399,7 +399,7 @@ def delete_user_data(user_id: str):
     # Log deletion
     audit_log.record_deletion(user_id_hashed, datetime.now())
 
-    return {"status": "deleted", "timestamp": datetime.now().isoformat()}
+```text
 ```
 
 
@@ -428,7 +428,7 @@ All data access is logged:
   records_accessed: 100
   user_id_hashed: requested (allowed for role)
   ip_address: 192.168.1.100
-  mfa_verified: true
+```text
 ```
 
 
@@ -501,7 +501,7 @@ python -m pytest emotional_os/tests/test_privacy_integration.py -v
 python emotional_os/privacy/verify_compliance.py
 
 # Monthly compliance check
-python emotional_os/privacy/run_compliance_check.py
+```text
 ```
 
 
@@ -522,7 +522,7 @@ python emotional_os/privacy/run_compliance_check.py
 ```
 User Message → parse_input() → Response
                      ↓
-              Raw text stored in DB ❌
+```text
 ```
 
 

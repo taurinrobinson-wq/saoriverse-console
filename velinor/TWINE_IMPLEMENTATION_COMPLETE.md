@@ -37,7 +37,7 @@ Main game loop controller connecting story, engine, and dialogue.
 - Event logging for debugging and replay
 
 **Game Loop:**
-
+```text
 ```
 Player Input → FirstPerson Intent Summary → Twine Processing →
 Game Mechanics → NPC Dialogue Generation → UI State Formatting → Response
@@ -92,7 +92,7 @@ Full integration guide covering:
 ## How It Works
 
 ### Data Flow
-
+```text
 ```
 Twine Story (JSON)
     ↓
@@ -131,7 +131,7 @@ Twine Story (JSON)
 - Success/failure routing based on roll
 
 **3. Story Commands**
-
+```json
 ```
 {background: location}      # UI shows background image
 {npc: NPC_Name}            # NPC is speaking
@@ -260,7 +260,7 @@ python3 velinor/engine/quickstart.py
 
 # Run with Streamlit (UI layer to be created)
 
-# streamlit run app.py  # (not yet created)
+```text
 ```
 
 

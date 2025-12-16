@@ -60,7 +60,7 @@
 ##
 
 ## Module Dependencies
-
+```text
 ```
 voice_affect_detector.py
   ├── No external dependencies
@@ -177,7 +177,7 @@ If issues arise in production:
 
 ```bash
 git revert f6b38a0
-./deploy.sh production
+```text
 ```
 
 
@@ -186,7 +186,7 @@ git revert f6b38a0
 
 ```bash
 git checkout 129ca3b  # Phase 3.1/3.5 commit
-./deploy.sh production
+```text
 ```
 
 
@@ -213,7 +213,7 @@ python -m pytest emotional_os/core/firstperson/test_*.py -v
 python -c "from emotional_os.core.firstperson import VoiceAffectDetector, FacialExpressionDetector, MultimodalFusionEngine; print('✅ All imports working')"
 
 # Verify Phase 3.1 compatibility
-python -c "from emotional_os.core.firstperson import EmotionalProfileManager; print('✅ Phase 3.1 integration available')"
+```text
 ```
 
 
@@ -227,7 +227,7 @@ git show f6b38a0
 
 # 4 files changed, 1849 insertions(+)
 
-# ✅ Ready for deployment
+```text
 ```
 
 
@@ -246,7 +246,7 @@ python -m pytest emotional_os/ -q
 
 # Test voice analysis in staging
 curl http://staging/api/voice/analyze \
-  -X POST -d @voice_sample.json
+```text
 ```
 
 
@@ -264,7 +264,7 @@ curl https://saoriverse.ai/api/health
 # Expected: {"status": "ok", "version": "3.2"}
 
 # Monitor logs
-tail -f logs/production.log | grep -i "phase_3_2\|multimodal\|voice\|facial"
+```text
 ```
 
 

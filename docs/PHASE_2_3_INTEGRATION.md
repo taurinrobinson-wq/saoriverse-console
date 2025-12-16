@@ -25,7 +25,7 @@ from emotional_os.core.firstperson.repair_orchestrator import RepairOrchestrator
 if "repair_orchestrator" not in st.session_state:
     st.session_state.repair_orchestrator = RepairOrchestrator(
         user_id=st.session_state.user_id
-    )
+```text
 ```
 
 
@@ -51,7 +51,7 @@ context = GlyphCompositionContext(
 )
 
 st.session_state.repair_orchestrator.record_response(response_text)
-st.session_state.last_glyph_context = context
+```text
 ```
 
 
@@ -74,7 +74,7 @@ else:
     if st.session_state.last_glyph_context:
         st.session_state.repair_orchestrator.record_acceptance(
             st.session_state.last_glyph_context
-        )
+```text
 ```
 
 
@@ -96,7 +96,7 @@ if repair_analysis.is_rejection:
             arousal=arousal,
             valence=valence,
             glyph_name=suggested_glyph
-        )
+```text
 ```
 
 
@@ -108,7 +108,7 @@ Track these in Streamlit session state:
 ```python
 st.session_state.repair_orchestrator    # RepairOrchestrator instance
 st.session_state.last_glyph_context     # GlyphCompositionContext from last response
-st.session_state.last_response_text     # Previous response text
+```text
 ```
 
 

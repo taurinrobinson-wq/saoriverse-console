@@ -53,7 +53,7 @@
 ##
 
 ## Test Results
-
+```text
 ```
 ✅ All 6 Test Categories Passing
 
@@ -123,7 +123,7 @@
 ##
 
 ## Architecture Overview
-
+```text
 ```
 User Input (Streamlit)
     ↓
@@ -154,7 +154,7 @@ cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
 
 # Or quick test
-.venv/bin/python -c "from parser.nrc_lexicon_loader import nrc; print(nrc.analyze_text('I feel happy'))"
+```text
 ```
 
 
@@ -194,7 +194,7 @@ Phase 3: UI Integration (1-2 hours)
   └─ Verify privacy
 
 Phase 4: Launch (Ready)
-  └─ Start FirstPerson in Local Mode
+```text
 ```
 
 

@@ -52,7 +52,7 @@ Velinor is a **text-based narrative adventure game** with emotional resonance me
 
 ```bash
 bash setup.sh
-bash run.sh
+```text
 ```
 
 
@@ -63,7 +63,7 @@ bash run.sh
 python -m venv venv
 venv\Scripts\activate.bat
 pip install streamlit pillow
-streamlit run velinor_app.py
+```text
 ```
 
 
@@ -85,7 +85,7 @@ velinor_app.py (Streamlit UI)
 [Game Engine + NPC System]
         ├─ Player Stats
         ├─ Event System
-        └─ Multiplayer Tracking
+```text
 ```
 
 
@@ -178,7 +178,7 @@ saoriverse-console/
     ├── README.md               # Project overview
     ├── STATUS.md               # Project status
     ├── TWINE_INTEGRATION_GUIDE.md
-    └── TWINE_IMPLEMENTATION_COMPLETE.md
+```text
 ```
 
 
@@ -262,7 +262,7 @@ bash run.sh
 
 # Then in browser: http://localhost:8501
 
-# Click "Start New Game" and explore!
+```text
 ```
 
 

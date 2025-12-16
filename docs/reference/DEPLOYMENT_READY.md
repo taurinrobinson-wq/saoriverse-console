@@ -44,7 +44,7 @@ In the Streamlit Cloud dashboard, go to App settings → Secrets:
 
 [supabase]
 url = "your-supabase-url"
-key = "your-supabase-anon-key"
+```text
 ```
 
 
@@ -73,7 +73,7 @@ Once you upgrade Python on your Mac:
 python3.11 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-streamlit run main_v2.py
+```text
 ```
 
 

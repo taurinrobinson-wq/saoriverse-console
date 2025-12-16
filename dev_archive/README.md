@@ -35,7 +35,7 @@ export PROJECT_JWT_SECRET="your-jwt-secret"
 
 # (optional) override other test vars
 export TEST_CUSTOM_TOKEN="..."
-export TEST_USER_ID="..."
+```text
 ```
 
 

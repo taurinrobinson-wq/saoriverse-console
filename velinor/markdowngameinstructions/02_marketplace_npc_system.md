@@ -18,7 +18,7 @@ The marketplace is a **trust economy** where NPCs vary in openness, but all requ
 - **Shrine Keeper**: Skeptical of outsiders seeking sacred knowledge
 
 ### Dialogue Pattern: First Encounter
-
+```sql
 ```
 NPC: "You're not from here. Outsiders take more than they give."
 
@@ -56,7 +56,7 @@ C) "Then don't trust me yet. Just watch." → Shows respect for caution
 - **Scribe**: Eager to document stories, seeks connection through narratives
 
 ### Dialogue Pattern: First Encounter
-
+```text
 ```
 NPC: "I'd welcome you with open arms, but too many hands here have stolen."
 
@@ -102,7 +102,7 @@ C) "Then let me earn it, slowly."                → Respects their process
 ##
 
 ## Trust Meter (Optional Implementation)
-
+```text
 ```
 Per NPC:
 [==========] Mistrusting NPC (10 points to unlock mid-tier dialogue)
@@ -128,7 +128,7 @@ Actions:
 - Trust is not isolated; it propagates through the marketplace community
 
 ### Example:
-
+```text
 ```
 Player helps Nima (mistrusting guard) find stolen goods
 → Nima tells Ravi (welcoming NPC) the player is reliable

@@ -12,7 +12,7 @@ If you have `supabase-cli` installed:
 
 ```bash
 cd /workspaces/saoriverse-console
-supabase db push
+```text
 ```
 
 
@@ -116,7 +116,7 @@ DROP TRIGGER IF EXISTS conversations_update_updated_at ON public.conversations;
 CREATE TRIGGER conversations_update_updated_at
 BEFORE UPDATE ON public.conversations
 FOR EACH ROW
-EXECUTE FUNCTION update_conversation_updated_at();
+```text
 ```
 
 
@@ -128,7 +128,7 @@ After running the SQL, verify the tables were created:
 
 ```bash
 cd /workspaces/saoriverse-console
-python3 scripts/migrate_supabase.py --verify
+```text
 ```
 
 
@@ -138,7 +138,7 @@ You should see:
 ```
 ✅ conversations table EXISTS
 ✅ conversation_metadata table EXISTS
-✅ All tables created successfully!
+```text
 ```
 
 
@@ -156,7 +156,7 @@ You should see:
 
 ```sql
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.conversation_metadata ENABLE ROW LEVEL SECURITY;
+```text
 ```
 
 
@@ -194,7 +194,7 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5
 service_role_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTQ2NzIwMCwiZXhwIjoyMDcxMDQzMjAwfQ.sILcK31ECwM0IUECL0NklBdv4WREIxToqtCdsMYKWqo"
 auth_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth-manager"
 saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori"
-current_saori_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed"
+```text
 ```
 
 
@@ -205,7 +205,7 @@ current_saori_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori
 ## Step 6: Restart Your App
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 

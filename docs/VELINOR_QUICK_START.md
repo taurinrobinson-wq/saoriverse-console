@@ -7,7 +7,7 @@
 ```bash
 bash setup.sh
 source venv/bin/activate
-bash run.sh
+```text
 ```
 
 
@@ -18,7 +18,7 @@ bash run.sh
 python -m venv venv
 venv\Scripts\activate.bat
 pip install streamlit pillow
-streamlit run velinor_app.py
+```text
 ```
 
 
@@ -111,7 +111,7 @@ saoriverse-console/
     ├── README.md               # Project overview
     ├── STATUS.md               # Current status
     ├── TWINE_INTEGRATION_GUIDE.md
-    └── TWINE_IMPLEMENTATION_COMPLETE.md
+```text
 ```
 
 
@@ -135,7 +135,7 @@ story = StoryBuilder("My Adventure")
 story.add_passage("start", "You awake in a strange place...", is_start=True)
 story.add_choice("start", "Look around", "examine")
 story.add_choice("start", "Move forward", "walk")
-story.export_json("my_story.json")
+```text
 ```
 
 
@@ -148,7 +148,7 @@ story.export_json("my_story.json")
 {dice: d20+courage}      # Trigger dice roll
 {multiplayer: true}      # Adapt for group
 [[Choice text->passage]] # Link to next passage
-[[Choice (Skill, DC N)->passage]]  # Skill check choice
+```text
 ```
 
 
@@ -161,7 +161,7 @@ story.export_json("my_story.json")
 
 ```bash
 cd /path/to/saoriverse-console
-streamlit run velinor_app.py
+```text
 ```
 
 
@@ -172,7 +172,7 @@ streamlit run velinor_app.py
 ```bash
 ls velinor/backgrounds/    # Should see 15+ images
 ls velinor/npcs/           # Should see 7+ images
-ls velinor/velinor_title_transparent.png
+```text
 ```
 
 
@@ -181,7 +181,7 @@ ls velinor/velinor_title_transparent.png
 **Try different port:**
 
 ```bash
-streamlit run velinor_app.py --server.port 8502
+```text
 ```
 
 
@@ -192,7 +192,7 @@ streamlit run velinor_app.py --server.port 8502
 ```bash
 deactivate  # if in a venv
 rm -rf venv/
-bash setup.sh
+```text
 ```
 
 
@@ -205,7 +205,7 @@ bash setup.sh
 ```bash
 conda create -n velinor python=3.11
 conda activate velinor
-pip install streamlit pillow
+```text
 ```
 
 
@@ -217,14 +217,14 @@ FROM python:3.11-slim
 WORKDIR /app
 COPY . .
 RUN pip install streamlit pillow
-CMD ["streamlit", "run", "velinor_app.py"]
+```text
 ```
 
 
 
 ```bash
 docker build -t velinor .
-docker run -p 8501:8501 velinor
+```text
 ```
 
 

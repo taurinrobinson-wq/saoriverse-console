@@ -4,7 +4,7 @@
 ##
 
 ## 🏗️ CURRENT ARCHITECTURE
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    STREAMLIT UI (app.py)                    │
@@ -40,7 +40,7 @@
 ## 🔌 WHAT'S CONNECTED vs. DISCONNECTED
 
 ### ✅ CONNECTED (Working Today)
-
+```text
 ```
 Input → signal_parser ✅ → glyph lookup ✅ → compose_response ✅ → Output
 ```
@@ -48,7 +48,7 @@ Input → signal_parser ✅ → glyph lookup ✅ → compose_response ✅ → Ou
 
 
 ### ❌ MISSING (Built but Not Used)
-
+```text
 ```
 ConversationMemory ❌
     ↓ (should feed context)
@@ -80,7 +80,7 @@ GenerativeTension ❌
 ## 🎯 INTEGRATION PRIORITIES
 
 ### TIER 1: DO THIS WEEK (45 min)
-
+```text
 ```
 ┌────────────────────────────────────┐
 │  ConversationMemory                │  ⭐ Huge impact
@@ -100,7 +100,7 @@ GenerativeTension ❌
 
 
 ### TIER 2: NEXT 1-2 WEEKS (3-4 hrs)
-
+```text
 ```
 ┌────────────────────────────────────┐
 │  Presence Layer                    │  ⭐ Makes system feel alive
@@ -114,7 +114,7 @@ GenerativeTension ❌
 
 
 ### TIER 3: WEEK 3-4 (6-8 hrs)
-
+```text
 ```
 ┌────────────────────────────────────┐
 │  Saori Layer                       │  ⭐ Poetic understanding
@@ -135,7 +135,7 @@ GenerativeTension ❌
 
 
 ### TIER 4: ONGOING (2-3 hrs)
-
+```text
 ```
 ┌────────────────────────────────────┐
 │  Temporal Memory                   │  🔵 Cross-session memory
@@ -149,7 +149,7 @@ GenerativeTension ❌
 ##
 
 ## 📈 IMPACT PROGRESSION
-
+```text
 ```
 TIER 1 (After 45 min)
 ──────────────────────────────────────────────────
@@ -187,7 +187,7 @@ Example: "Last time we spoke, you were struggling with..."
 ##
 
 ## ⏱️ TIMELINE AT A GLANCE
-
+```text
 ```
 NOW (Today)
 │
@@ -215,7 +215,7 @@ NOW (Today)
 ##
 
 ## 📊 EFFORT vs. IMPACT
-
+```text
 ```
 IMPACT
   │
@@ -242,7 +242,7 @@ IMPACT
 ## 🔍 CONNECTIVITY HEAT MAP
 
 ### RED (Not Connected)
-
+```text
 ```
 ❌ AttunementLoop
 ❌ EmbodiedSimulation
@@ -256,7 +256,7 @@ IMPACT
 
 
 ### YELLOW (Built but Not Called)
-
+```text
 ```
 ⚠️  ConversationMemory (methods exist but not used)
 ⚠️  LexiconLearner (methods exist but not used)
@@ -265,7 +265,7 @@ IMPACT
 
 
 ### GREEN (Connected)
-
+```text
 ```
 ✅ signal_parser
 ✅ glyph_lookup
@@ -276,7 +276,7 @@ IMPACT
 ##
 
 ## 🚀 IMPLEMENTATION COMPLEXITY
-
+```text
 ```
 EASY TO CONNECT                   HARD TO CONNECT
 ├─ ConversationMemory             ├─ SaoriLayer
@@ -321,7 +321,7 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 ##
 
 ## 📋 FILES TO READ (By Priority)
-
+```text
 ```
 IMMEDIATE (Today)
 1. EVALUATION_SUMMARY.md         ⭐⭐⭐ START HERE
@@ -348,7 +348,7 @@ REFERENCE (As Needed)
 **Pick ONE and do it:**
 
 ### Option A: 10 Minutes
-
+```text
 ```
 Read: EVALUATION_SUMMARY.md
 Then: Know what to do next
@@ -357,7 +357,7 @@ Then: Know what to do next
 
 
 ### Option B: 45 Minutes
-
+```text
 ```
 Read: QUICK_START_CONVERSATION_MEMORY.md
 Code: Follow 4 steps
@@ -367,7 +367,7 @@ Test: Verify it works
 
 
 ### Option C: 1 Hour
-
+```text
 ```
 Read: EVALUATION_SUMMARY.md
 Code: CODE_CHANGES_READY_TO_COPY.md
@@ -377,7 +377,7 @@ Test: Run test_quick_integration.py
 
 
 ### Option D: 2 Hours (Thorough)
-
+```text
 ```
 Read: EVALUATION_SUMMARY.md
 Read: SYSTEM_INTEGRATION_ANALYSIS.md
@@ -408,7 +408,7 @@ Test: Run full test
 ##
 
 ## 🌟 The Vision
-
+```sql
 ```
 TODAY                          4 WEEKS FROM NOW
 

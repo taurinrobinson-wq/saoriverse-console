@@ -15,7 +15,7 @@ Welcome to SaoriVerse Console! This guide helps you find what you need quickly.
 ```bash
 python core/main_v2.py        # Start Streamlit dev app
 bash scripts/run_local.sh      # Run with full setup
-bash scripts/deploy.sh         # Deploy to production
+```text
 ```
 
 
@@ -104,7 +104,7 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 **Start the application**
 
 ```bash
-python core/main_v2.py
+```text
 ```
 
 
@@ -124,7 +124,7 @@ python core/main_v2.py
 **Deploy to production**
 
 ```bash
-bash scripts/deploy.sh
+```text
 ```
 
 
@@ -132,7 +132,7 @@ bash scripts/deploy.sh
 **Set up locally**
 
 ```bash
-bash scripts/run_local.sh
+```text
 ```
 
 
@@ -163,7 +163,7 @@ saoriverse-console/
 ├── emotional_os/             ← Feature modules
 ├── tools/                    ← Analysis and testing tools
 ├── tests/                    ← Test suites
-└── archive/                  ← Historical code
+```text
 ```
 
 

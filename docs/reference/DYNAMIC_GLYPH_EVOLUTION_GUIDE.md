@@ -5,7 +5,7 @@
 The system now automatically creates new glyphs during live conversations through the hybrid processor. This document explains how the components work together.
 
 ## Architecture
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    USER-AI DIALOGUE                              │
@@ -66,7 +66,7 @@ result = processor.process_user_message(
 
 # - New glyphs generated
 
-# - Pattern analysis
+```text
 ```
 
 
@@ -103,7 +103,7 @@ Discovers new emotional dimensions:
 
 ```
 User: "I feel deeply seen and yet exposed"
-AI:   "That presence, that visibility, is sacred..."
+```text
 ```
 
 
@@ -117,7 +117,7 @@ signals = extractor.extract_signals(combined_text)
 #   {"signal": "love", "strength": 0.9},
 #   {"signal": "vulnerability", "strength": 0.8},
 
-# ]
+```text
 ```
 
 
@@ -138,7 +138,7 @@ learner.learn_from_exchange(
 
 # - Shared lexicon (if quality passes)
 
-# - Learning log (append-only)
+```text
 ```
 
 
@@ -157,7 +157,7 @@ patterns = evolution._detect_patterns_in_exchange(
 #     "keywords": ["deeply", "seen", "exposed"],
 #   }
 
-# ]
+```text
 ```
 
 
@@ -179,7 +179,7 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 #   "response_cue": "Honor the courage of opening one's heart",
 #   "created_from_conversation": true,
 
-# }
+```text
 ```
 
 
@@ -196,7 +196,7 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 
 # - Exported to system database
 
-# - Indexed for user-specific glyphs
+```text
 ```
 
 
@@ -229,7 +229,7 @@ result = processor.process_user_message(
 
 # Check results
 print(f"New glyphs: {len(result['pipeline_stages']['glyph_generation']['new_glyphs_generated'])}")
-print(f"Lexicon signals: {result['pipeline_stages']['lexicon']['signal_count']}")
+```text
 ```
 
 
@@ -255,7 +255,7 @@ result2 = processor.process_user_message(
 
 # Get conversation summary
 summary = processor.get_conversation_summary(conversation_id)
-print(f"Total glyphs generated in conversation: {len(summary['all_glyphs_generated'])}")
+```text
 ```
 
 
@@ -278,7 +278,7 @@ user_glyphs = processor.evolution.get_conversation_glyphs(
 )
 
 # Print recent glyphs
-processor.evolution.print_discovered_glyphs(limit=5)
+```text
 ```
 
 
@@ -297,7 +297,7 @@ result = processor.export_session_glyphs(
 # Or use evolution directly
 export_result = processor.evolution.export_glyphs_for_system(
     output_file="/path/to/all_glyphs.json"
-)
+```text
 ```
 
 
@@ -333,7 +333,7 @@ processor.print_session_summary()
 #   5. 🌿🎻 Natural Longing (nature + longing)
 #
 
-# ════════════════════════════════════════════════════════════════════════════════
+```text
 ```
 
 
@@ -346,7 +346,7 @@ processor.print_session_summary()
 evolution = DynamicGlyphEvolution(
     hybrid_learner=learner,
     min_frequency_for_glyph=300,  # Default: 300 co-occurrences
-)
+```text
 ```
 
 
@@ -362,7 +362,7 @@ evolution.emotion_symbols = {
     "vulnerability": "🌱",
     "joy": "☀",
     # ... add more
-}
+```text
 ```
 
 
@@ -378,7 +378,7 @@ signal_keywords = {
     ("love", "intimacy"): ["love", "intimacy", "close", "tender", "embrace"],
     ("love", "vulnerability"): ["open", "honest", "bare", "risk"],
     # ... customize for your use case
-}
+```text
 ```
 
 
@@ -397,7 +397,7 @@ Example progression:
 ```
 Initial: 8 hardcoded dimensions
 After poetry processing: 18+ adaptive dimensions
-After dialogue: 25+ dimensions from conversation patterns
+```text
 ```
 
 
@@ -419,7 +419,7 @@ is_quality, reason = learner._is_quality_exchange(
     user_input, ai_response, signals
 )
 
-# reason: "quality_exchange" | "input_too_short" | "toxic_keyword_..." | etc
+```text
 ```
 
 
@@ -452,7 +452,7 @@ learning/
 │   └── user_456_lexicon.json
 ├── generated_glyphs/
 │   └── session_glyphs.json       # Exported for system
-└── hybrid_learning_log.jsonl     # Append-only learning log
+```text
 ```
 
 
@@ -483,7 +483,7 @@ top_glyphs = sorted(
     reverse=True
 )[:5]
 for glyph in top_glyphs:
-    print(f"  {glyph['name']}: {glyph['combined_frequency']} co-occurrences")
+```text
 ```
 
 

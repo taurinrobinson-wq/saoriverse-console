@@ -62,7 +62,7 @@ Successfully implemented all 7 response generation principles from the improveme
 ## Test Results
 
 ### Test 1: Response Type Alternation ✓
-
+```text
 ```
 Turn 1: Expected QUESTION   | Got QUESTION   ✓
 Turn 2: Expected REFLECTION | Got REFLECTION ✓
@@ -75,7 +75,7 @@ Turn 6: Expected REFLECTION | Got REFLECTION ✓
 
 
 ### Test 2: Closing Type Generation ✓
-
+```text
 ```
 Question:   "What's the part of the overwhelm that troubles you most?" ✓
 Reflection: "It sounds like the accumulation is what's breaking it for you." ✓

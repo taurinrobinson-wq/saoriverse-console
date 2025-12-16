@@ -35,7 +35,7 @@ The complete codebase reorganization has been successfully executed. The project
 ## What Changed
 
 ### Before Reorganization
-
+```text
 ```
 saoriverse-console/
 ├── 150+ files in root (.py, .md)
@@ -51,7 +51,7 @@ saoriverse-console/
 
 
 ### After Reorganization
-
+```text
 ```
 saoriverse-console/
 ├── app.py               (single entry point)
@@ -214,7 +214,7 @@ git log --oneline | head -5
 
 # b5d65d3 refactor: Complete codebase reorganization
 
-# [previous commits...]
+```text
 ```
 
 

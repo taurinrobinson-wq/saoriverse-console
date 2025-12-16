@@ -7,7 +7,7 @@ Your Velinor game now has **emotionally-aware NPC responses** through FirstPerso
 ## 🎯 The Integration
 
 ### Before
-
+```text
 ```
 Player: "I'm overwhelmed"
 NPC:    "I see. What would you like to do?"
@@ -16,7 +16,7 @@ NPC:    "I see. What would you like to do?"
 
 
 ### After (With FirstPerson)
-
+```text
 ```
 Player: "I'm overwhelmed"
          ↓ [FirstPerson Analysis]
@@ -66,7 +66,7 @@ NPC:    "I hear the weight in that. The burden you're carrying—
 ## 🧠 How It Works
 
 ### 1. Player Input
-
+```text
 ```
 "I'm not sure I can handle this responsibility"
 ```
@@ -87,7 +87,7 @@ affect_parser.analyze_affect(input)
 memory.record_turn(input, affect, theme)
 → Tracks conversation history
 → Detects patterns across turns
-→ Measures emotional trajectory
+```text
 ```
 
 
@@ -98,7 +98,7 @@ memory.record_turn(input, affect, theme)
 orchestrator.process_player_action(player_input)
 → Applies emotional analysis
 → Updates game state
-→ Calls NPC dialogue generation
+```text
 ```
 
 
@@ -113,7 +113,7 @@ _generate_emotionally_aware_response(
     memory_context={...}
 )
 → "I hear the weight in that. The path of responsibility
-   can feel immense. What needs to be said about it?"
+```text
 ```
 
 
@@ -122,7 +122,7 @@ _generate_emotionally_aware_response(
 
 ```
 NPC: "I hear the weight in that. The path of responsibility
-     can feel immense. What needs to be said about it?"
+```text
 ```
 
 
@@ -166,7 +166,7 @@ NPC: "I hear the weight in that. The path of responsibility
 ```
 You:   "I don't know if I'm ready for this"
 NPC:   "I hear the uncertainty in that. That's real.
-        Tell me more about what concerns you."
+```text
 ```
 
 
@@ -177,7 +177,7 @@ NPC:   "I hear the uncertainty in that. That's real.
 You:   "I keep coming back to my doubts"
 NPC:   "I'm hearing doubt come up again. That tells me
         something. What's beneath it?"
-[FirstPerson detected 'doubt' appears in turn 1, 3, 5]
+```text
 ```
 
 
@@ -189,7 +189,7 @@ You:   "But maybe I'm stronger than I thought"
 NPC:   "There's something to sit with there. I'm also
         noticing a shift in what you're saying.
         What's helping?"
-[FirstPerson measured: valence improved from -0.8 to +0.1]
+```text
 ```
 
 
@@ -229,7 +229,7 @@ streamlit run velinor_app.py
 
 # FirstPerson automatically analyzes your inputs
 
-# NPCs respond with emotional awareness
+```text
 ```
 
 
@@ -239,7 +239,7 @@ streamlit run velinor_app.py
 ```bash
 python3 FIRSTPERSON_INTEGRATION_TEST.py
 
-# Output shows all 5 integration tests passing ✓
+```text
 ```
 
 

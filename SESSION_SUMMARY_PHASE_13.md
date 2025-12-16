@@ -71,7 +71,7 @@ This session implemented that entire vision in code.
     "Mirror user's metaphorical language",
     "Proportional empathy"
   ]
-}
+```text
 ```
 
 
@@ -117,7 +117,7 @@ TEST 4: Archetype matching
 Input: "It's been overwhelming, but my partner gave me a hug"
 Matches:
   - GratitudeToOverwhelm: 0.65
-  - ReliefToGratitude: 0.37
+```text
 ```
 
 

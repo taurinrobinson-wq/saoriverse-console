@@ -44,7 +44,7 @@ log_glyph_usage(glyph_name, user_hash, input_text, relevance_score)
   → Tracks which glyphs are used across the system
 
 promote_candidate_to_production(glyph_name)
-  → Moves validated candidate to production glyph_lexicon
+```text
 ```
 
 
@@ -63,7 +63,7 @@ GlyphLearner.analyze_input_for_glyph_generation()
   ├─ Map gates: [Gate 4 (high intensity), Gate 5 (medium)]
   └─ Confidence: 0.75
   ↓
-Return candidate glyph with all metadata
+```text
 ```
 
 
@@ -94,7 +94,7 @@ Return candidate glyph with all metadata
   "The {emotional_term} is evidence of your integrity."
 
 "insight" patterns:
-  "You've arrived at something true. That {emotional_term}—it's not confusion. It's clarity moving into you."
+```text
 ```
 
 
@@ -117,7 +117,7 @@ What this does:
   ✓ Reinforces: "caught between", "tension", "authenticity"
   ✓ Names the glyph implicitly
   ✓ Validates the emotional pattern
-  ✓ Gathers implicit feedback (what does it feel like to be known?)
+```text
 ```
 
 
@@ -135,7 +135,7 @@ craft_insufficient_glyph_response(partial_glyph, existing_glyphs, input)
   → When glyph is incomplete, bridges with existing patterns
 
 create_training_response(glyph_candidate, original_input, signals, emotional_analysis)
-  → Convenience wrapper for full response generation
+```text
 ```
 
 
@@ -185,7 +185,7 @@ emotional_territory (coverage mapping)
   ├─ emotional_area
   ├─ primary_glyphs
   ├─ coverage_quality (CRITICAL, POOR, FAIR, STRONG)
-  └─ needs_development
+```text
 ```
 
 
@@ -210,7 +210,7 @@ get_glyphs_for_user(user_hash="user_002", emotional_signal="β", gates=["Gate 4"
     1. User B's personal adoption history (different from A)
     2. Consensus adoption (same as A, global)
     3. Quality score (same as A)
-  ↓ Result: Different ordering for B, personalized to B's history
+```text
 ```
 
 
@@ -240,7 +240,7 @@ recommend_new_glyphs_for_gaps()
   → Guide future glyph generation based on gaps
 
 get_system_health_report()
-  → Dashboard: how many users, glyphs, adoption rates, coverage
+```text
 ```
 
 
@@ -257,7 +257,7 @@ User Input
   ├─ Evaluate gates
   ├─ Fetch matching glyphs
   ├─ Select best glyph + contextual response
-  └─ Return glyph + response
+```text
 ```
 
 
@@ -289,7 +289,7 @@ User Input
   │       User sees PERSONALIZED response (never generic)
   │       System records adoption in shared_glyph_manager
   │
-  └─ Return glyph + training response
+```text
 ```
 
 
@@ -368,7 +368,7 @@ INSERT INTO glyph_usage_log
 # 5. Update coverage
 UPDATE emotional_territory
   SET primary_glyphs = [..., "Fractured Identity"]
-  WHERE emotional_area = "identity"
+```text
 ```
 
 
@@ -391,7 +391,7 @@ record_glyph_adoption("user_002_hash", "Fractured Identity", rating=1)
 glyph gets promoted to production glyph_lexicon
 promote_candidate_to_production("Fractured Identity")
   → Moves from candidates to core glyphs
-  → Can now be discovered by new users searching this emotional territory
+```text
 ```
 
 
@@ -413,7 +413,7 @@ Coverage map shows:
 Recommendations:
   ⚠️ Generate 3-4 more glyphs for "identity territory"
   ⚠️ Generate 5+ new glyphs for "shame territory"
-  💡 Keywords: embarrassment, unworthiness, exposure, humiliation
+```text
 ```
 
 
@@ -449,7 +449,7 @@ SYSTEM'S EXPERIENCE:
   - All three users in same shared database
   - Every adoption, every feedback improves system
   - Most-adopted glyphs surface to top for new users
-  - System knows which territories need development
+```text
 ```
 
 

@@ -26,7 +26,7 @@ try:
         st.session_state.show_personal_log = True
         st.rerun()
 except Exception:
-    pass
+```text
 ```
 
 
@@ -42,7 +42,7 @@ if st.session_state.get('authenticated'):
             st.session_state.show_personal_log = True
             st.rerun()
     except Exception:
-        pass
+```text
 ```
 
 
@@ -60,7 +60,7 @@ try:
         auth = SaoynxAuthentication()
         auth.logout()
 except Exception:
-    pass
+```text
 ```
 
 
@@ -77,7 +77,7 @@ if st.session_state.get('authenticated'):
             auth = SaoynxAuthentication()
             auth.logout()
     except Exception:
-        pass
+```text
 ```
 
 
@@ -96,7 +96,7 @@ st.session_state['persist_history'] = st.checkbox(
     "💾 Save my chats",
     value=persist_default,
     help="Automatically save conversations for later retrieval"
-)
+```text
 ```
 
 

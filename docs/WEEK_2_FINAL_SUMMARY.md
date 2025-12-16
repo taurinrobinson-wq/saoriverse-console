@@ -97,7 +97,7 @@
 ##
 
 ## Quality Metrics
-
+```text
 ```
 Metric                  Value        Status
 ─────────────────────────────────────────────
@@ -125,7 +125,7 @@ Regressions            0             ✅ None
 ##
 
 ## Git Commits
-
+```text
 ```
 9e12da3 - docs: Add Tier 2 documentation index
 4c00509 - docs: Add Tier 2 achievement summary
@@ -140,7 +140,7 @@ Regressions            0             ✅ None
 ##
 
 ## Performance Breakdown
-
+```text
 ```
 ┌─────────────────────────────────────────┐
 │ Response Processing Timeline             │
@@ -201,7 +201,7 @@ Regressions            0             ✅ None
 - MythologyWeaver: Personal identity
 
 ### Performance Budget
-
+```text
 ```
 Tier 1: 40ms
 Tier 2: 20ms
@@ -279,7 +279,7 @@ enhanced, metrics = tier2.process_for_aliveness(
     user_input, base_response, history=[]
 )
 
-# Result: "That's fantastic! I'm excited too! Tell me more!"
+```text
 ```
 
 
@@ -295,7 +295,7 @@ In production code:
 3. Returns enhanced response
 4. Logs metrics
 
-# No changes needed - it just works!
+```text
 ```
 
 
@@ -315,7 +315,7 @@ In production code:
 Tier 1 alone:        40ms
 Tier 2 adds:         20ms (+50% latency)
 Still fast:          60ms total (<100ms budget)
-Result:              ✅ Excellent
+```text
 ```
 
 
@@ -336,7 +336,7 @@ PASSED:  53/53 (100%)
 FAILED:  0
 SKIPPED: 0
 Time:    0.45s
-Status:  ✅ ALL PASSING
+```text
 ```
 
 

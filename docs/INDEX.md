@@ -5,7 +5,7 @@
 ##
 
 ## 📂 Directory Structure Overview
-
+```text
 ```
 /workspaces/saoriverse-console/
 │
@@ -189,7 +189,7 @@
 ## 🎯 Key Improvements
 
 ### Before (Cluttered Root)
-
+```text
 ```
 root/
 ├── 30+ Python files (mixed purposes)
@@ -203,7 +203,7 @@ root/
 
 
 ### After (Organized Structure)
-
+```text
 ```
 root/
 ├── 2 essential .md files (README, CONTRIBUTING)
@@ -281,7 +281,7 @@ Contains all JSON and text analysis reports from glyph testing and validation
 ##
 
 ## ✅ Verification
-
+```sql
 ```
 ✅ Root directory cleaned from 100+ files to 2 essential files
 ✅ All documentation organized in docs/ with subcategories

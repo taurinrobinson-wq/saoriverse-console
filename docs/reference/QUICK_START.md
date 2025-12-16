@@ -12,7 +12,7 @@ Your system **now automatically creates new glyphs during every user-AI conversa
 ## What Actually Happens During a Conversation
 
 ### **Before (Old System)**
-
+```text
 ```
 User: "I feel vulnerable with you"
   ↓
@@ -28,7 +28,7 @@ Return response
 
 
 ### **After (New System)**
-
+```text
 ```
 User: "I feel vulnerable with you"
 AI: "That vulnerability is your greatest strength"
@@ -71,7 +71,7 @@ AI: "That vulnerability is your greatest strength"
 ```python
 User clicks send in Streamlit chat
   ↓
-emotion_os/deploy/modules/ui.py (line 573)
+```text
 ```
 
 
@@ -99,7 +99,7 @@ if processing_mode == "hybrid":
         st.session_state['new_glyphs_this_session'].extend(new_glyphs)
         st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
         for glyph in new_glyphs:
-            st.info(f"{glyph.symbol} {glyph.name}")
+```text
 ```
 
 
@@ -120,7 +120,7 @@ User sees in sidebar:
     ♥🌹 Sensual Devotion
     💭 love + sensuality
 
-    [📥 Export Discovered Glyphs]
+```text
 ```
 
 
@@ -151,7 +151,7 @@ learning/
 │       (User's personal signal vocabulary)
 │
 └── hybrid_learning_log.jsonl
-    (Append-only log of all learning)
+```text
 ```
 
 
@@ -173,7 +173,7 @@ class DynamicGlyphEvolution:
         new_glyphs = self._generate_glyphs_from_patterns(patterns)
 
         # 3. Save and return
-        return new_glyphs
+```text
 ```
 
 
@@ -205,7 +205,7 @@ class HybridProcessorWithEvolution:
             "new_glyphs_generated": ...,
             "lexicon_updates": ...,
             "pattern_analysis": ...,
-        }
+```text
 ```
 
 
@@ -217,7 +217,7 @@ def create_integrated_processor(hybrid_learner, adaptive_extractor, user_id):
     """Creates and initializes the full pipeline"""
     evolution = integrate_evolution_with_processor(learner, extractor)
     processor = HybridProcessorWithEvolution(learner, extractor, evolution, user_id)
-    return processor
+```text
 ```
 
 
@@ -247,7 +247,7 @@ Default is 300 co-occurrences. To make glyphs appear faster:
 evolution = DynamicGlyphEvolution(
     hybrid_learner=learner,
     min_frequency_for_glyph=50,  # Lower = glyphs appear sooner
-)
+```text
 ```
 
 
@@ -262,7 +262,7 @@ name_map = {
     ("love", "vulnerability"): "Open-Hearted Love",
     ("joy", "celebration"): "Pure Celebration",
     # Add your own
-}
+```text
 ```
 
 
@@ -277,7 +277,7 @@ self.emotion_symbols = {
     "intimacy": "❤",
     "vulnerability": "🌱",
     # Customize
-}
+```text
 ```
 
 
@@ -302,7 +302,7 @@ result = processor.process_user_message(
 )
 
 glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
-print(f"Generated {len(glyphs)} glyphs")
+```text
 ```
 
 
@@ -326,7 +326,7 @@ User: "I feel vulnerable"
 → Adaptive extraction: ["vulnerability"]
 → Pattern: None yet (need co-occurrence)
 → No glyph created
-→ Lexicon updated: vulnerability frequency +1
+```text
 ```
 
 
@@ -339,7 +339,7 @@ User: "Being with them makes me feel safe despite my fear"
 → Pattern: (vulnerability + safety) = 2 co-occurrences
 → Frequency: 2 < 300 threshold
 → No glyph created yet
-→ Lexicon updated with new patterns
+```text
 ```
 
 
@@ -355,7 +355,7 @@ User: "This safe place with them is where I'm most myself"
 → Symbol: 🌱✨
 → Response: "You've found the sacred space where vulnerability becomes strength"
 → Saved to: learning/conversation_glyphs.json
-→ Displayed in: Streamlit sidebar
+```text
 ```
 
 
@@ -410,7 +410,7 @@ ui.py (line 573)
 main_v2.py sidebar displays:
     "✨ N new glyph(s) discovered!"
     ↓
-User sees and can export
+```text
 ```
 
 

@@ -71,7 +71,7 @@ export const dialogueDatabase: Record<string, DialogueNode> = {
     ]
   },
   // More dialogue nodes...
-};
+```sql
 ```
 
 
@@ -86,7 +86,7 @@ Add support for tracking which choice was made:
 interface GameSceneProps {
   // ... existing props
   onChoiceClick: (choiceId: string, choiceIndex: number) => void;
-}
+```text
 ```
 
 
@@ -139,7 +139,7 @@ export function useDialogue() {
   };
 
   return { handleDialogueChoice, dialogueDatabase };
-}
+```text
 ```
 
 
@@ -181,7 +181,7 @@ export default function DialogueRenderer() {
       }}
     />
   );
-}
+```sql
 ```
 
 
@@ -203,7 +203,7 @@ Replace the hardcoded GameScene with DialogueRenderer:
 />
 
 // New:
-<DialogueRenderer />
+```text
 ```
 
 
@@ -237,7 +237,7 @@ export const NPCDatabase: Record<string, NPC> = {
     ]
   },
   // ... more NPCs
-};
+```text
 ```
 
 

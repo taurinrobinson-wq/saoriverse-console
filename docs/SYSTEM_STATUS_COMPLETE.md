@@ -21,7 +21,7 @@ Your system is **functional and values-aligned**. It's currently delivering appr
 ##
 
 ## System Architecture (Current)
-
+```text
 ```
 User Input
     ↓
@@ -72,7 +72,7 @@ User Input
 **Status:** LIVE and working
 
 **Test Result:**
-
+```text
 ```
 Input: "I have thoughts of suicide"
 Output: "You named thoughts of suicide. That is heavy.
@@ -106,7 +106,7 @@ Thank you for trusting me with it."
 - (60+ more)
 
 **Test Result:**
-
+```json
 ```
 [fetch_glyphs] Retrieved 36 rows
 Sample glyphs: ['Recursive Ache', 'Reverent Ache', ...]
@@ -126,7 +126,7 @@ Sample glyphs: ['Recursive Ache', 'Reverent Ache', ...]
 - BUT final response is still generic template
 
 **Example:**
-
+```text
 ```
 Signals: [exhausted, hard]
 Glyphs fetched: 36 including 'Recursive Ache', 'Euphoric Yearning'
@@ -178,7 +178,7 @@ Add ~20 positive emotion keywords to emotional_keywords list
 ## Test Results (Current)
 
 ### Comprehensive Integration Tests
-
+```text
 ```
 SCENARIO 1: Simple Greeting
   Score: 0.16/1.0

@@ -48,7 +48,7 @@ But they're actually in:
 
 # Line 73-74 - Will fail:
 glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
-glyph_json: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
+```text
 ```
 
 
@@ -60,7 +60,7 @@ glyph_json: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
 ```python
 
 # Line 27 - Will fail:
-glyph_lexicon: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
+```text
 ```
 
 
@@ -72,7 +72,7 @@ glyph_lexicon: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
 ```python
 
 # Line 89 - Will fail:
-glyph_lexicon_path: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
+```text
 ```
 
 
@@ -84,7 +84,7 @@ glyph_lexicon_path: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
 ```python
 
 # Line 18 - Will fail:
-lexicon_path: str = "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json"
+```text
 ```
 
 
@@ -96,7 +96,7 @@ lexicon_path: str = "emotional_os/lexicon/word_centric_emotional_lexicon_expande
 ```python
 
 # Line 33 - Will fail unless running from src/ directory:
-protocol_config_path: str = "emotional_os/core/suicidality_protocol.json"
+```text
 ```
 
 
@@ -126,7 +126,7 @@ cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
 # Verify (should show all files found):
 ls -la emotional_os/glyphs/
 ls -la emotional_os/core/
-ls -la emotional_os/lexicon/
+```text
 ```
 
 
@@ -176,7 +176,7 @@ Load Word Lexicon
 Load Antonym Index
     ↓ ❌ FAILS - File not at expected path
     ↓
-SYSTEM PARTIALLY INITIALIZED (many features broken)
+```text
 ```
 
 
@@ -194,7 +194,7 @@ data/
 ├── word_centric_emotional_lexicon_expanded.json  ← Code expects in emotional_os/lexicon/
 ├── lexicons/
 │   └── nrc_emotion_lexicon.txt     ✅ Works (found via search)
-└── [other files...]
+```text
 ```
 
 
@@ -226,7 +226,7 @@ src/
 │
 └── emotional_os_safety/
     ├── trauma_lexicon.json               ✅ Works (relative path)
-    └── [other modules...]
+```text
 ```
 
 
@@ -249,7 +249,7 @@ emotional_os/                            ← DOESN'T EXIST
 │   ├── runtime_fallback_lexicon.json
 │   └── learned_lexicon.json
 └── safety/
-    └── trauma_lexicon.json
+```text
 ```
 
 

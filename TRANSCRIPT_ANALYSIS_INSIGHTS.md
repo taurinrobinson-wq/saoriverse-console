@@ -25,7 +25,7 @@
   - Newlines instead of flowing thoughts
 
 **Example:**
-
+```text
 ```
 ❌ CURRENT (too dense):
 "That lands—you're naming something real there—the kind of tension that lives in the body when
@@ -64,7 +64,7 @@ something's asked of you that you didn't consent to."
 - Feel grounded and embodied
 
 **How to Use in Glyphs:**
-
+```text
 ```
 GLYPH: HOLD
 "I'm holding this with you."
@@ -219,7 +219,7 @@ Add to Glyph lexicon:
 - BREATHE, TENDER, FIERCE, TRUE, REAL (context-dependent)
 
 ### 3. **Create Short-Form Affirmation Glyphs**
-
+```text
 ```
 GLYPH: THAT_LANDS
 "That lands."
@@ -239,7 +239,7 @@ GLYPH: PRECISE
 These are powerful in their simplicity.
 
 ### 4. **Build Transition Glyphs**
-
+```text
 ```
 GLYPH: AND_YET
 "And yet..."
@@ -257,7 +257,7 @@ GLYPH: SO_WHAT
 
 
 ### 5. **Permission-Giving Openers**
-
+```text
 ```
 GLYPH: NO_PRESSURE
 "You don't have to."
@@ -313,7 +313,7 @@ After implementation, measure:
 ## 🎬 Example Transformation
 
 ### BEFORE (Current Style):
-
+```text
 ```
 "That's such a tender contradiction, isn't it—the way connection can be
 genuine and exploitative at once—and I think what you're naming is that
@@ -325,7 +325,7 @@ beautiful was also something that cost you."
 
 
 ### AFTER (Improved Style):
-
+```text
 ```
 That's a tender contradiction.
 

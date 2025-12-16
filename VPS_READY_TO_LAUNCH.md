@@ -5,7 +5,7 @@
 Your complete production deployment package is **ready to deploy** to DigitalOcean.
 
 ### Production Infrastructure ✅
-
+```bash
 ```
 ✅ docker-compose.prod.yml     - Production orchestration (42 lines)
 ✅ nginx.prod.conf             - SSL/TLS reverse proxy (77 lines)
@@ -15,7 +15,7 @@ Your complete production deployment package is **ready to deploy** to DigitalOce
 
 
 ### Documentation Suite ✅
-
+```text
 ```
 ✅ VPS_THE_SIMPLE_VERSION.md      - Beginner-friendly (start here)
 ✅ DEPLOYMENT_VPS.md              - Complete step-by-step guide
@@ -56,7 +56,7 @@ git commit -m "feat: add production VPS deployment infrastructure
 - Complete deployment documentation suite
 
 Enables self-hosted reliable deployment with auto-scaling capabilities."
-git push origin main
+```text
 ```
 
 
@@ -129,7 +129,7 @@ ssh root@[YOUR_IP]
 # 6. Test
 https://velinor.firstperson.chat
 
-# ✅ Done!
+```text
 ```
 
 
@@ -152,7 +152,7 @@ Now (DigitalOcean) ✅
 ├─ Auto-restart on crash
 ├─ Full SSH access to debug
 ├─ Complete control
-└─ $6/month flat rate
+```text
 ```
 
 
@@ -266,7 +266,7 @@ Now (DigitalOcean) ✅
 ✅ No Railway issues
 ✅ Peace of mind
 ✅ 99.9% uptime
-✅ $6/month cost
+```text
 ```
 
 
@@ -347,7 +347,7 @@ Everything is created, tested, documented, and ready to go.
 You just went from:
 
 ```
-😞 Railway (broken)
+```text
 ```
 
 

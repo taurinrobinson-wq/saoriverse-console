@@ -37,7 +37,7 @@ Phase 3.2 successfully implements multi-modal emotional understanding by combini
 ## What Changed
 
 ### New Modules Created (1,849 lines total)
-
+```text
 ```
 emotional_os/core/firstperson/
 ├── voice_affect_detector.py (485 lines)
@@ -71,7 +71,7 @@ emotional_os/core/firstperson/
 
 
 ### Documentation Created (4 comprehensive guides)
-
+```text
 ```
 docs/
 ├── PHASE_3_2_DOCUMENTATION.md (450 lines)
@@ -128,7 +128,7 @@ docs/
 ## Test Results
 
 ### Phase 3.2 Tests (14/14 ✅)
-
+```text
 ```
 TestVoiceAffectDetector::
   ✅ test_calm_voice_analysis
@@ -191,7 +191,7 @@ TestPhase32Integration::
 ##
 
 ## Architecture
-
+```text
 ```
 Input Data:
 ├── Text (from Phase 1-2)

@@ -39,7 +39,7 @@ Your glyph system contains **6,434 glyphs** organized across **63 primary catego
 ## The Translation Problem
 
 ### Current Flow (3 layers)
-
+```text
 ```
 User Input: "I'm exhausted"
     ↓
@@ -99,7 +99,7 @@ Benefits:
 ### Step 3: Direct Response Mapping
 
 New flow (2 layers instead of 3):
-
+```text
 ```
 User Input: "I'm exhausted"
     ↓
@@ -175,7 +175,7 @@ AFFECT_TO_GLYPH = {
     ("neutral", 0.3, 0.1): "Stillness", # Low arousal + slightly positive
     ("warm", 0.7, 0.8): "Connection",   # High arousal + positive
     ("grateful", 0.4, 0.9): "Acceptance", # Low-medium + very positive
-}
+```text
 ```
 
 
@@ -188,7 +188,7 @@ AFFECT_TO_GLYPH = {
 brief_responses = [
     "I hear the sadness in this. It feels heavy.",
     "I can sense the sorrow. It's real.",
-]
+```text
 ```
 
 

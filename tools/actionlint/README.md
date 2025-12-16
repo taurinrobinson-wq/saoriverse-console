@@ -45,7 +45,7 @@ jobs:
           path: ~/.npm
           key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }}
         if: ${{ github.repository.permissions.admin == true }}
-      - run: npm install && npm test
+```text
 ```
 
 
@@ -80,7 +80,7 @@ test.yaml:21:20: property "platform" is not defined in object type {os: string} 
 test.yaml:22:17: receiver of object dereference "permissions" must be type of object but got "string" [expression]
    |
 22 |         if: ${{ github.repository.permissions.admin == true }}
-   |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```text
 ```
 
 
@@ -104,7 +104,7 @@ Install `actionlint` command by downloading [the released binary][releases] or b
 or run via Docker container.
 
 ```sh
-go install github.com/rhysd/actionlint/cmd/actionlint@latest
+```text
 ```
 
 

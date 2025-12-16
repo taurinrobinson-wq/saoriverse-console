@@ -11,7 +11,7 @@ The previous implementation incorrectly made glyphs the PRIMARY driver of respon
 ### 1. Parse User's Message Semantically
 
 Extract linguistic elements:
-
+```text
 ```
 User Input: "I'm feeling so stressed today"
 
@@ -28,7 +28,7 @@ User Input: "I'm feeling so stressed today"
 ### 2. Analyze What's Missing
 
 System identifies gaps in the message:
-
+```text
 ```
 User said "I'm feeling so stressed today" but didn't say:
 - CONTEXT: What triggered this? What's the situation?
@@ -43,7 +43,7 @@ User said "I'm feeling so stressed today" but didn't say:
 ### 3. Build Response Structure
 
 **Acknowledgment** → Glyph Validation → Clarifying Question
-
+```text
 ```
 Acknowledgment:
   "You're feeling stress right now—and you're emphasizing how much this is present."
@@ -63,7 +63,7 @@ Clarifying Question:
 ### 4. Generate Targeted Clarification
 
 Questions are specific to what's missing, not generic:
-
+```text
 ```
 Missing Element                  Clarifying Question
 ─────────────────────────────────────────────────────
@@ -79,7 +79,7 @@ Agency/attempt                  "What have you tried?"
 ## Examples
 
 ### Example 1: Minimal Information
-
+```text
 ```
 User: "I'm sad"
 
@@ -100,7 +100,7 @@ Why this works:
 
 
 ### Example 2: Present Tense + Emphasis + Temporal
-
+```text
 ```
 User: "I'm feeling so stressed today"
 
@@ -125,7 +125,7 @@ Why this works:
 
 
 ### Example 3: Continuous Past + No Specifics
-
+```text
 ```
 User: "I've been feeling anxious lately"
 
@@ -148,7 +148,7 @@ Why this works:
 
 
 ### Example 4: Rich Context
-
+```text
 ```
 User: "I feel really overwhelmed with all the work and family responsibilities right now"
 
@@ -227,7 +227,7 @@ Why this works:
    - Emotionally themed based on primary affect
 
 ### Response Structure
-
+```json
 ```
 {acknowledgment}. {glyph_validation}. {clarifying_question}
 ```
@@ -235,7 +235,7 @@ Why this works:
 
 
 Example breakdown:
-
+```text
 ```
 "You're feeling stress right now—and you're emphasizing how much this is present.
 What you're describing has a quality of quiet revelation. What's creating this pressure?"

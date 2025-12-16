@@ -7,7 +7,7 @@
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-./run_gutenberg_learning.sh
+```text
 ```
 
 
@@ -15,7 +15,7 @@ cd /Users/taurinrobinson/saoriverse-console
 Or directly:
 
 ```bash
-nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py &
+```text
 ```
 
 
@@ -24,7 +24,7 @@ nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher
 ## 📊 Monitor Progress
 
 ```bash
-tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
+```text
 ```
 
 
@@ -33,7 +33,7 @@ tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 ## 📈 View Results
 
 ```bash
-cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
+```text
 ```
 
 
@@ -47,7 +47,7 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/          (8 collections)
 ├── gutenberg_learning.log     (processing log)
-└── gutenberg_processing_results.json
+```text
 ```
 
 
@@ -59,7 +59,7 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 ├── gutenberg_fetcher.py
 ├── bulk_text_processor.py
 ├── run_gutenberg_learning.sh
-└── GUTENBERG_PROCESSING.md
+```text
 ```
 
 

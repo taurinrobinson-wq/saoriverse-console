@@ -1,7 +1,7 @@
 # Data Flow: From Poetry to Glyphs
 
 ## The Complete Journey
-
+```text
 ```
 PROJECT GUTENBERG POETRY
 (1.1 Million Words from 18 Collections)
@@ -134,7 +134,7 @@ READY FOR SYSTEM INTEGRATION
   "narrative_hook": "A story of love through intimacy",
   "created_from_pattern": true,
   "source": "gutenberg_poetry"
-}
+```text
 ```
 
 

@@ -57,7 +57,7 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 ##
 
 ## State Machine Flow
-
+```text
 ```
 User discloses suicidal ideation
               ↓
@@ -143,7 +143,7 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 ## Consent Logic
 
 ### Resource Offering (Key Innovation)
-
+```text
 ```
 1. Detect suicidal disclosure
 2. Acknowledge + clarify role + invite
@@ -159,7 +159,7 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 
 
 ### Return Detection
-
+```text
 ```
 If user returns AND has "check_in_invited" flag:
    1. Use check_in_recognition templates FIRST
@@ -177,7 +177,7 @@ If user returns AND has "check_in_invited" flag:
 
 ```bash
 cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
-python tests/test_suicidality_protocol.py
+```text
 ```
 
 
@@ -206,7 +206,7 @@ Response includes resources: True
 --- Test 5: Respecting 'No' to Resources ---
 Response respects boundary: True
 
-✅ CONSENT-BASED PROTOCOL WORKING
+```text
 ```
 
 

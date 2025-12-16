@@ -106,7 +106,7 @@ for fname, paths in files_to_check.items():
             found = True
             break
     if not found:
-        print(f"❌ {fname}: NOT FOUND - searched {[str(p) for p in paths]}")
+```text
 ```
 
 

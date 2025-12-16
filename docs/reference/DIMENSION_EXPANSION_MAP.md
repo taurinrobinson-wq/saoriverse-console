@@ -1,7 +1,7 @@
 # Emotional Dimension Expansion Map
 
 ## Your Original 8 Dimensions (from "Hope is the thing with feathers")
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  BASE EMOTIONAL DIMENSIONS (Foundation)                 │
@@ -20,7 +20,7 @@
 
 
 ## New Pre-Discovered Dimensions (from Poetry Analysis)
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  ENHANCED DIMENSIONS (Poetry Canon Analysis)            │
@@ -41,7 +41,7 @@
 
 
 ## Dynamically Discovered Dimensions (from Corpus Learning)
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  ADAPTIVE DIMENSIONS (Learned from Processing)          │
@@ -59,7 +59,7 @@
 
 
 ## Dimension Expansion Timeline
-
+```text
 ```
 November 3, 2025
 ├─ Started: 8 dimensions (your poem)
@@ -79,7 +79,7 @@ November 3, 2025
 ## Cross-Dimension Relationships
 
 ### Example: "Melancholic Nostalgia"
-
+```text
 ```
 Melancholy (13)
     + Nostalgia (9)
@@ -96,7 +96,7 @@ When extracted from Romantic poetry:
 
 
 ### Example: "Transcendent Wonder"
-
+```text
 ```
 Transcendence (11)
     + Wonder (16)
@@ -129,7 +129,7 @@ When extracted from Shelley:
 - **Resilience**: standing firm, enduring
 
 ## System Processing Flow with Adaptive Extraction
-
+```text
 ```
 Poetry Corpus
     ↓
@@ -159,7 +159,7 @@ System now understands poetry at deeper level
 - Semantic relationships between classical poets
 
 **Example Report:**
-
+```text
 ```
 Emotional Dimensions Report:
 ├─ Base Dimensions: 8

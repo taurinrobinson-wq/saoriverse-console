@@ -3,7 +3,7 @@
 ## Storage Configuration
 
 **All data files are stored on your external drive:**
-
+```text
 ```
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (8 poetry collections)
@@ -14,7 +14,7 @@
 
 
 **Code files remain on your hard drive:**
-
+```text
 ```
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py
@@ -106,7 +106,7 @@ From our test run with Emily Dickinson poetry:
 fetcher = GutenbergPoetryFetcher()
 downloaded = fetcher.download_all_collections()
 
-# Downloads 12 poetry collections from Project Gutenberg
+```text
 ```
 
 
@@ -140,7 +140,7 @@ Results saved to:
 **View processing log on external drive:**
 
 ```bash
-tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
+```text
 ```
 
 
@@ -148,7 +148,7 @@ tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 **Check results when complete:**
 
 ```bash
-cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
+```text
 ```
 
 
@@ -156,7 +156,7 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 **View downloaded poetry:**
 
 ```bash
-ls -lh "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
+```text
 ```
 
 
@@ -170,7 +170,7 @@ To download more poetry collections or re-run processing in the future:
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-./run_gutenberg_learning.sh
+```text
 ```
 
 
@@ -179,7 +179,7 @@ cd /Users/taurinrobinson/saoriverse-console
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py > /Volumes/My Passport\ for\ Mac/saoriverse_data/gutenberg_learning.log 2>&1 &
+```text
 ```
 
 

@@ -3,7 +3,7 @@
 ## 🎯 Integration at a Glance
 
 Your Velinor game now uses FirstPerson to make NPC dialogue **emotionally responsive**. Here's what happens:
-
+```text
 ```
 You type: "I'm overwhelmed by all of this"
            ↓
@@ -51,7 +51,7 @@ NPC adapts response:
 FirstPerson tracks across turns:
 
 ### Conversation Memory
-
+```text
 ```
 Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6
 Turn 2: "It's like I've lost them" → Theme: grief, Valence: -0.8
@@ -64,7 +64,7 @@ Turn 3: "But maybe there's hope"  → Theme: grief, Valence: -0.1
 
 
 ### NPC Responds to Pattern
-
+```text
 ```
 Turn 3 NPC: "I'm noticing a shift in what you're saying.
 What's helping you see this differently?"
@@ -103,7 +103,7 @@ st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(...)
 orchestrator = VelinorTwineOrchestrator(
     first_person_module=firstperson_orchestrator,
     ...
-)
+```text
 ```
 
 
@@ -121,7 +121,7 @@ player_analysis = self._summarize_player_intent(player_input, player_id)
 npc_dialogue = self._generate_npc_dialogue(
     npc_name='Keeper',
     context=updated_state  # Contains player_analysis
-)
+```text
 ```
 
 
@@ -146,7 +146,7 @@ FirstPerson Analysis:
 Keeper's Response:
 "I hear the weight in that. The gravity of what you're carrying—
 I feel it too. What needs to be said about it? Sometimes naming it
-helps."
+```text
 ```
 
 
@@ -172,7 +172,7 @@ FirstPerson Analysis:
 Keeper's Response:
 "I hear the weight in that. And I'm noticing grief keeps coming
 back to you—it's sitting heavy. That tells me something. What do
-you need in this moment?"
+```text
 ```
 
 
@@ -195,7 +195,7 @@ FirstPerson Analysis:
 
 Keeper's Response:
 "There's something to sit with there. I'm also noticing a shift
-in what you're saying. What's helping you see this differently?"
+```text
 ```
 
 
@@ -207,7 +207,7 @@ in what you're saying. What's helping you see this differently?"
 ```bash
 
 # Just run it—integration works automatically!
-streamlit run velinor_app.py
+```text
 ```
 
 
@@ -220,7 +220,7 @@ The terminal shows debug info (if logging enabled):
 ```
 [Player Input] "I'm struggling with loss"
 [FirstPerson] tone='heavy', theme='grief', valence=-0.7, intensity=0.8
-[NPC] Keeper generates response...
+```text
 ```
 
 
@@ -241,7 +241,7 @@ response_openings = {
 theme_acknowledgments = {
     'grief': "Your custom grief acknowledgment",
     ...
-}
+```text
 ```
 
 
@@ -270,7 +270,7 @@ self.memory.record_turn(
     affect={valence: -0.7, intensity: 0.8, tone: 'heavy'},
     theme='general',
     glyph_name=None
-)
+```text
 ```
 
 
@@ -286,7 +286,7 @@ Turn 3: "Grief is still with me" → theme='grief' (2nd occurrence)
 memory.repeated_patterns = ['grief']
 
 # Next NPC response includes:
-"I'm noticing grief keeps coming back to you."
+```text
 ```
 
 

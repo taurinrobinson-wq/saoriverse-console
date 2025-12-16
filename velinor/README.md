@@ -11,7 +11,7 @@ player `tone` vectors into NPC `remnants` updates. Files added:
 Run the tests with:
 
 ```bash
-pytest -q velinor/tests/test_resonance.py
+```text
 ```
 
 
@@ -45,7 +45,7 @@ Velinor is an innovative interactive fiction experience built with:
 cd saoriverse-console
 
 # Install dependencies
-pip install -r requirements.txt
+```text
 ```
 
 
@@ -69,7 +69,7 @@ state = orchestrator.start_game()
 state = orchestrator.process_player_action(
     choice_index=0,  # Select first choice
     player_id="player_1"
-)
+```text
 ```
 
 
@@ -94,7 +94,7 @@ TWINE STORY (JSON)
     ├─ Streamlit (Desktop)
     ├─ Web Framework (Online)
     ├─ CLI Terminal (Local)
-    └─ Mobile App (Future)
+```text
 ```
 
 
@@ -125,7 +125,7 @@ You emerge into the Market District...
 
 [[Ask about the Tone->keeper_dialogue]]
 [[Explore alone->market_exploration]]
-[[Observe (Wisdom, DC 11)->observer_path]]
+```text
 ```
 
 
@@ -161,7 +161,7 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
     'empathy': 60,     # Connect with others, feel
     'resolve': 50,     # Persist despite difficulty
     'resonance': 100,  # Hear the Tone, collect glyphs
-}
+```text
 ```
 
 
@@ -179,7 +179,7 @@ Example:
 Player chooses: "Persuade the guard"
 DC: 12, Player Courage: +3
 Roll: 14 + 3 = 17 ✅ Success
-→ Route to success_path passage
+```text
 ```
 
 
@@ -206,7 +206,7 @@ Roll: 14 + 3 = 17 ✅ Success
 **Solo Mode:**
 
 ```
-NPC: "You steady yourself, blade in hand."
+```text
 ```
 
 
@@ -215,7 +215,7 @@ NPC: "You steady yourself, blade in hand."
 
 ```
 NPC: "Together, your courage strengthens. The mist bends
-     to your collective will."
+```text
 ```
 
 
@@ -249,7 +249,7 @@ velinor/
 ├── assets/
 │   └── backgrounds/            # Location images
 ├── markdowngameinstructions/   # Design docs
-└── TWINE_INTEGRATION_GUIDE.md  # Full reference
+```text
 ```
 
 
@@ -324,7 +324,7 @@ print("New location:", state['game_state']['current_location'])
 orchestrator.save_game("saves/game_001.json")
 
 # Load
-state = orchestrator.load_game("saves/game_001.json")
+```text
 ```
 
 
@@ -350,7 +350,7 @@ Velinor loads Twine 2 JSON export format:
       "size": [100, 100]
     }
   ]
-}
+```text
 ```
 
 

@@ -10,7 +10,7 @@ A private, local-first emotional AI companion with integrated voice interface.
 ### 1. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+```text
 ```
 
 
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ### 2. Run the Application
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 
@@ -55,7 +55,7 @@ This project uses a clean folder structure to prevent clutter:
 pip install -r requirements.txt
 
 # Run Streamlit app
-streamlit run app.py
+```text
 ```
 
 
@@ -89,7 +89,7 @@ saoriverse-console/
 ├── data/                 # Data files (glyphs, lexicons)
 ├── scripts/              # Utility scripts (organized)
 ├── docs/                 # Documentation
-└── archive/              # Old code/docs (for reference)
+```text
 ```
 
 
@@ -111,7 +111,7 @@ pytest tests/unit/
 pytest tests/integration/
 
 # With coverage report
-pytest tests/ --cov=src
+```text
 ```
 
 
@@ -122,7 +122,7 @@ pytest tests/ --cov=src
 ### Text-to-Response Pipeline
 
 ```
-User Input → Signal Parser → Response Generator → Streamlit UI
+```text
 ```
 
 
@@ -130,7 +130,7 @@ User Input → Signal Parser → Response Generator → Streamlit UI
 ### Voice Pipeline (Optional)
 
 ```
-Audio Input → STT → [same as above] → TTS → Audio Output
+```text
 ```
 
 
@@ -138,7 +138,7 @@ Audio Input → STT → [same as above] → TTS → Audio Output
 ### Learning System
 
 ```
-User Feedback → Pattern Learning → Memory Storage → Improvement
+```text
 ```
 
 
@@ -206,7 +206,7 @@ lsof -i :8501
 kill -9 <PID>
 
 # Then restart
-streamlit run app.py
+```text
 ```
 
 
@@ -222,7 +222,7 @@ cd saoriverse-console
 python -c "import sys; print(sys.path)"
 
 # Reinstall dependencies
-pip install -r requirements.txt
+```text
 ```
 
 

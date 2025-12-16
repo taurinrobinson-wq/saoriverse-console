@@ -8,7 +8,7 @@ Quick start (development):
 
 ```bash
 cd firstperson
-npm install
+```text
 ```
 
 
@@ -16,7 +16,7 @@ npm install
 2. Start the Expo dev server
 
 ```bash
-npx expo start
+```text
 ```
 
 
@@ -30,7 +30,7 @@ Backend configuration
 - By default the app points at `http://localhost:8000`. To change this, set the environment variable `REACT_APP_SAOYNX_API_URL` before starting the app. Example:
 
 ```bash
-REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000" npx expo start
+```text
 ```
 
 

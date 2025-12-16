@@ -150,7 +150,7 @@ You now have **2,131 lines** of comprehensive documentation for building a fully
 ##
 
 ## 📊 Content Summary
-
+```text
 ```
 Total Documentation: 2,131 lines
 Total Code Examples: 400+ lines
@@ -233,7 +233,7 @@ python -m spacy download en_core_web_sm
 # Download NRC: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
 # 3. Test
-python test_local_mode.py
+```text
 ```
 
 

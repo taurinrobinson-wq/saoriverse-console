@@ -32,7 +32,7 @@ result = learner.learn_from_exchange(
     emotional_signals=[...]
 )
 
-# Automatically anonymized & logged with mapping
+```text
 ```
 
 
@@ -54,7 +54,7 @@ Your Identity:        Medical Details:    Sharing:
 ○ Anonymous          ○ Abstract (...)    ○ Legacy archive
 ○ Private (...)      ○ Remove            ○ Research
 
-✅ Confirm  🔄 Change  ⏭️ Later
+```text
 ```
 
 
@@ -124,7 +124,7 @@ Log Entry Saved
 User History Updated
     ├─ Visible to user
     ├─ Searchable
-    └─ Exportable
+```text
 ```
 
 
@@ -152,7 +152,7 @@ result = learner.learn_from_exchange(
 
 # - Stores mapping for audit trail
 
-# - Logs only signals, gates, metadata (no raw text)
+```text
 ```
 
 
@@ -166,7 +166,7 @@ learner = HybridLearnerWithUserOverrides(
     enable_anonymization=True,
     allow_medical_details=True,  # Keep "depression" as-is
     allow_names=False  # Anonymize "Michelle" → "The Thread"
-)
+```text
 ```
 
 
@@ -182,7 +182,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 
 # Shows options and gets user choice
 
-# Automatically uses for future logging
+```text
 ```
 
 
@@ -227,7 +227,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 [Processing time]
 
 📋 Memory & Sharing
-[Consent Widget]
+```text
 ```
 
 
@@ -240,7 +240,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 ├─ Store medical details [toggle]
 ├─ View My Data Privacy Report [button]
 ├─ Delete All My Data [button]
-└─ Learn More [expander]
+```text
 ```
 
 
@@ -250,7 +250,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 ```python
 st.session_state['consent_allow_names'] = False
 st.session_state['consent_allow_medical'] = False
-st.session_state[f'consent_exchange_{i}'] = {...}
+```text
 ```
 
 

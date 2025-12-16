@@ -339,7 +339,7 @@ Each marketplace visit can feel fresh:
 ##
 
 ## Marketplace Sphere Map (Visual Reference)
-
+```text
 ```
                      Ravi (0.8) ← → Nima
                      /  \              /  \

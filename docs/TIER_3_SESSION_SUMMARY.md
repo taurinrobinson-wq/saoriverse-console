@@ -108,7 +108,7 @@ Created comprehensive documentation:
 ## Technical Metrics
 
 ### Code Statistics
-
+```text
 ```
 Implementation Files:
 ├── tier3_poetic_consciousness.py: 610 lines
@@ -133,7 +133,7 @@ Documentation:
 
 
 ### Performance Metrics
-
+```text
 ```
 Single Call Performance:
 ├── Average: 7.2ms
@@ -153,7 +153,7 @@ Full Pipeline (T1+T2+T3):
 
 
 ### Test Coverage
-
+```text
 ```
 Test Results:
 ├── Total Tests: 98
@@ -206,7 +206,7 @@ if tier3:
         )
         response = poetry_response
     except Exception as e:
-        logger.warning(f"Tier 3 enhancement failed: {e}")
+```text
 ```
 
 
@@ -224,7 +224,7 @@ def _ensure_tier3_poetic_consciousness():
             tier3 = Tier3PoeticConsciousness()
             st.session_state["tier3_poetic_consciousness"] = tier3
         except Exception as e:
-            logger.warning(f"Failed to initialize Tier 3: {e}")
+```text
 ```
 
 
@@ -395,7 +395,7 @@ The response enhancement system is now complete with creative depth, emotional p
 ```bash
 pytest tests/test_tier1_foundation.py tests/test_tier2_aliveness.py tests/test_tier3_poetic_consciousness.py --tb=no -q
 
-# Expected: 98 passed in 0.57s
+```text
 ```
 
 
@@ -405,7 +405,7 @@ pytest tests/test_tier1_foundation.py tests/test_tier2_aliveness.py tests/test_t
 ```bash
 pytest tests/test_tier3_poetic_consciousness.py -v
 
-# Expected: 45 passed in 0.55s
+```text
 ```
 
 
@@ -416,7 +416,7 @@ pytest tests/test_tier3_poetic_consciousness.py -v
 git log --oneline -10
 git status
 
-# Expected: clean working tree, commit 72b9198 visible
+```text
 ```
 
 

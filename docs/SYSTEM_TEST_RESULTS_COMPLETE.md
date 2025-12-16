@@ -159,7 +159,7 @@ The FirstPerson system successfully processes emotional conversations with prope
 ## Performance Metrics
 
 ### Response Times
-
+```text
 ```
 Fastest: 6ms (Test 8, 10)
 Slowest: 36ms (Test 2)

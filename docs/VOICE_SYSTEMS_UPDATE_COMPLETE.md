@@ -117,7 +117,7 @@ Impact analysis document including:
 - **Competitors**: Actually don't have equivalent offerings
 
 ### New TAM Components
-
+```text
 ```
 Previous Markets ($100B):
 ├─ Mental health: $10B
@@ -233,7 +233,7 @@ TOTAL: $120-160B+
 ##
 
 ## Git Commits
-
+```text
 ```
 Commit 444da02: docs: Add comprehensive voice & multimodal interface documentation
   - Updated COMPREHENSIVE_TECHNOLOGY_SURVEY.md with Section 1.5

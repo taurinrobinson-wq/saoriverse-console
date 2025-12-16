@@ -15,7 +15,7 @@
 ## Verification
 
 All tests passing:
-
+```text
 ```
 ✓ Core modules compile without errors
 ✓ Integration functional
@@ -39,7 +39,7 @@ All tests passing:
 **Test locally:**
 
 ```bash
-python emotional_os/main_v2.py
+```text
 ```
 
 
@@ -50,7 +50,7 @@ python emotional_os/main_v2.py
 from emotional_os.glyphs.signal_parser import parse_input
 
 result = parse_input("I feel overwhelmed", "emotional_os/glyphs/lexicon.db")
-print(result['voltage_response'])  # Generated response
+```text
 ```
 
 

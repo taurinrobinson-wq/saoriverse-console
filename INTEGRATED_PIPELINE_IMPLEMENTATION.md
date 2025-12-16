@@ -9,7 +9,7 @@
 
 ### Created: `src/firstperson_integrated_pipeline.py`
 A new orchestrator that wires ALL your built response systems together:
-
+```text
 ```
 User Input
     ↓
@@ -63,7 +63,7 @@ FINAL RESPONSE (~85-90ms total)
 ## Architecture Changes
 
 ### BEFORE (Current)
-
+```text
 ```
 /chat endpoint
     → generate_empathetic_response()
@@ -75,7 +75,7 @@ FINAL RESPONSE (~85-90ms total)
 **Problem:** Generic responses, no emotional attunement, missing safety layers
 
 ### AFTER (New)
-
+```text
 ```
 /chat endpoint
     → generate_empathetic_response() [BASE]
@@ -184,7 +184,7 @@ If ANY component fails:
 # Kill current process (Ctrl+C in terminal if running)
 
 # Then start fresh:
-D:/saoriverse-console/.venv/Scripts/python.exe firstperson_backend.py
+```text
 ```
 
 
@@ -200,7 +200,7 @@ D:/saoriverse-console/.venv/Scripts/python.exe firstperson_backend.py
 ✓ Response Templates initialized
 ✓ Affect Parser initialized
 ✓ Context Selector initialized
-✓ Integrated response pipeline initialized
+```text
 ```
 
 

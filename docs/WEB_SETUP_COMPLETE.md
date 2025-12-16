@@ -17,7 +17,7 @@ I've set up your Next.js web version to run **directly on your Mac without Docke
 
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
-./RUN_WEB_DEV.sh
+```text
 ```
 
 
@@ -27,7 +27,7 @@ Then visit: **http://localhost:3000**
 
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
-./RUN_FULL_STACK.sh
+```text
 ```
 
 
@@ -95,7 +95,7 @@ velinor-web/
 │   │   └── GameScene.tsx # Main game component (empty, ready for you)
 │   └── styles/
 ├── public/assets/        # All game graphics
-└── package.json
+```text
 ```
 
 
@@ -118,7 +118,7 @@ npm run build
 npm run lint
 
 # Run production server
-npm start
+```text
 ```
 
 
@@ -133,7 +133,7 @@ POST   /sessions                    # Create new game
 GET    /sessions/{id}               # Get game state
 POST   /sessions/{id}/actions       # Process player action
 POST   /sessions/{id}/save          # Save game
-GET    /sessions/{id}/load          # Load game
+```sql
 ```
 
 
@@ -149,7 +149,7 @@ const startGame = async (playerName: string) => {
     player_backstory: 'Wanderer seeking truth'
   });
   return response.data; // { session_id, initial_state, ... }
-};
+```text
 ```
 
 
@@ -185,7 +185,7 @@ For understanding the game logic:
 ```bash
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
-nvm use 20.11.0
+```text
 ```
 
 
@@ -198,7 +198,7 @@ nvm use 20.11.0
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
 # Or use different port
-PORT=3001 npm run dev
+```bash
 ```
 
 

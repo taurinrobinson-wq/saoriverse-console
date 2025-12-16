@@ -95,7 +95,7 @@ python -m spacy download en_core_web_sm
 # Place in: data/lexicons/nrc_emotion_lexicon.txt
 
 # 3. Test that everything works
-python test_local_mode.py
+```text
 ```
 
 
@@ -195,7 +195,7 @@ User Input
     ↓
 [Learning System] → Personalize for this user
     ↓
-User receives response (100% local, 100% private)
+```text
 ```
 
 
@@ -323,7 +323,7 @@ And that place is completely **yours**.
 /SOVEREIGN_LOCAL_QUICK_START.md ........ Implementation guide (copy-paste code)
 /FIRSTPERSON_MANIFESTO.md ............ Values & principles
 /TECHNICAL_ARCHITECTURE.md .......... Developer documentation
-/README.md ........................... This summary
+```text
 ```
 
 

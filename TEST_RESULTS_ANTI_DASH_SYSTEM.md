@@ -7,7 +7,7 @@ Status: ✅ ALL TESTS PASSED
 ## Test Suite 1: Em Dash Removal
 
 ### Test 1a: Simple Overwhelm Response
-
+```text
 ```
 Glyph: Spiral Containment
 Tone Pool: Grounded
@@ -22,7 +22,7 @@ Status: ✓ PASS (no dashes to remove, response clean)
 
 
 ### Test 1b: Complex Math Response
-
+```text
 ```
 Glyph: Recursive Ache
 Tone Pool: Reflective
@@ -37,7 +37,7 @@ Status: ✓ PASS (em dashes properly converted to colons)
 
 
 ### Test 1c: Grief Response
-
+```text
 ```
 Glyph: Recursive Ache
 Tone Pool: Reflective
@@ -54,7 +54,7 @@ Status: ✓ PASS (response clean, natural flow)
 ## Test Suite 2: Tone Pool Detection
 
 ### Test 2a: Keyword Mapping
-
+```text
 ```
 Glyph Name: "Spiral Containment"
 Mapping: "containment" → Grounded pool
@@ -66,7 +66,7 @@ Status: ✓ PASS
 
 
 ### Test 2b: Keyword Mapping (Reflective)
-
+```text
 ```
 Glyph Name: "Recursive Ache"
 Mapping: "ache" → Reflective pool
@@ -78,7 +78,7 @@ Status: ✓ PASS
 
 
 ### Test 2c: Keyword Mapping (Empathetic)
-
+```text
 ```
 Glyph Name: "Still Recognition"
 Primary Keyword: "recognition" → Empathetic pool
@@ -93,7 +93,7 @@ Status: ✓ PASS
 ## Test Suite 3: Punctuation Substitution
 
 ### Test 3a: Sentence Split (Grounded)
-
+```text
 ```
 Original: "You're moving through this—there's no wrong way."
 Pool: Grounded
@@ -105,7 +105,7 @@ Status: ✓ PASS
 
 
 ### Test 3b: Colon Emphasis (Reflective)
-
+```text
 ```
 Original: "The difficulty you feel—it's not a flaw."
 Pool: Reflective
@@ -117,7 +117,7 @@ Status: ✓ PASS
 
 
 ### Test 3c: Comma Join (Empathetic)
-
+```text
 ```
 Original: "The alone you're feeling—it belongs to the unknown."
 Pool: Empathetic
@@ -132,7 +132,7 @@ Status: ✓ PASS
 ## Test Suite 4: Rotation Bank Diversity
 
 ### Test 4a: Four Identical Inputs, Different Outputs
-
+```text
 ```
 Input (repeated 4 times): "I'm feeling anxious and overwhelmed"
 
@@ -156,7 +156,7 @@ Status: ✓ PASS (excellent diversity from rotation bank)
 
 
 ### Test 4b: Opening Phrase Variety
-
+```text
 ```
 Opening phrases across 4 runs:
   - "I hear you about..."
@@ -171,7 +171,7 @@ Status: ✓ PASS
 
 
 ### Test 4c: Movement Language Variety
-
+```text
 ```
 Movement phrases in responses:
   - "You're traversing something real"
@@ -189,7 +189,7 @@ Status: ✓ PASS
 ## Test Suite 5: Performance Impact
 
 ### Test 5a: Response Time Overhead
-
+```text
 ```
 Input: "I'm feeling overwhelmed and anxious"
 
@@ -206,7 +206,7 @@ Status: ✓ PASS (no performance regression)
 
 
 ### Test 5b: Multiple Sequential Calls
-
+```text
 ```
 4 identical inputs, sequential processing:
   Response 1: 0.043s
@@ -225,7 +225,7 @@ Status: ✓ PASS (consistent and fast)
 ## Test Suite 6: Error Handling
 
 ### Test 6a: Missing Style Matrix
-
+```text
 ```
 File deleted: style_matrix.json
 Behavior: System loads minimal default pools
@@ -237,7 +237,7 @@ Status: ✓ PASS (graceful degradation)
 
 
 ### Test 6b: Invalid Glyph Name
-
+```text
 ```
 Glyph Name: None or empty
 Behavior: System uses default Grounded pool
@@ -248,7 +248,7 @@ Status: ✓ PASS (defensive handling)
 
 
 ### Test 6c: Cleaning Exception
-
+```text
 ```
 Scenario: Cleaner raises exception
 Behavior: Original response returned unchanged
@@ -262,7 +262,7 @@ Status: ✓ PASS (exception caught, no crash)
 ## Test Suite 7: Integration Testing
 
 ### Test 7a: Full Pipeline (UI to Response)
-
+```text
 ```
 User Input: "I'm grieving"
   ↓
@@ -282,7 +282,7 @@ Status: ✓ PASS (full integration successful)
 
 
 ### Test 7b: Streamlit App Integration
-
+```text
 ```
 App File: main_v2.py
 Entry Point: Working
@@ -314,7 +314,7 @@ Status: ✓ PASS (live app running successfully)
 ## Test Suite 9: Edge Cases
 
 ### Edge Case 1: Very Short Input
-
+```text
 ```
 Input: "sad"
 Response: "It's okay not to know. That's part of the process."
@@ -325,7 +325,7 @@ Status: ✓ PASS
 
 
 ### Edge Case 2: Very Long Input
-
+```text
 ```
 Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining things in a way I don't understand and it's creating real isolation in my family and I'm starting to doubt myself"
 Response: Generated successfully, ~250 characters
@@ -336,7 +336,7 @@ Status: ✓ PASS
 
 
 ### Edge Case 3: Multiple Rapid Calls
-
+```text
 ```
 5 rapid sequential calls to same input
 All: Completed successfully
@@ -347,7 +347,7 @@ Status: ✓ PASS
 
 
 ### Edge Case 4: Glyph with Multiple Keyword Matches
-
+```text
 ```
 Glyph: "Grief of Recognition"
 Keywords: "grief" (Reflective) + "recognition" (Empathetic)
@@ -362,7 +362,7 @@ Status: ✓ PASS (first keyword wins, deterministic)
 ## Test Suite 10: Compatibility
 
 ### Backward Compatibility
-
+```text
 ```
 Existing code calling compose_response():
   - Works without modification

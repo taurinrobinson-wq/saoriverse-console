@@ -28,7 +28,7 @@ All scaffolding is complete. The full web stack is ready for local testing and d
 - ✅ All dependencies installed (axios, zustand, Tailwind CSS)
 
 ### Directory Structure
-
+```text
 ```
 d:\saoriverse-console\
 ├── velinor_api.py                    ✅ FastAPI backend
@@ -101,7 +101,7 @@ Terminal 1 (Backend):
 
 ```bash
 cd d:\saoriverse-console
-python velinor_api.py
+```text
 ```
 
 
@@ -110,7 +110,7 @@ Terminal 2 (Frontend):
 
 ```bash
 cd d:\saoriverse-console\velinor-web
-npm run dev
+```text
 ```
 
 

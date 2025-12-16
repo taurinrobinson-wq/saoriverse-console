@@ -46,7 +46,7 @@
 ## TARGET STATE
 
 ### Directory Structure (Clean & Logical)
-
+```text
 ```
 saoriverse-console/
 │
@@ -168,7 +168,7 @@ grep -r "from emotional_os" --include="*.py" | head -20
 # Check entry points
 grep -l "if __name__ == '__main__'" *.py
 
-# Output: Multiple entry points to consolidate
+```text
 ```
 
 
@@ -181,7 +181,7 @@ grep -l "if __name__ == '__main__'" *.py
 git checkout -b refactor/reorganization-master
 
 # Tag current state
-git tag pre-reorganization
+```text
 ```
 
 
@@ -216,7 +216,7 @@ touch src/voice_interface.py       # Voice orchestration
 touch src/audio_pipeline.py        # STT pipeline
 touch src/multimodal_fusion.py     # Multimodal analysis
 touch src/privacy_layer.py         # Privacy/encryption
-touch src/learning.py              # Learning systems
+```text
 ```
 
 
@@ -233,7 +233,7 @@ mkdir -p tests/fixtures/
 # Create test discovery
 touch tests/__init__.py
 touch tests/conftest.py             # Pytest configuration
-touch tests/fixtures/sample_data.py # Test fixtures
+```text
 ```
 
 
@@ -249,7 +249,7 @@ mkdir -p data/fixtures/
 
 # Move all glyph/lexicon data to data/
 mv glyphs.db data/
-mv lexicons/* data/lexicons/ 2>/dev/null || true
+```text
 ```
 
 
@@ -267,7 +267,7 @@ mv docs/LEXICON_*.md docs/archive/
 # Create new guide structure
 touch docs/ARCHITECTURE.md
 touch docs/TESTING_GUIDE.md
-touch docs/API_REFERENCE.md
+```text
 ```
 
 
@@ -288,7 +288,7 @@ find . -type f -name "*.py" -exec grep -l "emotional_os" {} \; | grep -v __pycac
 find . -type f -name "*response*" -o -name "*generator*" | grep -v __pycache__
 
 # Find all voice code
-find . -type f -path "*spoken_interface*" -name "*.py" | sort
+```text
 ```
 
 
@@ -387,7 +387,7 @@ __all__ = [
     "encrypt_signals",
     "decrypt_signals",
     "LearningSystem",
-]
+```text
 ```
 
 
@@ -400,7 +400,7 @@ __all__ = [
 ```bash
 
 # Move all test_*.py from root to tests/
-mv test_*.py tests/
+```text
 ```
 
 
@@ -421,7 +421,7 @@ tests/unit/
 ├── test_audio_pipeline.py
 ├── test_privacy_layer.py
 ├── test_learning.py
-└── test_multimodal_fusion.py
+```text
 ```
 
 
@@ -455,7 +455,7 @@ def sample_signal():
         "attunement": 0.7,
         "certainty": 0.5,
         "valence": 0.3
-    }
+```sql
 ```
 
 
@@ -470,7 +470,7 @@ testpaths = tests
 python_files = test_*.py
 python_classes = Test*
 python_functions = test_*
-addopts = -v --tb=short
+```text
 ```
 
 
@@ -542,7 +542,7 @@ def main():
         # Voice UI would go here
 
 if __name__ == "__main__":
-    main()
+```text
 ```
 
 
@@ -554,7 +554,7 @@ if __name__ == "__main__":
 # Remove old entry points (after backup)
 rm main_v2.py
 rm main_v2_simple.py
-rm start.py
+```text
 ```
 
 
@@ -577,7 +577,7 @@ Usage:
 cd scripts/
 python -m data.download_nrc_lexicon
 python -m setup.init_db
-python -m debug.inspect_glyphs
+```text
 ```
 
 
@@ -602,7 +602,7 @@ mv scripts/download_nrc_lexicon.py scripts/data/
 mv scripts/init_test_db.py scripts/setup/
 mv scripts/inspect_glyphs.py scripts/debug/
 
-# ... etc
+```text
 ```
 
 
@@ -632,7 +632,7 @@ def test_imports():
 
 if __name__ == "__main__":
     success = test_imports()
-    sys.exit(0 if success else 1)
+```text
 ```
 
 
@@ -640,7 +640,7 @@ if __name__ == "__main__":
 Run it:
 
 ```bash
-python tools/import_checker.py
+```text
 ```
 
 
@@ -656,7 +656,7 @@ pytest tests/unit/test_emotional_os.py -v
 pytest tests/unit/ -v
 
 # Run with coverage
-pytest tests/ --cov=src --cov-report=html
+```text
 ```
 
 
@@ -669,7 +669,7 @@ pytest tests/ --cov=src --cov-report=html
 pytest tests/integration/test_full_e2e.py -v
 
 # All integration tests
-pytest tests/integration/ -v
+```text
 ```
 
 
@@ -683,7 +683,7 @@ streamlit run app.py
 
 # Verify in browser
 
-# http://localhost:8501
+```text
 ```
 
 
@@ -706,7 +706,7 @@ mv local_inference archive/old_structure/
 # Move old documentation
 mv *.md archive/old_docs/ 2>/dev/null || true
 
-# Keep: README.md, CONTRIBUTING.md, docs/ directory
+```sql
 ```
 
 
@@ -723,7 +723,7 @@ TTS>=0.21.0
 pydantic>=2.0
 python-dotenv>=1.0
 
-# ... etc
+```text
 ```
 
 
@@ -741,7 +741,7 @@ htmlcov/
 *.log
 build/
 dist/
-*.egg-info/
+```text
 ```
 
 
@@ -749,7 +749,7 @@ dist/
 ### 8.3 Verify No Broken Imports
 
 ```bash
-python -c "import src; print('✅ Core module imports successfully')"
+```text
 ```
 
 
@@ -769,7 +769,7 @@ git commit -m "refactor: Complete codebase reorganization
 - All tests passing, all modules importable
 - Ready for efficient development and deployment"
 
-git push origin refactor/reorganization-master
+```text
 ```
 
 

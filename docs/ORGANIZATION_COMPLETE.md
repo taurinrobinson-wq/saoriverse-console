@@ -28,7 +28,7 @@ From the root directory:
 ./scripts/RUN_FULL_STACK.sh
 
 # Install dependencies
-pip install -r requirements.txt
+```text
 ```
 
 
@@ -69,7 +69,7 @@ saoriverse-console/
 ├── velinor-web/                 # Next.js web version
 ├── firstperson-web/             # FirstPerson web UI
 ├── tests/                       # Unit tests
-└── ...                          # Other source folders
+```text
 ```
 
 
@@ -87,7 +87,7 @@ Commit 2: ANALYSIS_COMPLETE.md (auto-generated)
 Commit 3: PHASE_1_SUMMARY.md (auto-generated)
 Commit 4: BUG_FIX_REPORT.md (auto-generated)
 Commit 5: Fix actual issue
-... (40+ commits, half are garbage summaries)
+```text
 ```
 
 
@@ -101,7 +101,7 @@ Commit 1: Implementation phase 1
 Commit 2: Fix: Player choice processing
 Commit 3: Add: Glyph collection UI
 Commit 4: Chore: Organize project structure
-... (clean, meaningful history)
+```text
 ```
 
 

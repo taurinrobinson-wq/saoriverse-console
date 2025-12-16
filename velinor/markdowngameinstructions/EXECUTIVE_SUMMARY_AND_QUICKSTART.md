@@ -160,7 +160,7 @@ The player must choose between six fundamentally different endings:
 ##
 
 ## File Structure (markdowngameinstructions folder)
-
+```text
 ```
 markdowngameinstructions/
 ├── TONE_STAT_SYSTEM.md

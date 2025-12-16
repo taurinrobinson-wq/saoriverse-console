@@ -46,7 +46,7 @@ python -m pytest emotional_os/core/firstperson/test_*.py -v
 python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; print('✓ Imports OK')"
 
 # 3. Verify Supabase connection (if applicable)
-python scripts/validate_supabase.py
+```text
 ```
 
 
@@ -62,7 +62,7 @@ python scripts/validate_supabase.py
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 
 # 3. Monitor metrics for 24 hours
-python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m = DeploymentMonitor(); m.report_health()"
+```text
 ```
 
 
@@ -82,7 +82,7 @@ python -c "from emotional_os.core.firstperson.deployment_monitor import Deployme
 
 # 4. Commit deployment
 git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
-git push origin release/firstperson-phase-1-2
+```text
 ```
 
 
@@ -105,7 +105,7 @@ pytest emotional_os/core/firstperson/test_repair_module.py -v
 pytest emotional_os/core/firstperson/test_repair_orchestrator.py -v
 
 # Integration orchestrator
-pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
+```text
 ```
 
 
@@ -118,7 +118,7 @@ pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py::TestIntegrationFlow -v
 
 # Phase 2.3 repair detection
-pytest emotional_os/core/firstperson/test_repair_orchestrator.py::TestRejectionDetection -v
+```text
 ```
 
 
@@ -136,7 +136,7 @@ orch = FirstPersonOrchestrator(user_id="test_user", conversation_id="test_conv")
 response = orch.handle_conversation_turn("They were fighting again.")
 print(response.response_text)
 
-# Expected: Clarifying prompt about "they"
+```text
 ```
 
 
@@ -156,7 +156,7 @@ for turn_num, input_text in enumerate(inputs, 1):
     response = orch.handle_conversation_turn(input_text)
     print(f"Turn {turn_num}: {response.detected_theme}")
 
-# Expected: "family conflict" or similar theme on turn 3+
+```text
 ```
 
 
@@ -172,7 +172,7 @@ repair = RepairOrchestrator(user_id="test_user")
 is_rejection = repair.detect_rejection("No, that's not what I meant.")
 print(is_rejection)
 
-# Expected: True
+```text
 ```
 
 
@@ -218,7 +218,7 @@ python -m emotional_os.core.firstperson.deployment_monitor
 watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 
 # Generate health report
-python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m = DeploymentMonitor(); m.report_health()"
+```text
 ```
 
 

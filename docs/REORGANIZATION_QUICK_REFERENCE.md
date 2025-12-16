@@ -21,7 +21,7 @@ grep -l "emotional_os" *.py 2>/dev/null || echo "No imports in root"
 
 # Create backup branch
 git checkout -b refactor/reorganization-master
-git tag pre-reorganization
+```text
 ```
 
 
@@ -53,7 +53,7 @@ touch tests/integration/__init__.py
 touch scripts/__init__.py
 touch scripts/data/__init__.py
 touch scripts/setup/__init__.py
-touch scripts/debug/__init__.py
+```text
 ```
 
 
@@ -85,7 +85,7 @@ mv test_*.py tests/ 2>/dev/null || true
 mv tests/test_emotional_os.py tests/unit/ 2>/dev/null || true
 mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 
-# ... etc for each test
+```text
 ```
 
 
@@ -103,7 +103,7 @@ mv *lexicon*.json data/lexicons/ 2>/dev/null || true
 mv *glyph*.json data/ 2>/dev/null || true
 
 # Move database
-mv *.db data/ 2>/dev/null || true
+```text
 ```
 
 
@@ -124,7 +124,7 @@ mv scripts/seed*.py scripts/setup/ 2>/dev/null || true
 # Debug scripts
 mv scripts/inspect*.py scripts/debug/ 2>/dev/null || true
 mv scripts/debug*.py scripts/debug/ 2>/dev/null || true
-mv scripts/trace*.py scripts/debug/ 2>/dev/null || true
+```text
 ```
 
 
@@ -182,7 +182,7 @@ def check():
 
 if __name__ == "__main__":
     sys.exit(0 if check() else 1)
-EOF
+```text
 ```
 
 
@@ -190,7 +190,7 @@ EOF
 Run it:
 
 ```bash
-python tools/import_checker.py
+```text
 ```
 
 
@@ -239,7 +239,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-EOF
+```text
 ```
 
 
@@ -261,7 +261,7 @@ pytest tests/integration/ -v --tb=short
 # Test Streamlit launch
 streamlit run app.py
 
-# Then: Ctrl+C to stop
+```text
 ```
 
 
@@ -286,7 +286,7 @@ for file in *.md; do
     if [[ "$file" != "README.md" && "$file" != "CONTRIBUTING.md" ]]; then
         mv "$file" docs/archive/" 2>/dev/null || true
     fi
-done
+```text
 ```
 
 
@@ -314,7 +314,7 @@ git commit -m "refactor: Complete codebase reorganization
 - Ready for efficient development and deployment"
 
 # Push to GitHub
-git push origin refactor/reorganization-master
+```text
 ```
 
 

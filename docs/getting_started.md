@@ -13,7 +13,7 @@ Quick steps
 
 ```bash
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
-cd saoriverse-console
+```text
 ```
 
 
@@ -21,7 +21,7 @@ cd saoriverse-console
 2. Load safe defaults
 
 ```bash
-cp .env.template .env  # Load safe defaults for local-only mode
+```text
 ```
 
 
@@ -31,7 +31,7 @@ cp .env.template .env  # Load safe defaults for local-only mode
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt      # runtime deps
-pip install -r requirements-dev.txt  # dev/test deps
+```text
 ```
 
 
@@ -39,7 +39,7 @@ pip install -r requirements-dev.txt  # dev/test deps
 4. Run the enrichment pipeline (example)
 
 ```bash
-python3 enrich_runner.py
+```text
 ```
 
 
@@ -47,7 +47,7 @@ python3 enrich_runner.py
 5. View logs
 
 ```bash
-tail -f logs/enrich.log
+```text
 ```
 
 
@@ -55,7 +55,7 @@ tail -f logs/enrich.log
 6. Run tests
 
 ```bash
-pytest -q
+```text
 ```
 
 
@@ -69,7 +69,7 @@ make env        # Load safe defaults
 make install    # Create virtualenv and install deps
 make enrich     # Run the enrichment pipeline
 make test       # Run tests
-make logs       # View recent enrichment logs
+```text
 ```
 
 

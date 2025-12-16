@@ -114,7 +114,7 @@ We've transformed the FirstPerson web app from vanilla scaffolding into a **beau
 ```bash
 cd firstperson-web
 npm install --legacy-peer-deps
-npm run dev
+```text
 ```
 
 
@@ -146,7 +146,7 @@ Edit Tailwind classes in components:
 
 ```tsx
 // Change from indigo to purple
-className="from-purple-600 to-pink-600"
+```text
 ```
 
 
@@ -156,7 +156,7 @@ Edit Framer Motion transitions:
 
 ```tsx
 transition={{ duration: 0.5 }} // Slower
-transition={{ duration: 0.2 }} // Faster
+```text
 ```
 
 
@@ -171,7 +171,7 @@ Edit the `detectExcitement()` function in chat page:
 const excitementPatterns = [
   /your-keyword/i,
   // Add more patterns...
-];
+```text
 ```
 
 

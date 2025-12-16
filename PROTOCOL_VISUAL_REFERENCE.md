@@ -1,7 +1,7 @@
 # 🎬 Your Protocol, Visualized
 
 ## The Flow Your Users Will Experience
-
+```text
 ```
 User in Crisis
     │
@@ -92,7 +92,7 @@ RETURN DETECTED ✅
 ## What Happens Behind the Scenes
 
 ### State Machine (Your Logic Made Executable)
-
+```text
 ```
                 ┌──────────────────────┐
                 │ DisclosureDetected   │
@@ -170,7 +170,7 @@ RETURN DETECTED ✅
       // Can add more or localize...
     ]
   }
-}
+```text
 ```
 
 
@@ -201,7 +201,7 @@ if suicidality_protocol.should_use_protocol(input_text):
         "response_source": "suicidality_protocol",
         "suicidality_state": state_info,
         # ... other fields
-    }
+```text
 ```
 
 
@@ -214,7 +214,7 @@ if suicidality_protocol.should_use_protocol(input_text):
 ### Run the test suite:
 
 ```bash
-python tests/test_suicidality_protocol.py
+```text
 ```
 
 
@@ -233,7 +233,7 @@ result = parse_input(
 
 print(result['voltage_response'])
 
-# Output: "You named thoughts of suicide. That is heavy..."
+```text
 ```
 
 
@@ -253,7 +253,7 @@ is a real act of courage."
 
 If they return again:
 "You are allowed to be here with what you feel.
-I will listen."
+```text
 ```
 
 
@@ -308,7 +308,7 @@ Would that be helpful right now?"
 User: "Not right now"
 
 System: "That's okay. I'm still here.
-Can you tell me what's going on?"
+```text
 ```
 
 
@@ -331,7 +331,7 @@ User returns: "Hey, I'm doing a bit better today"
 Your system first message:
 "Thank you for coming back. Your check-in matters.
 You chose to return and connect. I recognize
-the significance of that."
+```text
 ```
 
 
@@ -372,7 +372,7 @@ All suicidality disclosures:
 ```
 User: "I'm suicidal"
 System: WARNING! CRISIS! HERE'S THE HOTLINE!
-Result: User feels scared, rushed, not heard
+```text
 ```
 
 

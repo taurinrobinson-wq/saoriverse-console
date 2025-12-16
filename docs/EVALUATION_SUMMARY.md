@@ -46,7 +46,7 @@
 ## Why They're Disconnected
 
 ### The Problem in One Diagram
-
+```text
 ```
 User Input
     ↓
@@ -93,7 +93,7 @@ MISSING:
 ### TIER 1: ConversationMemory + LexiconLearner (45 min)
 
 **Before:**
-
+```text
 ```
 User: "I'm stressed"
 System: "Tell me about the stress."
@@ -105,7 +105,7 @@ System: "Tell me about work." ← REPEATED PATTERN
 
 
 **After:**
-
+```text
 ```
 User: "I'm stressed"
 System: "I hear you're stressed."
@@ -127,7 +127,7 @@ System: "Work has flooded your mind with competing demands..." ← CONTEXT AWARE
 ### TIER 2: Presence Layer (2-3 hours)
 
 **Before:**
-
+```text
 ```
 System always responds with same tone/energy
 Responses feel robotic/predictable
@@ -138,7 +138,7 @@ System never seems "tired" or "engaged"
 
 
 **After:**
-
+```text
 ```
 System adapts to user's pacing (fast/slow/paused)
 Responses vary in energy (crisp when engaged, sparse when tired)
@@ -159,7 +159,7 @@ Different emotional modes come through
 ### TIER 3: Saori Layer + Generative Tension (4-6 hours)
 
 **Before:**
-
+```text
 ```
 Single consistent voice
 Literal acknowledgment
@@ -169,7 +169,7 @@ Predictable response patterns
 
 
 **After:**
-
+```text
 ```
 Multiple archetypal voices (Witness, Trickster, Oracle)
 Creative reframing ("broken" becomes "opening")
@@ -284,7 +284,7 @@ When integration is working:
 ##
 
 ## Estimated Timeline
-
+```text
 ```
 NOW
 │

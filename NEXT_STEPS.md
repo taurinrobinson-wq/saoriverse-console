@@ -41,7 +41,7 @@ logger.info(f"DEBUG: Glyph names: {[g.get('glyph_name') for g in glyphs]}")
 
 # After response composition:
 logger.info(f"DEBUG: Response source: {response_source}")
-logger.info(f"DEBUG: Contextual response: {contextual_response[:100]}")
+```sql
 ```
 
 
@@ -60,7 +60,7 @@ Add logging:
 
 ```python
 poetic_result = engine.process_glyph_response(...)
-logger.info(f"DEBUG: Poetic result: {poetic_result}")
+```text
 ```
 
 
@@ -82,7 +82,7 @@ if glyphs and response_composer:
         glyphs=glyphs,
         signals=signals,
         input_text=input_text
-    )
+```text
 ```
 
 
@@ -98,7 +98,7 @@ Add to `emotional_keywords` list:
 ```python
 "beautiful", "lovely", "wonderful", "joy", "delight",
 "daughter", "family", "together", "close", "connection",
-"drawing", "pure joy", "existed together"
+```text
 ```
 
 
@@ -118,7 +118,7 @@ affirmation_keywords = [
 if any(kw in lower_input for kw in affirmation_keywords):
     # Log affirmed flow
     from emotional_os.feedback.reward_model import RewardModel
-    logger.info(f"Affirmation detected - logging flow")
+```text
 ```
 
 

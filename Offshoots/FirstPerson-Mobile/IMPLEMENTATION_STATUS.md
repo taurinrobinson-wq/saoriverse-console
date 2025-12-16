@@ -52,7 +52,7 @@ We've successfully built a **complete React Native (Expo) mobile application** t
 ## Architecture Highlights
 
 ### **Data Flow**
-
+```text
 ```
 User Input → ChatInput → StorageService (optimistic)
     ↓
@@ -70,7 +70,7 @@ Persist to AsyncStorage
 
 
 ### **Offline Sync**
-
+```text
 ```
 Network Error → Queue message via SyncService
     ↓
@@ -86,7 +86,7 @@ Clear queue on success
 
 
 ### **Storage Schema**
-
+```text
 ```
 AsyncStorage Keys:
 ├── fp_conversations - All message history
@@ -100,7 +100,7 @@ AsyncStorage Keys:
 ##
 
 ## Project Structure
-
+```text
 ```
 firstperson/
 ├── App.js                          # Navigation setup + onboarding logic
@@ -150,7 +150,7 @@ firstperson/
   "react-navigation-bottom-tabs": "^6.4.0",
   "react-navigation-native": "^6.1.9",
   "react-navigation-stack": "^6.3.20"
-}
+```text
 ```
 
 
@@ -164,7 +164,7 @@ firstperson/
 
 ```bash
 cd /workspaces/saoriverse-console/firstperson
-npm install
+```text
 ```
 
 
@@ -178,7 +178,7 @@ npm start
 
 # Scan QR with Expo Go app, or:
 npm run ios      # iOS simulator
-npm run android  # Android emulator
+```text
 ```
 
 
@@ -189,7 +189,7 @@ npm run android  # Android emulator
 
 # Update backend URL in src/config.js or set env:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
-npm start
+```text
 ```
 
 

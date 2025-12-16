@@ -45,7 +45,7 @@ Each element has:
 ### Reaction Chains
 
 Reactions transform input elements into results:
-
+```text
 ```
 Longing + Grief → Tenderness
 "The ache of missing becomes the softness of cherishing"
@@ -76,7 +76,7 @@ reaction = engine.react(["Lg", "Gf"])
 # With catalyst
 reaction = engine.react(["Rg", "Fg"], catalyst="Rv")
 
-# Result: Presence
+```text
 ```
 
 
@@ -115,7 +115,7 @@ archive.log_reaction(
     reaction_result=reaction,
     ritual_prompt=ritual,
     user_notes="I'm finding tenderness in my grief..."
-)
+```text
 ```
 
 
@@ -129,7 +129,7 @@ current_elements = ["Lg", "Gf", "St"]
 possible = engine.find_possible_reactions(current_elements)
 
 for p in possible:
-    print(f"{p['inputs']} → {p['result'].name}")
+```text
 ```
 
 
@@ -140,7 +140,7 @@ for p in possible:
 from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 
 # In your Streamlit app
-render_velonix_interface()
+```text
 ```
 
 
@@ -176,7 +176,7 @@ RitualPromptSystem
 EmotionalArchive
 ├── Entry Logging
 ├── JSON Export
-└── Narrative Export
+```text
 ```
 
 
@@ -254,7 +254,7 @@ All reactions are automatically logged to create a "legacy capsule" of emotional
 
 # Export archive
 archive_json = archive.export_as_json()
-narrative = archive.export_as_narrative()
+```text
 ```
 
 
@@ -264,7 +264,7 @@ narrative = archive.export_as_narrative()
 Run the demo to see VELΩNIX in action:
 
 ```bash
-python3 emotional_os/glyphs/velonix_demo.py
+```text
 ```
 
 
@@ -296,7 +296,7 @@ custom = EmotionalElement(
     color_hex="#FFD700"
 )
 
-engine.add_custom_element(custom)
+```text
 ```
 
 

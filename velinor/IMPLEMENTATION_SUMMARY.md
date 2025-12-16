@@ -123,7 +123,7 @@ Streamlit app for interactive scene testing:
 - Glyph resonance display
 
 **Workflow:**
-
+```text
 ```
 1. Run: streamlit run velinor_scenes_test.py
 2. Enter player name
@@ -142,7 +142,7 @@ Streamlit app for interactive scene testing:
 ## 🎮 How It Works
 
 ### Scene Progression Flow
-
+```text
 ```
 Scene.DISTANT
     ↓ [Continue button]
@@ -160,7 +160,7 @@ Scene.CHOICES (Player selects dialogue)
 
 
 ### Visual Layering
-
+```text
 ```
 Background Image (full width)
     ↓
@@ -178,7 +178,7 @@ Player Option Buttons
 
 
 ### Trust System
-
+```text
 ```
 Each NPC has trust value: 0.0 → 1.0
 Each dialogue option has trust_modifier: 0.05 → 0.25
@@ -189,7 +189,7 @@ Trust gates deeper dialogue and future interactions
 
 
 ### Glyph Resonance
-
+```text
 ```
 Each scene has:
 - glyph_distant: glyphs triggered in Scene.DISTANT
@@ -232,7 +232,7 @@ scene = SceneModule(
     player_options=[...],
     glyph_distant=[...],
     glyph_close=[...],
-)
+```text
 ```
 
 
@@ -240,7 +240,7 @@ scene = SceneModule(
 Then add to sequence:
 
 ```python
-scenes.append(scene)
+```text
 ```
 
 
@@ -343,7 +343,7 @@ velinor/
 Root:
 ├── velinor_app.py (original main app - can integrate scenes later)
 ├── velinor_scenes_test.py (NEW - test/demo interface)
-└── ...
+```text
 ```
 
 
@@ -421,7 +421,7 @@ scene = MarketplaceSceneSequence.build_my_new_scene()
 
 # - Navigate to scene
 
-# - Verify dialogue flows and choices branch correctly
+```text
 ```
 
 
@@ -460,7 +460,7 @@ def build_healer_encounter() -> SceneModule:
 
         glyph_distant=["Esḧ"],
         glyph_close=["Cinarä̈", "Sha'rú"],
-    )
+```text
 ```
 
 

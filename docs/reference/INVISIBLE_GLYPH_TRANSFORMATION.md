@@ -24,7 +24,7 @@ Complete refactor to make glyphs work **invisibly**.
 #### Message 1: Math Anxiety
 
 **BEFORE (Visible Glyph):**
-
+```text
 ```
 There's something in what you're describing—boundaries that hold without pressure.
 a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction...
@@ -36,7 +36,7 @@ a sanctuary of quiet care. You're not alone—many brilliant people have genuine
 ❌ User feels categorized
 
 **AFTER (Invisible Glyph):**
-
+```text
 ```
 You're not alone—many brilliant people have genuine friction with math, especially
 when it's presented in a way that doesn't match how their mind naturally works...
@@ -50,7 +50,7 @@ when it's presented in a way that doesn't match how their mind naturally works..
 #### Message 3: Feedback Correction
 
 **BOTH architectures handle feedback well:**
-
+```text
 ```
 I appreciate you saying that. I want to make sure I'm actually hearing you,
 not projecting onto you. Help me understand: what did I miss?
@@ -87,7 +87,7 @@ if any(word in lower_input for word in ['math', 'anxiety', 'mental block']):
     parts.append("That friction you're naming is real...")
 elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
     # They're recognizing a pattern they carry
-    parts.append("Recognizing where something comes from...")
+```text
 ```
 
 
@@ -120,7 +120,7 @@ if message_content.get("math_frustration"):
 if intensity >= 8:
     question = f"I'm here to work through {struggle} with you."
 else:
-    question = f"What would it feel like to approach {struggle} differently?"
+```text
 ```
 
 
@@ -141,7 +141,7 @@ Intensity = 1  (used internally)
 Closing choice: "permission" (gentle approach)
   ↓
 User sees: "You get to take this at your own pace"
-  (never sees "Gate 2" or intensity calculation)
+```text
 ```
 
 
@@ -154,7 +154,7 @@ Glyph emotional_signal: "containment/care"
 Selects bridge language from emotional_bridges["containment"]
   ↓
 User sees: "When someone explains in a way only they can follow..."
-  (feels aligned with their emotional state, never sees emotional_signal)
+```text
 ```
 
 
@@ -169,7 +169,7 @@ _glyph_to_emotion_category("still containment") → "joy"
 Poetry selection searches joy/stability themed poems
   ↓
 User sees: Beautiful poem about stability/presence
-  (doesn't know it was selected via glyph mapping)
+```text
 ```
 
 
@@ -182,7 +182,7 @@ Gate count: 1 (low intensity)
 Choose movement_language["with"] (gentler)
   ↓
 "You're carrying this with presence"
-  (feels appropriate to intensity, glyph data invisible)
+```text
 ```
 
 

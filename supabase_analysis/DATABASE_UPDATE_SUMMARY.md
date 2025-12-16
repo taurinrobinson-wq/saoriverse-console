@@ -117,7 +117,7 @@ All other user-data tables need RLS policies applied:
 
 # Run the script
 
-# Verify with the included verification queries
+```text
 ```
 
 
@@ -128,7 +128,7 @@ All other user-data tables need RLS policies applied:
 
 # Copy final_cleanup.sql to Supabase SQL Editor
 
-# Run to drop backup table and verify status
+```text
 ```
 
 
@@ -139,7 +139,7 @@ All other user-data tables need RLS policies applied:
 
 # Find emotional_tags_rows.sql or create tags
 
-# Populate via SQL or bulk insert
+```text
 ```
 
 
@@ -156,7 +156,7 @@ All other user-data tables need RLS policies applied:
 #   - Message processes successfully
 #   - Glyphs are matched
 #   - Response is generated
-#   - Data appears in conversations/glyph_logs tables
+```text
 ```
 
 

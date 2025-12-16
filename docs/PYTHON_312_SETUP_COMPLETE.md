@@ -40,7 +40,7 @@ Audio, NLP, Document Processing, Data Science, Testing, Web Framework, Backend, 
 ### Start Development Server
 
 ```powershell
-py -3.12 -m streamlit run app.py
+```text
 ```
 
 
@@ -48,7 +48,7 @@ py -3.12 -m streamlit run app.py
 ### Install spaCy Model (if needed - already done!)
 
 ```powershell
-py -3.12 -m spacy download en_core_web_sm
+```text
 ```
 
 
@@ -56,7 +56,7 @@ py -3.12 -m spacy download en_core_web_sm
 ### Download TextBlob Corpora (optional - improves accuracy)
 
 ```powershell
-py -3.12 -m textblob.download_corpora
+```text
 ```
 
 
@@ -64,7 +64,7 @@ py -3.12 -m textblob.download_corpora
 ### Install Additional Packages
 
 ```powershell
-py -3.12 -m pip install package-name
+```text
 ```
 
 
@@ -72,7 +72,7 @@ py -3.12 -m pip install package-name
 ### Run Tests
 
 ```powershell
-py -3.12 -m pytest
+```text
 ```
 
 
@@ -107,7 +107,7 @@ d:\saoriverse-console\
 │   ├── deploy_modules/          ← Main deployment code
 │   ├── emotional_os/            ← Emotional OS variant
 │   └── emotional_os_safety/     ← Safety variant
-└── [documentation files]         ← Setup guides and documentation
+```text
 ```
 
 
@@ -170,7 +170,7 @@ d:\saoriverse-console\
 ### If port 8501 is in use:
 
 ```powershell
-py -3.12 -m streamlit run app.py --server.port 8502
+```text
 ```
 
 
@@ -178,7 +178,7 @@ py -3.12 -m streamlit run app.py --server.port 8502
 ### If you need to reinstall packages:
 
 ```powershell
-py -3.12 -m pip install -r requirements.txt --upgrade --force-reinstall
+```text
 ```
 
 
@@ -186,7 +186,7 @@ py -3.12 -m pip install -r requirements.txt --upgrade --force-reinstall
 ### To check installed packages:
 
 ```powershell
-py -3.12 -m pip list
+```text
 ```
 
 

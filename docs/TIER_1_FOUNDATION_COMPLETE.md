@@ -40,7 +40,7 @@ Tests cover:
 - Component availability
 
 ## Architecture: 7-Stage Pipeline
-
+```text
 ```
 Stage 1: Memory Tracking (0-3ms)
 ├─ Add turn to ConversationMemory for context tracking
@@ -82,7 +82,7 @@ Stage 7: Final Memory Update (35-38ms)
 **Total Target:** <100ms (currently achieving ~35-40ms in tests)
 
 ## Performance Results
-
+```text
 ```
 ✓ Initialization:        0.41s (one-time)
 ✓ Basic response:        ~0ms
@@ -110,7 +110,7 @@ enhanced_response, metrics = self.tier1.process_response(
     user_input=user_message,
     base_response=generated_response,
     context=session_context,
-)
+```text
 ```
 
 
@@ -123,7 +123,7 @@ enhanced_response, metrics = self.tier1.process_response(
 if "tier1_foundation" not in st.session_state:
     st.session_state.tier1_foundation = Tier1Foundation(
         conversation_memory=st.session_state.conversation_memory
-    )
+```text
 ```
 
 
@@ -236,7 +236,7 @@ Available for Tiers 2-4: ~60ms (60%)
 ├─ Presence (Tier 2):   20ms
 ├─ Depth (Tier 3):      20ms
 ├─ Memory (Tier 4):     15ms
-└─ Buffer:               5ms
+```text
 ```
 
 

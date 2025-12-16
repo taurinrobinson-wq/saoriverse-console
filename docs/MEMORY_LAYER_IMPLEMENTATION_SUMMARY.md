@@ -33,7 +33,7 @@ New methods added to DynamicResponseComposer:
 ## How It Works: Three-Turn Example
 
 ### Turn 1: User reveals emotional state
-
+```text
 ```
 Input:  "I'm feeling so stressed today"
 Parse:  stress, present-tense, today-bound, emphasis "so"
@@ -45,7 +45,7 @@ Ask:    "What triggered this?"
 
 
 ### Turn 2: User reveals root cause & mechanism
-
+```text
 ```
 Input:  "I have so much on my mind at work that I can't make one step forward"
 Parse:  cognitive_overload, work-domain, paralysis, thought-flooding
@@ -59,7 +59,7 @@ Ask:    "How many distinct things compete?"  (now specific!)
 
 
 ### Turn 3: User provides specificity
-
+```text
 ```
 Input:  "5 projects due this week, client presentation Thursday, deck not started"
 Parse:  5 competing items, Thursday deadline, unstarted blocker, client-critical
@@ -91,7 +91,7 @@ Ask:    "Which of these 5 could wait?"  (now action-oriented!)
 ## Response Quality Progression
 
 **Without Memory** (isolated responses):
-
+```text
 ```
 "What's causing that stress?"
 "That sounds overwhelming. What's the main thing?"
@@ -102,7 +102,7 @@ Problem: Redundant, doesn't build on prior messages
 
 
 **With Memory** (contextual responses):
-
+```text
 ```
 Turn 1: "I hear you're feeling stress today."
 Turn 2: "I hear you - work has flooded your mind with competing
@@ -117,7 +117,7 @@ Benefit: Each response builds, gets smarter and more actionable
 ## Causal Chain Recognition
 
 The memory layer builds understanding of the causal chain:
-
+```text
 ```
 Root Trigger
     ↓
@@ -185,7 +185,7 @@ turns: List[MessageTurn]
 integrated_state: IntegratedEmotionalState
 causal_understanding: CausalUnderstanding
 system_knowledge: SystemKnowledge
-glyph_evolution: List[List[str]]
+```text
 ```
 
 
@@ -198,7 +198,7 @@ secondary_affects: List[str]  # ["paralysis", "anxiety", "overwhelm"]
 intensity: str  # "high"
 primary_domains: List[str]  # ["work", "client work"]
 temporal_scope: str  # "today (acute) + ongoing (chronic)"
-confidence: float  # 0.95 (0.7 -> 0.85 -> 0.95)
+```text
 ```
 
 
@@ -209,7 +209,7 @@ confidence: float  # 0.95 (0.7 -> 0.85 -> 0.95)
 root_triggers: List[str]  # ["work", "client work"]
 mechanisms: List[str]  # ["cognitive flooding"]
 manifestations: List[str]  # ["paralysis", "anxiety"]
-agency_state: str  # "blocked by priority conflict"
+```text
 ```
 
 
@@ -293,7 +293,7 @@ response = composer.compose_response_with_memory(
     input_text,
     conversation_memory=memory,
     glyph=glyph
-)
+```text
 ```
 
 

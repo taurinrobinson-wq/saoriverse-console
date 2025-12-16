@@ -25,7 +25,7 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
 ## Marketplace Sphere of Influence
 
 ### Network Map
-
+```text
 ```
                     Ravi (0.8) ← → Nima
                     /  \              /  \

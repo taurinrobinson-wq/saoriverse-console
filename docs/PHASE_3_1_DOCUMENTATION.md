@@ -48,7 +48,7 @@ predict_upcoming_themes(lookahead_hours=4)
 
 # Quality metrics
 get_session_coherence()
-export_profile()
+```text
 ```
 
 
@@ -63,7 +63,7 @@ UserEmotionalProfile:
   ├── time_patterns: {theme -> TimePatterns}
   ├── preferred_glyph_types: {glyph -> effectiveness_score}
   ├── snapshots: [EmotionalSnapshot]
-  └── session_coherence tracking
+```text
 ```
 
 
@@ -91,7 +91,7 @@ end_session(user_satisfaction)
 
 # Analysis
 get_coherence_report()  # Comprehensive metrics
-suggest_improvements()  # Actionable suggestions
+```text
 ```
 
 
@@ -111,7 +111,7 @@ EXCELLENT    (coherence ≥ 0.85): High coherence, user satisfied
 GOOD         (coherence ≥ 0.70): Solid coherence, mostly on-track
 ADEQUATE     (coherence ≥ 0.50): Some coherence, minor deviations
 POOR         (coherence ≥ 0.30): Low coherence, user frustrated
-FRAGMENTED   (coherence < 0.30): Multiple sudden theme shifts
+```text
 ```
 
 
@@ -145,7 +145,7 @@ get_preference_acceleration()        # How rapidly changing
 predict_preference_trajectory(pref, days_ahead=30)
 
 # Clustering
-identify_preference_clusters()  # Which preferences co-occur
+```text
 ```
 
 
@@ -177,7 +177,7 @@ summary = orchestrator.end_session(session_id, overall_satisfaction)
 # Insights and recommendations
 insights = orchestrator.get_user_insights()
 recommendations = orchestrator.get_session_recommendations(session_id)
-comparison = orchestrator.compare_session_to_profile(session_id)
+```text
 ```
 
 
@@ -211,7 +211,7 @@ Record to all Phase 3.1 components:
     ↓
 Generate Insights & Recommendations
     ↓
-Update Response Context (for next turn)
+```text
 ```
 
 
@@ -235,7 +235,7 @@ manager.record_interaction(
 # After multiple interactions, query patterns
 dominant = manager.get_dominant_themes(limit=5)
 trajectory = manager.get_emotional_trajectory(days=30)
-predictions = manager.predict_upcoming_themes(lookahead_hours=4)
+```text
 ```
 
 
@@ -258,7 +258,7 @@ session.record_turn(
 # End session
 coherence = session.end_session(user_satisfaction=0.8)
 report = session.get_coherence_report()
-suggestions = session.suggest_improvements()
+```text
 ```
 
 
@@ -275,7 +275,7 @@ tracker.record_preference(PreferenceType.THEME, "grounding", 0.7)
 # After 30+ days...
 emerging = tracker.get_emerging_preferences(days=30)
 fading = tracker.get_fading_preferences(days=30)
-predictions = tracker.predict_preference_trajectory("glyph:Sanctuary", 30)
+```text
 ```
 
 
@@ -378,7 +378,7 @@ predictions = tracker.predict_preference_trajectory("glyph:Sanctuary", 30)
     "frustration_markers": [],
     "breakthrough_markers": [5],
     "user_satisfaction": 0.8,
-}
+```text
 ```
 
 
@@ -410,7 +410,7 @@ predictions = tracker.predict_preference_trajectory("glyph:Sanctuary", 30)
         {"theme": "grounding", "probability": 0.73},
         {"theme": "morning_anxiety", "probability": 0.41},
     ],
-}
+```text
 ```
 
 

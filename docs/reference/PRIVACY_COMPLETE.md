@@ -37,7 +37,7 @@ The Saoriverse Console now implements **Option A: Gate-Based Data Masking** to p
 
 ### Test 2: Privacy Audit (privacy_monitor.py)
 **Result**: Correctly identifies old format entries (expected before code deployment)
-
+```text
 ```
 ✅ Total entries: 3738
 ❌ Violations: 11214 (all from old format - pre-implementation)
@@ -48,7 +48,7 @@ The Saoriverse Console now implements **Option A: Gate-Based Data Masking** to p
 
 ### Test 3: End-to-End Test (test_e2e_simple.py)
 **Result**: ✅ ALL CHECKS PASSED
-
+```text
 ```
 ✅ Processed 3 test exchanges
 ✅ Logged 3 entries in privacy-safe format
@@ -71,7 +71,7 @@ The Saoriverse Console now implements **Option A: Gate-Based Data Masking** to p
   "glyph_names": ["Nature's Touch", "Transcendent Moment"],
   "ai_response_length": 85,
   "exchange_quality": "logged"
-}
+```text
 ```
 
 
@@ -91,7 +91,7 @@ log_entry = {
     "user_id": "user_hash",
     "user_input": "I'm struggling with depression...",  # ❌ RAW TEXT
     "ai_response": "[response content]",  # ❌ RAW CONTENT
-}
+```text
 ```
 
 
@@ -107,7 +107,7 @@ log_entry = {
     "ai_response_length": 245,  # ✅ Metadata only
     # NO raw user_input
     # NO ai_response content
-}
+```text
 ```
 
 
@@ -119,7 +119,7 @@ log_entry = {
 **Example - Before (Privacy Violation):**
 
 ```python
-entry["examples"].append(user_input)  # ❌ Stores: "I'm depressed..."
+```text
 ```
 
 
@@ -132,7 +132,7 @@ entry["example_contexts"].append({
     "associated_signals": ["vulnerability", "melancholy"],
     "gates": ["Gate 4", "Gate 6"]
     # NO user_input stored
-})
+```text
 ```
 
 

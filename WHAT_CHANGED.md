@@ -24,7 +24,7 @@ python core/main_v2.py
 python main_v2_simple.py
 
 # or
-streamlit run main_v2.py
+```text
 ```
 
 
@@ -32,7 +32,7 @@ streamlit run main_v2.py
 **After:**
 
 ```bash
-streamlit run app.py  # That's it!
+```text
 ```
 
 
@@ -44,7 +44,7 @@ streamlit run app.py  # That's it!
 pytest tests/
 pytest .                # Also ran root tests
 
-# Tests scattered across multiple directories
+```text
 ```
 
 
@@ -54,7 +54,7 @@ pytest .                # Also ran root tests
 ```bash
 pytest tests/           # All tests
 pytest tests/unit/      # Just unit tests
-pytest tests/integration/  # Just integration tests
+```text
 ```
 
 
@@ -65,7 +65,7 @@ pytest tests/integration/  # Just integration tests
 ```bash
 find . -name "*response*" | grep -v __pycache__
 
-# Returns 20+ results in different directories
+```text
 ```
 
 
@@ -77,7 +77,7 @@ ls src/
 
 # response_generator.py, response_adapter.py, response_selector.py
 
-# All in one place!
+```text
 ```
 
 
@@ -89,7 +89,7 @@ ls src/
 1. Create code in multiple possible locations
 2. Update imports in 5+ places
 3. Add test somewhere unclear
-4. Hope nothing breaks
+```text
 ```
 
 
@@ -100,7 +100,7 @@ ls src/
 1. Add code to src/your_module.py
 2. Add test to tests/unit/test_your_module.py
 3. Run: pytest tests/unit/test_your_module.py
-4. Done!
+```text
 ```
 
 
@@ -113,7 +113,7 @@ from emotional_os.core.signal_parser import parse_input
 from parser.signal_parser import parse_input  # Which one?
 from src.signal_parser import parse_input
 
-# Multiple possible locations!
+```text
 ```
 
 
@@ -121,7 +121,7 @@ from src.signal_parser import parse_input
 **After:**
 
 ```python
-from src.signal_parser import parse_input  # One location!
+```text
 ```
 
 
@@ -155,7 +155,7 @@ saoriverse-console/
 │   ├── test_*.py (mixed with integration tests)
 │   ├── fixtures/
 │   └── ...
-└── scripts/ (50+ files, all mixed together)
+```text
 ```
 
 
@@ -197,7 +197,7 @@ saoriverse-console/
 │
 └── archive/                  (old code for reference)
     ├── old_structure/
-    └── old_modules/
+```text
 ```
 
 
@@ -249,7 +249,7 @@ pytest tests/
 
 # - Hard to run specific tests
 
-# - Coverage hard to measure
+```text
 ```
 
 
@@ -260,7 +260,7 @@ pytest tests/
 pytest tests/           # All tests
 pytest tests/unit/      # Fast unit tests (< 1 sec)
 pytest tests/integration/  # Slower integration tests (< 10 sec)
-pytest tests/ --cov=src  # Coverage report
+```text
 ```
 
 
@@ -275,7 +275,7 @@ pytest tests/ --cov=src  # Coverage report
 # These all existed and were confusing:
 from emotional_os.core.signal_parser import parse_input
 from parser.signal_parser import parse_input
-from src.signal_parser import parse_input  # Which one to use?
+```text
 ```
 
 
@@ -285,7 +285,7 @@ from src.signal_parser import parse_input  # Which one to use?
 ```python
 
 # Clear single source of truth:
-from src.signal_parser import parse_input  # Only option!
+```text
 ```
 
 
@@ -320,7 +320,7 @@ git checkout pre-reorganization
 
 # Or: git reset --hard pre-reorganization
 
-# App returns to pre-reorganization state
+```text
 ```
 
 

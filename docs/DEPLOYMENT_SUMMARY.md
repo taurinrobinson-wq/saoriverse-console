@@ -77,7 +77,7 @@ ssh root@161.35.227.49
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 chmod +x docker-setup.sh
-./docker-setup.sh
+```text
 ```
 
 
@@ -108,7 +108,7 @@ docker compose up -d
 
 # Verify
 docker compose ps
-curl http://161.35.227.49:8000/health
+```text
 ```
 
 
@@ -127,7 +127,7 @@ Once deployed, your app is live at:
 Frontend:          http://161.35.227.49:3000
 API Server:        http://161.35.227.49:8000
 Health Check:      http://161.35.227.49:8000/health
-Nginx Proxy:       http://161.35.227.49:80 (same as :3000)
+```text
 ```
 
 
@@ -142,7 +142,7 @@ curl http://161.35.227.49:8000/health
 # Example API call (from your machine)
 curl -X POST http://161.35.227.49:8000/api/chat \
   -H "Content-Type: application/json" \
-  -d '{"message":"Hello","user_id":"test","mode":"local"}'
+```text
 ```
 
 
@@ -166,7 +166,7 @@ docker compose down            # Remove containers
 # Development
 docker compose exec backend bash    # Shell access
 docker compose build --no-cache     # Rebuild images
-docker compose up -d --build        # Rebuild & restart
+```text
 ```
 
 
@@ -199,7 +199,7 @@ LOG_LEVEL=info
 
 # OPENAI_API_KEY=...
 
-# SUPABASE_URL=...
+```text
 ```
 
 

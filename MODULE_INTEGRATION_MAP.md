@@ -20,7 +20,7 @@ def handle_response_pipeline(user_input, context):
     4. composer.compose_response()                 # ← fallback only
     5. encoding.encode_conversation()              # ← emotional_os_privacy
     6. learner.learn_from_exchange()               # ← emotional_os_learning
-    7. return response
+```text
 ```
 
 
@@ -57,7 +57,7 @@ from src.emotional_os_privacy.dream_engine import DreamEngine
 from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtocol
 
 # Memory
-from src.emotional_os_glyphs.conversation_memory import ConversationMemory
+```text
 ```
 
 
@@ -96,7 +96,7 @@ class SessionState:
         self.memory = ConversationMemory()
 
         self.user_id = None
-        self.session_id = None
+```text
 ```
 
 
@@ -119,7 +119,7 @@ risk_level = classify_risk(user_input)  # → "high"
 # Call 3: Build consent prompt
 consent_prompt = build_consent_prompt(risk_level)
 
-# Output: "I hear words that suggest you might be in immediate distress..."
+```text
 ```
 
 
@@ -143,7 +143,7 @@ signals = adaptive_extractor.extract_signals(user_input)
 # Call 3: Poetry signal extraction (if expressive language)
 poetry_signals = poetry_extractor.extract_signals(user_input)
 
-# → [{"signal": "vulnerability", "confidence": 0.87}, ...]
+```text
 ```
 
 
@@ -164,7 +164,7 @@ best_archetype = archetype_library.get_best_match(
     threshold=0.3
 )
 
-# → ConversationArchetype("OverwhelmToReflection")
+```text
 ```
 
 
@@ -184,7 +184,7 @@ response = archetype_gen.generate_archetype_aware_response(
 
 # If no archetype match, fallback:
 if not response:
-    response = composer.compose_response(user_input, glyph)
+```text
 ```
 
 
@@ -200,7 +200,7 @@ if is_sensitive:
         base_response=response,
         tone="gentle"
     )
-    # Adds compassionate framing + optional consent
+```text
 ```
 
 
@@ -220,7 +220,7 @@ encoded = encoding.encode_conversation(
     session_id=session.session_id
 )
 
-# → {"user_id_hashed": "...", "encoded_signals": [...], ...}
+```text
 ```
 
 
@@ -253,7 +253,7 @@ if is_end_of_day:
         date="2024-12-04",
         conversations=[day's conversations],
         glyph_effectiveness={...}
-    )
+```text
 ```
 
 
@@ -344,7 +344,7 @@ CREATE TABLE daily_summaries (
 -- Encrypted conversations (already exists, but may need privacy fields)
 ALTER TABLE conversations ADD COLUMN encoded_version JSON;
 ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
-ALTER TABLE conversations ADD COLUMN encryption_salt TEXT;
+```text
 ```
 
 
@@ -391,7 +391,7 @@ ALTER TABLE conversations ADD COLUMN encryption_salt TEXT;
     "include_crisis_resources": false,
     "user_controlled_escalation": true
   }
-}
+```text
 ```
 
 
@@ -424,7 +424,7 @@ try:
     encoded = encoding.encode_conversation(...)
 except Exception as e:
     logger.error(f"Encoding failed: {e}")
-    encoded = {"error": "encoding failed", "fallback": True}
+```text
 ```
 
 
@@ -463,7 +463,7 @@ def test_dream_engine(): ...
 
 # test_pipeline_integration.py
 def test_full_request_pipeline(): ...
-def test_fallback_chain(): ...
+```text
 ```
 
 
@@ -501,7 +501,7 @@ metrics = {
     "lexicon_words_found_avg": 0.0,
     "privacy_encoding_success": True,
     "response_generation_time_ms": 0.0,
-}
+```text
 ```
 
 

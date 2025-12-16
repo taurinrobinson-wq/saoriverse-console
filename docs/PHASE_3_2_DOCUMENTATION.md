@@ -42,7 +42,7 @@ Analyzes acoustic features of speech to detect emotional tone using Voice Activi
 - Confidence score (0-1)
 
 **Processing**:
-
+```text
 ```
 AcousticFeatures → [Arousal, Valence, Dominance] → Primary Tone → Emotional State
                    ↓
@@ -97,7 +97,7 @@ Detects emotional expression from facial landmarks using Facial Action Coding Sy
 - Attention score (0-1): engagement level
 
 **Processing**:
-
+```text
 ```
 FaceLandmarks → [AU1-AU26 Intensities] → Expression Classification
                  ↓
@@ -146,7 +146,7 @@ Combines text, voice, and facial data into unified emotional understanding.
 - Detailed modality-by-modality comparison
 
 **Processing**:
-
+```text
 ```
 Text Tone + Voice Analysis + Facial Analysis
     ↓
@@ -192,7 +192,7 @@ analysis = detector.analyze(features)
 print(f"Detected tone: {analysis.detected_tone}")  # EXCITED
 print(f"Arousal: {analysis.arousal:.2f}")         # ~0.625
 print(f"Valence: {analysis.valence:.2f}")         # ~0.63
-print(f"Stress: {analysis.stress_indicator:.2f}") # ~0.77
+```text
 ```
 
 
@@ -220,7 +220,7 @@ analysis = detector.analyze(landmarks)
 print(f"Expression: {analysis.expression}")     # HAPPY or SURPRISED
 print(f"AU12 (smile): {analysis.action_units.intensities['AU12_lip_corner_puller']:.2f}")
 print(f"AU6 (cheek): {analysis.action_units.intensities['AU6_cheek_raiser']:.2f}")
-print(f"Authenticity: {analysis.authenticity:.2f}")
+```text
 ```
 
 
@@ -254,7 +254,7 @@ if analysis.incongruences:
 dims = analysis.dimensions
 print(f"Fused arousal: {dims.arousal:.2f} (from {dims.arousal_source})")
 print(f"Fused valence: {dims.valence:.2f} (from {dims.valence_source})")
-print(f"Stress level: {dims.stress_level:.2f}")
+```text
 ```
 
 
@@ -272,7 +272,7 @@ Text + Voice + Facial (Phase 3.2)
               ↓
     EmotionalProfileManager (Phase 3.1)
               ↓
-   Emotional Trajectory + Session Coherence + Preference Evolution
+```text
 ```
 
 
@@ -295,7 +295,7 @@ Voice: Low pitch, slow rate, high pauses (negative valence)
 Facial: Lowered mouth corners, inner brow raise (sad)
 
 Result: TEXT_POSITIVE_VOICE_NEGATIVE
-Incongruences: ["Possible sarcasm detected"]
+```text
 ```
 
 
@@ -308,7 +308,7 @@ Voice: Variable pitch, high pause frequency, high stress indicators
 Facial: Low eye contact, lip tension
 
 Result: SUPPRESSION
-Incongruences: ["Possible emotion suppression (calm text, stressed voice)"]
+```text
 ```
 
 

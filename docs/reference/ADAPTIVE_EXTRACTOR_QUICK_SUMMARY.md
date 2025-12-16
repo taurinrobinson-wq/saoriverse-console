@@ -10,7 +10,7 @@
 ## THE SOLUTION ✨
 
 ### Timeline of Expansion:
-
+```text
 ```
 BEFORE (Original System)
 └─ 8 Dimensions Only
@@ -55,7 +55,7 @@ AFTER (Adaptive System)
 ## DIMENSION BREAKDOWN
 
 ### Your 8 Base Dimensions
-
+```sql
 ```
 Foundation set from "Hope is the thing with feathers"
 ├─ Love
@@ -71,7 +71,7 @@ Foundation set from "Hope is the thing with feathers"
 
 
 ### 10 Pre-Discovered Dimensions (from Poetry Analysis)
-
+```text
 ```
 Identified patterns across poetry canon
 ├─ Nostalgia      → time, memory, longing for past
@@ -89,7 +89,7 @@ Identified patterns across poetry canon
 
 
 ### N Adaptive Dimensions (Learned from Your Collections)
-
+```text
 ```
 Discovered dynamically during processing of:
 - Emily Dickinson (1.1M words)
@@ -112,7 +112,7 @@ Expected discoveries:
 ## HOW IT WORKS NOW
 
 ### Before: Extraction Constrained to 8
-
+```text
 ```
 Poetry Text
     ↓
@@ -128,7 +128,7 @@ Limited lexicon expansion
 
 
 ### After: Extraction Expands Dynamically
-
+```text
 ```
 Poetry Text
     ↓
@@ -166,7 +166,7 @@ Comprehensive lexicon expansion
 ## MEASUREMENT
 
 ### Dimension Expansion Ratio
-
+```text
 ```
 Starting:      8 dimensions (100%)
 With Pre-disc: 18 dimensions (225%)
@@ -176,7 +176,7 @@ With Adaptive: 20-25+ dimensions (250-312%)
 
 
 ### Keyword Coverage
-
+```text
 ```
 Before:  ~200 keywords (8 dimensions)
 After:   ~400+ keywords (18+ dimensions)
@@ -186,7 +186,7 @@ Growth:  100%+ more emotional vocabulary
 
 
 ### Lexicon Richness
-
+```text
 ```
 Same word, multiple meanings:
   "tears" → 3 dimensions (before) vs. 6 dimensions (after)
@@ -218,7 +218,7 @@ Your system is now like a **linguist that learns new dialects**. As it processes
 The next time you run the Gutenberg processor:
 
 ```bash
-./run_gutenberg_learning.sh
+```text
 ```
 
 

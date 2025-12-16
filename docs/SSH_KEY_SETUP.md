@@ -5,7 +5,7 @@
 First, try connecting with password authentication:
 
 ```bash
-ssh -o PreferredAuthentications=password root@161.35.227.49
+```text
 ```
 
 
@@ -26,7 +26,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean_key -N ""
 
 # ~/.ssh/digitalocean_key (private key - KEEP SAFE)
 
-# ~/.ssh/digitalocean_key.pub (public key - share with server)
+```text
 ```
 
 
@@ -42,7 +42,7 @@ cat ~/.ssh/digitalocean_key.pub
 
 # 1. ssh root@161.35.227.49
 
-# 2. Paste this into ~/.ssh/authorized_keys:
+```text
 ```
 
 
@@ -50,7 +50,7 @@ cat ~/.ssh/digitalocean_key.pub
 Or do it in one command (if you can SSH):
 
 ```bash
-cat ~/.ssh/digitalocean_key.pub | ssh root@161.35.227.49 "cat >> ~/.ssh/authorized_keys"
+```text
 ```
 
 
@@ -71,7 +71,7 @@ Host 161.35.227.49
 EOF
 
 # Then just use:
-ssh 161.35.227.49
+```text
 ```
 
 
@@ -126,7 +126,7 @@ Once you can connect (any method), run:
 ```bash
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
-chmod +x docker-setup.sh && ./docker-setup.sh
+```text
 ```
 
 

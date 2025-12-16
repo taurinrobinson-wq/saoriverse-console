@@ -209,7 +209,7 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
 - Collapsed Underpass
 
 **Major Encounters:**
-
+```json
 ```
 [Player Arrival]
     ↓
@@ -251,7 +251,7 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
 - NPC-gifted tools enhance navigation
 
 **First Chamber:**
-
+```json
 ```
 [Triglyph Chamber: Echoed Memory]
     ↓
@@ -273,7 +273,7 @@ Effect: Unlocks deeper NPC resonance, reveals survivor guilt
 **Chamber Progression:**
 
 Each chamber represents a buried Corelink hub with corrupted emotional algorithms:
-
+```json
 ```
 [Octoglyph Sequence]
     ↓
@@ -330,7 +330,7 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
 - Soft mnemonic energy pulses
 
 **Encounter Structure:**
-
+```json
 ```
 [Enter Chamber]
     ↓
@@ -377,7 +377,7 @@ Glyphs are emotional artifacts scattered after Velinor's sacrifice. They serve a
 - **Legacy**: Memory transmuted into enduring meaning
 
 **Fusion:**
-
+```text
 ```
 Sorrow + Remembrance + Legacy
     ↓
@@ -404,7 +404,7 @@ Tear of Integration (triangle with single tear)
 | 8. Hopeful Transmission | Ache into meaning | Light through prism | [TBD] |
 
 **Fusion:**
-
+```text
 ```
 All 8 Octoglyph Fragments
     ↓
@@ -455,7 +455,7 @@ Based on:
 - Collected most/all glyphs
 
 **Resolution:**
-
+```javascript
 ```
 Velinor: "Then let it be done. Let memory be fused."
 Saori: "I'll carry it this time. All of it."
@@ -487,7 +487,7 @@ Saori's guilt eased, but collapse risk remains
 - Dialogue choice: "Let go together"
 
 **Resolution:**
-
+```text
 ```
 Velinor: "You remembered me. Not as a system. As a friend."
 Saori: "I never stopped."
@@ -523,7 +523,7 @@ Emotional autonomy preserved
 - Recognizes system is flawed
 
 **Resolution:**
-
+```text
 ```
 Velinor: "You see it now. The fracture. The cost. The truth."
 Saori: "I tried to fix it. I tried to fix her."
@@ -556,7 +556,7 @@ Collapse embraced as necessary ending
 - Rejection of both philosophies
 
 **Resolution:**
-
+```text
 ```
 Velinor: "You chose rupture. You chose freedom."
 Saori: "I'll remember her. Even if no one else can."
@@ -589,7 +589,7 @@ Future generations start fresh
 - Refuses full commitment to either path
 
 **Resolution:**
-
+```text
 ```
 Velinor: "You kept what mattered. Not for the system. For yourself."
 Saori: "Then let the rest collapse. But let those memories endure."
@@ -623,7 +623,7 @@ Some memories preserved, others lost
 - No clear choice made
 
 **Resolution:**
-
+```text
 ```
 Velinor: "Ask her what she feared. Ask her what she lost."
 Saori: "I feared losing her. I feared being wrong."
@@ -995,7 +995,7 @@ These choices accumulate TONE stats without major branching:
 - Use semantic versioning (1.0 → 1.1 for minor, 1.0 → 2.0 for major)
 
 **Change Log Format:**
-
+```sql
 ```
 
 ## Update Log

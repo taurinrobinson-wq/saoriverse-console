@@ -3,7 +3,7 @@
 ## What It Does
 
 Tracks user's emotional state across multiple messages and builds understanding.
-
+```text
 ```
 Message 1: "I'm stressed"
               ↓
@@ -37,7 +37,7 @@ memory.add_turn(
 memory.get_emotional_profile_brief()  # "HIGH: stress, overload (in work)"
 memory.get_causal_narrative()  # "work → cognitive flooding → paralysis"
 memory.get_next_clarifications()  # ["What triggered?", "How many things?"]
-memory.get_glyph_set()  # ["Still Insight", "Quiet Revelation", ...]
+```text
 ```
 
 
@@ -56,7 +56,7 @@ parsed = SemanticParsing(
     thought_patterns=["flooding"],
     action_capacity="paralyzed",
     raw_input="...",
-)
+```text
 ```
 
 
@@ -104,7 +104,7 @@ response = composer.compose_response_with_memory(
     glyph=None,
 )
 
-print(response)  # "I hear you're feeling stress today."
+```text
 ```
 
 
@@ -136,7 +136,7 @@ def compose_response_with_memory(
     question = "Which of these could wait?"
 
     # 5. Combine
-    return f"{acknowledgment} {validation} {question}"
+```text
 ```
 
 
@@ -162,7 +162,7 @@ def compose_response_with_memory(
 ```
 Turn 1: 0.7 (emotion stated, cause unknown)
 Turn 2: 0.85 (mechanism revealed: work → flooding → paralysis)
-Turn 3: 0.95 (specifics provided: 5 projects, Thursday, unstarted)
+```text
 ```
 
 
@@ -173,7 +173,7 @@ Turn 3: 0.95 (specifics provided: 5 projects, Thursday, unstarted)
 ```
 Turn 1: [Still Insight]
 Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
-Turn 3: [Still Insight, Quiet Revelation, Fragmentation, The Threshold]
+```text
 ```
 
 
@@ -236,7 +236,7 @@ SYSTEM (full context):
   parsed: 5 items, Thursday deadline, client, unstarted
   learns: exact problem, most urgent item, blocker
   stored: confident in specifics, confidence 0.95
-  response: "I hear you - which of these 5 could potentially wait?"
+```text
 ```
 
 

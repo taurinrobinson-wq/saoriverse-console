@@ -131,7 +131,7 @@
 ## Test Results Summary
 
 ### All Tests Passing ✅
-
+```text
 ```
 Test 1: Unit Tests (test_privacy_masking.py)
   ✅ 16/16 checks passed
@@ -163,7 +163,7 @@ cd /Users/taurinrobinson/saoriverse-console
 python3 test_privacy_masking.py
 
 # Run E2E tests
-python3 test_e2e_simple.py
+```text
 ```
 
 
@@ -175,7 +175,7 @@ python3 test_e2e_simple.py
 # Run all three test suites
 python3 privacy_monitor.py
 python3 test_privacy_masking.py
-python3 test_e2e_simple.py
+```text
 ```
 
 
@@ -185,7 +185,7 @@ python3 test_e2e_simple.py
 ```bash
 
 # Monthly compliance check
-python3 privacy_monitor.py
+```text
 ```
 
 
@@ -214,7 +214,7 @@ User Input
     ↓
 "I'm struggling with depression and anxiety..."
     ↓
-❌ PRIVACY VIOLATION: Raw personal health data exposed
+```text
 ```
 
 

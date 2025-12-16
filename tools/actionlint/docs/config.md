@@ -17,7 +17,7 @@ with `-init-config` flag.
 
 ```sh
 actionlint -init-config
-vim .github/actionlint.yaml
+```text
 ```
 
 

@@ -82,7 +82,7 @@ Enhanced main orchestrator with prosody support and non-blocking playback.
    - State callbacks for real-time UI updates
 
 **Architecture**:
-
+```text
 ```
 Record Audio (AudioRecorder)
     ↓
@@ -113,7 +113,7 @@ PortAudio support now included for audio recording:
 # Audio dependencies
 portaudio19-dev  # PortAudio development headers
 libsndfile1      # Sound file I/O
-ffmpeg           # Audio format conversion
+```text
 ```
 
 
@@ -149,7 +149,7 @@ ffmpeg           # Audio format conversion
 ```
 Chunk 1: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 Chunk 2: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
-Total for 2 chunks: 6.0 seconds
+```text
 ```
 
 
@@ -163,7 +163,7 @@ Chunk 1: Synthesize (1.0s)
 Chunk 2:                    Synthesize (1.0s)
                            ├─ Play (1.8s, overlaps with Chunk 1)
                            └─ Sleep (1.8s)
-Total for 2 chunks: 3.8 seconds (37% faster!)
+```text
 ```
 
 
@@ -201,7 +201,7 @@ glyph_intent = {
 # <prosody rate='fast' pitch='high' volume='loud'>Let's do this!</prosody>
 
 # Result: Fast speech, high pitch, loud volume →
-#         User hears: excited, energetic, confident FirstPerson
+```text
 ```
 
 

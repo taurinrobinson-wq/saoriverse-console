@@ -128,7 +128,7 @@ git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml \
 git commit -m "feat: add production VPS deployment infrastructure"
 git push origin main
 
-# Option B: Quick version (see GIT_PUSH_COMMAND.md)
+```text
 ```
 
 
@@ -161,7 +161,7 @@ DOCUMENTATION (Pick your style)
 ├─ VPS_DEPLOYMENT_INDEX.md    → Find what you need
 ├─ VPS_READY_TO_LAUNCH.md     → Launch confirmation
 ├─ PUSH_TO_GITHUB.md          → Git instructions
-└─ GIT_PUSH_COMMAND.md        → Copy-paste git commands
+```text
 ```
 
 
@@ -227,7 +227,7 @@ Your deployment is successful when:
 
 ```
 1. Push to GitHub → 2. Set up DigitalOcean → 3. Deploy → 4. Done!
-(No auto-deploy needed, just manual deployments when needed)
+```text
 ```
 
 
@@ -236,7 +236,7 @@ Your deployment is successful when:
 
 ```
 1. Push to GitHub → Auto-triggers GitHub Actions → 2. VPS auto-updates
-(Every git push auto-deploys to production)
+```text
 ```
 
 
@@ -245,7 +245,7 @@ Your deployment is successful when:
 
 ```
 1. Deploy to local Docker → 2. Test → 3. Push to GitHub → 4. Auto-deploys
-(Validate locally before production)
+```text
 ```
 
 

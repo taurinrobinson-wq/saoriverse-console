@@ -3,7 +3,7 @@
 ## Overview
 
 Your Velinor game is now **emotionally intelligent**. Every NPC interaction adapts in real-time to your emotional state through FirstPerson integration.
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    VELINOR GAME                             │
@@ -104,7 +104,7 @@ if 'firstperson_orchestrator' not in st.session_state:
         user_id='velinor_player',
         conversation_id='velinor_game'
     )
-    st.session_state.firstperson_orchestrator.initialize_session()
+```text
 ```
 
 
@@ -124,7 +124,7 @@ orchestrator = VelinorTwineOrchestrator(
     story_path=str(story_path),
     first_person_module=firstperson_orchestrator,  # ← Connected here
     npc_system=None
-)
+```text
 ```
 
 
@@ -138,7 +138,7 @@ def _summarize_player_intent(self, player_input, player_id):
     # Analyzes emotional tone, theme, valence, intensity
     # Returns: {original_input, emotional_tone, detected_theme, ...}
     analysis = self.first_person.handle_conversation_turn(player_input)
-    return analysis
+```text
 ```
 
 
@@ -154,7 +154,7 @@ def _generate_emotionally_aware_response(self, npc_name, player_input,
     # - Emotional tone
     # - Theme + memory context
     # - Intensity level
-    # Returns: Nuanced NPC dialogue
+```text
 ```
 
 
@@ -173,7 +173,7 @@ if updated_state.get('npc_name'):
     updated_state['npc_dialogue'] = self._generate_npc_dialogue(
         npc_name=updated_state['npc_name'],
         context=updated_state,  # ← Contains player_analysis
-    )
+```text
 ```
 
 
@@ -202,7 +202,7 @@ Input:    "I feel disconnected from everything"
 Analysis: { tone: 'heavy', theme: 'general', valence: -0.7, intensity: 0.6 }
 Memory:   { turns: 1, emotional_trajectory: [-0.7], themes: {'general': 1} }
 NPC:      "I hear the weight in that. What you're naming has weight.
-           Tell me more about what feels disconnected."
+```text
 ```
 
 
@@ -214,7 +214,7 @@ Input:    "It's like I've lost something important"
 Analysis: { tone: 'heavy', theme: 'grief', valence: -0.8, intensity: 0.7 }
 Memory:   { turns: 2, emotional_trajectory: [-0.7, -0.8], themes: {'general': 1, 'grief': 1} }
 NPC:      "I hear the weight in that. Loss shapes us in ways words
-           sometimes can't reach. What needs to be said about it?"
+```text
 ```
 
 
@@ -230,7 +230,7 @@ Memory:   { turns: 3, emotional_trajectory: [-0.7, -0.8, -0.1],
             recurring_themes: ['grief'] }
 NPC:      "There's something to sit with there. I'm noticing grief
            keeps coming back to you—that tells me something. And I'm
-           also noticing a shift in what you're saying. What's helping?"
+```text
 ```
 
 
@@ -250,7 +250,7 @@ NPC:      "There's something to sit with there. I'm noticing grief
 ```
 f90cccf - Feat: FirstPerson integration for emotionally-aware NPC responses
 a3de8fe - Docs: Add FirstPerson + Velinor quick reference guide
-5a91073 - Docs: Add FirstPerson integration summary
+```text
 ```
 
 

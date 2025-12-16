@@ -58,7 +58,7 @@ Response Orchestration Layer
     ↓
 Output Layer
 ├─ Empathy Rituals (practices for users)
-└─ Final Response Composer (fresh, varied phrasing)
+```text
 ```
 
 
@@ -426,7 +426,7 @@ create table conversations (
 -- Indexes for fast queries
 create index idx_conversations_user_created on conversations(user_id, created_at desc);
 create index idx_conversations_theme on conversations(theme);
-create index idx_conversations_user_theme on conversations(user_id, theme);
+```text
 ```
 
 
@@ -440,7 +440,7 @@ select anchor, summary, theme, clarifier, created_at
 from conversations
 where user_id = $1
 order by created_at desc
-limit 20;
+```text
 ```
 
 
@@ -452,7 +452,7 @@ select theme, count(*) as frequency
 from conversations
 where user_id = $1 and created_at > now() - interval '30 days'
 group by theme
-order by frequency desc;
+```text
 ```
 
 
@@ -464,7 +464,7 @@ select extract(hour from created_at) as hour_of_day, count(*) as frequency
 from conversations
 where user_id = $1
 group by hour_of_day
-order by frequency desc;
+```text
 ```
 
 
@@ -501,7 +501,7 @@ export function useConversationMemory(userId) {
   }, [userId]);
 
   return memory;
-}
+```text
 ```
 
 

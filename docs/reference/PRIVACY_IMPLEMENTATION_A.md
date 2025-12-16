@@ -20,7 +20,7 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
   "ai_response": "I understand. These feelings are valid...",
   "emotional_signals": [...],
   "glyphs": [...]
-}
+```text
 ```
 
 
@@ -44,7 +44,7 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
   "glyph_names": ["Recursive Grief", "Overwhelm Pattern"],
   "ai_response_length": 245,
   "exchange_quality": "logged"
-}
+```text
 ```
 
 
@@ -76,7 +76,7 @@ log_entry = {
     "ai_response": ai_response,  # ❌ RAW CONTENT
     "emotional_signals": emotional_signals,
     "glyphs": glyphs,
-}
+```text
 ```
 
 
@@ -94,7 +94,7 @@ log_entry = {
     "exchange_quality": "logged",
     # REMOVED: "user_input" (raw text)
     # REMOVED: "ai_response" (content)
-}
+```text
 ```
 
 
@@ -109,7 +109,7 @@ log_entry = {
 
 ```python
 entry = user_overrides["signals"][signal]
-entry["examples"].append(user_input)  # ❌ RAW MESSAGE STORED
+```text
 ```
 
 
@@ -123,7 +123,7 @@ entry["example_contexts"].append({
     "associated_signals": [...],  # Which signals co-occur
     "gates": [...],  # Which gates activate
     # NO user_input stored
-})
+```text
 ```
 
 
@@ -145,7 +145,7 @@ entry["example_contexts"].append({
 **Usage:**
 
 ```bash
-python3 privacy_monitor.py
+```text
 ```
 
 
@@ -160,7 +160,7 @@ python3 privacy_monitor.py
 📊 Compliance: 0.0% (entries are from pre-privacy-implementation)
 
 ⚠️ This is expected for historical data logged before Option A.
-New exchanges (after code deployment) will use privacy-safe format.
+```text
 ```
 
 
@@ -187,7 +187,7 @@ New exchanges (after code deployment) will use privacy-safe format.
 ✅ User lexicon has NO full messages
 ✅ example_contexts have keyword field
 ✅ example_contexts have associated_signals
-✅ example_contexts have gates
+```text
 ```
 
 
@@ -222,7 +222,7 @@ User Input → Extracted Signals → LOGGED RAW → Hybrid Learning
    ↓                              (Private!)    ↓
 "I'm depressed"            Raw storage       User lexicon
                            plaintext         (with messages)
-                           ❌ PRIVACY RISK
+```text
 ```
 
 

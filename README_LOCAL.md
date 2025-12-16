@@ -23,7 +23,7 @@ docker compose -f docker-compose.dev.yml up --build
 
 # to stop:
 ctrl+c
-docker compose -f docker-compose.dev.yml down
+```text
 ```
 
 
@@ -52,7 +52,7 @@ docker compose up --build
 
 # to stop:
 ctrl+c
-docker compose down
+```text
 ```
 
 

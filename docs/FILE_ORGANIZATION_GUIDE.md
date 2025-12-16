@@ -7,7 +7,7 @@
 ## 📊 Complete Project File Map
 
 ### Root Level (2 Files - Clean!)
-
+```text
 ```
 README.md                      Project overview & getting started
 CONTRIBUTING.md                Contribution guidelines
@@ -21,7 +21,7 @@ CONTRIBUTING.md                Contribution guidelines
 ## 🔧 Core Application (core/)
 
 **Purpose**: All essential Python files that power the application
-
+```text
 ```
 core/
 ├── start.py                   Railway deployment entry point
@@ -46,7 +46,7 @@ core/
 ## 📚 Documentation (docs/)
 
 ### guides/ - Design & Reference Documents
-
+```text
 ```
 docs/guides/
 ├── MODULARIZATION_COMPLETE.md      ⭐ PRIMARY - Complete architecture guide (13 KB)
@@ -67,7 +67,7 @@ docs/guides/
 **Purpose**: Architecture, design, and project references
 
 ### reports/ - Analysis & Reports
-
+```text
 ```
 docs/reports/
 ├── FACTORIAL_EXPANSION_REPORT.json
@@ -91,7 +91,7 @@ docs/reports/
 **Purpose**: Test results, analysis outputs, audit trails
 
 ### archives/ - Phase & Sprint History
-
+```text
 ```
 docs/archives/
 ├── FIRSTPERSON_PHASE_1_6_INTEGRATION.md
@@ -121,7 +121,7 @@ docs/archives/
 **Purpose**: Development history and context
 
 ### INDEX.md - Navigation Guide
-
+```text
 ```
 docs/INDEX.md                 ⭐ START HERE - Complete documentation index & navigation
 ```
@@ -135,7 +135,7 @@ docs/INDEX.md                 ⭐ START HERE - Complete documentation index & na
 ## 📊 Data (data/)
 
 ### glyphs/ - Glyph Generation & Validation
-
+```text
 ```
 data/glyphs/
 ├── phase_1_complete_glyphs.json
@@ -156,7 +156,7 @@ data/glyphs/
 **Purpose**: Glyph generation, validation, and database
 
 ### lexicons/ - NLP Lexicon Data
-
+```text
 ```
 data/lexicons/
 ├── lexicon_enhanced.json
@@ -171,7 +171,7 @@ data/lexicons/
 **Purpose**: NLP processing and antonym mapping
 
 ### analysis/ - Analysis Outputs
-
+```text
 ```
 data/analysis/
 └── [Analysis output files go here]
@@ -182,7 +182,7 @@ data/analysis/
 **Purpose**: Expansion directory for analysis results
 
 ### exports/ - Export Files
-
+```text
 ```
 data/exports/
 └── [Export files go here]
@@ -194,7 +194,7 @@ data/exports/
 ##
 
 ## ⚙️ Configuration (config/)
-
+```text
 ```
 config/
 ├── package.json              Node.js dependencies
@@ -213,7 +213,7 @@ config/
 ##
 
 ## 📜 Scripts (scripts/)
-
+```text
 ```
 scripts/
 ├── deploy.sh                 Production deployment script
@@ -227,7 +227,7 @@ scripts/
 ##
 
 ## 🔍 Logs (logs/)
-
+```text
 ```
 logs/
 ├── debug_chat.log
@@ -244,7 +244,7 @@ logs/
 ##
 
 ## 🎨 Frontend (frontend/)
-
+```text
 ```
 frontend/
 └── test.js                   Frontend test file
@@ -259,7 +259,7 @@ frontend/
 ## 🏛️ Modularized Application (emotional_os/)
 
 ### emotional_os/utils/
-
+```text
 ```
 emotional_os/utils/
 ├── svg_loader.py
@@ -272,7 +272,7 @@ emotional_os/utils/
 **Purpose**: Shared utility functions
 
 ### emotional_os/session/
-
+```text
 ```
 emotional_os/session/
 └── session_manager.py        Session state management
@@ -283,7 +283,7 @@ emotional_os/session/
 **Purpose**: User session handling
 
 ### emotional_os/ui/
-
+```text
 ```
 emotional_os/ui/
 ├── ui_refactored.py          Consolidated UI module (~200 lines)
@@ -297,7 +297,7 @@ emotional_os/ui/
 **Purpose**: UI component organization
 
 ### emotional_os/response/
-
+```text
 ```
 emotional_os/response/
 ├── response_handler.py
@@ -309,7 +309,7 @@ emotional_os/response/
 **Purpose**: Response processing logic
 
 ### emotional_os/features/
-
+```text
 ```
 emotional_os/features/
 ├── document_processor.py
@@ -323,7 +323,7 @@ emotional_os/features/
 **Purpose**: Optional feature modules
 
 ### emotional_os/glyphs/
-
+```text
 ```
 emotional_os/glyphs/
 ├── glyph_generator.py
@@ -337,7 +337,7 @@ emotional_os/glyphs/
 **Purpose**: Glyph system implementation
 
 ### emotional_os/parser/
-
+```text
 ```
 emotional_os/parser/
 └── [NLP parsing modules]
@@ -348,7 +348,7 @@ emotional_os/parser/
 **Purpose**: Input parsing and NLP
 
 ### emotional_os/learning/
-
+```text
 ```
 emotional_os/learning/
 └── [Learning system modules]
@@ -359,7 +359,7 @@ emotional_os/learning/
 **Purpose**: Learning and memory management
 
 ### emotional_os/core/
-
+```text
 ```
 emotional_os/core/
 └── [Core system modules]
@@ -373,7 +373,7 @@ emotional_os/core/
 ## 🗜️ Organized Tools (tools/)
 
 ### tools/analysis/
-
+```text
 ```
 tools/analysis/
 ├── gate_distribution_analyzer.py
@@ -387,7 +387,7 @@ tools/analysis/
 **Purpose**: Analysis and reporting utilities
 
 ### tools/document_processing/
-
+```text
 ```
 tools/document_processing/
 ├── docx_reader.py
@@ -401,7 +401,7 @@ tools/document_processing/
 **Purpose**: Document handling utilities
 
 ### tools/glyph_testing/
-
+```text
 ```
 tools/glyph_testing/
 ├── glyph_conversation_test_harness.py
@@ -417,7 +417,7 @@ tools/glyph_testing/
 ## 📦 Organized Archives (archive/)
 
 ### archive/phase_infrastructure/
-
+```text
 ```
 archive/phase_infrastructure/
 ├── phase_1_generator.py
@@ -436,7 +436,7 @@ archive/phase_infrastructure/
 ##
 
 ## 🧪 Tests (tests/)
-
+```text
 ```
 tests/
 ├── test_*.py                 Comprehensive test files

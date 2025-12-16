@@ -8,7 +8,7 @@ Quick start (local devcontainer / machine):
 1. Install system deps (Linux):
 
 ```bash
-sudo apt-get update && sudo apt-get install -y fluidsynth ffmpeg
+```text
 ```
 
 
@@ -16,7 +16,7 @@ sudo apt-get update && sudo apt-get install -y fluidsynth ffmpeg
 2. Install Python deps:
 
 ```bash
-python3 -m pip install -r Offshoots/ToneCore/requirements.txt
+```text
 ```
 
 

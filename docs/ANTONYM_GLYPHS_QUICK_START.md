@@ -13,7 +13,7 @@
 ### Import the Module
 
 ```python
-from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion, search_antonyms
+```text
 ```
 
 
@@ -24,7 +24,7 @@ from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion, search_a
 
 # Find the opposite of comfort
 antonym = find_antonym_by_emotion("comfort")
-print(antonym["Name"])  # Output: "Gentle Holding"
+```text
 ```
 
 
@@ -36,7 +36,7 @@ print(antonym["Name"])  # Output: "Gentle Holding"
 # Search for anything related to "joy"
 results = search_antonyms("joy")
 for r in results:
-    print(f"{r['Base Emotion']}: {r['Name']}")
+```text
 ```
 
 
@@ -54,7 +54,7 @@ opposite = find_antonym_by_emotion(emotion)
 
 if opposite:
     st.markdown("### The Opposite Perspective")
-    st.markdown(format_antonym_for_display(opposite))
+```text
 ```
 
 
@@ -67,7 +67,7 @@ from emotional_os.glyphs.antonym_glyphs import list_antonym_emotions
 emotions = list_antonym_emotions()
 print(f"Available antonym emotions: {len(emotions)}")
 for e in emotions[:10]:
-    print(f"  - {e}")
+```text
 ```
 
 
@@ -82,7 +82,7 @@ selected = st.selectbox("Choose an emotion:", emotions)
 
 antonym = find_antonym_by_emotion(selected)
 st.write(f"**Name**: {antonym['Name']}")
-st.write(f"**Description**: {antonym['Description']}")
+```text
 ```
 
 
@@ -121,7 +121,7 @@ st.write(f"**Description**: {antonym['Description']}")
 │   └── test_antonym_glyphs.py                  # Test suite
 └── docs/
     ├── ANTONYM_GLYPHS_INTEGRATION.md           # Full documentation
-    └── ANTONYM_GLYPHS_QUICK_START.md           # This file
+```text
 ```
 
 
@@ -130,7 +130,7 @@ st.write(f"**Description**: {antonym['Description']}")
 
 ```bash
 cd /workspaces/saoriverse-console
-python3 tests/test_antonym_glyphs.py
+```text
 ```
 
 

@@ -1,7 +1,7 @@
 # 🚀 DEPLOYMENT READY - Visual Overview
 
 ## You Have Everything You Need
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                  YOUR DOCKER SETUP IS READY                 │
@@ -46,7 +46,7 @@ ssh root@161.35.227.49
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 chmod +x docker-setup.sh
-./docker-setup.sh
+```text
 ```
 
 
@@ -65,7 +65,7 @@ chmod +x docker-setup.sh
 ```bash
 
 # Follow the step-by-step instructions in:
-📖 DIGITALOCEAN_DEPLOYMENT_GUIDE.md (Sections 1-5)
+```text
 ```
 
 
@@ -78,7 +78,7 @@ chmod +x docker-setup.sh
 # Read detailed instructions:
 🔧 DOCKER_UBUNTU_SETUP.md
 
-# Then manually run each Docker command
+```text
 ```
 
 
@@ -90,7 +90,7 @@ chmod +x docker-setup.sh
 🌐 Frontend:    http://161.35.227.49:3000
 ⚙️  API:         http://161.35.227.49:8000
 💚 Health:      http://161.35.227.49:8000/health
-🔄 Nginx:       http://161.35.227.49:80 (same as :3000)
+```text
 ```
 
 
@@ -114,7 +114,7 @@ chmod +x docker-setup.sh
     └─────────────────────┘  └──────────────────────┘
 
     Both services on same Docker network (saoriverse)
-    Data persists in volumes: data_local/
+```text
 ```
 
 
@@ -140,7 +140,7 @@ chmod +x docker-setup.sh
 ☐ 4. Run: ./docker-setup.sh
 ☐ 5. Wait 5-10 minutes
 ☐ 6. Open browser to http://161.35.227.49:3000
-☐ Done! ✅
+```text
 ```
 
 
@@ -165,7 +165,7 @@ docker compose restart
 docker compose stop
 
 # Update code and restart
-git pull && docker compose up -d --build
+```text
 ```
 
 
@@ -186,7 +186,7 @@ git pull && docker compose up -d --build
 docker compose logs
 
 # Usually just need to retry
-./docker-setup.sh
+```text
 ```
 
 
@@ -201,7 +201,7 @@ docker compose logs
 # Rebuild from scratch
 docker compose down
 docker compose build --no-cache
-docker compose up -d
+```sql
 ```
 
 
@@ -216,7 +216,7 @@ curl http://localhost:8000/health
 
 # Then from your machine (replace IP if different)
 curl http://161.35.227.49:3000
-curl http://161.35.227.49:8000/health
+```text
 ```
 
 
@@ -255,7 +255,7 @@ Infrastructure:
 └── Nginx (reverse proxy)
 
 Deployment:
-└── DigitalOcean (Ubuntu 22.04 LTS)
+```text
 ```
 
 
@@ -289,7 +289,7 @@ Deployment:
 │                 │   │  SQLite DB       │
 └─────────────────┘   └──────────────────┘
 
-All inside Docker on DigitalOcean (161.35.227.49)
+```text
 ```
 
 
@@ -310,7 +310,7 @@ saoriverse-nginx          Up
 
 Your application is now running on:
 Frontend:  http://161.35.227.49:3000
-API:       http://161.35.227.49:8000
+```text
 ```
 
 

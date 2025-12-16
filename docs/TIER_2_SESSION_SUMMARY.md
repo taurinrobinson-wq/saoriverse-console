@@ -154,7 +154,7 @@ Created comprehensive documentation:
 ### Phase 6: Version Control (5 min)
 
 **Commit 1: Tier 2 Implementation**
-
+```text
 ```
 commit 94ce399
 feat: Tier 2 Aliveness - Emotional Presence and Adaptivity
@@ -171,7 +171,7 @@ feat: Tier 2 Aliveness - Emotional Presence and Adaptivity
 (Included in Commit 1)
 
 **Commit 3: Documentation**
-
+```text
 ```
 commit 34f4ce8
 docs: Add Tier 2 Aliveness completion report and quick reference
@@ -191,7 +191,7 @@ docs: Add Tier 2 Aliveness completion report and quick reference
 ## Technical Details
 
 ### Architecture
-
+```text
 ```
 User Input
     ↓
@@ -224,7 +224,7 @@ EnergyTracker
 
 
 ### Performance Profile
-
+```text
 ```
 ┌──────────────────────────────────────────┐
 │ Response Timeline (milliseconds)          │
@@ -253,7 +253,7 @@ try:
     result = component.process()
 except Exception as e:
     logger.warning(f"Component failed: {e}")
-    return fallback_value  # Graceful degradation
+```text
 ```
 
 
@@ -263,7 +263,7 @@ If entire Tier 2 fails:
 ```python
 except Exception as e:
     logger.error(f"Tier 2 processing failed: {e}")
-    return base_response  # Fallback to pre-Tier2 response
+```text
 ```
 
 
@@ -404,7 +404,7 @@ if tier2:
         logger.debug(f"Tier 2 metrics: {tier2_metrics}")
         response = aliveness_response
     except Exception as e:
-        logger.warning(f"Tier 2 aliveness failed: {e}, using Tier 1 response")
+```text
 ```
 
 
@@ -424,7 +424,7 @@ def _ensure_tier2_aliveness():
             logger.info("Tier 2 Aliveness initialized in session")
         except Exception as e:
             logger.warning(f"Failed to initialize Tier 2 Aliveness: {e}")
-            st.session_state["tier2_aliveness"] = None
+```text
 ```
 
 
@@ -497,7 +497,7 @@ EmbodiedSimulation               <10ms     4ms      ✅ 60% better
 EnergyTracker                    <10ms     4ms      ✅ 60% better
 Tier 2 Total                     <30ms    20ms      ✅ 33% better
 Tier 1 + Tier 2                  <70ms    60ms      ✅ 14% better
-Combined Pipeline                <100ms   60ms      ✅ 40% headroom
+```text
 ```
 
 

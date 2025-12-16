@@ -9,7 +9,7 @@ Phase 1 of the Velinor game development roadmap has been successfully implemente
 ### 1. Graphics Assets Setup ✓
 
 All 7 renamed graphics are now in the web version:
-
+```text
 ```
 velinor-web/public/assets/
 ├── overlays/
@@ -53,7 +53,7 @@ getAccessibleEndings(stats)             // All accessible endings
 
 // Get player feedback
 getToneTier(value)                       // "Poor", "Weak", "Good", "Strong", "Excellent"
-getNPCDialoguePath(npcName, stats)      // Which dialogue variation?
+```text
 ```
 
 
@@ -81,7 +81,7 @@ updateToneStats({
   statName: 'empathy',
   delta: 5,
   description: 'Showed emotional understanding'
-});
+```text
 ```
 
 
@@ -142,7 +142,7 @@ choice.toneChanges.forEach(action => {
   updateToneStats(action);
 });
 
-setScene(choice.nextScene, backgroundImage, overlayImage);
+```text
 ```
 
 
@@ -157,7 +157,7 @@ if (toneStats.trust >= 60) {
   showDialog('I trust you enough to share this...');
 } else {
   showDialog('I... don\'t know you well enough yet.');
-}
+```text
 ```
 
 
@@ -199,7 +199,7 @@ export default function DialogueScene() {
       {/* Each choice applies TONE changes when clicked */}
     </div>
   );
-}
+```text
 ```
 
 

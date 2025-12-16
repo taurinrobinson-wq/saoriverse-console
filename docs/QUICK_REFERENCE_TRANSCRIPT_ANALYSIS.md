@@ -1,7 +1,7 @@
 # Quick Reference: Transcript Analysis Results
 
 ## 📊 The Numbers
-
+```text
 ```
 Original transcript:    39,811 lines
 Legal/song content:     -4,094 lines (10.3%)
@@ -36,7 +36,7 @@ Unique conversations:   1 (one amazing long thread)
 ## 🚀 Implementation Priority
 
 ### THIS WEEK
-
+```text
 ```
 1. Add 3 new Glyphs:
    - THAT_LANDS ("That lands.")
@@ -51,7 +51,7 @@ Unique conversations:   1 (one amazing long thread)
 
 
 ### NEXT WEEK
-
+```text
 ```
 5. Add 7 more Glyphs:
    - HOLD_IT, ECHO_BACK, PERMISSION
@@ -68,7 +68,7 @@ Unique conversations:   1 (one amazing long thread)
 
 
 ### WEEK 3-4
-
+```text
 ```
 8. Full Glyph lexicon rebuild with new standards
 9. A/B test old vs. new voice
@@ -121,7 +121,7 @@ Use these as your model for tone/style:
 All 10 are under 15 words. All are direct. All are present. All are true.
 
 ## 📁 Files You Got
-
+```text
 ```
 ✅ copilot-activity-history-cleaned.csv
    → 35,717 clean rows, all legal content removed

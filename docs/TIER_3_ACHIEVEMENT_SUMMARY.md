@@ -104,7 +104,7 @@ A sophisticated system that adds creative depth and poetic expression to every r
 ## The Complete System
 
 ### **Response Pipeline (70ms total)**
-
+```text
 ```
 User Input
     ↓
@@ -310,7 +310,7 @@ Easy to extend:
 - Long-term narrative continuity
 
 ### **Performance Allocation**
-
+```text
 ```
 Tier 1: 40ms (Foundation)
 Tier 2: 20ms (Aliveness)

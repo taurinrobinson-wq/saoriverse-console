@@ -7,7 +7,7 @@
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 bash setup.sh
-bash run.sh
+```text
 ```
 
 
@@ -26,7 +26,7 @@ source venv/bin/activate
 pip install streamlit pillow
 
 # Run the game
-streamlit run velinor_app.py
+```text
 ```
 
 
@@ -56,7 +56,7 @@ orchestrator = VelinorTwineOrchestrator(
     story_path=str(story_path),
     first_person_module=FirstPersonOrchestrator("game_npc", "velinor_session"),  # ← Add this
     npc_system=npc_system
-)
+```text
 ```
 
 
@@ -79,7 +79,7 @@ glyph_collection_enabled = true
 
 [deployment]
 environment = "production"  # or "development"
-debug_mode = false
+```text
 ```
 
 
@@ -108,7 +108,7 @@ streamlit run velinor_app.py
 
 # App runs at http://localhost:8501
 
-# Press Ctrl+C to stop
+```text
 ```
 
 
@@ -118,7 +118,7 @@ streamlit run velinor_app.py
 ```bash
 
 # If FirstPerson is enabled, additional debug info will show
-streamlit run velinor_app.py --logger.level=debug
+```text
 ```
 
 
@@ -161,7 +161,7 @@ streamlit run velinor_app.py --logger.level=debug
 
 ```bash
 docker build -t velinor-game .
-docker run -p 8501:8501 velinor-game
+```text
 ```
 
 
@@ -205,7 +205,7 @@ session_scope = "velinor_game"
 
 # Optional: Analytics
 [analytics]
-enabled = false
+```text
 ```
 
 
@@ -255,7 +255,7 @@ saoriverse-console/
     └── emotional_os/
         └── deploy/
             └── core/
-                └── firstperson/  ← Import from here for integration
+```text
 ```
 
 
@@ -284,7 +284,7 @@ streamlit --version
 rm -rf ~/.streamlit
 
 # Deactivate venv
-deactivate
+```text
 ```
 
 
@@ -303,7 +303,7 @@ ls -la velinor/backgrounds/
 ls -la velinor/npcs/
 
 # Test game imports
-python3 -c "from velinor.engine import VelinorEngine; print('✓ Game ready')"
+```text
 ```
 
 

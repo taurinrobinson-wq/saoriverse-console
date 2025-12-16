@@ -12,7 +12,7 @@ Your Saoriverse Console development environment is now fully configured with Pyt
 # Start the app
 py -3.12 -m streamlit run app.py
 
-# Open http://localhost:8501 in your browser
+```text
 ```
 
 
@@ -61,7 +61,7 @@ py -3.12 -m pytest
 py -3.12 -m pip install package-name
 
 # Update specific package
-py -3.12 -m pip install --upgrade package-name
+```text
 ```
 
 
@@ -93,7 +93,7 @@ Data Processing:
 pandas + numpy → matplotlib (visualization)
 
 Document Processing:
-PDF (pdfplumber) + DOCX (python-docx) + Excel (openpyxl)
+```text
 ```
 
 

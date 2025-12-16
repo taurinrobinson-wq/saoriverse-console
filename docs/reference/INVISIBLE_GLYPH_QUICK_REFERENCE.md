@@ -50,7 +50,7 @@ They see personalized responses about their specific situation. They never see:
 2. Validates their specific struggle (not glyph category)
 3. Uses glyph intensity invisibly for tone/closing
 4. Maps glyph emotional signal to language choice
-5. Returns response that feels personal, not categorical
+```text
 ```
 
 
@@ -63,7 +63,7 @@ They see personalized responses about their specific situation. They never see:
 1. Checks for message features (math_frustration, inherited_pattern, etc.)
 2. Responds directly to each feature
 3. Uses glyph intensity (invisible) to calibrate language intensity
-4. Returns response about their situation, not glyph system
+```text
 ```
 
 
@@ -127,7 +127,7 @@ In `signal_parser.py`, in message_features dict:
 message_features = {
     "existing_feature": condition,
     "new_feature": condition,  # Add here
-}
+```text
 ```
 
 
@@ -136,7 +136,7 @@ Then handle in `compose_message_aware_response()`:
 
 ```python
 if message_content.get("new_feature"):
-    parts.append("Your response about this feature...")
+```text
 ```
 
 
@@ -148,7 +148,7 @@ Update `_glyph_to_emotion_category()` in `dynamic_response_composer.py`:
 emotion_map = {
     "existing_glyph": "emotion",
     "new_glyph": "emotion",  # Add mapping
-}
+```text
 ```
 
 
@@ -162,7 +162,7 @@ Poetry comes from `_weave_poetry()` which uses emotion category mapping. If you 
 ### Quick Test
 
 ```bash
-python test_glyph_aware_responses.py
+```text
 ```
 
 

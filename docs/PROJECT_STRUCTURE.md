@@ -1,7 +1,7 @@
 # Project Structure Guide
 
 ## 📂 Directory Layout
-
+```text
 ```
 saoriverse-console/
 │
@@ -98,7 +98,7 @@ saoriverse-console/
 ./scripts/RUN_WEB_DEV.sh
 
 # Or run full stack (frontend + backend)
-./scripts/RUN_FULL_STACK.sh
+```text
 ```
 
 
@@ -106,7 +106,7 @@ saoriverse-console/
 ### Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+```text
 ```
 
 
@@ -148,7 +148,7 @@ ls -la scratch/
 rm scratch/old_summary.md
 
 # Verify .gitignore is working
-git status  # scratch/ files should NOT appear here
+```text
 ```
 
 
@@ -172,7 +172,7 @@ saoriverse-console/
 ├── ANALYSIS_COMPLETE.md
 ├── ... 40+ more .md files
 ├── src/
-└── velinor/
+```text
 ```
 
 

@@ -26,7 +26,7 @@ Next recommended actions when you resume:
 ```powershell
 Set-Location -Path "C:\Users\Admin\OneDrive\Desktop\Deleted_Emotional_OS_Folder\Emotional OS"
 & ".\.venv\Scripts\Activate.ps1"  # if needed
-& ".\.venv\Scripts\python.exe" -m pytest -q
+```text
 ```
 
 

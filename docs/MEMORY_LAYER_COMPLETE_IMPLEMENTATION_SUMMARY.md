@@ -56,7 +56,7 @@ Four complementary documentation files:
 ## The Problem It Solves
 
 ### Before Memory Layer
-
+```text
 ```
 User Turn 1: "I'm stressed"
 System: "What's causing that stress?"
@@ -77,7 +77,7 @@ Problem: Each response treats message in isolation
 
 
 ### After Memory Layer
-
+```text
 ```
 User Turn 1: "I'm stressed"
 System: "I hear you're feeling stress today."
@@ -103,7 +103,7 @@ Benefit: Progressive understanding, targeted questions, clear demonstration of c
 ## Information Flow: Three-Message Example
 
 ### Turn 1: Emotional State Revealed
-
+```text
 ```
 User says: "I'm feeling so stressed today"
 
@@ -127,7 +127,7 @@ Response: "I hear you're feeling stress today."
 
 
 ### Turn 2: Root Cause & Mechanism Revealed
-
+```text
 ```
 User says: "I have so much on my mind at work that I can't take a step forward"
 
@@ -157,7 +157,7 @@ Response: "I hear you - work has flooded your mind with so many competing
 
 
 ### Turn 3: Specificity & Context Revealed
-
+```text
 ```
 User says: "5 projects due this week - client presentation Thursday,
            haven't even started the deck"
@@ -271,7 +271,7 @@ Response: "I hear you - work has flooded your mind with competing demands...
 1. Parse semantically → SemanticParsing object
 2. Add to memory → memory.add_turn(input, parsed, glyphs, needs)
 3. Memory integrates → updates integrated_state, causal_understanding
-4. Generate response → composer.compose_response_with_memory(memory)
+```text
 ```
 
 
@@ -290,7 +290,7 @@ SemanticParsing(
     thought_patterns=["how thinking is affected"],
     action_capacity="can/cannot act?",
     raw_input="full message",
-)
+```text
 ```
 
 

@@ -4,7 +4,7 @@ Print this and keep it handy! 📋
 ##
 
 ## 🎯 Your Deployment Path
-
+```text
 ```
 LOCAL MACHINE
     ↓ git push
@@ -45,7 +45,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/velinor
 
 # Hostname: velinor-server
 
-# Save the IP when created
+```text
 ```
 
 
@@ -56,7 +56,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/velinor
 A Record:
   Host: velinor
   Value: [YOUR_DROPLET_IP]
-  TTL: 30 min
+```text
 ```
 
 
@@ -78,7 +78,7 @@ ssh root@[DROPLET_IP]
 
 # - Issue SSL certificate
 
-# - Start nginx
+```text
 ```
 
 
@@ -99,7 +99,7 @@ curl https://velinor.firstperson.chat/health
 # Visit in browser
 https://velinor.firstperson.chat
 
-# Should show Velinor game with green/gold buttons
+```text
 ```
 
 
@@ -146,7 +146,7 @@ docker compose -f docker-compose.prod.yml up -d
 docker compose -f docker-compose.prod.yml ps
 
 # Manual deploy
-cd /opt/velinor && /opt/velinor/deploy.sh
+```text
 ```
 
 
@@ -177,7 +177,7 @@ Your VPS (/opt/velinor):
 ├── velinor/                   ← Backend code
 ├── velinor-web/               ← Frontend code
 ├── requirements-game.txt      ← Python dependencies
-└── .git/                      ← Git repository
+```text
 ```
 
 
@@ -188,7 +188,7 @@ Your VPS (/opt/velinor):
 ### Container crashed? Restart it
 
 ```bash
-docker compose -f docker-compose.prod.yml restart velinor
+```text
 ```
 
 
@@ -197,7 +197,7 @@ docker compose -f docker-compose.prod.yml restart velinor
 
 ```bash
 docker compose -f docker-compose.prod.yml down
-docker compose -f docker-compose.prod.yml up -d
+```text
 ```
 
 
@@ -205,7 +205,7 @@ docker compose -f docker-compose.prod.yml up -d
 ### Nginx won't start? Check config
 
 ```bash
-docker exec velinor_prod nginx -t
+```text
 ```
 
 
@@ -214,7 +214,7 @@ docker exec velinor_prod nginx -t
 
 ```bash
 certbot renew --force-renewal
-docker compose -f docker-compose.prod.yml restart nginx-ssl
+```text
 ```
 
 
@@ -224,7 +224,7 @@ docker compose -f docker-compose.prod.yml restart nginx-ssl
 ```bash
 nslookup velinor.firstperson.chat
 
-# Should return your DigitalOcean IP
+```text
 ```
 
 
@@ -234,7 +234,7 @@ nslookup velinor.firstperson.chat
 ```bash
 curl -I https://velinor.firstperson.chat
 
-# Should show 200 OK with certificate details
+```text
 ```
 
 
@@ -250,7 +250,7 @@ curl -I https://velinor.firstperson.chat
 
 ```bash
 docker compose -f docker-compose.prod.yml ps
-docker compose -f docker-compose.prod.yml logs | grep ERROR
+```text
 ```
 
 
@@ -263,7 +263,7 @@ docker compose -f docker-compose.prod.yml logs | grep ERROR
 apt-get update && apt-get upgrade -y
 
 # Test deploy script
-/opt/velinor/deploy.sh
+```text
 ```
 
 
@@ -285,7 +285,7 @@ git push origin main
 
 # VPS automatically updates within 5-10 minutes
 
-# Your site is updated!
+```sql
 ```
 
 
@@ -299,7 +299,7 @@ git add docker-compose.prod.yml nginx.prod.conf
 git commit -m "chore: update config"
 git push origin main
 
-# Auto-deploy pulls, rebuilds image, restarts
+```text
 ```
 
 
@@ -317,7 +317,7 @@ nano docker-compose.prod.yml  # or edit any file
 
 # Manually redeploy
 docker compose -f docker-compose.prod.yml down
-docker compose -f docker-compose.prod.yml up -d
+```text
 ```
 
 
@@ -332,7 +332,7 @@ docker compose -f docker-compose.prod.yml up -d
 # NEVER share /root/.ssh/velinor_deploy (private key)
 
 # It's what gives GitHub permission to deploy
-ls -la /root/.ssh/
+```text
 ```
 
 
@@ -344,7 +344,7 @@ Inbound Rules (Allow):
   - SSH (22) from your IP
   - HTTP (80) from Everywhere
   - HTTPS (443) from Everywhere
-Outbound: Allow All
+```text
 ```
 
 

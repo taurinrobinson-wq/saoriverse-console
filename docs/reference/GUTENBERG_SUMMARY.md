@@ -15,7 +15,7 @@
 ## 📊 Current Storage Configuration
 
 ### External Drive Location
-
+```text
 ```
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (6.5 MB - 8 poetry collections)
@@ -28,7 +28,7 @@ Total: 8.0 MB used | 458 GB available
 
 
 ### Hard Drive Location (Code Only)
-
+```text
 ```
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py           (210 lines - Gutenberg downloader)
@@ -108,7 +108,7 @@ From processing 8 collections:
 ### Monitor Current Processing
 
 ```bash
-tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
+```text
 ```
 
 
@@ -116,7 +116,7 @@ tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 ### View Processing Results
 
 ```bash
-cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
+```text
 ```
 
 
@@ -125,7 +125,7 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-./run_gutenberg_learning.sh
+```text
 ```
 
 
@@ -134,7 +134,7 @@ cd /Users/taurinrobinson/saoriverse-console
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py > "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning_$(date +%s).log" 2>&1 &
+```text
 ```
 
 
@@ -142,7 +142,7 @@ nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher
 ### Check External Drive Space
 
 ```bash
-df -h | grep "My Passport"
+```text
 ```
 
 
@@ -168,7 +168,7 @@ Project Gutenberg API
    Results saved to external drive
    ├─ gutenberg_processing_results.json
    ├─ gutenberg_learning.log
-   └─ gutenberg_poetry/ (downloaded collections)
+```text
 ```
 
 
@@ -186,7 +186,7 @@ Signals Extracted: ~8,000-10,000
 Lexicon Entries Added: ~2,000-5,000
 Processing Log Size: 4.8 MB (59,796 lines)
 Quality Score Average: 0.75-0.85 (good)
-Processing Time: ~5-15 minutes total
+```text
 ```
 
 
@@ -259,7 +259,7 @@ Edit `gutenberg_fetcher.py` (lines 35-70) to add URLs:
 ```python
 "shakespeare_sonnets": "https://www.gutenberg.org/ebooks/1041",
 "milton_paradise_lost": "https://www.gutenberg.org/ebooks/26",
-"byron_complete": "https://www.gutenberg.org/ebooks/3440",
+```text
 ```
 
 
@@ -274,7 +274,7 @@ venv/bin/python -c "
 from bulk_text_processor import BulkTextProcessor
 processor = BulkTextProcessor('your_file.txt')
 results = processor.process()
-"
+```text
 ```
 
 
@@ -284,7 +284,7 @@ results = processor.process()
 Watch the log while processing runs:
 
 ```bash
-watch -n 2 'tail -20 "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"'
+```text
 ```
 
 
@@ -311,7 +311,7 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 
 # Keep the processing results and lexicon updates
 
-# Then re-download when ready
+```text
 ```
 
 
@@ -345,7 +345,7 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 **Solution**: Use quotes around paths with spaces
 
 ```bash
-tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
+```text
 ```
 
 
@@ -362,7 +362,7 @@ tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 **Solution**: Add execute permission
 
 ```bash
-chmod +x /Users/taurinrobinson/saoriverse-console/run_gutenberg_learning.sh
+```text
 ```
 
 

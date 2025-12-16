@@ -57,7 +57,7 @@ I've successfully created a **production-ready glyph-informed chat system** that
 
 # OLD (BLOCKING)
 save_success = await run_in_threadpool(save_conversation_to_supabase, ...)
-return ChatResponse(...)  # Only returns AFTER save completes
+```text
 ```
 
 
@@ -70,7 +70,7 @@ return ChatResponse(...)  # Only returns AFTER save completes
 return ChatResponse(...)  # Return IMMEDIATELY
 
 # Then in background:
-asyncio.create_task(save_in_background())  # Save without blocking
+```text
 ```
 
 
@@ -197,7 +197,7 @@ asyncio.create_task(save_in_background())  # Save without blocking
 │  - theme_anchors (emotional themes)                        │
 │  - temporal_patterns (time-based learning)                 │
 │  - user_profiles (preferences)                             │
-└─────────────────────────────────────────────────────────────┘
+```text
 ```
 
 
@@ -209,7 +209,7 @@ asyncio.create_task(save_in_background())  # Save without blocking
 ```bash
 python firstperson_backend.py
 
-# Backend listening on http://localhost:8000
+```text
 ```
 
 
@@ -227,7 +227,7 @@ python diagnose_backend.py
 
 # ✓ Conversations loading
 
-# ✓ Supabase connectivity
+```text
 ```
 
 

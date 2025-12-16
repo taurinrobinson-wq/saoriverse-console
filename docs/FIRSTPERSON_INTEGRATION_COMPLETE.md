@@ -21,7 +21,7 @@ Your Velinor game is now **emotionally intelligent**. NPC responses adapt in rea
 - Modified `process_player_action()` to attach analysis to game state
 
 ### Emotional Analysis Pipeline
-
+```text
 ```
 Player Input
     ↓
@@ -74,7 +74,7 @@ Chat Display (Light Theme)
 ### Based on Emotional Tone
 
 **Your Input:** "I'm feeling overwhelmed by everything"
-
+```text
 ```
 Analysis: { tone: 'heavy', valence: -0.8, intensity: 0.9 }
 NPC:      "I hear the weight in that. The gravity of what
@@ -85,7 +85,7 @@ NPC:      "I hear the weight in that. The gravity of what
 
 
 **Your Input:** "I'm curious about what comes next"
-
+```text
 ```
 Analysis: { tone: 'curious', valence: 0.3, intensity: 0.4 }
 NPC:      "Tell me more about that. I'm curious where that
@@ -97,7 +97,7 @@ NPC:      "Tell me more about that. I'm curious where that
 ### Based on Recurring Themes
 
 **Turn 1:** "I keep thinking about loss"
-
+```text
 ```
 Analysis: { theme: 'grief', frequency: 1 }
 NPC:      "Loss shapes us in ways words can't reach..."
@@ -106,7 +106,7 @@ NPC:      "Loss shapes us in ways words can't reach..."
 
 
 **Turn 3:** "The grief is still with me"
-
+```text
 ```
 Analysis: { theme: 'grief', frequency: 2, is_recurring: true }
 NPC:      "I hear the weight in that. And I'm noticing grief
@@ -118,7 +118,7 @@ NPC:      "I hear the weight in that. And I'm noticing grief
 ### Based on Emotional Trajectory
 
 **Turns 1-2:** Valence: -0.8 → -0.9 (worsening)
-
+```text
 ```
 NPC:      "I'm noticing the weight increasing. What's happening?"
 ```
@@ -126,7 +126,7 @@ NPC:      "I'm noticing the weight increasing. What's happening?"
 
 
 **Turns 2-3:** Valence: -0.9 → -0.2 (improving)
-
+```text
 ```
 NPC:      "I'm also noticing a shift. What's helping?"
 ```
@@ -153,7 +153,7 @@ NPC:      "I'm also noticing a shift. What's helping?"
 ### Launch the Game
 
 ```bash
-streamlit run velinor_app.py
+```text
 ```
 
 
@@ -163,7 +163,7 @@ That's it! FirstPerson integration is automatic. Just play normally and notice h
 ### Validate the Integration
 
 ```bash
-python3 FIRSTPERSON_INTEGRATION_TEST.py
+```text
 ```
 
 
@@ -262,7 +262,7 @@ All pushed to GitHub main branch ✅
     has_context: false,  // First turn
     emotional_trend: 'stable'
   }
-}
+```text
 ```
 
 
@@ -290,7 +290,7 @@ All pushed to GitHub main branch ✅
       'grief': {frequency: 1}
     }
   }
-}
+```text
 ```
 
 
@@ -319,7 +319,7 @@ All pushed to GitHub main branch ✅
     },
     recurring_themes: ['grief']
   }
-}
+```text
 ```
 
 
@@ -368,7 +368,7 @@ All pushed to GitHub main branch ✅
 ```bash
 streamlit run velinor_app.py
 
-# Game launches with FirstPerson integration active
+```text
 ```
 
 

@@ -22,7 +22,7 @@ This is your complete guide to migrating Velinor from Streamlit to a proper web 
 ## 🛠️ Files Created for You
 
 ### Backend
-
+```text
 ```
 velinor_api.py          FastAPI server that wraps Velinor engine
                         - Session management
@@ -33,7 +33,7 @@ velinor_api.py          FastAPI server that wraps Velinor engine
 
 
 ### Frontend Components
-
+```text
 ```
 frontend_lib_api.ts     TypeScript API client for axios
                         - Game start
@@ -51,7 +51,7 @@ frontend_GameScene.tsx  React component for game scenes
 
 
 ### Documentation
-
+```text
 ```
 VELINOR_WEB_COMPLETE.md         Complete overview (read first!)
 VELINOR_WEB_MIGRATION.md        Step-by-step setup (6 phases)
@@ -95,7 +95,7 @@ npm run dev
 # Phase 5: Deploy
 git add .
 git commit -m "Velinor web game"
-git push origin main
+```text
 ```
 
 
@@ -124,7 +124,7 @@ git push origin main
                     ├─ Velinor Engine
                     ├─ Dice Rolls
                     ├─ NPC Dialogue
-                    └─ Stats Tracking
+```text
 ```
 
 
@@ -151,7 +151,7 @@ Ready to set up?        VELINOR_WEB_MIGRATION.md (Phase 1)
 Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md
 Ready to deploy?        RAILWAY_DEPLOYMENT.md
 Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
-Want game engine info?  velinor/TWINE_INTEGRATION_GUIDE.md
+```text
 ```
 
 
@@ -174,7 +174,7 @@ python velinor_api.py
 cd velinor-web && npm run dev
 
 # Deploy
-git add . && git commit -m "message" && git push origin main
+```text
 ```
 
 

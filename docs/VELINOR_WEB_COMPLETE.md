@@ -6,7 +6,7 @@ You're ditching **Streamlit** and moving to a proper **web stack** because Strea
 ##
 
 ## New Architecture
-
+```text
 ```
 Your Computer (Dev)          Railway Server (Production)
 ═══════════════════          ════════════════════════════
@@ -59,7 +59,7 @@ Velinor (Python)             Velinor (Python) - embedded in backend
 ```bash
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 cd velinor-web
-npm install axios zustand
+```text
 ```
 
 
@@ -70,7 +70,7 @@ npm install axios zustand
 
 # From repo root
 cp frontend_lib_api.ts velinor-web/lib/api.ts
-cp frontend_GameScene.tsx velinor-web/components/GameScene.tsx
+```text
 ```
 
 
@@ -89,7 +89,7 @@ python velinor_api.py
 # Terminal 2
 cd velinor-web && npm run dev
 
-# Browser: http://localhost:3000
+```text
 ```
 
 
@@ -101,7 +101,7 @@ git add .
 git commit -m "feat: Next.js + FastAPI Velinor game"
 git push origin main
 
-# Railway auto-deploys in ~3-5 minutes
+```text
 ```
 
 
@@ -152,7 +152,7 @@ saoriverse-console/
     │   ├── backgrounds/             ← Copy from velinor/backgrounds/
     │   ├── overlays/                ← NEW: dust, fog, glyphs
     │   └── npcs/                    ← Copy from velinor/npcs/
-    └── package.json
+```text
 ```
 
 
@@ -168,7 +168,7 @@ saoriverse-console/
 st.image(splash_img)  # Shows image
 st.button("Start")    # Shows below, not on top
 
-# Result: Button appears below image, not overlaid
+```text
 ```
 
 
@@ -181,7 +181,7 @@ st.button("Start")    # Shows below, not on top
   <button style={{ position: 'absolute', bottom: '20px' }}>
     Start  {/* Button is truly on top */}
   </button>
-</div>
+```text
 ```
 
 
@@ -232,7 +232,7 @@ START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
   ├─→ NEXTJS_FRONTEND_SETUP.md (detailed setup)
   ├─→ RAILWAY_DEPLOYMENT.md (production deploy)
   ├─→ VELINOR_WEB_QUICK_REFERENCE.md (commands)
-  └─→ velinor/TWINE_INTEGRATION_GUIDE.md (engine API)
+```text
 ```
 
 

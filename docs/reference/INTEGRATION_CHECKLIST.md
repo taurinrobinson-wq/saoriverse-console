@@ -116,7 +116,7 @@
 ### Automated Verification
 
 ```bash
-bash verify_integration.sh
+```text
 ```
 
 
@@ -322,7 +322,7 @@ UI Display (main_v2.py)
 Data Persistence
 ├─ Session state
 ├─ JSON files
-└─ Learning log
+```text
 ```
 
 

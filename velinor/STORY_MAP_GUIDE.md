@@ -117,7 +117,7 @@ The story map is organized into **9 major sections**:
 - Trait: [Personality summary]
 - Sphere: [Connected NPCs with weights]
 - Gift: [Tool or knowledge they provide]
-- [Special mechanics if applicable]
+```text
 ```
 
 
@@ -137,7 +137,7 @@ The story map is organized into **9 major sections**:
 - [ ] **[Quest Name]**: [Brief description]
   - Trigger: [When it becomes available]
   - NPCs involved: [List]
-  - Reward: [What player gains]
+```text
 ```
 
 
@@ -154,7 +154,7 @@ The story map is organized into **9 major sections**:
 **Step 1:** Update "Glyph System" → Octoglyph System table
 
 ```markdown
-| [Number] | [Emotional Stage] | [Visual Description] | [Location] |
+```text
 ```
 
 
@@ -165,7 +165,7 @@ The story map is organized into **9 major sections**:
 - [x] **[Chamber Name]**
   - Location: [Where in game world]
   - Puzzle: [Emotional/mechanical challenge]
-  - Memory echo: [What story is revealed]
+```text
 ```
 
 
@@ -193,7 +193,7 @@ The story map is organized into **9 major sections**:
 [How NPCs respond]
 
 **Final Image:**
-[Visual description of ending scene]
+```sql
 ```
 
 
@@ -223,7 +223,7 @@ After:
 - [x] **Healer's Circle** (3 NPCs)
   - **Mirena the Bone-Setter**: Elderly, pragmatic
   - **Joran the Herbalist**: Young, optimistic
-  - **Lysandra the Memory-Keeper**: Middle-aged, haunted by Cataclysm
+```text
 ```
 
 
