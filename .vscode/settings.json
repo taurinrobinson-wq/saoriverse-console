@@ -54,5 +54,6 @@
     "**/dist/**": true,
     "**/.venv/**": true,
     "**/archive/**": true
-  }
+  },
+  "python.analysis.autoImportCompletions": true
 }

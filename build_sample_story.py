@@ -336,10 +336,196 @@ What comes next?
 """
     )
     
-    # Export to JSON
-    output_path = '/Volumes/My Passport for Mac/saoriverse-console/velinor/stories/sample_story.json'
+    # Add final chamber endings (Saori / Velinor / Player triadic scenes)
+    def add_endings(sb: StoryBuilder):
+        # Restart (Redemptive)
+        sb.add_passage(
+            name="Restart_Corelink",
+            text="""
+{background: corelink_chamber}
+
+The chamber hums as the Octoglyph locks into place. Saori trembles before the console; Velinor flickers, tethered to the Corelink.
+
+"You know what this means," Saori whispers. "If I restart Corelink, the ache might soften. But it will never be the same."
+
+Velinor's voice, distorted but steady: "If it awakens, I awaken too. Player, will you carry this risk with us?"
+"""
+        )
+        sb.add_choice("Restart_Corelink", "Encourage them to restart", "Epilogue_Restart")
+        sb.add_choice("Restart_Corelink", "Warn them of the risks", "Epilogue_Restart_Ambiguous")
+
+        sb.add_passage(
+            name="Epilogue_Restart",
+            text="""
+The Tear of Integration flares into a single pulse. Voices return, fragile but real. Saori smiles through tears; Velinor steadies, his presence fragile but genuine.
+
+"Thank you for seeing us," Saori says. "Even if this breaks again, at least we tried."
+
+Velinor adds, "You carried coherence into this chamber. Whatever happens next, it is because you chose."
+"""
+        )
+
+        sb.add_passage(
+            name="Epilogue_Restart_Ambiguous",
+            text="""
+The glyphs flare unevenly. Some voices return; others remain mute. The marketplace hums with an odd mix of joy and unease. Saori looks at you, eyes wet; Velinor flickers, half‑present.
+
+"We are together, but not whole," Velinor says. "You chose, and now we live with it."
+"""
+        )
+
+        # Refusal (Sacrificial)
+        sb.add_passage(
+            name="Refusal_Corelink",
+            text="""
+The chamber is quiet. Saori's hand hovers over the console. Velinor's form is fractured but steady.
+
+"If I restart it, the ache might soften. But I fear it will bind us again," Saori whispers.
+
+Velinor: "If silence remains, I remain fractured. Yet perhaps that is mercy. Player, you must decide."
+"""
+        )
+        sb.add_choice("Refusal_Corelink", "Support their refusal", "Epilogue_Refusal")
+        sb.add_choice("Refusal_Corelink", "Urge them to restart anyway", "Epilogue_Refusal_Conflict")
+
+        sb.add_passage(
+            name="Epilogue_Refusal",
+            text="""
+Saori lowers her hand. The console fades; glyphs dissolve into quiet. Survivors remain fractured but free. Saori exhales, heavy but resolute.
+
+"Better broken than bound again," she says.
+
+Velinor: "You chose silence, and in silence we endure."
+"""
+        )
+
+        sb.add_passage(
+            name="Epilogue_Refusal_Conflict",
+            text="""
+The choice was contested. The console dims; silence holds. Tension lingers among survivors, but dignity remains.
+"""
+        )
+
+        # Balance (Ambiguous)
+        sb.add_passage(
+            name="Balance_Corelink",
+            text="""
+The Hexaglyph pulses unevenly. Saori and Velinor stand together, hands near the console.
+
+"Not whole, not erased," Velinor says. "Fragments stitched, but never seamless. Player, is this enough?"
+"""
+        )
+        sb.add_choice("Balance_Corelink", "Affirm their balance", "Epilogue_Balance")
+        sb.add_choice("Balance_Corelink", "Urge them toward clarity", "Epilogue_Balance_Conflict")
+
+        sb.add_passage(
+            name="Epilogue_Balance",
+            text="""
+Partial echoes return. Some voices harmonize; others remain silent. The community holds in a bittersweet communion.
+
+Saori: "We live in pieces, but together."
+
+Velinor: "You chose balance, and balance is survival."
+"""
+        )
+
+        sb.add_passage(
+            name="Epilogue_Balance_Conflict",
+            text="""
+The chamber hums unevenly; debate remains. Fragments endure, and the world keeps walking forward with an uneasy grace.
+"""
+        )
+
+        # Transmission (Legacy)
+        sb.add_passage(
+            name="Transmission_Corelink",
+            text="""
+Glyphs of ancestry and song shimmer. Saori holds the console but does not restart it.
+
+"Memory itself is enough," Saori whispers. "Stories, rituals, and songs can bind us without wires. Player, will you choose transmission?"
+"""
+        )
+        sb.add_choice("Transmission_Corelink", "Affirm transmission over restoration", "Epilogue_Transmission")
+        sb.add_choice("Transmission_Corelink", "Urge them to restart anyway", "Epilogue_Transmission_Conflict")
+
+        sb.add_passage(
+            name="Epilogue_Transmission",
+            text="""
+Glyphs dissolve into radiant echoes—songs and rituals spread across survivors. The marketplace fills with voices carrying memory forward.
+
+Saori: "We carry them forward."
+
+Velinor: "You chose transmission. Legacy will endure."
+"""
+        )
+
+        sb.add_passage(
+            name="Epilogue_Transmission_Conflict",
+            text="""
+Transmission is chosen amid contention. Memory persists through ritual, though wounds remain.
+"""
+        )
+
+        # Joy (Communal Resurrection)
+        sb.add_passage(
+            name="Joy_Corelink",
+            text="""
+The Heptaglyph pulses like music. Saori laughs through tears; Velinor brightens.
+
+"Joy is survival," Velinor says. "Player, will you help us choose celebration?"
+"""
+        )
+        sb.add_choice("Joy_Corelink", "Affirm joy as survival", "Epilogue_Joy")
+        sb.add_choice("Joy_Corelink", "Urge them toward restoration", "Epilogue_Joy_Conflict")
+
+        sb.add_passage(
+            name="Epilogue_Joy",
+            text="""
+The chamber dissolves into festival. Survivors gather in song and dance. Saori: "We are alive, and that is enough." Velinor: "You chose joy, and joy is survival."
+"""
+        )
+
+        sb.add_passage(
+            name="Epilogue_Joy_Conflict",
+            text="""
+Joy is chosen despite doubts. The marketplace celebrates, though unease still whispers at the edges.
+"""
+        )
+
+        # Collapse (Accepted Uncertainty)
+        sb.add_passage(
+            name="Collapse_Corelink",
+            text="""
+The Collapse constellation glows erratically. Saori steadies herself; Velinor flickers wildly.
+
+"We cannot force clarity," Saori says. "We do not need answers to live. Player, will you walk into the unknown with us?"
+"""
+        )
+        sb.add_choice("Collapse_Corelink", "Affirm acceptance of uncertainty", "Epilogue_Collapse")
+        sb.add_choice("Collapse_Corelink", "Urge them toward clarity", "Epilogue_Collapse_Conflict")
+
+        sb.add_passage(
+            name="Epilogue_Collapse",
+            text="""
+The console glitches; fragments remain unresolved. Survivors walk into uncertainty together. Saori: "We do not need answers to live." Velinor: "You carried coherence into this chamber. Even in collapse, you gave us choice."
+"""
+        )
+
+        sb.add_passage(
+            name="Epilogue_Collapse_Conflict",
+            text="""
+The choice was contested; uncertainty holds. The community moves forward with courage shaped by doubt.
+"""
+        )
+
+    add_endings(story)
+
+    # Export to local JSON for validation
+    output_path = str(Path(__file__).parent / 'velinor' / 'stories' / 'sample_story.json')
+    # ensure parent dir exists
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     story.export_json(output_path)
-    
+
     print(f"✅ Sample story scaffold created at: {output_path}")
     return story
 
