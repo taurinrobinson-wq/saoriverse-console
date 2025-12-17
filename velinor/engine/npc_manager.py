@@ -50,6 +50,7 @@ class NPCProfile:
             "skepticism": 0.5
         }
         self._validate_traits()
+        
     
     def _validate_traits(self):
         """Ensure all 8 REMNANTS traits are present and in valid range [0.1, 0.9]."""
@@ -117,6 +118,11 @@ class NPCManager:
         """Initialize empty NPC manager."""
         self.npcs: Dict[str, NPCProfile] = {}
         self.influence_map: Dict[str, Dict[str, float]] = {}
+        # When True, ripple strength is scaled by source NPC dominance
+        # in the relevant trait (trust for positive ripples, skepticism for negative).
+        self.use_emergent_influence: bool = False
+        # emergent base offset (multiplier baseline)
+        self.emergent_baseline: float = 0.5
         self.history: List[Dict] = []
     
     def add_npc(self, npc: NPCProfile) -> None:
@@ -170,10 +176,23 @@ class NPCManager:
             for to_npc, ripple_value in ripples.items():
                 if to_npc not in self.npcs:
                     continue
-                
+                # Compute emergent multiplier if enabled
+                effective_ripple = ripple_value
+                if self.use_emergent_influence:
+                    source = self.npcs[from_npc]
+                    # Positive ripples align with source trust, negative with source skepticism
+                    if ripple_value > 0:
+                        source_factor = source.remnants.get('trust', 0.5)
+                    else:
+                        source_factor = source.remnants.get('skepticism', 0.5)
+
+                    # Multiplier ranges roughly from (baseline+0.1) to (baseline+0.9)
+                    multiplier = self.emergent_baseline + source_factor
+                    effective_ripple = ripple_value * multiplier
+
                 # Ripple nudges trust/skepticism based on sign
-                self.npcs[to_npc].adjust_trait("trust", ripple_value)
-                self.npcs[to_npc].adjust_trait("skepticism", -ripple_value)
+                self.npcs[to_npc].adjust_trait("trust", effective_ripple)
+                self.npcs[to_npc].adjust_trait("skepticism", -effective_ripple)
     
     def simulate_encounters(self, encounters: List[Dict[str, float]]) -> List[Dict]:
         """
@@ -369,6 +388,42 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "need": 0.3,          # Self-reliant, carries burdens alone
             "trust": 0.6,         # Trusts those who keep law
             "skepticism": 0.5     # Cautious but not paranoid
+        }),
+
+        # Archivist Malrik: Skeptics' leader - guardian of records, high memory and skepticism
+        NPCProfile("Archivist Malrik", {
+            "resolve": 0.7,
+            "empathy": 0.3,
+            "memory": 0.9,       # Archivist: exceptional recall and context
+            "nuance": 0.6,
+            "authority": 0.7,
+            "need": 0.3,
+            "trust": 0.3,
+            "skepticism": 0.7    # Leads the Skeptics; spreads doubt
+        }),
+
+        # High Seer Elenya: Mystics' leader - communal seer, high empathy and trust
+        NPCProfile("High Seer Elenya", {
+            "resolve": 0.5,
+            "empathy": 0.9,
+            "memory": 0.7,
+            "nuance": 0.8,
+            "authority": 0.6,
+            "need": 0.4,
+            "trust": 0.8,
+            "skepticism": 0.2    # Mystics inspire faith, lower skepticism
+        })
+        ,
+        # Coren: Mediator - bridges opposing factions, high nuance and trust
+        NPCProfile("Coren the Mediator", {
+            "resolve": 0.6,
+            "empathy": 0.65,
+            "memory": 0.6,
+            "nuance": 0.8,
+            "authority": 0.6,
+            "need": 0.4,
+            "trust": 0.75,
+            "skepticism": 0.2
         })
     ]
     
@@ -382,43 +437,77 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
     """
     return {
         "Ravi": {
-            "Nima": -0.08,      # Ravi's trust weakens Nima's distrust slightly
+            "Nima": 0.15,       # couple influence (exception to 0.1 cap)
             "Tovren": 0.1,      # Ravi's openness encourages Tovren's trust
             "Mariel": 0.05
         },
         "Nima": {
-            "Ravi": -0.05,      # Nima's skepticism nudges Ravi toward doubt
-            "Kaelen": -0.15,    # Nima's suspicion intensifies Kaelen distrust
+            "Ravi": -0.15,      # mutual couple influence (negative sign indicates Nima's skepticism)
+            "Kaelen": -0.1,     # capped at 0.1
             "Mariel": 0.1
         },
         "Kaelen": {
             "Tovren": -0.1,     # Kaelen's shifty presence worries merchants
             "Korrin": 0.05,     # Gossip and thieves circulate rumors
-            "Drossel": 0.2      # Kaelen's thief nature aligns with Drossel's authority
+            "Drossel": 0.1      # Dalen/Drossel/Kaelen camaraderie (capped at 0.1)
+        },
+        "Dalen": {
+            "Ravi": 0.08,       # Dalen's bold presence lifts merchant morale slightly
+            "Mariel": 0.05,     # Dalen's narrative presence encourages community bridging
+            "Nima": -0.05,      # Dalen's recklessness can heighten Nima's suspicion
+            "Drossel": 0.1,     # roguelike affinity
+            "Kaelen": 0.1       # roguelike affinity
         },
         "Tovren": {
-            "Ravi": 0.05        # Practical caution spreads to merchants
+            "Ravi": 0.05,       # Practical caution spreads to merchants
+            "Archivist Malrik": 0.1,  # practical alignment
+            "High Seer Elenya": -0.1, # misaligned with mystical values
+            "Captain Veynar": 0.1     # values safety in market
         },
         "Sera": {
-            "Mariel": 0.15      # Sera's trust in Mariel is reciprocal
+            "Mariel": 0.1,      # Sera's trust in Mariel
+            "Ravi": 0.1,        # communal influence (capped)
+            "High Seer Elenya": 0.05
         },
         "Mariel": {
             "Ravi": 0.1,        # Mariel's respect strengthens Ravi
             "Nima": 0.1         # Mariel's wisdom calms Nima's skepticism
         },
         "Drossel": {
-            "Kaelen": 0.15,     # Drossel respects Kaelen's criminality
-            "Korrin": -0.1,     # Drossel mistrusts even allies; gossips are loose cannons
-            "Tovren": -0.2,     # Drossel's presence darkens merchants' suspicion
-            "Ravi": -0.25,      # Drossel's criminality erodes Ravi's trust in community
-            "Nima": 0.05        # Nima's suspicion resonates with Drossel's distrust
+            "Kaelen": 0.1,
+            "Korrin": -0.1,
+            "Tovren": -0.1,
+            "Ravi": -0.1,
+            "Nima": 0.05
         },
         "Captain Veynar": {
             "Ravi": 0.1,        # Veynar's protection strengthens merchants' confidence
-            "Tovren": 0.15,     # Practical alliance with practical merchant
+            "Tovren": 0.1,      # Practical alliance with practical merchant
             "Mariel": 0.08,     # Mutual respect between law and wisdom
-            "Kaelen": -0.6,     # Veynar hunts Kaelen; counter-sphere (strong negative ripple)
-            "Drossel": -0.4,    # Veynar pursues thieves; strong opposition
-            "Nima": 0.05        # Veynar's authority aligns with Nima's caution
+            "Kaelen": -0.1,     # capped negative correlation
+            "Drossel": -0.1,    # capped negative correlation
+            "Nima": 0.05
+        }
+        ,
+        "Archivist Malrik": {
+            "Nima": -0.1,      # capped skepticism influence
+            "Ravi": -0.1,
+            "Kaelen": -0.05,
+            "Mariel": 0.05,
+            "High Seer Elenya": -0.1
+        },
+        "High Seer Elenya": {
+            "Sera": 0.1,
+            "Mariel": 0.1,
+            "Ravi": 0.05,
+            "Nima": 0.05,
+            "Archivist Malrik": -0.1
+        },
+        "Coren the Mediator": {
+            "Archivist Malrik": 0.1,
+            "High Seer Elenya": 0.1,
+            "Mariel": 0.05,
+            "Kaelen": 0.08,
+            "Korrin": 0.08
         }
     }
