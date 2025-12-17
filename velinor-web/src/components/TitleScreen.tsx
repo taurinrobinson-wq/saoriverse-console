@@ -88,10 +88,10 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
   // Layer 3: Title overlay
   const titleOverlayStyle: CSSProperties = {
     position: 'absolute',
-    top: '8%',
+    top: '50%',
     left: '50%',
-    transform: 'translateX(-50%)',
-    width: '33%',
+    transform: 'translate(-50%, -50%)',
+    width: '16.5%',
     height: 'auto',
     objectFit: 'contain',
     zIndex: 3,
