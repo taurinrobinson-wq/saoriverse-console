@@ -1,8 +1,10 @@
-# LLM configuration stub
-CACHED_PROVIDER = "stub"
-PROVIDER = "ollama"  # options: 'stub', 'ollama', 'openai'
-MODEL = "llama2"  # default local model name for Ollama (override as needed)
-OLLAMA_HTTP_URL = "http://localhost:11434"  # default Ollama HTTP endpoint
+# Dialogue generation configuration
+# Uses deterministic pipeline: NRC lexicon + spaCy + TextBlob
+# Python 3.12+ recommended for best NLP library compatibility
+
+PROVIDER = "nrc"  # 'nrc' = deterministic only (no external LLM services)
 CACHE_PATH = "velinor/cache/dialogue/"
 SAFE_WORDS = ["glyph", "resonance", "ritual"]
-DEFAULT_VARIANT = "deterministic"
+
+# Optional: spaCy and TextBlob are used when available for enhanced sentiment analysis
+# If not installed, the system gracefully falls back to simple heuristics
