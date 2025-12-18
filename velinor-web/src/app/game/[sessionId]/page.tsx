@@ -5,6 +5,7 @@ import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import GameScene from '@/components/GameScene';
 import ToneStatsDisplay from '@/components/ToneStatsDisplay';
 import { useGameStore } from '@/lib/gameStore';
+import { gameApi } from '@/lib/api';
 
 interface GameState {
   session_id: string;
@@ -38,16 +39,8 @@ export default function GamePage() {
       try {
         const playerName = searchParams.get('player') || 'Traveler';
 
-        // Start a new game session
-        const response = await fetch('/api/game/start', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ player_name: playerName }),
-        });
-
-        if (!response.ok) throw new Error('Failed to start game');
-
-        const data = await response.json();
+        // Start a new game session via backend API
+        const data = await gameApi.startGame(playerName);
         setSessionId(data.session_id);
         setGameState(data.state);
         setLoading(false);
@@ -64,15 +57,7 @@ export default function GamePage() {
     if (!sessionId) return;
 
     try {
-      const response = await fetch(`/api/game/${sessionId}/action`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ choice_index: choiceIndex }),
-      });
-
-      if (!response.ok) throw new Error('Failed to process action');
-
-      const data = await response.json();
+      const data = await gameApi.takeAction(sessionId, choiceIndex);
       setGameState(data.state);
     } catch (err) {
       setError(`Action failed: ${err}`);
@@ -173,7 +158,7 @@ export default function GamePage() {
         backgroundImage={gameState.background_image || '/assets/backgrounds/velhara_market.png'}
         narration={gameState.main_dialogue}
         npcName={gameState.npc_name || gameState.passage_name}
-        choices={gameState.choices.map(c => ({ text: c.text, id: c.index.toString() }))}
+        choices={gameState.choices.map((c, i) => ({ text: c.text, id: i.toString() }))}
         onChoiceClick={handleChoiceClick}
       />
 
