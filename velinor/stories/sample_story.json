@@ -5,7 +5,7 @@
     {
       "pid": "1",
       "name": "market_entry",
-      "text": "\n{background: market_ruins}\n{npc: Keeper}\n\nYou emerge from the collapsed underpass into what was once the Market District \nof Saonyx. The air is thick with silence\u2014not the silence of absence, but of \nwaiting. Crumbling vendor stalls line the plaza, their surfaces worn by time \nand weather. Vines creep up shattered display windows, and bioluminescent fungi \ncast a faint glow on the stone.\n\nA figure approaches from the shadows. It's an older person with weathered skin \nand eyes that seem to recognize something in you.\n\n\"Welcome to the Remnants,\" they say. \"I am called the Keeper. You carry the \nweight of choice in you\u2014I can feel it. The Tone pulses faintly here still, \nwaiting for those who listen.\"\n\nWhat do you do?\n\n\n[[Approach the Keeper and ask about the Tone->keeper_dialogue_1]]\n\n[[Explore the Market District before speaking to anyone->market_exploration]]\n\n[[Keep your distance and observe (Wisdom, DC 11)->keeper_wary]]",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou step into the Market District, the air smelling of old spices and dust. Stalls sag with age; light pools in broken stones. Across the plaza, two figures stand framed by a ruined awning — Ravi, a lean merchant with quick eyes, and Nima, whose expression is open and curious. They don't move. They simply watch.\n\nYou're suddenly aware of them. You're aware of being watched.\n\n*They're staring at me. What should I do?*\n\n\n[[Step forward and greet them->ravi_nima_greet]]\n[[Stand still and watch (Observation check)->ravi_nima_observe]]\n[[Call out to them to stop->ravi_nima_callout]]\n[[Turn away and explore the stalls->market_exploration]]",
       "tags": [],
       "position": [
         0,
@@ -17,27 +17,71 @@
       ],
       "_metadata": {
         "background": null,
-        "npcs": []
+        "npcs": ["Ravi", "Nima"]
       },
       "choices": [
         {
-          "text": "Approach the Keeper and ask about the Tone",
-          "target": "keeper_dialogue_1",
-          "tone_effects": {},
-          "npc_resonance": {}
+          "text": "Step forward and greet them",
+          "target": "ravi_nima_greet",
+          "tone_effects": {"empathy": 0.05, "courage": 0.03},
+          "npc_resonance": {"Ravi": 0.08, "Nima": 0.03},
+          "mark_story_beat": "seek_glyph_sorrow"
         },
         {
-          "text": "Explore the Market District before speaking to anyone",
+          "text": "Stand still and watch (Observation check)",
+          "target": "ravi_nima_observe",
+          "tone_effects": {"wisdom": 0.04, "empathy": 0.02},
+          "npc_resonance": {"Nima": 0.06},
+          "mark_story_beat": "seek_glyph_sorrow"
+        },
+        {
+          "text": "Call out to them to stop",
+          "target": "ravi_nima_callout",
+          "tone_effects": {"resolve": -0.02, "courage": -0.01},
+          "npc_resonance": {"Ravi": -0.05, "Nima": -0.08}
+        },
+        {
+          "text": "Turn away and explore the stalls",
           "target": "market_exploration",
-          "tone_effects": {},
-          "npc_resonance": {}
-        },
-        {
-          "text": "Keep your distance and observe (Wisdom, DC 11)",
-          "target": "keeper_wary",
-          "tone_effects": {},
+          "tone_effects": {"wisdom": 0.02},
           "npc_resonance": {}
         }
+      ]
+    },
+    {
+      "pid": "200",
+      "name": "ravi_nima_greet",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou take a breath and step forward, offering a small bow and a smile. Ravi's eyes soften; Nima inclines their head slightly. Ravi speaks first, voice low and warm.\n\n\"You have the look of someone who listens,\" he says. \"Things are shifting in the ruins—if you seek answers, there are paths worth following.\"\n\nNima adds, \"We saw something earlier, near the old shrine. If you're willing, there's a way to learn more.\"\n\n[[Ask them about the shrine->shrine_hint]]",
+      "tags": [],
+      "position": [0, 0],
+      "size": [100, 100],
+      "_metadata": {"background": "market_ruins", "npcs": ["Ravi", "Nima"]},
+      "choices": [
+        {"text": "Ask them about the shrine", "target": "shrine_hint", "tone_effects": {"empathy": 0.02}, "npc_resonance": {"Ravi": 0.05}}
+      ]
+    },
+    {
+      "pid": "201",
+      "name": "ravi_nima_observe",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou stand still and watch, taking in the small cues of posture and movement. Nima watches you back with a faint, assessing smile. After a moment, Nima speaks: \"You're careful. That will serve you. There are signs near the old well—listen for the echo.\"\n\nRavi nods and points toward a lane leading deeper into the stalls.\n\n[[Follow the lane they point to->market_lane]]",
+      "tags": [],
+      "position": [0, 0],
+      "size": [100, 100],
+      "_metadata": {"background": "market_ruins", "npcs": ["Ravi", "Nima"]},
+      "choices": [
+        {"text": "Follow the lane they point to", "target": "market_lane", "tone_effects": {"wisdom": 0.03}, "npc_resonance": {"Nima": 0.04}}
+      ]
+    },
+    {
+      "pid": "202",
+      "name": "ravi_nima_callout",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou shout and demand they explain themselves. The plaza's air tightens. Ravi's jaw hardens; Nima flinches. Ravi steps forward, voice sharp.\n\n\"No need for that, friend,\" he says. \"We mean no harm. But the ruins ask for care.\"\n\nNima's expression cools; they retreat into the crowd. The moment feels closed.\n\n[[Mutter at yourself and move on->market_exploration]]",
+      "tags": [],
+      "position": [0, 0],
+      "size": [100, 100],
+      "_metadata": {"background": "market_ruins", "npcs": ["Ravi", "Nima"]},
+      "choices": [
+        {"text": "Mutter and move on", "target": "market_exploration", "tone_effects": {"empathy": -0.03}, "npc_resonance": {"Ravi": -0.04, "Nima": -0.06}}
       ]
     },
     {

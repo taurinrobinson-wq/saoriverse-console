@@ -16,6 +16,19 @@ from datetime import datetime
 from .core import VelinorEngine, GameSession
 from .npc_system import NPCDialogueSystem
 from .twine_adapter import TwineGameSession, TwineStoryLoader, DialogueParser
+# Try to import REMNANTS NPC manager and helper constructors
+try:
+    from .npc_manager import NPCManager, create_marketplace_npcs, create_marketplace_influence_map
+except Exception:
+    NPCManager = None
+    create_marketplace_npcs = None
+    create_marketplace_influence_map = None
+# Optional Twine -> frontend scene mapping
+try:
+    from .scene_mapping import get_scene_id
+except Exception:
+    def get_scene_id(name: str):
+        return None
 
 
 @dataclass
@@ -65,6 +78,23 @@ class VelinorTwineOrchestrator:
         self.game_engine = game_engine
         self.first_person = first_person_module
         self.npc_system = npc_system
+        # REMNANTS manager (for trait/influence simulation)
+        self.remnants_manager = NPCManager() if NPCManager is not None else None
+        # Populate REMNANTS manager with marketplace NPCs and influence map
+        if self.remnants_manager and create_marketplace_npcs:
+            try:
+                npcs = create_marketplace_npcs()
+                self.remnants_manager.add_npcs_batch(npcs)
+                influence_map = create_marketplace_influence_map() if create_marketplace_influence_map else {}
+                for from_npc, ripples in (influence_map or {}).items():
+                    for to_npc, val in ripples.items():
+                        try:
+                            self.remnants_manager.set_influence(from_npc, to_npc, val)
+                        except Exception:
+                            continue
+            except Exception:
+                # Fail gracefully if population fails
+                pass
         
         # Load story
         self.story_loader = TwineStoryLoader()
@@ -237,6 +267,53 @@ class VelinorTwineOrchestrator:
         # Update player stats if story indicates changes
         if 'stat_change' in story_state:
             self._apply_stat_changes(story_state['stat_change'], player_id)
+
+        # Apply metadata from the last chosen choice (tone effects, npc resonance, story beats)
+        last_choice_meta = story_state.get('last_choice_metadata', {}) or {}
+        if last_choice_meta:
+            # Tone effects: map small float values to engine stat deltas (engine uses 0-1 floats)
+            tone_effects = last_choice_meta.get('tone_effects', {})
+            if tone_effects:
+                # Apply to player stats via game engine (expects normalized floats)
+                for stat, delta in tone_effects.items():
+                    try:
+                        # If the tone effects are expressed as small floats (-0.2..0.2), apply directly
+                        delta_float = float(delta)
+                        self.game_engine.update_stat(stat, delta_float)
+                    except Exception:
+                        # Fallback: try converting from percent-like values
+                        try:
+                            d = int(delta)
+                            self.game_engine.update_stat(stat, d / 100.0)
+                        except Exception:
+                            pass
+
+                # Also apply to REMNANTS manager if available (affects NPC trait profiles)
+                if self.remnants_manager:
+                    try:
+                        self.remnants_manager.apply_tone_effects(tone_effects)
+                    except Exception:
+                        pass
+
+            # NPC resonance: direct per-NPC nudges (treated as trust changes)
+            npc_res = last_choice_meta.get('npc_resonance', {})
+            if npc_res and self.remnants_manager:
+                for npc_name, val in npc_res.items():
+                    try:
+                        if npc_name in self.remnants_manager.npcs:
+                            # Treat as a small trust delta (0.1 scale)
+                            delta_val = float(val)
+                            self.remnants_manager.npcs[npc_name].adjust_trait('trust', delta_val)
+                    except Exception:
+                        continue
+
+            # Mark story beats if author provided them
+            beat = last_choice_meta.get('mark_story_beat')
+            if beat:
+                try:
+                    self.game_engine.mark_story_beat(beat)
+                except Exception:
+                    pass
         
         # Trigger background change via callback
         if 'background' in story_state and story_state['background']:
@@ -436,9 +513,18 @@ class VelinorTwineOrchestrator:
         Format story state for UI consumption.
         Structures data for rendering in Twine UI, web frontend, etc.
         """
+        # Include optional frontend scene id mapping when available so the
+        # web UI can either render Twine content or use a local scene graph.
+        scene_id = None
+        try:
+            scene_id = get_scene_id(story_state.get('passage_name'))
+        except Exception:
+            scene_id = None
+
         return {
             'passage_id': story_state.get('passage_id'),
             'passage_name': story_state.get('passage_name'),
+            'scene_id': scene_id,
             'main_dialogue': story_state.get('dialogue'),
             'npc_name': story_state.get('npc_name'),
             'npc_dialogue': story_state.get('npc_dialogue'),

@@ -77,6 +77,11 @@ class TwineStoryLoader:
         self.passages: Dict[str, StoryPassage] = {}
         self.passages_by_name: Dict[str, str] = {}  # Maps passage name to pid
         self.story_data: Optional[Dict[str, Any]] = None
+        # Map logical background keys used in Twine to actual filenames
+        # (extend as needed).
+        self.background_filename_map = {
+            'market_ruins': 'city_market(16-9).png'
+        }
     
     def load_from_json(self, json_path: str) -> Dict[str, StoryPassage]:
         """Load Twine story exported as JSON."""
@@ -191,7 +196,21 @@ class DialogueParser:
         cleaned = re.sub(r'\[\[.*?\]\]', '', passage_text)
         # Remove command markers (e.g., {background: market})
         cleaned = re.sub(r'\{.*?\}', '', cleaned)
-        return cleaned.strip()
+
+        # Prefer a short italicized line when present (authors often mark the
+        # focal line with *asterisks*). If found, return that as the main
+        # dialogue. Otherwise return the cleaned text.
+        italics_match = re.search(r"\*(.+?)\*", cleaned, flags=re.DOTALL)
+        if italics_match:
+            main = italics_match.group(1).strip()
+        else:
+            main = cleaned.strip()
+
+        # Convert simple *italics* to HTML <em> for basic rendering in the
+        # frontend (keeps output safe and predictable).
+        main = re.sub(r"\*(.+?)\*", r"<em>\1</em>", main)
+
+        return main
     
     @staticmethod
     def extract_commands(passage_text: str) -> Dict[str, Any]:
@@ -277,6 +296,16 @@ class TwineGameSession:
                 is_multiplayer=commands.get('multiplayer_mode', False)
             )
         
+        # Map background logical name to filename when possible so frontend
+        # can load the actual image file.
+        bg = commands.get('background')
+        bg_filename = None
+        try:
+            if bg and hasattr(self.story_loader, 'background_filename_map'):
+                bg_filename = self.story_loader.background_filename_map.get(bg, None)
+        except Exception:
+            bg_filename = None
+
         result = {
             'passage_id': passage_id,
             'passage_name': passage.name,
@@ -285,7 +314,7 @@ class TwineGameSession:
                 {'text': c.text, 'target': c.target_passage, 'requires_check': c.requires_skill_check}
                 for c in choices
             ],
-            'background': commands.get('background'),
+            'background': bg_filename or commands.get('background'),
             'npc_name': commands.get('npc_name'),
             'is_multiplayer': commands.get('multiplayer_mode', False),
             'has_clarifying_question': random.random() < 0.4  # 40% of turns
@@ -366,8 +395,41 @@ class TwineGameSession:
             'passage_id': next_passage_id
         })
         
-        # Render and return next passage
-        return self._render_passage(next_passage_id)
+        # Attempt to attach metadata for the chosen choice (tone effects, npc resonance)
+        chosen_metadata = {}
+        try:
+            # Look up original passage data from loader's story_data
+            orig_passages = self.story_loader.story_data.get('passages', []) if self.story_loader.story_data else []
+            # Find the source passage data (where the choice was made)
+            source_pid = passage.pid
+            source_passage_data = None
+            for p in orig_passages:
+                if str(p.get('pid')) == str(source_pid) or p.get('name') == passage.name:
+                    source_passage_data = p
+                    break
+
+            if source_passage_data and 'choices' in source_passage_data:
+                # Match the chosen entry by target (and text if available)
+                for c in source_passage_data.get('choices', []):
+                    target = c.get('target') or c.get('to') or c.get('target_passage')
+                    text = c.get('text')
+                    if target == chosen.target_passage or (text and text == chosen.text):
+                        # Copy known metadata keys
+                        chosen_metadata['tone_effects'] = c.get('tone_effects', {})
+                        chosen_metadata['npc_resonance'] = c.get('npc_resonance', {})
+                        # Allow story authors to mark beats
+                        if 'mark_story_beat' in c:
+                            chosen_metadata['mark_story_beat'] = c.get('mark_story_beat')
+                        break
+        except Exception:
+            chosen_metadata = {}
+
+        # Render next passage and attach metadata about the choice that led here
+        next_render = self._render_passage(next_passage_id)
+        if chosen_metadata:
+            next_render['last_choice_metadata'] = chosen_metadata
+
+        return next_render
     
     def _roll_skill_check(self, choice: DialogueChoice, player_id: Optional[str]) -> Dict[str, Any]:
         """Roll d20 + modifiers for skill check."""

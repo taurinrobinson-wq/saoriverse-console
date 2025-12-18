@@ -2,6 +2,7 @@
 
 import { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
+import AuthModal from '../components/AuthModal';
 
 interface TitleScreenProps {
   onGameStart?: (playerName: string) => void;
@@ -19,6 +20,8 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
     setError('');
   };
 
+  const [showAuth, setShowAuth] = useState(false);
+
   const handleConfirmName = async () => {
     if (!playerName.trim()) {
       setError('Please enter a character name');
@@ -28,8 +31,20 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
     setLoading(true);
     setError('');
     try {
+      // If an auth token exists, call backend /api/game/start to create a session
+      const token = typeof window !== 'undefined' ? localStorage.getItem('velinor_token') : null;
       if (onGameStart) {
         onGameStart(playerName);
+      } else if (token) {
+        const resp = await fetch('/api/game/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ player_name: playerName })
+        });
+        if (!resp.ok) throw new Error('failed to start session');
+        const data = await resp.json();
+        const sessionId = data.session_id;
+        router.push(`/game/${sessionId}`);
       } else {
         router.push(`/game/velhara_market?player=${encodeURIComponent(playerName)}`);
       }
@@ -188,6 +203,24 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
       >
         Play New Game
       </button>
+
+      <button
+        onClick={() => setShowAuth(true)}
+        style={{
+          position: 'absolute',
+          top: 24,
+          right: 24,
+          padding: '8px 12px',
+          borderRadius: 8,
+          background: '#2e3f2f',
+          color: '#e6d8b4',
+          border: '1px solid rgba(168,143,92,0.3)'
+        }}
+      >
+        Sign In
+      </button>
+
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
 
       {/* Player Name Input Modal */}
       {showNameInput && (
