@@ -13,7 +13,7 @@ print("=" * 70)
 # Test 1: Import LLM Transformer
 print("\n1. Testing LLM Transformer module...")
 try:
-    from draftshift.llm_transformer import get_transformer, LLMTransformer
+    from DraftShift.llm_transformer import get_transformer, LLMTransformer
     print("   ✅ Import successful")
     transformer = get_transformer()
     status = transformer.get_status()
@@ -28,7 +28,7 @@ except Exception as e:
 # Test 2: Import Civility Scorer
 print("\n2. Testing Civility Scorer module...")
 try:
-    from draftshift.civility_scorer import get_scorer, CivilityScorer, CivilityLevel
+    from DraftShift.civility_scorer import get_scorer, CivilityScorer, CivilityLevel
     print("   ✅ Import successful")
     scorer = get_scorer()
     print("   ✅ Scorer initialized")
@@ -47,7 +47,7 @@ except Exception as e:
 # Test 3: Import Risk Alerts
 print("\n3. Testing Risk Alerts module...")
 try:
-    from draftshift.risk_alerts import get_alert_generator, AlertSeverity
+    from DraftShift.risk_alerts import get_alert_generator, AlertSeverity
     print("   ✅ Import successful")
     generator = get_alert_generator()
     print("   ✅ Alert generator initialized")
@@ -61,10 +61,10 @@ except Exception as e:
     import traceback
     traceback.print_exc()
 
-# Test 4: Integration test with draftshift.core
-print("\n4. Testing integration with draftshift.core...")
+# Test 4: Integration test with DraftShift.core
+print("\n4. Testing integration with DraftShift.core...")
 try:
-    from draftshift.core import split_sentences, detect_tone
+    from DraftShift.core import split_sentences, detect_tone
     test_text = "This is excellent work. However, you should reconsider."
     sentences = split_sentences(test_text)
     print(f"   ✅ Split into {len(sentences)} sentence(s)")

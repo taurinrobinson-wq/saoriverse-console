@@ -3,7 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import streamlit as st
 
-from draftshift.core import split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES
+from DraftShift.core import split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES
 
 # Locate .env at repo root if present, otherwise fallback to cwd
 repo_root = Path(__file__).resolve().parents[1]
