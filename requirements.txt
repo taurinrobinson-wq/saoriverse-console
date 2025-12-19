@@ -1,6 +1,4 @@
-streamlit
-python-dotenv
-requests# Saoriverse Console / FirstPerson Requirements
+# Saoriverse Console / FirstPerson Requirements
 # All-in-one requirements file for the application
 # Python 3.13 compatible (with careful package selection)
 # Python 3.11 or 3.12 also fully supported
