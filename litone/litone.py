@@ -1,20 +1,26 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 import streamlit as st
 
-# MUST be first Streamlit call, before all other imports - reload trigger v2
-st.set_page_config(page_title="LiToneCheck", layout="wide")
+from draftshift.core import split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES
 
-import os
-from dotenv import load_dotenv
-from litone.core import split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES
+# Locate .env at repo root if present, otherwise fallback to cwd
+repo_root = Path(__file__).resolve().parents[1]
+env_path = repo_root / "LiToneCheck.env"
+if not env_path.exists():
+    env_path = Path.cwd() / "LiToneCheck.env"
+load_dotenv(dotenv_path=str(env_path))
 
-load_dotenv(dotenv_path="LiToneCheck.env")
+st.set_page_config(title="LiToneCheck", layout="wide")
 
-st.title("LiToneCheck — interactive sentence tone inspector")
+st.title("DraftShift — interactive sentence tone inspector")
 
 # Try to import the project's richer signal parser if available
 HAS_PARSE_INPUT = False
 parse_input = None
 try:
+    # Preferred import path used in the repo
     from src.emotional_os.core.signal_parser import parse_input as _parse_input
     parse_input = _parse_input
     HAS_PARSE_INPUT = True
@@ -51,10 +57,12 @@ for i, s in enumerate(sentences):
     cols[1].markdown(f"**{tone}**")
     cols[2].write(transformed)
 
+    # If we have a richer parser, show signals/glyphs for each sentence
     if HAS_PARSE_INPUT:
         try:
             parsed = parse_input(s, lexicon_path="emotional_os/parser/signal_lexicon.json")
             signals = parsed.get("signals") or []
+            glyphs = parsed.get("glyphs") or []
             cols[3].write(f"Signals: {', '.join([str(x.get('signal') or x.get('keyword') or '') for x in signals])}")
         except Exception:
             cols[3].write("Parser error")

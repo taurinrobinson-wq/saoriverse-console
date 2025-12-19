@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+"""Quick integration test for enhanced LiToneCheck modules"""
+
+print("=" * 60)
+print("LiToneCheck Enhanced Module Integration Test")
+print("=" * 60)
+
+# Test 1: Import litone modules
+print("\n1. Testing module imports...")
+try:
+    import litone
+    print("   ✅ litone package")
+except Exception as e:
+    print(f"   ❌ litone package: {e}")
+
+try:
+    from litone import core
+    print("   ✅ litone.core")
+except Exception as e:
+    print(f"   ❌ litone.core: {e}")
+
+try:
+    from litone import constants
+    print("   ✅ litone.constants")
+except Exception as e:
+    print(f"   ❌ litone.constants: {e}")
+
+try:
+    from litone.enhanced_affect_parser import create_enhanced_affect_parser
+    print("   ✅ litone.enhanced_affect_parser")
+except Exception as e:
+    print(f"   ❌ litone.enhanced_affect_parser: {e}")
+
+try:
+    from litone.tone_analysis_composer import create_tone_analysis_composer
+    print("   ✅ litone.tone_analysis_composer")
+except Exception as e:
+    print(f"   ❌ litone.tone_analysis_composer: {e}")
+
+# Test 2: Create affect parser
+print("\n2. Testing Enhanced Affect Parser...")
+try:
+    parser = create_enhanced_affect_parser()
+    print("   ✅ Parser instantiated")
+    
+    result = parser.analyze_affect("I truly appreciate your kind attention to this matter.")
+    print(f"   ✅ Analysis: emotion={result.primary_emotion}, valence={result.valence:.2f}")
+    print(f"      Confidence: {result.overall_confidence:.2f}, Arousal: {result.arousal:.2f}")
+except Exception as e:
+    print(f"   ❌ Error: {e}")
+
+# Test 3: Create tone composer
+print("\n3. Testing Tone Analysis Composer...")
+try:
+    composer = create_tone_analysis_composer()
+    print("   ✅ Composer instantiated")
+    
+    # Test analyze_tone
+    analysis = composer.analyze_tone("I must insist on compliance with this directive.")
+    print(f"   ✅ Tone analysis: {analysis['current_tone']}")
+    print(f"      Strengths: {len(analysis['strengths'])} identified")
+    print(f"      Issues: {len(analysis['potential_issues'])} identified")
+    
+    # Test suggest_transformation
+    suggestion = composer.suggest_transformation(
+        "This shall be binding.", 
+        "Very Formal", 
+        "Friendly"
+    )
+    print(f"   ✅ Transformation suggestion: {suggestion['difficulty']} difficulty")
+    print(f"      Key changes: {len(suggestion['key_changes'])}")
+    print(f"      Word replacements: {len(suggestion['word_replacements'])}")
+except Exception as e:
+    print(f"   ❌ Error: {e}")
+
+# Test 4: Test detect_tone with new enhancements
+print("\n4. Testing Enhanced detect_tone()...")
+try:
+    tone1 = core.detect_tone("Thank you so much for your kind help!")
+    print(f"   ✅ Friendly text -> {tone1}")
+    
+    tone2 = core.detect_tone("I understand your concerns and appreciate your perspective.")
+    print(f"   ✅ Empathetic text -> {tone2}")
+    
+    tone3 = core.detect_tone("Pursuant to the aforementioned agreement.")
+    print(f"   ✅ Formal text -> {tone3}")
+except Exception as e:
+    print(f"   ❌ Error: {e}")
+
+# Test 5: Tool status
+print("\n5. Testing Tool Status...")
+try:
+    status = core.get_tool_status()
+    print("   ✅ Tool status retrieved:")
+    for tool, info in status.items():
+        if isinstance(info, dict) and 'loaded' in info:
+            symbol = "✅" if info['loaded'] else "❌"
+            print(f"      {symbol} {tool}: {info.get('loaded', False)}")
+except Exception as e:
+    print(f"   ❌ Error: {e}")
+
+print("\n" + "=" * 60)
+print("All tests completed!")
+print("=" * 60)
