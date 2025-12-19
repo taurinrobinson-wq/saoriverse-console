@@ -5,7 +5,7 @@
     {
       "pid": "1",
       "name": "market_entry",
-      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou step into the Market District, the air smelling of old spices and dust. Stalls sag with age; light pools in broken stones. Across the plaza, two figures stand framed by a ruined awning — Ravi, a lean merchant with quick eyes, and Nima, whose expression is open and curious. They don't move. They simply watch.\n\nYou're suddenly aware of them. You're aware of being watched.\n\n*They're staring at me. What should I do?*\n\n\n[[Step forward and greet them->ravi_nima_greet]]\n[[Stand still and watch (Observation check)->ravi_nima_observe]]\n[[Call out to them to stop->ravi_nima_callout]]\n[[Turn away and explore the stalls->market_exploration]]",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou step into the Market District, the air smelling of old spices and dust. Stalls sag with age; light pools in broken stones. Across the plaza, two figures stand framed by a ruined awning — Ravi, a lean merchant with quick eyes, and Nima, whose expression is open and curious. They don't move. They simply watch.\n\nYou're suddenly aware of them. You're aware of being watched.\n\n*They're staring at me. What should I do?*\n\n\n[[Step forward and greet them->ravi_nima_greet]]\n[[Stand still and watch->ravi_nima_observe]]\n[[Call out to them to stop->ravi_nima_callout]]\n[[Turn away and explore the stalls->market_exploration]]",
       "tags": [],
       "position": [
         0,
