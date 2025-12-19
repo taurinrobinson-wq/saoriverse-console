@@ -5,29 +5,45 @@ st.set_page_config(page_title="LiToneCheck", layout="wide")
 
 import os
 from dotenv import load_dotenv
-from litone.core import (
+from pathlib import Path
+from draftshift.core import (
     split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES,
-    classify_sentence_structure, assess_overall_message, get_active_tools
+    classify_sentence_structure, assess_overall_message, get_active_tools, get_tool_status
 )
 
-load_dotenv(dotenv_path="LiToneCheck.env")
+# Locate .env at repo root if present, otherwise fallback to cwd
+repo_root = Path(__file__).resolve().parents[1]
+env_path = repo_root / "LiToneCheck.env"
+if not env_path.exists():
+    env_path = Path.cwd() / "LiToneCheck.env"
+load_dotenv(dotenv_path=str(env_path))
 
-st.title("LiToneCheck — Interactive Tone Shifter for Legal Correspondence")
+st.title("DraftShift — Interactive Tone Shifter for Legal Correspondence")
 
 # Try to import the project's richer signal parser if available
 HAS_PARSE_INPUT = False
 parse_input = None
+parse_error = None
 try:
     from src.emotional_os.core.signal_parser import parse_input as _parse_input
     parse_input = _parse_input
     HAS_PARSE_INPUT = True
-except Exception:
+except Exception as e1:
     try:
         from emotional_os.core.signal_parser import parse_input as _parse_input
         parse_input = _parse_input
         HAS_PARSE_INPUT = True
-    except Exception:
-        HAS_PARSE_INPUT = False
+    except Exception as e2:
+        try:
+            from src.emotional_os_core.signal_parser import parse_input as _parse_input
+            parse_input = _parse_input
+            HAS_PARSE_INPUT = True
+        except Exception as e3:
+            parse_error = f"Could not load signal parser from any known path"
+            HAS_PARSE_INPUT = False
+
+# Get tool status for sidebar
+tool_status = get_tool_status()
 
 # Sidebar settings
 with st.sidebar:
@@ -56,13 +72,30 @@ with st.sidebar:
     use_sapling = bool(os.environ.get("SAPLING_API_KEY"))
     st.write(f"**Sapling API:** {'✅ Configured' if use_sapling else '❌ Not configured'}")
     st.write(f"**Signal Parser:** {'✅ Available' if HAS_PARSE_INPUT else '❌ Not available'}")
+    if parse_error:
+        with st.expander("Parser Error Details"):
+            st.warning(parse_error)
     
     # Show which NLP tools are active (will update after analysis)
     st.subheader("📊 NLP Engines")
+    nrc_status = "✅" if tool_status["nrc"]["loaded"] else "❌"
+    spacy_status = "✅" if tool_status["spacy"]["loaded"] else "❌"
+    textblob_status = "✅" if tool_status["textblob"]["loaded"] else "❌"
+    
     col1, col2, col3 = st.columns(3)
-    col1.write("**NRC**")
-    col2.write("**spaCy**")
-    col3.write("**TextBlob**")
+    col1.write(f"**NRC** {nrc_status}")
+    col2.write(f"**spaCy** {spacy_status}")
+    col3.write(f"**TextBlob** {textblob_status}")
+    
+    # Show errors if any
+    if tool_status["nrc"]["error"] or tool_status["spacy"]["error"] or tool_status["textblob"]["error"]:
+        with st.expander("Tool Load Errors"):
+            if tool_status["nrc"]["error"]:
+                st.error(f"**NRC:** {tool_status['nrc']['error']}")
+            if tool_status["spacy"]["error"]:
+                st.error(f"**spaCy:** {tool_status['spacy']['error']}")
+            if tool_status["textblob"]["error"]:
+                st.error(f"**TextBlob:** {tool_status['textblob']['error']}")
 
 # Main text input
 text = st.text_area("📄 Paste or type your legal correspondence:", height=200, key="main_text")

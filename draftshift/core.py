@@ -137,8 +137,6 @@ def get_tone_composer() -> Optional[ToneAnalysisComposer]:
     return _tone_composer
 
 
-# === Legacy Tool Status Functions (kept for backward compatibility) ===
-
 def get_tool_status_legacy() -> dict:
     """Return status of legacy NLP tools."""
 
