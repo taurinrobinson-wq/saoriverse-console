@@ -14,37 +14,37 @@ print("=" * 60)
 # Test 1: Module Imports
 print("\n1. Testing module imports...")
 try:
-    import draftshift
-    print("   [OK] draftshift package")
+    import DraftShift
+    print("   [OK] DraftShift package")
 except Exception as e:
-    print(f"   [FAIL] draftshift package: {e}")
+    print(f"   [FAIL] DraftShift package: {e}")
 
 try:
-    import draftshift.core
+    import DraftShift.core
     print("   [OK] draftshift.core")
 except Exception as e:
     print(f"   [FAIL] draftshift.core: {e}")
 
 try:
-    import draftshift.constants
+    import DraftShift.constants
     print("   [OK] draftshift.constants")
 except Exception as e:
     print(f"   [FAIL] draftshift.constants: {e}")
 
 try:
-    import draftshift.enhanced_affect_parser
+    import DraftShift.enhanced_affect_parser
     print("   [OK] draftshift.enhanced_affect_parser")
 except Exception as e:
     print(f"   [FAIL] draftshift.enhanced_affect_parser: {e}")
 
 try:
-    import draftshift.tone_analysis_composer
+    import DraftShift.tone_analysis_composer
     print("   [OK] draftshift.tone_analysis_composer")
 except Exception as e:
     print(f"   [FAIL] draftshift.tone_analysis_composer: {e}")
 
 try:
-    import draftshift.tone_signal_parser
+    import DraftShift.tone_signal_parser
     print("   [OK] draftshift.tone_signal_parser")
 except Exception as e:
     print(f"   [FAIL] draftshift.tone_signal_parser: {e}")
@@ -52,7 +52,7 @@ except Exception as e:
 # Test 2: Enhanced Affect Parser
 print("\n2. Testing Enhanced Affect Parser...")
 try:
-    from draftshift.enhanced_affect_parser import create_enhanced_affect_parser
+    from DraftShift.enhanced_affect_parser import create_enhanced_affect_parser
     parser = create_enhanced_affect_parser()
     analysis = parser.analyze_affect("This is wonderful!")
     print(f"   [OK] Parser instantiated")
@@ -63,7 +63,7 @@ except Exception as e:
 # Test 3: Tone Analysis Composer
 print("\n3. Testing Tone Analysis Composer...")
 try:
-    from draftshift.tone_analysis_composer import create_tone_analysis_composer
+    from DraftShift.tone_analysis_composer import create_tone_analysis_composer
     composer = create_tone_analysis_composer()
     analysis = composer.analyze_tone("This agreement is hereby binding.")
     print(f"   [OK] Composer instantiated")
@@ -74,7 +74,7 @@ except Exception as e:
 # Test 4: Tone Signal Parser
 print("\n4. Testing Tone Signal Parser...")
 try:
-    from draftshift.tone_signal_parser import create_tone_signal_parser
+    from DraftShift.tone_signal_parser import create_tone_signal_parser
     parser = create_tone_signal_parser()
     analysis = parser.analyze_text("I understand your concerns and will help resolve this.")
     print(f"   [OK] Signal parser instantiated")
@@ -86,7 +86,7 @@ except Exception as e:
 # Test 5: Enhanced detect_tone()
 print("\n5. Testing Enhanced detect_tone()...")
 try:
-    from draftshift import core
+    from DraftShift import core
     analysis = core.detect_tone("This is very formal and professional language.")
     print(f"   [OK] detect_tone result: {analysis}")
 except Exception as e:
@@ -95,7 +95,7 @@ except Exception as e:
 # Test 6: Tool Status
 print("\n6. Testing Tool Status...")
 try:
-    from draftshift import get_tool_status
+    from DraftShift import get_tool_status
     status = get_tool_status()
     if isinstance(status, dict):
         print(f"   [OK] Tool status retrieved: {len(status)} keys")

@@ -1,24 +1,45 @@
 import streamlit as st
+from pathlib import Path
 
 # MUST be first Streamlit call, before all other imports
-st.set_page_config(page_title="LiToneCheck", layout="wide")
+# Set favicon using the DraftShift logo
+logo_path = Path(__file__).parent / "logo.svg"
+st.set_page_config(
+    page_title="DraftShift", 
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        "About": "Interactive Tone Shifter for Legal Correspondence"
+    }
+)
 
 import os
 from dotenv import load_dotenv
-from pathlib import Path
 from DraftShift.core import (
     split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES,
     classify_sentence_structure, assess_overall_message, get_active_tools, get_tool_status
 )
+from DraftShift.llm_transformer import get_transformer
+from DraftShift.civility_scorer import get_scorer
+from DraftShift.risk_alerts import get_alert_generator
 
 # Locate .env at repo root if present, otherwise fallback to cwd
 repo_root = Path(__file__).resolve().parents[1]
 env_path = repo_root / "LiToneCheck.env"
 if not env_path.exists():
     env_path = Path.cwd() / "LiToneCheck.env"
+from dotenv import load_dotenv
 load_dotenv(dotenv_path=str(env_path))
 
-st.title("DraftShift — Interactive Tone Shifter for Legal Correspondence")
+# Display logo and title
+col1, col2 = st.columns([1, 10])
+with col1:
+    if logo_path.exists():
+        st.image(str(logo_path), width=60, use_column_width=False)
+    else:
+        st.write("📋")
+with col2:
+    st.title("Interactive Tone Shifter for Legal Correspondence")
 
 # Try to import the project's richer signal parser if available
 HAS_PARSE_INPUT = False
@@ -121,6 +142,14 @@ overall_assessment = assess_overall_message(sentences, tones)
 # Get which tools were actually used
 active_tools = get_active_tools()
 
+# ============ CIVILITY SCORING (Phase 1.2) ============
+scorer = get_scorer()
+civility_assessment = scorer.score_document(sentences, tones, structures=structures)
+
+# ============ RISK ALERTS (Phase 1.3) ============
+alert_generator = get_alert_generator()
+risk_report = alert_generator.scan_document(sentences, tones)
+
 # ============ TRANSFORMED TEXT SECTION (FIRST) ============
 st.subheader("✨ Transformed Text")
 transformed_sentences = [shift_tone(s, target_tone) for s in sentences]
@@ -140,7 +169,7 @@ with col1:
 # ============ OVERALL ASSESSMENT ============
 st.subheader(f"📊 Overall Message Assessment: **{overall_assessment}**")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.metric("Total Sentences", len(sentences))
 with col2:
@@ -151,6 +180,83 @@ with col2:
     st.metric("Dominant Tone", dominant_tone)
 with col3:
     st.metric("Target Tone", target_tone)
+with col4:
+    # Civility score (0-100)
+    civility_score = civility_assessment['score']
+    # Color code the civility score
+    if civility_score >= 85:
+        color = "🟢"
+    elif civility_score >= 70:
+        color = "🟡"
+    elif civility_score >= 55:
+        color = "🟠"
+    else:
+        color = "🔴"
+    st.metric("Civility Score", f"{color} {civility_score}/100")
+
+# ============ RISK ALERTS SECTION (Phase 1.3) ============
+if risk_report['alerts_total'] > 0:
+    st.divider()
+    st.subheader("⚠️ Civility Alerts")
+    
+    # Overall recommendation
+    recommendation_text = risk_report['overall_recommendation']
+    if "DO NOT SEND" in recommendation_text:
+        st.error(recommendation_text)
+    elif "HIGH RISK" in recommendation_text:
+        st.warning(recommendation_text)
+    elif "MODERATE" in recommendation_text:
+        st.warning(recommendation_text)
+    else:
+        st.success(recommendation_text)
+    
+    # Alert counts
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        if risk_report['critical_count'] > 0:
+            st.metric("🔴 Critical", risk_report['critical_count'])
+    with col2:
+        if risk_report['high_count'] > 0:
+            st.metric("🟠 High", risk_report['high_count'])
+    with col3:
+        medium_count = len(risk_report['alerts_by_severity']['medium'])
+        if medium_count > 0:
+            st.metric("🟡 Medium", medium_count)
+    with col4:
+        st.metric("Total Alerts", risk_report['alerts_total'])
+    
+    # Show critical alerts inline
+    if risk_report['alerts_by_severity']['critical']:
+        st.subsubheader("Critical Issues")
+        for alert in risk_report['alerts_by_severity']['critical']:
+            with st.container(border=True):
+                st.error(f"**{alert['message']}**")
+                if alert['snippet']:
+                    st.code(alert['snippet'], language="text")
+                if alert['suggestion']:
+                    st.write(f"💡 {alert['suggestion']}")
+    
+    # Expandable high/medium alerts
+    if risk_report['alerts_by_severity']['high'] or risk_report['alerts_by_severity']['medium']:
+        with st.expander("View High & Medium Priority Alerts"):
+            for alert in risk_report['alerts_by_severity']['high']:
+                with st.container(border=True):
+                    st.warning(f"**{alert['message']}**")
+                    if alert['snippet']:
+                        st.code(alert['snippet'], language="text")
+                    if alert['suggestion']:
+                        st.write(f"💡 {alert['suggestion']}")
+            
+            for alert in risk_report['alerts_by_severity']['medium']:
+                with st.container(border=True):
+                    st.info(f"**{alert['message']}**")
+                    if alert['snippet']:
+                        st.code(alert['snippet'], language="text")
+                    if alert['suggestion']:
+                        st.write(f"💡 {alert['suggestion']}")
+else:
+    st.divider()
+    st.success("✅ No civility alerts detected.")
 
 # ============ DETAILED ANALYSIS (IN EXPANDER) ============
 with st.expander("🔍 Sentence Tone & Structural Analysis"):
@@ -196,4 +302,4 @@ with st.expander("🔍 Sentence Tone & Structural Analysis"):
         st.write(f"**TextBlob:** {'✅ Used' if active_tools['textblob'] else '❌ Not used'}")
 
 st.divider()
-st.caption("💡 **LiToneCheck** helps you adapt your legal correspondence to different audiences. Experiment with different target tones to find the right voice for your recipient.")
+st.caption("💡 **DraftShift** helps you adapt your legal correspondence to different audiences. Experiment with different target tones to find the right voice for your recipient.")

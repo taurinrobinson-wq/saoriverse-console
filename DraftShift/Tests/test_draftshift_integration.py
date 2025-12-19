@@ -5,43 +5,43 @@ print("=" * 60)
 print("DraftShift Enhanced Module Integration Test")
 print("=" * 60)
 
-# Test 1: Import draftshift modules
+# Test 1: Import DraftShift modules
 print("\n1. Testing module imports...")
 try:
-    import draftshift
-    print("   ✅ draftshift package")
+    import DraftShift
+    print("   ✅ DraftShift package")
 except Exception as e:
-    print(f"   ❌ draftshift package: {e}")
+    print(f"   ❌ DraftShift package: {e}")
 
 try:
-    from draftshift import core
-    print("   ✅ draftshift.core")
+    from DraftShift import core
+    print("   ✅ DraftShift.core")
 except Exception as e:
-    print(f"   ❌ draftshift.core: {e}")
+    print(f"   ❌ DraftShift.core: {e}")
 
 try:
-    from draftshift import constants
-    print("   ✅ draftshift.constants")
+    from DraftShift import constants
+    print("   ✅ DraftShift.constants")
 except Exception as e:
-    print(f"   ❌ draftshift.constants: {e}")
+    print(f"   ❌ DraftShift.constants: {e}")
 
 try:
-    from draftshift.enhanced_affect_parser import create_enhanced_affect_parser
-    print("   ✅ draftshift.enhanced_affect_parser")
+    from DraftShift.enhanced_affect_parser import create_enhanced_affect_parser
+    print("   ✅ DraftShift.enhanced_affect_parser")
 except Exception as e:
-    print(f"   ❌ draftshift.enhanced_affect_parser: {e}")
+    print(f"   ❌ DraftShift.enhanced_affect_parser: {e}")
 
 try:
-    from draftshift.tone_analysis_composer import create_tone_analysis_composer
-    print("   ✅ draftshift.tone_analysis_composer")
+    from DraftShift.tone_analysis_composer import create_tone_analysis_composer
+    print("   ✅ DraftShift.tone_analysis_composer")
 except Exception as e:
-    print(f"   ❌ draftshift.tone_analysis_composer: {e}")
+    print(f"   ❌ DraftShift.tone_analysis_composer: {e}")
 
 try:
-    from draftshift.tone_signal_parser import create_tone_signal_parser
-    print("   ✅ draftshift.tone_signal_parser")
+    from DraftShift.tone_signal_parser import create_tone_signal_parser
+    print("   ✅ DraftShift.tone_signal_parser")
 except Exception as e:
-    print(f"   ❌ draftshift.tone_signal_parser: {e}")
+    print(f"   ❌ DraftShift.tone_signal_parser: {e}")
 
 # Test 2: Create affect parser
 print("\n2. Testing Enhanced Affect Parser...")

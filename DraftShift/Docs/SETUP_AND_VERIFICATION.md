@@ -46,7 +46,7 @@ All integration tests passed successfully:
 ### Import and Use
 
 ```python
-from draftshift import core
+from DraftShift import core
 
 # Analyze tone
 analysis = core.detect_tone("I understand your concerns and will help.")
@@ -61,14 +61,14 @@ transformed = core.shift_tone(analysis, target_tone=2)  # More friendly
 
 ```bash
 cd d:\\saoriverse-console
-py -3.12 -c "import sys; sys.path.insert(0, '.'); from draftshift.Tests.test_litone_integration import *"
+py -3.12 -c "import sys; sys.path.insert(0, '.'); from DraftShift.Tests.test_litone_integration import *"
 ```
 
 ### Component-Specific Usage
 
 #### 1. Lightweight Signal Parser
 ```python
-from draftshift.tone_signal_parser import create_tone_signal_parser
+from DraftShift.tone_signal_parser import create_tone_signal_parser
 
 parser = create_tone_signal_parser()
 analysis = parser.analyze_text("Therefore, we must protect our interests.")
@@ -89,7 +89,7 @@ print(f"Confidence: {analysis.confidence}")                # 0.XX
 
 #### 2. Enhanced Affect Parser
 ```python
-from draftshift.enhanced_affect_parser import create_enhanced_affect_parser
+from DraftShift.enhanced_affect_parser import create_enhanced_affect_parser
 
 parser = create_enhanced_affect_parser()
 analysis = parser.analyze("This is wonderful!")
@@ -106,7 +106,7 @@ print(f"Arousal: {analysis.arousal}")          # 0.XX (level of activity)
 
 #### 3. Tone Analysis Composer
 ```python
-from draftshift.tone_analysis_composer import create_tone_analysis_composer
+from DraftShift.tone_analysis_composer import create_tone_analysis_composer
 
 composer = create_tone_analysis_composer()
 analysis = composer.analyze_tone("Formal legal text here...")

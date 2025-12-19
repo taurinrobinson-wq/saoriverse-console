@@ -180,8 +180,8 @@ result = model.generate("Rewrite this civilly: We strongly object...")
 ### Current State (Already Working)
 ```python
 # Analysis layer (ready)
-from draftshift import core
-from draftshift.tone_signal_parser import create_tone_signal_parser
+from DraftShift import core
+from DraftShift.tone_signal_parser import create_tone_signal_parser
 
 analysis = core.detect_tone("Your correspondence here")
 # Returns: tone, confidence, signals, emotions
@@ -190,7 +190,7 @@ analysis = core.detect_tone("Your correspondence here")
 ### Phase 1 Addition: LLM Integration
 ```python
 from gpt4all import GPT4All
-from draftshift import core
+from DraftShift import core
 
 # Load analysis (existing)
 analysis = core.detect_tone(text)

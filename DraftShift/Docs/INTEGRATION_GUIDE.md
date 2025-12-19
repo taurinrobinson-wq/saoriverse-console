@@ -50,7 +50,7 @@ Multi-method emotion and tone detection using NRC + TextBlob + spaCy
 
 **Usage:**
 ```python
-from draftshift.enhanced_affect_parser import create_enhanced_affect_parser
+from DraftShift.enhanced_affect_parser import create_enhanced_affect_parser
 parser = create_enhanced_affect_parser()
 analysis = parser.analyze_affect("Your statement fails to consider precedent.")
 # Returns: emotion, valence, arousal, dominance, confidence
@@ -64,7 +64,7 @@ Contextual tone analysis and transformation recommendations
 
 **Usage:**
 ```python
-from draftshift.tone_analysis_composer import create_tone_analysis_composer
+from DraftShift.tone_analysis_composer import create_tone_analysis_composer
 composer = create_tone_analysis_composer()
 
 # Deep tone analysis
@@ -92,7 +92,7 @@ Unlike the full signal_parser.py (2400+ lines), this lightweight version:
 
 **Usage:**
 ```python
-from draftshift.tone_signal_parser import create_tone_signal_parser
+from DraftShift.tone_signal_parser import create_tone_signal_parser
 parser = create_tone_signal_parser()
 
 # Analyze text for signals

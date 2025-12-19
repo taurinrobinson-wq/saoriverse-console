@@ -91,7 +91,7 @@ Unlike the full signal_parser.py (2400+ lines), this lightweight version:
 
 This documentation has been moved to the DraftShift package.
 
-See: `draftshift/Docs/INTEGRATION_GUIDE.md`
+See: `DraftShift/Docs/INTEGRATION_GUIDE.md`
 
 ````
 # Analyze text for signals

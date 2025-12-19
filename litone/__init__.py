@@ -10,7 +10,7 @@ correspondence. It integrates multiple NLP approaches:
 - core: Main tone detection and transformation logic
 
 Quick Start:
-    from draftshift import core
+    from DraftShift import core
     analysis = core.detect_tone("This shall be binding.")
     transformed = core.shift_tone(analysis, target_tone=3)  # Friendly
 
@@ -39,11 +39,11 @@ Tests:
 """Backward compatibility shim: re-export DraftShift implementation.
 
 This file allows `import litone` to continue working while the
-implementation now lives in the `draftshift` package.
+implementation now lives in the `DraftShift` package.
 """
 
 try:
-    from draftshift import (
+    from DraftShift import (
         constants as constants,
         enhanced_affect_parser as enhanced_affect_parser,
         tone_analysis_composer as tone_analysis_composer,
@@ -58,7 +58,7 @@ try:
         "core",
     ]
 except Exception:
-    # If draftshift isn't importable, keep empty but allow import
+    # If DraftShift isn't importable, keep empty but allow import
     __all__ = []
 
 __version__ = "1.1.0"

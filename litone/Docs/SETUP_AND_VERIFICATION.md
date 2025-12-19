@@ -16,7 +16,7 @@ litone/
 
 This documentation has been moved to the DraftShift package.
 
-See: `draftshift/Docs/SETUP_AND_VERIFICATION.md`
+See: `DraftShift/Docs/SETUP_AND_VERIFICATION.md`
 
 ````
 │   └── INTEGRATION_GUIDE.md

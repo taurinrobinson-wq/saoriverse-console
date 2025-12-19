@@ -1,7 +1,7 @@
 """DraftShift package - legal tone analysis and transformations.
 
 This package contains the DraftShift implementation (formerly `litone`).
-Import modules from this package directly, e.g. `from draftshift import core`.
+Import modules from this package directly, e.g. `from DraftShift import core`.
 """
 
 try:
