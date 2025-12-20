@@ -256,6 +256,37 @@ class EnhancedAffectParser:
             "surprised": {"surprise": 1.0},
             "amazed": {"surprise": 1.0},
             "shocked": {"surprise": 1.0},
+            # Frustration / escalation / boundary / resignation additions
+            "frustrated": {"anger": 0.8, "negative": 1.0},
+            "fed up": {"anger": 0.8, "negative": 1.0},
+            "irritated": {"anger": 0.7, "negative": 1.0},
+            "annoyed": {"anger": 0.6, "negative": 1.0},
+            "overwhelmed": {"sadness": 0.6, "negative": 1.0},
+            "exhausted": {"sadness": 0.6, "negative": 1.0},
+            "fine": {"sadness": 0.4, "negative": 0.5},
+            "whatever": {"sadness": 0.7, "negative": 1.0},
+            "forget it": {"sadness": 0.8, "negative": 1.0},
+            "never mind": {"sadness": 0.6, "negative": 1.0},
+            "done": {"sadness": 0.6, "negative": 1.0},
+            "over it": {"sadness": 0.8, "negative": 1.0},
+            "stop": {"anger": 0.6, "negative": 1.0},
+            "enough": {"anger": 0.6, "negative": 1.0},
+            "no more": {"anger": 0.7, "negative": 1.0},
+            "unacceptable": {"anger": 0.9, "negative": 1.0},
+            "ridiculous": {"anger": 0.8, "negative": 1.0},
+            "absurd": {"anger": 0.8, "negative": 1.0},
+            "impossible": {"anger": 0.7, "negative": 1.0},
+            "maybe": {"positive": 0.0, "negative": 0.0},
+            "perhaps": {"positive": 0.0, "negative": 0.0},
+            "possibly": {"positive": 0.0, "negative": 0.0},
+            "might": {"positive": 0.0, "negative": 0.0},
+            "could": {"positive": 0.0, "negative": 0.0},
+            "just": {"positive": 0.0, "negative": 0.0},
+            "a bit": {"positive": 0.0, "negative": 0.0},
+            "i want to understand": {"trust": 0.8, "positive": 0.5},
+            "i care": {"trust": 0.8, "positive": 0.6},
+            "i'm trying": {"trust": 0.6, "positive": 0.5},
+            "let's figure this out": {"trust": 0.8, "positive": 0.6},
             
             # Legal-specific formal words
             "hereby": {"trust": 0.5, "positive": 0.5},
@@ -280,7 +311,15 @@ class EnhancedAffectParser:
         """
         if not text:
             return self._create_neutral_analysis()
-        
+
+        # Expand contractions early so downstream tokenization sees real structure
+        try:
+            from DraftShift.contraction_handler import expand_contractions
+            text = expand_contractions(text)
+        except Exception:
+            # If module unavailable, continue with original text
+            pass
+
         text_lower = text.lower()
         
         # 1. NRC Analysis
@@ -296,6 +335,19 @@ class EnhancedAffectParser:
         is_negated = self._has_negation(text_lower)
         has_intensifier = self._has_intensifier(text_lower)
         sarcasm_likely = self._detect_sarcasm(text_lower)
+
+        # 3b. spaCy-powered nuance extraction (if available) to refine signals
+        try:
+            from DraftShift.nuance_extractor import extract_nuance
+            signals = extract_nuance(text)
+            if signals:
+                # Override/improve simple heuristics with extracted signals
+                if signals.get("negations"):
+                    is_negated = True
+                if signals.get("intensifiers"):
+                    has_intensifier = True
+        except Exception:
+            signals = None
         
         # 4. Derive primary emotion from NRC
         primary_emotion, primary_confidence = self._get_primary_emotion(nrc_scores)
