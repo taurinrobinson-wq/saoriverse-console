@@ -68,56 +68,18 @@ try:
         HAS_SPACY = True
         logger.info("✅ spaCy model loaded successfully")
     except Exception as e:
-        # Try to download the model automatically, then fall back to a blank pipeline
+        # Model not found or error loading; fall back to blank pipeline
+        # (Downloads should happen during deployment setup, not runtime to avoid permission errors)
         try:
-            try:
-                from spacy import cli as spacy_cli
-            except Exception:
-                spacy_cli = None
-
-            if spacy_cli is not None:
-                logger.info("spaCy model not found; attempting to download en_core_web_sm...")
-                download_success = False
-                # Try regular download first
-                try:
-                    spacy_cli.download("en_core_web_sm")
-                    _nlp = spacy.load("en_core_web_sm")
-                    HAS_SPACY = True
-                    download_success = True
-                    logger.info("✅ spaCy model downloaded and loaded successfully")
-                except PermissionError as perm_e:
-                    # Try download with --user flag for permission-denied errors
-                    logger.info(f"Regular download failed with permission error; trying --user flag...")
-                    try:
-                        import subprocess
-                        subprocess.run([
-                            "python", "-m", "spacy", "download", 
-                            "en_core_web_sm", "--user"
-                        ], check=True, capture_output=True, timeout=120)
-                        _nlp = spacy.load("en_core_web_sm")
-                        HAS_SPACY = True
-                        download_success = True
-                        logger.info("✅ spaCy model downloaded (with --user) and loaded successfully")
-                    except Exception as user_download_e:
-                        logger.warning(f"Download with --user flag also failed: {user_download_e}")
-                except Exception as e2:
-                    logger.warning(f"Failed to download spaCy model: {e2}")
-            
-            # If download not available or failed, use a minimal blank English pipeline
-            if _nlp is None:
-                try:
-                    _nlp = spacy.blank("en")
-                    HAS_SPACY = True
-                    SPACY_ERROR = f"Using blank 'en' pipeline (original error: {e})"
-                    logger.warning("⚠️ spaCy model not available; using blank 'en' pipeline")
-                except Exception as e3:
-                    SPACY_ERROR = f"spaCy load failed: {e3}"
-                    logger.warning(f"❌ spaCy blank model failed: {e3}")
-                    _nlp = None
-                    HAS_SPACY = False
-        except Exception as outer_e:
-            SPACY_ERROR = str(outer_e)
-            logger.warning(f"❌ spaCy model failed to load: {outer_e}")
+            _nlp = spacy.blank("en")
+            HAS_SPACY = True
+            SPACY_ERROR = f"Using blank 'en' pipeline (model not found). To use full model, run: python -m spacy download en_core_web_sm"
+            logger.warning(f"⚠️ {SPACY_ERROR}")
+        except Exception as e3:
+            SPACY_ERROR = f"spaCy load failed: {e3}"
+            logger.warning(f"❌ spaCy blank model failed: {e3}")
+            _nlp = None
+            HAS_SPACY = False
 except Exception as e:
     SPACY_ERROR = str(e)
     logger.warning(f"❌ spaCy import failed: {e}")
