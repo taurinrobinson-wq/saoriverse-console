@@ -138,11 +138,15 @@ except ImportError as e1:
 col1, col2 = st.columns([1, 10])
 with col1:
     if logo_path.exists():
-        st.image(str(logo_path), width=60)
+        st.image(str(logo_path), width=140)
     else:
         st.write("📋")
 with col2:
-    st.title("Interactive Tone Shifter for Legal Correspondence")
+    # Smaller, subtler title to fit the header while keeping logo prominent
+    st.markdown(
+        "<h1 style='font-size:22px;margin:0;padding:0'>Interactive Tone Shifter for Legal Correspondence</h1>",
+        unsafe_allow_html=True,
+    )
 
 # -------------------------------------------------------------------
 # ✅ SIDEBAR
