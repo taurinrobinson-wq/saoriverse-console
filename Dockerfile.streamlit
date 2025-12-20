@@ -1,5 +1,6 @@
 # Dockerfile for Streamlit FirstPerson app with Ollama integration
-FROM python:3.11-slim
+# Using Python 3.12 for optimal spaCy and audio processing compatibility
+FROM python:3.12-slim
 
 WORKDIR /app
 
@@ -19,8 +20,11 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download and install spaCy model using python -m spacy download (more reliable)
-RUN python -m spacy download en_core_web_sm --quiet 2>/dev/null || echo "Warning: spaCy model download had issues, will retry at runtime"
+# Download and install spaCy model (MUST succeed - don't suppress errors)
+RUN python -m spacy download en_core_web_sm && echo "✓ spaCy model installed successfully"
+
+# Also install TextBlob corpora
+RUN python -m textblob.download_corpora
 
 # Copy application code
 COPY . .
@@ -30,11 +34,11 @@ RUN mkdir -p ~/.streamlit
 
 # Streamlit config
 RUN echo '\
-[client]\n\
-logger.level = "info"\n\
-[logger]\n\
-level = "info"\n\
-' > ~/.streamlit/config.toml
+    [client]\n\
+    logger.level = "info"\n\
+    [logger]\n\
+    level = "info"\n\
+    ' > ~/.streamlit/config.toml
 
 # Expose Streamlit port
 EXPOSE 8501

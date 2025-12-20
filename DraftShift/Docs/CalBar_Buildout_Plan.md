@@ -102,7 +102,7 @@ ________________________________________
 // .devcontainer/devcontainer.json
 {
   "name": "DraftShift",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {}
   }

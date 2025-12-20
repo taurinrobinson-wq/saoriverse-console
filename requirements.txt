@@ -1,7 +1,7 @@
 # Saoriverse Console / FirstPerson Requirements
 # All-in-one requirements file for the application
-# Python 3.13 compatible (with careful package selection)
-# Python 3.11 or 3.12 also fully supported
+# ⚡ OPTIMIZED FOR PYTHON 3.12 (spacy/audio compatibility)
+# Python 3.11 also supported, Python 3.13+ not recommended due to spacy/torch issues
 
 # ============================================================================
 # CORE STREAMLIT & WEB FRAMEWORK
@@ -29,14 +29,14 @@ lxml==5.3.0
 # ============================================================================
 # DATA PROCESSING & NUMERICAL
 # ============================================================================
-pandas>=2.0.0
-numpy>=1.24.0
+pandas>=2.0.0,<3.0.0  # 3.12 compatible, cap at 2.x for stability
+numpy>=1.24.0,<2.0.0  # 3.12 compatible, cap at 1.x for stability
 
 # ============================================================================
 # NLP & SENTIMENT ANALYSIS
 # ============================================================================
 textblob>=0.17.1
-spacy>=3.6.0  # Python 3.12: Full support (commented for 3.13 only)
+spacy>=3.7.0,<4.0.0  # Python 3.12 full support, >=3.7 for better compatibility
 
 # Note: TextBlob corpora need to be downloaded:
 #   python -m textblob.download_corpora

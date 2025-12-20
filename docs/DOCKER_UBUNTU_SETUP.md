@@ -107,7 +107,7 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 #### 3a. Create `Dockerfile` (Backend - Python/FastAPI)
 
 ```dockerfile
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
