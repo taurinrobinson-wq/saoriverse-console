@@ -102,10 +102,30 @@ class EnhancedAffectParser:
             try:
                 import spacy
                 try:
+                    # Try to load the small English model
                     self.spacy_model = spacy.load("en_core_web_sm")
                     logger.info("✓ SpaCy en_core_web_sm loaded")
-                except OSError:
-                    logger.warning("SpaCy model not found: python -m spacy download en_core_web_sm")
+                except Exception as e:
+                    # Try to download the model, then fall back to a blank pipeline
+                    try:
+                        try:
+                            from spacy import cli as spacy_cli
+                        except Exception:
+                            spacy_cli = None
+
+                        if spacy_cli is not None:
+                            logger.info("spaCy model not found; attempting to download en_core_web_sm...")
+                            try:
+                                spacy_cli.download("en_core_web_sm")
+                                self.spacy_model = spacy.load("en_core_web_sm")
+                                logger.info("✓ SpaCy en_core_web_sm downloaded and loaded")
+                            except Exception as e2:
+                                logger.warning(f"Failed to download spaCy model: {e2}")
+                        if self.spacy_model is None:
+                            self.spacy_model = spacy.blank("en")
+                            logger.warning("⚠️ SpaCy model not available; using blank 'en' pipeline")
+                    except Exception as e3:
+                        logger.warning(f"SpaCy load/download failed: {e3}")
             except ImportError:
                 logger.warning("SpaCy not available: pip install spacy")
         

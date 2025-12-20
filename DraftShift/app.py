@@ -171,7 +171,8 @@ with st.sidebar:
 
     st.subheader("🛠️ Tools & APIs")
     use_sapling = bool(os.environ.get("SAPLING_API_KEY"))
-    st.write(f"**Sapling API:** {'✅ Configured' if use_sapling else '❌ Not configured'}")
+    if use_sapling:
+        st.write("**Sapling API:** ✅ Configured")
     st.write(f"**Signal Parser:** {'✅ Available' if HAS_PARSE_INPUT else '⚠️ Not available'}")
 
     st.subheader("📊 NLP Engines")

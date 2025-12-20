@@ -62,15 +62,43 @@ except Exception as e1:
 
 try:
     import spacy
+    _nlp = None
     try:
         _nlp = spacy.load("en_core_web_sm")
         HAS_SPACY = True
         logger.info("✅ spaCy model loaded successfully")
     except Exception as e:
-        SPACY_ERROR = f"Model not found: {e}. Install with: python -m spacy download en_core_web_sm"
-        logger.warning(f"❌ spaCy model failed to load: {SPACY_ERROR}")
-        _nlp = None
-        HAS_SPACY = False
+        # Try to download the model automatically, then fall back to a blank pipeline
+        try:
+            try:
+                from spacy import cli as spacy_cli
+            except Exception:
+                spacy_cli = None
+
+            if spacy_cli is not None:
+                logger.info("spaCy model not found; attempting to download en_core_web_sm...")
+                try:
+                    spacy_cli.download("en_core_web_sm")
+                    _nlp = spacy.load("en_core_web_sm")
+                    HAS_SPACY = True
+                    logger.info("✅ spaCy model downloaded and loaded successfully")
+                except Exception as e2:
+                    logger.warning(f"Failed to download spaCy model: {e2}")
+            # If download not available or failed, use a minimal blank English pipeline
+            if _nlp is None:
+                try:
+                    _nlp = spacy.blank("en")
+                    HAS_SPACY = True
+                    SPACY_ERROR = f"Using blank 'en' pipeline (original error: {e})"
+                    logger.warning("⚠️ spaCy model not available; using blank 'en' pipeline")
+                except Exception as e3:
+                    SPACY_ERROR = f"spaCy load failed: {e3}"
+                    logger.warning(f"❌ spaCy blank model failed: {e3}")
+                    _nlp = None
+                    HAS_SPACY = False
+        except Exception as outer_e:
+            SPACY_ERROR = str(outer_e)
+            logger.warning(f"❌ spaCy model failed to load: {outer_e}")
 except Exception as e:
     SPACY_ERROR = str(e)
     logger.warning(f"❌ spaCy import failed: {e}")
