@@ -77,13 +77,32 @@ try:
 
             if spacy_cli is not None:
                 logger.info("spaCy model not found; attempting to download en_core_web_sm...")
+                download_success = False
+                # Try regular download first
                 try:
                     spacy_cli.download("en_core_web_sm")
                     _nlp = spacy.load("en_core_web_sm")
                     HAS_SPACY = True
+                    download_success = True
                     logger.info("✅ spaCy model downloaded and loaded successfully")
+                except PermissionError as perm_e:
+                    # Try download with --user flag for permission-denied errors
+                    logger.info(f"Regular download failed with permission error; trying --user flag...")
+                    try:
+                        import subprocess
+                        subprocess.run([
+                            "python", "-m", "spacy", "download", 
+                            "en_core_web_sm", "--user"
+                        ], check=True, capture_output=True, timeout=120)
+                        _nlp = spacy.load("en_core_web_sm")
+                        HAS_SPACY = True
+                        download_success = True
+                        logger.info("✅ spaCy model downloaded (with --user) and loaded successfully")
+                    except Exception as user_download_e:
+                        logger.warning(f"Download with --user flag also failed: {user_download_e}")
                 except Exception as e2:
                     logger.warning(f"Failed to download spaCy model: {e2}")
+            
             # If download not available or failed, use a minimal blank English pipeline
             if _nlp is None:
                 try:
