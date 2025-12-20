@@ -329,49 +329,68 @@ def shift_tone(sentence: str, target_tone: str) -> str:
 
     # Smart heuristic transformations for legal text
     s = sentence.strip()
+    s_lower = s.lower()
     
     if target_tone == "Very Formal":
-        # Replace contractions with full forms
+        # Maximum formality: replace all contractions, use formal language
         s = _replace_contractions(s)
-        # Ensure sentence ends with period if not already
-        if not s.endswith('.') and not s.endswith('!') and not s.endswith('?'):
+        # Replace casual words with formal equivalents
+        s = re.sub(r"\bi'm\b", 'I am', s, flags=re.IGNORECASE)
+        s = re.sub(r"\byou're\b", 'you are', s, flags=re.IGNORECASE)
+        s = re.sub(r'\bso\b', 'therefore', s, flags=re.IGNORECASE)
+        s = re.sub(r'\bfails to\b', 'fails to', s, flags=re.IGNORECASE)  # Keep strong
+        s = re.sub(r'\bdid not\b', 'failed to', s, flags=re.IGNORECASE)  # Strengthen
+        # Ensure sentence ends with period
+        if not s.endswith(('.', '!', '?')):
             s = s + '.'
-        # Replace informal phrases with formal equivalents
-        s = re.sub(r'\bi\'ve\b', 'I have', s, flags=re.IGNORECASE)
-        s = re.sub(r'\bdon\'t\b', 'do not', s, flags=re.IGNORECASE)
-        s = re.sub(r'\bdoesn\'t\b', 'does not', s, flags=re.IGNORECASE)
         return s
 
     if target_tone == "Formal":
-        # Replace contractions
+        # Formal: replace contractions, remove hedging, maintain professional tone
         s = _replace_contractions(s)
-        # Remove hedging language (maybe, might, could, perhaps)
-        s = re.sub(r'\b(maybe|might|could|perhaps)\b', '', s, flags=re.IGNORECASE)
-        # Clean up extra spaces
+        # Replace very casual language
+        s = re.sub(r'\bso\b', 'therefore', s, flags=re.IGNORECASE)
+        s = re.sub(r'\bkinda\b|\bsorta\b', '', s, flags=re.IGNORECASE)
+        # Remove excessive hedging
+        s = re.sub(r'\b(maybe|might|could|perhaps|seems|appears to be)\b', '', s, flags=re.IGNORECASE)
+        # Clean up extra spaces from removals
         s = re.sub(r'\s+', ' ', s).strip()
         # Ensure proper ending
         if not s.endswith(('.', '!', '?')):
             s = s + '.'
         return s
 
+    if target_tone == "Neutral":
+        # Neutral: remove emotional language, be objective
+        s = _replace_contractions(s)
+        # Remove exclamations and emotional intensifiers
+        s = re.sub(r'\bvery\b|\bextremely\b|\babsolutely\b|\bclearly\b', '', s, flags=re.IGNORECASE)
+        # Tone down critical language
+        s = re.sub(r'\bfails to\b', 'does not', s, flags=re.IGNORECASE)
+        s = re.sub(r'\boverlooks\b', 'does not fully consider', s, flags=re.IGNORECASE)
+        # Replace exclamation with period
+        s = s.rstrip('!') + ('.' if not s.rstrip('!').endswith(('.', '?')) else '')
+        # Clean up extra spaces
+        s = re.sub(r'\s+', ' ', s).strip()
+        if not s.endswith(('.', '!', '?')):
+            s = s + '.'
+        return s
+
     if target_tone == "Friendly":
-        # For legal text, "friendly" means warmer but still professional
-        # Don't prepend text that breaks sentence structure—just replace words
-        s_lower = s.lower()
-        
+        # Friendly: warm but still professional, soften critical language
         # Replace very formal phrases with friendlier equivalents
         s = re.sub(r'\bshall\b', 'will', s, flags=re.IGNORECASE)
-        s = re.sub(r'\bthus\b', 'so', s, flags=re.IGNORECASE)
-        s = re.sub(r'\btherefore\b', 'so', s, flags=re.IGNORECASE)
+        s = re.sub(r'\bthus\b|\btherefore\b', 'so', s, flags=re.IGNORECASE)
         s = re.sub(r'\bnevertheless\b', 'however', s, flags=re.IGNORECASE)
         
         # Soften critical words
         s = re.sub(r'\boverlooks\b', 'may not fully consider', s, flags=re.IGNORECASE)
         s = re.sub(r'\bfails to\b', 'did not', s, flags=re.IGNORECASE)
         s = re.sub(r'\bundue weight\b', 'significant weight', s, flags=re.IGNORECASE)
+        s = re.sub(r'\binadequate\b', 'insufficient', s, flags=re.IGNORECASE)
+        s = re.sub(r'\bunacceptable\b', 'not ideal', s, flags=re.IGNORECASE)
         
-        # Replace contractions for slight formality
-        s = _replace_contractions(s)
+        # Keep contractions for warmth (don't replace)
         
         # Add warmth with exclamation where appropriate
         if any(word in s_lower for word in ["thank", "appreciate", "grateful"]):
@@ -384,26 +403,32 @@ def shift_tone(sentence: str, target_tone: str) -> str:
         return s
 
     if target_tone == "Empathetic":
-        # Add empathetic context to critical or difficult statements
-        s_lower = s.lower()
+        # Empathetic: acknowledge feelings, soften critical tone, show understanding
         
-        # Add understanding preface to critical or challenging statements
-        if any(word in s_lower for word in ["fails", "inadequate", "unfair", "undue", "problem", "issue"]):
-            if not s_lower.startswith(("i understand", "i recognize", "i appreciate", "certainly")):
-                # Add empathetic opening
-                s = "I understand that " + s[0].lower() + s[1:]
+        # Add empathetic opening to critical or challenging statements
+        if any(word in s_lower for word in ["fails", "inadequate", "unfair", "undue", "problem", "issue", "overlooks"]):
+            if not s_lower.startswith(("i understand", "i recognize", "i appreciate", "certainly", "i see")):
+                # Add empathetic opening that flows naturally
+                if s[0].isupper():
+                    s = "I understand that " + s[0].lower() + s[1:]
+                else:
+                    s = "I understand that " + s
         
-        # Replace harsh words with softer equivalents
+        # Replace harsh words with gentler equivalents
         s = re.sub(r'\bfails? to\b', 'did not', s, flags=re.IGNORECASE)
-        s = re.sub(r'\bunacceptable\b', 'problematic', s, flags=re.IGNORECASE)
-        s = re.sub(r'\bunfair\b', 'difficult', s, flags=re.IGNORECASE)
+        s = re.sub(r'\bunacceptable\b', 'concerning', s, flags=re.IGNORECASE)
+        s = re.sub(r'\bunfair\b', 'challenging', s, flags=re.IGNORECASE)
+        s = re.sub(r'\boverlooks\b', 'may have overlooked', s, flags=re.IGNORECASE)
+        s = re.sub(r'\binadequate\b', 'insufficient', s, flags=re.IGNORECASE)
+        
+        # Keep contractions for warmth
         
         # Ensure proper ending
         if not s.endswith(('.', '!', '?')):
             s = s + '.'
         return s
 
-    # Neutral - return mostly as-is with minor cleanup
+    # Default fallback (shouldn't reach here with valid tones)
     if not s.endswith(('.', '!', '?')):
         s = s + '.'
     return s
