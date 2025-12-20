@@ -1,19 +1,27 @@
-"""DraftShift Streamlit Application - Interactive Tone Shifter for Legal Correspondence"""
+"""
+DraftShift Streamlit Application - Interactive Tone Shifter for Legal Correspondence
+"""
 
-# CRITICAL: Path setup must happen BEFORE any other imports
-# This ensures DraftShift modules can be imported correctly
+# -------------------------------------------------------------------
+# ✅ PATH SETUP — MUST HAPPEN BEFORE ANY OTHER IMPORTS
+# -------------------------------------------------------------------
 import sys
 import os
 from pathlib import Path
 
-# Get the absolute path to the repository root (parent of DraftShift directory)
-repo_root = Path(__file__).resolve().parents[1]
+# Safely resolve repo root (DraftShift/ is the folder containing this file)
+try:
+    current_file = Path(__file__).resolve()
+    repo_root = current_file.parent.parent  # parent of DraftShift/
+except Exception:
+    # Streamlit Cloud sometimes strips __file__
+    repo_root = Path.cwd()
 
-# Add repo root to Python path if not already present
+# Add repo root to sys.path
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
-# Debug information (controlled by DEBUG_DRAFTSHIFT environment variable)
+# Debug mode
 DEBUG_MODE = os.environ.get("DEBUG_DRAFTSHIFT", "").lower() in ("true", "1", "yes")
 
 if DEBUG_MODE:
@@ -21,137 +29,89 @@ if DEBUG_MODE:
     print("DraftShift Startup - Path Configuration")
     print("=" * 80)
     print(f"Current working directory: {os.getcwd()}")
-    print(f"Script location (__file__): {__file__}")
-    print(f"Repository root: {repo_root}")
+    print(f"Repo root: {repo_root}")
     print(f"Python path (first 5 entries):")
-    for i, path_entry in enumerate(sys.path[:5], 1):
-        print(f"  {i}. {path_entry}")
+    for i, p in enumerate(sys.path[:5], 1):
+        print(f"  {i}. {p}")
     print("=" * 80)
-    print("\n🔍 DEBUG MODE ENABLED")
-    print(f"Full sys.path: {sys.path}")
-    print()
 
-# Now import streamlit (must be after path setup but before DraftShift imports)
+# -------------------------------------------------------------------
+# ✅ STREAMLIT MUST BE IMPORTED AFTER PATH SETUP
+# -------------------------------------------------------------------
 import streamlit as st
 
-# MUST be first Streamlit call, before all other imports
-# Set favicon using the DraftShift logo
+# ✅ FIRST STREAMLIT CALL — MUST COME BEFORE ANY OTHER st.* CALLS
 logo_path = Path(__file__).parent / "logo.svg"
 st.set_page_config(
-    page_title="DraftShift", 
+    page_title="DraftShift",
     layout="wide",
     initial_sidebar_state="expanded",
-    menu_items={
-        "About": "Interactive Tone Shifter for Legal Correspondence"
-    }
+    menu_items={"About": "Interactive Tone Shifter for Legal Correspondence"},
 )
 
+# -------------------------------------------------------------------
+# ✅ ENVIRONMENT VARIABLES
+# -------------------------------------------------------------------
 from dotenv import load_dotenv
 
-# Helper function to display error details
-def show_error_details(error_type: str, error_message: str) -> None:
-    """Display formatted error details in Streamlit UI."""
-    st.error(f"**Error details:** {error_type}: {error_message}")
-
-# Import DraftShift modules with comprehensive error handling
-try:
-    if DEBUG_MODE:
-        print("\n📦 Importing DraftShift modules...")
-    
-    from DraftShift.core import (
-        split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES,
-        classify_sentence_structure, assess_overall_message, get_active_tools, get_tool_status
-    )
-    if DEBUG_MODE:
-        print("  ✅ DraftShift.core imported successfully")
-    
-    from DraftShift.llm_transformer import get_transformer
-    if DEBUG_MODE:
-        print("  ✅ DraftShift.llm_transformer imported successfully")
-    
-    from DraftShift.civility_scorer import get_scorer
-    if DEBUG_MODE:
-        print("  ✅ DraftShift.civility_scorer imported successfully")
-    
-    from DraftShift.risk_alerts import get_alert_generator
-    if DEBUG_MODE:
-        print("  ✅ DraftShift.risk_alerts imported successfully")
-        print("✅ All DraftShift modules imported successfully\n")
-    
-except ImportError as e:
-    if DEBUG_MODE:
-        print(f"\n❌ IMPORT ERROR: {e}\n")
-    st.error("❌ Failed to import DraftShift modules")
-    show_error_details(type(e).__name__, str(e))
-    
-    st.subheader("🔍 Diagnostic Information")
-    path_entries = '\n'.join(f'  {i}. {p}' for i, p in enumerate(sys.path[:5], 1))
-    diagnostic_info = f"""Current working directory: {os.getcwd()}
-Script location: {__file__}
-Repository root: {repo_root}
-Repository root in sys.path: {str(repo_root) in sys.path}
-
-Python sys.path (first 5 entries):
-{path_entries}"""
-    st.code(diagnostic_info, language="text")
-    
-    st.subheader("💡 Troubleshooting Steps")
-    st.markdown("""
-1. **Verify you're in the correct directory:**
-   - Run from repository root: `streamlit run DraftShift/app.py`
-   - Or from DraftShift: `cd DraftShift && streamlit run app.py`
-
-2. **Check that DraftShift/__init__.py exists:**
-   - This file defines DraftShift as a Python package
-
-3. **Enable debug mode:**
-   - Set environment variable: `export DEBUG_DRAFTSHIFT=true`
-   - Then run: `streamlit run DraftShift/app.py`
-
-4. **Verify package structure:**
-   - Ensure all required files are present in DraftShift directory
-   - Check that you have read permissions for all files
-    """)
-    
-    st.stop()
-except Exception as e:
-    if DEBUG_MODE:
-        print(f"\n❌ UNEXPECTED ERROR: {type(e).__name__}: {e}\n")
-    st.error(f"❌ Unexpected error during import: {type(e).__name__}")
-    show_error_details(type(e).__name__, str(e))
-    st.info("💡 This may indicate a problem with the DraftShift module code itself.")
-    if DEBUG_MODE:
-        import traceback
-        st.code(traceback.format_exc(), language="python")
-    st.stop()
-
-# Locate .env at repo root if present, otherwise fallback to cwd
 env_path = repo_root / "LiToneCheck.env"
 if not env_path.exists():
     env_path = Path.cwd() / "LiToneCheck.env"
 
-# Load environment variables
 load_dotenv(dotenv_path=str(env_path))
 
-# Debug: Show .env file status
-if os.environ.get("DEBUG_DRAFTSHIFT"):
-    if env_path.exists():
-        print(f"  .env loaded from: {env_path}")
-    else:
-        print(f"  .env not found at: {env_path}")
-        print(f"  Note: .env file is optional. App will work without it.")
+if DEBUG_MODE:
+    print(f".env loaded from: {env_path if env_path.exists() else 'NOT FOUND'}")
 
-# Display logo and title
-col1, col2 = st.columns([1, 10])
-with col1:
-    if logo_path.exists():
-        st.image(str(logo_path), width=60, use_column_width=False)
-    else:
-        st.write("📋")
-with col2:
-    st.title("Interactive Tone Shifter for Legal Correspondence")
+# -------------------------------------------------------------------
+# ✅ ERROR DISPLAY HELPER
+# -------------------------------------------------------------------
+def show_error_details(error_type: str, error_message: str) -> None:
+    st.error(f"**Error details:** {error_type}: {error_message}")
 
-# Try to import the project's richer signal parser if available (optional dependency)
+# -------------------------------------------------------------------
+# ✅ IMPORT DRAFTSHIFT MODULES
+# -------------------------------------------------------------------
+try:
+    from DraftShift.core import (
+        split_sentences,
+        detect_tone,
+        shift_tone,
+        map_slider_to_tone,
+        TONES,
+        classify_sentence_structure,
+        assess_overall_message,
+        get_active_tools,
+        get_tool_status,
+    )
+
+    from DraftShift.llm_transformer import get_transformer
+    from DraftShift.civility_scorer import get_scorer
+    from DraftShift.risk_alerts import get_alert_generator
+
+except ImportError as e:
+    st.error("❌ Failed to import DraftShift modules")
+    show_error_details(type(e).__name__, str(e))
+
+    st.subheader("🔍 Diagnostic Information")
+    st.code(
+        f"Working directory: {os.getcwd()}\n"
+        f"Repo root: {repo_root}\n"
+        f"sys.path (first 5):\n" +
+        "\n".join(f"  {i}. {p}" for i, p in enumerate(sys.path[:5], 1)),
+        language="text",
+    )
+
+    st.stop()
+
+except Exception as e:
+    st.error("❌ Unexpected error during import")
+    show_error_details(type(e).__name__, str(e))
+    st.stop()
+
+# -------------------------------------------------------------------
+# ✅ OPTIONAL: SIGNAL PARSER
+# -------------------------------------------------------------------
 HAS_PARSE_INPUT = False
 parse_input = None
 parse_error = None
@@ -162,28 +122,36 @@ try:
     parse_input = _parse_input
     HAS_PARSE_INPUT = True
 except ImportError as e1:
-    parse_error_details.append(f"src.emotional_os.core: {str(e1)}")
+    parse_error_details.append(f"src.emotional_os.core: {e1}")
     try:
         from emotional_os.core.signal_parser import parse_input as _parse_input
         parse_input = _parse_input
         HAS_PARSE_INPUT = True
     except ImportError as e2:
-        parse_error_details.append(f"emotional_os.core: {str(e2)}")
-        # signal_parser is optional - the app will work without it
-        parse_error = "Signal parser module is not available (optional feature)"
+        parse_error_details.append(f"emotional_os.core: {e2}")
+        parse_error = "Signal parser unavailable (optional)"
         HAS_PARSE_INPUT = False
-except Exception as e:
-    parse_error = f"Unexpected error loading signal parser: {type(e).__name__}: {str(e)}"
-    HAS_PARSE_INPUT = False
 
-# Get tool status for sidebar
+# -------------------------------------------------------------------
+# ✅ HEADER
+# -------------------------------------------------------------------
+col1, col2 = st.columns([1, 10])
+with col1:
+    if logo_path.exists():
+        st.image(str(logo_path), width=60)
+    else:
+        st.write("📋")
+with col2:
+    st.title("Interactive Tone Shifter for Legal Correspondence")
+
+# -------------------------------------------------------------------
+# ✅ SIDEBAR
+# -------------------------------------------------------------------
 tool_status = get_tool_status()
 
-# Sidebar settings
 with st.sidebar:
     st.header("⚙️ Settings & Tools")
-    
-    # Tone selector with labels
+
     st.subheader("Target Tone")
     tone_names_display = {
         0: "Very Formal 📋",
@@ -192,98 +160,80 @@ with st.sidebar:
         3: "Friendly 😊",
         4: "Empathetic 🤝",
     }
+
     tone_idx = st.radio(
-        "Select target tone for transformation:",
+        "Select target tone:",
         options=[0, 1, 2, 3, 4],
         format_func=lambda x: tone_names_display[x],
-        horizontal=False,
     )
     target_tone = map_slider_to_tone(tone_idx)
     st.write(f"**Selected:** {target_tone}")
-    
-    # API/Tool Status
+
     st.subheader("🛠️ Tools & APIs")
     use_sapling = bool(os.environ.get("SAPLING_API_KEY"))
     st.write(f"**Sapling API:** {'✅ Configured' if use_sapling else '❌ Not configured'}")
-    st.write(f"**Signal Parser:** {'✅ Available' if HAS_PARSE_INPUT else '⚠️ Not available (optional)'}")
-    if parse_error and os.environ.get("DEBUG_DRAFTSHIFT"):
-        with st.expander("Parser Debug Details (optional feature)"):
-            st.info(parse_error)
-            if parse_error_details:
-                st.write("Import attempts:")
-                for detail in parse_error_details:
-                    st.text(detail)
-    
-    # Show which NLP tools are active (will update after analysis)
+    st.write(f"**Signal Parser:** {'✅ Available' if HAS_PARSE_INPUT else '⚠️ Not available'}")
+
     st.subheader("📊 NLP Engines")
-    nrc_status = "✅" if tool_status["nrc"]["loaded"] else "❌"
-    spacy_status = "✅" if tool_status["spacy"]["loaded"] else "❌"
-    textblob_status = "✅" if tool_status["textblob"]["loaded"] else "❌"
-    
     col1, col2, col3 = st.columns(3)
-    col1.write(f"**NRC** {nrc_status}")
-    col2.write(f"**spaCy** {spacy_status}")
-    col3.write(f"**TextBlob** {textblob_status}")
-    
-    # Show errors if any
-    if tool_status["nrc"]["error"] or tool_status["spacy"]["error"] or tool_status["textblob"]["error"]:
-        with st.expander("Tool Load Errors"):
-            if tool_status["nrc"]["error"]:
-                st.error(f"**NRC:** {tool_status['nrc']['error']}")
-            if tool_status["spacy"]["error"]:
-                st.error(f"**spaCy:** {tool_status['spacy']['error']}")
-            if tool_status["textblob"]["error"]:
-                st.error(f"**TextBlob:** {tool_status['textblob']['error']}")
+    col1.write(f"**NRC:** {'✅' if tool_status['nrc']['loaded'] else '❌'}")
+    col2.write(f"**spaCy:** {'✅' if tool_status['spacy']['loaded'] else '❌'}")
+    col3.write(f"**TextBlob:** {'✅' if tool_status['textblob']['loaded'] else '❌'}")
 
-# Main text input
-text = st.text_area("📄 Paste or type your legal correspondence:", height=200, key="main_text")
+# -------------------------------------------------------------------
+# ✅ MAIN INPUT
+# -------------------------------------------------------------------
+text = st.text_area("📄 Paste or type your legal correspondence:", height=200)
 
-# Submit button
 col1, col2 = st.columns([3, 1])
 with col2:
     submit_button = st.button("🔄 Analyze & Transform", type="primary")
 
 if not text.strip():
-    st.info("👉 Enter your correspondence above and click 'Analyze & Transform' to begin.")
+    st.info("👉 Enter your correspondence above and click Analyze.")
     st.stop()
 
 if not submit_button:
     st.stop()
 
-# ============ ANALYSIS ============
+# -------------------------------------------------------------------
+# ✅ ANALYSIS
+# -------------------------------------------------------------------
 sentences = split_sentences(text)
 tones = [detect_tone(s) for s in sentences]
 structures = [classify_sentence_structure(s) for s in sentences]
 overall_assessment = assess_overall_message(sentences, tones)
-
-# Get which tools were actually used
 active_tools = get_active_tools()
 
-# ============ CIVILITY SCORING (Phase 1.2) ============
+# Civility scoring
 scorer = get_scorer()
 civility_assessment = scorer.score_document(sentences, tones, structures=structures)
 
-# ============ RISK ALERTS (Phase 1.3) ============
+# Risk alerts
 alert_generator = get_alert_generator()
 risk_report = alert_generator.scan_document(sentences, tones)
 
-# ============ TRANSFORMED TEXT SECTION (FIRST) ============
+# -------------------------------------------------------------------
+# ✅ TRANSFORMED TEXT
+# -------------------------------------------------------------------
 st.subheader("✨ Transformed Text")
 transformed_sentences = [shift_tone(s, target_tone) for s in sentences]
 transformed_full = " ".join(transformed_sentences)
-st.text_area("Output:", value=transformed_full, height=200, disabled=True, key="output_text")
 
-# Copy button
+st.text_area("Output:", value=transformed_full, height=200, disabled=True)
+
 col1, col2, col3 = st.columns([1, 1, 3])
 with col1:
     st.download_button(
         label="📋 Copy to Clipboard",
-        data=transformed_full,
+        data=str(transformed_full),
         file_name="transformed_text.txt",
         mime="text/plain",
     )
 
-# ============ OVERALL ASSESSMENT ============
+# -------------------------------------------------------------------
+# ✅ OVERALL ASSESSMENT
+# -------------------------------------------------------------------
 st.subheader(f"📊 Overall Message Assessment: **{overall_assessment}**")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -291,16 +241,14 @@ with col1:
     st.metric("Total Sentences", len(sentences))
 with col2:
     tone_distribution = {}
-    for tone in tones:
-        tone_distribution[tone] = tone_distribution.get(tone, 0) + 1
+    for t in tones:
+        tone_distribution[t] = tone_distribution.get(t, 0) + 1
     dominant_tone = max(tone_distribution, key=tone_distribution.get)
     st.metric("Dominant Tone", dominant_tone)
 with col3:
     st.metric("Target Tone", target_tone)
 with col4:
-    # Civility score (0-100)
-    civility_score = civility_assessment['score']
-    # Color code the civility score
+    civility_score = civility_assessment["score"]
     if civility_score >= 85:
         color = "🟢"
     elif civility_score >= 70:
@@ -311,13 +259,14 @@ with col4:
         color = "🔴"
     st.metric("Civility Score", f"{color} {civility_score}/100")
 
-# ============ RISK ALERTS SECTION (Phase 1.3) ============
-if risk_report['alerts_total'] > 0:
+# -------------------------------------------------------------------
+# ✅ RISK ALERTS
+# -------------------------------------------------------------------
+if risk_report["alerts_total"] > 0:
     st.divider()
     st.subheader("⚠️ Civility Alerts")
-    
-    # Overall recommendation
-    recommendation_text = risk_report['overall_recommendation']
+
+    recommendation_text = risk_report["overall_recommendation"]
     if "DO NOT SEND" in recommendation_text:
         st.error(recommendation_text)
     elif "HIGH RISK" in recommendation_text:
@@ -326,97 +275,80 @@ if risk_report['alerts_total'] > 0:
         st.warning(recommendation_text)
     else:
         st.success(recommendation_text)
-    
-    # Alert counts
+
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        if risk_report['critical_count'] > 0:
-            st.metric("🔴 Critical", risk_report['critical_count'])
+        if risk_report["critical_count"] > 0:
+            st.metric("🔴 Critical", risk_report["critical_count"])
     with col2:
-        if risk_report['high_count'] > 0:
-            st.metric("🟠 High", risk_report['high_count'])
+        if risk_report["high_count"] > 0:
+            st.metric("🟠 High", risk_report["high_count"])
     with col3:
-        medium_count = len(risk_report['alerts_by_severity']['medium'])
+        medium_count = len(risk_report["alerts_by_severity"]["medium"])
         if medium_count > 0:
             st.metric("🟡 Medium", medium_count)
     with col4:
-        st.metric("Total Alerts", risk_report['alerts_total'])
-    
-    # Show critical alerts inline
-    if risk_report['alerts_by_severity']['critical']:
-        st.subsubheader("Critical Issues")
-        for alert in risk_report['alerts_by_severity']['critical']:
+        st.metric("Total Alerts", risk_report["alerts_total"])
+
+    if risk_report["alerts_by_severity"]["critical"]:
+        st.subheader("Critical Issues")
+        for alert in risk_report["alerts_by_severity"]["critical"]:
             with st.container(border=True):
                 st.error(f"**{alert['message']}**")
-                if alert['snippet']:
-                    st.code(alert['snippet'], language="text")
-                if alert['suggestion']:
+                if alert["snippet"]:
+                    st.code(alert["snippet"], language="text")
+                if alert["suggestion"]:
                     st.write(f"💡 {alert['suggestion']}")
-    
-    # Expandable high/medium alerts
-    if risk_report['alerts_by_severity']['high'] or risk_report['alerts_by_severity']['medium']:
+
+    if risk_report["alerts_by_severity"]["high"] or risk_report["alerts_by_severity"]["medium"]:
         with st.expander("View High & Medium Priority Alerts"):
-            for alert in risk_report['alerts_by_severity']['high']:
+            for alert in risk_report["alerts_by_severity"]["high"]:
                 with st.container(border=True):
                     st.warning(f"**{alert['message']}**")
-                    if alert['snippet']:
-                        st.code(alert['snippet'], language="text")
-                    if alert['suggestion']:
+                    if alert["snippet"]:
+                        st.code(alert["snippet"], language="text")
+                    if alert["suggestion"]:
                         st.write(f"💡 {alert['suggestion']}")
-            
-            for alert in risk_report['alerts_by_severity']['medium']:
+
+            for alert in risk_report["alerts_by_severity"]["medium"]:
                 with st.container(border=True):
                     st.info(f"**{alert['message']}**")
-                    if alert['snippet']:
-                        st.code(alert['snippet'], language="text")
-                    if alert['suggestion']:
+                    if alert["snippet"]:
+                        st.code(alert["snippet"], language="text")
+                    if alert["suggestion"]:
                         st.write(f"💡 {alert['suggestion']}")
 else:
     st.divider()
     st.success("✅ No civility alerts detected.")
 
-# ============ DETAILED ANALYSIS (IN EXPANDER) ============
+# -------------------------------------------------------------------
+# ✅ DETAILED ANALYSIS
+# -------------------------------------------------------------------
 with st.expander("🔍 Sentence Tone & Structural Analysis"):
     st.subheader("Sentence-by-Sentence Breakdown")
-    
-    analysis_data = []
+
     for i, (original, tone, structure, transformed) in enumerate(
         zip(sentences, tones, structures, transformed_sentences), 1
     ):
-        analysis_data.append({
-            "Sentence": i,
-            "Original": original,
-            "Detected Tone": tone,
-            "Structure": structure,
-            "Transformed": transformed,
-        })
-    
-    for row in analysis_data:
         with st.container(border=True):
             col1, col2 = st.columns([1, 1])
-            
             with col1:
-                st.write(f"**Sentence {row['Sentence']}**")
-                st.write(f"📍 **Structure:** {row['Structure']}")
-                st.write(f"🎯 **Detected Tone:** {row['Detected Tone']}")
-            
+                st.write(f"**Sentence {i}**")
+                st.write(f"📍 **Structure:** {structure}")
+                st.write(f"🎯 **Detected Tone:** {tone}")
             with col2:
-                st.write(f"**Original:**")
-                st.write(row['Original'])
-            
+                st.write("**Original:**")
+                st.write(original)
+
             st.write(f"**Transformed to {target_tone}:**")
-            st.write(row['Transformed'])
-    
-    # NLP Tools used
+            st.write(transformed)
+
     st.divider()
-    st.subheader("🛠️ NLP Tools Used in This Analysis")
+    st.subheader("🛠️ NLP Tools Used")
     col1, col2, col3 = st.columns(3)
-    with col1:
-        st.write(f"**NRC Lexicon:** {'✅ Used' if active_tools['nrc'] else '❌ Not used'}")
-    with col2:
-        st.write(f"**spaCy:** {'✅ Used' if active_tools['spacy'] else '❌ Not used'}")
-    with col3:
-        st.write(f"**TextBlob:** {'✅ Used' if active_tools['textblob'] else '❌ Not used'}")
+    col1.write(f"**NRC:** {'✅ Used' if active_tools['nrc'] else '❌'}")
+    col2.write(f"**spaCy:** {'✅ Used' if active_tools['spacy'] else '❌'}")
+    col3.write(f"**TextBlob:** {'✅ Used' if active_tools['textblob'] else '❌'}")
 
 st.divider()
-st.caption("💡 **DraftShift** helps you adapt your legal correspondence to different audiences. Experiment with different target tones to find the right voice for your recipient.")
+st.caption("💡 DraftShift helps you adapt your legal correspondence to different audiences.")
