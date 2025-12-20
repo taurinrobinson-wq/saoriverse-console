@@ -13,21 +13,20 @@ repo_root = Path(__file__).resolve().parents[1]
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
-# Debug information (always print for troubleshooting)
-print("=" * 80)
-print("DraftShift Startup - Path Configuration")
-print("=" * 80)
-print(f"Current working directory: {os.getcwd()}")
-print(f"Script location (__file__): {__file__}")
-print(f"Repository root: {repo_root}")
-print(f"Python path (first 5 entries):")
-for i, path_entry in enumerate(sys.path[:5], 1):
-    print(f"  {i}. {path_entry}")
-print("=" * 80)
-
-# Enhanced debug mode with environment variable
+# Debug information (controlled by DEBUG_DRAFTSHIFT environment variable)
 DEBUG_MODE = os.environ.get("DEBUG_DRAFTSHIFT", "").lower() in ("true", "1", "yes")
+
 if DEBUG_MODE:
+    print("=" * 80)
+    print("DraftShift Startup - Path Configuration")
+    print("=" * 80)
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Script location (__file__): {__file__}")
+    print(f"Repository root: {repo_root}")
+    print(f"Python path (first 5 entries):")
+    for i, path_entry in enumerate(sys.path[:5], 1):
+        print(f"  {i}. {path_entry}")
+    print("=" * 80)
     print("\n🔍 DEBUG MODE ENABLED")
     print(f"Full sys.path: {sys.path}")
     print()
@@ -51,30 +50,37 @@ from dotenv import load_dotenv
 
 # Import DraftShift modules with comprehensive error handling
 try:
-    print("\n📦 Importing DraftShift modules...")
+    if DEBUG_MODE:
+        print("\n📦 Importing DraftShift modules...")
+    
     from DraftShift.core import (
         split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES,
         classify_sentence_structure, assess_overall_message, get_active_tools, get_tool_status
     )
-    print("  ✅ DraftShift.core imported successfully")
+    if DEBUG_MODE:
+        print("  ✅ DraftShift.core imported successfully")
     
     from DraftShift.llm_transformer import get_transformer
-    print("  ✅ DraftShift.llm_transformer imported successfully")
+    if DEBUG_MODE:
+        print("  ✅ DraftShift.llm_transformer imported successfully")
     
     from DraftShift.civility_scorer import get_scorer
-    print("  ✅ DraftShift.civility_scorer imported successfully")
+    if DEBUG_MODE:
+        print("  ✅ DraftShift.civility_scorer imported successfully")
     
     from DraftShift.risk_alerts import get_alert_generator
-    print("  ✅ DraftShift.risk_alerts imported successfully")
-    
-    print("✅ All DraftShift modules imported successfully\n")
+    if DEBUG_MODE:
+        print("  ✅ DraftShift.risk_alerts imported successfully")
+        print("✅ All DraftShift modules imported successfully\n")
     
 except ImportError as e:
-    print(f"\n❌ IMPORT ERROR: {e}\n")
+    if DEBUG_MODE:
+        print(f"\n❌ IMPORT ERROR: {e}\n")
     st.error("❌ Failed to import DraftShift modules")
     st.error(f"**Error details:** {type(e).__name__}: {str(e)}")
     
     st.subheader("🔍 Diagnostic Information")
+    path_entries = '\n'.join(f'  {i}. {p}' for i, p in enumerate(sys.path[:5], 1))
     st.code(f"""
 Current working directory: {os.getcwd()}
 Script location: {__file__}
@@ -82,7 +88,7 @@ Repository root: {repo_root}
 Repository root in sys.path: {str(repo_root) in sys.path}
 
 Python sys.path (first 5 entries):
-{chr(10).join(f'  {i}. {p}' for i, p in enumerate(sys.path[:5], 1))}
+{path_entries}
     """, language="text")
     
     st.subheader("💡 Troubleshooting Steps")
