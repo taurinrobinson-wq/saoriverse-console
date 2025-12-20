@@ -1,20 +1,39 @@
-import streamlit as st
-from pathlib import Path
+"""DraftShift Streamlit Application - Interactive Tone Shifter for Legal Correspondence"""
+
+# CRITICAL: Path setup must happen BEFORE any other imports
+# This ensures DraftShift modules can be imported correctly
 import sys
 import os
+from pathlib import Path
 
-# Add parent directory to Python path to enable imports
-# This allows the app to run from both the repo root and the DraftShift directory
+# Get the absolute path to the repository root (parent of DraftShift directory)
 repo_root = Path(__file__).resolve().parents[1]
+
+# Add repo root to Python path if not already present
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
-# Debug: Log Python path for troubleshooting
-if os.environ.get("DEBUG_DRAFTSHIFT"):
-    print(f"DraftShift Debug Info:")
-    print(f"  __file__: {__file__}")
-    print(f"  repo_root: {repo_root}")
-    print(f"  sys.path: {sys.path[:5]}")  # Show first 5 entries
+# Debug information (always print for troubleshooting)
+print("=" * 80)
+print("DraftShift Startup - Path Configuration")
+print("=" * 80)
+print(f"Current working directory: {os.getcwd()}")
+print(f"Script location (__file__): {__file__}")
+print(f"Repository root: {repo_root}")
+print(f"Python path (first 5 entries):")
+for i, path_entry in enumerate(sys.path[:5], 1):
+    print(f"  {i}. {path_entry}")
+print("=" * 80)
+
+# Enhanced debug mode with environment variable
+DEBUG_MODE = os.environ.get("DEBUG_DRAFTSHIFT", "").lower() in ("true", "1", "yes")
+if DEBUG_MODE:
+    print("\n🔍 DEBUG MODE ENABLED")
+    print(f"Full sys.path: {sys.path}")
+    print()
+
+# Now import streamlit (must be after path setup but before DraftShift imports)
+import streamlit as st
 
 # MUST be first Streamlit call, before all other imports
 # Set favicon using the DraftShift logo
@@ -30,20 +49,69 @@ st.set_page_config(
 
 from dotenv import load_dotenv
 
-# Import DraftShift modules
+# Import DraftShift modules with comprehensive error handling
 try:
+    print("\n📦 Importing DraftShift modules...")
     from DraftShift.core import (
         split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES,
         classify_sentence_structure, assess_overall_message, get_active_tools, get_tool_status
     )
+    print("  ✅ DraftShift.core imported successfully")
+    
     from DraftShift.llm_transformer import get_transformer
+    print("  ✅ DraftShift.llm_transformer imported successfully")
+    
     from DraftShift.civility_scorer import get_scorer
+    print("  ✅ DraftShift.civility_scorer imported successfully")
+    
     from DraftShift.risk_alerts import get_alert_generator
+    print("  ✅ DraftShift.risk_alerts imported successfully")
+    
+    print("✅ All DraftShift modules imported successfully\n")
+    
 except ImportError as e:
-    st.error(f"❌ Failed to import DraftShift modules: {e}")
-    st.error(f"Current working directory: {os.getcwd()}")
-    st.error(f"Python path includes: {repo_root}")
-    st.info("💡 Make sure you're running this app from the repository root or that all dependencies are installed.")
+    print(f"\n❌ IMPORT ERROR: {e}\n")
+    st.error("❌ Failed to import DraftShift modules")
+    st.error(f"**Error details:** {type(e).__name__}: {str(e)}")
+    
+    st.subheader("🔍 Diagnostic Information")
+    st.code(f"""
+Current working directory: {os.getcwd()}
+Script location: {__file__}
+Repository root: {repo_root}
+Repository root in sys.path: {str(repo_root) in sys.path}
+
+Python sys.path (first 5 entries):
+{chr(10).join(f'  {i}. {p}' for i, p in enumerate(sys.path[:5], 1))}
+    """, language="text")
+    
+    st.subheader("💡 Troubleshooting Steps")
+    st.markdown("""
+1. **Verify you're in the correct directory:**
+   - Run from repository root: `cd /path/to/saoriverse-console && streamlit run DraftShift/app.py`
+   - Or from DraftShift: `cd /path/to/saoriverse-console/DraftShift && streamlit run app.py`
+
+2. **Check that DraftShift/__init__.py exists:**
+   - This file defines DraftShift as a Python package
+
+3. **Enable debug mode:**
+   - Set environment variable: `export DEBUG_DRAFTSHIFT=true`
+   - Then run: `streamlit run DraftShift/app.py`
+
+4. **Verify package structure:**
+   - Ensure all required files are present in DraftShift directory
+   - Check that you have read permissions for all files
+    """)
+    
+    st.stop()
+except Exception as e:
+    print(f"\n❌ UNEXPECTED ERROR: {type(e).__name__}: {e}\n")
+    st.error(f"❌ Unexpected error during import: {type(e).__name__}")
+    st.error(f"**Error details:** {str(e)}")
+    st.info("💡 This may indicate a problem with the DraftShift module code itself.")
+    if DEBUG_MODE:
+        import traceback
+        st.code(traceback.format_exc(), language="python")
     st.stop()
 
 # Locate .env at repo root if present, otherwise fallback to cwd
