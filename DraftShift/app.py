@@ -20,6 +20,11 @@ except Exception:
 # Add repo root to sys.path
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
+# Also prefer the top-level `src` package directory so imports like
+# `import emotional_os...` resolve when code is organized under `src/`.
+src_dir = repo_root / "src"
+if src_dir.exists() and str(src_dir) not in sys.path:
+    sys.path.insert(0, str(src_dir))
 
 # Debug mode
 DEBUG_MODE = os.environ.get("DEBUG_DRAFTSHIFT", "").lower() in ("true", "1", "yes")
