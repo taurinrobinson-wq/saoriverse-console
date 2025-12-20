@@ -5,10 +5,19 @@ Tests core components without special characters for Windows compatibility.
 """
 
 import sys
-sys.path.insert(0, '.')
+from pathlib import Path
+
+# Add repository root to Python path
+# This allows imports to work when running from any directory
+repo_root = Path(__file__).resolve().parents[2]
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 
 print("=" * 60)
 print("DraftShift Integration Verification")
+print("=" * 60)
+print(f"Repository root: {repo_root}")
+print(f"Python path configured: {str(repo_root) in sys.path}")
 print("=" * 60)
 
 # Test 1: Module Imports

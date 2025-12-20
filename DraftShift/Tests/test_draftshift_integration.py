@@ -1,8 +1,20 @@
 #!/usr/bin/env python3
 """Quick integration test for DraftShift modules"""
 
+import sys
+from pathlib import Path
+
+# Add repository root to Python path
+# This allows imports to work when running from any directory
+repo_root = Path(__file__).resolve().parents[2]
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
+
 print("=" * 60)
 print("DraftShift Enhanced Module Integration Test")
+print("=" * 60)
+print(f"Repository root: {repo_root}")
+print(f"Python path configured: {str(repo_root) in sys.path}")
 print("=" * 60)
 
 # Test 1: Import DraftShift modules

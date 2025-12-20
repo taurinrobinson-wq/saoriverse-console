@@ -83,22 +83,37 @@ streamlit run DraftShift/app.py
 
 #### Import Errors
 
-If you see `ModuleNotFoundError` for DraftShift modules:
+**✅ FIXED**: The app now automatically handles module import path issues!
 
-1. **Check your current directory:**
-   ```bash
-   pwd
-   ```
-   Make sure you're in the repository root or DraftShift directory.
+The app startup will display diagnostic information including:
+- Current working directory
+- Script location
+- Repository root path
+- Python sys.path entries
 
-2. **Verify Python path:**
-   The app automatically adds the parent directory to `sys.path`, but you can debug with:
-   ```bash
-   DEBUG_DRAFTSHIFT=true streamlit run DraftShift/app.py
-   ```
+If you see `ModuleNotFoundError` for DraftShift modules, the app will show:
+- Detailed error information
+- Diagnostic information about your environment
+- Step-by-step troubleshooting guide
 
-3. **Check package structure:**
-   Ensure `DraftShift/__init__.py` exists.
+**To enable additional debug output:**
+```bash
+export DEBUG_DRAFTSHIFT=true
+streamlit run DraftShift/app.py
+```
+
+**Verification:**
+Run the verification script to test your setup:
+```bash
+# From repository root
+python DraftShift/Tests/verify_setup.py
+
+# From DraftShift directory
+cd DraftShift
+python Tests/verify_setup.py
+```
+
+Both should work correctly thanks to automatic path configuration.
 
 #### Missing Optional Dependencies
 
@@ -126,17 +141,36 @@ For more detailed documentation, see:
 
 Test that the app is working:
 
-1. **Test imports:**
+1. **Quick verification (recommended):**
    ```bash
-   python -c "from DraftShift.core import detect_tone; print('✅ Imports work')"
+   # From repository root
+   python DraftShift/Tests/verify_setup.py
+   ```
+   
+   Or from DraftShift directory:
+   ```bash
+   cd DraftShift
+   python Tests/verify_setup.py
    ```
 
-2. **Start the app:**
+2. **Test imports (optional):**
+   ```bash
+   # From repository root
+   cd /path/to/saoriverse-console
+   python -c "import sys; from pathlib import Path; sys.path.insert(0, '.'); from DraftShift.core import detect_tone; print('✅ Imports work')"
+   ```
+
+3. **Start the app:**
    ```bash
    streamlit run DraftShift/app.py
    ```
+   
+   The app will display startup diagnostics showing:
+   - ✅ Path configuration
+   - ✅ Module import status
+   - ✅ Available NLP tools
 
-3. **Use the app:**
+4. **Use the app:**
    - Paste or type legal correspondence in the text area
    - Click "🔄 Analyze & Transform"
    - View transformed text and analysis
