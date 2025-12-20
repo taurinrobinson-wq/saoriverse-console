@@ -48,6 +48,11 @@ st.set_page_config(
 
 from dotenv import load_dotenv
 
+# Helper function to display error details
+def show_error_details(error_type: str, error_message: str) -> None:
+    """Display formatted error details in Streamlit UI."""
+    st.error(f"**Error details:** {error_type}: {error_message}")
+
 # Import DraftShift modules with comprehensive error handling
 try:
     if DEBUG_MODE:
@@ -77,25 +82,24 @@ except ImportError as e:
     if DEBUG_MODE:
         print(f"\n❌ IMPORT ERROR: {e}\n")
     st.error("❌ Failed to import DraftShift modules")
-    st.error(f"**Error details:** {type(e).__name__}: {str(e)}")
+    show_error_details(type(e).__name__, str(e))
     
     st.subheader("🔍 Diagnostic Information")
     path_entries = '\n'.join(f'  {i}. {p}' for i, p in enumerate(sys.path[:5], 1))
-    st.code(f"""
-Current working directory: {os.getcwd()}
+    diagnostic_info = f"""Current working directory: {os.getcwd()}
 Script location: {__file__}
 Repository root: {repo_root}
 Repository root in sys.path: {str(repo_root) in sys.path}
 
 Python sys.path (first 5 entries):
-{path_entries}
-    """, language="text")
+{path_entries}"""
+    st.code(diagnostic_info, language="text")
     
     st.subheader("💡 Troubleshooting Steps")
     st.markdown("""
 1. **Verify you're in the correct directory:**
-   - Run from repository root: `cd /path/to/saoriverse-console && streamlit run DraftShift/app.py`
-   - Or from DraftShift: `cd /path/to/saoriverse-console/DraftShift && streamlit run app.py`
+   - Run from repository root: `streamlit run DraftShift/app.py`
+   - Or from DraftShift: `cd DraftShift && streamlit run app.py`
 
 2. **Check that DraftShift/__init__.py exists:**
    - This file defines DraftShift as a Python package
@@ -111,9 +115,10 @@ Python sys.path (first 5 entries):
     
     st.stop()
 except Exception as e:
-    print(f"\n❌ UNEXPECTED ERROR: {type(e).__name__}: {e}\n")
+    if DEBUG_MODE:
+        print(f"\n❌ UNEXPECTED ERROR: {type(e).__name__}: {e}\n")
     st.error(f"❌ Unexpected error during import: {type(e).__name__}")
-    st.error(f"**Error details:** {str(e)}")
+    show_error_details(type(e).__name__, str(e))
     st.info("💡 This may indicate a problem with the DraftShift module code itself.")
     if DEBUG_MODE:
         import traceback
