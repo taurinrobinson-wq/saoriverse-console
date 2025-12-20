@@ -115,12 +115,30 @@ class EnhancedAffectParser:
 
                         if spacy_cli is not None:
                             logger.info("spaCy model not found; attempting to download en_core_web_sm...")
+                            download_success = False
+                            # Try regular download first
                             try:
                                 spacy_cli.download("en_core_web_sm")
                                 self.spacy_model = spacy.load("en_core_web_sm")
+                                download_success = True
                                 logger.info("✓ SpaCy en_core_web_sm downloaded and loaded")
+                            except PermissionError as perm_e:
+                                # Try with --user flag for permission-denied errors
+                                logger.info("Regular download failed with permission error; trying --user flag...")
+                                try:
+                                    import subprocess
+                                    subprocess.run([
+                                        "python", "-m", "spacy", "download",
+                                        "en_core_web_sm", "--user"
+                                    ], check=True, capture_output=True, timeout=120)
+                                    self.spacy_model = spacy.load("en_core_web_sm")
+                                    download_success = True
+                                    logger.info("✓ SpaCy en_core_web_sm downloaded (with --user) and loaded")
+                                except Exception as user_download_e:
+                                    logger.warning(f"Download with --user flag also failed: {user_download_e}")
                             except Exception as e2:
                                 logger.warning(f"Failed to download spaCy model: {e2}")
+                        
                         if self.spacy_model is None:
                             self.spacy_model = spacy.blank("en")
                             logger.warning("⚠️ SpaCy model not available; using blank 'en' pipeline")
