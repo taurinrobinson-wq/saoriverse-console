@@ -9,6 +9,16 @@ import sys
 import os
 from pathlib import Path
 
+# Pre-startup: Ensure spaCy model is available (for Streamlit Cloud compatibility)
+try:
+    from streamlit import cache_resource
+    # Import the pre-run hook to ensure spaCy model is downloaded before app loads
+    sys.path.insert(0, str(Path(__file__).parent / ".streamlit"))
+    from pre_run_hook import ensure_spacy_model
+    ensure_spacy_model()
+except Exception as e:
+    print(f"⚠️ Pre-run hook warning: {e}")
+
 # Verify Python version compatibility
 if sys.version_info >= (3, 13):
     print(f"❌ ERROR: Python {sys.version_info.major}.{sys.version_info.minor} is not supported")
