@@ -2,6 +2,10 @@ networks:
   velinor_network:
     driver: bridge
 
+volumes:
+  letsencrypt:
+  certbot-www:
+
 services:
   velinor:
     build:
@@ -23,9 +27,10 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
-
-  nginx-ssl:
+        - ./nginx.prod.conf:/etc/nginx/nginx.conf:ro
+        - letsencrypt:/etc/letsencrypt:ro
+        - certbot-www:/var/www/certbot
+        - /var/log/nginx:/var/log/nginx
     image: nginx:alpine
     container_name: nginx_ssl_proxy
     restart: always
@@ -34,6 +39,19 @@ services:
       - "443:443"
     networks:
       - velinor_network
+
+    certbot:
+      image: certbot/certbot:latest
+      container_name: certbot
+      restart: always
+      networks:
+        - velinor_network
+      volumes:
+        - letsencrypt:/etc/letsencrypt
+        - certbot-www:/var/www/certbot
+      entrypoint: ["/bin/sh", "-c", "trap exit TERM; while :; do sleep 12h & wait $${!}; certbot renew --webroot -w /var/www/certbot; done"]
+      depends_on:
+        - nginx-ssl
     volumes:
       - ./nginx.prod.conf:/etc/nginx/nginx.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
