@@ -1,5 +1,20 @@
 import streamlit as st
 from pathlib import Path
+import sys
+import os
+
+# Add parent directory to Python path to enable imports
+# This allows the app to run from both the repo root and the DraftShift directory
+repo_root = Path(__file__).resolve().parents[1]
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
+
+# Debug: Log Python path for troubleshooting
+if os.environ.get("DEBUG_DRAFTSHIFT"):
+    print(f"DraftShift Debug Info:")
+    print(f"  __file__: {__file__}")
+    print(f"  repo_root: {repo_root}")
+    print(f"  sys.path: {sys.path[:5]}")  # Show first 5 entries
 
 # MUST be first Streamlit call, before all other imports
 # Set favicon using the DraftShift logo
@@ -13,23 +28,39 @@ st.set_page_config(
     }
 )
 
-import os
 from dotenv import load_dotenv
-from DraftShift.core import (
-    split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES,
-    classify_sentence_structure, assess_overall_message, get_active_tools, get_tool_status
-)
-from DraftShift.llm_transformer import get_transformer
-from DraftShift.civility_scorer import get_scorer
-from DraftShift.risk_alerts import get_alert_generator
+
+# Import DraftShift modules
+try:
+    from DraftShift.core import (
+        split_sentences, detect_tone, shift_tone, map_slider_to_tone, TONES,
+        classify_sentence_structure, assess_overall_message, get_active_tools, get_tool_status
+    )
+    from DraftShift.llm_transformer import get_transformer
+    from DraftShift.civility_scorer import get_scorer
+    from DraftShift.risk_alerts import get_alert_generator
+except ImportError as e:
+    st.error(f"❌ Failed to import DraftShift modules: {e}")
+    st.error(f"Current working directory: {os.getcwd()}")
+    st.error(f"Python path includes: {repo_root}")
+    st.info("💡 Make sure you're running this app from the repository root or that all dependencies are installed.")
+    st.stop()
 
 # Locate .env at repo root if present, otherwise fallback to cwd
-repo_root = Path(__file__).resolve().parents[1]
 env_path = repo_root / "LiToneCheck.env"
 if not env_path.exists():
     env_path = Path.cwd() / "LiToneCheck.env"
-from dotenv import load_dotenv
+
+# Load environment variables
 load_dotenv(dotenv_path=str(env_path))
+
+# Debug: Show .env file status
+if os.environ.get("DEBUG_DRAFTSHIFT"):
+    if env_path.exists():
+        print(f"  .env loaded from: {env_path}")
+    else:
+        print(f"  .env not found at: {env_path}")
+        print(f"  Note: .env file is optional. App will work without it.")
 
 # Display logo and title
 col1, col2 = st.columns([1, 10])
@@ -41,27 +72,30 @@ with col1:
 with col2:
     st.title("Interactive Tone Shifter for Legal Correspondence")
 
-# Try to import the project's richer signal parser if available
+# Try to import the project's richer signal parser if available (optional dependency)
 HAS_PARSE_INPUT = False
 parse_input = None
 parse_error = None
+parse_error_details = []
+
 try:
     from src.emotional_os.core.signal_parser import parse_input as _parse_input
     parse_input = _parse_input
     HAS_PARSE_INPUT = True
-except Exception as e1:
+except ImportError as e1:
+    parse_error_details.append(f"src.emotional_os.core: {str(e1)}")
     try:
         from emotional_os.core.signal_parser import parse_input as _parse_input
         parse_input = _parse_input
         HAS_PARSE_INPUT = True
-    except Exception as e2:
-        try:
-            from src.emotional_os_core.signal_parser import parse_input as _parse_input
-            parse_input = _parse_input
-            HAS_PARSE_INPUT = True
-        except Exception as e3:
-            parse_error = f"Could not load signal parser from any known path"
-            HAS_PARSE_INPUT = False
+    except ImportError as e2:
+        parse_error_details.append(f"emotional_os.core: {str(e2)}")
+        # signal_parser is optional - the app will work without it
+        parse_error = "Signal parser module is not available (optional feature)"
+        HAS_PARSE_INPUT = False
+except Exception as e:
+    parse_error = f"Unexpected error loading signal parser: {type(e).__name__}: {str(e)}"
+    HAS_PARSE_INPUT = False
 
 # Get tool status for sidebar
 tool_status = get_tool_status()
@@ -92,10 +126,14 @@ with st.sidebar:
     st.subheader("🛠️ Tools & APIs")
     use_sapling = bool(os.environ.get("SAPLING_API_KEY"))
     st.write(f"**Sapling API:** {'✅ Configured' if use_sapling else '❌ Not configured'}")
-    st.write(f"**Signal Parser:** {'✅ Available' if HAS_PARSE_INPUT else '❌ Not available'}")
-    if parse_error:
-        with st.expander("Parser Error Details"):
-            st.warning(parse_error)
+    st.write(f"**Signal Parser:** {'✅ Available' if HAS_PARSE_INPUT else '⚠️ Not available (optional)'}")
+    if parse_error and os.environ.get("DEBUG_DRAFTSHIFT"):
+        with st.expander("Parser Debug Details (optional feature)"):
+            st.info(parse_error)
+            if parse_error_details:
+                st.write("Import attempts:")
+                for detail in parse_error_details:
+                    st.text(detail)
     
     # Show which NLP tools are active (will update after analysis)
     st.subheader("📊 NLP Engines")
