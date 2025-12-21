@@ -6,6 +6,7 @@ Verifies that NRC Lexicon + spaCy + Signal Parser all work together locally.
 
 import sys
 import time
+import pytest
 
 try:
     from parser.nrc_lexicon_loader import nrc
@@ -21,7 +22,7 @@ def test_local_mode():
     """Test complete local emotional processing."""
     if not LOCAL_MODE_AVAILABLE:
         print("⚠️ Skipping local mode tests (spaCy or other dependencies unavailable)")
-            pytest.skip("Skipping local mode tests (spaCy or other dependencies unavailable)")
+        pytest.skip("Skipping local mode tests (spaCy or other dependencies unavailable)")
 
     print("\n" + "="*80)
     print("🧪 FIRSTPERSON LOCAL MODE TESTING")
@@ -43,7 +44,7 @@ def test_local_mode():
 
     if not nrc.loaded or not semantic.loaded:
         print("\n❌ Infrastructure check FAILED")
-            pytest.fail("Infrastructure check failed: nrc or semantic not loaded")
+        pytest.fail("Infrastructure check failed: nrc or semantic not loaded")
 
     print("\n✅ Infrastructure ready\n")
 
@@ -146,12 +147,12 @@ def test_local_mode():
     # Check no API keys
     if os.environ.get('OPENAI_API_KEY'):
         print("  ❌ WARNING: OpenAI API key detected in environment")
-            pytest.fail("OPENAI_API_KEY present in environment")
+        pytest.fail("OPENAI_API_KEY present in environment")
     print("  ✓ No OpenAI API key (good)")
 
     if os.environ.get('SUPABASE_URL'):
         print("  ❌ WARNING: Supabase URL detected")
-            pytest.fail("SUPABASE_URL present in environment")
+        pytest.fail("SUPABASE_URL present in environment")
     print("  ✓ No cloud service URLs (good)")
 
     print("  ✓ All processing is completely local")
@@ -181,7 +182,7 @@ def test_local_mode():
     print("  3. Integrate into Streamlit UI")
     print("  4. Launch FirstPerson in Local Mode!")
 
-        assert True
+    assert True
 
 if __name__ == "__main__":
     try:
