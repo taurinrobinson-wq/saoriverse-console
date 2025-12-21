@@ -26,7 +26,7 @@ from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
-from feeling_system_config import (
+from .feeling_system_config import (
     FeelingSystemConfig,
     AffectiveMemoryConfig,
     get_default_config,
