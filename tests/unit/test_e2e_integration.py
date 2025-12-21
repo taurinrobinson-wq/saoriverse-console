@@ -40,12 +40,7 @@ def test_imports():
             results[name] = False
             print(f"✗ {name:40} FAILED: {e}")
     
-    if not all(results.values()):
-        print("\n❌ Import phase failed - cannot proceed")
-        return False
-    
-    print("\n✅ All imports successful\n")
-    return True
+    assert all(results.values()), "Import phase failed - cannot proceed"
 
 
 def test_signal_parsing():
@@ -83,10 +78,9 @@ def test_signal_parsing():
             print(f"  ✓ Parse successful")
         except Exception as e:
             print(f"  ✗ Parse failed: {e}")
-            return False
+            raise
     
-    print("\n✅ Signal parsing successful\n")
-    return True
+    assert True
 
 
 def test_response_generator():
@@ -114,14 +108,14 @@ def test_response_generator():
                 print(f"✓ Method {method} exists")
             else:
                 print(f"✗ Method {method} NOT FOUND")
-                return False
+                assert False, f"Method {method} NOT FOUND"
         
     except Exception as e:
         print(f"✗ Generator verification failed: {e}")
-        return False
-    
+        raise
+
     print("\n✅ Response generator verification successful\n")
-    return True
+    assert True
 
 
 def test_response_type_alternation():
@@ -158,12 +152,8 @@ def test_response_type_alternation():
         
         print(f"Turn {turn}: Expected {expected_type:12} | Got {response_type:12} {status}")
     
-    if not all_correct:
-        print("\n❌ Response type alternation FAILED")
-        return False
-    
+    assert all_correct, "Response type alternation FAILED"
     print("\n✅ Response type alternation working correctly\n")
-    return True
 
 
 def test_full_dialogue():
@@ -228,11 +218,11 @@ def test_full_dialogue():
             
         except Exception as e:
             print(f"✗ Turn {turn} failed: {e}")
-            return False
+            raise
     
     print(f"\n{'='*70}")
     print("✅ Full dialogue test completed successfully\n")
-    return True
+    assert True
 
 
 def main():
