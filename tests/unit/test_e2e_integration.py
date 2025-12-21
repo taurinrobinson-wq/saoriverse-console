@@ -106,7 +106,7 @@ def test_response_generator():
                        '_generate_closing_affirmation', '_generate_response']:
             if hasattr(generator, method):
                 print(f"✓ Method {method} exists")
-                else:
+            else:
                 print(f"✗ Method {method} NOT FOUND")
                 assert False, f"Method {method} NOT FOUND"
         
