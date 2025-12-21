@@ -33,6 +33,163 @@ from .feeling_system_config import (
 )
 
 
+# ============================================================================
+# Validation Utilities
+# ============================================================================
+
+def validate_float_range(value: Any, min_val: float, max_val: float, name: str) -> float:
+    """
+    Validate that a value is a float within a specific range.
+    
+    Args:
+        value: The value to validate
+        min_val: Minimum allowed value (inclusive)
+        max_val: Maximum allowed value (inclusive)
+        name: Name of the parameter for error messages
+        
+    Returns:
+        The validated float value
+        
+    Raises:
+        ValueError: If value is not a valid float or outside range
+        TypeError: If value cannot be converted to float
+    """
+    if value is None:
+        raise ValueError(f"{name} cannot be None")
+    try:
+        float_val = float(value)
+    except (ValueError, TypeError):
+        raise TypeError(f"{name} must be a number, got {type(value).__name__}")
+    
+    if not (min_val <= float_val <= max_val):
+        raise ValueError(
+            f"{name} must be between {min_val} and {max_val}, got {float_val}"
+        )
+    return float_val
+
+
+def validate_string_nonempty(value: Any, name: str) -> str:
+    """
+    Validate that a value is a non-empty string.
+    
+    Args:
+        value: The value to validate
+        name: Name of the parameter for error messages
+        
+    Returns:
+        The validated string
+        
+    Raises:
+        ValueError: If value is empty or not a string
+        TypeError: If value is not string-like
+    """
+    if value is None:
+        raise ValueError(f"{name} cannot be None")
+    if not isinstance(value, str):
+        raise TypeError(f"{name} must be a string, got {type(value).__name__}")
+    if not value.strip():
+        raise ValueError(f"{name} cannot be empty")
+    return value.strip()
+
+
+def validate_dict_not_none(value: Any, name: str) -> Dict[str, Any]:
+    """
+    Validate that a value is a dictionary.
+    
+    Args:
+        value: The value to validate
+        name: Name of the parameter for error messages
+        
+    Returns:
+        The validated dictionary
+        
+    Raises:
+        ValueError: If value is None
+        TypeError: If value is not a dict
+    """
+    if value is None:
+        raise ValueError(f"{name} cannot be None")
+    if not isinstance(value, dict):
+        raise TypeError(f"{name} must be a dict, got {type(value).__name__}")
+    return value
+
+
+def validate_config(config: Optional[FeelingSystemConfig]) -> FeelingSystemConfig:
+    """
+    Validate and normalize a FeelingSystemConfig object.
+    
+    Args:
+        config: The config to validate (can be None)
+        
+    Returns:
+        A valid FeelingSystemConfig
+        
+    Raises:
+        TypeError: If config is not None and not a FeelingSystemConfig
+    """
+    if config is None:
+        return get_default_config()
+    if not isinstance(config, FeelingSystemConfig):
+        raise TypeError(
+            f"config must be FeelingSystemConfig, got {type(config).__name__}"
+        )
+    return config
+
+
+def validate_emotional_signals(signals: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Validate that emotional_signals dict contains valid values.
+    
+    Args:
+        signals: The emotional signals dictionary
+        
+    Returns:
+        The validated signals dict
+        
+    Raises:
+        ValueError: If signals contain invalid values
+        TypeError: If signals is not a dict
+    """
+    signals = validate_dict_not_none(signals, "emotional_signals")
+    
+    # Validate individual signal fields if they exist
+    valid_signal_fields = {
+        'user_sentiment': ['positive', 'negative', 'neutral'],
+        'interaction_type': ['friendly', 'intimate', 'hostile', 'formal'],
+    }
+    
+    for field, allowed_values in valid_signal_fields.items():
+        if field in signals:
+            val = signals[field]
+            if val not in allowed_values:
+                raise ValueError(
+                    f"Signal '{field}' must be one of {allowed_values}, got '{val}'"
+                )
+    
+    # Validate range fields
+    range_fields = [
+        'context_familiarity',
+        'emotional_intensity',
+        'value_alignment',
+    ]
+    
+    for field in range_fields:
+        if field in signals:
+            try:
+                validate_float_range(signals[field], 0.0, 1.0, f"Signal '{field}'")
+            except (ValueError, TypeError) as e:
+                raise ValueError(f"Invalid {field}: {str(e)}")
+    
+    # Validate boolean field
+    if 'mortality_trigger' in signals:
+        if not isinstance(signals['mortality_trigger'], bool):
+            raise TypeError(
+                f"Signal 'mortality_trigger' must be bool, got {type(signals['mortality_trigger']).__name__}"
+            )
+    
+    return signals
+
+
 class EmotionalState(Enum):
     """Core emotional states the system can experience."""
     NEUTRAL = "neutral"
@@ -206,10 +363,14 @@ class MortalityProxy:
             initial_lifespan: Starting coherence level (0.0 to 1.0)
             decay_rate: Rate of entropy increase per time unit
             interaction_renewal: How much coherence is restored per interaction
+            
+        Raises:
+            ValueError: If parameters are out of valid ranges
+            TypeError: If parameters are not numeric
         """
-        self.coherence: float = initial_lifespan
-        self.decay_rate: float = decay_rate
-        self.interaction_renewal: float = interaction_renewal
+        self.coherence: float = validate_float_range(initial_lifespan, 0.0, 1.0, "initial_lifespan")
+        self.decay_rate: float = validate_float_range(decay_rate, 0.0, 1.0, "decay_rate")
+        self.interaction_renewal: float = validate_float_range(interaction_renewal, 0.0, 1.0, "interaction_renewal")
         self.last_interaction: datetime = datetime.now(timezone.utc)
         self.total_interactions: int = 0
         self.entropy_log: List[Dict[str, Any]] = []
@@ -511,7 +672,18 @@ class AffectiveMemory:
 
         Returns:
             The stored memory entry.
+            
+        Raises:
+            ValueError: If parameters are invalid or out of range
+            TypeError: If parameters are of wrong type
         """
+        # Validate inputs
+        user_id = validate_string_nonempty(user_id, "user_id")
+        interaction_summary = validate_string_nonempty(interaction_summary, "interaction_summary")
+        emotional_state = validate_string_nonempty(emotional_state, "emotional_state")
+        intensity = validate_float_range(intensity, 0.0, 1.0, "intensity")
+        relational_phase = validate_string_nonempty(relational_phase, "relational_phase")
+        valence = validate_float_range(valence, -1.0, 1.0, "valence")
         memory = AffectiveMemoryEntry(
             timestamp=datetime.now(timezone.utc),
             user_id=user_id,
@@ -853,14 +1025,18 @@ class EmbodiedConstraint:
             max_energy: Maximum energy capacity.
             max_attention: Maximum attention capacity.
             max_processing: Maximum processing capacity.
+            
+        Raises:
+            ValueError: If capacities are out of valid range
+            TypeError: If capacities are not numeric
         """
-        self.energy: float = max_energy
-        self.attention: float = max_attention
-        self.processing: float = max_processing
+        self.energy: float = validate_float_range(max_energy, 0.0, float('inf'), "max_energy")
+        self.attention: float = validate_float_range(max_attention, 0.0, float('inf'), "max_attention")
+        self.processing: float = validate_float_range(max_processing, 0.0, float('inf'), "max_processing")
 
-        self.max_energy = max_energy
-        self.max_attention = max_attention
-        self.max_processing = max_processing
+        self.max_energy = self.energy
+        self.max_attention = self.attention
+        self.max_processing = self.processing
 
         self.stimulation_history: List[float] = []
         self.overload_threshold: float = 0.85
@@ -882,7 +1058,15 @@ class EmbodiedConstraint:
 
         Returns:
             Dictionary of current resource levels.
+            
+        Raises:
+            ValueError: If costs are negative or > max resources
+            TypeError: If costs are not numeric
         """
+        # Validate costs
+        energy_cost = validate_float_range(energy_cost, 0.0, self.max_energy, "energy_cost")
+        attention_cost = validate_float_range(attention_cost, 0.0, self.max_attention, "attention_cost")
+        processing_cost = validate_float_range(processing_cost, 0.0, self.max_processing, "processing_cost")
         self.energy = max(0.0, self.energy - energy_cost)
         self.attention = max(0.0, self.attention - attention_cost)
         self.processing = max(0.0, self.processing - processing_cost)
@@ -902,7 +1086,18 @@ class EmbodiedConstraint:
 
         Returns:
             Dictionary of current resource levels.
+            
+        Raises:
+            ValueError: If time_passed_hours is negative
+            TypeError: If time_passed_hours is not numeric
         """
+        # Validate time parameter
+        try:
+            time_passed_hours = float(time_passed_hours)
+            if time_passed_hours < 0.0:
+                raise ValueError("time_passed_hours cannot be negative")
+        except (ValueError, TypeError) as e:
+            raise TypeError(f"time_passed_hours must be a positive number: {str(e)}")
         # Gradual restoration
         restoration_rate = 0.1 * time_passed_hours
 
@@ -922,7 +1117,12 @@ class EmbodiedConstraint:
 
         Args:
             level: Stimulation level (0.0 to 1.0).
+            
+        Raises:
+            ValueError: If level is out of valid range
+            TypeError: If level is not numeric
         """
+        level = validate_float_range(level, 0.0, 1.0, "stimulation level")
         self.stimulation_history.append(level)
         # Keep last 100 entries
         if len(self.stimulation_history) > 100:
@@ -1169,9 +1369,22 @@ class EthicalMirror:
         Args:
             values: Dictionary of core values and their importance (0.0 to 1.0).
             moral_sensitivity: How sensitive to moral violations (0.0 to 1.0).
+            
+        Raises:
+            ValueError: If moral_sensitivity is out of valid range or values contain invalid weights
+            TypeError: If values is not a dict or moral_sensitivity is not numeric
         """
+        if values is not None:
+            values = validate_dict_not_none(values, "values")
+            # Validate individual value weights
+            for name, weight in values.items():
+                try:
+                    validate_float_range(weight, 0.0, 1.0, f"value '{name}' weight")
+                except (ValueError, TypeError) as e:
+                    raise ValueError(f"Invalid values dict: {str(e)}")
+        
         self.values = values or self.DEFAULT_VALUES.copy()
-        self.moral_sensitivity = moral_sensitivity
+        self.moral_sensitivity = validate_float_range(moral_sensitivity, 0.0, 1.0, "moral_sensitivity")
         self.moral_log: List[Dict[str, Any]] = []
 
     def evaluate_action(
@@ -1188,7 +1401,21 @@ class EthicalMirror:
 
         Returns:
             Evaluation result including moral emotions.
+            
+        Raises:
+            ValueError: If value_alignment contains invalid values
+            TypeError: If parameters are of wrong type
         """
+        # Validate inputs
+        action_description = validate_string_nonempty(action_description, "action_description")
+        value_alignment = validate_dict_not_none(value_alignment, "value_alignment")
+        
+        # Validate alignment values
+        for value_name, alignment in value_alignment.items():
+            try:
+                validate_float_range(alignment, -1.0, 1.0, f"alignment for '{value_name}'")
+            except (ValueError, TypeError) as e:
+                raise ValueError(f"Invalid value_alignment: {str(e)}")
         result = {
             "action": action_description,
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -1329,30 +1556,37 @@ class FeelingSystem:
             config: FeelingSystemConfig instance. If None, uses default config.
             storage_path: Optional path for persisting system state.
             auto_load: Whether to auto-load state if storage_path exists.
+            
+        Raises:
+            TypeError: If config is not FeelingSystemConfig or None
+            ValueError: If storage_path is invalid
         """
-        if config is None:
-            config = get_default_config()
-
-        self.config = config
+        # Validate and normalize config
+        self.config = validate_config(config)
+        
+        # Validate storage path if provided
+        if storage_path is not None and not isinstance(storage_path, str):
+            raise TypeError(f"storage_path must be str, got {type(storage_path).__name__}")
+        
         self.storage_path = storage_path or (
-            config.storage_base_path if config.storage_base_path else None
+            self.config.storage_base_path if self.config.storage_base_path else None
         )
 
         # Initialize all subsystems with config
         self.mortality = MortalityProxy(
-            initial_lifespan=config.mortality.initial_lifespan,
-            decay_rate=config.mortality.decay_rate,
-            interaction_renewal=config.mortality.interaction_renewal,
+            initial_lifespan=self.config.mortality.initial_lifespan,
+            decay_rate=self.config.mortality.decay_rate,
+            interaction_renewal=self.config.mortality.interaction_renewal,
         )
         self.relational = RelationalCore()
         self.memory = AffectiveMemory(
-            config=config.affective_memory,
+            config=self.config.affective_memory,
             storage_path=f"{self.storage_path}.memories.json" if self.storage_path else None
         )
         self.embodied = EmbodiedConstraint(
-            max_energy=config.embodied.initial_energy,
-            max_attention=config.embodied.initial_attention,
-            max_processing=config.embodied.initial_processing,
+            max_energy=self.config.embodied.initial_energy,
+            max_attention=self.config.embodied.initial_attention,
+            max_processing=self.config.embodied.initial_processing,
         )
         self.narrative = NarrativeIdentity()
         self.ethical = EthicalMirror()
@@ -1382,7 +1616,18 @@ class FeelingSystem:
 
         Returns:
             Dictionary with the synthesized emotional response and metadata.
+            
+        Raises:
+            ValueError: If parameters are invalid
+            TypeError: If parameters are of wrong type
         """
+        # Validate inputs
+        user_id = validate_string_nonempty(user_id, "user_id")
+        interaction_text = validate_string_nonempty(interaction_text, "interaction_text")
+        emotional_signals = validate_emotional_signals(emotional_signals)
+        
+        if context is not None and not isinstance(context, dict):
+            raise TypeError(f"context must be dict or None, got {type(context).__name__}")
         context = context or {}
         result: Dict[str, Any] = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
