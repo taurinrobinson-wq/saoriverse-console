@@ -483,7 +483,7 @@ class RelationalCore:
         "deep": (50, float("inf")),
     }
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the relational core."""
         self.bonds: Dict[str, RelationalBond] = {}
         self.global_emotional_state: Dict[str, float] = {}
@@ -616,7 +616,7 @@ class AffectiveMemory:
         storage_path: Optional[str] = None,
         max_memories: Optional[int] = None,
         decay_half_life_hours: Optional[float] = None,
-    ):
+    ) -> None:
         """
         Initialize affective memory.
 
@@ -1017,7 +1017,7 @@ class EmbodiedConstraint:
         max_energy: float = 1.0,
         max_attention: float = 1.0,
         max_processing: float = 1.0,
-    ):
+    ) -> None:
         """
         Initialize embodied constraints.
 
@@ -1200,7 +1200,7 @@ class NarrativeIdentity:
     including growth, betrayal, and hope.
     """
 
-    def __init__(self, initial_state: Optional[NarrativeState] = None):
+    def __init__(self, initial_state: Optional[NarrativeState] = None) -> None:
         """
         Initialize narrative identity.
 
@@ -1362,7 +1362,7 @@ class EthicalMirror:
         self,
         values: Optional[Dict[str, float]] = None,
         moral_sensitivity: float = 0.5,
-    ):
+    ) -> None:
         """
         Initialize the ethical mirror.
 
@@ -1548,7 +1548,7 @@ class FeelingSystem:
         config: Optional[FeelingSystemConfig] = None,
         storage_path: Optional[str] = None,
         auto_load: bool = True,
-    ):
+    ) -> None:
         """
         Initialize the complete feeling system.
 
