@@ -27,7 +27,67 @@ class AffectParser:
         else:
             tone = "curious"
         
-        return {"valence": valence, "intensity": intensity, "tone": tone, "arousal": intensity}
+        # Compute mortality salience (implicit finitude signals)
+        mortality = self._compute_mortality_salience(text_lower, {
+            "valence": valence,
+            "intensity": intensity,
+        })
+
+        return {
+            "valence": valence,
+            "intensity": intensity,
+            "tone": tone,
+            "arousal": intensity,
+            "mortality_salience": mortality,
+        }
+
+    def _compute_mortality_salience(self, text_lower: str, affect: Dict[str, Any]) -> float:
+        """Lightweight rule-based mortality salience scorer.
+
+        Returns a float in [0.0, 1.0]. This is intentionally simple and
+        interpretable; it can be replaced later with an embedding/classifier.
+        """
+        # Lexicon buckets
+        temporal_risk = ["last", "soon", "forever", "end", "final", "won't be here", "one day", "last day"]
+        legacy_terms = ["legacy", "what matters", "remember", "remembered", "mean to me", "will matter"]
+        conditional_terms = [
+            "what if",
+            "if i die",
+            "if i'm not here",
+            "if i'm gone",
+            "if i don't",
+            "if i won't",
+            "i don't want to be here",
+            "don't want to be here",
+            "want to be gone",
+            "not be here",
+        ]
+        attachment_terms = ["i love", "so much", "wouldn't survive", "can't imagine", "can't live", "can't be without"]
+
+        score = 0.0
+
+        def count_matches(bucket):
+            return sum(1 for kw in bucket if kw in text_lower)
+
+        score += 0.22 * count_matches(temporal_risk)
+        score += 0.25 * count_matches(legacy_terms)
+        score += 0.27 * count_matches(conditional_terms)
+
+        # Attachment intensity should amplify when intensity is high
+        intensity = affect.get("intensity", 0.0)
+        attach_matches = count_matches(attachment_terms)
+        if intensity > 0.6:
+            score += 0.3 * attach_matches
+        else:
+            score += 0.12 * attach_matches
+
+        # Normalize / clamp
+        try:
+            score = max(0.0, min(1.0, float(score)))
+        except Exception:
+            score = 0.0
+
+        return score
 
 class ConversationMemory:
     """Track entities, themes, and emotional patterns across conversation turns."""
@@ -39,6 +99,9 @@ class ConversationMemory:
         self.themes = {}  # theme -> {frequency, last_seen, intensity_history}
         self.emotional_trajectory = []  # Valence over time
         self.repeated_patterns = []  # Themes that recur
+        # Mortality/finitude tracking
+        self.mortality_running = 0.0
+        self.mortality_history = []
         
     def record_turn(self, user_input: str, affect: Dict, theme: str, glyph_name: str = "") -> None:
         """Record a conversation turn with full metadata."""
@@ -64,6 +127,18 @@ class ConversationMemory:
         # Detect if theme is recurring
         if self.themes[theme]["frequency"] > 1:
             self.repeated_patterns.append(theme)
+
+        # Persist mortality salience for this turn (if present)
+        mortality = 0.0
+        try:
+            mortality = float(affect.get("mortality_salience", 0.0))
+        except Exception:
+            mortality = 0.0
+
+        self.mortality_history.append(mortality)
+        # Exponential smoothing for conversation-level mortality
+        alpha = 0.7
+        self.mortality_running = (self.mortality_running * alpha) + (mortality * (1 - alpha))
     
     def _extract_entities(self, text: str) -> List[str]:
         """Extract named entities and people references."""
@@ -104,6 +179,19 @@ class ConversationMemory:
         # Detect recurring themes
         recurring = [t for t, data in self.themes.items() if data["frequency"] > 1]
         
+        # Mortality trend detection (compare recent window to early average)
+        mortality_trend = "stable"
+        try:
+            if len(self.mortality_history) >= 6:
+                recent_avg = sum(self.mortality_history[-3:]) / 3
+                early_avg = sum(self.mortality_history[:3]) / 3
+                if recent_avg > early_avg + 0.1:
+                    mortality_trend = "rising"
+                elif recent_avg < early_avg - 0.1:
+                    mortality_trend = "falling"
+        except Exception:
+            mortality_trend = "stable"
+
         return {
             "has_context": True,
             "num_turns": len(self.turns),
@@ -112,6 +200,8 @@ class ConversationMemory:
             "emotional_trend": emotional_trend,
             "recent_valence": self.emotional_trajectory[-1] if self.emotional_trajectory else 0,
             "repeated_patterns": list(set(self.repeated_patterns)),
+            "mortality_salience": self.mortality_running,
+            "mortality_trend": mortality_trend,
         }
     
     def get_frequency_reflection(self, theme: str) -> Optional[str]:
@@ -155,6 +245,16 @@ class FirstPersonOrchestrator:
         # Check for frequency reflection
         frequency_reflection = self.memory.get_frequency_reflection(theme)
         
+        # Check for safety signals (high mortality + negative valence)
+        safety_signal = False
+        try:
+            mortality = affect.get("mortality_salience", 0.0)
+            valence = affect.get("valence", 0.0)
+            if mortality > 0.6 and valence < -0.6:
+                safety_signal = True
+        except Exception:
+            pass
+        
         return {
             "detected_theme": theme, 
             "theme_frequency": self.theme_frequency, 
@@ -162,6 +262,7 @@ class FirstPersonOrchestrator:
             "affect_analysis": affect,
             "memory_context": memory_context,
             "frequency_reflection": frequency_reflection,
+            "safety_signal": safety_signal,
         }
 
     def _extract_theme(self, text: str) -> str:
@@ -181,6 +282,10 @@ class FirstPersonOrchestrator:
         memory_context = self.memory.get_memory_context()
         frequency_reflection = self.memory.get_frequency_reflection(theme)
         
+        # Extract mortality signals
+        mortality = affect.get("mortality_salience", 0.0)
+        valence = affect.get("valence", 0.0)
+        
         # Build response with memory awareness
         if affect["valence"] < -0.5:
             opening = f"I hear the weight of {theme}."
@@ -194,11 +299,28 @@ class FirstPersonOrchestrator:
         if frequency_reflection and len(self.memory.turns) > 1:
             middle = frequency_reflection + " " + middle
         
-        # Add emotional trajectory awareness
-        if memory_context.get("emotional_trend") == "worsening" and len(self.memory.turns) > 2:
-            middle += " I'm noticing the weight increasing. What's happening?"
-        elif memory_context.get("emotional_trend") == "improving" and len(self.memory.turns) > 2:
-            middle += " I'm also noticing a shift. What's helping?"
+        # Apply mortality-informed response shaping
+        if mortality > 0.6:
+            if valence < -0.6:
+                # High mortality + high negativity: safety-focused
+                middle = (
+                    "I'm noticing something in what you're saying — a weight around finitude, around loss. "
+                    "That's important to name. Are you safe right now? What would help you feel grounded in this moment?"
+                )
+                opening = "That matters, and I want to make sure you're okay."
+            else:
+                # High mortality + neutral/positive: meaning-oriented
+                middle = (
+                    "I'm hearing something about what matters to you, and what you're afraid of losing. "
+                    "That clarity — knowing what's precious — that's a kind of wisdom. What's the most important part of that?"
+                )
+                opening = "There's meaning in what you're sensing."
+        else:
+            # Add emotional trajectory awareness (low mortality)
+            if memory_context.get("emotional_trend") == "worsening" and len(self.memory.turns) > 2:
+                middle += " I'm noticing the weight increasing. What's happening?"
+            elif memory_context.get("emotional_trend") == "improving" and len(self.memory.turns) > 2:
+                middle += " I'm also noticing a shift. What's helping?"
         
         closing = "What do you need?"
         
