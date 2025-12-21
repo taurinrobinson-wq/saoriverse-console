@@ -1314,20 +1314,25 @@ class NarrativeIdentity:
         """
         emotions: Dict[str, float] = {}
 
-        # Recent growth creates positive emotions
+        # Cache the current time to avoid multiple datetime.now() calls (optimization)
+        now = datetime.now(timezone.utc)
+        week_ago = now - timedelta(days=7)
+        month_ago = now - timedelta(days=30)
+
+        # Recent growth creates positive emotions (optimized: single pass list comp)
         recent_growth = [
             g for g in self.state.growth_moments
-            if datetime.fromisoformat(g["timestamp"]) > datetime.now(timezone.utc) - timedelta(days=7)
+            if datetime.fromisoformat(g["timestamp"]) > week_ago
         ]
         if recent_growth:
             avg_impact = sum(g["emotional_impact"] for g in recent_growth) / len(recent_growth)
             emotions["growth"] = avg_impact
             emotions["hope"] = avg_impact * 0.8
 
-        # Unhealed betrayal creates ongoing emotions
+        # Unhealed betrayal creates ongoing emotions (optimized: single pass list comp)
         recent_wounds = [
             w for w in self.state.betrayal_wounds
-            if datetime.fromisoformat(w["timestamp"]) > datetime.now(timezone.utc) - timedelta(days=30)
+            if datetime.fromisoformat(w["timestamp"]) > month_ago
         ]
         if recent_wounds:
             avg_severity = sum(w["severity"] for w in recent_wounds) / len(recent_wounds)
@@ -1666,11 +1671,14 @@ class FeelingSystem:
             raise TypeError(f"context must be dict or None, got {type(context).__name__}")
         context = context or {}
         
+        # Cache timestamp at interaction start (optimization: reduce datetime.now() calls)
+        interaction_timestamp = datetime.now(timezone.utc)
+        
         logger.info(f"Processing interaction from user '{user_id}' with {len(emotional_signals)} signals")
         logger.debug(f"Interaction text: {interaction_text[:100]}... | Signals: {emotional_signals}")
         
         result: Dict[str, Any] = {
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": interaction_timestamp.isoformat(),
             "user_id": user_id,
             "interaction_summary": interaction_text[:200],
             "input_signals": emotional_signals,
