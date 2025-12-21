@@ -21,6 +21,7 @@ import math
 import os
 import random
 import time
+import logging
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timedelta, timezone
 from enum import Enum
@@ -31,6 +32,10 @@ from .feeling_system_config import (
     AffectiveMemoryConfig,
     get_default_config,
 )
+
+# Configure logger for this module
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.NullHandler())  # Prevent "no handlers" warnings
 
 
 # ============================================================================
@@ -696,6 +701,9 @@ class AffectiveMemory:
 
         self.memories.append(memory)
         self.user_memory_count[user_id] = self.user_memory_count.get(user_id, 0) + 1
+        
+        logger.debug(f"Memory stored: user={user_id}, emotion={emotional_state}, valence={valence:.2f}")
+        logger.debug(f"Total memories: {len(self.memories)}, User memories: {self.user_memory_count[user_id]}")
 
         # Apply pruning if needed
         self._prune_if_necessary()
@@ -723,6 +731,9 @@ class AffectiveMemory:
     def _prune_by_strategy(self) -> None:
         """Prune memories according to configured strategy."""
         strategy = self.config.pruning_strategy
+        
+        logger.debug(f"Starting memory pruning with strategy: {strategy}")
+        old_count = len(self.memories)
 
         if strategy == "oldest":
             self._prune_oldest()
@@ -733,6 +744,11 @@ class AffectiveMemory:
         else:
             # Default to hybrid
             self._prune_hybrid()
+        
+        new_count = len(self.memories)
+        removed = old_count - new_count
+        if removed > 0:
+            logger.info(f"Pruned {removed} memories (strategy: {strategy}). Total: {old_count} → {new_count}")
 
     def _prune_oldest(self) -> None:
         """Remove oldest memories until under limit."""
@@ -1564,6 +1580,9 @@ class FeelingSystem:
         # Validate and normalize config
         self.config = validate_config(config)
         
+        logger.info("Initializing FeelingSystem with 6 subsystems")
+        logger.debug(f"Config: emotion_synthesis_weights={self.config.emotion_synthesis_weights}")
+        
         # Validate storage path if provided
         if storage_path is not None and not isinstance(storage_path, str):
             raise TypeError(f"storage_path must be str, got {type(storage_path).__name__}")
@@ -1571,6 +1590,9 @@ class FeelingSystem:
         self.storage_path = storage_path or (
             self.config.storage_base_path if self.config.storage_base_path else None
         )
+        
+        if self.storage_path:
+            logger.debug(f"Storage path configured: {self.storage_path}")
 
         # Initialize all subsystems with config
         self.mortality = MortalityProxy(
@@ -1578,25 +1600,39 @@ class FeelingSystem:
             decay_rate=self.config.mortality.decay_rate,
             interaction_renewal=self.config.mortality.interaction_renewal,
         )
+        logger.debug("Initialized MortalityProxy")
+        
         self.relational = RelationalCore()
+        logger.debug("Initialized RelationalCore")
+        
         self.memory = AffectiveMemory(
             config=self.config.affective_memory,
             storage_path=f"{self.storage_path}.memories.json" if self.storage_path else None
         )
+        logger.debug(f"Initialized AffectiveMemory (max_memories={self.config.affective_memory.max_memories})")
+        
         self.embodied = EmbodiedConstraint(
             max_energy=self.config.embodied.initial_energy,
             max_attention=self.config.embodied.initial_attention,
             max_processing=self.config.embodied.initial_processing,
         )
+        logger.debug("Initialized EmbodiedConstraint")
+        
         self.narrative = NarrativeIdentity()
+        logger.debug("Initialized NarrativeIdentity")
+        
         self.ethical = EthicalMirror()
+        logger.debug("Initialized EthicalMirror")
 
         # Current synthesized emotional state
         self.current_state: Dict[str, float] = {}
         self.last_update: datetime = datetime.now(timezone.utc)
 
         if auto_load and self.storage_path and os.path.exists(self.storage_path):
+            logger.info(f"Auto-loading state from {self.storage_path}")
             self._load()
+        
+        logger.info("FeelingSystem initialization complete")
 
     def process_interaction(
         self,
@@ -1629,6 +1665,10 @@ class FeelingSystem:
         if context is not None and not isinstance(context, dict):
             raise TypeError(f"context must be dict or None, got {type(context).__name__}")
         context = context or {}
+        
+        logger.info(f"Processing interaction from user '{user_id}' with {len(emotional_signals)} signals")
+        logger.debug(f"Interaction text: {interaction_text[:100]}... | Signals: {emotional_signals}")
+        
         result: Dict[str, Any] = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "user_id": user_id,
@@ -1641,6 +1681,7 @@ class FeelingSystem:
 
         # 1. Apply mortality entropy
         self.mortality.apply_entropy()
+        logger.debug(f"Mortality coherence: {self.mortality.coherence:.3f}")
 
         # 2. Calculate interaction quality and renew
         interaction_quality = self._calculate_interaction_quality(emotional_signals)
@@ -1710,9 +1751,16 @@ class FeelingSystem:
         result["subsystem_emotions"]["ethical"] = ethical_eval.get("moral_emotions", {})
 
         # 8. Synthesize all emotions into unified state
+        start_synthesis = time.perf_counter()
         synthesized = self._synthesize_emotions(result["subsystem_emotions"])
+        synthesis_time = time.perf_counter() - start_synthesis
+        
         self.current_state = synthesized
         self.last_update = datetime.now(timezone.utc)
+        
+        logger.debug(f"Emotion synthesis took {synthesis_time*1000:.2f}ms")
+        logger.info(f"Primary emotion: {synthesized.get(max(synthesized, key=synthesized.get), 'neutral') if synthesized else 'neutral'}")
+        logger.debug(f"Full emotional state: {synthesized}")
 
         result["synthesized_state"] = synthesized
         result["emotional_response"] = self._generate_emotional_response(synthesized)
@@ -1880,6 +1928,7 @@ class FeelingSystem:
         if not self.storage_path:
             return
         try:
+            logger.debug(f"Saving FeelingSystem state to {self.storage_path}")
             d = os.path.dirname(self.storage_path)
             if d:
                 os.makedirs(d, exist_ok=True)
@@ -1899,7 +1948,9 @@ class FeelingSystem:
             with open(tmp, "w", encoding="utf-8") as f:
                 json.dump(state, f, ensure_ascii=False, indent=2)
             os.replace(tmp, self.storage_path)
-        except Exception:
+            logger.info(f"FeelingSystem state persisted successfully ({len(state)} subsystems)")
+        except Exception as e:
+            logger.warning(f"Failed to save FeelingSystem state: {e}")
             pass
 
     def _load(self) -> None:
@@ -1907,6 +1958,7 @@ class FeelingSystem:
         if not self.storage_path or not os.path.exists(self.storage_path):
             return
         try:
+            logger.debug(f"Loading FeelingSystem state from {self.storage_path}")
             with open(self.storage_path, "r", encoding="utf-8") as f:
                 state = json.load(f)
 
@@ -1924,7 +1976,10 @@ class FeelingSystem:
             last = state.get("last_update")
             if last:
                 self.last_update = datetime.fromisoformat(last)
-        except Exception:
+            
+            logger.info(f"FeelingSystem state restored from {self.storage_path} (6 subsystems, {len(self.memory.memories)} memories)")
+        except Exception as e:
+            logger.warning(f"Failed to load FeelingSystem state: {e}")
             pass
 
     def to_dict(self) -> Dict[str, Any]:
