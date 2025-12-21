@@ -1,9 +1,10 @@
 """Compatibility shim exposing relational memory helpers at `core.relational_memory`.
 
-For legacy imports, forward to the implementation in `src.relational_memory`.
+For legacy imports, forward to the authoritative top-level `relational_memory`
+module so callers and tests share a single in-memory store instance.
 """
 
-from src.relational_memory import (
+from relational_memory import (
     RelationalMemoryCapsule,
     store_capsule,
     retrieve_capsule_by_tag,

@@ -25,15 +25,9 @@ class ClarificationTrace:
 		trigger = str(uuid.uuid4())
 		corrected_intent = ctx.get("inferred_intent")
 
-		# Try DB insert first
-		try:
-			ok = self._store.insert(trigger, original or "", corrected_intent, ctx, timeout=float(os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", 0.5)))
-			if ok:
-				return True
-		except Exception:
-			ok = False
-
-		# Fallback to JSONL
+		# If a JSONL store_path was provided, prefer writing to it directly
+		# (tests construct ClarificationTrace with a JSONL path when they
+		# expect JSONL-based storage).
 		if self.store_path:
 			rec = {
 				"trigger": trigger,
@@ -41,6 +35,8 @@ class ClarificationTrace:
 				"user_clarification": clarification[:1000],
 				"corrected_intent": corrected_intent,
 				"context": ctx,
+				"conversation_id": ctx.get("conversation_id"),
+				"user_id": ctx.get("user_id"),
 			}
 			self.store_path.parent.mkdir(parents=True, exist_ok=True)
 			with open(self.store_path, "a", encoding="utf8") as f:
@@ -51,10 +47,34 @@ class ClarificationTrace:
 				pass
 			return True
 
+		# Try DB insert first if no JSONL path provided
+		try:
+			ok = self._store.insert(trigger, original or "", corrected_intent, ctx, timeout=float(os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", 0.5)))
+			if ok:
+				return True
+		except Exception:
+			ok = False
+
 		return False
 
 	def lookup(self, original_input: str) -> Optional[Dict[str, Any]]:
-		# Check DB first
+		# If a JSONL path was provided, prefer reading that (tests create
+		# ClarificationTrace with a JSONL path and expect JSONL-only behavior).
+		if self.store_path:
+			if self.store_path.exists():
+				for ln in reversed(self.store_path.read_text(encoding="utf8").splitlines()):
+					if not ln.strip():
+						continue
+					try:
+						rec = json.loads(ln)
+					except Exception:
+						continue
+					if rec.get("original_input") and rec.get("original_input").lower().strip() == original_input.lower().strip():
+						return rec
+			# If JSONL was provided but no match, do not fall back to DB
+			return None
+
+		# Otherwise, check DB first (legacy/default behavior)
 		try:
 			conn = self._store
 			# direct DB access
@@ -73,17 +93,5 @@ class ClarificationTrace:
 					return {"trigger": tr, "original_input": orig, "corrected_intent": corr, "context": ctx}
 		except Exception:
 			pass
-
-		# Check JSONL
-		if self.store_path and self.store_path.exists():
-			for ln in reversed(self.store_path.read_text(encoding="utf8").splitlines()):
-				if not ln.strip():
-					continue
-				try:
-					rec = json.loads(ln)
-				except Exception:
-					continue
-				if rec.get("original_input") and rec.get("original_input").lower().strip() == original_input.lower().strip():
-					return rec
 
 		return None

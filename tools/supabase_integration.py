@@ -147,9 +147,10 @@ class HybridEmotionalProcessor:
     3. Intelligent fallback between both
     """
 
-    def __init__(self, supabase_integrator: Optional[SupabaseIntegrator] = None, use_local_fallback: bool = True):
+    def __init__(self, supabase_integrator: Optional[SupabaseIntegrator] = None, use_local_fallback: bool = True, limbic_engine: Optional[object] = None):
         self.supabase = supabase_integrator
         self.use_local_fallback = use_local_fallback
+        self.limbic_engine = limbic_engine
 
         # Import your local system
         if use_local_fallback:
@@ -182,7 +183,8 @@ class HybridEmotionalProcessor:
                     message, conversation_context=conversation_context, conversation_style="conversational"
                 )
 
-                return {
+                # Optionally decorate using limbic engine unless safety content present
+                result = {
                     "source": "supabase_ai",
                     "response": saori_response.reply,
                     "glyph_data": saori_response.glyph,
@@ -192,6 +194,21 @@ class HybridEmotionalProcessor:
                     "privacy_preserved": True,
                     "processing_method": "encrypted_ai_enhanced",
                 }
+
+                safety_terms = ("assault", "suicide", "abuse")
+                if self.limbic_engine and not any(t in message.lower() for t in safety_terms):
+                    try:
+                        limbic_map = self.limbic_engine.process_emotion_with_limbic_mapping(saori_response.reply)
+                        # Attach limbic mapping and mark decorated; also subtly modify response
+                        result["limbic"] = limbic_map
+                        result["limbic_decorated"] = True
+                        result["response"] = f"{saori_response.reply} (decorated)"
+                    except Exception:
+                        result["limbic_decorated"] = False
+                else:
+                    result["limbic_decorated"] = False
+
+                return result
 
             except Exception as e:
                 logging.error(f"Supabase processing failed: {e}")

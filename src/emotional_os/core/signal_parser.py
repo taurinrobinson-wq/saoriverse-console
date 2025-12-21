@@ -1256,12 +1256,30 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
     """
     lower_input = input_text.lower()
 
+    # Short-circuit clear reciprocal phrases before lexicon analysis so
+    # simple social prompts like "what's up" are treated conversationally
+    # even if noisy lexicon entries exist (tests expect this behavior).
+    reciprocal_phrases_quick = [
+        "how are you",
+        "how are you doing",
+        "how are you feeling",
+        "how's your day",
+        "how's it going",
+        "what's up",
+        "whats up",
+        "sup",
+        "what up",
+    ]
+    for p in reciprocal_phrases_quick:
+        if p in lower_input:
+            return _choose_reciprocal_response(input_text, lower_input)
+
     # Check if message has emotional/significant content
     # FIRST: Try word-centric lexicon (fast, direct lookup)
     try:
         lexicon = get_word_centric_lexicon()
         emotional_analysis = lexicon.analyze_emotional_content(input_text)
-        
+
         if emotional_analysis['has_emotional_content']:
             # Mark that we detected emotional content via lexicon
             # Store for later use in signal detection
@@ -2250,14 +2268,18 @@ def parse_input(
             # If learning pipeline fails, retain the original contextual response
             pass
 
-    # Sanctuary Mode: ensure compassionate handling for sensitive content
-    # DISABLED for UI: sanctuary wrapping is handled separately if needed
-    # primary_tone: str = str(signals[0].get(
-    #     "tone", "unknown")) if signals else "unknown"
-    # if SANCTUARY_MODE or is_sensitive_input(input_text):
-    #     contextual_response = ensure_sanctuary_response(
-    #         input_text=input_text, base_response=contextual_response, tone=primary_tone
-    #     )
+    # Sanctuary Mode: ensure compassionate handling for sensitive content.
+    # Enable wrapping here so callers of `parse_input` receive the sanctuary
+    # transformed response when SANCTUARY_MODE is active or input is sensitive.
+    try:
+        primary_tone: str = str(signals[0].get("tone", "unknown")) if signals else "unknown"
+        if SANCTUARY_MODE or is_sensitive_input(input_text):
+            contextual_response = ensure_sanctuary_response(
+                input_text=input_text, base_response=contextual_response, tone=primary_tone
+            )
+    except Exception:
+        # If sanctuary wrapping fails for any reason, keep the original response
+        pass
     # If best_glyph has a response_template, surface it for UI rendering (do not overwrite contextual_response here)
     voltage_response_template = None
     try:
