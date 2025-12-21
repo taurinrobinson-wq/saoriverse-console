@@ -453,6 +453,8 @@ class AffectiveMemory:
         self,
         config: Optional[AffectiveMemoryConfig] = None,
         storage_path: Optional[str] = None,
+        max_memories: Optional[int] = None,
+        decay_half_life_hours: Optional[float] = None,
     ):
         """
         Initialize affective memory.
@@ -460,10 +462,23 @@ class AffectiveMemory:
         Args:
             config: AffectiveMemoryConfig instance. If None, uses default config.
             storage_path: Optional path for persisting memories.
+            max_memories: (deprecated) Use config parameter instead.
+            decay_half_life_hours: (deprecated) Use config parameter instead.
         """
         if config is None:
             default_config = get_default_config()
             config = default_config.affective_memory
+            
+            # Backward compatibility: if old-style parameters provided, create custom config
+            if max_memories is not None or decay_half_life_hours is not None:
+                config = AffectiveMemoryConfig(
+                    max_memories=max_memories or config.max_memories,
+                    decay_half_life_hours=decay_half_life_hours or config.decay_half_life_hours,
+                    max_memories_per_user=config.max_memories_per_user,
+                    min_age_hours_for_pruning=config.min_age_hours_for_pruning,
+                    pruning_strategy=config.pruning_strategy,
+                    aggressive_pruning_threshold=config.aggressive_pruning_threshold,
+                )
 
         self.memories: List[AffectiveMemoryEntry] = []
         self.config = config
@@ -655,7 +670,7 @@ class AffectiveMemory:
         for memory in self.memories:
             hours_elapsed = (now - memory.timestamp).total_seconds() / 3600.0
             # Exponential decay with half-life
-            decay = math.pow(0.5, hours_elapsed / self.config.decay_half_life)
+            decay = math.pow(0.5, hours_elapsed / self.config.decay_half_life_hours)
             memory.decay_factor = decay
 
     def reinforce_memory(
@@ -790,8 +805,9 @@ class AffectiveMemory:
         """Serialize the affective memory state."""
         return {
             "memories": [m.to_dict() for m in self.memories],
-            "max_memories": self.max_memories,
-            "decay_half_life": self.decay_half_life,
+            "max_memories": self.config.max_memories,
+            "decay_half_life": self.config.decay_half_life_hours,
+            "pruned_count": self.pruned_count,
         }
 
     @classmethod
@@ -1334,9 +1350,9 @@ class FeelingSystem:
             storage_path=f"{self.storage_path}.memories.json" if self.storage_path else None
         )
         self.embodied = EmbodiedConstraint(
-            initial_energy=config.embodied.initial_energy,
-            initial_attention=config.embodied.initial_attention,
-            initial_processing=config.embodied.initial_processing,
+            max_energy=config.embodied.initial_energy,
+            max_attention=config.embodied.initial_attention,
+            max_processing=config.embodied.initial_processing,
         )
         self.narrative = NarrativeIdentity()
         self.ethical = EthicalMirror()
