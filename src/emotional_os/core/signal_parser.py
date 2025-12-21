@@ -25,6 +25,20 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any, Callable, cast, Dict, List, Optional, Union
 
+
+class Signal(dict):
+    """Dict-like signal object that is hashable so callers can use sets.
+
+    Behaves like a normal dict but implements a stable __hash__ based on
+    its items to allow `set(signals)` in tests and logging.
+    """
+    def __hash__(self) -> int:  # pragma: no cover - trivial
+        try:
+            # Sort items for stable ordering
+            return hash(tuple(sorted(self.items())))
+        except Exception:
+            return hash(id(self))
+
 # Pre-declare optionally-imported symbols with permissive Any to avoid mypy assignment
 # conflicts when falling back to None in ImportError handlers.
 get_poetic_engine: Any = None
@@ -227,14 +241,14 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                     # (This will depend on how we want to map them)
                     gates = word_data.get('gates', [])
                     if gates:
-                        matched_signals.append({
-                            "keyword": word,
-                            "signal": signal_name,
-                            "voltage": "high" if word_data.get('frequency', 0) > 100 else "medium",
-                            "tone": signal_name,
-                            "frequency": word_data.get('frequency', 0),
-                            "gates": gates,
-                        })
+                        matched_signals.append(Signal({
+                                "keyword": word,
+                                "signal": signal_name,
+                                "voltage": "high" if word_data.get('frequency', 0) > 100 else "medium",
+                                "tone": signal_name,
+                                "frequency": word_data.get('frequency', 0),
+                                "gates": gates,
+                            }))
             
             if matched_signals:
                 logger.info(f"Lexicon-based signal detection found {len(matched_signals)} signals")
@@ -249,7 +263,12 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
         enhanced_routing = enhance_gate_routing(
             [], input_text)  # Start with empty existing signals
         if enhanced_routing["enhanced_signals"]:
-            matched_signals.extend(enhanced_routing["enhanced_signals"])
+            # Ensure enhanced signals are wrapped as Signal instances
+            for s in enhanced_routing["enhanced_signals"]:
+                if isinstance(s, dict):
+                    matched_signals.append(Signal(s))
+                else:
+                    matched_signals.append(s)
             logger.info(
                 f"Enhanced NLP detected {len(enhanced_routing['enhanced_signals'])} signals")
     except ImportError:
@@ -273,17 +292,15 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
         if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
             if not isinstance(metadata, dict):
                 metadata = {}
-            matched_signals.append(
-                {
-                    "keyword": keyword,
-                    "signal": metadata.get("signal", "unknown"),
-                    "voltage": metadata.get("voltage", "medium"),
-                    "tone": metadata.get("tone", "unknown"),
-                }
-            )
+            matched_signals.append(Signal({
+                "keyword": keyword,
+                "signal": metadata.get("signal", "unknown"),
+                "voltage": metadata.get("voltage", "medium"),
+                "tone": metadata.get("tone", "unknown"),
+            }))
 
     # Fourth pass: Use NRC lexicon if available for richer emotion detection
-    if HAS_NRC and nrc and nrc.loaded:
+    if HAS_NRC and nrc and getattr(nrc, "loaded", False):
         nrc_emotions = nrc.analyze_text(input_text)
         if nrc_emotions and not matched_signals:
             # Map NRC emotions to signal voltages
@@ -308,8 +325,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
             top_emotion = max(nrc_emotions.items(), key=lambda x: x[1])[0]
             if top_emotion in nrc_to_signal:
                 signal, voltage, tone = nrc_to_signal[top_emotion]
-                matched_signals.append(
-                    {"keyword": top_emotion, "signal": signal, "voltage": voltage, "tone": tone})
+                matched_signals.append(Signal({"keyword": top_emotion, "signal": signal, "voltage": voltage, "tone": tone}))
 
     # Fifth pass: fuzzy matching for unmatched single words
     if not matched_signals:
@@ -321,14 +337,12 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                     metadata = signal_map.get(fuzzy_key, {})
                     if not isinstance(metadata, dict):
                         metadata = {}
-                    matched_signals.append(
-                        {
-                            "keyword": fuzzy_key,
-                            "signal": metadata.get("signal", "unknown"),
-                            "voltage": metadata.get("voltage", "medium"),
-                            "tone": metadata.get("tone", "unknown"),
-                        }
-                    )
+                    matched_signals.append(Signal({
+                        "keyword": fuzzy_key,
+                        "signal": metadata.get("signal", "unknown"),
+                        "voltage": metadata.get("voltage", "medium"),
+                        "tone": metadata.get("tone", "unknown"),
+                    }))
                     break  # Use first good fuzzy match
 
     return matched_signals

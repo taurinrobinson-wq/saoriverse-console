@@ -12,3 +12,8 @@ def random_closing_prompt(seed: int = None) -> str:
 	if seed is not None:
 		random.seed(seed)
 	return random.choice(CLOSING_PROMPTS)
+
+
+def get_closing_prompt(seed: int = None) -> str:
+	"""Backward-compatible alias expected by other modules/tests."""
+	return random_closing_prompt(seed=seed)
