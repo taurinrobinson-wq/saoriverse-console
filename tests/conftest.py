@@ -1,3 +1,16 @@
+import sys
+import os
+from pathlib import Path
+
+
+def pytest_configure(config):
+    """Ensure repository root and `src` directory are on sys.path for test imports."""
+    repo_root = Path(__file__).resolve().parents[1]
+    src_dir = repo_root / "src"
+    # Prefer repository root first so top-level packages (emotional_os/) are used
+    sys.path.insert(0, str(repo_root))
+    # Then allow imports from `src/` for packaged code
+    sys.path.insert(1, str(src_dir))
 """Pytest configuration for FirstPerson test suite."""
 
 import os

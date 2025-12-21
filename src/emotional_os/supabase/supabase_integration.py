@@ -1,0 +1,1 @@
+from emotional_os.supabase.supabase_integration import *
