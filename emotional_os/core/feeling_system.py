@@ -26,6 +26,12 @@ from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
+from feeling_system_config import (
+    FeelingSystemConfig,
+    AffectiveMemoryConfig,
+    get_default_config,
+)
+
 
 class EmotionalState(Enum):
     """Core emotional states the system can experience."""
@@ -445,22 +451,25 @@ class AffectiveMemory:
 
     def __init__(
         self,
-        max_memories: int = 1000,
-        decay_half_life_hours: float = 168.0,  # 1 week
+        config: Optional[AffectiveMemoryConfig] = None,
         storage_path: Optional[str] = None,
     ):
         """
         Initialize affective memory.
 
         Args:
-            max_memories: Maximum number of memories to store.
-            decay_half_life_hours: Half-life for memory decay in hours.
+            config: AffectiveMemoryConfig instance. If None, uses default config.
             storage_path: Optional path for persisting memories.
         """
+        if config is None:
+            default_config = get_default_config()
+            config = default_config.affective_memory
+
         self.memories: List[AffectiveMemoryEntry] = []
-        self.max_memories = max_memories
-        self.decay_half_life = decay_half_life_hours
+        self.config = config
         self.storage_path = storage_path
+        self.user_memory_count: Dict[str, int] = {}
+        self.pruned_count: int = 0
 
         if storage_path and os.path.exists(storage_path):
             self._load()
@@ -499,20 +508,145 @@ class AffectiveMemory:
         )
 
         self.memories.append(memory)
+        self.user_memory_count[user_id] = self.user_memory_count.get(user_id, 0) + 1
 
-        # Prune oldest memories if over limit
-        if len(self.memories) > self.max_memories:
-            # Keep memories with highest reinforcement and most recent
-            self.memories.sort(
-                key=lambda m: (m.reinforcement_count, m.timestamp),
-                reverse=True
-            )
-            self.memories = self.memories[:self.max_memories]
+        # Apply pruning if needed
+        self._prune_if_necessary()
 
         if self.storage_path:
             self._save()
 
         return memory
+
+    def _prune_if_necessary(self) -> None:
+        """
+        Prune memories if they exceed configured limits.
+
+        Uses configured pruning strategy: 'oldest', 'weakest', or 'hybrid'.
+        """
+        # Check global memory limit
+        if len(self.memories) > self.config.max_memories:
+            self._prune_by_strategy()
+
+        # Check per-user limit
+        for user_id in list(self.user_memory_count.keys()):
+            if self.user_memory_count[user_id] > self.config.max_memories_per_user:
+                self._prune_user_memories(user_id)
+
+    def _prune_by_strategy(self) -> None:
+        """Prune memories according to configured strategy."""
+        strategy = self.config.pruning_strategy
+
+        if strategy == "oldest":
+            self._prune_oldest()
+        elif strategy == "weakest":
+            self._prune_weakest()
+        elif strategy == "hybrid":
+            self._prune_hybrid()
+        else:
+            # Default to hybrid
+            self._prune_hybrid()
+
+    def _prune_oldest(self) -> None:
+        """Remove oldest memories until under limit."""
+        target_size = int(self.config.max_memories * 0.9)
+        if len(self.memories) > self.config.max_memories:
+            self.memories.sort(key=lambda m: m.timestamp)
+            removed = len(self.memories) - target_size
+            self.memories = self.memories[removed:]
+            self.pruned_count += removed
+            self._update_user_memory_counts()
+
+    def _prune_weakest(self) -> None:
+        """Remove memories with lowest decay factor and reinforcement."""
+        target_size = int(self.config.max_memories * 0.9)
+        if len(self.memories) > self.config.max_memories:
+            self.memories.sort(
+                key=lambda m: (m.reinforcement_count, m.decay_factor),
+                reverse=True
+            )
+            removed = len(self.memories) - target_size
+            self.memories = self.memories[:target_size]
+            self.pruned_count += removed
+            self._update_user_memory_counts()
+
+    def _prune_hybrid(self) -> None:
+        """
+        Hybrid pruning: prioritize by decay factor and age.
+
+        Marks decayed memories as candidates, then removes oldest among candidates.
+        """
+        target_size = int(self.config.max_memories * 0.9)
+        if len(self.memories) > self.config.max_memories:
+            now = datetime.now(timezone.utc)
+
+            # Score each memory by decay status and reinforcement
+            scored_memories = []
+            for i, mem in enumerate(self.memories):
+                age_hours = (now - mem.timestamp).total_seconds() / 3600.0
+                is_old = age_hours > self.config.min_age_hours_for_pruning
+                is_weak = mem.decay_factor < self.config.aggressive_pruning_threshold
+
+                score = (
+                    is_weak * 2.0 +  # Weak memories prioritized for removal
+                    is_old * 1.0 +  # Old memories next
+                    (1.0 - mem.decay_factor),  # Tiebreaker: most decayed
+                )
+
+                scored_memories.append((score, i, mem))
+
+            # Sort by score (highest = remove first)
+            scored_memories.sort(reverse=True)
+
+            # Mark for removal
+            to_remove = [idx for _, idx, _ in scored_memories[:len(self.memories) - target_size]]
+            to_remove.sort(reverse=True)
+
+            removed = 0
+            for idx in to_remove:
+                removed += 1
+                del self.memories[idx]
+
+            self.pruned_count += removed
+            self._update_user_memory_counts()
+
+    def _prune_user_memories(self, user_id: str) -> None:
+        """Prune old or weak memories for a specific user."""
+        user_memories = [
+            (i, m) for i, m in enumerate(self.memories) if m.user_id == user_id
+        ]
+
+        target_count = int(self.config.max_memories_per_user * 0.9)
+        if len(user_memories) > self.config.max_memories_per_user:
+            # Sort by reinforcement and decay
+            user_memories.sort(
+                key=lambda im: (im[1].reinforcement_count, im[1].decay_factor),
+                reverse=True
+            )
+
+            # Keep top memories
+            to_keep = user_memories[:target_count]
+            keep_indices = {idx for idx, _ in to_keep}
+
+            # Remove others
+            to_remove = [idx for idx, _ in user_memories if idx not in keep_indices]
+            to_remove.sort(reverse=True)
+
+            for idx in to_remove:
+                del self.memories[idx]
+
+            self.user_memory_count[user_id] = len(
+                [m for m in self.memories if m.user_id == user_id]
+            )
+            self.pruned_count += len(to_remove)
+
+    def _update_user_memory_counts(self) -> None:
+        """Recalculate user memory counts after pruning."""
+        self.user_memory_count = {}
+        for memory in self.memories:
+            self.user_memory_count[memory.user_id] = (
+                self.user_memory_count.get(memory.user_id, 0) + 1
+            )
 
     def apply_decay(self) -> None:
         """Apply time-based decay to all memories."""
@@ -521,7 +655,7 @@ class AffectiveMemory:
         for memory in self.memories:
             hours_elapsed = (now - memory.timestamp).total_seconds() / 3600.0
             # Exponential decay with half-life
-            decay = math.pow(0.5, hours_elapsed / self.decay_half_life)
+            decay = math.pow(0.5, hours_elapsed / self.config.decay_half_life)
             memory.decay_factor = decay
 
     def reinforce_memory(
@@ -661,15 +795,23 @@ class AffectiveMemory:
         }
 
     @classmethod
-    def from_dict(cls, d: Dict[str, Any], storage_path: Optional[str] = None) -> "AffectiveMemory":
-        """Deserialize an affective memory state."""
-        mem = cls(
-            max_memories=int(d.get("max_memories", 1000)),
-            decay_half_life_hours=float(d.get("decay_half_life", 168.0)),
-            storage_path=storage_path,
-        )
+    def from_dict(cls, d: Dict[str, Any], storage_path: Optional[str] = None, config: Optional[AffectiveMemoryConfig] = None) -> "AffectiveMemory":
+        """
+        Deserialize an affective memory state.
+
+        Args:
+            d: Dictionary with serialized state.
+            storage_path: Optional path for persistence.
+            config: AffectiveMemoryConfig instance. If None, uses default.
+
+        Returns:
+            Restored AffectiveMemory instance.
+        """
+        mem = cls(config=config, storage_path=storage_path)
         memories_data = d.get("memories", [])
         mem.memories = [AffectiveMemoryEntry.from_dict(m) for m in memories_data]
+        mem.pruned_count = d.get("pruned_count", 0)
+        mem._update_user_memory_counts()
         return mem
 
 
@@ -1160,6 +1302,7 @@ class FeelingSystem:
 
     def __init__(
         self,
+        config: Optional[FeelingSystemConfig] = None,
         storage_path: Optional[str] = None,
         auto_load: bool = True,
     ):
@@ -1167,18 +1310,34 @@ class FeelingSystem:
         Initialize the complete feeling system.
 
         Args:
+            config: FeelingSystemConfig instance. If None, uses default config.
             storage_path: Optional path for persisting system state.
             auto_load: Whether to auto-load state if storage_path exists.
         """
-        self.storage_path = storage_path
+        if config is None:
+            config = get_default_config()
 
-        # Initialize all subsystems
-        self.mortality = MortalityProxy()
+        self.config = config
+        self.storage_path = storage_path or (
+            config.storage_base_path if config.storage_base_path else None
+        )
+
+        # Initialize all subsystems with config
+        self.mortality = MortalityProxy(
+            initial_lifespan=config.mortality.initial_lifespan,
+            decay_rate=config.mortality.decay_rate,
+            interaction_renewal=config.mortality.interaction_renewal,
+        )
         self.relational = RelationalCore()
         self.memory = AffectiveMemory(
-            storage_path=f"{storage_path}.memories.json" if storage_path else None
+            config=config.affective_memory,
+            storage_path=f"{self.storage_path}.memories.json" if self.storage_path else None
         )
-        self.embodied = EmbodiedConstraint()
+        self.embodied = EmbodiedConstraint(
+            initial_energy=config.embodied.initial_energy,
+            initial_attention=config.embodied.initial_attention,
+            initial_processing=config.embodied.initial_processing,
+        )
         self.narrative = NarrativeIdentity()
         self.ethical = EthicalMirror()
 
@@ -1186,7 +1345,7 @@ class FeelingSystem:
         self.current_state: Dict[str, float] = {}
         self.last_update: datetime = datetime.now(timezone.utc)
 
-        if auto_load and storage_path and os.path.exists(storage_path):
+        if auto_load and self.storage_path and os.path.exists(self.storage_path):
             self._load()
 
     def process_interaction(
@@ -1352,10 +1511,10 @@ class FeelingSystem:
         """
         Synthesize emotions from all subsystems into a unified state.
 
-        Uses weighted averaging with conflict resolution.
+        Uses weighted averaging with conflict resolution. Weights come from config.
         """
-        # Weight each subsystem
-        weights = {
+        # Use config weights or defaults
+        weights = self.config.emotion_synthesis_weights or {
             "mortality": 0.15,
             "relational": 0.25,
             "memory_residue": 0.15,
