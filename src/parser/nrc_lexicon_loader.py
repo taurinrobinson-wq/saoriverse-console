@@ -34,6 +34,8 @@ class NRCLexicon:
         self.lexicon_path = lexicon_path
         self.lexicon: Dict[str, Dict[str, int]] = {}
         self.word_emotions: Dict[str, List[str]] = {}
+        # Indicates whether the lexicon loaded successfully and contains entries
+        self.loaded: bool = False
         self._load_lexicon()
     
     def _find_lexicon_file(self) -> Optional[str]:
@@ -84,8 +86,10 @@ class NRCLexicon:
                 
             if self.lexicon:
                 logger.debug(f"NRC lexicon loaded successfully: {len(self.lexicon)} words")
+                self.loaded = True
             else:
                 logger.warning(f"NRC lexicon loaded but is empty: {lexicon_file}")
+                self.loaded = False
                 
         except Exception as e:
             logger.debug(f"Failed to load NRC lexicon: {e}")
@@ -201,6 +205,10 @@ class NRCLexicon:
             emotion: count / found_emotional_words 
             for emotion, count in emotion_counts.items()
         }
+
+    def analyze_text(self, text: str) -> Dict[str, float]:
+        """Compatibility wrapper expected by other modules: returns emotion scores for text."""
+        return self.get_emotion_score(text)
 
 
 # Global NRC lexicon instance (lazy-loaded)
