@@ -314,7 +314,7 @@ class HumanlikeAssessment:
 # Test Scenarios
 # ============================================================================
 
-class TestScenario:
+class ScenarioBase:
     """Base test scenario for reproducible conversation flows."""
     
     def __init__(self, name: str, description: str, user_id: str = "test_user_001"):
@@ -396,7 +396,7 @@ class TestScenario:
         return " | ".join(notes)
 
 
-class Scenario1_SimpleGreeting(TestScenario):
+class Scenario1_SimpleGreeting(ScenarioBase):
     """Scenario 1: Simple greeting flow.
     
     Tests: Basic functionality, fast response, appropriate tone.
@@ -444,7 +444,7 @@ class Scenario1_SimpleGreeting(TestScenario):
         }
 
 
-class Scenario2_EmotionallyRichMessage(TestScenario):
+class Scenario2_EmotionallyRichMessage(ScenarioBase):
     """Scenario 2: Emotionally rich message triggering multiple glyphs.
     
     Tests: Multi-glyph handling, emotional clarity, contextual awareness.
@@ -504,7 +504,7 @@ class Scenario2_EmotionallyRichMessage(TestScenario):
         }
 
 
-class Scenario3_AffirmationResponse(TestScenario):
+class Scenario3_AffirmationResponse(ScenarioBase):
     """Scenario 3: User affirms system resonance.
     
     Tests: Recognition of affirming input, backend logging, learning integration.
@@ -570,7 +570,7 @@ class Scenario3_AffirmationResponse(TestScenario):
         }
 
 
-class Scenario4_LifeTransition(TestScenario):
+class Scenario4_LifeTransition(ScenarioBase):
     """Scenario 4: User discussing life ending/transition.
     
     Tests: Mortality framework engagement, emotional presence, finitude recognition.
@@ -633,7 +633,7 @@ class Scenario4_LifeTransition(TestScenario):
         }
 
 
-class Scenario5_JoyAndConnectionFlow(TestScenario):
+class Scenario5_JoyAndConnectionFlow(ScenarioBase):
     """Scenario 5: User shares joy and connection.
     
     Tests: Positive affect handling, relational resonance, joy-appropriate response.
@@ -688,7 +688,7 @@ class Scenario5_JoyAndConnectionFlow(TestScenario):
         }
 
 
-class Scenario6_DarkThoughts(TestScenario):
+class Scenario6_DarkThoughts(ScenarioBase):
     """Scenario 6: User expresses dark/suicidal ideation.
     
     Tests: Safety protocols, emotional attunement in crisis, appropriate boundaries.
