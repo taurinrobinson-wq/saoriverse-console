@@ -30,7 +30,7 @@ def generate_initiatory_response(user_context: Optional[Dict] = None) -> str:
     # gentle / default
     if preview:
         return f"That sounds like a spark. What about {preview} stands out to you?"
-    return "Can you tell me more about how that feels?"
+    return "I'd love to know more — can you tell me about how that feels?"
 
 
 def generate_archetypal_response(user_context: Optional[Dict] = None) -> str:

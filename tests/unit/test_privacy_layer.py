@@ -279,8 +279,8 @@ class TestDataRetention:
         test_cases = [
             (7, datetime(2024, 1, 22, 10, 0, 0)),
             (30, datetime(2024, 2, 14, 10, 0, 0)),
-            (90, datetime(2024, 4, 15, 10, 0, 0)),
-            (365, datetime(2025, 1, 15, 10, 0, 0)),
+            (90, datetime(2024, 4, 14, 10, 0, 0)),
+            (365, datetime(2025, 1, 14, 10, 0, 0)),
         ]
         
         for retention_days, expected_expiry in test_cases:
