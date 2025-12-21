@@ -21,7 +21,7 @@ def test_local_mode():
     """Test complete local emotional processing."""
     if not LOCAL_MODE_AVAILABLE:
         print("⚠️ Skipping local mode tests (spaCy or other dependencies unavailable)")
-        return
+            pytest.skip("Skipping local mode tests (spaCy or other dependencies unavailable)")
 
     print("\n" + "="*80)
     print("🧪 FIRSTPERSON LOCAL MODE TESTING")
@@ -43,7 +43,7 @@ def test_local_mode():
 
     if not nrc.loaded or not semantic.loaded:
         print("\n❌ Infrastructure check FAILED")
-        return False
+            pytest.fail("Infrastructure check failed: nrc or semantic not loaded")
 
     print("\n✅ Infrastructure ready\n")
 
@@ -146,12 +146,12 @@ def test_local_mode():
     # Check no API keys
     if os.environ.get('OPENAI_API_KEY'):
         print("  ❌ WARNING: OpenAI API key detected in environment")
-        return False
+            pytest.fail("OPENAI_API_KEY present in environment")
     print("  ✓ No OpenAI API key (good)")
 
     if os.environ.get('SUPABASE_URL'):
         print("  ❌ WARNING: Supabase URL detected")
-        return False
+            pytest.fail("SUPABASE_URL present in environment")
     print("  ✓ No cloud service URLs (good)")
 
     print("  ✓ All processing is completely local")
@@ -181,7 +181,7 @@ def test_local_mode():
     print("  3. Integrate into Streamlit UI")
     print("  4. Launch FirstPerson in Local Mode!")
 
-    return True
+        assert True
 
 if __name__ == "__main__":
     try:
