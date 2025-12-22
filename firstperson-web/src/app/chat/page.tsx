@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import ResponseMetadata from "@/components/ResponseMetadata";
 
 type Message = {
   id: string;
@@ -9,6 +10,15 @@ type Message = {
   content: string;
   timestamp: Date;
   glyph_voltage?: string;
+  metadata?: {
+    firstperson_orchestrator?: {
+      mortality_salience?: number;
+      memory_context_injected?: boolean;
+      frequency_reflection?: string;
+      safety_signal?: boolean;
+      affect_analysis?: { valence?: number; intensity?: number };
+    };
+  };
 };
 
 type Conversation = {
@@ -28,7 +38,7 @@ export default function ChatPage() {
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [newTitle, setNewTitle] = useState("");
-  
+
   // Audio state
   const [isRecording, setIsRecording] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
@@ -45,7 +55,7 @@ export default function ChatPage() {
       router.push("/");
       return;
     }
-    
+
     // Decode token to get user info
     const userInfo = localStorage.getItem("userInfo");
     if (userInfo) {
@@ -73,7 +83,7 @@ export default function ChatPage() {
     try {
       const response = await fetch(`/api/conversation/${user?.username}/${conversationId}`);
       const data = await response.json();
-      
+
       if (data.success && data.message) {
         const conv = JSON.parse(data.message);
         // Convert messages to the format we use
@@ -219,6 +229,7 @@ export default function ChatPage() {
           content: data.message || "I'm listening...",
           timestamp: new Date(),
           glyph_voltage: data.glyph_voltage,
+          metadata: data.metadata,
         };
         setMessages((prev) => [...prev, assistantMessage]);
 
@@ -294,6 +305,23 @@ export default function ChatPage() {
     }
   };
 
+  const handleFeedback = async (messageId: string, helpful: boolean) => {
+    try {
+      await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message_id: messageId,
+          conversation_id: currentConversationId,
+          helpful,
+          user_id: user?.username || "demo_user",
+        }),
+      });
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+    }
+  };
+
   const handleNewConversation = () => {
     setCurrentConversationId(null);
     setMessages([]);
@@ -326,11 +354,11 @@ export default function ChatPage() {
           <button onClick={handleNewConversation} className="btn btn-sidebar-new">
             + New Conversation
           </button>
-          
+
           <h3 style={{ marginBottom: "1rem", marginTop: "1rem", color: "var(--text-primary)" }}>
             Conversations
           </h3>
-          
+
           <div className="conversations-list">
             {conversations.length === 0 ? (
               <div style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>
@@ -340,9 +368,8 @@ export default function ChatPage() {
               conversations.map((conv) => (
                 <div
                   key={conv.conversation_id}
-                  className={`conversation-item ${
-                    currentConversationId === conv.conversation_id ? "active" : ""
-                  }`}
+                  className={`conversation-item ${currentConversationId === conv.conversation_id ? "active" : ""
+                    }`}
                   onClick={() => loadConversation(conv.conversation_id)}
                 >
                   <div className="conv-title">{conv.title}</div>
@@ -395,6 +422,13 @@ export default function ChatPage() {
             messages.map((msg) => (
               <div key={msg.id} className={`message ${msg.role}`}>
                 <div className="message-content">{msg.content}</div>
+                {msg.role === "assistant" && msg.metadata && (
+                  <ResponseMetadata
+                    metadata={msg.metadata}
+                    messageId={msg.id}
+                    onFeedback={handleFeedback}
+                  />
+                )}
               </div>
             ))
           )}
@@ -445,7 +479,7 @@ export default function ChatPage() {
           placeholder="Share what you're feeling..."
           disabled={isLoading}
         />
-        
+
         {/* Audio Controls */}
         <div className="audio-controls">
           {isRecording ? (
@@ -468,7 +502,7 @@ export default function ChatPage() {
               🎤
             </button>
           )}
-          
+
           {isTranscribing && <span className="status">Transcribing...</span>}
           {isSynthesizing && <span className="status">Speaking...</span>}
         </div>
@@ -476,7 +510,7 @@ export default function ChatPage() {
         <button type="submit" className="btn btn-primary" disabled={isLoading || isRecording}>
           {isLoading ? "..." : "Send"}
         </button>
-        
+
         <audio ref={audioRef} hidden />
       </form>
 

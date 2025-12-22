@@ -196,6 +196,7 @@ class ChatResponse(BaseModel):
     message: str
     error: Optional[str] = None
     conversation_id: Optional[str] = None
+    metadata: Optional[dict] = None
 
 
 class ConversationInfo(BaseModel):
@@ -568,6 +569,32 @@ async def chat(request: ChatRequest) -> ChatResponse:
         base_response_text = base_response_dict.get("text", "I hear you.")
         glyph_intent = base_response_dict.get("glyph_intent", {})
         logger.info(f"[{request_id}] Step 1 complete: {base_response_text[:50]}...")
+        # If the integrated pipeline is not available, run the lightweight
+        # FirstPerson orchestrator (affect parsing + memory) to provide
+        # affect analysis and memory-aware metadata for the response.
+        fp_orchestrator_metadata = {}
+        if not INTEGRATED_PIPELINE:
+            try:
+                from src.emotional_os.deploy.core.firstperson import create_orchestrator
+
+                orch = create_orchestrator(user_id, conversation_id)
+                if orch:
+                    orch.initialize_session()
+                    fp_result = orch.handle_conversation_turn(message, glyph_intent)
+                    # Attach orchestrator output to metadata so frontend can use it
+                    fp_orchestrator_metadata = fp_result or {}
+                    
+                    # Log mortality salience for telemetry
+                    mortality = fp_result.get("affect_analysis", {}).get("mortality_salience", 0.0)
+                    logger.info(f"[{request_id}] Mortality salience: {mortality:.2f}, Safety signal: {fp_result.get('safety_signal', False)}")
+                    
+                    # If there's a gentle frequency reflection, incorporate it
+                    # into the response so users see memory-aware acknowledgements.
+                    freq_ref = fp_orchestrator_metadata.get("frequency_reflection")
+                    if freq_ref:
+                        base_response_text = f"{freq_ref} {base_response_text}"
+            except Exception as e:
+                logger.debug(f"[{request_id}] FirstPerson orchestrator fallback failed: {e}")
         
         # STEP 2: Enhance response through pipeline (if available)
         response_text = base_response_text
@@ -631,11 +658,21 @@ async def chat(request: ChatRequest) -> ChatResponse:
         elif not title:
             title = "Conversation"
         
+        # Merge any FirstPerson orchestrator metadata when pipeline is unavailable
+        try:
+            if fp_orchestrator_metadata:
+                pipeline_metadata = pipeline_metadata or {}
+                pipeline_metadata["firstperson_orchestrator"] = fp_orchestrator_metadata
+        except NameError:
+            # fp_orchestrator_metadata may not be defined in some code paths
+            pass
+
         # STEP 4: Return response IMMEDIATELY (do NOT wait for Supabase save)
         response_obj = ChatResponse(
             success=True,
             message=response_text,
-            conversation_id=conversation_id
+            conversation_id=conversation_id,
+            metadata=pipeline_metadata
         )
         logger.info(f"[{request_id}] Step 4: Response prepared, returning to client")
         
@@ -762,6 +799,42 @@ async def rename_conversation(user_id: str, conversation_id: str, request: Renam
         )
     except Exception as e:
         print(f"Error renaming conversation: {e}", file=sys.stderr)
+        return ChatResponse(
+            success=False,
+            message="",
+            error=str(e)
+        )
+
+
+class FeedbackRequest(BaseModel):
+    """Request schema for response feedback."""
+    message_id: str
+    conversation_id: Optional[str] = None
+    helpful: bool
+    user_id: Optional[str] = None
+
+
+@app.post("/api/feedback")
+async def submit_feedback(request: FeedbackRequest) -> ChatResponse:
+    """Record user feedback on assistant response."""
+    try:
+        # Log the feedback for metrics collection
+        logger.info(
+            f"Feedback: message_id={request.message_id}, "
+            f"conversation_id={request.conversation_id}, "
+            f"helpful={request.helpful}, user_id={request.user_id}"
+        )
+        
+        # In a production system, you would save this to a feedback table in Supabase
+        # For now, we just log it for metrics and analysis
+        
+        return ChatResponse(
+            success=True,
+            message="Feedback recorded",
+            conversation_id=request.conversation_id or ""
+        )
+    except Exception as e:
+        logger.error(f"Error recording feedback: {e}")
         return ChatResponse(
             success=False,
             message="",
