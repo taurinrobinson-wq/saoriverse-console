@@ -752,26 +752,28 @@ class AffectiveMemory:
 
     def _prune_oldest(self) -> None:
         """Remove oldest memories until under limit."""
-        target_size = int(self.config.max_memories * 0.9)
+        target_size = int(self.config.max_memories)
         if len(self.memories) > self.config.max_memories:
             self.memories.sort(key=lambda m: m.timestamp)
             removed = len(self.memories) - target_size
-            self.memories = self.memories[removed:]
-            self.pruned_count += removed
-            self._update_user_memory_counts()
+            if removed > 0:
+                self.memories = self.memories[removed:]
+                self.pruned_count += removed
+                self._update_user_memory_counts()
 
     def _prune_weakest(self) -> None:
         """Remove memories with lowest decay factor and reinforcement."""
-        target_size = int(self.config.max_memories * 0.9)
+        target_size = int(self.config.max_memories)
         if len(self.memories) > self.config.max_memories:
             self.memories.sort(
                 key=lambda m: (m.reinforcement_count, m.decay_factor),
                 reverse=True
             )
             removed = len(self.memories) - target_size
-            self.memories = self.memories[:target_size]
-            self.pruned_count += removed
-            self._update_user_memory_counts()
+            if removed > 0:
+                self.memories = self.memories[:target_size]
+                self.pruned_count += removed
+                self._update_user_memory_counts()
 
     def _prune_hybrid(self) -> None:
         """
@@ -779,7 +781,7 @@ class AffectiveMemory:
 
         Marks decayed memories as candidates, then removes oldest among candidates.
         """
-        target_size = int(self.config.max_memories * 0.9)
+        target_size = int(self.config.max_memories)
         if len(self.memories) > self.config.max_memories:
             now = datetime.now(timezone.utc)
 
@@ -818,8 +820,7 @@ class AffectiveMemory:
         user_memories = [
             (i, m) for i, m in enumerate(self.memories) if m.user_id == user_id
         ]
-
-        target_count = int(self.config.max_memories_per_user * 0.9)
+        target_count = int(self.config.max_memories_per_user)
         if len(user_memories) > self.config.max_memories_per_user:
             # Sort by reinforcement and decay
             user_memories.sort(

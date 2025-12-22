@@ -56,25 +56,10 @@ def test_concurrent_inserts_use_fallback_under_timeout(tmp_path, monkeypatch):
     # all results should be True (not exceptions)
     assert all(r is True for r in results), f"Some calls failed: {[r for r in results if r is not True]}"
 
-    # give background fallback writes a moment
-    time.sleep(0.2)
-
-    # count JSONL lines
-    jsonl_count = 0
-    if jsonl_path.exists():
-        jsonl_count = len([ln for ln in jsonl_path.read_text(encoding="utf8").splitlines() if ln.strip()])
-
-    # count DB rows
-    conn = sqlite3.connect(str(store.db_path), timeout=1, check_same_thread=False)
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT COUNT(1) FROM clarifications")
-        row = cur.fetchone()
-        db_count = row[0] if row and row[0] is not None else 0
-    finally:
-        conn.close()
-
-        # Collect triggers from JSONL and DB and assert we have N unique triggers stored
+    # Give background fallback writes time; poll for up to 5s for writes to complete
+    deadline = time.time() + 5.0
+    union = set()
+    while time.time() < deadline:
         jsonl_triggers = set()
         if jsonl_path.exists():
             for ln in jsonl_path.read_text(encoding="utf8").splitlines():
@@ -89,17 +74,22 @@ def test_concurrent_inserts_use_fallback_under_timeout(tmp_path, monkeypatch):
                     jsonl_triggers.add(rec.get("trigger"))
 
         db_triggers = set()
-        conn = sqlite3.connect(str(store.db_path), timeout=1, check_same_thread=False)
-        try:
-            cur = conn.cursor()
-            cur.execute("SELECT trigger FROM clarifications")
-            for row in cur.fetchall():
-                if row and row[0]:
-                    db_triggers.add(row[0])
-        finally:
-            conn.close()
+        if os.path.exists(str(store.db_path)):
+            conn = sqlite3.connect(str(store.db_path), timeout=1, check_same_thread=False)
+            try:
+                cur = conn.cursor()
+                cur.execute("SELECT trigger FROM clarifications")
+                for row in cur.fetchall():
+                    if row and row[0]:
+                        db_triggers.add(row[0])
+            finally:
+                conn.close()
 
         union = jsonl_triggers.union(db_triggers)
-        assert (
-            len(union) == N
-        ), f"Expected {N} unique stored triggers, found {len(union)} (jsonl={len(jsonl_triggers)}, db={len(db_triggers)})"
+        if len(union) == N:
+            break
+        time.sleep(0.05)
+
+    assert (
+        len(union) == N
+    ), f"Expected {N} unique stored triggers, found {len(union)} (jsonl={len(jsonl_triggers)}, db={len(db_triggers)})"
