@@ -806,6 +806,42 @@ async def rename_conversation(user_id: str, conversation_id: str, request: Renam
         )
 
 
+class FeedbackRequest(BaseModel):
+    """Request schema for response feedback."""
+    message_id: str
+    conversation_id: Optional[str] = None
+    helpful: bool
+    user_id: Optional[str] = None
+
+
+@app.post("/api/feedback")
+async def submit_feedback(request: FeedbackRequest) -> ChatResponse:
+    """Record user feedback on assistant response."""
+    try:
+        # Log the feedback for metrics collection
+        logger.info(
+            f"Feedback: message_id={request.message_id}, "
+            f"conversation_id={request.conversation_id}, "
+            f"helpful={request.helpful}, user_id={request.user_id}"
+        )
+        
+        # In a production system, you would save this to a feedback table in Supabase
+        # For now, we just log it for metrics and analysis
+        
+        return ChatResponse(
+            success=True,
+            message="Feedback recorded",
+            conversation_id=request.conversation_id or ""
+        )
+    except Exception as e:
+        logger.error(f"Error recording feedback: {e}")
+        return ChatResponse(
+            success=False,
+            message="",
+            error=str(e)
+        )
+
+
 def detect_themes(conversation_history: List[dict]) -> dict:
     """Detect recurring themes and emotional patterns across conversation history."""
     all_text = " ".join([msg.get("content", "").lower() for msg in conversation_history])
