@@ -22,7 +22,10 @@ def test_parse_input_smoke_creates_response(tmp_path):
     fixture_script = repo_root / "scripts" / "create_sqlite_fixture.py"
     # Create fixture
     assert fixture_script.exists(), f"Fixture script missing: {fixture_script}"
-    os.system(f'python3 "{fixture_script}"')
+    import sys
+    import subprocess
+    # Use the current Python executable so tests run on Windows and Unix
+    subprocess.run([sys.executable, str(fixture_script)], check=True)
     fixture_db = repo_root / "emotional_os" / "glyphs" / "glyphs_integration_fixture.db"
     assert fixture_db.exists(), "Fixture DB was not created"
 
