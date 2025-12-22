@@ -3,8 +3,14 @@ import os
 import uuid
 from pathlib import Path
 from typing import Optional, Dict, Any
+import threading
 
 from emotional_os.adapter.clarification_store import get_default_store, ClarificationStore
+
+# Simple process-global lock to serialize JSONL writes when multiple threads
+# append to the same JSONL file. This prevents lost lines on platforms where
+# concurrent appends from multiple threads can interleave or be dropped.
+_jsonl_write_lock = threading.Lock()
 
 
 class ClarificationTrace:
@@ -39,8 +45,16 @@ class ClarificationTrace:
 				"user_id": ctx.get("user_id"),
 			}
 			self.store_path.parent.mkdir(parents=True, exist_ok=True)
-			with open(self.store_path, "a", encoding="utf8") as f:
-				f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+			# Serialize writes to avoid races in concurrent test scenarios
+			with _jsonl_write_lock:
+				with open(self.store_path, "a", encoding="utf8") as f:
+					f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+					try:
+						f.flush()
+						os.fsync(f.fileno())
+					except Exception:
+						# best-effort; ignore if fsync isn't available
+						pass
 			try:
 				os.chmod(self.store_path, 0o600)
 			except Exception:
