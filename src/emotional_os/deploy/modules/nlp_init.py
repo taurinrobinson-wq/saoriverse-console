@@ -128,7 +128,7 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
         NLP_STATE["spacy_available"] = False
         NLP_STATE["spacy_model_loaded"] = False
         NLP_STATE["spacy_exc"] = repr(e)
-        logger.error("spaCy import failed: %s", e)
+        logger.warning("spaCy import failed: %s", e)
 
     # NRC Lexicon - try multiple import strategies
     try:
@@ -194,7 +194,8 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     except Exception as e:
         NLP_STATE["nrc_available"] = False
         NLP_STATE["nrc_exc"] = repr(e)
-        logger.error("NRC lexicon not available: %s", e)
+        NLP_STATE["nrc_exc"] = repr(e)
+        logger.warning("NRC lexicon not available: %s", e)
 
     # Record python executable for diagnostics (helps ensure Streamlit uses same env)
     NLP_STATE["python_executable"] = sys.executable
