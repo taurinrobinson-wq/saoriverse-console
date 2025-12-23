@@ -49,8 +49,106 @@ class _SimpleNRC:
         return scores
 
 
-# Singleton instance used by imports like `from parser.nrc_lexicon_loader import nrc`
-nrc = _SimpleNRC()
+# Robust NRC loader with optional file-backed lexicon and a lightweight fallback.
+from pathlib import Path
+from typing import Dict, List
+
+
+class NRC:
+    def __init__(self):
+        self.lexicon: Dict[str, List[str]] = {}
+        self.loaded: bool = False
+        self._init()
+
+    def _init(self):
+        possible = [
+            Path("data/lexicons/nrc_emotion_lexicon.txt"),
+            Path("data/lexicons/nrc_lexicon_cleaned.json"),
+            Path("emotional_os/lexicon/nrc_emotion_lexicon.txt"),
+            # repo-root lexicons/ directory (user-provided attachment)
+            Path(__file__).parent.parent.parent / "lexicons" / "nrc_emotion_lexicon.txt",
+            Path("lexicons/nrc_emotion_lexicon.txt"),
+        ]
+
+        found = None
+        for p in possible:
+            if p.exists():
+                found = p
+                break
+
+        if found:
+            try:
+                if found.suffix == ".json":
+                    import json
+
+                    with open(found, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    # Accept either {word: [emotions]} or {"lexicon": {word: [emotions]}}
+                    if isinstance(data, dict) and "lexicon" in data:
+                        self.lexicon = {k.lower(): v for k, v in data["lexicon"].items()}
+                    else:
+                        self.lexicon = {k.lower(): v for k, v in data.items()}
+                else:
+                    # TSV loader: word \t emotion \t value (1 means associated)
+                    with open(found, "r", encoding="utf-8") as f:
+                        for line in f:
+                            parts = line.strip().split("\t")
+                            if len(parts) != 3:
+                                continue
+                            word, emotion, value = parts
+                            if value.strip() != "1":
+                                continue
+                            word = word.lower()
+                            self.lexicon.setdefault(word, [])
+                            if emotion not in self.lexicon[word]:
+                                self.lexicon[word].append(emotion)
+
+                if self.lexicon:
+                    self.loaded = True
+            except Exception:
+                # Fall through to fallback behavior
+                self.lexicon = {}
+                self.loaded = False
+
+        # Lightweight fallback: a few high-signal keywords mapped to emotions.
+        if not self.lexicon:
+            self.lexicon = {
+                "happy": ["joy", "positive"],
+                "joy": ["joy", "positive"],
+                "sad": ["sadness", "negative"],
+                "sadness": ["sadness", "negative"],
+                "angry": ["anger", "negative"],
+                "fear": ["fear", "negative"],
+                "surprised": ["surprise"],
+                "disgusted": ["disgust"],
+                "love": ["joy", "positive", "trust"],
+                "hate": ["anger", "negative"],
+            }
+            # Even when using fallback, mark loaded True so callers can use analyze_text
+            self.loaded = True
+
+    def analyze_text(self, text: str) -> Dict[str, float]:
+        import re
+        from collections import Counter
+
+        words = re.findall(r"\b\w+\b", text.lower())
+        counts = Counter()
+        total = 0
+        for w in words:
+            emotions = self.lexicon.get(w)
+            if emotions:
+                total += 1
+                for e in emotions:
+                    counts[e] += 1
+
+        if total == 0:
+            return {}
+
+        return {k: v / total for k, v in counts.items()}
+
+
+# Export singleton for compatibility
+nrc = NRC()
 """
 NRC Emotion Lexicon Loader
 
@@ -73,6 +171,8 @@ _NRC_POSSIBLE_PATHS = [
     "emotional_os/lexicon/nrc_emotion_lexicon.txt",
     Path(__file__).parent.parent.parent / "data" / "lexicons" / "nrc_emotion_lexicon.txt",
     Path(__file__).parent.parent.parent / "data" / "lexicons" / "nrc_lexicon_cleaned.json",
+    Path(__file__).parent.parent.parent / "lexicons" / "nrc_emotion_lexicon.txt",
+    Path("lexicons/nrc_emotion_lexicon.txt"),
 ]
 
 class NRCLexicon:

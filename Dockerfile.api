@@ -18,13 +18,14 @@ RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.api.txt
 
 # Download spaCy model if spaCy is installed (safe no-op if not)
-RUN python -c "import importlib, subprocess, sys
+RUN python - <<'PY'
+import importlib, subprocess, sys
 try:
   importlib.import_module('spacy')
   subprocess.run([sys.executable, '-m', 'spacy', 'download', 'en_core_web_sm'], check=True)
 except Exception:
   pass
-"
+PY
 
 # Copy only the repository (Dockerfile respects .dockerignore)
 COPY . .
