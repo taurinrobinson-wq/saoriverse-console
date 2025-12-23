@@ -106,3 +106,37 @@ def infer_stub(payload: dict):
     user_id = payload.get("user_id", "anonymous")
     out = adapter.process(text=text, user_id=user_id, signals=None)
     return {"response": out.get("response", {}).get("text", "")}
+
+
+@app.post("/v1/parse")
+def parse_endpoint(payload: dict, x_api_key: str = Header(None)):
+    """Return the full parse_input analysis (glyphs, signals, voltage_response, etc.).
+
+    This endpoint is intended for UI clients that need the full parsing/glyph
+    metadata rather than the rendered poetic response returned by `/v1/demo`.
+    """
+    # Simple API key guard: match same key used by /v1/demo
+    api_key = os.environ.get("EMOTIONAL_OS_API_KEY", "dev-key-change-me")
+    if x_api_key != api_key:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+
+    text = payload.get("text", "")
+    user_id = payload.get("user_id", "anonymous")
+
+    try:
+        # Import parse_input and path utilities from the Emotional OS core
+        from src.emotional_os.core.signal_parser import parse_input
+        from src.emotional_os.core.paths import get_path_manager
+
+        pm = get_path_manager()
+        lexicon_path = str(pm._resolve_path(
+            "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json",
+            "word_centric_emotional_lexicon_expanded.json",
+        ))
+        db_path = str(pm.glyph_db())
+
+        result = parse_input(text, lexicon_path, db_path=db_path, conversation_context={"user_id": user_id}, user_id=user_id)
+        return result
+    except Exception as e:
+        # Return a simple error wrapper rather than raising to keep client-friendly JSON
+        return {"error": str(e)}
