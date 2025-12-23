@@ -1,0 +1,31 @@
+# Dockerfile.api - lightweight API image
+FROM python:3.12-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PORT=8000
+
+# Minimal system deps for API (no heavy build tools)
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install API-specific Python requirements
+COPY requirements.api.txt .
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r requirements.api.txt
+
+# Copy only the repository (Dockerfile respects .dockerignore)
+COPY . .
+
+RUN mkdir -p /app/logs
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD curl -f http://localhost:8000/health || exit 1
+
+# Start FastAPI app (adjust module path if needed)
+CMD ["uvicorn", "emotional_os_api.app:app", "--host", "0.0.0.0", "--port", "8000"]
