@@ -2,7 +2,7 @@
 # Simple telemetry storage for limbic demo events
 import os
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "telemetry.db")
@@ -40,7 +40,7 @@ def record_event(event: Dict[str, Any]):
         """INSERT INTO limbic_events (timestamp, user_id, input_text, emotion, enrichment_applied, ab_group, latency_ms, glyphs_generated, safety_flag)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         (
-            event.get("timestamp", datetime.utcnow().isoformat()),
+            event.get("timestamp", datetime.now(timezone.utc).isoformat()),
             event.get("user_id", "unknown"),
             event.get("input_text", ""),
             event.get("emotion", ""),

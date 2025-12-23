@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 # Import the canonical adapter implementation
@@ -82,7 +82,7 @@ def demo_endpoint(payload: DemoRequest, x_api_key: str = Header(None)):
     )
 
     # Normalize and return
-    meta_ts = engine_output.get("meta", {}).get("timestamp") or datetime.utcnow().isoformat() + "Z"
+    meta_ts = engine_output.get("meta", {}).get("timestamp") or datetime.now(timezone.utc).isoformat() + "Z"
 
     response_block = engine_output.get("response", {})
     state_block = engine_output.get("state", {})

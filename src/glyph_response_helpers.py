@@ -64,7 +64,7 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
             logdir = os.path.join(os.getcwd(), "logs")
             os.makedirs(logdir, exist_ok=True)
             path = os.path.join(logdir, "unsafe_tags.log")
-            ts = datetime.datetime.utcnow().isoformat()
+            ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
             with open(path, "a", encoding="utf-8") as fh:
                 fh.write(f"{ts}\t{tag}\t{conf}\t{sorted_overlays}\n")
         except Exception:

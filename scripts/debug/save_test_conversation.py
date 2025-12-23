@@ -15,7 +15,7 @@ import argparse
 import json
 import os
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 from emotional_os.deploy.modules.conversation_manager import ConversationManager
 
@@ -41,7 +41,7 @@ def main():
             "user": "Test user message: I'm running an end-to-end persistence check.",
             "assistant": "Thanks for sharing. This is a test conversation saved to Supabase.",
             "role": "user",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
     ]
 

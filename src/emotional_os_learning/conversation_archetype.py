@@ -13,7 +13,7 @@ system applies dynamically to generate fresh responses in similar contexts.
 import json
 import os
 from typing import Any, Dict, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class ConversationArchetype:
@@ -49,7 +49,7 @@ class ConversationArchetype:
         self.tone_guidelines = tone_guidelines
         self.pattern_template = pattern_template or ""
         self.success_weight = success_weight
-        self.created_at = created_at or datetime.utcnow().isoformat()
+        self.created_at = created_at or datetime.now(timezone.utc).isoformat()
         self.usage_count = 0
         self.success_count = 0
     
