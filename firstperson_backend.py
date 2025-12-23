@@ -667,6 +667,44 @@ async def chat(request: ChatRequest) -> ChatResponse:
             # fp_orchestrator_metadata may not be defined in some code paths
             pass
 
+        # Integration: attempt to append small emotional OS micro-behaviors
+        # (pun interjector, mutual joy) in a guarded, non-blocking way.
+        try:
+            # Build a lightweight context for the micro-engines
+            micro_context = {
+                "message": message,
+                "user_id": user_id,
+                "conversation_id": conversation_id,
+                "messages": messages,
+                "pipeline_metadata": pipeline_metadata,
+            }
+
+            try:
+                # Import the micro-engines directly (avoid importing the integrator
+                # which may not be available in some dev states).
+                from src.emotional_os.pun_interjector import PunInterjector
+                from src.emotional_os.mutual_joy_handler import MutualJoyHandler
+
+                _pun_engine = PunInterjector()
+                _joy_engine = MutualJoyHandler()
+
+                pun_obj = _pun_engine.compose_pun(micro_context)
+                pun_text = _pun_engine.render(pun_obj) if pun_obj else ""
+
+                joy_text = _joy_engine.choose_template(micro_context) or ""
+
+                # Respect one-paragraph rule: append with a single space
+                extras = " ".join([t for t in (pun_text.strip(), joy_text.strip()) if t])
+                if extras:
+                    response_text = f"{response_text} {extras}"
+
+            except Exception:
+                # Safe fallback: if micro-engines are missing or error, ignore.
+                pass
+        except Exception:
+            # Defensive: do not let micro-integration break the main flow
+            pass
+
         # STEP 4: Return response IMMEDIATELY (do NOT wait for Supabase save)
         response_obj = ChatResponse(
             success=True,
