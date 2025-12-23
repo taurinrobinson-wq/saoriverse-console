@@ -1,3 +1,56 @@
+"""Minimal NRC lexicon loader shim.
+
+Provides a tiny `nrc` object with a `lexicon` and `analyze_text(text)` method.
+This is a pragmatic, lightweight fallback implementation so the repo can
+use NRC-style emotion lookups without an external dependency.
+
+It performs simple keyword matching and returns a dict of emotion->score.
+"""
+from __future__ import annotations
+
+import re
+from typing import Dict
+
+
+class _SimpleNRC:
+    def __init__(self):
+        # Minimal emotion keyword sets; extend as needed
+        self.lexicon = {
+            "anger": ["angry", "mad", "furious", "irritated", "annoyed"],
+            "anticipation": ["expect", "await", "anticipat", "looking forward"],
+            "disgust": ["disgust", "gross", "repulsed"],
+            "fear": ["scared", "afraid", "fear", "anxious", "panic"],
+            "joy": ["happy", "joy", "glad", "delighted", "excited"],
+            "negative": ["bad", "terrible", "awful", "horrible"],
+            "positive": ["good", "great", "wonderful", "nice"],
+            "sadness": ["sad", "unhappy", "mourn", "grief", "cry"],
+            "surprise": ["surprise", "surprised", "unexpected"],
+            "trust": ["trust", "trusted", "rely", "depend"],
+        }
+        # Flattened set for quick membership tests
+        self._keywords = {e: set(w for w in words) for e, words in self.lexicon.items()}
+        self.loaded = True
+
+    def analyze_text(self, text: str) -> Dict[str, float]:
+        """Return a simple score map of emotions detected in `text`.
+
+        Scores are 0..1 based on keyword hit counts normalized by total keywords
+        found for each emotion.
+        """
+        lower = text.lower()
+        words = re.findall(r"\w+", lower)
+        word_set = set(words)
+        scores: Dict[str, float] = {}
+        for emotion, keys in self._keywords.items():
+            hits = sum(1 for k in keys if k in lower or k in word_set)
+            if hits:
+                # crude score: hits / number of keywords for emotion
+                scores[emotion] = hits / max(1, len(keys))
+        return scores
+
+
+# Singleton instance used by imports like `from parser.nrc_lexicon_loader import nrc`
+nrc = _SimpleNRC()
 """
 NRC Emotion Lexicon Loader
 
