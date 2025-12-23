@@ -41,6 +41,9 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
     start_time = time.time()
     response = ""
     processing_mode = st.session_state.get("processing_mode", "local")
+    # Trace processing mode and orchestrator presence
+    fp_present = 'yes' if st.session_state.get("firstperson_orchestrator") else 'no'
+    logger.info(f"handle_response_pipeline start: mode={processing_mode}, firstperson_present={fp_present}")
     
     # Initialize Tier 1 Foundation if not already done
     if "tier1_foundation" not in st.session_state:
@@ -192,6 +195,7 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
     """
     try:
         from emotional_os.glyphs.signal_parser import parse_input
+        from .remote_parser import remote_parse_input
         from emotional_os.core.paths import get_path_manager
 
         # Get proper paths using PathManager (handles both local and cloud deployments)
@@ -209,6 +213,40 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
             db_path=db_path,
             conversation_context=conversation_context,
         )
+
+        # If running in non-local mode or local parsing didn't produce glyphs/responses,
+        # prefer the remote ML engine (keeps UI lightweight and delegates NLP).
+        processing_mode = st.session_state.get("processing_mode", "local")
+        prefers_remote = processing_mode != "local"
+        need_remote = False
+        # If processing mode prefers remote, we'll use it
+        if prefers_remote:
+            need_remote = True
+        else:
+            # If local analysis lacks voltage_response or best_glyph, try remote
+            if not local_analysis.get("voltage_response") or not local_analysis.get("best_glyph"):
+                need_remote = True
+
+        # Be more aggressive: if spaCy is not installed in this runtime, force remote parsing
+        try:
+            import spacy  # type: ignore
+            spacy_available = True
+        except Exception:
+            spacy_available = False
+        if not spacy_available:
+            logger.info("_run_local_processing: spaCy not available in UI runtime; forcing remote parse")
+            need_remote = True
+
+        if need_remote:
+            remote = None
+            try:
+                remote = remote_parse_input(user_input, conversation_context)
+            except Exception as e:
+                logger.debug(f"remote_parse_input exception: {e}")
+
+            if remote:
+                logger.info("_run_local_processing: using remote parse result")
+                local_analysis = remote
 
         # Ensure local_analysis is a dict
         if not isinstance(local_analysis, dict):
@@ -277,6 +315,16 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
             return conversational_response
         
         # Single response: use as-is
+        logger.info("_build_conversational_response: USING_VOLTAGE_RESPONSE")
+        # store a brief debug snapshot in session state for traceability
+        try:
+            st.session_state["last_used_response_source"] = {
+                "source": "voltage_response",
+                "voltage_snippet": response[:300],
+                "best_glyph": best_glyph.get("glyph_name") if isinstance(best_glyph, dict) else None,
+            }
+        except Exception:
+            pass
         return response
     
     # Use FirstPerson orchestrator to generate glyph-informed response
@@ -285,7 +333,15 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         if fp_orch and best_glyph and isinstance(best_glyph, dict):
             # Generate fresh response using glyph as constraint
             response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
-            logger.debug(f"Generated FirstPerson response using glyph {best_glyph.get('glyph_name')}")
+            logger.info(f"_build_conversational_response: USING_FIRSTPERSON glyph={best_glyph.get('glyph_name')}")
+            try:
+                st.session_state["last_used_response_source"] = {
+                    "source": "firstperson",
+                    "glyph": best_glyph.get("glyph_name"),
+                    "response_snippet": response[:300],
+                }
+            except Exception:
+                pass
             return response
     except Exception as e:
         logger.debug(f"FirstPerson response generation failed: {e}")
