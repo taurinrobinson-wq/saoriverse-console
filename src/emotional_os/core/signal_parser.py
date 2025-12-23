@@ -149,8 +149,33 @@ def fuzzy_contains(input_str: str, patterns: list, threshold: float = 0.6) -> bo
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
     base_lexicon = {}
     if os.path.exists(base_path):
-        with open(base_path, "r", encoding="utf-8") as f:
-            base_lexicon = json.load(f)
+        # Be robust: some deployments may supply a binary DB path or a
+        # JSON file with non-UTF-8 content. Try utf-8, then fall back to
+        # latin-1, and finally decode with replacement to avoid raising
+        # UnicodeDecodeError which breaks the pipeline.
+        try:
+            with open(base_path, "r", encoding="utf-8") as f:
+                base_lexicon = json.load(f)
+        except UnicodeDecodeError:
+            try:
+                with open(base_path, "r", encoding="latin-1") as f:
+                    base_lexicon = json.load(f)
+                logger.warning(f"Loaded signal map using latin-1 fallback for {base_path}")
+            except Exception:
+                try:
+                    # As a last resort, attempt to read as text with replacement
+                    with open(base_path, "rb") as bf:
+                        raw = bf.read()
+                    txt = raw.decode("utf-8", errors="replace")
+                    base_lexicon = json.loads(txt)
+                    logger.warning(f"Loaded signal map with replace-decoding for {base_path}")
+                except Exception as ex:
+                    logger.warning(f"Could not load base signal map (non-text or invalid JSON): {ex}")
+                    base_lexicon = {}
+        except Exception as ex:
+            # Catch JSONDecodeError and other issues
+            logger.warning(f"Could not load base signal map: {ex}")
+            base_lexicon = {}
 
     learned_lexicon = {}
     if os.path.exists(learned_path):
@@ -2407,6 +2432,19 @@ def parse_input(
             except Exception:
                 contextual_response = conversational_alt
             response_source = f"{response_source}|conversationalized"
+    except Exception:
+        pass
+
+    # Log final assembly for tracing
+    try:
+        logger.info(
+            "parse_input final: response_source=%s, voltage_len=%d, glyphs=%d",
+            response_source,
+            len(contextual_response) if isinstance(contextual_response, str) else 0,
+            len(glyphs) if isinstance(glyphs, list) else 0,
+        )
+        if best_glyph and isinstance(best_glyph, dict):
+            logger.info("parse_input final: best_glyph=%s", best_glyph.get("glyph_name"))
     except Exception:
         pass
 
