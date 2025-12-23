@@ -1,3 +1,31 @@
+# Reduce build context and keep images small
+.git
+.github
+.venv
+venv
+env
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.cache
+.idea
+.vscode
+node_modules
+*.egg-info
+dist
+build
+data_local
+logs
+models
+*.tar.gz
+*.zip
+.DS_Store
+.ipynb_checkpoints
+.streamlit/local
+/.gitignore
+/.dockerignore
+*.mid
 # Docker ignore for Railway deployment
 .env
 .git
