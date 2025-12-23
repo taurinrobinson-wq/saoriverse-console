@@ -894,7 +894,7 @@ class DynamicResponseComposer:
             os.makedirs("learning", exist_ok=True)
             outp = os.path.join("learning", "staged_glyphs.jsonl")
             record = {
-                "ts": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+                "ts": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat() + "Z",
                 "input_text": input_text,
                 "extracted": extracted,
                 "glyphs": [

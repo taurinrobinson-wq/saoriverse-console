@@ -25,7 +25,7 @@ import os
 import sys
 import time
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 try:
     import requests
@@ -114,7 +114,7 @@ def main():
             "user": text,
             "assistant": f"Test assistant reply for message {i}",
             "role": "user" if i % 2 == 1 else "assistant",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
         messages.append(msg)
         ok, res_msg = mgr.save_conversation(conv_id, f"E2E test conv {conv_id[:8]}", messages, processing_mode="local")

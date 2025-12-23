@@ -7,7 +7,7 @@ are intended to be recalled in emotional language only.
 
 import json
 from dataclasses import asdict, dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 
 
@@ -18,7 +18,7 @@ class RelationalMemoryCapsule:
     voltage_marking: str
     user_input: str
     response_summary: str
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> dict:
         return {
@@ -33,7 +33,7 @@ class RelationalMemoryCapsule:
     @classmethod
     def from_dict(cls, d: dict) -> "RelationalMemoryCapsule":
         ts = d.get("timestamp")
-        dt = datetime.fromisoformat(ts) if ts else datetime.utcnow()
+        dt = datetime.fromisoformat(ts) if ts else datetime.now(timezone.utc)
         return cls(
             symbolic_tags=d.get("symbolic_tags", []),
             relational_phase=d.get("relational_phase", ""),

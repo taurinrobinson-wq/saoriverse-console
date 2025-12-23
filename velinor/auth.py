@@ -15,7 +15,7 @@ import hashlib
 import hmac
 import base64
 import secrets
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
 
 DB_PATH = Path(__file__).parent / "velinor_auth.db"
@@ -68,7 +68,7 @@ def create_user(username: str, password: str) -> Dict[str, Any]:
     pw_hash, salt = _hash_password(password)
     conn = _get_conn()
     cur = conn.cursor()
-    now = datetime.utcnow().isoformat()
+    now = datetime.now(timezone.utc).isoformat()
     try:
         cur.execute("INSERT INTO users (username, password_hash, salt, created_at) VALUES (?, ?, ?, ?)",
                     (username, pw_hash, salt, now))
@@ -121,7 +121,7 @@ def _sign(payload_b64: str) -> str:
 
 
 def create_access_token(user_id: int, expires_minutes: int = 60 * 24 * 7) -> str:
-    exp = int((datetime.utcnow() + timedelta(minutes=expires_minutes)).timestamp())
+    exp = int((datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)).timestamp())
     payload = json.dumps({"user_id": user_id, "exp": exp}, separators=(',', ':'))
     payload_b64 = base64.urlsafe_b64encode(payload.encode('utf-8')).decode()
     sig = _sign(payload_b64)
@@ -136,7 +136,7 @@ def verify_token(token: str) -> Optional[int]:
             return None
         payload_json = base64.urlsafe_b64decode(payload_b64.encode('utf-8')).decode('utf-8')
         payload = json.loads(payload_json)
-        if int(payload.get('exp', 0)) < int(datetime.utcnow().timestamp()):
+        if int(payload.get('exp', 0)) < int(datetime.now(timezone.utc).timestamp()):
             return None
         return int(payload.get('user_id'))
     except Exception:
@@ -147,7 +147,7 @@ def save_profile(user_id: int, profile: Dict[str, Any]) -> None:
     init_db()
     conn = _get_conn()
     cur = conn.cursor()
-    now = datetime.utcnow().isoformat()
+    now = datetime.now(timezone.utc).isoformat()
     cur.execute("REPLACE INTO profiles (user_id, profile_json, updated_at) VALUES (?, ?, ?)",
                 (user_id, json.dumps(profile), now))
     conn.commit()

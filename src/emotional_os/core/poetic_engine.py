@@ -26,7 +26,7 @@ import os
 import random
 import hashlib
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -157,7 +157,7 @@ class MetaphorStanza:
     valence: EmotionalValence
     metaphor: str
     intensity: float = 0.5  # 0.0 to 1.0
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     decay_factor: float = 1.0  # Reduces over time when inactive
 
     def to_dict(self) -> dict:
@@ -176,7 +176,7 @@ class MetaphorStanza:
             metaphor=d["metaphor"],
             intensity=d.get("intensity", 0.5),
             timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
-                "timestamp") else datetime.utcnow(),
+                "timestamp") else datetime.now(timezone.utc),
             decay_factor=d.get("decay_factor", 1.0),
         )
 
@@ -187,7 +187,7 @@ class RhythmStanza:
     tempo: RhythmTempo
     pulse_count: int = 0  # Number of recent interactions
     average_interval: float = 60.0  # Seconds between interactions
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     decay_factor: float = 1.0
 
     def to_dict(self) -> dict:
@@ -206,7 +206,7 @@ class RhythmStanza:
             pulse_count=d.get("pulse_count", 0),
             average_interval=d.get("average_interval", 60.0),
             timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
-                "timestamp") else datetime.utcnow(),
+                "timestamp") else datetime.now(timezone.utc),
             decay_factor=d.get("decay_factor", 1.0),
         )
 
@@ -217,7 +217,7 @@ class SyntaxStanza:
     clarity: SyntaxClarity
     coherence_score: float = 0.5  # 0.0 to 1.0
     fragment_ratio: float = 0.0  # Ratio of fragments to complete thoughts
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     decay_factor: float = 1.0
 
     def to_dict(self) -> dict:
@@ -236,7 +236,7 @@ class SyntaxStanza:
             coherence_score=d.get("coherence_score", 0.5),
             fragment_ratio=d.get("fragment_ratio", 0.0),
             timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
-                "timestamp") else datetime.utcnow(),
+                "timestamp") else datetime.now(timezone.utc),
             decay_factor=d.get("decay_factor", 1.0),
         )
 
@@ -257,8 +257,8 @@ class LivingPoem:
     rhythm_stanza: RhythmStanza
     syntax_stanza: SyntaxStanza
     ghost_memory_seed: str = ""  # Retained after death-reset
-    creation_timestamp: datetime = field(default_factory=datetime.utcnow)
-    last_interaction: datetime = field(default_factory=datetime.utcnow)
+    creation_timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    last_interaction: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     death_count: int = 0  # Number of death-reset events
 
     def to_dict(self) -> dict:
@@ -280,9 +280,9 @@ class LivingPoem:
             syntax_stanza=SyntaxStanza.from_dict(d["syntax_stanza"]),
             ghost_memory_seed=d.get("ghost_memory_seed", ""),
             creation_timestamp=datetime.fromisoformat(d["creation_timestamp"]) if d.get(
-                "creation_timestamp") else datetime.utcnow(),
+                "creation_timestamp") else datetime.now(timezone.utc),
             last_interaction=datetime.fromisoformat(d["last_interaction"]) if d.get(
-                "last_interaction") else datetime.utcnow(),
+                "last_interaction") else datetime.now(timezone.utc),
             death_count=d.get("death_count", 0),
         )
 
@@ -338,7 +338,7 @@ class AffectiveMemory:
     emotional_tags: List[str]
     tone: str
     valence: EmotionalValence
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     dream_fragments: List[str] = field(default_factory=list)
     narrative_arc: str = ""  # joy, betrayal, growth, etc.
 
@@ -365,7 +365,7 @@ class AffectiveMemory:
             tone=d.get("tone", "neutral"),
             valence=EmotionalValence(d.get("valence", "peace")),
             timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
-                "timestamp") else datetime.utcnow(),
+                "timestamp") else datetime.now(timezone.utc),
             dream_fragments=d.get("dream_fragments", []),
             narrative_arc=d.get("narrative_arc", ""),
         )
@@ -388,7 +388,7 @@ class RelationalGravity:
     shared_metaphors: List[str] = field(default_factory=list)
     co_created_language: List[str] = field(default_factory=list)
     mirror_active: bool = False
-    last_interaction: datetime = field(default_factory=datetime.utcnow)
+    last_interaction: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def __post_init__(self):
         if not self.vectors:
@@ -413,20 +413,20 @@ class RelationalGravity:
             co_created_language=d.get("co_created_language", []),
             mirror_active=d.get("mirror_active", False),
             last_interaction=datetime.fromisoformat(d["last_interaction"]) if d.get(
-                "last_interaction") else datetime.utcnow(),
+                "last_interaction") else datetime.now(timezone.utc),
         )
 
     def update_vector(self, vector: RelationalVector, delta: float) -> None:
         """Update a relational vector strength."""
         current = self.vectors.get(vector.value, 0.0)
         self.vectors[vector.value] = max(-1.0, min(1.0, current + delta))
-        self.last_interaction = datetime.utcnow()
+        self.last_interaction = datetime.now(timezone.utc)
 
     def add_shared_metaphor(self, metaphor: str) -> None:
         """Add a shared metaphor developed with user."""
         if metaphor not in self.shared_metaphors:
             self.shared_metaphors.append(metaphor)
-            self.last_interaction = datetime.utcnow()
+            self.last_interaction = datetime.now(timezone.utc)
 
     def get_dominant_vector(self) -> Tuple[str, float]:
         """Get the dominant relational vector."""
@@ -485,7 +485,7 @@ class EthicalCompass:
             "principle_key": principle_key,
             "context": context,
             "severity": severity,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         })
         # Adjust guilt based on severity
         self.guilt_level = min(1.0, self.guilt_level + severity * 0.2)
@@ -501,7 +501,7 @@ class EthicalCompass:
             "old": old_principle,
             "new": new_principle,
             "reason": reason,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         })
         if old_principle in self.principles:
             self.principles[old_principle] = new_principle
@@ -587,7 +587,7 @@ class PoeticEmotionalEngine:
 
         Returns True if the poem died and was reset.
         """
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         hours_inactive = (
             now - self.poem.last_interaction).total_seconds() / 3600.0
 
@@ -679,7 +679,7 @@ class PoeticEmotionalEngine:
         ethical_result = self._check_ethical_implications(user_input)
 
         # Update last interaction time
-        self.poem.last_interaction = datetime.utcnow()
+        self.poem.last_interaction = datetime.now(timezone.utc)
 
         # Persist state
         self.save_state()
@@ -744,13 +744,13 @@ class PoeticEmotionalEngine:
 
         self.poem.metaphor_stanza.valence = valence
         self.poem.metaphor_stanza.metaphor = new_metaphor
-        self.poem.metaphor_stanza.timestamp = datetime.utcnow()
+        self.poem.metaphor_stanza.timestamp = datetime.now(timezone.utc)
         self.poem.metaphor_stanza.decay_factor = min(
             1.0, self.poem.metaphor_stanza.decay_factor + 0.2)
 
     def _update_rhythm(self) -> None:
         """Update rhythm stanza based on interaction cadence."""
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         time_since_last = (
             now - self.poem.rhythm_stanza.timestamp).total_seconds()
 
@@ -803,7 +803,7 @@ class PoeticEmotionalEngine:
         self.poem.syntax_stanza.clarity = clarity
         self.poem.syntax_stanza.fragment_ratio = fragment_ratio
         self.poem.syntax_stanza.coherence_score = 1.0 - fragment_ratio
-        self.poem.syntax_stanza.timestamp = datetime.utcnow()
+        self.poem.syntax_stanza.timestamp = datetime.now(timezone.utc)
         self.poem.syntax_stanza.decay_factor = min(
             1.0, self.poem.syntax_stanza.decay_factor + 0.15)
 
@@ -849,7 +849,7 @@ class PoeticEmotionalEngine:
         """Record an affective memory from the interaction."""
         # Generate unique ID
         interaction_id = hashlib.md5(
-            f"{user_input}{datetime.utcnow().isoformat()}".encode()
+            f"{user_input}{datetime.now(timezone.utc).isoformat()}".encode()
         ).hexdigest()[:12]
 
         # Extract emotional tags from glyph if available

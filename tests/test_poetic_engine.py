@@ -2,7 +2,7 @@
 
 import os
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import pytest
 
@@ -281,7 +281,7 @@ class TestPoeticEmotionalEngine:
     def test_decay_mechanism(self, engine):
         """Test poem decay over time."""
         # Set last interaction to 2 hours ago
-        engine.poem.last_interaction = datetime.utcnow() - timedelta(hours=2)
+        engine.poem.last_interaction = datetime.now(timezone.utc) - timedelta(hours=2)
         
         initial_decay = engine.poem.metaphor_stanza.decay_factor
         engine.apply_decay()
@@ -295,7 +295,7 @@ class TestPoeticEmotionalEngine:
         engine.poem.metaphor_stanza.decay_factor = 0.05
         engine.poem.rhythm_stanza.decay_factor = 0.05
         engine.poem.syntax_stanza.decay_factor = 0.05
-        engine.poem.last_interaction = datetime.utcnow() - timedelta(hours=5)
+        engine.poem.last_interaction = datetime.now(timezone.utc) - timedelta(hours=5)
         
         # This should trigger death
         death_occurred = engine.apply_decay()

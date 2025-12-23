@@ -50,7 +50,7 @@ def fetch_emotion_logs(
     Returns:
         List of emotion log entries from Supabase
     """
-    since = (datetime.datetime.utcnow() - datetime.timedelta(days=days)).isoformat()
+    since = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=days)).isoformat()
 
     try:
         response = (
@@ -140,7 +140,7 @@ def update_thresholds_in_database(
                     "user_id": user_id,
                     "emotion": emotion,
                     "threshold": threshold,
-                    "updated_at": datetime.datetime.utcnow().isoformat(),
+                    "updated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
                 },
                 onConflict="user_id,emotion",
             ).execute()

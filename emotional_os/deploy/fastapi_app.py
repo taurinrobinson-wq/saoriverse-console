@@ -7,7 +7,7 @@ import base64
 import json
 import os
 import secrets
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import requests
 import uvicorn
@@ -286,14 +286,14 @@ async def chat(chat_data: ChatRequest):
     # Structured tracing/logging for debugging message flows
     saori_url = CURRENT_SAORI_URL or f"{SUPABASE_URL}/functions/v1/saori-fixed"
     trace_entry = {
-        "ts": datetime.utcnow().isoformat() + "Z",
+        "ts": datetime.now(timezone.utc).isoformat() + "Z",
         "user_id": chat_data.user_id,
         "mode": chat_data.mode,
         "message_preview": (chat_data.message[:200] + "...") if len(chat_data.message) > 200 else chat_data.message,
         "saori_url": saori_url,
     }
 
-    start = datetime.utcnow()
+    start = datetime.now(timezone.utc)
     try:
         # If the client requests local processing, run the hybrid/local pipeline here
         if chat_data.mode == 'local' or os.getenv('DEFAULT_PROCESSING_MODE', 'local') == 'local':
@@ -316,7 +316,7 @@ async def chat(chat_data: ChatRequest):
                         user_id=getattr(chat_data, 'user_id', None),
                         processing_mode=getattr(chat_data, 'mode', 'local')
                     )
-                    duration = (datetime.utcnow() - start).total_seconds()
+                    duration = (datetime.now(timezone.utc) - start).total_seconds()
                     trace_entry.update({
                         "duration_s": duration,
                         "status_code": 200
@@ -368,7 +368,7 @@ async def chat(chat_data: ChatRequest):
             timeout=30,
         )
 
-        duration = (datetime.utcnow() - start).total_seconds()
+        duration = (datetime.now(timezone.utc) - start).total_seconds()
         trace_entry.update({"duration_s": duration, "status_code": getattr(response, "status_code", None)})
 
         try:
@@ -411,7 +411,7 @@ async def chat(chat_data: ChatRequest):
         }
 
     except Exception as e:
-        duration = (datetime.utcnow() - start).total_seconds()
+        duration = (datetime.now(timezone.utc) - start).total_seconds()
         trace_entry.update({"duration_s": duration, "exception": str(e)})
         try:
             with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:

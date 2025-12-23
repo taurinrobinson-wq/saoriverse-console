@@ -25,7 +25,7 @@ import json
 import os
 import re
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def high_non_alnum_ratio(s: str, threshold: float = 0.25) -> bool:
@@ -122,7 +122,7 @@ def archive_and_remove(db_path: str, rowids: list):
                 continue
             cursor.execute(
                 "INSERT INTO glyph_lexicon_archived (orig_rowid, glyph_name, description, gate, archived_at) VALUES (?, ?, ?, ?, ?)",
-                (rid, row[0], row[1], row[2], datetime.utcnow().isoformat()),
+                (rid, row[0], row[1], row[2], datetime.now(timezone.utc).isoformat()),
             )
             cursor.execute("DELETE FROM glyph_lexicon WHERE rowid = ?", (rid,))
             archived += 1

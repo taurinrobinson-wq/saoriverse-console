@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Optional
 
 from .sanctuary_handler import (
@@ -57,7 +57,7 @@ class SanctuaryConversationManager:
 
             # Log privacy-safe event
             log_entry = make_privacy_safe_log(user_hash or "anonymous", risk, reply_result.get("action", "unknown"))
-            log_entry["timestamp"] = datetime.utcnow().isoformat()
+            log_entry["timestamp"] = datetime.now(timezone.utc).isoformat()
 
             # Clear pending consent
             session["pending_consent"] = False
@@ -75,7 +75,7 @@ class SanctuaryConversationManager:
 
             # Privacy-safe log for detection event
             log_entry = make_privacy_safe_log(user_hash or "anonymous", risk, "prompted")
-            log_entry["timestamp"] = datetime.utcnow().isoformat()
+            log_entry["timestamp"] = datetime.now(timezone.utc).isoformat()
 
             return {"type": "consent_prompt", "payload": prompt, "log": log_entry}
 
