@@ -149,6 +149,11 @@ def fuzzy_contains(input_str: str, patterns: list, threshold: float = 0.6) -> bo
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
     base_lexicon = {}
     if os.path.exists(base_path):
+        # If the provided path is clearly a binary DB (sqlite), skip JSON load
+        if str(base_path).lower().endswith((".db", ".sqlite", ".sqlite3")):
+            logger.debug(f"Signal map path appears to be a DB file; skipping JSON load: {base_path}")
+            base_lexicon = {}
+        else:
         # Be robust: some deployments may supply a binary DB path or a
         # JSON file with non-UTF-8 content. Try utf-8, then fall back to
         # latin-1, and finally decode with replacement to avoid raising
