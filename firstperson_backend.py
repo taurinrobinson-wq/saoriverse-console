@@ -31,6 +31,18 @@ except ImportError as e:
     logger.warning(f"Integrated pipeline not available: {e}")
     PIPELINE_AVAILABLE = False
 
+# Import new pipeline components
+try:
+    from src.emotional_os.pipeline.turn_classifier import TurnClassifier
+    from src.emotional_os.pipeline.policy_router import PolicyRouter
+    logger.info("✓ TurnClassifier and PolicyRouter imported")
+    TURN_CLASSIFIER = TurnClassifier()
+    POLICY_ROUTER = PolicyRouter()
+except ImportError as e:
+    logger.warning(f"Pipeline components not available: {e}")
+    TURN_CLASSIFIER = None
+    POLICY_ROUTER = None
+
 try:
     import requests
 except ImportError:
@@ -569,11 +581,21 @@ async def chat(request: ChatRequest) -> ChatResponse:
         base_response_text = base_response_dict.get("text", "I hear you.")
         glyph_intent = base_response_dict.get("glyph_intent", {})
         logger.info(f"[{request_id}] Step 1 complete: {base_response_text[:50]}...")
+        
+        # NEW STEP 1.5: Classify turn type and check routing
+        turn_classification = {}
+        if TURN_CLASSIFIER:
+            try:
+                turn_classification = TURN_CLASSIFIER.classify(
+                    message,
+                    conversation_history=messages,
+                    user_id=user_id,
+                )
+                logger.info(f"[{request_id}] Turn type: {turn_classification.get('turn_type')} (confidence={turn_classification.get('confidence', 0):.2f})")
+            except Exception as e:
+                logger.warning(f"[{request_id}] Turn classification failed: {e}")
+        
         # If the integrated pipeline is not available, run the lightweight
-        # FirstPerson orchestrator (affect parsing + memory) to provide
-        # affect analysis and memory-aware metadata for the response.
-        fp_orchestrator_metadata = {}
-        if not INTEGRATED_PIPELINE:
             try:
                 from src.emotional_os.deploy.core.firstperson import create_orchestrator
 
@@ -652,6 +674,35 @@ async def chat(request: ChatRequest) -> ChatResponse:
             logger.debug(f"[{request_id}] Pipeline unavailable, using base response")
             response_text = base_response_text
         
+        # NEW STEP 2.5: Route response through policy router and check invariants
+        if POLICY_ROUTER and turn_classification:
+            try:
+                domains = pipeline_metadata.get("domains", {})
+                affect = pipeline_metadata.get("affect", {})
+                
+                policy_result = POLICY_ROUTER.route(
+                    turn_type=turn_classification.get("turn_type", "disclosure"),
+                    base_response=response_text,
+                    domains=domains,
+                    conversation_history=messages,
+                    user_message=message,
+                    affect=affect,
+                )
+                
+                logger.info(f"[{request_id}] Policy check: invariants_pass={policy_result['invariants_pass']}")
+                if not policy_result["invariants_pass"]:
+                    logger.warning(f"[{request_id}] Policy violations: {policy_result['violations']}")
+                    # Log for metrics/debugging but don't fail (graceful degradation)
+                
+                # Add policy metadata to response
+                pipeline_metadata["policy_router"] = {
+                    "invariants_pass": policy_result["invariants_pass"],
+                    "violations": policy_result["violations"],
+                    "recommended_generator": policy_result["recommended_generator"],
+                }
+            except Exception as e:
+                logger.warning(f"[{request_id}] Policy routing failed: {e}")
+        
         # STEP 3: Auto-generate title from first message
         if is_first_message and not title:
             title = auto_name_conversation(message)
@@ -678,7 +729,18 @@ async def chat(request: ChatRequest) -> ChatResponse:
                 "messages": messages,
                 "pipeline_metadata": pipeline_metadata,
             }
-
+            # Log the micro-context shape/content for debugging why micro-engines fire
+            try:
+                logger.info(f"[{request_id}] Micro context for micro-engines: {micro_context}")
+            except Exception:
+                # Best-effort logging; don't fail the request if logging errors
+                pass
+            # Also write micro_context to a debug file for reliable capture in tests
+            try:
+                with open(r"d:\\saoriverse-console\\tools\\micro_context_debug.log", "a", encoding="utf-8") as _f:
+                    _f.write(f"[{request_id}] " + repr(micro_context) + "\n")
+            except Exception:
+                pass
             try:
                 # Import the micro-engines directly (avoid importing the integrator
                 # which may not be available in some dev states).
@@ -691,7 +753,58 @@ async def chat(request: ChatRequest) -> ChatResponse:
                 pun_obj = _pun_engine.compose_pun(micro_context)
                 pun_text = _pun_engine.render(pun_obj) if pun_obj else ""
 
-                joy_text = _joy_engine.choose_template(micro_context) or ""
+                # Gate the mutual-joy handler so it only runs when there's
+                # a clear positive uplift signal. This prevents celebratory
+                # lines from being appended for doubt/uncertainty messages.
+                joy_text = ""
+                try:
+                    pipeline = micro_context.get("pipeline_metadata") or {}
+                    affect = {}
+                    if isinstance(pipeline, dict):
+                        affect = pipeline.get("affect") or pipeline.get("affect_analysis") or pipeline.get("emotion") or {}
+
+                    tone = (affect.get("tone") or "").lower() if isinstance(affect, dict) else ""
+                    try:
+                        valence = float(affect.get("valence") or 0.0) if isinstance(affect, dict) else 0.0
+                    except Exception:
+                        valence = 0.0
+                    try:
+                        arousal = float(affect.get("arousal") or 0.0) if isinstance(affect, dict) else 0.0
+                    except Exception:
+                        arousal = 0.0
+
+                    positive_tones = {"relieved", "proud", "excited", "grateful", "amazed", "relief", "pride", "joy", "delight", "satisfaction"}
+                    downward_cues = [
+                        "i'm not sure", "i am not sure", "i'm starting to feel doubtful", "i'm doubtful",
+                        "i'm struggling", "i'm not sure if", "i'm unsure", "i don't know", "i'm worried",
+                        "i'm afraid", "i'm anxious", "not sure"
+                    ]
+
+                    text_lower = (micro_context.get("message") or "").lower()
+
+                    # Determine if joy is allowed: require explicit uplift tone + thresholds,
+                    # or strong lexical positive cues. Always block if downward cues present.
+                    joy_allowed = False
+                    if tone in positive_tones and valence > 0.4 and arousal > 0.3:
+                        joy_allowed = True
+
+                    # Strong lexical positives can allow joy even if tone naming differs
+                    strong_positive_cues = [
+                        "i did it", "i made it", "i'm so happy", "so happy", "i'm grateful",
+                        "i'm relieved", "i'm proud", "i'm excited", "i finally"
+                    ]
+                    if not joy_allowed and any(cue in text_lower for cue in strong_positive_cues):
+                        joy_allowed = True
+
+                    # Block on downward cues regardless
+                    if any(cue in text_lower for cue in downward_cues):
+                        joy_allowed = False
+
+                    if joy_allowed:
+                        joy_text = _joy_engine.choose_template(micro_context) or ""
+                except Exception:
+                    # Safe fallback: do not let gating errors block response
+                    joy_text = ""
 
                 # Respect one-paragraph rule: append with a single space
                 extras = " ".join([t for t in (pun_text.strip(), joy_text.strip()) if t])
@@ -882,19 +995,26 @@ async def submit_feedback(request: FeedbackRequest) -> ChatResponse:
 
 def detect_themes(conversation_history: List[dict]) -> dict:
     """Detect recurring themes and emotional patterns across conversation history."""
+    import re
     all_text = " ".join([msg.get("content", "").lower() for msg in conversation_history])
-    
+
+    # Tokenize into word tokens to avoid substring false positives (eg. 'enjoy' triggering 'joy')
+    tokens = set(re.findall(r"\b\w+\b", all_text))
+
+    def any_token_in(words):
+        return any(w in tokens for w in words)
+
     themes = {
-        "fatigue": any(word in all_text for word in ["tired", "exhausted", "drained", "burned out", "worn out", "depleted"]),
-        "hope": any(word in all_text for word in ["hope", "hopeful", "optimistic", "looking forward", "possibility", "chance"]),
-        "stress": any(word in all_text for word in ["stress", "stressed", "anxious", "overwhelmed", "pressure", "struggling"]),
-        "isolation": any(word in all_text for word in ["alone", "lonely", "isolated", "nobody understands", "on my own"]),
-        "work": any(word in all_text for word in ["work", "job", "career", "office", "deadline", "attorney", "lawyer", "boss", "team"]),
-        "health": any(word in all_text for word in ["drinking", "drug", "alcohol", "sick", "illness", "depression", "anxiety", "therapy"]),
-        "grief": any(word in all_text for word in ["grief", "loss", "lost", "lost someone", "death", "died", "mourning"]),
-        "joy": any(word in all_text for word in ["joy", "happy", "excited", "love", "amazing", "wonderful", "great"]),
+        "fatigue": any_token_in(["tired", "exhausted", "drained", "burned", "worn", "depleted"]),
+        "hope": any_token_in(["hope", "hopeful", "optimistic", "forward", "possibility", "chance"]),
+        "stress": any_token_in(["stress", "stressed", "anxious", "overwhelmed", "pressure", "struggling"]),
+        "isolation": any_token_in(["alone", "lonely", "isolated", "nobody", "on"]),
+        "work": any_token_in(["work", "job", "career", "office", "deadline", "attorney", "lawyer", "boss", "team"]),
+        "health": any_token_in(["drinking", "drug", "alcohol", "sick", "illness", "depression", "anxiety", "therapy"]),
+        "grief": any_token_in(["grief", "loss", "lost", "death", "died", "mourning"]),
+        "joy": any_token_in(["joy", "happy", "excited", "love", "amazing", "wonderful", "great"]),
     }
-    
+
     return themes
 
 
@@ -1073,13 +1193,23 @@ def generate_empathetic_response(message: str, conversation_history: Optional[Li
             glyph_intent["tone"] = "positive"
             glyph_intent["attunement"] = "empathy"
         else:
-            # Fallback: still specific but more open
-            response_text = (
-                "I hear the significance in what you just shared. There's something real there. "
-                "What's the most important part of that for you to tell me about?"
-            )
-            glyph_intent["tone"] = "neutral"
-            glyph_intent["attunement"] = "curiosity"
+            # Use semantic compression layer to synthesize a concise, attuned response
+            try:
+                from src.emotional_os.semantic_compressor import SemanticCompressor
+
+                compressor = SemanticCompressor()
+                # We don't have pipeline affect at this stage, but we can still extract domains
+                domains = compressor.extract_domains(message, None)
+                response_text = compressor.compress(domains, message)
+                glyph_intent["tone"] = "neutral"
+                glyph_intent["attunement"] = "curiosity"
+            except Exception:
+                # Fallback conservative reply if compressor fails
+                response_text = (
+                    "I hear the significance in what you just shared. There's something real there. "
+                    "What's the most important part of that for you to tell me about?"
+                )
+                
     
     return {
         "text": response_text,
@@ -1096,8 +1226,9 @@ if __name__ == "__main__":
     logger.info("=" * 60)
     logger.info("(AI models will initialize on first request)")
     logger.info("=" * 60)
-    logger.info("API listening on http://0.0.0.0:8000")
-    logger.info("API docs: http://0.0.0.0:8000/docs")
+    port = int(os.environ.get("PORT", "8000"))
+    logger.info(f"API listening on http://0.0.0.0:{port}")
+    logger.info(f"API docs: http://0.0.0.0:{port}/docs")
     logger.info("=" * 60)
     
     # Windows multiprocessing with spawn causes crashes - use single worker
@@ -1106,7 +1237,7 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8000,
+        port=port,
         log_level="info",
         workers=1,
         reload=False,

@@ -15,17 +15,21 @@
   ],
   "headers": [],
   "rewrites": {
-    "beforeFiles": [
-      {
-        "source": "/api/:path*",
-        "destination": "http://localhost:8001/api/:path*",
-        "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
-      }
-    ],
+    "beforeFiles": [],
     "afterFiles": [],
     "fallback": []
   },
-  "dynamicRoutes": [],
+  "dynamicRoutes": [
+    {
+      "page": "/api/conversation/[userId]/[conversationId]",
+      "regex": "^/api/conversation/([^/]+?)/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPuserId": "nxtPuserId",
+        "nxtPconversationId": "nxtPconversationId"
+      },
+      "namedRegex": "^/api/conversation/(?<nxtPuserId>[^/]+?)/(?<nxtPconversationId>[^/]+?)(?:/)?$"
+    }
+  ],
   "staticRoutes": [
     {
       "page": "/",
@@ -44,6 +48,72 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/auth",
+      "regex": "^/api/auth(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth(?:/)?$"
+    },
+    {
+      "page": "/api/auth/login",
+      "regex": "^/api/auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/login(?:/)?$"
+    },
+    {
+      "page": "/api/auth/register",
+      "regex": "^/api/auth/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/register(?:/)?$"
+    },
+    {
+      "page": "/api/auth-manager",
+      "regex": "^/api/auth\\-manager(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth\\-manager(?:/)?$"
+    },
+    {
+      "page": "/api/chat",
+      "regex": "^/api/chat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/chat(?:/)?$"
+    },
+    {
+      "page": "/api/conversations",
+      "regex": "^/api/conversations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/conversations(?:/)?$"
+    },
+    {
+      "page": "/api/emotion-thresholds",
+      "regex": "^/api/emotion\\-thresholds(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/emotion\\-thresholds(?:/)?$"
+    },
+    {
+      "page": "/api/emotions",
+      "regex": "^/api/emotions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/emotions(?:/)?$"
+    },
+    {
+      "page": "/api/feedback",
+      "regex": "^/api/feedback(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/feedback(?:/)?$"
+    },
+    {
+      "page": "/api/synthesize",
+      "regex": "^/api/synthesize(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/synthesize(?:/)?$"
+    },
+    {
+      "page": "/api/transcribe",
+      "regex": "^/api/transcribe(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/transcribe(?:/)?$"
     },
     {
       "page": "/chat",

@@ -132,3 +132,5 @@ export const ResponseMetadata: React.FC<ResponseMetadataProps> = ({
         </div>
     );
 };
+
+export default ResponseMetadata;
