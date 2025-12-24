@@ -140,12 +140,27 @@ class TurnClassifier:
         }
 
     def _score_markers(self, text: str, markers: set) -> float:
-        """Score how many markers are present (0.0-1.0)."""
+        """Score how many markers are present (0.0-1.0), weighted by importance.
+        
+        Higher score if multiple markers found; single clear marker gets ~0.7.
+        """
         if not markers:
             return 0.0
 
-        matched = sum(1 for marker in markers if marker in text)
-        return min(1.0, matched / len(markers))
+        matched = [marker for marker in markers if marker in text]
+        if not matched:
+            return 0.0
+        
+        # Single clear marker: 0.65
+        # Two markers: 0.8
+        # Three+: 1.0
+        match_count = len(matched)
+        if match_count == 1:
+            return 0.65
+        elif match_count == 2:
+            return 0.80
+        else:
+            return 1.0
 
     def _detect_emotional_signal(self, text: str) -> Optional[str]:
         """Detect primary emotional signal from text."""
