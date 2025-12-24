@@ -141,7 +141,7 @@ export default function ChatPage() {
       const formData = new FormData();
       formData.append("file", audioBlob, "audio.webm");
 
-      const response = await fetch("http://localhost:8000/transcribe", {
+      const response = await fetch("/api/transcribe", {
         method: "POST",
         body: formData,
       });
@@ -162,7 +162,7 @@ export default function ChatPage() {
   const playSynthesis = async (text: string) => {
     setIsSynthesizing(true);
     try {
-      const response = await fetch("http://localhost:8000/synthesize", {
+      const response = await fetch("/api/synthesize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),

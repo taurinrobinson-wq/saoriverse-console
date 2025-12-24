@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
+    const backendUrl = (process.env.BACKEND_URL || "http://localhost:8000").trim();
     const response = await fetch(`${backendUrl}/conversations/${userId}`);
     const data = await response.json();
     return new Response(JSON.stringify(data), {

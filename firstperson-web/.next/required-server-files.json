@@ -291,17 +291,7 @@
     "turbopack": {
       "root": "D:\\saoriverse-console\\firstperson-web"
     },
-    "distDirRoot": ".next",
-    "_originalRewrites": {
-      "beforeFiles": [
-        {
-          "source": "/api/:path*",
-          "destination": "http://localhost:8001/api/:path*"
-        }
-      ],
-      "afterFiles": [],
-      "fallback": []
-    }
+    "distDirRoot": ".next"
   },
   "appDir": "D:\\saoriverse-console\\firstperson-web",
   "relativeAppDir": "",

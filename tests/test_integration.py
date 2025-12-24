@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Subsystem integration tests for FeelingSystem.
+Subsystem integration tests for FeelingSystem + Pipeline components.
 
 Tests cross-subsystem effects, data flow, and coherence:
 - Mortality effects on other subsystems
@@ -9,10 +9,17 @@ Tests cross-subsystem effects, data flow, and coherence:
 - Embodied constraints on emotional expression
 - Narrative identity shaping emotional responses
 - Ethical mirror affecting decision-making
+- Pipeline component integration (TurnClassifier, PolicyRouter)
 """
 
 import pytest
+import sys
+from pathlib import Path
 from datetime import datetime, timedelta, timezone
+
+# Add repo root to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from emotional_os.core.feeling_system import FeelingSystem, reset_feeling_system
 
 
@@ -454,6 +461,110 @@ class TestIntegrationRobustness:
         bond1 = system.relational.bonds["user_001"]
         bond2 = system.relational.bonds["user_002"]
         
+
+class TestPipelineComponentsIntegration:
+    """Test TurnClassifier and PolicyRouter integration."""
+
+    def test_turn_classifier_with_real_messages(self):
+        """TurnClassifier should classify real messages correctly."""
+        from src.emotional_os.pipeline.turn_classifier import TurnClassifier
+
+        classifier = TurnClassifier()
+        
+        # Exhaustion disclosure
+        result = classifier.classify(
+            "I'm so tired of things right now... Christmas in two days."
+        )
+        assert result["turn_type"] == "disclosure"
+        assert result["confidence"] > 0.7
+        assert result["emotional_signal"] == "exhaustion"
+        
+        # Gratitude
+        result = classifier.classify("Thank you for listening. That actually helped.")
+        assert result["turn_type"] == "gratitude"
+        assert result["confidence"] > 0.7
+
+    def test_policy_router_enforces_domain_reference(self):
+        """PolicyRouter should enforce domain reference invariant."""
+        from src.emotional_os.pipeline.policy_router import PolicyRouter
+
+        router = PolicyRouter()
+        
+        domains = {
+            "exhaustion": 0.9,
+            "stress": 0.7,
+            "blocked_joy": 0.5,
+        }
+        
+        # Response without explicit domain reference
+        response = "I hear you. That's a lot to carry."
+        result = router.route(
+            turn_type="disclosure",
+            base_response=response,
+            domains=domains,
+            user_message="I'm exhausted",
+        )
+        
+        assert not result["invariants_pass"]
+        assert any("domain" in v.lower() for v in result["violations"])
+        
+        # Response with domain reference
+        response_with_ref = "The exhaustion you're describing is real. I'm here."
+        result2 = router.route(
+            turn_type="disclosure",
+            base_response=response_with_ref,
+            domains=domains,
+            user_message="I'm exhausted",
+        )
+        
+        assert result2["invariants_pass"]
+
+    def test_semantic_compressor_length_constraint(self):
+        """Semantic compressor should produce ≤2 sentences."""
+        from src.emotional_os.semantic_compressor import SemanticCompressor
+
+        compressor = SemanticCompressor()
+        
+        domains = {
+            "exhaustion": 0.9,
+            "temporal_pressure": 0.8,
+            "stress": 0.6,
+        }
+        msg = "I'm so tired of things right now... Christmas in two days."
+        
+        result = compressor.compress(domains, msg)
+        
+        # Count sentences
+        sentences = [s.strip() for s in result.split(".") if s.strip()]
+        assert len(sentences) <= 2
+        assert len(result) < 200
+
+    def test_joy_gating_prevents_inappropriate_celebration(self):
+        """Joy handler should be gated by affect and lexical cues."""
+        from src.emotional_os.mutual_joy_handler import MutualJoyHandler
+
+        joy_handler = MutualJoyHandler()
+        
+        # Context with negative affect
+        context = {
+            "message": "I'm struggling and doubting myself",
+            "user_id": "test",
+            "pipeline_metadata": {
+                "affect": {
+                    "tone": "uncertain",
+                    "valence": 0.2,
+                    "arousal": 0.4,
+                }
+            },
+        }
+        
+        # Joy handler should not produce a template for this
+        template = joy_handler.choose_template(context)
+        # Either None or a conservative template, not celebratory
+        if template:
+            assert "amazing" not in template.lower()
+            assert "wonderful" not in template.lower()
+
         # They should have different trust levels (different experiences)
         assert bond1.trust_level > 0 and bond2.trust_level > 0
 
