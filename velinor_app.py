@@ -23,6 +23,8 @@ from datetime import datetime
 import sys
 from PIL import Image
 import io
+import time
+import random
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent
@@ -233,6 +235,211 @@ def add_button_overlay(image: Image.Image, button_text: str, position: str = "bo
     draw.text((text_x, text_y), button_text, fill=button_text_color, font=font)
     
     return img_with_button
+
+
+def init_boss_fight_session():
+    """Initialize session state for boss fight test."""
+    if 'boss_fight' not in st.session_state:
+        st.session_state.boss_fight = {
+            'initialized': True,
+            'x': 0.05,  # horizontal position (0..1)
+            'direction': 1,  # 1 = left->right, -1 = right->left
+            'speed': 0.15,  # fraction per second across screen
+            'frame': 'right',  # 'left'|'right'|'forward'
+            'forward_timer': 0.0,
+            'overlay_fill': 0.0,  # 0..1
+            'last_time': time.time(),
+            'hit_count': 0,
+            'shudder_ticks': 0,
+        }
+
+
+def update_boss_state(delta: float):
+    """Advance boss state by delta seconds."""
+    s = st.session_state.boss_fight
+    # Move
+    s['x'] += s['direction'] * s['speed'] * delta
+    # Bounce and toggle frame
+    if s['x'] >= 0.95:
+        s['x'] = 0.95
+        s['direction'] = -1
+        s['frame'] = 'left'
+    elif s['x'] <= 0.05:
+        s['x'] = 0.05
+        s['direction'] = 1
+        s['frame'] = 'right'
+
+    # Randomly trigger a forward-facing window while pacing
+    if s['forward_timer'] <= 0:
+        # small chance per second to become forward for 0.6s
+        if random.random() < 0.6 * delta:
+            s['frame'] = 'forward'
+            s['forward_timer'] = 0.6
+    else:
+        s['forward_timer'] -= delta
+        if s['forward_timer'] <= 0:
+            # return to pacing image matching direction
+            s['frame'] = 'right' if s['direction'] == 1 else 'left'
+
+    # Overlay fills slowly during fight
+    s['overlay_fill'] = min(1.0, s['overlay_fill'] + 0.02 * delta)
+
+    # Handle shudder ticks (reduce over time)
+    if s['shudder_ticks'] > 0:
+        s['shudder_ticks'] -= max(1, int(8 * delta))
+
+
+def composite_boss_scene(bg_img: Image.Image, boss_img: Image.Image, overlay_img: Image.Image, x_frac: float, shudder: int, width: int = 800) -> Image.Image:
+    """Compose background + boss at horizontal fraction x_frac and overlay fill.
+
+    Returns a PIL Image resized to `width` px wide for display.
+    """
+    # Work on a copy
+    bg = bg_img.convert('RGBA').copy()
+    canvas_w, canvas_h = bg.size
+
+    # Boss scale: height about 45% of background
+    boss_h = int(canvas_h * 0.45)
+    boss_aspect = boss_img.width / boss_img.height
+    boss_w = int(boss_h * boss_aspect)
+    boss_resized = boss_img.resize((boss_w, boss_h), Image.Resampling.LANCZOS).convert('RGBA')
+
+    # Compute position
+    x_px = int((canvas_w - boss_w) * x_frac)
+    y_px = canvas_h - boss_h - 20
+
+    # Apply shudder by small random offset when shuddering
+    if shudder > 0:
+        jitter = random.randint(-6, 6)
+        x_px = max(0, min(canvas_w - boss_w, x_px + jitter))
+        y_px = max(0, min(canvas_h - boss_h, y_px + random.randint(-3, 3)))
+
+    # Paste boss
+    composite = bg.copy()
+    composite.paste(boss_resized, (x_px, y_px), boss_resized)
+
+    # Apply semi-transparent overlay fill from bottom using supplied overlay_img as pattern
+    if overlay_img:
+        ov = overlay_img.convert('RGBA')
+        ov = ov.resize((canvas_w, canvas_h), Image.Resampling.LANCZOS)
+        # overlay alpha proportional to overlay_fill stored in session
+        alpha = int(180 * st.session_state.boss_fight.get('overlay_fill', 0.0))
+        mask = Image.new('L', (canvas_w, canvas_h), color=alpha)
+        composite = Image.alpha_composite(composite, Image.composite(ov, Image.new('RGBA',(canvas_w,canvas_h)), mask))
+
+    # Resize to fixed display width
+    ratio = width / composite.width
+    new_size = (width, int(composite.height * ratio))
+    return composite.resize(new_size, Image.Resampling.LANCZOS).convert('RGB')
+
+
+def render_boss_fight():
+    """Render boss fight test UI.
+
+    Uses session state `boss_fight` dict and image assets under `velinor/backgrounds` and `velinor/bosses`.
+    """
+    # Ensure session
+    init_boss_fight_session()
+    s = st.session_state.boss_fight
+
+    # Load assets once into session for performance
+    if 'assets_loaded' not in s:
+        PROJECT_ROOT = Path(__file__).parent
+        def load(path):
+            try:
+                return Image.open(path)
+            except Exception:
+                return None
+
+        s['bg_img'] = load(str(PROJECT_ROOT / 'velinor' / 'backgrounds' / 'boss_chamber01.png'))
+        s['boss_left'] = load(str(PROJECT_ROOT / 'velinor' / 'bosses' / 'triglyph_boss_nobg_left.png'))
+        s['boss_right'] = load(str(PROJECT_ROOT / 'velinor' / 'bosses' / 'triglyph_boss_nobg_right.png'))
+        s['boss_forward'] = load(str(PROJECT_ROOT / 'velinor' / 'bosses' / 'triglyph_boss_nobg_forward2.png'))
+        s['overlay_img'] = load(str(PROJECT_ROOT / 'velinor' / 'backgrounds' / 'boss_chamber01.png'))
+        s['assets_loaded'] = True
+
+    now = time.time()
+    delta = max(0.01, now - s.get('last_time', now))
+    s['last_time'] = now
+
+    # Update state
+    update_boss_state(delta)
+
+    # Determine current boss image
+    frame = s['frame']
+    if frame == 'left':
+        boss_img = s.get('boss_left') or s.get('boss_right')
+    elif frame == 'right':
+        boss_img = s.get('boss_right') or s.get('boss_left')
+    else:
+        boss_img = s.get('boss_forward') or s.get('boss_right')
+
+    # If shudder requested, keep shudder_ticks > 0 to jitter
+    shudder = s.get('shudder_ticks', 0)
+
+    # Composite scene image
+    if not s.get('bg_img') or not boss_img:
+        st.error('Missing boss or background assets for boss test.')
+        return
+
+    display_img = composite_boss_scene(s['bg_img'], boss_img, s.get('overlay_img'), s['x'], shudder, width=800)
+
+    # Display composite image at fixed width so we can place an overlay button by pixel
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image(display_img, use_column_width=False, width=800)
+
+    # Click handling: only respond when forward frame is visible
+    can_hit = (frame == 'forward')
+
+    # Compute button horizontal pixel (approx) to overlay on top of boss
+    img_w = 800
+    boss_px_w = int(display_img.width * 0.25)
+    boss_center_px = int(img_w * s['x'])
+    # Constrain
+    boss_center_px = max(40, min(img_w - 40, boss_center_px))
+
+    # Invisible button style positioned over boss
+    left_margin = boss_center_px - (boss_px_w // 2)
+    if left_margin < 0:
+        left_margin = 0
+
+    st.markdown(f"""
+        <style>
+        .stButton button {{
+            background-color: transparent !important;
+            border: none !important;
+            color: transparent !important;
+            padding: 0 !important;
+            margin: -{int(display_img.height*0.45)}px 0 0 {left_margin}px !important;
+            width: {boss_px_w}px !important;
+            height: {int(display_img.height*0.5)}px !important;
+            cursor: pointer;
+        }}
+        .stButton button:hover {{ background-color: rgba(255,255,255,0.02) !important; }}
+        </style>
+    """, unsafe_allow_html=True)
+
+    hit = False
+    if st.button('Hit Boss', key='boss_hit_btn', help='Click when boss faces you', args=None):
+        if can_hit:
+            hit = True
+        else:
+            st.warning('That was not a hit window!')
+
+    if hit:
+        # Register hit effects: shudder and speed up and overlay surge
+        s['hit_count'] += 1
+        s['shudder_ticks'] = max(s.get('shudder_ticks', 0), 8)
+        s['speed'] = s.get('speed', 0.15) * 1.25
+        s['overlay_fill'] = min(1.0, s['overlay_fill'] + 0.08)
+        st.success('Hit! The triglyph reels.')
+
+    # Show basic HUD below
+    st.markdown(f"**Overlay**: {s['overlay_fill']:.2f} • **Speed**: {s['speed']:.3f} • **Hits**: {s['hit_count']}")
+
+    # Auto-rerun to animate
+    st.experimental_rerun()
 
 
 def display_background(background_name: str):
@@ -924,6 +1131,16 @@ def main():
                 
                 if st.button("Start New Game", use_container_width=False, key="welcome_start"):
                     start_new_game()
+                # Test Boss Fight button
+                if st.button("Test Boss Fight", use_container_width=False, key="welcome_boss_test"):
+                    st.session_state.boss_test = True
+                    # initialize boss session
+                    init_boss_fight_session()
+                    st.experimental_rerun()
+
+    # If boss test was requested, render boss fight UI
+    if st.session_state.get('boss_test'):
+        render_boss_fight()
 
 
 if __name__ == "__main__":

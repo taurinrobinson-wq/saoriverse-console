@@ -3,6 +3,9 @@
 import { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
 import AuthModal from '../components/AuthModal';
+import dynamic from 'next/dynamic';
+
+const BossFight = dynamic(() => import('../components/BossFight'), { ssr: false });
 
 interface TitleScreenProps {
   onGameStart?: (playerName: string) => void;
@@ -21,6 +24,7 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
   };
 
   const [showAuth, setShowAuth] = useState(false);
+  const [showBossTest, setShowBossTest] = useState(false);
 
   const handleConfirmName = async () => {
     if (!playerName.trim()) {
@@ -219,6 +223,33 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
       >
         Sign In
       </button>
+
+      <button
+        onClick={() => setShowBossTest(true)}
+        style={{
+          position: 'absolute',
+          bottom: 64,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '10px 20px',
+          borderRadius: 10,
+          background: '#2f4b4b',
+          color: '#dfe8e8',
+          border: '1px solid rgba(255,255,255,0.06)',
+          zIndex: 10,
+        }}
+      >
+        Test Boss Fight
+      </button>
+
+      {showBossTest && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '95%', maxWidth: 1200 }}>
+            <button onClick={() => setShowBossTest(false)} style={{ marginBottom: 12, padding: '8px 12px', borderRadius: 8 }}>Close Test</button>
+            <BossFight />
+          </div>
+        </div>
+      )}
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
 
