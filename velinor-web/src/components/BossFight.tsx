@@ -25,6 +25,7 @@ export default function BossFight({
     const [overlayFill, setOverlayFill] = useState(0);
     const [hits, setHits] = useState(0);
     const [shudder, setShudder] = useState(false);
+    const [defeated, setDefeated] = useState(false);
 
     const rafRef = useRef<number | null>(null);
     const lastRef = useRef<number | null>(null);
@@ -66,13 +67,19 @@ export default function BossFight({
                 }
             }
 
-            // overlay fill
-            setOverlayFill((v) => Math.min(1, v + 0.02 * dt));
+            // overlay fill — slower baseline so it doesn't overwhelm quickly
+            setOverlayFill((v) => Math.min(1, v + 0.005 * dt));
 
             // shudder decays
             if (shudder) {
                 // hide shudder after small time
                 setTimeout(() => setShudder(false), 180);
+            }
+
+            // stop animation if defeated (we let a short vanish animation play in UI)
+            if (defeated) {
+                if (rafRef.current) cancelAnimationFrame(rafRef.current);
+                return;
             }
 
             rafRef.current = requestAnimationFrame(step);
@@ -83,28 +90,66 @@ export default function BossFight({
             mounted = false;
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
-    }, [shudder]);
+    }, [shudder, defeated]);
 
     const handleHit = () => {
-        if (frame !== "forward") return;
+        if (frame !== "forward" || defeated) return;
         // successful hit
-        setHits((h) => h + 1);
-        setShudder(true);
-        speedRef.current = Math.min(1.5, speedRef.current * 1.25);
-        setOverlayFill((v) => Math.min(1, v + 0.08));
-        // shorten forward window so it doesn't stay
-        forwardTimerRef.current = 0;
-        setFrame(dirRef.current === 1 ? "right" : "left");
+        setHits((h) => {
+            const newHits = h + 1;
+            // apply speed increase per hit, with a reasonable cap
+            speedRef.current = Math.min(2.5, speedRef.current * 1.2);
+            // overlay surges on hit
+            setOverlayFill((v) => Math.min(1, v + 0.08));
+
+            // shudder visual
+            setShudder(true);
+
+            // check for vanquish threshold
+            if (newHits >= 10) {
+                setDefeated(true);
+                // trigger vanish: clear forward window and set frame to forward briefly
+                forwardTimerRef.current = 0;
+                setFrame("forward");
+                // let animation show then stop
+                setTimeout(() => {
+                    // stop requestAnimationFrame loop by setting defeated true (handled in step)
+                }, 300);
+            } else {
+                // shorten forward window so it doesn't stay
+                forwardTimerRef.current = 0;
+                setFrame(dirRef.current === 1 ? "right" : "left");
+            }
+
+            return newHits;
+        });
     };
 
     const bossUrl = frame === "left" ? bossLeftUrl : frame === "right" ? bossRightUrl : bossForwardUrl;
+
+    // visual filters to increase contrast against background
+    const bossBaseFilter = "contrast(1.35) saturate(1.15) drop-shadow(0 12px 24px rgba(0,0,0,0.7))";
 
     return (
         <div style={{ position: "relative", width: "100%", maxWidth: 1200, margin: "0 auto", aspectRatio: "16/9", overflow: "hidden" }}>
             <img src={bgUrl} alt="boss bg" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
 
-            {/* rising semi-transparent overlay */}
-            <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: `${overlayFill * 100}%`, background: "rgba(18,18,18,0.6)", pointerEvents: "none", transition: "height 0.12s linear", zIndex: 5 }} />
+            {/* rising semi-transparent overlay (uses overlay image for texture + tint) */}
+            <div style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                bottom: 0,
+                height: `${overlayFill * 100}%`,
+                pointerEvents: "none",
+                transition: "height 0.4s linear",
+                zIndex: 5,
+                backgroundImage: `linear-gradient(rgba(12,18,36,0.55), rgba(12,18,36,0.55)), url(${overlayUrl})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center bottom",
+                backgroundRepeat: "no-repeat",
+                opacity: 0.72,
+            }} />
 
             {/* boss image */}
             <img
@@ -115,18 +160,24 @@ export default function BossFight({
                     position: "absolute",
                     bottom: "6%",
                     left: `${x * 100}%`,
-                    transform: "translateX(-50%)",
-                    height: "45%",
-                    cursor: frame === "forward" ? "pointer" : "default",
+                    transform: defeated ? "translateX(-50%) scale(1.6)" : "translateX(-50%)",
+                    height: defeated ? "55%" : "45%",
+                    cursor: frame === "forward" && !defeated ? "pointer" : "default",
                     zIndex: 10,
-                    transition: shudder ? "transform 0.05s" : "left 0.06s linear",
-                    filter: shudder ? "brightness(1.1) drop-shadow(0 8px 18px rgba(0,0,0,0.6))" : "none",
+                    transition: defeated ? "transform 0.7s ease, opacity 0.7s ease" : shudder ? "transform 0.05s" : "left 0.06s linear",
+                    filter: `${bossBaseFilter}${shudder ? " brightness(1.1)" : ""}`,
+                    opacity: defeated ? 0 : 1,
+                    pointerEvents: defeated ? "none" : "auto",
                 }}
             />
 
             {/* small HUD */}
             <div style={{ position: "absolute", left: 12, top: 12, zIndex: 20, color: "#eee", fontSize: 14 }}>
-                Overlay: {(overlayFill * 100).toFixed(0)}% • Speed: {speedRef.current.toFixed(2)} • Hits: {hits}
+                {defeated ? (
+                    <span style={{ color: '#a3ffb5', fontWeight: 700 }}>Vanquished!</span>
+                ) : (
+                    <>Overlay: {(overlayFill * 100).toFixed(0)}% • Speed: {speedRef.current.toFixed(2)} • Hits: {hits}</>
+                )}
             </div>
         </div>
     );
