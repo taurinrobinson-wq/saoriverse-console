@@ -356,6 +356,63 @@ He approaches with genuine warmth, though his eyes carry caution.
             glyph_close=["Cinarä̈", "Brethielï̈"],
         )
 
+    @staticmethod
+    def build_boss_chamber() -> SceneModule:
+        """Build the boss chamber encounter scene."""
+        return SceneModule(
+            scene_id="boss_chamber_01",
+            npc_name="Tri-Glyph",
+            npc_archetype="oracle",
+
+            narration_distant="""
+Far ahead, the cavern widens into a vaulted chamber.
+A massive glyph sits at its center, its facets catching what little light remains.
+The air tastes like old metal and thunder.
+            """.strip(),
+
+            narration_close="""
+You stand on the threshold of the chamber.
+The triglyph towers above you, humming in a tone that resonates in your bones.
+Something in you recognizes it — and also resists.
+            """.strip(),
+
+            npc_dialogue="""
+"Who awakens the pattern?"
+The glyph's voice is a chorus — layered, patient, and immense.
+"Name yourself, or be unmade into static." 
+            """.strip(),
+
+            assets=SceneAssets(
+                background_distant="velinor/backgrounds/boss_chamber01.png",
+                background_close="velinor/backgrounds/boss_chamber01.png",
+                foreground_distant="velinor/bosses/triglyph_boss_nobg_forward.png",
+                foreground_close="velinor/bosses/triglyph_boss_nobg_forward2.png",
+            ),
+
+            player_options=[
+                DialogueOption(
+                    text="Strike the triglyph with force.",
+                    glyph_triggers=["Vhar"],
+                    npc_response="The glyph flares — pain and memory ripple outward.",
+                    trust_modifier=-0.25
+                ),
+                DialogueOption(
+                    text="Reach out and speak softly.",
+                    glyph_triggers=["Aelitḧ", "Thalen̈"],
+                    npc_response="The pattern listens. It answers in a slow, careful cadence.",
+                    trust_modifier=0.35
+                ),
+                DialogueOption(
+                    text="Fall back and observe.",
+                    glyph_triggers=["Esḧ"],
+                    npc_response="Distance sharpens the edges — the glyph waits.",
+                    trust_modifier=0.05
+                ),
+            ],
+
+            glyph_distant=["Esḧ"],
+            glyph_close=["Querrä", "Brethielï̈"],
+        )
 
 # Session-based scene manager
 def get_scene_renderer() -> SceneRenderer:
