@@ -28,8 +28,13 @@
         "corrupted_data",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "hold_hand",
+        "sit_or_leave"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -73,8 +78,14 @@
         "ghost_signals",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -113,8 +124,13 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -153,8 +169,13 @@
         "abandoned_rituals",
         "broken_corelink"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -190,8 +211,12 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -226,8 +251,13 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "hold_hand",
+        "sit_or_leave"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -265,8 +295,13 @@
         "corrupted_data",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "hold_hand",
+        "sit_or_leave"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -302,8 +337,12 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -337,8 +376,14 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -375,8 +420,14 @@
         "corrupted_data",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust",
+        "choose_sovereignty"
+      ],
+      "narrative_triggers": [
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -416,8 +467,13 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "mediate_or_ignore",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -456,8 +512,13 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "hold_hand",
+        "sit_or_leave"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -494,8 +555,15 @@
       "remnants_integration": [
         "broken_corelink"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search",
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -532,8 +600,12 @@
         "corrupted_data",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -567,8 +639,12 @@
       "story_seed": "",
       "tone_integration": [],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -609,8 +685,18 @@
         "ghost_signals",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust",
+        "collect_item",
+        "confront_or_ignore"
+      ],
+      "narrative_triggers": [
+        "witness_event",
+        "npc_whispers",
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -650,8 +736,12 @@
         "corrupted_data",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -689,8 +779,14 @@
         "intimate"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -724,8 +820,12 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -758,8 +858,14 @@
         "fragmented"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -800,8 +906,14 @@
         "ghost_signals",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -840,8 +952,14 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -878,8 +996,15 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_interrupt",
+        "follow_or_ignore",
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -913,8 +1038,14 @@
         "hopeful"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search",
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_hidden_passage"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -956,8 +1087,20 @@
         "abandoned_rituals",
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search",
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene",
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "player_enters_location",
+        "player_enters_hidden_passage",
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -995,8 +1138,14 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1030,8 +1179,14 @@
         "ritualistic"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1067,8 +1222,13 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -1105,8 +1265,14 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -1144,8 +1310,13 @@
         "abandoned_rituals",
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -1183,8 +1354,16 @@
         "environmental_scars",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust",
+        "collect_item",
+        "confront_or_ignore"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -1222,8 +1401,12 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search"
+      ],
+      "narrative_triggers": [
+        "player_enters_hidden_passage"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -1256,8 +1439,14 @@
         "hopeful"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1298,8 +1487,12 @@
         "broken_corelink",
         "corrupted_data"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -1339,8 +1532,16 @@
         "ghost_signals",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "witness_event",
+        "npc_whispers",
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -1378,8 +1579,14 @@
         "intimate"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -1419,8 +1626,16 @@
       "remnants_integration": [
         "ghost_signals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "witness_event",
+        "npc_whispers",
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1456,8 +1671,16 @@
         "intimate"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene",
+        "sit_or_leave",
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1491,8 +1714,14 @@
         "hopeful"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1531,8 +1760,13 @@
         "environmental_scars",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -1569,8 +1803,15 @@
         "intimate"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "choose_trust",
+        "align_with_npc_or_oppose",
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -1606,8 +1847,12 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -1640,8 +1885,14 @@
         "hopeful"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1678,8 +1929,20 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search",
+        "align_with_npc_or_oppose",
+        "choose_trust",
+        "collect_item",
+        "investigate_or_leave",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_collects_item",
+        "player_enters_hidden_passage",
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -1716,8 +1979,13 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -1756,8 +2024,12 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -1796,8 +2068,13 @@
         "abandoned_rituals",
         "broken_corelink"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -1839,8 +2116,13 @@
         "ghost_signals",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -1880,8 +2162,13 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_returns_to_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -1925,8 +2212,12 @@
         "environmental_scars",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "collapse",
@@ -1965,8 +2256,13 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_returns_to_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -2005,8 +2301,16 @@
         "abandoned_rituals",
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search",
+        "align_with_npc_or_oppose",
+        "choose_trust",
+        "choose_sovereignty"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -2043,8 +2347,14 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -2087,8 +2397,15 @@
         "environmental_scars",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_sits_with_npc"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -2128,8 +2445,13 @@
       "remnants_integration": [
         "broken_corelink"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "betrayal",
@@ -2171,8 +2493,13 @@
         "broken_corelink",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_interrupt",
+        "follow_or_ignore"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -2216,8 +2543,13 @@
         "ghost_signals",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_interrupt",
+        "follow_or_ignore"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -2251,8 +2583,13 @@
         "hopeful"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -2287,8 +2624,13 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -2326,8 +2668,15 @@
       "remnants_integration": [
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "investigate_or_leave",
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_collects_item"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -2365,8 +2714,14 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -2402,8 +2757,17 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene",
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "presence",
@@ -2443,8 +2807,12 @@
         "broken_corelink",
         "corrupted_data"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -2480,8 +2848,15 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search",
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_returns_to_location",
+        "player_enters_hidden_passage"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -2519,8 +2894,13 @@
       "remnants_integration": [
         "abandoned_rituals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "creative",
@@ -2561,8 +2941,13 @@
         "broken_corelink",
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_participate",
+        "join_or_watch"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -2604,8 +2989,14 @@
         "abandoned_rituals",
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
@@ -2641,8 +3032,16 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search",
+        "observe_or_intervene",
+        "sit_or_leave",
+        "choose_trust",
+        "choose_sovereignty"
+      ],
+      "narrative_triggers": [
+        "player_enters_hidden_passage"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -2675,8 +3074,12 @@
         "somber"
       ],
       "remnants_integration": [],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "follow_route_or_search"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "boundaries",
@@ -2712,8 +3115,14 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "align_with_npc_or_oppose",
+        "choose_trust"
+      ],
+      "narrative_triggers": [
+        "npc_gives_test",
+        "alignment_check"
+      ],
       "memory_fragments": [],
       "tags": [
         "community",
@@ -2749,8 +3158,12 @@
       "remnants_integration": [
         "environmental_scars"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ache",
@@ -2788,8 +3201,13 @@
         "abandoned_rituals",
         "memory_echoes"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "collect_item",
+        "return_item"
+      ],
+      "narrative_triggers": [
+        "player_enters_location"
+      ],
       "memory_fragments": [],
       "tags": [
         "ancestry",
@@ -2830,8 +3248,15 @@
       "remnants_integration": [
         "ghost_signals"
       ],
-      "player_choices": [],
-      "narrative_triggers": [],
+      "player_choices": [
+        "sit_or_leave",
+        "say_nothing",
+        "observe_or_intervene"
+      ],
+      "narrative_triggers": [
+        "player_returns_to_location",
+        "player_sits_with_npc"
+      ],
       "memory_fragments": [],
       "tags": [
         "memory-loss",
