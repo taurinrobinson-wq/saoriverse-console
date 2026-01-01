@@ -13,6 +13,17 @@ from collections import defaultdict
 HERE = os.path.dirname(__file__)
 DATA_PATH = os.path.normpath(os.path.join(HERE, '..', 'velinor', 'markdowngameinstructions', 'Glyph_Organizer.json'))
 
+import json
+
+# Load authoritative rulebook if present
+RULEBOOK_PATH = os.path.normpath(os.path.join(HERE, '..', 'velinor', 'markdowngameinstructions', 'Glyph_Rules.json'))
+if os.path.exists(RULEBOOK_PATH):
+    with open(RULEBOOK_PATH, 'r', encoding='utf-8') as rf:
+        RULES = json.load(rf)
+else:
+    RULES = {}
+
+# Fallback keyword maps (used when no authoritative rule applies)
 TONES_MAP = {
     'somber': ['ache', 'loss', 'grief', 'mourning', 'sorrow', 'hollow', 'weary', 'quiet', 'tender', 'widow'],
     'mythic': ['ancestry', 'lineage', 'ritual', 'legacy', 'covenant', 'ancestor', 'tomb', 'ossuary', 'myth', 'inherit'],
@@ -93,8 +104,30 @@ def enrich():
         tags = g.get('tags', []) or []
         domain = g.get('domain','') or ''
 
-        tones = map_tones(text, domain, tags)
-        rems = map_remnants(text, tags)
+        # Attempt authoritative NPC rules first
+        npc_name = (g.get('npc', {}).get('name') or '').lower()
+        tones = []
+        rems = []
+        if RULES.get('npc_rules') and npc_name:
+            # match any rule key contained in the npc name
+            for key, rule in RULES['npc_rules'].items():
+                if key in npc_name:
+                    tones = rule.get('tone_integration', [])
+                    rems = rule.get('remnants_integration', [])
+                    break
+
+        # If no NPC rule matched, use domain defaults
+        if not tones and RULES.get('domain_defaults'):
+            domdef = RULES['domain_defaults'].get(domain)
+            if domdef:
+                tones = domdef.get('tone', [])
+                rems = domdef.get('remnants', [])
+
+        # Fall back to heuristic mapping if still empty
+        if not tones:
+            tones = map_tones(text, domain, tags)
+        if not rems:
+            rems = map_remnants(text, tags)
 
         g['tone_integration'] = tones
         g['remnants_integration'] = rems
