@@ -5,11 +5,22 @@ import { useRouter } from 'next/navigation';
 import AuthModal from '../components/AuthModal';
 import dynamic from 'next/dynamic';
 
-const BossFight = dynamic(() => import('../components/BossFight'), { ssr: false });
+// Dynamically import components to avoid hydration issues
+const KaeleScene = dynamic(() => import('./KaeleScene'), { ssr: false });
+const BossFight = dynamic(() => import('./BossFight'), { ssr: false });
 
 interface TitleScreenProps {
   onGameStart?: (playerName: string) => void;
 }
+
+// Development scene configurations
+const DEV_SCENES = {
+  triglyph_boss: { label: 'Triglyph Boss Fight', component: 'BossFight' },
+  kaelen_marketplace: { label: 'Kaelen - Marketplace', component: 'KaeleScene', props: { scenarioType: 'marketplace' } },
+  kaelen_swamp: { label: 'Kaelen - Swamp Maze', component: 'KaeleScene', props: { scenarioType: 'swamp', autoAlternate: true, alternateInterval: 2000 } },
+  kaelen_confrontation: { label: 'Kaelen - Final Confrontation', component: 'KaeleScene', props: { scenarioType: 'confrontation' } },
+  glyph_stolen_memory: { label: 'Glyph of Stolen Memory', component: 'KaeleScene', props: { scenarioType: 'marketplace' } },
+};
 
 export default function TitleScreen({ onGameStart }: TitleScreenProps) {
   const router = useRouter();
@@ -17,14 +28,63 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
   const [showNameInput, setShowNameInput] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const handleStartButtonClick = () => {
-    setShowNameInput(true);
-    setError('');
-  };
-
+  const [selectedDevScene, setSelectedDevScene] = useState<string | null>(null);
   const [showAuth, setShowAuth] = useState(false);
   const [showBossTest, setShowBossTest] = useState(false);
+
+  // If a dev scene is selected, render it instead of the title screen
+  if (selectedDevScene) {
+    return (
+      <main style={{
+        position: 'relative',
+        width: '100%',
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #0f1a0f 0%, #1a2819 100%)',
+        padding: '40px 20px',
+        overflow: 'auto'
+      }}>
+        <button
+          onClick={() => setSelectedDevScene(null)}
+          style={{
+            position: 'fixed',
+            top: 24,
+            left: 24,
+            padding: '8px 16px',
+            background: '#2e3f2f',
+            color: '#e6d8b4',
+            border: '1px solid rgba(168,143,92,0.5)',
+            borderRadius: 8,
+            cursor: 'pointer',
+            zIndex: 100,
+            fontSize: '0.9rem',
+            fontFamily: 'Georgia, serif'
+          }}
+        >
+          ← Back to Title
+        </button>
+
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h1 style={{
+            color: '#e6d8b4',
+            textAlign: 'center',
+            marginBottom: '40px',
+            fontFamily: 'Georgia, serif',
+            fontSize: '2rem'
+          }}>
+            {DEV_SCENES[selectedDevScene as keyof typeof DEV_SCENES]?.label || 'Development Scene'}
+          </h1>
+
+          {selectedDevScene === 'triglyph_boss' && <BossFight />}
+          {(selectedDevScene === 'kaelen_marketplace' || 
+            selectedDevScene === 'kaelen_swamp' || 
+            selectedDevScene === 'kaelen_confrontation' ||
+            selectedDevScene === 'glyph_stolen_memory') && 
+            <KaeleScene {...DEV_SCENES[selectedDevScene as keyof typeof DEV_SCENES]?.props} />
+          }
+        </div>
+      </main>
+    );
+  }
 
   const handleConfirmName = async () => {
     if (!playerName.trim()) {
@@ -57,6 +117,10 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
       setError('Failed to start game');
       setLoading(false);
     }
+  };
+
+  const handleStartButtonClick = () => {
+    setShowNameInput(true);
   };
 
   const handleCancel = () => {
@@ -207,6 +271,37 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
       >
         Play New Game
       </button>
+
+      {/* Development Scene Selector Dropdown */}
+      <select
+        value={selectedDevScene || ''}
+        onChange={(e) => setSelectedDevScene(e.target.value || null)}
+        style={{
+          position: 'absolute',
+          bottom: '60px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '10px 16px',
+          fontSize: '0.95rem',
+          background: 'linear-gradient(135deg, #2e3f2f 0%, #1a2219 100%)',
+          color: '#e6d8b4',
+          border: '2px solid #a88f5c',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          zIndex: 10,
+          fontFamily: 'Georgia, serif',
+          boxShadow: '0 4px 12px rgba(168, 143, 92, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(4px)',
+          outline: 'none',
+        }}
+      >
+        <option value="">— Development Scenes —</option>
+        {Object.entries(DEV_SCENES).map(([key, scene]) => (
+          <option key={key} value={key}>
+            {scene.label}
+          </option>
+        ))}
+      </select>
 
       <button
         onClick={() => setShowAuth(true)}
