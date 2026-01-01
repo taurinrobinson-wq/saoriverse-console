@@ -19,20 +19,19 @@
       "storyline_summary": "Malrik shows the player chambers where the Corelink system stored emotional data???now corrupted, glitching, displaying fragments of millions of private moments. Names blur into meaninglessness. Relationships dissolve into noise. The glyph manifests when the player realizes that this fracture isn't ...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
         "fragmented",
-        "somber"
+        "eerie"
       ],
       "remnants_integration": [
-        "broken_corelink",
         "corrupted_data",
-        "memory_echoes"
+        "broken_corelink"
       ],
       "player_choices": [
-        "hold_hand",
-        "sit_or_leave"
+        "observe_or_intervene",
+        "investigate_or_leave"
       ],
       "narrative_triggers": [
+        "system_glitch_detected",
         "player_enters_location"
       ],
       "memory_fragments": [],
@@ -67,24 +66,20 @@
       "storyline_summary": "The player navigates the desert with Malrik, who points out mirages???false water, false paths, false homes. These mirages are fed by Corelink remnants, tech still broadcasting phantom signals. As the player walks, they question what's real. The glyph manifests when the player chooses to dismiss a m...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
         "fragmented",
-        "somber"
+        "eerie"
       ],
       "remnants_integration": [
-        "broken_corelink",
         "corrupted_data",
-        "environmental_scars",
-        "ghost_signals",
-        "memory_echoes"
+        "broken_corelink"
       ],
       "player_choices": [
-        "align_with_npc_or_oppose",
-        "choose_trust"
+        "observe_or_intervene",
+        "investigate_or_leave"
       ],
       "narrative_triggers": [
-        "npc_gives_test",
-        "alignment_check"
+        "system_glitch_detected",
+        "player_enters_location"
       ],
       "memory_fragments": [],
       "tags": [
@@ -118,17 +113,19 @@
       "storyline_summary": "inheritance rationalized as historical evidence.",
       "story_seed": "",
       "tone_integration": [
-        "mythic",
-        "ritualistic"
+        "fragmented",
+        "eerie"
       ],
       "remnants_integration": [
-        "abandoned_rituals"
+        "corrupted_data",
+        "broken_corelink"
       ],
       "player_choices": [
-        "collect_item",
-        "return_item"
+        "observe_or_intervene",
+        "investigate_or_leave"
       ],
       "narrative_triggers": [
+        "system_glitch_detected",
         "player_enters_location"
       ],
       "memory_fragments": [],
@@ -161,19 +158,19 @@
       "storyline_summary": "Malrik insists legacy is record, not myth. The player uncovers names etched in dust, realizing that even data carries ache. Legacy here is the fragile persistence of identity against forgetting.",
       "story_seed": "",
       "tone_integration": [
-        "mythic",
-        "ritualistic",
-        "somber"
+        "fragmented",
+        "eerie"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
+        "corrupted_data",
         "broken_corelink"
       ],
       "player_choices": [
-        "collect_item",
-        "return_item"
+        "observe_or_intervene",
+        "investigate_or_leave"
       ],
       "narrative_triggers": [
+        "system_glitch_detected",
         "player_enters_location"
       ],
       "memory_fragments": [],
@@ -206,15 +203,19 @@
       "storyline_summary": "Malrik leads the player through a gauntlet of desert ruins???each step destabilizing stone. He teaches measured pace: not fast (panic), not slow (paralysis), but a tempo that matches the ground beneath. The glyph manifests when the player successfully traverses the ruins, understanding that sovereig...",
       "story_seed": "",
       "tone_integration": [
-        "somber"
+        "fragmented",
+        "eerie"
       ],
       "remnants_integration": [
-        "environmental_scars"
+        "corrupted_data",
+        "broken_corelink"
       ],
       "player_choices": [
-        "observe_or_intervene"
+        "observe_or_intervene",
+        "investigate_or_leave"
       ],
       "narrative_triggers": [
+        "system_glitch_detected",
         "player_enters_location"
       ],
       "memory_fragments": [],
@@ -246,16 +247,19 @@
       "storyline_summary": "Malrik teaches the player to carve boundary markers in the desert sand???stones or glyphs that define safe space amid chaos. These markers are temporary; the wind will erase them. But while they stand, they hold. The glyph manifests when the player carves their first boundary marker and watches it h...",
       "story_seed": "",
       "tone_integration": [
-        "somber"
+        "fragmented",
+        "eerie"
       ],
       "remnants_integration": [
-        "environmental_scars"
+        "corrupted_data",
+        "broken_corelink"
       ],
       "player_choices": [
-        "hold_hand",
-        "sit_or_leave"
+        "observe_or_intervene",
+        "investigate_or_leave"
       ],
       "narrative_triggers": [
+        "system_glitch_detected",
         "player_enters_location"
       ],
       "memory_fragments": [],
@@ -287,20 +291,20 @@
       "storyline_summary": "Captain Veynar stands among broken banners, his authority eroded by promises that no longer hold. Each oath sworn to protect has splintered under collapse, leaving him weary and hollow. The player sees soldiers drifting away, their loyalty dissolved into silence. The glyph manifests when the player ...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "somber"
+        "somber",
+        "ritualistic"
       ],
       "remnants_integration": [
-        "corrupted_data",
-        "memory_echoes"
+        "abandoned_rituals",
+        "environmental_scars"
       ],
       "player_choices": [
-        "hold_hand",
-        "sit_or_leave"
+        "choose_sovereignty",
+        "align_with_npc_or_oppose"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "player_enters_location",
+        "mediate_or_ignore"
       ],
       "memory_fragments": [],
       "tags": [
@@ -334,14 +338,20 @@
       "storyline_summary": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance.",
       "story_seed": "",
       "tone_integration": [
-        "somber"
+        "somber",
+        "ritualistic"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "abandoned_rituals",
+        "environmental_scars"
+      ],
       "player_choices": [
-        "observe_or_intervene"
+        "choose_sovereignty",
+        "align_with_npc_or_oppose"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "player_enters_location",
+        "mediate_or_ignore"
       ],
       "memory_fragments": [],
       "tags": [
@@ -372,17 +382,20 @@
       "storyline_summary": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance.",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "somber"
+        "somber",
+        "ritualistic"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "abandoned_rituals",
+        "environmental_scars"
+      ],
       "player_choices": [
-        "align_with_npc_or_oppose",
-        "choose_trust"
+        "choose_sovereignty",
+        "align_with_npc_or_oppose"
       ],
       "narrative_triggers": [
-        "npc_gives_test",
-        "alignment_check"
+        "player_enters_location",
+        "mediate_or_ignore"
       ],
       "memory_fragments": [],
       "tags": [
@@ -413,12 +426,11 @@
       "storyline_summary": "Coren the Mediator leads a group that practices preemptive severance???severing all emotional bonds before they can betray you. They teach: if you cut ties first, the abandonment can't touch you. The player encounters their community and must choose: join them in their defense, or challenge their lo...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "intimate"
+        "fragmented"
       ],
       "remnants_integration": [
         "corrupted_data",
-        "memory_echoes"
+        "broken_corelink"
       ],
       "player_choices": [
         "align_with_npc_or_oppose",
@@ -460,9 +472,7 @@
       "storyline_summary": "Coren the Mediator stands between disputants in the marketplace???survivors arguing over resources, paths, survival strategies. She teaches co-witnessing: the ability to see both sides' pain without forcing resolution. She holds space for the ache itself. The glyph manifests when the player mediates...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "intimate",
-        "somber"
+        "ritualistic"
       ],
       "remnants_integration": [
         "environmental_scars"
@@ -504,13 +514,10 @@
       "storyline_summary": "The Trial Warden oversees a ritual space where survivors face their breaking points???the moment they might lash out or collapse. She teaches interruption: the ability to pause the impulse, to hold the rage without releasing it. The glyph manifests when the player faces their own trial???a moment wh...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "ritualistic"
       ],
       "remnants_integration": [
-        "abandoned_rituals"
+        "environmental_scars"
       ],
       "player_choices": [
         "hold_hand",
@@ -549,11 +556,10 @@
       "storyline_summary": "Dalen was a guide who led people deeper into Velhara during the collapse, trusting intel from the Corelink system. That intel was wrong???the system was fragmenting, spreading false paths. His charges were buried. Dalen survived with scars???physical and emotional. He teaches that betrayal leaves ma...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
         "somber"
       ],
       "remnants_integration": [
-        "broken_corelink"
+        "memory_echoes"
       ],
       "player_choices": [
         "follow_route_or_search",
@@ -598,7 +604,7 @@
       ],
       "remnants_integration": [
         "corrupted_data",
-        "memory_echoes"
+        "broken_corelink"
       ],
       "player_choices": [
         "observe_or_intervene"
@@ -637,8 +643,12 @@
       "location": "Desert trial grounds.",
       "storyline_summary": "Dalen insists sovereignty is earned through boldness. The glyph manifests when the player accepts risk as boundary.",
       "story_seed": "",
-      "tone_integration": [],
-      "remnants_integration": [],
+      "tone_integration": [
+        "ritualistic"
+      ],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "observe_or_intervene"
       ],
@@ -675,27 +685,19 @@
       "story_seed": "",
       "tone_integration": [
         "eerie",
-        "fragmented",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "fragmented"
       ],
       "remnants_integration": [
-        "corrupted_data",
         "ghost_signals",
-        "memory_echoes"
+        "corrupted_data"
       ],
       "player_choices": [
-        "align_with_npc_or_oppose",
-        "choose_trust",
-        "collect_item",
-        "confront_or_ignore"
+        "confront_or_ignore",
+        "observe_or_intervene"
       ],
       "narrative_triggers": [
-        "witness_event",
-        "npc_whispers",
         "npc_gives_test",
-        "alignment_check"
+        "witness_event"
       ],
       "memory_fragments": [],
       "tags": [
@@ -733,14 +735,16 @@
         "fragmented"
       ],
       "remnants_integration": [
-        "corrupted_data",
-        "memory_echoes"
+        "ghost_signals",
+        "corrupted_data"
       ],
       "player_choices": [
+        "confront_or_ignore",
         "observe_or_intervene"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "npc_gives_test",
+        "witness_event"
       ],
       "memory_fragments": [],
       "tags": [
@@ -775,17 +779,19 @@
       "story_seed": "",
       "tone_integration": [
         "eerie",
-        "fragmented",
-        "intimate"
+        "fragmented"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "ghost_signals",
+        "corrupted_data"
+      ],
       "player_choices": [
-        "sit_or_leave",
-        "say_nothing",
+        "confront_or_ignore",
         "observe_or_intervene"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "npc_gives_test",
+        "witness_event"
       ],
       "memory_fragments": [],
       "tags": [
@@ -817,14 +823,20 @@
       "storyline_summary": "Drossel teaches that boundaries are masks ? shifting, deceptive. The glyph manifests when the player learns sovereignty is not clarity but concealment.",
       "story_seed": "",
       "tone_integration": [
-        "somber"
+        "eerie",
+        "fragmented"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "ghost_signals",
+        "corrupted_data"
+      ],
       "player_choices": [
+        "confront_or_ignore",
         "observe_or_intervene"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "npc_gives_test",
+        "witness_event"
       ],
       "memory_fragments": [],
       "tags": [
@@ -855,16 +867,20 @@
       "storyline_summary": "The player faces Drossel?s test: betray Kaelen or protect him. Sovereignty manifests when choice itself becomes poisoned ? every path fractures trust.",
       "story_seed": "",
       "tone_integration": [
+        "eerie",
         "fragmented"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "ghost_signals",
+        "corrupted_data"
+      ],
       "player_choices": [
-        "align_with_npc_or_oppose",
-        "choose_trust"
+        "confront_or_ignore",
+        "observe_or_intervene"
       ],
       "narrative_triggers": [
         "npc_gives_test",
-        "alignment_check"
+        "witness_event"
       ],
       "memory_fragments": [],
       "tags": [
@@ -896,15 +912,10 @@
       "storyline_summary": "A mystic sits before a dormant Corelink console, palms flat on the ancient interface, communing with the faint resonance still thrumming beneath. She teaches the player that presence isn't only human???it's also the echo of systems that once held billions of minds. By placing their hands on the cons...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "somber"
+        "intimate"
       ],
       "remnants_integration": [
-        "broken_corelink",
-        "ghost_signals",
-        "memory_echoes"
+        "environmental_scars"
       ],
       "player_choices": [
         "sit_or_leave",
@@ -944,8 +955,6 @@
       "storyline_summary": "A healer tends the wounded survivors in the shrines???not with potions alone, but with presence. She sits with the injured, holding space for their pain without trying to fix it. The glyph manifests when the player joins her in this practice: sitting beside someone in ache, offering nothing but atte...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
         "intimate",
         "somber"
       ],
@@ -955,10 +964,11 @@
       "player_choices": [
         "sit_or_leave",
         "say_nothing",
-        "observe_or_intervene"
+        "hold_hand"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "player_sits_with_npc",
+        "player_returns_to_location"
       ],
       "memory_fragments": [],
       "tags": [
@@ -991,19 +1001,19 @@
       "story_seed": "",
       "tone_integration": [
         "hopeful",
-        "ritualistic"
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals"
+        "abandoned_rituals",
+        "environmental_scars"
       ],
       "player_choices": [
-        "observe_or_interrupt",
-        "follow_or_ignore",
         "observe_or_participate",
         "join_or_watch"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "player_enters_location",
+        "festival_trigger"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1035,16 +1045,20 @@
       "storyline_summary": "After harsh winters, alpine flowers bloom along hidden paths. The player is guided to walk this trail with others, each bloom symbolizing reunion and renewal. The glyph is revealed when the player recognizes that joy is not fleeting ? it is the spark of life returning, a promise that the path contin...",
       "story_seed": "",
       "tone_integration": [
-        "hopeful"
+        "hopeful",
+        "mythic"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "abandoned_rituals",
+        "environmental_scars"
+      ],
       "player_choices": [
-        "follow_route_or_search",
         "observe_or_participate",
         "join_or_watch"
       ],
       "narrative_triggers": [
-        "player_enters_hidden_passage"
+        "player_enters_location",
+        "festival_trigger"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1076,30 +1090,20 @@
       "storyline_summary": "The player enters a cavern where sound is swallowed by stone. Here, silence is not emptiness but a veil,  a sacred presence that covers grief and longing without words. The ritual requires the player to remain still, listening to what cannot be heard, until the glyph reveals itself in the hush. In t...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "hopeful",
+        "mythic"
       ],
       "remnants_integration": [
         "abandoned_rituals",
         "environmental_scars"
       ],
       "player_choices": [
-        "follow_route_or_search",
-        "sit_or_leave",
-        "say_nothing",
-        "observe_or_intervene",
-        "align_with_npc_or_oppose",
-        "choose_trust"
+        "observe_or_participate",
+        "join_or_watch"
       ],
       "narrative_triggers": [
         "player_enters_location",
-        "player_enters_hidden_passage",
-        "npc_gives_test",
-        "alignment_check"
+        "festival_trigger"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1132,19 +1136,19 @@
       "story_seed": "",
       "tone_integration": [
         "hopeful",
-        "mythic",
-        "ritualistic"
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals"
+        "abandoned_rituals",
+        "environmental_scars"
       ],
       "player_choices": [
-        "align_with_npc_or_oppose",
-        "choose_trust"
+        "observe_or_participate",
+        "join_or_watch"
       ],
       "narrative_triggers": [
-        "npc_gives_test",
-        "alignment_check"
+        "player_enters_location",
+        "festival_trigger"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1176,16 +1180,19 @@
       "story_seed": "",
       "tone_integration": [
         "hopeful",
-        "ritualistic"
+        "mythic"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "abandoned_rituals",
+        "environmental_scars"
+      ],
       "player_choices": [
-        "align_with_npc_or_oppose",
-        "choose_trust"
+        "observe_or_participate",
+        "join_or_watch"
       ],
       "narrative_triggers": [
-        "npc_gives_test",
-        "alignment_check"
+        "player_enters_location",
+        "festival_trigger"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1216,8 +1223,7 @@
       "storyline_summary": "Families gather to pass flame from elder to child while Inodora narrates. The glyph manifests when the player accepts the fire, understanding legacy as warmth that survives only through transmission.",
       "story_seed": "",
       "tone_integration": [
-        "mythic",
-        "ritualistic"
+        "mythic"
       ],
       "remnants_integration": [
         "abandoned_rituals"
@@ -1259,12 +1265,11 @@
       "storyline_summary": "A storyteller who remained through the collapse teaches that presence can anchor others. The glyph manifests when the player spends an entire night listening to stories and holds silent vigil, preventing the community's fear from spreading. This is presence as an anchor???sustaining others by stayin...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "somber"
+        "intimate"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "sit_or_leave",
         "say_nothing",
@@ -1303,11 +1308,9 @@
       "storyline_summary": "Sea merchants haggle, laugh, and celebrate successful trades at the docks. Their joy is infectious???the exuberance of commerce, of goods arriving, of profit and abundance flowing. Though self-interested, they can't help sharing in the energy of a good deal. The glyph manifests when the player joins...",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "ritualistic"
+        "hopeful"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
         "environmental_scars"
       ],
       "player_choices": [
@@ -1347,22 +1350,20 @@
       "storyline_summary": "Kaelen boasts of thefts, but what he steals now is not coin or relic, it is memory itself. Stories vanish from the marketplace, faces blur, names dissolve into shadow. Trust collapses when memory is rewritten, leaving community bonds incoherent. The glyph manifests when the player sees that stolen m...",
       "story_seed": "",
       "tone_integration": [
+        "eerie",
         "fragmented"
       ],
       "remnants_integration": [
-        "corrupted_data",
-        "environmental_scars",
-        "memory_echoes"
+        "memory_echoes",
+        "ghost_signals"
       ],
       "player_choices": [
         "align_with_npc_or_oppose",
-        "choose_trust",
-        "collect_item",
-        "confront_or_ignore"
+        "follow_or_ignore"
       ],
       "narrative_triggers": [
         "npc_gives_test",
-        "alignment_check"
+        "player_enters_hidden_passage"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1396,15 +1397,19 @@
       "storyline_summary": "Kaelen reveals secret routes. Sovereignty manifests as choice ? freedom carved in shadow.",
       "story_seed": "",
       "tone_integration": [
-        "ritualistic"
+        "eerie",
+        "fragmented"
       ],
       "remnants_integration": [
-        "abandoned_rituals"
+        "memory_echoes",
+        "ghost_signals"
       ],
       "player_choices": [
-        "follow_route_or_search"
+        "align_with_npc_or_oppose",
+        "follow_or_ignore"
       ],
       "narrative_triggers": [
+        "npc_gives_test",
         "player_enters_hidden_passage"
       ],
       "memory_fragments": [],
@@ -1436,16 +1441,20 @@
       "storyline_summary": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it is returned",
       "story_seed": "",
       "tone_integration": [
-        "hopeful"
+        "eerie",
+        "fragmented"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "memory_echoes",
+        "ghost_signals"
+      ],
       "player_choices": [
         "align_with_npc_or_oppose",
-        "choose_trust"
+        "follow_or_ignore"
       ],
       "narrative_triggers": [
         "npc_gives_test",
-        "alignment_check"
+        "player_enters_hidden_passage"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1476,16 +1485,10 @@
       "storyline_summary": "The Clay Hermit lives alone, surrounded by broken pottery???vessels he shapes then fractures intentionally. He explains: the Corelink network was a vessel holding billions of connected minds. When it shattered, every fragment was a person who fell. He teaches that fragility isn't weakness; it's the ...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "intimate",
-        "mythic",
-        "ritualistic",
         "somber"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "broken_corelink",
-        "corrupted_data"
+        "memory_echoes"
       ],
       "player_choices": [
         "observe_or_intervene"
@@ -1523,14 +1526,11 @@
       "storyline_summary": "Korrin?s whispers multiply, each retelling bending truth until voices splinter into chaos. What begins as a single rumor becomes a chorus of distortion, spreading fracture through the marketplace. Bonds dissolve not through violence but through words twisted beyond recognition. The glyph manifests w...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
         "fragmented"
       ],
       "remnants_integration": [
         "corrupted_data",
-        "environmental_scars",
-        "ghost_signals",
-        "memory_echoes"
+        "broken_corelink"
       ],
       "player_choices": [
         "align_with_npc_or_oppose",
@@ -1574,11 +1574,11 @@
       "storyline_summary": "Korrin tests the player by speaking half?truths, then waiting. Presence manifests when the player resists the urge to answer, realizing silence itself is witness ? observation stronger than speech.",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
         "intimate"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "sit_or_leave",
         "say_nothing",
@@ -1617,11 +1617,8 @@
       "storyline_summary": "Korrin whispers secrets that bind merchants together. The player must decide whether to repeat or protect these words. Trust manifests when restraint is chosen ? gossip becomes covenant only when handled with care.",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "hopeful",
-        "intimate",
-        "mythic",
-        "ritualistic"
+        "somber",
+        "hopeful"
       ],
       "remnants_integration": [
         "ghost_signals"
@@ -1665,12 +1662,12 @@
       "storyline_summary": "Korrin recalls promises made in haste and broken in silence. The player must decide whether to expose the betrayal or protect the bond. The glyph manifests when trust is shown to be fragile ? promises are only as strong as the witness who holds them.",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "hopeful",
-        "intimate"
+        "somber",
+        "hopeful"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "ghost_signals"
+      ],
       "player_choices": [
         "observe_or_intervene",
         "sit_or_leave",
@@ -1710,10 +1707,12 @@
       "storyline_summary": "Korrin?s words slither between truth and lies, charming merchants into uneasy alliances. The player must discern which words to repeat and which to silence. The glyph manifests when trust is revealed as discernment ? survival depends on knowing when speech heals and when it poisons.",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
+        "somber",
         "hopeful"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "ghost_signals"
+      ],
       "player_choices": [
         "align_with_npc_or_oppose",
         "choose_trust"
@@ -1751,14 +1750,10 @@
       "storyline_summary": "Player encounters a village trying to save a group of children trapped by a collapsed stone bridge. The player joins into help just in time to allow the childrens survival. Remembers Ravi and Nima's story and feels a sense of rebalancing",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "mythic",
-        "ritualistic"
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "environmental_scars",
-        "memory_echoes"
+        "abandoned_rituals"
       ],
       "player_choices": [
         "collect_item",
@@ -1798,11 +1793,11 @@
       "storyline_summary": "A skilled boatmaker takes pride in their craft, building vessels from reclaimed wood and salvaged materials. When they launch a new boat and it cuts smoothly across water for the first time, there's visible joy in their face???the joy of creation, of seeing something born from their hands work perfe...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "hopeful",
-        "intimate"
+        "hopeful"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "choose_trust",
         "align_with_npc_or_oppose",
@@ -1845,7 +1840,7 @@
         "somber"
       ],
       "remnants_integration": [
-        "environmental_scars"
+        "memory_echoes"
       ],
       "player_choices": [
         "observe_or_intervene"
@@ -1882,9 +1877,12 @@
       "storyline_summary": "The player joins Mariel in weaving communal cloth. Trust manifests as threads binding lives together.",
       "story_seed": "",
       "tone_integration": [
+        "somber",
         "hopeful"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "ghost_signals"
+      ],
       "player_choices": [
         "align_with_npc_or_oppose",
         "choose_trust"
@@ -1922,26 +1920,20 @@
       "storyline_summary": "The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and �paths that shift when watched.� He sends the player to retrieve a glyph he claims is �caught between fear and faith.� When the player finds it, the Glyph of Apprehensio...",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "intimate",
-        "somber"
+        "eerie",
+        "fragmented"
       ],
       "remnants_integration": [
-        "environmental_scars"
+        "memory_echoes",
+        "ghost_signals"
       ],
       "player_choices": [
-        "follow_route_or_search",
         "align_with_npc_or_oppose",
-        "choose_trust",
-        "collect_item",
-        "investigate_or_leave",
-        "return_item"
+        "follow_or_ignore"
       ],
       "narrative_triggers": [
-        "player_collects_item",
-        "player_enters_hidden_passage",
         "npc_gives_test",
-        "alignment_check"
+        "player_enters_hidden_passage"
       ],
       "memory_fragments": [],
       "tags": [
@@ -1972,9 +1964,7 @@
       "storyline_summary": "Player learns to appreciate the warmth provided by cloth weaved by others hands",
       "story_seed": "",
       "tone_integration": [
-        "intimate",
-        "mythic",
-        "ritualistic"
+        "mythic"
       ],
       "remnants_integration": [
         "abandoned_rituals"
@@ -2016,13 +2006,10 @@
       "storyline_summary": "After acquiring the Glyph of Remembrance, the player encounters Nima alone, gazing at a specific spot in the marketplace. This is where Ophina played. Player choices determine the encounter: Observe quietly (she walks away silently), Approach quietly (she admits 'I still can't believe it'), Inquire ...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
         "somber"
       ],
       "remnants_integration": [
-        "environmental_scars"
+        "memory_echoes"
       ],
       "player_choices": [
         "observe_or_intervene"
@@ -2059,14 +2046,10 @@
       "storyline_summary": "The Mourning Singer stands amid collapsed grandstands, singing fragments of a lullaby that no longer has a listener. She is raw, unguarded, her voice cracked with grief. The player witnesses her song and realizes she is keening???mourning not just a person, but the whole network that once held her v...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "intimate",
-        "ritualistic",
         "somber"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "broken_corelink"
+        "memory_echoes"
       ],
       "player_choices": [
         "observe_or_participate",
@@ -2105,16 +2088,10 @@
       "storyline_summary": "Within the Tomb of Echoes, the Desert Elder leads a ritual of breath. The cavern wind rises and falls like voices of the departed, each exhale carrying memory into the present. The player is asked to breathe in rhythm with the elder, joining a lineage of survival carried through breath itself. The g...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "mythic",
-        "ritualistic"
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "environmental_scars",
-        "ghost_signals",
-        "memory_echoes"
+        "abandoned_rituals"
       ],
       "player_choices": [
         "collect_item",
@@ -2154,10 +2131,7 @@
       "storyline_summary": "A song sung across generations returns in the player?s voice. Legacy is revealed as ache transformed into transmission.",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "mythic"
       ],
       "remnants_integration": [
         "abandoned_rituals"
@@ -2199,18 +2173,11 @@
       "storyline_summary": "At dawn, the Ruined Watcher tends a broken tower, repairing small rituals of survival such as sweeping rubble, lighting a lantern, marking the hours. Yet each act feels fragile, threatened by silence pressing in. Collapse here is not loud or sudden but quiet erosion, the slow unraveling of daily anc...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "fragmented"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
         "corrupted_data",
-        "environmental_scars",
-        "memory_echoes"
+        "broken_corelink"
       ],
       "player_choices": [
         "observe_or_intervene"
@@ -2250,8 +2217,7 @@
       "storyline_summary": "The dock worker watches ships arrive after perilous journeys across water. There's a moment when travelers step off the boat onto solid ground???relief, gratitude, sometimes tears of joy at safe return. The glyph manifests when the player witnesses and honors these arrivals, understanding that joy i...",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "intimate"
+        "hopeful"
       ],
       "remnants_integration": [
         "environmental_scars"
@@ -2293,13 +2259,11 @@
       "storyline_summary": "The ferry operator and dock worker depend on each other absolutely???one pilots the waters, the other coordinates cargo and ensures safe passage. When the player witnesses their wordless coordination, the trust between them becomes visible. The glyph manifests when the player realizes that some bond...",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "intimate",
-        "ritualistic"
+        "somber",
+        "hopeful"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "environmental_scars"
+        "ghost_signals"
       ],
       "player_choices": [
         "follow_route_or_search",
@@ -2340,13 +2304,11 @@
       "storyline_summary": "After obtaining the Tome of the Mustard Seed, Ravi approaches the player alone. He speaks of the moment before Ophina was trapped???the last instant he could have intervened but didn't. His trusting nature made him ignore his gut feeling that something was amiss. He carries deep guilt because he bel...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "mythic",
-        "somber"
+        "intimate"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "sit_or_leave",
         "say_nothing",
@@ -2385,17 +2347,10 @@
       "storyline_summary": "Ravi and Nima, a couple who lost their five-year-old daughter Ophina to a marketplace collapse, teach the player about legacy through sorrow. They arrived in Velhara marketplace full of hope, watching Ophina play among the stalls. But Ophina wandered too close to the crumbling civic center, and rust...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "hopeful",
-        "intimate",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "environmental_scars",
-        "memory_echoes"
+        "abandoned_rituals"
       ],
       "player_choices": [
         "sit_or_leave",
@@ -2437,12 +2392,10 @@
       "storyline_summary": "The Silent Elder hasn't spoken since the Corelink collapse???not out of trauma, but out of choice. With the network gone, she realized that most of what she said was noise, confirmation-seeking, the chatter of a mind desperate for connection. Now she sits in stillness. The glyph manifests when the p...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "somber"
+        "fragmented"
       ],
       "remnants_integration": [
+        "corrupted_data",
         "broken_corelink"
       ],
       "player_choices": [
@@ -2482,23 +2435,21 @@
       "storyline_summary": "By finding scattered photographs of Sealina�s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming lo...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "hopeful",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "somber",
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "broken_corelink",
-        "memory_echoes"
+        "memory_echoes",
+        "abandoned_rituals"
       ],
       "player_choices": [
-        "observe_or_interrupt",
-        "follow_or_ignore"
+        "follow_or_ignore",
+        "collect_item",
+        "return_item"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "player_enters_location",
+        "player_collects_item"
       ],
       "memory_fragments": [],
       "tags": [
@@ -2531,24 +2482,21 @@
       "storyline_summary": "Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother � dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her b...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "somber",
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "ghost_signals",
-        "memory_echoes"
+        "memory_echoes",
+        "abandoned_rituals"
       ],
       "player_choices": [
-        "observe_or_interrupt",
-        "follow_or_ignore"
+        "follow_or_ignore",
+        "collect_item",
+        "return_item"
       ],
       "narrative_triggers": [
-        "player_enters_location"
+        "player_enters_location",
+        "player_collects_item"
       ],
       "memory_fragments": [],
       "tags": [
@@ -2582,7 +2530,9 @@
       "tone_integration": [
         "hopeful"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "observe_or_participate",
         "join_or_watch"
@@ -2620,10 +2570,11 @@
       "storyline_summary": "Sera guides the player to gather blossoms that only open at dawn. Joy is appreciated because it can be fleeting, so appreciation with shared hope is embraced",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "somber"
+        "hopeful"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "observe_or_participate",
         "join_or_watch"
@@ -2661,12 +2612,10 @@
       "storyline_summary": "Sera brews a tea from herbs that lighten sorrow. The player helps her find the herbs, and in the process find solace in his grief over losing his family to disease. His story also lightens the hearts of the other grieving villagers. The group finds laughter in remembering jokes their loved ones used...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "hopeful",
-        "somber"
+        "hopeful"
       ],
       "remnants_integration": [
-        "memory_echoes"
+        "environmental_scars"
       ],
       "player_choices": [
         "collect_item",
@@ -2708,12 +2657,11 @@
       "storyline_summary": "In silence, the player inhales the scent of crushed herbs. Presence is revealed as subtle witness ? healing carried in quiet fragrance.",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "somber"
+        "intimate"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "sit_or_leave",
         "say_nothing",
@@ -2752,11 +2700,11 @@
       "storyline_summary": "Sera invites the player to join her in tending wounds with herbs. Trust manifests when care is given and received ? survival depends on hands extended in empathy.",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "intimate",
-        "somber"
+        "intimate"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "sit_or_leave",
         "say_nothing",
@@ -2797,15 +2745,10 @@
       "storyline_summary": "The Archivist guards a hall of broken records???genealogies scattered like shattered glass. She speaks of families fractured by Corelink's severance: parents who depended on the network to understand their children's emotional states, now blind to each other. Love and fear pull in opposite direction...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "intimate",
-        "mythic",
         "somber"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "broken_corelink",
-        "corrupted_data"
+        "memory_echoes"
       ],
       "player_choices": [
         "observe_or_intervene"
@@ -2843,11 +2786,11 @@
       "storyline_summary": "The loner camper, reclusive and hostile to intrusion, reveals a softer side when approached with true care. In their secluded camp, they've maintained a small tradition: a whistle carved from wood that plays a hauntingly beautiful melody. The player learns this tune through patient observation. The ...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "hopeful",
-        "somber"
+        "hopeful"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "follow_route_or_search",
         "observe_or_participate",
@@ -2887,12 +2830,10 @@
       "storyline_summary": "Cooks gather survivors around a communal fire to prepare meals. But more than nourishment, the feast is a ritual of reunion. The player helps prepare food alongside others???chopping, stirring, tasting. In the act of cooking together, laughter emerges naturally. Jokes are traded, stories shared. The...",
       "story_seed": "",
       "tone_integration": [
-        "hopeful",
-        "mythic",
-        "ritualistic"
+        "hopeful"
       ],
       "remnants_integration": [
-        "abandoned_rituals"
+        "environmental_scars"
       ],
       "player_choices": [
         "observe_or_participate",
@@ -2931,15 +2872,10 @@
       "storyline_summary": "The Desert Widow tends a shrine in the sand, offerings left by those who lost partners to the Corelink collapse. Some were deep enough in the network that the severance was lethal. She teaches a ritual lament???a song that carries grief into the wind where it can dissolve without poisoning the heart...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "mythic",
-        "ritualistic",
         "somber"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "broken_corelink",
-        "environmental_scars"
+        "memory_echoes"
       ],
       "player_choices": [
         "observe_or_participate",
@@ -2978,15 +2914,9 @@
       "storyline_summary": "The player enters the Resonance Chamber, a place where sound dissolves and touch becomes heightened. The Desert Listener guides them through a ritual of sensing absence, tracing walls, feeling vibrations, noticing what is no longer there. In this silence, loss is not spoken but embodied: the ache of...",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "intimate",
-        "mythic",
-        "ritualistic",
-        "somber"
+        "intimate"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
         "environmental_scars"
       ],
       "player_choices": [
@@ -3027,11 +2957,11 @@
       "storyline_summary": "The Mask-Maker crafts faces from clay, wood, and scrap???each one a different expression. Buyers choose masks to wear during the seasonal gatherings, allowing them to express emotions they otherwise keep hidden. The Mask-Maker reveals that grief, hidden, doesn't disappear???it calcifies. The glyph m...",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "intimate",
         "somber"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "memory_echoes"
+      ],
       "player_choices": [
         "follow_route_or_search",
         "observe_or_intervene",
@@ -3071,9 +3001,11 @@
       "storyline_summary": "Tovren teaches the player to mark unstable paths with chalk. Sovereignty is clarity ? boundaries drawn to protect travelers.",
       "story_seed": "",
       "tone_integration": [
-        "somber"
+        "ritualistic"
       ],
-      "remnants_integration": [],
+      "remnants_integration": [
+        "environmental_scars"
+      ],
       "player_choices": [
         "follow_route_or_search"
       ],
@@ -3109,11 +3041,11 @@
       "storyline_summary": "The player helps carry goods across a fractured bridge. Trust manifests when survival depends on bearing weight together.",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
+        "somber",
         "hopeful"
       ],
       "remnants_integration": [
-        "environmental_scars"
+        "ghost_signals"
       ],
       "player_choices": [
         "align_with_npc_or_oppose",
@@ -3156,7 +3088,7 @@
         "somber"
       ],
       "remnants_integration": [
-        "environmental_scars"
+        "memory_echoes"
       ],
       "player_choices": [
         "observe_or_intervene"
@@ -3193,13 +3125,10 @@
       "storyline_summary": "Bones preserved in ritual burial are not relics but promises. The glyph reveals itself when the player honors the remains, realizing legacy is covenant ? the living bound to remember the dead.",
       "story_seed": "",
       "tone_integration": [
-        "fragmented",
-        "mythic",
-        "ritualistic"
+        "mythic"
       ],
       "remnants_integration": [
-        "abandoned_rituals",
-        "memory_echoes"
+        "abandoned_rituals"
       ],
       "player_choices": [
         "collect_item",
@@ -3239,23 +3168,20 @@
       "storyline_summary": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence — not action — is what brings people back to themselves.",
       "story_seed": "",
       "tone_integration": [
-        "eerie",
-        "fragmented",
-        "hopeful",
         "intimate",
         "somber"
       ],
       "remnants_integration": [
-        "ghost_signals"
+        "environmental_scars"
       ],
       "player_choices": [
         "sit_or_leave",
         "say_nothing",
-        "observe_or_intervene"
+        "hold_hand"
       ],
       "narrative_triggers": [
-        "player_returns_to_location",
-        "player_sits_with_npc"
+        "player_sits_with_npc",
+        "player_returns_to_location"
       ],
       "memory_fragments": [],
       "tags": [

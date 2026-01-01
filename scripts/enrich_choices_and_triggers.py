@@ -105,6 +105,13 @@ def enrich():
     with open(DATA_PATH, 'r', encoding='utf-8') as fh:
         data = json.load(fh)
 
+    # load rulebook
+    RULEBOOK_PATH = os.path.normpath(os.path.join(HERE, '..', 'velinor', 'markdowngameinstructions', 'Glyph_Rules.json'))
+    rules = {}
+    if os.path.exists(RULEBOOK_PATH):
+        with open(RULEBOOK_PATH, 'r', encoding='utf-8') as rf:
+            rules = json.load(rf)
+
     for g in data.get('glyphs', []):
         text = ' '.join([g.get('original_storyline_text','') or '', g.get('theme','') or '', g.get('glyph_name','') or '', g.get('location','') or ''])
         tokens = keywords_from_text(text)
@@ -114,8 +121,21 @@ def enrich():
             for t in re.findall(r"[a-z0-9]+", tag):
                 tokens.add(t)
 
-        choices = map_to_choices(tokens)
-        triggers = map_to_triggers(tokens)
+        # NPC authoritative overrides
+        npc_name = (g.get('npc', {}).get('name') or '').lower()
+        choices = []
+        triggers = []
+        if rules.get('npc_rules') and npc_name:
+            for key, rule in rules['npc_rules'].items():
+                if key in npc_name:
+                    choices = rule.get('player_choices', [])[:]
+                    triggers = rule.get('narrative_triggers', [])[:]
+                    break
+
+        if not choices:
+            choices = map_to_choices(tokens)
+        if not triggers:
+            triggers = map_to_triggers(tokens)
 
         # defaults if nothing detected
         if not choices:
