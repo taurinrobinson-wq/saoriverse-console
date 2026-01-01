@@ -1,0 +1,2421 @@
+{
+  "glyphs": [
+    {
+      "domain": "Collapse",
+      "id": 62,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Archivist Malrik",
+        "role": "",
+        "npc_images": [
+          "npcs/archivist_malrik.png"
+        ],
+        "background_images": [
+          "backgrounds/archive_chamber_ruins_where_inscriptions_blur.png"
+        ]
+      },
+      "glyph_name": "Glyph of Fractured Memory",
+      "location": "Archive Chamber (Ruins Where Inscriptions Blur)",
+      "storyline_summary": "Malrik shows the player chambers where the Corelink system stored emotional data???now corrupted, glitching, displaying fragments of millions of private moments. Names blur into meaninglessness. Relationships dissolve into noise. The glyph manifests when the player realizes that this fracture isn't ...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Malrik shows the player chambers where the Corelink system stored emotional data???now corrupted, glitching, displaying fragments of millions of private moments. Names blur into meaninglessness. Relationships dissolve into noise. The glyph manifests when the player realizes that this fracture isn't accidental???it's what happens when a system designed to hold consciousness collapses mid-transmission. Data doesn't just vanish; it becomes distorted, haunting. This is the ache of information without context, memory without meaning."
+    },
+    {
+      "domain": "Collapse",
+      "id": 63,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Archivist Malrik",
+        "role": "",
+        "npc_images": [
+          "npcs/archivist_malrik.png"
+        ],
+        "background_images": [
+          "backgrounds/desert_heat_illusion_trial.png"
+        ]
+      },
+      "glyph_name": "Glyph of Mirage Echo",
+      "location": "Desert Heat (Illusion Trial)",
+      "storyline_summary": "The player navigates the desert with Malrik, who points out mirages???false water, false paths, false homes. These mirages are fed by Corelink remnants, tech still broadcasting phantom signals. As the player walks, they question what's real. The glyph manifests when the player chooses to dismiss a m...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player navigates the desert with Malrik, who points out mirages???false water, false paths, false homes. These mirages are fed by Corelink remnants, tech still broadcasting phantom signals. As the player walks, they question what's real. The glyph manifests when the player chooses to dismiss a mirage and keep walking, accepting uncertainty. This is fear and fracture embodied: the world becomes unreliable not through malice, but through the breakdown of the systems that made trust possible. This glyph teaches that surviving collapse means accepting that you cannot always know what's real."
+    },
+    {
+      "domain": "Legacy",
+      "id": 3,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Archivist Malrik",
+        "role": "",
+        "npc_images": [
+          "npcs/archivist_malrik.png"
+        ],
+        "background_images": [
+          "backgrounds/desert_tomb_archives.png"
+        ]
+      },
+      "glyph_name": "Glyph of Ancestral Record",
+      "location": "Desert tomb archives",
+      "storyline_summary": "inheritance rationalized as historical evidence.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "inheritance rationalized as historical evidence."
+    },
+    {
+      "domain": "Legacy",
+      "id": 7,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Archivist Malrik",
+        "role": "",
+        "npc_images": [
+          "npcs/archivist_malrik.png"
+        ],
+        "background_images": [
+          "backgrounds/desert_archive_chamber.png"
+        ]
+      },
+      "glyph_name": "Glyph of Sand Memories",
+      "location": "Desert archive chamber",
+      "storyline_summary": "Malrik insists legacy is record, not myth. The player uncovers names etched in dust, realizing that even data carries ache. Legacy here is the fragile persistence of identity against forgetting.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Malrik insists legacy is record, not myth. The player uncovers names etched in dust, realizing that even data carries ache. Legacy here is the fragile persistence of identity against forgetting."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 23,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Archivist Malrik",
+        "role": "",
+        "npc_images": [
+          "npcs/archivist_malrik.png"
+        ],
+        "background_images": [
+          "backgrounds/desert_trial_grounds_archive_chamber.png"
+        ]
+      },
+      "glyph_name": "Glyph of Measured Step",
+      "location": "Desert Trial Grounds (Archive Chamber)",
+      "storyline_summary": "Malrik leads the player through a gauntlet of desert ruins???each step destabilizing stone. He teaches measured pace: not fast (panic), not slow (paralysis), but a tempo that matches the ground beneath. The glyph manifests when the player successfully traverses the ruins, understanding that sovereig...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Malrik leads the player through a gauntlet of desert ruins???each step destabilizing stone. He teaches measured pace: not fast (panic), not slow (paralysis), but a tempo that matches the ground beneath. The glyph manifests when the player successfully traverses the ruins, understanding that sovereignty isn't freedom from consequence, but the discipline to move through consequence with intention. This is endurance as art."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 24,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Archivist Malrik",
+        "role": "",
+        "npc_images": [
+          "npcs/archivist_malrik.png"
+        ],
+        "background_images": [
+          "backgrounds/shifting_sands_desert_archive.png"
+        ]
+      },
+      "glyph_name": "Glyph of Boundary Stone",
+      "location": "Shifting Sands (Desert Archive)",
+      "storyline_summary": "Malrik teaches the player to carve boundary markers in the desert sand???stones or glyphs that define safe space amid chaos. These markers are temporary; the wind will erase them. But while they stand, they hold. The glyph manifests when the player carves their first boundary marker and watches it h...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Malrik teaches the player to carve boundary markers in the desert sand???stones or glyphs that define safe space amid chaos. These markers are temporary; the wind will erase them. But while they stand, they hold. The glyph manifests when the player carves their first boundary marker and watches it hold against the wind for a time. This is clarity through definition: the act of saying 'this far, no further,' knowing full well the boundary will eventually dissolve. Sovereignty isn't permanence???it's the repeated choice to mark and hold and redefine."
+    },
+    {
+      "domain": "Collapse",
+      "id": 65,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Captain Veynar",
+        "role": "",
+        "npc_images": [
+          "npcs/captain_veynar.png"
+        ],
+        "background_images": [
+          "backgrounds/guard_barracks.png"
+        ]
+      },
+      "glyph_name": "Glyph of Fractured Oath",
+      "location": "Guard barracks.",
+      "storyline_summary": "Captain Veynar stands among broken banners, his authority eroded by promises that no longer hold. Each oath sworn to protect has splintered under collapse, leaving him weary and hollow. The player sees soldiers drifting away, their loyalty dissolved into silence. The glyph manifests when the player ...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Captain Veynar stands among broken banners, his authority eroded by promises that no longer hold. Each oath sworn to protect has splintered under collapse, leaving him weary and hollow. The player sees soldiers drifting away, their loyalty dissolved into silence. The glyph manifests when the player recognizes that fracture is not only in stone or steel but in the vows that once bound a community together. Collapse here is the haunting of promises unkept, authority reduced to shadow."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 27,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Captain Veynar",
+        "role": "",
+        "npc_images": [
+          "npcs/captain_veynar.png"
+        ],
+        "background_images": [
+          "backgrounds/trial_grounds.png"
+        ]
+      },
+      "glyph_name": "Glyph of Iron Boundary",
+      "location": "Trial grounds.",
+      "storyline_summary": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance."
+    },
+    {
+      "domain": "Trust",
+      "id": 55,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Captain Veynar",
+        "role": "",
+        "npc_images": [
+          "npcs/captain_veynar.png"
+        ],
+        "background_images": [
+          "backgrounds/market_concourse.png"
+        ]
+      },
+      "glyph_name": "Glyph of Weary Justice",
+      "location": "Market concourse.",
+      "storyline_summary": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance."
+    },
+    {
+      "domain": "Collapse",
+      "id": 61,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Coren the Mediator",
+        "role": "",
+        "npc_images": [
+          "npcs/coren_the_mediator.png"
+        ],
+        "background_images": [
+          "backgrounds/cult_encampment_mountain_fortress.png"
+        ]
+      },
+      "glyph_name": "Glyph of Preemptive Severance",
+      "location": "Cult Encampment (Mountain Fortress)",
+      "storyline_summary": "Coren the Mediator leads a group that practices preemptive severance???severing all emotional bonds before they can betray you. They teach: if you cut ties first, the abandonment can't touch you. The player encounters their community and must choose: join them in their defense, or challenge their lo...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Coren the Mediator leads a group that practices preemptive severance???severing all emotional bonds before they can betray you. They teach: if you cut ties first, the abandonment can't touch you. The player encounters their community and must choose: join them in their defense, or challenge their logic. The glyph manifests when the player realizes that this is a response to trauma???a broken logic that protects by destroying. Understanding this fracture in reasoning reveals the glyph's truth: fear creates false choices. This is the collapse of empathy under pressure."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 22,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Coren the Mediator",
+        "role": "",
+        "npc_images": [
+          "npcs/coren_the_mediator.png"
+        ],
+        "background_images": [
+          "backgrounds/market_concourse_marketplace.png"
+        ]
+      },
+      "glyph_name": "Glyph of Held Ache",
+      "location": "Market Concourse (Marketplace)",
+      "storyline_summary": "Coren the Mediator stands between disputants in the marketplace???survivors arguing over resources, paths, survival strategies. She teaches co-witnessing: the ability to see both sides' pain without forcing resolution. She holds space for the ache itself. The glyph manifests when the player mediates...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "memory-loss",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Coren the Mediator stands between disputants in the marketplace???survivors arguing over resources, paths, survival strategies. She teaches co-witnessing: the ability to see both sides' pain without forcing resolution. She holds space for the ache itself. The glyph manifests when the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief on both sides. This is sovereignty as the refusal to collapse another's sorrow into your own certainty."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 21,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Dakrin",
+        "role": "Trial Warden",
+        "npc_images": [
+          "npcs/dakrin.png"
+        ],
+        "background_images": [
+          "backgrounds/trial_grounds_reclaimed_by_nature.png"
+        ]
+      },
+      "glyph_name": "Glyph of Interruptive Restraint",
+      "location": "Trial Grounds (Reclaimed by Nature)",
+      "storyline_summary": "The Trial Warden oversees a ritual space where survivors face their breaking points???the moment they might lash out or collapse. She teaches interruption: the ability to pause the impulse, to hold the rage without releasing it. The glyph manifests when the player faces their own trial???a moment wh...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "memory-loss",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Trial Warden oversees a ritual space where survivors face their breaking points???the moment they might lash out or collapse. She teaches interruption: the ability to pause the impulse, to hold the rage without releasing it. The glyph manifests when the player faces their own trial???a moment where anger or despair threatens to overwhelm???and chooses to breathe, to stop, to contain. This is sovereignty as the power not to destroy."
+    },
+    {
+      "domain": "Ache",
+      "id": 16,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Dalen the Rusted Guide",
+        "role": "",
+        "npc_images": [
+          "npcs/dalen_the_rusted_guide.png"
+        ],
+        "background_images": [
+          "backgrounds/caravan_ruins_collapsing_trade_route.png"
+        ]
+      },
+      "glyph_name": "Glyph of Betrayal Scar",
+      "location": "Caravan Ruins (Collapsing Trade Route)",
+      "storyline_summary": "Dalen was a guide who led people deeper into Velhara during the collapse, trusting intel from the Corelink system. That intel was wrong???the system was fragmenting, spreading false paths. His charges were buried. Dalen survived with scars???physical and emotional. He teaches that betrayal leaves ma...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss",
+        "memory-loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Dalen was a guide who led people deeper into Velhara during the collapse, trusting intel from the Corelink system. That intel was wrong???the system was fragmenting, spreading false paths. His charges were buried. Dalen survived with scars???physical and emotional. He teaches that betrayal leaves marks, and marks are evidence that we survived. The glyph manifests when Dalen trusts the player enough to show his scars, to say: I was betrayed, and I'm still here. This is the ache of broken trust, and the courage to move forward anyway."
+    },
+    {
+      "domain": "Collapse",
+      "id": 64,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Dalen the Rusted Guide",
+        "role": "",
+        "npc_images": [
+          "npcs/dalen_the_rusted_guide.png"
+        ],
+        "background_images": [
+          "backgrounds/unstable_ruins.png"
+        ]
+      },
+      "glyph_name": "Glyph of Shattered Corridor",
+      "location": "Unstable ruins.",
+      "storyline_summary": "Dalen leads the player through collapsing paths. Collapse is embodied in scars ? memory fractured by reckless survival.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Dalen leads the player through collapsing paths. Collapse is embodied in scars ? memory fractured by reckless survival."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 26,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Dalen the Rusted Guide",
+        "role": "",
+        "npc_images": [
+          "npcs/dalen_the_rusted_guide.png"
+        ],
+        "background_images": [
+          "backgrounds/desert_trial_grounds.png"
+        ]
+      },
+      "glyph_name": "Glyph of Reckless Trial",
+      "location": "Desert trial grounds.",
+      "storyline_summary": "Dalen insists sovereignty is earned through boldness. The glyph manifests when the player accepts risk as boundary.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Dalen insists sovereignty is earned through boldness. The glyph manifests when the player accepts risk as boundary."
+    },
+    {
+      "domain": "Collapse",
+      "id": 67,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Drossel the Cloaked",
+        "role": "",
+        "npc_images": [
+          "npcs/drossel_the_cloaked.png"
+        ],
+        "background_images": [
+          "backgrounds/market_stalls_rumor_circles.png"
+        ]
+      },
+      "glyph_name": "Glyph of Hollow Pact",
+      "location": "Market stalls, rumor circles.",
+      "storyline_summary": "Drossel lures the player into sharing secrets, his charm masking the theft beneath. What is stolen is not information alone, but the fragile covenant of trust itself. When the bond collapses, fragments of community vanish, whispers turn brittle, alliances fracture, and silence spreads like contagion...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Drossel lures the player into sharing secrets, his charm masking the theft beneath. What is stolen is not information alone, but the fragile covenant of trust itself. When the bond collapses, fragments of community vanish, whispers turn brittle, alliances fracture, and silence spreads like contagion. The glyph manifests when the player realizes that a pact without trust is only a hollow shell, an echo of connection that cannot endure."
+    },
+    {
+      "domain": "Collapse",
+      "id": 68,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Drossel the Cloaked",
+        "role": "",
+        "npc_images": [
+          "npcs/drossel_the_cloaked.png"
+        ],
+        "background_images": [
+          "backgrounds/thieves_lair_collapsing_corridors.png"
+        ]
+      },
+      "glyph_name": "Glyph of Cloaked Fracture",
+      "location": "Thieves? lair, collapsing corridors.",
+      "storyline_summary": "In the lair, paths flicker and collapse under Drossel?s manipulation. The glyph manifests when the player realizes fracture is not random ? it is orchestrated by deceit.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "In the lair, paths flicker and collapse under Drossel?s manipulation. The glyph manifests when the player realizes fracture is not random ? it is orchestrated by deceit."
+    },
+    {
+      "domain": "Presence",
+      "id": 35,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Drossel the Cloaked",
+        "role": "",
+        "npc_images": [
+          "npcs/drossel_the_cloaked.png"
+        ],
+        "background_images": [
+          "backgrounds/swamp_shrine_dim_alcove.png"
+        ]
+      },
+      "glyph_name": "Glyph of Serpent?s Silence",
+      "location": "Swamp shrine, dim alcove.",
+      "storyline_summary": "Drossel lures the player into a chamber where silence feels alive. Presence manifests when charm dissolves into suspicion ? silence itself becomes witness to manipulation.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Drossel lures the player into a chamber where silence feels alive. Presence manifests when charm dissolves into suspicion ? silence itself becomes witness to manipulation."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 29,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Drossel the Cloaked",
+        "role": "",
+        "npc_images": [
+          "npcs/drossel_the_cloaked.png"
+        ],
+        "background_images": [
+          "backgrounds/market_concourse_shadowed_stalls.png"
+        ]
+      },
+      "glyph_name": "Glyph of Masked Boundary",
+      "location": "Market concourse, shadowed stalls.",
+      "storyline_summary": "Drossel teaches that boundaries are masks ? shifting, deceptive. The glyph manifests when the player learns sovereignty is not clarity but concealment.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Drossel teaches that boundaries are masks ? shifting, deceptive. The glyph manifests when the player learns sovereignty is not clarity but concealment."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 30,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Drossel the Cloaked",
+        "role": "",
+        "npc_images": [
+          "npcs/drossel_the_cloaked.png"
+        ],
+        "background_images": [
+          "backgrounds/swamp_trial_grounds.png"
+        ]
+      },
+      "glyph_name": "Glyph of Venomous Choice",
+      "location": "Swamp trial grounds.",
+      "storyline_summary": "The player faces Drossel?s test: betray Kaelen or protect him. Sovereignty manifests when choice itself becomes poisoned ? every path fractures trust.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "memory-loss",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player faces Drossel?s test: betray Kaelen or protect him. Sovereignty manifests when choice itself becomes poisoned ? every path fractures trust."
+    },
+    {
+      "domain": "Presence",
+      "id": 39,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Elka",
+        "role": "Glyph Console Worshipper",
+        "npc_images": [
+          "npcs/elka.png"
+        ],
+        "background_images": [
+          "backgrounds/abandoned_shrine_with_corelink_node.png"
+        ]
+      },
+      "glyph_name": "Glyph of Echo Communion",
+      "location": "Abandoned Shrine with Corelink Node",
+      "storyline_summary": "A mystic sits before a dormant Corelink console, palms flat on the ancient interface, communing with the faint resonance still thrumming beneath. She teaches the player that presence isn't only human???it's also the echo of systems that once held billions of minds. By placing their hands on the cons...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "A mystic sits before a dormant Corelink console, palms flat on the ancient interface, communing with the faint resonance still thrumming beneath. She teaches the player that presence isn't only human???it's also the echo of systems that once held billions of minds. By placing their hands on the console with her, the player feels the ghost of connection, the phantom network still humming. The glyph manifests when the player accepts that presence can mean touching the edge of what's gone, honoring its memory through contact. This is presence as communion with absence, witness to what remains."
+    },
+    {
+      "domain": "Presence",
+      "id": 38,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Helia",
+        "role": "Shrine Healer",
+        "npc_images": [
+          "npcs/helia.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_healing_alcove.png"
+        ]
+      },
+      "glyph_name": "Glyph of Tender Witness",
+      "location": "Shrine Healing Alcove",
+      "storyline_summary": "A healer tends the wounded survivors in the shrines???not with potions alone, but with presence. She sits with the injured, holding space for their pain without trying to fix it. The glyph manifests when the player joins her in this practice: sitting beside someone in ache, offering nothing but atte...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "A healer tends the wounded survivors in the shrines???not with potions alone, but with presence. She sits with the injured, holding space for their pain without trying to fix it. The glyph manifests when the player joins her in this practice: sitting beside someone in ache, offering nothing but attention. Her hands are gentle, her voice quiet, her eyes steady. She teaches that sometimes presence is the greatest medicine. The player learns that witnessing isn't about words; it's about showing up and staying, even when there's nothing to say. This is touch without agenda, silence as sacred."
+    },
+    {
+      "domain": "Joy",
+      "id": 41,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "High Seer Elenya",
+        "role": "",
+        "npc_images": [
+          "npcs/high_seer_elenya.png"
+        ],
+        "background_images": [
+          "backgrounds/festival_beneath_open_peaks.png"
+        ]
+      },
+      "glyph_name": "Glyph of Sky Revelry",
+      "location": "Festival beneath open peaks",
+      "storyline_summary": "Once each season, the mountain community gathers under the stars for a night of dance, song, and shared offerings. The player joins this revelry, where joy is not just celebration but a sacred act of reunion ? laughter and movement binding the community together beneath the vast sky. The glyph manif...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Once each season, the mountain community gathers under the stars for a night of dance, song, and shared offerings. The player joins this revelry, where joy is not just celebration but a sacred act of reunion ? laughter and movement binding the community together beneath the vast sky. The glyph manifests when the player participates fully, showing that joy is a divine blessing that restores morale and strengthens bonds."
+    },
+    {
+      "domain": "Joy",
+      "id": 42,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "High Seer Elenya",
+        "role": "",
+        "npc_images": [
+          "npcs/high_seer_elenya.png"
+        ],
+        "background_images": [
+          "backgrounds/rare_alpine_flowers_marking_reunion_trails.png"
+        ]
+      },
+      "glyph_name": "Glyph of Blooming Path",
+      "location": "Rare alpine flowers marking reunion trails",
+      "storyline_summary": "After harsh winters, alpine flowers bloom along hidden paths. The player is guided to walk this trail with others, each bloom symbolizing reunion and renewal. The glyph is revealed when the player recognizes that joy is not fleeting ? it is the spark of life returning, a promise that the path contin...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "After harsh winters, alpine flowers bloom along hidden paths. The player is guided to walk this trail with others, each bloom symbolizing reunion and renewal. The glyph is revealed when the player recognizes that joy is not fleeting ? it is the spark of life returning, a promise that the path continues."
+    },
+    {
+      "domain": "Presence",
+      "id": 33,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "High Seer Elenya",
+        "role": "",
+        "npc_images": [
+          "npcs/high_seer_elenya.png"
+        ],
+        "background_images": [
+          "backgrounds/hidden_mountain_shrine_deep_within_echo_less_caverns.png"
+        ]
+      },
+      "glyph_name": "Glyph of Veiled Silence",
+      "location": "Hidden mountain shrine, deep within echo?less caverns.",
+      "storyline_summary": "The player enters a cavern where sound is swallowed by stone. Here, silence is not emptiness but a veil,  a sacred presence that covers grief and longing without words. The ritual requires the player to remain still, listening to what cannot be heard, until the glyph reveals itself in the hush. In t...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player enters a cavern where sound is swallowed by stone. Here, silence is not emptiness but a veil,  a sacred presence that covers grief and longing without words. The ritual requires the player to remain still, listening to what cannot be heard, until the glyph reveals itself in the hush. In this moment, Presence is understood as trust in silence itself: a divine witness that holds ache without judgment."
+    },
+    {
+      "domain": "Trust",
+      "id": 51,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "High Seer Elenya",
+        "role": "",
+        "npc_images": [
+          "npcs/high_seer_elenya.png"
+        ],
+        "background_images": [
+          "backgrounds/communal_fire_tended_by_shrine_keepers.png"
+        ]
+      },
+      "glyph_name": "Glyph of Covenant Flame",
+      "location": "Communal fire tended by shrine keepers;",
+      "storyline_summary": "The Covenant Flame is a fire that only survives through collective tending. Each member of the community adds fuel, guards it against wind, and shares its warmth. The player is asked to join this ritual, contributing alongside others. In doing so, they learn that survival is not solitary, it is a co...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Covenant Flame is a fire that only survives through collective tending. Each member of the community adds fuel, guards it against wind, and shares its warmth. The player is asked to join this ritual, contributing alongside others. In doing so, they learn that survival is not solitary, it is a covenant enacted in visible, daily acts of care. The glyph manifests when the flame endures through shared effort, symbolizing trust as the bond that keeps the community alive."
+    },
+    {
+      "domain": "Trust",
+      "id": 52,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "High Seer Elenya",
+        "role": "",
+        "npc_images": [
+          "npcs/high_seer_elenya.png"
+        ],
+        "background_images": [
+          "backgrounds/mountain_communal_hearth_or_alpine_shelter.png"
+        ]
+      },
+      "glyph_name": "Glyph of Shared Survival",
+      "location": "Mountain communal hearth or alpine shelter.",
+      "storyline_summary": "The player participates in a survival rite where each member contributes ? gathering wood, sharing food, guarding the shelter. The glyph is revealed when the player demonstrates willingness to rely on others and be relied upon.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player participates in a survival rite where each member contributes ? gathering wood, sharing food, guarding the shelter. The glyph is revealed when the player demonstrates willingness to rely on others and be relied upon."
+    },
+    {
+      "domain": "Legacy",
+      "id": 8,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Inodora",
+        "role": "Story Teller",
+        "npc_images": [
+          "npcs/inodora.png"
+        ],
+        "background_images": [
+          "backgrounds/communal_fire_circle.png"
+        ]
+      },
+      "glyph_name": "Glyph of Emotional Inheritance",
+      "location": "Communal fire circle",
+      "storyline_summary": "Families gather to pass flame from elder to child while Inodora narrates. The glyph manifests when the player accepts the fire, understanding legacy as warmth that survives only through transmission.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Families gather to pass flame from elder to child while Inodora narrates. The glyph manifests when the player accepts the fire, understanding legacy as warmth that survives only through transmission."
+    },
+    {
+      "domain": "Presence",
+      "id": 40,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Inodora",
+        "role": "Story Teller",
+        "npc_images": [
+          "npcs/inodora.png"
+        ],
+        "background_images": [
+          "backgrounds/old_communal_well.png"
+        ]
+      },
+      "glyph_name": "Glyph of Steadfast Witness",
+      "location": "Old Communal Well",
+      "storyline_summary": "A storyteller who remained through the collapse teaches that presence can anchor others. The glyph manifests when the player spends an entire night listening to stories and holds silent vigil, preventing the community's fear from spreading. This is presence as an anchor???sustaining others by stayin...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "A storyteller who remained through the collapse teaches that presence can anchor others. The glyph manifests when the player spends an entire night listening to stories and holds silent vigil, preventing the community's fear from spreading. This is presence as an anchor???sustaining others by staying."
+    },
+    {
+      "domain": "Joy",
+      "id": 50,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Juria & Korinth",
+        "role": "Sea Merchants",
+        "npc_images": [
+          "npcs/juria_korinth.png"
+        ],
+        "background_images": [
+          "backgrounds/bustling_harbor_market.png"
+        ]
+      },
+      "glyph_name": "Glyph of Trade Celebration",
+      "location": "Bustling Harbor Market",
+      "storyline_summary": "Sea merchants haggle, laugh, and celebrate successful trades at the docks. Their joy is infectious???the exuberance of commerce, of goods arriving, of profit and abundance flowing. Though self-interested, they can't help sharing in the energy of a good deal. The glyph manifests when the player joins...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Sea merchants haggle, laugh, and celebrate successful trades at the docks. Their joy is infectious???the exuberance of commerce, of goods arriving, of profit and abundance flowing. Though self-interested, they can't help sharing in the energy of a good deal. The glyph manifests when the player joins a celebration after a successful trade caravan arrives, understanding that joy can exist even in transactional relationships. This is the joy of exchange, of seeing needs met and desires fulfilled."
+    },
+    {
+      "domain": "Collapse",
+      "id": 66,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Kaelen the Suspected Thief",
+        "role": "",
+        "npc_images": [
+          "npcs/kaelen_the_suspected_thief.png"
+        ],
+        "background_images": [
+          "backgrounds/market_ruins.png"
+        ]
+      },
+      "glyph_name": "Glyph of Stolen Memory",
+      "location": "Market ruins.",
+      "storyline_summary": "Kaelen boasts of thefts, but what he steals now is not coin or relic, it is memory itself. Stories vanish from the marketplace, faces blur, names dissolve into shadow. Trust collapses when memory is rewritten, leaving community bonds incoherent. The glyph manifests when the player sees that stolen m...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Kaelen boasts of thefts, but what he steals now is not coin or relic, it is memory itself. Stories vanish from the marketplace, faces blur, names dissolve into shadow. Trust collapses when memory is rewritten, leaving community bonds incoherent. The glyph manifests when the player sees that stolen memory is not absence but distortion, a ledger altered in secret, a fracture that poisons the roots of belonging."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 28,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Kaelen the Suspected Thief",
+        "role": "",
+        "npc_images": [
+          "npcs/kaelen_the_suspected_thief.png"
+        ],
+        "background_images": [
+          "backgrounds/thieves_lair.png"
+        ]
+      },
+      "glyph_name": "Glyph of Hidden Passage",
+      "location": "Thieves lair.",
+      "storyline_summary": "Kaelen reveals secret routes. Sovereignty manifests as choice ? freedom carved in shadow.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Kaelen reveals secret routes. Sovereignty manifests as choice ? freedom carved in shadow."
+    },
+    {
+      "domain": "Trust",
+      "id": 56,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Kaelen the Suspected Thief",
+        "role": "",
+        "npc_images": [
+          "npcs/kaelen_the_suspected_thief.png"
+        ],
+        "background_images": [
+          "backgrounds/swamp.png"
+        ]
+      },
+      "glyph_name": "Glyth of Thieves' Honor",
+      "location": "Swamp",
+      "storyline_summary": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it is returned",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it is returned"
+    },
+    {
+      "domain": "Ache",
+      "id": 17,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Kiv",
+        "role": "Clay Hermit",
+        "npc_images": [
+          "npcs/kiv.png"
+        ],
+        "background_images": [
+          "backgrounds/kiln_ruins_forest_clearing.png"
+        ]
+      },
+      "glyph_name": "Glyph of Broken Vessel",
+      "location": "Kiln Ruins (Forest Clearing)",
+      "storyline_summary": "The Clay Hermit lives alone, surrounded by broken pottery???vessels he shapes then fractures intentionally. He explains: the Corelink network was a vessel holding billions of connected minds. When it shattered, every fragment was a person who fell. He teaches that fragility isn't weakness; it's the ...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss",
+        "memory-loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Clay Hermit lives alone, surrounded by broken pottery???vessels he shapes then fractures intentionally. He explains: the Corelink network was a vessel holding billions of connected minds. When it shattered, every fragment was a person who fell. He teaches that fragility isn't weakness; it's the prerequisite for love. The glyph manifests when the player helps him craft a new vessel and watches him break it, understanding the ritual: creation, connection, fracture, and beginning again. This is ache as teaching."
+    },
+    {
+      "domain": "Collapse",
+      "id": 69,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Korrin the Gossip",
+        "role": "",
+        "npc_images": [
+          "npcs/korrin_the_gossip.png"
+        ],
+        "background_images": [
+          "backgrounds/market_square_crowded_with_voices.png"
+        ]
+      },
+      "glyph_name": "Glyph of Fractured Rumor",
+      "location": "Market square, crowded with voices.",
+      "storyline_summary": "Korrin?s whispers multiply, each retelling bending truth until voices splinter into chaos. What begins as a single rumor becomes a chorus of distortion, spreading fracture through the marketplace. Bonds dissolve not through violence but through words twisted beyond recognition. The glyph manifests w...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Korrin?s whispers multiply, each retelling bending truth until voices splinter into chaos. What begins as a single rumor becomes a chorus of distortion, spreading fracture through the marketplace. Bonds dissolve not through violence but through words twisted beyond recognition. The glyph manifests when the player realizes that collapse can begin with sound alone, echoes that fracture trust until community itself unravels."
+    },
+    {
+      "domain": "Presence",
+      "id": 37,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Korrin the Gossip",
+        "role": "",
+        "npc_images": [
+          "npcs/korrin_the_gossip.png"
+        ],
+        "background_images": [
+          "backgrounds/informant_s_alcove_dimly_lit.png"
+        ]
+      },
+      "glyph_name": "Glyph of Listening Silence",
+      "location": "Informant?s alcove, dimly lit.",
+      "storyline_summary": "Korrin tests the player by speaking half?truths, then waiting. Presence manifests when the player resists the urge to answer, realizing silence itself is witness ? observation stronger than speech.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Korrin tests the player by speaking half?truths, then waiting. Presence manifests when the player resists the urge to answer, realizing silence itself is witness ? observation stronger than speech."
+    },
+    {
+      "domain": "Trust",
+      "id": 57,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Korrin the Gossip",
+        "role": "",
+        "npc_images": [
+          "npcs/korrin_the_gossip.png"
+        ],
+        "background_images": [
+          "backgrounds/market_alcove_behind_merchant_stalls.png"
+        ]
+      },
+      "glyph_name": "Glyph of Whispered Pact",
+      "location": "Market alcove, behind merchant stalls.",
+      "storyline_summary": "Korrin whispers secrets that bind merchants together. The player must decide whether to repeat or protect these words. Trust manifests when restraint is chosen ? gossip becomes covenant only when handled with care.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Korrin whispers secrets that bind merchants together. The player must decide whether to repeat or protect these words. Trust manifests when restraint is chosen ? gossip becomes covenant only when handled with care."
+    },
+    {
+      "domain": "Trust",
+      "id": 58,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Korrin the Gossip",
+        "role": "",
+        "npc_images": [
+          "npcs/korrin_the_gossip.png"
+        ],
+        "background_images": [
+          "backgrounds/merchant_alcove_whispered_deals.png"
+        ]
+      },
+      "glyph_name": "Glyph of Broken Promise",
+      "location": "Merchant alcove, whispered deals.",
+      "storyline_summary": "Korrin recalls promises made in haste and broken in silence. The player must decide whether to expose the betrayal or protect the bond. The glyph manifests when trust is shown to be fragile ? promises are only as strong as the witness who holds them.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Korrin recalls promises made in haste and broken in silence. The player must decide whether to expose the betrayal or protect the bond. The glyph manifests when trust is shown to be fragile ? promises are only as strong as the witness who holds them."
+    },
+    {
+      "domain": "Trust",
+      "id": 59,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Korrin the Gossip",
+        "role": "",
+        "npc_images": [
+          "npcs/korrin_the_gossip.png"
+        ],
+        "background_images": [
+          "backgrounds/market_square_crowded_with_voices.png"
+        ]
+      },
+      "glyph_name": "Glyph of Serpent?s Tongue",
+      "location": "Market square, crowded with voices.",
+      "storyline_summary": "Korrin?s words slither between truth and lies, charming merchants into uneasy alliances. The player must discern which words to repeat and which to silence. The glyph manifests when trust is revealed as discernment ? survival depends on knowing when speech heals and when it poisons.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Korrin?s words slither between truth and lies, charming merchants into uneasy alliances. The player must discern which words to repeat and which to silence. The glyph manifests when trust is revealed as discernment ? survival depends on knowing when speech heals and when it poisons."
+    },
+    {
+      "domain": "Legacy",
+      "id": 5,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Lark",
+        "role": "Shrine Mason",
+        "npc_images": [
+          "npcs/lark.png"
+        ],
+        "background_images": [
+          "backgrounds/river_bridge.png"
+        ]
+      },
+      "glyph_name": "Glyph of Shared Weight",
+      "location": "River bridge",
+      "storyline_summary": "Player encounters a village trying to save a group of children trapped by a collapsed stone bridge. The player joins into help just in time to allow the childrens survival. Remembers Ravi and Nima's story and feels a sense of rebalancing",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "memory-loss",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Player encounters a village trying to save a group of children trapped by a collapsed stone bridge. The player joins into help just in time to allow the childrens survival. Remembers Ravi and Nima's story and feels a sense of rebalancing"
+    },
+    {
+      "domain": "Joy",
+      "id": 49,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Lira",
+        "role": "Skilled Boatmaker",
+        "npc_images": [
+          "npcs/lira.png"
+        ],
+        "background_images": [
+          "backgrounds/boatwright_s_workshop.png"
+        ]
+      },
+      "glyph_name": "Glyph of Crafted Wonder",
+      "location": "Boatwright's Workshop",
+      "storyline_summary": "A skilled boatmaker takes pride in their craft, building vessels from reclaimed wood and salvaged materials. When they launch a new boat and it cuts smoothly across water for the first time, there's visible joy in their face???the joy of creation, of seeing something born from their hands work perfe...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "A skilled boatmaker takes pride in their craft, building vessels from reclaimed wood and salvaged materials. When they launch a new boat and it cuts smoothly across water for the first time, there's visible joy in their face???the joy of creation, of seeing something born from their hands work perfectly. The player helps test-launch a boat, and together they experience the delight of a flawless maiden voyage. The glyph manifests when the player recognizes that joy comes from making something beautiful from broken things."
+    },
+    {
+      "domain": "Ache",
+      "id": 19,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Mariel the Weaver",
+        "role": "",
+        "npc_images": [
+          "npcs/mariel_the_weaver.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_keeper_s_alcove_sacred_loom.png"
+        ]
+      },
+      "glyph_name": "Glyph of Sewn Ache",
+      "location": "Shrine Keeper's Alcove (Sacred Loom)",
+      "storyline_summary": "Mariel weaves cloth from threads salvaged from Velhara's ruins???copper wire, fabric scraps, strands of hair left behind. Each weaving is a memorial. She teaches that grief, when woven together, becomes something stronger: a shroud, a bandage, a map home. The glyph manifests when the player helps he...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Mariel weaves cloth from threads salvaged from Velhara's ruins???copper wire, fabric scraps, strands of hair left behind. Each weaving is a memorial. She teaches that grief, when woven together, becomes something stronger: a shroud, a bandage, a map home. The glyph manifests when the player helps her complete a cloth that holds the stories of seven lost families. This is ache transformed into care, grief given form and function."
+    },
+    {
+      "domain": "Trust",
+      "id": 54,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Mariel the Weaver",
+        "role": "",
+        "npc_images": [
+          "npcs/mariel_the_weaver.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_alcove.png"
+        ]
+      },
+      "glyph_name": "Glyph of Binding Cloth",
+      "location": "Shrine alcove.",
+      "storyline_summary": "The player joins Mariel in weaving communal cloth. Trust manifests as threads binding lives together.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player joins Mariel in weaving communal cloth. Trust manifests as threads binding lives together."
+    },
+    {
+      "domain": "Trust",
+      "id": 71,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Kaelen the Suspected Thief (as swamp trickster)",
+        "role": "",
+        "npc_images": [
+          "npcs/kaelen_the_suspected_thief_as_swamp_trickster.png"
+        ],
+        "background_images": [
+          "backgrounds/swamp_dock.png"
+        ]
+      },
+      "glyph_name": "Glyph of Apprehension",
+      "location": "Swamp Dock",
+      "storyline_summary": "The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and �paths that shift when watched.� He sends the player to retrieve a glyph he claims is �caught between fear and faith.� When the player finds it, the Glyph of Apprehensio...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and �paths that shift when watched.� He sends the player to retrieve a glyph he claims is �caught between fear and faith.� When the player finds it, the Glyph of Apprehension reveals itself � a symbol of the uneasy tension between trusting someone and fearing betrayal. If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead."
+    },
+    {
+      "domain": "Legacy",
+      "id": 6,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Mariel the Weaver (secondary quest)",
+        "role": "",
+        "npc_images": [
+          "npcs/mariel_the_weaver_secondary_quest.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_alcove.png"
+        ]
+      },
+      "glyph_name": "Glyph of Worn Cloth",
+      "location": "Shrine alcove",
+      "storyline_summary": "Player learns to appreciate the warmth provided by cloth weaved by others hands",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Player learns to appreciate the warmth provided by cloth weaved by others hands"
+    },
+    {
+      "domain": "Ache",
+      "id": 14,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Nima",
+        "role": "",
+        "npc_images": [
+          "npcs/nima.png"
+        ],
+        "background_images": [
+          "backgrounds/market_overlook.png"
+        ]
+      },
+      "glyph_name": "Glyph of Sorrow",
+      "location": "Market Overlook",
+      "storyline_summary": "After acquiring the Glyph of Remembrance, the player encounters Nima alone, gazing at a specific spot in the marketplace. This is where Ophina played. Player choices determine the encounter: Observe quietly (she walks away silently), Approach quietly (she admits 'I still can't believe it'), Inquire ...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "After acquiring the Glyph of Remembrance, the player encounters Nima alone, gazing at a specific spot in the marketplace. This is where Ophina played. Player choices determine the encounter: Observe quietly (she walks away silently), Approach quietly (she admits 'I still can't believe it'), Inquire directly (she says 'You wouldn't understand'), or Empathize (she opens: 'This is where it happened. The City spoke before I knew how to listen'). If the player shows high empathy, Nima shares fragments of Ophina's final moments and the player receives the Tome of the Mustard Seed???an item that enhances Empathy and unlocks grief-based dialogue with other survivors. This glyph represents sorrow not as something to fix, but as something to carry. It manifests when Nima feels witnessed, not absolved. This is the ache of permanent loss, metabolized into wisdom."
+    },
+    {
+      "domain": "Ache",
+      "id": 12,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Nordia the Mourning Singer",
+        "role": "",
+        "npc_images": [
+          "npcs/nordia_the_mourning_singer.png"
+        ],
+        "background_images": [
+          "backgrounds/civic_center_ruins_amphitheater.png"
+        ]
+      },
+      "glyph_name": "Glyph of Primal Oblivion",
+      "location": "Civic Center Ruins Amphitheater",
+      "storyline_summary": "The Mourning Singer stands amid collapsed grandstands, singing fragments of a lullaby that no longer has a listener. She is raw, unguarded, her voice cracked with grief. The player witnesses her song and realizes she is keening???mourning not just a person, but the whole network that once held her v...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss",
+        "memory-loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Mourning Singer stands amid collapsed grandstands, singing fragments of a lullaby that no longer has a listener. She is raw, unguarded, her voice cracked with grief. The player witnesses her song and realizes she is keening???mourning not just a person, but the whole network that once held her voice. The glyph manifests when the player chooses to listen fully, to be the audience Corelink once was. This is raw ache, unrefined, the howl before language."
+    },
+    {
+      "domain": "Legacy",
+      "id": 4,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Nordia the Mourning Singer (secondary arc)",
+        "role": "",
+        "npc_images": [
+          "npcs/nordia_the_mourning_singer_secondary_arc.png"
+        ],
+        "background_images": [
+          "backgrounds/tomb_of_echoes_cavern_where_wind_moves_like_ancestral_sighs.png"
+        ]
+      },
+      "glyph_name": "Glyph of Echoed Breath",
+      "location": "Tomb of Echoes, cavern where wind moves like ancestral sighs",
+      "storyline_summary": "Within the Tomb of Echoes, the Desert Elder leads a ritual of breath. The cavern wind rises and falls like voices of the departed, each exhale carrying memory into the present. The player is asked to breathe in rhythm with the elder, joining a lineage of survival carried through breath itself. The g...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "memory-loss",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Within the Tomb of Echoes, the Desert Elder leads a ritual of breath. The cavern wind rises and falls like voices of the departed, each exhale carrying memory into the present. The player is asked to breathe in rhythm with the elder, joining a lineage of survival carried through breath itself. The glyph manifests when the player realizes that inheritance is not only names or records, but the living act of breathing together, ancestors sustained in every breath drawn by the living."
+    },
+    {
+      "domain": "Legacy",
+      "id": 10,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Nordia the Mourning Singer (tertiary arc)",
+        "role": "",
+        "npc_images": [
+          "npcs/nordia_the_mourning_singer_tertiary_arc.png"
+        ],
+        "background_images": [
+          "backgrounds/civic_center_ruins_amphitheater.png"
+        ]
+      },
+      "glyph_name": "Glyph of Returning Song",
+      "location": "Civic Center Ruins Amphitheater",
+      "storyline_summary": "A song sung across generations returns in the player?s voice. Legacy is revealed as ache transformed into transmission.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "A song sung across generations returns in the player?s voice. Legacy is revealed as ache transformed into transmission."
+    },
+    {
+      "domain": "Collapse",
+      "id": 70,
+      "theme": "Memory distortion, fear, the fracture",
+      "npc": {
+        "name": "Orvak",
+        "role": "Ruined Watcher",
+        "npc_images": [
+          "npcs/orvak.png"
+        ],
+        "background_images": [
+          "backgrounds/collapsed_watchtower.png"
+        ]
+      },
+      "glyph_name": "Glyph of Quiet Collapse",
+      "location": "Collapsed Watchtower",
+      "storyline_summary": "At dawn, the Ruined Watcher tends a broken tower, repairing small rituals of survival such as sweeping rubble, lighting a lantern, marking the hours. Yet each act feels fragile, threatened by silence pressing in. Collapse here is not loud or sudden but quiet erosion, the slow unraveling of daily anc...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "collapse",
+        "distortion",
+        "fear",
+        "fracture",
+        "memory",
+        "memory-loss",
+        "the"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "At dawn, the Ruined Watcher tends a broken tower, repairing small rituals of survival such as sweeping rubble, lighting a lantern, marking the hours. Yet each act feels fragile, threatened by silence pressing in. Collapse here is not loud or sudden but quiet erosion, the slow unraveling of daily anchors. The glyph manifests when the player joins the Watcher in these fragile repairs, realizing that collapse can be softened but never erased, held back only by steady hands and shared ritual."
+    },
+    {
+      "domain": "Joy",
+      "id": 48,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Rasha",
+        "role": "Ferry Operator",
+        "npc_images": [
+          "npcs/rasha.png"
+        ],
+        "background_images": [
+          "backgrounds/harbor_at_dawn.png"
+        ]
+      },
+      "glyph_name": "Glyph of Arrival",
+      "location": "Harbor at Dawn",
+      "storyline_summary": "The dock worker watches ships arrive after perilous journeys across water. There's a moment when travelers step off the boat onto solid ground???relief, gratitude, sometimes tears of joy at safe return. The glyph manifests when the player witnesses and honors these arrivals, understanding that joy i...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The dock worker watches ships arrive after perilous journeys across water. There's a moment when travelers step off the boat onto solid ground???relief, gratitude, sometimes tears of joy at safe return. The glyph manifests when the player witnesses and honors these arrivals, understanding that joy is often the flip side of survival. This is the joy of homecoming, of making it through the dangerous waters and arriving."
+    },
+    {
+      "domain": "Trust",
+      "id": 60,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Rasha",
+        "role": "Ferry Operator & Rasha - Ferry Operator",
+        "npc_images": [
+          "npcs/rasha.png"
+        ],
+        "background_images": [
+          "backgrounds/harbor_dock.png"
+        ]
+      },
+      "glyph_name": "Glyph of Mutual Passage",
+      "location": "Harbor Dock",
+      "storyline_summary": "The ferry operator and dock worker depend on each other absolutely???one pilots the waters, the other coordinates cargo and ensures safe passage. When the player witnesses their wordless coordination, the trust between them becomes visible. The glyph manifests when the player realizes that some bond...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The ferry operator and dock worker depend on each other absolutely???one pilots the waters, the other coordinates cargo and ensures safe passage. When the player witnesses their wordless coordination, the trust between them becomes visible. The glyph manifests when the player realizes that some bonds are built not through words but through reliable action, day after day. The player must choose: exploit this duo's knowledge for shortcuts (fracturing their trust), or respect their expertise and build genuine alliance. This is trust as earned interdependence, survival built on mutual reliance."
+    },
+    {
+      "domain": "Presence",
+      "id": 32,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Ravi",
+        "role": "",
+        "npc_images": [
+          "npcs/ravi.png"
+        ],
+        "background_images": [
+          "backgrounds/market_shrine_marketplace.png"
+        ]
+      },
+      "glyph_name": "Glyph of Remembrance",
+      "location": "Market Shrine (Marketplace)",
+      "storyline_summary": "After obtaining the Tome of the Mustard Seed, Ravi approaches the player alone. He speaks of the moment before Ophina was trapped???the last instant he could have intervened but didn't. His trusting nature made him ignore his gut feeling that something was amiss. He carries deep guilt because he bel...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "After obtaining the Tome of the Mustard Seed, Ravi approaches the player alone. He speaks of the moment before Ophina was trapped???the last instant he could have intervened but didn't. His trusting nature made him ignore his gut feeling that something was amiss. He carries deep guilt because he believed his role as a father meant he was his daughter's knight and armor, that no harm could come to her in his presence. The City taught him the painful lesson of his hubris. Once bold and gregarious, he is now a hollow shell. The player listens without offering comfort. The glyph manifests when Ravi feels truly witnessed in his failure???not forgiven, not absolved, but simply seen. This presence is the refusal to look away from others' pain. Witnessing becomes a form of dignity. If the player has the Tome, Ravi's empathy gain is enhanced, and he reveals the location of the Glyph of Legacy."
+    },
+    {
+      "domain": "Legacy",
+      "id": 2,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Ravi, Nima",
+        "role": "",
+        "npc_images": [
+          "npcs/ravi_nima.png"
+        ],
+        "background_images": [
+          "backgrounds/civic_center_rubble.png"
+        ]
+      },
+      "glyph_name": "Glyph of Legacy",
+      "location": "Civic Center Rubble",
+      "storyline_summary": "Ravi and Nima, a couple who lost their five-year-old daughter Ophina to a marketplace collapse, teach the player about legacy through sorrow. They arrived in Velhara marketplace full of hope, watching Ophina play among the stalls. But Ophina wandered too close to the crumbling civic center, and rust...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "memory-loss",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Ravi and Nima, a couple who lost their five-year-old daughter Ophina to a marketplace collapse, teach the player about legacy through sorrow. They arrived in Velhara marketplace full of hope, watching Ophina play among the stalls. But Ophina wandered too close to the crumbling civic center, and rusted metal beams collapsed. Trapped under rubble with a broken leg, Ophina lingered for days while her parents brought food and water, helpless to save her. She died under their watch. This glyph unlocks after the player obtains Kaelen's confession???he witnessed the collapse while attempting a theft and felt powerless to intervene. The player learns that legacy isn't just inheritance of memory; it's the burden of witnessing loss and choosing to stay present afterward. Ravi and Nima stayed in the marketplace as penance, transforming their ache into a cautionary wisdom they share with the player. This glyph is the key to the Triglyph chamber."
+    },
+    {
+      "domain": "Collapse",
+      "id": 18,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Sanor",
+        "role": "Silent Elder",
+        "npc_images": [
+          "npcs/sanor.png"
+        ],
+        "background_images": [
+          "backgrounds/abandoned_shrine_rural_outskirts.png"
+        ]
+      },
+      "glyph_name": "Glyph of Silent Ache",
+      "location": "Abandoned Shrine (Rural Outskirts)",
+      "storyline_summary": "The Silent Elder hasn't spoken since the Corelink collapse???not out of trauma, but out of choice. With the network gone, she realized that most of what she said was noise, confirmation-seeking, the chatter of a mind desperate for connection. Now she sits in stillness. The glyph manifests when the p...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "betrayal",
+        "collapse",
+        "grief",
+        "loss",
+        "memory-loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Silent Elder hasn't spoken since the Corelink collapse???not out of trauma, but out of choice. With the network gone, she realized that most of what she said was noise, confirmation-seeking, the chatter of a mind desperate for connection. Now she sits in stillness. The glyph manifests when the player sits with her in complete silence for as long as they can bear, discovering that presence doesn't require words. This is the ache of all the things that will never be said, held in sacred quiet."
+    },
+    {
+      "domain": "Legacy",
+      "id": 1,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Sealina",
+        "role": "Street Performer",
+        "npc_images": [
+          "npcs/sealina.png"
+        ],
+        "background_images": [
+          "backgrounds/market_square.png"
+        ]
+      },
+      "glyph_name": "Glyph of Hopeful Transmission",
+      "location": "Market Square",
+      "storyline_summary": "By finding scattered photographs of Sealina�s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming lo...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "memory-loss",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "By finding scattered photographs of Sealina�s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity."
+    },
+    {
+      "domain": "Ache",
+      "id": 72,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Sealina",
+        "role": "Street Performer",
+        "npc_images": [
+          "npcs/sealina.png"
+        ],
+        "background_images": [
+          "backgrounds/market_square.png"
+        ]
+      },
+      "glyph_name": "Glyph of Echoed Longing",
+      "location": "Market Square",
+      "storyline_summary": "Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother � dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her b...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss",
+        "memory-loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother � dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost"
+    },
+    {
+      "domain": "Joy",
+      "id": 43,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Sera the Herb Novice",
+        "role": "",
+        "npc_images": [
+          "npcs/sera_the_herb_novice.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_garden_after_winter_thaw.png"
+        ]
+      },
+      "glyph_name": "Glyph of Verdant Reunion",
+      "location": "Shrine garden after winter thaw.",
+      "storyline_summary": "Sera guides the player to gather herbs that only bloom when tended together. Joy manifests as reunion through shared care ? growth as communal spark.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Sera guides the player to gather herbs that only bloom when tended together. Joy manifests as reunion through shared care ? growth as communal spark."
+    },
+    {
+      "domain": "Joy",
+      "id": 44,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Sera the Herb Novice",
+        "role": "",
+        "npc_images": [
+          "npcs/sera_the_herb_novice.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_garden_at_first_light.png"
+        ]
+      },
+      "glyph_name": "Glyph of Dawn Petals",
+      "location": "Shrine garden at first light.",
+      "storyline_summary": "Sera guides the player to gather blossoms that only open at dawn. Joy is appreciated because it can be fleeting, so appreciation with shared hope is embraced",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Sera guides the player to gather blossoms that only open at dawn. Joy is appreciated because it can be fleeting, so appreciation with shared hope is embraced"
+    },
+    {
+      "domain": "Joy",
+      "id": 45,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Sera the Herb Novice",
+        "role": "",
+        "npc_images": [
+          "npcs/sera_the_herb_novice.png"
+        ],
+        "background_images": [
+          "backgrounds/market_shrine_courtyard.png"
+        ]
+      },
+      "glyph_name": "Glyph of Laughter's Balm",
+      "location": "Market shrine courtyard.",
+      "storyline_summary": "Sera brews a tea from herbs that lighten sorrow. The player helps her find the herbs, and in the process find solace in his grief over losing his family to disease. His story also lightens the hearts of the other grieving villagers. The group finds laughter in remembering jokes their loved ones used...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "memory-loss",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Sera brews a tea from herbs that lighten sorrow. The player helps her find the herbs, and in the process find solace in his grief over losing his family to disease. His story also lightens the hearts of the other grieving villagers. The group finds laughter in remembering jokes their loved ones used to tell."
+    },
+    {
+      "domain": "Presence",
+      "id": 34,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Sera the Herb Novice",
+        "role": "",
+        "npc_images": [
+          "npcs/sera_the_herb_novice.png"
+        ],
+        "background_images": [
+          "backgrounds/herb_lined_shrine_alcove.png"
+        ]
+      },
+      "glyph_name": "Glyph of Fragrant Silence",
+      "location": "Herb?lined shrine alcove.",
+      "storyline_summary": "In silence, the player inhales the scent of crushed herbs. Presence is revealed as subtle witness ? healing carried in quiet fragrance.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "In silence, the player inhales the scent of crushed herbs. Presence is revealed as subtle witness ? healing carried in quiet fragrance."
+    },
+    {
+      "domain": "Presence",
+      "id": 36,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Sera the Herb Novice",
+        "role": "",
+        "npc_images": [
+          "npcs/sera_the_herb_novice.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_keeper_s_hut.png"
+        ]
+      },
+      "glyph_name": "Glyph of Quiet Bloom",
+      "location": "Shrine keeper?s hut.",
+      "storyline_summary": "Sera invites the player to join her in tending wounds with herbs. Trust manifests when care is given and received ? survival depends on hands extended in empathy.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Sera invites the player to join her in tending wounds with herbs. Trust manifests when care is given and received ? survival depends on hands extended in empathy."
+    },
+    {
+      "domain": "Ache",
+      "id": 13,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Seyla",
+        "role": "Archivist of Lineage",
+        "npc_images": [
+          "npcs/seyla.png"
+        ],
+        "background_images": [
+          "backgrounds/hall_of_ancestral_echoes_desert_tomb.png"
+        ]
+      },
+      "glyph_name": "Glyph of Dislocated Attachment",
+      "location": "Hall of Ancestral Echoes (desert tomb)",
+      "storyline_summary": "The Archivist guards a hall of broken records???genealogies scattered like shattered glass. She speaks of families fractured by Corelink's severance: parents who depended on the network to understand their children's emotional states, now blind to each other. Love and fear pull in opposite direction...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss",
+        "memory-loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Archivist guards a hall of broken records???genealogies scattered like shattered glass. She speaks of families fractured by Corelink's severance: parents who depended on the network to understand their children's emotional states, now blind to each other. Love and fear pull in opposite directions. The glyph manifests when the player helps the Archivist piece together one family's story, realizing that inheritance isn't just blood???it's the terrible knowledge of being known, and the ache of being suddenly unknown."
+    },
+    {
+      "domain": "Joy",
+      "id": 47,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Sybil",
+        "role": "Forest Loner Camper",
+        "npc_images": [
+          "npcs/sybil.png"
+        ],
+        "background_images": [
+          "backgrounds/hidden_forest_campsite.png"
+        ]
+      },
+      "glyph_name": "Glyph of Hidden Warmth",
+      "location": "Hidden Forest Campsite",
+      "storyline_summary": "The loner camper, reclusive and hostile to intrusion, reveals a softer side when approached with true care. In their secluded camp, they've maintained a small tradition: a whistle carved from wood that plays a hauntingly beautiful melody. The player learns this tune through patient observation. The ...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The loner camper, reclusive and hostile to intrusion, reveals a softer side when approached with true care. In their secluded camp, they've maintained a small tradition: a whistle carved from wood that plays a hauntingly beautiful melody. The player learns this tune through patient observation. The glyph manifests when the player returns to sing the melody back, and the loner actually smiles???a rare, fleeting expression of joy. This is the joy of connection despite walls, breakthrough achieved through persistence and respect."
+    },
+    {
+      "domain": "Joy",
+      "id": 46,
+      "theme": "Play, reunion, creative spark",
+      "npc": {
+        "name": "Tala",
+        "role": "Market Cook",
+        "npc_images": [
+          "npcs/tala.png"
+        ],
+        "background_images": [
+          "backgrounds/communal_cooking_fire.png"
+        ]
+      },
+      "glyph_name": "Glyph of Shared Feast",
+      "location": "Communal Cooking Fire",
+      "storyline_summary": "Cooks gather survivors around a communal fire to prepare meals. But more than nourishment, the feast is a ritual of reunion. The player helps prepare food alongside others???chopping, stirring, tasting. In the act of cooking together, laughter emerges naturally. Jokes are traded, stories shared. The...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "creative",
+        "joy",
+        "play",
+        "reunion",
+        "spark"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Cooks gather survivors around a communal fire to prepare meals. But more than nourishment, the feast is a ritual of reunion. The player helps prepare food alongside others???chopping, stirring, tasting. In the act of cooking together, laughter emerges naturally. Jokes are traded, stories shared. The glyph manifests when the player realizes that joy often comes not from grand celebration, but from the simple act of breaking bread with others. This is joy as everyday resurrection."
+    },
+    {
+      "domain": "Ache",
+      "id": 15,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Tessa",
+        "role": "Desert Widow",
+        "npc_images": [
+          "npcs/tessa.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_of_loss_desert_temple.png"
+        ]
+      },
+      "glyph_name": "Glyph of Widow's Cry",
+      "location": "Shrine of Loss (Desert Temple)",
+      "storyline_summary": "The Desert Widow tends a shrine in the sand, offerings left by those who lost partners to the Corelink collapse. Some were deep enough in the network that the severance was lethal. She teaches a ritual lament???a song that carries grief into the wind where it can dissolve without poisoning the heart...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss",
+        "memory-loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Desert Widow tends a shrine in the sand, offerings left by those who lost partners to the Corelink collapse. Some were deep enough in the network that the severance was lethal. She teaches a ritual lament???a song that carries grief into the wind where it can dissolve without poisoning the heart. The glyph manifests when the player joins her song, understanding that some griefs are meant to be transmitted, not contained. This is the widow's wisdom: loss shared becomes bearable."
+    },
+    {
+      "domain": "Presence",
+      "id": 31,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Thalma",
+        "role": "The Desert Listener",
+        "npc_images": [
+          "npcs/thalma.png"
+        ],
+        "background_images": [
+          "backgrounds/resonance_chamber_a_cavern_where_echoes_collapse_into_stillness.png"
+        ]
+      },
+      "glyph_name": "Glyph of Sensory Oblivion",
+      "location": "Resonance Chamber ? a cavern where echoes collapse into stillness.",
+      "storyline_summary": "The player enters the Resonance Chamber, a place where sound dissolves and touch becomes heightened. The Desert Listener guides them through a ritual of sensing absence, tracing walls, feeling vibrations, noticing what is no longer there. In this silence, loss is not spoken but embodied: the ache of...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player enters the Resonance Chamber, a place where sound dissolves and touch becomes heightened. The Desert Listener guides them through a ritual of sensing absence, tracing walls, feeling vibrations, noticing what is no longer there. In this silence, loss is not spoken but embodied: the ache of what has vanished is carried in the body?s subtle awareness. The glyph manifests when the player accepts that presence can mean witnessing emptiness without trying to fill it."
+    },
+    {
+      "domain": "Ache",
+      "id": 20,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Thoran",
+        "role": "Mask-Maker",
+        "npc_images": [
+          "npcs/thoran.png"
+        ],
+        "background_images": [
+          "backgrounds/market_stall_marketplace.png"
+        ]
+      },
+      "glyph_name": "Glyph of Hidden Ache",
+      "location": "Market Stall (Marketplace)",
+      "storyline_summary": "The Mask-Maker crafts faces from clay, wood, and scrap???each one a different expression. Buyers choose masks to wear during the seasonal gatherings, allowing them to express emotions they otherwise keep hidden. The Mask-Maker reveals that grief, hidden, doesn't disappear???it calcifies. The glyph m...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The Mask-Maker crafts faces from clay, wood, and scrap???each one a different expression. Buyers choose masks to wear during the seasonal gatherings, allowing them to express emotions they otherwise keep hidden. The Mask-Maker reveals that grief, hidden, doesn't disappear???it calcifies. The glyph manifests when the player commissions a mask that shows their true ache, then wears it publicly, allowing others to witness. This is the courage to stop performing recovery and admit: I am still broken, and that's okay."
+    },
+    {
+      "domain": "Sovereignty",
+      "id": 25,
+      "theme": "Boundaries, choice, clarity",
+      "npc": {
+        "name": "Tovren the Cartwright",
+        "role": "",
+        "npc_images": [
+          "npcs/tovren_the_cartwright.png"
+        ],
+        "background_images": [
+          "backgrounds/collapsing_trade_route.png"
+        ]
+      },
+      "glyph_name": "Glyph of Marked Boundaries",
+      "location": "Collapsing trade route.",
+      "storyline_summary": "Tovren teaches the player to mark unstable paths with chalk. Sovereignty is clarity ? boundaries drawn to protect travelers.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "boundaries",
+        "choice",
+        "clarity",
+        "sovereignty"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Tovren teaches the player to mark unstable paths with chalk. Sovereignty is clarity ? boundaries drawn to protect travelers."
+    },
+    {
+      "domain": "Trust",
+      "id": 53,
+      "theme": "Community, restoration, interdependence",
+      "npc": {
+        "name": "Tovren the Cartwright",
+        "role": "",
+        "npc_images": [
+          "npcs/tovren_the_cartwright.png"
+        ],
+        "background_images": [
+          "backgrounds/merchant_caravan.png"
+        ]
+      },
+      "glyph_name": "Glyph of Shared Burden",
+      "location": "Merchant caravan.",
+      "storyline_summary": "The player helps carry goods across a fractured bridge. Trust manifests when survival depends on bearing weight together.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "community",
+        "interdependence",
+        "memory-loss",
+        "restoration",
+        "trust"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player helps carry goods across a fractured bridge. Trust manifests when survival depends on bearing weight together."
+    },
+    {
+      "domain": "Ache",
+      "id": 11,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Varna",
+        "role": "Ruins Warden",
+        "npc_images": [
+          "npcs/varna.png"
+        ],
+        "background_images": [
+          "backgrounds/chamber_of_delayed_echoes_swamp_underground.png"
+        ]
+      },
+      "glyph_name": "Glyph of Infrasensory Oblivion",
+      "location": "Chamber of Delayed Echoes (swamp underground)",
+      "storyline_summary": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. The Ruins Warden appears???scarred, weathered, yet still watching the boundaries of the old city. She teaches that aban...",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ache",
+        "betrayal",
+        "grief",
+        "loss"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. The Ruins Warden appears???scarred, weathered, yet still watching the boundaries of the old city. She teaches that abandonment sometimes arrives late: the soul doesn't feel the cut until long after the severance. The glyph manifests when the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named. This is the seed of loss, the latency of loneliness."
+    },
+    {
+      "domain": "Legacy",
+      "id": 9,
+      "theme": "Family, ancestry, ritual inheritance",
+      "npc": {
+        "name": "Velka",
+        "role": "Bone Keeper",
+        "npc_images": [
+          "npcs/velka.png"
+        ],
+        "background_images": [
+          "backgrounds/ossuary_ruins.png"
+        ]
+      },
+      "glyph_name": "Glyph of Covenant Bone",
+      "location": "Ossuary ruins",
+      "storyline_summary": "Bones preserved in ritual burial are not relics but promises. The glyph reveals itself when the player honors the remains, realizing legacy is covenant ? the living bound to remember the dead.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "ancestry",
+        "family",
+        "inheritance",
+        "legacy",
+        "memory-loss",
+        "ritual"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Bones preserved in ritual burial are not relics but promises. The glyph reveals itself when the player honors the remains, realizing legacy is covenant ? the living bound to remember the dead."
+    },
+    {
+      "domain": "Presence",
+      "id": 73,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Helia",
+        "role": "Shrine Healer",
+        "npc_images": [
+          "npcs/helia.png"
+        ],
+        "background_images": [
+          "backgrounds/shrine_healing_alcove.png"
+        ]
+      },
+      "glyph_name": "Glyph of Quiet Return",
+      "location": "Shrine Healing Alcove",
+      "storyline_summary": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence — not action — is what brings people back to themselves.",
+      "story_seed": "",
+      "tone_integration": [],
+      "remnants_integration": [],
+      "player_choices": [],
+      "narrative_triggers": [],
+      "memory_fragments": [],
+      "tags": [
+        "memory-loss",
+        "presence",
+        "silence",
+        "touch",
+        "witness"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence — not action — is what brings people back to themselves."
+    }
+  ],
+  "meta": {
+    "source_csv": "..\\velinor\\markdowngameinstructions\\Glyph_Organizer.csv",
+    "converted_by": "convert_glyph_csv_to_json.py"
+  }
+}
