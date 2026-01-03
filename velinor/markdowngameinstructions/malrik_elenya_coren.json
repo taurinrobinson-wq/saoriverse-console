@@ -1,0 +1,332 @@
+{
+    "meta": {
+        "source": "velinor/markdowngameinstructions/malrik_elenya_coren.md",
+        "generated": "2026-01-02",
+        "notes": "Extracted character profiles, glyphs, mini-game and mechanics."
+    },
+    "characters": [
+        {
+            "id": "malrik",
+            "role": "Archivist",
+            "displayName": "Archivist Malrik",
+            "traits": [
+                "shrewd",
+                "empirically_minded",
+                "skeptical",
+                "rigorous",
+                "service_oriented",
+                "blind_spotted",
+                "haunted"
+            ],
+            "speechPattern": [
+                "proclamations",
+                "abrupt_pivots",
+                "half_explanations",
+                "impatient_clarity",
+                "rare_softness"
+            ],
+            "visual": {
+                "palette": [
+                    "sand",
+                    "stone",
+                    "faded_ochre"
+                ],
+                "silhouette": "upright, controlled",
+                "signature": "sand_diagrams, wrapped_head_covering"
+            },
+            "glyphs": [
+                {
+                    "name": "Glyph of Fractured Memory",
+                    "location": "Archive Chamber",
+                    "mechanic": "Player recognizes semantic fracture; glyph manifests when player interprets data as distorted, not vanished",
+                    "theme": "Collapse"
+                },
+                {
+                    "name": "Glyph of Mirage Echo",
+                    "location": "Desert Heat",
+                    "mechanic": "Player dismisses mirage and accepts uncertainty; teaches surviving collapse",
+                    "theme": "Fear/Collapse"
+                },
+                {
+                    "name": "Glyph of Ancestral Record",
+                    "location": "Desert tomb archives",
+                    "mechanic": "Legacy as evidence, discover records; emotional ache"
+                },
+                {
+                    "name": "Glyph of Sand Memories",
+                    "location": "Desert archive chamber",
+                    "mechanic": "Legacy is emotional even in data"
+                },
+                {
+                    "name": "Glyph of Measured Step",
+                    "location": "Desert Trial Grounds",
+                    "mechanic": "Traverse ruins with measured tempo; sovereignty as discipline"
+                },
+                {
+                    "name": "Glyph of Boundary Stone",
+                    "location": "Shifting Sands",
+                    "mechanic": "Carve temporary boundary; sovereignty through repeated choice"
+                }
+            ]
+        },
+        {
+            "id": "elenya",
+            "role": "High Seer",
+            "displayName": "High Seer Elenya",
+            "traits": [
+                "intuitive",
+                "compassionate",
+                "ritualistic",
+                "presence_oriented",
+                "renewal_focused"
+            ],
+            "speechPattern": [
+                "soft_clarity",
+                "metaphor",
+                "long_blinks"
+            ],
+            "visual": {
+                "palette": [
+                    "deep_indigo",
+                    "soft_violet",
+                    "pale_gold"
+                ],
+                "silhouette": "soft flowing lines",
+                "signature": "wind_touched_hair, mantle, long_blink"
+            },
+            "glyphs": [
+                {
+                    "name": "Glyph of Sky Revelry",
+                    "location": "Open peaks",
+                    "mechanic": "Participate in revelry; joy as communal survival"
+                },
+                {
+                    "name": "Glyph of Blooming Path",
+                    "location": "Alpine paths",
+                    "mechanic": "Follow blooming trail; renewal"
+                },
+                {
+                    "name": "Glyph of Veiled Silence",
+                    "location": "Hidden shrine",
+                    "mechanic": "Remain still in silence; presence as witness"
+                },
+                {
+                    "name": "Glyph of Covenant Flame",
+                    "location": "Communal fire",
+                    "mechanic": "Tend the flame collectively; trust as covenant"
+                }
+            ]
+        },
+        {
+            "id": "coren",
+            "role": "Mediator",
+            "displayName": "Coren the Mediator",
+            "traits": [
+                "mediator",
+                "adaptive",
+                "co_witness",
+                "boundary_sense"
+            ],
+            "aspects": [
+                "collapse",
+                "sovereignty"
+            ],
+            "glyphs": [
+                {
+                    "name": "Glyph of Preemptive Severance",
+                    "location": "Cult Encampment",
+                    "mechanic": "Sever emotional bonds preemptively; player recognizes fear-based false choices",
+                    "theme": "Collapse"
+                },
+                {
+                    "name": "Glyph of Held Ache",
+                    "location": "Market Concourse",
+                    "mechanic": "Co-witnessing conflict; sovereignty as holding sorrow without forcing resolution",
+                    "theme": "Sovereignty"
+                }
+            ]
+        }
+    ],
+    "miniGames": {
+        "observationalScene": {
+            "description": "A scene where player observes Malrik drawing in sand and Elenya watching.",
+            "anchors": [
+                "elenya_looking",
+                "elenya_hand_on_gut",
+                "malrik_unaware",
+                "malrik_aloof"
+            ],
+            "orientations": [
+                "trust",
+                "observation",
+                "narrative",
+                "empathy"
+            ],
+            "choiceSets": {
+                "trust": [
+                    "They’re just doing their usual thing.",
+                    "They always stand far apart like this.",
+                    "Elenya’s silence probably means she’s annoyed again.",
+                    "Malrik is focused. Nothing unusual here."
+                ],
+                "observation": [
+                    "The diagram he’s drawing looks intricate…",
+                    "Her hand placement is interesting.",
+                    "The wind is pushing her hair toward him.",
+                    "The terrain blends in a strange way."
+                ],
+                "narrative": [
+                    "This looks like the setup for something important.",
+                    "Their positions feel symbolic somehow.",
+                    "Is this a turning point between them?",
+                    "The world feels like it’s framing them on purpose."
+                ],
+                "empathy": [
+                    "She’s feeling something for him.",
+                    "Her hand on her gut… that’s emotion, not thought.",
+                    "He doesn’t see her — and that hurts a little.",
+                    "They’re meeting in the same landscape for the first time."
+                ]
+            },
+            "toneShifts": {
+                "trust": [
+                    [
+                        0.04,
+                        0.01,
+                        0.01,
+                        0.00
+                    ],
+                    [
+                        0.03,
+                        0.02,
+                        0.01,
+                        0.00
+                    ],
+                    [
+                        0.03,
+                        0.01,
+                        0.01,
+                        0.01
+                    ],
+                    [
+                        0.04,
+                        0.02,
+                        0.00,
+                        0.00
+                    ]
+                ],
+                "observation": [
+                    [
+                        0.01,
+                        0.04,
+                        0.01,
+                        0.00
+                    ],
+                    [
+                        0.01,
+                        0.03,
+                        0.01,
+                        0.01
+                    ],
+                    [
+                        0.00,
+                        0.03,
+                        0.02,
+                        0.01
+                    ],
+                    [
+                        0.01,
+                        0.04,
+                        0.02,
+                        0.00
+                    ]
+                ],
+                "narrative": [
+                    [
+                        0.00,
+                        0.02,
+                        0.04,
+                        0.01
+                    ],
+                    [
+                        0.00,
+                        0.02,
+                        0.03,
+                        0.02
+                    ],
+                    [
+                        0.00,
+                        0.01,
+                        0.04,
+                        0.02
+                    ],
+                    [
+                        0.00,
+                        0.02,
+                        0.04,
+                        0.01
+                    ]
+                ],
+                "empathy": [
+                    [
+                        0.00,
+                        0.01,
+                        0.02,
+                        0.04
+                    ],
+                    [
+                        0.00,
+                        0.01,
+                        0.01,
+                        0.04
+                    ],
+                    [
+                        0.00,
+                        0.01,
+                        0.02,
+                        0.04
+                    ],
+                    [
+                        0.00,
+                        0.01,
+                        0.03,
+                        0.03
+                    ]
+                ]
+            },
+            "toneOrder": [
+                "trust",
+                "observation",
+                "narrative",
+                "empathy"
+            ]
+        }
+    },
+    "systems": {
+        "toneStats": [
+            "trust",
+            "observation",
+            "narrative",
+            "empathy"
+        ],
+        "statBounds": {
+            "min": 0.0,
+            "max": 1.0
+        },
+        "attunement": {
+            "thresholds": [
+                0.10,
+                0.25
+            ],
+            "notes": "attunement influences Malrik/Elenya correlation"
+        },
+        "npcCorrelation": {
+            "ravi_nima": 0.5,
+            "malrik_elenya": {
+                "default": -0.5,
+                "neutral": 0.0,
+                "positive": 0.5
+            }
+        }
+    }
+}
