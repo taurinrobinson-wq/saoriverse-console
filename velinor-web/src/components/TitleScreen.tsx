@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 // Dynamically import components to avoid hydration issues
 const KaeleScene = dynamic(() => import('./KaeleScene'), { ssr: false });
 const BossFight = dynamic(() => import('./BossFight'), { ssr: false });
+const MalrikElenyaScene = dynamic(() => import('./MalrikElenyaScene'), { ssr: false });
 
 interface TitleScreenProps {
   onGameStart?: (playerName: string) => void;
@@ -20,6 +21,7 @@ const DEV_SCENES = {
   kaelen_swamp: { label: 'Kaelen - Swamp Maze', component: 'KaeleScene', props: { scenarioType: 'swamp', autoAlternate: true, alternateInterval: 2000 } },
   kaelen_confrontation: { label: 'Kaelen - Final Confrontation', component: 'KaeleScene', props: { scenarioType: 'confrontation' } },
   glyph_stolen_memory: { label: 'Glyph of Stolen Memory', component: 'KaeleScene', props: { scenarioType: 'marketplace' } },
+  malrik_elenya_observation: { label: 'Malrik & Elenya — Observational Scene', component: 'MalrikElenyaScene' },
 };
 
 export default function TitleScreen({ onGameStart }: TitleScreenProps) {
@@ -75,10 +77,11 @@ export default function TitleScreen({ onGameStart }: TitleScreenProps) {
           </h1>
 
           {selectedDevScene === 'triglyph_boss' && <BossFight />}
-          {(selectedDevScene === 'kaelen_marketplace' || 
-            selectedDevScene === 'kaelen_swamp' || 
+          {selectedDevScene === 'malrik_elenya_observation' && <MalrikElenyaScene />}
+          {(selectedDevScene === 'kaelen_marketplace' ||
+            selectedDevScene === 'kaelen_swamp' ||
             selectedDevScene === 'kaelen_confrontation' ||
-            selectedDevScene === 'glyph_stolen_memory') && 
+            selectedDevScene === 'glyph_stolen_memory') &&
             <KaeleScene {...DEV_SCENES[selectedDevScene as keyof typeof DEV_SCENES]?.props} />
           }
         </div>

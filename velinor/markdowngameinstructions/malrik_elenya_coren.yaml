@@ -1,0 +1,87 @@
+meta:
+  source: velinor/markdowngameinstructions/malrik_elenya_coren.md
+  generated: "2026-01-02"
+  notes: Extracted character profiles, glyphs, mini-game and mechanics.
+characters:
+  - id: malrik
+    role: Archivist
+    displayName: Archivist Malrik
+    traits:
+      [
+        shrewd,
+        empirically_minded,
+        skeptical,
+        rigorous,
+        service_oriented,
+        blind_spotted,
+        haunted,
+      ]
+    speechPattern:
+      [
+        proclamations,
+        abrupt_pivots,
+        half_explanations,
+        impatient_clarity,
+        rare_softness,
+      ]
+    visual:
+      palette: [sand, stone, faded_ochre]
+      silhouette: "upright, controlled"
+      signature: "sand_diagrams, wrapped_head_covering"
+    glyphs:
+      - name: Glyph of Fractured Memory
+        location: Archive Chamber
+        mechanic: "Player recognizes semantic fracture; glyph manifests when player interprets data as distorted, not vanished"
+        theme: Collapse
+      - name: Glyph of Mirage Echo
+        location: Desert Heat
+        mechanic: "Player dismisses mirage and accepts uncertainty; teaches surviving collapse"
+        theme: Fear/Collapse
+  - id: elenya
+    role: High Seer
+    displayName: High Seer Elenya
+    traits:
+      [
+        intuitive,
+        compassionate,
+        ritualistic,
+        presence_oriented,
+        renewal_focused,
+      ]
+    speechPattern: [soft_clarity, metaphor, long_blinks]
+    visual:
+      palette: [deep_indigo, soft_violet, pale_gold]
+      silhouette: "soft flowing lines"
+      signature: "wind_touched_hair, mantle, long_blink"
+  - id: coren
+    role: Mediator
+    displayName: Coren the Mediator
+    traits: [mediator, adaptive, co_witness, boundary_sense]
+    aspects: [collapse, sovereignty]
+    glyphs:
+      - name: Glyph of Preemptive Severance
+        location: Cult Encampment
+        mechanic: "Sever emotional bonds preemptively; player recognizes fear-based false choices"
+        theme: Collapse
+      - name: Glyph of Held Ache
+        location: Market Concourse
+        mechanic: "Co-witnessing conflict; sovereignty as holding sorrow without forcing resolution"
+        theme: Sovereignty
+miniGames:
+  observationalScene:
+    description: "A scene where player observes Malrik drawing in sand and Elenya watching."
+    anchors: [elenya_looking, elenya_hand_on_gut, malrik_unaware, malrik_aloof]
+    orientations: [trust, observation, narrative, empathy]
+    toneOrder: [trust, observation, narrative, empathy]
+systems:
+  toneStats: [trust, observation, narrative, empathy]
+  statBounds: { min: 0.0, max: 1.0 }
+  attunement:
+    thresholds: [0.10, 0.25]
+    notes: attunement influences Malrik/Elenya correlation
+  npcCorrelation:
+    ravi_nima: 0.5
+    malrik_elenya:
+      default: -0.5
+      neutral: 0.0
+      positive: 0.5
