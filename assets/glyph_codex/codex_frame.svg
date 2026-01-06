@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0" stop-color="#222"/>
+      <stop offset="1" stop-color="#111"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- outer frame -->
+  <rect x="32" y="32" width="960" height="960" rx="48" ry="48" fill="url(#metal)" stroke="#0b0b0b" stroke-width="6"/>
+
+  <!-- inner inset -->
+  <rect x="96" y="96" width="832" height="640" rx="20" ry="20" fill="#0d0f10" stroke="#151617" stroke-width="4"/>
+
+  <!-- screen (black area where glyph will render) -->
+  <rect x="144" y="144" width="736" height="544" rx="12" ry="12" fill="#030405"/>
+
+  <!-- subtle screen grid hint -->
+  <g opacity="0.06" stroke="#1a1a1a" stroke-width="1">
+    <defs>
+      <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+        <path d="M32 0 L0 0 0 32" fill="none"/>
+      </pattern>
+    </defs>
+    <rect x="144" y="144" width="736" height="544" fill="url(#grid)"/>
+  </g>
+
+  <!-- green status bar -->
+  <rect x="200" y="720" width="624" height="20" rx="6" fill="#0df05e" filter="url(#glow)" opacity="0.9"/>
+
+  <!-- nav bar area at bottom -->
+  <rect x="96" y="760" width="832" height="176" rx="20" ry="20" fill="#0c0e0f" stroke="#121416" stroke-width="2"/>
+
+  <!-- left button placeholder -->
+  <g id="left-btn" transform="translate(200,820)">
+    <rect x="-56" y="-56" width="112" height="112" rx="18" fill="#141617" stroke="#1e1f20" stroke-width="2"/>
+  </g>
+
+  <!-- right button placeholder -->
+  <g id="right-btn" transform="translate(824,820)">
+    <rect x="-56" y="-56" width="112" height="112" rx="18" fill="#141617" stroke="#1e1f20" stroke-width="2"/>
+  </g>
+
+  <!-- glyph display area center (transparent, but hint with a light ring) -->
+  <circle cx="512" cy="400" r="150" fill="none" stroke="#121315" stroke-width="2"/>
+
+  <!-- usage note as metadata (not visible) -->
+  <metadata>Codex frame: place glyph artwork centered at (512,400) within 300x300px area. Buttons anchored at left/right placeholders.</metadata>
+</svg>
