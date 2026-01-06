@@ -1,2 +1,0 @@
-/workspaces/saoriverse-console/velinor/markdowngameinstructions/05_npc_reaction_library.md:5:81 MD013/line-length Line length [Expected: 80; Actual: 198]
-/workspaces/saoriverse-console/velinor/markdowngameinstructions/05_npc_reaction_library.md:7 MD003/heading-style/header-style Heading style [Expected: atx; Actual: atx_closed]
