@@ -4,11 +4,17 @@ Maintains template banks for clarifying prompts and reflections with
 rotation logic to avoid phrase repetition. Supports adaptive variation
 based on context and user feedback patterns.
 
+NOW WITH AGENT MOOD SUPPORT (Phase 2):
+- Templates can be tagged with mood affinity
+- Selection filters by agent's current mood
+- Ensures responses match internal emotional state, not just user input
+
 Key functions:
 - get_clarifying_prompt: Retrieve a non-repetitive clarifying prompt
 - get_frequency_reflection: Retrieve a non-repetitive reflection
 - rotate_template: Select next template in rotation
 - add_template: Add custom templates to banks
+- get_response_for_mood: NEW - Select templates by agent mood
 """
 
 import random
@@ -42,6 +48,7 @@ class Template:
     category: str
     frequency_threshold: Optional[int] = None
     weight: float = 1.0  # Weight for random selection (higher = more likely)
+    agent_mood: Optional[str] = None  # NEW: Mood affinity (e.g., "concerned", "listening")
     times_used: int = 0
     last_used_at: Optional[str] = None
 
@@ -55,21 +62,25 @@ class TemplateBank:
     rotation_index: int = 0
     last_rotation_at: Optional[str] = None
 
-    def add_template(self, text: str, weight: float = 1.0) -> None:
+    def add_template(self, text: str, weight: float = 1.0, agent_mood: Optional[str] = None) -> None:
         """Add a template to the bank.
 
         Args:
             text: Template text
             weight: Selection weight (higher = more likely)
+            agent_mood: NEW - Mood affinity for this template
         """
-        template = Template(text=text, category=self.name, weight=weight)
+        template = Template(text=text, category=self.name, weight=weight, agent_mood=agent_mood)
         self.templates.append(template)
 
-    def get_next_template(self, use_rotation: bool = True) -> Optional[Template]:
+    def get_next_template(self, use_rotation: bool = True, agent_mood: Optional[str] = None) -> Optional[Template]:
         """Get next template using rotation or weighted random selection.
+        
+        NEW: Can filter by agent mood.
 
         Args:
             use_rotation: If True, use round-robin rotation; if False, use weighted random
+            agent_mood: NEW - Filter templates by mood affinity
 
         Returns:
             Template or None if bank is empty
@@ -77,23 +88,34 @@ class TemplateBank:
         if not self.templates:
             return None
 
+        # NEW: Filter by mood if specified
+        candidates = self.templates
+        if agent_mood:
+            candidates = [
+                t for t in self.templates
+                if t.agent_mood is None or t.agent_mood == agent_mood
+            ]
+        
+        if not candidates:
+            # Fall back to all templates if no mood match
+            candidates = self.templates
+
         if use_rotation:
             # Round-robin rotation to ensure variety
-            template = self.templates[self.rotation_index]
-            self.rotation_index = (
-                self.rotation_index + 1) % len(self.templates)
+            template = candidates[self.rotation_index % len(candidates)]
+            self.rotation_index = (self.rotation_index + 1) % len(candidates)
         else:
             # Weighted random selection
-            total_weight = sum(t.weight for t in self.templates)
+            total_weight = sum(t.weight for t in candidates)
             choice = random.uniform(0, total_weight)
             current = 0
 
-            for template in self.templates:
+            for template in candidates:
                 current += template.weight
                 if choice <= current:
                     break
             else:
-                template = self.templates[-1]
+                template = candidates[-1]
 
         return template
 
@@ -383,6 +405,70 @@ class ResponseTemplates:
         bank = bank_map.get(frequency)
         if bank:
             bank.add_template(text, weight=weight)
+
+    def get_response_for_mood(
+        self,
+        agent_mood: str,
+        signal_type: str = "combined",
+        theme: Optional[str] = None,
+        use_rotation: bool = True,
+    ) -> str:
+        """NEW (Phase 2): Get a response that matches agent's current mood.
+        
+        This ensures that the agent's internal emotional state influences
+        the structure and tone of responses, not just the user's affect.
+
+        Args:
+            agent_mood: Agent's current mood ('listening', 'concerned', 'moved', etc.)
+            signal_type: Type of signal to respond to ('pronoun', 'temporal', 'combined')
+            theme: Emotional theme (if available)
+            use_rotation: If True, use round-robin rotation
+
+        Returns:
+            Response text matched to agent mood
+        """
+        # Mood-to-template affinity mapping
+        # These influence which response templates are selected
+        mood_affinities = {
+            "listening": ["thoughtful", "curious"],
+            "resonating": ["attuned", "moved"],
+            "concerned": ["caring", "protective"],
+            "moving": ["vulnerable", "present"],
+            "protective": ["grounded", "strong"],
+            "reflective": ["introspective", "wondering"],
+            "uncertain": ["honest", "curious"],
+            "grounded": ["steady", "present"],
+        }
+        
+        # Get the bank for this signal type
+        bank_map = {
+            "pronoun": self.pronoun_clarifiers,
+            "temporal": self.temporal_clarifiers,
+            "combined": self.combined_clarifiers,
+        }
+        
+        bank = bank_map.get(signal_type.lower(), self.combined_clarifiers)
+        
+        # Get template filtered by agent mood
+        template = bank.get_next_template(use_rotation=use_rotation, agent_mood=agent_mood)
+        
+        if not template:
+            # Fallback to unfiltered selection
+            template = bank.get_next_template(use_rotation=use_rotation)
+        
+        if not template:
+            return "I'm here, and I'm listening."
+        
+        response = template.text
+        
+        # If we have a theme, inject it
+        if theme and "{theme}" in response:
+            response = response.format(theme=theme)
+        
+        # Track usage
+        self._track_usage(response, f"mood_{agent_mood}", "mood_aware")
+        
+        return response
 
     def _track_usage(self, template_text: str, context: str, response_type: str) -> None:
         """Track usage of templates for adaptive learning.

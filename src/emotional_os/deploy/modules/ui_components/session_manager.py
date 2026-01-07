@@ -92,30 +92,40 @@ def _ensure_processor_instances():
     # FirstPerson Orchestrator (relational AI)
     if "firstperson_orchestrator" not in st.session_state:
         try:
-            from ..core.firstperson import create_orchestrator
+            from emotional_os.core.firstperson import create_orchestrator
 
             user_id = st.session_state.get("user_id", "anon")
             conversation_id = st.session_state.get(
                 "current_conversation_id", "default")
 
+            logger.info(f"Initializing FirstPerson orchestrator: user_id={user_id}, conversation_id={conversation_id}")
             orchestrator = create_orchestrator(user_id, conversation_id)
             if orchestrator:
                 orchestrator.initialize_session()
                 st.session_state["firstperson_orchestrator"] = orchestrator
+                logger.info(f"✓ FirstPerson orchestrator initialized successfully")
+            else:
+                logger.warning(f"FirstPerson orchestrator factory returned None")
+                st.session_state["firstperson_orchestrator"] = None
         except Exception as e:
-            logger.debug(f"FirstPerson orchestrator init failed: {e}")
+            logger.error(f"FirstPerson orchestrator init FAILED: {type(e).__name__}: {e}", exc_info=True)
             st.session_state["firstperson_orchestrator"] = None
 
     # Affect Parser (emotional tone detection)
     if "affect_parser" not in st.session_state:
         try:
-            from ..core.firstperson import create_affect_parser
+            from emotional_os.core.firstperson import create_affect_parser
 
+            logger.info(f"Initializing Affect Parser")
             parser = create_affect_parser()
             if parser:
                 st.session_state["affect_parser"] = parser
+                logger.info(f"✓ Affect Parser initialized successfully")
+            else:
+                logger.warning(f"Affect parser factory returned None")
+                st.session_state["affect_parser"] = None
         except Exception as e:
-            logger.debug(f"Affect parser init failed: {e}")
+            logger.error(f"Affect parser init FAILED: {type(e).__name__}: {e}", exc_info=True)
             st.session_state["affect_parser"] = None
 
 
