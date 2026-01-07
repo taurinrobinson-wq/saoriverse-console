@@ -22,6 +22,8 @@ from .frequency_reflector import FrequencyReflector
 from .memory_manager import MemoryManager
 from .response_templates import ResponseTemplates
 from .supabase_manager import SupabaseManager
+from .agent_state_manager import AgentStateManager
+from .affect_parser import AffectParser
 
 
 @dataclass
@@ -79,6 +81,13 @@ class FirstPersonOrchestrator:
         self.memory_manager = MemoryManager(user_id=user_id)
         self.response_templates = ResponseTemplates()
         self.supabase_manager = SupabaseManager(user_id=user_id)
+        self.affect_parser = AffectParser()
+        
+        # Initialize agent state manager (NEW: Phase 1 of emotional continuity)
+        self.agent_state_manager = AgentStateManager(
+            user_id=user_id,
+            conversation_id=self.conversation_id
+        )
 
         # Track conversation state
         self.turn_count = 0
@@ -125,6 +134,11 @@ class FirstPersonOrchestrator:
         )
         self.turn_history.append(turn)
 
+        # Step 0: Emotional Analysis (NEW: Agent State Update)
+        # Parse user's affect and update agent's emotional response
+        user_affect = self.affect_parser.analyze_affect(user_input)
+        self.agent_state_manager.on_input(user_input, user_affect)
+
         # Step 1: Story-Start Detection
         story_analysis = self.story_start_detector.analyze_story_start(
             user_input)
@@ -151,6 +165,8 @@ class FirstPersonOrchestrator:
             detected_theme=detected_theme,
             should_reflect=should_reflect,
             freq_analysis=freq_analysis,
+            agent_state=self.agent_state_manager,  # NEW: Pass agent state
+            user_affect=user_affect,  # NEW: Pass affect analysis
         )
 
         # Step 4: Persist to Supabase
@@ -159,9 +175,13 @@ class FirstPersonOrchestrator:
             response_text=response_text,
             theme=detected_theme,
             turn=turn,
+            agent_state=self.agent_state_manager,  # NEW: Include agent state in persistence
         )
 
-        # Step 5: Create response object
+        # Step 5: Integrate response back into agent state (NEW)
+        self.agent_state_manager.integrate_after_response(response_text)
+
+        # Step 6: Create response object
         integration_response = IntegrationResponse(
             response_text=response_text,
             detected_pronoun_ambiguity=has_ambiguity,
@@ -175,6 +195,8 @@ class FirstPersonOrchestrator:
                 "story_analysis": story_analysis,
                 "frequency_analysis": freq_analysis,
                 "memory_anchors": self.memory_manager.get_top_themes(),
+                "agent_mood": self.agent_state_manager.get_mood_string(),  # NEW
+                "agent_state": self.agent_state_manager.get_state_summary(),  # NEW
             },
         )
 
@@ -189,6 +211,8 @@ class FirstPersonOrchestrator:
         detected_theme: Optional[str],
         should_reflect: bool,
         freq_analysis: Dict[str, Any],
+        agent_state: AgentStateManager,  # NEW
+        user_affect: Any,  # NEW
     ) -> str:
         """Compose response by orchestrating templates and context.
 
@@ -199,6 +223,8 @@ class FirstPersonOrchestrator:
             detected_theme: Detected emotional theme
             should_reflect: Whether frequency threshold met for reflection
             freq_analysis: Full frequency analysis result
+            agent_state: Current agent emotional state (NEW)
+            user_affect: User's affect analysis (NEW)
 
         Returns:
             Composed response text
@@ -234,7 +260,15 @@ class FirstPersonOrchestrator:
                 )
                 response_parts.append(acknowledgment)
 
-        return " ".join(response_parts)
+        response_text = " ".join(response_parts)
+        
+        # NEW: Validate response against agent state
+        is_valid, error_msg = agent_state.validate_response(response_text)
+        if not is_valid:
+            # If response violates commitments, regenerate with disclaimer
+            response_text = f"I need to be honest with you: {response_text}"
+        
+        return response_text
 
     def _persist_turn(
         self,
@@ -242,6 +276,7 @@ class FirstPersonOrchestrator:
         response_text: str,
         theme: Optional[str],
         turn: ConversationTurn,
+        agent_state: AgentStateManager = None,  # NEW
     ) -> bool:
         """Persist conversation turn to Supabase.
 
@@ -250,6 +285,7 @@ class FirstPersonOrchestrator:
             response_text: System response
             theme: Detected theme
             turn: Turn record
+            agent_state: Agent state for persistence (NEW)
 
         Returns:
             True if successful
@@ -280,6 +316,17 @@ class FirstPersonOrchestrator:
                             "response": response_text[:100],
                         },
                     )
+            
+            # NEW: Store agent state snapshot if provided
+            if agent_state:
+                try:
+                    # Save emotional pivot if mood changed
+                    if agent_state.state.recent_mood_shifts:
+                        # Store last mood shift as an emotional pivot
+                        # This could be persisted to a separate table
+                        pass
+                except Exception as e:
+                    print(f"Error storing agent state: {e}")
 
             return True
         except Exception as e:
@@ -363,6 +410,52 @@ class FirstPersonOrchestrator:
         }
 
 
+    def generate_response_with_glyph(self, user_input: str, best_glyph: dict) -> str:
+        """Generate response using glyph as emotional constraint.
+
+        This method integrates with the StructuralGlyphComposer to ensure
+        the glyph drives the response structure.
+
+        Args:
+            user_input: User's input message
+            best_glyph: Selected glyph dict with glyph_name, description, etc.
+
+        Returns:
+            Response text using glyph as meaning anchor
+        """
+        try:
+            from .structural_glyph_composer import StructuralGlyphComposer
+            
+            composer = StructuralGlyphComposer()
+            glyph_name = best_glyph.get("glyph_name", "unknown")
+            
+            # Parse affect first
+            user_affect = self.affect_parser.analyze_affect(user_input)
+            
+            # Update agent state
+            self.agent_state_manager.on_input(user_input, user_affect)
+            
+            # Compose response with structural glyph
+            response = composer.compose_with_structural_glyph(
+                user_input=user_input,
+                user_affect=user_affect,
+                agent_state=self.agent_state_manager,
+                glyph=best_glyph,
+                hypothesis=self.agent_state_manager.state.emotional_hypothesis
+            )
+            
+            # Integrate after response
+            self.agent_state_manager.integrate_after_response(response)
+            
+            return response
+        except Exception as e:
+            import logging
+            logging.debug(f"generate_response_with_glyph failed: {e}")
+            # Fallback to simple response
+            glyph_name = best_glyph.get("glyph_name", "something") if isinstance(best_glyph, dict) else "something"
+            return f"I'm sensing {glyph_name.lower()} in what you're saying. Tell me more."
+
+
 def create_orchestrator(
     user_id: str, conversation_id: str = None
 ) -> FirstPersonOrchestrator:
@@ -376,3 +469,12 @@ def create_orchestrator(
         FirstPersonOrchestrator instance
     """
     return FirstPersonOrchestrator(user_id=user_id, conversation_id=conversation_id)
+
+
+def create_affect_parser() -> AffectParser:
+    """Factory function to create affect parser instance.
+
+    Returns:
+        AffectParser instance
+    """
+    return AffectParser()

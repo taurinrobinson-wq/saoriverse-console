@@ -1,0 +1,792 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Velinor Skill Registry - Vocational apprenticeship system",
+    "total_skills": 62,
+    "categories": 7,
+    "generation_date": "2026-01-06"
+  },
+  "skill_categories": {
+    "collapse_discernment": {
+      "name": "Collapse Discernment",
+      "description": "Skills for seeing through illusion, recognizing distortion, and navigating fractured systems",
+      "core_theme": "Clarity through understanding what breaks"
+    },
+    "legacy_continuity": {
+      "name": "Legacy & Continuity",
+      "description": "Skills for holding memory, honoring lineage, and transmitting what survives",
+      "core_theme": "Connection across time"
+    },
+    "sovereignty_boundaries": {
+      "name": "Sovereignty & Boundaries",
+      "description": "Skills for defined agency, measured movement, and chosen limits",
+      "core_theme": "Agency through intention"
+    },
+    "presence_witnessing": {
+      "name": "Presence & Witnessing",
+      "description": "Skills for silent companionship, holding space, and healing presence",
+      "core_theme": "Healing through witnessed presence"
+    },
+    "trust_interdependence": {
+      "name": "Trust & Interdependence",
+      "description": "Skills for reliable bonds, collaborative labor, and shared survival",
+      "core_theme": "Survival through reliable bonds"
+    },
+    "joy_creativity": {
+      "name": "Joy & Creativity",
+      "description": "Skills for celebration, beauty-making, and communal resilience",
+      "core_theme": "Resilience through joy and creation"
+    },
+    "ache_grief": {
+      "name": "Ache & Grief",
+      "description": "Skills for witnessing loss, honoring the dead, and transforming sorrow",
+      "core_theme": "Wisdom through witnessed loss"
+    }
+  },
+  "skills": {
+    "illusion_discernment": {
+      "skill_id": "illusion_discernment",
+      "skill_name": "Illusion Discernment",
+      "category": "collapse_discernment",
+      "description": "Seeing through self-deception and false patterns",
+      "taught_by_glyphs": [
+        "Glyph of Mirage Echo"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Clarity through understanding collapse",
+      "remnants_effects": "memory:+0.1,presence:+0.1"
+    },
+    "distortion_recognition": {
+      "skill_id": "distortion_recognition",
+      "skill_name": "Distortion Recognition",
+      "category": "collapse_discernment",
+      "description": "Understanding how information becomes corrupted",
+      "taught_by_glyphs": [
+        "Glyph of Fractured Memory"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Clarity through understanding collapse",
+      "remnants_effects": "memory:+0.1,presence:+0.1"
+    },
+    "collapse_navigation": {
+      "skill_id": "collapse_navigation",
+      "skill_name": "Collapse Navigation",
+      "category": "collapse_discernment",
+      "description": "Moving through unstable, fracturing systems",
+      "taught_by_glyphs": [
+        "Glyph of Shattered Corridor"
+      ],
+      "prerequisite_skill": "illusion_discernment",
+      "emotional_impact": "Clarity through understanding collapse",
+      "remnants_effects": "memory:+0.1,presence:+0.1"
+    },
+    "trauma_recognition": {
+      "skill_id": "trauma_recognition",
+      "skill_name": "Trauma Recognition",
+      "category": "collapse_discernment",
+      "description": "Recognizing broken promises and systemic fracture",
+      "taught_by_glyphs": [
+        "Glyph of Fractured Oath"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Clarity through understanding collapse",
+      "remnants_effects": "memory:+0.1,presence:+0.1"
+    },
+    "truth_discernment": {
+      "skill_id": "truth_discernment",
+      "skill_name": "Truth Discernment",
+      "category": "collapse_discernment",
+      "description": "Discerning truth from distorted information",
+      "taught_by_glyphs": [
+        "Glyph of Fractured Rumor"
+      ],
+      "prerequisite_skill": "illusion_discernment",
+      "emotional_impact": "Clarity through understanding collapse",
+      "remnants_effects": "memory:+0.1,presence:+0.1"
+    },
+    "false_covenant_recognition": {
+      "skill_id": "false_covenant_recognition",
+      "skill_name": "False Covenant Recognition",
+      "category": "collapse_discernment",
+      "description": "Identifying covenant without substance",
+      "taught_by_glyphs": [
+        "Glyph of Hollow Pact"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Clarity through understanding collapse",
+      "remnants_effects": "memory:+0.1,presence:+0.1"
+    },
+    "deception_detection": {
+      "skill_id": "deception_detection",
+      "skill_name": "Deception Detection",
+      "category": "collapse_discernment",
+      "description": "Recognizing orchestrated collapse and manipulation",
+      "taught_by_glyphs": [
+        "Glyph of Cloaked Fracture"
+      ],
+      "prerequisite_skill": "illusion_discernment",
+      "emotional_impact": "Clarity through understanding collapse",
+      "remnants_effects": "memory:+0.1,presence:+0.1"
+    },
+    "lineage_interpretation": {
+      "skill_id": "lineage_interpretation",
+      "skill_name": "Lineage Interpretation",
+      "category": "legacy_continuity",
+      "description": "Reading and understanding family history and records",
+      "taught_by_glyphs": [
+        "Glyph of Ancestral Record"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Connection across time and generations",
+      "remnants_effects": "memory:+0.2,authority:+0.1"
+    },
+    "emotional_data_processing": {
+      "skill_id": "emotional_data_processing",
+      "skill_name": "Emotional Data Processing",
+      "category": "legacy_continuity",
+      "description": "Understanding that data and memory carry emotional weight",
+      "taught_by_glyphs": [
+        "Glyph of Sand Memories"
+      ],
+      "prerequisite_skill": "lineage_interpretation",
+      "emotional_impact": "Connection across time and generations",
+      "remnants_effects": "memory:+0.2,authority:+0.1"
+    },
+    "ritual_participation": {
+      "skill_id": "ritual_participation",
+      "skill_name": "Ritual Participation",
+      "category": "legacy_continuity",
+      "description": "Engaging in rituals that transmit tradition and connection",
+      "taught_by_glyphs": [
+        "Glyph of Emotional Inheritance"
+      ],
+      "prerequisite_skill": "emotional_data_processing",
+      "emotional_impact": "Connection across time and generations",
+      "remnants_effects": "memory:+0.2,authority:+0.1"
+    },
+    "ancestral_communion": {
+      "skill_id": "ancestral_communion",
+      "skill_name": "Ancestral Communion",
+      "category": "legacy_continuity",
+      "description": "Connecting with ancestors through breath and presence",
+      "taught_by_glyphs": [
+        "Glyph of Echoed Breath"
+      ],
+      "prerequisite_skill": "emotional_data_processing",
+      "emotional_impact": "Connection across time and generations",
+      "remnants_effects": "memory:+0.2,authority:+0.1"
+    },
+    "generational_voice": {
+      "skill_id": "generational_voice",
+      "skill_name": "Generational Voice",
+      "category": "legacy_continuity",
+      "description": "Speaking the voice of multiple generations",
+      "taught_by_glyphs": [
+        "Glyph of Returning Song"
+      ],
+      "prerequisite_skill": "ritual_participation",
+      "emotional_impact": "Connection across time and generations",
+      "remnants_effects": "memory:+0.2,authority:+0.1"
+    },
+    "legacy_persistence": {
+      "skill_id": "legacy_persistence",
+      "skill_name": "Legacy Persistence",
+      "category": "legacy_continuity",
+      "description": "Maintaining hope and transmission despite loss",
+      "taught_by_glyphs": [
+        "Glyph of Hopeful Transmission"
+      ],
+      "prerequisite_skill": "emotional_data_processing",
+      "emotional_impact": "Connection across time and generations",
+      "remnants_effects": "memory:+0.2,authority:+0.1"
+    },
+    "measured_movement": {
+      "skill_id": "measured_movement",
+      "skill_name": "Measured Movement",
+      "category": "sovereignty_boundaries",
+      "description": "Moving with intention through consequence",
+      "taught_by_glyphs": [
+        "Glyph of Measured Step"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Agency through defined limits",
+      "remnants_effects": "authority:+0.1,presence:+0.1"
+    },
+    "boundary_setting": {
+      "skill_id": "boundary_setting",
+      "skill_name": "Boundary Setting",
+      "category": "sovereignty_boundaries",
+      "description": "Defining and holding safe space amid chaos",
+      "taught_by_glyphs": [
+        "Glyph of Boundary Stone"
+      ],
+      "prerequisite_skill": "measured_movement",
+      "emotional_impact": "Agency through defined limits",
+      "remnants_effects": "authority:+0.1,presence:+0.1"
+    },
+    "risk_acceptance": {
+      "skill_id": "risk_acceptance",
+      "skill_name": "Risk Acceptance",
+      "category": "sovereignty_boundaries",
+      "description": "Accepting calculated risk as a form of sovereignty",
+      "taught_by_glyphs": [
+        "Glyph of Reckless Trial"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Agency through defined limits",
+      "remnants_effects": "authority:+0.1,presence:+0.1"
+    },
+    "enforced_boundaries": {
+      "skill_id": "enforced_boundaries",
+      "skill_name": "Enforced Boundaries",
+      "category": "sovereignty_boundaries",
+      "description": "Maintaining limits through weary vigilance",
+      "taught_by_glyphs": [
+        "Glyph of Iron Boundary"
+      ],
+      "prerequisite_skill": "boundary_setting",
+      "emotional_impact": "Agency through defined limits",
+      "remnants_effects": "authority:+0.1,presence:+0.1"
+    },
+    "impulse_regulation": {
+      "skill_id": "impulse_regulation",
+      "skill_name": "Impulse Regulation",
+      "category": "sovereignty_boundaries",
+      "description": "Pausing destructive impulses and holding rage without releasing it",
+      "taught_by_glyphs": [
+        "Glyph of Interruptive Restraint"
+      ],
+      "prerequisite_skill": "measured_movement",
+      "emotional_impact": "Agency through defined limits",
+      "remnants_effects": "authority:+0.1,presence:+0.1"
+    },
+    "co_witnessing": {
+      "skill_id": "co_witnessing",
+      "skill_name": "Co Witnessing",
+      "category": "sovereignty_boundaries",
+      "description": "Holding space for others' pain without fixing it",
+      "taught_by_glyphs": [
+        "Glyph of Held Ache"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Agency through defined limits",
+      "remnants_effects": "authority:+0.1,presence:+0.1"
+    },
+    "discernment_in_betrayal": {
+      "skill_id": "discernment_in_betrayal",
+      "skill_name": "Discernment In Betrayal",
+      "category": "sovereignty_boundaries",
+      "description": "Choosing wisely when all paths carry risk",
+      "taught_by_glyphs": [
+        "Glyph of Venomous Choice"
+      ],
+      "prerequisite_skill": "deception_detection",
+      "emotional_impact": "Agency through defined limits",
+      "remnants_effects": "authority:+0.1,presence:+0.1"
+    },
+    "silent_witnessing": {
+      "skill_id": "silent_witnessing",
+      "skill_name": "Silent Witnessing",
+      "category": "presence_witnessing",
+      "description": "Being present for others' pain through attention and stillness",
+      "taught_by_glyphs": [
+        "Glyph of Tender Witness"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "connection_holding": {
+      "skill_id": "connection_holding",
+      "skill_name": "Connection Holding",
+      "category": "presence_witnessing",
+      "description": "Touching the edge of what's gone and honoring its memory",
+      "taught_by_glyphs": [
+        "Glyph of Echo Communion"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "emotional_anchoring": {
+      "skill_id": "emotional_anchoring",
+      "skill_name": "Emotional Anchoring",
+      "category": "presence_witnessing",
+      "description": "Anchoring others through presence and sustained attention",
+      "taught_by_glyphs": [
+        "Glyph of Steadfast Witness"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "receptive_presence": {
+      "skill_id": "receptive_presence",
+      "skill_name": "Receptive Presence",
+      "category": "presence_witnessing",
+      "description": "Silence as observation stronger than speech",
+      "taught_by_glyphs": [
+        "Glyph of Listening Silence"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "healing_presence": {
+      "skill_id": "healing_presence",
+      "skill_name": "Healing Presence",
+      "category": "presence_witnessing",
+      "description": "Care given and received through quiet presence",
+      "taught_by_glyphs": [
+        "Glyph of Quiet Bloom"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "subtle_healing": {
+      "skill_id": "subtle_healing",
+      "skill_name": "Subtle Healing",
+      "category": "presence_witnessing",
+      "description": "Healing carried in quiet fragrance and presence",
+      "taught_by_glyphs": [
+        "Glyph of Fragrant Silence"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "absence_witnessing": {
+      "skill_id": "absence_witnessing",
+      "skill_name": "Absence Witnessing",
+      "category": "presence_witnessing",
+      "description": "Witnessing emptiness without trying to fill it",
+      "taught_by_glyphs": [
+        "Glyph of Sensory Oblivion"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "discerning_silence": {
+      "skill_id": "discerning_silence",
+      "skill_name": "Discerning Silence",
+      "category": "presence_witnessing",
+      "description": "Recognizing when silence becomes witness to manipulation",
+      "taught_by_glyphs": [
+        "Glyph of Serpent's Silence"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "presence_as_return": {
+      "skill_id": "presence_as_return",
+      "skill_name": "Presence As Return",
+      "category": "presence_witnessing",
+      "description": "Presence that brings people back to themselves",
+      "taught_by_glyphs": [
+        "Glyph of Quiet Return"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Healing through witnessed presence",
+      "remnants_effects": "presence:+0.2,empathy:+0.1"
+    },
+    "collective_tending": {
+      "skill_id": "collective_tending",
+      "skill_name": "Collective Tending",
+      "category": "trust_interdependence",
+      "description": "Collectively maintaining the bonds that keep community alive",
+      "taught_by_glyphs": [
+        "Glyph of Covenant Flame"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "interdependence_practice": {
+      "skill_id": "interdependence_practice",
+      "skill_name": "Interdependence Practice",
+      "category": "trust_interdependence",
+      "description": "Relying on others and being relied upon",
+      "taught_by_glyphs": [
+        "Glyph of Shared Survival"
+      ],
+      "prerequisite_skill": "collective_tending",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "wordless_coordination": {
+      "skill_id": "wordless_coordination",
+      "skill_name": "Wordless Coordination",
+      "category": "trust_interdependence",
+      "description": "Trust built through reliable, wordless action",
+      "taught_by_glyphs": [
+        "Glyph of Mutual Passage"
+      ],
+      "prerequisite_skill": "collective_tending",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "collaborative_labor": {
+      "skill_id": "collaborative_labor",
+      "skill_name": "Collaborative Labor",
+      "category": "trust_interdependence",
+      "description": "Bearing weight together across fractured bridges",
+      "taught_by_glyphs": [
+        "Glyph of Shared Burden"
+      ],
+      "prerequisite_skill": "interdependence_practice",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "thread_binding": {
+      "skill_id": "thread_binding",
+      "skill_name": "Thread Binding",
+      "category": "trust_interdependence",
+      "description": "Weaving threads of lives together through care",
+      "taught_by_glyphs": [
+        "Glyph of Binding Cloth"
+      ],
+      "prerequisite_skill": "collaborative_labor",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "ethical_boundaries": {
+      "skill_id": "ethical_boundaries",
+      "skill_name": "Ethical Boundaries",
+      "category": "trust_interdependence",
+      "description": "Maintaining justice through weary, persistent care",
+      "taught_by_glyphs": [
+        "Glyph of Weary Justice"
+      ],
+      "prerequisite_skill": "collective_tending",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "sacred_speech": {
+      "skill_id": "sacred_speech",
+      "skill_name": "Sacred Speech",
+      "category": "trust_interdependence",
+      "description": "Holding secrets and words with ceremonial care",
+      "taught_by_glyphs": [
+        "Glyph of Whispered Pact"
+      ],
+      "prerequisite_skill": "wordless_coordination",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "trust_repair": {
+      "skill_id": "trust_repair",
+      "skill_name": "Trust Repair",
+      "category": "trust_interdependence",
+      "description": "Healing fractured trust through witness and accountability",
+      "taught_by_glyphs": [
+        "Glyph of Broken Promise"
+      ],
+      "prerequisite_skill": "sacred_speech",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "discerning_speech": {
+      "skill_id": "discerning_speech",
+      "skill_name": "Discerning Speech",
+      "category": "trust_interdependence",
+      "description": "Knowing when speech heals and when it poisons",
+      "taught_by_glyphs": [
+        "Glyph of Serpent's Tongue"
+      ],
+      "prerequisite_skill": "sacred_speech",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "loyalty_in_shadow": {
+      "skill_id": "loyalty_in_shadow",
+      "skill_name": "Loyalty In Shadow",
+      "category": "trust_interdependence",
+      "description": "Maintaining loyalty that transcends normal bonds",
+      "taught_by_glyphs": [
+        "Glyph of Thieves' Honor"
+      ],
+      "prerequisite_skill": "wordless_coordination",
+      "emotional_impact": "Survival through reliable bonds",
+      "remnants_effects": "trust:+0.2,empathy:+0.1"
+    },
+    "communal_celebration": {
+      "skill_id": "communal_celebration",
+      "skill_name": "Communal Celebration",
+      "category": "joy_creativity",
+      "description": "Gathering others to break bread and create joy",
+      "taught_by_glyphs": [
+        "Glyph of Shared Feast"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "beauty_creation": {
+      "skill_id": "beauty_creation",
+      "skill_name": "Beauty Creation",
+      "category": "joy_creativity",
+      "description": "Making something beautiful from broken materials",
+      "taught_by_glyphs": [
+        "Glyph of Crafted Wonder"
+      ],
+      "prerequisite_skill": "communal_celebration",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "joy_witnessing": {
+      "skill_id": "joy_witnessing",
+      "skill_name": "Joy Witnessing",
+      "category": "joy_creativity",
+      "description": "Honoring safe return and the relief it brings",
+      "taught_by_glyphs": [
+        "Glyph of Arrival"
+      ],
+      "prerequisite_skill": "communal_celebration",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "exchange_appreciation": {
+      "skill_id": "exchange_appreciation",
+      "skill_name": "Exchange Appreciation",
+      "category": "joy_creativity",
+      "description": "Joy in transaction and needs being met",
+      "taught_by_glyphs": [
+        "Glyph of Trade Celebration"
+      ],
+      "prerequisite_skill": "communal_celebration",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "growth_witnessing": {
+      "skill_id": "growth_witnessing",
+      "skill_name": "Growth Witnessing",
+      "category": "joy_creativity",
+      "description": "Reuniting through growth and shared care",
+      "taught_by_glyphs": [
+        "Glyph of Verdant Reunion"
+      ],
+      "prerequisite_skill": "beauty_creation",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "ephemeral_appreciation": {
+      "skill_id": "ephemeral_appreciation",
+      "skill_name": "Ephemeral Appreciation",
+      "category": "joy_creativity",
+      "description": "Appreciating what is fleeting and beautiful",
+      "taught_by_glyphs": [
+        "Glyph of Dawn Petals"
+      ],
+      "prerequisite_skill": "joy_witnessing",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "grief_lightening": {
+      "skill_id": "grief_lightening",
+      "skill_name": "Grief Lightening",
+      "category": "joy_creativity",
+      "description": "Using laughter and memory to lighten sorrow",
+      "taught_by_glyphs": [
+        "Glyph of Laughter's Balm"
+      ],
+      "prerequisite_skill": "communal_celebration",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "connection_breakthrough": {
+      "skill_id": "connection_breakthrough",
+      "skill_name": "Connection Breakthrough",
+      "category": "joy_creativity",
+      "description": "Finding connection despite walls and defenses",
+      "taught_by_glyphs": [
+        "Glyph of Hidden Warmth"
+      ],
+      "prerequisite_skill": "joy_witnessing",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "sacred_celebration": {
+      "skill_id": "sacred_celebration",
+      "skill_name": "Sacred Celebration",
+      "category": "joy_creativity",
+      "description": "Celebration as sacred act that restores morale",
+      "taught_by_glyphs": [
+        "Glyph of Sky Revelry"
+      ],
+      "prerequisite_skill": "communal_celebration",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "renewal_promise": {
+      "skill_id": "renewal_promise",
+      "skill_name": "Renewal Promise",
+      "category": "joy_creativity",
+      "description": "Recognizing renewal and the continuation of life",
+      "taught_by_glyphs": [
+        "Glyph of Blooming Path"
+      ],
+      "prerequisite_skill": "growth_witnessing",
+      "emotional_impact": "Resilience through beauty and celebration",
+      "remnants_effects": "empathy:+0.1,trust:+0.1"
+    },
+    "grief_witnessing": {
+      "skill_id": "grief_witnessing",
+      "skill_name": "Grief Witnessing",
+      "category": "ache_grief",
+      "description": "Witnessing sorrow without trying to fix it",
+      "taught_by_glyphs": [
+        "Glyph of Sorrow"
+      ],
+      "prerequisite_skill": "",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "memory_honoring": {
+      "skill_id": "memory_honoring",
+      "skill_name": "Memory Honoring",
+      "category": "ache_grief",
+      "description": "Honoring those who are gone through memory",
+      "taught_by_glyphs": [
+        "Glyph of Remembrance"
+      ],
+      "prerequisite_skill": "grief_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "loss_transmission": {
+      "skill_id": "loss_transmission",
+      "skill_name": "Loss Transmission",
+      "category": "ache_grief",
+      "description": "Staying present with loss and choosing to remain",
+      "taught_by_glyphs": [
+        "Glyph of Legacy"
+      ],
+      "prerequisite_skill": "memory_honoring",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "survival_resilience": {
+      "skill_id": "survival_resilience",
+      "skill_name": "Survival Resilience",
+      "category": "ache_grief",
+      "description": "Carrying scars as evidence of survival",
+      "taught_by_glyphs": [
+        "Glyph of Betrayal Scar"
+      ],
+      "prerequisite_skill": "grief_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "raw_mourning": {
+      "skill_id": "raw_mourning",
+      "skill_name": "Raw Mourning",
+      "category": "ache_grief",
+      "description": "Keening and expressing grief without language",
+      "taught_by_glyphs": [
+        "Glyph of Primal Oblivion"
+      ],
+      "prerequisite_skill": "grief_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "fragility_understanding": {
+      "skill_id": "fragility_understanding",
+      "skill_name": "Fragility Understanding",
+      "category": "ache_grief",
+      "description": "Understanding fragility as prerequisite for love",
+      "taught_by_glyphs": [
+        "Glyph of Broken Vessel"
+      ],
+      "prerequisite_skill": "grief_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "grief_transformation": {
+      "skill_id": "grief_transformation",
+      "skill_name": "Grief Transformation",
+      "category": "ache_grief",
+      "description": "Weaving grief into something stronger",
+      "taught_by_glyphs": [
+        "Glyph of Sewn Ache"
+      ],
+      "prerequisite_skill": "memory_honoring",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "shared_lament": {
+      "skill_id": "shared_lament",
+      "skill_name": "Shared Lament",
+      "category": "ache_grief",
+      "description": "Transmitting grief into the wind where it dissolves",
+      "taught_by_glyphs": [
+        "Glyph of Widow's Cry"
+      ],
+      "prerequisite_skill": "raw_mourning",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "relational_rupture_understanding": {
+      "skill_id": "relational_rupture_understanding",
+      "skill_name": "Relational Rupture Understanding",
+      "category": "ache_grief",
+      "description": "Understanding families fractured by sudden severance",
+      "taught_by_glyphs": [
+        "Glyph of Dislocated Attachment"
+      ],
+      "prerequisite_skill": "grief_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "quiet_presence_in_ache": {
+      "skill_id": "quiet_presence_in_ache",
+      "skill_name": "Quiet Presence In Ache",
+      "category": "ache_grief",
+      "description": "Sitting with unspoken pain without words",
+      "taught_by_glyphs": [
+        "Glyph of Silent Ache"
+      ],
+      "prerequisite_skill": "silent_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "ache_visibility": {
+      "skill_id": "ache_visibility",
+      "skill_name": "Ache Visibility",
+      "category": "ache_grief",
+      "description": "Bringing hidden grief into light and acceptance",
+      "taught_by_glyphs": [
+        "Glyph of Hidden Ache"
+      ],
+      "prerequisite_skill": "grief_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "latent_loss_recognition": {
+      "skill_id": "latent_loss_recognition",
+      "skill_name": "Latent Loss Recognition",
+      "category": "ache_grief",
+      "description": "Recognizing loss that arrives after the event",
+      "taught_by_glyphs": [
+        "Glyph of Infrasensory Oblivion"
+      ],
+      "prerequisite_skill": "grief_witnessing",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    },
+    "intergenerational_grief": {
+      "skill_id": "intergenerational_grief",
+      "skill_name": "Intergenerational Grief",
+      "category": "ache_grief",
+      "description": "Feeling grief across generations",
+      "taught_by_glyphs": [
+        "Glyph of Echoed Longing"
+      ],
+      "prerequisite_skill": "memory_honoring",
+      "emotional_impact": "Wisdom through witnessed loss",
+      "remnants_effects": "empathy:+0.2,need:+0.1"
+    }
+  }
+}
