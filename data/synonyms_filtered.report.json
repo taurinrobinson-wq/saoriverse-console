@@ -1,8 +1,0 @@
-{
-  "seeds_processed": 174,
-  "seeds_kept": 163,
-  "total_removed_reasons": {
-    "multiword": 689,
-    "low_quality": 12
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "trust": {"emotion": "faith", "syntax": "affirmation"},
-  "skepticism": {"emotion": "distrust", "syntax": "conditional"},
-  "empathy": {"emotion": "compassion", "syntax": "inclusive"},
-  "memory": {"emotion": "anticipation", "syntax": "declarative"},
-  "nuance": {"emotion": "balance", "syntax": "balanced"}
-}
