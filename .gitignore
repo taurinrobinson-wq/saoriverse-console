@@ -162,3 +162,10 @@ Thumbs.db
 # Archive and backup directories
 archive/
 backups/
+
+# Generated data directories and runtime artifacts
+emotional_os/
+core/
+glyphs.db
+*.db-journal
+.supabase/
