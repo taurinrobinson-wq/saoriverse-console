@@ -18,7 +18,7 @@ An empathetic skeptic is different from a confused person.
 from typing import List, Dict, Tuple, Optional
 from enum import Enum
 from dataclasses import dataclass
-from trait_system import TraitType, TraitChoice, TraitProfiler, TraitProfile
+from .trait_system import TraitType, TraitChoice, TraitProfiler, TraitProfile
 
 
 class CoherenceLevel(Enum):

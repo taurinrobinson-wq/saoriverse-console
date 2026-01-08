@@ -16,6 +16,9 @@ from datetime import datetime
 from .core import VelinorEngine, GameSession
 from .npc_system import NPCDialogueSystem
 from .twine_adapter import TwineGameSession, TwineStoryLoader, DialogueParser
+from .trait_system import TraitProfiler, TraitChoice, TraitType
+from .coherence_calculator import CoherenceCalculator
+from .npc_response_engine import NPCResponseEngine
 # Try to import REMNANTS NPC manager and helper constructors
 try:
     from .npc_manager import NPCManager, create_marketplace_npcs, create_marketplace_influence_map
@@ -73,11 +76,18 @@ class VelinorTwineOrchestrator:
         game_engine: VelinorEngine,
         story_path: str,
         first_person_module: Optional[Any] = None,
-        npc_system: Optional[NPCDialogueSystem] = None
+        npc_system: Optional[NPCDialogueSystem] = None,
+        player_name: str = "Player"
     ):
         self.game_engine = game_engine
         self.first_person = first_person_module
         self.npc_system = npc_system
+        
+        # Initialize trait system
+        self.trait_profiler = TraitProfiler(player_name)
+        self.coherence_calculator = CoherenceCalculator(self.trait_profiler)
+        self.npc_response_engine = NPCResponseEngine(self.trait_profiler)
+        
         # REMNANTS manager (for trait/influence simulation)
         self.remnants_manager = NPCManager() if NPCManager is not None else None
         # Populate REMNANTS manager with marketplace NPCs and influence map
@@ -98,7 +108,8 @@ class VelinorTwineOrchestrator:
         
         # Load story
         self.story_loader = TwineStoryLoader()
-        self.story_loader.load_from_json(story_path)
+        if story_path:  # Only load if path provided
+            self.story_loader.load_from_json(story_path)
         
         # Initialize session
         self.twine_session: Optional[TwineGameSession] = None
@@ -139,6 +150,9 @@ class VelinorTwineOrchestrator:
         # Render starting passage
         initial_state = self.twine_session.start_story()
         self._log_event('game_started', initial_state)
+        
+        # Add trait system info to initial state
+        initial_state['trait_profile'] = self.trait_profiler.get_trait_summary()
         
         return self._format_ui_state(initial_state)
     
@@ -212,7 +226,84 @@ class VelinorTwineOrchestrator:
         
         return self._format_ui_state(updated_state)
     
-    def _summarize_player_intent(self, player_input: str, player_id: Optional[str]) -> str:
+    def record_trait_choice(
+        self,
+        choice_id: str,
+        choice_text: str,
+        primary_trait: TraitType,
+        trait_weight: float = 0.3,
+        secondary_trait: Optional[TraitType] = None,
+        secondary_weight: float = 0.0,
+        npc_name: str = "",
+        scene_name: str = "",
+    ) -> Dict[str, Any]:
+        """
+        Record a player choice that tags a trait.
+        
+        Called when dialogue options are selected in scenes.
+        Updates trait profile and returns current coherence state.
+        
+        Returns:
+            Updated trait profile with coherence info
+        """
+        trait_choice = TraitChoice(
+            choice_id=choice_id,
+            dialogue_option=choice_text,
+            primary_trait=primary_trait,
+            trait_weight=trait_weight,
+            secondary_trait=secondary_trait,
+            secondary_weight=secondary_weight,
+            npc_name=npc_name,
+            scene_name=scene_name,
+        )
+        
+        # Record the choice
+        self.trait_profiler.record_choice(trait_choice)
+        
+        # Get updated coherence report
+        coherence_report = self.coherence_calculator.get_coherence_report()
+        
+        # Log for diagnostics
+        self._log_event('trait_choice', {
+            'choice_id': choice_id,
+            'primary_trait': primary_trait.value,
+            'npc': npc_name,
+            'scene': scene_name,
+            'coherence': coherence_report.overall_coherence,
+            'npc_trust': coherence_report.npc_trust_level,
+        })
+        
+        return {
+            'trait_profile': self.trait_profiler.get_trait_summary(),
+            'coherence_report': {
+                'overall_coherence': coherence_report.overall_coherence,
+                'level': coherence_report.level.name,
+                'primary_pattern': coherence_report.primary_pattern.value,
+                'npc_trust_level': coherence_report.npc_trust_level,
+                'dialogue_depth': coherence_report.dialogue_depth,
+            }
+        }
+    
+    def get_trait_status(self) -> Dict[str, Any]:
+        """Get current player trait status for UI display."""
+        coherence_report = self.coherence_calculator.get_coherence_report()
+        return {
+            'trait_profile': self.trait_profiler.get_trait_summary(),
+            'coherence_report': {
+                'overall_coherence': coherence_report.overall_coherence,
+                'level': coherence_report.level.name,
+                'primary_pattern': coherence_report.primary_pattern.value,
+                'secondary_pattern': coherence_report.secondary_pattern.value if coherence_report.secondary_pattern else None,
+                'pattern_strength': coherence_report.pattern_strength,
+                'npc_trust_level': coherence_report.npc_trust_level,
+                'dialogue_depth': coherence_report.dialogue_depth,
+                'summary': coherence_report.summary(),
+            },
+            'npc_conflicts': {
+                npc: self.npc_response_engine.get_npc_conflict_level(npc)
+                for npc in ['Saori', 'Ravi', 'Nima', 'Malrik', 'Elenya', 'Coren']
+            }
+        }
         """
         Use FirstPerson to analyze and contextualize player's intent.
         Extracts emotional tone, themes, and context for nuanced NPC responses.

@@ -16,8 +16,8 @@ Each NPC has:
 from typing import Dict, List, Optional, Tuple
 from enum import Enum
 from dataclasses import dataclass, field
-from trait_system import TraitType, TraitProfiler
-from coherence_calculator import CoherenceCalculator, CoherenceLevel
+from .trait_system import TraitType, TraitProfiler
+from .coherence_calculator import CoherenceCalculator, CoherenceLevel
 
 
 class NPCPersonalityType(Enum):
