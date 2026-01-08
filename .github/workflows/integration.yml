@@ -1,0 +1,65 @@
+---
+name: Integration tests
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      enable_nlp:
+        description: "Install NLP deps (spaCy) before running integration tests"
+        required: false
+        default: "false"
+
+jobs:
+  integration:
+    name: Integration tests (SQLite fixture)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+          python -m pip install pytest
+
+      - name: Create SQLite fixture
+        run: |
+          python scripts/create_sqlite_fixture.py
+
+      - name: Evaluate enable_nlp
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && \
+            [ "${{ github.event.inputs.enable_nlp }}" = "true" ]; then
+            echo "ENABLE_NLP=true" >> $GITHUB_ENV
+          else
+            echo "ENABLE_NLP=false" >> $GITHUB_ENV
+          fi
+
+      - name: (optional) Install NLP deps
+        if: ${{ env.ENABLE_NLP == 'true' }}
+        run: |
+          python -m pip install spacy
+          python -m spacy download en_core_web_sm || true
+
+      - name: Run integration smoke test
+        run: |
+          pytest tests/integration/test_smoke_integration.py -q

@@ -1,0 +1,19 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/auth-manager/route": "/api/auth-manager",
+  "/api/auth/login/route": "/api/auth/login",
+  "/api/auth/register/route": "/api/auth/register",
+  "/api/auth/route": "/api/auth",
+  "/api/chat/route": "/api/chat",
+  "/api/conversation/[userId]/[conversationId]/route": "/api/conversation/[userId]/[conversationId]",
+  "/api/conversations/route": "/api/conversations",
+  "/api/emotion-thresholds/route": "/api/emotion-thresholds",
+  "/api/emotions/route": "/api/emotions",
+  "/api/feedback/route": "/api/feedback",
+  "/api/synthesize/route": "/api/synthesize",
+  "/api/transcribe/route": "/api/transcribe",
+  "/chat/page": "/chat",
+  "/page": "/",
+  "/settings/page": "/settings"
+}

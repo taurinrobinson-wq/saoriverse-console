@@ -1,0 +1,35 @@
+# Voice Interface Dependencies
+# For Sprints 1-4: Audio pipeline, STT, TTS, Prosody Planning
+
+# Speech Recognition (Local STT)
+faster-whisper>=0.10.0  # Faster Whisper implementation (CPU-optimized)
+# Download size: ~140MB for "base" model (one-time download)
+# Runtime: ~100ms per 10-second audio clip on CPU
+
+# Audio Processing
+librosa>=0.10.0  # Audio feature extraction (pitch, energy, speech rate)
+soundfile>=0.12.0  # WAV/audio file I/O
+sounddevice>=0.4.5  # Microphone input recording
+scipy>=1.11.0  # Signal processing (VAD, filtering)
+
+# Text-to-Speech (TTS) - Streaming
+TTS>=0.21.0  # Coqui TTS for high-quality voice synthesis
+# Models are downloaded on first use (~200MB for English)
+# Supports streaming/incremental synthesis
+# Note: TTS can be CPU-intensive; consider optional GPU support
+
+# Audio Utilities
+pydub>=0.25.0  # Audio format conversion
+numpy>=1.24.0  # Numerical operations
+matplotlib>=3.7.0  # Visualization (waveforms, spectrograms)
+
+# Streamlit Audio Components (built-in, but good to explicitly note)
+# st.audio_input() and st.camera_input() are built into Streamlit
+# No additional package needed - works via browser WebAPI
+
+# Optional: GPU acceleration for TTS (if user has CUDA)
+# torch>=2.0.0  # Uncomment for GPU support
+# torchaudio>=2.0.0
+
+# Optional: Advanced noise suppression
+# noisereduce>=2.0.0  # Optional, for better audio preprocessing

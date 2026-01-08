@@ -1,0 +1,10384 @@
+{
+  "ache": {
+    "seed": "ache",
+    "synonyms_scored": [
+      {
+        "word": "ache",
+        "score": 1.0
+      },
+      {
+        "word": "aching",
+        "score": 0.6
+      },
+      {
+        "word": "hurt",
+        "score": 0.492
+      },
+      {
+        "word": "suffer",
+        "score": 0.438
+      },
+      {
+        "word": "long",
+        "score": 0.317
+      },
+      {
+        "word": "yen",
+        "score": 0.184
+      },
+      {
+        "word": "smart",
+        "score": 0.09
+      },
+      {
+        "word": "yearn",
+        "score": 0.086
+      },
+      {
+        "word": "languish",
+        "score": 0.083
+      },
+      {
+        "word": "pine",
+        "score": -0.029
+      }
+    ],
+    "top_synonyms": [
+      "ache",
+      "aching",
+      "hurt",
+      "suffer",
+      "long"
+    ],
+    "provenance": {
+      "wordnet": [
+        "ache",
+        "aching",
+        "hurt",
+        "languish",
+        "pine",
+        "smart",
+        "suffer",
+        "yearn",
+        "yen"
+      ],
+      "spacy_top": []
+    }
+  },
+  "acheful": {
+    "seed": "acheful",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "again": {
+    "seed": "again",
+    "synonyms_scored": [
+      {
+        "word": "again",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "again"
+    ],
+    "provenance": {
+      "wordnet": [
+        "again"
+      ],
+      "spacy_top": []
+    }
+  },
+  "aggression": {
+    "seed": "aggression",
+    "synonyms_scored": [
+      {
+        "word": "aggression",
+        "score": 1.0
+      },
+      {
+        "word": "aggressiveness",
+        "score": 0.709
+      },
+      {
+        "word": "hostility",
+        "score": 0.491
+      }
+    ],
+    "top_synonyms": [
+      "aggression",
+      "aggressiveness",
+      "hostility"
+    ],
+    "provenance": {
+      "wordnet": [
+        "aggression",
+        "aggressiveness",
+        "hostility"
+      ],
+      "spacy_top": []
+    }
+  },
+  "alone": {
+    "seed": "alone",
+    "synonyms_scored": [
+      {
+        "word": "alone",
+        "score": 1.0
+      },
+      {
+        "word": "entirely",
+        "score": 0.607
+      },
+      {
+        "word": "solitary",
+        "score": 0.469
+      },
+      {
+        "word": "unique",
+        "score": 0.446
+      },
+      {
+        "word": "only",
+        "score": 0.433
+      },
+      {
+        "word": "lone",
+        "score": 0.4
+      },
+      {
+        "word": "lonely",
+        "score": 0.4
+      },
+      {
+        "word": "solely",
+        "score": 0.396
+      },
+      {
+        "word": "unequaled",
+        "score": 0.271
+      },
+      {
+        "word": "unequalled",
+        "score": 0.271
+      },
+      {
+        "word": "unparalleled",
+        "score": 0.271
+      },
+      {
+        "word": "exclusively",
+        "score": 0.044
+      },
+      {
+        "word": "solo",
+        "score": -0.008
+      },
+      {
+        "word": "unaccompanied",
+        "score": -0.193
+      }
+    ],
+    "top_synonyms": [
+      "alone",
+      "entirely",
+      "solitary",
+      "unique",
+      "only"
+    ],
+    "provenance": {
+      "wordnet": [
+        "alone",
+        "entirely",
+        "exclusively",
+        "lone",
+        "lonely",
+        "only",
+        "solely",
+        "solitary",
+        "solo",
+        "unaccompanied",
+        "unequaled",
+        "unequalled",
+        "unique",
+        "unparalleled"
+      ],
+      "spacy_top": []
+    }
+  },
+  "amazing": {
+    "seed": "amazing",
+    "synonyms_scored": [
+      {
+        "word": "amazing",
+        "score": 1.0
+      },
+      {
+        "word": "astonishing",
+        "score": 1.0
+      },
+      {
+        "word": "impressive",
+        "score": 1.0
+      },
+      {
+        "word": "surprising",
+        "score": 1.0
+      },
+      {
+        "word": "awe-inspiring",
+        "score": 0.682
+      },
+      {
+        "word": "awesome",
+        "score": 0.505
+      },
+      {
+        "word": "awful",
+        "score": 0.433
+      },
+      {
+        "word": "puzzle",
+        "score": 0.341
+      },
+      {
+        "word": "stick",
+        "score": 0.326
+      },
+      {
+        "word": "awing",
+        "score": 0.303
+      },
+      {
+        "word": "get",
+        "score": 0.283
+      },
+      {
+        "word": "beat",
+        "score": 0.269
+      },
+      {
+        "word": "pose",
+        "score": 0.231
+      },
+      {
+        "word": "amaze",
+        "score": 0.198
+      },
+      {
+        "word": "astonish",
+        "score": 0.198
+      },
+      {
+        "word": "vex",
+        "score": 0.198
+      },
+      {
+        "word": "baffle",
+        "score": 0.092
+      },
+      {
+        "word": "gravel",
+        "score": 0.077
+      },
+      {
+        "word": "astound",
+        "score": 0.067
+      },
+      {
+        "word": "bewilder",
+        "score": 0.067
+      },
+      {
+        "word": "perplex",
+        "score": 0.067
+      },
+      {
+        "word": "dumbfound",
+        "score": 0.041
+      },
+      {
+        "word": "stupefy",
+        "score": 0.041
+      },
+      {
+        "word": "flummox",
+        "score": 0.036
+      },
+      {
+        "word": "mystify",
+        "score": -0.03
+      },
+      {
+        "word": "nonplus",
+        "score": -0.044
+      }
+    ],
+    "top_synonyms": [
+      "amazing",
+      "astonishing",
+      "impressive",
+      "surprising",
+      "awe-inspiring"
+    ],
+    "provenance": {
+      "wordnet": [
+        "amaze",
+        "amazing",
+        "astonish",
+        "astonishing",
+        "astound",
+        "awe-inspiring",
+        "awesome",
+        "awful",
+        "awing",
+        "baffle",
+        "beat",
+        "bewilder",
+        "dumbfound",
+        "flummox",
+        "get",
+        "gravel",
+        "mystify",
+        "nonplus",
+        "perplex",
+        "pose",
+        "puzzle",
+        "stick",
+        "stupefy",
+        "vex"
+      ],
+      "spacy_top": []
+    }
+  },
+  "archive": {
+    "seed": "archive",
+    "synonyms_scored": [
+      {
+        "word": "archive",
+        "score": 1.0
+      },
+      {
+        "word": "archives",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "archive",
+      "archives"
+    ],
+    "provenance": {
+      "wordnet": [
+        "archive"
+      ],
+      "spacy_top": []
+    }
+  },
+  "asked": {
+    "seed": "asked",
+    "synonyms_scored": [
+      {
+        "word": "expect",
+        "score": 0.39
+      },
+      {
+        "word": "ask",
+        "score": 0.306
+      },
+      {
+        "word": "inquire",
+        "score": 0.286
+      },
+      {
+        "word": "need",
+        "score": 0.286
+      },
+      {
+        "word": "take",
+        "score": 0.171
+      },
+      {
+        "word": "postulate",
+        "score": 0.121
+      },
+      {
+        "word": "involve",
+        "score": 0.102
+      },
+      {
+        "word": "enquire",
+        "score": 0.079
+      },
+      {
+        "word": "necessitate",
+        "score": 0.023
+      },
+      {
+        "word": "require",
+        "score": 0.023
+      },
+      {
+        "word": "demand",
+        "score": -0.009
+      }
+    ],
+    "top_synonyms": [
+      "expect",
+      "ask",
+      "inquire",
+      "need",
+      "take"
+    ],
+    "provenance": {
+      "wordnet": [
+        "ask",
+        "demand",
+        "enquire",
+        "expect",
+        "inquire",
+        "involve",
+        "necessitate",
+        "need",
+        "postulate",
+        "require",
+        "take"
+      ],
+      "spacy_top": []
+    }
+  },
+  "attunement": {
+    "seed": "attunement",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "axis": {
+    "seed": "axis",
+    "synonyms_scored": [
+      {
+        "word": "axis",
+        "score": 1.0
+      },
+      {
+        "word": "bloc",
+        "score": -0.024
+      }
+    ],
+    "top_synonyms": [
+      "axis",
+      "bloc"
+    ],
+    "provenance": {
+      "wordnet": [
+        "axis",
+        "bloc"
+      ],
+      "spacy_top": []
+    }
+  },
+  "bliss": {
+    "seed": "bliss",
+    "synonyms_scored": [
+      {
+        "word": "bliss",
+        "score": 1.0
+      },
+      {
+        "word": "blissfulness",
+        "score": 0.043
+      }
+    ],
+    "top_synonyms": [
+      "bliss",
+      "blissfulness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "bliss",
+        "blissfulness"
+      ],
+      "spacy_top": []
+    }
+  },
+  "bloom": {
+    "seed": "bloom",
+    "synonyms_scored": [
+      {
+        "word": "bloom",
+        "score": 1.0
+      },
+      {
+        "word": "blooming",
+        "score": 1.0
+      },
+      {
+        "word": "blossom",
+        "score": 1.0
+      },
+      {
+        "word": "flower",
+        "score": 1.0
+      },
+      {
+        "word": "blush",
+        "score": 0.353
+      },
+      {
+        "word": "rosiness",
+        "score": 0.205
+      },
+      {
+        "word": "flush",
+        "score": 0.152
+      },
+      {
+        "word": "peak",
+        "score": 0.125
+      },
+      {
+        "word": "efflorescence",
+        "score": 0.104
+      },
+      {
+        "word": "prime",
+        "score": 0.098
+      },
+      {
+        "word": "heyday",
+        "score": 0.06
+      }
+    ],
+    "top_synonyms": [
+      "bloom",
+      "blooming",
+      "blossom",
+      "flower",
+      "blush"
+    ],
+    "provenance": {
+      "wordnet": [
+        "bloom",
+        "blooming",
+        "blossom",
+        "blush",
+        "efflorescence",
+        "flower",
+        "flush",
+        "heyday",
+        "peak",
+        "prime",
+        "rosiness"
+      ],
+      "spacy_top": []
+    }
+  },
+  "boundary": {
+    "seed": "boundary",
+    "synonyms_scored": [
+      {
+        "word": "boundary",
+        "score": 1.0
+      },
+      {
+        "word": "bounds",
+        "score": 0.523
+      },
+      {
+        "word": "edge",
+        "score": 0.41
+      },
+      {
+        "word": "limit",
+        "score": 0.356
+      },
+      {
+        "word": "bound",
+        "score": -0.041
+      }
+    ],
+    "top_synonyms": [
+      "boundary",
+      "bounds",
+      "edge",
+      "limit",
+      "bound"
+    ],
+    "provenance": {
+      "wordnet": [
+        "bound",
+        "boundary",
+        "edge",
+        "limit"
+      ],
+      "spacy_top": []
+    }
+  },
+  "breath": {
+    "seed": "breath",
+    "synonyms_scored": [
+      {
+        "word": "breath",
+        "score": 1.0
+      },
+      {
+        "word": "breather",
+        "score": 0.412
+      },
+      {
+        "word": "hint",
+        "score": 0.239
+      },
+      {
+        "word": "intimation",
+        "score": 0.131
+      }
+    ],
+    "top_synonyms": [
+      "breath",
+      "breather",
+      "hint",
+      "intimation"
+    ],
+    "provenance": {
+      "wordnet": [
+        "breath",
+        "breather",
+        "hint",
+        "intimation"
+      ],
+      "spacy_top": []
+    }
+  },
+  "burrow": {
+    "seed": "burrow",
+    "synonyms_scored": [
+      {
+        "word": "burrow",
+        "score": 1.0
+      },
+      {
+        "word": "tunnel",
+        "score": 0.126
+      }
+    ],
+    "top_synonyms": [
+      "burrow",
+      "tunnel"
+    ],
+    "provenance": {
+      "wordnet": [
+        "burrow",
+        "tunnel"
+      ],
+      "spacy_top": []
+    }
+  },
+  "card": {
+    "seed": "card",
+    "synonyms_scored": [
+      {
+        "word": "board",
+        "score": 1.0
+      },
+      {
+        "word": "card",
+        "score": 1.0
+      },
+      {
+        "word": "poster",
+        "score": 0.413
+      },
+      {
+        "word": "plug-in",
+        "score": 0.346
+      },
+      {
+        "word": "bill",
+        "score": 0.308
+      },
+      {
+        "word": "add-in",
+        "score": 0.197
+      },
+      {
+        "word": "placard",
+        "score": 0.177
+      },
+      {
+        "word": "notice",
+        "score": 0.165
+      },
+      {
+        "word": "lineup",
+        "score": 0.14
+      },
+      {
+        "word": "wit",
+        "score": 0.14
+      },
+      {
+        "word": "scorecard",
+        "score": 0.134
+      },
+      {
+        "word": "posting",
+        "score": 0.103
+      },
+      {
+        "word": "carte",
+        "score": 0.062
+      },
+      {
+        "word": "menu",
+        "score": 0.059
+      },
+      {
+        "word": "tease",
+        "score": 0.052
+      },
+      {
+        "word": "wag",
+        "score": 0.041
+      }
+    ],
+    "top_synonyms": [
+      "board",
+      "card",
+      "poster",
+      "plug-in",
+      "bill"
+    ],
+    "provenance": {
+      "wordnet": [
+        "add-in",
+        "bill",
+        "board",
+        "card",
+        "carte",
+        "lineup",
+        "menu",
+        "notice",
+        "placard",
+        "plug-in",
+        "poster",
+        "posting",
+        "scorecard",
+        "tease",
+        "wag",
+        "wit"
+      ],
+      "spacy_top": []
+    }
+  },
+  "celebratory": {
+    "seed": "celebratory",
+    "synonyms_scored": [
+      {
+        "word": "celebratory",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "celebratory"
+    ],
+    "provenance": {
+      "wordnet": [
+        "celebratory"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ceremonial": {
+    "seed": "ceremonial",
+    "synonyms_scored": [
+      {
+        "word": "ceremonial",
+        "score": 1.0
+      },
+      {
+        "word": "formal",
+        "score": 0.169
+      },
+      {
+        "word": "observance",
+        "score": 0.092
+      },
+      {
+        "word": "ceremony",
+        "score": 0.085
+      },
+      {
+        "word": "solemn",
+        "score": 0.082
+      }
+    ],
+    "top_synonyms": [
+      "ceremonial",
+      "formal",
+      "observance",
+      "ceremony",
+      "solemn"
+    ],
+    "provenance": {
+      "wordnet": [
+        "ceremonial",
+        "ceremony",
+        "observance"
+      ],
+      "spacy_top": []
+    }
+  },
+  "charge": {
+    "seed": "charge",
+    "synonyms_scored": [
+      {
+        "word": "charge",
+        "score": 1.0
+      },
+      {
+        "word": "burden",
+        "score": 0.555
+      },
+      {
+        "word": "bill",
+        "score": 0.447
+      },
+      {
+        "word": "commit",
+        "score": 0.409
+      },
+      {
+        "word": "commission",
+        "score": 0.372
+      },
+      {
+        "word": "accusation",
+        "score": 0.371
+      },
+      {
+        "word": "bearing",
+        "score": 0.341
+      },
+      {
+        "word": "flush",
+        "score": 0.341
+      },
+      {
+        "word": "send",
+        "score": 0.332
+      },
+      {
+        "word": "blame",
+        "score": 0.329
+      },
+      {
+        "word": "complaint",
+        "score": 0.321
+      },
+      {
+        "word": "buck",
+        "score": 0.312
+      },
+      {
+        "word": "shoot",
+        "score": 0.31
+      },
+      {
+        "word": "accuse",
+        "score": 0.305
+      },
+      {
+        "word": "point",
+        "score": 0.303
+      },
+      {
+        "word": "care",
+        "score": 0.274
+      },
+      {
+        "word": "level",
+        "score": 0.269
+      },
+      {
+        "word": "tear",
+        "score": 0.259
+      },
+      {
+        "word": "load",
+        "score": 0.258
+      },
+      {
+        "word": "billing",
+        "score": 0.24
+      },
+      {
+        "word": "direction",
+        "score": 0.239
+      },
+      {
+        "word": "appoint",
+        "score": 0.231
+      },
+      {
+        "word": "thrill",
+        "score": 0.21
+      },
+      {
+        "word": "guardianship",
+        "score": 0.192
+      },
+      {
+        "word": "mission",
+        "score": 0.192
+      },
+      {
+        "word": "kick",
+        "score": 0.189
+      },
+      {
+        "word": "lodge",
+        "score": 0.169
+      },
+      {
+        "word": "bang",
+        "score": 0.161
+      },
+      {
+        "word": "agitate",
+        "score": 0.16
+      },
+      {
+        "word": "institutionalise",
+        "score": 0.16
+      },
+      {
+        "word": "institutionalize",
+        "score": 0.16
+      },
+      {
+        "word": "excite",
+        "score": 0.155
+      },
+      {
+        "word": "rouse",
+        "score": 0.155
+      },
+      {
+        "word": "rush",
+        "score": 0.12
+      },
+      {
+        "word": "tutelage",
+        "score": 0.093
+      },
+      {
+        "word": "boot",
+        "score": 0.091
+      },
+      {
+        "word": "file",
+        "score": 0.077
+      },
+      {
+        "word": "consign",
+        "score": 0.044
+      },
+      {
+        "word": "cathexis",
+        "score": 0.0
+      },
+      {
+        "word": "commove",
+        "score": 0.0
+      },
+      {
+        "word": "saddle",
+        "score": -0.004
+      },
+      {
+        "word": "burster",
+        "score": -0.044
+      }
+    ],
+    "top_synonyms": [
+      "charge",
+      "burden",
+      "bill",
+      "commit",
+      "commission"
+    ],
+    "provenance": {
+      "wordnet": [
+        "accusation",
+        "accuse",
+        "agitate",
+        "appoint",
+        "bang",
+        "bearing",
+        "bill",
+        "billing",
+        "blame",
+        "boot",
+        "buck",
+        "burden",
+        "burster",
+        "care",
+        "cathexis",
+        "charge",
+        "commission",
+        "commit",
+        "commove",
+        "complaint",
+        "consign",
+        "direction",
+        "excite",
+        "file",
+        "flush",
+        "guardianship",
+        "institutionalise",
+        "institutionalize",
+        "kick",
+        "level",
+        "load",
+        "lodge",
+        "mission",
+        "point",
+        "rouse",
+        "rush",
+        "saddle",
+        "send",
+        "shoot",
+        "tear",
+        "thrill",
+        "tutelage"
+      ],
+      "spacy_top": []
+    }
+  },
+  "chart": {
+    "seed": "chart",
+    "synonyms_scored": [
+      {
+        "word": "chart",
+        "score": 1.0
+      },
+      {
+        "word": "graph",
+        "score": 0.433
+      }
+    ],
+    "top_synonyms": [
+      "chart",
+      "graph"
+    ],
+    "provenance": {
+      "wordnet": [
+        "chart",
+        "graph"
+      ],
+      "spacy_top": []
+    }
+  },
+  "chat": {
+    "seed": "chat",
+    "synonyms_scored": [
+      {
+        "word": "chat",
+        "score": 1.0
+      },
+      {
+        "word": "chit-chat",
+        "score": 0.819
+      },
+      {
+        "word": "jaw",
+        "score": 0.459
+      },
+      {
+        "word": "gossip",
+        "score": 0.368
+      },
+      {
+        "word": "natter",
+        "score": 0.211
+      },
+      {
+        "word": "confabulate",
+        "score": 0.178
+      },
+      {
+        "word": "schmooze",
+        "score": 0.178
+      },
+      {
+        "word": "chatter",
+        "score": 0.177
+      },
+      {
+        "word": "chitchat",
+        "score": 0.177
+      },
+      {
+        "word": "visit",
+        "score": 0.067
+      },
+      {
+        "word": "confabulation",
+        "score": 0.017
+      },
+      {
+        "word": "chaffer",
+        "score": 0.0
+      },
+      {
+        "word": "schmoose",
+        "score": 0.0
+      },
+      {
+        "word": "claver",
+        "score": -0.046
+      },
+      {
+        "word": "confab",
+        "score": -0.08
+      }
+    ],
+    "top_synonyms": [
+      "chat",
+      "chit-chat",
+      "jaw",
+      "gossip",
+      "natter"
+    ],
+    "provenance": {
+      "wordnet": [
+        "chaffer",
+        "chat",
+        "chatter",
+        "chit-chat",
+        "chitchat",
+        "claver",
+        "confab",
+        "confabulate",
+        "confabulation",
+        "gossip",
+        "jaw",
+        "natter",
+        "schmoose",
+        "schmooze",
+        "visit"
+      ],
+      "spacy_top": []
+    }
+  },
+  "chosen": {
+    "seed": "chosen",
+    "synonyms_scored": [
+      {
+        "word": "chosen",
+        "score": 1.0
+      },
+      {
+        "word": "selected",
+        "score": 0.276
+      },
+      {
+        "word": "prefer",
+        "score": 0.236
+      },
+      {
+        "word": "elect",
+        "score": 0.232
+      },
+      {
+        "word": "choose",
+        "score": 0.213
+      },
+      {
+        "word": "take",
+        "score": 0.213
+      },
+      {
+        "word": "opt",
+        "score": 0.209
+      },
+      {
+        "word": "select",
+        "score": -0.004
+      }
+    ],
+    "top_synonyms": [
+      "chosen",
+      "selected",
+      "prefer",
+      "elect",
+      "choose"
+    ],
+    "provenance": {
+      "wordnet": [
+        "choose",
+        "chosen",
+        "elect",
+        "opt",
+        "prefer",
+        "select",
+        "take"
+      ],
+      "spacy_top": []
+    }
+  },
+  "clarity": {
+    "seed": "clarity",
+    "synonyms_scored": [
+      {
+        "word": "clarity",
+        "score": 1.0
+      },
+      {
+        "word": "lucidity",
+        "score": 0.244
+      },
+      {
+        "word": "clearness",
+        "score": 0.06
+      },
+      {
+        "word": "limpidity",
+        "score": 0.0
+      },
+      {
+        "word": "pellucidity",
+        "score": 0.0
+      },
+      {
+        "word": "uncloudedness",
+        "score": 0.0
+      },
+      {
+        "word": "lucidness",
+        "score": -0.089
+      }
+    ],
+    "top_synonyms": [
+      "clarity",
+      "lucidity",
+      "clearness",
+      "limpidity",
+      "pellucidity"
+    ],
+    "provenance": {
+      "wordnet": [
+        "clarity",
+        "clearness",
+        "limpidity",
+        "lucidity",
+        "lucidness",
+        "pellucidity",
+        "uncloudedness"
+      ],
+      "spacy_top": []
+    }
+  },
+  "collapse": {
+    "seed": "collapse",
+    "synonyms_scored": [
+      {
+        "word": "collapse",
+        "score": 1.0
+      },
+      {
+        "word": "break",
+        "score": 0.339
+      },
+      {
+        "word": "tumble",
+        "score": 0.324
+      },
+      {
+        "word": "crash",
+        "score": 0.278
+      },
+      {
+        "word": "founder",
+        "score": 0.275
+      },
+      {
+        "word": "give",
+        "score": 0.25
+      },
+      {
+        "word": "burst",
+        "score": 0.228
+      },
+      {
+        "word": "crumble",
+        "score": 0.13
+      },
+      {
+        "word": "prostration",
+        "score": 0.083
+      },
+      {
+        "word": "flop",
+        "score": 0.037
+      },
+      {
+        "word": "crack",
+        "score": -0.064
+      },
+      {
+        "word": "crumple",
+        "score": -0.065
+      }
+    ],
+    "top_synonyms": [
+      "collapse",
+      "break",
+      "tumble",
+      "crash",
+      "founder"
+    ],
+    "provenance": {
+      "wordnet": [
+        "break",
+        "burst",
+        "collapse",
+        "crack",
+        "crash",
+        "crumble",
+        "crumple",
+        "flop",
+        "founder",
+        "give",
+        "prostration",
+        "tumble"
+      ],
+      "spacy_top": []
+    }
+  },
+  "community": {
+    "seed": "community",
+    "synonyms_scored": [
+      {
+        "word": "community",
+        "score": 1.0
+      },
+      {
+        "word": "public",
+        "score": 0.414
+      },
+      {
+        "word": "profession",
+        "score": 0.383
+      },
+      {
+        "word": "local",
+        "score": 0.321
+      }
+    ],
+    "top_synonyms": [
+      "community",
+      "public",
+      "profession",
+      "local"
+    ],
+    "provenance": {
+      "wordnet": [
+        "community"
+      ],
+      "spacy_top": []
+    }
+  },
+  "compromise": {
+    "seed": "compromise",
+    "synonyms_scored": [
+      {
+        "word": "compromise",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "compromise"
+    ],
+    "provenance": {
+      "wordnet": [
+        "compromise"
+      ],
+      "spacy_top": []
+    }
+  },
+  "condition": {
+    "seed": "condition",
+    "synonyms_scored": [
+      {
+        "word": "condition",
+        "score": 1.0
+      },
+      {
+        "word": "train",
+        "score": 0.264
+      },
+      {
+        "word": "shape",
+        "score": 0.26
+      },
+      {
+        "word": "specify",
+        "score": 0.254
+      },
+      {
+        "word": "term",
+        "score": 0.254
+      },
+      {
+        "word": "precondition",
+        "score": 0.203
+      },
+      {
+        "word": "discipline",
+        "score": 0.201
+      },
+      {
+        "word": "circumstance",
+        "score": 0.165
+      },
+      {
+        "word": "consideration",
+        "score": 0.165
+      },
+      {
+        "word": "status",
+        "score": 0.163
+      },
+      {
+        "word": "stipulate",
+        "score": 0.163
+      },
+      {
+        "word": "qualify",
+        "score": 0.157
+      },
+      {
+        "word": "check",
+        "score": 0.105
+      },
+      {
+        "word": "stipulation",
+        "score": 0.042
+      }
+    ],
+    "top_synonyms": [
+      "condition",
+      "train",
+      "shape",
+      "specify",
+      "term"
+    ],
+    "provenance": {
+      "wordnet": [
+        "check",
+        "circumstance",
+        "condition",
+        "consideration",
+        "discipline",
+        "precondition",
+        "qualify",
+        "shape",
+        "specify",
+        "status",
+        "stipulate",
+        "stipulation",
+        "term",
+        "train"
+      ],
+      "spacy_top": []
+    }
+  },
+  "contained": {
+    "seed": "contained",
+    "synonyms_scored": [
+      {
+        "word": "contain",
+        "score": 1.0
+      },
+      {
+        "word": "contained",
+        "score": 1.0
+      },
+      {
+        "word": "curb",
+        "score": 0.618
+      },
+      {
+        "word": "take",
+        "score": 0.532
+      },
+      {
+        "word": "carry",
+        "score": 0.521
+      },
+      {
+        "word": "hold",
+        "score": 0.419
+      },
+      {
+        "word": "comprise",
+        "score": 0.406
+      },
+      {
+        "word": "check",
+        "score": 0.402
+      },
+      {
+        "word": "moderate",
+        "score": 0.391
+      },
+      {
+        "word": "stop",
+        "score": 0.356
+      },
+      {
+        "word": "restrained",
+        "score": 0.341
+      },
+      {
+        "word": "arrest",
+        "score": 0.34
+      },
+      {
+        "word": "bear",
+        "score": 0.3
+      },
+      {
+        "word": "controlled",
+        "score": 0.278
+      },
+      {
+        "word": "incorporate",
+        "score": 0.269
+      },
+      {
+        "word": "control",
+        "score": 0.265
+      }
+    ],
+    "top_synonyms": [
+      "contain",
+      "contained",
+      "curb",
+      "take",
+      "carry"
+    ],
+    "provenance": {
+      "wordnet": [
+        "arrest",
+        "bear",
+        "carry",
+        "check",
+        "comprise",
+        "contain",
+        "contained",
+        "control",
+        "curb",
+        "hold",
+        "incorporate",
+        "moderate",
+        "stop",
+        "take"
+      ],
+      "spacy_top": []
+    }
+  },
+  "containment": {
+    "seed": "containment",
+    "synonyms_scored": [
+      {
+        "word": "containment",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "containment"
+    ],
+    "provenance": {
+      "wordnet": [
+        "containment"
+      ],
+      "spacy_top": []
+    }
+  },
+  "continuation": {
+    "seed": "continuation",
+    "synonyms_scored": [
+      {
+        "word": "continuance",
+        "score": 1.0
+      },
+      {
+        "word": "continuation",
+        "score": 1.0
+      },
+      {
+        "word": "prolongation",
+        "score": 0.348
+      },
+      {
+        "word": "sequel",
+        "score": 0.233
+      },
+      {
+        "word": "lengthiness",
+        "score": 0.066
+      },
+      {
+        "word": "protraction",
+        "score": -0.044
+      }
+    ],
+    "top_synonyms": [
+      "continuance",
+      "continuation",
+      "prolongation",
+      "sequel",
+      "lengthiness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "continuance",
+        "continuation",
+        "lengthiness",
+        "prolongation",
+        "protraction",
+        "sequel"
+      ],
+      "spacy_top": []
+    }
+  },
+  "continuity": {
+    "seed": "continuity",
+    "synonyms_scored": [
+      {
+        "word": "continuity",
+        "score": 1.0
+      },
+      {
+        "word": "persistence",
+        "score": 0.258
+      }
+    ],
+    "top_synonyms": [
+      "continuity",
+      "persistence"
+    ],
+    "provenance": {
+      "wordnet": [
+        "continuity",
+        "persistence"
+      ],
+      "spacy_top": []
+    }
+  },
+  "cost": {
+    "seed": "cost",
+    "synonyms_scored": [
+      {
+        "word": "cost",
+        "score": 1.0
+      },
+      {
+        "word": "price",
+        "score": 0.723
+      },
+      {
+        "word": "toll",
+        "score": 0.396
+      }
+    ],
+    "top_synonyms": [
+      "cost",
+      "price",
+      "toll"
+    ],
+    "provenance": {
+      "wordnet": [
+        "cost",
+        "price",
+        "toll"
+      ],
+      "spacy_top": []
+    }
+  },
+  "creation": {
+    "seed": "creation",
+    "synonyms_scored": [
+      {
+        "word": "creation",
+        "score": 1.0
+      },
+      {
+        "word": "world",
+        "score": 0.852
+      },
+      {
+        "word": "cosmos",
+        "score": 0.726
+      },
+      {
+        "word": "existence",
+        "score": 0.726
+      },
+      {
+        "word": "nature",
+        "score": 0.726
+      },
+      {
+        "word": "universe",
+        "score": 0.726
+      },
+      {
+        "word": "conception",
+        "score": 0.438
+      },
+      {
+        "word": "introduction",
+        "score": 0.346
+      },
+      {
+        "word": "foundation",
+        "score": 0.271
+      },
+      {
+        "word": "founding",
+        "score": 0.253
+      },
+      {
+        "word": "macrocosm",
+        "score": 0.236
+      },
+      {
+        "word": "institution",
+        "score": 0.196
+      },
+      {
+        "word": "origination",
+        "score": 0.188
+      },
+      {
+        "word": "initiation",
+        "score": 0.182
+      },
+      {
+        "word": "innovation",
+        "score": 0.175
+      },
+      {
+        "word": "instauration",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "creation",
+      "world",
+      "cosmos",
+      "existence",
+      "nature"
+    ],
+    "provenance": {
+      "wordnet": [
+        "conception",
+        "cosmos",
+        "creation",
+        "existence",
+        "foundation",
+        "founding",
+        "initiation",
+        "innovation",
+        "instauration",
+        "institution",
+        "introduction",
+        "macrocosm",
+        "origination",
+        "universe",
+        "world"
+      ],
+      "spacy_top": []
+    }
+  },
+  "dancing": {
+    "seed": "dancing",
+    "synonyms_scored": [
+      {
+        "word": "dancing",
+        "score": 1.0
+      },
+      {
+        "word": "dance",
+        "score": 0.141
+      },
+      {
+        "word": "active",
+        "score": 0.103
+      },
+      {
+        "word": "saltation",
+        "score": 0.0
+      },
+      {
+        "word": "terpsichore",
+        "score": -0.149
+      }
+    ],
+    "top_synonyms": [
+      "dancing",
+      "dance",
+      "active",
+      "saltation",
+      "terpsichore"
+    ],
+    "provenance": {
+      "wordnet": [
+        "dance",
+        "dancing",
+        "saltation",
+        "terpsichore"
+      ],
+      "spacy_top": []
+    }
+  },
+  "decoding": {
+    "seed": "decoding",
+    "synonyms_scored": [
+      {
+        "word": "decoding",
+        "score": 1.0
+      },
+      {
+        "word": "decryption",
+        "score": 1.0
+      },
+      {
+        "word": "decode",
+        "score": 0.277
+      },
+      {
+        "word": "decrypt",
+        "score": 0.277
+      },
+      {
+        "word": "decipher",
+        "score": 0.057
+      },
+      {
+        "word": "decipherment",
+        "score": -0.053
+      }
+    ],
+    "top_synonyms": [
+      "decoding",
+      "decryption",
+      "decode",
+      "decrypt",
+      "decipher"
+    ],
+    "provenance": {
+      "wordnet": [
+        "decipher",
+        "decipherment",
+        "decode",
+        "decoding",
+        "decrypt",
+        "decryption"
+      ],
+      "spacy_top": []
+    }
+  },
+  "deepens": {
+    "seed": "deepens",
+    "synonyms_scored": [
+      {
+        "word": "deepen",
+        "score": 0.497
+      },
+      {
+        "word": "heighten",
+        "score": 0.443
+      },
+      {
+        "word": "intensify",
+        "score": 0.312
+      },
+      {
+        "word": "change",
+        "score": 0.28
+      },
+      {
+        "word": "compound",
+        "score": 0.16
+      }
+    ],
+    "top_synonyms": [
+      "deepen",
+      "heighten",
+      "intensify",
+      "change",
+      "compound"
+    ],
+    "provenance": {
+      "wordnet": [
+        "change",
+        "compound",
+        "deepen",
+        "heighten",
+        "intensify"
+      ],
+      "spacy_top": []
+    }
+  },
+  "design": {
+    "seed": "design",
+    "synonyms_scored": [
+      {
+        "word": "design",
+        "score": 1.0
+      },
+      {
+        "word": "plan",
+        "score": 0.423
+      },
+      {
+        "word": "designing",
+        "score": 0.394
+      },
+      {
+        "word": "innovation",
+        "score": 0.336
+      },
+      {
+        "word": "aim",
+        "score": 0.333
+      },
+      {
+        "word": "project",
+        "score": 0.333
+      },
+      {
+        "word": "figure",
+        "score": 0.317
+      },
+      {
+        "word": "invention",
+        "score": 0.295
+      },
+      {
+        "word": "pattern",
+        "score": 0.295
+      },
+      {
+        "word": "blueprint",
+        "score": 0.275
+      },
+      {
+        "word": "intent",
+        "score": 0.224
+      },
+      {
+        "word": "intention",
+        "score": 0.224
+      },
+      {
+        "word": "conception",
+        "score": 0.188
+      },
+      {
+        "word": "purpose",
+        "score": 0.188
+      },
+      {
+        "word": "contrive",
+        "score": 0.052
+      },
+      {
+        "word": "excogitation",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "design",
+      "plan",
+      "designing",
+      "innovation",
+      "aim"
+    ],
+    "provenance": {
+      "wordnet": [
+        "aim",
+        "blueprint",
+        "conception",
+        "contrive",
+        "design",
+        "designing",
+        "excogitation",
+        "figure",
+        "innovation",
+        "intent",
+        "intention",
+        "invention",
+        "pattern",
+        "plan",
+        "project",
+        "purpose"
+      ],
+      "spacy_top": []
+    }
+  },
+  "devotion": {
+    "seed": "devotion",
+    "synonyms_scored": [
+      {
+        "word": "devotion",
+        "score": 1.0
+      },
+      {
+        "word": "veneration",
+        "score": 0.404
+      },
+      {
+        "word": "idolatry",
+        "score": 0.364
+      },
+      {
+        "word": "cultism",
+        "score": 0.095
+      },
+      {
+        "word": "devotedness",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "devotion",
+      "veneration",
+      "idolatry",
+      "cultism",
+      "devotedness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "cultism",
+        "devotedness",
+        "devotion",
+        "idolatry",
+        "veneration"
+      ],
+      "spacy_top": []
+    }
+  },
+  "devotional": {
+    "seed": "devotional",
+    "synonyms_scored": [
+      {
+        "word": "devotional",
+        "score": 1.0
+      },
+      {
+        "word": "pious",
+        "score": 0.243
+      }
+    ],
+    "top_synonyms": [
+      "devotional",
+      "pious"
+    ],
+    "provenance": {
+      "wordnet": [
+        "devotional"
+      ],
+      "spacy_top": []
+    }
+  },
+  "diagram": {
+    "seed": "diagram",
+    "synonyms_scored": [
+      {
+        "word": "diagram",
+        "score": 1.0
+      },
+      {
+        "word": "plot",
+        "score": 0.071
+      }
+    ],
+    "top_synonyms": [
+      "diagram",
+      "plot"
+    ],
+    "provenance": {
+      "wordnet": [
+        "diagram",
+        "plot"
+      ],
+      "spacy_top": []
+    }
+  },
+  "duty": {
+    "seed": "duty",
+    "synonyms_scored": [
+      {
+        "word": "duty",
+        "score": 1.0
+      },
+      {
+        "word": "obligation",
+        "score": 0.414
+      },
+      {
+        "word": "tariff",
+        "score": 0.353
+      },
+      {
+        "word": "responsibility",
+        "score": 0.229
+      }
+    ],
+    "top_synonyms": [
+      "duty",
+      "obligation",
+      "tariff",
+      "responsibility"
+    ],
+    "provenance": {
+      "wordnet": [
+        "duty",
+        "obligation",
+        "responsibility",
+        "tariff"
+      ],
+      "spacy_top": []
+    }
+  },
+  "echo": {
+    "seed": "echo",
+    "synonyms_scored": [
+      {
+        "word": "echo",
+        "score": 1.0
+      },
+      {
+        "word": "resound",
+        "score": 1.0
+      },
+      {
+        "word": "recall",
+        "score": 0.322
+      },
+      {
+        "word": "repeat",
+        "score": 0.244
+      },
+      {
+        "word": "reverberation",
+        "score": 0.178
+      },
+      {
+        "word": "reverberate",
+        "score": 0.154
+      },
+      {
+        "word": "ring",
+        "score": 0.013
+      },
+      {
+        "word": "replication",
+        "score": -0.031
+      }
+    ],
+    "top_synonyms": [
+      "echo",
+      "resound",
+      "recall",
+      "repeat",
+      "reverberation"
+    ],
+    "provenance": {
+      "wordnet": [
+        "echo",
+        "recall",
+        "repeat",
+        "replication",
+        "resound",
+        "reverberate",
+        "reverberation",
+        "ring"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ecstasy": {
+    "seed": "ecstasy",
+    "synonyms_scored": [
+      {
+        "word": "ecstasy",
+        "score": 1.0
+      },
+      {
+        "word": "mdma",
+        "score": 0.223
+      },
+      {
+        "word": "xtc",
+        "score": 0.118
+      },
+      {
+        "word": "adam",
+        "score": 0.107
+      },
+      {
+        "word": "exaltation",
+        "score": 0.092
+      },
+      {
+        "word": "transport",
+        "score": 0.074
+      },
+      {
+        "word": "rapture",
+        "score": 0.069
+      },
+      {
+        "word": "cristal",
+        "score": 0.03
+      },
+      {
+        "word": "repture",
+        "score": 0.0
+      },
+      {
+        "word": "methylenedioxymethamphetamine",
+        "score": -0.018
+      },
+      {
+        "word": "raptus",
+        "score": -0.022
+      }
+    ],
+    "top_synonyms": [
+      "ecstasy",
+      "mdma",
+      "xtc",
+      "adam",
+      "exaltation"
+    ],
+    "provenance": {
+      "wordnet": [
+        "adam",
+        "cristal",
+        "ecstasy",
+        "exaltation",
+        "rapture",
+        "raptus",
+        "transport",
+        "xtc"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ecstatic": {
+    "seed": "ecstatic",
+    "synonyms_scored": [
+      {
+        "word": "ecstatic",
+        "score": 1.0
+      },
+      {
+        "word": "rhapsodic",
+        "score": 0.602
+      },
+      {
+        "word": "rapt",
+        "score": 0.49
+      },
+      {
+        "word": "rapturous",
+        "score": 0.49
+      },
+      {
+        "word": "enraptured",
+        "score": 0.397
+      },
+      {
+        "word": "joyous",
+        "score": 0.353
+      }
+    ],
+    "top_synonyms": [
+      "ecstatic",
+      "rhapsodic",
+      "rapt",
+      "rapturous",
+      "enraptured"
+    ],
+    "provenance": {
+      "wordnet": [
+        "ecstatic",
+        "enraptured",
+        "rapt",
+        "rapturous",
+        "rhapsodic"
+      ],
+      "spacy_top": []
+    }
+  },
+  "effectiveness": {
+    "seed": "effectiveness",
+    "synonyms_scored": [
+      {
+        "word": "effectiveness",
+        "score": 1.0
+      },
+      {
+        "word": "strength",
+        "score": 0.436
+      },
+      {
+        "word": "potency",
+        "score": 0.374
+      },
+      {
+        "word": "effectivity",
+        "score": 0.238
+      },
+      {
+        "word": "effectuality",
+        "score": 0.0
+      },
+      {
+        "word": "effectualness",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "effectiveness",
+      "strength",
+      "potency",
+      "effectivity",
+      "effectuality"
+    ],
+    "provenance": {
+      "wordnet": [
+        "effectiveness",
+        "effectivity",
+        "effectuality",
+        "effectualness",
+        "potency",
+        "strength"
+      ],
+      "spacy_top": []
+    }
+  },
+  "element": {
+    "seed": "element",
+    "synonyms_scored": [
+      {
+        "word": "element",
+        "score": 1.0
+      },
+      {
+        "word": "component",
+        "score": 0.296
+      },
+      {
+        "word": "factor",
+        "score": 0.249
+      },
+      {
+        "word": "constituent",
+        "score": 0.191
+      },
+      {
+        "word": "ingredient",
+        "score": 0.08
+      }
+    ],
+    "top_synonyms": [
+      "element",
+      "component",
+      "factor",
+      "constituent",
+      "ingredient"
+    ],
+    "provenance": {
+      "wordnet": [
+        "component",
+        "constituent",
+        "element",
+        "factor",
+        "ingredient"
+      ],
+      "spacy_top": []
+    }
+  },
+  "emotional": {
+    "seed": "emotional",
+    "synonyms_scored": [
+      {
+        "word": "emotional",
+        "score": 1.0
+      },
+      {
+        "word": "agitated",
+        "score": 0.684
+      },
+      {
+        "word": "excited",
+        "score": 0.433
+      },
+      {
+        "word": "temperamental",
+        "score": 0.411
+      },
+      {
+        "word": "soulful",
+        "score": 0.399
+      },
+      {
+        "word": "affective",
+        "score": 0.339
+      },
+      {
+        "word": "supercharged",
+        "score": 0.281
+      },
+      {
+        "word": "cathartic",
+        "score": 0.275
+      },
+      {
+        "word": "emotive",
+        "score": 0.275
+      },
+      {
+        "word": "gushy",
+        "score": 0.275
+      },
+      {
+        "word": "lyrical",
+        "score": 0.275
+      },
+      {
+        "word": "maudlin",
+        "score": 0.275
+      },
+      {
+        "word": "mawkish",
+        "score": 0.275
+      },
+      {
+        "word": "moody",
+        "score": 0.275
+      },
+      {
+        "word": "schmaltzy",
+        "score": 0.275
+      },
+      {
+        "word": "sentimental",
+        "score": 0.275
+      },
+      {
+        "word": "mind-blowing",
+        "score": 0.27
+      },
+      {
+        "word": "hot-blooded",
+        "score": 0.266
+      },
+      {
+        "word": "aroused",
+        "score": 0.245
+      },
+      {
+        "word": "charged",
+        "score": 0.242
+      },
+      {
+        "word": "overemotional",
+        "score": 0.223
+      },
+      {
+        "word": "releasing",
+        "score": 0.209
+      },
+      {
+        "word": "effusive",
+        "score": 0.207
+      },
+      {
+        "word": "slushy",
+        "score": 0.192
+      },
+      {
+        "word": "low-down",
+        "score": 0.187
+      },
+      {
+        "word": "gushing",
+        "score": 0.141
+      },
+      {
+        "word": "funky",
+        "score": 0.137
+      },
+      {
+        "word": "mushy",
+        "score": 0.137
+      },
+      {
+        "word": "latin",
+        "score": 0.105
+      },
+      {
+        "word": "warm-toned",
+        "score": 0.086
+      },
+      {
+        "word": "demonstrative",
+        "score": 0.076
+      },
+      {
+        "word": "lyric",
+        "score": 0.071
+      },
+      {
+        "word": "bathetic",
+        "score": 0.036
+      },
+      {
+        "word": "affectional",
+        "score": 0.0
+      },
+      {
+        "word": "schmalzy",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "emotional",
+      "agitated",
+      "excited",
+      "temperamental",
+      "soulful"
+    ],
+    "provenance": {
+      "wordnet": [
+        "aroused",
+        "emotional",
+        "excited"
+      ],
+      "spacy_top": []
+    }
+  },
+  "equilibrium": {
+    "seed": "equilibrium",
+    "synonyms_scored": [
+      {
+        "word": "equilibrium",
+        "score": 1.0
+      },
+      {
+        "word": "balance",
+        "score": 0.375
+      },
+      {
+        "word": "counterbalance",
+        "score": 0.237
+      },
+      {
+        "word": "equipoise",
+        "score": 0.096
+      }
+    ],
+    "top_synonyms": [
+      "equilibrium",
+      "balance",
+      "counterbalance",
+      "equipoise"
+    ],
+    "provenance": {
+      "wordnet": [
+        "balance",
+        "counterbalance",
+        "equilibrium",
+        "equipoise"
+      ],
+      "spacy_top": []
+    }
+  },
+  "euphoric": {
+    "seed": "euphoric",
+    "synonyms_scored": [
+      {
+        "word": "euphoric",
+        "score": 1.0
+      },
+      {
+        "word": "expansive",
+        "score": 0.464
+      },
+      {
+        "word": "happy",
+        "score": 0.382
+      },
+      {
+        "word": "euphoriant",
+        "score": 0.002
+      }
+    ],
+    "top_synonyms": [
+      "euphoric",
+      "expansive",
+      "happy",
+      "euphoriant"
+    ],
+    "provenance": {
+      "wordnet": [
+        "euphoric"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ever": {
+    "seed": "ever",
+    "synonyms_scored": [
+      {
+        "word": "ever",
+        "score": 1.0
+      },
+      {
+        "word": "always",
+        "score": 0.738
+      },
+      {
+        "word": "e'er",
+        "score": 0.066
+      }
+    ],
+    "top_synonyms": [
+      "ever",
+      "always",
+      "e'er"
+    ],
+    "provenance": {
+      "wordnet": [
+        "always",
+        "e'er",
+        "ever"
+      ],
+      "spacy_top": []
+    }
+  },
+  "exaltation": {
+    "seed": "exaltation",
+    "synonyms_scored": [
+      {
+        "word": "exaltation",
+        "score": 1.0
+      },
+      {
+        "word": "apotheosis",
+        "score": 0.315
+      },
+      {
+        "word": "deification",
+        "score": 0.315
+      },
+      {
+        "word": "rapture",
+        "score": 0.222
+      },
+      {
+        "word": "raptus",
+        "score": 0.163
+      },
+      {
+        "word": "ecstasy",
+        "score": 0.092
+      },
+      {
+        "word": "transport",
+        "score": 0.009
+      }
+    ],
+    "top_synonyms": [
+      "exaltation",
+      "apotheosis",
+      "deification",
+      "rapture",
+      "raptus"
+    ],
+    "provenance": {
+      "wordnet": [
+        "apotheosis",
+        "deification",
+        "ecstasy",
+        "exaltation",
+        "rapture",
+        "raptus",
+        "transport"
+      ],
+      "spacy_top": []
+    }
+  },
+  "exalted": {
+    "seed": "exalted",
+    "synonyms_scored": [
+      {
+        "word": "exalted",
+        "score": 1.0
+      },
+      {
+        "word": "noble",
+        "score": 1.0
+      },
+      {
+        "word": "proclaim",
+        "score": 1.0
+      },
+      {
+        "word": "noble-minded",
+        "score": 0.752
+      },
+      {
+        "word": "rarefied",
+        "score": 0.534
+      },
+      {
+        "word": "lofty",
+        "score": 0.424
+      },
+      {
+        "word": "inspire",
+        "score": 0.416
+      },
+      {
+        "word": "idealistic",
+        "score": 0.34
+      },
+      {
+        "word": "enliven",
+        "score": 0.3
+      },
+      {
+        "word": "invigorate",
+        "score": 0.3
+      },
+      {
+        "word": "extol",
+        "score": 0.295
+      },
+      {
+        "word": "laud",
+        "score": 0.295
+      },
+      {
+        "word": "exalt",
+        "score": 0.279
+      },
+      {
+        "word": "glorify",
+        "score": 0.279
+      },
+      {
+        "word": "high-minded",
+        "score": 0.255
+      },
+      {
+        "word": "sublime",
+        "score": 0.24
+      },
+      {
+        "word": "thrill",
+        "score": 0.24
+      },
+      {
+        "word": "animate",
+        "score": 0.189
+      },
+      {
+        "word": "inebriate",
+        "score": 0.125
+      },
+      {
+        "word": "high-flown",
+        "score": 0.122
+      },
+      {
+        "word": "elevated",
+        "score": 0.112
+      },
+      {
+        "word": "high",
+        "score": 0.107
+      },
+      {
+        "word": "rarified",
+        "score": 0.102
+      },
+      {
+        "word": "beatify",
+        "score": 0.09
+      },
+      {
+        "word": "grand",
+        "score": 0.047
+      },
+      {
+        "word": "exhilarate",
+        "score": 0.027
+      }
+    ],
+    "top_synonyms": [
+      "exalted",
+      "noble",
+      "proclaim",
+      "noble-minded",
+      "rarefied"
+    ],
+    "provenance": {
+      "wordnet": [
+        "animate",
+        "beatify",
+        "elevated",
+        "enliven",
+        "exalt",
+        "exalted",
+        "exhilarate",
+        "extol",
+        "glorify",
+        "grand",
+        "high-flown",
+        "high-minded",
+        "idealistic",
+        "inebriate",
+        "inspire",
+        "invigorate",
+        "laud",
+        "lofty",
+        "noble-minded",
+        "proclaim",
+        "rarefied",
+        "rarified",
+        "sublime",
+        "thrill"
+      ],
+      "spacy_top": []
+    }
+  },
+  "expansion": {
+    "seed": "expansion",
+    "synonyms_scored": [
+      {
+        "word": "expansion",
+        "score": 1.0
+      },
+      {
+        "word": "enlargement",
+        "score": 0.331
+      },
+      {
+        "word": "elaboration",
+        "score": 0.215
+      }
+    ],
+    "top_synonyms": [
+      "expansion",
+      "enlargement",
+      "elaboration"
+    ],
+    "provenance": {
+      "wordnet": [
+        "elaboration",
+        "enlargement",
+        "expansion"
+      ],
+      "spacy_top": []
+    }
+  },
+  "expansive": {
+    "seed": "expansive",
+    "synonyms_scored": [
+      {
+        "word": "cavernous",
+        "score": 1.0
+      },
+      {
+        "word": "expansive",
+        "score": 1.0
+      },
+      {
+        "word": "impressive",
+        "score": 0.475
+      },
+      {
+        "word": "euphoric",
+        "score": 0.464
+      },
+      {
+        "word": "inflatable",
+        "score": 0.338
+      },
+      {
+        "word": "happy",
+        "score": 0.209
+      },
+      {
+        "word": "heroic",
+        "score": 0.168
+      },
+      {
+        "word": "erectile",
+        "score": 0.121
+      },
+      {
+        "word": "grand",
+        "score": 0.073
+      },
+      {
+        "word": "communicative",
+        "score": 0.066
+      },
+      {
+        "word": "talkative",
+        "score": 0.06
+      },
+      {
+        "word": "expandable",
+        "score": 0.005
+      },
+      {
+        "word": "communicatory",
+        "score": 0.0
+      },
+      {
+        "word": "distensible",
+        "score": 0.0
+      },
+      {
+        "word": "expandible",
+        "score": 0.0
+      },
+      {
+        "word": "expansible",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "cavernous",
+      "expansive",
+      "impressive",
+      "euphoric",
+      "inflatable"
+    ],
+    "provenance": {
+      "wordnet": [
+        "expansive",
+        "grand",
+        "heroic",
+        "talkative"
+      ],
+      "spacy_top": []
+    }
+  },
+  "export": {
+    "seed": "export",
+    "synonyms_scored": [
+      {
+        "word": "export",
+        "score": 1.0
+      },
+      {
+        "word": "exportation",
+        "score": 0.338
+      }
+    ],
+    "top_synonyms": [
+      "export",
+      "exportation"
+    ],
+    "provenance": {
+      "wordnet": [
+        "export",
+        "exportation"
+      ],
+      "spacy_top": []
+    }
+  },
+  "field": {
+    "seed": "field",
+    "synonyms_scored": [
+      {
+        "word": "field",
+        "score": 1.0
+      },
+      {
+        "word": "area",
+        "score": 0.314
+      },
+      {
+        "word": "bailiwick",
+        "score": 0.207
+      },
+      {
+        "word": "study",
+        "score": 0.207
+      },
+      {
+        "word": "arena",
+        "score": 0.185
+      },
+      {
+        "word": "sphere",
+        "score": 0.183
+      },
+      {
+        "word": "plain",
+        "score": 0.182
+      },
+      {
+        "word": "orbit",
+        "score": 0.175
+      },
+      {
+        "word": "theater",
+        "score": 0.165
+      },
+      {
+        "word": "subject",
+        "score": 0.154
+      },
+      {
+        "word": "battlefield",
+        "score": 0.15
+      },
+      {
+        "word": "battleground",
+        "score": 0.15
+      },
+      {
+        "word": "theatre",
+        "score": 0.147
+      },
+      {
+        "word": "discipline",
+        "score": 0.134
+      },
+      {
+        "word": "airfield",
+        "score": 0.075
+      },
+      {
+        "word": "champaign",
+        "score": 0.073
+      },
+      {
+        "word": "domain",
+        "score": 0.017
+      }
+    ],
+    "top_synonyms": [
+      "field",
+      "area",
+      "bailiwick",
+      "study",
+      "arena"
+    ],
+    "provenance": {
+      "wordnet": [
+        "airfield",
+        "area",
+        "arena",
+        "bailiwick",
+        "battlefield",
+        "battleground",
+        "champaign",
+        "discipline",
+        "domain",
+        "field",
+        "orbit",
+        "plain",
+        "sphere",
+        "study",
+        "subject",
+        "theater",
+        "theatre"
+      ],
+      "spacy_top": []
+    }
+  },
+  "firmly": {
+    "seed": "firmly",
+    "synonyms_scored": [
+      {
+        "word": "firmly",
+        "score": 1.0
+      },
+      {
+        "word": "steadfastly",
+        "score": 0.449
+      },
+      {
+        "word": "unwaveringly",
+        "score": 0.394
+      },
+      {
+        "word": "hard",
+        "score": 0.382
+      },
+      {
+        "word": "securely",
+        "score": 0.341
+      },
+      {
+        "word": "firm",
+        "score": 0.1
+      }
+    ],
+    "top_synonyms": [
+      "firmly",
+      "steadfastly",
+      "unwaveringly",
+      "hard",
+      "securely"
+    ],
+    "provenance": {
+      "wordnet": [
+        "firm",
+        "firmly",
+        "hard",
+        "securely",
+        "steadfastly",
+        "unwaveringly"
+      ],
+      "spacy_top": []
+    }
+  },
+  "fracture": {
+    "seed": "fracture",
+    "synonyms_scored": [
+      {
+        "word": "fracture",
+        "score": 1.0
+      },
+      {
+        "word": "shift",
+        "score": 0.28
+      },
+      {
+        "word": "break",
+        "score": 0.192
+      },
+      {
+        "word": "faulting",
+        "score": 0.173
+      },
+      {
+        "word": "fault",
+        "score": 0.094
+      },
+      {
+        "word": "cracking",
+        "score": 0.078
+      },
+      {
+        "word": "crack",
+        "score": -0.051
+      }
+    ],
+    "top_synonyms": [
+      "fracture",
+      "shift",
+      "break",
+      "faulting",
+      "fault"
+    ],
+    "provenance": {
+      "wordnet": [
+        "break",
+        "crack",
+        "cracking",
+        "fault",
+        "faulting",
+        "fracture",
+        "shift"
+      ],
+      "spacy_top": []
+    }
+  },
+  "fragment": {
+    "seed": "fragment",
+    "synonyms_scored": [
+      {
+        "word": "fragment",
+        "score": 1.0
+      },
+      {
+        "word": "shard",
+        "score": 0.011
+      },
+      {
+        "word": "fragmentise",
+        "score": 0.0
+      },
+      {
+        "word": "fragmentize",
+        "score": 0.0
+      },
+      {
+        "word": "sherd",
+        "score": -0.068
+      }
+    ],
+    "top_synonyms": [
+      "fragment",
+      "shard",
+      "fragmentise",
+      "fragmentize",
+      "sherd"
+    ],
+    "provenance": {
+      "wordnet": [
+        "fragment",
+        "fragmentise",
+        "fragmentize",
+        "shard",
+        "sherd"
+      ],
+      "spacy_top": []
+    }
+  },
+  "fulfillment": {
+    "seed": "fulfillment",
+    "synonyms_scored": [
+      {
+        "word": "fulfillment",
+        "score": 1.0
+      },
+      {
+        "word": "fulfilment",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "fulfillment",
+      "fulfilment"
+    ],
+    "provenance": {
+      "wordnet": [
+        "fulfillment",
+        "fulfilment"
+      ],
+      "spacy_top": []
+    }
+  },
+  "gentle": {
+    "seed": "gentle",
+    "synonyms_scored": [
+      {
+        "word": "gentle",
+        "score": 1.0
+      },
+      {
+        "word": "docile",
+        "score": 0.466
+      },
+      {
+        "word": "tame",
+        "score": 0.366
+      },
+      {
+        "word": "tamed",
+        "score": 0.35
+      },
+      {
+        "word": "noble",
+        "score": 0.317
+      },
+      {
+        "word": "blue",
+        "score": 0.297
+      },
+      {
+        "word": "aristocratic",
+        "score": 0.292
+      },
+      {
+        "word": "patrician",
+        "score": 0.292
+      },
+      {
+        "word": "blue-blooded",
+        "score": 0.276
+      },
+      {
+        "word": "appease",
+        "score": 0.275
+      },
+      {
+        "word": "easy",
+        "score": 0.267
+      },
+      {
+        "word": "assuage",
+        "score": 0.242
+      },
+      {
+        "word": "mollify",
+        "score": 0.242
+      },
+      {
+        "word": "pacify",
+        "score": 0.242
+      },
+      {
+        "word": "placate",
+        "score": 0.242
+      },
+      {
+        "word": "mild",
+        "score": 0.219
+      },
+      {
+        "word": "ennoble",
+        "score": 0.212
+      },
+      {
+        "word": "conciliate",
+        "score": 0.173
+      },
+      {
+        "word": "soft",
+        "score": 0.16
+      },
+      {
+        "word": "kind",
+        "score": 0.159
+      },
+      {
+        "word": "light",
+        "score": 0.077
+      },
+      {
+        "word": "gruntle",
+        "score": 0.068
+      },
+      {
+        "word": "gradual",
+        "score": 0.065
+      },
+      {
+        "word": "aristocratical",
+        "score": 0.0
+      },
+      {
+        "word": "lenify",
+        "score": 0.0
+      },
+      {
+        "word": "entitle",
+        "score": -0.001
+      }
+    ],
+    "top_synonyms": [
+      "gentle",
+      "docile",
+      "tame",
+      "tamed",
+      "noble"
+    ],
+    "provenance": {
+      "wordnet": [
+        "appease",
+        "aristocratic",
+        "aristocratical",
+        "assuage",
+        "blue",
+        "blue-blooded",
+        "conciliate",
+        "docile",
+        "easy",
+        "ennoble",
+        "entitle",
+        "gentle",
+        "gruntle",
+        "lenify",
+        "mollify",
+        "pacify",
+        "patrician",
+        "placate",
+        "soft"
+      ],
+      "spacy_top": []
+    }
+  },
+  "glyph": {
+    "seed": "glyph",
+    "synonyms_scored": [
+      {
+        "word": "glyph",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "glyph"
+    ],
+    "provenance": {
+      "wordnet": [
+        "glyph"
+      ],
+      "spacy_top": []
+    }
+  },
+  "glyphwork": {
+    "seed": "glyphwork",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "grief": {
+    "seed": "grief",
+    "synonyms_scored": [
+      {
+        "word": "grief",
+        "score": 1.0
+      },
+      {
+        "word": "sorrow",
+        "score": 1.0
+      },
+      {
+        "word": "heartbreak",
+        "score": 0.745
+      },
+      {
+        "word": "heartache",
+        "score": 0.586
+      },
+      {
+        "word": "brokenheartedness",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "grief",
+      "sorrow",
+      "heartbreak",
+      "heartache",
+      "brokenheartedness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "brokenheartedness",
+        "grief",
+        "heartache",
+        "heartbreak",
+        "sorrow"
+      ],
+      "spacy_top": []
+    }
+  },
+  "grief-ful": {
+    "seed": "grief-ful",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "held": {
+    "seed": "held",
+    "synonyms_scored": [
+      {
+        "word": "held",
+        "score": 1.0
+      },
+      {
+        "word": "have",
+        "score": 0.498
+      },
+      {
+        "word": "throw",
+        "score": 0.498
+      },
+      {
+        "word": "take",
+        "score": 0.489
+      },
+      {
+        "word": "accommodate",
+        "score": 0.461
+      },
+      {
+        "word": "give",
+        "score": 0.454
+      },
+      {
+        "word": "keep",
+        "score": 0.445
+      },
+      {
+        "word": "obtain",
+        "score": 0.432
+      },
+      {
+        "word": "declare",
+        "score": 0.422
+      },
+      {
+        "word": "hold",
+        "score": 0.421
+      },
+      {
+        "word": "support",
+        "score": 0.421
+      },
+      {
+        "word": "admit",
+        "score": 0.419
+      },
+      {
+        "word": "agree",
+        "score": 0.419
+      },
+      {
+        "word": "concur",
+        "score": 0.419
+      },
+      {
+        "word": "reserve",
+        "score": 0.401
+      },
+      {
+        "word": "deem",
+        "score": 0.386
+      },
+      {
+        "word": "check",
+        "score": 0.379
+      },
+      {
+        "word": "contain",
+        "score": 0.362
+      },
+      {
+        "word": "apply",
+        "score": 0.346
+      },
+      {
+        "word": "maintain",
+        "score": 0.342
+      },
+      {
+        "word": "retain",
+        "score": 0.342
+      },
+      {
+        "word": "sustain",
+        "score": 0.342
+      },
+      {
+        "word": "oblige",
+        "score": 0.337
+      },
+      {
+        "word": "carry",
+        "score": 0.319
+      },
+      {
+        "word": "make",
+        "score": 0.319
+      },
+      {
+        "word": "arrest",
+        "score": 0.308
+      },
+      {
+        "word": "moderate",
+        "score": 0.289
+      },
+      {
+        "word": "bear",
+        "score": 0.288
+      },
+      {
+        "word": "prevail",
+        "score": 0.276
+      },
+      {
+        "word": "curb",
+        "score": 0.27
+      },
+      {
+        "word": "harbour",
+        "score": 0.267
+      },
+      {
+        "word": "defy",
+        "score": 0.266
+      },
+      {
+        "word": "halt",
+        "score": 0.266
+      },
+      {
+        "word": "defend",
+        "score": 0.228
+      },
+      {
+        "word": "entertain",
+        "score": 0.228
+      },
+      {
+        "word": "restrain",
+        "score": 0.218
+      },
+      {
+        "word": "guard",
+        "score": 0.207
+      },
+      {
+        "word": "bind",
+        "score": 0.197
+      },
+      {
+        "word": "control",
+        "score": 0.178
+      },
+      {
+        "word": "nurse",
+        "score": 0.176
+      },
+      {
+        "word": "concord",
+        "score": 0.141
+      },
+      {
+        "word": "harbor",
+        "score": 0.141
+      },
+      {
+        "word": "book",
+        "score": 0.138
+      },
+      {
+        "word": "confine",
+        "score": 0.128
+      },
+      {
+        "word": "adjudge",
+        "score": 0.08
+      },
+      {
+        "word": "withstand",
+        "score": 0.053
+      },
+      {
+        "word": "obligate",
+        "score": 0.01
+      }
+    ],
+    "top_synonyms": [
+      "held",
+      "have",
+      "throw",
+      "take",
+      "accommodate"
+    ],
+    "provenance": {
+      "wordnet": [
+        "accommodate",
+        "adjudge",
+        "admit",
+        "agree",
+        "apply",
+        "arrest",
+        "bear",
+        "bind",
+        "book",
+        "carry",
+        "check",
+        "concord",
+        "concur",
+        "confine",
+        "contain",
+        "control",
+        "curb",
+        "declare",
+        "deem",
+        "defend",
+        "defy",
+        "entertain",
+        "give",
+        "guard",
+        "halt",
+        "harbor",
+        "harbour",
+        "have",
+        "held",
+        "hold",
+        "keep",
+        "maintain",
+        "make",
+        "moderate",
+        "nurse",
+        "obligate",
+        "oblige",
+        "obtain",
+        "prevail",
+        "reserve",
+        "restrain",
+        "retain",
+        "support",
+        "sustain",
+        "take",
+        "throw",
+        "withstand"
+      ],
+      "spacy_top": []
+    }
+  },
+  "honor": {
+    "seed": "honor",
+    "synonyms_scored": [
+      {
+        "word": "honor",
+        "score": 1.0
+      },
+      {
+        "word": "honour",
+        "score": 1.0
+      },
+      {
+        "word": "laurels",
+        "score": 0.636
+      },
+      {
+        "word": "reward",
+        "score": 0.534
+      },
+      {
+        "word": "accolade",
+        "score": 0.507
+      },
+      {
+        "word": "award",
+        "score": 0.507
+      },
+      {
+        "word": "favour",
+        "score": 0.452
+      },
+      {
+        "word": "respect",
+        "score": 0.422
+      },
+      {
+        "word": "favor",
+        "score": 0.409
+      },
+      {
+        "word": "grace",
+        "score": 0.404
+      },
+      {
+        "word": "observe",
+        "score": 0.272
+      },
+      {
+        "word": "purity",
+        "score": 0.213
+      },
+      {
+        "word": "pureness",
+        "score": 0.1
+      },
+      {
+        "word": "laurel",
+        "score": 0.07
+      }
+    ],
+    "top_synonyms": [
+      "honor",
+      "honour",
+      "laurels",
+      "reward",
+      "accolade"
+    ],
+    "provenance": {
+      "wordnet": [
+        "accolade",
+        "award",
+        "honor",
+        "honour",
+        "laurel",
+        "observe",
+        "pureness",
+        "purity",
+        "respect",
+        "reward"
+      ],
+      "spacy_top": []
+    }
+  },
+  "hum": {
+    "seed": "hum",
+    "synonyms_scored": [
+      {
+        "word": "hua",
+        "score": 1.0
+      },
+      {
+        "word": "hum",
+        "score": 1.0
+      },
+      {
+        "word": "harkat-ul-mujahidin",
+        "score": 0.321
+      },
+      {
+        "word": "humming",
+        "score": 0.122
+      },
+      {
+        "word": "busyness",
+        "score": 0.074
+      },
+      {
+        "word": "thrum",
+        "score": 0.073
+      },
+      {
+        "word": "buzz",
+        "score": 0.055
+      },
+      {
+        "word": "seethe",
+        "score": -0.018
+      }
+    ],
+    "top_synonyms": [
+      "hua",
+      "hum",
+      "harkat-ul-mujahidin",
+      "humming",
+      "busyness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "busyness",
+        "buzz",
+        "harkat-ul-mujahidin",
+        "hua",
+        "hum",
+        "humming",
+        "seethe",
+        "thrum"
+      ],
+      "spacy_top": []
+    }
+  },
+  "identifier": {
+    "seed": "identifier",
+    "synonyms_scored": [
+      {
+        "word": "identifier",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "identifier"
+    ],
+    "provenance": {
+      "wordnet": [
+        "identifier"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ignored": {
+    "seed": "ignored",
+    "synonyms_scored": [
+      {
+        "word": "ignored",
+        "score": 1.0
+      },
+      {
+        "word": "neglected",
+        "score": 1.0
+      },
+      {
+        "word": "ignore",
+        "score": 0.47
+      },
+      {
+        "word": "unnoticed",
+        "score": 0.401
+      },
+      {
+        "word": "dismiss",
+        "score": 0.341
+      },
+      {
+        "word": "disregard",
+        "score": 0.333
+      },
+      {
+        "word": "neglect",
+        "score": 0.279
+      },
+      {
+        "word": "snub",
+        "score": 0.254
+      },
+      {
+        "word": "unheeded",
+        "score": 0.226
+      },
+      {
+        "word": "cut",
+        "score": 0.059
+      },
+      {
+        "word": "discount",
+        "score": -0.026
+      }
+    ],
+    "top_synonyms": [
+      "ignored",
+      "neglected",
+      "ignore",
+      "unnoticed",
+      "dismiss"
+    ],
+    "provenance": {
+      "wordnet": [
+        "cut",
+        "discount",
+        "dismiss",
+        "disregard",
+        "ignore",
+        "ignored",
+        "neglect",
+        "neglected",
+        "snub",
+        "unheeded"
+      ],
+      "spacy_top": []
+    }
+  },
+  "indicator": {
+    "seed": "indicator",
+    "synonyms_scored": [
+      {
+        "word": "index",
+        "score": 1.0
+      },
+      {
+        "word": "indicator",
+        "score": 1.0
+      },
+      {
+        "word": "indicant",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "index",
+      "indicator",
+      "indicant"
+    ],
+    "provenance": {
+      "wordnet": [
+        "index",
+        "indicant",
+        "indicator"
+      ],
+      "spacy_top": []
+    }
+  },
+  "insight": {
+    "seed": "insight",
+    "synonyms_scored": [
+      {
+        "word": "insight",
+        "score": 1.0
+      },
+      {
+        "word": "perceptiveness",
+        "score": 0.548
+      },
+      {
+        "word": "penetration",
+        "score": 0.256
+      },
+      {
+        "word": "brainwave",
+        "score": 0.209
+      },
+      {
+        "word": "brainstorm",
+        "score": 0.19
+      },
+      {
+        "word": "perceptivity",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "insight",
+      "perceptiveness",
+      "penetration",
+      "brainwave",
+      "brainstorm"
+    ],
+    "provenance": {
+      "wordnet": [
+        "brainstorm",
+        "brainwave",
+        "insight",
+        "penetration",
+        "perceptiveness",
+        "perceptivity"
+      ],
+      "spacy_top": []
+    }
+  },
+  "insightful": {
+    "seed": "insightful",
+    "synonyms_scored": [
+      {
+        "word": "insightful",
+        "score": 1.0
+      },
+      {
+        "word": "perceptive",
+        "score": 0.432
+      }
+    ],
+    "top_synonyms": [
+      "insightful",
+      "perceptive"
+    ],
+    "provenance": {
+      "wordnet": [
+        "insightful"
+      ],
+      "spacy_top": []
+    }
+  },
+  "intention": {
+    "seed": "intention",
+    "synonyms_scored": [
+      {
+        "word": "intent",
+        "score": 1.0
+      },
+      {
+        "word": "intention",
+        "score": 1.0
+      },
+      {
+        "word": "purpose",
+        "score": 0.805
+      },
+      {
+        "word": "aim",
+        "score": 0.42
+      },
+      {
+        "word": "design",
+        "score": 0.224
+      }
+    ],
+    "top_synonyms": [
+      "intent",
+      "intention",
+      "purpose",
+      "aim",
+      "design"
+    ],
+    "provenance": {
+      "wordnet": [
+        "aim",
+        "design",
+        "intent",
+        "intention",
+        "purpose"
+      ],
+      "spacy_top": []
+    }
+  },
+  "invocation": {
+    "seed": "invocation",
+    "synonyms_scored": [
+      {
+        "word": "invocation",
+        "score": 1.0
+      },
+      {
+        "word": "supplication",
+        "score": 0.447
+      },
+      {
+        "word": "conjuring",
+        "score": 0.327
+      },
+      {
+        "word": "conjuration",
+        "score": 0.041
+      },
+      {
+        "word": "conjury",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "invocation",
+      "supplication",
+      "conjuring",
+      "conjuration",
+      "conjury"
+    ],
+    "provenance": {
+      "wordnet": [
+        "conjuration",
+        "conjuring",
+        "conjury",
+        "invocation",
+        "supplication"
+      ],
+      "spacy_top": []
+    }
+  },
+  "joy": {
+    "seed": "joy",
+    "synonyms_scored": [
+      {
+        "word": "joy",
+        "score": 1.0
+      },
+      {
+        "word": "rejoice",
+        "score": 1.0
+      },
+      {
+        "word": "delight",
+        "score": 0.316
+      },
+      {
+        "word": "gladden",
+        "score": 0.289
+      },
+      {
+        "word": "pleasure",
+        "score": 0.241
+      },
+      {
+        "word": "joyfulness",
+        "score": 0.205
+      },
+      {
+        "word": "joyousness",
+        "score": 0.135
+      }
+    ],
+    "top_synonyms": [
+      "joy",
+      "rejoice",
+      "delight",
+      "gladden",
+      "pleasure"
+    ],
+    "provenance": {
+      "wordnet": [
+        "delight",
+        "gladden",
+        "joy",
+        "joyfulness",
+        "joyousness",
+        "pleasure",
+        "rejoice"
+      ],
+      "spacy_top": []
+    }
+  },
+  "joyful": {
+    "seed": "joyful",
+    "synonyms_scored": [
+      {
+        "word": "joyful",
+        "score": 1.0
+      },
+      {
+        "word": "joyous",
+        "score": 1.0
+      },
+      {
+        "word": "happy",
+        "score": 0.734
+      },
+      {
+        "word": "elated",
+        "score": 0.376
+      },
+      {
+        "word": "overjoyed",
+        "score": 0.287
+      },
+      {
+        "word": "gleeful",
+        "score": 0.27
+      },
+      {
+        "word": "jubilant",
+        "score": 0.27
+      },
+      {
+        "word": "beatific",
+        "score": 0.25
+      }
+    ],
+    "top_synonyms": [
+      "joyful",
+      "joyous",
+      "happy",
+      "elated",
+      "overjoyed"
+    ],
+    "provenance": {
+      "wordnet": [
+        "elated",
+        "gleeful",
+        "joyful",
+        "jubilant"
+      ],
+      "spacy_top": []
+    }
+  },
+  "jubilant": {
+    "seed": "jubilant",
+    "synonyms_scored": [
+      {
+        "word": "exultant",
+        "score": 1.0
+      },
+      {
+        "word": "exulting",
+        "score": 1.0
+      },
+      {
+        "word": "gleeful",
+        "score": 1.0
+      },
+      {
+        "word": "jubilant",
+        "score": 1.0
+      },
+      {
+        "word": "rejoicing",
+        "score": 1.0
+      },
+      {
+        "word": "triumphal",
+        "score": 1.0
+      },
+      {
+        "word": "triumphant",
+        "score": 1.0
+      },
+      {
+        "word": "prideful",
+        "score": 0.451
+      },
+      {
+        "word": "elated",
+        "score": 0.392
+      },
+      {
+        "word": "joyful",
+        "score": 0.27
+      },
+      {
+        "word": "joyous",
+        "score": 0.27
+      }
+    ],
+    "top_synonyms": [
+      "exultant",
+      "exulting",
+      "gleeful",
+      "jubilant",
+      "rejoicing"
+    ],
+    "provenance": {
+      "wordnet": [
+        "elated",
+        "exultant",
+        "exulting",
+        "gleeful",
+        "joyful",
+        "jubilant",
+        "prideful",
+        "rejoicing",
+        "triumphal",
+        "triumphant"
+      ],
+      "spacy_top": []
+    }
+  },
+  "justification": {
+    "seed": "justification",
+    "synonyms_scored": [
+      {
+        "word": "justification",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "justification"
+    ],
+    "provenance": {
+      "wordnet": [
+        "justification"
+      ],
+      "spacy_top": []
+    }
+  },
+  "karmic": {
+    "seed": "karmic",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "law": {
+    "seed": "law",
+    "synonyms_scored": [
+      {
+        "word": "law",
+        "score": 1.0
+      },
+      {
+        "word": "jurisprudence",
+        "score": 0.279
+      },
+      {
+        "word": "police",
+        "score": 0.149
+      },
+      {
+        "word": "constabulary",
+        "score": 0.076
+      }
+    ],
+    "top_synonyms": [
+      "law",
+      "jurisprudence",
+      "police",
+      "constabulary"
+    ],
+    "provenance": {
+      "wordnet": [
+        "constabulary",
+        "jurisprudence",
+        "law",
+        "police"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ledger": {
+    "seed": "ledger",
+    "synonyms_scored": [
+      {
+        "word": "ledger",
+        "score": 1.0
+      },
+      {
+        "word": "leger",
+        "score": 0.048
+      },
+      {
+        "word": "book",
+        "score": 0.004
+      },
+      {
+        "word": "daybook",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "ledger",
+      "leger",
+      "book",
+      "daybook"
+    ],
+    "provenance": {
+      "wordnet": [
+        "book",
+        "daybook",
+        "ledger",
+        "leger"
+      ],
+      "spacy_top": []
+    }
+  },
+  "legacy": {
+    "seed": "legacy",
+    "synonyms_scored": [
+      {
+        "word": "legacy",
+        "score": 1.0
+      },
+      {
+        "word": "bequest",
+        "score": 0.033
+      }
+    ],
+    "top_synonyms": [
+      "legacy",
+      "bequest"
+    ],
+    "provenance": {
+      "wordnet": [
+        "bequest",
+        "legacy"
+      ],
+      "spacy_top": []
+    }
+  },
+  "lens": {
+    "seed": "lens",
+    "synonyms_scored": [
+      {
+        "word": "lens",
+        "score": 1.0
+      },
+      {
+        "word": "lense",
+        "score": 0.238
+      }
+    ],
+    "top_synonyms": [
+      "lens",
+      "lense"
+    ],
+    "provenance": {
+      "wordnet": [
+        "lens",
+        "lense"
+      ],
+      "spacy_top": []
+    }
+  },
+  "let": {
+    "seed": "let",
+    "synonyms_scored": [
+      {
+        "word": "let",
+        "score": 1.0
+      },
+      {
+        "word": "leave",
+        "score": 0.54
+      },
+      {
+        "word": "have",
+        "score": 0.455
+      },
+      {
+        "word": "countenance",
+        "score": 0.377
+      },
+      {
+        "word": "allow",
+        "score": 0.28
+      },
+      {
+        "word": "get",
+        "score": 0.251
+      },
+      {
+        "word": "permit",
+        "score": 0.218
+      },
+      {
+        "word": "lease",
+        "score": 0.194
+      },
+      {
+        "word": "rent",
+        "score": 0.059
+      },
+      {
+        "word": "lashkar-e-taiba",
+        "score": 0.03
+      },
+      {
+        "word": "lashkar-e-tayyiba",
+        "score": 0.03
+      },
+      {
+        "word": "lashkar-e-toiba",
+        "score": 0.03
+      }
+    ],
+    "top_synonyms": [
+      "let",
+      "leave",
+      "have",
+      "countenance",
+      "allow"
+    ],
+    "provenance": {
+      "wordnet": [
+        "allow",
+        "countenance",
+        "get",
+        "have",
+        "lashkar-e-taiba",
+        "lashkar-e-tayyiba",
+        "lashkar-e-toiba",
+        "lease",
+        "let",
+        "permit",
+        "rent"
+      ],
+      "spacy_top": []
+    }
+  },
+  "light": {
+    "seed": "light",
+    "synonyms_scored": [
+      {
+        "word": "illuminated",
+        "score": 1.0
+      },
+      {
+        "word": "illumination",
+        "score": 1.0
+      },
+      {
+        "word": "light",
+        "score": 1.0
+      },
+      {
+        "word": "light-duty",
+        "score": 0.714
+      },
+      {
+        "word": "light-colored",
+        "score": 0.704
+      },
+      {
+        "word": "light-headed",
+        "score": 0.655
+      },
+      {
+        "word": "light-footed",
+        "score": 0.641
+      },
+      {
+        "word": "light-armed",
+        "score": 0.617
+      },
+      {
+        "word": "fluorescent",
+        "score": 0.451
+      },
+      {
+        "word": "luminance",
+        "score": 0.451
+      },
+      {
+        "word": "luminescent",
+        "score": 0.451
+      },
+      {
+        "word": "luminosity",
+        "score": 0.429
+      },
+      {
+        "word": "phosphorescent",
+        "score": 0.381
+      },
+      {
+        "word": "illuminate",
+        "score": 0.375
+      },
+      {
+        "word": "brightness",
+        "score": 0.342
+      },
+      {
+        "word": "lightness",
+        "score": 0.342
+      },
+      {
+        "word": "lighting",
+        "score": 0.298
+      },
+      {
+        "word": "clean",
+        "score": 0.297
+      },
+      {
+        "word": "lighter",
+        "score": 0.264
+      },
+      {
+        "word": "incandescent",
+        "score": 0.234
+      },
+      {
+        "word": "lighted",
+        "score": 0.234
+      },
+      {
+        "word": "lit",
+        "score": 0.234
+      },
+      {
+        "word": "weak",
+        "score": 0.225
+      },
+      {
+        "word": "easy",
+        "score": 0.223
+      },
+      {
+        "word": "short",
+        "score": 0.223
+      },
+      {
+        "word": "lightweight",
+        "score": 0.221
+      },
+      {
+        "word": "bioluminescent",
+        "score": 0.199
+      },
+      {
+        "word": "low-cal",
+        "score": 0.181
+      },
+      {
+        "word": "igniter",
+        "score": 0.167
+      },
+      {
+        "word": "pure",
+        "score": 0.164
+      },
+      {
+        "word": "faint",
+        "score": 0.157
+      },
+      {
+        "word": "loose",
+        "score": 0.14
+      },
+      {
+        "word": "clear",
+        "score": 0.137
+      },
+      {
+        "word": "insufficient",
+        "score": 0.135
+      },
+      {
+        "word": "buoyant",
+        "score": 0.13
+      },
+      {
+        "word": "airy",
+        "score": 0.127
+      },
+      {
+        "word": "pale",
+        "score": 0.127
+      },
+      {
+        "word": "pastel",
+        "score": 0.127
+      },
+      {
+        "word": "powdery",
+        "score": 0.127
+      },
+      {
+        "word": "deficient",
+        "score": 0.122
+      },
+      {
+        "word": "idle",
+        "score": 0.122
+      },
+      {
+        "word": "fall",
+        "score": 0.12
+      },
+      {
+        "word": "ill",
+        "score": 0.115
+      },
+      {
+        "word": "lightly",
+        "score": 0.109
+      },
+      {
+        "word": "shallow",
+        "score": 0.109
+      },
+      {
+        "word": "spark",
+        "score": 0.109
+      },
+      {
+        "word": "reddened",
+        "score": 0.105
+      },
+      {
+        "word": "fat-free",
+        "score": 0.101
+      },
+      {
+        "word": "insignificant",
+        "score": 0.101
+      },
+      {
+        "word": "perch",
+        "score": 0.101
+      },
+      {
+        "word": "scant",
+        "score": 0.101
+      },
+      {
+        "word": "casual",
+        "score": 0.096
+      },
+      {
+        "word": "bright",
+        "score": 0.095
+      },
+      {
+        "word": "feathery",
+        "score": 0.095
+      },
+      {
+        "word": "dismount",
+        "score": 0.093
+      },
+      {
+        "word": "lightly-armed",
+        "score": 0.09
+      },
+      {
+        "word": "lite",
+        "score": 0.088
+      },
+      {
+        "word": "diet",
+        "score": 0.084
+      },
+      {
+        "word": "fooling",
+        "score": 0.083
+      },
+      {
+        "word": "gentle",
+        "score": 0.077
+      },
+      {
+        "word": "livid",
+        "score": 0.074
+      },
+      {
+        "word": "sick",
+        "score": 0.074
+      },
+      {
+        "word": "chiffon",
+        "score": 0.073
+      },
+      {
+        "word": "sparkle",
+        "score": 0.073
+      },
+      {
+        "word": "frivolous",
+        "score": 0.067
+      },
+      {
+        "word": "illuminating",
+        "score": 0.065
+      },
+      {
+        "word": "calorie-free",
+        "score": 0.062
+      },
+      {
+        "word": "tripping",
+        "score": 0.059
+      },
+      {
+        "word": "twinkle",
+        "score": 0.056
+      },
+      {
+        "word": "unclouded",
+        "score": 0.055
+      },
+      {
+        "word": "lightheaded",
+        "score": 0.051
+      },
+      {
+        "word": "floodlit",
+        "score": 0.046
+      },
+      {
+        "word": "flimsy",
+        "score": 0.042
+      },
+      {
+        "word": "wakeful",
+        "score": 0.042
+      },
+      {
+        "word": "digestible",
+        "score": 0.039
+      },
+      {
+        "word": "alight",
+        "score": 0.038
+      },
+      {
+        "word": "ignite",
+        "score": 0.038
+      },
+      {
+        "word": "illumine",
+        "score": 0.038
+      },
+      {
+        "word": "inflamed",
+        "score": 0.038
+      },
+      {
+        "word": "ignitor",
+        "score": 0.035
+      },
+      {
+        "word": "bantamweight",
+        "score": 0.013
+      },
+      {
+        "word": "featherweight",
+        "score": 0.013
+      },
+      {
+        "word": "flyweight",
+        "score": 0.013
+      },
+      {
+        "word": "floaty",
+        "score": 0.005
+      },
+      {
+        "word": "leavened",
+        "score": 0.005
+      },
+      {
+        "word": "nonfat",
+        "score": 0.005
+      },
+      {
+        "word": "candent",
+        "score": 0.0
+      },
+      {
+        "word": "candescent",
+        "score": 0.0
+      },
+      {
+        "word": "fatless",
+        "score": 0.0
+      },
+      {
+        "word": "featherlike",
+        "score": 0.0
+      },
+      {
+        "word": "floodlighted",
+        "score": 0.0
+      },
+      {
+        "word": "illume",
+        "score": 0.0
+      },
+      {
+        "word": "lamplit",
+        "score": 0.0
+      },
+      {
+        "word": "lightsome",
+        "score": 0.0
+      },
+      {
+        "word": "luminousness",
+        "score": 0.0
+      },
+      {
+        "word": "palish",
+        "score": 0.0
+      },
+      {
+        "word": "sluttish",
+        "score": -0.001
+      },
+      {
+        "word": "friable",
+        "score": -0.006
+      },
+      {
+        "word": "sandy",
+        "score": -0.006
+      },
+      {
+        "word": "unhorse",
+        "score": -0.008
+      },
+      {
+        "word": "unaccented",
+        "score": -0.022
+      },
+      {
+        "word": "wanton",
+        "score": -0.022
+      },
+      {
+        "word": "promiscuous",
+        "score": -0.032
+      },
+      {
+        "word": "abstemious",
+        "score": -0.038
+      },
+      {
+        "word": "swooning",
+        "score": -0.069
+      }
+    ],
+    "top_synonyms": [
+      "illuminated",
+      "illumination",
+      "light",
+      "light-duty",
+      "light-colored"
+    ],
+    "provenance": {
+      "wordnet": [
+        "abstemious",
+        "alight",
+        "brightness",
+        "calorie-free",
+        "clean",
+        "clear",
+        "dismount",
+        "easy",
+        "faint",
+        "fall",
+        "idle",
+        "ignite",
+        "igniter",
+        "ignitor",
+        "illume",
+        "illuminate",
+        "illumination",
+        "illumine",
+        "light",
+        "light-colored",
+        "light-headed",
+        "lighter",
+        "lightheaded",
+        "lighting",
+        "lightly",
+        "lightness",
+        "lightsome",
+        "lite",
+        "loose",
+        "low-cal",
+        "luminance",
+        "luminosity",
+        "luminousness",
+        "perch",
+        "promiscuous",
+        "scant",
+        "short",
+        "sluttish",
+        "spark",
+        "sparkle",
+        "swooning",
+        "tripping",
+        "twinkle",
+        "unaccented",
+        "unclouded",
+        "unhorse",
+        "wakeful",
+        "wanton",
+        "weak"
+      ],
+      "spacy_top": []
+    }
+  },
+  "lightpath": {
+    "seed": "lightpath",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "listen": {
+    "seed": "listen",
+    "synonyms_scored": [
+      {
+        "word": "listen",
+        "score": 1.0
+      },
+      {
+        "word": "hear",
+        "score": 0.676
+      },
+      {
+        "word": "mind",
+        "score": 0.593
+      },
+      {
+        "word": "heed",
+        "score": 0.305
+      }
+    ],
+    "top_synonyms": [
+      "listen",
+      "hear",
+      "mind",
+      "heed"
+    ],
+    "provenance": {
+      "wordnet": [
+        "hear",
+        "heed",
+        "listen",
+        "mind"
+      ],
+      "spacy_top": []
+    }
+  },
+  "long": {
+    "seed": "long",
+    "synonyms_scored": [
+      {
+        "word": "long",
+        "score": 1.0
+      },
+      {
+        "word": "long-lasting",
+        "score": 0.726
+      },
+      {
+        "word": "long-term",
+        "score": 0.704
+      },
+      {
+        "word": "long-run",
+        "score": 0.692
+      },
+      {
+        "word": "long-dated",
+        "score": 0.683
+      },
+      {
+        "word": "long-acting",
+        "score": 0.667
+      },
+      {
+        "word": "stressed",
+        "score": 0.648
+      },
+      {
+        "word": "long-distance",
+        "score": 0.637
+      },
+      {
+        "word": "long-range",
+        "score": 0.636
+      },
+      {
+        "word": "lasting",
+        "score": 0.554
+      },
+      {
+        "word": "long-lived",
+        "score": 0.549
+      },
+      {
+        "word": "abundant",
+        "score": 0.527
+      },
+      {
+        "word": "tenacious",
+        "score": 0.522
+      },
+      {
+        "word": "lengthy",
+        "score": 0.483
+      },
+      {
+        "word": "longer",
+        "score": 0.465
+      },
+      {
+        "word": "far",
+        "score": 0.446
+      },
+      {
+        "word": "prolonged",
+        "score": 0.429
+      },
+      {
+        "word": "durable",
+        "score": 0.401
+      },
+      {
+        "word": "extended",
+        "score": 0.383
+      },
+      {
+        "word": "longest",
+        "score": 0.379
+      },
+      {
+        "word": "endless",
+        "score": 0.334
+      },
+      {
+        "word": "unsound",
+        "score": 0.321
+      },
+      {
+        "word": "ache",
+        "score": 0.317
+      },
+      {
+        "word": "drawn-out",
+        "score": 0.312
+      },
+      {
+        "word": "protracted",
+        "score": 0.311
+      },
+      {
+        "word": "lengthened",
+        "score": 0.278
+      },
+      {
+        "word": "farsighted",
+        "score": 0.277
+      },
+      {
+        "word": "tall",
+        "score": 0.273
+      },
+      {
+        "word": "interminable",
+        "score": 0.267
+      },
+      {
+        "word": "longitudinal",
+        "score": 0.255
+      },
+      {
+        "word": "lifelong",
+        "score": 0.237
+      },
+      {
+        "word": "elongate",
+        "score": 0.223
+      },
+      {
+        "word": "elongated",
+        "score": 0.223
+      },
+      {
+        "word": "womb-to-tomb",
+        "score": 0.21
+      },
+      {
+        "word": "yen",
+        "score": 0.21
+      },
+      {
+        "word": "eternal",
+        "score": 0.204
+      },
+      {
+        "word": "foresighted",
+        "score": 0.197
+      },
+      {
+        "word": "perennial",
+        "score": 0.193
+      },
+      {
+        "word": "lank",
+        "score": 0.18
+      },
+      {
+        "word": "longstanding",
+        "score": 0.175
+      },
+      {
+        "word": "languish",
+        "score": 0.161
+      },
+      {
+        "word": "retentive",
+        "score": 0.139
+      },
+      {
+        "word": "overnight",
+        "score": 0.115
+      },
+      {
+        "word": "hanker",
+        "score": 0.089
+      },
+      {
+        "word": "yearn",
+        "score": 0.089
+      },
+      {
+        "word": "provident",
+        "score": 0.085
+      },
+      {
+        "word": "longish",
+        "score": 0.082
+      },
+      {
+        "word": "pine",
+        "score": 0.054
+      },
+      {
+        "word": "polysyllabic",
+        "score": 0.054
+      },
+      {
+        "word": "semipermanent",
+        "score": 0.047
+      },
+      {
+        "word": "agelong",
+        "score": 0.0
+      },
+      {
+        "word": "bimestrial",
+        "score": 0.0
+      },
+      {
+        "word": "longsighted",
+        "score": 0.0
+      },
+      {
+        "word": "prospicient",
+        "score": 0.0
+      },
+      {
+        "word": "recollective",
+        "score": 0.0
+      },
+      {
+        "word": "oblong",
+        "score": -0.022
+      },
+      {
+        "word": "yearlong",
+        "score": -0.043
+      },
+      {
+        "word": "farseeing",
+        "score": -0.051
+      },
+      {
+        "word": "daylong",
+        "score": -0.06
+      },
+      {
+        "word": "sesquipedalian",
+        "score": -0.099
+      },
+      {
+        "word": "foresightful",
+        "score": -0.104
+      },
+      {
+        "word": "extendable",
+        "score": -0.143
+      },
+      {
+        "word": "extendible",
+        "score": -0.143
+      },
+      {
+        "word": "nightlong",
+        "score": -0.156
+      }
+    ],
+    "top_synonyms": [
+      "long",
+      "long-lasting",
+      "long-term",
+      "long-run",
+      "long-dated"
+    ],
+    "provenance": {
+      "wordnet": [
+        "farseeing",
+        "farsighted",
+        "foresighted",
+        "foresightful",
+        "hanker",
+        "long",
+        "longsighted",
+        "prospicient",
+        "recollective",
+        "retentive",
+        "tenacious",
+        "yearn"
+      ],
+      "spacy_top": []
+    }
+  },
+  "longing": {
+    "seed": "longing",
+    "synonyms_scored": [
+      {
+        "word": "longing",
+        "score": 1.0
+      },
+      {
+        "word": "yearning",
+        "score": 0.396
+      },
+      {
+        "word": "hanker",
+        "score": 0.359
+      },
+      {
+        "word": "yearn",
+        "score": 0.359
+      },
+      {
+        "word": "long",
+        "score": 0.168
+      },
+      {
+        "word": "hungriness",
+        "score": -0.001
+      }
+    ],
+    "top_synonyms": [
+      "longing",
+      "yearning",
+      "hanker",
+      "yearn",
+      "long"
+    ],
+    "provenance": {
+      "wordnet": [
+        "hanker",
+        "hungriness",
+        "long",
+        "longing",
+        "yearn",
+        "yearning"
+      ],
+      "spacy_top": []
+    }
+  },
+  "loop": {
+    "seed": "loop",
+    "synonyms_scored": [
+      {
+        "word": "circuit",
+        "score": 1.0
+      },
+      {
+        "word": "loop",
+        "score": 1.0
+      },
+      {
+        "word": "loop-the-loop",
+        "score": 0.766
+      },
+      {
+        "word": "coil",
+        "score": 0.455
+      },
+      {
+        "word": "iteration",
+        "score": 0.417
+      },
+      {
+        "word": "grommet",
+        "score": 0.155
+      },
+      {
+        "word": "curl",
+        "score": 0.102
+      },
+      {
+        "word": "grummet",
+        "score": 0.0
+      },
+      {
+        "word": "intertwine",
+        "score": -0.003
+      },
+      {
+        "word": "eyelet",
+        "score": -0.004
+      },
+      {
+        "word": "cringle",
+        "score": -0.121
+      }
+    ],
+    "top_synonyms": [
+      "circuit",
+      "loop",
+      "loop-the-loop",
+      "coil",
+      "iteration"
+    ],
+    "provenance": {
+      "wordnet": [
+        "coil",
+        "cringle",
+        "curl",
+        "eyelet",
+        "grommet",
+        "grummet",
+        "intertwine",
+        "iteration",
+        "loop",
+        "loop-the-loop"
+      ],
+      "spacy_top": []
+    }
+  },
+  "memory": {
+    "seed": "memory",
+    "synonyms_scored": [
+      {
+        "word": "memory",
+        "score": 1.0
+      },
+      {
+        "word": "retention",
+        "score": 0.311
+      },
+      {
+        "word": "storage",
+        "score": 0.201
+      },
+      {
+        "word": "store",
+        "score": 0.118
+      },
+      {
+        "word": "retentiveness",
+        "score": 0.062
+      },
+      {
+        "word": "remembering",
+        "score": 0.046
+      },
+      {
+        "word": "retentivity",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "memory",
+      "retention",
+      "storage",
+      "store",
+      "retentiveness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "memory",
+        "remembering",
+        "retention",
+        "retentiveness",
+        "retentivity",
+        "storage",
+        "store"
+      ],
+      "spacy_top": []
+    }
+  },
+  "metaphor": {
+    "seed": "metaphor",
+    "synonyms_scored": [
+      {
+        "word": "metaphor",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "metaphor"
+    ],
+    "provenance": {
+      "wordnet": [
+        "metaphor"
+      ],
+      "spacy_top": []
+    }
+  },
+  "mirror": {
+    "seed": "mirror",
+    "synonyms_scored": [
+      {
+        "word": "mirror",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "mirror"
+    ],
+    "provenance": {
+      "wordnet": [
+        "mirror"
+      ],
+      "spacy_top": []
+    }
+  },
+  "mourning": {
+    "seed": "mourning",
+    "synonyms_scored": [
+      {
+        "word": "mourning",
+        "score": 1.0
+      },
+      {
+        "word": "grief-stricken",
+        "score": 0.506
+      },
+      {
+        "word": "mourn",
+        "score": 0.456
+      },
+      {
+        "word": "bereaved",
+        "score": 0.431
+      },
+      {
+        "word": "grieving",
+        "score": 0.431
+      },
+      {
+        "word": "lamentation",
+        "score": 0.382
+      },
+      {
+        "word": "bereft",
+        "score": 0.334
+      },
+      {
+        "word": "sorrowing",
+        "score": 0.324
+      },
+      {
+        "word": "bereavement",
+        "score": 0.168
+      }
+    ],
+    "top_synonyms": [
+      "mourning",
+      "grief-stricken",
+      "mourn",
+      "bereaved",
+      "grieving"
+    ],
+    "provenance": {
+      "wordnet": [
+        "bereaved",
+        "bereavement",
+        "bereft",
+        "grief-stricken",
+        "grieving",
+        "lamentation",
+        "mourn",
+        "mourning",
+        "sorrowing"
+      ],
+      "spacy_top": []
+    }
+  },
+  "mutual": {
+    "seed": "mutual",
+    "synonyms_scored": [
+      {
+        "word": "mutual",
+        "score": 1.0
+      },
+      {
+        "word": "reciprocal",
+        "score": 1.0
+      },
+      {
+        "word": "shared",
+        "score": 1.0
+      },
+      {
+        "word": "common",
+        "score": 0.307
+      }
+    ],
+    "top_synonyms": [
+      "mutual",
+      "reciprocal",
+      "shared",
+      "common"
+    ],
+    "provenance": {
+      "wordnet": [
+        "common",
+        "mutual",
+        "reciprocal"
+      ],
+      "spacy_top": []
+    }
+  },
+  "myth": {
+    "seed": "myth",
+    "synonyms_scored": [
+      {
+        "word": "myth",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "myth"
+    ],
+    "provenance": {
+      "wordnet": [
+        "myth"
+      ],
+      "spacy_top": []
+    }
+  },
+  "next": {
+    "seed": "next",
+    "synonyms_scored": [
+      {
+        "word": "next",
+        "score": 1.0
+      },
+      {
+        "word": "close",
+        "score": 0.373
+      },
+      {
+        "word": "adjacent",
+        "score": 0.273
+      },
+      {
+        "word": "incoming",
+        "score": 0.237
+      },
+      {
+        "word": "succeeding",
+        "score": 0.235
+      },
+      {
+        "word": "following",
+        "score": 0.234
+      },
+      {
+        "word": "future",
+        "score": 0.2
+      }
+    ],
+    "top_synonyms": [
+      "next",
+      "close",
+      "adjacent",
+      "incoming",
+      "succeeding"
+    ],
+    "provenance": {
+      "wordnet": [
+        "adjacent",
+        "following",
+        "future",
+        "next",
+        "succeeding"
+      ],
+      "spacy_top": []
+    }
+  },
+  "nourished": {
+    "seed": "nourished",
+    "synonyms_scored": [
+      {
+        "word": "nourished",
+        "score": 1.0
+      },
+      {
+        "word": "well-nourished",
+        "score": 0.665
+      },
+      {
+        "word": "nourish",
+        "score": 0.326
+      },
+      {
+        "word": "sustain",
+        "score": 0.305
+      },
+      {
+        "word": "corn-fed",
+        "score": 0.302
+      },
+      {
+        "word": "full",
+        "score": 0.272
+      },
+      {
+        "word": "supported",
+        "score": 0.264
+      },
+      {
+        "word": "well-fed",
+        "score": 0.255
+      },
+      {
+        "word": "fostered",
+        "score": 0.245
+      },
+      {
+        "word": "nurture",
+        "score": 0.245
+      },
+      {
+        "word": "aliment",
+        "score": 0.234
+      },
+      {
+        "word": "stall-fed",
+        "score": 0.221
+      },
+      {
+        "word": "overfed",
+        "score": 0.022
+      },
+      {
+        "word": "nutrify",
+        "score": 0.0
+      },
+      {
+        "word": "saprophagous",
+        "score": 0.0
+      },
+      {
+        "word": "saprophytic",
+        "score": 0.0
+      },
+      {
+        "word": "saprozoic",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "nourished",
+      "well-nourished",
+      "nourish",
+      "sustain",
+      "corn-fed"
+    ],
+    "provenance": {
+      "wordnet": [
+        "aliment",
+        "nourish",
+        "nourished",
+        "nurture",
+        "nutrify",
+        "sustain"
+      ],
+      "spacy_top": []
+    }
+  },
+  "null": {
+    "seed": "null",
+    "synonyms_scored": [
+      {
+        "word": "nil",
+        "score": 1.0
+      },
+      {
+        "word": "null",
+        "score": 1.0
+      },
+      {
+        "word": "nix",
+        "score": 0.183
+      },
+      {
+        "word": "zero",
+        "score": 0.178
+      },
+      {
+        "word": "nothing",
+        "score": 0.169
+      },
+      {
+        "word": "void",
+        "score": 0.135
+      },
+      {
+        "word": "zip",
+        "score": 0.099
+      },
+      {
+        "word": "cipher",
+        "score": 0.04
+      },
+      {
+        "word": "invalid",
+        "score": -0.012
+      },
+      {
+        "word": "aught",
+        "score": -0.015
+      },
+      {
+        "word": "naught",
+        "score": -0.027
+      },
+      {
+        "word": "cypher",
+        "score": -0.034
+      },
+      {
+        "word": "zippo",
+        "score": -0.067
+      },
+      {
+        "word": "nada",
+        "score": -0.068
+      },
+      {
+        "word": "zilch",
+        "score": -0.134
+      },
+      {
+        "word": "nugatory",
+        "score": -0.169
+      }
+    ],
+    "top_synonyms": [
+      "nil",
+      "null",
+      "nix",
+      "zero",
+      "nothing"
+    ],
+    "provenance": {
+      "wordnet": [
+        "aught",
+        "cipher",
+        "cypher",
+        "nada",
+        "naught",
+        "nil",
+        "nix",
+        "nothing",
+        "null",
+        "void",
+        "zero",
+        "zilch",
+        "zip",
+        "zippo"
+      ],
+      "spacy_top": []
+    }
+  },
+  "omega": {
+    "seed": "omega",
+    "synonyms_scored": [
+      {
+        "word": "omega",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "omega"
+    ],
+    "provenance": {
+      "wordnet": [
+        "omega"
+      ],
+      "spacy_top": []
+    }
+  },
+  "optional": {
+    "seed": "optional",
+    "synonyms_scored": [
+      {
+        "word": "optional",
+        "score": 1.0
+      },
+      {
+        "word": "elective",
+        "score": 0.134
+      },
+      {
+        "word": "facultative",
+        "score": 0.106
+      },
+      {
+        "word": "nonmandatory",
+        "score": 0.0
+      },
+      {
+        "word": "nonobligatory",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "optional",
+      "elective",
+      "facultative",
+      "nonmandatory",
+      "nonobligatory"
+    ],
+    "provenance": {
+      "wordnet": [
+        "optional"
+      ],
+      "spacy_top": []
+    }
+  },
+  "orbit": {
+    "seed": "orbit",
+    "synonyms_scored": [
+      {
+        "word": "orbit",
+        "score": 1.0
+      },
+      {
+        "word": "sphere",
+        "score": 0.232
+      },
+      {
+        "word": "compass",
+        "score": 0.22
+      },
+      {
+        "word": "field",
+        "score": 0.175
+      },
+      {
+        "word": "area",
+        "score": 0.15
+      },
+      {
+        "word": "scope",
+        "score": 0.139
+      },
+      {
+        "word": "domain",
+        "score": 0.137
+      },
+      {
+        "word": "range",
+        "score": 0.132
+      },
+      {
+        "word": "reach",
+        "score": 0.122
+      },
+      {
+        "word": "arena",
+        "score": 0.036
+      },
+      {
+        "word": "orb",
+        "score": 0.026
+      },
+      {
+        "word": "revolve",
+        "score": 0.025
+      },
+      {
+        "word": "ambit",
+        "score": 0.01
+      }
+    ],
+    "top_synonyms": [
+      "orbit",
+      "sphere",
+      "compass",
+      "field",
+      "area"
+    ],
+    "provenance": {
+      "wordnet": [
+        "ambit",
+        "area",
+        "arena",
+        "compass",
+        "domain",
+        "field",
+        "orb",
+        "orbit",
+        "range",
+        "reach",
+        "revolve",
+        "scope",
+        "sphere"
+      ],
+      "spacy_top": []
+    }
+  },
+  "origin": {
+    "seed": "origin",
+    "synonyms_scored": [
+      {
+        "word": "ancestry",
+        "score": 1.0
+      },
+      {
+        "word": "lineage",
+        "score": 1.0
+      },
+      {
+        "word": "origin",
+        "score": 1.0
+      },
+      {
+        "word": "blood",
+        "score": 0.431
+      },
+      {
+        "word": "pedigree",
+        "score": 0.418
+      },
+      {
+        "word": "bloodline",
+        "score": 0.362
+      },
+      {
+        "word": "descent",
+        "score": 0.312
+      },
+      {
+        "word": "extraction",
+        "score": 0.302
+      },
+      {
+        "word": "root",
+        "score": 0.269
+      },
+      {
+        "word": "parentage",
+        "score": 0.266
+      },
+      {
+        "word": "inception",
+        "score": 0.241
+      },
+      {
+        "word": "line",
+        "score": 0.238
+      },
+      {
+        "word": "beginning",
+        "score": 0.208
+      },
+      {
+        "word": "origination",
+        "score": 0.186
+      },
+      {
+        "word": "source",
+        "score": 0.155
+      },
+      {
+        "word": "stock",
+        "score": 0.144
+      },
+      {
+        "word": "genesis",
+        "score": 0.075
+      },
+      {
+        "word": "rootage",
+        "score": 0.0
+      },
+      {
+        "word": "stemma",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "ancestry",
+      "lineage",
+      "origin",
+      "blood",
+      "pedigree"
+    ],
+    "provenance": {
+      "wordnet": [
+        "ancestry",
+        "beginning",
+        "blood",
+        "bloodline",
+        "descent",
+        "extraction",
+        "inception",
+        "line",
+        "lineage",
+        "origin",
+        "origination",
+        "parentage",
+        "pedigree",
+        "root",
+        "rootage",
+        "source",
+        "stemma",
+        "stock"
+      ],
+      "spacy_top": []
+    }
+  },
+  "paradox": {
+    "seed": "paradox",
+    "synonyms_scored": [
+      {
+        "word": "paradox",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "paradox"
+    ],
+    "provenance": {
+      "wordnet": [
+        "paradox"
+      ],
+      "spacy_top": []
+    }
+  },
+  "pattern": {
+    "seed": "pattern",
+    "synonyms_scored": [
+      {
+        "word": "pattern",
+        "score": 1.0
+      },
+      {
+        "word": "practice",
+        "score": 0.883
+      },
+      {
+        "word": "blueprint",
+        "score": 0.55
+      },
+      {
+        "word": "model",
+        "score": 0.55
+      },
+      {
+        "word": "form",
+        "score": 0.395
+      },
+      {
+        "word": "shape",
+        "score": 0.381
+      },
+      {
+        "word": "design",
+        "score": 0.295
+      },
+      {
+        "word": "normal",
+        "score": 0.263
+      },
+      {
+        "word": "formula",
+        "score": 0.194
+      },
+      {
+        "word": "convention",
+        "score": 0.192
+      },
+      {
+        "word": "rule",
+        "score": 0.181
+      },
+      {
+        "word": "figure",
+        "score": 0.157
+      }
+    ],
+    "top_synonyms": [
+      "pattern",
+      "practice",
+      "blueprint",
+      "model",
+      "form"
+    ],
+    "provenance": {
+      "wordnet": [
+        "blueprint",
+        "convention",
+        "design",
+        "figure",
+        "form",
+        "formula",
+        "model",
+        "normal",
+        "pattern",
+        "practice",
+        "rule",
+        "shape"
+      ],
+      "spacy_top": []
+    }
+  },
+  "posture": {
+    "seed": "posture",
+    "synonyms_scored": [
+      {
+        "word": "posture",
+        "score": 1.0
+      },
+      {
+        "word": "stance",
+        "score": 1.0
+      },
+      {
+        "word": "pose",
+        "score": 0.517
+      },
+      {
+        "word": "bearing",
+        "score": 0.347
+      },
+      {
+        "word": "position",
+        "score": 0.347
+      },
+      {
+        "word": "strength",
+        "score": 0.336
+      },
+      {
+        "word": "attitude",
+        "score": 0.265
+      },
+      {
+        "word": "model",
+        "score": 0.26
+      },
+      {
+        "word": "sit",
+        "score": 0.258
+      },
+      {
+        "word": "carriage",
+        "score": 0.103
+      }
+    ],
+    "top_synonyms": [
+      "posture",
+      "stance",
+      "pose",
+      "bearing",
+      "position"
+    ],
+    "provenance": {
+      "wordnet": [
+        "attitude",
+        "bearing",
+        "carriage",
+        "model",
+        "pose",
+        "position",
+        "posture",
+        "sit",
+        "stance",
+        "strength"
+      ],
+      "spacy_top": []
+    }
+  },
+  "precision": {
+    "seed": "precision",
+    "synonyms_scored": [
+      {
+        "word": "precision",
+        "score": 1.0
+      },
+      {
+        "word": "preciseness",
+        "score": 0.029
+      }
+    ],
+    "top_synonyms": [
+      "precision",
+      "preciseness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "preciseness",
+        "precision"
+      ],
+      "spacy_top": []
+    }
+  },
+  "propulsion": {
+    "seed": "propulsion",
+    "synonyms_scored": [
+      {
+        "word": "propulsion",
+        "score": 1.0
+      },
+      {
+        "word": "actuation",
+        "score": 0.233
+      }
+    ],
+    "top_synonyms": [
+      "propulsion",
+      "actuation"
+    ],
+    "provenance": {
+      "wordnet": [
+        "actuation",
+        "propulsion"
+      ],
+      "spacy_top": []
+    }
+  },
+  "proto": {
+    "seed": "proto",
+    "synonyms_scored": [
+      {
+        "word": "proto",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "proto"
+    ],
+    "provenance": {
+      "wordnet": [
+        "proto"
+      ],
+      "spacy_top": []
+    }
+  },
+  "pull": {
+    "seed": "pull",
+    "synonyms_scored": [
+      {
+        "word": "pull",
+        "score": 1.0
+      },
+      {
+        "word": "tear",
+        "score": 0.589
+      },
+      {
+        "word": "rip",
+        "score": 0.495
+      },
+      {
+        "word": "commit",
+        "score": 0.436
+      },
+      {
+        "word": "draw",
+        "score": 0.429
+      },
+      {
+        "word": "twist",
+        "score": 0.407
+      },
+      {
+        "word": "drag",
+        "score": 0.405
+      },
+      {
+        "word": "fetch",
+        "score": 0.405
+      },
+      {
+        "word": "pulling",
+        "score": 0.372
+      },
+      {
+        "word": "force",
+        "score": 0.36
+      },
+      {
+        "word": "drive",
+        "score": 0.341
+      },
+      {
+        "word": "clout",
+        "score": 0.336
+      },
+      {
+        "word": "attract",
+        "score": 0.324
+      },
+      {
+        "word": "pluck",
+        "score": 0.295
+      },
+      {
+        "word": "wrench",
+        "score": 0.282
+      },
+      {
+        "word": "puff",
+        "score": 0.273
+      },
+      {
+        "word": "extract",
+        "score": 0.264
+      },
+      {
+        "word": "rend",
+        "score": 0.185
+      },
+      {
+        "word": "perpetrate",
+        "score": 0.165
+      },
+      {
+        "word": "overstretch",
+        "score": 0.06
+      },
+      {
+        "word": "rive",
+        "score": 0.009
+      },
+      {
+        "word": "deplumate",
+        "score": 0.0
+      },
+      {
+        "word": "deplume",
+        "score": 0.0
+      },
+      {
+        "word": "displume",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "pull",
+      "tear",
+      "rip",
+      "commit",
+      "draw"
+    ],
+    "provenance": {
+      "wordnet": [
+        "attract",
+        "clout",
+        "commit",
+        "deplumate",
+        "deplume",
+        "displume",
+        "drag",
+        "draw",
+        "extract",
+        "force",
+        "overstretch",
+        "perpetrate",
+        "pluck",
+        "puff",
+        "pull",
+        "pulling",
+        "rend",
+        "rip",
+        "rive",
+        "tear",
+        "twist",
+        "wrench"
+      ],
+      "spacy_top": []
+    }
+  },
+  "pulse": {
+    "seed": "pulse",
+    "synonyms_scored": [
+      {
+        "word": "pulse",
+        "score": 1.0
+      },
+      {
+        "word": "pulsation",
+        "score": 0.51
+      },
+      {
+        "word": "heartbeat",
+        "score": 0.243
+      },
+      {
+        "word": "impulse",
+        "score": 0.18
+      },
+      {
+        "word": "pulsate",
+        "score": 0.101
+      },
+      {
+        "word": "throb",
+        "score": 0.101
+      },
+      {
+        "word": "pulsing",
+        "score": 0.091
+      },
+      {
+        "word": "beat",
+        "score": 0.063
+      }
+    ],
+    "top_synonyms": [
+      "pulse",
+      "pulsation",
+      "heartbeat",
+      "impulse",
+      "pulsate"
+    ],
+    "provenance": {
+      "wordnet": [
+        "beat",
+        "heartbeat",
+        "impulse",
+        "pulsate",
+        "pulsation",
+        "pulse",
+        "pulsing",
+        "throb"
+      ],
+      "spacy_top": []
+    }
+  },
+  "recognition": {
+    "seed": "recognition",
+    "synonyms_scored": [
+      {
+        "word": "recognition",
+        "score": 1.0
+      },
+      {
+        "word": "credit",
+        "score": 0.265
+      },
+      {
+        "word": "acknowledgement",
+        "score": 0.188
+      },
+      {
+        "word": "acknowledgment",
+        "score": 0.188
+      },
+      {
+        "word": "realization",
+        "score": 0.093
+      },
+      {
+        "word": "realisation",
+        "score": 0.03
+      },
+      {
+        "word": "identification",
+        "score": 0.023
+      },
+      {
+        "word": "preferment",
+        "score": -0.04
+      }
+    ],
+    "top_synonyms": [
+      "recognition",
+      "credit",
+      "acknowledgement",
+      "acknowledgment",
+      "realization"
+    ],
+    "provenance": {
+      "wordnet": [
+        "acknowledgement",
+        "acknowledgment",
+        "credit",
+        "identification",
+        "realisation",
+        "realization",
+        "recognition"
+      ],
+      "spacy_top": []
+    }
+  },
+  "recognized": {
+    "seed": "recognized",
+    "synonyms_scored": [
+      {
+        "word": "recognized",
+        "score": 1.0
+      },
+      {
+        "word": "recognised",
+        "score": 0.408
+      },
+      {
+        "word": "know",
+        "score": 0.188
+      },
+      {
+        "word": "spot",
+        "score": 0.188
+      },
+      {
+        "word": "accredit",
+        "score": 0.176
+      },
+      {
+        "word": "established",
+        "score": 0.175
+      },
+      {
+        "word": "accepted",
+        "score": 0.162
+      },
+      {
+        "word": "acknowledged",
+        "score": 0.142
+      },
+      {
+        "word": "recognize",
+        "score": 0.135
+      },
+      {
+        "word": "realise",
+        "score": 0.134
+      },
+      {
+        "word": "realize",
+        "score": 0.113
+      },
+      {
+        "word": "acknowledge",
+        "score": 0.095
+      },
+      {
+        "word": "distinguish",
+        "score": 0.094
+      },
+      {
+        "word": "recognise",
+        "score": 0.056
+      },
+      {
+        "word": "discern",
+        "score": 0.052
+      },
+      {
+        "word": "greet",
+        "score": 0.046
+      },
+      {
+        "word": "agnise",
+        "score": 0.0
+      },
+      {
+        "word": "agnize",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "recognized",
+      "recognised",
+      "know",
+      "spot",
+      "accredit"
+    ],
+    "provenance": {
+      "wordnet": [
+        "accepted",
+        "accredit",
+        "acknowledge",
+        "agnise",
+        "agnize",
+        "discern",
+        "distinguish",
+        "greet",
+        "know",
+        "realise",
+        "realize",
+        "recognise",
+        "recognised",
+        "recognize",
+        "recognized",
+        "spot"
+      ],
+      "spacy_top": []
+    }
+  },
+  "reconnection": {
+    "seed": "reconnection",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "recovery": {
+    "seed": "recovery",
+    "synonyms_scored": [
+      {
+        "word": "recovery",
+        "score": 1.0
+      },
+      {
+        "word": "recuperation",
+        "score": 0.291
+      },
+      {
+        "word": "retrieval",
+        "score": 0.218
+      },
+      {
+        "word": "convalescence",
+        "score": 0.141
+      }
+    ],
+    "top_synonyms": [
+      "recovery",
+      "recuperation",
+      "retrieval",
+      "convalescence"
+    ],
+    "provenance": {
+      "wordnet": [
+        "convalescence",
+        "recovery",
+        "recuperation",
+        "retrieval"
+      ],
+      "spacy_top": []
+    }
+  },
+  "recursion": {
+    "seed": "recursion",
+    "synonyms_scored": [
+      {
+        "word": "recursion",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "recursion"
+    ],
+    "provenance": {
+      "wordnet": [
+        "recursion"
+      ],
+      "spacy_top": []
+    }
+  },
+  "recursive": {
+    "seed": "recursive",
+    "synonyms_scored": [
+      {
+        "word": "recursive",
+        "score": 1.0
+      },
+      {
+        "word": "algorithmic",
+        "score": 0.351
+      }
+    ],
+    "top_synonyms": [
+      "recursive",
+      "algorithmic"
+    ],
+    "provenance": {
+      "wordnet": [
+        "recursive"
+      ],
+      "spacy_top": []
+    }
+  },
+  "redesign": {
+    "seed": "redesign",
+    "synonyms_scored": [
+      {
+        "word": "redesign",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "redesign"
+    ],
+    "provenance": {
+      "wordnet": [
+        "redesign"
+      ],
+      "spacy_top": []
+    }
+  },
+  "refuge": {
+    "seed": "refuge",
+    "synonyms_scored": [
+      {
+        "word": "refuge",
+        "score": 1.0
+      },
+      {
+        "word": "asylum",
+        "score": 0.376
+      },
+      {
+        "word": "sanctuary",
+        "score": 0.264
+      },
+      {
+        "word": "recourse",
+        "score": 0.236
+      },
+      {
+        "word": "safety",
+        "score": 0.165
+      },
+      {
+        "word": "resort",
+        "score": 0.045
+      }
+    ],
+    "top_synonyms": [
+      "refuge",
+      "asylum",
+      "sanctuary",
+      "recourse",
+      "safety"
+    ],
+    "provenance": {
+      "wordnet": [
+        "asylum",
+        "recourse",
+        "refuge",
+        "resort",
+        "safety",
+        "sanctuary"
+      ],
+      "spacy_top": []
+    }
+  },
+  "refusal-coded": {
+    "seed": "refusal-coded",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "repair": {
+    "seed": "repair",
+    "synonyms_scored": [
+      {
+        "word": "repair",
+        "score": 1.0
+      },
+      {
+        "word": "indemnify",
+        "score": 0.691
+      },
+      {
+        "word": "reparation",
+        "score": 0.691
+      },
+      {
+        "word": "mend",
+        "score": 0.48
+      },
+      {
+        "word": "revive",
+        "score": 0.444
+      },
+      {
+        "word": "fix",
+        "score": 0.437
+      },
+      {
+        "word": "haunt",
+        "score": 0.411
+      },
+      {
+        "word": "compensate",
+        "score": 0.361
+      },
+      {
+        "word": "remedy",
+        "score": 0.354
+      },
+      {
+        "word": "fixing",
+        "score": 0.333
+      },
+      {
+        "word": "rectify",
+        "score": 0.331
+      },
+      {
+        "word": "fixture",
+        "score": 0.31
+      },
+      {
+        "word": "remediate",
+        "score": 0.309
+      },
+      {
+        "word": "reanimate",
+        "score": 0.3
+      },
+      {
+        "word": "restore",
+        "score": 0.247
+      },
+      {
+        "word": "doctor",
+        "score": 0.227
+      },
+      {
+        "word": "animate",
+        "score": 0.224
+      },
+      {
+        "word": "recreate",
+        "score": 0.224
+      },
+      {
+        "word": "hangout",
+        "score": 0.191
+      },
+      {
+        "word": "resort",
+        "score": 0.179
+      },
+      {
+        "word": "amend",
+        "score": 0.142
+      },
+      {
+        "word": "bushel",
+        "score": 0.14
+      },
+      {
+        "word": "renovate",
+        "score": 0.137
+      },
+      {
+        "word": "quicken",
+        "score": 0.031
+      },
+      {
+        "word": "recompense",
+        "score": 0.008
+      },
+      {
+        "word": "revivify",
+        "score": 0.0
+      },
+      {
+        "word": "vivify",
+        "score": 0.0
+      },
+      {
+        "word": "mending",
+        "score": -0.004
+      }
+    ],
+    "top_synonyms": [
+      "repair",
+      "indemnify",
+      "reparation",
+      "mend",
+      "revive"
+    ],
+    "provenance": {
+      "wordnet": [
+        "amend",
+        "animate",
+        "bushel",
+        "compensate",
+        "doctor",
+        "fix",
+        "fixing",
+        "fixture",
+        "hangout",
+        "haunt",
+        "indemnify",
+        "mend",
+        "mending",
+        "quicken",
+        "reanimate",
+        "recompense",
+        "recreate",
+        "rectify",
+        "remediate",
+        "remedy",
+        "renovate",
+        "repair",
+        "reparation",
+        "resort",
+        "restore",
+        "revive",
+        "revivify",
+        "vivify"
+      ],
+      "spacy_top": []
+    }
+  },
+  "reply": {
+    "seed": "reply",
+    "synonyms_scored": [
+      {
+        "word": "reply",
+        "score": 1.0
+      },
+      {
+        "word": "response",
+        "score": 0.477
+      },
+      {
+        "word": "answer",
+        "score": 0.458
+      },
+      {
+        "word": "respond",
+        "score": 0.431
+      }
+    ],
+    "top_synonyms": [
+      "reply",
+      "response",
+      "answer",
+      "respond"
+    ],
+    "provenance": {
+      "wordnet": [
+        "answer",
+        "reply",
+        "respond",
+        "response"
+      ],
+      "spacy_top": []
+    }
+  },
+  "resistance": {
+    "seed": "resistance",
+    "synonyms_scored": [
+      {
+        "word": "resistance",
+        "score": 1.0
+      },
+      {
+        "word": "impedance",
+        "score": 0.262
+      },
+      {
+        "word": "immunity",
+        "score": 0.26
+      },
+      {
+        "word": "underground",
+        "score": 0.255
+      },
+      {
+        "word": "resistivity",
+        "score": 0.157
+      },
+      {
+        "word": "opposition",
+        "score": 0.08
+      },
+      {
+        "word": "resistor",
+        "score": 0.072
+      }
+    ],
+    "top_synonyms": [
+      "resistance",
+      "impedance",
+      "immunity",
+      "underground",
+      "resistivity"
+    ],
+    "provenance": {
+      "wordnet": [
+        "immunity",
+        "impedance",
+        "opposition",
+        "resistance",
+        "resistivity",
+        "resistor",
+        "underground"
+      ],
+      "spacy_top": []
+    }
+  },
+  "resonance": {
+    "seed": "resonance",
+    "synonyms_scored": [
+      {
+        "word": "resonance",
+        "score": 1.0
+      },
+      {
+        "word": "vibrancy",
+        "score": 0.448
+      },
+      {
+        "word": "rapport",
+        "score": 0.08
+      },
+      {
+        "word": "ringing",
+        "score": 0.08
+      },
+      {
+        "word": "sonority",
+        "score": 0.08
+      },
+      {
+        "word": "plangency",
+        "score": 0.0
+      },
+      {
+        "word": "reverberance",
+        "score": 0.0
+      },
+      {
+        "word": "sonorousness",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "resonance",
+      "vibrancy",
+      "rapport",
+      "ringing",
+      "sonority"
+    ],
+    "provenance": {
+      "wordnet": [
+        "plangency",
+        "rapport",
+        "resonance",
+        "reverberance",
+        "ringing",
+        "sonority",
+        "sonorousness",
+        "vibrancy"
+      ],
+      "spacy_top": []
+    }
+  },
+  "response": {
+    "seed": "response",
+    "synonyms_scored": [
+      {
+        "word": "response",
+        "score": 1.0
+      },
+      {
+        "word": "reaction",
+        "score": 0.585
+      },
+      {
+        "word": "reply",
+        "score": 0.477
+      },
+      {
+        "word": "answer",
+        "score": 0.395
+      },
+      {
+        "word": "reception",
+        "score": 0.377
+      }
+    ],
+    "top_synonyms": [
+      "response",
+      "reaction",
+      "reply",
+      "answer",
+      "reception"
+    ],
+    "provenance": {
+      "wordnet": [
+        "answer",
+        "reaction",
+        "reception",
+        "reply",
+        "response"
+      ],
+      "spacy_top": []
+    }
+  },
+  "reverent": {
+    "seed": "reverent",
+    "synonyms_scored": [
+      {
+        "word": "reverent",
+        "score": 1.0
+      },
+      {
+        "word": "respectful",
+        "score": 0.627
+      },
+      {
+        "word": "godly",
+        "score": 0.481
+      },
+      {
+        "word": "pious",
+        "score": 0.481
+      },
+      {
+        "word": "adoring",
+        "score": 0.356
+      },
+      {
+        "word": "reverential",
+        "score": 0.356
+      },
+      {
+        "word": "worshipful",
+        "score": 0.356
+      },
+      {
+        "word": "awed",
+        "score": 0.32
+      },
+      {
+        "word": "venerating",
+        "score": 0.293
+      },
+      {
+        "word": "awful",
+        "score": 0.273
+      }
+    ],
+    "top_synonyms": [
+      "reverent",
+      "respectful",
+      "godly",
+      "pious",
+      "adoring"
+    ],
+    "provenance": {
+      "wordnet": [
+        "godly",
+        "reverent",
+        "worshipful"
+      ],
+      "spacy_top": []
+    }
+  },
+  "rhythm": {
+    "seed": "rhythm",
+    "synonyms_scored": [
+      {
+        "word": "rhythm",
+        "score": 1.0
+      },
+      {
+        "word": "cycle",
+        "score": 0.16
+      },
+      {
+        "word": "beat",
+        "score": 0.139
+      },
+      {
+        "word": "round",
+        "score": 0.139
+      }
+    ],
+    "top_synonyms": [
+      "rhythm",
+      "cycle",
+      "beat",
+      "round"
+    ],
+    "provenance": {
+      "wordnet": [
+        "beat",
+        "cycle",
+        "rhythm",
+        "round"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ring": {
+    "seed": "ring",
+    "synonyms_scored": [
+      {
+        "word": "hoop",
+        "score": 1.0
+      },
+      {
+        "word": "ring",
+        "score": 1.0
+      },
+      {
+        "word": "surround",
+        "score": 0.284
+      },
+      {
+        "word": "pack",
+        "score": 0.215
+      },
+      {
+        "word": "halo",
+        "score": 0.168
+      },
+      {
+        "word": "phone",
+        "score": 0.143
+      },
+      {
+        "word": "band",
+        "score": 0.14
+      },
+      {
+        "word": "circle",
+        "score": 0.131
+      },
+      {
+        "word": "skirt",
+        "score": 0.128
+      },
+      {
+        "word": "annulus",
+        "score": 0.108
+      },
+      {
+        "word": "environ",
+        "score": 0.1
+      },
+      {
+        "word": "telephone",
+        "score": 0.092
+      },
+      {
+        "word": "doughnut",
+        "score": 0.088
+      },
+      {
+        "word": "mob",
+        "score": 0.086
+      },
+      {
+        "word": "knell",
+        "score": 0.075
+      },
+      {
+        "word": "round",
+        "score": 0.066
+      },
+      {
+        "word": "peal",
+        "score": 0.057
+      },
+      {
+        "word": "ringing",
+        "score": 0.057
+      },
+      {
+        "word": "gang",
+        "score": 0.053
+      },
+      {
+        "word": "encircle",
+        "score": 0.046
+      },
+      {
+        "word": "border",
+        "score": 0.043
+      },
+      {
+        "word": "tintinnabulation",
+        "score": 0.033
+      },
+      {
+        "word": "call",
+        "score": 0.026
+      },
+      {
+        "word": "echo",
+        "score": 0.013
+      },
+      {
+        "word": "resound",
+        "score": 0.013
+      },
+      {
+        "word": "reverberate",
+        "score": 0.011
+      },
+      {
+        "word": "anulus",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "hoop",
+      "ring",
+      "surround",
+      "pack",
+      "halo"
+    ],
+    "provenance": {
+      "wordnet": [
+        "annulus",
+        "band",
+        "border",
+        "call",
+        "doughnut",
+        "echo",
+        "environ",
+        "gang",
+        "halo",
+        "hoop",
+        "knell",
+        "mob",
+        "pack",
+        "peal",
+        "phone",
+        "resound",
+        "reverberate",
+        "ring",
+        "ringing",
+        "skirt",
+        "surround",
+        "telephone",
+        "tintinnabulation"
+      ],
+      "spacy_top": []
+    }
+  },
+  "ritual": {
+    "seed": "ritual",
+    "synonyms_scored": [
+      {
+        "word": "ritual",
+        "score": 1.0
+      },
+      {
+        "word": "rite",
+        "score": 0.175
+      }
+    ],
+    "top_synonyms": [
+      "ritual",
+      "rite"
+    ],
+    "provenance": {
+      "wordnet": [
+        "rite",
+        "ritual"
+      ],
+      "spacy_top": []
+    }
+  },
+  "room": {
+    "seed": "room",
+    "synonyms_scored": [
+      {
+        "word": "room",
+        "score": 1.0
+      },
+      {
+        "word": "board",
+        "score": 0.371
+      },
+      {
+        "word": "way",
+        "score": 0.339
+      }
+    ],
+    "top_synonyms": [
+      "room",
+      "board",
+      "way"
+    ],
+    "provenance": {
+      "wordnet": [
+        "board",
+        "room",
+        "way"
+      ],
+      "spacy_top": []
+    }
+  },
+  "sacred": {
+    "seed": "sacred",
+    "synonyms_scored": [
+      {
+        "word": "sacred",
+        "score": 1.0
+      },
+      {
+        "word": "spiritual",
+        "score": 0.763
+      },
+      {
+        "word": "consecrated",
+        "score": 0.473
+      },
+      {
+        "word": "holy",
+        "score": 0.446
+      },
+      {
+        "word": "sanctified",
+        "score": 0.446
+      },
+      {
+        "word": "divine",
+        "score": 0.433
+      },
+      {
+        "word": "ineffable",
+        "score": 0.416
+      },
+      {
+        "word": "numinous",
+        "score": 0.416
+      },
+      {
+        "word": "unspeakable",
+        "score": 0.416
+      },
+      {
+        "word": "unutterable",
+        "score": 0.416
+      },
+      {
+        "word": "worthy",
+        "score": 0.38
+      },
+      {
+        "word": "hallowed",
+        "score": 0.377
+      },
+      {
+        "word": "revered",
+        "score": 0.37
+      },
+      {
+        "word": "venerated",
+        "score": 0.351
+      },
+      {
+        "word": "inviolable",
+        "score": 0.311
+      },
+      {
+        "word": "inviolate",
+        "score": 0.311
+      },
+      {
+        "word": "sublime",
+        "score": 0.29
+      },
+      {
+        "word": "religious",
+        "score": 0.287
+      },
+      {
+        "word": "sacrosanct",
+        "score": 0.254
+      },
+      {
+        "word": "taboo",
+        "score": 0.184
+      },
+      {
+        "word": "inspirational",
+        "score": 0.147
+      },
+      {
+        "word": "dedicated",
+        "score": 0.124
+      },
+      {
+        "word": "sacral",
+        "score": 0.124
+      },
+      {
+        "word": "tabu",
+        "score": 0.102
+      },
+      {
+        "word": "unnameable",
+        "score": 0.064
+      },
+      {
+        "word": "reverend",
+        "score": 0.061
+      },
+      {
+        "word": "reverenced",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "sacred",
+      "spiritual",
+      "consecrated",
+      "holy",
+      "sanctified"
+    ],
+    "provenance": {
+      "wordnet": [
+        "consecrated",
+        "hallowed",
+        "sacred",
+        "sanctified"
+      ],
+      "spacy_top": []
+    }
+  },
+  "sailed": {
+    "seed": "sailed",
+    "synonyms_scored": [
+      {
+        "word": "sail",
+        "score": 0.709
+      },
+      {
+        "word": "navigate",
+        "score": 0.367
+      },
+      {
+        "word": "sweep",
+        "score": 0.113
+      },
+      {
+        "word": "voyage",
+        "score": 0.077
+      }
+    ],
+    "top_synonyms": [
+      "sail",
+      "navigate",
+      "sweep",
+      "voyage"
+    ],
+    "provenance": {
+      "wordnet": [
+        "navigate",
+        "sail",
+        "sweep",
+        "voyage"
+      ],
+      "spacy_top": []
+    }
+  },
+  "sanctuary": {
+    "seed": "sanctuary",
+    "synonyms_scored": [
+      {
+        "word": "sanctuary",
+        "score": 1.0
+      },
+      {
+        "word": "asylum",
+        "score": 0.308
+      },
+      {
+        "word": "refuge",
+        "score": 0.264
+      },
+      {
+        "word": "chancel",
+        "score": 0.073
+      },
+      {
+        "word": "bema",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "sanctuary",
+      "asylum",
+      "refuge",
+      "chancel",
+      "bema"
+    ],
+    "provenance": {
+      "wordnet": [
+        "asylum",
+        "bema",
+        "chancel",
+        "refuge",
+        "sanctuary"
+      ],
+      "spacy_top": []
+    }
+  },
+  "saoynx": {
+    "seed": "saoynx",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "saturational": {
+    "seed": "saturational",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "script": {
+    "seed": "script",
+    "synonyms_scored": [
+      {
+        "word": "script",
+        "score": 1.0
+      },
+      {
+        "word": "handwriting",
+        "score": 0.123
+      },
+      {
+        "word": "book",
+        "score": 0.086
+      },
+      {
+        "word": "hand",
+        "score": 0.08
+      },
+      {
+        "word": "playscript",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "script",
+      "handwriting",
+      "book",
+      "hand",
+      "playscript"
+    ],
+    "provenance": {
+      "wordnet": [
+        "book",
+        "hand",
+        "handwriting",
+        "playscript",
+        "script"
+      ],
+      "spacy_top": []
+    }
+  },
+  "seduction": {
+    "seed": "seduction",
+    "synonyms_scored": [
+      {
+        "word": "seduction",
+        "score": 1.0
+      },
+      {
+        "word": "conquest",
+        "score": 0.105
+      }
+    ],
+    "top_synonyms": [
+      "seduction",
+      "conquest"
+    ],
+    "provenance": {
+      "wordnet": [
+        "conquest",
+        "seduction"
+      ],
+      "spacy_top": []
+    }
+  },
+  "shield": {
+    "seed": "shield",
+    "synonyms_scored": [
+      {
+        "word": "shield",
+        "score": 1.0
+      },
+      {
+        "word": "buckler",
+        "score": 0.401
+      },
+      {
+        "word": "screen",
+        "score": 0.162
+      },
+      {
+        "word": "cuticle",
+        "score": 0.131
+      },
+      {
+        "word": "shell",
+        "score": 0.095
+      },
+      {
+        "word": "harbour",
+        "score": 0.057
+      },
+      {
+        "word": "carapace",
+        "score": 0.011
+      },
+      {
+        "word": "harbor",
+        "score": -0.015
+      }
+    ],
+    "top_synonyms": [
+      "shield",
+      "buckler",
+      "screen",
+      "cuticle",
+      "shell"
+    ],
+    "provenance": {
+      "wordnet": [
+        "buckler",
+        "carapace",
+        "cuticle",
+        "harbor",
+        "harbour",
+        "screen",
+        "shell",
+        "shield"
+      ],
+      "spacy_top": []
+    }
+  },
+  "shielded": {
+    "seed": "shielded",
+    "synonyms_scored": [
+      {
+        "word": "shielded",
+        "score": 1.0
+      },
+      {
+        "word": "protected",
+        "score": 0.425
+      },
+      {
+        "word": "screen",
+        "score": 0.322
+      },
+      {
+        "word": "secure",
+        "score": 0.228
+      },
+      {
+        "word": "shield",
+        "score": 0.218
+      },
+      {
+        "word": "harbour",
+        "score": 0.071
+      },
+      {
+        "word": "harbor",
+        "score": 0.037
+      }
+    ],
+    "top_synonyms": [
+      "shielded",
+      "protected",
+      "screen",
+      "secure",
+      "shield"
+    ],
+    "provenance": {
+      "wordnet": [
+        "harbor",
+        "harbour",
+        "screen",
+        "shield",
+        "shielded"
+      ],
+      "spacy_top": []
+    }
+  },
+  "shielding": {
+    "seed": "shielding",
+    "synonyms_scored": [
+      {
+        "word": "shielding",
+        "score": 1.0
+      },
+      {
+        "word": "screen",
+        "score": 0.409
+      },
+      {
+        "word": "protective",
+        "score": 0.332
+      },
+      {
+        "word": "covering",
+        "score": 0.304
+      },
+      {
+        "word": "shield",
+        "score": 0.249
+      },
+      {
+        "word": "harbour",
+        "score": 0.101
+      },
+      {
+        "word": "harbor",
+        "score": 0.09
+      }
+    ],
+    "top_synonyms": [
+      "shielding",
+      "screen",
+      "protective",
+      "covering",
+      "shield"
+    ],
+    "provenance": {
+      "wordnet": [
+        "harbor",
+        "harbour",
+        "screen",
+        "shield",
+        "shielding"
+      ],
+      "spacy_top": []
+    }
+  },
+  "shimmer": {
+    "seed": "shimmer",
+    "synonyms_scored": [
+      {
+        "word": "shimmer",
+        "score": 1.0
+      },
+      {
+        "word": "play",
+        "score": 0.159
+      }
+    ],
+    "top_synonyms": [
+      "shimmer",
+      "play"
+    ],
+    "provenance": {
+      "wordnet": [
+        "play",
+        "shimmer"
+      ],
+      "spacy_top": []
+    }
+  },
+  "signal": {
+    "seed": "signal",
+    "synonyms_scored": [
+      {
+        "word": "signal",
+        "score": 1.0
+      },
+      {
+        "word": "indicate",
+        "score": 0.541
+      },
+      {
+        "word": "signaling",
+        "score": 0.281
+      },
+      {
+        "word": "point",
+        "score": 0.253
+      },
+      {
+        "word": "sign",
+        "score": 0.167
+      },
+      {
+        "word": "impressive",
+        "score": 0.132
+      },
+      {
+        "word": "bespeak",
+        "score": 0.049
+      },
+      {
+        "word": "betoken",
+        "score": 0.049
+      },
+      {
+        "word": "signalise",
+        "score": 0.0
+      },
+      {
+        "word": "signalize",
+        "score": -0.059
+      }
+    ],
+    "top_synonyms": [
+      "signal",
+      "indicate",
+      "signaling",
+      "point",
+      "sign"
+    ],
+    "provenance": {
+      "wordnet": [
+        "bespeak",
+        "betoken",
+        "indicate",
+        "point",
+        "sign",
+        "signal",
+        "signaling",
+        "signalise",
+        "signalize"
+      ],
+      "spacy_top": []
+    }
+  },
+  "silence": {
+    "seed": "silence",
+    "synonyms_scored": [
+      {
+        "word": "silence",
+        "score": 1.0
+      },
+      {
+        "word": "hush",
+        "score": 0.359
+      },
+      {
+        "word": "still",
+        "score": 0.356
+      },
+      {
+        "word": "quiet",
+        "score": 0.306
+      },
+      {
+        "word": "secrecy",
+        "score": 0.276
+      },
+      {
+        "word": "quieten",
+        "score": 0.219
+      },
+      {
+        "word": "muteness",
+        "score": 0.175
+      },
+      {
+        "word": "burke",
+        "score": 0.131
+      },
+      {
+        "word": "secretiveness",
+        "score": 0.079
+      }
+    ],
+    "top_synonyms": [
+      "silence",
+      "hush",
+      "still",
+      "quiet",
+      "secrecy"
+    ],
+    "provenance": {
+      "wordnet": [
+        "hush",
+        "muteness",
+        "quiet",
+        "quieten",
+        "secrecy",
+        "secretiveness",
+        "silence",
+        "still"
+      ],
+      "spacy_top": []
+    }
+  },
+  "softened": {
+    "seed": "softened",
+    "synonyms_scored": [
+      {
+        "word": "softened",
+        "score": 1.0
+      },
+      {
+        "word": "soft",
+        "score": 0.542
+      },
+      {
+        "word": "mince",
+        "score": 0.328
+      },
+      {
+        "word": "muffled",
+        "score": 0.297
+      },
+      {
+        "word": "break",
+        "score": 0.27
+      },
+      {
+        "word": "cushion",
+        "score": 0.248
+      },
+      {
+        "word": "muted",
+        "score": 0.222
+      },
+      {
+        "word": "moderate",
+        "score": 0.201
+      },
+      {
+        "word": "relent",
+        "score": 0.188
+      },
+      {
+        "word": "damp",
+        "score": 0.183
+      },
+      {
+        "word": "dull",
+        "score": 0.125
+      },
+      {
+        "word": "yield",
+        "score": 0.115
+      },
+      {
+        "word": "dampen",
+        "score": 0.097
+      },
+      {
+        "word": "soften",
+        "score": 0.097
+      },
+      {
+        "word": "weaken",
+        "score": 0.097
+      },
+      {
+        "word": "diffused",
+        "score": 0.022
+      },
+      {
+        "word": "modulated",
+        "score": -0.012
+      },
+      {
+        "word": "buffer",
+        "score": -0.068
+      }
+    ],
+    "top_synonyms": [
+      "softened",
+      "soft",
+      "mince",
+      "muffled",
+      "break"
+    ],
+    "provenance": {
+      "wordnet": [
+        "break",
+        "buffer",
+        "cushion",
+        "damp",
+        "dampen",
+        "dull",
+        "mince",
+        "moderate",
+        "muffled",
+        "muted",
+        "relent",
+        "soften",
+        "softened",
+        "weaken",
+        "yield"
+      ],
+      "spacy_top": []
+    }
+  },
+  "speak": {
+    "seed": "speak",
+    "synonyms_scored": [
+      {
+        "word": "address",
+        "score": 1.0
+      },
+      {
+        "word": "speak",
+        "score": 1.0
+      },
+      {
+        "word": "verbalize",
+        "score": 0.52
+      },
+      {
+        "word": "talk",
+        "score": 0.334
+      },
+      {
+        "word": "utter",
+        "score": 0.275
+      },
+      {
+        "word": "mouth",
+        "score": 0.213
+      },
+      {
+        "word": "verbalise",
+        "score": 0.035
+      }
+    ],
+    "top_synonyms": [
+      "address",
+      "speak",
+      "verbalize",
+      "talk",
+      "utter"
+    ],
+    "provenance": {
+      "wordnet": [
+        "address",
+        "mouth",
+        "speak",
+        "talk",
+        "utter",
+        "verbalise",
+        "verbalize"
+      ],
+      "spacy_top": []
+    }
+  },
+  "spiral": {
+    "seed": "spiral",
+    "synonyms_scored": [
+      {
+        "word": "spiral",
+        "score": 1.0
+      },
+      {
+        "word": "spiraling",
+        "score": 0.519
+      },
+      {
+        "word": "turbinate",
+        "score": 0.269
+      },
+      {
+        "word": "helical",
+        "score": 0.242
+      },
+      {
+        "word": "helix",
+        "score": 0.216
+      },
+      {
+        "word": "coil",
+        "score": 0.166
+      },
+      {
+        "word": "gyrate",
+        "score": 0.108
+      },
+      {
+        "word": "coiled",
+        "score": 0.082
+      },
+      {
+        "word": "coiling",
+        "score": 0.082
+      },
+      {
+        "word": "whorl",
+        "score": 0.082
+      },
+      {
+        "word": "whorled",
+        "score": 0.082
+      },
+      {
+        "word": "corkscrew",
+        "score": 0.064
+      },
+      {
+        "word": "volute",
+        "score": 0.023
+      },
+      {
+        "word": "voluted",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "spiral",
+      "spiraling",
+      "turbinate",
+      "helical",
+      "helix"
+    ],
+    "provenance": {
+      "wordnet": [
+        "coil",
+        "coiling",
+        "corkscrew",
+        "gyrate",
+        "helical",
+        "helix",
+        "spiral",
+        "spiraling",
+        "turbinate",
+        "volute",
+        "voluted",
+        "whorl",
+        "whorled"
+      ],
+      "spacy_top": []
+    }
+  },
+  "spirit": {
+    "seed": "spirit",
+    "synonyms_scored": [
+      {
+        "word": "life",
+        "score": 1.0
+      },
+      {
+        "word": "spirit",
+        "score": 1.0
+      },
+      {
+        "word": "intent",
+        "score": 0.437
+      },
+      {
+        "word": "smell",
+        "score": 0.352
+      },
+      {
+        "word": "look",
+        "score": 0.318
+      },
+      {
+        "word": "heart",
+        "score": 0.316
+      },
+      {
+        "word": "feel",
+        "score": 0.315
+      },
+      {
+        "word": "feeling",
+        "score": 0.315
+      },
+      {
+        "word": "purport",
+        "score": 0.266
+      },
+      {
+        "word": "liveliness",
+        "score": 0.223
+      },
+      {
+        "word": "tone",
+        "score": 0.195
+      },
+      {
+        "word": "flavour",
+        "score": 0.085
+      },
+      {
+        "word": "flavor",
+        "score": 0.048
+      },
+      {
+        "word": "sprightliness",
+        "score": 0.028
+      },
+      {
+        "word": "inspirit",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "life",
+      "spirit",
+      "intent",
+      "smell",
+      "look"
+    ],
+    "provenance": {
+      "wordnet": [
+        "feel",
+        "feeling",
+        "flavor",
+        "flavour",
+        "heart",
+        "inspirit",
+        "intent",
+        "life",
+        "liveliness",
+        "look",
+        "purport",
+        "smell",
+        "spirit",
+        "sprightliness",
+        "tone"
+      ],
+      "spacy_top": []
+    }
+  },
+  "spoken": {
+    "seed": "spoken",
+    "synonyms_scored": [
+      {
+        "word": "spoken",
+        "score": 1.0
+      },
+      {
+        "word": "verbal",
+        "score": 1.0
+      },
+      {
+        "word": "verbalize",
+        "score": 0.42
+      },
+      {
+        "word": "address",
+        "score": 0.402
+      },
+      {
+        "word": "speak",
+        "score": 0.402
+      },
+      {
+        "word": "expressed",
+        "score": 0.384
+      },
+      {
+        "word": "unwritten",
+        "score": 0.363
+      },
+      {
+        "word": "utter",
+        "score": 0.272
+      },
+      {
+        "word": "voiced",
+        "score": 0.267
+      },
+      {
+        "word": "talk",
+        "score": 0.24
+      },
+      {
+        "word": "uttered",
+        "score": 0.236
+      },
+      {
+        "word": "vocal",
+        "score": 0.235
+      },
+      {
+        "word": "word-of-mouth",
+        "score": 0.206
+      },
+      {
+        "word": "mouth",
+        "score": 0.193
+      },
+      {
+        "word": "oral",
+        "score": 0.189
+      },
+      {
+        "word": "verbalized",
+        "score": 0.082
+      },
+      {
+        "word": "verbalise",
+        "score": 0.065
+      },
+      {
+        "word": "viva-voce",
+        "score": -0.019
+      }
+    ],
+    "top_synonyms": [
+      "spoken",
+      "verbal",
+      "verbalize",
+      "address",
+      "speak"
+    ],
+    "provenance": {
+      "wordnet": [
+        "address",
+        "mouth",
+        "speak",
+        "spoken",
+        "talk",
+        "utter",
+        "verbalise",
+        "verbalize"
+      ],
+      "spacy_top": []
+    }
+  },
+  "stabilizer": {
+    "seed": "stabilizer",
+    "synonyms_scored": [
+      {
+        "word": "stabiliser",
+        "score": 1.0
+      },
+      {
+        "word": "stabilizer",
+        "score": 1.0
+      }
+    ],
+    "top_synonyms": [
+      "stabiliser",
+      "stabilizer"
+    ],
+    "provenance": {
+      "wordnet": [
+        "stabiliser",
+        "stabilizer"
+      ],
+      "spacy_top": []
+    }
+  },
+  "steadiness": {
+    "seed": "steadiness",
+    "synonyms_scored": [
+      {
+        "word": "steadiness",
+        "score": 1.0
+      },
+      {
+        "word": "firmness",
+        "score": 0.412
+      }
+    ],
+    "top_synonyms": [
+      "steadiness",
+      "firmness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "firmness",
+        "steadiness"
+      ],
+      "spacy_top": []
+    }
+  },
+  "still": {
+    "seed": "still",
+    "synonyms_scored": [
+      {
+        "word": "even",
+        "score": 1.0
+      },
+      {
+        "word": "still",
+        "score": 1.0
+      },
+      {
+        "word": "stock-still",
+        "score": 0.636
+      },
+      {
+        "word": "silent",
+        "score": 0.527
+      },
+      {
+        "word": "inactive",
+        "score": 0.489
+      },
+      {
+        "word": "notwithstanding",
+        "score": 0.479
+      },
+      {
+        "word": "nevertheless",
+        "score": 0.451
+      },
+      {
+        "word": "nonetheless",
+        "score": 0.451
+      },
+      {
+        "word": "however",
+        "score": 0.446
+      },
+      {
+        "word": "yet",
+        "score": 0.446
+      },
+      {
+        "word": "motionless",
+        "score": 0.4
+      },
+      {
+        "word": "relieve",
+        "score": 0.392
+      },
+      {
+        "word": "lull",
+        "score": 0.37
+      },
+      {
+        "word": "silence",
+        "score": 0.356
+      },
+      {
+        "word": "calm",
+        "score": 0.308
+      },
+      {
+        "word": "quiet",
+        "score": 0.308
+      },
+      {
+        "word": "stillness",
+        "score": 0.282
+      },
+      {
+        "word": "hush",
+        "score": 0.253
+      },
+      {
+        "word": "ease",
+        "score": 0.252
+      },
+      {
+        "word": "static",
+        "score": 0.222
+      },
+      {
+        "word": "allay",
+        "score": 0.2
+      },
+      {
+        "word": "quieten",
+        "score": 0.2
+      },
+      {
+        "word": "tranquilize",
+        "score": 0.153
+      },
+      {
+        "word": "withal",
+        "score": 0.119
+      },
+      {
+        "word": "soundless",
+        "score": 0.116
+      },
+      {
+        "word": "tranquil",
+        "score": 0.115
+      },
+      {
+        "word": "smooth",
+        "score": 0.104
+      },
+      {
+        "word": "unmoving",
+        "score": 0.098
+      },
+      {
+        "word": "placid",
+        "score": 0.082
+      },
+      {
+        "word": "unruffled",
+        "score": 0.082
+      },
+      {
+        "word": "nonmoving",
+        "score": 0.018
+      },
+      {
+        "word": "noneffervescent",
+        "score": 0.0
+      },
+      {
+        "word": "tranquillise",
+        "score": 0.0
+      },
+      {
+        "word": "tranquillize",
+        "score": 0.0
+      },
+      {
+        "word": "distillery",
+        "score": -0.01
+      }
+    ],
+    "top_synonyms": [
+      "even",
+      "still",
+      "stock-still",
+      "silent",
+      "inactive"
+    ],
+    "provenance": {
+      "wordnet": [
+        "allay",
+        "calm",
+        "distillery",
+        "ease",
+        "even",
+        "however",
+        "hush",
+        "inactive",
+        "lull",
+        "motionless",
+        "nevertheless",
+        "noneffervescent",
+        "nonetheless",
+        "notwithstanding",
+        "placid",
+        "quiet",
+        "quieten",
+        "relieve",
+        "silence",
+        "silent",
+        "smooth",
+        "soundless",
+        "static",
+        "still",
+        "stillness",
+        "stock-still",
+        "tranquil",
+        "tranquilize",
+        "tranquillise",
+        "tranquillize",
+        "unruffled",
+        "withal",
+        "yet"
+      ],
+      "spacy_top": []
+    }
+  },
+  "stillness": {
+    "seed": "stillness",
+    "synonyms_scored": [
+      {
+        "word": "stillness",
+        "score": 1.0
+      },
+      {
+        "word": "lifelessness",
+        "score": 0.595
+      },
+      {
+        "word": "still",
+        "score": 0.282
+      },
+      {
+        "word": "hush",
+        "score": 0.163
+      },
+      {
+        "word": "motionlessness",
+        "score": 0.0
+      },
+      {
+        "word": "windlessness",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "stillness",
+      "lifelessness",
+      "still",
+      "hush",
+      "motionlessness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "hush",
+        "lifelessness",
+        "motionlessness",
+        "still",
+        "stillness",
+        "windlessness"
+      ],
+      "spacy_top": []
+    }
+  },
+  "support": {
+    "seed": "support",
+    "synonyms_scored": [
+      {
+        "word": "hold",
+        "score": 1.0
+      },
+      {
+        "word": "support",
+        "score": 1.0
+      },
+      {
+        "word": "supporting",
+        "score": 0.845
+      },
+      {
+        "word": "sustain",
+        "score": 0.557
+      },
+      {
+        "word": "keep",
+        "score": 0.54
+      },
+      {
+        "word": "funding",
+        "score": 0.455
+      },
+      {
+        "word": "confirm",
+        "score": 0.417
+      },
+      {
+        "word": "living",
+        "score": 0.391
+      },
+      {
+        "word": "bolster",
+        "score": 0.378
+      },
+      {
+        "word": "underpin",
+        "score": 0.378
+      },
+      {
+        "word": "defend",
+        "score": 0.357
+      },
+      {
+        "word": "suffer",
+        "score": 0.356
+      },
+      {
+        "word": "back",
+        "score": 0.341
+      },
+      {
+        "word": "bear",
+        "score": 0.333
+      },
+      {
+        "word": "abide",
+        "score": 0.318
+      },
+      {
+        "word": "endure",
+        "score": 0.312
+      },
+      {
+        "word": "tolerate",
+        "score": 0.312
+      },
+      {
+        "word": "livelihood",
+        "score": 0.298
+      },
+      {
+        "word": "sustenance",
+        "score": 0.298
+      },
+      {
+        "word": "stomach",
+        "score": 0.273
+      },
+      {
+        "word": "affirm",
+        "score": 0.258
+      },
+      {
+        "word": "stand",
+        "score": 0.255
+      },
+      {
+        "word": "corroborate",
+        "score": 0.249
+      },
+      {
+        "word": "substantiate",
+        "score": 0.249
+      },
+      {
+        "word": "backing",
+        "score": 0.241
+      },
+      {
+        "word": "endorse",
+        "score": 0.208
+      },
+      {
+        "word": "patronise",
+        "score": 0.208
+      },
+      {
+        "word": "patronize",
+        "score": 0.208
+      },
+      {
+        "word": "documentation",
+        "score": 0.203
+      },
+      {
+        "word": "digest",
+        "score": 0.147
+      },
+      {
+        "word": "reinforcement",
+        "score": 0.143
+      },
+      {
+        "word": "backup",
+        "score": 0.093
+      },
+      {
+        "word": "subscribe",
+        "score": 0.084
+      },
+      {
+        "word": "patronage",
+        "score": 0.081
+      },
+      {
+        "word": "brook",
+        "score": 0.006
+      },
+      {
+        "word": "indorse",
+        "score": 0.0
+      },
+      {
+        "word": "reenforcement",
+        "score": -0.024
+      },
+      {
+        "word": "accompaniment",
+        "score": -0.055
+      }
+    ],
+    "top_synonyms": [
+      "hold",
+      "support",
+      "supporting",
+      "sustain",
+      "keep"
+    ],
+    "provenance": {
+      "wordnet": [
+        "abide",
+        "accompaniment",
+        "affirm",
+        "back",
+        "backing",
+        "backup",
+        "bear",
+        "brook",
+        "confirm",
+        "corroborate",
+        "defend",
+        "digest",
+        "documentation",
+        "endorse",
+        "endure",
+        "funding",
+        "hold",
+        "indorse",
+        "keep",
+        "livelihood",
+        "living",
+        "patronage",
+        "patronise",
+        "patronize",
+        "reenforcement",
+        "reinforcement",
+        "stand",
+        "stomach",
+        "subscribe",
+        "substantiate",
+        "suffer",
+        "support",
+        "supporting",
+        "sustain",
+        "sustenance",
+        "tolerate",
+        "underpin"
+      ],
+      "spacy_top": []
+    }
+  },
+  "surrender": {
+    "seed": "surrender",
+    "synonyms_scored": [
+      {
+        "word": "surrender",
+        "score": 1.0
+      },
+      {
+        "word": "deport",
+        "score": 0.472
+      },
+      {
+        "word": "capitulation",
+        "score": 0.359
+      },
+      {
+        "word": "resignation",
+        "score": 0.323
+      },
+      {
+        "word": "yielding",
+        "score": 0.248
+      },
+      {
+        "word": "extradite",
+        "score": 0.216
+      },
+      {
+        "word": "fall",
+        "score": 0.205
+      },
+      {
+        "word": "cede",
+        "score": 0.125
+      },
+      {
+        "word": "relinquish",
+        "score": 0.125
+      },
+      {
+        "word": "deliver",
+        "score": 0.092
+      }
+    ],
+    "top_synonyms": [
+      "surrender",
+      "deport",
+      "capitulation",
+      "resignation",
+      "yielding"
+    ],
+    "provenance": {
+      "wordnet": [
+        "capitulation",
+        "cede",
+        "deliver",
+        "fall",
+        "resignation",
+        "surrender",
+        "yielding"
+      ],
+      "spacy_top": []
+    }
+  },
+  "tender": {
+    "seed": "tender",
+    "synonyms_scored": [
+      {
+        "word": "tender",
+        "score": 1.0
+      },
+      {
+        "word": "crisp",
+        "score": 0.573
+      },
+      {
+        "word": "delicate",
+        "score": 0.573
+      },
+      {
+        "word": "flaky",
+        "score": 0.573
+      },
+      {
+        "word": "soft",
+        "score": 0.573
+      },
+      {
+        "word": "warm",
+        "score": 0.573
+      },
+      {
+        "word": "crispy",
+        "score": 0.459
+      },
+      {
+        "word": "raw",
+        "score": 0.316
+      },
+      {
+        "word": "tenderized",
+        "score": 0.272
+      },
+      {
+        "word": "sore",
+        "score": 0.258
+      },
+      {
+        "word": "short",
+        "score": 0.247
+      },
+      {
+        "word": "immature",
+        "score": 0.241
+      },
+      {
+        "word": "tenderise",
+        "score": 0.203
+      },
+      {
+        "word": "young",
+        "score": 0.196
+      },
+      {
+        "word": "cutter",
+        "score": 0.184
+      },
+      {
+        "word": "affectionate",
+        "score": 0.183
+      },
+      {
+        "word": "flakey",
+        "score": 0.181
+      },
+      {
+        "word": "sentimental",
+        "score": 0.156
+      },
+      {
+        "word": "caring",
+        "score": 0.147
+      },
+      {
+        "word": "loving",
+        "score": 0.147
+      },
+      {
+        "word": "protective",
+        "score": 0.137
+      },
+      {
+        "word": "cranky",
+        "score": 0.13
+      },
+      {
+        "word": "painful",
+        "score": 0.111
+      },
+      {
+        "word": "fond",
+        "score": 0.109
+      },
+      {
+        "word": "vulnerable",
+        "score": 0.103
+      },
+      {
+        "word": "sensitive",
+        "score": 0.088
+      },
+      {
+        "word": "tenderize",
+        "score": 0.083
+      },
+      {
+        "word": "bid",
+        "score": 0.081
+      },
+      {
+        "word": "tippy",
+        "score": 0.076
+      },
+      {
+        "word": "unstable",
+        "score": 0.07
+      },
+      {
+        "word": "offer",
+        "score": 0.067
+      },
+      {
+        "word": "chewable",
+        "score": 0.065
+      },
+      {
+        "word": "attender",
+        "score": 0.042
+      },
+      {
+        "word": "pinnace",
+        "score": 0.033
+      },
+      {
+        "word": "crank",
+        "score": 0.026
+      },
+      {
+        "word": "stamp",
+        "score": 0.02
+      },
+      {
+        "word": "attendant",
+        "score": 0.012
+      },
+      {
+        "word": "lovesome",
+        "score": 0.0
+      },
+      {
+        "word": "untoughened",
+        "score": 0.0
+      },
+      {
+        "word": "cuttable",
+        "score": -0.012
+      }
+    ],
+    "top_synonyms": [
+      "tender",
+      "crisp",
+      "delicate",
+      "flaky",
+      "soft"
+    ],
+    "provenance": {
+      "wordnet": [
+        "affectionate",
+        "attendant",
+        "attender",
+        "bid",
+        "crank",
+        "cranky",
+        "cutter",
+        "fond",
+        "lovesome",
+        "offer",
+        "pinnace",
+        "raw",
+        "sensitive",
+        "sore",
+        "stamp",
+        "tender",
+        "tenderise",
+        "tenderize",
+        "tippy",
+        "untoughened",
+        "warm"
+      ],
+      "spacy_top": []
+    }
+  },
+  "thread": {
+    "seed": "thread",
+    "synonyms_scored": [
+      {
+        "word": "thread",
+        "score": 1.0
+      },
+      {
+        "word": "meander",
+        "score": 0.296
+      },
+      {
+        "word": "wander",
+        "score": 0.211
+      },
+      {
+        "word": "ribbon",
+        "score": 0.155
+      },
+      {
+        "word": "draw",
+        "score": 0.148
+      },
+      {
+        "word": "yarn",
+        "score": 0.071
+      },
+      {
+        "word": "string",
+        "score": 0.062
+      },
+      {
+        "word": "wind",
+        "score": 0.015
+      },
+      {
+        "word": "weave",
+        "score": -0.052
+      }
+    ],
+    "top_synonyms": [
+      "thread",
+      "meander",
+      "wander",
+      "ribbon",
+      "draw"
+    ],
+    "provenance": {
+      "wordnet": [
+        "draw",
+        "meander",
+        "ribbon",
+        "string",
+        "thread",
+        "wander",
+        "weave",
+        "wind",
+        "yarn"
+      ],
+      "spacy_top": []
+    }
+  },
+  "time": {
+    "seed": "time",
+    "synonyms_scored": [
+      {
+        "word": "time",
+        "score": 1.0
+      },
+      {
+        "word": "sentence",
+        "score": 0.366
+      },
+      {
+        "word": "clip",
+        "score": 0.337
+      },
+      {
+        "word": "clock",
+        "score": 0.185
+      },
+      {
+        "word": "meter",
+        "score": 0.185
+      },
+      {
+        "word": "metre",
+        "score": -0.037
+      }
+    ],
+    "top_synonyms": [
+      "time",
+      "sentence",
+      "clip",
+      "clock",
+      "meter"
+    ],
+    "provenance": {
+      "wordnet": [
+        "clip",
+        "clock",
+        "meter",
+        "metre",
+        "sentence",
+        "time"
+      ],
+      "spacy_top": []
+    }
+  },
+  "together": {
+    "seed": "together",
+    "synonyms_scored": [
+      {
+        "word": "collectively",
+        "score": 1.0
+      },
+      {
+        "word": "together",
+        "score": 1.0
+      },
+      {
+        "word": "jointly",
+        "score": 0.36
+      },
+      {
+        "word": "assembled",
+        "score": 0.204
+      },
+      {
+        "word": "conjointly",
+        "score": 0.203
+      },
+      {
+        "word": "unitedly",
+        "score": 0.044
+      },
+      {
+        "word": "unneurotic",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "collectively",
+      "together",
+      "jointly",
+      "assembled",
+      "conjointly"
+    ],
+    "provenance": {
+      "wordnet": [
+        "together",
+        "unitedly"
+      ],
+      "spacy_top": []
+    }
+  },
+  "tracking": {
+    "seed": "tracking",
+    "synonyms_scored": [
+      {
+        "word": "tracking",
+        "score": 1.0
+      },
+      {
+        "word": "traverse",
+        "score": 0.301
+      },
+      {
+        "word": "cross",
+        "score": 0.223
+      },
+      {
+        "word": "tag",
+        "score": 0.212
+      },
+      {
+        "word": "cover",
+        "score": 0.203
+      },
+      {
+        "word": "tail",
+        "score": 0.177
+      },
+      {
+        "word": "trailing",
+        "score": 0.165
+      },
+      {
+        "word": "chase",
+        "score": 0.112
+      },
+      {
+        "word": "trail",
+        "score": 0.075
+      },
+      {
+        "word": "dog",
+        "score": 0.014
+      },
+      {
+        "word": "track",
+        "score": -0.009
+      }
+    ],
+    "top_synonyms": [
+      "tracking",
+      "traverse",
+      "cross",
+      "tag",
+      "cover"
+    ],
+    "provenance": {
+      "wordnet": [
+        "chase",
+        "cover",
+        "cross",
+        "dog",
+        "tag",
+        "tail",
+        "track",
+        "tracking",
+        "trail",
+        "trailing",
+        "traverse"
+      ],
+      "spacy_top": []
+    }
+  },
+  "transmission": {
+    "seed": "transmission",
+    "synonyms_scored": [
+      {
+        "word": "transmission",
+        "score": 1.0
+      },
+      {
+        "word": "transmitting",
+        "score": 1.0
+      },
+      {
+        "word": "infection",
+        "score": 0.316
+      },
+      {
+        "word": "contagion",
+        "score": 0.248
+      },
+      {
+        "word": "transmittance",
+        "score": 0.169
+      },
+      {
+        "word": "transmittal",
+        "score": 0.156
+      }
+    ],
+    "top_synonyms": [
+      "transmission",
+      "transmitting",
+      "infection",
+      "contagion",
+      "transmittance"
+    ],
+    "provenance": {
+      "wordnet": [
+        "contagion",
+        "infection",
+        "transmission",
+        "transmittal",
+        "transmittance",
+        "transmitting"
+      ],
+      "spacy_top": []
+    }
+  },
+  "unfolding": {
+    "seed": "unfolding",
+    "synonyms_scored": [
+      {
+        "word": "unfolding",
+        "score": 1.0
+      },
+      {
+        "word": "extend",
+        "score": 0.262
+      },
+      {
+        "word": "open",
+        "score": 0.228
+      },
+      {
+        "word": "spread",
+        "score": 0.228
+      },
+      {
+        "word": "unfold",
+        "score": 0.177
+      },
+      {
+        "word": "blossom",
+        "score": 0.148
+      },
+      {
+        "word": "flowering",
+        "score": 0.148
+      },
+      {
+        "word": "stretch",
+        "score": 0.022
+      }
+    ],
+    "top_synonyms": [
+      "unfolding",
+      "extend",
+      "open",
+      "spread",
+      "unfold"
+    ],
+    "provenance": {
+      "wordnet": [
+        "blossom",
+        "extend",
+        "flowering",
+        "open",
+        "spread",
+        "stretch",
+        "unfold",
+        "unfolding"
+      ],
+      "spacy_top": []
+    }
+  },
+  "use": {
+    "seed": "use",
+    "synonyms_scored": [
+      {
+        "word": "use",
+        "score": 1.0
+      },
+      {
+        "word": "employ",
+        "score": 0.512
+      },
+      {
+        "word": "practice",
+        "score": 0.512
+      },
+      {
+        "word": "usage",
+        "score": 0.456
+      },
+      {
+        "word": "utilization",
+        "score": 0.456
+      },
+      {
+        "word": "role",
+        "score": 0.428
+      },
+      {
+        "word": "utilize",
+        "score": 0.404
+      },
+      {
+        "word": "expend",
+        "score": 0.388
+      },
+      {
+        "word": "exercise",
+        "score": 0.38
+      },
+      {
+        "word": "function",
+        "score": 0.366
+      },
+      {
+        "word": "purpose",
+        "score": 0.337
+      },
+      {
+        "word": "enjoyment",
+        "score": 0.334
+      },
+      {
+        "word": "manipulation",
+        "score": 0.319
+      },
+      {
+        "word": "consumption",
+        "score": 0.317
+      },
+      {
+        "word": "apply",
+        "score": 0.313
+      },
+      {
+        "word": "utilisation",
+        "score": 0.303
+      },
+      {
+        "word": "utilise",
+        "score": 0.303
+      },
+      {
+        "word": "habit",
+        "score": 0.266
+      },
+      {
+        "word": "employment",
+        "score": 0.21
+      },
+      {
+        "word": "wont",
+        "score": 0.146
+      },
+      {
+        "word": "usance",
+        "score": 0.0
+      },
+      {
+        "word": "habituate",
+        "score": -0.034
+      }
+    ],
+    "top_synonyms": [
+      "use",
+      "employ",
+      "practice",
+      "usage",
+      "utilization"
+    ],
+    "provenance": {
+      "wordnet": [
+        "apply",
+        "consumption",
+        "employ",
+        "employment",
+        "enjoyment",
+        "exercise",
+        "expend",
+        "function",
+        "habit",
+        "habituate",
+        "manipulation",
+        "practice",
+        "purpose",
+        "role",
+        "usage",
+        "usance",
+        "use",
+        "utilisation",
+        "utilise",
+        "utilization",
+        "utilize"
+      ],
+      "spacy_top": []
+    }
+  },
+  "v10": {
+    "seed": "v10",
+    "synonyms_scored": [],
+    "top_synonyms": [],
+    "provenance": {
+      "wordnet": [],
+      "spacy_top": []
+    }
+  },
+  "void": {
+    "seed": "void",
+    "synonyms_scored": [
+      {
+        "word": "empty",
+        "score": 1.0
+      },
+      {
+        "word": "void",
+        "score": 1.0
+      },
+      {
+        "word": "avoid",
+        "score": 0.662
+      },
+      {
+        "word": "nothingness",
+        "score": 0.484
+      },
+      {
+        "word": "annul",
+        "score": 0.352
+      },
+      {
+        "word": "invalid",
+        "score": 0.337
+      },
+      {
+        "word": "invalidate",
+        "score": 0.281
+      },
+      {
+        "word": "nullify",
+        "score": 0.281
+      },
+      {
+        "word": "eliminate",
+        "score": 0.247
+      },
+      {
+        "word": "quash",
+        "score": 0.225
+      },
+      {
+        "word": "vacancy",
+        "score": 0.215
+      },
+      {
+        "word": "emptiness",
+        "score": 0.194
+      },
+      {
+        "word": "nugatory",
+        "score": 0.191
+      },
+      {
+        "word": "evacuate",
+        "score": 0.187
+      },
+      {
+        "word": "vacuum",
+        "score": 0.14
+      },
+      {
+        "word": "null",
+        "score": 0.135
+      },
+      {
+        "word": "nihility",
+        "score": 0.132
+      },
+      {
+        "word": "nullity",
+        "score": 0.041
+      },
+      {
+        "word": "vitiate",
+        "score": 0.037
+      }
+    ],
+    "top_synonyms": [
+      "empty",
+      "void",
+      "avoid",
+      "nothingness",
+      "annul"
+    ],
+    "provenance": {
+      "wordnet": [
+        "annul",
+        "avoid",
+        "emptiness",
+        "empty",
+        "evacuate",
+        "invalidate",
+        "nihility",
+        "nothingness",
+        "null",
+        "nullify",
+        "nullity",
+        "quash",
+        "vacancy",
+        "vacuum",
+        "vitiate",
+        "void"
+      ],
+      "spacy_top": []
+    }
+  },
+  "voltage": {
+    "seed": "voltage",
+    "synonyms_scored": [
+      {
+        "word": "voltage",
+        "score": 1.0
+      },
+      {
+        "word": "potential",
+        "score": 0.349
+      },
+      {
+        "word": "emf",
+        "score": -0.037
+      }
+    ],
+    "top_synonyms": [
+      "voltage",
+      "potential",
+      "emf"
+    ],
+    "provenance": {
+      "wordnet": [
+        "emf",
+        "potential",
+        "voltage"
+      ],
+      "spacy_top": []
+    }
+  },
+  "wa": {
+    "seed": "wa",
+    "synonyms_scored": [
+      {
+        "word": "washington",
+        "score": 0.737
+      }
+    ],
+    "top_synonyms": [
+      "washington"
+    ],
+    "provenance": {
+      "wordnet": [
+        "washington"
+      ],
+      "spacy_top": []
+    }
+  },
+  "wait": {
+    "seed": "wait",
+    "synonyms_scored": [
+      {
+        "word": "wait",
+        "score": 1.0
+      },
+      {
+        "word": "look",
+        "score": 0.645
+      },
+      {
+        "word": "expect",
+        "score": 0.591
+      },
+      {
+        "word": "waiting",
+        "score": 0.54
+      },
+      {
+        "word": "await",
+        "score": 0.504
+      },
+      {
+        "word": "hold",
+        "score": 0.255
+      },
+      {
+        "word": "delay",
+        "score": 0.086
+      },
+      {
+        "word": "waitress",
+        "score": 0.06
+      },
+      {
+        "word": "postponement",
+        "score": -0.033
+      }
+    ],
+    "top_synonyms": [
+      "wait",
+      "look",
+      "expect",
+      "waiting",
+      "await"
+    ],
+    "provenance": {
+      "wordnet": [
+        "await",
+        "delay",
+        "expect",
+        "hold",
+        "look",
+        "postponement",
+        "wait",
+        "waiting",
+        "waitress"
+      ],
+      "spacy_top": []
+    }
+  },
+  "waiting": {
+    "seed": "waiting",
+    "synonyms_scored": [
+      {
+        "word": "waiting",
+        "score": 1.0
+      },
+      {
+        "word": "wait",
+        "score": 0.54
+      },
+      {
+        "word": "expect",
+        "score": 0.527
+      },
+      {
+        "word": "look",
+        "score": 0.456
+      },
+      {
+        "word": "await",
+        "score": 0.419
+      },
+      {
+        "word": "ready",
+        "score": 0.344
+      },
+      {
+        "word": "waitress",
+        "score": 0.091
+      }
+    ],
+    "top_synonyms": [
+      "waiting",
+      "wait",
+      "expect",
+      "look",
+      "await"
+    ],
+    "provenance": {
+      "wordnet": [
+        "await",
+        "expect",
+        "look",
+        "wait",
+        "waiting",
+        "waitress"
+      ],
+      "spacy_top": []
+    }
+  },
+  "weave": {
+    "seed": "weave",
+    "synonyms_scored": [
+      {
+        "word": "weave",
+        "score": 1.0
+      },
+      {
+        "word": "interweave",
+        "score": 0.33
+      },
+      {
+        "word": "wander",
+        "score": 0.163
+      },
+      {
+        "word": "meander",
+        "score": 0.145
+      },
+      {
+        "word": "wind",
+        "score": 0.124
+      },
+      {
+        "word": "waver",
+        "score": 0.036
+      },
+      {
+        "word": "tissue",
+        "score": 0.012
+      },
+      {
+        "word": "thread",
+        "score": -0.052
+      }
+    ],
+    "top_synonyms": [
+      "weave",
+      "interweave",
+      "wander",
+      "meander",
+      "wind"
+    ],
+    "provenance": {
+      "wordnet": [
+        "interweave",
+        "meander",
+        "thread",
+        "tissue",
+        "wander",
+        "waver",
+        "weave",
+        "wind"
+      ],
+      "spacy_top": []
+    }
+  },
+  "wisdom": {
+    "seed": "wisdom",
+    "synonyms_scored": [
+      {
+        "word": "wisdom",
+        "score": 1.0
+      },
+      {
+        "word": "wiseness",
+        "score": 0.6
+      },
+      {
+        "word": "sapience",
+        "score": 0.276
+      },
+      {
+        "word": "soundness",
+        "score": 0.255
+      }
+    ],
+    "top_synonyms": [
+      "wisdom",
+      "wiseness",
+      "sapience",
+      "soundness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "sapience",
+        "soundness",
+        "wisdom",
+        "wiseness"
+      ],
+      "spacy_top": []
+    }
+  },
+  "witness": {
+    "seed": "witness",
+    "synonyms_scored": [
+      {
+        "word": "witness",
+        "score": 1.0
+      },
+      {
+        "word": "informant",
+        "score": 0.392
+      },
+      {
+        "word": "spectator",
+        "score": 0.282
+      },
+      {
+        "word": "find",
+        "score": 0.21
+      },
+      {
+        "word": "see",
+        "score": 0.203
+      },
+      {
+        "word": "viewer",
+        "score": 0.166
+      },
+      {
+        "word": "looker",
+        "score": 0.045
+      },
+      {
+        "word": "watcher",
+        "score": 0.018
+      },
+      {
+        "word": "attestant",
+        "score": 0.0
+      },
+      {
+        "word": "attestator",
+        "score": 0.0
+      },
+      {
+        "word": "attestor",
+        "score": 0.0
+      },
+      {
+        "word": "witnesser",
+        "score": 0.0
+      }
+    ],
+    "top_synonyms": [
+      "witness",
+      "informant",
+      "spectator",
+      "find",
+      "see"
+    ],
+    "provenance": {
+      "wordnet": [
+        "attestant",
+        "attestator",
+        "attestor",
+        "find",
+        "informant",
+        "looker",
+        "see",
+        "spectator",
+        "viewer",
+        "watcher",
+        "witness",
+        "witnesser"
+      ],
+      "spacy_top": []
+    }
+  },
+  "witnessed": {
+    "seed": "witnessed",
+    "synonyms_scored": [
+      {
+        "word": "attested",
+        "score": 0.541
+      },
+      {
+        "word": "seen",
+        "score": 0.467
+      },
+      {
+        "word": "observed",
+        "score": 0.411
+      },
+      {
+        "word": "see",
+        "score": 0.357
+      },
+      {
+        "word": "witness",
+        "score": 0.323
+      },
+      {
+        "word": "find",
+        "score": 0.136
+      }
+    ],
+    "top_synonyms": [
+      "attested",
+      "seen",
+      "observed",
+      "see",
+      "witness"
+    ],
+    "provenance": {
+      "wordnet": [
+        "find",
+        "see",
+        "witness"
+      ],
+      "spacy_top": []
+    }
+  },
+  "yearning": {
+    "seed": "yearning",
+    "synonyms_scored": [
+      {
+        "word": "yearning",
+        "score": 1.0
+      },
+      {
+        "word": "sad",
+        "score": 0.445
+      },
+      {
+        "word": "longing",
+        "score": 0.396
+      },
+      {
+        "word": "ache",
+        "score": 0.359
+      },
+      {
+        "word": "wistful",
+        "score": 0.338
+      },
+      {
+        "word": "languish",
+        "score": 0.214
+      },
+      {
+        "word": "hanker",
+        "score": 0.192
+      },
+      {
+        "word": "yearn",
+        "score": 0.192
+      },
+      {
+        "word": "long",
+        "score": 0.147
+      },
+      {
+        "word": "yen",
+        "score": 0.11
+      },
+      {
+        "word": "pine",
+        "score": 0.011
+      },
+      {
+        "word": "hungriness",
+        "score": -0.003
+      }
+    ],
+    "top_synonyms": [
+      "yearning",
+      "sad",
+      "longing",
+      "ache",
+      "wistful"
+    ],
+    "provenance": {
+      "wordnet": [
+        "ache",
+        "hanker",
+        "hungriness",
+        "languish",
+        "long",
+        "longing",
+        "pine",
+        "yearn",
+        "yearning",
+        "yen"
+      ],
+      "spacy_top": []
+    }
+  }
+}

@@ -1846,27 +1846,38 @@ water-access mechanic, and the dialogue-side flip animation.
 
 \---
 
-🐊 Swamp Encounter: Drossel’s Hideout
+🐊 Swamp Encounter: Mire of Echoes (Pre-Drossel Maze)
+
+**Before reaching Drossel's hideout, the player must navigate the Mire of Echoes — an optional side-quest maze where the swamp itself becomes a test of emotional wisdom.**
+
+See [SWAMP_MAZE_SIDEQUEST.md](SWAMP_MAZE_SIDEQUEST.md) for the full lore-corrected narrative with no technical language.
 
 Location
 
-• The Mire of Echoes — a misty, overgrown swamp just beyond the marketplace. • Access: Only
-reachable by watercraft (small skiff or glyph-powered ferry). • Lore: Once a data filtration zone
-for the Corelink system, now flooded and unstable. • Visuals:• Gnarled trees, hanging moss,
-flickering glyphs embedded in stone ruins. • Murky water reflects broken fragments of memory. •
-Drossel’s hideout is a half-sunken structure with tech remnants woven into its walls.
+• The Mire of Echoes — a misty, overgrown swamp just beyond the marketplace. 
+• Access: Only reachable by watercraft (small skiff or raft), accessible via Kaelen's guidance or a merchant's memory. 
+• Lore: An ancient place where water remembers what stone has forgotten. Once people gathered here. Now only echoes remain, and the swamp keeps their secrets. 
+• Visuals: Gnarled trees, hanging moss, old carvings in weathered stone ruins. Murky water that seems to hold reflections longer than it should. Drossel's hideout is a half-sunken structure, patient and secretive.
 
 \---
 
 Entry Mechanic
 
-• Player must earn passage via a merchant or shrine keeper who remembers the ferry glyph. • Trust or
-Empathy unlocks the route. • Observation reveals hidden glyph fragments that stabilize the skiff’s
-path.
+• Player must earn passage via Kaelen's trust (0.6+) or by convincing a merchant/shrine keeper who still remembers the old water routes. 
+• Trust or Empathy unlocks the route. 
+• Observation reveals subtle marks in the stone that guide the raft safely through flooded paths.
+
+**Maze Progression:**
+
+1. **The False Path** (Passage 1): A hollow grove with a cracked symbol. Observation, Empathy, and Trust gate on different revelations.
+2. **The Fog Logic Puzzle** (Passage 2): Five stone markers carved with emotion-shapes. The player must intuit which is which.
+3. **The Hidden Threshold** (Passage 3): A sunken archway where Drossel's tokens rest, preparing the player emotionally for confrontation.
+
+**Lore Note:** No NPC mentions technology, glyphs, or systems. Everything is described through folklore, intuition, and the weight of ancient silence. The mechanical gates (Observation, Empathy, Trust) function invisibly — NPCs only experience the world through emotion and memory.
 
 \---
 
-🎭 Drossel’s Dialogue-Side Flip
+🎭 🎭 Drossel’s Dialogue-Side Flip
 
 Visual Mechanic
 

@@ -43,15 +43,7 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
     processing_mode = st.session_state.get("processing_mode", "local")
     # Trace processing mode and orchestrator presence
     fp_present = 'yes' if st.session_state.get("firstperson_orchestrator") else 'no'
-    fp_orch = st.session_state.get("firstperson_orchestrator")
-    
-    # Log initial state
-    logger.info(f"handle_response_pipeline START")
-    logger.info(f"  mode={processing_mode}")
-    logger.info(f"  firstperson_present={fp_present}")
-    if fp_orch:
-        logger.info(f"  agent_mood={fp_orch.agent_state_manager.get_mood_string()}")
-        logger.info(f"  agent_turn={fp_orch.turn_count}")
+    logger.info(f"handle_response_pipeline start: mode={processing_mode}, firstperson_present={fp_present}")
     
     # Initialize Tier 1 Foundation if not already done
     if "tier1_foundation" not in st.session_state:
@@ -84,21 +76,6 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
             st.session_state.tier3_poetic_consciousness = None
 
     try:
-        # ⚠️ CRITICAL: Update agent emotional state based on user input
-        # This happens BEFORE response generation to track mood evolution
-        fp_orch = st.session_state.get("firstperson_orchestrator")
-        affect_parser = st.session_state.get("affect_parser")
-        
-        if fp_orch and affect_parser:
-            try:
-                # Analyze user's emotional affect
-                user_affect = affect_parser.analyze_affect(user_input)
-                # Update agent state based on user input
-                fp_orch.agent_state_manager.on_input(user_input, user_affect)
-                logger.info(f"  ✓ Agent state updated: mood={fp_orch.agent_state_manager.get_mood_string()}")
-            except Exception as e:
-                logger.debug(f"Agent state update failed: {e}")
-        
         # Run appropriate pipeline based on mode
         if processing_mode == "local":
             response = _run_local_processing(user_input, conversation_context)
@@ -117,15 +94,6 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
         # SYNTHESIS LAYER: Add captured details from user input to make response more specific
         # This ensures responses show they understood what the user said, not just generic prompts
         response = _synthesize_with_user_details(user_input, response, conversation_context)
-        
-        # ⚠️ CRITICAL: Integrate response into agent state for commitment tracking
-        # This happens AFTER response generation to record what agent committed to
-        if fp_orch:
-            try:
-                fp_orch.agent_state_manager.integrate_after_response(response)
-                logger.info(f"  ✓ Agent state integrated: commitments={fp_orch.agent_state_manager.state.established_commitments}")
-            except Exception as e:
-                logger.debug(f"Agent state integration failed: {e}")
         
         # TIER 1: Enhance response with learning and safety wrapping
         tier1 = st.session_state.get("tier1_foundation")
@@ -211,15 +179,6 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
         response = f"[ERROR] Response pipeline failed: {e}"
 
     processing_time = time.time() - start_time
-    
-    # Log final response and source
-    fp_orch = st.session_state.get("firstperson_orchestrator")
-    logger.info(f"handle_response_pipeline COMPLETE")
-    logger.info(f"  processing_time={processing_time:.3f}s")
-    logger.info(f"  response_length={len(response)}")
-    if fp_orch:
-        logger.info(f"  final_agent_mood={fp_orch.agent_state_manager.get_mood_string()}")
-        logger.info(f"  final_commitments={fp_orch.agent_state_manager.state.established_commitments}")
 
     return response, processing_time
 
@@ -336,13 +295,6 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
     best_glyph = local_analysis.get("best_glyph") if local_analysis else None
     voltage_response = local_analysis.get("voltage_response", "") if local_analysis else ""
     
-    # Log conditions for path selection
-    logger.info(f"_build_conversational_response: START")
-    logger.info(f"  voltage_response_exists: {bool(voltage_response and voltage_response.strip())}")
-    logger.info(f"  best_glyph_exists: {bool(best_glyph)}")
-    if best_glyph:
-        logger.info(f"  best_glyph_name: {best_glyph.get('glyph_name', 'UNKNOWN')}")
-    
     # If we have a voltage response, use that as the primary response
     if voltage_response and voltage_response.strip():
         # Clean up any leftover metadata
@@ -376,43 +328,28 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         return response
     
     # Use FirstPerson orchestrator to generate glyph-informed response
-    fp_orch = st.session_state.get("firstperson_orchestrator")
-    logger.info(f"  firstperson_orchestrator_available: {bool(fp_orch)}")
-    
-    if fp_orch:
-        try:
-            if best_glyph and isinstance(best_glyph, dict):
-                # Generate fresh response using glyph as constraint
-                logger.info(f"_build_conversational_response: ATTEMPTING_FIRSTPERSON glyph={best_glyph.get('glyph_name')}")
-                response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
-                logger.info(f"_build_conversational_response: SUCCESS_FIRSTPERSON glyph={best_glyph.get('glyph_name')}")
-                logger.info(f"  Agent mood: {fp_orch.agent_state_manager.get_mood_string()}")
-                logger.info(f"  Agent hypothesis: {fp_orch.agent_state_manager.state.emotional_hypothesis}")
-                try:
-                    st.session_state["last_used_response_source"] = {
-                        "source": "firstperson",
-                        "glyph": best_glyph.get("glyph_name"),
-                        "agent_mood": fp_orch.agent_state_manager.get_mood_string(),
-                        "response_snippet": response[:300],
-                    }
-                except Exception:
-                    pass
-                return response
-            else:
-                logger.info(f"_build_conversational_response: SKIPPING_FIRSTPERSON best_glyph_is_invalid")
-        except Exception as e:
-            logger.error(f"FirstPerson response generation failed: {type(e).__name__}: {e}")
-            import traceback
-            logger.error(f"Traceback: {traceback.format_exc()}")
-    else:
-        logger.info(f"_build_conversational_response: NO_FIRSTPERSON_ORCHESTRATOR_AVAILABLE")
+    try:
+        fp_orch = st.session_state.get("firstperson_orchestrator")
+        if fp_orch and best_glyph and isinstance(best_glyph, dict):
+            # Generate fresh response using glyph as constraint
+            response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
+            logger.info(f"_build_conversational_response: USING_FIRSTPERSON glyph={best_glyph.get('glyph_name')}")
+            try:
+                st.session_state["last_used_response_source"] = {
+                    "source": "firstperson",
+                    "glyph": best_glyph.get("glyph_name"),
+                    "response_snippet": response[:300],
+                }
+            except Exception:
+                pass
+            return response
+    except Exception as e:
+        logger.debug(f"FirstPerson response generation failed: {e}")
     
     # Fallback: build a simple acknowledgment + glyph insight
     # This is a minimal conversational wrapper
     glyph_name = best_glyph.get("glyph_name", "") if best_glyph and isinstance(best_glyph, dict) else ""
     glyph_desc = best_glyph.get("description", "") if best_glyph and isinstance(best_glyph, dict) else ""
-    
-    logger.info(f"_build_conversational_response: FALLBACK_SIMPLE_RESPONSE glyph={glyph_name if glyph_name else 'NONE'}")
     
     if glyph_name:
         # Create a simple conversational response

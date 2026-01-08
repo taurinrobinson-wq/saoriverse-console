@@ -1,0 +1,82 @@
+---
+name: Self-diagnostic and Auto-fix
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  diagnostic:
+    name: Run self-diagnostic and attempt fixes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies (if present)
+        run: |
+          # Use the runner Python explicitly to ensure packages are installed
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+          # Ensure pytest is available for the self-diagnostic to run tests
+          python -m pip install pytest
+
+      - name: Run self-diagnostic (auto-fix)
+        run: |
+          python tools/self_diagnostic.py --auto-fix
+
+      - name: Commit and push fixes (if any)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Expand github.head_ref into an env var so the shell sees a concrete
+          # value (prevents empty expansion inside the script when running
+          # against merge refs / detached HEAD).
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email \
+              "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "chore(diagnostics): auto-fix applied by CI"
+            # Use the pre-expanded env var to decide where to push.
+            # When this job runs on a pull_request, GITHUB_HEAD_REF will
+            # contain the source branch name and we can push the detached
+            # HEAD back to it.
+            if [ -n "$GITHUB_HEAD_REF" ]; then
+              echo "Pushing fixes to PR head branch"
+              git push origin HEAD:$GITHUB_HEAD_REF
+            else
+              # Otherwise push to the current branch (e.g., runs on main)
+              git push
+            fi
+          else
+            echo "No fixes to commit."
+          fi
+
+      - name: Run test suite (focused for PRs)
+        run: |
+          # Run the small, stable unit-test set on PRs so the self-diagnostic
+          # job doesn't run slow/integration tests that are flaky in CI.
+          pytest -q \
+            tests/test_ui_template_usage.py \
+            tests/test_sanctuary.py \
+            tests/unit/test_multi_glyph_selection.py \
+            tests/unit/test_display_name_normalizer.py \
+            tests/unit/test_glyph_tiebreak.py \
+            tests/unit/test_sanctuary_mode_toggle.py
