@@ -45,7 +45,7 @@ export default function GamePage() {
         // Start a new game session via backend API
         const data = await gameApi.startGame(playerName);
         setSessionId(data.session_id);
-        setGameState(data.state);
+        setGameState(data);
         setLoading(false);
       } catch (err) {
         setError(`Failed to initialize game: ${err}`);
@@ -60,8 +60,8 @@ export default function GamePage() {
     if (!sessionId) return;
 
     try {
-      const data = await gameApi.takeAction(sessionId, choiceIndex);
-      setGameState(data.state);
+      const data = await gameApi.takeAction(choiceIndex, undefined, sessionId);
+      setGameState(data);
     } catch (err) {
       setError(`Action failed: ${err}`);
     }
