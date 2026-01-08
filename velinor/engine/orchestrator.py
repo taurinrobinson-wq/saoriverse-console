@@ -19,6 +19,8 @@ from .twine_adapter import TwineGameSession, TwineStoryLoader, DialogueParser
 from .trait_system import TraitProfiler, TraitChoice, TraitType
 from .coherence_calculator import CoherenceCalculator
 from .npc_response_engine import NPCResponseEngine
+from .event_timeline import EventTimeline, CollapsePhase, AftermathPath
+from .collapse_scene import CollapseTriggerScene, ImmediateAftermathScene, AftermathPathDivergence
 # Try to import REMNANTS NPC manager and helper constructors
 try:
     from .npc_manager import NPCManager, create_marketplace_npcs, create_marketplace_influence_map
@@ -83,10 +85,15 @@ class VelinorTwineOrchestrator:
         self.first_person = first_person_module
         self.npc_system = npc_system
         
-        # Initialize trait system
+        # Initialize trait system (Phase 1 & 2)
         self.trait_profiler = TraitProfiler(player_name)
         self.coherence_calculator = CoherenceCalculator(self.trait_profiler)
         self.npc_response_engine = NPCResponseEngine(self.trait_profiler)
+        
+        # Initialize Phase 3 systems
+        self.event_timeline = EventTimeline()
+        self.collapse_trigger_scene = CollapseTriggerScene()
+        self.aftermath_scene = ImmediateAftermathScene()
         
         # REMNANTS manager (for trait/influence simulation)
         self.remnants_manager = NPCManager() if NPCManager is not None else None
@@ -693,3 +700,141 @@ class VelinorTwineOrchestrator:
                 save_data['story_context']['current_passage']
             )
         ) if self.twine_session else {}
+    
+    # ===== PHASE 3: COLLAPSE EVENT SYSTEM =====
+    
+    def advance_game_day(self) -> Dict[str, Any]:
+        """Advance one in-game day and check for events"""
+        day_events = self.event_timeline.advance_day()
+        
+        return {
+            "day": day_events["day"],
+            "phase": self.event_timeline.current_phase.value,
+            "events": day_events["triggered_events"],
+            "building_status": self.event_timeline.get_building_description(),
+            "game_state": self.event_timeline.get_game_state()
+        }
+    
+    def set_marketplace_conclusion(self, coherence: float, primary_trait: str) -> None:
+        """
+        Store player's state from marketplace scene and sync to timeline.
+        Called after marketplace scene completion.
+        """
+        malrik_elenya_cooperation = 100 - int((100 - coherence) * 0.3)
+        
+        self.event_timeline.set_marketplace_state(
+            coherence=coherence,
+            primary_trait=primary_trait,
+            malrik_elenya_cooperation=malrik_elenya_cooperation
+        )
+    
+    def trigger_collapse_event(self) -> Dict[str, Any]:
+        """Trigger the building collapse event"""
+        collapse_result = self.event_timeline.trigger_collapse()
+        
+        return {
+            "status": "collapse_triggered",
+            "scene": self.collapse_trigger_scene.get_post_collapse_dialogue(),
+            "collapse_data": collapse_result,
+            "game_state": self.event_timeline.get_game_state()
+        }
+    
+    def record_post_collapse_intervention(
+        self,
+        npc_name: str,
+        choice: str
+    ) -> Dict[str, Any]:
+        """Record player intervention during immediate aftermath"""
+        intervention_result = self.event_timeline.record_player_intervention(
+            npc_name=npc_name,
+            choice=choice,
+            effectiveness=1
+        )
+        
+        # Update aftermath scene based on intervention
+        self.aftermath_scene.player_interventions.append(choice)
+        
+        # Update position if choosing a side
+        if choice in ["pro_malrik", "support_malrik"]:
+            self.aftermath_scene.player_position = "pro_malrik"
+        elif choice in ["pro_elenya", "support_elenya"]:
+            self.aftermath_scene.player_position = "pro_elenya"
+        
+        return {
+            "intervention_recorded": True,
+            "rebuild_potential": intervention_result["rebuild_potential"],
+            "aftermath_path_probabilities": intervention_result["aftermath_path_probability"]
+        }
+    
+    def get_aftermath_narration(self, phase: str) -> str:
+        """Get narration for aftermath phase"""
+        if phase == "separation":
+            return self.aftermath_scene.get_separation_narration()
+        elif phase == "malrik_isolation":
+            return self.aftermath_scene.get_malrik_isolation_dialogue()
+        elif phase == "elenya_isolation":
+            return self.aftermath_scene.get_elenya_isolation_dialogue()
+        elif phase == "coren_exhaustion":
+            return self.aftermath_scene.get_coren_exhaustion_dialogue()
+        return ""
+    
+    def get_npc_response_to_intervention(
+        self,
+        npc_name: str,
+        intervention_type: str
+    ) -> str:
+        """Get NPC response to player intervention"""
+        if npc_name == "malrik":
+            return self.aftermath_scene.get_malrik_response_to_intervention(intervention_type)
+        elif npc_name == "elenya":
+            return self.aftermath_scene.get_elenya_response_to_intervention(intervention_type)
+        return ""
+    
+    def get_aftermath_path_narration(self, path: AftermathPath) -> str:
+        """Get narration for the aftermath path resolution"""
+        if path == AftermathPath.REBUILD_TOGETHER:
+            return self.aftermath_scene.get_rebuild_together_setup() + "\n\n" + \
+                   self.aftermath_scene.get_rebuild_together_progression()
+        elif path == AftermathPath.STALEMATE:
+            return self.aftermath_scene.get_stalemate_setup() + "\n\n" + \
+                   self.aftermath_scene.get_stalemate_resolution()
+        elif path == AftermathPath.COMPLETE_SEPARATION:
+            return self.aftermath_scene.get_complete_separation_setup() + "\n\n" + \
+                   self.aftermath_scene.get_complete_separation_aftermath()
+        return ""
+    
+    def resolve_aftermath_path(self) -> Dict[str, Any]:
+        """Determine and resolve which aftermath path the player is on"""
+        path = self.event_timeline.aftermath_path
+        path_connection = AftermathPathDivergence.get_aftermath_ending_connection(path)
+        
+        return {
+            "aftermath_path": path.value,
+            "description": path_connection.get("description", ""),
+            "narration": self.get_aftermath_path_narration(path),
+            "ending_paths_unlocked": path_connection.get("ending_paths_unlocked", []),
+            "npc_state": path_connection.get("npc_state", ""),
+            "world_state": path_connection.get("world_state", ""),
+            "game_state": self.event_timeline.get_game_state()
+        }
+    
+    def get_phase3_status(self) -> Dict[str, Any]:
+        """Get complete Phase 3 game status for UI"""
+        coherence_report = self.coherence_calculator.get_coherence_report()
+        
+        return {
+            "current_day": self.event_timeline.current_day,
+            "current_phase": self.event_timeline.current_phase.value,
+            "aftermath_path": self.event_timeline.aftermath_path.value,
+            "building_status": self.event_timeline.get_building_description(),
+            "building_stability": self.event_timeline.building_status.stability_percent,
+            "malrik_stress": self.event_timeline.malrik_state.stress_level,
+            "elenya_stress": self.event_timeline.elenya_state.stress_level,
+            "malrik_elenya_cooperation": self.event_timeline.malrik_state.cooperation_level,
+            "collapse_triggered": self.event_timeline.collapse_triggered,
+            "rebuild_potential": self.event_timeline.player_interventions.get_rebuild_potential(),
+            "player_interventions_count": self.event_timeline.player_interventions.total_intervention_count,
+            "coherence": coherence_report.overall_coherence,
+            "primary_trait": self.trait_profiler.get_primary_trait().value if self.trait_profiler.get_primary_trait() else "none"
+        }
+
