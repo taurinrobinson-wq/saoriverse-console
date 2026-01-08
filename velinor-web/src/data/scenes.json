@@ -1,0 +1,95 @@
+[
+  {
+    "id": "velhara_market",
+    "background": "/assets/backgrounds/city_market(16-9).png",
+    "overlay": "/assets/overlays/dust.png",
+    "text": "The market stretches before you. Dust hangs in shafts of light. People move like ghosts through the stalls.",
+    "npc_name": "Market Keeper",
+    "choices": [
+      { "label": "Step forward", "next": "collapse_scene" },
+      { "label": "Keep your distance", "next": "underpass_scene" },
+      { "label": "Explore the stalls", "next": "swamp_scene" },
+      { "label": "Freeze and observe", "next": "forest_scene" }
+    ]
+  },
+  {
+    "id": "collapse_scene",
+    "background": "/assets/backgrounds/desert.png",
+    "overlay": null,
+    "text": "The ground shifts. Light erupts from the stones. Something pulls at you—and you lose your footing.",
+    "npc_name": "The Collapse",
+    "choices": [
+      { "label": "Search the debris", "next": "lake_scene" },
+      { "label": "Call out for help", "next": "swamp_scene" },
+      { "label": "Return to the market", "next": "velhara_market" }
+    ]
+  },
+  {
+    "id": "underpass_scene",
+    "background": "/assets/backgrounds/forest.png",
+    "overlay": null,
+    "text": "The air is damp. Underground passages twist before you. Glyphs flicker faintly on the walls—or do they?",
+    "npc_name": "The Underground",
+    "choices": [
+      { "label": "Follow the glyphs", "next": "glyph_chamber" },
+      { "label": "Turn back", "next": "velhara_market" },
+      { "label": "Move deeper", "next": "lake_scene" }
+    ]
+  },
+  {
+    "id": "swamp_scene",
+    "background": "/assets/backgrounds/swamp(16-9-blue).png",
+    "overlay": null,
+    "text": "Water laps at broken stone. Mangroves twist through the ruins. Something moves beneath the surface.",
+    "npc_name": "The Swamp",
+    "choices": [
+      { "label": "Wade deeper", "next": "forest_scene" },
+      { "label": "Search the waterline", "next": "lake_scene" },
+      { "label": "Return to solid ground", "next": "velhara_market" }
+    ]
+  },
+  {
+    "id": "forest_scene",
+    "background": "/assets/backgrounds/forest_city.png",
+    "overlay": null,
+    "text": "Vines climb the towers. The city breathes with green silence. You feel watched, but gently.",
+    "npc_name": "The Forest",
+    "choices": [
+      { "label": "Climb the spire", "next": "glyph_chamber" },
+      { "label": "Rest among the roots", "next": "collapse_scene" },
+      { "label": "Descend to the water", "next": "lake_scene" }
+    ]
+  },
+  {
+    "id": "lake_scene",
+    "background": "/assets/backgrounds/lake.png",
+    "overlay": null,
+    "text": "The lake glows faintly. Something stirs beneath the surface. The water calls to you—ancient and patient.",
+    "npc_name": "The Lake",
+    "choices": [
+      { "label": "Dive in", "next": "glyph_chamber" },
+      { "label": "Circle the shore", "next": "swamp_scene" },
+      { "label": "Climb the cliffs", "next": "forest_scene" }
+    ]
+  },
+  {
+    "id": "glyph_chamber",
+    "background": "/assets/backgrounds/rural_city.png",
+    "overlay": null,
+    "text": "Glyphs hum with memory. The Tone reverberates through the ruins. You understand—or almost understand.",
+    "npc_name": "The Glyphs",
+    "choices": [
+      { "label": "Touch the glyphs", "next": "ending_fragment" },
+      { "label": "Step away", "next": "forest_scene" },
+      { "label": "Listen deeper", "next": "ending_fragment" }
+    ]
+  },
+  {
+    "id": "ending_fragment",
+    "background": "/assets/backgrounds/velinor_title_eyes_closed.png",
+    "overlay": null,
+    "text": "Velhara's remnants echo. The Tone lingers, waiting. You have touched the thread. What will you do with it?",
+    "npc_name": "Velinor",
+    "choices": []
+  }
+]
