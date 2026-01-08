@@ -21,6 +21,8 @@ from .coherence_calculator import CoherenceCalculator
 from .npc_response_engine import NPCResponseEngine
 from .event_timeline import EventTimeline, CollapsePhase, AftermathPath
 from .collapse_scene import CollapseTriggerScene, ImmediateAftermathScene, AftermathPathDivergence
+from .ending_system import EndingManager, CoreLinkChoice, EndingType
+from .corelink_scene import CoreLinkScene
 # Try to import REMNANTS NPC manager and helper constructors
 try:
     from .npc_manager import NPCManager, create_marketplace_npcs, create_marketplace_influence_map
@@ -94,6 +96,10 @@ class VelinorTwineOrchestrator:
         self.event_timeline = EventTimeline()
         self.collapse_trigger_scene = CollapseTriggerScene()
         self.aftermath_scene = ImmediateAftermathScene()
+        
+        # Initialize Phase 4 systems (Ending)
+        self.ending_manager = EndingManager()
+        self.corelink_scene = CoreLinkScene()
         
         # REMNANTS manager (for trait/influence simulation)
         self.remnants_manager = NPCManager() if NPCManager is not None else None
@@ -838,3 +844,90 @@ class VelinorTwineOrchestrator:
             "primary_trait": self.trait_profiler.get_primary_trait().value if self.trait_profiler.get_primary_trait() else "none"
         }
 
+    # ============================================================================
+    # PHASE 4: ENDING SYSTEM
+    # ============================================================================
+    
+    def initiate_ending_sequence(self) -> Dict[str, Any]:
+        """Start the ending sequence after Phase 3 completes"""
+        # Set up ending manager with Phase 3 state
+        coherence_report = self.coherence_calculator.get_coherence_report()
+        primary_trait = self.trait_profiler.get_primary_trait()
+        rebuild_advocacy = self.event_timeline.player_interventions.get_rebuild_potential()
+        
+        self.ending_manager.setup_from_phase3(
+            aftermath_path=self.event_timeline.aftermath_path,
+            coherence=coherence_report.overall_coherence,
+            primary_trait=primary_trait.value if primary_trait else "unknown",
+            rebuild_advocacy=rebuild_advocacy
+        )
+        
+        return {
+            "phase": "ending_sequence_started",
+            "corelink_chamber_narration": self.corelink_scene.get_chamber_entrance_narration(),
+            "setup_monologue": self.corelink_scene.get_setup_monologue(),
+            "aftermath_path": self.event_timeline.aftermath_path.value,
+            "player_coherence": coherence_report.overall_coherence,
+            "primary_trait": primary_trait.value if primary_trait else "unknown"
+        }
+    
+    def get_corelink_choice_prompt(self) -> Dict[str, Any]:
+        """Get the player choice prompt for Corelink decision"""
+        return {
+            "phase": "corelink_choice",
+            "choices": self.corelink_scene.get_choice_prompt(),
+            "reflection_prompt": self.corelink_scene.get_setup_monologue()
+        }
+    
+    def make_corelink_choice(self, choice: str) -> Dict[str, Any]:
+        """Player makes their Corelink decision"""
+        if choice not in ["restart", "abandon"]:
+            return {"error": f"Invalid choice: {choice}"}
+        
+        # Convert to CoreLinkChoice enum
+        core_choice = CoreLinkChoice.RESTART_SYSTEM if choice == "restart" else CoreLinkChoice.ABANDON_SYSTEM
+        
+        # Record choice and determine ending
+        ending_result = self.ending_manager.player_chooses_corelink(core_choice)
+        
+        # Get choice confirmation
+        confirmation = self.corelink_scene.get_choice_confirmation(choice)
+        
+        return {
+            "choice_made": True,
+            "choice": choice,
+            "confirmation_narration": confirmation["confirmation_narration"],
+            "ending_determined": ending_result["ending_determined"],
+            "ending_type": ending_result["ending_type"],
+            "ending_title": ending_result["ending_title"],
+            "aftermath_reflection": self.corelink_scene.get_after_choice_reflection(choice)
+        }
+    
+    def trigger_ending(self) -> Dict[str, Any]:
+        """Trigger the determined ending"""
+        ending_content = self.ending_manager.get_ending_content()
+        
+        if "error" in ending_content:
+            return ending_content
+        
+        return {
+            "phase": "ending",
+            "ending_type": ending_content["ending_type"],
+            "ending_title": ending_content["ending_title"],
+            "ending_description": ending_content["ending_description"],
+            "narration": ending_content["narration"],
+            "npc_final_states": ending_content["npc_final_states"],
+            "game_complete": True
+        }
+    
+    def get_ending_status(self) -> Dict[str, Any]:
+        """Get current ending status"""
+        return self.ending_manager.get_ending_status()
+    
+    def get_phase4_status(self) -> Dict[str, Any]:
+        """Get complete Phase 4 game status for UI"""
+        return {
+            "phase": 4,
+            "ending_status": self.get_ending_status(),
+            "game_complete": self.ending_manager.current_ending is not None
+        }
