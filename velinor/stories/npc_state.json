@@ -1,0 +1,2546 @@
+{
+  "npc_profiles": {
+    "Ravi": {
+      "name": "Ravi",
+      "remnants": {
+        "resolve": 0.29999999999999993,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.1,
+        "skepticism": 0.9
+      }
+    },
+    "Nima": {
+      "name": "Nima",
+      "remnants": {
+        "resolve": 0.29999999999999993,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.9,
+        "skepticism": 0.1
+      }
+    },
+    "Kaelen": {
+      "name": "Kaelen",
+      "remnants": {
+        "resolve": 0.2,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.25,
+        "skepticism": 0.75
+      }
+    },
+    "Tovren": {
+      "name": "Tovren",
+      "remnants": {
+        "resolve": 0.39999999999999997,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.1,
+        "skepticism": 0.9
+      }
+    },
+    "Sera": {
+      "name": "Sera",
+      "remnants": {
+        "resolve": 0.2,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.6,
+        "skepticism": 0.3
+      }
+    },
+    "Dalen": {
+      "name": "Dalen",
+      "remnants": {
+        "resolve": 0.4000000000000001,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.5,
+        "skepticism": 0.4
+      }
+    },
+    "Mariel": {
+      "name": "Mariel",
+      "remnants": {
+        "resolve": 0.29999999999999993,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.9,
+        "skepticism": 0.1
+      }
+    },
+    "Korrin": {
+      "name": "Korrin",
+      "remnants": {
+        "resolve": 0.2,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.1,
+        "skepticism": 0.9
+      }
+    },
+    "Drossel": {
+      "name": "Drossel",
+      "remnants": {
+        "resolve": 0.4000000000000001,
+        "empathy": 0.9,
+        "memory": 0.9,
+        "nuance": 0.7,
+        "authority": 0.30000000000000004,
+        "need": 0.9,
+        "trust": 0.9,
+        "skepticism": 0.1
+      }
+    }
+  },
+  "influence_map": {
+    "Ravi": {
+      "Nima": -0.08,
+      "Tovren": 0.1,
+      "Mariel": 0.05
+    },
+    "Nima": {
+      "Ravi": -0.05,
+      "Kaelen": -0.15,
+      "Mariel": 0.1
+    },
+    "Kaelen": {
+      "Tovren": -0.1,
+      "Korrin": 0.05,
+      "Drossel": 0.2
+    },
+    "Tovren": {
+      "Ravi": 0.05
+    },
+    "Sera": {
+      "Mariel": 0.15
+    },
+    "Mariel": {
+      "Ravi": 0.1,
+      "Nima": 0.1
+    },
+    "Drossel": {
+      "Kaelen": 0.15,
+      "Korrin": -0.1,
+      "Tovren": -0.2,
+      "Ravi": -0.25,
+      "Nima": 0.05
+    }
+  },
+  "history": [
+    {
+      "encounter": 1,
+      "tone_effects": {
+        "courage": 0.2,
+        "narrative_presence": 0.15
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 2,
+      "tone_effects": {
+        "wisdom": 0.2,
+        "courage": -0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 3,
+      "tone_effects": {
+        "empathy": 0.15,
+        "narrative_presence": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 4,
+      "tone_effects": {
+        "observation": 0.2,
+        "wisdom": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 5,
+      "tone_effects": {
+        "courage": 0.15,
+        "narrative_presence": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 6,
+      "tone_effects": {
+        "wisdom": 0.15,
+        "observation": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 7,
+      "tone_effects": {
+        "empathy": 0.15,
+        "observation": 0.15
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 8,
+      "tone_effects": {
+        "empathy": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 9,
+      "tone_effects": {
+        "empathy": 0.2,
+        "observation": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 10,
+      "tone_effects": {
+        "empathy": 0.15
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 11,
+      "tone_effects": {
+        "observation": 0.15,
+        "wisdom": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 12,
+      "tone_effects": {
+        "observation": 0.1,
+        "wisdom": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 13,
+      "tone_effects": {
+        "wisdom": 0.15,
+        "observation": 0.15
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 14,
+      "tone_effects": {
+        "courage": 0.1,
+        "narrative_presence": 0.15
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 15,
+      "tone_effects": {
+        "empathy": 0.15
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 16,
+      "tone_effects": {
+        "courage": 0.2,
+        "narrative_presence": 0.15
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 17,
+      "tone_effects": {
+        "wisdom": 0.2
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 18,
+      "tone_effects": {
+        "empathy": 0.05
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    },
+    {
+      "encounter": 19,
+      "tone_effects": {
+        "courage": 0.15,
+        "observation": 0.1
+      },
+      "npc_profiles": {
+        "Ravi": {
+          "name": "Ravi",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Nima": {
+          "name": "Nima",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Kaelen": {
+          "name": "Kaelen",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.25,
+            "skepticism": 0.75
+          }
+        },
+        "Tovren": {
+          "name": "Tovren",
+          "remnants": {
+            "resolve": 0.39999999999999997,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Sera": {
+          "name": "Sera",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.6,
+            "skepticism": 0.3
+          }
+        },
+        "Dalen": {
+          "name": "Dalen",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.5,
+            "skepticism": 0.4
+          }
+        },
+        "Mariel": {
+          "name": "Mariel",
+          "remnants": {
+            "resolve": 0.29999999999999993,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        },
+        "Korrin": {
+          "name": "Korrin",
+          "remnants": {
+            "resolve": 0.2,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.1,
+            "skepticism": 0.9
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.4000000000000001,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.7,
+            "authority": 0.30000000000000004,
+            "need": 0.9,
+            "trust": 0.9,
+            "skepticism": 0.1
+          }
+        }
+      }
+    }
+  ]
+}
