@@ -1122,3 +1122,77 @@ class VelinorTwineOrchestrator:
             "has_quick_save": self.quick_save_manager.has_quick_save(),
             "save_directory": str(self.save_manager.save_directory),
         }
+    
+    # ======================== Phase 6: API Serialization ========================
+    
+    def get_status(self) -> Dict[str, Any]:
+        """Get complete game status for API serialization"""
+        try:
+            # Basic game progress
+            status = {
+                "player_name": self.trait_profiler.player_name,
+                "phase": self.event_timeline.current_phase.value if self.event_timeline.current_phase else "unknown",
+                "day": self.event_timeline.current_day,
+                "completed": self.ending_manager.game_completed if self.ending_manager else False,
+            }
+            
+            # Coherence info
+            coherence = self.coherence_calculator.get_coherence_report()
+            status["coherence_score"] = coherence.overall_coherence
+            status["coherence_level"] = coherence.level.value if hasattr(coherence, 'level') else 'UNKNOWN'
+            status["primary_trait"] = self.trait_profiler.get_primary_trait().value
+            
+            # Building status
+            status["building_stability"] = self.event_timeline.building_status.stability_percent
+            status["malrik_stress"] = self.event_timeline.malrik_state.stress_level
+            status["elenya_stress"] = self.event_timeline.elenya_state.stress_level
+            
+            # Ending info
+            if self.ending_manager.game_completed:
+                status["ending_type"] = self.ending_manager.current_ending.value if self.ending_manager.current_ending else None
+            
+            return status
+        except Exception as e:
+            return {
+                "error": str(e),
+                "player_name": self.trait_profiler.player_name if self.trait_profiler else "Unknown",
+            }
+    
+    def process_player_choice(self, choice_index: int) -> Dict[str, Any]:
+        """Process a player choice (API wrapper)"""
+        try:
+            # Process the choice through the game engine
+            result = self.process_player_action(choice_index=choice_index)
+            
+            # Return structured result
+            return {
+                "success": True,
+                "choice_processed": True,
+                "result": result,
+                "new_status": self.get_status(),
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "choice_processed": False,
+                "error": str(e),
+            }
+    
+    def process_player_input(self, player_input: str) -> Dict[str, Any]:
+        """Process free-form player input (API wrapper)"""
+        try:
+            # Try to process as action
+            result = self.process_player_action(player_input=player_input)
+            
+            return {
+                "success": True,
+                "input_processed": True,
+                "result": result,
+                "new_status": self.get_status(),
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "input_processed": False,
+                "error": str(e),
+            }

@@ -1,0 +1,38 @@
+{
+  "slot_id": "save_5",
+  "save_name": "TestSave",
+  "state": {
+    "version": "1.0",
+    "save_timestamp": "2026-01-07T19:57:40.157367",
+    "player_name": "TestPlayer",
+    "play_duration_seconds": 0,
+    "trait_choices": {},
+    "coherence_score": 100.0,
+    "coherence_level": 95,
+    "primary_trait": "integration",
+    "secondary_trait": "",
+    "marketplace_visited": false,
+    "marketplace_path_chosen": "empathy",
+    "npc_compatibility": {
+      "malrik": 75.0,
+      "elenya": 75.0,
+      "coren": 50.0
+    },
+    "marketplace_conclusion_coherence": 75.0,
+    "current_day": 0,
+    "current_phase": "pre_collapse",
+    "building_stability_percent": 100,
+    "malrik_stress": 0,
+    "elenya_stress": 0,
+    "malrik_elenya_cooperation": 100,
+    "collapse_triggered": false,
+    "aftermath_path": "undetermined",
+    "player_interventions": [],
+    "rebuild_potential": 10,
+    "ending_type": null,
+    "ending_title": "",
+    "corelink_choice": "",
+    "game_completed": false,
+    "npc_final_states": null
+  }
+}
