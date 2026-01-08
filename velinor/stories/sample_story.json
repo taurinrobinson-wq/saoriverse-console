@@ -1,0 +1,776 @@
+{
+  "name": "Velinor: Remnants of the Tone - Sample",
+  "startnode": "1",
+  "passages": [
+    {
+      "pid": "1",
+      "name": "market_entry",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou step into the Market District, the air smelling of old spices and dust. Stalls sag with age; light pools in broken stones. Across the plaza, two figures stand framed by a ruined awning — Ravi, a lean merchant with quick eyes, and Nima, whose expression is open and curious. They don't move. They simply watch.\n\nYou're suddenly aware of them. You're aware of being watched.\n\n*They're staring at me. What should I do?*\n\n\n[[Step forward and greet them->ravi_nima_greet]]\n[[Stand still and watch->ravi_nima_observe]]\n[[Call out to them to stop->ravi_nima_callout]]\n[[Turn away and explore the stalls->market_exploration]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": ["Ravi", "Nima"]
+      },
+      "choices": [
+        {
+          "text": "Step forward and greet them",
+          "target": "ravi_nima_greet",
+          "tone_effects": {"empathy": 0.05, "courage": 0.03},
+          "npc_resonance": {"Ravi": 0.08, "Nima": 0.03},
+          "mark_story_beat": "seek_glyph_sorrow"
+        },
+        {
+          "text": "Stand still and watch (Observation check)",
+          "target": "ravi_nima_observe",
+          "tone_effects": {"wisdom": 0.04, "empathy": 0.02},
+          "npc_resonance": {"Nima": 0.06},
+          "mark_story_beat": "seek_glyph_sorrow"
+        },
+        {
+          "text": "Call out to them to stop",
+          "target": "ravi_nima_callout",
+          "tone_effects": {"resolve": -0.02, "courage": -0.01},
+          "npc_resonance": {"Ravi": -0.05, "Nima": -0.08}
+        },
+        {
+          "text": "Turn away and explore the stalls",
+          "target": "market_exploration",
+          "tone_effects": {"wisdom": 0.02},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "200",
+      "name": "ravi_nima_greet",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou take a breath and step forward, offering a small bow and a smile. Ravi's eyes soften; Nima inclines their head slightly. Ravi speaks first, voice low and warm.\n\n\"You have the look of someone who listens,\" he says. \"Things are shifting in the ruins—if you seek answers, there are paths worth following.\"\n\nNima adds, \"We saw something earlier, near the old shrine. If you're willing, there's a way to learn more.\"\n\n[[Ask them about the shrine->shrine_hint]]",
+      "tags": [],
+      "position": [0, 0],
+      "size": [100, 100],
+      "_metadata": {"background": "market_ruins", "npcs": ["Ravi", "Nima"]},
+      "choices": [
+        {"text": "Ask them about the shrine", "target": "shrine_hint", "tone_effects": {"empathy": 0.02}, "npc_resonance": {"Ravi": 0.05}}
+      ]
+    },
+    {
+      "pid": "201",
+      "name": "ravi_nima_observe",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou stand still and watch, taking in the small cues of posture and movement. Nima watches you back with a faint, assessing smile. After a moment, Nima speaks: \"You're careful. That will serve you. There are signs near the old well—listen for the echo.\"\n\nRavi nods and points toward a lane leading deeper into the stalls.\n\n[[Follow the lane they point to->market_lane]]",
+      "tags": [],
+      "position": [0, 0],
+      "size": [100, 100],
+      "_metadata": {"background": "market_ruins", "npcs": ["Ravi", "Nima"]},
+      "choices": [
+        {"text": "Follow the lane they point to", "target": "market_lane", "tone_effects": {"wisdom": 0.03}, "npc_resonance": {"Nima": 0.04}}
+      ]
+    },
+    {
+      "pid": "202",
+      "name": "ravi_nima_callout",
+      "text": "\n{background: market_ruins}\n{npc: Ravi, Nima}\n\nYou shout and demand they explain themselves. The plaza's air tightens. Ravi's jaw hardens; Nima flinches. Ravi steps forward, voice sharp.\n\n\"No need for that, friend,\" he says. \"We mean no harm. But the ruins ask for care.\"\n\nNima's expression cools; they retreat into the crowd. The moment feels closed.\n\n[[Mutter at yourself and move on->market_exploration]]",
+      "tags": [],
+      "position": [0, 0],
+      "size": [100, 100],
+      "_metadata": {"background": "market_ruins", "npcs": ["Ravi", "Nima"]},
+      "choices": [
+        {"text": "Mutter and move on", "target": "market_exploration", "tone_effects": {"empathy": -0.03}, "npc_resonance": {"Ravi": -0.04, "Nima": -0.06}}
+      ]
+    },
+    {
+      "pid": "2",
+      "name": "keeper_dialogue_1",
+      "text": "\n{npc: Keeper}\n\nThe Keeper's eyes soften as you approach.\n\n\"I've been waiting for someone like you,\" they say. \"The city remembers things \nwe've forgotten. The Tone\u2014our collective voice, our shared resonance\u2014it still \nechoes through these ruins. Most who come here don't know how to listen. But \nyou... you carry glyphs within you.\"\n\nThey gesture to a nearby plaza where several stone monuments stand, half-buried \nin moss and soil.\n\n\"Those markers hold fragments of what we were. If you're brave enough to seek \nthem out, you might begin to understand what was lost... and what can be recovered.\"\n\n[[Ask the Keeper to guide you to the monuments->keeper_guide]]\n[[Ask the Keeper about the glyphs they mentioned->keeper_glyphs]]\n[[Thank them but insist on exploring alone->market_alone]]\n\n\n[[Ask the Keeper to guide you->keeper_guide]]\n\n[[Ask about the glyphs->keeper_glyphs]]\n\n[[Explore alone->market_alone]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Ask the Keeper to guide you",
+          "target": "keeper_guide",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Ask about the glyphs",
+          "target": "keeper_glyphs",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Explore alone",
+          "target": "market_alone",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "3",
+      "name": "keeper_guide",
+      "text": "\n{npc: Keeper}\n{background: monuments}\n\nThe Keeper leads you deeper into the Market District, their footsteps echoing \nsoftly on the cracked stone. The monuments draw closer\u2014ancient pillars inscribed \nwith symbols that seem to shift and breathe in the bioluminescent light.\n\n\"These were gathering places,\" the Keeper explains. \"Where the citizens would \ncome to speak, to share their burdens, their joys. The Tone was strongest here. \nListen carefully...\"\n\nYou hear it\u2014a faint resonance, like the echo of thousands of voices speaking in \nunison, now fractured and distant.\n\n\"The first monument holds a memory of Courage,\" says the Keeper, pointing. \n\"The second, Wisdom. The third, Empathy. And the fourth... that one holds \nsomething I've never understood. Not all emotions have names.\"\n\nThe Keeper steps back. \"Choose one to approach. It will test you.\"\n\n[[Approach the Courage monument (Courage check, DC 12)->courage_monument]]\n[[Approach the Wisdom monument (Wisdom check, DC 12)->wisdom_monument]]\n[[Approach the Empathy monument (Empathy check, DC 12)->empathy_monument]]\n[[Approach the unnamed fourth monument (Resolve check, DC 13)->unknown_monument]]\n\n\n[[Test Courage->courage_monument]]\n\n[[Test Wisdom->wisdom_monument]]\n\n[[Test Empathy->empathy_monument]]\n\n[[Test the unknown->unknown_monument]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Test Courage",
+          "target": "courage_monument",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Test Wisdom",
+          "target": "wisdom_monument",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Test Empathy",
+          "target": "empathy_monument",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Test the unknown",
+          "target": "unknown_monument",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "4",
+      "name": "courage_monument",
+      "text": "\n{dice: d20+courage}\n\nYou step toward the monument carved with symbols of fire and forward motion. \nAs you approach, the bioluminescent glow intensifies, and you feel a sudden \nweight\u2014the accumulated fear of a civilization that lost its way.\n\n[Rolling d20 + Courage modifier...]\n\n**Success Path:**\nThe weight passes through you. You stand firm. The monument glows brightly, \nand a fragment of memory floods your mind: scenes of a city where people moved \nforward with purpose, unafraid.\n\nYou gain a Glyph of Courage: +5 to future Courage checks.\n\n**Failure Path:**\nThe weight overwhelms you. You stumble back, gasping. The monument's light \ndims. You feel something valuable slip away\u2014a moment lost.\n\n[[Return to the Keeper->keeper_aftermath]]\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "5",
+      "name": "keeper_glyphs",
+      "text": "\n{npc: Keeper}\n\nThe Keeper leans in, their voice becoming almost reverent.\n\n\"Glyphs are echoes of truth,\" they say. \"When our civilization was whole, \nwe encoded our deepest values\u2014Courage, Wisdom, Empathy, Resolve\u2014into symbols \nthat we could touch, feel, internalize. They were like compasses for the soul.\n\nWhen everything collapsed, the glyphs remained. Scattered. Waiting for someone \nlike you to gather them again.\n\nEach glyph you collect will strengthen you\u2014not in body, but in resonance. \nYou'll hear the Tone more clearly. You'll understand what needs to be healed.\"\n\nThe Keeper steps toward you.\n\n\"But be warned: gathering glyphs requires vulnerability. You must face the \nmemories they hold. Not everyone can bear that.\"\n\n[[Ask if the Keeper has glyphs->keeper_has_glyphs]]\n[[Express your determination->market_alone]]\n[[Ask about the danger->keeper_danger]]\n\n\n[[Ask if the Keeper has glyphs->keeper_has_glyphs]]\n\n[[Express determination->market_alone]]\n\n[[Ask about danger->keeper_danger]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Ask if the Keeper has glyphs",
+          "target": "keeper_has_glyphs",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Express determination",
+          "target": "market_alone",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Ask about danger",
+          "target": "keeper_danger",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "6",
+      "name": "keeper_has_glyphs",
+      "text": "\n{npc: Keeper}\n{background: keeper_sanctuary}\n\nThe Keeper nods slowly. \"I was wondering when you'd ask.\"\n\nThey lead you to a small, hidden chamber beneath one of the older market stalls. \nInside, carefully arranged on shelves carved from the old stone, are dozens of \nglyphs\u2014each glowing with its own faint luminescence.\n\n\"I've been collecting these for decades,\" the Keeper says. \"Preserving them. \nBut they were never meant to be hoarded. They need to be carried, integrated \ninto the living world again. Spread across Saonyx by someone with the strength \nto understand them.\"\n\nThe Keeper selects four from the shelves\u2014one each of Courage, Wisdom, Empathy, \nand Resolve.\n\n\"Start with these. Prove yourself, and the others will reveal themselves.\"\n\nYou receive: Glyph of Courage, Glyph of Wisdom, Glyph of Empathy, Glyph of Resolve\n\n[[Accept the glyphs and ask for guidance->keeper_guidance]]\n[[Ask about the costs of carrying glyphs->glyph_cost]]\n\n\n[[Accept and ask for guidance->keeper_guidance]]\n\n[[Ask about the cost->glyph_cost]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Accept and ask for guidance",
+          "target": "keeper_guidance",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Ask about the cost",
+          "target": "glyph_cost",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "7",
+      "name": "market_alone",
+      "text": "\n{background: market_ruins}\n\nYou thank the Keeper and turn toward the deeper Market District, determined \nto forge your own path through the ruins.\n\nThe Market District spreads before you like a skeleton of what it once was. \nStalls of different sizes hint at the commerce that once flowed here\u2014food, \ngoods, stories traded between people.\n\nYou notice several paths ahead:\n- A collapsed building with flickering lights inside (Archive?)\n- Stairs descending into darkness (Underground?)\n- A bridge spanning what looks like a ravine (Bridge District?)\n\nThe Keeper's voice calls after you: \"Be careful. Not all memories are kind.\"\n\nWhich path calls to you?\n\n[[Investigate the collapsed archive building->archive_entrance]]\n[[Descend the stairs->underground_entrance]]\n[[Cross the bridge->bridge_crossing]]\n\n\n[[Archive->archive_entrance]]\n\n[[Underground->underground_entrance]]\n\n[[Bridge->bridge_crossing]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Archive",
+          "target": "archive_entrance",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Underground",
+          "target": "underground_entrance",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Bridge",
+          "target": "bridge_crossing",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "8",
+      "name": "archive_entrance",
+      "text": "\n{background: archive_ruins}\n{npc: Archivist}\n\nYou approach the collapsed building. A figure emerges from the shadows\u2014\nyounger than the Keeper, with ink-stained fingers and eyes that gleam with \nintellectual hunger.\n\n\"The Archive,\" they say, introducing themselves as the Archivist. \"Or what's \nleft of it. Welcome. I suspect you're here for the same reason we all are: \nto remember.\"\n\n[Story continues with Archivist questline...]\n\n[[Continue->market_alone]]\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "9",
+      "name": "underground_entrance",
+      "text": "\n{background: underground_ruins}\n{npc: Tunnel}\n\nThe stairs descend into darkness. Your footsteps echo off tile and stone, \nsuggesting vast, empty chambers below. The bioluminescent fungi here glow \nbrighter\u2014as if thriving in the absence of direct sunlight.\n\nYou emerge into a sprawling underground city\u2014tunnels, plazas, infrastructure \nthat kept the surface city alive.\n\n[Story continues with Underground questline...]\n\n[[Continue->market_alone]]\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "10",
+      "name": "bridge_crossing",
+      "text": "\n{background: bridge_ravine}\n{npc: Bridge Sentinel}\n\nThe bridge stretches across a ravine filled with mist and bioluminescent plants. \nIt's built from stone and ancient metal, surprisingly sturdy despite years of \nneglect.\n\nA figure stands at the midpoint\u2014a sentinel of some kind, neither approaching \nnor fleeing.\n\n\"I've been waiting for a crosser,\" they say. \"The bridge doesn't let just \nanyone pass. Who are you, and what brings you to the other side?\"\n\n[Story continues with Bridge questline...]\n\n[[Continue->market_alone]]\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "11",
+      "name": "keeper_aftermath",
+      "text": "\n{npc: Keeper}\n{background: market_ruins}\n\nYou return to the Keeper, changed by your encounter at the monument.\n\n\"You've taken your first true step,\" they say, studying you carefully. \n\"The Tone recognizes you now. That will open doors... and create enemies.\"\n\nWhat comes next?\n\n[[Ask about the enemies->keeper_enemies]]\n[[Ask about other locations in Saonyx->saonyx_map]]\n[[Rest before continuing->rest_area]]\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "12",
+      "name": "Restart_Corelink",
+      "text": "\n{background: corelink_chamber}\n\nThe chamber hums as the Octoglyph locks into place. Saori trembles before the console; Velinor flickers, tethered to the Corelink.\n\n\"You know what this means,\" Saori whispers. \"If I restart Corelink, the ache might soften. But it will never be the same.\"\n\nVelinor's voice, distorted but steady: \"If it awakens, I awaken too. Player, will you carry this risk with us?\"\n\n\n[[Encourage them to restart->Epilogue_Restart]]\n\n[[Warn them of the risks->Epilogue_Restart_Ambiguous]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Encourage them to restart",
+          "target": "Epilogue_Restart",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Warn them of the risks",
+          "target": "Epilogue_Restart_Ambiguous",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "13",
+      "name": "Epilogue_Restart",
+      "text": "\nThe Tear of Integration flares into a single pulse. Voices return, fragile but real. Saori smiles through tears; Velinor steadies, his presence fragile but genuine.\n\n\"Thank you for seeing us,\" Saori says. \"Even if this breaks again, at least we tried.\"\n\nVelinor adds, \"You carried coherence into this chamber. Whatever happens next, it is because you chose.\"\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "14",
+      "name": "Epilogue_Restart_Ambiguous",
+      "text": "\nThe glyphs flare unevenly. Some voices return; others remain mute. The marketplace hums with an odd mix of joy and unease. Saori looks at you, eyes wet; Velinor flickers, half\u2011present.\n\n\"We are together, but not whole,\" Velinor says. \"You chose, and now we live with it.\"\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "15",
+      "name": "Refusal_Corelink",
+      "text": "\nThe chamber is quiet. Saori's hand hovers over the console. Velinor's form is fractured but steady.\n\n\"If I restart it, the ache might soften. But I fear it will bind us again,\" Saori whispers.\n\nVelinor: \"If silence remains, I remain fractured. Yet perhaps that is mercy. Player, you must decide.\"\n\n\n[[Support their refusal->Epilogue_Refusal]]\n\n[[Urge them to restart anyway->Epilogue_Refusal_Conflict]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Support their refusal",
+          "target": "Epilogue_Refusal",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Urge them to restart anyway",
+          "target": "Epilogue_Refusal_Conflict",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "16",
+      "name": "Epilogue_Refusal",
+      "text": "\nSaori lowers her hand. The console fades; glyphs dissolve into quiet. Survivors remain fractured but free. Saori exhales, heavy but resolute.\n\n\"Better broken than bound again,\" she says.\n\nVelinor: \"You chose silence, and in silence we endure.\"\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "17",
+      "name": "Epilogue_Refusal_Conflict",
+      "text": "\nThe choice was contested. The console dims; silence holds. Tension lingers among survivors, but dignity remains.\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "18",
+      "name": "Balance_Corelink",
+      "text": "\nThe Hexaglyph pulses unevenly. Saori and Velinor stand together, hands near the console.\n\n\"Not whole, not erased,\" Velinor says. \"Fragments stitched, but never seamless. Player, is this enough?\"\n\n\n[[Affirm their balance->Epilogue_Balance]]\n\n[[Urge them toward clarity->Epilogue_Balance_Conflict]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Affirm their balance",
+          "target": "Epilogue_Balance",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Urge them toward clarity",
+          "target": "Epilogue_Balance_Conflict",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "19",
+      "name": "Epilogue_Balance",
+      "text": "\nPartial echoes return. Some voices harmonize; others remain silent. The community holds in a bittersweet communion.\n\nSaori: \"We live in pieces, but together.\"\n\nVelinor: \"You chose balance, and balance is survival.\"\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "20",
+      "name": "Epilogue_Balance_Conflict",
+      "text": "\nThe chamber hums unevenly; debate remains. Fragments endure, and the world keeps walking forward with an uneasy grace.\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "21",
+      "name": "Transmission_Corelink",
+      "text": "\nGlyphs of ancestry and song shimmer. Saori holds the console but does not restart it.\n\n\"Memory itself is enough,\" Saori whispers. \"Stories, rituals, and songs can bind us without wires. Player, will you choose transmission?\"\n\n\n[[Affirm transmission over restoration->Epilogue_Transmission]]\n\n[[Urge them to restart anyway->Epilogue_Transmission_Conflict]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Affirm transmission over restoration",
+          "target": "Epilogue_Transmission",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Urge them to restart anyway",
+          "target": "Epilogue_Transmission_Conflict",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "22",
+      "name": "Epilogue_Transmission",
+      "text": "\nGlyphs dissolve into radiant echoes\u2014songs and rituals spread across survivors. The marketplace fills with voices carrying memory forward.\n\nSaori: \"We carry them forward.\"\n\nVelinor: \"You chose transmission. Legacy will endure.\"\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "23",
+      "name": "Epilogue_Transmission_Conflict",
+      "text": "\nTransmission is chosen amid contention. Memory persists through ritual, though wounds remain.\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "24",
+      "name": "Joy_Corelink",
+      "text": "\nThe Heptaglyph pulses like music. Saori laughs through tears; Velinor brightens.\n\n\"Joy is survival,\" Velinor says. \"Player, will you help us choose celebration?\"\n\n\n[[Affirm joy as survival->Epilogue_Joy]]\n\n[[Urge them toward restoration->Epilogue_Joy_Conflict]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Affirm joy as survival",
+          "target": "Epilogue_Joy",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Urge them toward restoration",
+          "target": "Epilogue_Joy_Conflict",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "25",
+      "name": "Epilogue_Joy",
+      "text": "\nThe chamber dissolves into festival. Survivors gather in song and dance. Saori: \"We are alive, and that is enough.\" Velinor: \"You chose joy, and joy is survival.\"\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "26",
+      "name": "Epilogue_Joy_Conflict",
+      "text": "\nJoy is chosen despite doubts. The marketplace celebrates, though unease still whispers at the edges.\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "27",
+      "name": "Collapse_Corelink",
+      "text": "\nThe Collapse constellation glows erratically. Saori steadies herself; Velinor flickers wildly.\n\n\"We cannot force clarity,\" Saori says. \"We do not need answers to live. Player, will you walk into the unknown with us?\"\n\n\n[[Affirm acceptance of uncertainty->Epilogue_Collapse]]\n\n[[Urge them toward clarity->Epilogue_Collapse_Conflict]]",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      },
+      "choices": [
+        {
+          "text": "Affirm acceptance of uncertainty",
+          "target": "Epilogue_Collapse",
+          "tone_effects": {},
+          "npc_resonance": {}
+        },
+        {
+          "text": "Urge them toward clarity",
+          "target": "Epilogue_Collapse_Conflict",
+          "tone_effects": {},
+          "npc_resonance": {}
+        }
+      ]
+    },
+    {
+      "pid": "28",
+      "name": "Epilogue_Collapse",
+      "text": "\nThe console glitches; fragments remain unresolved. Survivors walk into uncertainty together. Saori: \"We do not need answers to live.\" Velinor: \"You carried coherence into this chamber. Even in collapse, you gave us choice.\"\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    },
+    {
+      "pid": "29",
+      "name": "Epilogue_Collapse_Conflict",
+      "text": "\nThe choice was contested; uncertainty holds. The community moves forward with courage shaped by doubt.\n",
+      "tags": [],
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        100,
+        100
+      ],
+      "_metadata": {
+        "background": null,
+        "npcs": []
+      }
+    }
+  ]
+}
