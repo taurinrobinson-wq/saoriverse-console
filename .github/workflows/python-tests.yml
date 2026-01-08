@@ -1,0 +1,52 @@
+---
+name: CI — Python tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+
+      - name: Run tests
+        run: |
+          # On pull_request events run the small, stable unit-test list
+          # to keep PR validation fast and deterministic. On push to main
+          # run the full test suite.
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            pytest -q \
+              tests/test_ui_template_usage.py \
+              tests/test_sanctuary.py \
+              tests/unit/test_multi_glyph_selection.py \
+              tests/unit/test_display_name_normalizer.py \
+              tests/unit/test_glyph_tiebreak.py \
+              tests/unit/test_sanctuary_mode_toggle.py
+          else
+            python -m pytest -q
+          fi

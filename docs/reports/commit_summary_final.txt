@@ -1,0 +1,223 @@
+Commit summary (concise) generated on: 2025-11-10T18:58:36+00:00
+\n---
+Commit: b363c8a (b363c8a9bad0650fc81f52251a7c4adaa0c38414)
+Date: 2025-11-10 16:30:41 +0000
+Author: dev-bot <devnull@example.com>
+Message: Fix: guard against empty emotional_bridges and None last_assistant_message to avoid IndexError/AttributeError
+Purpose (from commit message): Fix: guard against empty emotional_bridges and None last_assistant_message to avoid IndexError/AttributeError
+\n---
+Commit: 12537b7 (12537b7edfad08cd30e773ecaaad7781245bab2b)
+Date: 2025-11-10 16:31:51 +0000
+Author: dev-bot <devnull@example.com>
+Message: chore: sync workspace - commit remaining local changes
+Created files (count: 22):
+  - emotional_os/deploy/Conversation
+  - emotional_os/deploy/Velinor.txt
+  - learning/imported_conversations/hybrid_compare_report.json
+  - learning/imported_conversations/learning_results.json
+  - learning/imported_conversations/parsed_conversation.json
+  - learning/imported_conversations/parsed_conversation_reclassified.json
+  - learning/processed_conversations/user_returns_original.txt
+  - learning/processed_conversations/user_returns_results.json
+  - learning/processed_conversations/velinor_original.txt
+  - learning/processed_conversations/velinor_results.json
+  - learning/user_overrides/reclassified_test_user_lexicon.json
+  - learning/user_overrides/user_returns_import_lexicon.json
+  - learning/user_overrides/velinor_import_lexicon.json
+  - scripts/compare_learners.py
+  - scripts/force_labels.py
+  - scripts/ingest_conversation.py
+  - scripts/label_summary.py
+  - scripts/reclassify_parsed.py
+  - scripts/rerun_learner.py
+  - scripts/rerun_learner_fixed.py
+  - scripts/run_learner_safe.py
+  - tests/test_hybrid_pipeline.py
+Purpose (from commit message): chore: sync workspace - commit remaining local changes
+\n---
+Commit: 424cdcb (424cdcb7b0c05d936dbcb8c29cd5f6a968be2bd3)
+Date: 2025-11-10 17:18:22 +0000
+Author: dev-bot <devnull@example.com>
+Message: chore: remove archived scripts and utilities tagged as review_for_deletion
+Renames:
+  - R100	archive/previous_uis/emotional_os_ui.py	archive/backups/previous_uis_20251110165806/emotional_os_ui.py
+  - R100	archive/previous_uis/emotional_os_ui_v2.py	archive/backups/previous_uis_20251110165806/emotional_os_ui_v2.py
+  - R100	archive/previous_uis/enhanced_conversation_demo.py	archive/backups/previous_uis_20251110165806/enhanced_conversation_demo.py
+Created files (count: 167):
+  - review_download_before_delete/archived_ui/emotional_os/archive/emotional_os_ui.py
+  - review_download_before_delete/core_modules/emotional_os/core/signal_parser.py
+  - review_download_before_delete/core_modules/emotional_os/deploy/test_evolving_glyphs.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/advanced_pruning_engine.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/antonym_glyphs.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/antonym_glyphs_indexer.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/antonym_glyphs_integration.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/evolving_glyph_integrator.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/factorial_with_advanced_pruning.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/glyph_factorial_engine.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/glyph_generator.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_adjacent_system.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_decorator.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_integration.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_visualizer.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/velonix_integration_examples.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/velonix_streamlit.py
+  - review_download_before_delete/core_modules/parser/semantic_engine.py
+  - review_download_before_delete/core_modules/parser/signal_parser.py
+  - review_download_before_delete/demo_only/demos/aggressive_consolidation.py
+  - review_download_before_delete/demo_only/demos/ascii_glyph_demo.py
+  - review_download_before_delete/demo_only/demos/balanced_consolidation.py
+  - review_download_before_delete/demo_only/demos/conversation_demo.py
+  - review_download_before_delete/demo_only/demos/demo_dynamic_glyph_evolution.py
+  - review_download_before_delete/demo_only/demos/demo_lexicon_aware_local_mode.py
+  - review_download_before_delete/demo_only/demos/enhanced_conversation_demo.py
+  - review_download_before_delete/demo_only/demos/simple_glyph_demo.py
+  - review_download_before_delete/demo_only/demos/simple_local_server.py
+  - review_download_before_delete/demo_only/demos/simple_ritual_processor.py
+  - review_download_before_delete/demo_only/demos/test_e2e_privacy.py
+  - review_download_before_delete/demo_only/demos/test_e2e_simple.py
+  - review_download_before_delete/demo_only/demos/test_glyph_aware_responses.py
+  - review_download_before_delete/demo_only/demos/test_privacy_masking.py
+  - review_download_before_delete/demo_only/emotional_os/auth/auth_emotional_os.py
+  - review_download_before_delete/demo_only/emotional_os/glyphs/ascii_glyph_demo.py
+  - review_download_before_delete/demo_only/emotional_os/glyphs/simple_glyph_demo.py
+  - review_download_before_delete/demo_only/emotional_os/glyphs/velonix_demo.py
+  - review_download_before_delete/demo_only/emotional_os/portal/admin_portal.py
+  - review_download_before_delete/demo_only/emotional_os/portal/conversation_demo.py
+  - review_download_before_delete/demo_only/emotional_os/portal/create_integration.py
+  - review_download_before_delete/demo_only/emotional_os/portal/create_integration_clean.py
+  - review_download_before_delete/demo_only/parser/enhanced_emotion_processor.py
+  - review_download_before_delete/demo_only/scripts/demo_local_e2e.py
+  - review_download_before_delete/demo_only/scripts/utilities/demonstrate_glyph_matching_boost.py
+  - review_download_before_delete/demo_only/scripts/utilities/demonstrate_nlp_integration.py
+  - review_download_before_delete/demo_only/scripts/utilities/enhanced_ritual_processor.py
+  - review_download_before_delete/demo_only/tests/integration/test_enhanced_system.py
+  - review_download_before_delete/demo_only/tools/simple_glyph_demo.py
+  - review_download_before_delete/deploy_tools/emotional_os/deploy/api_integration.py
+  - review_download_before_delete/deploy_tools/emotional_os/deploy/backup.py
+Purpose (from commit message): chore: remove archived scripts and utilities tagged as review_for_deletion
+\n---
+Commit: ba23324 (ba2332402285a28a996462571e5630125129f82e)
+Date: 2025-11-10 17:20:09 +0000
+Author: dev-bot <devnull@example.com>
+Message: chore: remove legacy UI files to prevent accidental inclusion in active workflows
+Deleted files (count: 21):
+  - archive/backups/previous_uis_20251110165806/emotional_os_ui.py
+  - archive/backups/previous_uis_20251110165806/emotional_os_ui_v2.py
+  - archive/backups/previous_uis_20251110165806/enhanced_conversation_demo.py
+  - archive/full_backups/emotional_os_ui.py
+  - archive/full_backups/emotional_os_ui_v2.py
+  - archive/full_backups/enhanced_conversation_demo.py
+  - demos/enhanced_conversation_demo.py
+  - emotional_os/archive/emotional_os_ui.py
+  - emotional_os/auth/authenticated_emotional_os_ui.py
+  - emotional_os/deploy/emotional_os_ui_v2.py
+  - review_download_before_delete/archived_ui/emotional_os/archive/emotional_os_ui.py
+  - review_download_before_delete/demo_only/demos/enhanced_conversation_demo.py
+  - review_download_before_delete/legacy_backups/archive/backups/previous_uis_20251110165806/emotional_os_ui.py
+  - review_download_before_delete/legacy_backups/archive/backups/previous_uis_20251110165806/emotional_os_ui_v2.py
+  - review_download_before_delete/legacy_backups/archive/backups/previous_uis_20251110165806/enhanced_conversation_demo.py
+  - review_download_before_delete/legacy_backups/archive/full_backups/emotional_os_ui.py
+  - review_download_before_delete/legacy_backups/archive/full_backups/emotional_os_ui_v2.py
+  - review_download_before_delete/legacy_backups/archive/full_backups/enhanced_conversation_demo.py
+  - review_download_before_delete/review_for_deletion/emotional_os/auth/authenticated_emotional_os_ui.py
+  - src/ui/emotional_os_ui.py
+  - src/ui/emotional_os_ui_v2.py
+Created files (count: 2):
+  - .codespacesignore
+  - .search_exclude
+Purpose (from commit message): chore: remove legacy UI files to prevent accidental inclusion in active workflows
+\n---
+Commit: 4a2f112 (4a2f1126e6acfbce238dc811c12d8ef56a1f4db0)
+Date: 2025-11-10 18:01:43 +0000
+Author: dev-bot <devnull@example.com>
+Message: docs: mark legacy UI filenames as archived and point readers to main_v2.py
+Created files (count: 2):
+  - legacy_references.txt
+  - legacy_update_summary.txt
+Purpose (from commit message): docs: mark legacy UI filenames as archived and point readers to main_v2.py
+\n---
+Commit: e42d6e0 (e42d6e0cd5fa2890525e4588eeda8e0f32134159)
+Date: 2025-11-10 18:04:31 +0000
+Author: dev-bot <devnull@example.com>
+Message: docs: tidy archived UI annotations and clarify demo creation messages
+Created files (count: 18):
+  - .devcontainer/setup.sh.bak
+  - DIRECTORY_STRUCTURE.md.bak
+  - README.md.bak
+  - README_DEVELOPMENT.md.bak
+  - SETUP.md.bak
+  - docs/reference/EXTERNAL_DRIVE_SETUP.md.bak
+  - docs/reference/IMPLEMENTATION_GUIDE.md.bak
+  - docs/reference/POETRY_ENRICHMENT_COMPLETE.md.bak
+  - docs/reference/POETRY_QUICKSTART.md.bak
+  - docs/reference/SOVEREIGN_LOCAL_QUICK_START.md.bak
+  - docs/reference/TECHNICAL_ARCHITECTURE.md.bak
+  - docs/reference/UI_REDESIGN_SUMMARY.md.bak
+  - emotional_os/docs/AUTH_DEPLOYMENT_GUIDE.md.bak
+  - emotional_os/docs/README.md.bak
+  - emotional_os/docs/SETUP.md.bak
+  - emotional_os/docs/UI_REDESIGN_SUMMARY.md.bak
+  - scripts/setup_external.sh.bak
+  - tests/integration/test_poetry_enrichment_e2e.py.bak
+Purpose (from commit message): docs: tidy archived UI annotations and clarify demo creation messages
+\n---
+Commit: 6816922 (68169229465c9f01d7616738c26573712794e4e8)
+Date: 2025-11-10 18:09:14 +0000
+Author: dev-bot <devnull@example.com>
+Message: chore: remove .bak backups and purge archived review files after creating ZIP archive
+Deleted files (count: 182):
+  - .devcontainer/setup.sh.bak
+  - DIRECTORY_STRUCTURE.md.bak
+  - README.md.bak
+  - README_DEVELOPMENT.md.bak
+  - SETUP.md.bak
+  - config/POETRY_DIAGNOSTIC.py.bak
+  - demos/test_e2e_privacy.py.bak
+  - demos/test_e2e_simple.py.bak
+  - docs/reference/EXTERNAL_DRIVE_SETUP.md.bak
+  - docs/reference/IMPLEMENTATION_GUIDE.md.bak
+  - docs/reference/POETRY_ENRICHMENT_COMPLETE.md.bak
+  - docs/reference/POETRY_QUICKSTART.md.bak
+  - docs/reference/SOVEREIGN_LOCAL_QUICK_START.md.bak
+  - docs/reference/TECHNICAL_ARCHITECTURE.md.bak
+  - docs/reference/UI_REDESIGN_SUMMARY.md.bak
+  - emotional_os/deploy/fastapi_wrapper.py.bak
+  - emotional_os/docs/AUTH_DEPLOYMENT_GUIDE.md.bak
+  - emotional_os/docs/README.md.bak
+  - emotional_os/docs/SETUP.md.bak
+  - emotional_os/docs/UI_REDESIGN_SUMMARY.md.bak
+  - review_download_before_delete/core_modules/emotional_os/core/signal_parser.py
+  - review_download_before_delete/core_modules/emotional_os/deploy/test_evolving_glyphs.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/advanced_pruning_engine.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/antonym_glyphs.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/antonym_glyphs_indexer.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/antonym_glyphs_integration.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/evolving_glyph_integrator.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/factorial_with_advanced_pruning.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/glyph_factorial_engine.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/glyph_generator.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_adjacent_system.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_decorator.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_integration.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/limbic_visualizer.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/velonix_integration_examples.py
+  - review_download_before_delete/core_modules/emotional_os/glyphs/velonix_streamlit.py
+  - review_download_before_delete/core_modules/parser/semantic_engine.py
+  - review_download_before_delete/core_modules/parser/signal_parser.py
+  - review_download_before_delete/demo_only/demos/aggressive_consolidation.py
+  - review_download_before_delete/demo_only/demos/ascii_glyph_demo.py
+  - review_download_before_delete/demo_only/demos/balanced_consolidation.py
+  - review_download_before_delete/demo_only/demos/conversation_demo.py
+  - review_download_before_delete/demo_only/demos/demo_dynamic_glyph_evolution.py
+  - review_download_before_delete/demo_only/demos/demo_lexicon_aware_local_mode.py
+  - review_download_before_delete/demo_only/demos/simple_glyph_demo.py
+  - review_download_before_delete/demo_only/demos/simple_local_server.py
+  - review_download_before_delete/demo_only/demos/simple_ritual_processor.py
+  - review_download_before_delete/demo_only/demos/test_e2e_privacy.py
+  - review_download_before_delete/demo_only/demos/test_e2e_simple.py
+  - review_download_before_delete/demo_only/demos/test_glyph_aware_responses.py
+  - ... (truncated)
+Created files (count: 2):
+  - review_download_before_delete/.gitkeep
+  - review_download_before_delete_20251110180913.zip
+Purpose (from commit message): chore: remove .bak backups and purge archived review files after creating ZIP archive

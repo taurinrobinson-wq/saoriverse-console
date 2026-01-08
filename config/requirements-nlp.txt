@@ -1,0 +1,13 @@
+# Optional NLP dependencies for enhanced emotion processing
+# Install into the same Python environment that runs Streamlit.
+
+textblob>=0.17.1
+spacy>=3.6.0
+# Note: spaCy models are not installed via pip by default. After installing
+# the packages run:
+#   python -m spacy download en_core_web_sm
+# and for TextBlob corpora:
+#   python -m textblob.download_corpora
+
+# If you use a container or Streamlit Cloud, ensure these steps are run in
+# the deployment environment (e.g., Dockerfile or init script).

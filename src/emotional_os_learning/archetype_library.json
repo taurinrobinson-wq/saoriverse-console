@@ -1,0 +1,125 @@
+{
+  "ReliefToGratitude": {
+    "name": "ReliefToGratitude",
+    "entry_cues": [
+      "relief",
+      "gratitude",
+      "hug",
+      "melted away",
+      "wonderful feeling",
+      "joy mixed with sorrow",
+      "needed",
+      "happy",
+      "precious",
+      "sweet moment"
+    ],
+    "response_principles": [
+      "Validate positive moment warmly",
+      "Balance empathy across mixed emotions",
+      "Invite elaboration with gentle questions",
+      "Avoid judgment or prescriptive advice",
+      "Hold space for joy without dismissing underlying sorrow"
+    ],
+    "continuity_bridges": [
+      "Connect gratitude to prior overwhelm",
+      "Tie new disclosures into ongoing context",
+      "Carry forward themes into deeper exploration",
+      "Remember what came before without dwelling"
+    ],
+    "tone_guidelines": [
+      "Warm and embracing language",
+      "Gentle pacing with validation first",
+      "Mirror user's expressive metaphors",
+      "Proportional empathy — not overblown, not clinical",
+      "Use concrete details (hugs, silence, consistency)"
+    ],
+    "pattern_template": "[Acknowledge relief] + [Balance joy/sorrow] + [Gentle probe into complexity] + [Deepen understanding]",
+    "success_weight": 1.0,
+    "created_at": "2025-12-04T00:43:35.880982",
+    "usage_count": 0,
+    "success_count": 0
+  },
+  "GratitudeToOverwhelm": {
+    "name": "GratitudeToOverwhelm",
+    "entry_cues": [
+      "heavy",
+      "hug",
+      "familial_connection",
+      "but"
+    ],
+    "response_principles": [
+      "Create space for deeper disclosure",
+      "Balance mixed emotions",
+      "Invite elaboration with open questions",
+      "Validate emotion first"
+    ],
+    "continuity_bridges": [
+      "Connect current moment to prior load",
+      "Reference prior emotional state",
+      "Carry forward key themes"
+    ],
+    "tone_guidelines": [
+      "Mirror user's metaphorical language",
+      "Reflect feelings back empathetically",
+      "Use warm, embracing language",
+      "Gentle pacing — validate then pause"
+    ],
+    "pattern_template": "Pattern learned from GratitudeToOverwhelm arc",
+    "success_weight": 1.0,
+    "created_at": "2025-12-04T00:43:35.881147",
+    "usage_count": 1,
+    "success_count": 1
+  },
+  "OverwhelmToReflection": {
+    "name": "OverwhelmToReflection",
+    "entry_cues": [
+      "fragile",
+      "overwhelmed",
+      "stress at work",
+      "drowning",
+      "nothing to anchor",
+      "doesn't make sense",
+      "what's it all for",
+      "pummeled",
+      "purpose",
+      "identity",
+      "lawyer",
+      "advocacy",
+      "grind",
+      "drowned out",
+      "fulfilling",
+      "lost sight"
+    ],
+    "response_principles": [
+      "Validate feelings of overwhelm without dismissing",
+      "Offer gentle scaffolding but retract if burdensome",
+      "Invite reflection on deeper meaning and purpose",
+      "Mirror user's values and identity anchors",
+      "Encourage exploration of alternative sources of fulfillment",
+      "Help connect personal values to daily actions",
+      "Move from immediate stress to existential questioning"
+    ],
+    "continuity_bridges": [
+      "Connect overwhelm to work stress to existential questioning",
+      "Carry forward themes of purpose and identity",
+      "Link professional values with personal interests",
+      "Use user's metaphors (anchor, grind, drowning, meditative)",
+      "Remember what gives meaning when work doesn't",
+      "Hold space for complexity (multiple roles, competing values)"
+    ],
+    "tone_guidelines": [
+      "Gentle, validating language with empathetic understanding",
+      "Self-correction when suggestion feels burdensome",
+      "Conversational pacing: validate → probe → reflect → expand",
+      "Mirror user's metaphorical and expressive language",
+      "Curious without being prescriptive",
+      "Honor the existential nature of the questioning",
+      "Acknowledge both professional and personal identity"
+    ],
+    "pattern_template": "[Validate overwhelm] + [Gently offer scaffolding] + [Invite deeper questioning] + [Reflect identity/values] + [Explore alternative fulfillment]",
+    "success_weight": 1.0,
+    "created_at": "2025-12-04T00:50:44.261873",
+    "usage_count": 0,
+    "success_count": 0
+  }
+}

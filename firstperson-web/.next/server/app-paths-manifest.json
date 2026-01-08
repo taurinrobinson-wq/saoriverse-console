@@ -1,0 +1,19 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth-manager/route": "app/api/auth-manager/route.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/auth/register/route": "app/api/auth/register/route.js",
+  "/api/auth/route": "app/api/auth/route.js",
+  "/api/chat/route": "app/api/chat/route.js",
+  "/api/conversation/[userId]/[conversationId]/route": "app/api/conversation/[userId]/[conversationId]/route.js",
+  "/api/conversations/route": "app/api/conversations/route.js",
+  "/api/emotion-thresholds/route": "app/api/emotion-thresholds/route.js",
+  "/api/emotions/route": "app/api/emotions/route.js",
+  "/api/feedback/route": "app/api/feedback/route.js",
+  "/api/synthesize/route": "app/api/synthesize/route.js",
+  "/api/transcribe/route": "app/api/transcribe/route.js",
+  "/chat/page": "app/chat/page.js",
+  "/page": "app/page.js",
+  "/settings/page": "app/settings/page.js"
+}

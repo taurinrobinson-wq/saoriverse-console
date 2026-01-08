@@ -1,0 +1,22 @@
+{
+  "total_rows": 500,
+  "response_source_counts": {
+    "conversational": 225,
+    "fallback_message": 205,
+    "dynamic_composer": 70
+  },
+  "matched_glyphs": 70,
+  "match_rate_pct": 14.0,
+  "top_glyphs": [
+    [
+      "Still Recognition",
+      39
+    ],
+    [
+      "Still Ache",
+      31
+    ]
+  ],
+  "debug_sql_count": 272,
+  "debug_glyph_rows_count": 0
+}

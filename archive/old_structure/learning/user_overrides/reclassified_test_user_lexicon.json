@@ -1,0 +1,146 @@
+{
+  "signals": {
+    "intimacy": {
+      "keywords": [
+        "intimacy"
+      ],
+      "example_contexts": [
+        {
+          "keyword": "intimacy",
+          "associated_signals": [
+            "love",
+            "vulnerability",
+            "sensuality",
+            "admiration",
+            "transformation",
+            "nature"
+          ],
+          "gates": []
+        }
+      ],
+      "frequency": 1
+    },
+    "love": {
+      "keywords": [
+        "love"
+      ],
+      "example_contexts": [
+        {
+          "keyword": "love",
+          "associated_signals": [
+            "intimacy",
+            "vulnerability",
+            "sensuality",
+            "admiration",
+            "transformation",
+            "nature"
+          ],
+          "gates": []
+        }
+      ],
+      "frequency": 1
+    },
+    "vulnerability": {
+      "keywords": [
+        "vulnerability"
+      ],
+      "example_contexts": [
+        {
+          "keyword": "vulnerability",
+          "associated_signals": [
+            "intimacy",
+            "love",
+            "sensuality",
+            "admiration",
+            "transformation",
+            "nature"
+          ],
+          "gates": []
+        }
+      ],
+      "frequency": 1
+    },
+    "sensuality": {
+      "keywords": [
+        "sensuality"
+      ],
+      "example_contexts": [
+        {
+          "keyword": "sensuality",
+          "associated_signals": [
+            "intimacy",
+            "love",
+            "vulnerability",
+            "admiration",
+            "transformation",
+            "nature"
+          ],
+          "gates": []
+        }
+      ],
+      "frequency": 1
+    },
+    "admiration": {
+      "keywords": [
+        "admiration"
+      ],
+      "example_contexts": [
+        {
+          "keyword": "admiration",
+          "associated_signals": [
+            "intimacy",
+            "love",
+            "vulnerability",
+            "sensuality",
+            "transformation",
+            "nature"
+          ],
+          "gates": []
+        }
+      ],
+      "frequency": 1
+    },
+    "transformation": {
+      "keywords": [
+        "transformation"
+      ],
+      "example_contexts": [
+        {
+          "keyword": "transformation",
+          "associated_signals": [
+            "intimacy",
+            "love",
+            "vulnerability",
+            "sensuality",
+            "admiration",
+            "nature"
+          ],
+          "gates": []
+        }
+      ],
+      "frequency": 1
+    },
+    "nature": {
+      "keywords": [
+        "nature"
+      ],
+      "example_contexts": [
+        {
+          "keyword": "nature",
+          "associated_signals": [
+            "intimacy",
+            "love",
+            "vulnerability",
+            "sensuality",
+            "admiration",
+            "transformation"
+          ],
+          "gates": []
+        }
+      ],
+      "frequency": 1
+    }
+  },
+  "trust_score": 0.45999999999999996,
+  "contributions": 2
+}

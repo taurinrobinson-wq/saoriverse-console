@@ -1,0 +1,8 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "deploy": {
+    "startCommand": "bash deploy/railway_start.sh",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 30
+  }
+}

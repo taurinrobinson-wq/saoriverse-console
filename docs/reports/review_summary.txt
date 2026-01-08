@@ -1,0 +1,172 @@
+Total files processed: 164
+  review_for_deletion: 85
+  demo_only: 29
+  core_module: 18
+  archived_ui: 1
+  deploy_tool: 11
+  legacy_backup: 7
+  test_unit: 7
+  test_performance: 2
+  test_integration: 4
+
+Files tagged review_for_deletion:
+  - review_download_before_delete/phase_3_integrator.py
+  - review_download_before_delete/phase_4_id_deduplicator.py
+  - review_download_before_delete/docx_reader.py
+  - review_download_before_delete/docx_viewer.py
+  - review_download_before_delete/test_scenarios.py
+  - review_download_before_delete/generate_scenario_report.py
+  - review_download_before_delete/phase_3_generator.py
+  - review_download_before_delete/start.py
+  - review_download_before_delete/glyph_conversation_test_harness.py
+  - review_download_before_delete/docx_web_viewer.py
+  - review_download_before_delete/phase_4_ritual_tester.py
+  - review_download_before_delete/phase_2_pruner.py
+  - review_download_before_delete/glyph_effectiveness_validator.py
+  - review_download_before_delete/phase_1_generator.py
+  - review_download_before_delete/gate_distribution_analyzer.py
+  - review_download_before_delete/emotional_os/safety/anonymization_protocol.py
+  - review_download_before_delete/emotional_os/safety/fallback_protocols.py
+  - review_download_before_delete/emotional_os/graphics/convert_logo_to_svg.py
+  - review_download_before_delete/emotional_os/auth/authenticated_emotional_os_ui.py
+  - review_download_before_delete/emotional_os/archive/main.py
+  - review_download_before_delete/emotional_os/archive/app.py
+  - review_download_before_delete/emotional_os/archive/archive_dedup/main_v2.py
+  - review_download_before_delete/emotional_os/ritual_ui/streamlit_cloud_ui.py
+  - review_download_before_delete/emotional_os/ritual_ui/saoynx_ui.py
+  - review_download_before_delete/config/update_system.py
+  - review_download_before_delete/config/railway_diagnostics.py
+  - review_download_before_delete/parser/poetry_extractor.py
+  - review_download_before_delete/parser/nrc_lexicon_loader.py
+  - review_download_before_delete/parser/poetry_enrichment.py
+  - review_download_before_delete/parser/poetry_database.py
+  - review_download_before_delete/scripts/ingest_conversation.py
+  - review_download_before_delete/scripts/label_summary.py
+  - review_download_before_delete/scripts/rerun_learner.py
+  - review_download_before_delete/scripts/debug_imports.py
+  - review_download_before_delete/scripts/reclassify_parsed.py
+  - review_download_before_delete/scripts/force_labels.py
+  - review_download_before_delete/scripts/rerun_learner_fixed.py
+  - review_download_before_delete/scripts/migrate_supabase.py
+  - review_download_before_delete/scripts/run_learner_safe.py
+  - review_download_before_delete/scripts/trace_chat_local.py
+  - review_download_before_delete/scripts/compare_learners.py
+  - review_download_before_delete/scripts/utilities/glyph_generator_from_extracted_data.py
+  - review_download_before_delete/scripts/utilities/create_integration.py
+  - review_download_before_delete/scripts/utilities/check_tables.py
+  - review_download_before_delete/scripts/utilities/lexicon_aware_response_generator.py
+  - review_download_before_delete/scripts/utilities/processing_summary.py
+  - review_download_before_delete/scripts/utilities/debug_parser.py
+  - review_download_before_delete/scripts/utilities/glyph_generator.py
+  - review_download_before_delete/scripts/utilities/create_integration_clean.py
+  - review_download_before_delete/scripts/utilities/process_glyph_documents.py
+  - review_download_before_delete/scripts/utilities/consolidate_glyphs.py
+  - review_download_before_delete/scripts/utilities/hybrid_processor_with_evolution.py
+  - review_download_before_delete/scripts/utilities/privacy_monitor.py
+  - review_download_before_delete/scripts/utilities/analyze_redundancy.py
+  - review_download_before_delete/scripts/utilities/check_db_status.py
+  - review_download_before_delete/scripts/utilities/supabase_integration.py
+  - review_download_before_delete/scripts/utilities/poetry_glyph_generator.py
+  - review_download_before_delete/scripts/utilities/poetry_data_hub.py
+  - review_download_before_delete/scripts/utilities/dynamic_glyph_evolution.py
+  - review_download_before_delete/scripts/utilities/verify_manifest.py
+  - review_download_before_delete/scripts/utilities/ritual_capsule_processor.py
+  - review_download_before_delete/scripts/utilities/poetry_data_pipeline.py
+  - review_download_before_delete/scripts/utilities/integrate_glyph_lexicons.py
+  - review_download_before_delete/scripts/utilities/consolidation_less_aggressive.py
+  - review_download_before_delete/scripts/utilities/poetry_text_cleaner.py
+  - review_download_before_delete/scripts/utilities/evolving_glyph_integrator.py
+  - review_download_before_delete/scripts/utilities/check_consolidation.py
+  - review_download_before_delete/scripts/utilities/gutenberg_fetcher.py
+  - review_download_before_delete/scripts/utilities/analyze_glyphs.py
+  - review_download_before_delete/scripts/utilities/bulk_text_processor.py
+  - review_download_before_delete/dev_tools/stress_log_test.py
+  - review_download_before_delete/dev_tools/simulate_conversations.py
+  - review_download_before_delete/local_inference/preprocessor.py
+  - review_download_before_delete/em_trace/trace_engine.py
+  - review_download_before_delete/tools/update_system.py
+  - review_download_before_delete/tools/consolidate_glyphs.py
+  - review_download_before_delete/tools/simple_local_server.py
+  - review_download_before_delete/tools/railway_diagnostics.py
+  - review_download_before_delete/tools/simple_ritual_processor.py
+  - review_download_before_delete/tools/self_diagnostic.py
+  - review_download_before_delete/tools/start.py
+  - review_download_before_delete/tools/ritual_capsule_processor.py
+  - review_download_before_delete/tools/clean_glyph_db.py
+  - review_download_before_delete/tools/integrate_glyph_lexicons.py
+  - review_download_before_delete/tools/analyze_glyphs.py
+
+Duplicate filenames found:
+  start.py:
+    - review_download_before_delete/start.py
+    - review_download_before_delete/tools/start.py
+  create_integration.py:
+    - review_download_before_delete/emotional_os/portal/create_integration.py
+    - review_download_before_delete/scripts/utilities/create_integration.py
+  create_integration_clean.py:
+    - review_download_before_delete/emotional_os/portal/create_integration_clean.py
+    - review_download_before_delete/scripts/utilities/create_integration_clean.py
+  conversation_demo.py:
+    - review_download_before_delete/emotional_os/portal/conversation_demo.py
+    - review_download_before_delete/demos/conversation_demo.py
+    - review_download_before_delete/archive/full_backups/conversation_demo.py
+  glyph_generator.py:
+    - review_download_before_delete/emotional_os/glyphs/glyph_generator.py
+    - review_download_before_delete/scripts/utilities/glyph_generator.py
+  ascii_glyph_demo.py:
+    - review_download_before_delete/emotional_os/glyphs/ascii_glyph_demo.py
+    - review_download_before_delete/demos/ascii_glyph_demo.py
+  simple_glyph_demo.py:
+    - review_download_before_delete/emotional_os/glyphs/simple_glyph_demo.py
+    - review_download_before_delete/demos/simple_glyph_demo.py
+    - review_download_before_delete/tools/simple_glyph_demo.py
+  evolving_glyph_integrator.py:
+    - review_download_before_delete/emotional_os/glyphs/evolving_glyph_integrator.py
+    - review_download_before_delete/scripts/utilities/evolving_glyph_integrator.py
+  emotional_os_ui.py:
+    - review_download_before_delete/emotional_os/archive/emotional_os_ui.py
+    - review_download_before_delete/archive/backups/previous_uis_20251110165806/emotional_os_ui.py
+    - review_download_before_delete/archive/full_backups/emotional_os_ui.py
+  signal_parser.py:
+    - review_download_before_delete/emotional_os/core/signal_parser.py
+    - review_download_before_delete/parser/signal_parser.py
+  test_evolving_glyphs.py:
+    - review_download_before_delete/emotional_os/deploy/test_evolving_glyphs.py
+    - review_download_before_delete/tests/performance/test_evolving_glyphs.py
+  trace_engine.py:
+    - review_download_before_delete/emotional_os/deploy/em_trace/trace_engine.py
+    - review_download_before_delete/em_trace/trace_engine.py
+  update_system.py:
+    - review_download_before_delete/config/update_system.py
+    - review_download_before_delete/tools/update_system.py
+  railway_diagnostics.py:
+    - review_download_before_delete/config/railway_diagnostics.py
+    - review_download_before_delete/tools/railway_diagnostics.py
+  simple_local_server.py:
+    - review_download_before_delete/demos/simple_local_server.py
+    - review_download_before_delete/tools/simple_local_server.py
+  enhanced_conversation_demo.py:
+    - review_download_before_delete/demos/enhanced_conversation_demo.py
+    - review_download_before_delete/archive/backups/previous_uis_20251110165806/enhanced_conversation_demo.py
+    - review_download_before_delete/archive/full_backups/enhanced_conversation_demo.py
+  simple_ritual_processor.py:
+    - review_download_before_delete/demos/simple_ritual_processor.py
+    - review_download_before_delete/tools/simple_ritual_processor.py
+  emotional_os_ui_v2.py:
+    - review_download_before_delete/archive/backups/previous_uis_20251110165806/emotional_os_ui_v2.py
+    - review_download_before_delete/archive/full_backups/emotional_os_ui_v2.py
+  consolidate_glyphs.py:
+    - review_download_before_delete/scripts/utilities/consolidate_glyphs.py
+    - review_download_before_delete/tools/consolidate_glyphs.py
+  ritual_capsule_processor.py:
+    - review_download_before_delete/scripts/utilities/ritual_capsule_processor.py
+    - review_download_before_delete/tools/ritual_capsule_processor.py
+  integrate_glyph_lexicons.py:
+    - review_download_before_delete/scripts/utilities/integrate_glyph_lexicons.py
+    - review_download_before_delete/tools/integrate_glyph_lexicons.py
+  analyze_glyphs.py:
+    - review_download_before_delete/scripts/utilities/analyze_glyphs.py
+    - review_download_before_delete/tools/analyze_glyphs.py
+
+Syntax check failures:
+  None

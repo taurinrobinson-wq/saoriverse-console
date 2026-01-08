@@ -1,0 +1,9 @@
+extracted_name,extracted_description,match_type,match_score,matched_id,matched_glyph_name,suggested_synonyms,suggested_triggers,new_glyph_needed
+feeling_unmoored,A sense of instability and lack of direction.,none,0.524,,,feeling;unmoored;a;sense;of;instability;and;lack,feeling unmoored;feeling_unmoored,yes
+seeking_stability,The desire for something solid to hold onto.,none,0.565,,,seeking;stability;the;desire;for;something;solid;to,seeking stability;seeking_stability,yes
+anger,Furious feelings about being dismissed at work.,none,0.333,,,furious;angry;irate;enraged;anger;feelings;about;being,anger,yes
+dismissal,Feeling disregarded and undervalued in a professional setting.,none,0.407,,,dismissed;ignored;overlooked;undervalued;dismissal;feeling;disregarded;and,dismissal,yes
+longing,A deep sense of yearning for someone who is absent.,fuzzy,0.75,2134,Longing of ...,miss;yearn;ache;pining;longing;a;deep;sense,longing,no
+heartache,Emotional pain stemming from missing someone dearly.,none,0.538,,,ache;sorrow;heartache;grief;emotional;pain;stemming;from,heartache,yes
+quiet_joy,A serene happiness found in peaceful moments.,none,0.55,,,quiet;joy;a;serene;happiness;found;in;peaceful,quiet joy;quiet_joy,yes
+overwhelm,Feeling burdened by excessive responsibilities and emotions.,none,0.364,,,overwhelmed;burdened;swamped;stressed;overwhelm;feeling;by;excessive,overwhelm,yes

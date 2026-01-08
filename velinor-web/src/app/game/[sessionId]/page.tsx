@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import GameScene from '@/components/GameScene';
+import dynamic from 'next/dynamic';
+// Load KaeleScene dynamically (client-only)
+const KaeleScene = dynamic(() => import('@/components/KaeleScene'), { ssr: false });
 import ToneStatsDisplay from '@/components/ToneStatsDisplay';
 import { useGameStore } from '@/lib/gameStore';
 import { gameApi } from '@/lib/api';
@@ -147,6 +150,26 @@ export default function GamePage() {
     );
   }
 
+  // Determine whether to render KaeleScene for Kaelen/trickster encounters
+  const npcNameLower = (gameState.npc_name || '').toLowerCase();
+  const passageLower = (gameState.passage_name || '').toLowerCase();
+
+  // Derive player stats and possible glyphs
+  const playerStats = gameState.game_state?.player_stats || {};
+  const glyphs = gameState.game_state?.glyphs_collected || gameState.game_state?.player_stats?.glyphs_collected || [];
+  const hasStillness = Array.isArray(glyphs) ? glyphs.includes('Stillness') : !!glyphs;
+
+  // Persona selection heuristic:
+  // - If NPC name explicitly contains "kaelen" or "trickster", use that persona
+  // - If we're in the swamp passage, prefer trickster for low empathy, Kaelen for higher empathy
+  let persona: 'kaelen' | 'trickster' = 'kaelen';
+  if (npcNameLower.includes('trickster')) persona = 'trickster';
+  else if (npcNameLower.includes('kaelen')) persona = 'kaelen';
+  else if (passageLower.includes('swamp') || (gameState.scene_id === 'swamp_scene')) {
+    const empathy = typeof playerStats.empathy === 'number' ? playerStats.empathy : 0;
+    persona = empathy < 50 ? 'trickster' : 'kaelen';
+  }
+
   return (
     <div style={{
       width: '100%',
@@ -154,13 +177,23 @@ export default function GamePage() {
       padding: '20px',
       background: '#000'
     }}>
-      <GameScene
-        backgroundImage={gameState.background_image || '/assets/backgrounds/velhara_market.png'}
-        narration={gameState.main_dialogue}
-        npcName={gameState.npc_name || gameState.passage_name}
-        choices={gameState.choices.map((c, i) => ({ text: c.text, id: i.toString() }))}
-        onChoiceClick={handleChoiceClick}
-      />
+      {((npcNameLower.includes('kaelen') || npcNameLower.includes('trickster') || gameState.scene_id === 'swamp_scene')) ? (
+        <KaeleScene
+          scenarioType={gameState.scene_id === 'swamp_scene' ? 'swamp' : 'marketplace'}
+          autoAlternate={gameState.scene_id === 'swamp_scene'}
+          alternateInterval={2000}
+          persona={persona}
+          playerHasStillness={hasStillness}
+        />
+      ) : (
+        <GameScene
+          backgroundImage={gameState.background_image || '/assets/backgrounds/velhara_market.png'}
+          narration={gameState.main_dialogue}
+          npcName={gameState.npc_name || gameState.passage_name}
+          choices={gameState.choices.map((c, i) => ({ text: c.text, id: i.toString() }))}
+          onChoiceClick={handleChoiceClick}
+        />
+      )}
 
       {/* TONE Stats Display Dev Console */}
       <ToneStatsDisplay />

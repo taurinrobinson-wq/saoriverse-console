@@ -1,0 +1,41 @@
+{
+  "signals": {
+    "transformation": {
+      "frequency": 10,
+      "keywords": [
+        "transformation",
+        "shift",
+        "transmutation",
+        "translation"
+      ]
+    },
+    "sensuality": {
+      "frequency": 4,
+      "keywords": [
+        "sensuality",
+        "sensualism",
+        "sensualness"
+      ]
+    },
+    "intimacy": {
+      "frequency": 8,
+      "keywords": [
+        "intimacy",
+        "liaison",
+        "affair",
+        "familiarity",
+        "amour",
+        "involvement",
+        "closeness",
+        "affaire"
+      ]
+    },
+    "vulnerability": {
+      "frequency": 2,
+      "keywords": [
+        "vulnerability",
+        "exposure"
+      ]
+    }
+  }
+}

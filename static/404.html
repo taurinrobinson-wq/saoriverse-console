@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saori Console</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+    #chat-box {
+      max-width: 600px;
+      margin: auto;
+    }
+    #messages {
+      border: 1px solid #333;
+      padding: 1rem;
+      height: 400px;
+      overflow-y: auto;
+      background: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+    .message {
+      margin-bottom: 1rem;
+    }
+    .user {
+      color: #9cdcfe;
+    }
+    .saori {
+      color: #dcdcaa;
+    }
+    form {
+      display: flex;
+      gap: 0.5rem;
+    }
+    input {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+      background: #222;
+      color: #fff;
+      border: 1px solid #555;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background: #444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #666;
+    }
+    .glyph {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+<div id="chat-box">
+  <div id="auth-box" style="max-width:600px;margin:auto;margin-bottom:2rem;border:1px solid red;">
+    <h2>Login to Access Rituals</h2>
+    <form id="login-form" style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Send Magic Link</button>
+    </form>
+    <button id="logout-button" style="display:none;">Logout</button>
+    <div id="auth-status" style="margin-top:0.5rem;color:#aaa;"></div>
+  </div>
+
+  <h1>Saori Console</h1>
+  <div id="messages"></div>
+  <form id="chat-form">
+    <input type="text" id="message" placeholder="Speak to Saori..." autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<!-- Supabase client (UMD build) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+  const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed";
+  const SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe";
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // Handle magic link redirect
+  (async () => {
+    const { error } = await supabase.auth.getSessionFromUrl();
+    if (error) {
+      console.error("Error completing login:", error.message);
+    } else {
+      console.log("Magic link login completed.");
+      window.history.replaceState({}, document.title, "/saoriverse-console/");
+    }
+  })();
+
+  const loginForm = document.getElementById("login-form");
+  const emailInput = document.getElementById("email");
+  const logoutButton = document.getElementById("logout-button");
+  const authStatus = document.getElementById("auth-status");
+
+  // Handle login
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email) return;
+
+    const { error } = await supabase.auth.signInWithOtp({ email });
+    if (error) {
+      authStatus.textContent = "Login failed. Try again.";
+      console.error("Login error:", error);
+    } else {
+      authStatus.textContent = "Magic link sent! Check your email.";
+    }
+  });
+
+  // Handle logout
+  logoutButton.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    authStatus.textContent = "Logged out.";
+    logoutButton.style.display = "none";
+  });
+
+  // Track session
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (session) {
+      authStatus.textContent = `Logged in as ${session.user.email}`;
+      logoutButton.style.display = "inline-block";
+    } else {
+      authStatus.textContent = "Not logged in.";
+      logoutButton.style.display = "none";
+    }
+  });
+
+  // Chat logic
+  const form = document.getElementById("chat-form");
+  const input = document.getElementById("message");
+  const messages = document.getElementById("messages");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const userMessage = input.value.trim();
+    if (!userMessage) return;
+
+    appendMessage("You", userMessage, "user");
+    input.value = "";
+
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
+
+    try {
+      const res = await fetch(EDGE_FUNCTION_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && { "Authorization": `Bearer ${token}` })
+        },
+        body: JSON.stringify({ message: userMessage })
+      });
+
+      const { reply, glyph } = await res.json();
+      appendMessage("Saori", reply, "saori", glyph);
+    } catch (err) {
+      console.error("Error:", err);
+      appendMessage("Saori", "I couldn’t reach the oracle. Try again soon.", "saori");
+    }
+  });
+
+  function appendMessage(sender, text, className, glyph = null) {
+    const div = document.createElement("div");
+    div.classList.add("message", className);
+    div.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    if (glyph?.tag_name) {
+      const glyphDiv = document.createElement("div");
+      glyphDiv.classList.add("glyph");
+      glyphDiv.textContent = `Glyph: ${glyph.tag_name} ${glyph.glyph ? `(${glyph.glyph})` : ""}`;
+      div.appendChild(glyphDiv);
+    }
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+</script>
+</body>
+</html>

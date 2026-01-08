@@ -1,0 +1,42 @@
+{
+  "hybrid_shared_stats": {
+    "signals_in_shared_lexicon": 8,
+    "learning_log_entries": 3740,
+    "scope": "shared"
+  },
+  "hybrid_user_stats": {
+    "signals_learned": 7,
+    "contributions": 2,
+    "trust_score": 0.45999999999999996,
+    "scope": "user"
+  },
+  "hybrid_run_count": 2,
+  "hybrid_run_details": [
+    {
+      "success": true,
+      "learned_to_shared": false,
+      "learned_to_user": true,
+      "reason": "input_too_long"
+    },
+    {
+      "success": true,
+      "learned_to_shared": false,
+      "learned_to_user": true,
+      "reason": "no_emotional_engagement"
+    }
+  ],
+  "lexicon_results_summary": {
+    "new_emotional_words": [],
+    "effective_response_patterns": [],
+    "word_associations": {},
+    "conversation_themes": [
+      "longing",
+      "love",
+      "grief",
+      "confusion",
+      "anger",
+      "joy",
+      "anxiety"
+    ]
+  }
+}

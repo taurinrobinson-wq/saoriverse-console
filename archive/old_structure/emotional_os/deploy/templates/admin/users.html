@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FirstPerson Admin - User Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #2E2E2E;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .admin-logo span {
+            margin-left: 0.5rem;
+        }
+        
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .admin-nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e6ed;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-tab {
+            color: #666;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .nav-tab:hover {
+            background: #f0f4f8;
+            color: #2E2E2E;
+        }
+        
+        .admin-content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #2E2E2E;
+        }
+        
+        .users-controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e6ed;
+        }
+        
+        .controls-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px 16px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .filter-select {
+            padding: 10px 16px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+        }
+        
+        .export-btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .export-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .users-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e6ed;
+        }
+        
+        .table-header {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e0e6ed;
+            font-weight: 600;
+            color: #2E2E2E;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e6ed;
+        }
+        
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #2E2E2E;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        td {
+            color: #4a5568;
+        }
+        
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .status-suspended {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-inactive {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit {
+            background: #3182ce;
+            color: white;
+        }
+        
+        .btn-edit:hover {
+            background: #2c5aa0;
+        }
+        
+        .btn-suspend {
+            background: #f6ad55;
+            color: white;
+        }
+        
+        .btn-suspend:hover {
+            background: #ed8936;
+        }
+        
+        .btn-delete {
+            background: #f56565;
+            color: white;
+        }
+        
+        .btn-delete:hover {
+            background: #e53e3e;
+        }
+        
+        .user-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .modal-header {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2E2E2E;
+        }
+        
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        
+        .close-btn {
+            background: #e2e8f0;
+            color: #4a5568;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .confirm-btn {
+            background: #f56565;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .page-btn {
+            padding: 8px 12px;
+            border: 1px solid #e0e6ed;
+            background: white;
+            color: #4a5568;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-logo">
+            🛡️ <span>FirstPerson Admin</span>
+        </div>
+        <div class="admin-user">
+            <span>Welcome, {{ admin_user.username }}</span>
+            <form method="post" action="/admin/logout" style="display: inline;">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </header>
+    
+    <nav class="admin-nav">
+        <div class="nav-tabs">
+            <a href="/admin/dashboard" class="nav-tab">Dashboard</a>
+            <a href="/admin/users" class="nav-tab active">Users</a>
+            <a href="/admin/conversations" class="nav-tab">Conversations</a>
+            <a href="/admin/settings" class="nav-tab">Settings</a>
+        </div>
+    </nav>
+    
+    <main class="admin-content">
+        <h1 class="section-title">User Management</h1>
+        
+        <div class="users-controls">
+            <div class="controls-row">
+                <input type="text" class="search-input" placeholder="Search users by username or email..." id="userSearch">
+                <select class="filter-select" id="statusFilter">
+                    <option value="all">All Users</option>
+                    <option value="active">Active Users</option>
+                    <option value="suspended">Suspended Users</option>
+                    <option value="inactive">Inactive Users</option>
+                </select>
+                <button class="export-btn" onclick="exportUsers()">Export Users</button>
+            </div>
+        </div>
+        
+        <div class="users-table">
+            <div class="table-header">
+                <span>All Users ({{ users|length }})</span>
+                <span>Showing 1-{{ users|length }} of {{ users|length }}</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Last Login</th>
+                        <th>Conversations</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    {% for user in users %}
+                    <tr data-status="{{ user.status }}" data-username="{{ user.username }}">
+                        <td>{{ user.id[:8] }}...</td>
+                        <td><strong>{{ user.username }}</strong></td>
+                        <td>{{ user.email or 'N/A' }}</td>
+                        <td><span class="status-badge status-{{ user.status }}">{{ user.status }}</span></td>
+                        <td>{{ user.created_at[:10] if user.created_at else 'N/A' }}</td>
+                        <td>{{ user.last_login[:16] if user.last_login else 'Never' }}</td>
+                        <td>{{ user.conversation_count or 0 }}</td>
+                        <td>
+                            <div class="user-actions">
+                                <button class="action-btn btn-edit" onclick="editUser('{{ user.id }}', '{{ user.username }}')">Edit</button>
+                                <button class="action-btn btn-suspend" onclick="suspendUser('{{ user.id }}', '{{ user.username }}')">Suspend</button>
+                                <button class="action-btn btn-delete" onclick="deleteUser('{{ user.id }}', '{{ user.username }}')">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">Next</button>
+        </div>
+    </main>
+    
+    <!-- User Action Modal -->
+    <div id="userModal" class="user-modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTitle">Confirm Action</div>
+            <div class="modal-body" id="modalBody">
+                Are you sure you want to perform this action?
+            </div>
+            <div class="modal-actions">
+                <button class="close-btn" onclick="closeModal()">Cancel</button>
+                <button class="confirm-btn" id="confirmBtn" onclick="confirmAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentAction = null;
+        let currentUserId = null;
+        
+        // Search functionality
+        document.getElementById('userSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#usersTableBody tr');
+            
+            rows.forEach(row => {
+                const username = row.dataset.username.toLowerCase();
+                const visible = username.includes(searchTerm);
+                row.style.display = visible ? '' : 'none';
+            });
+        });
+        
+        // Status filter
+        document.getElementById('statusFilter').addEventListener('change', function(e) {
+            const selectedStatus = e.target.value;
+            const rows = document.querySelectorAll('#usersTableBody tr');
+            
+            rows.forEach(row => {
+                const status = row.dataset.status;
+                const visible = selectedStatus === 'all' || status === selectedStatus;
+                row.style.display = visible ? '' : 'none';
+            });
+        });
+        
+        function editUser(userId, username) {
+            // Implement edit user functionality
+            alert(`Edit user functionality for ${username} coming soon!`);
+        }
+        
+        function suspendUser(userId, username) {
+            currentAction = 'suspend';
+            currentUserId = userId;
+            document.getElementById('modalTitle').textContent = 'Suspend User';
+            document.getElementById('modalBody').innerHTML = `
+                Are you sure you want to suspend user <strong>${username}</strong>?<br>
+                This will prevent them from accessing the system.
+            `;
+            document.getElementById('userModal').style.display = 'block';
+        }
+        
+        function deleteUser(userId, username) {
+            currentAction = 'delete';
+            currentUserId = userId;
+            document.getElementById('modalTitle').textContent = 'Delete User';
+            document.getElementById('modalBody').innerHTML = `
+                <strong>⚠️ WARNING:</strong> Are you sure you want to permanently delete user <strong>${username}</strong>?<br>
+                This action cannot be undone and will remove all their data.
+            `;
+            document.getElementById('userModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('userModal').style.display = 'none';
+            currentAction = null;
+            currentUserId = null;
+        }
+        
+        async function confirmAction() {
+            if (currentAction && currentUserId) {
+                try {
+                    const response = await fetch(`/admin/api/users/${currentUserId}/moderate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            user_id: currentUserId,
+                            action: currentAction,
+                            reason: `Admin action: ${currentAction}`
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert(result.message);
+                        location.reload(); // Refresh the page to see changes
+                    } else {
+                        alert('Error: ' + result.message);
+                    }
+                } catch (error) {
+                    alert('Error performing action: ' + error.message);
+                }
+            }
+            closeModal();
+        }
+        
+        function exportUsers() {
+            // Create CSV export
+            const users = {{ users | tojson }};
+            let csv = 'Username,Email,Status,Created,Last Login,Conversations\n';
+            
+            users.forEach(user => {
+                csv += `"${user.username}","${user.email || 'N/A'}","${user.status}","${user.created_at || 'N/A'}","${user.last_login || 'Never'}","${user.conversation_count || 0}"\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `firstperson_users_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('userModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

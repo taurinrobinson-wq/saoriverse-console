@@ -1,0 +1,42 @@
+{
+    "overwhelmed": {
+        "signal": "ε",
+        "voltage": "medium",
+        "tone": "insight"
+    },
+    "overwhelm": {
+        "signal": "ε",
+        "voltage": "medium",
+        "tone": "insight"
+    },
+    "anxious": {
+        "signal": "θ",
+        "voltage": "high",
+        "tone": "grief"
+    },
+    "anxiety": {
+        "signal": "θ",
+        "voltage": "high",
+        "tone": "grief"
+    },
+    "conflict": {
+        "signal": "β",
+        "voltage": "medium",
+        "tone": "containment"
+    },
+    "longing": {
+        "signal": "λ",
+        "voltage": "medium",
+        "tone": "longing"
+    },
+    "grief": {
+        "signal": "θ",
+        "voltage": "medium",
+        "tone": "grief"
+    },
+    "sad": {
+        "signal": "θ",
+        "voltage": "medium",
+        "tone": "grief"
+    }
+}

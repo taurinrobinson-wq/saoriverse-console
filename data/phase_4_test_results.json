@@ -1,0 +1,200 @@
+{
+  "total_tests": 9,
+  "passed": 9,
+  "failed": 0,
+  "rituals": {
+    "Ascending": {
+      "status": "PASS",
+      "gates": 12,
+      "glyphs": 7096
+    },
+    "Grounding": {
+      "status": "PASS",
+      "gates": 12,
+      "glyphs": 7096
+    },
+    "Inner Circle": {
+      "status": "PASS",
+      "gates": 6,
+      "glyphs": 3902
+    },
+    "Outer Cosmic": {
+      "status": "PASS",
+      "gates": 6,
+      "glyphs": 3194
+    },
+    "Shadow Work": {
+      "status": "PASS",
+      "gates": 5,
+      "glyphs": 3150
+    },
+    "Light Work": {
+      "status": "PASS",
+      "gates": 6,
+      "glyphs": 3796
+    }
+  },
+  "performance": {
+    "Ascending": {
+      "name": "Ascending",
+      "gates": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "total_gates": 12,
+      "total_glyphs": 7096,
+      "execution_time": 0.015974044799804688,
+      "gate_access_times": {
+        "1": 0.000476837158203125,
+        "2": 0.0002384185791015625,
+        "3": 0.0002384185791015625,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0002384185791015625,
+        "7": 0.0002384185791015625,
+        "8": 0.0002384185791015625,
+        "9": 0.0002384185791015625,
+        "10": 0.0002384185791015625,
+        "11": 0.0002384185791015625,
+        "12": 0.0002384185791015625
+      },
+      "status": "PASS"
+    },
+    "Grounding": {
+      "name": "Grounding",
+      "gates": [
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "total_gates": 12,
+      "total_glyphs": 7096,
+      "execution_time": 0.00667572021484375,
+      "gate_access_times": {
+        "12": 0.000476837158203125,
+        "11": 0.0002384185791015625,
+        "10": 0.0,
+        "9": 0.0,
+        "8": 0.0002384185791015625,
+        "7": 0.0,
+        "6": 0.0,
+        "5": 0.0,
+        "4": 0.0002384185791015625,
+        "3": 0.0,
+        "2": 0.0,
+        "1": 0.0002384185791015625
+      },
+      "status": "PASS"
+    },
+    "Inner Circle": {
+      "name": "Inner Circle",
+      "gates": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "total_gates": 6,
+      "total_glyphs": 3902,
+      "execution_time": 0.003337860107421875,
+      "gate_access_times": {
+        "4": 0.0002384185791015625,
+        "5": 0.0002384185791015625,
+        "6": 0.0,
+        "7": 0.0002384185791015625,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "status": "PASS"
+    },
+    "Outer Cosmic": {
+      "name": "Outer Cosmic",
+      "gates": [
+        1,
+        2,
+        3,
+        10,
+        11,
+        12
+      ],
+      "total_gates": 6,
+      "total_glyphs": 3194,
+      "execution_time": 0.003337860107421875,
+      "gate_access_times": {
+        "1": 0.0002384185791015625,
+        "2": 0.0002384185791015625,
+        "3": 0.0,
+        "10": 0.0002384185791015625,
+        "11": 0.0,
+        "12": 0.0002384185791015625
+      },
+      "status": "PASS"
+    },
+    "Shadow Work": {
+      "name": "Shadow Work",
+      "gates": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "total_gates": 5,
+      "total_glyphs": 3150,
+      "execution_time": 0.002384185791015625,
+      "gate_access_times": {
+        "7": 0.0,
+        "8": 0.000476837158203125,
+        "9": 0.0,
+        "10": 0.0002384185791015625,
+        "11": 0.0
+      },
+      "status": "PASS"
+    },
+    "Light Work": {
+      "name": "Light Work",
+      "gates": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "total_gates": 6,
+      "total_glyphs": 3796,
+      "execution_time": 0.0030994415283203125,
+      "gate_access_times": {
+        "1": 0.0,
+        "2": 0.0002384185791015625,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0
+      },
+      "status": "PASS"
+    }
+  },
+  "errors": []
+}

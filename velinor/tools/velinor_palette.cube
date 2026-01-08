@@ -1,0 +1,15 @@
+# Velinor palette 3D LUT (small 2x2x2 cube)
+# Simple palette transform: slight desaturate + warm/gold tint in midtones
+LUT_3D_SIZE 2
+
+# Order: 8 entries for a 2x2x2 cube. Values are R G B triples in [0..1].
+# This small cube gives a gentle overall tint; for production use a larger LUT.
+
+0.000000 0.000000 0.000000
+0.020000 0.020000 0.950000
+0.020000 0.930000 0.020000
+0.920000 0.930000 0.950000
+0.020000 0.050000 0.050000
+0.040000 0.040000 0.980000
+0.040000 0.980000 0.040000
+0.960000 0.980000 0.980000
