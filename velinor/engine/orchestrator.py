@@ -23,6 +23,9 @@ from .event_timeline import EventTimeline, CollapsePhase, AftermathPath
 from .collapse_scene import CollapseTriggerScene, ImmediateAftermathScene, AftermathPathDivergence
 from .ending_system import EndingManager, CoreLinkChoice, EndingType
 from .corelink_scene import CoreLinkScene
+from .game_state import GameStateSnapshot, GameStateBuilder
+from .save_system import SaveManager, QuickSaveManager
+from .load_system import LoadManager, SaveGameRecovery
 # Try to import REMNANTS NPC manager and helper constructors
 try:
     from .npc_manager import NPCManager, create_marketplace_npcs, create_marketplace_influence_map
@@ -100,6 +103,12 @@ class VelinorTwineOrchestrator:
         # Initialize Phase 4 systems (Ending)
         self.ending_manager = EndingManager()
         self.corelink_scene = CoreLinkScene()
+        
+        # Initialize Phase 5 systems (Save/Load)
+        self.save_manager = SaveManager()
+        self.load_manager = LoadManager()
+        self.quick_save_manager = QuickSaveManager(self.save_manager)
+        self.save_recovery = SaveGameRecovery()
         
         # REMNANTS manager (for trait/influence simulation)
         self.remnants_manager = NPCManager() if NPCManager is not None else None
@@ -930,4 +939,186 @@ class VelinorTwineOrchestrator:
             "phase": 4,
             "ending_status": self.get_ending_status(),
             "game_complete": self.ending_manager.current_ending is not None
+        }
+
+    # ============================================================================
+    # PHASE 5: SAVE/LOAD PERSISTENCE
+    # ============================================================================
+    
+    def save_game(self, save_name: str = None, auto_save: bool = False) -> Dict[str, Any]:
+        """
+        Save current game progress
+        
+        Args:
+            save_name: Name for the save slot (optional)
+            auto_save: Whether this is an auto-save
+            
+        Returns:
+            Dictionary with save result
+        """
+        # Build current game state
+        state_snapshot = GameStateBuilder.build_from_orchestrator(self)
+        
+        # Save to file
+        success, message, slot_id = self.save_manager.save_game(
+            state_snapshot,
+            save_name=save_name,
+            auto_save=auto_save
+        )
+        
+        used, max_slots = self.save_manager.get_save_slot_count()
+        
+        return {
+            "save_success": success,
+            "save_message": message,
+            "slot_id": slot_id,
+            "save_name": save_name or "Auto-Save",
+            "player_name": state_snapshot.player_name,
+            "current_day": state_snapshot.current_day,
+            "current_phase": state_snapshot.current_phase,
+            "game_completed": state_snapshot.game_completed,
+            "save_slots_used": used,
+            "save_slots_total": max_slots,
+        }
+    
+    def load_game(self, slot_id: str) -> Dict[str, Any]:
+        """
+        Load a saved game
+        
+        Args:
+            slot_id: ID of save slot to load
+            
+        Returns:
+            Dictionary with load result and game state
+        """
+        success, message, state = self.load_manager.load_game(slot_id)
+        
+        if not success:
+            return {
+                "load_success": False,
+                "load_message": message,
+            }
+        
+        # Restore state to orchestrator
+        restore_success, restore_message = self.load_manager.restore_to_orchestrator(
+            state, self
+        )
+        
+        if not restore_success:
+            return {
+                "load_success": False,
+                "load_message": restore_message,
+            }
+        
+        return {
+            "load_success": True,
+            "load_message": message,
+            "player_name": state.player_name,
+            "current_day": state.current_day,
+            "current_phase": state.current_phase,
+            "coherence_score": state.coherence_score,
+            "game_completed": state.game_completed,
+            "ending_type": state.ending_type,
+        }
+    
+    def get_save_slots(self) -> Dict[str, Any]:
+        """
+        Get all available save slots
+        
+        Returns:
+            Dictionary with list of save slots
+        """
+        slots = self.save_manager.get_save_slots()
+        
+        return {
+            "save_slots": [
+                {
+                    "slot_id": slot.slot_id,
+                    "save_name": slot.save_name,
+                    "player_name": slot.player_name,
+                    "save_timestamp": slot.save_timestamp,
+                    "current_day": slot.current_day,
+                    "current_phase": slot.current_phase,
+                    "game_completed": slot.game_completed,
+                    "ending_type": slot.ending_type,
+                    "description": self.save_manager.get_save_description(slot),
+                }
+                for slot in slots
+            ],
+            "total_slots": len(slots),
+        }
+    
+    def delete_save(self, slot_id: str) -> Dict[str, Any]:
+        """
+        Delete a save slot
+        
+        Args:
+            slot_id: ID of slot to delete
+            
+        Returns:
+            Dictionary with delete result
+        """
+        success, message = self.save_manager.delete_save(slot_id)
+        
+        return {
+            "delete_success": success,
+            "delete_message": message,
+        }
+    
+    def quick_save(self) -> Dict[str, Any]:
+        """
+        Perform a quick save
+        
+        Returns:
+            Dictionary with quick-save result
+        """
+        state_snapshot = GameStateBuilder.build_from_orchestrator(self)
+        success, message = self.quick_save_manager.quick_save(state_snapshot)
+        
+        return {
+            "quick_save_success": success,
+            "quick_save_message": message,
+        }
+    
+    def quick_load(self) -> Dict[str, Any]:
+        """
+        Load the quick-save
+        
+        Returns:
+            Dictionary with quick-load result
+        """
+        state = self.quick_save_manager.quick_load()
+        
+        if state is None:
+            return {
+                "quick_load_success": False,
+                "quick_load_message": "No quick-save available",
+            }
+        
+        restore_success, restore_message = self.load_manager.restore_to_orchestrator(state, self)
+        
+        return {
+            "quick_load_success": restore_success,
+            "quick_load_message": restore_message or "Quick-saved game loaded",
+            "player_name": state.player_name,
+            "current_day": state.current_day,
+        }
+    
+    def has_quick_save(self) -> Dict[str, Any]:
+        """Check if quick-save exists"""
+        return {
+            "has_quick_save": self.quick_save_manager.has_quick_save(),
+        }
+    
+    def get_phase5_status(self) -> Dict[str, Any]:
+        """Get complete Phase 5 game status for UI"""
+        used, max_slots = self.save_manager.get_save_slot_count()
+        
+        return {
+            "phase": 5,
+            "save_slots_used": used,
+            "save_slots_total": max_slots,
+            "save_slots_full": self.save_manager.is_save_slots_full(),
+            "has_quick_save": self.quick_save_manager.has_quick_save(),
+            "save_directory": str(self.save_manager.save_directory),
         }
