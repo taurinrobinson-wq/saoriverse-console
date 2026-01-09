@@ -64,6 +64,11 @@ class NPCProfile:
             if not 0.1 <= value <= 0.9:
                 raise ValueError(f"{self.name}.{trait} = {value} out of range [0.1, 0.9]")
     
+    @property
+    def traits(self) -> Dict[str, float]:
+        """Alias for remnants to match dialogue_context expectations."""
+        return self.remnants
+    
     def adjust_trait(self, trait: str, delta: float) -> None:
         """
         Adjust a single trait by delta, clamping to [0.1, 0.9].
@@ -254,6 +259,66 @@ class NPCManager:
             return []
         
         return sorted(npc.remnants.items(), key=lambda x: x[1], reverse=True)
+    
+    def apply_skill_task_outcome(self, task_outcome) -> None:
+        """
+        Apply REMNANTS shifts from a skill task outcome.
+        
+        This integrates SkillTaskOutcome from skill_system.py with NPCManager.
+        Handles:
+        - Direct REMNANTS shift to the NPC
+        - Ripple effects to connected NPCs (especially if lie discovered)
+        - Korrin-specific lie propagation
+        
+        Args:
+            task_outcome: SkillTaskOutcome object from skill_system.py
+        """
+        npc_name = task_outcome.claim.npc_name
+        if npc_name not in self.npcs:
+            return  # NPC not tracked, skip
+        
+        # Step 1: Apply direct REMNANTS effects
+        npc = self.npcs[npc_name]
+        for trait, delta in task_outcome.get_remnants_effects().items():
+            npc.adjust_trait(trait, delta)
+        
+        # Step 2: If lie was discovered, amplify ripples to connected NPCs
+        if task_outcome.lie_discovered:
+            self._propagate_lie_discovery(npc_name, task_outcome)
+        
+        # Step 3: Record in history
+        self.history.append({
+            "type": "skill_task_outcome",
+            "task_outcome": task_outcome.to_dict(),
+            "direct_npc": npc_name,
+            "ripple_npc": list(self.influence_map.get(npc_name, {}).keys())
+        })
+    
+    def _propagate_lie_discovery(self, source_npc: str, task_outcome) -> None:
+        """
+        When a lie is discovered, propagate skepticism through social network.
+        
+        Korrin is special — she actively spreads rumors about lies.
+        """
+        # Connected NPCs lose trust in player (through the source NPC's skepticism)
+        connected_npcs = self.influence_map.get(source_npc, {})
+        
+        for connected_npc in connected_npcs.keys():
+            if connected_npc not in self.npcs:
+                continue
+            
+            # Connected NPCs shift toward skepticism about the player
+            npc = self.npcs[connected_npc]
+            npc.adjust_trait("skepticism", 0.1)  # They hear about the deception
+            npc.adjust_trait("trust", -0.08)
+        
+        # Korrin specifically weaponizes lies she hears about
+        if "Korrin" in self.npcs and source_npc != "Korrin":
+            korrin = self.npcs["Korrin"]
+            # Korrin's skepticism goes up, memory of incident goes up
+            korrin.adjust_trait("skepticism", 0.15)
+            korrin.adjust_trait("memory", 0.1)
+            # This makes her future dialogue about the lie more likely
     
     def export_state(self) -> Dict:
         """Export all NPC states and influence map for story JSON."""
