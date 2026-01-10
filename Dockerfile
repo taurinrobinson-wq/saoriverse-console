@@ -17,9 +17,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install dependencies
-COPY requirements.txt .
+# Use lightweight docker requirements to fit in container
+COPY requirements.docker.txt .
 RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.docker.txt
 
 # Copy application code (excluding items in .dockerignore)
 COPY . .
@@ -35,4 +36,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
 # Run FastAPI server using uvicorn
-CMD ["uvicorn", "core.start:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "velinor_api:app", "--host", "0.0.0.0", "--port", "8000"]
