@@ -24,8 +24,17 @@ import sys
 import io
 import time
 import random
+import logging
 from PIL import Image
 import streamlit as st
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler()]
+)
+logger = logging.getLogger(__name__)
 
 # Define project root FIRST
 PROJECT_ROOT = Path(__file__).parent
@@ -1118,7 +1127,8 @@ def render_sidebar():
 
         # Location info in collapsible expander
         with st.sidebar.expander("📍 Scene", expanded=True):
-            st.text(state.current_scene if hasattr(state, 'current_scene') else 'Unknown')
+            st.text(state.current_scene if hasattr(
+                state, 'current_scene') else 'Unknown')
 
 
 # ============================================================================
@@ -1214,33 +1224,48 @@ def handle_special_action(action: str):
 
 def start_new_game():
     """Initialize and start a new game."""
+    logger.info("🎮 start_new_game() called")
     try:
         # Try to initialize new modular system first
         if HAS_NEW_COMPONENTS:
+            logger.info(
+                "✓ HAS_NEW_COMPONENTS is True, attempting new modular system...")
             try:
                 story_path = str(PROJECT_ROOT / "velinor" /
                                  "stories" / "sample_story.json")
+                logger.info(f"📖 Story path: {story_path}")
 
                 # Initialize systems for new modular UI
+                logger.info("🔧 Initializing VelinorEngine...")
                 game_engine = VelinorEngine()
                 game_engine.create_session(
                     player_name=st.session_state.player_name)
+                logger.info("✓ VelinorEngine created")
 
+                logger.info("🔧 Initializing NPCDialogueSystem...")
                 from velinor.engine.npc_system import NPCDialogueSystem
                 npc_system = NPCDialogueSystem()
+                logger.info("✓ NPCDialogueSystem created")
 
                 # Initialize orchestrator with story path
+                logger.info("🔧 Initializing VelinorTwineOrchestrator...")
                 orchestrator = VelinorTwineOrchestrator(
                     game_engine=game_engine,
                     story_path=story_path,
                     npc_system=npc_system,
                     player_name=st.session_state.player_name
                 )
+                logger.info("✓ VelinorTwineOrchestrator created")
 
                 # Start game and get initial state
+                logger.info("🚀 Starting game via orchestrator.start_game()...")
                 try:
                     initial_state = orchestrator.start_game()
-                except Exception:
+                    logger.info(
+                        f"✓ Game started, initial state: {list(initial_state.keys())}")
+                except Exception as e:
+                    logger.warning(
+                        f"⚠️ orchestrator.start_game() failed: {e}, using default state")
                     # If start_game fails, create a default state
                     initial_state = {
                         "scene": "market_arrival",
@@ -1260,6 +1285,7 @@ def start_new_game():
                     }
 
                 # Store new modular systems
+                logger.info("💾 Storing game systems in session state...")
                 st.session_state.game_systems = {
                     "orchestrator": orchestrator,
                     "engine": game_engine,
@@ -1267,18 +1293,28 @@ def start_new_game():
                     "initial_state": initial_state,
                     "ui": StreamlitUI()
                 }
-                st.session_state.game_state = StreamlitGameState()
-                st.session_state.current_state = initial_state
+                logger.info("✓ game_systems stored")
 
+                st.session_state.game_state = StreamlitGameState()
+                logger.info("✓ game_state created")
+
+                st.session_state.current_state = initial_state
+                logger.info("✓ current_state set")
+
+                logger.info("✅ New game started with enhanced UI!")
                 st.success("✅ New game started with enhanced UI!")
+                logger.info("🔄 Calling st.rerun()...")
                 st.rerun()
                 return
             except Exception as e:
+                logger.error(
+                    f"❌ Error in new modular system: {e}", exc_info=True)
                 # Fall through to legacy system if new system fails
                 st.warning(
                     f"Enhanced UI not available, using legacy mode: {str(e)}")
 
         # Legacy system initialization
+        logger.info("ℹ️ Falling back to legacy system...")
         engine = VelinorEngine()
         engine.create_session(
             player_name=st.session_state.player_name,
@@ -1443,14 +1479,23 @@ def render_about_menu():
 
 def main():
     """Main application entry point."""
+    logger.info("=" * 50)
+    logger.info("🎮 MAIN() CALLED")
+    logger.info(
+        f"orchestrator exists: {st.session_state.orchestrator is not None}")
+    logger.info(
+        f"game_state exists: {st.session_state.game_state is not None}")
+    logger.info("=" * 50)
 
     # Sidebar
     render_sidebar()
 
     # Main content
     if st.session_state.orchestrator and st.session_state.game_state:
+        logger.info("✓ Game active, rendering game screen...")
         render_game_screen()
     else:
+        logger.info("ℹ️ No active game, rendering title screen...")
         # Welcome splash screen - composite title screen
         background_path = str(PROJECT_ROOT / "velinor" /
                               "backgrounds" / "Velhara_background_title(blur).png")
@@ -1474,13 +1519,16 @@ def main():
         # Start New Game button (centered, large)
         col_btn_left, col_btn, col_btn_right = st.columns([1, 1, 1])
         with col_btn:
+            logger.info("📍 Rendering Start New Game button...")
             if st.button("🌙 Start New Game", use_container_width=True, key="welcome_start"):
+                logger.info("🔘 START NEW GAME BUTTON CLICKED!")
                 start_new_game()
 
         st.markdown("")  # Spacing
 
         # Test Boss Fight button
         if st.button("Test Boss Fight", use_container_width=False, key="welcome_boss_test"):
+            logger.info("🔘 BOSS TEST BUTTON CLICKED!")
             st.session_state.boss_test = True
             init_boss_fight_session()
             st.rerun()
