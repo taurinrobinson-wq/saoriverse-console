@@ -1460,8 +1460,11 @@ def main():
         composite_img = composite_title_screen(
             background_path, npc_overlay_path, title_overlay_path)
 
-        # Display composite image fullscreen
-        st.image(composite_img, use_column_width=True)
+        # Display composite image (constrained width)
+        col_spacer_left, col_image, col_spacer_right = st.columns([
+                                                                  0.1, 0.8, 0.1])
+        with col_image:
+            st.image(composite_img, use_column_width=True)
 
         st.markdown("")  # Spacing
 
