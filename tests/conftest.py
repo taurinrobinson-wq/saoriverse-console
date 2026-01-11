@@ -1,76 +1,31 @@
 import sys
-import os
 from pathlib import Path
 
+# Prepend the repo root and `src/` directories to sys.path so pytest import
+# collection resolves package imports to the project's source layout.
+ROOT = Path(__file__).resolve().parent
+SRC = ROOT / "src"
 
-def pytest_configure(config):
-    """Ensure repository root and `src` directory are on sys.path for test imports."""
-    repo_root = Path(__file__).resolve().parents[1]
-    src_dir = repo_root / "src"
-    # Prefer repository root first so top-level packages (emotional_os/) are used
-    sys.path.insert(0, str(repo_root))
-    # Then allow imports from `src/` for packaged code
-    sys.path.insert(1, str(src_dir))
-"""Pytest configuration for FirstPerson test suite."""
+# Ensure the repository root is first so top-level loaders (e.g., `parser`)
+# execute and can preload submodules into `sys.modules` if needed.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-import os
-import sys
+# Then add `src/` so `src` packages are importable as top-level modules.
+if SRC.is_dir() and str(SRC) not in sys.path:
+    sys.path.insert(1, str(SRC))
 
-import pytest
+# If a stale `parser` entry exists, clear it so imports are deterministic.
+if "parser" in sys.modules:
+    for key in list(sys.modules.keys()):
+        if key == "parser" or key.startswith("parser."):
+            del sys.modules[key]
 
-# Add project root to path so tests can import modules
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, PROJECT_ROOT)
-
-
-@pytest.fixture(autouse=True)
-def ensure_cwd_project_root():
-    """Ensure each test runs with the project root as the current working directory.
-
-    Some tests or helper scripts change the CWD; this autouse fixture resets it
-    for isolation and prevents relative-path flakiness.
-    """
-    prev = os.getcwd()
-    try:
-        os.chdir(PROJECT_ROOT)
-        yield
-    finally:
-        try:
-            os.chdir(prev)
-        except Exception:
-            # best-effort restore; ignore failures to avoid masking test errors
-            pass
-
-
-@pytest.fixture
-def sample_glyph():
-    """Sample glyph for testing."""
-    return {
-        "glyph_name": "Euphoric Yearning",
-        "gate": "Gate 5",
-        "description": "Hopeful desire with presence"
-    }
-
-
-@pytest.fixture
-def sample_signal():
-    """Sample emotional signal for testing."""
-    return {
-        "voltage": 0.6,
-        "tone": "Yearning",
-        "attunement": 0.7,
-        "certainty": 0.5,
-        "valence": 0.3
-    }
-
-
-@pytest.fixture
-def sample_user_input():
-    """Sample user input for testing."""
-    return "I've been feeling lost lately, like I'm not sure who I am anymore."
-
-
-@pytest.fixture
-def temp_data_dir(tmp_path):
-    """Temporary directory for test data."""
-    return tmp_path / "test_data"
+# Attempt to import the top-level `parser` package so its loader runs and
+# registers `parser.<submodule>` entries (the loader maps to `src/parser`).
+try:
+    import parser as _parser  # noqa: F401
+except Exception:
+    # If importing fails, allow pytest to continue and fail with clearer
+    # import errors later during test collection.
+    pass

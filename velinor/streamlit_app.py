@@ -18,20 +18,20 @@ Run:
     streamlit run velinor/streamlit_app.py
 """
 
-# Add project root to path BEFORE imports
-import streamlit as st
+# CRITICAL: Set up path before ANY other imports
 from velinor.engine.orchestrator import VelinorTwineOrchestrator
 from velinor.engine.core import VelinorEngine
 from velinor.engine.npc_system import NPCDialogueSystem
 from velinor.stories.story_definitions import build_velinor_story
 from velinor.streamlit_state import StreamlitGameState
 from velinor.streamlit_ui import StreamlitUI
+import streamlit as st
 from pathlib import Path
 import sys
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-# Now import game modules
+# NOW import streamlit and game modules
 
 
 def initialize_game():
