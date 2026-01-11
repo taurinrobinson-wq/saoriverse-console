@@ -298,8 +298,8 @@ def composite_title_screen(background_path: str, npc_overlay_path: str, title_ov
         # Resize background to 16:9 dimensions (1440x810)
         bg = bg.resize((1440, 810), Image.Resampling.LANCZOS)
 
-        # Resize NPC overlay to fit bottom-middle (~50% of height)
-        npc_height = int(bg.height * 0.80)
+        # Resize NPC overlay to fit bottom-middle (increase by 20% to ~96% of height)
+        npc_height = int(bg.height * 0.96)
         npc_ratio = npc_overlay.width / npc_overlay.height
         npc_width = int(npc_height * npc_ratio)
         npc_overlay = npc_overlay.resize(
@@ -309,16 +309,16 @@ def composite_title_screen(background_path: str, npc_overlay_path: str, title_ov
         npc_x = (bg.width - npc_width) // 2
         npc_y = bg.height - npc_height
 
-        # Resize title overlay (fit to ~32% of width - 20% smaller)
-        title_width = int(bg.width * 0.32)
+        # Resize title overlay (fit to ~29% of width - another 10% smaller)
+        title_width = int(bg.width * 0.29)
         title_ratio = title_overlay.width / title_overlay.height
         title_height = int(title_width / title_ratio)
         title_overlay = title_overlay.resize(
             (title_width, title_height), Image.Resampling.LANCZOS)
 
-        # Position title (center horizontally, lower on page - ~40% from top)
+        # Position title (center horizontally, even lower on page - ~50% from top)
         title_x = (bg.width - title_width) // 2
-        title_y = int(bg.height * 0.40)
+        title_y = int(bg.height * 0.50)
 
         # Composite: background -> NPC overlay -> title overlay (title on top)
         bg.paste(npc_overlay, (npc_x, npc_y), npc_overlay)
