@@ -16,28 +16,37 @@ Features:
 - Save/load functionality
 """
 
-from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
-from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
-import streamlit as st
+from engine import VelinorTwineOrchestrator, VelinorEngine
 from pathlib import Path
 import json
 from datetime import datetime
 import sys
-from PIL import Image
 import io
 import time
 import random
+from PIL import Image
+import streamlit as st
 
-# Add project root to path
-PROJECT_ROOT = Path(__file__).parent
+# Define project root FIRST
+PROJECT_ROOT = Path(__file__).parent.parent
+
+# Add project root to path for imports
 sys.path.insert(0, str(PROJECT_ROOT))
-sys.path.insert(0, str(PROJECT_ROOT / "src"))
+
+# Import optional modules
+try:
+    from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
+    HAS_EMOTIONAL_OS = True
+except ImportError:
+    HAS_EMOTIONAL_OS = False
+    FirstPersonOrchestrator = None
+    AffectParser = None
 
 
 # Import new modular components (if available)
 try:
-    from velinor.streamlit_state import StreamlitGameState
-    from velinor.streamlit_ui import StreamlitUI
+    from streamlit_state import StreamlitGameState
+    from streamlit_ui import StreamlitUI
     HAS_NEW_COMPONENTS = True
 except ImportError:
     HAS_NEW_COMPONENTS = False
@@ -1211,16 +1220,18 @@ def start_new_game():
             st.error(f"Story file not found: {story_path}")
             return
 
-        # Get or reinitialize FirstPerson for emotionally-aware NPC responses
-        firstperson_orchestrator = st.session_state.get(
-            'firstperson_orchestrator')
-        if not firstperson_orchestrator:
-            firstperson_orchestrator = FirstPersonOrchestrator(
-                user_id=st.session_state.player_name,
-                conversation_id='velinor_game'
-            )
-            firstperson_orchestrator.initialize_session()
-            st.session_state.firstperson_orchestrator = firstperson_orchestrator
+        # Get or reinitialize FirstPerson for emotionally-aware NPC responses (if available)
+        firstperson_orchestrator = None
+        if HAS_EMOTIONAL_OS:
+            firstperson_orchestrator = st.session_state.get(
+                'firstperson_orchestrator')
+            if not firstperson_orchestrator:
+                firstperson_orchestrator = FirstPersonOrchestrator(
+                    user_id=st.session_state.player_name,
+                    conversation_id='velinor_game'
+                )
+                firstperson_orchestrator.initialize_session()
+                st.session_state.firstperson_orchestrator = firstperson_orchestrator
 
         orchestrator = VelinorTwineOrchestrator(
             game_engine=engine,
