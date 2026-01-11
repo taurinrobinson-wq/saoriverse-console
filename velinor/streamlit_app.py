@@ -18,19 +18,20 @@ Run:
     streamlit run velinor/streamlit_app.py
 """
 
-from velinor.streamlit_ui import StreamlitUI
-from velinor.streamlit_state import StreamlitGameState
-from velinor.stories.story_definitions import build_velinor_story
-from velinor.engine.npc_system import NPCDialogueSystem
-from velinor.engine.core import VelinorEngine
-from velinor.engine.orchestrator import VelinorTwineOrchestrator
+# Add project root to path BEFORE imports
 import streamlit as st
+from velinor.engine.orchestrator import VelinorTwineOrchestrator
+from velinor.engine.core import VelinorEngine
+from velinor.engine.npc_system import NPCDialogueSystem
+from velinor.stories.story_definitions import build_velinor_story
+from velinor.streamlit_state import StreamlitGameState
+from velinor.streamlit_ui import StreamlitUI
 from pathlib import Path
 import sys
-
-# Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
+# Now import game modules
 
 
 def initialize_game():

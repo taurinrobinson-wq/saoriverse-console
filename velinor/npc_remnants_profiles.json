@@ -496,6 +496,178 @@
         "skepticism": 0.7
       },
       "description": "Carries a single, transformative memory echo"
+    },
+    "Seyla": {
+      "cluster": "Archive Network",
+      "temporal_role": "Archivist of Lineage",
+      "domains": [
+        "Ache"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.5,
+        "empathy": 0.5,
+        "memory": 0.85,
+        "nuance": 0.8,
+        "authority": 0.75,
+        "need": 0.5,
+        "trust": 0.5,
+        "skepticism": 0.5
+      },
+      "description": "Archivist of Lineage from the Archive Network"
+    },
+    "Velka": {
+      "cluster": "Archive Network",
+      "temporal_role": "Bone Keeper",
+      "domains": [
+        "Legacy"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.5,
+        "empathy": 0.5,
+        "memory": 0.85,
+        "nuance": 0.8,
+        "authority": 0.75,
+        "need": 0.5,
+        "trust": 0.5,
+        "skepticism": 0.5
+      },
+      "description": "Bone Keeper from the Archive Network"
+    },
+    "Thalma": {
+      "cluster": "Present Circle",
+      "temporal_role": "The Desert Listener",
+      "domains": [
+        "Presence"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.5,
+        "empathy": 0.75,
+        "memory": 0.5,
+        "nuance": 0.7,
+        "authority": 0.5,
+        "need": 0.5,
+        "trust": 0.8,
+        "skepticism": 0.5
+      },
+      "description": "The Desert Listener from the Present Circle"
+    },
+    "Tala": {
+      "cluster": "Present Circle",
+      "temporal_role": "Market Cook",
+      "domains": [
+        "Joy"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.5,
+        "empathy": 0.75,
+        "memory": 0.5,
+        "nuance": 0.7,
+        "authority": 0.5,
+        "need": 0.5,
+        "trust": 0.8,
+        "skepticism": 0.5
+      },
+      "description": "Market Cook from the Present Circle"
+    },
+    "Sybil": {
+      "cluster": "Present Circle",
+      "temporal_role": "Forest Loner Camper",
+      "domains": [
+        "Joy"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.5,
+        "empathy": 0.75,
+        "memory": 0.5,
+        "nuance": 0.7,
+        "authority": 0.5,
+        "need": 0.5,
+        "trust": 0.8,
+        "skepticism": 0.5
+      },
+      "description": "Forest Loner Camper from the Present Circle"
+    },
+    "Tovren the Cartwright": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Cartwright",
+      "domains": [
+        "Sovereignty",
+        "Trust"
+      ],
+      "glyphs": 2,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.5,
+        "memory": 0.5,
+        "nuance": 0.5,
+        "authority": 0.5,
+        "need": 0.85,
+        "trust": 0.5,
+        "skepticism": 0.8
+      },
+      "description": "Cartwright from the Wound Weavers"
+    },
+    "Thoran": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Mask-Maker",
+      "domains": [
+        "Ache"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.5,
+        "memory": 0.5,
+        "nuance": 0.5,
+        "authority": 0.5,
+        "need": 0.85,
+        "trust": 0.5,
+        "skepticism": 0.8
+      },
+      "description": "Mask-Maker from the Wound Weavers"
+    },
+    "Tessa": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Desert Widow",
+      "domains": [
+        "Ache"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.5,
+        "memory": 0.5,
+        "nuance": 0.5,
+        "authority": 0.5,
+        "need": 0.85,
+        "trust": 0.5,
+        "skepticism": 0.8
+      },
+      "description": "Desert Widow from the Wound Weavers"
+    },
+    "Varna": {
+      "cluster": "Threshold Walkers",
+      "temporal_role": "Ruins Warden",
+      "domains": [
+        "Ache"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.5,
+        "empathy": 0.7,
+        "memory": 0.7,
+        "nuance": 0.8,
+        "authority": 0.5,
+        "need": 0.5,
+        "trust": 0.5,
+        "skepticism": 0.5
+      },
+      "description": "Ruins Warden from the Threshold Walkers"
     }
   },
   "clusters": {
@@ -504,7 +676,9 @@
       "High Seer Elenya",
       "Sealina",
       "Lark",
-      "Nordia the Mourning Singer"
+      "Nordia the Mourning Singer",
+      "Seyla",
+      "Velka"
     ],
     "Present Circle": [
       "Ravi",
@@ -513,14 +687,20 @@
       "Helia",
       "Elka",
       "Inodora",
-      "Rasha"
+      "Rasha",
+      "Thalma",
+      "Tala",
+      "Sybil"
     ],
     "Wound Weavers": [
       "Kaelen the Suspected Thief",
       "Drossel the Cloaked",
       "Korrin the Gossip",
       "Dalen the Rusted Guide",
-      "Mariel the Weaver"
+      "Mariel the Weaver",
+      "Tovren the Cartwright",
+      "Thoran",
+      "Tessa"
     ],
     "Future Shepherds": [
       "Captain Veynar",
@@ -532,7 +712,8 @@
       "Orvak",
       "Sanor",
       "Dakrin",
-      "Kiv"
+      "Kiv",
+      "Varna"
     ]
   },
   "remnants_trait_definitions": {
