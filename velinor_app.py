@@ -309,8 +309,8 @@ def composite_title_screen(background_path: str, npc_overlay_path: str, title_ov
         npc_x = (bg.width - npc_width) // 2
         npc_y = bg.height - npc_height
 
-        # Resize title overlay (fit to ~60% of width)
-        title_width = int(bg.width * 0.6)
+        # Resize title overlay (fit to ~40% of width - smaller)
+        title_width = int(bg.width * 0.4)
         title_ratio = title_overlay.width / title_overlay.height
         title_height = int(title_width / title_ratio)
         title_overlay = title_overlay.resize(
@@ -320,9 +320,9 @@ def composite_title_screen(background_path: str, npc_overlay_path: str, title_ov
         title_x = (bg.width - title_width) // 2
         title_y = int(bg.height * 0.25)
 
-        # Composite: background -> title overlay -> NPC overlay (NPC last so it's on top)
-        bg.paste(title_overlay, (title_x, title_y), title_overlay)
+        # Composite: background -> NPC overlay -> title overlay (title on top)
         bg.paste(npc_overlay, (npc_x, npc_y), npc_overlay)
+        bg.paste(title_overlay, (title_x, title_y), title_overlay)
 
         return bg
     except Exception as e:
