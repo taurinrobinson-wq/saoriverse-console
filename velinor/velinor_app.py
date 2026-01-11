@@ -283,13 +283,10 @@ def composite_title_screen(background_path: str, npc_overlay_path: str, title_ov
         title_overlay = load_image_safe(title_overlay_path)
 
         if not bg:
-            st.warning(f"Background not loaded: {background_path}")
             return None
         if not npc_overlay:
-            st.warning(f"NPC overlay not loaded: {npc_overlay_path}")
             return None
         if not title_overlay:
-            st.warning(f"Title overlay not loaded: {title_overlay_path}")
             return None
 
         # Convert all to RGBA for compositing
@@ -1458,11 +1455,11 @@ def main():
         title_overlay_path = str(
             PROJECT_ROOT / "velinor" / "overlays" / "velinor_title_transparent2.png")
 
-        # Debug: Show what paths we're using
-        st.write(f"DEBUG: Background: {background_path}")
-        st.write(f"DEBUG: NPC: {npc_overlay_path}")
-        st.write(f"DEBUG: Title: {title_overlay_path}")
+        # Clear any cached composite on every render to ensure fresh images
+        if 'composite_cache' not in st.session_state:
+            st.session_state.composite_cache = None
 
+        # Force regeneration of composite image
         composite_img = composite_title_screen(
             background_path, npc_overlay_path, title_overlay_path)
 
@@ -1471,7 +1468,8 @@ def main():
             # Display composite image
             col_left, col_img, col_right = st.columns([1, 2, 1])
             with col_img:
-                st.image(composite_img, use_column_width=True)
+                st.image(composite_img, use_column_width=True,
+                         caption="Title Screen")
                 st.markdown("")  # Spacing
 
                 # Start New Game button (centered, large)
@@ -1488,6 +1486,10 @@ def main():
                     init_boss_fight_session()
                     st.rerun()
         else:
+            st.error("❌ Failed to load composite title screen, using fallback")
+            st.write(f"Background: {background_path}")
+            st.write(f"NPC: {npc_overlay_path}")
+            st.write(f"Title: {title_overlay_path}")
             # Fallback: single image splash screen
             splash_img_path = str(PROJECT_ROOT / "velinor" /
                                   "backgrounds" / "velinor_title_eyes_closed.png")
