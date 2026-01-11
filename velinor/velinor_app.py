@@ -282,7 +282,14 @@ def composite_title_screen(background_path: str, npc_overlay_path: str, title_ov
         npc_overlay = load_image_safe(npc_overlay_path)
         title_overlay = load_image_safe(title_overlay_path)
 
-        if not bg or not npc_overlay or not title_overlay:
+        if not bg:
+            st.warning(f"Background not loaded: {background_path}")
+            return None
+        if not npc_overlay:
+            st.warning(f"NPC overlay not loaded: {npc_overlay_path}")
+            return None
+        if not title_overlay:
+            st.warning(f"Title overlay not loaded: {title_overlay_path}")
             return None
 
         # Convert all to RGBA for compositing
@@ -290,34 +297,34 @@ def composite_title_screen(background_path: str, npc_overlay_path: str, title_ov
         npc_overlay = npc_overlay.convert('RGBA')
         title_overlay = title_overlay.convert('RGBA')
 
-        # Resize background to standard dimensions (1000x1200 for title screen)
-        bg = bg.resize((1000, 1200), Image.Resampling.LANCZOS)
+        # Resize background to 16:9 dimensions (1440x810)
+        bg = bg.resize((1440, 810), Image.Resampling.LANCZOS)
 
-        # Resize NPC overlay to fit (roughly center-right, ~60% of height)
-        npc_height = int(bg.height * 0.85)
+        # Resize NPC overlay to fit bottom-middle (~50% of height)
+        npc_height = int(bg.height * 0.80)
         npc_ratio = npc_overlay.width / npc_overlay.height
         npc_width = int(npc_height * npc_ratio)
         npc_overlay = npc_overlay.resize(
             (npc_width, npc_height), Image.Resampling.LANCZOS)
 
-        # Position NPC overlay (center horizontally, slightly left)
-        npc_x = (bg.width - npc_width) // 3
-        npc_y = (bg.height - npc_height) // 2
+        # Position NPC at bottom-middle (centered horizontally, aligned to bottom)
+        npc_x = (bg.width - npc_width) // 2
+        npc_y = bg.height - npc_height
 
-        # Resize title overlay (fit to ~70% of width)
-        title_width = int(bg.width * 0.7)
+        # Resize title overlay (fit to ~60% of width)
+        title_width = int(bg.width * 0.6)
         title_ratio = title_overlay.width / title_overlay.height
         title_height = int(title_width / title_ratio)
         title_overlay = title_overlay.resize(
             (title_width, title_height), Image.Resampling.LANCZOS)
 
-        # Position title (top-center)
+        # Position title (center horizontally, closer to bottom - ~30% from top)
         title_x = (bg.width - title_width) // 2
-        title_y = int(bg.height * 0.1)
+        title_y = int(bg.height * 0.25)
 
-        # Composite: background -> NPC overlay -> title overlay
-        bg.paste(npc_overlay, (npc_x, npc_y), npc_overlay)
+        # Composite: background -> title overlay -> NPC overlay (NPC last so it's on top)
         bg.paste(title_overlay, (title_x, title_y), title_overlay)
+        bg.paste(npc_overlay, (npc_x, npc_y), npc_overlay)
 
         return bg
     except Exception as e:
@@ -1451,10 +1458,16 @@ def main():
         title_overlay_path = str(
             PROJECT_ROOT / "velinor" / "overlays" / "velinor_title_transparent2.png")
 
+        # Debug: Show what paths we're using
+        st.write(f"DEBUG: Background: {background_path}")
+        st.write(f"DEBUG: NPC: {npc_overlay_path}")
+        st.write(f"DEBUG: Title: {title_overlay_path}")
+
         composite_img = composite_title_screen(
             background_path, npc_overlay_path, title_overlay_path)
 
         if composite_img:
+            st.write("✅ Composite image created successfully")
             # Display composite image
             col_left, col_img, col_right = st.columns([1, 2, 1])
             with col_img:
