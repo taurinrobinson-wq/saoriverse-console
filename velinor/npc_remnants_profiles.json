@@ -1,0 +1,548 @@
+{
+  "npc_profiles": {
+    "Archivist Malrik": {
+      "cluster": "Archive Network",
+      "temporal_role": "Keeper of the Past",
+      "domains": [
+        "Collapse",
+        "Legacy",
+        "Sovereignty"
+      ],
+      "glyphs": 6,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.65,
+        "memory": 0.95,
+        "nuance": 0.85,
+        "authority": 0.8,
+        "need": 0.5,
+        "trust": 0.6,
+        "skepticism": 0.7
+      },
+      "description": "Maintains the Archive, shows fragmented data chambers, records the collapse"
+    },
+    "High Seer Elenya": {
+      "cluster": "Archive Network",
+      "temporal_role": "Keeper of the Past",
+      "domains": [
+        "Joy",
+        "Presence",
+        "Trust"
+      ],
+      "glyphs": 5,
+      "remnants": {
+        "resolve": 0.75,
+        "empathy": 0.9,
+        "memory": 0.85,
+        "nuance": 0.8,
+        "authority": 0.7,
+        "need": 0.6,
+        "trust": 0.75,
+        "skepticism": 0.45
+      },
+      "description": "Keeper of rituals, bridges Unopened Heart glyph, emotional practices"
+    },
+    "Sealina": {
+      "cluster": "Archive Network",
+      "temporal_role": "Keeper of the Past",
+      "domains": [
+        "Ache",
+        "Legacy"
+      ],
+      "glyphs": 2,
+      "remnants": {
+        "resolve": 0.65,
+        "empathy": 0.85,
+        "memory": 0.9,
+        "nuance": 0.75,
+        "authority": 0.55,
+        "need": 0.8,
+        "trust": 0.6,
+        "skepticism": 0.6
+      },
+      "description": "Carries songs of what was lost, teaches grief as remembrance"
+    },
+    "Lark": {
+      "cluster": "Archive Network",
+      "temporal_role": "Keeper of the Past",
+      "domains": [
+        "Legacy"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.6,
+        "memory": 0.8,
+        "nuance": 0.65,
+        "authority": 0.75,
+        "need": 0.45,
+        "trust": 0.65,
+        "skepticism": 0.5
+      },
+      "description": "Ritual keeper, maintains ceremonial practices"
+    },
+    "Nordia the Mourning Singer": {
+      "cluster": "Archive Network",
+      "temporal_role": "Keeper of the Past",
+      "domains": [
+        "Ache",
+        "Legacy"
+      ],
+      "glyphs": 3,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.95,
+        "memory": 0.95,
+        "nuance": 0.8,
+        "authority": 0.6,
+        "need": 0.85,
+        "trust": 0.55,
+        "skepticism": 0.6
+      },
+      "description": "Makes grief audible, transforms loss into art and meaning"
+    },
+    "Ravi": {
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller",
+      "domains": [
+        "Presence"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.75,
+        "empathy": 0.8,
+        "memory": 0.5,
+        "nuance": 0.55,
+        "authority": 0.6,
+        "need": 0.65,
+        "trust": 0.8,
+        "skepticism": 0.6
+      },
+      "description": "Grounded, embodied, teaches sensory presence"
+    },
+    "Nima": {
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller",
+      "domains": [
+        "Ache"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.65,
+        "empathy": 0.9,
+        "memory": 0.5,
+        "nuance": 0.6,
+        "authority": 0.45,
+        "need": 0.8,
+        "trust": 0.7,
+        "skepticism": 0.55
+      },
+      "description": "Sensitive to emotional undercurrents, unsure why"
+    },
+    "Sera the Herb Novice": {
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller",
+      "domains": [
+        "Joy",
+        "Presence"
+      ],
+      "glyphs": 5,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.85,
+        "memory": 0.55,
+        "nuance": 0.65,
+        "authority": 0.5,
+        "need": 0.7,
+        "trust": 0.75,
+        "skepticism": 0.5
+      },
+      "description": "Curious, present-moment healer, learns through doing"
+    },
+    "Helia": {
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller",
+      "domains": [
+        "Presence"
+      ],
+      "glyphs": 2,
+      "remnants": {
+        "resolve": 0.8,
+        "empathy": 0.75,
+        "memory": 0.5,
+        "nuance": 0.6,
+        "authority": 0.55,
+        "need": 0.6,
+        "trust": 0.75,
+        "skepticism": 0.5
+      },
+      "description": "Present-focused, embodied, connected to place"
+    },
+    "Elka": {
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller",
+      "domains": [
+        "Presence"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.75,
+        "empathy": 0.65,
+        "memory": 0.45,
+        "nuance": 0.5,
+        "authority": 0.5,
+        "need": 0.55,
+        "trust": 0.7,
+        "skepticism": 0.5
+      },
+      "description": "Grounded in current moment, simple clarity"
+    },
+    "Inodora": {
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller / Bridge",
+      "domains": [
+        "Legacy",
+        "Presence"
+      ],
+      "glyphs": 2,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.8,
+        "memory": 0.8,
+        "nuance": 0.65,
+        "authority": 0.6,
+        "need": 0.6,
+        "trust": 0.7,
+        "skepticism": 0.55
+      },
+      "description": "Bridges past (ritual memory) and present (embodied knowledge)"
+    },
+    "Rasha": {
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller",
+      "domains": [
+        "Joy",
+        "Trust"
+      ],
+      "glyphs": 2,
+      "remnants": {
+        "resolve": 0.65,
+        "empathy": 0.8,
+        "memory": 0.55,
+        "nuance": 0.6,
+        "authority": 0.55,
+        "need": 0.65,
+        "trust": 0.85,
+        "skepticism": 0.45
+      },
+      "description": "Optimistic, trusting, extends capacity for joy"
+    },
+    "Kaelen the Suspected Thief": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Wound Bearer / Bridge",
+      "domains": [
+        "Collapse",
+        "Sovereignty",
+        "Trust"
+      ],
+      "glyphs": 4,
+      "remnants": {
+        "resolve": 0.6,
+        "empathy": 0.55,
+        "memory": 0.7,
+        "nuance": 0.85,
+        "authority": 0.55,
+        "need": 0.75,
+        "trust": 0.6,
+        "skepticism": 0.9
+      },
+      "description": "Carries ghost signals, moves between states, suspected of something unknown"
+    },
+    "Drossel the Cloaked": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Wound Bearer",
+      "domains": [
+        "Collapse",
+        "Presence",
+        "Sovereignty"
+      ],
+      "glyphs": 5,
+      "remnants": {
+        "resolve": 0.65,
+        "empathy": 0.5,
+        "memory": 0.65,
+        "nuance": 0.8,
+        "authority": 0.6,
+        "need": 0.8,
+        "trust": 0.5,
+        "skepticism": 0.85
+      },
+      "description": "Cloaked in fragmentation, carries corrupted data as embodied trauma"
+    },
+    "Korrin the Gossip": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Wound Bearer",
+      "domains": [
+        "Collapse",
+        "Presence",
+        "Trust"
+      ],
+      "glyphs": 5,
+      "remnants": {
+        "resolve": 0.6,
+        "empathy": 0.6,
+        "memory": 0.7,
+        "nuance": 0.7,
+        "authority": 0.55,
+        "need": 0.8,
+        "trust": 0.65,
+        "skepticism": 0.8
+      },
+      "description": "Transmits ghost signals, spreads emotional contagion"
+    },
+    "Dalen the Rusted Guide": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Wound Bearer",
+      "domains": [
+        "Ache",
+        "Collapse",
+        "Sovereignty"
+      ],
+      "glyphs": 3,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.7,
+        "memory": 0.75,
+        "nuance": 0.75,
+        "authority": 0.65,
+        "need": 0.85,
+        "trust": 0.55,
+        "skepticism": 0.75
+      },
+      "description": "Carries environmental scars as visible wounds, teaches through fragmentation"
+    },
+    "Mariel the Weaver": {
+      "cluster": "Wound Weavers",
+      "temporal_role": "Wound Bearer",
+      "domains": [
+        "Ache",
+        "Trust",
+        "Legacy"
+      ],
+      "glyphs": 3,
+      "remnants": {
+        "resolve": 0.65,
+        "empathy": 0.75,
+        "memory": 0.8,
+        "nuance": 0.9,
+        "authority": 0.55,
+        "need": 0.7,
+        "trust": 0.6,
+        "skepticism": 0.65
+      },
+      "description": "Weaves meaning from ghost signals and memory echoes"
+    },
+    "Captain Veynar": {
+      "cluster": "Future Shepherds",
+      "temporal_role": "Future Shepherd",
+      "domains": [
+        "Collapse",
+        "Sovereignty",
+        "Trust"
+      ],
+      "glyphs": 3,
+      "remnants": {
+        "resolve": 0.9,
+        "empathy": 0.7,
+        "memory": 0.65,
+        "nuance": 0.7,
+        "authority": 0.85,
+        "need": 0.6,
+        "trust": 0.75,
+        "skepticism": 0.6
+      },
+      "description": "Military precision meeting emotional need, protects space for healing"
+    },
+    "Coren the Mediator": {
+      "cluster": "Future Shepherds",
+      "temporal_role": "Future Shepherd",
+      "domains": [
+        "Collapse",
+        "Sovereignty"
+      ],
+      "glyphs": 2,
+      "remnants": {
+        "resolve": 0.8,
+        "empathy": 0.8,
+        "memory": 0.65,
+        "nuance": 0.95,
+        "authority": 0.8,
+        "need": 0.55,
+        "trust": 0.7,
+        "skepticism": 0.65
+      },
+      "description": "Holds space between contradiction, teaches integration"
+    },
+    "Juria & Korinth": {
+      "cluster": "Future Shepherds",
+      "temporal_role": "Future Shepherd",
+      "domains": [
+        "Joy"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.8,
+        "memory": 0.65,
+        "nuance": 0.65,
+        "authority": 0.6,
+        "need": 0.6,
+        "trust": 0.85,
+        "skepticism": 0.45
+      },
+      "description": "Model functioning partnership, teach what restored relationship looks like"
+    },
+    "Lira": {
+      "cluster": "Future Shepherds",
+      "temporal_role": "Future Shepherd",
+      "domains": [
+        "Joy"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.65,
+        "empathy": 0.85,
+        "memory": 0.5,
+        "nuance": 0.55,
+        "authority": 0.5,
+        "need": 0.55,
+        "trust": 0.8,
+        "skepticism": 0.4
+      },
+      "description": "Uncomplicated joy, teaches what happiness freed from trauma looks like"
+    },
+    "Orvak": {
+      "cluster": "Threshold Walkers",
+      "temporal_role": "Liminal Keeper",
+      "domains": [
+        "Collapse"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.5,
+        "memory": 0.7,
+        "nuance": 0.75,
+        "authority": 0.65,
+        "need": 0.75,
+        "trust": 0.5,
+        "skepticism": 0.8
+      },
+      "description": "Moves through broken corelink spaces, knows system failure intimately"
+    },
+    "Sanor": {
+      "cluster": "Threshold Walkers",
+      "temporal_role": "Liminal Keeper",
+      "domains": [
+        "Collapse"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.75,
+        "empathy": 0.55,
+        "memory": 0.6,
+        "nuance": 0.7,
+        "authority": 0.6,
+        "need": 0.8,
+        "trust": 0.55,
+        "skepticism": 0.85
+      },
+      "description": "Lives among corrupted data, survives in the wound itself"
+    },
+    "Dakrin": {
+      "cluster": "Threshold Walkers",
+      "temporal_role": "Liminal Keeper",
+      "domains": [
+        "Sovereignty"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.85,
+        "empathy": 0.6,
+        "memory": 0.55,
+        "nuance": 0.7,
+        "authority": 0.75,
+        "need": 0.6,
+        "trust": 0.65,
+        "skepticism": 0.65
+      },
+      "description": "Reclaims structures from collapse, teaches transformation of broken things"
+    },
+    "Kiv": {
+      "cluster": "Threshold Walkers",
+      "temporal_role": "Liminal Keeper",
+      "domains": [
+        "Ache"
+      ],
+      "glyphs": 1,
+      "remnants": {
+        "resolve": 0.6,
+        "empathy": 0.7,
+        "memory": 0.95,
+        "nuance": 0.85,
+        "authority": 0.5,
+        "need": 0.75,
+        "trust": 0.55,
+        "skepticism": 0.7
+      },
+      "description": "Carries a single, transformative memory echo"
+    }
+  },
+  "clusters": {
+    "Archive Network": [
+      "Archivist Malrik",
+      "High Seer Elenya",
+      "Sealina",
+      "Lark",
+      "Nordia the Mourning Singer"
+    ],
+    "Present Circle": [
+      "Ravi",
+      "Nima",
+      "Sera the Herb Novice",
+      "Helia",
+      "Elka",
+      "Inodora",
+      "Rasha"
+    ],
+    "Wound Weavers": [
+      "Kaelen the Suspected Thief",
+      "Drossel the Cloaked",
+      "Korrin the Gossip",
+      "Dalen the Rusted Guide",
+      "Mariel the Weaver"
+    ],
+    "Future Shepherds": [
+      "Captain Veynar",
+      "Coren the Mediator",
+      "Juria & Korinth",
+      "Lira"
+    ],
+    "Threshold Walkers": [
+      "Orvak",
+      "Sanor",
+      "Dakrin",
+      "Kiv"
+    ]
+  },
+  "remnants_trait_definitions": {
+    "resolve": "Capacity to act despite contradiction or uncertainty",
+    "empathy": "Capacity to feel what others feel, emotional resonance",
+    "memory": "Capacity to hold and integrate what was",
+    "nuance": "Capacity to hold contradiction without resolving it too quickly",
+    "authority": "Capacity to hold and transmit integrated state to others",
+    "need": "Awareness of genuine dependence on others, vulnerability",
+    "trust": "Capacity to believe in coherence despite evidence of fracture",
+    "skepticism": "Capacity to question and see through false coherence"
+  }
+}
