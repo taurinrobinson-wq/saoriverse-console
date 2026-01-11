@@ -19,13 +19,20 @@ Cannot move forward   Forced into perpetual now Can restore coherence
 
 ---
 
-## Three Outcomes (Player Determines)
+## Six Canonical Endings (Based on Two Axes)
 
-| Outcome | Archive Network | Present Circle | Wound Weavers | Future Shepherds | Result |
-|---------|-----------------|-----------------|------------------|------------------|--------|
-| **Restoration** | Memory 0.85+ | Trust 0.75+ | Nuance 0.90+ | Authority 0.80+ | Velinor reintegrated, Saori released, people remember |
-| **Failure** | Low scores | Low scores | Remain fractured | Unavailable as models | Wound unintegrated, world persists but haunted |
-| **Neutral** | Incomplete | Moderate | Moderate | Incomplete | Next generation inherits uncertainty |
+The ending is determined by:
+1. **Malrik & Elenya's state**: Rebuild Together, Partial Rebuild, or Abandon/Fracture
+2. **Player's Corelink choice**: Restart the System or Abandon the System
+
+| Ending | Malrik/Elenya | Corelink | Archive Network | Present Circle | Outcome |
+|--------|---------------|----------|------------------|---|--------|
+| **1: Hopeful Synthesis** | Rebuild | Restart | Memory 0.85+ | Trust 0.75+ | System as mirror of people's coherence |
+| **2: Pyrrhic Restart** | Abandon | Restart | Low scores | Low scores | System works, people didn't learn |
+| **3: Honest Collapse** | Abandon | Abandon | Fragmented | Low | Hard rebuilding, honest foundation |
+| **4: Earned Synthesis** | Rebuild | Abandon | Memory 0.85+ | Trust 0.75+ | People build without system, hardest path |
+| **5: Technical Solution** | Partial | Restart | Medium/High | Medium/High | System and people learning together |
+| **6: Stalemate** | Partial | Abandon | Medium | Medium | People work slowly, without guarantees |
 
 ---
 
@@ -214,28 +221,24 @@ Each bond determines restart possibility:
 
 ---
 
-## Three-Path Ending Guide
+## Three-Path Ending Guide (Synthesis Tiers)
 
-### **Restoration Path** (Player achieves coherence)
-- Velinor reintegrated
-- Saori released from past
-- People regain memory & continuity
-- Archive becomes library of remembrance
-- **Minimum**: Archive Memory 0.85+, Present Trust 0.75+, Wound Nuance 0.90+, Shepherd Authority 0.80+
+### **Synthesis-Leaning Path** (Player advocated for integration)
+- Unlock: Endings 1, 4, 5 (synthesis-oriented)
+- Characteristics: Empathy + understanding, advocate for shared solutions, consistent integration
+- Possible outcomes: System supports synthesis, or people build synthesis independently, or both learn together
 
-### **Failure Path** (Player doesn't intervene)
-- Velinor stays fragmented
-- Saori remains trapped
-- People remain without memory
-- World persists but haunted
-- **Marker**: Low scores across all clusters
+### **Skeptical-Leaning Path** (Player maintained critical distance)
+- Unlock: Endings 2, 3, 6 (fracture-accepting)
+- Characteristics: Challenge assumptions, maintain independence, note system failures
+- Possible outcomes: System works alone (hollow), or honest collapse, or slow stalemate
 
-### **Neutral Path** (Player does nothing)
-- Next generation grows without trauma
-- Inherits world of ruins & uncertainty
-- Studies collapse as ancient myth
-- Faces same question: repeat or learn?
-- **Marker**: Medium scores, incomplete bonds
+### **True Synthesis Path** (Rare; earned synthesis)
+- Unlock: Ending 4 (The Earned Synthesis)
+- Characteristics: Empathy + critical thinking, respect perspectives + hold accountable, both learn
+- Possible outcome: People build without system, Malrik/Elenya rebuild together, hardest but most real
+
+Note: Ending 4 requires BOTH full synthesis path AND Malrik/Elenya rebuilding together AND player choosing to abandon the system. It's the most demanding ending.
 
 ---
 

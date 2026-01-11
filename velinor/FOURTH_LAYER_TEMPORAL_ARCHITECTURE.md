@@ -15,33 +15,45 @@ Velinor is a world fractured across three temporal states:
 
 ---
 
-## The Three Restart Outcomes
+## The Six Canonical Endings
 
-All player actions lead to one of three endpoints:
+**All player actions lead to one of six endpoints**, determined by two axes:
+- **Axis 1**: Malrik & Elenya's rebuild state (Together, Partial, or Abandon)
+- **Axis 2**: Player's final Corelink choice (Restart or Abandon)
 
-### 1. **Restoration** (Player achieves emotional coherence)
-- Velinor is reintegrated
-- Saori is released from the past (guilt resolved through understanding)
-- The People regain their memories and continuity
-- The world's timeline is restored
-- *Critical insight*: Nothing is erased. The collapse, suffering, and confusion remain part of lived history. Restoration = reconciliation, not amnesia.
-- **Archive function**: Becomes a library of remembrance, a guide for how to integrate collective trauma.
+*See [CANONICAL_ENDINGS_CONSOLIDATION.md](CANONICAL_ENDINGS_CONSOLIDATION.md) for complete ending details.*
 
-### 2. **Failure** (Player does not intervene meaningfully)
-- Velinor remains fractured
-- Saori stays trapped in the past
-- The People remain without memory
-- Velhara does not restart
-- *Critical insight*: This is not a "bad ending" — it's a wound that remains unintegrated. The world persists, but haunted.
-- **Archive function**: Becomes a warning, incomplete record of what was lost.
+### **Synthesis Path** (Player advocated for integration)
+- **Ending 1: The Hopeful Synthesis** (Restart + Rebuild Together) — System becomes mirror of people's coherence
+- **Ending 4: The Earned Synthesis** (Abandon + Rebuild Together) — People build without system dependency
+- **Ending 5: The Technical Solution** (Restart + Partial Rebuild) — System and people learn together
 
-### 3. **Neutral Continuation** (Player does nothing)
-- The next generation grows up without the trauma
-- They inherit a world of ruins and uncertainty
-- They study the collapse as ancient myth, not lived experience
-- They face the same existential question: Will they repeat the mistake?
-- *Critical insight*: Humanity persists, but the wound echoes forward. The past is not integrated, merely passed on.
-- **Archive function**: Becomes a mystery, a puzzle for future generations to solve.
+### **Skeptical Path** (Player maintained critical distance)
+- **Ending 2: The Pyrrhic Restart** (Restart + Abandon/Fracture) — System works but people didn't learn
+- **Ending 3: The Honest Collapse** (Abandon + Abandon/Fracture) — Honest rebuilding without illusion
+- **Ending 6: The Stalemate** (Abandon + Partial Rebuild) — People work without system, slowly and uncertain
+
+---
+
+## The Temporal Meaning of the Six Endings
+
+All six endings express the same core truth about **past, present, and future through the lens of memory and synthesis**:
+
+### **Past Resolution**
+- **Strong synthesis endings** (1, 4, 5): Saori's guilt becomes specific and healable; archive becomes coherent
+- **Weak synthesis endings** (2, 3, 6): Saori remains trapped; archive remains fragmented or destroyed
+
+### **Present Stability**
+- **Both-axis high** (Restart + Rebuild): System and people reinforce each other
+- **Both-axis low** (Abandon + Fracture): System gone, people unprepared; hard rebuilding ahead
+- **Mixed** (Partial rebuild, one choice): Uncertain but genuine movement
+
+### **Future Possibility**
+- **Earned paths** (Ending 4): Next generation inherits both wounds and wisdom
+- **Hopeful paths** (Endings 1, 5): Next generation inherits functional system + human learning
+- **Honest paths** (Ending 3): Next generation inherits raw truth, must discover synthesis themselves
+- **Stalemate paths** (Ending 6): Next generation inherits ongoing work, no guarantees
+- **Pyrrhic paths** (Ending 2): Next generation inherits system that will fail again
 
 ---
 
