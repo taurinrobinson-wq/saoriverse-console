@@ -1106,16 +1106,19 @@ def render_sidebar():
 
     # Stats and location in sidebar expanders
     st.sidebar.divider()
-    state = st.session_state.game_state
+    state = st.session_state.get('game_state')
     if state:
         # Stats panel in collapsible expander
-        if state.get('game_state', {}).get('player_stats'):
-            with st.sidebar.expander("📊 Player Stats", expanded=True):
-                render_stats(state['game_state']['player_stats'])
+        with st.sidebar.expander("📊 Player Stats", expanded=True):
+            st.write(f"**Player:** {state.player_name}")
+            st.write(f"**Tone:**")
+            tone_dict = state.tone.to_dict() if hasattr(state.tone, 'to_dict') else {}
+            for stat, value in tone_dict.items():
+                st.write(f"  • {stat.title()}: {value}")
 
         # Location info in collapsible expander
-        with st.sidebar.expander("📍 Location", expanded=True):
-            st.text(state.get('passage_name', 'Unknown'))
+        with st.sidebar.expander("📍 Scene", expanded=True):
+            st.text(state.current_scene if hasattr(state, 'current_scene') else 'Unknown')
 
 
 # ============================================================================
