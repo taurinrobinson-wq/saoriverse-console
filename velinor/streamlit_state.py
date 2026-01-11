@@ -7,8 +7,8 @@ Clean state machine for Velinor Streamlit prototype.
 Tracks:
 - Game mode (narrative, glyph_input, chamber, special)
 - Glyphs (obtained, used, fusion state)
-- TONE stats (courage, wisdom, empathy, resolve, resonance)
-- REMNANTS traits
+- TONE stats (trust, observation, narrative_presence, empathy, resonance)
+- REMNANTS traits (resolve, empathy, memory, nuance, authority, need, trust, skepticism)
 - NPC perception + emotional state
 - Fight counter for chamber battles
 - Skills unlocked
@@ -21,12 +21,16 @@ from datetime import datetime
 
 @dataclass
 class ToneStats:
-    """Player's emotional tone signature."""
-    courage: float = 0.0
-    wisdom: float = 0.0
-    empathy: float = 0.0
-    resolve: float = 0.0
-    resonance: float = 0.0  # Overall harmonic balance
+    """Player's emotional TONE signature.
+
+    TONE = Trust, Observation, Narrative Presence, Empathy
+    Plus Resonance (overarching harmonic balance)
+    """
+    trust: float = 0.0  # T: Reliability to NPCs
+    observation: float = 0.0  # O: Perception and wisdom
+    narrative_presence: float = 0.0  # N: Charisma and agency
+    empathy: float = 0.0  # E: Heart and vulnerability
+    resonance: float = 0.0  # Overarching harmonic balance
 
     def apply_effect(self, effect: Dict[str, float]):
         """Apply tone modifications from a choice."""
@@ -36,11 +40,47 @@ class ToneStats:
 
     def to_dict(self) -> Dict[str, float]:
         return {
-            "courage": round(self.courage, 2),
-            "wisdom": round(self.wisdom, 2),
+            "trust": round(self.trust, 2),
+            "observation": round(self.observation, 2),
+            "narrative_presence": round(self.narrative_presence, 2),
             "empathy": round(self.empathy, 2),
-            "resolve": round(self.resolve, 2),
             "resonance": round(self.resonance, 2)
+        }
+
+
+@dataclass
+class RemnantTraits:
+    """NPC Personality System - REMNANTS traits.
+
+    REMNANTS = Resolve, Empathy, Memory, Nuance, Authority, Need, Trust, Skepticism
+    These describe NPC personalities and how they respond to player TONE stats.
+    """
+    resolve: float = 0.5  # R: How firm or principled
+    empathy: float = 0.5  # E: Capacity to care and connect
+    memory: float = 0.5  # M: How past shapes choices
+    nuance: float = 0.5  # N: Subtlety and complexity
+    authority: float = 0.5  # A: Relationship to boundaries and control
+    need: float = 0.5  # N: What they seek from player
+    trust: float = 0.5  # T: Baseline openness or suspicion
+    skepticism: float = 0.5  # S: Tendency to doubt and withhold
+
+    def apply_effect(self, effect: Dict[str, float]):
+        """Apply modifications to remnant traits."""
+        for stat, value in effect.items():
+            if hasattr(self, stat):
+                setattr(self, stat, max(
+                    0.0, min(1.0, getattr(self, stat) + value)))
+
+    def to_dict(self) -> Dict[str, float]:
+        return {
+            "resolve": round(self.resolve, 2),
+            "empathy": round(self.empathy, 2),
+            "memory": round(self.memory, 2),
+            "nuance": round(self.nuance, 2),
+            "authority": round(self.authority, 2),
+            "need": round(self.need, 2),
+            "trust": round(self.trust, 2),
+            "skepticism": round(self.skepticism, 2)
         }
 
 
@@ -61,16 +101,20 @@ class Glyph:
 
 @dataclass
 class NPCPerception:
-    """How an NPC perceives the player."""
+    """How an NPC perceives the player, plus their REMNANTS profile."""
     name: str
-    trust: float = 0.0  # -1.0 to 1.0
-    affinity: float = 0.0  # -1.0 to 1.0
-    understanding: float = 0.0  # -1.0 to 1.0
-    emotion: str = "neutral"  # emotional state
+    trust: float = 0.0  # -1.0 to 1.0: How much they trust the player
+    affinity: float = 0.0  # -1.0 to 1.0: How much they like the player
+    understanding: float = 0.0  # -1.0 to 1.0: How well they understand the player
+    emotion: str = "neutral"  # Current emotional state
     last_interaction: Optional[str] = None
+    remnants_profile: RemnantTraits = field(
+        default_factory=RemnantTraits)  # Their personality
 
     def to_dict(self) -> Dict[str, Any]:
-        return asdict(self)
+        data = asdict(self)
+        data['remnants_profile'] = self.remnants_profile.to_dict()
+        return data
 
 
 @dataclass
@@ -158,19 +202,26 @@ class StreamlitGameState:
                 emotional_effect="resonance",
                 npc_resonance={"Nima": 0.8}
             ),
-            "Courage": Glyph(
-                name="Courage",
-                description="The glyph of moving forward despite fear",
+            "Trust": Glyph(
+                name="Trust",
+                description="The glyph of belief in connection",
                 unlock_condition="first_choice",
-                emotional_effect="courage",
+                emotional_effect="trust",
                 npc_resonance={"Ravi": 0.6, "Veynar": 0.7}
             ),
-            "Wisdom": Glyph(
-                name="Wisdom",
+            "Observation": Glyph(
+                name="Observation",
                 description="The glyph of knowing what matters",
                 unlock_condition="marketplace_visit",
-                emotional_effect="wisdom",
+                emotional_effect="observation",
                 npc_resonance={"Kaelen": 0.8}
+            ),
+            "Narrative Presence": Glyph(
+                name="Narrative Presence",
+                description="The glyph of charisma and agency",
+                unlock_condition="first_dialogue",
+                emotional_effect="narrative_presence",
+                npc_resonance={"Ravi": 0.9, "Drossel": 0.8}
             ),
             "Transcendence": Glyph(
                 name="Transcendence",
@@ -179,22 +230,67 @@ class StreamlitGameState:
                 emotional_effect="resonance",
                 npc_resonance={"all": 0.5}
             ),
-            "Trust": Glyph(
-                name="Trust",
-                description="The glyph of believing in connection",
-                unlock_condition="npc_bond",
-                emotional_effect="empathy",
-                npc_resonance={"Ravi": 0.9, "Nima": 0.7}
-            ),
         }
 
     def _initialize_npc_perception(self) -> Dict[str, NPCPerception]:
-        """Set up NPC perception tracks."""
+        """Set up NPC perception tracks with REMNANTS profiles."""
         return {
-            "Ravi": NPCPerception(name="Ravi", emotion="thoughtful"),
-            "Nima": NPCPerception(name="Nima", emotion="cautious"),
-            "Veynar": NPCPerception(name="Veynar", emotion="uncertain"),
-            "Kaelen": NPCPerception(name="Kaelen", emotion="distant"),
+            "Ravi": NPCPerception(
+                name="Ravi",
+                emotion="thoughtful",
+                remnants_profile=RemnantTraits(
+                    resolve=0.7,  # Firm principles
+                    empathy=0.8,  # Caring
+                    memory=0.9,   # Bound to legacy
+                    nuance=0.8,   # Complex thinker
+                    authority=0.6,  # Moderate authority
+                    need=0.7,     # Seeks understanding
+                    trust=0.6,    # Cautious but fair
+                    skepticism=0.5  # Balanced doubt
+                )
+            ),
+            "Nima": NPCPerception(
+                name="Nima",
+                emotion="cautious",
+                remnants_profile=RemnantTraits(
+                    resolve=0.5,  # Flexible
+                    empathy=0.9,  # High emotional capacity
+                    memory=0.6,   # Some tradition
+                    nuance=0.9,   # Subtle observer
+                    authority=0.3,  # Low authority, respects others'
+                    need=0.8,     # Seeks trust
+                    trust=0.4,    # Skeptical baseline
+                    skepticism=0.8  # High skepticism
+                )
+            ),
+            "Veynar": NPCPerception(
+                name="Veynar",
+                emotion="uncertain",
+                remnants_profile=RemnantTraits(
+                    resolve=0.8,  # Very firm
+                    empathy=0.4,  # Lower capacity
+                    memory=0.7,   # Values tradition
+                    nuance=0.5,   # Straightforward
+                    authority=0.9,  # High authority
+                    need=0.6,     # Seeks respect
+                    trust=0.5,    # Neutral baseline
+                    skepticism=0.7  # Somewhat skeptical
+                )
+            ),
+            "Kaelen": NPCPerception(
+                name="Kaelen",
+                emotion="distant",
+                remnants_profile=RemnantTraits(
+                    resolve=0.6,  # Moderately firm
+                    empathy=0.3,  # Low capacity
+                    memory=0.4,   # Lives in present
+                    nuance=0.4,   # Blunt
+                    authority=0.5,  # Balanced
+                    need=0.9,     # Seeks survival/resources
+                    trust=0.2,    # Very skeptical
+                    skepticism=0.9  # High skepticism
+                )
+            ),
         }
 
     def _initialize_skills(self) -> Dict[str, Skill]:

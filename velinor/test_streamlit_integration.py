@@ -43,11 +43,11 @@ def test_tone_effects():
     """Test that tone effects work."""
     print("\nTesting tone effects...")
     state = StreamlitGameState()
-    initial_courage = state.tone.courage
-    state.apply_tone_effect({"courage": 0.5, "empathy": -0.2})
-    assert state.tone.courage > initial_courage
+    initial_trust = state.tone.trust
+    state.apply_tone_effect({"trust": 0.5, "empathy": -0.2})
+    assert state.tone.trust > initial_trust
     print(
-        f"✅ Tone effects applied: Courage {initial_courage} → {state.tone.courage}")
+        f"✅ Tone effects applied: Trust {initial_trust} → {state.tone.trust}")
 
 
 def test_glyph_operations():
@@ -116,7 +116,7 @@ def test_serialization():
     print("\nTesting serialization...")
     state = StreamlitGameState()
     state.obtain_glyph("Sorrow")
-    state.apply_tone_effect({"courage": 0.3})
+    state.apply_tone_effect({"trust": 0.3})
 
     serialized = state.to_dict()
     assert serialized is not None
