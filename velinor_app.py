@@ -1448,7 +1448,7 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome splash screen - try composite title screen first
+        # Welcome splash screen - composite title screen
         background_path = str(PROJECT_ROOT / "velinor" /
                               "backgrounds" / "Velhara_background_title(blur).png")
         npc_overlay_path = str(PROJECT_ROOT / "velinor" /
@@ -1456,81 +1456,28 @@ def main():
         title_overlay_path = str(
             PROJECT_ROOT / "velinor" / "overlays" / "velinor_title_transparent2.png")
 
-        # Clear any cached composite on every render to ensure fresh images
-        if 'composite_cache' not in st.session_state:
-            st.session_state.composite_cache = None
-
-        # Force regeneration of composite image
+        # Generate composite image
         composite_img = composite_title_screen(
             background_path, npc_overlay_path, title_overlay_path)
 
-        if composite_img:
-            st.write("✅ Composite image created successfully")
-            # Display composite image
-            col_left, col_img, col_right = st.columns([1, 2, 1])
-            with col_img:
-                st.image(composite_img, use_column_width=True,
-                         caption="Title Screen")
-                st.markdown("")  # Spacing
+        # Display composite image fullscreen
+        st.image(composite_img, use_column_width=True)
 
-                # Start New Game button (centered, large)
-                col_btn_left, col_btn, col_btn_right = st.columns([1, 1, 1])
-                with col_btn:
-                    if st.button("🌙 Start New Game", use_container_width=True, key="welcome_start"):
-                        start_new_game()
+        st.markdown("")  # Spacing
 
-                st.markdown("")  # Spacing
+        # Start New Game button (centered, large)
+        col_btn_left, col_btn, col_btn_right = st.columns([1, 1, 1])
+        with col_btn:
+            if st.button("🌙 Start New Game", use_container_width=True, key="welcome_start"):
+                start_new_game()
 
-                # Test Boss Fight button
-                if st.button("Test Boss Fight", use_container_width=False, key="welcome_boss_test"):
-                    st.session_state.boss_test = True
-                    init_boss_fight_session()
-                    st.rerun()
-        else:
-            st.error("❌ Failed to load composite title screen, using fallback")
-            st.write(f"Background: {background_path}")
-            st.write(f"NPC: {npc_overlay_path}")
-            st.write(f"Title: {title_overlay_path}")
-            # Fallback: single image splash screen
-            splash_img_path = str(PROJECT_ROOT / "velinor" /
-                                  "backgrounds" / "velinor_title_eyes_closed.png")
-            splash_img = load_image_safe(splash_img_path)
+        st.markdown("")  # Spacing
 
-            if splash_img:
-                # Add button overlay to image using PIL
-                splash_with_button = add_button_overlay(
-                    splash_img, "Start New Game", position="bottom")
-
-                # Display image centered
-                col_left, col_img, col_right = st.columns([1, 2, 1])
-                with col_img:
-                    st.image(splash_with_button, use_column_width=True)
-
-                    # Invisible clickable button that overlaps the drawn button
-                    st.markdown("""
-                        <style>
-                        .stButton button {
-                            background-color: transparent !important;
-                            border: none !important;
-                            color: transparent !important;
-                            padding: 0 !important;
-                            margin: -55px auto 0 auto !important;
-                            width: 200px !important;
-                        }
-                        .stButton button:hover {
-                            background-color: transparent !important;
-                        }
-                        </style>
-                    """, unsafe_allow_html=True)
-
-                    if st.button("Start New Game", use_container_width=False, key="welcome_start"):
-                        start_new_game()
-                    # Test Boss Fight button
-                    if st.button("Test Boss Fight", use_container_width=False, key="welcome_boss_test"):
-                        st.session_state.boss_test = True
-                        # initialize boss session
-                        init_boss_fight_session()
-                        st.rerun()
+        # Test Boss Fight button
+        if st.button("Test Boss Fight", use_container_width=False, key="welcome_boss_test"):
+            st.session_state.boss_test = True
+            init_boss_fight_session()
+            st.rerun()
 
     # If boss test was requested, render boss fight UI
     if st.session_state.get('boss_test'):
