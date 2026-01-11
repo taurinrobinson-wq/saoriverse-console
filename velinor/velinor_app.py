@@ -1447,9 +1447,9 @@ def main():
         background_path = str(PROJECT_ROOT / "velinor" /
                               "backgrounds" / "Velhara_background_title(blur).png")
         npc_overlay_path = str(PROJECT_ROOT / "velinor" /
-                               "npcs" / "Velinor_Triglyph_Appearance.png")
+                               "npcs" / "velinor_eyesopen_nobg_colorcorrected.png")
         title_overlay_path = str(
-            PROJECT_ROOT / "velinor" / "backgrounds" / "velinor_title_transparent.png")
+            PROJECT_ROOT / "velinor" / "overlays" / "velinor_title_transparent2.png")
 
         composite_img = composite_title_screen(
             background_path, npc_overlay_path, title_overlay_path)
