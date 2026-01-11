@@ -289,3 +289,233 @@ streamlit run velinor_scenes_test.py
 ```
 
 Have fun exploring the marketplace! 🎮
+
+---
+
+# 🌒 Velinor Streamlit Prototype - Full Game Implementation
+
+## New: Complete Streamlit Implementation
+
+A fully functional Streamlit version of **Velinor: Remnants of the Tone** with:
+
+- **Dynamic Scene Rendering** - Background + NPC overlay + dialogue
+- **Emotional OS (TONE)** - Track Courage, Wisdom, Empathy, Resolve, Resonance
+- **Glyph System** - Collect and use glyphs to unlock emotional chambers
+- **Chamber Mechanics** - Simple click-based battles and glyph acquisition
+- **NPC Perception** - Track trust, affinity, understanding for each NPC
+- **Skills & Dialogue** - Unlockable abilities that gate special branches
+
+## Quick Start
+
+### 1. Install Dependencies
+
+```bash
+pip install -r velinor/requirements_streamlit.txt
+```
+
+### 2. Run the Game
+
+```bash
+streamlit run velinor/streamlit_app.py
+```
+
+Opens at `http://localhost:8501`
+
+### 3. Validate Everything Works
+
+```bash
+python -m pytest velinor/test_streamlit_integration.py -v
+```
+
+All 8 tests should pass ✅
+
+## Game Modes
+
+### Narrative Mode (default)
+- Read dialogue and make choices
+- Each choice updates TONE and NPC perception
+- Progress through story arcs
+
+### Glyph Input Mode (at chamber doors)
+- Select 4 glyphs from your collection
+- See next set of 4 glyphs
+- Enter the chamber
+
+### Chamber Mode (glyph beast encounter)
+- Click "Attack" button repeatedly
+- At 15 attacks, obtain the glyph
+- Return to narrative
+
+### Special Action (fifth button)
+- Invoke glyphs on NPCs to unlock emotional dialogue
+- Update NPC perception deeply
+- Discover hidden story branches
+
+## Sidebar Dashboard
+
+Always visible on the right:
+
+**🎼 TONE** - Five emotional stats
+- 🟢 Courage, Wisdom, Empathy, Resolve, Resonance
+
+**👁️ REMNANTS** - Deep trait tracking
+- Truth vs Deception, Competence, Emotional Inference
+
+**✨ GLYPHS** - Emotional stances
+- 🟢 obtained (green), ⚫ locked (gray)
+
+**🎯 SKILLS** - Unlockable abilities
+- Gate special dialogue branches
+
+**👥 NPC PERCEPTION** - Trust/Affinity/Understanding
+- How each NPC perceives you
+
+## Files
+
+- **`streamlit_app.py`** - Main game loop (150 lines)
+- **`streamlit_state.py`** - Game state management (450 lines)
+- **`streamlit_ui.py`** - UI rendering (350 lines)
+- **`STREAMLIT_README.md`** - Complete architecture guide
+- **`test_streamlit_integration.py`** - Integration tests (150 lines)
+
+## Key Features
+
+### TONE System
+
+Five dimensions of emotional resonance:
+
+| Stat | Meaning |
+|------|---------|
+| Courage | Acting despite fear |
+| Wisdom | Knowing what matters |
+| Empathy | Feeling with others |
+| Resolve | Commitment to path |
+| Resonance | Harmonic balance |
+
+Each choice applies effects like `{"courage": +0.15, "empathy": -0.1}`
+
+### Glyphs as Emotional Verbs
+
+Glyphs aren't items—they're stances you can invoke:
+
+- **Sorrow** - Open vulnerability
+- **Presence** - Be fully aware
+- **Courage** - Move boldly
+- **Wisdom** - Choose wisely
+- **Trust** - Believe in connection
+- **Transcendence** - Ultimate victory
+
+### NPC Perception
+
+Three dimensions per NPC (-1.0 to +1.0):
+
+- **Trust** - Safety and reliability
+- **Affinity** - Liking and comfort
+- **Understanding** - Being known
+
+Use glyphs and skills to shift perception, unlock special dialogue.
+
+## Extending
+
+### Add Story Scenes
+
+In `stories/story_definitions.py`:
+
+```python
+story.add_passage(
+    name="my_scene",
+    text="*Dialogue here*",
+    background="location",
+    npcs=["Ravi"]
+)
+
+story.add_choice(
+    from_passage_name="my_scene",
+    choice_text="Choice text",
+    to_passage_name="next_scene",
+    tone_effects={"courage": 0.2},
+    npc_resonance={"Ravi": 0.1}
+)
+```
+
+### Add Glyphs
+
+In `streamlit_state.py`:
+
+```python
+"MyGlyph": Glyph(
+    name="MyGlyph",
+    description="Does X",
+    unlock_condition="scene_name",
+    emotional_effect="courage",
+    npc_resonance={"Ravi": 0.8}
+)
+```
+
+### Add Skills
+
+In `streamlit_state.py`:
+
+```python
+"My Skill": Skill(
+    name="My Skill",
+    description="Unlocks special dialogue",
+    dialogue_banks=["scene1", "scene2"]
+)
+```
+
+## Architecture
+
+```
+Streamlit App
+    ↓
+[Session State] ← [Game State] ← [UI Components]
+    ↓                  ↓
+[Orchestrator] ← [Story Engine]
+    ↓
+[Emotional OS] → [NPC System]
+```
+
+**Data Flow:**
+1. Player clicks button
+2. Handler updates `game_state` (TONE, glyphs, NPC perception)
+3. UI re-renders with new state
+4. Sidebar shows live updates
+
+## Testing
+
+Run integration tests:
+
+```bash
+python -m pytest velinor/test_streamlit_integration.py -v
+```
+
+Validates:
+- ✅ Story building (14 passages)
+- ✅ Game state initialization
+- ✅ Tone effects
+- ✅ Glyph operations
+- ✅ NPC perception
+- ✅ UI components
+- ✅ Game engine
+- ✅ Serialization
+
+## Limitations (By Design)
+
+- **No animations** - Fight loop is click-based (fast prototyping)
+- **No images** - Placeholders for backgrounds/overlays
+- **Text-based UI** - Upgrade to React later
+- **Single-player** - Multiplayer in future version
+- **5-button limit** - Forces clear UI design
+- **Gray/green glyphs** - Instant feedback without rendering
+
+## Next Steps
+
+1. **Play through story** - Test all branches
+2. **Tune fight mechanics** - Adjust attack count
+3. **Add more scenes** - Expand Act 2 & 3
+4. **Implement saving** - Wire up persistence
+5. **Port to React** - Build final cinematic version
+
+See `STREAMLIT_README.md` for complete documentation.
+
