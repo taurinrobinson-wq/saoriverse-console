@@ -263,6 +263,68 @@ def add_button_overlay(image: Image.Image, button_text: str, position: str = "bo
     return img_with_button
 
 
+def composite_title_screen(background_path: str, npc_overlay_path: str, title_overlay_path: str) -> Image.Image:
+    """Composite background, NPC overlay, and title for title screen.
+
+    Args:
+        background_path: Path to background image
+        npc_overlay_path: Path to NPC character overlay
+        title_overlay_path: Path to title text overlay
+
+    Returns:
+        Composited title screen image or None if any image fails to load
+    """
+    try:
+        from PIL import Image
+
+        # Load all three images
+        bg = load_image_safe(background_path)
+        npc_overlay = load_image_safe(npc_overlay_path)
+        title_overlay = load_image_safe(title_overlay_path)
+
+        if not bg or not npc_overlay or not title_overlay:
+            return None
+
+        # Convert all to RGBA for compositing
+        bg = bg.convert('RGBA')
+        npc_overlay = npc_overlay.convert('RGBA')
+        title_overlay = title_overlay.convert('RGBA')
+
+        # Resize background to standard dimensions (1000x1200 for title screen)
+        bg = bg.resize((1000, 1200), Image.Resampling.LANCZOS)
+
+        # Resize NPC overlay to fit (roughly center-right, ~60% of height)
+        npc_height = int(bg.height * 0.85)
+        npc_ratio = npc_overlay.width / npc_overlay.height
+        npc_width = int(npc_height * npc_ratio)
+        npc_overlay = npc_overlay.resize(
+            (npc_width, npc_height), Image.Resampling.LANCZOS)
+
+        # Position NPC overlay (center horizontally, slightly left)
+        npc_x = (bg.width - npc_width) // 3
+        npc_y = (bg.height - npc_height) // 2
+
+        # Resize title overlay (fit to ~70% of width)
+        title_width = int(bg.width * 0.7)
+        title_ratio = title_overlay.width / title_overlay.height
+        title_height = int(title_width / title_ratio)
+        title_overlay = title_overlay.resize(
+            (title_width, title_height), Image.Resampling.LANCZOS)
+
+        # Position title (top-center)
+        title_x = (bg.width - title_width) // 2
+        title_y = int(bg.height * 0.1)
+
+        # Composite: background -> NPC overlay -> title overlay
+        bg.paste(npc_overlay, (npc_x, npc_y), npc_overlay)
+        bg.paste(title_overlay, (title_x, title_y), title_overlay)
+
+        return bg
+    except Exception as e:
+        st.warning(f"Error compositing title screen: {e}")
+        return None
+
+
 def init_boss_fight_session():
     """Initialize session state for boss fight test."""
     if 'boss_fight' not in st.session_state:
@@ -1381,46 +1443,78 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome splash screen - image with button drawn on it
-        splash_img_path = str(PROJECT_ROOT / "velinor" /
-                              "backgrounds" / "velinor_title_eyes_closed.png")
-        splash_img = load_image_safe(splash_img_path)
+        # Welcome splash screen - try composite title screen first
+        background_path = str(PROJECT_ROOT / "velinor" /
+                              "backgrounds" / "Velhara_background_title(blur).png")
+        npc_overlay_path = str(PROJECT_ROOT / "velinor" /
+                               "npcs" / "Velinor_Triglyph_Appearance.png")
+        title_overlay_path = str(
+            PROJECT_ROOT / "velinor" / "backgrounds" / "velinor_title_transparent.png")
 
-        if splash_img:
-            # Add button overlay to image using PIL
-            splash_with_button = add_button_overlay(
-                splash_img, "Start New Game", position="bottom")
+        composite_img = composite_title_screen(
+            background_path, npc_overlay_path, title_overlay_path)
 
-            # Display image centered
+        if composite_img:
+            # Display composite image
             col_left, col_img, col_right = st.columns([1, 2, 1])
             with col_img:
-                st.image(splash_with_button, use_column_width=True)
+                st.image(composite_img, use_column_width=True)
+                st.markdown("")  # Spacing
 
-                # Invisible clickable button that overlaps the drawn button
-                st.markdown("""
-                    <style>
-                    .stButton button {
-                        background-color: transparent !important;
-                        border: none !important;
-                        color: transparent !important;
-                        padding: 0 !important;
-                        margin: -55px auto 0 auto !important;
-                        width: 200px !important;
-                    }
-                    .stButton button:hover {
-                        background-color: transparent !important;
-                    }
-                    </style>
-                """, unsafe_allow_html=True)
+                # Start New Game button (centered, large)
+                col_btn_left, col_btn, col_btn_right = st.columns([1, 1, 1])
+                with col_btn:
+                    if st.button("🌙 Start New Game", use_container_width=True, key="welcome_start"):
+                        start_new_game()
 
-                if st.button("Start New Game", use_container_width=False, key="welcome_start"):
-                    start_new_game()
+                st.markdown("")  # Spacing
+
                 # Test Boss Fight button
                 if st.button("Test Boss Fight", use_container_width=False, key="welcome_boss_test"):
                     st.session_state.boss_test = True
-                    # initialize boss session
                     init_boss_fight_session()
-                    st.experimental_rerun()
+                    st.rerun()
+        else:
+            # Fallback: single image splash screen
+            splash_img_path = str(PROJECT_ROOT / "velinor" /
+                                  "backgrounds" / "velinor_title_eyes_closed.png")
+            splash_img = load_image_safe(splash_img_path)
+
+            if splash_img:
+                # Add button overlay to image using PIL
+                splash_with_button = add_button_overlay(
+                    splash_img, "Start New Game", position="bottom")
+
+                # Display image centered
+                col_left, col_img, col_right = st.columns([1, 2, 1])
+                with col_img:
+                    st.image(splash_with_button, use_column_width=True)
+
+                    # Invisible clickable button that overlaps the drawn button
+                    st.markdown("""
+                        <style>
+                        .stButton button {
+                            background-color: transparent !important;
+                            border: none !important;
+                            color: transparent !important;
+                            padding: 0 !important;
+                            margin: -55px auto 0 auto !important;
+                            width: 200px !important;
+                        }
+                        .stButton button:hover {
+                            background-color: transparent !important;
+                        }
+                        </style>
+                    """, unsafe_allow_html=True)
+
+                    if st.button("Start New Game", use_container_width=False, key="welcome_start"):
+                        start_new_game()
+                    # Test Boss Fight button
+                    if st.button("Test Boss Fight", use_container_width=False, key="welcome_boss_test"):
+                        st.session_state.boss_test = True
+                        # initialize boss session
+                        init_boss_fight_session()
+                        st.rerun()
 
     # If boss test was requested, render boss fight UI
     if st.session_state.get('boss_test'):
