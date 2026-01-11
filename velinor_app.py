@@ -9,11 +9,11 @@ from velinor_app import main
 import sys
 from pathlib import Path
 
-# Add velinor directory to path so imports work
+# Add velinor directory to path BEFORE importing
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT / "velinor"))
 
-# Import and run the main app
+# Now import from velinor subdirectory
 
 if __name__ == "__main__":
     main()
