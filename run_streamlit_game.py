@@ -15,7 +15,6 @@ import streamlit as st
 from velinor.engine.orchestrator import VelinorTwineOrchestrator
 from velinor.engine.core import VelinorEngine
 from velinor.engine.npc_system import NPCDialogueSystem
-from velinor.stories.story_definitions import build_velinor_story
 from velinor.streamlit_state import StreamlitGameState
 from velinor.streamlit_ui import StreamlitUI
 import sys
@@ -32,9 +31,9 @@ if str(PROJECT_ROOT) not in sys.path:
 def initialize_game():
     """Initialize the Velinor game engine and orchestrator."""
     try:
-        # Build story
-        story_builder = build_velinor_story()
-        story_data = story_builder.story_data
+        # Story path
+        story_path = str(Path(__file__).parent / "velinor" /
+                         "stories" / "sample_story.json")
 
         # Initialize systems
         game_engine = VelinorEngine()
@@ -43,17 +42,18 @@ def initialize_game():
 
         npc_system = NPCDialogueSystem()
 
+        # Initialize orchestrator with story path
         orchestrator = VelinorTwineOrchestrator(
-            story=story_data,
-            engine=game_engine,
-            npc_system=npc_system
+            game_engine=game_engine,
+            story_path=story_path,
+            npc_system=npc_system,
+            player_name=st.session_state.get("player_name", "Traveler")
         )
 
         return {
             "orchestrator": orchestrator,
             "engine": game_engine,
             "npc_system": npc_system,
-            "story": story_data,
             "ui": StreamlitUI()
         }
     except Exception as e:
@@ -75,14 +75,38 @@ def main():
     if "game_systems" not in st.session_state:
         st.session_state.game_systems = initialize_game()
 
-    systems = st.session_state.game_systems
-    orchestrator = systems["orchestrator"]
-    ui = systems["ui"]
+    # Initialize game state if not already done
+    if "game_state" not in st.session_state:
+        st.session_state.game_state = StreamlitGameState()
 
-    # Render UI
-    ui.render_sidebar(st.session_state)
-    ui.render_scene(orchestrator, st.session_state)
-    ui.render_button_grid(orchestrator, st.session_state)
+    systems = st.session_state.game_systems
+    game_state = st.session_state.game_state
+    orchestrator = systems["orchestrator"]
+
+    # Display basic game info
+    st.title("🌙 Velinor: Remnants of the Tone")
+    st.write("Game engine initialized successfully!")
+
+    # Show basic game state
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("📊 Game State")
+        st.write(f"**Mode:** {game_state.mode}")
+        st.write(f"**Current Scene:** {game_state.current_scene}")
+        st.write(f"**Player:** {game_state.player_name}")
+
+    with col2:
+        st.subheader("🎼 TONE Stats")
+        tone_dict = game_state.tone.to_dict()
+        for stat, value in tone_dict.items():
+            st.write(f"**{stat}:** {value}")
+
+    # Show available glyphs
+    st.subheader("✨ Glyphs")
+    glyphs = game_state.glyphs
+    for glyph_name, glyph_obj in glyphs.items():
+        st.write(f"- **{glyph_name}**: {glyph_obj.description}")
 
 
 if __name__ == "__main__":
