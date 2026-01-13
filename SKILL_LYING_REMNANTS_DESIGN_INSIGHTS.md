@@ -234,12 +234,14 @@ Traditional Approach:
   - Creates branching story → content multiplication
 
 This System's Approach:
-  - Sera always teaches Herbalism
-  - Teaching style reflects REMNANTS state:
+  - Sera always teaches Herbalism (she's kind-hearted, never refuses)
+  - Lesson scope/complexity reflects REMNANTS state:
     * High trust: "I'm delighted to teach you."
-    * Low trust: "Fine. Pay attention; I won't repeat myself."
-  - Same content, different emotional texture
-  - Different texture creates authentic story beat
+      → Complex lesson on ingestible anti-viral
+    * Low trust: "I'm a little busy so I'll have to give you a quick lesson."
+      → Simple lesson on making a basic salve
+  - Same character, different scope
+  - Different scope creates authentic game consequence without personality shift
 ```
 
 Result: More content with same effort. Player feels respected (agency) and the story feels organic (emergence).
