@@ -2047,7 +2047,7 @@
       },
       "glyph_name": "Glyph of Worn Cloth",
       "location": "Shrine alcove",
-      "storyline_summary": "Player learns to appreciate the warmth provided by cloth weaved by others hands",
+      "storyline_summary": "Player learns to appreciate the warmth provided by cloth weaved by others hands, despite it being frayed and tattered",
       "story_seed": "",
       "tone_integration": [
         "mythic"
@@ -2071,7 +2071,7 @@
         "ritual"
       ],
       "alignment_paths": null,
-      "original_storyline_text": "Player learns to appreciate the warmth provided by cloth weaved by others hands"
+      "original_storyline_text": "Player learns to appreciate the warmth provided by cloth weaved by others hands, despite it being frayed and tattered"
     },
     {
       "domain": "Ache",
