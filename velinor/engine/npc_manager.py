@@ -479,6 +479,17 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "skepticism": 0.2    # Mystics inspire faith, lower skepticism
         })
         ,
+        # Saori: Oracle — measured, reflective, paradoxical (persistent presence)
+        NPCProfile("Saori", {
+            "resolve": 0.8,
+            "empathy": 0.6,
+            "memory": 0.85,
+            "nuance": 0.9,
+            "authority": 0.75,
+            "need": 0.35,
+            "trust": 0.4,
+            "skepticism": 0.7
+        }),
         # Coren: Mediator - bridges opposing factions, high nuance and trust
         NPCProfile("Coren the Mediator", {
             "resolve": 0.6,
@@ -566,7 +577,8 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
             "Mariel": 0.1,
             "Ravi": 0.05,
             "Nima": 0.05,
-            "Archivist Malrik": -0.1
+            "Archivist Malrik": -0.1,
+            "Saori": 0.05
         },
         "Coren the Mediator": {
             "Archivist Malrik": 0.1,
@@ -574,5 +586,11 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
             "Mariel": 0.05,
             "Kaelen": 0.08,
             "Korrin": 0.08
+        }
+        ,
+        "Saori": {
+            "Archivist Malrik": 0.08,
+            "High Seer Elenya": 0.05,
+            "Mariel": 0.04
         }
     }
