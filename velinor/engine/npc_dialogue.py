@@ -72,6 +72,25 @@ LEXICONS = {
         "trust_high": ["sunlight", "rain", "soil", "rooted"],
         "trust_low": ["shadow", "drought", "barren", "adrift"]
     },
+    "Saori": {
+        "description": "Oracle — measured, reflective, paradoxical",
+        "nuance_high": ["layered", "paradox", "mirror", "rift"],
+        "nuance_low": ["plain", "flat", "surface", "simple"],
+        "memory_high": ["recall", "echo", "archive", "remember"],
+        "memory_low": ["fade", "blank", "slip", "forget"],
+        "empathy_high": ["feel", "share", "tend", "hold"],
+        "empathy_low": ["withdraw", "harden", "distance", "shut down"],
+        "skepticism_high": ["probe", "question", "what if", "shadow"],
+        "skepticism_low": ["accept", "trust", "open", "clear"],
+        "trust_high": ["believe", "confide", "rely", "root"],
+        "trust_low": ["doubt", "hesitate", "step back", "guard"],
+        "authority_high": ["declare", "guide", "pronounce", "teach"],
+        "authority_low": ["suggest", "offer", "propose", "invite"],
+        "need_high": ["seek", "reach", "ask", "need"],
+        "need_low": ["sustain", "stand", "alone", "manage"],
+        "resolve_high": ["persist", "hold fast", "refuse", "endure"],
+        "resolve_low": ["waver", "pause", "consider", "yield"]
+    },
     
     "Dalen": {
         "description": "Wanderer + Adventurer — bold, reckless, free-spirited",
@@ -187,6 +206,14 @@ def apply_temperament(npc_name: str, text: str, remnants: Dict[str, float]) -> s
             return f"{text}. His voice is steady, scarred by years of duty."
         else:
             return f"{text}. His voice carries the weight of impossible choices."
+
+    elif npc_name == "Saori":
+        # Saori speaks in layered, patient phrasing — varies by nuance and skepticism
+        if remnants.get("nuance", 0.5) > 0.8:
+            return f"{text} — Saori's voice echoes, layered and patient."
+        if remnants.get("skepticism", 0.5) > 0.65:
+            return f"{text} — she tilts her head, measuring each word."
+        return f"{text} — spoken with quiet, watchful clarity."
     
     else:
         return text
