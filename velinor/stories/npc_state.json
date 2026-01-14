@@ -117,6 +117,20 @@
         "skepticism": 0.1
       }
     }
+    ,
+    "Saori": {
+      "name": "Saori",
+      "remnants": {
+        "resolve": 0.8,
+        "empathy": 0.6,
+        "memory": 0.85,
+        "nuance": 0.9,
+        "authority": 0.75,
+        "need": 0.35,
+        "trust": 0.4,
+        "skepticism": 0.7
+      }
+    }
   },
   "influence_map": {
     "Ravi": {
