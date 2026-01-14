@@ -1198,7 +1198,7 @@
       },
       "glyph_name": "Glyph of Covenant Flame",
       "location": "The Shared Archive Building (Central Chamber with Shrine Space)",
-      "storyline_summary": "Elenya gathers the community in the archive building's central chamber to light the Covenant Flame—a fire that will only survive through collective tending. She argues this is why the building matters: not as a sealed vault, but as a gathering place where the community tends the flame of shared memory and ritual. Each person adds fuel; each guards it against wind. But Malrik's shadow is felt: his worry that fire and records cannot coexist. Elenya's frustration is visible: her hurt that he refuses to see beauty in what she's building. The glyph manifests when the player joins the ritual and recognizes that activation isn't destruction—it's honoring memory through presence.",
+      "storyline_summary": "Elenya gathers the community in the archive building's central chamber to light the Covenant Flame — a ritual that demonstrates the archive's role as a living, shared space rather than a sealed vault. After the collapse the flame becomes a focal point for rebuild decisions: does the community preserve records in exclusive custody, or does it tend memory together? The glyph manifests when the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual.",
       "story_seed": "Elenya transforms the archive building into a ritual space, lighting the Covenant Flame to demonstrate that spiritual use strengthens rather than threatens preservation.",
       "tone_integration": [
         "hopeful",
@@ -1220,7 +1220,11 @@
       "narrative_triggers": [
         "covenant_flame_lit",
         "community_gathering",
-        "elenya_explains_vision"
+        "elenya_explains_vision",
+        "archive_discovered",
+        "building_collapse",
+        "rebuild_event",
+        "ritual_activated"
       ],
       "memory_fragments": [
         "elenya_lighting_flame.png",
@@ -1235,7 +1239,10 @@
         "ritual",
         "love-story",
         "activation",
-        "covenant"
+        "covenant",
+        "archive",
+        "rebuild",
+        "shrine"
       ],
       "alignment_paths": {
         "path_a": "Support Elenya's vision of shared activation",
