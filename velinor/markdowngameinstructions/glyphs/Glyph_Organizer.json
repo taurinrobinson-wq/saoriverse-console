@@ -3179,18 +3179,16 @@
       "id": 11,
       "theme": "Loss, grief, betrayal",
       "npc": {
-        "name": "Varna",
-        "role": "Ruins Warden",
-        "npc_images": [
-          "npcs/varna.png"
-        ],
+        "name": "Saori",
+        "role": "Oracle",
+        "npc_images": [],
         "background_images": [
           "backgrounds/chamber_of_delayed_echoes_swamp_underground.png"
         ]
       },
       "glyph_name": "Glyph of Infrasensory Oblivion",
       "location": "Chamber of Delayed Echoes (swamp underground)",
-      "storyline_summary": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. The Ruins Warden appears???scarred, weathered, yet still watching the boundaries of the old city. She teaches that aban...",
+      "storyline_summary": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. Saori appears—scarred, weathered, yet still watching the boundaries of the old city. She teaches that abandonment sometimes arrives late: the soul doesn't feel the cut until long after the severance. The glyph manifests when the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named. This is the seed of loss, the latency of loneliness.",
       "story_seed": "",
       "tone_integration": [
         "somber"
@@ -3301,6 +3299,78 @@
       ],
       "alignment_paths": null,
       "original_storyline_text": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence — not action — is what brings people back to themselves."
+    },
+    {
+      "domain": "Presence",
+      "id": 74,
+      "theme": "Touch, silence, witness",
+      "npc": {
+        "name": "Saori",
+        "role": "Oracle",
+        "npc_images": [],
+        "background_images": [
+          "backgrounds/hidden_broken_corelink_console.png"
+        ]
+      },
+      "glyph_name": "Glyph of Dormant Potential",
+      "location": "Hidden Broken Corelink Console",
+      "storyline_summary": "The player ventures into the swamp by walking directly into it. They must walk with faith to uncover a hidden truth about their family. Saori appears in the dim, guiding the seeker toward a dormant console that hums faintly beneath the muck. The glyph manifests when the player chooses trust over fear and presses the console's cracked face, revealing latent potential in memory fragments.",
+      "story_seed": "",
+      "tone_integration": [
+        "quiet",
+        "mysterious"
+      ],
+      "remnants_integration": [],
+      "player_choices": [
+        "trust_or_fear"
+      ],
+      "narrative_triggers": [
+        "player_finds_console"
+      ],
+      "memory_fragments": [],
+      "tags": [
+        "potential",
+        "family",
+        "memory"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player ventures into the swamp by walking directly into it. They must walk with faith to uncover a hidden truth about their family. Saori appears in the dim, guiding the seeker toward a dormant console that hums faintly beneath the muck. The glyph manifests when the player chooses trust over fear and presses the console's cracked face, revealing latent potential in memory fragments."
+    },
+    {
+      "domain": "Ache",
+      "id": 75,
+      "theme": "Loss, grief, betrayal",
+      "npc": {
+        "name": "Saori",
+        "role": "Oracle",
+        "npc_images": [],
+        "background_images": [
+          "backgrounds/mirror_chamber.png"
+        ]
+      },
+      "glyph_name": "Glyph of Mirrored Loss",
+      "location": "Mirror Chamber",
+      "storyline_summary": "The player must discern which is the true Saori among a multitude of convincing reflections. As the player probes, Saori speaks vaguely about growing up without finding an equal and then losing them tragically when she finally did. The encounter deepens the player's discernment and invites reflection on their own loss. The glyph manifests when the player recognizes truth through layered empathy and chooses which reflection to honor.",
+      "story_seed": "",
+      "tone_integration": [
+        "haunting",
+        "reflective"
+      ],
+      "remnants_integration": [],
+      "player_choices": [
+        "which_reflection"
+      ],
+      "narrative_triggers": [
+        "player_faces_mirrors"
+      ],
+      "memory_fragments": [],
+      "tags": [
+        "loss",
+        "mirror",
+        "discernment"
+      ],
+      "alignment_paths": null,
+      "original_storyline_text": "The player must discern which is the true Saori among a multitude of convincing reflections. As the player probes, Saori speaks vaguely about growing up without finding an equal and then losing them tragically when she finally did. The encounter deepens the player's discernment and invites reflection on their own loss. The glyph manifests when the player recognizes truth through layered empathy and chooses which reflection to honor."
     }
   ],
   "meta": {
