@@ -627,6 +627,12 @@
       "remnants_integration": [
         "memory_echoes"
       ],
+      "owner": "Saori",
+      "remnants_impact": {
+        "memory": -0.06,
+        "empathy": 0.04,
+        "skepticism": 0.02
+      },
       "player_choices": [
         "follow_route_or_search",
         "align_with_npc_or_oppose",
@@ -1598,6 +1604,12 @@
       "remnants_integration": [
         "memory_echoes"
       ],
+      "owner": "Saori",
+      "remnants_impact": {
+        "memory": -0.06,
+        "empathy": 0.04,
+        "skepticism": 0.02
+      },
       "player_choices": [
         "observe_or_intervene"
       ],
@@ -1950,6 +1962,12 @@
       "remnants_integration": [
         "memory_echoes"
       ],
+      "owner": "Saori",
+      "remnants_impact": {
+        "memory": -0.06,
+        "empathy": 0.04,
+        "skepticism": 0.02
+      },
       "player_choices": [
         "observe_or_intervene"
       ],
@@ -3196,6 +3214,12 @@
       "remnants_integration": [
         "memory_echoes"
       ],
+      "owner": "Saori",
+      "remnants_impact": {
+        "memory": -0.06,
+        "empathy": 0.04,
+        "skepticism": 0.02
+      },
       "player_choices": [
         "observe_or_intervene"
       ],
@@ -3324,6 +3348,12 @@
       "player_choices": [
         "trust_or_fear"
       ],
+      "owner": "Saori",
+      "remnants_impact": {
+        "memory": 0.04,
+        "nuance": 0.03,
+        "trust": 0.02
+      },
       "narrative_triggers": [
         "player_finds_console"
       ],
@@ -3360,6 +3390,12 @@
       "player_choices": [
         "which_reflection"
       ],
+      "owner": "Saori",
+      "remnants_impact": {
+        "empathy": 0.05,
+        "need": 0.04,
+        "skepticism": 0.01
+      },
       "narrative_triggers": [
         "player_faces_mirrors"
       ],

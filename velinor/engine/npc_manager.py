@@ -84,6 +84,12 @@ class NPCProfile:
     
     def copy(self) -> 'NPCProfile':
         """Return a deep copy of this profile."""
+        "Sealina": {"empathy": 0.06, "memory": 0.03},
+        "Lark": {"authority": 0.05, "nuance": 0.03},
+        "Nordia the Mourning Singer": {"empathy": 0.07, "memory": 0.04},
+        "Orvak": {"skepticism": 0.06, "nuance": 0.03},
+        "Tessa": {"empathy": 0.05, "nuance": 0.03},
+        "Lira": {"trust": 0.05, "empathy": 0.04}
         return NPCProfile(self.name, deepcopy(self.remnants))
     
     def to_dict(self) -> Dict:
@@ -500,6 +506,178 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "need": 0.4,
             "trust": 0.75,
             "skepticism": 0.2
+        })
+        ,
+        # Additional Tier-2 NPCs
+        NPCProfile("Sealina", {
+            "resolve": 0.65,
+            "empathy": 0.85,
+            "memory": 0.9,
+            "nuance": 0.75,
+            "authority": 0.55,
+            "need": 0.8,
+            "trust": 0.6,
+            "skepticism": 0.6
+        }),
+        NPCProfile("Lark", {
+            "resolve": 0.7,
+            "empathy": 0.6,
+            "memory": 0.8,
+            "nuance": 0.65,
+            "authority": 0.75,
+            "need": 0.45,
+            "trust": 0.65,
+            "skepticism": 0.5
+        }),
+        NPCProfile("Nordia the Mourning Singer", {
+            "resolve": 0.7,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.8,
+            "authority": 0.6,
+            "need": 0.85,
+            "trust": 0.55,
+            "skepticism": 0.6
+        }),
+        NPCProfile("Helia", {
+            "resolve": 0.8,
+            "empathy": 0.75,
+            "memory": 0.5,
+            "nuance": 0.6,
+            "authority": 0.55,
+            "need": 0.6,
+            "trust": 0.75,
+            "skepticism": 0.5
+        }),
+        NPCProfile("Elka", {
+            "resolve": 0.75,
+            "empathy": 0.65,
+            "memory": 0.45,
+            "nuance": 0.5,
+            "authority": 0.5,
+            "need": 0.55,
+            "trust": 0.7,
+            "skepticism": 0.5
+        }),
+        NPCProfile("Inodora", {
+            "resolve": 0.7,
+            "empathy": 0.8,
+            "memory": 0.8,
+            "nuance": 0.65,
+            "authority": 0.6,
+            "need": 0.6,
+            "trust": 0.7,
+            "skepticism": 0.55
+        }),
+        NPCProfile("Rasha", {
+            "resolve": 0.65,
+            "empathy": 0.8,
+            "memory": 0.55,
+            "nuance": 0.6,
+            "authority": 0.55,
+            "need": 0.65,
+            "trust": 0.85,
+            "skepticism": 0.45
+        }),
+        NPCProfile("Juria & Korinth", {
+            "resolve": 0.7,
+            "empathy": 0.8,
+            "memory": 0.65,
+            "nuance": 0.65,
+            "authority": 0.6,
+            "need": 0.6,
+            "trust": 0.85,
+            "skepticism": 0.45
+        }),
+        NPCProfile("Lira", {
+            "resolve": 0.65,
+            "empathy": 0.85,
+            "memory": 0.5,
+            "nuance": 0.55,
+            "authority": 0.5,
+            "need": 0.55,
+            "trust": 0.8,
+            "skepticism": 0.4
+        }),
+        NPCProfile("Orvak", {
+            "resolve": 0.7,
+            "empathy": 0.5,
+            "memory": 0.7,
+            "nuance": 0.75,
+            "authority": 0.65,
+            "need": 0.75,
+            "trust": 0.5,
+            "skepticism": 0.8
+        }),
+        NPCProfile("Sanor", {
+            "resolve": 0.75,
+            "empathy": 0.55,
+            "memory": 0.6,
+            "nuance": 0.7,
+            "authority": 0.6,
+            "need": 0.8,
+            "trust": 0.55,
+            "skepticism": 0.85
+        }),
+        NPCProfile("Dakrin", {
+            "resolve": 0.85,
+            "empathy": 0.6,
+            "memory": 0.55,
+            "nuance": 0.7,
+            "authority": 0.75,
+            "need": 0.6,
+            "trust": 0.65,
+            "skepticism": 0.65
+        }),
+        NPCProfile("Kiv", {
+            "resolve": 0.6,
+            "empathy": 0.7,
+            "memory": 0.9,
+            "nuance": 0.85,
+            "authority": 0.5,
+            "need": 0.75,
+            "trust": 0.55,
+            "skepticism": 0.7
+        }),
+        NPCProfile("Seyla", {
+            "resolve": 0.5,
+            "empathy": 0.5,
+            "memory": 0.85,
+            "nuance": 0.8,
+            "authority": 0.75,
+            "need": 0.5,
+            "trust": 0.5,
+            "skepticism": 0.5
+        }),
+        NPCProfile("Velka", {
+            "resolve": 0.5,
+            "empathy": 0.5,
+            "memory": 0.85,
+            "nuance": 0.8,
+            "authority": 0.75,
+            "need": 0.5,
+            "trust": 0.5,
+            "skepticism": 0.5
+        }),
+        NPCProfile("Tala", {
+            "resolve": 0.5,
+            "empathy": 0.75,
+            "memory": 0.5,
+            "nuance": 0.7,
+            "authority": 0.5,
+            "need": 0.5,
+            "trust": 0.8,
+            "skepticism": 0.5
+        }),
+        NPCProfile("Tessa", {
+            "resolve": 0.65,
+            "empathy": 0.9,
+            "memory": 0.85,
+            "nuance": 0.8,
+            "authority": 0.55,
+            "need": 0.25,
+            "trust": 0.45,
+            "skepticism": 0.4
         })
     ]
     

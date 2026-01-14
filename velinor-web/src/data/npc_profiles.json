@@ -39,6 +39,71 @@
         "name": "Mariel",
         "role": "scholar",
         "remnants": {
+    "sealina": {
+        "display_name": "Sealina",
+        "remnants": {
+            "resolve": 0.65,
+            "empathy": 0.85,
+            "memory": 0.9,
+            "nuance": 0.75,
+            "authority": 0.55,
+            "need": 0.8,
+            "trust": 0.6,
+            "skepticism": 0.6
+        }
+    },
+    "lark": {
+        "display_name": "Lark",
+        "remnants": {
+            "resolve": 0.7,
+            "empathy": 0.6,
+            "memory": 0.8,
+            "nuance": 0.65,
+            "authority": 0.75,
+            "need": 0.45,
+            "trust": 0.65,
+            "skepticism": 0.5
+        }
+    },
+    "nordia_the_mourning_singer": {
+        "display_name": "Nordia the Mourning Singer",
+        "remnants": {
+            "resolve": 0.7,
+            "empathy": 0.9,
+            "memory": 0.9,
+            "nuance": 0.8,
+            "authority": 0.6,
+            "need": 0.85,
+            "trust": 0.55,
+            "skepticism": 0.6
+        }
+    },
+    "orvak": {
+        "display_name": "Orvak",
+        "remnants": {
+            "resolve": 0.7,
+            "empathy": 0.5,
+            "memory": 0.7,
+            "nuance": 0.75,
+            "authority": 0.65,
+            "need": 0.75,
+            "trust": 0.5,
+            "skepticism": 0.8
+        }
+    },
+    "tessa": {
+        "display_name": "Tessa",
+        "remnants": {
+            "resolve": 0.65,
+            "empathy": 0.9,
+            "memory": 0.85,
+            "nuance": 0.8,
+            "authority": 0.55,
+            "need": 0.25,
+            "trust": 0.45,
+            "skepticism": 0.4
+        }
+    }
             "empathy": 0.25,
             "trust": 0.35,
             "memory": 0.6
