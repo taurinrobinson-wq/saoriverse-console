@@ -639,14 +639,14 @@
       ],
       "glyphs": 1,
       "remnants": {
-        "resolve": 0.7,
-        "empathy": 0.5,
-        "memory": 0.5,
-        "nuance": 0.5,
-        "authority": 0.5,
-        "need": 0.85,
-        "trust": 0.5,
-        "skepticism": 0.8
+        "resolve": 0.65,
+        "empathy": 0.9,
+        "memory": 0.85,
+        "nuance": 0.8,
+        "authority": 0.55,
+        "need": 0.25,
+        "trust": 0.45,
+        "skepticism": 0.4
       },
       "description": "Desert Widow from the Wound Weavers"
     },
@@ -660,13 +660,13 @@
       "glyphs": 3,
       "remnants": {
         "resolve": 0.8,
-        "empathy": 0.9,
+        "empathy": 0.6,
         "memory": 0.85,
-        "nuance": 0.8,
-        "authority": 0.6,
-        "need": 0.6,
-        "trust": 0.65,
-        "skepticism": 0.4
+        "nuance": 0.9,
+        "authority": 0.75,
+        "need": 0.35,
+        "trust": 0.4,
+        "skepticism": 0.7
       },
       "description": "Saori, the Oracle—a persistent presence whose remnants stats shift with player decisions."
     }
