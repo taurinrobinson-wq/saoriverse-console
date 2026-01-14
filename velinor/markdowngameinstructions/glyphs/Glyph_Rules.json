@@ -49,6 +49,14 @@
       "narrative_triggers": ["player_enters_location","festival_trigger"],
       "notes": "Communal joy activations (dawn, festival)." 
     }
+    ,
+    "saori": {
+      "tone_integration": ["mysterious","somber","intimate"],
+      "remnants_integration": ["memory_echoes","latent_potential","abandoned_rituals"],
+      "player_choices": ["trust_or_doubt","reveal_or_hide","follow_or_ignore"],
+      "narrative_triggers": ["player_follows_saori","player_activates_console","player_faces_mirrors"],
+      "notes": "Saori's remnants stats (memory_echoes, latent_potential) shift based on player decisions. These influence empathy rewards and final Saori/Velinor ending branches."
+    }
   },
   "domain_defaults": {
     "Presence": { "tone": ["intimate"], "remnants": ["environmental_scars"] },
