@@ -47,12 +47,22 @@ Player Role:    Participant in abstract archival journey
 Location:        The Shared Archive Building (Inside Chambers)
 Tone:           contemplative, tense, YEARNING
 Story:          Malrik navigates interior while Elenya's offerings are everywhere—
-                dried flowers, ritual marks, songs. He never removes them. His
-                eyes linger. His measured step IS his longing.
+                dried flowers, ritual marks, songs. He mutters about the mess
+                to visitors and grumbles when dust settles, but he never disturbs
+                her placements; instead he catalogs and preserves them carefully.
+                He deliberately steps around each offering, almost tiptoeing
+                so as not to shift a single petal, ribbon, or scrap of paper.
+                To some players this measured caution reads as pure precision—
+                an obsessive fastidiousness that values order over people.
+                To more empathetic players, the same behavior reads as
+                reverent care: though he complains aloud, his actions betray
+                a quiet internal reverence for Elenya and her followers.
+                His eyes linger. His measured step IS his longing.
 Lesson:         Method can be armor; discipline can contain ache
 Player Role:    Detective noticing what he doesn't consciously acknowledge
-Love Subtext:   His measured pace "isn't just method—it's a cage he built to 
-                contain his own longing"
+Love Subtext:   His measured pace isn't just method—it's a cage he built to
+                 contain his own longing, and yet the gentle care in his steps
+                 suggests a reverence he won't admit aloud.
 ```
 
 **Key Addition:** Environmental storytelling of love (offerings), new tone "yearning"
