@@ -1,0 +1,2436 @@
+{
+  "name": "brickhouse-center-flat-roof",
+  "size": {
+    "x": 11,
+    "y": 1,
+    "z": 11
+  },
+  "offset": {
+    "x": -48,
+    "y": 0,
+    "z": 155
+  },
+  "block_count": 121,
+  "blocks": {
+    "0,0,0": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,1": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,2": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,3": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,4": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,5": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,6": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,7": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,8": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,9": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "0,0,10": {
+      "type": "unknown",
+      "x": 0,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,0": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,1": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,2": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,3": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,4": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,5": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,6": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,7": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,8": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,9": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "1,0,10": {
+      "type": "unknown",
+      "x": 1,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,0": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,1": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,2": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,3": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,4": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,5": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,6": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,7": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,8": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,9": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "2,0,10": {
+      "type": "unknown",
+      "x": 2,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,0": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,1": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,2": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,3": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,4": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,5": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,6": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,7": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,8": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,9": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "3,0,10": {
+      "type": "unknown",
+      "x": 3,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,0": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,1": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,2": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,3": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,4": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,5": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,6": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,7": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,8": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,9": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "4,0,10": {
+      "type": "unknown",
+      "x": 4,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,0": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,1": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,2": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,3": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,4": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,5": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,6": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,7": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,8": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,9": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "5,0,10": {
+      "type": "unknown",
+      "x": 5,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,0": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,1": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,2": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,3": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,4": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,5": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,6": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,7": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,8": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,9": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "6,0,10": {
+      "type": "unknown",
+      "x": 6,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,0": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,1": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,2": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,3": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,4": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,5": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,6": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,7": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,8": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,9": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "7,0,10": {
+      "type": "unknown",
+      "x": 7,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,0": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,1": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,2": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,3": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,4": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,5": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,6": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,7": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,8": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,9": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "8,0,10": {
+      "type": "unknown",
+      "x": 8,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,0": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,1": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,2": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,3": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,4": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,5": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,6": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,7": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,8": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,9": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "9,0,10": {
+      "type": "unknown",
+      "x": 9,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,0": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 0,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,1": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 1,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,2": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 2,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,3": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 3,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,4": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 4,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,5": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 5,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,6": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 6,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,7": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 7,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,8": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 8,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,9": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 9,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "10,0,10": {
+      "type": "unknown",
+      "x": 10,
+      "y": 0,
+      "z": 10,
+      "aesthetic": {
+        "color": [
+          150,
+          150,
+          150
+        ],
+        "roughness": 0.7,
+        "metallic": 0.0,
+        "emissive": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  }
+}
