@@ -1,0 +1,22 @@
+archivist_malrik|semi-realistic painterly portrait, older archivist man, tired scholarly face, layered robes and archival ornaments, thoughtful weary expression, soft lighting, chest-up, velinor aesthetic
+coren_the_mediator|semi-realistic painterly portrait, diplomatic middle-aged man, calm composed expression, travel-worn robes, gentle eyes, chest-up, soft lighting, velinor aesthetic
+dakrin|semi-realistic painterly portrait, middle-aged woman, strong build, braided hair, ritual leathers, muted earth tones, iron armband, stoic expression, soft lighting, chest-up, velinor aesthetic
+elka|semi-realistic painterly portrait, contemplative woman, long loose hair, shrine robes pale blue and grey, subtle circuitry jewelry, serene expression, soft lighting, chest-up, gentle background, velinor aesthetic
+helia|semi-realistic painterly portrait, warm grounded woman, mid-forties, loose tied hair, healer wraps green and brown, herbs and cords, gentle compassionate expression, soft lighting, chest-up, velinor aesthetic
+high_seer_elenya|semi-realistic painterly portrait, austere priestess, middle-aged woman, ornate ritual robes, pale skin tones, eyes intense, serene yet commanding expression, soft dramatic lighting, chest-up, velinor aesthetic
+juria|semi-realistic painterly portrait, Juria, chest-up, soft lighting, muted velinor palette
+korinth|semi-realistic painterly portrait, Korinth, chest-up, soft lighting, muted velinor palette
+kiv|semi-realistic painterly portrait, older wiry man, greying hair, clay-stained robes, pottery shard adornments, contemplative sorrowful expression, soft lighting, chest-up, velinor aesthetic
+lark|semi-realistic painterly portrait, strong mason mid-thirties, stone-dust wraps, tool belt, earnest protective expression, soft lighting, chest-up, velinor aesthetic
+lira|semi-realistic painterly portrait, young woman, lithe, thoughtful expression, simple woven garments, muted palette, chest-up, soft lighting, velinor aesthetic
+nordia_the_mourning_singer|semi-realistic painterly portrait, grieving singer, late 30s, worn shawl, voice-worn face, sad compassionate eyes, chest-up, muted velinor palette, soft lighting
+nordia_the_mourning_singer_secondary_arc|semi-realistic painterly portrait, nordia the mourning, chest-up, soft lighting, muted velinor palette
+nordia_the_mourning_singer_tertiary_arc|semi-realistic painterly portrait, nordia the mourning, chest-up, soft lighting, muted velinor palette
+orvak|semi-realistic painterly portrait, weathered man, merchant type, practical robe, cautious expression, chest-up, soft lighting, velinor aesthetic
+rasha|semi-realistic painterly portrait, harbor trader, mid-30s, sun-weathered skin, layered fabrics, alert expression, chest-up, muted palette, velinor aesthetic
+sealina|semi-realistic painterly portrait, gentle elder woman, quiet eyes, layered robes, chest-up, soft lighting, velinor aesthetic
+seyla|semi-realistic painterly portrait, sharp-featured woman early forties, archivist robes ochre and red, lineage markers, focused weary expression, soft lighting, chest-up, velinor aesthetic
+sybil|semi-realistic painterly portrait, enigmatic woman, mid-40s, layered shawls, watchful eyes, chest-up, muted palette, velinor aesthetic
+thalma|semi-realistic painterly portrait, stoic elder, desert robes, weathered hands, calm expression, chest-up, velinor aesthetic
+thoran|semi-realistic painterly portrait, sturdy man, mid-40s, labor-worn clothing, steady gaze, chest-up, muted palette, velinor aesthetic
+velka|semi-realistic painterly portrait, matriarchal figure, late 50s, dignified robes, steady compassionate expression, chest-up, velinor palette

@@ -192,38 +192,48 @@ def build_velinorian_obj(
             faces.append((base_vi + c + 1, base_vi + d + 1, base_vi + a + 1))
         return faces
     
-    # Generate geometry
+    # Group blocks by material type to create separate object groups
+    blocks_by_mat = {}
     for coord_str, block_data in blocks.items():
+        block_type = block_data.get("type", "brick")
+        if block_type not in blocks_by_mat:
+            blocks_by_mat[block_type] = []
         x, y, z = map(int, coord_str.split(','))
-        aesth = block_data["aesthetic"]
-        
-        # Create material name
+        blocks_by_mat[block_type].append((x, y, z))
+    
+    # Generate geometry per material group
+    for mat_idx, (block_type, positions) in enumerate(blocks_by_mat.items()):
+        aesth = blocks[next(iter(blocks.keys()))].get("aesthetic", {"color": (150, 150, 150)})
         r, g, b = aesth["color"]
-        mat_name = f"mat_{r}_{g}_{b}"
+        mat_name = f"mat_{mat_idx}_{block_type[:10]}"
         
-        if mat_name not in materials:
-            materials[mat_name] = aesth
-            # Add material definition to MTL
-            r_norm, g_norm, b_norm = r / 255.0, g / 255.0, b / 255.0
-            mtl_lines.append(f"newmtl {mat_name}")
-            mtl_lines.append(f"Ka 0.1 0.1 0.1")  # Ambient
-            mtl_lines.append(f"Kd {r_norm} {g_norm} {b_norm}")  # Diffuse
-            mtl_lines.append(f"Ks 0.5 0.5 0.5")  # Specular
-            mtl_lines.append(f"Ns 32")  # Shininess
-            mtl_lines.append("")
+        # Add material definition to MTL
+        r_norm, g_norm, b_norm = r / 255.0, g / 255.0, b / 255.0
+        mtl_lines.append(f"newmtl {mat_name}")
+        mtl_lines.append(f"Ka 0.1 0.1 0.1")
+        mtl_lines.append(f"Kd {r_norm} {g_norm} {b_norm}")
+        mtl_lines.append(f"Ks 0.5 0.5 0.5")
+        mtl_lines.append(f"Ns 32")
+        mtl_lines.append("")
         
-        # Add vertices
-        verts = cube_verts(float(x), float(y), float(z), scale=1.0)
-        for vx, vy, vz in verts:
-            obj_lines.append(f"v {vx} {vy} {vz}")
-        
-        # Add faces
-        faces = cube_faces(vertex_count)
+        # Create object group for this material
+        obj_lines.append(f"# Object: {block_type}")
+        obj_lines.append(f"o {block_type.replace(' ', '_')}")
         obj_lines.append(f"usemtl {mat_name}")
-        for f_a, f_b, f_c in faces:
-            obj_lines.append(f"f {f_a} {f_b} {f_c}")
         
-        vertex_count += len(verts)
+        # Add vertices and faces for each block in this group
+        for x, y, z in positions:
+            verts = cube_verts(float(x), float(y), float(z), scale=1.0)
+            for vx, vy, vz in verts:
+                obj_lines.append(f"v {vx} {vy} {vz}")
+            
+            faces = cube_faces(vertex_count)
+            for f_a, f_b, f_c in faces:
+                obj_lines.append(f"f {f_a} {f_b} {f_c}")
+            
+            vertex_count += len(verts)
+        
+        obj_lines.append("")
     
     # Write OBJ
     os.makedirs(Path(output_obj).parent, exist_ok=True)
@@ -241,9 +251,10 @@ def build_velinorian_gltf(
     input_json: str = "velinor/assets/structures/brickhouse-entrance.json",
     output_glb: str = "velinor/assets/brickhouse-entrance_velinorian.glb",
 ) -> None:
-    """Build a glTF 2.0 binary mesh from a structure JSON (for Blender/engines)."""
+    """Build a glTF 2.0 binary mesh with vertex colors per block type."""
     try:
         import trimesh
+        import numpy as np
     except ImportError:
         print("trimesh not installed; skipping glTF export")
         return
@@ -254,23 +265,44 @@ def build_velinorian_gltf(
     
     blocks = struct_data["blocks"]
     
-    # Build mesh
-    meshes = []
+    # Group blocks by material to assign colors
+    blocks_by_mat = {}
     for coord_str, block_data in blocks.items():
-        x, y, z = map(int, coord_str.split(','))
+        block_type = block_data.get("type", "brick")
         
-        # Create a cube at this position
-        mesh = trimesh.creation.box(extents=[1.0, 1.0, 1.0])
-        mesh.apply_translation([x, y, z])
-        meshes.append(mesh)
+        if block_type not in blocks_by_mat:
+            blocks_by_mat[block_type] = []
+        
+        x, y, z = map(int, coord_str.split(','))
+        blocks_by_mat[block_type].append((x, y, z))
     
-    # Combine all meshes
-    combined = trimesh.util.concatenate(meshes)
+    # Create scene with colored mesh groups
+    scene = trimesh.Scene()
     
-    # Export glTF
+    for block_type, positions in blocks_by_mat.items():
+        aesth = blocks[next(iter(blocks.keys()))].get("aesthetic", {"color": (150, 150, 150)})
+        r, g, b = aesth["color"]
+        color = np.array([r, g, b, 255], dtype=np.uint8)
+        
+        # Build merged mesh for this material group
+        meshes_group = []
+        for x, y, z in positions:
+            mesh = trimesh.creation.box(extents=[1.0, 1.0, 1.0])
+            mesh.apply_translation([x, y, z])
+            meshes_group.append(mesh)
+        
+        # Merge group
+        if meshes_group:
+            merged = trimesh.util.concatenate(meshes_group)
+            # Set vertex colors for entire group
+            merged.visual.vertex_colors = np.tile(color, (len(merged.vertices), 1))
+            # Add to scene
+            scene.add_geometry(merged)
+    
+    # Export scene as glTF
     os.makedirs(Path(output_glb).parent, exist_ok=True)
-    combined.export(output_glb)
-    print(f"Wrote glTF: {output_glb}")
+    scene.export(output_glb)
+    print(f"Wrote glTF: {output_glb} ({len(blocks_by_mat)} material groups)")
 
 
 def main():

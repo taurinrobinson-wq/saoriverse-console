@@ -46,26 +46,28 @@ class BrickBuilding:
         story2_y = story1_y - 160
 
         # Door and window placement (in pixels)
-        door_x_min, door_x_max = int(self.center_x - 60), int(self.center_x + 60)
-        window1_x_min, window1_x_max = 120, 200
-        window2_x_min, window2_x_max = 420, 500
+        self.door_x_min, self.door_x_max = int(self.center_x - 60), int(self.center_x + 60)
+        self.window1_x_min, self.window1_x_max = 120, 200
+        self.window2_x_min, self.window2_x_max = 420, 500
         window_y_min = story1_y - 5 * (brick_h + 1)
         window_y_max = story1_y - 2 * (brick_h + 1)
 
         # Helper to add wall rows with openings
         def add_wall_rows(base_y):
+            # Use running bond: offset every other row by half a brick
             for row in range(8):
                 y = base_y - row * (brick_h + 1)
-                for col in range(10):
-                    x = 20 + col * (brick_w + 1)
+                offset = 0 if row % 2 == 0 else (brick_w // 2)
+                for col in range(12):
+                    x = 10 + offset + col * (brick_w + 1)
 
                     # Door void on lower rows
-                    if base_y == story1_y and row < 5 and door_x_min <= x <= door_x_max:
+                    if base_y == story1_y and row < 5 and self.door_x_min <= x <= self.door_x_max:
                         continue
 
                     # Window voids on appropriate rows
                     if window_y_min <= y <= window_y_max:
-                        if window1_x_min <= x <= window1_x_max or window2_x_min <= x <= window2_x_max:
+                        if (self.window1_x_min <= x <= self.window1_x_max) or (self.window2_x_min <= x <= self.window2_x_max):
                             continue
 
                     self.bricks.append({'x': x, 'y': y, 'w': brick_w, 'h': brick_h,
@@ -165,10 +167,39 @@ class BrickBuilding:
         # Draw ground line
         pygame.draw.line(surface, (40, 30, 20, 100), 
                         (0, self.base_y), (self.width, self.base_y), 2)
+
+        # Draw a subtle wall backdrop so gaps/voids read as negative space
+        wall_left = 10
+        wall_right = self.width - 10
+        wall_top = int(self.base_y - 360)
+        wall_rect = pygame.Rect(wall_left, wall_top, wall_right - wall_left, self.base_y - wall_top)
+        pygame.draw.rect(surface, (40, 35, 30, 12), wall_rect)
         
         # Draw all bricks
         for brick_info in self.bricks + self.roof_bricks:
             self._draw_brick(surface, brick_info)
+
+        # Draw doors and windows (frame + glass/void)
+        # Door
+        door_w = self.door_x_max - self.door_x_min
+        door_h = 90
+        door_rect = pygame.Rect(self.door_x_min - door_w//2 + (self.door_x_max - self.door_x_min)//2, self.base_y - door_h, door_w, door_h)
+        pygame.draw.rect(surface, (30, 20, 15, 255), door_rect)  # dark door
+        pygame.draw.rect(surface, (90, 60, 40, 255), door_rect, 4)
+        # Doorknob
+        pygame.draw.circle(surface, (200, 180, 120), (door_rect.right - 20, door_rect.centery), 4)
+
+        # Windows (left & right)
+        win_w = self.window1_x_max - self.window1_x_min
+        win_h = 60
+        w1_rect = pygame.Rect(self.window1_x_min, int(self.base_y - 4*(win_h/2) - 40), win_w, win_h)
+        w2_rect = pygame.Rect(self.window2_x_min, int(self.base_y - 4*(win_h/2) - 40), win_w, win_h)
+        for wr in (w1_rect, w2_rect):
+            # Glass (slightly transparent bluish)
+            glass = pygame.Surface((wr.width, wr.height), pygame.SRCALPHA)
+            glass.fill((80, 110, 130, 140))
+            surface.blit(glass, (wr.left, wr.top))
+            pygame.draw.rect(surface, (30, 30, 30), wr, 4)
     
     def _draw_brick(self, surface, brick_info):
         """Draw a single brick with rotation"""

@@ -109,8 +109,15 @@ def import_structure_json(
     """Import a structure JSON and create Blender objects."""
     
     # Load JSON
-    with open(json_path) as f:
-        data = json.load(f)
+    try:
+        with open(json_path) as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f"ERROR: File not found: {json_path}")
+        return None
+    except json.JSONDecodeError as e:
+        print(f"ERROR: Invalid JSON in {json_path}: {e}")
+        return None
     
     print(f"Importing {data['name']} ({data['block_count']} blocks)...")
     
@@ -226,17 +233,51 @@ def import_structure_json(
 
 def main():
     """Main entry point."""
+    print("\n" + "="*60)
+    print("VELINORIAN IMPORTER STARTING...")
+    print("="*60)
+    
     # Clear default cube if present
     if "Cube" in bpy.data.objects:
+        print("Clearing default cube...")
         bpy.data.objects.remove(bpy.data.objects["Cube"], do_unlink=True)
     
     # Get the workspace/script directory
-    workspace_dir = Path(__file__).parent.parent
+    # Handle both direct execution and Blender's text editor execution
+    try:
+        script_path = Path(__file__).resolve()
+        workspace_dir = script_path.parent.parent
+        print(f"Script path: {script_path}")
+        print(f"Workspace dir: {workspace_dir}")
+    except (TypeError, AttributeError):
+        # Running from Blender text editor; use current project or bpy context
+        workspace_dir = Path(bpy.path.abspath("//")).parent if bpy.data.filepath else Path.cwd()
+        if not workspace_dir.exists():
+            workspace_dir = Path.cwd()
+        print(f"Using Blender context dir: {workspace_dir}")
+    
     structures_dir = workspace_dir / "velinor" / "assets" / "structures"
+    print(f"Looking for structures at: {structures_dir}")
+    print(f"Exists: {structures_dir.exists()}")
+    
+    # Fallback: if structures not found, try relative from CWD
+    if not structures_dir.exists():
+        print(f"Not found, trying CWD: {Path.cwd()}")
+        structures_dir = Path.cwd() / "velinor" / "assets" / "structures"
+        print(f"New path: {structures_dir}")
+        print(f"Exists: {structures_dir.exists()}")
+    
+    if not structures_dir.exists():
+        print(f"\nERROR: Could not find structures directory!")
+        print(f"Tried: {workspace_dir / 'velinor' / 'assets' / 'structures'}")
+        print(f"Tried: {Path.cwd() / 'velinor' / 'assets' / 'structures'}")
+        print(f"Current working directory: {Path.cwd()}")
+        print(f"Available dirs in CWD: {list(Path.cwd().iterdir())[:10]}")
+        return
     
     # Import all structures found
     json_files = sorted(structures_dir.glob("*.json"))
-    print(f"\nFound {len(json_files)} structure files")
+    print(f"\nFound {len(json_files)} structure files at {structures_dir}")
     
     # Create a parent collection for all structures
     parent_coll = bpy.data.collections.new("Velinorian_Settlement")
@@ -249,19 +290,29 @@ def main():
                 collection_name=json_file.stem,
                 merge_materials=True,
             )
+            if coll is None:
+                continue
             # Move to parent collection
             parent_coll.children.link(coll)
             bpy.context.scene.collection.children.unlink(coll)
         except Exception as e:
             print(f"  ✗ Failed to import {json_file.stem}: {e}")
+            import traceback
+            traceback.print_exc()
     
-    # Frame all in viewport
-    for area in bpy.context.screen.areas:
-        if area.type == 'VIEW_3D':
-            for region in area.regions:
-                if region.type == 'WINDOW':
-                    ctx = {'area': area, 'region': region}
-                    bpy.ops.view3d.view_all(ctx)
+    # Frame all in viewport (Blender 4.2+ compatible)
+    try:
+        # Try using context override (Blender 4.2+)
+        for area in bpy.context.screen.areas:
+            if area.type == 'VIEW_3D':
+                for region in area.regions:
+                    if region.type == 'WINDOW':
+                        # Use temp_override for proper context in Blender 4.2+
+                        with bpy.context.temp_override(area=area, region=region):
+                            bpy.ops.view3d.view_all()
+                        break
+    except Exception as e:
+        print(f"Warning: Could not frame viewport: {e}")
     
     print("\n✓ Import complete! Velinorian structures loaded.")
 

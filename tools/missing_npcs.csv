@@ -1,0 +1,40 @@
+npc_name,found,matched_files
+Archivist Malrik,no,
+Captain Veynar,yes,velinor\npcs\Captain_Veynar_sitting_nobg.png;velinor\npcs\Captain_Veynar_standing_nobg.png;velinor\npcs\original\Captain_Veynar.png;velinor\npcs\original\Captain_Veynar_standing.png;velinor-web\assets\npcs\Captain_Veynar_sitting_nobg.png;velinor-web\assets\npcs\Captain_Veynar_standing_nobg.png;velinor-web\assets\npcs\original\Captain_Veynar.png;velinor-web\assets\npcs\original\Captain_Veynar_standing.png;velinor\npcs\original\Captain_Veynar.png;velinor\npcs\original\Captain_Veynar_standing.png
+Coren the Mediator,no,
+Dakrin,no,
+Dalen the Rusted Guide,yes,velinor\npcs\Dalen.png;velinor-web\assets\npcs\Dalen.png
+Drossel the Cloaked,yes,velinor\npcs\Drossel_left.png;velinor\npcs\Drossel_right.png;velinor-web\assets\npcs\Drossel_left.png;velinor-web\assets\npcs\Drossel_right.png
+Elka,no,
+Helia,no,
+High Seer Elenya,no,
+Inodora,yes,velinor\npcs\Inodora_nobg.png;velinor-web\assets\npcs\Inodora_nobg.png
+Juria & Korinth,no,
+Kaelen the Suspected Thief,yes,velinor\npcs\Kaelen_alt_nobg.png;velinor\npcs\Kaelen_fullbody_nobg.png;velinor\npcs\Kaelen_nobg.png;velinor\npcs\Kaelen_trickster_nobg(color).png;velinor\npcs\Kaelen_trickster_nobg2(color).png;velinor\npcs\Kaelen_trickster_nobg3.png;velinor\npcs\original\Portrait of Kaelen t.png;velinor-web\assets\npcs\Kaelen_alt_nobg.png;velinor-web\assets\npcs\Kaelen_nobg.png;velinor-web\assets\npcs\original\Portrait of Kaelen t.png;velinor\npcs\original\Portrait of Kaelen t.png
+Kiv,no,
+Korrin the Gossip,yes,velinor\npcs\Korrin_nobg.PNG;velinor\npcs\Korrin_sitting_nobg.png;velinor-web\assets\npcs\Korrin_nobg.PNG;velinor-web\assets\npcs\Korrin_sitting_nobg.png
+Lark,no,
+Lira,no,
+Mariel the Weaver,yes,velinor\npcs\Mariel_nobg.png;velinor\npcs\original\Mariel.png;velinor-web\assets\npcs\Mariel_nobg.png;velinor-web\assets\npcs\original\Mariel.png;velinor\npcs\original\Mariel.png
+Kaelen the Suspected Thief (as swamp trickster),yes,velinor\npcs\Kaelen_alt_nobg.png;velinor\npcs\Kaelen_fullbody_nobg.png;velinor\npcs\Kaelen_nobg.png;velinor\npcs\Kaelen_trickster_nobg(color).png;velinor\npcs\Kaelen_trickster_nobg2(color).png;velinor\npcs\Kaelen_trickster_nobg3.png;velinor\npcs\Swamp_trickster_fullybody_nobg.png;velinor\npcs\Swamp_trickster_nobg.png;velinor\npcs\original\Portrait of Kaelen t.png;velinor-web\assets\npcs\Kaelen_alt_nobg.png;velinor-web\assets\npcs\Kaelen_nobg.png;velinor-web\assets\npcs\original\Portrait of Kaelen t.png;velinor\npcs\original\Portrait of Kaelen t.png
+Mariel the Weaver (secondary quest),yes,velinor\npcs\Mariel_nobg.png;velinor\npcs\original\Mariel.png;velinor-web\assets\npcs\Mariel_nobg.png;velinor-web\assets\npcs\original\Mariel.png;velinor\npcs\original\Mariel.png
+Nima,yes,velinor\npcs\Nima(transparency).png;velinor\npcs\Ravi_Nima.png;velinor-web\assets\npcs\Nima(transparency).png;velinor-web\assets\npcs\Ravi_Nima.png
+Nordia the Mourning Singer,no,
+Nordia the Mourning Singer (secondary arc),no,
+Nordia the Mourning Singer (tertiary arc),no,
+Orvak,no,
+Rasha,no,
+Ravi,yes,velinor\npcs\Ravi(transparency).png;velinor\npcs\Ravi_Nima.png;velinor-web\assets\npcs\Ravi(transparency).png;velinor-web\assets\npcs\Ravi_Nima.png
+"Ravi, Nima",yes,velinor\npcs\Nima(transparency).png;velinor\npcs\Ravi(transparency).png;velinor\npcs\Ravi_Nima.png;velinor-web\assets\npcs\Nima(transparency).png;velinor-web\assets\npcs\Ravi(transparency).png;velinor-web\assets\npcs\Ravi_Nima.png
+Sanor,yes,velinor\npcs\Sanor_nobg.png;velinor-web\assets\npcs\Sanor_nobg.png
+Sealina,no,
+Sera the Herb Novice,yes,velinor\npcs\Sera_nobg.PNG;velinor-web\assets\npcs\Sera_nobg.PNG
+Seyla,no,
+Sybil,no,
+Tala,yes,velinor\npcs\tala_nobg.png;velinor\npcs\original\tala.png;velinor-web\assets\npcs\tala_nobg.png;velinor-web\assets\npcs\original\tala.png;velinor\npcs\original\tala.png
+Tessa,yes,velinor\npcs\Tessa_old_bowl_fwd_nobg.png;velinor\npcs\Tessa_old_bowl_nobg.png;velinor\npcs\Tessa_Young_nobg.png;velinor\npcs\Tessa_Young_Sad_nobg.png
+Thalma,no,
+Thoran,no,
+Tovren the Cartwright,yes,velinor\npcs\Tovren_color_corrected_left.png;velinor\npcs\Tovren_color_corrected_right.png;velinor-web\assets\npcs\Tovren_color_corrected_left.png;velinor-web\assets\npcs\Tovren_color_corrected_right.png
+Saori,yes,velinor\npcs\Saori_device_nobg_left.png;velinor\npcs\Saori_device_nobg_right.png;velinor\npcs\Saori_paper_nobg.png;velinor\npcs\Saori_stick_nobg_left.png;velinor\npcs\Saori_stick_nobg_right.png;velinor\npcs\Saori_Worried_nobg.png;velinor-web\assets\npcs\Saori_device_nobg_left.png;velinor-web\assets\npcs\Saori_device_nobg_right.png;velinor-web\assets\npcs\Saori_paper_nobg.png;velinor-web\assets\npcs\Saori_stick_nobg_left.png;velinor-web\assets\npcs\Saori_stick_nobg_right.png;velinor-web\assets\npcs\Saori_Worried_nobg.png
+Velka,no,

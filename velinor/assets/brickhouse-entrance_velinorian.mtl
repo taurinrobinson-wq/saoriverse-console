@@ -1,6 +1,6 @@
 # Velinorian Material Library
 
-newmtl mat_150_150_150
+newmtl mat_0_unknown
 Ka 0.1 0.1 0.1
 Kd 0.5882352941176471 0.5882352941176471 0.5882352941176471
 Ks 0.5 0.5 0.5
