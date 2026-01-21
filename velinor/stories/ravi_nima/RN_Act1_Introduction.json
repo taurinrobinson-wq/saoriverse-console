@@ -11,7 +11,9 @@
       "glyph_trigger": null,
       "tone_impact": {},
       "influence_impact": {},
+      // ✏️ AUTHOR SECTION: NARRATION
       "content": "NARRATION_A1_P01: // Describe marketplace. Set mood. Introduce Ravi or Nima as observer.",
+      // ✏️ END SECTION
       "author_notes": "Establish setting (Phase 2 marketplace). Player should feel the undercurrent of sadness.",
       "next_passage": "RN_A1_P02"
     },
@@ -23,7 +25,9 @@
       "glyph_trigger": "SORROW_TIER1",
       "tone_impact": {},
       "influence_impact": {},
+      // ✏️ AUTHOR SECTION: RAVI_DIALOGUE
       "content": "RAVI_LINE_01_INTRO: // [High Empathy variant] Ravi perceives player as listener. Reaches out.",
+      // ✏️ END SECTION
       "author_notes": "Ravi is unsettled. He notices something in the player. This is his opening.",
       "next_passage": "RN_A1_P03"
     },
@@ -35,7 +39,9 @@
       "glyph_trigger": null,
       "tone_impact": {},
       "influence_impact": {},
+      // ✏️ AUTHOR SECTION: RAVI_DIALOGUE
       "content": "RAVI_LINE_02_INTRO: // [High Skepticism variant] Ravi defensive, questioning. Testing player.",
+      // ✏️ END SECTION
       "author_notes": "Alternative dialogue branch for skeptical player energy.",
       "next_passage": "RN_A1_P04"
     },
