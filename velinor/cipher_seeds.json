@@ -1,0 +1,1735 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "source": "Glyph_Organizer.csv",
+    "integration": "Cipher seeds unlock glyphs in-game",
+    "total_glyphs": 75
+  },
+  "seeds": [
+    {
+      "id": "velinor-coll-001",
+      "glyph_name": "Glyph of Fractured Memory",
+      "npc": "Malrik",
+      "category": "Collapse",
+      "location": "Archive Chamber (Ruins Where Inscriptions Blur)",
+      "layer": 2,
+      "phrase": "the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning from fragments",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "malrik"
+      ],
+      "fragments": {
+        "layer_0": "the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning…",
+        "layer_1": "Archives hold what memory refuses.",
+        "layer_2": "the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning from fragments"
+      }
+    },
+    {
+      "id": "velinor-coll-002",
+      "glyph_name": "Glyph of Mirage Echo",
+      "npc": "Malrik",
+      "category": "Collapse",
+      "location": "Desert Heat (Illusion Trial)",
+      "layer": 2,
+      "phrase": "the player chooses to dismiss a mirage and keep walking, accepting uncertainty",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "malrik"
+      ],
+      "fragments": {
+        "layer_0": "the player chooses to dismiss a mirage and keep walking, accepting uncertainty",
+        "layer_1": "Archives hold what memory refuses.",
+        "layer_2": "the player chooses to dismiss a mirage and keep walking, accepting uncertainty"
+      }
+    },
+    {
+      "id": "velinor-lega-001",
+      "glyph_name": "Glyph of Ancestral Record",
+      "npc": "Malrik",
+      "category": "Legacy",
+      "location": "Desert tomb archives",
+      "layer": 2,
+      "phrase": "inheritance rationalized as historical evidence",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "malrik"
+      ],
+      "fragments": {
+        "layer_0": "inheritance rationalized as historical evidence",
+        "layer_1": "Archives hold what memory refuses.",
+        "layer_2": "inheritance rationalized as historical evidence"
+      }
+    },
+    {
+      "id": "velinor-lega-002",
+      "glyph_name": "Glyph of Sand Memories",
+      "npc": "Malrik",
+      "category": "Legacy",
+      "location": "Desert archive chamber",
+      "layer": 2,
+      "phrase": "Legacy here is the fragile persistence of identity against forgetting",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "malrik"
+      ],
+      "fragments": {
+        "layer_0": "Legacy here is the fragile persistence of identity against forgetting",
+        "layer_1": "Archives hold what memory refuses.",
+        "layer_2": "Legacy here is the fragile persistence of identity against forgetting"
+      }
+    },
+    {
+      "id": "velinor-sove-001",
+      "glyph_name": "Glyph of Measured Step",
+      "npc": "Malrik",
+      "category": "Sovereignty",
+      "location": "Archive Interior (Reclaimed Chambers)",
+      "layer": 2,
+      "phrase": "the player moves through the chambers and recognizes discipline as both protection and a barrier to intimacy",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "malrik"
+      ],
+      "fragments": {
+        "layer_0": "the player moves through the chambers and recognizes discipline as both protection and a barrier…",
+        "layer_1": "Archives hold what memory refuses.",
+        "layer_2": "the player moves through the chambers and recognizes discipline as both protection and a barrier to intimacy"
+      }
+    },
+    {
+      "id": "velinor-sove-002",
+      "glyph_name": "Glyph of Boundary Stone",
+      "npc": "Malrik",
+      "category": "Sovereignty",
+      "location": "The Shared Archive Building (Entrance)",
+      "layer": 2,
+      "phrase": "the player helps mark preservation zones and recognizes the cost of rigid boundaries",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "malrik"
+      ],
+      "fragments": {
+        "layer_0": "the player helps mark preservation zones and recognizes the cost of rigid boundaries",
+        "layer_1": "Archives hold what memory refuses.",
+        "layer_2": "the player helps mark preservation zones and recognizes the cost of rigid boundaries"
+      }
+    },
+    {
+      "id": "velinor-coll-003",
+      "glyph_name": "Glyph of Fractured Oath",
+      "npc": "Veynar",
+      "category": "Collapse",
+      "location": "Guard barracks.",
+      "layer": 2,
+      "phrase": "the player recognizes that fracture is not only in stone or steel but in the vows that once bound a community together",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "veynar"
+      ],
+      "fragments": {
+        "layer_0": "the player recognizes that fracture is not only in stone or steel but in the…",
+        "layer_1": "Authority without trust is only shadow.",
+        "layer_2": "the player recognizes that fracture is not only in stone or steel but in the vows that once bound a community together"
+      }
+    },
+    {
+      "id": "velinor-sove-003",
+      "glyph_name": "Glyph of Iron Boundary",
+      "npc": "Veynar",
+      "category": "Sovereignty",
+      "location": "Trial grounds.",
+      "layer": 2,
+      "phrase": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "veynar"
+      ],
+      "fragments": {
+        "layer_0": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance",
+        "layer_1": "Authority without trust is only shadow.",
+        "layer_2": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance"
+      }
+    },
+    {
+      "id": "velinor-trus-001",
+      "glyph_name": "Glyph of Weary Justice",
+      "npc": "Veynar",
+      "category": "Trust",
+      "location": "Market concourse.",
+      "layer": 2,
+      "phrase": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "veynar"
+      ],
+      "fragments": {
+        "layer_0": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance",
+        "layer_1": "Authority without trust is only shadow.",
+        "layer_2": "Veynar teaches that sovereignty is law ? boundaries enforced through weary vigilance"
+      }
+    },
+    {
+      "id": "velinor-coll-004",
+      "glyph_name": "Glyph of Preemptive Severance",
+      "npc": "Coren",
+      "category": "Collapse",
+      "location": "Cult Encampment (Mountain Fortress)",
+      "layer": 2,
+      "phrase": "the player realizes that this is a response to trauma'a broken logic that protects by destroying",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "coren"
+      ],
+      "fragments": {
+        "layer_0": "the player realizes that this is a response to trauma'a broken logic that protects by…",
+        "layer_1": "Fracture arrives quietly, unannounced.",
+        "layer_2": "the player realizes that this is a response to trauma'a broken logic that protects by destroying"
+      }
+    },
+    {
+      "id": "velinor-sove-004",
+      "glyph_name": "Glyph of Held Ache",
+      "npc": "Coren",
+      "category": "Sovereignty",
+      "location": "Market Concourse (Marketplace)",
+      "layer": 2,
+      "phrase": "the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief on both sides",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "coren"
+      ],
+      "fragments": {
+        "layer_0": "the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief…",
+        "layer_1": "Clarity is choosing what you will and won't hold.",
+        "layer_2": "the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief on both sides"
+      }
+    },
+    {
+      "id": "velinor-sove-005",
+      "glyph_name": "Glyph of Interruptive Restraint",
+      "npc": "Dakrin",
+      "category": "Sovereignty",
+      "location": "Trial Grounds (Reclaimed by Nature)",
+      "layer": 2,
+      "phrase": "the player faces their own trial'a moment where anger or despair threatens to overwhelm'and chooses to breathe, to stop, to contain",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "dakrin"
+      ],
+      "fragments": {
+        "layer_0": "the player faces their own trial'a moment where anger or despair threatens to overwhelm'and chooses…",
+        "layer_1": "Clarity is choosing what you will and won't hold.",
+        "layer_2": "the player faces their own trial'a moment where anger or despair threatens to overwhelm'and chooses to breathe, to stop, to contain"
+      }
+    },
+    {
+      "id": "velinor-ache-001",
+      "glyph_name": "Glyph of Betrayal Scar",
+      "npc": "Dalen",
+      "category": "Ache",
+      "location": "Caravan Ruins (Collapsing Trade Route)",
+      "layer": 2,
+      "phrase": "Dalen trusts the player enough to show his scars, to say: I was betrayed, and I'm still here",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "dalen"
+      ],
+      "fragments": {
+        "layer_0": "Dalen trusts the player enough to show his scars, to say: I was betrayed, and…",
+        "layer_1": "Scars are proof we survived.",
+        "layer_2": "Dalen trusts the player enough to show his scars, to say: I was betrayed, and I'm still here"
+      }
+    },
+    {
+      "id": "velinor-coll-005",
+      "glyph_name": "Glyph of Shattered Corridor",
+      "npc": "Dalen",
+      "category": "Collapse",
+      "location": "Unstable ruins.",
+      "layer": 2,
+      "phrase": "Collapse is embodied in scars ? memory fractured by reckless survival",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "dalen"
+      ],
+      "fragments": {
+        "layer_0": "Collapse is embodied in scars ? memory fractured by reckless survival",
+        "layer_1": "Scars are proof we survived.",
+        "layer_2": "Collapse is embodied in scars ? memory fractured by reckless survival"
+      }
+    },
+    {
+      "id": "velinor-sove-006",
+      "glyph_name": "Glyph of Reckless Trial",
+      "npc": "Dalen",
+      "category": "Sovereignty",
+      "location": "Desert trial grounds.",
+      "layer": 2,
+      "phrase": "the player accepts risk as boundary",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "dalen"
+      ],
+      "fragments": {
+        "layer_0": "the player accepts risk as boundary",
+        "layer_1": "Scars are proof we survived.",
+        "layer_2": "the player accepts risk as boundary"
+      }
+    },
+    {
+      "id": "velinor-coll-006",
+      "glyph_name": "Glyph of Hollow Pact",
+      "npc": "Drossel",
+      "category": "Collapse",
+      "location": "Market stalls, rumor circles.",
+      "layer": 2,
+      "phrase": "the player realizes that a pact without trust is only a hollow shell, an echo of connection that cannot endure",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "drossel"
+      ],
+      "fragments": {
+        "layer_0": "the player realizes that a pact without trust is only a hollow shell, an echo…",
+        "layer_1": "Fracture arrives quietly, unannounced.",
+        "layer_2": "the player realizes that a pact without trust is only a hollow shell, an echo of connection that cannot endure"
+      }
+    },
+    {
+      "id": "velinor-coll-007",
+      "glyph_name": "Glyph of Cloaked Fracture",
+      "npc": "Drossel",
+      "category": "Collapse",
+      "location": "Thieves? lair, collapsing corridors.",
+      "layer": 2,
+      "phrase": "the player realizes fracture is not random ' it is orchestrated by deceit",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "drossel"
+      ],
+      "fragments": {
+        "layer_0": "the player realizes fracture is not random ' it is orchestrated by deceit",
+        "layer_1": "Fracture arrives quietly, unannounced.",
+        "layer_2": "the player realizes fracture is not random ' it is orchestrated by deceit"
+      }
+    },
+    {
+      "id": "velinor-pres-001",
+      "glyph_name": "Glyph of Serpent?s Silence",
+      "npc": "Drossel",
+      "category": "Presence",
+      "location": "Swamp shrine, dim alcove.",
+      "layer": 2,
+      "phrase": "Presence manifests when charm dissolves into suspicion ? silence itself becomes witness to manipulation",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "drossel"
+      ],
+      "fragments": {
+        "layer_0": "Presence manifests when charm dissolves into suspicion ? silence itself becomes witness to manipulation",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "Presence manifests when charm dissolves into suspicion ? silence itself becomes witness to manipulation"
+      }
+    },
+    {
+      "id": "velinor-sove-007",
+      "glyph_name": "Glyph of Masked Boundary",
+      "npc": "Drossel",
+      "category": "Sovereignty",
+      "location": "Market concourse, shadowed stalls.",
+      "layer": 2,
+      "phrase": "the player learns sovereignty is not clarity but concealment",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "drossel"
+      ],
+      "fragments": {
+        "layer_0": "the player learns sovereignty is not clarity but concealment",
+        "layer_1": "Clarity is choosing what you will and won't hold.",
+        "layer_2": "the player learns sovereignty is not clarity but concealment"
+      }
+    },
+    {
+      "id": "velinor-sove-008",
+      "glyph_name": "Glyph of Venomous Choice",
+      "npc": "Drossel",
+      "category": "Sovereignty",
+      "location": "Swamp trial grounds.",
+      "layer": 2,
+      "phrase": "Sovereignty manifests when choice itself becomes poisoned ? every path fractures trust",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "drossel"
+      ],
+      "fragments": {
+        "layer_0": "Sovereignty manifests when choice itself becomes poisoned ? every path fractures trust",
+        "layer_1": "Clarity is choosing what you will and won't hold.",
+        "layer_2": "Sovereignty manifests when choice itself becomes poisoned ? every path fractures trust"
+      }
+    },
+    {
+      "id": "velinor-pres-002",
+      "glyph_name": "Glyph of Echo Communion",
+      "npc": "Elka",
+      "category": "Presence",
+      "location": "Abandoned Shrine with Corelink Node",
+      "layer": 2,
+      "phrase": "the player accepts that presence can mean touching the edge of what's gone, honoring its memory through contact",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "elka"
+      ],
+      "fragments": {
+        "layer_0": "the player accepts that presence can mean touching the edge of what's gone, honoring its…",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "the player accepts that presence can mean touching the edge of what's gone, honoring its memory through contact"
+      }
+    },
+    {
+      "id": "velinor-pres-003",
+      "glyph_name": "Glyph of Tender Witness",
+      "npc": "Helia",
+      "category": "Presence",
+      "location": "Shrine Healing Alcove",
+      "layer": 2,
+      "phrase": "the player joins her in this practice: sitting beside someone in ache, offering nothing but attention",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "helia"
+      ],
+      "fragments": {
+        "layer_0": "the player joins her in this practice: sitting beside someone in ache, offering nothing but…",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "the player joins her in this practice: sitting beside someone in ache, offering nothing but attention"
+      }
+    },
+    {
+      "id": "velinor-joy-001",
+      "glyph_name": "Glyph of Sky Revelry",
+      "npc": "Elenya",
+      "category": "Joy",
+      "location": "Festival beneath open peaks",
+      "layer": 2,
+      "phrase": "the player participates fully, showing that joy is a divine blessing that restores morale and strengthens bonds",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "elenya"
+      ],
+      "fragments": {
+        "layer_0": "the player participates fully, showing that joy is a divine blessing that restores morale and…",
+        "layer_1": "The sacred emerges when we stop forcing it.",
+        "layer_2": "the player participates fully, showing that joy is a divine blessing that restores morale and strengthens bonds"
+      }
+    },
+    {
+      "id": "velinor-joy-002",
+      "glyph_name": "Glyph of Blooming Path",
+      "npc": "Elenya",
+      "category": "Joy",
+      "location": "Rare alpine flowers marking reunion trails",
+      "layer": 2,
+      "phrase": "that joy is not fleeting ' it is the spark of life returning, a promise that the path continues",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "elenya"
+      ],
+      "fragments": {
+        "layer_0": "that joy is not fleeting ' it is the spark of life returning, a promise…",
+        "layer_1": "The sacred emerges when we stop forcing it.",
+        "layer_2": "that joy is not fleeting ' it is the spark of life returning, a promise that the path continues"
+      }
+    },
+    {
+      "id": "velinor-pres-004",
+      "glyph_name": "Glyph of Veiled Silence",
+      "npc": "Elenya",
+      "category": "Presence",
+      "location": "Hidden mountain shrine, deep within echo?less caverns.",
+      "layer": 2,
+      "phrase": "In this moment, Presence is understood as trust in silence itself: a divine witness that holds ache without judgment",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "elenya"
+      ],
+      "fragments": {
+        "layer_0": "In this moment, Presence is understood as trust in silence itself: a divine witness that…",
+        "layer_1": "The sacred emerges when we stop forcing it.",
+        "layer_2": "In this moment, Presence is understood as trust in silence itself: a divine witness that holds ache without judgment"
+      }
+    },
+    {
+      "id": "velinor-trus-002",
+      "glyph_name": "Glyph of Covenant Flame",
+      "npc": "Elenya",
+      "category": "Trust",
+      "location": "The Shared Archive Building (Central Chamber with Shrine Space)",
+      "layer": 2,
+      "phrase": "the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "elenya"
+      ],
+      "fragments": {
+        "layer_0": "the player joins the ritual and recognizes that activation can be a form of preservation,…",
+        "layer_1": "The sacred emerges when we stop forcing it.",
+        "layer_2": "the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual"
+      }
+    },
+    {
+      "id": "velinor-trus-003",
+      "glyph_name": "Glyph of Shared Survival",
+      "npc": "Elenya",
+      "category": "Trust",
+      "location": "Mountain communal hearth or alpine shelter.",
+      "layer": 2,
+      "phrase": "The glyph is revealed when the player demonstrates willingness to rely on others and be relied upon",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "elenya"
+      ],
+      "fragments": {
+        "layer_0": "The glyph is revealed when the player demonstrates willingness to rely on others and be…",
+        "layer_1": "The sacred emerges when we stop forcing it.",
+        "layer_2": "The glyph is revealed when the player demonstrates willingness to rely on others and be relied upon"
+      }
+    },
+    {
+      "id": "velinor-lega-003",
+      "glyph_name": "Glyph of Emotional Inheritance",
+      "npc": "Inodora",
+      "category": "Legacy",
+      "location": "Communal fire circle",
+      "layer": 2,
+      "phrase": "the player accepts the fire, understanding legacy as warmth that survives only through transmission",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "inodora"
+      ],
+      "fragments": {
+        "layer_0": "the player accepts the fire, understanding legacy as warmth that survives only through transmission",
+        "layer_1": "The living carry forward what breath can hold.",
+        "layer_2": "the player accepts the fire, understanding legacy as warmth that survives only through transmission"
+      }
+    },
+    {
+      "id": "velinor-pres-005",
+      "glyph_name": "Glyph of Steadfast Witness",
+      "npc": "Inodora",
+      "category": "Presence",
+      "location": "Old Communal Well",
+      "layer": 2,
+      "phrase": "the player spends an entire night listening to stories and holds silent vigil, preventing the community's fear from spreading",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "inodora"
+      ],
+      "fragments": {
+        "layer_0": "the player spends an entire night listening to stories and holds silent vigil, preventing the…",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "the player spends an entire night listening to stories and holds silent vigil, preventing the community's fear from spreading"
+      }
+    },
+    {
+      "id": "velinor-joy-003",
+      "glyph_name": "Glyph of Trade Celebration",
+      "npc": "Juria",
+      "category": "Joy",
+      "location": "Bustling Harbor Market",
+      "layer": 2,
+      "phrase": "the player joins a celebration after a successful trade caravan arrives, understanding that joy can exist even in transactional relationships",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "juria"
+      ],
+      "fragments": {
+        "layer_0": "the player joins a celebration after a successful trade caravan arrives, understanding that joy can…",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "the player joins a celebration after a successful trade caravan arrives, understanding that joy can exist even in transactional relationships"
+      }
+    },
+    {
+      "id": "velinor-coll-008",
+      "glyph_name": "Glyph of Stolen Memory",
+      "npc": "Kaelen",
+      "category": "Collapse",
+      "location": "Market ruins.",
+      "layer": 2,
+      "phrase": "the player sees that stolen memory is not absence but distortion, a ledger altered in secret, a fracture that poisons the roots of belonging",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "kaelen"
+      ],
+      "fragments": {
+        "layer_0": "the player sees that stolen memory is not absence but distortion, a ledger altered in…",
+        "layer_1": "Fracture arrives quietly, unannounced.",
+        "layer_2": "the player sees that stolen memory is not absence but distortion, a ledger altered in secret, a fracture that poisons the roots of belonging"
+      }
+    },
+    {
+      "id": "velinor-sove-009",
+      "glyph_name": "Glyph of Hidden Passage",
+      "npc": "Kaelen",
+      "category": "Sovereignty",
+      "location": "Thieves lair.",
+      "layer": 2,
+      "phrase": "choice ' freedom carved in shadow",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "kaelen"
+      ],
+      "fragments": {
+        "layer_0": "choice ' freedom carved in shadow",
+        "layer_1": "Clarity is choosing what you will and won't hold.",
+        "layer_2": "choice ' freedom carved in shadow"
+      }
+    },
+    {
+      "id": "velinor-trus-004",
+      "glyph_name": "Glyth of Thieves' Honor",
+      "npc": "Kaelen",
+      "category": "Trust",
+      "location": "Swamp",
+      "layer": 2,
+      "phrase": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it is returned",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "kaelen"
+      ],
+      "fragments": {
+        "layer_0": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it…",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it is returned"
+      }
+    },
+    {
+      "id": "velinor-ache-002",
+      "glyph_name": "Glyph of Broken Vessel",
+      "npc": "Kiv",
+      "category": "Ache",
+      "location": "Kiln Ruins (Forest Clearing)",
+      "layer": 2,
+      "phrase": "the player helps him craft a new vessel and watches him break it, understanding the ritual: creation, connection, fracture, and beginning again",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "kiv"
+      ],
+      "fragments": {
+        "layer_0": "the player helps him craft a new vessel and watches him break it, understanding the…",
+        "layer_1": "Grief becomes wisdom only when fully felt.",
+        "layer_2": "the player helps him craft a new vessel and watches him break it, understanding the ritual: creation, connection, fracture, and beginning again"
+      }
+    },
+    {
+      "id": "velinor-coll-009",
+      "glyph_name": "Glyph of Fractured Rumor",
+      "npc": "Korrin",
+      "category": "Collapse",
+      "location": "Market square, crowded with voices.",
+      "layer": 2,
+      "phrase": "the player realizes that collapse can begin with sound alone, echoes that fracture trust until community itself unravels",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "korrin"
+      ],
+      "fragments": {
+        "layer_0": "the player realizes that collapse can begin with sound alone, echoes that fracture trust until…",
+        "layer_1": "Fracture arrives quietly, unannounced.",
+        "layer_2": "the player realizes that collapse can begin with sound alone, echoes that fracture trust until community itself unravels"
+      }
+    },
+    {
+      "id": "velinor-pres-006",
+      "glyph_name": "Glyph of Listening Silence",
+      "npc": "Korrin",
+      "category": "Presence",
+      "location": "Informant?s alcove, dimly lit.",
+      "layer": 2,
+      "phrase": "Presence manifests when the player resists the urge to answer, realizing silence itself is witness ? observation stronger than speech",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "korrin"
+      ],
+      "fragments": {
+        "layer_0": "Presence manifests when the player resists the urge to answer, realizing silence itself is witness…",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "Presence manifests when the player resists the urge to answer, realizing silence itself is witness ? observation stronger than speech"
+      }
+    },
+    {
+      "id": "velinor-trus-005",
+      "glyph_name": "Glyph of Whispered Pact",
+      "npc": "Korrin",
+      "category": "Trust",
+      "location": "Market alcove, behind merchant stalls.",
+      "layer": 2,
+      "phrase": "Trust manifests when restraint is chosen ? gossip becomes covenant only when handled with care",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "korrin"
+      ],
+      "fragments": {
+        "layer_0": "Trust manifests when restraint is chosen ? gossip becomes covenant only when handled with care",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "Trust manifests when restraint is chosen ? gossip becomes covenant only when handled with care"
+      }
+    },
+    {
+      "id": "velinor-trus-006",
+      "glyph_name": "Glyph of Broken Promise",
+      "npc": "Korrin",
+      "category": "Trust",
+      "location": "Merchant alcove, whispered deals.",
+      "layer": 2,
+      "phrase": "trust is shown to be fragile ' promises are only as strong as the witness who holds them",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "korrin"
+      ],
+      "fragments": {
+        "layer_0": "trust is shown to be fragile ' promises are only as strong as the witness…",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "trust is shown to be fragile ' promises are only as strong as the witness who holds them"
+      }
+    },
+    {
+      "id": "velinor-trus-007",
+      "glyph_name": "Glyph of Serpent?s Tongue",
+      "npc": "Korrin",
+      "category": "Trust",
+      "location": "Market square, crowded with voices.",
+      "layer": 2,
+      "phrase": "trust is revealed as discernment ' survival depends on knowing when speech heals and when it poisons",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "korrin"
+      ],
+      "fragments": {
+        "layer_0": "trust is revealed as discernment ' survival depends on knowing when speech heals and when…",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "trust is revealed as discernment ' survival depends on knowing when speech heals and when it poisons"
+      }
+    },
+    {
+      "id": "velinor-lega-004",
+      "glyph_name": "Glyph of Shared Weight",
+      "npc": "Lark",
+      "category": "Legacy",
+      "location": "River bridge",
+      "layer": 2,
+      "phrase": "Remembers Ravi and Nima's story and feels a sense of rebalancing",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "lark"
+      ],
+      "fragments": {
+        "layer_0": "Remembers Ravi and Nima's story and feels a sense of rebalancing",
+        "layer_1": "The living carry forward what breath can hold.",
+        "layer_2": "Remembers Ravi and Nima's story and feels a sense of rebalancing"
+      }
+    },
+    {
+      "id": "velinor-joy-004",
+      "glyph_name": "Glyph of Crafted Wonder",
+      "npc": "Lira",
+      "category": "Joy",
+      "location": "Boatwright's Workshop",
+      "layer": 2,
+      "phrase": "the player recognizes that joy comes from making something beautiful from broken things",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "lira"
+      ],
+      "fragments": {
+        "layer_0": "the player recognizes that joy comes from making something beautiful from broken things",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "the player recognizes that joy comes from making something beautiful from broken things"
+      }
+    },
+    {
+      "id": "velinor-ache-003",
+      "glyph_name": "Glyph of Sewn Ache",
+      "npc": "Mariel",
+      "category": "Ache",
+      "location": "Shrine Keeper's Alcove (Sacred Loom)",
+      "layer": 2,
+      "phrase": "the player helps her complete a cloth that holds the stories of seven lost families",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "mariel"
+      ],
+      "fragments": {
+        "layer_0": "the player helps her complete a cloth that holds the stories of seven lost families",
+        "layer_1": "Grief becomes wisdom only when fully felt.",
+        "layer_2": "the player helps her complete a cloth that holds the stories of seven lost families"
+      }
+    },
+    {
+      "id": "velinor-trus-008",
+      "glyph_name": "Glyph of Binding Cloth",
+      "npc": "Mariel",
+      "category": "Trust",
+      "location": "Shrine alcove.",
+      "layer": 2,
+      "phrase": "threads binding lives together",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "mariel"
+      ],
+      "fragments": {
+        "layer_0": "threads binding lives together",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "threads binding lives together"
+      }
+    },
+    {
+      "id": "velinor-trus-009",
+      "glyph_name": "Glyph of Apprehension",
+      "npc": "Kaelen",
+      "category": "Trust",
+      "location": "Swamp Dock",
+      "layer": 2,
+      "phrase": "If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "kaelen"
+      ],
+      "fragments": {
+        "layer_0": "If the player aligns with Kaelen, he rewards them with the true route through the…",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead"
+      }
+    },
+    {
+      "id": "velinor-lega-005",
+      "glyph_name": "Glyph of Worn Cloth",
+      "npc": "Mariel",
+      "category": "Legacy",
+      "location": "Shrine alcove",
+      "layer": 2,
+      "phrase": "Player learns to appreciate the warmth provided by cloth weaved by others hands",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "mariel"
+      ],
+      "fragments": {
+        "layer_0": "Player learns to appreciate the warmth provided by cloth weaved by others hands",
+        "layer_1": "The living carry forward what breath can hold.",
+        "layer_2": "Player learns to appreciate the warmth provided by cloth weaved by others hands"
+      }
+    },
+    {
+      "id": "velinor-ache-004",
+      "glyph_name": "Glyph of Sorrow",
+      "npc": "Nima",
+      "category": "Ache",
+      "location": "Market Overlook",
+      "layer": 2,
+      "phrase": "This is the ache of permanent loss, metabolized into wisdom",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "nima"
+      ],
+      "fragments": {
+        "layer_0": "This is the ache of permanent loss, metabolized into wisdom",
+        "layer_1": "Loss has a weight that never leaves.",
+        "layer_2": "This is the ache of permanent loss, metabolized into wisdom"
+      }
+    },
+    {
+      "id": "velinor-ache-005",
+      "glyph_name": "Glyph of Primal Oblivion",
+      "npc": "Nordia",
+      "category": "Ache",
+      "location": "Civic Center Ruins Amphitheater",
+      "layer": 2,
+      "phrase": "the player chooses to listen fully, to be the audience Corelink once was",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "nordia"
+      ],
+      "fragments": {
+        "layer_0": "the player chooses to listen fully, to be the audience Corelink once was",
+        "layer_1": "Grief becomes wisdom only when fully felt.",
+        "layer_2": "the player chooses to listen fully, to be the audience Corelink once was"
+      }
+    },
+    {
+      "id": "velinor-lega-006",
+      "glyph_name": "Glyph of Echoed Breath",
+      "npc": "Nordia the Mourning Singer (secondary arc)",
+      "category": "Legacy",
+      "location": "Tomb of Echoes, cavern where wind moves like ancestral sighs",
+      "layer": 2,
+      "phrase": "the player realizes that inheritance is not only names or records, but the living act of breathing together, ancestors sustained in every breath drawn by the living",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "nordia the mourning singer (secondary arc)"
+      ],
+      "fragments": {
+        "layer_0": "the player realizes that inheritance is not only names or records, but the living act…",
+        "layer_1": "The living carry forward what breath can hold.",
+        "layer_2": "the player realizes that inheritance is not only names or records, but the living act of breathing together, ancestors sustained in every breath drawn by the living"
+      }
+    },
+    {
+      "id": "velinor-lega-007",
+      "glyph_name": "Glyph of Returning Song",
+      "npc": "Nordia the Mourning Singer (tertiary arc)",
+      "category": "Legacy",
+      "location": "Civic Center Ruins Amphitheater",
+      "layer": 2,
+      "phrase": "Legacy is revealed as ache transformed into transmission",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "nordia the mourning singer (tertiary arc)"
+      ],
+      "fragments": {
+        "layer_0": "Legacy is revealed as ache transformed into transmission",
+        "layer_1": "The living carry forward what breath can hold.",
+        "layer_2": "Legacy is revealed as ache transformed into transmission"
+      }
+    },
+    {
+      "id": "velinor-coll-010",
+      "glyph_name": "Glyph of Quiet Collapse",
+      "npc": "Orvak",
+      "category": "Collapse",
+      "location": "Collapsed Watchtower",
+      "layer": 2,
+      "phrase": "the player joins the Watcher in these fragile repairs, realizing that collapse can be softened but never erased, held back only by steady hands and shared ritual",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "orvak"
+      ],
+      "fragments": {
+        "layer_0": "the player joins the Watcher in these fragile repairs, realizing that collapse can be softened…",
+        "layer_1": "Fracture arrives quietly, unannounced.",
+        "layer_2": "the player joins the Watcher in these fragile repairs, realizing that collapse can be softened but never erased, held back only by steady hands and shared ritual"
+      }
+    },
+    {
+      "id": "velinor-joy-005",
+      "glyph_name": "Glyph of Arrival",
+      "npc": "Rasha",
+      "category": "Joy",
+      "location": "Harbor at Dawn",
+      "layer": 2,
+      "phrase": "the player witnesses and honors these arrivals, understanding that joy is often the flip side of survival",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "rasha"
+      ],
+      "fragments": {
+        "layer_0": "the player witnesses and honors these arrivals, understanding that joy is often the flip side…",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "the player witnesses and honors these arrivals, understanding that joy is often the flip side of survival"
+      }
+    },
+    {
+      "id": "velinor-trus-010",
+      "glyph_name": "Glyph of Mutual Passage",
+      "npc": "Rasha - Ferry Operator & Rasha - Ferry Operator",
+      "category": "Trust",
+      "location": "Harbor Dock",
+      "layer": 2,
+      "phrase": "the player realizes that some bonds are built not through words but through reliable action, day after day",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "rasha - ferry operator & rasha - ferry operator"
+      ],
+      "fragments": {
+        "layer_0": "the player realizes that some bonds are built not through words but through reliable action,…",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "the player realizes that some bonds are built not through words but through reliable action, day after day"
+      }
+    },
+    {
+      "id": "velinor-pres-007",
+      "glyph_name": "Glyph of Remembrance",
+      "npc": "Ravi",
+      "category": "Presence",
+      "location": "Market Shrine (Marketplace)",
+      "layer": 2,
+      "phrase": "Ravi feels truly witnessed in his failure'not forgiven, not absolved, but simply seen",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "ravi"
+      ],
+      "fragments": {
+        "layer_0": "Ravi feels truly witnessed in his failure'not forgiven, not absolved, but simply seen",
+        "layer_1": "Sometimes bearing witness is all we can offer.",
+        "layer_2": "Ravi feels truly witnessed in his failure'not forgiven, not absolved, but simply seen"
+      }
+    },
+    {
+      "id": "velinor-lega-008",
+      "glyph_name": "Glyph of Legacy",
+      "npc": "Ravi",
+      "category": "Legacy",
+      "location": "Civic Center Rubble",
+      "layer": 2,
+      "phrase": "that legacy isn't just inheritance of memory; it's the burden of witnessing loss and choosing to stay present afterward",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "ravi"
+      ],
+      "fragments": {
+        "layer_0": "that legacy isn't just inheritance of memory; it's the burden of witnessing loss and choosing…",
+        "layer_1": "Sometimes bearing witness is all we can offer.",
+        "layer_2": "that legacy isn't just inheritance of memory; it's the burden of witnessing loss and choosing to stay present afterward"
+      }
+    },
+    {
+      "id": "velinor-coll-011",
+      "glyph_name": "Glyph of Silent Ache",
+      "npc": "Sanor",
+      "category": "Collapse",
+      "location": "Abandoned Shrine (Rural Outskirts)",
+      "layer": 2,
+      "phrase": "the player sits with her in complete silence for as long as they can bear, discovering that presence doesn't require words",
+      "required_gates": [
+        "fear",
+        "fracture",
+        "dissolution"
+      ],
+      "tags": [
+        "collapse",
+        "sanor"
+      ],
+      "fragments": {
+        "layer_0": "the player sits with her in complete silence for as long as they can bear,…",
+        "layer_1": "Fracture arrives quietly, unannounced.",
+        "layer_2": "the player sits with her in complete silence for as long as they can bear, discovering that presence doesn't require words"
+      }
+    },
+    {
+      "id": "velinor-lega-009",
+      "glyph_name": "Glyph of Hopeful Transmission",
+      "npc": "Sealina",
+      "category": "Legacy",
+      "location": "Market Square",
+      "layer": 2,
+      "phrase": "Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "sealina"
+      ],
+      "fragments": {
+        "layer_0": "Returning it to Sealina allows her to remember her family and complete her inherited dance,…",
+        "layer_1": "The living carry forward what breath can hold.",
+        "layer_2": "Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity"
+      }
+    },
+    {
+      "id": "velinor-ache-006",
+      "glyph_name": "Glyph of Echoed Longing",
+      "npc": "Sealina",
+      "category": "Ache",
+      "location": "Market Square",
+      "layer": 2,
+      "phrase": "the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "sealina"
+      ],
+      "fragments": {
+        "layer_0": "the player witnesses her struggle to reconnect with the ache of a lineage her body…",
+        "layer_1": "Grief becomes wisdom only when fully felt.",
+        "layer_2": "the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost"
+      }
+    },
+    {
+      "id": "velinor-joy-006",
+      "glyph_name": "Glyph of Verdant Reunion",
+      "npc": "Sera",
+      "category": "Joy",
+      "location": "Shrine garden after winter thaw.",
+      "layer": 2,
+      "phrase": "reunion through shared care ' growth as communal spark",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "sera"
+      ],
+      "fragments": {
+        "layer_0": "reunion through shared care ' growth as communal spark",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "reunion through shared care ' growth as communal spark"
+      }
+    },
+    {
+      "id": "velinor-joy-007",
+      "glyph_name": "Glyph of Dawn Petals",
+      "npc": "Sera",
+      "category": "Joy",
+      "location": "Shrine garden at first light.",
+      "layer": 2,
+      "phrase": "Joy is appreciated because it can be fleeting, so appreciation with shared hope is embraced",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "sera"
+      ],
+      "fragments": {
+        "layer_0": "Joy is appreciated because it can be fleeting, so appreciation with shared hope is embraced",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "Joy is appreciated because it can be fleeting, so appreciation with shared hope is embraced"
+      }
+    },
+    {
+      "id": "velinor-joy-008",
+      "glyph_name": "Glyph of Laughter's Balm",
+      "npc": "Sera",
+      "category": "Joy",
+      "location": "Market shrine courtyard.",
+      "layer": 2,
+      "phrase": "The group finds laughter in remembering jokes their loved ones used to tell",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "sera"
+      ],
+      "fragments": {
+        "layer_0": "The group finds laughter in remembering jokes their loved ones used to tell",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "The group finds laughter in remembering jokes their loved ones used to tell"
+      }
+    },
+    {
+      "id": "velinor-pres-008",
+      "glyph_name": "Glyph of Fragrant Silence",
+      "npc": "Sera",
+      "category": "Presence",
+      "location": "Herb?lined shrine alcove.",
+      "layer": 2,
+      "phrase": "Presence is revealed as subtle witness ? healing carried in quiet fragrance",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "sera"
+      ],
+      "fragments": {
+        "layer_0": "Presence is revealed as subtle witness ? healing carried in quiet fragrance",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "Presence is revealed as subtle witness ? healing carried in quiet fragrance"
+      }
+    },
+    {
+      "id": "velinor-pres-009",
+      "glyph_name": "Glyph of Quiet Bloom",
+      "npc": "Sera",
+      "category": "Presence",
+      "location": "Shrine keeper?s hut.",
+      "layer": 2,
+      "phrase": "Trust manifests when care is given and received ? survival depends on hands extended in empathy",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "sera"
+      ],
+      "fragments": {
+        "layer_0": "Trust manifests when care is given and received ? survival depends on hands extended in…",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "Trust manifests when care is given and received ? survival depends on hands extended in empathy"
+      }
+    },
+    {
+      "id": "velinor-ache-007",
+      "glyph_name": "Glyph of Dislocated Attachment",
+      "npc": "Seyla",
+      "category": "Ache",
+      "location": "Hall of Ancestral Echoes (desert tomb)",
+      "layer": 2,
+      "phrase": "the player helps the Archivist piece together one family's story, realizing that inheritance isn't just blood'it's the terrible knowledge of being known, and the ache of being suddenly unknown",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "seyla"
+      ],
+      "fragments": {
+        "layer_0": "the player helps the Archivist piece together one family's story, realizing that inheritance isn't just…",
+        "layer_1": "Grief becomes wisdom only when fully felt.",
+        "layer_2": "the player helps the Archivist piece together one family's story, realizing that inheritance isn't just blood'it's the terrible knowledge of being known, and the ache of being suddenly unknown"
+      }
+    },
+    {
+      "id": "velinor-joy-009",
+      "glyph_name": "Glyph of Hidden Warmth",
+      "npc": "Sybil",
+      "category": "Joy",
+      "location": "Hidden Forest Campsite",
+      "layer": 2,
+      "phrase": "the player returns to sing the melody back, and the loner actually smiles'a rare, fleeting expression of joy",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "sybil"
+      ],
+      "fragments": {
+        "layer_0": "the player returns to sing the melody back, and the loner actually smiles'a rare, fleeting…",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "the player returns to sing the melody back, and the loner actually smiles'a rare, fleeting expression of joy"
+      }
+    },
+    {
+      "id": "velinor-joy-010",
+      "glyph_name": "Glyph of Shared Feast",
+      "npc": "Tala",
+      "category": "Joy",
+      "location": "Communal Cooking Fire",
+      "layer": 2,
+      "phrase": "the player realizes that joy often comes not from grand celebration, but from the simple act of breaking bread with others",
+      "required_gates": [
+        "celebration",
+        "reunion",
+        "spark"
+      ],
+      "tags": [
+        "joy",
+        "tala"
+      ],
+      "fragments": {
+        "layer_0": "the player realizes that joy often comes not from grand celebration, but from the simple…",
+        "layer_1": "Liberation lives in small renewals.",
+        "layer_2": "the player realizes that joy often comes not from grand celebration, but from the simple act of breaking bread with others"
+      }
+    },
+    {
+      "id": "velinor-ache-008",
+      "glyph_name": "Glyph of Widow's Cry",
+      "npc": "Tessa",
+      "category": "Ache",
+      "location": "Shrine of Loss (Desert Temple)",
+      "layer": 2,
+      "phrase": "the player joins her song, understanding that some griefs are meant to be transmitted, not contained",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "tessa"
+      ],
+      "fragments": {
+        "layer_0": "the player joins her song, understanding that some griefs are meant to be transmitted, not…",
+        "layer_1": "Grief becomes wisdom only when fully felt.",
+        "layer_2": "the player joins her song, understanding that some griefs are meant to be transmitted, not contained"
+      }
+    },
+    {
+      "id": "velinor-pres-010",
+      "glyph_name": "Glyph of Sensory Oblivion",
+      "npc": "Thalma",
+      "category": "Presence",
+      "location": "Resonance Chamber ? a cavern where echoes collapse into stillness.",
+      "layer": 2,
+      "phrase": "the player accepts that presence can mean witnessing emptiness without trying to fill it",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "thalma"
+      ],
+      "fragments": {
+        "layer_0": "the player accepts that presence can mean witnessing emptiness without trying to fill it",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "the player accepts that presence can mean witnessing emptiness without trying to fill it"
+      }
+    },
+    {
+      "id": "velinor-ache-009",
+      "glyph_name": "Glyph of Hidden Ache",
+      "npc": "Thoran",
+      "category": "Ache",
+      "location": "Market Stall (Marketplace)",
+      "layer": 2,
+      "phrase": "the player commissions a mask that shows their true ache, then wears it publicly, allowing others to witness",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "thoran"
+      ],
+      "fragments": {
+        "layer_0": "the player commissions a mask that shows their true ache, then wears it publicly, allowing…",
+        "layer_1": "Grief becomes wisdom only when fully felt.",
+        "layer_2": "the player commissions a mask that shows their true ache, then wears it publicly, allowing others to witness"
+      }
+    },
+    {
+      "id": "velinor-sove-010",
+      "glyph_name": "Glyph of Marked Boundaries",
+      "npc": "Tovren",
+      "category": "Sovereignty",
+      "location": "Collapsing trade route.",
+      "layer": 2,
+      "phrase": "Sovereignty is clarity ? boundaries drawn to protect travelers",
+      "required_gates": [
+        "clarity",
+        "boundary",
+        "choice"
+      ],
+      "tags": [
+        "sovereignty",
+        "tovren"
+      ],
+      "fragments": {
+        "layer_0": "Sovereignty is clarity ? boundaries drawn to protect travelers",
+        "layer_1": "Clarity is choosing what you will and won't hold.",
+        "layer_2": "Sovereignty is clarity ? boundaries drawn to protect travelers"
+      }
+    },
+    {
+      "id": "velinor-trus-011",
+      "glyph_name": "Glyph of Shared Burden",
+      "npc": "Tovren",
+      "category": "Trust",
+      "location": "Merchant caravan.",
+      "layer": 2,
+      "phrase": "Trust manifests when survival depends on bearing weight together",
+      "required_gates": [
+        "communion",
+        "interdependence",
+        "faith"
+      ],
+      "tags": [
+        "trust",
+        "tovren"
+      ],
+      "fragments": {
+        "layer_0": "Trust manifests when survival depends on bearing weight together",
+        "layer_1": "Bonds are forged through reliable action.",
+        "layer_2": "Trust manifests when survival depends on bearing weight together"
+      }
+    },
+    {
+      "id": "velinor-ache-010",
+      "glyph_name": "Glyph of Infrasensory Oblivion",
+      "npc": "Saori",
+      "category": "Ache",
+      "location": "Chamber of Delayed Echoes (swamp underground)",
+      "layer": 2,
+      "phrase": "the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "saori"
+      ],
+      "fragments": {
+        "layer_0": "the player aligns light and shadow, understanding that the deepest ache is the one that…",
+        "layer_1": "Presence speaks louder than words.",
+        "layer_2": "the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named"
+      }
+    },
+    {
+      "id": "velinor-lega-010",
+      "glyph_name": "Glyph of Covenant Bone",
+      "npc": "Velka",
+      "category": "Legacy",
+      "location": "Ossuary ruins",
+      "layer": 2,
+      "phrase": "the player honors the remains, realizing legacy is covenant ' the living bound to remember the dead",
+      "required_gates": [
+        "memory",
+        "inheritance",
+        "transmission"
+      ],
+      "tags": [
+        "legacy",
+        "velka"
+      ],
+      "fragments": {
+        "layer_0": "the player honors the remains, realizing legacy is covenant ' the living bound to remember…",
+        "layer_1": "The living carry forward what breath can hold.",
+        "layer_2": "the player honors the remains, realizing legacy is covenant ' the living bound to remember the dead"
+      }
+    },
+    {
+      "id": "velinor-pres-011",
+      "glyph_name": "Glyph of Quiet Return",
+      "npc": "Helia",
+      "category": "Presence",
+      "location": "Shrine Healing Alcove",
+      "layer": 2,
+      "phrase": "Helia realizes that presence — not action — is what brings people back to themselves",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "helia"
+      ],
+      "fragments": {
+        "layer_0": "Helia realizes that presence — not action — is what brings people back to themselves",
+        "layer_1": "To witness is to honor without changing.",
+        "layer_2": "Helia realizes that presence — not action — is what brings people back to themselves"
+      }
+    },
+    {
+      "id": "velinor-pres-012",
+      "glyph_name": "Glyph of Dormant Potential",
+      "npc": "Saori",
+      "category": "Presence",
+      "location": "Hidden Broken Corelink Console",
+      "layer": 2,
+      "phrase": "the player chooses trust over fear and presses the console's cracked face, revealing latent potential in memory fragments",
+      "required_gates": [
+        "witness",
+        "touch",
+        "silence"
+      ],
+      "tags": [
+        "presence",
+        "saori"
+      ],
+      "fragments": {
+        "layer_0": "the player chooses trust over fear and presses the console's cracked face, revealing latent potential…",
+        "layer_1": "Presence speaks louder than words.",
+        "layer_2": "the player chooses trust over fear and presses the console's cracked face, revealing latent potential in memory fragments"
+      }
+    },
+    {
+      "id": "velinor-ache-011",
+      "glyph_name": "Glyph of Mirrored Loss",
+      "npc": "Saori",
+      "category": "Ache",
+      "location": "Mirror Chamber",
+      "layer": 2,
+      "phrase": "the player recognizes truth through layered empathy and chooses which reflection to honor",
+      "required_gates": [
+        "grief",
+        "loss",
+        "betrayal"
+      ],
+      "tags": [
+        "ache",
+        "saori"
+      ],
+      "fragments": {
+        "layer_0": "the player recognizes truth through layered empathy and chooses which reflection to honor",
+        "layer_1": "Presence speaks louder than words.",
+        "layer_2": "the player recognizes truth through layered empathy and chooses which reflection to honor"
+      }
+    }
+  ]
+}

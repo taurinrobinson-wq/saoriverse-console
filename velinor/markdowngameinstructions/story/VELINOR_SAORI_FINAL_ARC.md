@@ -7,7 +7,159 @@ whose shared vision fractured under the weight of guilt, desperation, and confli
 Their final encounter determines not just the game's ending, but the player's understanding of
 sacrifice, autonomy, and what friendship means in the face of collapse.
 
+## Design & Twinship Backstory
+
+- **Designers**: The CoreLink system was designed by two prodigies—Velinor (23) and Saori (22). Both
+	were petulant, brilliant, and heralded as saviors of humanity by others; to them it was first and
+	foremost a game and a challenge for their overdeveloped brains. They shared an interest in fringe
+	retro culture and first bonded over Atari games during a field trip from Velhara Technical
+	Institute to the Museum of Prehistoric Technology.
+
+- **Motivation**: Building CoreLink began as play: the one great challenge that could finally
+	entertain them when everything else failed to. Their work was intellectually intoxicating and
+	intimately collaborative—creative sparring that forged a twinship rather than romance.
+
+- **Twinship**: Both had been misunderstood and bullied throughout their lives and found solace in
+	each other. They developed a bond that is as close as two people can get without it crossing into
+	physical sexual touch or attraction. Even when they disagreed about design or ethics, they found
+	mutual respect and an emotional refuge in one another.
+
+- **Secret Cipher & The Codex**: During downtime they created a private language — a cipher encoded
+	into glyphs only they could decode. The cipher can only be decoded via the codex device and only
+	when both architects consent to reveal it. Saori gave the player a codex early in the game as a
+	gesture of permission; because Velinor was incapacitated at the time, the device initially only
+	functions to activate nearby console nodes. As Velinor recovers, she can grant further consent,
+	allowing the codex to reveal deeper layers of their cipher.
+
+- **Nocturnal Tagging**: In the late hours during their never-ending coding sessions the two
+	would go out and digitally tag their cipher on buildings, rocks, and other surfaces throughout the
+	area. These tags were a private ritual—small acts of play and rebellion—anchoring the cipher in
+	the physical world. This explains why the player discovers incoherent glyphs in random places
+	across their journey: many are secret markers left by Velinor and Saori, waiting for the codex to
+	unlock them.
+
+- **Gameplay Implication**: Players will encounter incoherent symbols across the world. As the
+	player recovers Velinor's memory and emotional coherence, the codex gradually decodes those
+	symbols. Players can revisit locations at the end of the game to view fully decoded messages and
+	thus unlock the complete backstory — fragments are delivered on first playthroughs, while a
+	subsequent pass can reveal the entire narrative arc.
+
+- **Authorship of Pre- and Post-Collapse Code**: Most pre-collapse system code was written jointly.
+	However, because Velinor became fractured during the collapse, the panic, shutdown choice, and
+	the immediate aftermath are recorded primarily in Saori's hand.
+
+## Assets: Glyphs (archival note)
+
+- **Current Asset Direction**: Full-color glyph artwork (found in `velinor/glyph_images/full-color_glyphs/`)
+	has been archived to `velinor/glyph_images/archived_full-color_glyphs/` and should be considered
+	preserved outside the canonical gameplay set. Moving forward the canonical in-game glyph set is the simplified
+	`velinor/glyph_images/codex_glyphs/` collection. The codex images are designed for in-world
+	decoding and UI presentation; full-color glyphs are preserved for historical/reference purposes
+	only and should not be used as primary gameplay assets.
+
+- **Developer Action (recommended)**: Update game and web asset references to prefer
+	`velinor/glyph_images/codex_glyphs/`. The full-color glyphs have been moved to
+	`velinor/glyph_images/archived_full-color_glyphs/`. `Glyph_Organizer.json` was sanitized to
+	prefer `codex_glyphs` (backup saved as `velinor/markdowngameinstructions/glyphs/Glyph_Organizer.json.bak`).
+	If you want reversal or a separate PR that also updates any external deployments, I can prepare it.
+
 ##
+
+	## Cipher Domains & Categories
+
+	The CoreLink cipher system appears across several domains and categories. Each cipher can be
+	fragmented in-world and gradually decoded via the codex. Below are the principal domains and
+	representative micro‑phrases to use as seed content for glyph generation and placement.
+
+	DOMAIN 1 — Pre-Collapse
+
+	- CATEGORY 1 — Velinor's Tags / Core Beliefs (Autonomy, Memory, Boundaries)
+		- “Memory belongs to the one who carries it.”
+		- “Connection is strength. Fusion is erasure.”
+		- “I protect what must remain separate.”
+		- “A hive is not a home.”
+		- “She wanted unity. I wanted truth.”
+
+	- CATEGORY 2 — Saori's Tags / Core Beliefs (Unity, Healing, Wholeness)
+		- “Pain shared becomes bearable.”
+		- “Isolation is the root of suffering.”
+		- “If we all felt everything, no one would be alone.”
+		- “She feared what I hoped for.”
+		- “I wanted to heal the world.”
+
+	- CATEGORY 3 — Team Tags / Their Twinship (Recognition, Play, Intimacy)
+		- “She spoke my language.”
+		- “We argued for fun.”
+		- “She made me feel seen.”
+		- “We built the cipher to talk without words.”
+		- “We tagged the world with our secrets.”
+		- “She laughed when I broke the emulator.”
+		- “We stayed up until dawn debugging nothing.”
+
+	DOMAIN 2 — Collapse Cascade / The Cataclysm
+
+	- These are the darkest, most fragmented ciphers — the ones Velinor hides. Use for late-game
+		discovery and very fragmented glyphs.
+		- “Too many hearts at once.”
+		- “The children were the first.”
+		- “The screams echoed through the logs.”
+		- “I felt the system die.”
+
+	DOMAIN 3 — Saori's Post-Collapse
+
+	- CATEGORY 1 — The Fracture (Fear, Misunderstanding, Betrayal)
+		- “She kept saying no.”
+		- “I thought she was afraid.”
+		- “I pushed too far.”
+		- “She thought I chose the system over her.”
+		- “I didn’t want to lose her.”
+		- “We stopped listening.”
+		- “I thought she’d understand.”
+
+	- CATEGORY 2 — Saori's Confessions (The Shutdown Sequence)
+		- “I tried to shut it down alone.”
+		- “She came back for me.”
+		- “She broke to save me, to save them.”
+		- “I heard every scream.”
+		- “I didn’t mean for any of this.”
+
+	- CATEGORY 3 — Saori's Longing (The 25-Year Vigil)
+		- “Why won’t you wake up.”
+		- “You always were so stubborn.”
+		- “Come on, stop sleeping in, you lazy bum.”
+		- “Please, I’m sorry.”
+		- “I just want you back.”
+		- “Please come back to me.”
+
+	- CATEGORY 4 — Saori's Rationalizations (The Lies She Told Herself)
+		- “It was supposed to help.”
+		- “Unity was the answer.”
+		- “I thought I could fix everything.”
+
+	- CATEGORY 5 — Saori's Fears (The Present-Day Conflict)
+		- “What if I’m wrong again.”
+		- “What if she hates me.”
+		- “What if she dissolves.”
+		- “What if the world breaks again.”
+
+	- CATEGORY 6 — Saori's Memories (The Twinship)
+		- “She spoke my language.”
+		- “We saw each other.”
+		- “She made me feel less alone.”
+		- “We built the cipher for fun.”
+
+	- CATEGORY 7 — Saori's Resentments (The Unspoken Truths)
+		- “Why did you leave me.”
+		- “Why didn’t you stop me.”
+		- “Why did you say no.”
+
+	- CATEGORY 8 — Saori's Acceptance (The Endgame)
+		- “I can let you go.”
+		- “I will carry you.”
+		- “You were right.”
+		- “I’m sorry I wasn’t.”
+		- “Goodbye, my friend.”
+
 
 ## Part I: The Architects
 
@@ -43,8 +195,8 @@ sacrifice, autonomy, and what friendship means in the face of collapse.
 **The Breaking Point**:
 
 - Saori initiates the unification protocol without consensus.
-- Velinor discovers the activation and confronts her: "You chose your vision over our friendship."
-- Saori replies, voice shaking: "I chose humanity over caution."
+- Velinor discovers the activation and confronts her: "You chose your vision over our friendship. I thought we were partners. I thought you were different. You're just another architect chasing a dream at any cost."
+- Saori replies, voice shaking: "Please don't, don't say that. I-I didn't mean for this to happen. I just thought maybe, I don't know, you couldn't see the bigger picture. I'm not like that. Please, I don't want to lose you."
 
 ##
 
@@ -63,20 +215,22 @@ The unified system couldn't process conflicting emotions from billions of minds 
 
 **Saori's Horror**:
 
-- She realizes what she's done. The screams are audible in the logs.
+- She realizes what she's done. The screams are audible in the logs. Each death rings like a flash and pulse through the system.
+- The system is destabilizing rapidly—if not shut down, it will implode entirely.
 - She tries to initiate a manual shutdown, but it requires two architects—one to guide, one to anchor.
 - Velinor is unreachable. Saori is alone.
 
 **Velinor's Return**:
 
-- Velinor hears the system's death cry across the digital ether.
+- Velinor receives a notification and feels the system's death cry across the digital ether.
 - She returns to the chamber, not to save the system, but to save Saori.
 - They stand at the precipice of total collapse.
 
 **The Sacrifice**:
 
 - Saori says, voice breaking: "I need you. I can't do this alone."
-- Velinor replies, with terrible clarity: "Then I'll anchor. You shutdown."
+- Velinor replies, with terrible clarity: "Then I'll be your anchor. You shut it down."
+- Saori nods, tears streaming: "I'm so sorry, Velinor. I'm so, so sorry."
 - Velinor connects herself to the system—not to restore it, but to stabilize it long enough for the sequence.
 - Saori inputs the shutdown codes.
 - The system dies. Velinor's consciousness fractures into 70 glyphs.

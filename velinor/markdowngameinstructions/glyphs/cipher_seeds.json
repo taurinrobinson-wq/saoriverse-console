@@ -1,0 +1,137 @@
+{
+  "domains": [
+    {
+      "name": "Pre-Collapse",
+      "categories": [
+        {
+          "name": "Velinor's Tags / Core Beliefs (Autonomy, Memory, Boundaries)",
+          "phrases": [
+            "Memory belongs to the one who carries it.",
+            "Connection is strength. Fusion is erasure.",
+            "I protect what must remain separate.",
+            "A hive is not a home.",
+            "She wanted unity. I wanted truth."
+          ]
+        },
+        {
+          "name": "Saori's Tags / Core Beliefs (Unity, Healing, Wholeness)",
+          "phrases": [
+            "Pain shared becomes bearable.",
+            "Isolation is the root of suffering.",
+            "If we all felt everything, no one would be alone.",
+            "She feared what I hoped for.",
+            "I wanted to heal the world."
+          ]
+        },
+        {
+          "name": "Team Tags / Their Twinship (Recognition, Play, Intimacy)",
+          "phrases": [
+            "She spoke my language.",
+            "We argued for fun.",
+            "She made me feel seen.",
+            "We built the cipher to talk without words.",
+            "We tagged the world with our secrets.",
+            "She laughed when I broke the emulator.",
+            "We stayed up until dawn debugging nothing."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Collapse Cascade / The Cataclysm",
+      "categories": [
+        {
+          "name": "Velinor Hides (Overload, Collapse, Death)",
+          "phrases": [
+            "Too many hearts at once.",
+            "The children were the first.",
+            "The screams echoed through the logs.",
+            "I felt the system die."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Saori's Post-Collapse",
+      "categories": [
+        {
+          "name": "The Fracture (Fear, Misunderstanding, Betrayal)",
+          "phrases": [
+            "She kept saying no.",
+            "I thought she was afraid.",
+            "I pushed too far.",
+            "She thought I chose the system over her.",
+            "I didn’t want to lose her.",
+            "We stopped listening.",
+            "I thought she’d understand."
+          ]
+        },
+        {
+          "name": "Saori's Confessions (The Shutdown Sequence)",
+          "phrases": [
+            "I tried to shut it down alone.",
+            "She came back for me.",
+            "She broke to save me, to save them.",
+            "I heard every scream.",
+            "I didn’t mean for any of this."
+          ]
+        },
+        {
+          "name": "Saori's Longing (The 25-Year Vigil)",
+          "phrases": [
+            "Why won’t you wake up.",
+            "You always were so stubborn.",
+            "Come on, stop sleeping in, you lazy bum.",
+            "Please, I’m sorry.",
+            "I just want you back.",
+            "Please come back to me."
+          ]
+        },
+        {
+          "name": "Saori's Rationalizations (The Lies She Told Herself)",
+          "phrases": [
+            "It was supposed to help.",
+            "Unity was the answer.",
+            "I thought I could fix everything."
+          ]
+        },
+        {
+          "name": "Saori's Fears (The Present-Day Conflict)",
+          "phrases": [
+            "What if I’m wrong again.",
+            "What if she hates me.",
+            "What if she dissolves.",
+            "What if the world breaks again."
+          ]
+        },
+        {
+          "name": "Saori's Memories (The Twinship)",
+          "phrases": [
+            "She spoke my language.",
+            "We saw each other.",
+            "She made me feel less alone.",
+            "We built the cipher for fun."
+          ]
+        },
+        {
+          "name": "Saori's Resentments (The Unspoken Truths)",
+          "phrases": [
+            "Why did you leave me.",
+            "Why didn’t you stop me.",
+            "Why did you say no."
+          ]
+        },
+        {
+          "name": "Saori's Acceptance (The Endgame)",
+          "phrases": [
+            "I can let you go.",
+            "I will carry you.",
+            "You were right.",
+            "I’m sorry I wasn’t.",
+            "Goodbye, my friend."
+          ]
+        }
+      ]
+    }
+  ]
+}
