@@ -6,8 +6,8 @@ import sys
 import json
 from pathlib import Path
 
-# Add engine to path
-sys.path.insert(0, str(Path(__file__).parent / 'velinor' / 'engine'))
+# Add engine to path (now in velinor/tools/, need to go up to velinor/)
+sys.path.insert(0, str(Path(__file__).parent.parent / 'engine'))
 
 from twine_adapter import StoryBuilder
 
