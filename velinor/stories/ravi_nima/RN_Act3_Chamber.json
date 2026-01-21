@@ -1,0 +1,383 @@
+{
+  "act": 3,
+  "title": "Triglyph Chamber Journey",
+  "description": "Travel to the chamber. Descent into the deep. First glimpse of Velinor. Boss encounter with Ophina's transformed state.",
+  "passages": [
+    {
+      "passage_id": "RN_A3_P01",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Journey begins. They leave marketplace for old district.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P01: // Describe the journey to old district. Atmosphere shifts. Buildings older, stranger.",
+      "author_notes": "Transition to journey arc. Sense of approaching something significant.",
+      "next_passage": "RN_A3_P02"
+    },
+    {
+      "passage_id": "RN_A3_P02",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi voices his anxiety about returning to this place",
+      "glyph_trigger": "SORROW_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_09_JOURNEY_FEAR: // Ravi: 'I haven't been back here since...' Fear in his voice.",
+      "author_notes": "Ravi is on edge. This place haunts him. Sorrow glyph pulsates with his anxiety.",
+      "next_passage": "RN_A3_P03"
+    },
+    {
+      "passage_id": "RN_A3_P03",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima shows she's been preparing. She knows the way.",
+      "glyph_trigger": "REMEMBRANCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_08_PREPARATION: // Nima: 'I've traced her steps. I know where she went.'",
+      "author_notes": "Nima's methodical research. She's been tracking Ophina's trail.",
+      "next_passage": "RN_A3_P04"
+    },
+    {
+      "passage_id": "RN_A3_P04",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player chooses how to respond to their anxiety",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A3_C01",
+          "text": "PLAYER_CHOICE_A3_C01: // Reassurance (e.g., 'We'll figure this out')",
+          "tone_impact": { "empathy": 12 },
+          "influence_impact": { "Ravi": 0.3 },
+          "next_passage": "RN_A3_P05"
+        },
+        {
+          "id": "RN_A3_C02",
+          "text": "PLAYER_CHOICE_A3_C02: // Practical (e.g., 'What should we watch for?')",
+          "tone_impact": { "awareness": 10 },
+          "influence_impact": { "Ravi": 0.2 },
+          "next_passage": "RN_A3_P05"
+        },
+        {
+          "id": "RN_A3_C03",
+          "text": "PLAYER_CHOICE_A3_C03: // Challenge (e.g., 'You're scared. Say it.')",
+          "tone_impact": { "skepticism": 10, "integration": 8 },
+          "influence_impact": { "Ravi": 0.25 },
+          "next_passage": "RN_A3_P05"
+        }
+      ],
+      "author_notes": "Player supports or challenges Ravi. All paths lead to same destination but with different rapport."
+    },
+    {
+      "passage_id": "RN_A3_P05",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "They arrive at the old district. Strange symbols everywhere.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P02: // Describe district. Buildings etched with marks. Glyphs on walls. Eerie and ancient.",
+      "author_notes": "Build atmosphere. Sense of entering somewhere that shouldn't exist in the normal world.",
+      "next_passage": "RN_A3_P06"
+    },
+    {
+      "passage_id": "RN_A3_P06",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "The Triglyph Chamber building comes into view",
+      "glyph_trigger": "SORROW_TIER1 + REMEMBRANCE_TIER1 + LEGACY_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P03: // The massive building. Three enormous glyphs carved into facade. They seem to move.",
+      "author_notes": "The chamber is immense, impossible in scale. The three glyphs are visible as tier 1.",
+      "next_passage": "RN_A3_P07"
+    },
+    {
+      "passage_id": "RN_A3_P07",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima acknowledges what they're about to enter",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_09_THRESHOLD: // Nima: 'This is where she came. This is where everything changed.'",
+      "author_notes": "Nima's voice is steady but emotional. Recognition and resolve.",
+      "next_passage": "RN_A3_P08"
+    },
+    {
+      "passage_id": "RN_A3_P08",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player decides method of entry",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A3_C04",
+          "text": "PLAYER_CHOICE_A3_C04: // Together (e.g., 'We go in together')",
+          "tone_impact": { "integration": 8 },
+          "influence_impact": { "Ravi": 0.15, "Nima": 0.15 },
+          "next_passage": "RN_A3_P09"
+        },
+        {
+          "id": "RN_A3_C05",
+          "text": "PLAYER_CHOICE_A3_C05: // Scout (e.g., 'Let me check first')",
+          "tone_impact": { "awareness": 10 },
+          "influence_impact": { "Ravi": 0.1, "Nima": -0.1 },
+          "next_passage": "RN_A3_P09"
+        },
+        {
+          "id": "RN_A3_C06",
+          "text": "PLAYER_CHOICE_A3_C06: // Support (e.g., 'I'm with you')",
+          "tone_impact": { "empathy": 12, "integration": 10 },
+          "influence_impact": { "Ravi": 0.2, "Nima": 0.2 },
+          "next_passage": "RN_A3_P09"
+        }
+      ],
+      "author_notes": "Different approaches to entering. Nima prefers solidarity; Ravi is uncertain."
+    },
+    {
+      "passage_id": "RN_A3_P09",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Interior chamber revealed. Vast, circular, covered in glyphs.",
+      "glyph_trigger": "TRANSCENDENCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P04: // Inside chamber. Impossible scale. Walls spiral to invisible ceiling. Glyphs everywhere. Center: three platforms.",
+      "author_notes": "The chamber is a character itself. Make it feel alive and aware. Glyph shimmer is present.",
+      "next_passage": "RN_A3_P10"
+    },
+    {
+      "passage_id": "RN_A3_P10",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi recognizes something in the chamber. Recognition and awe.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_10_RECOGNITION: // Ravi: 'She sent me this symbol before she went silent. It's here. All parts of it.'",
+      "author_notes": "Ravi connects the dots. Ophina left a message encoded in the chamber itself.",
+      "next_passage": "RN_A3_P11"
+    },
+    {
+      "passage_id": "RN_A3_P11",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player chooses how to interact with the chamber glyphs",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A3_C07",
+          "text": "PLAYER_CHOICE_A3_C07: // Touch center glyph (e.g., 'Let me understand')",
+          "tone_impact": { "empathy": 20, "awareness": 15 },
+          "influence_impact": { "Ravi": 0.25, "Nima": 0.25 },
+          "next_passage": "RN_A3_P12"
+        },
+        {
+          "id": "RN_A3_C08",
+          "text": "PLAYER_CHOICE_A3_C08: // Ask them (e.g., 'What do you know?')",
+          "tone_impact": { "integration": 12 },
+          "influence_impact": { "Ravi": 0.2, "Nima": 0.2 },
+          "next_passage": "RN_A3_P13"
+        }
+      ],
+      "author_notes": "High-stakes moment. Touch the glyph = tier 2 reveal for player. Or ask NPCs = slower narrative path."
+    },
+    {
+      "passage_id": "RN_A3_P12",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Player experiences glyph resonance. Brief vision.",
+      "glyph_trigger": "SORROW_TIER2 or REMEMBRANCE_TIER2 or LEGACY_TIER2",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P05: // Player touches glyph. Flash of Ophina's perspective. Understanding floods through.",
+      "author_notes": "Moment of connection. Player briefly touches Ophina's consciousness. Tier 2 revealed (they choose which).",
+      "next_passage": "RN_A3_P14"
+    },
+    {
+      "passage_id": "RN_A3_P13",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi explains the three glyphs and their meaning",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_11_EXPLANATION: // Ravi: 'She said these were a map. Not a map of place—a map of feeling.'",
+      "author_notes": "Slow path to understanding. Ravi articulates the glyph meanings.",
+      "next_passage": "RN_A3_P14"
+    },
+    {
+      "passage_id": "RN_A3_P14",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Time to descend deeper. The chamber reveals stairs going down.",
+      "glyph_trigger": "SORROW_TIER2 + REMEMBRANCE_TIER2 + LEGACY_TIER2",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P06: // Stairs spiral downward. Glyphs on walls get denser, more complex. Air colder. Vibration building.",
+      "author_notes": "Transition to final chamber. Build tension. Sense of approaching climax.",
+      "next_passage": "RN_A3_P15"
+    },
+    {
+      "passage_id": "RN_A3_P15",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima shows her research knowledge. She's been studying the glyphs.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_10_RESEARCH: // Nima: 'The further down, the more real the glyphs become. Less carved. More alive.'",
+      "author_notes": "Nima's preparation pays off. She understands what they're entering.",
+      "next_passage": "RN_A3_P16"
+    },
+    {
+      "passage_id": "RN_A3_P16",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "They reach the deepest chamber. The Glyph Throne.",
+      "glyph_trigger": "TRANSCENDENCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P07: // Final chamber. Immense. Center: massive structure—part throne, part glyph, part something else. Translucent. Something moves inside.",
+      "author_notes": "Climactic moment. The throne IS a glyph. Make it feel overwhelming and sacred.",
+      "next_passage": "RN_A3_P17"
+    },
+    {
+      "passage_id": "RN_A3_P17",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima recognizes what the throne holds. Ophina is there.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_11_OPHINA_HERE: // Nima: 'Ophina. That's where she is.'",
+      "author_notes": "Recognition. Fear. Love. Nima's control begins to crack.",
+      "next_passage": "RN_A3_P18"
+    },
+    {
+      "passage_id": "RN_A3_P18",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Ophina's echo emerges from the throne",
+      "glyph_trigger": "TRANSCENDENCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P08: // The throne moves. Light becomes luminous. Shape that is Ophina's echo appears—not her, but her transformed presence.",
+      "author_notes": "Ophina's echo is the boss encounter. Not a fight—an emotional confrontation.",
+      "next_passage": "RN_A3_P19"
+    },
+    {
+      "passage_id": "RN_A3_P19",
+      "type": "dialogue",
+      "npc": "Ophina_Echo",
+      "emotional_beat": "Ophina's echo speaks. Her consciousness that has become something other.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "OPHINA_ECHO_LINE_01: // Ophina's voice (like glyphs sound): 'I had to understand. Understanding required sacrifice.'",
+      "author_notes": "Ophina is transformed. She's not lost—she's transcended. This is her truth.",
+      "next_passage": "RN_A3_P20"
+    },
+    {
+      "passage_id": "RN_A3_P20",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player chooses how to respond to Ophina's transformed state",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A3_C09",
+          "text": "PLAYER_CHOICE_A3_C09: // Acceptance (e.g., 'Let her go. She's at peace.')",
+          "tone_impact": { "empathy": 20, "awareness": 15 },
+          "influence_impact": { "Ravi": 0.3, "Nima": 0.4 },
+          "coherence_impact": 10,
+          "next_passage": "RN_A3_P21"
+        },
+        {
+          "id": "RN_A3_C10",
+          "text": "PLAYER_CHOICE_A3_C10: // Refusal (e.g., 'Bring her back.')",
+          "tone_impact": { "skepticism": 15 },
+          "influence_impact": { "Ravi": 0.1, "Nima": -0.1 },
+          "coherence_impact": -5,
+          "next_passage": "RN_A3_P22"
+        },
+        {
+          "id": "RN_A3_C11",
+          "text": "PLAYER_CHOICE_A3_C11: // Honest question (e.g., 'Do you have regrets?')",
+          "tone_impact": { "integration": 18 },
+          "influence_impact": { "Ravi": 0.35, "Nima": 0.45 },
+          "coherence_impact": 8,
+          "next_passage": "RN_A3_P21"
+        }
+      ],
+      "author_notes": "High-stakes emotional choice. This determines how Ravi & Nima process grief."
+    },
+    {
+      "passage_id": "RN_A3_P21",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima speaks forgiveness. The moment her control dissolves.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_12_FORGIVENESS: // Nima (crying, voice steady): 'I forgive you. I hope you're where you want to be.'",
+      "author_notes": "Emotional climax. Nima releases Ophina. Love without holding.",
+      "next_passage": "RN_A3_P23"
+    },
+    {
+      "passage_id": "RN_A3_P22",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi voices the refusal, then accepts it anyway",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_12_ACCEPTANCE: // Ravi (struggling): 'We have to let her go. This is what she wanted.'",
+      "author_notes": "Ravi comes to acceptance through difficulty. Harder path, same destination.",
+      "next_passage": "RN_A3_P23"
+    },
+    {
+      "passage_id": "RN_A3_P23",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Velinor reveal. First glimpse of what lies beyond.",
+      "glyph_trigger": "TRANSCENDENCE_TIER2",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A3_P09: // Ophina's echo dissolves into light. For an instant, they see something behind the glyphs. Not the chamber. Not this world.",
+      "author_notes": "Velinor reveal. Metaphysical moment. They touch something vast and aware. Make it feel real.",
+      "next_passage": "RN_A3_P24"
+    },
+    {
+      "passage_id": "RN_A3_P24",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi speaks with awe and recognition",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_13_VELINOR: // Ravi: 'That's what Ophina found. That's what changed her.'",
+      "author_notes": "Ravi's understanding of Ophina's transcendence. Not loss—transformation into something greater.",
+      "next_passage": "RN_A3_P25"
+    },
+    {
+      "passage_id": "RN_A3_P25",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima feels the presence too. Questions what it is.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_13_PRESENCE: // Nima: 'Did you feel that? What was that?'",
+      "author_notes": "Nima's shock and wonder. They've touched something real and vast.",
+      "next_passage": "RN_A4_P01"
+    }
+  ]
+}

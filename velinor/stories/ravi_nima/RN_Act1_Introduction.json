@@ -1,0 +1,235 @@
+{
+  "act": 1,
+  "title": "Introduction & Discovery",
+  "description": "Player meets Ravi or Nima in marketplace. First encounter reveals loss.",
+  "passages": [
+    {
+      "passage_id": "RN_A1_P01",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Player enters marketplace, senses unusual energy",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A1_P01: // Describe marketplace. Set mood. Introduce Ravi or Nima as observer.",
+      "author_notes": "Establish setting (Phase 2 marketplace). Player should feel the undercurrent of sadness.",
+      "next_passage": "RN_A1_P02"
+    },
+    {
+      "passage_id": "RN_A1_P02",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi reaches out to player. First touch of vulnerability.",
+      "glyph_trigger": "SORROW_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_01_INTRO: // [High Empathy variant] Ravi perceives player as listener. Reaches out.",
+      "author_notes": "Ravi is unsettled. He notices something in the player. This is his opening.",
+      "next_passage": "RN_A1_P03"
+    },
+    {
+      "passage_id": "RN_A1_P03",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi continues, emotional weight building",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_02_INTRO: // [High Skepticism variant] Ravi defensive, questioning. Testing player.",
+      "author_notes": "Alternative dialogue branch for skeptical player energy.",
+      "next_passage": "RN_A1_P04"
+    },
+    {
+      "passage_id": "RN_A1_P04",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi continues, emotional weight building",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_03_INTRO: // [Balanced variant] Ravi cautious but hopeful. Middle path.",
+      "author_notes": "For players with balanced TONE stats.",
+      "next_passage": "RN_A1_P05"
+    },
+    {
+      "passage_id": "RN_A1_P05",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player decides whether to engage with Ravi",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A1_C01",
+          "text": "PLAYER_CHOICE_A1_C01: // Empathetic engagement (e.g., 'Tell me what you need')",
+          "tone_impact": { "empathy": 15 },
+          "influence_impact": { "Ravi": 0.3 },
+          "next_passage": "RN_A1_P06"
+        },
+        {
+          "id": "RN_A1_C02",
+          "text": "PLAYER_CHOICE_A1_C02: // Skeptical deflection (e.g., 'Not my problem')",
+          "tone_impact": { "skepticism": 10 },
+          "influence_impact": { "Ravi": 0.0 },
+          "next_passage": "RN_A2_P01"
+        },
+        {
+          "id": "RN_A1_C03",
+          "text": "PLAYER_CHOICE_A1_C03: // Neutral listening (e.g., 'I'm listening')",
+          "tone_impact": { "integration": 8 },
+          "influence_impact": { "Ravi": 0.15 },
+          "next_passage": "RN_A1_P06"
+        }
+      ],
+      "author_notes": "High-stakes opening choice. Sets player's relationship to Ravi's crisis."
+    },
+    {
+      "passage_id": "RN_A1_P06",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi confesses his burden. Guilt and desperation visible.",
+      "glyph_trigger": "SORROW_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_04_BURDEN: // Ravi mentions Nima. Mentions Ophina (deceased). Guilt surfaces.",
+      "author_notes": "Core confession. 'My partner Nima lost someone. I should have...' Trembling hand with Sorrow glyph.",
+      "next_passage": "RN_A1_P07"
+    },
+    {
+      "passage_id": "RN_A1_P07",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player responds to Ravi's vulnerability",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A1_C04",
+          "text": "PLAYER_CHOICE_A1_C04: // Ask for story (e.g., 'Tell me about Ophina')",
+          "tone_impact": { "empathy": 12, "integration": 8 },
+          "influence_impact": { "Ravi": 0.2 },
+          "next_passage": "RN_A1_P08"
+        },
+        {
+          "id": "RN_A1_C05",
+          "text": "PLAYER_CHOICE_A1_C05: // Skeptical response (e.g., 'Why should I care?')",
+          "tone_impact": { "skepticism": 10 },
+          "influence_impact": { "Ravi": -0.1 },
+          "next_passage": "RN_A1_P09"
+        },
+        {
+          "id": "RN_A1_C06",
+          "text": "PLAYER_CHOICE_A1_C06: // Investigative (e.g., 'What happened?')",
+          "tone_impact": { "awareness": 10 },
+          "influence_impact": { "Ravi": 0.15 },
+          "next_passage": "RN_A1_P08"
+        }
+      ],
+      "author_notes": "Second choice. Branches to different emotional pathways."
+    },
+    {
+      "passage_id": "RN_A1_P08",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Nima appears. First meeting of all three.",
+      "glyph_trigger": "REMEMBRANCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A1_P02: // Nima emerges from marketplace crowd. Controlled, but eyes damaged by grief.",
+      "author_notes": "Transition moment. Two glyphs now visible: Sorrow (Ravi) + ghost of Remembrance (Nima).",
+      "next_passage": "RN_A1_P10"
+    },
+    {
+      "passage_id": "RN_A1_P09",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Nima appears even if player was dismissive. Still moves story forward.",
+      "glyph_trigger": "REMEMBRANCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A1_P03: // Nima still arrives, drawn to Ravi despite player rejection.",
+      "author_notes": "Ensures story progresses even if player ignored Ravi.",
+      "next_passage": "RN_A1_P10"
+    },
+    {
+      "passage_id": "RN_A1_P10",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima notices player's presence. Assesses situation.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_01_GREETING: // [High Empathy variant] 'Why are you telling strangers? We handle this ourselves.'",
+      "author_notes": "Nima is protective, guarded. Different from Ravi's openness.",
+      "next_passage": "RN_A1_P11"
+    },
+    {
+      "passage_id": "RN_A1_P11",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima continues",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_02_GREETING: // [High Skepticism variant] 'Who is this? Another con artist?'",
+      "author_notes": "Nima skeptical of strangers.",
+      "next_passage": "RN_A1_P12"
+    },
+    {
+      "passage_id": "RN_A1_P12",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima continues",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_03_GREETING: // [Balanced variant] 'You're just meeting Ravi? Welcome to our gravity well.'",
+      "author_notes": "Nima slightly sardonic.",
+      "next_passage": "RN_A1_P13"
+    },
+    {
+      "passage_id": "RN_A1_P13",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player chooses how to acknowledge Nima's arrival",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A1_C07",
+          "text": "PLAYER_CHOICE_A1_C07: // Address Nima (e.g., 'Tell me about Ophina')",
+          "tone_impact": { "empathy": 12 },
+          "influence_impact": { "Nima": 0.2, "Ravi": 0.1 },
+          "next_passage": "RN_A1_P14"
+        },
+        {
+          "id": "RN_A1_C08",
+          "text": "PLAYER_CHOICE_A1_C08: // Ask about their relationship (e.g., 'How long have you two...')",
+          "tone_impact": { "integration": 10, "awareness": 8 },
+          "influence_impact": { "Nima": 0.25, "Ravi": 0.15 },
+          "next_passage": "RN_A1_P14"
+        },
+        {
+          "id": "RN_A1_C09",
+          "text": "PLAYER_CHOICE_A1_C09: // Listen quietly (e.g., presence without questions)",
+          "tone_impact": { "awareness": 10 },
+          "influence_impact": { "Nima": 0.15, "Ravi": 0.15 },
+          "next_passage": "RN_A1_P14"
+        }
+      ],
+      "author_notes": "Closing Act 1. Leads to Act 2."
+    },
+    {
+      "passage_id": "RN_A1_P14",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Transition to marketplace story. All three now moving forward together.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A1_P04: // They sit together. Prepare to tell the full story.",
+      "author_notes": "Act 1 closes. Leads directly to Act 2 Ophina reveal.",
+      "next_passage": "RN_A2_P01"
+    }
+  ]
+}

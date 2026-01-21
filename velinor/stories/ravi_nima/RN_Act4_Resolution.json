@@ -1,0 +1,227 @@
+{
+  "act": 4,
+  "title": "Integration & Resolution",
+  "description": "Return to daylight. Processing Ophina's transcendence. Glyph tier 3 revelations. Arc closure.",
+  "passages": [
+    {
+      "passage_id": "RN_A4_P01",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "They climb back up. Return to surface. The world is the same, but they are changed.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A4_P01: // Ascending from chamber. Stairs seem shorter now. Daylight ahead. Different people coming out.",
+      "author_notes": "Journey back. Make it feel like crossing threshold between worlds. Integration beginning.",
+      "next_passage": "RN_A4_P02"
+    },
+    {
+      "passage_id": "RN_A4_P02",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Outside. In daylight again. Processing moment.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A4_P02: // Emerge into daylight. City is normal. They are changed. Moment of stillness.",
+      "author_notes": "Emotional landing pad. Give space for processing.",
+      "next_passage": "RN_A4_P03"
+    },
+    {
+      "passage_id": "RN_A4_P03",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima speaks her realization. Ophina is not lost; she's ahead.",
+      "glyph_trigger": "REMEMBRANCE_TIER2",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_14_REALIZATION: // Nima: 'She's not lost. She's just gone where we can't follow. Yet.'",
+      "author_notes": "Nima's transformation. Grief becomes understanding. 'Yet' is crucial—future possibility.",
+      "next_passage": "RN_A4_P04"
+    },
+    {
+      "passage_id": "RN_A4_P04",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi agrees. Guilt transforms into love.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_14_TRANSFORMATION: // Ravi: 'I can love her where she is now. That's what love learns to do.'",
+      "author_notes": "Ravi's emotional breakthrough. Guilt gives way to understanding.",
+      "next_passage": "RN_A4_P05"
+    },
+    {
+      "passage_id": "RN_A4_P05",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player asks what comes next",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A4_C01",
+          "text": "PLAYER_CHOICE_A4_C01: // Future (e.g., 'What will you do now?')",
+          "tone_impact": { "integration": 12 },
+          "influence_impact": { "Ravi": 0.15, "Nima": 0.15 },
+          "next_passage": "RN_A4_P06"
+        },
+        {
+          "id": "RN_A4_C02",
+          "text": "PLAYER_CHOICE_A4_C02: // Care (e.g., 'Will you be alright?')",
+          "tone_impact": { "empathy": 15 },
+          "influence_impact": { "Ravi": 0.2, "Nima": 0.2 },
+          "next_passage": "RN_A4_P06"
+        },
+        {
+          "id": "RN_A4_C03",
+          "text": "PLAYER_CHOICE_A4_C03: // Velinor (e.g., 'What was that thing we saw?')",
+          "tone_impact": { "awareness": 18 },
+          "influence_impact": { "Ravi": 0.2, "Nima": 0.25 },
+          "next_passage": "RN_A4_P07"
+        }
+      ],
+      "author_notes": "Player determines tone of resolution. Different questions, same direction."
+    },
+    {
+      "passage_id": "RN_A4_P06",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi articulates their new path",
+      "glyph_trigger": "LEGACY_TIER2",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_15_NEW_PATH: // Ravi: 'We stay in the city. We work toward understanding. Toward eventually seeing what she saw.'",
+      "author_notes": "Ravi's new purpose. Not grief-driven. Purpose-driven.",
+      "next_passage": "RN_A4_P08"
+    },
+    {
+      "passage_id": "RN_A4_P07",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima speculates on what they glimpsed",
+      "glyph_trigger": "TRANSCENDENCE_TIER2",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_15_VELINOR_THOUGHT: // Nima: 'Whatever that was... consciousness? Presence? Velinor was aware of us.'",
+      "author_notes": "Deeper speculation. Velinor isn't a place—it's a being. They touched it.",
+      "next_passage": "RN_A4_P08"
+    },
+    {
+      "passage_id": "RN_A4_P08",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Glyph tier 3 revelations begin. Full meanings unlock.",
+      "glyph_trigger": "SORROW_TIER3 + REMEMBRANCE_TIER3 + LEGACY_TIER3",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A4_P03: // The three glyphs now fully reveal their deepest meanings. Not just symbolically—integrated into understanding.",
+      "author_notes": "Tier 3 unlock. This is interior monologue, not dialogue. Show the full semantic truth.",
+      "next_passage": "RN_A4_P09"
+    },
+    {
+      "passage_id": "RN_A4_P09",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Sorrow tier 3 revealed",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "GLYPH_REVEAL_SORROW_T3: // The glyph means: 'The shape of what breaks you, so you can learn to hold the broken pieces.'",
+      "author_notes": "Full plaintext meaning of Sorrow. It's redemptive—breaking as teaching.",
+      "next_passage": "RN_A4_P10"
+    },
+    {
+      "passage_id": "RN_A4_P10",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Remembrance tier 3 revealed",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "GLYPH_REVEAL_REMEMBRANCE_T3: // The glyph means: 'The shape of what you refuse to forget, because forgetting would mean they never mattered.'",
+      "author_notes": "Full plaintext meaning of Remembrance. Memory as active choice.",
+      "next_passage": "RN_A4_P11"
+    },
+    {
+      "passage_id": "RN_A4_P11",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Legacy tier 3 revealed",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "GLYPH_REVEAL_LEGACY_T3: // The glyph means: 'The shape of what you choose to leave behind: your old self, so the new one can emerge.'",
+      "author_notes": "Full plaintext meaning of Legacy. Not inheritance—transformation.",
+      "next_passage": "RN_A4_P12"
+    },
+    {
+      "passage_id": "RN_A4_P12",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi thanks the player. Expresses what changed.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_16_GRATITUDE: // Ravi: 'You gave us permission to let her go. That's everything.'",
+      "author_notes": "Ravi's gratitude. The player's role was witness and permission-giver.",
+      "next_passage": "RN_A4_P13"
+    },
+    {
+      "passage_id": "RN_A4_P13",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima extends offer of continued partnership",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_16_PARTNERSHIP: // Nima: 'If you're on a similar path, we're here. We understand now. We can help.'",
+      "author_notes": "Nima offers to be ally/guide for player's journey. Arc-to-arc connection.",
+      "next_passage": "RN_A4_P14"
+    },
+    {
+      "passage_id": "RN_A4_P14",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Final reflection",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A4_C04",
+          "text": "PLAYER_CHOICE_A4_C04: // Continuity (e.g., 'I'll find you when I need guidance')",
+          "tone_impact": { "integration": 10 },
+          "influence_impact": { "Ravi": 0.1, "Nima": 0.1 },
+          "next_passage": "RN_A4_P15"
+        },
+        {
+          "id": "RN_A4_C05",
+          "text": "PLAYER_CHOICE_A4_C05: // Acknowledgment (e.g., 'Thank you for letting me witness')",
+          "tone_impact": { "empathy": 12, "awareness": 8 },
+          "influence_impact": { "Ravi": 0.15, "Nima": 0.15 },
+          "next_passage": "RN_A4_P15"
+        },
+        {
+          "id": "RN_A4_C06",
+          "text": "PLAYER_CHOICE_A4_C06: // Question (e.g., 'What comes next for us?')",
+          "tone_impact": { "awareness": 12 },
+          "influence_impact": { "Ravi": 0.1, "Nima": 0.1 },
+          "next_passage": "RN_A4_P15"
+        }
+      ],
+      "author_notes": "Arc closing. Leaves door open for future encounters."
+    },
+    {
+      "passage_id": "RN_A4_P15",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Arc resolution. Transition to next arc or continuation.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A4_P04: // Ravi & Nima fade back into the city. The glyphs remain visible to you now. Everything has changed.",
+      "author_notes": "Arc ends. Influence locked. Glyphs earned. Player moves forward transformed.",
+      "next_passage": null
+    }
+  ]
+}

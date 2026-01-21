@@ -1,0 +1,223 @@
+{
+  "act": 2,
+  "title": "Ophina's Story & Emotional Crisis",
+  "description": "Full backstory of Ophina revealed. Ravi & Nima's relationship with her unfolds. Crisis deepens.",
+  "passages": [
+    {
+      "passage_id": "RN_A2_P01",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Settling into storytelling. Ravi & Nima ready to share.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A2_P01: // Marketplace quiets. They find quiet corner. Time to talk.",
+      "author_notes": "Transition from intro to deeper story. Set reflective mood.",
+      "next_passage": "RN_A2_P02"
+    },
+    {
+      "passage_id": "RN_A2_P02",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi begins telling who Ophina was before everything changed",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_05_OPHINA_BEFORE: // Describe Ophina's personality, her light, what made her special.",
+      "author_notes": "Nostalgic storytelling with undertone of grief. Paint picture of who Ophina was.",
+      "next_passage": "RN_A2_P03"
+    },
+    {
+      "passage_id": "RN_A2_P03",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima adds her own memories. Shows different relationship to Ophina.",
+      "glyph_trigger": "REMEMBRANCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_04_OPHINA_LOVE: // Nima's perspective. She loved her differently than Ravi. Show that.",
+      "author_notes": "Reveal that Nima & Ophina were partners (romantic/intimate). This is love story too.",
+      "next_passage": "RN_A2_P04"
+    },
+    {
+      "passage_id": "RN_A2_P04",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player responds to story of Ophina's life",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A2_C01",
+          "text": "PLAYER_CHOICE_A2_C01: // Honor (e.g., 'She sounds remarkable')",
+          "tone_impact": { "empathy": 18 },
+          "influence_impact": { "Nima": 0.35, "Ravi": 0.25 },
+          "next_passage": "RN_A2_P05"
+        },
+        {
+          "id": "RN_A2_C02",
+          "text": "PLAYER_CHOICE_A2_C02: // Question (e.g., 'What was she searching for?')",
+          "tone_impact": { "awareness": 15, "integration": 10 },
+          "influence_impact": { "Nima": 0.2, "Ravi": 0.2 },
+          "next_passage": "RN_A2_P05"
+        },
+        {
+          "id": "RN_A2_C03",
+          "text": "PLAYER_CHOICE_A2_C03: // Practical (e.g., 'Why the Triglyph Chamber?')",
+          "tone_impact": { "skepticism": 12 },
+          "influence_impact": { "Nima": 0.15 },
+          "next_passage": "RN_A2_P05"
+        }
+      ],
+      "author_notes": "Player validates the story. Different responses show different aspect of empathy."
+    },
+    {
+      "passage_id": "RN_A2_P05",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi's guilt begins to surface. The 'should have' moment.",
+      "glyph_trigger": "SORROW_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_06_GUILT: // Ravi: 'I should have gone with her. I should have insisted...'",
+      "author_notes": "Guilt is breaking through. This is Ravi's core wound.",
+      "next_passage": "RN_A2_P06"
+    },
+    {
+      "passage_id": "RN_A2_P06",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima's control cracks. The refusal to stop her.",
+      "glyph_trigger": "LEGACY_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_05_CHOICE: // Nima: 'She chose to go. We couldn't have stopped her if we'd wanted to.'",
+      "author_notes": "Nima's acceptance of Ophina's agency. Different from Ravi's guilt.",
+      "next_passage": "RN_A2_P07"
+    },
+    {
+      "passage_id": "RN_A2_P07",
+      "type": "narration",
+      "npc": null,
+      "emotional_beat": "Describing the moment Ophina left. The absence.",
+      "glyph_trigger": "REMEMBRANCE_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NARRATION_A2_P02: // Paint the moment she left. What they remember. The silence after.",
+      "author_notes": "Emotional peak for Act 2. Make this feel real and present, not past.",
+      "next_passage": "RN_A2_P08"
+    },
+    {
+      "passage_id": "RN_A2_P08",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi explains what Ophina found. The glyphs called to her.",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_07_OPHINA_SEARCH: // 'She said the glyphs were keys. She had to understand them.'",
+      "author_notes": "Explain Ophina's mission. Why she went to Triglyph Chamber.",
+      "next_passage": "RN_A2_P09"
+    },
+    {
+      "passage_id": "RN_A2_P09",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima reveals the cryptic last message from Ophina",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_06_LAST_MESSAGE: // Nima quotes Ophina's final message. Mysterious. Prophetic.",
+      "author_notes": "Ophina's last words. Something about cost. About consciousness. Foreshadows Act 3.",
+      "next_passage": "RN_A2_P10"
+    },
+    {
+      "passage_id": "RN_A2_P10",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player responds to the revelation of how/why Ophina disappeared",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A2_C04",
+          "text": "PLAYER_CHOICE_A2_C04: // Support Ravi (e.g., 'It's not your fault')",
+          "tone_impact": { "empathy": 15 },
+          "influence_impact": { "Ravi": 0.4 },
+          "next_passage": "RN_A2_P11"
+        },
+        {
+          "id": "RN_A2_C05",
+          "text": "PLAYER_CHOICE_A2_C05: // Challenge him (e.g., 'What could you have done?')",
+          "tone_impact": { "skepticism": 12 },
+          "influence_impact": { "Ravi": 0.2 },
+          "next_passage": "RN_A2_P11"
+        },
+        {
+          "id": "RN_A2_C06",
+          "text": "PLAYER_CHOICE_A2_C06: // Witness (e.g., 'I hear you')",
+          "tone_impact": { "awareness": 10, "empathy": 12 },
+          "influence_impact": { "Ravi": 0.45 },
+          "next_passage": "RN_A2_P11"
+        }
+      ],
+      "author_notes": "Emotional crossroads. Player validates or challenges Ravi's guilt."
+    },
+    {
+      "passage_id": "RN_A2_P11",
+      "type": "dialogue",
+      "npc": "Ravi",
+      "emotional_beat": "Ravi makes the ask. Will player help them find Ophina?",
+      "glyph_trigger": null,
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "RAVI_LINE_08_THE_ASK: // Ravi (with Nima) asks: 'Will you come with us to find her?'",
+      "author_notes": "The commitment point. This is when the arc escalates. Player accepts the quest.",
+      "next_passage": "RN_A2_P12"
+    },
+    {
+      "passage_id": "RN_A2_P12",
+      "type": "dialogue",
+      "npc": "Nima",
+      "emotional_beat": "Nima reinforces the ask. Shows her determination.",
+      "glyph_trigger": "SORROW_TIER1 + REMEMBRANCE_TIER1 + LEGACY_TIER1",
+      "tone_impact": {},
+      "influence_impact": {},
+      "content": "NIMA_LINE_07_DETERMINATION: // Nima: 'We're going. With or without you.'",
+      "author_notes": "All three glyphs shimmer together for first time. They're connected.",
+      "next_passage": "RN_A2_P13"
+    },
+    {
+      "passage_id": "RN_A2_P13",
+      "type": "choice_point",
+      "npc": "Player",
+      "emotional_beat": "Player commits or hesitates. Major branching point.",
+      "glyph_trigger": null,
+      "gates": [],
+      "choices": [
+        {
+          "id": "RN_A2_C07",
+          "text": "PLAYER_CHOICE_A2_C07: // Full commitment (e.g., 'I'll help you find answers')",
+          "tone_impact": { "integration": 15 },
+          "influence_impact": { "Ravi": 0.5, "Nima": 0.5 },
+          "next_passage": "RN_A3_P01"
+        },
+        {
+          "id": "RN_A2_C08",
+          "text": "PLAYER_CHOICE_A2_C08: // Hesitation (e.g., 'Let me think about it')",
+          "tone_impact": { "skepticism": 8 },
+          "influence_impact": { "Ravi": 0.15, "Nima": 0.15 },
+          "next_passage": "RN_A3_P01"
+        },
+        {
+          "id": "RN_A2_C09",
+          "text": "PLAYER_CHOICE_A2_C09: // Question (e.g., 'Why me?')",
+          "tone_impact": { "awareness": 12 },
+          "influence_impact": { "Ravi": 0.25, "Nima": 0.25 },
+          "next_passage": "RN_A3_P01"
+        }
+      ],
+      "author_notes": "Act 2 closing. No turning back. All players move to Act 3 (chamber journey), but with different influence values."
+    }
+  ]
+}

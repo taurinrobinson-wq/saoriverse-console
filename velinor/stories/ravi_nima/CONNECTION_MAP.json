@@ -1,0 +1,203 @@
+{
+  "arc_id": "RAVI_NIMA_V1",
+  "title": "Ravi & Nima Arc - Story Connection Map",
+  "description": "Modular architecture allowing players to encounter Ravi and Nima in any order while maintaining coherent narrative.",
+  "design_principle": "Vertical slice packets can be played independently or sequentially. All paths lead to same emotional climax but with different relation values.",
+  "passages_total": 67,
+  "story_structure": {
+    "acts": 4,
+    "entry_points": 2,
+    "branch_points": 15,
+    "resolution_point": 1
+  },
+  "entry_points": [
+    {
+      "id": "ENTRY_RAVI_MARKETPLACE",
+      "passage": "RN_A1_P02",
+      "trigger": "Player enters marketplace (Phase 2+)",
+      "npc_present": "Ravi",
+      "preconditions": [],
+      "alternative_entry": "ENTRY_NIMA_MARKETPLACE"
+    },
+    {
+      "id": "ENTRY_NIMA_MARKETPLACE",
+      "passage": "RN_A1_P01",
+      "trigger": "Player enters marketplace (Phase 2+)",
+      "npc_present": "Nima",
+      "preconditions": [],
+      "alternative_entry": "ENTRY_RAVI_MARKETPLACE",
+      "note": "Alternative entry if player approaches Nima first instead of Ravi"
+    }
+  ],
+  "branch_structure": {
+    "ACT_1": {
+      "description": "Introduction. Meet Ravi or Nima. Learn of Ophina.",
+      "passages": ["RN_A1_P01 to RN_A1_P14"],
+      "choice_points": 3,
+      "outcomes": {
+        "full_engagement": { "influence_gain": 0.3 },
+        "skeptical_deflection": { "influence_gain": 0.0 },
+        "neutral_listening": { "influence_gain": 0.15 }
+      },
+      "convergence_point": "RN_A1_P14",
+      "leads_to": "ACT_2"
+    },
+    "ACT_2": {
+      "description": "Ophina's story. Emotional depth. Crisis escalation. The Ask.",
+      "passages": ["RN_A2_P01 to RN_A2_P13"],
+      "choice_points": 2,
+      "outcomes": {
+        "honor_ophina": { "influence_gain": 0.35 },
+        "challenge_guilt": { "influence_gain": 0.2 },
+        "witness_grief": { "influence_gain": 0.45 }
+      },
+      "convergence_point": "RN_A2_P13",
+      "leads_to": "ACT_3",
+      "note": "All players move to Act 3 regardless of choice, but with different influence values and Coherence impact"
+    },
+    "ACT_3": {
+      "description": "Triglyph Chamber journey. Boss encounter. Velinor reveal.",
+      "passages": ["RN_A3_P01 to RN_A3_P25"],
+      "choice_points": 4,
+      "outcomes": {
+        "acceptance_path": { "coherence_impact": 10, "influence_gain": 0.35 },
+        "refusal_path": { "coherence_impact": -5, "influence_gain": 0.1 },
+        "honest_question_path": { "coherence_impact": 8, "influence_gain": 0.4 }
+      },
+      "convergence_point": "RN_A3_P25",
+      "leads_to": "ACT_4",
+      "note": "All paths lead to same climactic Velinor reveal, but emotional weight differs"
+    },
+    "ACT_4": {
+      "description": "Integration. Glyph tier 3 reveals. Resolution.",
+      "passages": ["RN_A4_P01 to RN_A4_P15"],
+      "choice_points": 2,
+      "outcomes": {
+        "future_focus": { "influence_lock": "current_value" },
+        "care_focus": { "influence_lock": "current_value + 0.2" },
+        "velinor_curiosity": { "influence_lock": "current_value + 0.25" }
+      },
+      "convergence_point": "RN_A4_P15",
+      "leads_to": null,
+      "note": "Arc resolution. Influence values locked. Player ready for next arc."
+    }
+  },
+  "glyph_progression": {
+    "SORROW": {
+      "tier_1": { "passage": "RN_A1_P02", "visibility": "visual_shimmer", "context": "Ravi's guilt" },
+      "tier_2": { "passage": "RN_A3_P12", "visibility": "recognized", "context": "Chamber glyph contact (optional)" },
+      "tier_3": { "passage": "RN_A4_P09", "visibility": "plaintext", "meaning": "The breaking that teaches" }
+    },
+    "REMEMBRANCE": {
+      "tier_1": { "passage": "RN_A1_P08", "visibility": "ghost_shimmer", "context": "Nima's arrival" },
+      "tier_2": { "passage": "RN_A2_P03", "visibility": "solid", "context": "Ophina's story" },
+      "tier_3": { "passage": "RN_A4_P10", "visibility": "plaintext", "meaning": "What you refuse to forget" }
+    },
+    "LEGACY": {
+      "tier_1": { "passage": "RN_A2_P06", "visibility": "flicker", "context": "Ophina's choice revealed" },
+      "tier_2": { "passage": "RN_A3_P23", "visibility": "recognized", "context": "Velinor reveal" },
+      "tier_3": { "passage": "RN_A4_P11", "visibility": "plaintext", "meaning": "What you choose to leave behind" }
+    },
+    "TRANSCENDENCE": {
+      "tier_1": { "passage": "RN_A3_P06", "visibility": "overwhelming", "context": "Chamber facade glyphs" },
+      "tier_2": { "passage": "RN_A3_P23", "visibility": "conscious_contact", "context": "Velinor reveal" },
+      "tier_3": { "passage": null, "visibility": "locked", "context": "Revealed in future arc" }
+    }
+  },
+  "influence_tracking": {
+    "ravi_influence": {
+      "start": 0.0,
+      "min_possible": 0.0,
+      "max_possible": 0.8,
+      "key_moments": [
+        { "passage": "RN_A1_P05", "choice": "RN_A1_C01", "delta": 0.3 },
+        { "passage": "RN_A2_P04", "choice": "RN_A2_C01", "delta": 0.25 },
+        { "passage": "RN_A3_P20", "choice": "RN_A3_C09", "delta": 0.3 }
+      ]
+    },
+    "nima_influence": {
+      "start": 0.0,
+      "min_possible": -0.1,
+      "max_possible": 0.8,
+      "key_moments": [
+        { "passage": "RN_A1_P05", "choice": "RN_A1_C01", "delta": 0.2 },
+        { "passage": "RN_A2_P04", "choice": "RN_A2_C01", "delta": 0.35 },
+        { "passage": "RN_A3_P20", "choice": "RN_A3_C11", "delta": 0.45 }
+      ]
+    }
+  },
+  "tone_stat_impacts": {
+    "ACT_1": {
+      "total_empathy_swing": "0 to +27",
+      "total_skepticism_swing": "0 to +20",
+      "total_integration_swing": "0 to +18",
+      "total_awareness_swing": "0 to +20"
+    },
+    "ACT_2": {
+      "total_empathy_swing": "0 to +18",
+      "total_skepticism_swing": "0 to +12",
+      "total_integration_swing": "0 to +15",
+      "total_awareness_swing": "0 to +15"
+    },
+    "ACT_3": {
+      "total_empathy_swing": "0 to +20",
+      "total_skepticism_swing": "0 to +15",
+      "total_integration_swing": "0 to +18",
+      "total_awareness_swing": "0 to +25",
+      "coherence_impact": "-5 to +10"
+    },
+    "ACT_4": {
+      "total_empathy_swing": "0 to +15",
+      "total_integration_swing": "0 to +12",
+      "total_awareness_swing": "0 to +20"
+    }
+  },
+  "emotional_beats": [
+    { "act": 1, "beat": "Ravi reaches out—vulnerability on surface" },
+    { "act": 1, "beat": "Nima arrives—control meets openness" },
+    { "act": 2, "beat": "Ophina's story—love and loss together" },
+    { "act": 2, "beat": "The Ask—player commits or hesitates" },
+    { "act": 3, "beat": "Chamber descent—tension building" },
+    { "act": 3, "beat": "Boss encounter—Ophina's transformed state" },
+    { "act": 3, "beat": "Velinor reveal—metaphysical moment" },
+    { "act": 4, "beat": "Acceptance—grief transforms to understanding" },
+    { "act": 4, "beat": "Glyph revelations—meanings unlock" },
+    { "act": 4, "beat": "Gratitude—player's role honored" }
+  ],
+  "modularity_notes": {
+    "independence": "Each act is self-contained. Act 1 can be played, then later Acts 2-4. Arc pauses naturally at multiple points.",
+    "replayability": "Three major branch paths (Act 3 choice) create different emotional outcomes but same story resolution.",
+    "arc_connectivity": "End of Act 4 (RN_A4_P15) leaves player open to enter other NPC arcs. Ravi & Nima can be referenced/encountered later.",
+    "order_flexibility": "While this arc has linear progression, Ravi and Nima can be encountered before/after other NPCs. This arc doesn't require other NPCs to be done first."
+  },
+  "placeholders_by_type": {
+    "narration": 10,
+    "ravi_dialogue": 16,
+    "nima_dialogue": 16,
+    "ophina_echo_dialogue": 1,
+    "player_choices": 26,
+    "glyph_revelations": 4
+  },
+  "total_placeholders": 73,
+  "authoring_workflow": {
+    "step_1": "Copy JSON files to local editor",
+    "step_2": "Replace all NARRATION_* placeholders with prose (descriptions, atmosphere, passage transitions)",
+    "step_3": "Replace all RAVI_LINE_* placeholders with Ravi's dialogue (26 unique lines across 5 tiers)",
+    "step_4": "Replace all NIMA_LINE_* placeholders with Nima's dialogue (26 unique lines across 5 tiers)",
+    "step_5": "Replace all PLAYER_CHOICE_* placeholders with player dialogue options",
+    "step_6": "Replace all GLYPH_REVEAL_* placeholders with glyph tier 3 plaintext meanings",
+    "step_7": "Test in game engine: verify all branches, gates, influence tracking",
+    "step_8": "Run 3+ playthroughs: high empathy path, skepticism path, balanced path",
+    "step_9": "Polish dialogue, adjust emotional beats, lock for next arc"
+  },
+  "quality_gates": [
+    "All 73 placeholders filled with actual content",
+    "Ravi & Nima feel like distinct characters with unique voices (not similar)",
+    "Emotional beats land at intended moments (especially Act 3 climax)",
+    "Glyph progressions feel earned, not arbitrary",
+    "All three choice paths (acceptance, refusal, honest question) feel valid",
+    "3+ full playthroughs complete without breaking bugs",
+    "Influence values track correctly (start at 0.0, end at 0.5-0.8)",
+    "TONE stat impacts feel proportional to choices made"
+  ]
+}
