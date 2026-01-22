@@ -168,6 +168,10 @@ Tier 3 (Plaintext Layer) → Decoded meaning
 - Reveal hidden story layers
 - Lead to rare/premium endings
 
+**NEW (Post-2.0):**
+- **Glyph #76 (Shared Dawn)** — Joy/Presence hybrid. Catalytic tryst between Sera & Korrin. Unlocks Grounded Presence tool. Gated on Empathy 50+/Trust 50+, Coherence 50+, multi-NPC encounters.
+- **Glyph of Severed Covenant** — Ache/Legacy hybrid. Malrik & Elenya pre-collapse bond revelation. Unlocks alternative ending branches. Gated on Coherence 70+, Empathy 70+/Integration 70+, 4+ encounters with each NPC.
+
 ### 3-Tier Cipher
 
 **Example:**
@@ -370,6 +374,23 @@ passage = {
 3. Create response pools with trait-tagged responses
 4. Test with `test_npc_manager.py`
 
+**NEW (Post-2.0) NPC Updates:**
+
+**Sera & Korrin (Shared Dawn Arc)**:
+- New joint glyph encounter (#76): Market courtyard at dawn, post-tryst scene
+- New tools: Grounded Presence (Sera/Korrin tool, requires Presence 70+), Sacred Silence (Korrin tool, requires high influence post-Shared Dawn)
+- Influence mechanics: Sera/Korrin each gain +0.20 if player honors silence, -0.15 if exposed
+- Dialogue: Private reflection branches unlock post-encounter for each NPC
+- See `markdowngameinstructions/npcs/MARKETPLACE_NPC_ROSTER.md` (Sera lines 128+, Korrin lines 240+) for full profiles
+
+**Malrik & Elenya (Severed Bond Arc)**:
+- Optional revelation arc gated on Coherence 70+, Empathy 70+/Integration 70+, 4+ encounters each
+- Glyph of Severed Covenant unlocks post-revelation
+- Both NPCs show deeper vulnerability; Malrik admits past connection, Elenya reveals deliberate memory severance
+- Influence: Malrik +0.25, Elenya +0.25 (if encounter facilitated)
+- Integration with ending branches: Alternative final passage where both contribute to player's emotional resolution
+- See `markdowngameinstructions/story/story_arcs.md` ("The Severed Bond" section) for full encounter sequence
+
 ---
 
 ## Engine Architecture
@@ -385,11 +406,13 @@ passage = {
 - Player interacts with multiple NPCs
 - Complex choice chains emerge
 - Influence system becomes visible
+- NEW: Sera/Korrin Shared Dawn encounter becomes available (mid-game potential)
 
 **Phase 3: Collapse** (Pivot)
 - Central dramatic event forces commitment
 - Coherence pressure increases
 - Endings become visible in possibility space
+- NEW: Optional Malrik/Elenya revelation arc becomes available (coherence-dependent)
 
 **Phase 4: Endings** (Late game)
 - Player pursues specific emotional arc

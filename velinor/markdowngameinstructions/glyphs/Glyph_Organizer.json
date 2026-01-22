@@ -3770,6 +3770,89 @@
         "velinor/overlays/Glyph_Codex2.svg",
         "velinor/overlays/Glyph_Codex2.png"
       ]
+    },
+    {
+      "domain": "Joy",
+      "id": 76,
+      "theme": "Longing, creative spark, quiet intimacy",
+      "npc": {
+        "name": "Sera the Herb Novice & Korrin the Gossip",
+        "role": "Healer & Informant",
+        "npc_images": [
+          "npcs/sera_the_herb_novice.png",
+          "npcs/Korrin_sitting_nobg.png"
+        ],
+        "background_images": [
+          "velinor/glyph_images/codex_glyphs/CL_worn_cloth.PNG"
+        ]
+      },
+      "glyph_name": "Glyph of Shared Dawn",
+      "location": "Market courtyard at first light",
+      "storyline_summary": "The player rounds a corner in the market courtyard at dawn and finds Sera and Korrin sitting close, sharing a quiet moment neither expected. Their hands hover near each other but don't touch—held back by fear that gossip spreads quickly. Sera looks grounded and full. Korrin looks brighter, less jaded. The player doesn't need to be told what happened; the morning light shows it. The glyph manifests when the player witnesses this moment and understands that healing isn't only solemn ritual and grief-work—sometimes it emerges from a single fleeting encounter where two wounded people reawaken something in each other.",
+      "story_seed": "catalytic_tryst_encounter",
+      "tone_integration": [
+        "tender",
+        "intimate",
+        "quiet",
+        "hopeful"
+      ],
+      "remnants_integration": [
+        "emotional_awakening",
+        "relational_heat"
+      ],
+      "player_choices": [
+        "observe_silently",
+        "honor_their_privacy",
+        "mention_it_to_sera",
+        "mention_it_to_korrin",
+        "keep_their_secret"
+      ],
+      "owner": "Sera the Herb Novice, Korrin the Gossip",
+      "remnants_impact": {
+        "empathy": 0.08,
+        "joy": 0.10,
+        "presence": 0.07,
+        "trust": 0.05
+      },
+      "narrative_triggers": [
+        "player_explores_marketplace_at_dawn",
+        "after_sufficient_interactions_with_both"
+      ],
+      "memory_fragments": [],
+      "tags": [
+        "joy",
+        "longing",
+        "intimacy",
+        "catalysis",
+        "unspoken",
+        "witness",
+        "warmth"
+      ],
+      "alignment_paths": {
+        "path_honor_silence": {
+          "description": "Player chooses to honor their secret",
+          "influence_impact": {
+            "sera": 0.15,
+            "korrin": 0.15
+          },
+          "dialogue_unlock": "shared_dawn_acknowledged"
+        },
+        "path_expose_it": {
+          "description": "Player spreads the news",
+          "influence_impact": {
+            "sera": -0.20,
+            "korrin": -0.25,
+            "community": -0.10
+          },
+          "consequence": "both_become_guarded"
+        }
+      },
+      "original_storyline_text": "The player rounds a corner in the market courtyard at dawn and finds Sera and Korrin sitting close, sharing a quiet moment neither expected. Their hands hover near each other but don't touch—held back by fear that gossip spreads quickly. Sera looks grounded and full. Korrin looks brighter, less jaded. The player doesn't need to be told what happened; the morning light shows it. The glyph manifests when the player witnesses this moment and understands that healing isn't only solemn ritual and grief-work—sometimes it emerges from a single fleeting encounter where two wounded people reawaken something in each other. This is not romance; this is catalysis. A shared dawn where neither person expected to find warmth. If the player mentions it, both NPCs become guarded (gossip is a threat to what they share). If the player honors their silence, both gain influence, and new dialogue branches unlock exploring what this moment means for each of them.",
+      "glyph_images": [
+        "velinor/overlays/Glyph_Codex_tablet.png",
+        "velinor/overlays/Glyph_Codex2.svg",
+        "velinor/overlays/Glyph_Codex2.png"
+      ]
     }
   ],
   "meta": {

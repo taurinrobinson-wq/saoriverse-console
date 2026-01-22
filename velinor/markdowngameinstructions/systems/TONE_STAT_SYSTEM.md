@@ -147,3 +147,54 @@ stats serve the story, not the reverse.
 - [ ] Script NPC resonance ripple effects based on sphere weights
 - [ ] Create ending branch gating based on TONE profiles
 - [ ] Test emergent gameplay with varying TONE profiles
+
+---
+
+## New Content Integration: Sera/Korrin & Malrik/Elenya
+
+### Glyph of Shared Dawn — Trait & Gate Requirements
+
+**Trigger Gates**:
+- **Empathy** 50+ OR **Trust** 50+ (primary gate)
+- **Presence** encounters with both Sera (2+) AND Korrin (2+)
+- **Coherence** 50+ (player must be emotionally oriented enough to recognize the moment)
+
+**Post-Encounter Trait Activation**:
+- **Presence** trait unlocks new dialogue branch tier with both NPCs
+- **Joy** trait deepens understanding of the catalytic nature of the encounter
+- **Empathy** increases by 1-2 depending on player response path
+
+**NPC Influence Gating (Post-Encounter)**:
+- Sera influence 0.5+ AND Korrin influence 0.5+ → Unlocks "Grounded Presence" tool
+- Grounded Presence tool requires Presence 70+ to use effectively
+- Using tool allows player to sense NPC emotional authenticity across all marketplace encounters
+
+### Glyph of Severed Covenant — Trait & Gate Requirements
+
+**Trigger Gates** (Optional Arc):
+- **Coherence** 70+ (player must recognize the emotional architecture)
+- **Empathy** 70+ OR **Integration** 70+ (player must understand necessary trauma)
+- 4+ encounters with Malrik (Archive sequences)
+- 4+ encounters with Elenya (Shrine/ritual sequences)
+- **Possession** of Glyph of Fractured Memory AND Glyph of Measured Step
+
+**Post-Revelation Trait Activation**:
+- **Legacy** trait unlocks new dialogue tier with both NPCs (understanding inherited loss)
+- **Ache** trait deepens with Malrik (grief given articulation)
+- **Presence** trait deepens with Elenya (witness to deliberate severance)
+
+**Integration with Ending Paths**:
+- If Malrik/Elenya revelation discovered AND both have high influence (0.85+): Unlocks alternative final passage where both contribute to player's emotional resolution
+- Glyph of Severed Covenant becomes key to **Legacy** ending branch (recognizing what was lost and choosing to honor it)
+- Both NPCs' final dialogue reflects integration of past into present identity
+
+### Coherence Implications
+
+**Shared Dawn Encounter**:
+- Players with high **Joy** + high **Presence** already have balanced coherence
+- If player exposes relationship: Coherence -3 (community fracture creates internal conflict)
+
+**Malrik/Elenya Revelation**:
+- Players must achieve Coherence 70+ to unlock arc (gated to emotionally integrated players)
+- Discovering and facilitating encounter: Coherence +5 (integration of necessary loss)
+- Ending path shifts toward **Legacy** or **Acceptance** branches

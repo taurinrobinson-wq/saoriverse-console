@@ -127,38 +127,51 @@ foundation of NPC interaction in the early to mid-game.
 
 ### 4. Sera the Herb Novice
 
-**Appearance**: Young (early 20s), freckled, green-stained fingers, carries bundles of herbs bound with twine. Her hair is tied back pragmatically.
+**Appearance**: Young (early 20s), freckled, green-stained fingers, carries bundles of herbs bound with twine. Her hair is tied back pragmatically. After the Shared Dawn encounter, she carries herself with slightly more openness—less defensive posture.
 
 **Age**: Early 20s
 
 **Role**: Shrine acolyte, ritual keeper, Empathy-aligned, healer-in-training
 
-**Personality**: Gentle, curious, shy initially but warm once trust is built. She carries less cynicism than older NPCs.
+**Personality**: Gentle, curious, shy initially but warm once trust is built. She carries less cynicism than older NPCs. Post-Shared Dawn: slightly more grounded, less tentative, more willing to laugh.
 
-**TONE Affinity**: Empathy (primary), Observation (secondary)
+**TONE Affinity**: Empathy (primary), Observation (secondary), Presence (post-Shared Dawn)
 
 **Tools She Offers**:
 
 - **Flicker Ritual**: Reveals which paths will soon collapse. Unlocked at high Empathy.
 - **Healing Salve**: Restores emotional resonance in glyph chambers. Unlocked at high Trust + Empathy.
+- **Grounded Presence**: New tool unlocked post-Shared Dawn (high influence with both Sera and Korrin). Allows player to sense when NPCs are emotionally present vs. performing their roles.
 
 **Sample Dialogue**:
 
 - *First Meeting*: "Oh! You're the one Nima mentioned. She doesn't mention many people. That's a good sign."
 - *High Empathy*: "I think... I think you understand what loss feels like. It helps, knowing others do too."
 - *Teaching Ritual*: "Nima taught me this. It's about stillness, not force. Feel the moment before the break."
+- *Post-Shared Dawn (if player honored silence)*: "Thank you for not... making it into something it wasn't. That moment was just what it was. That was enough."
+- *Post-Shared Dawn (if player exposed it)*: "You told people. He's been quieter since then. I don't think we can... I need to focus on the shrine work again."
 
 **Quest Hooks**:
 
 - Gather rare herbs in dangerous zones (minor, paired with Nima)
 - Teach the player a ritual meditation (optional, deepens Empathy stat)
 - Discover Sera's pre-collapse family (optional lore)
+- **NEW**: Shared Dawn encounter at market dawn (optional, triggers after 2+ encounters with both Sera and Korrin, Empathy/Trust 50+)
+- **NEW**: Post-Shared Dawn reflection dialogue (unlocked if player honored the secret; explores what that night meant for Sera's sense of aliveness)
 
 **Resonance Triggers**:
 
 - **High Empathy**: She opens quickly, offers guidance, becomes an ally.
 - **Low Empathy**: She remains polite but distant, limits help.
 - **Pairing with Nima**: Their resonance amplifies. Treat Nima well, Sera softens further.
+- **Pairing with Korrin (Post-Shared Dawn)**: If both have high influence post-encounter, they become noticeably lighter when near each other. Their dialogues gain warmth and shared humor. If player exposed the relationship, both withdraw and their joint quest content becomes inaccessible.
+- **High Presence (Post-Shared Dawn)**: Sera becomes more vulnerable, more willing to explore questions of what joy feels like, whether brief moments matter, what it means to be surprised by aliveness.
+
+**Influence Modifications (Post-Shared Dawn)**:
+
+- **Path A - Honor Silence**: Sera gains +0.20 influence. She trusts the player's discretion. Later dialogue unlocks where she explores the encounter's meaning privately.
+- **Path B - Mention It (Kindly)**: Sera gains +0.10 influence (acknowledge, don't pry). She becomes cautiously friendly but slightly guarded.
+- **Path C - Expose/Tease**: Sera loses -0.15 influence. She becomes distant, protective of Korrin, withholds help. Relationship repairs slowly over multiple high-Empathy encounters.
 
 ##
 
@@ -239,38 +252,51 @@ foundation of NPC interaction in the early to mid-game.
 
 ### 7. Korrin the Gossip
 
-**Appearance**: Middle-aged, flamboyant scarf (changes color based on mood), quick darting eyes, always whispering with merchants. Fidgety hands, fingers always moving.
+**Appearance**: Middle-aged, flamboyant scarf (changes color based on mood; after Shared Dawn, the scarf is noticeably brighter), quick darting eyes, always whispering with merchants. Fidgety hands, fingers always moving. Post-Shared Dawn: sits more still sometimes, eyes softer.
 
 **Age**: Early 50s
 
 **Role**: Informant, rumor-spreader, Observation-aligned information broker
 
-**Personality**: Nervous, always seeking angles, but not malicious—just caught in the economy of information. Gossip is currency, and Korrin is the banker.
+**Personality**: Nervous, always seeking angles, but not malicious—just caught in the economy of information. Gossip is currency, and Korrin is the banker. Post-Shared Dawn: slightly less manic, more capable of genuine quiet, more protective of things that matter.
 
-**TONE Affinity**: Observation (primary), Trust (weak)
+**TONE Affinity**: Observation (primary), Trust (weak), Presence (post-Shared Dawn)
 
 **Tools He Offers**:
 
 - **Rumor of Routes**: Information about upcoming path collapses. Unlocked at high Observation.
 - **Gossip Protection**: NPCs less likely to spread rumors about the player. Unlocked at Trust (hard to achieve with Korrin).
+- **Sacred Silence**: New tool unlocked post-Shared Dawn (high influence). Korrin helps player keep secrets, protect vulnerable NPCs, shield moments that matter from community gossip. Paradoxically, the gossip-man becomes the keeper of confidences.
 
 **Sample Dialogue**:
 
 - *First Meeting*: "You're new. Everyone's talking. Want to know what? Costs a glyph fragment."
 - *High Observation*: "You notice things. Smart. Thieves are moving south quarter. Ravi doesn't know yet."
 - *On Gossip*: "I don't make the news, I just... distribute it. People need to know what's happening."
+- *Post-Shared Dawn (if player honored silence)*: "You kept our secret. That matters. In a marketplace full of voices, you stayed quiet. Not everyone can do that."
+- *Post-Shared Dawn (if player exposed it)*: "You spread it. I watched people's eyes when they heard. The walls went back up. We're careful now. More careful than we should have to be."
 
 **Quest Hooks**:
 
 - Gather information about merchant movements (minor intelligence quest)
 - Discover the source of spreading rumors (medium quest, ties to Kaelen)
 - Learn who Korrin once was—pre-collapse role (optional lore)
+- **NEW**: Shared Dawn encounter at market dawn (optional, triggers after 2+ encounters with both Sera and Korrin, Empathy/Trust 50+)
+- **NEW**: Post-Shared Dawn reflection dialogue (unlocked if player honored the secret; explores what that night meant for Korrin's sense of possibility beyond cynicism)
 
 **Resonance Triggers**:
 
 - **High Observation**: He shares real intelligence, becomes useful.
-- **High Trust**: Almost impossible with Korrin—he fundamentally doubts loyalty.
-- **Fractured with Merchants**: His rumors can damage NPC trust spheres.
+- **High Trust**: Almost impossible with Korrin—he fundamentally doubts loyalty. Post-Shared Dawn: becomes slightly more achievable if player honored the Sera secret (Trust can reach 0.65+ instead of ceiling at 0.50).
+- **Fractured with Merchants**: His rumors can damage NPC trust spheres. Post-Shared Dawn: he becomes more selective about what he spreads.
+- **Pairing with Sera (Post-Shared Dawn)**: If both have high influence post-encounter, their scenes together gain warmth and unexpected tenderness. Gossip stops flowing about them; Korrin actively protects the moment from community commentary. If player exposed the relationship, both withdraw; Korrin becomes protective/guarded; new shared content becomes inaccessible.
+- **High Presence (Post-Shared Dawn)**: Korrin becomes more reflective, less performative. He admits uncertainty, explores what it means to be surprised by gentleness, questions whether he's been hiding behind gossip to avoid real connection.
+
+**Influence Modifications (Post-Shared Dawn)**:
+
+- **Path A - Honor Silence**: Korrin gains +0.25 influence (strongest gain). He considers the player an ally in a deeper way. Later dialogue unlocks where he explores the encounter's meaning—gratitude for being witnessed without judgment, confusion about feeling less broken.
+- **Path B - Mention It (Kindly)**: Korrin gains +0.10 influence. He appreciates the acknowledgment but remains slightly guarded, aware that knowledge increases vulnerability.
+- **Path C - Expose/Tease**: Korrin loses -0.20 influence (greater loss than most NPCs). He feels betrayed not because the secret got out, but because it confirms his fear: vulnerability gets weaponized. Relationship repairs very slowly. He becomes harder, more cynical, more protective of information as his only real possession.
 
 ##
 
