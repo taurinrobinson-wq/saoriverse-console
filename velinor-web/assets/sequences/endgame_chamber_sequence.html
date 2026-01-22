@@ -44,11 +44,11 @@
             box-shadow: 0 0 40px rgba(0, 255, 255, 0.08);
         }
 
-        /* Chamber background */
+        /* Chamber background - Velinor ideal concept art */
         .chamber-bg {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #0f1a2a 0%, #1a2438 50%, #0f1a2a 100%);
+            background: url('../../public/velinor/backgrounds/Velinor_ideal.png') center/cover no-repeat;
             opacity: 1;
             z-index: 1;
         }
@@ -65,23 +65,23 @@
         .door {
             position: absolute;
             top: 50%;
-            width: 45%;
-            height: 85%;
             transform: translateY(-50%);
-            background-size: cover;
+            width: auto;
+            height: 84%;
+            background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: #1a1a1a;
+            background-color: transparent;
             border: none;
         }
 
         .door.left {
-            left: 5%;
+            left: 6.2%;
             background-image: url('../../public/velinor/doors/door_left.png');
         }
 
         .door.right {
-            right: 5%;
+            right: 6.2%;
             background-image: url('../../public/velinor/doors/door_right.png');
         }
 
@@ -120,11 +120,11 @@
             pointer-events: none;
         }
 
-        /* End image */
+        /* End image - Saori revelation (player looks right) */
         .end-image {
             position: absolute;
             inset: 0;
-            background: url('../../public/velinor/backgrounds/saori_velinor_end.png') center/cover no-repeat;
+            background: url('../../public/velinor/backgrounds/velinor_saori_end_reveal.png') center/cover no-repeat;
             background-size: cover;
             background-position: center;
             opacity: 0;
@@ -374,16 +374,16 @@
                 }
             });
 
-            // Door animation (2.5s)
+            // Door animation (2.5s) - pixel-perfect alignment using xPercent
             tl.to(doorsLeft, {
-                x: '-100%',
+                xPercent: -100,
                 duration: 2.5,
                 ease: 'power2.out',
                 transformOrigin: '0% 50%'
             }, 0);
 
             tl.to(doorsRight, {
-                x: '100%',
+                xPercent: 100,
                 duration: 2.5,
                 ease: 'power2.out',
                 transformOrigin: '100% 50%'
@@ -487,9 +487,9 @@
             // Jump to advancing stage
             gsap.killTweensOf([doorsLeft, doorsRight, voidEl, voidGlow, endImage, endImageFrame]);
 
-            // Set positions - doors fully open
-            doorsLeft.style.transform = 'translateX(-100%)';
-            doorsRight.style.transform = 'translateX(100%)';
+            // Set positions - doors fully open (preserve vertical centering)
+            doorsLeft.style.transform = 'translateY(-50%) translateX(-100%)';
+            doorsRight.style.transform = 'translateY(-50%) translateX(100%)';
             voidEl.style.opacity = '1';
             voidGlow.style.opacity = '0.2';
             endImage.style.opacity = '1';
@@ -506,8 +506,8 @@
         function reset() {
             gsap.killTweensOf('*');
 
-            doorsLeft.style.transform = 'translateX(0)';
-            doorsRight.style.transform = 'translateX(0)';
+            doorsLeft.style.transform = 'translateY(-50%) translateX(0)';
+            doorsRight.style.transform = 'translateY(-50%) translateX(0)';
             voidEl.style.opacity = '0';
             voidGlow.style.opacity = '0';
             endImage.style.opacity = '0';
