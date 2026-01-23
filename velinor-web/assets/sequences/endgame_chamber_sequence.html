@@ -42,13 +42,14 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 0 40px rgba(0, 255, 255, 0.08);
+            transform-origin: 50% 60%;
         }
 
         /* Chamber background - Velinor ideal concept art */
         .chamber-bg {
             position: absolute;
             inset: 0;
-            background: url('../../public/velinor/backgrounds/Velinor_ideal.png') center/cover no-repeat;
+            background: url('../../public/assets/backgrounds/Velinor_Ideal.png') center/cover no-repeat;
             opacity: 1;
             z-index: 1;
         }
@@ -59,14 +60,15 @@
             width: 100%;
             height: 100%;
             inset: 0;
-            z-index: 50;
+            z-index: 20;
+            pointer-events: none;
         }
 
         .door {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: auto;
+            width: 35%;
             height: 84%;
             background-size: contain;
             background-position: center;
@@ -77,12 +79,14 @@
 
         .door.left {
             left: 6.2%;
-            background-image: url('../../public/velinor/doors/door_left.png');
+            background-image: url('../../public/assets/doors/door_left.png');
+            background-position: right center;
         }
 
         .door.right {
             right: 6.2%;
-            background-image: url('../../public/velinor/doors/door_right.png');
+            background-image: url('../../public/assets/doors/door_right.png');
+            background-position: left center;
         }
 
         .door-seam {
@@ -102,42 +106,14 @@
             left: -1px;
         }
 
-        /* Void */
-        .void {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, #0066cc 0%, #001a4d 70%, #000810 100%);
-            opacity: 0;
-            z-index: 5;
-        }
-
-        .void-glow {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
-            opacity: 0;
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        /* End image - Saori revelation (player looks right) */
+        /* End image - Saori revelation (16:9, full-screen) */
         .end-image {
             position: absolute;
             inset: 0;
-            background: url('../../public/velinor/backgrounds/velinor_saori_end_reveal.png') center/cover no-repeat;
-            background-size: cover;
-            background-position: center;
+            background: url('../../public/assets/backgrounds/Velinor_Saori_End_Reveal.png') center/cover no-repeat;
+            background-attachment: fixed;
             opacity: 0;
-            z-index: 5;
-        }
-
-        .end-image-frame {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.1) 0%, transparent 60%);
-            opacity: 0;
-            z-index: 6;
-            pointer-events: none;
+            z-index: 10;
         }
 
         /* Particle canvas */
@@ -152,7 +128,7 @@
         .chamber-frame {
             position: absolute;
             inset: 0;
-            background: url('../../public/velinor/doors/chamber_frame.png') center/cover no-repeat;
+            background: url('../../public/assets/doors/chamber_frame.png') center/cover no-repeat;
             z-index: 100;
             pointer-events: none;
         }
@@ -256,14 +232,11 @@
         <div class="stage-display">
             <div class="chamber-bg"></div>
             <canvas id="particleCanvas"></canvas>
+            <div class="end-image"></div>
             <div class="doors-container">
                 <div class="door left"></div>
                 <div class="door right"></div>
             </div>
-            <div class="void"></div>
-            <div class="void-glow"></div>
-            <div class="end-image"></div>
-            <div class="end-image-frame"></div>
             <div class="chamber-frame"></div>
             <div class="prompt">Press forward to advance through the threshold...</div>
         </div>
@@ -286,7 +259,7 @@
     <script>
         // ============ STATE ============
         const state = {
-            stage: 'awaiting', // awaiting → doors_opening → void_reveal → void_contemplate → advancing → complete
+            stage: 'awaiting', // awaiting → doors_opening → velinor_ideal → advancing → complete
             progress: 0,
             totalDuration: 0,
         };
@@ -298,9 +271,6 @@
         const voidEl = document.querySelector('.void');
         const voidGlow = document.querySelector('.void-glow');
         const endImage = document.querySelector('.end-image');
-        const endImageFrame = document.querySelector('.end-image-frame');
-        const prompt = document.querySelector('.prompt');
-        const stageLabel = document.getElementById('stageLabel');
         const progressFill = document.querySelector('.progress-fill');
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
@@ -340,8 +310,8 @@
         }
 
         function updateParticles(dt) {
-            // Emit new particles during void reveal
-            if (state.stage === 'void_reveal' || state.stage === 'void_contemplate' || state.stage === 'advancing') {
+            // Emit new particles during advancing stage only
+            if (state.stage === 'advancing') {
                 for (let i = 0; i < 0.3; i++) {
                     particles.push(new Particle());
                 }
@@ -364,7 +334,7 @@
         function startSequence() {
             state.stage = 'doors_opening';
             state.progress = 0;
-            stageLabel.textContent = 'Stage: Doors Opening...';
+            stageLabel.textContent = 'Stage: Threshold Opening...';
             prompt.style.opacity = '0';
 
             const tl = gsap.timeline({
@@ -374,7 +344,7 @@
                 }
             });
 
-            // Door animation (2.5s) - pixel-perfect alignment using xPercent
+            // Door animation (2.5s)
             tl.to(doorsLeft, {
                 xPercent: -100,
                 duration: 2.5,
@@ -389,38 +359,22 @@
                 transformOrigin: '100% 50%'
             }, 0);
 
-            // Void appears
-            tl.to(voidEl, {
-                opacity: 1,
-                duration: 1,
-                ease: 'power1.inOut'
-            }, 0.5);
-
-            tl.to(voidGlow, {
-                opacity: 1,
-                duration: 2,
-                ease: 'power1.inOut'
-            }, 0.5);
-
-            // Transition to void contemplate
+            // Transition to velinor ideal view
             tl.call(() => {
-                state.stage = 'void_contemplate';
-                stageLabel.textContent = 'Stage: Void Contemplation...';
+                state.stage = 'velinor_ideal';
+                stageLabel.textContent = 'Stage: Velhara Before the Collapse';
                 prompt.style.opacity = '1';
-                prompt.textContent = 'Press forward to advance through the threshold...';
+                prompt.textContent = 'Press forward to step through the threshold...';
                 document.getElementById('advanceBtn').disabled = false;
             });
-
-            // Hold on void (3s)
-            tl.to({}, { duration: 3 });
         }
 
         function advanceSequence() {
-            if (state.stage !== 'void_contemplate') return;
+            if (state.stage !== 'velinor_ideal') return;
 
             state.stage = 'advancing';
             state.progress = 0;
-            stageLabel.textContent = 'Stage: Progressive Reveal...';
+            stageLabel.textContent = 'Stage: Crossing the Threshold';
             prompt.style.opacity = '0';
             document.getElementById('advanceBtn').disabled = true;
 
@@ -431,72 +385,58 @@
                 }
             });
 
-            // Fade in end image (7s)
+            // Zoom in through the doorway (4s)
+            tl.to(stageDisplay, {
+                scale: 1.4,
+                duration: 4,
+                ease: 'power2.inOut'
+            }, 0);
+
+            tl.call(() => {
+                stageLabel.textContent = 'Stage: Turning Toward Saori';
+            });
+
+            // Fade out velinor ideal, fade in Saori reveal (2s)
+            tl.to(document.querySelector('.chamber-bg'), {
+                opacity: 0,
+                duration: 2,
+                ease: 'power1.inOut'
+            }, '>-0.5');
+
             tl.to(endImage, {
                 opacity: 1,
-                duration: 7,
-                ease: 'power1.inOut'
-            }, 0);
-
-            // Fade void glow
-            tl.to(voidGlow, {
-                opacity: 0.2,
-                duration: 7,
-                ease: 'power1.inOut'
-            }, 0);
-
-            // End image frame glow
-            tl.to(endImageFrame, {
-                opacity: 0.8,
                 duration: 2,
-                delay: 5,
                 ease: 'power1.inOut'
-            });
-
-            // Camera movement simulation (subtle zoom/pan effect)
-            tl.to(stageDisplay, {
-                '--zoom': 1.08,
-                duration: 7,
-                ease: 'power1.inOut'
-            }, 0);
-
-            // Transition to complete
-            tl.call(() => {
-                state.stage = 'complete';
-                stageLabel.textContent = 'Stage: Complete — Revelation';
-                prompt.style.opacity = '1';
-                prompt.textContent = 'The journey ends. The truth endures.';
-            });
-
-            // Final fade out
-            tl.to({}, { duration: 3 });
-            tl.to([endImage, endImageFrame], {
-                opacity: 0,
-                duration: 4,
-                ease: 'power1.inOut',
-                delay: 2
             }, '<');
 
+            // Reset scale so Saori is full-screen (2s)
+            tl.to(stageDisplay, {
+                scale: 1,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, '>-0.5');
+
             tl.call(() => {
-                stageLabel.textContent = 'Sequence Complete';
-                prompt.style.opacity = '0';
+                state.stage = 'complete';
+                stageLabel.textContent = 'Stage: Complete — Saori\'s Revelation';
+                prompt.style.opacity = '1';
+                prompt.textContent = 'The journey ends. The truth endures.';
             });
         }
 
         function skipToReveal() {
             // Jump to advancing stage
-            gsap.killTweensOf([doorsLeft, doorsRight, voidEl, voidGlow, endImage, endImageFrame]);
+            gsap.killTweensOf([doorsLeft, doorsRight, stageDisplay]);
 
-            // Set positions - doors fully open (preserve vertical centering)
+            // Set positions - doors fully open
             doorsLeft.style.transform = 'translateY(-50%) translateX(-100%)';
             doorsRight.style.transform = 'translateY(-50%) translateX(100%)';
-            voidEl.style.opacity = '1';
-            voidGlow.style.opacity = '0.2';
+            document.querySelector('.chamber-bg').style.opacity = '0';
             endImage.style.opacity = '1';
-            endImageFrame.style.opacity = '0.8';
+            stageDisplay.style.scale = '1';
 
             state.stage = 'complete';
-            stageLabel.textContent = 'Stage: Complete — Revelation';
+            stageLabel.textContent = 'Stage: Complete — Saori\'s Revelation';
             prompt.style.opacity = '1';
             prompt.textContent = 'The journey ends. The truth endures.';
             document.getElementById('advanceBtn').disabled = true;
@@ -508,11 +448,9 @@
 
             doorsLeft.style.transform = 'translateY(-50%) translateX(0)';
             doorsRight.style.transform = 'translateY(-50%) translateX(0)';
-            voidEl.style.opacity = '0';
-            voidGlow.style.opacity = '0';
-            endImage.style.opacity = '0';
-            endImageFrame.style.opacity = '0';
             document.querySelector('.chamber-bg').style.opacity = '1';
+            endImage.style.opacity = '0';
+            stageDisplay.style.scale = '1';
 
             particles.length = 0;
 
