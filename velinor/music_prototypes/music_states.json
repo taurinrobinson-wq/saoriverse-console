@@ -1,0 +1,49 @@
+{
+  "states": [
+    {
+      "id": 0,
+      "name": "fracture_whisper",
+      "velocity": 24,
+      "duration_ms": 80,
+      "mute_factor": 0.9,
+      "description": "Almost-silent, tinny, half-fretted. Use heavy palm-mute or light finger pressure."
+    },
+    {
+      "id": 1,
+      "name": "strained_hint",
+      "velocity": 40,
+      "duration_ms": 120,
+      "mute_factor": 0.7,
+      "description": "Wiry and present. Slight increase in sustain and harmonic energy."
+    },
+    {
+      "id": 2,
+      "name": "threaded_tension",
+      "velocity": 64,
+      "duration_ms": 180,
+      "mute_factor": 0.45,
+      "description": "Clearer pitch, still thin. Good for intermediate narrative beats."
+    },
+    {
+      "id": 3,
+      "name": "near_presence",
+      "velocity": 90,
+      "duration_ms": 260,
+      "mute_factor": 0.15,
+      "description": "Warm, resonant. The motif almost resolves here."
+    },
+    {
+      "id": 4,
+      "name": "embodied_resolve",
+      "velocity": 110,
+      "duration_ms": 360,
+      "mute_factor": 0.0,
+      "description": "Full-bodied tone; release and narrative payoff."
+    }
+  ],
+  "mappings": {
+    "REMNANTS": "maps to 0..4 (low = fracture, high = embodied)",
+    "TONE": "continuous multiplier applied to velocity (0.0..1.0)",
+    "player_proximity": "adds +1 state when within close proximity to older self"
+  }
+}
