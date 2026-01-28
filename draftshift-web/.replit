@@ -1,0 +1,14 @@
+# Replit configuration for DraftShift
+# Runs FastAPI backend on port 8000, serves built React frontend
+
+run = "python -m uvicorn draftshift_web.api:app --reload --host 0.0.0.0 --port 8000"
+
+[env]
+PYTHONUNBUFFERED = "1"
+
+[nix]
+channel = "stable-23_11"
+
+[[ports]]
+localPort = 8000
+externalPort = 8000
