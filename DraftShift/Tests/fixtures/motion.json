@@ -1,0 +1,90 @@
+{
+  "type": "motion",
+  "attorney": {
+    "name": "Taurin Robinson",
+    "title": "Esq.",
+    "bar_number": "312345",
+    "firm": "Robinson Legal Group",
+    "address": "123 Market Street, Suite 400",
+    "city_state_zip": "Los Angeles, CA 90017",
+    "phone": "Tel: (213) 555-0199",
+    "email": "trobinson@draftshiftlaw.com",
+    "party": "Plaintiff"
+  },
+  "case": {
+    "county": "Los Angeles",
+    "case_number": "22STCV12345",
+    "parties": {
+      "plaintiff": "JOHN DOE, an individual",
+      "defendant": "ACME CORPORATION, a Delaware corporation"
+    }
+  },
+  "title": "PLAINTIFF'S NOTICE OF MOTION AND MOTION TO COMPEL FURTHER RESPONSES TO INTERROGATORIES",
+  "notice": {
+    "text": [
+      "PLEASE TAKE NOTICE that on March 3, 2026, at 8:30 a.m., or as soon thereafter as the matter may be heard, Plaintiff will move the Court for an order compelling Defendant to provide further responses to Plaintiff's Interrogatories, Set One."
+    ]
+  },
+  "arguments": [
+    {
+      "level": 1,
+      "text": "INTRODUCTION"
+    },
+    {
+      "paragraph": "This motion seeks straightforward discovery responses that Defendant has improperly withheld. Defendant's responses are incomplete, evasive, and fail to comply with California Code of Civil Procedure § 2030.210."
+    },
+    {
+      "level": 1,
+      "text": "LEGAL STANDARD"
+    },
+    {
+      "level": 2,
+      "text": "Discovery Must Be Liberally Granted"
+    },
+    {
+      "paragraph": "California law favors broad discovery to ensure cases are resolved on their merits. Code of Civil Procedure § 2017.010 provides that parties may discover any matter relevant to the pending action, whether or not it is admissible at trial."
+    },
+    {
+      "level": 2,
+      "text": "Proper Interrogatory Responses Required"
+    },
+    {
+      "paragraph": "Each interrogatory response must be complete, straightforward, and made in good faith. Evasive or incomplete responses are subject to a motion to compel under Code of Civil Procedure § 2030.300."
+    },
+    {
+      "level": 1,
+      "text": "ARGUMENT"
+    },
+    {
+      "level": 2,
+      "text": "Defendant's Responses Are Incomplete and Evasive"
+    },
+    {
+      "paragraph": "Defendant's responses to Interrogatories Nos. 1-5 consist entirely of generic objections and fail to provide substantive answers. The responses cite boilerplate privilege and work product objections without adequate factual support."
+    },
+    {
+      "level": 2,
+      "text": "Defendant Cannot Hide Behind Blanket Objections"
+    },
+    {
+      "paragraph": "A party cannot simply object to every interrogatory on the grounds of privilege or work product without providing a detailed factual basis for each objection. Defendant must either produce the requested documents or make a detailed showing of why each interrogatory is objectionable."
+    },
+    {
+      "level": 1,
+      "text": "CONCLUSION"
+    },
+    {
+      "paragraph": "For the foregoing reasons, Plaintiff respectfully requests that the Court grant this motion and order Defendant to provide full and complete responses to Interrogatories, Set One, within ten days of this order."
+    }
+  ],
+  "pos": {
+    "server_name": "Mary Johnson",
+    "server_county": "Los Angeles",
+    "document_title": "Notice of Motion and Motion to Compel Further Responses to Interrogatories",
+    "service_date": "January 28, 2026",
+    "service_method": "electronic service via email",
+    "service_location": "Los Angeles, California",
+    "execution_date": "January 28, 2026",
+    "execution_location": "Los Angeles"
+  }
+}

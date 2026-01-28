@@ -1,0 +1,98 @@
+# ============================================================
+#  CALIFORNIA CIVIL CITATION RULES — DRAFTSHIFT CONFIG
+# ============================================================
+
+citation:
+  mode: "california"   # california | bluebook | custom
+
+  # ----------------------------------------------------------
+  #  CASE NAMES
+  # ----------------------------------------------------------
+  case_names:
+    italicize: true
+    small_caps: false
+    bold: false
+    underline: false
+    comma_after_name: true
+    spacing_after: " "
+
+  # ----------------------------------------------------------
+  #  REPORTERS
+  # ----------------------------------------------------------
+  reporters:
+    california:
+      format: "{volume} {reporter} {page}"
+    federal:
+      format: "{volume} {reporter} {page}"
+    generic:
+      format: "{volume} {reporter} {page}"
+
+  # ----------------------------------------------------------
+  #  PIN CITES
+  # ----------------------------------------------------------
+  pin_cites:
+    separator: ", "
+    prefix: ""
+    italicize: false
+
+  # ----------------------------------------------------------
+  #  PARENTHETICALS
+  # ----------------------------------------------------------
+  parentheticals:
+    spacing_before: " "
+    spacing_after: ""
+    year_required: true
+    court_optional: true
+
+  # ----------------------------------------------------------
+  #  SHORT FORM
+  # ----------------------------------------------------------
+  short_form:
+    enabled: true
+    format: "{short_name}, {pin}"
+
+  # ----------------------------------------------------------
+  #  STATUTES
+  # ----------------------------------------------------------
+  statutes:
+    california_format: "Cal. {code} § {section}"
+    federal_format: "{title} U.S.C. § {section}"
+    spacing_after_symbol: " "
+
+  # ----------------------------------------------------------
+  #  SECONDARY SOURCES
+  # ----------------------------------------------------------
+  secondary_sources:
+    default:
+      title_italic: true
+      title_quotes: false
+      author_format: "{last}, {first}"
+      year_in_parentheses: true
+      edition_format: "{edition} ed."
+      publisher_format: "{publisher}"
+      section_symbol: "§"
+      section_spacing: " "
+      pin_separator: ", "
+      database_format: "({database} {year})"
+
+    treatise:
+      title_italic: true
+      author_required: true
+      section_symbol: "§"
+      year_in_parentheses: true
+
+    law_review:
+      title_italic: false
+      title_quotes: true
+      volume_first: true
+      page_required: true
+
+    restatement:
+      title_italic: true
+      section_symbol: "§"
+      edition_format: "{edition} Restatement"
+
+    practice_guide:
+      title_italic: true
+      publisher_format: "{publisher}"
+      database_format: "({database})"

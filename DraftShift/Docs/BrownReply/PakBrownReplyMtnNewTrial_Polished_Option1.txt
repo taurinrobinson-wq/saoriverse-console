@@ -1,0 +1,35 @@
+Reply Section — Credibility and Record (Polished Option 1)
+
+Introduction — framing the dispute
+Plaintiffs' opposition asks the Court to re‑weigh the record and expand liability beyond the narrow holdings of the Final Statement of Decision (SOD). That request cannot succeed: the SOD already performs the heavy lifting Plaintiffs ask this Court to do. The SOD (1) carefully calibrates the scope of any fiduciary duty, (2) credits evidence of voluntary transfers and substitutions, and (3) limits liability to narrow breaches by Ms. Pak. Plaintiffs’ contrary narrative depends on reading isolated fragments of testimony as dispositive while ignoring the SOD’s controlling credibility and documentary findings. (See SOD, generally, pp. 3; 20–24; 25–29; 30–33.)
+
+I. Credibility — the Court's controlling findings and their consequences
+- The court found Mr. Brown’s trial testimony of limited weight and repeatedly relied on corroborated documentary and third‑party testimony in its factual findings. Where Brown’s testimony conflicted with contemporaneous records and corroborated witness statements, the SOD credited the documentary record and corroboration over Brown’s memory. (SOD pp. 3; 20–22.)
+- The court placed little weight on Ms. Pak’s self‑serving and shifting testimony; it noted numerous contradictions that undermined her account. That assessment is dispositive: where Plaintiffs’ theory depends on treating Ms. Pak as a trustworthy witness of her own conduct, the SOD rejects that premise. (SOD §C, pp. 25–29.)
+
+Consequence: Credibility findings are not peripheral background — they are the foundation of the SOD’s legal conclusions. Any argument that depends on accepting Brown’s unsupported recollections or Pak’s changing explanations must yield to the SOD’s direct credibility rulings.
+
+II. Liability — what the SOD actually holds (and what Plaintiffs ignore)
+- No conversion/theft by Norris. The SOD expressly finds Plaintiffs did not prove that the Norris defendants took or retained plaintiffs’ property; rather, the record demonstrates voluntary transfers and substitutions of counsel commencing in 2019. (SOD pp. 20–24; see also SOD p.22 (substitutions and consensual transfers).)
+- Pak’s limited breaches. The SOD isolates the discrete fiduciary breaches the court found: improper use of firm/client funds for lead purchases and mismanagement of certain rent/lease obligations. The court found Pak’s lead purchases (a portion of which totaled approximately $188,500) were improperly funded from firm/client accounts and therefore constituted breach and elder‑abuse exposure as to Pak alone. (SOD §C and §D, pp. 25–29; 30.)
+- Duty timeline. Critically, the SOD fixes the operative duty window. Judge Recana found Pak owed fiduciary duties through April 1, 2020 (and with respect to certain work thereafter), and the court tied post‑2020 liability to narrow, case‑specific misuses of funds or obligations the SOD identifies—not to Plaintiffs’ sweeping “permanent duty” theory. (SOD §C, pp. 25–26.)
+
+III. Remedies — what the record supports and why Plaintiffs’ request is overbroad
+- Lease/balloon damages are limited and precisely quantified by the SOD: Plaintiffs received a net award for one half of the balloon obligation determined by the court (SOD p.28). The SOD’s arithmetic, not Plaintiffs’ speculation, governs any relief on that claim. (SOD p.28.)
+- Attorney fees under the Elder Abuse statute are tied to the court’s specific finding of elder financial abuse as to Ms. Pak; the SOD did not extend that statutory remedy to Norris. (SOD §D, pp. 30–31.)
+
+IV. Why Plaintiffs’ principal arguments fail under the SOD
+- Plaintiffs’ conversion/count‑theory (Norris): The SOD resolves this point against Plaintiffs—Brown voluntarily transferred cases to Norris (documented substitutions and agreements), and the SOD holds that those transfers do not transform contested communications into theft. (SOD pp. 20–24; see SOD p.22.)
+- Plaintiffs’ elder‑abuse overreach: The SOD ties elder‑abuse liability only to Pak’s misapplication of funds; it refuses to import elder‑abuse remedies against Norris where the evidentiary predicate is absent. (SOD §D, pp. 30–31.)
+- Plaintiffs’ causation and damages gaps: The SOD emphasizes that Plaintiffs offered no reliable, fact‑based quantification for many of their claimed operating‑expense losses and failed to show Norris caused those losses as a legal matter. Absent that proof, the Court is bound to deny relief beyond the discrete, quantified awards the SOD sustained. (SOD §§III–IV, pp. 20–24, 28.)
+
+V. Short answer to discrete misstatements in Plaintiffs’ brief (examples)
+- Misstatement: “Norris stole the mass tort cases and is jointly liable for treble damages.”
+  Correction: The SOD finds voluntary transfers and substitutions, not theft; Plaintiffs failed to show Norris knowingly participated in any improper diversion of funds. (SOD pp. 20–24; 22.)
+- Misstatement: “Pak’s conduct supports punitive awards and broad trebling under §3345.”
+  Correction: The SOD explicitly declined punitive damages and explained that §3345 trebling requires a statutory penalty basis the record does not supply here. (SOD §D–F, pp. 30–31.)
+
+Conclusion and requested relief
+For the reasons set out above and as reflected in the Final Statement of Decision, the Court should (1) deny Plaintiffs any relief beyond the narrow fiduciary/elder‑abuse award against Ms. Pak and the limited lease remedy the SOD awarded, and (2) reject Plaintiffs’ invitation to expand liability to Norris or to re‑open the Court’s calibrated credibility findings. A proposed judgment consistent with the SOD should be entered.
+
+Respectfully submitted.

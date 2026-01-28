@@ -1,36 +1,42 @@
-"""DraftShift package - legal tone analysis and transformations.
+"""
+DraftShift — Litigation Document Automation Platform
 
-This package contains the DraftShift implementation (formerly `litone`).
-Import modules from this package directly, e.g. `from DraftShift import core`.
+AI-powered platform for generating California civil pleadings,
+motions, oppositions, replies, and declarations with proper formatting,
+citation rules, and legal analysis.
+
+Submodules:
+    - pleadings: Core pleading classes (Motion, Opposition, Reply, Declaration)
+    - formats: YAML configuration files for formatting and citation rules
+    - tests: Test fixtures and test suite
 """
 
+__version__ = "0.1.0"
+__author__ = "Taurin Robinson"
+__license__ = "Proprietary"
+
+# Import pleadings module for direct access
 try:
-    from .core import (
-        detect_tone,
-        shift_tone,
-        split_sentences,
-        classify_sentence_structure,
-        assess_overall_message,
-        get_tool_status,
+    from .pleadings import (
+        BaseDocument,
+        DocumentBuilder,
+        Motion,
+        Opposition,
+        Reply,
+        Declaration,
+        PleadingFactory,
     )
     __all__ = [
-        "detect_tone",
-        "shift_tone",
-        "split_sentences",
-        "classify_sentence_structure",
-        "assess_overall_message",
-        "get_tool_status",
+        "BaseDocument",
+        "DocumentBuilder",
+        "Motion",
+        "Opposition",
+        "Reply",
+        "Declaration",
+        "PleadingFactory",
     ]
 except ImportError:
     __all__ = []
 
 # Make submodules available for explicit import
-from . import (
-    constants,
-    enhanced_affect_parser,
-    tone_analysis_composer,
-    tone_signal_parser,
-)
-
-__version__ = "1.1.0"
-__author__ = "DraftShift Team"
+from . import pleadings, formats, tests

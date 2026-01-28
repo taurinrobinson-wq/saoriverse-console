@@ -1,0 +1,24 @@
+{
+  "brown_testimony_weight": null,
+  "pak_not_credible": null,
+  "no_conversion_norris": {
+    "page": 22,
+    "start_line": 49,
+    "end_line": 49,
+    "matched_text": "Plaintiffs did not establish that the Norris defendant s took or retained plaintiffs' property. "
+  },
+  "pak_188500": null,
+  "lease_24000": {
+    "page": 28,
+    "start_line": 65,
+    "end_line": 65,
+    "matched_text": "are entitled to damages in the amount of $24,000"
+  },
+  "attorney_fees_15657": null,
+  "failed_prove_norris_pak": {
+    "page": 29,
+    "start_line": 44,
+    "end_line": 44,
+    "matched_text": "Plaintiffs failed to prove that Norris or Pak wrongfully obtained any clients or retained funds "
+  }
+}

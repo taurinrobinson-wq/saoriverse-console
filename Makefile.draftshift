@@ -1,0 +1,57 @@
+.PHONY: help install dev test lint format clean build all
+
+help:
+	@echo "DraftShift — Litigation Document Automation"
+	@echo ""
+	@echo "Usage:"
+	@echo "  make install         Install package in production mode"
+	@echo "  make dev             Install package in development mode"
+	@echo "  make test            Run pytest test suite"
+	@echo "  make test-verbose    Run pytest with verbose output"
+	@echo "  make test-coverage   Run pytest with coverage report"
+	@echo "  make lint            Run flake8 linter"
+	@echo "  make format          Format code with black"
+	@echo "  make type-check      Run mypy type checker"
+	@echo "  make build           Build distribution packages"
+	@echo "  make clean           Remove build artifacts and cache"
+	@echo "  make all             Install, test, lint, and build"
+	@echo ""
+	@echo "CLI Examples:"
+	@echo "  draftshift draftshift/tests/fixtures/motion.json"
+	@echo "  draftshift draftshift/tests/fixtures/motion.json -o Motion_to_Compel.docx"
+	@echo "  draftshift draftshift/tests/fixtures/declaration.json -v"
+
+install:
+	pip install -e .
+
+dev:
+	pip install -e ".[dev]"
+
+test:
+	pytest draftshift/tests/ -v
+
+test-verbose:
+	pytest draftshift/tests/ -vv -s
+
+test-coverage:
+	pytest draftshift/tests/ --cov=draftshift --cov-report=html --cov-report=term-missing
+
+lint:
+	flake8 draftshift/ --max-line-length=100 --ignore=E203,W503
+
+format:
+	black draftshift/ --line-length=100
+
+type-check:
+	mypy draftshift/ --ignore-missing-imports
+
+build: clean
+	python setup.py sdist bdist_wheel
+
+clean:
+	rm -rf build/ dist/ *.egg-info/ .pytest_cache/ .mypy_cache/ .coverage htmlcov/
+	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+	find . -type f -name "*.pyc" -delete
+
+all: install test lint build
+	@echo "✓ All targets completed successfully"

@@ -1,0 +1,85 @@
+{
+  "type": "opposition",
+  "attorney": {
+    "name": "Taurin Robinson",
+    "title": "Esq.",
+    "bar_number": "312345",
+    "firm": "Robinson Legal Group",
+    "address": "123 Market Street, Suite 400",
+    "city_state_zip": "Los Angeles, CA 90017",
+    "phone": "Tel: (213) 555-0199",
+    "email": "trobinson@draftshiftlaw.com",
+    "party": "Defendant"
+  },
+  "case": {
+    "county": "Los Angeles",
+    "case_number": "22STCV12345",
+    "parties": {
+      "plaintiff": "JOHN DOE, an individual",
+      "defendant": "ACME CORPORATION, a Delaware corporation"
+    }
+  },
+  "title": "DEFENDANT'S OPPOSITION TO PLAINTIFF'S MOTION FOR SUMMARY JUDGMENT",
+  "arguments": [
+    {
+      "level": 1,
+      "text": "INTRODUCTION"
+    },
+    {
+      "paragraph": "Plaintiff's motion for summary judgment should be denied because triable issues of material fact exist on every claim. Plaintiff cannot establish a complete absence of a genuine issue of material fact."
+    },
+    {
+      "level": 1,
+      "text": "LEGAL STANDARD"
+    },
+    {
+      "level": 2,
+      "text": "Summary Judgment Standard"
+    },
+    {
+      "paragraph": "A motion for summary judgment shall be granted only if all the papers submitted show that there is no triable issue of any material fact and that the moving party is entitled to judgment as a matter of law. Code of Civil Procedure § 437c(c). The moving party bears the initial burden of showing that one or more elements of the claim cannot be established or that there is a defense to the claim."
+    },
+    {
+      "level": 1,
+      "text": "ARGUMENT"
+    },
+    {
+      "level": 2,
+      "text": "Plaintiff Cannot Establish Its Prima Facie Case"
+    },
+    {
+      "paragraph": "Plaintiff's declaration fails to establish the essential elements of its claims. The evidence is conflicting, speculative, and insufficient to support Plaintiff's allegations. Defendant has submitted substantial evidence demonstrating the absence of causation and damages."
+    },
+    {
+      "level": 2,
+      "text": "Triable Issues of Fact Remain Regarding Causation"
+    },
+    {
+      "paragraph": "Multiple expert declarations submitted by Defendant establish that competing causation theories exist. These conflicting opinions create a triable issue of fact that must be resolved by a jury, not by summary judgment."
+    },
+    {
+      "level": 2,
+      "text": "Damages Are Disputed"
+    },
+    {
+      "paragraph": "Plaintiff's damage calculations are speculative and not supported by competent evidence. Defendant's damages expert has established that the loss of profits theory relied upon by Plaintiff is mathematically impossible and contradicted by Plaintiff's own business records."
+    },
+    {
+      "level": 1,
+      "text": "CONCLUSION"
+    },
+    {
+      "paragraph": "For the foregoing reasons, Defendant respectfully requests that the Court deny Plaintiff's motion for summary judgment in its entirety. The factual disputes identified herein preclude summary judgment as a matter of law and require resolution by a jury."
+    }
+  ],
+  "pos": {
+    "server_name": "David Chen",
+    "server_county": "Los Angeles",
+    "document_title": "Opposition to Motion for Summary Judgment",
+    "service_date": "January 28, 2026",
+    "service_method": "electronic service via email",
+    "service_location": "Los Angeles, California",
+    "execution_date": "January 28, 2026",
+    "execution_location": "Los Angeles"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "sections": [
+    {
+      "index": 1,
+      "roman": "II",
+      "title": "PROCEDURAL HISTORY",
+      "pages": [],
+      "file": "sod_sections\\01_II_PROCEDURAL_HISTORY.json"
+    },
+    {
+      "index": 2,
+      "roman": "III",
+      "title": "EVIDENCE PRESENTED",
+      "pages": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "file": "sod_sections\\02_III_EVIDENCE_PRESENTED.json"
+    },
+    {
+      "index": 3,
+      "roman": "IV",
+      "title": "PLAINTIFFS' CLAIMS",
+      "pages": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "file": "sod_sections\\03_IV_PLAINTIFFS_CLAIMS.json"
+    },
+    {
+      "index": 4,
+      "roman": "C",
+      "title": "Claims Solely Against Pak -Breach of Fiduciary Duty",
+      "pages": [
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "file": "sod_sections\\04_C_Claims_Solely_Against_Pak_Breach_of_Fiduciary_Duty.json"
+    },
+    {
+      "index": 5,
+      "roman": "D",
+      "title": "Elder Financial Abuse Against All Defendants (Cal. Welfare & Inst. Code§ 15600 et",
+      "pages": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "file": "sod_sections\\05_D_Elder_Financial_Abuse_Against_All_Defendants_Cal_Welfare_Ins.json"
+    },
+    {
+      "index": 6,
+      "roman": "D",
+      "title": "Pak's Counter-Claims",
+      "pages": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "file": "sod_sections\\06_D_Pak_s_Counter_Claims.json"
+    },
+    {
+      "index": 7,
+      "roman": "II",
+      "title": "PLAINTIFFS' OBJECTIONS TO THE ST A TEMENT OF DECISION",
+      "pages": [
+        45,
+        46,
+        47,
+        48
+      ],
+      "file": "sod_sections\\07_II_PLAINTIFFS_OBJECTIONS_TO_THE_ST_A_TEMENT_OF_DECISION.json"
+    },
+    {
+      "index": 8,
+      "roman": "III",
+      "title": "RULING ON OBJECTIONS BY CROSS-DEFENDANTS/CROSS",
+      "pages": [
+        49,
+        50
+      ],
+      "file": "sod_sections\\08_III_RULING_ON_OBJECTIONS_BY_CROSS_DEFENDANTS_CROSS.json"
+    }
+  ]
+}

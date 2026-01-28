@@ -1,0 +1,292 @@
+# ============================================================
+#  CALIFORNIA CIVIL PLEADING FORMAT — DRAFTSHIFT CONFIG
+# ============================================================
+
+# Import citation rules (separate configuration)
+imports:
+  citation: "california_civil_citation.yaml"
+
+# ----------------------------------------------------------
+#  PAGE GEOMETRY
+# ----------------------------------------------------------
+page_geometry:
+  paper_size: "letter"      # 8.5" x 11"
+  margins:
+    top: 1.0
+    bottom: 1.0
+    left: 1.0
+    right: 1.0
+  units: "inches"
+
+# ----------------------------------------------------------
+#  PLEADING PAPER
+# ----------------------------------------------------------
+pleading_paper:
+  enabled: true
+  lines: 28
+  line_spacing_pt: 24.0
+  spacing_before_pt: 0
+  spacing_after_pt: 0
+  grid_visible: true
+  grid_color: "#E8E8E8"
+
+# ----------------------------------------------------------
+#  FONT
+# ----------------------------------------------------------
+font:
+  default:
+    family: "Times New Roman"
+    size: 12
+    bold: false
+    italic: false
+    underline: false
+
+  caption:
+    family: "Times New Roman"
+    size: 12
+    bold: false
+    italic: false
+
+  headings:
+    family: "Times New Roman"
+    size: 12
+    bold: true
+    italic: false
+
+  signature:
+    family: "Times New Roman"
+    size: 12
+    bold: false
+
+# ----------------------------------------------------------
+#  CAPTION
+# ----------------------------------------------------------
+caption:
+  style: "two_column_table"
+  margin_bottom: 0.25
+  
+  table:
+    columns:
+      left:
+        width: 3.5
+        borders:
+          top: none
+          right: 0.5
+          bottom: 0.5
+          left: none
+          color: "#000000"
+      right:
+        width: 2.0
+        borders:
+          top: none
+          right: none
+          bottom: none
+          left: none
+
+  left_column:
+    content: |
+      SUPERIOR COURT OF CALIFORNIA
+      COUNTY OF [{COUNTY}]
+    font_size: 12
+    alignment: "left"
+    spacing_after: 12
+
+  right_column:
+    label: "Case No."
+    value_placeholder: "[CASE NUMBER]"
+    alignment: "right"
+
+  case_title:
+    alignment: "center"
+    spacing_before: 12
+    spacing_after: 12
+    font_size: 12
+    bold: false
+
+  parties:
+    format: "{plaintiff} v. {defendant}"
+    spacing_after: 12
+
+# ----------------------------------------------------------
+#  ATTORNEY BLOCK
+# ----------------------------------------------------------
+attorney_block:
+  position: "bottom_right"
+  margin_top: 0.25
+  tab_stops:
+    - position: 1.5
+    - position: 3.0
+
+  content_format: |
+    [{ATTORNEY_TITLE}]
+    [{ATTORNEY_NAME}]
+    [{FIRM_NAME}]
+    [{STREET_ADDRESS}]
+    [{CITY_STATE_ZIP}]
+    [{PHONE}]
+    [{EMAIL}]
+    [{BAR_NUMBER}]
+
+  labels:
+    - position: 0
+      text: "Attorney for [{PARTY}]"
+    - position: 1.5
+      text: "Bar No. [{BAR_NUMBER}]"
+
+# ----------------------------------------------------------
+#  ARGUMENT HEADINGS
+# ----------------------------------------------------------
+argument_headings:
+  level_1:
+    format: "roman_upper"          # I, II, III, IV
+    bold: true
+    spacing_before: 12
+    spacing_after: 6
+    font_size: 12
+
+  level_2:
+    format: "numeric"              # 1, 2, 3
+    indent: 0.5
+    bold: true
+    spacing_before: 6
+    spacing_after: 3
+    font_size: 12
+
+  level_3:
+    format: "alpha_upper"           # A, B, C
+    indent: 1.0
+    bold: true
+    spacing_before: 3
+    spacing_after: 0
+    font_size: 12
+
+  level_4:
+    format: "roman_lower"           # i, ii, iii
+    indent: 1.5
+    bold: false
+    italic: true
+    spacing_before: 3
+    spacing_after: 0
+    font_size: 12
+
+# ----------------------------------------------------------
+#  BODY TEXT
+# ----------------------------------------------------------
+body_text:
+  alignment: "left"
+  indent_first_paragraph: 0.5
+  spacing_before: 0
+  spacing_after: 0
+  line_spacing: "single"            # single | 1.5 | double
+  line_spacing_pt: 24.0
+
+# ----------------------------------------------------------
+#  NUMBERED PARAGRAPHS
+# ----------------------------------------------------------
+numbered_paragraphs:
+  enabled: true
+  format: "{number}."
+  alignment: "left"
+  indent_body: 0.5
+  indent_number: 0
+
+# ----------------------------------------------------------
+#  TABS
+# ----------------------------------------------------------
+tab_stops:
+  default:
+    - position: 0.5
+      alignment: "left"
+    - position: 1.0
+      alignment: "left"
+    - position: 1.5
+      alignment: "left"
+
+  attorney_block:
+    - position: 1.5
+      alignment: "left"
+    - position: 3.0
+      alignment: "left"
+
+  caption:
+    - position: 0.5
+      alignment: "left"
+    - position: 1.0
+      alignment: "left"
+    - position: 1.5
+      alignment: "left"
+
+# ----------------------------------------------------------
+#  SIGNATURE BLOCK
+# ----------------------------------------------------------
+signature_block:
+  margin_top: 0.5
+  content_format: |
+    Date: _______________
+    
+    ______________________________
+    [{ATTORNEY_SIGNATURE_LINE}]
+    Attorney for [{PARTY}]
+
+  alignment: "center"
+  spacing_before: 12
+
+# ----------------------------------------------------------
+#  PROOF OF SERVICE
+# ----------------------------------------------------------
+proof_of_service:
+  enabled: true
+  margin_top: 0.5
+  heading: "PROOF OF SERVICE"
+  heading_bold: true
+  content_template: |
+    I, [{SERVER_NAME}], declare under penalty of perjury 
+    under the laws of the State of California that I am 
+    employed in the County of [{COUNTY}], State of 
+    California. I am over the age of eighteen years and 
+    not a party to the within action. I am familiar with 
+    this office's practice of collection and processing 
+    correspondence for mailing with the United States 
+    Postal Service.
+    
+    On [{DATE}], I enclosed the within document(s) 
+    described as [{DOCUMENT_TITLE}] in a sealed envelope 
+    with postage thereon fully prepaid, in the ordinary 
+    course of business, and deposited said envelope for 
+    collection and mailing at [{LOCATION}].
+    
+    I declare under penalty of perjury that the 
+    foregoing is true and correct. Executed on 
+    [{EXECUTION_DATE}] at [{EXECUTION_LOCATION}], 
+    California.
+    
+    ______________________________
+    [{SERVER_SIGNATURE_LINE}]
+
+# ----------------------------------------------------------
+#  DOCUMENT METADATA
+# ----------------------------------------------------------
+metadata:
+  title: "California Civil Pleading"
+  subtitle: "v1.0"
+  description: "Default format for California state court civil pleadings"
+  jurisdiction: "california_superior"
+  compatible_with:
+    - Los Angeles Superior Court
+    - Orange County Superior Court
+    - San Diego Superior Court
+    - California State Courts (All)
+
+# ----------------------------------------------------------
+#  VALIDATION RULES
+# ----------------------------------------------------------
+validation:
+  require_case_number: true
+  require_attorney_block: true
+  require_signature: true
+  page_count_limit: null              # null = unlimited
+  word_count_limit: null              # null = unlimited
+  enforce_font_family: true
+  enforce_font_size: true
+  enforce_margins: true
+  enforce_pleading_paper: true

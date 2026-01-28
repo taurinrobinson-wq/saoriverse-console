@@ -1,0 +1,48 @@
+{
+  "type": "declaration",
+  "attorney": {
+    "name": "Taurin Robinson",
+    "title": "Esq.",
+    "bar_number": "312345",
+    "firm": "Robinson Legal Group",
+    "address": "123 Market Street, Suite 400",
+    "city_state_zip": "Los Angeles, CA 90017",
+    "phone": "Tel: (213) 555-0199",
+    "email": "trobinson@draftshiftlaw.com",
+    "party": "Plaintiff"
+  },
+  "case": {
+    "county": "Los Angeles",
+    "case_number": "22STCV12345",
+    "parties": {
+      "plaintiff": "JOHN DOE, an individual",
+      "defendant": "ACME CORPORATION, a Delaware corporation"
+    }
+  },
+  "title": "DECLARATION OF JOHN DOE IN SUPPORT OF PLAINTIFF'S OPPOSITION TO MOTION FOR SUMMARY JUDGMENT",
+  "declarant": {
+    "name": "John Doe",
+    "title": "Declarant",
+    "party": "Plaintiff"
+  },
+  "statements": [
+    "I am the Plaintiff in this action. I have personal knowledge of the facts set forth in this declaration, and if called as a witness, I could and would testify competently thereto.",
+    "I am employed as the Chief Operations Officer of Brown Manufacturing, Inc., a position I have held for fifteen years. In this role, I have direct knowledge of the operations, business practices, and financial performance of my company.",
+    "On June 5, 2025, I personally observed the defective condition of the product in question at our facility in Los Angeles, California. The defect was immediately apparent and caused significant concern among our staff.",
+    "I contacted Defendant ACME Corporation on three separate occasions—June 6, 2025, June 10, 2025, and June 15, 2025—requesting a full refund for the defective products. Each time I spoke with a representative, who assured me that the matter would be escalated to senior management.",
+    "Despite my repeated requests and follow-up communications, Defendant failed to respond or provide any meaningful explanation for the defect. No refund was issued, and no replacement products were offered.",
+    "As a direct result of the defective product and Defendant's failure to remedy the situation, our company incurred substantial losses, including the cost of the defective units, labor costs to investigate the defect, business disruption, and lost profits from clients who were unsatisfied with our services.",
+    "I have reviewed the business records of Brown Manufacturing, Inc., and they corroborate the facts stated in this declaration. Our financial records clearly demonstrate the losses we incurred due to Defendant's defective product.",
+    "Based on my personal knowledge and expertise in manufacturing operations, I am confident that the losses claimed by our company are conservative and well-supported by evidence. Had Defendant addressed the defect promptly and offered a refund or replacement, we would not have suffered these losses."
+  ],
+  "pos": {
+    "server_name": "Emily Johnson",
+    "server_county": "Los Angeles",
+    "document_title": "Declaration of John Doe in Support of Opposition to Motion for Summary Judgment",
+    "service_date": "January 28, 2026",
+    "service_method": "electronic service via email",
+    "service_location": "Los Angeles, California",
+    "execution_date": "January 28, 2026",
+    "execution_location": "Los Angeles"
+  }
+}
