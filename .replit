@@ -3,9 +3,3 @@ entrypoint = "draftshift-web/run_server.py"
 
 [env]
 PYTHONPATH = "/home/runner/saoriverse-console/draftshift-web"
-
-[buildpack]
-language = "python3"
-
-[nix]
-channel = "stable-23_11"
