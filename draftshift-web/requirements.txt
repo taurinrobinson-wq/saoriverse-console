@@ -1,8 +1,9 @@
-# DraftShift Web API - Minimal Dependencies
-# Note: Core packages (fastapi, uvicorn, pydantic, etc.) are pre-installed via replit.nix
-# Only add optional runtime dependencies here if needed
+# DraftShift Web API - Dependencies
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.12.5
+python-docx==1.2.0
+pyyaml==6.0.3
 
-# Utilities (if needed at runtime)
-python-dotenv==1.0.1
 
 pytest-cov==7.0.0
