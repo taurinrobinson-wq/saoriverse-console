@@ -1,5 +1,2 @@
-run = "cd draftshift-web && npm install && npm run build && python run_server.py"
-entrypoint = "draftshift-web/run_server.py"
-
-[env]
-PYTHONPATH = "/home/runner/saoriverse-console/draftshift-web"
+run = "cd draftshift-web && bash start.sh"
+entrypoint = "draftshift-web/start.sh"
