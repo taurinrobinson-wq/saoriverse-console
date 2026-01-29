@@ -1,17 +1,11 @@
-run = "cd draftshift-web && python run_server.py"
+run = "cd draftshift-web && npm install && npm run build && python run_server.py"
 entrypoint = "draftshift-web/run_server.py"
 
 [env]
-PYTHONPATH = "/home/runner/saoriverse-console/draftshift-web:/home/runner/saoriverse-console"
+PYTHONPATH = "/home/runner/saoriverse-console/draftshift-web"
 
-[packager]
+[buildpack]
 language = "python3"
-ignoreDefaultPythonPackages = true
-
-[packager.features]
-packageSearch = true
-guessImports = true
-enableGuessImports = true
 
 [nix]
-channel = "stable-23_05"
+channel = "stable-23_11"
