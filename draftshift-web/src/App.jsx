@@ -56,8 +56,13 @@ function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>DraftShift</h1>
-        <p>Automated Litigation Document Generator</p>
+        <div className="header-brand">
+          <img src="/DraftShiftPrototype Logo_final.svg" alt="DraftShift Logo" className="logo" />
+          <div className="header-text">
+            <h1>DraftShift</h1>
+            <p>Automated Litigation Document Generator</p>
+          </div>
+        </div>
         
         <nav className="tab-nav">
           <button 
