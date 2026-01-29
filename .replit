@@ -1,2 +1,1 @@
-run = "cd draftshift-web && bash start.sh"
-entrypoint = "draftshift-web/start.sh"
+run = "cd draftshift-web && python run_server.py"
