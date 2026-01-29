@@ -13,7 +13,7 @@ import sqlite3
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-JSON_PATH = ROOT / "emotional_os" / "glyphs" / "glyph_lexicon_rows_validated.json"
+JSON_PATH = ROOT / "emotional_os" / "glyphs" / "glyph_lexicon_rows.json"
 DB_PATH = ROOT / "glyphs.db"
 
 

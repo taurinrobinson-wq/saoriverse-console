@@ -12,12 +12,10 @@ def init_glyph_db():
     root = Path(__file__).parent  # repo root (same dir as script)
     db_path = root / "glyphs.db"
     
-    # Try different JSON sources
+    # Try different JSON sources (canonical pruned lexicon with 64 glyphs)
     json_paths = [
         root / "emotional_os" / "glyphs" / "glyph_lexicon_rows.json",
-        root / "emotional_os" / "glyphs" / "glyph_lexicon_rows_validated.json",
         root / "data" / "glyph_lexicon_rows.json",
-        root / "data" / "glyph_lexicon_rows_validated.json",
     ]
     
     json_path = None

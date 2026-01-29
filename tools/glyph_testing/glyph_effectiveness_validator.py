@@ -183,7 +183,7 @@ class GlyphEffectivenessValidator:
 
     def save_pruned_lexicon(self, valid_glyphs: List[Dict]) -> Path:
         """Save pruned lexicon to file."""
-        output_path = self.lexicon_path.parent / "glyph_lexicon_rows_validated.json"
+        output_path = self.lexicon_path.parent / "glyph_lexicon_rows.json"
 
         with open(output_path, "w") as f:
             json.dump(valid_glyphs, f, indent=2, ensure_ascii=False)
