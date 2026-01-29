@@ -1,21 +1,8 @@
 # DraftShift Web API - Minimal Dependencies
-# FastAPI web server + React frontend (no heavy ML/audio dependencies)
+# Note: Core packages (fastapi, uvicorn, pydantic, etc.) are pre-installed via replit.nix
+# Only add optional runtime dependencies here if needed
 
-# Web Framework
-fastapi==0.104.1
-uvicorn==0.24.0
-starlette==0.27.0
-pydantic==2.12.5
-python-multipart==0.0.6
-
-# Document Generation
-python-docx==1.2.0
-pyyaml==6.0.3
-
-# Utilities
+# Utilities (if needed at runtime)
 python-dotenv==1.0.1
-requests==2.32.3
 
-# Testing (optional)
-pytest==9.0.2
 pytest-cov==7.0.0
