@@ -23,6 +23,13 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Node.js / npm (Frontend dependencies - auto-installed)
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # Virtual environments
 .env
 .venv
