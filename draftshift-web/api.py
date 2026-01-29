@@ -13,6 +13,9 @@ import io
 import logging
 import base64
 
+# Import renamer service
+from renamer_service import router as renamer_router
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -38,6 +41,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include renamer routes
+app.include_router(renamer_router, prefix="/api/renamer", tags=["renamer"])
 
 
 # ============================================================

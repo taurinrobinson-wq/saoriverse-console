@@ -59,6 +59,38 @@ body {
 .app-header p {
   font-size: 1rem;
   opacity: 0.95;
+  margin-bottom: 1.5rem;
+}
+
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.tab-btn.active {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary);
+  border-color: white;
 }
 
 .app-main {
@@ -67,6 +99,11 @@ body {
   gap: 2rem;
   padding: 2rem;
   overflow: hidden;
+}
+
+.app-main.full-width {
+  padding: 0;
+  overflow-y: auto;
 }
 
 .sidebar {
