@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Glyph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "primary_emotions", "intensity", "glyph_type", "version"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "primary_emotions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "intensity": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "glyph_type": {"type": "string", "enum": ["emotion", "transition", "artifact"]},
+    "version": {"type": "string"},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {"type": "string"},
+        "source_id": {"type": "string"},
+        "created_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "url"],
+        "properties": {
+          "type": {"type": "string"},
+          "url": {"type": "string", "format": "uri"}
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}
