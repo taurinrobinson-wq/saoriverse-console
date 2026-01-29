@@ -165,7 +165,7 @@ export default function GamePage() {
   let persona: 'kaelen' | 'trickster' = 'kaelen';
   if (npcNameLower.includes('trickster')) persona = 'trickster';
   else if (npcNameLower.includes('kaelen')) persona = 'kaelen';
-  else if (passageLower.includes('swamp') || (gameState.scene_id === 'swamp_scene')) {
+  else if (passageLower.includes('swamp')) {
     const empathy = typeof playerStats.empathy === 'number' ? playerStats.empathy : 0;
     persona = empathy < 50 ? 'trickster' : 'kaelen';
   }
@@ -177,10 +177,10 @@ export default function GamePage() {
       padding: '20px',
       background: '#000'
     }}>
-      {((npcNameLower.includes('kaelen') || npcNameLower.includes('trickster') || gameState.scene_id === 'swamp_scene')) ? (
+      {((npcNameLower.includes('kaelen') || npcNameLower.includes('trickster'))) ? (
         <KaeleScene
-          scenarioType={gameState.scene_id === 'swamp_scene' ? 'swamp' : 'marketplace'}
-          autoAlternate={gameState.scene_id === 'swamp_scene'}
+          scenarioType='marketplace'
+          autoAlternate={false}
           alternateInterval={2000}
           persona={persona}
           playerHasStillness={hasStillness}

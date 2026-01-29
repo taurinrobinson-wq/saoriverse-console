@@ -1,11 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import createSnapshot from '../../../velinor/game_mechanics/frontend_api';
-import data from '../../../velinor/markdowngameinstructions/malrik_elenya_coren.json';
+// import createSnapshot from '../../../velinor/game_mechanics/frontend_api';
+// import data from '../../../velinor/markdowngameinstructions/malrik_elenya_coren.json';
 
 const ORIENTATIONS = ['trust', 'observation', 'narrative', 'empathy'] as const;
 
+// Temporarily disabled - requires external velinor imports
+export default function MalrikElenyaScene() {
+    return <div>Malrik & Elenya Scene - Coming Soon</div>;
+}
+
+/*
 export default function MalrikElenyaScene() {
     const [snap] = useState(() => createSnapshot.createToneSnapshot());
     const [orientation, setOrientation] = useState<string>('empathy');
@@ -58,3 +64,4 @@ export default function MalrikElenyaScene() {
         </div>
     );
 }
+*/

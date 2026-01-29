@@ -4,3 +4,20 @@ npm-debug.log
 Dockerfile
 .git
 public/local-storage
+# Exclude heavy folders that aren't needed for build
+external/
+backend/
+frontend/
+notebooks/
+logs/
+saves/
+.venv/
+venv/
+__pycache__/
+*.venv
+.env
+.env.local
+dist/
+.streamlit/
+.replit
+replit.nix

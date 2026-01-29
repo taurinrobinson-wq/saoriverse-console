@@ -1,0 +1,76 @@
+name: Deploy Velinor to Droplet
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'velinor-web/**'
+      - '.github/workflows/deploy-velinor.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      VELINOR_CONFIG: ${{ secrets.VELINOR_DEPLOY }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Parse secrets
+        id: secrets
+        run: |
+          echo "docker_username=$(echo $VELINOR_CONFIG | jq -r '.docker_username')" >> $GITHUB_OUTPUT
+          echo "docker_password=$(echo $VELINOR_CONFIG | jq -r '.docker_password')" >> $GITHUB_OUTPUT
+          echo "deploy_host=$(echo $VELINOR_CONFIG | jq -r '.deploy_host')" >> $GITHUB_OUTPUT
+          echo "deploy_user=$(echo $VELINOR_CONFIG | jq -r '.deploy_user')" >> $GITHUB_OUTPUT
+          echo "deploy_key=$(echo $VELINOR_CONFIG | jq -r '.deploy_key')" >> $GITHUB_OUTPUT
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ steps.secrets.outputs.docker_username }}
+          password: ${{ steps.secrets.outputs.docker_password }}
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./velinor-web
+          file: ./velinor-web/Dockerfile
+          push: true
+          tags: |
+            ${{ steps.secrets.outputs.docker_username }}/velinor:latest
+            ${{ steps.secrets.outputs.docker_username }}/velinor:${{ github.sha }}
+          cache-from: type=registry,ref=${{ steps.secrets.outputs.docker_username }}/velinor:buildcache
+          cache-to: type=registry,ref=${{ steps.secrets.outputs.docker_username }}/velinor:buildcache,mode=max
+      
+      - name: Deploy to droplet
+        env:
+          DEPLOY_HOST: ${{ steps.secrets.outputs.deploy_host }}
+          DEPLOY_USER: ${{ steps.secrets.outputs.deploy_user }}
+          DEPLOY_KEY: ${{ steps.secrets.outputs.deploy_key }}
+          DOCKER_USERNAME: ${{ steps.secrets.outputs.docker_username }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          
+          ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+          
+          ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST << 'EOF'
+            docker pull $DOCKER_USERNAME/velinor:latest
+            docker stop velinor || true
+            docker rm velinor || true
+            docker run -d \
+              --name velinor \
+              -p 3000:3000 \
+              --restart unless-stopped \
+              $DOCKER_USERNAME/velinor:latest
+            echo "Velinor deployed successfully!"
+          EOF

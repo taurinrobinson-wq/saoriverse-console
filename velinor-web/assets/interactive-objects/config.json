@@ -1,0 +1,34 @@
+{
+  "doors": {
+    "door-example": {
+      "name": "Example Door",
+      "frames": 12,
+      "frameRate": 30,
+      "dimensions": {
+        "width": 120,
+        "height": 200
+      },
+      "position": {
+        "x": 450,
+        "y": 200
+      },
+      "notes": "Door opens inward, coordinates from background image top-left"
+    }
+  },
+  "panels": {
+    "panel-example": {
+      "name": "Example Panel",
+      "frames": 8,
+      "frameRate": 25,
+      "dimensions": {
+        "width": 80,
+        "height": 100
+      },
+      "position": {
+        "x": 300,
+        "y": 150
+      },
+      "notes": "Interactive control panel"
+    }
+  }
+}
