@@ -1,7 +1,1 @@
 run = "cd draftshift-web && python run_server.py"
-
-[output]
-format = "replit_upm"
-
-[nix]
-channel = "stable-23_11"
