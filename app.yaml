@@ -1,0 +1,16 @@
+name: draftshift
+services:
+- name: draftshift-api
+  github:
+    repo: taurinrobinson-wq/saoriverse-console
+    branch: main
+    deploy_on_push: true
+  build_command: cd draftshift-web && pip install -r requirements.txt
+  run_command: cd draftshift-web && python run_server.py
+  envs:
+  - key: PYTHONUNBUFFERED
+    value: "1"
+  http_port: 8000
+  health_check:
+    http_path: /
+  source_dir: ./
