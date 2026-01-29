@@ -1,4 +1,1 @@
 run = "cd draftshift-web && python run_server.py"
-
-[output]
-format = "replit_upm"
