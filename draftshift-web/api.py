@@ -192,11 +192,15 @@ else:
 
 if __name__ == "__main__":
     import uvicorn
+    import os
+    
+    # Get port from environment or use default (for Replit compatibility)
+    port = int(os.getenv("PORT", 8000))
     
     # Run on 0.0.0.0 for Replit
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8000,
+        port=port,
         log_level="info"
     )

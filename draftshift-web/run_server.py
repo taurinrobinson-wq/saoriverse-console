@@ -36,8 +36,11 @@ if __name__ == "__main__":
     if not os.path.exists("dist"):
         run_command("npm run build", "Building React frontend")
     
+    # Get port from environment or use default
+    port = int(os.getenv("PORT", 8000))
+    
     # Start the server
-    print("\n🌐 Starting API server on port 8000...")
+    print(f"\n🌐 Starting API server on port {port}...")
     print("=" * 50)
     
     import uvicorn
@@ -46,7 +49,7 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8000,
+        port=port,
         log_level="info"
     )
 
