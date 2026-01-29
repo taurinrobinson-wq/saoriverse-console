@@ -3,6 +3,8 @@
 import os
 import sys
 import subprocess
+import threading
+import time
 
 # Add current dir to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -10,17 +12,27 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 print("🚀 DraftShift Renamer Starting")
 print("-" * 50)
 
-# Install npm deps if needed
-if not os.path.exists("node_modules"):
-    print("📦 Installing npm dependencies...")
-    subprocess.run("npm install", shell=True, check=False)
+def build_frontend():
+    """Build frontend in background"""
+    time.sleep(1)  # Wait a bit for server to start
+    
+    # Install npm deps if needed
+    if not os.path.exists("node_modules"):
+        print("📦 Installing npm dependencies...")
+        subprocess.run("npm install", shell=True, check=False)
+    
+    # Build React if needed
+    if not os.path.exists("dist"):
+        print("🏗️  Building React frontend...")
+        subprocess.run("npm run build", shell=True, check=False)
+    
+    print("✅ Frontend ready!")
 
-# Build React if needed
-if not os.path.exists("dist"):
-    print("🏗️  Building React frontend...")
-    subprocess.run("npm run build", shell=True, check=False)
+# Start build in background thread
+build_thread = threading.Thread(target=build_frontend, daemon=True)
+build_thread.start()
 
-# Start server
+# Start server immediately
 print("\n🌐 Starting API server...")
 port = int(os.getenv("PORT", 8000))
 print(f"📍 Using port: {port}")
