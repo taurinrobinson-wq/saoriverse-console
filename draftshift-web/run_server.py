@@ -1,29 +1,16 @@
 #!/usr/bin/env python3
-"""DraftShift API Server"""
+"""DraftShift API Server - Pre-built production server"""
 import os
 import sys
-import subprocess
-import threading
 
 # Add current dir to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-print("🚀 DraftShift Renamer Starting")
+print("🚀 DraftShift Starting")
 print("-" * 50)
+print("✅ Frontend pre-built and ready")
 
-def install_deps():
-    """Install npm dependencies in background (if needed)"""
-    if not os.path.exists("node_modules"):
-        print("📦 Installing npm dependencies...")
-        subprocess.run("npm install", shell=True, check=False)
-    print("✅ Dependencies ready!")
-
-# Start dependency installation in background (fast if node_modules exists)
-install_thread = threading.Thread(target=install_deps, daemon=True)
-install_thread.start()
-
-# Start server immediately (dist is pre-built and committed)
-print("\n🌐 Starting API server...")
+# Start server immediately (no npm needed - dist is pre-built)
 port = int(os.getenv("PORT", 8000))
 print(f"📍 Using port: {port}")
 print("-" * 50 + "\n")
