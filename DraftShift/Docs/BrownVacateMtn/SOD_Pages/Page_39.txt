@@ -1,0 +1,74 @@
+===== PAGE 39 =====
+
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 the property of the Norris firm (RT 3/14/25, J. White, cross, 32:2-34:28; 55: 1-63:4). Mr. Norris 
+objected in time and advised the parties that his active client files were stored on those systems 
+(Ex. 15558). Even if some of the data had once belonged to the Brown Law Firm, some of the 
+data certainly belonged exclusively to the Norris Law Firm. 
+Penal Code Section 502 provides: "In addition to any other civil remedy available , the owner 
+or lessee of the computer, computer system, computer network, computer program, or data who 
+suffers damage or loss by reason of a violation of any of the provision s of subdivision ( c) may 
+bring a civil action against the violator for compensatory damages and injunctive relief or other 
+equitable relief. Compensatory damages shall include any expenditure reasonably and 
+necessarily incurred by the owner or lessee to verify that a computer system, computer network, 
+computer program, or data was or was not altered, damaged, or deleted by the access. 
+The court finds that the contents of the four storage files maintained by Ann Brown must be 
+immediately returned to Norris, as well as all of the computers in the office at the time of the 
+take over. With respect to the issue of damages, the court finds that the loss described above is 
+also recoverable under Section 502, specifically, the cost of staff to attempt to restore the files, 
+the costs of the computers, or a total of $26,445.75. These expenses can only be recovered once. 
+The remainder of the damages established for conversion are unrelated to unlawful access to the 
+computers and so are not recoverable under Section 502. The claimed damages related to the 
+lost leads are not recoverable for the reasons stated above. 
+3. Liability of Andrew and Jonathan White for Conversion and Violation of Pena 
+Code Section 502 
+Cross-defendants Jonathan and Andrew White contend that they cannot be liable to cross­
+complainants for damages caused by their clients' entry into the office and retention of case files. 
+The court agrees that that their conduct was committed in good faith, based on a genuine, albeit 
+mistaken belief, that Baird Brown's office and case files had been commandeered by Donald 
+Norris and Michele Pak, without Brown's knowledge of consent. Under the agency immunity 
+doctrine, the Whites cannot be liable "to third persons for acts committed in good faith in 
+performance of professional activities as an attorney for his client." (Roberts v. Ball, Hunt, Harl, 
+Brown & Baerwitz (1976) 57 Cal.App.3d 104, 109.) Norris and Pak did not establish that the 
+Whites' conduct was "actuated by malicious motives," or that they "shared in the illegal motives 
+of [their] clients." (Id., at p. 109.) On the contrary, at all times the Whites were acting solely as 
+attorneys on behalf of their client, who they reasonably believed had been deceived . The court 
+also agrees with cross-defendant s that Norris and Pak did not establish any of the exceptions to 
+this agency immunity doctrine: there was no or insufficient evidence that the Whites engaged in 
+any fraud, or that they conspired with the Browns, or that they received any financial gain 
+because of their activities. At most, Pak and Norris established that the Whites, at some point, 
+discovered or reasonably should have discovered that some of the files they had sequestered 
+probably belonged solely to the Norris law firm. But their conduct in requesting that Norris 
+provide them a I ist of clients whose files needed to be returned was not unreasonable and was
+taken to protect the Browns from claims that they had not returned Norris's client files. Thus, 
+the Brown's failure to return cases files was done solely to protect the client and not for the 
+personal benefit of the attorneys. Accordingly, judgment should be entered in favor of the 
+White defendants on the cross-complaint. 
+40 
+
+===== END PAGE 39 =====

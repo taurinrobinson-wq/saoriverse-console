@@ -65,3 +65,9 @@ except ImportError as e:
     if 'conversation_archetype' not in error_str:
         import warnings
         warnings.warn(f"Failed to import emotional_os_learning: {e}")
+
+from .proto_glyph_manager import *  # noqa: F401,F403
+from .subordinate_bot_responder import *  # noqa: F401,F403
+from .dominant_bot_orchestrator import *  # noqa: F401,F403
+from .glyph_synthesizer import *  # noqa: F401,F403
+from .learning_pipeline import *  # noqa: F401,F403
