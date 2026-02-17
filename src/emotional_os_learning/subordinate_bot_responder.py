@@ -194,25 +194,56 @@ class SubordinateBotResponder:
         name = (glyph_name or "").lower()
         ui = (user_input or "").lower()
 
-        # Direct glyph-based mappings
+        # Map glyph name to a short emotion label for human-style phrasing
+        emotion = None
         if any(k in name for k in ("sad", "grief", "mourning", "ache")):
-            return "That sounds rough. What happened?", "matched"
+            emotion = "sad"
+        elif any(k in name for k in ("anger", "frustration")):
+            emotion = "angry"
+        elif any(k in name for k in ("fear", "anxiety", "panic")):
+            emotion = "anxious"
+        elif any(k in name for k in ("joy", "relief", "happy")):
+            emotion = "joy"
+        elif any(w in ui for w in ("tired", "exhausted", "beat", "sleepy")):
+            emotion = "tired"
 
-        if any(k in name for k in ("anger", "frustration")):
-            return "Yeah, I get why that would hit hard. What set it off?", "matched"
-
-        if any(k in name for k in ("fear", "anxiety", "panic")):
-            return "That sounds stressful. What's making it feel that way?", "matched"
-
-        if any(k in name for k in ("joy", "relief", "happy")):
-            return "Nice — sounds like something good happened.", "matched"
-
-        # Quick user-cue overrides
-        if any(w in ui for w in ("tired", "exhausted", "beat", "sleepy")):
-            return "You sound wiped. What's been draining you?", "matched"
+        # Use human-style helper to generate a short, casual reply
+        if emotion:
+            return self._human_style_response(emotion, user_input), "matched"
 
         # Default matched response (short and casual)
-        return "Okay, I’m with you. Tell me what’s going on.", "matched"
+        return self._human_style_response(None, user_input), "matched"
+
+    def _human_style_response(self, emotion: Optional[str], user_input: str) -> str:
+        """Produce a short, casual human-sounding response.
+
+        Uses a random opener, a light empathy marker, and an emotion-guided question.
+        """
+        import random
+
+        openers = ["Yeah.", "Yah.", "Gotcha.", "Okay.", "Mm.", "Alright."]
+        empathy = [
+            "I hear you.",
+            "I get that.",
+            "Makes sense.",
+            "I get why you'd feel that.",
+            "That tracks.",
+        ]
+
+        if emotion == "tired":
+            question = "What's got you so worn out?"
+        elif emotion == "sad":
+            question = "What’s weighing on you?"
+        elif emotion == "angry":
+            question = "What set that off?"
+        elif emotion == "anxious":
+            question = "What’s making it feel like that?"
+        elif emotion == "joy":
+            question = "Nice — what happened?"
+        else:
+            question = "What’s going on?"
+
+        return f"{random.choice(openers)} {random.choice(empathy)} {question}"
 
     def _generate_fallback_response(
         self,
