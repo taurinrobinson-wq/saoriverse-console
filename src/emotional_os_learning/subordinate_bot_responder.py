@@ -97,10 +97,12 @@ class SubordinateBotResponder:
             best_glyph_name = "fallback"
             match_confidence = 0.0
         
-        # Step 3: Apply tier processing (safety, presence, depth)
+        # Step 3: Apply tier processing (safety, presence)
+        # NOTE: Tier3 (poetic enrichment) is intentionally NOT applied here
+        # because the subordinate responder must remain fast, grounded, and
+        # non-poetic. Tier3 belongs to the dominant/deep layer only.
         response_text = self.tier1.wrap_response(response_text, conversation_context)
         response_text = self.tier2.attune_presence(response_text, conversation_context)
-        response_text = self.tier3.enrich_with_poetry(response_text, conversation_context)
         
         # Step 4: Calculate processing time
         processing_time_ms = (time.time() - start_time) * 1000
@@ -183,25 +185,34 @@ class SubordinateBotResponder:
         Returns:
             (response_text, method="matched")
         """
-        if glyph_name not in self.glyph_library:
-            return self._generate_fallback_response(user_input, conversation_context)
-        
-        glyph = self.glyph_library[glyph_name]
-        
-        # Use glyph's response template or examples
-        if "response_template" in glyph:
-            response_text = glyph["response_template"].format(
-                user_input=user_input,
-                **conversation_context,
-            )
-        elif "examples" in glyph and glyph["examples"]:
-            # Pick first example as response kernel
-            response_text = glyph["examples"][0]
-        else:
-            # Fallback if glyph has no response data
-            return self._generate_fallback_response(user_input, conversation_context)
-        
-        return response_text, "matched"
+        # Allow generating a response based on glyph_name even if the glyph
+        # isn't present in the library (we use glyph name as emotional direction).
+        glyph = self.glyph_library.get(glyph_name, {})
+
+        # Simplified mapping: use glyph name for emotional direction only.
+        # Return short, human, grounded responses (no poetry, no Tier3 here).
+        name = (glyph_name or "").lower()
+        ui = (user_input or "").lower()
+
+        # Direct glyph-based mappings
+        if any(k in name for k in ("sad", "grief", "mourning", "ache")):
+            return "That sounds rough. What happened?", "matched"
+
+        if any(k in name for k in ("anger", "frustration")):
+            return "Yeah, I get why that would hit hard. What set it off?", "matched"
+
+        if any(k in name for k in ("fear", "anxiety", "panic")):
+            return "That sounds stressful. What's making it feel that way?", "matched"
+
+        if any(k in name for k in ("joy", "relief", "happy")):
+            return "Nice — sounds like something good happened.", "matched"
+
+        # Quick user-cue overrides
+        if any(w in ui for w in ("tired", "exhausted", "beat", "sleepy")):
+            return "You sound wiped. What's been draining you?", "matched"
+
+        # Default matched response (short and casual)
+        return "Okay, I’m with you. Tell me what’s going on.", "matched"
 
     def _generate_fallback_response(
         self,
@@ -217,9 +228,17 @@ class SubordinateBotResponder:
         Returns:
             (response_text, method="fallback")
         """
-        # Generic fallback - acknowledges and invites deeper conversation
-        fallback = f"I hear you. Tell me more about {user_input.split()[0].lower() if user_input else 'that'}."
-        return fallback, "fallback"
+        # Rotate through short, casual fallback patterns for a more human feel
+        fallbacks = [
+            "Got it. What’s going on?",
+            "Okay. Say more.",
+            "Alright — walk me through it.",
+            "Yeah, I’m here. What happened?",
+            "Mm, okay. What part is hitting you the most?",
+            "I get you. Tell me more.",
+        ]
+        import random
+        return random.choice(fallbacks), "fallback"
 
     def update_glyph_library(self, glyph_library: Dict) -> None:
         """Update available glyphs (called when dominant bot creates new ones).
