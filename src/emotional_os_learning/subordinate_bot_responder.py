@@ -194,6 +194,28 @@ class SubordinateBotResponder:
         name = (glyph_name or "").lower()
         ui = (user_input or "").lower()
 
+        # Overwhelm detection: if the user's input contains common overwhelm cues,
+        # return the special human, space-creating response.
+        overwhelm_keywords = [
+            "overwhelm",
+            "overwhelmed",
+            "too much",
+            "can't",
+            "cant",
+            "drowning",
+            "swamped",
+            "buried",
+            "holding a lot",
+            "can't breathe",
+            "cant breathe",
+            "so much",
+            "overloaded",
+            "can't handle",
+            "cant handle",
+        ]
+        if any(k in ui for k in overwhelm_keywords):
+            return self._human_overwhelm_response(user_input), "matched"
+
         # Map glyph name to a short emotion label for human-style phrasing
         emotion = None
         if any(k in name for k in ("sad", "grief", "mourning", "ache")):
@@ -244,6 +266,57 @@ class SubordinateBotResponder:
             question = "What’s going on?"
 
         return f"{random.choice(openers)} {random.choice(empathy)} {question}"
+
+    def _human_overwhelm_response(self, user_input: str) -> str:
+        """Produce a short, grounded 'overwhelm' style reply that creates space.
+
+        Structure:
+        - human exhale opener
+        - name the weight
+        - optional gentle noticing about care/support
+        - agency-based invitation
+        """
+        import random
+
+        openers = [
+            "Wow.",
+            "Oof.",
+            "Man.",
+            "Yeah, that’s a lot.",
+            "Damn.",
+        ]
+
+        weight = [
+            "Sounds like you're holding a lot.",
+            "That's quite a load.",
+            "That's a heavy mix to deal with.",
+            "Feels like everything hit at once.",
+            "That's a lot for one person to carry.",
+        ]
+
+        noticing = [
+            "One thing I'm not hearing is where you're getting care in all that.",
+            "I’m not sure where you’re getting support in the middle of all that.",
+            "I don’t hear much room for you in that list.",
+            "I’m not seeing where you get to breathe in all of that.",
+            None,
+        ]
+
+        invitations = [
+            "If you wanna talk more about it, I'm here to listen.",
+            "If it helps to talk through any of it, I’m around.",
+            "If you feel like unpacking it, I’m here.",
+            "If you want to say more, I’m listening.",
+        ]
+
+        opener = random.choice(openers)
+        weight_line = random.choice(weight)
+        notice_line = random.choice(noticing)
+        invite = random.choice(invitations)
+
+        if notice_line:
+            return f"{opener} {weight_line} {notice_line} {invite}"
+        return f"{opener} {weight_line} {invite}"
 
     def _generate_fallback_response(
         self,
