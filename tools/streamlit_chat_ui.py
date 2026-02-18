@@ -231,8 +231,12 @@ def main():
                     # Try to extract an explicit corrected phrasing from the user's notes.
                     import re
                     txt = fb_text.strip()
-                    # Prefer text inside quotes if present
-                    m = re.search(r'["“”\']([^"“”\']+)["“”\']', txt)
+                    # Prefer text inside matching quotes: double, single, or smart quotes
+                    m = re.search(r'"([^"]+)"', txt)
+                    if not m:
+                        m = re.search(r"'([^']+)'", txt)
+                    if not m:
+                        m = re.search(r'“([^”]+)”', txt)
                     if m:
                         alt_text = m.group(1).strip()
                     else:
