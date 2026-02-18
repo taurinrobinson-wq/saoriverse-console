@@ -114,6 +114,27 @@ def main():
                 e['feedback'] = 'negative'
                 e['feedback_stage'] = 'awaiting_reason'
 
+        # Show feedback status immediately so user gets visual confirmation
+        if e.get('feedback'):
+            fb = e.get('feedback')
+            if fb == 'positive':
+                st.success('Feedback recorded: 👍')
+                # append to a feedback log for later review/learning
+                try:
+                    st.session_state.feedback_log = st.session_state.get('feedback_log', [])
+                    st.session_state.feedback_log.append({
+                        'user': e.get('user'),
+                        'response': e.get('response'),
+                        'type': 'positive',
+                        'ts': __import__('datetime').datetime.now().isoformat(),
+                    })
+                except Exception:
+                    pass
+            elif fb == 'corrected':
+                st.info('Response marked as corrected by alternative.')
+            elif fb == 'negative':
+                st.warning('Negative feedback received — awaiting your notes.')
+
         # If negative feedback was given, collect corrective feedback and generate an alternative
         if e.get('feedback') == 'negative' and e.get('feedback_stage') == 'awaiting_reason':
             fb_text = st.text_area("What was off about the response? (helpful: tell me what to change)", key=f"fb_text_{idx}")
