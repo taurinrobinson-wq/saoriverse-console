@@ -90,8 +90,103 @@ def main():
 
     st.markdown("---")
     st.subheader("Recent activity")
-    for e in reversed(st.session_state.chat_log[-20:]):
-        st.write(e)
+    # Render recent activity with feedback controls
+    chat = st.session_state.chat_log
+    # Show up to last 20 entries in reverse chronological order
+    start = max(0, len(chat) - 20)
+    for idx in range(len(chat) - 1, start - 1, -1):
+        e = chat[idx]
+        # Display in a compact, readable format
+        st.markdown(f"**User:** {e.get('user')}  \n**Response:** {e.get('response')}")
+
+        # Feedback controls: thumbs up / thumbs down
+        if not e.get('feedback'):
+            col_up, col_down = st.columns([1, 1])
+            if col_up.button("👍", key=f"thumbs_up_{idx}"):
+                e['feedback'] = 'positive'
+                # Inform orchestrator of positive feedback (if available)
+                try:
+                    st.session_state.orchestrator.observe_exchange(e.get('user'), {"response": e.get('response'), "confidence": e.get('confidence', 0.0)}, simple_emotion_parser(e.get('user')))
+                except Exception:
+                    pass
+
+            if col_down.button("👎", key=f"thumbs_down_{idx}"):
+                e['feedback'] = 'negative'
+                e['feedback_stage'] = 'awaiting_reason'
+
+        # If negative feedback was given, collect corrective feedback and generate an alternative
+        if e.get('feedback') == 'negative' and e.get('feedback_stage') == 'awaiting_reason':
+            fb_text = st.text_area("What was off about the response? (helpful: tell me what to change)", key=f"fb_text_{idx}")
+            if st.button("Submit feedback and try an alternative", key=f"fb_submit_{idx}"):
+                e['feedback_text'] = fb_text
+                e['feedback_stage'] = 'submitted'
+                # Record observation with orchestrator if available
+                try:
+                    st.session_state.orchestrator.observe_exchange(e.get('user'), {"response": e.get('response'), "confidence": e.get('confidence', 0.0)}, simple_emotion_parser(e.get('user')))
+                except Exception:
+                    pass
+
+                # Generate an alternative grounded response using the subordinate responder
+                try:
+                    responder = st.session_state.get('responder')
+                    if responder and hasattr(responder, 'respond'):
+                        # Create an alternative reply using the human-style helper
+                        alt_text = responder._human_style_response(None, e.get('user'))
+                        alt_text = f"{alt_text} Is this better?"
+                    else:
+                        alt_text = "Sorry — can you tell me what you'd prefer me to change?"
+                except Exception:
+                    alt_text = "Sorry — can you tell me what you'd prefer me to change?"
+
+                alt_entry = {
+                    "user": f"assistant_alt_for_{idx}",
+                    "response": alt_text,
+                    "glyph": "alternative",
+                    "confidence": 1.0,
+                    "mismatch": 1.0,
+                    "triggered": True,
+                    "learned": False,
+                    "origin": "alternative",
+                    "related_index": idx,
+                }
+                st.session_state.chat_log.append(alt_entry)
+
+        # If an alternative exists for this entry, render a simple accept/reject UI
+        # Look for any chat entries appended with related_index == idx
+        alts = [c for c in chat if c.get('origin') == 'alternative' and c.get('related_index') == idx]
+        for aidx, alt in enumerate(alts):
+            st.markdown(f"**Alternative {aidx+1}:** {alt.get('response')}")
+            if not alt.get('feedback'):
+                col_yes, col_no = st.columns([1, 1])
+                if col_yes.button("Yes — this is better", key=f"alt_yes_{idx}_{aidx}"):
+                    alt['feedback'] = 'positive'
+                    # Mark original as improved
+                    chat[idx]['feedback'] = 'corrected'
+                    # Optionally notify orchestrator/dominant of successful correction
+                    try:
+                        st.session_state.orchestrator.observe_exchange(chat[idx].get('user'), {"response": alt.get('response'), "confidence": alt.get('confidence', 1.0)}, simple_emotion_parser(chat[idx].get('user')))
+                    except Exception:
+                        pass
+                if col_no.button("No — try again", key=f"alt_no_{idx}_{aidx}"):
+                    alt['feedback'] = 'negative'
+                    # Generate another alternative (simple strategy: new human-style phrasing)
+                    try:
+                        responder = st.session_state.get('responder')
+                        new_alt = responder._human_style_response(None, chat[idx].get('user')) + " Is this better?"
+                    except Exception:
+                        new_alt = "Can you tell me a bit more about how you'd like this to be different?"
+                    new_entry = {
+                        "user": f"assistant_alt_for_{idx}",
+                        "response": new_alt,
+                        "glyph": "alternative",
+                        "confidence": 1.0,
+                        "mismatch": 1.0,
+                        "triggered": True,
+                        "learned": False,
+                        "origin": "alternative",
+                        "related_index": idx,
+                    }
+                    st.session_state.chat_log.append(new_entry)
 
 
 if __name__ == "__main__":
