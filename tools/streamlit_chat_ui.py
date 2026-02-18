@@ -276,6 +276,11 @@ def main():
                     "user": f"assistant_alt_for_{idx}",
                     "response": alt_text,
                     "glyph": "alternative",
+                    "alt_generation": {
+                        "method": "from_feedback_note" if fb_text and fb_text.strip() else "generated",
+                        "raw_note": fb_text if fb_text and fb_text.strip() else None,
+                        "extracted": alt_text,
+                    },
                     "confidence": 1.0,
                     "mismatch": 1.0,
                     "triggered": True,
