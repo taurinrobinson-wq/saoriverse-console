@@ -316,22 +316,73 @@ def main():
                         pass
                 if col_no.button("No — try again", key=f"alt_no_{idx}_{aidx}"):
                     alt['feedback'] = 'negative'
-                    # Generate another alternative (simple strategy: new human-style phrasing)
+                    alt['feedback_stage'] = 'awaiting_reason'
                     try:
-                        responder = st.session_state.get('responder')
-                        try:
-                            new_alt = responder._human_style_response(None, chat[idx].get('user'))
-                        except Exception:
-                            new_alt = None
-                        if new_alt:
-                            new_alt = new_alt + " Is this better?"
-                        else:
-                            new_alt = "Can you tell me a bit more about how you'd like this to be different?"
+                        append_feedback({
+                            'user': chat[idx].get('user'),
+                            'response': alt.get('response'),
+                            'glyph': alt.get('glyph'),
+                            'confidence': alt.get('confidence', 0.0),
+                            'type': 'negative_alt',
+                            'conversation_id': chat[idx].get('conversation_id') or st.session_state.get('conversation_id'),
+                            'turn_index': chat[idx].get('turn_index') or st.session_state.get('turn_index')
+                        })
                     except Exception:
-                        new_alt = "Can you tell me a bit more about how you'd like this to be different?"
+                        pass
+
+            # If alternative received negative feedback and awaiting_reason, collect notes and generate new alt
+            if alt.get('feedback') == 'negative' and alt.get('feedback_stage') == 'awaiting_reason':
+                st.write("Tell us what was off about this alternative and optionally provide corrected phrasing:")
+                alt_fb_tags = st.multiselect("Tags", ['too_flowery', 'too_short', 'missed_emotion', 'wrong_question', 'tone_off', 'other'], key=f"alt_fb_tags_{idx}_{aidx}")
+                alt_fb_text = st.text_area("Optional corrected phrasing (best: put exact assistant reply in quotes)", key=f"alt_fb_text_{idx}_{aidx}")
+                if st.button("Submit alt feedback and try another", key=f"alt_fb_submit_{idx}_{aidx}"):
+                    alt['feedback_text'] = alt_fb_text
+                    alt['feedback_stage'] = 'submitted'
+                    alt['feedback_tags'] = alt_fb_tags
+                    # Persist alt feedback
+                    try:
+                        append_feedback({
+                            'user': chat[idx].get('user'),
+                            'response': alt.get('response'),
+                            'glyph': alt.get('glyph'),
+                            'confidence': alt.get('confidence', 0.0),
+                            'type': 'negative_alt_with_note',
+                            'note': alt_fb_text,
+                            'tags': alt_fb_tags,
+                            'conversation_id': chat[idx].get('conversation_id') or st.session_state.get('conversation_id'),
+                            'turn_index': chat[idx].get('turn_index') or st.session_state.get('turn_index')
+                        })
+                    except Exception:
+                        pass
+
+                    # Use corrected phrasing if provided, otherwise generate via responder
+                    new_alt_text = None
+                    if alt_fb_text and alt_fb_text.strip():
+                        # attempt to extract quoted phrase first
+                        import re
+                        m = re.search(r'"([^"]+)"', alt_fb_text)
+                        if not m:
+                            m = re.search(r"'([^']+)'", alt_fb_text)
+                        if m:
+                            new_alt_text = m.group(1).strip()
+                        else:
+                            new_alt_text = alt_fb_text.strip()
+                    if not new_alt_text:
+                        try:
+                            responder = st.session_state.get('responder')
+                            if responder and hasattr(responder, '_human_style_response'):
+                                try:
+                                    new_alt_text = responder._human_style_response(None, chat[idx].get('user'))
+                                except Exception:
+                                    new_alt_text = None
+                        except Exception:
+                            new_alt_text = None
+                    if not new_alt_text:
+                        new_alt_text = "Can you tell me a bit more about how you'd like this to be different?"
+
                     new_entry = {
                         "user": f"assistant_alt_for_{idx}",
-                        "response": new_alt,
+                        "response": new_alt_text + (" Is this better?" if not new_alt_text.endswith('?') else ''),
                         "glyph": "alternative",
                         "confidence": 1.0,
                         "mismatch": 1.0,
