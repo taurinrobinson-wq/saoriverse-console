@@ -20,6 +20,12 @@ from feedback_store import append_feedback, append_conversation
 def init_state():
     if "glyphs" not in st.session_state:
         st.session_state.glyphs = load_glyphs()
+    # Conversation/session identifiers for stitching
+    if "conversation_id" not in st.session_state:
+        import uuid
+        st.session_state.conversation_id = str(uuid.uuid4())
+    if "turn_index" not in st.session_state:
+        st.session_state.turn_index = 0
     if "responder" not in st.session_state:
         responder, orchestrator, proto_mgr = make_responder_and_orchestrator(st.session_state.glyphs)
         st.session_state.responder = responder
@@ -39,6 +45,9 @@ def init_state():
 
 def append_log(entry: dict):
     entry["timestamp"] = datetime.now().isoformat()
+    # Add conversation metadata
+    entry["conversation_id"] = st.session_state.get("conversation_id")
+    entry["turn_index"] = st.session_state.get("turn_index", 0)
     st.session_state.chat_log.append(entry)
     # Persist conversation exchange for batch/dominant processing later
     try:
@@ -50,7 +59,14 @@ def append_log(entry: dict):
             "mismatch": entry.get("mismatch"),
             "triggered": entry.get("triggered"),
             "learned": entry.get("learned"),
+            "conversation_id": entry.get("conversation_id"),
+            "turn_index": entry.get("turn_index"),
         })
+    except Exception:
+        pass
+    # advance turn index
+    try:
+        st.session_state.turn_index = st.session_state.get("turn_index", 0) + 1
     except Exception:
         pass
 
@@ -126,6 +142,8 @@ def main():
                         'glyph': e.get('glyph'),
                         'confidence': e.get('confidence', 0.0),
                         'type': 'positive',
+                        'conversation_id': st.session_state.get('conversation_id'),
+                        'turn_index': e.get('turn_index') or st.session_state.get('turn_index')
                     })
                 except Exception:
                     pass
@@ -146,6 +164,8 @@ def main():
                         'glyph': e.get('glyph'),
                         'confidence': e.get('confidence', 0.0),
                         'type': 'negative',
+                        'conversation_id': st.session_state.get('conversation_id'),
+                        'turn_index': e.get('turn_index') or st.session_state.get('turn_index')
                     })
                 except Exception:
                     pass
@@ -173,11 +193,19 @@ def main():
 
         # If negative feedback was given, collect corrective feedback and generate an alternative
         if e.get('feedback') == 'negative' and e.get('feedback_stage') == 'awaiting_reason':
-            fb_text = st.text_area("What was off about the response? (helpful: tell me what to change)", key=f"fb_text_{idx}")
+            st.write("Tell us what was off and pick any tags that apply:")
+            # Structured tags for feedback classification
+            FEEDBACK_TAG_CHOICES = [
+                'too_flowery', 'too_short', 'missed_emotion', 'wrong_question',
+                'tone_off', 'pressure', 'uncanny', 'other'
+            ]
+            fb_tags = st.multiselect("Tags", FEEDBACK_TAG_CHOICES, key=f"fb_tags_{idx}")
+            fb_text = st.text_area("Optional: more details / corrected phrasing", key=f"fb_text_{idx}")
             if st.button("Submit feedback and try an alternative", key=f"fb_submit_{idx}"):
                 e['feedback_text'] = fb_text
                 e['feedback_stage'] = 'submitted'
-                # Persist the negative feedback with user's corrective text
+                e['feedback_tags'] = fb_tags
+                # Persist the negative feedback with user's corrective text and tags
                 try:
                     append_feedback({
                         'user': e.get('user'),
@@ -186,6 +214,9 @@ def main():
                         'confidence': e.get('confidence', 0.0),
                         'type': 'negative_with_note',
                         'note': fb_text,
+                        'tags': fb_tags,
+                        'conversation_id': e.get('conversation_id') or st.session_state.get('conversation_id'),
+                        'turn_index': e.get('turn_index') or st.session_state.get('turn_index'),
                     })
                 except Exception:
                     pass
@@ -196,22 +227,29 @@ def main():
                     pass
 
                 # Generate an alternative grounded response using the subordinate responder
-                try:
-                    responder = st.session_state.get('responder')
-                    if responder and hasattr(responder, 'respond'):
-                        # Create an alternative reply using the human-style helper
-                        try:
-                            alt_text = responder._human_style_response(None, e.get('user'))
-                        except Exception:
-                            alt_text = responder._human_style_response(None, e.get('user')) if hasattr(responder, '_human_style_response') else None
+                    try:
+                        responder = st.session_state.get('responder')
+                        alt_text = None
+                        if responder:
+                            # prefer a public method if available, else fallback to direct helper
+                            if hasattr(responder, '_human_style_response'):
+                                try:
+                                    alt_text = responder._human_style_response(None, e.get('user'))
+                                except Exception:
+                                    alt_text = None
+                            elif hasattr(responder, 'respond'):
+                                # call respond to get a SubordinateBotResponse and use its text
+                                try:
+                                    sub = responder.respond(e.get('user'), {'user':'feedback_alt'}, [])
+                                    alt_text = sub.response_text
+                                except Exception:
+                                    alt_text = None
                         if not alt_text:
                             alt_text = "Sorry — can you tell me what you'd prefer me to change?"
                         else:
                             alt_text = f"{alt_text} Is this better?"
-                    else:
+                    except Exception:
                         alt_text = "Sorry — can you tell me what you'd prefer me to change?"
-                except Exception:
-                    alt_text = "Sorry — can you tell me what you'd prefer me to change?"
 
                 alt_entry = {
                     "user": f"assistant_alt_for_{idx}",
@@ -237,6 +275,19 @@ def main():
                     alt['feedback'] = 'positive'
                     # Mark original as improved
                     chat[idx]['feedback'] = 'corrected'
+                    # Persist corrected pair for Dominant processing
+                    try:
+                        append_feedback({
+                            'user': chat[idx].get('user'),
+                            'original_response': chat[idx].get('response'),
+                            'corrected_response': alt.get('response'),
+                            'type': 'accepted_alternative',
+                            'tags': chat[idx].get('feedback_tags', []),
+                            'conversation_id': chat[idx].get('conversation_id') or st.session_state.get('conversation_id'),
+                            'turn_index': chat[idx].get('turn_index') or st.session_state.get('turn_index')
+                        })
+                    except Exception:
+                        pass
                     # Optionally notify orchestrator/dominant of successful correction
                     try:
                         st.session_state.orchestrator.observe_exchange(chat[idx].get('user'), {"response": alt.get('response'), "confidence": alt.get('confidence', 1.0)}, simple_emotion_parser(chat[idx].get('user')))
