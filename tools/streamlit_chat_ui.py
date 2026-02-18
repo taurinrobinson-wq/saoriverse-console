@@ -228,7 +228,24 @@ def main():
 
                 # If the user provided corrective phrasing, use that directly as the alternative.
                 if fb_text and fb_text.strip():
-                    alt_text = fb_text.strip()
+                    # Try to extract an explicit corrected phrasing from the user's notes.
+                    import re
+                    txt = fb_text.strip()
+                    # Prefer text inside quotes if present
+                    m = re.search(r'["“”\']([^"“”\']+)["“”\']', txt)
+                    if m:
+                        alt_text = m.group(1).strip()
+                    else:
+                        # Remove common prefatory phrases like "Should have been more like"
+                        alt_text = re.sub(r'(?i)^\s*(should have been more like[:\-\s]*)', '', txt).strip()
+                        # If still long or contains explanation, take the first sentence or line
+                        if '\n' in alt_text:
+                            alt_text = alt_text.split('\n', 1)[0].strip()
+                        if len(alt_text) > 240:
+                            # cut to first sentence
+                            parts = re.split(r'[\.\?!]\s+', alt_text)
+                            if parts:
+                                alt_text = parts[0].strip()
                 else:
                     # Generate an alternative grounded response using the subordinate responder
                     alt_text = None
