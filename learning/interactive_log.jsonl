@@ -1,0 +1,11 @@
+{"event": "demo_step", "input": "I had a lovely morning and I feel so happy", "glyph": "warm", "dom_mismatch": 0.0, "learned": true, "timestamp": "2026-02-17T13:58:52.467183"}
+{"event": "demo_step", "input": "I had a lovely morning and I feel so happy", "glyph": "warm", "dom_mismatch": 0.0, "learned": true, "timestamp": "2026-02-17T13:59:06.830681"}
+{"event": "demo_step", "input": "I had a lovely morning and I feel so happy", "glyph": "warm", "dom_mismatch": 0.0, "learned": true, "timestamp": "2026-02-17T13:59:19.839181"}
+{"event": "demo_step", "input": "I'm really scared about the results", "glyph": "fallback", "dom_mismatch": 0.5, "learned": true, "timestamp": "2026-02-17T13:59:21.994034"}
+{"event": "demo_step", "input": "I'm angry at what happened yesterday", "glyph": "fallback", "dom_mismatch": 0.5, "learned": true, "timestamp": "2026-02-17T13:59:24.096297"}
+{"event": "demo_step", "input": "I had a lovely morning and I feel so happy", "glyph": "Saturational Bliss", "dom_mismatch": 0.0, "learned": true, "timestamp": "2026-02-17T14:18:39.472619"}
+{"event": "demo_step", "input": "I'm really scared about the results", "glyph": "fallback", "dom_mismatch": 0.5, "learned": true, "timestamp": "2026-02-17T14:18:41.635687"}
+{"event": "demo_step", "input": "I'm angry at what happened yesterday", "glyph": "fallback", "dom_mismatch": 0.5, "learned": true, "timestamp": "2026-02-17T14:18:43.724299"}
+{"event": "demo_step", "input": "I had a lovely morning and I feel so happy", "glyph": "Saturational Bliss", "dom_mismatch": 0.0, "learned": true, "timestamp": "2026-02-17T14:23:28.121082"}
+{"event": "demo_step", "input": "I'm really scared about the results", "glyph": "fallback", "dom_mismatch": 0.5, "learned": true, "timestamp": "2026-02-17T14:23:30.256031"}
+{"event": "demo_step", "input": "I'm angry at what happened yesterday", "glyph": "fallback", "dom_mismatch": 0.5, "learned": true, "timestamp": "2026-02-17T14:23:32.459664"}

@@ -371,6 +371,18 @@ class SubordinateBotResponder:
         weight_line = random.choice(weight)
         notice_line = random.choice(noticing)
         invite = random.choice(invitations)
+        # If the user's input is very short (e.g., "feeling overwhelmed"),
+        # prefer a brief empathetic inquiry rather than assuming many details.
+        ui = (user_input or "").strip().lower()
+        short_phrases = {"feeling overwhelmed", "overwhelmed", "i'm overwhelmed", "im overwhelmed", "so overwhelmed"}
+        token_count = len(ui.split())
+        if ui in short_phrases or token_count <= 5:
+            inquiries = [
+                "Sorry to hear that — do you want to say more?",
+                "That sounds hard. Do you want to talk about it?",
+                "I'm sorry — do you want to tell me what's going on?",
+            ]
+            return random.choice(inquiries)
 
         if notice_line:
             return f"{opener} {weight_line} {notice_line} {invite}"

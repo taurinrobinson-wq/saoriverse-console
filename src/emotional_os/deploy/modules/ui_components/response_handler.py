@@ -301,7 +301,7 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         response = voltage_response.strip()
         if "Resonant Glyph:" in response:
             response = response.split("Resonant Glyph:")[0].strip()
-        
+
         # IMPORTANT: Check if this is a composite response (analysis + conversational)
         # separated by blank line or double newline
         parts = response.split("\n\n")
@@ -313,10 +313,9 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
             poetic_analysis = parts[0].strip()
             logger.debug(f"Composite response detected. Analysis: {poetic_analysis[:100]}...")
             return conversational_response
-        
-        # Single response: use as-is
-        logger.info("_build_conversational_response: USING_VOLTAGE_RESPONSE")
-        # store a brief debug snapshot in session state for traceability
+
+        # Single response: sanitize against poetic/glyph-description outputs
+        logger.info("_build_conversational_response: USING_VOLTAGE_RESPONSE (sanitizing)")
         try:
             st.session_state["last_used_response_source"] = {
                 "source": "voltage_response",
@@ -325,6 +324,51 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
             }
         except Exception:
             pass
+
+        # Defensive sanitization: if the voltage response appears poetic or directly
+        # mirrors the glyph description, avoid returning it verbatim to the UI.
+        try:
+            rt_lower = response.lower()
+            poetic_markers = (
+                "fullness",
+                "steeped",
+                "ecstatic",
+                "joy so",
+                "bliss",
+                "saturat",
+                "still",
+                "mourning",
+                "sanctify",
+                "poetic",
+                "lyric",
+            )
+            looks_poetic = any(m in rt_lower for m in poetic_markers) or len(rt_lower.split()) > 40
+
+            glyph_desc = ""
+            if best_glyph and isinstance(best_glyph, dict):
+                glyph_desc = (best_glyph.get("description") or "").strip().lower()
+
+            duplicates_glyph_desc = glyph_desc and glyph_desc and (glyph_desc in rt_lower or rt_lower in glyph_desc)
+
+            if looks_poetic or duplicates_glyph_desc:
+                # Prefer subordinate responder (if available) to produce a grounded reply
+                try:
+                    responder = st.session_state.get("responder")
+                    convo_ctx = st.session_state.get("conversation_context") or {}
+                    emotional_vector = local_analysis.get("emotional_vector") if isinstance(local_analysis, dict) else None
+                    if responder and hasattr(responder, "respond"):
+                        sub_resp = responder.respond(user_input, convo_ctx, emotional_vector or [])
+                        return sub_resp.response_text
+                except Exception:
+                    # If subordinate not available or fails, fall back to a gentle generic reply
+                    pass
+
+                # Gentle sanitized fallback
+                return "I hear you. Can you say a bit more about how that feels?"
+        except Exception:
+            # If sanitization checks fail, return original response as last resort
+            return response
+
         return response
     
     # Use FirstPerson orchestrator to generate glyph-informed response
@@ -361,7 +405,40 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         
         # Use glyph insight as support
         if glyph_desc:
-            return f"{opening}I'm sensing {glyph_name.lower()} — {glyph_desc.lower()}."
+            # Defensive: if the glyph description looks poetic, avoid returning
+            # the verbatim description to the user. Prefer subordinate responder
+            # or a short, grounded acknowledgement.
+            try:
+                gd_lower = glyph_desc.lower()
+                poetic_markers = (
+                    "fullness",
+                    "steeped",
+                    "ecstatic",
+                    "joy so",
+                    "bliss",
+                    "saturat",
+                    "still",
+                    "mourning",
+                    "sanctify",
+                    "poetic",
+                    "lyric",
+                )
+                looks_poetic = any(m in gd_lower for m in poetic_markers) or len(gd_lower.split()) > 40
+                if looks_poetic:
+                    try:
+                        responder = st.session_state.get("responder")
+                        convo_ctx = st.session_state.get("conversation_context") or {}
+                        emotional_vector = local_analysis.get("emotional_vector") if isinstance(local_analysis, dict) else None
+                        if responder and hasattr(responder, "respond"):
+                            sub_resp = responder.respond(user_input, convo_ctx, emotional_vector or [])
+                            return sub_resp.response_text
+                    except Exception:
+                        pass
+                    return f"{opening}I’m sensing {glyph_name.lower()}. Can you say more about how that feels?"
+                else:
+                    return f"{opening}I'm sensing {glyph_name.lower()} — {glyph_desc.lower()}."
+            except Exception:
+                return f"{opening}I'm sensing {glyph_name.lower()} — {glyph_desc.lower()}."
         else:
             return opening
     
