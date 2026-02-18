@@ -14,6 +14,7 @@ import streamlit as st
 
 # Reuse helpers from interactive CLI
 from interactive_learning_ui import load_glyphs, simple_emotion_parser, make_responder_and_orchestrator
+from feedback_store import append_feedback, append_conversation
 
 
 def init_state():
@@ -39,6 +40,19 @@ def init_state():
 def append_log(entry: dict):
     entry["timestamp"] = datetime.now().isoformat()
     st.session_state.chat_log.append(entry)
+    # Persist conversation exchange for batch/dominant processing later
+    try:
+        append_conversation({
+            "user": entry.get("user"),
+            "response": entry.get("response"),
+            "glyph": entry.get("glyph"),
+            "confidence": entry.get("confidence"),
+            "mismatch": entry.get("mismatch"),
+            "triggered": entry.get("triggered"),
+            "learned": entry.get("learned"),
+        })
+    except Exception:
+        pass
 
 
 def main():
@@ -104,6 +118,18 @@ def main():
             col_up, col_down = st.columns([1, 1])
             if col_up.button("👍", key=f"thumbs_up_{idx}"):
                 e['feedback'] = 'positive'
+                # Persist feedback for later batch processing by Dominant
+                try:
+                    append_feedback({
+                        'user': e.get('user'),
+                        'response': e.get('response'),
+                        'glyph': e.get('glyph'),
+                        'confidence': e.get('confidence', 0.0),
+                        'type': 'positive',
+                    })
+                except Exception:
+                    pass
+
                 # Inform orchestrator of positive feedback (if available)
                 try:
                     st.session_state.orchestrator.observe_exchange(e.get('user'), {"response": e.get('response'), "confidence": e.get('confidence', 0.0)}, simple_emotion_parser(e.get('user')))
@@ -113,6 +139,16 @@ def main():
             if col_down.button("👎", key=f"thumbs_down_{idx}"):
                 e['feedback'] = 'negative'
                 e['feedback_stage'] = 'awaiting_reason'
+                try:
+                    append_feedback({
+                        'user': e.get('user'),
+                        'response': e.get('response'),
+                        'glyph': e.get('glyph'),
+                        'confidence': e.get('confidence', 0.0),
+                        'type': 'negative',
+                    })
+                except Exception:
+                    pass
 
         # Show feedback status immediately so user gets visual confirmation
         if e.get('feedback'):
@@ -141,6 +177,18 @@ def main():
             if st.button("Submit feedback and try an alternative", key=f"fb_submit_{idx}"):
                 e['feedback_text'] = fb_text
                 e['feedback_stage'] = 'submitted'
+                # Persist the negative feedback with user's corrective text
+                try:
+                    append_feedback({
+                        'user': e.get('user'),
+                        'response': e.get('response'),
+                        'glyph': e.get('glyph'),
+                        'confidence': e.get('confidence', 0.0),
+                        'type': 'negative_with_note',
+                        'note': fb_text,
+                    })
+                except Exception:
+                    pass
                 # Record observation with orchestrator if available
                 try:
                     st.session_state.orchestrator.observe_exchange(e.get('user'), {"response": e.get('response'), "confidence": e.get('confidence', 0.0)}, simple_emotion_parser(e.get('user')))
@@ -152,8 +200,14 @@ def main():
                     responder = st.session_state.get('responder')
                     if responder and hasattr(responder, 'respond'):
                         # Create an alternative reply using the human-style helper
-                        alt_text = responder._human_style_response(None, e.get('user'))
-                        alt_text = f"{alt_text} Is this better?"
+                        try:
+                            alt_text = responder._human_style_response(None, e.get('user'))
+                        except Exception:
+                            alt_text = responder._human_style_response(None, e.get('user')) if hasattr(responder, '_human_style_response') else None
+                        if not alt_text:
+                            alt_text = "Sorry — can you tell me what you'd prefer me to change?"
+                        else:
+                            alt_text = f"{alt_text} Is this better?"
                     else:
                         alt_text = "Sorry — can you tell me what you'd prefer me to change?"
                 except Exception:
@@ -193,7 +247,14 @@ def main():
                     # Generate another alternative (simple strategy: new human-style phrasing)
                     try:
                         responder = st.session_state.get('responder')
-                        new_alt = responder._human_style_response(None, chat[idx].get('user')) + " Is this better?"
+                        try:
+                            new_alt = responder._human_style_response(None, chat[idx].get('user'))
+                        except Exception:
+                            new_alt = None
+                        if new_alt:
+                            new_alt = new_alt + " Is this better?"
+                        else:
+                            new_alt = "Can you tell me a bit more about how you'd like this to be different?"
                     except Exception:
                         new_alt = "Can you tell me a bit more about how you'd like this to be different?"
                     new_entry = {
