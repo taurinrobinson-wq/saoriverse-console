@@ -96,6 +96,64 @@ class SubordinateBotResponder:
             )
             best_glyph_name = "fallback"
             match_confidence = 0.0
+
+        # Defensive: if the generated response looks like a poetic glyph description
+        # (long, contains poetic markers or the glyph description), override it with
+        # a short human-style reply to keep subordinate grounded.
+        try:
+            rt_lower = (response_text or "").lower()
+            poetic_markers = (
+                "fullness",
+                "steeped",
+                "ecstatic",
+                "joy so",
+                "bliss",
+                "saturat",
+                "still",
+                "mourning",
+                "sanctify",
+                "poetic",
+                "lyric",
+            )
+
+            is_long = len((response_text or "").split()) > 12
+            has_poetic = any(m in rt_lower for m in poetic_markers)
+
+            # Also check if the glyph entry has a description that matches the response
+            glyph_desc = None
+            if best_glyph_name and best_glyph_name in self.glyph_library:
+                glyph_desc = (self.glyph_library[best_glyph_name].get("description") or "").strip().lower()
+
+            if (is_long and has_poetic) or (glyph_desc and glyph_desc and glyph_desc in rt_lower):
+                # If user is overwhelmed prefer the overwhelm template
+                ui = (user_input or "").lower()
+                overwhelm_kw = [
+                    "overwhelm",
+                    "overwhelmed",
+                    "too much",
+                    "drowning",
+                    "can't breathe",
+                    "cant breathe",
+                ]
+                if any(k in ui for k in overwhelm_kw):
+                    response_text = self._human_overwhelm_response(user_input)
+                else:
+                    # infer emotion from glyph name if possible
+                    inferred_emotion = None
+                    name = (best_glyph_name or "").lower()
+                    if any(k in name for k in ("sad", "grief", "mourning", "ache")):
+                        inferred_emotion = "sad"
+                    elif any(k in name for k in ("anger", "frustration")):
+                        inferred_emotion = "angry"
+                    elif any(k in name for k in ("fear", "anxiety", "panic")):
+                        inferred_emotion = "anxious"
+                    elif any(k in name for k in ("joy", "relief", "happy", "bliss")):
+                        inferred_emotion = "joy"
+                    response_text = self._human_style_response(inferred_emotion, user_input)
+                method = "matched"
+        except Exception:
+            # non-fatal: if anything goes wrong, keep original response_text
+            pass
         
         # Step 3: Apply tier processing (safety, presence)
         # NOTE: Tier3 (poetic enrichment) is intentionally NOT applied here
