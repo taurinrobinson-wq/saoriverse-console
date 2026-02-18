@@ -14,6 +14,7 @@ import streamlit as st
 
 # Reuse helpers from interactive CLI
 from interactive_learning_ui import load_glyphs, simple_emotion_parser, make_responder_and_orchestrator
+from state_shift_tracker import StateShiftTracker, Templates
 from feedback_store import append_feedback, append_conversation
 
 
@@ -37,6 +38,10 @@ def init_state():
             st.session_state.hybrid = get_hybrid_learner()
         except Exception:
             st.session_state.hybrid = None
+    if "state_tracker" not in st.session_state:
+        st.session_state.state_tracker = StateShiftTracker()
+    if "state_templates" not in st.session_state:
+        st.session_state.state_templates = Templates()
     if "chat_log" not in st.session_state:
         st.session_state.chat_log = []
     if "dominant_threshold" not in st.session_state:
@@ -93,7 +98,22 @@ def main():
         user_input = st.text_input("You", key="user_input")
         if st.button("Send") and user_input:
             ev = simple_emotion_parser(user_input)
+            # update and read conversational state
+            state = st.session_state.state_tracker.update(user_input)
             resp = st.session_state.responder.respond(user_input, {"user":"streamlit"}, ev)
+            # If the state suggests we should avoid questions or probing, use compact templates
+            if state in ("hesitation", "disclosure", "stabilization", "integration"):
+                try:
+                    override_text = st.session_state.state_templates.get(state)
+                    # Keep a gentle suffix for alternatives where appropriate
+                    resp_text = override_text
+                    resp_glyph = f"state_{state}"
+                except Exception:
+                    resp_text = getattr(resp, 'response_text', None)
+                    resp_glyph = getattr(resp, 'glyph_name', None)
+            else:
+                resp_text = getattr(resp, 'response_text', None)
+                resp_glyph = getattr(resp, 'glyph_name', None)
             # Dominant observes
             dom = st.session_state.orchestrator.observe_exchange(user_input, {"response": resp.response_text, "confidence": resp.confidence}, ev)
             mismatch = getattr(dom, 'mismatch_degree', getattr(dom, 'confidence', 0.0))
@@ -109,12 +129,13 @@ def main():
             # Append and show
             entry = {
                 "user": user_input,
-                "response": resp.response_text,
-                "glyph": resp.glyph_name,
-                "confidence": resp.confidence,
+                "response": resp_text,
+                "glyph": resp_glyph,
+                "confidence": getattr(resp, 'confidence', 1.0),
                 "mismatch": mismatch,
                 "triggered": triggered,
                 "learned": learned,
+                "state": state,
             }
             append_log(entry)
 
