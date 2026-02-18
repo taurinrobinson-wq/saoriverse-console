@@ -226,30 +226,34 @@ def main():
                 except Exception:
                     pass
 
-                # Generate an alternative grounded response using the subordinate responder
-                alt_text = None
-                try:
-                    responder = st.session_state.get('responder')
-                    if responder:
-                        # prefer a public method if available, else fallback to direct helper
-                        if hasattr(responder, '_human_style_response'):
-                            try:
-                                alt_text = responder._human_style_response(None, e.get('user'))
-                            except Exception:
-                                alt_text = None
-                        elif hasattr(responder, 'respond'):
-                            # call respond to get a SubordinateBotResponse and use its text
-                            try:
-                                sub = responder.respond(e.get('user'), {'user':'feedback_alt'}, [])
-                                alt_text = sub.response_text
-                            except Exception:
-                                alt_text = None
-                    if not alt_text:
+                # If the user provided corrective phrasing, use that directly as the alternative.
+                if fb_text and fb_text.strip():
+                    alt_text = fb_text.strip()
+                else:
+                    # Generate an alternative grounded response using the subordinate responder
+                    alt_text = None
+                    try:
+                        responder = st.session_state.get('responder')
+                        if responder:
+                            # prefer a public method if available, else fallback to direct helper
+                            if hasattr(responder, '_human_style_response'):
+                                try:
+                                    alt_text = responder._human_style_response(None, e.get('user'))
+                                except Exception:
+                                    alt_text = None
+                            elif hasattr(responder, 'respond'):
+                                # call respond to get a SubordinateBotResponse and use its text
+                                try:
+                                    sub = responder.respond(e.get('user'), {'user':'feedback_alt'}, [])
+                                    alt_text = sub.response_text
+                                except Exception:
+                                    alt_text = None
+                        if not alt_text:
+                            alt_text = "Sorry — can you tell me what you'd prefer me to change?"
+                        else:
+                            alt_text = f"{alt_text} Is this better?"
+                    except Exception:
                         alt_text = "Sorry — can you tell me what you'd prefer me to change?"
-                    else:
-                        alt_text = f"{alt_text} Is this better?"
-                except Exception:
-                    alt_text = "Sorry — can you tell me what you'd prefer me to change?"
 
                 alt_entry = {
                     "user": f"assistant_alt_for_{idx}",
