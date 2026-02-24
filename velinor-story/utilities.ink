@@ -57,8 +57,8 @@
 === tone_summary() ===
 Trust: {tone_trust}
 Observation: {tone_observation}
-Empathy: {tone_empathy}
 Narrative Presence: {tone_narrative_presence}
+Empathy: {tone_empathy}
 Coherence: {coherence}
 
 === highest_tone() ===
