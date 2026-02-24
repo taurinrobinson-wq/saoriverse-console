@@ -91,8 +91,8 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
         # Strip prosody metadata before returning
         response = strip_prosody_metadata(response)
 
-        # Prevent verbatim repetition
-        response = _prevent_response_repetition(response)
+        # Prevent verbatim repetition (pass current user input and conversation context so we can detect complaints)
+        response = _prevent_response_repetition(user_input, response, conversation_context)
         
         # SYNTHESIS LAYER: Add captured details from user input to make response more specific
         # This ensures responses show they understood what the user said, not just generic prompts
@@ -680,7 +680,7 @@ def strip_prosody_metadata(response: str) -> str:
     return response
 
 
-def _prevent_response_repetition(response: str) -> str:
+def _prevent_response_repetition(user_input: str, response: str, conversation_context: dict = None) -> str:
     """Prevent exact repetition of assistant's last message.
 
     If new response matches previous one, append a gentle follow-up prompt.
@@ -700,21 +700,158 @@ def _prevent_response_repetition(response: str) -> str:
         if not history or len(history) == 0:
             return response
 
-        # Get last assistant message
-        last_assistant = history[-1].get("assistant",
-                                         "") if isinstance(history[-1], dict) else ""
+        # Collect recent assistant messages (robust to different history formats)
+        assistant_msgs = []
+        user_msgs = []
+        for item in reversed(history[-10:]):  # look back up to last 10 exchanges
+            if isinstance(item, dict):
+                # Try common keys
+                if "assistant" in item:
+                    assistant_msgs.append(str(item.get("assistant") or "").strip())
+                elif item.get("role") == "assistant":
+                    assistant_msgs.append(str(item.get("content") or item.get("message") or "").strip())
+                if item.get("role") == "user" or "user" in str(item.get("role", "")).lower():
+                    user_msgs.append(str(item.get("content") or item.get("message") or item.get("user") or "").strip())
+            elif isinstance(item, str):
+                # Heuristic: alternate user/assistant unknown — skip
+                pass
 
-        if last_assistant and last_assistant.strip() == response.strip():
-            # Generate context-aware follow-up
+        # If any recent assistant message is similar to the current response,
+        # treat it as repetition and choose an alternative follow-up.
+        def _norm(s: str) -> str:
+            import re
+
+            return re.sub(r"\s+", " ", re.sub(r"[^\w\s]", "", (s or "").lower())).strip()
+
+        normalized = _norm(response)
+        recent_assistant_norms = [_norm(am) for am in assistant_msgs[:5] if am]
+
+        # Direct check against last assistant message from conversation context
+        try:
+            ctx_last = None
+            if isinstance(conversation_context, dict):
+                ctx_last = conversation_context.get("last_assistant_message")
+            if not ctx_last:
+                try:
+                    from .session_manager import get_conversation_context
+                    ctx_last = get_conversation_context().get("last_assistant_message")
+                except Exception:
+                    ctx_last = None
+            last_assistant_norm_direct = _norm(ctx_last or "")
+        except Exception:
+            last_assistant_norm_direct = ""
+
+        # If the last assistant message exactly matches the candidate response and
+        # the user just provided a substantive reply, acknowledge rather than re-ask.
+        try:
+            if last_assistant_norm_direct and last_assistant_norm_direct == normalized:
+                # substantive user reply heuristic
+                if len((user_input or "").split()) > 3 and not any(t in (user_input or "").lower() for t in ("you already", "not helpful", "stop repeating")):
+                    frag = (user_input or "").split('.')[-1].strip() or (user_input or "")[:80]
+                    return f"Thanks — it sounds like {frag}. That makes sense; would you like a short grounding or a tiny next step right now?"
+        except Exception:
+            pass
+
+        is_repeated = any(r == normalized or (r and normalized and (r in normalized or normalized in r)) for r in recent_assistant_norms)
+
+        # Also inspect current user_input for complaint triggers (current message not yet in history)
+        complaint_triggers = ("you already", "already asked", "not helpful", "stop repeating", "you asked", "you already asked")
+        current_user = (user_input or "").lower()
+        user_complaint_current = any(trigger in current_user for trigger in complaint_triggers)
+
+        # If the user explicitly complains about repetition, apologize and offer grounding
+        if user_complaint_current:
+            print(f"DEBUG: complaint detected in user_input='{current_user}'")
+            alt = (
+                "Sorry — I repeated myself. Thank you for pointing that out. "
+                "It sounds frustrating; I can slow down and try a different approach. "
+                "Would you prefer a brief grounding exercise, a practical step, or something else?"
+            )
+            return alt
+
+        # Debugging info
+        try:
+            logger.debug(f"RepetitionCheck: normalized_response='{normalized[:120]}', recent_assistant_norms={recent_assistant_norms}, current_user='{current_user[:120]}'")
+        except Exception:
+            pass
+
+        # QUICK HEURISTIC: if the candidate response is the clarifying question
+        # and the user's current message appears to answer it (has content/keywords),
+        # reflect rather than re-ask. This catches cases where history/context
+        # lookups may be unreliable in non-Streamlit runs.
+        try:
+            if "what would it look" in normalized and (len(current_user.split()) > 6 or any(k in current_user for k in ("tension", "frozen", "rest", "feel", "feelings"))):
+                fragment = current_user.split('.')[-1].strip()
+                fragment = fragment if fragment else current_user[:80]
+                reflect = f"Thanks for sharing that — it sounds like {fragment}. That makes sense given everything you're juggling. Would you like a grounding exercise or a small practical step right now?"
+                return reflect
+        except Exception:
+            pass
+        # If the last assistant asked a clarifying question (e.g., "What would it look like...")
+        # and the current user input appears to answer it (has content/keywords),
+        # prefer acknowledging and reflecting rather than re-asking.
+        try:
+            ctx = conversation_context if conversation_context is not None else get_conversation_context()
+            last_assistant_msg = (ctx.get("last_assistant_message") or "") if isinstance(ctx, dict) else ""
+        except Exception:
+            last_assistant_msg = ""
+
+        la_lower = (last_assistant_msg or "").lower()
+        clarifying_markers = ("what would it look", "what would it look like", "can you tell me one specific detail", "what would it look like if you could")
+        asked_clarifying = any(m in la_lower for m in clarifying_markers) or ("?" in la_lower and len(la_lower.split()) < 40)
+
+        # Heuristics for current user answering: contains emotional keywords or longer than a short reply
+        answer_keywords = ("tension", "frozen", "feel", "feelings", "mood", "relief", "rest", "meltd", "tension", "stress")
+        looks_like_answer = (len(current_user.split()) > 6) or any(k in current_user for k in answer_keywords)
+
+        if asked_clarifying and looks_like_answer and not user_complaint_current:
+            # Build a short reflective reply acknowledging the user's answer
+            try:
+                # Extract a short phrase from user's input for reflection
+                fragment = current_user.split('.')[-1].strip()
+                fragment = fragment if fragment else current_user[:80]
+                reflect = f"Thanks for sharing that — it sounds like {fragment}. That makes sense given everything you're juggling. Would you like a grounding exercise or a small practical step right now?"
+                return reflect
+            except Exception:
+                pass
+
+        if is_repeated:
+            # Check last assistant message from conversation context (if passed in session)
+            try:
+                from .session_manager import get_conversation_context
+                ctx = get_conversation_context()
+                last_assistant_msg = (ctx.get("last_assistant_message") or "")
+            except Exception:
+                last_assistant_msg = ""
+
+            last_assistant_norm = _norm(last_assistant_msg)
+
+            # If the last assistant message is the same clarifying prompt and the user
+            # just repeated themselves (or complained), don't ask the same question again.
+            repeated_clarifying = last_assistant_norm and (last_assistant_norm == normalized or last_assistant_norm in normalized or normalized in last_assistant_norm)
+
+            if user_complaint_current or any(any(trigger in um.lower() for trigger in complaint_triggers) for um in user_msgs[:3] if um) or repeated_clarifying:
+                alt = (
+                    "Sorry — I repeated myself. Thank you for pointing that out. "
+                    "It sounds like the tension in your body feels like it's holding you still. "
+                    "If you want, we can try a brief grounding: take one slow breath in, hold, and let it go — "
+                    "or tell me one tiny thing that might soften that tension right now."
+                )
+                return alt
+
+            # Otherwise, append a varied follow-up (avoid reusing the same follow-up every time)
             followups = [
                 "Can you tell me one specific detail about that?",
                 "Would it help if we tried one small concrete step together?",
                 "If you pick one thing to focus on right now, what would it be?",
-                "That's important, would you like a short breathing practice or a practical plan?",
+                "That's important — would you like a short breathing practice or a practical plan?",
             ]
 
-            idx = len(response) % len(followups)
-            response = f"{response} {followups[idx]}"
+            # Choose a follow-up that's different from the most recent assistant follow-up
+            for f in followups:
+                if not recent_assistant_norms or all(_norm(f) not in r for r in recent_assistant_norms):
+                    response = f"{response} {f}"
+                    break
 
     except Exception as e:
         logger.debug(f"Repetition prevention failed: {e}")

@@ -102,52 +102,53 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     try:
         nrc = None
         import_error = None
-        
-        # Strategy 1: Direct import (works when sys.path includes src)
-        try:
-            from parser.nrc_lexicon_loader import nrc  # noqa: F401
-            logger.debug("NRC loaded via parser.nrc_lexicon_loader")
-        except ImportError as e:
-            import_error = e
-        
-        # Strategy 2: Full module path
+
+        # Avoid importing the stdlib 'parser' package by name; instead locate
+        # the repository's 'nrc_lexicon_loader.py' and import it by file path.
+        from importlib import util as _util
+        from pathlib import Path
+
+        current_file = Path(__file__)
+        loader_path = None
+
+        # Look for common locations (walk parents to find src/parser)
+        for parent in current_file.parents:
+            candidate = parent / "parser" / "nrc_lexicon_loader.py"
+            if candidate.exists():
+                loader_path = candidate
+                logger.debug(f"Found NRC loader at: {candidate}")
+                break
+
+        # Also check project-level src/parser
+        if loader_path is None:
+            candidate = current_file.parents[3] / "parser" / "nrc_lexicon_loader.py"
+            if candidate.exists():
+                loader_path = candidate
+
+        if loader_path is not None:
+            try:
+                spec = _util.spec_from_file_location("nrc_lexicon_loader", str(loader_path))
+                module = _util.module_from_spec(spec)
+                spec.loader.exec_module(module)  # type: ignore
+                nrc = getattr(module, "nrc", None)
+                logger.debug(f"Imported NRC loader from file: {loader_path}")
+            except Exception as e:
+                import_error = e
+        else:
+            import_error = ImportError("Could not locate nrc_lexicon_loader.py in repository")
+
+        # As a final fallback, try the package import path that avoids the name 'parser'
         if nrc is None:
             try:
-                from emotional_os.parser.nrc_lexicon_loader import nrc  # noqa: F401
-                logger.debug("NRC loaded via emotional_os.parser.nrc_lexicon_loader")
-            except ImportError as e:
-                import_error = e
-        
-        # Strategy 3: Search filesystem and add path
-        if nrc is None:
-            from pathlib import Path
-            current_file = Path(__file__)
-            src_dir = None
-            
-            # Search up to find parser/nrc_lexicon_loader.py
-            for parent in current_file.parents:
-                candidate = parent / "parser" / "nrc_lexicon_loader.py"
-                if candidate.exists():
-                    src_dir = parent
-                    logger.debug(f"Found NRC at: {candidate}")
-                    break
-            
-            if src_dir:
-                if str(src_dir) not in sys.path:
-                    sys.path.insert(0, str(src_dir))
-                    logger.debug(f"Added {src_dir} to sys.path")
-                
-                try:
-                    from parser.nrc_lexicon_loader import nrc  # noqa: F401
-                    logger.debug("NRC loaded after filesystem search")
-                except ImportError as e:
-                    import_error = e
-            else:
-                import_error = ImportError("Could not find parser/nrc_lexicon_loader.py in parent directories")
-        
+                from src.parser.nrc_lexicon_loader import nrc  # noqa: F401
+                logger.debug("NRC loaded via src.parser.nrc_lexicon_loader")
+            except Exception as e:
+                # If this fails, capture the last error
+                import_error = import_error or e
+
         if nrc is not None:
             # Verify the NRC lexicon has data (not just imported but empty)
-            has_data = nrc.lexicon and len(nrc.lexicon) > 0
+            has_data = getattr(nrc, "lexicon", None) and len(getattr(nrc, "lexicon", {})) > 0
             if has_data:
                 NLP_STATE["nrc_available"] = True
                 NLP_STATE["nrc_exc"] = None
