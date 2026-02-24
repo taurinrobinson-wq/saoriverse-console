@@ -94,17 +94,23 @@ Coherence: {coherence}
 }
 
 === get_tone_name(stat) ===
-{stat == "empathy":
-    ~ return "Empathy (Compassion)"
-- stat == "observation":
-    ~ return "Observation (Critical Thinking)"
-- stat == "narrative_presence":
-    ~ return "Narrative Presence (Authority)"
-- stat == "trust":
-    ~ return "Trust (Connection)"
-- else:
-    ~ return "Unknown"
-}
+{stat}
++ empathy -> return_empathy_name
++ observation -> return_observation_name
++ narrative_presence -> return_narrative_presence_name
++ else -> return_trust_name
+
+=== return_empathy_name ===
+~ return "Empathy (Compassion)"
+
+=== return_observation_name ===
+~ return "Observation (Critical Thinking)"
+
+=== return_narrative_presence_name ===
+~ return "Narrative Presence (Authority)"
+
+=== return_trust_name ===
+~ return "Trust (Connection)"
 
 // ============================================================================
 // COHERENCE DESCRIPTIONS
@@ -136,28 +142,61 @@ Coherence: {coherence}
 ~ temp npc_primary_value = 50
 ~ temp npc_secondary_value = 50
 
-{
-    - npc_primary_tone == "empathy":
-        ~ npc_primary_value = tone_empathy
-    - npc_primary_tone == "observation":
-        ~ npc_primary_value = tone_observation
-    - npc_primary_tone == "narrative_presence":
-        ~ npc_primary_value = tone_narrative_presence
-    - npc_primary_tone == "trust":
-        ~ npc_primary_value = tone_trust
-}
+{npc_primary_tone}
++ empathy -> resonance_primary_empathy
++ observation -> resonance_primary_observation
++ narrative_presence -> resonance_primary_narrative_presence
++ else -> resonance_primary_trust
 
-{
-    - npc_secondary_tone == "empathy":
-        ~ npc_secondary_value = tone_empathy
-    - npc_secondary_tone == "observation":
-        ~ npc_secondary_value = tone_observation
-    - npc_secondary_tone == "narrative_presence":
-        ~ npc_secondary_value = tone_narrative_presence
-    - npc_secondary_tone == "trust":
-        ~ npc_secondary_value = tone_trust
-}
+=== resonance_primary_empathy ===
+~ npc_primary_value = tone_empathy
+{npc_secondary_tone}
++ empathy -> resonance_secondary_empathy
++ observation -> resonance_secondary_observation
++ narrative_presence -> resonance_secondary_narrative_presence
++ else -> resonance_secondary_trust
 
+=== resonance_primary_observation ===
+~ npc_primary_value = tone_observation
+{npc_secondary_tone}
++ empathy -> resonance_secondary_empathy
++ observation -> resonance_secondary_observation
++ narrative_presence -> resonance_secondary_narrative_presence
++ else -> resonance_secondary_trust
+
+=== resonance_primary_narrative_presence ===
+~ npc_primary_value = tone_narrative_presence
+{npc_secondary_tone}
++ empathy -> resonance_secondary_empathy
++ observation -> resonance_secondary_observation
++ narrative_presence -> resonance_secondary_narrative_presence
++ else -> resonance_secondary_trust
+
+=== resonance_primary_trust ===
+~ npc_primary_value = tone_trust
+{npc_secondary_tone}
++ empathy -> resonance_secondary_empathy
++ observation -> resonance_secondary_observation
++ narrative_presence -> resonance_secondary_narrative_presence
++ else -> resonance_secondary_trust
+
+=== resonance_secondary_empathy ===
+~ npc_secondary_value = tone_empathy
+~ temp resonance = (npc_primary_value + npc_secondary_value) / 2
+~ return resonance
+
+=== resonance_secondary_observation ===
+~ npc_secondary_value = tone_observation
+~ temp resonance = (npc_primary_value + npc_secondary_value) / 2
+~ return resonance
+
+=== resonance_secondary_narrative_presence ===
+~ npc_secondary_value = tone_narrative_presence
+~ temp resonance = (npc_primary_value + npc_secondary_value) / 2
+~ return resonance
+
+=== resonance_secondary_trust ===
+~ npc_secondary_value = tone_trust
 ~ temp resonance = (npc_primary_value + npc_secondary_value) / 2
 ~ return resonance
 

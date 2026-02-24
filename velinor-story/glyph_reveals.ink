@@ -17,13 +17,10 @@
 === promise_held ===
 ~ temp tier = get_glyph_tier("promise_held")
 
-{tier:
-    -> promise_held_tier_1
-- 2:
-    -> promise_held_tier_2
-- else:
-    -> promise_held_tier_3
-}
+{tier}
++ 1 -> promise_held_tier_1
++ 2 -> promise_held_tier_2
++ else -> promise_held_tier_3
 
 // --- TIER 1: Hint Layer (Always Visible) ---
 === promise_held_tier_1 ===
@@ -83,13 +80,10 @@ The glyph fades, but its presence lingers in your awareness.
 === collapse_moment ===
 ~ temp tier = get_glyph_tier("collapse_moment")
 
-{tier:
-    -> collapse_moment_tier_1
-- 2:
-    -> collapse_moment_tier_2
-- 3:
-    -> collapse_moment_tier_3
-}
+{tier}
++ 1 -> collapse_moment_tier_1
++ 2 -> collapse_moment_tier_2
++ else -> collapse_moment_tier_3
 
 === collapse_moment_tier_1 ===
 A jagged glyph appears, sharp and urgent: ⚡ (fractured lines, red-orange)
@@ -134,13 +128,10 @@ The urgent feeling settles into your bones. You carry it with you.
 === fierce_joy ===
 ~ temp tier = get_glyph_tier("fierce_joy")
 
-{tier:
-    -> fierce_joy_tier_1
-- 2:
-    -> fierce_joy_tier_2
-- 3:
-    -> fierce_joy_tier_3
-}
+{tier}
++ 1 -> fierce_joy_tier_1
++ 2 -> fierce_joy_tier_2
++ else -> fierce_joy_tier_3
 
 === fierce_joy_tier_1 ===
 A bright glyph appears with sharp edges: ✦ (star with hard angles, gold)
@@ -181,42 +172,47 @@ The bright, sharp feeling remains with you.
 // ============================================================================
 
 === get_glyph_tier(glyph_id) ===
-{glyph_id == "promise_held":
-    {has_met_ravi:
-        {coherence >= 70 and tone_empathy >= 70 and influence_ravi >= 0.6:
-            ~ return 3
-        - else:
-            ~ return 2
-        }
+{glyph_id}
++ promise_held -> get_tier_promise_held
++ collapse_moment -> get_tier_collapse_moment
++ fierce_joy -> get_tier_fierce_joy
++ else -> get_tier_default
+
+=== get_tier_promise_held ===
+{has_met_ravi:
+    {coherence >= 70 and tone_empathy >= 70 and influence_ravi >= 0.6:
+        ~ return 3
     - else:
-        ~ return 1
+        ~ return 2
     }
-    
-- glyph_id == "collapse_moment":
-    {collapse_witnessed:
-        {coherence >= 50 and tone_observation >= 60:
-            ~ return 3
-        - else:
-            ~ return 2
-        }
-    - else:
-        ~ return 1
-    }
-    
-- glyph_id == "fierce_joy":
-    {has_met_nima:
-        {coherence >= 65 and tone_observation >= 65 and influence_nima >= 0.6:
-            ~ return 3
-        - else:
-            ~ return 2
-        }
-    - else:
-        ~ return 1
-    }
-    
 - else:
     ~ return 1
 }
+
+=== get_tier_collapse_moment ===
+{collapse_witnessed:
+    {coherence >= 50 and tone_observation >= 60:
+        ~ return 3
+    - else:
+        ~ return 2
+    }
+- else:
+    ~ return 1
+}
+
+=== get_tier_fierce_joy ===
+{has_met_nima:
+    {coherence >= 65 and tone_observation >= 65 and influence_nima >= 0.6:
+        ~ return 3
+    - else:
+        ~ return 2
+    }
+- else:
+    ~ return 1
+}
+
+=== get_tier_default ===
+~ return 1
 
 // ============================================================================
 // GLYPH REVEAL SUMMARY
