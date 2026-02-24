@@ -128,7 +128,6 @@ Coherence: {coherence}
 - else:
     You are fractured. Everything feels impossible. The world doesn't make sense.
 }
--> DONE
 
 // ============================================================================
 // EMOTIONAL RESONANCE CHECK
