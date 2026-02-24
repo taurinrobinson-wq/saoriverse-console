@@ -2,6 +2,12 @@
 
 import pytest
 import time
+import sys
+import os
+
+# Add src to path for imports
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+
 from emotional_os.deploy.modules.ui_components.pipeline.parse_phase import parse_input_signals
 from emotional_os.deploy.modules.ui_components.pipeline.interpret_phase import interpret_emotional_context
 from emotional_os.deploy.modules.ui_components.pipeline.generate_phase import generate_enhanced_response
