@@ -16,34 +16,17 @@
 ~ return passes
 
 === check_tone_gate(stat, threshold) ===
+~ temp stat_value = 0
 {
     - stat == "trust":
-        -> check_tone_trust
+        ~ stat_value = tone_trust
     - stat == "observation":
-        -> check_tone_observation
+        ~ stat_value = tone_observation
     - stat == "narrative_presence":
-        -> check_tone_narrative_presence
+        ~ stat_value = tone_narrative_presence
     - else:
-        -> check_tone_empathy
+        ~ stat_value = tone_empathy
 }
-
-=== check_tone_trust ===
-~ temp stat_value = tone_trust
-~ temp passes = stat_value >= threshold
-~ return passes
-
-=== check_tone_observation ===
-~ temp stat_value = tone_observation
-~ temp passes = stat_value >= threshold
-~ return passes
-
-=== check_tone_narrative_presence ===
-~ temp stat_value = tone_narrative_presence
-~ temp passes = stat_value >= threshold
-~ return passes
-
-=== check_tone_empathy ===
-~ temp stat_value = tone_empathy
 ~ temp passes = stat_value >= threshold
 ~ return passes
 
@@ -113,17 +96,17 @@
 }
 
 === tone_gate_unlocked(stat, threshold, dialogue) ===
+~ temp stat_value = 0
 {
     - stat == "trust":
-        ~ temp stat_value = tone_trust
+        ~ stat_value = tone_trust
     - stat == "observation":
-        ~ temp stat_value = tone_observation
+        ~ stat_value = tone_observation
     - stat == "narrative_presence":
-        ~ temp stat_value = tone_narrative_presence
+        ~ stat_value = tone_narrative_presence
     - else:
-        ~ temp stat_value = tone_empathy
+        ~ stat_value = tone_empathy
 }
-
 {stat_value >= threshold:
     {dialogue}
 - else:
