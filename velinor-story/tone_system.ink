@@ -66,6 +66,7 @@ VAR collapse_witnessed = false
     ~ tone_integration = clamp(tone_integration + delta, 0, 100)
 - stat == "awareness":
     ~ tone_awareness = clamp(tone_awareness + delta, 0, 100)
+- else:
 }
 
 === adjust_influence(npc_name, delta) ===
@@ -75,6 +76,7 @@ VAR collapse_witnessed = false
     ~ influence_nima = clamp(influence_nima + delta, 0.0, 1.0)
 - npc_name == "saori":
     ~ influence_saori = clamp(influence_saori + delta, 0.0, 1.0)
+- else:
 }
 
 // Cascade influence: when one NPC's influence increases, nearby NPCs gain secondary boost
@@ -89,6 +91,7 @@ VAR collapse_witnessed = false
 - npc_name == "malrik":
     ~ adjust_influence("elenya", primary_delta * 0.8)  // Strong connection
     ~ adjust_influence("nordia", primary_delta * 0.5)
+- else:
 }
 
 // ============================================================================
@@ -104,8 +107,6 @@ VAR collapse_witnessed = false
 // ============================================================================
 
 === calculate_coherence() ===
-{
-- else:
     ~ temp mean = (tone_empathy + tone_skepticism + tone_integration + tone_awareness) / 4
     ~ temp dev_e = absolute(tone_empathy - mean)
     ~ temp dev_s = absolute(tone_skepticism - mean)
@@ -114,7 +115,6 @@ VAR collapse_witnessed = false
     ~ temp avg_dev = (dev_e + dev_s + dev_i + dev_a) / 4
     ~ coherence = 100 - avg_dev
     ~ return coherence
-}
 
 // ============================================================================
 // CHOICE IMPACT TEMPLATES
