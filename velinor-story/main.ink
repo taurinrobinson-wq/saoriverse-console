@@ -38,10 +38,10 @@ Let's begin.
 Thank you for playing.
 
 Final Stats:
+  Trust: {tone_trust}
+  Observation: {tone_observation}
   Empathy: {tone_empathy}
-  Skepticism: {tone_skepticism}
-  Integration: {tone_integration}
-  Awareness: {tone_awareness}
+  Narrative Presence: {tone_narrative_presence}
   Coherence: {coherence}
 
 Glyphs Revealed: {glyphs_revealed}
@@ -73,10 +73,10 @@ Glyphs Revealed: {glyphs_revealed}
 
 === show_stats ===
 Current Emotional State:
+  Trust: {tone_trust}
+  Observation: {tone_observation}
   Empathy: {tone_empathy}
-  Skepticism: {tone_skepticism}
-  Integration: {tone_integration}
-  Awareness: {tone_awareness}
+  Narrative Presence: {tone_narrative_presence}
   Coherence: {calculate_coherence()}
 
 * [Back] -> TEST_SCENE_SELECT
