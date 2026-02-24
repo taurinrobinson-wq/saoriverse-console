@@ -34,7 +34,7 @@ Goals:
      ```
 
    - Deploy Streamlit on the host and bind to localhost (127.0.0.1) so it is only reachable via the proxy.
-Example systemd unit should set `WorkingDirectory` to the repo and run `streamlit run main_v2.py`.
+Example systemd unit should set `WorkingDirectory` to the repo and run `streamlit run src/streamlit_integration/chat_sandbox.py`.
 
 3) Enable Basic Auth for `/app/` (optional but recommended)
 
@@ -95,7 +95,7 @@ instead of `/app`.
 
 8) Final checks
 
-   - Start Streamlit: `streamlit run main_v2.py` (ensure it's using `.streamlit/config.toml`) and check `http://127.0.0.1:8501/app/`.
+   - Start Streamlit: `streamlit run src/streamlit_integration/chat_sandbox.py` (ensure it's using `.streamlit/config.toml`) and check `http://127.0.0.1:8501/app/`.
    - Visit `https://firstperson.chat/` for the static site and `https://firstperson.chat/app/` for the proxied Streamlit app.
 
 ## Railway-specific notes

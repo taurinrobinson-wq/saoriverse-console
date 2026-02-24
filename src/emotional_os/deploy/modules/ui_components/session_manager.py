@@ -106,6 +106,29 @@ def _ensure_processor_instances():
             logger.debug(f"FirstPerson orchestrator init failed: {e}")
             st.session_state["firstperson_orchestrator"] = None
 
+        # Subordinate responder + orchestrator for fast grounded replies
+        if "responder" not in st.session_state:
+            try:
+                # Use shared factory where available
+                from src.responder_factory import make_responder_and_orchestrator
+
+                glyphs = {}
+                try:
+                    # Try to load glyph library if available
+                    from src.emotional_os_learning import get_archetype_library
+                    glyphs = get_archetype_library() if callable(get_archetype_library) else {}
+                except Exception:
+                    glyphs = {}
+
+                responder, orchestrator, proto_mgr = make_responder_and_orchestrator(glyphs)
+                st.session_state["responder"] = responder
+                st.session_state["dominant_orchestrator"] = orchestrator
+                st.session_state["proto_mgr"] = proto_mgr
+                logger.info("Subordinate responder and orchestrator initialized in session")
+            except Exception as e:
+                logger.debug(f"Responder factory init failed: {e}")
+                st.session_state["responder"] = None
+
     # Affect Parser (emotional tone detection)
     if "affect_parser" not in st.session_state:
         try:
@@ -202,15 +225,22 @@ def _ensure_tier3_poetic_consciousness():
     - TensionManager for creative exploration
     - MythologyWeaver for personal narrative building
     """
+    # Tier 3 (poetic) layer is deprecated/archived by default. Keep a
+    # session placeholder for backward compatibility but do not initialize
+    # the poetic machinery unless explicitly enabled via
+    # `st.session_state['enable_tier3_poetic'] = True`.
+    st.session_state.setdefault("enable_tier3_poetic", False)
     if "tier3_poetic_consciousness" not in st.session_state:
-        try:
-            from src.emotional_os.tier3_poetic_consciousness import Tier3PoeticConsciousness
-            tier3 = Tier3PoeticConsciousness()
-            st.session_state["tier3_poetic_consciousness"] = tier3
-            logger.info("Tier 3 Poetic Consciousness initialized in session")
-        except Exception as e:
-            logger.warning(f"Failed to initialize Tier 3 Poetic Consciousness: {e}")
-            st.session_state["tier3_poetic_consciousness"] = None
+        st.session_state["tier3_poetic_consciousness"] = None
+        if st.session_state.get("enable_tier3_poetic"):
+            try:
+                from src.emotional_os.tier3_poetic_consciousness import Tier3PoeticConsciousness
+                tier3 = Tier3PoeticConsciousness()
+                st.session_state["tier3_poetic_consciousness"] = tier3
+                logger.info("Tier 3 Poetic Consciousness initialized in session (enabled)")
+            except Exception as e:
+                logger.warning(f"Failed to initialize Tier 3 Poetic Consciousness: {e}")
+                st.session_state["tier3_poetic_consciousness"] = None
 
 
 def load_conversation_manager():

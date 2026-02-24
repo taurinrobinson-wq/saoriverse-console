@@ -21,6 +21,7 @@ from src.emotional_os.tier1_foundation import Tier1Foundation
 from src.emotional_os.tier2_aliveness import Tier2Aliveness
 from src.emotional_os.tier3_poetic_consciousness import Tier3PoeticConsciousness
 from ..ollama_client import get_ollama_client_singleton
+from src.emotional_os.deploy.modules.ui_components.mood_ring import generate_mood, mood_seed_for_window
 
 logger = logging.getLogger(__name__)
 
@@ -65,8 +66,10 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
             logger.warning(f"Failed to initialize Tier 2 Aliveness: {e}")
             st.session_state.tier2_aliveness = None
 
-    # Initialize Tier 3 Poetic Consciousness if not already done
-    if "tier3_poetic_consciousness" not in st.session_state:
+    # Tier 3 Poetic Consciousness is archived by default. A session flag
+    # (`enable_tier3_poetic`) controls whether Tier3 is initialized and used.
+    st.session_state.setdefault("enable_tier3_poetic", False)
+    if st.session_state.get("enable_tier3_poetic") and "tier3_poetic_consciousness" not in st.session_state:
         try:
             tier3 = Tier3PoeticConsciousness()
             st.session_state.tier3_poetic_consciousness = tier3
@@ -140,36 +143,35 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
             except Exception as e:
                 logger.warning(f"Tier 2 aliveness failed: {e}, using Tier 1 response")
 
-        # TIER 3: Add poetic consciousness through metaphor and aesthetics
-        # REDUCED APPLICATION: Only apply to longer, more complex responses
-        # to avoid over-enhancement and slowness
-        tier3 = st.session_state.get("tier3_poetic_consciousness")
-        if tier3 and len(response) > 100:  # Only enhance longer responses
-            try:
-                # Get conversation history and theme for context
-                conversation_history = conversation_context.get("messages", [])
-                theme = conversation_context.get("emotional_theme", "growth")
-                
-                # Process for poetry (metaphor, aesthetics, tension, mythology)
-                poetry_response, tier3_metrics = tier3.process_for_poetry(
-                    response=response,
-                    context={
-                        "messages": conversation_history,
-                        "theme": theme
-                    }
-                )
-                
-                # Log performance metrics
-                tier3_time = tier3_metrics.get("processing_time_ms", 0)
-                if tier3_time > 30:
-                    logger.warning(f"Tier 3 pipeline slow: {tier3_time:.2f}ms")
-                else:
-                    logger.debug(f"Tier 3 metrics: {tier3_metrics}")
-                
-                # Use poetry-enhanced response
-                response = poetry_response
-            except Exception as e:
-                logger.warning(f"Tier 3 poetry enhancement failed: {e}, using Tier 2 response")
+        # TIER 3: Poetic consciousness is archived; only run if explicitly enabled
+        if st.session_state.get("enable_tier3_poetic"):
+            tier3 = st.session_state.get("tier3_poetic_consciousness")
+            if tier3 and len(response) > 100:  # Only enhance longer responses
+                try:
+                    # Get conversation history and theme for context
+                    conversation_history = conversation_context.get("messages", [])
+                    theme = conversation_context.get("emotional_theme", "growth")
+
+                    # Process for poetry (metaphor, aesthetics, tension, mythology)
+                    poetry_response, tier3_metrics = tier3.process_for_poetry(
+                        response=response,
+                        context={
+                            "messages": conversation_history,
+                            "theme": theme
+                        }
+                    )
+
+                    # Log performance metrics
+                    tier3_time = tier3_metrics.get("processing_time_ms", 0)
+                    if tier3_time > 30:
+                        logger.warning(f"Tier 3 pipeline slow: {tier3_time:.2f}ms")
+                    else:
+                        logger.debug(f"Tier 3 metrics: {tier3_metrics}")
+
+                    # Use poetry-enhanced response
+                    response = poetry_response
+                except Exception as e:
+                    logger.warning(f"Tier 3 poetry enhancement failed: {e}, using Tier 2 response")
 
     except Exception as e:
         logger.error(f"Response pipeline FAILED: {type(e).__name__}: {e}", exc_info=True)
@@ -294,6 +296,54 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
     """
     best_glyph = local_analysis.get("best_glyph") if local_analysis else None
     voltage_response = local_analysis.get("voltage_response", "") if local_analysis else ""
+    # Early preference: if parse_input indicated a fallback_message and the
+    # user asked a short mood/feeling question, prefer the mood-ring or
+    # subordinate responder before using any voltage_response (prevents poetic fallbacks).
+    try:
+        if local_analysis.get("response_source") == "fallback_message":
+            u = (user_input or "").strip()
+            is_short = len(u) < 120
+            lower = u.lower()
+            # detect mood questions explicitly
+            mood_phrases = (
+                "what's your mood",
+                "what is your mood",
+                "what's your mood really",
+                "how are you feeling",
+                "what are you feeling",
+            )
+            is_mood_question = (
+                ("mood" in lower and ("your" in lower or "you" in lower))
+                or any(p in lower for p in mood_phrases)
+            )
+            chaos = "really" in lower
+
+            if is_short and is_mood_question:
+                try:
+                    # Try to get weather hint from local analysis if present
+                    weather = None
+                    if isinstance(local_analysis, dict):
+                        weather = local_analysis.get("weather") or local_analysis.get("external_weather")
+                    seed = mood_seed_for_window(None, weather or "Sunny")
+                    return generate_mood(now=None, weather=weather or "Sunny", seed=seed, chaos=chaos)
+                except Exception:
+                    logger.debug("Mood ring generation failed; falling back to responder")
+
+            if is_short and not is_mood_question:
+                q_terms = ("feel", "feeling", "how are you", "what would", "if you had")
+                is_question = ('?' in u) or any(q in lower for q in q_terms)
+                if is_question:
+                    try:
+                        responder = st.session_state.get("responder")
+                        convo_ctx = st.session_state.get("conversation_context") or {}
+                        emotional_vector = local_analysis.get("emotional_vector") if isinstance(local_analysis, dict) else None
+                        if responder and hasattr(responder, "respond"):
+                            sub_resp = responder.respond(user_input, convo_ctx, emotional_vector or [])
+                            return sub_resp.response_text
+                    except Exception:
+                        logger.debug("Subordinate responder failed for fallback_message (early)")
+    except Exception:
+        pass
     
     # If we have a voltage response, use that as the primary response
     if voltage_response and voltage_response.strip():

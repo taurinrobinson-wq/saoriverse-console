@@ -15,6 +15,7 @@ files_to_check=(
     "hybrid_processor_with_evolution.py"
     "emotional_os/deploy/modules/ui.py"
     "main_v2.py"
+    "src/streamlit_integration/chat_sandbox.py"
 )
 
 for file in "${files_to_check[@]}"; do
@@ -155,7 +156,7 @@ echo "============================================================"
 echo "✨ INTEGRATION VERIFICATION COMPLETE"
 echo ""
 echo "Next steps:"
-echo "  1. Run Streamlit: streamlit run main_v2.py"
+echo "  1. Run Streamlit: streamlit run src/streamlit_integration/chat_sandbox.py"
 echo "  2. Set processing mode to 'hybrid'"
 echo "  3. Have meaningful conversations"
 echo "  4. Watch the 'Glyphs Discovered' sidebar populate"

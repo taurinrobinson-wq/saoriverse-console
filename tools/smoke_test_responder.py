@@ -10,7 +10,8 @@ if toolsp not in sys.path:
     sys.path.insert(0, toolsp)
 
 try:
-    from interactive_learning_ui import load_glyphs, simple_emotion_parser, make_responder_and_orchestrator
+    from interactive_learning_ui import load_glyphs, simple_emotion_parser
+    from responder_factory import make_responder_and_orchestrator
 except Exception as e:
     print('IMPORT_FAILED', e)
     raise

@@ -14,7 +14,7 @@ def main():
         "-m",
         "streamlit",
         "run",
-        "main_v2.py",
+        "src/streamlit_integration/chat_sandbox.py",
         "--server.port=" + port,
         "--server.address=0.0.0.0",
         "--server.headless=true",

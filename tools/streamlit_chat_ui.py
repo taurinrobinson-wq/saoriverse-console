@@ -13,12 +13,24 @@ for p in (SRC, TOOLS):
 import streamlit as st
 
 # Reuse helpers from interactive CLI
-from interactive_learning_ui import load_glyphs, simple_emotion_parser, make_responder_and_orchestrator
+from interactive_learning_ui import load_glyphs, simple_emotion_parser
 from state_shift_tracker import StateShiftTracker, Templates
-from feedback_store import append_feedback, append_conversation
+from responder_factory import make_responder_and_orchestrator
+from persistence.feedback_adapter import append_feedback, append_conversation
 
 
 def init_state():
+    # If a shared initializer exists in the main app, prefer it to align
+    # `st.session_state` keys across UIs and avoid duplication.
+    try:
+        from emotional_os.deploy.modules.ui_components import initialize_session_state as _shared_init
+
+        try:
+            _shared_init()
+        except Exception:
+            pass
+    except Exception:
+        pass
     if "glyphs" not in st.session_state:
         st.session_state.glyphs = load_glyphs()
     # Conversation/session identifiers for stitching

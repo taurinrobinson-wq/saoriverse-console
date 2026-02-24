@@ -21,5 +21,5 @@ fi
 
 echo "[devcontainer setup] Completed."
 echo "If you want to start the Streamlit UI run:"
-echo "  streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --server.enableCORS false --server.enableXsrfProtection false"
+echo "  streamlit run src/streamlit_integration/chat_sandbox.py  --server.enableCORS false --server.enableXsrfProtection false"
 exit 0

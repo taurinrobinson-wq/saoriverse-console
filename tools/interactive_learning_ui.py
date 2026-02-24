@@ -137,6 +137,15 @@ def simple_emotion_parser(text: str):
         vec[5] = 0.9
     if any(w in t for w in ("scared", "afraid", "fear", "panic")):
         vec[3] = 0.9
+    # Heuristic: short questions asking about mood/feeling indicate
+    # curiosity/anticipation rather than a strong primary emotion.
+    # This helps prompts like "If you had a mood right now, what would it be?"
+    # avoid returning all-zero vector which makes downstream processing unreliable.
+    question_terms = ("mood", "feel", "feeling", "how are you", "what would", "if you had")
+    is_question = "?" in t or any(q in t for q in question_terms)
+    if is_question and sum(vec) == 0:
+        vec[7] = 0.6  # anticipation / curiosity
+        vec[2] = 0.2  # trust / openness
     # small baseline
     if sum(vec) == 0:
         vec[1] = 0.1
