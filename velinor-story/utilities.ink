@@ -23,10 +23,12 @@
 === clamp(value, min_val, max_val) ===
 {value < min_val:
     ~ return min_val
-- value > max_val:
-    ~ return max_val
 - else:
-    ~ return value
+    {value > max_val:
+        ~ return max_val
+    - else:
+        ~ return value
+    }
 }
 
 === average(a, b, c, d) ===

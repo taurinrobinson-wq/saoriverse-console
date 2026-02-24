@@ -21,7 +21,7 @@
     -> promise_held_tier_1
 - tier == 2:
     -> promise_held_tier_2
-- tier == 3:
+- else:
     -> promise_held_tier_3
 }
 

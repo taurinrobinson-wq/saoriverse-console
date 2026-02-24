@@ -64,9 +64,8 @@ VAR collapse_witnessed = false
     ~ tone_observation = clamp(tone_observation + delta, 0, 100)
 - stat == "empathy":
     ~ tone_empathy = clamp(tone_empathy + delta, 0, 100)
-- stat == "narrative_presence":
-    ~ tone_narrative_presence = clamp(tone_narrative_presence + delta, 0, 100)
 - else:
+    ~ tone_narrative_presence = clamp(tone_narrative_presence + delta, 0, 100)
 }
 
 === adjust_influence(npc_name, delta) ===
