@@ -63,40 +63,31 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
         NLP_STATE["textblob_exc"] = repr(e)
         logger.debug("TextBlob not available: %s", e)
 
-    # spaCy and model
+    # spaCy and model: use lazy loader to avoid importing spaCy at module import time
     try:
-        import spacy
-        import subprocess
-        import os
+        try:
+            from emotional_os.utils.nlp_loader import get_spacy_model
+        except Exception:
+            # fallback import path
+            from src.emotional_os.utils.nlp_loader import get_spacy_model  # type: ignore
 
         NLP_STATE["spacy_available"] = True
         NLP_STATE["spacy_exc"] = None
-        logger.info("spaCy import successful")
+        logger.info("spaCy lazy loader available")
         try:
-            # Attempt to load the model; this may raise if the model isn't installed
-            logger.info(f"Attempting to load spaCy model '{model_name}'...")
-            _nlp = spacy.load(model_name)
-            NLP_STATE["spacy_model_loaded"] = True
-            logger.info("spaCy model '%s' loaded successfully", model_name)
-        except OSError as load_exc:
-            # Model not found. Do NOT attempt to install packages at runtime
-            # (many deployment environments are read-only or lack permissions).
-            logger.warning(
-                "spaCy model '%s' not installed. Skipping automatic download to avoid permission errors.",
-                model_name,
-            )
-            NLP_STATE["spacy_model_loaded"] = False
-            NLP_STATE["spacy_exc"] = repr(load_exc)
-            logger.debug("spaCy load exception: %s", load_exc)
+            logger.info(f"Attempting to lazily load spaCy model '{model_name}'...")
+            _nlp = get_spacy_model(model_name)
+            NLP_STATE["spacy_model_loaded"] = bool(_nlp)
+            logger.info("spaCy model '%s' loaded (lazy) -> %s", model_name, NLP_STATE["spacy_model_loaded"])
         except Exception as me:
-            logger.warning(f"spaCy model load error: {me}")
+            logger.warning(f"spaCy model lazy load error: {me}")
             NLP_STATE["spacy_model_loaded"] = False
             NLP_STATE["spacy_exc"] = str(me)
     except Exception as e:
         NLP_STATE["spacy_available"] = False
         NLP_STATE["spacy_model_loaded"] = False
         NLP_STATE["spacy_exc"] = repr(e)
-        logger.warning("spaCy import failed: %s", e)
+        logger.warning("spaCy lazy loader not available: %s", e)
 
     # NRC Lexicon - try multiple import strategies
     try:

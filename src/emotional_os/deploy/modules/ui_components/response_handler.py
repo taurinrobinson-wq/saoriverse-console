@@ -229,10 +229,11 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
             if not local_analysis.get("voltage_response") or not local_analysis.get("best_glyph"):
                 need_remote = True
 
-        # Be more aggressive: if spaCy is not installed in this runtime, force remote parsing
+        # Be more aggressive: if spaCy is not installed in this runtime, force remote parsing.
+        # Use find_spec to avoid importing spaCy (importing can trigger heavy initialization).
         try:
-            import spacy  # type: ignore
-            spacy_available = True
+            import importlib.util as _util
+            spacy_available = _util.find_spec("spacy") is not None
         except Exception:
             spacy_available = False
         if not spacy_available:

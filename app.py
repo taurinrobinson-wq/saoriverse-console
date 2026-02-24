@@ -9,15 +9,18 @@ import sys
 import os
 from pathlib import Path
 
-# Pre-startup: Ensure spaCy model is available (for Streamlit Cloud compatibility)
-try:
-    from streamlit import cache_resource
-    # Import the pre-run hook to ensure spaCy model is downloaded before app loads
-    sys.path.insert(0, str(Path(__file__).parent / ".streamlit"))
-    from pre_run_hook import ensure_spacy_model
-    ensure_spacy_model()
-except Exception as e:
-    print(f"⚠️ Pre-run hook warning: {e}")
+# Pre-startup: Optionally ensure spaCy model is available
+# Controlled by env var `FIRSTPERSON_RUN_PRE_RUN_HOOK` (1/true/yes to enable)
+run_pre_hook = os.environ.get("FIRSTPERSON_RUN_PRE_RUN_HOOK", "").lower()
+if run_pre_hook in ("1", "true", "yes"):
+    try:
+        from streamlit import cache_resource
+        # Import the pre-run hook to ensure spaCy model is downloaded before app loads
+        sys.path.insert(0, str(Path(__file__).parent / ".streamlit"))
+        from pre_run_hook import ensure_spacy_model
+        ensure_spacy_model()
+    except Exception as e:
+        print(f"⚠️ Pre-run hook warning: {e}")
 
 # Verify Python version compatibility
 if sys.version_info >= (3, 13):

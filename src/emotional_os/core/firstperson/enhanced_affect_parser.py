@@ -96,18 +96,10 @@ class EnhancedAffectParser:
             except ImportError:
                 logger.warning("TextBlob not available: pip install textblob")
         
-        # Load SpaCy if available
+        # SpaCy model will be loaded lazily when needed to avoid side-effects
+        # at module import time (prevents Streamlit hot-reload churn).
         self.spacy_model = None
-        if use_spacy:
-            try:
-                import spacy
-                try:
-                    self.spacy_model = spacy.load("en_core_web_sm")
-                    logger.info("✓ SpaCy en_core_web_sm loaded")
-                except OSError:
-                    logger.warning("SpaCy model not found: python -m spacy download en_core_web_sm")
-            except ImportError:
-                logger.warning("SpaCy not available: pip install spacy")
+        self.use_spacy = use_spacy
         
         # Intensifiers and negation markers
         self.intensifiers = {
@@ -258,8 +250,18 @@ class EnhancedAffectParser:
         if self.textblob_available:
             textblob_polarity, textblob_subjectivity = self._analyze_textblob(text)
         
-        # 3. SpaCy Analysis (for future context/negation handling)
-        # Currently using pattern-based approach for speed
+        # 3. SpaCy Analysis (for dependency parsing / negation detection)
+        if self.use_spacy:
+            try:
+                # Lazy-load spaCy model when first needed
+                if self.spacy_model is None:
+                    try:
+                        from emotional_os.utils.nlp_loader import get_spacy_model
+                    except Exception:
+                        from src.emotional_os.utils.nlp_loader import get_spacy_model  # type: ignore
+                    self.spacy_model = get_spacy_model()
+            except Exception:
+                self.spacy_model = None
         
         # 4. Pattern Analysis
         is_negated = self._has_negation(text_lower)
@@ -347,6 +349,25 @@ class EnhancedAffectParser:
     
     def _has_negation(self, text: str) -> bool:
         """Check if text contains negation."""
+        # First, try spaCy-based negation detection if model available
+        try:
+            if self.spacy_model is None and self.use_spacy:
+                try:
+                    from emotional_os.utils.nlp_loader import get_spacy_model
+                except Exception:
+                    from src.emotional_os.utils.nlp_loader import get_spacy_model  # type: ignore
+                self.spacy_model = get_spacy_model()
+
+            if self.spacy_model is not None:
+                doc = self.spacy_model(text)
+                for token in doc:
+                    # token.dep_ == 'neg' is a common pattern for negation
+                    if token.dep_.lower() == "neg" or token.lower_ in self.negation_words:
+                        return True
+        except Exception:
+            pass
+
+        # Fallback simple word-based check
         words = text.split()
         for word in words:
             if word.strip(".,!?;:'\"") in self.negation_words:

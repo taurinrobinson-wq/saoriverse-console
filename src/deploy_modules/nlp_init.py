@@ -43,26 +43,29 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
         NLP_STATE["textblob_exc"] = repr(e)
         logger.debug("TextBlob not available: %s", e)
 
-    # spaCy and model
+    # spaCy and model: use lazy loader to avoid heavy top-level imports
     try:
-        import spacy
+        try:
+            from emotional_os.utils.nlp_loader import get_spacy_model
+        except Exception:
+            # As a fallback, try relative import if package layout differs
+            from src.emotional_os.utils.nlp_loader import get_spacy_model  # type: ignore
 
         NLP_STATE["spacy_available"] = True
         NLP_STATE["spacy_exc"] = None
         try:
-            # Attempt to load the model; this may raise if the model isn't installed
-            _nlp = spacy.load(model_name)
-            NLP_STATE["spacy_model_loaded"] = True
-            logger.info("spaCy model '%s' loaded", model_name)
+            _nlp = get_spacy_model(model_name)
+            NLP_STATE["spacy_model_loaded"] = bool(_nlp)
+            logger.info("spaCy model '%s' loaded (lazy) -> %s", model_name, NLP_STATE["spacy_model_loaded"])
         except Exception as me:
             NLP_STATE["spacy_model_loaded"] = False
             NLP_STATE["spacy_exc"] = repr(me)
-            logger.debug("spaCy model '%s' could not be loaded: %s", model_name, me)
+            logger.debug("spaCy model '%s' could not be loaded (lazy): %s", model_name, me)
     except Exception as e:
         NLP_STATE["spacy_available"] = False
         NLP_STATE["spacy_model_loaded"] = False
         NLP_STATE["spacy_exc"] = repr(e)
-        logger.debug("spaCy not available: %s", e)
+        logger.debug("spaCy not available (lazy): %s", e)
 
     # Record python executable for diagnostics (helps ensure Streamlit uses same env)
     NLP_STATE["python_executable"] = sys.executable
