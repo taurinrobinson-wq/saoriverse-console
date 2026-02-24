@@ -22,9 +22,8 @@
     ~ temp stat_value = tone_observation
 - stat == "narrative_presence":
     ~ temp stat_value = tone_narrative_presence
-- stat == "empathy":
-    ~ temp stat_value = tone_empathy
 - else:
+    ~ temp stat_value = tone_empathy
 }
 
 ~ temp passes = stat_value >= threshold
@@ -39,9 +38,8 @@
     ~ temp influence_value = influence_saori
 - npc_name == "malrik":
     ~ temp influence_value = influence_malrik
-- npc_name == "elenya":
-    ~ temp influence_value = influence_elenya
 - else:
+    ~ temp influence_value = influence_elenya
 }
 
 ~ temp passes = influence_value >= threshold
@@ -56,7 +54,7 @@
     You need coherence {threshold}+. Current: {coherence}
 - gate_type == "tone":
     You need {stat_or_npc} {threshold}+. Current: {get_tone_value(stat_or_npc)}
-- gate_type == "influence":
+- else:
     You need {stat_or_npc} trust {threshold}+. Current: {get_influence_value(stat_or_npc)}
 }
 
@@ -67,7 +65,7 @@
     ~ return tone_observation
 - stat == "narrative_presence":
     ~ return tone_narrative_presence
-- stat == "empathy":
+- else:
     ~ return tone_empathy
 }
 
@@ -102,7 +100,7 @@
     ~ temp stat_value = tone_observation
 - stat == "narrative_presence":
     ~ temp stat_value = tone_narrative_presence
-- stat == "empathy":
+- else:
     ~ temp stat_value = tone_empathy
 }
 
