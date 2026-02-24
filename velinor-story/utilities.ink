@@ -66,23 +66,31 @@ Coherence: {coherence}
 === highest_tone() ===
 {tone_empathy > tone_observation and tone_empathy > tone_narrative_presence and tone_empathy > tone_trust:
     ~ return "empathy"
-- tone_observation > tone_narrative_presence and tone_observation > tone_trust:
-    ~ return "observation"
-- tone_narrative_presence > tone_trust:
-    ~ return "narrative_presence"
 - else:
-    ~ return "trust"
+    {tone_observation > tone_narrative_presence and tone_observation > tone_trust:
+        ~ return "observation"
+    - else:
+        {tone_narrative_presence > tone_trust:
+            ~ return "narrative_presence"
+        - else:
+            ~ return "trust"
+        }
+    }
 }
 
 === lowest_tone() ===
 {tone_empathy < tone_observation and tone_empathy < tone_narrative_presence and tone_empathy < tone_trust:
     ~ return "empathy"
-- tone_observation < tone_narrative_presence and tone_observation < tone_trust:
-    ~ return "observation"
-- tone_narrative_presence < tone_trust:
-    ~ return "narrative_presence"
 - else:
-    ~ return "trust"
+    {tone_observation < tone_narrative_presence and tone_observation < tone_trust:
+        ~ return "observation"
+    - else:
+        {tone_narrative_presence < tone_trust:
+            ~ return "narrative_presence"
+        - else:
+            ~ return "trust"
+        }
+    }
 }
 
 === get_tone_name(stat) ===
@@ -125,26 +133,28 @@ Coherence: {coherence}
 // ============================================================================
 
 === emotional_resonance(npc_primary_tone, npc_secondary_tone) ===
-{npc_primary_tone == "empathy":
+{npc_primary_tone:
     ~ temp npc_primary_value = tone_empathy
-- npc_primary_tone == "observation":
+- observation:
     ~ temp npc_primary_value = tone_observation
-- npc_primary_tone == "narrative_presence":
+- narrative_presence:
     ~ temp npc_primary_value = tone_narrative_presence
-- npc_primary_tone == "trust":
+- trust:
     ~ temp npc_primary_value = tone_trust
 - else:
+    ~ temp npc_primary_value = 50
 }
 
-{npc_secondary_tone == "empathy":
+{npc_secondary_tone:
     ~ temp npc_secondary_value = tone_empathy
-- npc_secondary_tone == "observation":
+- observation:
     ~ temp npc_secondary_value = tone_observation
-- npc_secondary_tone == "narrative_presence":
+- narrative_presence:
     ~ temp npc_secondary_value = tone_narrative_presence
-- npc_secondary_tone == "trust":
+- trust:
     ~ temp npc_secondary_value = tone_trust
 - else:
+    ~ temp npc_secondary_value = 50
 }
 
 ~ temp resonance = (npc_primary_value + npc_secondary_value) / 2

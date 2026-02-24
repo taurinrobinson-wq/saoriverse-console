@@ -17,9 +17,9 @@
 === promise_held ===
 ~ temp tier = get_glyph_tier("promise_held")
 
-{tier == 1:
+{tier:
     -> promise_held_tier_1
-- tier == 2:
+- 2:
     -> promise_held_tier_2
 - else:
     -> promise_held_tier_3
@@ -83,11 +83,11 @@ The glyph fades, but its presence lingers in your awareness.
 === collapse_moment ===
 ~ temp tier = get_glyph_tier("collapse_moment")
 
-{tier == 1:
+{tier:
     -> collapse_moment_tier_1
-- tier == 2:
+- 2:
     -> collapse_moment_tier_2
-- tier == 3:
+- 3:
     -> collapse_moment_tier_3
 }
 
@@ -134,11 +134,11 @@ The urgent feeling settles into your bones. You carry it with you.
 === fierce_joy ===
 ~ temp tier = get_glyph_tier("fierce_joy")
 
-{tier == 1:
+{tier:
     -> fierce_joy_tier_1
-- tier == 2:
+- 2:
     -> fierce_joy_tier_2
-- tier == 3:
+- 3:
     -> fierce_joy_tier_3
 }
 

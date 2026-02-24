@@ -58,15 +58,31 @@ VAR collapse_witnessed = false
 // ============================================================================
 
 === adjust_tone(stat, delta) ===
-{stat == "trust":
-    ~ tone_trust = clamp(tone_trust + delta, 0, 100)
-- stat == "observation":
-    ~ tone_observation = clamp(tone_observation + delta, 0, 100)
-- stat == "empathy":
-    ~ tone_empathy = clamp(tone_empathy + delta, 0, 100)
+{stat:
+    -> adjust_tone_trust
+- observation:
+    -> adjust_tone_observation
+- empathy:
+    -> adjust_tone_empathy
 - else:
-    ~ tone_narrative_presence = clamp(tone_narrative_presence + delta, 0, 100)
+    -> adjust_tone_narrative_presence
 }
+
+=== adjust_tone_trust ===
+~ tone_trust = clamp(tone_trust + delta, 0, 100)
+-> DONE
+
+=== adjust_tone_observation ===
+~ tone_observation = clamp(tone_observation + delta, 0, 100)
+-> DONE
+
+=== adjust_tone_empathy ===
+~ tone_empathy = clamp(tone_empathy + delta, 0, 100)
+-> DONE
+
+=== adjust_tone_narrative_presence ===
+~ tone_narrative_presence = clamp(tone_narrative_presence + delta, 0, 100)
+-> DONE
 
 === adjust_influence(npc_name, delta) ===
 {npc_name == "ravi":
