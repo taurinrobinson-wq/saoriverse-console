@@ -78,48 +78,16 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
             _nlp = spacy.load(model_name)
             NLP_STATE["spacy_model_loaded"] = True
             logger.info("spaCy model '%s' loaded successfully", model_name)
-        except OSError:
-            # Model not found - try to download
-            logger.debug(f"Model '{model_name}' not found, attempting to download...")
-            
-            # Detect environment - if we can't write to home, probably Streamlit Cloud
-            home_dir = os.path.expanduser("~")
-            can_write = os.access(home_dir, os.W_OK)
-            
-            if not can_write:
-                logger.warning(
-                    f"spaCy model '{model_name}' not available. "
-                    "Running in restricted environment (likely Streamlit Cloud) with limited write permissions. "
-                    "NLP features will be partially available. For full NLP support, run locally."
-                )
-                NLP_STATE["spacy_model_loaded"] = False
-                NLP_STATE["spacy_exc"] = "Model not available in restricted environment"
-            else:
-                # Try downloading on systems with write access
-                try:
-                    result = subprocess.run(
-                        [sys.executable, "-m", "spacy", "download", model_name, "--quiet"], 
-                        capture_output=True, 
-                        timeout=120
-                    )
-                    if result.returncode == 0:
-                        # Try loading again after download
-                        _nlp = spacy.load(model_name)
-                        NLP_STATE["spacy_model_loaded"] = True
-                        logger.info("spaCy model '%s' downloaded and loaded successfully", model_name)
-                    else:
-                        stderr = result.stderr.decode('utf-8', errors='ignore') if result.stderr else ""
-                        logger.warning(f"spaCy model download failed: {stderr}")
-                        NLP_STATE["spacy_model_loaded"] = False
-                        NLP_STATE["spacy_exc"] = f"Download failed (code {result.returncode})"
-                except subprocess.TimeoutExpired:
-                    logger.warning(f"spaCy model download timed out after 120 seconds")
-                    NLP_STATE["spacy_model_loaded"] = False
-                    NLP_STATE["spacy_exc"] = "Download timeout"
-                except Exception as download_err:
-                    logger.warning(f"spaCy model download error: {download_err}")
-                    NLP_STATE["spacy_model_loaded"] = False
-                    NLP_STATE["spacy_exc"] = str(download_err)
+        except OSError as load_exc:
+            # Model not found. Do NOT attempt to install packages at runtime
+            # (many deployment environments are read-only or lack permissions).
+            logger.warning(
+                "spaCy model '%s' not installed. Skipping automatic download to avoid permission errors.",
+                model_name,
+            )
+            NLP_STATE["spacy_model_loaded"] = False
+            NLP_STATE["spacy_exc"] = repr(load_exc)
+            logger.debug("spaCy load exception: %s", load_exc)
         except Exception as me:
             logger.warning(f"spaCy model load error: {me}")
             NLP_STATE["spacy_model_loaded"] = False

@@ -173,6 +173,7 @@ _NRC_POSSIBLE_PATHS = [
     Path(__file__).parent.parent.parent / "data" / "lexicons" / "nrc_lexicon_cleaned.json",
     Path(__file__).parent.parent.parent / "lexicons" / "nrc_emotion_lexicon.txt",
     Path("lexicons/nrc_emotion_lexicon.txt"),
+    # Legacy velinor path (some projects store the lexicon under velinor/data)
 ]
 
 class NRCLexicon:
