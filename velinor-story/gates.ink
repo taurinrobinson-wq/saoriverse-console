@@ -16,14 +16,14 @@
 ~ return passes
 
 === check_tone_gate(stat, threshold) ===
-{stat == "empathy":
-    ~ temp stat_value = tone_empathy
+{stat == "trust":
+    ~ temp stat_value = tone_trust
 - stat == "observation":
     ~ temp stat_value = tone_observation
 - stat == "narrative_presence":
     ~ temp stat_value = tone_narrative_presence
-- stat == "trust":
-    ~ temp stat_value = tone_trust
+- stat == "empathy":
+    ~ temp stat_value = tone_empathy
 - else:
 }
 
@@ -61,14 +61,14 @@
 }
 
 === get_tone_value(stat) ===
-{stat == "empathy":
-    ~ return tone_empathy
+{stat == "trust":
+    ~ return tone_trust
 - stat == "observation":
     ~ return tone_observation
 - stat == "narrative_presence":
     ~ return tone_narrative_presence
-- stat == "trust":
-    ~ return tone_trust
+- stat == "empathy":
+    ~ return tone_empathy
 }
 
 === get_influence_value(npc_name) ===
@@ -96,14 +96,14 @@
 }
 
 === tone_gate_unlocked(stat, threshold, dialogue) ===
-{stat == "empathy":
-    ~ temp stat_value = tone_empathy
+{stat == "trust":
+    ~ temp stat_value = tone_trust
 - stat == "observation":
     ~ temp stat_value = tone_observation
 - stat == "narrative_presence":
     ~ temp stat_value = tone_narrative_presence
-- stat == "trust":
-    ~ temp stat_value = tone_trust
+- stat == "empathy":
+    ~ temp stat_value = tone_empathy
 }
 
 {stat_value >= threshold:
