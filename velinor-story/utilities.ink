@@ -119,19 +119,16 @@ Coherence: {coherence}
 === describe_coherence_level() ===
 {coherence >= 80:
     Your emotional state is highly integrated. You can hold multiple truths simultaneously. The world feels less like contradictions and more like complexity you're capable of navigating.
-    
 - coherence >= 65:
     You're finding your balance. Different feelings pull at you, but you're learning to weave them together into something coherent.
-    
 - coherence >= 50:
     Your emotions are mixed. You feel pulled in different directions. Integration is possible, but requires intention.
-    
 - coherence >= 40:
     You're struggling to hold it together. Conflicting feelings feel unbearable. You need to find harmony soon.
-    
 - else:
     You are fractured. Everything feels impossible. The world doesn't make sense.
 }
+-> DONE
 
 // ============================================================================
 // EMOTIONAL RESONANCE CHECK

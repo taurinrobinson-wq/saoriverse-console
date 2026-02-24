@@ -288,6 +288,7 @@ VAR collapse_witnessed = false
 - else:
     You're cautious but not completely closed off.
 }
+-> DONE
 
 {tone_observation > 70:
     You pick up on subtle details and nuances.
@@ -296,6 +297,7 @@ VAR collapse_witnessed = false
 - else:
     You notice some things but miss others.
 }
+-> DONE
 
 {tone_empathy > 70:
     You feel deeply attuned to others' emotions.
@@ -304,6 +306,7 @@ VAR collapse_witnessed = false
 - else:
     You have some emotional awareness.
 }
+-> DONE
 
 {tone_narrative_presence > 70:
     You project a commanding, visible presence.
@@ -312,6 +315,7 @@ VAR collapse_witnessed = false
 - else:
     You're neither particularly visible nor hidden.
 }
+-> DONE
 
 === describe_coherence ===
 {coherence >= 80:
