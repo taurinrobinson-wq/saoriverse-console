@@ -17,13 +17,14 @@
 
 === check_tone_gate(stat, threshold) ===
 {stat:
-    -> check_tone_trust
-- observation:
-    -> check_tone_observation
-- narrative_presence:
-    -> check_tone_narrative_presence
-- else:
-    -> check_tone_empathy
+    "trust":
+        -> check_tone_trust
+    - "observation":
+        -> check_tone_observation
+    - "narrative_presence":
+        -> check_tone_narrative_presence
+    - else:
+        -> check_tone_empathy
 }
 
 === check_tone_trust ===
