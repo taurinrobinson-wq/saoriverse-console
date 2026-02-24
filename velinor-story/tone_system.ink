@@ -9,10 +9,10 @@
 // ============================================================================
 
 // --- TONE Stats (0-100) ---
+VAR tone_trust = 50
+VAR tone_observation = 50
 VAR tone_empathy = 50
-VAR tone_skepticism = 50
-VAR tone_integration = 50
-VAR tone_awareness = 50
+VAR tone_narrative_presence = 50
 
 // --- Coherence Value (updated after each choice) ---
 VAR coherence = 100
@@ -58,14 +58,14 @@ VAR collapse_witnessed = false
 // ============================================================================
 
 === adjust_tone(stat, delta) ===
-{stat == "empathy":
+{stat == "trust":
+    ~ tone_trust = clamp(tone_trust + delta, 0, 100)
+- stat == "observation":
+    ~ tone_observation = clamp(tone_observation + delta, 0, 100)
+- stat == "empathy":
     ~ tone_empathy = clamp(tone_empathy + delta, 0, 100)
-- stat == "skepticism":
-    ~ tone_skepticism = clamp(tone_skepticism + delta, 0, 100)
-- stat == "integration":
-    ~ tone_integration = clamp(tone_integration + delta, 0, 100)
-- stat == "awareness":
-    ~ tone_awareness = clamp(tone_awareness + delta, 0, 100)
+- stat == "narrative_presence":
+    ~ tone_narrative_presence = clamp(tone_narrative_presence + delta, 0, 100)
 - else:
 }
 
@@ -107,12 +107,12 @@ VAR collapse_witnessed = false
 // ============================================================================
 
 === calculate_coherence() ===
-    ~ temp mean = (tone_empathy + tone_skepticism + tone_integration + tone_awareness) / 4
+    ~ temp mean = (tone_trust + tone_observation + tone_empathy + tone_narrative_presence) / 4
+    ~ temp dev_t = absolute(tone_trust - mean)
+    ~ temp dev_o = absolute(tone_observation - mean)
     ~ temp dev_e = absolute(tone_empathy - mean)
-    ~ temp dev_s = absolute(tone_skepticism - mean)
-    ~ temp dev_i = absolute(tone_integration - mean)
-    ~ temp dev_a = absolute(tone_awareness - mean)
-    ~ temp avg_dev = (dev_e + dev_s + dev_i + dev_a) / 4
+    ~ temp dev_n = absolute(tone_narrative_presence - mean)
+    ~ temp avg_dev = (dev_t + dev_o + dev_e + dev_n) / 4
     ~ coherence = 100 - avg_dev
     ~ return coherence
 
@@ -122,34 +122,34 @@ VAR collapse_witnessed = false
 // Use these patterns throughout the story
 // ============================================================================
 
-=== choice_empathy_care ===
-// "I want to help you"
-~ adjust_tone("empathy", 8)
-~ adjust_tone("integration", 5)
+=== choice_trust_connection ===
+// "I want to connect with you"
+~ adjust_tone("trust", 8)
+~ adjust_tone("empathy", 5)
 ~ coherence = calculate_coherence()
 
-=== choice_skepticism_question ===
+=== choice_observation_question ===
 // "Why should I believe you?"
-~ adjust_tone("skepticism", 8)
-~ adjust_tone("awareness", 3)
+~ adjust_tone("observation", 8)
+~ adjust_tone("narrative_presence", 3)
 ~ coherence = calculate_coherence()
 
-=== choice_integration_both ===
+=== choice_empathy_balanced ===
 // "Both are right in different ways"
-~ adjust_tone("integration", 10)
-~ adjust_tone("empathy", 3)
-~ adjust_tone("skepticism", 3)
+~ adjust_tone("empathy", 10)
+~ adjust_tone("observation", 3)
+~ adjust_tone("trust", 3)
 ~ coherence = calculate_coherence()
 
-=== choice_awareness_reflect ===
+=== choice_narrative_presence_reflect ===
 // "I need to understand myself first"
-~ adjust_tone("awareness", 8)
-~ adjust_tone("integration", 4)
+~ adjust_tone("narrative_presence", 8)
+~ adjust_tone("empathy", 4)
 ~ coherence = calculate_coherence()
 
 === choice_neutral ===
 // "I'll listen without judging"
-~ adjust_tone("awareness", 2)
+~ adjust_tone("observation", 2)
 ~ coherence = calculate_coherence()
 
 // ============================================================================
@@ -157,20 +157,36 @@ VAR collapse_witnessed = false
 // ============================================================================
 
 === describe_tone_state ===
-{tone_empathy > 70:
-    You feel open and compassionate.
-- tone_empathy < 30:
-    You feel guarded and distant.
+{tone_trust > 70:
+    You feel open to connection with others.
+- tone_trust < 30:
+    You feel defensive and wary of others.
 - else:
-    You feel uncertain about others.
+    You're cautious but not completely closed off.
 }
 
-{tone_skepticism > 70:
-    You question everything.
-- tone_skepticism < 30:
-    You accept what you're told.
+{tone_observation > 70:
+    You pick up on subtle details and nuances.
+- tone_observation < 30:
+    You see things in broad strokes.
 - else:
-    You try to balance belief and doubt.
+    You notice some things but miss others.
+}
+
+{tone_empathy > 70:
+    You feel deeply attuned to others' emotions.
+- tone_empathy < 30:
+    You feel distant from others' feelings.
+- else:
+    You have some emotional awareness.
+}
+
+{tone_narrative_presence > 70:
+    You project a commanding, visible presence.
+- tone_narrative_presence < 30:
+    You fade into the background.
+- else:
+    You're neither particularly visible nor hidden.
 }
 
 === describe_coherence ===
