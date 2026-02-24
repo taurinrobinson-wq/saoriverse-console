@@ -24,6 +24,7 @@
     ~ temp stat_value = tone_integration
 - stat == "awareness":
     ~ temp stat_value = tone_awareness
+- else:
 }
 
 ~ temp passes = stat_value >= threshold
@@ -40,6 +41,7 @@
     ~ temp influence_value = influence_malrik
 - npc_name == "elenya":
     ~ temp influence_value = influence_elenya
+- else:
 }
 
 ~ temp passes = influence_value >= threshold

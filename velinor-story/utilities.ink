@@ -131,6 +131,7 @@ Coherence: {coherence}
     ~ temp npc_primary_value = tone_integration
 - npc_primary_tone == "awareness":
     ~ temp npc_primary_value = tone_awareness
+- else:
 }
 
 {npc_secondary_tone == "empathy":
@@ -141,6 +142,7 @@ Coherence: {coherence}
     ~ temp npc_secondary_value = tone_integration
 - npc_secondary_tone == "awareness":
     ~ temp npc_secondary_value = tone_awareness
+- else:
 }
 
 ~ temp resonance = (npc_primary_value + npc_secondary_value) / 2
