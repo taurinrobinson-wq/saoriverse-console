@@ -1,0 +1,167 @@
+// ============================================================================
+// GATES: Emotional Gate Helper Functions
+// ============================================================================
+//
+// Three types of gates:
+//   1. TONE Gates — Require specific stat level
+//   2. Coherence Gates — Require emotional harmony
+//   3. Influence Gates — Based on relationship with specific NPC
+//
+// Gates determine which dialogue, choices, and glyphs are accessible
+//
+// ============================================================================
+
+=== check_coherence_gate(threshold) ===
+~ temp passes = coherence >= threshold
+~ return passes
+
+=== check_tone_gate(stat, threshold) ===
+{stat == "empathy":
+    ~ temp stat_value = tone_empathy
+- stat == "skepticism":
+    ~ temp stat_value = tone_skepticism
+- stat == "integration":
+    ~ temp stat_value = tone_integration
+- stat == "awareness":
+    ~ temp stat_value = tone_awareness
+}
+
+~ temp passes = stat_value >= threshold
+~ return passes
+
+=== check_influence_gate(npc_name, threshold) ===
+{npc_name == "ravi":
+    ~ temp influence_value = influence_ravi
+- npc_name == "nima":
+    ~ temp influence_value = influence_nima
+- npc_name == "saori":
+    ~ temp influence_value = influence_saori
+- npc_name == "malrik":
+    ~ temp influence_value = influence_malrik
+- npc_name == "elenya":
+    ~ temp influence_value = influence_elenya
+}
+
+~ temp passes = influence_value >= threshold
+~ return passes
+
+// ============================================================================
+// GATE DESCRIPTIONS (for feedback)
+// ============================================================================
+
+=== describe_gate_requirement(gate_type, stat_or_npc, threshold) ===
+{gate_type == "coherence":
+    You need coherence {threshold}+. Current: {coherence}
+- gate_type == "tone":
+    You need {stat_or_npc} {threshold}+. Current: {get_tone_value(stat_or_npc)}
+- gate_type == "influence":
+    You need {stat_or_npc} trust {threshold}+. Current: {get_influence_value(stat_or_npc)}
+}
+
+=== get_tone_value(stat) ===
+{stat == "empathy":
+    ~ return tone_empathy
+- stat == "skepticism":
+    ~ return tone_skepticism
+- stat == "integration":
+    ~ return tone_integration
+- stat == "awareness":
+    ~ return tone_awareness
+}
+
+=== get_influence_value(npc_name) ===
+{npc_name == "ravi":
+    ~ return influence_ravi
+- npc_name == "nima":
+    ~ return influence_nima
+- npc_name == "saori":
+    ~ return influence_saori
+- else:
+    ~ return 0.5
+}
+
+// ============================================================================
+// GATE OUTCOMES
+// What happens when you pass/fail various gates
+// ============================================================================
+
+=== coherence_gate_unlocked(dialogue) ===
+{coherence >= 70:
+    You feel emotionally integrated. The deeper truth becomes accessible.
+    {dialogue}
+- else:
+    This wisdom isn't yet accessible to you. Your emotional foundations aren't stable enough.
+}
+
+=== tone_gate_unlocked(stat, threshold, dialogue) ===
+{stat == "empathy":
+    ~ temp stat_value = tone_empathy
+- stat == "skepticism":
+    ~ temp stat_value = tone_skepticism
+- stat == "integration":
+    ~ temp stat_value = tone_integration
+- stat == "awareness":
+    ~ temp stat_value = tone_awareness
+}
+
+{stat_value >= threshold:
+    {dialogue}
+- else:
+    This path isn't accessible to you yet.
+}
+
+=== influence_gate_unlocked(npc, threshold, dialogue) ===
+~ temp influence_value = get_influence_value(npc)
+
+{influence_value >= threshold:
+    {npc} trusts you enough to share this.
+    {dialogue}
+- else:
+    {npc} doesn't know you well enough yet.
+}
+
+// ============================================================================
+// COMPLEX GATES (Multiple Conditions)
+// ============================================================================
+
+=== deep_dialogue_gate(npc, coherence_req, influence_req) ===
+{coherence >= coherence_req and get_influence_value(npc) >= influence_req:
+    ~ return true
+- else:
+    ~ return false
+}
+
+=== integration_check(min_empathy, min_skepticism, min_integration) ===
+{tone_empathy >= min_empathy and tone_skepticism >= min_skepticism and tone_integration >= min_integration:
+    ~ return true
+- else:
+    ~ return false
+}
+
+// ============================================================================
+// GATE NARRATIVE EXPLANATIONS
+// When a gate is not passed, explain why to the player
+// ============================================================================
+
+=== explain_unmet_gate(reason) ===
+{reason == "low_coherence":
+    Your emotional conflict is too great right now. You need to find more harmony between your different feelings before this wisdom can reach you.
+    
+- reason == "low_empathy":
+    Your heart is guarded right now. This dialogue requires vulnerability.
+    
+- reason == "low_skepticism":
+    You're trusting too easily. This person needs to know you think critically.
+    
+- reason == "low_integration":
+    You can't hold both sides of this truth yet. You need to integrate your conflicting feelings first.
+    
+- reason == "low_awareness":
+    You don't yet understand your own patterns. Look inward before looking outward.
+    
+- reason == "low_influence":
+    This person doesn't trust you yet. Relationship takes time.
+    
+- else:
+    This path isn't accessible to you right now.
+}
