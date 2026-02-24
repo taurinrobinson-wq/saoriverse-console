@@ -58,14 +58,15 @@ VAR collapse_witnessed = false
 // ============================================================================
 
 === adjust_tone(stat, delta) ===
-{stat:
-    -> adjust_tone_trust
-- observation:
-    -> adjust_tone_observation
-- empathy:
-    -> adjust_tone_empathy
-- else:
-    -> adjust_tone_narrative_presence
+{
+    - stat == "trust":
+        -> adjust_tone_trust
+    - stat == "observation":
+        -> adjust_tone_observation
+    - stat == "empathy":
+        -> adjust_tone_empathy
+    - else:
+        -> adjust_tone_narrative_presence
 }
 
 === adjust_tone_trust ===
