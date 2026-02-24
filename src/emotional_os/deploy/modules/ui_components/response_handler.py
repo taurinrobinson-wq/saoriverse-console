@@ -39,8 +39,8 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> tup
     
     logger.info(f"handle_response_pipeline start: input_len={len(user_input) if user_input else 0}")
 
-    # Initialize tiers if needed (lazy init)
-    _ensure_tiers_initialized()
+    # Tiers are eagerly initialized in session_manager.initialize_session_state()
+    # This eliminates first-message lag (Phase 2 optimization)
 
     try:
         # PHASE 1: Parse input signals
@@ -66,44 +66,13 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> tup
         return f"[ERROR] Response pipeline failed: {e}", processing_time
 
 
-def _ensure_tiers_initialized():
-    """Lazy initialize tiers if not already in session."""
-    # Tier 1
-    if "tier1_foundation" not in st.session_state:
-        try:
-            tier1 = Tier1Foundation(conversation_memory=None)
-            st.session_state.tier1_foundation = tier1
-            logger.info("Tier 1 Foundation initialized")
-        except Exception as e:
-            logger.warning(f"Failed to initialize Tier 1: {e}")
-            st.session_state.tier1_foundation = None
-
-    # Tier 2
-    if "tier2_aliveness" not in st.session_state:
-        try:
-            tier2 = Tier2Aliveness()
-            st.session_state.tier2_aliveness = tier2
-            logger.info("Tier 2 Aliveness initialized")
-        except Exception as e:
-            logger.warning(f"Failed to initialize Tier 2: {e}")
-            st.session_state.tier2_aliveness = None
-
-    # Tier 3 (opt-in)
-    st.session_state.setdefault("enable_tier3_poetic", False)
-    if st.session_state.get("enable_tier3_poetic") and "tier3_poetic_consciousness" not in st.session_state:
-        try:
-            tier3 = Tier3PoeticConsciousness()
-            st.session_state.tier3_poetic_consciousness = tier3
-            logger.info("Tier 3 Poetic Consciousness initialized")
-        except Exception as e:
-            logger.warning(f"Failed to initialize Tier 3: {e}")
-            st.session_state.tier3_poetic_consciousness = None
 
 
-# Legacy keep for compatibility (if anything else imports it)
-def generate_response(user_input: str, conversation_context: dict = None) -> str:
+# Legacy wrapper for backwards compatibility
+def generate_response(user_input: str, conversation_context: dict | None = None) -> str:
     """Legacy wrapper for backwards compatibility."""
     if conversation_context is None:
         conversation_context = {}
     response, _ = handle_response_pipeline(user_input, conversation_context)
     return response
+
