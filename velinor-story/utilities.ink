@@ -41,12 +41,12 @@
 // ============================================================================
 
 === calculate_coherence() ===
-~ temp mean = average(tone_empathy, tone_skepticism, tone_integration, tone_awareness)
+~ temp mean = average(tone_trust, tone_observation, tone_empathy, tone_narrative_presence)
+~ temp dev_t = absolute(tone_trust - mean)
+~ temp dev_o = absolute(tone_observation - mean)
 ~ temp dev_e = absolute(tone_empathy - mean)
-~ temp dev_s = absolute(tone_skepticism - mean)
-~ temp dev_i = absolute(tone_integration - mean)
-~ temp dev_a = absolute(tone_awareness - mean)
-~ temp avg_dev = average(dev_e, dev_s, dev_i, dev_a)
+~ temp dev_n = absolute(tone_narrative_presence - mean)
+~ temp avg_dev = average(dev_t, dev_o, dev_e, dev_n)
 ~ coherence = round(100 - avg_dev)
 ~ return coherence
 
@@ -55,43 +55,43 @@
 // ============================================================================
 
 === tone_summary() ===
+Trust: {tone_trust}
+Observation: {tone_observation}
 Empathy: {tone_empathy}
-Skepticism: {tone_skepticism}
-Integration: {tone_integration}
-Awareness: {tone_awareness}
+Narrative Presence: {tone_narrative_presence}
 Coherence: {coherence}
 
 === highest_tone() ===
-{tone_empathy > tone_skepticism and tone_empathy > tone_integration and tone_empathy > tone_awareness:
+{tone_empathy > tone_observation and tone_empathy > tone_narrative_presence and tone_empathy > tone_trust:
     ~ return "empathy"
-- tone_skepticism > tone_integration and tone_skepticism > tone_awareness:
-    ~ return "skepticism"
-- tone_integration > tone_awareness:
-    ~ return "integration"
+- tone_observation > tone_narrative_presence and tone_observation > tone_trust:
+    ~ return "observation"
+- tone_narrative_presence > tone_trust:
+    ~ return "narrative_presence"
 - else:
-    ~ return "awareness"
+    ~ return "trust"
 }
 
 === lowest_tone() ===
-{tone_empathy < tone_skepticism and tone_empathy < tone_integration and tone_empathy < tone_awareness:
+{tone_empathy < tone_observation and tone_empathy < tone_narrative_presence and tone_empathy < tone_trust:
     ~ return "empathy"
-- tone_skepticism < tone_integration and tone_skepticism < tone_awareness:
-    ~ return "skepticism"
-- tone_integration < tone_awareness:
-    ~ return "integration"
+- tone_observation < tone_narrative_presence and tone_observation < tone_trust:
+    ~ return "observation"
+- tone_narrative_presence < tone_trust:
+    ~ return "narrative_presence"
 - else:
-    ~ return "awareness"
+    ~ return "trust"
 }
 
 === get_tone_name(stat) ===
 {stat == "empathy":
     ~ return "Empathy (Compassion)"
-- stat == "skepticism":
-    ~ return "Skepticism (Critical Thinking)"
-- stat == "integration":
-    ~ return "Integration (Synthesis)"
-- stat == "awareness":
-    ~ return "Awareness (Self-Understanding)"
+- stat == "observation":
+    ~ return "Observation (Critical Thinking)"
+- stat == "narrative_presence":
+    ~ return "Narrative Presence (Authority)"
+- stat == "trust":
+    ~ return "Trust (Connection)"
 - else:
     ~ return "Unknown"
 }
@@ -125,23 +125,23 @@ Coherence: {coherence}
 === emotional_resonance(npc_primary_tone, npc_secondary_tone) ===
 {npc_primary_tone == "empathy":
     ~ temp npc_primary_value = tone_empathy
-- npc_primary_tone == "skepticism":
-    ~ temp npc_primary_value = tone_skepticism
-- npc_primary_tone == "integration":
-    ~ temp npc_primary_value = tone_integration
-- npc_primary_tone == "awareness":
-    ~ temp npc_primary_value = tone_awareness
+- npc_primary_tone == "observation":
+    ~ temp npc_primary_value = tone_observation
+- npc_primary_tone == "narrative_presence":
+    ~ temp npc_primary_value = tone_narrative_presence
+- npc_primary_tone == "trust":
+    ~ temp npc_primary_value = tone_trust
 - else:
 }
 
 {npc_secondary_tone == "empathy":
     ~ temp npc_secondary_value = tone_empathy
-- npc_secondary_tone == "skepticism":
-    ~ temp npc_secondary_value = tone_skepticism
-- npc_secondary_tone == "integration":
-    ~ temp npc_secondary_value = tone_integration
-- npc_secondary_tone == "awareness":
-    ~ temp npc_secondary_value = tone_awareness
+- npc_secondary_tone == "observation":
+    ~ temp npc_secondary_value = tone_observation
+- npc_secondary_tone == "narrative_presence":
+    ~ temp npc_secondary_value = tone_narrative_presence
+- npc_secondary_tone == "trust":
+    ~ temp npc_secondary_value = tone_trust
 - else:
 }
 
@@ -155,31 +155,31 @@ Coherence: {coherence}
 
 === consequence_empathetic ===
 ~ adjust_tone("empathy", 8)
-~ adjust_tone("awareness", 3)
+~ adjust_tone("observation", 3)
 ~ coherence = calculate_coherence()
 You acted with compassion.
 
-=== consequence_skeptical ===
-~ adjust_tone("skepticism", 8)
-~ adjust_tone("awareness", 3)
+=== consequence_observant ===
+~ adjust_tone("observation", 8)
+~ adjust_tone("observation", 3)
 ~ coherence = calculate_coherence()
 You questioned deeply.
 
-=== consequence_integrative ===
-~ adjust_tone("integration", 10)
+=== consequence_narrative ===
+~ adjust_tone("narrative_presence", 10)
 ~ adjust_tone("empathy", 2)
-~ adjust_tone("skepticism", 2)
+~ adjust_tone("observation", 2)
 ~ coherence = calculate_coherence()
 You held both truths simultaneously.
 
 === consequence_reflective ===
-~ adjust_tone("awareness", 8)
-~ adjust_tone("integration", 3)
+~ adjust_tone("trust", 8)
+~ adjust_tone("narrative_presence", 3)
 ~ coherence = calculate_coherence()
 You looked inward.
 
 === consequence_balanced ===
-~ adjust_tone("awareness", 3)
+~ adjust_tone("observation", 3)
 ~ coherence = calculate_coherence()
 You remained centered.
 
@@ -216,10 +216,10 @@ This would be exported as JSON to the Python backend:
 
 {
   "tone": {
+    "trust": {tone_trust},
+    "observation": {tone_observation},
     "empathy": {tone_empathy},
-    "skepticism": {tone_skepticism},
-    "integration": {tone_integration},
-    "awareness": {tone_awareness}
+    "narrative_presence": {tone_narrative_presence}
   },
   "coherence": {coherence},
   "influence": {

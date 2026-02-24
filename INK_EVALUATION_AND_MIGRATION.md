@@ -14,7 +14,7 @@
 |---------|-----------|-------------|------------|
 | **Variables** | ✅ Yes | ✅ Full support (VAR, LIST, CONST) | 100% |
 | **Conditionals** | ✅ Yes | ✅ `{condition: text A | text B}` | 100% |
-| **TONE Stats** | ✅ Yes | ✅ VAR empathy/skepticism/integration/awareness | 100% |
+| **TONE Stats** | ✅ Yes | ✅ VAR trust/observation/empathy/narrative_presence | 100% |
 | **Coherence Formula** | ✅ Yes | ✅ Math operations & stored value | 95% |
 | **Emotional Gates** | ✅ Yes | ✅ Conditional knot access | 100% |
 | **Influence Tracking** | ✅ Yes | ✅ VAR for each NPC (21 vars) | 100% |
@@ -157,10 +157,10 @@ INCLUDE marketplace.ink
 
 **tone_system.ink** (Game mechanics)
 ```ink
+VAR tone_trust = 50
+VAR tone_observation = 50
 VAR tone_empathy = 50
-VAR tone_skepticism = 50
-VAR tone_integration = 50
-VAR tone_awareness = 50
+VAR tone_narrative_presence = 50
 VAR coherence = 100
 
 // Functions for TONE adjustments, coherence calc

@@ -18,12 +18,12 @@
 === check_tone_gate(stat, threshold) ===
 {stat == "empathy":
     ~ temp stat_value = tone_empathy
-- stat == "skepticism":
-    ~ temp stat_value = tone_skepticism
-- stat == "integration":
-    ~ temp stat_value = tone_integration
-- stat == "awareness":
-    ~ temp stat_value = tone_awareness
+- stat == "observation":
+    ~ temp stat_value = tone_observation
+- stat == "narrative_presence":
+    ~ temp stat_value = tone_narrative_presence
+- stat == "trust":
+    ~ temp stat_value = tone_trust
 - else:
 }
 
@@ -63,12 +63,12 @@
 === get_tone_value(stat) ===
 {stat == "empathy":
     ~ return tone_empathy
-- stat == "skepticism":
-    ~ return tone_skepticism
-- stat == "integration":
-    ~ return tone_integration
-- stat == "awareness":
-    ~ return tone_awareness
+- stat == "observation":
+    ~ return tone_observation
+- stat == "narrative_presence":
+    ~ return tone_narrative_presence
+- stat == "trust":
+    ~ return tone_trust
 }
 
 === get_influence_value(npc_name) ===
@@ -98,12 +98,12 @@
 === tone_gate_unlocked(stat, threshold, dialogue) ===
 {stat == "empathy":
     ~ temp stat_value = tone_empathy
-- stat == "skepticism":
-    ~ temp stat_value = tone_skepticism
-- stat == "integration":
-    ~ temp stat_value = tone_integration
-- stat == "awareness":
-    ~ temp stat_value = tone_awareness
+- stat == "observation":
+    ~ temp stat_value = tone_observation
+- stat == "narrative_presence":
+    ~ temp stat_value = tone_narrative_presence
+- stat == "trust":
+    ~ temp stat_value = tone_trust
 }
 
 {stat_value >= threshold:
@@ -133,8 +133,8 @@
     ~ return false
 }
 
-=== integration_check(min_empathy, min_skepticism, min_integration) ===
-{tone_empathy >= min_empathy and tone_skepticism >= min_skepticism and tone_integration >= min_integration:
+=== integration_check(min_empathy, min_observation, min_narrative_presence) ===
+{tone_empathy >= min_empathy and tone_observation >= min_observation and tone_narrative_presence >= min_narrative_presence:
     ~ return true
 - else:
     ~ return false
@@ -152,14 +152,14 @@
 - reason == "low_empathy":
     Your heart is guarded right now. This dialogue requires vulnerability.
     
-- reason == "low_skepticism":
-    You're trusting too easily. This person needs to know you think critically.
+- reason == "low_observation":
+    You're not paying close enough attention. This person needs to know you see clearly.
     
-- reason == "low_integration":
-    You can't hold both sides of this truth yet. You need to integrate your conflicting feelings first.
+- reason == "low_narrative_presence":
+    You can't hold both sides of this truth yet. You need to integrate your different perspectives first.
     
-- reason == "low_awareness":
-    You don't yet understand your own patterns. Look inward before looking outward.
+- reason == "low_trust":
+    You don't yet believe in the possibility of change. Look within before looking outward.
     
 - reason == "low_influence":
     This person doesn't trust you yet. Relationship takes time.

@@ -49,7 +49,7 @@ Merchants sell: preserved food, hand-crafted tools, healing herbs, fabric, leath
 Everyone seems to know each other. Kids call out to adults by name. Adults stop to help with heavy loads.
 
 ~ adjust_tone("empathy", 3)
-~ adjust_tone("awareness", 2)
+~ adjust_tone("observation", 2)
 ~ coherence = calculate_coherence()
 
 "Beautiful, isn't it?" 
@@ -74,7 +74,7 @@ Rasha smiles.
 
 "That's better, I think."
 
-~ adjust_tone("integration", 5)
+~ adjust_tone("narrative_presence", 5)
 ~ cascade_influence("ravi", 0.1)  // Learning from Ravi's apprentice
 
 * [Return to marketplace] -> marketplace_hub
@@ -101,12 +101,12 @@ She gestures to flowers blooming through stone.
 
 * [Tell her you're grieving something] 
     ~ adjust_tone("empathy", 8)
-    ~ adjust_tone("awareness", 6)
+    ~ adjust_tone("observation", 6)
     ~ coherence = calculate_coherence()
     -> nordia_witness
     
 * [Observe quietly]
-    ~ adjust_tone("awareness", 5)
+    ~ adjust_tone("observation", 5)
     -> shrine_silence
 
 === nordia_witness ===
@@ -127,8 +127,8 @@ You sit. The sounds of the marketplace fade. You hear wind, leaves, water somewh
 
 Your mind quiets. Your TONE stats shift slightly toward balance.
 
-~ adjust_tone("awareness", 4)
-~ adjust_tone("integration", 3)
+~ adjust_tone("observation", 4)
+~ adjust_tone("narrative_presence", 3)
 ~ coherence = calculate_coherence()
 
 After a while, you feel ready to continue.
@@ -145,17 +145,17 @@ This is not abandoned. It's being transformed.
 A woman with engineering focus oversees the work: Vera (salvage leader).
 
 * [Help with the work]
-    ~ adjust_tone("integration", 5)
+    ~ adjust_tone("narrative_presence", 5)
     ~ adjust_tone("empathy", 5)
     ~ coherence = calculate_coherence()
     -> collapsed_help
     
 * [Question the building's stability]
-    ~ adjust_tone("skepticism", 6)
+    ~ adjust_tone("observation", 6)
     -> collapsed_question
     
 * [Observe the process]
-    ~ adjust_tone("awareness", 4)
+    ~ adjust_tone("observation", 4)
     -> collapsed_observe
 
 === collapsed_help ===
@@ -212,7 +212,7 @@ She points to blueprints on the ground.
 "That's the real infrastructure. Not the building. The knowledge. The practice. The choice to maintain it."
 
 * [That's wise] 
-    ~ adjust_tone("integration", 6)
+    ~ adjust_tone("narrative_presence", 6)
     -> marketplace_hub
     
 * [Return to marketplace] -> marketplace_hub
@@ -227,8 +227,8 @@ He looks at you with intensity.
 "Do you come seeking knowledge?" he asks. "Or do you come to understand why knowledge matters?"
 
 * [Both]
-    ~ adjust_tone("awareness", 5)
-    ~ adjust_tone("skepticism", 3)
+    ~ adjust_tone("observation", 5)
+    ~ adjust_tone("observation", 3)
     -> malrik_dialogue
     
 * [I want to know what was lost]
@@ -331,10 +331,10 @@ A moment of rest. A moment of integration.
 You pause and take inventory of your emotional state.
 
 Current TONE Stats:
+  Trust: {tone_trust}
+  Observation: {tone_observation}
   Empathy: {tone_empathy}
-  Skepticism: {tone_skepticism}
-  Integration: {tone_integration}
-  Awareness: {tone_awareness}
+  Narrative Presence: {tone_narrative_presence}
   
 Coherence: {coherence}
 

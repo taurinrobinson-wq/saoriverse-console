@@ -10,7 +10,7 @@
 
 **Velinor** is an emotionally-driven narrative game set in the ruins of Velhara, a futuristic city built on emotional infrastructure. The game explores themes of emotional coherence, memory, sacrifice, and autonomy through an innovative systems-based approach where every mechanic serves emotional depth.
 
-**Core Innovation:** The game doesn't use traditional character stats or combat. Instead, it tracks **TONE** (Empathy, Skepticism, Integration, Awareness)—four emotional dimensions that determine how NPCs respond, which story branches unlock, and how the game ends. Every player choice shapes their emotional coherence, which ripples through a network of 21 NPCs and their relationships.
+**Core Innovation:** The game doesn't use traditional character stats or combat. Instead, it tracks **TONE** (Trust, Observation, Empathy, Narrative Presence)—four emotional dimensions that determine how NPCs respond, which story branches unlock, and how the game ends. Every player choice shapes their emotional coherence, which ripples through a network of 21 NPCs and their relationships.
 
 **Architecture:**
 - **Emotional OS:** A 4-dimensional emotional state system that gates all dialogue and outcomes

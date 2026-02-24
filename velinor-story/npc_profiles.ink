@@ -35,12 +35,12 @@ She extends a small device—crystalline, warm to the touch. A codex.
 She pauses. "It destroyed us instead."
 
 * [Listen carefully] 
-    ~ adjust_tone("awareness", 5)
+    ~ adjust_tone("observation", 5)
     ~ coherence = calculate_coherence()
     -> saori_explains
     
 * [Question her motives]
-    ~ adjust_tone("skepticism", 8)
+    ~ adjust_tone("observation", 8)
     ~ coherence = calculate_coherence()
     -> saori_defensive
     
@@ -60,7 +60,7 @@ She holds the codex closer to you.
 
 * [I'll help you rebuild]
     ~ cascade_influence("saori", 0.15)
-    ~ adjust_tone("integration", 5)
+    ~ adjust_tone("narrative_presence", 5)
     ~ coherence = calculate_coherence()
     -> saori_gratitude
     
@@ -81,7 +81,7 @@ Her hands shake slightly.
     
 * [You seem to blame yourself]
     ~ adjust_tone("empathy", 6)
-    ~ adjust_tone("awareness", 4)
+    ~ adjust_tone("observation", 4)
     ~ coherence = calculate_coherence()
     ~ cascade_influence("saori", 0.2)
     -> saori_breaks
@@ -100,7 +100,7 @@ She takes a breath, steadies herself.
     -> saori_partnership
     
 * [What do you need specifically?]
-    ~ adjust_tone("awareness", 8)
+    ~ adjust_tone("observation", 8)
     ~ coherence = calculate_coherence()
     -> saori_mission
 
@@ -160,8 +160,8 @@ She hands you the codex.
 -> marketplace_hub
 
 === saori_alternative ===
-~ adjust_tone("skepticism", 5)
-~ adjust_tone("integration", 10)
+~ adjust_tone("observation", 5)
+~ adjust_tone("narrative_presence", 10)
 ~ coherence = calculate_coherence()
 
 Saori looks at you with new attention.
@@ -216,7 +216,7 @@ A tall figure is organizing bright bolts of fabric. He looks up as you approach.
 ~ has_met_ravi = true
 
 * [I'm looking for something]
-    ~ adjust_tone("skepticism", 2)
+    ~ adjust_tone("observation", 2)
     -> ravi_guide
     
 * [Tell me about this place]
@@ -225,7 +225,7 @@ A tall figure is organizing bright bolts of fabric. He looks up as you approach.
     
 * [You seem sad]
     ~ adjust_tone("empathy", 5)
-    ~ adjust_tone("awareness", 5)
+    ~ adjust_tone("observation", 5)
     ~ coherence = calculate_coherence()
     -> ravi_vulnerable
 
@@ -288,11 +288,11 @@ He looks at you with new intensity.
 "Tell me—is she trying to restart it? The Corelink?"
 
 * [I think so]
-    ~ adjust_tone("skepticism", 3)
+    ~ adjust_tone("observation", 3)
     -> ravi_worried
     
 * [She's looking for the glyphs]
-    ~ adjust_tone("awareness", 4)
+    ~ adjust_tone("observation", 4)
     -> ravi_glyphs_question
 
 === ravi_vulnerable ===
@@ -315,7 +315,7 @@ He trails off. Grief is plain on his face.
     
 * [That must have been devastating]
     ~ adjust_tone("empathy", 8)
-    ~ adjust_tone("awareness", 5)
+    ~ adjust_tone("observation", 5)
     ~ coherence = calculate_coherence()
     -> ravi_deepens
 
@@ -430,7 +430,7 @@ Ravi waves as you approach again.
     -> nima_dialogue
 
 === ravi_check_in ===
-~ temp tone_shift = (tone_empathy - tone_skepticism) / 2
+~ temp tone_shift = (tone_empathy - tone_observation) / 2
 Ravi considers you.
 
 {influence_ravi >= 0.7:
@@ -464,16 +464,16 @@ She pauses.
 ~ has_met_nima = true
 
 * [I'm here to help, if I can]
-    ~ adjust_tone("integration", 5)
+    ~ adjust_tone("narrative_presence", 5)
     ~ adjust_tone("empathy", 3)
     -> nima_cautious_open
     
 * [I don't need your approval]
-    ~ adjust_tone("skepticism", 8)
+    ~ adjust_tone("observation", 8)
     -> nima_challenged
     
 * [Tell me what you see]
-    ~ adjust_tone("awareness", 8)
+    ~ adjust_tone("observation", 8)
     -> nima_reads_you
 
 === nima_cautious_open ===
@@ -492,7 +492,7 @@ She extends her hand.
     
 * [I appreciate the cautious trust]
     ~ cascade_influence("nima", 0.15)
-    ~ adjust_tone("skepticism", 3)
+    ~ adjust_tone("observation", 3)
     -> nima_honest_beginning
 
 === nima_challenged ===
@@ -505,13 +505,13 @@ She leans against her workbench.
 "So tell me then—what are you actually doing here? Not the easy answer. The real one."
 
 * [Trying to understand what happened]
-    ~ adjust_tone("awareness", 6)
+    ~ adjust_tone("observation", 6)
     ~ adjust_tone("empathy", 4)
     ~ coherence = calculate_coherence()
     -> nima_respects_honesty
     
 * [I'm helping Saori rebuild]
-    ~ adjust_tone("integration", 3)
+    ~ adjust_tone("narrative_presence", 3)
     -> nima_rebuilding_reaction
 
 === nima_reads_you ===
@@ -526,7 +526,7 @@ She nods once.
 ~ cascade_influence("nima", 0.2)
 
 * [You can tell all that from looking?]
-    ~ adjust_tone("awareness", 5)
+    ~ adjust_tone("observation", 5)
     -> nima_explains
     
 * [I lost someone too]
@@ -545,7 +545,7 @@ She's quiet for a moment.
     -> nima_protective
     
 * [You're still grieving]
-    ~ adjust_tone("awareness", 8)
+    ~ adjust_tone("observation", 8)
     ~ coherence = calculate_coherence()
     -> nima_grief_ongoing
 
@@ -562,7 +562,7 @@ She gestures toward Ravi.
     
 * [Your daughter]
     ~ adjust_tone("empathy", 8)
-    ~ adjust_tone("awareness", 4)
+    ~ adjust_tone("observation", 4)
     ~ coherence = calculate_coherence()
     -> nima_shared_sorrow
 
@@ -587,11 +587,11 @@ She's not hostile, just protective.
 "The Corelink broke because of how it was built. Saori wants to fix it. But maybe it needed to break."
 
 * [That's why I need to understand]
-    ~ adjust_tone("awareness", 6)
+    ~ adjust_tone("observation", 6)
     -> nima_understanding
     
 * [Maybe you're right]
-    ~ adjust_tone("integration", 5)
+    ~ adjust_tone("narrative_presence", 5)
     -> nima_alliance
 
 === nima_explains ===

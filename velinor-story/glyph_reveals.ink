@@ -108,7 +108,7 @@ The moment of collapse—physical or emotional—where everything you built sudd
 * [Continue] -> collapse_moment_closing
 
 === collapse_moment_tier_3 ===
-{coherence >= 50 and tone_skepticism >= 60:
+{coherence >= 50 and tone_observation >= 60:
     Your understanding of systems—their fragility—opens the glyph:
     
     "In the moment of breaking, you discover what was actually holding. Was it structure? Or was it denial? The collapse is not the failure. The failure is what led to the collapse."
@@ -157,7 +157,7 @@ This is joy that has fought for its existence. Joy that knows what could have be
 * [Continue] -> fierce_joy_closing
 
 === fierce_joy_tier_3 ===
-{coherence >= 65 and tone_skepticism >= 65 and influence_nima >= 0.6:
+{coherence >= 65 and tone_observation >= 65 and influence_nima >= 0.6:
     Nima's quiet strength shows you the full meaning:
     
     "Softness without fierceness is submission. Fierceness without softness is cruelty. Joy without the willingness to defend it is fragile. Here is joy that has fought through grief and come out stronger."
@@ -194,7 +194,7 @@ The bright, sharp feeling remains with you.
     
 - glyph_id == "collapse_moment":
     {collapse_witnessed:
-        {coherence >= 50 and tone_skepticism >= 60:
+        {coherence >= 50 and tone_observation >= 60:
             ~ return 3
         - else:
             ~ return 2
@@ -205,7 +205,7 @@ The bright, sharp feeling remains with you.
     
 - glyph_id == "fierce_joy":
     {has_met_nima:
-        {coherence >= 65 and tone_skepticism >= 65 and influence_nima >= 0.6:
+        {coherence >= 65 and tone_observation >= 65 and influence_nima >= 0.6:
             ~ return 3
         - else:
             ~ return 2
