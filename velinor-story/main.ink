@@ -85,12 +85,16 @@ Current Emotional State:
 Glyphs Revealed: {glyphs_revealed}
 
 {glyphs_revealed > 0:
-  - The Promise Held (Comfort): {promise_held_unlocked}
-  - Collapse Moment (Crisis): {collapse_moment_unlocked}
-  - Fierce Joy (Joy): {fierce_joy_unlocked}
+    -> SHOW_GLYPH_LIST
 }
 
 * [Back] -> TEST_SCENE_SELECT
+
+=== SHOW_GLYPH_LIST ===
+- The Promise Held (Comfort): {promise_held_unlocked}
+- Collapse Moment (Crisis): {collapse_moment_unlocked}
+- Fierce Joy (Joy): {fierce_joy_unlocked}
+-> DONE
 
 === test_coherence_gate ===
 [Testing coherence gate: requires >= 70]
