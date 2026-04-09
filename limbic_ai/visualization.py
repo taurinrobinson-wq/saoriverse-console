@@ -141,8 +141,8 @@ def generate_svg_limbic_map(limbic_state: LimbicState) -> str:
     # SVG canvas dimensions
     width, height = 800, 600
     
-    # Start SVG
-    svg = f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">\n'
+    # Start SVG with responsive scaling
+    svg = f'<svg width="100%" height="auto" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">\n'
     svg += '<defs><style>text { font-family: Arial, sans-serif; font-size: 12px; }</style></defs>\n'
     svg += '<rect width="100%" height="100%" fill="#f8f9fa"/>\n'
     
