@@ -35,14 +35,14 @@
 
 ```bash
 
-# Current environment
+## Current environment
 source /workspaces/saoriverse-console/.venv/bin/activate
 
-# Optional: Upgrade to medium spaCy model (better accuracy)
+## Optional: Upgrade to medium spaCy model (better accuracy)
 pip install --upgrade spacy
 python -m spacy download en_core_web_md
 
-# Verify
+## Verify
 ```text
 
 ```text
@@ -63,17 +63,17 @@ nlp = spacy.load("en_core_web_md")
 text = "Michelle explains things in a way only she can follow"
 doc = nlp(text)
 
-# Extract entities
+## Extract entities
 for ent in doc.ents:
     print(f"{ent.text} ({ent.label_})")
     # Output: Michelle (PERSON)
 
-# Extract noun chunks (key phrases)
+## Extract noun chunks (key phrases)
 for chunk in doc.noun_chunks:
     print(chunk.text)
     # Output: Michelle, things, way
 
-# Get word vectors (semantic meaning)
+## Get word vectors (semantic meaning)
 word1 = nlp("anxiety")
 word2 = nlp("worry")
 
@@ -91,14 +91,14 @@ word2 = nlp("worry")
 
 from parser.nrc_lexicon_loader import nrc
 
-# Each word mapped to emotions
+## Each word mapped to emotions
 nrc.analyze_text("I have a mental block on math")
 
-# Output: {
-#   "negative": 0.8,
-#   "sadness": 0.6,
-#   "fear": 0.7,
-#   "frustration": 0.8
+## Output: {
+##   "negative": 0.8,
+##   "sadness": 0.6,
+##   "fear": 0.7,
+##   "frustration": 0.8
 
 ```text
 ```text
@@ -118,7 +118,7 @@ from parser.poetry_database import PoetryDatabase
 
 db = PoetryDatabase() poems = db.POETRY_COLLECTION["grief"]  # Get poems for grief emotion
 
-# Current usage: Pick one randomly and weave it in
+## Current usage: Pick one randomly and weave it in
 
 ```text
 ```
@@ -136,11 +136,11 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 sia = SentimentIntensityAnalyzer()
 scores = sia.polarity_scores("I'm FURIOUS about the math requirement!!!")
 
-# Output: {
-#   'neg': 0.55,   # Negative
-#   'neu': 0.00,   # Neutral
-#   'pos': 0.00,   # Positive
-#   'compound': -0.88  # Overall intensity (-1 to 1)
+## Output: { (2)
+##   'neg': 0.55,   # Negative
+##   'neu': 0.00,   # Neutral
+##   'pos': 0.00,   # Positive
+##   'compound': -0.88  # Overall intensity (-1 to 1)
 
 ```text
 
@@ -174,12 +174,12 @@ if 'block' in keywords:
 ```python
 
 
-# Extract features from actual message content
+## Extract features from actual message content
 features = { 'math_frustration': has_math_keywords and has_frustration, 'communication_friction':
 has_person and has_explain_keywords, 'inherited_pattern': has_inherited_keywords, 'person_involved':
 extract_person_name(text),  # spaCy }
 
-# Compose response by layering features
+## Compose response by layering features
 
 ```text
 ```text

@@ -288,6 +288,8 @@ To:
 
 - "First voice-enabled emotional AI with prosody mapping and suppression detection" → "$120-160B opportunity with unique market segments"
 
-The voice interface, when positioned correctly, becomes your unfair advantage in crisis support, accessibility, and telehealth. These are markets where competitors either don't exist yet (voice crisis AI) or where voice makes a massive difference (accessibility, telehealth triage).
+The voice interface, when positioned correctly, becomes your unfair advantage in crisis support,
+accessibility, and telehealth. These are markets where competitors either don't exist yet (voice
+crisis AI) or where voice makes a massive difference (accessibility, telehealth triage).
 
 **Next phase: Activate the crisis voice platforms (6-month closure likely).**

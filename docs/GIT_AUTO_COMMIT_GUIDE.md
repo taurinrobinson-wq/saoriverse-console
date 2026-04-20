@@ -130,10 +130,10 @@ The auto-commit scripts work alongside manual commits:
 
 ```bash
 
-# Auto-commit runs in background
+## Auto-commit runs in background
 .\scripts\auto-commit.ps1
 
-# You can still commit manually in another terminal
+## You can still commit manually in another terminal
 git add src/specific-file.ts
 git commit -m "feat: implement specific feature"
 ```text
@@ -160,7 +160,7 @@ Create a scheduled task to run the script automatically:
 ```powershell
 
 
-# Create scheduled task (run once at startup, repeat every 30 minutes)
+## Create scheduled task (run once at startup, repeat every 30 minutes)
 $trigger = New-ScheduledTaskTrigger -AtStartup -RepetitionInterval (New-TimeSpan -Minutes 30)
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\path\to\scripts\auto-commit.ps1"
 
@@ -175,10 +175,10 @@ Create a cron job to run every 30 minutes:
 ```bash
 
 
-# Edit crontab
+## Edit crontab
 crontab -e
 
-# Add this line (runs every 30 minutes)
+## Add this line (runs every 30 minutes)
 
 ```text
 ```text
@@ -238,7 +238,7 @@ If you prefer manual one-off commits:
 ```bash
 
 
-# Quick single commit
+## Quick single commit
 cd d:\saoriverse-console git add -A git commit -m "feat: implement emotion learning system"
 
 ```text
@@ -266,7 +266,7 @@ cd d:\saoriverse-console git add -A git commit -m "feat: implement emotion learn
 ```bash
 crontab -e
 
-# Remove the line you added earlier
+## Remove the line you added earlier
 ```
 
 

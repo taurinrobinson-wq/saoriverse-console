@@ -36,11 +36,11 @@ Adaptivity) → 20ms ↓ Tier 3: Poetic Consciousness (Poetry + Aesthetics + Ten
 
 engine = PoetryEngine() metaphor = engine.find_metaphor("growth", "joy")
 
-# → "sun breaking clouds", "blooming flowers", etc.
+## → "sun breaking clouds", "blooming flowers", etc.
 
 expr = engine.generate_poetic_expression("growth", "metaphorical")
 
-# → "Like transformation unfolds..."
+## → "Like transformation unfolds..."
 
 bridge = engine.bridge_concepts("growth", "challenge")
 
@@ -62,20 +62,20 @@ bridge = engine.bridge_concepts("growth", "challenge")
 ```python
 saori = SaoriLayer()
 
-# Ma: appropriate brevity
+## Ma: appropriate brevity
 brief = saori.apply_ma(long_response, max_length=150)
 
-# Wabi-sabi: imperfect beauty
+## Wabi-sabi: imperfect beauty
 imperfect = saori.apply_wabi_sabi("perfect solution")
 
-# → "perfect solution - flawed and beautiful nonetheless"
+## → "perfect solution - flawed and beautiful nonetheless"
 
-# Yūgen: subtle profundity
+## Yūgen: subtle profundity
 subtle = saori.apply_yugen("Here's the insight")
 
-# → "Here's the insight - more is felt than said"
+## → "Here's the insight - more is felt than said"
 
-# Mono no aware: gentle melancholy
+## Mono no aware: gentle melancholy
 transient = saori.apply_mono_no_aware("This moment")
 
 ```text
@@ -100,17 +100,17 @@ transient = saori.apply_mono_no_aware("This moment")
 
 tension = TensionManager()
 
-# Introduce tension at different levels
+## Introduce tension at different levels
 low = tension.introduce_tension(response, level=0.2)      # gentle
 med = tension.introduce_tension(response, level=0.5)      # moderate
 high = tension.introduce_tension(response, level=0.8)     # strong
 
-# Create openings for exploration
+## Create openings for exploration
 opening = tension.create_opening("This is what I think")
 
-# → "This is what I think... but what lies beyond?"
+## → "This is what I think... but what lies beyond?"
 
-# Balance paradox (both/and thinking)
+## Balance paradox (both/and thinking)
 paradox = tension.balance_paradox("strength", "vulnerability")
 
 ```text
@@ -132,23 +132,23 @@ paradox = tension.balance_paradox("strength", "vulnerability")
 
 weaver = MythologyWeaver()
 
-# Extract themes from conversation history
+## Extract themes from conversation history
 myth = weaver.weave_myth([ {"content": "I want to grow"}, {"content": "I'm learning through
 challenge"} ])
 
-# → {"themes": ["growth", "challenge"]}
+## → {"themes": ["growth", "challenge"]}
 
-# Track recurring symbols
+## Track recurring symbols
 symbols = weaver.track_symbols("light in the journey")
 
-# → {"light": 1, "journey": 1}
+## → {"light": 1, "journey": 1}
 
-# Add mythological elements
+## Add mythological elements
 enhanced = weaver.add_mythological_element(response, myth)
 
-# → Response prefixed with theme-related phrase
+## → Response prefixed with theme-related phrase
 
-# Build personal narrative
+## Build personal narrative
 narrative = weaver.build_personal_narrative(history)
 
 ```text
@@ -172,22 +172,22 @@ narrative = weaver.build_personal_narrative(history)
 
 tier3 = Tier3PoeticConsciousness()
 
-# Process response for poetry
+## Process response for poetry
 poetic, metrics = tier3.process_for_poetry( response="Here's an insight about growth", context={
 "messages": conversation_history, "theme": "growth" } )
 
-# Metrics returned
+## Metrics returned
 print(metrics)
 
-# {
-#     "theme": "growth",
-#     "aesthetic_applied": "wabi_sabi",
-#     "has_mythology": True,
-#     "processing_time_ms": 8.5
+## {
+##     "theme": "growth",
+##     "aesthetic_applied": "wabi_sabi",
+##     "has_mythology": True,
+##     "processing_time_ms": 8.5
 
-# }
+## }
 
-# Get latest metrics anytime
+## Get latest metrics anytime
 
 ```text
 ```
@@ -199,7 +199,7 @@ print(metrics)
 
 ```python
 
-# Tier 3 processing call (after Tier 2)
+## Tier 3 processing call (after Tier 2)
 tier3 = st.session_state.get("tier3_poetic_consciousness")
 if tier3:
     try:
@@ -223,10 +223,10 @@ if tier3:
 ```python
 
 
-# Called during initialize_session_state()
+## Called during initialize_session_state()
 _ensure_tier3_poetic_consciousness()
 
-# Function (25 lines)
+## Function (25 lines)
 def _ensure_tier3_poetic_consciousness():
     if "tier3_poetic_consciousness" not in st.session_state:
         try:
@@ -285,14 +285,14 @@ mythological elements ↓ Output: enhanced response string, metrics dict
 
 
 
-# Tier 3 only
+## Tier 3 only
 pytest tests/test_tier3_poetic_consciousness.py -v
 
-# All tiers (Tier 1+2+3)
+## All tiers (Tier 1+2+3)
 pytest tests/test_tier1_foundation.py tests/test_tier2_aliveness.py
 tests/test_tier3_poetic_consciousness.py -v
 
-# Quick check
+## Quick check
 pytest tests/test_tier3_poetic_consciousness.py --tb=no -q
 
 ```text
@@ -307,19 +307,19 @@ Tier 3 uses probabilistic application (not all enhancements applied every call):
 
 ```python
 
-# In PoetryEngine
+## In PoetryEngine
 if random.random() > 0.5:  # 50% chance
     response = engine.add_symbolic_language(response, theme)
 
-# In SaoriLayer
+## In SaoriLayer
 if random.random() > 0.7:  # 30% chance
     response = saori.apply_wabi_sabi(response)
 
-# In TensionManager
+## In TensionManager
 if random.random() > 0.6:  # 40% chance
     response = tension.introduce_tension(response, level)
 
-# In MythologyWeaver
+## In MythologyWeaver
 if myth.get("themes"):  # Only if themes extracted
 ```text
 
@@ -334,7 +334,7 @@ To increase poetry intensity (in any component):
 ```python
 
 
-# Lower probability threshold (e.g., 0.5 → 0.3 = 70% chance)
+## Lower probability threshold (e.g., 0.5 → 0.3 = 70% chance)
 if random.random() > 0.3:  # was 0.5
 
 ```text
@@ -346,7 +346,7 @@ To decrease poetry intensity:
 ```python
 
 
-# Raise probability threshold (e.g., 0.5 → 0.8 = 20% chance)
+## Raise probability threshold (e.g., 0.5 → 0.8 = 20% chance)
 if random.random() > 0.8:  # was 0.5
 
 ```text
@@ -392,7 +392,7 @@ except Exception as e:
 ```python
 
 
-# Just enhance response, don't care about metrics
+## Just enhance response, don't care about metrics
 poetic, _ = tier3.process_for_poetry(response)
 
 ```text
@@ -459,7 +459,7 @@ print(f"Time: {metrics.get('processing_time_ms')}ms")
 ```python
 
 
-# Set seed for reproducible behavior (for testing)
+## Set seed for reproducible behavior (for testing)
 import random random.seed(42) poetic, _ = tier3.process_for_poetry(response)
 
 ```

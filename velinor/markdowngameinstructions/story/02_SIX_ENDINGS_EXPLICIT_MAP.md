@@ -4,13 +4,17 @@
 
 **The Final Choice Is Not the Real Ending**
 
-At the Corelink chamber, the player's choice to restart the system or abandon it appears to be the ending. But it's not.
+At the Corelink chamber, the player's choice to restart the system or abandon it appears to be the
+ending. But it's not.
 
-The *real* ending was already determined by whether Malrik and Elenya chose to rebuild their shared archive together.
+The *real* ending was already determined by whether Malrik and Elenya chose to rebuild their shared
+archive together.
 
 Because: **Systems cannot do what people cannot.**
 
-If the people of Velhara have not learned synthesis, restarting the Corelink will only amplify their incoherence again. If they have learned synthesis, they don't need the Corelink—they can build coherence themselves.
+If the people of Velhara have not learned synthesis, restarting the Corelink will only amplify their
+incoherence again. If they have learned synthesis, they don't need the Corelink—they can build
+coherence themselves.
 
 ---
 
@@ -26,7 +30,8 @@ The six endings are created by two axes:
 - **Rebuild Together** (Chose synthesis, integration)
 - **Abandon the Building** (Chose fracture, separation)
 
-This creates a 2×3 matrix (2 player choices × 3 intermediate states) that gives six distinct narrative endings.
+This creates a 2×3 matrix (2 player choices × 3 intermediate states) that gives six distinct
+narrative endings.
 
 ---
 
@@ -39,9 +44,14 @@ This creates a 2×3 matrix (2 player choices × 3 intermediate states) that give
 - Player's accumulated choices showed path toward synthesis
 
 **Narrative Arc:**
-The player's journey through Velinor has modeled the possibility of holding multiple truths. When the player reaches the Corelink with Saori and Velinor, they propose restarting the system—but this time with a difference. The rebuilt archive in the city becomes a literal mirror of what the Corelink should do: hold contradictory perspectives in dialogue, not hierarchy.
+The player's journey through Velinor has modeled the possibility of holding multiple truths. When
+the player reaches the Corelink with Saori and Velinor, they propose restarting the system—but this
+time with a difference. The rebuilt archive in the city becomes a literal mirror of what the
+Corelink should do: hold contradictory perspectives in dialogue, not hierarchy.
 
-Malrik and Elenya stand together at the chamber's entrance, their rebuilt archive now a symbol of integration. The Corelink restarts, but it's different. It no longer tries to manufacture consensus. It amplifies coherence that the people have already chosen for themselves.
+Malrik and Elenya stand together at the chamber's entrance, their rebuilt archive now a symbol of
+integration. The Corelink restarts, but it's different. It no longer tries to manufacture consensus.
+It amplifies coherence that the people have already chosen for themselves.
 
 **Visual/Thematic Language:**
 - Light returning to the chamber
@@ -66,9 +76,13 @@ Malrik and Elenya stand together at the chamber's entrance, their rebuilt archiv
 - Player's accumulated choices showed intellectual understanding but emotional distance
 
 **Narrative Arc:**
-The player has understood the philosophy—that synthesis is possible—but the people of Velhara didn't follow. When the player reaches the Corelink, they choose to restart it anyway, hoping the system will succeed where the people failed.
+The player has understood the philosophy—that synthesis is possible—but the people of Velhara didn't
+follow. When the player reaches the Corelink, they choose to restart it anyway, hoping the system
+will succeed where the people failed.
 
-But at the edge of the city, Malrik and Elenya walk away from the ruins of their archive. They couldn't find common ground. The Corelink restarts, and the city lights up again—but the light is hollow. The fractures remain.
+But at the edge of the city, Malrik and Elenya walk away from the ruins of their archive. They
+couldn't find common ground. The Corelink restarts, and the city lights up again—but the light is
+hollow. The fractures remain.
 
 The system hums with power, but the people are still divided. History is repeating.
 
@@ -95,9 +109,12 @@ The system hums with power, but the people are still divided. History is repeati
 - Player's journey showed authentic skepticism of systems
 
 **Narrative Arc:**
-The player and Velinor stand in the chamber, looking at the Corelink. The player chooses not to restart it. They choose to let it rest. Saori and Velinor are aligned in this—no more manufactured solutions.
+The player and Velinor stand in the chamber, looking at the Corelink. The player chooses not to
+restart it. They choose to let it rest. Saori and Velinor are aligned in this—no more manufactured
+solutions.
 
-But the city is still broken. Malrik and Elenya never found their way to collaboration. The people are scattered, grieving, trying to survive in a city that no longer has a central organizing system.
+But the city is still broken. Malrik and Elenya never found their way to collaboration. The people
+are scattered, grieving, trying to survive in a city that no longer has a central organizing system.
 
 It's difficult. It's honest. It's not hopeful, but it's real.
 
@@ -127,13 +144,19 @@ It's difficult. It's honest. It's not hopeful, but it's real.
 - Player's journey showed path toward synthesis
 
 **Narrative Arc:**
-The player, Saori, and Velinor stand in the chamber. The choice is clear: don't restart the system. Let the people build what comes next.
+The player, Saori, and Velinor stand in the chamber. The choice is clear: don't restart the system.
+Let the people build what comes next.
 
-Above, in the city, Malrik and Elenya have already chosen to rebuild their archive together. It's not finished—it may never be finished. But they're doing the work, side by side, learning to hold each other's truths.
+Above, in the city, Malrik and Elenya have already chosen to rebuild their archive together. It's
+not finished—it may never be finished. But they're doing the work, side by side, learning to hold
+each other's truths.
 
-The Corelink goes dark, and for a moment there's silence. Then, from the city above, comes the sound of construction. People rebuilding. Communities forming. Synthesis happening not because a system forced it, but because people chose it.
+The Corelink goes dark, and for a moment there's silence. Then, from the city above, comes the sound
+of construction. People rebuilding. Communities forming. Synthesis happening not because a system
+forced it, but because people chose it.
 
-This is the hardest ending. It requires the most from the player and the world. But it's also the most real.
+This is the hardest ending. It requires the most from the player and the world. But it's also the
+most real.
 
 **Visual/Thematic Language:**
 - The Corelink glows one last time, then fades into silence
@@ -161,9 +184,12 @@ This is the hardest ending. It requires the most from the player and the world. 
 - Player's journey showed some but not all paths to synthesis
 
 **Narrative Arc:**
-The player reaches the Corelink as news arrives: Malrik and Elenya have started rebuilding their archive together. It's slow, tentative, incomplete—but it's happening.
+The player reaches the Corelink as news arrives: Malrik and Elenya have started rebuilding their
+archive together. It's slow, tentative, incomplete—but it's happening.
 
-The player chooses to restart the Corelink. The system comes back online, and it feels different this time. Not perfect, but better. The Corelink picks up signals from the rebuilding archive below—it learns, in real time, what synthesis looks like.
+The player chooses to restart the Corelink. The system comes back online, and it feels different
+this time. Not perfect, but better. The Corelink picks up signals from the rebuilding archive
+below—it learns, in real time, what synthesis looks like.
 
 The system and the people are in dialogue now, slowly calibrating together.
 
@@ -192,11 +218,15 @@ The system and the people are in dialogue now, slowly calibrating together.
 - Player's journey showed detachment from factional dynamics
 
 **Narrative Arc:**
-The player chooses not to restart the Corelink. The system goes dark. But this time, it's different—there's movement in the city. Malrik and Elenya are rebuilding their archive, slowly, imperfectly, without any system to guide them.
+The player chooses not to restart the Corelink. The system goes dark. But this time, it's
+different—there's movement in the city. Malrik and Elenya are rebuilding their archive, slowly,
+imperfectly, without any system to guide them.
 
-It's messy. It's uncertain. The factions remain distinct and sometimes in conflict. But there's no centralized power forcing resolution. They have to work it out themselves, day by day.
+It's messy. It's uncertain. The factions remain distinct and sometimes in conflict. But there's no
+centralized power forcing resolution. They have to work it out themselves, day by day.
 
-Saori and Velinor remain fractured, watching from the chamber as the city tries to figure out what comes next.
+Saori and Velinor remain fractured, watching from the chamber as the city tries to figure out what
+comes next.
 
 **Visual/Thematic Language:**
 - The Corelink goes dark
@@ -298,7 +328,8 @@ Notice the design:
 - **2 & 3** are fracture + opposite system choices (the tragedy pair)
 - **5 & 6** are partial synthesis + opposite system choices (the ambiguous pair)
 
-Each column explores what happens when *the people* succeed or fail, independent of whether the system returns. The system is ultimately irrelevant. The people matter.
+Each column explores what happens when *the people* succeed or fail, independent of whether the
+system returns. The system is ultimately irrelevant. The people matter.
 
 This mirrors the core philosophy: **Systems cannot do what people cannot.**
 
@@ -312,4 +343,5 @@ This mirrors the core philosophy: **Systems cannot do what people cannot.**
 - **Make replaying feel like exploring a different philosophy, not just getting "the good ending"**
 - **Ensure each ending has emotional resonance, not just mechanical difference**
 
-The endings aren't rewards for playing correctly. They're mirrors for the player to see what philosophy they actually embodied through the game.
+The endings aren't rewards for playing correctly. They're mirrors for the player to see what
+philosophy they actually embodied through the game.

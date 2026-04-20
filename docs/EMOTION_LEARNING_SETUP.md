@@ -57,7 +57,7 @@ create index if not exists emotions_log_context_idx
 
 This table stores per-user emotion detection thresholds calculated by `train_emotion_model.py`.
 
-### SQL to create the table
+### SQL to create the table (2)
 
 ```sql
 
@@ -78,7 +78,7 @@ create index if not exists emotion_thresholds_user_idx
 
 ```
 
-### How to apply
+### How to apply (2)
 
 1. Go to **SQL Editor** in Supabase Dashboard
 2. Click **New Query**
@@ -154,12 +154,12 @@ Ensure your backend has these environment variables set:
 
 
 
-# .env.local (Next.js)
+## .env.local (Next.js)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # Keep
 private!
 
-# For train_emotion_model.py
+## For train_emotion_model.py
 export SUPABASE_URL="https://your-project.supabase.co"
 
 ```text

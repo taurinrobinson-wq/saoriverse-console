@@ -459,11 +459,8 @@
 
 **Next steps:**
 
-1. Review `ADVANCED_PRUNING_GUIDE.md`
-2. Run `advanced_pruning_engine.py` on your data
-3. Check the generated `PRUNING_REPORT.json`
-4. Integrate with your workflow
-5. Enable match history tracking
+1. Review `ADVANCED_PRUNING_GUIDE.md` 2. Run `advanced_pruning_engine.py` on your data 3. Check the
+generated `PRUNING_REPORT.json` 4. Integrate with your workflow 5. Enable match history tracking
 
 **You now have an enterprise-grade glyph management system! 🚀**
 

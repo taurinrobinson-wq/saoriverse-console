@@ -211,14 +211,14 @@ recognizable voice 8. ✅ **Context Variations** — Same NPC, different context
 manager = NPCManager()
 manager.add_npcs_batch(create_marketplace_npcs())
 
-# Generate dialogue
+## Generate dialogue
 sera = manager.get_npc("Sera")
 dialogue = generate_dialogue("Sera", sera.remnants, context="greeting")
 
-# Apply player choice as TONE effect
+## Apply player choice as TONE effect
 manager.apply_tone_effects({"empathy": 0.15})
 
-# Regenerate with updated traits
+## Regenerate with updated traits
 new_dialogue = generate_dialogue("Sera", sera.remnants, context="alliance")
 ```
 

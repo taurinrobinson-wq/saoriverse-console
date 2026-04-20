@@ -379,7 +379,7 @@ The system includes a **simulation mode** that shows NPC evolution over multiple
 
 ```bash
 
-# Build story with NPC evolution simulation
+## Build story with NPC evolution simulation
 python velinor/stories/build_story.py --validate
 ```
 

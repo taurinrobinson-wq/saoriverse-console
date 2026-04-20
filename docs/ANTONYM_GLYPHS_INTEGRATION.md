@@ -71,13 +71,13 @@ antonym_glyphs.txt ↓ antonym_glyphs_indexer.py (loads and indexes) ↓ antonym
 from emotional_os.glyphs.antonym_glyphs import ( find_antonym_by_emotion, search_antonyms,
 find_antonym_by_voltage_pair, )
 
-# Find antonym by emotion name
+## Find antonym by emotion name
 antonym = find_antonym_by_emotion("comfort") print(antonym["Name"])  # Output: "Gentle Holding"
 
-# Search antonyms
+## Search antonyms
 results = search_antonyms("joy")
 
-# Find by voltage pair
+## Find by voltage pair
 
 ```text
 ```text
@@ -248,7 +248,7 @@ from emotional_os.glyphs.antonym_glyphs import (
     format_antonym_for_display
 )
 
-# User selected a glyph representing "grief"
+## User selected a glyph representing "grief"
 emotion = "grief"
 
 antonym = find_antonym_by_emotion(emotion)
@@ -291,10 +291,10 @@ if search_query:
 from emotional_os.glyphs.antonym_glyphs import ( suggest_emotional_opposite, find_antonym_by_emotion
 )
 
-# After user expresses an emotion
+## After user expresses an emotion
 user_emotion = "loneliness"
 
-# Suggest the opposite perspective
+## Suggest the opposite perspective
 opposite = suggest_emotional_opposite(user_emotion) if opposite: st.info(f"💡 Consider also:
 {opposite['Name']}")
 
@@ -484,16 +484,16 @@ Make sure:
 ```python
 
 
-# Quick import for most common use
+## Quick import for most common use
 from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion
 
-# Most common operations
+## Most common operations
 comfort = find_antonym_by_emotion("comfort") print(comfort["Name"])  # "Gentle Holding"
 
-# Search
+## Search
 results = search_antonyms("sorrow")
 
-# Get all emotions
+## Get all emotions
 emotions = list_antonym_emotions()
 
 ```

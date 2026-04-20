@@ -326,13 +326,13 @@ Collected: 10 items Passed: 10 Failed: 0 Skipped: 0 Success Rate: 100% Execution
 2. **Integrate** into response_handler.py and ui_refactored.py (1-2 hours)
 3. **Test** locally to verify it works (30 min)
 
-### Week 2
+### Week 2 (2)
 Begin Tier 2 (Aliveness) implementation
 
-### Week 3-4
+### Week 3-4 (2)
 Begin Tier 3 (Depth) implementation
 
-### Optional Week 5+
+### Optional Week 5+ (2)
 Begin Tier 4 (Memory) implementation
 ##
 

@@ -314,11 +314,9 @@ data = adapter.for_ritual_processing()  # Returns {name: text}
 
 Every collection passes:
 
-1. **Size Check** - Minimum 5,000 bytes (real content)
-2. **Line Distribution** - Average 20-200 characters per line
-3. **UTF-8 Encoding** - All characters valid Unicode
-4. **Special Character Check** - Less than 10% artifacts
-5. **Completeness Check** - No fragmentation markers
+1. **Size Check** - Minimum 5,000 bytes (real content) 2. **Line Distribution** - Average 20-200
+characters per line 3. **UTF-8 Encoding** - All characters valid Unicode 4. **Special Character
+Check** - Less than 10% artifacts 5. **Completeness Check** - No fragmentation markers
 
 Only after passing all checks does text reach "validated" status.
 
@@ -400,21 +398,17 @@ Three comprehensive guides included:
 
 ## What's Ready to Use
 
-✅ **poetry_data_pipeline.py** - Download, clean, validate, store
-✅ **poetry_text_cleaner.py** - Comprehensive text cleaning
-✅ **poetry_data_hub.py** - Unified data access for all modes
-✅ **Database schema** - SQLite with metadata, metrics, logs
-✅ **8 poetry collections** - 295K+ words from Gutenberg
-✅ **Documentation** - 54 KB of guides and examples
-✅ **Integration patterns** - Code examples for each mode
+✅ **poetry_data_pipeline.py** - Download, clean, validate, store ✅ **poetry_text_cleaner.py** -
+Comprehensive text cleaning ✅ **poetry_data_hub.py** - Unified data access for all modes ✅
+**Database schema** - SQLite with metadata, metrics, logs ✅ **8 poetry collections** - 295K+ words
+from Gutenberg ✅ **Documentation** - 54 KB of guides and examples ✅ **Integration patterns** - Code
+examples for each mode
 
 ## What's Next
 
-1. Run pipeline: `python poetry_data_pipeline.py --process`
-2. Update your processing systems to use the adapter
-3. Start processing clean, validated poetry
-4. Monitor quality metrics
-5. Add more collections as needed
+1. Run pipeline: `python poetry_data_pipeline.py --process` 2. Update your processing systems to use
+the adapter 3. Start processing clean, validated poetry 4. Monitor quality metrics 5. Add more
+collections as needed
 
 ## Questions?
 

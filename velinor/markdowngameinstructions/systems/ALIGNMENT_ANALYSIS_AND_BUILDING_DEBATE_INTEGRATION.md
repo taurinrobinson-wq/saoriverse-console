@@ -2,7 +2,10 @@
 
 ## Executive Summary
 
-The **VELINOR_COMPLETE_DESIGN.md** and **Glyph_Organizer.json** are **largely aligned in philosophy but misaligned in scope**. The JSON is significantly more comprehensive and updated. The new story beat (Malrik vs Elenya debate over building use with Coren mediating) **is not yet present in either document** and represents a critical integration opportunity.
+The **VELINOR_COMPLETE_DESIGN.md** and **Glyph_Organizer.json** are **largely aligned in philosophy
+but misaligned in scope**. The JSON is significantly more comprehensive and updated. The new story
+beat (Malrik vs Elenya debate over building use with Coren mediating) **is not yet present in either
+document** and represents a critical integration opportunity.
 
 ---
 
@@ -43,15 +46,18 @@ The **VELINOR_COMPLETE_DESIGN.md** and **Glyph_Organizer.json** are **largely al
 
 This scene is **crucial** because it represents:
 
-1. **The collision of two valid epistemologies** — not good vs evil, but two different ways of knowing
+1. **The collision of two valid epistemologies** — not good vs evil, but two different ways of
+knowing
    - **Malrik**: Data-driven, historical precedent, rational allocation
    - **Elenya**: Intuitive sensing, community cohesion, relational logic
 
-2. **Coren's true teaching role** — she's not just a bystander, but a bridge between opposing ways of seeing
+2. **Coren's true teaching role** — she's not just a bystander, but a bridge between opposing ways
+of seeing
    - This deepens her Sovereignty glyph (Held Ache) into practice
    - This is where co-witnessing becomes transformative
 
-3. **A player-driven narrative crossroads** — the player doesn't referee a winner; they choose *how to hold the tension*
+3. **A player-driven narrative crossroads** — the player doesn't referee a winner; they choose *how
+to hold the tension*
 
 ### 2.2 Proposed Glyph Entry: "Glyph of Contested Vision"
 
@@ -176,18 +182,18 @@ Add:
 ## 5. Action Items (Priority Order)
 
 ### High Priority
-1. **Add "Glyph of Contested Vision" to JSON** (above)
-2. **Expand Coren's section in VELINOR_COMPLETE_DESIGN.md** with paradox-holding philosophy
-3. **Add "Building Debate" narrative section to design doc** (2-3 paragraphs on epistemological collision)
+1. **Add "Glyph of Contested Vision" to JSON** (above) 2. **Expand Coren's section in
+VELINOR_COMPLETE_DESIGN.md** with paradox-holding philosophy 3. **Add "Building Debate" narrative
+section to design doc** (2-3 paragraphs on epistemological collision)
 
 ### Medium Priority
-4. Update player_choices in existing Coren glyphs to include building debate outcomes
-5. Add location asset references (backgrounds/reclaimed_community_hall_*.png)
-6. Cross-reference new glyph in design doc's character section
+4. Update player_choices in existing Coren glyphs to include building debate outcomes 5. Add
+location asset references (backgrounds/reclaimed_community_hall_*.png) 6. Cross-reference new glyph
+in design doc's character section
 
 ### Lower Priority
-7. Create a visual diagram showing how Malrik ↔ Elenya ↔ Coren form a philosophical triangle
-8. Add story seed examples for how building debate branches into other encounters
+7. Create a visual diagram showing how Malrik ↔ Elenya ↔ Coren form a philosophical triangle 8. Add
+story seed examples for how building debate branches into other encounters
 
 ---
 
@@ -212,18 +218,16 @@ Add:
 
 ## 7. Files to Modify
 
-1. ✏️ **VELINOR_COMPLETE_DESIGN.md** — Add Coren depth + Building Debate section
-2. ✏️ **Glyph_Organizer.json** — Add new glyph entry (ID 69)
-3. 📝 **(Optional) Glyph_Rules.json** — Add rules for contested_vision glyph handling
+1. ✏️ **VELINOR_COMPLETE_DESIGN.md** — Add Coren depth + Building Debate section 2. ✏️
+**Glyph_Organizer.json** — Add new glyph entry (ID 69) 3. 📝 **(Optional) Glyph_Rules.json** — Add
+rules for contested_vision glyph handling
 
 ---
 
 ## Next Steps
 
-Would you like me to:
-1. Update VELINOR_COMPLETE_DESIGN.md with the new sections?
-2. Add the "Glyph of Contested Vision" entry to the JSON?
-3. Refactor the Coren character section to emphasize her paradox-holding role?
-4. All of the above?
+Would you like me to: 1. Update VELINOR_COMPLETE_DESIGN.md with the new sections? 2. Add the "Glyph
+of Contested Vision" entry to the JSON? 3. Refactor the Coren character section to emphasize her
+paradox-holding role? 4. All of the above?
 
 Let me know if this aligns with your vision or if you'd like to adjust the building debate concept.

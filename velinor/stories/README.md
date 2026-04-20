@@ -105,7 +105,7 @@ This checks for:
 
 ```
 
-# STORY VALIDATION REPORT
+## STORY VALIDATION REPORT
 
 Story: Velinor: Remnants of the Tone
 Total passages: 14
@@ -309,21 +309,21 @@ Save, and it auto-rebuilds.
 
 ```python
 
-# Main path
+## Main path
 story.add_choice(
     from_passage="decision_point",
     text="Go with Ravi",
     to_passage="ravi_path_1"
 )
 
-# Alternative path
+## Alternative path
 story.add_choice(
     from_passage="decision_point",
     text="Go with Nima",
     to_passage="nima_path_1"
 )
 
-# Both paths can reconverge later
+## Both paths can reconverge later
 story.add_choice(
     from_passage="ravi_path_1",
     text="Meet up with Nima",

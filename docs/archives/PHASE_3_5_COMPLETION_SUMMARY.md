@@ -53,7 +53,7 @@ renderer.render_control_prefix(glyphs, gates)  # Generate <SYS> prefix
 ```python
 result = processor.process(response, gates, glyphs)
 
-# Returns: {text, is_safe, modifications, safety_score: 0.0-1.0}
+## Returns: {text, is_safe, modifications, safety_score: 0.0-1.0}
 ```
 
 
@@ -161,15 +161,15 @@ Gate enforcement ensures appropriate intensity/uncanniness
 ```python
 from local_inference.glyph_lm_control import GlyphRegistry, ControlTagRenderer, GatePolicy
 
-# Load glyphs
+## Load glyphs
 registry = GlyphRegistry()
 glyphs = registry.get_by_family("Ache")  # Get Ache family glyphs
 
-# Apply gates (safety filters)
+## Apply gates (safety filters)
 policy = GatePolicy()
 safe_glyphs = policy.filter_by_gate(glyphs, {"uncanny_ok": False})
 
-# Render control tags for LLM
+## Render control tags for LLM
 renderer = ControlTagRenderer()
 control_prefix = renderer.render_control_prefix(
     glyphs=safe_glyphs,
@@ -177,7 +177,7 @@ control_prefix = renderer.render_control_prefix(
     style={"register": "warm", "rhythm": "mixed"}
 )
 
-# Output: "<SYS><GLYPH:Serene Stillness:0.8> <GATE:uncanny_ok:false> ...</SYS>"
+## Output: "<SYS><GLYPH:Serene Stillness:0.8> <GATE:uncanny_ok:false> ...</SYS>"
 ```
 
 
@@ -188,20 +188,20 @@ from local_inference.safety_post_processor import SafetyPostProcessor
 
 processor = SafetyPostProcessor()
 
-# Process LLM output
+## Process LLM output
 result = processor.process(
     response="I remember your kindness from before.",
     gates={"uncanny_ok": False},
     glyphs=glyphs
 )
 
-# Returns: {
-#   "text": "I sense your kindness.",
-#   "is_safe": True,
-#   "modifications": ["Removed recognition phrase"],
-#   "safety_score": 0.95
+## Returns: {
+##   "text": "I sense your kindness.",
+##   "is_safe": True,
+##   "modifications": ["Removed recognition phrase"],
+##   "safety_score": 0.95
 
-# }
+## }
 ```
 
 
@@ -212,7 +212,7 @@ from local_inference.training_corpus import CorpusBuilder, TrainingExample
 
 builder = CorpusBuilder()
 
-# Add examples from interactions
+## Add examples from interactions
 example = TrainingExample(
     prompt="I feel lost.",
     response="That groundlessness can teach us.",
@@ -222,12 +222,12 @@ example = TrainingExample(
 )
 builder.add_example(example)
 
-# Get statistics
+## Get statistics
 stats = builder.get_statistics()
 print(f"Examples: {stats['total_examples']}")
 print(f"Gate distribution: {stats['gate_distribution']}")
 
-# Export for fine-tuning
+## Export for fine-tuning
 builder.export_jsonl("training_data.jsonl")
 ```
 
@@ -252,10 +252,10 @@ pip install transformers datasets peft accelerate bitsandbytes
 
 ```bash
 
-# Mistral-7B (recommended)
+## Mistral-7B (recommended)
 huggingface-cli download mistralai/Mistral-7B-Instruct-v0.2 --local-dir models/mistral-7b
 
-# Or Phi-3 mini (more efficient)
+## Or Phi-3 mini (more efficient)
 huggingface-cli download microsoft/phi-3-mini --local-dir models/phi-3-mini
 ```
 
@@ -264,19 +264,19 @@ huggingface-cli download microsoft/phi-3-mini --local-dir models/phi-3-mini
 
 ```python
 
-# Pseudocode - full implementation in next phase
+## Pseudocode - full implementation in next phase
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer
 from peft import LoraConfig, get_peft_model
 
-# Load model + tokenizer
+## Load model + tokenizer
 tokenizer = AutoTokenizer.from_pretrained("models/mistral-7b")
 model = AutoModelForCausalLM.from_pretrained("models/mistral-7b", load_in_8bit=True)
 
-# Configure LoRA (parameter-efficient fine-tuning)
+## Configure LoRA (parameter-efficient fine-tuning)
 lora_config = LoraConfig(r=16, lora_alpha=32, target_modules=["q_proj", "v_proj"])
 model = get_peft_model(model, lora_config)
 
-# Train on corpus with control tags
+## Train on corpus with control tags
 dataset = load_dataset("json", data_files="training_data.jsonl")
 trainer = Trainer(model=model, args=training_args, train_dataset=dataset)
 trainer.train()
@@ -287,10 +287,10 @@ trainer.train()
 
 ```bash
 
-# Start FastAPI server (pseudocode)
+## Start FastAPI server (pseudocode)
 uvicorn local_inference.inference_service:app --port 8000
 
-# Query with glyph control
+## Query with glyph control
 curl -X POST http://localhost:8000/generate \
   -H "Content-Type: application/json" \
   -d '{

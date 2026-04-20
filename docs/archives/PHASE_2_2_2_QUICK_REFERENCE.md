@@ -79,7 +79,7 @@ AFFECT_TO_GLYPH 4. Retrieve response from GLYPH_AWARE_RESPONSES 5. Return with g
 affect = {"tone": "sad", "arousal": 0.2, "valence": -0.9, "tone_confidence": 0.85}
 response, glyph = compose_glyph_aware_response("I'm exhausted", affect)
 
-# Returns: ("I feel the weight. It's Loss layered with fatigue...", "Loss")
+## Returns: ("I feel the weight. It's Loss layered with fatigue...", "Loss")
 ```
 
 
@@ -132,7 +132,7 @@ if should_use_glyph_responses(tone_confidence, arousal, valence):
     if response:
         return response
 
-# Fallback to ResponseRotator
+## Fallback to ResponseRotator
 return rotator.get_response(tone)
 ```
 
@@ -229,10 +229,10 @@ from emotional_os.core.firstperson import (
     get_glyph_for_affect
 )
 
-# Detect user affect
+## Detect user affect
 affect = detect_affect(user_input)  # Returns: {tone, arousal, valence, confidence}
 
-# Check if should use glyph responses
+## Check if should use glyph responses
 if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affect["valence"]):
     # Compose glyph-aware response
     response, glyph = compose_glyph_aware_response(user_input, affect)
@@ -277,7 +277,7 @@ response, glyph = compose_glyph_aware_response(
 )
 print(f"{glyph}: {response}")
 
-# Should print: Loss: I feel the weight. It's Loss layered with fatigue...
+## Should print: Loss: I feel the weight. It's Loss layered with fatigue...
 ```
 
 
@@ -285,16 +285,16 @@ print(f"{glyph}: {response}")
 
 ```bash
 
-# Run all glyph tests
+## Run all glyph tests
 pytest emotional_os/core/firstperson/test_glyph_response_composer.py -v
 
-# Run specific test class
+## Run specific test class
 pytest emotional_os/core/firstperson/test_glyph_response_composer.py::TestGlyphAwareResponseComposition -v
 
-# Run all FirstPerson tests (including Phase 1-2.1)
+## Run all FirstPerson tests (including Phase 1-2.1)
 pytest emotional_os/core/firstperson/test_*.py -v
 
-# Expected result: 219 passed
+## Expected result: 219 passed
 ```
 
 

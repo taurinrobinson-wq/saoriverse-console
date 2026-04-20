@@ -6,7 +6,7 @@
 ```
 
 
-# USER INPUT FLOW
+## USER INPUT FLOW
 
 Turn 1: "I'm feeling so stressed today"
         |
@@ -103,7 +103,7 @@ v SYSTEM UNDERSTANDS COMPLETE PROBLEM
 ```
 
 
-# CONFIDENCE PROGRESSION
+## CONFIDENCE PROGRESSION
 
 Turn 1: emotion stated but reason unknown Confidence: 0.7 (70% confident) ▓▓▓▓▓▓▓░░░
 
@@ -112,7 +112,7 @@ Turn 2: mechanism revealed (work -> cognitive flooding) Confidence: 0.85 (85% co
 Turn 3: specificity provided (5 projects, Thursday, deck) Confidence: 0.95 (95% confident)
 ▓▓▓▓▓▓▓▓▓░
 
-# GLYPH EVOLUTION
+## GLYPH EVOLUTION
 
 Turn 1: Still Insight (emerging awareness)
 
@@ -121,7 +121,7 @@ to organize
 
 Turn 3: Still Insight Quiet Revelation Fragmentation The Threshold  ←─ decision point
 
-# INFORMATION ACCUMULATION
+## INFORMATION ACCUMULATION
 
 Turn 1: • emotion: stress • timeframe: today ? cause: unknown
 
@@ -133,7 +133,7 @@ work + client work • cause: 5 competing projects • mechanism: cognitive floo
 conflict • manifestation: paralysis + inability to start critical item • specifics: client deck
 Thursday, unstarted, most urgent • next action: identify which can wait
 
-# CAUSAL CHAIN EMERGENCE
+## CAUSAL CHAIN EMERGENCE
 
 Turn 1: Emotion (stress)
     └─ Why? [UNKNOWN]
@@ -155,7 +155,7 @@ Turn 3: SPECIFIC TRIGGER (5 projects, Thursday client deck unstarted)
          └─ Results in stuck state
 (cannot make one step forward)
 
-# RESPONSE QUALITY FLOW
+## RESPONSE QUALITY FLOW
 
 Without Memory (Isolated):
 
@@ -191,7 +191,7 @@ Benefit: Progressive, specific, builds understanding
 
 ```
 
-# CONVERSATION MEMORY LAYER
+## CONVERSATION MEMORY LAYER
 
                  User Input
                      │

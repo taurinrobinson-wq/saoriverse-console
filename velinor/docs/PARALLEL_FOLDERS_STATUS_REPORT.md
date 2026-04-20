@@ -4,7 +4,8 @@
 
 ✅ **Both `velinor/` and `velinor-web/` are now properly synchronized with parallel structures.**
 
-The synchronization ensures that whenever game data or assets change in the Python engine, they're automatically available to the web frontend without manual copying.
+The synchronization ensures that whenever game data or assets change in the Python engine, they're
+automatically available to the web frontend without manual copying.
 
 ## What's Now in Place
 
@@ -57,12 +58,11 @@ velinor-web/
 
 ### The Sync Process
 
-1. **Source Detection:** Identifies all files in `velinor/data/`, `velinor/backgrounds/`, etc.
-2. **Checksum Verification:** MD5 hashes determine if files changed
-3. **Smart Copy:** Only copies changed files (faster on re-runs)
-4. **Directory Creation:** Auto-creates missing destinations
-5. **Verification:** Confirms all files exist and are accessible
-6. **Reporting:** Provides detailed sync statistics
+1. **Source Detection:** Identifies all files in `velinor/data/`, `velinor/backgrounds/`, etc. 2.
+**Checksum Verification:** MD5 hashes determine if files changed 3. **Smart Copy:** Only copies
+changed files (faster on re-runs) 4. **Directory Creation:** Auto-creates missing destinations 5.
+**Verification:** Confirms all files exist and are accessible 6. **Reporting:** Provides detailed
+sync statistics
 
 ### Last Sync Run
 
@@ -119,25 +119,21 @@ bash sync-parallel.sh
 
 ### Adding a New NPC
 
-1. **Create portrait** → Save PNG to `velinor/npcs/`
-2. **Update data** → Add entry to `velinor/data/npc_profiles.json`
-3. **Sync** → Run `sync-parallel.ps1`
-4. **Test engine** → `python -m velinor.engine.quickstart`
-5. **Test web** → Visit `http://localhost:3000`
+1. **Create portrait** → Save PNG to `velinor/npcs/` 2. **Update data** → Add entry to
+`velinor/data/npc_profiles.json` 3. **Sync** → Run `sync-parallel.ps1` 4. **Test engine** → `python
+-m velinor.engine.quickstart` 5. **Test web** → Visit `http://localhost:3000`
 
 ### Updating Trait Values
 
-1. **Edit engine** → Modify `velinor/data/npc_profiles.json`
-2. **Sync** → Run `sync-parallel.ps1`
-3. **Auto-available** → Web reads synced JSON on next page load
-4. **Commit** → Both folders committed together
+1. **Edit engine** → Modify `velinor/data/npc_profiles.json` 2. **Sync** → Run `sync-parallel.ps1`
+3. **Auto-available** → Web reads synced JSON on next page load 4. **Commit** → Both folders
+committed together
 
 ### Adding New Background
 
-1. **Create image** → Save PNG to `velinor/backgrounds/`
-2. **Reference in engine** → Update scene definitions
-3. **Sync** → Run `sync-parallel.ps1`
-4. **Web access** → Image available at `/assets/backgrounds/filename.png`
+1. **Create image** → Save PNG to `velinor/backgrounds/` 2. **Reference in engine** → Update scene
+definitions 3. **Sync** → Run `sync-parallel.ps1` 4. **Web access** → Image available at
+`/assets/backgrounds/filename.png`
 
 ## Documentation Created
 
@@ -212,10 +208,9 @@ ee3f85a feat: Implement 4-layer title screen with Velinor character overlay
 
 ## Next Steps
 
-1. **Regular Syncing:** Run `sync-parallel.ps1` after any asset/data changes
-2. **Unified Commits:** Always commit both folders together
-3. **Team Communication:** Document asset/data changes in commit messages
-4. **Monitoring:** Periodically verify sync status with diff checks
+1. **Regular Syncing:** Run `sync-parallel.ps1` after any asset/data changes 2. **Unified Commits:**
+Always commit both folders together 3. **Team Communication:** Document asset/data changes in commit
+messages 4. **Monitoring:** Periodically verify sync status with diff checks
 
 ## Troubleshooting
 
@@ -255,7 +250,8 @@ diff velinor/data/npc_profiles.json velinor-web/src/data/npc_profiles.json
 
 🟢 **PRODUCTION READY**
 
-Both `velinor/` and `velinor-web/` are fully synchronized and ready for active development. The parallel structure is established, documented, and verified.
+Both `velinor/` and `velinor-web/` are fully synchronized and ready for active development. The
+parallel structure is established, documented, and verified.
 
 ---
 

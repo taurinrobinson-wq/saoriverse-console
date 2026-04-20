@@ -371,13 +371,13 @@ The system now **automatically creates new glyphs during live user-AI conversati
 ```bash
 
 
-# Verify integration
+## Verify integration
 bash verify_integration.sh
 
-# Start the app
+## Start the app
 streamlit run main_v2.py
 
-# Select "hybrid" mode and start chatting!
+## Select "hybrid" mode and start chatting!
 
 ```
 

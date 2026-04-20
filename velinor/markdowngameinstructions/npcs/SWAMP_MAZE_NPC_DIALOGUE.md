@@ -1,6 +1,7 @@
 # Swamp Maze: NPC Dialogue Samples
 
-This file contains character voice examples for the three passages of the Swamp Maze side-quest. Use these as templates when generating dynamic dialogue based on player resonance stats.
+This file contains character voice examples for the three passages of the Swamp Maze side-quest. Use
+these as templates when generating dynamic dialogue based on player resonance stats.
 
 ---
 
@@ -29,18 +30,20 @@ This file contains character voice examples for the three passages of the Swamp 
 
 ## Voice Notes: Kaelen vs. The Trickster
 
-Important: Kaelen and the Trickster are never present in the same scene at the same time. They are two distinct personae the player will encounter; their language must consistently differ to cue the player to this structural truth without an explicit reveal.
+Important: Kaelen and the Trickster are never present in the same scene at the same time. They are
+two distinct personae the player will encounter; their language must consistently differ to cue the
+player to this structural truth without an explicit reveal.
 
 - **Kaelen (choppy, shifty)**: Short, halting phrases; always half-distracted, thinking about exits and contingencies. Uses contractions, stopped sentences, repeated small words. He rarely finishes thoughts fully and often trails off or repeats a word as if searching for the next step.
 
-    Example Kaelen lines (choppy):
+Example Kaelen lines (choppy):
     > "You—look, listen. Quick now. We move before it remembers you."
 
     > "I don't... I don't keep things long. Names, times—slip. Best to mark it while it's warm."
 
 - **The Trickster (smooth, deliberate)**: Long, measured sentences; coy, theatrical, never hurried. He speaks as if describing a small, elegant game. His voice puts space between ideas and bends meaning gently.
 
-    Example Trickster lines (smooth):
+Example Trickster lines (smooth):
     > "Ah, wanderer—how tidy your footsteps are. Do you prefer a story or an arrangement? I have both."
 
     > "You may follow my directions. Or you may not. Either choice is delightful; I will enjoy the consequence." 
@@ -151,10 +154,11 @@ For implementation, track these conditions:
 
 ## Usage Notes for Designers
 
-1. **Layer the dialogue**: Don't use all of Kaelen's lines at once. Reserve deeper reveals for later encounters.
-2. **Respect player agency**: If player solves the puzzle without help, acknowledge it differently than if they need guidance.
-3. **Echo the choice**: Reference the player's emotional journey in later conversations with other NPCs.
-4. **Build to confrontation**: These tokens should feel like fragments of Drossel's character, preparing the player emotionally for meeting him.
+1. **Layer the dialogue**: Don't use all of Kaelen's lines at once. Reserve deeper reveals for later
+encounters. 2. **Respect player agency**: If player solves the puzzle without help, acknowledge it
+differently than if they need guidance. 3. **Echo the choice**: Reference the player's emotional
+journey in later conversations with other NPCs. 4. **Build to confrontation**: These tokens should
+feel like fragments of Drossel's character, preparing the player emotionally for meeting him.
 
 ---
 

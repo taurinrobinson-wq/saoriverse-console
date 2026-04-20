@@ -108,10 +108,10 @@ what part of it asks for something from you?"
 
 ```python
 
-# The processor now includes lexicon-aware generation
+## The processor now includes lexicon-aware generation
 processor = create_integrated_processor(hybrid_learner, adaptive_extractor)
 
-# Use it to enhance responses
+## Use it to enhance responses
 personalization_data = processor.enhance_response_with_learned_context(
     user_message="I'm struggling with michelle",
     user_id="user_123",
@@ -120,12 +120,12 @@ personalization_data = processor.enhance_response_with_learned_context(
 
 print(personalization_data)
 
-# {
-#     "response": "I recognize that when you mention 'michelle'...",
-#     "personalization_level": "medium",
-#     "learned_associations": [("michelle", {...}), ...],
-#     "trigger_keywords": ["michelle"],
-#     "confidence": 0.6
+## {
+##     "response": "I recognize that when you mention 'michelle'...",
+##     "personalization_level": "medium",
+##     "learned_associations": [("michelle", {...}), ...],
+##     "trigger_keywords": ["michelle"],
+##     "confidence": 0.6
 
 ```text
 
@@ -142,18 +142,18 @@ For **local mode** (no API calls), use the lexicon-aware generator directly:
 from lexicon_aware_response_generator import LexiconAwareResponseGenerator
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 
-# Initialize
+## Initialize
 learner = HybridLearnerWithUserOverrides()
 generator = LexiconAwareResponseGenerator(hybrid_learner=learner)
 
-# Generate personalized response
+## Generate personalized response
 result = generator.generate_response(
     user_message=user_input,
     user_id=user_id,
     conversation_context=conversation_history
 )
 
-# Use the personalized response
+## Use the personalized response
 print(result["response"])  # Nuanced, personal response
 print(result["personalization_level"])  # How personalized is it?
 
@@ -167,10 +167,10 @@ print(result["personalization_level"])  # How personalized is it?
 
 import streamlit as st from hybrid_processor_with_evolution import create_integrated_processor
 
-# In your Streamlit app
+## In your Streamlit app
 st.session_state['processor'] = create_integrated_processor(...)
 
-# When user sends a message
+## When user sends a message
 if user_message:
     # Get personalization guidance
 personalization = st.session_state['processor'].enhance_response_with_learned_context(
@@ -289,14 +289,14 @@ In `LexiconAwareResponseGenerator`:
 
 ```python
 
-# Lower = more aggressive personalization
+## Lower = more aggressive personalization
 
-# Higher = only when very confident
+## Higher = only when very confident
 generator = LexiconAwareResponseGenerator()
 
-# Modify the _build_context_understanding method to adjust thresholds:
+## Modify the _build_context_understanding method to adjust thresholds:
 
-# if len(learned_contexts) >= 1:  # Lower threshold = more responsive
+## if len(learned_contexts) >= 1:  # Lower threshold = more responsive
 ```text
 
 ```text
@@ -322,11 +322,11 @@ class CustomLexiconGenerator(LexiconAwareResponseGenerator):
 ```python
 
 
-# Log custom quality metric
+## Log custom quality metric
 generator.log_response_quality( user_id=user_id, user_message=message, response=response,
 quality_score=0.95,  # User said "This is perfect" )
 
-# Get personalization stats
+## Get personalization stats
 stats = generator.get_personalization_stats(user_id) print(f"Average response quality:
 {stats['average_quality_score']}")
 
@@ -359,25 +359,25 @@ This transforms local mode from a "lite" version to a **genuinely personalized e
 
 
 
-# Quick test
+## Quick test
 from lexicon_aware_response_generator import LexiconAwareResponseGenerator
 
 generator = LexiconAwareResponseGenerator()
 
-# Simulate progression
+## Simulate progression
 print("=== Session 1 (No learned data) ===") result = generator.generate_response( user_message="I'm
 struggling", user_id="test_user" ) print(f"Level: {result['personalization_level']}")  # "none"
 print(f"Response: {result['response']}")
 
-# Simulate learning
+## Simulate learning
 
-# (In real scenario, this happens through hybrid_learner)
+## (In real scenario, this happens through hybrid_learner)
 
 print("\n=== Session 2 (With learned data) ===") result = generator.generate_response(
 user_message="michelle is being difficult", user_id="test_user" ) print(f"Level:
 {result['personalization_level']}")  # "medium" or "high" print(f"Response: {result['response']}")
 
-# Shows learned pattern
+## Shows learned pattern
 
 ```
 

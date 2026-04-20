@@ -4,10 +4,10 @@ These are the files ready to be pushed to your GitHub repository. Run these comm
 
 ```bash
 
-# Make sure you're in the repository root
+## Make sure you're in the repository root
 cd d:\saoriverse-console
 
-# Add all new/modified files
+## Add all new/modified files
 git add docker-compose.prod.yml \
         nginx.prod.conf \
         .github/workflows/deploy.yml \
@@ -15,10 +15,10 @@ git add docker-compose.prod.yml \
         VPS_QUICK_START.md \
         VPS_MIGRATION_CHECKLIST.md
 
-# Verify what's being added
+## Verify what's being added
 git status
 
-# Commit with message
+## Commit with message
 git commit -m "feat: add production VPS deployment infrastructure
 
 - docker-compose.prod.yml: Production Docker Compose with health checks
@@ -31,7 +31,7 @@ git commit -m "feat: add production VPS deployment infrastructure
 Enables self-hosted VPS deployment with automated CI/CD pipeline.
 Replaces unreliable Railway deployment."
 
-# Push to GitHub
+## Push to GitHub
 ```text
 
 ```text
@@ -60,7 +60,7 @@ Replaces unreliable Railway deployment."
 ```bash
 
 
-# Verify all files exist
+## Verify all files exist
 ls -la docker-compose.prod.yml
 ls -la nginx.prod.conf
 ls -la .github/workflows/deploy.yml
@@ -68,7 +68,7 @@ ls -la DEPLOYMENT_VPS.md
 ls -la VPS_QUICK_START.md
 ls -la VPS_MIGRATION_CHECKLIST.md
 
-# Check file integrity
+## Check file integrity
 cat docker-compose.prod.yml | head -5
 cat nginx.prod.conf | head -5
 
@@ -94,12 +94,12 @@ cat nginx.prod.conf | head -5
 ```bash
 
 
-# Option 1: Auto-deploy (recommended)
+## Option 1: Auto-deploy (recommended)
 git push origin main
 
-# GitHub Actions will deploy automatically
+## GitHub Actions will deploy automatically
 
-# Option 2: Manual deploy from VPS
+## Option 2: Manual deploy from VPS
 ssh root@YOUR_DROPLET_IP cd /opt/velinor git pull origin main docker compose -f
 docker-compose.prod.yml build
 
@@ -114,9 +114,9 @@ docker-compose.prod.yml build
 
 
 
-# Edit locally (e.g., nginx.prod.conf)
+## Edit locally (e.g., nginx.prod.conf)
 
-# Commit and push
+## Commit and push
 git add nginx.prod.conf git commit -m "chore: update nginx configuration" git push origin main
 
 ```text
@@ -127,11 +127,11 @@ git add nginx.prod.conf git commit -m "chore: update nginx configuration" git pu
 
 ```bash
 
-# Revert to previous commit
+## Revert to previous commit
 git revert HEAD
 git push origin main
 
-# Or manually stop and restart with git checkout
+## Or manually stop and restart with git checkout
 ssh root@YOUR_DROPLET_IP
 cd /opt/velinor
 git log --oneline  # Find commit to revert to

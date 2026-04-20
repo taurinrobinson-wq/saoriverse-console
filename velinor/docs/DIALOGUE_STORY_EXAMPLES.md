@@ -91,9 +91,9 @@ def scene_sera_redemption_arc():
     print("✓ Shrine keepers soften (ripple effect)")
     print("✓ Trust unlocks new story paths")
 
-# Run it:
+## Run it:
 
-# scene_sera_redemption_arc()
+## scene_sera_redemption_arc()
 ```
 
 
@@ -164,9 +164,9 @@ def scene_kaelen_betrayal_to_redemption():
     print("\n✓ PATH A leads to: Conflict, loss of trust")
     print("✓ PATH B leads to: Redemption, gain of powerful ally")
 
-# Run it:
+## Run it: (2)
 
-# scene_kaelen_betrayal_to_redemption()
+## scene_kaelen_betrayal_to_redemption()
 ```
 
 
@@ -253,9 +253,9 @@ def scene_drossel_deal():
         print("\n✗ Drossel sees you as risk. Deal rejected.")
         print("✗ Consequence: Shadow Path becomes enemy path")
 
-# Run it:
+## Run it: (3)
 
-# scene_drossel_deal()
+## scene_drossel_deal()
 ```
 
 
@@ -329,9 +329,9 @@ def scene_marketplace_conspiracy():
         npc = manager.get_npc(npc_encounter['npc'])
         print(f"{npc_encounter['npc']:12} | Dominant: {npc_encounter['dialogue_meta']['dominant_trait']:12} ({npc_encounter['dialogue_meta']['dominant_value']})")
 
-# Run it:
+## Run it: (4)
 
-# scene_marketplace_conspiracy()
+## scene_marketplace_conspiracy()
 ```
 
 
@@ -396,9 +396,9 @@ def scene_tutorial_dialogue_mechanics():
     print("✓ Lower empathy → Sera's dialogue uses words like 'fragile', 'fade', 'wither'")
     print("✓ Your choices shape how she speaks to you")
 
-# Run it:
+## Run it: (5)
 
-# scene_tutorial_dialogue_mechanics()
+## scene_tutorial_dialogue_mechanics()
 ```
 
 ## 
@@ -443,9 +443,9 @@ def scene_reputation_system():
     print(f"Kaelen's trust: {kaelen_a.remnants['trust']:.2f} → {kaelen_b.remnants['trust']:.2f}")
     print(f"Kaelen's empathy: {kaelen_a.remnants['empathy']:.2f} → {kaelen_b.remnants['empathy']:.2f}")
 
-# Run it:
+## Run it: (6)
 
-# scene_reputation_system()
+## scene_reputation_system()
 ```
 
 ## 
@@ -457,7 +457,7 @@ Copy any function into your game code, then:
 ```python
 from dialogue_story_examples import *
 
-# Run individual scenes:
+## Run individual scenes:
 scene_marketplace_greeting()
 scene_sera_redemption_arc()
 scene_kaelen_betrayal_to_redemption()

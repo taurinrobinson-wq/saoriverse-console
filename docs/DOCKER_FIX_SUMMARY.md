@@ -22,7 +22,7 @@
 
 ```dockerfile
 
-# Added these parameters:
+## Added these parameters:
 RUN pip install --default-timeout=60 \
                 --retries 5 \
 ```text
@@ -85,16 +85,16 @@ cd d/saoriverse-console
 
 
 
-# Option 1: Use resilient version
+## Option 1: Use resilient version
 docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
-# Option 2: Increase timeout further
+## Option 2: Increase timeout further
 docker build -f Dockerfile.firstperson -t firstperson:latest \
   --build-arg PIP_TIMEOUT=180 \
   --build-arg PIP_RETRIES=10 \
   --no-cache .
 
-# Option 3: Check Docker network
+## Option 3: Check Docker network
 docker run --rm alpine ping 8.8.8.8
 
 ```

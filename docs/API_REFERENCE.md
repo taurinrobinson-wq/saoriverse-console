@@ -71,12 +71,12 @@ from src.signal_parser import parse_input
 signal = parse_input("I'm happy about the news")
 print(signal)
 
-# {
-#   "voltage": 0.7,
-#   "tone": "Joy",
-#   "attunement": 0.8,
-#   "certainty": 0.9,
-#   "valence": 0.8
+## {
+##   "voltage": 0.7,
+##   "tone": "Joy",
+##   "attunement": 0.8,
+##   "certainty": 0.9,
+##   "valence": 0.8
 
 ```text
 
@@ -263,7 +263,7 @@ Retrieve memories for a session.
 
 Plan prosody parameters based on glyph.
 
-##### `__init__()`
+##### `__init__()` (2)
 
 Initialize prosody planner with glyph-to-prosody mappings.
 
@@ -306,7 +306,7 @@ planner = ProsodyPlanner()
 
 Manage text-to-speech synthesis.
 
-##### `__init__()`
+##### `__init__()` (3)
 
 Initialize TTS engine.
 
@@ -343,7 +343,7 @@ tts = StreamingTTS()
 
 Manage audio input and transcription.
 
-##### `__init__()`
+##### `__init__()` (4)
 
 Initialize audio pipeline with STT engine.
 
@@ -381,7 +381,7 @@ pipeline = AudioPipeline()
 
 Learn emotional patterns from user interactions.
 
-##### `__init__()`
+##### `__init__()` (5)
 
 Initialize lexicon learner.
 
@@ -457,13 +457,13 @@ from src import process_user_input
 
 voice = VoiceInterface()
 
-# 1. Transcribe audio to text
+## 1. Transcribe audio to text
 text = voice.transcribe_audio("user_input.mp3")
 
-# 2. Generate response
+## 2. Generate response
 response = process_user_input(text)
 
-# 3. Synthesize response to audio
+## 3. Synthesize response to audio
 
 ```text
 
@@ -478,10 +478,10 @@ src.relational_memory import RelationalMemoryCapsule, store_capsule
 
 user_input = "I'm feeling overwhelmed" signal = parse_input(user_input)
 
-# Learn from interaction
+## Learn from interaction
 learner = LexiconLearner() patterns = learner.extract_patterns(user_input, signal)
 
-# Store memory
+## Store memory
 capsule = RelationalMemoryCapsule( user_input=user_input, signal=signal, response=response,
 glyph=selected_glyph, )
 

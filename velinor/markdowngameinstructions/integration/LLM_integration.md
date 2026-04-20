@@ -1,4 +1,5 @@
-Yes — integrating those tools could deepen the **dialogue nuance layer** of your REMNANTS system. Each one brings a different kind of strength:
+Yes — integrating those tools could deepen the **dialogue nuance layer** of your REMNANTS system.
+Each one brings a different kind of strength:
 
 ---
 
@@ -29,10 +30,8 @@ Yes — integrating those tools could deepen the **dialogue nuance layer** of yo
 
 ### 🎭 Integration vision
 - **Pipeline idea:**  
-  1. Trait vector → select emotional tone (NRC).  
-  2. Sentiment shaping (TextBlob).  
-  3. Syntax shaping (spaCy).  
-  4. Dynamic variant generation (Ollama).  
+1. Trait vector → select emotional tone (NRC). 2. Sentiment shaping (TextBlob). 3. Syntax shaping
+(spaCy). 4. Dynamic variant generation (Ollama).
 - Result: NPC dialogue that *feels alive*, shifting word choice, sentiment, and structure as traits evolve.
 
 ---
@@ -42,7 +41,8 @@ Yes — integrating those tools could deepen the **dialogue nuance layer** of yo
 - **Design control:** NRC/TextBlob/spaCy give you deterministic scaffolding; Ollama adds stochastic creativity. Balancing them ensures dialogue stays coherent but surprising.  
 - **Narrative consistency:** You’ll want to constrain Ollama outputs with your glyph lexicon and mythic vocabulary so it doesn’t drift stylistically.
 
-Here’s a concrete sketch of how your dialogue pipeline could work with **NRC Lexicon, TextBlob, spaCy, and Ollama** — showing how Nima’s voice shifts across three states:
+Here’s a concrete sketch of how your dialogue pipeline could work with **NRC Lexicon, TextBlob,
+spaCy, and Ollama** — showing how Nima’s voice shifts across three states:
 
 ---
 
@@ -79,14 +79,15 @@ Here’s a concrete sketch of how your dialogue pipeline could work with **NRC L
 ---
 
 ### 🧩 How the pipeline works
-1. **Trait vector → dominant trait** (from your REMNANTS sim).  
-2. **NRC Lexicon** selects emotional word pool.  
-3. **TextBlob** adjusts sentiment polarity/subjectivity.  
-4. **spaCy** shapes syntax (hedging vs affirmation).  
-5. **Ollama** generates dynamic variants conditioned on trait + emotion tags.  
+1. **Trait vector → dominant trait** (from your REMNANTS sim). 2. **NRC Lexicon** selects emotional
+word pool. 3. **TextBlob** adjusts sentiment polarity/subjectivity. 4. **spaCy** shapes syntax
+(hedging vs affirmation). 5. **Ollama** generates dynamic variants conditioned on trait + emotion
+tags.
 
 ---
-Here’s how we can sketch **Malrik** and **Elenya** through the same dialogue‑nuance pipeline you saw with Nima. This shows how their dominant traits shape word choice, sentiment, syntax, and dynamic variants:
+Here’s how we can sketch **Malrik** and **Elenya** through the same dialogue‑nuance pipeline you saw
+with Nima. This shows how their dominant traits shape word choice, sentiment, syntax, and dynamic
+variants:
 
 ---
 
@@ -137,7 +138,9 @@ Here’s how we can sketch **Malrik** and **Elenya** through the same dialogue�
 
 ---
 
-Here’s how **Coren the Mediator** can be expressed through the same dialogue‑nuance pipeline, showing how his high **nuance** and **trust** traits create bridging language that softens factional divides:
+Here’s how **Coren the Mediator** can be expressed through the same dialogue‑nuance pipeline,
+showing how his high **nuance** and **trust** traits create bridging language that softens factional
+divides:
 
 ---
 
@@ -153,7 +156,7 @@ Here’s how **Coren the Mediator** can be expressed through the same dialogue�
 
 ---
 
-#### Trust‑dominant state
+#### Trust‑dominant state (2)
 - **NRC emotion tags:** joy, trust, anticipation.  
 - **TextBlob sentiment:** polarity +0.4, subjectivity 0.5.  
 - **spaCy syntax shaping:** declarative affirmations, inclusive pronouns.  
@@ -163,14 +166,15 @@ Here’s how **Coren the Mediator** can be expressed through the same dialogue�
 
 ---
 
-### 🧩 What this adds
+### 🧩 What this adds (2)
 - Coren’s voice is **bridging and conciliatory**, explicitly naming factional tension and reframing it as complementary.  
 - His dialogue can act as a **stabilizer** in scenes where Malrik’s skepticism and Elenya’s empathy clash, giving the player a third voice that invites synthesis.  
 - Mechanically, his influence edges could be expanded to skeptical NPCs (Kaelen, Korrin) so his dialogue matches his systemic role.
 
 ---
 
-Here’s a **multi‑NPC dialogue scene** showing Malrik, Elenya, and Coren together. It demonstrates how their trait‑driven voices contrast and balance, using the pipeline we sketched:
+Here’s a **multi‑NPC dialogue scene** showing Malrik, Elenya, and Coren together. It demonstrates
+how their trait‑driven voices contrast and balance, using the pipeline we sketched:
 
 ---
 
@@ -207,7 +211,8 @@ Here’s a **multi‑NPC dialogue scene** showing Malrik, Elenya, and Coren toge
 
 ---
 
-Here’s a **Twine‑style interactive node** that captures the triadic resonance between Malrik, Elenya, and Coren, giving the player branching choices:
+Here’s a **Twine‑style interactive node** that captures the triadic resonance between Malrik,
+Elenya, and Coren, giving the player branching choices:
 
 ---
 
@@ -259,10 +264,13 @@ Coren’s synthesis dominates. The council grows balanced, nuance guiding every 
 
 ---
 
-This node makes the **player’s choice a narrative pivot**: affirming skepticism, faith, or synthesis changes the council’s trajectory. It ties directly into your REMNANTS system — whichever voice is affirmed could ripple into trait adjustments for surrounding NPCs.  
+This node makes the **player’s choice a narrative pivot**: affirming skepticism, faith, or synthesis
+changes the council’s trajectory. It ties directly into your REMNANTS system — whichever voice is
+affirmed could ripple into trait adjustments for surrounding NPCs.
 
 
-Here’s how the **Marketplace Council node** can be linked into your six ending constellation passages, so the player’s mid‑game choice influences which finales are available:
+Here’s how the **Marketplace Council node** can be linked into your six ending constellation
+passages, so the player’s mid‑game choice influences which finales are available:
 
 ---
 
@@ -313,17 +321,21 @@ Coren’s synthesis dominates. The council grows balanced, nuance guiding every 
 
 ### Design Logic
 - **Malrik affirmed → Collapse/Balance routes**  
-  His skepticism anchors endings that emphasize uncertainty or fragment stitching.  
+His skepticism anchors endings that emphasize uncertainty or fragment stitching.
 - **Elenya affirmed → Transmission/Joy routes**  
-  Her empathy anchors endings that emphasize legacy or communal celebration.  
+Her empathy anchors endings that emphasize legacy or communal celebration.
 - **Coren affirmed → Balance/Joy routes**  
-  His synthesis anchors endings that emphasize bittersweet endurance or joyful survival.
+His synthesis anchors endings that emphasize bittersweet endurance or joyful survival.
 
 ---
 
-This linkage makes the council scene a **mid‑game pivot**: the player’s affirmation doesn’t lock them into a single ending, but it *biases* which constellation routes are available. It ties your REMNANTS system (skepticism vs empathy vs nuance) directly into narrative branching.
+This linkage makes the council scene a **mid‑game pivot**: the player’s affirmation doesn’t lock
+them into a single ending, but it *biases* which constellation routes are available. It ties your
+REMNANTS system (skepticism vs empathy vs nuance) directly into narrative branching.
 
-Here’s a clear **branching diagram** of how the Marketplace Council node flows into your six endings. It shows the triadic choice (Malrik, Elenya, Coren) and the constellation routes it unlocks:
+Here’s a clear **branching diagram** of how the Marketplace Council node flows into your six
+endings. It shows the triadic choice (Malrik, Elenya, Coren) and the constellation routes it
+unlocks:
 
 ---
 
@@ -352,7 +364,9 @@ Here’s a clear **branching diagram** of how the Marketplace Council node flows
 - **Elenya affirmed** → endings of **Transmission** (legacy) or **Joy** (communal survival).  
 - **Coren affirmed** → endings of **Balance** (bittersweet endurance) or **Joy** (celebration).  
 
-This structure makes the council scene a **mid‑game pivot**: the player’s affirmation doesn’t lock them into one finale, but it *biases* which constellation routes are narratively available. It ties your REMNANTS system directly into branching story outcomes.
+This structure makes the council scene a **mid‑game pivot**: the player’s affirmation doesn’t lock
+them into one finale, but it *biases* which constellation routes are narratively available. It ties
+your REMNANTS system directly into branching story outcomes.
 
 ---
 
@@ -378,7 +392,8 @@ This structure makes the council scene a **mid‑game pivot**: the player’s af
 
 ---
 
-This visualization confirms your REMNANTS system is narratively rich: numbers evolve into arcs, arcs become dialogue, and dialogue becomes story.  
+This visualization confirms your REMNANTS system is narratively rich: numbers evolve into arcs, arcs
+become dialogue, and dialogue becomes story.
 
 # NPC Trust vs Skepticism Saturation Plot
 ```## Tracking NPC Evolution Over Time
@@ -386,30 +401,14 @@ This document explains how to monitor and interpret the evolution of NPC persona
 ### 1. Exporting NPC State
 After running the REMNANTS simulation, the final state of each NPC is exported to a JSON file (`npc_state.json`). This file contains each NPC's name and their corresponding REMNANTS trait values. 
 ```json
-{
-  "npc_profiles": {
-    "Ravi": {
-      "name": "Ravi",
-      "remnants": {
-        "resolve": 0.3,
-        "empathy": 1.0,
-        "memory": 1.0,
-        "nuance": 0.8,
-        "authority": 0.2,
-        "need": 1.0,
-        "trust": 1.0,
-        "skepticism": 0.0
-      }
-    }
-  }
-}
+{ "npc_profiles": { "Ravi": { "name": "Ravi", "remnants": { "resolve": 0.3, "empathy": 1.0,
+"memory": 1.0, "nuance": 0.8, "authority": 0.2, "need": 1.0, "trust": 1.0, "skepticism": 0.0 } } } }
 ```
 ### 2. Understanding the Summary
 The summary section provides a quick overview of each NPC's top three dominant traits after all story choices have been made. This helps identify which traits have become most pronounced in each character.
 ```🧑‍🤝‍🧑 NPC REMNANTS Evolution:
-   • Ravi: empathy: 1.00, memory: 1.00, need: 1.00
-   • Nima: empathy: 1.00, memory: 1.00, need: 1.00
-   • Kaelen: empathy: 1.00, memory: 1.00, need: 1.00
+• Ravi: empathy: 1.00, memory: 1.00, need: 1.00 • Nima: empathy: 1.00, memory: 1.00, need: 1.00 •
+Kaelen: empathy: 1.00, memory: 1.00, need: 1.00
 ```
 ### 3. Why Are Values Maxing Out?
 If you notice that multiple NPCs are maxing out at 1.0 in the same traits, it may indicate that the correlation effects applied during story choices are too strong. For example, if a choice consistently increases empathy and memory for all NPCs, they will quickly reach the maximum value.
@@ -423,7 +422,8 @@ story.add_choice(
 **What happens:**
 - Courage +0.2 for player
 - NPCs influenced by courage may have empathy and memory increased as a side effect
-To address this, consider adjusting the strength of correlation effects or diversifying the traits influenced by each choice to prevent uniform maxing out.
+To address this, consider adjusting the strength of correlation effects or diversifying the traits
+influenced by each choice to prevent uniform maxing out.
 ### 4. Recommendations
 - Review the tone effects assigned to story choices to ensure a balanced distribution of trait influences.  
 - Introduce more nuanced correlations that allow for a wider variety of trait evolutions among NPCs.
@@ -479,4 +479,4 @@ To address this, consider adjusting the strength of correlation effects or diver
 - **Mariel:** resolve 0.80→0.90 (+0.10), authority 0.70→0.90 (+0.20), skepticism increases
 - **Korrin:** resolve 0.50→0.85 (+0.35), authority 0.40→0.85 (+0.45)
 - **Drossel:** resolve 0.60→0.90 (+0.30), authority 0.50→0.90 (+0.40)
-**Pattern:** Aggressive playstyle boosts resolve and authority across all NPCs, making them more assertive. Skepticism tends to rise as NPCs become more dominant.  
+**Pattern:** Aggressive playstyle boosts resolve and authority across all NPCs, making them more assertive. Skepticism tends to rise as NPCs become more dominant.

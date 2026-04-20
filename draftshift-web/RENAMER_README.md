@@ -4,7 +4,8 @@
 
 ## Overview
 
-DraftShift Renamer is a web-based tool that intelligently renames litigation document files to a standardized format: `YYMMDD – Document_Type.ext`
+DraftShift Renamer is a web-based tool that intelligently renames litigation document files to a
+standardized format: `YYMMDD – Document_Type.ext`
 
 The system automatically:
 - Extracts dates from file content and metadata
@@ -258,11 +259,9 @@ YYMMDD – Document_Type.ext
 
 Dates are detected in this priority order:
 
-1. **User-provided date** (if given)
-2. **Docket number** (parses dates from court filings)
-3. **Content extraction** (regex patterns in document text)
-4. **File metadata** (created_at, modified_at timestamps)
-5. **Default** (today's date)
+1. **User-provided date** (if given) 2. **Docket number** (parses dates from court filings) 3.
+**Content extraction** (regex patterns in document text) 4. **File metadata** (created_at,
+modified_at timestamps) 5. **Default** (today's date)
 
 ## Behind the Scenes: FilenameNormalizer
 
@@ -290,16 +289,16 @@ print(result.detected_type)      # "Motion for Summary Judgment"
 ### Environment Variables
 
 ```bash
-# Port for API server
+## Port for API server
 PORT=8000
 
-# Max files per request
+## Max files per request
 MAX_FILES_PER_REQUEST=100
 
-# Temp directory for file processing
+## Temp directory for file processing
 TEMP_DIR=/tmp/draftshift-renamer
 
-# Jurisdiction (affects date/document patterns)
+## Jurisdiction (affects date/document patterns)
 JURISDICTION=SDCA
 ```
 
@@ -310,7 +309,7 @@ from filename_normalizer import FilenameNormalizer
 
 normalizer = FilenameNormalizer()
 
-# Add custom document type
+## Add custom document type
 normalizer.add_custom_documents({
     "Expert Report": {
         "keywords": ["expert", "report", "declaration", "testify"],
@@ -318,7 +317,7 @@ normalizer.add_custom_documents({
     }
 })
 
-# Register jurisdiction-specific patterns
+## Register jurisdiction-specific patterns
 normalizer.register_jurisdiction("SDCA", {
     "date_patterns": [...],
     "document_types": {...}
@@ -332,17 +331,17 @@ normalizer.register_jurisdiction("SDCA", {
 ```bash
 python -m pytest test_filename_normalizer.py -v
 
-# With coverage
+## With coverage
 python -m pytest test_filename_normalizer.py --cov=filename_normalizer
 ```
 
 ### Test with API
 
 ```bash
-# Start server
+## Start server
 python run_server.py
 
-# Test in another terminal
+## Test in another terminal
 curl -X POST \
   -F "files=@test.pdf" \
   http://localhost:8000/api/renamer/analyze
@@ -379,13 +378,13 @@ docker run -p 8000:8000 draftshift-renamer
 
 ### Local Development
 ```bash
-# Install dependencies
+## Install dependencies
 pip install -r requirements.txt
 
-# Start server
+## Start server (2)
 python run_server.py
 
-# Open browser to http://localhost:8000
+## Open browser to http://localhost:8000
 ```
 
 ## Roadmap
@@ -399,10 +398,10 @@ python run_server.py
 
 ## Support
 
-For bugs, feature requests, or questions:
-1. Check [GitHub Issues](https://github.com/taurinrobinson/saoriverse-console/issues)
-2. Review [FilenameNormalizer documentation](FILENAME_NORMALIZER_EXAMPLES.py)
-3. Check [test examples](test_filename_normalizer.py)
+For bugs, feature requests, or questions: 1. Check [GitHub
+Issues](https://github.com/taurinrobinson/saoriverse-console/issues) 2. Review [FilenameNormalizer
+documentation](FILENAME_NORMALIZER_EXAMPLES.py) 3. Check [test
+examples](test_filename_normalizer.py)
 
 ## License
 

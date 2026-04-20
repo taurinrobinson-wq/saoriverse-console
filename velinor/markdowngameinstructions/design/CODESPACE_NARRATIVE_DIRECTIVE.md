@@ -18,8 +18,7 @@ NPCs may bridge multiple domains if their life naturally touches more than one e
 ---
 
 ## 2. Memory Loss Is the Core World Mechanic
-All NPCs begin with partial or fractured memories.  
-The player’s presence helps them recover:
+All NPCs begin with partial or fractured memories. The player’s presence helps them recover:
 
 - identity  
 - lineage  
@@ -40,8 +39,7 @@ NPCs never “remember everything” at once — memory returns in fragments.
 ---
 
 ## 3. Glyphs Emerge From Emotional Revelation
-A glyph is not a reward or quest item.  
-It is the crystallization of an emotional moment.
+A glyph is not a reward or quest item. It is the crystallization of an emotional moment.
 
 Glyphs manifest when:
 
@@ -61,15 +59,14 @@ Glyphs should feel like **emotional truths made visible**.
 Every NPC arc should follow this pattern:
 
 ### Act 1 — Disruption
-The NPC shows confusion, fracture, or emotional imbalance.  
-The player notices something is “off.”
+The NPC shows confusion, fracture, or emotional imbalance. The player notices something is “off.”
 
 ### Act 2 — Recognition
 The player engages, observes, or collects something that reveals the deeper emotional truth.
 
 ### Act 3 — Resolution
-A glyph manifests when the emotional truth becomes clear.  
-Resolution may be healing, clarity, collapse, or acceptance.
+A glyph manifests when the emotional truth becomes clear. Resolution may be healing, clarity,
+collapse, or acceptance.
 
 Some arcs may have:
 
@@ -105,8 +102,7 @@ When arcs branch:
 - each branch may give a different glyph  
 - **but all branches must converge on the same narrative endpoint**  
 
-Example:  
-Kaelen’s Trust vs Collapse branches both lead to Drossel.
+Example: Kaelen’s Trust vs Collapse branches both lead to Drossel.
 
 ---
 
@@ -126,17 +122,23 @@ The summary should capture the emotional essence, not the full scene.
 
 ### Sealina — Ache → Legacy Arc
 - **Ache (Echoed Longing):**  
-  Sealina forgets her dance mid‑performance. The player follows her and discovers faded photos of her mother and grandmother. The glyph manifests when the player witnesses her struggle to reconnect with the ache of a lineage her body remembers but her mind has lost.
+Sealina forgets her dance mid‑performance. The player follows her and discovers faded photos of her
+mother and grandmother. The glyph manifests when the player witnesses her struggle to reconnect with
+the ache of a lineage her body remembers but her mind has lost.
 
 - **Legacy (Hopeful Transmission):**  
-  The player finds scattered photographs of Sealina’s family. When the images resonate through the Corelink, the glyph emerges. Returning it restores her memory and allows her to complete her inherited dance.
+The player finds scattered photographs of Sealina’s family. When the images resonate through the
+Corelink, the glyph emerges. Returning it restores her memory and allows her to complete her
+inherited dance.
 
 ### Kaelen — Trust ↔ Collapse Arc
 - **Trust (Apprehension):**  
-  In trickster form, Kaelen sends the player to retrieve a glyph “caught between fear and faith.” If aligned with him, the player receives the glyph and the true route.
+In trickster form, Kaelen sends the player to retrieve a glyph “caught between fear and faith.” If
+aligned with him, the player receives the glyph and the true route.
 
 - **Collapse (Stolen Memory):**  
-  If the player opposes him, Kaelen leads them into the maze. The glyph at the end restores his fractured identity.
+If the player opposes him, Kaelen leads them into the maze. The glyph at the end restores his
+fractured identity.
 
 These arcs demonstrate:
 
@@ -156,11 +158,11 @@ Codespace should model all future storylines on these patterns.
 
 ---
 
-# GLOBAL RULES FOR ALL DOMAINS
+## GLOBAL RULES FOR ALL DOMAINS
 
 ### 1. Every storyline must emerge from memory loss.
-NPCs begin with fractured identity, missing history, or emotional amnesia.  
-The player’s presence helps them recover:
+NPCs begin with fractured identity, missing history, or emotional amnesia. The player’s presence
+helps them recover:
 
 - a memory  
 - a relationship  
@@ -201,20 +203,21 @@ Player notices the deeper emotional truth.
 Glyph manifests when the emotional truth crystallizes.
 
 ### 5. Branching arcs must converge.
-If a storyline branches (like Kaelen), both paths must lead to the same narrative endpoint, even if the glyphs differ.
+If a storyline branches (like Kaelen), both paths must lead to the same narrative endpoint, even if
+the glyphs differ.
 
 ### 6. Glyph summaries must be short and index‑friendly.
 2–4 sentences capturing the emotional essence.
 
 ---
 
-# DOMAIN‑BY‑DOMAIN GENERATION LOGIC
+## DOMAIN‑BY‑DOMAIN GENERATION LOGIC
 
 Below is the emotional logic Codespace should use when generating new glyph storylines.
 
 ---
 
-# ACHE — Loss, Grief, Betrayal
+## ACHE — Loss, Grief, Betrayal
 ### Core Question:
 *What pain is this NPC carrying that they cannot articulate?*
 
@@ -237,154 +240,152 @@ When the player perceives the ache beneath the NPC’s behavior.
 
 ---
 
-# LEGACY — Family, Ancestry, Ritual Inheritance
-### Core Question:
+## LEGACY — Family, Ancestry, Ritual Inheritance
+### Core Question: (2)
 *What lineage or ritual has been broken, and how can it be restored?*
 
-### NPC State:
+### NPC State: (2)
 - missing family history  
 - broken rituals  
 - lost heirlooms  
 - forgotten traditions  
 
-### Player Role:
+### Player Role: (2)
 Collector of fragments.
 
-### Glyph Trigger:
+### Glyph Trigger: (2)
 When a lineage reconnects or a ritual is restored.
 
-### Examples:
+### Examples: (2)
 - Sealina’s photographs  
 - Inodora’s fire‑passing  
 - Nordia’s returning song  
 
 ---
 
-# TRUST — Community, Restoration, Interdependence
-### Core Question:
+## TRUST — Community, Restoration, Interdependence
+### Core Question: (3)
 *What bond is fragile here, and what choice reveals its strength or weakness?*
 
-### NPC State:
+### NPC State: (3)
 - suspicion  
 - fractured alliances  
 - reliance on others  
 - fear of betrayal  
 
-### Player Role:
+### Player Role: (3)
 Decider of alignment.
 
-### Glyph Trigger:
+### Glyph Trigger: (3)
 When the player chooses trust, restraint, or interdependence.
 
-### Examples:
+### Examples: (3)
 - Kaelen’s trickster test  
 - Rasha’s mutual passage  
 - Korrin’s whispered pacts  
 
 ---
 
-# COLLAPSE — Memory Distortion, Fear, Fracture
-### Core Question:
+## COLLAPSE — Memory Distortion, Fear, Fracture
+### Core Question: (4)
 *What system, identity, or belief is breaking down?*
 
-### NPC State:
+### NPC State: (4)
 - dissociation  
 - corrupted memory  
 - distorted perception  
 - broken logic  
 
-### Player Role:
+### Player Role: (4)
 Observer of fracture.
 
-### Glyph Trigger:
+### Glyph Trigger: (4)
 When the player recognizes the collapse pattern.
 
-### Examples:
+### Examples: (4)
 - Kaelen’s stolen memory  
 - Malrik’s fractured archives  
 - Sanor’s silent ache  
 
 ---
 
-# SOVEREIGNTY — Boundaries, Choice, Clarity
-### Core Question:
+## SOVEREIGNTY — Boundaries, Choice, Clarity
+### Core Question: (5)
 *What boundary must be drawn, held, or redefined?*
 
-### NPC State:
+### NPC State: (5)
 - overwhelmed  
 - boundaryless  
 - rigid or collapsing identity  
 - unclear choices  
 
-### Player Role:
+### Player Role: (5)
 Participant in defining limits.
 
-### Glyph Trigger:
+### Glyph Trigger: (5)
 When the player demonstrates clarity, restraint, or intentional choice.
 
-### Examples:
+### Examples: (5)
 - Veynar’s iron boundary  
 - Coren’s held ache  
 - Dakrin’s interruptive restraint  
 
 ---
 
-# PRESENCE — Touch, Silence, Witness
-### Core Question:
+## PRESENCE — Touch, Silence, Witness
+### Core Question: (6)
 *What moment requires stillness, attention, or embodied presence?*
 
-### NPC State:
+### NPC State: (6)
 - overwhelmed by noise  
 - afraid to speak  
 - needing witness  
 - needing grounding  
 
-### Player Role:
+### Player Role: (6)
 Silent companion.
 
-### Glyph Trigger:
+### Glyph Trigger: (6)
 When the player stays, listens, or touches without agenda.
 
-### Examples:
+### Examples: (6)
 - Ravi’s remembrance  
 - Helia’s tender witness  
 - Elka’s echo communion  
 
 ---
 
-# JOY — Play, Reunion, Creative Spark
-### Core Question:
+## JOY — Play, Reunion, Creative Spark
+### Core Question: (7)
 *What moment of delight or reunion is waiting to be rediscovered?*
 
-### NPC State:
+### NPC State: (7)
 - disconnected from joy  
 - isolated  
 - creatively blocked  
 - longing for community  
 
-### Player Role:
+### Player Role: (7)
 Participant in lightness.
 
-### Glyph Trigger:
+### Glyph Trigger: (7)
 When the player engages in shared play, creation, or reunion.
 
-### Examples:
+### Examples: (7)
 - Elenya’s sky revelry  
 - Sera’s dawn petals  
 - Lira’s crafted wonder  
 
 ---
 
-# HOW CODESPACE SHOULD USE THIS GUIDE
+## HOW CODESPACE SHOULD USE THIS GUIDE
 
 When generating a new storyline:
 
-1. **Choose a domain.**  
-2. **Identify the NPC’s emotional fracture.**  
-3. **Define what memory is missing.**  
-4. **Determine what the player must witness, collect, or choose.**  
-5. **Let the glyph manifest at the emotional turning point.**  
-6. **Write a short 2–4 sentence summary for the organizer.**
+1. **Choose a domain.** 2. **Identify the NPC’s emotional fracture.** 3. **Define what memory is
+missing.** 4. **Determine what the player must witness, collect, or choose.** 5. **Let the glyph
+manifest at the emotional turning point.** 6. **Write a short 2–4 sentence summary for the
+organizer.**
 
 This ensures every new storyline:
 
@@ -396,7 +397,7 @@ This ensures every new storyline:
 
 ---
 
-# MAJOR STORYLINE TEMPLATE #3 — PRESENCE DOMAIN
+## MAJOR STORYLINE TEMPLATE #3 — PRESENCE DOMAIN
 ## NPC: Helia, Shrine Healer
 ## Glyph: Glyph of Quiet Return
 ## Domain: Presence
@@ -404,11 +405,11 @@ This ensures every new storyline:
 
 ---
 
-# FULL STORYLINE (FOR YOUR NARRATIVE DOC)
+## FULL STORYLINE (FOR YOUR NARRATIVE DOC)
 
-### Act 1 — Disruption
-The player finds Helia tending to a survivor who is unconscious but breathing.  
-Helia looks exhausted — not physically, but emotionally hollow.
+### Act 1 — Disruption (2)
+The player finds Helia tending to a survivor who is unconscious but breathing. Helia looks exhausted
+— not physically, but emotionally hollow.
 
 She says:
 
@@ -416,10 +417,11 @@ She says:
 > But not fully.  
 > They reach for someone who isn’t here.”
 
-She admits she doesn’t know who the survivor is.  
-She only knows they were found clutching a broken Corelink pendant.
+She admits she doesn’t know who the survivor is. She only knows they were found clutching a broken
+Corelink pendant.
 
-Helia has been sitting with them for days, speaking softly, humming, holding their hand — but she feels like she’s failing.
+Helia has been sitting with them for days, speaking softly, humming, holding their hand — but she
+feels like she’s failing.
 
 She says:
 
@@ -427,12 +429,12 @@ She says:
 > I don’t know if I’m helping.  
 > I don’t know if presence matters when memory is gone.”
 
-This is the fracture:  
+This is the fracture:
 **Helia doubts the value of presence itself.**
 
 ---
 
-### Act 2 — Recognition
+### Act 2 — Recognition (2)
 The player returns later and finds Helia asleep, head resting on the survivor’s cot.
 
 The survivor is awake — barely — whispering a single word:
@@ -446,15 +448,11 @@ The player can choose to:
 - Simply remain in the room  
 - Say nothing  
 
-No dialogue is required.  
-No action is required.  
-Just **presence**.
+No dialogue is required. No action is required. Just **presence**.
 
-Helia wakes and sees the player sitting with the survivor.  
-She watches silently.
+Helia wakes and sees the player sitting with the survivor. She watches silently.
 
-The survivor’s breathing steadies.  
-Their eyes close peacefully.
+The survivor’s breathing steadies. Their eyes close peacefully.
 
 Helia whispers:
 
@@ -463,8 +461,9 @@ Helia whispers:
 
 ---
 
-### Act 3 — Resolution
-As the room settles into shared quiet, the **Glyph of Quiet Return** manifests in the dust near the cot.
+### Act 3 — Resolution (2)
+As the room settles into shared quiet, the **Glyph of Quiet Return** manifests in the dust near the
+cot.
 
 It represents:
 
@@ -486,17 +485,20 @@ Helia’s faith in presence is restored.
 
 ---
 
-# SHORT ORGANIZER SUMMARY (READY FOR YOUR CSV)
+## SHORT ORGANIZER SUMMARY (READY FOR YOUR CSV)
 
 ## Presence — Glyph of Quiet Return
 **NPC:** Helia — Shrine Healer  
 **Location:** Shrine Healing Alcove  
 **Summary:**  
-Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence — not action — is what brings people back to themselves. This glyph embodies healing through witness and silence.
+Helia tends to an unconscious survivor and doubts whether her presence matters. When the player
+quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph
+manifests as Helia realizes that presence — not action — is what brings people back to themselves.
+This glyph embodies healing through witness and silence.
 
 ---
 
-# Why This Works as a Major Template
+## Why This Works as a Major Template
 
 This storyline teaches Codespace how to generate Presence arcs that are:
 

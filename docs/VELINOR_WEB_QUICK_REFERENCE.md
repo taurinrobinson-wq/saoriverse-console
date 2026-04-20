@@ -15,13 +15,13 @@
 
 ```bash
 
-# Start Backend (Terminal 1)
+## Start Backend (Terminal 1)
 cd /path/to/saoriverse-console
 python velinor_api.py
 
-# → http://localhost:8000 (Swagger docs at /docs)
+## → http://localhost:8000 (Swagger docs at /docs)
 
-# Start Frontend (Terminal 2)
+## Start Frontend (Terminal 2)
 cd velinor-web
 npm run dev
 

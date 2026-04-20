@@ -45,10 +45,8 @@ railway up
 
 ### 6. Add Custom Domain
 
-1. Go to [Railway Dashboard](https://railway.app/dashboard)
-2. Click your project → Settings → Domains
-3. Add custom domain: `firstperson.chat`
-4. Update DNS at your domain registrar:
+1. Go to [Railway Dashboard](https://railway.app/dashboard) 2. Click your project → Settings →
+Domains 3. Add custom domain: `firstperson.chat` 4. Update DNS at your domain registrar:
    - **Type**: CNAME
    - **Name**: @ (root domain) or www
    - **Value**: [Railway will provide this]
@@ -82,12 +80,10 @@ vercel domains add firstperson.chat
 
 ## What's Been Prepared
 
-✅ **FastAPI Application**: Complete web server ready for production
-✅ **Professional Templates**: Clean, responsive HTML/CSS interface
-✅ **Railway Config**: Optimized for easy deployment
-✅ **Requirements**: All Python dependencies specified
-✅ **Health Checks**: Built-in monitoring endpoints
-✅ **Static Assets**: FirstPerson logo and graphics ready
+✅ **FastAPI Application**: Complete web server ready for production ✅ **Professional Templates**:
+Clean, responsive HTML/CSS interface ✅ **Railway Config**: Optimized for easy deployment ✅
+**Requirements**: All Python dependencies specified ✅ **Health Checks**: Built-in monitoring
+endpoints ✅ **Static Assets**: FirstPerson logo and graphics ready
 
 ## Files Created for Deployment
 
@@ -109,8 +105,5 @@ Your Supabase configuration from `main_v2.py`:
 
 ## Next Steps
 
-1. Choose Railway or Vercel for hosting
-2. Set up your environment variables
-3. Deploy the application
-4. Configure firstperson.chat DNS
-5. Your professional AI companion will be live! 🚀
+1. Choose Railway or Vercel for hosting 2. Set up your environment variables 3. Deploy the
+application 4. Configure firstperson.chat DNS 5. Your professional AI companion will be live! 🚀

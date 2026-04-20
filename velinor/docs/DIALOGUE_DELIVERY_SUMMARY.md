@@ -213,20 +213,20 @@ python velinor/stories/test_dialogue_generation.py
 
 ```python
 
-# 1. Generate encounter
+## 1. Generate encounter
 encounter = generate_encounter("Sera", npc.remnants, encounter_id=1)
 
-# 2. Display dialogue
+## 2. Display dialogue
 print(encounter['dialogue'])
 
-# 3. Show choices
+## 3. Show choices
 for choice in encounter['choices']:
     print(f"[{choice['trait']}] {choice['text']}")
 
-# 4. Player picks choice 0 (empathy)
+## 4. Player picks choice 0 (empathy)
 manager.apply_tone_effects({"empathy": 0.15})
 
-# 5. Next encounter has updated dialogue
+## 5. Next encounter has updated dialogue
 new_encounter = generate_encounter("Sera", manager.get_npc("Sera").remnants, 2)
 ```
 

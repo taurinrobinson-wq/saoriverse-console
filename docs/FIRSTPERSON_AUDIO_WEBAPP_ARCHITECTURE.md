@@ -101,10 +101,10 @@ nginx_ssl: image: nginx:alpine ports: [80:80, 443:443] depends_on:
 
 
 
-# Existing
+## Existing
 server_name velinor.firstperson.chat; location / { proxy_pass http://velinor_api:8000; }
 
-# NEW
+## NEW
 server_name firstperson.chat;
 
 ```text
@@ -171,7 +171,7 @@ server_name firstperson.chat;
 
 ```python
 
-# Copy to firstperson_api.py
+## Copy to firstperson_api.py
 from emotional_os.deploy.modules.audio_conversation_orchestrator import AudioConversationOrchestrator
 from emotional_os.deploy.modules.prosody_planner import ProsodyPlanner
 from emotional_os.deploy.modules.nlp_init import warmup_nlp
@@ -186,7 +186,7 @@ from emotional_os.deploy.modules.nlp_init import warmup_nlp
 ```python
 
 
-# velinor_api.py structure
+## velinor_api.py structure
 FastAPI app
 ├── CORS middleware
 ├── Health check endpoint
@@ -204,15 +204,15 @@ FastAPI app
 ```bash
 
 
-# Transcribe audio
+## Transcribe audio
 POST /api/transcribe Content-Type: multipart/form-data { audio: <wav_blob> } → { text: "hello",
 confidence: 0.95 }
 
-# Get response
+## Get response
 POST /api/chat { message: "hello", user_id: "abc123" } → { text: "...", glyph_intent: {...},
 audio_url: "..." }
 
-# Synthesize audio
+## Synthesize audio
 POST /api/synthesize { text: "...", glyph_intent: {...} }
 
 ```text

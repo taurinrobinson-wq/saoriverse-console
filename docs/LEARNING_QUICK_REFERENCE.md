@@ -152,14 +152,14 @@ from emotional_os.learning import get_archetype_library
 
 library = get_archetype_library()
 
-# See all archetypes
+## See all archetypes
 print(f"Total: {len(library.archetypes)}")
 
-# Find best match for input
+## Find best match for input
 best = library.get_best_match("I feel relieved and grateful") print(f"Best match: {best.name if best
 else 'None'}")
 
-# Get all matches above threshold
+## Get all matches above threshold
 matches = library.get_all_matches( user_input="I'm overwhelmed but grateful", threshold=0.3 ) for
 archetype, score in matches:
 
@@ -273,13 +273,13 @@ Every archetype has these components:
 ```bash
 
 
-# Run complete test
+## Run complete test
 python test_learning_module.py
 
-# View the archetype library
+## View the archetype library
 cat emotional_os/learning/archetype_library.json | python -m json.tool
 
-# Test a single response
+## Test a single response
 python -c " from emotional_os.learning import get_archetype_response_generator gen =
 get_archetype_response_generator() resp = gen.generate_archetype_aware_response( 'I feel relieved
 and grateful' ) print(resp) "

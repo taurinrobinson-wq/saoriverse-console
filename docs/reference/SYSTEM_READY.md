@@ -7,7 +7,7 @@ Console continuously learn and become more nuanced and human-like. Here's everyt
 
 ## 📁 NEW FILES CREATED
 
-### <strong>FP</strong> Core System Files
+### **FP** Core System Files
 
 - **`glyph_generator.py`** - Main glyph generation engine (530+ lines)
 - **`evolving_glyph_integrator.py`** - Integration wrapper for your existing system
@@ -85,7 +85,7 @@ This shows you exactly how the system works!
 
 from evolving_glyph_integrator import EvolvingGlyphIntegrator
 
-# Initialize the evolving system
+## Initialize the evolving system
 integrator = EvolvingGlyphIntegrator(
     supabase_function_url="your-function-url",
     supabase_anon_key="your-anon-key",
@@ -94,13 +94,13 @@ integrator = EvolvingGlyphIntegrator(
     evolution_frequency=5
 )
 
-# Replace your normal conversation processing with this:
+## Replace your normal conversation processing with this:
 result = integrator.process_conversation_with_evolution(
     message="user's message here",
     conversation_context={"session_id": "123"}
 )
 
-# Access both normal response AND evolution info:
+## Access both normal response AND evolution info:
 saori_reply = result['saori_response'].reply
 
 ```text

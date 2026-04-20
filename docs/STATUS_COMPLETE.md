@@ -223,10 +223,10 @@ curl -X POST http://localhost:8000/chat \
 
 
 
-# BEFORE (blocking, caused hang)
+## BEFORE (blocking, caused hang)
 save_success = await run_in_threadpool(save_conversation_to_supabase, ...) return ChatResponse(...)
 
-# AFTER (non-blocking)
+## AFTER (non-blocking)
 return ChatResponse(...)
 
 ```text
@@ -364,20 +364,20 @@ You asked me to create a system incorporating:
 
 ```bash
 
-# 1. Install dependencies
+## 1. Install dependencies
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 
-# 2. Validate setup
+## 2. Validate setup
 python validate_installation.py
 
-# 3. Start backend
+## 3. Start backend
 python firstperson_backend.py
 
-# 4. In another terminal: test it
+## 4. In another terminal: test it
 python diagnose_backend.py
 
-# 5. Send a message
+## 5. Send a message
 curl -X POST http://localhost:8000/chat \
   -H "Content-Type: application/json" \
   -d '{

@@ -36,7 +36,7 @@ that big a deal anyway. I don't understand why she's making such a fuss.
 
 ## Option 2: Command Line
 
-### 1. Install Dependencies
+### 1. Install Dependencies (2)
 ```bash
 cd limbic_ai
 pip install -r requirements.txt
@@ -70,7 +70,7 @@ analyzer = LimbicAnalyzer()
 scenario = "I got fired and it's all my fault..."
 analysis = analyzer.analyze(scenario)
 
-# Access results
+## Access results
 print(analysis.limbic_state)
 print(analysis.emotional_features)
 print(analyzer.get_summary(analysis))
@@ -110,11 +110,9 @@ dlPFC          (████████░) 0.80  - Cognitive control
 
 LimbicAI uses **keyword density analysis** to identify emotional patterns:
 
-1. **Parse** - Find emotion-related keywords in your text
-2. **Weight** - Assign importance based on frequency
-3. **Map** - Convert to brain region activations
-4. **Visualize** - Show limbic system "heatmap"
-5. **Explain** - Provide context and guidance
+1. **Parse** - Find emotion-related keywords in your text 2. **Weight** - Assign importance based on
+frequency 3. **Map** - Convert to brain region activations 4. **Visualize** - Show limbic system
+"heatmap" 5. **Explain** - Provide context and guidance
 
 **It's not mind-reading!** Rather, it's:
 - ✅ Evidence-based (grounded in neuroscience)
@@ -159,10 +157,10 @@ pip install --upgrade flask werkzeug
 
 ### Module not found error?
 ```bash
-# Make sure you're in the right directory
+## Make sure you're in the right directory
 cd limbic_ai
 
-# Install in development mode
+## Install in development mode
 pip install -e .
 ```
 
@@ -173,11 +171,9 @@ The system needs at least 10 words to meaningfully analyze.
 
 ## Next Steps
 
-1. **Try web interface**: Most user-friendly
-2. **Explore examples**: Understand different patterns
-3. **Read full README**: Deeper technical details
-4. **Review code**: See how mapping works
-5. **Contribute**: Add features or improve NLP
+1. **Try web interface**: Most user-friendly 2. **Explore examples**: Understand different patterns
+3. **Read full README**: Deeper technical details 4. **Review code**: See how mapping works 5.
+**Contribute**: Add features or improve NLP
 
 ---
 
@@ -189,4 +185,3 @@ The system needs at least 10 words to meaningfully analyze.
 - Look at `tests.py` for expected behavior
 
 Happy analyzing! 🧠
-

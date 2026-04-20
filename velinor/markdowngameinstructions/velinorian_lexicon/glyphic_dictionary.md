@@ -32,14 +32,14 @@
 - **Gameplay**: Used to mend glyph fractures, unlock reconciliation endings
 - **Lore**: “Sha’rú was vow and act alike—repairing tone was sacred duty.”
 
-# Velinorian Glyphic Dictionary
+## Velinorian Glyphic Dictionary (2)
 
 “To speak Velinorian is to breathe the wind.” Every word ends with a ritualized breath-shape,
 carrying emotional voltage and closure.
 
 ##
 
-## Entry Template
+## Entry Template (2)
 
 Each glyph entry follows this format:
 
@@ -70,7 +70,7 @@ Each glyph entry follows this format:
 
 ##
 
-### Brethielï̈
+### Brethielï̈ (2)
 
 - **Phonetic Rendering**: /ˈbrɛθiːli/ → hsii
 - **Literal Meaning**: Breath as guide
@@ -83,7 +83,7 @@ Each glyph entry follows this format:
 
 ##
 
-### Sha’rú
+### Sha’rú (2)
 
 - **Phonetic Rendering**: /ʃaʔruː/ → kahʔ
 - **Literal Meaning**: Repair, restore

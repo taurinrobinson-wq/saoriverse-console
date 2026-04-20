@@ -3,7 +3,10 @@
 ## ✅ Completed: Lore-Corrected Swamp Narrative Integration
 
 ### Overview
-The swamp trickster and Kaelen side-quest has been fully integrated into the Velinor narrative system with **zero technological language**. All references to glyphs, Corelink, and OS fragments have been replaced with folklore, intuition, and emotional language that NPCs would realistically use.
+The swamp trickster and Kaelen side-quest has been fully integrated into the Velinor narrative
+system with **zero technological language**. All references to glyphs, Corelink, and OS fragments
+have been replaced with folklore, intuition, and emotional language that NPCs would realistically
+use.
 
 ---
 
@@ -73,11 +76,10 @@ The swamp trickster and Kaelen side-quest has been fully integrated into the Vel
 ## 🔗 Integration Points
 
 ### Story Flow
-1. **Kaelen Trust Path** (0.6+) → Unlocks swamp maze invitation
-2. **Water Route Access** → "Merchant's memory" or "old water ways" (no glyph terminology)
-3. **Three Passages** → Emotional tests that gate on TONE stats
-4. **Token Collection** → Five emotional anchors for Drossel confrontation
-5. **Drossel Encounter** → Emotionally prepared player with deeper understanding
+1. **Kaelen Trust Path** (0.6+) → Unlocks swamp maze invitation 2. **Water Route Access** →
+"Merchant's memory" or "old water ways" (no glyph terminology) 3. **Three Passages** → Emotional
+tests that gate on TONE stats 4. **Token Collection** → Five emotional anchors for Drossel
+confrontation 5. **Drossel Encounter** → Emotionally prepared player with deeper understanding
 
 ### NPC Connections
 - **Kaelen**: Primary guide, reveals Drossel's nature through tokens
@@ -137,11 +139,11 @@ The swamp trickster and Kaelen side-quest has been fully integrated into the Vel
 
 ## ✨ What This Achieves
 
-✅ **Lore Integrity**: No character breaks immersion by mentioning forgotten technology  
-✅ **Emotional Depth**: The maze becomes a psychological test, not a puzzle  
-✅ **Player Understanding**: Collecting tokens deepens emotional readiness for Drossel  
-✅ **Mechanical Invisibility**: Systems work while remaining narratively hidden  
-✅ **Cultural Memory**: Reflects Velinor's fractured, half-remembered civilization  
+✅ **Lore Integrity**: No character breaks immersion by mentioning forgotten technology ✅ **Emotional
+Depth**: The maze becomes a psychological test, not a puzzle ✅ **Player Understanding**: Collecting
+tokens deepens emotional readiness for Drossel ✅ **Mechanical Invisibility**: Systems work while
+remaining narratively hidden ✅ **Cultural Memory**: Reflects Velinor's fractured, half-remembered
+civilization
 
 ---
 
@@ -180,9 +182,8 @@ The swamp trickster and Kaelen side-quest has been fully integrated into the Vel
 
 ## 🎭 Success Metrics
 
-The swamp maze side-quest successfully:
-1. ✅ Uses **zero technical terminology** in NPC dialogue
-2. ✅ **Gates on emotional stats** while remaining lore-consistent
-3. ✅ **Deepens player understanding** of Drossel before confrontation
-4. ✅ **Rewards exploration** with emotional growth (Empathy/Observation)
-5. ✅ **Maintains world coherence** by using only language NPCs would realistically employ
+The swamp maze side-quest successfully: 1. ✅ Uses **zero technical terminology** in NPC dialogue 2.
+✅ **Gates on emotional stats** while remaining lore-consistent 3. ✅ **Deepens player understanding**
+of Drossel before confrontation 4. ✅ **Rewards exploration** with emotional growth
+(Empathy/Observation) 5. ✅ **Maintains world coherence** by using only language NPCs would
+realistically employ

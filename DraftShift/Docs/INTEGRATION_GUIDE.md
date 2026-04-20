@@ -50,10 +50,10 @@ Multi-method emotion and tone detection using NRC + TextBlob + spaCy
 
 **Usage:**
 ```python
-from DraftShift.enhanced_affect_parser import create_enhanced_affect_parser
-parser = create_enhanced_affect_parser()
-analysis = parser.analyze_affect("Your statement fails to consider precedent.")
-# Returns: emotion, valence, arousal, dominance, confidence
+from DraftShift.enhanced_affect_parser import create_enhanced_affect_parser parser =
+create_enhanced_affect_parser() analysis = parser.analyze_affect("Your statement fails to consider
+precedent.")
+## Returns: emotion, valence, arousal, dominance, confidence
 ```
 
 ---
@@ -64,19 +64,16 @@ Contextual tone analysis and transformation recommendations
 
 **Usage:**
 ```python
-from DraftShift.tone_analysis_composer import create_tone_analysis_composer
-composer = create_tone_analysis_composer()
+from DraftShift.tone_analysis_composer import create_tone_analysis_composer composer =
+create_tone_analysis_composer()
 
-# Deep tone analysis
+## Deep tone analysis
 analysis = composer.analyze_tone("I must demand immediate compliance.")
 
-# Transformation guidance
-suggestion = composer.suggest_transformation(
-    "This is unacceptable.",
-    from_tone="Very Formal",
-    to_tone="Empathetic"
-)
-# Returns: strategy, word_replacements, examples, difficulty
+## Transformation guidance
+suggestion = composer.suggest_transformation( "This is unacceptable.", from_tone="Very Formal",
+to_tone="Empathetic" )
+## Returns: strategy, word_replacements, examples, difficulty
 ```
 
 ---
@@ -92,14 +89,14 @@ Unlike the full signal_parser.py (2400+ lines), this lightweight version:
 
 **Usage:**
 ```python
-from DraftShift.tone_signal_parser import create_tone_signal_parser
-parser = create_tone_signal_parser()
+from DraftShift.tone_signal_parser import create_tone_signal_parser parser =
+create_tone_signal_parser()
 
-# Analyze text for signals
+## Analyze text for signals
 analysis = parser.analyze_text("I understand your concerns and will help resolve this.")
-# Returns: primary_signal, scores, tone_profile, confidence
+## Returns: primary_signal, scores, tone_profile, confidence
 
-# Get markers for specific signal
+## Get markers for specific signal
 markers = parser.detect_signal_markers(text, "Ω")  # Recognition/Acknowledgment
 ```
 
@@ -151,17 +148,17 @@ Centralized configuration for legal tone analysis with legal signals, patterns, 
 ```python
 from draftshift import core
 
-# Get affect parser
+## Get affect parser
 parser = core.get_affect_parser()
 
-# Get tone composer
+## Get tone composer
 composer = core.get_tone_composer()
 
-# Get signal parser
-from draftshift.tone_signal_parser import create_tone_signal_parser
-signal_parser = create_tone_signal_parser()
+## Get signal parser
+from draftshift.tone_signal_parser import create_tone_signal_parser signal_parser =
+create_tone_signal_parser()
 
-# Get tool status
+## Get tool status
 status = core.get_tool_status()
 ```
 

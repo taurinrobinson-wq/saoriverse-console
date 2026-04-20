@@ -246,15 +246,15 @@ When someone uses FirstPerson in Local Mode:
 
 
 
-# 1. Install
+## 1. Install
 pip install spacy nltk
 
-# 2. Download
+## 2. Download
 python -m spacy download en_core_web_sm
 
-# Download NRC: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+## Download NRC: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
-# 3. Test
+## 3. Test
 
 ```text
 ```

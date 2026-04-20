@@ -40,18 +40,16 @@ Infrastructure:
   - Content-based date extraction (regex patterns)
   - Jurisdiction-specific customization support
   - Custom document type registration
-  
+
 - **Testing**: 23 unit tests, 100% passing (0.11s execution)
 - **Dependencies**: Standard library only (difflib, datetime, re, collections)
 
 #### RenamerService FastAPI Router (329 lines)
 - **Endpoints**: 6 production-ready REST API endpoints
-  1. `POST /analyze` - Analyze files without download
-  2. `POST /rename-and-download` - Full workflow with ZIP
-  3. `POST /preview` - Detailed preview with confidence scores
-  4. `POST /custom-rename` - Apply user overrides
-  5. `GET /supported-types` - List document types
-  6. `POST /add-custom-type` - Register custom types
+1. `POST /analyze` - Analyze files without download 2. `POST /rename-and-download` - Full workflow
+with ZIP 3. `POST /preview` - Detailed preview with confidence scores 4. `POST /custom-rename` -
+Apply user overrides 5. `GET /supported-types` - List document types 6. `POST /add-custom-type` -
+Register custom types
 
 - **Features**:
   - Multipart/form-data file upload support
@@ -96,7 +94,7 @@ Infrastructure:
   - Green (#7ec850) success color
   - White interface (clean, minimal)
   - Legal document aesthetic
-  
+
 - **Components**:
   - Upload zone with gradient background
   - Preview table with grid layout

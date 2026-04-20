@@ -429,36 +429,36 @@ To add new scenes, follow this pattern:
 ```python
 
 
-# 1. Create scene in new file or add to existing module
+## 1. Create scene in new file or add to existing module
 scene = MarketplaceSceneSequence.build_my_new_scene()
 
-# 2. Define all fields
+## 2. Define all fields
 
-# - scene_id: unique identifier
+## - scene_id: unique identifier
 
-# - npc_name: who the player meets
+## - npc_name: who the player meets
 
-# - narration_distant/close: what player sees
+## - narration_distant/close: what player sees
 
-# - npc_dialogue: what NPC says
+## - npc_dialogue: what NPC says
 
-# - assets: background/foreground paths
+## - assets: background/foreground paths
 
-# - player_options: dialogue choices (DialogueOption instances)
+## - player_options: dialogue choices (DialogueOption instances)
 
-# - glyph_distant/close: resonance indicators
+## - glyph_distant/close: resonance indicators
 
-# 3. Add to sequence or standalone
+## 3. Add to sequence or standalone
 
-# - For sequences, add to get_sequence() list
+## - For sequences, add to get_sequence() list
 
-# - For standalone, can use SceneRenderer.render_scene()
+## - For standalone, can use SceneRenderer.render_scene()
 
-# 4. Test in velinor_scenes_test.py
+## 4. Test in velinor_scenes_test.py
 
-# - Run streamlit app
+## - Run streamlit app
 
-# - Navigate to scene
+## - Navigate to scene
 
 ```text
 ```text

@@ -6,13 +6,13 @@
 
 ```python
 
-# CURRENT (response_handler.py):
+## CURRENT (response_handler.py):
 def handle_response_pipeline(user_input, context):
     1. basic_signal_parser.parse_input()           # ← emotional_os.core
     2. composer.compose_response()                 # ← glyph-based
     3. return response
 
-# NEEDED (integrated_pipeline.py):
+## NEEDED (integrated_pipeline.py):
 def handle_response_pipeline(user_input, context):
     1. sanctuary.is_sensitive_input()              # ← emotional_os_safety
     2. lexicon.find_emotional_words()              # ← emotional_os_lexicon
@@ -35,15 +35,15 @@ def handle_response_pipeline(user_input, context):
 ```python
 
 
-# Safety
+## Safety
 from src.emotional_os_safety.sanctuary import Sanctuary, is_sensitive_input, ensure_sanctuary_response
 from src.emotional_os_safety.sanctuary_handler import classify_risk, build_consent_prompt
 from src.emotional_os_safety.conversation_manager import SanctuaryConversationManager
 
-# Lexicon
+## Lexicon
 from src.emotional_os_lexicon.lexicon_loader import WordCentricLexicon
 
-# Learning
+## Learning
 from src.emotional_os_learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 from src.emotional_os_learning.poetry_signal_extractor import PoetrySignalExtractor
 from src.emotional_os_learning.archetype_response_generator import ArchetypeResponseGenerator
@@ -53,13 +53,13 @@ from src.emotional_os_learning.hybrid_learner import HybridLearner, get_hybrid_l
 from src.emotional_os_learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 from src.emotional_os_learning.conversation_learner import ConversationLearner
 
-# Privacy
+## Privacy
 from src.emotional_os_privacy.encryption_manager import EncryptionManager, ConversationEncryptionLayer
 from src.emotional_os_privacy.data_encoding import DataEncodingPipeline
 from src.emotional_os_privacy.dream_engine import DreamEngine
 from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtocol
 
-# Memory
+## Memory
 
 ```text
 
@@ -72,7 +72,7 @@ from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtoco
 ```python
 
 
-# In app startup or session creation:
+## In app startup or session creation:
 
 class SessionState: def __init__(self):
         # Safety
@@ -111,15 +111,15 @@ self.user_id = None
 
 
 
-# Input: user_input = "I'm suicidal"
+## Input: user_input = "I'm suicidal"
 
-# Call 1: Check if sensitive
+## Call 1: Check if sensitive
 is_sensitive = sanctuary.is_sensitive_input(user_input)  # → True
 
-# Call 2: Classify risk
+## Call 2: Classify risk
 risk_level = classify_risk(user_input)  # → "high"
 
-# Call 3: Build consent prompt
+## Call 3: Build consent prompt
 consent_prompt = build_consent_prompt(risk_level)
 
 ```text
@@ -130,19 +130,19 @@ consent_prompt = build_consent_prompt(risk_level)
 
 ```python
 
-# Input: user_input = "I'm overwhelmed and fragile"
+## Input: user_input = "I'm overwhelmed and fragile"
 
-# Call 1: Lexicon lookup (1000+ words)
+## Call 1: Lexicon lookup (1000+ words)
 emotional_words = lexicon.find_emotional_words_with_context(user_input)
 
-# → [("overwhelmed", {...}, 4), ("fragile", {...}, 21)]
+## → [("overwhelmed", {...}, 4), ("fragile", {...}, 21)]
 
-# Call 2: Adaptive signal extraction
+## Call 2: Adaptive signal extraction
 signals = adaptive_extractor.extract_signals(user_input)
 
-# → [{"signal": "overwhelm", "confidence": 0.95}, ...]
+## → [{"signal": "overwhelm", "confidence": 0.95}, ...]
 
-# Call 3: Poetry signal extraction (if expressive language)
+## Call 3: Poetry signal extraction (if expressive language)
 poetry_signals = poetry_extractor.extract_signals(user_input)
 
 ```text
@@ -156,12 +156,12 @@ poetry_signals = poetry_extractor.extract_signals(user_input)
 ```python
 
 
-# Input: user_input, prior_context = [previous turns]
+## Input: user_input, prior_context = [previous turns]
 
-# Call 1: Get prior context
+## Call 1: Get prior context
 context_summary = memory.get_emotional_profile_brief()
 
-# Call 2: Find best matching archetype
+## Call 2: Find best matching archetype
 best_archetype = archetype_library.get_best_match(
     user_input,
     prior_context=context_summary,
@@ -177,13 +177,13 @@ best_archetype = archetype_library.get_best_match(
 ```python
 
 
-# Call 1: Generate archetype-aware response
+## Call 1: Generate archetype-aware response
 response = archetype_gen.generate_archetype_aware_response( user_input=user_input,
 prior_context=context_summary, glyph=None )
 
-# → "That weight is real. What's underneath that for you?"
+## → "That weight is real. What's underneath that for you?"
 
-# If no archetype match, fallback:
+## If no archetype match, fallback:
 if not response:
 
 ```text
@@ -197,7 +197,7 @@ if not response:
 
 
 
-# If sensitive input detected, wrap response
+## If sensitive input detected, wrap response
 if is_sensitive: response = ensure_sanctuary_response( input_text=user_input,
 base_response=response, tone="gentle" )
 
@@ -209,7 +209,7 @@ base_response=response, tone="gentle" )
 
 ```python
 
-# Encode for storage (raw text never persisted)
+## Encode for storage (raw text never persisted)
 encoded = encoding.encode_conversation(
     user_id=session.user_id,
     raw_user_input=user_input,
@@ -231,7 +231,7 @@ encoded = encoding.encode_conversation(
 ```python
 
 
-# Learn from this exchange
+## Learn from this exchange
 learner_result = hybrid_learner.learn_from_exchange(
     user_id=session.user_id,
     user_input=user_input,
@@ -240,7 +240,7 @@ learner_result = hybrid_learner.learn_from_exchange(
     glyphs=[...]
 )
 
-# Analyze for new archetypes
+## Analyze for new archetypes
 analysis = conversation_learner.analyze_conversation(
     turns=[all turns in session]
 )
@@ -248,7 +248,7 @@ if analysis:
     new_archetype = conversation_learner.create_archetype_from_analysis(analysis)
     archetype_library.add_archetype(new_archetype)
 
-# Create daily summary
+## Create daily summary
 if is_end_of_day:
     daily_summary = dream_engine.create_daily_summary(
         user_id=session.user_id,
@@ -349,25 +349,25 @@ true, "source": "word_centric_emotional_lexicon_expanded.json", "use_adaptive_di
 
 ```python
 
-# If archetype generation fails
+## If archetype generation fails
 try:
     response = archetype_gen.generate_archetype_aware_response(...)
 except Exception as e:
     logger.warning(f"Archetype generation failed: {e}")
     response = None
 
-# If no response from archetype, use glyph fallback
+## If no response from archetype, use glyph fallback
 if not response:
     response = composer.compose_response(user_input, glyph)
 
-# If learning fails, log but continue
+## If learning fails, log but continue
 try:
     hybrid_learner.learn_from_exchange(...)
 except Exception as e:
     logger.warning(f"Learning failed: {e}")
     # Don't break response pipeline
 
-# If privacy encoding fails, fall back to plaintext
+## If privacy encoding fails, fall back to plaintext
 try:
     encoded = encoding.encode_conversation(...)
 except Exception as e:
@@ -387,32 +387,32 @@ except Exception as e:
 ```python
 
 
-# test_safety_integration.py
+## test_safety_integration.py
 def test_sensitive_input_detection(): ...
 def test_risk_classification(): ...
 def test_consent_prompt_building(): ...
 
-# test_lexicon_integration.py
+## test_lexicon_integration.py
 def test_word_lookup(): ...
 def test_emotional_words_extraction(): ...
 def test_frequency_scoring(): ...
 
-# test_archetype_integration.py
+## test_archetype_integration.py
 def test_archetype_matching(): ...
 def test_response_generation_v1(): ...
 def test_response_generation_v2(): ...
 
-# test_learning_integration.py
+## test_learning_integration.py
 def test_hybrid_learner(): ...
 def test_conversation_learner(): ...
 def test_archetype_creation(): ...
 
-# test_privacy_integration.py
+## test_privacy_integration.py
 def test_data_encoding_pipeline(): ...
 def test_encryption(): ...
 def test_dream_engine(): ...
 
-# test_pipeline_integration.py
+## test_pipeline_integration.py
 def test_full_request_pipeline(): ...
 
 ```text

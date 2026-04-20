@@ -2,7 +2,8 @@
 
 ## Overview
 
-This document defines the **state machine** for chamber progression, coherence tracking, and how the world responds to each glyph cleared.
+This document defines the **state machine** for chamber progression, coherence tracking, and how the
+world responds to each glyph cleared.
 
 ---
 
@@ -259,7 +260,8 @@ END
 
 ### **Coherence 8: Endgame (Conversation with Corelink)**
 
-This is not a traditional boss fight. It's a **conversation** with the Corelink system itself, now restored enough to communicate directly.
+This is not a traditional boss fight. It's a **conversation** with the Corelink system itself, now
+restored enough to communicate directly.
 
 See [ENDGAME_CHAMBER_SEQUENCE.md](./ENDGAME_CHAMBER_SEQUENCE.md) for specifics.
 

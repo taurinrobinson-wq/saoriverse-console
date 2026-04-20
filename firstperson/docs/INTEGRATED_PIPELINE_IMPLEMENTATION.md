@@ -189,9 +189,9 @@ composition 4. Entire pipeline fails → Return original base response 5. Pipeli
 ```bash
 
 
-# Kill current process (Ctrl+C in terminal if running)
+## Kill current process (Ctrl+C in terminal if running)
 
-# Then start fresh:
+## Then start fresh:
 
 ```text
 

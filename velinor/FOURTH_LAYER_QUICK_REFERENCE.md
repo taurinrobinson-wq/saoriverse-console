@@ -21,9 +21,8 @@ Cannot move forward   Forced into perpetual now Can restore coherence
 
 ## Six Canonical Endings (Based on Two Axes)
 
-The ending is determined by:
-1. **Malrik & Elenya's state**: Rebuild Together, Partial Rebuild, or Abandon/Fracture
-2. **Player's Corelink choice**: Restart the System or Abandon the System
+The ending is determined by: 1. **Malrik & Elenya's state**: Rebuild Together, Partial Rebuild, or
+Abandon/Fracture 2. **Player's Corelink choice**: Restart the System or Abandon the System
 
 | Ending | Malrik/Elenya | Corelink | Archive Network | Present Circle | Outcome |
 |--------|---------------|----------|------------------|---|--------|
@@ -238,7 +237,8 @@ Each bond determines restart possibility:
 - Characteristics: Empathy + critical thinking, respect perspectives + hold accountable, both learn
 - Possible outcome: People build without system, Malrik/Elenya rebuild together, hardest but most real
 
-Note: Ending 4 requires BOTH full synthesis path AND Malrik/Elenya rebuilding together AND player choosing to abandon the system. It's the most demanding ending.
+Note: Ending 4 requires BOTH full synthesis path AND Malrik/Elenya rebuilding together AND player
+choosing to abandon the system. It's the most demanding ending.
 
 ---
 

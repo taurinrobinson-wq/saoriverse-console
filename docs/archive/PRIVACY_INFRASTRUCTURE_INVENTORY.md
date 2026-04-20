@@ -354,11 +354,8 @@ Raw text: NEVER STORED ✓
 
 ### Monthly Tasks
 
-1. Run ARX compliance check
-2. Review compliance report
-3. Verify k ≥ 5
-4. Check user rights requests processed
-5. Audit access logs
+1. Run ARX compliance check 2. Review compliance report 3. Verify k ≥ 5 4. Check user rights
+requests processed 5. Audit access logs
 
 ## Summary
 
@@ -381,13 +378,12 @@ Raw text: NEVER STORED ✓
 
 **What's Next:**
 
-1. Integrate with signal_parser.py (today/tomorrow)
-2. Test in staging (week 1)
-3. Deploy to production (week 1-2)
-4. Monitor compliance (ongoing)
+1. Integrate with signal_parser.py (today/tomorrow) 2. Test in staging (week 1) 3. Deploy to
+production (week 1-2) 4. Monitor compliance (ongoing)
 
 **Result:**
-FirstPerson's users' privacy is now protected from day one. Raw conversation text is **never** stored. ✓
+FirstPerson's users' privacy is now protected from day one. Raw conversation text is **never**
+stored. ✓
 
 ##
 

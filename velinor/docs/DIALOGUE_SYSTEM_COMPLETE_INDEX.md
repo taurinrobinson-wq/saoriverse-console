@@ -189,10 +189,10 @@ influence network)
 
 ```bash
 
-# Read the system overview
+## Read the system overview
 cat DIALOGUE_SYSTEM_READY_TO_SHIP.md
 
-# Run the tests to see it in action
+## Run the tests to see it in action
 python velinor/stories/test_dialogue_generation.py
 ```
 
@@ -201,10 +201,10 @@ python velinor/stories/test_dialogue_generation.py
 
 ```bash
 
-# Read the complete guide
+## Read the complete guide
 cat DIALOGUE_GENERATION_GUIDE.md
 
-# Read integration patterns
+## Read integration patterns
 cat DIALOGUE_SYSTEM_QUICK_START.md
 ```
 
@@ -213,9 +213,9 @@ cat DIALOGUE_SYSTEM_QUICK_START.md
 
 ```python
 
-# See Pattern D in DIALOGUE_SYSTEM_QUICK_START.md
+## See Pattern D in DIALOGUE_SYSTEM_QUICK_START.md
 
-# Or read DIALOGUE_STORY_EXAMPLES.md for real scenarios
+## Or read DIALOGUE_STORY_EXAMPLES.md for real scenarios
 ```
 
 
@@ -223,11 +223,11 @@ cat DIALOGUE_SYSTEM_QUICK_START.md
 
 ```python
 
-# Add new NPC lexicon
+## Add new NPC lexicon
 
-# Modify encounter contexts
+## Modify encounter contexts
 
-# Create custom choice pools
+## Create custom choice pools
 ```
 
 ## 

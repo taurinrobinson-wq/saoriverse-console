@@ -129,21 +129,21 @@ story.add_passage(
 
 ```python
 
-# Choice point
+## Choice point
 story.add_choice(
     from_passage_name="fork",
     choice_text="Path A",
     to_passage_name="path_a"
 )
 
-# Alternative
+## Alternative
 story.add_choice(
     from_passage_name="fork",
     choice_text="Path B",
     to_passage_name="path_b"
 )
 
-# Reconverge
+## Reconverge
 story.add_choice(
     from_passage_name="path_a",
     choice_text="Meet up",
@@ -156,16 +156,16 @@ story.add_choice(
 
 ```bash
 
-# Build (Python → JSON)
+## Build (Python → JSON)
 python build_story.py
 
-# Build + Validate
+## Build + Validate
 python build_story.py --validate
 
-# Watch for changes
+## Watch for changes
 python build_story.py --watch
 
-# Parse Markdown
+## Parse Markdown
 python build_story.py --parse-markdown
 ```
 

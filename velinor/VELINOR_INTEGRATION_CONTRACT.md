@@ -596,8 +596,7 @@ Coherence: 100 - 2.25 = 97.75 (round to 98)
 ### Influence Updates
 
 **When choice is taken:**
-1. Backend evaluates choice's `influence_impact`
-2. For each NPC in impact:
+1. Backend evaluates choice's `influence_impact` 2. For each NPC in impact:
    ```
    new_influence[npc] = current_influence[npc] + impact_value
    clamped to [0, 1]
@@ -769,36 +768,33 @@ function ChoiceButtons({ choices }) {
 ### Using cURL
 
 ```bash
-# Start game
+## Start game
 curl -X POST http://localhost:8000/api/game/start \
   -H "Content-Type: application/json" \
   -d '{"player_name": "Alice"}'
 
-# Take action
+## Take action
 curl -X POST http://localhost:8000/api/game/action \
   -H "Content-Type: application/json" \
   -d '{"session_id": "abc-123", "action_id": "choice-001"}'
 
-# Get status
+## Get status
 curl http://localhost:8000/api/game/status?session_id=abc-123
 
-# Save game
+## Save game
 curl -X POST http://localhost:8000/api/game/save \
   -H "Content-Type: application/json" \
   -d '{"session_id": "abc-123", "slot": 0}'
 
-# Load game
+## Load game
 curl http://localhost:8000/api/game/load?session_id=abc-123&slot=0
 ```
 
 ### Using Postman
 
-1. Create new collection "Velinor API"
-2. Add requests for each endpoint
-3. Set base URL: `{{BASE_URL}}/api`
-4. Set variable: `BASE_URL = http://localhost:8000`
-5. Set variable: `SESSION_ID` (from /start response)
-6. Test each endpoint
+1. Create new collection "Velinor API" 2. Add requests for each endpoint 3. Set base URL:
+`{{BASE_URL}}/api` 4. Set variable: `BASE_URL = http://localhost:8000` 5. Set variable: `SESSION_ID`
+(from /start response) 6. Test each endpoint
 
 ---
 

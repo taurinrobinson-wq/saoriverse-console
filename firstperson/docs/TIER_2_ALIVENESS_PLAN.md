@@ -161,29 +161,29 @@ EnergyTracker (maintain pacing) → 3-5ms
 ```python
 
 
-# Imports
+## Imports
 from emotional_os.core.lexicon_learner import LexiconLearner
 from emotional_os.core.signal_parser import parse_signals
 
-# ... other imports
+## ... other imports
 
-# AttunementLoop class (80 lines)
+## AttunementLoop class (80 lines)
 class AttunementLoop:
     def __init__(self): ...
 
-# EmotionalReciprocity class (80 lines)
+## EmotionalReciprocity class (80 lines)
 class EmotionalReciprocity:
     def __init__(self): ...
 
-# EmbodiedSimulation class (80 lines)
+## EmbodiedSimulation class (80 lines)
 class EmbodiedSimulation:
     def __init__(self): ...
 
-# EnergyTracker class (80 lines)
+## EnergyTracker class (80 lines)
 class EnergyTracker:
     def __init__(self): ...
 
-# Tier2Aliveness orchestrator (100 lines)
+## Tier2Aliveness orchestrator (100 lines)
 class Tier2Aliveness:
     def __init__(self): ...
 
@@ -220,7 +220,7 @@ class Tier2Aliveness:
 ```python
 
 
-# After Tier 1 processing:
+## After Tier 1 processing:
 tier2 = st.session_state.get("tier2_aliveness") if tier2: response, metrics =
 tier2.process_for_aliveness( user_input, response, history
 

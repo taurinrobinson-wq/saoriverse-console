@@ -4,9 +4,11 @@
 
 Velinor's emotional OS is not separate from the story. It *is* the story.
 
-Every mechanic in the emotional OS is designed to make the player feel the consequences of choosing synthesis, skepticism, or empathy—not as abstract stats, but as ripples through the world.
+Every mechanic in the emotional OS is designed to make the player feel the consequences of choosing
+synthesis, skepticism, or empathy—not as abstract stats, but as ripples through the world.
 
-The narrative spine (Saori → Ravi/Nima → Marketplace Debate → Collapse → Corelink) exists to test the player's emotional coherence repeatedly at increasing scales.
+The narrative spine (Saori → Ravi/Nima → Marketplace Debate → Collapse → Corelink) exists to test
+the player's emotional coherence repeatedly at increasing scales.
 
 ---
 
@@ -393,11 +395,13 @@ Traits become nearly fixed; player's choices are validated rather than shifted:
 
 ### **What Makes Velinor's Emotional OS Different**
 
-Traditional emotion systems track player choices to determine outcomes. Velinor's emotional OS works differently:
+Traditional emotion systems track player choices to determine outcomes. Velinor's emotional OS works
+differently:
 
 **It's not about tracking choices. It's about recognizing patterns.**
 
-Every NPC sees the pattern of the player's emotional responses and reacts to the *pattern*, not to individual choices.
+Every NPC sees the pattern of the player's emotional responses and reacts to the *pattern*, not to
+individual choices.
 
 **Example:**
 
@@ -466,15 +470,19 @@ Each faction (Archivists, Mystics) and mediator (Coren) has their own trait pref
 **Why Coherence Matters:**
 The entire emotional OS is built on the idea that **emotional authenticity matters**.
 
-If the player is incoherent—saying one thing but doing another—the world notices and responds accordingly.
+If the player is incoherent—saying one thing but doing another—the world notices and responds
+accordingly.
 
-This is why Ending 4 (The Earned Synthesis) is the "truest" ending: it requires the highest coherence. The player has to actually *be* someone who integrates contradictions, not just talk about it.
+This is why Ending 4 (The Earned Synthesis) is the "truest" ending: it requires the highest
+coherence. The player has to actually *be* someone who integrates contradictions, not just talk
+about it.
 
 ---
 
 ## Connection Back to the Story
 
-The narrative spine (fixed + hinge + fluid sections) is designed to test emotional coherence at every scale:
+The narrative spine (fixed + hinge + fluid sections) is designed to test emotional coherence at
+every scale:
 
 **Personal Scale (Ravi/Nima):** Does the player's response to grief match their traits?
 
@@ -484,11 +492,14 @@ The narrative spine (fixed + hinge + fluid sections) is designed to test emotion
 
 **Civilizational Scale (Corelink Chamber):** Does the player's final choice match everything they've embodied?
 
-If coherence has been maintained, the ending feels inevitable. Not because the game forced it, but because the player recognizes themselves in it.
+If coherence has been maintained, the ending feels inevitable. Not because the game forced it, but
+because the player recognizes themselves in it.
 
-If coherence has been broken, the ending feels surprising, even conflicted—which is also authentic, because it reflects a player who changed their mind along the way.
+If coherence has been broken, the ending feels surprising, even conflicted—which is also authentic,
+because it reflects a player who changed their mind along the way.
 
-Either way, the emotional OS has done its job: it's shown the player what they actually believe through hundreds of choices, not told them what they should believe through a single choice.
+Either way, the emotional OS has done its job: it's shown the player what they actually believe
+through hundreds of choices, not told them what they should believe through a single choice.
 
 ---
 

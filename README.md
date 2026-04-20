@@ -51,16 +51,16 @@ This project uses a clean folder structure to prevent clutter:
 ```bash
 
 
-# Start Velinor web game (dev mode)
+## Start Velinor web game (dev mode)
 ./scripts/RUN_WEB_DEV.sh
 
-# Start full stack (frontend + backend)
+## Start full stack (frontend + backend)
 ./scripts/RUN_FULL_STACK.sh
 
-# Install dependencies
+## Install dependencies
 pip install -r requirements.txt
 
-# Run Streamlit app
+## Run Streamlit app
 
 ```text
 ```text
@@ -114,16 +114,16 @@ saoriverse-console/
 
 ```bash
 
-# All tests
+## All tests
 pytest tests/
 
-# Unit tests only
+## Unit tests only
 pytest tests/unit/
 
-# Integration tests only
+## Integration tests only
 pytest tests/integration/
 
-# With coverage report
+## With coverage report
 ```text
 
 ```text
@@ -222,11 +222,11 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ```bash
 
-# Kill the process using port 8501
+## Kill the process using port 8501
 lsof -i :8501
 kill -9 <PID>
 
-# Then restart
+## Then restart
 ```text
 
 ```text
@@ -238,13 +238,13 @@ kill -9 <PID>
 ```bash
 
 
-# Ensure you're in the project root
+## Ensure you're in the project root
 cd saoriverse-console
 
-# Verify Python path
+## Verify Python path
 python -c "import sys; print(sys.path)"
 
-# Reinstall dependencies
+## Reinstall dependencies
 
 ```text
 
@@ -255,10 +255,10 @@ python -c "import sys; print(sys.path)"
 ```bash
 
 
-# Check pytest is installed
+## Check pytest is installed
 python -m pytest --version
 
-# Run with verbose output
+## Run with verbose output
 pytest tests/ -v
 
 ```

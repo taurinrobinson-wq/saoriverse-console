@@ -21,7 +21,8 @@ pip install -r velinor/music_prototypes/requirements.txt
 python velinor/music_prototypes/generate_motifs.py
 ```
 
-Outputs: `velinor_motif.mid` and `saori_motif.mid` in the same folder. Import these into your DAW or MIDI host for auditioning.
+Outputs: `velinor_motif.mid` and `saori_motif.mid` in the same folder. Import these into your DAW or
+MIDI host for auditioning.
 
 Next steps (optional)
 - I can render WAVs from the MIDI using a soundfont and `fluidsynth`, or create layered recorded samples for FMOD/Wwise.

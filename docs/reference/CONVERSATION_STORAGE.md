@@ -43,15 +43,15 @@ Run the SQL migration in Supabase:
 
 ```bash
 
-# Option A: Via Supabase Dashboard
+## Option A: Via Supabase Dashboard
 
-# 1. Go to Supabase Console → SQL Editor
+## 1. Go to Supabase Console → SQL Editor
 
-# 2. Create new query
+## 2. Create new query
 
-# 3. Copy and run sql/conversations_table.sql
+## 3. Copy and run sql/conversations_table.sql
 
-# Option B: Via Supabase CLI (if installed)
+## Option B: Via Supabase CLI (if installed)
 ```text
 
 ```text
@@ -71,7 +71,7 @@ Ensure `st.secrets` contains Supabase credentials:
 ```yaml
 
 
-# .streamlit/secrets.toml
+## .streamlit/secrets.toml
 [supabase]
 url = "https://your-project.supabase.co"
 
@@ -99,7 +99,7 @@ Conversations are automatically named from the first message:
 
 from emotional_os.deploy.modules.conversation_manager import generate_auto_name
 
-# Example
+## Example
 title = generate_auto_name("I've been feeling anxious about work")
 
 ```text
@@ -124,13 +124,13 @@ from emotional_os.deploy.modules.conversation_manager import ConversationManager
 
 manager = ConversationManager(user_id="user123")
 
-# Load all conversations
+## Load all conversations
 conversations = manager.load_conversations()
 
-# Load specific conversation
+## Load specific conversation
 conv = manager.load_conversation("conv-id-123")
 
-# Save conversation
+## Save conversation
 success, msg = manager.save_conversation(
     conversation_id="conv-id-123",
     title="Work Anxiety Discussion",
@@ -139,10 +139,10 @@ success, msg = manager.save_conversation(
     ]
 )
 
-# Rename conversation
+## Rename conversation
 success, msg = manager.rename_conversation("conv-id-123", "New Title")
 
-# Delete conversation
+## Delete conversation
 ```text
 
 ```text
@@ -236,9 +236,9 @@ To migrate existing conversation history:
 ```python
 
 
-# This would require custom migration script
+## This would require custom migration script
 
-# Contact development team for migration support
+## Contact development team for migration support
 
 ```
 

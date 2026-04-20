@@ -26,8 +26,7 @@ streamlit run velinor/streamlit_app.py
 | **Resolve** | Commitment to path | Staying true to choices |
 | **Resonance** | Harmonic balance | Emotionally consistent choices |
 
-Range: -1.0 (low) to +1.0 (high)
-Green = positive, Yellow = neutral, Red = negative
+Range: -1.0 (low) to +1.0 (high) Green = positive, Yellow = neutral, Red = negative
 
 ## Glyphs
 
@@ -71,10 +70,10 @@ Per NPC (-1.0 to +1.0):
 ## Testing
 
 ```bash
-# Run integration tests (8 tests, ~1 second)
+## Run integration tests (8 tests, ~1 second)
 python -m pytest velinor/test_streamlit_integration.py -v
 
-# Manual testing
+## Manual testing
 streamlit run velinor/streamlit_app.py
 ```
 
@@ -127,7 +126,7 @@ Open "🔧 Debug Panel" in app:
 None implemented yet, but you can modify `streamlit_state.py`:
 
 ```python
-# Example: Unlock all glyphs
+## Example: Unlock all glyphs
 for glyph_name in state.glyphs:
     state.obtain_glyph(glyph_name)
 ```
@@ -150,11 +149,9 @@ for glyph_name in state.glyphs:
 
 ## Next Steps
 
-1. **Test all story branches** - Play through different paths
-2. **Add more scenes** - Expand Act 2 & 3
-3. **Tune mechanics** - Adjust glyph costs, fight difficulty
-4. **Implement saving** - Persist progress across sessions
-5. **Port to React** - Build final cinematic version
+1. **Test all story branches** - Play through different paths 2. **Add more scenes** - Expand Act 2
+& 3 3. **Tune mechanics** - Adjust glyph costs, fight difficulty 4. **Implement saving** - Persist
+progress across sessions 5. **Port to React** - Build final cinematic version
 
 ## Links
 

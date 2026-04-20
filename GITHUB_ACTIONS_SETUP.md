@@ -1,6 +1,7 @@
 # GitHub Actions Deployment Setup for Velinor
 
-This document walks you through setting up automatic Docker builds and deployments to your droplet using GitHub Actions.
+This document walks you through setting up automatic Docker builds and deployments to your droplet
+using GitHub Actions.
 
 ## Prerequisites
 
@@ -20,9 +21,9 @@ This document walks you through setting up automatic Docker builds and deploymen
 
 Your workflow needs credentials stored securely as "Secrets" in GitHub.
 
-1. Go to your GitHub repo: https://github.com/taurinrobinson-wq/saoriverse-console
-2. Click **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret** and add these four:
+1. Go to your GitHub repo: https://github.com/taurinrobinson-wq/saoriverse-console 2. Click
+**Settings** → **Secrets and variables** → **Actions** 3. Click **New repository secret** and add
+these four:
 
 ### Secret 1: `DOCKER_USERNAME`
 - **Value:** Your Docker Hub username
@@ -54,10 +55,8 @@ Your workflow needs credentials stored securely as "Secrets" in GitHub.
 
 ## Step 2: Test the Setup
 
-1. Make a small change to a file in `velinor-web/` (e.g., add a comment)
-2. Commit and push to `main`
-3. Go to **Actions** tab in your GitHub repo
-4. Watch the workflow run:
+1. Make a small change to a file in `velinor-web/` (e.g., add a comment) 2. Commit and push to
+`main` 3. Go to **Actions** tab in your GitHub repo 4. Watch the workflow run:
    - **Build and push** should take 2-3 minutes
    - **Deploy to droplet** should take 1-2 minutes
 
@@ -69,15 +68,9 @@ If it fails, check the logs—they'll tell you exactly what went wrong.
 
 **When you push to `main` (changes in `velinor-web/`):**
 
-1. GitHub Actions spins up a Ubuntu machine
-2. Checks out your code
-3. Builds a Docker image of Velinor
-4. Pushes the image to Docker Hub
-5. SSHes into your droplet (161.35.227.49)
-6. Pulls the new image
-7. Stops the old container
-8. Starts a new container with the latest image
-9. Done!
+1. GitHub Actions spins up a Ubuntu machine 2. Checks out your code 3. Builds a Docker image of
+Velinor 4. Pushes the image to Docker Hub 5. SSHes into your droplet (161.35.227.49) 6. Pulls the
+new image 7. Stops the old container 8. Starts a new container with the latest image 9. Done!
 
 **No manual steps. No SSH terminal. Just push → deploy.**
 
@@ -87,10 +80,8 @@ If it fails, check the logs—they'll tell you exactly what went wrong.
 
 To see what's happening during a deployment:
 
-1. Go to **Actions** tab
-2. Click the latest workflow run
-3. Click **build-and-deploy**
-4. Expand any failed step to see detailed error messages
+1. Go to **Actions** tab 2. Click the latest workflow run 3. Click **build-and-deploy** 4. Expand
+any failed step to see detailed error messages
 
 Common issues:
 
@@ -105,7 +96,7 @@ Common issues:
 From now on, deploying Velinor is as simple as:
 
 ```bash
-# Make changes locally
+## Make changes locally
 git commit -am "Update Velinor dialogue"
 git push origin main
 ```
@@ -130,9 +121,8 @@ docker logs velinor  # View container logs
 
 Once this works, you can:
 
-1. Add more workflows for other services (draftshift, etc.)
-2. Add environment variables (database connections, API keys) as secrets
-3. Add notifications (Slack, email) when deployments succeed/fail
+1. Add more workflows for other services (draftshift, etc.) 2. Add environment variables (database
+connections, API keys) as secrets 3. Add notifications (Slack, email) when deployments succeed/fail
 4. Create staging deployments (test before production)
 
 But for now, just get Velinor deploying automatically. That's the big win.

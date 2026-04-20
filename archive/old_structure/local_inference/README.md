@@ -125,10 +125,8 @@ python -m pytest test_phase_3_5.py -v
 
 Examples Include:
 
-1. Basic response generation with safety processing
-2. Context-based glyph selection
-3. Training corpus capture and statistics
-4. Safety gates in action (conservative vs experimental)
+1. Basic response generation with safety processing 2. Context-based glyph selection 3. Training
+corpus capture and statistics 4. Safety gates in action (conservative vs experimental)
 
 Run with:
 
@@ -342,12 +340,11 @@ test_phase_3_5.py::TestPhase35Integration::test_glyph_control_flow PASSED
 
 ## 🚀 Next Steps
 
-1. **Local LLM Integration** - Create `llm_adapter.py` for llama.cpp/Ollama
-2. **Streaming Support** - Implement token-by-token streaming with on-the-fly safety checks
-3. **Fine-Tuning Pipeline** - Use captured training corpus for model improvement
-4. **Monitoring Dashboard** - Build metrics and safety auditing dashboard
-5. **User Studies** - Validate satisfaction feedback and safety effectiveness
-6. **Domain Expansion** - Add specialized glyphs for specific use cases
+1. **Local LLM Integration** - Create `llm_adapter.py` for llama.cpp/Ollama 2. **Streaming Support**
+- Implement token-by-token streaming with on-the-fly safety checks 3. **Fine-Tuning Pipeline** - Use
+captured training corpus for model improvement 4. **Monitoring Dashboard** - Build metrics and
+safety auditing dashboard 5. **User Studies** - Validate satisfaction feedback and safety
+effectiveness 6. **Domain Expansion** - Add specialized glyphs for specific use cases
 
 ##
 
@@ -385,11 +382,9 @@ local_inference/
 
 ## 🎓 Learning Path
 
-1. **5 min**: Read `QUICK_START.md` for overview
-2. **10 min**: Run `examples.py` to see it in action
-3. **15 min**: Review `test_phase_3_5.py` to understand capabilities
-4. **30 min**: Read `PHASE_3_5_DOCS.md` for deep dive
-5. **30 min**: Integrate with your local LLM
+1. **5 min**: Read `QUICK_START.md` for overview 2. **10 min**: Run `examples.py` to see it in
+action 3. **15 min**: Review `test_phase_3_5.py` to understand capabilities 4. **30 min**: Read
+`PHASE_3_5_DOCS.md` for deep dive 5. **30 min**: Integrate with your local LLM
 
 ##
 
@@ -405,7 +400,9 @@ local_inference/
 
 ## 🎉 Summary
 
-Phase 3.5 delivers a **complete, tested, documented system** for glyph-controlled local LLM inference with production-ready safety enforcement. All components are implemented, tested (31/31 passing), and ready for integration with local models like llama.cpp and Ollama.
+Phase 3.5 delivers a **complete, tested, documented system** for glyph-controlled local LLM
+inference with production-ready safety enforcement. All components are implemented, tested (31/31
+passing), and ready for integration with local models like llama.cpp and Ollama.
 
 **Status: COMPLETE ✅**
 

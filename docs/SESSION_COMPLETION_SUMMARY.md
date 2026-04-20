@@ -162,12 +162,12 @@ Long-term Memory (90+ days)
 
 
 
-# 1. Install dependencies
+## 1. Install dependencies
 pip install cryptography pytest
 
-# 2. Create database tables (see PRIVACY_LAYER_DATABASE_SCHEMA.md)
+## 2. Create database tables (see PRIVACY_LAYER_DATABASE_SCHEMA.md)
 
-# 3. Run tests to verify everything works
+## 3. Run tests to verify everything works
 
 ```text
 ```

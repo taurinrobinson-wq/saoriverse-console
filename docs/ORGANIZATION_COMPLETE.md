@@ -25,13 +25,13 @@ From the root directory:
 
 ```bash
 
-# Start Velinor web game (dev mode at localhost:3000)
+## Start Velinor web game (dev mode at localhost:3000)
 ./scripts/RUN_WEB_DEV.sh
 
-# Start full stack (frontend + backend together)
+## Start full stack (frontend + backend together)
 ./scripts/RUN_FULL_STACK.sh
 
-# Install dependencies
+## Install dependencies
 ```text
 
 ```text
@@ -179,25 +179,25 @@ Check that everything is working:
 
 ```bash
 
-# Verify git status is clean
+## Verify git status is clean
 git status
 
-# Should show: "On branch main" + nothing to commit
+## Should show: "On branch main" + nothing to commit
 
-# Verify scripts are executable
+## Verify scripts are executable
 ls -la scripts/RUN*.sh
 
-# Should show: -rwxr-xr-x (executable)
+## Should show: -rwxr-xr-x (executable)
 
-# Verify scratch is ignored
+## Verify scratch is ignored
 git status scratch/
 
-# Should show: scratch/ is ignored
+## Should show: scratch/ is ignored
 
-# Verify important docs exist
+## Verify important docs exist
 ls docs/PROJECT_STRUCTURE.md
 
-# Should exist ✅
+## Should exist ✅
 ```
 
 

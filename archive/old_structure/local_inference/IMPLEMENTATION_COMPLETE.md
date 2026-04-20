@@ -2,17 +2,17 @@
 
 ## 🎯 Executive Summary
 
-Phase 3.5 is a **complete, production-ready system** for glyph-controlled local LLM inference with multi-layered safety enforcement. It enables emotionally coherent, safe responses using local models (GGUF/llama.cpp) with no external APIs.
+Phase 3.5 is a **complete, production-ready system** for glyph-controlled local LLM inference with
+multi-layered safety enforcement. It enables emotionally coherent, safe responses using local models
+(GGUF/llama.cpp) with no external APIs.
 
 ### Key Achievements
 
-✅ **Glyph Schema & Registry** - 8 base glyphs with emotional attributes
-✅ **Gate Enforcement** - Multi-layer safety policy system
-✅ **Control Tag Rendering** - XML-based LLM prompt control
-✅ **Safety Post-Processing** - 4-layer violation detection & removal
-✅ **Training Corpus Pipeline** - JSONL-based fine-tuning data generation
-✅ **Comprehensive Tests** - 31 tests, 100% pass rate
-✅ **Production Examples** - Full end-to-end workflow demonstrations
+✅ **Glyph Schema & Registry** - 8 base glyphs with emotional attributes ✅ **Gate Enforcement** -
+Multi-layer safety policy system ✅ **Control Tag Rendering** - XML-based LLM prompt control ✅
+**Safety Post-Processing** - 4-layer violation detection & removal ✅ **Training Corpus Pipeline** -
+JSONL-based fine-tuning data generation ✅ **Comprehensive Tests** - 31 tests, 100% pass rate ✅
+**Production Examples** - Full end-to-end workflow demonstrations
 
 ##
 
@@ -354,9 +354,8 @@ builder.export_to_jsonl("training_data.jsonl")
 
 The system provides **deterministic, multi-layer safety**:
 
-1. **Gate Selection** - Only approved glyphs used
-2. **Control Encoding** - Constraints encoded in prompt
-3. **Post-Processing** - 4-layer verification:
+1. **Gate Selection** - Only approved glyphs used 2. **Control Encoding** - Constraints encoded in
+prompt 3. **Post-Processing** - 4-layer verification:
    - Recognition risk detection (removes "I remember you")
    - Uncanniness enforcement (removes boundary-dissolving content)
    - Rhythm compliance (validates pacing)
@@ -487,12 +486,10 @@ fine_tuner.train(epochs=3, batch_size=8)
 
 ## 🚦 Next Steps
 
-1. **Integrate Local LLM** - Hook llama.cpp/Ollama adapter
-2. **Streaming Support** - Real-time token-by-token generation
-3. **Fine-Tuning Loop** - Use corpus for model improvement
-4. **Monitoring UI** - Dashboard for safety metrics
-5. **User Studies** - Validate satisfaction feedback
-6. **Domain Expansion** - Add specialized glyphs
+1. **Integrate Local LLM** - Hook llama.cpp/Ollama adapter 2. **Streaming Support** - Real-time
+token-by-token generation 3. **Fine-Tuning Loop** - Use corpus for model improvement 4. **Monitoring
+UI** - Dashboard for safety metrics 5. **User Studies** - Validate satisfaction feedback 6. **Domain
+Expansion** - Add specialized glyphs
 
 ##
 

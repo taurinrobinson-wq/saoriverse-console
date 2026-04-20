@@ -21,18 +21,18 @@
 ```bash
 
 
-# 1. Connect
+## 1. Connect
 ssh root@161.35.227.49
 
-# 2. Clone & setup
+## 2. Clone & setup
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 chmod +x docker-setup.sh
 
-# 3. Run setup
+## 3. Run setup
 ./docker-setup.sh
 
-# 4. Verify
+## 4. Verify
 docker compose ps
 
 ```text
@@ -57,31 +57,31 @@ docker compose ps
 ```bash
 
 
-# View all containers
+## View all containers
 docker compose ps
 
-# View logs (follow updates in real-time)
+## View logs (follow updates in real-time)
 docker compose logs -f
 
-# Just backend logs
+## Just backend logs
 docker compose logs -f backend
 
-# Just frontend logs
+## Just frontend logs
 docker compose logs -f frontend
 
-# Stop everything
+## Stop everything
 docker compose stop
 
-# Restart everything
+## Restart everything
 docker compose restart
 
-# Pull latest code and restart
+## Pull latest code and restart
 git pull && docker compose up -d --build
 
-# Shell access to backend
+## Shell access to backend
 docker compose exec backend bash
 
-# Check disk usage
+## Check disk usage
 
 ```text
 ```text
@@ -124,7 +124,7 @@ saoriverse-console/
 ```bash
 docker compose logs
 
-# Read the error message, then:
+## Read the error message, then:
 docker compose down
 docker compose build --no-cache
 ```text
@@ -138,7 +138,7 @@ docker compose build --no-cache
 ```bash
 
 
-# Kill the process using the port
+## Kill the process using the port
 sudo lsof -i :8000
 sudo kill -9 <PID>
 
@@ -151,12 +151,12 @@ sudo kill -9 <PID>
 ```bash
 
 
-# Check if backend is healthy
+## Check if backend is healthy
 docker compose ps
 
-# Status column should say "healthy"
+## Status column should say "healthy"
 
-# Test from inside frontend container
+## Test from inside frontend container
 
 ```text
 ```text

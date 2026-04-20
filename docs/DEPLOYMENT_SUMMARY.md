@@ -88,23 +88,23 @@ chmod +x docker-setup.sh
 ```bash
 
 
-# SSH to droplet
+## SSH to droplet
 ssh root@161.35.227.49
 
-# Install Docker (see DOCKER_UBUNTU_SETUP.md for details)
+## Install Docker (see DOCKER_UBUNTU_SETUP.md for details)
 curl -fsSL https://get.docker.com | sh
 
-# Clone and configure
+## Clone and configure
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 cp .env.example .env
 nano .env  # Edit if needed
 
-# Build and start
+## Build and start
 docker compose build
 docker compose up -d
 
-# Verify
+## Verify
 docker compose ps
 
 ```text
@@ -138,10 +138,10 @@ Check:      http://161.35.227.49:8000/health
 
 
 
-# Health check
+## Health check
 curl http://161.35.227.49:8000/health
 
-# Example API call (from your machine)
+## Example API call (from your machine)
 curl -X POST http://161.35.227.49:8000/api/chat \
   -H "Content-Type: application/json" \
 
@@ -155,18 +155,18 @@ curl -X POST http://161.35.227.49:8000/api/chat \
 
 ```bash
 
-# Status
+## Status
 docker compose ps              # Running containers
 docker compose logs -f         # Live logs
 docker system df               # Disk usage
 
-# Control
+## Control
 docker compose up -d           # Start
 docker compose stop            # Stop
 docker compose restart         # Restart
 docker compose down            # Remove containers
 
-# Development
+## Development
 docker compose exec backend bash    # Shell access
 docker compose build --no-cache     # Rebuild images
 ```text
@@ -184,26 +184,26 @@ The `.env.example` file includes:
 ```env
 
 
-# API Configuration
+## API Configuration
 API_HOST=0.0.0.0
 API_PORT=8000
 API_URL=http://161.35.227.49:8000
 
-# Frontend
+## Frontend
 FRONTEND_URL=http://161.35.227.49
 REACT_APP_SAOYNX_API_URL=http://161.35.227.49:8000
 
-# Database
+## Database
 DATABASE_URL=sqlite:///./data_local/app.db
 
-# Environment
+## Environment
 ENV=production
 DEBUG=false
 LOG_LEVEL=info
 
-# Optional: External services
+## Optional: External services
 
-# OPENAI_API_KEY=...
+## OPENAI_API_KEY=...
 
 ```text
 

@@ -38,7 +38,8 @@
 ## 🌒 PHASE 1: Stabilize the Core (2–4 weeks)
 
 ### Goal
-Lock the foundation. The emotional OS, glyphs, traits, and core mechanics become frozen — this is your physics engine now.
+Lock the foundation. The emotional OS, glyphs, traits, and core mechanics become frozen — this is
+your physics engine now.
 
 ### Workstreams (Can Run in Parallel)
 
@@ -150,12 +151,12 @@ Lock the foundation. The emotional OS, glyphs, traits, and core mechanics become
 
 ## 🔥 PHASE 2: Build the Playable Spine (4–8 weeks)
 
-### Goal
-Write the story. Wire the choices. Embed glyphs. Connect collapse to endings. The game becomes playable end-to-end.
+### Goal (2)
+Write the story. Wire the choices. Embed glyphs. Connect collapse to endings. The game becomes
+playable end-to-end.
 
 ### Critical Path
-Story Spine → NPC Responses → Collapse Event → Endings Testing  
-(Each depends on previous)
+Story Spine → NPC Responses → Collapse Event → Endings Testing (Each depends on previous)
 
 #### Workstream 2A: Implement Full Story Spine (2–3 weeks)
 
@@ -311,7 +312,7 @@ Story Spine → NPC Responses → Collapse Event → Endings Testing
 
 ## 🌿 PHASE 3: Frontend Integration (3–6 weeks)
 
-### Goal
+### Goal (3)
 Velinor-web comes online. API works. UI renders glyphs, NPCs, choices. Game is playable on the web.
 
 ### Workstreams (Mostly Sequential — API first, then UI)
@@ -435,8 +436,9 @@ Velinor-web comes online. API works. UI renders glyphs, NPCs, choices. Game is p
 
 ## 🌑 PHASE 4: Content Expansion + Polish (4–8 weeks)
 
-### Goal
-The game becomes *good* — deeper characters, more glyph resonance, cinematic endings, sound/animation polish.
+### Goal (4)
+The game becomes *good* — deeper characters, more glyph resonance, cinematic endings,
+sound/animation polish.
 
 ### Workstreams (Non-Blocking — Can Run in Parallel)
 
@@ -560,7 +562,7 @@ The game becomes *good* — deeper characters, more glyph resonance, cinematic e
 
 ## 🌌 PHASE 5: QA + Playtesting (2–4 weeks)
 
-### Goal
+### Goal (5)
 Find and fix edge cases. Validate emotional arcs. Ensure pacing feels right.
 
 ### Workstreams
@@ -847,40 +849,32 @@ Find and fix edge cases. Validate emotional arcs. Ensure pacing feels right.
 ## 🎬 Execution Principles
 
 ### 1. **Lock, Then Execute**
-Lock emotional OS, story skeleton, and API contract *first*.  
-Then execute without revisiting.  
+Lock emotional OS, story skeleton, and API contract *first*. Then execute without revisiting.
 Revisiting kills velocity.
 
 ### 2. **Build Vertically**
-Go from "start" to "end" for one path first.  
-Then expand breadth (more NPCs, more glyphs, more endings).  
-Never build all features halfway.
+Go from "start" to "end" for one path first. Then expand breadth (more NPCs, more glyphs, more
+endings). Never build all features halfway.
 
 ### 3. **Test Early, Test Often**
-Run full playthroughs starting Phase 3.  
-Find issues while they're cheap to fix.  
-Don't wait until Phase 5 to discover game-breaking bugs.
+Run full playthroughs starting Phase 3. Find issues while they're cheap to fix. Don't wait until
+Phase 5 to discover game-breaking bugs.
 
 ### 4. **Defer Polish**
-Phases 1–3: Functional > Beautiful  
-Phase 4: Add beauty  
-Phase 5: Refine  
-In 3-month timeline: Skip Phase 4 entirely.
+Phases 1–3: Functional > Beautiful Phase 4: Add beauty Phase 5: Refine In 3-month timeline: Skip
+Phase 4 entirely.
 
 ### 5. **Define "Done"**
-Per phase: What does success look like?  
-Be ruthless: If it's not in "done", it's not getting done.  
+Per phase: What does success look like? Be ruthless: If it's not in "done", it's not getting done.
 Defer nice-to-haves to post-launch.
 
 ---
 
 ## 🎯 Next Steps: Pick Your Timeline
 
-1. **Read this document** ← You are here
-2. **Align with stakeholders** — Which timeline? Which scope?
-3. **Lock Phase 1** — Freeze emotional OS, commit to glyph generation
-4. **Start Week 1** — Phase 1, Workstream 1A (glyph corpus)
-5. **Weekly standups** — Use template above, track velocity
+1. **Read this document** ← You are here 2. **Align with stakeholders** — Which timeline? Which
+scope? 3. **Lock Phase 1** — Freeze emotional OS, commit to glyph generation 4. **Start Week 1** —
+Phase 1, Workstream 1A (glyph corpus) 5. **Weekly standups** — Use template above, track velocity
 
 ---
 

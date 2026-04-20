@@ -2,7 +2,10 @@
 
 ## Overview
 
-Velinor's skill system integrates player skill claims (truthful or lie) with the hidden REMNANTS system. NPCs don't see player stats—only dialogue options and consequences reveal NPC states. This creates immersive gameplay where **player agency comes from honest self-assessment or risky deception**, not mechanical lockouts.
+Velinor's skill system integrates player skill claims (truthful or lie) with the hidden REMNANTS
+system. NPCs don't see player stats—only dialogue options and consequences reveal NPC states. This
+creates immersive gameplay where **player agency comes from honest self-assessment or risky
+deception**, not mechanical lockouts.
 
 ## Core Design Principles
 
@@ -36,12 +39,12 @@ Tracks player's actual skills.
 ```python
 skill_manager = SkillManager()
 
-# Player learns Herbalism (0.6 proficiency)
+## Player learns Herbalism (0.6 proficiency)
 herbalism = create_velinor_skills()["Herbalism"]
 herbalism.level = 0.6
 skill_manager.add_skill(herbalism)
 
-# Check what player actually knows
+## Check what player actually knows
 player_level = skill_manager.get_skill_level("Herbalism")  # Returns 0.6
 ```
 
@@ -64,7 +67,7 @@ claim = SkillClaim(
     is_truthful=True           # Or False for a lie
 )
 
-# Predict if lie will be obvious
+## Predict if lie will be obvious
 if claim.is_lie():
     confidence = claim.discovery_confidence()  # 0.0-1.0
     # 0.95 = almost certainly caught (claiming no-skill)
@@ -83,8 +86,8 @@ outcome = SkillTaskOutcome(
     execution_roll=0.7         # Random luck (0.0-1.0)
 )
 
-# Success = (player_actual_level + execution_roll*0.3) >= task_difficulty
-# Lie discovered if task fails OR NPC rolls high on scrutiny
+## Success = (player_actual_level + execution_roll*0.3) >= task_difficulty
+## Lie discovered if task fails OR NPC rolls high on scrutiny
 ```
 
 **Key Logic:**
@@ -101,15 +104,15 @@ npc_manager = NPCManager()
 npc_manager.add_npcs_batch(create_marketplace_npcs())
 npc_manager.set_influence_map(create_marketplace_influence_map())
 
-# Player claims Tracking to Kaelen, fails, lie discovered
+## Player claims Tracking to Kaelen, fails, lie discovered
 claim = SkillClaim(..., is_truthful=False)
 outcome = SkillTaskOutcome(claim, 0.5, 0.2)  # Failure
 
 npc_manager.apply_skill_task_outcome(outcome)
-# Result:
-# - Kaelen: Trust -0.2, Skepticism +0.25
-# - Ripple to Tovren, Korrin, etc.: Trust -0.08, Skepticism +0.1
-# - Korrin's special reaction: Memory +0.1, begins spreading rumor
+## Result:
+## - Kaelen: Trust -0.2, Skepticism +0.25
+## - Ripple to Tovren, Korrin, etc.: Trust -0.08, Skepticism +0.1
+## - Korrin's special reaction: Memory +0.1, begins spreading rumor
 ```
 
 ### 5. **DialogueContext** (what dialogue options are available)
@@ -124,20 +127,20 @@ dialogue_ctx = create_npc_dialogue_context(
     player_lie_history={"Kaelen": True}  # Was lie caught before?
 )
 
-# NPC's opening reflects their current stance
+## NPC's opening reflects their current stance
 print(dialogue_ctx.generate_opening_dialogue())
-# If Kaelen is now skeptical: "You again. Somehow I doubt your competence here."
+## If Kaelen is now skeptical: "You again. Somehow I doubt your competence here."
 
-# Get available dialogue options
+## Get available dialogue options
 options = dialogue_ctx.generate_dialogue_options("Tracking")
-# Shows:
-# 1. "Honestly, I don't know Tracking yet. Could you teach me?" (always truthful)
-# 2. "I'd rather learn from you than fake it." (deflect, no skill claim)
-# 3. (Hidden if NPC skepticism is too high) Lie options disappear
+## Shows:
+## 1. "Honestly, I don't know Tracking yet. Could you teach me?" (always truthful)
+## 2. "I'd rather learn from you than fake it." (deflect, no skill claim)
+## 3. (Hidden if NPC skepticism is too high) Lie options disappear
 
-# If previous lie caught, new option appears:
-# 3. "Last time was an exception. I actually know Lockpicking."
-#    (Only if player actually has Lockpicking, redemption path)
+## If previous lie caught, new option appears:
+## 3. "Last time was an exception. I actually know Lockpicking."
+##    (Only if player actually has Lockpicking, redemption path)
 ```
 
 ---
@@ -215,8 +218,7 @@ else:
 ```
 
 **Discovery happens if:**
-1. Task fails (obvious incompetence)
-2. Task succeeds but NPC rolls high on scrutiny (lucky catch)
+1. Task fails (obvious incompetence) 2. Task succeeds but NPC rolls high on scrutiny (lucky catch)
 
 ---
 
@@ -244,7 +246,7 @@ influence_map = {
 - Negative ripple (-0.1, -0.05): Connected NPC's Trust ↓, Skepticism ↑
 
 **Korrin's Special Role:**
-When a lie is caught, Korrin gets **enhanced ripple** and **higher memory**: 
+When a lie is caught, Korrin gets **enhanced ripple** and **higher memory**:
 ```python
 if lie_discovered and target_npc != source_npc:
     if target_npc == "Korrin":
@@ -252,55 +254,56 @@ if lie_discovered and target_npc != source_npc:
         korrin.adjust_trait("memory", 0.1)       # She remembers this
 ```
 
-Korrin then spreads the lie gossip to her network (Kaelen, Tovren, etc.), creating social pressure beyond the immediate NPC.
+Korrin then spreads the lie gossip to her network (Kaelen, Tovren, etc.), creating social pressure
+beyond the immediate NPC.
 
 ---
 
 ## Example: Complete Skill Encounter Flow
 
 ```python
-# 1. Player meets Sera with zero Tracking skill
+## 1. Player meets Sera with zero Tracking skill
 dialogue_ctx = create_npc_dialogue_context(
     "Sera", 
     npc_manager.npcs["Sera"], 
     player_skills={"Tracking": 0.0}
 )
 
-# 2. NPC's stance is cautious (default trust 0.6)
+## 2. NPC's stance is cautious (default trust 0.6)
 print(dialogue_ctx.generate_opening_dialogue())
-# > "Gentle, shy, responds to empathy"
+## > "Gentle, shy, responds to empathy"
 
-# 3. Player sees available options
+## 3. Player sees available options
 options = dialogue_ctx.generate_dialogue_options("Tracking")
-# Shows: "I don't know Tracking" (honest) or "I'd rather learn from you" (deflect)
-# Hidden: "Of course I know Tracking" (would be obvious lie)
+## Shows: "I don't know Tracking" (honest) or "I'd rather learn from you" (deflect)
+## Hidden: "Of course I know Tracking" (would be obvious lie)
 
-# 4. Player chooses to lie anyway (RISKY)
+## 4. Player chooses to lie anyway (RISKY)
 claim = SkillClaim(skill_manager, "Sera", "Tracking", is_truthful=False)
 
-# 5. Task outcome: Random failure (execution_roll low)
+## 5. Task outcome: Random failure (execution_roll low)
 outcome = SkillTaskOutcome(claim, task_difficulty=0.5, execution_roll=0.2)
-# Success formula: (0.0 + 0.2*0.3) >= 0.5 → 0.06 >= 0.5 → FALSE
-# Lie discovered = True (task failed at zero skill)
+## Success formula: (0.0 + 0.2*0.3) >= 0.5 → 0.06 >= 0.5 → FALSE
+## Lie discovered = True (task failed at zero skill)
 
-# 6. Apply consequences
+## 6. Apply consequences
 npc_manager.apply_skill_task_outcome(outcome)
 
-# 7. Sera's REMNANTS shift:
-#    Trust: 0.6 → 0.4 (penalty -0.2 for lie discovered)
-#    Skepticism: 0.3 → 0.55 (penalty +0.25 for lie discovered)
+## 7. Sera's REMNANTS shift:
+##    Trust: 0.6 → 0.4 (penalty -0.2 for lie discovered)
+##    Skepticism: 0.3 → 0.55 (penalty +0.25 for lie discovered)
 
-# 8. Ripple effects through influence_map:
-#    Mariel (trusts Sera): Trust 0.7 → 0.62, Skepticism 0.2 → 0.3
+## 8. Ripple effects through influence_map:
+##    Mariel (trusts Sera): Trust 0.7 → 0.62, Skepticism 0.2 → 0.3
 
-# 9. NPC dialogue reflects new emotional state
+## 9. NPC dialogue reflects new emotional state
 dialogue_ctx_after = create_npc_dialogue_context("Sera", ...)
 print(dialogue_ctx_after.generate_reaction_after_failure_lie_caught())
-# > "You lied to me. That really hurts. I thought you were better than that."
+## > "You lied to me. That really hurts. I thought you were better than that."
 
-# 10. Next encounter with Sera: Options are filtered by her new skepticism
-#     Lie options don't appear (too skeptical to bluff)
-#     Redemption option appears (for truthful claim after previous lie)
+## 10. Next encounter with Sera: Options are filtered by her new skepticism
+##     Lie options don't appear (too skeptical to bluff)
+##     Redemption option appears (for truthful claim after previous lie)
 ```
 
 ---
@@ -326,20 +329,20 @@ python velinor\engine\test_skill_dialogue_integration.py
 ```
 
 **Tests:**
-1. **Honest Skill Claim**: Player truthfully claims skill, succeeds
-2. **Lie & Discovery**: Player lies, fails, consequences ripple through network
-3. **Broken Trust Recovery**: Follow-up encounter after lie—dialogue changes, redemption path appears
-4. **Korrin Rumor-Spreading**: Korrin's enhanced ripple mechanic when lies are discovered
+1. **Honest Skill Claim**: Player truthfully claims skill, succeeds 2. **Lie & Discovery**: Player
+lies, fails, consequences ripple through network 3. **Broken Trust Recovery**: Follow-up encounter
+after lie—dialogue changes, redemption path appears 4. **Korrin Rumor-Spreading**: Korrin's enhanced
+ripple mechanic when lies are discovered
 
 ---
 
 ## Key Insight: Why This Preserves Immersion
 
-Traditional RPG systems: "Skill check hidden, result shows pass/fail"
-→ Player feels mechanical, not emotional
+Traditional RPG systems: "Skill check hidden, result shows pass/fail" → Player feels mechanical, not
+emotional
 
-Velinor approach: "Skill check hidden, result shows NPC's changed attitude"
-→ Player intuits consequences from dialogue, feels immersive
+Velinor approach: "Skill check hidden, result shows NPC's changed attitude" → Player intuits
+consequences from dialogue, feels immersive
 
 **Example:**
 - **Mechanical feedback**: "Your Tracking is 0.0. Skill check vs DC 5 failed."
@@ -351,11 +354,11 @@ Player learns the consequence (Sera is now guarded) through story, not stats.
 
 ## Next Steps
 
-1. **Integrate into encounter system**: When player meets NPC, generate dialogue context
-2. **Implement dialogue branching UI**: Show player options, let them choose truthful/lie
-3. **Create NPC task definitions**: Define task difficulty, consequences for each encounter
-4. **Test social pressure**: Run scenarios where multiple lies create cascading skepticism
-5. **Refine Korrin's rumor system**: Make her the player's reputation management challenge
+1. **Integrate into encounter system**: When player meets NPC, generate dialogue context 2.
+**Implement dialogue branching UI**: Show player options, let them choose truthful/lie 3. **Create
+NPC task definitions**: Define task difficulty, consequences for each encounter 4. **Test social
+pressure**: Run scenarios where multiple lies create cascading skepticism 5. **Refine Korrin's rumor
+system**: Make her the player's reputation management challenge
 
 ---
 

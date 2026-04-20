@@ -58,10 +58,8 @@ for name, text in data.items():
 
 ## What Gets Cleaned
 
-✓ OCR artifacts (page numbers, brackets, markers)
-✓ Encoding issues (CRLF, smart quotes, em dashes)
-✓ Fragmentation (hyphenation, line breaks)
-✓ Excessive whitespace (preserves poetry formatting)
+✓ OCR artifacts (page numbers, brackets, markers) ✓ Encoding issues (CRLF, smart quotes, em dashes)
+✓ Fragmentation (hyphenation, line breaks) ✓ Excessive whitespace (preserves poetry formatting)
 
 ## Collections Included
 
@@ -166,12 +164,10 @@ SQLite database (`poetry_hub.db`) tracks:
 
 ## Key Guarantees
 
-✅ **CLEAN** - No OCR artifacts, encoding issues, or markup
-✅ **USABLE** - No fragmentation, complete lines and stanzas
-✅ **VALIDATED** - Every collection passes 5-level quality checks
-✅ **INTEGRATED** - Works with all your processing modes
-✅ **TRACKED** - Full audit trail of all operations
-✅ **SCALABLE** - Easy to add more poetry collections
+✅ **CLEAN** - No OCR artifacts, encoding issues, or markup ✅ **USABLE** - No fragmentation, complete
+lines and stanzas ✅ **VALIDATED** - Every collection passes 5-level quality checks ✅ **INTEGRATED**
+- Works with all your processing modes ✅ **TRACKED** - Full audit trail of all operations ✅
+**SCALABLE** - Easy to add more poetry collections
 
 ## One More Thing
 

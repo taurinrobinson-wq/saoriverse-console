@@ -45,10 +45,10 @@ Velinor is an innovative interactive fiction experience built with:
 ```bash
 
 
-# Clone repo and navigate
+## Clone repo and navigate
 cd saoriverse-console
 
-# Install dependencies
+## Install dependencies
 
 ```text
 
@@ -60,14 +60,14 @@ cd saoriverse-console
 
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
-# Initialize
+## Initialize
 engine = VelinorEngine(player_name="Traveler") orchestrator = VelinorTwineOrchestrator(
 game_engine=engine, story_path="velinor/stories/sample_story.json" )
 
-# Start game
+## Start game
 state = orchestrator.start_game()
 
-# Process player input
+## Process player input
 state = orchestrator.process_player_action( choice_index=0,  # Select first choice
 player_id="player_1"
 
@@ -312,26 +312,26 @@ velinor/
 ```python
 
 
-# Initialize
+## Initialize (2)
 orchestrator = VelinorTwineOrchestrator( game_engine=engine,
 story_path="velinor/stories/sample_story.json" )
 
-# Start
+## Start
 state = orchestrator.start_game() print(state['main_dialogue']) print("Choices:", state['choices'])
 
-# Player chooses
+## Player chooses
 state = orchestrator.process_player_action(choice_index=0)
 
-# Or player types
+## Or player types
 state = orchestrator.process_player_action( player_input="I approach cautiously" )
 
-# Get result
+## Get result
 print(state['npc_dialogue']) print("New location:", state['game_state']['current_location'])
 
-# Save
+## Save
 orchestrator.save_game("saves/game_001.json")
 
-# Load
+## Load
 
 ```text
 ```text

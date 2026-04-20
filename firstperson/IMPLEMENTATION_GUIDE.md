@@ -6,14 +6,13 @@
 
 ### Key Features (MVP)
 
-✅ **Onboarding Ritual** - 3-step guided flow (Welcome → Mode Selection → Personalization)
-✅ **Multi-Mode First Turn** - Ritual, Casual, or Reflective conversation starter
-✅ **Prosody-Aware Responses** - Displays emotions, glyphs, confidence scores, tone
-✅ **Memory Capsules** - Relational context snapshots saved every 5 messages
-✅ **Local-First Storage** - All conversations stored privately on device via AsyncStorage
-✅ **Offline-First Sync** - Messages queue when offline, auto-sync when online
-✅ **Settings Dashboard** - Preferences, conversation management, privacy controls
-✅ **Streamlined UI** - Bottom tab navigation (Chat, Settings) with minimal cognitive load
+✅ **Onboarding Ritual** - 3-step guided flow (Welcome → Mode Selection → Personalization) ✅
+**Multi-Mode First Turn** - Ritual, Casual, or Reflective conversation starter ✅ **Prosody-Aware
+Responses** - Displays emotions, glyphs, confidence scores, tone ✅ **Memory Capsules** - Relational
+context snapshots saved every 5 messages ✅ **Local-First Storage** - All conversations stored
+privately on device via AsyncStorage ✅ **Offline-First Sync** - Messages queue when offline,
+auto-sync when online ✅ **Settings Dashboard** - Preferences, conversation management, privacy
+controls ✅ **Streamlined UI** - Bottom tab navigation (Chat, Settings) with minimal cognitive load
 
 ##
 
@@ -78,11 +77,10 @@ Manages all local data using `@react-native-async-storage/async-storage`.
 ```
 
 
-fp_conversations         # All conversations and messages
-fp_memory_capsules      # Relational context snapshots
-fp_user_prefs           # User preferences (theme, notifications, etc)
-fp_sync_queue           # Messages queued during offline
-fp_onboarding_complete  # Onboarding completion marker
+fp_conversations         # All conversations and messages fp_memory_capsules      # Relational
+context snapshots fp_user_prefs           # User preferences (theme, notifications, etc)
+fp_sync_queue           # Messages queued during offline fp_onboarding_complete  # Onboarding
+completion marker
 
 ```
 
@@ -110,15 +108,10 @@ Handles all backend communication with prosody parsing and offline detection.
 
 ```javascript
 
-{
-  emotion: "melancholy",         // e.g., joy, sadness, anger, etc
-  confidence: 0.87,              // 0.0 - 1.0
-  intensity: "high",             // gentle, moderate, high
-  tone: "reflective",            // tone of response
-  glyphs: [
-    { name: "Ember", score: 0.92, symbol: "🔥", description: "..." },
-    { name: "Echo", score: 0.78, symbol: "📍", description: "..." }
-  ]
+{ emotion: "melancholy",         // e.g., joy, sadness, anger, etc confidence: 0.87,              //
+0.0 - 1.0 intensity: "high",             // gentle, moderate, high tone: "reflective",            //
+tone of response glyphs: [ { name: "Ember", score: 0.92, symbol: "🔥", description: "..." }, { name:
+"Echo", score: 0.78, symbol: "📍", description: "..." } ]
 
 ```text
 ```text
@@ -217,13 +210,9 @@ Displays individual messages with optional prosody metadata.
 ```javascript
 
 
-{
-  message: {
+{ message: {
     role: "user" | "assistant",
-    text: string,
-    prosody?: {...},              // Optional metadata
-    timestamp?: ISO string,
-  },
+text: string, prosody?: {...},              // Optional metadata timestamp?: ISO string, },
   theme: "light" | "dark"
 
 ```text
@@ -312,13 +301,13 @@ SyncService.performSync() triggered
 ```bash
 
 
-# Install Node.js 18+
+## Install Node.js 18+
 node --version
 
-# Install Expo CLI
+## Install Expo CLI
 npm install -g expo-cli
 
-# Install EAS CLI (for building)
+## Install EAS CLI (for building)
 
 ```text
 ```text
@@ -332,23 +321,23 @@ npm install -g expo-cli
 
 cd /workspaces/saoriverse-console/firstperson
 
-# Install dependencies
+## Install dependencies
 npm install
 
-# Start Expo dev server
+## Start Expo dev server
 npm start
 
-# Scan QR code with Expo Go app (iOS/Android)
+## Scan QR code with Expo Go app (iOS/Android)
 
-# Or launch emulator:
+## Or launch emulator:
 
-# - Android: npm run android
+## - Android: npm run android
 
-# - iOS: npm run ios
+## - iOS: npm run ios
 
-# Test on device:
+## Test on device:
 
-# - Physical device: Expo Go app → Scan QR
+## - Physical device: Expo Go app → Scan QR
 
 ```text
 ```
@@ -358,10 +347,10 @@ npm start
 
 ```bash
 
-# Configure backend URL (in src/config.js):
+## Configure backend URL (in src/config.js):
 REACT_APP_SAOYNX_API_URL=http://192.168.1.100:8000  # Replace with your IP
 
-# Or in environment:
+## Or in environment:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 ```text
 
@@ -466,12 +455,12 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 ```bash
 
 
-# Check backend is running
+## Check backend is running
 curl http://localhost:8000/health
 
-# Check IP address is correct in config.js
+## Check IP address is correct in config.js
 
-# For device on same WiFi: use computer's LAN IP, not localhost
+## For device on same WiFi: use computer's LAN IP, not localhost
 ipconfig getifaddr en0  # macOS
 
 ```text
@@ -485,10 +474,10 @@ ipconfig getifaddr en0  # macOS
 
 
 
-# Ensure package is installed
+## Ensure package is installed
 npm list @react-native-async-storage/async-storage
 
-# Clear cache and reinstall
+## Clear cache and reinstall
 rm -rf node_modules
 
 ```text
@@ -499,10 +488,10 @@ rm -rf node_modules
 
 ```bash
 
-# Ensure all navigation dependencies installed
+## Ensure all navigation dependencies installed
 npm install @react-navigation/native @react-navigation/bottom-tabs
 
-# Clear Expo cache
+## Clear Expo cache
 expo start -c
 ```
 
@@ -524,17 +513,12 @@ expo start -c
 
 **New Files (11):**
 
-1. ✅ `App.js` - Main app with navigation
-2. ✅ `src/screens/ChatScreen.js` - Chat interface
-3. ✅ `src/screens/OnboardingScreen.js` - Onboarding flow
-4. ✅ `src/screens/SettingsScreen.js` - Settings interface
-5. ✅ `src/components/MessageBubble.js` - Message display
-6. ✅ `src/components/ChatInput.js` - Input component
-7. ✅ `src/services/ApiService.js` - Backend integration
-8. ✅ `src/services/StorageService.js` - Local storage
-9. ✅ `src/services/SyncService.js` - Offline sync
-10. ✅ `package.json` - Updated dependencies
-11. ✅ This guide document
+1. ✅ `App.js` - Main app with navigation 2. ✅ `src/screens/ChatScreen.js` - Chat interface 3. ✅
+`src/screens/OnboardingScreen.js` - Onboarding flow 4. ✅ `src/screens/SettingsScreen.js` - Settings
+interface 5. ✅ `src/components/MessageBubble.js` - Message display 6. ✅
+`src/components/ChatInput.js` - Input component 7. ✅ `src/services/ApiService.js` - Backend
+integration 8. ✅ `src/services/StorageService.js` - Local storage 9. ✅ `src/services/SyncService.js`
+- Offline sync 10. ✅ `package.json` - Updated dependencies 11. ✅ This guide document
 
 **Existing Files Updated:**
 
@@ -548,12 +532,9 @@ See `Offshoots/FirstPerson-Mobile/FirstPerson-Mobile.md` for MVP spec.
 
 **Quick Deploy Checklist:**
 
-1. Configure EAS Build: `eas build:configure`
-2. Build for iOS: `eas build --platform ios --distribution testflight`
-3. Build for Android: `eas build --platform android --distribution play`
-4. Submit to TestFlight / Play Store
-5. Monitor for crash reports
-6. Iterate on user feedback
+1. Configure EAS Build: `eas build:configure` 2. Build for iOS: `eas build --platform ios
+--distribution testflight` 3. Build for Android: `eas build --platform android --distribution play`
+4. Submit to TestFlight / Play Store 5. Monitor for crash reports 6. Iterate on user feedback
 
 ##
 

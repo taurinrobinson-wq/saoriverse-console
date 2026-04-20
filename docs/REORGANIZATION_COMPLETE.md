@@ -223,12 +223,12 @@ saoriverse-console/
 
 git branch
 
-# * refactor/reorganization-master
-#   main
+## * refactor/reorganization-master
+##   main
 
 git log --oneline | head -5
 
-# b5d65d3 refactor: Complete codebase reorganization
+## b5d65d3 refactor: Complete codebase reorganization
 
 ```text
 ```text
@@ -241,10 +241,10 @@ git log --oneline | head -5
 
 
 
-# To rollback to pre-reorganization state:
+## To rollback to pre-reorganization state:
 git checkout pre-reorganization
 
-# or
+## or
 git reset --hard pre-reorganization
 
 ```

@@ -10,11 +10,11 @@ training response
 
 This is a reference implementation showing exactly where to add the learning pipeline. """
 
-# ============================================================================
+## ============================================================================
 
-# CURRENT signal_parser.py FLOW (Simplified)
+## CURRENT signal_parser.py FLOW (Simplified)
 
-# ============================================================================
+## ============================================================================ (2)
 
 """ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
 
@@ -34,11 +34,11 @@ if glyphs: best_glyph, response = select_best_glyph_and_response( glyphs, signal
 response = generate_contextual_response(signals) return { "best_glyph": None,  # ← THIS IS THE
 PROBLEM "voltage_response": response, "signals": signals, "gates": gates } """
 
-# ============================================================================
+## ============================================================================ (3)
 
-# PHASE 2 INTEGRATION: The Complete Modification
+## PHASE 2 INTEGRATION: The Complete Modification
 
-# ============================================================================
+## ============================================================================ (4)
 
 """ MODIFICATION TO signal_parser.py:
 
@@ -50,7 +50,7 @@ from emotional_os.glyphs.glyph_learner import GlyphLearner from
 emotional_os.glyphs.learning_response_generator import LearningResponseGenerator from
 emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 
-# Initialize managers (once, at module load)
+## Initialize managers (once, at module load)
 
 _glyph_learner = GlyphLearner() _learning_response_gen = LearningResponseGenerator()
 _shared_glyph_manager = SharedGlyphManager()
@@ -58,11 +58,11 @@ _shared_glyph_manager = SharedGlyphManager()
 def _get_user_hash(user_id: str = None) -> str: """Create anonymous user hash.""" if not user_id:
 user_id = "anonymous" return hashlib.sha256(user_id.encode()).hexdigest()[:16]
 
-# ============================================================================
+## ============================================================================ (5)
 
-# MODIFIED parse_input() with Learning Pipeline
+## MODIFIED parse_input() with Learning Pipeline
 
-# ============================================================================
+## ============================================================================ (6)
 
 def parse_input(text: str, user_hash: Optional[str] = None) -> Dict: """ Parse emotional input and
 return glyph + response.
@@ -143,11 +143,11 @@ tone_map = { "grief": "grief", "longing": "longing", "containment": "containment
 
 return tone_map.get(primary_tone, "unknown")
 
-# ============================================================================
+## ============================================================================ (7)
 
-# BONUS: Admin Dashboard Helpers
+## BONUS: Admin Dashboard Helpers
 
-# ============================================================================
+## ============================================================================ (8)
 
 def get_system_learning_status() -> Dict: """ Get current system learning status. Useful for admin
 dashboard. """ health =_shared_glyph_manager.get_system_health_report()
@@ -165,11 +165,11 @@ def promote_candidate_glyph(glyph_name: str) -> bool: """ Move a candidate glyph
 production. Called after human review/validation. """
 return_glyph_learner.promote_candidate_to_production(glyph_name)
 
-# ============================================================================
+## ============================================================================ (9)
 
-# INTEGRATION CHECKLIST
+## INTEGRATION CHECKLIST
 
-# ============================================================================
+## ============================================================================ (10)
 
 """ ✓ Step 1: Add imports at top of signal_parser.py ✓ Step 2: Initialize managers (module level) ✓
 Step 3: Modify parse_input() to include learning pipeline ✓ Step 4: Add _determine_emotional_tone()
@@ -186,11 +186,11 @@ AFTER: Input: "I feel caught between who I pretend to be and who I really am" Si
 (trains system) Database: Logged, versioned, adoption tracked System: Ready for next user with
 similar emotion """
 
-# ============================================================================
+## ============================================================================ (11)
 
-# TESTING THE INTEGRATION
+## TESTING THE INTEGRATION
 
-# ============================================================================
+## ============================================================================ (12)
 
 """ After integration, test with:
 
@@ -208,4 +208,4 @@ user_hash="test_user_001" )
 
 print(result["best_glyph"])  # Should be "Fractured Identity" or similar print(result["source"])
 
-# Should be "glyph_learning_pipeline" print(result["confidence"])  # Should be > 0.5 """
+## Should be "glyph_learning_pipeline" print(result["confidence"])  # Should be > 0.5 """

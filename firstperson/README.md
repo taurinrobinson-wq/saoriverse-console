@@ -1,6 +1,7 @@
 # firstperson (Expo), minimal scaffold
 
-This folder contains a minimal Expo React Native app used to test the `firstperson` mobile client against the Python FastAPI backend in this repo.
+This folder contains a minimal Expo React Native app used to test the `firstperson` mobile client
+against the Python FastAPI backend in this repo.
 
 Quick start (development):
 
@@ -44,8 +45,7 @@ EAS (optional)
 ```bash
 
 
-cd firstperson
-eas build:configure
+cd firstperson eas build:configure
 
 ```
 

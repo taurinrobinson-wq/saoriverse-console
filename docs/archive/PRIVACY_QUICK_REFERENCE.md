@@ -226,11 +226,9 @@ A: Call `/user/data-delete` (deletes all records with that user's hash).
 
 If raw text appears in database:
 
-1. **Immediate:** Stop writes to conversation_logs_anonymized
-2. **Investigation:** Query for raw text fields
-3. **Fix:** Update encoding logic, redeploy
-4. **Audit:** Check what was stored, delete if needed
-5. **Report:** Document incident for compliance
+1. **Immediate:** Stop writes to conversation_logs_anonymized 2. **Investigation:** Query for raw
+text fields 3. **Fix:** Update encoding logic, redeploy 4. **Audit:** Check what was stored, delete
+if needed 5. **Report:** Document incident for compliance
 
 ## Success Indicators
 
@@ -244,15 +242,9 @@ If raw text appears in database:
 
 ## Next Steps
 
-1. Read PRIVACY_DEPLOYMENT_GUIDE.md
-2. Run verify_privacy_encoding.py
-3. Find storage points in signal_parser.py
-4. Integrate encode_and_store_conversation()
-5. Test locally
-6. Deploy to staging
-7. Run compliance check
-8. Deploy to production
-9. Monitor with monthly compliance reports
+1. Read PRIVACY_DEPLOYMENT_GUIDE.md 2. Run verify_privacy_encoding.py 3. Find storage points in
+signal_parser.py 4. Integrate encode_and_store_conversation() 5. Test locally 6. Deploy to staging
+7. Run compliance check 8. Deploy to production 9. Monitor with monthly compliance reports
 
 ##
 

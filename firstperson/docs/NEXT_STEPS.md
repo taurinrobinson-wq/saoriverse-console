@@ -39,12 +39,12 @@ Add logging to see:
 
 ```python
 
-# After glyph fetch:
+## After glyph fetch:
 glyphs = fetch_glyphs(gates, db_path)  # Returns 36 glyphs
 logger.info(f"DEBUG: Fetched {len(glyphs)} glyphs")
 logger.info(f"DEBUG: Glyph names: {[g.get('glyph_name') for g in glyphs]}")
 
-# After response composition:
+## After response composition:
 logger.info(f"DEBUG: Response source: {response_source}")
 ```sql
 
@@ -88,7 +88,7 @@ Once you see where the pipe breaks, reconnect it. Likely needs:
 ```python
 
 
-# If glyphs exist and composition available:
+## If glyphs exist and composition available:
 if glyphs and response_composer: contextual_response =
 response_composer.compose_multi_glyph_response( glyphs=glyphs, signals=signals,
 input_text=input_text

@@ -17,9 +17,9 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```python
 
-# Input: "I'm really excited about this!"
+## Input: "I'm really excited about this!"
 
-# Detected tone: "joyful"
+## Detected tone: "joyful"
 
 ```text
 
@@ -45,15 +45,15 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ```python
 
 
-# Input: "This is AMAZING!!!!"
+## Input: "This is AMAZING!!!!"
 
-# Measured intensity: 0.85 (high)
+## Measured intensity: 0.85 (high)
 
-# Adjustment: "This will be AMAZING!" (more affirming, energetic)
+## Adjustment: "This will be AMAZING!" (more affirming, energetic)
 
-# Input: "maybe it could work?"
+## Input: "maybe it could work?"
 
-# Measured intensity: 0.35 (low)
+## Measured intensity: 0.35 (low)
 
 ```text
 
@@ -76,13 +76,13 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ```python
 
 
-# Suggested phrases based on emotional state:
+## Suggested phrases based on emotional state:
 
-# Anxious: "I'm holding space for your concerns"
+## Anxious: "I'm holding space for your concerns"
 
-# Sad: "I'm here with you in this"
+## Sad: "I'm here with you in this"
 
-# Joyful: "I'm present with your excitement"
+## Joyful: "I'm present with your excitement"
 
 ```text
 ```text
@@ -108,21 +108,21 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 
 
-# Conversation phases:
+## Conversation phases:
 
-# 1-5 msgs: "opening" (establish rhythm, energy 0.6)
+## 1-5 msgs: "opening" (establish rhythm, energy 0.6)
 
-# 5-15 msgs: "deepening" (build momentum, energy 0.7)
+## 5-15 msgs: "deepening" (build momentum, energy 0.7)
 
-# 15-25 msgs: "climax" (peak engagement, energy 0.8)
+## 15-25 msgs: "climax" (peak engagement, energy 0.8)
 
-# 25+ msgs: "closing" (wind down, energy 0.4)
+## 25+ msgs: "closing" (wind down, energy 0.4)
 
-# Fatigue detection:
+## Fatigue detection:
 
-# - Messages getting shorter? (fatigue detected)
+## - Messages getting shorter? (fatigue detected)
 
-# - Session >30min + 20+ messages? (fatigue detected)
+## - Session >30min + 20+ messages? (fatigue detected)
 
 ```text
 ```
@@ -137,30 +137,30 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ```python
 from src.emotional_os.tier2_aliveness import Tier2Aliveness
 
-# Initialize once per session
+## Initialize once per session
 tier2 = Tier2Aliveness()
 
-# Process response through Tier 2
+## Process response through Tier 2
 enhanced_response, metrics = tier2.process_for_aliveness(
     user_input="I'm excited about this!",
     base_response="That's great. Tell me more.",
     history=conversation_history  # Optional
 )
 
-# Use the enhanced response
+## Use the enhanced response
 print(enhanced_response)
 
-# Check metrics (optional)
+## Check metrics (optional)
 print(metrics)
 
-# {
-#   "tone": "joyful",
-#   "intensity": 0.8,
-#   "phase": "deepening",
-#   "energy": 0.7,
-#   "momentum": "building",
-#   "fatigue_detected": False,
-#   "processing_time_ms": 22.5
+## {
+##   "tone": "joyful",
+##   "intensity": 0.8,
+##   "phase": "deepening",
+##   "energy": 0.7,
+##   "momentum": "building",
+##   "fatigue_detected": False,
+##   "processing_time_ms": 22.5
 
 ```text
 
@@ -175,15 +175,15 @@ If you're using the response pipeline:
 ```python
 
 
-# In response_handler.py:
+## In response_handler.py:
 
-# ✅ Tier 2 is already initialized
+## ✅ Tier 2 is already initialized
 
-# ✅ Already processing after Tier 1
+## ✅ Already processing after Tier 1
 
-# ✅ Metrics logged automatically
+## ✅ Metrics logged automatically
 
-# ✅ Graceful fallback if fails
+## ✅ Graceful fallback if fails
 
 ```text
 
@@ -311,7 +311,7 @@ After processing:
 
 metrics = { "tone": "joyful",              # Detected emotional tone "intensity": 0.75,
 
-# 0.0 (min) to 1.0 (max) "phase": "deepening",          # opening/deepening/climax/closing "energy":
+## 0.0 (min) to 1.0 (max) "phase": "deepening",          # opening/deepening/climax/closing "energy":
 0.7,                 # Recommended energy level "momentum": "building",        #
 Building/sustaining/winding "fatigue_detected": False,     # Is user getting tired?
 "processing_time_ms": 22.5     # How long it took
@@ -355,15 +355,15 @@ To adjust Tier 2 behavior:
 
 
 
-# In tier2_aliveness.py:
+## In tier2_aliveness.py:
 
-# Change tone markers
+## Change tone markers
 attunement.tone_markers["joyful"] = ["happy", "excited", ...]
 
-# Change embodied phrases
+## Change embodied phrases
 embodied.embodied_phrases["opening"] = ["I'm listening", ...]
 
-# Change energy levels for phases
+## Change energy levels for phases
 pacing = tracker.calculate_optimal_pacing("deepening")
 
 ```text

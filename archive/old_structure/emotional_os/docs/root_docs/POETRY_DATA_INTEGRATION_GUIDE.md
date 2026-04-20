@@ -4,11 +4,12 @@
 
 Your poetry data pipeline is now complete with three core components:
 
-1. **poetry_text_cleaner.py** - Comprehensive text cleaning (OCR artifacts, encoding issues, fragmentation)
-2. **poetry_data_hub.py** - Unified data management with SQLite database
-3. **poetry_data_pipeline.py** - End-to-end pipeline orchestration
+1. **poetry_text_cleaner.py** - Comprehensive text cleaning (OCR artifacts, encoding issues,
+fragmentation) 2. **poetry_data_hub.py** - Unified data management with SQLite database 3.
+**poetry_data_pipeline.py** - End-to-end pipeline orchestration
 
-This ensures all extracted poetry is **clean, usable, non-fragmented, and accessible to all processing modes**.
+This ensures all extracted poetry is **clean, usable, non-fragmented, and accessible to all
+processing modes**.
 
 ## Quick Start
 
@@ -238,11 +239,10 @@ elif processing_mode == 'ritual':
 
 All poetry passes 5-level validation:
 
-1. **Size Check** - Minimum 5,000 bytes (actual poetry content)
-2. **Line Distribution** - Average 20-200 characters per line
-3. **UTF-8 Encoding** - Valid Unicode throughout
-4. **Special Characters** - Less than 10% artifacts/symbols
-5. **Completeness** - No markers indicating fragmentation
+1. **Size Check** - Minimum 5,000 bytes (actual poetry content) 2. **Line Distribution** - Average
+20-200 characters per line 3. **UTF-8 Encoding** - Valid Unicode throughout 4. **Special
+Characters** - Less than 10% artifacts/symbols 5. **Completeness** - No markers indicating
+fragmentation
 
 ## Quality Metrics Collected
 
@@ -329,11 +329,10 @@ Expected times (single-threaded):
 
 ## Next Steps
 
-1. **Run the pipeline**: `python poetry_data_pipeline.py --process`
-2. **Check status**: `python poetry_data_pipeline.py --status`
-3. **Export for processing**: `python poetry_data_pipeline.py --export poetry_export`
-4. **Integrate with existing systems**: Use `ProcessingModeAdapter` in your code
-5. **Monitor quality**: Check metrics in database periodically
+1. **Run the pipeline**: `python poetry_data_pipeline.py --process` 2. **Check status**: `python
+poetry_data_pipeline.py --status` 3. **Export for processing**: `python poetry_data_pipeline.py
+--export poetry_export` 4. **Integrate with existing systems**: Use `ProcessingModeAdapter` in your
+code 5. **Monitor quality**: Check metrics in database periodically
 
 ## Support
 

@@ -39,11 +39,10 @@
 
 ### How It Learns
 
-1. **Pattern Extraction**: Regex-based emotional phrase detection
-2. **Word Association**: Maps user input to effective responses
-3. **Theme Identification**: Categorizes conversations by emotional content
-4. **Signal Mapping**: Automatically assigns emotional signals to new words
-5. **Effectiveness Scoring**: Evaluates response quality based on:
+1. **Pattern Extraction**: Regex-based emotional phrase detection 2. **Word Association**: Maps user
+input to effective responses 3. **Theme Identification**: Categorizes conversations by emotional
+content 4. **Signal Mapping**: Automatically assigns emotional signals to new words 5.
+**Effectiveness Scoring**: Evaluates response quality based on:
    - Length and thoughtfulness
    - Presence of questions (encourages exploration)
    - Empathetic language
@@ -109,10 +108,10 @@
 
 This redesigned interface is now ready for other users because:
 
-1. **No Technical Exposure**: Backend complexity is completely hidden
-2. **Intuitive Interface**: Familiar chat-based interaction model
-3. **Self-Improving**: Gets better with more conversations
-4. **User-Friendly**: Focus on emotional exploration, not technical details
-5. **Professional UI**: Clean, modern design suitable for therapeutic/wellness contexts
+1. **No Technical Exposure**: Backend complexity is completely hidden 2. **Intuitive Interface**:
+Familiar chat-based interaction model 3. **Self-Improving**: Gets better with more conversations 4.
+**User-Friendly**: Focus on emotional exploration, not technical details 5. **Professional UI**:
+Clean, modern design suitable for therapeutic/wellness contexts
 
-The system now functions like a sophisticated emotional companion that learns and grows with its users, while maintaining the elegant simplicity of a chat interface.
+The system now functions like a sophisticated emotional companion that learns and grows with its
+users, while maintaining the elegant simplicity of a chat interface.

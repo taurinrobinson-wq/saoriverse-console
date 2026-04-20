@@ -501,9 +501,7 @@ SELECT COUNT(*) FROM conversation_logs_anonymized;
 
 **Possible causes:**
 
-1. Too few users in test environment
-2. Too specific quasi-identifiers
-3. Bucket sizes too small
+1. Too few users in test environment 2. Too specific quasi-identifiers 3. Bucket sizes too small
 
 **Solutions:**
 

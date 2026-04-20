@@ -33,11 +33,10 @@
 
 **Velinor** is an emotional narrative game engine that:
 
-1. **Tracks emotional state** through TONE stats (Empathy, Skepticism, Integration, Awareness)
-2. **Uses glyphs** as a 3-tier cipher to encode emotional meaning into dialogue
-3. **Models NPC responses** based on coherence and emotional gates
-4. **Presents 6 distinct endings** based on player emotional trajectory
-5. **Supports save/load** for session persistence and exploration
+1. **Tracks emotional state** through TONE stats (Empathy, Skepticism, Integration, Awareness) 2.
+**Uses glyphs** as a 3-tier cipher to encode emotional meaning into dialogue 3. **Models NPC
+responses** based on coherence and emotional gates 4. **Presents 6 distinct endings** based on
+player emotional trajectory 5. **Supports save/load** for session persistence and exploration
 
 ### Design Principle
 
@@ -199,10 +198,9 @@ Tier 3 (Plaintext):
 - `velinor/docs/GLYPH_CIPHER_3_TIER_INTEGRATION.md` — Detailed glyph semantics
 
 **How to Add/Modify:**
-1. Edit `glyphs_complete.json` — add glyph entry with all 3 tiers
-2. Assign category (base/fragment/transcendence)
-3. Set emotional associations in tier 2 and 3
-4. Test via `test_glyph_cipher.py`
+1. Edit `glyphs_complete.json` — add glyph entry with all 3 tiers 2. Assign category
+(base/fragment/transcendence) 3. Set emotional associations in tier 2 and 3 4. Test via
+`test_glyph_cipher.py`
 
 ---
 
@@ -233,10 +231,8 @@ Tier 3 (Plaintext):
 - `velinor/docs/DIALOGUE_SYSTEM_COMPLETE_INDEX.md` — Trait-to-dialogue mapping
 
 **How to Add/Modify:**
-1. Edit `trait_profiles.json` — add trait with emotional gates
-2. Link to relevant glyphs
-3. Define influence impact on NPC choices
-4. Test with `test_trait_system_foundation.py`
+1. Edit `trait_profiles.json` — add trait with emotional gates 2. Link to relevant glyphs 3. Define
+influence impact on NPC choices 4. Test with `test_trait_system_foundation.py`
 
 ---
 
@@ -314,11 +310,9 @@ passage = {
 - `velinor/engine/passage_manager.py` — Passage loading and navigation
 
 **How to Add/Modify:**
-1. Edit `story_definitions.py` — add passage with choices
-2. Set `tone_impact` and `influence_impact` values
-3. Define `gates` for conditional content
-4. Link to glyphs in passage content
-5. Test with `test_passage_manager.py`
+1. Edit `story_definitions.py` — add passage with choices 2. Set `tone_impact` and
+`influence_impact` values 3. Define `gates` for conditional content 4. Link to glyphs in passage
+content 5. Test with `test_passage_manager.py`
 
 ---
 
@@ -358,21 +352,17 @@ passage = {
 ### NPC Response Engine
 
 **Process:**
-1. Get current game state (TONE, coherence, influence with NPC)
-2. Evaluate emotional gates
-3. Select appropriate response pool
-4. Generate response with glyphs and trait activation
-5. Calculate influence impact
+1. Get current game state (TONE, coherence, influence with NPC) 2. Evaluate emotional gates 3.
+Select appropriate response pool 4. Generate response with glyphs and trait activation 5. Calculate
+influence impact
 
 **Files to Modify:**
 - `velinor/engine/npc_response_engine.py` — Response selection logic
 - `velinor/data/npc_profiles.json` — NPC gates and response pools
 
 **How to Add/Modify:**
-1. Edit `npc_profiles.json` — add NPC entry
-2. Define traits, emotional stance, gates
-3. Create response pools with trait-tagged responses
-4. Test with `test_npc_manager.py`
+1. Edit `npc_profiles.json` — add NPC entry 2. Define traits, emotional stance, gates 3. Create
+response pools with trait-tagged responses 4. Test with `test_npc_manager.py`
 
 **NEW (Post-2.0) NPC Updates:**
 
@@ -620,16 +610,16 @@ Quick reference:
 ### Running Tests
 
 ```bash
-# All tests
+## All tests
 pytest velinor/tests/
 
-# Specific test file
+## Specific test file
 pytest velinor/tests/test_npc_manager.py
 
-# With coverage
+## With coverage
 pytest velinor/tests/ --cov=velinor/engine
 
-# Single test
+## Single test
 pytest velinor/tests/test_trait_system_foundation.py::test_trait_gate_evaluation
 ```
 

@@ -4,13 +4,13 @@
 
 ```bash
 
-# 1. Start services
+## 1. Start services
 docker-compose -f docker-compose.local.yml up -d
 
-# 2. Pull a model (llama3 recommended, ~4.7GB)
+## 2. Pull a model (llama3 recommended, ~4.7GB)
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# 3. Open Streamlit
+## 3. Open Streamlit
 
 ```text
 
@@ -55,17 +55,17 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 
 client = get_ollama_client_singleton()
 
-# Check if available
+## Check if available
 if client.is_available(): print("✅ Ollama running")
 
-# Get models
+## Get models
 models = client.get_available_models() print(f"Available models: {models}")
 
-# Generate response
+## Generate response
 response = client.generate( prompt="Why is the sky blue?", model="llama3", temperature=0.7,
 num_predict=512 ) print(response)
 
-# Generate with conversation context
+## Generate with conversation context
 response = client.generate_with_context( user_input="I'm feeling overwhelmed",
 conversation_history=[ {"role": "user", "content": "I've been stressed"}, {"role": "assistant",
 "content": "That sounds challenging"}, ], model="llama3" )
@@ -81,31 +81,31 @@ conversation_history=[ {"role": "user", "content": "I've been stressed"}, {"role
 
 
 
-# Start services
+## Start services
 docker-compose -f docker-compose.local.yml up -d
 
-# Stop services
+## Stop services
 docker-compose -f docker-compose.local.yml down
 
-# View logs
+## View logs
 docker-compose -f docker-compose.local.yml logs -f streamlit docker-compose -f
 docker-compose.local.yml logs -f ollama
 
-# Check status
+## Check status
 docker-compose -f docker-compose.local.yml ps
 
-# Pull a model
+## Pull a model
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3 docker-compose -f
 docker-compose.local.yml exec ollama ollama pull mistral docker-compose -f docker-compose.local.yml
 exec ollama ollama pull orca-mini
 
-# List models
+## List models
 docker-compose -f docker-compose.local.yml exec ollama ollama list
 
-# Remove container but keep data
+## Remove container but keep data
 docker-compose -f docker-compose.local.yml rm
 
-# Full cleanup (removes models!)
+## Full cleanup (removes models!)
 
 ```text
 ```
@@ -115,10 +115,10 @@ docker-compose -f docker-compose.local.yml rm
 
 ```bash
 
-# Ollama base URL (auto-configured in Docker)
+## Ollama base URL (auto-configured in Docker)
 OLLAMA_BASE_URL=http://ollama:11434
 
-# Local development (laptop, desktop)
+## Local development (laptop, desktop)
 ```text
 
 ```text
@@ -144,10 +144,10 @@ mistral     → Medium (4.1GB), well-rounded
 ```bash
 
 
-# Check health
+## Check health
 curl http://localhost:11434/api/tags
 
-# Generate response
+## Generate response (2)
 curl -X POST http://localhost:11434/api/generate \
 
 ```text
@@ -171,11 +171,11 @@ Expected: All 5 checks pass ✅
 ```python
 import streamlit as st
 
-# Check session state
+## Check session state
 st.write("Ollama Available:", st.session_state.get("ollama_available"))
 st.write("Models:", st.session_state.get("ollama_models"))
 
-# Test generation
+## Test generation
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 client = get_ollama_client_singleton()
 response = client.generate("Test", model="llama3")
@@ -190,13 +190,13 @@ response = client.generate("Test", model="llama3")
 ```bash
 
 
-# Ollama service
+## Ollama service
 docker-compose -f docker-compose.local.yml logs -f ollama
 
-# Streamlit service
+## Streamlit service
 docker-compose -f docker-compose.local.yml logs -f streamlit
 
-# Both
+## Both
 
 ```text
 
@@ -285,17 +285,17 @@ ui_refactored.py                   (Already imports everything)
 ```python
 
 
-# 1. Session initialization
+## 1. Session initialization
 src/emotional_os/deploy/modules/ui_components/session_manager.py
     → _ensure_ollama_client()
     → stores in st.session_state["ollama_client"]
 
-# 2. Response generation (fallback)
+## 2. Response generation (fallback)
 src/emotional_os/deploy/modules/ui_components/response_handler.py
     → _get_ollama_fallback_response()
     → called when glyph processing fails
 
-# 3. Direct client usage (testing)
+## 3. Direct client usage (testing)
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 
 ```

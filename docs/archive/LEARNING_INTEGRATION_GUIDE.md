@@ -1,14 +1,15 @@
 # Integration Guide: Adding Dynamic Learning to Main Response Pipeline
 
-This guide shows how to integrate the learning module into the existing `signal_parser.py` response generation.
+This guide shows how to integrate the learning module into the existing `signal_parser.py` response
+generation.
 
 ## Overview
 
-The learning module should work alongside (not replace) the existing glyph-based response system. It provides an additional layer that:
+The learning module should work alongside (not replace) the existing glyph-based response system. It
+provides an additional layer that:
 
-1. **Tries archetype-based response first** (if a good match exists)
-2. **Falls back to glyph-based response** (existing system)
-3. **Logs all responses** for automatic learning
+1. **Tries archetype-based response first** (if a good match exists) 2. **Falls back to glyph-based
+response** (existing system) 3. **Logs all responses** for automatic learning
 
 ## Step 1: Add Learning Module to signal_parser.py
 

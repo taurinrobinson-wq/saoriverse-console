@@ -17,14 +17,18 @@
 
 #### Why This Works
 
-This glyph adds **heat** to Velinor's emotional climate without breaking accessibility or tone. It's not romance—it's a moment where two wounded people reawaken each other. Sera teaches Korrin uncomplicated care. Korrin reminds Sera that aliveness exists even in collapse.
+This glyph adds **heat** to Velinor's emotional climate without breaking accessibility or tone. It's
+not romance—it's a moment where two wounded people reawaken each other. Sera teaches Korrin
+uncomplicated care. Korrin reminds Sera that aliveness exists even in collapse.
 
 #### Narrative Mechanics
 
 **Three Player Pathways**:
-1. **Observe Silently** (Witnessing): Player sees the moment from distance. Gentle, consensual. Both NPCs gain +0.20 influence. Empathy +2, Presence +1.
-2. **Approach Kindly** (Honor the moment): Player greets them with respect, no prying. Both gain +0.15 influence. Dialogue branch unlocks.
-3. **Expose/Mock** (Break the moment): Player spreads news or teases. Both lose -0.15 influence. Community gossip spreads. Relationship damage.
+1. **Observe Silently** (Witnessing): Player sees the moment from distance. Gentle, consensual. Both
+NPCs gain +0.20 influence. Empathy +2, Presence +1. 2. **Approach Kindly** (Honor the moment):
+Player greets them with respect, no prying. Both gain +0.15 influence. Dialogue branch unlocks. 3.
+**Expose/Mock** (Break the moment): Player spreads news or teases. Both lose -0.15 influence.
+Community gossip spreads. Relationship damage.
 
 #### Gates & Triggers
 
@@ -75,14 +79,14 @@ This glyph adds **heat** to Velinor's emotional climate without breaking accessi
 
 A beat. He doesn’t look at the player when he says it.
 
-Malrik:  
-“I’ve tried to reconstruct the missing pieces, but there’s nothing to reconstruct. It’s absence, not damage.”
+Malrik: “I’ve tried to reconstruct the missing pieces, but there’s nothing to reconstruct. It’s
+absence, not damage.”
 
-High Empathy Variation
-He lets a little more slip — not about love, but about value.
+High Empathy Variation He lets a little more slip — not about love, but about value.
 
-Malrik:  
-“Elenya never understood why I kept such meticulous records. She said memory should breathe, not be pinned down. I used to think she was reckless. Now I’m not sure if she was right… or if I’ve simply lost something I can’t name.”
+Malrik: “Elenya never understood why I kept such meticulous records. She said memory should breathe,
+not be pinned down. I used to think she was reckless. Now I’m not sure if she was right… or if I’ve
+simply lost something I can’t name.”
 
 This keeps the ache without naming the wound.
 
@@ -103,9 +107,13 @@ A breath. Her hand drifts unconsciously to her sternum.
 
 **The Behavioral Mechanism (Gate: Empathy 70+ OR Narrative Presence 75+)**: Activating this glyph near Malrik catalyzes a profound behavioral shift. He becomes suddenly motivated—almost compulsively—to focus on rebuilding the collapsed shared archive space he and Elenya were previously forced to share by Coren. 
 
-Outwardly, he rationalizes: "The archives are a disgrace. I can't stand the disarray. Records are degrading further."
+Outwardly, he rationalizes: "The archives are a disgrace. I can't stand the disarray. Records are
+degrading further."
 
-Subtext: His body remembers wanting to be close to her. He works longer hours without complaining. His voice softens when he speaks about the project. He hums under his breath without noticing. He's lighter, less brittle. He becomes more patient with the player, less guarded around Elenya. He has no conscious explanation for why this work brings him unexpected joy.
+Subtext: His body remembers wanting to be close to her. He works longer hours without complaining.
+His voice softens when he speaks about the project. He hums under his breath without noticing. He's
+lighter, less brittle. He becomes more patient with the player, less guarded around Elenya. He has
+no conscious explanation for why this work brings him unexpected joy.
 
 **Elenya's Mirror Response**: Simultaneously, Elenya feels the shift without understanding it. She senses a warmth around him she can't name, a softening in his presence, a comfort she doesn't trust. She finds herself drawn to help rebuild despite her usual emotional distance—compelled by something she cannot articulate toward the same shared space he's suddenly focused on restoring.
 
@@ -117,26 +125,23 @@ Subtext: His body remembers wanting to be close to her. He works longer hours wi
 
 **Malrik** (He doesn't accuse. He recognizes.)
 
-Malrik:  
-"When the memories returned… there was a shape in them. A place where something used to be. Not torn — removed. Deliberately."
+Malrik: "When the memories returned… there was a shape in them. A place where something used to be.
+Not torn — removed. Deliberately."
 
 He looks at her, not with anger, but with a kind of quiet understanding.
 
-Malrik:  
-"I don't know what we were. I only know there's an absence that fits your outline."
+Malrik: "I don't know what we were. I only know there's an absence that fits your outline."
 
 **Elenya** (She doesn't justify. She admits the cost.)
 
-Elenya:  
-"I did what I had to do to survive. I didn't think… I didn't think the world would ever give those memories back."
+Elenya: "I did what I had to do to survive. I didn't think… I didn't think the world would ever give
+those memories back."
 
 A long silence.
 
-Malrik:  
-"…I'm not asking for them."
+Malrik: "…I'm not asking for them."
 
-Elenya:  
-"I know."
+Elenya: "I know."
 
 #### Trigger Gates
 
@@ -157,21 +162,29 @@ Elenya:
 - Integration with **Legacy** ending branch
 
 **Critical Endgame Leverage—Player Agency Through Emotional Investment**:
-Players who unlock this arc become emotionally invested in pursuing system reactivation/memory restoration, not for mechanical advantage, but because they want to see Malrik and Elenya's relationship restored. By witnessing:
+Players who unlock this arc become emotionally invested in pursuing system reactivation/memory
+restoration, not for mechanical advantage, but because they want to see Malrik and Elenya's
+relationship restored. By witnessing:
 - Their unconscious compulsion to rebuild the shared archive (glyph-driven behavioral trigger)
 - Their attempts to recreate proximity they can't consciously remember
 - The ache of two people standing in the ruins of a life they once shared
 
-Players develop *emotional motivation* to pursue memory restoration as an act of mercy, not just an endgame mechanical choice. This transforms endgame agency: "restore the system because these two people deserve to remember each other" becomes as compelling as any mechanical reward. The arc's power lies in making players witness the cost of severed memory and want to restore it.
+Players develop *emotional motivation* to pursue memory restoration as an act of mercy, not just an
+endgame mechanical choice. This transforms endgame agency: "restore the system because these two
+people deserve to remember each other" becomes as compelling as any mechanical reward. The arc's
+power lies in making players witness the cost of severed memory and want to restore it.
 
 **Critical Caveat—Restoration ≠ Reconciliation**:
-Even if memories are restored, Malrik and Elenya are not guaranteed to reunite. Twenty years have passed. They've both changed fundamentally:
+Even if memories are restored, Malrik and Elenya are not guaranteed to reunite. Twenty years have
+passed. They've both changed fundamentally:
 - Malrik's erudite, argumentative nature has matured into fixed perspective
 - Elenya's spiritual leanings have evolved into complete worldview
 - Both have developed new patterns, conflicts, and ways of being
 - Restoration of memory doesn't erase the divergence of their paths
 
-They may discover irreconcilable differences. Restoration reveals truth, not destiny. **This prevents the arc from feeling like a simple "fix everything" button—restoration is messy, consequential, and sometimes painful.**
+They may discover irreconcilable differences. Restoration reveals truth, not destiny. **This
+prevents the arc from feeling like a simple "fix everything" button—restoration is messy,
+consequential, and sometimes painful.**
 
 ---
 
@@ -184,7 +197,8 @@ They may discover irreconcilable differences. Restoration reveals truth, not des
 - Explains why his withdrawal and nihilism run so deep—the cataclysm confirmed what he already knew
 
 **Memory Overload: The Cost of Restoration**:
-Some NPCs find reintegration of two complete timelines overwhelming. They must simultaneously hold who they were and who they became—and sometimes these identities are irreconcilable. Consequences:
+Some NPCs find reintegration of two complete timelines overwhelming. They must simultaneously hold
+who they were and who they became—and sometimes these identities are irreconcilable. Consequences:
 - Some NPCs choose isolation to protect themselves from psychic fragmentation
 - Some attempt reconciliation and discover grief returns—mourning not just lost time, but divergence of selves
 - Player witnesses that remembering everything doesn't heal; sometimes it wounds more deeply
@@ -251,15 +265,25 @@ Some NPCs find reintegration of two complete timelines overwhelming. They must s
 
 ### What This Adds to Velinor
 
-1. **Heat Without Explicitness**: The world now has charged moments—intimacy, vulnerability, physical presence—without crossing into graphic content. Appropriate for wide audience while honoring mature themes.
+1. **Heat Without Explicitness**: The world now has charged moments—intimacy, vulnerability,
+physical presence—without crossing into graphic content. Appropriate for wide audience while
+honoring mature themes.
 
-2. **Presence as Healing**: Two new arcs demonstrate that healing isn't only solemn ritual and grief-work. Sometimes it emerges from unexpected connection (Sera/Korrin) or from finally articulating what's been lost (Malrik/Elenya).
+2. **Presence as Healing**: Two new arcs demonstrate that healing isn't only solemn ritual and
+grief-work. Sometimes it emerges from unexpected connection (Sera/Korrin) or from finally
+articulating what's been lost (Malrik/Elenya).
 
-3. **Joy as Complex**: Joy in Velinor isn't triumphant or simple. It's fragile, brief, sometimes fleeting—but it matters. Both arcs show joy arising from genuine recognition of another person's aliveness.
+3. **Joy as Complex**: Joy in Velinor isn't triumphant or simple. It's fragile, brief, sometimes
+fleeting—but it matters. Both arcs show joy arising from genuine recognition of another person's
+aliveness.
 
-4. **Necessary Trauma**: The Malrik/Elenya revelation introduces the idea that some painful choices are necessary. Memory severance isn't evil; it's survival. Love sometimes means letting someone carry their loss alone.
+4. **Necessary Trauma**: The Malrik/Elenya revelation introduces the idea that some painful choices
+are necessary. Memory severance isn't evil; it's survival. Love sometimes means letting someone
+carry their loss alone.
 
-5. **Tone Balance**: The original game weighted heavily toward Collapse, Ache, and Sovereignty. These arcs add Joy, Presence, and Trust—creating emotional contrast that makes the heavier emotions resonate more deeply.
+5. **Tone Balance**: The original game weighted heavily toward Collapse, Ache, and Sovereignty.
+These arcs add Joy, Presence, and Trust—creating emotional contrast that makes the heavier emotions
+resonate more deeply.
 
 ---
 
@@ -288,7 +312,8 @@ Some NPCs find reintegration of two complete timelines overwhelming. They must s
 
 ## Design Philosophy
 
-These additions embody the principle that **emotional OS isn't just mechanical—it's architectural**. Every system serves the player's emotional journey:
+These additions embody the principle that **emotional OS isn't just mechanical—it's architectural**.
+Every system serves the player's emotional journey:
 
 - **Glyphs encode meaning** through layered ciphers
 - **Traits define emotional boundaries** that NPCs recognize
@@ -296,7 +321,9 @@ These additions embody the principle that **emotional OS isn't just mechanical�
 - **Endings reflect emotional arc completion**
 - **Heat emerges from genuine recognition**, not forced romance
 
-The Sera/Korrin dynamic and Malrik/Elenya revelation don't just add content—they deepen the game's central thesis: **that in collapse, what matters is how we witness each other's aliveness and how we choose to carry loss**.
+The Sera/Korrin dynamic and Malrik/Elenya revelation don't just add content—they deepen the game's
+central thesis: **that in collapse, what matters is how we witness each other's aliveness and how we
+choose to carry loss**.
 
 ---
 

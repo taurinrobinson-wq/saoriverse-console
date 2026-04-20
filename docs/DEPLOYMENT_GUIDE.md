@@ -62,10 +62,10 @@ That's the only deployment file change needed.
 ```bash
 
 
-# Test that the new structure works locally
+## Test that the new structure works locally
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console streamlit run app.py
 
-# Should launch at http://localhost:8501
+## Should launch at http://localhost:8501
 
 ```text
 ```text
@@ -116,7 +116,7 @@ Wait for deployment to complete (~2-3 min)
 ```bash
 
 
-# If you have railway CLI installed
+## If you have railway CLI installed
 
 ```text
 
@@ -167,7 +167,7 @@ If something goes wrong:
 ```bash
 
 
-# Revert to previous deployment
+## Revert to previous deployment
 git revert HEAD git push origin refactor/reorganization-master
 
 ```text
@@ -240,7 +240,7 @@ The `.streamlit/config.toml` already has correct settings:
 
 streamlit run app.py
 
-# Should work fine
+## Should work fine
 
 ```
 

@@ -56,14 +56,14 @@ Find where the base response is generated, then add:
 ```python
 
 
-# After generating base_response
+## After generating base_response
 enhanced_response, perf_metrics = self.tier1.process_response( user_input=user_message,
 base_response=base_response,  # or generated_response context={"user_id": user_id}  # optional )
 
-# Log metrics if needed
+## Log metrics if needed
 if perf_metrics.get("total") > 0.1: logger.warning(f"Tier 1 slow: {perf_metrics['total']:.3f}s")
 
-# Return enhanced response instead of base
+## Return enhanced response instead of base
 
 ```text
 ```text
@@ -76,7 +76,7 @@ if perf_metrics.get("total") > 0.1: logger.warning(f"Tier 1 slow: {perf_metrics[
 
 
 
-# In logging/monitoring section
+## In logging/monitoring section
 self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
 
 ```text
@@ -124,7 +124,7 @@ In the chat display section:
 ```python
 
 
-# After showing the response
+## After showing the response
 if show_debug_metrics: tier1 = st.session_state.tier1_foundation metrics =
 tier1.get_performance_metrics()
 
@@ -147,14 +147,14 @@ f"{metrics['safety_check']*1000:.1f}ms") with col3:
 
 
 
-# Full test suite (should all pass)
+## Full test suite (should all pass)
 python -m pytest tests/test_tier1_foundation.py -v
 
-# Individual performance test
+## Individual performance test
 python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_performance_under_100ms
 -v
 
-# Manual test script
+## Manual test script
 
 ```text
 ```

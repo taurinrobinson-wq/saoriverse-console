@@ -311,10 +311,10 @@ tracks gaps correctly ✅ Response composition uses memory appropriately
 ```python
 
 
-# Old
+## Old
 response = composer.compose_response(input_text, glyph)
 
-# New (with memory)
+## New (with memory)
 memory.add_turn(input_text, parsed, glyphs, missing, clarifications)
 response = composer.compose_response_with_memory(
     input_text,

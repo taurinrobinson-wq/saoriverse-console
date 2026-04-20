@@ -26,7 +26,8 @@ Gameplay/Mechanical hooks:
 - Role: Mediator with two aspects (Collapse / Sovereignty)
 - Glyphs: Preemptive Severance (cult encampment), Held Ache (market concourse)
 
-Mechanic: Coren's aspect/glyph depends on player orientation; teaches either severance or co-witnessing.
+Mechanic: Coren's aspect/glyph depends on player orientation; teaches either severance or
+co-witnessing.
 
 ### Observational Mini-Game (Sand Diagram Scene)
 - Anchors: Elenya watching, hand on gut; Malrik drawing and unaware

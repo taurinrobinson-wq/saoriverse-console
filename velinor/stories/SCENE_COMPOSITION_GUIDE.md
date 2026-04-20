@@ -113,7 +113,7 @@ story.add_passage(
 
 ```python
 
-# If you want to skip specifying these:
+## If you want to skip specifying these:
 story.add_passage(
     name="exploration",
     text="You wander through ruins...",
@@ -205,7 +205,7 @@ story.add_passage(
 
 ```python
 
-# Market scene
+## Market scene
 story.add_passage(
     name="market_decision",
     text="You stand at a crossroads...",
@@ -213,7 +213,7 @@ story.add_passage(
     npcs=["Ravi", "Nima"]
 )
 
-# Branch 1: Follow underground
+## Branch 1: Follow underground
 story.add_passage(
     name="underground_path",
     text="You descend into darkness...",
@@ -221,7 +221,7 @@ story.add_passage(
     npcs=["Kaelen"]
 )
 
-# Branch 2: Go to shrine
+## Branch 2: Go to shrine
 story.add_passage(
     name="shrine_path",
     text="You climb toward the shrine...",
@@ -233,14 +233,14 @@ story.add_passage(
 
 ## Naming Conventions
 
-### Backgrounds
+### Backgrounds (2)
 
 Use snake_case with descriptive location names:
 - `market_ruins` (not `MarketRuins` or `market-ruins`)
 - `shelter_interior` (not `ShelterInterior`)
 - `shrine_ruins` (not `templeRuins`)
 
-### NPCs
+### NPCs (2)
 
 Use proper case (as characters would be named):
 - `Ravi` (not `ravi` or `RAVI`)
@@ -290,7 +290,7 @@ test
 
 ```python
 
-# Marketplace opening
+## Marketplace opening
 story.add_passage(
     name="market_arrival",
     text="""You emerge from the collapsed underpass into the Market District.
@@ -302,7 +302,7 @@ story.add_passage(
     tags=["marketplace", "act1"]
 )
 
-# NPC encounter
+## NPC encounter
 story.add_passage(
     name="meet_ravi_nima",
     text="""The dust clears. Two figures emerge: Ravi, warm-eyed and calm.
@@ -313,7 +313,7 @@ story.add_passage(
     tags=["marketplace", "act1", "npc_encounter"]
 )
 
-# Ravi path
+## Ravi path
 story.add_passage(
     name="ravi_dialogue",
     text="""You move toward Ravi. His expression softens. "I've learned to

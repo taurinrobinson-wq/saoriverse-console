@@ -1,6 +1,7 @@
 # Secret-scan and allowlist (detect-secrets)
 
-This repository enforces secret scanning both locally (via `pre-commit`) and in CI (GitHub Actions) using `detect-secrets`.
+This repository enforces secret scanning both locally (via `pre-commit`) and in CI (GitHub Actions)
+using `detect-secrets`.
 
 What we added
 
@@ -14,8 +15,8 @@ Why we have an allowlist
 
 How to update the allowlist
 
-1. Edit `.secret-allowlist` in the repository root.
-2. Add one glob per line (fnmatch style). Example:
+1. Edit `.secret-allowlist` in the repository root. 2. Add one glob per line (fnmatch style).
+Example:
 
 ```
 *.env.example
@@ -34,13 +35,14 @@ Security best practices
 
 Rotation / revocation steps (high-level)
 
-1. Identify the provider (e.g., OpenAI, Google Cloud, OAuth provider).
-2. Log in to the provider console and revoke or rotate the key/token.
-3. Update the environment where the app runs to use the new credential (e.g., GitHub Secrets, server env vars).
-4. If the secret was committed and pushed, remove it from history (we already scrubbed `deploy/CoPilot_chunks`) and force-pushed the cleaned branch. Notify collaborators, they must reset to the rewritten `main` (see below).
+1. Identify the provider (e.g., OpenAI, Google Cloud, OAuth provider). 2. Log in to the provider
+console and revoke or rotate the key/token. 3. Update the environment where the app runs to use the
+new credential (e.g., GitHub Secrets, server env vars). 4. If the secret was committed and pushed,
+remove it from history (we already scrubbed `deploy/CoPilot_chunks`) and force-pushed the cleaned
+branch. Notify collaborators, they must reset to the rewritten `main` (see below).
 
-How collaborators can sync after a history rewrite
-If the main branch was force-pushed after a scrub, instruct collaborators to do the following:
+How collaborators can sync after a history rewrite If the main branch was force-pushed after a
+scrub, instruct collaborators to do the following:
 
 ```bash
 

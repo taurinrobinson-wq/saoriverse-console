@@ -115,7 +115,7 @@
   - 5th commit: App integration + tabs
   - 6th commit: API documentation
   - 7th commit: Integration tests
-  
+
 - [x] All changes pushed to GitHub main branch
 - [x] Commit messages descriptive and conventional
 
@@ -125,51 +125,51 @@
 
 ### Local Development
 ```bash
-# 1. Install dependencies
+## 1. Install dependencies
 cd draftshift-web
 pip install -r requirements.txt
 npm install
 
-# 2. Build frontend
+## 2. Build frontend
 npm run build
 
-# 3. Start API server
+## 3. Start API server
 python run_server.py
 
-# 4. Open browser
-# http://localhost:8000
+## 4. Open browser
+## http://localhost:8000
 ```
 
 ### Replit Deployment
 ```bash
-# 1. SSH into Replit or open terminal
+## 1. SSH into Replit or open terminal
 cd /home/runner/saoriverse-console/draftshift-web
 
-# 2. Pull latest code
+## 2. Pull latest code
 git pull origin main
 
-# 3. Install dependencies
+## 3. Install dependencies
 pip install -r requirements.txt
 npm install
 
-# 4. Build frontend
+## 4. Build frontend
 npm run build
 
-# 5. Start server (will auto-bind to Replit's URL)
+## 5. Start server (will auto-bind to Replit's URL)
 python run_server.py
 
-# Server will be available at: https://saoriverse-console.replit.dev
+## Server will be available at: https://saoriverse-console.replit.dev
 ```
 
 ### Docker Deployment
 ```bash
-# Build image
+## Build image
 docker build -f Dockerfile -t draftshift-renamer .
 
-# Run container
+## Run container
 docker run -p 8000:8000 draftshift-renamer
 
-# Access at http://localhost:8000
+## Access at http://localhost:8000
 ```
 
 ---
@@ -179,25 +179,25 @@ docker run -p 8000:8000 draftshift-renamer
 ### Health Check
 ```bash
 curl http://localhost:8000/api/health
-# Expected: {"status": "healthy", ...}
+## Expected: {"status": "healthy", ...}
 ```
 
 ### Supported Types Check
 ```bash
 curl http://localhost:8000/api/renamer/supported-types
-# Expected: List of 25+ document types
+## Expected: List of 25+ document types
 ```
 
 ### Test File Upload
 ```bash
-# Create test file
+## Create test file
 echo "MOTION FOR SUMMARY JUDGMENT dated 01/15/2024" > test.txt
 
-# Upload and analyze
+## Upload and analyze
 curl -F "files=@test.txt" \
   http://localhost:8000/api/renamer/analyze
 
-# Expected: JSON with renamed filename "240115 – Motion for Summary Judgment.txt"
+## Expected: JSON with renamed filename "240115 – Motion for Summary Judgment.txt"
 ```
 
 ### Test ZIP Download
@@ -206,19 +206,15 @@ curl -F "files=@test.txt" \
   http://localhost:8000/api/renamer/rename-and-download \
   -o renamed.zip
 
-# Verify ZIP contents
+## Verify ZIP contents
 unzip -l renamed.zip
-# Expected: Contains "240115 – Motion for Summary Judgment.txt"
+## Expected: Contains "240115 – Motion for Summary Judgment.txt"
 ```
 
 ### Frontend UI Test
-1. Open http://localhost:8000
-2. Click "File Renamer" tab
-3. Upload test.txt via drag-and-drop
-4. Verify preview table shows renamed filename
-5. Click "Download Renamed Files" button
-6. Verify ZIP downloads
-7. Extract and verify file contents
+1. Open http://localhost:8000 2. Click "File Renamer" tab 3. Upload test.txt via drag-and-drop 4.
+Verify preview table shows renamed filename 5. Click "Download Renamed Files" button 6. Verify ZIP
+downloads 7. Extract and verify file contents
 
 ---
 
@@ -262,12 +258,12 @@ unzip -l renamed.zip
 If issues occur:
 
 ```bash
-# Revert to previous stable version
+## Revert to previous stable version
 git log --oneline | head -10  # Find last good commit
 git revert [commit-hash]      # Revert the bad commit
 git push origin main
 
-# Or manually downgrade
+## Or manually downgrade
 git checkout [previous-stable-tag]
 npm run build
 python run_server.py
@@ -309,10 +305,10 @@ python run_server.py
 ### Issue: Port 8000 already in use
 **Solution**: Kill existing process or use different port
 ```bash
-# Windows
+## Windows
 taskkill /F /IM python.exe
 
-# Linux/Mac
+## Linux/Mac
 lsof -ti:8000 | xargs kill -9
 ```
 
@@ -340,11 +336,10 @@ python -m pytest test_filename_normalizer.py -v
 
 ## 📞 Support & Feedback
 
-For issues or suggestions:
-1. Check [GitHub Issues](https://github.com/taurinrobinson/saoriverse-console/issues)
-2. Review error logs: Check uvicorn output for detailed errors
-3. Test endpoints individually: Use cURL or Postman
-4. Check browser console: (F12) for frontend errors
+For issues or suggestions: 1. Check [GitHub
+Issues](https://github.com/taurinrobinson/saoriverse-console/issues) 2. Review error logs: Check
+uvicorn output for detailed errors 3. Test endpoints individually: Use cURL or Postman 4. Check
+browser console: (F12) for frontend errors
 
 ---
 
@@ -352,16 +347,10 @@ For issues or suggestions:
 
 DraftShift Renamer is production-ready when:
 
-✅ All tests passing  
-✅ API server starts without errors  
-✅ Frontend builds and loads correctly  
-✅ File upload and download working  
-✅ Preview table shows correct renames  
-✅ ZIP download contains properly renamed files  
-✅ Error handling graceful  
-✅ Mobile responsive  
-✅ Documentation complete  
-✅ Code committed to GitHub  
+✅ All tests passing ✅ API server starts without errors ✅ Frontend builds and loads correctly ✅ File
+upload and download working ✅ Preview table shows correct renames ✅ ZIP download contains properly
+renamed files ✅ Error handling graceful ✅ Mobile responsive ✅ Documentation complete ✅ Code
+committed to GitHub
 
 **Current Status: ALL CRITERIA MET ✅**
 
@@ -369,4 +358,4 @@ DraftShift Renamer is production-ready when:
 
 **Last Updated**: January 28, 2026  
 **Status**: PRODUCTION READY  
-**Version**: 1.0.0  
+**Version**: 1.0.0

@@ -148,7 +148,7 @@ markdown
 
 ##
 
-## Scene 1: Distant Presence
+## Scene 1: Distant Presence (2)
 
 **Narration**:
 You notice someone in the distance. She stands still amid the ruins, draped in a dark teal robe
@@ -160,7 +160,7 @@ older.
 
 ##
 
-## Scene 2: Approach
+## Scene 2: Approach (2)
 
 **Narration**:
 She comes closer to you. Her eyes are transfixed on you — unblinking, unreadable. You are intrigued.
@@ -280,12 +280,12 @@ NPC dialogue adapts:
 
 python
 
-# Pseudo-code for layering
+## Pseudo-code for layering
 
 background = st.image("market_collapsed.png") foreground = st.image("npc_velinor.png",
 use_column_width=True) map_overlay = st.map(player_position)
 
-# Collapse event
+## Collapse event
 
 if collapse_trigger: st.image("market_more_collapsed.png") st.sidebar.markdown("❌ Area collapsed at
 sector 3") ✨ Why It Works Immersion: Even without animation, players feel the city shifting.
@@ -434,7 +434,7 @@ markdown
 
 ##
 
-### Player Options
+### Player Options (2)
 
 - **Option A**: “What was that? Are you two okay!?”
 - **Option B**: “I’m surprised you didn’t even flinch.”
@@ -484,7 +484,7 @@ Here’s a generalized collapse dialogue module you can reuse across encounters:
 
 markdown
 
-# Collapse Dialogue Module
+## Collapse Dialogue Module
 
 ## Trigger
 
@@ -494,7 +494,7 @@ markdown
 
 ##
 
-## Player Options
+## Player Options (3)
 
 - **Option A**: “What was that? Are you two okay!?”
 - **Option B**: “I’m surprised you didn’t even flinch.”
@@ -524,7 +524,7 @@ markdown
 
 ##
 
-## Narrative Effect
+## Narrative Effect (2)
 
 - Collapse feels dramatic to the player, normalized to NPCs.
 - Reinforces theme: the city is alive, collapsing and reshaping constantly.
@@ -638,14 +638,14 @@ Here’s how you could structure that in your module:
 
 markdown
 
-## Collapse Event: Market Tremor
+## Collapse Event: Market Tremor (2)
 
 **Background Swap**: intact_market.png → collapsed_market.png
 **Foreground**: NPCs (static or reactive variants)
 
 ##
 
-### Player Options
+### Player Options (4)
 
 - “What was that? Are you two okay!?”
 - “I’m surprised you didn’t even flinch.”
@@ -653,7 +653,7 @@ markdown
 
 ##
 
-### NPC Response
+### NPC Response (2)
 
 - **Static NPCs**:
 “Looks like you really are new to the city. You get used to it. We barely notice it now.”
@@ -670,7 +670,7 @@ your surroundings. The only constant here is change.”
 
 ##
 
-### Glyph Resonance
+### Glyph Resonance (2)
 
 - Player shock → [Thalen̈] (longing)
 - Player inquiry → [Querrä] (inquiry)
@@ -880,7 +880,7 @@ Here’s a trust mechanic module scaffold you can drop into your repo to keep th
 
 markdown
 
-# Trust Mechanic Module
+## Trust Mechanic Module
 
 ## Variables
 
@@ -919,7 +919,7 @@ markdown
 
 ##
 
-## Narrative Effect
+## Narrative Effect (3)
 
 - Player empathy and curiosity directly shape survival tools.
 - NPCs act as gatekeepers of knowledge, reinforcing trust as a mechanic.
@@ -975,9 +975,9 @@ This makes tools feel earned, fragile, and alive.
 
 🛠️ Implementation Scaffold markdown
 
-# Tool Loss Mechanic
+## Tool Loss Mechanic
 
-## Variables
+## Variables (2)
 
 - `trust_level`: integer (0–3)
 - `map_access`: boolean
@@ -1075,14 +1075,14 @@ insights Indifferent +Cunning → detect duplicitous NPCs, avoid traps Tools wit
 perilous Hostile +Intimidation → NPCs reveal info under pressure Trust collapses, tools revoked,
 hostile RNG spikes 🧩 Implementation Logic markdown
 
-# Player Stats
+## Player Stats
 
 - trust_level: affects tool access
 - cunning: affects lie detection
 - intimidation: affects forced info
 - vulnerability: affects RNG encounter risk
 
-# Example Event
+## Example Event
 
 NPC offers guidance:
 

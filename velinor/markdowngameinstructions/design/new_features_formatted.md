@@ -1,12 +1,10 @@
 # Velinor Game Design & Development Notes
 
 ## Table of Contents
-1. [Glyph Design Philosophy](#glyph-design-philosophy)
-2. [Core Characters](#core-characters)
-3. [Emotional Architecture](#emotional-architecture)
-4. [Technical Implementation](#technical-implementation)
-5. [Player Systems](#player-systems)
-6. [World Building](#world-building)
+1. [Glyph Design Philosophy](#glyph-design-philosophy) 2. [Core Characters](#core-characters) 3.
+[Emotional Architecture](#emotional-architecture) 4. [Technical
+Implementation](#technical-implementation) 5. [Player Systems](#player-systems) 6. [World
+Building](#world-building)
 
 ---
 
@@ -16,7 +14,9 @@
 
 **The Crying Bust with Crown (Legacy Glyph)**
 
-The legacy glyph for Ravi and Nima's story represents a crying bust with a crown—a final, definitive image of transformation rather than tragedy. This glyph serves as the emotional endpoint of their arc with their daughter Ophina, who was lost in the collapsing ruins of Velhara.
+The legacy glyph for Ravi and Nima's story represents a crying bust with a crown—a final, definitive
+image of transformation rather than tragedy. This glyph serves as the emotional endpoint of their
+arc with their daughter Ophina, who was lost in the collapsing ruins of Velhara.
 
 #### Why It Works
 
@@ -45,7 +45,9 @@ Velinor approaches morality differently than most games:
 
 #### Core Concept
 
-Malrik is not a librarian—he's a keeper of emotional residues. He doesn't just record events; he records the causes behind them and the effects they leave behind. His worldview is shaped by gaps he cannot see, making him fallible but profoundly human.
+Malrik is not a librarian—he's a keeper of emotional residues. He doesn't just record events; he
+records the causes behind them and the effects they leave behind. His worldview is shaped by gaps he
+cannot see, making him fallible but profoundly human.
 
 #### Key Traits
 
@@ -81,11 +83,12 @@ Malrik is not a librarian—he's a keeper of emotional residues. He doesn't just
 **Role**: The Mystic
 **Teaching Mode**: Belonging through intuition, resonance, and attunement
 
-#### Core Concept
+#### Core Concept (2)
 
-Elenya perceives emotional currents the way Malrik perceives evidence. Her worldview is not irrational—it is felt logic, grounded in natural phenomena and sensory perception.
+Elenya perceives emotional currents the way Malrik perceives evidence. Her worldview is not
+irrational—it is felt logic, grounded in natural phenomena and sensory perception.
 
-#### Key Traits
+#### Key Traits (2)
 
 - Teaches attunement, presence, joy, renewal
 - Understands silence as sacred witness
@@ -120,9 +123,11 @@ Elenya perceives emotional currents the way Malrik perceives evidence. Her world
 **Role**: The Bridge Between
 **Teaching Mode**: Being heard through breath, resonance, and relational restoration
 
-#### Core Concept
+#### Core Concept (3)
 
-Nordia is a singer from the isolated northern highlands, untouched by Corelink. When the cataclysm struck Velhara, she lost someone who worked in the city—and lost the medium that made her voice meaningful. Her grief is structural, not just personal.
+Nordia is a singer from the isolated northern highlands, untouched by Corelink. When the cataclysm
+struck Velhara, she lost someone who worked in the city—and lost the medium that made her voice
+meaningful. Her grief is structural, not just personal.
 
 #### Nordia's Three-Glyph Arc
 
@@ -231,13 +236,12 @@ Every glyph and character fits into seven interconnected emotional domains:
 
 ### Emergent Patterns
 
-1. **Domain Anchors**: Each domain has primary teachers who embody its core truth
-2. **Malrik, Elenya, Nordia form the epistemic triad**: Knowing → Belonging → Being heard
-3. **Drossel is the shadow-teacher**: Appears in Sovereignty, Collapse, Presence as anti-glyph
-4. **Sera is the emotional bridge**: Connects Presence, Joy, and Trust
-5. **Collapse and Trust are inverses**: Each collapse has a corresponding trust glyph that repairs
-6. **Ache and Joy are cyclical**: Characters transform between them
-7. **Legacy is the center**: Touches all other domains
+1. **Domain Anchors**: Each domain has primary teachers who embody its core truth 2. **Malrik,
+Elenya, Nordia form the epistemic triad**: Knowing → Belonging → Being heard 3. **Drossel is the
+shadow-teacher**: Appears in Sovereignty, Collapse, Presence as anti-glyph 4. **Sera is the
+emotional bridge**: Connects Presence, Joy, and Trust 5. **Collapse and Trust are inverses**: Each
+collapse has a corresponding trust glyph that repairs 6. **Ache and Joy are cyclical**: Characters
+transform between them 7. **Legacy is the center**: Touches all other domains
 
 ---
 
@@ -247,9 +251,9 @@ Every glyph and character fits into seven interconnected emotional domains:
 
 Velinor is built on a modular three-layer visual system:
 
-1. **Background**: Static scene setter (forest, ruins, market)
-2. **Midground/Overlay**: Dynamic elements (falling structures, water ripples, character expressions)
-3. **Foreground**: Interactive elements (raft, UI, clickable zones)
+1. **Background**: Static scene setter (forest, ruins, market) 2. **Midground/Overlay**: Dynamic
+elements (falling structures, water ripples, character expressions) 3. **Foreground**: Interactive
+elements (raft, UI, clickable zones)
 
 #### Benefits
 
@@ -365,9 +369,8 @@ function fadeOut(audio, duration = 3000) {
 
 For cinematic action sequences like the Nordia ruin escape:
 
-1. **Design**: Modular short clips instead of real-time physics
-2. **Implementation**: Timed click zones with branching outcomes
-3. **Result**: Cinematic action without movement engine complexity
+1. **Design**: Modular short clips instead of real-time physics 2. **Implementation**: Timed click
+zones with branching outcomes 3. **Result**: Cinematic action without movement engine complexity
 
 #### Example Structure
 
@@ -385,13 +388,16 @@ For cinematic action sequences like the Nordia ruin escape:
 The core emotional measurement system for Velinor:
 
 #### T — Trust
-Measures how NPCs respond to the player's empathy and reliability. Builds resonance in relationships.
+Measures how NPCs respond to the player's empathy and reliability. Builds resonance in
+relationships.
 
 #### O — Observation
-Tracks perception, wisdom, and restraint. Governs how well the player notices subtle cues and hidden glyphs.
+Tracks perception, wisdom, and restraint. Governs how well the player notices subtle cues and hidden
+glyphs.
 
 #### N — Narrative Presence
-Reflects charisma and agency. How boldly the player steps into encounters, shaping story progression.
+Reflects charisma and agency. How boldly the player steps into encounters, shaping story
+progression.
 
 #### E — Empathy
 The heart of Velinor. Determines depth of NPC resonance, memory recovery, and glyph unlocks.
@@ -517,11 +523,13 @@ Players assemble Velinor's world like a puzzle:
 
 ### NPC Suggestion System
 
-NPCs read the player's TONE stats and puzzle-building style, then offer suggestions that feel organic and attuned:
+NPCs read the player's TONE stats and puzzle-building style, then offer suggestions that feel
+organic and attuned:
 
 #### The Lantern-Keeper (Sample NPC)
 
-A soft-spoken wanderer who appears wherever the player might need orientation. They never dictate, only reflect.
+A soft-spoken wanderer who appears wherever the player might need orientation. They never dictate,
+only reflect.
 
 **Adapts to Player Stance**:
 
@@ -572,10 +580,9 @@ A soft-spoken wanderer who appears wherever the player might need orientation. T
 #### Desert Progression
 
 **Player choices create stance:**
-1. Continue forward at same pace → Neutral, aligned with environment
-2. Proceed cautiously → Wary posture; Fear rises (0.3)
-3. Slow down → Hesitation; Fear rises (0.4)
-4. Stop and find guide → Protective posture; Fear rises (0.5)
+1. Continue forward at same pace → Neutral, aligned with environment 2. Proceed cautiously → Wary
+posture; Fear rises (0.3) 3. Slow down → Hesitation; Fear rises (0.4) 4. Stop and find guide →
+Protective posture; Fear rises (0.5)
 
 #### Swamp Traversal with Raft
 
@@ -611,15 +618,11 @@ A soft-spoken wanderer who appears wherever the player might need orientation. T
 Triggered by combination of factors (narrative, player choice, QTE failure):
 
 **Sound Sequence**:
-1. Wood_Crack_Large_Tree (structural failure)
-2. Metal_Squeal (industrial decay)
-3. Impact_Heavy_Metal (collapse climax)
-4. Silence or distant echo (aftermath)
+1. Wood_Crack_Large_Tree (structural failure) 2. Metal_Squeal (industrial decay) 3.
+Impact_Heavy_Metal (collapse climax) 4. Silence or distant echo (aftermath)
 
 **Visual Sequence**:
-1. Building overlay tilts or shifts
-2. Debris overlay fades in
-3. Screen shake (tied to Fear level)
+1. Building overlay tilts or shifts 2. Debris overlay fades in 3. Screen shake (tied to Fear level)
 4. Dust/shadow overlays
 
 #### Consequence Variations

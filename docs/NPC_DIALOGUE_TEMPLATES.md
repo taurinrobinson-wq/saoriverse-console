@@ -2,14 +2,13 @@
 
 ## Overview
 
-NPCs' speech patterns reflect:
-1. **Their implant's condition** — disruption level
-2. **Coherence of the system** — how much is restored
-3. **Which domains are cleared** — what they remember
-4. **Proximity to nodes** — how much distortion they feel right now
-5. **Their role** — who they are when coherent
+NPCs' speech patterns reflect: 1. **Their implant's condition** — disruption level 2. **Coherence of
+the system** — how much is restored 3. **Which domains are cleared** — what they remember 4.
+**Proximity to nodes** — how much distortion they feel right now 5. **Their role** — who they are
+when coherent
 
-This document provides dialogue templates for each coherence level, showing how NPCs progress from incoherent to clear.
+This document provides dialogue templates for each coherence level, showing how NPCs progress from
+incoherent to clear.
 
 ---
 
@@ -446,10 +445,10 @@ KORRIN (Covenant NPC)
 
 ## Writing Guidelines for NPC Dialogue
 
-1. **Use fragmentation for incoherence** — incomplete sentences, loops, contradictions that happen in real time
-2. **Show progress, not explanation** — don't say "I'm more coherent now," just speak more coherently
-3. **Tie dialogue to domain** — if Covenant is cleared, people talk more about connection
-4. **Reference the system explicitly** — NPCs should gradually understand what happened to them
-5. **Make it emotional, not technical** — it's not about explaining Corelink, it's about how it felt
-6. **Use the player as a mirror** — NPCs reflect back what the player has done
-7. **Build toward the Endgame** — all dialogue should point toward the conversation with the system itself
+1. **Use fragmentation for incoherence** — incomplete sentences, loops, contradictions that happen
+in real time 2. **Show progress, not explanation** — don't say "I'm more coherent now," just speak
+more coherently 3. **Tie dialogue to domain** — if Covenant is cleared, people talk more about
+connection 4. **Reference the system explicitly** — NPCs should gradually understand what happened
+to them 5. **Make it emotional, not technical** — it's not about explaining Corelink, it's about how
+it felt 6. **Use the player as a mirror** — NPCs reflect back what the player has done 7. **Build
+toward the Endgame** — all dialogue should point toward the conversation with the system itself

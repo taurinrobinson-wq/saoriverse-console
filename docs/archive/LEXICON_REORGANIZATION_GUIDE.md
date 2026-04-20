@@ -42,12 +42,11 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
 
 ## Benefits
 
-1. **Direct Lookups**: `lexicon["hold"]` instead of searching through all signals
-2. **Multi-Signal Mapping**: One word can trigger multiple emotional signals
-3. **Frequency Data**: Know which words most frequently appear in conversations
-4. **Gate Assignment**: Immediate gate activation mapping
-5. **Source Tracking**: Know if word came from user conversations or classic poetry
-6. **Queryable**: Enable "give me all intimacy words" or "what signals does HOLD trigger?"
+1. **Direct Lookups**: `lexicon["hold"]` instead of searching through all signals 2. **Multi-Signal
+Mapping**: One word can trigger multiple emotional signals 3. **Frequency Data**: Know which words
+most frequently appear in conversations 4. **Gate Assignment**: Immediate gate activation mapping 5.
+**Source Tracking**: Know if word came from user conversations or classic poetry 6. **Queryable**:
+Enable "give me all intimacy words" or "what signals does HOLD trigger?"
 
 ## Integration Steps
 
@@ -116,12 +115,10 @@ def top_emotional_words(n=20):
 
 ## Migration Path
 
-1. [OK] New lexicon created and tested
-2. -> Update signal_parser.py to use word-centric lookups
-3. -> Add query functions for common operations
-4. -> Test with sample inputs (stressed, hold, sacred, exactly, etc.)
-5. -> Benchmark performance (should be 10x faster)
-6. -> Deprecate old signal_lexicon.json
+1. [OK] New lexicon created and tested 2. -> Update signal_parser.py to use word-centric lookups 3.
+-> Add query functions for common operations 4. -> Test with sample inputs (stressed, hold, sacred,
+exactly, etc.) 5. -> Benchmark performance (should be 10x faster) 6. -> Deprecate old
+signal_lexicon.json
 
 ## Word Coverage
 
@@ -137,23 +134,19 @@ def top_emotional_words(n=20):
 
 **Top 10 words**:
 
- 1. **the** (freq=14589) -> gates [1, 5] []
- 2. **you** (freq=12339) -> gates [1, 5] []
- 3. **that** (freq=9404) -> gates [1, 5] [joy, transformation, admiration, love, intimacy, nature, sensuality, vulnerability]
- 4. **and** (freq=8680) -> gates [1, 5] []
- 5. **not** (freq=5286) -> gates [1, 5] []
- 6. **taurin** (freq=4223) -> gates [1, 5] []
- 7. **just** (freq=4177) -> gates [1, 5] []
- 8. **with** (freq=3480) -> gates [1, 5] [joy, love, intimacy, sensuality, vulnerability]
- 9. **like** (freq=3222) -> gates [8, 12] [love]
-10. **but** (freq=3183) -> gates [1, 5] []
+1. **the** (freq=14589) -> gates [1, 5] [] 2. **you** (freq=12339) -> gates [1, 5] [] 3. **that**
+(freq=9404) -> gates [1, 5] [joy, transformation, admiration, love, intimacy, nature, sensuality,
+vulnerability] 4. **and** (freq=8680) -> gates [1, 5] [] 5. **not** (freq=5286) -> gates [1, 5] []
+6. **taurin** (freq=4223) -> gates [1, 5] [] 7. **just** (freq=4177) -> gates [1, 5] [] 8. **with**
+(freq=3480) -> gates [1, 5] [joy, love, intimacy, sensuality, vulnerability] 9. **like** (freq=3222)
+-> gates [8, 12] [love] 10. **but** (freq=3183) -> gates [1, 5] []
 
 ## Next Steps
 
-1. Review GLYPH_ENHANCEMENTS_FROM_TRANSCRIPT.md for how to use these words
-2. Check TRANSCRIPT_ANALYSIS_INSIGHTS.md for emotional vocabulary recommendations
-3. Integrate new Glyphs that leverage high-frequency emotional words
-4. A/B test response quality with word-centric emotional recognition
+1. Review GLYPH_ENHANCEMENTS_FROM_TRANSCRIPT.md for how to use these words 2. Check
+TRANSCRIPT_ANALYSIS_INSIGHTS.md for emotional vocabulary recommendations 3. Integrate new Glyphs
+that leverage high-frequency emotional words 4. A/B test response quality with word-centric
+emotional recognition
 
 ##
 

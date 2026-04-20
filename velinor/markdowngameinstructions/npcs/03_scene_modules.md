@@ -37,7 +37,7 @@ character in scene
 
 
 
-## Scene 1: Distant Presence
+## Scene 1: Distant Presence (2)
 
 **Visual Setup**:
 - Background Image: [full marketplace/environment]
@@ -72,7 +72,7 @@ mystery]
 
 ```markdown
 
-## Scene 2: Approach
+## Scene 2: Approach (2)
 
 **Visual Setup**:
 - Background Image: [same or adjusted for proximity]
@@ -141,7 +141,7 @@ mystery]
 
 ## Example: Velinor's First Encounter
 
-### Scene Metadata
+### Scene Metadata (2)
 
 ```
 
@@ -155,13 +155,13 @@ Ambient Sound:        wind_through_ruins.mp3 + faint_chimes.mp3 Glyph Triggers: 
 
 ```
 
-### Scene 1: Distant Presence
+### Scene 1: Distant Presence (3)
 
 ```
 
 
 
-## Scene 1: Distant Presence
+## Scene 1: Distant Presence (4)
 
 **Visual**:
 - Velinor visible amid marketplace ruins, still and observant
@@ -178,11 +178,11 @@ appears to be some kind of priestess… or something older.
 ```
 
 
-### Scene 2: Approach
+### Scene 2: Approach (3)
 
 ```
 
-## Scene 2: Approach
+## Scene 2: Approach (4)
 
 **Visual**:
 - Velinor steps closer, eyes unblinking, gaze locked on player
@@ -205,7 +205,7 @@ Before you have a chance to speak, she does.
 ```
 
 
-### Player Options
+### Player Options (2)
 
 ```
 
@@ -236,14 +236,14 @@ Before you have a chance to speak, she does.
 ```python
 
 
-# Scene 1: Distant presence
+## Scene 1: Distant presence
 col1, col2 = st.columns([3, 1]) with col1: background = st.image("velinor_marketplace_distant.png")
 foreground = st.image("velinor_priestess_distant.png", width=150)
 
-# Display narration and glyph
+## Display narration and glyph
 st.write("You notice someone in the distance...") display_glyph([Esḧ])
 
-# Player advances (button, timer, or next section)
+## Player advances (button, timer, or next section)
 if st.button("Continue"):
     # Scene 2: Approach
 st.image("velinor_marketplace_distant.png") st.image("velinor_priestess_close.png", width=400)

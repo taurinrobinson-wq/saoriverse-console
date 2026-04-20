@@ -9,8 +9,7 @@ What this folder should contain (not all files are copied here automatically):
 Purpose
 - A minimal, shareable package that demonstrates the project's title screen and a tiny interactive placeholder scene.
 
-How to build the package locally (PowerShell)
-1. From the repo root:
+How to build the package locally (PowerShell) 1. From the repo root:
 
 ```powershell
 mkdir -Force deliverable
@@ -23,9 +22,7 @@ copy-item requirements_streamlit.txt deliverable\
 
 2. Add a README and any small license or contact notes.
 
-Run the demo (recipient instructions)
-1. Install Python and pip.
-2. From the `deliverable` folder:
+Run the demo (recipient instructions) 1. Install Python and pip. 2. From the `deliverable` folder:
 
 ```powershell
 pip install -r requirements_streamlit.txt

@@ -97,10 +97,10 @@ your emotional state through FirstPerson integration.
 
 
 
-# Lines 28-30
+## Lines 28-30
 from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
-# Lines 46-52
+## Lines 46-52
 if 'firstperson_orchestrator' not in st.session_state: st.session_state.firstperson_orchestrator =
 FirstPersonOrchestrator( user_id='velinor_player', conversation_id='velinor_game' )
 
@@ -112,7 +112,7 @@ FirstPersonOrchestrator( user_id='velinor_player', conversation_id='velinor_game
 
 ```python
 
-# Lines 568-579
+## Lines 568-579
 firstperson_orchestrator = st.session_state.get('firstperson_orchestrator')
 if not firstperson_orchestrator:
     firstperson_orchestrator = FirstPersonOrchestrator(...)
@@ -134,7 +134,7 @@ orchestrator = VelinorTwineOrchestrator(
 ```python
 
 
-# Lines 177-210
+## Lines 177-210
 def _summarize_player_intent(self, player_input, player_id):
     # Analyzes emotional tone, theme, valence, intensity
     # Returns: {original_input, emotional_tone, detected_theme, ...}
@@ -149,7 +149,7 @@ def _summarize_player_intent(self, player_input, player_id):
 ```python
 
 
-# Lines 289-340
+## Lines 289-340
 def _generate_emotionally_aware_response(self, npc_name, player_input, emotional_tone, theme,
 valence, intensity, memory, ...):
     # Constructs three-part response based on:
@@ -168,11 +168,11 @@ valence, intensity, memory, ...):
 
 
 
-# Lines 140-150
+## Lines 140-150
 player_analysis = self._summarize_player_intent(player_input, player_id)
 next_state['player_analysis'] = player_analysis next_state['player_input'] = player_input
 
-# Later: used in NPC dialogue generation
+## Later: used in NPC dialogue generation
 if updated_state.get('npc_name'): updated_state['npc_dialogue'] = self._generate_npc_dialogue(
 npc_name=updated_state['npc_name'], context=updated_state,  # ← Contains player_analysis
 
@@ -280,19 +280,19 @@ FirstPerson + Velinor quick reference guide
 
 ```bash
 
-# Local development - Works immediately
+## Local development - Works immediately
 streamlit run velinor_app.py
 
-# Testing integration
+## Testing integration
 python3 FIRSTPERSON_INTEGRATION_TEST.py
 
-# Production
+## Production
 
-# - Push to Streamlit Cloud
+## - Push to Streamlit Cloud
 
-# - Or deploy with Docker (Dockerfile included)
+## - Or deploy with Docker (Dockerfile included)
 
-# - Or use FastAPI backend from main branch
+## - Or use FastAPI backend from main branch
 ```
 
 

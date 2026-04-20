@@ -10,7 +10,9 @@
 
 ## Summary
 
-Phase 2 successfully integrated the Phase 1 trait system into the main game loop and implemented the first major branching dialogue scene (Marketplace Debate). The game now responds dynamically to player traits and coherence.
+Phase 2 successfully integrated the Phase 1 trait system into the main game loop and implemented the
+first major branching dialogue scene (Marketplace Debate). The game now responds dynamically to
+player traits and coherence.
 
 ---
 
@@ -57,15 +59,12 @@ def get_trait_status() -> Dict[str, Any]:
 - Function: Introduce factions, seed love story, establish ideological framework
 
 **Entry Points** (3 ways to approach):
-1. **Direct Encounter**: Walk straight into debate
-2. **Directed Introduction**: Get context from marketplace NPC first
-3. **Faction Introduction**: Already met a faction member
+1. **Direct Encounter**: Walk straight into debate 2. **Directed Introduction**: Get context from
+marketplace NPC first 3. **Faction Introduction**: Already met a faction member
 
 **Scene Phases**:
-1. `INTRO`: Player approaches/witnesses debate
-2. `SETUP`: NPCs explain their positions
-3. `BRANCHING`: Player makes significant choice
-4. `RESOLUTION`: Scene ends with consequences
+1. `INTRO`: Player approaches/witnesses debate 2. `SETUP`: NPCs explain their positions 3.
+`BRANCHING`: Player makes significant choice 4. `RESOLUTION`: Scene ends with consequences
 
 **Branching Choices** (6+ options):
 
@@ -329,12 +328,10 @@ GAME LOOP (orchestrator.py)
 
 ## Integration Points for Phase 3
 
-Phase 3 (Building Collapse) will:
-1. Use player's final trait pattern from marketplace
-2. Use coherence level to determine NPC responses during crisis
-3. Use relationship state (built in marketplace) to determine allegiances
-4. Implement 7-day event progression system
-5. Gate 3 aftermath paths based on coherence/traits
+Phase 3 (Building Collapse) will: 1. Use player's final trait pattern from marketplace 2. Use
+coherence level to determine NPC responses during crisis 3. Use relationship state (built in
+marketplace) to determine allegiances 4. Implement 7-day event progression system 5. Gate 3
+aftermath paths based on coherence/traits
 
 **Data passed to Phase 3**:
 - Player's trait profile (current scores and pattern)
@@ -346,19 +343,12 @@ Phase 3 (Building Collapse) will:
 
 ## Design Principles Maintained
 
-✅ **All Phase 1 principles maintained**:
-1. Patterns matter, not individual choices
-2. Coherence is consequence
-3. People matter more than systems
-4. Authenticity rewards
-5. Multiple valid paths
+✅ **All Phase 1 principles maintained**: 1. Patterns matter, not individual choices 2. Coherence is
+consequence 3. People matter more than systems 4. Authenticity rewards 5. Multiple valid paths
 
-✅ **New principles added**:
-6. Branching should reflect trait compatibility
-7. Coherence determines dialogue depth
-8. NPC perception affects scene dynamics
-9. Consequences cascade forward
-10. Player agency respected (no forced choices)
+✅ **New principles added**: 6. Branching should reflect trait compatibility 7. Coherence determines
+dialogue depth 8. NPC perception affects scene dynamics 9. Consequences cascade forward 10. Player
+agency respected (no forced choices)
 
 ---
 
@@ -375,33 +365,26 @@ No optimization needed for Phase 2 scope.
 
 ## What's Working
 
-✅ Trait tracking integrated into main game loop  
-✅ Marketplace scene with branching dialogue  
-✅ Coherence-based dialogue depth  
-✅ NPC personality compatibility  
-✅ Trait visualization in Streamlit  
-✅ Scene playable with different trait profiles  
-✅ All paths lead to valid resolutions  
+✅ Trait tracking integrated into main game loop ✅ Marketplace scene with branching dialogue ✅
+Coherence-based dialogue depth ✅ NPC personality compatibility ✅ Trait visualization in Streamlit ✅
+Scene playable with different trait profiles ✅ All paths lead to valid resolutions
 
 ---
 
 ## What's Not Yet Implemented
 
-❌ Building Collapse event progression (Phase 3)  
-❌ Save/load persistence (Phase 5)  
-❌ API layer (Phase 6)  
-❌ Web UI (Phase 7)  
+❌ Building Collapse event progression (Phase 3) ❌ Save/load persistence (Phase 5) ❌ API layer (Phase
+6) ❌ Web UI (Phase 7)
 
 ---
 
 ## Next Steps: Phase 3
 
-Phase 3 will implement the Building Collapse timeline system:
-1. **EventTimeline**: Track 7-day progression
-2. **Collapse Trigger**: Player decision point about archive safety
-3. **3 Aftermath Paths**: Rebuild Together / Stalemate / Separation
-4. **Relationship Locks**: Trait pattern determines alliance options
-5. **Coherence Impact**: Coherence affects how NPCs trust player during crisis
+Phase 3 will implement the Building Collapse timeline system: 1. **EventTimeline**: Track 7-day
+progression 2. **Collapse Trigger**: Player decision point about archive safety 3. **3 Aftermath
+Paths**: Rebuild Together / Stalemate / Separation 4. **Relationship Locks**: Trait pattern
+determines alliance options 5. **Coherence Impact**: Coherence affects how NPCs trust player during
+crisis
 
 **Estimated**: 5-7 days  
 **Foundation**: ✅ Phase 1 & 2 complete

@@ -357,12 +357,11 @@ Moving existing code to canonical imports?
 
 ## 🎓 Learning Path
 
-1. **Understand the signals** - Read about the 7 signals and what they represent
-2. **Parse some input** - Use `parse_input()` to extract signals from text
-3. **Explore the gates** - See which gates activate for different signal combinations
-4. **Learn from conversations** - Use `LexiconLearner` to extract patterns
-5. **Customize lexicons** - Add new words and emotional mappings
-6. **Integrate with glyphs** - Use parsed signals to fetch glyphs
+1. **Understand the signals** - Read about the 7 signals and what they represent 2. **Parse some
+input** - Use `parse_input()` to extract signals from text 3. **Explore the gates** - See which
+gates activate for different signal combinations 4. **Learn from conversations** - Use
+`LexiconLearner` to extract patterns 5. **Customize lexicons** - Add new words and emotional
+mappings 6. **Integrate with glyphs** - Use parsed signals to fetch glyphs
 
 ##
 
@@ -376,11 +375,10 @@ Moving existing code to canonical imports?
 
 ## 💡 Pro Tips
 
-1. **Always use centralized imports** - Easier to refactor later
-2. **Leverage PathManager** - Handles path resolution automatically
-3. **Check constants first** - Don't hardcode gate numbers, use ECM_GATES
-4. **Test lexicon learning** - New words get added automatically
-5. **Use get_learning_stats()** - Monitor what the system is learning
+1. **Always use centralized imports** - Easier to refactor later 2. **Leverage PathManager** -
+Handles path resolution automatically 3. **Check constants first** - Don't hardcode gate numbers,
+use ECM_GATES 4. **Test lexicon learning** - New words get added automatically 5. **Use
+get_learning_stats()** - Monitor what the system is learning
 
 ##
 

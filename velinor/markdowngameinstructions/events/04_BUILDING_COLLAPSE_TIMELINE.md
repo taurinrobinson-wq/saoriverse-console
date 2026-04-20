@@ -323,13 +323,16 @@ The game now branches based on Malrik/Elenya's relationship state and player's c
 ## Symbolism of the Collapse
 
 ### **At Personal Scale:**
-The building collapse mirrors the collapse of Malrik and Elenya's relationship. The infrastructure they built together is failing. The question is whether they'll rebuild from the ruins or walk away.
+The building collapse mirrors the collapse of Malrik and Elenya's relationship. The infrastructure
+they built together is failing. The question is whether they'll rebuild from the ruins or walk away.
 
 ### **At Communal Scale:**
-The factions lose their shared space. This forces a choice: collaboration in reconstruction or separate survival.
+The factions lose their shared space. This forces a choice: collaboration in reconstruction or
+separate survival.
 
 ### **At Civilizational Scale:**
-This is an echo of Velhara's original collapse. A shared structure failed because the people inside couldn't hold it together. Now the question is: will the people learn from history, or repeat it?
+This is an echo of Velhara's original collapse. A shared structure failed because the people inside
+couldn't hold it together. Now the question is: will the people learn from history, or repeat it?
 
 ---
 
@@ -421,7 +424,8 @@ The collapse is not punishment. It's a mirror.
 
 ## Player's Role During Collapse
 
-The player is a witness to a communal crisis. Their choices during the collapse aftermath directly influence the trajectory of Malrik/Elenya's relationship and the ending they unlock.
+The player is a witness to a communal crisis. Their choices during the collapse aftermath directly
+influence the trajectory of Malrik/Elenya's relationship and the ending they unlock.
 
 **High Intervention (Multiple conversations):**
 - Player seen as catalyst
@@ -438,7 +442,9 @@ The player is a witness to a communal crisis. Their choices during the collapse 
 - Endings 2, 3 become more likely
 - NPCs don't reference player's role
 
-The collapse event is designed to make the player feel the weight of choice—not in a controlling way, but in an authentic way. The player cannot force Malrik and Elenya to rebuild. But they can provide support, encouragement, or perspective that helps them find their own way.
+The collapse event is designed to make the player feel the weight of choice—not in a controlling
+way, but in an authentic way. The player cannot force Malrik and Elenya to rebuild. But they can
+provide support, encouragement, or perspective that helps them find their own way.
 
 ---
 
@@ -446,13 +452,17 @@ The collapse event is designed to make the player feel the weight of choice—no
 
 Remember: **Systems cannot do what people cannot.**
 
-Velhara tried to manufacture coherence through the Corelink system. Instead, the system amplified the people's incoherence until civilization collapsed.
+Velhara tried to manufacture coherence through the Corelink system. Instead, the system amplified
+the people's incoherence until civilization collapsed.
 
 The archive building collapse is a micro-enactment of that same pattern.
 
-If Malrik and Elenya cannot find synthesis, the building fails.
-If they rebuild with genuine cooperation, the building becomes a symbol of integration.
+If Malrik and Elenya cannot find synthesis, the building fails. If they rebuild with genuine
+cooperation, the building becomes a symbol of integration.
 
-The ending of the game depends on whether the people learned the lesson Velhara failed to learn: that structures are only as strong as the human connections they're built upon.
+The ending of the game depends on whether the people learned the lesson Velhara failed to learn:
+that structures are only as strong as the human connections they're built upon.
 
-The player's entire emotional OS journey is learning to see this truth—from the personal scale (Malrik/Elenya) to the communal scale (the city) to the civilizational scale (the Corelink choice at the end).
+The player's entire emotional OS journey is learning to see this truth—from the personal scale
+(Malrik/Elenya) to the communal scale (the city) to the civilizational scale (the Corelink choice at
+the end).

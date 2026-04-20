@@ -1,6 +1,7 @@
 # Parallel Folder Structure Synchronization
 
-This document defines how `velinor/` (Python game engine) and `velinor-web/` (Next.js frontend) folders are kept in parallel.
+This document defines how `velinor/` (Python game engine) and `velinor-web/` (Next.js frontend)
+folders are kept in parallel.
 
 ## Folder Structure
 
@@ -76,40 +77,35 @@ saoriverse-console/
 ### PowerShell (Windows)
 
 ```powershell
-# velinor-web/sync-parallel.ps1
-# Usage: cd velinor-web; powershell -ExecutionPolicy Bypass -File sync-parallel.ps1
+## velinor-web/sync-parallel.ps1
+## Usage: cd velinor-web; powershell -ExecutionPolicy Bypass -File sync-parallel.ps1
 ```
 
 ### Bash (macOS/Linux)
 
 ```bash
-# velinor-web/sync-parallel.sh
-# Usage: cd velinor-web; bash sync-parallel.sh
+## velinor-web/sync-parallel.sh
+## Usage: cd velinor-web; bash sync-parallel.sh
 ```
 
 ## Development Workflow
 
 ### When Updating NPCs in Python
 
-1. Edit `velinor/engine/npc_manager.py` or `velinor/data/npc_profiles.json`
-2. Run sync script: `powershell -File sync-parallel.ps1`
-3. Verify changes in web frontend
-4. Commit both changes together
+1. Edit `velinor/engine/npc_manager.py` or `velinor/data/npc_profiles.json` 2. Run sync script:
+`powershell -File sync-parallel.ps1` 3. Verify changes in web frontend 4. Commit both changes
+together
 
 ### When Adding New Background Images
 
-1. Add image to `velinor/backgrounds/`
-2. Update velinor code if needed
-3. Run sync script: `powershell -File sync-parallel.ps1`
-4. Verify image loads in web frontend
-5. Commit both changes together
+1. Add image to `velinor/backgrounds/` 2. Update velinor code if needed 3. Run sync script:
+`powershell -File sync-parallel.ps1` 4. Verify image loads in web frontend 5. Commit both changes
+together
 
 ### When Modifying UI Overlays
 
-1. Edit image in `velinor/overlays/`
-2. Run sync script: `powershell -File sync-parallel.ps1`
-3. Web frontend auto-refreshes
-4. Commit changes
+1. Edit image in `velinor/overlays/` 2. Run sync script: `powershell -File sync-parallel.ps1` 3. Web
+frontend auto-refreshes 4. Commit changes
 
 ## Git Strategy
 
@@ -163,16 +159,13 @@ After syncing, verify:
 
 ### Web images not loading
 
-1. Check browser console for 404 errors
-2. Verify sync script ran successfully
-3. Check file exists: `ls velinor-web/public/assets/backgrounds/`
-4. Restart dev server: `npm run dev`
+1. Check browser console for 404 errors 2. Verify sync script ran successfully 3. Check file exists:
+`ls velinor-web/public/assets/backgrounds/` 4. Restart dev server: `npm run dev`
 
 ### JSON data not updating
 
-1. Verify file was copied: `diff velinor/data/npc_profiles.json velinor-web/src/data/npc_profiles.json`
-2. Re-run sync script
-3. Clear Next.js cache: `rm -rf .next`
+1. Verify file was copied: `diff velinor/data/npc_profiles.json
+velinor-web/src/data/npc_profiles.json` 2. Re-run sync script 3. Clear Next.js cache: `rm -rf .next`
 4. Restart dev server
 
 ### Out of sync after merge
@@ -180,35 +173,34 @@ After syncing, verify:
 If you see conflicts after merging:
 
 ```bash
-# Re-run sync to ensure parallel consistency
+## Re-run sync to ensure parallel consistency
 cd velinor-web
 powershell -File sync-parallel.ps1
 
-# Commit the sync
+## Commit the sync
 git add -A
 git commit -m "chore: Resync parallel folders after merge"
 ```
 
 ## Future Enhancements
 
-1. **Automated sync on file watch** - Watch `velinor/data/` and auto-sync on changes
-2. **TypeScript NPC types** - Generate `.d.ts` from npc_profiles.json
-3. **Asset optimization** - Automatic image compression before sync
-4. **Continuous sync** - GitHub Actions workflow to sync on commit
-5. **Conflict detection** - Script to detect out-of-sync files
+1. **Automated sync on file watch** - Watch `velinor/data/` and auto-sync on changes 2. **TypeScript
+NPC types** - Generate `.d.ts` from npc_profiles.json 3. **Asset optimization** - Automatic image
+compression before sync 4. **Continuous sync** - GitHub Actions workflow to sync on commit 5.
+**Conflict detection** - Script to detect out-of-sync files
 
 ## Monitoring
 
 Keep these commands bookmarked for quick checks:
 
 ```bash
-# Check if data is in sync
+## Check if data is in sync
 diff velinor/data/npc_profiles.json velinor-web/src/data/npc_profiles.json
 
-# Find missing images in web
+## Find missing images in web
 diff <(ls -1 velinor/backgrounds/) <(ls -1 velinor-web/public/assets/backgrounds/)
 
-# Check all sync'd files
+## Check all sync'd files
 find velinor/data -name "*.json" -exec diff {} velinor-web/src/data/{} \;
 ```
 

@@ -2,7 +2,8 @@
 
 ## 🌐 Moving from Streamlit to firstperson.chat
 
-Congratulations on securing the firstperson.chat domain! Here's how to deploy your FirstPerson AI Companion to your own professional domain.
+Congratulations on securing the firstperson.chat domain! Here's how to deploy your FirstPerson AI
+Companion to your own professional domain.
 
 ## 📁 Files Created
 
@@ -135,12 +136,10 @@ Visit <http://localhost:8000> to test your app.
 
 ## 📊 Benefits of Custom Domain
 
-✅ **Professional branding** - firstperson.chat looks much more credible
-✅ **Better SEO** - Google prefers custom domains
-✅ **No platform limitations** - Full control over features
-✅ **SSL certificate** - Secure HTTPS connection
-✅ **Email integration** - Can set up <support@firstperson.chat>
-✅ **Scalability** - Can handle more users than Streamlit
+✅ **Professional branding** - firstperson.chat looks much more credible ✅ **Better SEO** - Google
+prefers custom domains ✅ **No platform limitations** - Full control over features ✅ **SSL
+certificate** - Secure HTTPS connection ✅ **Email integration** - Can set up
+<support@firstperson.chat> ✅ **Scalability** - Can handle more users than Streamlit
 
 ## 🔧 Environment Variables
 
@@ -155,16 +154,16 @@ SECRET_KEY=generated_32_character_hex_string
 
 ## 📈 Next Steps
 
-1. **Deploy to your chosen platform**
-2. **Configure firstperson.chat DNS**
-3. **Test authentication and chat functionality**
-4. **Add Google Analytics for user tracking**
-5. **Set up monitoring and error tracking**
-6. **Create admin panel at admin.firstperson.chat**
+1. **Deploy to your chosen platform** 2. **Configure firstperson.chat DNS** 3. **Test authentication
+and chat functionality** 4. **Add Google Analytics for user tracking** 5. **Set up monitoring and
+error tracking** 6. **Create admin panel at admin.firstperson.chat**
 
 ## 📁 Static site + Supabase Edge Functions (recommended production pattern)
 
-This project includes a static HTML frontend (`emotional_os/deploy/templates/chat.html`) that can be deployed as a pure static site (Netlify, Vercel, S3+CloudFront). The static site talks to backend services using Supabase Edge Functions and Supabase Auth, this gives you a fully serverless public site while keeping server-side code private (Streamlit) for development.
+This project includes a static HTML frontend (`emotional_os/deploy/templates/chat.html`) that can be
+deployed as a pure static site (Netlify, Vercel, S3+CloudFront). The static site talks to backend
+services using Supabase Edge Functions and Supabase Auth, this gives you a fully serverless public
+site while keeping server-side code private (Streamlit) for development.
 
 Why use this pattern?
 
@@ -174,9 +173,11 @@ Why use this pattern?
 
 How to wire it up
 
-1. Deploy the contents of `emotional_os/deploy/templates/chat.html` and the `static/` folder to your static host.
-2. Configure your Supabase Edge Function (example name: `saori-fixed`) to accept requests from your static site. Use CORS or origin checks as needed.
-3. In your static hosting settings, set a meta header or inject a small inline config that points to your Edge Function URL, for example:
+1. Deploy the contents of `emotional_os/deploy/templates/chat.html` and the `static/` folder to your
+static host. 2. Configure your Supabase Edge Function (example name: `saori-fixed`) to accept
+requests from your static site. Use CORS or origin checks as needed. 3. In your static hosting
+settings, set a meta header or inject a small inline config that points to your Edge Function URL,
+for example:
 
 ```html
 <meta name="edge-function-url" content="https://<REGION>.functions.supabase.co/saori-fixed">
@@ -184,9 +185,13 @@ How to wire it up
 ```
 
 
-4. Ensure your Edge Function uses Supabase Auth and RLS correctly. The static site will handle sign-in with Supabase client-side (using anon key or OAuth) and call Edge Functions with user tokens when needed.
+4. Ensure your Edge Function uses Supabase Auth and RLS correctly. The static site will handle
+sign-in with Supabase client-side (using anon key or OAuth) and call Edge Functions with user tokens
+when needed.
 
-5. Keep the Streamlit app for development only (run locally or host internally). The Dockerfile in this repo defaults to not serving the static chat file, see `SERVE_STATIC_CHAT` environment variable.
+5. Keep the Streamlit app for development only (run locally or host internally). The Dockerfile in
+this repo defaults to not serving the static chat file, see `SERVE_STATIC_CHAT` environment
+variable.
 
 Verification
 

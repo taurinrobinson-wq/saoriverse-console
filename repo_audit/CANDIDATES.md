@@ -79,13 +79,13 @@ Quick commands to preview usage (no-op, safe):
 
 ```bash
 
-# list candidate folders
+## list candidate folders
 ls -la scripts dev_tools tools demos || true
 
-# preview size of large files
+## preview size of large files
 du -sh emotional_os/glyphs/glyphs.db || true
 
-# show git-tracked large files (helpful for decisions)
+## show git-tracked large files (helpful for decisions)
 git ls-files -z | xargs -0 du -sh | sort -h | tail -n 30
 ```
 

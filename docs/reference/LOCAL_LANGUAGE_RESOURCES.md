@@ -6,9 +6,9 @@ system WITHOUT relying on OpenAI APIs. """
 
 # ============================================================================
 
-# 1. NLTK - ALREADY INTEGRATED IN YOUR SYSTEM
+## 1. NLTK - ALREADY INTEGRATED IN YOUR SYSTEM
 
-# ============================================================================
+## ============================================================================ (2)
 
 NLTK_RESOURCES = { "name": "Natural Language Toolkit (NLTK)", "status": "✓ ALREADY INSTALLED & IN
 USE", "location": "emotional_os/glyphs/openai_response_learner.py", "what_it_provides": {
@@ -21,11 +21,11 @@ and words" }, "corpora": { "stopwords": "Common words (the, a, is) across multip
 Corpus (annotated text)", "Gutenberg Corpus (books)", "Movie Reviews Corpus", "Product Reviews
 Corpus" ] }
 
-# ============================================================================
+## ============================================================================ (3)
 
-# 2. WORDNET - INTEGRATED VIA NLTK
+## 2. WORDNET - INTEGRATED VIA NLTK
 
-# ============================================================================
+## ============================================================================ (4)
 
 WORDNET_RESOURCE = { "name": "WordNet - Lexical Database", "source": "Princeton University",
 "access": "Via NLTK: from nltk.corpus import wordnet", "what_it_contains": { "total_words":
@@ -49,11 +49,11 @@ Result: joy, happiness, delight """, "emotional_use_cases": [ "Expand emotional 
 sorrow, mourning, etc.)", "Find emotional opposites for reframing", "Identify emotional hierarchy
 (specific vs general emotions)", "Semantic similarity matching" ] }
 
-# ============================================================================
+## ============================================================================ (5)
 
-# 3. SPACY - ADVANCED NLP (NOT INSTALLED, SHOULD BE)
+## 3. SPACY - ADVANCED NLP (NOT INSTALLED, SHOULD BE)
 
-# ============================================================================
+## ============================================================================ (6)
 
 SPACY_RESOURCE = { "name": "spaCy - Industrial-Strength NLP", "status": "❌ AVAILABLE BUT NOT
 INSTALLED", "install": "pip install spacy", "download_models": [ "python -m spacy download
@@ -77,11 +77,11 @@ for token in doc: print(token.text, token.lemma_)
 doc1 = nlp("I'm feeling sad") doc2 = nlp("I'm feeling depressed") print(doc1.similarity(doc2))  #
 0.8+ (very similar) """ }
 
-# ============================================================================
+## ============================================================================ (7)
 
-# 4. TEXTBLOB - SIMPLE SENTIMENT ANALYSIS
+## 4. TEXTBLOB - SIMPLE SENTIMENT ANALYSIS
 
-# ============================================================================
+## ============================================================================ (8)
 
 TEXTBLOB_RESOURCE = { "name": "TextBlob", "status": "❌ NOT INSTALLED", "install": "pip install
 textblob", "simple_usage": """ from textblob import TextBlob
@@ -92,11 +92,11 @@ text = "I love this moment!" blob = TextBlob(text)
 print(blob.sentiment)  # Sentiment(polarity=0.8, subjectivity=0.9) """, "emotional_use": "Quick
 sentiment baseline for emotional messages" }
 
-# ============================================================================
+## ============================================================================ (9)
 
-# 5. GENSIM - WORD EMBEDDINGS & SIMILARITY
+## 5. GENSIM - WORD EMBEDDINGS & SIMILARITY
 
-# ============================================================================
+## ============================================================================ (10)
 
 GENSIM_RESOURCE = { "name": "Gensim - Word Embeddings", "status": "❌ NOT INSTALLED", "install": "pip
 install gensim", "provides": { "word2vec": "Pre-trained word embeddings (300 dimensions)",
@@ -117,11 +117,11 @@ result = model.most_similar( positive=['love', 'connection'], negative=['heartbr
 "advantages": [ "Fast semantic similarity (0.001s per lookup)", "No API calls needed", "Pre-trained
 on billions of words", "Can handle out-of-vocabulary words" ] }
 
-# ============================================================================
+## ============================================================================ (11)
 
-# 6. PUBLIC DATASETS & LEXICONS
+## 6. PUBLIC DATASETS & LEXICONS
 
-# ============================================================================
+## ============================================================================ (12)
 
 PUBLIC_EMOTIONAL_DATASETS = { "yelp_reviews": { "source": "https://www.yelp.com/dataset", "size":
 "9GB - 6M+ reviews", "free": True, "use": "Extract emotional language from real reviews" },
@@ -146,11 +146,11 @@ datasets", "free": True, "use": "Emotion recognition and detection" },
 "google_nGram_corpus": { "source": "https://books.google.com/ngrams", "content": "Frequency of word
 phrases across 5M+ books", "free": True, "use": "Language patterns and word associations" } }
 
-# ============================================================================
+## ============================================================================ (13)
 
-# 7. NRC EMOTION LEXICON - MOST RELEVANT FOR YOUR SYSTEM
+## 7. NRC EMOTION LEXICON - MOST RELEVANT FOR YOUR SYSTEM
 
-# ============================================================================
+## ============================================================================ (14)
 
 NRC_EMOTION_LEXICON = { "name": "NRC Word-Emotion Association Lexicon", "creator": "National
 Research Council of Canada", "access": "FREE DOWNLOAD", "url":
@@ -181,11 +181,11 @@ signals = [emotion_to_voltage[e] for e in detected_emotions if e in emotion_to_v
     # Result: ['γ', 'ε']
 """ }
 
-# ============================================================================
+## ============================================================================ (15)
 
-# 8. RECOMMENDATION: SETUP PLAN
+## 8. RECOMMENDATION: SETUP PLAN
 
-# ============================================================================
+## ============================================================================ (16)
 
 RECOMMENDED_SETUP = { "IMMEDIATE (5 minutes)": { "1": "pip install spacy", "2": "python -m spacy
 download en_core_web_sm", "3": "Download NRC Emotion Lexicon from
@@ -204,11 +204,11 @@ embeddings)", "benefit": "Context-aware glyph matching, understand emotion nuanc
 emotion detection model", "3": "Build local knowledge base from user interactions", "benefit":
 "Completely AI-independent, 100% local emotional intelligence" } }
 
-# ============================================================================
+## ============================================================================ (17)
 
-# 9. COMPARISON: API vs LOCAL
+## 9. COMPARISON: API vs LOCAL
 
-# ============================================================================
+## ============================================================================ (18)
 
 API_VS_LOCAL = { "API Approach (Current)": { "pros": ["Latest AI", "Better quality responses"],
 "cons": [ "Costs money ($0.01-0.30 per request)", "Network latency (0.5-2s)", "Data privacy concerns
@@ -225,15 +225,15 @@ spaCy for entity extraction (what triggered the emotion) 3. Use Word2Vec for sem
 Generate contextual response from local patterns 5. OPTIONAL: Send to OpenAI only for
 complex/unclear cases 6. Learn from OpenAI responses → improve local patterns """ } }
 
-# ============================================================================
+## ============================================================================ (19)
 
-# 10. IMPLEMENTATION CODE TEMPLATE
+## 10. IMPLEMENTATION CODE TEMPLATE
 
-# ============================================================================
+## ============================================================================ (20)
 
 IMPLEMENTATION_TEMPLATE = """
 
-# parser/nrc_lexicon_loader.py
+## parser/nrc_lexicon_loader.py
 
 import json from typing import Dict, Set
 
@@ -269,7 +269,7 @@ for _ in range(int(score * 10)): signals.append(signal)
 
 return signals
 
-# In signal_parser.py - MODIFY parse_input()
+## In signal_parser.py - MODIFY parse_input()
 
 def parse_input_with_nrc(input_text: str, nrc_loader: NRCLexiconLoader) -> Dict: '''Enhanced parsing
 using NRC lexicon + local resources'''
@@ -293,11 +293,11 @@ return { 'input': input_text, 'emotions': emotions,  # NEW 'signals': signals, '
 'glyphs': glyphs, 'best_glyph': best_glyph, 'response': response, 'processing_time': 0.005  # MUCH
 faster than API } """
 
-# ============================================================================
+## ============================================================================ (21)
 
-# SUMMARY
+## SUMMARY
 
-# ============================================================================
+## ============================================================================ (22)
 
 """ YES - There are MANY public language databases you can use locally:
 

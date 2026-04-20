@@ -1,6 +1,7 @@
 # Engine Integration — Driving the Motif at Runtime
 
-This doc gives concise patterns for wiring the `Velinor` fracture-tone and `Saori` dyads into a game audio engine. Choose one: sample layers (recommended) or procedural MIDI.
+This doc gives concise patterns for wiring the `Velinor` fracture-tone and `Saori` dyads into a game
+audio engine. Choose one: sample layers (recommended) or procedural MIDI.
 
 Design principles
 - Treat `pressure` as the primary control value (0.0..1.0) mapped to a discrete state index (0..4 in `music_states.json`).
@@ -20,9 +21,9 @@ def pressure_to_state(pressure):
     idx = int(pressure * (len(states)-1))
     return states[idx]
 
-# call when game updates
+## call when game updates
 state = pressure_to_state(game.REMNANTS_normalized)
-# then trigger sample or synth with state['velocity'] and state['duration_ms']
+## then trigger sample or synth with state['velocity'] and state['duration_ms']
 ```
 
 2) Unity + FMOD (recommended for polished results)

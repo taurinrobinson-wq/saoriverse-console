@@ -17,9 +17,9 @@ How to test in staging (recommended)
 1) Preflight checks
    - In the Supabase SQL editor (staging), run:
 
-     SELECT to_regclass('public.conversation_messages') AS conv_msg,
-            to_regclass('public.conversation_metadata') AS conv_meta,
-            to_regclass('public.conversations') AS conversations;
+SELECT to_regclass('public.conversation_messages') AS conv_msg,
+to_regclass('public.conversation_metadata') AS conv_meta, to_regclass('public.conversations') AS
+conversations;
 
    - Confirm the tables you expect exist.
 
@@ -27,10 +27,9 @@ How to test in staging (recommended)
    - Copy/paste `sql/rls_policies.sql` (or the safe policy block in `sql/conversations_rls_policies.sql`) into the Supabase SQL editor in staging and execute.
    - Verify the policies:
 
-     SELECT schemaname, tablename, policyname, qual, with_check
-     FROM pg_policies
-     WHERE schemaname = 'public' AND tablename IN ('conversation_messages','conversation_metadata','conversations')
-     ORDER BY tablename, policyname;
+SELECT schemaname, tablename, policyname, qual, with_check FROM pg_policies WHERE schemaname =
+'public' AND tablename IN ('conversation_messages','conversation_metadata','conversations') ORDER BY
+tablename, policyname;
 
 3) Integration test (quick manual)
    - Sign up two test users (A and B) in the staging frontend.
@@ -40,17 +39,14 @@ How to test in staging (recommended)
 4) Run the repository integration test script
    - The repo includes `scripts/test_conversation_integration.mjs` (Node). To run it locally you need the following env vars:
 
-     SUPABASE_URL (staging)
-     SUPABASE_ANON_KEY (staging)
-     SUPABASE_SERVICE_ROLE_KEY (staging)  # for admin operations in the script
-     TEST_USER_A_EMAIL and TEST_USER_A_PASSWORD (or pre-created user + access token)
+SUPABASE_URL (staging) SUPABASE_ANON_KEY (staging) SUPABASE_SERVICE_ROLE_KEY (staging)  # for admin
+operations in the script TEST_USER_A_EMAIL and TEST_USER_A_PASSWORD (or pre-created user + access
+token)
 
    - Example (locally):
 
-     export SUPABASE_URL="https://<your-project>.supabase.co"
-     export SUPABASE_ANON_KEY="<anon-key>"
-     export SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"
-     node scripts/test_conversation_integration.mjs
+export SUPABASE_URL="https://<your-project>.supabase.co" export SUPABASE_ANON_KEY="<anon-key>"
+export SUPABASE_SERVICE_ROLE_KEY="<service-role-key>" node scripts/test_conversation_integration.mjs
 
    - The script will:
      - Create a test user (or sign in), obtain an access token

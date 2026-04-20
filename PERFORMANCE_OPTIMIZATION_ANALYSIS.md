@@ -19,19 +19,19 @@
 ## Optimization Strategy
 
 ### Phase 1: Immediate Wins (High ROI)
-1. **Cache timestamp at interaction start** - Reduce datetime.now() from 2M to 2K calls (99.9% reduction)
-2. **Cache narrative emotions calculation** - Memoize per interaction
-3. **Optimize decay calculations** - Use incremental updates vs. recalculate
+1. **Cache timestamp at interaction start** - Reduce datetime.now() from 2M to 2K calls (99.9%
+reduction) 2. **Cache narrative emotions calculation** - Memoize per interaction 3. **Optimize decay
+calculations** - Use incremental updates vs. recalculate
 
 ### Phase 2: Medium-term (Algorithmic improvements)
-1. **Lazy evaluation for residue calculations** - Only calculate when needed
-2. **Batch datetime operations** - Group serialization
-3. **Connection pooling for memory operations** - Reduce list iterations
+1. **Lazy evaluation for residue calculations** - Only calculate when needed 2. **Batch datetime
+operations** - Group serialization 3. **Connection pooling for memory operations** - Reduce list
+iterations
 
 ### Phase 3: Long-term (Architecture)
-1. **Subsystem emotion caching** - Cache outputs for 100ms windows
-2. **Async memory operations** - Move persistence off critical path
-3. **Memory indexing** - Use dict lookup vs. list iteration for recalls
+1. **Subsystem emotion caching** - Cache outputs for 100ms windows 2. **Async memory operations** -
+Move persistence off critical path 3. **Memory indexing** - Use dict lookup vs. list iteration for
+recalls
 
 ## Implementation Priority
 

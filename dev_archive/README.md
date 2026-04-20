@@ -32,7 +32,7 @@ export SUPABASE_PUBLISHABLE_KEY="your-publishable-key"
 export SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
 export PROJECT_JWT_SECRET="your-jwt-secret"
 
-# (optional) override other test vars
+## (optional) override other test vars
 export TEST_CUSTOM_TOKEN="..."
 ```text
 

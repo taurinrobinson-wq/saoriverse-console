@@ -2,7 +2,9 @@
 
 ## Overview[![Coverage Status](https://coveralls.io/repos/github/supabase/cli/badge.svg?branch=main)](https://coveralls.io/github/supabase/cli?branch=main) [![Bitbucket Pipelines](https://img.shields.io/bitbucket/pipelines/supabase-cli/setup-cli/master?style=flat-square&label=Bitbucket%20Canary)](https://bitbucket.org/supabase-cli/setup-cli/pipelines) [![Gitlab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/sweatybridge%2Fsetup-cli?label=Gitlab%20Canary)
 
-This system is a modular, privacy-focused emotional OS and web platform. It supports Streamlit, FastAPI, local and cloud deployment, and auto-evolving emotional lexicons.](<https://gitlab.com/sweatybridge/setup-cli/-/pipelines>)
+This system is a modular, privacy-focused emotional OS and web platform. It supports Streamlit,
+FastAPI, local and cloud deployment, and auto-evolving emotional
+lexicons.](<https://gitlab.com/sweatybridge/setup-cli/-/pipelines>)
 
 ## Folder Structure[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools
 
@@ -74,20 +76,19 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   Available via [Homebrew](https://brew.sh). To install:
 
   ```sh
-  brew install supabase/tap/supabase
+brew install supabase/tap/supabase
   ```
 
   To install the beta release channel:
 
   ```sh
-  brew install supabase/tap/supabase-beta
-  brew link --overwrite supabase-beta
+brew install supabase/tap/supabase-beta brew link --overwrite supabase-beta
   ```
 
   To upgrade:
 
   ```sh
-  brew upgrade supabase
+brew upgrade supabase
   ```
 
 </details>
@@ -98,14 +99,13 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   Available via [Scoop](https://scoop.sh). To install:
 
   ```powershell
-  scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
-  scoop install supabase
+scoop bucket add supabase https://github.com/supabase/scoop-bucket.git scoop install supabase
   ```
 
   To upgrade:
 
   ```powershell
-  scoop update supabase
+scoop update supabase
   ```
 
 </details>
@@ -120,13 +120,13 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   To install:
 
   ```sh
-  brew install supabase/tap/supabase
+brew install supabase/tap/supabase
   ```
 
   To upgrade:
 
   ```sh
-  brew upgrade supabase
+brew upgrade supabase
   ```
 
 #### via Linux packages
@@ -134,19 +134,19 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
 
   ```sh
-  sudo apk add --allow-untrusted <...>.apk
+sudo apk add --allow-untrusted <...>.apk
   ```
 
   ```sh
-  sudo dpkg -i <...>.deb
+sudo dpkg -i <...>.deb
   ```
 
   ```sh
-  sudo rpm -i <...>.rpm
+sudo rpm -i <...>.rpm
   ```
 
   ```sh
-  sudo pacman -U <...>.pkg.tar.zst
+sudo pacman -U <...>.pkg.tar.zst
   ```
 
 </details>
@@ -157,13 +157,13 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   You can also install the CLI via [go modules](https://go.dev/ref/mod#go-install) without the help of package managers.
 
   ```sh
-  go install github.com/supabase/cli@latest
+go install github.com/supabase/cli@latest
   ```
 
   Add a symlink to the binary in `$PATH` for easier access:
 
   ```sh
-  ln -s "$(go env GOPATH)/bin/cli" /usr/bin/supabase
+ln -s "$(go env GOPATH)/bin/cli" /usr/bin/supabase
   ```
 
   This works on other non-standard Linux distros.
@@ -176,7 +176,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   To install in your working directory:
 
   ```bash
-  pkgx install supabase
+pkgx install supabase
   ```
 
   Available via [Nixpkgs](https://nixos.org/). Package script [here](https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/supabase-cli/default.nix).

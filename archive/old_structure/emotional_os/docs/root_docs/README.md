@@ -1,6 +1,7 @@
 # Emotional OS - Privacy-Preserving Emotional Intelligence System
 
-A revolutionary emotional processing system that combines privacy-first glyph encryption with AI-enhanced conversational capabilities.
+A revolutionary emotional processing system that combines privacy-first glyph encryption with
+AI-enhanced conversational capabilities.
 
 ## 🌟 Features
 
@@ -25,9 +26,8 @@ Select "Local" mode in the sidebar for privacy-first processing.
 
 ### AI-Enhanced Mode (Supabase Integration)
 
-1. Copy `.env.example` to `.env`
-2. Add your Supabase credentials
-3. Select "Hybrid" or "Supabase" mode in the sidebar
+1. Copy `.env.example` to `.env` 2. Add your Supabase credentials 3. Select "Hybrid" or "Supabase"
+mode in the sidebar
 
 ## 🔧 Configuration
 
@@ -37,7 +37,9 @@ See [SETUP.md](SETUP.md) for detailed configuration instructions.
 
 ## Developer install (editable)
 
-For contributors and local development you can install the repository into a virtual environment in "editable" mode. This makes the `emotional_os` package available for imports and lets you iterate without reinstalling:
+For contributors and local development you can install the repository into a virtual environment in
+"editable" mode. This makes the `emotional_os` package available for imports and lets you iterate
+without reinstalling:
 
 ```bash
 python -m venv .venv
@@ -47,7 +49,9 @@ pip install -e .
 ```
 
 
-The editable install exposes the package name `saoriverse_console` and makes the `emotional_os` package importable (for example: `from emotional_os.supabase.supabase_integration import SupabaseIntegrator`).
+The editable install exposes the package name `saoriverse_console` and makes the `emotional_os`
+package importable (for example: `from emotional_os.supabase.supabase_integration import
+SupabaseIntegrator`).
 
 The repo already includes a minimal `pyproject.toml` + `setup.cfg` to support this workflow.
 
@@ -89,7 +93,8 @@ This system prioritizes user privacy through:
 
 ## 🎯 Innovation
 
-Emotional OS represents a new category of **encrypted emotional intelligence** that solves the core tension between AI capability and privacy protection.
+Emotional OS represents a new category of **encrypted emotional intelligence** that solves the core
+tension between AI capability and privacy protection.
 
 ## 📄 License
 
@@ -101,7 +106,8 @@ Emotional OS represents a new category of **encrypted emotional intelligence** t
 
 ## CI & Unit Tests (Glyph-native behavior)
 
-This repository now includes focused unit tests and a CI job that lock in core glyph-native behaviors:
+This repository now includes focused unit tests and a CI job that lock in core glyph-native
+behaviors:
 
 - Unit tests added:
   - `tests/test_ui_template_usage.py` — ensures the UI selection rule prefers `response_template` when glyph debug is off and falls back to contextual responses when debug is on.
@@ -121,11 +127,14 @@ pytest -q tests/test_ui_template_usage.py tests/unit/test_multi_glyph_selection.
 ```
 
 
-If you want broader integration tests (DB fixtures, spaCy, TextBlob), I can add an optional CI job that prepares the environment; for now these unit tests anchor the symbolic behaviors we care about.
+If you want broader integration tests (DB fixtures, spaCy, TextBlob), I can add an optional CI job
+that prepares the environment; for now these unit tests anchor the symbolic behaviors we care about.
 
 ## Conversation history persistence (Supabase)
 
-If you opt in to persist conversation history via the Streamlit sidebar, the app writes rows into a Supabase Postgres table named `conversation_history` and records deletion requests to `conversation_deletion_audit`.
+If you opt in to persist conversation history via the Streamlit sidebar, the app writes rows into a
+Supabase Postgres table named `conversation_history` and records deletion requests to
+`conversation_deletion_audit`.
 
 Files included in this repo:
 
@@ -154,7 +163,8 @@ supabase db query < sql/create_conversation_history_tables.sql
 
 Row-Level Security (recommended)
 
-After creating the table, enable RLS and add policies so that only the owning user can read/delete their rows. Example (adjust `auth.uid()` to match your JWT `sub` mapping):
+After creating the table, enable RLS and add policies so that only the owning user can read/delete
+their rows. Example (adjust `auth.uid()` to match your JWT `sub` mapping):
 
 ```sql
 ALTER TABLE public.conversation_history ENABLE ROW LEVEL SECURITY;

@@ -2,7 +2,9 @@
 
 ## Welcome
 
-I have created a **comprehensive documentation suite** for the **Project Gutenberg Poetry Extraction & Learning Pipeline** for Saoriverse. This project downloads 30+ classic poetry collections and uses them to discover new emotional dimensions and generate 50-80 new emotional glyphs.
+I have created a **comprehensive documentation suite** for the **Project Gutenberg Poetry Extraction
+& Learning Pipeline** for Saoriverse. This project downloads 30+ classic poetry collections and uses
+them to discover new emotional dimensions and generate 50-80 new emotional glyphs.
 
 ##
 
@@ -230,24 +232,23 @@ SYSTEM (existing):
 
 ### Path 1: "5-Minute Overview"
 
-1. Read [GUTENBERG_QUICK_FACTS.md](./GUTENBERG_QUICK_FACTS.md) (5 min)
-2. Done! You now understand the project
+1. Read [GUTENBERG_QUICK_FACTS.md](./GUTENBERG_QUICK_FACTS.md) (5 min) 2. Done! You now understand
+the project
 
 ### Path 2: "Get It Running" (30 minutes)
 
-1. Read [GUTENBERG_QUICK_FACTS.md](./GUTENBERG_QUICK_FACTS.md) (5 min)
-2. Read [GUTENBERG_QUICK_START.md](./GUTENBERG_QUICK_START.md) (5 min)
-3. Read [GUTENBERG_EXAMPLES_AND_DATA.md](./GUTENBERG_EXAMPLES_AND_DATA.md) (20 min)
-4. Run the commands!
+1. Read [GUTENBERG_QUICK_FACTS.md](./GUTENBERG_QUICK_FACTS.md) (5 min) 2. Read
+[GUTENBERG_QUICK_START.md](./GUTENBERG_QUICK_START.md) (5 min) 3. Read
+[GUTENBERG_EXAMPLES_AND_DATA.md](./GUTENBERG_EXAMPLES_AND_DATA.md) (20 min) 4. Run the commands!
 
 ### Path 3: "Deep Understanding" (90 minutes)
 
-1. Read [GUTENBERG_QUICK_FACTS.md](./GUTENBERG_QUICK_FACTS.md) (5 min)
-2. Read [PROJECT_GUTENBERG_EXTRACTION_GUIDE.md](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md) (30 min)
-3. Read [GUTENBERG_ARCHITECTURE.md](./GUTENBERG_ARCHITECTURE.md) (20 min)
-4. Read [GUTENBERG_EXAMPLES_AND_DATA.md](./GUTENBERG_EXAMPLES_AND_DATA.md) (15 min)
-5. Read [GUTENBERG_DOCUMENTATION_INDEX.md](./GUTENBERG_DOCUMENTATION_INDEX.md) (10 min)
-6. Run the pipeline (optional)
+1. Read [GUTENBERG_QUICK_FACTS.md](./GUTENBERG_QUICK_FACTS.md) (5 min) 2. Read
+[PROJECT_GUTENBERG_EXTRACTION_GUIDE.md](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md) (30 min) 3. Read
+[GUTENBERG_ARCHITECTURE.md](./GUTENBERG_ARCHITECTURE.md) (20 min) 4. Read
+[GUTENBERG_EXAMPLES_AND_DATA.md](./GUTENBERG_EXAMPLES_AND_DATA.md) (15 min) 5. Read
+[GUTENBERG_DOCUMENTATION_INDEX.md](./GUTENBERG_DOCUMENTATION_INDEX.md) (10 min) 6. Run the pipeline
+(optional)
 
 ##
 
@@ -311,13 +312,9 @@ PROJECT STATS:
 
 You now have **everything you need** to:
 
-1. ✅ Understand the Project Gutenberg pipeline
-2. ✅ Run the complete 5-phase system
-3. ✅ See real outputs with generated glyphs
-4. ✅ Learn about discovered dimensions
-5. ✅ Deploy to Saoriverse
-6. ✅ Extend with custom collections
-7. ✅ Troubleshoot any issues
+1. ✅ Understand the Project Gutenberg pipeline 2. ✅ Run the complete 5-phase system 3. ✅ See real
+outputs with generated glyphs 4. ✅ Learn about discovered dimensions 5. ✅ Deploy to Saoriverse 6. ✅
+Extend with custom collections 7. ✅ Troubleshoot any issues
 
 ##
 
@@ -402,9 +399,11 @@ cat bulk_processing_results.json | jq '.'
 
 👉 **Ready to Run?** Read [GUTENBERG_QUICK_START.md](./GUTENBERG_QUICK_START.md) (5 min)
 
-👉 **Want Details?** Read [PROJECT_GUTENBERG_EXTRACTION_GUIDE.md](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md) (30 min)
+👉 **Want Details?** Read
+[PROJECT_GUTENBERG_EXTRACTION_GUIDE.md](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md) (30 min)
 
-👉 **Need Help?** Read [GUTENBERG_DOCUMENTATION_INDEX.md](./GUTENBERG_DOCUMENTATION_INDEX.md) (10 min)
+👉 **Need Help?** Read [GUTENBERG_DOCUMENTATION_INDEX.md](./GUTENBERG_DOCUMENTATION_INDEX.md) (10
+min)
 
 ##
 

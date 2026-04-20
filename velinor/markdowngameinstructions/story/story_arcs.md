@@ -17,9 +17,11 @@
 **Narrative**: Kaelen offers to guide the player to "the place Drossel taught me to hide"—a mystical maze in the swamp where the world feels still and waiting. The journey is not through stone corridors, but through fog and intuition.
 
 **Three Passages**:
-1. **The False Path**: A grove where symbols pulse faintly. Observation reveals hidden patterns; Empathy senses forgotten echoes.
-2. **The Fog Logic Puzzle**: Five markers carved with emotion-shapes. No one names them—only the player feels which is which. Success requires emotional intuition.
-3. **The Hidden Threshold**: A sunken archway where Drossel's tokens rest. Collecting them prepares the player emotionally for the final confrontation.
+1. **The False Path**: A grove where symbols pulse faintly. Observation reveals hidden patterns;
+Empathy senses forgotten echoes. 2. **The Fog Logic Puzzle**: Five markers carved with
+emotion-shapes. No one names them—only the player feels which is which. Success requires emotional
+intuition. 3. **The Hidden Threshold**: A sunken archway where Drossel's tokens rest. Collecting
+them prepares the player emotionally for the final confrontation.
 
 **Rewards**:
 - Empathy +1, Observation +1 (or equivalent resonance tokens)
@@ -68,14 +70,15 @@
 
 A beat. He doesn't look at the player when he says it.
 
-Malrik:  
-"I've tried to reconstruct the missing pieces, but there's nothing to reconstruct. It's absence, not damage."
+Malrik: "I've tried to reconstruct the missing pieces, but there's nothing to reconstruct. It's
+absence, not damage."
 
 **High Empathy Variation**
 He lets a little more slip — not about love, but about value.
 
-Malrik:  
-"Elenya never understood why I kept such meticulous records. She said memory should breathe, not be pinned down. I used to think she was reckless. Now I'm not sure if she was right… or if I've simply lost something I can't name."
+Malrik: "Elenya never understood why I kept such meticulous records. She said memory should breathe,
+not be pinned down. I used to think she was reckless. Now I'm not sure if she was right… or if I've
+simply lost something I can't name."
 
 This keeps the ache without naming the wound.
 
@@ -100,11 +103,16 @@ A breath. Her hand drifts unconsciously to her sternum.
 - **Using it near Malrik**: The glyph hums softly. Malrik pauses with involuntary recognition—not dramatic, not with full memory, but with a subtle shift like hearing a melody he can't place. He might say: "Strange… I feel like I've seen that lantern before" or "Why does this make me feel… warm?"
 
 **The Mechanism (High Empathy/Narrative Presence Gate)**:
-If player has Empathy 70+ or Narrative Presence 75+, activating this glyph near Malrik catalyzes a behavioral shift. He becomes motivated—almost compulsively—to focus on rebuilding the collapsed shared archive space he and Elenya were previously forced to share. 
+If player has Empathy 70+ or Narrative Presence 75+, activating this glyph near Malrik catalyzes a
+behavioral shift. He becomes motivated—almost compulsively—to focus on rebuilding the collapsed
+shared archive space he and Elenya were previously forced to share.
 
-Outwardly: "The archives are a disgrace. I can't stand the disarray. If we don't rebuild now, the records will degrade further."
+Outwardly: "The archives are a disgrace. I can't stand the disarray. If we don't rebuild now, the
+records will degrade further."
 
-Subtext: His body remembers wanting to be close to her. He works longer hours without complaining. His voice softens when speaking about the project. He hums under his breath without realizing it. He's lighter, less brittle around her. He doesn't know why the work brings him joy.
+Subtext: His body remembers wanting to be close to her. He works longer hours without complaining.
+His voice softens when speaking about the project. He hums under his breath without realizing it.
+He's lighter, less brittle around her. He doesn't know why the work brings him joy.
 
 **Elenya's Mirror**: Simultaneously, Elenya feels the shift without understanding it. She senses a warmth around him, a softening in his presence, a familiarity in the way he moves. She finds herself drawn to help with the reconstruction despite her usual distance. The shared space becomes metaphor—both rebuilding the physical archive and repairing the possibility of proximity they once knew.
 
@@ -122,39 +130,47 @@ Subtext: His body remembers wanting to be close to her. He works longer hours wi
 
 **Malrik** (He doesn't accuse. He recognizes.)
 
-Malrik:  
-"When the memories returned… there was a shape in them. A place where something used to be. Not torn — removed. Deliberately."
+Malrik: "When the memories returned… there was a shape in them. A place where something used to be.
+Not torn — removed. Deliberately."
 
 He looks at her, not with anger, but with a kind of quiet understanding.
 
-Malrik:  
-"I don't know what we were. I only know there's an absence that fits your outline."
+Malrik: "I don't know what we were. I only know there's an absence that fits your outline."
 
 **Elenya** (She doesn't justify. She admits the cost.)
 
-Elenya:  
-"I did what I had to do to survive. I didn't think… I didn't think the world would ever give those memories back."
+Elenya: "I did what I had to do to survive. I didn't think… I didn't think the world would ever give
+those memories back."
 
 A long silence.
 
-Malrik:  
-"…I'm not asking for them."
+Malrik: "…I'm not asking for them."
 
-Elenya:  
-"I know."
+Elenya: "I know."
 
 
 **Critical Caveat—Restoration ≠ Reconciliation**:
-Even if memories are restored, Malrik and Elenya are not guaranteed to reunite. Twenty years have passed. They've both changed fundamentally:
+Even if memories are restored, Malrik and Elenya are not guaranteed to reunite. Twenty years have
+passed. They've both changed fundamentally:
 - Malrik's erudite, argumentative nature has matured into fixed perspective and rigid belief
 - Elenya's spiritual leanings have evolved into a complete worldview
 - Both have developed new patterns, conflicts, and ways of being
 - Restoration of memory doesn't erase the divergence of their paths
 
-They may attempt reconciliation and discover irreconcilable differences. They may find that who they were no longer aligns with who they've become. The restored memories may bring clarity that separation is the healthier choice. **Restoration reveals truth, not destiny.** The player should witness that remembering the past doesn't automatically fix the present.
+They may attempt reconciliation and discover irreconcilable differences. They may find that who they
+were no longer aligns with who they've become. The restored memories may bring clarity that
+separation is the healthier choice. **Restoration reveals truth, not destiny.** The player should
+witness that remembering the past doesn't automatically fix the present.
 
 **Emotional Motivation & Endgame Leverage**:
-This arc creates a profound player motivation: discovering Malrik and Elenya's severed bond and watching them unconsciously rebuild their shared space makes players *emotionally invested* in system reactivation. Players who unlock this arc gain heightened motivation to pursue memory restoration, not for mechanical advantage, but because they want to see Malrik and Elenya's relationship restored. The glyph mechanism (behavioral trigger to rebuild the archive) makes the player witness two people unconsciously trying to recreate intimacy they can't remember having—which makes the choice to restore their memories feel like an act of mercy, not just an endgame mechanical choice.
+This arc creates a profound player motivation: discovering Malrik and Elenya's severed bond and
+watching them unconsciously rebuild their shared space makes players *emotionally invested* in
+system reactivation. Players who unlock this arc gain heightened motivation to pursue memory
+restoration, not for mechanical advantage, but because they want to see Malrik and Elenya's
+relationship restored. The glyph mechanism (behavioral trigger to rebuild the archive) makes the
+player witness two people unconsciously trying to recreate intimacy they can't remember having—which
+makes the choice to restore their memories feel like an act of mercy, not just an endgame mechanical
+choice.
 
 **Narrative Function**: This arc transforms endgame agency from "restore the system because it's powerful" into "restore the system because these two people deserve to remember each other."
 
@@ -205,11 +221,22 @@ This arc creates a profound player motivation: discovering Malrik and Elenya's s
 
 **Three Passages**:
 
-1. **The Witnessing (Player Observation)**: Player observes from a distance without being seen. Sera reaches as if to take Korrin's hand, then pulls back—not in fear, but in protection of the moment itself. Player sees the unspoken: they both know this is fragile. Player receives Glyph of Shared Dawn and gains Empathy +2, Presence +1.
+1. **The Witnessing (Player Observation)**: Player observes from a distance without being seen. Sera
+reaches as if to take Korrin's hand, then pulls back—not in fear, but in protection of the moment
+itself. Player sees the unspoken: they both know this is fragile. Player receives Glyph of Shared
+Dawn and gains Empathy +2, Presence +1.
 
-2. **The Conversation Path (Player Approaches)**: Player approaches and greets them. Awkward moment. Both become slightly guarded, but not hostile. Sera says something like "Morning tea helps with market chaos," deflecting. Korrin fidgets with his scarf. If player honors the moment with kindness (no prying questions), both gain +0.15 influence and unlock new dialogue branch. If player makes light of it or teases, both gain -0.10 influence.
+2. **The Conversation Path (Player Approaches)**: Player approaches and greets them. Awkward moment.
+Both become slightly guarded, but not hostile. Sera says something like "Morning tea helps with
+market chaos," deflecting. Korrin fidgets with his scarf. If player honors the moment with kindness
+(no prying questions), both gain +0.15 influence and unlock new dialogue branch. If player makes
+light of it or teases, both gain -0.10 influence.
 
-3. **The Unspoken Pact (Player Chooses Silence)**: Player recognizes the moment for what it is and simply nods, moving on without comment. This is the "correct" path emotionally. Both Sera and Korrin privately realize the player understood. They each gain +0.20 influence, and a later private dialogue with each unlocks where they explore what the encounter meant. Sera admits "I didn't know I could feel that way." Korrin admits "Maybe I'm not as broken as I thought."
+3. **The Unspoken Pact (Player Chooses Silence)**: Player recognizes the moment for what it is and
+simply nods, moving on without comment. This is the "correct" path emotionally. Both Sera and Korrin
+privately realize the player understood. They each gain +0.20 influence, and a later private
+dialogue with each unlocks where they explore what the encounter meant. Sera admits "I didn't know I
+could feel that way." Korrin admits "Maybe I'm not as broken as I thought."
 
 **NPC Ripples**:
 - **Nima**: Sera is lighter, more present. Nima notices and subtly asks if something's changed. Sera deflects but seems genuinely better.
@@ -255,11 +282,16 @@ This arc creates a profound player motivation: discovering Malrik and Elenya's s
 This isn't always reconcilable. Some choose isolation.
 
 **Consequential Encounters**:
-1. **The Isolationist** (specific NPC varies by playthrough): Player finds them withdrawn, deliberately limiting contact. They admit: "Holding both versions of myself at once—it's too much. I need silence to keep from shattering."
+1. **The Isolationist** (specific NPC varies by playthrough): Player finds them withdrawn,
+deliberately limiting contact. They admit: "Holding both versions of myself at once—it's too much. I
+need silence to keep from shattering."
 
-2. **The Conflicted Reconciler**: An NPC attempts to reconcile their past self with present self but finds irreconcilable differences. Grief returns—now they're mourning not just the lost time, but the divergence of who they were from who they've become.
+2. **The Conflicted Reconciler**: An NPC attempts to reconcile their past self with present self but
+finds irreconcilable differences. Grief returns—now they're mourning not just the lost time, but the
+divergence of who they were from who they've become.
 
-3. **The Functional Split**: Some NPCs compartmentalize, treating their past identity as "someone else" to protect themselves from the full weight of continuity.
+3. **The Functional Split**: Some NPCs compartmentalize, treating their past identity as "someone
+else" to protect themselves from the full weight of continuity.
 
 **Player Consequence**: Restoration becomes morally complex. The player must witness that remembering everything doesn't heal—sometimes it wounds more deeply. The system restoration isn't a solution; it's a reckoning.
 

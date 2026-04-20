@@ -47,7 +47,8 @@ Shepherd Authority Score = AVG(Veynar, Coren, Juria, Lira Authority)
 - Player chooses: "Restart the Corelink"
 
 **Why it works:**
-The system returns as a *tool*, not a controller. The people have already learned synthesis, so the system can reflect that. Everyone wins—but it's a hopeful, not earned, victory.
+The system returns as a *tool*, not a controller. The people have already learned synthesis, so the
+system can reflect that. Everyone wins—but it's a hopeful, not earned, victory.
 
 ---
 
@@ -69,7 +70,9 @@ The system returns as a *tool*, not a controller. The people have already learne
 - Player chooses: "Restart the Corelink"
 
 **Why it matters:**
-The system works technically. But the people didn't do the emotional work. The Corelink will amplify the existing fractures. This is the "intellectual understanding without emotional commitment" ending.
+The system works technically. But the people didn't do the emotional work. The Corelink will amplify
+the existing fractures. This is the "intellectual understanding without emotional commitment"
+ending.
 
 ---
 
@@ -91,7 +94,8 @@ The system works technically. But the people didn't do the emotional work. The C
 - Player chooses: "Abandon the Corelink"
 
 **Why it resonates:**
-The honest path. No illusions. No system. Just people, their wounds, and the hard work of rebuilding by hand. This ending says: "We don't have answers, but at least we're real about it."
+The honest path. No illusions. No system. Just people, their wounds, and the hard work of rebuilding
+by hand. This ending says: "We don't have answers, but at least we're real about it."
 
 ---
 
@@ -114,7 +118,9 @@ The honest path. No illusions. No system. Just people, their wounds, and the har
 - Player chooses: "Abandon the Corelink"
 
 **Why it's hardest:**
-Requires both the highest REMNANTS scores AND the player rejecting the technological solution. Player must trust that the people can build without a system. This is faith in human capability, not faith in technology.
+Requires both the highest REMNANTS scores AND the player rejecting the technological solution.
+Player must trust that the people can build without a system. This is faith in human capability, not
+faith in technology.
 
 ---
 
@@ -136,7 +142,8 @@ Requires both the highest REMNANTS scores AND the player rejecting the technolog
 - Player chooses: "Restart the Corelink"
 
 **Why it works:**
-The system and people co-learn. System provides support as people do the emotional work. Realistic middle ground—not perfect, but promising. The system becomes a partner, not a savior.
+The system and people co-learn. System provides support as people do the emotional work. Realistic
+middle ground—not perfect, but promising. The system becomes a partner, not a savior.
 
 ---
 
@@ -158,7 +165,9 @@ The system and people co-learn. System provides support as people do the emotion
 - Player chooses: "Abandon the Corelink"
 
 **Why it's uncertain:**
-No system to lean on. But also no guarantees. People work together slowly, not knowing if they'll succeed. Maximum uncertainty. Velinor and Saori remain in slow healing. The world persists but doesn't know its own future.
+No system to lean on. But also no guarantees. People work together slowly, not knowing if they'll
+succeed. Maximum uncertainty. Velinor and Saori remain in slow healing. The world persists but
+doesn't know its own future.
 
 ---
 
@@ -194,7 +203,8 @@ No system to lean on. But also no guarantees. People work together slowly, not k
 ## Cascading Effects That Support Endings
 
 ### **Archive Network Cascade → Supports Endings 1, 4, 5**
-When player bonds with Malrik, his Memory increases. He influences other Archive members. Their combined clarity makes Malrik/Elenya rebuild more likely.
+When player bonds with Malrik, his Memory increases. He influences other Archive members. Their
+combined clarity makes Malrik/Elenya rebuild more likely.
 
 **Implementation:**
 - Malrik Memory 0.80+ → can articulate what Elenya feared
@@ -202,7 +212,8 @@ When player bonds with Malrik, his Memory increases. He influences other Archive
 - When both reach these levels, "Rebuild Together" becomes possible
 
 ### **Present Circle Cascade → Supports Endings 1, 4, 5**
-When player builds Trust with one Dweller, others sense safety. Stable community makes people capable of witnessing healing relationships.
+When player builds Trust with one Dweller, others sense safety. Stable community makes people
+capable of witnessing healing relationships.
 
 **Implementation:**
 - Ravi Trust 0.80+ → others feel grounded
@@ -249,7 +260,8 @@ All six endings express the core Fourth Layer truth:
 - **Endings 2 & 3** explore what happens when people *can't* (fracture) — system is irrelevant  
 - **Endings 5 & 6** explore what happens when people *are learning* (partial) — system is partner or burden
 
-The player's job isn't to "win" an ending. It's to discover which philosophy they embodied through their choices, and see that philosophy reflected in the world's transformation.
+The player's job isn't to "win" an ending. It's to discover which philosophy they embodied through
+their choices, and see that philosophy reflected in the world's transformation.
 
 ---
 

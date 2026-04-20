@@ -4,7 +4,9 @@
 
 ## Overview
 
-This document describes the complete end-to-end pipeline for extracting emotional patterns from Project Gutenberg poetry collections and converting them into the Saoriverse's emotional glyph system.
+This document describes the complete end-to-end pipeline for extracting emotional patterns from
+Project Gutenberg poetry collections and converting them into the Saoriverse's emotional glyph
+system.
 
 The pipeline processes **30+ classic poetry collections** (approximately 2-3 million words) and:
 
@@ -122,10 +124,10 @@ python scripts/utilities/gutenberg_fetcher.py
 
 **Processing Pipeline**:
 
-1. **Chunk Text**: Split into 500-word semantic chunks (respecting sentence boundaries)
-2. **Extract Signals**: Use AdaptiveSignalExtractor to identify emotional dimensions
-3. **Learn Patterns**: Update shared lexicon with new vocabulary and patterns
-4. **Track Metrics**: Record coverage, contributions, dimension discoveries
+1. **Chunk Text**: Split into 500-word semantic chunks (respecting sentence boundaries) 2. **Extract
+Signals**: Use AdaptiveSignalExtractor to identify emotional dimensions 3. **Learn Patterns**:
+Update shared lexicon with new vocabulary and patterns 4. **Track Metrics**: Record coverage,
+contributions, dimension discoveries
 
 **Key Classes**:
 
@@ -664,10 +666,9 @@ Solution: Lower frequency threshold from 300 to 200
 
 The AdaptiveSignalExtractor uses several techniques to discover new emotional dimensions:
 
-1. **Keyword Co-occurrence**: Words appearing together suggest emotional combinations
-2. **Semantic Clustering**: Similar words grouped by context
-3. **Frequency Analysis**: Emerging patterns in new texts
-4. **Context Weaving**: Emotional shifts within single poems
+1. **Keyword Co-occurrence**: Words appearing together suggest emotional combinations 2. **Semantic
+Clustering**: Similar words grouped by context 3. **Frequency Analysis**: Emerging patterns in new
+texts 4. **Context Weaving**: Emotional shifts within single poems
 
 Example:
 
@@ -761,10 +762,10 @@ External Storage:
 
 To extend the Project Gutenberg extraction project:
 
-1. **Add Poetry Collections**: Update `POETRY_BOOKS` in `gutenberg_fetcher.py`
-2. **Improve Signal Extraction**: Modify `adaptive_signal_extractor.py`
-3. **Enhance Glyph Generation**: Update pattern analysis in `glyph_generator_from_extracted_data.py`
-4. **Report Results**: Submit processing metrics and generated glyphs
+1. **Add Poetry Collections**: Update `POETRY_BOOKS` in `gutenberg_fetcher.py` 2. **Improve Signal
+Extraction**: Modify `adaptive_signal_extractor.py` 3. **Enhance Glyph Generation**: Update pattern
+analysis in `glyph_generator_from_extracted_data.py` 4. **Report Results**: Submit processing
+metrics and generated glyphs
 
 ## License & Attribution
 

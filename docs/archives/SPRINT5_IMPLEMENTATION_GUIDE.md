@@ -71,7 +71,7 @@ if glyphs:
 ```python
 from sprint5_integration import init_sprint5_systems, log_interaction, get_session_metrics
 
-# Initialize Sprint 5 systems (do this once, at app startup)
+## Initialize Sprint 5 systems (do this once, at app startup)
 if "sprint5_initialized" not in st.session_state:
     init_sprint5_systems(
         enable_profiling=False,  # Keep False in production (minimal overhead)
@@ -79,7 +79,7 @@ if "sprint5_initialized" not in st.session_state:
     )
     st.session_state.sprint5_initialized = True
 
-# Log each interaction in your chat loop
+## Log each interaction in your chat loop
 def on_user_message(user_text, confidence=0.95):
     latency_ms = time.time() - start_time
 
@@ -115,7 +115,7 @@ def on_user_message(user_text, confidence=0.95):
 ```python
 from sprint5_integration import validate_user_input
 
-# Validate input before processing
+## Validate input before processing
 is_valid, error_msg = validate_user_input(
     user_text=user_input,
     confidence=transcription_confidence
@@ -135,7 +135,7 @@ Here's how it fits into the existing `main_v2.py` → `ui.py` flow:
 
 ```python
 
-# In emotional_os/deploy/modules/ui.py
+## In emotional_os/deploy/modules/ui.py
 
 import time
 from sprint5_integration import (
@@ -241,7 +241,7 @@ from enhanced_response_composer import create_enhanced_composer
 
 composer = create_enhanced_composer()
 
-# Test with high-emotion input
+## Test with high-emotion input
 glyphs = [{'glyph_name': 'Tension Hold', 'voltage': 0.8}]
 
 response, prosody = composer.compose_multi_glyph_response(
@@ -328,7 +328,7 @@ If issues arise, revert to standard composer:
 
 ```python
 
-# In ui.py
+## In ui.py
 composer = DynamicResponseComposer()  # Use original
 response_text = composer.compose_multi_glyph_response(...)
 ```

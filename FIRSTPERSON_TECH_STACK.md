@@ -423,13 +423,10 @@ Foundation Presence Depth → Response Generation
 
 ## 🎯 User Experience
 
-1. **Splash Screen** → Select "Demo" or "Sign In"
-2. **Authentication** → Supabase login
-3. **Chat Interface** → Type message, hit enter
-4. **Response** → AI responds with emotional awareness
-5. **History** → Scroll up to review conversation
-6. **Settings** → Configure preferences & learning
-7. **Sidebar** → Processing mode, diagnostics
+1. **Splash Screen** → Select "Demo" or "Sign In" 2. **Authentication** → Supabase login 3. **Chat
+Interface** → Type message, hit enter 4. **Response** → AI responds with emotional awareness 5.
+**History** → Scroll up to review conversation 6. **Settings** → Configure preferences & learning 7.
+**Sidebar** → Processing mode, diagnostics
 
 ---
 

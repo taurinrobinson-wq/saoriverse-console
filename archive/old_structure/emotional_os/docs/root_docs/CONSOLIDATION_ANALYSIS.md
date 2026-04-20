@@ -4,9 +4,9 @@
 
 Your system has **3 major sources of duplication**:
 
-1. **4 versions of `signal_parser.py`** (695 lines total, highly redundant)
-2. **3 versions of `lexicon_learner.py`** (703 lines total, overlapping features)
-3. **Lexicon files scattered across 4 locations** (JSON desynchronization risk)
+1. **4 versions of `signal_parser.py`** (695 lines total, highly redundant) 2. **3 versions of
+`lexicon_learner.py`** (703 lines total, overlapping features) 3. **Lexicon files scattered across 4
+locations** (JSON desynchronization risk)
 
 **Impact**: Maintenance nightmare, desynchronization bugs, increased cognitive load
 
@@ -72,9 +72,9 @@ Your system has **3 major sources of duplication**:
 ## 🔍 Why This Happened
 
 1. **Modular Experimentation**: Different subsystems (glyphs, deploy, parser) evolved independently
-2. **Path Coupling**: Each module hard-coded its own lexicon paths
-3. **No Central Registry**: No clear "canonical" version, so copies multiplied
-4. **Incremental Enhancement**: Bug fixes weren't propagated back to all copies
+2. **Path Coupling**: Each module hard-coded its own lexicon paths 3. **No Central Registry**: No
+clear "canonical" version, so copies multiplied 4. **Incremental Enhancement**: Bug fixes weren't
+propagated back to all copies
 
 ##
 
@@ -233,12 +233,9 @@ from emotional_os.core.signal_parser import *
 
 ## 🚀 Next Steps
 
-1. Review this analysis
-2. Approve consolidation approach
-3. I'll execute Phase 1: Create canonical modules
-4. Verify tests pass
-5. Phase 2: Migrate all consumers
-6. Phase 3: Backward compatibility stubs
+1. Review this analysis 2. Approve consolidation approach 3. I'll execute Phase 1: Create canonical
+modules 4. Verify tests pass 5. Phase 2: Migrate all consumers 6. Phase 3: Backward compatibility
+stubs
 
 ##
 

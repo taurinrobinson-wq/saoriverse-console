@@ -2,7 +2,8 @@
 
 ## Overview
 
-This document maps how all Velinor design documents interconnect and how they collectively create the game's architecture.
+This document maps how all Velinor design documents interconnect and how they collectively create
+the game's architecture.
 
 ---
 
@@ -180,38 +181,36 @@ This document maps how all Velinor design documents interconnect and how they co
 ## How to Use These Documents
 
 ### **For Narrative Design**
-1. Start with **Narrative Spine** (what are the fixed anchors?)
-2. Detail each anchor with **Scene Branching** documents (Marketplace Debate)
-3. Define consequences with **Event Timeline** documents (Building Collapse)
-4. Map all possible outcomes with **Endings** document (Six Endings)
-5. Ensure **Emotional OS Mechanics** explains why those outcomes exist
+1. Start with **Narrative Spine** (what are the fixed anchors?) 2. Detail each anchor with **Scene
+Branching** documents (Marketplace Debate) 3. Define consequences with **Event Timeline** documents
+(Building Collapse) 4. Map all possible outcomes with **Endings** document (Six Endings) 5. Ensure
+**Emotional OS Mechanics** explains why those outcomes exist
 
 ### **For Dialogue Writing**
-1. Check which scene you're writing (from Narrative Spine)
-2. Read appropriate **Scene Branching** document (e.g., Marketplace Debate Branching)
-3. Note the dialogue branches and trait tags
-4. Consult **Emotional OS Mechanics** for how NPC reacts to player's trait profile
-5. Ensure dialogue connects to story consequences (via Event Timeline or Endings)
+1. Check which scene you're writing (from Narrative Spine) 2. Read appropriate **Scene Branching**
+document (e.g., Marketplace Debate Branching) 3. Note the dialogue branches and trait tags 4.
+Consult **Emotional OS Mechanics** for how NPC reacts to player's trait profile 5. Ensure dialogue
+connects to story consequences (via Event Timeline or Endings)
 
 ### **For Systems Design**
-1. Define all traits in **Emotional OS Mechanics**
-2. Create systems to track trait profile (pattern, not individual choices)
-3. Build NPC reaction logic based on **Emotional OS Mechanics** (how does NPC respond to trait profile?)
-4. Wire story state updates to **Event Timeline** (does this choice affect collapse trajectory?)
-5. Calculate ending eligibility using **Six Endings** (which endings are now possible?)
+1. Define all traits in **Emotional OS Mechanics** 2. Create systems to track trait profile
+(pattern, not individual choices) 3. Build NPC reaction logic based on **Emotional OS Mechanics**
+(how does NPC respond to trait profile?) 4. Wire story state updates to **Event Timeline** (does
+this choice affect collapse trajectory?) 5. Calculate ending eligibility using **Six Endings**
+(which endings are now possible?)
 
 ### **For Level Design**
-1. Use **Narrative Spine** to determine which areas matter at which times
-2. Check **Marketplace Debate Branching** for specific locations (archive building, marketplace)
-3. Use **Building Collapse Timeline** to plan destruction sequence and timing
-4. Ensure **Emotional OS Mechanics** is reflected in NPC placement and spacing (can player easily separate Malrik/Elenya, or are they always together?)
+1. Use **Narrative Spine** to determine which areas matter at which times 2. Check **Marketplace
+Debate Branching** for specific locations (archive building, marketplace) 3. Use **Building Collapse
+Timeline** to plan destruction sequence and timing 4. Ensure **Emotional OS Mechanics** is reflected
+in NPC placement and spacing (can player easily separate Malrik/Elenya, or are they always
+together?)
 
 ### **For QA**
-1. Read **Narrative Spine** to understand intended flow
-2. Verify all **Scene Branching** dialogue options exist and function
-3. Test **Event Timeline** triggers (does collapse happen when expected?)
-4. Validate **Six Endings** are all reachable (play through with different trait profiles)
-5. Check **Emotional OS Mechanics** (do traits actually affect NPC behavior as documented?)
+1. Read **Narrative Spine** to understand intended flow 2. Verify all **Scene Branching** dialogue
+options exist and function 3. Test **Event Timeline** triggers (does collapse happen when expected?)
+4. Validate **Six Endings** are all reachable (play through with different trait profiles) 5. Check
+**Emotional OS Mechanics** (do traits actually affect NPC behavior as documented?)
 
 ---
 
@@ -271,30 +270,27 @@ NARRATIVE_SPINE_AND_STRUCTURE.md (foundation)
 
 ### **Test 1: Trace a Player's Path**
 
-Pick a trait profile (e.g., High Empathy, Medium Skepticism, High Integration):
-1. See what dialogue options are available in Marketplace Debate (from Branching document)
-2. Predict NPC reactions (from Emotional OS Mechanics)
-3. Predict what path Malrik/Elenya take during collapse (from Collapse Timeline)
-4. Predict which ending is accessible (from Six Endings document)
-5. Verify the prediction matches the intended design
+Pick a trait profile (e.g., High Empathy, Medium Skepticism, High Integration): 1. See what dialogue
+options are available in Marketplace Debate (from Branching document) 2. Predict NPC reactions (from
+Emotional OS Mechanics) 3. Predict what path Malrik/Elenya take during collapse (from Collapse
+Timeline) 4. Predict which ending is accessible (from Six Endings document) 5. Verify the prediction
+matches the intended design
 
 ### **Test 2: Trace an NPC's Response**
 
-Pick an NPC (e.g., Coren) and a scene (e.g., Building Collapse Day 3):
-1. What's Coren's emotional state? (from Collapse Timeline)
-2. What trait profile does this player have? (from Emotional OS Mechanics)
-3. What's the expected dialogue? (from Collapse Timeline + Emotional OS Mechanics)
-4. Does it affect rebuild trajectory? (from Collapse Timeline)
-5. Verify it connects to ending possibilities (from Six Endings)
+Pick an NPC (e.g., Coren) and a scene (e.g., Building Collapse Day 3): 1. What's Coren's emotional
+state? (from Collapse Timeline) 2. What trait profile does this player have? (from Emotional OS
+Mechanics) 3. What's the expected dialogue? (from Collapse Timeline + Emotional OS Mechanics) 4.
+Does it affect rebuild trajectory? (from Collapse Timeline) 5. Verify it connects to ending
+possibilities (from Six Endings)
 
 ### **Test 3: Reverse-Engineer an Ending**
 
-Pick an ending (e.g., Ending 4: The Earned Synthesis):
-1. What trait profile is required? (from Six Endings document)
-2. What needs to have happened in Marketplace Debate? (from Branching document)
-3. What path must Malrik/Elenya take in Building Collapse? (from Collapse Timeline)
-4. What decisions must the player make? (from Collapse Timeline)
-5. Create a full playthrough path that leads to that ending
+Pick an ending (e.g., Ending 4: The Earned Synthesis): 1. What trait profile is required? (from Six
+Endings document) 2. What needs to have happened in Marketplace Debate? (from Branching document) 3.
+What path must Malrik/Elenya take in Building Collapse? (from Collapse Timeline) 4. What decisions
+must the player make? (from Collapse Timeline) 5. Create a full playthrough path that leads to that
+ending
 
 ---
 
@@ -316,16 +312,16 @@ Pick an ending (e.g., Ending 4: The Earned Synthesis):
 
 1. **Dialogue System:** Build dialogue option system with trait tags
    - Reference: Marketplace Debate Branching, Emotional OS Mechanics
-   
+
 2. **Trigger System:** Build event system that tracks timelines
    - Reference: Building Collapse Timeline, Narrative Spine
-   
+
 3. **NPC Behavior:** Build NPC reaction system based on trait profiles
    - Reference: Emotional OS Mechanics, all branching documents
-   
+
 4. **Ending System:** Build logic to calculate which ending is accessible
    - Reference: Six Endings, Emotional OS Mechanics
-   
+
 5. **Coherence Tracking:** Build system to track trait coherence
    - Reference: Emotional OS Mechanics
 
@@ -359,6 +355,8 @@ These documents collectively describe a game where:
 - **People matter more than systems** (core theme tested at every scale)
 - **The world is a mirror** (reflects player's emotional stance back at them)
 
-If you implement these documents correctly, the player won't feel like they're playing a game with emotional systems. They'll feel like they're in a world that understands them, responds to them authentically, and reflects their choices back to them in meaningful ways.
+If you implement these documents correctly, the player won't feel like they're playing a game with
+emotional systems. They'll feel like they're in a world that understands them, responds to them
+authentically, and reflects their choices back to them in meaningful ways.
 
 That's the goal. That's Velinor.

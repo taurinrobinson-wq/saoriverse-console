@@ -48,10 +48,11 @@ High-level suggestions (actionable)
 8. Tests & validation
 - Add unit tests that validate a sample of glyphs against the schema and the rulebook mappings.
 
-Suggested next steps (priority)
-1. You supply authoritative rule text for the remaining NPCs and Presence thresholds. I will encode it in `Glyph_Rules.json` and re-run enrichment.
-2. Add `presence_time_seconds` and `presence_strength` fields to schema if you want numeric checks. I can update schema accordingly.
-3. If you want the CLI wrapper next, I can add `scripts/manage_glyphs.py` that executes the pipeline and optionally commits. That can come after rule expansion.
+Suggested next steps (priority) 1. You supply authoritative rule text for the remaining NPCs and
+Presence thresholds. I will encode it in `Glyph_Rules.json` and re-run enrichment. 2. Add
+`presence_time_seconds` and `presence_strength` fields to schema if you want numeric checks. I can
+update schema accordingly. 3. If you want the CLI wrapper next, I can add `scripts/manage_glyphs.py`
+that executes the pipeline and optionally commits. That can come after rule expansion.
 
 Notes
 - All changes are committed to `main`. Re-running the enrichment scripts is idempotent — re-run after rule edits to refresh JSON.

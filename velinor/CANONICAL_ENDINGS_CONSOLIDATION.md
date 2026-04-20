@@ -8,8 +8,8 @@
 
 Velinor's ending system operates on **two interdependent axes**:
 
-1. **The Malrik/Elenya Relationship Arc** (Determines "world coherence")
-2. **The Final Corelink Choice** (Determines "system resolution")
+1. **The Malrik/Elenya Relationship Arc** (Determines "world coherence") 2. **The Final Corelink
+Choice** (Determines "system resolution")
 
 The combination of these two decisions creates six distinct endings.
 
@@ -18,7 +18,8 @@ The combination of these two decisions creates six distinct endings.
 ## The Two Axes Explained
 
 ### **Axis 1: Malrik & Elenya's Rebuild State**
-This is determined throughout the game by player choices, NPC relationship tracking, and the Collapse Timeline sequence.
+This is determined throughout the game by player choices, NPC relationship tracking, and the
+Collapse Timeline sequence.
 
 **States:**
 - **Rebuild Together** (Full synthesis) — Happens when player advocates consistently and intervenes with empathy
@@ -39,7 +40,8 @@ This happens in the final chamber with Saori and Velinor.
 
 ## The Six Primary Endings (02_SIX_ENDINGS_EXPLICIT_MAP.md - Canonical)
 
-These are created by the **2×3 matrix**: (Restart vs. Abandon) × (Rebuild Together, Partial Rebuild, Abandon/Fracture)
+These are created by the **2×3 matrix**: (Restart vs. Abandon) × (Rebuild Together, Partial Rebuild,
+Abandon/Fracture)
 
 ### **Ending 1: The Hopeful Synthesis**
 **Conditions:**
@@ -48,7 +50,8 @@ These are created by the **2×3 matrix**: (Restart vs. Abandon) × (Rebuild Toge
 - Player path: Synthesis-leaning choices throughout
 
 **Meaning:**
-The people of Velhara have learned to hold multiple truths. The system restarts as a *mirror* of what they've already chosen—not a controller, but a reflection of their own coherence.
+The people of Velhara have learned to hold multiple truths. The system restarts as a *mirror* of
+what they've already chosen—not a controller, but a reflection of their own coherence.
 
 **Visual/Emotional:** Light returning, merged codex colors (blues + ambers → white), healing connection between Saori and Velinor.
 
@@ -67,7 +70,9 @@ The people of Velhara have learned to hold multiple truths. The system restarts 
 - Player path: Intellectual understanding but emotional distance
 
 **Meaning:**
-The player understood the philosophy but couldn't make it happen. The system restarts anyway, hoping technology can solve what people couldn't. It succeeds technically but fails emotionally—history repeats.
+The player understood the philosophy but couldn't make it happen. The system restarts anyway, hoping
+technology can solve what people couldn't. It succeeds technically but fails emotionally—history
+repeats.
 
 **Visual/Emotional:** Corelink glows with eerie, artificial quality. Malrik and Elenya walk away as silhouettes. City lights return but feel hollow.
 
@@ -86,7 +91,8 @@ The player understood the philosophy but couldn't make it happen. The system res
 - Player path: Authentic skepticism of systems
 
 **Meaning:**
-The player chooses not to restart the system. Neither do the people choose to rebuild. The city is genuinely broken, but people face it honestly without illusions of technological salvation.
+The player chooses not to restart the system. Neither do the people choose to rebuild. The city is
+genuinely broken, but people face it honestly without illusions of technological salvation.
 
 **Visual/Emotional:** Corelink dims and goes dark. City lights go out one by one. But in the marketplace, small fires light up as people gather to rebuild by hand. Malrik's archive is a skeleton. Elenya's mystics scatter.
 
@@ -105,7 +111,8 @@ The player chooses not to restart the system. Neither do the people choose to re
 - Player path: Full synthesis + active advocacy
 
 **Meaning:**
-The hardest ending. The player refuses the technological shortcut. The people choose to build coherence themselves. It's not finished—it may never be—but it's earned.
+The hardest ending. The player refuses the technological shortcut. The people choose to build
+coherence themselves. It's not finished—it may never be—but it's earned.
 
 **Visual/Emotional:** Corelink fades into silence. From above comes sound of construction. Rebuilt archive is half-Malrik, half-Elenya. Saori and Velinor's connection healing. Marketplace alive with possibility. Coren stands as friend, not mediator.
 
@@ -124,7 +131,8 @@ The hardest ending. The player refuses the technological shortcut. The people ch
 - Player path: Some but not all synthesis pathways
 
 **Meaning:**
-The system and people are in dialogue. System restarts as Malrik and Elenya begin rebuilding. They learn from each other in real time—not perfect, but calibrating together.
+The system and people are in dialogue. System restarts as Malrik and Elenya begin rebuilding. They
+learn from each other in real time—not perfect, but calibrating together.
 
 **Visual/Emotional:** Corelink restarts with warmer tone. As it powers up, receives signals from the rebuilding archive below—two factions' voices intertwining in data. Softer, more distributed city light.
 
@@ -143,7 +151,8 @@ The system and people are in dialogue. System restarts as Malrik and Elenya begi
 - Player path: Detachment from factional dynamics
 
 **Meaning:**
-No system. No guarantor. But there is movement—people rebuilding imperfectly, without institutional support. Messy, uncertain, but authentic.
+No system. No guarantor. But there is movement—people rebuilding imperfectly, without institutional
+support. Messy, uncertain, but authentic.
 
 **Visual/Emotional:** Corelink goes dark. City dim, lit by small fires and bioluminescence. Archive work is tentative and uncertain. Coren mediates without institutional power. Saori and Velinor connection healing slowly.
 
@@ -157,7 +166,9 @@ No system. No guarantor. But there is movement—people rebuilding imperfectly, 
 
 ## The Saori/Velinor Sub-Paths (VELINOR_SAORI_FINAL_ARC.md)
 
-Note: These six choices appear to represent variations *within* the final chamber sequence, potentially sub-branching from the primary six endings above. **Clarification needed on whether these replace or nest within the primary six.**
+Note: These six choices appear to represent variations *within* the final chamber sequence,
+potentially sub-branching from the primary six endings above. **Clarification needed on whether
+these replace or nest within the primary six.**
 
 | Sub-Path | Velinor Fate | Saori Fate | Archive Fate |
 |----------|--------------|-----------|------------|
@@ -248,7 +259,8 @@ The six endings all illustrate this principle:
 - Endings 2 & 3 show what happens when people don't (system is irrelevant)
 - Endings 5 & 6 show the in-between state (system and people co-learning or struggling)
 
-The real ending isn't determined by the Corelink choice. It's determined by whether Malrik and Elenya—and by extension, the community—chose synthesis or fracture.
+The real ending isn't determined by the Corelink choice. It's determined by whether Malrik and
+Elenya—and by extension, the community—chose synthesis or fracture.
 
 ---
 
@@ -267,7 +279,8 @@ The real ending isn't determined by the Corelink choice. It's determined by whet
 
 ## Unresolved Questions for Clarification
 
-1. **Are the Saori/Velinor sub-paths (6 branches from VELINOR_SAORI_FINAL_ARC.md) separate from or nested within the primary six endings?**
+1. **Are the Saori/Velinor sub-paths (6 branches from VELINOR_SAORI_FINAL_ARC.md) separate from or
+nested within the primary six endings?**
    - Option A: They replace the primary six (primary doc is outdated)
    - Option B: They nest within (3 primary paths × 2 Saori choices = 6 variations)
    - Option C: They're parallel branching (player gets two sequential choices)

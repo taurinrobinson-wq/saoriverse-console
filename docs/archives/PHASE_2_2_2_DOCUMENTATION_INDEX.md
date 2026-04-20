@@ -111,10 +111,10 @@ from emotional_os.core.firstperson import (
     get_glyph_for_affect
 )
 
-# Detect affect
+## Detect affect
 affect = {"tone": "sad", "arousal": 0.2, "valence": -0.9, "tone_confidence": 0.85}
 
-# Check if should use glyph responses
+## Check if should use glyph responses
 if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affect["valence"]):
     # Compose glyph-aware response
     response, glyph = compose_glyph_aware_response("I'm exhausted", affect)
@@ -145,10 +145,10 @@ See `PHASE_2_2_2_QUICK_REFERENCE.md` for complete API reference.
 
 ```bash
 
-# Run all glyph tests
+## Run all glyph tests
 pytest emotional_os/core/firstperson/test_glyph_response_composer.py -v
 
-# Run full FirstPerson suite
+## Run full FirstPerson suite
 pytest emotional_os/core/firstperson/test_*.py -v
 ```
 

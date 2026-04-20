@@ -79,7 +79,7 @@ To see more granular NPC differences, adjust correlation weights in `npc_manager
 
 ```python
 
-# Direct effect: 1:1 (full correlation)
+## Direct effect: 1:1 (full correlation)
 npc.adjust_trait(trait, delta)
 ```
 
@@ -88,7 +88,7 @@ npc.adjust_trait(trait, delta)
 
 ```python
 
-# Soften the effect
+## Soften the effect
 npc.adjust_trait(trait, delta * 0.5)
 ```
 
@@ -97,7 +97,7 @@ npc.adjust_trait(trait, delta * 0.5)
 
 ```python
 
-# Much more subtle
+## Much more subtle
 npc.adjust_trait(trait, delta * 0.2)
 ```
 

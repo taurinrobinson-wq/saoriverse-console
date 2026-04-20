@@ -155,7 +155,7 @@ def build_my_new_scene() -> SceneModule:
         glyph_close=["Querrä", "Cinarä̈"],
     )
 
-# Add to sequence at bottom:
+## Add to sequence at bottom:
 @staticmethod
 def get_sequence() -> List[SceneModule]:
     return [
@@ -292,7 +292,7 @@ Have fun exploring the marketplace! 🎮
 
 ---
 
-# 🌒 Velinor Streamlit Prototype - Full Game Implementation
+## 🌒 Velinor Streamlit Prototype - Full Game Implementation
 
 ## New: Complete Streamlit Implementation
 
@@ -422,20 +422,10 @@ Use glyphs and skills to shift perception, unlock special dialogue.
 In `stories/story_definitions.py`:
 
 ```python
-story.add_passage(
-    name="my_scene",
-    text="*Dialogue here*",
-    background="location",
-    npcs=["Ravi"]
-)
+story.add_passage( name="my_scene", text="*Dialogue here*", background="location", npcs=["Ravi"] )
 
-story.add_choice(
-    from_passage_name="my_scene",
-    choice_text="Choice text",
-    to_passage_name="next_scene",
-    tone_effects={"courage": 0.2},
-    npc_resonance={"Ravi": 0.1}
-)
+story.add_choice( from_passage_name="my_scene", choice_text="Choice text",
+to_passage_name="next_scene", tone_effects={"courage": 0.2}, npc_resonance={"Ravi": 0.1} )
 ```
 
 ### Add Glyphs
@@ -443,13 +433,8 @@ story.add_choice(
 In `streamlit_state.py`:
 
 ```python
-"MyGlyph": Glyph(
-    name="MyGlyph",
-    description="Does X",
-    unlock_condition="scene_name",
-    emotional_effect="courage",
-    npc_resonance={"Ravi": 0.8}
-)
+"MyGlyph": Glyph( name="MyGlyph", description="Does X", unlock_condition="scene_name",
+emotional_effect="courage", npc_resonance={"Ravi": 0.8} )
 ```
 
 ### Add Skills
@@ -457,23 +442,15 @@ In `streamlit_state.py`:
 In `streamlit_state.py`:
 
 ```python
-"My Skill": Skill(
-    name="My Skill",
-    description="Unlocks special dialogue",
-    dialogue_banks=["scene1", "scene2"]
-)
+"My Skill": Skill( name="My Skill", description="Unlocks special dialogue",
+dialogue_banks=["scene1", "scene2"] )
 ```
 
 ## Architecture
 
 ```
-Streamlit App
-    ↓
-[Session State] ← [Game State] ← [UI Components]
-    ↓                  ↓
-[Orchestrator] ← [Story Engine]
-    ↓
-[Emotional OS] → [NPC System]
+Streamlit App ↓ [Session State] ← [Game State] ← [UI Components] ↓                  ↓ [Orchestrator]
+← [Story Engine] ↓ [Emotional OS] → [NPC System]
 ```
 
 **Data Flow:**
@@ -518,4 +495,3 @@ Validates:
 5. **Port to React** - Build final cinematic version
 
 See `STREAMLIT_README.md` for complete documentation.
-

@@ -9,20 +9,20 @@ Quick reference for integrating Sprint 5 modules into existing voice interface.
 ```python
 from spoken_interface.performance_profiler import PerformanceProfiler, ModelPerformanceBenchmark
 
-# Initialize profiler
+## Initialize profiler
 profiler = PerformanceProfiler()
 
-# Measure STT
+## Measure STT
 transcript = profiler.measure("stt", transcribe_audio, audio_bytes)
 
-# Measure TTS
+## Measure TTS
 audio = profiler.measure("tts", synthesize_speech, text)
 
-# Check for bottlenecks
+## Check for bottlenecks
 summary = profiler.get_summary()
 print(summary)
 
-# Get model recommendation
+## Get model recommendation
 if summary["avg_latency_ms"] > 300:
     faster_model = ModelPerformanceBenchmark.get_whisper_recommendation(150)
 ```
@@ -35,7 +35,7 @@ from spoken_interface.advanced_prosody import AdvancedProsodyPlanner
 
 planner = AdvancedProsodyPlanner()
 
-# Plan prosody for emotional response
+## Plan prosody for emotional response
 plan = planner.plan_advanced_prosody(
     text="I'm really glad to hear that!",
     voltage=0.8,
@@ -44,7 +44,7 @@ plan = planner.plan_advanced_prosody(
     certainty=0.85
 )
 
-# Use plan directives
+## Use plan directives
 print(f"Pitch contour: {plan.pitch_contour}")
 print(f"Emphasis points: {plan.emphasis_points}")
 print(f"Breath style: {plan.breath_style}")
@@ -57,10 +57,10 @@ print(f"Breathiness: {plan.breathiness}")
 ```python
 from spoken_interface.session_logger import SessionLogger
 
-# Initialize logger
+## Initialize logger
 logger = SessionLogger(save_dir="./logs/sessions")
 
-# Log interactions
+## Log interactions
 logger.log_user_message("Hello!", confidence=0.95, latency_ms=200)
 logger.log_assistant_message(
     "Hi there!",
@@ -68,12 +68,12 @@ logger.log_assistant_message(
     latency_ms=150
 )
 
-# Get metrics
+## Get metrics
 metrics = logger.calculate_session_metrics()
 print(f"Quality: {metrics['quality_score']}")
 print(f"Consistency: {metrics['consistency_score']}")
 
-# Save session
+## Save session
 logger.save_session()
 ```
 
@@ -85,13 +85,13 @@ from spoken_interface.voice_ui_enhancements import VoiceUIEnhancements
 
 enhancements = VoiceUIEnhancements()
 
-# Validate audio before processing
+## Validate audio before processing
 is_valid, error = enhancements.handle_audio_edge_cases(audio_bytes)
 if not is_valid:
     print(f"Error: {error}")
     return
 
-# Validate transcription
+## Validate transcription
 is_valid, error = enhancements.handle_transcription_edge_cases(
     text=transcript,
     confidence=conf_score
@@ -100,7 +100,7 @@ if not is_valid:
     print(f"Error: {error}")
     return
 
-# Display metrics
+## Display metrics
 enhancements.render_performance_metrics(latency_ms=250, confidence=0.95)
 ```
 
@@ -111,17 +111,17 @@ enhancements.render_performance_metrics(latency_ms=250, confidence=0.95)
 
 ```python
 
-# At top of file
+## At top of file
 from spoken_interface.performance_profiler import PerformanceProfiler
 from spoken_interface.session_logger import SessionLogger
 from spoken_interface.voice_ui_enhancements import VoiceUIEnhancements
 
-# Initialize once
+## Initialize once
 profiler = PerformanceProfiler()
 logger = SessionLogger(save_dir="./logs/sessions")
 enhancements = VoiceUIEnhancements()
 
-# In chat loop
+## In chat loop
 def process_voice_input(audio_bytes):
     # Validate audio
     is_valid, error = enhancements.handle_audio_edge_cases(audio_bytes)
@@ -199,7 +199,7 @@ def generate_voice_response(response_text, emotional_state):
 
 ```python
 
-# Add to sidebar
+## Add to sidebar
 with st.sidebar:
     st.title("Performance & Metrics")
 

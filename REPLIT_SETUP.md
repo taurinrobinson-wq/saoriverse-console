@@ -36,12 +36,9 @@ Your Replit project should have this structure:
 
 When you click **Run**, the sequence will be:
 
-1. ✅ Change to `draftshift-web` directory
-2. ✅ Check for `node_modules` → auto-install if missing
-3. ✅ Check for `dist/` → auto-build if missing
-4. ✅ Install Python dependencies (`pip install -r requirements.txt`)
-5. ✅ Start FastAPI server on port 8000
-6. ✅ Serve React UI from `/`
+1. ✅ Change to `draftshift-web` directory 2. ✅ Check for `node_modules` → auto-install if missing 3.
+✅ Check for `dist/` → auto-build if missing 4. ✅ Install Python dependencies (`pip install -r
+requirements.txt`) 5. ✅ Start FastAPI server on port 8000 6. ✅ Serve React UI from `/`
 
 ### Step 4: Access Your App
 
@@ -74,15 +71,15 @@ You should see:
 ## What run_server.py Does
 
 ```python
-# Checks if node_modules exists
+## Checks if node_modules exists
 if not os.path.exists("node_modules"):
     subprocess.run("npm install", shell=True)
 
-# Checks if dist/ exists  
+## Checks if dist/ exists  
 if not os.path.exists("dist"):
     subprocess.run("npm run build", shell=True)
 
-# Then starts FastAPI server
+## Then starts FastAPI server
 uvicorn.run(app, host="0.0.0.0", port=8000)
 ```
 
@@ -92,9 +89,8 @@ This ensures everything is ready before the server starts.
 
 Once running, test the renamer with:
 
-1. Click **📁 File Renamer** tab
-2. Drag and drop a document (PDF, DOCX, TXT, etc.)
-3. See preview with:
+1. Click **📁 File Renamer** tab 2. Drag and drop a document (PDF, DOCX, TXT, etc.) 3. See preview
+with:
    - Original filename
    - Renamed to: `YYMMDD – Document_Type.ext`
    - Detected date
@@ -122,9 +118,10 @@ Once all checked, click **Run** on Replit!
 
 Check these common problems:
 
-1. **No `.replit` file** → Create one at project root with run command
-2. **Wrong directory** → Make sure you're running from root, not `draftshift-web/`
-3. **Old Replit environment** → Clear cache or reimport from GitHub fresh
-4. **Missing dependencies** → Check `requirements.txt` and `package.json` are complete
+1. **No `.replit` file** → Create one at project root with run command 2. **Wrong directory** → Make
+sure you're running from root, not `draftshift-web/` 3. **Old Replit environment** → Clear cache or
+reimport from GitHub fresh 4. **Missing dependencies** → Check `requirements.txt` and `package.json`
+are complete
 
-See [DEPLOYMENT_CHECKLIST.md](draftshift-web/DEPLOYMENT_CHECKLIST.md) for more detailed troubleshooting.
+See [DEPLOYMENT_CHECKLIST.md](draftshift-web/DEPLOYMENT_CHECKLIST.md) for more detailed
+troubleshooting.

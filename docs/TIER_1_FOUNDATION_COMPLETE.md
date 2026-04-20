@@ -114,10 +114,10 @@ Performance headroom: ~60ms available for future stages
 
 from emotional_os.tier1_foundation import Tier1Foundation
 
-# In response handler init
+## In response handler init
 self.tier1 = Tier1Foundation(conversation_memory=conversation_memory)
 
-# In response generation pipeline
+## In response generation pipeline
 enhanced_response, metrics = self.tier1.process_response( user_input=user_message,
 base_response=generated_response, context=session_context,
 
@@ -132,7 +132,7 @@ base_response=generated_response, context=session_context,
 
 
 
-# In Streamlit session initialization
+## In Streamlit session initialization
 if "tier1_foundation" not in st.session_state: st.session_state.tier1_foundation = Tier1Foundation(
 conversation_memory=st.session_state.conversation_memory
 

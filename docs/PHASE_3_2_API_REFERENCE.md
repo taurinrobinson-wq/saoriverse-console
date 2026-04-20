@@ -173,9 +173,9 @@ class VoiceAnalysis:
 
 Main class for analyzing facial emotion from landmarks.
 
-#### Methods
+#### Methods (2)
 
-##### `__init__()`
+##### `__init__()` (2)
 
 ```python
 
@@ -257,7 +257,7 @@ Input data for facial analysis (68 points normalized to 0-1 range).
 @dataclass class FaceLandmarks: contour: List[Tuple[float, float]]              # 17 points
 right_eyebrow: List[Tuple[float, float]]        # 5 points left_eyebrow: List[Tuple[float, float]]
 
-# 5 points nose: List[Tuple[float, float]]                 # 9 points right_eye: List[Tuple[float,
+## 5 points nose: List[Tuple[float, float]]                 # 9 points right_eye: List[Tuple[float,
 float]]            # 6 points left_eye: List[Tuple[float, float]]             # 6 points
 
 ```text
@@ -321,10 +321,10 @@ Output data from facial expression analysis.
 float                            # 0-1 action_units: ActionUnitIntensities          # AU
 measurements eye_metrics: EyeMetrics mouth_metrics: MouthMetrics arousal: float
 
-# 0-1, sleepy to alert valence: float                               # 0-1, negative to positive
+## 0-1, sleepy to alert valence: float                               # 0-1, negative to positive
 dominance: float                             # 0-1, submissive to assertive attention: float
 
-# 0-1, distracted to focused
+## 0-1, distracted to focused
 
 ```text
 ```text
@@ -341,9 +341,9 @@ dominance: float                             # 0-1, submissive to assertive atte
 
 Fuses text, voice, and facial data into unified emotional understanding.
 
-#### Methods
+#### Methods (3)
 
-##### `__init__()`
+##### `__init__()` (3)
 
 ```python
 
@@ -435,7 +435,7 @@ valence: float                       # 0-1, fused valence dominance: float      
 0-1, fused dominance arousal_source: str                  # "text", "voice", "facial"
 valence_source: str                  # "text", "voice", "facial" dominance_source: str
 
-# "text", "voice", "facial"
+## "text", "voice", "facial"
 
 ```text
 ```text

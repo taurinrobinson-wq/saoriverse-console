@@ -124,7 +124,7 @@ Glyph:" in response: response = response.split("Resonant Glyph:")[0].strip() ret
 import sys
 from pathlib import Path
 
-# Add src to path
+## Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from emotional_os_glyphs.conversation_memory import ConversationMemory
@@ -244,9 +244,9 @@ cd d:\saoriverse-console
 
 **Expected output:**
 
-# ```
+## ```
 
-# TESTING: ConversationMemory Integration
+## TESTING: ConversationMemory Integration
 
 📝 TURN 1: 'I'm feeling so stressed today'
    Confidence: 0.70
@@ -262,7 +262,7 @@ cd d:\saoriverse-console
 
 #
 
-# VALIDATION
+## VALIDATION
 
 ✅ Confidence increased from T1 to T2
 ✅ Memory-aware response generated
@@ -412,7 +412,7 @@ Just in case you want a quick revert:
 
 
 
-# Backup the files you're modifying
+## Backup the files you're modifying
 Copy-Item "src/emotional_os/deploy/modules/ui_refactored.py" "ui_refactored.py.backup" Copy-Item
 "src/emotional_os/deploy/modules/ui_components/response_handler.py" "response_handler.py.backup"
 

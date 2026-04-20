@@ -180,7 +180,7 @@ Analysis:
 - ✅ Easy backup and migration
 - ✅ Full data ownership
 
-### Performance
+### Performance (2)
 
 - ✅ Sub-millisecond enrichment
 - ✅ Instant poetry lookup

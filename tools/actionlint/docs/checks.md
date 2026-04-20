@@ -1116,7 +1116,7 @@ of `github.event` as array. Those properties include untrusted inputs like `gith
 
 
 
-# Echo list of github.event.comment.body, github.event.pull_request.body, ...
+## Echo list of github.event.comment.body, github.event.pull_request.body, ...
 
 ```text
 ```
@@ -2178,7 +2178,7 @@ Example input:
 
 on: push
 
-# ERROR: Available values for whole permissions are "write-all", "read-all" or "none"
+## ERROR: Available values for whole permissions are "write-all", "read-all" or "none"
 permissions: write
 
 jobs:
@@ -2511,7 +2511,7 @@ Example reusable workflow:
 ```yaml
 
 
-# .github/workflows/reusable.yaml
+## .github/workflows/reusable.yaml
 on: workflow_call: inputs: name: type: string required: true id: type: number message: type: string
 secrets: password: required: true
 
@@ -2600,7 +2600,7 @@ Example reusable workflow:
 ```yaml
 
 
-# .github/workflows/get-build-info.yaml
+## .github/workflows/get-build-info.yaml
 on:
   workflow_call:
     outputs:

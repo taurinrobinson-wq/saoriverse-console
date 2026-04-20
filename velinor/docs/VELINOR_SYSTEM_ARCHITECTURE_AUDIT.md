@@ -2,6 +2,6 @@
 
 ## Current State Analysis
 
-... (full audit moved from root) 
+... (full audit moved from root)
 
 (See original file in project root for full detail prior to consolidation.)

@@ -29,17 +29,16 @@ powershell -ExecutionPolicy Bypass -File sync-parallel.ps1
 
 ### Verify Sync Status
 ```bash
-# Check if files match
+## Check if files match
 diff velinor/data/npc_profiles.json velinor-web/src/data/npc_profiles.json
 
-# List all backgrounds in web
+## List all backgrounds in web
 ls -1 velinor-web/public/assets/backgrounds/ | wc -l
 ```
 
 ### After Any Update
-1. Make changes in `velinor/` (engine logic, data, or images)
-2. Run sync script: `sync-parallel.ps1`
-3. Commit both folders together
+1. Make changes in `velinor/` (engine logic, data, or images) 2. Run sync script:
+`sync-parallel.ps1` 3. Commit both folders together
 
 ## Folder Structure
 
@@ -65,28 +64,20 @@ velinor-web/                           ← Frontend (Next.js, synced copy)
 ## Common Tasks
 
 ### Adding a New NPC Portrait
-1. Save PNG to `velinor/npcs/`
-2. Update `velinor/data/npc_profiles.json` if needed
-3. Run: `sync-parallel.ps1`
-4. Verify in web: `http://localhost:3000`
+1. Save PNG to `velinor/npcs/` 2. Update `velinor/data/npc_profiles.json` if needed 3. Run:
+`sync-parallel.ps1` 4. Verify in web: `http://localhost:3000`
 
 ### Updating NPC Traits
-1. Edit `velinor/data/npc_profiles.json`
-2. Run: `sync-parallel.ps1`
-3. Test in Python engine: `python -m velinor.engine.quickstart`
-4. Verify in web frontend
+1. Edit `velinor/data/npc_profiles.json` 2. Run: `sync-parallel.ps1` 3. Test in Python engine:
+`python -m velinor.engine.quickstart` 4. Verify in web frontend
 
 ### Adding New Background
-1. Save PNG to `velinor/backgrounds/`
-2. Run: `sync-parallel.ps1`
-3. Reference in game scenes
-4. Verify loads in web
+1. Save PNG to `velinor/backgrounds/` 2. Run: `sync-parallel.ps1` 3. Reference in game scenes 4.
+Verify loads in web
 
 ### Updating Game Logic
-1. Edit `velinor/engine/npc_manager.py` etc.
-2. If data changes, run: `sync-parallel.ps1`
-3. Test Python engine
-4. Web auto-reflects data changes on next load
+1. Edit `velinor/engine/npc_manager.py` etc. 2. If data changes, run: `sync-parallel.ps1` 3. Test
+Python engine 4. Web auto-reflects data changes on next load
 
 ## Sync Statistics
 
@@ -102,14 +93,14 @@ velinor-web/                           ← Frontend (Next.js, synced copy)
 
 ### Assets not loading in web
 ```powershell
-# Re-sync
+## Re-sync
 cd velinor-web
 powershell -File sync-parallel.ps1
 
-# Clear Next.js cache
+## Clear Next.js cache
 rm -r .next
 
-# Restart dev server
+## Restart dev server
 npm run dev
 ```
 
@@ -123,11 +114,11 @@ git commit -m "chore: Resync parallel folders"
 
 ### Check sync status
 ```bash
-# List all synced files
+## List all synced files
 ls velinor/data/*.json
 ls velinor-web/src/data/*.json
 
-# Compare file counts
+## Compare file counts
 ls -1 velinor/backgrounds/*.png | wc -l
 ls -1 velinor-web/public/assets/backgrounds/*.png | wc -l
 ```
@@ -137,21 +128,21 @@ ls -1 velinor-web/public/assets/backgrounds/*.png | wc -l
 When making changes affecting synced files:
 
 ```bash
-# 1. Make changes
-# Edit velinor/engine/npc_manager.py or data files
+## 1. Make changes
+## Edit velinor/engine/npc_manager.py or data files
 
-# 2. Sync
+## 2. Sync
 cd velinor-web
 powershell -File sync-parallel.ps1
 
-# 3. Test both
+## 3. Test both
 cd ../velinor
 python -m velinor.engine.quickstart  # Test engine
 
 cd ../velinor-web
 npm run dev                          # Test web
 
-# 4. Commit both
+## 4. Commit both
 git add -A
 git commit -m "feat: Update NPC system and sync web
 
@@ -171,10 +162,8 @@ All synced files are verified using MD5 checksums:
 
 When you make changes, remember to:
 
-1. ✅ Update source in `velinor/`
-2. ✅ Run `sync-parallel.ps1`
-3. ✅ Test both engine and web
-4. ✅ Commit both folders
+1. ✅ Update source in `velinor/` 2. ✅ Run `sync-parallel.ps1` 3. ✅ Test both engine and web 4. ✅
+Commit both folders
 
 This keeps everything in sync and prevents frontend/backend mismatches.
 

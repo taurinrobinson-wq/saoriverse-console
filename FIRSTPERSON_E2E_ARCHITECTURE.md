@@ -2,10 +2,9 @@
 
 ## 🎯 Quick Summary
 
-The FirstPerson Streamlit app is a **3-phase emotional response system** that:
-1. **Parse** user input for emotional signals
-2. **Interpret** the context and generate base response  
-3. **Generate** enhanced response with tiers (Foundation, Aliveness, Poetic)
+The FirstPerson Streamlit app is a **3-phase emotional response system** that: 1. **Parse** user
+input for emotional signals 2. **Interpret** the context and generate base response 3. **Generate**
+enhanced response with tiers (Foundation, Aliveness, Poetic)
 
 All tiers are **eager-initialized at app startup** (no first-message lag).
 
@@ -82,16 +81,16 @@ PARSE SIGNALS              INTERPRET             GENERATE
 user_input = "I feel like I'm failing at everything lately."
 conversation_context = {"messages": [...], "user_mood": "low"}
 
-# Phase 1 execution
+## Phase 1 execution
 analysis = parse_input_signals(user_input, conversation_context)
 
-# Output:
-# {
-#   "voltage_response": "[poetic response from glyphs]",
-#   "best_glyph": {"glyph_name": "Burden", "description": "..."},
-#   "emotional_vector": [0.8, 0.2, 0.1, ...],  # fear, sadness, etc
-#   "response_source": "local"
-# }
+## Output:
+## {
+##   "voltage_response": "[poetic response from glyphs]",
+##   "best_glyph": {"glyph_name": "Burden", "description": "..."},
+##   "emotional_vector": [0.8, 0.2, 0.1, ...],  # fear, sadness, etc
+##   "response_source": "local"
+## }
 ```
 
 **Key Methods:**
@@ -108,11 +107,9 @@ analysis = parse_input_signals(user_input, conversation_context)
 **What it does:**
 - Takes parsed signals and generates **base response** (no tier enhancements yet)
 - Tries multiple strategies in order:
-  1. **Mood ring** if asking "what's your mood?"
-  2. **Subordinate responder** for short questions
-  3. **Voltage response** (poetic signal from Phase 1)
-  4. **FirstPerson orchestrator** with glyph matching
-  5. **Fallback** simple acknowledgment
+1. **Mood ring** if asking "what's your mood?" 2. **Subordinate responder** for short questions 3.
+**Voltage response** (poetic signal from Phase 1) 4. **FirstPerson orchestrator** with glyph
+matching 5. **Fallback** simple acknowledgment
 
 **Execution Flow:**
 ```python
@@ -122,15 +119,15 @@ analysis = {
 }
 conversation_context = {"messages": [...]}
 
-# Phase 2 execution
+## Phase 2 execution
 base_response = interpret_emotional_context(
     user_input,
     analysis,
     conversation_context
 )
 
-# Output: "I hear you. That sounds overwhelming. Can you say more about..."
-# (conversational, not yet tier-enhanced)
+## Output: "I hear you. That sounds overwhelming. Can you say more about..."
+## (conversational, not yet tier-enhanced)
 ```
 
 **Key Components:**
@@ -151,27 +148,27 @@ base_response = interpret_emotional_context(
 - Returns enhanced response + processing time
 
 **Tier Application:**
-1. **Tier 1 Foundation** - Learning, safety wrapping, conversation memory
-2. **Tier 2 Aliveness** - Tone, energy, presence, emotional resonance
-3. **Tier 3 Poetic** (optional) - Metaphor, mythology, poetic consciousness
+1. **Tier 1 Foundation** - Learning, safety wrapping, conversation memory 2. **Tier 2 Aliveness** -
+Tone, energy, presence, emotional resonance 3. **Tier 3 Poetic** (optional) - Metaphor, mythology,
+poetic consciousness
 
 **Execution Flow:**
 ```python
 base_response = "I hear you. That sounds overwhelming."
 
-# Phase 3 execution
+## Phase 3 execution
 final_response, elapsed_time = generate_enhanced_response(
     user_input,
     base_response,
     conversation_context
 )
 
-# Tier 1: Adds learning context + safety padding
-# Tier 2: Enhances tone for warmth and presence
-# Tier 3 (if enabled): Adds poetic metaphor
+## Tier 1: Adds learning context + safety padding
+## Tier 2: Enhances tone for warmth and presence
+## Tier 3 (if enabled): Adds poetic metaphor
 
-# Output: "[Full response with all tier enhancements applied]"
-# elapsed_time: 0.45  (seconds)
+## Output: "[Full response with all tier enhancements applied]"
+## elapsed_time: 0.45  (seconds)
 ```
 
 **Key Methods:**
@@ -230,16 +227,16 @@ d:\saoriverse-console\app.py  (root level)
 ### Key Functions in app.py
 
 ```python
-# 1. Initialize session on app load
+## 1. Initialize session on app load
 if "initialized" not in st.session_state:
     from emotional_os.deploy.modules.ui_components.session_manager import initialize_session_state
     initialize_session_state()
     # ✅ This calls eager tier initialization (Phase 2)
 
-# 2. Get user input
+## 2. Get user input
 user_input = st.chat_input("What's on your mind?")
 
-# 3. Process through pipeline (when message arrives)
+## 3. Process through pipeline (when message arrives)
 if user_input:
     from emotional_os.deploy.modules.ui_components.response_handler import handle_response_pipeline
     
@@ -255,7 +252,7 @@ if user_input:
     # 4. Display response
     st.write(response)
 
-# 5. Optional: Show metrics
+## 5. Optional: Show metrics
 st.sidebar.metric("Response Time", f"{elapsed:.2f}s")
 ```
 
@@ -321,16 +318,16 @@ st.session_state = {
 ## 🧪 Testing the System
 
 ```bash
-# Run E2E tests (7 scenarios)
+## Run E2E tests (7 scenarios)
 pytest tests/test_e2e_firstperson.py -v
 
-# Run load test (10 diverse inputs)
+## Run load test (10 diverse inputs)
 pytest tests/test_load_firstperson.py -v
 
-# Run regression tests (edge cases)
+## Run regression tests (edge cases)
 pytest tests/test_regression_firstperson.py -v
 
-# Run latency benchmarks
+## Run latency benchmarks
 pytest tests/test_latency_firstperson.py -v
 ```
 
@@ -365,18 +362,18 @@ pytest tests/test_latency_firstperson.py -v
 ## 🚀 Running the App
 
 ```bash
-# Start Streamlit app
+## Start Streamlit app
 streamlit run app.py
 
-# On first load:
-# 1. Session initializes (eager tier init happens here)
-# 2. UI loads with chat input ready
-# 3. No lag on first message!
+## On first load:
+## 1. Session initializes (eager tier init happens here)
+## 2. UI loads with chat input ready
+## 3. No lag on first message!
 
-# When user types message:
-# 1. handle_response_pipeline() is called
-# 2. Parse → Interpret → Generate (all 3 phases execute)
-# 3. Response displayed in <2 seconds
+## When user types message:
+## 1. handle_response_pipeline() is called
+## 2. Parse → Interpret → Generate (all 3 phases execute)
+## 3. Response displayed in <2 seconds
 ```
 
 ---
@@ -384,7 +381,8 @@ streamlit run app.py
 ## ❓ Common Questions
 
 **Q: Where are tiers initialized?**
-A: In `session_manager.py::initialize_session_state()`. Called from `app.py` on app load (eager init).
+A: In `session_manager.py::initialize_session_state()`. Called from `app.py` on app load (eager
+init).
 
 **Q: How does the spaCy model load without warnings?**
 A: Via `nlp_loader.py` with `@st.cache_resource`. Lazy-loaded, cached, no repeated warnings.
@@ -399,7 +397,8 @@ A: Yes, set `st.session_state["enable_tier3_poetic"] = False` in app.py.
 A: Merged into `response_handler.py` (120 clean lines). Old 1,233-line version is gone.
 
 **Q: How do I add a new response strategy?**
-A: Edit `interpret_phase.py::_build_conversational_response()`. Add a new fallback strategy in the chain.
+A: Edit `interpret_phase.py::_build_conversational_response()`. Add a new fallback strategy in the
+chain.
 
 ---
 

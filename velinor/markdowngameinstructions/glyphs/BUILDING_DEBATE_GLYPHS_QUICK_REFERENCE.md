@@ -2,7 +2,8 @@
 
 ## Status: ✅ COMPLETE
 
-All five glyphs have been successfully modified to integrate the archive building debate, Malrik & Elenya's love story, and Coren's paradox-holding role.
+All five glyphs have been successfully modified to integrate the archive building debate, Malrik &
+Elenya's love story, and Coren's paradox-holding role.
 
 ---
 
@@ -157,19 +158,18 @@ No System + Fracture = Authentic failure, honest collapse
 ## Next Immediate Steps
 
 ### High Priority
-1. Write specific dialogue for Marketplace Debate scene (Act II)
-2. Create visual assets for building locations and character poses
-3. Define the six ending branching logic based on Malrik/Elenya choice + System choice
+1. Write specific dialogue for Marketplace Debate scene (Act II) 2. Create visual assets for
+building locations and character poses 3. Define the six ending branching logic based on
+Malrik/Elenya choice + System choice
 
 ### Medium Priority
-4. Implement player_choice branching in narrative system
-5. Add trigger conditions for `narrative_triggers` (e.g., `archive_discovered`, `both_sides_present`)
-6. Create memory_fragment visual assets (malrik_inscription_photo.png, etc.)
+4. Implement player_choice branching in narrative system 5. Add trigger conditions for
+`narrative_triggers` (e.g., `archive_discovered`, `both_sides_present`) 6. Create memory_fragment
+visual assets (malrik_inscription_photo.png, etc.)
 
 ### Lower Priority
-7. Update VELINOR_COMPLETE_DESIGN.md with Coren's expanded role
-8. Add tests to verify glyph tag consistency
-9. Document dialogue patterns for subtext-driven love story
+7. Update VELINOR_COMPLETE_DESIGN.md with Coren's expanded role 8. Add tests to verify glyph tag
+consistency 9. Document dialogue patterns for subtext-driven love story
 
 ---
 
@@ -190,11 +190,12 @@ No System + Fracture = Authentic failure, honest collapse
 
 ## Questions for Continued Development
 
-1. **Dialogue:** Should the building debate happen in a single scene, or recur with escalating tension?
-2. **Collapse Mechanics:** Should the collapse be partially caused by their conflict, or is it independent?
-3. **Ending Quality:** Should the player's empathy for Malrik/Elenya's love story affect which ending they can achieve?
-4. **Coren's Arc:** Does Coren have her own 3-glyph arc showing her becoming a true paradox-holder, or is she already whole?
-5. **Building Symbol:** Is the building itself a character (with memory/feeling), or purely a stage for human conflict?
+1. **Dialogue:** Should the building debate happen in a single scene, or recur with escalating
+tension? 2. **Collapse Mechanics:** Should the collapse be partially caused by their conflict, or is
+it independent? 3. **Ending Quality:** Should the player's empathy for Malrik/Elenya's love story
+affect which ending they can achieve? 4. **Coren's Arc:** Does Coren have her own 3-glyph arc
+showing her becoming a true paradox-holder, or is she already whole? 5. **Building Symbol:** Is the
+building itself a character (with memory/feeling), or purely a stage for human conflict?
 
 ---
 

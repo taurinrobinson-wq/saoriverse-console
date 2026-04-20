@@ -392,29 +392,20 @@ pytest test_privacy_layer.py::TestIntegration -v
 
 ### Option A: Learn First (Recommended if first time)
 
-1. Read SESSION_COMPLETION_SUMMARY.md (10 min)
-2. Read PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md (20 min)
-3. Review encryption_manager.py code (15 min)
-4. Review dream_engine.py code (15 min)
-5. Then proceed to Phase 2
+1. Read SESSION_COMPLETION_SUMMARY.md (10 min) 2. Read PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md (20
+min) 3. Review encryption_manager.py code (15 min) 4. Review dream_engine.py code (15 min) 5. Then
+proceed to Phase 2
 
 ### Option B: Build First (If you're ready)
 
-1. `pip install cryptography`
-2. Create database tables (from schema document)
-3. `pytest test_privacy_layer.py -v`
-4. Start Phase 3: Signal Parser Integration
-5. Refer to docs as needed
+1. `pip install cryptography` 2. Create database tables (from schema document) 3. `pytest
+test_privacy_layer.py -v` 4. Start Phase 3: Signal Parser Integration 5. Refer to docs as needed
 
 ### Option C: Hybrid (Best balance)
 
-1. Skim SESSION_COMPLETION_SUMMARY.md (5 min)
-2. `pip install cryptography`
-3. `pytest test_privacy_layer.py -v` (verify it works)
-4. Review PRIVACY_LAYER_QUICK_START.md Phase 2
-5. Create database tables
-6. Tests again
-7. Proceed to Phase 3 with integration guide
+1. Skim SESSION_COMPLETION_SUMMARY.md (5 min) 2. `pip install cryptography` 3. `pytest
+test_privacy_layer.py -v` (verify it works) 4. Review PRIVACY_LAYER_QUICK_START.md Phase 2 5. Create
+database tables 6. Tests again 7. Proceed to Phase 3 with integration guide
 
 ##
 

@@ -702,7 +702,8 @@ export function DialogueBox({ text, npcName }) {
   return (
     <div className={styles.dialogueBox}>
       {npcName && <div className={styles.npcName}>{npcName}</div>}
-      <p>{text}</p>
+      {text}
+
     </div>
   )
 }
@@ -716,7 +717,8 @@ export function DialogueBox({ text, npcName }) {
 ```tsx
 <div className="flex flex-col gap-4 p-6 bg-slate-900 text-white rounded">
   <h1 className="text-2xl font-bold text-purple-400">Title</h1>
-  <p>Content</p>
+  Content
+
 </div>
 ```
 
@@ -921,14 +923,14 @@ useEffect(() => {
 
 **Setup:**
 ```bash
-# Install dependencies
+## Install dependencies
 npm install
 
-# Start dev server (http://localhost:3000)
+## Start dev server (http://localhost:3000)
 npm run dev
 
-# Make changes to .tsx, .css, .ts files
-# Hot reload: Changes auto-refresh in browser
+## Make changes to .tsx, .css, .ts files
+## Hot reload: Changes auto-refresh in browser
 ```
 
 **Environment Variables:** `.env.local`
@@ -940,75 +942,75 @@ NEXT_PUBLIC_VELINOR_API_TIMEOUT=30000
 ### Building for Production
 
 ```bash
-# Build optimized version
+## Build optimized version
 npm run build
 
-# Run production build locally
+## Run production build locally
 npm start
 
-# Output: .next/ directory (ready to deploy)
+## Output: .next/ directory (ready to deploy)
 ```
 
 ### Deployment Options
 
 #### Option 1: Vercel (Recommended for Next.js)
 ```bash
-# Install Vercel CLI
+## Install Vercel CLI
 npm i -g vercel
 
-# Deploy
+## Deploy
 vercel
 
-# With environment variables
+## With environment variables
 vercel env pull
 vercel
 ```
 
 #### Option 2: Docker
 ```bash
-# Build image
+## Build image
 docker build -t velinor-web .
 
-# Run container
+## Run container
 docker run -p 3000:3000 velinor-web
 ```
 
 #### Option 3: Manual Deploy
 ```bash
 npm run build
-# Upload .next/ directory to server with Node.js
+## Upload .next/ directory to server with Node.js
 ```
 
 ### Type Checking
 
 ```bash
-# Check for TypeScript errors
+## Check for TypeScript errors
 npm run type-check
 
-# Watch mode
+## Watch mode
 npm run type-check -- --watch
 ```
 
 ### Linting
 
 ```bash
-# Run ESLint
+## Run ESLint
 npm run lint
 
-# Fix auto-fixable issues
+## Fix auto-fixable issues
 npm run lint -- --fix
 ```
 
 ### Testing
 
 ```bash
-# Run all tests
+## Run all tests
 npm test
 
-# Watch mode
+## Watch mode (2)
 npm test -- --watch
 
-# With coverage
+## With coverage
 npm test -- --coverage
 ```
 

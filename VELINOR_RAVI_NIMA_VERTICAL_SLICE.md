@@ -718,14 +718,14 @@ ACT 5: RESOLUTION & INTEGRATION
 
 **The Ravi & Nima arc is "DONE" when:**
 
-1. **Playable end-to-end** — Start game → choose to help Ravi & Nima → follow arc to completion (25-30 min)
-2. **Story is tight** — 18-22 passages, 8-12 choices, clear emotional progression
-3. **Characters are voiced** — Ravi & Nima feel real through 25-30 unique lines each
-4. **Glyphs are embedded** — Sorrow, Remembrance, Legacy appear at narrative peaks and tier up believably
-5. **UI is stable** — No crashes, all components render, animations smooth
-6. **Backend is solid** — All API calls work, no data corruption, influence tracks correctly
-7. **Emotional arc lands** — Player cares about Ravi & Nima; Ophina's story feels significant; first Velinor reveal feels metaphysically important
-8. **3+ playthroughs pass** — No blockers, multiple emotional paths feel valid
+1. **Playable end-to-end** — Start game → choose to help Ravi & Nima → follow arc to completion
+(25-30 min) 2. **Story is tight** — 18-22 passages, 8-12 choices, clear emotional progression 3.
+**Characters are voiced** — Ravi & Nima feel real through 25-30 unique lines each 4. **Glyphs are
+embedded** — Sorrow, Remembrance, Legacy appear at narrative peaks and tier up believably 5. **UI is
+stable** — No crashes, all components render, animations smooth 6. **Backend is solid** — All API
+calls work, no data corruption, influence tracks correctly 7. **Emotional arc lands** — Player cares
+about Ravi & Nima; Ophina's story feels significant; first Velinor reveal feels metaphysically
+important 8. **3+ playthroughs pass** — No blockers, multiple emotional paths feel valid
 
 **Then:** Move to next vertical slice (Saori arc? Khadra arc? You choose)
 

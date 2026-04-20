@@ -250,7 +250,7 @@ Default is 300 co-occurrences. To make glyphs appear faster:
 ```python
 
 
-# In dynamic_glyph_evolution.py, DynamicGlyphEvolution.__init__
+## In dynamic_glyph_evolution.py, DynamicGlyphEvolution.__init__
 evolution = DynamicGlyphEvolution(
     hybrid_learner=learner,
     min_frequency_for_glyph=50,  # Lower = glyphs appear sooner
@@ -432,17 +432,17 @@ main_v2.py sidebar displays:
 ```bash
 
 
-# Verify integration
+## Verify integration
 bash verify_integration.sh
 
-# Start the app
+## Start the app
 streamlit run main_v2.py
 
-# Select "hybrid" mode
+## Select "hybrid" mode
 
-# Have meaningful conversations
+## Have meaningful conversations
 
-# Watch glyphs appear!
+## Watch glyphs appear!
 
 ```
 

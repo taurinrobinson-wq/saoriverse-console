@@ -323,7 +323,7 @@ Next actions
 
 ##
 
-# Shared Core Recommendations
+## Shared Core Recommendations
 
 Design a shared "Emotion Core" microservice exposing:
 
@@ -339,7 +339,7 @@ Infrastructure
 - Models: open LLMs for prototyping, consider hosted endpoints for heavy tasks; small distilled classifiers run on-device for overlays.
 - Security: encryption at rest/in transit, role-based access, audit logs; HIPAA controls for enterprise products.
 
-# Next steps (recommendation)
+## Next steps (recommendation)
 
 1. Confirm priority order of offshoots (which MVP to build first). 2. For first-priority product,
 produce a 2-week sprint plan and begin the prototype (code scaffold + endpoint mock). 3. Assemble

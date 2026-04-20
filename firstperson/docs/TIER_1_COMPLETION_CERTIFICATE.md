@@ -35,8 +35,8 @@ RESULTS: ✓ test_initialization                          PASSED [ 10%] ✓ test
 PASSED [ 20%] ✓ test_performance_under_100ms                 PASSED [ 30%] ✓ test_response_fallback
 PASSED [ 40%] ✓ test_performance_metrics_structure           PASSED [ 50%] ✓
 test_sensitive_input_detection               PASSED [ 60%] ✓ test_learning_integration PASSED [ 70%]
-✓ test_multiple_exchanges                      PASSED [ 80%] ✓ test_lexicon_learner_available
-PASSED [ 90%] ✓ test_sanctuary_available PASSED [100%]
+✓ test_multiple_exchanges                      PASSED [ 80%] ✓ test_lexicon_learner_available PASSED
+[ 90%] ✓ test_sanctuary_available PASSED [100%]
 
 Total Tests: 10 Passed: 10 Failed: 0 Skipped: 0 Success Rate: 100% Execution Time: 0.39 seconds
 
@@ -78,8 +78,8 @@ Total Tests: 10 Passed: 10 Failed: 0 Skipped: 0 Success Rate: 100% Execution Tim
 
 
 Stage 1: Memory tracking          0-3ms  ✓ Stage 2: Safety checking          3-8ms  ✓ Stage 3:
-Signal detection         8-13ms ✓ Stage 4: Generation               0ms    ✓ Stage 5: Learning 2ms
-✓ Stage 6: Compassion wrapping      5ms    ✓ Stage 7: Final memory update      2ms    ✓
+Signal detection         8-13ms ✓ Stage 4: Generation               0ms    ✓ Stage 5: Learning 2ms ✓
+Stage 6: Compassion wrapping      5ms    ✓ Stage 7: Final memory update      2ms    ✓
 ───────────────────────────────────────── Total Pipeline:                   ~40ms  ✓
 
 Performance Budget: 100ms Used: 40ms (40%) Remaining: 60ms (60%) Status: ✅ ON TRACK

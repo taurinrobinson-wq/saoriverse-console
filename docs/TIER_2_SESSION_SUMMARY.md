@@ -450,7 +450,7 @@ except Exception as e:
 ```python
 
 
-# TIER 2: Add aliveness and presence
+## TIER 2: Add aliveness and presence
 tier2 = st.session_state.get("tier2_aliveness") if tier2: try: conversation_history =
 conversation_context.get("messages", []) aliveness_response, tier2_metrics =
 tier2.process_for_aliveness( user_input=user_input, base_response=response,

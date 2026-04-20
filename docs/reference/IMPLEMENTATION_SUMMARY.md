@@ -120,7 +120,7 @@ Changes to `render_main_app()`:
 
 manager = ConversationManager(user_id)
 
-# Initialize current conversation ID (UUID)
+## Initialize current conversation ID (UUID)
 
 current_conversation_id = str(uuid.uuid4())
 

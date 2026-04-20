@@ -40,7 +40,7 @@ from emotional_os.core.firstperson import StoryStartDetector
 detector = StoryStartDetector()
 analysis = detector.analyze_story_start("They keep fighting but it's not their fault")
 
-# Returns: detected_pronouns, detected_markers, clarifying_prompts
+## Returns: detected_pronouns, detected_markers, clarifying_prompts
 ```
 
 
@@ -75,7 +75,7 @@ reflector.record_theme("I'm angry with the kids")
 reflector.record_theme("Family conflict is mounting")
 reflection = reflector.generate_frequency_reflection("family_conflict", 2)
 
-# Returns: gentle reflection about emerging pattern
+## Returns: gentle reflection about emerging pattern
 ```
 
 
@@ -155,11 +155,11 @@ from emotional_os.core.firstperson import MemoryManager
 manager = MemoryManager(user_id="user_123")
 context = manager.rehydrate_memory(limit=20)
 
-# Returns: narrative_memory, theme_frequencies, temporal_patterns, salience
+## Returns: narrative_memory, theme_frequencies, temporal_patterns, salience
 
 formatted = manager.format_memory_for_parser()
 
-# Ready for injection into signal_parser context
+## Ready for injection into signal_parser context
 ```
 
 
@@ -200,18 +200,18 @@ from emotional_os.core.firstperson import ResponseTemplates
 
 templates = ResponseTemplates()
 
-# Get varied clarifying prompts
+## Get varied clarifying prompts
 prompt1 = templates.get_clarifying_prompt("pronoun", use_rotation=True)
 prompt2 = templates.get_clarifying_prompt("pronoun", use_rotation=True)
 
-# prompt1 != prompt2 (rotation prevents repetition)
+## prompt1 != prompt2 (rotation prevents repetition)
 
-# Get themed reflections by frequency
+## Get themed reflections by frequency
 reflection = templates.get_frequency_reflection(3, "work_stress")
 
-# Returns reflection like: "I'm noticing work_stress is coming up..."
+## Returns reflection like: "I'm noticing work_stress is coming up..."
 
-# Add custom templates
+## Add custom templates
 templates.add_custom_clarifier("pronoun", "Who exactly do you mean?", weight=2.0)
 ```
 
@@ -465,9 +465,9 @@ from emotional_os.core.firstperson import FrequencyReflector
 
 reflector = FrequencyReflector()
 
-# Reflection threshold is hardcoded to 2 in current version
+## Reflection threshold is hardcoded to 2 in current version
 
-# Customization available in Phase 1.6 integration
+## Customization available in Phase 1.6 integration
 ```
 
 
@@ -475,11 +475,11 @@ reflector = FrequencyReflector()
 
 ```python
 
-# Currently 8 fixed themes in FrequencyReflector
+## Currently 8 fixed themes in FrequencyReflector
 
-# Can add more by modifying THEME_PATTERNS dict
+## Can add more by modifying THEME_PATTERNS dict
 
-# Recommended in Phase 2 refactoring
+## Recommended in Phase 2 refactoring
 ```
 
 
@@ -508,16 +508,16 @@ scoring with ML-based weighting 5. **Cross-module** signal optimization
 
 ```bash
 
-# All FirstPerson tests
+## All FirstPerson tests
 pytest emotional_os/core/firstperson/test_*.py -v
 
-# Specific module
+## Specific module
 pytest emotional_os/core/firstperson/test_story_start_detector.py -v
 
-# With coverage
+## With coverage
 pytest emotional_os/core/firstperson/test_*.py --cov=emotional_os.core.firstperson
 
-# Specific test class
+## Specific test class
 pytest emotional_os/core/firstperson/test_frequency_reflector.py::TestFrequencyReflector -v
 ```
 

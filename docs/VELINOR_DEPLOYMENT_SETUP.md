@@ -20,14 +20,14 @@ bash setup.sh
 ```bash
 
 
-# Create virtual environment
+## Create virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
-# Install dependencies
+## Install dependencies
 pip install streamlit pillow
 
-# Run the game
+## Run the game
 
 ```text
 
@@ -54,10 +54,10 @@ Modify the game initialization section to import and connect FirstPerson:
 ```python
 
 
-# Around line 540-560 in velinor_app.py
+## Around line 540-560 in velinor_app.py
 from src.emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
-# Then when creating orchestrator:
+## Then when creating orchestrator:
 orchestrator = VelinorTwineOrchestrator( game_engine=engine, story_path=str(story_path),
 first_person_module=FirstPersonOrchestrator("game_npc", "velinor_session"),  # ← Add this
 npc_system=npc_system
@@ -75,7 +75,7 @@ For Streamlit Cloud deployment, add to `.streamlit/secrets.toml`:
 
 
 
-# .streamlit/secrets.toml
+## .streamlit/secrets.toml
 [firstperson] module_path = "src.emotional_os.deploy.core.firstperson" session_name = "velinor_game"
 enable_affect_analysis = true
 
@@ -110,10 +110,10 @@ The game works perfectly without FirstPerson/Glyph integration:
 
 ```bash
 
-# Terminal 1: Start the app
+## Terminal 1: Start the app
 streamlit run velinor_app.py
 
-# App runs at http://localhost:8501
+## App runs at http://localhost:8501
 
 ```text
 
@@ -126,7 +126,7 @@ streamlit run velinor_app.py
 ```bash
 
 
-# If FirstPerson is enabled, additional debug info will show
+## If FirstPerson is enabled, additional debug info will show
 
 ```text
 
@@ -219,13 +219,13 @@ Add to `.streamlit/secrets.toml`:
 
 
 
-# Glyph persistence
+## Glyph persistence
 [glyph] supabase_url = "https://your-project.supabase.co" supabase_key = "your-anon-key"
 
-# FirstPerson if needed
+## FirstPerson if needed
 [firstperson] api_key = "your-api-key" session_scope = "velinor_game"
 
-# Optional: Analytics
+## Optional: Analytics
 [analytics]
 
 ```text
@@ -295,25 +295,25 @@ saoriverse-console/
 ```bash
 
 
-# Setup
+## Setup
 bash setup.sh
 
-# Run game
+## Run game
 bash run.sh
 
-# Manual run
+## Manual run
 streamlit run velinor_app.py
 
-# Debug mode
+## Debug mode
 streamlit run velinor_app.py --logger.level=debug
 
-# Check version
+## Check version
 streamlit --version
 
-# Clear cache
+## Clear cache
 rm -rf ~/.streamlit
 
-# Deactivate venv
+## Deactivate venv
 
 ```text
 
@@ -326,13 +326,13 @@ rm -rf ~/.streamlit
 ```bash
 
 
-# Check if Python dependencies installed
+## Check if Python dependencies installed
 pip list | grep -E "streamlit|pillow"
 
-# Check game files
+## Check game files
 ls -la velinor/engine/ ls -la velinor/backgrounds/ ls -la velinor/npcs/
 
-# Test game imports
+## Test game imports
 
 ```text
 ```text

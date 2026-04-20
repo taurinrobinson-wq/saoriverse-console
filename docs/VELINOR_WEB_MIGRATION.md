@@ -23,7 +23,7 @@ You're moving from Streamlit (with overlay limitations) to a proper web stack:
 
 ```bash
 
-# From repo root
+## From repo root
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
 cd velinor-web
@@ -40,7 +40,7 @@ From the root, copy the prepared files into the Next.js project:
 ```bash
 
 
-# From root of saoriverse-console
+## From root of saoriverse-console
 cp frontend_lib_api.ts velinor-web/lib/api.ts
 
 ```text
@@ -141,13 +141,13 @@ Copy your game assets into the Next.js public folder:
 
 ```bash
 
-# Copy backgrounds
+## Copy backgrounds
 cp -r velinor/backgrounds/* velinor-web/public/assets/backgrounds/
 
-# Copy NPCs
+## Copy NPCs
 cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 
-# Create overlays folder (for dust, fog, glyphs)
+## Create overlays folder (for dust, fog, glyphs)
 ```text
 
 ```text
@@ -163,7 +163,7 @@ cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 cd d:\saoriverse-console
 python velinor_api.py
 
-# Runs on http://localhost:8000
+## Runs on http://localhost:8000
 
 ```text
 
@@ -194,10 +194,10 @@ Test the game flow:
 
 
 
-# Add and commit everything
+## Add and commit everything
 git add . git commit -m "feat: Complete Next.js + FastAPI Velinor game" git push origin main
 
-# Railway auto-deploys
+## Railway auto-deploys
 
 ```text
 ```

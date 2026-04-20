@@ -329,10 +329,10 @@ Watch the log while processing runs:
 
 ```bash
 
-# Remove old poetry files only
+## Remove old poetry files only
 rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 
-# Keep the processing results and lexicon updates
+## Keep the processing results and lexicon updates
 
 ```text
 
@@ -411,7 +411,7 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 
 df -h "/Volumes/My Passport for Mac"
 
-# Should show 458 GB available
+## Should show 458 GB available
 
 ```
 

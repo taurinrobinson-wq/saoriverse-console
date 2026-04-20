@@ -96,12 +96,12 @@ To make Python 3.12 the default:
 ```powershell
 
 
-# Check current default
+## Check current default
 py --version
 
-# Set Python 3.12 as default (if needed)
+## Set Python 3.12 as default (if needed)
 
-# This requires manual registry edit or environment variable setup
+## This requires manual registry edit or environment variable setup
 
 ```
 

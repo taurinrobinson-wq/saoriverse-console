@@ -2,7 +2,8 @@
 
 ## Overview
 
-Fallback Protocols is a tone-aware system that prevents over-triggering, misinterpretation, and forced presence. It handles:
+Fallback Protocols is a tone-aware system that prevents over-triggering, misinterpretation, and
+forced presence. It handles:
 
 - **Ambiguous Tone Detection**: Mixed signals (e.g., "I'm fine" + voltage signals)
 - **Trigger Misfire Detection**: False positives (e.g., sarcastic "stay")
@@ -330,11 +331,10 @@ All tests pass: ✅ 19/19
 
 Key principles:
 
-1. **Respect user agency** - Don't lock triggers unless tone + phrase both confirm
-2. **Detect contradiction** - Ambiguous tone → ask, don't assume
-3. **Hold boundaries** - Respect sarcasm and explicit negation
-4. **Voltage overrides ritual** - When conflict exists, prioritize raw emotion
-5. **Silence is sacred** - After confirmation, wait without performing
+1. **Respect user agency** - Don't lock triggers unless tone + phrase both confirm 2. **Detect
+contradiction** - Ambiguous tone → ask, don't assume 3. **Hold boundaries** - Respect sarcasm and
+explicit negation 4. **Voltage overrides ritual** - When conflict exists, prioritize raw emotion 5.
+**Silence is sacred** - After confirmation, wait without performing
 
 ## Files
 

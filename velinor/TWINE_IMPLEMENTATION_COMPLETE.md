@@ -259,13 +259,13 @@ dialogue 5. **Skill check validation** - Test dice rolls and stat modifiers
 ```bash
 
 
-# Build sample story
+## Build sample story
 python3 build_sample_story.py
 
-# Test game initialization
+## Test game initialization
 python3 velinor/engine/quickstart.py
 
-# Run with Streamlit (UI layer to be created)
+## Run with Streamlit (UI layer to be created)
 
 ```text
 

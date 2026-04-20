@@ -22,12 +22,12 @@ If you see a password prompt, enter your DigitalOcean root password.
 ```bash
 
 
-# Generate SSH key (press Enter to accept defaults)
+## Generate SSH key (press Enter to accept defaults)
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean_key -N ""
 
-# This creates:
+## This creates:
 
-# ~/.ssh/digitalocean_key (private key - KEEP SAFE)
+## ~/.ssh/digitalocean_key (private key - KEEP SAFE)
 
 ```text
 
@@ -38,12 +38,12 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean_key -N ""
 ```bash
 
 
-# Copy your public key
+## Copy your public key
 cat ~/.ssh/digitalocean_key.pub
 
-# Then SSH to droplet and add it:
+## Then SSH to droplet and add it:
 
-# 1. ssh root@161.35.227.49
+## 1. ssh root@161.35.227.49
 
 ```text
 ```text
@@ -63,10 +63,10 @@ Or do it in one command (if you can SSH):
 
 ```bash
 
-# Now connect with your key
+## Now connect with your key
 ssh -i ~/.ssh/digitalocean_key root@161.35.227.49
 
-# Or set it as default in ~/.ssh/config
+## Or set it as default in ~/.ssh/config
 cat >> ~/.ssh/config << 'EOF'
 Host 161.35.227.49
     HostName 161.35.227.49
@@ -74,7 +74,7 @@ Host 161.35.227.49
     IdentityFile ~/.ssh/digitalocean_key
 EOF
 
-# Then just use:
+## Then just use:
 ```text
 
 ```text

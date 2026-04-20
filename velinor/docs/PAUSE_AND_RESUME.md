@@ -14,8 +14,7 @@ Key files / how to reproduce the title demo
 - Title image: `velinor_title_transparent.png`
 - Requirements (for demo): `requirements_streamlit.txt`
 
-To run the title demo locally
-1. Install dependencies:
+To run the title demo locally 1. Install dependencies:
 
 ```powershell
 pip install -r requirements_streamlit.txt
@@ -27,7 +26,9 @@ pip install -r requirements_streamlit.txt
 streamlit run tools/run_title_demo.py
 ```
 
-If you need a portable package, create a `deliverable/` folder and copy `velinor_title_transparent.png`, `city_market.png`, `Mariel_nobg.png`, `tools/run_title_demo.py`, and `requirements_streamlit.txt` into it.
+If you need a portable package, create a `deliverable/` folder and copy
+`velinor_title_transparent.png`, `city_market.png`, `Mariel_nobg.png`, `tools/run_title_demo.py`,
+and `requirements_streamlit.txt` into it.
 
 Blender renders and headless scripts
 - Scripts added to `tools/`:

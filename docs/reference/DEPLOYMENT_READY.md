@@ -45,9 +45,9 @@ In the Streamlit Cloud dashboard, go to App settings → Secrets:
 
 ```toml
 
-# .streamlit/secrets.toml (for local testing)
+## .streamlit/secrets.toml (for local testing)
 
-# OR Streamlit Cloud Secrets tab
+## OR Streamlit Cloud Secrets tab
 
 [supabase]
 url = "your-supabase-url"

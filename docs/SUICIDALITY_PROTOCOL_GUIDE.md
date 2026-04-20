@@ -202,7 +202,7 @@ Expected output:
 ```
 
 
-# CONSENT-BASED SUICIDALITY PROTOCOL TEST SUITE
+## CONSENT-BASED SUICIDALITY PROTOCOL TEST SUITE
 
 --- Test 1: Initial Disclosure Detection ---
 ✓ Acknowledgment present: True ✓ Role clarity present: True ✓ Invitation present: True
@@ -235,9 +235,9 @@ result = parse_input( "I have thoughts of suicide",
 lexicon_path="emotional_os/core/emotional_keywords_enhanced.json", db_path="glyphs.db",
 user_id="user_123" )
 
-# System routes to suicidality protocol automatically
+## System routes to suicidality protocol automatically
 
-# Returns with response_source: "suicidality_protocol"
+## Returns with response_source: "suicidality_protocol"
 
 ```
 

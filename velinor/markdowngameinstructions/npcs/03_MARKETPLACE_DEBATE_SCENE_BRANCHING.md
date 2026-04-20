@@ -82,7 +82,8 @@ Fear that everything will be lost. Control as a proxy for preventing disaster.
 - Frequently glancing at Malrik, checking his reaction
 
 **Subtext:**
-Grief that the old ways are dying. Frustration that her contributions aren't valued. Longing for Malrik to understand her.
+Grief that the old ways are dying. Frustration that her contributions aren't valued. Longing for
+Malrik to understand her.
 
 ### **Coren's Attempted Bridge**
 
@@ -492,25 +493,20 @@ The debate dialogue shifts based on:
 ## Key NPC Emotional Beats
 
 ### **Malrik's Inner Arc (Across Scene)**
-1. **Defensive:** Rigidity and control as protection
-2. **Challenged:** Player questions his framework
-3. **Vulnerable:** Moment where fear under the rigidity is visible
-4. **Possibility:** If guided toward synthesis, begins to soften
-5. **Choice Point:** Will he actually change, or retreat into control?
+1. **Defensive:** Rigidity and control as protection 2. **Challenged:** Player questions his
+framework 3. **Vulnerable:** Moment where fear under the rigidity is visible 4. **Possibility:** If
+guided toward synthesis, begins to soften 5. **Choice Point:** Will he actually change, or retreat
+into control?
 
 ### **Elenya's Inner Arc (Across Scene)**
-1. **Frustrated:** Not being heard or valued
-2. **Hopeful:** If player shows understanding
-3. **Heartbroken:** Realizing Malrik might not meet her halfway
-4. **Resilient:** But still believing synthesis is possible
-5. **Choice Point:** Will she keep trying, or give up on him?
+1. **Frustrated:** Not being heard or valued 2. **Hopeful:** If player shows understanding 3.
+**Heartbroken:** Realizing Malrik might not meet her halfway 4. **Resilient:** But still believing
+synthesis is possible 5. **Choice Point:** Will she keep trying, or give up on him?
 
 ### **Coren's Inner Arc (Across Scene)**
-1. **Tired:** Exhausted from endless mediation
-2. **Hopeful:** Player might be someone who understands
-3. **Realistic:** Skepticism that anything will change
-4. **Catalyzed:** If player takes active role, renewed hope
-5. **Grateful:** Recognition that someone else is helping
+1. **Tired:** Exhausted from endless mediation 2. **Hopeful:** Player might be someone who
+understands 3. **Realistic:** Skepticism that anything will change 4. **Catalyzed:** If player takes
+active role, renewed hope 5. **Grateful:** Recognition that someone else is helping
 
 ---
 

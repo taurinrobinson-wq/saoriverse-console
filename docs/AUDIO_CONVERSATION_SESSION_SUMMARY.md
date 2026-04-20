@@ -7,9 +7,9 @@ Date: December 11, 2025 Status: Implementation Ready """
 
 # ============================================================================
 
-# WHAT WAS BUILT
+## WHAT WAS BUILT
 
-# ============================================================================
+## ============================================================================ (2)
 
 ## 1. ProsodyPlanner Class
 
@@ -106,7 +106,7 @@ PortAudio support now included for audio recording:
 
 
 
-# Audio dependencies
+## Audio dependencies
 portaudio19-dev  # PortAudio development headers libsndfile1      # Sound file I/O
 
 ```text
@@ -134,11 +134,11 @@ portaudio19-dev  # PortAudio development headers libsndfile1      # Sound file I
 - Quick start guide
 - Current status & next priorities
 
-# ============================================================================
+## ============================================================================ (3)
 
-# TECHNICAL IMPROVEMENTS EXPLAINED
+## TECHNICAL IMPROVEMENTS EXPLAINED
 
-# ============================================================================
+## ============================================================================ (4)
 
 ## Non-Blocking Playback (Why It Matters)
 
@@ -195,11 +195,11 @@ glyph_intent = { "voltage": "high",         # Aroused, energetic "tone": "positi
 encouraging "certainty": "high",       # Confident "energy": 0.85,            # Very intense
 "hesitation": False,       # Fluent, no pauses }
 
-# ProsodyPlanner produces:
+## ProsodyPlanner produces:
 
-# <prosody rate='fast' pitch='high' volume='loud'>Let's do this!</prosody>
+## <prosody rate='fast' pitch='high' volume='loud'>Let's do this!</prosody>
 
-# Result: Fast speech, high pitch, loud volume →
+## Result: Fast speech, high pitch, loud volume →
 
 ```text
 ```text
@@ -215,26 +215,26 @@ glyph_intent = { "voltage": "low",          # Subdued, introspective "tone": "ne
 Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,             # Minimal intensity
 "hesitation": True,        # Thoughtful pauses }
 
-# ProsodyPlanner produces:
+## ProsodyPlanner produces: (2)
 
-# <prosody rate='slow' pitch='low' volume='soft'>
+## <prosody rate='slow' pitch='low' volume='soft'>
 
-# I'm<break time="250ms"/> not sure<break time="250ms"/>
+## I'm<break time="250ms"/> not sure<break time="250ms"/>
 
-# about this...
+## about this...
 
-# </prosody>
+## </prosody>
 
-# Result: Slow speech, low pitch, soft volume, pauses →
-#         User hears: concerned, uncertain, introspective FirstPerson
+## Result: Slow speech, low pitch, soft volume, pauses →
+##         User hears: concerned, uncertain, introspective FirstPerson
 
 ```
 
-# ============================================================================
+## ============================================================================ (5)
 
-# FILES CHANGED
+## FILES CHANGED
 
-# ============================================================================
+## ============================================================================ (6)
 
 **Created**:
 
@@ -265,11 +265,11 @@ Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,            
 
 **Deleted**: None
 
-# ============================================================================
+## ============================================================================ (7)
 
-# GIT COMMITS
+## GIT COMMITS
 
-# ============================================================================
+## ============================================================================ (8)
 
 1. **dadea67** - "fix: correct NRC lexicon import paths and resolve sys variable shadowing in nlp_init.py"
 
@@ -285,11 +285,11 @@ Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,            
    - New: `AUDIO_CONVERSATION_INTEGRATION_GUIDE.md`
    - New: `AUDIO_CONVERSATION_IMPLEMENTATION_CHECKLIST.md`
 
-# ============================================================================
+## ============================================================================ (9)
 
-# WHAT'S READY NOW
+## WHAT'S READY NOW
 
-# ============================================================================
+## ============================================================================ (10)
 
 ✅ **Production-Ready Components**:
 
@@ -320,11 +320,11 @@ Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,            
 4. Tune prosody mappings based on actual behavior
 5. Optimize latency/performance
 
-# ============================================================================
+## ============================================================================ (11)
 
-# KEY INSIGHTS
+## KEY INSIGHTS
 
-# ============================================================================
+## ============================================================================ (12)
 
 **1. Non-Blocking Playback is Game-Changing**
 
@@ -356,11 +356,11 @@ Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,            
 - State callbacks enable reactive UI updates
 - Pause/Resume/Stop give users full control
 
-# ============================================================================
+## ============================================================================ (13)
 
-# REMAINING WORK (Priority Order)
+## REMAINING WORK (Priority Order)
 
-# ============================================================================
+## ============================================================================ (14)
 
 **PHASE 3 (UI Integration)** - 2-3 hours
 
@@ -388,11 +388,11 @@ Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,            
 
 **Total Estimated Remaining**: 10-16 hours for full production-ready system
 
-# ============================================================================
+## ============================================================================ (15)
 
-# SUCCESS CRITERIA
+## SUCCESS CRITERIA
 
-# ============================================================================
+## ============================================================================ (16)
 
 When complete, the system should:
 
@@ -409,11 +409,11 @@ When complete, the system should:
 ✓ Maintain <2 second latency from speech end to response audio start
 ✓ Sound natural, emotionally expressive, and responsive to user input
 
-# ============================================================================
+## ============================================================================ (17)
 
-# CONCLUSION
+## CONCLUSION
 
-# ============================================================================
+## ============================================================================ (18)
 
 All foundational infrastructure for prosody-aware audio conversation is now in place.
 The system is architected to enable FirstPerson to express its emotional state through

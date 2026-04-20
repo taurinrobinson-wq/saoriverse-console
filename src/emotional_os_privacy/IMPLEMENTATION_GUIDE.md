@@ -97,7 +97,7 @@ Find all places where conversation data goes to the database:
 
 
 
-# Search for database writes
+## Search for database writes
 grep -r "\.insert\(" emotional_os/ grep -r "supabase\." emotional_os/
 
 ```text
@@ -117,7 +117,7 @@ Typical locations:
 
 ```python
 
-# Raw text goes to database
+## Raw text goes to database
 result = parse_input(user_input, ...)
 db.table("conversations").insert({
     "user_id": user_id,
@@ -135,7 +135,7 @@ db.table("conversations").insert({
 ```python
 
 
-# Only encoded data goes to database
+## Only encoded data goes to database
 from emotional_os.privacy.signal_parser_integration import encode_and_store_conversation
 
 result = parse_input(user_input, ...)
@@ -286,7 +286,7 @@ class TestDataEncoding(unittest.TestCase):
 
 from emotional_os.privacy.arx_integration import ARXAnonymityVerifier
 
-# Verify k-anonymity (k >= 5 means user not uniquely identifiable)
+## Verify k-anonymity (k >= 5 means user not uniquely identifiable)
 verifier = ARXAnonymityVerifier(k_threshold=5)
 verifier.run_monthly_compliance_check(db_connection)
 
@@ -483,19 +483,19 @@ Run full test suite:
 ```bash
 
 
-# Test encoding pipeline
+## Test encoding pipeline
 python -m pytest emotional_os/privacy/test_data_encoding.py -v
 
-# Test k-anonymity
+## Test k-anonymity
 python -m pytest emotional_os/privacy/test_arx_integration.py -v
 
-# Test integration
+## Test integration
 python -m pytest emotional_os/tests/test_privacy_integration.py -v
 
-# Verify no raw text in database
+## Verify no raw text in database
 python emotional_os/privacy/verify_compliance.py
 
-# Monthly compliance check
+## Monthly compliance check
 
 ```text
 

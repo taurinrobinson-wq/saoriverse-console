@@ -31,13 +31,13 @@ pip install -e ".[dev]"
 #### From CLI
 
 ```bash
-# Build motion from JSON fixture
+## Build motion from JSON fixture
 draftshift draftshift/tests/fixtures/motion.json
 
-# Build with custom output filename
+## Build with custom output filename
 draftshift draftshift/tests/fixtures/motion.json -o Motion_to_Compel.docx
 
-# Verbose output
+## Verbose output
 draftshift draftshift/tests/fixtures/reply.json -v
 ```
 
@@ -47,11 +47,11 @@ draftshift draftshift/tests/fixtures/reply.json -v
 from draftshift import PleadingFactory
 import json
 
-# Load data
+## Load data
 with open("motion.json") as f:
     data = json.load(f)
 
-# Create and build pleading
+## Create and build pleading
 factory = PleadingFactory(
     "draftshift/formats/california_civil.yaml",
     "draftshift/formats/california_civil_citation.yaml"
@@ -95,8 +95,8 @@ draftshift/
 ### Three-Layer Design
 
 1. **BaseDocument** (Engine): Loads YAML configs, manages DOCX generation, provides helper methods
-2. **DocumentBuilder/Pleading Classes** (Templates): Define pleading structure, orchestrate components
-3. **PleadingFactory** (Router): Detects pleading type, instantiates correct class
+2. **DocumentBuilder/Pleading Classes** (Templates): Define pleading structure, orchestrate
+components 3. **PleadingFactory** (Router): Detects pleading type, instantiates correct class
 
 ### Configuration-Driven
 
@@ -108,7 +108,7 @@ draftshift/
 To add a new pleading type:
 
 ```python
-# draftshift/pleadings/motion_in_limine.py
+## draftshift/pleadings/motion_in_limine.py
 from .base import BaseDocument
 
 class MotionInLimine(BaseDocument):
@@ -306,9 +306,7 @@ Proprietary — All rights reserved
 
 ## Author
 
-Taurin Robinson  
-DraftShift Legal  
-trobinson@draftshiftlaw.com
+Taurin Robinson DraftShift Legal trobinson@draftshiftlaw.com
 
 ## Contributing
 

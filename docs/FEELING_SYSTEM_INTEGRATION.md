@@ -2,9 +2,13 @@
 
 ## Overview
 
-The Feeling System is a speculative emotional architecture designed to drive nuanced, context-aware responses in conversation and interaction. It operates as a **state machine that synthesizes emotions** from multiple subsystems, tracks emotional memory, and provides configurable parameters for tuning emotional behavior.
+The Feeling System is a speculative emotional architecture designed to drive nuanced, context-aware
+responses in conversation and interaction. It operates as a **state machine that synthesizes
+emotions** from multiple subsystems, tracks emotional memory, and provides configurable parameters
+for tuning emotional behavior.
 
-This guide explains how to integrate the Feeling System with your response engine and dialogue pipeline.
+This guide explains how to integrate the Feeling System with your response engine and dialogue
+pipeline.
 
 ---
 
@@ -16,11 +20,11 @@ This guide explains how to integrate the Feeling System with your response engin
 from emotional_os.core.feeling_system import FeelingSystem, FeelingSystemConfig
 from emotional_os.core.feeling_system_config import get_default_config
 
-# Option A: Use defaults
+## Option A: Use defaults
 config = get_default_config()
 feeling_system = FeelingSystem(config=config)
 
-# Option B: Customize configuration
+## Option B: Customize configuration
 config = get_default_config()
 config.affective_memory.max_memories = 500  # Increase capacity
 config.affective_memory.pruning_strategy = 'hybrid'  # Use hybrid pruning
@@ -30,7 +34,7 @@ feeling_system = FeelingSystem(config=config)
 ### 2. Process Interactions
 
 ```python
-# After user input or system event, create emotional signals
+## After user input or system event, create emotional signals
 emotional_signals = {
     'user_sentiment': 'positive',           # 'positive', 'negative', 'neutral'
     'interaction_type': 'intimate',         # 'friendly', 'intimate', 'hostile', 'formal'
@@ -41,7 +45,7 @@ emotional_signals = {
     'user_id': 'user_12345'                 # For tracking relationships and memory per-user
 }
 
-# Process the interaction
+## Process the interaction
 feeling_system.process_interaction(
     user_message="I love how thoughtful you are",
     emotional_signals=emotional_signals,
@@ -52,7 +56,7 @@ feeling_system.process_interaction(
 ### 3. Read Current Emotional State
 
 ```python
-# Get synthesized emotional state for response generation
+## Get synthesized emotional state for response generation
 current_state = feeling_system.get_current_state()
 
 print(f"Current emotion: {current_state['primary_emotion']}")
@@ -60,7 +64,7 @@ print(f"Emotional intensity: {current_state['intensity']}")
 print(f"Emotional memory: {current_state['memory_influence']}")
 print(f"All emotions: {current_state['all_emotions']}")
 
-# Example response modulation
+## Example response modulation
 if current_state['primary_emotion'] == 'joy':
     response_tone = "warm, enthusiastic, open"
 elif current_state['primary_emotion'] == 'sorrow':
@@ -74,12 +78,12 @@ elif current_state['primary_emotion'] == 'fear':
 ```python
 import json
 
-# Save state to disk
+## Save state to disk
 state_dict = feeling_system.to_dict()
 with open('feeling_system_state.json', 'w') as f:
     json.dump(state_dict, f, indent=2)
 
-# Load state in new session
+## Load state in new session
 with open('feeling_system_state.json', 'r') as f:
     saved_state = json.load(f)
     
@@ -214,7 +218,8 @@ feeling_system.from_dict(state_dict)
 
 ## Emotional Signals Reference
 
-The `emotional_signals` dictionary is the primary way to inform the Feeling System about the context and nature of an interaction. All fields are optional but recommended:
+The `emotional_signals` dictionary is the primary way to inform the Feeling System about the context
+and nature of an interaction. All fields are optional but recommended:
 
 | Signal | Type | Range | Meaning |
 |--------|------|-------|---------|
@@ -394,13 +399,13 @@ from emotional_os.core.feeling_system_config import get_default_config
 
 config = get_default_config()
 
-# Memory tuning
+## Memory tuning
 config.affective_memory.max_memories = 500
 config.affective_memory.max_memories_per_user = 100
 config.affective_memory.pruning_strategy = 'hybrid'  # 'oldest', 'weakest', or 'hybrid'
 config.affective_memory.aggressive_pruning_threshold = 0.5
 
-# Emotion synthesis
+## Emotion synthesis
 config.emotion_synthesis_weights = {
     'joy': 0.15,
     'sorrow': 0.25,
@@ -410,15 +415,15 @@ config.emotion_synthesis_weights = {
     'void_state': 0.10
 }
 
-# Mortality system
+## Mortality system
 config.mortality_proxy.decay_rate = 0.05
 config.mortality_proxy.interaction_renewal_amount = 0.3
 
-# Embodied constraints
+## Embodied constraints
 config.embodied_constraint.initial_energy = 1.0
 config.embodied_constraint.attention_recovery_rate = 0.08
 
-# Relational dynamics
+## Relational dynamics
 config.relational_core.trust_increment = 0.15
 config.relational_core.phase_progression_thresholds = [0.3, 0.6, 0.8]
 
@@ -523,32 +528,38 @@ def test_integration_with_response_engine():
 ## FAQ
 
 **Q: What happens if I don't provide all emotional signals?**
-A: All fields are optional. The system has sensible defaults. Missing signals are treated as neutral/default values.
+A: All fields are optional. The system has sensible defaults. Missing signals are treated as
+neutral/default values.
 
 **Q: How does memory affect emotional state?**
-A: The Affective Memory subsystem tracks past interactions and their emotional valence. Recent, emotionally intense memories have stronger influence on current state. This creates emotional continuity.
+A: The Affective Memory subsystem tracks past interactions and their emotional valence. Recent,
+emotionally intense memories have stronger influence on current state. This creates emotional
+continuity.
 
 **Q: Can I customize emotions?**
-A: Yes, modify `config.emotion_synthesis_weights` before creating FeelingSystem. The weights determine which emotions are more likely to be synthesized in given contexts.
+A: Yes, modify `config.emotion_synthesis_weights` before creating FeelingSystem. The weights
+determine which emotions are more likely to be synthesized in given contexts.
 
 **Q: What's the difference between the three pruning strategies?**
-A: 
+A:
 - **oldest**: Removes oldest memories first (FIFO)
 - **weakest**: Removes lowest-valence memories first
 - **hybrid**: Scores memories by decay status + age, removes lowest scores first
 
 **Q: How do I handle multiple concurrent users?**
-A: Create separate FeelingSystem instances per user, or use the `user_id` field in emotional_signals to track per-user relational state. Memory limits per user (`max_memories_per_user`) prevent one user from dominating system memory.
+A: Create separate FeelingSystem instances per user, or use the `user_id` field in emotional_signals
+to track per-user relational state. Memory limits per user (`max_memories_per_user`) prevent one
+user from dominating system memory.
 
 ---
 
 ## Next Steps
 
-1. **Extract Signal Logic**: Implement `extract_signals()` for your specific use case
-2. **Integrate with Response Engine**: Add feeling system calls to your dialogue pipeline
-3. **Monitor Performance**: Track synthesis latency and memory usage
-4. **Tune Configuration**: Adjust weights and thresholds based on observed behavior
-5. **User Testing**: Validate that emotional modulation improves conversation quality
+1. **Extract Signal Logic**: Implement `extract_signals()` for your specific use case 2. **Integrate
+with Response Engine**: Add feeling system calls to your dialogue pipeline 3. **Monitor
+Performance**: Track synthesis latency and memory usage 4. **Tune Configuration**: Adjust weights
+and thresholds based on observed behavior 5. **User Testing**: Validate that emotional modulation
+improves conversation quality
 
 ---
 

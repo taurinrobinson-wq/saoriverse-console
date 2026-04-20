@@ -216,15 +216,15 @@ Phase 3.1 3. Fall back to text-only analysis
 ```bash
 
 
-# Run full test suite
+## Run full test suite
 python -m pytest emotional_os/core/firstperson/test_*.py -v
 
-# Expected: 14/14 passing
+## Expected: 14/14 passing
 
-# Check imports
+## Check imports
 python -c "from emotional_os.core.firstperson import VoiceAffectDetector, FacialExpressionDetector, MultimodalFusionEngine; print('✅ All imports working')"
 
-# Verify Phase 3.1 compatibility
+## Verify Phase 3.1 compatibility
 
 ```text
 
@@ -235,10 +235,10 @@ python -c "from emotional_os.core.firstperson import VoiceAffectDetector, Facial
 ```bash
 
 
-# View changes
+## View changes
 git show f6b38a0
 
-# 4 files changed, 1849 insertions(+)
+## 4 files changed, 1849 insertions(+)
 
 ```text
 ```text
@@ -251,15 +251,15 @@ git show f6b38a0
 
 
 
-# Deploy to staging first
+## Deploy to staging first
 ./deploy.sh staging
 
-# Run full test suite in staging
+## Run full test suite in staging
 python -m pytest emotional_os/ -q
 
-# Expected: 396/396 passing
+## Expected: 396/396 passing
 
-# Test voice analysis in staging
+## Test voice analysis in staging
 curl http://staging/api/voice/analyze \
 
 ```text
@@ -270,15 +270,15 @@ curl http://staging/api/voice/analyze \
 
 ```bash
 
-# Deploy to production
+## Deploy to production
 ./deploy.sh production
 
-# Verify deployment
+## Verify deployment
 curl https://saoriverse.ai/api/health
 
-# Expected: {"status": "ok", "version": "3.2"}
+## Expected: {"status": "ok", "version": "3.2"}
 
-# Monitor logs
+## Monitor logs
 ```text
 
 ```text
@@ -290,23 +290,23 @@ curl https://saoriverse.ai/api/health
 ```bash
 
 
-# Test voice analysis
+## Test voice analysis
 curl https://saoriverse.ai/api/voice/analyze \
   -X POST -d @voice_sample.json
 
-# Expected: MultimodalAnalysis with confidence > 0.6
+## Expected: MultimodalAnalysis with confidence > 0.6
 
-# Test facial analysis
+## Test facial analysis
 curl https://saoriverse.ai/api/facial/analyze \
   -X POST -d @landmarks_sample.json
 
-# Expected: FacialAnalysis with valid expression
+## Expected: FacialAnalysis with valid expression
 
-# Test multimodal fusion
+## Test multimodal fusion
 curl https://saoriverse.ai/api/multimodal/fuse \
   -X POST -d @full_analysis.json
 
-# Expected: Complete MultimodalAnalysis result
+## Expected: Complete MultimodalAnalysis result
 
 ```
 

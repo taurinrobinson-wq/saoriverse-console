@@ -30,18 +30,18 @@ execute DIGITALOCEAN VPS (123.45.67.89) ↓ docker compose DOCKER CONTAINERS
 
 
 
-# SSH Key Generation
+## SSH Key Generation
 ssh-keygen -t ed25519 -f ~/.ssh/velinor
 
-# Then create Droplet:
+## Then create Droplet:
 
-# Image: Ubuntu 22.04 LTS
+## Image: Ubuntu 22.04 LTS
 
-# Plan: Basic $6/month
+## Plan: Basic $6/month
 
-# SSH Key: Paste ~/.ssh/velinor.pub
+## SSH Key: Paste ~/.ssh/velinor.pub
 
-# Hostname: velinor-server
+## Hostname: velinor-server
 
 ```text
 ```
@@ -65,17 +65,17 @@ A Record:
 
 ssh root@[DROPLET_IP]
 
-# Then paste the full script from VPS_QUICK_START.md Step 4
+## Then paste the full script from VPS_QUICK_START.md Step 4
 
-# It will:
+## It will:
 
-# - Install Docker, Docker Compose, Certbot
+## - Install Docker, Docker Compose, Certbot
 
-# - Clone your repo
+## - Clone your repo
 
-# - Build and start containers
+## - Build and start containers
 
-# - Issue SSL certificate
+## - Issue SSL certificate
 
 ```text
 
@@ -86,16 +86,16 @@ ssh root@[DROPLET_IP]
 ```bash
 
 
-# From local machine
+## From local machine
 curl https://velinor.firstperson.chat
 
-# Should show HTML
+## Should show HTML
 
 curl https://velinor.firstperson.chat/health
 
-# Should show JSON
+## Should show JSON
 
-# Visit in browser
+## Visit in browser
 https://velinor.firstperson.chat
 
 ```text
@@ -128,28 +128,28 @@ https://velinor.firstperson.chat
 
 
 
-# SSH into VPS
+## SSH into VPS
 ssh root@YOUR_DROPLET_IP
 
-# SSH into container
+## SSH into container
 docker exec -it velinor_prod bash
 
-# View logs
+## View logs
 docker compose -f docker-compose.prod.yml logs -f
 
-# Restart services
+## Restart services
 docker compose -f docker-compose.prod.yml restart
 
-# Stop services
+## Stop services
 docker compose -f docker-compose.prod.yml down
 
-# Start services
+## Start services
 docker compose -f docker-compose.prod.yml up -d
 
-# Check status
+## Check status
 docker compose -f docker-compose.prod.yml ps
 
-# Manual deploy
+## Manual deploy
 
 ```text
 ```
@@ -276,10 +276,10 @@ docker compose -f docker-compose.prod.yml ps
 
 ```bash
 
-# Update packages
+## Update packages
 apt-get update && apt-get upgrade -y
 
-# Test deploy script
+## Test deploy script
 ```text
 
 ```text
@@ -295,15 +295,15 @@ apt-get update && apt-get upgrade -y
 ```bash
 
 
-# Local machine
+## Local machine
 cd ~/saoriverse-console
 git add .
 git commit -m "feat: my change"
 git push origin main
 
-# GitHub Actions auto-triggers
+## GitHub Actions auto-triggers
 
-# VPS automatically updates within 5-10 minutes
+## VPS automatically updates within 5-10 minutes
 
 ```sql
 
@@ -314,7 +314,7 @@ git push origin main
 ```bash
 
 
-# Edit docker-compose.prod.yml or nginx.prod.conf locally
+## Edit docker-compose.prod.yml or nginx.prod.conf locally
 git add docker-compose.prod.yml nginx.prod.conf git commit -m "chore: update config" git push origin
 main
 
@@ -329,13 +329,13 @@ main
 
 
 
-# SSH to VPS
+## SSH to VPS
 ssh root@[DROPLET_IP]
 
-# Make fix
+## Make fix
 cd /opt/velinor nano docker-compose.prod.yml  # or edit any file
 
-# Manually redeploy
+## Manually redeploy
 docker compose -f docker-compose.prod.yml down
 
 ```text
@@ -350,9 +350,9 @@ docker compose -f docker-compose.prod.yml down
 
 ```bash
 
-# NEVER share /root/.ssh/velinor_deploy (private key)
+## NEVER share /root/.ssh/velinor_deploy (private key)
 
-# It's what gives GitHub permission to deploy
+## It's what gives GitHub permission to deploy
 ```text
 
 ```text
@@ -384,7 +384,7 @@ Inbound Rules (Allow):
 ```bash
 
 
-# On VPS, regularly verify deploy.sh exists and works
+## On VPS, regularly verify deploy.sh exists and works
 /opt/velinor/deploy.sh --dry-run  # Test without deploying
 
 ```

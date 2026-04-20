@@ -6,9 +6,9 @@ the signal parsing and glyph matching system. """
 
 # ============================================================================
 
-# 1. DATABASE ARCHITECTURE
+## 1. DATABASE ARCHITECTURE
 
-# ============================================================================
+## ============================================================================ (2)
 
 DATABASE_LOCATIONS = { "primary": { "path":
 "/Users/taurinrobinson/saoriverse-console/emotional_os/glyphs/glyphs.db", "table": "glyph_lexicon",
@@ -17,11 +17,11 @@ DATABASE_LOCATIONS = { "primary": { "path":
 "/Users/taurinrobinson/saoriverse-console/glyph_lexicon_rows.csv", "records": 292, "sync_status":
 "Current (Oct 30, 2025)" } }
 
-# ============================================================================
+## ============================================================================ (3)
 
-# 2. SIGNAL LEXICON FILES (JSON-based keyword mapping)
+## 2. SIGNAL LEXICON FILES (JSON-based keyword mapping)
 
-# ============================================================================
+## ============================================================================ (4)
 
 SIGNAL_LEXICONS = { "base_signal_lexicon": { "path": "parser/signal_lexicon.json", "keywords": 152,
 "maps_to": "voltage signals (α, β, γ, δ, ε, θ, λ, Ω)", "loaded_by": ["signal_parser.py",
@@ -29,11 +29,11 @@ SIGNAL_LEXICONS = { "base_signal_lexicon": { "path": "parser/signal_lexicon.json
 "parser/learned_lexicon.json", "keywords": 9, "maps_to": "voltage signals", "auto_generated": True,
 "merged_with": "base_signal_lexicon at runtime" } }
 
-# ============================================================================
+## ============================================================================ (5)
 
-# 3. CODE THAT ACCESSES THE DATABASE
+## 3. CODE THAT ACCESSES THE DATABASE
 
-# ============================================================================
+## ============================================================================ (6)
 
 DATABASE_ACCESS_CODE = { "signal_parser.py": { "location":
 "/Users/taurinrobinson/saoriverse-console/parser/signal_parser.py", "key_function":
@@ -76,11 +76,11 @@ ritual suggestion, "voltage_response": contextual emotional response, "debug_sql
 sqlite3.connect(db_path)", "error_handling": "Try/except for OperationalError, returns empty list on
 failure" } }
 
-# ============================================================================
+## ============================================================================ (7)
 
-# 4. STREAMLIT UI INTEGRATION
+## 4. STREAMLIT UI INTEGRATION
 
-# ============================================================================
+## ============================================================================ (8)
 
 STREAMLIT_INTEGRATION = { "main_v2.py": { "location":
 "/Users/taurinrobinson/saoriverse-console/main_v2.py", "imports": [ "from
@@ -107,11 +107,11 @@ Displays:
         - Processing time
 """ } }
 
-# ============================================================================
+## ============================================================================ (9)
 
-# 5. DATABASE QUERY PATTERNS
+## 5. DATABASE QUERY PATTERNS
 
-# ============================================================================
+## ============================================================================ (10)
 
 QUERY_PATTERNS = { "fetch_glyphs_by_gates": { "sql": "SELECT glyph_name, description, gate FROM
 glyph_lexicon WHERE gate IN (?, ?, ?, ...)", "used_by": ["signal_parser.py",
@@ -123,11 +123,11 @@ glyph_lexicon WHERE gate IN (?, ?, ?, ...)", "used_by": ["signal_parser.py",
 "explore_glyphs_by_voltage": { "sql": "SELECT voltage_pair, glyph_name FROM glyph_lexicon WHERE
 voltage_pair LIKE ?", "used_by": "Analysis and debugging scripts" } }
 
-# ============================================================================
+## ============================================================================ (11)
 
-# 6. SIGNAL LEXICON ENHANCEMENT SYSTEM
+## 6. SIGNAL LEXICON ENHANCEMENT SYSTEM
 
-# ============================================================================
+## ============================================================================ (12)
 
 LEXICON_ENHANCEMENT = { "integrate_glyph_lexicons.py": { "location":
 "/Users/taurinrobinson/saoriverse-console/integrate_glyph_lexicons.py", "purpose": "Convert CSV
@@ -141,11 +141,11 @@ glyph keywords into signal lexicon", "create_glyph_name_index": "Create fast loo
 from user interactions", "keys": ["something", "dealing", "like", "system", "good", "enough",
 "better", "deeply", "compelled"], "signal_mapping": "Most mapped to 'ε' (insight)" } }
 
-# ============================================================================
+## ============================================================================ (13)
 
-# 7. VOLTAGE SIGNAL SYSTEM (Core Emotional Encoding)
+## 7. VOLTAGE SIGNAL SYSTEM (Core Emotional Encoding)
 
-# ============================================================================
+## ============================================================================ (14)
 
 VOLTAGE_SIGNALS = { "α": { "name": "Attunement/Devotion", "gates": ["Gate 6", "Gate 9"],
 "emotional_themes": ["sacred", "vow", "devotion", "offering", "purpose", "joy", "exaltation"],
@@ -169,11 +169,11 @@ mourning", "collapse", "ceremony", "honoring"], "keywords": ["ceremony", "ritual
 recognition", "authentic meeting", "mirroring"], "keywords": ["recognition", "seen", "witnessed",
 "understood", "authentic", "genuine"] } }
 
-# ============================================================================
+## ============================================================================ (15)
 
-# 8. GATE SYSTEM (Emotional Complexity Levels)
+## 8. GATE SYSTEM (Emotional Complexity Levels)
 
-# ============================================================================
+## ============================================================================ (16)
 
 GATES = { "Gate 2": { "signals": ["β", "θ"], "emotional_level": "Binary/Simple", "examples": ["Held
 Grief", "Boundary of Recognition"] }, "Gate 4": { "signals": ["γ", "θ"], "emotional_level": "Layered
@@ -186,11 +186,11 @@ Stillness", "Spiral Joy", "Joyful Insight"] }, "Gate 6": { "signals": ["α", "Ω
 "Mutual Mirror"] }, "Gate 10": { "signals": ["θ"], "emotional_level": "Sacred Collapse", "examples":
 ["Ceremonial Collapse"] } }
 
-# ============================================================================
+## ============================================================================ (17)
 
-# 9. TESTING & VERIFICATION
+## 9. TESTING & VERIFICATION
 
-# ============================================================================
+## ============================================================================ (18)
 
 TESTING_SCRIPTS = { "test_signal_matching.py": { "location":
 "/Users/taurinrobinson/saoriverse-console/test_signal_matching.py", "tests": 14, "messages_tested":
@@ -202,22 +202,22 @@ working" },
 "/Users/taurinrobinson/saoriverse-console/test_glyph_messages.py", "categories": 15,
 "total_messages": 100+ } }
 
-# ============================================================================
+## ============================================================================ (19)
 
-# 10. PRODUCTION DEPLOYMENT
+## 10. PRODUCTION DEPLOYMENT
 
-# ============================================================================
+## ============================================================================ (20)
 
 PRODUCTION_SETUP = { "live_at": "<https://firstperson.chat>", "platform": "Railway", "database":
 "emotional_os/glyphs/glyphs.db (local SQLite)", "signal_lexicon": "parser/signal_lexicon.json (152
 keywords)", "processing_mode": "local (no external API dependency)", "performance": {
 "signal_parsing": "0.00-0.02s", "glyph_lookup": "0.01s", "total_latency": "0.02s per message" } }
 
-# ============================================================================
+## ============================================================================ (21)
 
-# SUMMARY
+## SUMMARY
 
-# ============================================================================
+## ============================================================================ (22)
 
 """ The FirstPerson Emotional OS has a complete end-to-end system for:
 

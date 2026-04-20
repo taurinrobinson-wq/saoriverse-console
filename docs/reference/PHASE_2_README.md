@@ -305,17 +305,17 @@ shows glyphs generated, responses crafted, health report
 ```bash
 
 
-# Copy new files
+## Copy new files
 cp emotional_os/glyphs/glyph_learner.py [target]
 cp emotional_os/glyphs/learning_response_generator.py [target]
 cp emotional_os/glyphs/shared_glyph_manager.py [target]
 
-# Modify signal_parser.py (follow integration guide)
+## Modify signal_parser.py (follow integration guide)
 
-# Test locally
+## Test locally
 python test_glyph_learning_pipeline.py
 
-# Deploy
+## Deploy
 git add .
 git commit -m "Phase 2: Real-time glyph learning system"
 git push

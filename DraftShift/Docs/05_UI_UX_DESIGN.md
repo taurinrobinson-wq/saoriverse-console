@@ -360,26 +360,19 @@ Full dashboard with compliance reporting, history, and firm-wide civility metric
 ## 🔄 User Workflows
 
 ### Workflow 1: Analyze & Accept Suggestion
-1. **Input**: Paste correspondence
-2. **Analyze**: Click "Analyze"
-3. **Review**: See civility score, glyph map, alerts
-4. **Decide**: Read suggested rewrite
-5. **Act**: Click "Use This" or "Copy to Clipboard"
+1. **Input**: Paste correspondence 2. **Analyze**: Click "Analyze" 3. **Review**: See civility
+score, glyph map, alerts 4. **Decide**: Read suggested rewrite 5. **Act**: Click "Use This" or "Copy
+to Clipboard"
 
 ### Workflow 2: Review Multiple Versions
-1. **Input**: Correspondence
-2. **Analyze**: Get initial result
-3. **Regenerate**: Click "Regenerate" for alternative rewrites
-4. **Compare**: Side-by-side view of versions
-5. **Choose**: Select best version
-6. **Export**: Copy or save
+1. **Input**: Correspondence 2. **Analyze**: Get initial result 3. **Regenerate**: Click
+"Regenerate" for alternative rewrites 4. **Compare**: Side-by-side view of versions 5. **Choose**:
+Select best version 6. **Export**: Copy or save
 
 ### Workflow 3: Compliance Reporting (Phase 3)
-1. **Navigate**: Click "Reports"
-2. **Filter**: Date range, document type, civility threshold
-3. **Generate**: Export as PDF/markdown
-4. **Review**: Compliance metrics, trends, alerts
-5. **Submit**: Use for Rule 9.7 declaration
+1. **Navigate**: Click "Reports" 2. **Filter**: Date range, document type, civility threshold 3.
+**Generate**: Export as PDF/markdown 4. **Review**: Compliance metrics, trends, alerts 5.
+**Submit**: Use for Rule 9.7 declaration
 
 ---
 
@@ -423,8 +416,9 @@ Full dashboard with compliance reporting, history, and firm-wide civility metric
 
 ## 🎓 Next Steps
 
-1. **Phase 1**: Streamlit prototype (all above layouts translate 1:1 to st.* components).
-2. **Phase 2**: React components + FastAPI backend (use component tree as guide).
-3. **Phase 3**: Full HTML/JS with Electron or PWA wrapper (ready for enterprise).
+1. **Phase 1**: Streamlit prototype (all above layouts translate 1:1 to st.* components). 2. **Phase
+2**: React components + FastAPI backend (use component tree as guide). 3. **Phase 3**: Full HTML/JS
+with Electron or PWA wrapper (ready for enterprise).
 
-The same UX philosophy and information architecture apply across all phases; only the implementation technology changes.
+The same UX philosophy and information architecture apply across all phases; only the implementation
+technology changes.

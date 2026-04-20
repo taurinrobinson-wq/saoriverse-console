@@ -769,25 +769,25 @@ function ChoiceButtons({ choices }) {
 ### Using cURL
 
 ```bash
-# Start game
+## Start game
 curl -X POST http://localhost:8000/api/game/start \
   -H "Content-Type: application/json" \
   -d '{"player_name": "Alice"}'
 
-# Take action
+## Take action
 curl -X POST http://localhost:8000/api/game/action \
   -H "Content-Type: application/json" \
   -d '{"session_id": "abc-123", "action_id": "choice-001"}'
 
-# Get status
+## Get status
 curl http://localhost:8000/api/game/status?session_id=abc-123
 
-# Save game
+## Save game
 curl -X POST http://localhost:8000/api/game/save \
   -H "Content-Type: application/json" \
   -d '{"session_id": "abc-123", "slot": 0}'
 
-# Load game
+## Load game
 curl http://localhost:8000/api/game/load?session_id=abc-123&slot=0
 ```
 

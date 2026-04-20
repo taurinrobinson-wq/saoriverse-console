@@ -2,7 +2,9 @@
 
 ## Summary
 
-Your lore-corrected swamp trickster and Kaelen side-quest has been **fully integrated** into the saoriverse-console project. All work has been completed following your specifications with **zero technological language** and pure folklore/intuition-based NPC dialogue.
+Your lore-corrected swamp trickster and Kaelen side-quest has been **fully integrated** into the
+saoriverse-console project. All work has been completed following your specifications with **zero
+technological language** and pure folklore/intuition-based NPC dialogue.
 
 ---
 
@@ -10,19 +12,23 @@ Your lore-corrected swamp trickster and Kaelen side-quest has been **fully integ
 
 ### 📁 New Files Created (385 lines total)
 
-1. **[SWAMP_MAZE_SIDEQUEST.md](velinor/markdowngameinstructions/SWAMP_MAZE_SIDEQUEST.md)** (213 lines)
+1. **[SWAMP_MAZE_SIDEQUEST.md](velinor/markdowngameinstructions/SWAMP_MAZE_SIDEQUEST.md)** (213
+lines)
    - Complete three-passage narrative (False Path → Fog Puzzle → Hidden Threshold)
    - Emotional OS stat gating with lore-consistent descriptions
    - Integration notes and player experience arc
    - All technical terminology replaced with folklore language
 
-2. **[SWAMP_MAZE_NPC_DIALOGUE.md](velinor/markdowngameinstructions/SWAMP_MAZE_NPC_DIALOGUE.md)** (92 lines)
+2. **[SWAMP_MAZE_NPC_DIALOGUE.md](velinor/markdowngameinstructions/SWAMP_MAZE_NPC_DIALOGUE.md)** (92
+lines)
    - Kaelen dialogue samples for each passage (trust-gated variations)
    - Nima, Ravi, and environmental voice contributions
    - Token collection dialogue callbacks
    - Integration examples for dialogue engine
 
-3. **[SWAMP_MAZE_INTEGRATION_SUMMARY.md](velinor/markdowngameinstructions/SWAMP_MAZE_INTEGRATION_SUMMARY.md)** (145 lines)
+3.
+**[SWAMP_MAZE_INTEGRATION_SUMMARY.md](velinor/markdowngameinstructions/SWAMP_MAZE_INTEGRATION_SUMMARY.md)**
+(145 lines)
    - Design principles applied
    - Integration points and mechanical transparency notes
    - Next steps for implementation
@@ -111,10 +117,9 @@ Your lore-corrected swamp trickster and Kaelen side-quest has been **fully integ
 ## 🔄 Integration Points
 
 **Story Flow**:
-1. Kaelen Trust (0.6+) → Swamp maze invitation
-2. Navigate three passages → Emotional growth + token collection
-3. Tokens inform Drossel encounter → Deeper understanding of isolation
-4. Final confrontation → Player emotionally prepared
+1. Kaelen Trust (0.6+) → Swamp maze invitation 2. Navigate three passages → Emotional growth + token
+collection 3. Tokens inform Drossel encounter → Deeper understanding of isolation 4. Final
+confrontation → Player emotionally prepared
 
 **Mechanical Gates**:
 - **Observation**: Reveals patterns, shortcuts, logical clues
@@ -127,21 +132,20 @@ Your lore-corrected swamp trickster and Kaelen side-quest has been **fully integ
 
 All documentation is production-ready:
 
-✅ **SWAMP_MAZE_SIDEQUEST.md** — Use for world-building and visual/audio design  
-✅ **SWAMP_MAZE_NPC_DIALOGUE.md** — Use for dialogue engine integration  
-✅ **SWAMP_MAZE_INTEGRATION_SUMMARY.md** — Use for dev reference and next-steps planning  
-✅ **story_arcs.md** — Updated with quest overview and progression  
-✅ **Velinor_story_lines.md** — Updated with lore-corrected descriptions  
+✅ **SWAMP_MAZE_SIDEQUEST.md** — Use for world-building and visual/audio design ✅
+**SWAMP_MAZE_NPC_DIALOGUE.md** — Use for dialogue engine integration ✅
+**SWAMP_MAZE_INTEGRATION_SUMMARY.md** — Use for dev reference and next-steps planning ✅
+**story_arcs.md** — Updated with quest overview and progression ✅ **Velinor_story_lines.md** —
+Updated with lore-corrected descriptions
 
 ---
 
 ## 🎨 Design Philosophy Achieved
 
-✨ **Zero Immersion Breaking**: No technological language breaks character  
-✨ **Mechanical Invisibility**: Systems work without being named  
-✨ **Emotional Resonance**: Players feel the journey, not solve systems  
-✨ **Lore Consistency**: Everything fits a world that forgot its past  
-✨ **Character Growth**: Tokens prepare player emotionally for Drossel  
+✨ **Zero Immersion Breaking**: No technological language breaks character ✨ **Mechanical
+Invisibility**: Systems work without being named ✨ **Emotional Resonance**: Players feel the
+journey, not solve systems ✨ **Lore Consistency**: Everything fits a world that forgot its past ✨
+**Character Growth**: Tokens prepare player emotionally for Drossel
 
 ---
 
@@ -162,13 +166,13 @@ All documentation is production-ready:
 
 Your swamp maze is now documentation-complete and ready for:
 
-1. **Visual Design** — Asset creation for three passages
-2. **Dialogue Engine Integration** — Connect samples to dialogue system
-3. **Sound Design** — Swamp ambience, token resonance effects
-4. **Quest State Management** — Track passage completion and tokens
-5. **Late-Game Callbacks** — Reference tokens in Drossel encounter
+1. **Visual Design** — Asset creation for three passages 2. **Dialogue Engine Integration** —
+Connect samples to dialogue system 3. **Sound Design** — Swamp ambience, token resonance effects 4.
+**Quest State Management** — Track passage completion and tokens 5. **Late-Game Callbacks** —
+Reference tokens in Drossel encounter
 
-All narrative groundwork is laid. The implementation phase can begin with full creative vision intact.
+All narrative groundwork is laid. The implementation phase can begin with full creative vision
+intact.
 
 ---
 

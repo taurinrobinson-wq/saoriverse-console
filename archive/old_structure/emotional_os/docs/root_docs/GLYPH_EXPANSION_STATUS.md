@@ -56,11 +56,8 @@ Handles 85,264+ combinations through intelligent filtering:
 
 Successfully executed end-to-end:
 
-1. Load 292 glyphs from CSV
-2. Generate combinations
-3. Score combinations
-4. Prune redundancy
-5. Ready to sync to JSON
+1. Load 292 glyphs from CSV 2. Generate combinations 3. Score combinations 4. Prune redundancy 5.
+Ready to sync to JSON
 
 ##
 
@@ -132,10 +129,9 @@ coverage:   Gap filling potential (0-1 based on gate frequency)
 
 ### Pruning Logic
 
-1. **Self-combinations:** Remove `glyph × glyph` (exact same parent)
-2. **Exact duplicates:** Same voltage pair = remove
-3. **Semantic duplicates:** Text similarity >80% = remove
-4. **Score filtering:** Keep top X% by combined_score
+1. **Self-combinations:** Remove `glyph × glyph` (exact same parent) 2. **Exact duplicates:** Same
+voltage pair = remove 3. **Semantic duplicates:** Text similarity >80% = remove 4. **Score
+filtering:** Keep top X% by combined_score
 
 ##
 
@@ -209,11 +205,11 @@ All components tested and working:
 
 ## 🎓 Key Insights
 
-1. **CSV is authoritative:** The 292-glyph CSV is 4.5x more comprehensive than the 64-glyph JSON subset
-2. **Factorial approach works:** Multiplying glyphs creates meaningful new emotional vocabulary
-3. **Pruning is essential:** 85,264 combinations → 6,000-8,000 after intelligent filtering
-4. **Scoring is balanced:** Weighted formula prevents novelty-only bias
-5. **Semantic detection works:** 80%+ text similarity detection removes near-duplicates
+1. **CSV is authoritative:** The 292-glyph CSV is 4.5x more comprehensive than the 64-glyph JSON
+subset 2. **Factorial approach works:** Multiplying glyphs creates meaningful new emotional
+vocabulary 3. **Pruning is essential:** 85,264 combinations → 6,000-8,000 after intelligent
+filtering 4. **Scoring is balanced:** Weighted formula prevents novelty-only bias 5. **Semantic
+detection works:** 80%+ text similarity detection removes near-duplicates
 
 ##
 
@@ -231,7 +227,8 @@ All components tested and working:
 - Expansion: 94-126x increase
 - Granularity: Much finer emotional distinctions possible
 
-This represents a **massive expansion** of the emotional vocabulary available to the Saoriverse system, enabling much more nuanced and precise emotional expression.
+This represents a **massive expansion** of the emotional vocabulary available to the Saoriverse
+system, enabling much more nuanced and precise emotional expression.
 
 ##
 

@@ -1,7 +1,9 @@
 # Before & After: Glyph Transformation
 
 ## Overview
-Rather than creating new glyphs, five existing glyphs were **recontextualized** to become interlocking chapters of the archive building debate narrative. This preserves the character arcs while anchoring them in the shared conflict.
+Rather than creating new glyphs, five existing glyphs were **recontextualized** to become
+interlocking chapters of the archive building debate narrative. This preserves the character arcs
+while anchoring them in the shared conflict.
 
 ---
 
@@ -33,7 +35,7 @@ Love Subtext:   "His love for memory-keeping masks fear of losing her vision"
 
 ## GLYPH 23: Glyph of Measured Step (Malrik)
 
-### BEFORE
+### BEFORE (2)
 ```
 Location:        Desert Trial Grounds (Archive Chamber)
 Tone:           fragmented, eerie
@@ -42,7 +44,7 @@ Lesson:         Discipline = moving with intention through consequence
 Player Role:    Participant in abstract archival journey
 ```
 
-### AFTER
+### AFTER (2)
 ```
 Location:        The Shared Archive Building (Inside Chambers)
 Tone:           contemplative, tense, YEARNING
@@ -71,7 +73,7 @@ Love Subtext:   His measured pace isn't just method—it's a cage he built to
 
 ## GLYPH 22: Glyph of Held Ache (Coren the Mediator) ⭐
 
-### BEFORE
+### BEFORE (3)
 ```
 Location:        Market Concourse (Marketplace)
 Tone:           ritualistic
@@ -81,7 +83,7 @@ Player Role:    Learning mediation technique from various conflicts
 Emphasis:       Practical problem-solving
 ```
 
-### AFTER
+### AFTER (3)
 ```
 Location:        The Shared Archive Building (Concourse Central Chamber) ⭐
 Tone:           contemplative, PARADOXICAL, HOLDING
@@ -100,7 +102,7 @@ Emphasis:       Philosophical depth—this is where the game's core teaching liv
 
 ## GLYPH 51: Glyph of Covenant Flame (Elenya)
 
-### BEFORE
+### BEFORE (4)
 ```
 Location:        Communal fire (hidden mountain shrine)
 Tone:           hopeful, mythic
@@ -110,7 +112,7 @@ Player Role:    Joining a beautiful ritual
 Emphasis:       Joyful, mythic, no conflict
 ```
 
-### AFTER
+### AFTER (4)
 ```
 Location:        The Shared Archive Building (Central Chamber with Shrine Space)
 Tone:           hopeful, mythic, TENDER, HURT
@@ -130,7 +132,7 @@ Love Subtext:   "The way her shoulders tense, the way she avoids looking at him"
 
 ## GLYPH 52: Glyph of Shared Survival (Elenya)
 
-### BEFORE
+### BEFORE (5)
 ```
 Location:        Mountain communal hearth
 Tone:           hopeful, mythic
@@ -140,7 +142,7 @@ Player Role:    Participating in a communal practice
 Emphasis:       Universal, timeless ritual
 ```
 
-### AFTER
+### AFTER (5)
 ```
 Location:        The Shared Archive Building (During Crisis or Time-Sharing)
 Tone:           hopeful, mythic, DIFFICULT, MATURE
@@ -183,11 +185,12 @@ Emphasis:       Mature, earned, specific—THIS building, THIS conflict
 
 ### Why Recontextualization Works
 
-1. **Character Consistency:** Malrik's philosophy about boundaries/steps doesn't change—just where it manifests
-2. **Thematic Coherence:** The game's lesson (systems cannot do what people cannot) lives in HOW these glyphs interconnect
-3. **Scope Preservation:** Stays within the 68-glyph frame, making the design more elegant
-4. **Narrative Depth:** Five glyphs tell a *story* rather than five isolated lessons
-5. **Player Understanding:** The player sees how philosophy becomes personal, how principle becomes pain
+1. **Character Consistency:** Malrik's philosophy about boundaries/steps doesn't change—just where
+it manifests 2. **Thematic Coherence:** The game's lesson (systems cannot do what people cannot)
+lives in HOW these glyphs interconnect 3. **Scope Preservation:** Stays within the 68-glyph frame,
+making the design more elegant 4. **Narrative Depth:** Five glyphs tell a *story* rather than five
+isolated lessons 5. **Player Understanding:** The player sees how philosophy becomes personal, how
+principle becomes pain
 
 ### The Elegant Loop
 
@@ -237,12 +240,12 @@ All five glyphs are *present in this arc*. None are wasted.
 
 ## Conclusion
 
-These five glyphs now form an **integrated love story** wrapped around a **philosophical debate** about how to honor memory. Rather than diluting the design with new glyphs, recontextualizing existing ones:
+These five glyphs now form an **integrated love story** wrapped around a **philosophical debate**
+about how to honor memory. Rather than diluting the design with new glyphs, recontextualizing
+existing ones:
 
-✅ Maintains design elegance  
-✅ Deepens character relationships  
-✅ Makes the game's core lesson concrete  
-✅ Gives players multiple meaningful choices  
-✅ Creates a path from principle to personal stakes to synthesis  
+✅ Maintains design elegance ✅ Deepens character relationships ✅ Makes the game's core lesson
+concrete ✅ Gives players multiple meaningful choices ✅ Creates a path from principle to personal
+stakes to synthesis
 
 The building isn't just a setting. It's where theory meets love.

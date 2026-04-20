@@ -326,7 +326,7 @@ Run tests to verify:
 
 python test_user_driven_responses.py           # Basic test python SEMANTIC_PARSING_WALKTHROUGH.py
 
-# Detailed walkthrough python test_semantic_parsing.py                # Multiple cases python
+## Detailed walkthrough python test_semantic_parsing.py                # Multiple cases python
 test_full_e2e_user_driven.py           # Full pipeline
 
 ```

@@ -33,7 +33,8 @@
 ## Next Steps
 
 ### High ROI (Quick Wins)
-1. **MD024** - Fix duplicate headings in velinor narrative files 2. **MD033** - Convert raw `<br>`
+1. **MD024** - Fix duplicate headings in velinor narrative files 2. **MD033** - Convert raw `
+`
 to markdown equivalents 3. **MD003** - Standardize remaining atx_closed headings
 
 ### Medium ROI (Systematic)

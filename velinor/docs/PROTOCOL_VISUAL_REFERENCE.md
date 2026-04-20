@@ -177,7 +177,7 @@ You can change every response, add new ones, customize for different cultures, a
 
 
 
-# At the top of parse_input():
+## At the top of parse_input():
 
 from emotional_os.core.suicidality_handler import get_suicidality_protocol
 

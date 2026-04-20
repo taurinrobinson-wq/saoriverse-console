@@ -35,7 +35,7 @@
 - **Top Discoveries**: Displays most effective new patterns
 - **Learning Stats**: Detailed analytics for developers
 
-## <strong>FP</strong> Medium Language Model Approach
+## **FP** Medium Language Model Approach
 
 ### How It Learns
 

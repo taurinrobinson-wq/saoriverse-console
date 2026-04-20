@@ -15,10 +15,10 @@ AI-powered conversations entirely on your local machine without external API dep
 
 ```bash
 
-# From repository root
+## From repository root
 docker-compose -f docker-compose.local.yml up -d
 
-# Streamlit available at: http://localhost:8501
+## Streamlit available at: http://localhost:8501
 
 ```text
 
@@ -31,13 +31,13 @@ docker-compose -f docker-compose.local.yml up -d
 ```bash
 
 
-# List what's available
+## List what's available
 docker-compose -f docker-compose.local.yml exec ollama ollama list
 
-# Pull llama3 (recommended, ~4.7GB)
+## Pull llama3 (recommended, ~4.7GB)
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# Or try other models
+## Or try other models
 docker-compose -f docker-compose.local.yml exec ollama ollama pull mistral      # ~4.1GB
 docker-compose -f docker-compose.local.yml exec ollama ollama pull neural-chat  # ~4.1GB
 
@@ -50,10 +50,10 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull neural-chat  
 ```bash
 
 
-# Check service health
+## Check service health
 curl http://localhost:11434/api/tags
 
-# Generate a response (replace llama3 with your model)
+## Generate a response (replace llama3 with your model)
 curl -X POST http://localhost:11434/api/generate -d '{ "model": "llama3", "prompt": "Why is the sky
 blue?", "stream": false
 
@@ -202,13 +202,13 @@ In docker-compose or .env:
 ```bash
 
 
-# Base URL for Ollama API (auto-configured in container)
+## Base URL for Ollama API (auto-configured in container)
 OLLAMA_BASE_URL=http://ollama:11434
 
-# Streamlit logging
+## Streamlit logging
 STREAMLIT_LOGGER_LEVEL=info
 
-# Optional: GPU acceleration (requires nvidia-docker)
+## Optional: GPU acceleration (requires nvidia-docker)
 
 ```text
 ```text
@@ -235,16 +235,16 @@ and behavior here]
 
 ```bash
 
-# Check if container is running
+## Check if container is running
 docker-compose -f docker-compose.local.yml ps
 
-# Check logs
+## Check logs
 docker-compose -f docker-compose.local.yml logs ollama
 
-# Ensure network exists
+## Ensure network exists
 docker network ls | grep firstperson_network
 
-# Restart services
+## Restart services
 ```text
 
 ```text
@@ -256,10 +256,10 @@ docker network ls | grep firstperson_network
 ```bash
 
 
-# Pull a model
+## Pull a model
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# Verify
+## Verify
 
 ```text
 
@@ -278,10 +278,10 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```bash
 
 
-# Clean up old containers/images
+## Clean up old containers/images
 docker-compose -f docker-compose.local.yml down docker system prune -a
 
-# Remove model data if needed (warning: deletes models)
+## Remove model data if needed (warning: deletes models)
 
 ```text
 ```text
@@ -319,14 +319,14 @@ Requires: `nvidia-docker` installed and NVIDIA GPU available.
 
 ```python
 
-# Health check
+## Health check
 client.is_available() -> bool
 
-# Model management
+## Model management
 models = client.get_available_models() -> list[str]
 client.pull_model("llama3") -> bool
 
-# Generation (blocking)
+## Generation (blocking)
 response = client.generate(
     prompt="Why is the sky blue?",
     model="llama3",
@@ -334,7 +334,7 @@ response = client.generate(
     num_predict=512
 ) -> str
 
-# Generation with context (for conversations)
+## Generation with context (for conversations)
 response = client.generate_with_context(
     user_input="I'm feeling overwhelmed",
     conversation_history=[
@@ -344,7 +344,7 @@ response = client.generate_with_context(
     model="llama3"
 ) -> str
 
-# Health status
+## Health status
 ```text
 
 ```text
@@ -366,7 +366,7 @@ Ollama base URL is auto-detected:
 ```python
 
 
-# In Python REPL or notebook
+## In Python REPL or notebook
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 
 client = get_ollama_client_singleton()

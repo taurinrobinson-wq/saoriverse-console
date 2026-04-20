@@ -94,20 +94,20 @@ User never sees "Gate 2". They just experience:
 ```python
 
 
-# EXTRACT glyph data invisibly
+## EXTRACT glyph data invisibly
 intensity_level = len(gates)  # Used for tone, never shown to user poetry_emotion =
 _glyph_to_emotion_category(glyph_name)  # Used for poetry selection
 
-# RESPOND TO PERSON, NOT GLYPH
+## RESPOND TO PERSON, NOT GLYPH
 if "math" in input.lower():
     # Respond to THEIR struggle, not glyph category
 parts.append("You're not alone—many brilliant people have genuine friction with math...")
 
-# APPLY glyph calibration invisibly
+## APPLY glyph calibration invisibly
 if intensity_level <= 2: closing = "permission_based"  # Gentle else: closing = "question_based"  #
 More engaging
 
-# OUTPUT feels personal, not categorical
+## OUTPUT feels personal, not categorical
 
 ```text
 ```text
@@ -122,11 +122,11 @@ More engaging
 
 
 
-# Direct response to message features (math_frustration, inherited_pattern, etc.)
+## Direct response to message features (math_frustration, inherited_pattern, etc.)
 if message_content.get("math_frustration"): parts.append("You're not alone—many brilliant people
 have genuine friction...")
 
-# High intensity = more support language
+## High intensity = more support language
 if intensity >= 8: parts.append("I'm here to work through this with you.") else:
 
 ```text

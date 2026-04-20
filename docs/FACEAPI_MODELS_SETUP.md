@@ -26,10 +26,10 @@ Then copy models from node_modules:
 ```bash
 
 
-# Windows PowerShell
+## Windows PowerShell
 Copy-Item node_modules/face-api.js/dist/models -Destination public/models -Recurse -Force
 
-# macOS/Linux
+## macOS/Linux
 
 ```text
 
@@ -69,10 +69,10 @@ public/models/
 
 
 
-# Windows PowerShell
+## Windows PowerShell (2)
 Get-ChildItem -Path "firstperson-web/public/models" -File
 
-# macOS/Linux
+## macOS/Linux (2)
 
 ```text
 ```

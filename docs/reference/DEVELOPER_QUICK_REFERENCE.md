@@ -17,15 +17,15 @@ Transform FirstPerson from cloud-dependent to fully sovereign with:
 
 ```bash
 
-# Install core dependencies
+## Install core dependencies
 pip install spacy nltk word2vec-python
 
-# Download spaCy English model
+## Download spaCy English model
 python -m spacy download en_core_web_sm
 
-# Download NRC Emotion Lexicon (one-time)
+## Download NRC Emotion Lexicon (one-time)
 
-# From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+## From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
 ```text
 
@@ -184,7 +184,7 @@ CREATE INDEX idx_glyph_metaphors ON glyph_metaphors(glyph_id);
 ```python
 
 
-# 1. Load models (once at startup)
+## 1. Load models (once at startup)
 from parser.nrc_lexicon_loader import nrc
 from parser.semantic_engine import semantic
 from parser.signal_parser import parse_input
@@ -194,29 +194,29 @@ nrc  # Already loaded
 semantic = SemanticEngine()
 generator = PoetricResponseGenerator(db)
 
-# 2. User input
+## 2. User input
 user_message = "I keep replaying that moment over and over, and it hurts"
 
-# 3. Process locally
+## 3. Process locally
 start = time.time()
 
-# Step A: Recognize emotions
+## Step A: Recognize emotions
 nrc_emotions = nrc.analyze_text(user_message)
 
-# Result: {'sadness': 4, 'negative': 5, 'fear': 1}
+## Result: {'sadness': 4, 'negative': 5, 'fear': 1}
 
-# Step B: Extract context
+## Step B: Extract context
 entities = semantic.extract_entities(user_message)
 chunks = semantic.get_noun_chunks(user_message)
 
-# Result: entities=[], chunks=["that moment", "it"]
+## Result: entities=[], chunks=["that moment", "it"]
 
-# Step C: Get signals
+## Step C: Get signals
 signals = parse_input(user_message)
 
-# Result: {'signals': ['γ'], 'gates': [4,5,9], 'glyph': 'Recursive Ache'}
+## Result: {'signals': ['γ'], 'gates': [4,5,9], 'glyph': 'Recursive Ache'}
 
-# Step D: Generate response
+## Step D: Generate response
 response = generator.generate_response(
     glyph_name=signals['glyph'],
     user_message=user_message
@@ -224,11 +224,11 @@ response = generator.generate_response(
 
 elapsed = time.time() - start
 
-# Result: 0.15-0.3 seconds (local)
+## Result: 0.15-0.3 seconds (local)
 
-# Compare: 1-2 seconds (OpenAI API)
+## Compare: 1-2 seconds (OpenAI API)
 
-# 4. Return to user
+## 4. Return to user
 print(response)
 
 ```text
@@ -258,19 +258,19 @@ print(response)
 ```bash
 
 
-# Create test_local_mode_dev.py
+## Create test_local_mode_dev.py
 python -c " import time from parser.nrc_lexicon_loader import nrc from parser.semantic_engine import
 SemanticEngine
 
-# Test NRC
+## Test NRC
 emotions = nrc.analyze_text('I am happy and grateful') assert 'joy' in emotions or 'positive' in
 emotions print('✓ NRC Lexicon working')
 
-# Test spaCy
+## Test spaCy
 semantic = SemanticEngine() entities = semantic.extract_entities('I love New York') assert any('GPE'
 in e[1] for e in entities) print('✓ spaCy working')
 
-# Test latency
+## Test latency
 start = time.time() for i in range(10): nrc.analyze_text('I feel sad and lost') elapsed =
 (time.time() - start) / 10 print(f'✓ Average latency: {elapsed*1000:.1f}ms')
 
@@ -290,13 +290,13 @@ print('\\n✅ All tests passed!')
 
 python -c " import sys import os
 
-# Check no API keys exposed
+## Check no API keys exposed
 if os.environ.get('OPENAI_API_KEY'): print('❌ API key detected!') sys.exit(1)
 
-# Check all models are local
+## Check all models are local
 from parser.nrc_lexicon_loader import nrc import spacy nlp = spacy.load('en_core_web_sm')
 
-# Verify no network calls attempted
+## Verify no network calls attempted
 print('✅ Local mode verified') print('✅ No external API keys') print('✅ All models local') print('✅
 Zero external calls possible')
 
@@ -364,7 +364,7 @@ data/
 pip install spacy
 python -m spacy download en_core_web_sm
 
-# Download NRC lexicon manually
+## Download NRC lexicon manually
 
 ```
 

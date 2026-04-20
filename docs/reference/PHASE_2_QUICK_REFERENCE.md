@@ -7,11 +7,11 @@ system.
 
 Print this out or pin it in your IDE. """
 
-# ============================================================================
+## ============================================================================
 
-# THE SYSTEM IN ONE PARAGRAPH
+## THE SYSTEM IN ONE PARAGRAPH
 
-# ============================================================================
+## ============================================================================ (2)
 
 """ When signal_parser finds no matching glyph, instead of returning None or a generic message, the
 learning pipeline:
@@ -23,11 +23,11 @@ system 5. Returns the response (never None)
 Result: Every user interaction teaches the system. Every response is personal. The database grows
 from every interaction. """
 
-# ============================================================================
+## ============================================================================ (3)
 
-# THE THREE MODULES YOU NEED TO KNOW
+## THE THREE MODULES YOU NEED TO KNOW
 
-# ============================================================================
+## ============================================================================ (4)
 
 """
 
@@ -48,11 +48,11 @@ consensus, coverage gaps Entry points: • get_glyphs_for_user(user_hash, signal
 record_glyph_adoption(user_hash, glyph_name, rating) • get_system_health_report() •
 recommend_new_glyphs_for_gaps() """
 
-# ============================================================================
+## ============================================================================ (5)
 
-# HOW TO INTEGRATE (3 STEPS)
+## HOW TO INTEGRATE (3 STEPS)
 
-# ============================================================================
+## ============================================================================ (6)
 
 """ STEP 1: Add imports to signal_parser.py ───────────────────────────────────────── from
 emotional_os.glyphs.glyph_learner import GlyphLearner from
@@ -93,11 +93,11 @@ not signals: return "unknown" tone_map = { "grief": "grief", "longing": "longing
 "recognition", "unknown": "unknown" } return tone_map.get(signals[0].get("tone", "unknown"),
 "unknown") """
 
-# ============================================================================
+## ============================================================================ (7)
 
-# DATABASE SCHEMA (WHAT GETS CREATED)
+## DATABASE SCHEMA (WHAT GETS CREATED)
 
-# ============================================================================
+## ============================================================================ (8)
 
 """ When you initialize, these tables are created in glyphs.db:
 
@@ -145,11 +145,11 @@ emotional_territory
 EXISTING TABLES: ──────────────── glyph_lexicon (unchanged) glyph_usage_log (retained)
 emotional_patterns (retained) """
 
-# ============================================================================
+## ============================================================================ (9)
 
-# KEY METHODS CHEATSHEET
+## KEY METHODS CHEATSHEET
 
-# ============================================================================
+## ============================================================================ (10)
 
 """ GLYPH LEARNER: ────────────── learner.analyze_input_for_glyph_generation(text, signals,
 user_hash) → Analyzes input, returns complete glyph candidate
@@ -186,11 +186,11 @@ mgr.recommend_new_glyphs_for_gaps() → Specific recommendations (emotional area
 
 mgr.get_system_health_report() → Dashboard: total glyphs, users, adoption rates, etc """
 
-# ============================================================================
+## ============================================================================ (11)
 
-# RESPONSE TEMPLATES (8 EMOTIONAL TONES)
+## RESPONSE TEMPLATES (8 EMOTIONAL TONES)
 
-# ============================================================================
+## ============================================================================ (12)
 
 """ GRIEF: "There's a depth to what you're carrying. {term} is one of the truest things..."
 
@@ -213,11 +213,11 @@ Key pattern:
 1. Select template for detected tone 2. Insert key emotional term from user input (reinforcement) 3.
 Add validation prompt at end (feedback gathering) 4. Reference glyph name (training signal) """
 
-# ============================================================================
+## ============================================================================ (13)
 
-# TESTING
+## TESTING
 
-# ============================================================================
+## ============================================================================ (14)
 
 """ QUICK TEST (validate it works): ─────────────────────────────── python
 test_glyph_learning_pipeline.py Expected: 3 new glyphs generated, responses shown, health report
@@ -239,11 +239,11 @@ glyph_candidates;  # New candidates SELECT count(*) FROM glyph_versions;    # Ve
 SELECT* FROM glyph_consensus ORDER BY consensus_strength DESC LIMIT 5; SELECT * FROM
 user_glyph_preferences LIMIT 5; """
 
-# ============================================================================
+## ============================================================================ (15)
 
-# DEPLOYMENT CHECKLIST
+## DEPLOYMENT CHECKLIST
 
-# ============================================================================
+## ============================================================================ (16)
 
 """ □ Copy 4 files to emotional_os/glyphs/
   ├─ glyph_learner.py
@@ -268,11 +268,11 @@ user_glyph_preferences LIMIT 5; """
 - Confirm adoptions recorded
 """
 
-# ============================================================================
+## ============================================================================ (17)
 
-# TROUBLESHOOTING
+## TROUBLESHOOTING
 
-# ============================================================================
+## ============================================================================ (18)
 
 """ PROBLEM: "No module named glyph_learner" SOLUTION: Check files are in emotional_os/glyphs/ Make
 sure __init__.py exists in emotional_os/glyphs/
@@ -292,43 +292,43 @@ Check that adoption is being recorded
 PROBLEM: "Coverage gaps not showing" SOLUTION: Run analyze_coverage_gaps() May need 50+ glyphs for
 pattern to emerge """
 
-# ============================================================================
+## ============================================================================ (19)
 
-# MONITORING COMMANDS
+## MONITORING COMMANDS
 
-# ============================================================================
+## ============================================================================ (20)
 
 """
 
-# Check system health
+## Check system health
 
 python -c " from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager mgr =
 SharedGlyphManager() print(mgr.get_system_health_report()) "
 
-# Get recommendations
+## Get recommendations
 
 python -c " from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager mgr =
 SharedGlyphManager() for rec in mgr.recommend_new_glyphs_for_gaps(): print(rec) "
 
-# View database size
+## View database size
 
 ls -lh emotional_os/glyphs/glyphs.db
 
-# Count candidates vs production
+## Count candidates vs production
 
 sqlite3 emotional_os/glyphs/glyphs.db \ "SELECT 'Candidates', count(*) FROM glyph_candidates UNION
 ALL SELECT 'Production', count(*) FROM glyph_versions WHERE is_active=1;"
 
-# View top glyphs by adoption
+## View top glyphs by adoption
 
 sqlite3 emotional_os/glyphs/glyphs.db \ "SELECT glyph_name, total_users_adopted, consensus_strength
 FROM glyph_consensus ORDER BY total_users_adopted DESC LIMIT 10;" """
 
-# ============================================================================
+## ============================================================================ (21)
 
-# REFERENCE LINKS
+## REFERENCE LINKS
 
-# ============================================================================
+## ============================================================================ (22)
 
 """ For more information, see:
 
@@ -346,11 +346,11 @@ CODE WITH DOCSTRINGS: → glyph_learner.py → learning_response_generator.py �
 
 WORKING EXAMPLE: → test_glyph_learning_pipeline.py """
 
-# ============================================================================
+## ============================================================================ (23)
 
-# PHILOSOPHY
+## PHILOSOPHY
 
-# ============================================================================
+## ============================================================================ (24)
 
 """ Every interaction teaches the system. No user ever sees a standardized message. The shared
 database grows stronger with each user. The system learns through authentic emotional communication.

@@ -4,10 +4,8 @@
 
 You need to set these 4 environment variables in Railway with your actual Supabase values:
 
-1. SUPABASE_URL - Your Supabase project URL
-2. SUPABASE_KEY - Your Supabase anon key
-3. SUPABASE_AUTH_URL - Your auth function URL
-4. CURRENT_SAORI_URL - Your Saori AI function URL
+1. SUPABASE_URL - Your Supabase project URL 2. SUPABASE_KEY - Your Supabase anon key 3.
+SUPABASE_AUTH_URL - Your auth function URL 4. CURRENT_SAORI_URL - Your Saori AI function URL
 
 ## Step 2: Run These Commands
 
@@ -40,10 +38,8 @@ railway up
 
 ## Step 4: Add Your Custom Domain
 
-1. Go to <https://railway.com/project/0b1980c1-3144-4369-9b61-778c89a66727>
-2. Click Settings → Domains
-3. Add custom domain: firstperson.chat
-4. Update your DNS records as instructed by Railway
+1. Go to <https://railway.com/project/0b1980c1-3144-4369-9b61-778c89a66727> 2. Click Settings →
+Domains 3. Add custom domain: firstperson.chat 4. Update your DNS records as instructed by Railway
 
 ##
 
@@ -51,9 +47,8 @@ railway up
 
 Your Supabase credentials are stored in your Streamlit secrets. You can find them:
 
-1. **In your Streamlit Cloud dashboard**: Go to your app settings → Secrets
-2. **In local .streamlit/secrets.toml file** (if you have one)
-3. **In your Supabase dashboard**:
+1. **In your Streamlit Cloud dashboard**: Go to your app settings → Secrets 2. **In local
+.streamlit/secrets.toml file** (if you have one) 3. **In your Supabase dashboard**:
    - URL: Project Settings → API → Project URL
    - Key: Project Settings → API → Project API keys → anon public
 

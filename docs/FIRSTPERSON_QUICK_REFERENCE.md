@@ -109,10 +109,10 @@ What's helping you see this differently?"
 ```python
 
 
-# FirstPerson initialized on startup
+## FirstPerson initialized on startup
 st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(...)
 
-# Passed to game engine
+## Passed to game engine
 orchestrator = VelinorTwineOrchestrator(
     first_person_module=firstperson_orchestrator,
     ...
@@ -126,12 +126,12 @@ orchestrator = VelinorTwineOrchestrator(
 ```python
 
 
-# Step 1: Analyze player input
+## Step 1: Analyze player input
 player_analysis = self._summarize_player_intent(player_input, player_id)
 
-# Returns: {emotional_tone, detected_theme, valence, intensity, memory_context}
+## Returns: {emotional_tone, detected_theme, valence, intensity, memory_context}
 
-# Step 2: Apply to NPC dialogue
+## Step 2: Apply to NPC dialogue
 npc_dialogue = self._generate_npc_dialogue( npc_name='Keeper', context=updated_state  # Contains
 player_analysis
 
@@ -218,7 +218,7 @@ Keeper's Response:
 ```bash
 
 
-# Just run it—integration works automatically!
+## Just run it—integration works automatically!
 
 ```text
 ```text
@@ -247,14 +247,14 @@ Edit `_generate_emotionally_aware_response()` in `orchestrator.py`:
 
 ```python
 
-# Modify opening responses
+## Modify opening responses
 response_openings = {
     'uplifting': ["Your custom uplifting response"],
     'heavy': ["Your custom heavy response"],
     ...
 }
 
-# Modify theme acknowledgments
+## Modify theme acknowledgments
 theme_acknowledgments = {
     'grief': "Your custom grief acknowledgment",
     ...
@@ -301,10 +301,10 @@ self.memory.record_turn(
 Turn 1: "I miss them" → theme='general' Turn 2: "The loss keeps returning" → theme='grief' Turn 3:
 "Grief is still with me" → theme='grief' (2nd occurrence)
 
-# FirstPerson detects 'grief' is recurring:
+## FirstPerson detects 'grief' is recurring:
 memory.repeated_patterns = ['grief']
 
-# Next NPC response includes:
+## Next NPC response includes:
 
 ```text
 ```text

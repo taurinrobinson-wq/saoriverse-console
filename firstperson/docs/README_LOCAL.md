@@ -14,14 +14,14 @@ PowerShell commands:
 
 # from repo root
 
-# start dev services (builds and installs dependencies inside containers)
+## start dev services (builds and installs dependencies inside containers)
 docker compose -f docker-compose.dev.yml up --build
 
-# Open frontend: http://localhost:3000
+## Open frontend: http://localhost:3000
 
-# Open API health: http://localhost:8000/health
+## Open API health: http://localhost:8000/health
 
-# to stop:
+## to stop:
 ctrl+c
 ```text
 
@@ -45,14 +45,14 @@ PowerShell commands:
 ```powershell
 
 
-# build and run production-like container (may take longer)
+## build and run production-like container (may take longer)
 docker compose up --build
 
-# open the site at: http://localhost:8080  (host port 8080 mapped to container port 8000)
+## open the site at: http://localhost:8080  (host port 8080 mapped to container port 8000)
 
-# check health endpoint: http://localhost:8080/health
+## check health endpoint: http://localhost:8080/health
 
-# to stop:
+## to stop: (2)
 ctrl+c
 
 ```text
@@ -69,13 +69,13 @@ Tips to speed up cycles
 ```powershell
 
 
-# list containers
+## list containers
 docker ps
 
-# then tail logs
+## then tail logs
 docker logs -f saoriverse-console-local
 
-# or for dev containers
+## or for dev containers
 docker logs -f <container_name>
 
 ```

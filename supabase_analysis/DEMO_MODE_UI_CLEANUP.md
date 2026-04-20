@@ -38,7 +38,7 @@ except Exception:
 ```python
 
 
-# Only show for authenticated users (requires data persistence)
+## Only show for authenticated users (requires data persistence)
 if st.session_state.get('authenticated'):
     try:
         if st.button("Start Personal Log", key="start_log_btn"):
@@ -72,7 +72,7 @@ import SaoynxAuthentication auth = SaoynxAuthentication() auth.logout() except E
 
 
 
-# Only show for authenticated users
+## Only show for authenticated users
 if st.session_state.get('authenticated'): try: if st.button("Logout", key="controls_logout",
 help="Sign out of your account"): from .auth import SaoynxAuthentication auth =
 SaoynxAuthentication() auth.logout() except Exception:
@@ -89,7 +89,7 @@ SaoynxAuthentication() auth.logout() except Exception:
 
 ```python
 
-# Persist history toggle
+## Persist history toggle
 persist_default = st.session_state.get('persist_history', True)
 st.session_state['persist_history'] = st.checkbox(
     "💾 Save my chats",
@@ -106,9 +106,9 @@ st.session_state['persist_history'] = st.checkbox(
 ```python
 
 
-# Persist history toggle - only show for authenticated users
+## Persist history toggle - only show for authenticated users
 
-# Demo mode doesn't support data persistence
+## Demo mode doesn't support data persistence
 if st.session_state.get('authenticated'):
     persist_default = st.session_state.get('persist_history', True)
     st.session_state['persist_history'] = st.checkbox(

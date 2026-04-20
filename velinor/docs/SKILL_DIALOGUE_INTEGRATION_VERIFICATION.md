@@ -5,7 +5,8 @@
 
 ## 1. System Architecture Overview
 
-The Velinor dialogue and skill system implements the **"Visible Self, Invisible World"** design principle:
+The Velinor dialogue and skill system implements the **"Visible Self, Invisible World"** design
+principle:
 
 | Aspect | Player Sees | Player Cannot See |
 |--------|-------------|------------------|
@@ -444,24 +445,24 @@ velinor/engine/
 ## 10. Usage Example
 
 ```python
-# Setup
+## Setup
 npc_manager = NPCManager()
 npc_manager.add_npc(NPCProfile("Sera", {...REMNANTS...}))
 skill_manager = SkillManager()
 
-# Player learns skill
+## Player learns skill
 herbalism = PlayerSkill("Herbalism", SkillDomain.HEALING)
 herbalism.level = 0.6
 skill_manager.add_skill(herbalism)
 
-# Player meets NPC
+## Player meets NPC
 claim = SkillClaim(skill_manager, "Sera", "Herbalism", is_truthful=True)
 outcome = SkillTaskOutcome(claim, task_difficulty=0.5, execution_roll=0.8)
 
-# Apply consequences
+## Apply consequences
 npc_manager.apply_skill_task_outcome(outcome)
 
-# Generate dialogue
+## Generate dialogue
 sera = npc_manager.npcs["Sera"]
 dialogue_ctx = NPCDialogueContext(
     npc_name="Sera",
@@ -479,11 +480,9 @@ print(dialogue_ctx.generate_reaction_after_success())
 
 The skill-lying-REMNANTS integration is **fully implemented and verified** across:
 
-1. ✅ **NPC Manager**: apply_skill_task_outcome() + _propagate_lie_discovery()
-2. ✅ **Dialogue System**: Dynamic options based on NPC REMNANTS
-3. ✅ **Skill System**: SkillClaim + SkillTaskOutcome with discovery mechanics
-4. ✅ **Social Ripples**: Influence map + Korrin special rumor-spreading
-5. ✅ **Test Coverage**: 4 comprehensive scenarios demonstrating full flow
+1. ✅ **NPC Manager**: apply_skill_task_outcome() + _propagate_lie_discovery() 2. ✅ **Dialogue
+System**: Dynamic options based on NPC REMNANTS 3. ✅ **Skill System**: SkillClaim + SkillTaskOutcome
+with discovery mechanics 4. ✅ **Social Ripples**: Influence map + Korrin special rumor-spreading 5.
+✅ **Test Coverage**: 4 comprehensive scenarios demonstrating full flow
 
 **Key Achievement:** Consequences are purely social (dialogue shifts, community reputation) with NO mechanical lockouts, enabling organic player agency through truthfulness or deception as valid playstyles.
-

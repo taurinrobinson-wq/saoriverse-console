@@ -62,35 +62,35 @@ Then copy-paste this entire block:
 #!/bin/bash
 set -e
 
-# Update system
+## Update system
 apt-get update && apt-get upgrade -y
 
-# Install Docker
+## Install Docker
 curl -fsSL https://get.docker.com -o get-docker.sh sh get-docker.sh rm get-docker.sh
 
-# Install Docker Compose
+## Install Docker Compose
 apt-get install -y docker-compose-plugin
 
-# Install certbot for SSL
+## Install certbot for SSL
 apt-get install -y certbot python3-certbot-nginx
 
-# Create deployment directory
+## Create deployment directory
 mkdir -p /opt/velinor cd /opt/velinor
 
-# Clone repo (replace with your repo URL)
+## Clone repo (replace with your repo URL)
 git clone https://github.com/YOUR_USERNAME/saoriverse-console.git .
 
-# Build and start
+## Build and start
 docker compose -f docker-compose.prod.yml build docker compose -f docker-compose.prod.yml up -d
 
-# Get SSL certificate
+## Get SSL certificate
 certbot certonly --standalone \
   -d velinor.firstperson.chat \
   --email your-email@example.com \
   --agree-tos \
   --non-interactive
 
-# Restart nginx with SSL
+## Restart nginx with SSL
 docker compose -f docker-compose.prod.yml restart nginx-ssl
 
 ```text

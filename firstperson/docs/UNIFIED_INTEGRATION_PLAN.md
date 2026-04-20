@@ -1,6 +1,6 @@
 # UNIFIED INTEGRATION PLAN - Analysis Complete + Comprehensive Modules
 
-# Performance-First, Locally-Hosted, Compassionate Responses
+## Performance-First, Locally-Hosted, Compassionate Responses
 
 **Status:** Ready to implement
 **Timeline:** 4 weeks, incremental rollout
@@ -59,7 +59,7 @@
 
 ```python
 
-# In response_handler.py, session init:
+## In response_handler.py, session init:
 from src.emotional_os_glyphs.conversation_memory import ConversationMemory
 
 class SessionState:
@@ -68,7 +68,7 @@ class SessionState:
         self.session_id = None
         self.user_id = None
 
-# In handle_response_pipeline:
+## In handle_response_pipeline:
 def handle_response_pipeline(user_input, session):
     # Add turn to memory FIRST (before any analysis)
     session.memory.add_turn(user_input, {
@@ -118,7 +118,7 @@ def handle_response_pipeline(user_input, session):
 ```python
 
 
-# In handle_response_pipeline, after response generated:
+## In handle_response_pipeline, after response generated:
 
 from src.emotional_os_learning.lexicon_learner import get_lexicon_learner
 
@@ -153,12 +153,12 @@ learner.learn_from_exchange(
 ```python
 
 
-# In handle_response_pipeline, before returning response:
+## In handle_response_pipeline, before returning response:
 
 from src.emotional_os_safety.sanctuary import is_sensitive_input, ensure_sanctuary_response from
 src.emotional_os_safety.sanctuary_handler import classify_risk
 
-# Check if input is sensitive
+## Check if input is sensitive
 if is_sensitive_input(user_input): risk_level = classify_risk(user_input)
 
     # If high-risk, show consent (user controls next action)
@@ -185,15 +185,15 @@ response = ensure_sanctuary_response( input_text=user_input, base_response=respo
 
 
 
-# File: src/emotional_os/deploy/modules/ui_components/response_handler.py
+## File: src/emotional_os/deploy/modules/ui_components/response_handler.py
 
-# Add imports at top
+## Add imports at top
 from src.emotional_os_glyphs.conversation_memory import ConversationMemory from
 src.emotional_os_learning.lexicon_learner import get_lexicon_learner from
 src.emotional_os_safety.sanctuary import is_sensitive_input, ensure_sanctuary_response from
 src.emotional_os_safety.sanctuary_handler import classify_risk, build_consent_prompt
 
-# Update handle_response_pipeline:
+## Update handle_response_pipeline:
 def handle_response_pipeline(user_input, context, session): """ TIER 1: Foundation layer with
 context + compassion
 
@@ -237,9 +237,9 @@ session.memory.add_turn(response, { "role": "assistant", "timestamp": datetime.n
 
 ```python
 
-# File: src/emotional_os/deploy/modules/ui_refactored.py
+## File: src/emotional_os/deploy/modules/ui_refactored.py
 
-# In session initialization:
+## In session initialization:
 class SessionState:
     def __init__(self):
         # Add memory
@@ -260,7 +260,7 @@ class SessionState:
 ```python
 
 
-# File: test_tier1_foundation.py
+## File: test_tier1_foundation.py
 
 import pytest
 from datetime import datetime
@@ -334,19 +334,19 @@ def test_response_time():
 ```bash
 
 
-# Run tests
+## Run tests
 python -m pytest test_tier1_foundation.py -v
 
-# Run integration test with UI
+## Run integration test with UI
 streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 
-# Talk to system, verify:
+## Talk to system, verify:
 
-# - No repeated questions
+## - No repeated questions
 
-# - System remembers prior context
+## - System remembers prior context
 
-# - Responses feel more compassionate
+## - Responses feel more compassionate
 
 ```text
 ```text
@@ -364,14 +364,14 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 
 ## WEEK 2: TIER 2 - ALIVENESS (4-6 hours)
 
-### Core Objective
+### Core Objective (2)
 
 - Add emotional tone variation (not single robotic voice)
 - Enable energy/fatigue cycles (detect and match pacing)
 - Implement emotional reciprocity (system responds to emotion, not just content)
 - Verify response time still under 100ms
 
-### Modules to Integrate
+### Modules to Integrate (2)
 
 #### 1. Presence Layer - Attunement (PRIORITY: HIGHEST)
 
@@ -390,7 +390,7 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 
 
 
-# In response_handler.py:
+## In response_handler.py:
 
 from src.emotional_os.core.presence_integration import PresenceIntegration
 
@@ -428,7 +428,7 @@ pacing=pacing_score )
 
 ```python
 
-# In response_handler.py:
+## In response_handler.py: (2)
 
 from src.emotional_os.core.emotional_reciprocity import EmotionalReciprocity
 
@@ -474,11 +474,11 @@ def handle_response_pipeline(user_input, context, session):
 ```python
 
 
-# In response_handler.py:
+## In response_handler.py: (3)
 
 from src.emotional_os.core.embodied_simulation import EmbodiedSimulation
 
-# Initialize once per session
+## Initialize once per session
 session.embodied = EmbodiedSimulation()
 
 def handle_response_pipeline(user_input, context, session):
@@ -520,7 +520,7 @@ def handle_response_pipeline(user_input, context, session):
 ```python
 
 
-# File: src/emotional_os/core/presence_integration.py
+## File: src/emotional_os/core/presence_integration.py
 
 from typing import Dict, Optional import re
 
@@ -558,7 +558,7 @@ return response.replace(". ", ". ... ") else:
 
 
 
-# File: src/emotional_os/core/emotional_reciprocity.py
+## File: src/emotional_os/core/emotional_reciprocity.py
 
 from typing import Dict, List, Optional
 
@@ -567,7 +567,7 @@ class EmotionalReciprocity: """Generate emotionally complementary responses"""
     # Map from user emotion to system response approach
 RECIPROCITY_MAP = { "overwhelm": "grounding",  # Calm, steady, anchoring "joy": "expansion",
 
-# Encourage, elaborate, celebrate "grief": "presence",        # Stay with, hold space, witness
+## Encourage, elaborate, celebrate "grief": "presence",        # Stay with, hold space, witness
 "confusion": "clarifying",  # Offer structure, name patterns "anger": "channeling",      # Validate,
 explore meaning "vulnerability": "safety",  # Gentle, protective, affirming }
 
@@ -599,7 +599,7 @@ def _vary_approach(self, approach: str) -> str: """Vary approach to avoid repeti
 
 ```python
 
-# File: src/emotional_os/core/embodied_simulation.py
+## File: src/emotional_os/core/embodied_simulation.py
 
 from enum import Enum
 
@@ -647,12 +647,12 @@ class EmbodiedSimulation:
 ```python
 
 
-# Add to imports
+## Add to imports
 from src.emotional_os.core.presence_integration import PresenceIntegration
 from src.emotional_os.core.emotional_reciprocity import EmotionalReciprocity
 from src.emotional_os.core.embodied_simulation import EmbodiedSimulation
 
-# Update handle_response_pipeline
+## Update handle_response_pipeline
 def handle_response_pipeline(user_input, context, session):
     """
     TIER 1 + TIER 2: Foundation + Aliveness
@@ -694,7 +694,7 @@ def handle_response_pipeline(user_input, context, session):
 ```python
 
 
-# File: test_tier2_aliveness.py
+## File: test_tier2_aliveness.py
 
 import pytest from src.emotional_os.core.presence_integration import PresenceIntegration from
 src.emotional_os.core.emotional_reciprocity import EmotionalReciprocity from
@@ -745,14 +745,14 @@ def test_tier2_response_time(): """Full pipeline with Tier 2 still under 100ms""
 
 ## WEEK 3-4: TIER 3 - DEPTH (6-8 hours)
 
-### Core Objective
+### Core Objective (3)
 
 - Enable poetic understanding (metaphor-aware responses)
 - Implement multiple archetypal voices
 - Add managed surprise (dynamic variation)
 - Maintain < 100ms response time
 
-### Modules to Integrate
+### Modules to Integrate (3)
 
 #### 1. Poetic Consciousness (PRIORITY: HIGHEST)
 
@@ -815,13 +815,13 @@ After all Tiers 1-3 stable and tested
 
 
 
-# ✅ DO: Use local systems
+## ✅ DO: Use local systems
 - NRC (emotion lexicon)
 - Spacy (NLP, entity recognition)
 - TextBlob (sentiment)
 - Regex patterns (fast matching)
 
-# ❌ DON'T: External APIs
+## ❌ DON'T: External APIs
 - No OpenAI calls
 - No remote LLMs
 
@@ -833,13 +833,13 @@ After all Tiers 1-3 stable and tested
 
 ```python
 
-# ✅ DO: Heuristics for speed
+## ✅ DO: Heuristics for speed
 - Pattern matching (regex)
 - Keyword lookups
 - Rule-based logic
 - State machines
 
-# ❌ DON'T: Heavy models
+## ❌ DON'T: Heavy models
 - Large language models
 - Complex neural networks
 ```text
@@ -853,12 +853,12 @@ After all Tiers 1-3 stable and tested
 ```python
 
 
-# ✅ DO: Cache what you can
+## ✅ DO: Cache what you can
 - Emotion lexicon loaded once per session
 - Patterns compiled at startup
 - Emotional profiles cached
 
-# ❌ DON'T: Recompute each turn
+## ❌ DON'T: Recompute each turn
 - Reparse lexicon files
 - Recompile patterns
 
@@ -871,12 +871,12 @@ After all Tiers 1-3 stable and tested
 ```python
 
 
-# ✅ DO: Simple approaches
+## ✅ DO: Simple approaches
 - Detect pacing from punctuation
 - Energy cycles with counters
 - Emotional tones from keywords
 
-# ❌ DON'T: Complex approaches
+## ❌ DON'T: Complex approaches
 - Sentiment analysis on every word
 - Complex ML models
 
@@ -924,7 +924,7 @@ session_metrics = {
 ```python
 
 
-# In response_handler.py
+## In response_handler.py
 
 import time
 from contextlib import contextmanager
@@ -1024,7 +1024,7 @@ pytest test_integration_full_pipeline.py -v
 
 pytest test_performance.py -v
 
-# Verify: All responses < 100ms
+## Verify: All responses < 100ms
 
 ```
 

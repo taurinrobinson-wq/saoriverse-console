@@ -62,7 +62,7 @@ sophisticated emotional intelligence with advanced technical infrastructure.
 
 ```python
 
-# OLD (BLOCKING)
+## OLD (BLOCKING)
 save_success = await run_in_threadpool(save_conversation_to_supabase, ...)
 ```text
 
@@ -75,10 +75,10 @@ save_success = await run_in_threadpool(save_conversation_to_supabase, ...)
 ```python
 
 
-# NEW (NON-BLOCKING)
+## NEW (NON-BLOCKING)
 return ChatResponse(...)  # Return IMMEDIATELY
 
-# Then in background:
+## Then in background:
 
 ```text
 
@@ -238,13 +238,13 @@ python firstperson_backend.py
 ```bash
 python diagnose_backend.py
 
-# Tests:
+## Tests:
 
-# ✓ Health check
+## ✓ Health check
 
-# ✓ Chat endpoint (with timing)
+## ✓ Chat endpoint (with timing)
 
-# ✓ Conversations loading
+## ✓ Conversations loading
 
 ```text
 
@@ -268,7 +268,7 @@ curl -X POST http://localhost:8000/chat \
     }
   }'
 
-# Response should arrive in <100ms
+## Response should arrive in <100ms
 
 ```
 

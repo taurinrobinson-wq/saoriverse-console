@@ -59,13 +59,13 @@ user_id="user_123" )
 result = processor.process_user_message( user_message="I feel a deep connection but it's
 terrifying", ai_response="That vulnerability is the doorway...", )
 
-# Result includes:
+## Result includes:
 
-# - Signals extracted
+## - Signals extracted
 
-# - Lexicon updates
+## - Lexicon updates
 
-# - New glyphs generated
+## - New glyphs generated
 
 ```text
 ```
@@ -115,9 +115,9 @@ User: "I feel deeply seen and yet exposed"
 
 signals = extractor.extract_signals(combined_text)
 
-# Returns: [
-#   {"signal": "love", "strength": 0.9},
-#   {"signal": "vulnerability", "strength": 0.8},
+## Returns: [
+##   {"signal": "love", "strength": 0.9},
+##   {"signal": "vulnerability", "strength": 0.8},
 
 ```text
 
@@ -130,11 +130,11 @@ signals = extractor.extract_signals(combined_text)
 learner.learn_from_exchange( user_id="user_123", user_input="...", ai_response="...",
 emotional_signals=signals, )
 
-# Updates:
+## Updates:
 
-# - User's personal lexicon (fast)
+## - User's personal lexicon (fast)
 
-# - Shared lexicon (if quality passes)
+## - Shared lexicon (if quality passes)
 
 ```text
 ```text
@@ -148,12 +148,12 @@ emotional_signals=signals, )
 
 patterns = evolution._detect_patterns_in_exchange( user_input, ai_response, signals )
 
-# Returns: [
-#   {
-#     "signal_pair": ["love", "vulnerability"],
-#     "co_occurrence_count": 1,
-#     "keywords": ["deeply", "seen", "exposed"],
-#   }
+## Returns: [ (2)
+##   {
+##     "signal_pair": ["love", "vulnerability"],
+##     "co_occurrence_count": 1,
+##     "keywords": ["deeply", "seen", "exposed"],
+##   }
 
 ```text
 ```
@@ -164,17 +164,17 @@ patterns = evolution._detect_patterns_in_exchange( user_input, ai_response, sign
 ```python
 new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 
-# Creates glyphs like:
+## Creates glyphs like:
 
-# {
-#   "id": "glyph_dialogue_user_123_abc_1",
-#   "name": "Open-Hearted Love",
-#   "symbol": "♥🌱",
-#   "core_emotions": ["love", "vulnerability"],
-#   "associated_keywords": ["deeply", "seen", "exposed"],
-#   "combined_frequency": 300,
-#   "response_cue": "Honor the courage of opening one's heart",
-#   "created_from_conversation": true,
+## { (2)
+##   "id": "glyph_dialogue_user_123_abc_1",
+##   "name": "Open-Hearted Love",
+##   "symbol": "♥🌱",
+##   "core_emotions": ["love", "vulnerability"],
+##   "associated_keywords": ["deeply", "seen", "exposed"],
+##   "combined_frequency": 300,
+##   "response_cue": "Honor the courage of opening one's heart",
+##   "created_from_conversation": true,
 
 ```text
 
@@ -187,13 +187,13 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 ```python
 
 
-# Glyphs automatically:
+## Glyphs automatically:
 
-# - Saved to conversation_glyphs.json
+## - Saved to conversation_glyphs.json
 
-# - Available for next dialogue turns
+## - Available for next dialogue turns
 
-# - Exported to system database
+## - Exported to system database
 
 ```text
 
@@ -209,19 +209,19 @@ from hybrid_processor_with_evolution import create_integrated_processor from
 emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides from
 emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 
-# Initialize components
+## Initialize components
 learner = HybridLearnerWithUserOverrides() extractor = AdaptiveSignalExtractor(adaptive=True,
 use_discovered=True)
 
-# Create integrated processor
+## Create integrated processor
 processor = create_integrated_processor( hybrid_learner=learner, adaptive_extractor=extractor,
 user_id="user_123", )
 
-# Process dialogue
+## Process dialogue
 result = processor.process_user_message( user_message="I want to understand my grief",
 ai_response="Grief is love with nowhere to go...", )
 
-# Check results
+## Check results
 print(f"New glyphs: {len(result['pipeline_stages']['glyph_generation']['new_glyphs_generated'])}")
 
 ```text
@@ -236,15 +236,15 @@ print(f"New glyphs: {len(result['pipeline_stages']['glyph_generation']['new_glyp
 
 conversation_id = "conv_session_001"
 
-# Turn 1
+## Turn 1
 result1 = processor.process_user_message( user_message="I feel lost", ai_response="Feeling lost is
 the beginning of finding yourself", conversation_id=conversation_id, )
 
-# Turn 2
+## Turn 2
 result2 = processor.process_user_message( user_message="But there's also beauty in the uncertainty",
 ai_response="Yes, that uncertain beauty is where growth happens", conversation_id=conversation_id, )
 
-# Get conversation summary
+## Get conversation summary
 summary = processor.get_conversation_summary(conversation_id)
 
 ```text
@@ -255,20 +255,20 @@ summary = processor.get_conversation_summary(conversation_id)
 
 ```python
 
-# Get all glyphs from current session
+## Get all glyphs from current session
 all_glyphs = processor.get_all_generated_glyphs()
 
-# Get glyphs from specific conversation
+## Get glyphs from specific conversation
 conv_glyphs = processor.evolution.get_conversation_glyphs(
     conversation_id="conv_session_001"
 )
 
-# Get user-specific glyphs
+## Get user-specific glyphs
 user_glyphs = processor.evolution.get_conversation_glyphs(
     user_id="user_123"
 )
 
-# Print recent glyphs
+## Print recent glyphs
 ```text
 
 ```text
@@ -280,14 +280,14 @@ user_glyphs = processor.evolution.get_conversation_glyphs(
 ```python
 
 
-# Export session glyphs
+## Export session glyphs
 result = processor.export_session_glyphs(
     output_file="/path/to/session_glyphs.json"
 )
 
-# Result: {"success": true, "count": 15, "file": "..."}
+## Result: {"success": true, "count": 15, "file": "..."}
 
-# Or use evolution directly
+## Or use evolution directly
 export_result = processor.evolution.export_glyphs_for_system(
     output_file="/path/to/all_glyphs.json"
 
@@ -300,30 +300,30 @@ export_result = processor.evolution.export_glyphs_for_system(
 ```python
 
 
-# Print comprehensive summary
+## Print comprehensive summary
 processor.print_session_summary()
 
-# Output:
+## Output:
 
-# ════════════════════════════════════════════════════════════════════════════════
+## ════════════════════════════════════════════════════════════════════════════════
 
-# HYBRID PROCESSOR SESSION SUMMARY
+## HYBRID PROCESSOR SESSION SUMMARY
 
-# ════════════════════════════════════════════════════════════════════════════════
+## ════════════════════════════════════════════════════════════════════════════════ (2)
 
-# Total conversations processed: 3
+## Total conversations processed: 3
 
-# Total turns processed: 8
+## Total turns processed: 8
 
-# Total new glyphs generated: 5
+## Total new glyphs generated: 5
 
-# NEW GLYPHS GENERATED:
-#   1. ♥❤ Intimate Connection (love + intimacy)
-#   2. ♥🌱 Open-Hearted Love (love + vulnerability)
-#   3. ♥🌹 Sensual Devotion (love + sensuality)
-#   4. 🌱✨ Vulnerable Wonder (vulnerability + wonder)
+## NEW GLYPHS GENERATED:
+##   1. ♥❤ Intimate Connection (love + intimacy)
+##   2. ♥🌱 Open-Hearted Love (love + vulnerability)
+##   3. ♥🌹 Sensual Devotion (love + sensuality)
+##   4. 🌱✨ Vulnerable Wonder (vulnerability + wonder)
 
-# 5. 🌿🎻 Natural Longing (nature + longing)
+## 5. 🌿🎻 Natural Longing (nature + longing)
 
 ```text
 ```text
@@ -368,7 +368,7 @@ Adjust keywords and thresholds in `_detect_patterns_in_exchange()`:
 ```python
 
 
-# In dynamic_glyph_evolution.py, DynamicGlyphEvolution class
+## In dynamic_glyph_evolution.py, DynamicGlyphEvolution class
 signal_keywords = {
     ("love", "intimacy"): ["love", "intimacy", "close", "tender", "embrace"],
     ("love", "vulnerability"): ["open", "honest", "bare", "risk"],
@@ -460,20 +460,20 @@ Track evolution progress:
 ```python
 
 
-# Session metrics
+## Session metrics
 print(f"Glyphs in session: {len(processor.generated_glyphs)}")
 print(f"Conversations: {len(set(c['conversation_id'] for c in processor.conversation_history))}")
 print(f"Total turns: {len(processor.conversation_history)}")
 
-# Lexicon size
+## Lexicon size
 lexicon = processor.evolution._load_lexicon()
 print(f"Active dimensions: {len(lexicon.get('signals', {}))}")
 
-# User glyphs
+## User glyphs
 user_glyphs = processor.evolution.get_conversation_glyphs(user_id="user_123")
 print(f"Glyphs for user: {len(user_glyphs)}")
 
-# Glyph frequencies
+## Glyph frequencies
 top_glyphs = sorted(
     processor.generated_glyphs,
     key=lambda g: g.get("combined_frequency", 0),
@@ -546,7 +546,7 @@ def _create_pattern_symbol(self, signal1, signal2):
         # Your custom symbol selection
 return "✨🔮"
 
-# Use it
+## Use it
 evolution = CustomGlyphEvolution(hybrid_learner) processor = HybridProcessorWithEvolution(...,
 evolution)
 

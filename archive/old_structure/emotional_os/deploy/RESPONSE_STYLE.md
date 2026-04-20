@@ -57,4 +57,5 @@ Notes
 
 - For cross-platform consistency we updated the main Deno edge functions and the web template. There are a few internal scripts (backups, logs) that still contain the literal fallback; they are non-user-facing and can be updated as needed.
 
-If you'd like, I can centralize the TypeScript fallback logic into a shared module next so the same alternatives are reused across all functions.
+If you'd like, I can centralize the TypeScript fallback logic into a shared module next so the same
+alternatives are reused across all functions.

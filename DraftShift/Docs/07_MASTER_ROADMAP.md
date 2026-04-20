@@ -2,7 +2,8 @@
 
 ## 📋 Executive Summary
 
-This document synthesizes all DraftShift architecture, design, and phasing guidance into a single master roadmap. It details exactly what to build, in what order, with dependencies clearly mapped.
+This document synthesizes all DraftShift architecture, design, and phasing guidance into a single
+master roadmap. It details exactly what to build, in what order, with dependencies clearly mapped.
 
 **Current State:** DraftShift core modules (analysis, signal parsing, affect parsing) are **working and tested** in draftshift/ folder.
 
@@ -58,7 +59,8 @@ This document synthesizes all DraftShift architecture, design, and phasing guida
 ## 📅 Phase 1 Implementation: MVP (Months 1-3)
 
 ### Goal
-Prove civility scoring + transformation works. Build Streamlit prototype. Validate concept with 5-10 beta users.
+Prove civility scoring + transformation works. Build Streamlit prototype. Validate concept with 5-10
+beta users.
 
 ### What to Build
 
@@ -237,11 +239,11 @@ st.set_page_config(page_title="DraftShift", layout="wide")
 
 st.title("DraftShift - Civility Analyzer for Legal Correspondence")
 
-# Sidebar settings
+## Sidebar settings
 mode = st.sidebar.selectbox("Draft Mode", ["civility", "litigation", "client-friendly", "neutral-negotiation"])
 include_rewrite = st.sidebar.checkbox("Include Suggested Rewrite", value=True)
 
-# Main input
+## Main input
 text = st.text_area("Enter your correspondence:", height=200)
 
 if st.button("Analyze"):
@@ -279,7 +281,7 @@ if st.button("Analyze"):
         rewrite_score = core.calculate_civility_score(core.detect_tone(rewrite))
         st.success(f"✅ Civility score improved to {rewrite_score}/100")
 
-# Disclaimer
+## Disclaimer
 st.info("""
 **DraftShift Disclaimer:**
 DraftShift does not replace the role of an attorney or ethics consultant. 
@@ -344,16 +346,14 @@ streamlit==1.28.0
 
 ## 📅 Phase 2 Implementation: Beta (Months 4-6)
 
-### Goal
+### Goal (2)
 Production-ready backend + polished React frontend. Deploy to 20-30 beta users.
 
 ### What to Build (Summary)
-1. **FastAPI Backend** - Full API endpoints, database layer (SQLite)
-2. **React Frontend** - Component tree from UI design, TypeScript + Tailwind
-3. **Docker Deployment** - Containerized setup
-4. **Compliance Reporting** - Basic PDF export
-5. **Authentication** - JWT-based auth
-6. **Automated Testing** - Unit + integration tests
+1. **FastAPI Backend** - Full API endpoints, database layer (SQLite) 2. **React Frontend** -
+Component tree from UI design, TypeScript + Tailwind 3. **Docker Deployment** - Containerized setup
+4. **Compliance Reporting** - Basic PDF export 5. **Authentication** - JWT-based auth 6. **Automated
+Testing** - Unit + integration tests
 
 ### Architecture
 ```
@@ -395,18 +395,15 @@ Production-ready backend + polished React frontend. Deploy to 20-30 beta users.
 
 ## 📅 Phase 3 Implementation: Enterprise (Months 7+)
 
-### Goal
+### Goal (3)
 Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytics, integrations.
 
-### What to Build (Summary)
-1. **Electron App** - Cross-platform desktop wrapper
-2. **Multi-Tenant Backend** - Org isolation, permissions
-3. **Advanced Dashboard** - Compliance analytics, trends
-4. **SAML/SSO** - Enterprise authentication
-5. **Archive Analysis** - AnythingLLM + RAG
-6. **Glyph Visualization** - Symbolic overlays
-7. **Integrations** - Outlook, Gmail, case management
-8. **Admin Console** - User/org management
+### What to Build (Summary) (2)
+1. **Electron App** - Cross-platform desktop wrapper 2. **Multi-Tenant Backend** - Org isolation,
+permissions 3. **Advanced Dashboard** - Compliance analytics, trends 4. **SAML/SSO** - Enterprise
+authentication 5. **Archive Analysis** - AnythingLLM + RAG 6. **Glyph Visualization** - Symbolic
+overlays 7. **Integrations** - Outlook, Gmail, case management 8. **Admin Console** - User/org
+management
 
 ### Key Features
 - Firm-wide civility dashboards
@@ -415,7 +412,7 @@ Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytic
 - Fine-tuned civility models (optional)
 - On-premises deployment option
 
-### Success Criteria
+### Success Criteria (2)
 - [ ] SOC 2 Type II audit passed
 - [ ] GDPR/CCPA compliance
 - [ ] 100+ enterprise beta users
@@ -429,12 +426,8 @@ Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytic
 ## 🔄 Dependencies & Sequencing
 
 ### Critical Path (Minimum to Ship Phase 1)
-1. ✅ Analysis modules (already done)
-2. → LLM Integration (1.1)
-3. → Civility Scoring (1.2)
-4. → Risk Alerts (1.3)
-5. → Streamlit App (1.4)
-6. → Phase 1 Release
+1. ✅ Analysis modules (already done) 2. → LLM Integration (1.1) 3. → Civility Scoring (1.2) 4. →
+Risk Alerts (1.3) 5. → Streamlit App (1.4) 6. → Phase 1 Release
 
 ### Phase 1 → Phase 2 Transition
 - Phase 1 must be validated with beta users first
@@ -490,13 +483,13 @@ Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytic
 
 ## 🔐 Security & Compliance Checklist
 
-### Phase 1
+### Phase 1 (2)
 - [ ] Local-only (no external APIs)
 - [ ] No PII/correspondence stored by default
 - [ ] DISCLAIMER prominently displayed
 - [ ] Lawyer review of transformations for legal accuracy
 
-### Phase 2
+### Phase 2 (2)
 - [ ] HTTPS enforced
 - [ ] JWT authentication
 - [ ] Encrypted password storage (bcrypt)
@@ -504,7 +497,7 @@ Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytic
 - [ ] GDPR consent + data export capability
 - [ ] Audit logs for all actions
 
-### Phase 3
+### Phase 3 (2)
 - [ ] SAML/SSO support
 - [ ] Role-based access control (RBAC)
 - [ ] Multi-tenant data isolation
@@ -517,20 +510,20 @@ Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytic
 
 ## 📈 Success Metrics & KPIs
 
-### Phase 1
+### Phase 1 (3)
 - Users: 5-10 beta
 - Avg civility score improvement: >5 points
 - User satisfaction: >70%
 - Concept validation: ✅
 
-### Phase 2
+### Phase 2 (3)
 - Users: 20-30 beta
 - Avg civility score improvement: >10 points
 - User satisfaction: >80%
 - NPS score: >30
 - Uptime: >99%
 
-### Phase 3
+### Phase 3 (3)
 - Users: 100+ beta (law firm decision-makers)
 - Avg civility score improvement: >10 points
 - User satisfaction: >85%
@@ -570,20 +563,20 @@ Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytic
 
 ## 📖 Documentation to Create
 
-### Phase 1
+### Phase 1 (4)
 - [ ] README (setup + quick start)
 - [ ] User guide (how to use app)
 - [ ] Architecture overview
 - [ ] Troubleshooting guide
 
-### Phase 2
+### Phase 2 (4)
 - [ ] API documentation (Swagger)
 - [ ] Deployment guide (Docker)
 - [ ] Developer setup guide
 - [ ] Database schema documentation
 - [ ] Admin guide
 
-### Phase 3
+### Phase 3 (4)
 - [ ] Enterprise deployment guide (on-prem, Kubernetes)
 - [ ] Integration guides (Outlook, Gmail, etc.)
 - [ ] Admin console guide
@@ -624,11 +617,12 @@ Full-featured enterprise platform with multi-tenant, SAML/SSO, advanced analytic
 
 ## Summary
 
-DraftShift is positioned to become **the civility compliance engine for legal professionals**. By following this phased roadmap:
+DraftShift is positioned to become **the civility compliance engine for legal professionals**. By
+following this phased roadmap:
 
-1. **Phase 1** validates the concept and builds a functional MVP
-2. **Phase 2** scales to early customers with a production system
-3. **Phase 3** enables enterprise deployment with advanced features
+1. **Phase 1** validates the concept and builds a functional MVP 2. **Phase 2** scales to early
+customers with a production system 3. **Phase 3** enables enterprise deployment with advanced
+features
 
 **Current advantage:** All core analysis modules are already built and working. The path forward is clear: integrate an LLM, build the Streamlit prototype, validate with users, then systematically build toward enterprise.
 

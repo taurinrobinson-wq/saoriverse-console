@@ -4,9 +4,8 @@
 
 When you have a DOCX file open or selected in VS Code:
 
-1. **Press Ctrl+Shift+P** (or Cmd+Shift+P on Mac)
-2. **Type "Run Task"** and select it
-3. **Choose one of these:**
+1. **Press Ctrl+Shift+P** (or Cmd+Shift+P on Mac) 2. **Type "Run Task"** and select it 3. **Choose
+one of these:**
    - **"View DOCX in Browser"** → Opens in web viewer (best for reading)
    - **"View DOCX as Text"** → Shows in terminal (quick preview)
    - **"Export DOCX to JSON"** → Extracts all data (for processing)
@@ -63,10 +62,8 @@ python3 docx_web_viewer.py document.docx
 
 ## 🎯 Try It Now
 
-1. **Find a DOCX file** in your workspace (try the one you mentioned)
-2. **Right-click it** or have it active in the editor
-3. **Press Ctrl+Shift+P** and type "Run Task"
-4. **Select "View DOCX in Browser"**
-5. A browser tab will open showing the document!
+1. **Find a DOCX file** in your workspace (try the one you mentioned) 2. **Right-click it** or have
+it active in the editor 3. **Press Ctrl+Shift+P** and type "Run Task" 4. **Select "View DOCX in
+Browser"** 5. A browser tab will open showing the document!
 
 ## � What You Get

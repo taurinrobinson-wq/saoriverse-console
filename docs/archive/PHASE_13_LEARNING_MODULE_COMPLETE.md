@@ -2,12 +2,13 @@
 
 ## What You've Built
 
-You've implemented a **three-layer dynamic learning system** that transforms how the saoriverse console evolves. Instead of canned responses or template rotation, the system now:
+You've implemented a **three-layer dynamic learning system** that transforms how the saoriverse
+console evolves. Instead of canned responses or template rotation, the system now:
 
-1. **Learns from lived dialogue** (your conversational scenes)
-2. **Extracts actionable rules** (response principles, tone guidelines, continuity bridges)
-3. **Applies principles dynamically** (generates fresh responses, not templates)
-4. **Improves continuously** (success weights evolve based on real outcomes)
+1. **Learns from lived dialogue** (your conversational scenes) 2. **Extracts actionable rules**
+(response principles, tone guidelines, continuity bridges) 3. **Applies principles dynamically**
+(generates fresh responses, not templates) 4. **Improves continuously** (success weights evolve
+based on real outcomes)
 
 ##
 
@@ -17,7 +18,8 @@ You've implemented a **three-layer dynamic learning system** that transforms how
 
 **File**: `emotional_os/learning/conversation_archetype.py`
 
-Stores conversation patterns extracted from successful dialogues. Each archetype is a **rule set**, not a canned script.
+Stores conversation patterns extracted from successful dialogues. Each archetype is a **rule set**,
+not a canned script.
 
 ```python
 ReliefToGratitude archetype contains:
@@ -129,12 +131,10 @@ New or refined archetype added to library
 
 **How It Works**:
 
-1. Detects emotional transitions (overwhelm → relief → gratitude)
-2. Extracts keywords that signal that pattern
-3. Analyzes system responses to find principles
-4. Identifies how system maintained conversation coherence
-5. Creates archetype or merges with existing one
-6. Updates success weights based on user feedback
+1. Detects emotional transitions (overwhelm → relief → gratitude) 2. Extracts keywords that signal
+that pattern 3. Analyzes system responses to find principles 4. Identifies how system maintained
+conversation coherence 5. Creates archetype or merges with existing one 6. Updates success weights
+based on user feedback
 
 ##
 
@@ -144,20 +144,19 @@ New or refined archetype added to library
 
 # LEARNING MODULE TEST COMPLETE [OK]
 
-✓ Layer 1: Archetype Library loaded (1 pre-loaded archetype)
-✓ Layer 2: Response Generator produced contextualized responses
-✓ Layer 3: Conversation Learner extracted new archetype from dialogue
+✓ Layer 1: Archetype Library loaded (1 pre-loaded archetype) ✓ Layer 2: Response Generator produced
+contextualized responses ✓ Layer 3: Conversation Learner extracted new archetype from dialogue
 
 Sample Results:
 
 - Input: "My child hugged me and I felt relieved despite stress"
 - Archetype matched: ReliefToGratitude (confidence: 0.77)
 - Response generated: "That moment with your child sounds genuinely special.
-                       What does that connection feel like for you?"
+What does that connection feel like for you?"
 
 - New archetype learned: "GratitudeToOverwhelm" (from your dialogue)
-  Entry cues: ['heavy', 'hug', 'familial_connection', 'but']
-  Response principles: ['Create space for deeper disclosure', 'Balance mixed emotions']
+Entry cues: ['heavy', 'hug', 'familial_connection', 'but'] Response principles: ['Create space for
+deeper disclosure', 'Balance mixed emotions']
 
 ```
 ##
@@ -199,34 +198,23 @@ Sample Results:
 
 
 # Access the three layers
-from emotional_os.learning import (
-    get_archetype_library,
-    get_archetype_response_generator,
-    get_conversation_learner,
-)
+from emotional_os.learning import ( get_archetype_library, get_archetype_response_generator,
+get_conversation_learner, )
 
 # Generate a response using principles
-generator = get_archetype_response_generator()
-response = generator.generate_archetype_aware_response(
-    user_input="I feel grateful but overwhelmed",
-    prior_context="Yesterday was really heavy",
-)
+generator = get_archetype_response_generator() response =
+generator.generate_archetype_aware_response( user_input="I feel grateful but overwhelmed",
+prior_context="Yesterday was really heavy", )
 
 # Learn from a conversation
-learner = get_conversation_learner()
-new_archetype = learner.learn_from_conversation(
-    turns=[
-        {"role": "user", "content": "..."},
-        {"role": "assistant", "content": "..."},
+learner = get_conversation_learner() new_archetype = learner.learn_from_conversation( turns=[
+{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."},
         # ... more turns
-    ],
-    user_rating=0.95,  # 1.0 = excellent
-)
+], user_rating=0.95,  # 1.0 = excellent )
 
 # Check library
-library = get_archetype_library()
-print(f"Total archetypes: {len(library.archetypes)}")
-print(f"Best match for input: {library.get_best_match(user_input)}")
+library = get_archetype_library() print(f"Total archetypes: {len(library.archetypes)}") print(f"Best
+match for input: {library.get_best_match(user_input)}")
 
 ```
 
@@ -341,12 +329,9 @@ python test_learning_module.py
 cat emotional_os/learning/archetype_library.json | python -m json.tool
 
 # Test a specific archetype match
-python -c "
-from emotional_os.learning import get_archetype_library
-lib = get_archetype_library()
-match = lib.get_best_match('I felt so grateful after the hard day')
-print(f'Best match: {match.name if match else None}')
-"
+python -c " from emotional_os.learning import get_archetype_library lib = get_archetype_library()
+match = lib.get_best_match('I felt so grateful after the hard day') print(f'Best match: {match.name
+if match else None}') "
 
 ```
 

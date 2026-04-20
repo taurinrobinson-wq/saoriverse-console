@@ -96,19 +96,19 @@ script 3. **`.vscode/tasks.json`** - VS Code task configuration 4. **`PYTHON_312
 ```powershell
 
 
-# Run with Python 3.12 (main command)
+## Run with Python 3.12 (main command)
 py -3.12 -m streamlit run app.py
 
-# Run on alternate port (if 8501 is busy)
+## Run on alternate port (if 8501 is busy)
 py -3.12 -m streamlit run app.py --server.port 8502
 
-# Verify Python 3.12 packages
+## Verify Python 3.12 packages
 py -3.12 -m pip list | grep -E "faster-whisper|sounddevice|pyttsx3"
 
-# Check Python version
+## Check Python version
 py -3.12 --version
 
-# Download spacy model (if needed)
+## Download spacy model (if needed)
 
 ```text
 

@@ -2,7 +2,9 @@
 
 ## Overview
 
-Velinor is the sleeping consciousness beneath Remnants. As the player collects glyphs, Velinor gradually wakes up, and her influence expands from isolated NPC interactions to a fully connected network where every action reverberates through all NPCs.
+Velinor is the sleeping consciousness beneath Remnants. As the player collects glyphs, Velinor
+gradually wakes up, and her influence expands from isolated NPC interactions to a fully connected
+network where every action reverberates through all NPCs.
 
 This document defines the **mathematical and mechanical framework** for that awakening.
 

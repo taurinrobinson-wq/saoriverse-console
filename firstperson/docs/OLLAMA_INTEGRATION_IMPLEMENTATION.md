@@ -185,10 +185,10 @@ needed functions
 ```bash
 
 
-# Default recommendation: llama3 (~4.7GB)
+## Default recommendation: llama3 (~4.7GB)
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# Or try smaller models for faster iteration
+## Or try smaller models for faster iteration
 
 ```text
 
@@ -271,10 +271,10 @@ environment:
 
 docker-compose -f docker-compose.local.yml up -d
 
-# Watch logs
+## Watch logs
 docker-compose -f docker-compose.local.yml logs -f streamlit
 
-# Stop
+## Stop
 
 ```text
 ```text
@@ -287,13 +287,13 @@ docker-compose -f docker-compose.local.yml logs -f streamlit
 
 
 
-# Check health
+## Check health
 curl http://localhost:11434/api/tags
 
-# List models
+## List models
 curl http://localhost:11434/api/tags | jq '.models[].name'
 
-# Generate
+## Generate
 curl -X POST http://localhost:11434/api/generate -d '{ "model": "llama3", "prompt": "Hello!",
 "stream": false
 
@@ -305,7 +305,7 @@ curl -X POST http://localhost:11434/api/generate -d '{ "model": "llama3", "promp
 
 ```python
 
-# In Streamlit app or Python REPL
+## In Streamlit app or Python REPL
 import streamlit as st
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 
@@ -363,7 +363,7 @@ Expected output:
 
 
 
-# Would need to update production docker-compose to include Ollama
+## Would need to update production docker-compose to include Ollama
 
 ```text
 ```
@@ -375,13 +375,13 @@ Expected output:
 
 ```bash
 
-# Check if running
+## Check if running
 docker-compose -f docker-compose.local.yml ps
 
-# Check logs
+## Check logs
 docker-compose -f docker-compose.local.yml logs ollama
 
-# Restart
+## Restart
 ```text
 
 ```text
@@ -393,10 +393,10 @@ docker-compose -f docker-compose.local.yml logs ollama
 ```bash
 
 
-# Pull a model
+## Pull a model
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# Verify
+## Verify
 docker-compose -f docker-compose.local.yml exec ollama ollama list
 
 ```

@@ -248,7 +248,7 @@ grep -r "\.insert\(" emotional_os/core/signal_parser.py
 ```python
 from emotional_os.privacy.signal_parser_integration import encode_and_store_conversation
 
-# Replace raw storage with:
+## Replace raw storage with:
 success, record_id = encode_and_store_conversation(
     user_id=user_id,
     raw_user_input=user_input,

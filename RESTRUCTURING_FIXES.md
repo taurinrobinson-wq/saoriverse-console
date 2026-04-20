@@ -82,7 +82,7 @@ Example for `src/emotional_os/glyphs/__init__.py`:
 
 
 
-# Register all submodules from the sibling in sys.modules
+## Register all submodules from the sibling in sys.modules
 for key, module in list(sys.modules.items()): if key.startswith('emotional_os_glyphs'):
         # Map emotional_os_glyphs.X to emotional_os.glyphs.X
 new_key = key.replace('emotional_os_glyphs', 'emotional_os.glyphs')

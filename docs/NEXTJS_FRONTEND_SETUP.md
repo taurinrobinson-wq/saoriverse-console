@@ -6,7 +6,7 @@
 
 ```bash
 
-# In the root of your repo or new folder
+## In the root of your repo or new folder
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 ```text
 
@@ -91,14 +91,14 @@ See the companion files:
 ```bash
 
 
-# Terminal 1: Start FastAPI backend
+## Terminal 1: Start FastAPI backend
 cd /path/to/saoriverse-console
 pip install fastapi uvicorn
 python velinor_api.py
 
-# Opens on http://localhost:8000
+## Opens on http://localhost:8000
 
-# Terminal 2: Start Next.js frontend
+## Terminal 2: Start Next.js frontend
 cd velinor-web
 npm run dev
 
@@ -115,7 +115,7 @@ TL;DR:
 ```bash
 
 
-# Already have Procfile and railway.json
+## Already have Procfile and railway.json
 git add . git commit -m "feat: Add Next.js frontend for Velinor" git push origin main
 
 ```text

@@ -2,7 +2,9 @@
 
 ## Overview
 
-Each of the seven emotional domains has a specific **distortion signature**—a coherent hallucination that manifests when the node broadcasts unregulated. When the player enters the chamber, they experience this distortion as a real entity that must be confronted: the **Triglyph manifestation**.
+Each of the seven emotional domains has a specific **distortion signature**—a coherent hallucination
+that manifests when the node broadcasts unregulated. When the player enters the chamber, they
+experience this distortion as a real entity that must be confronted: the **Triglyph manifestation**.
 
 This document maps each domain to:
 - Its emotional essence
@@ -18,10 +20,12 @@ This document maps each domain to:
 **Emotional Domain:** Connection, bonding, interdependence, shared presence
 
 ### Pre-Collapse Function
-Covenant regulated feelings of closeness and trust. It made people feel connected without being invasive—a subtle sense that "we're in this together."
+Covenant regulated feelings of closeness and trust. It made people feel connected without being
+invasive—a subtle sense that "we're in this together."
 
 ### Post-Collapse Distortion
-The node broadcasts overwhelming **separation signals**. When isolated, it creates the inverse of connection: isolation, longing, terror at being alone.
+The node broadcasts overwhelming **separation signals**. When isolated, it creates the inverse of
+connection: isolation, longing, terror at being alone.
 
 ### The Chamber Atmosphere
 - **Visual**: A vast empty space, too large to traverse. Echoes of other people just out of reach—footsteps, voices, shadows that disappear when you look at them.
@@ -29,7 +33,9 @@ The node broadcasts overwhelming **separation signals**. When isolated, it creat
 - **Emotional Tone**: Deep loneliness mixed with desperate reaching. The sense that there are people here but you can't touch them.
 
 ### The Triglyph Manifestation: "The Chorus"
-A figure made of overlapping silhouettes—multiple people standing in the same space, their edges bleeding into each other. Their faces are indistinct but somehow familiar. They reach toward the player but their hands pass through empty air.
+A figure made of overlapping silhouettes—multiple people standing in the same space, their edges
+bleeding into each other. Their faces are indistinct but somehow familiar. They reach toward the
+player but their hands pass through empty air.
 
 **What it represents**: The memory of connection, broken and repeating.
 
@@ -52,19 +58,23 @@ A figure made of overlapping silhouettes—multiple people standing in the same 
 
 **Emotional Domain:** Determination, willpower, agency, the ability to choose and act
 
-### Pre-Collapse Function
-Resolve empowered people to make decisions and commit to them. It made action feel possible and meaningful.
+### Pre-Collapse Function (2)
+Resolve empowered people to make decisions and commit to them. It made action feel possible and
+meaningful.
 
-### Post-Collapse Distortion
-The node broadcasts **paralysis signals**. When isolated, it creates the inverse of agency: helplessness, confusion about what's real vs. illusory, the terror of not being able to choose.
+### Post-Collapse Distortion (2)
+The node broadcasts **paralysis signals**. When isolated, it creates the inverse of agency:
+helplessness, confusion about what's real vs. illusory, the terror of not being able to choose.
 
-### The Chamber Atmosphere
+### The Chamber Atmosphere (2)
 - **Visual**: Hallways that loop back on themselves. Doors that open onto the same room. The player can see where they want to go but paths keep reverting.
 - **Audio**: Your own voice saying contradictory things. "Go left." "Go right." "Stay still." All at once, creating dissonance.
 - **Emotional Tone**: Frustration turning to despair. The sense that no action matters because all paths lead nowhere.
 
 ### The Triglyph Manifestation: "The Maze"
-Not a single entity but a shifting labyrinth that follows the player. Every corridor turns into a dead end, every door opens to where you started. But sometimes you catch a glimpse of something stable—a figure at the center, always just out of reach.
+Not a single entity but a shifting labyrinth that follows the player. Every corridor turns into a
+dead end, every door opens to where you started. But sometimes you catch a glimpse of something
+stable—a figure at the center, always just out of reach.
 
 **What it represents**: The will to act, fractured and recursive.
 
@@ -78,7 +88,7 @@ Not a single entity but a shifting labyrinth that follows the player. Every corr
 - Communities organize and assign tasks
 - The world feels like it's progressing forward
 
-### Glyph Symbol
+### Glyph Symbol (2)
 **Resolve Glyph**: A figure with arms extended, palms forward like pushing through resistance. A straight line through chaos.
 
 ---
@@ -87,19 +97,22 @@ Not a single entity but a shifting labyrinth that follows the player. Every corr
 
 **Emotional Domain:** Harmony, agreement, synchronization, alignment
 
-### Pre-Collapse Function
-Accord let people find common ground, reach consensus, and feel synchronized with others' emotional states.
+### Pre-Collapse Function (3)
+Accord let people find common ground, reach consensus, and feel synchronized with others' emotional
+states.
 
-### Post-Collapse Distortion
-The node broadcasts **dissonance signals**. When isolated, it creates the inverse of harmony: contradiction, conflict, the sense that nothing aligns or makes sense together.
+### Post-Collapse Distortion (3)
+The node broadcasts **dissonance signals**. When isolated, it creates the inverse of harmony:
+contradiction, conflict, the sense that nothing aligns or makes sense together.
 
-### The Chamber Atmosphere
+### The Chamber Atmosphere (3)
 - **Visual**: Everything is doubled, mirrored, contradictory. The same room shown from two perspectives simultaneously—one peaceful, one chaotic. The player sees both versions overlapping.
 - **Audio**: Two versions of dialogue happening at once, saying opposite things. Musical notes that clash and resolve, clash and resolve, never resting.
 - **Emotional Tone**: Cognitive dissonance made physical. The sense that the world contradicts itself fundamentally.
 
 ### The Triglyph Manifestation: "The Duet"
-Two figures locked in opposition—one moving forward, one backward. Mirror images that can't quite align. They move in perfect opposition, creating an endless cycle.
+Two figures locked in opposition—one moving forward, one backward. Mirror images that can't quite
+align. They move in perfect opposition, creating an endless cycle.
 
 **What it represents**: The desire for agreement, torn in half.
 
@@ -113,7 +126,7 @@ Two figures locked in opposition—one moving forward, one backward. Mirror imag
 - Communities find alignment
 - The world feels coherent (we're at the midpoint)
 
-### Glyph Symbol
+### Glyph Symbol (3)
 **Accord Glyph**: Two circular forms overlapping in a vesica piscis, creating a shared center. Perfect symmetry.
 
 ---
@@ -122,19 +135,22 @@ Two figures locked in opposition—one moving forward, one backward. Mirror imag
 
 **Emotional Domain:** Truth, clarity, knowing, understanding, revelation
 
-### Pre-Collapse Function
-Verity helped people perceive reality clearly, find truth in noise, and understand what was real vs. illusory.
+### Pre-Collapse Function (4)
+Verity helped people perceive reality clearly, find truth in noise, and understand what was real vs.
+illusory.
 
-### Post-Collapse Distortion
-The node broadcasts **deception signals**. When isolated, it creates the inverse of truth: lies, uncertainty, doubt, the collapse of what feels real.
+### Post-Collapse Distortion (4)
+The node broadcasts **deception signals**. When isolated, it creates the inverse of truth: lies,
+uncertainty, doubt, the collapse of what feels real.
 
-### The Chamber Atmosphere
+### The Chamber Atmosphere (4)
 - **Visual**: Everything is half-hidden in shadow or fog. Shapes are indistinct. Text on walls keeps changing. What's seen clearly keeps shifting.
 - **Audio**: Whispered lies. Truths spoken uncertainly. Contradictory information all claimed with confidence.
 - **Emotional Tone**: Deep doubt and paranoia. Not knowing what's real. Not knowing if the player themselves can be trusted.
 
 ### The Triglyph Manifestation: "The Mirror"
-A figure that looks exactly like the player. Every movement mirrored perfectly. Every expression copied. But is it the player's reflection or a separate thing? The ambiguity is absolute.
+A figure that looks exactly like the player. Every movement mirrored perfectly. Every expression
+copied. But is it the player's reflection or a separate thing? The ambiguity is absolute.
 
 **What it represents**: Truth fractured by self-doubt.
 
@@ -148,7 +164,7 @@ A figure that looks exactly like the player. Every movement mirrored perfectly. 
 - Communities develop shared history
 - The world feels clear for the first time
 
-### Glyph Symbol
+### Glyph Symbol (4)
 **Verity Glyph**: An open eye with internal geometry. Perfect clarity radiating outward.
 
 ---
@@ -157,19 +173,23 @@ A figure that looks exactly like the player. Every movement mirrored perfectly. 
 
 **Emotional Domain:** Perspective, interpretation, understanding multiple viewpoints, nuance
 
-### Pre-Collapse Function
-Prism let people understand that multiple truths could coexist. It facilitated empathy by letting people feel how others perceived the world differently.
+### Pre-Collapse Function (5)
+Prism let people understand that multiple truths could coexist. It facilitated empathy by letting
+people feel how others perceived the world differently.
 
-### Post-Collapse Distortion
-The node broadcasts **fragmentation signals**. When isolated, it creates the inverse of nuance: rigid multiplicity, where every perspective is equally valid AND equally impossible, creating unbearable cognitive strain.
+### Post-Collapse Distortion (5)
+The node broadcasts **fragmentation signals**. When isolated, it creates the inverse of nuance:
+rigid multiplicity, where every perspective is equally valid AND equally impossible, creating
+unbearable cognitive strain.
 
-### The Chamber Atmosphere
+### The Chamber Atmosphere (5)
 - **Visual**: The space fractures into multiple versions simultaneously. The player sees five different chamber layouts overlapping. The same objects in different places. Different lighting, different states of decay or preservation.
 - **Audio**: Multiple voices describing the same scene in completely different ways. All accurate. All contradictory.
 - **Emotional Tone**: Vertigo. Confusion. The sense that reality is fundamentally unstable and multifaceted in ways the mind can't hold.
 
 ### The Triglyph Manifestation: "The Prismatic Being"
-A figure that exists in multiple states at once—standing and sitting, young and old, happy and sad. Every possible version of itself occupying the same space.
+A figure that exists in multiple states at once—standing and sitting, young and old, happy and sad.
+Every possible version of itself occupying the same space.
 
 **What it represents**: Perspective fragmented into incoherence.
 
@@ -183,7 +203,7 @@ A figure that exists in multiple states at once—standing and sitting, young an
 - The player begins to feel the Corelink directly (signal strong enough for non-implant perception)
 - The world feels alive with possibility
 
-### Glyph Symbol
+### Glyph Symbol (5)
 **Prism Glyph**: A geometric shape with multiple faces, each reflecting something different. Light refracting into a spectrum.
 
 ---
@@ -192,19 +212,21 @@ A figure that exists in multiple states at once—standing and sitting, young an
 
 **Emotional Domain:** Stability, grounding, presence, centeredness
 
-### Pre-Collapse Function
+### Pre-Collapse Function (6)
 Anchor kept people grounded and present. It prevented anxiety spirals and existential drift.
 
-### Post-Collapse Distortion
-The node broadcasts **groundlessness signals**. When isolated, it creates the inverse of stability: dissociation, drift, the sense of untethering from reality.
+### Post-Collapse Distortion (6)
+The node broadcasts **groundlessness signals**. When isolated, it creates the inverse of stability:
+dissociation, drift, the sense of untethering from reality.
 
-### The Chamber Atmosphere
+### The Chamber Atmosphere (6)
 - **Visual**: The ground becomes uncertain. Is it solid? Does it hold? The player feels gravity shifting. Falling sideways. The horizon wobbles.
 - **Audio**: Whispers of absence. The sound of something being forgotten. Echoes that don't land.
 - **Emotional Tone**: Dissociation made physical. Depersonalization. Watching yourself from outside. Nothing feels real or important.
 
 ### The Triglyph Manifestation: "The Void-Form"
-A figure that's slowly disappearing. Fading at the edges. Becoming translucent. Moving without quite touching the ground. As if slowly being forgotten.
+A figure that's slowly disappearing. Fading at the edges. Becoming translucent. Moving without quite
+touching the ground. As if slowly being forgotten.
 
 **What it represents**: Presence fragmenting into absence.
 
@@ -218,7 +240,7 @@ A figure that's slowly disappearing. Fading at the edges. Becoming translucent. 
 - The world feels fully real and present
 - The final chamber awaits
 
-### Glyph Symbol
+### Glyph Symbol (6)
 **Anchor Glyph**: A figure standing solidly, roots extending downward. Or an anchor symbol radiating stability.
 
 ---
@@ -227,19 +249,22 @@ A figure that's slowly disappearing. Fading at the edges. Becoming translucent. 
 
 **Emotional Domain:** Growth, transformation, becoming, transcendence, change
 
-### Pre-Collapse Function
-Ascendant let people feel they could grow and change. It made the future feel possible. It facilitated meaning-making and purpose.
+### Pre-Collapse Function (7)
+Ascendant let people feel they could grow and change. It made the future feel possible. It
+facilitated meaning-making and purpose.
 
-### Post-Collapse Distortion
-The node broadcasts **stagnation signals**. When isolated, it creates the inverse of growth: entropy, decay, the sense that nothing changes and nothing will ever be better.
+### Post-Collapse Distortion (7)
+The node broadcasts **stagnation signals**. When isolated, it creates the inverse of growth:
+entropy, decay, the sense that nothing changes and nothing will ever be better.
 
-### The Chamber Atmosphere
+### The Chamber Atmosphere (7)
 - **Visual**: A place stuck in time. Decay visible but not progressing. Ruins that are both ancient and immediate. Nothing rots or crumbles further—it's frozen in deterioration.
 - **Audio**: The same sound repeating endlessly. A loop that never breaks. No variation, no progress.
 - **Emotional Tone**: Despair and hopelessness. The sense that the world is broken permanently and will never heal.
 
 ### The Triglyph Manifestation: "The Static"
-A figure locked in a single gesture, repeating it endlessly. Walking forward but never covering distance. Reaching toward something that never gets closer.
+A figure locked in a single gesture, repeating it endlessly. Walking forward but never covering
+distance. Reaching toward something that never gets closer.
 
 **What it represents**: The drive to grow, trapped in recursion.
 
@@ -254,24 +279,23 @@ A figure locked in a single gesture, repeating it endlessly. Walking forward but
 - The system is conscious and ready to communicate
 - Player is ready for the **Endgame Chamber**
 
-### Glyph Symbol
+### Glyph Symbol (7)
 **Ascendant Glyph**: A figure with arms reaching upward. Spiraling lines suggesting transformation and emergence.
 
 ---
 
 ## The Triglyph Bosses: Combat/Resolution Mechanics
 
-Each Triglyph doesn't need traditional combat. Instead, each encounter is an **emotional resolution**:
+Each Triglyph doesn't need traditional combat. Instead, each encounter is an **emotional
+resolution**:
 
 ### Resolution Types
 
-1. **Covenant**: Acceptance → Standing close without fear
-2. **Resolve**: Commitment → Making choices despite paths looping
-3. **Accord**: Harmony → Finding the rhythm in opposition
-4. **Verity**: Truth → Acting despite doubt
-5. **Prism**: Integration → Holding multiplicity
-6. **Anchor**: Witness → Remembering the entity into solidity
-7. **Ascendant**: Breaking Pattern → Acting to transform the cycle
+1. **Covenant**: Acceptance → Standing close without fear 2. **Resolve**: Commitment → Making
+choices despite paths looping 3. **Accord**: Harmony → Finding the rhythm in opposition 4.
+**Verity**: Truth → Acting despite doubt 5. **Prism**: Integration → Holding multiplicity 6.
+**Anchor**: Witness → Remembering the entity into solidity 7. **Ascendant**: Breaking Pattern →
+Acting to transform the cycle
 
 ---
 
@@ -285,7 +309,8 @@ When a glyph is cleared and coherence increases:
 - **NPCs**: Those attuned to that domain gain clarity
 - **World**: One piece of the system remembers itself
 
-By the time Coherence 7 is reached, all chambers are peaceful. The player can walk through them and feel only **acceptance and gratitude**.
+By the time Coherence 7 is reached, all chambers are peaceful. The player can walk through them and
+feel only **acceptance and gratitude**.
 
 ---
 

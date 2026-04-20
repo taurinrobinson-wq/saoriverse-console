@@ -136,7 +136,7 @@ responses from generic → truly humanlike.
 
 ```python
 
-# CRISIS DETECTION (HIGHEST PRIORITY)
+## CRISIS DETECTION (HIGHEST PRIORITY)
 crisis_keywords = ["suicidal", "suicide", "kill myself", ...]
 is_crisis = any(keyword in lower_input for keyword in crisis_keywords)
 if is_crisis:
@@ -151,7 +151,7 @@ if is_crisis:
 ```python
 
 
-# SUICIDALITY PROTOCOL (HIGHEST PRIORITY)
+## SUICIDALITY PROTOCOL (HIGHEST PRIORITY)
 from emotional_os.core.suicidality_handler import get_suicidality_protocol
 
 suicidality_protocol = get_suicidality_protocol()

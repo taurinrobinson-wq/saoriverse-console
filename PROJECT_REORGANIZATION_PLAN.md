@@ -1,10 +1,11 @@
 # Project Reorganization Plan
 
 ## Problem Identified
-The project root contains 65 Python files, most of which should be organized into subdirectories. This causes:
-1. **Import confusion**: Streamlit struggles with module resolution when files are scattered
-2. **Navigation difficulty**: Hard to understand which files are active vs. deprecated
-3. **Maintenance burden**: No clear separation between game code, backend services, tests, and utilities
+The project root contains 65 Python files, most of which should be organized into subdirectories.
+This causes: 1. **Import confusion**: Streamlit struggles with module resolution when files are
+scattered 2. **Navigation difficulty**: Hard to understand which files are active vs. deprecated 3.
+**Maintenance burden**: No clear separation between game code, backend services, tests, and
+utilities
 
 ## Current State
 - **65 Python files** in root directory
@@ -101,24 +102,20 @@ tools/
 
 ## Migration Steps
 
-1. Create new directories: `backend/`, `tests/`, `tools/`
-2. Move files in batches (5-10 at a time)
-3. Update import statements in moved files
-4. Update any references in documentation
-5. Update `.gitignore` if needed
-6. Test each subsystem after moving:
+1. Create new directories: `backend/`, `tests/`, `tools/` 2. Move files in batches (5-10 at a time)
+3. Update import statements in moved files 4. Update any references in documentation 5. Update
+`.gitignore` if needed 6. Test each subsystem after moving:
    - Run tests from `tests/`
    - Run backend from `backend/`
    - Run game from root with `run_streamlit_game.py`
 
 ## Expected Benefits
 
-✅ **Cleaner root directory** (from 65 files → ~10-15 files)
-✅ **Clear module organization** (easier to find what you need)
-✅ **Better import clarity** (modules import from logical locations)
-✅ **Improved maintainability** (easy to see what's active vs. deprecated)
-✅ **Streamlit compatibility** (clearer path resolution)
-✅ **Professional project structure** (follows Python conventions)
+✅ **Cleaner root directory** (from 65 files → ~10-15 files) ✅ **Clear module organization** (easier
+to find what you need) ✅ **Better import clarity** (modules import from logical locations) ✅
+**Improved maintainability** (easy to see what's active vs. deprecated) ✅ **Streamlit
+compatibility** (clearer path resolution) ✅ **Professional project structure** (follows Python
+conventions)
 
 ## Timeline
 - Once approved, can be executed in one comprehensive operation

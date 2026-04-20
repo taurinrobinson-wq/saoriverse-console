@@ -120,7 +120,7 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 ```bash
 
 
-# Local machine
+## Local machine
 /Users/taurinrobinson/saoriverse-console/.venv → Points to external drive /Volumes/My Passport for
 Mac/FirstPerson/venv
 
@@ -159,7 +159,7 @@ FirstPerson **requires** the external drive to be mounted to run:
 
 ```bash
 
-# If external drive isn't mounted:
+## If external drive isn't mounted:
 cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
 
@@ -176,7 +176,7 @@ If it doesn't auto-mount:
 ```bash
 
 
-# Manual mount command
+## Manual mount command
 
 ```text
 
@@ -215,7 +215,7 @@ All code changes sync to Git regardless of external storage.
 
 
 
-# Fix permissions on external drive
+## Fix permissions on external drive
 chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson"
 
 ```text
@@ -226,13 +226,13 @@ chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson"
 
 ```bash
 
-# Check if external drive is mounted
+## Check if external drive is mounted
 ls /Volumes/ | grep "My Passport"
 
-# If not mounted, connect it or run:
+## If not mounted, connect it or run:
 diskutil mount "/Volumes/My Passport for Mac"
 
-# Verify symlinks
+## Verify symlinks
 cd /Users/taurinrobinson/saoriverse-console
 ```text
 
@@ -245,7 +245,7 @@ cd /Users/taurinrobinson/saoriverse-console
 ```bash
 
 
-# Run the setup script to fix everything
+## Run the setup script to fix everything
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
@@ -269,10 +269,10 @@ Since your data is now on an external drive:
 ```bash
 
 
-# All FirstPerson data
+## All FirstPerson data
 cp -r "/Volumes/My Passport for Mac/FirstPerson" /Volumes/[another-drive]/FirstPerson-backup
 
-# Just data
+## Just data
 
 ```text
 ```text
@@ -304,13 +304,13 @@ For quick testing, you can:
 
 
 
-# Copy venv locally (1.2GB)
+## Copy venv locally (1.2GB)
 cp -r "/Volumes/My Passport for Mac/FirstPerson/venv" /Users/taurinrobinson/saoriverse-console/.venv
 
-# Remove symlink, use local copy
+## Remove symlink, use local copy
 cd /Users/taurinrobinson/saoriverse-console rm .venv
 
-# Now use local .venv
+## Now use local .venv
 
 ```text
 ```
@@ -358,23 +358,23 @@ rm -rf .venv
 ```bash
 
 
-# Check setup
+## Check setup
 cd /Users/taurinrobinson/saoriverse-console
 ./setup_external.sh
 
-# Run tests
+## Run tests
 .venv/bin/python test_local_mode.py
 
-# Start FirstPerson
+## Start FirstPerson
 .venv/bin/streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
-# Check external drive
+## Check external drive
 du -sh "/Volumes/My Passport for Mac/FirstPerson"
 
-# Verify symlinks
+## Verify symlinks (2)
 ls -la .venv data
 
-# Check if mounted
+## Check if mounted
 mount | grep "My Passport"
 
 ```

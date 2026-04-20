@@ -88,32 +88,32 @@ VELINOR_WEB_QUICK_REFERENCE.md  Commands & troubleshooting
 ```bash
 
 
-# Phase 1: Create Next.js project
+## Phase 1: Create Next.js project
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 cd velinor-web
 npm install axios zustand
 
-# Phase 2: Copy components
+## Phase 2: Copy components
 cp ../frontend_lib_api.ts lib/api.ts
 cp ../frontend_GameScene.tsx components/GameScene.tsx
 
-# Phase 3: Create pages
+## Phase 3: Create pages
 
-# → app/page.tsx (splash screen)
+## → app/page.tsx (splash screen)
 
-# → app/game/[sessionId]/page.tsx (game scene)
+## → app/game/[sessionId]/page.tsx (game scene)
 
-# See VELINOR_WEB_MIGRATION.md for code
+## See VELINOR_WEB_MIGRATION.md for code
 
-# Phase 4: Test locally
+## Phase 4: Test locally
 
-# Terminal 1:
+## Terminal 1:
 python velinor_api.py
 
-# Terminal 2:
+## Terminal 2:
 npm run dev
 
-# Phase 5: Deploy
+## Phase 5: Deploy
 git add .
 git commit -m "Velinor web game"
 
@@ -184,19 +184,19 @@ Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
 
 ```bash
 
-# Create project
+## Create project
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
-# Install deps
+## Install deps
 cd velinor-web && npm install axios zustand
 
-# Run backend
+## Run backend
 python velinor_api.py
 
-# Run frontend
+## Run frontend
 cd velinor-web && npm run dev
 
-# Deploy
+## Deploy
 ```text
 
 ```text

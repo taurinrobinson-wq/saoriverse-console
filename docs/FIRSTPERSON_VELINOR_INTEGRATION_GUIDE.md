@@ -167,7 +167,7 @@ What's helping?
 ```python
 
 
-# Automatically initializes FirstPerson on app startup
+## Automatically initializes FirstPerson on app startup
 if 'firstperson_orchestrator' not in st.session_state:
     st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(
         user_id='velinor_player',
@@ -183,7 +183,7 @@ if 'firstperson_orchestrator' not in st.session_state:
 ```python
 
 
-# FirstPerson is passed to orchestrator when game starts
+## FirstPerson is passed to orchestrator when game starts
 firstperson_orchestrator = st.session_state.get('firstperson_orchestrator')
 
 orchestrator = VelinorTwineOrchestrator( game_engine=engine, story_path=str(story_path),
@@ -200,10 +200,10 @@ first_person_module=firstperson_orchestrator,  # ← Connected here npc_system=N
 
 
 
-# Player input is analyzed through FirstPerson
+## Player input is analyzed through FirstPerson
 player_analysis = self._summarize_player_intent(player_input, player_id)
 
-# Returns:
+## Returns:
 { 'original_input': "I'm struggling with loss", 'emotional_tone': 'heavy', 'detected_theme':
 'grief', 'valence': -0.6, 'intensity': 0.8, 'memory_context': { 'has_context': True,
 'recurring_themes': ['grief'], 'emotional_trend': 'stable' }
@@ -216,7 +216,7 @@ player_analysis = self._summarize_player_intent(player_input, player_id)
 
 ```python
 
-# NPC response uses emotional analysis to craft nuanced dialogue
+## NPC response uses emotional analysis to craft nuanced dialogue
 dialogue = self._generate_emotionally_aware_response(
     npc_name='Keeper',
     player_input='I feel lost',
@@ -324,10 +324,10 @@ elif trend == 'improving':
 ```bash
 
 
-# Activate venv if not already active
+## Activate venv if not already active
 source venv/bin/activate
 
-# Run the Velinor game
+## Run the Velinor game
 
 ```text
 ```text
@@ -342,7 +342,7 @@ The integration works automatically—no configuration needed!
 
 
 
-# Run the integration test
+## Run the integration test
 
 ```text
 ```
@@ -438,7 +438,7 @@ Optional: For cloud deployment or advanced features, you can add:
 
 
 
-# .streamlit/secrets.toml (if deploying with Streamlit Cloud)
+## .streamlit/secrets.toml (if deploying with Streamlit Cloud)
 [firstperson] enable_affect_analysis = true
 
 ```text
@@ -514,7 +514,7 @@ helping you see this differently? That matters."
 
 ```bash
 
-# Make sure src/ is in Python path
+## Make sure src/ is in Python path
 export PYTHONPATH="${PYTHONPATH}:/path/to/saoriverse-console/src"
 streamlit run velinor_app.py
 ```

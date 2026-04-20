@@ -2,7 +2,8 @@
 
 ## Overview
 
-This guide explains how to integrate the privacy-first encoding pipeline into FirstPerson so that raw conversation text is **never stored** in Supabase.
+This guide explains how to integrate the privacy-first encoding pipeline into FirstPerson so that
+raw conversation text is **never stored** in Supabase.
 
 ## Problem Statement
 
@@ -10,11 +11,8 @@ This guide explains how to integrate the privacy-first encoding pipeline into Fi
 
 **Desired State:**
 
-1. Raw text received but never persisted
-2. Only encoded signals/gates/glyphs stored
-3. User ID hashed one-way
-4. K-anonymity verified (k ≥ 5)
-5. Full GDPR/CCPA/HIPAA compliance
+1. Raw text received but never persisted 2. Only encoded signals/gates/glyphs stored 3. User ID
+hashed one-way 4. K-anonymity verified (k ≥ 5) 5. Full GDPR/CCPA/HIPAA compliance
 
 ## Architecture
 
@@ -400,11 +398,8 @@ def delete_user_data(user_id: str):
 
 The system automatically generates:
 
-1. K-anonymity verification (k >= 5)
-2. Data retention audit
-3. User rights requests processed
-4. Encryption verification
-5. DPA compliance checklist
+1. K-anonymity verification (k >= 5) 2. Data retention audit 3. User rights requests processed 4.
+Encryption verification 5. DPA compliance checklist
 
 Reports saved to: `compliance_reports/[YYYY-MM-DD]_compliance_report.json`
 
@@ -506,11 +501,9 @@ python emotional_os/privacy/run_compliance_check.py
 
 ### Alert Conditions
 
-1. K-value drops below 5 (over-identification risk)
-2. Raw text field inserted (policy violation)
-3. Unencrypted data access attempt
-4. Data export without valid user ID
-5. Deletion request not completed within 30 days
+1. K-value drops below 5 (over-identification risk) 2. Raw text field inserted (policy violation) 3.
+Unencrypted data access attempt 4. Data export without valid user ID 5. Deletion request not
+completed within 30 days
 
 ## Summary
 
@@ -547,4 +540,5 @@ User Message → parse_input() → Response
 - ✅ User rights implemented
 - ✅ Audit logging enabled
 
-This design ensures FirstPerson protects user privacy with the same care as its crisis response logic.
+This design ensures FirstPerson protects user privacy with the same care as its crisis response
+logic.

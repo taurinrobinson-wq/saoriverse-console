@@ -25,7 +25,7 @@ spot-check several records.
 
 ```bash
 
-# dry-run (no network writes)
+## dry-run (no network writes)
 ```sql
 
 ```sql
@@ -41,7 +41,7 @@ spot-check several records.
 export SUPABASE_URL=https://<your>.supabase.co
 export SUPABASE_KEY=<your-service-role-key>
 
-# apply in conservative batches
+## apply in conservative batches
 python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_plan_<ts>.json --apply --batch-size 200
 
 ```

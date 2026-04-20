@@ -328,10 +328,8 @@ for name, text in data.items():
 
 ## Benefits
 
-✓ **Clean Data**: All OCR artifacts, encoding issues, fragmentation removed
-✓ **Quality Assured**: Every collection validated before use
-✓ **Mode-Ready**: Data formatted correctly for each processing system
-✓ **Tracked**: Full audit trail of what was done to each text
-✓ **Reproducible**: Same clean data used everywhere
-✓ **Scalable**: Add more poetry collections anytime
-✓ **Accessible**: Unified interface for all processing modes
+✓ **Clean Data**: All OCR artifacts, encoding issues, fragmentation removed ✓ **Quality Assured**:
+Every collection validated before use ✓ **Mode-Ready**: Data formatted correctly for each processing
+system ✓ **Tracked**: Full audit trail of what was done to each text ✓ **Reproducible**: Same clean
+data used everywhere ✓ **Scalable**: Add more poetry collections anytime ✓ **Accessible**: Unified
+interface for all processing modes

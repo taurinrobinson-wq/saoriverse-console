@@ -2,7 +2,9 @@
 
 ## Executive Summary
 
-The Streamlit implementation has been thoroughly reviewed and corrected to ensure perfect consistency with the TONE and REMNANTS system definitions from the authoritative markdown documentation.
+The Streamlit implementation has been thoroughly reviewed and corrected to ensure perfect
+consistency with the TONE and REMNANTS system definitions from the authoritative markdown
+documentation.
 
 **Status**: ✅ **COMPLETE & VERIFIED**  
 **All Tests Passing**: 8/8 ✅  
@@ -174,7 +176,8 @@ test_serialization .................... PASSED ← Tests correct "trust" effect
 
 ## NPC REMNANTS Profiles Reference
 
-All NPCs now have distinctive REMNANTS profiles that determine how they respond to player TONE choices:
+All NPCs now have distinctive REMNANTS profiles that determine how they respond to player TONE
+choices:
 
 ### Ravi (Thoughtful Scholar)
 ```

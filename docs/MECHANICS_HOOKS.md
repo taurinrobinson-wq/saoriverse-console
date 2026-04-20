@@ -2,7 +2,9 @@
 
 ## Overview
 
-This document defines **implementation points** where the emotional OS becomes tangible gameplay mechanics. These hooks translate the Corelink architecture into systems that affect the player moment-to-moment.
+This document defines **implementation points** where the emotional OS becomes tangible gameplay
+mechanics. These hooks translate the Corelink architecture into systems that affect the player
+moment-to-moment.
 
 ---
 
@@ -13,7 +15,8 @@ This document defines **implementation points** where the emotional OS becomes t
 ## 1. SIGNAL STRENGTH SYSTEM
 
 ### What It Does
-Tracks how "coherent" the Corelink system is at any given moment. Drives visual effects, audio, NPC behavior, and difficulty.
+Tracks how "coherent" the Corelink system is at any given moment. Drives visual effects, audio, NPC
+behavior, and difficulty.
 
 ### Implementation Points
 
@@ -79,10 +82,11 @@ class CoreLinkSystem:
 
 ## 2. PROXIMITY-BASED DISTORTION
 
-### What It Does
-The closer the player is to an uncleared node, the stronger the distortion effects. Cleared nodes become calm "rest zones."
+### What It Does (2)
+The closer the player is to an uncleared node, the stronger the distortion effects. Cleared nodes
+become calm "rest zones."
 
-### Implementation Points
+### Implementation Points (2)
 
 #### Distance Calculation
 ```
@@ -114,7 +118,7 @@ The closer the player is to an uncleared node, the stronger the distortion effec
 - NPCs gather around cleared nodes (like rest areas)
 - NPCs show signs of distress if forced too close
 
-### Implementation Code Hooks
+### Implementation Code Hooks (2)
 
 ```python
 class DistortionField:
@@ -153,10 +157,10 @@ class DistortionField:
 
 ## 3. COHERENCE STATE MACHINE
 
-### What It Does
+### What It Does (3)
 Tracks which glyphs are cleared and orchestrates world changes when thresholds are reached.
 
-### Implementation Points
+### Implementation Points (3)
 
 #### State Transitions
 
@@ -230,10 +234,10 @@ class CoherenceStateMachine:
 
 ## 4. NPC MEMORY SYSTEM
 
-### What It Does
+### What It Does (4)
 Each NPC has a **memory tree** that unlocks based on coherence level and which domains are cleared.
 
-### Implementation Points
+### Implementation Points (4)
 
 #### Memory Structure
 
@@ -307,10 +311,10 @@ class NPCDialogue:
 
 ## 5. ENVIRONMENTAL RESPONSIVENESS
 
-### What It Does
+### What It Does (5)
 The world visibly changes as coherence increases—NPC density, community structures, audio landscape.
 
-### Implementation Points
+### Implementation Points (5)
 
 #### NPC Behavior Changes
 
@@ -380,10 +384,11 @@ class EnvironmentalEvents:
 
 ## 6. PLAYER EXPERIENCE SCALING
 
-### What It Does
-As coherence increases, the player feels the system more directly. Even without an implant, they begin to perceive emotional signals.
+### What It Does (6)
+As coherence increases, the player feels the system more directly. Even without an implant, they
+begin to perceive emotional signals.
 
-### Implementation Points
+### Implementation Points (6)
 
 #### Perception Changes
 
@@ -412,7 +417,7 @@ Coherence 5-6: Late chambers are emotionally complex (not mechanically hard)
 Coherence 7: No combat—just the endgame conversation
 ```
 
-### Implementation Code Hooks
+### Implementation Code Hooks (3)
 
 ```python
 class PlayerPerception:
@@ -438,10 +443,10 @@ class PlayerPerception:
 
 ## 7. SAVE/LOAD INTEGRATION
 
-### What It Does
+### What It Does (7)
 Ensures coherence state is preserved and world responds correctly to loaded state.
 
-### Implementation Points
+### Implementation Points (7)
 
 ```python
 class SaveSystem:
@@ -474,10 +479,10 @@ class SaveSystem:
 
 ## 8. QUEST/OBJECTIVE HOOKS
 
-### What It Does
+### What It Does (8)
 Game objectives update based on current coherence level.
 
-### Implementation Points
+### Implementation Points (8)
 
 ```python
 class QuestSystem:

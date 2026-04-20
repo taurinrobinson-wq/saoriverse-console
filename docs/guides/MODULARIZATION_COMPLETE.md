@@ -280,11 +280,11 @@ tone_adapters                                  →  ✅ Root from main_v2 import
 ```python
 
 
-# Had to search through root directory
+## Had to search through root directory
 
-# Many similar-named files mixed together
+## Many similar-named files mixed together
 
-# Unclear which file belongs with which functionality
+## Unclear which file belongs with which functionality
 from glyph_generator import ... from main_response_engine import ...
 
 ```text
@@ -298,20 +298,20 @@ from glyph_generator import ... from main_response_engine import ...
 
 
 
-# Clear intent
+## Clear intent
 
-# Backward compatible (old imports still work)
+## Backward compatible (old imports still work)
 from main_response_engine import ...          # Core, stays in root from response_adapter import ...
 
-# Core, stays in root
+## Core, stays in root
 
-# New code can use organized imports
+## New code can use organized imports
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer from
 tools.document_processing.docx_reader import read_docx from
 tools.glyph_testing.glyph_conversation_test_harness import ... from
 archive.phase_infrastructure.phase_modulator import detect_phase
 
-# UI components
+## UI components
 from emotional_os.ui.header_ui import render_header
 
 ```text

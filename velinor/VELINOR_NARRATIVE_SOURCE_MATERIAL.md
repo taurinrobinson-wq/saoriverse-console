@@ -10,7 +10,8 @@
 
 ### 1.1 Personal Poetry as Creative Source
 
-Your personal poetry directly maps to the seven domains. These can inform emotional tone, dialogue rhythms, and narrative pacing in character scenes.
+Your personal poetry directly maps to the seven domains. These can inform emotional tone, dialogue
+rhythms, and narrative pacing in character scenes.
 
 ---
 
@@ -39,7 +40,8 @@ That's the open door.
 - **Emotional Beats**: Recognition, shared understanding, being chosen into a moment
 
 **Dialogue Application**: 
-Use this tone for scenes where NPCs have quiet, shared jokes. Banter that feels like two people understanding each other without words. Think Nima or Tala in moment of ease with the player.
+Use this tone for scenes where NPCs have quiet, shared jokes. Banter that feels like two people
+understanding each other without words. Think Nima or Tala in moment of ease with the player.
 
 Example dialogue style:
 ```
@@ -74,7 +76,8 @@ You know she a ninja queen.
 - **Emotional Beats**: Domestic conflict, warning signs, reassurance in small things
 
 **Dialogue Application**:
-Use for scenes showing relationship history, domestic conflicts that reveal character. NPCs talking about scars (literal or emotional) from past events. The weight of shared history.
+Use for scenes showing relationship history, domestic conflicts that reveal character. NPCs talking
+about scars (literal or emotional) from past events. The weight of shared history.
 
 Example dialogue style:
 ```
@@ -106,7 +109,8 @@ Each of these poems carries a very distinct emotional physics...
 - **Emotional Beats**: Unspoken invitation, mutual desire, playful consent
 
 **Dialogue Application**:
-Moments of non-verbal understanding between characters. Glances that mean things. Physical closeness without dialogue.
+Moments of non-verbal understanding between characters. Glances that mean things. Physical closeness
+without dialogue.
 
 Example scene direction:
 ```
@@ -174,7 +178,9 @@ Into her.
 - **Emotional Beats**: Seeing the landscape, freezing, forced into darkness, discovering own light, accepting the inevitable
 
 **Dialogue Application**:
-This is the emotional DNA of pivotal moments. Character accepts something they can't change. The moment of "I have to let go." Think: Saori accepting Velinor's sacrifice. Think: player confronting a fixed point.
+This is the emotional DNA of pivotal moments. Character accepts something they can't change. The
+moment of "I have to let go." Think: Saori accepting Velinor's sacrifice. Think: player confronting
+a fixed point.
 
 Example monologue:
 ```
@@ -239,7 +245,8 @@ I was hoping to age with you gracefully but you just want to draw the line
 - **Emotional Beats**: Waiting without answer, fearing the worst, accepting what won't change
 
 **Dialogue Application**:
-NPCs in limbo. Waiting for someone who won't return. The ache of unreturned feelings. Especially useful for Saori (waiting for Velinor), or any NPC carrying a wound.
+NPCs in limbo. Waiting for someone who won't return. The ache of unreturned feelings. Especially
+useful for Saori (waiting for Velinor), or any NPC carrying a wound.
 
 Example dialogue:
 ```
@@ -287,7 +294,8 @@ I can't stop the wheels no brakes to set
 - **Emotional Beats**: Body catching up to soul, watching momentum, papers signed but soul not ready
 
 **Dialogue Application**:
-The moment after the fixed point. When the decision is made but the grief hasn't caught up. The slow realization of irreversibility.
+The moment after the fixed point. When the decision is made but the grief hasn't caught up. The slow
+realization of irreversibility.
 
 Example dialogue:
 ```
@@ -444,22 +452,22 @@ The player has earned Elenya's trust. She invites them in—something she's neve
 
 *She doesn't explain what it is. Instead*:
 
-"These places you've found... they are remnants of something older than this land remembers. They respond to you because you carry a certain... resonance."
+"These places you've found... they are remnants of something older than this land remembers. They
+respond to you because you carry a certain... resonance."
 
 *Pause. She almost said too much.*
 
-"There was a time when I believed these fractures could be mended. Now I'm not so sure. But you... you might see something I could not."
+"There was a time when I believed these fractures could be mended. Now I'm not so sure. But you...
+you might see something I could not."
 
 #### Act II: Saori Gives Glyphs Throughout the Game
 
 Each glyph she gives unlocks a piece of her story—not in facts, but in emotional form.
 
 **Pattern**:
-1. Player encounters Corelink hub or experiences emotional beat
-2. Saori gives them a glyph
-3. Glyph has emotional resonance with what they've experienced
-4. But it hints at something larger, older, more fractured
-5. Player slowly realizes Saori knows more than she says
+1. Player encounters Corelink hub or experiences emotional beat 2. Saori gives them a glyph 3. Glyph
+has emotional resonance with what they've experienced 4. But it hints at something larger, older,
+more fractured 5. Player slowly realizes Saori knows more than she says
 
 **Glyphs Saori Could Give**:
 - Glyph of the First Fracture (Collapse)
@@ -563,25 +571,26 @@ NPC: No brakes left. Just watching the track end.
 
 ### For Dialogue Writers
 
-1. **Use poetry structure rhythms** - Short lines, long pauses, metaphor before fact
-2. **Let emotional tone carry meaning** - Characters don't explain themselves; they reveal through vulnerability
-3. **Reserve explanation for the final reveal** - Mystery is built by emotional resonance, not information
-4. **Physical details as emotional anchors** - Kettle, tea, ember light, rising steam = memory surfacing
-5. **Silence as dialogue** - Some of the most powerful moments have no words
+1. **Use poetry structure rhythms** - Short lines, long pauses, metaphor before fact 2. **Let
+emotional tone carry meaning** - Characters don't explain themselves; they reveal through
+vulnerability 3. **Reserve explanation for the final reveal** - Mystery is built by emotional
+resonance, not information 4. **Physical details as emotional anchors** - Kettle, tea, ember light,
+rising steam = memory surfacing 5. **Silence as dialogue** - Some of the most powerful moments have
+no words
 
 ### For Scene Design
 
-1. **Threshold spaces** - Saori's yurt, Elenya's private chamber, the final chamber
-2. **Sensory catalysts** - Heat, steam, light, silence, touch
-3. **Memory surfacing through sensation** - Not exposition, but emotional remembering
-4. **Visual echoes** - Young Velinor in flickers, older Velinor in final chamber
+1. **Threshold spaces** - Saori's yurt, Elenya's private chamber, the final chamber 2. **Sensory
+catalysts** - Heat, steam, light, silence, touch 3. **Memory surfacing through sensation** - Not
+exposition, but emotional remembering 4. **Visual echoes** - Young Velinor in flickers, older
+Velinor in final chamber
 
 ### For Character Moments
 
-1. **Characters hide before they reveal** - Saori avoids, Elenya sealed, Velinor fragmented
-2. **Vulnerability is the arc** - They don't get stronger; they get more honest
-3. **Fixed points are inevitable** - Some events characters can't prevent, only accept
-4. **Presence is healing** - Being witnessed, being seen, is more powerful than being fixed
+1. **Characters hide before they reveal** - Saori avoids, Elenya sealed, Velinor fragmented 2.
+**Vulnerability is the arc** - They don't get stronger; they get more honest 3. **Fixed points are
+inevitable** - Some events characters can't prevent, only accept 4. **Presence is healing** - Being
+witnessed, being seen, is more powerful than being fixed
 
 ---
 

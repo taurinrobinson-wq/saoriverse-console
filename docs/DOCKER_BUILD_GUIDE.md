@@ -6,10 +6,10 @@
 
 ```powershell
 
-# Windows PowerShell
+## Windows PowerShell
 python check-docker-requirements.py
 
-# macOS/Linux
+## macOS/Linux
 ```text
 
 ```text
@@ -25,10 +25,10 @@ Expected output: All checks ✅
 ```powershell
 
 
-# Windows PowerShell
+## Windows PowerShell (2)
 docker build -f Dockerfile.firstperson -t firstperson:latest .
 
-# macOS/Linux
+## macOS/Linux (2)
 
 ```text
 
@@ -39,10 +39,10 @@ docker build -f Dockerfile.firstperson -t firstperson:latest .
 ```powershell
 
 
-# Windows PowerShell
+## Windows PowerShell (3)
 docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
-# macOS/Linux
+## macOS/Linux (3)
 
 ```text
 ```text
@@ -55,10 +55,10 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 
 
-# Windows PowerShell
+## Windows PowerShell (4)
 .\test-docker-build.ps1
 
-# macOS/Linux
+## macOS/Linux (4)
 
 ```text
 ```
@@ -68,13 +68,13 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 ```bash
 
-# Check image was created
+## Check image was created
 docker images | grep firstperson
 
-# Test FastAPI import
+## Test FastAPI import
 docker run --rm firstperson:latest python -c "import fastapi; print('✅ OK')"
 
-# Test health endpoint
+## Test health endpoint
 docker run -d -p 8000:8000 --name firstperson-test firstperson:latest
 sleep 5
 curl http://localhost:8000/health
@@ -158,13 +158,13 @@ PIP_RETRIES: 5 attempts (was 1)
 
 
 
-# Verify you're in correct directory
+## Verify you're in correct directory
 pwd  # or cd d:\saoriverse-console
 
-# Verify Dockerfile exists
+## Verify Dockerfile exists
 ls Dockerfile.firstperson
 
-# Rebuild with explicit path
+## Rebuild with explicit path
 
 ```text
 ```
@@ -214,7 +214,7 @@ Successfully tagged firstperson:latest
 
 docker run -p 8000:8000 -p 3001:3001 firstperson:latest
 
-# No errors, container starts
+## No errors, container starts
 
 ```text
 
@@ -261,10 +261,10 @@ docker push your-registry/firstperson:v1.0.0
 ```bash
 
 
-# On your DigitalOcean droplet (161.35.227.49)
+## On your DigitalOcean droplet (161.35.227.49)
 ssh -i ~/.ssh/velinor root@161.35.227.49
 
-# Pull and run
+## Pull and run
 docker pull your-registry/firstperson:latest
 docker run -d \
   -p 8000:8000 \
@@ -308,11 +308,11 @@ If you need to force a clean rebuild:
 ```powershell
 
 
-# Windows PowerShell
+## Windows PowerShell (5)
 docker system prune -a  # Remove all images/containers docker build --no-cache -f
 Dockerfile.firstperson -t firstperson:latest .
 
-# macOS/Linux
+## macOS/Linux (5)
 docker system prune -a docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 
 ```

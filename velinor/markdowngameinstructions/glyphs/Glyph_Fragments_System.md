@@ -8,14 +8,17 @@
 - **Emotional Resonance**: Building relationships with NPCs who don't give full glyphs but still matter to the world
 - **Replayability**: Different choices with each NPC create varied playstyles (stealthy vs. authoritarian vs. empathetic)
 
-Fragments **reward experimentation** and **encourage exploration** without the narrative weight of full glyphs. A player can ignore all 36 fragments and still access the 70 glyphs, but fragments enrich the world and unlock quality-of-life features.
+Fragments **reward experimentation** and **encourage exploration** without the narrative weight of
+full glyphs. A player can ignore all 36 fragments and still access the 70 glyphs, but fragments
+enrich the world and unlock quality-of-life features.
 
 ---
 
 ## Fragment Mechanics
 
 ### Stat Gains
-Fragments grant smaller REMNANTS bonuses than glyphs (+10 to +20 vs. glyphs' +30 to +50) but are less emotionally demanding to unlock. Some fragments offer **choice consequences**:
+Fragments grant smaller REMNANTS bonuses than glyphs (+10 to +20 vs. glyphs' +30 to +50) but are
+less emotionally demanding to unlock. Some fragments offer **choice consequences**:
 - GF-006 (Fraudulent Boatmaker): -10 Resolve initially, then +20 Skepticism (learns through betrayal)
 - GF-014 (Deputy): +10 Authority OR -5 Empathy (reflects moral choice)
 - GF-024 (Relic Hunter): +20 Observation if loyal, or -10 Skepticism if betrayed (trust matters)
@@ -199,7 +202,8 @@ Fragments can scale to include:
 - **Pet/Companion Fragments**: Bond with animals that provide combat or exploration bonuses
 - **Lore Fragments**: Meet archivists who teach about pre-Corelink history (rewards Memory trait)
 
-Each expansion maintains the core philosophy: **fragments deepen the world without overshadowing the emotional core of the 70 glyphs**.
+Each expansion maintains the core philosophy: **fragments deepen the world without overshadowing the
+emotional core of the 70 glyphs**.
 
 ---
 
@@ -217,9 +221,9 @@ Each expansion maintains the core philosophy: **fragments deepen the world witho
 - Storyline: Detailed encounter narrative (100–200 words)
 - Emotional_Focus: Primary REMNANTS stat(s) affected
 
-Ready to integrate into the game engine via:
-1. `fragment_manager.py`: Tracks which fragments player has discovered/completed
-2. `npc_encounter.py`: Extends to handle fragment encounters
-3. `game_state.py`: Fragment completion affects NPC dialogue and reputation
+Ready to integrate into the game engine via: 1. `fragment_manager.py`: Tracks which fragments player
+has discovered/completed 2. `npc_encounter.py`: Extends to handle fragment encounters 3.
+`game_state.py`: Fragment completion affects NPC dialogue and reputation
 
-All fragments are discoverable through natural exploration; none are locked behind glyphs or story gates (though some are gated behind REMNANTS stat thresholds for balance).
+All fragments are discoverable through natural exploration; none are locked behind glyphs or story
+gates (though some are gated behind REMNANTS stat thresholds for balance).

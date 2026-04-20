@@ -271,7 +271,7 @@ pytest tests/ -k signal_parser  # Tests mentioning "signal_parser"
 ```bash
 
 
-# Define in test: @pytest.mark.slow
+## Define in test: @pytest.mark.slow
 pytest tests/ -m slow           # Only marked tests
 
 ```text
@@ -308,10 +308,10 @@ Coverage report generation
 
 ```bash
 
-# Before committing
+## Before committing
 pytest tests/unit/ --tb=short
 
-# If all pass:
+## If all pass:
 ```text
 
 ```text
@@ -436,7 +436,7 @@ pytest tests/ --cov=src.response_generator
 
 def test_parser_extracts_emotional_signal_from_text():
 
-# Bad
+## Bad
 
 def test_parse():
 

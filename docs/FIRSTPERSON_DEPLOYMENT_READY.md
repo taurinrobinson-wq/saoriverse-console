@@ -33,19 +33,19 @@ deployment steps, testing procedures, and success metrics. """
 
 ##
 
-# ===== DEPLOYMENT STEPS =====
+## ===== DEPLOYMENT STEPS =====
 
 ## Pre-Deployment Validation
 
 ```bash
 
-# 1. Verify all tests pass
+## 1. Verify all tests pass
 python -m pytest emotional_os/core/firstperson/test_*.py -v
 
-# 2. Check imports are working
+## 2. Check imports are working
 python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; print('✓ Imports OK')"
 
-# 3. Verify Supabase connection (if applicable)
+## 3. Verify Supabase connection (if applicable)
 ```text
 
 ```text
@@ -57,13 +57,13 @@ python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; pr
 ```bash
 
 
-# 1. Deploy to staging environment
+## 1. Deploy to staging environment
 ./deploy.sh staging
 
-# 2. Run smoke tests
+## 2. Run smoke tests
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 
-# 3. Monitor metrics for 24 hours
+## 3. Monitor metrics for 24 hours
 
 ```text
 
@@ -74,17 +74,17 @@ pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 ```bash
 
 
-# 1. Create feature branch for release
+## 1. Create feature branch for release
 git checkout -b release/firstperson-phase-1-2
 
-# 2. Deploy to production
+## 2. Deploy to production
 ./deploy.sh production
 
-# 3. Begin real-time monitoring
+## 3. Begin real-time monitoring
 python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m =
 DeploymentMonitor(); m.start_monitoring()"
 
-# 4. Commit deployment
+## 4. Commit deployment
 git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
 
 ```text
@@ -94,7 +94,7 @@ git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
 
 ##
 
-# ===== TESTING PROCEDURES =====
+## ===== TESTING PROCEDURES =====
 
 ## Unit Tests (All Modules)
 
@@ -102,17 +102,17 @@ git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
 
 
 
-# Story-start detection
+## Story-start detection
 pytest emotional_os/core/firstperson/test_story_start_detector.py -v
 
-# Frequency reflection
+## Frequency reflection
 pytest emotional_os/core/firstperson/test_frequency_reflector.py -v
 
-# Repair module
+## Repair module
 pytest emotional_os/core/firstperson/test_repair_module.py -v pytest
 emotional_os/core/firstperson/test_repair_orchestrator.py -v
 
-# Integration orchestrator
+## Integration orchestrator
 
 ```text
 ```
@@ -122,10 +122,10 @@ emotional_os/core/firstperson/test_repair_orchestrator.py -v
 
 ```bash
 
-# Full Phase 1 pipeline
+## Full Phase 1 pipeline
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py::TestIntegrationFlow -v
 
-# Phase 2.3 repair detection
+## Phase 2.3 repair detection
 ```text
 
 ```text
@@ -142,7 +142,7 @@ from emotional_os.core.firstperson.integration_orchestrator import FirstPersonOr
 
 orch = FirstPersonOrchestrator(user_id="test_user", conversation_id="test_conv")
 
-# Should generate clarifier
+## Should generate clarifier
 response = orch.handle_conversation_turn("They were fighting again.")
 print(response.response_text)
 
@@ -155,7 +155,7 @@ print(response.response_text)
 ```python
 
 
-# Three turns with same theme should trigger reflection
+## Three turns with same theme should trigger reflection
 inputs = [ "The kids were fighting.", "More fighting today.", "Still fighting over the same thing."
 ]
 
@@ -176,7 +176,7 @@ from emotional_os.core.firstperson.repair_orchestrator import RepairOrchestrator
 
 repair = RepairOrchestrator(user_id="test_user")
 
-# Should detect this as correction
+## Should detect this as correction
 is_rejection = repair.detect_rejection("No, that's not what I meant.") print(is_rejection)
 
 ```text
@@ -185,7 +185,7 @@ is_rejection = repair.detect_rejection("No, that's not what I meant.") print(is_
 
 ##
 
-# ===== SUCCESS METRICS =====
+## ===== SUCCESS METRICS =====
 
 ## Key Performance Indicators (KPI)
 
@@ -218,13 +218,13 @@ is_rejection = repair.detect_rejection("No, that's not what I meant.") print(is_
 
 ```bash
 
-# Check all metrics
+## Check all metrics
 python -m emotional_os.core.firstperson.deployment_monitor
 
-# Stream real-time metrics
+## Stream real-time metrics
 watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 
-# Generate health report
+## Generate health report
 ```text
 
 ```text
@@ -233,35 +233,35 @@ watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 
 ##
 
-# ===== ROLLBACK PROCEDURE =====
+## ===== ROLLBACK PROCEDURE =====
 
 If issues arise:
 
 ```bash
 
 
-# 1. Identify issue via monitoring
+## 1. Identify issue via monitoring
 python -m emotional_os.core.firstperson.deployment_monitor
 
-# 2. Rollback to previous version
+## 2. Rollback to previous version
 git revert HEAD
 
-# 3. Re-deploy to production
+## 3. Re-deploy to production
 ./deploy.sh production
 
-# 4. Verify tests pass
+## 4. Verify tests pass
 pytest emotional_os/core/firstperson/test_*.py -q
 
-# 5. Open incident ticket for investigation
+## 5. Open incident ticket for investigation
 
-# Issue tracking system: [fill in]
+## Issue tracking system: [fill in]
 
 ```
 
 
 ##
 
-# ===== KNOWN LIMITATIONS & NEXT STEPS =====
+## ===== KNOWN LIMITATIONS & NEXT STEPS =====
 
 ## Current Limitations
 
@@ -282,7 +282,7 @@ modeling
 
 ##
 
-# ===== SUPPORT & CONTACTS =====
+## ===== SUPPORT & CONTACTS =====
 
 ## Emergency Contacts
 
@@ -303,7 +303,7 @@ modeling
 
 ##
 
-# ===== DEPLOYMENT SIGN-OFF =====
+## ===== DEPLOYMENT SIGN-OFF =====
 
 **System Status**: 🟢 PRODUCTION READY
 

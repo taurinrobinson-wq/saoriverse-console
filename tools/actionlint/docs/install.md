@@ -162,16 +162,16 @@ installed, run these commands to install actionlint:
 
 
 
-# Add actionlint plugin
+## Add actionlint plugin
 asdf plugin add actionlint
 
-# Show all installable versions
+## Show all installable versions
 asdf list-all actionlint
 
-# Install specific version
+## Install specific version
 asdf install actionlint latest
 
-# Set a version globally (on your ~/.tool-versions file)
+## Set a version globally (on your ~/.tool-versions file)
 
 ```sql
 ```
@@ -183,10 +183,10 @@ Recent [Go][] toolchain is necessary to build actionlint from source. Use Go 1.1
 
 ```sh
 
-# Install the latest stable version
+## Install the latest stable version
 go install github.com/rhysd/actionlint/cmd/actionlint@latest
 
-# Install the head of main branch
+## Install the head of main branch
 go install github.com/rhysd/actionlint/cmd/actionlint
 ```
 

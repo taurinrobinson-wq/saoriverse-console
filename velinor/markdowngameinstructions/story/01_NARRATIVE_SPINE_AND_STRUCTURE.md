@@ -1,7 +1,9 @@
 # Velinor: Narrative Spine & Story Structure
 
 ## Overview
-Velinor uses a **fixed spine with fluid limbs** narrative architecture. Three structural anchors hold the emotional and thematic coherence of the game, while everything else remains emergent and player-responsive.
+Velinor uses a **fixed spine with fluid limbs** narrative architecture. Three structural anchors
+hold the emotional and thematic coherence of the game, while everything else remains emergent and
+player-responsive.
 
 ---
 
@@ -131,11 +133,14 @@ The player can return to the building multiple times and witness:
 "Will you rebuild this together, or will you walk away because it's too hard to hold both truths?"
 
 **Two Possible Paths:**
-1. **Rebuild Together** → Symbol of integration, healing, synthesis possible
-2. **Abandon It** → Scar on the city, warning of what happens when people cling to their own truth
+1. **Rebuild Together** → Symbol of integration, healing, synthesis possible 2. **Abandon It** →
+Scar on the city, warning of what happens when people cling to their own truth
 
 **Connection to Velhara's Downfall:**
-The collapse mirrors civilizational-scale lesson: A structure cannot hold what the people inside it refuse to hold together. Velhara tried to manufacture coherence through the Corelink system instead of earning it through human connection. Now Malrik and Elenya face the same choice at a personal scale.
+The collapse mirrors civilizational-scale lesson: A structure cannot hold what the people inside it
+refuse to hold together. Velhara tried to manufacture coherence through the Corelink system instead
+of earning it through human connection. Now Malrik and Elenya face the same choice at a personal
+scale.
 
 ---
 
@@ -162,9 +167,8 @@ The collapse mirrors civilizational-scale lesson: A structure cannot hold what t
 ## The Six Endings: Synthesis Question Resolved
 
 ### **Structural Pattern:**
-Each ending resolves two nested questions:
-1. **At the Corelink:** Does the system restart, or do we rebuild without it?
-2. **In the city:** Did Malrik and Elenya rebuild together, or walk away?
+Each ending resolves two nested questions: 1. **At the Corelink:** Does the system restart, or do we
+rebuild without it? 2. **In the city:** Did Malrik and Elenya rebuild together, or walk away?
 
 The combination of these two answers creates narrative texture:
 - **System + Synthesis** = Hope, integration possible

@@ -90,13 +90,13 @@ from spoken_interface.advanced_prosody import AdvancedProsodyPlanner
 from spoken_interface.session_logger import SessionLogger
 from spoken_interface.voice_ui_enhancements import VoiceUIEnhancements
 
-# Initialize
+## Initialize
 profiler = PerformanceProfiler()
 prosody_planner = AdvancedProsodyPlanner()
 logger = SessionLogger()
 ui = VoiceUIEnhancements()
 
-# In chat loop
+## In chat loop
 def on_user_input(audio_bytes, user_text, confidence):
     # Validate
     is_valid, error = ui.handle_audio_edge_cases(audio_bytes)
@@ -191,7 +191,7 @@ plan = planner.plan_advanced_prosody(
     text=response, voltage=v, tone=t, attunement=a, certainty=c
 )
 
-# Use plan.pitch_contour, emphasis_points, breath_style, etc.
+## Use plan.pitch_contour, emphasis_points, breath_style, etc.
 ```
 
 

@@ -39,10 +39,10 @@ Update your `Procfile` to run both backend and frontend:
 ```procfile
 
 
-# Backend API
+## Backend API
 api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 
-# Frontend (after Next.js is set up)
+## Frontend (after Next.js is set up)
 
 ```text
 ```text
@@ -82,17 +82,17 @@ In Railway dashboard, set:
 ```bash
 
 
-# Add Procfile changes
+## Add Procfile changes
 git add Procfile requirements.txt
 
-# Add frontend
+## Add frontend
 git add velinor-web/
 
-# Commit and push
+## Commit and push
 git commit -m "feat: Add FastAPI backend and Next.js frontend for Velinor"
 git push origin main
 
-# Railway auto-deploys (~3-5 minutes)
+## Railway auto-deploys (~3-5 minutes)
 
 ```text
 
@@ -150,7 +150,7 @@ Terminal 1 - Backend:
 ```bash
 python velinor_api.py
 
-# http://localhost:8000
+## http://localhost:8000
 
 ```text
 

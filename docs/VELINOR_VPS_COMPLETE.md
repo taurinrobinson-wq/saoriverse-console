@@ -146,7 +146,7 @@ You now have a **complete, production-ready deployment package** for Velinor on 
 
 ```bash
 
-# Option A: Full command
+## Option A: Full command
 git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml \
         DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md \
         VPS_REFERENCE_CARD.md VPS_MIGRATION_SUMMARY.md VPS_THE_SIMPLE_VERSION.md \

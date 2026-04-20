@@ -100,10 +100,10 @@ saoriverse-console/
 
 
 
-# Run just the web dev server
+## Run just the web dev server
 ./scripts/RUN_WEB_DEV.sh
 
-# Or run full stack (frontend + backend)
+## Or run full stack (frontend + backend)
 
 ```text
 ```
@@ -152,13 +152,13 @@ by git) 3. **Temporary notes** → Keep in `scratch/` for reference, delete late
 ```bash
 
 
-# Check what's in scratch (for cleanup decisions)
+## Check what's in scratch (for cleanup decisions)
 ls -la scratch/
 
-# Remove temporary files safely
+## Remove temporary files safely
 rm scratch/old_summary.md
 
-# Verify .gitignore is working
+## Verify .gitignore is working
 
 ```text
 

@@ -25,11 +25,11 @@ Thursday deadline" ↓ SYSTEM UNDERSTANDS: Work demands → cognitive flooding �
 
 memory = ConversationMemory()
 
-# After each user message:
+## After each user message:
 memory.add_turn( user_input="...", parsed=SemanticParsing(...), glyphs_identified=["..."],
 missing_elements=["..."], clarifications_asked=["..."], )
 
-# Get current state:
+## Get current state:
 memory.get_emotional_profile_brief()  # "HIGH: stress, overload (in work)"
 memory.get_causal_narrative()  # "work → cognitive flooding → paralysis"
 memory.get_next_clarifications()  # ["What triggered?", "How many things?"]
@@ -67,11 +67,11 @@ parsed = SemanticParsing(
 from src.emotional_os_glyphs.conversation_memory import ConversationMemory, SemanticParsing
 from src.emotional_os_glyphs.dynamic_response_composer import DynamicResponseComposer
 
-# Initialize
+## Initialize
 memory = ConversationMemory()
 composer = DynamicResponseComposer()
 
-# Per message
+## Per message
 user_input = "I'm feeling so stressed today"
 
 parsed = SemanticParsing(
@@ -87,7 +87,7 @@ parsed = SemanticParsing(
     raw_input=user_input,
 )
 
-# Store in memory
+## Store in memory
 turn = memory.add_turn(
     user_input=user_input,
     parsed=parsed,
@@ -96,7 +96,7 @@ turn = memory.add_turn(
     clarifications_asked=["What triggered this?"],
 )
 
-# Generate response using memory
+## Generate response using memory
 response = composer.compose_response_with_memory(
     input_text=user_input,
     conversation_memory=memory,
@@ -275,23 +275,23 @@ SYSTEM (full context):
 ```python
 
 
-# 1. Import
+## 1. Import
 from conversation_memory import ConversationMemory, SemanticParsing
 
-# 2. Create
+## 2. Create
 memory = ConversationMemory()
 
-# 3. Parse each message
+## 3. Parse each message
 parsed = SemanticParsing( actor="I", primary_affects=["stress"], secondary_affects=[],
 tense="present", emphasis="so", domains=[], temporal_scope="today", thought_patterns=[],
 action_capacity="unknown", raw_input="I'm feeling so stressed today", )
 
-# 4. Add to memory
+## 4. Add to memory
 memory.add_turn( user_input="I'm feeling so stressed today", parsed=parsed,
 glyphs_identified=["Still Insight"], missing_elements=["causation"], clarifications_asked=["What
 triggered this?"], )
 
-# 5. Use memory in response
+## 5. Use memory in response
 response = composer.compose_response_with_memory( input_text=user_input, conversation_memory=memory,
 )
 

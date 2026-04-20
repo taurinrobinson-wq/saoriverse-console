@@ -198,7 +198,7 @@ relational_memory import RelationalMemoryCapsule
 ```python
 
 
-# Old imports - still work via shims
+## Old imports - still work via shims
 from glyph_generator import GlyphGenerator
 
 ```text
@@ -212,11 +212,11 @@ from glyph_generator import GlyphGenerator
 
 
 
-# Root core system - unchanged
+## Root core system - unchanged
 from main_response_engine import process_user_input from response_adapter import
 translate_emotional_response
 
-# Reorganized tools - use full paths
+## Reorganized tools - use full paths
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer from
 tools.document_processing.docx_reader import read_docx
 

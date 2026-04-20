@@ -119,14 +119,14 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```bash
 
 
-# 1. Start the app
+## 1. Start the app
 streamlit run app.py
 
-# 2. Check "Save my chats"
+## 2. Check "Save my chats"
 
-# 3. Send one message
+## 3. Send one message
 
-# 4. Refresh browser (F5)
+## 4. Refresh browser (F5)
 
 ```text
 ```text
@@ -182,9 +182,9 @@ saoriverse-console/
 ```bash
 python3 scripts/migrate_supabase.py
 
-# Copy the SQL shown
+## Copy the SQL shown
 
-# Paste into Supabase SQL editor
+## Paste into Supabase SQL editor
 
 ```text
 
@@ -326,10 +326,10 @@ For more information, see:
 
 ```bash
 
-# Verify database tables exist
+## Verify database tables exist
 python3 scripts/migrate_supabase.py --verify
 
-# View recent commits
+## View recent commits
 ```text
 
 ```text
@@ -346,13 +346,13 @@ Editor" in sidebar 4. Select "conversations" table 5. See all saved conversation
 ```bash
 
 
-# View app logs
+## View app logs
 streamlit run app.py
 
-# View Python logs for debugging
+## View Python logs for debugging
 python3 -c "from emotional_os.deploy.modules.conversation_manager import ConversationManager"
 
-# Git status
+## Git status
 git status
 
 ```text

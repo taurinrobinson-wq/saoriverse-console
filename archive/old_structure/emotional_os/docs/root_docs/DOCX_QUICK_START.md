@@ -63,11 +63,9 @@ You'll see:
 
 ## 📚 Files Created
 
-1. **docx_reader.py** - CLI tool for reading/extracting/exporting
-2. **docx_viewer.py** - Streamlit interactive viewer
-3. **docx_web_viewer.py** - Web server for browser viewing
-4. **.vscode/tasks.json** - VS Code task shortcuts
-5. **VS_CODE_DOCX_VIEWING.md** - Detailed guide
+1. **docx_reader.py** - CLI tool for reading/extracting/exporting 2. **docx_viewer.py** - Streamlit
+interactive viewer 3. **docx_web_viewer.py** - Web server for browser viewing 4.
+**.vscode/tasks.json** - VS Code task shortcuts 5. **VS_CODE_DOCX_VIEWING.md** - Detailed guide
 
 ## 💡 Pro Tips
 

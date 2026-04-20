@@ -53,17 +53,17 @@ User Message ↓ ┌────────────────────
 
 
 
-# Old approach
+## Old approach
 if 'anxiety' in keywords: response = ( "I can feel the anxiety you're carrying. When our minds race
 like this, " "it often helps to find a still point. The energy you're feeling, " "that's your system
 preparing you. What if we could transform this " "racing energy into focused readiness?" )
     # Repeat for messages 1, 2, 3 = identical structure
 
-# Problem: Same response for:
+## Problem: Same response for:
 
-# - "I'm very mad that I had to do so much math" (anxiety keyword in context: NO)
+## - "I'm very mad that I had to do so much math" (anxiety keyword in context: NO)
 
-# - "mental block on it" (anxiety keyword in context: NO)
+## - "mental block on it" (anxiety keyword in context: NO)
 
 ```text
 ```
@@ -73,22 +73,22 @@ preparing you. What if we could transform this " "racing energy into focused rea
 
 ```python
 
-# New approach
+## New approach
 extracted = extract_entities_and_emotions(input_text)
 
-# For "I'm very mad I had to do math":
+## For "I'm very mad I had to do math":
 
-# → entities: ["math", "brief"], emotions: ["frustration"], people: []
+## → entities: ["math", "brief"], emotions: ["frustration"], people: []
 
-# For "mental block on it... Michelle... explains things":
+## For "mental block on it... Michelle... explains things":
 
-# → entities: ["mental block", "communication"], emotions: ["frustration"], people: ["Michelle"]
+## → entities: ["mental block", "communication"], emotions: ["frustration"], people: ["Michelle"]
 
-# For "it's inherited from Michelle... she is very anxious":
+## For "it's inherited from Michelle... she is very anxious":
 
-# → entities: ["inherited pattern"], emotions: ["inherited", "attribution_boundary"], people: ["Michelle"]
+## → entities: ["inherited pattern"], emotions: ["inherited", "attribution_boundary"], people: ["Michelle"]
 
-# Then compose contextually:
+## Then compose contextually:
 response = compose_message_aware_response(
     features={
         "math_frustration": True,
@@ -97,15 +97,15 @@ response = compose_message_aware_response(
     }
 )
 
-# Result: "You're not alone—many brilliant people have genuine friction with math,
+## Result: "You're not alone—many brilliant people have genuine friction with math,
 
-# especially when it's presented in a way that doesn't match how their mind naturally works.
+## especially when it's presented in a way that doesn't match how their mind naturally works.
 
-# When Michelle explains something in a way that only they can follow, that creates real isolation.
+## When Michelle explains something in a way that only they can follow, that creates real isolation.
 
-# That's not a failing on your part—it's a rhythm mismatch. Mental blocks are usually where the
+## That's not a failing on your part—it's a rhythm mismatch. Mental blocks are usually where the
 
-# concept structure doesn't match your natural thinking pattern. That's not fixed—it's just a
+## concept structure doesn't match your natural thinking pattern. That's not fixed—it's just a
 
 ```text
 

@@ -300,10 +300,8 @@ Target for prod:   0.70/1.0 (needed for humanlike presence)
 
 System fetches 36 glyphs but returns generic response. This suggests:
 
-1. `select_best_glyph_and_response()` not using glyph data
-2. Poetic engine not injecting output
-3. Fallback template being returned
-4. Generic template handler too aggressive
+1. `select_best_glyph_and_response()` not using glyph data 2. Poetic engine not injecting output 3.
+Fallback template being returned 4. Generic template handler too aggressive
 
 ##
 
@@ -358,13 +356,13 @@ System fetches 36 glyphs but returns generic response. This suggests:
 
 ### If You Have 2 Hours
 
-1. Debug glyph → response composition
-2. Wire poetic engine output into response
-3. Re-run tests (should see scores jump to 0.55+)
+1. Debug glyph → response composition 2. Wire poetic engine output into response 3. Re-run tests
+(should see scores jump to 0.55+)
 
 ### If You Want Production Today
 
-Not possible yet. Need at least 4-6 hours for core fixes. But system is CLOSE - all pieces exist, just not connected right.
+Not possible yet. Need at least 4-6 hours for core fixes. But system is CLOSE - all pieces exist,
+just not connected right.
 
 ##
 

@@ -2,7 +2,9 @@
 
 ## Overview
 
-Phase 3.5 implements a complete **glyph-controlled local LLM system** for fine-tuned, emotionally coherent responses. The system uses multi-layered safety gates, curriculum learning, and training corpus generation to enable reliable local inference without external APIs.
+Phase 3.5 implements a complete **glyph-controlled local LLM system** for fine-tuned, emotionally
+coherent responses. The system uses multi-layered safety gates, curriculum learning, and training
+corpus generation to enable reliable local inference without external APIs.
 
 ## Architecture
 
@@ -506,9 +508,8 @@ python -m pytest test_phase_3_5.py -v
 
 The system provides **multi-layered safety**:
 
-1. **Gate Selection** - Only use glyphs approved by the gate
-2. **Control Tags** - Encode constraints directly in prompt
-3. **Post-Processing** - 4-layer verification:
+1. **Gate Selection** - Only use glyphs approved by the gate 2. **Control Tags** - Encode
+constraints directly in prompt 3. **Post-Processing** - 4-layer verification:
    - Recognition risk detection
    - Uncanniness enforcement
    - Rhythm compliance
@@ -524,11 +525,8 @@ The system provides **multi-layered safety**:
 
 ## Next Steps
 
-1. Integrate `LocalLLMAdapter` with Ollama/llama.cpp
-2. Build interactive training UI
-3. Implement curriculum learning loop
-4. Create monitoring dashboard
-5. Deploy to production with safety auditing
+1. Integrate `LocalLLMAdapter` with Ollama/llama.cpp 2. Build interactive training UI 3. Implement
+curriculum learning loop 4. Create monitoring dashboard 5. Deploy to production with safety auditing
 
 ## References
 

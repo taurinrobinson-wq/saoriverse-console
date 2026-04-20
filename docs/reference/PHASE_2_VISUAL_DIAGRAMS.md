@@ -4,9 +4,9 @@ This file contains ASCII diagrams showing how all the pieces fit together. """
 
 # ============================================================================
 
-# DIAGRAM 1: Overall System Flow
+## DIAGRAM 1: Overall System Flow
 
-# ============================================================================
+## ============================================================================ (2)
 
 """
 
@@ -54,11 +54,11 @@ Guide Next Generation
 
 """
 
-# ============================================================================
+## ============================================================================ (3)
 
-# DIAGRAM 2: Shared Database vs User Segregation
+## DIAGRAM 2: Shared Database vs User Segregation
 
-# ============================================================================
+## ============================================================================ (4)
 
 """
 
@@ -100,11 +100,11 @@ BUT: Same glyphs in shared DB! User A's adoption helps User B!
 
 """
 
-# ============================================================================
+## ============================================================================ (5)
 
-# DIAGRAM 3: Glyph Learning Pipeline
+## DIAGRAM 3: Glyph Learning Pipeline
 
-# ============================================================================
+## ============================================================================ (6)
 
 """
 
@@ -169,11 +169,11 @@ Ready for next user the system)                       └─ System evolves
 
 """
 
-# ============================================================================
+## ============================================================================ (7)
 
-# DIAGRAM 4: User Segregation Mechanism
+## DIAGRAM 4: User Segregation Mechanism
 
-# ============================================================================
+## ============================================================================ (8)
 
 """
 
@@ -213,11 +213,11 @@ KEY INSIGHT:
 
 """
 
-# ============================================================================
+## ============================================================================ (9)
 
-# DIAGRAM 5: System Learning Feedback Loop
+## DIAGRAM 5: System Learning Feedback Loop
 
-# ============================================================================
+## ============================================================================ (10)
 
 """
 
@@ -261,11 +261,11 @@ v [SYSTEM LEARNS AND IMPROVES]
 
 """
 
-# ============================================================================
+## ============================================================================ (11)
 
-# DIAGRAM 6: From No-Glyph to Production (Glyph Lifecycle)
+## DIAGRAM 6: From No-Glyph to Production (Glyph Lifecycle)
 
-# ============================================================================
+## ============================================================================ (12)
 
 """
 
@@ -277,23 +277,23 @@ v                  v                    v                  v               v
 Signal               confidence:        quality_score        consensus_       is_active: detected
 0.65-0.80          accumulates          strength: 0.6+   1 by system positive feedback all users can
 No existing          Candidate         Starting to show      Strong signal    find it glyph found
-stored in         pattern across        across user database users                 base
-promoted to Rare edge core lexicon case               Marked for         Featured in validation
-personalized Can be & refinement       recommendations                        updated/versioned
-Appears in but stable Awaiting           Used by new          system health human review       users
-actively reports           Widely or consensus                                              trusted
-promotion Building              Marketing strong track         vector           Becomes record
-reference Core glyphs       point for (proven)          new ones
+stored in         pattern across        across user database users                 base promoted to
+Rare edge core lexicon case               Marked for         Featured in validation personalized Can
+be & refinement       recommendations                        updated/versioned Appears in but stable
+Awaiting           Used by new          system health human review       users actively reports
+Widely or consensus                                              trusted promotion Building
+Marketing strong track         vector           Becomes record reference Core glyphs       point for
+(proven)          new ones
 
 Timeline: 0 interactions    1-3 sessions    4-10 sessions    Multiple weeks   Months+
 
 """
 
-# ============================================================================
+## ============================================================================ (13)
 
-# DIAGRAM 7: Response Template Selection (Tone-Based)
+## DIAGRAM 7: Response Template Selection (Tone-Based)
 
-# ============================================================================
+## ============================================================================ (14)
 
 """
 
@@ -330,11 +330,11 @@ FROM the same template pattern
 
 """
 
-# ============================================================================
+## ============================================================================ (15)
 
-# DIAGRAM 8: Coverage Analysis (Where to Generate Next)
+## DIAGRAM 8: Coverage Analysis (Where to Generate Next)
 
-# ============================================================================
+## ============================================================================ (16)
 
 """
 

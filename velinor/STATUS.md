@@ -224,10 +224,10 @@ game_engine=engine, story_path="velinor/stories/sample_story.json" )
 
 
 
-# Choice-based
+## Choice-based
 state = orchestrator.process_player_action( choice_index=0, player_id="player_1" )
 
-# Free-text
+## Free-text
 state = orchestrator.process_player_action( player_input="I approach cautiously",
 player_id="player_1"
 

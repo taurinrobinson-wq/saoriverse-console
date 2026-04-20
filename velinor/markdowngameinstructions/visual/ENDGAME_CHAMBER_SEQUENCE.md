@@ -1,7 +1,8 @@
 # Velinor Endgame Chamber Sequence
 
 ## Overview
-The glyph insertion chamber finale: doors slide open to reveal a heavenly blue glowing void, then progressive reveal of the end image as player advances through the threshold.
+The glyph insertion chamber finale: doors slide open to reveal a heavenly blue glowing void, then
+progressive reveal of the end image as player advances through the threshold.
 
 ---
 
@@ -321,11 +322,8 @@ class VoidParticles {
 
 ## Post-Reveal Mechanics
 
-After player reaches end image:
-1. Fade to black (3-5 seconds)
-2. Credits roll (if applicable)
-3. Optional epilogue scenes (based on TONE state / ending branch)
-4. Return to main menu or NG+ prompt
+After player reaches end image: 1. Fade to black (3-5 seconds) 2. Credits roll (if applicable) 3.
+Optional epilogue scenes (based on TONE state / ending branch) 4. Return to main menu or NG+ prompt
 
 ---
 

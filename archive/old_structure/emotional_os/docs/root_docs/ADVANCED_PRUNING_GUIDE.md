@@ -2,7 +2,9 @@
 
 ## Overview
 
-Your other AI's pruning strategy is now implemented in `advanced_pruning_engine.py`. This sophisticated system replaces the basic numerical pruning with architecture-aware filtering that understands your VELΩNIX system.
+Your other AI's pruning strategy is now implemented in `advanced_pruning_engine.py`. This
+sophisticated system replaces the basic numerical pruning with architecture-aware filtering that
+understands your VELΩNIX system.
 
 ##
 
@@ -443,11 +445,11 @@ Ensure data completeness for best results:
 
 ## 🎓 Key Insights
 
-1. **Activation history is most important** (30% weight) - use what actually works
-2. **Signal strength prevents poor quality** (25% weight) - maintain emotional clarity
-3. **Tone diversity preserves richness** (15% weight) - don't over-specialize
-4. **Redundancy detection is sophisticated** (20% weight) - role-based, not just name-based
-5. **Reaction anchors are protected** (10% weight) - keep system catalysts
+1. **Activation history is most important** (30% weight) - use what actually works 2. **Signal
+strength prevents poor quality** (25% weight) - maintain emotional clarity 3. **Tone diversity
+preserves richness** (15% weight) - don't over-specialize 4. **Redundancy detection is
+sophisticated** (20% weight) - role-based, not just name-based 5. **Reaction anchors are protected**
+(10% weight) - keep system catalysts
 
 ##
 

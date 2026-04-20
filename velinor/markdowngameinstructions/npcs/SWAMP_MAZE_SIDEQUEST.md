@@ -2,7 +2,10 @@
 
 ## Overview
 
-This side-quest takes place in the **Mire of Echoes**, accessible only through Kaelen's trust. The player navigates a mystical maze where the environment itself responds to emotional resonance. No technological language is used—only the language NPCs would realistically employ: folklore, superstition, intuition, and emotional resonance.
+This side-quest takes place in the **Mire of Echoes**, accessible only through Kaelen's trust. The
+player navigates a mystical maze where the environment itself responds to emotional resonance. No
+technological language is used—only the language NPCs would realistically employ: folklore,
+superstition, intuition, and emotional resonance.
 
 **Mechanical truth**: The maze still gates on emotional OS stats (Observation, Empathy, Trust), but characters only describe it through **feeling** and **mystery**.
 
@@ -11,27 +14,29 @@ This side-quest takes place in the **Mire of Echoes**, accessible only through K
 ## 🧩 Passage 1: The False Path
 
 **Scene:**  
-The player follows the trickster's directions to a hollow grove. The trees here feel *wrong* — too still, too symmetrical, as if waiting.
+The player follows the trickster's directions to a hollow grove. The trees here feel *wrong* — too
+still, too symmetrical, as if waiting.
 
 **Narrative Beat:**  
-If Kaelen is present:  
+If Kaelen is present:
 > "This place… it's not what he said it was. Feels like the swamp's playin' tricks."
 
 **Mystery Object:**  
-A stone pedestal with a cracked symbol carved into it.  
-It pulses faintly — not with light, but with a feeling.  
-A tug in the chest. A memory you never lived.
+A stone pedestal with a cracked symbol carved into it. It pulses faintly — not with light, but with
+a feeling. A tug in the chest. A memory you never lived.
 
 **Player Sensations (TONE‑gated):**
 
 - **High Observation** (Observer affinity):  
-  The moss on the trees forms the missing shape of the cracked symbol. You begin to see the pattern beneath the disorder.
-  
+The moss on the trees forms the missing shape of the cracked symbol. You begin to see the pattern
+beneath the disorder.
+
 - **High Empathy** (Sentinel affinity):  
-  The player feels a faint ache, like someone once stood here waiting. The stone remembers them, even if the world forgot.
-  
+The player feels a faint ache, like someone once stood here waiting. The stone remembers them, even
+if the world forgot.
+
 - **Low Trust** (Skeptic affinity):  
-  The fog thickens and loops the player back. The swamp doesn't trust easy passages.
+The fog thickens and loops the player back. The swamp doesn't trust easy passages.
 
 **Outcome:**
 - Success: Player moves forward to Passage 2
@@ -39,8 +44,7 @@ A tug in the chest. A memory you never lived.
 
 **Lore Language:**
 
-No one calls it a glyph.  
-They just call it **"the mark"** or **"the old sign."**
+No one calls it a glyph. They just call it **"the mark"** or **"the old sign."**
 
 > "The mark doesn't look like much. But the swamp remembers it. And if the swamp remembers, so should we."
 
@@ -49,45 +53,36 @@ They just call it **"the mark"** or **"the old sign."**
 ## 🧩 Passage 2: The Fog Logic Puzzle
 
 **Scene:**  
-A clearing with five stone markers.  
-Each bears a different carved sign — emotions made into shapes.
+A clearing with five stone markers. Each bears a different carved sign — emotions made into shapes.
 
-The swamp whispers.  
-Not words.  
-Just impressions.
+The swamp whispers. Not words. Just impressions.
 
 **The Five Markers (what they represent, unknown to NPCs):**
-1. **Grief** — Deep, hollow, pulling downward
-2. **Suspicion** — Twisted, angular, unsettling
-3. **Joy** — Curved, reaching upward, almost alive
-4. **Anger** — Sharp, violent, chaotic marks
-5. **Stillness** — Quiet, balanced, accepting
+1. **Grief** — Deep, hollow, pulling downward 2. **Suspicion** — Twisted, angular, unsettling 3.
+**Joy** — Curved, reaching upward, almost alive 4. **Anger** — Sharp, violent, chaotic marks 5.
+**Stillness** — Quiet, balanced, accepting
 
-But the characters don't know that.  
-They only **feel** it.
+But the characters don't know that. They only **feel** it.
 
 **Clues:**
 
 - **A whisper in the fog** (heard through high Empathy):  
   > "The one who hides does not run."
-  
+
 - **Kaelen** (if present, high Trust):  
   > "Drossel… he was the quiet sort. Sat more than he walked. Waited instead of rushed."
 
 - **Environmental hint** (high Observation):  
-  The stones settle deeper into the earth in order, from agitated to still. The fifth stone has no moss — it's too perfectly balanced.
+The stones settle deeper into the earth in order, from agitated to still. The fifth stone has no
+moss — it's too perfectly balanced.
 
 **Player Choice:**
 
 - **Touch the stone that feels quiet, steady, unmoving** (Stillness marker)
-  → Puzzle succeeds
-  → Fog clears slightly
-  → Passage 2 resolves
+→ Puzzle succeeds → Fog clears slightly → Passage 2 resolves
 
 - **Touch any other stone**
-  → Puzzle fails
-  → Fog loops back to Passage 1
-  → Must re-enter and try again
+→ Puzzle fails → Fog loops back to Passage 1 → Must re-enter and try again
 
 **Mechanical Detail:**
 - **High Observation + High Empathy**: Player intuits the answer immediately
@@ -97,8 +92,7 @@ They only **feel** it.
 
 **Lore Language:**
 
-No one says "glyph."  
-They say **"the quiet stone"** or **"the one that feels like waiting."**
+No one says "glyph." They say **"the quiet stone"** or **"the one that feels like waiting."**
 
 > "Drossel always liked the quiet places. Not because he was shy. Because they let him think. And thinking is what made him dangerous."
 
@@ -107,9 +101,8 @@ They say **"the quiet stone"** or **"the one that feels like waiting."**
 ## 🧩 Passage 3: The Hidden Threshold
 
 **Scene:**  
-The fog parts.  
-A narrow path leads to a sunken archway covered in old carvings.  
-The air feels heavy, like a memory pressing against the skin.
+The fog parts. A narrow path leads to a sunken archway covered in old carvings. The air feels heavy,
+like a memory pressing against the skin.
 
 The stones here are older than the ones before. Weathered. Patient.
 
@@ -140,12 +133,13 @@ If player has collected **Empathy tokens** or shows high emotional OS stats:
 
 **Token Lore:**
 
-Drossel carried five of these. Nobody knows why. Some say he carved them himself. Others say he found them in places the world forgot.
+Drossel carried five of these. Nobody knows why. Some say he carved them himself. Others say he
+found them in places the world forgot.
 
 **Lore Language:**
 
-No one calls it a glyph.  
-They call it **"a token,"** **"a keepsake,"** **"one of Drossel's secrets,"** or simply **"the mark."**
+No one calls it a glyph. They call it **"a token,"** **"a keepsake,"** **"one of Drossel's
+secrets,"** or simply **"the mark."**
 
 If Kaelen is present:
 > "He carried five of these. I never understood why. But I knew—whenever he had all five, he felt safe. Like they made him less alone in his own mind."
@@ -203,7 +197,8 @@ Player realizes the swamp **responds to what they pay attention to**.
 Player learns to **read emotion without language**.
 
 **Passage 3**: Integration + Reward  
-Player **carries something Drossel carried** — a physical reminder that even the most isolated people leave echoes.
+Player **carries something Drossel carried** — a physical reminder that even the most isolated
+people leave echoes.
 
 By the end, the player has:
 - Deepened their empathy

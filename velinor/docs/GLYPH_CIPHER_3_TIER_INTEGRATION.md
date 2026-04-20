@@ -2,7 +2,8 @@
 
 ## Status: Ready for Implementation
 
-I've scanned the complete glyph ecosystem and built the integration architecture to handle all three tiers:
+I've scanned the complete glyph ecosystem and built the integration architecture to handle all three
+tiers:
 
 ### ✅ What I Found
 
@@ -147,14 +148,16 @@ game_state.py (persistent progression)
 
 ## Key Design Decisions
 
-1. **Three-Tier Integration**: Glyphs span fragments (learning) → base (story) → transcendence (endgame). Cipher system supports all three.
+1. **Three-Tier Integration**: Glyphs span fragments (learning) → base (story) → transcendence
+(endgame). Cipher system supports all three.
 
 2. **Emotional Gates per Tier**:
    - Base glyphs: Gate by category (fear for Collapse, grief for Ache, etc.)
    - Fragments: Lower gate requirements (easier to learn)
    - Transcendence: Require "coherence" gates (high emotional alignment)
 
-3. **NPC-Specific Paths**: Each NPC gives specific glyphs. Emotional state determines how quickly you unlock them.
+3. **NPC-Specific Paths**: Each NPC gives specific glyphs. Emotional state determines how quickly
+you unlock them.
 
 4. **No Duplication**: Single source of truth (Glyph_Organizer.json) for all glyph metadata.
 
@@ -162,6 +165,7 @@ game_state.py (persistent progression)
 
 ## Ready When You Are
 
-All code is written and validated syntax. Just need to run the generator from Windows PowerShell to create the corpus, then the system is live.
+All code is written and validated syntax. Just need to run the generator from Windows PowerShell to
+create the corpus, then the system is live.
 
 Want me to walk through any specific tier in detail?

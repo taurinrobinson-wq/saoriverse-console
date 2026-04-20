@@ -7,9 +7,10 @@
 Velinor is a world fractured across three temporal states:
 
 1. **The Past** (Saori): Memory intact but frozen by guilt. Conscious, but unable to move forward.
-2. **The Present** (The People): Living without history. Forced into perpetual now, unaware of context.
-3. **The Future** (The Player): The only consciousness capable of moving between states with agency.
-4. **The Wound** (Velinor): The collapse itself, existing as fragmented consciousness across all three states.
+2. **The Present** (The People): Living without history. Forced into perpetual now, unaware of
+context. 3. **The Future** (The Player): The only consciousness capable of moving between states
+with agency. 4. **The Wound** (Velinor): The collapse itself, existing as fragmented consciousness
+across all three states.
 
 **The Fourth Layer Insight**: Time isn't a line — it's a field. The player moves through this field with intent, and every action ripples through all three temporal states *simultaneously*.
 
@@ -37,7 +38,8 @@ Velinor is a world fractured across three temporal states:
 
 ## The Temporal Meaning of the Six Endings
 
-All six endings express the same core truth about **past, present, and future through the lens of memory and synthesis**:
+All six endings express the same core truth about **past, present, and future through the lens of
+memory and synthesis**:
 
 ### **Past Resolution**
 - **Strong synthesis endings** (1, 4, 5): Saori's guilt becomes specific and healable; archive becomes coherent
@@ -62,7 +64,8 @@ All six endings express the same core truth about **past, present, and future th
 NPCs are organized not by faction, but by their relationship to time and memory:
 
 ### **Keepers of the Past** (Memory, Legacy, Archive)
-These NPCs actively carry or work with collective memory. They maintain records, rituals, and emotional continuity.
+These NPCs actively carry or work with collective memory. They maintain records, rituals, and
+emotional continuity.
 
 | NPC | Domain Span | Role | Key REMNANTS |
 |-----|-----------|------|-------------|
@@ -79,7 +82,8 @@ These NPCs actively carry or work with collective memory. They maintain records,
 ---
 
 ### **Present Dwellers** (Narrative Presence, Embodied Unknowing)
-These NPCs live fully in the present moment, unaware of what came before. They are the emotional heart of the current world.
+These NPCs live fully in the present moment, unaware of what came before. They are the emotional
+heart of the current world.
 
 | NPC | Domain Span | Role | Key REMNANTS |
 |-----|-----------|------|-------------|
@@ -98,7 +102,8 @@ These NPCs live fully in the present moment, unaware of what came before. They a
 ---
 
 ### **Wound Bearers** (Fragmentation, Echoes of Velinor)
-These NPCs carry traces of Velinor's fracture without knowing it. They are conduits for the wound itself.
+These NPCs carry traces of Velinor's fracture without knowing it. They are conduits for the wound
+itself.
 
 | NPC | Domain Span | Role | Key REMNANTS |
 |-----|-----------|------|-------------|
@@ -115,7 +120,8 @@ These NPCs carry traces of Velinor's fracture without knowing it. They are condu
 ---
 
 ### **Future Shepherds** (Transcendence, Possibility)
-These NPCs are oriented toward becoming, integration, or transcendence. They model the emotional state the entire world is trying to reach.
+These NPCs are oriented toward becoming, integration, or transcendence. They model the emotional
+state the entire world is trying to reach.
 
 | NPC | Domain Span | Role | Key REMNANTS |
 |-----|-----------|------|-------------|
@@ -148,7 +154,8 @@ These NPCs exist at boundaries — between domains, between states, between past
 
 ## REMNANTS Trait Reference
 
-The 8 REMNANTS traits define how NPCs respond emotionally and how their state propagates through the network:
+The 8 REMNANTS traits define how NPCs respond emotionally and how their state propagates through the
+network:
 
 | Trait | Definition | High Expression | Low Expression | Temporal Function |
 |-------|-----------|-----------------|-----------------|------------------|
@@ -165,7 +172,8 @@ The 8 REMNANTS traits define how NPCs respond emotionally and how their state pr
 
 ## Cascading Effects: How Player Actions Ripple Through Time
 
-When a player takes an action that deepens a bond with an NPC, the effect propagates in three directions simultaneously:
+When a player takes an action that deepens a bond with an NPC, the effect propagates in three
+directions simultaneously:
 
 ### **Past Resonance** (Memory Layer)
 The action reaches backward through the NPC's connection to Saori and archived memory.
@@ -201,7 +209,8 @@ The action determines what state becomes possible in the restart.
 
 ## NPC Relational Clusters
 
-NPCs don't exist in isolation. They form resonance groups based on shared domains, REMNANTS patterns, and temporal roles.
+NPCs don't exist in isolation. They form resonance groups based on shared domains, REMNANTS
+patterns, and temporal roles.
 
 ### **Cluster: The Archive Network**
 *Keepers of the Past who work together to restore memory*
@@ -213,13 +222,11 @@ NPCs don't exist in isolation. They form resonance groups based on shared domain
 - Critical path: If the player bonds with all four, the Archive becomes a complete guide to the collapse and restoration
 
 **Example cascade**:
-1. Player helps Malrik organize corrupted data
-2. Malrik's Memory increases, Organization improves
-3. Elenya (adjacent, high Empathy) notices and feels safer accessing her own memory
-4. Elenya's Memory increases
-5. Sealina's songs begin to carry clearer emotional context (Memory increases)
-6. Nordia's Mourning transforms from grief into meaning-making
-7. The Archive goes from fragmented to integrated
+1. Player helps Malrik organize corrupted data 2. Malrik's Memory increases, Organization improves
+3. Elenya (adjacent, high Empathy) notices and feels safer accessing her own memory 4. Elenya's
+Memory increases 5. Sealina's songs begin to carry clearer emotional context (Memory increases) 6.
+Nordia's Mourning transforms from grief into meaning-making 7. The Archive goes from fragmented to
+integrated
 
 ### **Cluster: The Present Circle**
 *Present Dwellers who anchor the current world*
@@ -231,12 +238,10 @@ NPCs don't exist in isolation. They form resonance groups based on shared domain
 - Critical path: If all six reach Trust 0.75+, the current world becomes resilient enough to survive the restart
 
 **Example cascade**:
-1. Player spends time with Ravi (building Trust)
-2. Ravi's Empathy increases as he feels safer
-3. Nima feels Ravi's emotional shift (through Empathy contagion)
-4. Nima's Need decreases (fewer "why am I so sad?" questions) — replaced by community feeling
-5. Sera notices and becomes bolder in her own choices
-6. The entire circle becomes more coherent
+1. Player spends time with Ravi (building Trust) 2. Ravi's Empathy increases as he feels safer 3.
+Nima feels Ravi's emotional shift (through Empathy contagion) 4. Nima's Need decreases (fewer "why
+am I so sad?" questions) — replaced by community feeling 5. Sera notices and becomes bolder in her
+own choices 6. The entire circle becomes more coherent
 
 ### **Cluster: The Wound Weavers**
 *Bearers of fragmentation who must integrate, not resolve*
@@ -248,12 +253,11 @@ NPCs don't exist in isolation. They form resonance groups based on shared domain
 - Critical path: If all five reach Nuance 0.90+, they become the teachers of the next generation (Neutral ending) or the guides to authentic integration (Restoration ending)
 
 **Example cascade**:
-1. Player helps Kaelen see their ghostly signals as actual information
-2. Kaelen's Skepticism becomes wisdom (still questioning, but productive)
-3. Drossel feels this shift — stops seeing conspiracy, starts seeing pattern
-4. Korrin's gossip becomes more accurate (Skepticism + Memory)
-5. Dalen teaches others to read environmental scars as maps, not wounds
-6. Mariel weaves these insights into a new form of meaning-making
+1. Player helps Kaelen see their ghostly signals as actual information 2. Kaelen's Skepticism
+becomes wisdom (still questioning, but productive) 3. Drossel feels this shift — stops seeing
+conspiracy, starts seeing pattern 4. Korrin's gossip becomes more accurate (Skepticism + Memory) 5.
+Dalen teaches others to read environmental scars as maps, not wounds 6. Mariel weaves these insights
+into a new form of meaning-making
 
 ### **Cluster: The Emergence Circle**
 *Future Shepherds who model integrated possibility*
@@ -265,12 +269,10 @@ NPCs don't exist in isolation. They form resonance groups based on shared domain
 - Critical path: They don't need to be "helped" — rather, other NPCs need to witness them and believe
 
 **Example cascade**:
-1. Player witnesses Veynar's Authority (decisive action from compassion)
-2. Veynar's presence increases the player's own Resolve
-3. Coren's Nuance becomes visible as necessary (complexity + care)
-4. Juria & Korinth's Trust in each other spreads — people see it's possible
-5. Lira's joy becomes contagious (not fake, but earned)
-6. The world shifts: "This is what we're trying to become"
+1. Player witnesses Veynar's Authority (decisive action from compassion) 2. Veynar's presence
+increases the player's own Resolve 3. Coren's Nuance becomes visible as necessary (complexity +
+care) 4. Juria & Korinth's Trust in each other spreads — people see it's possible 5. Lira's joy
+becomes contagious (not fake, but earned) 6. The world shifts: "This is what we're trying to become"
 
 ### **Cluster: The Threshold Walkers**
 *Liminal figures who teach transformation itself*
@@ -282,30 +284,33 @@ NPCs don't exist in isolation. They form resonance groups based on shared domain
 - Critical path: They don't form a tight network — instead, each serves as a teacher-guide for different types of NPC transitions
 
 **Example cascade**:
-1. Player helps Orvak navigate broken corelink without being broken by it
-2. Orvak's Resolve increases (can survive contradiction)
-3. Sanor learns by watching: this is how you don't let the system destroy you
-4. Dakrin shows how to reclaim structure from ruins
-5. Kiv holds a single transformation story that proves change is possible
-6. New NPCs facing their own fragmentation now have living examples to learn from
+1. Player helps Orvak navigate broken corelink without being broken by it 2. Orvak's Resolve
+increases (can survive contradiction) 3. Sanor learns by watching: this is how you don't let the
+system destroy you 4. Dakrin shows how to reclaim structure from ruins 5. Kiv holds a single
+transformation story that proves change is possible 6. New NPCs facing their own fragmentation now
+have living examples to learn from
 
 ---
 
 ## The Player's Temporal Role
 
-The player is the only consciousness that can move between past, present, and future with agency. But they can only do so *through bonds*.
+The player is the only consciousness that can move between past, present, and future with agency.
+But they can only do so *through bonds*.
 
 ### **How the Player Becomes Temporal**
 
-1. **Past Resonance**: By helping Present Dwellers and Wound Bearers heal, the player creates resonance with Saori's pain (not directly, but through emotional logic)
+1. **Past Resonance**: By helping Present Dwellers and Wound Bearers heal, the player creates
+resonance with Saori's pain (not directly, but through emotional logic)
    - Every bond increases the "clarity" of what Saori can feel about her loss
    - Not redemption, but specificity
 
-2. **Present Stability**: By bonding with the Archive Network and Present Circle, the player stabilizes the current world
+2. **Present Stability**: By bonding with the Archive Network and Present Circle, the player
+stabilizes the current world
    - More bonds = more emotional coherence now
    - This coherence is what makes a restart possible
 
-3. **Future Possibility**: By helping Wound Bearers integrate and witnessing Future Shepherds, the player determines what becomes possible after the restart
+3. **Future Possibility**: By helping Wound Bearers integrate and witnessing Future Shepherds, the
+player determines what becomes possible after the restart
    - High Nuance in the Wound network = next generation has tools for integration
    - High Authority in the Emergence network = next generation has models to follow
 
@@ -370,35 +375,33 @@ The Archive is not just a lore device. It is the mechanism through which tempora
 
 ## Memory Fragments & Emotional Archaeology
 
-As the player bonds deepen with the Archive Network, they unlock memory fragments that show the collapse's emotional truth.
+As the player bonds deepen with the Archive Network, they unlock memory fragments that show the
+collapse's emotional truth.
 
 **Malrik's Archive Chambers** (Memory Fragments):
-1. "The moment Velinor's consciousness began to fragment"
-2. "How Saori made the decision to remain outside the reset"
-3. "The last coherent message Velinor transmitted before collapse"
-4. "What each person lost in the chaos"
+1. "The moment Velinor's consciousness began to fragment" 2. "How Saori made the decision to remain
+outside the reset" 3. "The last coherent message Velinor transmitted before collapse" 4. "What each
+person lost in the chaos"
 
 **Elenya's Ritual Spaces** (Memory Fragments):
-1. "The original connection ritual that bound Velinor's consciousness"
-2. "How the people learned to live without memory"
-3. "Glimpses of Unopened Heart: what Elenya carries"
-4. "The moment trust became necessary for survival"
+1. "The original connection ritual that bound Velinor's consciousness" 2. "How the people learned to
+live without memory" 3. "Glimpses of Unopened Heart: what Elenya carries" 4. "The moment trust
+became necessary for survival"
 
 **Sealina's Songs** (Memory Fragments):
-1. "The names of those who died in the collapse"
-2. "The grief that was never properly grieved"
-3. "What beauty persists despite fracture"
+1. "The names of those who died in the collapse" 2. "The grief that was never properly grieved" 3.
+"What beauty persists despite fracture"
 
 **Nordia's Mourning** (Memory Fragments):
-1. "Specific loss: who did she love that was taken?"
-2. "How grief can become meaning-making"
-3. "The voice of the dead, carried forward"
+1. "Specific loss: who did she love that was taken?" 2. "How grief can become meaning-making" 3.
+"The voice of the dead, carried forward"
 
 **Lark's Rituals** (Memory Fragments):
-1. "How to honor what was without being trapped by it"
-2. "The ceremonial space for integration"
+1. "How to honor what was without being trapped by it" 2. "The ceremonial space for integration"
 
-These fragments, when collected, form a complete emotional archaeology of the collapse. The player doesn't "solve" the collapse history — but they can *understand* it, feel its weight, and help others integrate it.
+These fragments, when collected, form a complete emotional archaeology of the collapse. The player
+doesn't "solve" the collapse history — but they can *understand* it, feel its weight, and help
+others integrate it.
 
 ---
 
@@ -412,12 +415,10 @@ It is a temporal organism made of:
 - **The Player** (the future entering the system)
 - **The Archive** (the continuity that holds all three)
 
-Every bond the player forms is a neuron firing in this organism.
-Every REMNANTS cascade is the nervous system reorganizing.
-Every memory fragment recovered is the organism remembering itself.
+Every bond the player forms is a neuron firing in this organism. Every REMNANTS cascade is the
+nervous system reorganizing. Every memory fragment recovered is the organism remembering itself.
 
-The restart is not a reset.
-It is reintegration.
+The restart is not a reset. It is reintegration.
 
 And the player is the catalyst that makes integration possible.
 

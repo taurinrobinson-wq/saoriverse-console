@@ -119,9 +119,9 @@ All other user-data tables need RLS policies applied:
 
 ```bash
 
-# Copy enable_rls_policies.sql to Supabase SQL Editor
+## Copy enable_rls_policies.sql to Supabase SQL Editor
 
-# Run the script
+## Run the script
 
 ```text
 
@@ -134,7 +134,7 @@ All other user-data tables need RLS policies applied:
 ```bash
 
 
-# Copy final_cleanup.sql to Supabase SQL Editor
+## Copy final_cleanup.sql to Supabase SQL Editor
 
 ```text
 
@@ -145,7 +145,7 @@ All other user-data tables need RLS policies applied:
 ```bash
 
 
-# Find emotional_tags_rows.sql or create tags
+## Find emotional_tags_rows.sql or create tags
 
 ```text
 ```text
@@ -158,14 +158,14 @@ All other user-data tables need RLS policies applied:
 
 
 
-# Start your application
+## Start your application
 
-# Send a test message: "I feel caught between hope and despair"
+## Send a test message: "I feel caught between hope and despair"
 
-# Verify:
-#   - Message processes successfully
-#   - Glyphs are matched
-#   - Response is generated
+## Verify:
+##   - Message processes successfully
+##   - Glyphs are matched
+##   - Response is generated
 
 ```text
 ```

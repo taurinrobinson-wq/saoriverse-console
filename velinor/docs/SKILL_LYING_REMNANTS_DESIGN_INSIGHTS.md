@@ -5,22 +5,22 @@
 This system elegantly separates what the player experiences from what NPCs experience:
 
 ### Player's Perspective
-✅ **See:** Own TONE stats (Trust, Observation, Narrative Presence, Empathy)
-❌ **Don't See:** NPC REMNANTS, game systems, mechanical rules
-📍 **Learn:** NPC state ONLY through dialogue shifts and social consequences
+✅ **See:** Own TONE stats (Trust, Observation, Narrative Presence, Empathy) ❌ **Don't See:** NPC
+REMNANTS, game systems, mechanical rules 📍 **Learn:** NPC state ONLY through dialogue shifts and
+social consequences
 
 ### NPC's Perspective (Hidden)
-✅ **Have:** REMNANTS traits that evolve based on player actions
-✅ **Know:** When player is lying (through discovery mechanics)
-✅ **Remember:** Past deceptions (Memory trait + Korrin's rumor-spreading)
-❌ **Cannot:** Block access or create narrative lockouts
+✅ **Have:** REMNANTS traits that evolve based on player actions ✅ **Know:** When player is lying
+(through discovery mechanics) ✅ **Remember:** Past deceptions (Memory trait + Korrin's
+rumor-spreading) ❌ **Cannot:** Block access or create narrative lockouts
 
 ---
 
 ## Why This Design Works
 
 ### 1. Immersion Through Ignorance
-By hiding REMNANTS, the player experiences consequence-through-inference rather than consequence-through-mechanics. This feels more like real social interaction:
+By hiding REMNANTS, the player experiences consequence-through-inference rather than
+consequence-through-mechanics. This feels more like real social interaction:
 
 - **Traditional RPG:** "Kaelen's trust is now 0.2 (too low for quests)"
 - **This System:** "Kaelen says, 'I thought better of you. Let's just get this done.' [Something is wrong]"
@@ -56,7 +56,8 @@ Player lies twice         → Korrin starts spreading rumors
                           → Same task, different dialogue tone
 ```
 
-This incentivizes *some* honesty, but doesn't enforce it. The player can continue lying and facing escalating social friction—the choice remains theirs.
+This incentivizes *some* honesty, but doesn't enforce it. The player can continue lying and facing
+escalating social friction—the choice remains theirs.
 
 ---
 
@@ -169,7 +170,8 @@ Player succeeds honestly
 Partial recovery: Sera still cautious (Trust 0.3) but less hostile
 ```
 
-Key insight: **Trust rebuilds slowly**. One honest success doesn't erase the lie, but it begins the process.
+Key insight: **Trust rebuilds slowly**. One honest success doesn't erase the lie, but it begins the
+process.
 
 This creates natural story beats:
 - Act 1: Establish trust through honesty
@@ -217,10 +219,11 @@ IF player_trust_with_NPC < 0.5:
 
 This system deliberately avoids this because:
 
-1. **Agency Preservation**: Player can always attempt tasks
-2. **Narrative Coherence**: Same story with different emotional texture is more elegant than parallel timelines
-3. **Social Realism**: In real life, you don't become "blocked" from social interactions; they become *uncomfortable*
-4. **Replay Value**: Same task played differently based on trust state is more interesting than blocked content
+1. **Agency Preservation**: Player can always attempt tasks 2. **Narrative Coherence**: Same story
+with different emotional texture is more elegant than parallel timelines 3. **Social Realism**: In
+real life, you don't become "blocked" from social interactions; they become *uncomfortable* 4.
+**Replay Value**: Same task played differently based on trust state is more interesting than blocked
+content
 
 ---
 
@@ -244,7 +247,8 @@ This System's Approach:
   - Different scope creates authentic game consequence without personality shift
 ```
 
-Result: More content with same effort. Player feels respected (agency) and the story feels organic (emergence).
+Result: More content with same effort. Player feels respected (agency) and the story feels organic
+(emergence).
 
 ---
 
@@ -274,7 +278,8 @@ Glyphs and skills work orthogonally:
 - **Glyphs**: Emotional arcs, character discovery
 - **Skills**: Practical competencies, agency in tasks
 
-Learning a glyph doesn't teach you a skill; learning a skill doesn't reveal a glyph. But together they create a cohesive character arc where the player's choices ripple through the world.
+Learning a glyph doesn't teach you a skill; learning a skill doesn't reveal a glyph. But together
+they create a cohesive character arc where the player's choices ripple through the world.
 
 ---
 
@@ -282,10 +287,10 @@ Learning a glyph doesn't teach you a skill; learning a skill doesn't reveal a gl
 
 This design respects the player by:
 
-1. **Trusting intuition**: Hidden stats mean players read social cues like real life
-2. **Respecting agency**: Lying is possible; consequences are social, not mechanical
-3. **Rewarding roleplay**: Same mechanics serve both honest and deceptive playstyles
-4. **Creating emergence**: Organic ripple effects and community dynamics feel alive
+1. **Trusting intuition**: Hidden stats mean players read social cues like real life 2. **Respecting
+agency**: Lying is possible; consequences are social, not mechanical 3. **Rewarding roleplay**: Same
+mechanics serve both honest and deceptive playstyles 4. **Creating emergence**: Organic ripple
+effects and community dynamics feel alive
 
-The result is a system where the player doesn't solve a puzzle (get trust to X, get skill to Y) but rather navigates a social ecosystem where their choices matter and consequences ripple naturally.
-
+The result is a system where the player doesn't solve a puzzle (get trust to X, get skill to Y) but
+rather navigates a social ecosystem where their choices matter and consequences ripple naturally.

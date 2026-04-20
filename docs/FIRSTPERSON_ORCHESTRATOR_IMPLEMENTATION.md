@@ -54,11 +54,11 @@ Analyzes emotional tone, intensity, and valence of user input.
 
 affect = parser.analyze_affect("I'm grieving the loss of my job")
 
-# Returns: {
-#   "valence": -0.6 (negative)
-#   "intensity": 0.8 (high emotional arousal)
-#   "tone": "heavy" (reflective but intense)
-#   "arousal": 0.8
+## Returns: {
+##   "valence": -0.6 (negative)
+##   "intensity": 0.8 (high emotional arousal)
+##   "tone": "heavy" (reflective but intense)
+##   "arousal": 0.8
 
 ```text
 ```

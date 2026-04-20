@@ -2,10 +2,9 @@
 
 ## TL;DR
 
-1. **Open** any of the 4 JSON files (RN_Act1_Introduction.json, etc.)
-2. **Search** for: `PLACEHOLDER_NAME:`
-3. **Replace** that entire line with your actual writing
-4. **Done!** That's one placeholder filled.
+1. **Open** any of the 4 JSON files (RN_Act1_Introduction.json, etc.) 2. **Search** for:
+`PLACEHOLDER_NAME:` 3. **Replace** that entire line with your actual writing 4. **Done!** That's one
+placeholder filled.
 
 ---
 
@@ -192,11 +191,9 @@ This tells you:
 
 ## Making Replacements (VS Code)
 
-1. **Press Ctrl+H** to open Find & Replace
-2. **Find:** `PLACEHOLDER_NAME: // [description]`
-3. **Replace:** `Your actual dialogue here`
-4. **Click:** Replace (or Replace All if confident)
-5. **Press Ctrl+H** again to close
+1. **Press Ctrl+H** to open Find & Replace 2. **Find:** `PLACEHOLDER_NAME: // [description]` 3.
+**Replace:** `Your actual dialogue here` 4. **Click:** Replace (or Replace All if confident) 5.
+**Press Ctrl+H** again to close
 
 ---
 
@@ -227,12 +224,12 @@ For each placeholder:
 
 ## Quick Tips
 
-1. **Read author_notes first.** It's your creative brief.
-2. **Keep dialogue short.** 1-3 sentences per line (except long stories).
-3. **Trust the structure.** The emotional beats, glyph triggers, and tone impacts do the heavy lifting. Your dialogue just voices it.
-4. **Stay in character.** Ravi sounds different from Nima. Keep voices distinct.
-5. **Use sensory details** in narration. Show, don't tell.
-6. **Don't explain the glyphs.** Players will learn through emotional moments. Tier 3 meanings should feel like poetic clarifications, not lessons.
+1. **Read author_notes first.** It's your creative brief. 2. **Keep dialogue short.** 1-3 sentences
+per line (except long stories). 3. **Trust the structure.** The emotional beats, glyph triggers, and
+tone impacts do the heavy lifting. Your dialogue just voices it. 4. **Stay in character.** Ravi
+sounds different from Nima. Keep voices distinct. 5. **Use sensory details** in narration. Show,
+don't tell. 6. **Don't explain the glyphs.** Players will learn through emotional moments. Tier 3
+meanings should feel like poetic clarifications, not lessons.
 
 ---
 
@@ -276,14 +273,11 @@ For each placeholder:
 
 ## Next Steps
 
-1. **Open** `RN_Act1_Introduction.json` in your editor
-2. **Search** for `RAVI_LINE_01_INTRO:`
-3. **Read** the `author_notes` for that passage
-4. **Write** Ravi's actual dialogue
-5. **Move** to next placeholder (Ctrl+G to find next)
-6. **Repeat** until Act 1 is done
-7. **Commit:** `git add RN_Act1_Introduction.json && git commit -m "story: write Act 1 dialogue and narration"`
-8. **Move** to Act 2, then 3, then 4
+1. **Open** `RN_Act1_Introduction.json` in your editor 2. **Search** for `RAVI_LINE_01_INTRO:` 3.
+**Read** the `author_notes` for that passage 4. **Write** Ravi's actual dialogue 5. **Move** to next
+placeholder (Ctrl+G to find next) 6. **Repeat** until Act 1 is done 7. **Commit:** `git add
+RN_Act1_Introduction.json && git commit -m "story: write Act 1 dialogue and narration"` 8. **Move**
+to Act 2, then 3, then 4
 
 ---
 

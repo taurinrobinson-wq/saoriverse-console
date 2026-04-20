@@ -40,19 +40,19 @@ tests/
 
 
 
-# Run all tests
+## Run all tests
 python tests/run_tests.py
 
-# Run only unit tests
+## Run only unit tests
 python tests/run_tests.py unit
 
-# Run only integration tests
+## Run only integration tests
 python tests/run_tests.py integration
 
-# Run only performance tests
+## Run only performance tests
 python tests/run_tests.py performance
 
-# Run with verbose output
+## Run with verbose output
 
 ```text
 ```
@@ -62,24 +62,24 @@ python tests/run_tests.py performance
 
 ```bash
 
-# Run all tests
+## Run all tests (2)
 pytest tests/
 
-# Run specific category
+## Run specific category
 pytest tests/unit/
 pytest tests/integration/
 pytest tests/performance/
 
-# Run specific test file
+## Run specific test file
 pytest tests/unit/test_signal_matching.py
 
-# Run specific test function
+## Run specific test function
 pytest tests/unit/test_signal_matching.py::test_signal_matching
 
-# Run with verbose output
+## Run with verbose output (2)
 pytest -v tests/
 
-# Run with markers
+## Run with markers
 ```text
 
 ```text
@@ -172,7 +172,7 @@ Some integration tests require local database setup:
 
 
 
-# Initialize glyphs database
+## Initialize glyphs database
 
 ```text
 ```
@@ -192,7 +192,7 @@ Example:
 
 ```python
 
-# tests/unit/test_my_feature.py
+## tests/unit/test_my_feature.py
 def test_something():
     from emotional_os.glyphs import some_function
     result = some_function()

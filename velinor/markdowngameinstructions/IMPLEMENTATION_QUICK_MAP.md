@@ -210,12 +210,17 @@
 
 ## Key Principles
 
-1. **Heat is Emotional, Not Explicit**: Both arcs add warmth through genuine recognition, not through sexual content.
+1. **Heat is Emotional, Not Explicit**: Both arcs add warmth through genuine recognition, not
+through sexual content.
 
-2. **Catalyst, Not Resolution**: Sera/Korrin encounter is fleeting but transformative. It's not a romance beginning; it's a moment of reawakening.
+2. **Catalyst, Not Resolution**: Sera/Korrin encounter is fleeting but transformative. It's not a
+romance beginning; it's a moment of reawakening.
 
-3. **Necessary Trauma**: Malrik/Elenya revelation honors the idea that some painful choices are survival choices. Memory severance isn't evil; it's love.
+3. **Necessary Trauma**: Malrik/Elenya revelation honors the idea that some painful choices are
+survival choices. Memory severance isn't evil; it's love.
 
-4. **Witness is Healing**: Both arcs emphasize the power of being seen, of sitting with another's reality, of honoring what's been lost.
+4. **Witness is Healing**: Both arcs emphasize the power of being seen, of sitting with another's
+reality, of honoring what's been lost.
 
-5. **Emotional Architecture**: All mechanics (glyphs, traits, influence, gates) work together to make the player's emotional journey feel real and consequential.
+5. **Emotional Architecture**: All mechanics (glyphs, traits, influence, gates) work together to
+make the player's emotional journey feel real and consequential.

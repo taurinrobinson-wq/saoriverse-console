@@ -47,17 +47,17 @@ iterate quickly** with fast container startup
 
 ```bash
 
-# 1. Start both services
+## 1. Start both services
 docker-compose -f docker-compose.local.yml up -d
 
-# 2. Pull a language model (takes 5-10 min, ~4.7GB)
+## 2. Pull a language model (takes 5-10 min, ~4.7GB)
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# 3. Open in browser
+## 3. Open in browser
 
-# Visit http://localhost:8501
+## Visit http://localhost:8501
 
-# 4. Chat with FirstPerson!
+## 4. Chat with FirstPerson!
 
 ```text
 
@@ -370,7 +370,7 @@ Everything is ready to use. Just run:
 docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# Open http://localhost:8501
+## Open http://localhost:8501
 
 ```
 

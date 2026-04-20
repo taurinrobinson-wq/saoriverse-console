@@ -62,13 +62,13 @@ Or use **`VPS_QUICK_START.md`** for quick copy-paste commands.
 ```bash
 
 
-# Test HTTPS
+## Test HTTPS
 curl https://velinor.firstperson.chat
 
-# Visit in browser
+## Visit in browser
 https://velinor.firstperson.chat
 
-# Check API
+## Check API
 
 ```text
 

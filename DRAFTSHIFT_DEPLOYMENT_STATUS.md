@@ -61,10 +61,8 @@ Your DraftShift web application is now fully deployed and ready to push to Repli
 ## Next Steps: Deploy to Replit
 
 ### Option 1: Use Replit Extension (Recommended)
-1. Open Command Palette: `Ctrl+Shift+P`
-2. Search "Replit: Connect"
-3. Paste URL: `https://replit.com/@taurinrobinson/saoriverse-console`
-4. Replit auto-syncs changes
+1. Open Command Palette: `Ctrl+Shift+P` 2. Search "Replit: Connect" 3. Paste URL:
+`https://replit.com/@taurinrobinson/saoriverse-console` 4. Replit auto-syncs changes
 
 ### Option 2: Git Push Method
 ```bash
@@ -125,11 +123,11 @@ pytest-cov==7.0.0
 ## To Run Locally
 
 ```bash
-# Terminal 1: Start API server
+## Terminal 1: Start API server
 cd saoriverse-console
 python draftshift-web/api.py
 
-# Terminal 2: Test (optional)
+## Terminal 2: Test (optional)
 python draftshift-web/test_api.py
 ```
 
@@ -139,9 +137,7 @@ Then visit: `http://localhost:8000`
 
 ## Ready to Deploy! 🚀
 
-Your DraftShift app is production-ready. The `.replit` file will:
-1. Install dependencies from `requirements.txt`
-2. Start FastAPI on port 8000
-3. Serve React frontend at `/`
+Your DraftShift app is production-ready. The `.replit` file will: 1. Install dependencies from
+`requirements.txt` 2. Start FastAPI on port 8000 3. Serve React frontend at `/`
 
 No extra configuration needed!

@@ -11,7 +11,9 @@ Summary
 
 > Right now I’m feeling rather depressed. Said goodbye to my kids to trade off with their mom. My kids are always fighting with each other. I don’t know how to help them feel the abundance of my love...
 
-(Excerpt continues — full transcript captured in the original file. The main emotional themes: grief at separation, parenting guilt, sibling conflict, financial/identity stress, antidepressant tapering, sexual reconnection, nostalgia, and resurfacing grief.)
+(Excerpt continues — full transcript captured in the original file. The main emotional themes: grief
+at separation, parenting guilt, sibling conflict, financial/identity stress, antidepressant
+tapering, sexual reconnection, nostalgia, and resurfacing grief.)
 
 Key emotional signals in the conversation:
 - recurrent grief and loss cues (goodbyes, divorce, seeing an ex move on)
@@ -30,11 +32,13 @@ Key emotional signals in the conversation:
 ---
 
 **Implementation Goals**
-1. Detect implicit mortality salience (not only explicit death mentions) and compute `mortality_salience` ∈ [0.0, 1.0].
-2. Persist per-turn and conversation-level salience into `ConversationMemory` with smoothing & trend detection.
-3. Use `mortality_salience` to shape responses: meaning‑making prompts, validation, triage/safety, and lowered quick‑fix suggestions.
-4. Surface `mortality_salience` and related metadata through the backend `ChatResponse.metadata` so frontend & telemetry can consume it.
-5. Add tests, telemetry, and a short simulation script to measure impact.
+1. Detect implicit mortality salience (not only explicit death mentions) and compute
+`mortality_salience` ∈ [0.0, 1.0]. 2. Persist per-turn and conversation-level salience into
+`ConversationMemory` with smoothing & trend detection. 3. Use `mortality_salience` to shape
+responses: meaning‑making prompts, validation, triage/safety, and lowered quick‑fix suggestions. 4.
+Surface `mortality_salience` and related metadata through the backend `ChatResponse.metadata` so
+frontend & telemetry can consume it. 5. Add tests, telemetry, and a short simulation script to
+measure impact.
 
 ---
 

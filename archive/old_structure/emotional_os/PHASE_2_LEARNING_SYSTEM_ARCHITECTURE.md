@@ -1,6 +1,7 @@
 # Phase 2, Learning System Architecture (Placeholder)
 
-This placeholder describes the high-level architecture used in Phase 2 for the learning/limbic subsystem.
+This placeholder describes the high-level architecture used in Phase 2 for the learning/limbic
+subsystem.
 
 Sections to expand
 

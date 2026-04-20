@@ -2,7 +2,8 @@
 
 ## Overview
 
-Welcome to DraftShift—a civility compliance engine designed for legal professionals navigating California's Rule 9.7 and similar professional ethics requirements.
+Welcome to DraftShift—a civility compliance engine designed for legal professionals navigating
+California's Rule 9.7 and similar professional ethics requirements.
 
 **Quick Links:**
 
@@ -21,24 +22,25 @@ Welcome to DraftShift—a civility compliance engine designed for legal professi
 ## 🚀 Quick Start: Where to Begin?
 
 ### If you're a developer (starting Phase 1):
-1. Read [02_ARCHITECTURE.md](02_ARCHITECTURE.md) to understand the current state
-2. Read [03_LOCAL_LLM_STACK.md](03_LOCAL_LLM_STACK.md) to choose your LLM
-3. Go to [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) → Phase 1 section for task checklist
+1. Read [02_ARCHITECTURE.md](02_ARCHITECTURE.md) to understand the current state 2. Read
+[03_LOCAL_LLM_STACK.md](03_LOCAL_LLM_STACK.md) to choose your LLM 3. Go to
+[07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) → Phase 1 section for task checklist
 
 ### If you're a product/business person:
-1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md) for market context
-2. Read [06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md) for timeline + resources
-3. Refer to [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) for gates + success metrics
+1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md) for market context 2. Read
+[06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md) for timeline + resources 3. Refer to
+[07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) for gates + success metrics
 
 ### If you're designing the UI/frontend:
-1. Read [05_UI_UX_DESIGN.md](05_UI_UX_DESIGN.md) for wireframes + component tree
-2. Read [04_API_SPECIFICATION.md](04_API_SPECIFICATION.md) to understand the backend contract
-3. Refer to Phase 1/2/3 descriptions in [06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md)
+1. Read [05_UI_UX_DESIGN.md](05_UI_UX_DESIGN.md) for wireframes + component tree 2. Read
+[04_API_SPECIFICATION.md](04_API_SPECIFICATION.md) to understand the backend contract 3. Refer to
+Phase 1/2/3 descriptions in [06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md)
 
 ### If you're evaluating legal/compliance aspects:
-1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md) for positioning
-2. Search for "disclaimer" and "attorney control" in [02_ARCHITECTURE.md](02_ARCHITECTURE.md) and [05_UI_UX_DESIGN.md](05_UI_UX_DESIGN.md)
-3. Review compliance checklist in [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md)
+1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md) for positioning 2. Search for "disclaimer"
+and "attorney control" in [02_ARCHITECTURE.md](02_ARCHITECTURE.md) and
+[05_UI_UX_DESIGN.md](05_UI_UX_DESIGN.md) 3. Review compliance checklist in
+[07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md)
 
 ---
 
@@ -178,28 +180,24 @@ print(emotions.primary_emotion)  # Joy, anger, trust, etc.
 ## 🎓 Learning Paths
 
 ### For Developers
-1. Start with [02_ARCHITECTURE.md](02_ARCHITECTURE.md)
-2. Review core modules in `draftshift/` folder
-3. Go to [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) → Phase 1 section
-4. Pick your first task from the checklist
+1. Start with [02_ARCHITECTURE.md](02_ARCHITECTURE.md) 2. Review core modules in `draftshift/`
+folder 3. Go to [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) → Phase 1 section 4. Pick your first
+task from the checklist
 
 ### For Product Managers
-1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md)
-2. Review [06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md) for timelines
-3. Check gates/milestones in [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md)
-4. Coordinate with dev team on Phase 1 kickoff
+1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md) 2. Review
+[06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md) for timelines 3. Check gates/milestones in
+[07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) 4. Coordinate with dev team on Phase 1 kickoff
 
 ### For Designers
-1. Review [05_UI_UX_DESIGN.md](05_UI_UX_DESIGN.md) wireframes
-2. Study component tree (Phase 2 section)
-3. Read [04_API_SPECIFICATION.md](04_API_SPECIFICATION.md) to understand data
-4. Design Phase 1 Streamlit mockups or Phase 2 React Figma file
+1. Review [05_UI_UX_DESIGN.md](05_UI_UX_DESIGN.md) wireframes 2. Study component tree (Phase 2
+section) 3. Read [04_API_SPECIFICATION.md](04_API_SPECIFICATION.md) to understand data 4. Design
+Phase 1 Streamlit mockups or Phase 2 React Figma file
 
 ### For Legal/Compliance Review
-1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md) for market context
-2. Review all references to "disclaimer" and "attorney control"
-3. Check "Legal & Compliance Checklist" in [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md)
-4. Flag any concerns for product/dev team
+1. Read [01_PRODUCT_STRATEGY.md](01_PRODUCT_STRATEGY.md) for market context 2. Review all references
+to "disclaimer" and "attorney control" 3. Check "Legal & Compliance Checklist" in
+[07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) 4. Flag any concerns for product/dev team
 
 ---
 
@@ -208,10 +206,9 @@ print(emotions.primary_emotion)  # Joy, anger, trust, etc.
 **Current Status:** Core modules complete; ready to begin Phase 1 (LLM integration + Streamlit).
 
 **Next Immediate Steps:**
-1. ✅ Understand the architecture ([02_ARCHITECTURE.md](02_ARCHITECTURE.md))
-2. ✅ Choose your LLM backend ([03_LOCAL_LLM_STACK.md](03_LOCAL_LLM_STACK.md))
-3. → Recruit Phase 1 beta users (5-10 lawyers)
-4. → Begin LLM integration task (from [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) Phase 1)
+1. ✅ Understand the architecture ([02_ARCHITECTURE.md](02_ARCHITECTURE.md)) 2. ✅ Choose your LLM
+backend ([03_LOCAL_LLM_STACK.md](03_LOCAL_LLM_STACK.md)) 3. → Recruit Phase 1 beta users (5-10
+lawyers) 4. → Begin LLM integration task (from [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) Phase 1)
 5. → Build Streamlit MVP
 
 **Timeline to Launch:**
@@ -224,22 +221,29 @@ print(emotions.primary_emotion)  # Joy, anger, trust, etc.
 ## ❓ FAQ
 
 **Q: Is the core analysis working now?**
-A: Yes! All modules (spaCy, TextBlob, NRC, signals) are implemented and tested. Go to [02_ARCHITECTURE.md](02_ARCHITECTURE.md) for architecture overview.
+A: Yes! All modules (spaCy, TextBlob, NRC, signals) are implemented and tested. Go to
+[02_ARCHITECTURE.md](02_ARCHITECTURE.md) for architecture overview.
 
 **Q: What do I build first?**
-A: LLM integration (Phase 1). See [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) Phase 1 section for exact tasks.
+A: LLM integration (Phase 1). See [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) Phase 1 section for
+exact tasks.
 
 **Q: Can we skip Phase 1 and go straight to Phase 2?**
-A: Not recommended. Phase 1 validates the concept quickly. Skip it only if you have strong user demand + resources for full Phase 2 (200+ hours).
+A: Not recommended. Phase 1 validates the concept quickly. Skip it only if you have strong user
+demand + resources for full Phase 2 (200+ hours).
 
 **Q: How do we handle attorney-client privilege?**
-A: All processing is local; no external APIs. No storage by default. See [02_ARCHITECTURE.md](02_ARCHITECTURE.md) "Privacy Model."
+A: All processing is local; no external APIs. No storage by default. See
+[02_ARCHITECTURE.md](02_ARCHITECTURE.md) "Privacy Model."
 
 **Q: What's the civility scoring based on?**
-A: Weighted algorithm combining sentiment polarity (30%), emotion profile (30%), signal balance (20%), subjectivity (10%), modifiers (10%). See [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) Phase 1.2 for details.
+A: Weighted algorithm combining sentiment polarity (30%), emotion profile (30%), signal balance
+(20%), subjectivity (10%), modifiers (10%). See [07_MASTER_ROADMAP.md](07_MASTER_ROADMAP.md) Phase
+1.2 for details.
 
 **Q: Can we deploy to the cloud?**
-A: Phase 1-2 are local-only or single-tenant cloud. Phase 3 adds multi-tenant cloud support. See [06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md).
+A: Phase 1-2 are local-only or single-tenant cloud. Phase 3 adds multi-tenant cloud support. See
+[06_DEVELOPMENT_PHASES.md](06_DEVELOPMENT_PHASES.md).
 
 ---
 

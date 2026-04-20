@@ -1,14 +1,17 @@
 # Velinor Glyph Animation Specifications
 
 ## Overview
-Pre-baked animations for glyph discoveries using Stable Diffusion-generated frames composited with WebGL particle effects.
+Pre-baked animations for glyph discoveries using Stable Diffusion-generated frames composited with
+WebGL particle effects.
 
 ---
 
 ## Animation 1: Glyph of Sparks Lost — Sand Emergence
 
 ### Visual Narrative
-A broken lantern with incomplete halo emerges from sand. As it rises, sand particles cascade downward with realistic gravity. The glyph glows softly—not triumphant, but discovered. The lantern symbol is faint, as if surfacing from deep memory.
+A broken lantern with incomplete halo emerges from sand. As it rises, sand particles cascade
+downward with realistic gravity. The glyph glows softly—not triumphant, but discovered. The lantern
+symbol is faint, as if surfacing from deep memory.
 
 ### Technical Specs
 
@@ -29,9 +32,9 @@ Base prompt should emphasize:
 
 **Frame Breakdown**:
 1. **Frames 0-15** (0.0-0.625s): Lantern barely visible beneath sand, sand beginning to move upward
-2. **Frames 16-35** (0.625s-1.458s): Lantern emerges, sand cascades more heavily
-3. **Frames 36-50** (1.458s-2.083s): Lantern fully visible, sand settling, glow intensifies slightly
-4. **Frames 51-60** (2.083s-2.5s): Final settle, glyph appears in steady state
+2. **Frames 16-35** (0.625s-1.458s): Lantern emerges, sand cascades more heavily 3. **Frames 36-50**
+(1.458s-2.083s): Lantern fully visible, sand settling, glow intensifies slightly 4. **Frames 51-60**
+(2.083s-2.5s): Final settle, glyph appears in steady state
 
 **Visual Elements**:
 - Lantern symbol: Small, centered, appears to be carved/etched
@@ -50,9 +53,9 @@ Base prompt should emphasize:
 - Particle size: 1-3mm (screen-relative)
 
 **Composition**:
-1. Stable Diffusion frames play as sprite animation (backbone)
-2. Particle effects render on top in real-time
-3. Glyph symbol overlay: Static vector glyph (can be SVG or texture) that phases in during frames 40-45
+1. Stable Diffusion frames play as sprite animation (backbone) 2. Particle effects render on top in
+real-time 3. Glyph symbol overlay: Static vector glyph (can be SVG or texture) that phases in during
+frames 40-45
 
 **Code Structure**:
 ```javascript
@@ -162,10 +165,11 @@ assets/
 
 ## Animation 2: Standard Glyph Discovery
 
-### Visual Narrative
-Glyph symbol appears centered on screen. Soft glow pulse. Optional sparkle/light particles. No gravity physics—this is meant to feel magical/instantaneous, not physical.
+### Visual Narrative (2)
+Glyph symbol appears centered on screen. Soft glow pulse. Optional sparkle/light particles. No
+gravity physics—this is meant to feel magical/instantaneous, not physical.
 
-### Technical Specs
+### Technical Specs (2)
 
 **Frame Generation** (Stable Diffusion):
 - **Total frames**: 30 frames at 24fps = 1.25 seconds
@@ -185,10 +189,11 @@ Glyph symbol appears centered on screen. Soft glow pulse. Optional sparkle/light
 
 ## Animation 3: Glyph Console Emergence (Future)
 
-### Visual Narrative
-Console platform rises from sand. Panels slide into place. Sand cascades more dramatically than Sparks Lost. Mechanical/architectural feel (solid surfaces).
+### Visual Narrative (3)
+Console platform rises from sand. Panels slide into place. Sand cascades more dramatically than
+Sparks Lost. Mechanical/architectural feel (solid surfaces).
 
-### Technical Specs
+### Technical Specs (3)
 
 **Frame Generation**:
 - **Total frames**: 90 frames at 30fps = 3.0 seconds
@@ -209,32 +214,24 @@ Console platform rises from sand. Panels slide into place. Sand cascades more dr
 
 ### Step 1: Generate Frames with Stable Diffusion
 
-Using Automatic1111 WebUI:
-1. Set up batch generation with negative prompts (avoid: "blurry", "low quality", "cartoon")
-2. Use consistent seed for frame-to-frame coherence (or vary slightly for natural motion)
-3. Generate full frame sequence
-4. Export as PNG with transparency
+Using Automatic1111 WebUI: 1. Set up batch generation with negative prompts (avoid: "blurry", "low
+quality", "cartoon") 2. Use consistent seed for frame-to-frame coherence (or vary slightly for
+natural motion) 3. Generate full frame sequence 4. Export as PNG with transparency
 
 ### Step 2: Sequence Assembly
 
-1. Verify frame count matches spec
-2. Organize into directory structure
-3. Generate metadata.json with timing/particle/audio specs
-4. Test frame playback at correct FPS
+1. Verify frame count matches spec 2. Organize into directory structure 3. Generate metadata.json
+with timing/particle/audio specs 4. Test frame playback at correct FPS
 
 ### Step 3: WebGL Integration
 
-1. Load frame sequence into Three.js
-2. Create particle system with matching physics params
-3. Wire audio triggers
-4. Test full animation loop
+1. Load frame sequence into Three.js 2. Create particle system with matching physics params 3. Wire
+audio triggers 4. Test full animation loop
 
 ### Step 4: UI/Game Integration
 
-1. Trigger animation on glyph discovery
-2. Pause game state during animation (or allow non-blocking overlay)
-3. Add skip option (for accessibility)
-4. Log glyph acquisition to player state
+1. Trigger animation on glyph discovery 2. Pause game state during animation (or allow non-blocking
+overlay) 3. Add skip option (for accessibility) 4. Log glyph acquisition to player state
 
 ---
 
@@ -281,4 +278,5 @@ This pipeline can be extended for:
 - Tutorial/onboarding animations
 - Ending variations (different glyph discovery styles based on player choices)
 
-Each animation follows same pattern: **Stable Diffusion frames + WebGL particle effects + audio triggers**.
+Each animation follows same pattern: **Stable Diffusion frames + WebGL particle effects + audio
+triggers**.

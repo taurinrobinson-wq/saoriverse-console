@@ -1,6 +1,7 @@
 DigitalOcean quickstart for `velinor.firstperson.chat`
 
-This guide shows how to provision a droplet, bootstrap it, and deploy the `saoriverse-console` compose stack.
+This guide shows how to provision a droplet, bootstrap it, and deploy the `saoriverse-console`
+compose stack.
 
 Prerequisites
 - `doctl` configured locally (`doctl auth init`) or use the DigitalOcean control panel.
@@ -26,10 +27,10 @@ doctl compute droplet create "$DROPLET_NAME" \
 # from your local machine
 DROPLET_IP=203.0.113.10   # replace with droplet IP from the previous command
 ssh root@$DROPLET_IP
-# on the droplet, inside $HOME
+## on the droplet, inside $HOME
 curl -fsSL https://raw.githubusercontent.com/taurinrobinson-wq/saoriverse-console/main/scripts/bootstrap-droplet.sh -o /tmp/bootstrap-droplet.sh
 chmod +x /tmp/bootstrap-droplet.sh
-# run with your domain/email
+## run with your domain/email
 DOMAIN=velinor.firstperson.chat EMAIL=you@domain.com /tmp/bootstrap-droplet.sh
 ```
 

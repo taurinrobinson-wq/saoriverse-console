@@ -1,6 +1,7 @@
 # DraftShift Web UI
 
-A modern web interface for the DraftShift litigation document automation platform. Built with React, Vite, and FastAPI.
+A modern web interface for the DraftShift litigation document automation platform. Built with React,
+Vite, and FastAPI.
 
 ## Features
 
@@ -146,18 +147,14 @@ Specifies runtime dependencies:
 
 ### Deploy to Replit
 
-1. Push repository to GitHub
-2. Go to [replit.com](https://replit.com) and create new Replit
-3. Import from GitHub repository
-4. Replit auto-configures from `.replit` and `replit.nix`
-5. Application runs at `https://draftshift.replit.dev`
+1. Push repository to GitHub 2. Go to [replit.com](https://replit.com) and create new Replit 3.
+Import from GitHub repository 4. Replit auto-configures from `.replit` and `replit.nix` 5.
+Application runs at `https://draftshift.replit.dev`
 
 **Automated steps on Replit:**
-1. Install Python dependencies: `pip install -r requirements-api.txt`
-2. Install Node dependencies: `npm install`
-3. Build React: `npm run build`
-4. Start FastAPI server: `python -m uvicorn draftshift_web.api:app --host 0.0.0.0 --port 8000`
-5. FastAPI serves built React files from `dist/`
+1. Install Python dependencies: `pip install -r requirements-api.txt` 2. Install Node dependencies:
+`npm install` 3. Build React: `npm run build` 4. Start FastAPI server: `python -m uvicorn
+draftshift_web.api:app --host 0.0.0.0 --port 8000` 5. FastAPI serves built React files from `dist/`
 
 ## File Structure
 
@@ -196,31 +193,25 @@ The UI features:
 
 ### CORS Errors
 
-If you see CORS errors:
-1. Ensure FastAPI backend is running on `http://localhost:8000`
-2. Check `vite.config.js` proxy configuration
-3. Verify `api.py` has CORS middleware enabled
+If you see CORS errors: 1. Ensure FastAPI backend is running on `http://localhost:8000` 2. Check
+`vite.config.js` proxy configuration 3. Verify `api.py` has CORS middleware enabled
 
 ### Fixture Loading Fails
 
-If fixtures don't load:
-1. Ensure `draftshift/tests/fixtures/` directory exists
-2. Check JSON files are properly formatted
-3. Verify relative paths in `api.py`
+If fixtures don't load: 1. Ensure `draftshift/tests/fixtures/` directory exists 2. Check JSON files
+are properly formatted 3. Verify relative paths in `api.py`
 
 ### Build Errors
 
-If document generation fails:
-1. Check JSON format matches schema
-2. Review `api.py` logs for validation errors
-3. Ensure `draftshift` package is installed
+If document generation fails: 1. Check JSON format matches schema 2. Review `api.py` logs for
+validation errors 3. Ensure `draftshift` package is installed
 
 ### Port Conflicts
 
 If port 8000 is in use:
 ```bash
 python -m uvicorn draftshift_web.api:app --port 8001
-# Then update vite.config.js proxy target
+## Then update vite.config.js proxy target
 ```
 
 ## Performance Optimization

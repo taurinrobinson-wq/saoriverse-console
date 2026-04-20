@@ -83,7 +83,7 @@ Generates contextual NPC dialogue based on current REMNANTS state.
 sera = manager.get_npc("Sera")
 dialogue = generate_dialogue("Sera", sera.remnants, context="greeting")
 
-# Output: "I see sprout in you.... like herbs, it blooms so softly."
+## Output: "I see sprout in you.... like herbs, it blooms so softly."
 ```
 
 
@@ -246,11 +246,11 @@ npcs_dict = {name: npc.remnants for name, npc in manager.npcs.items()}
 
 scene = generate_scene(npcs_dict, encounter_id=1, context="greeting")
 
-# Outputs all 9 NPCs reacting to player presence
+## Outputs all 9 NPCs reacting to player presence
 for encounter in scene['npcs']:
     print(f"{encounter['npc']}: {encounter['dialogue']}")
 
-# Marketplace mood is determined by most common trait
+## Marketplace mood is determined by most common trait
 print(f"Overall mood: {scene['dominant_mood'].upper()}")
 ```
 
@@ -316,15 +316,15 @@ The `context` parameter changes the dialogue template:
 
 ```python
 
-# Initial state: antagonistic
+## Initial state: antagonistic
 kaelen.adjust_trait("empathy", -0.3)   # Drop empathy
 kaelen.adjust_trait("trust", -0.3)     # Drop trust
 
-# After player choices: redemptive
+## After player choices: redemptive
 kaelen.adjust_trait("empathy", 0.5)    # Raise empathy
 kaelen.adjust_trait("trust", 0.4)      # Raise trust
 
-# Dialogue automatically shifts from "scheme/trick" to "redeem/listen"
+## Dialogue automatically shifts from "scheme/trick" to "redeem/listen"
 ```
 
 
@@ -332,13 +332,13 @@ kaelen.adjust_trait("trust", 0.4)      # Raise trust
 
 ```python
 
-# Novice state: uncertain
+## Novice state: uncertain
 npc.adjust_trait("authority", -0.2)
 
-# After player empowerment: confident
+## After player empowerment: confident
 npc.adjust_trait("authority", 0.3)
 
-# Choices shift from tentative to assertive
+## Choices shift from tentative to assertive
 ```
 
 
@@ -346,15 +346,15 @@ npc.adjust_trait("authority", 0.3)
 
 ```python
 
-# Fresh state: low memory
+## Fresh state: low memory
 npc.adjust_trait("memory", 0.3)
 
-# Dialogue: "I forget... something fades."
+## Dialogue: "I forget... something fades."
 
-# After historical revelation: high memory
+## After historical revelation: high memory
 npc.adjust_trait("memory", 0.8)
 
-# Dialogue: "I remember... weave the threads together."
+## Dialogue: "I remember... weave the threads together."
 ```
 
 ## 
@@ -408,7 +408,7 @@ When multiple traits conflict (e.g., high Empathy + high Skepticism), generate d
 
 ```python
 
-# Nima: Skeptical but learning to trust
+## Nima: Skeptical but learning to trust
 "I doubt... but perhaps there's something here worth believing in."
 ```
 

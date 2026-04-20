@@ -11,10 +11,10 @@ The easiest way to start developing:
 
 ```bash
 
-# Navigate to your project
+## Navigate to your project
 cd "/Volumes/My Passport for Mac/saoriverse-console"
 
-# Run the dev server
+## Run the dev server
 ```text
 
 ```text
@@ -119,16 +119,16 @@ The dev server automatically reloads when you save files—just edit and refresh
 
 
 
-# Start dev server (3000)
+## Start dev server (3000)
 npm run dev
 
-# Build for production
+## Build for production
 npm run build
 
-# Start production server
+## Start production server
 npm start
 
-# Lint code
+## Lint code
 
 ```text
 ```
@@ -207,7 +207,7 @@ It will run on `http://localhost:8000`
 ```bash
 
 
-# Make sure nvm is loaded
+## Make sure nvm is loaded
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 
@@ -220,10 +220,10 @@ source "$NVM_DIR/nvm.sh"
 ```bash
 
 
-# Kill the existing process
+## Kill the existing process
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
-# Or use a different port
+## Or use a different port
 
 ```text
 ```text

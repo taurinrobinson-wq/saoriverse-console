@@ -114,7 +114,9 @@ Response delivered to user
 - Deduplication & staging: candidate glyphs are checked against an existing lexicon and `relational_memory` (when available). Near-duplicates are staged to `learning/near_duplicate_staging.jsonl` (append-only) and the emitted candidate includes `dedup` and `dedup_reason` metadata.
 - Main app docstring now documents the full startup → auth → opt-in persistence → parse → response flow. See `main_v2.py` for the succinct runtime summary.
 
-Use this document as the canonical reference for the response flow while you continue improving the system. If you update selection heuristics (weights, `top_n`, or intensity calculations), update this file so the team's expectations stay aligned.
+Use this document as the canonical reference for the response flow while you continue improving the
+system. If you update selection heuristics (weights, `top_n`, or intensity calculations), update
+this file so the team's expectations stay aligned.
 
 ##
 
@@ -275,13 +277,10 @@ SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
 
 ### Core Tables
 
-1. **glyph_lexicon** - Production glyphs (6,434 glyphs)
-2. **glyph_candidates** - Learning pipeline candidates
-3. **glyph_versions** - Track glyph evolution
-4. **glyph_usage_log** - Track usage across users
-5. **user_glyph_preferences** - Per-user glyph adoption
-6. **glyph_consensus** - Shared learning consensus
-7. **emotional_territory** - Coverage gap analysis
+1. **glyph_lexicon** - Production glyphs (6,434 glyphs) 2. **glyph_candidates** - Learning pipeline
+candidates 3. **glyph_versions** - Track glyph evolution 4. **glyph_usage_log** - Track usage across
+users 5. **user_glyph_preferences** - Per-user glyph adoption 6. **glyph_consensus** - Shared
+learning consensus 7. **emotional_territory** - Coverage gap analysis
 
 ### Supporting Tables
 
@@ -326,9 +325,8 @@ print(f"Response: {result['voltage_response'][:100]}...")
 
 ## 📝 Summary
 
-✅ **Database Updated:** 6,434 glyphs now loaded
-⚠️ **Action Required:** Configure `CURRENT_SAORI_URL` in `.env`
-📊 **Response System:** Multi-layered with learning capabilities
-🔄 **Flow:** signal_parser → glyphs.db → response composers
+✅ **Database Updated:** 6,434 glyphs now loaded ⚠️ **Action Required:** Configure
+`CURRENT_SAORI_URL` in `.env` 📊 **Response System:** Multi-layered with learning capabilities 🔄
+**Flow:** signal_parser → glyphs.db → response composers
 
 The system is now ready to provide rich emotional responses once the backend API is configured.

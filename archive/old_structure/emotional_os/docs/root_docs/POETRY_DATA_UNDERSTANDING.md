@@ -2,7 +2,8 @@
 
 ## TL;DR
 
-The code you asked about loads **clean poetry to train your emotional AI**. It's not just data sitting there - it's the "textbook" your system learns from to understand what users really mean.
+The code you asked about loads **clean poetry to train your emotional AI**. It's not just data
+sitting there - it's the "textbook" your system learns from to understand what users really mean.
 
 ##
 
@@ -233,7 +234,9 @@ for collection_name, text in data.items():
 
 ## The Bottom Line
 
-Poetry is **the language of emotion** - it's how humans express the deepest feelings. By training your system on clean, validated poetry, you give it a "lexicon of emotion" to recognize when users input text.
+Poetry is **the language of emotion** - it's how humans express the deepest feelings. By training
+your system on clean, validated poetry, you give it a "lexicon of emotion" to recognize when users
+input text.
 
 This makes your system:
 
@@ -242,4 +245,5 @@ This makes your system:
 - **More versatile** - Handles varied expressions of the same emotion
 - **More reliable** - Built on validated, clean data (not OCR garbage)
 
-The poetry is your training textbook. Signal extraction is your student. User input is the test. And a clean "textbook" means better learning and better results.
+The poetry is your training textbook. Signal extraction is your student. User input is the test. And
+a clean "textbook" means better learning and better results.

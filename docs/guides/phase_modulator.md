@@ -8,7 +8,7 @@ architecture.
 
 ##
 
-<strong>FP</strong> Core Design Principles
+**FP** Core Design Principles
 
 • No backend terms: Avoid “glyph,” “gate,” “trace,” “signal,” etc. • Emotion-first language: Use
 tone, metaphor, and relational cues. • User-led resonance: Reflect user language and emotional
@@ -258,7 +258,7 @@ context.
 
 ##
 
-<strong>FP</strong> Cue Detection Logic: `phase_modulator.py`
+**FP** Cue Detection Logic: `phase_modulator.py`
 
 🔍 Key Phrase Patterns
 
@@ -327,7 +327,7 @@ respond with symbolic intelligence and relational nuance:
 
 ##
 
-1. <strong>FP</strong> Symbolic Tagging Engine
+1. **FP** Symbolic Tagging Engine
 
 This module assigns symbolic tags to user input based on emotional voltage and relational depth.
 These tags guide the phase modulator and can also be used for glyph generation, memory indexing, or
@@ -541,7 +541,7 @@ initiatory (∞) or archetypal (α) • voltage_marking: e.g., ΔV↑↑, +ΔV, 
 
 ##
 
-<strong>FP</strong> Memory Retrieval Logic
+**FP** Memory Retrieval Logic
 
 When a user refers back to a moment:
 
@@ -566,7 +566,7 @@ pass
 
 def retrieve_capsule_by_tag(tag: str):
 
-# Search memory archive for matching symbolic tag
+## Search memory archive for matching symbolic tag
 
 pass
 

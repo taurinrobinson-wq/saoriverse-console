@@ -415,14 +415,14 @@ Seasonal pattern recognition 5. **Phase 7:** Predictive glyph recommendation
 
 ```python
 
-# View your preference dashboard
+## View your preference dashboard
 ui = initialize_preference_ui()
 ui.display_user_dashboard(user_id="your_user_id")
 
-# Export your preferences
+## Export your preferences
 json_data = manager.export_user_preferences("your_user_id")
 
-# Set manual overrides
+## Set manual overrides
 manager.set_manual_override("your_user_id", "compassionate", "warmth", "My favorite")
 ```
 
@@ -431,17 +431,17 @@ manager.set_manual_override("your_user_id", "compassionate", "warmth", "My favor
 
 ```python
 
-# Use glyph clustering
+## Use glyph clustering
 clustering = GlyphClusteringEngine()
 similar = clustering.find_similar_glyphs("warmth")
 alternatives = clustering.find_complementary_glyphs("energy")
 
-# Track temporal patterns
+## Track temporal patterns
 analyzer = TemporalAnalyzer()
 analyzer.record_event(event)
 best = analyzer.get_best_glyph_for_time("compassionate")
 
-# Context-aware selection
+## Context-aware selection
 selector = ContextAwareSelector()
 state = ConversationState(...)
 glyph, metadata = selector.select(state, available_glyphs)
@@ -452,20 +452,20 @@ glyph, metadata = selector.select(state, available_glyphs)
 
 ```python
 
-# Full end-to-end with all features
+## Full end-to-end with all features
 orchestrator = RepairOrchestrator(user_id)
 preferences = PreferenceManager()
 clustering = GlyphClusteringEngine()
 temporal = TemporalAnalyzer()
 context = ContextAwareSelector()
 
-# Analyze input for rejections
+## Analyze input for rejections
 analysis = orchestrator.analyze_for_repair(user_input)
 
-# Get best glyph considering all factors
+## Get best glyph considering all factors
 glyph = orchestrator.get_best_glyph_for_state(emotional_state)
 
-# Record for learning
+## Record for learning
 orchestrator.record_response(response_text, context)
 preferences.record_glyph_use(user_id, glyph, tone, accepted)
 ```

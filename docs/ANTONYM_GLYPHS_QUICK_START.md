@@ -22,7 +22,7 @@ any code ✅ **Fast Indexed Lookup** by emotion, pairing, or name ✅ **Comprehe
 ```python
 
 
-# Find the opposite of comfort
+## Find the opposite of comfort
 antonym = find_antonym_by_emotion("comfort")
 
 ```text
@@ -34,7 +34,7 @@ antonym = find_antonym_by_emotion("comfort")
 ```python
 
 
-# Search for anything related to "joy"
+## Search for anything related to "joy"
 results = search_antonyms("joy") for r in results:
 
 ```text

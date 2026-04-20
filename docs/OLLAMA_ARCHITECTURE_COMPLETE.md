@@ -291,7 +291,7 @@ User types message
 ```python
 
 
-# Python code in response_handler.py
+## Python code in response_handler.py
 POST http://ollama:11434/api/generate
 {
     "model": "llama3",
@@ -327,7 +327,7 @@ overwhelm feeling when everything piles up...", "done": true, "context": [128, 2
 
 
 
-# After initialization
+## After initialization
 st.session_state = {
     # ... other state ...
 

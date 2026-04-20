@@ -217,7 +217,7 @@ Each component works independently and in concert:
 ```python
 
 
-# Phase 4: Add poetic consciousness
+## Phase 4: Add poetic consciousness
 tier3 = st.session_state.get("tier3_poetic_consciousness")
 if tier3:
     try:

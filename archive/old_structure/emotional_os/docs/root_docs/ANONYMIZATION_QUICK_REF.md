@@ -4,9 +4,9 @@
 
 **3-Layer Privacy Protection System**:
 
-1. **Gate-Based Masking** (Always active) - Raw data never stored, signals only
-2. **Intelligent Anonymization** (When enabled) - Names/dates/locations/medical → glyphs
-3. **Consent-Based De-Anonymization** (You control) - User chooses sharing preferences
+1. **Gate-Based Masking** (Always active) - Raw data never stored, signals only 2. **Intelligent
+Anonymization** (When enabled) - Names/dates/locations/medical → glyphs 3. **Consent-Based
+De-Anonymization** (You control) - User chooses sharing preferences
 
 ## Files Changed/Created
 
@@ -86,14 +86,11 @@ if consent:
 
 ### User Experience
 
-1. Type message in chat
-2. Get response
-3. **Consent widget appears:**
+1. Type message in chat 2. Get response 3. **Consent widget appears:**
    - Choose: "With my name" / "Anonymous" / "Private"
    - Choose: "Keep medical" / "Abstract" / "Remove"
    - Choose: "Private" / "Legacy archive" / "Research"
-4. Click ✅ Confirm (or Later/Change)
-5. Entry anonymized per preferences and logged
+4. Click ✅ Confirm (or Later/Change) 5. Entry anonymized per preferences and logged
 
 ## Key Glyphs
 

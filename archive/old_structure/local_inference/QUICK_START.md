@@ -263,11 +263,9 @@ User Input
 
 ## Next Steps
 
-1. **Integrate with Local LLM**: Hook `llama.cpp` or Ollama
-2. **Build Training Loop**: Use captured examples to fine-tune
-3. **Monitor Safety**: Track which gates/glyphs work best
-4. **Expand Glyphs**: Add domain-specific glyphs
-5. **User Studies**: Collect satisfaction feedback
+1. **Integrate with Local LLM**: Hook `llama.cpp` or Ollama 2. **Build Training Loop**: Use captured
+examples to fine-tune 3. **Monitor Safety**: Track which gates/glyphs work best 4. **Expand
+Glyphs**: Add domain-specific glyphs 5. **User Studies**: Collect satisfaction feedback
 
 ## Debugging
 

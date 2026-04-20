@@ -10,68 +10,70 @@ sacrifice, autonomy, and what friendship means in the face of collapse.
 ## Design & Twinship Backstory
 
 - **Designers**: The CoreLink system was designed by two prodigies—Velinor (23) and Saori (22). Both
-	were petulant, brilliant, and heralded as saviors of humanity by others; to them it was first and
-	foremost a game and a challenge for their overdeveloped brains. They shared an interest in fringe
-	retro culture and first bonded over Atari games during a field trip from Velhara Technical
-	Institute to the Museum of Prehistoric Technology.
+were petulant, brilliant, and heralded as saviors of humanity by others; to them it was first and
+foremost a game and a challenge for their overdeveloped brains. They shared an interest in fringe
+retro culture and first bonded over Atari games during a field trip from Velhara Technical Institute
+to the Museum of Prehistoric Technology.
 
 - **Motivation**: Building CoreLink began as play: the one great challenge that could finally
-	entertain them when everything else failed to. Their work was intellectually intoxicating and
-	intimately collaborative—creative sparring that forged a twinship rather than romance.
+entertain them when everything else failed to. Their work was intellectually intoxicating and
+intimately collaborative—creative sparring that forged a twinship rather than romance.
 
 - **Twinship**: Both had been misunderstood and bullied throughout their lives and found solace in
-	each other. They developed a bond that is as close as two people can get without it crossing into
-	physical sexual touch or attraction. Even when they disagreed about design or ethics, they found
-	mutual respect and an emotional refuge in one another.
+each other. They developed a bond that is as close as two people can get without it crossing into
+physical sexual touch or attraction. Even when they disagreed about design or ethics, they found
+mutual respect and an emotional refuge in one another.
 
 - **Secret Cipher & The Codex**: During downtime they created a private language — a cipher encoded
-	into glyphs only they could decode. The cipher can only be decoded via the codex device and only
-	when both architects consent to reveal it. Saori gave the player a codex early in the game as a
-	gesture of permission; because Velinor was incapacitated at the time, the device initially only
-	functions to activate nearby console nodes. As Velinor recovers, she can grant further consent,
-	allowing the codex to reveal deeper layers of their cipher.
+into glyphs only they could decode. The cipher can only be decoded via the codex device and only
+when both architects consent to reveal it. Saori gave the player a codex early in the game as a
+gesture of permission; because Velinor was incapacitated at the time, the device initially only
+functions to activate nearby console nodes. As Velinor recovers, she can grant further consent,
+allowing the codex to reveal deeper layers of their cipher.
 
 - **Nocturnal Tagging**: In the late hours during their never-ending coding sessions the two
-	would go out and digitally tag their cipher on buildings, rocks, and other surfaces throughout the
-	area. These tags were a private ritual—small acts of play and rebellion—anchoring the cipher in
-	the physical world. This explains why the player discovers incoherent glyphs in random places
-	across their journey: many are secret markers left by Velinor and Saori, waiting for the codex to
-	unlock them.
+would go out and digitally tag their cipher on buildings, rocks, and other surfaces throughout the
+area. These tags were a private ritual—small acts of play and rebellion—anchoring the cipher in the
+physical world. This explains why the player discovers incoherent glyphs in random places across
+their journey: many are secret markers left by Velinor and Saori, waiting for the codex to unlock
+them.
 
 - **Gameplay Implication**: Players will encounter incoherent symbols across the world. As the
-	player recovers Velinor's memory and emotional coherence, the codex gradually decodes those
-	symbols. Players can revisit locations at the end of the game to view fully decoded messages and
-	thus unlock the complete backstory — fragments are delivered on first playthroughs, while a
-	subsequent pass can reveal the entire narrative arc.
+player recovers Velinor's memory and emotional coherence, the codex gradually decodes those symbols.
+Players can revisit locations at the end of the game to view fully decoded messages and thus unlock
+the complete backstory — fragments are delivered on first playthroughs, while a subsequent pass can
+reveal the entire narrative arc.
 
 - **Authorship of Pre- and Post-Collapse Code**: Most pre-collapse system code was written jointly.
-	However, because Velinor became fractured during the collapse, the panic, shutdown choice, and
-	the immediate aftermath are recorded primarily in Saori's hand.
+However, because Velinor became fractured during the collapse, the panic, shutdown choice, and the
+immediate aftermath are recorded primarily in Saori's hand.
 
 ## Assets: Glyphs (archival note)
 
 - **Current Asset Direction**: Full-color glyph artwork (found in `velinor/glyph_images/full-color_glyphs/`)
-	has been archived to `velinor/glyph_images/archived_full-color_glyphs/` and should be considered
-	preserved outside the canonical gameplay set. Moving forward the canonical in-game glyph set is the simplified
+has been archived to `velinor/glyph_images/archived_full-color_glyphs/` and should be considered
+preserved outside the canonical gameplay set. Moving forward the canonical in-game glyph set is the
+simplified
 	`velinor/glyph_images/codex_glyphs/` collection. The codex images are designed for in-world
-	decoding and UI presentation; full-color glyphs are preserved for historical/reference purposes
-	only and should not be used as primary gameplay assets.
+decoding and UI presentation; full-color glyphs are preserved for historical/reference purposes only
+and should not be used as primary gameplay assets.
 
 - **Developer Action (recommended)**: Update game and web asset references to prefer
 	`velinor/glyph_images/codex_glyphs/`. The full-color glyphs have been moved to
 	`velinor/glyph_images/archived_full-color_glyphs/`. `Glyph_Organizer.json` was sanitized to
-	prefer `codex_glyphs` (backup saved as `velinor/markdowngameinstructions/glyphs/Glyph_Organizer.json.bak`).
-	If you want reversal or a separate PR that also updates any external deployments, I can prepare it.
+prefer `codex_glyphs` (backup saved as
+`velinor/markdowngameinstructions/glyphs/Glyph_Organizer.json.bak`). If you want reversal or a
+separate PR that also updates any external deployments, I can prepare it.
 
 ##
 
 	## Cipher Domains & Categories
 
-	The CoreLink cipher system appears across several domains and categories. Each cipher can be
-	fragmented in-world and gradually decoded via the codex. Below are the principal domains and
-	representative micro‑phrases to use as seed content for glyph generation and placement.
+The CoreLink cipher system appears across several domains and categories. Each cipher can be
+fragmented in-world and gradually decoded via the codex. Below are the principal domains and
+representative micro‑phrases to use as seed content for glyph generation and placement.
 
-	DOMAIN 1 — Pre-Collapse
+DOMAIN 1 — Pre-Collapse
 
 	- CATEGORY 1 — Velinor's Tags / Core Beliefs (Autonomy, Memory, Boundaries)
 		- “Memory belongs to the one who carries it.”
@@ -96,16 +98,16 @@ sacrifice, autonomy, and what friendship means in the face of collapse.
 		- “She laughed when I broke the emulator.”
 		- “We stayed up until dawn debugging nothing.”
 
-	DOMAIN 2 — Collapse Cascade / The Cataclysm
+DOMAIN 2 — Collapse Cascade / The Cataclysm
 
 	- These are the darkest, most fragmented ciphers — the ones Velinor hides. Use for late-game
-		discovery and very fragmented glyphs.
+discovery and very fragmented glyphs.
 		- “Too many hearts at once.”
 		- “The children were the first.”
 		- “The screams echoed through the logs.”
 		- “I felt the system die.”
 
-	DOMAIN 3 — Saori's Post-Collapse
+DOMAIN 3 — Saori's Post-Collapse
 
 	- CATEGORY 1 — The Fracture (Fear, Misunderstanding, Betrayal)
 		- “She kept saying no.”

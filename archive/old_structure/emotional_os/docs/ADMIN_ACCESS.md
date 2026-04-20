@@ -20,11 +20,10 @@
 
 ## Admin Portal Features
 
-✅ **Dashboard**: System overview, stats, recent users
-✅ **User Management**: View, moderate, export user accounts
-✅ **Conversation Moderation**: Review conversations, sentiment analysis, flagging
-✅ **System Settings**: Configuration, security, backup & recovery
-✅ **Admin Authentication**: Secure 8-hour sessions
+✅ **Dashboard**: System overview, stats, recent users ✅ **User Management**: View, moderate, export
+user accounts ✅ **Conversation Moderation**: Review conversations, sentiment analysis, flagging ✅
+**System Settings**: Configuration, security, backup & recovery ✅ **Admin Authentication**: Secure
+8-hour sessions
 
 ## Security Notes
 

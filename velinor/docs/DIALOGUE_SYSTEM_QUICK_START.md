@@ -19,18 +19,18 @@ core system.
 from velinor.engine.npc_manager import NPCManager, create_marketplace_npcs
 from velinor.engine.npc_dialogue import generate_dialogue
 
-# Initialize system
+## Initialize system
 manager = NPCManager()
 manager.add_npcs_batch(create_marketplace_npcs())
 
-# Get an NPC
+## Get an NPC
 sera = manager.get_npc("Sera")
 
-# Generate dialogue
+## Generate dialogue
 dialogue = generate_dialogue("Sera", sera.remnants, context="greeting")
 print(dialogue)
 
-# Output: "I see sprout in you.... like herbs, it blooms so softly."
+## Output: "I see sprout in you.... like herbs, it blooms so softly."
 ```
 
 
@@ -44,13 +44,13 @@ choices = generate_choices("Sera", sera.remnants, num_choices=3)
 for choice in choices:
     print(f"[{choice['trait']}] {choice['text']}")
 
-# Output:
+## Output:
 
-# [empathy] Listen deeply.
+## [empathy] Listen deeply.
 
-# [need] Ask for help.
+## [need] Ask for help.
 
-# [nuance] Perhaps find middle ground.
+## [nuance] Perhaps find middle ground.
 ```
 
 
@@ -62,22 +62,22 @@ from velinor.engine.npc_encounter import generate_encounter, print_encounter
 encounter = generate_encounter("Sera", sera.remnants, encounter_id=1, context="greeting")
 print_encounter(encounter, full_details=True)
 
-# Output:
+## Output: (2)
 
-# ======================================================================
+## ======================================================================
 
-# ENCOUNTER #1 - SERA
+## ENCOUNTER #1 - SERA
 
-# ======================================================================
+## ====================================================================== (2)
 
-# Sera turns to face you, curious.
+## Sera turns to face you, curious.
 
-# I see sprout in you.... like herbs, it blooms so softly.
+## I see sprout in you.... like herbs, it blooms so softly.
 
-# Your Choices:
-#   1. [EMPATHY] [########--] Listen deeply.
-#   2. [NEED] [########--] Ask for help.
-#   3. [NUANCE] [######----] Perhaps find middle ground.
+## Your Choices:
+##   1. [EMPATHY] [########--] Listen deeply.
+##   2. [NEED] [########--] Ask for help.
+##   3. [NUANCE] [######----] Perhaps find middle ground.
 ```
 
 
@@ -91,7 +91,7 @@ scene = generate_scene(npcs_dict, encounter_id=1, context="greeting")
 
 print_scene(scene, summary_only=True)
 
-# Output shows all 9 NPCs' reactions to player
+## Output shows all 9 NPCs' reactions to player
 ```
 
 ## 
@@ -213,17 +213,17 @@ class GameEngine:
 
         return scene
 
-# Usage in game loop:
+## Usage in game loop:
 
-# engine = GameEngine()
+## engine = GameEngine()
 
-# engine.player_encounters_npc("Sera", "greeting")
+## engine.player_encounters_npc("Sera", "greeting")
 
 # # Player picks choice
 
-# engine.player_chooses(0)  # Picks first choice (empathy)
+## engine.player_chooses(0)  # Picks first choice (empathy)
 
-# engine.player_encounters_npc("Sera", "alliance")  # Updated dialogue
+## engine.player_encounters_npc("Sera", "alliance")  # Updated dialogue
 ```
 
 ## 
@@ -235,7 +235,7 @@ class GameEngine:
 ```python
 from velinor.engine.npc_dialogue import LEXICONS
 
-# Add to existing NPC
+## Add to existing NPC
 LEXICONS["Sera"]["authority_high"] = ["guide", "lead", "inspire"]
 LEXICONS["Sera"]["authority_low"] = ["defer", "follow", "obey"]
 ```
@@ -266,7 +266,7 @@ ENCOUNTER_CONTEXTS["mystery"] = {
     ]
 }
 
-# Now use: generate_encounter("Sera", remnants, 1, "mystery")
+## Now use: generate_encounter("Sera", remnants, 1, "mystery")
 ```
 
 ## 
@@ -318,22 +318,22 @@ Your choices:
 npc = manager.get_npc("Sera")
 print(npc.to_dict())
 
-# Output:
+## Output: (3)
 
-# {
-#     'name': 'Sera',
-#     'remnants': {
-#         'resolve': 0.3,
-#         'empathy': 0.8,
-#         'memory': 0.5,
-#         'nuance': 0.5,
-#         'authority': 0.4,
-#         'need': 0.8,
-#         'trust': 0.6,
-#         'skepticism': 0.3
-#     }
+## {
+##     'name': 'Sera',
+##     'remnants': {
+##         'resolve': 0.3,
+##         'empathy': 0.8,
+##         'memory': 0.5,
+##         'nuance': 0.5,
+##         'authority': 0.4,
+##         'need': 0.8,
+##         'trust': 0.6,
+##         'skepticism': 0.3
+##     }
 
-# }
+## } (2)
 ```
 
 
@@ -360,10 +360,10 @@ print(f"Dominant trait: {dominant_trait} ({value})")
 
 ```bash
 
-# Run comprehensive test suite
+## Run comprehensive test suite
 python velinor/stories/test_dialogue_generation.py
 
-# Run individual test
+## Run individual test
 python -c "
 from velinor.stories.test_dialogue_generation import test_dialogue_variety
 test_dialogue_variety()
@@ -380,7 +380,7 @@ test_dialogue_variety()
 kaelen.adjust_trait("empathy", 0.3)  # Raises empathy
 kaelen.adjust_trait("trust", 0.2)    # Raises trust
 
-# Lexicon shifts from "scheme/trick" to "redeem/listen"
+## Lexicon shifts from "scheme/trick" to "redeem/listen"
 ```
 
 
@@ -390,7 +390,7 @@ kaelen.adjust_trait("trust", 0.2)    # Raises trust
 nima.adjust_trait("skepticism", 0.3)  # Already high
 nima.adjust_trait("trust", -0.2)       # Lower trust
 
-# Lexicon shifts to "shadow/hidden truth"
+## Lexicon shifts to "shadow/hidden truth"
 ```
 
 
@@ -400,7 +400,7 @@ nima.adjust_trait("trust", -0.2)       # Lower trust
 sera.adjust_trait("resolve", 0.3)   # Raise resolve
 sera.adjust_trait("authority", 0.2) # Raise authority
 
-# Changes dominant trait → different lexicon selection
+## Changes dominant trait → different lexicon selection
 ```
 
 ## 

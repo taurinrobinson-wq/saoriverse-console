@@ -157,9 +157,8 @@ result = model.generate("Rewrite this civilly: We strongly object...")
 - **Deployment**: User machines or small cloud VMs.
 
 **Setup:**
-1. Switch from GPT4All to KoboldCPP CLI.
-2. Expose API on `localhost:5001`.
-3. FastAPI calls KoboldCPP endpoint for transformations.
+1. Switch from GPT4All to KoboldCPP CLI. 2. Expose API on `localhost:5001`. 3. FastAPI calls
+KoboldCPP endpoint for transformations.
 
 ---
 
@@ -179,12 +178,12 @@ result = model.generate("Rewrite this civilly: We strongly object...")
 
 ### Current State (Already Working)
 ```python
-# Analysis layer (ready)
+## Analysis layer (ready)
 from DraftShift import core
 from DraftShift.tone_signal_parser import create_tone_signal_parser
 
 analysis = core.detect_tone("Your correspondence here")
-# Returns: tone, confidence, signals, emotions
+## Returns: tone, confidence, signals, emotions
 ```
 
 ### Phase 1 Addition: LLM Integration
@@ -192,13 +191,13 @@ analysis = core.detect_tone("Your correspondence here")
 from gpt4all import GPT4All
 from DraftShift import core
 
-# Load analysis (existing)
+## Load analysis (existing)
 analysis = core.detect_tone(text)
 
-# Load LLM (new)
+## Load LLM (new)
 llm = GPT4All("mistral-7b-instruct-v0.1.Q4_0.gguf", device='cpu')
 
-# Transform if civility score < threshold
+## Transform if civility score < threshold
 if analysis['civility_score'] < 70:
     prompt = f"""Rewrite the following legal correspondence to be more civil 
     while maintaining assertiveness. Keep the core message but soften aggressive phrasing.
@@ -213,7 +212,7 @@ if analysis['civility_score'] < 70:
 
 ### API Integration (Phase 2)
 ```python
-# FastAPI endpoint that calls KoboldCPP
+## FastAPI endpoint that calls KoboldCPP
 @app.post("/analyze")
 def analyze_draft(request: DraftRequest):
     # Existing analysis
@@ -244,10 +243,10 @@ def analyze_draft(request: DraftRequest):
 
 ### Installation
 ```bash
-# 1. Install Python package
+## 1. Install Python package
 pip install gpt4all streamlit
 
-# 2. Download model (will auto-download on first use, or manually)
+## 2. Download model (will auto-download on first use, or manually)
 python -c "from gpt4all import GPT4All; GPT4All('mistral-7b-instruct-v0.1.Q4_0.gguf')"
 ```
 
@@ -289,10 +288,9 @@ if st.button("Transform"):
 - **Scalability**: KoboldCPP handles higher concurrency.
 
 ### How to Migrate
-1. **Phase 1**: Use GPT4All in Streamlit (testing phase).
-2. **Phase 2 Start**: Install KoboldCPP; start it as a background service.
-3. **Switch API Calls**: Change from `GPT4All().generate()` to HTTP POST to KoboldCPP endpoint.
-4. **No UI Changes**: Frontend remains the same.
+1. **Phase 1**: Use GPT4All in Streamlit (testing phase). 2. **Phase 2 Start**: Install KoboldCPP;
+start it as a background service. 3. **Switch API Calls**: Change from `GPT4All().generate()` to
+HTTP POST to KoboldCPP endpoint. 4. **No UI Changes**: Frontend remains the same.
 
 ### Code Before (GPT4All)
 ```python
@@ -337,11 +335,12 @@ result = response.json()['results'][0]['text']
 
 ## 🎓 Recommended Reading
 
-1. **GGUF Format**: https://github.com/ggerganov/ggml/blob/master/gguf.md
-2. **Mistral 7B Instruct**: https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2
-3. **Quantization Techniques**: https://huggingface.co/docs/transformers/quantization
-4. **KoboldCPP Docs**: https://github.com/LostRuins/koboldcpp
+1. **GGUF Format**: https://github.com/ggerganov/ggml/blob/master/gguf.md 2. **Mistral 7B
+Instruct**: https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2 3. **Quantization
+Techniques**: https://huggingface.co/docs/transformers/quantization 4. **KoboldCPP Docs**:
+https://github.com/LostRuins/koboldcpp
 
 ---
 
-This stack provides **maximum flexibility**, **zero cloud costs**, and **full privacy control**—exactly what DraftShift needs to serve attorneys ethically and effectively.
+This stack provides **maximum flexibility**, **zero cloud costs**, and **full privacy
+control**—exactly what DraftShift needs to serve attorneys ethically and effectively.

@@ -1,6 +1,7 @@
 # Privacy Layer Database Schema
 
-This document specifies the database tables needed for the encryption + retention + dream engine model.
+This document specifies the database tables needed for the encryption + retention + dream engine
+model.
 
 ## Table: `conversations_encrypted`
 
@@ -228,10 +229,8 @@ user_retention_preferences (retention settings, one per user)
 
 ### Phase 1: Add New Tables
 
-1. Create `conversations_encrypted` table
-2. Create `dream_summaries` table
-3. Create `user_retention_preferences` table
-4. Create `audit_log_privacy` table
+1. Create `conversations_encrypted` table 2. Create `dream_summaries` table 3. Create
+`user_retention_preferences` table 4. Create `audit_log_privacy` table
 
 ### Phase 2: Initialize User Preferences
 
@@ -247,22 +246,19 @@ WHERE user_id_hashed NOT IN (SELECT user_id_hashed FROM user_retention_preferenc
 
 For each existing conversation:
 
-1. Decrypt current storage (if any)
-2. Re-encrypt with `EncryptionManager.encrypt_conversation()`
-3. Insert into `conversations_encrypted` with calculated `expires_at`
-4. Delete from old table after verification
+1. Decrypt current storage (if any) 2. Re-encrypt with `EncryptionManager.encrypt_conversation()` 3.
+Insert into `conversations_encrypted` with calculated `expires_at` 4. Delete from old table after
+verification
 
 ### Phase 4: Enable Dream Engine
 
-1. Start daily summary generation at end-of-day
-2. Store summaries in `dream_summaries`
-3. Use summaries for context instead of loading all conversations
+1. Start daily summary generation at end-of-day 2. Store summaries in `dream_summaries` 3. Use
+summaries for context instead of loading all conversations
 
 ### Phase 5: Clean Up Old Storage
 
-1. Once all conversations migrated and verified
-2. Drop old conversation storage table
-3. Keep audit logs forever for compliance
+1. Once all conversations migrated and verified 2. Drop old conversation storage table 3. Keep audit
+logs forever for compliance
 
 ##
 

@@ -2,7 +2,9 @@
 
 ## Overview
 
-The Corelink system is the **emotional physics engine** of Velinor. It's not just lore—it's a mechanical substrate that explains why the world behaves as it does, why NPCs are disoriented, why glyphs matter, and why the player (and only the player) can restore coherence.
+The Corelink system is the **emotional physics engine** of Velinor. It's not just lore—it's a
+mechanical substrate that explains why the world behaves as it does, why NPCs are disoriented, why
+glyphs matter, and why the player (and only the player) can restore coherence.
 
 ---
 
@@ -15,7 +17,9 @@ The Corelink system is the **emotional physics engine** of Velinor. It's not jus
 - **Function**: Smoothed emotional turbulence across the population, creating collective emotional homeostasis
 - **Effect**: Velhara was stable, coherent, orderly—a society in psychological equilibrium
 
-This wasn't oppressive in the sense of explicit control. It was more like **emotional stereo speakers balanced at a comfortable volume**—you didn't notice it, and neither did anyone else. The system was just... how things worked.
+This wasn't oppressive in the sense of explicit control. It was more like **emotional stereo
+speakers balanced at a comfortable volume**—you didn't notice it, and neither did anyone else. The
+system was just... how things worked.
 
 ---
 
@@ -38,14 +42,16 @@ This is why:
 
 ## The Player: Why They're Different
 
-The player was **too young to receive an implant** when the system collapsed. This makes them unique:
+The player was **too young to receive an implant** when the system collapsed. This makes them
+unique:
 
 - **Unimplanted** = no direct neurological link to Corelink broadcasts
 - **Less affected** = can approach nodes without the same cognitive overload implanted people experience
 - **Natural investigator** = they're the only one who can enter chambers, experience the distortions, and survive them
 - **Restoration agent** = as they clear chambers and restore coherence, the system begins broadcasting strong enough that *even non-implanted people* feel it
 
-The player is not a hero. They're a **necessary accident**—the only person positioned to fix a system they never participated in.
+The player is not a hero. They're a **necessary accident**—the only person positioned to fix a
+system they never participated in.
 
 ---
 
@@ -70,29 +76,34 @@ The player is not a hero. They're a **necessary accident**—the only person pos
 
 As coherence increases:
 
-1. **Nodes stabilize** — broadcast becomes predictable instead of chaotic
-2. **NPCs clarify** — their implants can now receive signals, creating two-way communication again
-3. **Emotional distortions decrease** — the system regulates itself
-4. **Chambers become legible** — what was hostile confusion becomes understandable emotional truth
-5. **The player feels more** — as the system strengthens, even non-implanted people begin to feel its broadcast
+1. **Nodes stabilize** — broadcast becomes predictable instead of chaotic 2. **NPCs clarify** —
+their implants can now receive signals, creating two-way communication again 3. **Emotional
+distortions decrease** — the system regulates itself 4. **Chambers become legible** — what was
+hostile confusion becomes understandable emotional truth 5. **The player feels more** — as the
+system strengthens, even non-implanted people begin to feel its broadcast
 
 ---
 
 ## Nodes: The Seven Emotional Domains
 
-Each node broadcasts the emotional signature of its domain. When isolated and unregulated, these become **distortion fields**—chambers filled with coherent hallucinations that reflect the domain's emotional nature.
+Each node broadcasts the emotional signature of its domain. When isolated and unregulated, these
+become **distortion fields**—chambers filled with coherent hallucinations that reflect the domain's
+emotional nature.
 
 The seven domains are:
 
-1. **Covenant** — Connection, bonding, interdependence → Distortion: Overwhelming sense of separation and longing
-2. **Resolve** — Determination, will, agency → Distortion: Paralysis, confusion about choice
-3. **Accord** — Harmony, agreement, synchronization → Distortion: Dissonance, contradiction, conflict
-4. **Verity** — Truth, clarity, knowing → Distortion: Lies, doubt, uncertainty
-5. **Prism** — Perspective, understanding, interpretation → Distortion: Fragmented reality, multiple contradictory perceptions
-6. **Anchor** — Stability, grounding, presence → Distortion: Groundlessness, drift, dissociation
-7. **Ascendant** — Growth, transformation, becoming → Distortion: Stagnation, decay, entropy
+1. **Covenant** — Connection, bonding, interdependence → Distortion: Overwhelming sense of
+separation and longing 2. **Resolve** — Determination, will, agency → Distortion: Paralysis,
+confusion about choice 3. **Accord** — Harmony, agreement, synchronization → Distortion: Dissonance,
+contradiction, conflict 4. **Verity** — Truth, clarity, knowing → Distortion: Lies, doubt,
+uncertainty 5. **Prism** — Perspective, understanding, interpretation → Distortion: Fragmented
+reality, multiple contradictory perceptions 6. **Anchor** — Stability, grounding, presence →
+Distortion: Groundlessness, drift, dissociation 7. **Ascendant** — Growth, transformation, becoming
+→ Distortion: Stagnation, decay, entropy
 
-Each domain's node is a separate chamber, and each chamber manifests a unique hallucination—a "Triglyph boss" or coherent distortion-entity that must be confronted and cleared to restore that domain's emotional signal.
+Each domain's node is a separate chamber, and each chamber manifests a unique hallucination—a
+"Triglyph boss" or coherent distortion-entity that must be confronted and cleared to restore that
+domain's emotional signal.
 
 ---
 
@@ -100,13 +111,14 @@ Each domain's node is a separate chamber, and each chamber manifests a unique ha
 
 When the player enters a chamber:
 
-1. **They cross the node's broadcast threshold** — the emotional signal becomes overwhelming
-2. **Their perception shifts** — the distortion field creates a shared hallucination
-3. **The Triglyph manifestation appears** — a coherent entity born from the node's emotional incoherence
-4. **Combat/confrontation occurs** — not physical violence, but emotional resolution (mechanics TBD)
-5. **The glyph is discovered** — a symbol of the domain, which when activated restores that node
-6. **Coherence increases by 1** — the domain's signal becomes bidirectional again
-7. **The chamber transforms** — emotional distortion decreases, the hallucination stabilizes into something almost peaceful
+1. **They cross the node's broadcast threshold** — the emotional signal becomes overwhelming 2.
+**Their perception shifts** — the distortion field creates a shared hallucination 3. **The Triglyph
+manifestation appears** — a coherent entity born from the node's emotional incoherence 4.
+**Combat/confrontation occurs** — not physical violence, but emotional resolution (mechanics TBD) 5.
+**The glyph is discovered** — a symbol of the domain, which when activated restores that node 6.
+**Coherence increases by 1** — the domain's signal becomes bidirectional again 7. **The chamber
+transforms** — emotional distortion decreases, the hallucination stabilizes into something almost
+peaceful
 
 ---
 
@@ -131,12 +143,14 @@ The intensity depends on:
 
 As the player clears glyphs and coherence increases:
 
-1. **Early chambers** feel alien and hostile—pure distortion
-2. **Mid-game chambers** become navigable—patterns emerge, emotional logic becomes clearer
-3. **Late chambers** feel almost introspective—the distortions become recognizable emotional states
-4. **Final chamber** (the Endgame Chamber) is not a fight—it's a conversation with the Corelink system itself, now restored enough to communicate
+1. **Early chambers** feel alien and hostile—pure distortion 2. **Mid-game chambers** become
+navigable—patterns emerge, emotional logic becomes clearer 3. **Late chambers** feel almost
+introspective—the distortions become recognizable emotional states 4. **Final chamber** (the Endgame
+Chamber) is not a fight—it's a conversation with the Corelink system itself, now restored enough to
+communicate
 
-By the endgame, the system isn't the enemy. It's a living infrastructure that broke and is slowly remembering itself through the player's actions.
+By the endgame, the system isn't the enemy. It's a living infrastructure that broke and is slowly
+remembering itself through the player's actions.
 
 ---
 
@@ -150,4 +164,5 @@ The Corelink system connects to:
 - **Dialogue**: NPC behavior changes based on coherence level
 - **Mechanics**: Proximity detection, signal strength, hallucination rendering
 
-Every system in the game should funnel back to: "How does this reflect the emotional state of Corelink at this coherence level?"
+Every system in the game should funnel back to: "How does this reflect the emotional state of
+Corelink at this coherence level?"

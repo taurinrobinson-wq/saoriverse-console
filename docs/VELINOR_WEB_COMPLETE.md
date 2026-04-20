@@ -73,7 +73,7 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
 ```bash
 
-# From repo root
+## From repo root
 cp frontend_lib_api.ts velinor-web/lib/api.ts
 ```text
 
@@ -91,10 +91,10 @@ cp frontend_lib_api.ts velinor-web/lib/api.ts
 ```bash
 
 
-# Terminal 1
+## Terminal 1
 python velinor_api.py
 
-# Terminal 2
+## Terminal 2
 cd velinor-web && npm run dev
 
 ```text
@@ -175,7 +175,7 @@ saoriverse-console/
 
 ```python
 
-# Streamlit can't layer properly
+## Streamlit can't layer properly
 st.image(splash_img)  # Shows image
 st.button("Start")    # Shows below, not on top
 
@@ -267,21 +267,21 @@ START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
 
 
 
-# Create Next.js project (one time)
+## Create Next.js project (one time)
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
-# Install dependencies (one time)
+## Install dependencies (one time)
 cd velinor-web && npm install axios zustand
 
-# Development (every session)
+## Development (every session)
 
-# Terminal 1:
+## Terminal 1:
 python velinor_api.py
 
-# Terminal 2:
+## Terminal 2:
 cd velinor-web && npm run dev
 
-# Deployment (when ready)
+## Deployment (when ready)
 git add . git commit -m "your message" git push origin main
 
 ```

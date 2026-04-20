@@ -358,7 +358,7 @@ most_helpful_poetry TEXT, effectiveness_score FLOAT
 ```python
 
 
-# Tier 1 - Built-in, already working
+## Tier 1 - Built-in, already working
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 sia = SentimentIntensityAnalyzer()
@@ -371,7 +371,7 @@ sia = SentimentIntensityAnalyzer()
 
 ```python
 
-# NRC Emotion Lexicon lookup
+## NRC Emotion Lexicon lookup
 from parser.nrc_lexicon_loader import nrc
 
 emotions = nrc.analyze_text(text)  # 14,182 word database
@@ -385,7 +385,7 @@ emotions = nrc.analyze_text(text)  # 14,182 word database
 ```python
 
 
-# Entity extraction + semantic relationships
+## Entity extraction + semantic relationships
 import spacy
 
 nlp = spacy.load("en_core_web_sm") doc = nlp(text)
@@ -400,17 +400,17 @@ entities = [(ent.text, ent.label_) for ent in doc.ents]
 
 ```python
 
-# Custom signal parser
+## Custom signal parser
 from parser.signal_parser import parse_input
 
 signals = parse_input(text)
 
-# Result:
+## Result:
 
-# {
-#   'signals': ['γ', 'γ'],
-#   'gates': [4, 5, 9],
-#   'glyphs': ['Recursive Ache', 'Spiral Ache']
+## {
+##   'signals': ['γ', 'γ'],
+##   'gates': [4, 5, 9],
+##   'glyphs': ['Recursive Ache', 'Spiral Ache']
 
 ```text
 
@@ -421,7 +421,7 @@ signals = parse_input(text)
 ```python
 
 
-# Fetch poetry, metaphors, rituals
+## Fetch poetry, metaphors, rituals
 glyph_id = fetch_glyph_id("Recursive Ache") poetry = fetch_glyph_poetry(glyph_id) metaphors =
 fetch_glyph_metaphors(glyph_id)
 
@@ -433,7 +433,7 @@ fetch_glyph_metaphors(glyph_id)
 
 ```python
 
-# Template-based response using all enrichment
+## Template-based response using all enrichment
 response = generate_response( glyph_name="Recursive Ache", poetry=poetry, metaphors=metaphors,
 rituals=rituals, user_message=text
 ```text
@@ -549,19 +549,19 @@ saoriverse-console/
 
 ```bash
 
-# Clone repo
+## Clone repo
 git clone https://github.com/user/firstperson.git
 
-# Install
+## Install
 pip install -r requirements.txt python -m spacy download en_core_web_sm
 
-# Download NRC (one-time, 15MB)
+## Download NRC (one-time, 15MB)
 
-# From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+## From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
-# Place in: data/lexicons/nrc_emotion_lexicon.txt
+## Place in: data/lexicons/nrc_emotion_lexicon.txt
 
-# Run
+## Run
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 ```text
@@ -573,17 +573,17 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 ```bash
 
 
-# Setup dev environment
+## Setup dev environment
 python -m venv venv source venv/bin/activate pip install -r requirements.txt pip install -r
 requirements-dev.txt
 
-# Download poetry (optional for enrichment)
+## Download poetry (optional for enrichment)
 python data_preparation/poetry_downloader.py
 
-# Run tests
+## Run tests
 pytest tests/
 
-# Run locally
+## Run locally
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=debug
 
 ```

@@ -4,9 +4,9 @@
 
 You've built **three layers** of glyph content:
 
-1. **75 Base Glyphs** — Story-driven, NPC-specific, domain-categorized
-2. **36 Intermediate Fragments** — Progression steps, ability gates, mechanical teaching
-3. **7 Transcendence Glyphs** — Boss encounters, emotional convergence, endgame
+1. **75 Base Glyphs** — Story-driven, NPC-specific, domain-categorized 2. **36 Intermediate
+Fragments** — Progression steps, ability gates, mechanical teaching 3. **7 Transcendence Glyphs** —
+Boss encounters, emotional convergence, endgame
 
 I've wired these into **one unified cipher system** that makes all three tiers playable.
 

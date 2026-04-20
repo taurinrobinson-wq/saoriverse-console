@@ -178,7 +178,7 @@ def render_multimodal_sidebar():
 ```python
 
 
-# In your message handling loop, add:
+## In your message handling loop, add:
 
 multimodal_data = render_multimodal_sidebar()
 
@@ -299,10 +299,10 @@ User: "I'm doing fine" + Voice sample + Facial snap
 ```python
 
 
-# Audio extraction (use librosa or SpeechRecognition)
+## Audio extraction (use librosa or SpeechRecognition)
 extract_acoustic_features(audio_bytes) → AcousticFeatures
 
-# Facial landmark extraction (use MediaPipe)
+## Facial landmark extraction (use MediaPipe)
 
 ```text
 ```text

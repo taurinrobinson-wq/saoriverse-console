@@ -243,20 +243,20 @@ Integration points:
 
 from spoken_interface.voice_ui import integrate_voice_ui_into_chat
 
-# In main_v2.py or deployment UI:
+## In main_v2.py or deployment UI:
 voice_config = integrate_voice_ui_into_chat() components = voice_config["components"]
 
-# Render voice input in sidebar
+## Render voice input in sidebar
 transcription = voice_config["render_input"]()
 
-# Process transcription as user message
+## Process transcription as user message
 if transcription: user_message = transcription
     # ... existing chat flow ...
 
-# Generate glyph-based response
+## Generate glyph-based response
 glyph_signals = generate_response_with_glyphs(response_text)
 
-# Render voice output with prosody
+## Render voice output with prosody
 
 ```text
 ```text

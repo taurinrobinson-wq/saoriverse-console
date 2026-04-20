@@ -258,11 +258,11 @@ Instead: Generic phrases
 
 **What Should Happen:**
 
-1. ✅ Signal detection: overwhelm, exhaustion, past strength, doubt (4+ signals)
-2. ✅ Gate activation: stress gate, resilience gate, uncertainty gate
-3. ✅ Glyph fetch: retrieve 3-5 matching glyphs for multi-glyph composition
-4. ✅ Response: weave together acknowledgment of exhaustion + recognition of strength + gentle encouragement
-5. ✅ Tone: urgent but grounded, acknowledging finitude (you ARE tired, this IS hard)
+1. ✅ Signal detection: overwhelm, exhaustion, past strength, doubt (4+ signals) 2. ✅ Gate
+activation: stress gate, resilience gate, uncertainty gate 3. ✅ Glyph fetch: retrieve 3-5 matching
+glyphs for multi-glyph composition 4. ✅ Response: weave together acknowledgment of exhaustion +
+recognition of strength + gentle encouragement 5. ✅ Tone: urgent but grounded, acknowledging
+finitude (you ARE tired, this IS hard)
 
 **What Actually Happened:**
 
@@ -277,9 +277,8 @@ Instead: Generic phrases
 
 **What Should Happen (Mortality Framework):**
 
-1. ✅ Detect death/ending language: "ending," "closing chapter," "grief"
-2. ✅ Activate mortality framework
-3. ✅ Response should include:
+1. ✅ Detect death/ending language: "ending," "closing chapter," "grief" 2. ✅ Activate mortality
+framework 3. ✅ Response should include:
    - Acknowledgment of loss (not optimism)
    - Recognition of time-boundedness (this chapter IS ending)
    - Validation of grief (not "it'll be okay")
@@ -413,14 +412,11 @@ Responses suggest:
 
 When user affirms ("that really helped"), system should:
 
-1. Detect affirmation signal
-2. Log to `emotional_os/feedback/affirmed_flows.jsonl`
-3. Extract:
+1. Detect affirmation signal 2. Log to `emotional_os/feedback/affirmed_flows.jsonl` 3. Extract:
    - Input message
    - Generated response
    - Triggered signals + glyphs
    - Humanlike score (0.65+)
-4. Use in reward model training
-5. Strengthen similar flows in future
+4. Use in reward model training 5. Strengthen similar flows in future
 
 **Current Status:** Not happening - need to wire this in.

@@ -35,7 +35,7 @@ self-hosted-runner:
     - windows-latest-xl
     - linux-multi-gpu
 
-# Configuration variables in array of strings defined in your repository or organization
+## Configuration variables in array of strings defined in your repository or organization
 config-variables:
   - DEFAULT_RUNNER
   - JOB_NAME

@@ -107,13 +107,13 @@ tests/test_tier1_foundation.py::TestTier1ComponentIntegration::test_sanctuary_av
 ```python
 
 
-# 1. Add import at top
+## 1. Add import at top
 from src.emotional_os.tier1_foundation import Tier1Foundation
 
-# 2. In __init__, add
+## 2. In __init__, add
 self.tier1 = Tier1Foundation(conversation_memory=session.get("memory"))
 
-# 3. In response generation pipeline, after base response:
+## 3. In response generation pipeline, after base response:
 enhanced_response, perf_metrics = self.tier1.process_response( user_input=user_message,
 base_response=generated_response, context={"user_id": user_id, "turn_count": turn_count} )
 
@@ -132,12 +132,12 @@ base_response=generated_response, context={"user_id": user_id, "turn_count": tur
 
 
 
-# In session initialization:
+## In session initialization:
 if "tier1_foundation" not in st.session_state: tier1 = Tier1Foundation(
 conversation_memory=st.session_state.get("conversation_memory") ) st.session_state.tier1_foundation
 = tier1
 
-# In chat loop:
+## In chat loop:
 
 ```text
 ```
@@ -204,24 +204,24 @@ Time-of-day and conversation-phase aware
 
 **Starting when:** Tier 2 validated (end of week 2)
 
-### What's New
+### What's New (2)
 
 - **Poetic:** Multiple voices, layered meanings
 - **Saori:** Mirror/edge/genome architecture
 - **Tension:** Surprise, challenge, creative subversion
 
-### Components to Add
+### Components to Add (2)
 
 1. **PoeticConsciousness** - Multi-layered responses 2. **SaoriLayer** - Advanced emotional
 framework 3. **GenerativeTension** - Managed surprise and growth
 
-### Expected Performance Impact
+### Expected Performance Impact (2)
 
 - Tier 1+2: ~60ms
 - Tier 3: +20-30ms (depth processing)
 - **New Total: ~85-90ms** (10-15% under budget)
 
-### Files to Create
+### Files to Create (2)
 
 - `src/emotional_os/tier3_depth.py` (~300 lines)
 - `tests/test_tier3_depth.py` (~200 lines)
@@ -232,13 +232,13 @@ framework 3. **GenerativeTension** - Managed surprise and growth
 
 **Starting when:** All tiers stable and integrated
 
-### What's New
+### What's New (3)
 
 - **Temporal Memory:** Cross-session emotional state
 - **Dream Engine:** Pattern synthesis and integration
 - **Long-term Learning:** Multi-week conversation themes
 
-### Expected Performance Impact
+### Expected Performance Impact (3)
 
 - Tier 1+2+3: ~85-90ms
 - Tier 4: +5-10ms (async processing possible)

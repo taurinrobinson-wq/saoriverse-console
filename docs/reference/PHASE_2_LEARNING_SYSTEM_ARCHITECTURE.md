@@ -204,13 +204,13 @@ emotional_territory (coverage mapping)
 ```python
 
 
-# User A's view
+## User A's view
 get_glyphs_for_user(user_hash="user_001", emotional_signal="β", gates=["Gate 4"]) ↓ Query returns
 glyphs ordered by: 1. User A's personal adoption history (what A has used before) 2. Consensus
 adoption (what most users adopted) 3. Quality score (how well it works) ↓ Result: Personalized
 ordering, but all glyphs from shared DB
 
-# User B's view
+## User B's view
 get_glyphs_for_user(user_hash="user_002", emotional_signal="β", gates=["Gate 4"]) ↓ Query returns
 SAME glyphs, but ordered by: 1. User B's personal adoption history (different from A) 2. Consensus
 adoption (same as A, global) 3. Quality score (same as A)
@@ -343,26 +343,26 @@ Over time, system learns which intensity levels match which glyphs
 ```python
 
 
-# When a user sees a new glyph response:
+## When a user sees a new glyph response:
 
-# 1. Log to glyph_versions (creates version 1)
+## 1. Log to glyph_versions (creates version 1)
 CREATE: glyph_versions glyph_name = "Fractured Identity" version_num = 1 description = "The tension
 of performing vs. being..." emotional_signal = "β" gates = ["Gate 4", "Gate 5"] created_by =
 "user_001_hash" is_active = 1
 
-# 2. Initialize consensus
+## 2. Initialize consensus
 INSERT INTO glyph_consensus glyph_name = "Fractured Identity" total_users_adopted = 1
 positive_feedback_count = 0 consensus_strength = 0.0
 
-# 3. Record this user's adoption
+## 3. Record this user's adoption
 INSERT INTO user_glyph_preferences user_hash = "user_001_hash" glyph_name = "Fractured Identity"
 usage_count = 1 rating = 1 (implicit positive from engagement)
 
-# 4. Log usage pattern
+## 4. Log usage pattern
 INSERT INTO glyph_usage_log glyph_name = "Fractured Identity" user_hash = "user_001_hash" input_text
 = "I feel caught between..." relevance_score = 0.9
 
-# 5. Update coverage
+## 5. Update coverage
 UPDATE emotional_territory SET primary_glyphs = [..., "Fractured Identity"]
 
 ```text
@@ -376,16 +376,16 @@ Later, when User 002 experiences similar emotion:
 
 
 
-# Query returns to User 002:
+## Query returns to User 002:
 get_glyphs_for_user("user_002_hash", signal="β", gates=["Gate 4"]) → Returns ["Fractured Identity",
 "Containment", "Still Recognition"] → Ordered by: [0 (User 002 never used), 1 (1 user adopted),
 strong]
 
-# User 002 might use it too:
+## User 002 might use it too:
 record_glyph_adoption("user_002_hash", "Fractured Identity", rating=1) → adoption_count = 2 →
 consensus_strength increases
 
-# Eventually, after 5+ users adopt + positive ratings:
+## Eventually, after 5+ users adopt + positive ratings:
 glyph gets promoted to production glyph_lexicon promote_candidate_to_production("Fractured
 Identity") → Moves from candidates to core glyphs
 

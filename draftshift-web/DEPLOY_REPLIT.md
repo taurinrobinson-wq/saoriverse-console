@@ -2,7 +2,8 @@
 
 ## Overview
 
-Deploy DraftShift Web UI to Replit for free hosting at `https://draftshift.replit.dev` (or your custom subdomain).
+Deploy DraftShift Web UI to Replit for free hosting at `https://draftshift.replit.dev` (or your
+custom subdomain).
 
 ## Prerequisites
 
@@ -14,11 +15,8 @@ Deploy DraftShift Web UI to Replit for free hosting at `https://draftshift.repli
 
 ### Step 1: Create Replit Project
 
-1. Go to [replit.com](https://replit.com)
-2. Click "Create" → "Import from GitHub"
-3. Paste your GitHub repository URL
-4. Click "Import"
-5. Replit clones your repo and auto-detects environment
+1. Go to [replit.com](https://replit.com) 2. Click "Create" → "Import from GitHub" 3. Paste your
+GitHub repository URL 4. Click "Import" 5. Replit clones your repo and auto-detects environment
 
 ### Step 2: Verify Configuration Files
 
@@ -46,10 +44,10 @@ Both files should exist in `draftshift-web/` directory.
 Replit should auto-install, but if needed, click Shell and run:
 
 ```bash
-# Install Node dependencies
+## Install Node dependencies
 npm install
 
-# Install Python dependencies
+## Install Python dependencies
 pip install -r requirements.txt
 pip install -r ../requirements-backend.txt
 ```
@@ -69,7 +67,7 @@ This creates `draftshift-web/dist/` with production-optimized files.
 If DraftShift engine needs special configuration, create `.env`:
 
 ```bash
-# In Replit Shell
+## In Replit Shell
 echo "DEBUG=false" > .env
 echo "LOG_LEVEL=info" >> .env
 ```
@@ -166,7 +164,7 @@ pip install -e ../draftshift
 
 Option B: Ensure PYTHONPATH includes parent directory
 ```bash
-# Add to api.py at top:
+## Add to api.py at top:
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -217,13 +215,12 @@ app.add_middleware(
 
 View application logs in Replit:
 
-1. Click "Tools" → "Shell"
-2. View logs:
+1. Click "Tools" → "Shell" 2. View logs:
 ```bash
-# Recent logs
+## Recent logs
 tail -f .replit.log
 
-# Or run app in foreground
+## Or run app in foreground
 python -m uvicorn api:app --host 0.0.0.0 --port 8000
 ```
 
@@ -259,10 +256,9 @@ pip install -r requirements.txt
 
 To use custom domain instead of `replit.dev`:
 
-1. Go to Replit project → "Tools" → "Domain"
-2. Enter custom domain (e.g., `draftshift.yourdomain.com`)
-3. Update DNS records per Replit instructions
-4. SSL certificate auto-provisioned
+1. Go to Replit project → "Tools" → "Domain" 2. Enter custom domain (e.g.,
+`draftshift.yourdomain.com`) 3. Update DNS records per Replit instructions 4. SSL certificate
+auto-provisioned
 
 ## Security Considerations
 

@@ -261,15 +261,15 @@ OVERALL STATUS: 🟢 PRODUCTION READY
 
 ```bash
 
-# 1. Verify current state
+## 1. Verify current state
 cd /workspaces/saoriverse-console
 git log --oneline -5          # See latest commits
 git status                     # Should be clean
 
-# 2. Run full test suite
+## 2. Run full test suite
 python -m pytest emotional_os/core/firstperson/test_*.py -q
 
-# 3. Check deployment readiness
+## 3. Check deployment readiness
 cat docs/FIRSTPERSON_DEPLOYMENT_READY.md | head -100
 ```
 
@@ -281,7 +281,7 @@ cat docs/FIRSTPERSON_DEPLOYMENT_READY.md | head -100
 ```bash
 ./deploy.sh staging        # 1. Deploy to staging
 
-# Monitor for 24 hours...
+## Monitor for 24 hours...
 ./deploy.sh production     # 2. Deploy to production (after validation)
 ```
 
@@ -290,15 +290,15 @@ cat docs/FIRSTPERSON_DEPLOYMENT_READY.md | head -100
 
 ```bash
 
-# Phase 3.1: Memory Integration
+## Phase 3.1: Memory Integration
 
-# Start with emotional profile persistence
+## Start with emotional profile persistence
 
-# Build on existing memory_manager.py
+## Build on existing memory_manager.py
 
 git checkout -b feature/phase-3-1-memory-integration
 
-# Implement long-term profiles, session coherence, preference evolution
+## Implement long-term profiles, session coherence, preference evolution
 ```
 
 
@@ -306,13 +306,13 @@ git checkout -b feature/phase-3-1-memory-integration
 
 ```bash
 
-# Gather real user data
+## Gather real user data
 
-# Fine-tune temporal marker detection
+## Fine-tune temporal marker detection
 
-# Improve sarcasm handling
+## Improve sarcasm handling
 
-# Optimize response quality
+## Optimize response quality
 ```
 
 

@@ -2,14 +2,16 @@
 
 ## 📅 Phased Release Strategy
 
-DraftShift evolves through three distinct phases, each building on the previous while maintaining the existing working systems. Each phase has a clear gate criterion before proceeding.
+DraftShift evolves through three distinct phases, each building on the previous while maintaining
+the existing working systems. Each phase has a clear gate criterion before proceeding.
 
 ---
 
 ## 🟢 Phase 1: MVP (Months 1-3)
 
 ### Objective
-Prove civility scoring + transformation concept with working Streamlit prototype. Focus on core logic, not UI polish.
+Prove civility scoring + transformation concept with working Streamlit prototype. Focus on core
+logic, not UI polish.
 
 ### What's Included
 - ✅ Streamlit interface with existing analysis modules
@@ -37,11 +39,9 @@ Prove civility scoring + transformation concept with working Streamlit prototype
 | Deployment | Local machine |
 
 ### Deliverables
-1. **Streamlit App** (`draftshift/streamlit_app.py`)
-2. **LLM Integration Module** (`draftshift/llm_transformer.py`)
-3. **Civility Scoring Algorithm** (updated in `core.py`)
-4. **Risk Alert Logic** (in `core.py`)
-5. **Documentation** (README with setup instructions)
+1. **Streamlit App** (`draftshift/streamlit_app.py`) 2. **LLM Integration Module**
+(`draftshift/llm_transformer.py`) 3. **Civility Scoring Algorithm** (updated in `core.py`) 4. **Risk
+Alert Logic** (in `core.py`) 5. **Documentation** (README with setup instructions)
 
 ### Success Criteria (Gate Before Phase 2)
 - [ ] Streamlit app runs without errors
@@ -60,10 +60,11 @@ streamlit run draftshift/streamlit_app.py
 
 ## 🟠 Phase 2: Beta (Months 4-6)
 
-### Objective
-Production-ready backend + polished React frontend. Scale from local testing to small team deployments.
+### Objective (2)
+Production-ready backend + polished React frontend. Scale from local testing to small team
+deployments.
 
-### What's Included
+### What's Included (2)
 - ✅ FastAPI backend (exposes full API)
 - ✅ React frontend (component tree from UI design doc)
 - ✅ Model selection/switching (KoboldCPP + GPT4All options)
@@ -73,7 +74,7 @@ Production-ready backend + polished React frontend. Scale from local testing to 
 - ✅ HTTPS support
 - ✅ Basic authentication (JWT)
 
-### What's **NOT** Included
+### What's **NOT** Included (2)
 - ❌ Enterprise multi-tenant support
 - ❌ SAML/SSO
 - ❌ Correspondence archive analysis
@@ -82,7 +83,7 @@ Production-ready backend + polished React frontend. Scale from local testing to 
 - ❌ Mobile app
 - ❌ Integration with case management systems
 
-### Tech Stack
+### Tech Stack (2)
 | Component | Technology |
 |-----------|-----------|
 | Analysis | Same as Phase 1 |
@@ -92,14 +93,12 @@ Production-ready backend + polished React frontend. Scale from local testing to 
 | UI Library | (Radix, Shadcn/ui) |
 | Deployment | Docker + optional cloud VM |
 
-### Deliverables
-1. **FastAPI Backend** (`draftshift/api/main.py` + routes)
-2. **React Frontend** (`draftshift/frontend/` with component tree)
-3. **Database Layer** (SQLAlchemy models for history/settings)
-4. **Dockerfile** for containerized deployment
-5. **Compliance Report Generator** (basic PDF export)
-6. **API Documentation** (Swagger/OpenAPI)
-7. **Installation Guide** (self-hosted deployment)
+### Deliverables (2)
+1. **FastAPI Backend** (`draftshift/api/main.py` + routes) 2. **React Frontend**
+(`draftshift/frontend/` with component tree) 3. **Database Layer** (SQLAlchemy models for
+history/settings) 4. **Dockerfile** for containerized deployment 5. **Compliance Report Generator**
+(basic PDF export) 6. **API Documentation** (Swagger/OpenAPI) 7. **Installation Guide** (self-hosted
+deployment)
 
 ### Success Criteria (Gate Before Phase 3)
 - [ ] FastAPI backend passes security audit (OWASP Top 10)
@@ -111,12 +110,12 @@ Production-ready backend + polished React frontend. Scale from local testing to 
 - [ ] Deployment guide allows setup in <30 minutes
 - [ ] API endpoints tested with >90% code coverage
 
-### Deployment
+### Deployment (2)
 ```bash
-# Start backend
+## Start backend
 docker run -p 8000:8000 draftshift-api
 
-# Start frontend (separate, connects to backend)
+## Start frontend (separate, connects to backend)
 npm start  # React dev server or production build
 ```
 
@@ -124,10 +123,11 @@ npm start  # React dev server or production build
 
 ## 🔵 Phase 3: Enterprise (Months 7+)
 
-### Objective
-Full-featured civility compliance platform with advanced analytics, integrations, and multi-tenant support.
+### Objective (3)
+Full-featured civility compliance platform with advanced analytics, integrations, and multi-tenant
+support.
 
-### What's Included
+### What's Included (3)
 - ✅ Full HTML/JS app (Electron or PWA)
 - ✅ Electron desktop app (macOS, Windows, Linux)
 - ✅ Multi-tenant support (firm-wide deployments)
@@ -141,12 +141,12 @@ Full-featured civility compliance platform with advanced analytics, integrations
 - ✅ On-premises deployment support
 - ✅ Admin dashboard (user management, audit logs, settings)
 
-### What's **NOT** Included
+### What's **NOT** Included (3)
 - ❌ Real-time collaboration (multi-author editing)
 - ❌ AI model fine-tuning (user-submitted feedback)
 - ❌ International localization (non-English jurisdictions)
 
-### Tech Stack
+### Tech Stack (3)
 | Component | Technology |
 |-----------|-----------|
 | Analysis | Same as Phase 1-2 |
@@ -158,17 +158,13 @@ Full-featured civility compliance platform with advanced analytics, integrations
 | Deployment | Docker Compose, Kubernetes, on-premises |
 | Monitoring | Prometheus + Grafana |
 
-### Deliverables
-1. **Electron App** (cross-platform desktop wrapper)
-2. **Multi-Tenant Backend** (org isolation, permissions)
-3. **Advanced Dashboard** (compliance metrics, trends, reports)
-4. **SAML/SSO Integration** (enterprise auth)
-5. **Archive Analysis Pipeline** (AnythingLLM-based RAG)
-6. **Glyph Visualization Layer** (symbolic overlays on UI)
-7. **Integration Adapters** (Outlook, Gmail, case management)
-8. **Admin Console** (user/org management, audit logs)
-9. **Migration Tools** (Phase 2 → Phase 3 data import)
-10. **Enterprise Deployment Guide** (on-prem, cloud, hybrid)
+### Deliverables (3)
+1. **Electron App** (cross-platform desktop wrapper) 2. **Multi-Tenant Backend** (org isolation,
+permissions) 3. **Advanced Dashboard** (compliance metrics, trends, reports) 4. **SAML/SSO
+Integration** (enterprise auth) 5. **Archive Analysis Pipeline** (AnythingLLM-based RAG) 6. **Glyph
+Visualization Layer** (symbolic overlays on UI) 7. **Integration Adapters** (Outlook, Gmail, case
+management) 8. **Admin Console** (user/org management, audit logs) 9. **Migration Tools** (Phase 2 →
+Phase 3 data import) 10. **Enterprise Deployment Guide** (on-prem, cloud, hybrid)
 
 ### Success Criteria (Go-to-Market)
 - [ ] Enterprise security audit passes (SOC 2 Type II)
@@ -182,16 +178,16 @@ Full-featured civility compliance platform with advanced analytics, integrations
 
 ### Deployment Options
 ```bash
-# Option 1: Docker Compose (small-medium firms)
+## Option 1: Docker Compose (small-medium firms)
 docker-compose up -d
 
-# Option 2: Kubernetes (large firms)
+## Option 2: Kubernetes (large firms)
 kubectl apply -f draftshift-helm-chart/
 
-# Option 3: Electron Desktop App
+## Option 3: Electron Desktop App
 npm run electron-build
 
-# Option 4: Cloud-Hosted SaaS
+## Option 4: Cloud-Hosted SaaS
 AWS/GCP/Azure deployment (optional future phase)
 ```
 
@@ -325,4 +321,6 @@ AWS/GCP/Azure deployment (optional future phase)
 
 ---
 
-This phased approach allows DraftShift to **validate the core concept quickly** (Phase 1), **build a production system for early customers** (Phase 2), and **scale to enterprise** (Phase 3)—without wasting resources on features before demand is proven.
+This phased approach allows DraftShift to **validate the core concept quickly** (Phase 1), **build a
+production system for early customers** (Phase 2), and **scale to enterprise** (Phase 3)—without
+wasting resources on features before demand is proven.

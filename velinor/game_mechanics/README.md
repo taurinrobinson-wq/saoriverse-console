@@ -1,6 +1,7 @@
 # Velinor Game Mechanics — Frontend Wiring
 
-This folder contains minimal mechanics code and a small TypeScript API to wire the mechanics into frontend code.
+This folder contains minimal mechanics code and a small TypeScript API to wire the mechanics into
+frontend code.
 
 Usage (TypeScript):
 

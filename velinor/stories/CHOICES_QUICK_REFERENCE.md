@@ -60,17 +60,17 @@ story.add_choice(
 
 ```python
 
-# Small (minor/neutral)
+## Small (minor/neutral)
 0.05    # 5% change
 
-# Medium (notable)
+## Medium (notable)
 0.15    # 15% change
 0.2     # 20% change
 
-# Large (major)
+## Large (major)
 0.25    # 25% change
 
-# Negative (drawback)
+## Negative (drawback)
 -0.1    # -10% change
 -0.15   # -15% change
 ```
@@ -114,7 +114,7 @@ npc_resonance={"Nima": 0.15}
 
 ```python
 
-# No parameters - pure navigation
+## No parameters - pure navigation
 ```
 
 
@@ -208,7 +208,7 @@ Same narrative point, three different choices:
 
 ```python
 
-# Path 1: Trust immediately (Ravi)
+## Path 1: Trust immediately (Ravi)
 story.add_choice(
     from_passage_name="meet_ravi",
     choice_text="Tell them everything",
@@ -216,7 +216,7 @@ story.add_choice(
     npc_resonance={"Ravi": 0.25}
 )
 
-# Path 2: Stay guarded (Nima)
+## Path 2: Stay guarded (Nima)
 story.add_choice(
     from_passage_name="meet_ravi",
     choice_text="Ask questions first",
@@ -224,7 +224,7 @@ story.add_choice(
     npc_resonance={"Nima": 0.25}
 )
 
-# Path 3: Leave (Kaelen)
+## Path 3: Leave (Kaelen)
 story.add_choice(
     from_passage_name="meet_ravi",
     choice_text="Walk away",

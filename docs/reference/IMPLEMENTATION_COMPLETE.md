@@ -270,7 +270,7 @@ learning/
 ```python
 
 
-# In dynamic_glyph_evolution.py
+## In dynamic_glyph_evolution.py
 evolution = DynamicGlyphEvolution(
     min_frequency_for_glyph=300,  # Default
     # Lower = glyphs appear faster
@@ -285,7 +285,7 @@ evolution = DynamicGlyphEvolution(
 ```python
 
 
-# In dynamic_glyph_evolution.py
+## In dynamic_glyph_evolution.py (2)
 self.emotion_symbols = { "love": "♥", "vulnerability": "🌱",
     # Add more
 
@@ -300,7 +300,7 @@ self.emotion_symbols = { "love": "♥", "vulnerability": "🌱",
 
 
 
-# In dynamic_glyph_evolution.py, _create_pattern_name()
+## In dynamic_glyph_evolution.py, _create_pattern_name()
 name_map = { ("love", "vulnerability"): "Open-Hearted Love",
     # Customize as needed
 
@@ -316,15 +316,15 @@ name_map = { ("love", "vulnerability"): "Open-Hearted Love",
 
 ```bash
 
-# Verify integration
+## Verify integration
 bash verify_integration.sh
 
-# Start Streamlit
+## Start Streamlit
 streamlit run main_v2.py
 
-# Select "hybrid" processing mode
+## Select "hybrid" processing mode
 
-# Have meaningful conversations
+## Have meaningful conversations
 
 ```text
 
@@ -340,19 +340,19 @@ from hybrid_processor_with_evolution import create_integrated_processor
 
 processor = create_integrated_processor(learner, extractor, user_id)
 
-# Process a message
+## Process a message
 result = processor.process_user_message(
     user_message="I feel deeply vulnerable",
     ai_response="That vulnerability is strength"
 )
 
-# Get new glyphs
+## Get new glyphs
 new_glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
 
-# Export all glyphs
+## Export all glyphs
 processor.export_session_glyphs("output.json")
 
-# Print summary
+## Print summary
 
 ```text
 
@@ -363,13 +363,13 @@ processor.export_session_glyphs("output.json")
 ```bash
 
 
-# View discovered glyphs
+## View discovered glyphs
 cat learning/conversation_glyphs.json | python -m json.tool
 
-# View user's personal lexicon
+## View user's personal lexicon
 cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 
-# View learning log
+## View learning log
 
 ```text
 ```text
@@ -577,7 +577,7 @@ This transforms Saoriverse from a static system with predefined glyphs into a **
 
 bash verify_integration.sh     # ← Run this first streamlit run main_v2.py        # ← Then run this
 
-# Select "hybrid" mode and start chatting!
+## Select "hybrid" mode and start chatting!
 
 ```
 

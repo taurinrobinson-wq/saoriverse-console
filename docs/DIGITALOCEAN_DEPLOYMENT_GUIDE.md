@@ -19,7 +19,7 @@ droplet ✓ GitHub repository cloned locally
 ```bash
 ssh root@161.35.227.49
 
-# If using SSH key, it may be automatic
+## If using SSH key, it may be automatic
 
 ```text
 
@@ -32,14 +32,14 @@ ssh root@161.35.227.49
 ```bash
 
 
-# Clone the repo
+## Clone the repo
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 
-# Make the setup script executable
+## Make the setup script executable
 chmod +x docker-setup.sh
 
-# Run it
+## Run it
 
 ```text
 
@@ -59,13 +59,13 @@ This script will:
 ```bash
 
 
-# Check running containers
+## Check running containers
 docker compose ps
 
-# Test the API
+## Test the API
 curl http://161.35.227.49:8000/health
 
-# Test the frontend
+## Test the frontend
 
 ```text
 ```text
@@ -82,29 +82,29 @@ curl http://161.35.227.49:8000/health
 
 
 
-# Update system
+## Update system
 sudo apt update sudo apt upgrade -y
 
-# Install dependencies
+## Install dependencies
 sudo apt install -y \ apt-transport-https \ ca-certificates \ curl \ gnupg \ lsb-release
 
-# Add Docker GPG key
+## Add Docker GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
 sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-# Add Docker repository
+## Add Docker repository
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
 https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | \
 sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Install Docker
+## Install Docker
 sudo apt update sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-# Allow running docker without sudo (optional)
+## Allow running docker without sudo (optional)
 sudo usermod -aG docker $USER newgrp docker
 
-# Verify
+## Verify
 
 ```text
 ```
@@ -114,21 +114,21 @@ sudo usermod -aG docker $USER newgrp docker
 
 ```bash
 
-# Clone repository
+## Clone repository
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 
-# Copy example environment file
+## Copy example environment file
 cp .env.example .env
 
-# Edit with your settings (if needed)
+## Edit with your settings (if needed)
 nano .env
 
-# Key variables to check:
+## Key variables to check:
 
-# - API_URL=http://161.35.227.49:8000
+## - API_URL=http://161.35.227.49:8000
 
-# - FRONTEND_URL=http://161.35.227.49
+## - FRONTEND_URL=http://161.35.227.49
 
 ```text
 
@@ -141,22 +141,22 @@ nano .env
 ```bash
 
 
-# Build Docker images
+## Build Docker images
 docker compose build
 
-# Start containers in background
+## Start containers in background
 docker compose up -d
 
-# Check status
+## Check status
 docker compose ps
 
-# View logs
+## View logs
 docker compose logs -f
 
-# View just backend logs
+## View just backend logs
 docker compose logs -f backend
 
-# View just frontend logs
+## View just frontend logs
 
 ```text
 
@@ -184,19 +184,19 @@ Once everything is running:
 ```bash
 
 
-# All services
+## All services
 docker compose logs
 
-# Specific service
+## Specific service
 docker compose logs backend docker compose logs frontend docker compose logs nginx
 
-# Follow logs in real-time
+## Follow logs in real-time
 docker compose logs -f
 
-# Last 100 lines
+## Last 100 lines
 docker compose logs --tail 100
 
-# Last 100 lines, following
+## Last 100 lines, following
 
 ```text
 ```text
@@ -209,16 +209,16 @@ docker compose logs --tail 100
 
 
 
-# Stop without removing
+## Stop without removing
 docker compose stop
 
-# Restart
+## Restart
 docker compose restart
 
-# Remove everything (data persists in volumes)
+## Remove everything (data persists in volumes)
 docker compose down
 
-# Remove everything including volumes (WARNING: deletes data)
+## Remove everything including volumes (WARNING: deletes data)
 
 ```text
 ```
@@ -228,13 +228,13 @@ docker compose down
 
 ```bash
 
-# Restart backend
+## Restart backend
 docker compose restart backend
 
-# Restart frontend
+## Restart frontend
 docker compose restart frontend
 
-# Restart nginx
+## Restart nginx
 ```text
 
 ```text
@@ -246,13 +246,13 @@ docker compose restart frontend
 ```bash
 
 
-# Get a shell in the backend container
+## Get a shell in the backend container
 docker compose exec backend bash
 
-# Run a Python command in backend
+## Run a Python command in backend
 docker compose exec backend python -c "import sys; print(sys.version)"
 
-# Get a shell in the frontend container
+## Get a shell in the frontend container
 
 ```text
 
@@ -263,13 +263,13 @@ docker compose exec backend python -c "import sys; print(sys.version)"
 ```bash
 
 
-# Overall Docker stats
+## Overall Docker stats
 docker stats
 
-# Space usage
+## Space usage
 docker system df
 
-# Prune unused images/containers
+## Prune unused images/containers
 
 ```text
 ```text
@@ -286,16 +286,16 @@ docker system df
 
 
 
-# Pull latest changes
+## Pull latest changes
 git pull origin main
 
-# Rebuild images
+## Rebuild images
 docker compose build
 
-# Restart with new code
+## Restart with new code
 docker compose up -d
 
-# Verify
+## Verify (2)
 
 ```sql
 ```
@@ -305,10 +305,10 @@ docker compose up -d
 
 ```bash
 
-# Just rebuild and restart backend
+## Just rebuild and restart backend
 docker compose up -d --build backend
 
-# Just rebuild and restart frontend
+## Just rebuild and restart frontend
 ```text
 
 ```text
@@ -324,15 +324,15 @@ docker compose up -d --build backend
 ```bash
 
 
-# Check logs first
+## Check logs first
 docker compose logs backend
 
-# Rebuild from scratch
+## Rebuild from scratch
 docker compose down
 docker compose build --no-cache
 docker compose up -d
 
-# Check if ports are already in use
+## Check if ports are already in use
 sudo lsof -i :8000
 sudo lsof -i :3000
 
@@ -345,13 +345,13 @@ sudo lsof -i :3000
 ```bash
 
 
-# Check usage
+## Check usage
 docker system df
 
-# Clean up everything unused
+## Clean up everything unused
 docker system prune -a
 
-# Remove specific image
+## Remove specific image
 
 ```text
 ```text
@@ -364,13 +364,13 @@ docker system prune -a
 
 
 
-# Check networks
+## Check networks
 docker network ls
 
-# Inspect network
+## Inspect network
 docker network inspect saoriverse-console_saoriverse
 
-# Restart network
+## Restart network
 docker compose down
 
 ```sql
@@ -381,15 +381,15 @@ docker compose down
 
 ```bash
 
-# Check if backend is healthy
+## Check if backend is healthy
 docker compose ps
 
-# Status should be "Up (healthy)"
+## Status should be "Up (healthy)"
 
-# Test backend from inside frontend container
+## Test backend from inside frontend container
 docker compose exec frontend curl http://backend:8000/health
 
-# Check environment variable in frontend
+## Check environment variable in frontend
 docker compose exec frontend env | grep API_URL
 
 ```text
@@ -407,13 +407,13 @@ docker compose exec frontend env | grep API_URL
 ```bash
 
 
-# Backup database and files
+## Backup database and files
 docker compose exec backend tar -czf /app/backup.tar.gz data_local/
 
-# Copy to your machine
+## Copy to your machine
 docker cp saoriverse-backend:/app/backup.tar.gz ./backup.tar.gz
 
-# Or use rsync
+## Or use rsync
 
 ```sql
 
@@ -424,13 +424,13 @@ docker cp saoriverse-backend:/app/backup.tar.gz ./backup.tar.gz
 ```bash
 
 
-# Copy backup to container
+## Copy backup to container
 docker cp backup.tar.gz saoriverse-backend:/app/
 
-# Extract
+## Extract
 docker compose exec backend tar -xzf /app/backup.tar.gz
 
-# Restart
+## Restart (2)
 
 ```text
 ```text
@@ -447,15 +447,15 @@ docker compose exec backend tar -xzf /app/backup.tar.gz
 
 
 
-# Install certbot
+## Install certbot
 sudo apt install -y certbot python3-certbot-nginx
 
-# Get certificate (stops nginx temporarily)
+## Get certificate (stops nginx temporarily)
 docker compose stop nginx sudo certbot certonly --standalone -d 161.35.227.49
 
-# Update nginx.conf with SSL directives
+## Update nginx.conf with SSL directives
 
-# Then restart nginx
+## Then restart nginx
 
 ```sql
 ```
@@ -473,7 +473,7 @@ server {
     # ... rest of config
 }
 
-# Redirect HTTP to HTTPS
+## Redirect HTTP to HTTPS
 server {
     listen 80;
     return 301 https://$host$request_uri;
@@ -493,7 +493,7 @@ server {
 
 #!/bin/bash
 
-# save as check-health.sh
+## save as check-health.sh
 
 echo "=== Container Status ==="
 docker compose ps
@@ -519,10 +519,10 @@ Run it regularly:
 
 chmod +x check-health.sh ./check-health.sh
 
-# Or set up a cron job to check every hour
+## Or set up a cron job to check every hour
 crontab -e
 
-# Add: 0 * * * * /root/saoriverse-console/check-health.sh >> /var/log/saoriverse-health.log 2>&1
+## Add: 0 * * * * /root/saoriverse-console/check-health.sh >> /var/log/saoriverse-health.log 2>&1
 
 ```
 

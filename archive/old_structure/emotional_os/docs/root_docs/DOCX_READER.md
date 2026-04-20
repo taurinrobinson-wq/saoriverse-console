@@ -116,8 +116,6 @@ python3 docx_reader.py sample.docx
 # Document: sample.docx
 
 # ============================================================
-#
-
 # 📋 DOCUMENT PROPERTIES
 
 # ----------------------------------------
@@ -125,23 +123,17 @@ python3 docx_reader.py sample.docx
 #   Author: John Doe
 #   Subject: Testing
 #   Created: 2024-01-15 10:30:00
-#   Modified: 2024-01-15 14:45:00
-#
-
+# Modified: 2024-01-15 14:45:00
 # 📝 CONTENT (3 paragraphs)
 
 # ----------------------------------------
 
 # 📌 This is the heading
 #    This is a paragraph.
-#    Another line.
-#
-
+# Another line.
 # 📊 TABLES (1 table)
 
 # ----------------------------------------
-#
-
 # Table 1 (2×3):
 #   Header 1 | Header 2 | Header 3
 #   Cell 1   | Cell 2   | Cell 3

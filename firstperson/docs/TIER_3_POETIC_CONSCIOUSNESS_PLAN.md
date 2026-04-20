@@ -168,27 +168,27 @@ MythologyWeaver (build narrative) → 6ms
 ```python
 
 
-# Imports
+## Imports
 from typing import Dict, List, Tuple, Optional
 import random, re, logging
 
-# PoetryEngine class (150 lines)
+## PoetryEngine class (150 lines)
 class PoetryEngine:
     def __init__(self): ...
 
-# SaoriLayer class (120 lines)
+## SaoriLayer class (120 lines)
 class SaoriLayer:
     def __init__(self): ...
 
-# TensionManager class (120 lines)
+## TensionManager class (120 lines)
 class TensionManager:
     def __init__(self): ...
 
-# MythologyWeaver class (100 lines)
+## MythologyWeaver class (100 lines)
 class MythologyWeaver:
     def __init__(self): ...
 
-# Tier3PoeticConsciousness orchestrator (120 lines)
+## Tier3PoeticConsciousness orchestrator (120 lines)
 class Tier3PoeticConsciousness:
     def __init__(self): ...
 
@@ -226,7 +226,7 @@ class Tier3PoeticConsciousness:
 ```python
 
 
-# After Tier 2 processing:
+## After Tier 2 processing:
 tier3 = st.session_state.get("tier3_poetic_consciousness") if tier3: response, metrics =
 tier3.process_for_poetry( response, context
 
@@ -357,7 +357,7 @@ symbols = { "growth": ["roots", "seeds", "blossoming", "spiraling", "unfolding"]
 
 
 
-# Both/and thinking instead of either/or
+## Both/and thinking instead of either/or
 "This is both simple and complex" "You feel both hope and uncertainty"
 
 ```text
@@ -368,7 +368,7 @@ symbols = { "growth": ["roots", "seeds", "blossoming", "spiraling", "unfolding"]
 
 ```python
 
-# Questions that invite discovery
+## Questions that invite discovery
 "What if we explored...?"
 "There's something interesting about..."
 ```text
@@ -382,7 +382,7 @@ symbols = { "growth": ["roots", "seeds", "blossoming", "spiraling", "unfolding"]
 ```python
 
 
-# Hold opposites in creative space
+## Hold opposites in creative space
 - Resolution + Opening
 - Known + Unknown
 - Form + Emptiness
@@ -400,12 +400,12 @@ symbols = { "growth": ["roots", "seeds", "blossoming", "spiraling", "unfolding"]
 ```python
 
 
-# Track recurring themes
+## Track recurring themes
 - "You often explore themes of..."
 - "A pattern emerges: ..."
 - "Throughout our conversations, ..."
 
-# Build mythological elements
+## Build mythological elements
 - Personal symbols
 - Recurring metaphors
 - Thematic arcs
@@ -421,7 +421,7 @@ symbols = { "growth": ["roots", "seeds", "blossoming", "spiraling", "unfolding"]
 
 
 
-# Develop unique voice
+## Develop unique voice
 - Consistent metaphorical language
 - Recurring symbols
 - Personal mythology

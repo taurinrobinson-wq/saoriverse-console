@@ -1,6 +1,7 @@
 # IFY — Technical Architecture & Glyph Remediation
 
-This document outlines a practical, implementable architecture for IFY (Emotional Music Engine), focusing first on glyph data quality and remediation so your emotional OS can be functional.
+This document outlines a practical, implementable architecture for IFY (Emotional Music Engine),
+focusing first on glyph data quality and remediation so your emotional OS can be functional.
 
 ## Goals
 - Define a clear system architecture for IFY MVP
@@ -32,22 +33,20 @@ Components:
 - Analytics & Personalization
   - Preference store, incremental training signals
 
-Data flows:
-1. Ingest song metadata and audio embeddings
-2. Classify emotional features via LLM + audio model
-3. Map song features -> glyphs (via glyph metadata)
-4. Playlist engine composes emotional arcs using glyph transitions
-5. User plays tracks via external service, feedback loops update model
+Data flows: 1. Ingest song metadata and audio embeddings 2. Classify emotional features via LLM +
+audio model 3. Map song features -> glyphs (via glyph metadata) 4. Playlist engine composes
+emotional arcs using glyph transitions 5. User plays tracks via external service, feedback loops
+update model
 
 ---
 
 ## Glyph Data: Problem & Fix
 
-Problem observed: glyph JSON documents contain extraneous, loosely-typed fields that break pipeline code expecting a stable schema.
+Problem observed: glyph JSON documents contain extraneous, loosely-typed fields that break pipeline
+code expecting a stable schema.
 
-Solution summary:
-1. Define a canonical glyph JSON schema (strict fields + types)
-2. Run a non-destructive cleaning process over existing glyph files to:
+Solution summary: 1. Define a canonical glyph JSON schema (strict fields + types) 2. Run a
+non-destructive cleaning process over existing glyph files to:
    - Remove unknown fields
    - Normalize types and key names
    - Fill missing required fields with safe defaults
@@ -107,11 +106,10 @@ Adds:
 ---
 
 ## Next Technical Tasks (recommended order)
-1. Run `clean_glyphs.py` in dry-run mode over all glyphs (audit output)
-2. Review audit artifacts and adjust schema vocabulary
-3. Commit cleaned glyphs to `src/emotional_os_glyphs/canonical_cleaned/`
-4. Implement ingestion validation to quarantine nonconformant glyphs
-5. Build the emotional tagging pipeline (LLM + audio embeddings)
+1. Run `clean_glyphs.py` in dry-run mode over all glyphs (audit output) 2. Review audit artifacts
+and adjust schema vocabulary 3. Commit cleaned glyphs to
+`src/emotional_os_glyphs/canonical_cleaned/` 4. Implement ingestion validation to quarantine
+nonconformant glyphs 5. Build the emotional tagging pipeline (LLM + audio embeddings)
 
 ---
 
@@ -128,4 +126,6 @@ Adds:
 ---
 
 ## Ready to proceed
-I will now create the authoritative `glyph_schema.json` and a safe cleaning script `clean_glyphs.py` in `Offshoots/IFY`. After that I can run a dry-run audit over the repository glyph folders if you want. Do you want me to proceed and run the auditor now?
+I will now create the authoritative `glyph_schema.json` and a safe cleaning script `clean_glyphs.py`
+in `Offshoots/IFY`. After that I can run a dry-run audit over the repository glyph folders if you
+want. Do you want me to proceed and run the auditor now?

@@ -6,9 +6,9 @@ emotional intelligence system that NEVER sends data to external APIs or services
 
 # ============================================================================
 
-# 1. VISION: SOVEREIGN EMOTIONAL SANCTUARY
+## 1. VISION: SOVEREIGN EMOTIONAL SANCTUARY
 
-# ============================================================================
+## ============================================================================ (2)
 
 SOVEREIGN_PRINCIPLES = { "data_sovereignty": { "principle": "User data never leaves the local
 system", "implementation": [ "All processing happens locally (0ms network latency)", "Database
@@ -27,11 +27,11 @@ only", "Deterministic processing (reproducible results)" ] },
 "Poetic, literary responses (not clinical AI tone)", "Emotional literacy development", "Glyph-based
 meaning-making", "Ritual and ceremonial acknowledgment" ] } }
 
-# ============================================================================
+## ============================================================================ (3)
 
-# 2. POETIC & LITERARY RESOURCES FOR EMOTIONAL DEPTH
+## 2. POETIC & LITERARY RESOURCES FOR EMOTIONAL DEPTH
 
-# ============================================================================
+## ============================================================================ (4)
 
 POETIC_RESOURCES = { "project_gutenberg": { "name": "Project Gutenberg", "url":
 "https://www.gutenberg.org/", "what_contains": "70,000+ FREE books (poetry, literature, drama)",
@@ -70,11 +70,11 @@ expression", "use": "Extract emotional language patterns, authentic metaphors" }
 "https://github.com/CrisisTextLine/", "contains": "Anonymized crisis conversations",
 "emotional_value": "Real vulnerable moments, authentic support language" } } }
 
-# ============================================================================
+## ============================================================================ (5)
 
-# 3. LOCAL MODE ARCHITECTURE
+## 3. LOCAL MODE ARCHITECTURE
 
-# ============================================================================
+## ============================================================================ (6)
 
 LOCAL_MODE_STACK = { "tier_1_base": { "name": "Fast Emotional Recognition", "time": "0.001-0.01s",
 "components": [ "NRC Emotion Lexicon (14k words)", "NLTK tokenizer + POS tagger", "Local
@@ -96,11 +96,11 @@ responses (not generic AI)", "use_case": "Create emotionally resonant, safe resp
 "Glyph effectiveness tracking", "Auto-expanding signal lexicon" ], "output": "System improves over
 time for THIS user", "use_case": "Personalization, user-specific emotional patterns" } }
 
-# ============================================================================
+## ============================================================================ (7)
 
-# 4. GLYPH DATABASE ENRICHMENT STRATEGY
+## 4. GLYPH DATABASE ENRICHMENT STRATEGY
 
-# ============================================================================
+## ============================================================================ (8)
 
 GLYPH_ENRICHMENT = { "current_state": { "total_glyphs": 292, "description": "Voltage-pair based
 emotional states", "from": "VELŌNIX system" },
@@ -168,11 +168,11 @@ source TEXT, emotional_authenticity_score FLOAT, helpful_response TEXT );
 CREATE TABLE glyph_rituals ( id INTEGER PRIMARY KEY, glyph_id INTEGER, ritual_language TEXT,
 ritual_type TEXT, -- "acknowledgment", "witnessing", "transformation" source TEXT ); """ }
 
-# ============================================================================
+## ============================================================================ (9)
 
-# 5. LOCAL PROCESSING PIPELINE (FULL FLOW)
+## 5. LOCAL PROCESSING PIPELINE (FULL FLOW)
 
-# ============================================================================
+## ============================================================================ (10)
 
 FULL_LOCAL_PIPELINE = { "input_stage": """ User: "I keep replaying that moment over and over, and it
 hurts" """,
@@ -242,11 +242,11 @@ over time" } },
 "0.25s" }, "comparison": { "local_mode": "0.25s (INSTANT, NO NETWORK)", "openai_api": "1-2s (network
 latency + processing)", "advantage": "4-8x faster + ZERO data transmission" } } }
 
-# ============================================================================
+## ============================================================================ (11)
 
-# 6. IMPLEMENTATION ROADMAP
+## 6. IMPLEMENTATION ROADMAP
 
-# ============================================================================
+## ============================================================================ (12)
 
 IMPLEMENTATION_ROADMAP = { "phase_1_foundation": { "name": "Local Infrastructure (1-2 days)",
 "tasks": [ "Install spaCy + download en_core_web_sm", "Download NRC Emotion Lexicon", "Download
@@ -289,11 +289,11 @@ data export feature (JSON dump of all user data)", "Create local backup system",
 encryption for database", "Create privacy policy & data policy", "Document data location &
 retention" ], "outcome": "Users have full control and transparency" } }
 
-# ============================================================================
+## ============================================================================ (13)
 
-# 7. LOCAL MODE ENABLED UI FLOW
+## 7. LOCAL MODE ENABLED UI FLOW
 
-# ============================================================================
+## ============================================================================ (14)
 
 LOCAL_MODE_UI = { "settings_page": """ ⚙️ FIRSTPERSON SETTINGS
 
@@ -336,11 +336,11 @@ Your patterns:
 
 [Download all my data] [Export as JSON] [Clear all data] """ }
 
-# ============================================================================
+## ============================================================================ (15)
 
-# 8. TECHNICAL IMPLEMENTATION CHECKLIST
+## 8. TECHNICAL IMPLEMENTATION CHECKLIST
 
-# ============================================================================
+## ============================================================================ (16)
 
 IMPLEMENTATION_CHECKLIST = """ SOVEREIGN LOCAL MODE - COMPLETE IMPLEMENTATION
 
@@ -368,11 +368,11 @@ backup system ☐ Privacy policy published ☐ Data location documented ☐ Opti
 ☐ TESTING & VALIDATION ☐ Local mode fully tested ☐ No data leaves system ☐ Performance verified (<1s
 per message) ☐ Responses quality tested ☐ User safety verified """
 
-# ============================================================================
+## ============================================================================ (17)
 
-# 9. WHY THIS MATTERS
+## 9. WHY THIS MATTERS
 
-# ============================================================================
+## ============================================================================ (18)
 
 """ SOVEREIGNTY & SAFETY
 

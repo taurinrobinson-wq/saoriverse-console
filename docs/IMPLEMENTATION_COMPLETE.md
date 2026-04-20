@@ -113,16 +113,16 @@ the accumulation is what's breaking it for you." ✓ Affirmation:"Your exhaustio
 ```bash
 
 
-# Test response type pattern (turns 1-8)
+## Test response type pattern (turns 1-8)
 python test_closing_types.py
 
-# Test full dialogue with alternation
+## Test full dialogue with alternation
 python test_response_type_alternation.py
 
-# View implementation summary
+## View implementation summary
 python IMPLEMENTATION_SUMMARY.py
 
-# View before/after comparison
+## View before/after comparison
 python BEFORE_AFTER_COMPARISON.py
 
 ```

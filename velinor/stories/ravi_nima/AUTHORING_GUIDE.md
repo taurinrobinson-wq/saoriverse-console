@@ -169,14 +169,10 @@ Search for: ✏️ AUTHOR SECTION: GLYPH_REVEAL
 
 ## Workflow
 
-1. **Open** `RN_Act1_Introduction.json` in your editor
-2. **Search** for `✏️ AUTHOR SECTION`
-3. **Navigate** to first result
-4. **Read** the `author_notes` field (tells you what goes here)
-5. **Write** your content between the markers
-6. **Delete** the placeholder text (just keep your writing)
-7. **Press** Ctrl+G (find next)
-8. **Repeat** until all placeholders are done
+1. **Open** `RN_Act1_Introduction.json` in your editor 2. **Search** for `✏️ AUTHOR SECTION` 3.
+**Navigate** to first result 4. **Read** the `author_notes` field (tells you what goes here) 5.
+**Write** your content between the markers 6. **Delete** the placeholder text (just keep your
+writing) 7. **Press** Ctrl+G (find next) 8. **Repeat** until all placeholders are done
 
 ---
 
@@ -225,7 +221,9 @@ Search for: ✏️ AUTHOR SECTION: GLYPH_REVEAL
 | 4   | 4         | 3    | 2    | —      | 2       | 4      | 15    |
 | **TOTAL** | **20** | **15** | **10** | **1** | **11** | **4** | **61** |
 
-Wait, let me recount... CONNECTION_MAP says 73. Let me check Act 1 more carefully. Actually the inventory includes variants (like RAVI_LINE_01_INTRO has 3 variants - high empathy, skepticism, balanced). Let me revise:
+Wait, let me recount... CONNECTION_MAP says 73. Let me check Act 1 more carefully. Actually the
+inventory includes variants (like RAVI_LINE_01_INTRO has 3 variants - high empathy, skepticism,
+balanced). Let me revise:
 
 **Actual breakdown:**
 - Passages with multiple variants (e.g., Ravi's opening line has 3 variants for different player TONE states)
@@ -272,12 +270,13 @@ Notice: No markers left. Just the passage, fully written.
 
 ## Tips
 
-1. **Read author_notes first.** It tells you what emotional truth you're capturing.
-2. **Keep it short.** NPC dialogue should be 1-3 sentences per passage (except long stories).
-3. **Use the `emotional_beat` field.** It's your north star for tone.
-4. **Remember glyph_trigger.** If a passage has `SORROW_TIER1`, that glyph should feel present (visually or emotionally).
-5. **Check influence_impact.** If this passage adds `empathy: 15`, make sure your dialogue justifies that emotional weight.
-6. **Don't explain.** Trust the glyphs, gates, and emotional beats to do the work. Your writing just voices the architecture.
+1. **Read author_notes first.** It tells you what emotional truth you're capturing. 2. **Keep it
+short.** NPC dialogue should be 1-3 sentences per passage (except long stories). 3. **Use the
+`emotional_beat` field.** It's your north star for tone. 4. **Remember glyph_trigger.** If a passage
+has `SORROW_TIER1`, that glyph should feel present (visually or emotionally). 5. **Check
+influence_impact.** If this passage adds `empathy: 15`, make sure your dialogue justifies that
+emotional weight. 6. **Don't explain.** Trust the glyphs, gates, and emotional beats to do the work.
+Your writing just voices the architecture.
 
 ---
 

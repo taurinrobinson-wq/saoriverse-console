@@ -85,11 +85,11 @@ from litone import core, constants
 from litone.tone_signal_parser import create_tone_signal_parser
 from litone.enhanced_affect_parser import create_enhanced_affect_parser
 
-# Detect tone
+## Detect tone
 analysis = core.detect_tone("I understand your concerns.")
 print(f"Tone: {analysis['tone']}")
 
-# Detect signals
+## Detect signals
 parser = create_tone_signal_parser()
 signals = parser.analyze_text("Therefore, we must protect our interests.")
 print(f"Signal: {signals.primary_signal_name}")
@@ -167,14 +167,12 @@ py -3.12 -c "import sys; sys.path.insert(0, '.'); from litone.Tests.test_litone_
 
 ## ✨ What Makes This Special
 
-1. **Self-contained:** All code in litone folder, no external dependencies
-2. **Lightweight:** Signal parser = 300 lines, not heavy 2400+ version
-3. **Organized:** Clear folder structure (Docs, Tests, Core)
-4. **Documented:** 4 comprehensive guides at different detail levels
-5. **Tested:** 6 test categories, all passing
-6. **Adapted:** Components optimized for legal correspondence (not chat)
-7. **Backward compatible:** Existing code unchanged
-8. **Production ready:** No synthetic scaffolding, fully functional
+1. **Self-contained:** All code in litone folder, no external dependencies 2. **Lightweight:**
+Signal parser = 300 lines, not heavy 2400+ version 3. **Organized:** Clear folder structure (Docs,
+Tests, Core) 4. **Documented:** 4 comprehensive guides at different detail levels 5. **Tested:** 6
+test categories, all passing 6. **Adapted:** Components optimized for legal correspondence (not
+chat) 7. **Backward compatible:** Existing code unchanged 8. **Production ready:** No synthetic
+scaffolding, fully functional
 
 ## 🎯 Next Potential Enhancements
 

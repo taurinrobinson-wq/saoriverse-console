@@ -27,7 +27,7 @@ Quick start (local devcontainer / machine):
 ```bash
 
 
-# Example: run on port 8502 to avoid conflicts with other apps
+## Example: run on port 8502 to avoid conflicts with other apps
 streamlit run Offshoots/ToneCore/streamlit_app.py --server.port 8502
 
 ```

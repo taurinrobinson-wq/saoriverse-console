@@ -270,9 +270,9 @@ To reduce processing:
 
 ```python
 
-# In ui.py, around line 573
+## In ui.py, around line 573
 
-# Only process evolution every N turns instead of every turn
+## Only process evolution every N turns instead of every turn
 if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
 ```text
 
@@ -292,18 +292,18 @@ from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrid
 from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 from hybrid_processor_with_evolution import create_integrated_processor
 
-# Create components
+## Create components
 learner = HybridLearnerWithUserOverrides()
 extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
 
-# Create processor
+## Create processor
 processor = create_integrated_processor(
     hybrid_learner=learner,
     adaptive_extractor=extractor,
     user_id="test_user"
 )
 
-# Test a conversation
+## Test a conversation
 result = processor.process_user_message(
     user_message="I feel deeply vulnerable with you",
     ai_response="That vulnerability is your greatest strength",
@@ -353,7 +353,7 @@ result = processor.process_user_message(
 ```python
 
 
-# In main_v2.py, add debug
+## In main_v2.py, add debug
 if 'new_glyphs_this_session' in st.session_state:
 
 ```text
@@ -377,7 +377,7 @@ if 'new_glyphs_this_session' in st.session_state:
 
 
 
-# In ui.py, enable debug mode to see signals
+## In ui.py, enable debug mode to see signals
 
 ```text
 ```

@@ -198,16 +198,16 @@ dialogue_ctx = create_npc_dialogue_context(
     player_lie_history=player_state.lies_caught_by_npc
 )
 
-# Show NPC opening
+## Show NPC opening
 print(dialogue_ctx.generate_opening_dialogue())
 
-# Show dialogue options
+## Show dialogue options
 options = dialogue_ctx.generate_dialogue_options(task_skill)
 ```
 
 ### When Player Chooses Dialogue Option:
 ```python
-# Determine what player is claiming
+## Determine what player is claiming
 claim = SkillClaim(
     player_skill_manager=skill_manager,
     npc_name=npc.name,
@@ -218,17 +218,17 @@ claim = SkillClaim(
 
 ### When Task Completes:
 ```python
-# Compute outcome
+## Compute outcome
 outcome = SkillTaskOutcome(claim, task_difficulty, execution_roll)
 
-# Apply REMNANTS effects & ripples
+## Apply REMNANTS effects & ripples
 npc_manager.apply_skill_task_outcome(outcome)
 
-# Get NPC's reaction
+## Get NPC's reaction
 reaction = dialogue_ctx.generate_reaction_after_success()  # or failure variants
 print(reaction)
 
-# Record for future encounters
+## Record for future encounters
 player_state.lies_caught_by_npc[npc.name] = outcome.lie_discovered
 ```
 
@@ -296,12 +296,12 @@ From `skill_tree_lying.md`:
 
 ## Conclusion
 
-The skill system, lying mechanics, and REMNANTS integration are fully implemented and tested. The system achieves:
+The skill system, lying mechanics, and REMNANTS integration are fully implemented and tested. The
+system achieves:
 
-1. **Immersive consequence delivery** through dialogue, not UI
-2. **Non-linear gameplay** without narrative branching explosion
-3. **Social emergent properties** through influence ripples and Korrin's rumor network
-4. **Multiple playstyles** (honest, deceptive, redemptive) with organic costs
+1. **Immersive consequence delivery** through dialogue, not UI 2. **Non-linear gameplay** without
+narrative branching explosion 3. **Social emergent properties** through influence ripples and
+Korrin's rumor network 4. **Multiple playstyles** (honest, deceptive, redemptive) with organic costs
 5. **Organic reputation system** that evolves through player choices
 
 The architecture is clean, testable, and ready for integration into the game engine.

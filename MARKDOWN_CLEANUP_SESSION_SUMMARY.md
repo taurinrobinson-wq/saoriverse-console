@@ -2,7 +2,8 @@
 
 ## What Was Done
 
-Completed automated markdown formatting fixes across **432 files** using the tools from your home Codespace session.
+Completed automated markdown formatting fixes across **432 files** using the tools from your home
+Codespace session.
 
 ### Fixes Applied
 
@@ -21,16 +22,15 @@ Completed automated markdown formatting fixes across **432 files** using the too
 
 ### Scripts Used
 
-1. **scripts/fix_heading_style.py** — Converts `## Heading ##` to `## Heading`
-2. **scripts/markdown_fixer.py** — Adds blank lines around headings, lists, code blocks
-3. **scripts/md013_wrap.py** — Soft-wraps paragraphs to 100-char limit
+1. **scripts/fix_heading_style.py** — Converts `## Heading ##` to `## Heading` 2.
+**scripts/markdown_fixer.py** — Adds blank lines around headings, lists, code blocks 3.
+**scripts/md013_wrap.py** — Soft-wraps paragraphs to 100-char limit
 
 ### Workflow
 
-1. ✅ Pulled latest from remote (merged linting work + your dialogue system commits)
-2. ✅ Created batch fixer script (`fix_all_markdown.py`)
-3. ✅ Ran all three fixers sequentially on repo
-4. ✅ Committed changes (432 files modified)
+1. ✅ Pulled latest from remote (merged linting work + your dialogue system commits) 2. ✅ Created
+batch fixer script (`fix_all_markdown.py`) 3. ✅ Ran all three fixers sequentially on repo 4. ✅
+Committed changes (432 files modified)
 
 ### Remaining Issues
 
@@ -39,11 +39,12 @@ Based on the LINT_STATUS.md report from remote, these issues likely remain:
 - **MD024** (duplicate headings) — ~11,648 occurrences
   - Same heading appears multiple times in files
   - Requires manual review/consolidation
-  
+
 - **MD033** (raw HTML) — ~12,149 occurrences
-  - HTML tags like `<br>` instead of markdown
+  - HTML tags like `
+` instead of markdown
   - Can be converted systematically
-  
+
 - **MD025** (multiple h1s) — ~4,988 occurrences
   - Multiple level-1 headings in single file
   - Structural issue, needs review
@@ -56,9 +57,10 @@ Based on the LINT_STATUS.md report from remote, these issues likely remain:
 
 To fix remaining issues, prioritize in this order:
 
-1. **MD024** (duplicate headings) — Consolidate or rename duplicates
-2. **MD033** (raw HTML) — Convert `<br>` → line breaks, `<details>` → details blocks
-3. **MD025** (multiple h1s) — Review files and consolidate to single h1 per file
+1. **MD024** (duplicate headings) — Consolidate or rename duplicates 2. **MD033** (raw HTML) —
+Convert `
+` → line breaks, `<details>` → details blocks 3. **MD025** (multiple h1s) — Review
+files and consolidate to single h1 per file
 
 ### Files Changed This Session
 
@@ -71,7 +73,8 @@ To fix remaining issues, prioritize in this order:
 
 All fixes respect `.markdownlint.json`:
 - **MD013**: 100-char soft limit (code blocks excluded)
-- **MD033**: `<br>` tag allowed (others not)
+- **MD033**: `
+` tag allowed (others not)
 - All fixes conservative (no content rewriting)
 
 ## Git Status

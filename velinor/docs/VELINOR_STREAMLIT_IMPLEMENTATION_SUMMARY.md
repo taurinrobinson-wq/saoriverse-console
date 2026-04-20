@@ -2,7 +2,8 @@
 
 **Status:** ✅ COMPLETE AND TESTED
 
-Comprehensive Streamlit implementation of **Velinor: Remnants of the Tone** based on the improvements outlined in `velinor_streamlit_improvements.md`.
+Comprehensive Streamlit implementation of **Velinor: Remnants of the Tone** based on the
+improvements outlined in `velinor_streamlit_improvements.md`.
 
 ## What Was Implemented
 
@@ -106,11 +107,10 @@ class StreamlitGameState:
 
 ### Data Flow
 
-1. **Player Action** → Button click
-2. **Handler** → `handle_choice()`, `handle_glyph_input()`, `handle_attack()`, `handle_special_action()`
-3. **State Update** → Modify `game_state` (TONE, glyphs, NPC perception)
-4. **Render** → UI re-renders with new state via Streamlit `st.rerun()`
-5. **Sidebar** → Auto-updates showing live TONE/REMNANTS/NPC data
+1. **Player Action** → Button click 2. **Handler** → `handle_choice()`, `handle_glyph_input()`,
+`handle_attack()`, `handle_special_action()` 3. **State Update** → Modify `game_state` (TONE,
+glyphs, NPC perception) 4. **Render** → UI re-renders with new state via Streamlit `st.rerun()` 5.
+**Sidebar** → Auto-updates showing live TONE/REMNANTS/NPC data
 
 ### Mode Transitions
 
@@ -162,13 +162,9 @@ streamlit run velinor/streamlit_app.py
 Opens at `http://localhost:8501`
 
 ### Play
-1. Read dialogue in main area
-2. Click choice buttons to advance story
-3. Watch TONE update in sidebar
-4. At chamber door, select 8 glyphs
-5. Click Attack 15 times to obtain glyph
-6. Optionally invoke glyph on NPC
-7. Continue story
+1. Read dialogue in main area 2. Click choice buttons to advance story 3. Watch TONE update in
+sidebar 4. At chamber door, select 8 glyphs 5. Click Attack 15 times to obtain glyph 6. Optionally
+invoke glyph on NPC 7. Continue story
 
 ### Debug
 - Open "🔧 Debug Panel" at bottom
@@ -188,20 +184,20 @@ Opens at `http://localhost:8501`
 
 ### Why These Limitations?
 
-1. **No animations** - Click-based fight loop allows fast iteration on emotional logic
-2. **Gray/green glyphs** - Avoids image rendering bottleneck during prototyping
-3. **Five-button maximum** - Forces clear, simple UI design (prevents overwhelming player)
-4. **Text-based scene** - Placeholder approach, upgrade to React with real graphics later
-5. **Single-player only** - Multiplayer networking is Phase 2
-6. **Simple fight mechanic** - Validates pacing and emotional arc, not combat depth
+1. **No animations** - Click-based fight loop allows fast iteration on emotional logic 2.
+**Gray/green glyphs** - Avoids image rendering bottleneck during prototyping 3. **Five-button
+maximum** - Forces clear, simple UI design (prevents overwhelming player) 4. **Text-based scene** -
+Placeholder approach, upgrade to React with real graphics later 5. **Single-player only** -
+Multiplayer networking is Phase 2 6. **Simple fight mechanic** - Validates pacing and emotional arc,
+not combat depth
 
 ### Why These Choices?
 
-1. **Sidebar for TONE** - Emotional OS should always be visible, informing choices
-2. **Glyph invocation as 5th button** - Separates emotional actions from story progression
-3. **NPC perception tracking** - Gates special dialogue, creates replayability
-4. **Two glyph sets at doors** - Allows 8 required glyphs without UI clutter
-5. **Streamlit for prototype** - Zero boilerplate, rapid iteration on narrative logic
+1. **Sidebar for TONE** - Emotional OS should always be visible, informing choices 2. **Glyph
+invocation as 5th button** - Separates emotional actions from story progression 3. **NPC perception
+tracking** - Gates special dialogue, creates replayability 4. **Two glyph sets at doors** - Allows 8
+required glyphs without UI clutter 5. **Streamlit for prototype** - Zero boilerplate, rapid
+iteration on narrative logic
 
 ## Extensibility
 
@@ -291,14 +287,13 @@ elif mode == "my_mode":
 
 ## Known Limitations
 
-1. **No real image rendering** - Background/overlay are text placeholders
-2. **No animations** - Fight loop is manual click progression
-3. **No audio** - Text-only prototype
-4. **Single session** - No persistent save between app restarts (can add)
-5. **No network** - Single-player only
-6. **Streamlit constraints** - Full page reruns on button click (acceptable for prototype)
+1. **No real image rendering** - Background/overlay are text placeholders 2. **No animations** -
+Fight loop is manual click progression 3. **No audio** - Text-only prototype 4. **Single session** -
+No persistent save between app restarts (can add) 5. **No network** - Single-player only 6.
+**Streamlit constraints** - Full page reruns on button click (acceptable for prototype)
 
-All of these are intentional design choices to prioritize fast iteration on emotional logic validation.
+All of these are intentional design choices to prioritize fast iteration on emotional logic
+validation.
 
 ## Testing Instructions
 
@@ -313,13 +308,9 @@ Takes ~1 second, validates all core systems.
 streamlit run velinor/streamlit_app.py
 ```
 
-Then:
-1. Make choices → watch TONE update
-2. Reach chamber door → select 8 glyphs
-3. Enter chamber → attack 15 times
-4. Get new glyph → check sidebar
-5. Use glyph on NPC → see special dialogue
-6. Try different paths → verify NPC perception changes
+Then: 1. Make choices → watch TONE update 2. Reach chamber door → select 8 glyphs 3. Enter chamber →
+attack 15 times 4. Get new glyph → check sidebar 5. Use glyph on NPC → see special dialogue 6. Try
+different paths → verify NPC perception changes
 
 ## Commit History
 

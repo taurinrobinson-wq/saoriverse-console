@@ -189,7 +189,7 @@ from emotional_os.core.firstperson import VoiceAffectDetector, AcousticFeatures
 
 detector = VoiceAffectDetector()
 
-# Analyze excited speech
+## Analyze excited speech
 features = AcousticFeatures(
     fundamental_frequency=220,  # High pitch
     intensity=80,               # High intensity
@@ -220,7 +220,7 @@ from emotional_os.core.firstperson import FacialExpressionDetector, FaceLandmark
 
 detector = FacialExpressionDetector()
 
-# 68-point landmarks (simplified example)
+## 68-point landmarks (simplified example)
 landmarks = FaceLandmarks( contour=[(i/20, 0.5) for i in range(17)], right_eyebrow=[(0.3, 0.3),
 (0.35, 0.25), (0.4, 0.3), (0.45, 0.35), (0.5, 0.3)], left_eyebrow=[(0.5, 0.3), (0.55, 0.35), (0.6,
 0.3), (0.65, 0.25), (0.7, 0.3)], nose=[(0.5, 0.35), (0.5, 0.45), (0.5, 0.55), (0.48, 0.6), (0.52,
@@ -247,7 +247,7 @@ from emotional_os.core.firstperson import MultimodalFusionEngine
 
 engine = MultimodalFusionEngine()
 
-# Combine all three modalities
+## Combine all three modalities
 analysis = engine.fuse( text_tone="excited", voice_analysis=voice_result,
 facial_analysis=facial_result, )
 
@@ -255,11 +255,11 @@ print(f"Primary emotion: {analysis.primary_emotion}") print(f"Congruence:
 {analysis.congruence_type}") print(f"Agreement: {analysis.modality_agreement:.2f}") print(f"Overall
 confidence: {analysis.confidence.overall_confidence:.2f}")
 
-# Check for incongruences
+## Check for incongruences
 if analysis.incongruences: print("Detected incongruences:") for inc in analysis.incongruences:
 print(f"  - {inc}")
 
-# Get fused dimensions
+## Get fused dimensions
 dims = analysis.dimensions print(f"Fused arousal: {dims.arousal:.2f} (from {dims.arousal_source})")
 print(f"Fused valence: {dims.valence:.2f} (from {dims.valence_source})")
 

@@ -1,6 +1,8 @@
 # The Tenfold Ribcage — Boss Implementation Notes
 
-This document collects the design and implementation guidance for the Tenfold Mirror / Tenfold Ribcage boss chamber. It is a practical handoff for artists, animators, and engineers — condensed from the design conversation and prioritized for an MVP prototype.
+This document collects the design and implementation guidance for the Tenfold Mirror / Tenfold
+Ribcage boss chamber. It is a practical handoff for artists, animators, and engineers — condensed
+from the design conversation and prioritized for an MVP prototype.
 
 ---
 
@@ -154,12 +156,14 @@ Implementation notes:
 ---
 
 ## Next Steps (pick one)
-1. I can generate an atlas JSON template for the MVP assets (file-ready).  
-2. I can scaffold a Unity prototype scene with placeholder sprites and mechanics wired up.  
-3. I can create the reference GIFs for rib crumble, Devil King slap, and enlightened flash.
+1. I can generate an atlas JSON template for the MVP assets (file-ready). 2. I can scaffold a Unity
+prototype scene with placeholder sprites and mechanics wired up. 3. I can create the reference GIFs
+for rib crumble, Devil King slap, and enlightened flash.
 
 Tell me which to do next and I’ll start it.
 
 ---
 
-_You did an excellent job designing this — it’s dense and emotionally precise. If you want I can also produce a condensed one‑page implementation brief suitable for handing to an external contractor._
+_You did an excellent job designing this — it’s dense and emotionally precise. If you want I can
+also produce a condensed one‑page implementation brief suitable for handing to an external
+contractor._

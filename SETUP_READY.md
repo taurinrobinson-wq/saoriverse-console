@@ -11,7 +11,7 @@ dependencies installed and verified.
 
 ```powershell
 
-# Start the app
+## Start the app
 py -3.12 -m streamlit run app.py
 
 ```text
@@ -52,19 +52,19 @@ in requirements.txt 4. ✅ Downloaded spacy English model 5. ✅ Verified all pa
 ```powershell
 
 
-# Run on different port
+## Run on different port
 py -3.12 -m streamlit run app.py --server.port 8502
 
-# Check installed packages
+## Check installed packages
 py -3.12 -m pip list
 
-# Run tests
+## Run tests
 py -3.12 -m pytest
 
-# Install new package
+## Install new package
 py -3.12 -m pip install package-name
 
-# Update specific package
+## Update specific package
 
 ```text
 

@@ -120,13 +120,13 @@ These libraries enable audio features. Install only if you want voice:
 ```bash
 
 
-# For speech-to-text
+## For speech-to-text
 pip install faster-whisper librosa soundfile
 
-# For text-to-speech
+## For text-to-speech
 pip install TTS
 
-# Optional: GPU acceleration
+## Optional: GPU acceleration
 
 ```text
 
@@ -154,15 +154,15 @@ pip install TTS
 ```python
 
 
-# Import audio components
+## Import audio components
 from emotional_os.deploy.modules.ui_components import ( render_voice_mode_toggle,
 synthesize_response_audio, render_audio_playback, )
 
-# Synthesize response with glyph guidance
+## Synthesize response with glyph guidance
 audio_bytes = synthesize_response_audio( response_text="I hear you.", glyph_name="I_HEAR_YOU",  #
 Influences prosody voice="Warm", speed=1.0 )
 
-# Display playback widget
+## Display playback widget
 
 ```text
 ```text

@@ -30,10 +30,10 @@ If you have multiple Python versions installed:
 ```bash
 
 
-# List installed versions
+## List installed versions
 py --list-paths
 
-# Use Python 3.12 specifically
+## Use Python 3.12 specifically
 py -3.12 -m pip install -r requirements.txt
 
 ```text
@@ -45,10 +45,10 @@ py -3.12 -m pip install -r requirements.txt
 ```bash
 
 
-# With pyenv
+## With pyenv
 pyenv install 3.12.0 pyenv local 3.12.0
 
-# With conda
+## With conda
 conda create -n firstperson python=3.12 conda activate firstperson
 
 ```text
@@ -66,10 +66,10 @@ All dependencies are now consolidated in **`requirements.txt`** at the root of t
 
 
 
-# Install all dependencies
+## Install all dependencies
 pip install -r requirements.txt
 
-# Or use pip-tools for reproducible builds
+## Or use pip-tools for reproducible builds
 pip install pip-tools pip-compile requirements.txt
 
 ```text
@@ -166,12 +166,12 @@ If using a virtual environment:
 
 ```bash
 
-# Windows
+## Windows
 .venv\Scripts\activate
 
-# Linux/Mac
+## Linux/Mac
 source .venv/bin/activate
 
-# Then install
+## Then install
 pip install -r requirements.txt
 ```

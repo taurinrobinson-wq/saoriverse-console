@@ -48,20 +48,19 @@ All integration tests passed successfully:
 ```python
 from DraftShift import core
 
-# Analyze tone
-analysis = core.detect_tone("I understand your concerns and will help.")
-print(f"Tone: {analysis['tone']}")
-print(f"Confidence: {analysis['confidence']}")
+## Analyze tone
+analysis = core.detect_tone("I understand your concerns and will help.") print(f"Tone:
+{analysis['tone']}") print(f"Confidence: {analysis['confidence']}")
 
-# Transform tone
+## Transform tone
 transformed = core.shift_tone(analysis, target_tone=2)  # More friendly
 ```
 
 ### Run Tests
 
 ```bash
-cd d:\\saoriverse-console
-py -3.12 -c "import sys; sys.path.insert(0, '.'); from DraftShift.Tests.test_litone_integration import *"
+cd d:\\saoriverse-console py -3.12 -c "import sys; sys.path.insert(0, '.'); from
+DraftShift.Tests.test_litone_integration import *"
 ```
 
 ### Component-Specific Usage
@@ -70,12 +69,12 @@ py -3.12 -c "import sys; sys.path.insert(0, '.'); from DraftShift.Tests.test_lit
 ```python
 from DraftShift.tone_signal_parser import create_tone_signal_parser
 
-parser = create_tone_signal_parser()
-analysis = parser.analyze_text("Therefore, we must protect our interests.")
+parser = create_tone_signal_parser() analysis = parser.analyze_text("Therefore, we must protect our
+interests.")
 
-print(f"Primary Signal: {analysis.primary_signal_name}")  # β (Boundary/Protective)
-print(f"Tone Profile: {analysis.tone_profile}")            # Protective/Formal
-print(f"Confidence: {analysis.confidence}")                # 0.XX
+print(f"Primary Signal: {analysis.primary_signal_name}")  # β (Boundary/Protective) print(f"Tone
+Profile: {analysis.tone_profile}")            # Protective/Formal print(f"Confidence:
+{analysis.confidence}")                # 0.XX
 ```
 
 **7 Core Signals Detected:**
@@ -91,12 +90,10 @@ print(f"Confidence: {analysis.confidence}")                # 0.XX
 ```python
 from DraftShift.enhanced_affect_parser import create_enhanced_affect_parser
 
-parser = create_enhanced_affect_parser()
-analysis = parser.analyze("This is wonderful!")
+parser = create_enhanced_affect_parser() analysis = parser.analyze("This is wonderful!")
 
-print(f"Emotion: {analysis.primary_emotion}")  # joy
-print(f"Valence: {analysis.valence}")          # 0.XX (positive)
-print(f"Arousal: {analysis.arousal}")          # 0.XX (level of activity)
+print(f"Emotion: {analysis.primary_emotion}")  # joy print(f"Valence: {analysis.valence}")
+## 0.XX (positive) print(f"Arousal: {analysis.arousal}")          # 0.XX (level of activity)
 ```
 
 **Analysis Methods:**
@@ -108,14 +105,14 @@ print(f"Arousal: {analysis.arousal}")          # 0.XX (level of activity)
 ```python
 from DraftShift.tone_analysis_composer import create_tone_analysis_composer
 
-composer = create_tone_analysis_composer()
-analysis = composer.analyze_tone("Formal legal text here...")
+composer = create_tone_analysis_composer() analysis = composer.analyze_tone("Formal legal text
+here...")
 
-print(f"Tone: {analysis['tone']}")              # Identified tone
-print(f"Strengths: {analysis['tone_strengths']}")    # What works well
-print(f"Issues: {analysis['tone_issues']}")    # What needs adjustment
+print(f"Tone: {analysis['tone']}")              # Identified tone print(f"Strengths:
+{analysis['tone_strengths']}")    # What works well print(f"Issues: {analysis['tone_issues']}")    #
+What needs adjustment
 
-# Get transformation guidance
+## Get transformation guidance
 guidance = composer.suggest_transformation(analysis, target_tone="Empathetic")
 ```
 

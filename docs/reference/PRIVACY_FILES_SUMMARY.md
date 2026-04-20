@@ -182,10 +182,10 @@ Learning data preserved
 
 cd /Users/taurinrobinson/saoriverse-console
 
-# Run unit tests
+## Run unit tests
 python3 test_privacy_masking.py
 
-# Run E2E tests
+## Run E2E tests
 
 ```text
 ```
@@ -195,7 +195,7 @@ python3 test_privacy_masking.py
 
 ```bash
 
-# Run all three test suites
+## Run all three test suites
 python3 privacy_monitor.py
 python3 test_privacy_masking.py
 ```text
@@ -209,7 +209,7 @@ python3 test_privacy_masking.py
 ```bash
 
 
-# Monthly compliance check
+## Monthly compliance check
 
 ```text
 

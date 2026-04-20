@@ -66,7 +66,7 @@ all services 5. Verifies everything works 6. Shows you the URLs
 
 ```bash
 
-# Follow the step-by-step instructions in:
+## Follow the step-by-step instructions in:
 ```text
 
 ```text
@@ -80,7 +80,7 @@ all services 5. Verifies everything works 6. Shows you the URLs
 ```bash
 
 
-# Read detailed instructions:
+## Read detailed instructions:
 🔧 DOCKER_UBUNTU_SETUP.md
 
 ```text
@@ -166,19 +166,19 @@ Once deployed, these are your daily commands:
 ```bash
 
 
-# See what's running
+## See what's running
 docker compose ps
 
-# Watch logs (CTRL+C to stop)
+## Watch logs (CTRL+C to stop)
 docker compose logs -f
 
-# Restart everything
+## Restart everything
 docker compose restart
 
-# Stop everything
+## Stop everything
 docker compose stop
 
-# Update code and restart
+## Update code and restart
 
 ```text
 
@@ -199,10 +199,10 @@ docker compose stop
 ```bash
 
 
-# Check the error
+## Check the error
 docker compose logs
 
-# Usually just need to retry
+## Usually just need to retry
 
 ```text
 ```text
@@ -215,10 +215,10 @@ docker compose logs
 
 
 
-# See what's wrong
+## See what's wrong
 docker compose logs
 
-# Rebuild from scratch
+## Rebuild from scratch
 docker compose down docker compose build --no-cache
 
 ```sql
@@ -229,11 +229,11 @@ docker compose down docker compose build --no-cache
 
 ```bash
 
-# Test from inside droplet first
+## Test from inside droplet first
 curl http://localhost:3000
 curl http://localhost:8000/health
 
-# Then from your machine (replace IP if different)
+## Then from your machine (replace IP if different)
 curl http://161.35.227.49:3000
 ```text
 

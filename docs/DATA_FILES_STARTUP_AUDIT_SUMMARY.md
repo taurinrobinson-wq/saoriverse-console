@@ -51,7 +51,7 @@ But they're actually in:
 
 ```python
 
-# Line 73-74 - Will fail:
+## Line 73-74 - Will fail:
 glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
 
@@ -67,7 +67,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```python
 
 
-# Line 27 - Will fail:
+## Line 27 - Will fail:
 
 ```text
 
@@ -81,7 +81,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```python
 
 
-# Line 89 - Will fail:
+## Line 89 - Will fail:
 
 ```text
 ```text
@@ -97,7 +97,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 
 
 
-# Line 18 - Will fail:
+## Line 18 - Will fail:
 
 ```text
 ```
@@ -110,7 +110,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 
 ```python
 
-# Line 33 - Will fail unless running from src/ directory:
+## Line 33 - Will fail unless running from src/ directory:
 ```text
 
 ```text
@@ -128,21 +128,21 @@ This is the **FASTEST FIX** - just create the directory structure code expects:
 ```bash
 
 
-# Run from repo root:
+## Run from repo root:
 mkdir -p emotional_os/glyphs
 mkdir -p emotional_os/core
 mkdir -p emotional_os/lexicon
 
-# Copy glyph files
+## Copy glyph files
 cp data/glyph_lexicon_rows.json emotional_os/glyphs/
 cp data/glyph_lexicon_rows.csv emotional_os/glyphs/
 cp data/antonym_glyphs_indexed.json emotional_os/glyphs/
 
-# Copy config files
+## Copy config files
 cp src/emotional_os_lexicon/word_centric_emotional_lexicon_expanded.json emotional_os/lexicon/
 cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
 
-# Verify (should show all files found):
+## Verify (should show all files found):
 ls -la emotional_os/glyphs/
 ls -la emotional_os/core/
 
@@ -280,7 +280,7 @@ Before starting the app, run this check:
 ```bash
 
 
-# Check if critical files exist at code's expected paths
+## Check if critical files exist at code's expected paths
 test -f "emotional_os/glyphs/glyph_lexicon_rows.json" && echo "✅ Glyph JSON found" || echo "❌ Glyph JSON MISSING"
 test -f "emotional_os/glyphs/glyph_lexicon_rows.csv" && echo "✅ Glyph CSV found" || echo "❌ Glyph CSV MISSING"
 test -f "emotional_os/core/suicidality_protocol.json" && echo "✅ Protocol found" || echo "❌ Protocol MISSING"

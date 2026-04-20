@@ -130,16 +130,16 @@ Save a file → Browser auto-refreshes. No manual reload needed!
 
 cd velinor-web
 
-# Start dev (port 3000)
+## Start dev (port 3000)
 npm run dev
 
-# Build for production
+## Build for production
 npm run build
 
-# Check TypeScript errors
+## Check TypeScript errors
 npm run lint
 
-# Run production server
+## Run production server
 
 ```text
 ```
@@ -226,10 +226,10 @@ export NVM_DIR="$HOME/.nvm" source "$NVM_DIR/nvm.sh"
 
 
 
-# Kill it
+## Kill it
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
-# Or use different port
+## Or use different port
 
 ```bash
 ```

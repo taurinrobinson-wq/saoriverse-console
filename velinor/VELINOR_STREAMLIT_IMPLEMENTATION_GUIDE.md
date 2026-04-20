@@ -8,7 +8,9 @@
 
 ## Quick Summary
 
-This guide consolidates 6000+ lines of design conversation into an actionable blueprint for building the Velinor Streamlit prototype. It contains everything needed to implement a working emotional narrative sandbox.
+This guide consolidates 6000+ lines of design conversation into an actionable blueprint for building
+the Velinor Streamlit prototype. It contains everything needed to implement a working emotional
+narrative sandbox.
 
 ---
 
@@ -407,7 +409,8 @@ When player's TONE shifts → NPCs' REMNANTS shift → World changes
 
 ### 10.3 Fixed Points & Inevitable Events
 
-Certain story beats **cannot be avoided** because they are the emotional anchors the entire narrative depends on. The player's choices shape *how* they happen, not *if* they happen.
+Certain story beats **cannot be avoided** because they are the emotional anchors the entire
+narrative depends on. The player's choices shape *how* they happen, not *if* they happen.
 
 ---
 
@@ -434,11 +437,9 @@ Certain story beats **cannot be avoided** because they are the emotional anchors
 
 ## Part 12: Next Steps
 
-1. **Week 1**: Complete core state machine & UI framework
-2. **Week 2**: Implement first 3 scenes + NPC system
-3. **Week 3**: Implement glyph system + transcendence chambers
-4. **Week 4**: Add Saori's arc + flickers + final chamber
-5. **Week 5**: Ending branches + polish + testing
+1. **Week 1**: Complete core state machine & UI framework 2. **Week 2**: Implement first 3 scenes +
+NPC system 3. **Week 3**: Implement glyph system + transcendence chambers 4. **Week 4**: Add Saori's
+arc + flickers + final chamber 5. **Week 5**: Ending branches + polish + testing
 
 ---
 

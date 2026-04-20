@@ -38,7 +38,7 @@ app.py (entry point)
 
 
 
-# From session_manager.py
+## From session_manager.py
 if "firstperson_orchestrator" not in st.session_state: try: from ..core.firstperson import
 create_orchestrator orchestrator = create_orchestrator(user_id, conversation_id) if orchestrator:
 orchestrator.initialize_session()
@@ -55,7 +55,7 @@ orchestrator.initialize_session()
 
 ```python
 
-# From response_handler.py
+## From response_handler.py
 fp_orch = st.session_state.get("firstperson_orchestrator")
 if fp_orch:
 ```text
@@ -73,7 +73,7 @@ if fp_orch:
 ```python
 
 
-# From response_handler.py
+## From response_handler.py (2)
 fp_orch = st.session_state.get("firstperson_orchestrator")
 firstperson_response = fp_orch.handle_conversation_turn(user_input)
 if isinstance(firstperson_response, dict):

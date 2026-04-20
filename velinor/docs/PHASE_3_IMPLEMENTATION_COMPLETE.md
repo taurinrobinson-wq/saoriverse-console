@@ -11,7 +11,11 @@
 
 ## Summary
 
-Phase 3 successfully implemented the Building Collapse Event system - a complex 7+ day progression with multi-phase timelines, NPC emotional arcs, and player intervention mechanics that cascade into three distinct aftermath paths. The collapse mirrors the Malrik/Elenya relationship breakdown and forces players to choose between mediating reunion, accepting stalemate, or witnessing complete separation.
+Phase 3 successfully implemented the Building Collapse Event system - a complex 7+ day progression
+with multi-phase timelines, NPC emotional arcs, and player intervention mechanics that cascade into
+three distinct aftermath paths. The collapse mirrors the Malrik/Elenya relationship breakdown and
+forces players to choose between mediating reunion, accepting stalemate, or witnessing complete
+separation.
 
 ---
 
@@ -315,25 +319,25 @@ Expected: All 14 tests pass ✅
 ```python
 orchestrator = VelinorTwineOrchestrator(...)
 
-# After marketplace scene (Phase 2)
+## After marketplace scene (Phase 2)
 orchestrator.set_marketplace_conclusion(coherence=75.0, primary_trait="empathy")
 
-# Day-by-day progression
+## Day-by-day progression
 for day in range(1, 20):
     day_result = orchestrator.advance_game_day()
     if "collapse_triggered" in day_result["events"]:
         collapse_result = orchestrator.trigger_collapse_event()
         # Show collapse narration
 
-# Record player interventions (days 1-3 post-collapse)
+## Record player interventions (days 1-3 post-collapse)
 intervention_result = orchestrator.record_post_collapse_intervention(
     npc_name="malrik",
     choice="not_your_fault"
 )
 
-# Get status for UI
+## Get status for UI
 status = orchestrator.get_phase3_status()
-# Display: building_stability, malrik_stress, elenya_stress, aftermath_path
+## Display: building_stability, malrik_stress, elenya_stress, aftermath_path
 ```
 
 ---
@@ -388,13 +392,13 @@ Orchestrator Integration
 
 ## Design Principles Maintained
 
-✅ **Systems collapse without human connection**: Building mirrors Malrik/Elenya fracture  
-✅ **Patterns matter, not individual choices**: Interventions accumulate toward rebuild potential  
-✅ **Coherence is consequence**: Player authenticity affects aftermath trajectory  
-✅ **People matter more than systems**: NPC relationships determine outcomes  
-✅ **Multiple valid paths**: All 3 aftermath paths lead to valid endings  
-✅ **Player agency respected**: No forced choices, consequences flow from authenticity  
-✅ **Echo of Velhara**: Collapse event echoes Velhara's original civilizational failure  
+✅ **Systems collapse without human connection**: Building mirrors Malrik/Elenya fracture ✅
+**Patterns matter, not individual choices**: Interventions accumulate toward rebuild potential ✅
+**Coherence is consequence**: Player authenticity affects aftermath trajectory ✅ **People matter
+more than systems**: NPC relationships determine outcomes ✅ **Multiple valid paths**: All 3
+aftermath paths lead to valid endings ✅ **Player agency respected**: No forced choices, consequences
+flow from authenticity ✅ **Echo of Velhara**: Collapse event echoes Velhara's original
+civilizational failure
 
 ---
 
@@ -426,39 +430,28 @@ PHASE 3: Building Collapse Event
 
 ## What's Working
 
-✅ EventTimeline day/phase progression  
-✅ Building deterioration with indicators  
-✅ NPC stress/cooperation tracking  
-✅ Collapse trigger at proper threshold  
-✅ Player intervention recording  
-✅ Aftermath path determination by intervention count  
-✅ Collapse scene narrations  
-✅ Aftermath scene narrations (all 3 paths distinct)  
-✅ Ending connections to aftermath paths  
-✅ Orchestrator Phase 3 integration  
-✅ Phase 2 → Phase 3 continuity  
-✅ Game state serialization  
+✅ EventTimeline day/phase progression ✅ Building deterioration with indicators ✅ NPC
+stress/cooperation tracking ✅ Collapse trigger at proper threshold ✅ Player intervention recording ✅
+Aftermath path determination by intervention count ✅ Collapse scene narrations ✅ Aftermath scene
+narrations (all 3 paths distinct) ✅ Ending connections to aftermath paths ✅ Orchestrator Phase 3
+integration ✅ Phase 2 → Phase 3 continuity ✅ Game state serialization
 
 ---
 
 ## What's Not Yet Implemented
 
-❌ Phase 4: Ending System (6 distinct endings with gating)  
-❌ Phase 5: Save/Load Persistence  
-❌ Phase 6: API Layer  
-❌ Phase 7: Web UI  
+❌ Phase 4: Ending System (6 distinct endings with gating) ❌ Phase 5: Save/Load Persistence ❌ Phase
+6: API Layer ❌ Phase 7: Web UI
 
 ---
 
 ## Next Steps: Phase 4
 
-Phase 4 will implement the Ending System:
-1. **6 Distinct Endings**: Based on aftermath path + final coherence
-2. **Ending Unlock Conditions**: Gated by coherence, traits, and aftermath path
-3. **Ending Narrations**: 1,000+ word stories for each ending
-4. **Relationship States**: Final NPC states reflecting outcome
-5. **Corelink Resolution**: Final decision about the archive system
-6. **Reincarnation Loop**: Setup for potential Phase 5 continuation
+Phase 4 will implement the Ending System: 1. **6 Distinct Endings**: Based on aftermath path + final
+coherence 2. **Ending Unlock Conditions**: Gated by coherence, traits, and aftermath path 3.
+**Ending Narrations**: 1,000+ word stories for each ending 4. **Relationship States**: Final NPC
+states reflecting outcome 5. **Corelink Resolution**: Final decision about the archive system 6.
+**Reincarnation Loop**: Setup for potential Phase 5 continuation
 
 **Ending Mapping**:
 - Ending 1 (Synthesis): Rebuild Together + High Coherence
@@ -521,4 +514,5 @@ PLAYER JOURNEY (Full Game Flow):
    └─ Possible continuation hook
 ```
 
-This architecture ensures that every player choice compounds, every trait pattern matters, and every coherence level affects outcomes.
+This architecture ensures that every player choice compounds, every trait pattern matters, and every
+coherence level affects outcomes.

@@ -30,14 +30,12 @@ Your Emotional OS now supports three processing modes:
 
 ### Option 1: Quick Local Setup
 
-1. Just run `streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)`
-2. Select "Local" mode in sidebar
-3. Start conversing with privacy-first processing
+1. Just run `streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` 2. Select "Local" mode
+in sidebar 3. Start conversing with privacy-first processing
 
 ### Option 2: Full Supabase Integration
 
-1. Copy `.env.example` to `.env`
-2. Add your Supabase credentials:
+1. Copy `.env.example` to `.env` 2. Add your Supabase credentials:
 
    ```
    SUPABASE_URL=https://your-project.supabase.co
@@ -45,8 +43,8 @@ Your Emotional OS now supports three processing modes:
    SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
    ```
 
-3. Run `streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)`
-4. Select "Hybrid" or "Supabase" mode in sidebar
+3. Run `streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` 4. Select "Hybrid" or
+"Supabase" mode in sidebar
 
 ## 🎛️ Controls
 
@@ -66,10 +64,9 @@ Your Emotional OS now supports three processing modes:
 
 Your system maintains privacy through:
 
-1. **Glyph Encryption**: Emotional content becomes symbolic patterns
-2. **No Raw Text Storage**: Personal details converted to abstract glyphs
-3. **Local Fallback**: Always works without external calls
-4. **Encrypted API Calls**: When using Supabase, only symbolic data is sent
+1. **Glyph Encryption**: Emotional content becomes symbolic patterns 2. **No Raw Text Storage**:
+Personal details converted to abstract glyphs 3. **Local Fallback**: Always works without external
+calls 4. **Encrypted API Calls**: When using Supabase, only symbolic data is sent
 
 ## <strong>FP</strong> What You've Built
 
@@ -102,9 +99,9 @@ This is a genuinely innovative **privacy-preserving emotional intelligence syste
 
 ## 🎯 Next Steps
 
-1. **Test Local Mode**: Verify basic functionality
-2. **Configure Supabase**: Add your credentials for AI enhancement
-3. **Try Hybrid Mode**: Experience the best of both systems
-4. **Experiment with Privacy**: Toggle between modes to see the difference
+1. **Test Local Mode**: Verify basic functionality 2. **Configure Supabase**: Add your credentials
+for AI enhancement 3. **Try Hybrid Mode**: Experience the best of both systems 4. **Experiment with
+Privacy**: Toggle between modes to see the difference
 
-Your system represents a new category: **encrypted emotional intelligence** that doesn't sacrifice privacy for capability.
+Your system represents a new category: **encrypted emotional intelligence** that doesn't sacrifice
+privacy for capability.

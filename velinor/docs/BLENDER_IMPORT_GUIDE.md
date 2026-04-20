@@ -3,10 +3,9 @@
 ## Quick Start
 
 ### Option 1: Run Python Script in Blender (Recommended)
-1. **Open Blender 4.2.16 LTS**
-2. **Switch to Scripting workspace** (top-right dropdown)
-3. **Text > Open Text Block** → select `tools/blender_import_velinorian.py`
-4. **Run Script** (Alt+P) or click the Play button
+1. **Open Blender 4.2.16 LTS** 2. **Switch to Scripting workspace** (top-right dropdown) 3. **Text >
+Open Text Block** → select `tools/blender_import_velinorian.py` 4. **Run Script** (Alt+P) or click
+the Play button
 
 This will:
 - Create a "Velinorian_Settlement" collection
@@ -15,10 +14,8 @@ This will:
 - Frame all objects in the 3D viewport
 
 ### Option 2: Import glTF Files
-1. **File > Import > glTF 2.0 (.glb/.gltf)**
-2. Navigate to `velinor/assets/`
-3. Select any `*_velinorian.glb` file (e.g., `brickhouse-entrance_velinorian.glb`)
-4. Import and scale as needed
+1. **File > Import > glTF 2.0 (.glb/.gltf)** 2. Navigate to `velinor/assets/` 3. Select any
+`*_velinorian.glb` file (e.g., `brickhouse-entrance_velinorian.glb`) 4. Import and scale as needed
 
 ### Option 3: Command Line
 ```bash
@@ -66,10 +63,8 @@ The Python scripts apply a unified color palette:
 ## Customize Further in Blender
 
 ### Edit Materials
-1. **Shading workspace**
-2. Select an object (e.g., `brick_merged`)
-3. **Material Properties** → Adjust color, roughness, metallic, subsurface
-4. Add textures (Principled BSDF nodes)
+1. **Shading workspace** 2. Select an object (e.g., `brick_merged`) 3. **Material Properties** →
+Adjust color, roughness, metallic, subsurface 4. Add textures (Principled BSDF nodes)
 
 ### Add Details
 - **Modifiers** → Add displacement, normal maps for weathering

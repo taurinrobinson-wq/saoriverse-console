@@ -2,7 +2,9 @@
 
 ## 📡 API Overview
 
-The FastAPI backend exposes DraftShift's full civility analysis and transformation pipeline. This specification defines the exact request/response contract for the frontend and any third-party integrations.
+The FastAPI backend exposes DraftShift's full civility analysis and transformation pipeline. This
+specification defines the exact request/response contract for the frontend and any third-party
+integrations.
 
 **Base URL**: `http://localhost:8000` (development) or `https://your-domain.com` (production)
 
@@ -422,7 +424,7 @@ def analyze_correspondence(text, mode="civility"):
     else:
         raise Exception(f"API error: {response.status_code}")
 
-# Usage
+## Usage
 result = analyze_correspondence("We strongly object to your position.")
 print(f"Civility Score: {result['civility_score']}")
 print(f"Rewrite: {result['suggested_rewrite']}")
@@ -458,4 +460,5 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ---
 
-This API provides the foundation for both the Streamlit prototype and the eventual React/HTML/JS frontend.
+This API provides the foundation for both the Streamlit prototype and the eventual React/HTML/JS
+frontend.

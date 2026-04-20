@@ -37,8 +37,8 @@ For example, in your `story_definitions.py`, you might write:
 
 python text="""\*They’re staring at me. What should I do?\*"""
 
-If your engine doesn’t support Markdown, you might need to define a custom tag like `<i>They’re
-staring at me.</i>` or use a formatting function.
+If your engine doesn’t support Markdown, you might need to define a custom tag like `*They’re
+staring at me.*` or use a formatting function.
 
 Want me to help you define a formatting parser that handles italics, bold, and maybe even glyph glow
 effects in your story engine?
@@ -293,7 +293,7 @@ Chalk of Paths", "ripple": {"Merchants": 0.15} }, "Sera": { "sphere": \["Shrine 
 * **Step 3:** Apply ripple effects to spheres or other NPCs.
 * **Step 4:** Trigger influence (tool, ritual, quest) if thresholds are met.
 
-## **✨ Why This Works**
+## **✨ Why This Works** (2)
 
 * You don’t need a giant personality survey.
 * Each NPC is defined by **sphere \+ trait \+ influence \+ ripple**.
@@ -339,7 +339,7 @@ Each NPC gets a **REMNANTS profile**: json { "Ravi": {"resolve": 0.6, "empathy":
   * Ravi’s high Trust \+ moderate Resolve means he rewards boldness but dislikes withholding.
 * Ripple effects: NPC spheres (Merchants, Shrine keepers, Wanderers) shift based on aggregate REMNANTS values.
 
-## **✨ Why This Works**
+## **✨ Why This Works** (3)
 
 * **Lore‑aligned**: “Remnants of the Tone” isn’t just a title, it’s the system.
 * **Compact but expressive**: 8 traits cover most relational behaviors without being overwhelming.
@@ -495,7 +495,7 @@ updated\_ravi \= apply\_tone\_to\_remnants(ravi\_profile, tone\_effects)
 So Ravi becomes more caring and dependent, but less firm and slightly more skeptical — a natural
 ripple from the player’s choices.
 
-## **✨ Why This Works**
+## **✨ Why This Works** (4)
 
 * **Automated**: You don’t hand‑code resonance values.
 * **Dynamic**: NPC personalities evolve as the player’s TONE shifts.
@@ -539,7 +539,7 @@ ripple\_value npc\_profiles\[target\]\["skepticism"\] \= npc\_profiles\[target\]
 
 return npc\_profiles
 
-## **🌀 Example Run**
+## **🌀 Example Run** (2)
 
 python npc\_profiles \= { "Ravi": {"resolve": 0.6, "empathy": 0.5, "memory": 0.4, "nuance": 0.3,
 "authority": 0.3, "need": 0.5, "trust": 0.7, "skepticism": 0.2}, "Nima": {"resolve": 0.5, "empathy":
@@ -552,13 +552,13 @@ influence\_map \= { "Ravi": {"Nima": \-0.1},   \# Ravi’s trust weakens Nima’
 
 updated\_profiles \= apply\_tone\_to\_all\_npcs(npc\_profiles, tone\_effects, influence\_map)
 
-### **Result:**
+### **Result:** (2)
 
 * Ravi: Empathy ↑, Need ↑, Resolve ↓, Trust ↓, Skepticism ↑.
 * Nima: Empathy ↑, Need ↑, Resolve ↓, Trust ↓, Skepticism ↑.
 * Ripple: Ravi’s trust loss nudges Nima further skeptical; Nima’s suspicion nudges Ravi’s trust down again.
 
-## **✨ Why This Works**
+## **✨ Why This Works** (5)
 
 * **Automated scaling**: One function applies player tone shifts across all NPCs.
 * **Relational web**: Influence maps create emergent drama (Ravi’s trust weakens Nima’s openness).
@@ -588,7 +588,7 @@ history.append({"encounter": i, "profiles": npc\_profiles.copy()})
 
 return history
 
-## **🌀 Example Run**
+## **🌀 Example Run** (3)
 
 ### **Initial Profiles**
 
@@ -731,7 +731,7 @@ json { "name": "Dalen", "sphere": \["Wanderers", "Hidden shrines"\], "remnants":
 "skepticism": 0.3 }, "trait": "Narrative Presence", "influence": "Leads player into unstable
 corridors, gifting Trial Token", "ripple": { "Ravi": 0.1, "Nima": \-0.1 } }
 
-## **🎮 Gameplay Integration**
+## **🎮 Gameplay Integration** (2)
 
 * **TONE Alignment**:
   * Narrative Presence choices raise his resonance.
@@ -786,7 +786,7 @@ json { "name": "Mariel", "sphere": \["Merchants", "Shrine keepers"\], "remnants"
 "skepticism": 0.2 }, "trait": "Trust \+ Empathy", "influence": "Offers Thread of Memory, a tool that
 binds glyph fragments together", "ripple": { "Ravi": 0.1, "Nima": 0.1 } }
 
-## **🎮 Gameplay Integration**
+## **🎮 Gameplay Integration** (3)
 
 * **TONE Alignment**:
   * Empathy and Trust choices raise her resonance.
@@ -797,7 +797,7 @@ binds glyph fragments together", "ripple": { "Ravi": 0.1, "Nima": 0.1 } }
   * Her approval strengthens Ravi’s merchant trust and Nima’s shrine empathy simultaneously.
   * Her disapproval weakens both spheres, making tools and rituals harder to access.
 
-## **🧠 Narrative Role**
+## **🧠 Narrative Role** (2)
 
 Mariel is a **binding node** — she doesn’t just offer tools, she stabilizes relationships. Her
 Thread of Memory isn’t just a mechanic, it’s a metaphor: she helps the player stitch together
@@ -960,14 +960,14 @@ Here’s a way to think about it:
   * Add subtle prosody changes (tone, pacing) based on traits (e.g., Skepticism → clipped delivery, Empathy → softer cadence).
 * This makes emergent dialogue feel intentional, not random.
 
-## **🎮 Example in Play**
+## **🎮 Example in Play** (2)
 
 * **Ravi (Trust 0.9, Skepticism 0.2):** `"I believe in your path. Merchants will follow where you lead."`
 * **Ravi (Trust 0.4, Skepticism 0.8):** `"I doubt this course. Merchants will close their doors if you persist."`
 
 Same beat, different resonance — and the TTS engine makes both sound natural.
 
-## **✨ Why This Works**
+## **✨ Why This Works** (6)
 
 * **Replayability:** Every run feels authored, but no two runs are identical.
 * **Scalability:** You don’t have to hand‑write every branch; traits drive variation.
@@ -1042,7 +1042,7 @@ random.choice(lexicon\["sera"\]\["empathy\_low"\])
 * **High Empathy Sera:** `"I feel bloom in this moment... like the herbs, it grows softly."`
 * **Low Empathy Sera:** `"I feel fragile in this moment... like the herbs, it grows softly."`
 
-## **✨ Why This Works**
+## **✨ Why This Works** (7)
 
 * **Replayability:** Dialogue feels authored but adapts to stats.
 * **Personality fidelity:** Each NPC has a consistent “voice” across contexts.
@@ -1102,7 +1102,7 @@ return npc\_temp(base\_text)
 * **Drossel (high trust):** `"You speak of mon ami, but I weigh the cost, mon cher — but shadows linger."`
 * **Drossel (low trust):** `"You speak of knife, but I weigh the cost, mon cher — but shadows linger."`
 
-## **✨ Why This Works**
+## **✨ Why This Works** (8)
 
 * **Reusable:** One framework, many NPCs.
 * **Consistent voice:** Each NPC always “sounds” like themselves.
@@ -1176,7 +1176,7 @@ softly."
 print(manager.get\_dialogue("Drossel")) \# "You speak of shadow, but I weigh the cost, mon cher —
 but shadows linger."
 
-## **✨ Why This Works**
+## **✨ Why This Works** (9)
 
 * **Direct integration:** Dialogue pulls live REMNANTS values, so it evolves with playstyle.
 * **NPC fidelity:** Each character has their own lexicon \+ decorator, ensuring consistent “voice.”
@@ -1232,7 +1232,7 @@ base\_text \= f"My {dominant\_trait} guides me ({value:.2f})" else: base\_text \
 
 return temperaments.get(name, lambda t: t)(base\_text)
 
-## **🎮 Example Usage**
+## **🎮 Example Usage** (2)
 
 python from npc\_manager import NPCManager, create\_marketplace\_npcs from npc\_dialogue import
 generate\_dialogue
@@ -1312,7 +1312,7 @@ Offer comfort \- \[need\] Ask for help \- \[trust\] Consider show reliance
 Code Drossel says: My trust feels shadow, mon cher — but shadows linger. Your choices: \-
 \[authority\] Command action \- \[skepticism\] Question motives \- \[resolve\] Stand firm
 
-## **✨ Benefits**
+## **✨ Benefits** (2)
 
 * **Emergent menus:** Player options vary dynamically with NPC temperament.
 * **Replay depth:** Different runs produce different dialogue *and* choices.
@@ -1670,7 +1670,7 @@ random.choice(lexicons\["Veynar"\]\["resolve\_low"\]) base\_text \+= f", though 
 
 return temperaments\["Veynar"\](base\_text)
 
-## **🎮 Example Outputs**
+## **🎮 Example Outputs** (2)
 
 * **High Authority \+ High Resolve:** *“The justice must be upheld, and I will stand firm. His voice is steady, scarred by years of thefts.”*
 * **Low Authority \+ Low Resolve:** *“I carry weariness with me still, though I may hesitate. His voice is steady, scarred by years of thefts.”*
@@ -1689,14 +1689,14 @@ Captain Veynar’s weary authority, completing their dual‑arc.
 
 ## **🕶 Kaelen — Dialogue Profile**
 
-### **Lexicon**
+### **Lexicon** (2)
 
 * **Empathy high (≥0.7):** “redeem,” “listen,” “share,” “trust”
 * **Empathy low (\<0.7):** “scheme,” “trick,” “steal,” “shadow”
 * **Skepticism high (≥0.7):** “doubt,” “whisper,” “hidden,” “mask”
 * **Skepticism low (\<0.7):** “open,” “plain,” “clear,” “direct”
 
-### **Temperament Decorator**
+### **Temperament Decorator** (2)
 
 * Voice is sly, playful, always hinting at ulterior motives.
 
@@ -1705,7 +1705,7 @@ his grin flickers like a shadow in torchlight."
 
 *
 
-## **🧩 Example Generator Code**
+## **🧩 Example Generator Code** (2)
 
 python lexicons\["Kaelen"\] \= { "empathy\_high": \["redeem", "listen", "share", "trust"\],
 "empathy\_low": \["scheme", "trick", "steal", "shadow"\], "skepticism\_high": \["doubt", "whisper",
@@ -1725,7 +1725,7 @@ sometimes things are {word}"
 
 return temperaments\["Kaelen"\](base\_text)
 
-## **🎮 Example Outputs**
+## **🎮 Example Outputs** (3)
 
 * **High Empathy \+ Low Skepticism:** *“I could share, if you believe me — sometimes things are clear... his grin flickers like a shadow in torchlight.”*
 * **Low Empathy \+ High Skepticism:** *“I might steal, if you’re not careful — but there’s always whisper... his grin flickers like a shadow in torchlight.”*
@@ -1779,7 +1779,7 @@ name, i) for name in self.npcs.keys() } } self.history.append(snapshot)
 
 return self.history
 
-## **🎮 Example Run**
+## **🎮 Example Run** (2)
 
 python manager \= NPCManager() manager.add\_npcs\_batch(create\_marketplace\_npcs())
 
@@ -1948,7 +1948,7 @@ archetypes that embody endurance, resilience, and mystery. Here’s how they cou
 * **Desert Crone:** Grizzled truth‑teller, tied to **Skepticism glyphs**. Offers harsh wisdom and curses if disrespected.
 * **Sand Artisan:** Creates fragile boats for desert rivers, tied to **Nuance glyphs**. Their craft collapses if trust is misplaced.
 
-## **🎮 Totals**
+## **🎮 Totals** (2)
 
 * Mountains: 4–5 NPCs
 * Mountain Pass: 3–4 NPCs
@@ -1958,7 +1958,7 @@ archetypes that embody endurance, resilience, and mystery. Here’s how they cou
 with aquatic, forest, market, and anchors. Each biome feels distinct, and glyph categories are
 evenly represented.
 
-## **✨ Narrative Advantage**
+## **✨ Narrative Advantage** (2)
 
 * **Mountains:** Endurance, wisdom, isolation.
 * **Pass:** Transition, moral tests, smuggling.
@@ -2023,7 +2023,7 @@ of factions without overwhelming the player. Here’s how they could slot in:
   * Maintain neutrality, but miss out on faction‑specific glyph powers.
   * Can act as mediator later, bridging cults for unique resolution.
 
-## **✨ Narrative Advantage**
+## **✨ Narrative Advantage** (3)
 
 * Adds **ideological tension** without bloating NPC count.
 * Creates **Saori resonance** — mystics elevate her as divine, skeptics dismiss her as anomaly.
@@ -2122,7 +2122,7 @@ Let’s take stock of where we are in terms of NPC count, based on everything we
 
 👉 That puts you at **\~50–55 NPCs total** across all biomes and factions.
 
-## **✨ Why This Works**
+## **✨ Why This Works** (10)
 
 * **Balanced Distribution:** Each biome has its own “identity” NPCs (skeptics in desert, mystics in mountains, thieves in swamp/market, merchants by the sea).
 * **Factional Tension:** Guards vs. thieves, skeptics vs. mystics, loners vs. communal cooks.
@@ -2151,7 +2151,7 @@ So in practice you now have three tiers:
   * They reinforce **biome identity** (skeptics in desert, mystics in mountains, thieves in swamp/market).
   * They ripple traits but don’t need procedural dialogue — just presence and influence.
 
-## **✨ Why This Works**
+## **✨ Why This Works** (11)
 
 * **Scalable:** You don’t have to hand‑script 50+ lexicons.
 * **Replayable:** Core NPCs \+ anchors drive emergent dialogue, while supporting figures shift the trait web.
@@ -2195,7 +2195,7 @@ and faction density but aren’t interactable beyond presence.
 * Supporting figures are **visual \+ atmospheric**: they make the cults feel populated, but don’t add complexity to dialogue generation.
 * This keeps the system lean: you only need to maintain lexicons and decorators for Malrik and Elenya, while the rest are “crowd NPCs.”
 
-## **✨ Narrative Advantage**
+## **✨ Narrative Advantage** (4)
 
 * **Biome coverage:** Skeptics dominate desert, Mystics dominate mountains.
 * **Factional tension:** Player chooses science vs. faith, or neutrality.
@@ -2211,7 +2211,7 @@ organize them clearly so you can see the spine of your cast:
 
 ## **🎭 Named Characters So Far**
 
-### **Core Market Cast (10)**
+### **Core Market Cast (10)** (2)
 
 1. Ravi – warm merchant, trusting but cautious 2. Nima – suspicious observer, empathetic once trust
 is earned 3. Kaelen – shifty thief, redeemable arc 4. Tovren – practical merchant, values
@@ -2220,7 +2220,7 @@ presence 7. Mariel – patient, wise, bridges merchants and shrine keepers 8. Ko
 suspicious, loves information 9. Drossel – thieves’ leader, manipulative and dangerous 10. Captain
 Veynar – weary market guard, mirror to Kaelen
 
-### **Anchors (2)**
+### **Anchors (2)** (2)
 
 11. Velinor – endgame anchor, mythic figure 12. Saori – endgame anchor, divine/mystic resonance
 
@@ -2235,7 +2235,7 @@ cult leader (mountains), glyphs as divine blessings
 * **Anchors:** 2
 * **Cult Leaders:** 2 👉 **Total Named Characters: 14**
 
-## **✨ Next Step**
+## **✨ Next Step** (2)
 
 Supporting figures (ferry operators, cooks, loners, sages, healers, etc.) don’t need to be “named” —
 they can remain **functional archetypes** or **crowd NPCs**. That keeps the named roster tight and
@@ -2338,7 +2338,7 @@ them dominate the whole system.
 👉 **Mystics:** 15 glyphs total (but only 5 quest‑locked). 👉 **Skeptics:** 30 glyphs total (but only
 5 quest‑locked). 👉 **Neutral glyphs (Ache):** 10 glyphs, available outside cult quests.
 
-## **🎮 Narrative Advantage**
+## **🎮 Narrative Advantage** (2)
 
 * **Factional Choice:** Player decides whether glyphs are divine blessings or scientific phenomena.
 * **Replayability:** Different cult alignment changes which glyph quests unlock.
@@ -2433,14 +2433,14 @@ them through different biomes, factions, and encounters.
 * 49 new ones (7 per category).
 * Ache and Collapse end up with 11 each because of the Octoglyph overlap, but you can either **merge duplicates** or treat them as **variant glyphs** (e.g., “Held Ache” vs. “Lingering Ache”).
 
-## **🎮 Narrative Advantage**
+## **🎮 Narrative Advantage** (3)
 
 * **Symmetry:** 7 glyphs per category feels clean and intentional.
 * **Flexibility:** Even categories already covered (Legacy, Ache, Collapse) get new glyphs, so players can collect them in multiple contexts.
 * **Replayability:** Different biomes emphasize different categories, so no playthrough feels the same.
 * **Factional Integration:** Cults lock 10 glyphs, Octoglyph locks 8, leaving 52 glyphs scattered across ecosystems, merchants, loners, thieves, etc.
 
-## **✨ Next Step**
+## **✨ Next Step** (3)
 
 We can now **generate 7 glyph concepts per category** (short names \+ thematic descriptions) to fill
 out the roster. For example:
@@ -2483,7 +2483,7 @@ their dialogue and player choices.
   * Glyph 1: *Fractured Bond* (Ache) — sharper grief, distrust born of betrayal by fate.
   * Glyph 2: *Hopeful Transmission* (Legacy) — her attempt to transform loss into resilience, passing meaning forward.
 
-## **🎮 Narrative Function**
+## **🎮 Narrative Function** (2)
 
 * **Dialogue:**
   * Ravi: “Some losses are carried in silence. Some oaths are carried in trade.”

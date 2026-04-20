@@ -124,11 +124,11 @@ To confirm system is working:
 
 ```python
 
-# Check NRC lexicon is loaded
+## Check NRC lexicon is loaded
 from parser.nrc_lexicon_loader import nrc
 print(f"NRC loaded: {len(nrc)} emotions")  # Should show: NRC loaded: 10 emotions
 
-# Check FirstPerson integration available
+## Check FirstPerson integration available
 from emotional_os.llm.firstperson_integration import get_firstperson_generator
 gen = get_firstperson_generator()
 print(f"FirstPerson available: {gen.is_available()}")  # Currently: False (Phase 1 pending)

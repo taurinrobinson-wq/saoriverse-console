@@ -16,10 +16,10 @@ To apply this migration to your Supabase/Postgres database, run (example):
 
 ```bash
 
-# If you have psql configured with appropriate connection string / env var:
+## If you have psql configured with appropriate connection string / env var:
 psql $DATABASE_URL -f sql/create_user_preferences_table.sql
 
-# Or using the Supabase CLI (if authenticated):
+## Or using the Supabase CLI (if authenticated):
 supabase db remote set $YOUR_DB_CONNECTION_URL
 psql $YOUR_DB_CONNECTION_URL -f sql/create_user_preferences_table.sql
 ```

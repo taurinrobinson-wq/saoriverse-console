@@ -30,7 +30,7 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 
 ##
 
-## <strong>FP</strong> What It Preserves
+## **FP** What It Preserves
 
 | Element | Original | Anonymized | Preserved? |
 |---------|----------|-----------|-----------|
@@ -56,8 +56,8 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 mother/parent        → the Lightkeeper father/guardian      → the Steward / the Guardian son/child →
 the Bearer / the Seedling daughter/child       → the Lightkeeper / the Seedling sibling → the Mirror
 (sister) / the Anchor (brother) spouse               → the Thread (wife) / the Guardian (husband)
-therapist/counselor  → the Witness doctor               → the Steward of Medicine boss/authority
-→ the Authority friend/companion     → the Companion
+therapist/counselor  → the Witness doctor               → the Steward of Medicine boss/authority →
+the Authority friend/companion     → the Companion
 
 ```
 
@@ -135,10 +135,10 @@ Denver               → Rocky Mountain
 
 from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
 
-# Create protocol
+## Create protocol
 anon = AnonymizationProtocol(allow_medical=False, allow_names=False)
 
-# Anonymize an entry
+## Anonymize an entry
 entry = {
     "text": "Michelle said I should see Dr. Johnson. I'm depressed since August 2023.",
     "ritual": "Light a candle for my son.",
@@ -158,7 +158,7 @@ print(anonymized["text"])
 ```python
 
 
-# Allow medical terms if user explicitly consents
+## Allow medical terms if user explicitly consents
 anon_with_medical = AnonymizationProtocol(allow_medical=True, allow_names=False)
 
 anonymized, anonmap = anon_with_medical.anonymize_entry(entry, "user_123")
@@ -176,19 +176,19 @@ print(anonymized["text"])
 
 
 
-# Generate consent request for therapist sharing
+## Generate consent request for therapist sharing
 consent = anon.create_consent_request("user_123", "therapy_sharing")
 
 print(consent["question"])
 
-# Output: "Share this moment with your therapist for clinical review?"
+## Output: "Share this moment with your therapist for clinical review?"
 
 print(consent["options"])
 
-# {
-#   "yes_unveil": "Yes, reveal my identity for this purpose",
-#   "yes_keep_anon": "Yes, keep it anonymous",
-#   "no_decline": "No, keep this private"
+## {
+##   "yes_unveil": "Yes, reveal my identity for this purpose",
+##   "yes_keep_anon": "Yes, keep it anonymous",
+##   "no_decline": "No, keep this private"
 
 ```text
 ```
@@ -198,7 +198,7 @@ print(consent["options"])
 
 ```python
 
-# Generate report for user to see what was changed
+## Generate report for user to see what was changed
 report = anon.generate_anonymization_report(entry, anonmap)
 
 print(f"Identifiers replaced: {report['changes_made']['identifiers_replaced']}")
@@ -352,7 +352,7 @@ User Entry (Raw)
 
 
 
-# Before logging an exchange:
+## Before logging an exchange:
 from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
 
 anon = AnonymizationProtocol() entry = { "text": user_message, "ritual": ritual_suggestion,
@@ -360,10 +360,10 @@ anon = AnonymizationProtocol() entry = { "text": user_message, "ritual": ritual_
 
 anonymized, anonmap = anon.anonymize_entry(entry, user_id)
 
-# Log only anonymized version
+## Log only anonymized version
 _log_exchange(anonymized)
 
-# Store map for potential de-anonymization
+## Store map for potential de-anonymization
 
 ```text
 ```
@@ -373,7 +373,7 @@ _log_exchange(anonymized)
 
 ```python
 
-# After ritual execution:
+## After ritual execution:
 st.write("Would you like this moment to be remembered with your name?")
 
 col1, col2, col3 = st.columns(3)
@@ -401,17 +401,17 @@ with col3:
 ```python
 
 
-# When exporting emotional archives:
+## When exporting emotional archives:
 
-# Ask user: consent level for export?
+## Ask user: consent level for export?
 
-# Options:
+## Options:
 
-# - Full (with identity revealed)
+## - Full (with identity revealed)
 
-# - Anonymized (glyphs, relative dates)
+## - Anonymized (glyphs, relative dates)
 
-# - Clinical (medical details preserved, names hidden)
+## - Clinical (medical details preserved, names hidden)
 
 ```
 

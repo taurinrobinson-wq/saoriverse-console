@@ -52,18 +52,18 @@ caution
 
 ## NPC Archetype 2: Welcoming NPCs (Weary by Necessity)
 
-### Behavior Profile
+### Behavior Profile (2)
 - **Stance**: Warm tone, genuine openness, but cautious pauses
 - **Motivation**: Want to connect, but recent crime forced restraint
 - **Trigger**: Player shows respect and listening, not extraction
 - **Barrier**: Medium initial trust cost; faster progression but emotional guards remain
 
-### Example NPCs
+### Example NPCs (2)
 - **Ravi** (Marketplace Guide): Smiles, gives orientation, shares rumors early
 - **Healer**: Compassionate, understands grief, slower to warm up to strangers
 - **Scribe**: Eager to document stories, seeks connection through narratives
 
-### Dialogue Pattern: First Encounter
+### Dialogue Pattern: First Encounter (2)
 ```text
 
 ```text
@@ -81,13 +81,13 @@ slowly."                → Respects their process
 
 
 
-### Trust Building Mechanics
+### Trust Building Mechanics (2)
 - **Early Engagement**: Offer small information early to establish goodwill
 - **Emotional Resonance**: Respond to player's grief or questions with empathy
 - **Repeated Connection**: Like to see player return; take interest in their progress
 - **Shared Context**: Reference the crime wave, acknowledge NPCs' trauma
 
-### Reward States
+### Reward States (2)
 - **Early Trust**: Orientation, marketplace rumors, initial warmth
 - **Mid Trust**: Personal stories, glyph fragments, emotional openness
 - **High Trust**: Intimate revelations, alliance, possible adventure hooks

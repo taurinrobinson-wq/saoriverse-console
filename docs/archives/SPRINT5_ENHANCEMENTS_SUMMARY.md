@@ -43,14 +43,14 @@ Records timing information for any operation.
 
 ```python
 
-# Usage
+## Usage
 measurement = LatencyMeasurement(
     operation="stt_inference",
     start_time=1.0,
     end_time=2.5
 )
 
-# duration_ms: 1500, timestamp, metadata
+## duration_ms: 1500, timestamp, metadata
 ```
 
 
@@ -60,18 +60,18 @@ Main profiling engine for measuring operation latency.
 
 ```python
 
-# Usage
+## Usage (2)
 profiler = PerformanceProfiler()
 
-# Measure any function
+## Measure any function
 result = profiler.measure("stt_inference", transcribe_audio, audio_bytes)
 
-# Get summary statistics
+## Get summary statistics
 summary = profiler.get_summary()
 
-# Returns: count, mean, median, p95, p99 per operation
+## Returns: count, mean, median, p95, p99 per operation
 
-# Export results
+## Export results
 profiler.save_results("profile_results.json")
 ```
 
@@ -89,14 +89,14 @@ Pre-configured model recommendations based on latency targets.
 
 ```python
 
-# Usage
+## Usage (3)
 model = ModelPerformanceBenchmark.get_whisper_recommendation(target_latency_ms=100)
 
-# Returns: "base" (for 100ms target)
+## Returns: "base" (for 100ms target)
 
 model = ModelPerformanceBenchmark.get_tts_recommendation(target_latency_ms=150)
 
-# Returns: "glow-tts" or "glow-tts-tiny"
+## Returns: "glow-tts" or "glow-tts-tiny"
 ```
 
 
@@ -123,11 +123,11 @@ Analyzes measurements and suggests optimization strategies.
 
 ```python
 
-# Usage
+## Usage (4)
 optimizer = LatencyOptimizer(profiler)
 recommendations = optimizer.analyze_measurements()
 
-# Returns list of (bottleneck, severity, suggestion)
+## Returns list of (bottleneck, severity, suggestion)
 ```
 
 
@@ -142,21 +142,21 @@ recommendations = optimizer.analyze_measurements()
 
 ```python
 
-# Profile STT pipeline
+## Profile STT pipeline
 results = profile_stt_pipeline(
     audio_data=audio_bytes,
     model_size="base"  # or "tiny", "small", "medium"
 )
 
-# Measures: audio loading, feature extraction, inference
+## Measures: audio loading, feature extraction, inference
 
-# Profile TTS pipeline
+## Profile TTS pipeline
 results = profile_tts_pipeline(
     text="Test synthesis",
     model_type="glow-tts"
 )
 
-# Measures: text processing, mel-spectrogram, vocoding
+## Measures: text processing, mel-spectrogram, vocoding
 ```
 
 
@@ -169,11 +169,11 @@ from spoken_interface.performance_profiler import PerformanceProfiler, ModelPerf
 
 profiler = PerformanceProfiler()
 
-# Measure existing pipeline
+## Measure existing pipeline
 transcription = profiler.measure("stt", transcribe_audio, audio_bytes)
 audio = profiler.measure("tts", synthesize_speech, text, prosody_plan)
 
-# Check performance
+## Check performance
 summary = profiler.get_summary()
 if summary["avg_latency_ms"] > 500:
     # Recommend faster model
@@ -195,7 +195,7 @@ if summary["avg_latency_ms"] > 500:
 
 **File:** `spoken_interface/advanced_prosody.py`
 
-### Purpose
+### Purpose (2)
 
 Replace static prosody guardrails with dynamic, emotionally intelligent control that creates natural
 variations in pitch, energy, pauses, and breathing throughout responses.
@@ -357,7 +357,7 @@ Tracks emotional consistency across multiple responses.
 ```python
 tracker = EmotionalContinuityTracker()
 
-# Record each response
+## Record each response
 tracker.add_response(
     text="I understand your concern",
     voltage=0.4,
@@ -365,10 +365,10 @@ tracker.add_response(
     attunement=0.8
 )
 
-# Check session consistency
+## Check session consistency
 consistency = tracker.get_emotional_continuity_score()
 
-# Returns: 0-1 (1 = highly consistent)
+## Returns: 0-1 (1 = highly consistent)
 ```
 
 
@@ -385,7 +385,7 @@ from spoken_interface.advanced_prosody import AdvancedProsodyPlanner
 
 planner = AdvancedProsodyPlanner()
 
-# Excited response
+## Excited response
 excited_plan = planner.plan_advanced_prosody(
     text="That's amazing! I'm so happy for you!",
     voltage=0.9,        # High arousal
@@ -394,9 +394,9 @@ excited_plan = planner.plan_advanced_prosody(
     certainty=0.9
 )
 
-# Result: Gasping breath, rising pitch, high energy, air sounds
+## Result: Gasping breath, rising pitch, high energy, air sounds
 
-# Sad response
+## Sad response
 sad_plan = planner.plan_advanced_prosody(
     text="I'm sorry to hear about your loss.",
     voltage=0.2,        # Low arousal
@@ -405,18 +405,18 @@ sad_plan = planner.plan_advanced_prosody(
     certainty=0.6       # Uncertain
 )
 
-# Result: Shallow breath, lower pitch, fading energy, less air
+## Result: Shallow breath, lower pitch, fading energy, less air
 ```
 
 
-### Integration Points
+### Integration Points (2)
 
 Add to `streaming_tts.py`:
 
 ```python
 from spoken_interface.advanced_prosody import AdvancedProsodyPlanner
 
-# For sensitive/emotional passages
+## For sensitive/emotional passages
 if response_tone in ["excited", "sad", "empathetic"]:
     advanced_planner = AdvancedProsodyPlanner()
     prosody = advanced_planner.plan_advanced_prosody(
@@ -430,7 +430,7 @@ if response_tone in ["excited", "sad", "empathetic"]:
 ```
 
 
-### Test Coverage
+### Test Coverage (2)
 
 - ✅ Pitch contour generation (excited, sad, confident)
 - ✅ Energy contour generation (fade patterns)
@@ -450,12 +450,12 @@ if response_tone in ["excited", "sad", "empathetic"]:
 
 ### Part 1: Session Logging (440 lines)
 
-#### Purpose
+#### Purpose (3)
 
 Comprehensive logging of voice interactions for analysis of emotional patterns, conversation
 quality, and long-term system improvement.
 
-#### Key Dataclasses
+#### Key Dataclasses (2)
 
 ##### `InteractionEvent`
 
@@ -503,33 +503,33 @@ Main logging engine.
 ```python
 logger = SessionLogger(save_dir="./session_logs")
 
-# Log user input
+## Log user input
 logger.log_user_message(
     text="How can I improve my public speaking?",
     confidence=0.95,
     latency_ms=250
 )
 
-# Log assistant response
+## Log assistant response
 logger.log_assistant_message(
     text="I have several suggestions...",
     emotional_state={"voltage": 0.6, "tone": "helpful", "attunement": 0.8},
     latency_ms=300
 )
 
-# Get metrics
+## Get metrics
 metrics = logger.calculate_session_metrics()
 
-# Returns: dict with comprehensive stats
+## Returns: dict with comprehensive stats
 
-# Generate report
+## Generate report
 report = logger.get_summary_report()
 print(report)  # Human-readable text report
 
-# Save session
+## Save session
 path = logger.save_session()
 
-# Saves JSON with full history
+## Saves JSON with full history
 ```
 
 
@@ -567,19 +567,19 @@ Cross-session pattern analysis.
 ```python
 analyzer = SessionAnalyzer(session_dir="./session_logs")
 
-# Load all sessions
+## Load all sessions
 sessions = analyzer.load_sessions()
 
-# Get aggregate statistics
+## Get aggregate statistics
 agg_metrics = analyzer.get_aggregate_metrics()
 
-# Returns: average quality, consistency, etc. across all sessions
+## Returns: average quality, consistency, etc. across all sessions
 ```
 
 
 ### Part 2: Voice UI Enhancements (350 lines)
 
-#### Purpose
+#### Purpose (4)
 
 Visual feedback, edge case handling, and graceful error recovery for robust voice interface.
 
@@ -604,23 +604,23 @@ Validates audio and transcription with specific error messages.
 ```python
 manager = EdgeCaseManager()
 
-# Validate audio
+## Validate audio
 is_valid, error_msg = manager.validate_audio(audio_bytes)
 
-# Returns: (True, "") or (False, "Audio too short (200ms < 500ms minimum)")
+## Returns: (True, "") or (False, "Audio too short (200ms < 500ms minimum)")
 
-# Validate transcription
+## Validate transcription
 is_valid, error_msg = manager.validate_transcription(
     text="hello",
     confidence=0.95
 )
 
-# Returns: (True, "") or (False, specific error)
+## Returns: (True, "") or (False, specific error)
 
-# Handle silence
+## Handle silence
 has_silence, msg = manager.handle_silence_in_audio(audio_bytes)
 
-# Returns: (True, "Audio is mostly silence") or (False, "")
+## Returns: (True, "Audio is mostly silence") or (False, "")
 ```
 
 
@@ -642,7 +642,7 @@ Renders emotional signals as visual gauges and timelines.
 ```python
 visualizer = GlyphSignalVisualizer()
 
-# Render individual signal gauges
+## Render individual signal gauges
 fig = visualizer.render_glyph_gauge(
     signal_name="Attunement",
     value=0.75,
@@ -650,7 +650,7 @@ fig = visualizer.render_glyph_gauge(
 )
 plt.show()
 
-# Render emotional timeline
+## Render emotional timeline
 fig = visualizer.render_emotional_timeline(
     emotional_history=[0.5, 0.6, 0.7, 0.65, 0.8],
     signal_name="Attunement"
@@ -672,7 +672,7 @@ Main UI enhancement system combining all features.
 ```python
 enhancements = VoiceUIEnhancements()
 
-# Render full glyph visualization (for Streamlit)
+## Render full glyph visualization (for Streamlit)
 enhancements.render_glyph_visualization(
     session_metrics={
         "avg_arousal": 0.6,
@@ -683,22 +683,22 @@ enhancements.render_glyph_visualization(
     emotional_history=[0.5, 0.6, 0.7]
 )
 
-# Handle audio edge cases
+## Handle audio edge cases
 is_valid, msg = enhancements.handle_audio_edge_cases(audio_bytes)
 
-# Handle transcription edge cases
+## Handle transcription edge cases
 is_valid, msg = enhancements.handle_transcription_edge_cases(
     text="hello",
     confidence=0.95
 )
 
-# Render fallback UI for errors
+## Render fallback UI for errors
 enhancements.render_fallback_ui(
     error_type="low_confidence",
     error_message="Speech unclear"
 )
 
-# Render performance metrics
+## Render performance metrics
 enhancements.render_performance_metrics(
     latency_ms=250,
     confidence=0.95
@@ -712,7 +712,7 @@ enhancements.render_performance_metrics(
 - 🟡 Yellow: 200-500ms latency, 0.5-0.8 confidence
 - 🔴 Red: >500ms latency, <0.5 confidence
 
-### Integration Points
+### Integration Points (3)
 
 Add to `voice_interface.py`:
 
@@ -720,35 +720,35 @@ Add to `voice_interface.py`:
 from spoken_interface.session_logger import SessionLogger
 from spoken_interface.voice_ui_enhancements import VoiceUIEnhancements
 
-# Initialize logging
+## Initialize logging
 session_logger = SessionLogger(save_dir="./logs/sessions")
 ui_enhancements = VoiceUIEnhancements()
 
-# In chat loop
+## In chat loop
 user_input, confidence = speech_to_text(audio_bytes)
 
-# Validate transcription
+## Validate transcription (2)
 is_valid, error_msg = ui_enhancements.handle_transcription_edge_cases(user_input, confidence)
 if not is_valid:
     show_error(error_msg)
     return
 
-# Log interaction
+## Log interaction
 session_logger.log_user_message(user_input, confidence=confidence)
 
-# Generate response
+## Generate response
 response, emotional_state = generate_response(user_input)
 
-# Log response
+## Log response
 session_logger.log_assistant_message(response, emotional_state=emotional_state)
 
-# Show metrics
+## Show metrics
 ui_enhancements.render_performance_metrics(latency_ms=250, confidence=confidence)
 ui_enhancements.render_glyph_visualization(session_metrics=...)
 ```
 
 
-### Test Coverage
+### Test Coverage (3)
 
 - ✅ Session logger initialization and recording
 - ✅ User/assistant message logging

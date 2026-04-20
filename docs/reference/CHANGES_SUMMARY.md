@@ -61,20 +61,20 @@ user-AI conversations in hybrid mode.
 
 ```python
 
-# NEW: Initialize evolution system once per session
+## NEW: Initialize evolution system once per session
 if 'hybrid_processor' not in st.session_state:
     from hybrid_processor_with_evolution import create_integrated_processor
     processor = create_integrated_processor(learner, extractor, user_id)
     st.session_state['hybrid_processor'] = processor
 
-# NEW: Process through evolution pipeline
+## NEW: Process through evolution pipeline
 evolution_result = processor.process_user_message(
     user_message=user_input,
     ai_response=response,
     user_id=user_id,
 )
 
-# NEW: Display new glyphs if created
+## NEW: Display new glyphs if created
 new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
 if new_glyphs:
     st.session_state['new_glyphs_this_session'].extend(new_glyphs)
@@ -95,7 +95,7 @@ if new_glyphs:
 ```python
 
 
-# NEW: Sidebar expander showing discovered glyphs
+## NEW: Sidebar expander showing discovered glyphs
 with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
     new_glyphs = st.session_state.get('new_glyphs_this_session', [])
     if new_glyphs:
@@ -362,11 +362,11 @@ Verifies:
 
 from hybrid_processor_with_evolution import create_integrated_processor
 
-# Should import successfully
+## Should import successfully
 
 processor = create_integrated_processor(learner, extractor, "test")
 
-# Should initialize without errors
+## Should initialize without errors
 
 result = processor.process_user_message( "I feel vulnerable", "That's your strength" )
 
@@ -416,19 +416,19 @@ Discovered This Session" ✅ Each glyph displays: symbol + name + emotions + key
 
 ```bash
 
-# 1. Verify all connections
+## 1. Verify all connections
 bash verify_integration.sh
 
-# 2. Start the app
+## 2. Start the app
 streamlit run main_v2.py
 
-# 3. Select hybrid mode in the UI
+## 3. Select hybrid mode in the UI
 
-# 4. Have meaningful conversations
+## 4. Have meaningful conversations
 
-# 5. Watch glyphs appear in sidebar
+## 5. Watch glyphs appear in sidebar
 
-# 6. Check persistence
+## 6. Check persistence
 cat learning/conversation_glyphs.json
 ```
 

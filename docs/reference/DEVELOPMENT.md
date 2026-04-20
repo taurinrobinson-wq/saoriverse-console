@@ -23,15 +23,15 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```bash
 
 
-# Create virtual environment
+## Create virtual environment
 python -m venv .venv
 
-# Activate virtual environment
+## Activate virtual environment
 
-# On Linux/macOS:
+## On Linux/macOS:
 source .venv/bin/activate
 
-# On Windows:
+## On Windows:
 
 ```text
 
@@ -137,9 +137,9 @@ pre-commit run ruff --all-files
 
 
 
-# Uncomment the pytest stage in .pre-commit-config.yaml to enable on commit
+## Uncomment the pytest stage in .pre-commit-config.yaml to enable on commit
 
-# Then manually run:
+## Then manually run:
 
 ```text
 ```
@@ -188,7 +188,7 @@ pre-commit run ruff --all-files
 
 ```bash
 
-# Pre-commit hooks will run automatically if configured
+## Pre-commit hooks will run automatically if configured
 git add .
 ```text
 
@@ -228,10 +228,10 @@ View results in GitHub Actions: <https://github.com/taurinrobinson-wq/saoriverse
 ```bash
 
 
-# Make sure you're in the project root
+## Make sure you're in the project root
 cd /path/to/saoriverse-console
 
-# Try with explicit path
+## Try with explicit path
 
 ```text
 ```text
@@ -244,10 +244,10 @@ cd /path/to/saoriverse-console
 
 
 
-# Ensure all dependencies are installed
+## Ensure all dependencies are installed
 pip install -r requirements.txt
 
-# Reinstall in case of issues
+## Reinstall in case of issues
 
 ```text
 ```
@@ -257,7 +257,7 @@ pip install -r requirements.txt
 
 ```bash
 
-# Reinstall hooks
+## Reinstall hooks
 ```text
 
 ```text
@@ -269,10 +269,10 @@ pip install -r requirements.txt
 ```bash
 
 
-# Install coverage tools
+## Install coverage tools
 pip install pytest-cov
 
-# Generate manually
+## Generate manually
 pytest tests/ --cov=emotional_os --cov-report=html
 
 ```

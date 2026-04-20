@@ -192,23 +192,18 @@ Quick win (Streamlit only): 1-2 weeks (Phases 1-3)
 
 ## What's Working Now
 
-✅ **Trait tracking**: Records and patterns choices  
-✅ **Coherence calculation**: Measures emotional consistency  
-✅ **NPC compatibility**: Maps personality to player traits  
-✅ **Pattern recognition**: Identifies primary/secondary traits  
-✅ **Test harness**: Validates all systems  
+✅ **Trait tracking**: Records and patterns choices ✅ **Coherence calculation**: Measures emotional
+consistency ✅ **NPC compatibility**: Maps personality to player traits ✅ **Pattern recognition**:
+Identifies primary/secondary traits ✅ **Test harness**: Validates all systems
 
 ---
 
 ## What's Not Yet Connected
 
-❌ **Orchestrator integration**: Trait system not yet in main game loop  
-❌ **Marketplace scene**: Design done, implementation not started  
-❌ **Streamlit UI**: No trait display yet  
-❌ **Dialogue mapping**: Choices not yet tagged with traits  
-❌ **Path gating**: Coherence doesn't lock dialogue paths yet  
-❌ **Web UI**: Next.js skeleton still empty  
-❌ **API layer**: No endpoints yet  
+❌ **Orchestrator integration**: Trait system not yet in main game loop ❌ **Marketplace scene**:
+Design done, implementation not started ❌ **Streamlit UI**: No trait display yet ❌ **Dialogue
+mapping**: Choices not yet tagged with traits ❌ **Path gating**: Coherence doesn't lock dialogue
+paths yet ❌ **Web UI**: Next.js skeleton still empty ❌ **API layer**: No endpoints yet
 
 ---
 
@@ -236,11 +231,10 @@ Quick win (Streamlit only): 1-2 weeks (Phases 1-3)
 
 ## Key Implementation Rules
 
-1. **Patterns over individual choices**: Look at 5-10 recent choices
-2. **Coherence is consequence**: Inconsistent players face suspicion
-3. **People matter more than mechanics**: NPCs are individuals with preferences
-4. **Authenticity rewards**: High coherence unlocks deeper interactions
-5. **Multiple valid paths**: Don't punish contradictory players, just notice
+1. **Patterns over individual choices**: Look at 5-10 recent choices 2. **Coherence is
+consequence**: Inconsistent players face suspicion 3. **People matter more than mechanics**: NPCs
+are individuals with preferences 4. **Authenticity rewards**: High coherence unlocks deeper
+interactions 5. **Multiple valid paths**: Don't punish contradictory players, just notice
 
 ---
 
@@ -282,11 +276,9 @@ Quick win (Streamlit only): 1-2 weeks (Phases 1-3)
 - ✅ Integration points identified
 
 **Next steps**:
-1. Integrate TraitProfiler into orchestrator
-2. Implement marketplace_scene.py with dialogue mapping
-3. Update Streamlit UI to display traits
-4. Test with multiple player profiles
-5. Ensure all 3+ trait paths work
+1. Integrate TraitProfiler into orchestrator 2. Implement marketplace_scene.py with dialogue mapping
+3. Update Streamlit UI to display traits 4. Test with multiple player profiles 5. Ensure all 3+
+trait paths work
 
 ---
 

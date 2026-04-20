@@ -2,7 +2,8 @@
 
 ## Overview
 
-Successfully implemented a comprehensive conversation management system with emotional intelligence, automatic naming, and continuity features.
+Successfully implemented a comprehensive conversation management system with emotional intelligence,
+automatic naming, and continuity features.
 
 ## Features Implemented ✅
 
@@ -73,10 +74,9 @@ def evaluate_gates(signals: List[str], gates: Dict) -> Dict[str, float]
 
 ### Data Flow
 
-1. **Startup**: Auto-load most recent conversation if available
-2. **First Message**: Detect emotional glyphs and generate poetic title
-3. **Ongoing**: Save messages with generated title to database
-4. **New Conversation**: Clear state when user explicitly starts fresh
+1. **Startup**: Auto-load most recent conversation if available 2. **First Message**: Detect
+emotional glyphs and generate poetic title 3. **Ongoing**: Save messages with generated title to
+database 4. **New Conversation**: Clear state when user explicitly starts fresh
 
 ### Database Schema (Enhanced)
 
@@ -139,8 +139,8 @@ Examples from `data/glyph_lexicon_rows.json`:
 
 
 
-SUPABASE_URL=your_supabase_url
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  # Required for RLS bypass
+SUPABASE_URL=your_supabase_url SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  # Required for RLS
+bypass
 
 ```
 
@@ -151,10 +151,8 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  # Required for RLS bypass
 
 
 
-[supabase]
-url = "your_supabase_url"
-service_role_key = "your_service_role_key"  # Primary
-key = "your_anon_key"  # Fallback
+[supabase] url = "your_supabase_url" service_role_key = "your_service_role_key"  # Primary key =
+"your_anon_key"  # Fallback
 
 ```
 

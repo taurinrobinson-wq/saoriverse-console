@@ -40,7 +40,7 @@ story.add_passage(
     tags=["act1", "marketplace"]
 )
 
-# Add player choices
+## Add player choices
 story.add_choice(
     from_passage_name="market_arrival",
     choice_text="What player sees",
@@ -113,20 +113,20 @@ Catches broken links, dead ends, missing passages, etc.
 
 ```bash
 
-# 1. Edit the story
+## 1. Edit the story
 nano velinor/stories/story_definitions.py
 
-# 2. Save and auto-build (watch mode)
+## 2. Save and auto-build (watch mode)
 python velinor/stories/build_story.py --watch
 
-# 3. In another terminal, validate + test
+## 3. In another terminal, validate + test
 python velinor/stories/build_story.py --validate
 
-# 4. Commit when happy
+## 4. Commit when happy
 git add velinor/stories/story_definitions.py
 git commit -m "story: [Your message]"
 
-# 5. Push
+## 5. Push
 git push
 ```
 
@@ -242,11 +242,11 @@ story.add_choice(
 
 ```python
 
-# Decision point
+## Decision point
 story.add_choice(from_passage_name="fork", choice_text="Path A", to_passage_name="path_a_1")
 story.add_choice(from_passage_name="fork", choice_text="Path B", to_passage_name="path_b_1")
 
-# Both paths converge later
+## Both paths converge later
 story.add_choice(from_passage_name="path_a_1", choice_text="Meet up", to_passage_name="convergence")
 story.add_choice(from_passage_name="path_b_1", choice_text="Meet up", to_passage_name="convergence")
 ```
@@ -428,19 +428,19 @@ Write the story. Run the build. Validate. Play. Repeat.
 
 ```bash
 
-# Build story (Python → JSON)
+## Build story (Python → JSON)
 python velinor/stories/build_story.py
 
-# Build + validate
+## Build + validate
 python velinor/stories/build_story.py --validate
 
-# Watch for changes + auto-rebuild
+## Watch for changes + auto-rebuild
 python velinor/stories/build_story.py --watch
 
-# Parse Markdown to Python scaffold
+## Parse Markdown to Python scaffold
 python velinor/stories/build_story.py --parse-markdown
 
-# Just validate existing JSON
+## Just validate existing JSON
 python velinor/stories/story_validator.py velinor/stories/sample_story.json
 ```
 

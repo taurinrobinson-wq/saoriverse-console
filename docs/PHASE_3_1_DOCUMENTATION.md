@@ -40,16 +40,16 @@ Builds long-term understanding of user's emotional landscape.
 
 ```python
 
-# Record interactions with emotional context
+## Record interactions with emotional context
 record_interaction(tone, intensity, themes, glyph_response, user_satisfaction)
 
-# Analyze patterns
+## Analyze patterns
 get_emotional_trajectory(days=30)
 get_dominant_themes(limit=5)
 get_time_patterns(theme)
 predict_upcoming_themes(lookahead_hours=4)
 
-# Quality metrics
+## Quality metrics
 get_session_coherence()
 ```text
 
@@ -90,13 +90,13 @@ Measures quality and continuity of individual sessions.
 ```python
 
 
-# Real-time turn recording
+## Real-time turn recording
 record_turn(turn_number, user_input, themes, emotional_tone, glyph, frustration, breakthrough)
 
-# Session completion
+## Session completion
 end_session(user_satisfaction)
 
-# Analysis
+## Analysis
 get_coherence_report()  # Comprehensive metrics
 
 ```text
@@ -141,20 +141,20 @@ Tracks how user preferences change and evolve over time.
 
 ```python
 
-# Recording
+## Recording
 record_preference(preference_type, item, score, interactions)
 
-# Trend identification
+## Trend identification
 get_emerging_preferences(days=30, threshold=0.3)   # Growing interests
 get_fading_preferences(days=30, threshold=0.3)    # Declining interests
 get_stable_preferences(threshold=0.1)             # Consistent preferences
 
-# Advanced analytics
+## Advanced analytics
 get_preference_volatility()          # How variable preferences are
 get_preference_acceleration()        # How rapidly changing
 predict_preference_trajectory(pref, days_ahead=30)
 
-# Clustering
+## Clustering
 ```text
 
 ```text
@@ -178,7 +178,7 @@ Bridges all three components with existing Phase 1-2 infrastructure.
 
 orchestrator = Phase3IntegrationOrchestrator(user_id)
 
-# Session lifecycle
+## Session lifecycle
 tracker = orchestrator.start_session(session_id)
 context = orchestrator.record_interaction(
     session_id, turn_number, user_input,
@@ -187,7 +187,7 @@ context = orchestrator.record_interaction(
 )
 summary = orchestrator.end_session(session_id, overall_satisfaction)
 
-# Insights and recommendations
+## Insights and recommendations
 insights = orchestrator.get_user_insights()
 recommendations = orchestrator.get_session_recommendations(session_id)
 
@@ -235,11 +235,11 @@ components:
 
 manager = EmotionalProfileManager("user_123")
 
-# After each interaction...
+## After each interaction...
 manager.record_interaction( tone=EmotionalTone.GROUNDED, intensity="medium",
 themes=["self-compassion", "grounding"], glyph_response="Sanctuary", user_satisfaction=0.85, )
 
-# After multiple interactions, query patterns
+## After multiple interactions, query patterns
 dominant = manager.get_dominant_themes(limit=5) trajectory =
 manager.get_emotional_trajectory(days=30)
 
@@ -252,7 +252,7 @@ manager.get_emotional_trajectory(days=30)
 ```python
 session = SessionCoherenceTracker("sess_001", "user_123", profile_manager)
 
-# For each turn...
+## For each turn...
 session.record_turn(
     turn_number=1,
     user_input="I feel overwhelmed",
@@ -262,7 +262,7 @@ session.record_turn(
     has_frustration=False,
 )
 
-# End session
+## End session
 coherence = session.end_session(user_satisfaction=0.8)
 report = session.get_coherence_report()
 ```text
@@ -277,11 +277,11 @@ report = session.get_coherence_report()
 
 tracker = PreferenceEvolutionTracker("user_123")
 
-# Record preferences
+## Record preferences
 tracker.record_preference(PreferenceType.GLYPH, "Sanctuary", 0.8)
 tracker.record_preference(PreferenceType.THEME, "grounding", 0.7)
 
-# After 30+ days...
+## After 30+ days...
 emerging = tracker.get_emerging_preferences(days=30)
 fading = tracker.get_fading_preferences(days=30)
 

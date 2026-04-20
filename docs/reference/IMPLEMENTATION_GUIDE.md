@@ -96,19 +96,19 @@ Deep technical documentation for developers.
 
 ```bash
 
-# 1. Install spaCy with English models
+## 1. Install spaCy with English models
 pip install spacy
 python -m spacy download en_core_web_sm
 
-# 2. Download NRC Emotion Lexicon
+## 2. Download NRC Emotion Lexicon
 
-# Go to: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+## Go to: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
-# Download: NRC-Emotion-Lexicon-Wordlevel-v0.92.txt
+## Download: NRC-Emotion-Lexicon-Wordlevel-v0.92.txt
 
-# Place in: data/lexicons/nrc_emotion_lexicon.txt
+## Place in: data/lexicons/nrc_emotion_lexicon.txt
 
-# 3. Test that everything works
+## 3. Test that everything works
 ```text
 
 ```text

@@ -1,6 +1,8 @@
 # Velinor — Remnants Overview
 
-This document summarizes the current state of the Velinor "Remnants" assets, prototypes, and implementation notes in the repo. It is intended as a single reference so you can see what exists, how to run it, and what the next steps are.
+This document summarizes the current state of the Velinor "Remnants" assets, prototypes, and
+implementation notes in the repo. It is intended as a single reference so you can see what exists,
+how to run it, and what the next steps are.
 
 ## Where things live
 - Music prototypes and tools: [velinor/music_prototypes](velinor/music_prototypes)
@@ -45,12 +47,15 @@ Notes:
 - Rendered WAVs: [velinor/music_prototypes/velinor_motif_sf2.wav](velinor/music_prototypes/velinor_motif_sf2.wav), [velinor/music_prototypes/saori_motif_sf2.wav](velinor/music_prototypes/saori_motif_sf2.wav)
 
 ## Next recommended steps (short term)
-1. Generate per-state WAV layers (5 layers) for each motif to import into FMOD/Wwise as crossfaded stacks.
-2. Produce a small artist brief + PSD templates from `boss_fight_implementation.md` (I can generate atlas JSON template next).
-3. Scaffold a Unity prototype scene (placeholder art) implementing rib behaviors and the Learning puzzle.
+1. Generate per-state WAV layers (5 layers) for each motif to import into FMOD/Wwise as crossfaded
+stacks. 2. Produce a small artist brief + PSD templates from `boss_fight_implementation.md` (I can
+generate atlas JSON template next). 3. Scaffold a Unity prototype scene (placeholder art)
+implementing rib behaviors and the Learning puzzle.
 
 ## Quick morale note
-You built a dense, emotionally precise design — it’s normal to feel exhausted after iterating this much alone. You’ve done the hardest part: the concept and structure. The rest is implementable and I can keep taking the heavy lifting from here.
+You built a dense, emotionally precise design — it’s normal to feel exhausted after iterating this
+much alone. You’ve done the hardest part: the concept and structure. The rest is implementable and I
+can keep taking the heavy lifting from here.
 
 ---
 

@@ -4,17 +4,13 @@
 
 **New to this project?** Start with one of these:
 
-1. **Quick Overview (5 minutes)**
-   → Read: `SESSION_COMPLETION_SUMMARY.md`
-   → Understand what was built and why
+1. **Quick Overview (5 minutes)** → Read: `SESSION_COMPLETION_SUMMARY.md` → Understand what was
+built and why
 
-2. **Visual Learner (15 minutes)**
-   → Read: `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md`
-   → See diagrams and data flows
+2. **Visual Learner (15 minutes)** → Read: `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → See diagrams
+and data flows
 
-3. **Ready to Build (1 hour)**
-   → Read: `PRIVACY_LAYER_QUICK_START.md`
-   → Follow Phase 2 checklist
+3. **Ready to Build (1 hour)** → Read: `PRIVACY_LAYER_QUICK_START.md` → Follow Phase 2 checklist
 
 ##
 
@@ -161,25 +157,22 @@
 
 ### First Time? (Complete Path - 2 hours)
 
-1. SESSION_COMPLETION_SUMMARY.md (10 min) - Understand what exists
-2. PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md (20 min) - See how it works
-3. PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md (15 min) - Understand design
-4. PRIVACY_LAYER_DATABASE_SCHEMA.md (20 min) - See data structure
-5. PRIVACY_LAYER_INTEGRATION_GUIDE.md (25 min) - Learn how to build
-6. PRIVACY_LAYER_QUICK_START.md (20 min) - Get implementation checklist
+1. SESSION_COMPLETION_SUMMARY.md (10 min) - Understand what exists 2.
+PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md (20 min) - See how it works 3.
+PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md (15 min) - Understand design 4.
+PRIVACY_LAYER_DATABASE_SCHEMA.md (20 min) - See data structure 5. PRIVACY_LAYER_INTEGRATION_GUIDE.md
+(25 min) - Learn how to build 6. PRIVACY_LAYER_QUICK_START.md (20 min) - Get implementation
+checklist
 
 ### Just Want to Build? (Fast Path - 1 hour)
 
-1. PRIVACY_LAYER_QUICK_START.md (30 min) - Get checklist
-2. PRIVACY_LAYER_INTEGRATION_GUIDE.md (25 min) - See examples
-3. Reference other docs as needed during implementation
+1. PRIVACY_LAYER_QUICK_START.md (30 min) - Get checklist 2. PRIVACY_LAYER_INTEGRATION_GUIDE.md (25
+min) - See examples 3. Reference other docs as needed during implementation
 
 ### Just Want to Review Code? (Code Path - 30 min)
 
-1. Session_COMPLETION_SUMMARY.md → Files Reference section
-2. Review `encryption_manager.py` (10 min)
-3. Review `dream_engine.py` (10 min)
-4. Review `test_privacy_layer.py` (10 min)
+1. Session_COMPLETION_SUMMARY.md → Files Reference section 2. Review `encryption_manager.py` (10
+min) 3. Review `dream_engine.py` (10 min) 4. Review `test_privacy_layer.py` (10 min)
 
 ##
 
@@ -201,18 +194,18 @@ If you don't have these, start with reading the documentation!
 
 ### "How does encryption work?"
 
-→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Encryption Key Management Flow"
-→ `encryption_manager.py` → Read `derive_key_from_password()` method
+→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Encryption Key Management Flow" →
+`encryption_manager.py` → Read `derive_key_from_password()` method
 
 ### "How does daily summary work?"
 
-→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → System Architecture Diagram
-→ `dream_engine.py` → Read `create_daily_summary()` method
+→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → System Architecture Diagram → `dream_engine.py` → Read
+`create_daily_summary()` method
 
 ### "What if the database is compromised?"
 
-→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Security Model: Threat Scenarios"
-→ `PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → "Security Highlights"
+→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Security Model: Threat Scenarios" →
+`PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → "Security Highlights"
 
 ### "What are the database tables?"
 
@@ -244,8 +237,7 @@ If you don't have these, start with reading the documentation!
 
 ### "What tests should I run?"
 
-→ `PRIVACY_LAYER_QUICK_START.md` → Phase 2, Step 3
-→ `test_privacy_layer.py` → Run with pytest
+→ `PRIVACY_LAYER_QUICK_START.md` → Phase 2, Step 3 → `test_privacy_layer.py` → Run with pytest
 
 ### "What's the next phase?"
 
@@ -303,37 +295,39 @@ If you don't have these, start with reading the documentation!
 
 ### For Security Concepts
 
-→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Security Highlights"
-→ `PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → "Security Highlights"
-→ `test_privacy_layer.py` → TestSecurityProperties class
+→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Security Highlights" →
+`PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → "Security Highlights" → `test_privacy_layer.py` →
+TestSecurityProperties class
 
 ### For Database Design
 
-→ `PRIVACY_LAYER_DATABASE_SCHEMA.md` → Complete schema section
-→ `test_privacy_layer.py` → TestDataRetention class
+→ `PRIVACY_LAYER_DATABASE_SCHEMA.md` → Complete schema section → `test_privacy_layer.py` →
+TestDataRetention class
 
 ### For Integration Patterns
 
-→ `PRIVACY_LAYER_INTEGRATION_GUIDE.md` → All sections
-→ `test_privacy_layer.py` → TestIntegration class
+→ `PRIVACY_LAYER_INTEGRATION_GUIDE.md` → All sections → `test_privacy_layer.py` → TestIntegration
+class
 
 ### For Compliance
 
-→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Compliance Mapping"
-→ `PRIVACY_LAYER_DATABASE_SCHEMA.md` → "Privacy & Compliance Notes"
-→ `PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → GDPR/CCPA/HIPAA sections
+→ `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Compliance Mapping" →
+`PRIVACY_LAYER_DATABASE_SCHEMA.md` → "Privacy & Compliance Notes" →
+`PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → GDPR/CCPA/HIPAA sections
 
 ##
 
 ## 💡 Tips
 
-1. **Short on time?** Start with `SESSION_COMPLETION_SUMMARY.md`, then jump to `PRIVACY_LAYER_QUICK_START.md`
+1. **Short on time?** Start with `SESSION_COMPLETION_SUMMARY.md`, then jump to
+`PRIVACY_LAYER_QUICK_START.md`
 
 2. **Visual learner?** Go to `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` first
 
 3. **Want to code?** Start with `PRIVACY_LAYER_INTEGRATION_GUIDE.md`
 
-4. **Questions?** Search this index, or look in `PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → "Questions & Clarifications"
+4. **Questions?** Search this index, or look in `PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` →
+"Questions & Clarifications"
 
 5. **Stuck?** Check `PRIVACY_LAYER_QUICK_START.md` → "Tips & Troubleshooting"
 

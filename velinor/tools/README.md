@@ -1,6 +1,7 @@
 # velinor/tools/ — Velinor Game Tools & Builders
 
-This directory contains **Velinor-specific Python utilities and scripts**, including builders for assets, glyphs, story content, and integration tools.
+This directory contains **Velinor-specific Python utilities and scripts**, including builders for
+assets, glyphs, story content, and integration tools.
 
 These are organized by function:
 
@@ -77,16 +78,16 @@ Some tools work with external services:
 
 Most tools can be run from the repo root:
 ```bash
-# Generate missing NPC list
+## Generate missing NPC list
 python velinor/tools/list_missing_npcs.py
 
-# Batch render buildings
+## Batch render buildings
 python velinor/tools/brick_collapse_gen.py output.png --collapse 0.8 --seed 42
 
-# Expand lexicon
+## Expand lexicon
 python velinor/tools/expand_lexicon_with_synonyms.py
 
-# Grade video
+## Grade video
 ./velinor/tools/grade_video.sh input.mp4 output.mp4
 ```
 
@@ -106,10 +107,6 @@ Tools typically save to:
 
 ## Development Guidelines
 
-When adding a new Velinor tool:
-1. Add it to this directory
-2. Document its purpose in this README
-3. Include usage examples in docstrings
-4. If it generates outputs, specify the output directory
-5. If it imports from velinor/, verify the import paths work
-
+When adding a new Velinor tool: 1. Add it to this directory 2. Document its purpose in this README
+3. Include usage examples in docstrings 4. If it generates outputs, specify the output directory 5.
+If it imports from velinor/, verify the import paths work

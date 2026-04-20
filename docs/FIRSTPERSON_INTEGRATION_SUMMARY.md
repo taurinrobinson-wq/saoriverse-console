@@ -243,12 +243,12 @@ noticing a shift in what you're saying. What's helping?"
 
 ```bash
 
-# The integration is already active!
+## The integration is already active!
 streamlit run velinor_app.py
 
-# Game launches at http://localhost:8501
+## Game launches at http://localhost:8501
 
-# FirstPerson automatically analyzes your inputs
+## FirstPerson automatically analyzes your inputs
 
 ```text
 

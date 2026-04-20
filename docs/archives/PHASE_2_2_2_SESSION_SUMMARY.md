@@ -422,10 +422,10 @@ from emotional_os.core.firstperson import (
     should_use_glyph_responses,
 )
 
-# Your affect analysis
+## Your affect analysis
 affect = {"tone": "sad", "arousal": 0.2, "valence": -0.9, "tone_confidence": 0.85}
 
-# Check if should use glyphs
+## Check if should use glyphs
 if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affect["valence"]):
     response, glyph = compose_glyph_aware_response("I'm exhausted", affect)
     print(response)  # "I feel the weight. It's Loss layered with fatigue..."
@@ -436,10 +436,10 @@ if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affe
 
 ```bash
 
-# Run all glyph tests
+## Run all glyph tests
 pytest emotional_os/core/firstperson/test_glyph_response_composer.py -v
 
-# Run full suite
+## Run full suite
 pytest emotional_os/core/firstperson/test_*.py -v
 ```
 

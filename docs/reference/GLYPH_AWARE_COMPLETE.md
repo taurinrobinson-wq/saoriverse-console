@@ -45,10 +45,10 @@ glyph's emotional category
 
 ```python
 
-# OLD
+## OLD
 def compose_response(self, input_text: str, glyph_name: str = "", ...)
 
-# NEW
+## NEW
 ```text
 
 ```text
@@ -141,14 +141,14 @@ if message_content.get("math_frustration"):
 
 ```python
 
-# OLD
+## OLD (2)
 composed = _response_composer.compose_response(
     input_text=input_text,
     glyph_name=name,
     ...
 )
 
-# NEW
+## NEW (2)
 composed = _response_composer.compose_response(
     input_text=input_text,
     glyph=glyph,  # Pass full dict
@@ -170,10 +170,10 @@ Updated both:
 ```python
 
 
-# OLD - inconsistent tuple structure
+## OLD - inconsistent tuple structure
 return None, "I can sense there's something..."
 
-# NEW - consistent tuple: (best_glyph, (response, feedback_data))
+## NEW - consistent tuple: (best_glyph, (response, feedback_data))
 return None, ("I can sense there's something...",
 
 ```text
@@ -187,9 +187,9 @@ return None, ("I can sense there's something...",
 ```python
 
 
-# Database returns singular "gate" field
+## Database returns singular "gate" field
 
-# Code checks both variations
+## Code checks both variations
 gate_data = glyph.get("gates") or glyph.get("gate") gates_list = gate_data if isinstance(gate_data,
 list) else [gate_data]
 

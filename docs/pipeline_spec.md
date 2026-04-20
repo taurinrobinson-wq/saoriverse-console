@@ -1,7 +1,9 @@
 # FirstPerson Pipeline Specification
 
 ## Overview
-The FirstPerson response pipeline is a composable, typed system that converts user messages into semantically attuned, contextually grounded responses. It enforces invariants at each stage to prevent canned, overly-celebratory, or verbatim-echo replies.
+The FirstPerson response pipeline is a composable, typed system that converts user messages into
+semantically attuned, contextually grounded responses. It enforces invariants at each stage to
+prevent canned, overly-celebratory, or verbatim-echo replies.
 
 ## Component Interfaces
 

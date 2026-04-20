@@ -24,10 +24,10 @@
 ```bash
 python core/main_v2.py
 
-# or
+## or
 python main_v2_simple.py
 
-# or
+## or (2)
 ```text
 
 ```text
@@ -85,7 +85,7 @@ find . -name "*response*" | grep -v __pycache__
 
 ls src/
 
-# response_generator.py, response_adapter.py, response_selector.py
+## response_generator.py, response_adapter.py, response_selector.py
 
 ```text
 
@@ -268,11 +268,11 @@ saoriverse-console/
 ```bash
 pytest tests/
 
-# - Some tests not discovered
+## - Some tests not discovered
 
-# - Unclear which are unit vs integration
+## - Unclear which are unit vs integration
 
-# - Hard to run specific tests
+## - Hard to run specific tests
 
 ```text
 
@@ -296,12 +296,12 @@ pytest tests/integration/  # Slower integration tests (< 10 sec)
 
 ## Import Impact
 
-### Before
+### Before (2)
 
 ```python
 
 
-# These all existed and were confusing:
+## These all existed and were confusing:
 from emotional_os.core.signal_parser import parse_input from parser.signal_parser import parse_input
 
 ```text
@@ -309,13 +309,13 @@ from emotional_os.core.signal_parser import parse_input from parser.signal_parse
 
 ```
 
-### After
+### After (2)
 
 ```python
 
 
 
-# Clear single source of truth:
+## Clear single source of truth:
 
 ```text
 ```
@@ -354,7 +354,7 @@ from emotional_os.core.signal_parser import parse_input from parser.signal_parse
 ```bash
 git checkout pre-reorganization
 
-# Or: git reset --hard pre-reorganization
+## Or: git reset --hard pre-reorganization
 
 ```text
 
@@ -420,30 +420,30 @@ Run these to verify everything works:
 ```bash
 
 
-# 1. App launches
+## 1. App launches
 streamlit run app.py
 
-# Should open browser to http://localhost:8501
+## Should open browser to http://localhost:8501
 
-# 2. Tests discover
+## 2. Tests discover
 pytest tests/ --collect-only
 
-# Should show 25+ tests collected
+## Should show 25+ tests collected
 
-# 3. Tests pass
+## 3. Tests pass
 pytest tests/unit/
 
-# Should show "PASSED [100%]"
+## Should show "PASSED [100%]"
 
-# 4. Imports work
+## 4. Imports work
 python -c "from src import process_user_input; print('OK')"
 
-# Should print: OK
+## Should print: OK
 
-# 5. No root clutter
+## 5. No root clutter
 ls -1 *.py
 
-# Should show: app.py only
+## Should show: app.py only
 
 ```
 

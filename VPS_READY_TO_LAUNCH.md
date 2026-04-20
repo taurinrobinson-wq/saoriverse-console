@@ -109,34 +109,34 @@ After pushing, choose your path:
 
 
 
-# 1. Push to GitHub
+## 1. Push to GitHub
 cd d:\saoriverse-console git add *.md docker-compose.prod.yml nginx.prod.conf .github/ git commit -m
 "feat: add VPS deployment infrastructure" git push origin main
 
-# 2. Create DigitalOcean account
+## 2. Create DigitalOcean account
 
-# Go to https://digitalocean.com, sign up
+## Go to https://digitalocean.com, sign up
 
-# 3. Create Droplet
+## 3. Create Droplet
 
-# Image: Ubuntu 22.04 LTS
+## Image: Ubuntu 22.04 LTS
 
-# Plan: Basic $6/month
+## Plan: Basic $6/month
 
-# Save the IP
+## Save the IP
 
-# 4. Add DNS
+## 4. Add DNS
 
-# Go to Namecheap → firstperson.chat → Advanced DNS
+## Go to Namecheap → firstperson.chat → Advanced DNS
 
-# A Record: velinor → [Your IP]
+## A Record: velinor → [Your IP]
 
-# 5. SSH and deploy (copy-paste from VPS_QUICK_START.md Step 4)
+## 5. SSH and deploy (copy-paste from VPS_QUICK_START.md Step 4)
 ssh root@[YOUR_IP]
 
-# Then paste the full setup script
+## Then paste the full setup script
 
-# 6. Test
+## 6. Test
 https://velinor.firstperson.chat
 
 ```text

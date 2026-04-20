@@ -1,15 +1,16 @@
 # LimbicAI - Interactive Emotional Analysis System
 
-An interactive web application for analyzing emotional responses through the lens of affective neuroscience. Users enter scenarios that trigger emotions, and the system maps the likely limbic system activation patterns, providing science-grounded guidance.
+An interactive web application for analyzing emotional responses through the lens of affective
+neuroscience. Users enter scenarios that trigger emotions, and the system maps the likely limbic
+system activation patterns, providing science-grounded guidance.
 
 ## What is LimbicAI?
 
 LimbicAI is a teaching/translation tool that:
 
-1. **Parses** your emotional scenario using NLP
-2. **Maps** extracted emotional features to limbic brain region activations
-3. **Visualizes** the limbic system state with activation levels
-4. **Explains** what's happening neurobiologically and psychologically
+1. **Parses** your emotional scenario using NLP 2. **Maps** extracted emotional features to limbic
+brain region activations 3. **Visualizes** the limbic system state with activation levels 4.
+**Explains** what's happening neurobiologically and psychologically
 
 ## Core Concept
 
@@ -63,17 +64,14 @@ pip install -r requirements.txt
 python app.py
 ```
 
-4. **Access the web interface**:
-Open browser to `http://localhost:5000`
+4. **Access the web interface**: Open browser to `http://localhost:5000`
 
 ## Usage
 
 ### Web Interface
 
-1. Navigate to the main page
-2. Enter your emotional scenario in the text area
-3. Click "Analyze"
-4. View:
+1. Navigate to the main page 2. Enter your emotional scenario in the text area 3. Click "Analyze" 4.
+View:
    - Visual limbic map showing brain region activations
    - Summary of emotional patterns
    - Detailed explanations for each brain region
@@ -157,7 +155,8 @@ Returns system status.
 
 ### Feature Extraction
 
-Keywords and patterns are identified in the scenario text, normalized by text length, and converted to 0-1 activation scores.
+Keywords and patterns are identified in the scenario text, normalized by text length, and converted
+to 0-1 activation scores.
 
 Example keyword groups:
 - Social rejection: "broke up", "rejected", "excluded", "abandoned"
@@ -230,13 +229,11 @@ Saoriverse Console Project.
 
 ## Support
 
-For issues or questions:
-1. Check the examples in this README
-2. Review the inline code documentation
-3. Open an issue with detailed problem description
+For issues or questions: 1. Check the examples in this README 2. Review the inline code
+documentation 3. Open an issue with detailed problem description
 
 ---
 
 **Note**: LimbicAI is a teaching tool designed to help people understand 
-the neurobiology of emotions. It should not replace professional mental 
-health support or clinical assessment.
+the neurobiology of emotions. It should not replace professional mental health support or clinical
+assessment.

@@ -165,17 +165,17 @@ browser console (F12) for errors 4. Verify `sql/conversations_table.sql` was run
 ```bash
 
 
-# 1. Create test user
+## 1. Create test user
 
-# 2. Start conversation, check "Save my chats"
+## 2. Start conversation, check "Save my chats"
 
-# 3. Send a message
+## 3. Send a message
 
-# 4. Refresh page (F5)
+## 4. Refresh page (F5)
 
-# 5. Verify conversation appears in sidebar
+## 5. Verify conversation appears in sidebar
 
-# Check Supabase:
+## Check Supabase:
 
 ```text
 
@@ -196,16 +196,16 @@ from emotional_os.deploy.modules.conversation_manager import ConversationManager
 
 manager = ConversationManager(user_id="user123")
 
-# List all conversations
+## List all conversations
 convs = manager.load_conversations() print(convs)
 
-# Load specific conversation
+## Load specific conversation
 conv = manager.load_conversation("conv-uuid") print(conv['messages'])
 
-# Rename
+## Rename
 success, msg = manager.rename_conversation("conv-uuid", "New Title")
 
-# Delete
+## Delete
 
 ```text
 ```text

@@ -7,7 +7,9 @@
 
 ## Executive Summary
 
-You've just crossed a threshold most legal-tech founders never reach: **you now have a fully scaffolded, modular, testable, extensible litigation-document generation platform**. DraftShift isn't a prototype anymore — it's a real engine with a real architecture.
+You've just crossed a threshold most legal-tech founders never reach: **you now have a fully
+scaffolded, modular, testable, extensible litigation-document generation platform**. DraftShift
+isn't a prototype anymore — it's a real engine with a real architecture.
 
 **What you have:**
 - ✅ BaseDocument engine (YAML-driven formatting)
@@ -19,7 +21,8 @@ You've just crossed a threshold most legal-tech founders never reach: **you now 
 - ✅ California-compliant formatting
 - ✅ Modular citation engine
 
-At this point, you've got **two equally strong paths forward**, depending on what you want to accomplish next.
+At this point, you've got **two equally strong paths forward**, depending on what you want to
+accomplish next.
 
 ---
 
@@ -28,13 +31,13 @@ At this point, you've got **two equally strong paths forward**, depending on wha
 You're ready to validate the entire system right now.
 
 ```bash
-# Single pleading build
+## Single pleading build
 draftshift draftshift/tests/fixtures/motion.json -o Motion_to_Compel.docx
 
-# Full test suite
+## Full test suite
 make -f Makefile.draftshift test
 
-# Quick-start example (all 4 pleading types)
+## Quick-start example (all 4 pleading types)
 python draftshift_quickstart.py
 ```
 
@@ -58,13 +61,15 @@ Four production-ready DOCX files:
 - `Reply.docx` — Reply with counter-arguments
 - `Declaration.docx` — Declaration with numbered paragraphs + auto-attestation
 
-If everything passes, you'll have a working DOCX generator that **already outperforms most commercial tools**.
+If everything passes, you'll have a working DOCX generator that **already outperforms most
+commercial tools**.
 
 ---
 
 ## Path 2: Next Phase of Development
 
-If testing is successful, here are the natural next steps that **build directly on the architecture you now have**. Each is modular — you can do them in any order.
+If testing is successful, here are the natural next steps that **build directly on the architecture
+you now have**. Each is modular — you can do them in any order.
 
 ### **Phase 2.1: Local Rule Overrides** (1-2 weeks)
 
@@ -93,16 +98,15 @@ federal_central_district.yaml          # Central District of California
 
 #### Implementation
 
-1. Create variant YAML files (copy base, override specific fields)
-2. Update `PleadingFactory` to accept optional `--jurisdiction` parameter
-3. Update JSON fixtures to include `"jurisdiction"` field
+1. Create variant YAML files (copy base, override specific fields) 2. Update `PleadingFactory` to
+accept optional `--jurisdiction` parameter 3. Update JSON fixtures to include `"jurisdiction"` field
 4. Update CLI: `draftshift motion.json --jurisdiction la_superior`
 
 #### Architecture already supports this
 Your YAML is hierarchical — inheritance is trivial.
 
 ```python
-# In factory
+## In factory
 if jurisdiction:
     config = load_base_config()
     config.update(load_jurisdiction_override())
@@ -116,7 +120,7 @@ if jurisdiction:
 
 **Next step**: Add Bluebook mode for federal briefs, law review articles, memos.
 
-#### Add to `/draftshift/formats/`
+#### Add to `/draftshift/formats/` (2)
 
 ```
 bluebook_citation.yaml          # Case names, reporters, statutes, secondary sources
@@ -132,22 +136,21 @@ federal_brief.yaml              # Federal brief formatting (different from state
 - Short forms (Bluebook has different rules)
 - Secondary sources (Law review citations are completely different)
 
-#### Implementation
+#### Implementation (2)
 
-1. Create `bluebook_citation.yaml`
-2. Update JSON schema to support `"citation_mode": "bluebook"`
-3. Update CLI: `draftshift brief.json --citation-mode bluebook`
-4. Update BaseDocument to load citation config dynamically
+1. Create `bluebook_citation.yaml` 2. Update JSON schema to support `"citation_mode": "bluebook"` 3.
+Update CLI: `draftshift brief.json --citation-mode bluebook` 4. Update BaseDocument to load citation
+config dynamically
 
-#### Architecture already supports this
+#### Architecture already supports this (2)
 Your citation engine is decoupled from formatting.
 
 ```yaml
-# Current
+## Current
 citations:
   mode: "california"
 
-# New
+## New
 citations:
   mode: "bluebook"  # or "california"
 ```
@@ -209,14 +212,13 @@ Each template pre-fills:
 }
 ```
 
-#### Implementation
+#### Implementation (3)
 
-1. Create template JSON files with pre-filled arguments
-2. Create `TemplateLoader` class
-3. Merge user-provided data with template
-4. Update CLI: `draftshift --template motion_to_compel user_data.json`
+1. Create template JSON files with pre-filled arguments 2. Create `TemplateLoader` class 3. Merge
+user-provided data with template 4. Update CLI: `draftshift --template motion_to_compel
+user_data.json`
 
-#### Architecture already supports this
+#### Architecture already supports this (3)
 Your JSON schema is already flexible enough.
 
 ---
@@ -240,15 +242,15 @@ Use existing libraries:
 - `python-docx` (read) + `reportlab` or `pypdf` (write)
 - Or simpler: `libreoffice --headless --convert-to pdf`
 
-#### Implementation
+#### Implementation (4)
 
-1. Create `PDFExporter` class
-2. Update `DocumentBuilder.save()` to support `format="pdf"`
-3. Update CLI: `draftshift motion.json -o Motion.pdf --format pdf`
+1. Create `PDFExporter` class 2. Update `DocumentBuilder.save()` to support `format="pdf"` 3. Update
+CLI: `draftshift motion.json -o Motion.pdf --format pdf`
 
 #### Why this matters
 
-Courts increasingly require PDF-only submission. Enabling PDF export means DraftShift works for actual filing.
+Courts increasingly require PDF-only submission. Enabling PDF export means DraftShift works for
+actual filing.
 
 ---
 
@@ -284,7 +286,7 @@ Courts increasingly require PDF-only submission. Enabling PDF export means Draft
 #### Example API
 
 ```python
-# FastAPI endpoint
+## FastAPI endpoint
 @app.post("/build")
 async def build_pleading(json_file: UploadFile, output_format: str = "docx"):
     data = json.loads(await json_file.read())
@@ -317,13 +319,11 @@ When you build a pleading, it auto-fills:
 - Reservation IDs
 - Client matter numbers
 
-#### Implementation
+#### Implementation (5)
 
-1. Create `CaseDataStore` class (PostgreSQL ORM with SQLAlchemy)
-2. Create `/draftshift/backend/case_db.py`
-3. Update factory to accept optional `case_id` parameter
-4. Query database and merge with user input
-5. Update CLI: `draftshift motion.json --case-id 22STCV12345`
+1. Create `CaseDataStore` class (PostgreSQL ORM with SQLAlchemy) 2. Create
+`/draftshift/backend/case_db.py` 3. Update factory to accept optional `case_id` parameter 4. Query
+database and merge with user input 5. Update CLI: `draftshift motion.json --case-id 22STCV12345`
 
 #### Database schema
 
@@ -363,10 +363,9 @@ CREATE TABLE case_attorneys (
 
 If you want to maximize impact with minimum effort:
 
-1. **Week 1**: Test end-to-end (Path 1) → Deploy Phase 2.1 (Local rules)
-2. **Week 2-3**: Phase 2.3 (Templates) → Phase 2.6 (Case DB)
-3. **Week 4**: Phase 2.2 (Bluebook) → Phase 2.5 (Web UI)
-4. **Week 5+**: Phase 2.4 (PDF) → Polish and launch
+1. **Week 1**: Test end-to-end (Path 1) → Deploy Phase 2.1 (Local rules) 2. **Week 2-3**: Phase 2.3
+(Templates) → Phase 2.6 (Case DB) 3. **Week 4**: Phase 2.2 (Bluebook) → Phase 2.5 (Web UI) 4. **Week
+5+**: Phase 2.4 (PDF) → Polish and launch
 
 ---
 
@@ -401,11 +400,10 @@ Most legal-tech startups build **monoliths**. You built **modules**.
 
 ## Open Questions for Next Sprint
 
-1. **Which phase first?** (Most impact per effort)
-2. **How many custom local rules** before you build a rules engine?
-3. **Do you want to support federal court** or stay state-only?
-4. **What's your filing timeline?** (Does PDF export matter now, or later?)
-5. **Who's your first user?** (Tailor Phase 2.5 UI to their workflow)
+1. **Which phase first?** (Most impact per effort) 2. **How many custom local rules** before you
+build a rules engine? 3. **Do you want to support federal court** or stay state-only? 4. **What's
+your filing timeline?** (Does PDF export matter now, or later?) 5. **Who's your first user?**
+(Tailor Phase 2.5 UI to their workflow)
 
 ---
 

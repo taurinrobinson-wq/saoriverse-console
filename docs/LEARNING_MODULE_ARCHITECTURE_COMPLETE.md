@@ -453,7 +453,7 @@ want to sit with?" Feels coherent, contextual, genuinely responsive
 ```python
 
 
-# In signal_parser.py response generation:
+## In signal_parser.py response generation:
 def generate_response(user_input, prior_context):
     # Try archetype first
 archetype_response = archetype_generator.generate_archetype_aware_response( user_input=user_input,
@@ -473,7 +473,7 @@ principles
 
 
 
-# After successful conversation:
+## After successful conversation:
 def log_successful_interaction(dialogue, feedback): learner = ConversationLearner()
 
     # Extract patterns

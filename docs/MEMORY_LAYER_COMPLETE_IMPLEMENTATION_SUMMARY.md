@@ -293,7 +293,7 @@ potentially wait?"
 
 
 
-# Per user message:
+## Per user message:
 1. Parse semantically → SemanticParsing object 2. Add to memory → memory.add_turn(input, parsed,
 glyphs, needs) 3. Memory integrates → updates integrated_state, causal_understanding
 

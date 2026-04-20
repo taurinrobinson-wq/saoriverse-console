@@ -34,7 +34,8 @@ Goals:
      ```
 
    - Deploy Streamlit on the host and bind to localhost (127.0.0.1) so it is only reachable via the proxy.
-Example systemd unit should set `WorkingDirectory` to the repo and run `streamlit run src/streamlit_integration/chat_sandbox.py`.
+Example systemd unit should set `WorkingDirectory` to the repo and run `streamlit run
+src/streamlit_integration/chat_sandbox.py`.
 
 3) Enable Basic Auth for `/app/` (optional but recommended)
 

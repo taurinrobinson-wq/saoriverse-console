@@ -63,11 +63,10 @@
 ### 4. `test_trait_system_foundation.py` (260 lines)
 
 **Test coverage**:
-1. ✅ Basic trait tracking (3 empathetic choices → primary trait is empathy)
-2. ✅ Coherence calculation (80% empathy → 80 coherence → CLEAR level)
-3. ✅ Incoherence detection (evenly split traits → 25 coherence → CONTRADICTORY)
-4. ✅ NPC response engine (empathetic player vs empathetic NPC = "ally")
-5. ✅ Trait choice presets (mixed choices → mixed pattern)
+1. ✅ Basic trait tracking (3 empathetic choices → primary trait is empathy) 2. ✅ Coherence
+calculation (80% empathy → 80 coherence → CLEAR level) 3. ✅ Incoherence detection (evenly split
+traits → 25 coherence → CONTRADICTORY) 4. ✅ NPC response engine (empathetic player vs empathetic NPC
+= "ally") 5. ✅ Trait choice presets (mixed choices → mixed pattern)
 
 ---
 
@@ -119,10 +118,10 @@ Enable/disable certain endings based on pattern
 
 ## Design Principles Enforced
 
-1. **Patterns matter**: System looks at 5-10 recent choices, not overall average
-2. **Coherence is key**: Contradiction creates tension in the world
-3. **People matter more than optimization**: Consistent characters are respected, contradictory ones are suspect
-4. **Authenticity matters**: High coherence = deeper world interactions
+1. **Patterns matter**: System looks at 5-10 recent choices, not overall average 2. **Coherence is
+key**: Contradiction creates tension in the world 3. **People matter more than optimization**:
+Consistent characters are respected, contradictory ones are suspect 4. **Authenticity matters**:
+High coherence = deeper world interactions
 
 ---
 
@@ -155,12 +154,10 @@ Enable/disable certain endings based on pattern
 
 ## What's Next: Phase 2 - Marketplace Debate Scene
 
-Phase 2 will:
-1. Integrate trait_system into orchestrator.py's main game loop
-2. Implement marketplace intro scene with branching dialogue
-3. Map dialogue choices to TraitChoice objects
-4. Update Streamlit UI to display trait profiles and dialogue depth
-5. Create marketplace debate branching with 3+ paths based on traits
+Phase 2 will: 1. Integrate trait_system into orchestrator.py's main game loop 2. Implement
+marketplace intro scene with branching dialogue 3. Map dialogue choices to TraitChoice objects 4.
+Update Streamlit UI to display trait profiles and dialogue depth 5. Create marketplace debate
+branching with 3+ paths based on traits
 
 **Estimated**: 3-5 days
 **Dependencies**: Phase 1 foundation ✅

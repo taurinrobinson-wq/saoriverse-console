@@ -142,7 +142,7 @@ encounters = [
 from velinor.engine.npc_manager import NPCManager
 from velinor.stories.test_remnants_simulation import *
 
-# Initialize NPCs
+## Initialize NPCs
 manager = NPCManager()
 npcs = create_marketplace_npcs()
 manager.add_npcs_batch(npcs)
@@ -153,11 +153,11 @@ manager.add_npcs_batch(npcs)
 
 ```python
 
-# When player makes a choice:
+## When player makes a choice:
 tone_effects = {"courage": 0.2, "empathy": -0.1}
 manager.simulate_encounters([tone_effects])
 
-# Access updated NPC state:
+## Access updated NPC state:
 npc = manager.npcs["Ravi"]
 print(npc.remnants)  # Shows updated traits
 ```
@@ -167,7 +167,7 @@ print(npc.remnants)  # Shows updated traits
 
 ```python
 
-# Make NPC dialogue depend on their current state:
+## Make NPC dialogue depend on their current state:
 if manager.npcs["Kaelen"].remnants["empathy"] > 0.7:
     # Play "redeemed Kaelen" dialogue
 else:

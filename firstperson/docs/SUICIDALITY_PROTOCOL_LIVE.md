@@ -158,24 +158,24 @@ These are offered by consent, not pushed.
 
 from emotional_os.core.signal_parser import parse_input
 
-# User sends: "I have thoughts of suicide"
+## User sends: "I have thoughts of suicide"
 result = parse_input( input_text="I have thoughts of suicide",
 lexicon_path="emotional_os/core/emotional_keywords_enhanced.json", db_path="glyphs.db",
 user_id="user_123" )
 
-# System automatically detects and routes to suicidality protocol
+## System automatically detects and routes to suicidality protocol
 
-# Returns:
+## Returns:
 
-# {
-#   "response_source": "suicidality_protocol",
-#   "voltage_response": "You named thoughts of suicide...",
-#   "suicidality_state": {
-#     "current_state": "Explore",
-#     "consent_flags": {"discussion_opt_in": True, ...},
-#     "disclosure_count": 1,
-#     "first_disclosure": "2025-12-03T..."
-#   }
+## {
+##   "response_source": "suicidality_protocol",
+##   "voltage_response": "You named thoughts of suicide...",
+##   "suicidality_state": {
+##     "current_state": "Explore",
+##     "consent_flags": {"discussion_opt_in": True, ...},
+##     "disclosure_count": 1,
+##     "first_disclosure": "2025-12-03T..."
+##   }
 
 ```text
 ```text

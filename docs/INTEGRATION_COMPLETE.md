@@ -20,7 +20,7 @@
 
 ```python
 
-# Automatically anonymizes before storing
+## Automatically anonymizes before storing
 learner = HybridLearnerWithUserOverrides(
     enable_anonymization=True,  # On by default
     allow_medical_details=False,  # User can override
@@ -144,11 +144,11 @@ learner = HybridLearnerWithUserOverrides()  # Anonymization enabled by default
 result = learner.learn_from_exchange( user_id="user_123", user_input="I'm struggling with my
 therapist", ai_response="That sounds challenging...", emotional_signals=[...] )
 
-# Automatically:
+## Automatically:
 
-# - Anonymizes: "therapist" → "The Witness"
+## - Anonymizes: "therapist" → "The Witness"
 
-# - Stores mapping for audit trail
+## - Stores mapping for audit trail
 
 ```text
 ```
@@ -158,7 +158,7 @@ therapist", ai_response="That sounds challenging...", emotional_signals=[...] )
 
 ```python
 
-# Allow medical details but anonymize names
+## Allow medical details but anonymize names
 learner = HybridLearnerWithUserOverrides(
     enable_anonymization=True,
     allow_medical_details=True,  # Keep "depression" as-is
@@ -174,12 +174,12 @@ learner = HybridLearnerWithUserOverrides(
 ```python
 
 
-# In main_v2.py, after response:
+## In main_v2.py, after response:
 from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
 
 consent = render_anonymization_consent_widget(f"exchange_{i}")
 
-# Shows options and gets user choice
+## Shows options and gets user choice
 
 ```text
 
@@ -310,26 +310,26 @@ To verify integration is working:
 ```bash
 
 
-# Test anonymization protocol
+## Test anonymization protocol
 python3 emotional_os/safety/anonymization_protocol.py
 
-# Test hybrid learner with anonymization
+## Test hybrid learner with anonymization
 python3 -c "
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 learner = HybridLearnerWithUserOverrides(enable_anonymization=True)
 print('✅ Anonymization enabled in hybrid learner')
 "
 
-# Test consent UI
+## Test consent UI
 python3 -c "
 from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
 print('✅ Consent UI components available')
 "
 
-# Run full app (Streamlit)
+## Run full app (Streamlit)
 streamlit run main_v2.py
 
-# Try making a query and look for consent widget after response
+## Try making a query and look for consent widget after response
 
 ```
 

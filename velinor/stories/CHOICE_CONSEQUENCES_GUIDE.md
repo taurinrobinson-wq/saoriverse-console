@@ -118,7 +118,7 @@ Each choice affects the player differently:
 
 ```python
 
-# Aggressive approach - high courage, but makes Nima wary
+## Aggressive approach - high courage, but makes Nima wary
 story.add_choice(
     from_passage_name="market_arrival",
     choice_text="Step toward the figures",
@@ -127,7 +127,7 @@ story.add_choice(
     npc_resonance={"Ravi": 0.1, "Nima": -0.1}
 )
 
-# Careful approach - high wisdom, earns Nima's respect
+## Careful approach - high wisdom, earns Nima's respect
 story.add_choice(
     from_passage_name="market_arrival",
     choice_text="Retreat toward the underpass (safer)",
@@ -136,7 +136,7 @@ story.add_choice(
     npc_resonance={"Ravi": -0.1, "Nima": 0.15}
 )
 
-# Social approach - empathy and presence, balanced
+## Social approach - empathy and presence, balanced
 story.add_choice(
     from_passage_name="market_arrival",
     choice_text="Call out to them",
@@ -145,7 +145,7 @@ story.add_choice(
     npc_resonance={"Ravi": 0.15, "Nima": 0.05}
 )
 
-# Observant approach - wisdom and perception
+## Observant approach - wisdom and perception
 story.add_choice(
     from_passage_name="market_arrival",
     choice_text="Stay still and observe",
@@ -244,16 +244,16 @@ Relationships build over time:
 
 ```python
 
-# Small effect (neutral/minor)
+## Small effect (neutral/minor)
 tone_effects={"courage": 0.05}
 
-# Medium effect (notable)
+## Medium effect (notable)
 tone_effects={"courage": 0.15}
 
-# Large effect (major)
+## Large effect (major)
 tone_effects={"courage": 0.25}
 
-# Negative effect (drawback)
+## Negative effect (drawback)
 tone_effects={"courage": -0.1}
 ```
 
@@ -262,7 +262,7 @@ tone_effects={"courage": -0.1}
 
 ```python
 
-# Balanced approach - moderate effects
+## Balanced approach - moderate effects
 story.add_choice(
     ...
     tone_effects={
@@ -272,7 +272,7 @@ story.add_choice(
     }
 )
 
-# Specialized approach - focused effects
+## Specialized approach - focused effects
 story.add_choice(
     ...
     tone_effects={
@@ -287,19 +287,19 @@ story.add_choice(
 
 ```python
 
-# Early meeting - establish base
+## Early meeting - establish base
 story.add_choice(
     ...
     npc_resonance={"Ravi": 0.1, "Nima": 0.05}
 )
 
-# Deepening trust - larger gain
+## Deepening trust - larger gain
 story.add_choice(
     ...
     npc_resonance={"Ravi": 0.25}
 )
 
-# Wrong direction - penalty
+## Wrong direction - penalty
 story.add_choice(
     ...
     npc_resonance={"Ravi": -0.15}

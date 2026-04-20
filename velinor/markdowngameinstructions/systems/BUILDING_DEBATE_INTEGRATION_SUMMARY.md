@@ -2,12 +2,13 @@
 
 ## Overview
 
-Five key glyphs from the JSON Glyph_Organizer have been modified to weave together:
-1. **The archive building debate** (from Narrative Spine) as the central conflict
-2. **The love story between Malrik and Elenya** (subtle, subtext-driven)
-3. **Coren's role as the paradox-holder** (mediation as true strength)
+Five key glyphs from the JSON Glyph_Organizer have been modified to weave together: 1. **The archive
+building debate** (from Narrative Spine) as the central conflict 2. **The love story between Malrik
+and Elenya** (subtle, subtext-driven) 3. **Coren's role as the paradox-holder** (mediation as true
+strength)
 
-Rather than creating new glyphs, existing glyphs were recontextualized to become chapters of this integrated narrative arc.
+Rather than creating new glyphs, existing glyphs were recontextualized to become chapters of this
+integrated narrative arc.
 
 ---
 
@@ -112,9 +113,9 @@ Rather than creating new glyphs, existing glyphs were recontextualized to become
 ## The Narrative Arc These Glyphs Create
 
 ### **Act II: The Debate Emerges**
-1. **Boundary Stone** — Malrik establishes his position with fear hidden beneath rigidity
-2. **Measured Step** — The player walks through the contested space and sees his internal conflict
-3. **Held Ache** (begins) — Coren appears to mediate
+1. **Boundary Stone** — Malrik establishes his position with fear hidden beneath rigidity 2.
+**Measured Step** — The player walks through the contested space and sees his internal conflict 3.
+**Held Ache** (begins) — Coren appears to mediate
 
 ### **Act II-III: The Love Story Crystallizes**
 - The player witnesses Malrik's eyes lingering on Elenya's offerings
@@ -122,9 +123,9 @@ Rather than creating new glyphs, existing glyphs were recontextualized to become
 - The player understands that this isn't philosophical disagreement—it's personal
 
 ### **Act III: The Vision Contest**
-4. **Covenant Flame** — Elenya demonstrates her vision is sacred, not destructive
-5. **Held Ache** (continues) — Coren holds the paradox steady
-6. **Shared Survival** (begins) — Time-sharing arrangement proposed
+4. **Covenant Flame** — Elenya demonstrates her vision is sacred, not destructive 5. **Held Ache**
+(continues) — Coren holds the paradox steady 6. **Shared Survival** (begins) — Time-sharing
+arrangement proposed
 
 ### **Act III/IV: The Integration Challenge**
 7. **Shared Survival** (completes) — Both communities learn to tend together
@@ -174,9 +175,9 @@ The love story is **not overt**. It's embedded in:
 
 All three modified Malrik/Elenya glyphs ripple toward the **Building Collapse** turning point:
 
-1. **Boundary Stone** — Establishes what will be lost if the building falls
-2. **Measured Step** — Shows the emotional infrastructure that will crumble
-3. **Covenant Flame** — Demonstrates what could be preserved if they rebuild together
+1. **Boundary Stone** — Establishes what will be lost if the building falls 2. **Measured Step** —
+Shows the emotional infrastructure that will crumble 3. **Covenant Flame** — Demonstrates what could
+be preserved if they rebuild together
 
 When the building collapses in Act III:
 - If Malrik/Elenya haven't begun to integrate, they blame each other and walk away
@@ -206,21 +207,19 @@ For each glyph, the following fields were modified:
 ## Next Steps
 
 ### Narrative Design
-1. Write specific dialogue for the Marketplace Debate scene (Act II)
-2. Create the Building Collapse scripted sequence (Act III)
-3. Design the Triad Convergence choices (Act IV)
-4. Define the six ending combinations based on System Restart + Synthesis questions
+1. Write specific dialogue for the Marketplace Debate scene (Act II) 2. Create the Building Collapse
+scripted sequence (Act III) 3. Design the Triad Convergence choices (Act IV) 4. Define the six
+ending combinations based on System Restart + Synthesis questions
 
 ### Implementation
-1. Create UI/narrative branches for `player_choices` in these glyphs
-2. Implement trigger system for `narrative_triggers`
-3. Add memory fragment visuals (dried_flowers.png, shared_schedule.png, etc.)
+1. Create UI/narrative branches for `player_choices` in these glyphs 2. Implement trigger system for
+`narrative_triggers` 3. Add memory fragment visuals (dried_flowers.png, shared_schedule.png, etc.)
 4. Link these glyphs to ending determination logic
 
 ### Design Docs
-1. Update VELINOR_COMPLETE_DESIGN.md with Coren's expanded role
-2. Add building collapse sequence to Narrative Spine
-3. Document the six endings based on Malrik/Elenya rebuild choice + System restart choice
+1. Update VELINOR_COMPLETE_DESIGN.md with Coren's expanded role 2. Add building collapse sequence to
+Narrative Spine 3. Document the six endings based on Malrik/Elenya rebuild choice + System restart
+choice
 
 ---
 
@@ -234,7 +233,8 @@ For each glyph, the following fields were modified:
 
 The glyphs now embody this: **Systems cannot do what people cannot.**
 
-Both Malrik and Elenya must learn to hold paradox. Only then can the building be shared. Only then can Velhara truly be restored.
+Both Malrik and Elenya must learn to hold paradox. Only then can the building be shared. Only then
+can Velhara truly be restored.
 
 ---
 

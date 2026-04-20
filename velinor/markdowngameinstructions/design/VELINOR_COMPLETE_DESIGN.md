@@ -2,7 +2,9 @@
 
 ## Overview
 
-Velinor is a narrative-driven emotional game built on Buddhist philosophy, emotional physics, and modular design. Rather than binary morality or external punishment, the world metabolizes the player's emotional state (TONE) into environmental consequence and narrative pacing.
+Velinor is a narrative-driven emotional game built on Buddhist philosophy, emotional physics, and
+modular design. Rather than binary morality or external punishment, the world metabolizes the
+player's emotional state (TONE) into environmental consequence and narrative pacing.
 
 **Core Thesis**: Players aren't defeated—they're reflected. The world doesn't impose emotion; it mirrors what the player brings into each moment.
 
@@ -10,14 +12,12 @@ Velinor is a narrative-driven emotional game built on Buddhist philosophy, emoti
 
 ## Table of Contents
 
-1. [Design Philosophy & Vision](#design-philosophy--vision)
-2. [Core Characters & Glyphs](#core-characters--glyphs)
-3. [The Seven Emotional Domains](#the-seven-emotional-domains)
-4. [The TONE System](#the-tone-system)
-5. [Fear as Emotional Multiplier](#fear-as-emotional-multiplier)
-6. [Technical Implementation](#technical-implementation)
-7. [World Design & Progression](#world-design--progression)
-8. [Best Practices & Integration](#best-practices--integration)
+1. [Design Philosophy & Vision](#design-philosophy--vision) 2. [Core Characters &
+Glyphs](#core-characters--glyphs) 3. [The Seven Emotional Domains](#the-seven-emotional-domains) 4.
+[The TONE System](#the-tone-system) 5. [Fear as Emotional Multiplier](#fear-as-emotional-multiplier)
+6. [Technical Implementation](#technical-implementation) 7. [World Design &
+Progression](#world-design--progression) 8. [Best Practices &
+Integration](#best-practices--integration)
 
 ---
 
@@ -25,7 +25,8 @@ Velinor is a narrative-driven emotional game built on Buddhist philosophy, emoti
 
 ### Why Velinor is Different
 
-Most games operate on a binary framework: hero vs. villain, safe vs. dangerous, win vs. lose. Velinor rejects this entirely.
+Most games operate on a binary framework: hero vs. villain, safe vs. dangerous, win vs. lose.
+Velinor rejects this entirely.
 
 **What informed this approach:**
 
@@ -51,7 +52,10 @@ In Velinor, narrative doesn't decorate mechanics—it *is* the mechanic.
 **Pathos** (emotional resonance) becomes the bloodstream.
 The world becomes the body that holds both.
 
-This is why Ravi and Nima's story of losing their daughter Ophina lands so hard: it's not a cutscene or lore dump. It's a lived reality that shapes the ruins they inhabit, the glyphs they create, and how they encounter the player. The player doesn't hear about grief—they *witness* the alchemy of converting it into legacy.
+This is why Ravi and Nima's story of losing their daughter Ophina lands so hard: it's not a cutscene
+or lore dump. It's a lived reality that shapes the ruins they inhabit, the glyphs they create, and
+how they encounter the player. The player doesn't hear about grief—they *witness* the alchemy of
+converting it into legacy.
 
 ---
 
@@ -59,7 +63,9 @@ This is why Ravi and Nima's story of losing their daughter Ophina lands so hard:
 
 ### Character Design as Pedagogy
 
-Rather than building character backstories first, Velinor builds emotional curricula. Each character teaches through their glyphs—not through exposition, but through trials that embody a philosophical principle.
+Rather than building character backstories first, Velinor builds emotional curricula. Each character
+teaches through their glyphs—not through exposition, but through trials that embody a philosophical
+principle.
 
 This means:
 - Characters are defined by what they make the player understand, not by their personal history
@@ -70,17 +76,26 @@ This means:
 
 **The Setup**
 
-Ravi and Nima are an African American couple who lost their daughter Ophina when the ruins of Velhara collapsed. They watched helplessly as she succumbed to injuries, unable to free her from the rubble. They've lived as shells ever since—grief-saturated, withdrawn, locked in the moment of loss.
+Ravi and Nima are an African American couple who lost their daughter Ophina when the ruins of
+Velhara collapsed. They watched helplessly as she succumbed to injuries, unable to free her from the
+rubble. They've lived as shells ever since—grief-saturated, withdrawn, locked in the moment of loss.
 
 **Why This Story Works**
 
-This isn't a tragic side quest. It's a mirror for real grief that doesn't resolve neatly. Many people have experienced the death of someone with so much life ahead of them. Velinor doesn't ask the player to "fix" their pain or help them "move on." It asks something harder: to witness the moment when they stop being defined by the loss and start being defined by the love that preceded it.
+This isn't a tragic side quest. It's a mirror for real grief that doesn't resolve neatly. Many
+people have experienced the death of someone with so much life ahead of them. Velinor doesn't ask
+the player to "fix" their pain or help them "move on." It asks something harder: to witness the
+moment when they stop being defined by the loss and start being defined by the love that preceded
+it.
 
 **The Legacy Glyph**
 
-The final glyph in their arc is a crying bust with a crown—tears of grief held within dignity, elevation, remembrance. The crown doesn't erase the tragedy. It reframes it: their daughter becomes the person who reshaped their lives, not the event that broke them.
+The final glyph in their arc is a crying bust with a crown—tears of grief held within dignity,
+elevation, remembrance. The crown doesn't erase the tragedy. It reframes it: their daughter becomes
+the person who reshaped their lives, not the event that broke them.
 
-This glyph only appears when the player has walked through the entire arc *with* Ravi and Nima, understanding the alchemy of poison-to-medicine through their own witnessing.
+This glyph only appears when the player has walked through the entire arc *with* Ravi and Nima,
+understanding the alchemy of poison-to-medicine through their own witnessing.
 
 ---
 
@@ -88,7 +103,9 @@ This glyph only appears when the player has walked through the entire arc *with*
 
 #### What He Is
 
-Malrik isn't a wise sage sitting in a library. He's a keeper of emotional residues—the imprints left behind when systems meant to hold consciousness collapse. He documents not just events, but the causes behind them and the effects they leave.
+Malrik isn't a wise sage sitting in a library. He's a keeper of emotional residues—the imprints left
+behind when systems meant to hold consciousness collapse. He documents not just events, but the
+causes behind them and the effects they leave.
 
 **Critical insight**: Malrik lost most of his memory in the cataclysm. He can't trust his own past, so he trusts only what can be observed, measured, repeated. This isn't strength—it's a coping mechanism. And it makes him a perfect exposition character because his explanations are:
 - Accurate in method
@@ -97,7 +114,8 @@ Malrik isn't a wise sage sitting in a library. He's a keeper of emotional residu
 
 #### How He Teaches
 
-Malrik's pedagogy is structured like a philosophical syllabus. Each glyph teaches a principle that builds on the last:
+Malrik's pedagogy is structured like a philosophical syllabus. Each glyph teaches a principle that
+builds on the last:
 
 **Glyph of Ancestral Record** (Desert tomb archives)
 - Inheritance is evidence, not myth
@@ -131,7 +149,10 @@ Malrik's pedagogy is structured like a philosophical syllabus. Each glyph teache
 
 #### Why He Matters as an NPC
 
-Malrik becomes the player's bridge between raw fact and emotional meaning. When Malrik explains something, the player learns how to *know*. Later, when they meet Elenya, they learn how to *feel*. Together, these two exposition characters reveal that truth lives in the intersection, not in either extreme alone.
+Malrik becomes the player's bridge between raw fact and emotional meaning. When Malrik explains
+something, the player learns how to *know*. Later, when they meet Elenya, they learn how to *feel*.
+Together, these two exposition characters reveal that truth lives in the intersection, not in either
+extreme alone.
 
 ---
 
@@ -139,13 +160,16 @@ Malrik becomes the player's bridge between raw fact and emotional meaning. When 
 
 #### What She Is
 
-Where Malrik perceives through evidence, Elenya perceives through intuition, resonance, and natural attunement. Her worldview isn't irrational—it's *felt logic*, grounded in sensation, breath, and the emotional currents running beneath the surface of the world.
+Where Malrik perceives through evidence, Elenya perceives through intuition, resonance, and natural
+attunement. Her worldview isn't irrational—it's *felt logic*, grounded in sensation, breath, and the
+emotional currents running beneath the surface of the world.
 
 She teaches the player how to *belong* rather than how to *know*.
 
 #### How She Teaches
 
-Elenya's glyphs form an arc of presence, joy, and trust—the emotional counter-current to Malrik's discernment:
+Elenya's glyphs form an arc of presence, joy, and trust—the emotional counter-current to Malrik's
+discernment:
 
 **Glyph of Veiled Silence** (Hidden mountain shrine, echoless caverns)
 - Silence is not emptiness; it's a sacred presence
@@ -174,17 +198,22 @@ Elenya's glyphs form an arc of presence, joy, and trust—the emotional counter-
 
 #### Why She Matters
 
-Elenya is what happens when you survive loss without becoming bitter. She doesn't deny pain; she attunes to it. She doesn't force joy; she recognizes it as medicine. She doesn't demand certainty; she builds presence instead.
+Elenya is what happens when you survive loss without becoming bitter. She doesn't deny pain; she
+attunes to it. She doesn't force joy; she recognizes it as medicine. She doesn't demand certainty;
+she builds presence instead.
 
-Together with Malrik, she represents the Buddhist middle path: truth emerges not from binaries, but from holding both perspectives simultaneously.
+Together with Malrik, she represents the Buddhist middle path: truth emerges not from binaries, but
+from holding both perspectives simultaneously.
 
 ---
 
 ### Nordia the Mourning Singer: The Bridge
 
-#### What She Is
+#### What She Is (2)
 
-Nordia is a singer from the isolated northern highlands—a region untouched by Corelink, where voice travels through wind and ritual, not networks. When the cataclysm struck Velhara, she didn't just lose someone. She lost the *medium* that made her voice meaningful.
+Nordia is a singer from the isolated northern highlands—a region untouched by Corelink, where voice
+travels through wind and ritual, not networks. When the cataclysm struck Velhara, she didn't just
+lose someone. She lost the *medium* that made her voice meaningful.
 
 **Critical insight**: Unlike Malrik and Elenya, Nordia doesn't teach through exposition. She teaches by *moving*. She's the only NPC who travels with the player, embodying the journey from collapse through continuity toward restoration.
 
@@ -215,17 +244,24 @@ This arc is unique because it requires the player's active participation. Nordia
 
 #### Why This Arc Is Revolutionary
 
-1. **The player is essential to her healing** — Not as savior, but as breath partner, listener, co-singer. This is mutual transformation.
+1. **The player is essential to her healing** — Not as savior, but as breath partner, listener,
+co-singer. This is mutual transformation.
 
-2. **It mirrors the emotional physics of Velinor** — Collapse → Continuity → Co-creation. The world doesn't work without relationships.
+2. **It mirrors the emotional physics of Velinor** — Collapse → Continuity → Co-creation. The world
+doesn't work without relationships.
 
-3. **It ties her directly to the cataclysm** — Her grief isn't personal alone; it's structural. She lost the network that carried her voice.
+3. **It ties her directly to the cataclysm** — Her grief isn't personal alone; it's structural. She
+lost the network that carried her voice.
 
-4. **It makes failure meaningful** — If the player can't retrieve the memory, or if timing fails in the Velhara ruins, the glyph doesn't appear. The world reflects the relationship.
+4. **It makes failure meaningful** — If the player can't retrieve the memory, or if timing fails in
+the Velhara ruins, the glyph doesn't appear. The world reflects the relationship.
 
 #### Northern Heritage (Optional Depth)
 
-Nordia could be from isolated northern highlands (Iceland-like) with their own mourning traditions—places untouched by Corelink, where voice was carried by wind, not wires. This gives her grief a bicultural dimension: she's mourning the loss of a bridge between two worlds, not just a person.
+Nordia could be from isolated northern highlands (Iceland-like) with their own mourning
+traditions—places untouched by Corelink, where voice was carried by wind, not wires. This gives her
+grief a bicultural dimension: she's mourning the loss of a bridge between two worlds, not just a
+person.
 
 ---
 
@@ -233,14 +269,16 @@ Nordia could be from isolated northern highlands (Iceland-like) with their own m
 
 ### Why Seven?
 
-When Taurin looked at all the glyphs and characters, they naturally organized into seven emotional domains. This isn't arbitrary—it emerged from the philosophy itself.
+When Taurin looked at all the glyphs and characters, they naturally organized into seven emotional
+domains. This isn't arbitrary—it emerged from the philosophy itself.
 
 **The Structure:**
 - Three "inner" domains (Presence, Ache, Joy)
 - Three "outer" domains (Sovereignty, Collapse, Trust)
 - One "bridging" domain (Legacy) that connects all
 
-Legacy sits in the center because it's the transmission between inner and outer worlds—between personal experience and communal continuity.
+Legacy sits in the center because it's the transmission between inner and outer worlds—between
+personal experience and communal continuity.
 
 ### 1. Legacy: What Survives Through Transmission
 
@@ -394,9 +432,14 @@ Legacy sits in the center because it's the transmission between inner and outer 
 
 **Special NPC: Korrin the Gossip**
 
-Korrin operates across Collapse, Trust, and Presence as the world's emotional diagnostician. He's flamboyant, amoral, and theatrical—which means he's weaponizing charm to reveal truth faster than solemnity ever could. He treats collapse like a stage and uses gossip to map the emotional landscape.
+Korrin operates across Collapse, Trust, and Presence as the world's emotional diagnostician. He's
+flamboyant, amoral, and theatrical—which means he's weaponizing charm to reveal truth faster than
+solemnity ever could. He treats collapse like a stage and uses gossip to map the emotional
+landscape.
 
-His glyphs teach through misdirection and revelation: all three stories he tells are partially true and partially false, which means what the player believes reveals *who they are*, not what happened. This is emotional profiling disguised as a game.
+His glyphs teach through misdirection and revelation: all three stories he tells are partially true
+and partially false, which means what the player believes reveals *who they are*, not what happened.
+This is emotional profiling disguised as a game.
 
 ---
 
@@ -404,7 +447,8 @@ His glyphs teach through misdirection and revelation: all three stories he tells
 
 ### What TONE Is (And Isn't)
 
-TONE isn't a numerical stat system like health or mana. It's an emotional compass that measures the player's internal stance toward the world.
+TONE isn't a numerical stat system like health or mana. It's an emotional compass that measures the
+player's internal stance toward the world.
 
 **What TONE measures:**
 - How the player relates to others (Trust)
@@ -418,7 +462,9 @@ TONE isn't a numerical stat system like health or mana. It's an emotional compas
 - Force emotional responses
 - Create "good" and "bad" playstyles
 
-Instead, TONE shapes *how the world reflects back*. A bold player in a dangerous place feels alive. A cautious player in danger feels afraid. Neither is wrong; both are valid emotional experiences shaped by the player's own stance.
+Instead, TONE shapes *how the world reflects back*. A bold player in a dangerous place feels alive.
+A cautious player in danger feels afraid. Neither is wrong; both are valid emotional experiences
+shaped by the player's own stance.
 
 ### T — Trust
 
@@ -490,7 +536,8 @@ Instead, TONE shapes *how the world reflects back*. A bold player in a dangerous
 
 ### Why Fear Exists
 
-Fear isn't a stat the player "earns" like experience points. Fear is a *mirror*—a real-time reflection of how the player's emotional stance aligns with the moment they're in.
+Fear isn't a stat the player "earns" like experience points. Fear is a *mirror*—a real-time
+reflection of how the player's emotional stance aligns with the moment they're in.
 
 ### The Core Formula
 
@@ -640,7 +687,8 @@ Fear rises through player behavior, not environment:
 - Ignoring NPC boundaries
 - Forcing traversal without caution
 - Pushing too hard, too fast
-→ Fear increases because the player knows they're overextended (different quality than hesitation fear, but still real)
+→ Fear increases because the player knows they're overextended (different quality than hesitation
+fear, but still real)
 
 **Social Missteps**
 - Breaking trust with NPCs
@@ -666,7 +714,8 @@ Fear rises through player behavior, not environment:
 
 ### Philosophy First
 
-Velinor's technical choices serve the emotional design, not the reverse. Every system is built to be:
+Velinor's technical choices serve the emotional design, not the reverse. Every system is built to
+be:
 - **Modular** (reusable across zones)
 - **Lightweight** (doesn't require heavy game engines)
 - **Responsive** (reflects player state in real-time)
@@ -948,7 +997,8 @@ function handleQTEResult(timingWindow) {
 
 #### The Puzzle Metaphor
 
-Velinor isn't a branching narrative. It's a puzzle the player assembles in their own emotional order.
+Velinor isn't a branching narrative. It's a puzzle the player assembles in their own emotional
+order.
 
 **The Picture is Fixed:**
 - 70 glyphs to collect
@@ -1053,7 +1103,9 @@ These are the pacing valves that keep emotional intensity balanced without micro
 
 ### NPC Suggestion System
 
-NPCs don't push players toward specific paths. They *read* the player's emotional stance and puzzle-building style, then offer a suggestion that feels like it came from the world, not the designer.
+NPCs don't push players toward specific paths. They *read* the player's emotional stance and
+puzzle-building style, then offer a suggestion that feels like it came from the world, not the
+designer.
 
 #### How NPCs Read the Player
 
@@ -1174,10 +1226,9 @@ When adding a new element (NPC, glyph, zone, encounter):
 
 ### What All Players Experience
 
-1. **Convergence**: All paths lead to the Corelink Hub
-2. **Meeting Saori and Velinor**: The final NPCs who understand the cataclysm
-3. **The Choice**: A branching moment where the player decides what the world becomes next
-4. **Resolution**: How their emotional arc informs their final decision
+1. **Convergence**: All paths lead to the Corelink Hub 2. **Meeting Saori and Velinor**: The final
+NPCs who understand the cataclysm 3. **The Choice**: A branching moment where the player decides
+what the world becomes next 4. **Resolution**: How their emotional arc informs their final decision
 
 ### What Differs
 
@@ -1186,13 +1237,15 @@ When adding a new element (NPC, glyph, zone, encounter):
 - **The fear levels they maintained** affect how they see themselves
 - **The pattern of their puzzle** becomes their personal narrative
 
-Two players with identical inventories might make completely different final choices because they walked different paths to get there.
+Two players with identical inventories might make completely different final choices because they
+walked different paths to get there.
 
 ---
 
 ## Conclusion
 
-Velinor isn't about winning. It's about becoming emotionally literate within a world that mirrors your internal state.
+Velinor isn't about winning. It's about becoming emotionally literate within a world that mirrors
+your internal state.
 
 **The system works because:**
 - Every mechanic serves emotional truth
@@ -1206,7 +1259,8 @@ Velinor isn't about winning. It's about becoming emotionally literate within a w
 - Sovereign (never forced or punished for their emotional stance)
 - Transformative (the world becomes a reflection of their growth)
 
-This is what happens when you build a game where **ethos becomes spine, pathos becomes bloodstream, and the world becomes the body that holds both.**
+This is what happens when you build a game where **ethos becomes spine, pathos becomes bloodstream,
+and the world becomes the body that holds both.**
 
 ---
 

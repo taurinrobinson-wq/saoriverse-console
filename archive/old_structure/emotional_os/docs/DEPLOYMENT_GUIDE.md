@@ -11,19 +11,17 @@ The optimized edge function addresses the 9.48s latency bottleneck with these ke
 
 ### Key Optimizations
 
-1. **Response Caching**: 1-minute TTL Map cache for repeated queries
-2. **Quick Responses**: Instant replies for common emotions (grief, joy, anxiety, etc.)
-3. **Parallel Processing**: Tag lookup and AI calls run simultaneously
-4. **Faster Model**: gpt-4o-mini with max_tokens limit
-5. **Selective Glyph Processing**: Only for complex messages
+1. **Response Caching**: 1-minute TTL Map cache for repeated queries 2. **Quick Responses**: Instant
+replies for common emotions (grief, joy, anxiety, etc.) 3. **Parallel Processing**: Tag lookup and
+AI calls run simultaneously 4. **Faster Model**: gpt-4o-mini with max_tokens limit 5. **Selective
+Glyph Processing**: Only for complex messages
 
 ## 📋 Deployment Steps
 
 ### Step 1: Access Supabase Dashboard
 
-1. Go to [Supabase Dashboard](https://supabase.com/dashboard)
-2. Select your Emotional OS project
-3. Navigate to **Edge Functions** in the left sidebar
+1. Go to [Supabase Dashboard](https://supabase.com/dashboard) 2. Select your Emotional OS project 3.
+Navigate to **Edge Functions** in the left sidebar
 
 ### Step 2: Locate Current Function
 
@@ -32,9 +30,9 @@ The optimized edge function addresses the 9.48s latency bottleneck with these ke
 
 ### Step 3: Replace Function Code
 
-1. **BACKUP CURRENT CODE**: Copy the existing code to a safe place
-2. **Replace with optimized version**: Copy the entire content of `optimized_edge_function.ts`
-3. **Verify Environment Variables**: Ensure these are still set:
+1. **BACKUP CURRENT CODE**: Copy the existing code to a safe place 2. **Replace with optimized
+version**: Copy the entire content of `optimized_edge_function.ts` 3. **Verify Environment
+Variables**: Ensure these are still set:
    - `SUPABASE_URL`
    - `SUPABASE_ANON_KEY` or `PROJECT_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY` or `PROJECT_SERVICE_ROLE_KEY`
@@ -42,9 +40,8 @@ The optimized edge function addresses the 9.48s latency bottleneck with these ke
 
 ### Step 4: Deploy and Test
 
-1. Click **Deploy** in the Supabase dashboard
-2. Wait for deployment to complete (usually 30-60 seconds)
-3. Test with a simple message to verify functionality
+1. Click **Deploy** in the Supabase dashboard 2. Wait for deployment to complete (usually 30-60
+seconds) 3. Test with a simple message to verify functionality
 
 ### Step 5: Performance Validation
 
@@ -116,9 +113,8 @@ test_results = test_optimized_performance()
 
 ### Check Performance in Supabase
 
-1. Go to **Edge Functions** → **saori-fixed** → **Logs**
-2. Look for performance metrics in the console output
-3. Monitor error rates and response times
+1. Go to **Edge Functions** → **saori-fixed** → **Logs** 2. Look for performance metrics in the
+console output 3. Monitor error rates and response times
 
 ### Debug Mode in Streamlit
 
@@ -138,10 +134,8 @@ if st.sidebar.checkbox("Debug Performance"):
 
 If issues occur, quickly revert:
 
-1. Go back to Supabase Edge Functions dashboard
-2. Replace optimized code with backed-up original code
-3. Deploy the original version
-4. Investigate issues in development environment
+1. Go back to Supabase Edge Functions dashboard 2. Replace optimized code with backed-up original
+code 3. Deploy the original version 4. Investigate issues in development environment
 
 ## 📊 Success Metrics
 
@@ -154,10 +148,10 @@ Monitor these improvements:
 
 ## Next Steps After Deployment
 
-1. **Integrate Client Optimizations**: Update Streamlit UI to use instant acknowledgments
-2. **Monitor Real Usage**: Track performance with actual user interactions
-3. **Fine-tune Cache TTL**: Adjust based on usage patterns
-4. **Add Streaming**: Implement progressive response loading for complex queries
+1. **Integrate Client Optimizations**: Update Streamlit UI to use instant acknowledgments 2.
+**Monitor Real Usage**: Track performance with actual user interactions 3. **Fine-tune Cache TTL**:
+Adjust based on usage patterns 4. **Add Streaming**: Implement progressive response loading for
+complex queries
 
 ##
 

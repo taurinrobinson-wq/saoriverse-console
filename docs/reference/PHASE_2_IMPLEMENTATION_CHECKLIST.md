@@ -5,11 +5,11 @@
 Quick reference for implementing the real-time glyph learning system. Mark off items as you complete
 them. """
 
-# ============================================================================
+## ============================================================================
 
-# PART A: FILE CREATION (Already Done ✓)
+## PART A: FILE CREATION (Already Done ✓)
 
-# ============================================================================
+## ============================================================================ (2)
 
 """ ✓ [1.1] emotional_os/glyphs/glyph_learner.py
         - Analyzes emotional language
@@ -64,11 +64,11 @@ them. """
         - Response template selection
 """
 
-# ============================================================================
+## ============================================================================ (3)
 
-# PART B: SIGNAL_PARSER.PY INTEGRATION
+## PART B: SIGNAL_PARSER.PY INTEGRATION
 
-# ============================================================================
+## ============================================================================ (4)
 
 """ □ [2.1] Add imports to signal_parser.py from emotional_os.glyphs.glyph_learner import
 GlyphLearner from emotional_os.glyphs.learning_response_generator import LearningResponseGenerator
@@ -96,11 +96,11 @@ LearningResponseGenerator()_shared_glyph_manager = SharedGlyphManager()
 
 □ [2.8] Add promote_candidate_glyph() for admin review """
 
-# ============================================================================
+## ============================================================================ (5)
 
-# PART C: DATABASE SETUP
+## PART C: DATABASE SETUP
 
-# ============================================================================
+## ============================================================================ (6)
 
 """ □ [3.1] Ensure GlyphLearner._ensure_learning_tables() runs
         - Creates: glyph_candidates table
@@ -119,11 +119,11 @@ LearningResponseGenerator()_shared_glyph_manager = SharedGlyphManager()
 emotional_os/glyphs/glyphs.db ".schema glyph_versions" sqlite3 emotional_os/glyphs/glyphs.db
 ".schema user_glyph_preferences" """
 
-# ============================================================================
+## ============================================================================ (7)
 
-# PART D: TESTING
+## PART D: TESTING
 
-# ============================================================================
+## ============================================================================ (8)
 
 """ □ [4.1] Run initial sanity check python test_glyph_learning_pipeline.py
 
@@ -176,11 +176,11 @@ Expected:
         - Next user with similar emotion finds it
 """
 
-# ============================================================================
+## ============================================================================ (9)
 
-# PART E: VALIDATION
+## PART E: VALIDATION
 
-# ============================================================================
+## ============================================================================ (10)
 
 """ □ [5.1] Verify no "None" responses
         - Test 10 diverse emotional inputs
@@ -213,11 +213,11 @@ Expected:
         - New glyphs promoted to production
 """
 
-# ============================================================================
+## ============================================================================ (11)
 
-# PART F: DEPLOYMENT
+## PART F: DEPLOYMENT
 
-# ============================================================================
+## ============================================================================ (12)
 
 """ □ [6.1] Backup existing database cp emotional_os/glyphs/glyphs.db
 emotional_os/glyphs/glyphs.db.backup
@@ -243,11 +243,11 @@ push
         - Monitor database size growth
 """
 
-# ============================================================================
+## ============================================================================ (13)
 
-# PART G: ADMIN DASHBOARD (Optional but Recommended)
+## PART G: ADMIN DASHBOARD (Optional but Recommended)
 
-# ============================================================================
+## ============================================================================ (14)
 
 """ □ [7.1] Create admin endpoint that calls: get_system_learning_status()
 get_glyph_recommendations()
@@ -272,11 +272,11 @@ get_glyph_recommendations()
         - User learning curve
 """
 
-# ============================================================================
+## ============================================================================ (15)
 
-# PART H: DOCUMENTATION
+## PART H: DOCUMENTATION
 
-# ============================================================================
+## ============================================================================ (16)
 
 """ ✓ [8.1] Architecture documentation PHASE_2_LEARNING_SYSTEM_ARCHITECTURE.md
 
@@ -295,11 +295,11 @@ get_glyph_recommendations()
         - How to promote candidates manually
 """
 
-# ============================================================================
+## ============================================================================ (17)
 
-# PART I: MONITORING & ITERATION
+## PART I: MONITORING & ITERATION
 
-# ============================================================================
+## ============================================================================ (18)
 
 """ □ [9.1] Weekly reports:
         - How many new glyphs generated?
@@ -326,49 +326,49 @@ get_glyph_recommendations()
         - Keep documentation updated
 """
 
-# ============================================================================
+## ============================================================================ (19)
 
-# QUICK COMMAND REFERENCE
+## QUICK COMMAND REFERENCE
 
-# ============================================================================
+## ============================================================================ (20)
 
 """
 
-# Run tests
+## Run tests
 
 python test_glyph_learning_pipeline.py
 
-# Check system health
+## Check system health
 
 python -c " from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager mgr =
 SharedGlyphManager() print(mgr.get_system_health_report()) "
 
-# Test signal parser
+## Test signal parser
 
 python -c " from emotional_os.parser.signal_parser import parse_input result = parse_input('I feel
 caught between...') print(result['best_glyph'], result['source']) "
 
-# View database
+## View database
 
 sqlite3 emotional_os/glyphs/glyphs.db SELECT count(*) FROM glyph_candidates; SELECT count(*) FROM
 glyph_versions; SELECT* FROM glyph_consensus ORDER BY consensus_strength DESC LIMIT 5; SELECT * FROM
 user_glyph_preferences WHERE user_hash = 'xxx';
 
-# Deploy
+## Deploy
 
 git add emotional_os/glyphs/ emotional_os/parser/signal_parser.py git commit -m "Phase 2: Real-time
 glyph learning" git push
 
-# Monitor logs
+## Monitor logs
 
 tail -f railway_logs.txt | grep -i glyph
 """
 
-# ============================================================================
+## ============================================================================ (21)
 
-# SUMMARY
+## SUMMARY
 
-# ============================================================================
+## ============================================================================ (22)
 
 print(""" ╔════════════════════════════════════════════════════════════════════════════╗ ║ EMOTIONAL
 OS PHASE 2 IMPLEMENTATION PLAN                  ║ ║                   Real-Time Glyph Learning

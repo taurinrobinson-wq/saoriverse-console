@@ -497,7 +497,7 @@ git merge feature/phase-3-1-memory-integration
 ```bash
 ./deploy.sh staging
 
-# Monitor: deployment_monitor.py
+## Monitor: deployment_monitor.py
 ```
 
 
@@ -506,9 +506,9 @@ git merge feature/phase-3-1-memory-integration
 ```bash
 ./deploy.sh production
 
-# Monitor: deployment_monitor.py
+## Monitor: deployment_monitor.py (2)
 
-# Rollback: rollback.sh if needed
+## Rollback: rollback.sh if needed
 ```
 
 

@@ -75,10 +75,10 @@ from spoken_interface import AudioPipeline
 
 pipeline = AudioPipeline()  # Lazy-loads Whisper model
 
-# User records: "I'm feeling really overwhelmed today"
+## User records: "I'm feeling really overwhelmed today"
 transcription_result = pipeline.transcribe(audio_bytes)
 
-# Result:
+## Result:
 {
     "text": "I'm feeling really overwhelmed today",
     "language": "en",
@@ -432,20 +432,20 @@ class VoiceUIState:
 ```python
 
 
-# In main_v2.py or entry point
+## In main_v2.py or entry point
 import streamlit as st
 from spoken_interface.voice_ui import integrate_voice_ui_into_chat
 from emotional_os.glyphs.archetype_response_generator_v2 import ArchetypeResponseGeneratorV2
 
-# Initialize
+## Initialize
 generator = ArchetypeResponseGeneratorV2()
 voice_config = integrate_voice_ui_into_chat(generator)
 
-# Render voice UI
+## Render voice UI
 st.sidebar.markdown("---")
 st.sidebar.subheader("🎤 Voice Interface")
 
-# Input
+## Input
 transcription = voice_config["render_input"]()
 
 if transcription:

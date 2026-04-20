@@ -163,17 +163,17 @@ saoriverse-console/
 
 
 
-# Count tests
+## Count tests
 find . -name "test_*.py" -type f | wc -l
 
-# Output: Test count by location
+## Output: Test count by location
 
-# Check imports
+## Check imports
 grep -r "from emotional_os" --include="*.py" | head -20
 
-# Output: What's importing what
+## Output: What's importing what
 
-# Check entry points
+## Check entry points
 grep -l "if __name__ == '__main__'" *.py
 
 ```text
@@ -184,10 +184,10 @@ grep -l "if __name__ == '__main__'" *.py
 
 ```bash
 
-# Create branch for reorganization
+## Create branch for reorganization
 git checkout -b refactor/reorganization-master
 
-# Tag current state
+## Tag current state
 ```text
 
 ```text
@@ -213,11 +213,11 @@ Create a dependency map showing:
 ```bash
 
 
-# Create src/ with flat structure
+## Create src/ with flat structure
 mkdir -p src/
 touch src/__init__.py
 
-# Create core modules (move/consolidate existing code)
+## Create core modules (move/consolidate existing code)
 touch src/emotional_os.py          # Consolidate glyph + signal logic
 touch src/signal_parser.py         # Parse inputs to signals
 touch src/response_generator.py    # Generate responses
@@ -238,10 +238,10 @@ touch src/privacy_layer.py         # Privacy/encryption
 ```bash
 
 
-# Create tests/ with organization
+## Create tests/ with organization
 mkdir -p tests/unit/ mkdir -p tests/integration/ mkdir -p tests/fixtures/
 
-# Create test discovery
+## Create test discovery
 touch tests/__init__.py touch tests/conftest.py             # Pytest configuration
 
 ```text
@@ -255,10 +255,10 @@ touch tests/__init__.py touch tests/conftest.py             # Pytest configurati
 
 
 
-# Consolidate data files
+## Consolidate data files
 mkdir -p data/lexicons/ mkdir -p data/models/ mkdir -p data/fixtures/
 
-# Move all glyph/lexicon data to data/
+## Move all glyph/lexicon data to data/
 mv glyphs.db data/
 
 ```text
@@ -269,13 +269,13 @@ mv glyphs.db data/
 
 ```bash
 
-# Archive old docs
+## Archive old docs
 mkdir -p docs/archive/
 mv docs/PHASE_13_*.md docs/archive/
 mv docs/PRIVACY_LAYER_*.md docs/archive/
 mv docs/LEXICON_*.md docs/archive/
 
-# Create new guide structure
+## Create new guide structure
 touch docs/ARCHITECTURE.md
 touch docs/TESTING_GUIDE.md
 ```text
@@ -295,13 +295,13 @@ touch docs/TESTING_GUIDE.md
 ```bash
 
 
-# Find all emotional_os related files
+## Find all emotional_os related files
 find . -type f -name "*.py" -exec grep -l "emotional_os" {} \; | grep -v __pycache__ | sort
 
-# Find all response generation code
+## Find all response generation code
 find . -type f -name "*response*" -o -name "*generator*" | grep -v __pycache__
 
-# Find all voice code
+## Find all voice code
 
 ```text
 
@@ -416,7 +416,7 @@ __all__ = [ "EmotionalOS", "GlyphSignals", "parse_input", "extract_themes", "gen
 
 
 
-# Move all test_*.py from root to tests/
+## Move all test_*.py from root to tests/
 
 ```text
 ```
@@ -449,15 +449,15 @@ tests/unit/
 ```python
 
 
-# tests/conftest.py
+## tests/conftest.py
 import pytest
 import sys
 from pathlib import Path
 
-# Add src to path so imports work
+## Add src to path so imports work
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-# Shared fixtures
+## Shared fixtures
 @pytest.fixture
 def sample_glyph():
     return {
@@ -485,7 +485,7 @@ def sample_signal():
 
 [pytest]
 
-# tests/pytest.ini
+## tests/pytest.ini
 testpaths = tests python_files = test_*.py python_classes = Test* python_functions = test_*
 
 ```text
@@ -512,7 +512,7 @@ Run: streamlit run app.py """
 import streamlit as st from src import ( EmotionalOS, ArchetypeResponseGeneratorV2, VoiceInterface,
 )
 
-# Page configuration
+## Page configuration
 st.set_page_config( page_title="FirstPerson", page_icon="🧠", layout="wide", )
 
 def init_session(): """Initialize session state.""" if "initialized" not in st.session_state:
@@ -551,7 +551,7 @@ if __name__ == "__main__":
 
 ```bash
 
-# Remove old entry points (after backup)
+## Remove old entry points (after backup)
 rm main_v2.py
 rm main_v2_simple.py
 ```text
@@ -569,7 +569,7 @@ rm main_v2_simple.py
 ```markdown
 
 
-# Scripts Directory
+## Scripts Directory
 
 Organization:
 - `data/` - Data processing and migration scripts
@@ -590,14 +590,14 @@ python -m setup.init_db
 ```bash
 
 
-# Create subdirectories
+## Create subdirectories
 mkdir -p scripts/data/ mkdir -p scripts/setup/ mkdir -p scripts/debug/
 
-# Create __init__.py files
+## Create __init__.py files
 touch scripts/__init__.py touch scripts/data/__init__.py touch scripts/setup/__init__.py touch
 scripts/debug/__init__.py
 
-# Move scripts to appropriate locations
+## Move scripts to appropriate locations
 mv scripts/download_nrc_lexicon.py scripts/data/ mv scripts/init_test_db.py scripts/setup/ mv
 scripts/inspect_glyphs.py scripts/debug/
 
@@ -643,13 +643,13 @@ Run it:
 ```bash
 
 
-# Run specific test module
+## Run specific test module
 pytest tests/unit/test_emotional_os.py -v
 
-# Run all unit tests
+## Run all unit tests
 pytest tests/unit/ -v
 
-# Run with coverage
+## Run with coverage
 
 ```text
 
@@ -660,10 +660,10 @@ pytest tests/unit/ -v
 ```bash
 
 
-# E2E test
+## E2E test
 pytest tests/integration/test_full_e2e.py -v
 
-# All integration tests
+## All integration tests
 
 ```text
 ```text
@@ -676,10 +676,10 @@ pytest tests/integration/test_full_e2e.py -v
 
 
 
-# Should work with single entry point
+## Should work with single entry point
 streamlit run app.py
 
-# Verify in browser
+## Verify in browser
 
 ```text
 ```
@@ -693,15 +693,15 @@ streamlit run app.py
 
 ```bash
 
-# Create archive directory
+## Create archive directory
 mkdir -p archive/old_structure/
 
-# Move old directories
+## Move old directories
 mv emotional_os archive/old_structure/
 mv parser archive/old_structure/
 mv local_inference archive/old_structure/
 
-# Move old documentation
+## Move old documentation
 mv *.md archive/old_docs/ 2>/dev/null || true
 
 ```sql
@@ -861,10 +861,10 @@ If something breaks during reorganization:
 ```bash
 
 
-# Revert to backup
+## Revert to backup
 git checkout pre-reorganization
 
-# Or reset current branch
+## Or reset current branch
 git reset --hard origin/main
 git branch -D refactor/reorganization-master
 

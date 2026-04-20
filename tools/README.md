@@ -58,7 +58,6 @@ See [velinor/tools/README.md](../velinor/tools/README.md) for the complete list.
 
 ## Adding New Tools
 
-When adding a new utility:
-1. Ask: "Is this Velinor-specific?"
-2. If YES → create in [velinor/tools/](../velinor/tools/) and add to its README
-3. If NO → create here in tools/ and update this README
+When adding a new utility: 1. Ask: "Is this Velinor-specific?" 2. If YES → create in
+[velinor/tools/](../velinor/tools/) and add to its README 3. If NO → create here in tools/ and
+update this README

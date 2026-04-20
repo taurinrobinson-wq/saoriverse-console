@@ -52,7 +52,7 @@ They see personalized responses about their specific situation. They never see:
 
 ```python
 
-# What it does:
+## What it does:
 1. Analyzes message content (what they're actually saying)
 2. Validates their specific struggle (not glyph category)
 3. Uses glyph intensity invisibly for tone/closing
@@ -68,7 +68,7 @@ They see personalized responses about their specific situation. They never see:
 ```python
 
 
-# What it does:
+## What it does: (2)
 1. Checks for message features (math_frustration, inherited_pattern, etc.)
 2. Responds directly to each feature
 3. Uses glyph intensity (invisible) to calibrate language intensity
@@ -207,10 +207,10 @@ from emotional_os.glyphs.signal_parser import parse_input
 result = parse_input( "I have anxiety about math", lexicon_path="velonix_lexicon.json",
 db_path="glyphs.db" )
 
-# See what glyph was selected:
+## See what glyph was selected:
 print(result["best_glyph"]["glyph_name"])
 
-# See the response (should not mention glyph):
+## See the response (should not mention glyph):
 print(result["voltage_response"])
 
 ```

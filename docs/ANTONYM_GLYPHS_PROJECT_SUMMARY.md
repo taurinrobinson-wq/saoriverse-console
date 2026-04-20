@@ -139,7 +139,7 @@ Test Coverage:
 
 from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion
 
-# Find the opposite of "comfort"
+## Find the opposite of "comfort"
 antonym = find_antonym_by_emotion("comfort")
 
 ```text

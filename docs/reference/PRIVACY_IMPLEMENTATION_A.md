@@ -77,7 +77,7 @@ Saoriverse Console while preserving learning capability.
 
 log_entry = { "timestamp": datetime.now().isoformat(), "user_id": user_id, "user_input": user_input,
 
-# ❌ RAW TEXT "ai_response": ai_response,  # ❌ RAW CONTENT "emotional_signals": emotional_signals,
+## ❌ RAW TEXT "ai_response": ai_response,  # ❌ RAW CONTENT "emotional_signals": emotional_signals,
 "glyphs": glyphs,
 
 ```text
@@ -162,7 +162,7 @@ entry["example_contexts"].append({
 
 
 
-# 📋 PRIVACY AUDIT: learning/hybrid_learning_log.jsonl
+## 📋 PRIVACY AUDIT: learning/hybrid_learning_log.jsonl
 ✅ Total entries: 3738 ❌ Violations: 11214 (from 3738 entries in old format) 📊 Compliance: 0.0%
 (entries are from pre-privacy-implementation)
 

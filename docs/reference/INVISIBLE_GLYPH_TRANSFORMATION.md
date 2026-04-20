@@ -92,14 +92,14 @@ glyph) ✓ Shows they're listening to the person's correction
 ```python
 
 
-# BEFORE
+## BEFORE
 if glyph and glyph.get("description"):
     opening = f"There's something in what you're describing—{glyph_description.lower()}"
     parts.append(opening)
 
-# AFTER
+## AFTER
 
-# Validate the specific struggle the person is naming
+## Validate the specific struggle the person is naming
 lower_input = input_text.lower()
 
 if any(word in lower_input for word in ['math', 'anxiety', 'mental block']):
@@ -121,20 +121,20 @@ elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
 ```python
 
 
-# BEFORE
+## BEFORE (2)
 if glyph and glyph.get("description"): opening = f"There's something in what you're
 describing—{glyph_description.lower()}" parts.append(opening)
 
-# AFTER
+## AFTER (2)
 
-# Intensity calculated invisibly
+## Intensity calculated invisibly
 if glyph: gate_data = glyph.get("gates") or glyph.get("gate") intensity = len(gates_list) if
 gates_list else 1
 
-# Response addresses message content
+## Response addresses message content
 if message_content.get("math_frustration"): parts.append("You're not alone...")
 
-# Closing calibrated by intensity (invisible to user)
+## Closing calibrated by intensity (invisible to user)
 if intensity >= 8: question = f"I'm here to work through {struggle} with you." else:
 
 ```text

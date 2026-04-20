@@ -153,15 +153,15 @@ Ollama Fallback (local LLM)
 ```bash
 
 
-# 1. Start services
+## 1. Start services
 docker-compose -f docker-compose.local.yml up -d
 
-# 2. Pull a model (takes 5-15 minutes)
+## 2. Pull a model (takes 5-15 minutes)
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# 3. Open in browser
+## 3. Open in browser
 
-# Visit http://localhost:8501
+## Visit http://localhost:8501
 
 ```text
 
@@ -485,7 +485,7 @@ You now have a **complete, production-ready Ollama integration** that:
 docker-compose -f docker-compose.local.yml up -d docker-compose -f docker-compose.local.yml exec
 ollama ollama pull llama3
 
-# Visit http://localhost:8501
+## Visit http://localhost:8501 (2)
 
 ```
 

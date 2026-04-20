@@ -112,7 +112,7 @@ Based on lightweight plan, validates each turn:
 
 ```python
 
-# In orchestrator.handle_conversation_turn():
+## In orchestrator.handle_conversation_turn():
 story_analysis = self.story_start_detector.analyze_story_start(user_input)
 has_ambiguity = bool(story_analysis.get("detected_pronouns") or
                       story_analysis.get("detected_temporal_markers"))
@@ -141,11 +141,11 @@ if should_reflect:
 
 ```python
 
-# On session start:
+## On session start:
 memory_context = self.memory_manager.rehydrate_memory(limit=20)
 self.memory_rehydrated = memory_context.get("anchor_count") > 0
 
-# Available for all responses via:
+## Available for all responses via:
 top_themes = self.memory_manager.get_top_themes()
 memory_summary = self.memory_manager.get_memory_summary()
 ```
@@ -155,7 +155,7 @@ memory_summary = self.memory_manager.get_memory_summary()
 
 ```python
 
-# When no ambiguity/reflection detected:
+## When no ambiguity/reflection detected:
 if not response_parts:
     if detected_theme:
         acknowledgment = f"I'm hearing that {detected_theme}..."
@@ -227,18 +227,18 @@ end-to-end coordination
 ```python
 from emotional_os.core.firstperson import FirstPersonOrchestrator
 
-# Create orchestrator for user session
+## Create orchestrator for user session
 orchestrator = FirstPersonOrchestrator(
     user_id="user_123",
     conversation_id="conv_456"
 )
 
-# Initialize session (rehydrates memory)
+## Initialize session (rehydrates memory)
 session = orchestrator.initialize_session()
 print(f"Memory rehydrated: {session['memory_rehydrated']}")
 print(f"Anchors loaded: {session['anchors_loaded']}")
 
-# Process conversation turns
+## Process conversation turns
 response1 = orchestrator.handle_conversation_turn(
     "She was waiting at the corner."
 )
@@ -251,12 +251,12 @@ response2 = orchestrator.handle_conversation_turn(
 print(f"System: {response2.response_text}")
 print(f"Theme detected: {response2.detected_theme}")
 
-# Get conversation summary
+## Get conversation summary
 summary = orchestrator.get_conversation_summary()
 print(f"Themes detected: {summary['unique_themes']}")
 print(f"Turn count: {summary['turn_count']}")
 
-# Check template variety
+## Check template variety
 metrics = orchestrator.get_response_variety_metrics()
 print(f"Variety ratio: {metrics['variety_ratio']:.2%}")
 ```
@@ -267,10 +267,10 @@ print(f"Variety ratio: {metrics['variety_ratio']:.2%}")
 ```python
 from emotional_os.core.firstperson import create_orchestrator
 
-# Create with auto-generated conversation ID
+## Create with auto-generated conversation ID
 orchestrator = create_orchestrator(user_id="user_789")
 
-# Start conversation
+## Start conversation
 orchestrator.initialize_session()
 response = orchestrator.handle_conversation_turn("Hello, I need to talk.")
 ```
@@ -280,13 +280,13 @@ response = orchestrator.handle_conversation_turn("Hello, I need to talk.")
 
 ```python
 
-# Get memory anchors
+## Get memory anchors
 top_themes = orchestrator.memory_manager.get_top_themes(limit=5)
 
-# Get template usage stats
+## Get template usage stats
 stats = orchestrator.response_templates.get_usage_statistics()
 
-# Get conversation summary
+## Get conversation summary (2)
 summary = orchestrator.get_conversation_summary()
 print(f"Themes: {summary['unique_themes']}")
 print(f"Reflections triggered: {summary['reflections_triggered']}")
@@ -303,7 +303,7 @@ The orchestrator can be integrated into the existing response engine:
 
 ```python
 
-# In main_response_engine.py
+## In main_response_engine.py
 
 from emotional_os.core.firstperson import FirstPersonOrchestrator
 
@@ -330,10 +330,10 @@ Memory can be injected into signal parser context:
 
 ```python
 
-# Get formatted memory signals
+## Get formatted memory signals
 memory_signals = orchestrator.memory_manager.format_memory_for_parser()
 
-# Inject into parser
+## Inject into parser
 parser.inject_context(memory_signals)
 ```
 
@@ -448,7 +448,7 @@ Phase 2 will plug into the orchestrator for enhanced emotional responsiveness.
 
 ##
 
-## Summary
+## Summary (2)
 
 **Phase 1.6 delivers:**
 

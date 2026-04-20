@@ -18,7 +18,7 @@ architecture leverages these offline resources:
 
 ```bash
 
-# Install (one-time)
+## Install (one-time)
 pip install spacy
 ```text
 
@@ -60,9 +60,9 @@ pip install spacy
 
 from gensim.models import KeyedVectors
 
-# Download pre-trained Google News Word2Vec vectors (1.5GB, one-time)
+## Download pre-trained Google News Word2Vec vectors (1.5GB, one-time)
 
-# Then use for similarity matching:
+## Then use for similarity matching:
 vectors = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
 similar_words = vectors.most_similar('anxiety', topn=5)
 
@@ -82,11 +82,11 @@ similar_words = vectors.most_similar('anxiety', topn=5)
 
 from nltk.text import TextCollection
 
-# Build from all your glyph descriptions + poetry + prior responses
+## Build from all your glyph descriptions + poetry + prior responses
 linguistic_patterns = TextCollection([ list_of_glyph_descriptions, list_of_poetry_lines,
 list_of_prior_responses ])
 
-# Generate realistic-sounding next phrases based on learned patterns
+## Generate realistic-sounding next phrases based on learned patterns
 
 ```sql
 ```sql
@@ -109,18 +109,18 @@ import spacy
 nlp = spacy.load("en_core_web_md")  # Medium model has better word vectors doc = nlp("Michelle
 explains things in a way that only she can follow")
 
-# Extract: subject, verb, object, modifiers
+## Extract: subject, verb, object, modifiers
 for token in doc: print(f"{token.text} -> {token.dep_} ({token.head.text})")
 
-# Output:
+## Output:
 
-# Michelle -> nsubj -> explains
+## Michelle -> nsubj -> explains
 
-# explains -> ROOT
+## explains -> ROOT
 
-# things -> dobj -> explains
+## things -> dobj -> explains
 
-# way -> prep_in -> explains
+## way -> prep_in -> explains
 
 ```text
 ```
@@ -145,7 +145,7 @@ Poetry weaving ✅ Semantic engine (spaCy basics)
 
 ```python
 
-# Example enhancement to signal_parser.py:
+## Example enhancement to signal_parser.py:
 extracted = self.semantic_engine.extract_entities(text)
 people = extracted["people"]  # ["Michelle"]
 if people:
@@ -223,15 +223,15 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 
 
 
-# Each response randomly selects from multiple opening styles
+## Each response randomly selects from multiple opening styles
 
-# + adds entity-specific context
+## + adds entity-specific context
 
-# + weaves poetry fragments
+## + weaves poetry fragments
 
-# + builds unique closing question
+## + builds unique closing question
 
-# Result: Feels fresh, not templated
+## Result: Feels fresh, not templated
 
 ```
 

@@ -11,11 +11,11 @@ FirstPerson web build to your DigitalOcean droplet.
 
 ```bash
 
-# Update package index
+## Update package index
 sudo apt update
 sudo apt upgrade -y
 
-# Install Docker dependencies
+## Install Docker dependencies
 sudo apt install -y \
     apt-transport-https \
     ca-certificates \
@@ -23,19 +23,19 @@ sudo apt install -y \
     gnupg \
     lsb-release
 
-# Add Docker's official GPG key
+## Add Docker's official GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-# Set up Docker repository
+## Set up Docker repository
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Update package index again
+## Update package index again
 sudo apt update
 
-# Install Docker Engine
+## Install Docker Engine
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-# Verify installation
+## Verify installation
 ```text
 
 ```text
@@ -47,13 +47,13 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```bash
 
 
-# Allow running docker without sudo
+## Allow running docker without sudo
 sudo usermod -aG docker $USER
 
-# Apply group changes (you may need to log out and back in)
+## Apply group changes (you may need to log out and back in)
 newgrp docker
 
-# Verify you can run docker without sudo
+## Verify you can run docker without sudo
 
 ```text
 
@@ -64,13 +64,13 @@ newgrp docker
 ```bash
 
 
-# Enable Docker to start on boot
+## Enable Docker to start on boot
 sudo systemctl enable docker
 
-# Start Docker if not already running
+## Start Docker if not already running
 sudo systemctl start docker
 
-# Check status
+## Check status
 
 ```text
 ```text
@@ -85,14 +85,14 @@ sudo systemctl start docker
 
 
 
-# Check if docker-compose already installed
+## Check if docker-compose already installed
 docker compose version
 
-# If not, install it
+## If not, install it
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname
 -s)-$(uname -m)" -o /usr/local/bin/docker-compose sudo chmod +x /usr/local/bin/docker-compose
 
-# Verify
+## Verify
 
 ```text
 ```
@@ -115,28 +115,28 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8000
 
-# Install system dependencies
+## Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
+## Copy requirements
 COPY requirements.txt .
 
-# Install Python dependencies
+## Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application
+## Copy application
 COPY . .
 
-# Create data directory
+## Create data directory
 RUN mkdir -p /app/data_local
 
 EXPOSE 8000
 
-# Run FastAPI server
+## Run FastAPI server
 ```text
 
 ```text
@@ -151,21 +151,21 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
+## Copy package files
 COPY firstperson/package*.json ./
 
-# Install dependencies
+## Install dependencies
 RUN npm ci
 
-# Copy frontend code
+## Copy frontend code
 COPY firstperson/src ./src
 COPY firstperson/*.js ./
 COPY firstperson/*.json ./
 
-# Expose port (for development; production uses different setup)
+## Expose port (for development; production uses different setup)
 EXPOSE 3000
 
-# Start Expo
+## Start Expo
 
 ```bash
 
@@ -237,10 +237,10 @@ networks: saoriverse:
 
 ```bash
 
-# SSH into your droplet
+## SSH into your droplet
 ssh root@161.35.227.49
 
-# Clone the repository
+## Clone the repository
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
 
@@ -253,10 +253,10 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```bash
 
 
-# Create .env file from template
+## Create .env file from template
 cp .env.example .env
 
-# Edit with your settings
+## Edit with your settings
 
 ```sql
 
@@ -267,13 +267,13 @@ Add/update these variables:
 ```env
 
 
-# API Configuration
+## API Configuration
 API_HOST=0.0.0.0 API_PORT=8000 API_URL=http://161.35.227.49:8000
 
-# Frontend Configuration
+## Frontend Configuration
 FRONTEND_URL=http://161.35.227.49
 
-# Database (if needed)
+## Database (if needed)
 DATABASE_URL=sqlite:///./data_local/app.db
 
 ```text
@@ -287,22 +287,22 @@ DATABASE_URL=sqlite:///./data_local/app.db
 
 
 
-# Build images
+## Build images
 docker compose build
 
-# Start containers in background
+## Start containers in background
 docker compose up -d
 
-# Check status
+## Check status (2)
 docker compose ps
 
-# View logs
+## View logs
 docker compose logs -f
 
-# View backend logs only
+## View backend logs only
 docker compose logs -f backend
 
-# View frontend logs only
+## View frontend logs only
 
 ```text
 ```
@@ -312,13 +312,13 @@ docker compose logs -f backend
 
 ```bash
 
-# Test backend API
+## Test backend API
 curl http://161.35.227.49:8000/health
 
-# Test frontend
+## Test frontend
 curl http://161.35.227.49:3000
 
-# Check container health
+## Check container health
 ```text
 
 ```text
@@ -376,40 +376,40 @@ server {
 ```bash
 
 
-# View all containers
+## View all containers
 docker ps -a
 
-# View running containers
+## View running containers
 docker ps
 
-# Start containers
+## Start containers
 docker compose start
 
-# Stop containers
+## Stop containers
 docker compose stop
 
-# Restart containers
+## Restart containers
 docker compose restart
 
-# Remove containers and volumes
+## Remove containers and volumes
 docker compose down
 
-# Remove containers and volumes and images
+## Remove containers and volumes and images
 docker compose down --rmi all
 
-# View logs (all services)
+## View logs (all services)
 docker compose logs
 
-# View logs (specific service)
+## View logs (specific service)
 docker compose logs backend
 
-# Follow logs in real-time
+## Follow logs in real-time
 docker compose logs -f
 
-# Execute command in running container
+## Execute command in running container
 docker compose exec backend bash
 
-# Check resource usage
+## Check resource usage
 
 ```text
 ```text
@@ -426,13 +426,13 @@ docker compose exec backend bash
 
 
 
-# Pull latest changes
+## Pull latest changes
 git pull origin main
 
-# Rebuild images
+## Rebuild images
 docker compose build
 
-# Restart with new code
+## Restart with new code
 
 ```text
 ```
@@ -442,10 +442,10 @@ docker compose build
 
 ```bash
 
-# All services
+## All services
 docker compose logs -f
 
-# Last 100 lines
+## Last 100 lines
 ```text
 
 ```text
@@ -457,10 +457,10 @@ docker compose logs -f
 ```bash
 
 
-# Backup SQLite database
+## Backup SQLite database
 docker compose exec backend cp data_local/app.db data_local/app.db.backup
 
-# Or tar everything
+## Or tar everything
 docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
 
 ```text
@@ -476,10 +476,10 @@ docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
 ```bash
 
 
-# Check logs
+## Check logs
 docker compose logs backend
 
-# Rebuild and restart
+## Rebuild and restart
 docker compose down
 
 ```text
@@ -493,10 +493,10 @@ docker compose down
 
 
 
-# Check what's using port 8000
+## Check what's using port 8000
 sudo netstat -tlnp | grep 8000
 
-# Kill process (if needed)
+## Kill process (if needed)
 
 ```text
 ```
@@ -506,11 +506,11 @@ sudo netstat -tlnp | grep 8000
 
 ```bash
 
-# Check network
+## Check network
 docker network ls
 docker network inspect saoriverse-console_saoriverse
 
-# Rebuild network
+## Rebuild network
 docker compose down
 ```text
 
@@ -523,10 +523,10 @@ docker compose down
 ```bash
 
 
-# Check disk usage
+## Check disk usage
 docker system df
 
-# Clean up unused images/containers/networks
+## Clean up unused images/containers/networks
 
 ```text
 
@@ -541,15 +541,15 @@ docker system df
 ```bash
 
 
-# Install Certbot
+## Install Certbot
 sudo apt install -y certbot python3-certbot-nginx
 
-# Get certificate
+## Get certificate
 sudo certbot certonly --standalone -d 161.35.227.49
 
-# Update nginx.conf with SSL
+## Update nginx.conf with SSL
 
-# Then: docker compose restart nginx
+## Then: docker compose restart nginx
 
 ```
 

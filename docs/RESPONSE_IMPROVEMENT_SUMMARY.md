@@ -54,7 +54,7 @@ requests_presence = any(phrase in message_lower for phrase in
 
 ```python
 
-# EXHAUSTION + MOMENTUM LOSS + NEED FOR PRESENCE = Holding Space Response
+## EXHAUSTION + MOMENTUM LOSS + NEED FOR PRESENCE = Holding Space Response
 if (has_exhaustion or themes["fatigue"]) and has_momentum_loss and requests_presence:
     response_text = (
         "I'm with you in that. The heaviness you're describing—waking up already

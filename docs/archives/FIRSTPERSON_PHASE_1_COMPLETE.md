@@ -70,25 +70,25 @@ stored in Supabase ✅ **Offline Graceful** - Works fine without Supabase (retur
 orch = FirstPersonOrchestrator("user_123", "conv_456")
 orch.initialize_session()  # Load prior themes/anchors
 
-# Turn 1: Ambiguity
+## Turn 1: Ambiguity
 resp1 = orch.handle_conversation_turn("She was waiting at the corner.")
 
-# → "Who was waiting? Your sister, friend, or someone else?"
+## → "Who was waiting? Your sister, friend, or someone else?"
 
-# Turn 2: Theme detected
+## Turn 2: Theme detected
 resp2 = orch.handle_conversation_turn("My sister. She's anxious about her exam.")
 
-# → "I hear anxiety about exams coming up for her..."
+## → "I hear anxiety about exams coming up for her..."
 
-# Turn 3: Memory injected
+## Turn 3: Memory injected
 resp3 = orch.handle_conversation_turn("This keeps happening.")
 
-# → (memory context + "I noticed anxiety patterns showing up...")
+## → (memory context + "I noticed anxiety patterns showing up...")
 
-# Turn 6: Varied response, theme recorded
+## Turn 6: Varied response, theme recorded
 resp6 = orch.handle_conversation_turn("I want to help her more.")
 
-# → (different framing, no repetition, persisted to Supabase)
+## → (different framing, no repetition, persisted to Supabase)
 ```
 
 

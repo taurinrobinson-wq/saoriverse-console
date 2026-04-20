@@ -1,6 +1,7 @@
 # Velinor Streamlit Prototype
 
-Full Streamlit implementation of **Velinor: Remnants of the Tone** - an emotionally-driven narrative game with:
+Full Streamlit implementation of **Velinor: Remnants of the Tone** - an emotionally-driven narrative
+game with:
 
 - **Dynamic Scene Rendering** - Background + NPC overlay + dialogue
 - **Button-Driven Interaction** - 2x2 button grid + optional fifth action button
@@ -136,7 +137,8 @@ Five core emotional dimensions track the player's emotional resonance:
 - **Resolve** - Commitment to chosen path
 - **Resonance** - Overall harmonic balance
 
-Each choice applies effects like `{"courage": +0.15, "empathy": -0.1}`, creating emergent emotional arcs.
+Each choice applies effects like `{"courage": +0.15, "empathy": -0.1}`, creating emergent emotional
+arcs.
 
 ### REMNANTS System
 
@@ -234,11 +236,8 @@ python velinor/stories/story_validator.py
 
 Run the Streamlit app and:
 
-1. Make choices to see TONE updates
-2. Reach a chamber door to test glyph input
-3. Enter chamber and attack 15 times
-4. Check sidebar to verify glyph added
-5. Use glyph on NPC to see special dialogue
+1. Make choices to see TONE updates 2. Reach a chamber door to test glyph input 3. Enter chamber and
+attack 15 times 4. Check sidebar to verify glyph added 5. Use glyph on NPC to see special dialogue
 
 ## Limitations & Design Choices
 
@@ -298,11 +297,9 @@ python -c "from velinor.engine.orchestrator import VelinorTwineOrchestrator; pri
 
 To add features:
 
-1. Add story content in `story_definitions.py`
-2. Add state tracking in `streamlit_state.py`
-3. Add UI components in `streamlit_ui.py`
-4. Wire handlers in `streamlit_app.py`
-5. Test with `streamlit run velinor/streamlit_app.py`
+1. Add story content in `story_definitions.py` 2. Add state tracking in `streamlit_state.py` 3. Add
+UI components in `streamlit_ui.py` 4. Wire handlers in `streamlit_app.py` 5. Test with `streamlit
+run velinor/streamlit_app.py`
 
 ## License
 

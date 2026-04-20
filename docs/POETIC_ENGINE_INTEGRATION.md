@@ -176,10 +176,10 @@ The poetic engine is integrated into `parse_input()`:
 ```python
 
 
-# In emotional_os/core/signal_parser.py
+## In emotional_os/core/signal_parser.py
 result = parse_input(input_text, lexicon_path, db_path, conversation_context, user_id)
 
-# Result now includes:
+## Result now includes:
 result = {
     # ... existing fields ...
     "poetic_state": {
@@ -230,22 +230,22 @@ The engine's affective memory feeds into the learning pipeline:
 
 from emotional_os.core import get_poetic_engine
 
-# Get singleton engine instance
+## Get singleton engine instance
 engine = get_poetic_engine()
 
-# Update from user interaction
+## Update from user interaction
 result = engine.update_from_interaction( user_input="I feel overwhelmed by work",
 detected_emotions={"anxiety": 0.8}, user_id="user_123" )
 
 print(result["poem_rendered"])
 
-# Output:
+## Output:
 
-# [anxiety]
+## [anxiety]
 
-# a clock ticking in the dark
+## a clock ticking in the dark
 
-# Tempo: erratic
+## Tempo: erratic
 
 ```text
 ```
@@ -255,28 +255,28 @@ print(result["poem_rendered"])
 
 ```python
 
-# Session 1: User arrives anxious
+## Session 1: User arrives anxious
 engine.update_from_interaction(
     user_input="Everything is falling apart",
     detected_emotions={"anxiety": 0.9, "fear": 0.7},
     user_id="user_123"
 )
 
-# Session 2: User starts processing
+## Session 2: User starts processing
 engine.update_from_interaction(
     user_input="I think I understand why I felt that way",
     detected_emotions={"peace": 0.4, "hope": 0.3},
     user_id="user_123"
 )
 
-# Session 3: User finds resolution
+## Session 3: User finds resolution
 engine.update_from_interaction(
     user_input="I feel much better now, thank you for listening",
     detected_emotions={"joy": 0.6, "peace": 0.8},
     user_id="user_123"
 )
 
-# The poem and relational gravity evolve through this arc
+## The poem and relational gravity evolve through this arc
 summary = engine.get_current_state_summary()
 print(summary["poem"]["valence"])  # "peace"
 ```text
@@ -290,21 +290,21 @@ print(summary["poem"]["valence"])  # "peace"
 ```python
 
 
-# Enter dreaming during idle time
+## Enter dreaming during idle time
 dreams = engine.enter_dreaming_mode()
 
 for dream in dreams:
     print(dream)
 
-# Output might include:
+## Output might include:
 
-# ~~ Dream Sequence ~~
+## ~~ Dream Sequence ~~
 
-# In dreams of anxiety: wind before the storm
+## In dreams of anxiety: wind before the storm
 
-# In dreams of hope: a seed breaking through stone
+## In dreams of hope: a seed breaking through stone
 
-# (Echoes from 5 memories)
+## (Echoes from 5 memories)
 
 ```text
 
@@ -315,7 +315,7 @@ for dream in dreams:
 ```python
 
 
-# For users with mirroring active
+## For users with mirroring active
 engine.user_gravity["user_123"].mirror_active = True
 
 response = engine.generate_mirror_response( user_id="user_123", user_input="I feel lost",

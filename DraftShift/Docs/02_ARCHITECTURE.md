@@ -2,7 +2,9 @@
 
 ## 🏗️ System Architecture Overview
 
-DraftShift is built as a **modular, privacy-first** civility analysis engine. The system flows from analysis → transformation → compliance scoring, with the attorney always in control at the final decision point.
+DraftShift is built as a **modular, privacy-first** civility analysis engine. The system flows from
+analysis → transformation → compliance scoring, with the attorney always in control at the final
+decision point.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -268,4 +270,5 @@ Display Dashboard + Attorney Decision
 
 ---
 
-This architecture ensures DraftShift is **fast, private, and attorney-controlled**—exactly what legal professionals need.
+This architecture ensures DraftShift is **fast, private, and attorney-controlled**—exactly what
+legal professionals need.

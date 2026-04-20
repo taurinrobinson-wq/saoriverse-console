@@ -15,28 +15,28 @@ from emotional_os.core.firstperson import (
     FaceLandmarks,
 )
 
-# Initialize detectors
+## Initialize detectors
 voice_detector = VoiceAffectDetector()
 facial_detector = FacialExpressionDetector()
 fusion_engine = MultimodalFusionEngine()
 
-# Extract features (from audio and video)
+## Extract features (from audio and video)
 voice_features = extract_acoustic_features(audio_data)  # Your extraction code
 facial_landmarks = extract_facial_landmarks(video_frame)  # Your extraction code
 
-# Analyze each modality
+## Analyze each modality
 voice_analysis = voice_detector.analyze(voice_features)
 facial_analysis = facial_detector.analyze(facial_landmarks)
 text_tone = "excited"  # From Phase 1-2 analysis
 
-# Fuse all modalities
+## Fuse all modalities
 multimodal_result = fusion_engine.fuse(
     text_tone=text_tone,
     voice_analysis=voice_analysis,
     facial_analysis=facial_analysis,
 )
 
-# Use result
+## Use result
 print(f"Detected emotion: {multimodal_result.primary_emotion}")
 print(f"Confidence: {multimodal_result.confidence.overall_confidence:.2f}")
 if multimodal_result.incongruences:
@@ -54,7 +54,7 @@ from emotional_os.core.firstperson import EmotionalProfileManager
 
 profile_manager = EmotionalProfileManager()
 
-# Update profile with Phase 3.2 data
+## Update profile with Phase 3.2 data
 profile_manager.update_profile(
     emotion_tone=multimodal_result.primary_emotion,
     confidence=multimodal_result.confidence.overall_confidence,
@@ -66,7 +66,7 @@ profile_manager.update_profile(
     incongruences=multimodal_result.incongruences,
 )
 
-# Profile now tracks multimodal data
+## Profile now tracks multimodal data
 
 ```text
 
@@ -164,7 +164,7 @@ left_eye], mouth=[normalize(lm) for lm in mouth],
 
 ```python
 
-# Test voice detection independently
+## Test voice detection independently
 voice_detector = VoiceAffectDetector()
 voice_analysis = voice_detector.analyze(acoustic_features)
 
@@ -184,7 +184,7 @@ assert 0 <= voice_analysis.valence <= 1
 ```python
 
 
-# Test facial detection independently
+## Test facial detection independently
 facial_detector = FacialExpressionDetector()
 facial_analysis = facial_detector.analyze(landmarks)
 
@@ -203,7 +203,7 @@ assert 0 <= facial_analysis.attention <= 1
 ```python
 
 
-# Test fusion of all three modalities
+## Test fusion of all three modalities
 engine = MultimodalFusionEngine() result = engine.fuse(text_tone, voice_analysis, facial_analysis)
 
 assert result.primary_emotion is not None assert 0 <= result.modality_agreement <= 1 assert
@@ -222,13 +222,13 @@ result.confidence.overall_confidence >= result.confidence.text_confidence
 
 
 
-# Test integration with emotional profiles
+## Test integration with emotional profiles
 profile_manager = EmotionalProfileManager()
 
-# Before update
+## Before update
 profile_before = profile_manager.get_current_profile()
 
-# After multimodal analysis
+## After multimodal analysis
 profile_manager.update_profile( emotion_tone=result.primary_emotion,
 confidence=result.confidence.overall_confidence, arousal=result.dimensions.arousal,
 valence=result.dimensions.valence, dominance=result.dimensions.dominance,

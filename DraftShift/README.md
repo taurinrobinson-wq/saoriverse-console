@@ -4,19 +4,18 @@
 
 ### Prerequisites
 
-1. Python 3.11+ (tested with 3.12)
-2. Required dependencies (install with pip)
+1. Python 3.11+ (tested with 3.12) 2. Required dependencies (install with pip)
 
 ### Installation
 
 ```bash
-# From the repository root directory
+## From the repository root directory
 cd /path/to/saoriverse-console
 
-# Install dependencies
+## Install dependencies
 pip install streamlit python-dotenv textblob spacy
 
-# Download optional NLP models (recommended)
+## Download optional NLP models (recommended)
 python -m spacy download en_core_web_sm
 python -m textblob.download_corpora
 ```
@@ -47,10 +46,10 @@ The app will automatically:
 Create a `LiToneCheck.env` file in the repository root with:
 
 ```env
-# Optional: Enable debug logging
+## Optional: Enable debug logging
 DEBUG_DRAFTSHIFT=true
 
-# Optional: Sapling API for advanced grammar checking
+## Optional: Sapling API for advanced grammar checking
 SAPLING_API_KEY=your_api_key_here
 ```
 
@@ -105,10 +104,10 @@ streamlit run DraftShift/app.py
 **Verification:**
 Run the verification script to test your setup:
 ```bash
-# From repository root
+## From repository root
 python DraftShift/Tests/verify_setup.py
 
-# From DraftShift directory
+## From DraftShift directory
 cd DraftShift
 python Tests/verify_setup.py
 ```
@@ -146,8 +145,8 @@ Test that the app is working:
    # From repository root
    python DraftShift/Tests/verify_setup.py
    ```
-   
-   Or from DraftShift directory:
+
+Or from DraftShift directory:
    ```bash
    cd DraftShift
    python Tests/verify_setup.py
@@ -164,8 +163,8 @@ Test that the app is working:
    ```bash
    streamlit run DraftShift/app.py
    ```
-   
-   The app will display startup diagnostics showing:
+
+The app will display startup diagnostics showing:
    - ✅ Path configuration
    - ✅ Module import status
    - ✅ Available NLP tools

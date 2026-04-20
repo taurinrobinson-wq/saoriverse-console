@@ -217,7 +217,7 @@ saoriverse-console/
 through story system 4. Applies game mechanics (dice rolls, stat changes) 5. Generates NPC response
 6. Updates UI with next state 7. Repeat
 
-### ✅ Story System
+### ✅ Story System (2)
 
 - Twine JSON loading ✓
 - Choice parsing ✓
@@ -288,11 +288,11 @@ through story system 4. Applies game mechanics (dice rolls, stat changes) 5. Gen
 
 ```bash
 
-# Install and play
+## Install and play
 bash setup.sh
 bash run.sh
 
-# Then in browser: http://localhost:8501
+## Then in browser: http://localhost:8501
 
 ```text
 

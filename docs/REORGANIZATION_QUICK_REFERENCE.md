@@ -8,19 +8,19 @@
 
 ```bash
 
-# Count tests
+## Count tests
 find . -name "test_*.py" -type f | wc -l
 
-# Find voice code
+## Find voice code
 find . -path "*spoken_interface*" -name "*.py" | sort
 
-# Find response generation code
+## Find response generation code
 find . -type f \( -name "*response*" -o -name "*generator*" \) | grep -v __pycache__
 
-# Check main imports
+## Check main imports
 grep -l "emotional_os" *.py 2>/dev/null || echo "No imports in root"
 
-# Create backup branch
+## Create backup branch
 git checkout -b refactor/reorganization-master
 ```text
 
@@ -35,7 +35,7 @@ git checkout -b refactor/reorganization-master
 ```bash
 
 
-# Core source structure
+## Core source structure
 mkdir -p src/
 mkdir -p tests/unit/
 mkdir -p tests/integration/
@@ -49,7 +49,7 @@ mkdir -p scripts/debug/
 mkdir -p docs/archive/
 mkdir -p config/
 
-# Create __init__.py files
+## Create __init__.py files
 touch src/__init__.py
 touch tests/__init__.py
 touch tests/unit/__init__.py
@@ -85,10 +85,10 @@ touch scripts/setup/__init__.py
 ```bash
 
 
-# Move all test_*.py from root to tests/
+## Move all test_*.py from root to tests/
 mv test_*.py tests/ 2>/dev/null || true
 
-# Organize by module
+## Organize by module
 mv tests/test_emotional_os.py tests/unit/ 2>/dev/null || true
 mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 
@@ -103,14 +103,14 @@ mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 
 
 
-# Consolidate data
+## Consolidate data
 mkdir -p data/lexicons mkdir -p data/models
 
-# Move lexicon data
+## Move lexicon data
 mv *lexicon*.json data/lexicons/ 2>/dev/null || true
 mv *glyph*.json data/ 2>/dev/null || true
 
-# Move database
+## Move database
 
 ```text
 ```
@@ -120,16 +120,16 @@ mv *glyph*.json data/ 2>/dev/null || true
 
 ```bash
 
-# Data processing scripts
+## Data processing scripts
 mv scripts/download*.py scripts/data/ 2>/dev/null || true
 mv scripts/migrate*.py scripts/data/ 2>/dev/null || true
 mv scripts/export*.py scripts/data/ 2>/dev/null || true
 
-# Setup scripts
+## Setup scripts
 mv scripts/init*.py scripts/setup/ 2>/dev/null || true
 mv scripts/seed*.py scripts/setup/ 2>/dev/null || true
 
-# Debug scripts
+## Debug scripts
 mv scripts/inspect*.py scripts/debug/ 2>/dev/null || true
 mv scripts/debug*.py scripts/debug/ 2>/dev/null || true
 ```text
@@ -247,16 +247,16 @@ if __name__ == "__main__": main()
 
 ```bash
 
-# Test imports
+## Test imports
 python tools/import_checker.py
 
-# Test with pytest
+## Test with pytest
 pytest tests/unit/ -v --tb=short
 
-# Test with integration
+## Test with integration
 pytest tests/integration/ -v --tb=short
 
-# Test Streamlit launch
+## Test Streamlit launch
 streamlit run app.py
 
 ```text
@@ -272,16 +272,16 @@ streamlit run app.py
 ```bash
 
 
-# Archive old structure
+## Archive old structure
 mkdir -p archive/old_structure/
 mv emotional_os/ archive/old_structure/ 2>/dev/null || true
 mv parser/ archive/old_structure/ 2>/dev/null || true
 mv local_inference/ archive/old_structure/ 2>/dev/null || true
 
-# Remove old entry points
+## Remove old entry points
 rm -f main_v2.py main_v2_simple.py start.py
 
-# Archive old docs (keep README, CONTRIBUTING, docs/)
+## Archive old docs (keep README, CONTRIBUTING, docs/)
 mkdir -p docs/archive/
 for file in *.md; do
     if [[ "$file" != "README.md" && "$file" != "CONTRIBUTING.md" ]]; then
@@ -299,13 +299,13 @@ for file in *.md; do
 ```bash
 
 
-# Stage everything
+## Stage everything
 git add -A
 
-# Check what's being committed
+## Check what's being committed
 git status
 
-# Commit with detailed message
+## Commit with detailed message
 git commit -m "refactor: Complete codebase reorganization
 
 - Move core logic to src/ with flat structure
@@ -316,7 +316,7 @@ git commit -m "refactor: Complete codebase reorganization
 - All tests passing, all modules importable
 - Ready for efficient development and deployment"
 
-# Push to GitHub
+## Push to GitHub
 
 ```text
 ```text
@@ -362,19 +362,19 @@ After everything is organized:
 
 
 
-# Run all tests
+## Run all tests
 pytest tests/ -v --cov=src
 
-# Launch app for testing
+## Launch app for testing
 streamlit run app.py
 
-# Create new test
+## Create new test
 touch tests/unit/test_new_feature.py
 
-# ... write test ...
+## ... write test ...
 pytest tests/unit/test_new_feature.py -v
 
-# Commit changes
+## Commit changes
 git add -A git commit -m "feat: Add new feature" git push origin feature/name
 
 ```

@@ -70,7 +70,7 @@ Updated `compose_message_aware_response()` to start with glyph description ancho
 
 
 
-# Now starts with glyph context before message-specific content
+## Now starts with glyph context before message-specific content
 if glyph and glyph.get("description"): opening = f"There's something in what you're
 describing—{glyph_description.lower()}"
 

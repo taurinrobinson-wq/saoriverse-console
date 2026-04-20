@@ -55,7 +55,8 @@ python scripts/utilities/integrate_glyph_lexicons.py \
 
 ### New Emotional Dimensions Found
 
-Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sensuality, intimacy, nature), poetry reveals:
+Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sensuality, intimacy,
+nature), poetry reveals:
 
 - Nostalgia / Longing
 - Wonder / Awe
@@ -68,11 +69,9 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 
 ### Most Frequent Patterns (Glyph Candidates)
 
-1. Love + Nature = "Nature's Love"
-2. Love + Transformation = "Love's Becoming"
-3. Joy + Nature = "Natural Joy"
-4. Transformation + Admiration = "Inspiring Change"
-5. Vulnerability + Love = "Open Heart"
+1. Love + Nature = "Nature's Love" 2. Love + Transformation = "Love's Becoming" 3. Joy + Nature =
+"Natural Joy" 4. Transformation + Admiration = "Inspiring Change" 5. Vulnerability + Love = "Open
+Heart"
 
 ## File Locations
 

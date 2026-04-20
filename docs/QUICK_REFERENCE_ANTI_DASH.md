@@ -107,16 +107,16 @@ no wrong way to do it." (Grounded pool, periods applied)
 
 from emotional_os.glyphs.punctuation_cleaner import clean_response
 
-# Simple one-off cleaning
+## Simple one-off cleaning
 cleaned = clean_response( response="You're not alone—many people feel this way.", glyph_name="Still
 Recognition" )
 
-# Returns: "You're not alone, many people feel this way."
+## Returns: "You're not alone, many people feel this way."
 
-# Access cleaner directly
+## Access cleaner directly
 from emotional_os.glyphs.punctuation_cleaner import get_cleaner cleaner = get_cleaner()
 
-# Process with all features
+## Process with all features
 cleaned = cleaner.process_response( response=raw_response, glyph_name=glyph_name, diversify=True  #
 Replace generic closings
 

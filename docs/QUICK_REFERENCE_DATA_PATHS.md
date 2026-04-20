@@ -173,14 +173,14 @@ When the app starts, these files are loaded in this order:
 ```bash
 
 
-# Create missing directory structure
+## Create missing directory structure
 mkdir -p emotional_os/glyphs
 mkdir -p emotional_os/core
 mkdir -p emotional_os/parser
 mkdir -p emotional_os/lexicon
 mkdir -p emotional_os/safety
 
-# Copy files (or symlink if on same filesystem)
+## Copy files (or symlink if on same filesystem)
 cp data/glyph_lexicon_rows.json emotional_os/glyphs/
 cp data/glyph_lexicon_rows.csv emotional_os/glyphs/
 cp data/antonym_glyphs_indexed.json emotional_os/glyphs/

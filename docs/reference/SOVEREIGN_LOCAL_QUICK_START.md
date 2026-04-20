@@ -13,7 +13,7 @@ This guide gets you from idea to working sovereign local system in hours, not we
 ```bash
 pip install spacy
 
-# Download English model for NER, tokenization, etc.
+## Download English model for NER, tokenization, etc.
 ```text
 
 ```text
@@ -25,14 +25,14 @@ pip install spacy
 ```bash
 
 
-# Create folder
+## Create folder
 mkdir -p data/lexicons
 
-# Download NRC Emotion Lexicon (free, public domain)
+## Download NRC Emotion Lexicon (free, public domain)
 
-# From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+## From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
-# File: NRC-Emotion-Lexicon-Wordlevel-v0.92.txt
+## File: NRC-Emotion-Lexicon-Wordlevel-v0.92.txt
 
 ```text
 
@@ -43,10 +43,10 @@ mkdir -p data/lexicons
 ```python
 
 
-# Your code already has this! Just verify:
+## Your code already has this! Just verify:
 import nltk from nltk.sentiment import SentimentIntensityAnalyzer
 
-# Should work - NLTK already integrated
+## Should work - NLTK already integrated
 sia = SentimentIntensityAnalyzer()
 
 ```text
@@ -109,7 +109,7 @@ for emotion in word_emotions: emotions[emotion] += 1
 return dict(emotions)
 
 
-# Singleton instance - load once at startup
+## Singleton instance - load once at startup
 nrc = NRCLexicon()
 
 if __name__ == "__main__":
@@ -129,11 +129,11 @@ Update `parser/signal_parser.py` to use NRC lexicon:
 
 ```python
 
-# At the top, add:
+## At the top, add:
 from parser.nrc_lexicon_loader import nrc
 import spacy
 
-# Load spaCy model at startup
+## Load spaCy model at startup
 nlp = spacy.load("en_core_web_sm")
 
 def enhanced_parse_signals(text: str) -> dict:
@@ -281,7 +281,7 @@ class PoetryExtractor:
         conn.close()
         return False
 
-# Manually curated poetry examples (can expand with Project Gutenberg)
+## Manually curated poetry examples (can expand with Project Gutenberg)
 POETRY_DATABASE = {
     "Recursive Ache": [
         {
@@ -360,7 +360,7 @@ Update `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) to show loca
 ```python
 
 
-# Add to sidebar:
+## Add to sidebar:
 st.sidebar.markdown("---") st.sidebar.subheader("🔐 Processing Mode")
 
 mode = st.sidebar.radio( "Choose processing mode:", ["Local Mode (Recommended)", "Hybrid Mode",
@@ -376,7 +376,7 @@ st.sidebar.info(""" 🔐 **Your data is safe**
 """) USE_LOCAL_ONLY = True else: st.sidebar.warning("Cloud Mode: Some data may be transmitted")
 USE_LOCAL_ONLY = False
 
-# In response generation:
+## In response generation:
 if USE_LOCAL_ONLY:
     # Use local processing
 response_data = parse_input(user_message) glyph = response_data['best_glyph']
@@ -467,20 +467,20 @@ Run it:
 ```bash
 
 
-# Option A: Download pre-curated poetry collection
+## Option A: Download pre-curated poetry collection
 curl -o data/poetry/gutenberg_poetry.zip \
   "https://www.gutenberg.org/cache/epub/collections/poetry-zh.zip"
 
-# Option B: Use Python script
+## Option B: Use Python script
 python -c "
 import urllib.request
 import os
 
 os.makedirs('data/poetry', exist_ok=True)
 
-# Download a specific poetry book
+## Download a specific poetry book
 
-# Example: Emily Dickinson Complete Poems
+## Example: Emily Dickinson Complete Poems
 url = 'https://www.gutenberg.org/cache/epub/1638/pg1638.txt'
 urllib.request.urlretrieve(url, 'data/poetry/dickinson.txt')
 print('✓ Downloaded Emily Dickinson poems')
@@ -499,7 +499,7 @@ Add this to `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED):
 
 import os
 
-# DISABLE external API calls in local mode
+## DISABLE external API calls in local mode
 if mode == "Local Mode (Recommended)":
     # Remove OpenAI key to prevent accidental API calls
 os.environ.pop('OPENAI_API_KEY', None)
@@ -542,12 +542,12 @@ response_data = parse_input(user_message)
 
 
 
-# Start the app in local mode
+## Start the app in local mode
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
-# Select: "Local Mode (Recommended)"
+## Select: "Local Mode (Recommended)"
 
-# Type: "I feel stuck in this loop of grief"
+## Type: "I feel stuck in this loop of grief"
 
 ```text
 ```
@@ -579,22 +579,22 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 ```python
 
-# Run this to verify local mode is truly private:
+## Run this to verify local mode is truly private:
 python -c "
 import os
 import sys
 
-# Check no API keys
+## Check no API keys
 if os.environ.get('OPENAI_API_KEY'):
     print('❌ WARNING: OpenAI API key detected')
     sys.exit(1)
 
-# Check all models are local
+## Check all models are local
 from parser.nrc_lexicon_loader import nrc
 import spacy
 nlp = spacy.load('en_core_web_sm')
 
-# Check no network calls
+## Check no network calls
 import requests
 try:
     # This should NOT happen

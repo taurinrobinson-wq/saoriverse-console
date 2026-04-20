@@ -148,15 +148,15 @@ Returns new game state
 ```bash
 
 
-# Terminal 1
+## Terminal 1
 Ctrl+C  (stop backend)
 python velinor_api.py
 
-# Terminal 2
+## Terminal 2
 Ctrl+C  (stop frontend)
 npm run dev
 
-# Browser
+## Browser
 
 ```text
 
@@ -174,10 +174,10 @@ Once the local test works:
 
 cd d:\saoriverse-console
 
-# Commit the web stack
+## Commit the web stack
 git add . git commit -m "Add Velinor web stack (FastAPI + Next.js)" git push origin main
 
-# Railway auto-deploys!
+## Railway auto-deploys!
 
 ```text
 ```text

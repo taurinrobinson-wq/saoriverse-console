@@ -4,11 +4,11 @@ Purpose
 - Consolidated spec sheet for batch generation of placeholder NPC portraits that match the existing Velinor painterly style.
 - Includes: human-readable descriptions, batch‑friendly prompts, filename conventions, and generation notes for Automatic1111.
 
-How to use
-1. Pick a generation backend (Automatic1111 / Ollama / Stable Diffusion CLI).
-2. Start the backend locally (e.g., Automatic1111 WebUI on `http://127.0.0.1:7860`).
-3. Use `tools/batch_generate_automatic1111.sh` as an example to create images from the batch‑friendly prompts.
-4. Postprocess outputs with `tools/asset_pipeline.py` to apply the painterly finish and thumbnails.
+How to use 1. Pick a generation backend (Automatic1111 / Ollama / Stable Diffusion CLI). 2. Start
+the backend locally (e.g., Automatic1111 WebUI on `http://127.0.0.1:7860`). 3. Use
+`tools/batch_generate_automatic1111.sh` as an example to create images from the batch‑friendly
+prompts. 4. Postprocess outputs with `tools/asset_pipeline.py` to apply the painterly finish and
+thumbnails.
 
 Naming convention
 - Output images: `npc_<slug>_v1.png`, `npc_<slug>_v2.png`, `npc_<slug>_v3.png`
@@ -54,9 +54,9 @@ Included NPCs (from your specs)
 
 - Optional secondary NPCs: Desert Elder, Shrine Keeper, Harbor Dock Worker, Market Shrine Keeper (prompts available in the batch file)
 
-Postprocess pipeline
-1. Run generation to produce 1024x1024 PNGs in `output/generated/`.
-2. Use `python tools/asset_pipeline.py --input-dir output/generated --out-dir assets/npcs --size 1024` to produce painterly, alpha-corrected final assets and thumbnails.
+Postprocess pipeline 1. Run generation to produce 1024x1024 PNGs in `output/generated/`. 2. Use
+`python tools/asset_pipeline.py --input-dir output/generated --out-dir assets/npcs --size 1024` to
+produce painterly, alpha-corrected final assets and thumbnails.
 
 Notes on style matching
 - The provided sample portraits emphasize subdued occlusion, painterly brush texture, muted warm palette, and directional studio-like lighting. The batch prompts above are tuned for that look; you can add a style token such as `velinor portrait rendering` or any custom model tag if you have a fine-tuned model.
@@ -71,4 +71,3 @@ Files added
 If you want, I can also add:
 - An `ollama` example script
 - A small CLI tool that reads `Glyph_Organizer.json`, maps `npc.name` → `slug`, and writes a CSV of missing NPCs to use for batch generation.
-

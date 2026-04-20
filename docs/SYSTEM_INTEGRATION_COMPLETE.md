@@ -182,9 +182,9 @@ src/emotional_os/deploy/
 ```bash
 
 
-# Streamlit Cloud will use your repository automatically
+## Streamlit Cloud will use your repository automatically
 
-# No additional setup needed
+## No additional setup needed
 
 ```
 

@@ -90,17 +90,17 @@ Lightweight keyword-based affect detection for emotional attunement.
 
 ```python
 
-# Input: "I'm so grateful for your help! This means everything!"
+## Input: "I'm so grateful for your help! This means everything!"
 
-# Output: AffectAnalysis(
-#   tone="grateful",
-#   tone_confidence=0.9,
-#   valence=0.95,
-#   arousal=0.6,
-#   secondary_tones=["warm"],
-#   explanation="Detected grateful tone (90% confidence) with positive sentiment (+0.95) and moderate intensity (0.60)"
+## Output: AffectAnalysis(
+##   tone="grateful",
+##   tone_confidence=0.9,
+##   valence=0.95,
+##   arousal=0.6,
+##   secondary_tones=["warm"],
+##   explanation="Detected grateful tone (90% confidence) with positive sentiment (+0.95) and moderate intensity (0.60)"
 
-# )
+## )
 ```
 
 

@@ -1,6 +1,7 @@
 # PLACEHOLDER LOCATIONS: Visual Map
 
-This file shows you exactly what each placeholder looks like in the JSON files, so you know where to find and replace them.
+This file shows you exactly what each placeholder looks like in the JSON files, so you know where to
+find and replace them.
 
 ---
 
@@ -304,14 +305,14 @@ This file shows you exactly what each placeholder looks like in the JSON files, 
 - **Find All Ravi lines:** `Ctrl+F` → type `RAVI_LINE_`
 - **Find All glyphs:** `Ctrl+F` → type `GLYPH_REVEAL_`
 
-Each search highlights every occurrence across all open files. Use `Ctrl+G` or the down arrow to navigate to next match.
+Each search highlights every occurrence across all open files. Use `Ctrl+G` or the down arrow to
+navigate to next match.
 
 ---
 
 ## When You Finish an Act
 
-1. **Open terminal** in VS Code
-2. **Type:**
+1. **Open terminal** in VS Code 2. **Type:**
    ```bash
    git add RN_Act1_Introduction.json
    git commit -m "story: write Act 1 dialogue and narration

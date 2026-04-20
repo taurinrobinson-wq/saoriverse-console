@@ -1,14 +1,17 @@
 # ✅ What will give you the biggest immediate gain?
 **Improving parser accuracy.**
 
-Why?
-Because the enhanced affect parser is about to become the *foundation* for the entire tone‑transformation pipeline. Every weakness you saw in the tone tests — the lack of nuance, the inability to detect emotional stance, the failure to distinguish frustration from critique — all of that traces back to the affect parser not yet being rich enough.
+Why? Because the enhanced affect parser is about to become the *foundation* for the entire
+tone‑transformation pipeline. Every weakness you saw in the tone tests — the lack of nuance, the
+inability to detect emotional stance, the failure to distinguish frustration from critique — all of
+that traces back to the affect parser not yet being rich enough.
 
-CI/test integration is valuable, but it won’t *improve* the system — it will only help you catch regressions. Right now, you need forward motion, not guardrails.
+CI/test integration is valuable, but it won’t *improve* the system — it will only help you catch
+regressions. Right now, you need forward motion, not guardrails.
 
 ---
 
-# ✅ What accuracy improvements matter most right now?
+## ✅ What accuracy improvements matter most right now?
 Here’s the order that will give you the biggest lift:
 
 ### **1. Handle contractions properly**
@@ -48,7 +51,7 @@ Right now, the parser is not using any of that nuance.
 
 ---
 
-# ✅ Why accuracy first?
+## ✅ Why accuracy first?
 Because once the affect parser is strong, you unlock:
 
 - better tone detection  
@@ -58,33 +61,34 @@ Because once the affect parser is strong, you unlock:
 - better smoothing  
 - better test runner results  
 
-CI integration is great, but it’s a multiplier — it multiplies whatever quality you already have.  
+CI integration is great, but it’s a multiplier — it multiplies whatever quality you already have.
 Right now, you want to raise the baseline before you multiply it.
 
 ---
 
-# ✅ My recommendation
+## ✅ My recommendation
 **Improve parser accuracy next.**  
 Specifically:
 
-1. Add contraction expansion  
-2. Improve tokenization  
-3. Expand fallback NRC lexicon  
+1. Add contraction expansion 2. Improve tokenization 3. Expand fallback NRC lexicon
 
-Once that’s in place, CI integration becomes meaningful — you’ll be locking in a much stronger emotional engine.
+Once that’s in place, CI integration becomes meaningful — you’ll be locking in a much stronger
+emotional engine.
 
 ---
 
-Perfect — let’s build this out in a way that actually strengthens DraftShift’s emotional core. Since you said “sure,” I’ll take that as the green light to outline the **next concrete module** you can implement: a contraction‑handling layer that plugs directly into your enhanced affect parser and improves emotional signal detection immediately.
+Perfect — let’s build this out in a way that actually strengthens DraftShift’s emotional core. Since
+you said “sure,” I’ll take that as the green light to outline the **next concrete module** you can
+implement: a contraction‑handling layer that plugs directly into your enhanced affect parser and
+improves emotional signal detection immediately.
 
 Below is a clean, actionable design you can drop into your codebase.
 
 ---
 
-# 🔧 **1. Contraction Expansion Module (High‑Impact, Low‑Complexity)**
+## 🔧 **1. Contraction Expansion Module (High‑Impact, Low‑Complexity)**
 
-Contractions hide emotional signals.  
-Right now, your parser sees:
+Contractions hide emotional signals. Right now, your parser sees:
 
 - “I’m done” → `["I", "m", "done"]`
 - “You’re not listening” → `["You", "re", "not", "listening"]`
@@ -180,7 +184,7 @@ This one change will dramatically improve:
 
 ---
 
-# 🔧 **2. Tokenization Improvements (spaCy‑powered)**
+## 🔧 **2. Tokenization Improvements (spaCy‑powered)**
 
 spaCy gives you:
 
@@ -192,30 +196,22 @@ spaCy gives you:
 You want to extract:
 
 ### ✅ **Negation scope**
-“I am not okay”  
-“You are not listening”  
-“I don’t want to continue this conversation”
+“I am not okay” “You are not listening” “I don’t want to continue this conversation”
 
 ### ✅ **Intensifiers**
-“really upset”  
-“so frustrated”  
-“very concerned”
+“really upset” “so frustrated” “very concerned”
 
 ### ✅ **Boundary markers**
-“I’m done talking”  
-“I need space”  
-“I can’t continue like this”
+“I’m done talking” “I need space” “I can’t continue like this”
 
 ### ✅ **Relational stance**
-“You’re not hearing me”  
-“I feel dismissed”  
-“This isn’t working”
+“You’re not hearing me” “I feel dismissed” “This isn’t working”
 
 I can help you write a spaCy‑based extractor next if you want.
 
 ---
 
-# 🔧 **3. NRC Expansion (Emotion‑Specific Lexicon)**
+## 🔧 **3. NRC Expansion (Emotion‑Specific Lexicon)**
 
 Your fallback NRC lexicon should include:
 
@@ -241,7 +237,7 @@ These map beautifully into your glyph system.
 
 ---
 
-# ✅ **What this unlocks**
+## ✅ **What this unlocks**
 Once you add contraction handling + improved tokenization + NRC expansion, you’ll see:
 
 - better emotional detection  
@@ -256,17 +252,19 @@ This is the foundation you need before you refine the transformation engine.
 
 ---
 
-Absolutely — let’s build the **spaCy‑powered nuance extractor**.  
-This is the missing layer that will let DraftShift finally *understand* emotional structure instead of just reacting to keywords. I’ll give you a clean, modular design you can drop into your pipeline, and I’ll explain why each component matters for your emotional OS and glyph system.
+Absolutely — let’s build the **spaCy‑powered nuance extractor**. This is the missing layer that will
+let DraftShift finally *understand* emotional structure instead of just reacting to keywords. I’ll
+give you a clean, modular design you can drop into your pipeline, and I’ll explain why each
+component matters for your emotional OS and glyph system.
 
 Below is the full architecture, broken into clear, implementable pieces.
 
 ---
 
-# 🌿 **spaCy‑Powered Nuance Extractor (Design + Implementation)**
+## 🌿 **spaCy‑Powered Nuance Extractor (Design + Implementation)**
 
-This module sits *after* contraction expansion and *before* affect scoring.  
-Its job is to extract the emotional and relational signals that spaCy is uniquely good at detecting.
+This module sits *after* contraction expansion and *before* affect scoring. Its job is to extract
+the emotional and relational signals that spaCy is uniquely good at detecting.
 
 You’ll get:
 
@@ -285,7 +283,7 @@ This is the layer that will make DraftShift feel intelligent instead of template
 
 ---
 
-# ✅ **1. High‑Level Architecture**
+## ✅ **1. High‑Level Architecture**
 
 ```
 text
@@ -299,12 +297,12 @@ text
 
 ---
 
-# ✅ **2. The Nuance Extractor Module**
+## ✅ **2. The Nuance Extractor Module**
 
 Here’s the structure you want:
 
 ```python
-# nuance_extractor.py
+## nuance_extractor.py
 
 import spacy
 
@@ -397,53 +395,41 @@ This gives you a **rich emotional and relational map** of the sentence.
 
 ---
 
-# ✅ **3. Why this matters for DraftShift**
+## ✅ **3. Why this matters for DraftShift**
 
-### ✅ **Negation scope**
-“I’m not okay”  
-“You’re not listening”  
-“I don’t want to continue this conversation”
+### ✅ **Negation scope** (2)
+“I’m not okay” “You’re not listening” “I don’t want to continue this conversation”
 
 These are emotional signals, not grammar.
 
-### ✅ **Intensifiers**
-“really upset”  
-“so frustrated”  
-“very concerned”
+### ✅ **Intensifiers** (2)
+“really upset” “so frustrated” “very concerned”
 
 Intensity matters for glyph mapping.
 
-### ✅ **Boundary markers**
-“I’m done talking”  
-“I need space”  
-“No more of this”
+### ✅ **Boundary markers** (2)
+“I’m done talking” “I need space” “No more of this”
 
 These should *not* survive in Friendly or Empathetic tones.
 
 ### ✅ **Agency**
-“We met yesterday”  
-“I feel dismissed”  
-“You ignored my message”
+“We met yesterday” “I feel dismissed” “You ignored my message”
 
 This is crucial for meaning preservation.
 
 ### ✅ **Repair attempts**
-“I want to understand”  
-“I’m trying here”  
-“Let’s figure this out”
+“I want to understand” “I’m trying here” “Let’s figure this out”
 
 These should be amplified in Empathetic tone.
 
-### ✅ **Escalation**
-“unacceptable”  
-“ridiculous”  
-“impossible”
+### ✅ **Escalation** (2)
+“unacceptable” “ridiculous” “impossible”
 
 These should be softened in Neutral or Friendly.
 
 ---
 
-# ✅ **4. How this plugs into your glyph system**
+## ✅ **4. How this plugs into your glyph system**
 
 Each nuance maps cleanly to glyph categories:
 
@@ -463,7 +449,7 @@ This is exactly what your emotional OS was designed for.
 
 ---
 
-# ✅ **5. What this unlocks next**
+## ✅ **5. What this unlocks next**
 Once this nuance extractor is in place, you can:
 
 - build a **meaning‑preservation layer**  
@@ -475,32 +461,33 @@ This is the missing backbone.
 
 ---
 
-Perfect — let’s build the **meaning‑preservation module**, because this is the piece that will finally stop DraftShift from producing vague, contradictory, or semantically broken rewrites. This is also the layer that lets your glyph system and nuance extractor actually *matter* downstream.
+Perfect — let’s build the **meaning‑preservation module**, because this is the piece that will
+finally stop DraftShift from producing vague, contradictory, or semantically broken rewrites. This
+is also the layer that lets your glyph system and nuance extractor actually *matter* downstream.
 
-I’ll give you a clean, modular design you can drop straight into your pipeline. It’s built to work with the nuance extractor you just added, and it uses spaCy’s dependency graph to preserve agency, intent, and emotional center.
+I’ll give you a clean, modular design you can drop straight into your pipeline. It’s built to work
+with the nuance extractor you just added, and it uses spaCy’s dependency graph to preserve agency,
+intent, and emotional center.
 
 Below is the architecture, the reasoning, and the implementation.
 
 ---
 
-# 🌿 **Meaning‑Preservation Module (Design + Implementation)**
+## 🌿 **Meaning‑Preservation Module (Design + Implementation)**
 
 This module ensures that after tone transformation:
 
-✅ the same person is doing the same action  
-✅ the emotional center stays intact  
-✅ the message’s intent is preserved  
-✅ the transformation doesn’t contradict the original  
-✅ the transformation doesn’t introduce nonsense  
-✅ the transformation doesn’t erase boundaries or commitments  
-✅ the transformation doesn’t soften things that must remain firm  
-✅ the transformation doesn’t escalate things that must remain neutral
+✅ the same person is doing the same action ✅ the emotional center stays intact ✅ the message’s
+intent is preserved ✅ the transformation doesn’t contradict the original ✅ the transformation
+doesn’t introduce nonsense ✅ the transformation doesn’t erase boundaries or commitments ✅ the
+transformation doesn’t soften things that must remain firm ✅ the transformation doesn’t escalate
+things that must remain neutral
 
 This is the layer that makes DraftShift feel *trustworthy*.
 
 ---
 
-# ✅ **1. High‑Level Architecture**
+## ✅ **1. High‑Level Architecture** (2)
 
 ```
 text
@@ -517,12 +504,12 @@ text
 
 The meaning‑preservation module has two parts:
 
-1. **Meaning Extractor** (extracts semantic structure from the original)
-2. **Meaning Validator** (checks whether the transformed text preserves it)
+1. **Meaning Extractor** (extracts semantic structure from the original) 2. **Meaning Validator**
+(checks whether the transformed text preserves it)
 
 ---
 
-# ✅ **2. Meaning Extractor (spaCy‑powered)**
+## ✅ **2. Meaning Extractor (spaCy‑powered)**
 
 This module extracts:
 
@@ -537,7 +524,7 @@ This module extracts:
 Here’s the implementation:
 
 ```python
-# meaning_extractor.py
+## meaning_extractor.py
 
 import spacy
 nlp = spacy.load("en_core_web_sm")
@@ -609,7 +596,7 @@ This gives you a **semantic fingerprint** of the original message.
 
 ---
 
-# ✅ **3. Meaning Validator**
+## ✅ **3. Meaning Validator**
 
 This module checks whether the transformed text:
 
@@ -624,7 +611,7 @@ This module checks whether the transformed text:
 Here’s the implementation:
 
 ```python
-# meaning_validator.py
+## meaning_validator.py
 
 def validate_meaning(original_meaning: dict, transformed_meaning: dict) -> list:
     errors = []
@@ -658,13 +645,12 @@ def validate_meaning(original_meaning: dict, transformed_meaning: dict) -> list:
     return errors
 ```
 
-This validator returns a list of semantic violations.  
-If the list is empty → meaning preserved.  
-If not → the transformation must be rejected or re‑generated.
+This validator returns a list of semantic violations. If the list is empty → meaning preserved. If
+not → the transformation must be rejected or re‑generated.
 
 ---
 
-# ✅ **4. How this transforms DraftShift**
+## ✅ **4. How this transforms DraftShift**
 
 Once this module is in place:
 
@@ -699,12 +685,10 @@ This is the layer that stops DraftShift from producing garbage.
 
 ---
 
-# ✅ **5. What you can build next**
+## ✅ **5. What you can build next**
 Now that you have:
 
-✅ nuance extractor  
-✅ meaning extractor  
-✅ meaning validator  
+✅ nuance extractor ✅ meaning extractor ✅ meaning validator
 
 You’re ready for:
 
@@ -717,4 +701,5 @@ This is the final polish that removes:
 - contradictory statements  
 - template collisions  
 
-If you want, I can design that next — it’s the last major piece before DraftShift becomes the system you originally envisioned.
+If you want, I can design that next — it’s the last major piece before DraftShift becomes the system
+you originally envisioned.

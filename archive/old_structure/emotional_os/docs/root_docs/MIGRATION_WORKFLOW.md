@@ -1,14 +1,15 @@
 # Migration Workflow: Telemetry + Fragment Detection + Cleanup Pipeline
 
-This document outlines the complete workflow for using the new telemetry, fragment detection, and cleanup pipeline introduced in the `chore/cleanup-telemetry-fragments` branch.
+This document outlines the complete workflow for using the new telemetry, fragment detection, and
+cleanup pipeline introduced in the `chore/cleanup-telemetry-fragments` branch.
 
 ## 🎯 Overview
 
 The migration includes three main components:
 
-1. **Conservative Cleanup Pipeline** - Normalizes and enriches glyph data with fragment detection
-2. **Telemetry Instrumentation** - Observable events for debugging and monitoring
-3. **Safe Supabase Migration Tools** - Backup and batched upsert capabilities
+1. **Conservative Cleanup Pipeline** - Normalizes and enriches glyph data with fragment detection 2.
+**Telemetry Instrumentation** - Observable events for debugging and monitoring 3. **Safe Supabase
+Migration Tools** - Backup and batched upsert capabilities
 
 ## 📁 Key Files Added
 
@@ -165,7 +166,8 @@ signal_parser.set_telemetry(False)  # Disable for session
 
 ### UI Toggle
 
-The Streamlit app now includes a "Developer: Telemetry" expander with a checkbox to enable telemetry for the current session.
+The Streamlit app now includes a "Developer: Telemetry" expander with a checkbox to enable telemetry
+for the current session.
 
 ### Telemetry Output Format
 
@@ -290,10 +292,9 @@ sp.set_telemetry(True)
 
 ### Recommended Follow-ups
 
-1. **Monitor telemetry** in production to identify performance bottlenecks
-2. **Adjust fragment threshold** if 0.5 proves too conservative/aggressive
-3. **Expand cleanup heuristics** based on production data patterns
-4. **Automate migration** using CI/CD pipeline for future updates
+1. **Monitor telemetry** in production to identify performance bottlenecks 2. **Adjust fragment
+threshold** if 0.5 proves too conservative/aggressive 3. **Expand cleanup heuristics** based on
+production data patterns 4. **Automate migration** using CI/CD pipeline for future updates
 
 ### Integration Opportunities
 

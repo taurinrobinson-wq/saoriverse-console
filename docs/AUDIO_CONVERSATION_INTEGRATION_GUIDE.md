@@ -10,9 +10,9 @@ FirstPerson Pipeline 5. Usage Examples 6. Troubleshooting """
 
 # ============================================================================
 
-# 1. ARCHITECTURE OVERVIEW
+## 1. ARCHITECTURE OVERVIEW
 
-# ============================================================================
+## ============================================================================ (2)
 
 """ ┌─────────────────────────────────────────────────────────────────────────┐
 │                     AUDIO CONVERSATION PIPELINE                         │
@@ -41,11 +41,11 @@ chunked intelligently at sentence/phrase boundaries • Auto-silence Detection: 
 1.5s of quiet • Pause/Resume/Stop: user controls at any time • State Machine: UI always knows
 current conversation state """
 
-# ============================================================================
+## ============================================================================ (3)
 
-# 2. COMPONENTS & RESPONSIBILITIES
+## 2. COMPONENTS & RESPONSIBILITIES
 
-# ============================================================================
+## ============================================================================ (4)
 
 """ ┌─ AudioRecorder ──────────────────────────────────────────────────────────┐
 │ Captures user speech with automatic silence detection                    │
@@ -117,11 +117,11 @@ current conversation state """
 └─────────────────────────────────────────────────────────────────────────┘
 """
 
-# ============================================================================
+## ============================================================================ (5)
 
-# 3. DATA FLOW
+## 3. DATA FLOW
 
-# ============================================================================
+## ============================================================================ (6)
 
 """ TURN-BY-TURN DATA FLOW:
 
@@ -181,11 +181,11 @@ current conversation state """
     └─ Otherwise → Back to step 1 (USER SPEAKS)
 """
 
-# ============================================================================
+## ============================================================================ (7)
 
-# 4. INTEGRATION WITH FIRSTPERSON PIPELINE
+## 4. INTEGRATION WITH FIRSTPERSON PIPELINE
 
-# ============================================================================
+## ============================================================================ (8)
 
 """ Your response_processor function MUST follow this signature:
 
@@ -207,25 +207,25 @@ intensity "hesitation": False,      # No pauses }
 
 return response_text, glyph_intent
 
-# Then instantiate orchestrator
+## Then instantiate orchestrator
 
 orchestrator = AudioConversationOrchestrator( response_processor=your_response_processor,
 max_turns=50 )
 
-# Run conversation (from Streamlit or elsewhere)
+## Run conversation (from Streamlit or elsewhere)
 
 turns = asyncio.run(orchestrator.run_conversation_loop())
 
-# Access results
+## Access results
 
 for turn in turns: print(f"User: {turn.user_text}") print(f"System: {turn.system_response}")
 print(f"Time: {turn.processing_time:.2f}s") print(f"Audio Played: {turn.audio_played}") """
 
-# ============================================================================
+## ============================================================================ (9)
 
-# 5. USAGE EXAMPLES
+## 5. USAGE EXAMPLES
 
-# ============================================================================
+## ============================================================================ (10)
 
 """ EXAMPLE 1: Standalone Python Script ────────────────────────────────────
 
@@ -243,17 +243,17 @@ return response, glyph_intent
 
 orchestrator = AudioConversationOrchestrator(my_response_processor, max_turns=10)
 
-# Add state callback for logging
+## Add state callback for logging
 
 def on_state_change(state): print(f"[State] {state.value.upper()}")
 
 orchestrator.register_state_callback(on_state_change)
 
-# Run conversation
+## Run conversation
 
 turns = asyncio.run(orchestrator.run_conversation_loop())
 
-# Print transcript
+## Print transcript
 
 for i, turn in enumerate(turns, 1): print(f"\\n=== Turn {i} ===") print(f"You: {turn.user_text}")
 print(f"FirstPerson: {turn.system_response}") print(f"Processing: {turn.processing_time:.2f}s")
@@ -278,14 +278,14 @@ glyph_intent = { "voltage": "high" if len(response) > 200 else "medium", "tone":
 extract from sentiment analysis "certainty": "high", "energy": 0.7, "hesitation": False, } return
 response, glyph_intent
 
-# Initialize session state
+## Initialize session state
 
 if "orchestrator" not in st.session_state: st.session_state.orchestrator =
 AudioConversationOrchestrator( response_processor, max_turns=50 )
 
 orchestrator = st.session_state.orchestrator
 
-# UI Layout
+## UI Layout
 
 col1, col2, col3 = st.columns(3)
 
@@ -295,7 +295,7 @@ with col2: if st.button("⏸️ Pause"): orchestrator.pause()
 
 with col3: if st.button("⏹️ Stop"): orchestrator.stop()
 
-# State display
+## State display
 
 state_colors = { "idle": "🟢", "recording": "🔴", "transcribing": "🔵", "processing": "🟠", "speaking":
 "🟡", "paused": "⚪", "stopped": "⚫", }
@@ -303,12 +303,12 @@ state_colors = { "idle": "🟢", "recording": "🔴", "transcribing": "🔵", "p
 col_status = st.empty() col_status.write(f"{state_colors.get(orchestrator.state.value, '❓')} " +
 f"**State**: {orchestrator.state.value.upper()}")
 
-# Run conversation if active
+## Run conversation if active
 
 if st.session_state.get("conversation_running", False): with st.spinner("Listening..."): turns =
 asyncio.run(orchestrator.run_conversation_loop()) st.session_state.conversation_running = False
 
-# Display history
+## Display history
 
 if orchestrator.conversation_history: st.subheader("Conversation Transcript") for i, turn in
 enumerate(orchestrator.conversation_history, 1): with st.expander(f"Turn {i}:
@@ -320,7 +320,7 @@ enumerate(orchestrator.conversation_history, 1): with st.expander(f"Turn {i}:
 
 EXAMPLE 3: Pause/Resume During Conversation ──────────────────────────────────────────────
 
-# In a background thread or event handler
+## In a background thread or event handler
 
 import time
 
@@ -333,18 +333,18 @@ print("⏹️ Stopped")
 
 time.sleep(0.1)
 
-# Run in separate thread
+## Run in separate thread
 
 import threading monitor_thread = threading.Thread(target=monitor_user_input, daemon=True)
 monitor_thread.start()
 
 turns = asyncio.run(orchestrator.run_conversation_loop()) """
 
-# ============================================================================
+## ============================================================================ (11)
 
-# 6. TROUBLESHOOTING
+## 6. TROUBLESHOOTING
 
-# ============================================================================
+## ============================================================================ (12)
 
 """ ISSUE: "sounddevice unavailable: PortAudio library not found"
 ────────────────────────────────────────────────────────────── Cause: PortAudio development headers
@@ -377,8 +377,8 @@ response_processor not returning glyph_intent tuple Fix: • Ensure response_pro
 glyph_intent) not just text • Check ProsodyPlanner mapping matches your glyph schema • Verify
 pyttsx3 supports SSML (some platforms don't fully support it) """
 
-# ============================================================================
+## ============================================================================ (13)
 
-# END OF GUIDE
+## END OF GUIDE
 
-# ============================================================================
+## ============================================================================ (14)

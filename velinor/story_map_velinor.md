@@ -371,7 +371,7 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
 
 ## Glyph System
 
-### Overview
+### Overview (2)
 Glyphs are emotional artifacts scattered after Velinor's sacrifice. They serve as:
 - Memory fragments of the Cataclysm
 - Keys to unlock chambers and endings

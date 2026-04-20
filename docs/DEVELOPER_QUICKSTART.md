@@ -11,16 +11,16 @@
 
 ```bash
 
-# 1. Navigate to project
+## 1. Navigate to project
 cd /workspaces/saoriverse-console
 
-# 2. Install dependencies
+## 2. Install dependencies
 pip install -r config/requirements.txt
 
-# 3. Start the application
+## 3. Start the application
 python core/start.py
 
-# OR for Streamlit
+## OR for Streamlit
 ```text
 
 ```text
@@ -113,11 +113,11 @@ All essential Python files are in `core/`:
 ```python
 
 
-# Import from core/ directory
+## Import from core/ directory
 from core.main_response_engine import process_user_input from core.response_adapter import
 translate_emotional_response from core.tone_adapters import generate_archetypal_response
 
-# Or maintain backward compatibility with shims
+## Or maintain backward compatibility with shims
 from core.phase_modulator import detect_phase
 
 ```text
@@ -231,10 +231,10 @@ Deployment and setup scripts:
 ```bash
 
 
-# Deploy to production
+## Deploy to production
 scripts/deploy.sh
 
-# Run locally
+## Run locally
 
 ```text
 
@@ -358,10 +358,10 @@ Glyph testing:
 ```bash
 
 
-# Using start.py (Railway)
+## Using start.py (Railway)
 python core/start.py
 
-# Using Streamlit directly
+## Using Streamlit directly
 
 ```text
 ```text
@@ -403,16 +403,16 @@ python core/start.py
 
 
 
-# Response System
+## Response System
 from core.main_response_engine import process_user_input from core.response_adapter import
 translate_emotional_response from core.response_selector import select_first_turn_response from
 core.tone_adapters import generate_archetypal_response from core.symbolic_tagger import tag_input
 from core.relational_memory import RelationalMemoryCapsule
 
-# Application Entry Points
+## Application Entry Points
 from core.start import main as start_railway from core.main_v2 import run_app
 
-# Compatibility Shims (Legacy)
+## Compatibility Shims (Legacy)
 from core.phase_modulator import detect_phase
 
 ```text
@@ -423,30 +423,30 @@ from core.phase_modulator import detect_phase
 
 ```python
 
-# Utils
+## Utils
 from emotional_os.utils.svg_loader import load_svg
 from emotional_os.utils.css_injector import inject_css
 from emotional_os.utils.styling_utils import apply_theme
 
-# Session Management
+## Session Management
 from emotional_os.session.session_manager import SessionManager
 
-# UI Components
+## UI Components
 from emotional_os.ui.header_ui import render_header
 from emotional_os.ui.sidebar_ui import render_sidebar
 from emotional_os.ui.chat_display import render_chat
 
-# Response Processing
+## Response Processing
 from emotional_os.response.response_handler import handle_response
 from emotional_os.response.glyph_handler import handle_glyph
 
-# Features
+## Features
 from emotional_os.features.document_processor import process_document
 from emotional_os.features.learning_tracker import track_learning
 from emotional_os.features.journal_center import manage_journal
 from emotional_os.features.theme_manager import manage_theme
 
-# Glyphs
+## Glyphs
 ```text
 
 ```text
@@ -458,15 +458,15 @@ from emotional_os.features.theme_manager import manage_theme
 ```python
 
 
-# Analysis
+## Analysis
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
 from tools.analysis.evolving_glyph_integrator import EvolvingGlyphIntegrator
 
-# Document Processing
+## Document Processing
 from tools.document_processing.docx_reader import read_docx
 from tools.document_processing.docx_viewer import view_docx
 
-# Glyph Testing
+## Glyph Testing
 
 ```text
 

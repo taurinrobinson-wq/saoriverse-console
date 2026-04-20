@@ -47,56 +47,51 @@ cd ..
 ```bash
 cd draftshift-web
 npm run dev
-# Output: http://localhost:5173
+## Output: http://localhost:5173
 ```
 
 **Terminal 2 — FastAPI Backend:**
 ```bash
 cd draftshift-web
 python -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
-# Output: Uvicorn running on http://0.0.0.0:8000
+## Output: Uvicorn running on http://0.0.0.0:8000
 ```
 
-6. **Open Browser**
-Go to `http://localhost:5173` and start building pleadings!
+6. **Open Browser** Go to `http://localhost:5173` and start building pleadings!
 
 ---
 
 ## Option B: Replit Cloud Deployment (10 minutes)
 
-### Requirements
+### Requirements (2)
 
 - GitHub account (already have code committed)
 - Replit account (free: replit.com)
 - No credit card needed
 
-### Steps
+### Steps (2)
 
-1. **Visit Replit**
-Go to https://replit.com
+1. **Visit Replit** Go to https://replit.com
 
 2. **Create Project**
 - Click "Create" → "Import from GitHub"
 - Paste: `https://github.com/taurinrobinson-wq/saoriverse-console`
 - Click "Import"
 
-3. **Wait for Setup**
-Replit automatically:
+3. **Wait for Setup** Replit automatically:
 - Detects `.replit` configuration
 - Installs Python 3.11
 - Installs Node.js 20
 - Installs all dependencies
 
-4. **Build React Frontend**
-In Replit Shell (bottom panel):
+4. **Build React Frontend** In Replit Shell (bottom panel):
 ```bash
 cd draftshift-web
 npm run build
 ```
 Wait ~30 seconds for build to complete.
 
-5. **Start Application**
-Click "Run" button (top of editor)
+5. **Start Application** Click "Run" button (top of editor)
 
 You should see:
 ```
@@ -104,8 +99,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000
 INFO:     Application startup complete
 ```
 
-6. **Access Live URL**
-Replit shows a "Webview" panel with your live URL:
+6. **Access Live URL** Replit shows a "Webview" panel with your live URL:
 - **Format**: `https://[your-replit-name].replit.dev`
 - **Example**: `https://draftshift.replit.dev`
 
@@ -312,25 +306,16 @@ saoriverse-console/
 You now have a fully functional litigation document automation system!
 
 ### To test it:
-1. Load a fixture
-2. Build a pleading
-3. Download the DOCX
-4. Open in Word
-5. Verify formatting matches California pleading paper
+1. Load a fixture 2. Build a pleading 3. Download the DOCX 4. Open in Word 5. Verify formatting
+matches California pleading paper
 
 ### To deploy it:
-1. Push to GitHub (already done!)
-2. Create Replit project from GitHub
-3. Click "Run"
-4. Share the URL
+1. Push to GitHub (already done!) 2. Create Replit project from GitHub 3. Click "Run" 4. Share the
+URL
 
 ### To extend it:
-1. Add new pleading types
-2. Customize YAML configs
-3. Add form-based editor
-4. Implement user authentication
-5. Build case database
-6. Add e-filing integration
+1. Add new pleading types 2. Customize YAML configs 3. Add form-based editor 4. Implement user
+authentication 5. Build case database 6. Add e-filing integration
 
 ---
 

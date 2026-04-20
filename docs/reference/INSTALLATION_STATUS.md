@@ -141,10 +141,10 @@ User (100% LOCAL, 100% PRIVATE)
 ```bash
 
 
-# Run comprehensive test suite
+## Run comprehensive test suite
 cd /Users/taurinrobinson/saoriverse-console .venv/bin/python test_local_mode.py
 
-# Or quick test
+## Or quick test
 
 ```text
 ```text
@@ -230,19 +230,19 @@ This is the foundation of **SOVEREIGN emotional technology**.
 
 ```bash
 
-# Verify installation
+## Verify installation
 pip list | grep -E "spacy|nltk|scipy"
 
-# Test NRC Lexicon
+## Test NRC Lexicon
 python -c "from parser.nrc_lexicon_loader import nrc; print(f'Words: {len(nrc.word_emotions)}, Emotions: {len(nrc.emotion_words)}')"
 
-# Test spaCy
+## Test spaCy
 python -c "from parser.semantic_engine import semantic; print(semantic.extract_adjectives('I am sad and angry'))"
 
-# Full test
+## Full test
 python test_local_mode.py
 
-# Check privacy
+## Check privacy
 python -c "import os; print('OpenAI Key:', 'YES' if os.environ.get('OPENAI_API_KEY') else 'NO')"
 ```
 

@@ -196,23 +196,23 @@ saoriverse-console/
 
 
 
-# Finding code was hard
+## Finding code was hard
 find . -name "*response*" -type f | grep -v __pycache__
 
-# Returns multiple results in different places
+## Returns multiple results in different places
 
-# Running tests was unclear
+## Running tests was unclear
 pytest tests/ 2>&1  # Some tests don't run pytest test_*.py    # But these do?
 
-# Launching app required knowing which file
+## Launching app required knowing which file
 streamlit run main_v2.py          # This is a wrapper streamlit run main_v2_simple.py   # This is a
 bypass
 
-# Adding new features was confusing
+## Adding new features was confusing
 
-# Where do I put the new test?
+## Where do I put the new test?
 
-# How do I import what I just wrote?
+## How do I import what I just wrote?
 
 ```text
 ```
@@ -222,21 +222,21 @@ bypass
 
 ```bash
 
-# Finding code is instant
+## Finding code is instant
 find src/ -name "*.py" | sort
 
-# Shows exactly what exists, one file per concern
+## Shows exactly what exists, one file per concern
 
-# Running tests is simple
+## Running tests is simple
 pytest tests/                      # All tests
 pytest tests/unit/                 # Just unit tests
 pytest tests/integration/          # Just integration tests
 pytest tests/unit/test_voice*.py   # Just voice tests
 
-# Launching app is obvious
+## Launching app is obvious
 streamlit run app.py               # That's the only option
 
-# Adding new features is clear
+## Adding new features is clear
 1. Add code to src/your_module.py
 2. Add tests to tests/unit/test_your_module.py
 3. Run pytest tests/unit/test_your_module.py
@@ -285,13 +285,13 @@ Follow the phases in order:
 
 
 
-# Test imports
+## Test imports
 python tools/import_checker.py
 
-# Run all tests
+## Run all tests
 pytest tests/ -v
 
-# Launch Streamlit
+## Launch Streamlit
 
 ```text
 ```
@@ -384,35 +384,35 @@ After you're done, run this verification:
 ```bash
 
 
-# 1. Imports work
+## 1. Imports work
 python tools/import_checker.py
 
-# Should output: ✅ All imports successful!
+## Should output: ✅ All imports successful!
 
-# 2. Tests discover
+## 2. Tests discover
 pytest tests/ --collect-only
 
-# Should show 30+ tests collected
+## Should show 30+ tests collected
 
-# 3. Tests pass
+## 3. Tests pass
 pytest tests/unit/ -v
 
-# Should show: PASSED [100%]
+## Should show: PASSED [100%]
 
-# 4. Streamlit launches
+## 4. Streamlit launches
 streamlit run app.py
 
-# Should open browser to http://localhost:8501
+## Should open browser to http://localhost:8501
 
-# 5. No root clutter
+## 5. No root clutter
 ls -la | grep -E "\.py$" | wc -l
 
-# Should show only 1-2 .py files (app.py)
+## Should show only 1-2 .py files (app.py)
 
-# 6. Voice available
+## 6. Voice available
 python -c "from src import VoiceInterface; print('✅ Voice ready')"
 
-# Should print: ✅ Voice ready
+## Should print: ✅ Voice ready
 
 ```
 

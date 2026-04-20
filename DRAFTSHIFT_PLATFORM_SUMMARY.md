@@ -13,9 +13,8 @@
 
 The platform consists of three integrated components:
 
-1. **DraftShift Engine** — Python library for document generation
-2. **Web API** — FastAPI backend exposing document generation
-3. **Web UI** — React interface for non-technical users
+1. **DraftShift Engine** — Python library for document generation 2. **Web API** — FastAPI backend
+exposing document generation 3. **Web UI** — React interface for non-technical users
 
 **Total Code**: 77 files, ~12,000 lines  
 **Commits**: 3 (foundation, roadmap, web UI)  
@@ -207,16 +206,16 @@ draftshift-web/
 #### Development
 
 ```bash
-# Install dependencies
+## Install dependencies
 npm install
 
-# Start dev server (port 5173, proxy to localhost:8000)
+## Start dev server (port 5173, proxy to localhost:8000)
 npm run dev
 
-# Build for production
+## Build for production
 npm run build
 
-# Preview production build
+## Preview production build
 npm run preview
 ```
 
@@ -338,18 +337,17 @@ Terminal 1:
 ```bash
 cd draftshift-web
 npm run dev
-# Runs on http://localhost:5173
+## Runs on http://localhost:5173
 ```
 
 Terminal 2:
 ```bash
 cd draftshift-web
 python -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
-# Runs on http://localhost:8000
+## Runs on http://localhost:8000
 ```
 
-5. **Access UI**
-Open http://localhost:5173 in browser
+5. **Access UI** Open http://localhost:5173 in browser
 
 ### Production Deployment
 
@@ -603,7 +601,7 @@ git push origin main
 - ✅ **Error Messages**: Clear and actionable
 - ✅ **Mobile Support**: Responsive on all devices
 
-### Performance
+### Performance (2)
 
 - ✅ **Build Time**: < 1 minute including API request
 - ✅ **Document Quality**: Production-ready DOCX
@@ -616,31 +614,22 @@ git push origin main
 
 ### Immediate (Week 1)
 
-1. Deploy to Replit
-2. Test end-to-end workflow
-3. Share URL with test users
-4. Gather feedback
+1. Deploy to Replit 2. Test end-to-end workflow 3. Share URL with test users 4. Gather feedback
 
 ### Short-term (Weeks 2-4)
 
-5. Implement Phase 2 (local rules library)
-6. Add form-based JSON editor (replace textarea)
-7. Implement error logging
-8. Add usage analytics
+5. Implement Phase 2 (local rules library) 6. Add form-based JSON editor (replace textarea) 7.
+Implement error logging 8. Add usage analytics
 
 ### Medium-term (Months 2-3)
 
-9. Implement Phase 3 (case database)
-10. Add user authentication
-11. Implement version history
-12. Beta launch with law firms
+9. Implement Phase 3 (case database) 10. Add user authentication 11. Implement version history 12.
+Beta launch with law firms
 
 ### Long-term (Months 4-6)
 
-13. Phase 4 (collaboration features)
-14. Phase 5 (advanced features)
-15. Phase 6 (enterprise deployment)
-16. General availability launch
+13. Phase 4 (collaboration features) 14. Phase 5 (advanced features) 15. Phase 6 (enterprise
+deployment) 16. General availability launch
 
 ---
 
@@ -675,10 +664,8 @@ git push origin main
 
 For issues, feature requests, or questions:
 
-1. Check documentation files
-2. Review example fixtures in `draftshift/tests/fixtures/`
-3. Run tests locally: `pytest draftshift/tests/test_pleadings.py`
-4. Check API logs for detailed error messages
+1. Check documentation files 2. Review example fixtures in `draftshift/tests/fixtures/` 3. Run tests
+locally: `pytest draftshift/tests/test_pleadings.py` 4. Check API logs for detailed error messages
 
 ---
 
@@ -689,7 +676,7 @@ For issues, feature requests, or questions:
 
 ---
 
-# DraftShift Platform is Live! 🎉
+## DraftShift Platform is Live! 🎉
 
 Welcome to the future of litigation document automation.
 

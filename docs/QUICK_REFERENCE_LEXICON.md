@@ -83,11 +83,11 @@ from emotional_os.lexicon.lexicon_loader import get_lexicon
 
 lexicon = get_lexicon()
 
-# Query operations
+## Query operations
 signals = lexicon.get_signals('hold') gates = lexicon.get_gates('sacred') freq =
 lexicon.get_frequency('exactly')
 
-# Analyze text
+## Analyze text
 analysis = lexicon.analyze_emotional_content(user_input) print(analysis['emotional_words'])       #
 List of words found print(analysis['primary_signals'])       # Most active signals
 print(analysis['gate_activations'])      # Gates activated
@@ -215,12 +215,12 @@ print(f"Gates: {[g[0] for g in analysis['gate_activations']]}")
 
 ```python
 
-# Check if file exists
+## Check if file exists
 from pathlib import Path
 lexicon_path = Path("emotional_os/lexicon/word_centric_emotional_lexicon.json")
 assert lexicon_path.exists(), "Lexicon file missing!"
 
-# Try loading manually
+## Try loading manually
 from emotional_os.lexicon.lexicon_loader import load_lexicon
 ```text
 
@@ -233,7 +233,7 @@ from emotional_os.lexicon.lexicon_loader import load_lexicon
 ```python
 
 
-# Check if word is in lexicon
+## Check if word is in lexicon
 word = 'hold'
 if word not in lexicon.lexicon:
     print(f"{word} not in lexicon")
@@ -248,7 +248,7 @@ if word not in lexicon.lexicon:
 ```python
 
 
-# Debug: Check what signals are mapped
+## Debug: Check what signals are mapped
 text = "I hold this sacred" analysis = lexicon.analyze_emotional_content(text)
 
 print("Found words:", [w['word'] for w in analysis['emotional_words']]) print("Signals:",

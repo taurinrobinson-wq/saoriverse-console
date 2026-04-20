@@ -137,16 +137,16 @@ Run validation scripts:
 
 
 
-# Direct method test
+## Direct method test
 python test_craft_glyph_response.py
 
-# Full pipeline test
+## Full pipeline test
 python validate_full_pipeline.py
 
-# End-to-end system test
+## End-to-end system test
 python test_end_to_end.py
 
-# Comprehensive validation
+## Comprehensive validation
 python FINAL_VALIDATION.py
 
 ```

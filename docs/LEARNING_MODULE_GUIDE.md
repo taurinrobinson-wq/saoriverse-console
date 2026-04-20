@@ -130,12 +130,12 @@ System records whether user found response helpful, updates archetype success we
 from emotional_os.learning import ( get_archetype_library, get_archetype_response_generator,
 get_conversation_learner, )
 
-# Generate a response using learned archetypes
+## Generate a response using learned archetypes
 generator = get_archetype_response_generator() response =
 generator.generate_archetype_aware_response( user_input="I feel grateful but also overwhelmed",
 prior_context="Yesterday I was so stressed", glyph=None,  # Optional glyph for tonal calibration )
 
-# Learn from a conversation
+## Learn from a conversation
 learner = get_conversation_learner() new_archetype = learner.learn_from_conversation( turns=[
 {"role": "user", "content": "..."}, {"role": "assistant", "content": "..."},
         # ... more turns
@@ -150,17 +150,17 @@ learner = get_conversation_learner() new_archetype = learner.learn_from_conversa
 ```python
 library = get_archetype_library()
 
-# Get all archetypes
+## Get all archetypes
 archetypes = library.archetypes
 
-# Find best match for input
+## Find best match for input
 best_match = library.get_best_match(
     user_input="I'm feeling better but still sad",
     prior_context="I lost someone important",
     threshold=0.3  # Minimum match score
 )
 
-# Record success for learning
+## Record success for learning
 ```text
 
 ```text
@@ -207,10 +207,10 @@ weights
 ```bash
 
 
-# Run the test suite
+## Run the test suite
 python test_learning_module.py
 
-# Check the archetype library
+## Check the archetype library
 cat emotional_os/learning/archetype_library.json | python -m json.tool
 
 ```

@@ -2,14 +2,14 @@
 
 ## Overview
 
-You have successfully designed and partially implemented a complete privacy layer for FirstPerson that enables:
+You have successfully designed and partially implemented a complete privacy layer for FirstPerson
+that enables:
 
-✅ **Personalization** - "Welcome back, Taurin!" (encrypted name storage)
-✅ **Conversation History** - Store encrypted conversations with user-configurable retention
-✅ **Long-term Memory** - Daily dream summaries capture patterns without heavy data loads
-✅ **User Control** - Retention settings, data export, GDPR deletion
-✅ **Compliance** - GDPR, CCPA, HIPAA, state wiretapping laws
-✅ **Security** - AES-256 encryption with Fernet, password-derived keys
+✅ **Personalization** - "Welcome back, Taurin!" (encrypted name storage) ✅ **Conversation History**
+- Store encrypted conversations with user-configurable retention ✅ **Long-term Memory** - Daily
+dream summaries capture patterns without heavy data loads ✅ **User Control** - Retention settings,
+data export, GDPR deletion ✅ **Compliance** - GDPR, CCPA, HIPAA, state wiretapping laws ✅
+**Security** - AES-256 encryption with Fernet, password-derived keys
 
 ## Architecture
 
@@ -168,10 +168,9 @@ summary = DreamEngine.create_daily_summary(
 
 ### Immediately Available
 
-1. **AES-256 Encryption** - Full implementation, just needs `cryptography` library
-2. **Dream Engine** - Complete pattern extraction logic
-3. **Database Schema** - Ready to create tables
-4. **Integration Guide** - Complete examples for each component
+1. **AES-256 Encryption** - Full implementation, just needs `cryptography` library 2. **Dream
+Engine** - Complete pattern extraction logic 3. **Database Schema** - Ready to create tables 4.
+**Integration Guide** - Complete examples for each component
 
 ### Next: Install Dependencies
 
@@ -293,12 +292,11 @@ Result: Privacy + Personalization + Memory
 
 ### Key Properties
 
-1. **One-way user hashing** - User ID hashed for DB queries, not reversible
-2. **Password-derived encryption** - Each user has unique key, only derivable with password
-3. **Fernet encryption** - AES-256 with HMAC authentication
-4. **In-memory only** - Keys never written to disk
-5. **Per-user encryption** - No master key, no bulk decryption possible
-6. **Deterministic KDF** - Same password always produces same key (enables consistent encryption)
+1. **One-way user hashing** - User ID hashed for DB queries, not reversible 2. **Password-derived
+encryption** - Each user has unique key, only derivable with password 3. **Fernet encryption** -
+AES-256 with HMAC authentication 4. **In-memory only** - Keys never written to disk 5. **Per-user
+encryption** - No master key, no bulk decryption possible 6. **Deterministic KDF** - Same password
+always produces same key (enables consistent encryption)
 
 ### Attack Scenarios Defended Against
 
@@ -316,26 +314,22 @@ Result: Privacy + Personalization + Memory
 
 ### User Signs Up
 
-1. User provides: email, password, name
-2. `EncryptionManager.derive_key_from_password(email, password)` → unique key
-3. User profile encrypted: `{"name": "Taurin", "email": "..."}` → AES-256 blob
-4. User retention preference saved: `retention_days: 30` (default)
-5. User ID hashed for DB queries (one-way hash)
+1. User provides: email, password, name 2. `EncryptionManager.derive_key_from_password(email,
+password)` → unique key 3. User profile encrypted: `{"name": "Taurin", "email": "..."}` → AES-256
+blob 4. User retention preference saved: `retention_days: 30` (default) 5. User ID hashed for DB
+queries (one-way hash)
 
 ### User Logs In
 
-1. User enters: email, password
-2. `EncryptionManager.derive_key_from_password(email, password)` → same unique key
-3. User profile decrypted: blob → `{"name": "Taurin", ...}`
-4. Recent conversations loaded (encrypted blobs)
-5. Dream summaries loaded (patterns, no decryption needed)
-6. System greets: "Welcome back, Taurin! I remember you were working through anxiety about work..."
+1. User enters: email, password 2. `EncryptionManager.derive_key_from_password(email, password)` →
+same unique key 3. User profile decrypted: blob → `{"name": "Taurin", ...}` 4. Recent conversations
+loaded (encrypted blobs) 5. Dream summaries loaded (patterns, no decryption needed) 6. System
+greets: "Welcome back, Taurin! I remember you were working through anxiety about work..."
 
 ### User Has a Conversation
 
-1. User types: "I'm anxious about my presentation"
-2. System processes: Signal extraction, glyph selection, response
-3. Conversation stored:
+1. User types: "I'm anxious about my presentation" 2. System processes: Signal extraction, glyph
+selection, response 3. Conversation stored:
    - Create structure: `{messages, signals, glyphs, ...}`
    - Encrypt with user's key
    - Store to DB with expiration: `expires_at = now + 30 days`
@@ -343,42 +337,34 @@ Result: Privacy + Personalization + Memory
 
 ### End of Day
 
-1. All conversations from today retrieved from daily batch
-2. Dream Engine extracts:
+1. All conversations from today retrieved from daily batch 2. Dream Engine extracts:
    - Emotions: anxiety (60%), hope (40%)
    - Themes: work, relationships
    - Concerns: perfectionism, boundary issues
    - Effective glyphs: GROUNDING (85%), PERSPECTIVE (72%)
-3. Summary encrypted and stored: `expires_at = now + 90 days`
-4. Daily batch cleared
-5. Cleanup job runs: removes conversations older than expiration
+3. Summary encrypted and stored: `expires_at = now + 90 days` 4. Daily batch cleared 5. Cleanup job
+runs: removes conversations older than expiration
 
 ### User Changes Retention to 7 Days
 
-1. User updates preference: `retention_days: 7`
-2. All NEW conversations now expire after 7 days
-3. Old conversations keep their original expiration
-4. After 7 days: all conversations automatically deleted
-5. Dream summaries still kept (90 days, used for long-term pattern reference)
+1. User updates preference: `retention_days: 7` 2. All NEW conversations now expire after 7 days 3.
+Old conversations keep their original expiration 4. After 7 days: all conversations automatically
+deleted 5. Dream summaries still kept (90 days, used for long-term pattern reference)
 
 ### User Requests Data Export
 
-1. User calls: `/api/user/data-export`
-2. System retrieves:
+1. User calls: `/api/user/data-export` 2. System retrieves:
    - All encrypted conversations
    - All encrypted dream summaries
    - User profile
-3. Package as ZIP or JSON with metadata
-4. User downloads (encrypted)
-5. User can decrypt offline with their password (they have the key!)
+3. Package as ZIP or JSON with metadata 4. User downloads (encrypted) 5. User can decrypt offline
+with their password (they have the key!)
 
 ### User Requests Deletion (GDPR)
 
-1. User calls: `/api/user/data-delete`
-2. System sets: `deleted_at = now`
-3. System marks user retention preference: `deleted_at`
-4. User can still login for 30 days (grace period)
-5. After 30 days: automatic permanent deletion
+1. User calls: `/api/user/data-delete` 2. System sets: `deleted_at = now` 3. System marks user
+retention preference: `deleted_at` 4. User can still login for 30 days (grace period) 5. After 30
+days: automatic permanent deletion
    - All conversations_encrypted deleted
    - All dream_summaries deleted
    - User profile deleted

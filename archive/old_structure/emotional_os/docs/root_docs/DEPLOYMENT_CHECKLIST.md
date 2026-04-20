@@ -8,10 +8,8 @@ Preflight (local/staging):
 
 2. Verify user_id format
    - Run the pre-check SQL from `sql/conversations_migrate_to_uuid_20251108.sql` in staging and ensure it returns zero rows:
-     SELECT user_id
-     FROM public.conversations
-     WHERE user_id IS NOT NULL
-       AND NOT (user_id ~* '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+SELECT user_id FROM public.conversations WHERE user_id IS NOT NULL AND NOT (user_id ~*
+'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
 
 3. Run migration in staging
    - Execute `sql/conversations_migrate_to_uuid_20251108.sql` in Supabase SQL editor.
@@ -56,4 +54,5 @@ Notes & reminders
 - Run the migration in a staging environment first and test thoroughly.
 - Keep the backup table for a retention period (e.g., 7 days) until confident.
 
-Contact me if you want me to create a one-click Supabase Assistant message that runs the migration and returns verification output.
+Contact me if you want me to create a one-click Supabase Assistant message that runs the migration
+and returns verification output.

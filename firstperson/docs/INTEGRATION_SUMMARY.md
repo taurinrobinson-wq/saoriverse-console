@@ -2,7 +2,8 @@
 
 ## ✅ REAL ARCHITECTURE (What Actually Exists)
 
-You have a **complete, integrated 7-layer system** with both a Streamlit interface AND a Next.js web interface:
+You have a **complete, integrated 7-layer system** with both a Streamlit interface AND a Next.js web
+interface:
 
 ### Layer 1-5: Game Engine ✅ COMPLETE
 - **Phase 1**: Trait system (8 traits, coherence tracking)
@@ -28,7 +29,7 @@ You have a **complete, integrated 7-layer system** with both a Streamlit interfa
   - Pages: Title screen, game scenes, boss test
   - Components: GameScene, TitleScreen, KaeleScene, ToneStatsDisplay
   - State management: Zustand (gameStore.ts)
-  
+
 - **TypeScript API Client**: `velinor-web/src/lib/api.ts` (NEW)
   - GameApiClient class with full endpoint coverage
   - Type-safe interfaces for all game data
@@ -36,8 +37,8 @@ You have a **complete, integrated 7-layer system** with both a Streamlit interfa
   - Methods: startGame(), takeAction(), saveGame(), loadGame(), getStatus(), etc.
 
 ### Entry Points
-1. **Streamlit UI**: `streamlit run app.py` (existing interface)
-2. **Next.js Web UI**: `npm run dev` in velinor-web/ (new integrated frontend)
+1. **Streamlit UI**: `streamlit run app.py` (existing interface) 2. **Next.js Web UI**: `npm run
+dev` in velinor-web/ (new integrated frontend)
 
 ---
 
@@ -85,7 +86,7 @@ Response back to frontend
 ### Start the API Backend
 ```bash
 python velinor_api.py
-# or
+## or
 uvicorn velinor_api:app --reload --port 8000
 ```
 
@@ -94,7 +95,7 @@ uvicorn velinor_api:app --reload --port 8000
 cd velinor-web
 npm install
 npm run dev
-# Available at http://localhost:3000
+## Available at http://localhost:3000
 ```
 
 ### Or use Streamlit (existing)
@@ -140,11 +141,10 @@ pytest -v
 
 ## 🎯 Now You Have
 
-✅ **Phases 1-5**: Complete game engine (121+ tests)
-✅ **Phase 6**: REST API backend (velinor_api.py - already existed)
-✅ **Phase 7**: TypeScript web client integration (just added)
-✅ **Frontend**: Next.js app ready to connect (velinor-web)
-✅ **Alt Frontend**: Streamlit app (app.py - already existed)
+✅ **Phases 1-5**: Complete game engine (121+ tests) ✅ **Phase 6**: REST API backend (velinor_api.py
+- already existed) ✅ **Phase 7**: TypeScript web client integration (just added) ✅ **Frontend**:
+Next.js app ready to connect (velinor-web) ✅ **Alt Frontend**: Streamlit app (app.py - already
+existed)
 
 **Total**: 7 complete, integrated phases with 148+ tests, 6000+ lines of code
 
@@ -170,4 +170,3 @@ This is **not a mock or test system** - it's a fully integrated production archi
 - Real error handling and validation
 
 Everything is wired together and ready to deploy.
-

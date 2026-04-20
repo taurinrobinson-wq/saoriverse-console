@@ -161,20 +161,20 @@ Done. No branching tree explosion.
 
 ```python
 
-# 1. Player enters scene with Sera
+## 1. Player enters scene with Sera
 encounter = generate_encounter("Sera", manager.get_npc("Sera").remnants, 1)
 
-# 2. Display dialogue
+## 2. Display dialogue
 print(encounter['dialogue'])
 
-# 3. Show choices
+## 3. Show choices
 for i, choice in enumerate(encounter['choices']):
     print(f"{i+1}. {choice['text']}")
 
-# 4. Player picks choice 0 (empathy)
+## 4. Player picks choice 0 (empathy)
 manager.apply_tone_effects({"empathy": 0.15})
 
-# 5. Next encounter has updated dialogue
+## 5. Next encounter has updated dialogue
 new_encounter = generate_encounter("Sera", manager.get_npc("Sera").remnants, 2)
 ```
 

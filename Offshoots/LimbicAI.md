@@ -1,13 +1,16 @@
 You’re thinking like a systems designer *and* a neuroscientist here—perfect combo for this.
 
-Let me give you something Codespaces can actually start from: a **first‑pass spec** for a limbic‑visualizer prototype that’s grounded in real affective neuroscience, but simple enough to implement.
+Let me give you something Codespaces can actually start from: a **first‑pass spec** for a
+limbic‑visualizer prototype that’s grounded in real affective neuroscience, but simple enough to
+implement.
 
 ---
 
 ### 1. Core concept
 
 **Goal:**  
-User types a scenario → system parses it → maps likely emotional states → lights up a simplified “limbic map” + explains what’s going on.
+User types a scenario → system parses it → maps likely emotional states → lights up a simplified
+“limbic map” + explains what’s going on.
 
 **Important:**  
 This is *modeling*, not “AI feelings.” It’s a teaching/translation tool.
@@ -80,10 +83,8 @@ For v1, think **simple 2D schematic**:
 
 User flow:
 
-1. User types scenario.  
-2. Press “Simulate.”  
-3. Visualization updates: nodes light up according to activation.  
-4. Side panel explains in plain language.
+1. User types scenario. 2. Press “Simulate.” 3. Visualization updates: nodes light up according to
+activation. 4. Side panel explains in plain language.
 
 Example explanation for your breakup scenario:
 
@@ -138,7 +139,7 @@ function mapFeaturesToLimbic(features: EmotionalFeatures): LimbicState {
 }
 ```
 
-For v1, **you** (or an LLM prompt) can hand‑label EmotionalFeatures from the text; later, that can be automated.
+For v1, **you** (or an LLM prompt) can hand‑label EmotionalFeatures from the text; later, that can
+be automated.
 
 ---
-

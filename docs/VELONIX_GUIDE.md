@@ -74,12 +74,12 @@ from emotional_os.glyphs.velonix_reaction_engine import get_velonix_engine
 
 engine = get_velonix_engine()
 
-# Execute a reaction
+## Execute a reaction
 reaction = engine.react(["Lg", "Gf"])
 
-# Result: Tenderness
+## Result: Tenderness
 
-# With catalyst
+## With catalyst
 reaction = engine.react(["Rg", "Fg"], catalyst="Rv")
 
 ```text
@@ -100,10 +100,10 @@ engine = get_velonix_engine()
 visualizer = VelonixVisualizer(engine)
 archive = EmotionalArchive()
 
-# Execute reaction
+## Execute reaction
 reaction = engine.react(["Lg", "Gf"])
 
-# Generate visualization
+## Generate visualization
 inputs = [engine.get_element("Lg"), engine.get_element("Gf")]
 result = reaction['result_element']
 svg = visualizer.generate_reaction_visualization(
@@ -111,11 +111,11 @@ svg = visualizer.generate_reaction_visualization(
     result=result
 )
 
-# Generate ritual prompt
+## Generate ritual prompt
 ritual = RitualPromptSystem.generate_ritual_prompt(result)
 print(f"Engage with: {ritual['prompt']}")
 
-# Archive for legacy
+## Archive for legacy
 archive.log_reaction(
     reaction_result=reaction,
     ritual_prompt=ritual,
@@ -131,7 +131,7 @@ archive.log_reaction(
 ```python
 
 
-# What reactions are possible from current state?
+## What reactions are possible from current state?
 current_elements = ["Lg", "Gf", "St"]
 possible = engine.find_possible_reactions(current_elements)
 
@@ -147,7 +147,7 @@ for p in possible:
 
 from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 
-# In your Streamlit app
+## In your Streamlit app
 
 ```text
 ```text
@@ -263,7 +263,7 @@ All reactions are automatically logged to create a "legacy capsule" of emotional
 
 ```python
 
-# Export archive
+## Export archive
 archive_json = archive.export_as_json()
 ```text
 

@@ -186,10 +186,10 @@ cd /workspaces/saoriverse-console/firstperson
 ```bash
 
 
-# Start Expo dev server
+## Start Expo dev server
 npm start
 
-# Scan QR with Expo Go app, or:
+## Scan QR with Expo Go app, or:
 npm run ios      # iOS simulator
 
 ```text
@@ -203,7 +203,7 @@ npm run ios      # iOS simulator
 
 
 
-# Update backend URL in src/config.js or set env:
+## Update backend URL in src/config.js or set env:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 
 ```text
@@ -214,16 +214,16 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 
 ```bash
 
-# Test backend connectivity
+## Test backend connectivity
 curl http://localhost:8000/health
 
-# Verify local storage
+## Verify local storage
 
-# (Check app settings > conversations)
+## (Check app settings > conversations)
 
-# Test offline mode
+## Test offline mode
 
-# (Airplane mode → send message → see queue → turn on)
+## (Airplane mode → send message → see queue → turn on)
 ```
 
 

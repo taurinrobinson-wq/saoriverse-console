@@ -1,6 +1,7 @@
 # Privacy Layer Integration Guide
 
-This document explains how to integrate the encryption + retention + dream engine system into the FirstPerson sanctuary app.
+This document explains how to integrate the encryption + retention + dream engine system into the
+FirstPerson sanctuary app.
 
 ## Architecture Overview
 

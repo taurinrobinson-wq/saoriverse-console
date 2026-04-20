@@ -74,7 +74,7 @@ User Output
 
 ```python
 
-# Before generating response, analyze for rejections
+## Before generating response, analyze for rejections
 repair_analysis = repair_orchestrator.analyze_for_repair(user_input)
 
 if repair_analysis.is_rejection and repair_analysis.suggested_alternative:
@@ -90,7 +90,7 @@ elif not repair_analysis.is_rejection:
 
 ```python
 
-# Pass suggested glyph to composer if available
+## Pass suggested glyph to composer if available
 brief_response, used_glyph = compose_glyph_aware_response(
     user_input,
     affect_analysis=affect_analysis,
@@ -104,7 +104,7 @@ brief_response, used_glyph = compose_glyph_aware_response(
 
 ```python
 
-# Record the response and emotional state for next turn
+## Record the response and emotional state for next turn
 if repair_orchestrator and used_glyph:
     context_record = GlyphCompositionContext(
         tone=tone or "neutral",
