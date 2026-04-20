@@ -3,15 +3,9 @@
   "MD013": {
     "line_length": 100,
     "code_blocks": false,
-    "code_fence_length": 100,
-    "heading_length": 100,
-    "headers": 100,
     "tables": false,
     "url_length": false,
-    "stern": false,
-    "headers_only": false
+    "stern": false
   },
-  "MD033": {
-    "allowed_html": ["br"]
-  }
+  "MD033": true
 }

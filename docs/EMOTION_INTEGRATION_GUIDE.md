@@ -67,7 +67,7 @@ ChatInterface } from "@/components/ChatInterface"; import { useSession } from "@
 
 export default function ChatPage() { const { user } = useSession();
 
-if (!user) { return <div>Please log in</div>; }
+if (!user) { return Please log in; }
 
 return ( <div className="flex h-screen gap-4 p-4 bg-gray-900"> {/* Main chat area */} <div
 className="flex-1 flex flex-col bg-white rounded-lg"> <ChatInterface userId={user.id} /> </div>
@@ -314,7 +314,7 @@ export function EmotionHistory({ userId }: { userId: string }) {
       });
   }, [userId]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return Loading...;
 
   return (
     <div className="p-4">

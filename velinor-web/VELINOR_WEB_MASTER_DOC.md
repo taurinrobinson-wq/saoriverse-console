@@ -904,7 +904,7 @@ useEffect(() => {
    
    export default function MyPage() {
      const { sessionId } = useGameStore()
-     return <div>Session: {sessionId}</div>
+     return Session: {sessionId}
    }
    ```
 
