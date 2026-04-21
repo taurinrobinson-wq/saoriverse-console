@@ -26,8 +26,9 @@ import base64
 try:
     from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
     HAS_AGGRID = True
-except ImportError:
+except ImportError as e:
     HAS_AGGRID = False
+    print(f"❌ AgGrid import failed: {e}")
 
 # Import utilities
 from utils import (
