@@ -238,51 +238,38 @@ if view_mode == "Central View":
     if table_data:
         table_df = pd.DataFrame(table_data)
         
-        st.markdown("### 📖 Glyph Registry — Click glyph name to open Story Builder")
+        st.markdown("### 📖 Glyph Registry — Click any glyph name to open Story Builder")
         
-        # Import html escape for safe rendering
-        import html as html_module
+        # Create header row with column widths
+        col_widths = [2, 1.5, 1, 2, 2]
+        header_cols = st.columns(col_widths)
+        header_cols[0].write("**✍️ Glyph**")
+        header_cols[1].write("**NPC Giver**")
+        header_cols[2].write("**Category**")
+        header_cols[3].write("**Theme**")
+        header_cols[4].write("**Location**")
         
-        # Build HTML table with styled clickable glyph names
-        html_table = """
-<style>
-.glyph-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-.glyph-table th { background-color: #f0f2f6; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #ddd; }
-.glyph-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
-.glyph-table tr:hover { background-color: #f9f9f9; }
-.glyph-name { color: #1f77b4; font-weight: 500; cursor: pointer; }
-.glyph-name:hover { text-decoration: underline; }
-</style>
-<table class="glyph-table">
-<thead><tr><th>✍️ Glyph</th><th>NPC Giver</th><th>Category</th><th>Theme</th><th>Location</th></tr></thead>
-<tbody>
-"""
+        st.divider()
         
-        for idx, (_, row) in enumerate(table_df.iterrows()):
-            glyph_escaped = html_module.escape(str(row['Glyph']))
-            npc_escaped = html_module.escape(str(row['NPC Giver']))
-            cat_escaped = html_module.escape(str(row['Category']))
-            theme_escaped = html_module.escape(str(row['Theme']))
-            loc_escaped = html_module.escape(str(row['Location']))
+        # Create data rows - each glyph name is a clickable button
+        for _, row in table_df.iterrows():
+            cols = st.columns(col_widths)
             
-            html_table += f"<tr><td><span class='glyph-name'>{glyph_escaped}</span></td><td>{npc_escaped}</td><td>{cat_escaped}</td><td>{theme_escaped}</td><td>{loc_escaped}</td></tr>\n"
-        
-        html_table += "</tbody></table>"
-        
-        st.markdown(html_table, unsafe_allow_html=True)
-        
-        # Buttons for each glyph (hidden but functional)
-        # Use columns to create a 4-column layout that's less visually intrusive
-        st.markdown("**Select a glyph above or use quick actions below:**")
-        cols = st.columns(4)
-        for idx, (_, row) in enumerate(filtered_core.iterrows()):
-            glyph_row = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
-            col_idx = idx % 4
+            # First column: clickable glyph name button
+            if cols[0].button(
+                row['Glyph'], 
+                key=f"glyph_{hash(row['Glyph']) % 1000000}",
+                use_container_width=True
+            ):
+                glyph_full = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
+                st.session_state.selected_story_glyph = glyph_full
+                st.rerun()
             
-            with cols[col_idx]:
-                if st.button(f"✍️ {row['Glyph']}", key=f"open_story_{idx}"):
-                    st.session_state.selected_story_glyph = glyph_row
-                    st.rerun()
+            # Other columns: static text display
+            cols[1].write(row['NPC Giver'])
+            cols[2].write(row['Category'])
+            cols[3].write(row['Theme'])
+            cols[4].write(row['Location'])
     
     # =====================================================================
     # Story Builder Modal (appears when a glyph is selected)
