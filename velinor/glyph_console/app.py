@@ -386,6 +386,72 @@ if view_mode == "Central View":
                 )
                 choices_list.append(choice)
 
+            # =====================================================================
+            # Relational Story Fields
+            # =====================================================================
+            st.subheader("Relational Story Context")
+            st.markdown("*Optional: Add deeper narrative context and relationships*")
+
+            col_rel1, col_rel2 = st.columns(2)
+            
+            with col_rel1:
+                location_context = st.text_area(
+                    "Location Context",
+                    placeholder="How does this location shape the encounter?",
+                    height=80,
+                    key="rel_location"
+                )
+                
+                npc_significance = st.text_area(
+                    "NPC Significance",
+                    placeholder="What is this NPC's deeper role in the world?",
+                    height=80,
+                    key="rel_npc_sig"
+                )
+                
+                historical_context = st.text_area(
+                    "Historical Context",
+                    placeholder="What pre-collapse or post-collapse events led to this?",
+                    height=80,
+                    key="rel_history"
+                )
+                
+                collapse_fragment = st.text_area(
+                    "Collapse Fragment",
+                    placeholder="How does this glyph relate to the Collapse event?",
+                    height=80,
+                    key="rel_collapse"
+                )
+
+            with col_rel2:
+                player_development = st.text_area(
+                    "Player Development",
+                    placeholder="How does experiencing this glyph change the player?",
+                    height=80,
+                    key="rel_player_dev"
+                )
+                
+                narrative_function = st.text_area(
+                    "Narrative Function",
+                    placeholder="What role does this glyph play in the larger story?",
+                    height=80,
+                    key="rel_narrative_fn"
+                )
+                
+                emotional_stakes = st.text_area(
+                    "Emotional Stakes",
+                    placeholder="What emotions or conflicts are at play?",
+                    height=80,
+                    key="rel_emotional"
+                )
+                
+                progression = st.text_area(
+                    "Progression",
+                    placeholder="How does this lead to the next arc or chamber?",
+                    height=80,
+                    key="rel_progression"
+                )
+
             # Build preview payload
             preview = {
                 "glyph": glyph_row["Glyph"],
@@ -396,6 +462,16 @@ if view_mode == "Central View":
                 "story_summary": story_summary,
                 "dialogue": dialogue_text,
                 "choices": [c for c in choices_list if c],
+                "relational_story": {
+                    "location_context": location_context,
+                    "npc_significance": npc_significance,
+                    "historical_context": historical_context,
+                    "collapse_fragment": collapse_fragment,
+                    "player_development": player_development,
+                    "narrative_function": narrative_function,
+                    "emotional_stakes": emotional_stakes,
+                    "progression": progression
+                }
             }
 
             st.markdown("### Preview")

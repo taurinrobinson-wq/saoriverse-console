@@ -50,6 +50,19 @@
               "path_a": { "type": "string" },
               "path_b": { "type": "string" }
             }
+          },
+          "relational_story": {
+            "type": "object",
+            "properties": {
+              "location_context": { "type": "string" },
+              "npc_significance": { "type": "string" },
+              "historical_context": { "type": "string" },
+              "collapse_fragment": { "type": "string" },
+              "player_development": { "type": "string" },
+              "narrative_function": { "type": "string" },
+              "emotional_stakes": { "type": "string" },
+              "progression": { "type": "string" }
+            }
           }
         }
       }
