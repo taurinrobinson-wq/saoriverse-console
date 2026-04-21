@@ -240,82 +240,78 @@ if view_mode == "Central View":
         
         st.markdown("### 📖 Glyph Registry — Click any glyph name to open Story Builder")
         
-        # Create scrollable container
-        scrollable_html = """
+        # Create a scrollable container with buttons inside
+        scrollable_container = st.container()
+        
+        with scrollable_container:
+            scrollable_html = """
         <style>
-            .glyph-registry-scroll {
+            .glyph-scroll-wrapper {
                 max-height: 400px;
                 overflow-y: auto;
                 border: 1px solid #ddd;
                 border-radius: 8px;
-                padding: 16px;
                 margin: 16px 0;
             }
-            .glyph-row {
+            .glyph-table-header {
                 display: grid;
                 grid-template-columns: 2fr 1.5fr 1fr 2fr 2fr;
                 gap: 16px;
-                padding: 8px 0;
-                border-bottom: 1px solid #eee;
-                align-items: center;
-            }
-            .glyph-row:last-child {
-                border-bottom: none;
-            }
-            .glyph-header {
-                display: grid;
-                grid-template-columns: 2fr 1.5fr 1fr 2fr 2fr;
-                gap: 16px;
-                padding: 8px 0;
+                padding: 12px 16px;
                 font-weight: 600;
+                background-color: #f0f2f6;
                 border-bottom: 2px solid #ddd;
-                margin-bottom: 8px;
+                position: sticky;
+                top: 0;
+            }
+            .glyph-table-rows {
+                padding: 16px;
             }
         </style>
-        <div class="glyph-registry-scroll">
-        """
-        
-        # Header
-        scrollable_html += """
-        <div class="glyph-header">
-            <div>✍️ Glyph</div>
-            <div>NPC Giver</div>
-            <div>Category</div>
-            <div>Theme</div>
-            <div>Location</div>
-        </div>
-        """
-        
-        # Rows (as static HTML for now, we'll use Streamlit buttons below)
-        for idx, (_, row) in enumerate(table_df.iterrows()):
-            scrollable_html += f"""
-        <div class="glyph-row">
-            <div>{row['Glyph']}</div>
-            <div>{row['NPC Giver']}</div>
-            <div>{row['Category']}</div>
-            <div>{row['Theme']}</div>
-            <div>{row['Location']}</div>
+        <div class="glyph-scroll-wrapper">
+            <div class="glyph-table-header">
+                <div>✍️ Glyph</div>
+                <div>NPC Giver</div>
+                <div>Category</div>
+                <div>Theme</div>
+                <div>Location</div>
+            </div>
+            <div class="glyph-table-rows">
+            """
+            
+            for idx, (_, row) in enumerate(table_df.iterrows()):
+                scrollable_html += f"""
+            <div style="display: grid; grid-template-columns: 2fr 1.5fr 1fr 2fr 2fr; gap: 16px; padding: 8px 0; border-bottom: 1px solid #eee; align-items: center;">
+                <div>{row['Glyph']}</div>
+                <div>{row['NPC Giver']}</div>
+                <div>{row['Category']}</div>
+                <div>{row['Theme']}</div>
+                <div>{row['Location']}</div>
+            </div>
+                """
+            
+            scrollable_html += """
+            </div>
         </div>
             """
-        
-        scrollable_html += "</div>"
-        st.markdown(scrollable_html, unsafe_allow_html=True)
-        
-        # Clickable buttons below the scrollable table (hidden with empty container)
-        st.markdown("**Select a glyph from the list above:**")
-        cols = st.columns(4)
-        for idx, (_, row) in enumerate(table_df.iterrows()):
-            glyph_full = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
-            col_idx = idx % 4
             
-            with cols[col_idx]:
-                if st.button(
-                    f"✍️ {row['Glyph']}", 
-                    key=f"glyph_btn_{hash(row['Glyph']) % 1000000}",
-                    use_container_width=True
-                ):
-                    st.session_state.selected_story_glyph = glyph_full
-                    st.rerun()
+            st.markdown(scrollable_html, unsafe_allow_html=True)
+            
+            # Clickable buttons in a columns layout below the scrollable table
+            st.markdown("**Click glyph name above or select from buttons below:**")
+            cols = st.columns(4)
+            for idx, (_, row) in enumerate(table_df.iterrows()):
+                glyph_full = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
+                col_idx = idx % 4
+                
+                with cols[col_idx]:
+                    if st.button(
+                        f"✍️ {row['Glyph']}", 
+                        key=f"glyph_btn_{hash(row['Glyph']) % 1000000}",
+                        use_container_width=True
+                    ):
+                        st.session_state.selected_story_glyph = glyph_full
+                        st.rerun()
     
     # =====================================================================
     # Story Builder Modal (appears when a glyph is selected)
