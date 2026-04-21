@@ -18,7 +18,7 @@ from pathlib import Path
 # Add parent directory to path so we can import velinor
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from velinor.engine.twine_adapter import StoryBuilder
+from velinor.story.story_builder import StoryBuilder
 
 
 def build_velinor_story():

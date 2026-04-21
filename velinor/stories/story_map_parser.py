@@ -109,7 +109,7 @@ class MarkdownStoryParser:
             '    python story_map_parser.py --input story_map_velinor.md --output story_definitions.py',
             '"""',
             '',
-            'from velinor.engine.twine_adapter import StoryBuilder',
+            'from velinor.story.story_builder import StoryBuilder',
             '',
             '',
             'def build_velinor_story():',

@@ -23,14 +23,9 @@ from .npc_system import (
     NPCPersonality,
 )
 
-from .twine_adapter import (
-    TwineGameSession,
-    TwineStoryLoader,
-    DialogueParser,
-    StoryBuilder,
-    StoryPassage,
-    DialogueChoice,
-)
+from velinor.story.story_builder import StoryBuilder
+from velinor.story.story_loader import StoryLoader, StoryPassage
+from velinor.story.story_session import StorySession, DialogueChoice
 
 from .scene_manager import (
     SceneModule,
@@ -60,11 +55,10 @@ __all__ = [
     "NPCRegistry",
     "NPC",
     "NPCPersonality",
-    # Twine Integration
-    "TwineGameSession",
-    "TwineStoryLoader",
-    "DialogueParser",
+    # Story System
     "StoryBuilder",
+    "StoryLoader",
+    "StorySession",
     "StoryPassage",
     "DialogueChoice",
     # Orchestrator

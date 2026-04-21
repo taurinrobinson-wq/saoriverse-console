@@ -15,7 +15,8 @@ from datetime import datetime
 
 from .core import VelinorEngine, GameSession
 from .npc_system import NPCDialogueSystem
-from .twine_adapter import TwineGameSession, TwineStoryLoader, DialogueParser
+from velinor.story.story_loader import StoryLoader
+from velinor.story.story_session import StorySession
 from .trait_system import TraitProfiler, TraitChoice, TraitType
 from .coherence_calculator import CoherenceCalculator
 from .npc_response_engine import NPCResponseEngine
@@ -129,12 +130,12 @@ class VelinorTwineOrchestrator:
                 pass
         
         # Load story
-        self.story_loader = TwineStoryLoader()
+        self.story_loader = StoryLoader()
         if story_path:  # Only load if path provided
             self.story_loader.load_from_json(story_path)
         
         # Initialize session
-        self.twine_session: Optional[TwineGameSession] = None
+        self.story_session: Optional[StorySession] = None
         self.multiplayer_state: Optional[MultiplayerState] = None
         self.game_log: List[Dict[str, Any]] = []
     
@@ -153,8 +154,8 @@ class VelinorTwineOrchestrator:
         Returns:
             Initial passage rendering
         """
-        # Start Twine session
-        self.twine_session = TwineGameSession(
+        # Start story session
+        self.story_session = StorySession(
             story_loader=self.story_loader,
             game_engine=self.game_engine,
             first_person_orchestrator=self.first_person
@@ -170,7 +171,7 @@ class VelinorTwineOrchestrator:
             )
         
         # Render starting passage
-        initial_state = self.twine_session.start_story()
+        initial_state = self.story_session.start_story()
         self._log_event('game_started', initial_state)
         
         # Add trait system info to initial state
@@ -197,7 +198,7 @@ class VelinorTwineOrchestrator:
         Returns:
             Updated game state with next passage and any game changes
         """
-        if not self.twine_session:
+        if not self.story_session:
             raise RuntimeError("Game not started")
         
         # Buffer input in multiplayer
@@ -214,8 +215,8 @@ class VelinorTwineOrchestrator:
         else:
             player_summary = player_input
         
-        # Process through Twine system
-        next_state = self.twine_session.process_player_input(
+        # Process through story system
+        next_state = self.story_session.process_player_input(
             player_response=player_summary,
             choice_index=choice_index,
             player_id=player_id
@@ -430,7 +431,7 @@ class VelinorTwineOrchestrator:
         
         # Trigger background change via callback
         if 'background' in story_state and story_state['background']:
-            self.twine_session._trigger_callback('on_background_change', {
+            self.story_session._trigger_callback('on_background_change', {
                 'background': story_state['background']
             })
         
@@ -684,9 +685,9 @@ class VelinorTwineOrchestrator:
         save_data = {
             'timestamp': datetime.now().isoformat(),
             'story_context': {
-                'current_passage': self.twine_session.context.current_passage_id if self.twine_session else None,
-                'visited_passages': list(self.twine_session.context.visited_passages) if self.twine_session else [],
-                'dialogue_log': self.twine_session.context.dialogue_log if self.twine_session else [],
+                'current_passage': self.story_session.context.current_passage_id if self.story_session else None,
+                'visited_passages': list(self.story_session.context.visited_passages) if self.story_session else [],
+                'dialogue_log': self.story_session.context.dialogue_log if self.story_session else [],
             },
             'game_state': self._get_player_stats(),
             'game_log': self.game_log
@@ -701,20 +702,20 @@ class VelinorTwineOrchestrator:
             save_data = json.load(f)
         
         # Restore story context
-        if self.twine_session:
+        if self.story_session:
             passage_id = save_data['story_context']['current_passage']
             if passage_id:
-                self.twine_session.context.current_passage_id = passage_id
-                self.twine_session.context.visited_passages = set(
+                self.story_session.context.current_passage_id = passage_id
+                self.story_session.context.visited_passages = set(
                     save_data['story_context']['visited_passages']
                 )
-                self.twine_session.context.dialogue_log = save_data['story_context']['dialogue_log']
+                self.story_session.context.dialogue_log = save_data['story_context']['dialogue_log']
         
         return self._format_ui_state(
-            self.twine_session._render_passage(
+            self.story_session._render_passage(
                 save_data['story_context']['current_passage']
             )
-        ) if self.twine_session else {}
+        ) if self.story_session else {}
     
     # ===== PHASE 3: COLLAPSE EVENT SYSTEM =====
     
