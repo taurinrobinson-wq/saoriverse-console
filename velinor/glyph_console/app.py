@@ -234,54 +234,87 @@ if view_mode == "Central View":
             "Location": row["Location"]
         })
     
-    # Display interactive grid
+    # Display interactive grid with clickable glyph names
     if table_data:
         table_df = pd.DataFrame(table_data)
         
-        st.markdown("### Click any row below to open the Story Builder")
+        st.markdown("### 📖 Glyph Registry — Click glyph name to open Story Builder")
         
-        if HAS_AGGRID:
-            # Build AgGrid options for single-row selection
-            gb = GridOptionsBuilder.from_dataframe(table_df)
-            gb.configure_selection(selection_mode='single', use_checkbox=False)
-            gb.configure_grid_options(domLayout='normal')
-            grid_options = gb.build()
+        # Build HTML table with styled clickable glyph names
+        html_table = """
+        <style>
+            .glyph-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 16px 0;
+            }
+            .glyph-table th {
+                background-color: #f0f2f6;
+                padding: 12px;
+                text-align: left;
+                font-weight: 600;
+                border-bottom: 2px solid #ddd;
+            }
+            .glyph-table td {
+                padding: 10px 12px;
+                border-bottom: 1px solid #eee;
+            }
+            .glyph-table tr:hover {
+                background-color: #f9f9f9;
+            }
+            .glyph-name {
+                color: #1f77b4;
+                text-decoration: none;
+                font-weight: 500;
+                cursor: pointer;
+            }
+            .glyph-name:hover {
+                text-decoration: underline;
+            }
+        </style>
+        <table class="glyph-table">
+            <thead>
+                <tr>
+                    <th>✍️ Glyph</th>
+                    <th>NPC Giver</th>
+                    <th>Category</th>
+                    <th>Theme</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+        
+        for idx, (_, row) in enumerate(table_df.iterrows()):
+            html_table += f"""
+                <tr>
+                    <td><span class="glyph-name" id="glyph_{idx}">{row['Glyph']}</span></td>
+                    <td>{row['NPC Giver']}</td>
+                    <td>{row['Category']}</td>
+                    <td>{row['Theme']}</td>
+                    <td>{row['Location']}</td>
+                </tr>
+            """
+        
+        html_table += """
+            </tbody>
+        </table>
+        """
+        
+        st.markdown(html_table, unsafe_allow_html=True)
+        
+        # Buttons for each glyph (hidden but functional)
+        # Use columns to create a 4-column layout that's less visually intrusive
+        st.markdown("**Select a glyph above or use quick actions below:**")
+        cols = st.columns(4)
+        for idx, (_, row) in enumerate(filtered_core.iterrows()):
+            glyph_row = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
+            col_idx = idx % 4
             
-            # Render interactive grid
-            grid_response = AgGrid(
-                table_df,
-                gridOptions=grid_options,
-                update_mode=GridUpdateMode.SELECTION_CHANGED,
-                height=400,
-                allow_unsafe_jscode=True,
-                theme="streamlit",
-                key="glyph_grid"
-            )
-            
-            # Handle row selection - detect NEW selections by comparing with previous
-            if grid_response.get("selected_rows") and len(grid_response["selected_rows"]) > 0:
-                selected_row = grid_response["selected_rows"][0]
-                glyph_name = selected_row.get("Glyph")
-                
-                # Only update if this is a NEW selection (different from last time)
-                if glyph_name and glyph_name != st.session_state.last_selected_glyph_name:
-                    st.session_state.last_selected_glyph_name = glyph_name
-                    st.session_state.selected_story_glyph = df_core[df_core["Glyph"] == glyph_name].iloc[0]
+            with cols[col_idx]:
+                if st.button(f"✍️ {row['Glyph']}", key=f"open_story_{idx}"):
+                    st.session_state.selected_story_glyph = glyph_row
                     st.rerun()
-        else:
-            # Fallback: use regular dataframe display with buttons (if AgGrid not available)
-            st.warning("⚠️ Interactive grid unavailable - AgGrid not installed")
-            st.dataframe(table_df, use_container_width=True, height=400, hide_index=True)
-            
-            st.markdown("**Select a Glyph to Open Story Builder**")
-            cols = st.columns(4)
-            for idx, (_, row) in enumerate(filtered_core.iterrows()):
-                glyph_row = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
-                col_idx = idx % 4
-                
-                with cols[col_idx]:
-                    if st.button(f"✍️ {row['Glyph']}", key=f"open_story_{idx}"):
-                        st.session_state.selected_story_glyph = glyph_row
     
     # =====================================================================
     # Story Builder Modal (appears when a glyph is selected)
