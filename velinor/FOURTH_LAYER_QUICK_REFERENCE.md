@@ -85,7 +85,7 @@ Abandon/Fracture 2. **Player's Corelink choice**: Restart the System or Abandon 
 
 **Bond strategy**: Don't try to "fix" them. Help them integrate contradiction.
 **Cascade effect**: When Nuance increases, they teach others to hold complexity.
-**Critical path**: Get all 5 to Nuance 0.90+ → they become wisdom-keepers.
+**Critical path**: Get all 5 to Nuance 0.90+ → they become complexity-keepers.
 
 ---
 
@@ -143,7 +143,7 @@ When player increases NPC trait:
 Each bond determines restart possibility:
 - **Archive** bonds = Past can be integrated
 - **Present** bonds = Current world stable enough to hold memory
-- **Wound** bonds = Fragmentation can be taught as wisdom
+- **Wound** bonds = Fragmentation can be taught through nuance
 - **Shepherd** bonds = Leaders exist to guide forward
 
 **Example**: Help Kaelen integrate skepticism + trust → teaches next generation discernment
@@ -193,7 +193,7 @@ Each bond determines restart possibility:
 
 **Wound Weavers** → Teaches *how to integrate*
 - Bond with them = player learns to hold contradiction
-- Their Nuance increase = world gains wisdom, not just healing
+- Their Nuance increase = world gains nuance and depth, not just healing
 
 **Future Shepherds** → Models *what's possible*
 - Witness them = player believes integration is real

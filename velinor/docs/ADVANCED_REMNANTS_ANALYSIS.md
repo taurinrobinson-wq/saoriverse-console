@@ -15,7 +15,7 @@ Shows how one NPC's trait changes cascade through the influence network.
 
 **Cautious Playstyle Cascades:**
 - Ravi's memory spike (+0.30) flows to Tovren, Dalen
-- Nima maintains high nuance even under wisdom influence
+- Nima maintains high nuance even under high observation influence
 - Dalen acts as cascade amplifier (resolve +0.10, nuance +0.20)
 
 **Empathetic Playstyle Cascades:**
@@ -38,15 +38,15 @@ Measures which traits resist change (RIGID) vs. which shift easily (FLUID).
 - **RIGID:** Resolve (75%), Empathy (75%), Need (75%)
 - **STABLE:** Trust (31%)
 - **FLUID:** Nuance (19%) ← Most affected
-- **Insight:** Wisdom/observation overwhelmingly shifts nuance; core resolve stable
+- **Insight:** High observation overwhelmingly shifts nuance; core resolve stable
 
 **Empathetic Play:**
 - **FLUID:** Trust (31%), Skepticism (36%), Authority (1-5%)
 - **Insight:** Empathy dissolves barriers; authority collapses under compassion
 
 ### Game Design Implication:
-- **Aggressive routes** lock in core traits (empathy unchanging = ≠ redemption arc)
-- **Cautious routes** preserve resolve (wisdom respects conviction)
+- **Aggressive routes** lock in core traits (empathy unchanging = no redemption arc)
+- **Cautious routes** preserve resolve (high observation respects conviction)
 - **Empathetic routes** shatter everything (true redemption possible)
 
 ## 3. **Tool Resonance Tracking** 🎁
@@ -109,7 +109,7 @@ def check_tool_unlock(npc, tool_name):
 
     elif tool_name == "Scales of Balance":
         # Nuance must be developed
-        if npc.remnants["nuance"] > 0.7 and npc.remnants["wisdom"] > 0.6:
+        if npc.remnants["nuance"] > 0.7 and npc.remnants["memory"] > 0.6:
             return True
 
     return False
@@ -164,7 +164,7 @@ example)
 
 ### Customize Analysis:
 Edit `test_remnants_advanced.py` to:
-- Add new playstyles (Mix courage + observation for unique profiles)
+- Add new playstyles (Mix narrative_presence + observation for unique profiles)
 - Define custom tool resonances
 - Test specific NPC redemption paths
 - Model future story branches
@@ -203,7 +203,7 @@ Multiple tools can amplify each other on same NPC:
 
 ```python
 if "Mirror of Selfhood" in npc.tools and "Scales of Balance" in npc.tools:
-    # Both empathy AND wisdom tools = unlock "wise healer" dialogue tree
+    # Both empathy AND nuance tools = unlock "wise healer" dialogue tree
     npc.unlock_synergy_tree("wise_healer")
 ```
 

@@ -29,7 +29,7 @@ emergent gameplay where emotional resonance becomes mechanical.
 
 ### Observation (O)
 
-- **Definition**: Tracks perception and wisdom. Governs subtle discoveries—gestures, glyph traces, hidden paths, NPC tells.
+- **Definition**: Tracks perception and attentiveness. Governs subtle discoveries—gestures, glyph traces, hidden paths, NPC tells.
 - **Increases When**: The player notices details, waits and watches, avoids impulsive choices, reads NPCs carefully.
 - **Decreases When**: The player rushes, ignores clues, misses glyph signatures, acts blindly.
 - **NPC Response**: High Observation → Glyph chambers reveal hidden exits, NPCs notice the player's attentiveness and soften. Low Observation → Player falls into traps, misses warnings, vulnerable to Kaelen's thefts.
@@ -68,8 +68,8 @@ emergent gameplay where emotional resonance becomes mechanical.
 | Choice | Trust Impact | Observation Impact | Narrative Presence Impact | Empathy Impact |
 |--------|---|---|---|---|
 | Step toward the figures | +1 Trust | -1 Observation | +2 Narrative Presence | +1 Empathy |
-| Keep your distance | +1 Wisdom | +2 Observation | -1 Narrative Presence | -1 Empathy |
-| Explore the stalls | +1 Wisdom | +1 Observation | +1 Narrative Presence | +2 Empathy |
+| Keep your distance | +1 Trust | +2 Observation | -1 Narrative Presence | -1 Empathy |
+| Explore the stalls | +1 Trust | +1 Observation | +1 Narrative Presence | +2 Empathy |
 | Freeze and observe | Neutral | +2 Observation | Neutral | +1 Empathy |
 
 ##

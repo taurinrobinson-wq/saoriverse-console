@@ -6,7 +6,7 @@ The **REMNANTS system** makes NPCs evolve dynamically based on player choices. R
 personalities, NPCs become **fragments reshaped by the player's resonance** — literally "remnants of
 the Tone."
 
-When you increase a TONE stat (courage, empathy, etc.), it automatically ripples through connected
+When you increase a TONE stat (trust, observation, narrative_presence, empathy), it automatically ripples through connected
 NPCs' **REMNANTS traits**, creating emergent personality arcs that feel organic rather than
 scripted.
 ## 
@@ -33,13 +33,12 @@ growth/decline.
 
 ### TONE Stats (What The Player Has)
 
-The player progresses through these TONE attributes:
+The player progresses through these TONE attributes (canonical):
 
-- **Courage** - boldness, direct action, willingness to risk
-- **Wisdom** - caution, observation, patience, careful choice
+- **Trust** - reliability, promise-keeping, relationship building
+- **Observation** - perception, attentiveness, noticing details
+- **Narrative Presence** - boldness, agency, visibility in story
 - **Empathy** - understanding, compassion, emotional attunement
-- **Observation** - paying attention, noticing details, investigation
-- **Narrative Presence** - visibility, reputation, authority in the story
 ## 
 
 ## TONE → REMNANTS Correlation
@@ -48,11 +47,10 @@ When the player increases a TONE stat, it automatically adjusts connected NPC RE
 
 | Player Increases... | NPC Traits Raise | NPC Traits Lower |
 |-------------------|-----------------|-----------------|
-| **Courage** | Resolve, Narrative_Presence | Nuance, Empathy |
-| **Wisdom** | Nuance, Memory | Authority |
-| **Empathy** | Empathy, Need | Resolve |
+| **Narrative Presence** | Resolve, Authority | Nuance, Empathy |
 | **Observation** | Nuance, Memory | Authority |
-| **Narrative Presence** | Authority, Resolve | Nuance |
+| **Empathy** | Empathy, Need | Resolve |
+| **Trust** | Trust, Memory | Skepticism |
 
 ### Why This Works
 
@@ -61,6 +59,7 @@ Think of TONE and REMNANTS as **resonance frequencies**:
 - A **bold player** (high Narrative Presence) makes NPCs more authoritative but less nuanced — they follow your lead, but subtlety fades.
 - A **compassionate player** (high Empathy) makes NPCs more vulnerable and emotionally open, but less firm in their stance.
 - An **observant player** (high Observation) makes NPCs more thoughtful and complex, but less commanding.
+- A **trustworthy player** (high Trust) strengthens NPC confidence and memory, but undermines their skepticism.
 
 The correlation reflects how **player style reshapes the world**.
 ## 
@@ -83,11 +82,11 @@ Ravi {
 ```
 
 
-### Player Makes Bold Choice (+Courage +0.2, +Narrative_Presence +0.15)
+### Player Makes Bold Choice (+Narrative_Presence +0.2, +Observation +0.1)
 
 **Direct effect on Ravi:**
 - Resolve ↑ (+0.2) → 0.8 (more firm)
-- Narrative_Presence ↑ (+0.15) → 0.65 (but Nuance ↓ by 0.15 → 0.25)
+- Authority ↑ (+0.15) → 0.65 (but Nuance ↓ by 0.15 → 0.25)
 
 **Ripple effect from influence map:**
 - Ravi→Nima ripple (-0.08) nudges Nima's trust down
@@ -163,7 +162,7 @@ tension even though only Ravi was directly affected.
 - → Drossel: +0.2 (thief nature aligns with gang leader)
 
 **Mariel** (bridge figure):
-- → Ravi: +0.1 (wisdom strengthens)
+- → Ravi: +0.1 (observation strengthens nuance)
 - → Nima: +0.1 (insight calms)
 
 **Sera** (healer):
