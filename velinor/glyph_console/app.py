@@ -341,81 +341,74 @@ if view_mode == "Central View":
         )
         st.plotly_chart(fig, use_container_width=True)
         
-        # ====================================================================
-        # STORY BUILDER PANEL
-        # ====================================================================
-        
+        # =====================================================================
+        # ✍️ STORY BUILDER
+        # =====================================================================
         st.divider()
-        st.subheader("✍️ Story Builder")
-        st.markdown("Author the story experience for this glyph encounter.")
-        
-        # Story Summary
-        story_summary = st.text_area(
-            "Story Summary",
-            placeholder="Describe the narrative context and what the player experiences when encountering this glyph...",
-            height=100,
-            key=f"story_summary_{selected_glyph}"
-        )
-        
-        # Dialogue
-        dialogue_text = st.text_area(
-            "Dialogue",
-            placeholder="What does the NPC say? Include key dialogue that conveys the glyph's meaning...",
-            height=120,
-            key=f"dialogue_{selected_glyph}"
-        )
-        
-        # Dynamic Choice Builder
-        st.markdown("**Player Choices**")
-        num_choices = int(st.number_input(
-            "How many choices should the player have?",
-            min_value=1,
-            max_value=5,
-            value=2,
-            key=f"num_choices_{selected_glyph}"
-        ))
-        
-        # Generate choice input fields
-        choices_list = []
-        choice_cols = st.columns(num_choices)
-        
-        for i in range(num_choices):
-            with choice_cols[i % len(choice_cols)]:
-                choice_text = st.text_input(
+        with st.expander("✍️ Story Builder", expanded=True):
+            st.markdown("Author the story experience for this glyph encounter.")
+
+            # Two-column layout for story + dialogue
+            col_story, col_dialogue = st.columns(2)
+
+            with col_story:
+                story_summary = st.text_area(
+                    "Story Summary",
+                    placeholder="Describe the narrative context and what the player experiences when encountering this glyph...",
+                    height=200,
+                    key="story_summary"
+                )
+
+            with col_dialogue:
+                dialogue_text = st.text_area(
+                    "Dialogue",
+                    placeholder="What does the NPC say? Include key dialogue that conveys the glyph's meaning...",
+                    height=200,
+                    key="dialogue_text"
+                )
+
+            st.subheader("Player Choices")
+
+            num_choices = int(st.number_input(
+                "How many choices should the player have?",
+                min_value=0,
+                max_value=10,
+                value=2,
+                key="num_choices"
+            ))
+
+            choices_list = []
+            for i in range(num_choices):
+                choice = st.text_input(
                     f"Choice {i+1}",
                     placeholder=f"Option {i+1} text...",
-                    key=f"choice_{selected_glyph}_{i}"
+                    key=f"choice_{i+1}"
                 )
-                if choice_text:
-                    choices_list.append(choice_text)
-        
-        # Confirm Story Button
-        st.divider()
-        col_confirm, col_preview = st.columns(2)
-        
-        with col_confirm:
-            if st.button("📝 Confirm Story", key=f"confirm_story_{selected_glyph}"):
-                # Validate inputs
+                choices_list.append(choice)
+
+            # Build preview payload
+            preview = {
+                "glyph": glyph_row["Glyph"],
+                "category": glyph_row["Category"],
+                "npc": glyph_row["NPC Giver"],
+                "theme": glyph_row["Theme"],
+                "location": glyph_row["Location"],
+                "story_summary": story_summary,
+                "dialogue": dialogue_text,
+                "choices": [c for c in choices_list if c],
+            }
+
+            st.markdown("### Preview")
+            st.json(preview)
+
+            if st.button("Confirm Story", key="confirm_story"):
                 if not story_summary or not dialogue_text:
                     st.error("Story Summary and Dialogue are required.")
-                elif len(choices_list) == 0:
+                elif len([c for c in choices_list if c]) == 0:
                     st.error("At least one choice is required.")
                 else:
-                    # Build story JSON
-                    story_data = {
-                        "glyph": glyph_row["Glyph"],
-                        "category": glyph_row["Category"],
-                        "npc": glyph_row["NPC Giver"],
-                        "theme": glyph_row["Theme"],
-                        "location": glyph_row["Location"],
-                        "story_summary": story_summary,
-                        "dialogue": dialogue_text,
-                        "choices": choices_list
-                    }
-                    
-                    # Commit to GitHub
                     filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
-                    content = json.dumps(story_data, indent=2)
+                    content = json.dumps(preview, indent=2)
                     
                     with st.spinner(f"Committing {filename} to GitHub..."):
                         success, message = commit_story_to_repo(filename, content)
@@ -425,23 +418,6 @@ if view_mode == "Central View":
                         st.info(f"Story saved to: `velinor/stories/{filename}`")
                     else:
                         st.error(f"✗ {message}")
-        
-        with col_preview:
-            if st.button("👁️ Preview JSON", key=f"preview_story_{selected_glyph}"):
-                if story_summary and dialogue_text and len(choices_list) > 0:
-                    story_data = {
-                        "glyph": glyph_row["Glyph"],
-                        "category": glyph_row["Category"],
-                        "npc": glyph_row["NPC Giver"],
-                        "theme": glyph_row["Theme"],
-                        "location": glyph_row["Location"],
-                        "story_summary": story_summary,
-                        "dialogue": dialogue_text,
-                        "choices": choices_list
-                    }
-                    st.json(story_data)
-                else:
-                    st.warning("Fill in all fields to preview.")
 
 
 # ============================================================================
