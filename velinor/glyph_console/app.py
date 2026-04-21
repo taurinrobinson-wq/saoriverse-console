@@ -222,42 +222,60 @@ if view_mode == "Central View":
         key="core_glyphs_table"
     )
     
-    # Glyph detail selector
+    # Glyph detail selector with clickable buttons
     st.divider()
-    st.subheader("📋 Glyph Details")
+    st.subheader("📋 Select Glyph for Details")
     
-    glyph_names = ["Select a glyph..."] + filtered_core["Glyph"].tolist()
-    selected_glyph = st.selectbox("Choose glyph to view", glyph_names, key="glyph_select")
+    glyph_names = filtered_core["Glyph"].tolist()
     
-    if selected_glyph != "Select a glyph...":
-        glyph_row = df_core[df_core["Glyph"] == selected_glyph].iloc[0]
+    if glyph_names:
+        # Create a grid of clickable glyph buttons (4 per row)
+        cols_per_row = 4
+        for row_idx in range(0, len(glyph_names), cols_per_row):
+            cols = st.columns(cols_per_row)
+            for col_idx, col in enumerate(cols):
+                glyph_idx = row_idx + col_idx
+                if glyph_idx < len(glyph_names):
+                    glyph_name = glyph_names[glyph_idx]
+                    with col:
+                        if st.button(glyph_name, key=f"glyph_btn_{glyph_idx}", use_container_width=True):
+                            st.session_state.selected_glyph_name = glyph_name
         
-        # Main glyph info
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.markdown(f"**Glyph**: {glyph_row['Glyph']}")
-            st.markdown(f"**Category**: `{glyph_row['Category']}`")
-        with col2:
-            st.markdown(f"**NPC Giver**: {glyph_row['NPC Giver']}")
-            st.markdown(f"**Theme**: {glyph_row['Theme']}")
-        with col3:
-            st.markdown(f"**Location**: {glyph_row['Location']}")
+        # Get selected glyph (from button click or session state)
+        selected_glyph = st.session_state.get("selected_glyph_name", None)
         
-        st.divider()
-        
-        # Storyline
-        st.subheader("📖 Storyline")
-        st.write(glyph_row["Storyline"])
-        
-        st.divider()
-        
-        # Relationships & Impact
-        col_left, col_right = st.columns(2)
-        
-        with col_left:
-            st.subheader("🔗 Related Content")
+        if selected_glyph and selected_glyph in df_core["Glyph"].values:
+            glyph_row = df_core[df_core["Glyph"] == selected_glyph].iloc[0]
             
-            # Related fragments
+            st.divider()
+            st.markdown(f"### ✨ {glyph_row['Glyph']}")
+            
+            # Main glyph info
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.markdown(f"**Glyph**: {glyph_row['Glyph']}")
+                st.markdown(f"**Category**: `{glyph_row['Category']}`")
+            with col2:
+                st.markdown(f"**NPC Giver**: {glyph_row['NPC Giver']}")
+                st.markdown(f"**Theme**: {glyph_row['Theme']}")
+            with col3:
+                st.markdown(f"**Location**: {glyph_row['Location']}")
+            
+            st.divider()
+            
+            # Storyline
+            st.subheader("📖 Storyline")
+            st.write(glyph_row["Storyline"])
+            
+            st.divider()
+            
+            # Relationships & Impact
+            col_left, col_right = st.columns(2)
+            
+            with col_left:
+                st.subheader("🔗 Related Content")
+                
+                # Related fragments
             related_fragments = match_fragments_to_glyph(glyph_row, df_fragments)
             if not related_fragments.empty:
                 st.markdown("**Related Fragments**")
