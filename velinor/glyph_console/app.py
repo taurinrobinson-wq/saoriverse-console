@@ -401,19 +401,23 @@ if view_mode == "Central View":
                         key=f"player_line_{i}"
                     )
                 
+                # Narrative function options with human-readable display
+                narrative_options = [
+                    "reveal_emotion",
+                    "advance_plot",
+                    "challenge_player",
+                    "withhold_truth",
+                    "provide_clue",
+                    "mask_fear",
+                    "offer_comfort",
+                    "escalate_tension",
+                    "test_player"
+                ]
+                
                 narrative_function = st.selectbox(
                     f"Narrative Function {i+1}",
-                    [
-                        "reveal_emotion",
-                        "advance_plot",
-                        "challenge_player",
-                        "withhold_truth",
-                        "provide_clue",
-                        "mask_fear",
-                        "offer_comfort",
-                        "escalate_tension",
-                        "test_player"
-                    ],
+                    options=narrative_options,
+                    format_func=lambda x: x.replace("_", " ").title(),
                     key=f"narr_func_{i}"
                 )
                 
