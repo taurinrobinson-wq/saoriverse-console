@@ -23,12 +23,9 @@ from github import Github
 from github.GithubException import GithubException
 import base64
 
-try:
-    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
-    HAS_AGGRID = True
-except ImportError as e:
-    HAS_AGGRID = False
-    print(f"❌ AgGrid import failed: {e}")
+# Note: Removed AgGrid due to incompatibility between streamlit-aggrid 0.3.3 and pandas 2.x
+# Using Streamlit's native st.data_editor() instead for interactive tables
+HAS_AGGRID = False
 
 # Import utilities
 from utils import (
@@ -123,7 +120,8 @@ st.markdown("""
 @st.cache_data
 def load_datasets():
     """Load all four glyph datasets."""
-    base_path = Path("velinor/markdowngameinstructions/glyphs")
+    # Go up one level from velinor/glyph_console to velinor, then navigate to datasets
+    base_path = Path(__file__).parent.parent / "markdowngameinstructions" / "glyphs"
     
     try:
         df_core = pd.read_csv(base_path / "Glyph_Organizer.csv")
@@ -236,54 +234,46 @@ if view_mode == "Central View":
             "Location": row["Location"]
         })
     
-    # Display interactive grid
+    # Display interactive grid with clickable glyph names
     if table_data:
         table_df = pd.DataFrame(table_data)
         
-        st.markdown("### Click any row below to open the Story Builder")
+        st.markdown("### 📖 Glyph Registry — Click any glyph name to open Story Builder")
         
-        if HAS_AGGRID:
-            # Build AgGrid options for single-row selection
-            gb = GridOptionsBuilder.from_dataframe(table_df)
-            gb.configure_selection(selection_mode='single', use_checkbox=False)
-            gb.configure_grid_options(domLayout='normal')
-            grid_options = gb.build()
-            
-            # Render interactive grid
-            grid_response = AgGrid(
-                table_df,
-                gridOptions=grid_options,
-                update_mode=GridUpdateMode.SELECTION_CHANGED,
-                height=400,
-                allow_unsafe_jscode=True,
-                theme="streamlit",
-                key="glyph_grid"
-            )
-            
-            # Handle row selection - detect NEW selections by comparing with previous
-            if grid_response.get("selected_rows") and len(grid_response["selected_rows"]) > 0:
-                selected_row = grid_response["selected_rows"][0]
-                glyph_name = selected_row.get("Glyph")
+        # Create scrollable area using columns and divider
+        col_widths = [2, 1.5, 1, 2, 2]
+        
+        # Header
+        h_cols = st.columns(col_widths)
+        h_cols[0].markdown("**✍️ Glyph**")
+        h_cols[1].markdown("**NPC Giver**")
+        h_cols[2].markdown("**Category**")
+        h_cols[3].markdown("**Theme**")
+        h_cols[4].markdown("**Location**")
+        
+        st.divider()
+        
+        # Create scrollable area with container
+        with st.container(border=True, height=400):
+            for idx, (_, row) in enumerate(table_df.iterrows()):
+                # Create clickable row
+                row_cols = st.columns(col_widths)
                 
-                # Only update if this is a NEW selection (different from last time)
-                if glyph_name and glyph_name != st.session_state.last_selected_glyph_name:
-                    st.session_state.last_selected_glyph_name = glyph_name
-                    st.session_state.selected_story_glyph = df_core[df_core["Glyph"] == glyph_name].iloc[0]
+                # First column: clickable button styled like text
+                glyph_full = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
+                if row_cols[0].button(
+                    row['Glyph'],
+                    key=f"glyph_{idx}",
+                    use_container_width=True
+                ):
+                    st.session_state.selected_story_glyph = glyph_full
                     st.rerun()
-        else:
-            # Fallback: use regular dataframe display with buttons (if AgGrid not available)
-            st.warning("⚠️ Interactive grid unavailable - AgGrid not installed")
-            st.dataframe(table_df, use_container_width=True, height=400, hide_index=True)
-            
-            st.markdown("**Select a Glyph to Open Story Builder**")
-            cols = st.columns(4)
-            for idx, (_, row) in enumerate(filtered_core.iterrows()):
-                glyph_row = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
-                col_idx = idx % 4
                 
-                with cols[col_idx]:
-                    if st.button(f"✍️ {row['Glyph']}", key=f"open_story_{idx}"):
-                        st.session_state.selected_story_glyph = glyph_row
+                # Other columns: text display
+                row_cols[1].write(row['NPC Giver'])
+                row_cols[2].write(row['Category'])
+                row_cols[3].write(row['Theme'])
+                row_cols[4].write(row['Location'])
     
     # =====================================================================
     # Story Builder Modal (appears when a glyph is selected)
