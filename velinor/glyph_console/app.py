@@ -208,397 +208,354 @@ if view_mode == "Central View":
             )
         ]
     
-    # Display as searchable table with interactive rows
+    # Display as searchable table with expandable rows
     st.subheader("Core Glyphs Registry")
     
-    # Table header
-    header_cols = st.columns([1, 2, 2, 2, 2, 0.8])
-    with header_cols[0]:
-        st.markdown("**Category**")
-    with header_cols[1]:
-        st.markdown("**Glyph**")
-    with header_cols[2]:
-        st.markdown("**NPC Giver**")
-    with header_cols[3]:
-        st.markdown("**Theme**")
-    with header_cols[4]:
-        st.markdown("**Location**")
-    with header_cols[5]:
-        st.markdown("**View**")
-    
-    st.divider()
-    
-    # Interactive rows
+    # Expandable rows for each glyph
     for idx, (_, row) in enumerate(filtered_core.iterrows()):
-        row_cols = st.columns([1, 2, 2, 2, 2, 0.8])
-        with row_cols[0]:
-            st.text(row["Category"])
-        with row_cols[1]:
-            st.text(row["Glyph"])
-        with row_cols[2]:
-            st.text(row["NPC Giver"])
-        with row_cols[3]:
-            st.text(row["Theme"])
-        with row_cols[4]:
-            st.text(row["Location"])
-        with row_cols[5]:
-            if st.button("➡️", key=f"glyph_btn_{idx}", help=f"View {row['Glyph']} details"):
-                st.session_state.selected_glyph_name = row["Glyph"]
-    
-    # Show details if a glyph is selected
-    glyph_names = filtered_core["Glyph"].tolist()
-    
-    # Get selected glyph (from button click or session state)
-    selected_glyph = st.session_state.get("selected_glyph_name", None)
-    
-    if selected_glyph and selected_glyph in df_core["Glyph"].values:
-        glyph_row = df_core[df_core["Glyph"] == selected_glyph].iloc[0]
+        glyph_row = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
         
-        st.divider()
-        st.markdown(f"### ✨ {glyph_row['Glyph']}")
-        
-        # Main glyph info
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.markdown(f"**Glyph**: {glyph_row['Glyph']}")
-            st.markdown(f"**Category**: `{glyph_row['Category']}`")
-        with col2:
-            st.markdown(f"**NPC Giver**: {glyph_row['NPC Giver']}")
-            st.markdown(f"**Theme**: {glyph_row['Theme']}")
-        with col3:
-            st.markdown(f"**Location**: {glyph_row['Location']}")
-        
-        st.divider()
-        
-        # Storyline
-        st.subheader("📖 Storyline")
-        st.write(glyph_row["Storyline"])
-        
-        st.divider()
-        
-        # Relationships & Impact
-        col_left, col_right = st.columns(2)
-        
-        with col_left:
-            st.subheader("🔗 Related Content")
+        # Create expander with arrow and glyph name
+        with st.expander(f"➡️ {row['Glyph']} — {row['NPC Giver']} ({row['Category']})", expanded=False):
             
-            # Related fragments
-            related_fragments = match_fragments_to_glyph(glyph_row, df_fragments)
-            if not related_fragments.empty:
-                st.markdown("**Related Fragments**")
-                for _, frag in related_fragments.head(3).iterrows():
-                    st.markdown(f"""
-                    <div class="related-item">
-                    • **{frag['Fragment_ID']}** - {frag['NPC_Name']} ({frag['Biome']})
-                    </div>
-                    """, unsafe_allow_html=True)
+            # Display glyph metadata
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.markdown(f"**Category**: `{glyph_row['Category']}`")
+                st.markdown(f"**Glyph**: {glyph_row['Glyph']}")
+            with col2:
+                st.markdown(f"**NPC Giver**: {glyph_row['NPC Giver']}")
+                st.markdown(f"**Theme**: {glyph_row['Theme']}")
+            with col3:
+                st.markdown(f"**Location**: {glyph_row['Location']}")
             
-            # Related fusion glyphs
-            related_fusion = match_fusion_to_glyph(glyph_row, df_transcendence)
-            if not related_fusion.empty:
-                st.markdown("**Leads to Fusion Glyphs**")
-                for _, fusion in related_fusion.iterrows():
-                    st.markdown(f"""
-                    <div class="related-item">
-                    • **{fusion['Glyph']}** - {fusion['NPC Receiver']}
-                    </div>
-                    """, unsafe_allow_html=True)
+            st.divider()
             
-            # Related cipher seeds
-            related_cipher = match_cipher_to_glyph(glyph_row, df_cipher)
-            if not related_cipher.empty:
-                st.markdown("**Related Cipher Seeds**")
-                for _, cipher in related_cipher.head(2).iterrows():
-                    st.markdown(f"""
-                    <div class="related-item">
-                    • {cipher['category']} - "{cipher['phrase'][:50]}..."
-                    </div>
-                    """, unsafe_allow_html=True)
-        
-        with col_right:
-            st.subheader("📊 Impact Analysis")
+            st.divider()
             
-            # Compute impacts
-            tone_impact = compute_tone_impact(glyph_row, related_fragments)
-            remnants_impact = compute_remnants_impact(glyph_row, related_fragments)
-            endgame_impact = compute_endgame_dependencies(glyph_row, df_transcendence)
-            emotional_alignment = compute_emotional_alignment(glyph_row)
+            # Relationships & Impact
+            col_left, col_right = st.columns(2)
             
-            # TONE Impact
-            st.markdown("**TONE Impact**")
-            tone_df = pd.DataFrame(
-                list(tone_impact.items()),
-                columns=["Stat", "Delta"]
-            ).sort_values("Delta", ascending=False)
-            st.dataframe(tone_df, use_container_width=True, hide_index=True)
-            
-            # REMNANTS Impact
-            st.markdown("**REMNANTS Impact**")
-            st.markdown(f"• **Primary NPC**: {remnants_impact['npc_name']}")
-            
-            # Display REMNANTS traits
-            if "traits" in remnants_impact:
-                traits_df = pd.DataFrame(
-                    list(remnants_impact["traits"].items()),
-                    columns=["Trait", "Effect"]
-                ).sort_values("Effect", ascending=False)
-                st.dataframe(traits_df, use_container_width=True, hide_index=True)
-            
-            if remnants_impact.get('related_npcs'):
-                st.markdown(f"• **Related NPCs**: {', '.join(remnants_impact['related_npcs'][:3])}")
-            
-            # Endgame Impact
-            if endgame_impact['contributes_to_fusion']:
-                st.markdown("**Endgame Impact**")
-                for fusion in endgame_impact['contributes_to_fusion']:
-                    st.markdown(f"• Prerequisite for: **{fusion}**")
-                if endgame_impact['chamber_type']:
-                    st.markdown(f"• Chamber Type: `{endgame_impact['chamber_type']}`")
-        
-        # Emotional Alignment
-        st.divider()
-        st.subheader("🎯 Emotional Alignment")
-        
-        alignment_df = pd.DataFrame(
-            list(emotional_alignment.items()),
-            columns=["Category", "Alignment"]
-        )
-        
-        fig = px.bar(
-            alignment_df,
-            x="Category",
-            y="Alignment",
-            color="Alignment",
-            title="Emotional System Alignment",
-            color_continuous_scale="Viridis"
-        )
-        st.plotly_chart(fig, use_container_width=True)
-        
-        # =====================================================================
-        # ✍️ STORY BUILDER
-        # =====================================================================
-        st.divider()
-        with st.expander("✍️ Story Builder", expanded=True):
-            st.markdown("Author the story experience for this glyph encounter.")
-
-            # Two-column layout for story + dialogue
-            col_story, col_dialogue = st.columns(2)
-
-            with col_story:
-                story_summary = st.text_area(
-                    "Story Summary",
-                    placeholder="Describe the narrative context and what the player experiences when encountering this glyph...",
-                    height=200,
-                    key="story_summary"
-                )
-
-            with col_dialogue:
-                st.markdown("**Dialogue Sequence**")
-                st.markdown("*Alternating NPC/Player lines with narrative functions*")
-
-            # Dialogue Sequence Builder
-            num_dialogue_turns = int(st.number_input(
-                "How many dialogue turns should there be?",
-                min_value=1,
-                max_value=20,
-                value=3,
-                key="num_dialogue_turns"
-            ))
-
-            npc_name = glyph_row["NPC Giver"]
-            dialogue_sequence = []
-            for i in range(num_dialogue_turns):
-                st.markdown(f"#### Dialogue Turn {i+1}")
+            with col_left:
+                st.subheader("🔗 Related Content")
                 
-                col_npc, col_player = st.columns(2)
+                # Related fragments
+                related_fragments = match_fragments_to_glyph(glyph_row, df_fragments)
+                if not related_fragments.empty:
+                    st.markdown("**Related Fragments**")
+                    for _, frag in related_fragments.head(3).iterrows():
+                        st.markdown(f"""
+                        <div class="related-item">
+                        • **{frag['Fragment_ID']}** - {frag['NPC_Name']} ({frag['Biome']})
+                        </div>
+                        """, unsafe_allow_html=True)
                 
-                with col_npc:
-                    npc_line = st.text_input(
-                        f"{npc_name} (NPC Line {i+1})",
-                        placeholder="What does the NPC say?",
-                        key=f"npc_line_{i}"
-                    )
+                # Related fusion glyphs
+                related_fusion = match_fusion_to_glyph(glyph_row, df_transcendence)
+                if not related_fusion.empty:
+                    st.markdown("**Leads to Fusion Glyphs**")
+                    for _, fusion in related_fusion.iterrows():
+                        st.markdown(f"""
+                        <div class="related-item">
+                        • **{fusion['Glyph']}** - {fusion['NPC Receiver']}
+                        </div>
+                        """, unsafe_allow_html=True)
                 
-                with col_player:
-                    player_line = st.text_input(
-                        f"Player (Player Line {i+1})",
-                        placeholder="Player's response or action...",
-                        key=f"player_line_{i}"
-                    )
+                # Related cipher seeds
+                related_cipher = match_cipher_to_glyph(glyph_row, df_cipher)
+                if not related_cipher.empty:
+                    st.markdown("**Related Cipher Seeds**")
+                    for _, cipher in related_cipher.head(2).iterrows():
+                        st.markdown(f"""
+                        <div class="related-item">
+                        • {cipher['category']} - "{cipher['phrase'][:50]}..."
+                        </div>
+                        """, unsafe_allow_html=True)
+            
+            with col_right:
+                st.subheader("📊 Impact Analysis")
                 
-                # Narrative function options with human-readable display
-                narrative_options = [
-                    "reveal_emotion",
-                    "advance_plot",
-                    "challenge_player",
-                    "withhold_truth",
-                    "provide_clue",
-                    "mask_fear",
-                    "offer_comfort",
-                    "escalate_tension",
-                    "test_player"
-                ]
+                # Compute impacts
+                tone_impact = compute_tone_impact(glyph_row, related_fragments)
+                remnants_impact = compute_remnants_impact(glyph_row, related_fragments)
+                endgame_impact = compute_endgame_dependencies(glyph_row, df_transcendence)
+                emotional_alignment = compute_emotional_alignment(glyph_row)
                 
-                narrative_function = st.selectbox(
-                    f"Narrative Function {i+1}",
-                    options=narrative_options,
-                    format_func=lambda x: x.replace("_", " ").title(),
-                    key=f"narr_func_{i}"
-                )
+                # TONE Impact
+                st.markdown("**TONE Impact**")
+                tone_df = pd.DataFrame(
+                    list(tone_impact.items()),
+                    columns=["Stat", "Delta"]
+                ).sort_values("Delta", ascending=False)
+                st.dataframe(tone_df, use_container_width=True, hide_index=True)
                 
-                dialogue_sequence.append({
-                    "npc": npc_name,
-                    "npc_line": npc_line,
-                    "player_line": player_line,
-                    "narrative_function": narrative_function
-                })
-
-            st.subheader("Player Choices")
-
-            num_choices = int(st.number_input(
-                "How many choices should the player have?",
-                min_value=0,
-                max_value=10,
-                value=2,
-                key="num_choices"
-            ))
-
-            choices_list = []
-            for i in range(num_choices):
-                choice = st.text_input(
-                    f"Choice {i+1}",
-                    placeholder=f"Option {i+1} text...",
-                    key=f"choice_{i+1}"
-                )
-                choices_list.append(choice)
-
+                # REMNANTS Impact
+                st.markdown("**REMNANTS Impact**")
+                st.markdown(f"• **Primary NPC**: {remnants_impact['npc_name']}")
+                
+                # Display REMNANTS traits
+                if "traits" in remnants_impact:
+                    traits_df = pd.DataFrame(
+                        list(remnants_impact["traits"].items()),
+                        columns=["Trait", "Effect"]
+                    ).sort_values("Effect", ascending=False)
+                    st.dataframe(traits_df, use_container_width=True, hide_index=True)
+                
+                if remnants_impact.get('related_npcs'):
+                    st.markdown(f"• **Related NPCs**: {', '.join(remnants_impact['related_npcs'][:3])}")
+                
+                # Endgame Impact
+                if endgame_impact['contributes_to_fusion']:
+                    st.markdown("**Endgame Impact**")
+                    for fusion in endgame_impact['contributes_to_fusion']:
+                        st.markdown(f"• Prerequisite for: **{fusion}**")
+                    if endgame_impact['chamber_type']:
+                        st.markdown(f"• Chamber Type: `{endgame_impact['chamber_type']}`")
+            
+            # Emotional Alignment
+            st.divider()
+            st.subheader("🎯 Emotional Alignment")
+            
+            alignment_df = pd.DataFrame(
+                list(emotional_alignment.items()),
+                columns=["Category", "Alignment"]
+            )
+            
+            fig = px.bar(
+                alignment_df,
+                x="Category",
+                y="Alignment",
+                color="Alignment",
+                title="Emotional System Alignment",
+                color_continuous_scale="Viridis"
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            
             # =====================================================================
-            # Relational Story Fields
+            # ✍️ STORY BUILDER
             # =====================================================================
-            st.subheader("Relational Story Context")
-            st.markdown("*Optional: Add deeper narrative context and relationships*")
+            st.divider()
+            with st.expander("✍️ Story Builder", expanded=False):
+                st.markdown("Author the story experience for this glyph encounter.")
 
-            col_rel1, col_rel2 = st.columns(2)
-            
-            with col_rel1:
-                location_context = st.text_area(
-                    "Location Context",
-                    placeholder="How does this location shape the encounter?",
-                    height=80,
-                    key="rel_location"
-                )
-                
-                npc_significance = st.text_area(
-                    "NPC Significance",
-                    placeholder="What is this NPC's deeper role in the world?",
-                    height=80,
-                    key="rel_npc_sig"
-                )
-                
-                historical_context = st.text_area(
-                    "Historical Context",
-                    placeholder="What pre-collapse or post-collapse events led to this?",
-                    height=80,
-                    key="rel_history"
-                )
-                
-                collapse_fragment = st.text_area(
-                    "Collapse Fragment",
-                    placeholder="How does this glyph relate to the Collapse event?",
-                    height=80,
-                    key="rel_collapse"
-                )
+                # Two-column layout for story + dialogue
+                col_story, col_dialogue = st.columns(2)
 
-            with col_rel2:
-                player_development = st.text_area(
-                    "Player Development",
-                    placeholder="How does experiencing this glyph change the player?",
-                    height=80,
-                    key="rel_player_dev"
-                )
-                
-                narrative_function = st.text_area(
-                    "Narrative Function",
-                    placeholder="What role does this glyph play in the larger story?",
-                    height=80,
-                    key="rel_narrative_fn"
-                )
-                
-                emotional_stakes = st.text_area(
-                    "Emotional Stakes",
-                    placeholder="What emotions or conflicts are at play?",
-                    height=80,
-                    key="rel_emotional"
-                )
-                
-                progression = st.text_area(
-                    "Progression",
-                    placeholder="How does this lead to the next arc or chamber?",
-                    height=80,
-                    key="rel_progression"
-                )
+                with col_story:
+                    story_summary = st.text_area(
+                        "Story Summary",
+                        placeholder="Describe the narrative context and what the player experiences when encountering this glyph...",
+                        height=200,
+                        key=f"story_summary_{idx}"
+                    )
 
-            # Build preview payload
-            preview = {
-                "glyph": glyph_row["Glyph"],
-                "category": glyph_row["Category"],
-                "npc": glyph_row["NPC Giver"],
-                "theme": glyph_row["Theme"],
-                "location": glyph_row["Location"],
-                "story_summary": story_summary,
-                "dialogue_sequence": [
-                    {
-                        "npc": turn["npc"],
-                        "npc_line": turn["npc_line"],
-                        "player_line": turn["player_line"],
-                        "narrative_function": turn["narrative_function"]
+                with col_dialogue:
+                    st.markdown("**Dialogue Sequence**")
+                    st.markdown("*Alternating NPC/Player lines with narrative functions*")
+
+                # Dialogue Sequence Builder
+                num_dialogue_turns = int(st.number_input(
+                    "How many dialogue turns should there be?",
+                    min_value=1,
+                    max_value=20,
+                    value=3,
+                    key=f"num_dialogue_turns_{idx}"
+                ))
+
+                npc_name = glyph_row["NPC Giver"]
+                dialogue_sequence = []
+                for i in range(num_dialogue_turns):
+                    st.markdown(f"#### Dialogue Turn {i+1}")
+                    
+                    col_npc, col_player = st.columns(2)
+                    
+                    with col_npc:
+                        npc_line = st.text_input(
+                            f"{npc_name} (NPC Line {i+1})",
+                            placeholder="What does the NPC say?",
+                            key=f"npc_line_{idx}_{i}"
+                        )
+                    
+                    with col_player:
+                        player_line = st.text_input(
+                            f"Player (Player Line {i+1})",
+                            placeholder="Player's response or action...",
+                            key=f"player_line_{idx}_{i}"
+                        )
+                    
+                    # Narrative function options with human-readable display
+                    narrative_options = [
+                        "reveal_emotion",
+                        "advance_plot",
+                        "challenge_player",
+                        "withhold_truth",
+                        "provide_clue",
+                        "mask_fear",
+                        "offer_comfort",
+                        "escalate_tension",
+                        "test_player"
+                    ]
+                    
+                    narrative_function = st.selectbox(
+                        f"Narrative Function {i+1}",
+                        options=narrative_options,
+                        format_func=lambda x: x.replace("_", " ").title(),
+                        key=f"narr_func_{idx}_{i}"
+                    )
+                    
+                    dialogue_sequence.append({
+                        "npc": npc_name,
+                        "npc_line": npc_line,
+                        "player_line": player_line,
+                        "narrative_function": narrative_function
+                    })
+
+                st.subheader("Player Choices")
+
+                num_choices = int(st.number_input(
+                    "How many choices should the player have?",
+                    min_value=0,
+                    max_value=10,
+                    value=2,
+                    key=f"num_choices_{idx}"
+                ))
+
+                choices_list = []
+                for i in range(num_choices):
+                    choice = st.text_input(
+                        f"Choice {i+1}",
+                        placeholder=f"Option {i+1} text...",
+                        key=f"choice_{idx}_{i+1}"
+                    )
+                    choices_list.append(choice)
+
+                # =====================================================================
+                # Relational Story Fields
+                # =====================================================================
+                st.subheader("Relational Story Context")
+                st.markdown("*Optional: Add deeper narrative context and relationships*")
+
+                col_rel1, col_rel2 = st.columns(2)
+                
+                with col_rel1:
+                    location_context = st.text_area(
+                        "Location Context",
+                        placeholder="How does this location shape the encounter?",
+                        height=80,
+                        key=f"rel_location_{idx}"
+                    )
+                    
+                    npc_significance = st.text_area(
+                        "NPC Significance",
+                        placeholder="What is this NPC's deeper role in the world?",
+                        height=80,
+                        key=f"rel_npc_sig_{idx}"
+                    )
+                    
+                    historical_context = st.text_area(
+                        "Historical Context",
+                        placeholder="What pre-collapse or post-collapse events led to this?",
+                        height=80,
+                        key=f"rel_history_{idx}"
+                    )
+                    
+                    collapse_fragment = st.text_area(
+                        "Collapse Fragment",
+                        placeholder="How does this glyph relate to the Collapse event?",
+                        height=80,
+                        key=f"rel_collapse_{idx}"
+                    )
+
+                with col_rel2:
+                    player_development = st.text_area(
+                        "Player Development",
+                        placeholder="How does experiencing this glyph change the player?",
+                        height=80,
+                        key=f"rel_player_dev_{idx}"
+                    )
+                    
+                    narrative_function_rel = st.text_area(
+                        "Narrative Function",
+                        placeholder="What role does this glyph play in the larger story?",
+                        height=80,
+                        key=f"rel_narrative_fn_{idx}"
+                    )
+                    
+                    emotional_stakes = st.text_area(
+                        "Emotional Stakes",
+                        placeholder="What emotions or conflicts are at play?",
+                        height=80,
+                        key=f"rel_emotional_{idx}"
+                    )
+                    
+                    progression = st.text_area(
+                        "Progression",
+                        placeholder="How does this lead to the next arc or chamber?",
+                        height=80,
+                        key=f"rel_progression_{idx}"
+                    )
+
+                # Build preview payload
+                preview = {
+                    "glyph": glyph_row["Glyph"],
+                    "category": glyph_row["Category"],
+                    "npc": glyph_row["NPC Giver"],
+                    "theme": glyph_row["Theme"],
+                    "location": glyph_row["Location"],
+                    "story_summary": story_summary,
+                    "dialogue_sequence": [
+                        {
+                            "npc": turn["npc"],
+                            "npc_line": turn["npc_line"],
+                            "player_line": turn["player_line"],
+                            "narrative_function": turn["narrative_function"]
+                        }
+                        for turn in dialogue_sequence
+                        if turn["npc_line"] and turn["player_line"]
+                    ],
+                    "choices": [c for c in choices_list if c],
+                    "relational_story": {
+                        "location_context": location_context,
+                        "npc_significance": npc_significance,
+                        "historical_context": historical_context,
+                        "collapse_fragment": collapse_fragment,
+                        "player_development": player_development,
+                        "narrative_function": narrative_function_rel,
+                        "emotional_stakes": emotional_stakes,
+                        "progression": progression
                     }
+                }
+
+                st.markdown("### Formatted Dialogue Preview")
+                formatted_dialogue = "\n\n".join([
+                    f'{turn["npc"]}: "{turn["npc_line"]}"\nPlayer: "{turn["player_line"]}"'
                     for turn in dialogue_sequence
                     if turn["npc_line"] and turn["player_line"]
-                ],
-                "choices": [c for c in choices_list if c],
-                "relational_story": {
-                    "location_context": location_context,
-                    "npc_significance": npc_significance,
-                    "historical_context": historical_context,
-                    "collapse_fragment": collapse_fragment,
-                    "player_development": player_development,
-                    "narrative_function": narrative_function,
-                    "emotional_stakes": emotional_stakes,
-                    "progression": progression
-                }
-            }
+                ])
+                st.code(formatted_dialogue if formatted_dialogue else "(No dialogue entered yet)")
 
-            st.markdown("### Formatted Dialogue Preview")
-            formatted_dialogue = "\n\n".join([
-                f'{turn["npc"]}: "{turn["npc_line"]}"\nPlayer: "{turn["player_line"]}"'
-                for turn in dialogue_sequence
-                if turn["npc_line"] and turn["player_line"]
-            ])
-            st.code(formatted_dialogue if formatted_dialogue else "(No dialogue entered yet)")
+                st.markdown("### Full JSON Preview")
+                st.json(preview)
 
-            st.markdown("### Full JSON Preview")
-            st.json(preview)
-
-            if st.button("Confirm Story", key="confirm_story"):
-                if not story_summary:
-                    st.error("Story Summary is required.")
-                elif len([c for c in choices_list if c]) == 0:
-                    st.error("At least one choice is required.")
-                elif len([turn for turn in dialogue_sequence if turn["npc_line"] and turn["player_line"]]) == 0:
-                    st.error("At least one complete dialogue turn (NPC line + Player line) is required.")
-                else:
-                    filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
-                    content = json.dumps(preview, indent=2)
-                    
-                    with st.spinner(f"Committing {filename} to GitHub..."):
-                        success, message = commit_story_to_repo(filename, content)
-                    
-                    if success:
-                        st.success(f"✓ {message}")
-                        st.info(f"Story saved to: `velinor/stories/{filename}`")
+                if st.button("Confirm Story", key=f"confirm_story_{idx}"):
+                    if not story_summary:
+                        st.error("Story Summary is required.")
+                    elif len([c for c in choices_list if c]) == 0:
+                        st.error("At least one choice is required.")
+                    elif len([turn for turn in dialogue_sequence if turn["npc_line"] and turn["player_line"]]) == 0:
+                        st.error("At least one complete dialogue turn (NPC line + Player line) is required.")
                     else:
-                        st.error(f"✗ {message}")
+                        filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
+                        content = json.dumps(preview, indent=2)
+                        
+                        with st.spinner(f"Committing {filename} to GitHub..."):
+                            success, message = commit_story_to_repo(filename, content)
+                        
+                        if success:
+                            st.success(f"✓ {message}")
+                            st.info(f"Story saved to: `velinor/stories/{filename}`")
+                        else:
+                            st.error(f"✗ {message}")
 
 
 # ============================================================================
