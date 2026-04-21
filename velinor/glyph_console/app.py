@@ -520,6 +520,8 @@ if view_mode == "Central View":
                 if success:
                     st.success(f"✓ {message}")
                     st.info(f"Story saved to: `velinor/stories/{filename}`")
+                    # Sync export section to this glyph
+                    st.session_state.last_edited_glyph = glyph_row["Glyph"]
                     st.session_state.selected_story_glyph = None
                 else:
                     st.error(f"✗ {message}")
@@ -529,10 +531,18 @@ if view_mode == "Central View":
         st.markdown("---")
         st.markdown("*Click a button above to open the story builder for a glyph*")
     
-    # Glyph selector
+    # Glyph selector (synced with story builder)
+    glyph_options = df_core["Glyph"].tolist()
+    
+    # Set default index if a glyph was just edited
+    default_index = 0
+    if "last_edited_glyph" in st.session_state and st.session_state.last_edited_glyph in glyph_options:
+        default_index = glyph_options.index(st.session_state.last_edited_glyph)
+    
     selected_export_glyph = st.selectbox(
         "Select glyph to export",
-        options=df_core["Glyph"].tolist(),
+        options=glyph_options,
+        index=default_index,
         key="export_select"
     )
     
