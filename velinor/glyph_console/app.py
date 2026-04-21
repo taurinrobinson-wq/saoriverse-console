@@ -368,12 +368,61 @@ if view_mode == "Central View":
                 )
 
             with col_dialogue:
-                dialogue_text = st.text_area(
-                    "Dialogue",
-                    placeholder="What does the NPC say? Include key dialogue that conveys the glyph's meaning...",
-                    height=200,
-                    key="dialogue_text"
+                st.markdown("**Dialogue Sequence**")
+                st.markdown("*Alternating NPC/Player lines with narrative functions*")
+
+            # Dialogue Sequence Builder
+            num_dialogue_turns = int(st.number_input(
+                "How many dialogue turns should there be?",
+                min_value=1,
+                max_value=20,
+                value=3,
+                key="num_dialogue_turns"
+            ))
+
+            npc_name = glyph_row["NPC Giver"]
+            dialogue_sequence = []
+            for i in range(num_dialogue_turns):
+                st.markdown(f"#### Dialogue Turn {i+1}")
+                
+                col_npc, col_player = st.columns(2)
+                
+                with col_npc:
+                    npc_line = st.text_input(
+                        f"{npc_name} (NPC Line {i+1})",
+                        placeholder="What does the NPC say?",
+                        key=f"npc_line_{i}"
+                    )
+                
+                with col_player:
+                    player_line = st.text_input(
+                        f"Player (Player Line {i+1})",
+                        placeholder="Player's response or action...",
+                        key=f"player_line_{i}"
+                    )
+                
+                narrative_function = st.selectbox(
+                    f"Narrative Function {i+1}",
+                    [
+                        "reveal_emotion",
+                        "advance_plot",
+                        "challenge_player",
+                        "withhold_truth",
+                        "provide_clue",
+                        "mask_fear",
+                        "offer_comfort",
+                        "escalate_tension",
+                        "test_player"
+                    ],
+                    key=f"narr_func_{i}"
                 )
+                
+                dialogue_sequence.append({
+                    "npc": npc_name,
+                    "npc_line": npc_line,
+                    "player_line": player_line,
+                    "narrative_function": narrative_function
+                })
 
             st.subheader("Player Choices")
 
@@ -468,7 +517,16 @@ if view_mode == "Central View":
                 "theme": glyph_row["Theme"],
                 "location": glyph_row["Location"],
                 "story_summary": story_summary,
-                "dialogue": dialogue_text,
+                "dialogue_sequence": [
+                    {
+                        "npc": turn["npc"],
+                        "npc_line": turn["npc_line"],
+                        "player_line": turn["player_line"],
+                        "narrative_function": turn["narrative_function"]
+                    }
+                    for turn in dialogue_sequence
+                    if turn["npc_line"] and turn["player_line"]
+                ],
                 "choices": [c for c in choices_list if c],
                 "relational_story": {
                     "location_context": location_context,
@@ -482,14 +540,24 @@ if view_mode == "Central View":
                 }
             }
 
-            st.markdown("### Preview")
+            st.markdown("### Formatted Dialogue Preview")
+            formatted_dialogue = "\n\n".join([
+                f'{turn["npc"]}: "{turn["npc_line"]}"\nPlayer: "{turn["player_line"]}"'
+                for turn in dialogue_sequence
+                if turn["npc_line"] and turn["player_line"]
+            ])
+            st.code(formatted_dialogue if formatted_dialogue else "(No dialogue entered yet)")
+
+            st.markdown("### Full JSON Preview")
             st.json(preview)
 
             if st.button("Confirm Story", key="confirm_story"):
-                if not story_summary or not dialogue_text:
-                    st.error("Story Summary and Dialogue are required.")
+                if not story_summary:
+                    st.error("Story Summary is required.")
                 elif len([c for c in choices_list if c]) == 0:
                     st.error("At least one choice is required.")
+                elif len([turn for turn in dialogue_sequence if turn["npc_line"] and turn["player_line"]]) == 0:
+                    st.error("At least one complete dialogue turn (NPC line + Player line) is required.")
                 else:
                     filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
                     content = json.dumps(preview, indent=2)
