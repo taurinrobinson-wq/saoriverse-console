@@ -319,23 +319,27 @@ if view_mode == "Central View":
 
         npc_name = glyph_row["NPC Giver"]
         dialogue_sequence = []
+        
+        # Speaker options for encounters
+        speaker_options = ["Player", "Ravi", "Nima", "Ravi + Nima"]
+        
         for i in range(num_dialogue_turns):
             st.markdown(f"#### Dialogue Turn {i+1}")
             
-            col_npc, col_player = st.columns(2)
+            col_speaker, col_line = st.columns([1.5, 3])
             
-            with col_npc:
-                npc_line = st.text_input(
-                    f"{npc_name} (NPC Line {i+1})",
-                    placeholder="What does the NPC say?",
-                    key=f"npc_line_{idx}_{i}"
+            with col_speaker:
+                speaker = st.selectbox(
+                    "Speaker",
+                    options=speaker_options,
+                    key=f"speaker_{idx}_{i}"
                 )
             
-            with col_player:
-                player_line = st.text_input(
-                    f"Player (Player Line {i+1})",
-                    placeholder="Player's response or action...",
-                    key=f"player_line_{idx}_{i}"
+            with col_line:
+                dialogue_line = st.text_input(
+                    "Dialogue",
+                    placeholder="What does this speaker say?",
+                    key=f"dialogue_line_{idx}_{i}"
                 )
             
             # Narrative function options with human-readable display
@@ -359,9 +363,8 @@ if view_mode == "Central View":
             )
             
             dialogue_sequence.append({
-                "npc": npc_name,
-                "npc_line": npc_line,
-                "player_line": player_line,
+                "speaker": speaker,
+                "dialogue": dialogue_line,
                 "narrative_function": narrative_function
             })
 
@@ -460,13 +463,12 @@ if view_mode == "Central View":
             "story_summary": story_summary,
             "dialogue_sequence": [
                 {
-                    "npc": turn["npc"],
-                    "npc_line": turn["npc_line"],
-                    "player_line": turn["player_line"],
+                    "speaker": turn["speaker"],
+                    "dialogue": turn["dialogue"],
                     "narrative_function": turn["narrative_function"]
                 }
                 for turn in dialogue_sequence
-                if turn["npc_line"] and turn["player_line"]
+                if turn["dialogue"]
             ],
             "choices": [c for c in choices_list if c],
             "relational_story": {
@@ -483,9 +485,9 @@ if view_mode == "Central View":
 
         st.markdown("### Formatted Dialogue Preview")
         formatted_dialogue = "\n\n".join([
-            f'{turn["npc"]}: "{turn["npc_line"]}"\nPlayer: "{turn["player_line"]}"'
+            f'{turn["speaker"]}: "{turn["dialogue"]}"'
             for turn in dialogue_sequence
-            if turn["npc_line"] and turn["player_line"]
+            if turn["dialogue"]
         ])
         st.code(formatted_dialogue if formatted_dialogue else "(No dialogue entered yet)")
 
@@ -497,8 +499,8 @@ if view_mode == "Central View":
                 st.error("Story Summary is required.")
             elif len([c for c in choices_list if c]) == 0:
                 st.error("At least one choice is required.")
-            elif len([turn for turn in dialogue_sequence if turn["npc_line"] and turn["player_line"]]) == 0:
-                st.error("At least one complete dialogue turn (NPC line + Player line) is required.")
+            elif len([turn for turn in dialogue_sequence if turn["dialogue"]]) == 0:
+                st.error("At least one dialogue turn with content is required.")
             else:
                 filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
                 content = json.dumps(preview, indent=2)
