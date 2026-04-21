@@ -15,6 +15,7 @@ import streamlit as st
 import pandas as pd
 import networkx as nx
 import json
+import os
 from pathlib import Path
 from typing import Dict, List, Any
 import plotly.graph_objects as go
@@ -57,11 +58,19 @@ def commit_story_to_repo(filename: str, content: str):
         tuple: (success: bool, message: str)
     """
     try:
-        # Get GitHub token from Streamlit secrets
-        if "GITHUB_TOKEN" not in st.secrets:
-            return False, "GitHub token not configured in secrets."
+        # Get GitHub token from Streamlit secrets or environment variable
+        github_token = None
         
-        github_token = st.secrets["GITHUB_TOKEN"]
+        # Try Streamlit secrets first (for local/Cloud development)
+        if "GITHUB_TOKEN" in st.secrets:
+            github_token = st.secrets["GITHUB_TOKEN"]
+        # Fall back to environment variable (for CI/CD or alternative deployment)
+        elif "GITHUB_TOKEN" in os.environ:
+            github_token = os.environ["GITHUB_TOKEN"]
+        
+        if not github_token:
+            return False, "GitHub token not configured. Set GITHUB_TOKEN in Streamlit secrets or as environment variable."
+        
         g = Github(github_token)
         repo = g.get_repo("taurinrobinson-wq/saoriverse-console")
         
