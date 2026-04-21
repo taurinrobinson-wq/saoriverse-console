@@ -240,66 +240,34 @@ if view_mode == "Central View":
         
         st.markdown("### 📖 Glyph Registry — Click glyph name to open Story Builder")
         
+        # Import html escape for safe rendering
+        import html as html_module
+        
         # Build HTML table with styled clickable glyph names
         html_table = """
-        <style>
-            .glyph-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin: 16px 0;
-            }
-            .glyph-table th {
-                background-color: #f0f2f6;
-                padding: 12px;
-                text-align: left;
-                font-weight: 600;
-                border-bottom: 2px solid #ddd;
-            }
-            .glyph-table td {
-                padding: 10px 12px;
-                border-bottom: 1px solid #eee;
-            }
-            .glyph-table tr:hover {
-                background-color: #f9f9f9;
-            }
-            .glyph-name {
-                color: #1f77b4;
-                text-decoration: none;
-                font-weight: 500;
-                cursor: pointer;
-            }
-            .glyph-name:hover {
-                text-decoration: underline;
-            }
-        </style>
-        <table class="glyph-table">
-            <thead>
-                <tr>
-                    <th>✍️ Glyph</th>
-                    <th>NPC Giver</th>
-                    <th>Category</th>
-                    <th>Theme</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
-            <tbody>
-        """
+<style>
+.glyph-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+.glyph-table th { background-color: #f0f2f6; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #ddd; }
+.glyph-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+.glyph-table tr:hover { background-color: #f9f9f9; }
+.glyph-name { color: #1f77b4; font-weight: 500; cursor: pointer; }
+.glyph-name:hover { text-decoration: underline; }
+</style>
+<table class="glyph-table">
+<thead><tr><th>✍️ Glyph</th><th>NPC Giver</th><th>Category</th><th>Theme</th><th>Location</th></tr></thead>
+<tbody>
+"""
         
         for idx, (_, row) in enumerate(table_df.iterrows()):
-            html_table += f"""
-                <tr>
-                    <td><span class="glyph-name" id="glyph_{idx}">{row['Glyph']}</span></td>
-                    <td>{row['NPC Giver']}</td>
-                    <td>{row['Category']}</td>
-                    <td>{row['Theme']}</td>
-                    <td>{row['Location']}</td>
-                </tr>
-            """
+            glyph_escaped = html_module.escape(str(row['Glyph']))
+            npc_escaped = html_module.escape(str(row['NPC Giver']))
+            cat_escaped = html_module.escape(str(row['Category']))
+            theme_escaped = html_module.escape(str(row['Theme']))
+            loc_escaped = html_module.escape(str(row['Location']))
+            
+            html_table += f"<tr><td><span class='glyph-name'>{glyph_escaped}</span></td><td>{npc_escaped}</td><td>{cat_escaped}</td><td>{theme_escaped}</td><td>{loc_escaped}</td></tr>\n"
         
-        html_table += """
-            </tbody>
-        </table>
-        """
+        html_table += "</tbody></table>"
         
         st.markdown(html_table, unsafe_allow_html=True)
         
