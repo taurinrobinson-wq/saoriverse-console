@@ -534,21 +534,22 @@ if view_mode == "Central View":
     # Glyph selector (synced with story builder)
     glyph_options = df_core["Glyph"].tolist()
     
-    # Auto-sync when a glyph is just edited
+    # 1. SYNC FIRST - Update export selection if a glyph was just edited
     if "last_edited_glyph" in st.session_state:
         if st.session_state.last_edited_glyph in glyph_options:
             st.session_state.export_glyph_selection = st.session_state.last_edited_glyph
         # Clear the flag so it only syncs once
         del st.session_state.last_edited_glyph
     
-    # Initialize export selection state (after potential sync)
+    # 2. THEN INITIALIZE - Set up export selection state if needed
     if "export_glyph_selection" not in st.session_state:
         st.session_state.export_glyph_selection = glyph_options[0] if glyph_options else None
     
-    # Ensure selection is valid and in options
+    # 3. VALIDATE - Ensure selection is valid and in options
     if st.session_state.export_glyph_selection not in glyph_options:
         st.session_state.export_glyph_selection = glyph_options[0] if glyph_options else None
     
+    # 4. RENDER - Create selectbox with synced glyph
     selected_export_glyph = st.selectbox(
         "Select glyph to export",
         options=glyph_options,
