@@ -304,14 +304,22 @@ if view_mode == "Central View":
             tone_df = pd.DataFrame(
                 list(tone_impact.items()),
                 columns=["Stat", "Delta"]
-            )
+            ).sort_values("Delta", ascending=False)
             st.dataframe(tone_df, use_container_width=True, hide_index=True)
             
             # REMNANTS Impact
             st.markdown("**REMNANTS Impact**")
             st.markdown(f"• **Primary NPC**: {remnants_impact['npc_name']}")
-            st.markdown(f"• **Trust Delta**: +{remnants_impact['trust_delta']:.2f}")
-            if remnants_impact['related_npcs']:
+            
+            # Display REMNANTS traits
+            if "traits" in remnants_impact:
+                traits_df = pd.DataFrame(
+                    list(remnants_impact["traits"].items()),
+                    columns=["Trait", "Effect"]
+                ).sort_values("Effect", ascending=False)
+                st.dataframe(traits_df, use_container_width=True, hide_index=True)
+            
+            if remnants_impact.get('related_npcs'):
                 st.markdown(f"• **Related NPCs**: {', '.join(remnants_impact['related_npcs'][:3])}")
             
             # Endgame Impact

@@ -130,34 +130,39 @@ def match_cipher_to_glyph(glyph_row: Dict, df_cipher: pd.DataFrame) -> pd.DataFr
 def compute_tone_impact(glyph_row: Dict, df_fragments: pd.DataFrame = None) -> Dict[str, float]:
     """Compute TONE stat impact based on glyph category and fragments.
     
-    Base impact by category:
-    - Collapse: -0.2 to -0.05
-    - Ache: -0.1 to +0.1
-    - Sovereignty: +0.05 to +0.2
-    - Presence: +0.1 to +0.3
-    - Trust: +0.15 to +0.3
-    - Legacy: +0.2 to +0.4
+    TONE Stats (canonical):
+    - trust: Reliability and promise-keeping
+    - observation: Perception and wisdom
+    - narrative_presence: Agency and boldness
+    - empathy: Connection and emotional resonance
     
-    Then apply fragment effects.
+    Base impact by category:
+    - Collapse: -trust, -observation
+    - Ache: +empathy, -narrative_presence
+    - Sovereignty: +observation, +narrative_presence
+    - Presence: +empathy, +narrative_presence
+    - Trust: +trust, +empathy
+    - Legacy: +observation, +empathy
+    - Transcendence: +all (balanced)
     """
     tone_impact = {
-        "courage": 0.0,
-        "wisdom": 0.0,
-        "empathy": 0.0,
-        "resolve": 0.0
+        "trust": 0.0,
+        "observation": 0.0,
+        "narrative_presence": 0.0,
+        "empathy": 0.0
     }
     
     category = str(glyph_row.get("Category", "")).strip().lower()
     
-    # Base category impacts
+    # Base category impacts (canonical TONE stats)
     category_impacts = {
-        "collapse": {"resolve": -0.2, "wisdom": -0.1},
-        "ache": {"empathy": -0.05, "courage": -0.1},
-        "sovereignty": {"courage": 0.15, "resolve": 0.1},
-        "presence": {"empathy": 0.25, "wisdom": 0.15},
-        "trust": {"empathy": 0.25, "wisdom": 0.1},
-        "legacy": {"wisdom": 0.2, "empathy": 0.15},
-        "transcendence": {"empathy": 0.3, "wisdom": 0.25}
+        "collapse": {"trust": -0.2, "observation": -0.1},
+        "ache": {"empathy": 0.25, "narrative_presence": -0.05},
+        "sovereignty": {"observation": 0.15, "narrative_presence": 0.15},
+        "presence": {"empathy": 0.25, "narrative_presence": 0.15},
+        "trust": {"trust": 0.25, "empathy": 0.15},
+        "legacy": {"observation": 0.2, "empathy": 0.15},
+        "transcendence": {"trust": 0.2, "observation": 0.2, "narrative_presence": 0.2, "empathy": 0.2}
     }
     
     for cat, impacts in category_impacts.items():
@@ -167,16 +172,17 @@ def compute_tone_impact(glyph_row: Dict, df_fragments: pd.DataFrame = None) -> D
     # Apply fragment effects if provided
     if df_fragments is not None and not df_fragments.empty:
         for _, fragment in df_fragments.head(3).iterrows():
-            # Extract ability gains from fragment
+            # Extract ability gains from fragment and map to TONE stats
             ability_gained = str(fragment.get("Ability_Gained", "")).lower()
+            
             if "observation" in ability_gained:
-                tone_impact["wisdom"] += 0.05
+                tone_impact["observation"] += 0.05
             if "empathy" in ability_gained:
                 tone_impact["empathy"] += 0.05
             if "authority" in ability_gained:
-                tone_impact["resolve"] += 0.05
+                tone_impact["narrative_presence"] += 0.05
             if "resolve" in ability_gained:
-                tone_impact["resolve"] += 0.05
+                tone_impact["trust"] += 0.05
     
     return tone_impact
 
@@ -184,18 +190,59 @@ def compute_tone_impact(glyph_row: Dict, df_fragments: pd.DataFrame = None) -> D
 def compute_remnants_impact(glyph_row: Dict, df_fragments: pd.DataFrame = None) -> Dict[str, Any]:
     """Compute REMNANTS NPC impact based on glyph giver and fragments.
     
+    REMNANTS Traits (canonical):
+    - resolve: Determination and perseverance
+    - empathy: Emotional connection
+    - memory: Recall and history
+    - nuance: Understanding complexity
+    - authority: Confidence and agency
+    - need: Vulnerability and reliance
+    - trust: Reliability
+    - skepticism: Critical thinking
+    
     Returns:
     - npc_name: Primary NPC giver
-    - trust_delta: Change in trust with NPC
+    - traits: Dict of REMNANTS trait effects
     - related_npcs: NPCs affected by fragments
     """
     npc_giver = str(glyph_row.get("NPC Giver", "")).strip()
     
     remnants_impact = {
         "npc_name": npc_giver,
-        "trust_delta": 0.15,  # Base trust gain
+        "traits": {
+            "resolve": 0.15,
+            "empathy": 0.1,
+            "memory": 0.15,
+            "nuance": 0.05,
+            "authority": 0.1,
+            "need": 0.0,
+            "trust": 0.15,
+            "skepticism": 0.0
+        },
         "related_npcs": []
     }
+    
+    # Category-specific trait effects
+    category = str(glyph_row.get("Category", "")).strip().lower()
+    
+    if "collapse" in category:
+        remnants_impact["traits"]["skepticism"] += 0.2
+        remnants_impact["traits"]["trust"] -= 0.1
+    elif "ache" in category:
+        remnants_impact["traits"]["empathy"] += 0.2
+        remnants_impact["traits"]["memory"] += 0.15
+    elif "trust" in category:
+        remnants_impact["traits"]["trust"] += 0.25
+        remnants_impact["traits"]["resolve"] += 0.1
+    elif "legacy" in category:
+        remnants_impact["traits"]["memory"] += 0.25
+        remnants_impact["traits"]["empathy"] += 0.1
+    elif "sovereignty" in category:
+        remnants_impact["traits"]["authority"] += 0.2
+        remnants_impact["traits"]["resolve"] += 0.15
+    elif "presence" in category:
+        remnants_impact["traits"]["empathy"] += 0.15
+        remnants_impact["traits"]["nuance"] += 0.15
     
     # Fragment NPC relationships
     if df_fragments is not None and not df_fragments.empty:
@@ -203,11 +250,23 @@ def compute_remnants_impact(glyph_row: Dict, df_fragments: pd.DataFrame = None) 
             frag_npc = str(fragment.get("NPC_Name", "")).strip()
             if frag_npc and frag_npc != npc_giver:
                 remnants_impact["related_npcs"].append(frag_npc)
+                
+                # Fragment-specific trait effects
+                ability_gained = str(fragment.get("Ability_Gained", "")).lower()
+                if "empathy" in ability_gained:
+                    remnants_impact["traits"]["empathy"] += 0.05
+                if "observation" in ability_gained:
+                    remnants_impact["traits"]["nuance"] += 0.05
+                if "authority" in ability_gained:
+                    remnants_impact["traits"]["authority"] += 0.05
+                if "resolve" in ability_gained:
+                    remnants_impact["traits"]["resolve"] += 0.05
     
     # Transcendence-specific: receivers instead of givers
-    if "transcendence" in str(glyph_row.get("Category", "")).lower():
+    if "transcendence" in category:
         remnants_impact["npc_name"] = str(glyph_row.get("NPC Receiver", "")).strip()
-        remnants_impact["trust_delta"] = 0.2
+        remnants_impact["traits"]["trust"] += 0.1
+        remnants_impact["traits"]["resolve"] += 0.1
     
     return remnants_impact
 
