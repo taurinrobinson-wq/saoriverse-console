@@ -1,14 +1,13 @@
 # Saoriverse Console / FirstPerson Requirements
 # All-in-one requirements file for the application
-# ⚡ OPTIMIZED FOR PYTHON 3.12 (spacy/audio compatibility)
-# Python 3.11 also supported, Python 3.13+ not recommended due to spacy/torch issues
+# ⚡ OPTIMIZED FOR PYTHON 3.11 (stable, most compatible)
+# Python 3.12 also supported, Python 3.13+ not recommended due to spacy/torch/aggrid issues
 
 # ============================================================================
 # CORE STREAMLIT & WEB FRAMEWORK
 # ============================================================================
 streamlit==1.37.1
-streamlit-aggrid>=0.3.5; python_version < '3.14'
-streamlit-aggrid @ git+https://github.com/PablocFonseca/streamlit-aggrid.git; python_version >= '3.14'
+streamlit-aggrid>=0.3.5
 python-dotenv==1.0.1
 requests==2.32.3
 supabase==2.6.0
