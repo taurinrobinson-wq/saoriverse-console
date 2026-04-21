@@ -201,6 +201,8 @@ if view_mode == "Central View":
     # Initialize session state for story builder selection
     if "selected_story_glyph" not in st.session_state:
         st.session_state.selected_story_glyph = None
+    if "last_selected_glyph_name" not in st.session_state:
+        st.session_state.last_selected_glyph_name = None
     
     # Search box
     search_term = st.text_input(
@@ -240,9 +242,9 @@ if view_mode == "Central View":
         st.markdown("### Click any row below to open the Story Builder")
         
         if HAS_AGGRID:
-            # Build AgGrid options
+            # Build AgGrid options for single-row selection
             gb = GridOptionsBuilder.from_dataframe(table_df)
-            gb.configure_selection('single', use_checkbox=False)
+            gb.configure_selection(selection_mode='single', use_checkbox=False)
             gb.configure_grid_options(domLayout='normal')
             grid_options = gb.build()
             
@@ -253,16 +255,23 @@ if view_mode == "Central View":
                 update_mode=GridUpdateMode.SELECTION_CHANGED,
                 height=400,
                 allow_unsafe_jscode=True,
-                theme="streamlit"
+                theme="streamlit",
+                key="glyph_grid"
             )
             
-            # Handle row selection
-            if grid_response["selected_rows"]:
+            # Handle row selection - detect NEW selections by comparing with previous
+            if grid_response.get("selected_rows") and len(grid_response["selected_rows"]) > 0:
                 selected_row = grid_response["selected_rows"][0]
-                glyph_name = selected_row["Glyph"]
-                st.session_state.selected_story_glyph = df_core[df_core["Glyph"] == glyph_name].iloc[0]
+                glyph_name = selected_row.get("Glyph")
+                
+                # Only update if this is a NEW selection (different from last time)
+                if glyph_name and glyph_name != st.session_state.last_selected_glyph_name:
+                    st.session_state.last_selected_glyph_name = glyph_name
+                    st.session_state.selected_story_glyph = df_core[df_core["Glyph"] == glyph_name].iloc[0]
+                    st.rerun()
         else:
-            # Fallback: use regular dataframe display with buttons
+            # Fallback: use regular dataframe display with buttons (if AgGrid not available)
+            st.warning("⚠️ Interactive grid unavailable - AgGrid not installed")
             st.dataframe(table_df, use_container_width=True, height=400, hide_index=True)
             
             st.markdown("**Select a Glyph to Open Story Builder**")
