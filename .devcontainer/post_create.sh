@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
+set -e
 
 # Idempotent post-create script for devcontainer
 # - ensures a project virtualenv at .venv

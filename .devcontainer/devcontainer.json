@@ -28,8 +28,8 @@
     "GLYPH_MODE": "hybrid",
     "DEFAULT_TONE": "plain"
   },
-  "updateContentCommand": "bash .devcontainer/setup.sh",
-  "postCreateCommand": "bash .devcontainer/post_create.sh",
+  "updateContentCommand": "/bin/bash .devcontainer/setup.sh",
+  "postCreateCommand": "/bin/bash .devcontainer/post_create.sh",
   // Disabled auto-start of Streamlit to prevent memory exhaustion
   // Run manually with: streamlit run src/streamlit_integration/chat_sandbox.py --server.enableCORS false --server.enableXsrfProtection false
   "portsAttributes": {
