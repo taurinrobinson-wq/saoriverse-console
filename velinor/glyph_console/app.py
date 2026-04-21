@@ -23,12 +23,9 @@ from github import Github
 from github.GithubException import GithubException
 import base64
 
-try:
-    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
-    HAS_AGGRID = True
-except ImportError as e:
-    HAS_AGGRID = False
-    print(f"❌ AgGrid import failed: {e}")
+# Note: Removed AgGrid due to incompatibility between streamlit-aggrid 0.3.3 and pandas 2.x
+# Using Streamlit's native st.data_editor() instead for interactive tables
+HAS_AGGRID = False
 
 # Import utilities
 from utils import (

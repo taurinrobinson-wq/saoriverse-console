@@ -30,7 +30,7 @@ lxml==5.3.0
 # ============================================================================
 # DATA PROCESSING & NUMERICAL
 # ============================================================================
-pandas>=2.0.0,<3.0.0  # 3.12 compatible, cap at 2.x for stability
+pandas>=2.0.0,<3.0.0  # Using native Streamlit components instead of AgGrid
 numpy>=1.24.0,<2.0.0  # 3.12 compatible, cap at 1.x for stability
 plotly>=5.0.0  # Interactive visualizations for Streamlit
 networkx>=3.0  # Graph/network analysis for relationship graphs
