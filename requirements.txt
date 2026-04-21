@@ -6,8 +6,8 @@
 # ============================================================================
 # CORE STREAMLIT & WEB FRAMEWORK
 # ============================================================================
-streamlit==1.37.1
-streamlit-aggrid>=0.3.5
+streamlit==1.55.0
+streamlit-aggrid==0.3.3
 python-dotenv==1.0.1
 requests==2.32.3
 supabase==2.6.0
