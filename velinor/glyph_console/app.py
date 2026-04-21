@@ -22,7 +22,12 @@ import plotly.express as px
 from github import Github
 from github.GithubException import GithubException
 import base64
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
+
+try:
+    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
+    HAS_AGGRID = True
+except ImportError:
+    HAS_AGGRID = False
 
 # Import utilities
 from utils import (
@@ -234,27 +239,42 @@ if view_mode == "Central View":
         
         st.markdown("### Click any row below to open the Story Builder")
         
-        # Build AgGrid options
-        gb = GridOptionsBuilder.from_dataframe(table_df)
-        gb.configure_selection('single', use_checkbox=False)
-        gb.configure_grid_options(domLayout='normal')
-        grid_options = gb.build()
-        
-        # Render interactive grid
-        grid_response = AgGrid(
-            table_df,
-            gridOptions=grid_options,
-            update_mode=GridUpdateMode.SELECTION_CHANGED,
-            height=400,
-            allow_unsafe_jscode=True,
-            theme="streamlit"
-        )
-        
-        # Handle row selection
-        if grid_response["selected_rows"]:
-            selected_row = grid_response["selected_rows"][0]
-            glyph_name = selected_row["Glyph"]
-            st.session_state.selected_story_glyph = df_core[df_core["Glyph"] == glyph_name].iloc[0]
+        if HAS_AGGRID:
+            # Build AgGrid options
+            gb = GridOptionsBuilder.from_dataframe(table_df)
+            gb.configure_selection('single', use_checkbox=False)
+            gb.configure_grid_options(domLayout='normal')
+            grid_options = gb.build()
+            
+            # Render interactive grid
+            grid_response = AgGrid(
+                table_df,
+                gridOptions=grid_options,
+                update_mode=GridUpdateMode.SELECTION_CHANGED,
+                height=400,
+                allow_unsafe_jscode=True,
+                theme="streamlit"
+            )
+            
+            # Handle row selection
+            if grid_response["selected_rows"]:
+                selected_row = grid_response["selected_rows"][0]
+                glyph_name = selected_row["Glyph"]
+                st.session_state.selected_story_glyph = df_core[df_core["Glyph"] == glyph_name].iloc[0]
+        else:
+            # Fallback: use regular dataframe display with buttons
+            st.warning("⚠️ Interactive grid unavailable. Using standard table view. Please install streamlit-aggrid.")
+            st.dataframe(table_df, use_container_width=True, height=400, hide_index=True)
+            
+            st.markdown("**Select a Glyph to Open Story Builder**")
+            cols = st.columns(4)
+            for idx, (_, row) in enumerate(filtered_core.iterrows()):
+                glyph_row = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
+                col_idx = idx % 4
+                
+                with cols[col_idx]:
+                    if st.button(f"✍️ {row['Glyph']}", key=f"open_story_{idx}"):
+                        st.session_state.selected_story_glyph = glyph_row
     
     # =====================================================================
     # Story Builder Modal (appears when a glyph is selected)
