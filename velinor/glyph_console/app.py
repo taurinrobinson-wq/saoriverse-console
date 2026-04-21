@@ -120,7 +120,8 @@ st.markdown("""
 @st.cache_data
 def load_datasets():
     """Load all four glyph datasets."""
-    base_path = Path("velinor/markdowngameinstructions/glyphs")
+    # Go up one level from velinor/glyph_console to velinor, then navigate to datasets
+    base_path = Path(__file__).parent.parent / "markdowngameinstructions" / "glyphs"
     
     try:
         df_core = pd.read_csv(base_path / "Glyph_Organizer.csv")
