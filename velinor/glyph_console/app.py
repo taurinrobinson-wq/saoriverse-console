@@ -329,7 +329,7 @@ if view_mode == "Central View":
                 title="Emotional System Alignment",
                 color_continuous_scale="Viridis"
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True, key=f"emotional_alignment_{idx}")
             
             # =====================================================================
             # ✍️ STORY BUILDER
