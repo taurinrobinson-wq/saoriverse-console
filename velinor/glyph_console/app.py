@@ -240,36 +240,82 @@ if view_mode == "Central View":
         
         st.markdown("### 📖 Glyph Registry — Click any glyph name to open Story Builder")
         
-        # Create header row with column widths
-        col_widths = [2, 1.5, 1, 2, 2]
-        header_cols = st.columns(col_widths)
-        header_cols[0].write("**✍️ Glyph**")
-        header_cols[1].write("**NPC Giver**")
-        header_cols[2].write("**Category**")
-        header_cols[3].write("**Theme**")
-        header_cols[4].write("**Location**")
+        # Create scrollable container
+        scrollable_html = """
+        <style>
+            .glyph-registry-scroll {
+                max-height: 400px;
+                overflow-y: auto;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 16px;
+                margin: 16px 0;
+            }
+            .glyph-row {
+                display: grid;
+                grid-template-columns: 2fr 1.5fr 1fr 2fr 2fr;
+                gap: 16px;
+                padding: 8px 0;
+                border-bottom: 1px solid #eee;
+                align-items: center;
+            }
+            .glyph-row:last-child {
+                border-bottom: none;
+            }
+            .glyph-header {
+                display: grid;
+                grid-template-columns: 2fr 1.5fr 1fr 2fr 2fr;
+                gap: 16px;
+                padding: 8px 0;
+                font-weight: 600;
+                border-bottom: 2px solid #ddd;
+                margin-bottom: 8px;
+            }
+        </style>
+        <div class="glyph-registry-scroll">
+        """
         
-        st.divider()
+        # Header
+        scrollable_html += """
+        <div class="glyph-header">
+            <div>✍️ Glyph</div>
+            <div>NPC Giver</div>
+            <div>Category</div>
+            <div>Theme</div>
+            <div>Location</div>
+        </div>
+        """
         
-        # Create data rows - each glyph name is a clickable button
-        for _, row in table_df.iterrows():
-            cols = st.columns(col_widths)
+        # Rows (as static HTML for now, we'll use Streamlit buttons below)
+        for idx, (_, row) in enumerate(table_df.iterrows()):
+            scrollable_html += f"""
+        <div class="glyph-row">
+            <div>{row['Glyph']}</div>
+            <div>{row['NPC Giver']}</div>
+            <div>{row['Category']}</div>
+            <div>{row['Theme']}</div>
+            <div>{row['Location']}</div>
+        </div>
+            """
+        
+        scrollable_html += "</div>"
+        st.markdown(scrollable_html, unsafe_allow_html=True)
+        
+        # Clickable buttons below the scrollable table (hidden with empty container)
+        st.markdown("**Select a glyph from the list above:**")
+        cols = st.columns(4)
+        for idx, (_, row) in enumerate(table_df.iterrows()):
+            glyph_full = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
+            col_idx = idx % 4
             
-            # First column: clickable glyph name button
-            if cols[0].button(
-                row['Glyph'], 
-                key=f"glyph_{hash(row['Glyph']) % 1000000}",
-                use_container_width=True
-            ):
-                glyph_full = df_core[df_core["Glyph"] == row["Glyph"]].iloc[0]
-                st.session_state.selected_story_glyph = glyph_full
-                st.rerun()
-            
-            # Other columns: static text display
-            cols[1].write(row['NPC Giver'])
-            cols[2].write(row['Category'])
-            cols[3].write(row['Theme'])
-            cols[4].write(row['Location'])
+            with cols[col_idx]:
+                if st.button(
+                    f"✍️ {row['Glyph']}", 
+                    key=f"glyph_btn_{hash(row['Glyph']) % 1000000}",
+                    use_container_width=True
+                ):
+                    st.session_state.selected_story_glyph = glyph_full
+                    st.rerun()
     
     # =====================================================================
     # Story Builder Modal (appears when a glyph is selected)
