@@ -488,7 +488,6 @@ if view_mode == "Central View":
         # Show glyph info when hovering/selected through a different mechanism (display a chart here)
         st.markdown("---")
         st.markdown("*Click a button above to open the story builder for a glyph*")
-    """)
     
     # Glyph selector
     selected_export_glyph = st.selectbox(
