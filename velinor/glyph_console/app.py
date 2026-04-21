@@ -19,6 +19,9 @@ from pathlib import Path
 from typing import Dict, List, Any
 import plotly.graph_objects as go
 import plotly.express as px
+from github import Github
+from github.GithubException import GithubException
+import base64
 
 # Import utilities
 from utils import (
@@ -33,6 +36,58 @@ from utils import (
     get_graph_stats,
     export_glyph_to_json
 )
+
+# ============================================================================
+# GITHUB INTEGRATION HELPERS
+# ============================================================================
+
+def commit_story_to_repo(filename: str, content: str):
+    """
+    Commit a story file to the GitHub repository using PyGithub.
+    
+    Args:
+        filename: Name of the file to commit (e.g., "Glyph_of_Memory.json")
+        content: JSON string content of the story
+    
+    Returns:
+        tuple: (success: bool, message: str)
+    """
+    try:
+        # Get GitHub token from Streamlit secrets
+        if "GITHUB_TOKEN" not in st.secrets:
+            return False, "GitHub token not configured in secrets."
+        
+        github_token = st.secrets["GITHUB_TOKEN"]
+        g = Github(github_token)
+        repo = g.get_repo("taurinrobinson-wq/saoriverse-console")
+        
+        # Build the file path
+        path = f"velinor/stories/{filename}"
+        
+        try:
+            # Try to get existing file
+            existing = repo.get_contents(path, ref="main")
+            # File exists, update it
+            repo.update_file(
+                path,
+                f"Update story for {filename}",
+                content,
+                existing.sha,
+                branch="main"
+            )
+            return True, f"Story updated: {filename}"
+        except GithubException:
+            # File doesn't exist, create it
+            repo.create_file(
+                path,
+                f"Add story for {filename}",
+                content,
+                branch="main"
+            )
+            return True, f"Story created: {filename}"
+    
+    except Exception as e:
+        return False, f"Error committing to GitHub: {str(e)}"
 
 # ============================================================================
 # PAGE CONFIG
@@ -285,6 +340,108 @@ if view_mode == "Central View":
             color_continuous_scale="Viridis"
         )
         st.plotly_chart(fig, use_container_width=True)
+        
+        # ====================================================================
+        # STORY BUILDER PANEL
+        # ====================================================================
+        
+        st.divider()
+        st.subheader("✍️ Story Builder")
+        st.markdown("Author the story experience for this glyph encounter.")
+        
+        # Story Summary
+        story_summary = st.text_area(
+            "Story Summary",
+            placeholder="Describe the narrative context and what the player experiences when encountering this glyph...",
+            height=100,
+            key=f"story_summary_{selected_glyph}"
+        )
+        
+        # Dialogue
+        dialogue_text = st.text_area(
+            "Dialogue",
+            placeholder="What does the NPC say? Include key dialogue that conveys the glyph's meaning...",
+            height=120,
+            key=f"dialogue_{selected_glyph}"
+        )
+        
+        # Dynamic Choice Builder
+        st.markdown("**Player Choices**")
+        num_choices = int(st.number_input(
+            "How many choices should the player have?",
+            min_value=1,
+            max_value=5,
+            value=2,
+            key=f"num_choices_{selected_glyph}"
+        ))
+        
+        # Generate choice input fields
+        choices_list = []
+        choice_cols = st.columns(num_choices)
+        
+        for i in range(num_choices):
+            with choice_cols[i % len(choice_cols)]:
+                choice_text = st.text_input(
+                    f"Choice {i+1}",
+                    placeholder=f"Option {i+1} text...",
+                    key=f"choice_{selected_glyph}_{i}"
+                )
+                if choice_text:
+                    choices_list.append(choice_text)
+        
+        # Confirm Story Button
+        st.divider()
+        col_confirm, col_preview = st.columns(2)
+        
+        with col_confirm:
+            if st.button("📝 Confirm Story", key=f"confirm_story_{selected_glyph}"):
+                # Validate inputs
+                if not story_summary or not dialogue_text:
+                    st.error("Story Summary and Dialogue are required.")
+                elif len(choices_list) == 0:
+                    st.error("At least one choice is required.")
+                else:
+                    # Build story JSON
+                    story_data = {
+                        "glyph": glyph_row["Glyph"],
+                        "category": glyph_row["Category"],
+                        "npc": glyph_row["NPC Giver"],
+                        "theme": glyph_row["Theme"],
+                        "location": glyph_row["Location"],
+                        "story_summary": story_summary,
+                        "dialogue": dialogue_text,
+                        "choices": choices_list
+                    }
+                    
+                    # Commit to GitHub
+                    filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
+                    content = json.dumps(story_data, indent=2)
+                    
+                    with st.spinner(f"Committing {filename} to GitHub..."):
+                        success, message = commit_story_to_repo(filename, content)
+                    
+                    if success:
+                        st.success(f"✓ {message}")
+                        st.info(f"Story saved to: `velinor/stories/{filename}`")
+                    else:
+                        st.error(f"✗ {message}")
+        
+        with col_preview:
+            if st.button("👁️ Preview JSON", key=f"preview_story_{selected_glyph}"):
+                if story_summary and dialogue_text and len(choices_list) > 0:
+                    story_data = {
+                        "glyph": glyph_row["Glyph"],
+                        "category": glyph_row["Category"],
+                        "npc": glyph_row["NPC Giver"],
+                        "theme": glyph_row["Theme"],
+                        "location": glyph_row["Location"],
+                        "story_summary": story_summary,
+                        "dialogue": dialogue_text,
+                        "choices": choices_list
+                    }
+                    st.json(story_data)
+                else:
+                    st.warning("Fill in all fields to preview.")
 
 
 # ============================================================================
