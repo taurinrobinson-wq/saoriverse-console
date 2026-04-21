@@ -5,9 +5,6 @@ toolbarMode = "viewer"
 [logger]
 level = "info"
 
-[client]
-showErrorDetails = false
-
 [server]
 headless = true
 port = 8501
