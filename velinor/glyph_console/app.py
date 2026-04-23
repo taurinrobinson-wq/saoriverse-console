@@ -310,13 +310,16 @@ if view_mode == "Central View":
 
         # Parse NPC names from the NPC Giver column
         def parse_npc_names(npc_giver_string):
-            """Parse NPC names from string like 'Ravi and Nima' or 'Ravi, Nima'"""
+            """Parse NPC names from string like 'Ravi and Nima', 'Ravi, Nima', or 'Sera the Herb Novice & Korrin the Gossip'"""
             if not npc_giver_string or pd.isna(npc_giver_string):
                 return []
             
-            # Split by "and" or comma
+            # Split by "&", "and", or comma
             names = []
-            parts = str(npc_giver_string).replace(" and ", ",").split(",")
+            text = str(npc_giver_string)
+            # Replace different separators with comma
+            text = text.replace(" & ", ",").replace(" and ", ",")
+            parts = text.split(",")
             for part in parts:
                 name = part.strip()
                 if name:
