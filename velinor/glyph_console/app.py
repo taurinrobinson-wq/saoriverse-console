@@ -399,7 +399,7 @@ if view_mode == "Central View":
                     key=f"dialogue_line_{idx}_{i}"
                 )
             
-            # Narrative function options with human-readable display
+            # Narrative function / player subtext — depends on speaker
             narrative_options = [
                 "reveal_emotion",
                 "advance_plot",
@@ -411,18 +411,47 @@ if view_mode == "Central View":
                 "escalate_tension",
                 "test_player"
             ]
-            
-            narrative_function = st.selectbox(
-                f"Narrative Function {i+1}",
-                options=narrative_options,
-                format_func=lambda x: x.replace("_", " ").title(),
-                key=f"narr_func_{idx}_{i}"
-            )
-            
+
+            player_subtext_options = [
+                "seeking_safety",
+                "testing_boundaries",
+                "avoiding_pain",
+                "trying_to_impress",
+                "hiding_vulnerability",
+                "asserting_control",
+                "seeking_connection",
+                "distrusting_npc",
+                "feeling_overwhelmed",
+                "masking_confusion",
+                "trying_to_please",
+                "pushing_back",
+                "dissociating",
+                "hoping_for_rescue",
+                "preparing_to_withdraw"
+            ]
+
+            if speaker == "Player":
+                player_subtext = st.selectbox(
+                    f"Player Subtext {i+1}",
+                    options=player_subtext_options,
+                    format_func=lambda x: x.replace("_", " ").title(),
+                    key=f"player_subtext_{idx}_{i}"
+                )
+                narrative_function = None
+            else:
+                narrative_function = st.selectbox(
+                    f"Narrative Function {i+1}",
+                    options=narrative_options,
+                    format_func=lambda x: x.replace("_", " ").title(),
+                    key=f"narr_func_{idx}_{i}"
+                )
+                player_subtext = None
+
             dialogue_sequence.append({
                 "speaker": speaker,
                 "dialogue": dialogue_line,
-                "narrative_function": narrative_function
+                "narrative_function": narrative_function,
+                "player_subtext": player_subtext
             })
 
         st.subheader("Player Choices")
