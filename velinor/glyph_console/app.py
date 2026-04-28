@@ -345,6 +345,9 @@ if view_mode == "Central View":
                 name = part.strip()
                 if name:
                     names.append(name)
+            # Deduplicate while preserving order
+            seen = set()
+            names = [n for n in names if not (n in seen or seen.add(n))]
             return names
 
         parsed_npcs = parse_npc_names(npc_name)
