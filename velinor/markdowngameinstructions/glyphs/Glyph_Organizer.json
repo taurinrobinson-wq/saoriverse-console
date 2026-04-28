@@ -2627,7 +2627,7 @@
       "theme": "Community, restoration, interdependence",
       "npc": {
         "name": "Rasha",
-        "role": "Ferry Operator & Rasha - Ferry Operator",
+        "role": "Ferry Operator",
         "npc_images": [
           "npcs/rasha.png"
         ],

@@ -1182,7 +1182,7 @@
     {
       "id": "velinor-trus-010",
       "glyph_name": "Glyph of Mutual Passage",
-      "npc": "Rasha - Ferry Operator & Rasha - Ferry Operator",
+      "npc": "Rasha - Ferry Operator",
       "category": "Trust",
       "location": "Harbor Dock",
       "layer": 2,
@@ -1194,7 +1194,7 @@
       ],
       "tags": [
         "trust",
-        "rasha - ferry operator & rasha - ferry operator"
+        "rasha - ferry operator"
       ],
       "fragments": {
         "layer_0": "the player realizes that some bonds are built not through words but through reliable action,…",
