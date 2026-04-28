@@ -15,6 +15,7 @@ import streamlit as st
 import pandas as pd
 import networkx as nx
 import json
+import os
 from pathlib import Path
 from typing import Dict, List, Any
 import plotly.graph_objects as go
@@ -57,11 +58,19 @@ def commit_story_to_repo(filename: str, content: str):
         tuple: (success: bool, message: str)
     """
     try:
-        # Get GitHub token from Streamlit secrets
-        if "GITHUB_TOKEN" not in st.secrets:
-            return False, "GitHub token not configured in secrets."
+        # Get GitHub token from Streamlit secrets or environment variable
+        github_token = None
         
-        github_token = st.secrets["GITHUB_TOKEN"]
+        # Try Streamlit secrets first (for local/Cloud development)
+        if "GITHUB_TOKEN" in st.secrets:
+            github_token = st.secrets["GITHUB_TOKEN"]
+        # Fall back to environment variable (for CI/CD or alternative deployment)
+        elif "GITHUB_TOKEN" in os.environ:
+            github_token = os.environ["GITHUB_TOKEN"]
+        
+        if not github_token:
+            return False, "GitHub token not configured. Set GITHUB_TOKEN in Streamlit secrets or as environment variable."
+        
         g = Github(github_token)
         repo = g.get_repo("taurinrobinson-wq/saoriverse-console")
         
@@ -308,6 +317,18 @@ if view_mode == "Central View":
             st.markdown("**Dialogue Sequence**")
             st.markdown("*Alternating NPC/Player lines with narrative functions*")
 
+        # Dialogue Sequence Builder
+        num_dialogue_turns = int(st.number_input(
+            "How many dialogue turns should there be?",
+            min_value=1,
+            max_value=20,
+            value=3,
+            key=f"num_dialogue_turns_{idx}"
+        ))
+
+        npc_name = glyph_row["NPC Giver"]
+        dialogue_sequence = []
+        
         # Parse NPC names from the NPC Giver column
         def parse_npc_names(npc_giver_string):
             """Parse NPC names from string like 'Ravi and Nima', 'Ravi, Nima', or 'Sera the Herb Novice & Korrin the Gossip'"""
@@ -326,25 +347,22 @@ if view_mode == "Central View":
                     names.append(name)
             return names
 
-        npc_giver = glyph_row["NPC Giver"]
-        parsed_npcs = parse_npc_names(npc_giver)
+        parsed_npcs = parse_npc_names(npc_name)
         
-        # Build speaker options: individual NPCs + combined + Player
-        speaker_options = parsed_npcs.copy() if parsed_npcs else ["NPC"]
-        if len(parsed_npcs) > 1:
-            speaker_options.append(" and ".join(parsed_npcs))
+        # Build speaker options: only use NPCs explicitly listed in NPC Giver column
+        # Never default to other NPCs - only the ones specified for this glyph
+        if parsed_npcs:
+            speaker_options = parsed_npcs.copy()
+            # Only add combined speaker option if there are multiple NPCs
+            if len(parsed_npcs) > 1:
+                speaker_options.append(" and ".join(parsed_npcs))
+        else:
+            # Fallback if no NPC specified
+            speaker_options = ["NPC"]
+        
+        # Always add Player as an option
         speaker_options.append("Player")
-
-        # Dialogue Sequence Builder
-        num_dialogue_turns = int(st.number_input(
-            "How many dialogue turns should there be?",
-            min_value=1,
-            max_value=20,
-            value=3,
-            key=f"num_dialogue_turns_{idx}"
-        ))
-
-        dialogue_sequence = []
+        
         for i in range(num_dialogue_turns):
             st.markdown(f"#### Dialogue Turn {i+1}")
             
@@ -359,8 +377,8 @@ if view_mode == "Central View":
             
             with col_line:
                 dialogue_line = st.text_input(
-                    f"{speaker}'s line",
-                    placeholder=f"What does {speaker} say?",
+                    "Dialogue",
+                    placeholder="What does this speaker say?",
                     key=f"dialogue_line_{idx}_{i}"
                 )
             
@@ -386,7 +404,7 @@ if view_mode == "Central View":
             
             dialogue_sequence.append({
                 "speaker": speaker,
-                "line": dialogue_line,
+                "dialogue": dialogue_line,
                 "narrative_function": narrative_function
             })
 
@@ -486,11 +504,11 @@ if view_mode == "Central View":
             "dialogue_sequence": [
                 {
                     "speaker": turn["speaker"],
-                    "line": turn["line"],
+                    "dialogue": turn["dialogue"],
                     "narrative_function": turn["narrative_function"]
                 }
                 for turn in dialogue_sequence
-                if turn["line"]
+                if turn["dialogue"]
             ],
             "choices": [c for c in choices_list if c],
             "relational_story": {
@@ -507,9 +525,9 @@ if view_mode == "Central View":
 
         st.markdown("### Formatted Dialogue Preview")
         formatted_dialogue = "\n\n".join([
-            f'{turn["speaker"]}: "{turn["line"]}"'
+            f'{turn["speaker"]}: "{turn["dialogue"]}"'
             for turn in dialogue_sequence
-            if turn["line"]
+            if turn["dialogue"]
         ])
         st.code(formatted_dialogue if formatted_dialogue else "(No dialogue entered yet)")
 
@@ -521,8 +539,8 @@ if view_mode == "Central View":
                 st.error("Story Summary is required.")
             elif len([c for c in choices_list if c]) == 0:
                 st.error("At least one choice is required.")
-            elif len([turn for turn in dialogue_sequence if turn["line"]]) == 0:
-                st.error("At least one dialogue line is required.")
+            elif len([turn for turn in dialogue_sequence if turn["dialogue"]]) == 0:
+                st.error("At least one dialogue turn with content is required.")
             else:
                 filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
                 content = json.dumps(preview, indent=2)
@@ -533,6 +551,8 @@ if view_mode == "Central View":
                 if success:
                     st.success(f"✓ {message}")
                     st.info(f"Story saved to: `velinor/stories/{filename}`")
+                    # Sync export section to this glyph
+                    st.session_state.last_edited_glyph = glyph_row["Glyph"]
                     st.session_state.selected_story_glyph = None
                 else:
                     st.error(f"✗ {message}")
@@ -542,11 +562,30 @@ if view_mode == "Central View":
         st.markdown("---")
         st.markdown("*Click a button above to open the story builder for a glyph*")
     
-    # Glyph selector
+    # Glyph selector (synced with story builder)
+    glyph_options = df_core["Glyph"].tolist()
+    
+    # 1. SYNC FIRST - Update export selection if a glyph was just edited
+    if "last_edited_glyph" in st.session_state:
+        if st.session_state.last_edited_glyph in glyph_options:
+            st.session_state.export_glyph_selection = st.session_state.last_edited_glyph
+        # Clear the flag so it only syncs once
+        del st.session_state.last_edited_glyph
+    
+    # 2. THEN INITIALIZE - Set up export selection state if needed
+    if "export_glyph_selection" not in st.session_state:
+        st.session_state.export_glyph_selection = glyph_options[0] if glyph_options else None
+    
+    # 3. VALIDATE - Ensure selection is valid and in options
+    if st.session_state.export_glyph_selection not in glyph_options:
+        st.session_state.export_glyph_selection = glyph_options[0] if glyph_options else None
+    
+    # 4. RENDER - Create selectbox with synced glyph
     selected_export_glyph = st.selectbox(
         "Select glyph to export",
-        options=df_core["Glyph"].tolist(),
-        key="export_select"
+        options=glyph_options,
+        index=glyph_options.index(st.session_state.export_glyph_selection) if st.session_state.export_glyph_selection in glyph_options else 0,
+        key="export_glyph_selection"
     )
     
     if selected_export_glyph:
