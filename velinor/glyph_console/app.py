@@ -137,7 +137,21 @@ def load_datasets():
         df_fragments = pd.read_csv(base_path / "Glyph_Fragments.csv")
         df_transcendence = pd.read_csv(base_path / "Glyph_Transcendence.csv")
         df_cipher = pd.read_csv(base_path / "cipher_seeds.csv")
-        
+
+        # Clean up any duplicate NPC names in the NPC Giver column (e.g. "Rasha & Rasha")
+        def dedup_npc_giver(value):
+            if not value or pd.isna(value):
+                return value
+            text = str(value).replace(" & ", ",").replace(" and ", ",")
+            parts = [p.strip() for p in text.split(",") if p.strip()]
+            seen = set()
+            unique = [p for p in parts if not (p in seen or seen.add(p))]
+            if len(unique) == 1:
+                return unique[0]
+            return " & ".join(unique)
+
+        df_core["NPC Giver"] = df_core["NPC Giver"].apply(dedup_npc_giver)
+
         return df_core, df_fragments, df_transcendence, df_cipher
     except FileNotFoundError as e:
         st.error(f"Could not load datasets: {e}")
