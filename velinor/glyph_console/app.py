@@ -327,6 +327,7 @@ if view_mode == "Central View":
                     use_container_width=True
                 ):
                     st.session_state.selected_story_glyph = glyph_full
+                    st.session_state.last_selected_glyph_name = row["Glyph"]
                     st.rerun()
                 
                 # Other columns: text display
@@ -939,6 +940,12 @@ if view_mode == "Central View":
     # 3. VALIDATE - Ensure selection is valid and in options
     if st.session_state.export_glyph_selection not in glyph_options:
         st.session_state.export_glyph_selection = glyph_options[0] if glyph_options else None
+
+    # 3.5 SYNC - When a glyph is opened in Story Builder, sync export selector once
+    if st.session_state.selected_story_glyph is not None:
+        selected_story_name = st.session_state.selected_story_glyph["Glyph"]
+        if selected_story_name in glyph_options and st.session_state.export_glyph_selection != selected_story_name:
+            st.session_state.export_glyph_selection = selected_story_name
     
     # 4. RENDER - Create selectbox with synced glyph
     selected_export_glyph = st.selectbox(
