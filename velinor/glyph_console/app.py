@@ -785,8 +785,8 @@ if view_mode == "Central View":
         ])
         st.code(formatted_dialogue if formatted_dialogue else "(No dialogue entered yet)")
 
-        st.markdown("### Full JSON Preview")
-        st.json(preview)
+        with st.expander("Full JSON Preview", expanded=False):
+            st.json(preview)
 
         st.markdown("### Branching Integrity Check")
         preview_nodes = preview.get("dialogue_nodes", [])
@@ -975,8 +975,8 @@ if view_mode == "Central View":
         export_json = export_glyph_to_json(glyph_row, related)
         
         # Display JSON
-        st.subheader("📋 Export Preview")
-        st.json(export_json)
+        with st.expander("📋 Export Preview", expanded=False):
+            st.json(export_json)
         
         # Download button
         st.divider()
