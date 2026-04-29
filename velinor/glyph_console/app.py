@@ -102,6 +102,43 @@ def commit_story_to_repo(filename: str, content: str):
     except Exception as e:
         return False, f"Error committing to GitHub: {str(e)}"
 
+
+def load_story_from_repo(filename: str):
+    """
+    Load a story JSON file from the GitHub repository if it exists.
+
+    Args:
+        filename: Name of the file to load (e.g., "Glyph_of_Memory.json")
+
+    Returns:
+        tuple: (found: bool, data: dict, message: str)
+    """
+    try:
+        github_token = None
+
+        if "GITHUB_TOKEN" in st.secrets:
+            github_token = st.secrets["GITHUB_TOKEN"]
+        elif "GITHUB_TOKEN" in os.environ:
+            github_token = os.environ["GITHUB_TOKEN"]
+
+        if not github_token:
+            return False, {}, "GitHub token not configured for story loading."
+
+        g = Github(github_token)
+        repo = g.get_repo("taurinrobinson-wq/saoriverse-console")
+        path = f"velinor/stories/{filename}"
+
+        try:
+            existing = repo.get_contents(path, ref="main")
+            content = existing.decoded_content.decode("utf-8")
+            data = json.loads(content)
+            return True, data, f"Loaded existing story: {filename}"
+        except GithubException:
+            return False, {}, f"No existing story found for: {filename}"
+
+    except Exception as e:
+        return False, {}, f"Error loading story from GitHub: {str(e)}"
+
 # ============================================================================
 # PAGE CONFIG
 # ============================================================================
@@ -304,6 +341,32 @@ if view_mode == "Central View":
     if st.session_state.selected_story_glyph is not None:
         glyph_row = st.session_state.selected_story_glyph
         idx = hash(glyph_row["Glyph"]) % 1000000  # Use hash for consistent key generation
+        glyph_name = glyph_row["Glyph"]
+        story_filename = f"{glyph_name.replace(' ', '_')}.json"
+
+        if "story_cache" not in st.session_state:
+            st.session_state.story_cache = {}
+
+        if glyph_name not in st.session_state.story_cache:
+            found_story, loaded_data, load_message = load_story_from_repo(story_filename)
+            st.session_state.story_cache[glyph_name] = loaded_data if found_story else {}
+            st.session_state[f"story_load_message_{idx}"] = load_message
+
+        loaded_story = st.session_state.story_cache.get(glyph_name, {})
+        loaded_dialogue_nodes = loaded_story.get("dialogue_nodes", [])
+
+        # Backward compatibility: convert old linear dialogue_sequence into nodes.
+        if not loaded_dialogue_nodes and loaded_story.get("dialogue_sequence"):
+            legacy_sequence = loaded_story.get("dialogue_sequence", [])
+            for i, turn in enumerate(legacy_sequence):
+                loaded_dialogue_nodes.append({
+                    "node_id": f"{glyph_name.replace(' ', '_').lower()}_{i + 1}",
+                    "speaker": turn.get("speaker", "NPC"),
+                    "dialogue": turn.get("dialogue", ""),
+                    "narrative_function": turn.get("narrative_function"),
+                    "player_subtext": turn.get("player_subtext"),
+                    "choices": []
+                })
         
         st.divider()
         st.markdown(f"## ✍️ Story Builder: {glyph_row['Glyph']}")
@@ -320,28 +383,39 @@ if view_mode == "Central View":
         col_story, col_dialogue = st.columns(2)
 
         with col_story:
+            story_summary_key = f"story_summary_{idx}"
+            if story_summary_key not in st.session_state:
+                st.session_state[story_summary_key] = loaded_story.get("story_summary", "")
+
             story_summary = st.text_area(
                 "Story Summary",
                 placeholder="Describe the narrative context and what the player experiences when encountering this glyph...",
                 height=200,
-                key=f"story_summary_{idx}"
+                key=story_summary_key
             )
 
         with col_dialogue:
-            st.markdown("**Dialogue Sequence**")
-            st.markdown("*Alternating NPC/Player lines with narrative functions*")
+            st.markdown("**Dialogue Nodes**")
+            st.markdown("*Branching dialogue with node IDs and per-node choices*")
 
-        # Dialogue Sequence Builder
-        num_dialogue_turns = int(st.number_input(
-            "How many dialogue turns should there be?",
+        load_message_key = f"story_load_message_{idx}"
+        if load_message_key in st.session_state:
+            st.caption(st.session_state[load_message_key])
+
+        # Dialogue Node Builder
+        num_nodes_key = f"num_dialogue_nodes_{idx}"
+        if num_nodes_key not in st.session_state:
+            st.session_state[num_nodes_key] = len(loaded_dialogue_nodes) if loaded_dialogue_nodes else 3
+
+        num_dialogue_nodes = int(st.number_input(
+            "How many dialogue nodes should there be?",
             min_value=1,
             max_value=20,
-            value=3,
-            key=f"num_dialogue_turns_{idx}"
+            key=num_nodes_key
         ))
 
         npc_name = glyph_row["NPC Giver"]
-        dialogue_sequence = []
+        dialogue_nodes = []
         
         # Parse NPC names from the NPC Giver column
         def parse_npc_names(npc_giver_string):
@@ -379,99 +453,207 @@ if view_mode == "Central View":
         
         # Always add Player as an option
         speaker_options.append("Player")
+
+        narrative_options = [
+            "reveal_emotion",
+            "advance_plot",
+            "challenge_player",
+            "withhold_truth",
+            "provide_clue",
+            "mask_fear",
+            "offer_comfort",
+            "escalate_tension",
+            "test_player"
+        ]
+
+        player_subtext_options = [
+            "seeking_safety",
+            "testing_boundaries",
+            "avoiding_pain",
+            "trying_to_impress",
+            "hiding_vulnerability",
+            "asserting_control",
+            "seeking_connection",
+            "distrusting_npc",
+            "feeling_overwhelmed",
+            "masking_confusion",
+            "trying_to_please",
+            "pushing_back",
+            "dissociating",
+            "hoping_for_rescue",
+            "preparing_to_withdraw"
+        ]
+
+        revelation_options = [
+            "none",
+            "partial_truth",
+            "misdirection",
+            "full_truth",
+            "withheld_key_detail",
+            "emotional_disclosure"
+        ]
         
-        for i in range(num_dialogue_turns):
-            st.markdown(f"#### Dialogue Turn {i+1}")
+        for i in range(num_dialogue_nodes):
+            default_node = loaded_dialogue_nodes[i] if i < len(loaded_dialogue_nodes) else {}
+            default_node_id = default_node.get("node_id") or f"{glyph_name.replace(' ', '_').lower()}_{i + 1}"
+
+            st.markdown(f"#### Dialogue Node {i+1}")
+
+            node_id_key = f"node_id_{idx}_{i}"
+            if node_id_key not in st.session_state:
+                st.session_state[node_id_key] = default_node_id
+
+            node_id = st.text_input(
+                f"Node ID {i+1}",
+                key=node_id_key,
+                placeholder="Unique ID (e.g., sera_1)"
+            )
             
             col_speaker, col_line = st.columns([1.5, 3])
+
+            default_speaker = default_node.get("speaker", speaker_options[0])
+            speaker_index = speaker_options.index(default_speaker) if default_speaker in speaker_options else 0
             
             with col_speaker:
                 speaker = st.selectbox(
                     "Speaker",
                     options=speaker_options,
+                    index=speaker_index,
                     key=f"speaker_{idx}_{i}"
                 )
+
+            default_dialogue = default_node.get("dialogue", "")
+            dialogue_key = f"dialogue_line_{idx}_{i}"
+            if dialogue_key not in st.session_state:
+                st.session_state[dialogue_key] = default_dialogue
             
             with col_line:
                 dialogue_line = st.text_input(
                     "Dialogue",
                     placeholder="What does this speaker say?",
-                    key=f"dialogue_line_{idx}_{i}"
+                    key=dialogue_key
                 )
-            
-            # Narrative function / player subtext — depends on speaker
-            narrative_options = [
-                "reveal_emotion",
-                "advance_plot",
-                "challenge_player",
-                "withhold_truth",
-                "provide_clue",
-                "mask_fear",
-                "offer_comfort",
-                "escalate_tension",
-                "test_player"
-            ]
-
-            player_subtext_options = [
-                "seeking_safety",
-                "testing_boundaries",
-                "avoiding_pain",
-                "trying_to_impress",
-                "hiding_vulnerability",
-                "asserting_control",
-                "seeking_connection",
-                "distrusting_npc",
-                "feeling_overwhelmed",
-                "masking_confusion",
-                "trying_to_please",
-                "pushing_back",
-                "dissociating",
-                "hoping_for_rescue",
-                "preparing_to_withdraw"
-            ]
 
             if speaker == "Player":
+                default_subtext = default_node.get("player_subtext")
+                subtext_index = player_subtext_options.index(default_subtext) if default_subtext in player_subtext_options else 0
                 player_subtext = st.selectbox(
                     f"Player Subtext {i+1}",
                     options=player_subtext_options,
+                    index=subtext_index,
                     format_func=lambda x: x.replace("_", " ").title(),
                     key=f"player_subtext_{idx}_{i}"
                 )
                 narrative_function = None
             else:
+                default_narrative = default_node.get("narrative_function")
+                narrative_index = narrative_options.index(default_narrative) if default_narrative in narrative_options else 0
                 narrative_function = st.selectbox(
                     f"Narrative Function {i+1}",
                     options=narrative_options,
+                    index=narrative_index,
                     format_func=lambda x: x.replace("_", " ").title(),
                     key=f"narr_func_{idx}_{i}"
                 )
                 player_subtext = None
 
-            dialogue_sequence.append({
+            st.markdown(f"**Choices For Node {i+1}**")
+
+            default_choices = default_node.get("choices", [])
+            num_node_choices_key = f"num_node_choices_{idx}_{i}"
+            if num_node_choices_key not in st.session_state:
+                st.session_state[num_node_choices_key] = len(default_choices)
+
+            num_node_choices = int(st.number_input(
+                f"How many choices from node {i+1}?",
+                min_value=0,
+                max_value=10,
+                key=num_node_choices_key
+            ))
+
+            node_choices = []
+            for j in range(num_node_choices):
+                default_choice = default_choices[j] if j < len(default_choices) else {}
+                default_choice_id = default_choice.get("choice_id") or f"{node_id or default_node_id}_c{j + 1}"
+
+                choice_col_1, choice_col_2 = st.columns(2)
+                with choice_col_1:
+                    choice_id_key = f"choice_id_{idx}_{i}_{j}"
+                    if choice_id_key not in st.session_state:
+                        st.session_state[choice_id_key] = default_choice_id
+                    choice_id = st.text_input(
+                        f"Choice ID {i+1}.{j+1}",
+                        key=choice_id_key
+                    )
+
+                    choice_text_key = f"choice_text_{idx}_{i}_{j}"
+                    if choice_text_key not in st.session_state:
+                        st.session_state[choice_text_key] = default_choice.get("text", "")
+                    choice_text = st.text_input(
+                        f"Choice Text {i+1}.{j+1}",
+                        key=choice_text_key,
+                        placeholder="What option can the player choose?"
+                    )
+
+                    choice_subtext_default = default_choice.get("subtext")
+                    choice_subtext_index = player_subtext_options.index(choice_subtext_default) if choice_subtext_default in player_subtext_options else 0
+                    choice_subtext = st.selectbox(
+                        f"Choice Subtext {i+1}.{j+1}",
+                        options=player_subtext_options,
+                        index=choice_subtext_index,
+                        format_func=lambda x: x.replace("_", " ").title(),
+                        key=f"choice_subtext_{idx}_{i}_{j}"
+                    )
+
+                with choice_col_2:
+                    revelation_default = default_choice.get("revelation", "none")
+                    revelation_index = revelation_options.index(revelation_default) if revelation_default in revelation_options else 0
+                    revelation = st.selectbox(
+                        f"Revelation Tag {i+1}.{j+1}",
+                        options=revelation_options,
+                        index=revelation_index,
+                        format_func=lambda x: x.replace("_", " ").title(),
+                        key=f"choice_revelation_{idx}_{i}_{j}"
+                    )
+
+                    consequence_key = f"choice_consequence_{idx}_{i}_{j}"
+                    if consequence_key not in st.session_state:
+                        st.session_state[consequence_key] = default_choice.get("consequence", "") or ""
+                    consequence = st.text_input(
+                        f"Consequence Tag {i+1}.{j+1}",
+                        key=consequence_key,
+                        placeholder="Optional consequence tag"
+                    )
+
+                    next_node_key = f"choice_next_node_{idx}_{i}_{j}"
+                    if next_node_key not in st.session_state:
+                        st.session_state[next_node_key] = default_choice.get("next_node", "")
+                    next_node = st.text_input(
+                        f"Next Node {i+1}.{j+1}",
+                        key=next_node_key,
+                        placeholder="Target node_id"
+                    )
+
+                node_choices.append({
+                    "choice_id": choice_id,
+                    "text": choice_text,
+                    "subtext": choice_subtext,
+                    "revelation": revelation,
+                    "consequence": consequence.strip() if consequence else None,
+                    "next_node": next_node
+                })
+
+            dialogue_nodes.append({
+                "node_id": node_id,
                 "speaker": speaker,
                 "dialogue": dialogue_line,
                 "narrative_function": narrative_function,
-                "player_subtext": player_subtext
+                "player_subtext": player_subtext,
+                "choices": [
+                    choice for choice in node_choices
+                    if choice["text"]
+                ]
             })
-
-        st.subheader("Player Choices")
-
-        num_choices = int(st.number_input(
-            "How many choices should the player have?",
-            min_value=0,
-            max_value=10,
-            value=2,
-            key=f"num_choices_{idx}"
-        ))
-
-        choices_list = []
-        for i in range(num_choices):
-            choice = st.text_input(
-                f"Choice {i+1}",
-                placeholder=f"Option {i+1} text...",
-                key=f"choice_{idx}_{i+1}"
-            )
-            choices_list.append(choice)
 
         # =====================================================================
         # Relational Story Fields
@@ -480,63 +662,88 @@ if view_mode == "Central View":
         st.markdown("*Optional: Add deeper narrative context and relationships*")
 
         col_rel1, col_rel2 = st.columns(2)
+        rel_story = loaded_story.get("relational_story", {})
         
         with col_rel1:
+            rel_location_key = f"rel_location_{idx}"
+            if rel_location_key not in st.session_state:
+                st.session_state[rel_location_key] = rel_story.get("location_context", "")
             location_context = st.text_area(
                 "Location Context",
                 placeholder="How does this location shape the encounter?",
                 height=80,
-                key=f"rel_location_{idx}"
+                key=rel_location_key
             )
             
+            rel_npc_sig_key = f"rel_npc_sig_{idx}"
+            if rel_npc_sig_key not in st.session_state:
+                st.session_state[rel_npc_sig_key] = rel_story.get("npc_significance", "")
             npc_significance = st.text_area(
                 "NPC Significance",
                 placeholder="What is this NPC's deeper role in the world?",
                 height=80,
-                key=f"rel_npc_sig_{idx}"
+                key=rel_npc_sig_key
             )
             
+            rel_history_key = f"rel_history_{idx}"
+            if rel_history_key not in st.session_state:
+                st.session_state[rel_history_key] = rel_story.get("historical_context", "")
             historical_context = st.text_area(
                 "Historical Context",
                 placeholder="What pre-collapse or post-collapse events led to this?",
                 height=80,
-                key=f"rel_history_{idx}"
+                key=rel_history_key
             )
             
+            rel_collapse_key = f"rel_collapse_{idx}"
+            if rel_collapse_key not in st.session_state:
+                st.session_state[rel_collapse_key] = rel_story.get("collapse_fragment", "")
             collapse_fragment = st.text_area(
                 "Collapse Fragment",
                 placeholder="How does this glyph relate to the Collapse event?",
                 height=80,
-                key=f"rel_collapse_{idx}"
+                key=rel_collapse_key
             )
 
         with col_rel2:
+            rel_player_dev_key = f"rel_player_dev_{idx}"
+            if rel_player_dev_key not in st.session_state:
+                st.session_state[rel_player_dev_key] = rel_story.get("player_development", "")
             player_development = st.text_area(
                 "Player Development",
                 placeholder="How does experiencing this glyph change the player?",
                 height=80,
-                key=f"rel_player_dev_{idx}"
+                key=rel_player_dev_key
             )
             
+            rel_narr_fn_key = f"rel_narrative_fn_{idx}"
+            if rel_narr_fn_key not in st.session_state:
+                st.session_state[rel_narr_fn_key] = rel_story.get("narrative_function", "")
             narrative_function_rel = st.text_area(
                 "Narrative Function",
                 placeholder="What role does this glyph play in the larger story?",
                 height=80,
-                key=f"rel_narrative_fn_{idx}"
+                key=rel_narr_fn_key
             )
             
+            rel_emotional_key = f"rel_emotional_{idx}"
+            if rel_emotional_key not in st.session_state:
+                st.session_state[rel_emotional_key] = rel_story.get("emotional_stakes", "")
             emotional_stakes = st.text_area(
                 "Emotional Stakes",
                 placeholder="What emotions or conflicts are at play?",
                 height=80,
-                key=f"rel_emotional_{idx}"
+                key=rel_emotional_key
             )
             
+            rel_progression_key = f"rel_progression_{idx}"
+            if rel_progression_key not in st.session_state:
+                st.session_state[rel_progression_key] = rel_story.get("progression", "")
             progression = st.text_area(
                 "Progression",
                 placeholder="How does this lead to the next arc or chamber?",
                 height=80,
-                key=f"rel_progression_{idx}"
+                key=rel_progression_key
             )
 
         # Build preview payload
@@ -547,16 +754,18 @@ if view_mode == "Central View":
             "theme": glyph_row["Theme"],
             "location": glyph_row["Location"],
             "story_summary": story_summary,
-            "dialogue_sequence": [
+            "dialogue_nodes": [
                 {
-                    "speaker": turn["speaker"],
-                    "dialogue": turn["dialogue"],
-                    "narrative_function": turn["narrative_function"]
+                    "node_id": node["node_id"],
+                    "speaker": node["speaker"],
+                    "dialogue": node["dialogue"],
+                    "narrative_function": node["narrative_function"],
+                    "player_subtext": node["player_subtext"],
+                    "choices": node["choices"]
                 }
-                for turn in dialogue_sequence
-                if turn["dialogue"]
+                for node in dialogue_nodes
+                if node["dialogue"]
             ],
-            "choices": [c for c in choices_list if c],
             "relational_story": {
                 "location_context": location_context,
                 "npc_significance": npc_significance,
@@ -571,9 +780,8 @@ if view_mode == "Central View":
 
         st.markdown("### Formatted Dialogue Preview")
         formatted_dialogue = "\n\n".join([
-            f'{turn["speaker"]}: "{turn["dialogue"]}"'
-            for turn in dialogue_sequence
-            if turn["dialogue"]
+            f'{node["node_id"]} | {node["speaker"]}: "{node["dialogue"]}" (choices: {len(node["choices"])})'
+            for node in preview["dialogue_nodes"]
         ])
         st.code(formatted_dialogue if formatted_dialogue else "(No dialogue entered yet)")
 
@@ -583,9 +791,7 @@ if view_mode == "Central View":
         if st.button("Confirm Story", key=f"confirm_story_{idx}"):
             if not story_summary:
                 st.error("Story Summary is required.")
-            elif len([c for c in choices_list if c]) == 0:
-                st.error("At least one choice is required.")
-            elif len([turn for turn in dialogue_sequence if turn["dialogue"]]) == 0:
+            elif len(preview["dialogue_nodes"]) == 0:
                 st.error("At least one dialogue turn with content is required.")
             else:
                 filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
@@ -595,6 +801,7 @@ if view_mode == "Central View":
                     success, message = commit_story_to_repo(filename, content)
                 
                 if success:
+                    st.session_state.story_cache[glyph_row["Glyph"]] = preview
                     st.success(f"✓ {message}")
                     st.info(f"Story saved to: `velinor/stories/{filename}`")
                     # Sync export section to this glyph
