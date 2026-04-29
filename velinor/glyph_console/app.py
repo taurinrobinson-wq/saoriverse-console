@@ -788,11 +788,118 @@ if view_mode == "Central View":
         st.markdown("### Full JSON Preview")
         st.json(preview)
 
+        st.markdown("### Branching Integrity Check")
+        preview_nodes = preview.get("dialogue_nodes", [])
+        node_ids = [node.get("node_id", "").strip() for node in preview_nodes]
+        non_empty_node_ids = [node_id for node_id in node_ids if node_id]
+        node_id_set = set(non_empty_node_ids)
+
+        duplicate_node_ids = sorted({node_id for node_id in non_empty_node_ids if non_empty_node_ids.count(node_id) > 1})
+        missing_node_id_indices = [i + 1 for i, node_id in enumerate(node_ids) if not node_id]
+
+        edges = []
+        dangling_references = set()
+        choices_missing_next_node = []
+
+        for node in preview_nodes:
+            source_id = (node.get("node_id") or "").strip()
+            for choice in node.get("choices", []):
+                target_id = (choice.get("next_node") or "").strip()
+                choice_id = (choice.get("choice_id") or "").strip()
+
+                if not target_id:
+                    if choice.get("text"):
+                        choices_missing_next_node.append(choice_id or f"{source_id}:unnamed_choice")
+                    continue
+
+                edges.append((source_id, target_id, choice_id))
+                if target_id not in node_id_set:
+                    dangling_references.add(target_id)
+
+        unreachable_nodes = []
+        if non_empty_node_ids:
+            graph = nx.DiGraph()
+            graph.add_nodes_from(non_empty_node_ids)
+            graph.add_edges_from([(src, dst) for src, dst, _ in edges if src and dst and src in node_id_set and dst in node_id_set])
+
+            start_node = non_empty_node_ids[0]
+            reachable = {start_node}
+            reachable.update(nx.descendants(graph, start_node))
+            unreachable_nodes = sorted(node_id for node_id in node_id_set if node_id not in reachable)
+
+            # Visual map of branching nodes and transitions.
+            if graph.number_of_nodes() > 0:
+                pos = nx.spring_layout(graph, seed=42)
+
+                edge_x = []
+                edge_y = []
+                for src, dst in graph.edges():
+                    x0, y0 = pos[src]
+                    x1, y1 = pos[dst]
+                    edge_x.extend([x0, x1, None])
+                    edge_y.extend([y0, y1, None])
+
+                edge_trace = go.Scatter(
+                    x=edge_x,
+                    y=edge_y,
+                    line={"width": 1, "color": "#888"},
+                    hoverinfo="none",
+                    mode="lines"
+                )
+
+                node_x = []
+                node_y = []
+                node_text = []
+                for node_id in graph.nodes():
+                    x, y = pos[node_id]
+                    node_x.append(x)
+                    node_y.append(y)
+                    out_degree = graph.out_degree(node_id)
+                    in_degree = graph.in_degree(node_id)
+                    node_text.append(f"{node_id}<br>out: {out_degree}, in: {in_degree}")
+
+                node_trace = go.Scatter(
+                    x=node_x,
+                    y=node_y,
+                    mode="markers+text",
+                    text=list(graph.nodes()),
+                    textposition="top center",
+                    hovertext=node_text,
+                    hoverinfo="text",
+                    marker={"size": 16, "color": "#2E86DE", "line": {"width": 1, "color": "#1B4F72"}}
+                )
+
+                fig = go.Figure(data=[edge_trace, node_trace])
+                fig.update_layout(
+                    showlegend=False,
+                    margin={"l": 20, "r": 20, "t": 20, "b": 20},
+                    xaxis={"showgrid": False, "zeroline": False, "showticklabels": False},
+                    yaxis={"showgrid": False, "zeroline": False, "showticklabels": False},
+                    height=380
+                )
+                st.plotly_chart(fig, use_container_width=True)
+
+        if missing_node_id_indices:
+            st.error(f"Missing node_id on node(s): {', '.join(str(i) for i in missing_node_id_indices)}")
+        if duplicate_node_ids:
+            st.error(f"Duplicate node_id values: {', '.join(duplicate_node_ids)}")
+        if dangling_references:
+            st.error(f"Choices reference unknown next_node values: {', '.join(sorted(dangling_references))}")
+        if unreachable_nodes:
+            st.warning(f"Unreachable node(s) from start node: {', '.join(unreachable_nodes)}")
+        if choices_missing_next_node:
+            st.info(f"Choices missing next_node: {', '.join(choices_missing_next_node)}")
+
+        if not any([missing_node_id_indices, duplicate_node_ids, dangling_references, unreachable_nodes]):
+            st.success("Branching structure looks consistent: IDs are unique, references resolve, and all nodes are reachable from the start node.")
+
         if st.button("Confirm Story", key=f"confirm_story_{idx}"):
             if not story_summary:
                 st.error("Story Summary is required.")
             elif len(preview["dialogue_nodes"]) == 0:
                 st.error("At least one dialogue turn with content is required.")
+            elif missing_node_id_indices or duplicate_node_ids or dangling_references:
+                st.error("Fix branching integrity errors before saving (missing/duplicate node IDs or invalid next_node references).")
             else:
                 filename = f"{glyph_row['Glyph'].replace(' ', '_')}.json"
                 content = json.dumps(preview, indent=2)
