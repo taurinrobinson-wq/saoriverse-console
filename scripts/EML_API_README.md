@@ -21,6 +21,18 @@ Open docs at:
 
 - `http://localhost:8000/docs`
 
+## Streamlit Local UI (Simpler Alternative)
+
+If you prefer no CORS/HTTPS/browser setup, run the local Streamlit app:
+
+```bash
+python -m pip install -r requirements.api.txt
+python -m pip install streamlit
+streamlit run scripts/eml_batch_streamlit.py
+```
+
+Then open the local URL shown by Streamlit (typically `http://localhost:8501`).
+
 ## API Usage
 
 ### 1) Preview proposed renamed filenames
