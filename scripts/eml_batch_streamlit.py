@@ -14,6 +14,7 @@ from datetime import datetime
 from email import policy
 from email.parser import BytesParser
 from pathlib import Path
+from time import perf_counter
 
 import streamlit as st
 
@@ -186,6 +187,9 @@ def _build_download(
 def main() -> None:
     st.set_page_config(page_title="EML Batch Processor", layout="wide")
 
+    if "uploader_key" not in st.session_state:
+        st.session_state["uploader_key"] = 0
+
     st.title("EML Batch Processor")
     st.caption("Local Streamlit app: upload .eml files, preview rename output, and download processed output.")
 
@@ -194,6 +198,7 @@ def main() -> None:
         type=["eml"],
         accept_multiple_files=True,
         help="No browser CORS/HTTPS setup required when running locally.",
+        key=f"uploader_{st.session_state['uploader_key']}",
     )
 
     st.write("**Include in download ZIP:**")
@@ -208,7 +213,19 @@ def main() -> None:
 
     rename_only = not include_pdfs
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
+
+    with col3:
+        if st.button("Clear Files"):
+            st.session_state["uploader_key"] += 1
+            st.session_state.pop("preview_rows", None)
+            st.session_state.pop("download_bytes", None)
+            st.session_state.pop("download_name", None)
+            st.session_state.pop("download_mime", None)
+            st.session_state.pop("is_zip", None)
+            st.session_state.pop("process_summary", None)
+            st.session_state.pop("process_timing", None)
+            st.rerun()
 
     with col1:
         if st.button("Preview Renames", disabled=not uploaded_files):
@@ -219,17 +236,21 @@ def main() -> None:
         process_disabled = not uploaded_files or (not include_pdfs and not include_emails)
         if st.button("Process Batch", type="primary", disabled=process_disabled):
             with st.spinner("Processing uploaded files..."):
+                start = perf_counter()
                 download_bytes, download_name, download_mime, is_zip, n_ok, n_err = _build_download(
                     uploaded_files,
                     rename_only=rename_only,
                     include_emails=include_emails,
                     include_pdfs=include_pdfs,
                 )
+                elapsed_seconds = perf_counter() - start
+                processed_count = n_ok + n_err
                 st.session_state["download_bytes"] = download_bytes
                 st.session_state["download_name"] = download_name
                 st.session_state["download_mime"] = download_mime
                 st.session_state["is_zip"] = is_zip
                 st.session_state["process_summary"] = (n_ok, n_err)
+                st.session_state["process_timing"] = (elapsed_seconds, processed_count)
 
     preview_rows = st.session_state.get("preview_rows")
     if preview_rows:
@@ -241,6 +262,7 @@ def main() -> None:
     download_mime = st.session_state.get("download_mime", "application/zip")
     is_zip = st.session_state.get("is_zip", True)
     process_summary = st.session_state.get("process_summary")
+    process_timing = st.session_state.get("process_timing")
 
     if process_summary:
         n_ok, n_err = process_summary
@@ -248,6 +270,14 @@ def main() -> None:
             st.warning(f"Processed {n_ok} file(s) successfully. {n_err} failed.")
         else:
             st.success(f"Processed {n_ok} file(s) successfully.")
+
+    if process_timing:
+        elapsed_seconds, processed_count = process_timing
+        rate = processed_count / elapsed_seconds if elapsed_seconds > 0 else 0.0
+        st.info(
+            f"Processing time: {elapsed_seconds:.2f}s for {processed_count} file(s) "
+            f"({rate:.2f} files/sec)."
+        )
 
     if download_bytes:
         label_prefix = "Download ZIP" if is_zip else "Download File"
