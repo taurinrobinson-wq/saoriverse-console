@@ -1,5 +1,0 @@
-# CI checklist:
-
-- Required repository secrets: SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY, PROJECT_SERVICE_ROLE_KEY, SUPABASE_AUTH_URL, SUPABASE_FUNCTION_URL, OPENAI_API_KEY
-- How to run tests locally: pytest -q tests/test_ui_template_usage.py tests/unit/test_multi_glyph_selection.py tests/unit/test_display_name_normalizer.py  (edge tests: pytest -q supabase/tests)
-- Expected artifacts: test run logs in Actions; no build artifacts are produced by these workflows

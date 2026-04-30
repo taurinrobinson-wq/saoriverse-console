@@ -1,9 +1,0 @@
----
-# cPanel deployment configuration for FirstPerson
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/firscius/public_html/
-    - /bin/cp -R * $DEPLOYPATH
-    - /bin/cp requirements.txt $DEPLOYPATH
-    - cd $DEPLOYPATH && python3 -m pip install --user -r requirements.txt
-    - cd $DEPLOYPATH && python3 -m pip install --user gunicorn

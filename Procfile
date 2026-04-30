@@ -1,1 +1,0 @@
-web: cd draftshift-web && python run_server.py

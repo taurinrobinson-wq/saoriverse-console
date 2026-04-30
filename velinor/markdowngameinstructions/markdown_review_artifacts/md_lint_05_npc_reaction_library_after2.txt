@@ -1,2 +1,0 @@
-/workspaces/saoriverse-console/velinor/markdowngameinstructions/05_npc_reaction_library.md:5:81 MD013/line-length Line length [Expected: 80; Actual: 198]
-/workspaces/saoriverse-console/velinor/markdowngameinstructions/05_npc_reaction_library.md:7 MD012/no-multiple-blanks Multiple consecutive blank lines [Expected: 1; Actual: 2]

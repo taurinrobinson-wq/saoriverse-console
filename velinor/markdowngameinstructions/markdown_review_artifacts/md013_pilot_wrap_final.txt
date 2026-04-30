@@ -1,5 +1,0 @@
-Wrapped: docs/reference/ADAPTIVE_EXTRACTOR_QUICK_SUMMARY.md
-Wrapped: velinor/markdowngameinstructions/05_npc_reaction_library.md
-Wrapped: velinor/story_map_velinor.md
-Wrapped: docs/reference/ADAPTIVE_DIMENSIONS_AND_GLYPHS.md
-Wrapped: docs/reference/TECHNICAL_ARCHITECTURE.md

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EML Batch Processor UI</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>EML Batch Processor</h1>
+    <p class="subtext">Static UI for local API at <span id="api-base">http://localhost:8000</span></p>
+
+    <section class="card">
+      <h2>Upload .eml Files</h2>
+      <div id="drop-zone" class="drop-zone" role="button" tabindex="0" aria-label="Upload EML files">
+        <p>Drag and drop .eml files here</p>
+        <p class="muted">or click to select files</p>
+        <input id="file-input" type="file" accept=".eml" multiple hidden>
+      </div>
+      <div class="selected-wrap">
+        <strong>Selected files:</strong>
+        <ul id="selected-files" class="selected-files"></ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="actions">
+        <button id="preview-btn" class="btn" disabled>Preview Renames</button>
+        <button id="process-btn" class="btn btn-primary" disabled>Process Batch</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Preview Results</h2>
+      <div class="table-wrap">
+        <table id="preview-table">
+          <thead>
+            <tr>
+              <th>Original Name</th>
+              <th>Proposed Name</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="preview-body">
+            <tr>
+              <td colspan="3" class="muted">No preview yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Manifest Results</h2>
+      <pre id="manifest-output" class="manifest-output">No process run yet.</pre>
+      <a id="download-link" class="btn btn-download hidden" download>Download ZIP</a>
+    </section>
+
+    <p id="status-line" class="status-line"></p>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
