@@ -130,6 +130,7 @@ async def process_eml_batch(
     background_tasks: BackgroundTasks,
     files: List[UploadFile] = File(...),
     rename_only: bool = False,
+    exclude_attachments: bool = False,
 ):
     _validate_uploads(files)
 
@@ -158,6 +159,7 @@ async def process_eml_batch(
                 upload_path,
                 output_dir=output_dir,
                 rename_only=rename_only,
+                exclude_attachments=exclude_attachments,
             )
 
             final_eml = package_dir / renamed_path.name

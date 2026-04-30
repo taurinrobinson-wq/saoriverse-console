@@ -253,7 +253,7 @@ def append_pdf(writer: PdfWriter, pdf_path: Path) -> None:
         writer.add_page(page)
 
 
-def build_combined_pdf(email_msg, output_pdf: Path) -> list[str]:
+def build_combined_pdf(email_msg, output_pdf: Path, exclude_attachments: bool = False) -> list[str]:
     notes: list[str] = []
     writer = PdfWriter()
 
@@ -264,66 +264,67 @@ def build_combined_pdf(email_msg, output_pdf: Path) -> list[str]:
         make_email_pdf(email_msg, email_pdf)
         append_pdf(writer, email_pdf)
 
-        attach_index = 0
-        for part in email_msg.iter_attachments():
-            attach_index += 1
-            filename = part.get_filename() or f"attachment_{attach_index}"
-            content_type = part.get_content_type()
-            raw = part.get_payload(decode=True) or b""
-            safe_name = sanitize_filename_component(filename, max_len=60)
-            ext = Path(filename).suffix.lower()
+        if not exclude_attachments:
+            attach_index = 0
+            for part in email_msg.iter_attachments():
+                attach_index += 1
+                filename = part.get_filename() or f"attachment_{attach_index}"
+                content_type = part.get_content_type()
+                raw = part.get_payload(decode=True) or b""
+                safe_name = sanitize_filename_component(filename, max_len=60)
+                ext = Path(filename).suffix.lower()
 
-            raw_path = temp_dir / f"raw_{attach_index}_{safe_name}{ext}"
-            raw_path.write_bytes(raw)
+                raw_path = temp_dir / f"raw_{attach_index}_{safe_name}{ext}"
+                raw_path.write_bytes(raw)
 
-            if content_type == "application/pdf" or ext == ".pdf":
-                append_pdf(writer, raw_path)
-                notes.append(f"Included PDF attachment: {filename}")
-                continue
+                if content_type == "application/pdf" or ext == ".pdf":
+                    append_pdf(writer, raw_path)
+                    notes.append(f"Included PDF attachment: {filename}")
+                    continue
 
-            if content_type.startswith("image/") or ext in {".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tif", ".tiff"}:
-                img_pdf = temp_dir / f"attachment_{attach_index}.pdf"
-                try:
-                    attachment_image_to_pdf(raw_path, img_pdf, filename)
-                    append_pdf(writer, img_pdf)
-                    notes.append(f"Included image attachment: {filename}")
-                except Exception as ex:
-                    info_pdf = temp_dir / f"attachment_{attach_index}_info.pdf"
-                    attachment_to_text_pdf(
-                        f"Attachment: {filename}",
-                        f"Could not render image attachment ({content_type}).\nReason: {ex}",
-                        info_pdf,
-                    )
-                    append_pdf(writer, info_pdf)
-                    notes.append(f"Attachment image render failed: {filename}")
-                continue
+                if content_type.startswith("image/") or ext in {".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tif", ".tiff"}:
+                    img_pdf = temp_dir / f"attachment_{attach_index}.pdf"
+                    try:
+                        attachment_image_to_pdf(raw_path, img_pdf, filename)
+                        append_pdf(writer, img_pdf)
+                        notes.append(f"Included image attachment: {filename}")
+                    except Exception as ex:
+                        info_pdf = temp_dir / f"attachment_{attach_index}_info.pdf"
+                        attachment_to_text_pdf(
+                            f"Attachment: {filename}",
+                            f"Could not render image attachment ({content_type}).\nReason: {ex}",
+                            info_pdf,
+                        )
+                        append_pdf(writer, info_pdf)
+                        notes.append(f"Attachment image render failed: {filename}")
+                    continue
 
-            if content_type.startswith("text/") or ext in {".txt", ".csv", ".json", ".xml", ".md", ".log"}:
-                text_pdf = temp_dir / f"attachment_{attach_index}.pdf"
-                try:
-                    text_content = raw.decode("utf-8", errors="replace")
-                except Exception:
-                    text_content = str(raw)
-                attachment_to_text_pdf(f"Attachment Text: {filename}", text_content, text_pdf)
-                append_pdf(writer, text_pdf)
-                notes.append(f"Included text attachment: {filename}")
-                continue
+                if content_type.startswith("text/") or ext in {".txt", ".csv", ".json", ".xml", ".md", ".log"}:
+                    text_pdf = temp_dir / f"attachment_{attach_index}.pdf"
+                    try:
+                        text_content = raw.decode("utf-8", errors="replace")
+                    except Exception:
+                        text_content = str(raw)
+                    attachment_to_text_pdf(f"Attachment Text: {filename}", text_content, text_pdf)
+                    append_pdf(writer, text_pdf)
+                    notes.append(f"Included text attachment: {filename}")
+                    continue
 
-            info_pdf = temp_dir / f"attachment_{attach_index}_info.pdf"
-            attachment_to_text_pdf(
-                f"Attachment Metadata: {filename}",
-                "\n".join(
-                    [
-                        f"Filename: {filename}",
-                        f"Content-Type: {content_type}",
-                        f"Size: {len(raw)} bytes",
-                        "This file type was attached but not converted inline.",
-                    ]
-                ),
-                info_pdf,
-            )
-            append_pdf(writer, info_pdf)
-            notes.append(f"Added metadata page for unsupported attachment: {filename}")
+                info_pdf = temp_dir / f"attachment_{attach_index}_info.pdf"
+                attachment_to_text_pdf(
+                    f"Attachment Metadata: {filename}",
+                    "\n".join(
+                        [
+                            f"Filename: {filename}",
+                            f"Content-Type: {content_type}",
+                            f"Size: {len(raw)} bytes",
+                            "This file type was attached but not converted inline.",
+                        ]
+                    ),
+                    info_pdf,
+                )
+                append_pdf(writer, info_pdf)
+                notes.append(f"Added metadata page for unsupported attachment: {filename}")
 
     with output_pdf.open("wb") as f:
         writer.write(f)
@@ -331,7 +332,12 @@ def build_combined_pdf(email_msg, output_pdf: Path) -> list[str]:
     return notes
 
 
-def process_email_file(eml_path: Path, output_dir: Path, rename_only: bool = False) -> tuple[Path, Optional[Path], list[str]]:
+def process_email_file(
+    eml_path: Path,
+    output_dir: Path,
+    rename_only: bool = False,
+    exclude_attachments: bool = False,
+) -> tuple[Path, Optional[Path], list[str]]:
     msg = parse_email(eml_path)
 
     new_name = build_new_eml_name(msg)
@@ -345,7 +351,7 @@ def process_email_file(eml_path: Path, output_dir: Path, rename_only: bool = Fal
 
     if not rename_only:
         output_pdf = unique_path(output_dir / f"{target_eml.stem}.pdf")
-        notes = build_combined_pdf(msg, output_pdf)
+        notes = build_combined_pdf(msg, output_pdf, exclude_attachments=exclude_attachments)
 
     return target_eml, output_pdf, notes
 

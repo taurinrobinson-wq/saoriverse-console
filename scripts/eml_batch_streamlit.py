@@ -102,6 +102,7 @@ def _build_download(
     rename_only: bool,
     include_emails: bool,
     include_pdfs: bool,
+    exclude_attachments: bool,
 ) -> tuple[bytes, str, str, bool, int, int]:
     with tempfile.TemporaryDirectory(prefix="eml_streamlit_") as td:
         root = Path(td)
@@ -128,6 +129,7 @@ def _build_download(
                     src_path,
                     output_dir=output_dir,
                     rename_only=rename_only,
+                    exclude_attachments=exclude_attachments,
                 )
 
                 final_eml = package_dir / renamed_path.name
@@ -204,7 +206,8 @@ def main() -> None:
     st.write("**Include in download ZIP:**")
     col_opt1, col_opt2 = st.columns(2)
     with col_opt1:
-        include_pdfs = st.checkbox("PDFs", value=True)
+        include_pdfs = st.checkbox("Include PDFs in ZIP", value=True)
+        exclude_attachments = st.checkbox("Exclude attachments (email body only)", value=False)
     with col_opt2:
         include_emails = st.checkbox("Renamed .eml files", value=False)
 
@@ -243,6 +246,7 @@ def main() -> None:
                     rename_only=rename_only,
                     include_emails=include_emails,
                     include_pdfs=include_pdfs,
+                    exclude_attachments=exclude_attachments,
                 )
                 elapsed_seconds = perf_counter() - start
                 processed_count = n_ok + n_err
