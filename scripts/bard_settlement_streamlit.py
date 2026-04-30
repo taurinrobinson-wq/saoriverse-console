@@ -197,7 +197,7 @@ def _preview_rows(uploaded_files) -> list[dict]:
     return rows
 
 
-def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
+def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int, int]:
     with tempfile.TemporaryDirectory(prefix="bard_pdf_streamlit_") as td:
         root = Path(td)
         input_dir = root / "input"
@@ -210,6 +210,8 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
 
         results: list[dict] = []
         settlement_rows: list[tuple[str, str, float]] = []
+        seen_claim_numbers: set[str] = set()
+        duplicates_removed = 0
 
         for upload in uploaded_files:
             original_name = Path(upload.name).name
@@ -219,6 +221,21 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
 
                 src_path = unique_path(input_dir / original_name)
                 src_path.write_bytes(upload.getvalue())
+
+                claim_number, _, _, _ = extract_fields_from_pdf(src_path)
+                if not claim_number:
+                    raise ValueError("Missing required fields: claim_number")
+                if claim_number in seen_claim_numbers:
+                    duplicates_removed += 1
+                    results.append(
+                        {
+                            "original_name": original_name,
+                            "status": "duplicate",
+                            "error": f"Duplicate claim number skipped: {claim_number}",
+                        }
+                    )
+                    continue
+                seen_claim_numbers.add(claim_number)
 
                 new_path, meta = process_pdf_file(src_path, package_dir)
 
@@ -264,6 +281,7 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
                 False,
                 n_ok,
                 n_err,
+                duplicates_removed,
             )
 
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -273,7 +291,7 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
             for item in packaged_items:
                 zf.write(item, arcname=item.name)
 
-        return buf.getvalue(), zip_name, "application/zip", True, n_ok, n_err
+        return buf.getvalue(), zip_name, "application/zip", True, n_ok, n_err, duplicates_removed
 
 
 def main() -> None:
@@ -307,6 +325,7 @@ def main() -> None:
             st.session_state.pop("is_zip", None)
             st.session_state.pop("process_summary", None)
             st.session_state.pop("process_timing", None)
+            st.session_state.pop("duplicates_removed", None)
             st.rerun()
 
     with col1:
@@ -319,7 +338,7 @@ def main() -> None:
             with st.spinner("Processing uploaded files..."):
                 files_to_process = uploaded_files or []
                 start = perf_counter()
-                download_bytes, download_name, download_mime, is_zip, n_ok, n_err = _build_download(
+                download_bytes, download_name, download_mime, is_zip, n_ok, n_err, duplicates_removed = _build_download(
                     files_to_process
                 )
                 elapsed_seconds = perf_counter() - start
@@ -334,6 +353,7 @@ def main() -> None:
                 st.session_state["is_zip"] = is_zip
                 st.session_state["process_summary"] = (n_ok, n_err)
                 st.session_state["process_timing"] = (elapsed_seconds, processed_count, total_input_bytes)
+                st.session_state["duplicates_removed"] = duplicates_removed
 
     preview_rows = st.session_state.get("preview_rows")
     if preview_rows:
@@ -346,6 +366,7 @@ def main() -> None:
     is_zip = st.session_state.get("is_zip", True)
     process_summary = st.session_state.get("process_summary")
     process_timing = st.session_state.get("process_timing")
+    duplicates_removed = st.session_state.get("duplicates_removed", 0)
 
     if process_summary:
         n_ok, n_err = process_summary
@@ -362,6 +383,9 @@ def main() -> None:
             f"Processing time: {elapsed_seconds:.2f}s for {processed_count} file(s) "
             f"({rate:.2f} files/sec). Total input size: {total_input_mb:.2f} MB."
         )
+
+    if duplicates_removed:
+        st.info(f"Duplicates removed by Claim ID: {duplicates_removed}")
 
     if download_bytes:
         label_prefix = "Download ZIP" if is_zip else "Download File"
