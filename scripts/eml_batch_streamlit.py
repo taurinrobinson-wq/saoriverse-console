@@ -18,7 +18,24 @@ from pathlib import Path
 
 import streamlit as st
 
-from scripts.eml_batch_rename_and_pdf import build_new_eml_name, process_email_file, unique_path
+try:
+    from scripts.eml_batch_rename_and_pdf import build_new_eml_name, process_email_file, unique_path
+except ModuleNotFoundError:
+    import sys
+
+    # Fallback 1: add repo root and retry package-style import.
+    repo_root = Path(__file__).resolve().parents[1]
+    if str(repo_root) not in sys.path:
+        sys.path.insert(0, str(repo_root))
+
+    try:
+        from scripts.eml_batch_rename_and_pdf import build_new_eml_name, process_email_file, unique_path
+    except ModuleNotFoundError:
+        # Fallback 2: import sibling module directly from scripts/ directory.
+        scripts_dir = Path(__file__).resolve().parent
+        if str(scripts_dir) not in sys.path:
+            sys.path.insert(0, str(scripts_dir))
+        from eml_batch_rename_and_pdf import build_new_eml_name, process_email_file, unique_path
 
 
 def _preview_rows(uploaded_files) -> list[dict]:
