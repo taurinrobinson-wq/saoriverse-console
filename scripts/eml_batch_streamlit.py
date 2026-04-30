@@ -236,21 +236,25 @@ def main() -> None:
         process_disabled = not uploaded_files or (not include_pdfs and not include_emails)
         if st.button("Process Batch", type="primary", disabled=process_disabled):
             with st.spinner("Processing uploaded files..."):
+                files_to_process = uploaded_files or []
                 start = perf_counter()
                 download_bytes, download_name, download_mime, is_zip, n_ok, n_err = _build_download(
-                    uploaded_files,
+                    files_to_process,
                     rename_only=rename_only,
                     include_emails=include_emails,
                     include_pdfs=include_pdfs,
                 )
                 elapsed_seconds = perf_counter() - start
                 processed_count = n_ok + n_err
+                total_input_bytes = sum(
+                    int(getattr(upload, "size", 0) or len(upload.getvalue())) for upload in files_to_process
+                )
                 st.session_state["download_bytes"] = download_bytes
                 st.session_state["download_name"] = download_name
                 st.session_state["download_mime"] = download_mime
                 st.session_state["is_zip"] = is_zip
                 st.session_state["process_summary"] = (n_ok, n_err)
-                st.session_state["process_timing"] = (elapsed_seconds, processed_count)
+                st.session_state["process_timing"] = (elapsed_seconds, processed_count, total_input_bytes)
 
     preview_rows = st.session_state.get("preview_rows")
     if preview_rows:
@@ -272,11 +276,12 @@ def main() -> None:
             st.success(f"Processed {n_ok} file(s) successfully.")
 
     if process_timing:
-        elapsed_seconds, processed_count = process_timing
+        elapsed_seconds, processed_count, total_input_bytes = process_timing
         rate = processed_count / elapsed_seconds if elapsed_seconds > 0 else 0.0
+        total_input_mb = total_input_bytes / (1024 * 1024)
         st.info(
             f"Processing time: {elapsed_seconds:.2f}s for {processed_count} file(s) "
-            f"({rate:.2f} files/sec)."
+            f"({rate:.2f} files/sec). Total input size: {total_input_mb:.2f} MB."
         )
 
     if download_bytes:
