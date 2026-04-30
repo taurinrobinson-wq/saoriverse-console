@@ -123,6 +123,7 @@ def _build_settlements_workbook(rows: list[tuple[str, str, float]]) -> bytes:
 def _preview_rows(uploaded_files) -> list[dict]:
     rows: list[dict] = []
     used_names: set[str] = set()
+    seen_claim_numbers: set[str] = set()
 
     for upload in uploaded_files:
         original_name = upload.name
@@ -159,6 +160,21 @@ def _preview_rows(uploaded_files) -> list[dict]:
                     }
                 )
                 continue
+
+            if claim_number in seen_claim_numbers:
+                rows.append(
+                    {
+                        "original_name": original_name,
+                        "proposed_name": "",
+                        "claim_number": claim_number,
+                        "client_name": client_name,
+                        "total_award": award_formatted,
+                        "status": "duplicate",
+                        "error": f"Duplicate claim number detected in upload set: {claim_number}",
+                    }
+                )
+                continue
+            seen_claim_numbers.add(claim_number)
 
             proposed = build_new_pdf_name(client_name, claim_number, award_formatted)
             stem = Path(proposed).stem
