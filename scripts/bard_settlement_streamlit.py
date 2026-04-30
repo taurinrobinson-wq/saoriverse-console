@@ -16,6 +16,7 @@ from time import perf_counter
 
 import streamlit as st
 from openpyxl import Workbook
+from openpyxl.styles import Border, Font, Side
 
 try:
     from scripts.bard_pdf_extract import (
@@ -70,6 +71,9 @@ def _build_settlements_workbook(rows: list[tuple[str, str, float]]) -> bytes:
     if ws is None:
         raise RuntimeError("Failed to create worksheet")
     ws.title = "Settlements"
+    bold_font = Font(bold=True)
+    thin_side = Side(style="thin", color="000000")
+    all_border = Border(left=thin_side, right=thin_side, top=thin_side, bottom=thin_side)
 
     ws.append(
         [
@@ -82,6 +86,8 @@ def _build_settlements_workbook(rows: list[tuple[str, str, float]]) -> bytes:
             "Total Award",
         ]
     )
+    for col_idx in range(1, 8):
+        ws.cell(row=1, column=col_idx).font = bold_font
 
     sorted_rows = sorted(rows, key=lambda row: _split_client_name(row[1])[0].lower())
     for idx, (claim_number, client_name, award_float) in enumerate(sorted_rows, start=1):
@@ -95,12 +101,19 @@ def _build_settlements_workbook(rows: list[tuple[str, str, float]]) -> bytes:
             ws.cell(row=row_idx, column=7).number_format = "$#,##0.00"
 
         summary_row = data_end + 1
-        ws.cell(row=summary_row, column=3, value="Average Settlement")
-        ws.cell(row=summary_row, column=4, value=f"=AVERAGE(G{data_start}:G{data_end})")
-        ws.cell(row=summary_row, column=5, value="Total Settlements")
-        ws.cell(row=summary_row, column=6, value=f"=SUM(G{data_start}:G{data_end})")
-        ws.cell(row=summary_row, column=4).number_format = "$#,##0.00"
-        ws.cell(row=summary_row, column=6).number_format = "$#,##0.00"
+        ws.cell(row=summary_row, column=4, value="Average Settlement")
+        ws.cell(row=summary_row, column=5, value=f"=AVERAGE(G{data_start}:G{data_end})")
+        ws.cell(row=summary_row, column=6, value="Total Settlements")
+        ws.cell(row=summary_row, column=7, value=f"=SUM(G{data_start}:G{data_end})")
+        ws.cell(row=summary_row, column=5).number_format = "$#,##0.00"
+        ws.cell(row=summary_row, column=7).number_format = "$#,##0.00"
+        for col_idx in range(1, 8):
+            ws.cell(row=summary_row, column=col_idx).font = bold_font
+
+    table_end_row = len(sorted_rows) + 2 if sorted_rows else 1
+    for row_idx in range(1, table_end_row + 1):
+        for col_idx in range(1, 8):
+            ws.cell(row=row_idx, column=col_idx).border = all_border
 
     buf = io.BytesIO()
     wb.save(buf)
