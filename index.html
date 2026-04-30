@@ -9,7 +9,17 @@
 <body>
   <main class="container">
     <h1>EML Batch Processor</h1>
-    <p class="subtext">Static UI for local API at <span id="api-base">http://localhost:8000</span></p>
+    <p class="subtext">Static UI for EML API</p>
+
+    <section class="card">
+      <h2>API Connection</h2>
+      <div class="api-config">
+        <label for="api-url"><strong>API Base URL</strong></label>
+        <input id="api-url" class="api-url" type="url" placeholder="http://localhost:8000" aria-label="API base URL">
+        <button id="test-api-btn" class="btn" type="button">Test Connection</button>
+      </div>
+      <p class="muted small-note">If this page is opened from HTTPS (like GitHub Pages), the API should also be HTTPS to avoid browser mixed-content blocking.</p>
+    </section>
 
     <section class="card">
       <h2>Upload .eml Files</h2>

@@ -39,6 +39,24 @@ h2 {
   margin-bottom: 18px;
 }
 
+.api-config {
+  display: grid;
+  gap: 8px;
+}
+
+.api-url {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-size: 0.95rem;
+}
+
+.small-note {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
 .card {
   background: var(--card);
   border: 1px solid var(--line);

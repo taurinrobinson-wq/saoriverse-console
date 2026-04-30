@@ -1,4 +1,9 @@
-const API_BASE = "http://localhost:8000";
+const DEFAULT_API_BASE =
+  window.location.protocol === "https:"
+    ? ""
+    : "http://localhost:8000";
+
+let apiBase = (localStorage.getItem("emlApiBase") || DEFAULT_API_BASE).trim();
 
 const dropZone = document.getElementById("drop-zone");
 const fileInput = document.getElementById("file-input");
@@ -9,8 +14,42 @@ const previewBody = document.getElementById("preview-body");
 const manifestOutput = document.getElementById("manifest-output");
 const statusLine = document.getElementById("status-line");
 const downloadLink = document.getElementById("download-link");
+const apiUrlInput = document.getElementById("api-url");
+const testApiBtn = document.getElementById("test-api-btn");
 
 let selectedFiles = [];
+
+if (apiUrlInput) {
+  apiUrlInput.value = apiBase;
+}
+
+function getApiBase() {
+  const candidate = (apiUrlInput?.value || apiBase || "").trim().replace(/\/+$/, "");
+  if (!candidate) {
+    throw new Error("Set API Base URL first.");
+  }
+  apiBase = candidate;
+  localStorage.setItem("emlApiBase", apiBase);
+  return apiBase;
+}
+
+async function testApiConnection() {
+  try {
+    const base = getApiBase();
+    setStatus("Testing API connection...");
+    const response = await fetch(`${base}/health`, { method: "GET" });
+    if (!response.ok) {
+      throw new Error(`Health check failed: ${response.status}`);
+    }
+    setStatus(`Connected to ${base}`);
+  } catch (error) {
+    const hint =
+      window.location.protocol === "https:" && String(apiUrlInput?.value || "").startsWith("http://")
+        ? " Browser blocked HTTP API from an HTTPS page. Use an HTTPS API URL, or run UI locally on http://localhost."
+        : "";
+    setStatus(`${error.message}${hint}`);
+  }
+}
 
 function setStatus(message) {
   statusLine.textContent = message;
@@ -59,7 +98,7 @@ async function previewRenames() {
   previewBtn.disabled = true;
 
   try {
-    const response = await fetch(`${API_BASE}/api/eml/preview`, {
+    const response = await fetch(`${getApiBase()}/api/eml/preview`, {
       method: "POST",
       body: buildFormData(),
     });
@@ -83,7 +122,11 @@ async function previewRenames() {
     };
     manifestOutput.textContent = JSON.stringify(clientManifest, null, 2);
   } catch (error) {
-    setStatus(error.message);
+    const hint =
+      window.location.protocol === "https:" && String(apiUrlInput?.value || "").startsWith("http://")
+        ? " Browser blocked HTTP API from an HTTPS page. Use an HTTPS API URL, or run UI locally on http://localhost."
+        : "";
+    setStatus(`${error.message}${hint}`);
   } finally {
     previewBtn.disabled = selectedFiles.length === 0;
   }
@@ -120,7 +163,7 @@ async function processBatch() {
   processBtn.disabled = true;
 
   try {
-    const response = await fetch(`${API_BASE}/api/eml/process`, {
+    const response = await fetch(`${getApiBase()}/api/eml/process`, {
       method: "POST",
       body: buildFormData(),
     });
@@ -150,7 +193,11 @@ async function processBatch() {
 
     setStatus("Batch process complete. ZIP ready to download.");
   } catch (error) {
-    setStatus(error.message);
+    const hint =
+      window.location.protocol === "https:" && String(apiUrlInput?.value || "").startsWith("http://")
+        ? " Browser blocked HTTP API from an HTTPS page. Use an HTTPS API URL, or run UI locally on http://localhost."
+        : "";
+    setStatus(`${error.message}${hint}`);
   } finally {
     processBtn.disabled = selectedFiles.length === 0;
   }
@@ -213,5 +260,13 @@ dropZone.addEventListener("drop", (e) => {
 
 previewBtn.addEventListener("click", previewRenames);
 processBtn.addEventListener("click", processBatch);
+testApiBtn.addEventListener("click", testApiConnection);
+
+if (apiUrlInput) {
+  apiUrlInput.addEventListener("change", () => {
+    apiBase = apiUrlInput.value.trim().replace(/\/+$/, "");
+    localStorage.setItem("emlApiBase", apiBase);
+  });
+}
 
 setStatus("Ready. Add .eml files to begin.");
