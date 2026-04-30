@@ -8,7 +8,6 @@ Run:
 from __future__ import annotations
 
 import io
-import json
 import tempfile
 import zipfile
 from datetime import datetime
@@ -88,7 +87,12 @@ def _preview_rows(uploaded_files) -> list[dict]:
     return rows
 
 
-def _build_zip(uploaded_files, rename_only: bool) -> tuple[bytes, dict]:
+def _build_zip(
+    uploaded_files,
+    rename_only: bool,
+    include_emails: bool,
+    include_pdfs: bool,
+) -> tuple[bytes, int, int]:
     with tempfile.TemporaryDirectory(prefix="eml_streamlit_") as td:
         root = Path(td)
         input_dir = root / "input"
@@ -117,20 +121,22 @@ def _build_zip(uploaded_files, rename_only: bool) -> tuple[bytes, dict]:
                 )
 
                 final_eml = package_dir / renamed_path.name
-                renamed_path.replace(final_eml)
+                if include_emails:
+                    renamed_path.replace(final_eml)
+                else:
+                    renamed_path.unlink(missing_ok=True)
 
-                pdf_name = None
                 if pdf_path and pdf_path.exists():
-                    final_pdf = package_dir / pdf_path.name
-                    pdf_path.replace(final_pdf)
-                    pdf_name = final_pdf.name
+                    if include_pdfs:
+                        final_pdf = package_dir / pdf_path.name
+                        pdf_path.replace(final_pdf)
+                    else:
+                        pdf_path.unlink(missing_ok=True)
 
                 results.append(
                     {
                         "original_name": original_name,
-                        "renamed_eml": final_eml.name,
-                        "pdf": pdf_name,
-                        "notes": notes,
+                        "renamed_eml": final_eml.name if include_emails else None,
                         "status": "success",
                     }
                 )
@@ -143,23 +149,15 @@ def _build_zip(uploaded_files, rename_only: bool) -> tuple[bytes, dict]:
                     }
                 )
 
-        manifest = {
-            "created_at": datetime.utcnow().isoformat() + "Z",
-            "rename_only": rename_only,
-            "total_files": len(uploaded_files),
-            "successful": sum(1 for r in results if r["status"] == "success"),
-            "failed": sum(1 for r in results if r["status"] == "error"),
-            "files": results,
-        }
-
-        (package_dir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        n_ok = sum(1 for r in results if r["status"] == "success")
+        n_err = sum(1 for r in results if r["status"] == "error")
 
         buf = io.BytesIO()
         with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
             for item in sorted(package_dir.glob("*")):
                 zf.write(item, arcname=item.name)
 
-        return buf.getvalue(), manifest
+        return buf.getvalue(), n_ok, n_err
 
 
 def main() -> None:
@@ -175,7 +173,17 @@ def main() -> None:
         help="No browser CORS/HTTPS setup required when running locally.",
     )
 
-    rename_only = st.checkbox("Rename only (skip PDF generation)", value=False)
+    st.write("**Include in download ZIP:**")
+    col_opt1, col_opt2 = st.columns(2)
+    with col_opt1:
+        include_pdfs = st.checkbox("PDFs", value=True)
+    with col_opt2:
+        include_emails = st.checkbox("Renamed .eml files", value=False)
+
+    if not include_pdfs and not include_emails:
+        st.warning("Select at least one output type above.")
+
+    rename_only = not include_pdfs
 
     col1, col2 = st.columns(2)
 
@@ -185,11 +193,17 @@ def main() -> None:
             st.session_state["preview_rows"] = rows
 
     with col2:
-        if st.button("Process Batch", type="primary", disabled=not uploaded_files):
+        process_disabled = not uploaded_files or (not include_pdfs and not include_emails)
+        if st.button("Process Batch", type="primary", disabled=process_disabled):
             with st.spinner("Processing uploaded files..."):
-                zip_bytes, manifest = _build_zip(uploaded_files, rename_only=rename_only)
+                zip_bytes, n_ok, n_err = _build_zip(
+                    uploaded_files,
+                    rename_only=rename_only,
+                    include_emails=include_emails,
+                    include_pdfs=include_pdfs,
+                )
                 st.session_state["zip_bytes"] = zip_bytes
-                st.session_state["manifest"] = manifest
+                st.session_state["process_summary"] = (n_ok, n_err)
                 ts = datetime.now().strftime("%Y%m%d_%H%M%S")
                 st.session_state["zip_name"] = f"processed_eml_batch_{ts}.zip"
 
@@ -198,13 +212,16 @@ def main() -> None:
         st.subheader("Preview Results")
         st.dataframe(preview_rows, use_container_width=True)
 
-    manifest = st.session_state.get("manifest")
     zip_bytes = st.session_state.get("zip_bytes")
     zip_name = st.session_state.get("zip_name", "processed_emails.zip")
+    process_summary = st.session_state.get("process_summary")
 
-    if manifest:
-        st.subheader("Manifest")
-        st.json(manifest)
+    if process_summary:
+        n_ok, n_err = process_summary
+        if n_err:
+            st.warning(f"Processed {n_ok} file(s) successfully. {n_err} failed.")
+        else:
+            st.success(f"Processed {n_ok} file(s) successfully.")
 
     if zip_bytes:
         st.download_button(
