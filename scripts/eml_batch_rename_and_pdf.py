@@ -72,6 +72,7 @@ def html_to_text(value: str) -> str:
     text = re.sub(r"<\s*/\s*p\s*>", "\n\n", text, flags=re.IGNORECASE)
     text = re.sub(r"<[^>]+>", "", text)
     text = html.unescape(text)
+    text = text.replace("\u2013", "-").replace("\u2014", "-")
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 
