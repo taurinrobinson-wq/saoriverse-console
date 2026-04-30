@@ -7,7 +7,6 @@ Run:
 
 from __future__ import annotations
 
-import csv
 import io
 import tempfile
 import zipfile
@@ -16,6 +15,7 @@ from pathlib import Path
 from time import perf_counter
 
 import streamlit as st
+from openpyxl import Workbook
 
 try:
     from scripts.bard_pdf_extract import (
@@ -52,6 +52,59 @@ except ModuleNotFoundError:
         )
 
 INPUT_EXT = ".pdf"
+
+
+def _split_client_name(client_name: str) -> tuple[str, str]:
+    if "," in client_name:
+        last, first = client_name.split(",", 1)
+        return last.strip(), first.strip()
+    parts = client_name.split()
+    if len(parts) >= 2:
+        return parts[-1], " ".join(parts[:-1])
+    return client_name.strip(), ""
+
+
+def _build_settlements_workbook(rows: list[tuple[str, str, float]]) -> bytes:
+    wb = Workbook()
+    ws = wb.active
+    if ws is None:
+        raise RuntimeError("Failed to create worksheet")
+    ws.title = "Settlements"
+
+    ws.append(
+        [
+            "No.",
+            "Claim ID:",
+            "Claimant Last Name",
+            "Claimant First Name",
+            "Delivery Method",
+            "Scheduled Send Date",
+            "Total Award",
+        ]
+    )
+
+    sorted_rows = sorted(rows, key=lambda row: _split_client_name(row[1])[0].lower())
+    for idx, (claim_number, client_name, award_float) in enumerate(sorted_rows, start=1):
+        last_name, first_name = _split_client_name(client_name)
+        ws.append([idx, claim_number, last_name, first_name, "", "", award_float])
+
+    if sorted_rows:
+        data_start = 2
+        data_end = len(sorted_rows) + 1
+        for row_idx in range(data_start, data_end + 1):
+            ws.cell(row=row_idx, column=7).number_format = "$#,##0.00"
+
+        summary_row = data_end + 1
+        ws.cell(row=summary_row, column=3, value="Average Settlement")
+        ws.cell(row=summary_row, column=4, value=f"=AVERAGE(G{data_start}:G{data_end})")
+        ws.cell(row=summary_row, column=5, value="Total Settlements")
+        ws.cell(row=summary_row, column=6, value=f"=SUM(G{data_start}:G{data_end})")
+        ws.cell(row=summary_row, column=4).number_format = "$#,##0.00"
+        ws.cell(row=summary_row, column=6).number_format = "$#,##0.00"
+
+    buf = io.BytesIO()
+    wb.save(buf)
+    return buf.getvalue()
 
 
 def _preview_rows(uploaded_files) -> list[dict]:
@@ -143,7 +196,7 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
         package_dir.mkdir(parents=True, exist_ok=True)
 
         results: list[dict] = []
-        csv_rows: list[tuple[str, str, float]] = []
+        settlement_rows: list[tuple[str, str, float]] = []
 
         for upload in uploaded_files:
             original_name = Path(upload.name).name
@@ -156,7 +209,7 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
 
                 new_path, meta = process_pdf_file(src_path, package_dir)
 
-                csv_rows.append((meta["claim_number"], meta["client_name"], meta["award_float"]))
+                settlement_rows.append((meta["claim_number"], meta["client_name"], meta["award_float"]))
 
                 results.append(
                     {
@@ -174,14 +227,10 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
                     }
                 )
 
-        # Write CSV summary alongside the PDFs
-        if csv_rows:
-            csv_path = package_dir / "settlements_summary.csv"
-            with csv_path.open("w", newline="", encoding="utf-8") as f:
-                writer = csv.writer(f)
-                writer.writerow(["Claim Number", "Client Name", "Total Award"])
-                for claim_number, client_name, award_float in csv_rows:
-                    writer.writerow([claim_number, client_name, f"{award_float:.2f}"])
+        # Write XLSX summary alongside the PDFs
+        if settlement_rows:
+            xlsx_path = package_dir / "settlements_summary.xlsx"
+            xlsx_path.write_bytes(_build_settlements_workbook(settlement_rows))
 
         n_ok = sum(1 for r in results if r["status"] == "success")
         n_err = sum(1 for r in results if r["status"] == "error")
@@ -190,7 +239,11 @@ def _build_download(uploaded_files) -> tuple[bytes, str, str, bool, int, int]:
         if len(packaged_items) == 1:
             single_item = packaged_items[0]
             suffix = single_item.suffix.lower()
-            mime = "application/pdf" if suffix == ".pdf" else "text/csv"
+            mime = (
+                "application/pdf"
+                if suffix == ".pdf"
+                else "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
             return (
                 single_item.read_bytes(),
                 single_item.name,
@@ -219,7 +272,7 @@ def main() -> None:
     st.title("Bard Settlement PDF Processor")
     st.caption(
         "Upload Bard settlement PDFs, preview extracted fields and rename output, "
-        "and download processed files plus CSV summary."
+        "and download processed files plus Excel summary."
     )
 
     uploaded_files = st.file_uploader(
