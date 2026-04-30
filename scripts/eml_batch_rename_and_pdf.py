@@ -65,6 +65,13 @@ def short_subject(subject: str, max_chars: int = 36) -> str:
         return subject
     return subject[:max_chars].rsplit(" ", 1)[0] or subject[:max_chars]
 
+def _normalize_pdf_text(text: str) -> str:
+    """Normalize characters that cause missing-glyph black boxes in PDF renderers."""
+    return (
+        text.replace("\u2013", "-")   # en dash
+            .replace("\u2014", "-")   # em dash
+            .replace("\u202F", " ")   # narrow no-break space
+    )
 
 def html_to_text(value: str) -> str:
     # Basic HTML to plain text conversion suitable for email body extraction.
@@ -72,7 +79,7 @@ def html_to_text(value: str) -> str:
     text = re.sub(r"<\s*/\s*p\s*>", "\n\n", text, flags=re.IGNORECASE)
     text = re.sub(r"<[^>]+>", "", text)
     text = html.unescape(text)
-    text = text.replace("\u2013", "-").replace("\u2014", "-")
+    text = _normalize_pdf_text(text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 
@@ -170,7 +177,7 @@ def get_best_body_text(msg) -> str:
 
 def make_email_pdf(email_msg, output_pdf: Path) -> None:
     styles = getSampleStyleSheet()
-    body_text = get_best_body_text(email_msg) or "(No message body found)"
+    body_text = _normalize_pdf_text(get_best_body_text(email_msg) or "(No message body found)")
 
     story = [
         Paragraph("Email Content", styles["Title"]),
@@ -178,11 +185,11 @@ def make_email_pdf(email_msg, output_pdf: Path) -> None:
     ]
 
     headers = [
-        ["From", str(email_msg.get("From", ""))],
-        ["To", str(email_msg.get("To", ""))],
-        ["Cc", str(email_msg.get("Cc", ""))],
-        ["Date", str(email_msg.get("Date", ""))],
-        ["Subject", str(email_msg.get("Subject", ""))],
+        ["From", _normalize_pdf_text(str(email_msg.get("From", "")))],
+        ["To", _normalize_pdf_text(str(email_msg.get("To", "")))],
+        ["Cc", _normalize_pdf_text(str(email_msg.get("Cc", "")))],
+        ["Date", _normalize_pdf_text(str(email_msg.get("Date", "")))],
+        ["Subject", _normalize_pdf_text(str(email_msg.get("Subject", "")))],
     ]
 
     table = Table(headers, colWidths=[1.2 * inch, 6.0 * inch])
@@ -215,9 +222,9 @@ def attachment_to_text_pdf(
 ) -> None:
     styles = getSampleStyleSheet()
     story = [
-        Paragraph(title, styles["Title"]),
+        Paragraph(_normalize_pdf_text(title), styles["Title"]),
         Spacer(1, 0.2 * inch),
-        Preformatted(content_text, styles["Code"]),
+        Preformatted(_normalize_pdf_text(content_text), styles["Code"]),
     ]
     doc = SimpleDocTemplate(str(output_pdf), pagesize=LETTER)
     doc.build(story)
@@ -233,7 +240,7 @@ def attachment_image_to_pdf(image_path: Path, output_pdf: Path, name: str) -> No
     img.drawWidth, img.drawHeight = fit_in_box(img.imageWidth, img.imageHeight, max_w, max_h)
 
     story = [
-        Paragraph(f"Attachment Image: {name}", styles["Title"]),
+        Paragraph(_normalize_pdf_text(f"Attachment Image: {name}"), styles["Title"]),
         Spacer(1, 0.2 * inch),
         img,
     ]
