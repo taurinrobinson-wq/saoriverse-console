@@ -87,12 +87,21 @@ def _preview_rows(uploaded_files) -> list[dict]:
     return rows
 
 
-def _build_zip(
+def _mime_for_path(path: Path) -> str:
+    suffix = path.suffix.lower()
+    if suffix == ".pdf":
+        return "application/pdf"
+    if suffix == ".eml":
+        return "message/rfc822"
+    return "application/octet-stream"
+
+
+def _build_download(
     uploaded_files,
     rename_only: bool,
     include_emails: bool,
     include_pdfs: bool,
-) -> tuple[bytes, int, int]:
+) -> tuple[bytes, str, str, bool, int, int]:
     with tempfile.TemporaryDirectory(prefix="eml_streamlit_") as td:
         root = Path(td)
         input_dir = root / "input"
@@ -152,19 +161,33 @@ def _build_zip(
         n_ok = sum(1 for r in results if r["status"] == "success")
         n_err = sum(1 for r in results if r["status"] == "error")
 
+        packaged_items = sorted(item for item in package_dir.glob("*") if item.is_file())
+        if len(packaged_items) == 1:
+            single_item = packaged_items[0]
+            return (
+                single_item.read_bytes(),
+                single_item.name,
+                _mime_for_path(single_item),
+                False,
+                n_ok,
+                n_err,
+            )
+
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        zip_name = f"processed_eml_batch_{ts}.zip"
         buf = io.BytesIO()
         with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-            for item in sorted(package_dir.glob("*")):
+            for item in packaged_items:
                 zf.write(item, arcname=item.name)
 
-        return buf.getvalue(), n_ok, n_err
+        return buf.getvalue(), zip_name, "application/zip", True, n_ok, n_err
 
 
 def main() -> None:
     st.set_page_config(page_title="EML Batch Processor", layout="wide")
 
     st.title("EML Batch Processor")
-    st.caption("Local Streamlit app: upload .eml files, preview rename output, and download a processed ZIP.")
+    st.caption("Local Streamlit app: upload .eml files, preview rename output, and download processed output.")
 
     uploaded_files = st.file_uploader(
         "Upload .eml files",
@@ -196,24 +219,27 @@ def main() -> None:
         process_disabled = not uploaded_files or (not include_pdfs and not include_emails)
         if st.button("Process Batch", type="primary", disabled=process_disabled):
             with st.spinner("Processing uploaded files..."):
-                zip_bytes, n_ok, n_err = _build_zip(
+                download_bytes, download_name, download_mime, is_zip, n_ok, n_err = _build_download(
                     uploaded_files,
                     rename_only=rename_only,
                     include_emails=include_emails,
                     include_pdfs=include_pdfs,
                 )
-                st.session_state["zip_bytes"] = zip_bytes
+                st.session_state["download_bytes"] = download_bytes
+                st.session_state["download_name"] = download_name
+                st.session_state["download_mime"] = download_mime
+                st.session_state["is_zip"] = is_zip
                 st.session_state["process_summary"] = (n_ok, n_err)
-                ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-                st.session_state["zip_name"] = f"processed_eml_batch_{ts}.zip"
 
     preview_rows = st.session_state.get("preview_rows")
     if preview_rows:
         st.subheader("Preview Results")
         st.dataframe(preview_rows, use_container_width=True)
 
-    zip_bytes = st.session_state.get("zip_bytes")
-    zip_name = st.session_state.get("zip_name", "processed_emails.zip")
+    download_bytes = st.session_state.get("download_bytes")
+    download_name = st.session_state.get("download_name", "processed_output.zip")
+    download_mime = st.session_state.get("download_mime", "application/zip")
+    is_zip = st.session_state.get("is_zip", True)
     process_summary = st.session_state.get("process_summary")
 
     if process_summary:
@@ -223,12 +249,13 @@ def main() -> None:
         else:
             st.success(f"Processed {n_ok} file(s) successfully.")
 
-    if zip_bytes:
+    if download_bytes:
+        label_prefix = "Download ZIP" if is_zip else "Download File"
         st.download_button(
-            label=f"Download ZIP ({zip_name})",
-            data=zip_bytes,
-            file_name=zip_name,
-            mime="application/zip",
+            label=f"{label_prefix} ({download_name})",
+            data=download_bytes,
+            file_name=download_name,
+            mime=download_mime,
         )
 
 
