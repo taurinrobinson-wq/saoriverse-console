@@ -4,11 +4,12 @@ from pathlib import Path
 
 import streamlit as st
 
-from modules import bard_settlement, eml_converter
+from modules import bard_settlement, eml_converter, medical_analyzer
 
 MODULES = {
     "EML -> PDF Converter": eml_converter,
     "Bard Settlement Processor": bard_settlement,
+    "Medical Record Analyzer": medical_analyzer,
 }
 
 LOGO_PATH = Path(__file__).resolve().parent / "assets" / "graphics" / "TRLFLogo.svg"
