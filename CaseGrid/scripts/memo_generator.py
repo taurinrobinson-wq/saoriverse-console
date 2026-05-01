@@ -4,8 +4,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from docx import Document
-
 MEMO_OUTPUT_DIR = Path(__file__).resolve().parents[1] / "assets" / "memo_output"
 MEMO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -19,6 +17,8 @@ def generate_memo(
     missing: list[str],
 ) -> Path:
     """Create and save a legal memorandum in .docx format."""
+    from docx import Document
+
     doc = Document()
 
     doc.add_heading("THE ROBINSON LAW FIRM, PROF. CORP.", level=0)

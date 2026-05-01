@@ -28,7 +28,10 @@ def _load_script_function(script_name: str, function_name: str) -> Callable[...,
         return None
 
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    try:
+        spec.loader.exec_module(module)
+    except Exception:
+        return None
     fn = getattr(module, function_name, None)
     if callable(fn):
         return fn
