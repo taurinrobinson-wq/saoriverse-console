@@ -56,6 +56,8 @@ def _evaluate_rule(record_value, operator: str, expected: str):
             return None
     if operator == "contains":
         return expected.lower() in str(record_value).lower()
+    if operator == "not contains":
+        return expected.lower() not in str(record_value).lower()
     if operator == "exists":
         return record_value not in (None, "", [])
     if operator == "not exists":
@@ -180,7 +182,17 @@ def _build_xlsx(results: list[dict]) -> bytes:
 # Main Streamlit UI
 # ---------------------------------------------------------------------------
 
-_OPERATORS = ["=", "!=", "<", ">", "contains", "exists", "not exists"]
+FRIENDLY_OPERATORS: dict[str, str] = {
+    "is equal to": "=",
+    "is not equal to": "!=",
+    "is less than": "<",
+    "is greater than": ">",
+    "contains": "contains",
+    "does not contain": "not contains",
+    "is present": "exists",
+    "is missing": "not exists",
+}
+_FRIENDLY_LIST = list(FRIENDLY_OPERATORS.keys())
 _SK = "med_"  # session-state key prefix
 
 
@@ -247,6 +259,7 @@ def run() -> None:
 
     # ---- Rule builder ----
     st.subheader("Qualification Rules")
+    st.caption("Use plain-English conditions. CaseGrid handles the logic automatically.")
     rules: list[dict] = st.session_state[f"{_SK}current"]["rules"]
 
     for i, rule in enumerate(rules):
@@ -257,10 +270,17 @@ def run() -> None:
                 "Field", value=rule.get("field", ""), key=f"{_SK}field_{i}"
             )
         with rB:
-            op_idx = _OPERATORS.index(rule["operator"]) if rule.get("operator") in _OPERATORS else 0
-            rule["operator"] = st.selectbox(
-                "Operator", _OPERATORS, index=op_idx, key=f"{_SK}op_{i}"
+            current_friendly = next(
+                (k for k, v in FRIENDLY_OPERATORS.items() if v == rule.get("operator")),
+                _FRIENDLY_LIST[0],
             )
+            selected_friendly = st.selectbox(
+                f"Condition {i + 1}",
+                _FRIENDLY_LIST,
+                index=_FRIENDLY_LIST.index(current_friendly),
+                key=f"{_SK}op_{i}",
+            )
+            rule["operator"] = FRIENDLY_OPERATORS[selected_friendly or _FRIENDLY_LIST[0]]
         with rC:
             rule["value"] = st.text_input(
                 "Value", value=rule.get("value", ""), key=f"{_SK}val_{i}"
