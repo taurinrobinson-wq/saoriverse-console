@@ -39,13 +39,16 @@ def generate_memo(
     from docx import Document
 
     doc = Document()
+    display_name = _lastname_first(patient_name or "Unknown Patient")
+
+    doc.core_properties.title = f"CaseGrid Medical Record Analysis Memorandum - {display_name}"
 
     doc.add_heading("THE ROBINSON LAW FIRM, PROF. CORP.", level=0)
-    doc.add_heading("CaseGrid Medical Record Analysis Memorandum", level=1)
+    doc.add_heading(f"CaseGrid Medical Record Analysis Memorandum - {display_name}", level=1)
 
     # Executive Summary
-    display_name = _lastname_first(patient_name)
     doc.add_heading("Executive Summary", level=2)
+    doc.add_paragraph(f"This report analyzes medical records for patient {display_name}.")
     doc.add_paragraph(f"Patient: {display_name}")
     doc.add_paragraph(f"Date of Birth: {dob or 'Unknown'}")
     doc.add_paragraph(f"Record Range: {record_range}")
