@@ -7,6 +7,17 @@ from typing import Any
 MEMO_OUTPUT_DIR = Path(__file__).resolve().parents[1] / "assets" / "memo_output"
 MEMO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Human-readable display names for technical rule fields
+_FIELD_DISPLAY_NAMES: dict[str, str] = {
+    "primary_cancer": "Ovarian cancer diagnosis",
+    "age_at_diagnosis": "Age at diagnosis",
+    "pathology_present": "Pathology documentation",
+    "brca_result": "BRCA status",
+    "metastatic": "Metastatic disease",
+    "diagnosis_date": "Diagnosis date",
+    "dob": "Date of birth",
+}
+
 
 def _lastname_first(name: str) -> str:
     """Return 'Lastname, Firstname' from any name string, else return name unchanged."""
@@ -40,28 +51,48 @@ def generate_memo(
     doc.add_paragraph(f"Record Range: {record_range}")
     doc.add_paragraph(f"Qualification Status: {evaluation.get('status', 'Unknown')}")
 
-    # Criteria Table
-    doc.add_heading("Criteria Table", level=2)
-    table = doc.add_table(rows=1, cols=5)
-    table.style = "Table Grid"
-    headers = table.rows[0].cells
-    headers[0].text = "Field"
-    headers[1].text = "Condition"
-    headers[2].text = "Expected"
-    headers[3].text = "Extracted"
-    headers[4].text = "Result"
-
+    # Qualification Summary — narrative, human-readable
+    doc.add_heading("Qualification Summary", level=2)
     for item in evaluation.get("details", []):
         rule = item.get("rule", {})
-        row = table.add_row().cells
-        row[0].text = str(rule.get("field", ""))
-        row[1].text = str(rule.get("operator", ""))
-        row[2].text = str(rule.get("value", ""))
-        row[3].text = str(item.get("value", ""))
-        row[4].text = (
-            "Pass" if item.get("result") is True
-            else "Fail" if item.get("result") is False
-            else "Insufficient"
+        field = rule.get("field", "")
+        display_field = _FIELD_DISPLAY_NAMES.get(field, field.replace("_", " ").title())
+        extracted = item.get("value")
+        result = item.get("result")
+        operator = rule.get("operator", "")
+        expected = rule.get("value", "")
+        required = rule.get("required", True)
+
+        if result is True:
+            outcome = "Met"
+        elif result is False:
+            outcome = "Not Met"
+        else:
+            outcome = "Insufficient Data"
+
+        # Build a readable sentence per criterion
+        extracted_str = str(extracted) if extracted not in (None, "", [], "None") else "not found"
+        if operator in ("exists", "is present"):
+            detail = f"Present: {extracted_str}"
+        elif operator in ("not exists", "is missing"):
+            detail = f"Absent as expected: {extracted_str}"
+        elif operator in ("contains",):
+            detail = f"Contains '{expected}': {extracted_str}"
+        elif operator in ("not contains", "does not contain"):
+            detail = f"Does not contain '{expected}': {extracted_str}"
+        elif operator == "<":
+            detail = f"{extracted_str} (threshold: < {expected})"
+        elif operator == ">":
+            detail = f"{extracted_str} (threshold: > {expected})"
+        elif operator in ("=", "!="):
+            detail = f"{extracted_str} (expected: {expected})"
+        else:
+            detail = extracted_str
+
+        req_label = "(required)" if required else "(optional)"
+        doc.add_paragraph(
+            f"{display_field} — {detail}   |   {outcome} {req_label}",
+            style="List Bullet",
         )
 
     # Ovarian Cancer Evidence — grouped by page, no raw text

@@ -50,6 +50,60 @@ _BRCA_PATTERNS = [
     re.compile(r"\bbrca\s*2\b|\bbrca2\b", re.IGNORECASE),
 ]
 
+# Patterns for service/admit/discharge/print dates found in medical records
+_DIAGNOSIS_DATE_PATTERNS = [
+    re.compile(r"\bservice\s*date(?:/time)?\s*[:\-]\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\badmit(?:ted)?(?:\s*date)?\s*[:\-]\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\badmission\s*date\s*[:\-]\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bdischarge\s*date\s*[:\-]\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bprint\s*date(?:/time)?\s*[:\-]\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\breport\s*request\s*id[^\n]{0,60}(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bdate\s*of\s*service\s*[:\-]\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+]
+
+
+def _extract_snippet(page_text: str, keyword: str) -> str:
+    """Return 1-2 sentences surrounding keyword in page_text (max 300 chars)."""
+    lower = page_text.lower()
+    pos = lower.find(keyword.lower())
+    if pos == -1:
+        return page_text[:200].strip()
+
+    start = max(0, pos - 150)
+    end = min(len(page_text), pos + len(keyword) + 150)
+    snippet = page_text[start:end].strip()
+
+    # Try to trim to a clean sentence start
+    boundary = re.search(r'(?:[.!?]\s+)([A-Z])', snippet)
+    if boundary and boundary.start() < 80:
+        snippet = snippet[boundary.start() + 1:].strip()
+
+    # Trim at last sentence end
+    last_end = max(
+        snippet.rfind("."),
+        snippet.rfind("!"),
+        snippet.rfind("?"),
+    )
+    if 0 < last_end < len(snippet) - 1:
+        snippet = snippet[: last_end + 1]
+
+    return snippet[:300]
+
+
+def _extract_diagnosis_date(pages: list[str]) -> date | None:
+    """
+    Scan all pages for service/admit/discharge/print date patterns.
+    Returns the earliest valid date found (most likely the diagnosis encounter).
+    """
+    candidates: list[date] = []
+    for page_text in pages:
+        for pattern in _DIAGNOSIS_DATE_PATTERNS:
+            for match in pattern.finditer(page_text):
+                dt = _parse_date(match.group(1))
+                if dt:
+                    candidates.append(dt)
+    return min(candidates) if candidates else None
+
 
 def _parse_date(raw: str | None) -> date | None:
     if not raw:
@@ -108,11 +162,12 @@ def normalize_medical_record(file_bytes: bytes) -> dict[str, Any]:
 
     evidence: list[dict[str, Any]] = []
 
-    def add_evidence(page_number: int, excerpt: str, normalized: str) -> None:
+    def add_evidence(page_number: int, page_text: str, normalized: str, keyword: str = "") -> None:
+        snippet = _extract_snippet(page_text, keyword or normalized)
         evidence.append(
             {
                 "page": page_number,
-                "text": excerpt[:300],
+                "text": snippet,
                 "normalized": normalized,
             }
         )
@@ -127,7 +182,7 @@ def normalize_medical_record(file_bytes: bytes) -> dict[str, Any]:
                 primary_cancer = "ovarian cancer"
                 if "metastatic" in term:
                     metastatic = True
-                add_evidence(idx, page_text, "ovarian cancer")
+                add_evidence(idx, page_text, "ovarian cancer", keyword=term)
                 break
 
         if (
@@ -136,23 +191,24 @@ def normalize_medical_record(file_bytes: bytes) -> dict[str, Any]:
         ):
             primary_cancer = "ovarian cancer"
             metastatic = True
-            add_evidence(idx, page_text, "metastatic ovarian cancer context")
+            add_evidence(idx, page_text, "metastatic ovarian cancer context", keyword="metastatic adenocarcinoma")
 
         for chemo in _CHEMO_TERMS:
             if chemo in page_lower:
                 if primary_cancer is None:
                     primary_cancer = "possible ovarian cancer"
-                add_evidence(idx, page_text, f"chemo evidence: {chemo}")
+                add_evidence(idx, page_text, f"chemo evidence: {chemo}", keyword=chemo)
                 break
 
         for term in _PATHOLOGY_TERMS:
             if term in page_lower:
-                add_evidence(idx, page_text, "pathology")
+                add_evidence(idx, page_text, "pathology", keyword=term)
                 break
 
         for brca_pattern in _BRCA_PATTERNS:
-            if brca_pattern.search(page_text):
-                add_evidence(idx, page_text, "brca")
+            m = brca_pattern.search(page_text)
+            if m:
+                add_evidence(idx, page_text, "brca", keyword=m.group(0))
                 break
 
     pathology_present = any(e["normalized"] == "pathology" for e in evidence)
@@ -173,9 +229,13 @@ def normalize_medical_record(file_bytes: bytes) -> dict[str, Any]:
     dob_raw = _find_first_by_patterns(full_text, _DOB_PATTERNS)
     dob_date = _parse_date(dob_raw)
 
+    # Try explicit diagnosis date patterns first, then service/admit dates, then fallback
     diagnosis_raw = _find_first_by_patterns(full_text, _DIAG_PATTERNS)
     diagnosis_date = _parse_date(diagnosis_raw)
     if diagnosis_date is None:
+        diagnosis_date = _extract_diagnosis_date(pages)
+    if diagnosis_date is None:
+        # Last resort: earliest date anywhere in document
         all_dates: list[date] = []
         for match in re.finditer(r"\b\d{1,2}/\d{1,2}/\d{2,4}\b|\b\d{4}-\d{2}-\d{2}\b", full_text):
             dt = _parse_date(match.group(0))
@@ -186,9 +246,7 @@ def normalize_medical_record(file_bytes: bytes) -> dict[str, Any]:
 
     age_at_diagnosis: int | None = None
     if dob_date and diagnosis_date and diagnosis_date >= dob_date:
-        age_at_diagnosis = diagnosis_date.year - dob_date.year - (
-            (diagnosis_date.month, diagnosis_date.day) < (dob_date.month, dob_date.day)
-        )
+        age_at_diagnosis = int((diagnosis_date - dob_date).days / 365.25)
 
     return {
         "dob": dob_date.isoformat() if dob_date else None,
