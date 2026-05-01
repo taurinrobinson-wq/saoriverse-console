@@ -1,0 +1,29 @@
+{
+  "name": "Talcum Powder - Ovarian Cancer Qualification",
+  "rules": [
+    {
+      "field": "primary_cancer",
+      "operator": "contains",
+      "value": "ovarian",
+      "required": true
+    },
+    {
+      "field": "age_at_diagnosis",
+      "operator": "<",
+      "value": "75",
+      "required": true
+    },
+    {
+      "field": "pathology_present",
+      "operator": "exists",
+      "value": "",
+      "required": true
+    },
+    {
+      "field": "brca_result",
+      "operator": "!=",
+      "value": "Positive",
+      "required": true
+    }
+  ]
+}

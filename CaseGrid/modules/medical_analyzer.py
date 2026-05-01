@@ -1,9 +1,11 @@
 """CaseGrid – Medical Record Analyzer module."""
 from __future__ import annotations
 
+import importlib.util
 import io
 import json
 from pathlib import Path
+from typing import Any, Callable
 
 import streamlit as st
 
@@ -13,6 +15,30 @@ import streamlit as st
 
 TEMPLATE_DIR = Path(__file__).resolve().parents[1] / "assets" / "medical_templates"
 TEMPLATE_DIR.mkdir(parents=True, exist_ok=True)
+SCRIPTS_DIR = Path(__file__).resolve().parents[1] / "scripts"
+
+
+def _load_script_function(script_name: str, function_name: str) -> Callable[..., Any] | None:
+    module_path = SCRIPTS_DIR / script_name
+    if not module_path.exists():
+        return None
+
+    spec = importlib.util.spec_from_file_location(function_name, module_path)
+    if spec is None or spec.loader is None:
+        return None
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    fn = getattr(module, function_name, None)
+    if callable(fn):
+        return fn
+    return None
+
+
+NORMALIZE_MEDICAL_RECORD = _load_script_function(
+    "medical_normalizer.py", "normalize_medical_record"
+)
+GENERATE_MEMO = _load_script_function("memo_generator.py", "generate_memo")
 
 
 def _load_templates() -> dict:
@@ -89,57 +115,6 @@ def _evaluate_record(record: dict, template: dict) -> tuple[str, list[dict]]:
 
 
 # ---------------------------------------------------------------------------
-# Basic PDF text extractor (no external dependency beyond pypdf / pdfplumber)
-# ---------------------------------------------------------------------------
-
-def _parse_medical_record(upload) -> dict:
-    """
-    Attempt to extract key/value pairs from the uploaded PDF.
-
-    Strategy:
-      - Try pdfplumber first (best text extraction).
-      - Fall back to pypdf if pdfplumber is unavailable.
-    The resulting dict maps lowercased field names to their extracted values.
-    The full concatenated text is always available under the key ``__text__``.
-    """
-    raw_text = ""
-
-    # --- pdfplumber ---
-    try:
-        import pdfplumber  # type: ignore
-
-        upload.seek(0)
-        with pdfplumber.open(upload) as pdf:
-            raw_text = "\n".join(
-                page.extract_text() or "" for page in pdf.pages
-            )
-    except Exception:
-        # --- pypdf fallback ---
-        try:
-            from pypdf import PdfReader  # type: ignore
-
-            upload.seek(0)
-            reader = PdfReader(upload)
-            raw_text = "\n".join(
-                page.extract_text() or "" for page in reader.pages
-            )
-        except Exception:
-            raw_text = ""
-
-    # Build a simple field dict from "Label: Value" lines
-    record: dict = {"__text__": raw_text}
-    for line in raw_text.splitlines():
-        if ":" in line:
-            parts = line.split(":", 1)
-            key = parts[0].strip().lower()
-            val = parts[1].strip()
-            if key:
-                record[key] = val
-
-    return record
-
-
-# ---------------------------------------------------------------------------
 # XLSX export helper
 # ---------------------------------------------------------------------------
 
@@ -198,6 +173,10 @@ _SK = "med_"  # session-state key prefix
 
 def run() -> None:
     st.header("Medical Record Analyzer")
+
+    if NORMALIZE_MEDICAL_RECORD is None:
+        st.error("Missing parser: CaseGrid/scripts/medical_normalizer.py")
+        return
 
     # ---- Load persisted templates ----
     templates = _load_templates()
@@ -313,15 +292,26 @@ def run() -> None:
             results: list[dict] = []
             with st.spinner("Analyzing records…"):
                 for upload in uploads:
-                    record = _parse_medical_record(upload)
+                    record = NORMALIZE_MEDICAL_RECORD(upload.getvalue())
                     status, rule_results = _evaluate_record(
                         record, st.session_state[f"{_SK}current"]
                     )
+                    missing_data = [
+                        r["rule"].get("field", "")
+                        for r in rule_results
+                        if r["result"] is None and r["rule"].get("required", True)
+                    ]
+                    patient_name = Path(upload.name).stem
+                    page_count = record.get("page_count") or 0
                     results.append(
                         {
                             "filename": upload.name,
+                            "patient_name": patient_name,
+                            "record_range": f"Pages 1-{page_count}" if page_count else "Unknown",
                             "status": status,
                             "details": rule_results,
+                            "record": record,
+                            "missing_data": missing_data,
                         }
                     )
             st.session_state[f"{_SK}results"] = results
@@ -342,7 +332,17 @@ def run() -> None:
         c3.metric("Insufficient Data", counts["Insufficient Data"])
 
         # Results table
-        table_data = [{"File": r["filename"], "Status": r["status"]} for r in results]
+        table_data = [
+            {
+                "File": r["filename"],
+                "Patient": r["patient_name"],
+                "Status": r["status"],
+                "Age At Diagnosis": r["record"].get("age_at_diagnosis"),
+                "Primary Cancer": r["record"].get("primary_cancer"),
+                "BRCA": r["record"].get("brca_result"),
+            }
+            for r in results
+        ]
         st.dataframe(table_data, use_container_width=True)
 
         # Detailed breakdown per file
@@ -362,6 +362,36 @@ def run() -> None:
                         f"{req_label} — extracted: `{rd['value']}`"
                     )
                 st.divider()
+
+        st.subheader("Legal Memo Generator")
+        if GENERATE_MEMO is None:
+            st.warning("Memo generator unavailable. Add CaseGrid/scripts/memo_generator.py")
+        else:
+            for idx, r in enumerate(results):
+                if st.button(f"Generate Legal Memo: {r['filename']}", key=f"{_SK}memo_{idx}"):
+                    memo_path = GENERATE_MEMO(
+                        r["patient_name"],
+                        r["record"].get("dob"),
+                        r["record_range"],
+                        {"status": r["status"], "details": r["details"]},
+                        r["record"].get("evidence", []),
+                        r["missing_data"],
+                    )
+                    memo_file = Path(memo_path)
+                    st.session_state[f"{_SK}memo_file_{idx}"] = str(memo_file)
+                    st.success(f"Memo generated: {memo_file}")
+
+                memo_file_str = st.session_state.get(f"{_SK}memo_file_{idx}")
+                if memo_file_str:
+                    memo_file = Path(memo_file_str)
+                    if memo_file.exists():
+                        st.download_button(
+                            f"Download Memo: {r['patient_name']}",
+                            data=memo_file.read_bytes(),
+                            file_name=memo_file.name,
+                            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                            key=f"{_SK}memo_dl_{idx}",
+                        )
 
         # XLSX download
         xlsx_bytes = _build_xlsx(results)
