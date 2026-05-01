@@ -225,17 +225,20 @@ def run() -> None:
             st.success(f"Deleted **{selected_template}**")
             st.rerun()
 
-    # Load selected template into session state
+    if f"{_SK}current" not in st.session_state:
+        st.session_state[f"{_SK}current"] = {"name": "New Template", "rules": []}
+
+    # Load selected template into session state when selection changes.
+    loaded_template_key = f"{_SK}loaded_template"
+    last_loaded_template = st.session_state.get(loaded_template_key)
     if (
         selected_template != "— select —"
-        and f"{_SK}current" not in st.session_state
+        and selected_template != last_loaded_template
     ):
         st.session_state[f"{_SK}current"] = templates.get(
             selected_template, {"name": selected_template, "rules": []}
         )
-
-    if f"{_SK}current" not in st.session_state:
-        st.session_state[f"{_SK}current"] = {"name": "New Template", "rules": []}
+        st.session_state[loaded_template_key] = selected_template
 
     st.divider()
 
