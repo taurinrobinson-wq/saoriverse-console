@@ -287,8 +287,25 @@ def run() -> None:
 
     # ---- File upload + analysis ----
     st.subheader("Upload Medical Records")
+
+    if f"{_SK}uploader_key" not in st.session_state:
+        st.session_state[f"{_SK}uploader_key"] = 0
+
+    up_col1, up_col2 = st.columns([3, 1])
+    with up_col2:
+        if st.button("Clear Files", key=f"{_SK}clear"):
+            st.session_state[f"{_SK}uploader_key"] += 1
+            st.session_state.pop(f"{_SK}results", None)
+            for k in list(st.session_state.keys()):
+                if k.startswith(f"{_SK}memo_file_"):
+                    st.session_state.pop(k, None)
+            st.rerun()
+
     uploads = st.file_uploader(
-        "Upload PDFs", type=["pdf"], accept_multiple_files=True, key=f"{_SK}uploads"
+        "Upload PDFs",
+        type=["pdf"],
+        accept_multiple_files=True,
+        key=f"{_SK}uploads_{st.session_state[f'{_SK}uploader_key']}",
     )
 
     if st.button("Run Analysis", key=f"{_SK}run") and uploads:
