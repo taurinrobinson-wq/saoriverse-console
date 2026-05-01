@@ -180,14 +180,14 @@ def run() -> None:
     st.markdown(
         """
         <style>
-        div[data-testid="stButton"] button[kind="secondary"][id$="med_clear"] {
-            border: 2px solid #ff69b4;
-            color: #ff69b4;
+        .pink-clear-btn button {
+            border: 2px solid #ff69b4 !important;
+            color: #ff69b4 !important;
         }
-        div[data-testid="stButton"] button[kind="secondary"][id$="med_clear"]:hover {
-            border-color: #ff1493;
-            color: #ff1493;
-            background-color: rgba(255,105,180,0.08);
+        .pink-clear-btn button:hover {
+            border-color: #ff1493 !important;
+            color: #ff1493 !important;
+            background-color: rgba(255,105,180,0.08) !important;
         }
         </style>
         """,
@@ -310,6 +310,7 @@ def run() -> None:
 
     up_col1, up_col2 = st.columns([3, 1])
     with up_col2:
+        st.markdown('<div class="pink-clear-btn">', unsafe_allow_html=True)
         if st.button("Clear Files", key=f"{_SK}clear"):
             st.session_state[f"{_SK}uploader_key"] += 1
             st.session_state.pop(f"{_SK}results", None)
@@ -317,6 +318,7 @@ def run() -> None:
                 if k.startswith(f"{_SK}memo_file_"):
                     st.session_state.pop(k, None)
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
     uploads = st.file_uploader(
         "Upload PDFs",
