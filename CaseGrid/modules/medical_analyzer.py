@@ -177,6 +177,23 @@ _SK = "med_"  # session-state key prefix
 def run() -> None:
     st.header("Medical Record Analyzer")
 
+    st.markdown(
+        """
+        <style>
+        div[data-testid="stButton"] button[kind="secondary"][id$="med_clear"] {
+            border: 2px solid #ff69b4;
+            color: #ff69b4;
+        }
+        div[data-testid="stButton"] button[kind="secondary"][id$="med_clear"]:hover {
+            border-color: #ff1493;
+            color: #ff1493;
+            background-color: rgba(255,105,180,0.08);
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     if NORMALIZE_MEDICAL_RECORD is None:
         st.error("Missing parser: CaseGrid/scripts/medical_normalizer.py")
         return
