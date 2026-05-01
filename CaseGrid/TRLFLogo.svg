@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 585.54 192.77">
+  <!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 2.1.3 Build 182)  -->
+  <defs>
+    <style>
+      .st0 {
+        letter-spacing: .02em;
+      }
+
+      .st0, .st1, .st2, .st3 {
+        fill: #231f20;
+      }
+
+      .st0, .st4, .st2, .st3 {
+        isolation: isolate;
+      }
+
+      .st0, .st2 {
+        font-family: Microsoft-Himalaya, 'Microsoft Himalaya';
+      }
+
+      .st0, .st3 {
+        font-size: 64.49px;
+      }
+
+      .st5, .st6 {
+        fill: none;
+      }
+
+      .st6 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 3.92px;
+      }
+
+      .st2 {
+        font-size: 47.15px;
+        letter-spacing: .02em;
+      }
+
+      .st3 {
+        font-family: PerpetuaTitlingMT-Bold, 'Perpetua Titling MT';
+        font-weight: 700;
+        letter-spacing: .02em;
+      }
+    </style>
+  </defs>
+  <rect class="st5" width="585.54" height="192.77"/>
+  <g>
+    <path class="st1" d="M155.28,153.94h-31.67l-40.3-55.61c-1.48.09-2.81.15-3.99.2-1.18.04-2.24.06-3.2.06-.78,0-1.61-.02-2.48-.06s-1.78-.11-2.75-.2v34.55c0,4.19.28,7.48.85,9.88s1.39,4.19,2.48,5.36c1.09,1.18,2.4,1.9,3.92,2.16,1.53.25,3.25.39,5.17.39h4.71v3.27h-51.03v-3.27h4.58c4.88,0,8.46-1.61,10.73-4.84,1.22-1.92,1.82-6.23,1.82-12.95V56.06c0-7.33-.83-11.95-2.48-13.87-2.27-2.61-5.62-3.92-10.07-3.92h-4.58v-3.27h43.3c6.36,0,11.87.24,16.49.72s8.42,1.2,11.38,2.16c2.96.96,5.76,2.29,8.37,3.99,2.61,1.7,4.91,3.75,6.87,6.15,1.97,2.4,3.52,5.08,4.65,8.05,1.14,2.97,1.7,6.15,1.7,9.55,0,7.42-2.35,13.78-7.06,19.1-4.71,5.32-12.08,9.12-22.11,11.38l24.46,34.02c2.88,3.92,5.43,7.15,7.65,9.68,2.22,2.53,4.45,4.54,6.67,6.02s4.58,2.57,7.06,3.27,5.43,1.22,8.83,1.57v3.27h.02ZM70.88,92.83c1.14,0,2.11.03,2.94.07.83.05,1.51.06,2.04.06,5.67,0,10.64-.65,14.92-1.96,4.28-1.31,7.85-3.14,10.73-5.49,2.88-2.35,5.04-5.13,6.48-8.31s2.16-6.65,2.16-10.4-.62-7.04-1.83-10.14c-1.23-3.09-2.97-5.76-5.23-7.99-2.27-2.22-4.98-3.94-8.11-5.17-3.14-1.22-6.59-1.82-10.34-1.82s-8.16.57-13.74,1.7v49.46h-.01Z"/>
+    <rect class="st6" x="11.72" y="13.21" width="165.91" height="165.91"/>
+    <g class="st4">
+      <text class="st0" transform="translate(201.69 60.2)"><tspan x="0" y="0">THE</tspan></text>
+    </g>
+    <g class="st4">
+      <text class="st3" transform="translate(200.1 123.33)"><tspan x="0" y="0">ROBINSON</tspan></text>
+    </g>
+    <g class="st4">
+      <text class="st0" transform="translate(197.82 166.51)"><tspan x="0" y="0">LAW FIRM, </tspan></text>
+      <text class="st2" transform="translate(449.74 166.51)"><tspan x="0" y="0">P.C.</tspan></text>
+    </g>
+  </g>
+</svg>
