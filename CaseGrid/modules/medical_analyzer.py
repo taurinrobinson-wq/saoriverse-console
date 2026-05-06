@@ -4,6 +4,8 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import sys
+import zipfile
 from pathlib import Path
 from typing import Any, Callable
 
@@ -23,15 +25,21 @@ def _load_script_function(script_name: str, function_name: str) -> Callable[...,
     if not module_path.exists():
         return None
 
-    spec = importlib.util.spec_from_file_location(function_name, module_path)
-    if spec is None or spec.loader is None:
-        return None
+    module_name = f"casegrid_{module_path.stem}"
+    module = sys.modules.get(module_name)
+    if module is None:
+        spec = importlib.util.spec_from_file_location(module_name, module_path)
+        if spec is None or spec.loader is None:
+            return None
 
-    module = importlib.util.module_from_spec(spec)
-    try:
-        spec.loader.exec_module(module)
-    except Exception:
-        return None
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[module_name] = module
+        try:
+            spec.loader.exec_module(module)
+        except Exception:
+            sys.modules.pop(module_name, None)
+            return None
+
     fn = getattr(module, function_name, None)
     if callable(fn):
         return fn
@@ -42,6 +50,12 @@ NORMALIZE_MEDICAL_RECORD = _load_script_function(
     "medical_normalizer.py", "normalize_medical_record"
 )
 GENERATE_MEMO = _load_script_function("memo_generator.py", "generate_memo")
+INGEST_MEDICAL_RECORD = _load_script_function(
+    "medical_ingester.py", "ingest_medical_record"
+)
+SPLIT_PDF_BY_ENCOUNTERS = _load_script_function(
+    "medical_ingester.py", "split_pdf_by_encounters"
+)
 
 
 def _load_templates() -> dict:
@@ -128,6 +142,8 @@ def _build_xlsx(results: list[dict]) -> bytes:
 
         wb = openpyxl.Workbook()
         ws = wb.active
+        if ws is None:
+            return b""
         ws.title = "Analysis Results"
 
         STATUS_COLORS = {
@@ -156,6 +172,122 @@ def _build_xlsx(results: list[dict]) -> bytes:
         return b""
 
 
+def _build_encounter_zip(
+    source_name: str,
+    file_bytes: bytes,
+    encounters: list[dict[str, Any]],
+) -> tuple[str, bytes] | None:
+    if SPLIT_PDF_BY_ENCOUNTERS is None:
+        return None
+
+    split_files = SPLIT_PDF_BY_ENCOUNTERS(file_bytes, encounters)
+    if not split_files:
+        return None
+
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for filename, content in split_files.items():
+            archive.writestr(filename, content)
+    return f"{Path(source_name).stem}_encounters.zip", buffer.getvalue()
+
+
+def _render_ingestion_mode() -> None:
+    if INGEST_MEDICAL_RECORD is None:
+        st.error("Missing ingester: CaseGrid/scripts/medical_ingester.py")
+        return
+
+    st.subheader("Upload Medical Records for Timeline Extraction")
+
+    injury_input = st.text_input(
+        "Injuries to flag (comma-separated)",
+        placeholder="neck, back, left shoulder, headaches",
+        key=f"{_SK}injury_terms",
+    )
+    injury_terms = [term.strip() for term in injury_input.split(",") if term.strip()]
+
+    uploads = st.file_uploader(
+        "Upload PDFs",
+        type=["pdf"],
+        accept_multiple_files=True,
+        key=f"{_SK}ingest_uploads",
+    )
+    split_pdfs = st.checkbox(
+        "Generate per-encounter PDFs",
+        value=False,
+        key=f"{_SK}split_pdfs",
+    )
+
+    if st.button("Run Ingestion", key=f"{_SK}ingest_run") and uploads:
+        timelines: list[dict[str, Any]] = []
+        with st.spinner("Building encounter timelines..."):
+            for upload in uploads:
+                file_bytes = upload.getvalue()
+                record = INGEST_MEDICAL_RECORD(
+                    file_bytes,
+                    patient_name=Path(upload.name).stem,
+                    injury_terms=injury_terms,
+                )
+                timelines.append(
+                    {
+                        "filename": upload.name,
+                        "timeline": record,
+                        "raw_bytes": file_bytes,
+                    }
+                )
+        st.session_state[f"{_SK}ingest_results"] = timelines
+
+    timelines_state = st.session_state.get(f"{_SK}ingest_results")
+    if not isinstance(timelines_state, list) or not timelines_state:
+        return
+
+    timelines = timelines_state
+
+    st.subheader("Encounter Timelines")
+    for item in timelines:
+        filename = item["filename"]
+        timeline = item["timeline"]
+        encounters = timeline.get("encounters", [])
+
+        st.markdown(f"### {filename}")
+        st.write(f"Patient: {timeline.get('patient_name')}")
+        st.write(f"Total pages: {timeline.get('page_count')}")
+
+        table_rows = [
+            {
+                "DOS": encounter.get("dos"),
+                "Pages": f"{encounter.get('page_start')}-{encounter.get('page_end')}",
+                "Type": encounter.get("document_type"),
+                "Facility": encounter.get("facility"),
+                "Injury-related": "Yes" if encounter.get("injury_related") else "No",
+            }
+            for encounter in encounters
+        ]
+        st.dataframe(table_rows, use_container_width=True)
+
+        for encounter in encounters:
+            label = (
+                f"DOS {encounter.get('dos')} | "
+                f"Pages {encounter.get('page_start')}-{encounter.get('page_end')} | "
+                f"{encounter.get('document_type')}"
+            )
+            with st.expander(label):
+                st.json(encounter)
+
+        if split_pdfs:
+            zip_payload = _build_encounter_zip(filename, item["raw_bytes"], encounters)
+            if zip_payload is None:
+                st.warning("Encounter PDF splitting is unavailable for this file.")
+            else:
+                zip_name, zip_bytes = zip_payload
+                st.download_button(
+                    f"Download Encounter PDFs: {filename}",
+                    data=zip_bytes,
+                    file_name=zip_name,
+                    mime="application/zip",
+                    key=f"{_SK}encounter_zip_{filename}",
+                )
+
+
 # ---------------------------------------------------------------------------
 # Main Streamlit UI
 # ---------------------------------------------------------------------------
@@ -177,6 +309,12 @@ _SK = "med_"  # session-state key prefix
 def run() -> None:
     st.header("Medical Record Analyzer")
 
+    mode = st.radio(
+        "Mode",
+        ["Qualification Templates", "Encounter Timeline / Injury Ingestion"],
+        key=f"{_SK}mode",
+    )
+
     st.markdown(
         """
         <style>
@@ -193,6 +331,10 @@ def run() -> None:
         """,
         unsafe_allow_html=True,
     )
+
+    if mode == "Encounter Timeline / Injury Ingestion":
+        _render_ingestion_mode()
+        return
 
     if NORMALIZE_MEDICAL_RECORD is None:
         st.error("Missing parser: CaseGrid/scripts/medical_normalizer.py")
@@ -315,7 +457,7 @@ def run() -> None:
             st.session_state[f"{_SK}uploader_key"] += 1
             st.session_state.pop(f"{_SK}results", None)
             for k in list(st.session_state.keys()):
-                if k.startswith(f"{_SK}memo_file_"):
+                if isinstance(k, str) and k.startswith(f"{_SK}memo_file_"):
                     st.session_state.pop(k, None)
             st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
