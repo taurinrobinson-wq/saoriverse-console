@@ -350,7 +350,7 @@ export default function ChatPage() {
     try {
       const sessionKey = `${user?.username || "demo_user"}:${currentConversationId || "session"}`;
       const response = await fetch(
-        `/api/dictionary/lookup?word=${encodeURIComponent(word)}&sessionKey=${encodeURIComponent(sessionKey)}`,
+        `/api/dictionary/lookup?word=${encodeURIComponent(word)}&sessionKey=${encodeURIComponent(sessionKey)}&refresh=1`,
         { method: "GET" }
       );
       const data = await response.json();

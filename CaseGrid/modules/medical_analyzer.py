@@ -216,6 +216,12 @@ def _render_ingestion_mode() -> None:
         value=False,
         key=f"{_SK}split_pdfs",
     )
+    force_dictionary_refresh = st.checkbox(
+        "Force fresh dictionary API lookups (debug)",
+        value=False,
+        key=f"{_SK}force_dictionary_refresh",
+        help="Bypasses local term cache so Merriam usage counters should increment every run.",
+    )
 
     st.caption(
         f"Upload limits: <= {_MAX_UPLOAD_MB} MB per file, <= {_MAX_TOTAL_UPLOAD_MB} MB total per run."
@@ -256,6 +262,7 @@ def _render_ingestion_mode() -> None:
                         file_bytes,
                         patient_name=Path(upload.name).stem,
                         injury_terms=injury_terms,
+                        force_dictionary_refresh=force_dictionary_refresh,
                     )
 
                     item: dict[str, Any] = {

@@ -904,17 +904,23 @@ async def chat(request: ChatRequest) -> ChatResponse:
 
 
 @app.get("/dictionary/lookup")
-async def dictionary_lookup(word: str, request: Request, session_key: str | None = None):
+async def dictionary_lookup(
+    word: str,
+    request: Request,
+    session_key: str | None = None,
+    refresh: bool = False,
+):
     """Lightweight dictionary lookup endpoint for UI vocabulary features."""
     resolved_session_key = session_key
     if not resolved_session_key:
         client_host = request.client.host if request.client else "unknown"
         resolved_session_key = f"webapi:{client_host}"
-    result = lookup_word(word, session_key=resolved_session_key)
+    result = lookup_word(word, session_key=resolved_session_key, force_refresh=refresh)
     return {
         "success": bool(result.get("ok")),
         "result": result,
         "message": format_lookup_response(result),
+        "debug": result.get("debug"),
     }
 
 

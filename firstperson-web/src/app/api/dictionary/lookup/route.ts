@@ -6,6 +6,7 @@ export async function GET(request: NextRequest) {
   try {
     const word = (request.nextUrl.searchParams.get('word') || '').trim();
     const sessionKey = (request.nextUrl.searchParams.get('sessionKey') || '').trim();
+    const refresh = (request.nextUrl.searchParams.get('refresh') || '').trim();
 
     if (!word) {
       return NextResponse.json(
@@ -17,9 +18,12 @@ export async function GET(request: NextRequest) {
     const sessionParam = sessionKey
       ? `&session_key=${encodeURIComponent(sessionKey)}`
       : '';
+    const refreshParam = refresh === '1' || refresh.toLowerCase() === 'true'
+      ? '&refresh=true'
+      : '';
 
     const upstream = await fetch(
-      `${BACKEND_URL}/dictionary/lookup?word=${encodeURIComponent(word)}${sessionParam}`,
+      `${BACKEND_URL}/dictionary/lookup?word=${encodeURIComponent(word)}${sessionParam}${refreshParam}`,
       {
         method: 'GET',
         headers: {

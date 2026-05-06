@@ -18,6 +18,11 @@ from functools import lru_cache
 from typing import Any
 
 _MW_DICTIONARY_API_KEY_ENV = "MW_DICTIONARY_API_KEY"
+_MW_DICTIONARY_API_KEY_ALIASES = (
+    _MW_DICTIONARY_API_KEY_ENV,
+    "MERRIAM_WEBSTER_DICTIONARY_API_KEY",
+    "MERIAM_WEBSTER_DICTIONARY_API_KEY",
+)
 _MW_DICTIONARY_BASE_URL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json"
 _SESSION_LOOKUP_EVENTS: dict[str, list[float]] = defaultdict(list)
 _SESSION_LOOKUP_LOCK = threading.Lock()
@@ -63,10 +68,27 @@ def _normalize_lookup_word(word: str) -> str:
 
 
 @lru_cache(maxsize=512)
-def _query_dictionary(word: str) -> Any:
-    api_key = os.getenv(_MW_DICTIONARY_API_KEY_ENV, "").strip()
+def _query_dictionary_cached(word: str) -> Any:
+    return _query_dictionary_uncached(word)
+
+
+def _resolve_dictionary_api_key() -> str:
+    for env_name in _MW_DICTIONARY_API_KEY_ALIASES:
+        value = os.getenv(env_name, "").strip()
+        if value:
+            return value
+    return ""
+
+
+def _query_dictionary_uncached(word: str) -> Any:
+    api_key = _resolve_dictionary_api_key()
     if not api_key:
-        return {"_error": f"Missing {_MW_DICTIONARY_API_KEY_ENV} environment variable."}
+        return {
+            "_error": (
+                "Missing dictionary API key env var. "
+                f"Checked: {', '.join(_MW_DICTIONARY_API_KEY_ALIASES)}"
+            )
+        }
 
     quoted_word = urllib.parse.quote(word)
     quoted_key = urllib.parse.quote(api_key)
@@ -79,7 +101,22 @@ def _query_dictionary(word: str) -> Any:
         return {"_error": f"Dictionary lookup failed: {exc}"}
 
 
-def lookup_word(word: str, max_defs: int = 3, session_key: str | None = None) -> dict[str, Any]:
+def _query_dictionary(word: str, *, force_refresh: bool = False) -> tuple[Any, bool]:
+    if force_refresh:
+        return _query_dictionary_uncached(word), False
+
+    before_hits = _query_dictionary_cached.cache_info().hits
+    payload = _query_dictionary_cached(word)
+    after_hits = _query_dictionary_cached.cache_info().hits
+    return payload, after_hits > before_hits
+
+
+def lookup_word(
+    word: str,
+    max_defs: int = 3,
+    session_key: str | None = None,
+    force_refresh: bool = False,
+) -> dict[str, Any]:
     normalized = _normalize_lookup_word(word)
     if not normalized:
         return {"ok": False, "error": "Please provide a valid word to define."}
@@ -89,7 +126,7 @@ def lookup_word(word: str, max_defs: int = 3, session_key: str | None = None) ->
         if not allowed:
             return {"ok": False, "word": normalized, "error": reason}
 
-    payload = _query_dictionary(normalized)
+    payload, cache_hit = _query_dictionary(normalized, force_refresh=force_refresh)
     if isinstance(payload, dict) and payload.get("_error"):
         return {"ok": False, "word": normalized, "error": payload["_error"]}
 
@@ -137,6 +174,11 @@ def lookup_word(word: str, max_defs: int = 3, session_key: str | None = None) ->
         "definitions": defs,
         "stems": stems,
         "source": "merriam_webster_collegiate",
+        "debug": {
+            "cache_hit": cache_hit,
+            "force_refresh": force_refresh,
+            "api_key_configured": bool(_resolve_dictionary_api_key()),
+        },
     }
 
 

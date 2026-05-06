@@ -123,6 +123,16 @@ _FOLLOW_UP_TERMS = ["follow up", "follow-up", "return visit", "repeat", "recheck
 
 _MW_MEDICAL_API_KEY_ENV = "MW_MEDICAL_API_KEY"
 _MW_DICTIONARY_API_KEY_ENV = "MW_DICTIONARY_API_KEY"
+_MW_MEDICAL_API_KEY_ALIASES = (
+    _MW_MEDICAL_API_KEY_ENV,
+    "MERRIAM_WEBSTER_MEDICAL_API_KEY",
+    "MERIAM_WEBSTER_MEDICAL_API_KEY",
+)
+_MW_DICTIONARY_API_KEY_ALIASES = (
+    _MW_DICTIONARY_API_KEY_ENV,
+    "MERRIAM_WEBSTER_DICTIONARY_API_KEY",
+    "MERIAM_WEBSTER_DICTIONARY_API_KEY",
+)
 _MW_MEDICAL_BASE_URL = "https://www.dictionaryapi.com/api/v3/references/medical/json"
 _MW_DICTIONARY_BASE_URL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json"
 _API_EXPANSION_SEEDS = [
@@ -155,6 +165,15 @@ _STOPWORD_TOKENS = {
 }
 
 _TERM_EXPANSION_CACHE: dict[tuple[str, str], set[str]] = {}
+
+
+def _resolve_api_key(medical: bool) -> str:
+    aliases = _MW_MEDICAL_API_KEY_ALIASES if medical else _MW_DICTIONARY_API_KEY_ALIASES
+    for env_name in aliases:
+        value = os.getenv(env_name, "").strip()
+        if value:
+            return value
+    return ""
 
 
 @dataclass
@@ -313,17 +332,17 @@ def _extract_terms_from_dictionary_payload(payload: Any) -> set[str]:
     return expanded
 
 
-def _lookup_mw_terms(term: str, *, medical: bool) -> set[str]:
+def _lookup_mw_terms(term: str, *, medical: bool, force_refresh: bool = False) -> set[str]:
     normalized_term = _normalize_term(term)
     if not normalized_term:
         return set()
 
     cache_key = ("medical" if medical else "dictionary", normalized_term)
     cached = _TERM_EXPANSION_CACHE.get(cache_key)
-    if cached is not None:
+    if cached is not None and not force_refresh:
         return set(cached)
 
-    api_key = os.getenv(_MW_MEDICAL_API_KEY_ENV if medical else _MW_DICTIONARY_API_KEY_ENV, "").strip()
+    api_key = _resolve_api_key(medical)
     if not api_key:
         return set()
 
@@ -345,7 +364,9 @@ def _lookup_mw_terms(term: str, *, medical: bool) -> set[str]:
     return expanded
 
 
-def _expand_injury_terms_with_api(injury_terms: list[str]) -> list[str]:
+def _expand_injury_terms_with_api(
+    injury_terms: list[str], *, force_refresh: bool = False
+) -> list[str]:
     seeds = set(_API_EXPANSION_SEEDS)
     seeds.update(_normalize_term(term) for term in injury_terms)
     seeds.discard("")
@@ -354,7 +375,7 @@ def _expand_injury_terms_with_api(injury_terms: list[str]) -> list[str]:
     expanded.discard("")
 
     for term in sorted(seeds):
-        medical_terms = _lookup_mw_terms(term, medical=True)
+        medical_terms = _lookup_mw_terms(term, medical=True, force_refresh=force_refresh)
         if medical_terms:
             expanded.update(medical_terms)
 
@@ -425,11 +446,18 @@ def ingest_medical_record(
     file_bytes: bytes,
     patient_name: str | None = None,
     injury_terms: list[str] | None = None,
+    force_dictionary_refresh: bool = False,
 ) -> dict[str, Any]:
     base_injury_terms = sorted(
         set(_DEFAULT_INJURY_TERMS + [term.lower() for term in (injury_terms or [])])
     )
-    active_injury_terms = _expand_injury_terms_with_api(base_injury_terms) or base_injury_terms
+    active_injury_terms = (
+        _expand_injury_terms_with_api(
+            base_injury_terms,
+            force_refresh=force_dictionary_refresh,
+        )
+        or base_injury_terms
+    )
     pages = _extract_pages(file_bytes)
     encounters: list[Encounter] = []
 
