@@ -219,24 +219,46 @@ def _render_ingestion_mode() -> None:
 
     if st.button("Run Ingestion", key=f"{_SK}ingest_run") and uploads:
         timelines: list[dict[str, Any]] = []
+        errors: list[str] = []
         with st.spinner("Building encounter timelines..."):
             for upload in uploads:
-                file_bytes = upload.getvalue()
-                record = INGEST_MEDICAL_RECORD(
-                    file_bytes,
-                    patient_name=Path(upload.name).stem,
-                    injury_terms=injury_terms,
-                )
-                timelines.append(
-                    {
+                try:
+                    file_bytes = upload.getvalue()
+                    record = INGEST_MEDICAL_RECORD(
+                        file_bytes,
+                        patient_name=Path(upload.name).stem,
+                        injury_terms=injury_terms,
+                    )
+
+                    item: dict[str, Any] = {
                         "filename": upload.name,
                         "timeline": record,
-                        "raw_bytes": file_bytes,
                     }
-                )
+
+                    # Avoid keeping raw PDF bytes in session state unless needed.
+                    if split_pdfs:
+                        zip_payload = _build_encounter_zip(
+                            upload.name,
+                            file_bytes,
+                            record.get("encounters", []),
+                        )
+                        if zip_payload is not None:
+                            zip_name, zip_bytes = zip_payload
+                            item["encounter_zip_name"] = zip_name
+                            item["encounter_zip_bytes"] = zip_bytes
+                    timelines.append(item)
+                except Exception as exc:
+                    errors.append(f"{upload.name}: {exc}")
         st.session_state[f"{_SK}ingest_results"] = timelines
+        st.session_state[f"{_SK}ingest_errors"] = errors
 
     timelines_state = st.session_state.get(f"{_SK}ingest_results")
+    ingest_errors = st.session_state.get(f"{_SK}ingest_errors")
+    if isinstance(ingest_errors, list) and ingest_errors:
+        st.error("Some files failed to ingest:")
+        for err in ingest_errors:
+            st.write(f"- {err}")
+
     if not isinstance(timelines_state, list) or not timelines_state:
         return
 
@@ -274,14 +296,14 @@ def _render_ingestion_mode() -> None:
                 st.json(encounter)
 
         if split_pdfs:
-            zip_payload = _build_encounter_zip(filename, item["raw_bytes"], encounters)
-            if zip_payload is None:
+            zip_name = item.get("encounter_zip_name")
+            zip_bytes = item.get("encounter_zip_bytes")
+            if not isinstance(zip_name, str) or not isinstance(zip_bytes, (bytes, bytearray)):
                 st.warning("Encounter PDF splitting is unavailable for this file.")
             else:
-                zip_name, zip_bytes = zip_payload
                 st.download_button(
                     f"Download Encounter PDFs: {filename}",
-                    data=zip_bytes,
+                    data=bytes(zip_bytes),
                     file_name=zip_name,
                     mime="application/zip",
                     key=f"{_SK}encounter_zip_{filename}",
