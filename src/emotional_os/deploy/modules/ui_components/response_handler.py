@@ -11,16 +11,32 @@ This is now a clean orchestrator instead of a 1,233-line monolith.
 
 import time
 import logging
+import re
 import streamlit as st
 from src.emotional_os.tier1_foundation import Tier1Foundation
 from src.emotional_os.tier2_aliveness import Tier2Aliveness
 from src.emotional_os.tier3_poetic_consciousness import Tier3PoeticConsciousness
+from src.emotional_os.shared.mw_dictionary import lookup_word, format_lookup_response
 from ..ollama_client import get_ollama_client_singleton
 from emotional_os.deploy.modules.ui_components.pipeline.parse_phase import parse_input_signals
 from emotional_os.deploy.modules.ui_components.pipeline.interpret_phase import interpret_emotional_context
 from emotional_os.deploy.modules.ui_components.pipeline.generate_phase import generate_enhanced_response
 
 logger = logging.getLogger(__name__)
+
+_LOOKUP_PATTERNS = [
+    re.compile(r"^\s*/?define\s+(.+?)\s*$", re.IGNORECASE),
+    re.compile(r"^\s*/?lookup\s+(.+?)\s*$", re.IGNORECASE),
+    re.compile(r"^\s*what\s+does\s+(.+?)\s+mean\??\s*$", re.IGNORECASE),
+]
+
+
+def _extract_lookup_word(user_input: str) -> str | None:
+    for pattern in _LOOKUP_PATTERNS:
+        match = pattern.match(user_input or "")
+        if match:
+            return match.group(1).strip(" \t\n\r.,!?\"'")
+    return None
 
 
 def handle_response_pipeline(user_input: str, conversation_context: dict) -> tuple:
@@ -38,6 +54,15 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> tup
     start_time = time.time()
     
     logger.info(f"handle_response_pipeline start: input_len={len(user_input) if user_input else 0}")
+
+    lookup_word_value = _extract_lookup_word(user_input)
+    if lookup_word_value:
+        session_key = (
+            f"streamlit:{st.session_state.get('user_id', 'anon')}:{st.session_state.get('current_conversation_id', 'default')}"
+        )
+        result = lookup_word(lookup_word_value, session_key=session_key)
+        processing_time = time.time() - start_time
+        return format_lookup_response(result), processing_time
 
     # Tiers are eagerly initialized in session_manager.initialize_session_state()
     # This eliminates first-message lag (Phase 2 optimization)

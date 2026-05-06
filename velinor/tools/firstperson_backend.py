@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 import threading
+import re
 
 # Setup logging
 logging.basicConfig(
@@ -21,6 +22,21 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s %(message)s"
 )
 logger = logging.getLogger("firstperson")
+from src.emotional_os.shared.mw_dictionary import lookup_word, format_lookup_response
+
+_LOOKUP_PATTERNS = [
+    re.compile(r"^\s*/?define\s+(.+?)\s*$", re.IGNORECASE),
+    re.compile(r"^\s*/?lookup\s+(.+?)\s*$", re.IGNORECASE),
+    re.compile(r"^\s*what\s+does\s+(.+?)\s+mean\??\s*$", re.IGNORECASE),
+]
+
+
+def _extract_lookup_word(message: str) -> str | None:
+    for pattern in _LOOKUP_PATTERNS:
+        match = pattern.match(message or "")
+        if match:
+            return match.group(1).strip(" \t\n\r.,!?\"'")
+    return None
 
 # Import integrated pipeline
 try:
@@ -555,6 +571,28 @@ async def chat(request: ChatRequest) -> ChatResponse:
         
         message = request.message.strip()
         user_id = request.userId or "demo_user"
+
+        conversation_id_hint = None
+        if request.context and isinstance(request.context, dict):
+            conversation_id_hint = request.context.get("conversation_id")
+        lookup_session_key = f"webchat:{user_id}:{conversation_id_hint or 'session'}"
+
+        lookup_word_value = _extract_lookup_word(message)
+        if lookup_word_value:
+            lookup_result = lookup_word(lookup_word_value, session_key=lookup_session_key)
+            lookup_response = format_lookup_response(lookup_result)
+            return ChatResponse(
+                success=True,
+                message=lookup_response,
+                conversation_id=(request.context or {}).get("conversation_id") if isinstance(request.context, dict) else None,
+                metadata={
+                    "dictionary_lookup": {
+                        "word": lookup_word_value,
+                        "ok": bool(lookup_result.get("ok")),
+                        "source": lookup_result.get("source", "merriam_webster_collegiate"),
+                    }
+                },
+            )
         
         # Validate and extract context safely
         conversation_id = None
@@ -863,6 +901,21 @@ async def chat(request: ChatRequest) -> ChatResponse:
     except Exception as e:
         logger.exception(f"[{request_id}] Error processing chat: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/dictionary/lookup")
+async def dictionary_lookup(word: str, request: Request, session_key: str | None = None):
+    """Lightweight dictionary lookup endpoint for UI vocabulary features."""
+    resolved_session_key = session_key
+    if not resolved_session_key:
+        client_host = request.client.host if request.client else "unknown"
+        resolved_session_key = f"webapi:{client_host}"
+    result = lookup_word(word, session_key=resolved_session_key)
+    return {
+        "success": bool(result.get("ok")),
+        "result": result,
+        "message": format_lookup_response(result),
+    }
 
 
 @app.get("/conversations/{user_id}")

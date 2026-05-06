@@ -2,7 +2,11 @@
 from __future__ import annotations
 
 import io
+import json
+import os
 import re
+import urllib.parse
+import urllib.request
 from dataclasses import asdict, dataclass
 from datetime import date, datetime
 from typing import Any
@@ -25,10 +29,29 @@ _DATE_PATTERNS = [
 ]
 
 _DOS_PATTERNS = [
+    # Full phrases
     re.compile(r"\bdate of service[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bdate of visit[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bdate of treatment[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bdate of injury[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bdate seen[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bencounter date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bvisit date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\btreatment date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bappointment date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bappt\.? date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\boffice visit[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bseen on[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
     re.compile(r"\bprocedure date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
     re.compile(r"\breport date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bexam date[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
     re.compile(r"\bexam[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    # Common abbreviations (DOS, DOV, DOT, DOI, DX)
+    re.compile(r"\bD\.?O\.?S\.?[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bD\.?O\.?V\.?[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bD\.?O\.?T\.?[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    re.compile(r"\bD\.?O\.?I\.?[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
+    # Generic fallbacks
     re.compile(r"\bservice[:\-]?\s*(\d{1,2}/\d{1,2}/\d{2,4})", re.IGNORECASE),
 ]
 
@@ -97,6 +120,41 @@ _MEDICATION_LINE = re.compile(
 )
 
 _FOLLOW_UP_TERMS = ["follow up", "follow-up", "return visit", "repeat", "recheck"]
+
+_MW_MEDICAL_API_KEY_ENV = "MW_MEDICAL_API_KEY"
+_MW_DICTIONARY_API_KEY_ENV = "MW_DICTIONARY_API_KEY"
+_MW_MEDICAL_BASE_URL = "https://www.dictionaryapi.com/api/v3/references/medical/json"
+_MW_DICTIONARY_BASE_URL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json"
+_API_EXPANSION_SEEDS = [
+    "neck",
+    "back",
+    "shoulder",
+    "head",
+    "concussion",
+    "dizziness",
+    "headache",
+    "hamstring",
+    "knee",
+]
+
+_STOPWORD_TOKENS = {
+    "a",
+    "an",
+    "and",
+    "at",
+    "by",
+    "for",
+    "from",
+    "in",
+    "of",
+    "on",
+    "or",
+    "the",
+    "to",
+    "with",
+}
+
+_TERM_EXPANSION_CACHE: dict[tuple[str, str], set[str]] = {}
 
 
 @dataclass
@@ -212,6 +270,136 @@ def _extract_follow_up(text: str) -> list[str]:
     return follow_up
 
 
+def _normalize_term(raw: str) -> str:
+    cleaned = raw.replace("*", " ").strip().lower()
+    cleaned = re.sub(r"[^a-z0-9\-\s]", " ", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned
+
+
+def _extract_terms_from_dictionary_payload(payload: Any) -> set[str]:
+    expanded: set[str] = set()
+    if not isinstance(payload, list):
+        return expanded
+
+    for item in payload:
+        if isinstance(item, str):
+            normalized = _normalize_term(item)
+            if normalized:
+                expanded.add(normalized)
+            continue
+
+        if not isinstance(item, dict):
+            continue
+
+        meta = item.get("meta")
+        if isinstance(meta, dict):
+            stems = meta.get("stems")
+            if isinstance(stems, list):
+                for stem in stems:
+                    if isinstance(stem, str):
+                        normalized = _normalize_term(stem)
+                        if normalized:
+                            expanded.add(normalized)
+
+        hwi = item.get("hwi")
+        if isinstance(hwi, dict):
+            headword = hwi.get("hw")
+            if isinstance(headword, str):
+                normalized = _normalize_term(headword)
+                if normalized:
+                    expanded.add(normalized)
+
+    return expanded
+
+
+def _lookup_mw_terms(term: str, *, medical: bool) -> set[str]:
+    normalized_term = _normalize_term(term)
+    if not normalized_term:
+        return set()
+
+    cache_key = ("medical" if medical else "dictionary", normalized_term)
+    cached = _TERM_EXPANSION_CACHE.get(cache_key)
+    if cached is not None:
+        return set(cached)
+
+    api_key = os.getenv(_MW_MEDICAL_API_KEY_ENV if medical else _MW_DICTIONARY_API_KEY_ENV, "").strip()
+    if not api_key:
+        return set()
+
+    base_url = _MW_MEDICAL_BASE_URL if medical else _MW_DICTIONARY_BASE_URL
+    quoted_term = urllib.parse.quote(normalized_term)
+    url = f"{base_url}/{quoted_term}?key={urllib.parse.quote(api_key)}"
+
+    try:
+        with urllib.request.urlopen(url, timeout=4) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except Exception:
+        return set()
+
+    expanded = _extract_terms_from_dictionary_payload(payload)
+    if normalized_term:
+        expanded.add(normalized_term)
+
+    _TERM_EXPANSION_CACHE[cache_key] = set(expanded)
+    return expanded
+
+
+def _expand_injury_terms_with_api(injury_terms: list[str]) -> list[str]:
+    seeds = set(_API_EXPANSION_SEEDS)
+    seeds.update(_normalize_term(term) for term in injury_terms)
+    seeds.discard("")
+
+    expanded: set[str] = set(_normalize_term(term) for term in injury_terms)
+    expanded.discard("")
+
+    for term in sorted(seeds):
+        medical_terms = _lookup_mw_terms(term, medical=True)
+        if medical_terms:
+            expanded.update(medical_terms)
+
+    # Keep terms reasonably specific to reduce broad false positives in page text.
+    base_terms = {_normalize_term(term) for term in injury_terms if _normalize_term(term)}
+    medical_suffixes = (
+        "algia",
+        "cele",
+        "emia",
+        "itis",
+        "oma",
+        "opathy",
+        "osis",
+        "pathy",
+        "spasm",
+        "uria",
+    )
+
+    anchor_tokens: set[str] = set()
+    for base_term in seeds:
+        for token in base_term.split():
+            if token and token not in _STOPWORD_TOKENS and len(token) >= 3:
+                anchor_tokens.add(token)
+
+    filtered: set[str] = set()
+    for term in expanded:
+        if not term or not re.search(r"[a-z]", term):
+            continue
+        words = term.split()
+        if len(words) > 2:
+            continue
+        if any(word in _STOPWORD_TOKENS for word in words):
+            continue
+        if len(words) == 1 and term not in base_terms and not term.endswith(medical_suffixes):
+            continue
+        if anchor_tokens and not any(token in term for token in anchor_tokens):
+            continue
+        filtered.add(term)
+
+    # Preserve all original user/default terms even if they fail strict filtering.
+    filtered.update(_normalize_term(term) for term in injury_terms if _normalize_term(term))
+
+    return sorted(filtered)
+
+
 def _detect_injury_relevance(text: str, injury_terms: list[str]) -> tuple[bool, list[str]]:
     lower = text.lower()
     reasons = sorted({term for term in injury_terms if term in lower})
@@ -238,9 +426,10 @@ def ingest_medical_record(
     patient_name: str | None = None,
     injury_terms: list[str] | None = None,
 ) -> dict[str, Any]:
-    active_injury_terms = sorted(
+    base_injury_terms = sorted(
         set(_DEFAULT_INJURY_TERMS + [term.lower() for term in (injury_terms or [])])
     )
+    active_injury_terms = _expand_injury_terms_with_api(base_injury_terms) or base_injury_terms
     pages = _extract_pages(file_bytes)
     encounters: list[Encounter] = []
 

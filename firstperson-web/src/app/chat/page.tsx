@@ -38,6 +38,10 @@ export default function ChatPage() {
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+  const [dictionaryWord, setDictionaryWord] = useState("");
+  const [dictionaryResult, setDictionaryResult] = useState<string | null>(null);
+  const [dictionaryError, setDictionaryError] = useState<string | null>(null);
+  const [isDictionaryLoading, setIsDictionaryLoading] = useState(false);
 
   // Audio state
   const [isRecording, setIsRecording] = useState(false);
@@ -335,6 +339,36 @@ export default function ChatPage() {
     router.push("/");
   };
 
+  const handleDictionaryLookup = async () => {
+    const word = dictionaryWord.trim();
+    if (!word || isDictionaryLoading) return;
+
+    setIsDictionaryLoading(true);
+    setDictionaryError(null);
+    setDictionaryResult(null);
+
+    try {
+      const sessionKey = `${user?.username || "demo_user"}:${currentConversationId || "session"}`;
+      const response = await fetch(
+        `/api/dictionary/lookup?word=${encodeURIComponent(word)}&sessionKey=${encodeURIComponent(sessionKey)}`,
+        { method: "GET" }
+      );
+      const data = await response.json();
+
+      if (!response.ok || !data?.success) {
+        setDictionaryError(data?.error || data?.message || "Dictionary lookup failed.");
+        return;
+      }
+
+      setDictionaryResult(data?.message || "No definition found.");
+    } catch (error) {
+      console.error("Dictionary lookup error:", error);
+      setDictionaryError("Dictionary lookup failed. Please try again.");
+    } finally {
+      setIsDictionaryLoading(false);
+    }
+  };
+
   if (!user) return null;
 
   return (
@@ -358,6 +392,34 @@ export default function ChatPage() {
           <h3 style={{ marginBottom: "1rem", marginTop: "1rem", color: "var(--text-primary)" }}>
             Conversations
           </h3>
+
+          <div className="dictionary-card">
+            <div className="dictionary-title">Vocabulary Lookup</div>
+            <div className="dictionary-row">
+              <input
+                type="text"
+                value={dictionaryWord}
+                onChange={(e) => setDictionaryWord(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleDictionaryLookup();
+                  }
+                }}
+                placeholder="Define a word"
+              />
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={handleDictionaryLookup}
+                disabled={isDictionaryLoading || !dictionaryWord.trim()}
+              >
+                {isDictionaryLoading ? "..." : "Define"}
+              </button>
+            </div>
+            {dictionaryError && <div className="dictionary-error">{dictionaryError}</div>}
+            {dictionaryResult && <pre className="dictionary-result">{dictionaryResult}</pre>}
+          </div>
 
           <div className="conversations-list">
             {conversations.length === 0 ? (
@@ -577,6 +639,60 @@ export default function ChatPage() {
           gap: 0.5rem;
           max-height: 400px;
           overflow-y: auto;
+        }
+
+        .dictionary-card {
+          margin-bottom: 1rem;
+          padding: 0.75rem;
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          background: var(--bg-secondary);
+        }
+
+        .dictionary-title {
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: 0.5rem;
+        }
+
+        .dictionary-row {
+          display: flex;
+          gap: 0.5rem;
+        }
+
+        .dictionary-row input {
+          width: 100%;
+          min-width: 0;
+          padding: 0.5rem;
+          border: 1px solid var(--border-color);
+          border-radius: 6px;
+          background: var(--bg-primary);
+          color: var(--text-primary);
+          font-size: 0.8rem;
+        }
+
+        .dictionary-row button {
+          white-space: nowrap;
+        }
+
+        .dictionary-error {
+          margin-top: 0.5rem;
+          color: #ef4444;
+          font-size: 0.75rem;
+          line-height: 1.35;
+        }
+
+        .dictionary-result {
+          margin-top: 0.5rem;
+          white-space: pre-wrap;
+          font-family: inherit;
+          color: var(--text-secondary);
+          font-size: 0.75rem;
+          line-height: 1.35;
+          background: transparent;
+          border: none;
+          padding: 0;
         }
 
         .conversation-item {
