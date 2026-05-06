@@ -222,6 +222,11 @@ def _render_ingestion_mode() -> None:
         key=f"{_SK}force_dictionary_refresh",
         help="Bypasses local term cache so Merriam usage counters should increment every run.",
     )
+    show_encounter_json = st.checkbox(
+        "Show per-encounter JSON details (slow for large files)",
+        value=False,
+        key=f"{_SK}show_encounter_json",
+    )
 
     st.caption(
         f"Upload limits: <= {_MAX_UPLOAD_MB} MB per file, <= {_MAX_TOTAL_UPLOAD_MB} MB total per run."
@@ -272,15 +277,22 @@ def _render_ingestion_mode() -> None:
 
                     # Avoid keeping raw PDF bytes in session state unless needed.
                     if split_pdfs:
-                        zip_payload = _build_encounter_zip(
-                            upload.name,
-                            file_bytes,
-                            record.get("encounters", []),
-                        )
-                        if zip_payload is not None:
-                            zip_name, zip_bytes = zip_payload
-                            item["encounter_zip_name"] = zip_name
-                            item["encounter_zip_bytes"] = zip_bytes
+                        page_count = int(record.get("page_count") or 0)
+                        if page_count > _MAX_SPLIT_PAGE_COUNT:
+                            item["split_skipped_reason"] = (
+                                "Encounter splitting skipped because file is too large "
+                                f"({page_count} pages > {_MAX_SPLIT_PAGE_COUNT}-page limit)."
+                            )
+                        else:
+                            zip_payload = _build_encounter_zip(
+                                upload.name,
+                                file_bytes,
+                                record.get("encounters", []),
+                            )
+                            if zip_payload is not None:
+                                zip_name, zip_bytes = zip_payload
+                                item["encounter_zip_name"] = zip_name
+                                item["encounter_zip_bytes"] = zip_bytes
                     timelines.append(item)
                 except Exception as exc:
                     errors.append(f"{upload.name}: {exc}")
@@ -308,10 +320,17 @@ def _render_ingestion_mode() -> None:
         filename = item["filename"]
         timeline = item["timeline"]
         encounters = timeline.get("encounters", [])
+        total_encounters = len(encounters)
+        preview_encounters = encounters[:_MAX_PREVIEW_ENCOUNTERS]
 
         st.markdown(f"### {filename}")
         st.write(f"Patient: {timeline.get('patient_name')}")
         st.write(f"Total pages: {timeline.get('page_count')}")
+        st.write(f"Total encounters: {total_encounters}")
+        if total_encounters > _MAX_PREVIEW_ENCOUNTERS:
+            st.info(
+                f"Showing first {_MAX_PREVIEW_ENCOUNTERS} encounters in table/details for performance."
+            )
 
         table_rows = [
             {
@@ -321,20 +340,34 @@ def _render_ingestion_mode() -> None:
                 "Facility": encounter.get("facility"),
                 "Injury-related": "Yes" if encounter.get("injury_related") else "No",
             }
-            for encounter in encounters
+            for encounter in preview_encounters
         ]
         st.dataframe(table_rows, use_container_width=True)
 
-        for encounter in encounters:
-            label = (
-                f"DOS {encounter.get('dos')} | "
-                f"Pages {encounter.get('page_start')}-{encounter.get('page_end')} | "
-                f"{encounter.get('document_type')}"
-            )
-            with st.expander(label):
-                st.json(encounter)
+        if show_encounter_json:
+            for encounter in preview_encounters:
+                label = (
+                    f"DOS {encounter.get('dos')} | "
+                    f"Pages {encounter.get('page_start')}-{encounter.get('page_end')} | "
+                    f"{encounter.get('document_type')}"
+                )
+                with st.expander(label):
+                    st.json(encounter)
+
+        timeline_json = json.dumps(timeline, indent=2, ensure_ascii=True)
+        st.download_button(
+            f"Download Full Timeline JSON: {filename}",
+            data=timeline_json,
+            file_name=f"{Path(filename).stem}_timeline.json",
+            mime="application/json",
+            key=f"{_SK}timeline_json_{filename}",
+        )
 
         if split_pdfs:
+            split_skipped_reason = item.get("split_skipped_reason")
+            if isinstance(split_skipped_reason, str) and split_skipped_reason:
+                st.warning(split_skipped_reason)
+
             zip_name = item.get("encounter_zip_name")
             zip_bytes = item.get("encounter_zip_bytes")
             if not isinstance(zip_name, str) or not isinstance(zip_bytes, (bytes, bytearray)):
@@ -367,6 +400,8 @@ _FRIENDLY_LIST = list(FRIENDLY_OPERATORS.keys())
 _SK = "med_"  # session-state key prefix
 _MAX_UPLOAD_MB = 40
 _MAX_TOTAL_UPLOAD_MB = 120
+_MAX_PREVIEW_ENCOUNTERS = 60
+_MAX_SPLIT_PAGE_COUNT = 80
 
 
 def run() -> None:
