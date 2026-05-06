@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import traceback
 from pathlib import Path
 
 import streamlit as st
@@ -36,7 +37,7 @@ def main() -> None:
     )
 
     if LOGO_PATH.exists():
-        st.sidebar.image(str(LOGO_PATH), use_column_width=True)
+        st.sidebar.image(str(LOGO_PATH), width=300)
     st.sidebar.markdown('<div class="cg-title">CaseGrid</div>', unsafe_allow_html=True)
     st.sidebar.caption("Modular Legal Workstation")
 
@@ -45,7 +46,12 @@ def main() -> None:
         st.info("Select a module from the sidebar.")
         return
 
-    MODULES[choice].run()
+    try:
+        MODULES[choice].run()
+    except Exception as exc:
+        st.error(f"Module failed: {exc}")
+        st.code(traceback.format_exc())
+        raise
 
 
 if __name__ == "__main__":
