@@ -544,8 +544,14 @@ def ingest_medical_record(
         "patient_name": patient_name or "",
         "page_count": len(pages),
         "user_injury_terms": injury_terms or [],
-        "encounters": [asdict(encounter) for encounter in encounters],
+        "encounters": [_encounter_to_serializable(encounter) for encounter in encounters],
     }
+
+
+def _encounter_to_serializable(encounter: Encounter) -> dict[str, Any]:
+    payload = asdict(encounter)
+    payload["dos"] = encounter.dos.isoformat() if encounter.dos else None
+    return payload
 
 
 def _coerce_encounter(encounter: Encounter | dict[str, Any]) -> tuple[date | None, int, int]:
