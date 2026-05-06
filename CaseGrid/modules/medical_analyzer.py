@@ -217,9 +217,37 @@ def _render_ingestion_mode() -> None:
         key=f"{_SK}split_pdfs",
     )
 
+    st.caption(
+        f"Upload limits: <= {_MAX_UPLOAD_MB} MB per file, <= {_MAX_TOTAL_UPLOAD_MB} MB total per run."
+    )
+
     if st.button("Run Ingestion", key=f"{_SK}ingest_run") and uploads:
+        oversized = [
+            upload.name
+            for upload in uploads
+            if getattr(upload, "size", 0) > _MAX_UPLOAD_MB * 1024 * 1024
+        ]
+        total_bytes = sum(int(getattr(upload, "size", 0)) for upload in uploads)
+
+        if oversized:
+            st.error(
+                "These files exceed the per-file size limit "
+                f"({_MAX_UPLOAD_MB} MB): {', '.join(oversized)}"
+            )
+            return
+        if total_bytes > _MAX_TOTAL_UPLOAD_MB * 1024 * 1024:
+            st.error(
+                "Total upload size exceeds limit "
+                f"({_MAX_TOTAL_UPLOAD_MB} MB). Please run fewer files at once."
+            )
+            return
+
         timelines: list[dict[str, Any]] = []
         errors: list[str] = []
+        # Clear old state before a new ingestion run.
+        st.session_state[f"{_SK}ingest_results"] = []
+        st.session_state[f"{_SK}ingest_errors"] = []
+
         with st.spinner("Building encounter timelines..."):
             for upload in uploads:
                 try:
@@ -249,6 +277,10 @@ def _render_ingestion_mode() -> None:
                     timelines.append(item)
                 except Exception as exc:
                     errors.append(f"{upload.name}: {exc}")
+                finally:
+                    # Ensure per-file bytes are dropped quickly in low-memory environments.
+                    if "file_bytes" in locals():
+                        del file_bytes
         st.session_state[f"{_SK}ingest_results"] = timelines
         st.session_state[f"{_SK}ingest_errors"] = errors
 
@@ -326,6 +358,8 @@ FRIENDLY_OPERATORS: dict[str, str] = {
 }
 _FRIENDLY_LIST = list(FRIENDLY_OPERATORS.keys())
 _SK = "med_"  # session-state key prefix
+_MAX_UPLOAD_MB = 40
+_MAX_TOTAL_UPLOAD_MB = 120
 
 
 def run() -> None:
