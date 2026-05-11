@@ -166,6 +166,10 @@ _STOPWORD_TOKENS = {
 
 _TERM_EXPANSION_CACHE: dict[tuple[str, str], set[str]] = {}
 
+# Safety rails for very large or pathological PDFs.
+_DEFAULT_MAX_PROCESS_PAGES = 400
+_DEFAULT_MAX_PAGE_TEXT_CHARS = 25_000
+
 
 def _resolve_api_key(medical: bool) -> str:
     aliases = _MW_MEDICAL_API_KEY_ALIASES if medical else _MW_DICTIONARY_API_KEY_ALIASES
@@ -226,17 +230,40 @@ def _parse_date(raw: str | None) -> date | None:
     return None
 
 
-def _extract_pages(file_bytes: bytes) -> list[str]:
-    if pdfplumber:
-        try:
-            with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
-                return [(page.extract_text() or "") for page in pdf.pages]
-        except Exception:
-            pass
+def _truncate_page_text(text: str, max_chars_per_page: int | None) -> str:
+    if max_chars_per_page is None or max_chars_per_page <= 0:
+        return text
+    return text[:max_chars_per_page]
+
+
+def _extract_pages(
+    file_bytes: bytes,
+    *,
+    max_pages: int | None = None,
+    max_chars_per_page: int | None = None,
+) -> list[str]:
     if PdfReader:
         try:
             reader = PdfReader(io.BytesIO(file_bytes))
-            return [(page.extract_text() or "") for page in reader.pages]
+            pages: list[str] = []
+            for page_index, page in enumerate(reader.pages, start=1):
+                if max_pages is not None and max_pages > 0 and page_index > max_pages:
+                    break
+                text = page.extract_text() or ""
+                pages.append(_truncate_page_text(text, max_chars_per_page))
+            return pages
+        except Exception:
+            pass
+    if pdfplumber:
+        try:
+            with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
+                pages = []
+                for page_index, page in enumerate(pdf.pages, start=1):
+                    if max_pages is not None and max_pages > 0 and page_index > max_pages:
+                        break
+                    text = page.extract_text() or ""
+                    pages.append(_truncate_page_text(text, max_chars_per_page))
+                return pages
         except Exception:
             pass
     return []
@@ -245,6 +272,7 @@ def _extract_pages(file_bytes: bytes) -> list[str]:
 def chunk_pdf(
     file_bytes: bytes,
     pages_per_chunk: int = 10,
+    max_pages: int | None = None,
 ) -> Iterator[tuple[int, int, bytes]]:
     """Yield (start_page, end_page, chunk_bytes) for each PDF chunk.
 
@@ -255,6 +283,8 @@ def chunk_pdf(
 
     reader = PdfReader(io.BytesIO(file_bytes))
     total_pages = len(reader.pages)
+    if max_pages is not None and max_pages > 0:
+        total_pages = min(total_pages, max_pages)
 
     for start in range(0, total_pages, pages_per_chunk):
         end = min(start + pages_per_chunk, total_pages)
@@ -272,30 +302,55 @@ def _iter_page_texts(
     enable_chunking: bool,
     chunk_pages: int,
     chunk_threshold_pages: int,
+    max_pages: int,
+    max_chars_per_page: int,
 ) -> Iterator[tuple[int, str]]:
     """Yield (global_page_number, page_text) in processing order."""
+    if max_pages <= 0:
+        return
+
     if not enable_chunking or chunk_pages <= 0 or not PdfReader or not PdfWriter:
-        pages = _extract_pages(file_bytes)
+        pages = _extract_pages(
+            file_bytes,
+            max_pages=max_pages,
+            max_chars_per_page=max_chars_per_page,
+        )
         for page_index, text in enumerate(pages, start=1):
             yield page_index, text
         return
 
     try:
         total_pages = len(PdfReader(io.BytesIO(file_bytes)).pages)
+        total_pages = min(total_pages, max_pages)
     except Exception:
-        pages = _extract_pages(file_bytes)
+        pages = _extract_pages(
+            file_bytes,
+            max_pages=max_pages,
+            max_chars_per_page=max_chars_per_page,
+        )
         for page_index, text in enumerate(pages, start=1):
             yield page_index, text
         return
 
     if total_pages < chunk_threshold_pages:
-        pages = _extract_pages(file_bytes)
+        pages = _extract_pages(
+            file_bytes,
+            max_pages=max_pages,
+            max_chars_per_page=max_chars_per_page,
+        )
         for page_index, text in enumerate(pages, start=1):
             yield page_index, text
         return
 
-    for start_page, _end_page, chunk_bytes in chunk_pdf(file_bytes, pages_per_chunk=chunk_pages):
-        pages = _extract_pages(chunk_bytes)
+    for start_page, _end_page, chunk_bytes in chunk_pdf(
+        file_bytes,
+        pages_per_chunk=chunk_pages,
+        max_pages=max_pages,
+    ):
+        pages = _extract_pages(
+            chunk_bytes,
+            max_chars_per_page=max_chars_per_page,
+        )
         for offset, text in enumerate(pages):
             yield start_page + offset, text
 
@@ -508,6 +563,8 @@ def ingest_medical_record(
     enable_chunking: bool = True,
     chunk_pages: int = 10,
     chunk_threshold_pages: int = 40,
+    max_pages: int = _DEFAULT_MAX_PROCESS_PAGES,
+    max_chars_per_page: int = _DEFAULT_MAX_PAGE_TEXT_CHARS,
 ) -> dict[str, Any]:
     base_injury_terms = sorted(
         set(_DEFAULT_INJURY_TERMS + [term.lower() for term in (injury_terms or [])])
@@ -584,6 +641,8 @@ def ingest_medical_record(
         enable_chunking=enable_chunking,
         chunk_pages=chunk_pages,
         chunk_threshold_pages=chunk_threshold_pages,
+        max_pages=max_pages,
+        max_chars_per_page=max_chars_per_page,
     ):
         total_processed_pages = idx
         lower = text.lower()
@@ -631,7 +690,12 @@ def ingest_medical_record(
             injury_reasons.extend(reasons)
 
     if total_processed_pages == 0:
-        return {"patient_name": patient_name or "", "page_count": 0, "encounters": []}
+        return {
+            "patient_name": patient_name or "",
+            "page_count": 0,
+            "encounters": [],
+            "page_limit_hit": False,
+        }
 
     flush(total_processed_pages)
 
@@ -639,6 +703,7 @@ def ingest_medical_record(
         "patient_name": patient_name or "",
         "page_count": total_processed_pages,
         "user_injury_terms": injury_terms or [],
+        "page_limit_hit": total_processed_pages >= max_pages,
         "encounters": [_encounter_to_serializable(encounter) for encounter in encounters],
     }
 

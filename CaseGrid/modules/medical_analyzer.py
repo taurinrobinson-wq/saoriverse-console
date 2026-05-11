@@ -268,12 +268,22 @@ def _render_ingestion_mode() -> None:
                         patient_name=Path(upload.name).stem,
                         injury_terms=injury_terms,
                         force_dictionary_refresh=force_dictionary_refresh,
+                        enable_chunking=True,
+                        chunk_pages=6,
+                        chunk_threshold_pages=12,
+                        max_pages=400,
+                        max_chars_per_page=25_000,
                     )
 
                     item: dict[str, Any] = {
                         "filename": upload.name,
                         "timeline": record,
                     }
+
+                    if record.get("page_limit_hit"):
+                        item["ingest_warning"] = (
+                            "Only the first 400 pages were processed to keep ingestion responsive."
+                        )
 
                     # Avoid keeping raw PDF bytes in session state unless needed.
                     if split_pdfs:
@@ -327,6 +337,9 @@ def _render_ingestion_mode() -> None:
         st.write(f"Patient: {timeline.get('patient_name')}")
         st.write(f"Total pages: {timeline.get('page_count')}")
         st.write(f"Total encounters: {total_encounters}")
+        ingest_warning = item.get("ingest_warning")
+        if isinstance(ingest_warning, str) and ingest_warning:
+            st.warning(ingest_warning)
         if total_encounters > _MAX_PREVIEW_ENCOUNTERS:
             st.info(
                 f"Showing first {_MAX_PREVIEW_ENCOUNTERS} encounters in table/details for performance."
