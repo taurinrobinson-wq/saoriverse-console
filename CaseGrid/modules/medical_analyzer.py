@@ -191,6 +191,66 @@ def _build_encounter_zip(
     return f"{Path(source_name).stem}_encounters.zip", buffer.getvalue()
 
 
+def _build_word_style_encounter_report(encounter: dict[str, Any], patient_name: str) -> str:
+    encounter_date = encounter.get("dos") or "Unknown"
+    matched_terms = sorted({str(term) for term in (encounter.get("injury_reasons") or []) if term})
+    negated_terms = sorted(
+        {str(term) for term in (encounter.get("negated_injury_terms") or []) if term}
+    )
+    injury_related = bool(encounter.get("injury_related"))
+
+    if injury_related:
+        reasoning = (
+            "At least one injury keyword appeared in a sentence without negation within the five-word window."
+        )
+    elif negated_terms:
+        reasoning = "All detected injury keywords were negated in context, so they were ignored."
+    else:
+        reasoning = "No injury keywords were found in this encounter text."
+
+    matched_text = ", ".join(matched_terms) if matched_terms else "None"
+    negated_text = ", ".join(negated_terms) if negated_terms else "None"
+    injury_text = "YES" if injury_related else "NO"
+
+    return (
+        "---\n"
+        "INJURY ANALYSIS REPORT\n"
+        f"Encounter Date: {encounter_date}\n"
+        f"Patient: {patient_name}\n\n"
+        f"- Injury-Related Encounter: {injury_text}\n"
+        f"- Matched Injury Terms: {matched_text}\n"
+        f"- Negated Terms Ignored: {negated_text}\n"
+        "- Reasoning Summary:\n"
+        f"  - {reasoning}\n"
+        "---"
+    )
+
+
+def _build_word_style_timeline_report(timeline: dict[str, Any]) -> str:
+    patient_name = str(timeline.get("patient_name") or "Unknown")
+    encounters = timeline.get("encounters") or []
+    reports: list[str] = []
+    for encounter in encounters:
+        if isinstance(encounter, dict):
+            reports.append(_build_word_style_encounter_report(encounter, patient_name))
+
+    if not reports:
+        return (
+            "---\n"
+            "INJURY ANALYSIS REPORT\n"
+            "Encounter Date: Unknown\n"
+            f"Patient: {patient_name}\n\n"
+            "- Injury-Related Encounter: NO\n"
+            "- Matched Injury Terms: None\n"
+            "- Negated Terms Ignored: None\n"
+            "- Reasoning Summary:\n"
+            "  - No encounter content was available for injury analysis.\n"
+            "---"
+        )
+
+    return "\n\n".join(reports)
+
+
 def _render_ingestion_mode() -> None:
     if INGEST_MEDICAL_RECORD is None:
         st.error("Missing ingester: CaseGrid/scripts/medical_ingester.py")
@@ -222,10 +282,10 @@ def _render_ingestion_mode() -> None:
         key=f"{_SK}force_dictionary_refresh",
         help="Bypasses local term cache so Merriam usage counters should increment every run.",
     )
-    show_encounter_json = st.checkbox(
-        "Show per-encounter JSON details (slow for large files)",
+    show_encounter_report = st.checkbox(
+        "Show per-encounter injury report details",
         value=False,
-        key=f"{_SK}show_encounter_json",
+        key=f"{_SK}show_encounter_report",
     )
 
     st.caption(
@@ -357,7 +417,7 @@ def _render_ingestion_mode() -> None:
         ]
         st.dataframe(table_rows, use_container_width=True)
 
-        if show_encounter_json:
+        if show_encounter_report:
             for encounter in preview_encounters:
                 label = (
                     f"DOS {encounter.get('dos')} | "
@@ -365,15 +425,15 @@ def _render_ingestion_mode() -> None:
                     f"{encounter.get('document_type')}"
                 )
                 with st.expander(label):
-                    st.json(encounter)
+                    st.text(_build_word_style_encounter_report(encounter, str(timeline.get("patient_name") or "Unknown")))
 
-        timeline_json = json.dumps(timeline, indent=2, ensure_ascii=True)
+        timeline_report = _build_word_style_timeline_report(timeline)
         st.download_button(
-            f"Download Full Timeline JSON: {filename}",
-            data=timeline_json,
-            file_name=f"{Path(filename).stem}_timeline.json",
-            mime="application/json",
-            key=f"{_SK}timeline_json_{filename}",
+            f"Download Injury Analysis Report: {filename}",
+            data=timeline_report,
+            file_name=f"{Path(filename).stem}_injury_analysis_report.txt",
+            mime="text/plain",
+            key=f"{_SK}injury_report_{filename}",
         )
 
         if split_pdfs:

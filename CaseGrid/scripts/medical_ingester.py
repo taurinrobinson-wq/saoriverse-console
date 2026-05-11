@@ -170,6 +170,20 @@ _TERM_EXPANSION_CACHE: dict[tuple[str, str], set[str]] = {}
 _DEFAULT_MAX_PROCESS_PAGES = 400
 _DEFAULT_MAX_PAGE_TEXT_CHARS = 25_000
 
+_NEGATION_TERMS = {"denies", "no", "none", "negative", "not", "without", "absent"}
+_NORMALIZED_INJURY_KEYWORDS = [
+    "neck",
+    "back",
+    "shoulder",
+    "head",
+    "thigh",
+    "hamstring",
+    "dizziness",
+    "headache",
+    "bruising",
+    "pain",
+]
+
 
 def _resolve_api_key(medical: bool) -> str:
     aliases = _MW_MEDICAL_API_KEY_ALIASES if medical else _MW_DICTIONARY_API_KEY_ALIASES
@@ -204,6 +218,7 @@ class Encounter:
     follow_up: list[str]
     injury_related: bool
     injury_reasons: list[str]
+    negated_injury_terms: list[str]
     questions_for_client: list[str]
 
 
@@ -534,10 +549,39 @@ def _expand_injury_terms_with_api(
     return sorted(filtered)
 
 
-def _detect_injury_relevance(text: str, injury_terms: list[str]) -> tuple[bool, list[str]]:
-    lower = text.lower()
-    reasons = sorted({term for term in injury_terms if term in lower})
-    return bool(reasons), reasons
+def _split_sentences(text: str) -> list[str]:
+    parts = re.split(r"(?<=[.!?])\s+|\n+", text)
+    return [part.strip() for part in parts if part and part.strip()]
+
+
+def _keyword_pattern(term: str) -> re.Pattern[str]:
+    return re.compile(rf"\b{re.escape(term)}\b", re.IGNORECASE)
+
+
+def _has_negation_within_window(sentence: str, match_start: int, window: int = 5) -> bool:
+    prefix = sentence[:match_start].lower()
+    tokens = re.findall(r"[a-z0-9']+", prefix)
+    prior_tokens = tokens[-window:]
+    return any(token in _NEGATION_TERMS for token in prior_tokens)
+
+
+def _detect_injury_relevance(
+    text: str, injury_terms: list[str]
+) -> tuple[bool, list[str], list[str]]:
+    matched_terms: set[str] = set()
+    negated_terms: set[str] = set()
+    sentences = _split_sentences(text)
+
+    for sentence in sentences:
+        for term in injury_terms:
+            pattern = _keyword_pattern(term)
+            for match in pattern.finditer(sentence):
+                if _has_negation_within_window(sentence, match.start(), window=5):
+                    negated_terms.add(term)
+                    continue
+                matched_terms.add(term)
+
+    return bool(matched_terms), sorted(matched_terms), sorted(negated_terms)
 
 
 def _generate_questions(encounter: Encounter) -> list[str]:
@@ -566,16 +610,7 @@ def ingest_medical_record(
     max_pages: int = _DEFAULT_MAX_PROCESS_PAGES,
     max_chars_per_page: int = _DEFAULT_MAX_PAGE_TEXT_CHARS,
 ) -> dict[str, Any]:
-    base_injury_terms = sorted(
-        set(_DEFAULT_INJURY_TERMS + [term.lower() for term in (injury_terms or [])])
-    )
-    active_injury_terms = (
-        _expand_injury_terms_with_api(
-            base_injury_terms,
-            force_refresh=force_dictionary_refresh,
-        )
-        or base_injury_terms
-    )
+    active_injury_terms = list(_NORMALIZED_INJURY_KEYWORDS)
     encounters: list[Encounter] = []
     total_processed_pages = 0
 
@@ -592,12 +627,14 @@ def ingest_medical_record(
     follow_up: list[str] = []
     injury_related = False
     injury_reasons: list[str] = []
+    negated_injury_terms: list[str] = []
 
     def flush(end_page: int) -> None:
         nonlocal current_start, current_dos, current_type
         nonlocal current_facility, current_provider
         nonlocal body_parts, symptoms, diagnoses, impression_lines
         nonlocal medications, follow_up, injury_related, injury_reasons
+        nonlocal negated_injury_terms
 
         if end_page < current_start:
             return
@@ -617,6 +654,7 @@ def ingest_medical_record(
             follow_up=sorted(set(follow_up)),
             injury_related=injury_related,
             injury_reasons=sorted(set(injury_reasons)),
+            negated_injury_terms=sorted(set(negated_injury_terms)),
             questions_for_client=[],
         )
         encounter.questions_for_client = _generate_questions(encounter)
@@ -635,6 +673,7 @@ def ingest_medical_record(
         follow_up = []
         injury_related = False
         injury_reasons = []
+        negated_injury_terms = []
 
     for idx, text in _iter_page_texts(
         file_bytes,
@@ -684,10 +723,12 @@ def ingest_medical_record(
         medications.extend(_extract_medications(text))
         follow_up.extend(_extract_follow_up(text))
 
-        page_injury, reasons = _detect_injury_relevance(text, active_injury_terms)
+        page_injury, reasons, negated_terms = _detect_injury_relevance(text, active_injury_terms)
         if page_injury:
             injury_related = True
             injury_reasons.extend(reasons)
+        if negated_terms:
+            negated_injury_terms.extend(negated_terms)
 
     if total_processed_pages == 0:
         return {
@@ -702,7 +743,7 @@ def ingest_medical_record(
     return {
         "patient_name": patient_name or "",
         "page_count": total_processed_pages,
-        "user_injury_terms": injury_terms or [],
+        "user_injury_terms": active_injury_terms,
         "page_limit_hit": total_processed_pages >= max_pages,
         "encounters": [_encounter_to_serializable(encounter) for encounter in encounters],
     }
