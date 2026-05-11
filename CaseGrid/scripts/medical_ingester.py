@@ -9,7 +9,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import asdict, dataclass
 from datetime import date, datetime
-from typing import Any
+from typing import Any, Iterator
 
 try:
     import pdfplumber  # type: ignore
@@ -242,6 +242,64 @@ def _extract_pages(file_bytes: bytes) -> list[str]:
     return []
 
 
+def chunk_pdf(
+    file_bytes: bytes,
+    pages_per_chunk: int = 10,
+) -> Iterator[tuple[int, int, bytes]]:
+    """Yield (start_page, end_page, chunk_bytes) for each PDF chunk.
+
+    Streaming chunk generation avoids holding every chunk in memory at once.
+    """
+    if not PdfReader or not PdfWriter or pages_per_chunk <= 0:
+        return
+
+    reader = PdfReader(io.BytesIO(file_bytes))
+    total_pages = len(reader.pages)
+
+    for start in range(0, total_pages, pages_per_chunk):
+        end = min(start + pages_per_chunk, total_pages)
+        writer = PdfWriter()
+        for page_index in range(start, end):
+            writer.add_page(reader.pages[page_index])
+        buffer = io.BytesIO()
+        writer.write(buffer)
+        yield start + 1, end, buffer.getvalue()
+
+
+def _iter_page_texts(
+    file_bytes: bytes,
+    *,
+    enable_chunking: bool,
+    chunk_pages: int,
+    chunk_threshold_pages: int,
+) -> Iterator[tuple[int, str]]:
+    """Yield (global_page_number, page_text) in processing order."""
+    if not enable_chunking or chunk_pages <= 0 or not PdfReader or not PdfWriter:
+        pages = _extract_pages(file_bytes)
+        for page_index, text in enumerate(pages, start=1):
+            yield page_index, text
+        return
+
+    try:
+        total_pages = len(PdfReader(io.BytesIO(file_bytes)).pages)
+    except Exception:
+        pages = _extract_pages(file_bytes)
+        for page_index, text in enumerate(pages, start=1):
+            yield page_index, text
+        return
+
+    if total_pages < chunk_threshold_pages:
+        pages = _extract_pages(file_bytes)
+        for page_index, text in enumerate(pages, start=1):
+            yield page_index, text
+        return
+
+    for start_page, _end_page, chunk_bytes in chunk_pdf(file_bytes, pages_per_chunk=chunk_pages):
+        pages = _extract_pages(chunk_bytes)
+        for offset, text in enumerate(pages):
+            yield start_page + offset, text
+
+
 def _detect_dos(text: str) -> date | None:
     for pattern in _DOS_PATTERNS:
         match = pattern.search(text)
@@ -447,6 +505,9 @@ def ingest_medical_record(
     patient_name: str | None = None,
     injury_terms: list[str] | None = None,
     force_dictionary_refresh: bool = False,
+    enable_chunking: bool = True,
+    chunk_pages: int = 10,
+    chunk_threshold_pages: int = 40,
 ) -> dict[str, Any]:
     base_injury_terms = sorted(
         set(_DEFAULT_INJURY_TERMS + [term.lower() for term in (injury_terms or [])])
@@ -458,11 +519,8 @@ def ingest_medical_record(
         )
         or base_injury_terms
     )
-    pages = _extract_pages(file_bytes)
     encounters: list[Encounter] = []
-
-    if not pages:
-        return {"patient_name": patient_name or "", "page_count": 0, "encounters": []}
+    total_processed_pages = 0
 
     current_start = 1
     current_dos: date | None = None
@@ -521,7 +579,13 @@ def ingest_medical_record(
         injury_related = False
         injury_reasons = []
 
-    for idx, text in enumerate(pages, start=1):
+    for idx, text in _iter_page_texts(
+        file_bytes,
+        enable_chunking=enable_chunking,
+        chunk_pages=chunk_pages,
+        chunk_threshold_pages=chunk_threshold_pages,
+    ):
+        total_processed_pages = idx
         lower = text.lower()
         dos_here = _detect_dos(text)
         if dos_here and (current_dos is not None or idx > current_start):
@@ -566,11 +630,14 @@ def ingest_medical_record(
             injury_related = True
             injury_reasons.extend(reasons)
 
-    flush(len(pages))
+    if total_processed_pages == 0:
+        return {"patient_name": patient_name or "", "page_count": 0, "encounters": []}
+
+    flush(total_processed_pages)
 
     return {
         "patient_name": patient_name or "",
-        "page_count": len(pages),
+        "page_count": total_processed_pages,
         "user_injury_terms": injury_terms or [],
         "encounters": [_encounter_to_serializable(encounter) for encounter in encounters],
     }
