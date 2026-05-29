@@ -5,14 +5,9 @@ Provides web interface for emotion analysis and guidance.
 """
 
 from flask import Flask, render_template_string, request, jsonify
-from limbic_ai.analyzer import LimbicAnalyzer
-import os
+from limbic_ai.agent_core import get_or_create_mind
 
 app = Flask(__name__)
-
-# Initialize analyzer
-analyzer = LimbicAnalyzer()
-
 
 # HTML Template for main page
 MAIN_TEMPLATE = """
@@ -189,6 +184,24 @@ MAIN_TEMPLATE = """
             padding: 15px;
             margin: 15px 0;
         }
+
+        .internal-state-box {
+            background: #fff8f0;
+            border: 2px solid #f0a35d;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .goal-pill {
+            display: inline-block;
+            background: #f0a35d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 3px;
+        }
         
         .error-message {
             background: #ff6b6b;
@@ -210,7 +223,7 @@ MAIN_TEMPLATE = """
     <div class="container">
         <header>
             <h1>🧠 LimbicAI</h1>
-            <p class="subtitle">Understanding your emotional responses through neuroscience</p>
+            <p class="subtitle">A persistent internal-state model with memory, goals, conflict, and narrative</p>
         </header>
         
         <div class="main-content">
@@ -246,6 +259,13 @@ MAIN_TEMPLATE = """
         async function analyzeScenario() {
             const scenario = document.getElementById('scenarioInput').value.trim();
             const errorMsg = document.getElementById('errorMessage');
+            const sessionIdKey = 'limbicai_session_id';
+            let sessionId = localStorage.getItem(sessionIdKey);
+
+            if (!sessionId) {
+                sessionId = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2));
+                localStorage.setItem(sessionIdKey, sessionId);
+            }
             
             // Clear previous error
             errorMsg.style.display = 'none';
@@ -268,7 +288,7 @@ MAIN_TEMPLATE = """
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ scenario: scenario })
+                    body: JSON.stringify({ scenario: scenario, session_id: sessionId })
                 });
                 
                 if (!response.ok) {
@@ -295,6 +315,13 @@ MAIN_TEMPLATE = """
                 <div class="summary-box">
                     <strong>Quick Summary:</strong> ${data.summary}
                 </div>
+                <div class="internal-state-box">
+                    <strong>Internal State:</strong>
+                    <div style="margin-top: 10px; color: #6b4f2a; line-height: 1.6;">${data.narrative}</div>
+                    <div style="margin-top: 10px; color: #6b4f2a; font-size: 0.95em;">
+                        Turn ${data.turn_index} | Reward signal ${data.reward_signal.toFixed(2)} | Conflict ${data.conflict_index.toFixed(2)}
+                    </div>
+                </div>
                 <div class="limbic-map">${data.visualization}</div>
                 <h3 style="margin-top: 20px; color: #333;">Key Emotional Features:</h3>
                 <div>
@@ -306,6 +333,21 @@ MAIN_TEMPLATE = """
                     html += `<span class="feature-badge">${feature.replace(/_/g, ' ')}: ${(value * 100).toFixed(0)}%</span>`;
                 }
             }
+            html += '</div>';
+
+            html += `
+                <h3 style="margin-top: 20px; color: #333;">Active Goals:</h3>
+                <div>
+            `;
+
+            for (const goal of data.internal_state.active_goals) {
+                html += `<span class="goal-pill">${goal.name.replace(/_/g, ' ')}: ${(goal.priority * 100).toFixed(0)}%</span>`;
+            }
+
+            if (!data.internal_state.active_goals.length) {
+                html += '<p style="color: #777;">No active goals yet.</p>';
+            }
+
             html += '</div>';
             
             resultsDiv.innerHTML = html;
@@ -322,6 +364,13 @@ MAIN_TEMPLATE = """
                     </div>
                 `;
             }
+
+            detailedHtml += `
+                <div class="explanation">
+                    <h3>Internal Tensions</h3>
+                    <p>${data.internal_state.unresolved_tensions.length ? data.internal_state.unresolved_tensions.join(' ') : 'No unresolved tensions are currently flagged.'}</p>
+                </div>
+            `;
             
             detailedDiv.innerHTML = detailedHtml;
             document.getElementById('detailedSection').style.display = 'block';
@@ -347,35 +396,50 @@ def api_analyze():
     try:
         data = request.json
         scenario = data.get('scenario', '').strip()
+        session_id = data.get('session_id', 'default').strip() or 'default'
         
         if not scenario:
             return jsonify({'error': 'Scenario is required'}), 400
         
-        # Analyze
-        analysis = analyzer.analyze(scenario)
+        mind = get_or_create_mind(session_id)
+        turn = mind.step(scenario)
         
         # Generate visualization
         from limbic_ai.visualization import generate_svg_limbic_map
-        svg = generate_svg_limbic_map(analysis.limbic_state)
-        
-        # Generate summary
-        summary = analyzer.get_summary(analysis)
+        svg = generate_svg_limbic_map(turn.limbic_state)
+
+        top_goal = mind.state.active_goals[0].name.replace('_', ' ') if mind.state.active_goals else 'stabilize'
+        dominant_subsystem = max(turn.subsystem_scores.items(), key=lambda item: item[1])[0]
+        summary = (
+            f"Continuity turn {turn.turn_index} with dominant subsystem {dominant_subsystem}. "
+            f"Current goal: {top_goal}. Reward signal {turn.reward_signal:+.2f}."
+        )
         
         return jsonify({
             'scenario': scenario,
+            'session_id': session_id,
+            'turn_index': turn.turn_index,
             'features': {
-                'social_rejection': analysis.emotional_features.social_rejection,
-                'self_blame': analysis.emotional_features.self_blame,
-                'other_blame': analysis.emotional_features.other_blame,
-                'empathy_for_other': analysis.emotional_features.empathy_for_other,
-                'rationalization': analysis.emotional_features.rationalization,
-                'threat_to_identity': analysis.emotional_features.threat_to_identity,
-                'loss_of_reward': analysis.emotional_features.loss_of_reward,
+                'social_rejection': turn.emotional_features.social_rejection,
+                'self_blame': turn.emotional_features.self_blame,
+                'other_blame': turn.emotional_features.other_blame,
+                'empathy_for_other': turn.emotional_features.empathy_for_other,
+                'rationalization': turn.emotional_features.rationalization,
+                'threat_to_identity': turn.emotional_features.threat_to_identity,
+                'loss_of_reward': turn.emotional_features.loss_of_reward,
             },
-            'limbic_state': analysis.limbic_state.as_dict(),
+            'limbic_state': turn.limbic_state.as_dict(),
             'visualization': svg,
             'summary': summary,
-            'explanations': analysis.explanations,
+            'narrative': turn.state.narrative,
+            'reward_signal': turn.reward_signal,
+            'conflict_index': turn.conflict_index,
+            'subsystem_scores': turn.subsystem_scores,
+            'internal_state': turn.state.to_dict(),
+            'explanations': {
+                region: f"{region.replace('_', ' ').title()} is active at {activation:.1%}."
+                for region, activation in turn.limbic_state.as_dict().items()
+            },
         })
     
     except ValueError as e:

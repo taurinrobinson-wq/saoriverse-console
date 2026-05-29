@@ -1,0 +1,39 @@
+{
+  "terms": {
+    "agency": {
+      "definition": "The felt ability to initiate and sustain action.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "care": {
+      "definition": "Attention oriented toward preserving another being or relation.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "conflict": {
+      "definition": "Tension between internal subsystems or goals.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "goal": {
+      "definition": "A persistent target that guides updates and action selection.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "narrative": {
+      "definition": "A self-generated account that integrates state, memory, and experience.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "reward": {
+      "definition": "An internal scalar that indicates whether current interaction improves system fit.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "self": {
+      "definition": "The system's current model of its own continuity, agency, and coherence.",
+      "source": "seed",
+      "confidence": 0.8
+    }
+  }
+}

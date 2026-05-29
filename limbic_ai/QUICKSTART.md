@@ -6,13 +6,13 @@ Get up and running with LimbicAI in 5 minutes!
 
 ### 1. Install Dependencies
 ```bash
-cd limbic_ai
+cd D:\saoriverse-console
 pip install -r requirements.txt
 ```
 
 ### 2. Start the Server
 ```bash
-python app.py
+python -m limbic_ai.app
 ```
 
 ### 3. Open in Browser
@@ -38,7 +38,7 @@ that big a deal anyway. I don't understand why she's making such a fuss.
 
 ### 1. Install Dependencies (2)
 ```bash
-cd limbic_ai
+cd D:\saoriverse-console
 pip install -r requirements.txt
 ```
 
@@ -63,17 +63,16 @@ See feature extraction, limbic activations, and detailed analysis.
 
 ### Quick Import
 ```python
-from limbic_ai import LimbicAnalyzer
+from limbic_ai import get_or_create_mind
 
-analyzer = LimbicAnalyzer()
+mind = get_or_create_mind("demo-session")
 
-scenario = "I got fired and it's all my fault..."
-analysis = analyzer.analyze(scenario)
+turn = mind.step("I got fired and it's all my fault...")
 
 ## Access results
-print(analysis.limbic_state)
-print(analysis.emotional_features)
-print(analyzer.get_summary(analysis))
+print(turn.limbic_state)
+print(turn.emotional_features)
+print(turn.state.narrative)
 ```
 
 ---
@@ -108,18 +107,20 @@ dlPFC          (████████░) 0.80  - Cognitive control
 
 ## Science Behind It
 
-LimbicAI uses **keyword density analysis** to identify emotional patterns:
+LimbicAI now uses a **persistent internal-state loop** to accumulate emotional and goal state over time:
 
-1. **Parse** - Find emotion-related keywords in your text 2. **Weight** - Assign importance based on
-frequency 3. **Map** - Convert to brain region activations 4. **Visualize** - Show limbic system
-"heatmap" 5. **Explain** - Provide context and guidance
+1. **Parse** - Extract emotional features from incoming text
+2. **State update** - Update memory, bodily state, valuation, goals, and self-model
+3. **Conflict** - Let competing subsystems disagree and persist
+4. **Narrate** - Build an ongoing first-person internal narrative
+5. **Visualize** - Show the current state as a limbic-style map
 
-**It's not mind-reading!** Rather, it's:
-- ✅ Evidence-based (grounded in neuroscience)
-- ✅ Pattern recognition (keyword matching + weighting)
-- ✅ Educational (helps you understand emotional mechanisms)
-- ❌ Not diagnostic
-- ❌ Not clinical judgment
+**It is still not consciousness or a clinical diagnosis.** It is:
+- ✅ Stateful across turns
+- ✅ Modular, with separate memory, goal, conflict, and valuation loops
+- ✅ Designed for agent-style continuity and self-modeling
+- ❌ Not a human brain model
+- ❌ Not clinically validated
 
 ---
 
@@ -171,9 +172,11 @@ The system needs at least 10 words to meaningfully analyze.
 
 ## Next Steps
 
-1. **Try web interface**: Most user-friendly 2. **Explore examples**: Understand different patterns
-3. **Read full README**: Deeper technical details 4. **Review code**: See how mapping works 5.
-**Contribute**: Add features or improve NLP
+1. **Try web interface**: Watch the internal state accumulate across turns
+2. **Explore examples**: Understand different patterns
+3. **Review code**: Start with `limbic_ai/agent_core.py`
+4. **Extend the state loop**: Add better memory, goals, or environment feedback
+5. **Contribute**: Improve the model boundaries and evaluation
 
 ---
 

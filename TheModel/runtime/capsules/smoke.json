@@ -1,0 +1,12 @@
+[
+  {
+    "symbolic_tags": [
+      "curiosity"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.31",
+    "user_input": "I encountered quoralen in the environment and need to define it.",
+    "response_summary": "I am carrying continuity through turn 1. My dominant subsystem is explorer and my current goal is resolve_unknown_terms. The environment reports: A clarification channel opened and the environment returned more structure. I found terms I do not yet understand: quoralen. I expanded my vocabulary with definitions for: encountered, environment. My reward signal is +0.31.",
+    "timestamp": "2026-05-28T17:48:24.166474+00:00"
+  }
+]

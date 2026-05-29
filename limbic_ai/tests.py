@@ -7,6 +7,7 @@ from limbic_ai.models import EmotionalFeatures, LimbicState, clamp_01
 from limbic_ai.nlp_parser import EmotionalFeatureExtractor
 from limbic_ai.mapping import map_features_to_limbic
 from limbic_ai.analyzer import LimbicAnalyzer
+from limbic_ai.agent_core import get_or_create_mind, reset_mind
 
 
 class TestModels(unittest.TestCase):
@@ -147,6 +148,37 @@ class TestAnalyzer(unittest.TestCase):
         
         self.assertIn("##", summary)  # Markdown formatting
         self.assertGreater(len(summary), 50)
+
+
+class TestInternalMind(unittest.TestCase):
+    """Test the persistent internal-mind layer."""
+
+    def setUp(self):
+        reset_mind("unit-test-session")
+
+    def tearDown(self):
+        reset_mind("unit-test-session")
+
+    def test_state_persists_across_turns(self):
+        mind = get_or_create_mind("unit-test-session")
+
+        first_turn = mind.step("I got rejected and I feel like it was my fault.")
+        second_turn = mind.step("I keep thinking about what happened and I want to repair it.")
+
+        self.assertEqual(first_turn.turn_index, 1)
+        self.assertEqual(second_turn.turn_index, 2)
+        self.assertGreaterEqual(len(second_turn.state.working_memory), 2)
+        self.assertGreaterEqual(second_turn.state.self_model["continuity"], first_turn.state.self_model["continuity"])
+        self.assertGreaterEqual(len(second_turn.state.active_goals), 1)
+        self.assertIn("narrative", second_turn.to_dict())
+
+    def test_conflict_and_narrative_are_generated(self):
+        mind = get_or_create_mind("unit-test-session")
+        turn = mind.step("I understand their pain, but I also think it's not that big of a deal.")
+
+        self.assertGreaterEqual(turn.conflict_index, 0.0)
+        self.assertTrue(turn.state.narrative)
+        self.assertIn("current", turn.state.narrative.lower())
 
 
 if __name__ == '__main__':

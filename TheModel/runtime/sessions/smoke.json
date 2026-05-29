@@ -1,0 +1,107 @@
+{
+  "session_id": "smoke",
+  "turn_index": 1,
+  "working_memory": [
+    "I encountered quoralen in the environment and need to define it."
+  ],
+  "long_term_memory": [
+    "turn 1: I encountered quoralen in the environment and need to define it."
+  ],
+  "emotional_state": {
+    "valence": 0.956,
+    "arousal": 0.17,
+    "social_threat": 0.0,
+    "attachment_pressure": 0.0,
+    "curiosity": 0.33,
+    "care": 0.0
+  },
+  "bodily_state": {
+    "tension": 0.148,
+    "energy": 0.484,
+    "safety": 0.77,
+    "activation": 0.192
+  },
+  "self_model": {
+    "continuity": 0.18,
+    "coherence": 0.559,
+    "agency": 0.206,
+    "stability": 0.546,
+    "curiosity": 0.38
+  },
+  "background_processes": {
+    "rumination": 0.125,
+    "monitoring": 0.024,
+    "repair": 0.0,
+    "lexicon_growth": 0.2
+  },
+  "active_goals": [
+    {
+      "name": "resolve_unknown_terms",
+      "drive": "meaning",
+      "priority": 0.72,
+      "status": "active",
+      "created_turn": 1,
+      "last_updated_turn": 1
+    }
+  ],
+  "subsystem_scores": {
+    "impulse": 0.0,
+    "planner": 0.14,
+    "critic": 0.0,
+    "caretaker": 0.0,
+    "explorer": 0.416,
+    "protector": 0.179
+  },
+  "unresolved_tensions": [
+    "Subsystems disagree about the next best action."
+  ],
+  "narrative": "I am carrying continuity through turn 1. My dominant subsystem is explorer and my current goal is resolve_unknown_terms. The environment reports: A clarification channel opened and the environment returned more structure. I found terms I do not yet understand: quoralen. I expanded my vocabulary with definitions for: encountered, environment. My reward signal is +0.31.",
+  "reward_signal": 0.312,
+  "vocabulary_questions": [
+    {
+      "term": "quoralen",
+      "question": "What does 'quoralen' mean in your context?",
+      "reason": "unknown_term"
+    }
+  ],
+  "known_terms": [
+    "agency",
+    "care",
+    "conflict",
+    "define",
+    "encountered",
+    "environment",
+    "feel",
+    "goal",
+    "happened",
+    "here",
+    "kind",
+    "limerence",
+    "matters",
+    "moving",
+    "narrative",
+    "others",
+    "please",
+    "rejected",
+    "reward",
+    "self",
+    "sonder",
+    "understand",
+    "want",
+    "what"
+  ],
+  "environment": {
+    "scene": "intake",
+    "safety": 0.7,
+    "novelty": 0.2,
+    "coherence": 0.7,
+    "last_event": "A clarification channel opened and the environment returned more structure.",
+    "affordances": [
+      "observe",
+      "ask",
+      "rest",
+      "approach",
+      "define"
+    ]
+  }
+}

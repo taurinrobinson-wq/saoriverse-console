@@ -1,0 +1,134 @@
+{
+  "terms": {
+    "agency": {
+      "definition": "The felt ability to initiate and sustain action.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "care": {
+      "definition": "Attention oriented toward preserving another being or relation.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "conflict": {
+      "definition": "Tension between internal subsystems or goals.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "goal": {
+      "definition": "A persistent target that guides updates and action selection.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "narrative": {
+      "definition": "A self-generated account that integrates state, memory, and experience.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "reward": {
+      "definition": "An internal scalar that indicates whether current interaction improves system fit.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "self": {
+      "definition": "The system's current model of its own continuity, agency, and coherence.",
+      "source": "seed",
+      "confidence": 0.8
+    },
+    "rejected": {
+      "definition": "not given approval or acceptance",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "want": {
+      "definition": "to be needy or destitute",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "understand": {
+      "definition": "to grasp the meaning of",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "please": {
+      "definition": "to afford or give pleasure or satisfaction",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "define": {
+      "definition": "to determine or identify the essential qualities or meaning of",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "limerence": {
+      "definition": "a state of blissful usually temporary infatuation experienced during the early period of a romantic relationship : the euphoric feeling experienced when first falling in love",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "sonder": {
+      "definition": "The realization that others have lives as vivid as your own.",
+      "source": "user",
+      "confidence": 1.0
+    },
+    "matters": {
+      "definition": "a subject under consideration",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "others": {
+      "definition": "a different or additional one",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "feel": {
+      "definition": "to handle or touch in order to examine, test, or explore some quality",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "kind": {
+      "definition": "a group united by common traits or interests : category",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "here": {
+      "definition": "in or at this place —often used interjectionally especially in answering a roll call",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "what": {
+      "definition": "—used as an interrogative expressing inquiry about the identity, nature, or value of an object or matter",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "happened": {
+      "definition": "to occur by chance —often used with it",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "moving": {
+      "definition": "marked by or capable of movement",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "encountered": {
+      "definition": "to meet as an adversary or enemy",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "environment": {
+      "definition": "the circumstances, objects, or conditions by which one is surrounded : the factors and influences that affect the growth, health, progress, functioning, etc., of someone or something",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "through": {
+      "definition": "—used as a function word to indicate movement into something at one side or point and out at another and especially the opposite side of",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "scene": {
+      "definition": "one of the subdivisions of a play: such as",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    }
+  }
+}

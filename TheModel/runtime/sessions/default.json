@@ -1,0 +1,240 @@
+{
+  "session_id": "default",
+  "turn_index": 0,
+  "current_day": 1,
+  "last_run": "2026-05-28T18:07:10.776753+00:00",
+  "working_memory": [],
+  "long_term_memory": [],
+  "emotional_state": {
+    "valence": 0.5,
+    "arousal": 0.2,
+    "social_threat": 0.0,
+    "attachment_pressure": 0.0,
+    "curiosity": 0.3,
+    "care": 0.0
+  },
+  "bodily_state": {
+    "tension": 0.2,
+    "energy": 0.5,
+    "safety": 0.8,
+    "activation": 0.2
+  },
+  "self_model": {
+    "continuity": 0.0,
+    "coherence": 0.5,
+    "agency": 0.2,
+    "stability": 0.5,
+    "curiosity": 0.3
+  },
+  "background_processes": {
+    "rumination": 0.0,
+    "monitoring": 0.0,
+    "repair": 0.2,
+    "lexicon_growth": 0.0
+  },
+  "active_goals": [
+    {
+      "name": "advance_main_mission",
+      "drive": "mission",
+      "priority": 0.8,
+      "status": "active",
+      "created_turn": 0,
+      "last_updated_turn": 0
+    }
+  ],
+  "main_mission": {
+    "statement": "Increase internal coherence and conceptual richness over time."
+  },
+  "health_metrics": {
+    "goal_progress_rate": 0.4,
+    "contradiction_count": 0,
+    "vocabulary_growth_rate": 0.0,
+    "error_events": 0,
+    "stalled_goals": 0,
+    "global_health": 0.638
+  },
+  "villager_states": {
+    "Tomas": {
+      "name": "Tomas",
+      "role": "planner",
+      "mood": "hopeful",
+      "skills": [
+        "goal decomposition",
+        "prioritization",
+        "maintenance"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [
+        "Break the mission into the next concrete step for day 1",
+        "Refresh active goals so the village keeps a clear direction",
+        "Schedule a coherence walk through the environment"
+      ],
+      "recent_outcomes": [
+        "The work ahead became clearer and the village chose a firmer direction.",
+        "The work ahead became clearer and the village chose a firmer direction.",
+        "The villagers patched a weak seam and steadied the town's shared map."
+      ],
+      "reward_trend": 0.5
+    },
+    "Mira": {
+      "name": "Mira",
+      "role": "curiosity keeper",
+      "mood": "steady",
+      "skills": [
+        "vocabulary growth",
+        "question asking",
+        "definition finding"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0
+    },
+    "Edda": {
+      "name": "Edda",
+      "role": "stability steward",
+      "mood": "steady",
+      "skills": [
+        "contradiction tracking",
+        "repair",
+        "coherence monitoring"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0
+    },
+    "Lio": {
+      "name": "Lio",
+      "role": "narrator",
+      "mood": "steady",
+      "skills": [
+        "memory weaving",
+        "summary",
+        "story continuity"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0
+    },
+    "Sable": {
+      "name": "Sable",
+      "role": "architect",
+      "mood": "steady",
+      "skills": [
+        "system design",
+        "reward tuning",
+        "structure revision"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [
+        "Adjust internal reward weights to favor progress and coherence"
+      ],
+      "recent_outcomes": [
+        "The villagers patched a weak seam and steadied the town's shared map."
+      ],
+      "reward_trend": 0.14
+    },
+    "Jun": {
+      "name": "Jun",
+      "role": "caretaker",
+      "mood": "steady",
+      "skills": [
+        "health monitoring",
+        "self-repair",
+        "recovery"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0
+    }
+  },
+  "task_backlog": [
+    {
+      "description": "Break the mission into the next concrete step for day 1",
+      "proposed_by": "Tomas",
+      "priority": 0.82,
+      "expected_reward": 0.2,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Refresh active goals so the village keeps a clear direction",
+      "proposed_by": "Tomas",
+      "priority": 0.78,
+      "expected_reward": 0.16,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Adjust internal reward weights to favor progress and coherence",
+      "proposed_by": "Sable",
+      "priority": 0.72,
+      "expected_reward": 0.14,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Schedule a coherence walk through the environment",
+      "proposed_by": "Tomas",
+      "priority": 0.7,
+      "expected_reward": 0.14,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Patch weak coherence in the environment model",
+      "proposed_by": "Edda",
+      "priority": 0.7,
+      "expected_reward": 0.13,
+      "dependencies": [],
+      "status": "proposed"
+    },
+    {
+      "description": "Record the village's important events into a coherent daybook entry",
+      "proposed_by": "Lio",
+      "priority": 0.66,
+      "expected_reward": 0.1,
+      "dependencies": [],
+      "status": "proposed"
+    },
+    {
+      "description": "Review the goal structure for redundant or conflicting work",
+      "proposed_by": "Sable",
+      "priority": 0.58,
+      "expected_reward": 0.09,
+      "dependencies": [],
+      "status": "proposed"
+    }
+  ],
+  "recent_events": [
+    "The work ahead became clearer and the village chose a firmer direction.",
+    "The work ahead became clearer and the village chose a firmer direction.",
+    "The villagers patched a weak seam and steadied the town's shared map.",
+    "The villagers patched a weak seam and steadied the town's shared map."
+  ],
+  "narrative_log": [
+    "Day 1: The village pursued 4 task(s) in service of 'Increase internal coherence and conceptual richness over time.'. Health now rests at 64%."
+  ],
+  "subsystem_scores": {},
+  "unresolved_tensions": [],
+  "narrative": "Day 1: The village pursued 4 task(s) in service of 'Increase internal coherence and conceptual richness over time.'. Health now rests at 64%.",
+  "reward_signal": 0.64,
+  "vocabulary_questions": [],
+  "known_terms": [],
+  "environment": {
+    "scene": "intake",
+    "safety": 0.7,
+    "novelty": 0.2,
+    "coherence": 0.76,
+    "last_event": "The environment is waiting for input.",
+    "affordances": [
+      "observe",
+      "ask",
+      "rest",
+      "approach"
+    ]
+  }
+}
