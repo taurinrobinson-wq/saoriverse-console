@@ -1,4 +1,4 @@
-"""Core data models for TheModel."""
+"""Core data models for TheVillage."""
 
 from __future__ import annotations
 

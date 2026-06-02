@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing import List
 
-from TheModel.core.models import EnvironmentState, Goal, InternalState, Task, clamp_01
-from TheModel.core.villagers import Villager, record_villager_outcome
-from TheModel.learning.logging import append_feedback
+from TheVillage.core.models import EnvironmentState, Goal, InternalState, Task, clamp_01
+from TheVillage.core.villagers import Villager, record_villager_outcome
+from TheVillage.learning.logging import append_feedback
 
 
 def _rank_tasks(tasks: List[Task]) -> List[Task]:

@@ -1,19 +1,19 @@
-"""TheModel orchestration engine."""
+"""TheVillage orchestration engine."""
 
 from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Dict
 
-from TheModel.core.interpreter import interpret_text
-from TheModel.core.models import Goal, InteractionResult, InternalState, clamp_01
-from TheModel.core.scheduler import daily_tick
-from TheModel.core.villagers import default_villagers
-from TheModel.embodiment.environment import SimpleWorldEnvironment
-from TheModel.learning.logging import append_conversation
-from TheModel.learning.vocabulary import VocabularyLearner
-from TheModel.memory.capsule import MemoryCapsule
-from TheModel.memory.store import append_capsule, load_state, reset_session, save_state
+from TheVillage.core.interpreter import interpret_text
+from TheVillage.core.models import Goal, InteractionResult, InternalState, clamp_01
+from TheVillage.core.scheduler import daily_tick
+from TheVillage.core.villagers import default_villagers
+from TheVillage.embodiment.environment import SimpleWorldEnvironment
+from TheVillage.learning.logging import append_conversation
+from TheVillage.learning.vocabulary import VocabularyLearner
+from TheVillage.memory.capsule import MemoryCapsule
+from TheVillage.memory.store import append_capsule, load_state, reset_session, save_state
 
 
 def is_new_day(state: InternalState) -> bool:
@@ -27,7 +27,7 @@ def is_new_day(state: InternalState) -> bool:
     return now.date() > last_run.astimezone(timezone.utc).date()
 
 
-class TheModelEngine:
+class TheVillageEngine:
     def __init__(self, session_id: str):
         self.session_id = session_id
         self.vocabulary = VocabularyLearner()
@@ -238,13 +238,13 @@ class TheModelEngine:
         return [name for name, value in features.items() if value > 0.15] or ["low_signal"]
 
 
-_ENGINE_REGISTRY: Dict[str, TheModelEngine] = {}
+_ENGINE_REGISTRY: Dict[str, TheVillageEngine] = {}
 
 
-def get_or_create_engine(session_id: str = "default") -> TheModelEngine:
+def get_or_create_engine(session_id: str = "default") -> TheVillageEngine:
     key = session_id.strip() or "default"
     if key not in _ENGINE_REGISTRY:
-        _ENGINE_REGISTRY[key] = TheModelEngine(key)
+        _ENGINE_REGISTRY[key] = TheVillageEngine(key)
     return _ENGINE_REGISTRY[key]
 
 

@@ -1,6 +1,6 @@
-# TheModel
+# The Village
 
-TheModel is now a village simulator built from patterns already present in this repository. Each major subsystem is represented as a villager with its own role, mood, tasks, and daily responsibilities in service of one main mission.
+The Village is now a village simulator built from patterns already present in this repository. Each major subsystem is represented as a villager with its own role, mood, tasks, and daily responsibilities in service of one main mission.
 
 The package still preserves your nine target components:
 
@@ -17,7 +17,7 @@ The package still preserves your nine target components:
 ## Structure
 
 ```
-TheModel/
+TheVillage/
   core/           orchestration, state, villagers, scheduler, interpretation
   memory/         persistent session state and memory capsules
   embodiment/     simple action-consequence environment
@@ -38,10 +38,10 @@ TheModel/
 
 ## Village Layer
 
-- Villagers live in [TheModel/core/villagers.py](d:/saoriverse-console/TheModel/core/villagers.py).
-- The daily task engine lives in [TheModel/core/scheduler.py](d:/saoriverse-console/TheModel/core/scheduler.py).
-- Dialogue rendering for the village metaphor lives in [TheModel/interface/dialogue.py](d:/saoriverse-console/TheModel/interface/dialogue.py).
-- The main mission, health metrics, task backlog, villager states, and last run timestamp are persisted in [TheModel/core/models.py](d:/saoriverse-console/TheModel/core/models.py).
+- Villagers live in [TheVillage/core/villagers.py](d:/saoriverse-console/TheVillage/core/villagers.py).
+- The daily task engine lives in [TheVillage/core/scheduler.py](d:/saoriverse-console/TheVillage/core/scheduler.py).
+- Dialogue rendering for the village metaphor lives in [TheVillage/interface/dialogue.py](d:/saoriverse-console/TheVillage/interface/dialogue.py).
+- The main mission, health metrics, task backlog, villager states, and last run timestamp are persisted in [TheVillage/core/models.py](d:/saoriverse-console/TheVillage/core/models.py).
 
 ## Run
 
@@ -49,7 +49,7 @@ Install Flask if needed, then run:
 
 ```bash
 cd D:\saoriverse-console
-python -m TheModel.interface.api
+python -m TheVillage.interface.api
 ```
 
 The UI runs on http://localhost:5050.
@@ -58,7 +58,7 @@ To run one autonomous daily cycle from the command line:
 
 ```bash
 cd D:\saoriverse-console
-python -m TheModel.core.mind
+python -m TheVillage.core.mind
 ```
 
 That entrypoint is designed so you can wire it into OS scheduling tools.

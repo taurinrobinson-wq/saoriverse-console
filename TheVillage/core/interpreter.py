@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from typing import Dict, List, Set
 
-from TheModel.core.models import Interpretation, clamp_01
+from TheVillage.core.models import Interpretation, clamp_01
 
 
 TOKEN_PATTERN = re.compile(r"[a-zA-Z][a-zA-Z\-']+")

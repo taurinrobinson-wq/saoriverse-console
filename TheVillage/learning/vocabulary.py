@@ -1,4 +1,4 @@
-"""Vocabulary learning and unknown-term questioning for TheModel."""
+"""Vocabulary learning and unknown-term questioning for TheVillage."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ import json
 from pathlib import Path
 from typing import Dict, List
 
-from TheModel.learning.logging import append_vocabulary
-from TheModel.learning.mw_dictionary import lookup_word
+from TheVillage.learning.logging import append_vocabulary
+from TheVillage.learning.mw_dictionary import lookup_word
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]

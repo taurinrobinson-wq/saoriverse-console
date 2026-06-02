@@ -1,4 +1,4 @@
-"""Flask interface for TheModel.
+"""Flask interface for TheVillage.
 
 Adapted from the session-oriented UI pattern already present in limbic_ai/app.py.
 """
@@ -7,9 +7,9 @@ from __future__ import annotations
 
 from flask import Flask, jsonify, render_template_string, request
 
-from TheModel.core.mind import get_or_create_engine, reset_engine
-from TheModel.core.villagers import default_villagers
-from TheModel.interface.dialogue import village_summary_to_dialogue, villager_to_dialogue
+from TheVillage.core.mind import get_or_create_engine, reset_engine
+from TheVillage.core.villagers import default_villagers
+from TheVillage.interface.dialogue import village_summary_to_dialogue, villager_to_dialogue
 
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ MAIN_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheModel Village</title>
+    <title>The Village</title>
     <style>
         :root {
             --sky-top: #f8c98d;
@@ -481,7 +481,7 @@ MAIN_TEMPLATE = """
         </div>
     </div>
     <script>
-        const sessionStorageKey = 'themodel_session_id';
+        const sessionStorageKey = 'thevillage_session_id';
         let cachedPayload = null;
         let selectedVillager = null;
 

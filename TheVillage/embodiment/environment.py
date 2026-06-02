@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from TheModel.core.models import EnvironmentState, clamp_01
+from TheVillage.core.models import EnvironmentState, clamp_01
 
 
 class SimpleWorldEnvironment:

@@ -1,4 +1,4 @@
-"""Persistent storage helpers for TheModel state and capsules."""
+"""Persistent storage helpers for TheVillage state and capsules."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ import json
 from pathlib import Path
 from typing import List
 
-from TheModel.core.models import InternalState
-from TheModel.memory.capsule import MemoryCapsule
+from TheVillage.core.models import InternalState
+from TheVillage.memory.capsule import MemoryCapsule
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]

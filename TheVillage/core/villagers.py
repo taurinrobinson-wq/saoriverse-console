@@ -1,11 +1,11 @@
-"""Village-style subsystem abstractions for TheModel."""
+"""Village-style subsystem abstractions for TheVillage."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import List
 
-from TheModel.core.models import EnvironmentState, Goal, InternalState, Task, VillagerState, clamp_01
+from TheVillage.core.models import EnvironmentState, Goal, InternalState, Task, VillagerState, clamp_01
 
 
 def _ensure_villager_state(state: InternalState, name: str, role: str, skills: List[str]) -> VillagerState:

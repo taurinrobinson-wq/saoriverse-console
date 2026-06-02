@@ -1,1 +1,0 @@
-"""Embodiment layer for TheModel."""
