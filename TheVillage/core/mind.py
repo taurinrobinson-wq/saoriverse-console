@@ -3,28 +3,18 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import re
 from typing import Dict
 
 from TheVillage.core.interpreter import interpret_text
 from TheVillage.core.models import Goal, InteractionResult, InternalState, clamp_01
-from TheVillage.core.scheduler import daily_tick
-from TheVillage.core.villagers import default_villagers
+from TheVillage.core.scheduler import daily_tick, process_hour
+from TheVillage.core.villagers import Aura, default_villagers
 from TheVillage.embodiment.environment import SimpleWorldEnvironment
 from TheVillage.learning.logging import append_conversation
 from TheVillage.learning.vocabulary import VocabularyLearner
 from TheVillage.memory.capsule import MemoryCapsule
 from TheVillage.memory.store import append_capsule, load_state, reset_session, save_state
-
-
-def is_new_day(state: InternalState) -> bool:
-    if not state.narrative_log:
-        return True
-    try:
-        last_run = datetime.fromisoformat(state.last_run)
-    except ValueError:
-        return True
-    now = datetime.now(timezone.utc)
-    return now.date() > last_run.astimezone(timezone.utc).date()
 
 
 class TheVillageEngine:
@@ -34,26 +24,63 @@ class TheVillageEngine:
         self.environment = SimpleWorldEnvironment()
         self.state = load_state(session_id)
         self.villagers = default_villagers()
+        self.aura = Aura(self.state)
 
     def refresh_state(self) -> InternalState:
         self.state = load_state(self.session_id)
+        self.aura = Aura(self.state)
         return self.state
+
+    def is_dream_time(self) -> bool:
+        return self.state.current_hour < 8
+
+    def tick_hour(self, hours: int = 1) -> list:
+        executed_tasks = []
+        tick_count = max(1, int(hours))
+        for _ in range(tick_count):
+            previous_hour = self.state.current_hour
+            self.state.current_hour = (self.state.current_hour + 1) % 24
+            process_hour(self.state, self.state.environment, self.villagers, aura=self.aura)
+            if previous_hour == 23 and self.state.current_hour == 0:
+                if self.state.narrative_log:
+                    self.state.current_day += 1
+                executed = daily_tick(self.state, self.state.environment, self.villagers, aura=self.aura)
+                executed_tasks.extend(executed)
+        self.state.last_run = datetime.now(timezone.utc).isoformat()
+        return executed_tasks
 
     def run_daily_cycle(self) -> list:
         self.refresh_state()
-        if not is_new_day(self.state):
-            return []
-        if self.state.narrative_log:
-            self.state.current_day += 1
-        executed = daily_tick(self.state, self.state.environment, self.villagers)
-        self.state.last_run = datetime.now(timezone.utc).isoformat()
+        hours_to_rollover = (24 - self.state.current_hour) % 24
+        if hours_to_rollover == 0:
+            hours_to_rollover = 24
+        executed = self.tick_hour(hours_to_rollover)
         save_state(self.state)
         return executed
+
+    @staticmethod
+    def _extract_advance_hours(text: str, action: str | None) -> int:
+        combined = f"{action or ''} {text}".lower()
+        if "advance" not in combined or "hour" not in combined:
+            return 0
+        match = re.search(r"(\d+)\s*hour", combined)
+        if match:
+            return max(1, int(match.group(1)))
+        return 1
 
     def interact(self, text: str, action: str | None = None) -> InteractionResult:
         cleaned_text = " ".join(text.split())
         if len(cleaned_text) < 2:
             raise ValueError("Interaction text is required.")
+
+        advanced_hours = self._extract_advance_hours(cleaned_text, action)
+        if advanced_hours > 0:
+            executed = self.tick_hour(advanced_hours)
+            if executed:
+                self.state.recent_events.append(
+                    f"Hourly rollover triggered {len(executed)} scheduled task(s) for day {self.state.current_day}."
+                )
+                self.state.recent_events = self.state.recent_events[-20:]
 
         self.state.turn_index += 1
         interpretation = interpret_text(cleaned_text, self.vocabulary.known_terms())
@@ -214,7 +241,7 @@ class TheVillageEngine:
         dominant_subsystem = max(self.state.subsystem_scores.items(), key=lambda item: item[1])[0]
         top_goal = self.state.active_goals[0].name if self.state.active_goals else "stabilize"
         parts = [
-            f"The village is carrying continuity through turn {self.state.turn_index}.",
+            f"The village is carrying continuity through turn {self.state.turn_index} at hour {self.state.current_hour:02d}.",
             f"The loudest voice in the square is {dominant_subsystem}, and the village is leaning toward {top_goal}.",
             f"The environment reports: {env_feedback.get('last_event', 'No event available.')}",
         ]

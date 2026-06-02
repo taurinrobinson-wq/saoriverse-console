@@ -7,6 +7,9 @@ from datetime import datetime, timezone
 from typing import Dict, List
 
 
+ROLE_AURA = "aura"
+
+
 def clamp_01(value: float) -> float:
     return max(0.0, min(1.0, value))
 
@@ -89,6 +92,9 @@ class VillagerState:
     recent_tasks: List[str] = field(default_factory=list)
     recent_outcomes: List[str] = field(default_factory=list)
     reward_trend: float = 0.0
+    dream_state: Dict[str, float | int | str] = field(default_factory=dict)
+    dream_log: List[str] = field(default_factory=list)
+    house_brief: "HouseBrief" = field(default_factory=lambda: HouseBrief())
 
     def to_dict(self) -> dict:
         return {
@@ -100,6 +106,42 @@ class VillagerState:
             "recent_tasks": list(self.recent_tasks),
             "recent_outcomes": list(self.recent_outcomes),
             "reward_trend": round(self.reward_trend, 3),
+            "dream_state": dict(self.dream_state),
+            "dream_log": list(self.dream_log),
+            "house_brief": self.house_brief.to_dict(),
+        }
+
+
+@dataclass
+class HouseBrief:
+    house_goal: str = "Maintain steady contribution to village cohesion."
+    problem_statement: str = "No active blocker is currently flagged."
+    guidance_request: str = "Select a guidance style for today's work."
+    choices: List[str] = field(default_factory=lambda: [
+        "Take a conservative step to preserve stability.",
+        "Try a moderate experiment to gather new signal.",
+        "Coordinate with another house before acting.",
+        "Invest in long-term structure over short-term speed.",
+    ])
+    selected_choice: int | None = None
+    influence_strength: float = 0.2
+    downstream_impacts: List[str] = field(default_factory=list)
+    dream_insight: str | None = None
+    aspiration: str | None = None
+    last_updated_turn: int = 0
+
+    def to_dict(self) -> dict:
+        return {
+            "house_goal": self.house_goal,
+            "problem_statement": self.problem_statement,
+            "guidance_request": self.guidance_request,
+            "choices": list(self.choices),
+            "selected_choice": self.selected_choice,
+            "influence_strength": round(self.influence_strength, 3),
+            "downstream_impacts": list(self.downstream_impacts),
+            "dream_insight": self.dream_insight,
+            "aspiration": self.aspiration,
+            "last_updated_turn": self.last_updated_turn,
         }
 
 
@@ -128,6 +170,7 @@ class InternalState:
     session_id: str
     turn_index: int = 0
     current_day: int = 1
+    current_hour: int = 8
     last_run: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     working_memory: List[str] = field(default_factory=list)
     long_term_memory: List[str] = field(default_factory=list)
@@ -171,6 +214,12 @@ class InternalState:
     reward_signal: float = 0.0
     vocabulary_questions: List[dict] = field(default_factory=list)
     known_terms: List[str] = field(default_factory=list)
+    aura_forecast: str | None = None
+    aura_arc_theme: str | None = None
+    aura_tension: float | None = None
+    aura_last_synthesis: str | None = None
+    aura_arc_stage: int = 0
+    aura_dream_history: List[str] = field(default_factory=list)
     environment: EnvironmentState = field(default_factory=EnvironmentState)
 
     def to_dict(self) -> dict:
@@ -178,6 +227,7 @@ class InternalState:
             "session_id": self.session_id,
             "turn_index": self.turn_index,
             "current_day": self.current_day,
+            "current_hour": self.current_hour,
             "last_run": self.last_run,
             "working_memory": list(self.working_memory),
             "long_term_memory": list(self.long_term_memory),
@@ -198,6 +248,12 @@ class InternalState:
             "reward_signal": round(self.reward_signal, 3),
             "vocabulary_questions": list(self.vocabulary_questions),
             "known_terms": list(self.known_terms),
+            "aura_forecast": self.aura_forecast,
+            "aura_arc_theme": self.aura_arc_theme,
+            "aura_tension": round(self.aura_tension, 3) if isinstance(self.aura_tension, (int, float)) else None,
+            "aura_last_synthesis": self.aura_last_synthesis,
+            "aura_arc_stage": self.aura_arc_stage,
+            "aura_dream_history": list(self.aura_dream_history),
             "environment": self.environment.to_dict(),
         }
 
@@ -236,6 +292,31 @@ class InternalState:
                 recent_tasks=value.get("recent_tasks", []),
                 recent_outcomes=value.get("recent_outcomes", []),
                 reward_trend=value.get("reward_trend", 0.0),
+                dream_state=value.get("dream_state", {}),
+                dream_log=value.get("dream_log", []),
+                house_brief=HouseBrief(
+                    house_goal=(value.get("house_brief") or {}).get(
+                        "house_goal", "Maintain steady contribution to village cohesion."
+                    ),
+                    problem_statement=(value.get("house_brief") or {}).get(
+                        "problem_statement", "No active blocker is currently flagged."
+                    ),
+                    guidance_request=(value.get("house_brief") or {}).get(
+                        "guidance_request", "Select a guidance style for today's work."
+                    ),
+                    choices=(value.get("house_brief") or {}).get("choices", [
+                        "Take a conservative step to preserve stability.",
+                        "Try a moderate experiment to gather new signal.",
+                        "Coordinate with another house before acting.",
+                        "Invest in long-term structure over short-term speed.",
+                    ]),
+                    selected_choice=(value.get("house_brief") or {}).get("selected_choice"),
+                    influence_strength=(value.get("house_brief") or {}).get("influence_strength", 0.2),
+                    downstream_impacts=(value.get("house_brief") or {}).get("downstream_impacts", []),
+                    dream_insight=(value.get("house_brief") or {}).get("dream_insight"),
+                    aspiration=(value.get("house_brief") or {}).get("aspiration"),
+                    last_updated_turn=(value.get("house_brief") or {}).get("last_updated_turn", 0),
+                ),
             )
             for key, value in data.get("villager_states", {}).items()
         }
@@ -243,6 +324,7 @@ class InternalState:
             session_id=data.get("session_id", defaults.session_id),
             turn_index=data.get("turn_index", defaults.turn_index),
             current_day=data.get("current_day", defaults.current_day),
+            current_hour=data.get("current_hour", defaults.current_hour),
             last_run=data.get("last_run", defaults.last_run),
             working_memory=data.get("working_memory", []),
             long_term_memory=data.get("long_term_memory", []),
@@ -263,6 +345,12 @@ class InternalState:
             reward_signal=data.get("reward_signal", 0.0),
             vocabulary_questions=data.get("vocabulary_questions", []),
             known_terms=data.get("known_terms", []),
+            aura_forecast=data.get("aura_forecast"),
+            aura_arc_theme=data.get("aura_arc_theme"),
+            aura_tension=data.get("aura_tension"),
+            aura_last_synthesis=data.get("aura_last_synthesis"),
+            aura_arc_stage=data.get("aura_arc_stage", 0),
+            aura_dream_history=data.get("aura_dream_history", []),
             environment=environment,
         )
 

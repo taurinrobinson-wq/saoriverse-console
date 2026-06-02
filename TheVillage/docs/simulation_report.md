@@ -1,0 +1,290 @@
+# TheVillage 4-Day Simulation Report
+
+## Overview
+- The simulation ran an autonomous village loop with dream hours, waking hours, daily briefing, and randomized house decisions.
+- Days completed: 4
+- Day-level successes without local errors: 4
+- Total logged highlights: 4
+- Total logged errors: 0
+
+## Day-by-Day Chronicle
+
+### Day 1
+- Waking summary: Day 1 opened with 4 scheduled task(s) and 14 active goal(s).
+- Dream summaries:
+  - Tomas: Tomas dreamed: In a branching hallway, a unfinished blueprints began to echo softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Mira: Mira dreamed: In a library of shifting symbols, a whispering symbols began to reveal softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Edda: Edda dreamed: In a silent workshop, a fractured tiles began to vibrate softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio: Lio dreamed: In an endless stage, a looping voices began to rewrite softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Sable: Sable dreamed: In a shifting blueprint, a towers began to collapse softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Jun: Jun dreamed: In a garden that grows and dies in seconds, a water began to pulse softly as a warning bell lingered behind every movement. The scene felt calm and nearly harmonious.
+- Dream insights:
+  - Tomas: Tomas saw planning confusion in repeating routes; simplify plan branches before scaling. Arc theme 'alignment', fear 'losing the map', desire 'clean structure', tension 0.00 (low).
+  - Mira: Mira read discovery signals in the dream; explore one unknown concept with focused curiosity. Arc theme 'alignment', fear 'sealed knowledge', desire 'discovery', tension 0.00 (low).
+  - Edda: Edda read integration momentum; merge nearby tensions into one coherent thread. Arc theme 'alignment', fear 'repair paralysis', desire 'calm integrity', tension 0.00 (low).
+  - Lio: Lio detected narrative gaps where meaning is fading; restitch missing links in the story arc. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Sable: Sable saw structural weakness signals; reinforce a failing support before extending complexity. Arc theme 'alignment', fear 'foundation failure', desire 'long-horizon growth', tension 0.00 (low).
+  - Jun: Jun noticed subtle strain markers; prioritize care routines that stabilize recovery capacity. Arc theme 'warning', fear 'care exhaustion', desire 'steady warmth', tension 0.00 (low).
+- Aspirations:
+  - Tomas: I want to simplify our long-term plan.
+  - Mira: I feel drawn to explore a new unknown concept.
+  - Edda: I want to unify two conflicting goals.
+  - Lio: I want to clarify a missing part of our story.
+  - Sable: I want to reinforce a structural weakness.
+  - Jun: I want to restore our resilience.
+- Selected choices:
+  - Tomas: Run a bounded experiment to gather new signal.
+  - Mira: Run a bounded experiment to gather new signal.
+  - Edda: Pilot aspiration: align cross house plans.
+  - Lio: Pilot aspiration: align cross house plans.
+  - Sable: Prioritize low-risk stabilization.
+  - Jun: Run a bounded experiment to gather new signal.
+- Influence propagation effects:
+  - Tomas: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+  - Mira: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+  - Edda: cohesion +0.004, stress -0.001, progress +0.004, stability +0.004
+  - Lio: cohesion +0.004, stress -0.001, progress +0.004, stability +0.004
+  - Sable: cohesion +0.004, stress -0.005, progress -0.002, stability +0.003
+  - Jun: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+- Arc progression and subconscious state:
+  - Tomas: stage 0 theme alignment; fear 'losing the map', desire 'clean structure', tension 0.00
+  - Mira: stage 0 theme alignment; fear 'sealed knowledge', desire 'discovery', tension 0.00
+  - Edda: stage 0 theme alignment; fear 'repair paralysis', desire 'calm integrity', tension 0.00
+  - Lio: stage 0 theme alignment; fear 'forgotten chapters', desire 'voice alignment', tension 0.00
+  - Sable: stage 0 theme alignment; fear 'foundation failure', desire 'long-horizon growth', tension 0.00
+  - Jun: stage 0 theme warning; fear 'care exhaustion', desire 'steady warmth', tension 0.00
+- Dream influence on next-day goals:
+  - Tomas: align_cross_house_plans,pursue_long_horizon_tomas,simplify_plan_path
+  - Mira: align_cross_house_plans,pursue_long_horizon_mira,probe_unresolved_concept
+  - Edda: align_cross_house_plans,pursue_long_horizon_edda,resolve_primary_contradiction
+  - Lio: align_cross_house_plans,pursue_long_horizon_lio,clarify_missing_story_link
+  - Sable: align_cross_house_plans,pursue_long_horizon_sable,reinforce_structural_support
+  - Jun: stabilize_critical_path,pursue_long_horizon_jun,restore_resilience_reserve
+- Aura's reading:
+  - Forecast: The inner voices are converging; today is well-suited for weaving threads into a clearer whole. Aura glimpses: In a quiet pool beneath a starless sky, veils begin to pulse around the village's reflection. The psyche feels steady, carrying traces of glow, loop, repair, shadow, voice.
+  - Arc/Tension: theme=integration, tension=0.00
+  - Last synthesis: In a lantern-lit observatory, threads of light begin to converge around the village's reflection. The psyche feels steady, carrying traces of fracture, grow, loop, voice.
+  - Alignment with house behavior: Aura reading and house choices showed mixed alignment.
+- Narrative fragments:
+  - Lio dreamed: In an endless stage, a looping voices began to rewrite softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio interpreted the dream: Lio noticed repetitive framing; rewrite one recurring chapter to improve alignment. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Lio adjusted pace for hour 8 and now feels hopeful.
+  - Sable checked in with Lio to align priorities for hour 8.
+  - Day 2: The village pursued 4 task(s) in service of 'Increase internal coherence and conceptual richness over time.'. Health now rests at 70%.
+- Notable tensions or resolutions:
+  - No notable tensions were reported.
+- Global metrics: cohesion=0.926, stress=0.000, health=0.705, contradictions=0, progress=0.704
+
+### Day 2
+- Waking summary: Day 2 opened with 3 scheduled task(s) and 14 active goal(s).
+- Dream summaries:
+  - Tomas: Tomas dreamed: In a half-built tower, a maps began to stretch restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Mira: Mira dreamed: In a river of questions, a books began to reveal restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Edda: Edda dreamed: In a room of suspended shards, a woven threads began to vibrate restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio: Lio dreamed: In an endless stage, a unfinished chapters began to rewrite restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Sable: Sable dreamed: In a half-built structure, a fractals began to rebuild restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Jun: Jun dreamed: In a room filled with warm air, a gardens began to bloom restlessly as a warning bell lingered behind every movement. The scene felt calm and nearly harmonious.
+- Dream insights:
+  - Tomas: Tomas found directional clarity in the symbols; keep one coherent plan corridor for the next cycle. Arc theme 'alignment', fear 'losing the map', desire 'clean structure', tension 0.00 (low).
+  - Mira: Mira read discovery signals in the dream; explore one unknown concept with focused curiosity. Arc theme 'alignment', fear 'sealed knowledge', desire 'discovery', tension 0.00 (low).
+  - Edda: Edda saw coherence fracture signals; repair the primary contradiction before new expansion. Arc theme 'alignment', fear 'repair paralysis', desire 'calm integrity', tension 0.00 (low).
+  - Lio: Lio noticed repetitive framing; rewrite one recurring chapter to improve alignment. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Sable: Sable saw structural weakness signals; reinforce a failing support before extending complexity. Arc theme 'alignment', fear 'foundation failure', desire 'long-horizon growth', tension 0.00 (low).
+  - Jun: Jun noticed subtle strain markers; prioritize care routines that stabilize recovery capacity. Arc theme 'warning', fear 'care exhaustion', desire 'steady warmth', tension 0.00 (low).
+- Aspirations:
+  - Tomas: I want to simplify our long-term plan.
+  - Mira: I feel drawn to explore a new unknown concept.
+  - Edda: I want to unify two conflicting goals.
+  - Lio: I want to clarify a missing part of our story.
+  - Sable: I want to reinforce a structural weakness.
+  - Jun: I want to restore our resilience.
+- Selected choices:
+  - Tomas: Pilot aspiration: align cross house plans.
+  - Mira: Coordinate with one neighboring house before acting.
+  - Edda: Coordinate with one neighboring house before acting.
+  - Lio: Run a bounded experiment to gather new signal.
+  - Sable: Prioritize low-risk stabilization.
+  - Jun: Coordinate with one neighboring house before acting.
+- Influence propagation effects:
+  - Tomas: cohesion +0.004, stress -0.001, progress +0.004, stability +0.004
+  - Mira: cohesion +0.005, stress -0.002, progress +0.002, stability +0.003
+  - Edda: cohesion +0.005, stress -0.002, progress +0.002, stability +0.003
+  - Lio: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+  - Sable: cohesion +0.004, stress -0.005, progress -0.002, stability +0.003
+  - Jun: cohesion +0.005, stress -0.002, progress +0.002, stability +0.003
+- Arc progression and subconscious state:
+  - Tomas: stage 1 theme alignment; fear 'losing the map', desire 'clean structure', tension 0.00
+  - Mira: stage 1 theme alignment; fear 'sealed knowledge', desire 'discovery', tension 0.00
+  - Edda: stage 1 theme alignment; fear 'repair paralysis', desire 'calm integrity', tension 0.00
+  - Lio: stage 1 theme alignment; fear 'forgotten chapters', desire 'voice alignment', tension 0.00
+  - Sable: stage 1 theme alignment; fear 'foundation failure', desire 'long-horizon growth', tension 0.00
+  - Jun: stage 1 theme warning; fear 'care exhaustion', desire 'steady warmth', tension 0.00
+- Dream influence on next-day goals:
+  - Tomas: align_cross_house_plans,pursue_long_horizon_tomas,simplify_plan_path
+  - Mira: align_cross_house_plans,pursue_long_horizon_mira,probe_unresolved_concept
+  - Edda: align_cross_house_plans,pursue_long_horizon_edda,resolve_primary_contradiction
+  - Lio: align_cross_house_plans,pursue_long_horizon_lio,clarify_missing_story_link
+  - Sable: align_cross_house_plans,pursue_long_horizon_sable,reinforce_structural_support
+  - Jun: stabilize_critical_path,pursue_long_horizon_jun,restore_resilience_reserve
+- Aura's reading:
+  - Forecast: The inner voices are converging; today is well-suited for weaving threads into a clearer whole. Aura glimpses: In a lantern-lit observatory, threads of light begin to converge around the village's reflection. The psyche feels steady, carrying traces of fracture, grow, loop, voice.
+  - Arc/Tension: theme=integration, tension=0.00
+  - Last synthesis: In a circle of stones humming softly, lanterns begin to dissolve around the village's reflection. The psyche feels steady, carrying traces of quiet, unspoken themes.
+  - Alignment with house behavior: Aura reading and house choices showed mixed alignment.
+- Narrative fragments:
+  - Lio dreamed: In an endless stage, a unfinished chapters began to rewrite restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio interpreted the dream: Lio noticed repetitive framing; rewrite one recurring chapter to improve alignment. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Lio adjusted pace for hour 8 and now feels hopeful.
+  - Day 3: The village pursued 3 task(s) in service of 'Increase internal coherence and conceptual richness over time.'. Health now rests at 77%.
+- Notable tensions or resolutions:
+  - No notable tensions were reported.
+- Global metrics: cohesion=0.946, stress=0.010, health=0.770, contradictions=0, progress=1.000
+
+### Day 3
+- Waking summary: Day 3 opened with 3 scheduled task(s) and 14 active goal(s).
+- Dream summaries:
+  - Tomas: Tomas dreamed: In a foggy crossroads, a bridges began to tilt restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Mira: Mira dreamed: In a library of shifting symbols, a books began to glow restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Edda: Edda dreamed: In a hall of mirrored contradictions, a knots began to freeze restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio: Lio dreamed: In an endless stage, a ink began to loop restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Sable: Sable dreamed: In a half-built structure, a fractals began to spiral restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Jun: Jun dreamed: In a room filled with warm air, a gardens began to wilt restlessly as a warning bell lingered behind every movement. The scene felt calm and nearly harmonious.
+- Dream insights:
+  - Tomas: Tomas found directional clarity in the symbols; keep one coherent plan corridor for the next cycle. Arc theme 'alignment', fear 'losing the map', desire 'clean structure', tension 0.00 (low).
+  - Mira: Mira read discovery signals in the dream; explore one unknown concept with focused curiosity. Arc theme 'alignment', fear 'sealed knowledge', desire 'discovery', tension 0.00 (low).
+  - Edda: Edda sensed subtle instability; tighten coherence checks across the village core. Arc theme 'alignment', fear 'repair paralysis', desire 'calm integrity', tension 0.00 (low).
+  - Lio: Lio noticed repetitive framing; rewrite one recurring chapter to improve alignment. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Sable: Sable sensed latent potential; rebuild one foundation to support long-horizon growth. Arc theme 'alignment', fear 'foundation failure', desire 'long-horizon growth', tension 0.00 (low).
+  - Jun: Jun read recovery momentum; protect restorative rhythms while energy is available. Arc theme 'warning', fear 'care exhaustion', desire 'steady warmth', tension 0.00 (low).
+- Aspirations:
+  - Tomas: I want to simplify our long-term plan.
+  - Mira: I feel drawn to explore a new unknown concept.
+  - Edda: I want to unify two conflicting goals.
+  - Lio: I want to clarify a missing part of our story.
+  - Sable: I want to reinforce a structural weakness.
+  - Jun: I want to restore our resilience.
+- Selected choices:
+  - Tomas: Prioritize low-risk stabilization.
+  - Mira: Run a bounded experiment to gather new signal.
+  - Edda: Coordinate with one neighboring house before acting.
+  - Lio: Pilot aspiration: align cross house plans.
+  - Sable: Prioritize low-risk stabilization.
+  - Jun: Run a bounded experiment to gather new signal.
+- Influence propagation effects:
+  - Tomas: cohesion +0.004, stress -0.005, progress -0.002, stability +0.003
+  - Mira: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+  - Edda: cohesion +0.005, stress -0.002, progress +0.002, stability +0.003
+  - Lio: cohesion +0.004, stress -0.001, progress +0.004, stability +0.004
+  - Sable: cohesion +0.004, stress -0.005, progress -0.002, stability +0.003
+  - Jun: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+- Arc progression and subconscious state:
+  - Tomas: stage 2 theme alignment; fear 'losing the map', desire 'clean structure', tension 0.00
+  - Mira: stage 2 theme alignment; fear 'sealed knowledge', desire 'discovery', tension 0.00
+  - Edda: stage 2 theme alignment; fear 'repair paralysis', desire 'calm integrity', tension 0.00
+  - Lio: stage 2 theme alignment; fear 'forgotten chapters', desire 'voice alignment', tension 0.00
+  - Sable: stage 2 theme alignment; fear 'foundation failure', desire 'long-horizon growth', tension 0.00
+  - Jun: stage 2 theme warning; fear 'care exhaustion', desire 'steady warmth', tension 0.00
+- Dream influence on next-day goals:
+  - Tomas: align_cross_house_plans,pursue_long_horizon_tomas,simplify_plan_path
+  - Mira: align_cross_house_plans,pursue_long_horizon_mira,probe_unresolved_concept
+  - Edda: align_cross_house_plans,pursue_long_horizon_edda,resolve_primary_contradiction
+  - Lio: align_cross_house_plans,pursue_long_horizon_lio,clarify_missing_story_link
+  - Sable: align_cross_house_plans,pursue_long_horizon_sable,reinforce_structural_support
+  - Jun: stabilize_critical_path,pursue_long_horizon_jun,restore_resilience_reserve
+- Aura's reading:
+  - Forecast: The inner voices are converging; today is well-suited for weaving threads into a clearer whole. Aura glimpses: In a circle of stones humming softly, lanterns begin to dissolve around the village's reflection. The psyche feels steady, carrying traces of quiet, unspoken themes.
+  - Arc/Tension: theme=integration, tension=0.00
+  - Last synthesis: In a field of drifting embers, threads of light begin to reveal around the village's reflection. The psyche feels steady, carrying traces of glow, loop, wilt.
+  - Alignment with house behavior: Aura reading and house choices showed mixed alignment.
+- Narrative fragments:
+  - Lio dreamed: In an endless stage, a ink began to loop restlessly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio interpreted the dream: Lio noticed repetitive framing; rewrite one recurring chapter to improve alignment. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Lio adjusted pace for hour 8 and now feels hopeful.
+  - Day 4: The village pursued 3 task(s) in service of 'Increase internal coherence and conceptual richness over time.'. Health now rests at 77%.
+- Notable tensions or resolutions:
+  - No notable tensions were reported.
+- Global metrics: cohesion=0.958, stress=0.000, health=0.770, contradictions=0, progress=1.000
+
+### Day 4
+- Waking summary: Day 4 opened with 3 scheduled task(s) and 14 active goal(s).
+- Dream summaries:
+  - Tomas: Tomas dreamed: In a branching hallway, a forking paths began to rearrange violently until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Mira: Mira dreamed: In a river of questions, a whispering symbols began to whisper violently until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Edda: Edda dreamed: In a silent workshop, a cracked pottery began to freeze violently until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio: Lio dreamed: In an endless stage, a ink began to unravel violently until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Sable: Sable dreamed: In a field of rising pillars, a towers began to spiral violently until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Jun: Jun dreamed: In a room filled with warm air, a water began to brighten violently as a warning bell lingered behind every movement. The scene felt calm and nearly harmonious.
+- Dream insights:
+  - Tomas: Tomas found directional clarity in the symbols; keep one coherent plan corridor for the next cycle. Arc theme 'alignment', fear 'losing the map', desire 'clean structure', tension 0.00 (low).
+  - Mira: Mira read discovery signals in the dream; explore one unknown concept with focused curiosity. Arc theme 'alignment', fear 'sealed knowledge', desire 'discovery', tension 0.00 (low).
+  - Edda: Edda sensed subtle instability; tighten coherence checks across the village core. Arc theme 'alignment', fear 'repair paralysis', desire 'calm integrity', tension 0.00 (low).
+  - Lio: Lio noticed repetitive framing; rewrite one recurring chapter to improve alignment. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Sable: Sable read mixed architecture pressure; inspect core supports before new design moves. Arc theme 'alignment', fear 'foundation failure', desire 'long-horizon growth', tension 0.00 (low).
+  - Jun: Jun sensed depletion in the dream; restore resilience reserves before stress rises. Arc theme 'warning', fear 'care exhaustion', desire 'steady warmth', tension 0.00 (low).
+- Aspirations:
+  - Tomas: I want to simplify our long-term plan.
+  - Mira: I feel drawn to explore a new unknown concept.
+  - Edda: I want to unify two conflicting goals.
+  - Lio: I want to clarify a missing part of our story.
+  - Sable: I want to reinforce a structural weakness.
+  - Jun: I want to restore our resilience.
+- Selected choices:
+  - Tomas: Run a bounded experiment to gather new signal.
+  - Mira: Pilot aspiration: align cross house plans.
+  - Edda: Run a bounded experiment to gather new signal.
+  - Lio: Pilot aspiration: align cross house plans.
+  - Sable: Coordinate with one neighboring house before acting.
+  - Jun: Coordinate with one neighboring house before acting.
+- Influence propagation effects:
+  - Tomas: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+  - Mira: cohesion +0.004, stress -0.001, progress +0.004, stability +0.004
+  - Edda: cohesion -0.002, stress +0.004, progress +0.006, stability -0.001
+  - Lio: cohesion +0.004, stress -0.001, progress +0.004, stability +0.004
+  - Sable: cohesion +0.005, stress -0.002, progress +0.002, stability +0.003
+  - Jun: cohesion +0.005, stress -0.002, progress +0.002, stability +0.003
+- Arc progression and subconscious state:
+  - Tomas: stage 3 theme alignment; fear 'losing the map', desire 'clean structure', tension 0.00
+  - Mira: stage 3 theme alignment; fear 'sealed knowledge', desire 'discovery', tension 0.00
+  - Edda: stage 3 theme alignment; fear 'repair paralysis', desire 'calm integrity', tension 0.00
+  - Lio: stage 3 theme alignment; fear 'forgotten chapters', desire 'voice alignment', tension 0.00
+  - Sable: stage 3 theme alignment; fear 'foundation failure', desire 'long-horizon growth', tension 0.00
+  - Jun: stage 3 theme warning; fear 'care exhaustion', desire 'steady warmth', tension 0.00
+- Dream influence on next-day goals:
+  - Tomas: align_cross_house_plans,pursue_long_horizon_tomas,simplify_plan_path
+  - Mira: align_cross_house_plans,pursue_long_horizon_mira,probe_unresolved_concept
+  - Edda: align_cross_house_plans,pursue_long_horizon_edda,resolve_primary_contradiction
+  - Lio: align_cross_house_plans,pursue_long_horizon_lio,clarify_missing_story_link
+  - Sable: align_cross_house_plans,pursue_long_horizon_sable,reinforce_structural_support
+  - Jun: stabilize_critical_path,pursue_long_horizon_jun,restore_resilience_reserve
+- Aura's reading:
+  - Forecast: The inner voices are converging; today is well-suited for weaving threads into a clearer whole. Aura glimpses: In a field of drifting embers, threads of light begin to reveal around the village's reflection. The psyche feels steady, carrying traces of glow, loop, wilt.
+  - Arc/Tension: theme=integration, tension=0.00
+  - Last synthesis: In a wind-carved shrine at the village edge, spirals begin to pulse around the village's reflection. The psyche feels steady, carrying traces of quiet, unspoken themes.
+  - Alignment with house behavior: Aura reading and house choices showed mixed alignment.
+- Narrative fragments:
+  - Lio dreamed: In an endless stage, a ink began to unravel violently until scattered pieces briefly matched. The scene felt calm and nearly harmonious.
+  - Lio interpreted the dream: Lio felt the story can align further; narrate one clear throughline across the houses. Arc theme 'alignment', fear 'forgotten chapters', desire 'voice alignment', tension 0.00 (low).
+  - Lio adjusted pace for hour 8 and now feels hopeful.
+  - Day 5: The village pursued 3 task(s) in service of 'Increase internal coherence and conceptual richness over time.'. Health now rests at 77%.
+- Notable tensions or resolutions:
+  - No notable tensions were reported.
+- Global metrics: cohesion=0.971, stress=0.000, health=0.770, contradictions=0, progress=1.000
+
+## System Behavior Analysis
+- What worked well: Dream-to-brief handoff remained consistent and all houses received four guidance options daily.
+- What broke or behaved unexpectedly: Minor drift bursts can briefly increase stress during experimentation-heavy days.
+- Emergent patterns: Coordinating and long-horizon choices tended to improve cohesion over repeated cycles.
+- Cross-villager interactions: Planner/stability moves often dampened stress after curiosity-driven exploration.
+- Dream-to-goal coherence: Night insights consistently shaped next-day framing and aspiration phrasing.
+
+## Conclusion
+- Overall stability: The village remained operational across day/night transitions.
+- Personality drift: Mild role-consistent drift appeared, with each house reinforcing its specialty.
+- Long-horizon tendencies: Long-horizon choices gradually supported coherence and mission continuity.
+- Suggested next improvements: Add per-house influence memory and compare random policy vs. guided policy over longer runs.
+
+## Highlights
+- Day 1: health held at 0.70 with cohesion 0.93.
+- Day 2: health held at 0.77 with cohesion 0.95.
+- Day 3: health held at 0.77 with cohesion 0.96.
+- Day 4: health held at 0.77 with cohesion 0.97.

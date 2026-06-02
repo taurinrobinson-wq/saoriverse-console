@@ -30,8 +30,14 @@ def _capsule_path(session_id: str) -> Path:
 def load_state(session_id: str) -> InternalState:
     path = _session_path(session_id)
     if not path.exists():
-        return InternalState(session_id=session_id)
+        return InternalState(session_id=session_id, current_hour=8)
     payload = json.loads(path.read_text(encoding="utf-8"))
+    payload.setdefault("current_hour", 8)
+    for villager_data in (payload.get("villager_states") or {}).values():
+        brief = villager_data.get("house_brief")
+        if isinstance(brief, dict):
+            brief.setdefault("dream_insight", None)
+            brief.setdefault("aspiration", None)
     return InternalState.from_dict(payload)
 
 
