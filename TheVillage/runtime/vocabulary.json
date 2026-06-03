@@ -249,6 +249,26 @@
       "definition": "an intervening time : interval",
       "source": "merriam_webster",
       "confidence": 0.7
+    },
+    "doubt": {
+      "definition": "to call into question the truth of : to be uncertain or in doubt about",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "more": {
+      "definition": "greater",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "dynamic": {
+      "definition": "marked by usually continuous and productive activity or change",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "like": {
+      "definition": "to feel attraction toward or take pleasure in : enjoy",
+      "source": "merriam_webster",
+      "confidence": 0.7
     }
   }
 }

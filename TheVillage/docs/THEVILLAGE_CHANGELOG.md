@@ -22,6 +22,69 @@ Use this log to track:
 
 ---
 
+## 2026-06-02 - Step 2: Election and Scoring Logic Implemented
+- Summary: Implemented governance election flow with functional fitness scoring and ranked-choice runoff.
+- Scope: `governance.py`, elections routing.
+- User impact: Leader selection now reflects live system needs instead of static max-score selection.
+- Technical details:
+- Added `governance.compute_leadership_score(villager, context)` with weighted coherence, role strength, needs vector, emotional field, mission alignment, and reward trend.
+- Added `governance.run_ranked_choice_election()` with majority detection and elimination rounds.
+- Added `governance.needs_vector` update flow to rebalance candidate fitness based on village conditions.
+- Validation: Governance and evolution mode tests passing.
+- Follow-up: Continue tuning weights for long-horizon stabilization under prolonged crisis.
+
+## 2026-06-02 - Step 3: Crisis and Revalidation Flows Wired
+- Summary: Connected crisis leadership transfer and legitimacy revalidation to the new governance model.
+- Scope: Mind orchestration, governance triggers, elections mode integration.
+- User impact: Crisis transfer now selects interim leadership functionally, while legitimacy failure can trigger revalidation elections automatically.
+- Technical details:
+- Added crisis override path and non-counting crisis election handling.
+- Added `governance.trigger_revalidation_if_needed()` checks for legitimacy drop, dispute, crisis escalation, and recovery shifts.
+- Added dispute resolution timing telemetry hook.
+- Validation: Crisis -> election -> revalidation paths covered by governance tests.
+- Follow-up: Add UI surfacing for active revalidation state.
+
+## 2026-06-02 - Step 4: HouseBrief Governance Override Applied
+- Summary: Added governance-aware house brief override layer during leadership transition and crisis.
+- Scope: `HouseBrief` model and villager crisis brief generation.
+- User impact: House prompts now adapt during transitions with clearer governance-safe framing and transition-sensitive guidance.
+- Technical details:
+- Implemented `house_brief.apply_governance_override()`.
+- Applied crisis transition context and legitimacy-aware downstream impacts.
+- Preserved role-specific handoff/authority guidance while applying governance context.
+- Validation: Model tests confirm crisis house briefs still include role-specific handoff semantics.
+- Follow-up: Add richer per-role override variants for late-stage stabilization.
+
+## 2026-06-02 - Step 5: Governance Telemetry Added
+- Summary: Added governance telemetry tracking for leadership cadence, legitimacy, crisis load, and cohesion effects.
+- Scope: Governance state synchronization and telemetry updates.
+- User impact: Governance behavior is now auditable and measurable over time.
+- Technical details:
+- Added telemetry under `telemetry.governance.*` including term durations, consecutive terms, cooldowns, legitimacy history, crisis frequency, dispute resolution time, coherence impact, and internality growth indicators.
+- Added synchronization between runtime governance metadata and persisted `governance` state fields.
+- Validation: Governance regression tests verify telemetry presence and update behavior.
+- Follow-up: Add chartable API output slices for telemetry consumers.
+
+## 2026-06-02 - Step 6: Governance Regression Suite Added
+- Summary: Added dedicated regression coverage for governance charter behavior.
+- Scope: New test module and cross-mode validation.
+- User impact: Reduced risk of silent regressions in term policy, crisis transfer, and legitimacy logic.
+- Technical details:
+- Added `TheVillage/tests/test_governance.py` covering term limits/cooldowns, crisis non-counting elections, revalidation triggers, needs-vector scoring response, non-adversarial crisis language, and crisis->election->stabilization loop.
+- Validation: Test module executed in CI-style local run.
+- Follow-up: Add parameterized tests for extended term sequences and edge-case cooldown rollover.
+
+## 2026-06-02 - Step 7: Full Validation and Regression Fix
+- Summary: Ran full TheVillage test suite, fixed one guidance-override regression, and revalidated.
+- Scope: Full test suite plus targeted model patch.
+- User impact: Ensures governance override does not erase role-specific handoff/authority guidance during crisis.
+- Technical details:
+- Initial full run found one failure in `test_model.py` leadership crisis guidance expectations.
+- Patched `HouseBrief.apply_governance_override()` to keep existing transition-context guidance (handoff/authority/legitimacy/revalidation) and only apply generic override when missing.
+- Final full suite result: all tests passing.
+- Validation: `pytest TheVillage/tests -q` -> 39 passed.
+- Follow-up: Keep this regression in place as a guard for future governance prompt refactors.
+
 ## 2026-06-02 - Humane Governance Charter Model (Terms, Ranked-Choice, Revalidation, Telemetry)
 - Summary: Implemented a stable, development-oriented governance charter that rotates leadership functionally, enforces anti-stagnation limits, and handles crisis/dispute/revalidation without adversarial framing.
 - Scope: Governance module, elections mode, core state model, mind orchestration, house-brief behavior, telemetry wiring, and regression coverage.

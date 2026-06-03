@@ -140,7 +140,12 @@ class HouseBrief:
             self.influence_strength = clamp_01(self.influence_strength + 0.08)
             if "leadership" not in self.problem_statement.lower():
                 self.problem_statement = f"Leadership transition pressure is active. {self.problem_statement}"
-            if "transition" not in self.guidance_request.lower():
+            guidance_lower = self.guidance_request.lower()
+            has_transition_context = any(
+                token in guidance_lower
+                for token in ("transition", "handoff", "authority", "legitimacy", "revalidation")
+            )
+            if not has_transition_context:
                 self.guidance_request = "Which guidance option best supports safe leadership transition and mission continuity?"
             if legitimacy < 0.5:
                 self.downstream_impacts.append("Can restore leadership legitimacy and reduce contradiction pressure.")
