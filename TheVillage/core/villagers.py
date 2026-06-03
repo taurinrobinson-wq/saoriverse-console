@@ -479,6 +479,80 @@ class Villager:
         if brief.dream_insight:
             brief.guidance_request = "Which option best honors the dream signal while preserving cohesion?"
 
+    def _apply_crisis_brief_context(self, state: InternalState, brief: HouseBrief) -> None:
+        crisis_kind = str(state.evolution_meta.get("active_crisis") or "")
+        if crisis_kind != "leadership":
+            return
+
+        affected = str(state.evolution_meta.get("affected_villager") or "Tomas")
+        interim = str(state.evolution_meta.get("interim_leader") or state.executive_function or "Tomas")
+        recovery = str(state.evolution_meta.get("recovery_status") or "acute")
+        dispute = bool(state.evolution_meta.get("leadership_dispute"))
+        revalidation = bool(state.evolution_meta.get("leadership_revalidation"))
+        candidate_review = state.evolution_meta.get("candidate_review_list")
+        candidate_review_list = candidate_review if isinstance(candidate_review, list) else []
+        candidates = [str(name) for name in candidate_review_list if isinstance(name, str) and name]
+        candidate_text = ", ".join(candidates) if candidates else "Edda, Sable, Lio, Jun, Mira"
+
+        brief.house_goal = "Maintain village continuity through leadership turbulence."
+        brief.problem_statement = (
+            f"Leadership crisis is active: {affected} is {recovery}, interim authority is {interim}, "
+            f"and trust volatility is elevated."
+        )
+        if dispute:
+            brief.problem_statement += " Interpersonal friction is rising over who should retain executive authority."
+        if revalidation:
+            brief.problem_statement += (
+                " Election outcomes are being reinterpreted, with doubts about whether the current leader best serves "
+                "coherence and internality growth."
+            )
+
+        brief.guidance_request = "What action best de-risks leadership transition right now?"
+        brief.choices = [
+            "Stabilize core operations and pause non-critical experiments.",
+            "Pair interim leadership with a cross-house counterbalance check.",
+            "Run an open leadership check-in to reduce rumor and uncertainty.",
+            "Expand recovery support while preparing a contingency succession path.",
+        ]
+        brief.downstream_impacts = [
+            "Changes short-term trust and leadership legitimacy.",
+            "Alters contradiction pressure and disruption sensitivity.",
+        ]
+        if revalidation:
+            brief.guidance_request = "How should leadership legitimacy be revalidated against the core mission?"
+            brief.choices[-1] = f"Run a transparent leadership fitness review across {candidate_text}."
+            brief.downstream_impacts.append(
+                "Can improve mission-fit clarity for coherence and self-understanding outcomes."
+            )
+
+        if self.name == affected:
+            brief.house_goal = "Recover capacity and transfer planning context without system shock."
+            brief.guidance_request = "How should recovery and authority handoff be paced for safety and legitimacy?"
+            brief.choices = [
+                "Report current capacity limits transparently.",
+                "Delegate mission-critical decisions while recovering.",
+                "Request caretaker oversight on workload and stress.",
+                "Propose a time-bounded path to reassess leadership readiness.",
+            ]
+
+        if self.name == interim:
+            brief.house_goal = "Lead the village through emergency transition while preserving legitimacy."
+            brief.guidance_request = "How should interim authority be exercised to prevent a secondary fracture?"
+            brief.choices = [
+                "Declare a clear interim mandate and review window.",
+                "Create transparent decision logs for all houses.",
+                "Invite narrator and caretaker into leadership check-ins.",
+                "Commit to a formal revalidation election before long-term transfer.",
+            ]
+            if revalidation:
+                brief.guidance_request = "How should interim authority stay legitimate while leadership fitness is re-checked?"
+                brief.choices[-1] = f"Open a mission-fit review that includes {candidate_text}."
+
+        if dispute:
+            brief.choices[-1] = "Initiate mediated leadership settlement before conflict escalates."
+        if dispute and revalidation:
+            brief.choices[-1] = "Initiate mediated settlement plus a time-bounded revalidation election."
+
     def refresh_house_brief(self, state: InternalState, environment: EnvironmentState) -> None:
         villager_state = self.ensure_state(state)
         brief = villager_state.house_brief
@@ -491,6 +565,7 @@ class Villager:
             "Feeds into next cycle cohesion updates.",
         ]
         self._apply_dream_brief_bias(villager_state, brief)
+        self._apply_crisis_brief_context(state, brief)
         brief.last_updated_turn = state.turn_index
 
     def propose_tasks(self, state: InternalState, environment: EnvironmentState) -> List[Task]:
@@ -542,6 +617,15 @@ class Villager:
         drift = random.uniform(-0.02, 0.03)
         villager_state.reward_trend = max(-1.0, min(1.0, villager_state.reward_trend + drift))
         villager_state.mood = derive_mood(villager_state.reward_trend, state.health_metrics.global_health)
+        if str(state.evolution_meta.get("active_crisis") or "") == "leadership":
+            if self.name in {
+                str(state.evolution_meta.get("affected_villager") or ""),
+                str(state.evolution_meta.get("interim_leader") or ""),
+            }:
+                if villager_state.mood == "hopeful":
+                    villager_state.mood = "steady"
+            elif villager_state.mood == "hopeful" and random.random() < 0.35:
+                villager_state.mood = "steady"
         return f"{self.name} adjusted pace for hour {state.current_hour} and now feels {villager_state.mood}."
 
 
@@ -596,6 +680,7 @@ class PlannerVillager(Villager):
             "Affects coherence and goal progress rates.",
         ]
         self._apply_dream_brief_bias(villager_state, brief)
+        self._apply_crisis_brief_context(state, brief)
 
     def interpret_dream(self, dream_text: str) -> str:
         lowered = dream_text.lower()
@@ -667,6 +752,7 @@ class CuriosityVillager(Villager):
             "Can lower contradiction pressure in later cycles.",
         ]
         self._apply_dream_brief_bias(villager_state, brief)
+        self._apply_crisis_brief_context(state, brief)
 
     def interpret_dream(self, dream_text: str) -> str:
         lowered = dream_text.lower()
@@ -749,6 +835,7 @@ class StabilityVillager(Villager):
             "Changes perceived safety for caretaker behaviors.",
         ]
         self._apply_dream_brief_bias(villager_state, brief)
+        self._apply_crisis_brief_context(state, brief)
 
     def interpret_dream(self, dream_text: str) -> str:
         lowered = dream_text.lower()
@@ -807,6 +894,7 @@ class NarratorVillager(Villager):
             "Stabilizes mission continuity across day/night transitions.",
         ]
         self._apply_dream_brief_bias(villager_state, brief)
+        self._apply_crisis_brief_context(state, brief)
 
     def interpret_dream(self, dream_text: str) -> str:
         lowered = dream_text.lower()
@@ -877,6 +965,7 @@ class ArchitectVillager(Villager):
             "Can amplify or dampen subsystem disagreement.",
         ]
         self._apply_dream_brief_bias(villager_state, brief)
+        self._apply_crisis_brief_context(state, brief)
 
     def interpret_dream(self, dream_text: str) -> str:
         lowered = dream_text.lower()
@@ -950,6 +1039,7 @@ class CaretakerVillager(Villager):
             "Constrains how aggressively other houses can explore.",
         ]
         self._apply_dream_brief_bias(villager_state, brief)
+        self._apply_crisis_brief_context(state, brief)
 
     def interpret_dream(self, dream_text: str) -> str:
         lowered = dream_text.lower()

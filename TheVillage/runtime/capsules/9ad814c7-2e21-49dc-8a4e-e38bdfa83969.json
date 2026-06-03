@@ -1,0 +1,62 @@
+[
+  {
+    "symbolic_tags": [
+      "identity_pressure"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.28",
+    "user_input": "Tomas has fallen ill and a new temporary leader needs to be elected. There may be some dispute about who the leader should be.",
+    "response_summary": "The village is carrying continuity through turn 1 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment registered an ambiguous action and produced a weak signal. The library expanded with definitions for: elected, leader, temporary. The village's reward signal is +0.28.",
+    "timestamp": "2026-06-03T02:04:05.535730+00:00"
+  },
+  {
+    "symbolic_tags": [
+      "low_signal"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.35",
+    "user_input": "Tomas is recovering but refuses to fully step back, and Edda does not want to give up leadership.",
+    "response_summary": "The village is carrying continuity through turn 2 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The library expanded with definitions for: fully, recovering, refuses. The village's reward signal is +0.35.",
+    "timestamp": "2026-06-03T02:17:49.917716+00:00"
+  },
+  {
+    "symbolic_tags": [
+      "low_signal"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.11",
+    "user_input": "Tomas has fallen ill and needs someone to take over leadership.",
+    "response_summary": "The village is carrying continuity through turn 3 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village's reward signal is +0.11.",
+    "timestamp": "2026-06-03T02:18:10.913630+00:00"
+  },
+  {
+    "symbolic_tags": [
+      "low_signal"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.11",
+    "user_input": "Tomas is recovering but does not want to give up leadership.",
+    "response_summary": "The village is carrying continuity through turn 4 at hour 08. The loudest voice in the square is protector, and the village is leaning toward negotiate_leadership_settlement. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village found terms it does not yet understand: does. The village's reward signal is +0.11.",
+    "timestamp": "2026-06-03T02:19:05.197236+00:00"
+  },
+  {
+    "symbolic_tags": [
+      "low_signal"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.10",
+    "user_input": "Tomas has fallen ill and needs someone to take over leadership.",
+    "response_summary": "The village is carrying continuity through turn 5 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village's reward signal is +0.10.",
+    "timestamp": "2026-06-03T02:26:51.179272+00:00"
+  },
+  {
+    "symbolic_tags": [
+      "care"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.18",
+    "user_input": "Tomas is now recovering, but Edda does not want to give up leadership. The election results raised doubts that a more dynamic leader like Sable, Lio, Jun, or Mira might better help the village realize its goal.",
+    "response_summary": "The village is carrying continuity through turn 6 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The caretaking houses are trying to preserve connection and care. The village found terms it does not yet understand: edda, does. The library expanded with definitions for: raised. The village's reward signal is +0.18.",
+    "timestamp": "2026-06-03T02:26:52.097112+00:00"
+  }
+]

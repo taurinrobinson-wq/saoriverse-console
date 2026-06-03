@@ -43,6 +43,65 @@ class TestTheVillage(unittest.TestCase):
         self.assertIn("sonder", result.state.known_terms)
         self.assertGreater(result.state.reward_signal, -1.0)
 
+    def test_leadership_crisis_changes_state_beyond_log(self):
+        engine = get_or_create_engine("thevillage-test")
+        result = engine.interact(
+            "Tomas has fallen ill and needs someone to take over leadership.",
+            action="observe",
+        )
+
+        goal_names = {goal.name for goal in result.state.active_goals}
+        self.assertIn("stabilize_leadership_transition", goal_names)
+        self.assertEqual(result.state.evolution_mode, "elections")
+        self.assertTrue(any("Crisis protocol activated" in line for line in result.state.recent_events))
+        self.assertIn(result.state.executive_function, {villager.name for villager in engine.villagers})
+
+        tomas_brief = result.state.villager_states["Tomas"].house_brief
+        self.assertIn("Recover capacity", tomas_brief.house_goal)
+        self.assertTrue(
+            "handoff" in tomas_brief.guidance_request.lower()
+            or "authority" in tomas_brief.guidance_request.lower()
+        )
+        self.assertTrue(any("delegate mission-critical" in choice.lower() for choice in tomas_brief.choices))
+
+        interim = result.state.executive_function
+        interim_brief = result.state.villager_states[interim].house_brief
+        self.assertTrue("interim" in interim_brief.house_goal.lower() or "lead" in interim_brief.house_goal.lower())
+
+    def test_leadership_dispute_phrase_escalates_active_crisis(self):
+        engine = get_or_create_engine("thevillage-test")
+        engine.interact("Tomas has fallen ill and leadership must be transferred.", action="observe")
+        result = engine.interact(
+            "Tomas is recovering but does not want to give up leadership.",
+            action="observe",
+        )
+
+        self.assertTrue(bool(result.state.evolution_meta.get("leadership_dispute")))
+        self.assertIn("negotiate_leadership_settlement", {goal.name for goal in result.state.active_goals})
+        self.assertTrue(any("dispute" in line.lower() for line in result.state.recent_events))
+
+    def test_edda_refusal_and_election_doubt_trigger_revalidation(self):
+        engine = get_or_create_engine("thevillage-test")
+        engine.interact("Tomas has fallen ill and needs someone to take over leadership.", action="observe")
+        result = engine.interact(
+            (
+                "Tomas is now recovering, but Edda does not want to give up leadership. "
+                "The election results raised doubts that a more dynamic leader like Sable, Lio, Jun, or Mira might "
+                "better help the village realize its goal."
+            ),
+            action="observe",
+        )
+
+        self.assertTrue(bool(result.state.evolution_meta.get("leadership_dispute")))
+        self.assertEqual(result.state.evolution_meta.get("disputing_actor"), "Edda")
+        self.assertTrue(bool(result.state.evolution_meta.get("leadership_revalidation")))
+        self.assertIn("revalidate_leadership_mandate", {goal.name for goal in result.state.active_goals})
+        self.assertIn("compare_leadership_candidates", {goal.name for goal in result.state.active_goals})
+        review_data = result.state.evolution_meta.get("candidate_review_list")
+        review_list = review_data if isinstance(review_data, list) else []
+        self.assertTrue(all(name in review_list for name in ["Edda", "Sable", "Lio", "Jun", "Mira"]))
+        self.assertTrue(any("legitimacy review" in line.lower() for line in result.state.recent_events))
+
     def test_daily_tick_executes_ranked_tasks(self):
         state = InternalState(session_id="thevillage-test")
         state.vocabulary_questions = [{"term": "quoralen", "question": "What does quoralen mean?", "reason": "unknown_term"}]

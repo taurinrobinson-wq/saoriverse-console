@@ -1,0 +1,22 @@
+[
+  {
+    "symbolic_tags": [
+      "low_signal"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.30",
+    "user_input": "Tomas has fallen ill and needs someone to take over leadership.",
+    "response_summary": "The village is carrying continuity through turn 1 at hour 08. The loudest voice in the square is protector, and the village is leaning toward improve_world_model. The environment reports: The environment registered an ambiguous action and produced a weak signal. The library expanded with definitions for: fallen, needs, tomas. The village's reward signal is +0.30.",
+    "timestamp": "2026-06-03T01:54:14.129750+00:00"
+  },
+  {
+    "symbolic_tags": [
+      "low_signal"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.29",
+    "user_input": "Tomas has fallen ill and needs someone to take over leadership.",
+    "response_summary": "The village is carrying continuity through turn 2 at hour 08. The loudest voice in the square is protector, and the village is leaning toward improve_world_model. The environment reports: The environment registered an ambiguous action and produced a weak signal. The library expanded with definitions for: over, someone, take. The village's reward signal is +0.29.",
+    "timestamp": "2026-06-03T01:55:59.831381+00:00"
+  }
+]

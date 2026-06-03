@@ -579,6 +579,18 @@ MAIN_TEMPLATE = """
                     <label for="actionText">Action</label>
                     <input id="actionText" placeholder="observe, ask, approach, rest, define..." />
                 </div>
+                <div class="row">
+                    <label for="modeSelect">Evolution Mode</label>
+                    <div class="mini-grid" style="grid-template-columns: 1fr auto; gap: 8px;">
+                        <select id="modeSelect">
+                            <option value="homeostasis">Homeostasis</option>
+                            <option value="disruption">Disruption</option>
+                            <option value="elections">Elections</option>
+                        </select>
+                        <button type="button" class="ghost-btn" onclick="setEvolutionMode()">Apply Mode</button>
+                    </div>
+                    <p id="modeStatus" class="muted" style="margin: 6px 0 0;">Mode: homeostasis · Leader: Tomas</p>
+                </div>
                 <button onclick="interact()">Send To Village</button>
                 <button class="ghost-btn" onclick="runDailyCycle()">Run One Day</button>
                 <button class="ghost-btn" onclick="resetState()">Reset Village</button>
@@ -784,6 +796,19 @@ MAIN_TEMPLATE = """
             log.innerHTML = list.map(item => `<p>• ${item}</p>`).join('');
         }
 
+        function renderEvolution(evolution) {
+            const modeSelect = document.getElementById('modeSelect');
+            const modeStatus = document.getElementById('modeStatus');
+            const mode = (evolution && evolution.mode) ? evolution.mode : 'homeostasis';
+            const leader = (evolution && evolution.leader) ? evolution.leader : 'Tomas';
+            if (modeSelect) {
+                modeSelect.value = mode;
+            }
+            if (modeStatus) {
+                modeStatus.textContent = `Mode: ${mode} · Leader: ${leader}`;
+            }
+        }
+
         function render(data) {
             cachedPayload = data;
             document.getElementById('error').textContent = '';
@@ -827,6 +852,7 @@ MAIN_TEMPLATE = """
             const villagerItems = (data.villagers && data.villagers.length) ? data.villagers : fallbackVillagers;
             renderVillageHouses(villagerItems, data.aura || null);
             renderTownLog(data.state.recent_events || []);
+            renderEvolution(data.evolution || null);
 
             if (!selectedVillager && villagerItems.length) {
                 selectedVillager = villagerItems[0].name;
@@ -932,6 +958,24 @@ MAIN_TEMPLATE = """
             }
         }
 
+        async function setEvolutionMode() {
+            const mode = document.getElementById('modeSelect').value;
+            try {
+                const response = await fetch('/api/mode', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ session_id: getSessionId(), mode }),
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Mode update failed.');
+                }
+                render(data);
+            } catch (error) {
+                document.getElementById('error').textContent = String(error);
+            }
+        }
+
         async function teachTerm() {
             const payload = {
                 session_id: getSessionId(),
@@ -971,6 +1015,7 @@ MAIN_TEMPLATE = """
             renderVillageHouses(fallbackVillagers, null);
             renderVillagerDetail(null);
             renderTownLog([]);
+            renderEvolution(null);
             document.getElementById('metricRow').innerHTML = '';
         }
 
@@ -1032,6 +1077,12 @@ def _build_village_payload(engine):
         "state": engine.state.to_dict(),
         "villagers": villagers,
         "aura": aura,
+        "evolution": {
+            "mode": engine.state.evolution_mode,
+            "leader": engine.state.executive_function,
+            "registered_event_types": engine.state.registered_event_types,
+            "event_backlog_size": len(engine.state.event_backlog),
+        },
         "village_dialogue": village_summary_to_dialogue(engine.state.to_dict(), engine.state.narrative),
         "color_scheme": get_color_scheme(engine.state.current_hour),
     }
@@ -1161,6 +1212,18 @@ def api_daily_cycle():
     executed = engine.run_daily_cycle()
     payload = _build_village_payload(engine)
     payload["executed_tasks"] = [task.to_dict() for task in executed]
+    return jsonify(payload)
+
+
+@app.route("/api/mode", methods=["POST"])
+def api_set_mode():
+    data = request.get_json(silent=True) or {}
+    session_id = (data.get("session_id") or "default").strip() or "default"
+    mode = (data.get("mode") or "homeostasis").strip()
+    engine = get_or_create_engine(session_id)
+    selected = engine.set_evolution_mode(mode)
+    payload = _build_village_payload(engine)
+    payload["selected_mode"] = selected
     return jsonify(payload)
 
 

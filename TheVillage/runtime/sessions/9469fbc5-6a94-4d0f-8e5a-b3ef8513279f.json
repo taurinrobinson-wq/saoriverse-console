@@ -1,0 +1,664 @@
+{
+  "session_id": "9469fbc5-6a94-4d0f-8e5a-b3ef8513279f",
+  "turn_index": 1,
+  "current_day": 1,
+  "current_hour": 0,
+  "last_run": "2026-06-03T02:00:08.923535+00:00",
+  "working_memory": [
+    "Tomas has fallen ill and needs someone to take over leadership."
+  ],
+  "long_term_memory": [],
+  "emotional_state": {
+    "valence": 0.956,
+    "arousal": 0.176,
+    "social_threat": 0.0,
+    "attachment_pressure": 0.0,
+    "curiosity": 0.476,
+    "care": 0.0
+  },
+  "bodily_state": {
+    "tension": 0.397,
+    "energy": 0.371,
+    "safety": 0.77,
+    "activation": 0.193
+  },
+  "self_model": {
+    "continuity": 0.18,
+    "coherence": 0.854,
+    "agency": 0.776,
+    "stability": 0.714,
+    "curiosity": 0.21
+  },
+  "background_processes": {
+    "rumination": 0.091,
+    "monitoring": 0.025,
+    "repair": 0.3,
+    "lexicon_growth": 0.0
+  },
+  "active_goals": [
+    {
+      "name": "stabilize_leadership_transition",
+      "drive": "stability",
+      "priority": 0.874,
+      "status": "active",
+      "created_turn": 1,
+      "last_updated_turn": 1
+    },
+    {
+      "name": "maintain_service_continuity",
+      "drive": "mission",
+      "priority": 0.817,
+      "status": "active",
+      "created_turn": 1,
+      "last_updated_turn": 1
+    },
+    {
+      "name": "absorb_disruption",
+      "drive": "integration",
+      "priority": 0.75,
+      "status": "active",
+      "created_turn": 0,
+      "last_updated_turn": 0
+    },
+    {
+      "name": "map_unknown_corridor",
+      "drive": "mission",
+      "priority": 0.541,
+      "status": "active",
+      "created_turn": 0,
+      "last_updated_turn": 0
+    },
+    {
+      "name": "pursue_long_horizon_tomas",
+      "drive": "mission",
+      "priority": 0.532,
+      "status": "active",
+      "created_turn": 0,
+      "last_updated_turn": 0
+    },
+    {
+      "name": "simplify_plan_path",
+      "drive": "mission",
+      "priority": 0.532,
+      "status": "active",
+      "created_turn": 0,
+      "last_updated_turn": 0
+    }
+  ],
+  "main_mission": {
+    "statement": "Increase internal coherence and conceptual richness over time."
+  },
+  "health_metrics": {
+    "goal_progress_rate": 0.432,
+    "contradiction_count": 1,
+    "vocabulary_growth_rate": 0.0,
+    "error_events": 0,
+    "stalled_goals": 0,
+    "global_health": 0.598
+  },
+  "villager_states": {
+    "Tomas": {
+      "name": "Tomas",
+      "role": "planner",
+      "mood": "worried",
+      "skills": [
+        "goal decomposition",
+        "prioritization",
+        "maintenance"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [
+        "Break the mission into the next concrete step for day 1",
+        "Schedule a coherence walk through the environment"
+      ],
+      "recent_outcomes": [
+        "The work ahead became clearer and the village chose a firmer direction.",
+        "The villagers patched a weak seam and steadied the town's shared map."
+      ],
+      "reward_trend": -0.056,
+      "dream_state": {
+        "dream_arc_stage": 1,
+        "dream_arc_theme": "search",
+        "hidden_fear": "directionless loops",
+        "hidden_desire": "clean structure",
+        "unresolved_tension": 0.03,
+        "last_dream_day": 1,
+        "last_dream_hour": 0,
+        "dream_intensity": 0.193,
+        "dream_arc_stage_used": 0,
+        "dream_arc_theme_used": "search",
+        "dream_insight": "Tomas found directional clarity in the symbols; keep one coherent plan corridor for the next cycle. Arc theme 'search', fear 'directionless loops', desire 'clean structure', tension 0.03 (low).",
+        "shift_priority_delta": 0.04,
+        "shift_tension_delta": -0.01,
+        "shift_curiosity_delta": 0.06,
+        "shift_structure_delta": 0.04,
+        "shift_stability_delta": 0.01,
+        "shift_cohesion_delta": 0.03,
+        "shift_long_horizon_bias": 0.06,
+        "shift_goal_suggestions": "map_unknown_corridor,pursue_long_horizon_tomas,simplify_plan_path",
+        "shift_arc_theme": "search",
+        "shift_tension_level": 0.03,
+        "last_dream_text": "Tomas dreamed: In a shifting grid, a clocks began to stretch softly while an unseen answer stayed just out of reach. The scene felt calm and nearly harmonious."
+      },
+      "dream_log": [
+        "Tomas dreamed: In a shifting grid, a clocks began to stretch softly while an unseen answer stayed just out of reach. The scene felt calm and nearly harmonious."
+      ],
+      "house_brief": {
+        "house_goal": "Convert mission pressure into concrete next-step plans.",
+        "problem_statement": "Planning load is split across 'absorb disruption' and day-1 execution limits. Dream signal: Tomas found directional clarity in the symbols; keep one coherent plan corridor for the next cycle. Arc theme 'search', fear 'directionless loops', desire 'clean structure', tension 0.03 (low).",
+        "guidance_request": "Which option best honors the dream signal while preserving cohesion?",
+        "choices": [
+          "Prioritize low-risk stabilization.",
+          "Run a bounded experiment to gather new signal.",
+          "Coordinate with one neighboring house before acting.",
+          "Pilot aspiration: map unknown corridor."
+        ],
+        "selected_choice": 1,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Backlog ordering changes for all houses.",
+          "Affects coherence and goal progress rates."
+        ],
+        "dream_insight": "Tomas found directional clarity in the symbols; keep one coherent plan corridor for the next cycle. Arc theme 'search', fear 'directionless loops', desire 'clean structure', tension 0.03 (low).",
+        "aspiration": "I want to simplify our long-term plan.",
+        "last_updated_turn": 0
+      }
+    },
+    "Mira": {
+      "name": "Mira",
+      "role": "curiosity keeper",
+      "mood": "steady",
+      "skills": [
+        "vocabulary growth",
+        "question asking",
+        "definition finding"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.12,
+      "dream_state": {
+        "dream_arc_stage": 1,
+        "dream_arc_theme": "warning",
+        "hidden_fear": "sealed knowledge",
+        "hidden_desire": "living language",
+        "unresolved_tension": 0.029,
+        "last_dream_day": 1,
+        "last_dream_hour": 0,
+        "dream_intensity": 0.134,
+        "dream_arc_stage_used": 0,
+        "dream_arc_theme_used": "warning",
+        "dream_insight": "Mira perceived quiet curiosity pressure; pursue a gentle conceptual discovery pass. Arc theme 'warning', fear 'sealed knowledge', desire 'living language', tension 0.03 (low).",
+        "shift_priority_delta": 0.02,
+        "shift_tension_delta": -0.04,
+        "shift_curiosity_delta": 0.06,
+        "shift_structure_delta": 0.0,
+        "shift_stability_delta": 0.06,
+        "shift_cohesion_delta": 0.01,
+        "shift_long_horizon_bias": 0.04,
+        "shift_goal_suggestions": "stabilize_critical_path,pursue_long_horizon_mira,probe_unresolved_concept",
+        "shift_arc_theme": "warning",
+        "shift_tension_level": 0.029,
+        "last_dream_text": "Mira dreamed: In a room where words rearrange themselves, a whispering symbols began to unfold softly as a warning bell lingered behind every movement. The scene felt calm and nearly harmonious."
+      },
+      "dream_log": [
+        "Mira dreamed: In a room where words rearrange themselves, a whispering symbols began to unfold softly as a warning bell lingered behind every movement. The scene felt calm and nearly harmonious."
+      ],
+      "house_brief": {
+        "house_goal": "Expand the lexicon and reduce conceptual blind spots.",
+        "problem_statement": "There are 0 unresolved language gap(s) influencing interpretation quality. Dream signal: Mira perceived quiet curiosity pressure; pursue a gentle conceptual discovery pass. Arc theme 'warning', fear 'sealed knowledge', desire 'living language', tension 0.03 (low).",
+        "guidance_request": "Which option best honors the dream signal while preserving cohesion?",
+        "choices": [
+          "Prioritize low-risk stabilization.",
+          "Run a bounded experiment to gather new signal.",
+          "Coordinate with one neighboring house before acting.",
+          "Pilot aspiration: stabilize critical path."
+        ],
+        "selected_choice": 1,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Influences interpreter confidence and explorer subsystem strength.",
+          "Can lower contradiction pressure in later cycles."
+        ],
+        "dream_insight": "Mira perceived quiet curiosity pressure; pursue a gentle conceptual discovery pass. Arc theme 'warning', fear 'sealed knowledge', desire 'living language', tension 0.03 (low).",
+        "aspiration": "I feel drawn to explore a new unknown concept.",
+        "last_updated_turn": 0
+      }
+    },
+    "Edda": {
+      "name": "Edda",
+      "role": "stability steward",
+      "mood": "steady",
+      "skills": [
+        "contradiction tracking",
+        "repair",
+        "coherence monitoring"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [
+        "Patch weak coherence in the environment model"
+      ],
+      "recent_outcomes": [
+        "The villagers patched a weak seam and steadied the town's shared map."
+      ],
+      "reward_trend": 0.588,
+      "dream_state": {
+        "dream_arc_stage": 1,
+        "dream_arc_theme": "fracture",
+        "hidden_fear": "unseen contradictions",
+        "hidden_desire": "calm integrity",
+        "unresolved_tension": 0.025,
+        "last_dream_day": 1,
+        "last_dream_hour": 0,
+        "dream_intensity": 0.103,
+        "dream_arc_stage_used": 0,
+        "dream_arc_theme_used": "fracture",
+        "dream_insight": "Edda read integration momentum; merge nearby tensions into one coherent thread. Arc theme 'fracture', fear 'unseen contradictions', desire 'calm integrity', tension 0.03 (low).",
+        "shift_priority_delta": 0.05,
+        "shift_tension_delta": -0.01,
+        "shift_curiosity_delta": 0.02,
+        "shift_structure_delta": 0.01,
+        "shift_stability_delta": 0.08,
+        "shift_cohesion_delta": 0.07,
+        "shift_long_horizon_bias": 0.04,
+        "shift_goal_suggestions": "repair_coherence_seam,pursue_long_horizon_edda,resolve_primary_contradiction",
+        "shift_arc_theme": "fracture",
+        "shift_tension_level": 0.025,
+        "last_dream_text": "Edda dreamed: In a silent workshop, a knots began to repair softly as hidden seams threatened to break. The scene felt calm and nearly harmonious."
+      },
+      "dream_log": [
+        "Edda dreamed: In a silent workshop, a knots began to repair softly as hidden seams threatened to break. The scene felt calm and nearly harmonious."
+      ],
+      "house_brief": {
+        "house_goal": "Reduce contradictions and preserve structural coherence.",
+        "problem_statement": "Stability sees 0 contradiction marker(s) with coherence at 0.51. Dream signal: Edda read integration momentum; merge nearby tensions into one coherent thread. Arc theme 'fracture', fear 'unseen contradictions', desire 'calm integrity', tension 0.03 (low).",
+        "guidance_request": "Which option best honors the dream signal while preserving cohesion?",
+        "choices": [
+          "Prioritize low-risk stabilization.",
+          "Run a bounded experiment to gather new signal.",
+          "Coordinate with one neighboring house before acting.",
+          "Pilot aspiration: repair coherence seam."
+        ],
+        "selected_choice": 2,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Directly affects global health and stalled-goal pressure.",
+          "Changes perceived safety for caretaker behaviors."
+        ],
+        "dream_insight": "Edda read integration momentum; merge nearby tensions into one coherent thread. Arc theme 'fracture', fear 'unseen contradictions', desire 'calm integrity', tension 0.03 (low).",
+        "aspiration": "I want to unify two conflicting goals.",
+        "last_updated_turn": 0
+      }
+    },
+    "Lio": {
+      "name": "Lio",
+      "role": "narrator",
+      "mood": "steady",
+      "skills": [
+        "memory weaving",
+        "summary",
+        "story continuity"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.037,
+      "dream_state": {
+        "dream_arc_stage": 1,
+        "dream_arc_theme": "search",
+        "hidden_fear": "story rupture",
+        "hidden_desire": "shared narrative",
+        "unresolved_tension": 0.0,
+        "last_dream_day": 1,
+        "last_dream_hour": 0,
+        "dream_intensity": 0.218,
+        "dream_arc_stage_used": 0,
+        "dream_arc_theme_used": "search",
+        "dream_insight": "Lio detected narrative gaps where meaning is fading; restitch missing links in the story arc. Arc theme 'search', fear 'story rupture', desire 'shared narrative', tension 0.00 (low).",
+        "shift_priority_delta": 0.02,
+        "shift_tension_delta": -0.01,
+        "shift_curiosity_delta": 0.06,
+        "shift_structure_delta": 0.03,
+        "shift_stability_delta": 0.01,
+        "shift_cohesion_delta": 0.06,
+        "shift_long_horizon_bias": 0.04,
+        "shift_goal_suggestions": "map_unknown_corridor,pursue_long_horizon_lio,clarify_missing_story_link",
+        "shift_arc_theme": "search",
+        "shift_tension_level": 0.0,
+        "last_dream_text": "Lio dreamed: In an endless stage, a ink began to fade softly while an unseen answer stayed just out of reach. The scene felt calm and nearly harmonious."
+      },
+      "dream_log": [
+        "Lio dreamed: In an endless stage, a ink began to fade softly while an unseen answer stayed just out of reach. The scene felt calm and nearly harmonious."
+      ],
+      "house_brief": {
+        "house_goal": "Preserve continuity and make village dynamics legible.",
+        "problem_statement": "Narrative buffer has 0 recent entries to weave into one coherent account. Dream signal: Lio detected narrative gaps where meaning is fading; restitch missing links in the story arc. Arc theme 'search', fear 'story rupture', desire 'shared narrative', tension 0.00 (low).",
+        "guidance_request": "Which option best honors the dream signal while preserving cohesion?",
+        "choices": [
+          "Prioritize low-risk stabilization.",
+          "Run a bounded experiment to gather new signal.",
+          "Coordinate with one neighboring house before acting.",
+          "Pilot aspiration: map unknown corridor."
+        ],
+        "selected_choice": 0,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Improves explainability when users check each house.",
+          "Stabilizes mission continuity across day/night transitions."
+        ],
+        "dream_insight": "Lio detected narrative gaps where meaning is fading; restitch missing links in the story arc. Arc theme 'search', fear 'story rupture', desire 'shared narrative', tension 0.00 (low).",
+        "aspiration": "I want to clarify a missing part of our story.",
+        "last_updated_turn": 0
+      }
+    },
+    "Sable": {
+      "name": "Sable",
+      "role": "architect",
+      "mood": "steady",
+      "skills": [
+        "system design",
+        "reward tuning",
+        "structure revision"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [
+        "Adjust internal reward weights to favor progress and coherence"
+      ],
+      "recent_outcomes": [
+        "The villagers patched a weak seam and steadied the town's shared map."
+      ],
+      "reward_trend": 0.221,
+      "dream_state": {
+        "dream_arc_stage": 1,
+        "dream_arc_theme": "alignment",
+        "hidden_fear": "structural drift",
+        "hidden_desire": "resilient design",
+        "unresolved_tension": 0.0,
+        "last_dream_day": 1,
+        "last_dream_hour": 0,
+        "dream_intensity": 0.196,
+        "dream_arc_stage_used": 0,
+        "dream_arc_theme_used": "alignment",
+        "dream_insight": "Sable sensed latent potential; rebuild one foundation to support long-horizon growth. Arc theme 'alignment', fear 'structural drift', desire 'resilient design', tension 0.00 (low).",
+        "shift_priority_delta": 0.04,
+        "shift_tension_delta": -0.01,
+        "shift_curiosity_delta": 0.03,
+        "shift_structure_delta": 0.07,
+        "shift_stability_delta": 0.01,
+        "shift_cohesion_delta": 0.04,
+        "shift_long_horizon_bias": 0.07,
+        "shift_goal_suggestions": "align_cross_house_plans,pursue_long_horizon_sable,reinforce_structural_support",
+        "shift_arc_theme": "alignment",
+        "shift_tension_level": 0.0,
+        "last_dream_text": "Sable dreamed: In a shifting blueprint, a ruins began to rebuild softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious."
+      },
+      "dream_log": [
+        "Sable dreamed: In a shifting blueprint, a ruins began to rebuild softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious."
+      ],
+      "house_brief": {
+        "house_goal": "Tune system structures for long-horizon cohesion.",
+        "problem_statement": "Architecture sees progress 0.00 and health 0.60; balance may be off. Dream signal: Sable sensed latent potential; rebuild one foundation to support long-horizon growth. Arc theme 'alignment', fear 'structural drift', desire 'resilient design', tension 0.00 (low).",
+        "guidance_request": "Which option best honors the dream signal while preserving cohesion?",
+        "choices": [
+          "Prioritize low-risk stabilization.",
+          "Run a bounded experiment to gather new signal.",
+          "Coordinate with one neighboring house before acting.",
+          "Pilot aspiration: align cross house plans."
+        ],
+        "selected_choice": 2,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Adjusts medium-term reward and planning tendencies.",
+          "Can amplify or dampen subsystem disagreement."
+        ],
+        "dream_insight": "Sable sensed latent potential; rebuild one foundation to support long-horizon growth. Arc theme 'alignment', fear 'structural drift', desire 'resilient design', tension 0.00 (low).",
+        "aspiration": "I want to reinforce a structural weakness.",
+        "last_updated_turn": 0
+      }
+    },
+    "Jun": {
+      "name": "Jun",
+      "role": "caretaker",
+      "mood": "steady",
+      "skills": [
+        "health monitoring",
+        "self-repair",
+        "recovery"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.125,
+      "dream_state": {
+        "dream_arc_stage": 1,
+        "dream_arc_theme": "alignment",
+        "hidden_fear": "quiet burnout",
+        "hidden_desire": "resilience",
+        "unresolved_tension": 0.0,
+        "last_dream_day": 1,
+        "last_dream_hour": 0,
+        "dream_intensity": 0.207,
+        "dream_arc_stage_used": 0,
+        "dream_arc_theme_used": "alignment",
+        "dream_insight": "Jun sensed depletion in the dream; restore resilience reserves before stress rises. Arc theme 'alignment', fear 'quiet burnout', desire 'resilience', tension 0.00 (low).",
+        "shift_priority_delta": 0.02,
+        "shift_tension_delta": -0.04,
+        "shift_curiosity_delta": 0.03,
+        "shift_structure_delta": 0.04,
+        "shift_stability_delta": 0.04,
+        "shift_cohesion_delta": 0.04,
+        "shift_long_horizon_bias": 0.04,
+        "shift_goal_suggestions": "align_cross_house_plans,pursue_long_horizon_jun,restore_resilience_reserve",
+        "shift_arc_theme": "alignment",
+        "shift_tension_level": 0.0,
+        "last_dream_text": "Jun dreamed: In a quiet grove, a roots began to wilt softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious."
+      },
+      "dream_log": [
+        "Jun dreamed: In a quiet grove, a roots began to wilt softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious."
+      ],
+      "house_brief": {
+        "house_goal": "Protect resilience and maintain recovery capacity.",
+        "problem_statement": "Caretaker tracks tension 0.20 and safety 0.70; stress pockets may form. Dream signal: Jun sensed depletion in the dream; restore resilience reserves before stress rises. Arc theme 'alignment', fear 'quiet burnout', desire 'resilience', tension 0.00 (low).",
+        "guidance_request": "Which option best honors the dream signal while preserving cohesion?",
+        "choices": [
+          "Prioritize low-risk stabilization.",
+          "Run a bounded experiment to gather new signal.",
+          "Coordinate with one neighboring house before acting.",
+          "Pilot aspiration: align cross house plans."
+        ],
+        "selected_choice": 3,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Shifts mood drift and hourly stability.",
+          "Constrains how aggressively other houses can explore."
+        ],
+        "dream_insight": "Jun sensed depletion in the dream; restore resilience reserves before stress rises. Arc theme 'alignment', fear 'quiet burnout', desire 'resilience', tension 0.00 (low).",
+        "aspiration": "I want to restore our resilience.",
+        "last_updated_turn": 0
+      }
+    }
+  },
+  "task_backlog": [
+    {
+      "description": "Break the mission into the next concrete step for day 1",
+      "proposed_by": "Tomas",
+      "priority": 0.82,
+      "expected_reward": 0.2,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Adjust internal reward weights to favor progress and coherence",
+      "proposed_by": "Sable",
+      "priority": 0.72,
+      "expected_reward": 0.14,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Schedule a coherence walk through the environment",
+      "proposed_by": "Tomas",
+      "priority": 0.7,
+      "expected_reward": 0.14,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Patch weak coherence in the environment model",
+      "proposed_by": "Edda",
+      "priority": 0.7,
+      "expected_reward": 0.13,
+      "dependencies": [],
+      "status": "completed"
+    },
+    {
+      "description": "Record the village's important events into a coherent daybook entry",
+      "proposed_by": "Lio",
+      "priority": 0.66,
+      "expected_reward": 0.1,
+      "dependencies": [],
+      "status": "proposed"
+    },
+    {
+      "description": "Review the goal structure for redundant or conflicting work",
+      "proposed_by": "Sable",
+      "priority": 0.58,
+      "expected_reward": 0.09,
+      "dependencies": [],
+      "status": "proposed"
+    }
+  ],
+  "recent_events": [
+    "Edda dreamed: In a silent workshop, a knots began to repair softly as hidden seams threatened to break. The scene felt calm and nearly harmonious.",
+    "Edda interpreted the dream: Edda read integration momentum; merge nearby tensions into one coherent thread. Arc theme 'fracture', fear 'unseen contradictions', desire 'calm integrity', tension 0.03 (low).",
+    "Lio dreamed: In an endless stage, a ink began to fade softly while an unseen answer stayed just out of reach. The scene felt calm and nearly harmonious.",
+    "Lio interpreted the dream: Lio detected narrative gaps where meaning is fading; restitch missing links in the story arc. Arc theme 'search', fear 'story rupture', desire 'shared narrative', tension 0.00 (low).",
+    "Sable dreamed: In a shifting blueprint, a ruins began to rebuild softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.",
+    "Sable interpreted the dream: Sable sensed latent potential; rebuild one foundation to support long-horizon growth. Arc theme 'alignment', fear 'structural drift', desire 'resilient design', tension 0.00 (low).",
+    "Jun dreamed: In a quiet grove, a roots began to wilt softly until scattered pieces briefly matched. The scene felt calm and nearly harmonious.",
+    "Jun interpreted the dream: Jun sensed depletion in the dream; restore resilience reserves before stress rises. Arc theme 'alignment', fear 'quiet burnout', desire 'resilience', tension 0.00 (low).",
+    "Aura synthesized the dreams: In a quiet pool beneath a starless sky, threads of light begin to echo around the village's reflection. The psyche feels steady, carrying traces of repair, wilt.",
+    "A surprise opportunity arrived and challenged current priorities.",
+    "Evolution mode disruption completed. Aura final reading updated.",
+    "Aura forecast: The inner voices are converging; today is well-suited for weaving threads into a clearer whole. Aura glimpses: In a quiet pool beneath a starless sky, threads of light begin to echo around the village's reflection. The psyche feels steady, carrying traces of repair, wilt.",
+    "The work ahead became clearer and the village chose a firmer direction.",
+    "The villagers patched a weak seam and steadied the town's shared map.",
+    "The villagers patched a weak seam and steadied the town's shared map.",
+    "The villagers patched a weak seam and steadied the town's shared map.",
+    "The village heard: Tomas has fallen ill and needs someone to take over leadership.",
+    "Leadership shifted from Tomas to Edda. Reason: Election trigger fired with candidate scores: {'Tomas': 0.486, 'Mira': 0.59, 'Edda': 0.767, 'Lio': 0.5092, 'Sable': 0.5553, 'Jun': 0.6312}",
+    "Evolution mode elections completed. Aura final reading updated.",
+    "Crisis protocol activated: governance shifted to elections mode and selected leader Edda."
+  ],
+  "narrative_log": [
+    "Day 1: The village pursued 4 task(s) in service of 'Increase internal coherence and conceptual richness over time.'. Health now rests at 61%.",
+    "The village is carrying continuity through turn 1 at hour 00. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village's reward signal is +0.14."
+  ],
+  "subsystem_scores": {
+    "impulse": 0.0,
+    "planner": 0.214,
+    "critic": 0.0,
+    "caretaker": 0.0,
+    "explorer": 0.224,
+    "protector": 0.303
+  },
+  "unresolved_tensions": [
+    "Subsystems disagree about the next best action."
+  ],
+  "narrative": "The village is carrying continuity through turn 1 at hour 00. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village's reward signal is +0.14.",
+  "reward_signal": 0.139,
+  "vocabulary_questions": [],
+  "known_terms": [
+    "agency",
+    "care",
+    "conflict",
+    "define",
+    "encountered",
+    "environment",
+    "fallen",
+    "feel",
+    "goal",
+    "happened",
+    "here",
+    "kind",
+    "leadership",
+    "limerence",
+    "matters",
+    "moving",
+    "narrative",
+    "needs",
+    "others",
+    "over",
+    "please",
+    "rejected",
+    "reward",
+    "scene",
+    "self",
+    "someone",
+    "sonder",
+    "take",
+    "through",
+    "tomas",
+    "understand",
+    "want",
+    "what"
+  ],
+  "aura_forecast": "The inner voices are converging; today is well-suited for weaving threads into a clearer whole. Aura glimpses: In a quiet pool beneath a starless sky, threads of light begin to echo around the village's reflection. The psyche feels steady, carrying traces of repair, wilt.",
+  "aura_arc_theme": "integration",
+  "aura_tension": 0.705,
+  "aura_last_synthesis": "In a quiet pool beneath a starless sky, threads of light begin to echo around the village's reflection. The psyche feels steady, carrying traces of repair, wilt.",
+  "aura_arc_stage": 4,
+  "aura_dream_history": [
+    "In a quiet pool beneath a starless sky, threads of light begin to echo around the village's reflection. The psyche feels steady, carrying traces of repair, wilt."
+  ],
+  "evolution_mode": "elections",
+  "executive_function": "Edda",
+  "registered_event_types": [
+    "signal_noise",
+    "surprise_opportunity",
+    "resource_dip"
+  ],
+  "event_backlog": [],
+  "mode_history": [
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "disruption",
+    "elections"
+  ],
+  "evolution_meta": {
+    "disruption_cooldown": 2,
+    "last_mode_result": {
+      "mode": "elections",
+      "triggered": 1,
+      "leader": "Edda",
+      "changed": 1
+    }
+  },
+  "environment": {
+    "scene": "intake",
+    "safety": 0.7,
+    "novelty": 0.52,
+    "coherence": 0.735,
+    "last_event": "The environment revealed more detail after observation.",
+    "affordances": [
+      "observe",
+      "ask",
+      "rest",
+      "approach",
+      "define"
+    ]
+  }
+}

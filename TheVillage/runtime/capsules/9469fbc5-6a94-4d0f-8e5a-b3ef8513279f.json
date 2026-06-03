@@ -1,0 +1,12 @@
+[
+  {
+    "symbolic_tags": [
+      "low_signal"
+    ],
+    "relational_phase": "intake",
+    "voltage_marking": "reward:+0.14",
+    "user_input": "Tomas has fallen ill and needs someone to take over leadership.",
+    "response_summary": "The village is carrying continuity through turn 1 at hour 00. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village's reward signal is +0.14.",
+    "timestamp": "2026-06-03T02:00:08.923535+00:00"
+  }
+]

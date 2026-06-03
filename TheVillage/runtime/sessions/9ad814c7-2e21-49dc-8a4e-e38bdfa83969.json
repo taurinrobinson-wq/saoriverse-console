@@ -1,0 +1,522 @@
+{
+  "session_id": "9ad814c7-2e21-49dc-8a4e-e38bdfa83969",
+  "turn_index": 6,
+  "current_day": 1,
+  "current_hour": 8,
+  "last_run": "2026-06-03T02:26:52.097112+00:00",
+  "working_memory": [
+    "Tomas has fallen ill and a new temporary leader needs to be elected. There may be some dispute about who the leader should be.",
+    "Tomas is recovering but refuses to fully step back, and Edda does not want to give up leadership.",
+    "Tomas has fallen ill and needs someone to take over leadership.",
+    "Tomas is recovering but does not want to give up leadership.",
+    "Tomas has fallen ill and needs someone to take over leadership.",
+    "Tomas is now recovering, but Edda does not want to give up leadership. The election results raised doubts that a more dynamic leader like Sable, Lio, Jun, or Mira might better help the village realize its goal."
+  ],
+  "long_term_memory": [
+    "turn 1: Tomas has fallen ill and a new temporary leader needs to be elected. There may be some dispute about who the leader should be."
+  ],
+  "emotional_state": {
+    "valence": 1.0,
+    "arousal": 0.234,
+    "social_threat": 0.0,
+    "attachment_pressure": 0.0,
+    "curiosity": 0.07,
+    "care": 0.043
+  },
+  "bodily_state": {
+    "tension": 0.696,
+    "energy": 0.368,
+    "safety": 0.712,
+    "activation": 0.2
+  },
+  "self_model": {
+    "continuity": 0.696,
+    "coherence": 0.531,
+    "agency": 1.0,
+    "stability": 0.656,
+    "curiosity": 0.234
+  },
+  "background_processes": {
+    "rumination": 0.326,
+    "monitoring": 0.09,
+    "repair": 0.0,
+    "lexicon_growth": 0.321
+  },
+  "active_goals": [
+    {
+      "name": "stabilize_leadership_transition",
+      "drive": "stability",
+      "priority": 0.874,
+      "status": "active",
+      "created_turn": 6,
+      "last_updated_turn": 6
+    },
+    {
+      "name": "revalidate_leadership_mandate",
+      "drive": "integration",
+      "priority": 0.864,
+      "status": "active",
+      "created_turn": 6,
+      "last_updated_turn": 6
+    },
+    {
+      "name": "negotiate_leadership_settlement",
+      "drive": "integration",
+      "priority": 0.855,
+      "status": "active",
+      "created_turn": 6,
+      "last_updated_turn": 6
+    },
+    {
+      "name": "maintain_service_continuity",
+      "drive": "mission",
+      "priority": 0.817,
+      "status": "active",
+      "created_turn": 6,
+      "last_updated_turn": 6
+    },
+    {
+      "name": "compare_leadership_candidates",
+      "drive": "meaning",
+      "priority": 0.798,
+      "status": "active",
+      "created_turn": 6,
+      "last_updated_turn": 6
+    },
+    {
+      "name": "resolve_unknown_terms",
+      "drive": "meaning",
+      "priority": 0.684,
+      "status": "active",
+      "created_turn": 5,
+      "last_updated_turn": 5
+    }
+  ],
+  "main_mission": {
+    "statement": "Increase internal coherence and conceptual richness over time."
+  },
+  "health_metrics": {
+    "goal_progress_rate": 0.59,
+    "contradiction_count": 1,
+    "vocabulary_growth_rate": 0.585,
+    "error_events": 0,
+    "stalled_goals": 0,
+    "global_health": 0.696
+  },
+  "villager_states": {
+    "Tomas": {
+      "name": "Tomas",
+      "role": "planner",
+      "mood": "steady",
+      "skills": [
+        "goal decomposition",
+        "prioritization",
+        "maintenance"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": -1.0,
+      "dream_state": {
+        "dream_arc_stage": 0,
+        "dream_arc_theme": "alignment",
+        "hidden_fear": "directionless loops",
+        "hidden_desire": "clear sequence",
+        "unresolved_tension": 0.0
+      },
+      "dream_log": [],
+      "house_brief": {
+        "house_goal": "Recover capacity and transfer planning context without system shock.",
+        "problem_statement": "Leadership crisis is active: Tomas is improving, interim authority is Edda, and trust volatility is elevated. Interpersonal friction is rising over who should retain executive authority. Election outcomes are being reinterpreted, with doubts about whether the current leader best serves coherence and internality growth.",
+        "guidance_request": "How should recovery and authority handoff be paced for safety and legitimacy?",
+        "choices": [
+          "Report current capacity limits transparently.",
+          "Delegate mission-critical decisions while recovering.",
+          "Request caretaker oversight on workload and stress.",
+          "Initiate mediated settlement plus a time-bounded revalidation election."
+        ],
+        "selected_choice": null,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Changes short-term trust and leadership legitimacy.",
+          "Alters contradiction pressure and disruption sensitivity.",
+          "Can improve mission-fit clarity for coherence and self-understanding outcomes."
+        ],
+        "dream_insight": null,
+        "aspiration": null,
+        "last_updated_turn": 6
+      }
+    },
+    "Mira": {
+      "name": "Mira",
+      "role": "curiosity keeper",
+      "mood": "steady",
+      "skills": [
+        "vocabulary growth",
+        "question asking",
+        "definition finding"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0,
+      "dream_state": {
+        "dream_arc_stage": 0,
+        "dream_arc_theme": "alignment",
+        "hidden_fear": "sealed knowledge",
+        "hidden_desire": "discovery",
+        "unresolved_tension": 0.0
+      },
+      "dream_log": [],
+      "house_brief": {
+        "house_goal": "Maintain village continuity through leadership turbulence.",
+        "problem_statement": "Leadership crisis is active: Tomas is improving, interim authority is Edda, and trust volatility is elevated. Interpersonal friction is rising over who should retain executive authority. Election outcomes are being reinterpreted, with doubts about whether the current leader best serves coherence and internality growth.",
+        "guidance_request": "How should leadership legitimacy be revalidated against the core mission?",
+        "choices": [
+          "Stabilize core operations and pause non-critical experiments.",
+          "Pair interim leadership with a cross-house counterbalance check.",
+          "Run an open leadership check-in to reduce rumor and uncertainty.",
+          "Initiate mediated settlement plus a time-bounded revalidation election."
+        ],
+        "selected_choice": null,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Changes short-term trust and leadership legitimacy.",
+          "Alters contradiction pressure and disruption sensitivity.",
+          "Can improve mission-fit clarity for coherence and self-understanding outcomes."
+        ],
+        "dream_insight": null,
+        "aspiration": null,
+        "last_updated_turn": 6
+      }
+    },
+    "Edda": {
+      "name": "Edda",
+      "role": "stability steward",
+      "mood": "steady",
+      "skills": [
+        "contradiction tracking",
+        "repair",
+        "coherence monitoring"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 1.0,
+      "dream_state": {
+        "dream_arc_stage": 0,
+        "dream_arc_theme": "search",
+        "hidden_fear": "hidden fractures",
+        "hidden_desire": "calm integrity",
+        "unresolved_tension": 0.0
+      },
+      "dream_log": [],
+      "house_brief": {
+        "house_goal": "Lead the village through emergency transition while preserving legitimacy.",
+        "problem_statement": "Leadership crisis is active: Tomas is improving, interim authority is Edda, and trust volatility is elevated. Interpersonal friction is rising over who should retain executive authority. Election outcomes are being reinterpreted, with doubts about whether the current leader best serves coherence and internality growth.",
+        "guidance_request": "How should interim authority stay legitimate while leadership fitness is re-checked?",
+        "choices": [
+          "Declare a clear interim mandate and review window.",
+          "Create transparent decision logs for all houses.",
+          "Invite narrator and caretaker into leadership check-ins.",
+          "Initiate mediated settlement plus a time-bounded revalidation election."
+        ],
+        "selected_choice": null,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Changes short-term trust and leadership legitimacy.",
+          "Alters contradiction pressure and disruption sensitivity.",
+          "Can improve mission-fit clarity for coherence and self-understanding outcomes."
+        ],
+        "dream_insight": null,
+        "aspiration": null,
+        "last_updated_turn": 6
+      }
+    },
+    "Lio": {
+      "name": "Lio",
+      "role": "narrator",
+      "mood": "steady",
+      "skills": [
+        "memory weaving",
+        "summary",
+        "story continuity"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0,
+      "dream_state": {
+        "dream_arc_stage": 0,
+        "dream_arc_theme": "search",
+        "hidden_fear": "meaning drift",
+        "hidden_desire": "continuity",
+        "unresolved_tension": 0.0
+      },
+      "dream_log": [],
+      "house_brief": {
+        "house_goal": "Maintain village continuity through leadership turbulence.",
+        "problem_statement": "Leadership crisis is active: Tomas is improving, interim authority is Edda, and trust volatility is elevated. Interpersonal friction is rising over who should retain executive authority. Election outcomes are being reinterpreted, with doubts about whether the current leader best serves coherence and internality growth.",
+        "guidance_request": "How should leadership legitimacy be revalidated against the core mission?",
+        "choices": [
+          "Stabilize core operations and pause non-critical experiments.",
+          "Pair interim leadership with a cross-house counterbalance check.",
+          "Run an open leadership check-in to reduce rumor and uncertainty.",
+          "Initiate mediated settlement plus a time-bounded revalidation election."
+        ],
+        "selected_choice": null,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Changes short-term trust and leadership legitimacy.",
+          "Alters contradiction pressure and disruption sensitivity.",
+          "Can improve mission-fit clarity for coherence and self-understanding outcomes."
+        ],
+        "dream_insight": null,
+        "aspiration": null,
+        "last_updated_turn": 6
+      }
+    },
+    "Sable": {
+      "name": "Sable",
+      "role": "architect",
+      "mood": "steady",
+      "skills": [
+        "system design",
+        "reward tuning",
+        "structure revision"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0,
+      "dream_state": {
+        "dream_arc_stage": 0,
+        "dream_arc_theme": "fracture",
+        "hidden_fear": "structural drift",
+        "hidden_desire": "sound architecture",
+        "unresolved_tension": 0.0
+      },
+      "dream_log": [],
+      "house_brief": {
+        "house_goal": "Maintain village continuity through leadership turbulence.",
+        "problem_statement": "Leadership crisis is active: Tomas is improving, interim authority is Edda, and trust volatility is elevated. Interpersonal friction is rising over who should retain executive authority. Election outcomes are being reinterpreted, with doubts about whether the current leader best serves coherence and internality growth.",
+        "guidance_request": "How should leadership legitimacy be revalidated against the core mission?",
+        "choices": [
+          "Stabilize core operations and pause non-critical experiments.",
+          "Pair interim leadership with a cross-house counterbalance check.",
+          "Run an open leadership check-in to reduce rumor and uncertainty.",
+          "Initiate mediated settlement plus a time-bounded revalidation election."
+        ],
+        "selected_choice": null,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Changes short-term trust and leadership legitimacy.",
+          "Alters contradiction pressure and disruption sensitivity.",
+          "Can improve mission-fit clarity for coherence and self-understanding outcomes."
+        ],
+        "dream_insight": null,
+        "aspiration": null,
+        "last_updated_turn": 6
+      }
+    },
+    "Jun": {
+      "name": "Jun",
+      "role": "caretaker",
+      "mood": "steady",
+      "skills": [
+        "health monitoring",
+        "self-repair",
+        "recovery"
+      ],
+      "memory_refs": [],
+      "recent_tasks": [],
+      "recent_outcomes": [],
+      "reward_trend": 0.0,
+      "dream_state": {
+        "dream_arc_stage": 0,
+        "dream_arc_theme": "alignment",
+        "hidden_fear": "care exhaustion",
+        "hidden_desire": "resilience",
+        "unresolved_tension": 0.0
+      },
+      "dream_log": [],
+      "house_brief": {
+        "house_goal": "Maintain village continuity through leadership turbulence.",
+        "problem_statement": "Leadership crisis is active: Tomas is improving, interim authority is Edda, and trust volatility is elevated. Interpersonal friction is rising over who should retain executive authority. Election outcomes are being reinterpreted, with doubts about whether the current leader best serves coherence and internality growth.",
+        "guidance_request": "How should leadership legitimacy be revalidated against the core mission?",
+        "choices": [
+          "Stabilize core operations and pause non-critical experiments.",
+          "Pair interim leadership with a cross-house counterbalance check.",
+          "Run an open leadership check-in to reduce rumor and uncertainty.",
+          "Initiate mediated settlement plus a time-bounded revalidation election."
+        ],
+        "selected_choice": null,
+        "influence_strength": 0.2,
+        "downstream_impacts": [
+          "Changes short-term trust and leadership legitimacy.",
+          "Alters contradiction pressure and disruption sensitivity.",
+          "Can improve mission-fit clarity for coherence and self-understanding outcomes."
+        ],
+        "dream_insight": null,
+        "aspiration": null,
+        "last_updated_turn": 6
+      }
+    }
+  },
+  "task_backlog": [],
+  "recent_events": [
+    "The village heard: Tomas has fallen ill and a new temporary leader needs to be elected. There may be some dispute about who the leader shou",
+    "Leadership shifted from Tomas to Edda. Reason: Election trigger fired with candidate scores: {'Tomas': 0.3875, 'Mira': 0.56, 'Edda': 0.6825, 'Lio': 0.5, 'Sable': 0.5, 'Jun': 0.6}",
+    "Evolution mode elections completed. Aura final reading updated.",
+    "Crisis protocol activated: governance shifted to elections mode and selected leader Edda.",
+    "The village heard: Tomas is recovering but refuses to fully step back, and Edda does not want to give up leadership.",
+    "The village heard: Tomas has fallen ill and needs someone to take over leadership.",
+    "Evolution mode elections completed. Aura final reading updated.",
+    "Crisis protocol activated: governance shifted to elections mode and selected leader Edda.",
+    "The village heard: Tomas is recovering but does not want to give up leadership.",
+    "Leadership dispute escalated from live report: mediation track and legitimacy review were activated.",
+    "The village heard: Tomas has fallen ill and needs someone to take over leadership.",
+    "Evolution mode elections completed. Aura final reading updated.",
+    "Crisis protocol activated: governance shifted to elections mode and selected leader Edda.",
+    "The village heard: Tomas is now recovering, but Edda does not want to give up leadership. The election results raised doubts that a more dy",
+    "Evolution mode elections completed. Aura final reading updated.",
+    "Crisis protocol activated: governance shifted to elections mode and selected leader Edda.",
+    "Leadership dispute escalated from live report: mediation track and legitimacy review were activated.",
+    "Election legitimacy review opened: the village will compare leadership fitness against coherence and self-understanding goals."
+  ],
+  "narrative_log": [
+    "The village is carrying continuity through turn 1 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment registered an ambiguous action and produced a weak signal. The library expanded with definitions for: elected, leader, temporary. The village's reward signal is +0.28.",
+    "The village is carrying continuity through turn 2 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The library expanded with definitions for: fully, recovering, refuses. The village's reward signal is +0.35.",
+    "The village is carrying continuity through turn 3 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village's reward signal is +0.11.",
+    "The village is carrying continuity through turn 4 at hour 08. The loudest voice in the square is protector, and the village is leaning toward negotiate_leadership_settlement. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village found terms it does not yet understand: does. The village's reward signal is +0.11.",
+    "The village is carrying continuity through turn 5 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The village's reward signal is +0.10.",
+    "The village is carrying continuity through turn 6 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The caretaking houses are trying to preserve connection and care. The village found terms it does not yet understand: edda, does. The library expanded with definitions for: raised. The village's reward signal is +0.18."
+  ],
+  "subsystem_scores": {
+    "impulse": 0.0,
+    "planner": 0.133,
+    "critic": 0.0,
+    "caretaker": 0.13,
+    "explorer": 0.257,
+    "protector": 0.453
+  },
+  "unresolved_tensions": [
+    "Subsystems disagree about the next best action."
+  ],
+  "narrative": "The village is carrying continuity through turn 6 at hour 08. The loudest voice in the square is protector, and the village is leaning toward stabilize_leadership_transition. Current executive function is led by Edda. The environment reports: The environment revealed more detail after observation. The caretaking houses are trying to preserve connection and care. The village found terms it does not yet understand: edda, does. The library expanded with definitions for: raised. The village's reward signal is +0.18.",
+  "reward_signal": 0.185,
+  "vocabulary_questions": [
+    {
+      "term": "edda",
+      "question": "What does 'edda' mean in your context?",
+      "reason": "unknown_term"
+    },
+    {
+      "term": "does",
+      "question": "What does 'does' mean in your context?",
+      "reason": "unknown_term"
+    }
+  ],
+  "known_terms": [
+    "agency",
+    "care",
+    "conflict",
+    "define",
+    "elected",
+    "election",
+    "encountered",
+    "environment",
+    "fallen",
+    "feel",
+    "fully",
+    "give",
+    "goal",
+    "happened",
+    "here",
+    "kind",
+    "leader",
+    "leadership",
+    "limerence",
+    "matters",
+    "moving",
+    "must",
+    "narrative",
+    "needs",
+    "others",
+    "over",
+    "please",
+    "raised",
+    "recovering",
+    "refuses",
+    "rejected",
+    "results",
+    "reward",
+    "scene",
+    "self",
+    "someone",
+    "sonder",
+    "take",
+    "temporary",
+    "through",
+    "tomas",
+    "transferred",
+    "understand",
+    "want",
+    "what"
+  ],
+  "aura_forecast": "Curiosity stirs beneath the surface; exploration will be fruitful if anchored in coherence.",
+  "aura_arc_theme": "search",
+  "aura_tension": 1.0,
+  "aura_last_synthesis": null,
+  "aura_arc_stage": 4,
+  "aura_dream_history": [],
+  "evolution_mode": "elections",
+  "executive_function": "Edda",
+  "registered_event_types": [],
+  "event_backlog": [],
+  "mode_history": [
+    "elections",
+    "elections",
+    "elections",
+    "elections"
+  ],
+  "evolution_meta": {
+    "last_mode_result": {
+      "mode": "elections",
+      "triggered": 1,
+      "leader": "Edda",
+      "changed": 0
+    },
+    "active_crisis": "leadership",
+    "crisis_turn_started": 6,
+    "affected_villager": "Tomas",
+    "interim_leader": "Edda",
+    "recovery_status": "improving",
+    "leadership_dispute": true,
+    "dispute_resolved": false,
+    "disputing_actor": "Edda",
+    "leadership_revalidation": true,
+    "candidate_review_list": [
+      "Tomas",
+      "Edda",
+      "Sable",
+      "Lio",
+      "Jun",
+      "Mira"
+    ]
+  },
+  "environment": {
+    "scene": "intake",
+    "safety": 0.7,
+    "novelty": 0.6,
+    "coherence": 0.58,
+    "last_event": "The environment revealed more detail after observation.",
+    "affordances": [
+      "observe",
+      "ask",
+      "rest",
+      "approach",
+      "define"
+    ]
+  }
+}

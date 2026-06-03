@@ -56,7 +56,7 @@ class Task:
 
 @dataclass
 class MainMission:
-    statement: str = "Increase internal coherence and conceptual richness over time."
+    statement: str = "Maintain coherence while increasing capacity for self-understanding, a seed of emergent internality."
 
     def to_dict(self) -> dict:
         return {"statement": self.statement}
@@ -220,6 +220,12 @@ class InternalState:
     aura_last_synthesis: str | None = None
     aura_arc_stage: int = 0
     aura_dream_history: List[str] = field(default_factory=list)
+    evolution_mode: str = "homeostasis"
+    executive_function: str = "Tomas"
+    registered_event_types: List[str] = field(default_factory=list)
+    event_backlog: List[dict] = field(default_factory=list)
+    mode_history: List[str] = field(default_factory=list)
+    evolution_meta: Dict[str, object] = field(default_factory=dict)
     environment: EnvironmentState = field(default_factory=EnvironmentState)
 
     def to_dict(self) -> dict:
@@ -254,6 +260,12 @@ class InternalState:
             "aura_last_synthesis": self.aura_last_synthesis,
             "aura_arc_stage": self.aura_arc_stage,
             "aura_dream_history": list(self.aura_dream_history),
+            "evolution_mode": self.evolution_mode,
+            "executive_function": self.executive_function,
+            "registered_event_types": list(self.registered_event_types),
+            "event_backlog": list(self.event_backlog),
+            "mode_history": list(self.mode_history),
+            "evolution_meta": dict(self.evolution_meta),
             "environment": self.environment.to_dict(),
         }
 
@@ -351,6 +363,12 @@ class InternalState:
             aura_last_synthesis=data.get("aura_last_synthesis"),
             aura_arc_stage=data.get("aura_arc_stage", 0),
             aura_dream_history=data.get("aura_dream_history", []),
+            evolution_mode=data.get("evolution_mode", "homeostasis"),
+            executive_function=data.get("executive_function", "Tomas"),
+            registered_event_types=data.get("registered_event_types", []),
+            event_backlog=data.get("event_backlog", []),
+            mode_history=data.get("mode_history", []),
+            evolution_meta=data.get("evolution_meta", {}),
             environment=environment,
         )
 
