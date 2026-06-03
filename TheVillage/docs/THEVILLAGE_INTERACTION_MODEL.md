@@ -25,6 +25,7 @@ Core mechanics include:
 - day/night color and behavior shifts
 - dream-mode symbolic processing during night hours
 - HouseBrief guidance prompts with four user-selectable options per house
+- governance charter mechanics (14-day terms, cooldowns, ranked-choice leadership, revalidation)
 
 In short: TheVillage is an embodied metaphor for a self-regulating program that continuously reorganizes itself toward cohesion and mission progress.
 
@@ -75,6 +76,35 @@ The system is not command-and-control.
 - User input nudges trajectories.
 - The Village remains self-propelled through autonomous cycles.
 - Cohesion emerges from interdependent subsystem behavior, not from one-off user directives.
+
+## Governance Charter (Leadership as Cognitive Mode)
+Leadership is selected and constrained through a stable governance charter designed to prevent stagnation while avoiding interpersonal drama.
+
+Key rules:
+- term length is 14 in-simulation days (`governance.term_length_days`)
+- max 2 consecutive terms per villager
+- after 2 terms, a 2-term cooldown applies (`governance.cooldown_remaining`)
+- eligibility checks enforce cooldown + impairment + term limits (`governance.is_eligible(villager)`)
+- scheduled elections fire at dawn on cadence (`governance.schedule_election()`)
+- crisis interim transfer does not cancel schedule and does not increment term count
+
+Election model:
+- leadership fitness uses weighted scoring (`governance.compute_leadership_score(villager, context)`)
+- scoring weights adapt to village needs via `governance.needs_vector`
+- elections use internal ranked-choice with instant runoff (`governance.run_ranked_choice_election()`)
+
+Legitimacy and revalidation:
+- leaders carry dynamic legitimacy (`governance.legitimacy_score`)
+- revalidation can trigger from low legitimacy, dispute, crisis escalation, or recovery shifts (`governance.trigger_revalidation_if_needed()`)
+- failed revalidation triggers immediate election
+
+House-level transition behavior:
+- house briefs apply crisis-aware governance overrides (`house_brief.apply_governance_override()`)
+- dispute language is constrained to non-adversarial functional framing (`crisis_brief.language_rules`)
+- post-election stabilization reduces contradiction pressure and emotional volatility (`governance.apply_post_election_stabilization()`)
+
+Telemetry:
+- governance metrics are tracked under `telemetry.governance.*`
 
 ## Is this a game, a simulation, or both?
 It is both, with simulation as the foundation and game-like interaction as the interface layer.

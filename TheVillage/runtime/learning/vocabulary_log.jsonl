@@ -87,3 +87,9 @@
 {"ts": "2026-06-03T02:27:05.522530+00:00", "event": "learn_definition", "term": "sonder", "source": "user"}
 {"ts": "2026-06-03T02:27:05.757230+00:00", "event": "unknown_term", "session_id": "thevillage-test", "term": "quoralen"}
 {"ts": "2026-06-03T02:27:05.967037+00:00", "event": "unknown_term", "session_id": "thevillage-test", "term": "vesperline"}
+{"ts": "2026-06-03T02:58:25.011701+00:00", "event": "learn_definition", "term": "continuity", "source": "merriam_webster"}
+{"ts": "2026-06-03T02:58:25.243206+00:00", "event": "learn_definition", "term": "risk", "source": "merriam_webster"}
+{"ts": "2026-06-03T02:58:25.478510+00:00", "event": "unknown_term", "session_id": "thevillage-governance-test", "term": "edda"}
+{"ts": "2026-06-03T02:58:25.787655+00:00", "event": "unknown_term", "session_id": "thevillage-governance-test", "term": "does"}
+{"ts": "2026-06-03T02:58:26.028788+00:00", "event": "learn_definition", "term": "legitimacy", "source": "merriam_webster"}
+{"ts": "2026-06-03T02:58:26.263108+00:00", "event": "learn_definition", "term": "interim", "source": "merriam_webster"}

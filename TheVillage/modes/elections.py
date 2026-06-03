@@ -5,10 +5,28 @@ from __future__ import annotations
 from typing import Iterable
 
 from TheVillage.core.models import InternalState
-from TheVillage.governance import choose_leader, get_leader, set_leader
+from TheVillage.governance import (
+    get_leader,
+    maybe_run_crisis_election,
+    maybe_run_revalidation_election,
+    maybe_run_scheduled_election,
+    run_election,
+)
 
 
 class ElectionsMode:
+    @staticmethod
+    def _as_int(value: object, fallback: int = 0) -> int:
+        if isinstance(value, bool):
+            return int(value)
+        if isinstance(value, int):
+            return value
+        if isinstance(value, float):
+            return int(value)
+        if isinstance(value, str) and value.strip().lstrip("-").isdigit():
+            return int(value)
+        return fallback
+
     def _is_triggered(self, state: InternalState) -> bool:
         contradictions = max(
             int(state.health_metrics.contradiction_count),
@@ -38,6 +56,35 @@ class ElectionsMode:
         return scores
 
     def apply(self, state: InternalState, villager_names: Iterable[str]) -> dict[str, str | int]:
+        names = list(villager_names)
+
+        scheduled = maybe_run_scheduled_election(state, names)
+        if isinstance(scheduled, dict):
+            return {
+                "mode": "elections",
+                "triggered": 1,
+                "leader": str(scheduled.get("leader", get_leader(state))),
+                "changed": self._as_int(scheduled.get("changed", 0), 0),
+            }
+
+        crisis = maybe_run_crisis_election(state, names)
+        if isinstance(crisis, dict):
+            return {
+                "mode": "elections",
+                "triggered": 1,
+                "leader": str(crisis.get("leader", get_leader(state))),
+                "changed": self._as_int(crisis.get("changed", 0), 0),
+            }
+
+        revalidation = maybe_run_revalidation_election(state, names)
+        if isinstance(revalidation, dict):
+            return {
+                "mode": "elections",
+                "triggered": 1,
+                "leader": str(revalidation.get("leader", get_leader(state))),
+                "changed": self._as_int(revalidation.get("changed", 0), 0),
+            }
+
         if not self._is_triggered(state):
             return {
                 "mode": "elections",
@@ -45,15 +92,15 @@ class ElectionsMode:
                 "leader": get_leader(state),
             }
 
-        scores = self._score_candidates(state, villager_names)
-        winner = choose_leader(scores)
-        previous = get_leader(state)
-        reason = f"Election trigger fired with candidate scores: {scores}"
-        set_leader(state, winner, reason=reason)
-
+        result = run_election(
+            state,
+            names,
+            election_type="pressure",
+            reason="Election trigger fired from contradiction/tension pressure.",
+        )
         return {
             "mode": "elections",
             "triggered": 1,
-            "leader": get_leader(state),
-            "changed": int(previous != winner),
+            "leader": str(result.get("leader", get_leader(state))),
+            "changed": self._as_int(result.get("changed", 0), 0),
         }

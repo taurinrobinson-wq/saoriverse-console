@@ -22,6 +22,31 @@ Use this log to track:
 
 ---
 
+## 2026-06-02 - Humane Governance Charter Model (Terms, Ranked-Choice, Revalidation, Telemetry)
+- Summary: Implemented a stable, development-oriented governance charter that rotates leadership functionally, enforces anti-stagnation limits, and handles crisis/dispute/revalidation without adversarial framing.
+- Scope: Governance module, elections mode, core state model, mind orchestration, house-brief behavior, telemetry wiring, and regression coverage.
+- User impact: Leadership now behaves as a temporary cognitive mode with explicit term cadence, eligibility gates, mission-fit revalidation, and calmer transition language during crisis.
+- Technical details:
+- Added governance term structure: 14-day terms, max 2 consecutive terms, and 2-term cooldown tracking.
+- Added eligibility checks that reject cooldown, impairment, and over-limit candidates.
+- Added scheduled elections at dawn cadence, with crisis interim transfer that does not increment term count and does not cancel scheduled elections.
+- Added functional leadership scoring using coherence contribution, role strengths, needs weighting, emotional field state, reward trend, and mission alignment.
+- Added dynamic `governance.needs_vector` to rebalance candidate fitness by current system pressures.
+- Added ranked-choice election with instant runoff and Aura-aware modifier.
+- Added dynamic legitimacy scoring and revalidation triggers tied to legitimacy drop, dispute cues, crisis escalation/recovery shifts.
+- Added post-election stabilization to reduce contradiction pressure and smooth emotional volatility.
+- Added house-level governance override integration and non-adversarial tone enforcement in crisis briefs.
+- Added explicit governance telemetry under `telemetry.governance.*` (term durations, cooldowns, consecutive terms, legitimacy, crisis frequency, dispute resolution time, coherence impact, internality indicators).
+- Validation:
+- Governance regression suite added and passing.
+- Crisis -> election -> stabilization loop validated.
+- Term limits and cooldown behavior validated.
+- Revalidation trigger behavior validated.
+- Non-adversarial crisis brief language validated.
+- Follow-up:
+- Expose governance/telemetry slices as first-class API response sections for easier frontend inspection.
+- Add dashboard views for legitimacy trajectory and dispute-resolution latency.
+
 ## 2026-06-01 - Canonical Role Baseline Established
 - Summary: Documented the six canonical houses and their subsystem correlations.
 - Scope: Documentation only.

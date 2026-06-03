@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from typing import List
 
 from TheVillage.core.models import EnvironmentState, Goal, HouseBrief, InternalState, Task, VillagerState, clamp_01
+from TheVillage.governance import enforce_tone_constraints, get_governance
 
 
 ROLE_SYMBOLS = {
@@ -552,6 +553,33 @@ class Villager:
             brief.choices[-1] = "Initiate mediated leadership settlement before conflict escalates."
         if dispute and revalidation:
             brief.choices[-1] = "Initiate mediated settlement plus a time-bounded revalidation election."
+
+        governance = get_governance(state)
+        crisis_brief = governance.get("crisis_brief") if isinstance(governance.get("crisis_brief"), dict) else {}
+        language_rules_text = crisis_brief.get("language_rules") if isinstance(crisis_brief, dict) else []
+        disallowed_terms = ["sabotage", "manipulate", "attack", "undermine", "resentment", "hostility"]
+        preferred_replacements = {
+            "sabotage": "destabilize",
+            "manipulate": "over-influence",
+            "attack": "pressure",
+            "undermine": "weaken",
+            "resentment": "concern",
+            "hostility": "strain",
+        }
+        brief.apply_governance_override({
+            "crisis_override_active": bool(governance.get("crisis_override_active", False)),
+            "transition_active": True,
+            "legitimacy_score": float(governance.get("legitimacy_score", 0.7)),
+            "language_rules": {
+                "rules": list(language_rules_text) if isinstance(language_rules_text, list) else [],
+                "disallowed_terms": disallowed_terms,
+                "preferred_replacements": preferred_replacements,
+            },
+        })
+        brief.house_goal = enforce_tone_constraints(brief.house_goal)
+        brief.problem_statement = enforce_tone_constraints(brief.problem_statement)
+        brief.guidance_request = enforce_tone_constraints(brief.guidance_request)
+        brief.choices = [enforce_tone_constraints(choice) for choice in brief.choices]
 
     def refresh_house_brief(self, state: InternalState, environment: EnvironmentState) -> None:
         villager_state = self.ensure_state(state)

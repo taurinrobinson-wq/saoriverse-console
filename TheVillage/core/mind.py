@@ -16,6 +16,14 @@ from TheVillage.learning.logging import append_conversation
 from TheVillage.learning.vocabulary import VocabularyLearner
 from TheVillage.memory.capsule import MemoryCapsule
 from TheVillage.memory.store import append_capsule, load_state, reset_session, save_state
+from TheVillage.governance import (
+    get_governance,
+    maybe_run_crisis_election,
+    maybe_run_scheduled_election,
+    record_dispute_resolution_time,
+    trigger_revalidation_if_needed,
+    update_legitimacy_score,
+)
 
 
 class TheVillageEngine:
@@ -50,6 +58,7 @@ class TheVillageEngine:
             previous_hour = self.state.current_hour
             self.state.current_hour = (self.state.current_hour + 1) % 24
             process_hour(self.state, self.state.environment, self.villagers, aura=self.aura)
+            maybe_run_scheduled_election(self.state, [villager.name for villager in self.villagers])
             self._advance_crisis_arc()
             self.evolution.run_cycle(
                 self.state,
@@ -134,14 +143,22 @@ class TheVillageEngine:
             self.state.villager_states["Edda"].reward_trend = min(1.0, self.state.villager_states["Edda"].reward_trend + 0.25)
 
         self.state.evolution_mode = "elections"
-        mode_result = self.evolution.run_cycle(
-            self.state,
-            [villager.name for villager in self.villagers],
-            mode="elections",
-            aura=self.aura,
-        )
+        governance = get_governance(self.state)
+        governance["crisis_override_active"] = True
+        governance["crisis_election_does_not_increment_term_count"] = True
 
-        elected = (mode_result.get("result") or {}).get("leader") or self.state.executive_function
+        crisis_result = maybe_run_crisis_election(self.state, [villager.name for villager in self.villagers])
+        if crisis_result is None:
+            mode_result = self.evolution.run_cycle(
+                self.state,
+                [villager.name for villager in self.villagers],
+                mode="elections",
+                aura=self.aura,
+            )
+            elected = (mode_result.get("result") or {}).get("leader") or self.state.executive_function
+        else:
+            elected = str(crisis_result.get("leader") or self.state.executive_function)
+
         self.state.recent_events.append(
             f"Crisis protocol activated: governance shifted to elections mode and selected leader {elected}."
         )
@@ -199,6 +216,7 @@ class TheVillageEngine:
             self.state.evolution_meta["dispute_resolved"] = True
             self.state.evolution_meta["active_crisis"] = ""
             self.state.evolution_meta["leadership_dispute"] = False
+            record_dispute_resolution_time(self.state, elapsed_turns)
             self.state.recent_events.append(
                 "Leadership settlement reached: interim mandate converted into a reviewed transition plan."
             )
@@ -317,6 +335,7 @@ class TheVillageEngine:
             touched = True
 
         if touched:
+            trigger_revalidation_if_needed(self.state)
             self.state.unresolved_tensions = self.state.unresolved_tensions[-8:]
             self.state.recent_events = self.state.recent_events[-20:]
         return touched
@@ -351,6 +370,14 @@ class TheVillageEngine:
         self._update_emotions(interpretation.features, env_feedback)
         self._update_self_model(interpretation.features, vocab_result)
         self._update_subsystems(interpretation.features)
+        update_legitimacy_score(self.state)
+        if trigger_revalidation_if_needed(self.state):
+            self.evolution.run_cycle(
+                self.state,
+                [villager.name for villager in self.villagers],
+                mode="elections",
+                aura=self.aura,
+            )
         self._update_goals(interpretation.features, env_feedback)
         self._update_reward(interpretation.features, env_feedback, vocab_result)
         self._update_narrative(interpretation.features, env_feedback, vocab_result)

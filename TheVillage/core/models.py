@@ -128,6 +128,36 @@ class HouseBrief:
     downstream_impacts: List[str] = field(default_factory=list)
     dream_insight: str | None = None
     aspiration: str | None = None
+
+    def apply_governance_override(self, governance_context: dict | None = None) -> None:
+        context = governance_context or {}
+        crisis_active = bool(context.get("crisis_override_active"))
+        transition_active = bool(context.get("transition_active"))
+        legitimacy = float(context.get("legitimacy_score", 0.5))
+        language_rules = context.get("language_rules") or {}
+
+        if crisis_active or transition_active:
+            self.influence_strength = clamp_01(self.influence_strength + 0.08)
+            if "leadership" not in self.problem_statement.lower():
+                self.problem_statement = f"Leadership transition pressure is active. {self.problem_statement}"
+            if "transition" not in self.guidance_request.lower():
+                self.guidance_request = "Which guidance option best supports safe leadership transition and mission continuity?"
+            if legitimacy < 0.5:
+                self.downstream_impacts.append("Can restore leadership legitimacy and reduce contradiction pressure.")
+            else:
+                self.downstream_impacts.append("Helps consolidate post-election stability and cross-house trust.")
+
+        disallowed = [str(item).lower() for item in (language_rules.get("disallowed_terms") or [])]
+        replacements = language_rules.get("preferred_replacements") or {}
+        for field_name in ("house_goal", "problem_statement", "guidance_request"):
+            text = getattr(self, field_name)
+            lowered = text.lower()
+            for token in disallowed:
+                if token and token in lowered:
+                    replacement = str(replacements.get(token) or "functional concern")
+                    text = text.replace(token, replacement).replace(token.title(), replacement.title())
+            setattr(self, field_name, text)
+        self.downstream_impacts = self.downstream_impacts[-4:]
     last_updated_turn: int = 0
 
     def to_dict(self) -> dict:
@@ -162,6 +192,50 @@ class EnvironmentState:
             "coherence": round(self.coherence, 3),
             "last_event": self.last_event,
             "affordances": list(self.affordances),
+        }
+
+
+@dataclass
+class GovernanceState:
+    term_length_days: int = 14
+    max_consecutive_terms: int = 2
+    cooldown_terms_after_limit: int = 2
+    current_term_number: int = 1
+    current_term_started_day: int = 1
+    next_scheduled_election_day: int = 15
+    consecutive_terms_served: Dict[str, int] = field(default_factory=dict)
+    cooldown_remaining: Dict[str, int] = field(default_factory=dict)
+    crisis_override_active: bool = False
+    crisis_election_does_not_increment_term_count: bool = True
+    needs_vector: Dict[str, float] = field(default_factory=dict)
+    legitimacy_score: float = 0.7
+    legitimacy_threshold: float = 0.45
+    mission_alignment_score: float = 0.7
+    active_dispute: bool = False
+    pending_revalidation: bool = False
+    last_election_day: int = 1
+    last_election_kind: str = "scheduled"
+
+    def to_dict(self) -> dict:
+        return {
+            "term_length_days": self.term_length_days,
+            "max_consecutive_terms": self.max_consecutive_terms,
+            "cooldown_terms_after_limit": self.cooldown_terms_after_limit,
+            "current_term_number": self.current_term_number,
+            "current_term_started_day": self.current_term_started_day,
+            "next_scheduled_election_day": self.next_scheduled_election_day,
+            "consecutive_terms_served": dict(self.consecutive_terms_served),
+            "cooldown_remaining": dict(self.cooldown_remaining),
+            "crisis_override_active": self.crisis_override_active,
+            "crisis_election_does_not_increment_term_count": self.crisis_election_does_not_increment_term_count,
+            "needs_vector": {key: round(value, 3) for key, value in self.needs_vector.items()},
+            "legitimacy_score": round(self.legitimacy_score, 3),
+            "legitimacy_threshold": round(self.legitimacy_threshold, 3),
+            "mission_alignment_score": round(self.mission_alignment_score, 3),
+            "active_dispute": self.active_dispute,
+            "pending_revalidation": self.pending_revalidation,
+            "last_election_day": self.last_election_day,
+            "last_election_kind": self.last_election_kind,
         }
 
 
@@ -226,6 +300,8 @@ class InternalState:
     event_backlog: List[dict] = field(default_factory=list)
     mode_history: List[str] = field(default_factory=list)
     evolution_meta: Dict[str, object] = field(default_factory=dict)
+    governance: GovernanceState = field(default_factory=GovernanceState)
+    telemetry: Dict[str, object] = field(default_factory=dict)
     environment: EnvironmentState = field(default_factory=EnvironmentState)
 
     def to_dict(self) -> dict:
@@ -266,6 +342,8 @@ class InternalState:
             "event_backlog": list(self.event_backlog),
             "mode_history": list(self.mode_history),
             "evolution_meta": dict(self.evolution_meta),
+            "governance": self.governance.to_dict(),
+            "telemetry": dict(self.telemetry),
             "environment": self.environment.to_dict(),
         }
 
@@ -294,6 +372,38 @@ class InternalState:
         )
         mission_data = data.get("main_mission", {})
         mission = MainMission(statement=mission_data.get("statement", defaults.main_mission.statement))
+        governance_data = data.get("governance", {})
+        governance = GovernanceState(
+            term_length_days=int(governance_data.get("term_length_days", 14) or 14),
+            max_consecutive_terms=int(governance_data.get("max_consecutive_terms", 2) or 2),
+            cooldown_terms_after_limit=int(governance_data.get("cooldown_terms_after_limit", 2) or 2),
+            current_term_number=int(governance_data.get("current_term_number", 1) or 1),
+            current_term_started_day=int(governance_data.get("current_term_started_day", 1) or 1),
+            next_scheduled_election_day=int(governance_data.get("next_scheduled_election_day", 15) or 15),
+            consecutive_terms_served={
+                str(key): int(value)
+                for key, value in (governance_data.get("consecutive_terms_served") or {}).items()
+            },
+            cooldown_remaining={
+                str(key): int(value)
+                for key, value in (governance_data.get("cooldown_remaining") or {}).items()
+            },
+            crisis_override_active=bool(governance_data.get("crisis_override_active", False)),
+            crisis_election_does_not_increment_term_count=bool(
+                governance_data.get("crisis_election_does_not_increment_term_count", True)
+            ),
+            needs_vector={
+                str(key): float(value)
+                for key, value in (governance_data.get("needs_vector") or {}).items()
+            },
+            legitimacy_score=float(governance_data.get("legitimacy_score", 0.7)),
+            legitimacy_threshold=float(governance_data.get("legitimacy_threshold", 0.45)),
+            mission_alignment_score=float(governance_data.get("mission_alignment_score", 0.7)),
+            active_dispute=bool(governance_data.get("active_dispute", False)),
+            pending_revalidation=bool(governance_data.get("pending_revalidation", False)),
+            last_election_day=int(governance_data.get("last_election_day", 1) or 1),
+            last_election_kind=str(governance_data.get("last_election_kind", "scheduled") or "scheduled"),
+        )
         villager_states = {
             key: VillagerState(
                 name=value.get("name", key),
@@ -369,6 +479,8 @@ class InternalState:
             event_backlog=data.get("event_backlog", []),
             mode_history=data.get("mode_history", []),
             evolution_meta=data.get("evolution_meta", {}),
+            governance=governance,
+            telemetry=data.get("telemetry", {}),
             environment=environment,
         )
 

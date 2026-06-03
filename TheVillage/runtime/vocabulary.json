@@ -229,6 +229,26 @@
       "definition": "to call into question the truth of : to be uncertain or in doubt about",
       "source": "merriam_webster",
       "confidence": 0.7
+    },
+    "continuity": {
+      "definition": "uninterrupted connection, succession, or union",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "risk": {
+      "definition": "possibility of loss or injury : peril",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "legitimacy": {
+      "definition": "the quality or state of being legitimate",
+      "source": "merriam_webster",
+      "confidence": 0.7
+    },
+    "interim": {
+      "definition": "an intervening time : interval",
+      "source": "merriam_webster",
+      "confidence": 0.7
     }
   }
 }
