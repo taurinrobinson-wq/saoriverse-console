@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velinor: Marketplace Parallax - Phase 1 v3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#1a1510;font-family:'Inter',sans-serif}
+canvas{display:block;width:100vw;height:100vh;cursor:default}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<canvas id="gc"></canvas>
+<script>
+(function(){
+"use strict";
+
+const C=document.getElementById('gc');
+const X=C.getContext('2d');
+let W,H;
+
+function resize(){W=C.width=window.innerWidth;H=C.height=window.innerHeight}
+resize();
+window.addEventListener('resize',resize);
+
+// ── COLOR PALETTE ──
+const COLORS={
+  bg:'#1a1510',
+  amber:'#d4a04a',
+  teal:'#4a9a8a',
+  violet:'#8a5ab5',
+  rose:'#b5607a',
+  gold:'#c9a84c',
+  offwhite:'#e8ddd0',
+  dimwhite:'#a89888',
+  stone_dark:'#3d3530',
+  stone_mid:'#5c5248',
+  stone_light:'#7a6b55',
+  wood_dark:'#4a3f35',
+  wood_light:'#6b5c50'
+};
+
+// ── DIALOGUE SYSTEM ──
+const DLG={
+  ravi:[
+    {speaker:'Ravi',text:"We don't sell to strangers. Not since Ophina.",choices:[
+      {text:"I heard about what happened. I'm sorry.",tag:'T'},
+      {text:"What happened to Ophina?",tag:'O'},
+      {text:"I'm not here to buy. I'm here to understand.",tag:'N'}
+    ]},
+    {speaker:'Nima',text:"She was just curious. Children always are. The wall — nobody marked it as unsafe. Nobody warned her.",choices:null},
+    {speaker:'Ravi',text:"We found her in the afternoon. Under the stones. This stall... we keep it open because closing it means she's really gone.",choices:[
+      {text:"You're keeping her alive this way.",tag:'E'},
+      {text:"Do you know what caused the collapse?",tag:'O'}
+    ]},
+    {speaker:'Ravi',text:"Find something — anything — that can hold the weight of what we're carrying. I don't know what I mean. But something here knows.",choices:null}
+  ],
+  nima:[
+    {speaker:'Nima',text:"I stand here every morning. I don't know why. The stone is cold. She isn't here anymore.",choices:[
+      {text:"That takes courage.",tag:'T'},
+      {text:"How long have you been coming here?",tag:'O'},
+      {text:"You don't have to explain yourself to anyone.",tag:'E'}
+    ]},
+    {speaker:'Nima',text:"She used to hum. I can almost hear it. Almost.",choices:null},
+    {speaker:'Nima',text:"There's something near here. I can feel it when the light shifts. Like a word I once knew but can't say anymore.",choices:null}
+  ],
+  kaelen:[
+    {speaker:'Kaelen',text:"I wasn't near the wall. I wasn't anywhere near it.",choices:[
+      {text:"It's okay. Whatever happened, it wasn't your fault.",tag:'E'},
+      {text:"But you know something about what occurred?",tag:'O'},
+      {text:"I'm not here to accuse you.",tag:'T'}
+    ]},
+    {speaker:'Kaelen',text:"...I was taking something from the stall across the way. Stupid. A few coins. And I saw the girl — she was climbing, looking at something on top of the wall. I should have called out. I didn't. Because I was afraid of being seen.",choices:null},
+    {speaker:'Kaelen',text:"Then the stone moved. And I ran. And I've been running in circles ever since.",choices:[
+      {text:"You can make it mean something now.",tag:'N'},
+      {text:"That's the weight you're carrying.",tag:'E'}
+    ]},
+    {speaker:'Kaelen',text:"There's something near where I dropped the bag. Near the wall. I kept going back to it and couldn't pick it up.",choices:null}
+  ]
+};
+
+// ── SPRITE LOADING ──
+const spriteCache={};
+function loadSprite(npcKey,imageUrl){
+  if(spriteCache[npcKey])return;
+  const img=new Image();
+  img.src=imageUrl;
+  img.onload=()=>{spriteCache[npcKey]=img};
+}
+// Load both portrait and full-body sprites
+loadSprite('ravi','../npcs/Ravi(transparency).png');
+loadSprite('nima','../npcs/Nima(transparency).png');
+loadSprite('kaelen','../npcs/Kaelen_nobg.png');
+
+// ── INPUT ──
+const keys={};
+let mouseX=0,mouseY=0;
+document.addEventListener('keydown',e=>{
+  keys[e.key.toLowerCase()]=true;
+  keys[e.code]=true;
+  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();
+  if(e.key.toLowerCase()==='e'){
+    if(G.dialogueActive){advanceDialogue();}
+    else if(G.playerNearNPC){startDialogue(G.playerNearNPC);}
+  }
+  if(e.key.toLowerCase()==='escape'&&G.dialogueActive)endDialogue();
+});
+document.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;keys[e.code]=false});
+C.addEventListener('mousemove',e=>{const r=C.getBoundingClientRect();mouseX=(e.clientX-r.left)*(W/r.width);mouseY=(e.clientY-r.top)*(H/r.height)});
+
+// ── GAME STATE ──
+const G={
+  scene:'marketplace',
+  time:0,
+  worldWidth:1200,
+  worldHeight:600,
+  
+  // Player
+  player:{
+    x:600,     // Center horizontally
+    y:450,
+    vx:0,vy:0,
+    speed:180,
+    width:30,height:60,
+    depth:0.9
+  },
+  
+  // Camera (centered on world)
+  camera:{
+    x:0,y:0,
+    targetX:0,targetY:0,
+    smoothing:0.1
+  },
+  
+  // NPCs positioned at specific depths for sizing reference
+  npcs:{
+    ravi:{x:250,y:340,width:30,height:60,name:'Ravi',met:false,active:true,spriteUrl:'../npcs/Ravi(transparency).png'},
+    nima:{x:600,y:350,width:28,height:58,name:'Nima',met:false,active:true,spriteUrl:'../npcs/Nima(transparency).png'},
+    kaelen:{x:900,y:360,width:30,height:60,name:'Kaelen',met:false,active:true,spriteUrl:'../npcs/Kaelen_nobg.png'}
+  },
+  
+  // Collision - tighter to visual stalls
+  stalls:[
+    // Left side stalls
+    {x:60,y:180,w:100,h:220,label:'left_stall_1'},
+    {x:30,y:450,w:90,h:150,label:'left_stall_2'},
+    // Right side stalls
+    {x:1050,y:190,w:110,h:210,label:'right_stall_1'},
+    {x:1080,y:450,w:100,h:160,label:'right_stall_2'}
+  ],
+  
+  // Dialogue
+  playerNearNPC:null,
+  interactRange:80,
+  dialogueActive:false,
+  currentNPC:null,
+  dialogueIndex:0,
+  selectedChoice:0,
+  
+  sceneDepth:0
+};
+
+// ── PARALLAX LAYERS ──
+const layers=[
+  {name:'sky',parallaxSpeed:0.02,drawFn:drawSkyLayer},
+  {name:'distant_canyon',parallaxSpeed:0.08,drawFn:drawDistantCanyon},
+  {name:'midground_stalls',parallaxSpeed:0.25,drawFn:drawMidgroundStalls},
+  {name:'stalls',parallaxSpeed:0.6,drawFn:drawStalls}
+];
+
+// ── LAYER DRAWING FUNCTIONS ──
+function drawSkyLayer(cameraX,cameraY){
+  const grad=X.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'#0d0a15');
+  grad.addColorStop(0.3,'#1a1520');
+  grad.addColorStop(1,'#2d1f2a');
+  X.fillStyle=grad;
+  X.fillRect(0,0,W,H);
+}
+
+function drawDistantCanyon(cameraX,cameraY){
+  X.fillStyle='#3d2820';
+  X.fillRect(0,H*0.35,W,H*0.25);
+  
+  // Minimal horizontal parallax
+  const parallaxOffset=(cameraX-W/2)*0.02;
+  for(let i=0;i<5;i++){
+    X.fillStyle='rgba(60,50,40,0.3)';
+    X.fillRect(i*250+parallaxOffset,H*0.35,220,H*0.25);
+  }
+}
+
+function drawMidgroundStalls(cameraX,cameraY){
+  // Distant smaller stalls
+  const parallaxOffset=(cameraX-W/2)*0.08;
+  X.fillStyle='#6b5c45';
+  X.fillRect(120+parallaxOffset,200,80,120);
+  X.fillRect(550+parallaxOffset,210,90,110);
+  X.fillRect(1000+parallaxOffset,190,85,130);
+}
+
+function drawStalls(cameraX,cameraY){
+  // Main stalls with minimal horizontal parallax
+  const parallaxOffset=(cameraX-W/2)*0.15;
+  
+  G.stalls.forEach(stall=>{
+    const sx=stall.x+parallaxOffset-cameraX;
+    const sy=stall.y-cameraY;
+    
+    // Stall base/support legs
+    X.fillStyle=COLORS.wood_dark;
+    X.fillRect(sx+5,sy+stall.h-8,12,8);
+    X.fillRect(sx+stall.w-17,sy+stall.h-8,12,8);
+    
+    // Stall walls/shelving
+    X.fillStyle=COLORS.stone_mid;
+    X.fillRect(sx,sy,stall.w,stall.h);
+    
+    // Front edge shadow
+    X.fillStyle=COLORS.stone_dark;
+    X.fillRect(sx,sy+stall.h-6,stall.w,6);
+    
+    // Top trim
+    X.fillStyle=COLORS.stone_light;
+    X.fillRect(sx,sy,stall.w,4);
+    
+    // Stall roof/canopy
+    X.fillStyle=COLORS.wood_dark;
+    X.beginPath();
+    X.moveTo(sx-8,sy);
+    X.lineTo(sx+stall.w+8,sy);
+    X.lineTo(sx+stall.w+6,sy-12);
+    X.lineTo(sx-6,sy-12);
+    X.closePath();
+    X.fill();
+    
+    // Roof edge highlight
+    X.strokeStyle=COLORS.amber;
+    X.lineWidth=1;
+    X.globalAlpha=0.4;
+    X.beginPath();
+    X.moveTo(sx-8,sy);
+    X.lineTo(sx+stall.w+8,sy);
+    X.stroke();
+    X.globalAlpha=1;
+    
+    // Shelf lines
+    X.strokeStyle=COLORS.amber;
+    X.lineWidth=1;
+    X.globalAlpha=0.3;
+    for(let i=1;i<3;i++){
+      const lineY=sy+(i*stall.h/3);
+      X.beginPath();
+      X.moveTo(sx+2,lineY);
+      X.lineTo(sx+stall.w-2,lineY);
+      X.stroke();
+    }
+    X.globalAlpha=1;
+  });
+}
+
+// ── UPDATE ──
+let lastT=0;
+function update(dt){
+  if(dt>0.05)dt=0.05;
+  G.time+=dt;
+  
+  if(!G.dialogueActive){
+    let moveX=0,moveY=0;
+    if(keys['w']||keys['arrowup'])moveY-=1;
+    if(keys['s']||keys['arrowdown'])moveY+=1;
+    if(keys['a']||keys['arrowleft'])moveX-=1;
+    if(keys['d']||keys['arrowright'])moveX+=1;
+    
+    const len=Math.sqrt(moveX*moveX+moveY*moveY);
+    if(len>0){moveX/=len;moveY/=len;}
+    
+    G.player.vx=moveX*G.player.speed;
+    G.player.vy=moveY*G.player.speed;
+    
+    const newX=G.player.x+G.player.vx*dt;
+    const newY=G.player.y+G.player.vy*dt;
+    
+    if(!checkCollision(newX,newY,G.player.width,G.player.height)){
+      G.player.x=newX;
+      G.player.y=newY;
+    }
+    
+    // World boundaries
+    G.player.x=Math.max(20,Math.min(G.worldWidth-20,G.player.x));
+    G.player.y=Math.max(10,Math.min(G.worldHeight-10,G.player.y));
+  }
+  
+  // Calculate depth from Y position
+  G.player.depth=Math.min(1,Math.max(0,G.player.y/G.worldHeight));
+  G.sceneDepth=G.player.depth;
+  
+  // Camera centering - minimal horizontal movement
+  G.camera.targetX=Math.max(0,Math.min(G.worldWidth-W,G.player.x-W/2));
+  G.camera.targetY=Math.max(0,Math.min(G.worldHeight-H,G.player.y-H*0.35));
+  
+  G.camera.x+=(G.camera.targetX-G.camera.x)*G.camera.smoothing;
+  G.camera.y+=(G.camera.targetY-G.camera.y)*G.camera.smoothing;
+  
+  // Check NPC proximity
+  G.playerNearNPC=null;
+  Object.keys(G.npcs).forEach(key=>{
+    const npc=G.npcs[key];
+    const dx=npc.x-G.player.x;
+    const dy=npc.y-G.player.y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<G.interactRange){
+      G.playerNearNPC=key;
+    }
+  });
+}
+
+function checkCollision(x,y,w,h){
+  for(let stall of G.stalls){
+    if(x<stall.x+stall.w&&x+w>stall.x&&
+       y<stall.y+stall.h&&y+h>stall.y){
+      return true;
+    }
+  }
+  return false;
+}
+
+// ── DIALOGUE ──
+function startDialogue(npcKey){
+  G.dialogueActive=true;
+  G.currentNPC=npcKey;
+  G.dialogueIndex=0;
+  G.selectedChoice=0;
+  G.npcs[npcKey].met=true;
+}
+
+function advanceDialogue(){
+  if(!G.currentNPC)return;
+  const lines=DLG[G.currentNPC];
+  if(!lines)return;
+  
+  G.dialogueIndex++;
+  G.selectedChoice=0;
+  
+  if(G.dialogueIndex>=lines.length){
+    endDialogue();
+  }
+}
+
+function endDialogue(){
+  G.dialogueActive=false;
+  G.currentNPC=null;
+  G.dialogueIndex=0;
+  G.selectedChoice=0;
+}
+
+// ── RENDER ──
+function render(){
+  X.fillStyle=COLORS.bg;
+  X.fillRect(0,0,W,H);
+  
+  X.save();
+  X.translate(-G.camera.x,-G.camera.y);
+  
+  // Draw layers
+  layers.forEach(layer=>{
+    layer.drawFn(G.camera.x,G.camera.y);
+  });
+  
+  // Draw NPCs
+  Object.keys(G.npcs).forEach(key=>{
+    const npc=G.npcs[key];
+    drawNPC(npc,key);
+  });
+  
+  // Draw player
+  drawPlayer();
+  
+  // Interaction prompt
+  if(G.playerNearNPC){
+    const npc=G.npcs[G.playerNearNPC];
+    X.fillStyle=COLORS.amber;
+    X.font='bold 14px Inter';
+    X.textAlign='center';
+    X.fillText('[E] Talk',npc.x,npc.y-100);
+  }
+  
+  X.restore();
+  
+  // HUD
+  renderHUD();
+  
+  // Dialogue
+  if(G.dialogueActive){
+    renderDialogue();
+  }
+}
+
+function drawNPC(npc,key){
+  // Try to draw sprite image
+  if(spriteCache[key]){
+    const img=spriteCache[key];
+    // Draw sprite with aspect ratio preserved
+    const displayHeight=npc.height;
+    const displayWidth=(img.width/img.height)*displayHeight;
+    
+    // Shadow
+    X.globalAlpha=0.3;
+    X.fillStyle='#000';
+    X.ellipse(npc.x,npc.y+displayHeight*0.4,displayWidth*0.3,3,0,0,2*Math.PI);
+    X.fill();
+    X.globalAlpha=1;
+    
+    // Draw sprite centered
+    X.drawImage(img,npc.x-displayWidth/2,npc.y-displayHeight,displayWidth,displayHeight);
+  }else{
+    // Fallback: simple representation
+    X.globalAlpha=0.4;
+    X.fillStyle='#000';
+    X.ellipse(npc.x,npc.y+npc.height/2+3,npc.width/2+2,3,0,0,2*Math.PI);
+    X.fill();
+    X.globalAlpha=1;
+    
+    X.fillStyle=COLORS.stone_light;
+    X.fillRect(npc.x-npc.width/2,npc.y-npc.height,npc.width,npc.height);
+    
+    X.fillStyle=COLORS.amber;
+    X.beginPath();
+    X.arc(npc.x,npc.y-npc.height-8,8,0,Math.PI*2);
+    X.fill();
+  }
+  
+  // Name label
+  X.fillStyle=COLORS.gold;
+  X.font='bold 12px Inter';
+  X.textAlign='center';
+  X.fillText(npc.name,npc.x,npc.y-npc.height-120);
+}
+
+function drawPlayer(){
+  const depth=G.player.depth;
+  // Player scales from NPC size (1.0) to 1.5x at bottom
+  const scale=1.0+depth*0.5;
+  
+  // Shadow
+  X.globalAlpha=Math.max(0.2,depth*0.5);
+  X.fillStyle='#000';
+  X.ellipse(G.player.x,G.player.y+G.player.height*scale*0.4,G.player.width*scale*0.3,2,0,0,2*Math.PI);
+  X.fill();
+  X.globalAlpha=1;
+  
+  // Body
+  X.save();
+  X.translate(G.player.x,G.player.y);
+  X.scale(scale,scale);
+  
+  X.fillStyle=COLORS.offwhite;
+  X.fillRect(-G.player.width/2,-G.player.height,G.player.width,G.player.height);
+  
+  // Head
+  X.fillStyle=COLORS.dimwhite;
+  X.beginPath();
+  X.arc(0,-G.player.height-6,6,0,Math.PI*2);
+  X.fill();
+  
+  // Eyes
+  X.fillStyle='#000';
+  X.fillRect(-2,-G.player.height-7,2,2);
+  X.fillRect(2,-G.player.height-7,2,2);
+  
+  X.restore();
+}
+
+function renderHUD(){
+  X.fillStyle=COLORS.amber;
+  X.font='12px monospace';
+  X.textAlign='left';
+  X.fillText(`Depth: ${(G.player.depth*100).toFixed(0)}%`,20,30);
+  X.fillText(`WASD/Arrows: Move | E: Interact/Advance | ESC: Close`,20,H-20);
+}
+
+function renderDialogue(){
+  // Dark overlay
+  X.globalAlpha=0.85;
+  X.fillStyle='#000';
+  X.fillRect(0,0,W,H);
+  X.globalAlpha=1;
+  
+  const portraitW=160;
+  const portraitH=200;
+  const portraitX=60;
+  const portraitY=H/2-portraitH/2;
+  
+  // Portrait frame
+  X.fillStyle=COLORS.stone_dark;
+  X.fillRect(portraitX-3,portraitY-3,portraitW+6,portraitH+6);
+  X.strokeStyle=COLORS.amber;
+  X.lineWidth=3;
+  X.strokeRect(portraitX-3,portraitY-3,portraitW+6,portraitH+6);
+  
+  // Portrait/sprite image
+  if(spriteCache[G.currentNPC]){
+    X.drawImage(spriteCache[G.currentNPC],portraitX,portraitY,portraitW,portraitH);
+  }else{
+    X.fillStyle=COLORS.stone_mid;
+    X.fillRect(portraitX,portraitY,portraitW,portraitH);
+    X.fillStyle=COLORS.dimwhite;
+    X.font='12px Inter';
+    X.textAlign='center';
+    X.fillText('Loading...',portraitX+portraitW/2,portraitY+portraitH/2);
+  }
+  
+  // Dialogue box
+  const boxX=portraitX+portraitW+40;
+  const boxY=portraitY;
+  const boxW=W-boxX-60;
+  const boxH=portraitH;
+  
+  X.fillStyle=COLORS.stone_dark;
+  X.fillRect(boxX,boxY,boxW,boxH);
+  X.strokeStyle=COLORS.amber;
+  X.lineWidth=2;
+  X.strokeRect(boxX,boxY,boxW,boxH);
+  
+  // Speaker name
+  X.fillStyle=COLORS.gold;
+  X.font='bold 16px Cinzel';
+  X.textAlign='left';
+  X.fillText(G.currentNPC.charAt(0).toUpperCase()+G.currentNPC.slice(1),boxX+15,boxY+25);
+  
+  // Dialogue text
+  const lines=DLG[G.currentNPC];
+  if(lines&&G.dialogueIndex<lines.length){
+    const currentLine=lines[G.dialogueIndex];
+    X.fillStyle=COLORS.offwhite;
+    X.font='13px Inter';
+    X.textAlign='left';
+    wrapText(currentLine.text,boxX+15,boxY+55,boxW-30,18);
+    
+    // Choices
+    if(currentLine.choices&&currentLine.choices.length>0){
+      let choiceY=boxY+145;
+      currentLine.choices.forEach((choice,i)=>{
+        X.fillStyle=COLORS.dimwhite;
+        X.font='11px Inter';
+        X.fillText(`[${String.fromCharCode(65+i)}] ${choice.text}`,boxX+15,choiceY);
+        choiceY+=16;
+      });
+    }else{
+      // Continue prompt
+      X.fillStyle=COLORS.amber;
+      X.globalAlpha=0.6+Math.sin(G.time*3)*0.4;
+      X.font='11px Inter';
+      X.fillText('[E] Continue',boxX+15,boxY+boxH-10);
+      X.globalAlpha=1;
+    }
+  }else{
+    // No more dialogue
+    X.fillStyle=COLORS.dimwhite;
+    X.font='13px Inter';
+    X.fillText('[E] Close',boxX+15,boxY+50);
+  }
+}
+
+function wrapText(text,x,y,maxW,lineH){
+  const words=text.split(' ');
+  let line='';
+  for(let word of words){
+    const testLine=line+word+' ';
+    const metrics=X.measureText(testLine);
+    if(metrics.width>maxW&&line){
+      X.fillText(line,x,y);
+      line=word+' ';
+      y+=lineH;
+    }else{
+      line=testLine;
+    }
+  }
+  if(line)X.fillText(line,x,y);
+}
+
+// ── MAIN LOOP ──
+function loop(ts){
+  const dt=(ts-lastT)/1000;
+  lastT=ts;
+  update(dt);
+  render();
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(ts=>{
+  lastT=ts;
+  loop(ts);
+});
+
+})();
+</script>
+</body>
+</html>
