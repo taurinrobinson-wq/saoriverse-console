@@ -1,0 +1,1015 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Velinor: Remnants of the Tone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0d0d12; color: #d0d0e0; font-family: Inter, sans-serif; }
+  canvas { image-rendering: pixelated; }
+  .choice-btn { transition: transform 0.18s ease, border-color 0.18s ease; }
+  .choice-btn:hover { transform: scale(1.01); border-color: #5b5b78; }
+</style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-2">
+  <div id="title-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center bg-[#0d0d12]">
+    <h1 class="font-['Press_Start_2P'] text-3xl mb-3">VELINOR</h1>
+    <p class="text-sm text-gray-400 mb-6">Remnants of the Tone</p>
+    <p class="text-xs max-w-md text-gray-500 mb-8 px-3">Saori gives you a codex and vanishes. Velhara remembers collapse but not cause. Follow the glow, recover three resonances, and face the Triglyph in boss_chamber01.</p>
+    <p class="font-['Press_Start_2P'] text-xs">PRESS ENTER</p>
+  </div>
+
+  <div id="victory-screen" class="fixed inset-0 z-50 hidden flex-col items-center justify-center text-center bg-[rgba(13,13,18,0.95)] px-4">
+    <h2 class="font-['Press_Start_2P'] text-2xl mb-3">TRIGLYPH CLAIMED</h2>
+    <p id="victory-text" class="text-sm text-gray-300 max-w-lg"></p>
+    <button id="play-again" class="mt-6 px-4 py-2 rounded bg-[#1d1d2a] border border-[#33334a]">Play Again</button>
+  </div>
+
+  <div class="w-full max-w-[980px] flex flex-col gap-2">
+    <div class="w-full rounded-lg bg-[#15151e] border border-[#2a2a3a] px-3 py-2 flex justify-between items-center">
+      <span class="font-['Press_Start_2P'] text-xs">VELHARA</span>
+      <span id="top-glyph-count" class="font-['Press_Start_2P'] text-xs text-gray-400">RESONANCE 0 / 4</span>
+      <span id="top-area" class="font-['Press_Start_2P'] text-xs text-gray-400">Desert Approach</span>
+    </div>
+    <div class="w-full rounded-lg bg-[#111119] border border-[#232334] px-3 py-2 text-center">
+      <span id="status" class="text-xs text-gray-300">Find Saori. Press E near people, traces, doors, and bosses.</span>
+    </div>
+
+    <div class="flex gap-2 flex-col md:flex-row">
+      <div class="md:w-[200px] rounded-lg bg-[#15151e] border border-[#2a2a3a] p-3">
+        <p class="font-['Press_Start_2P'] text-[10px] text-center text-gray-500 mb-2">KNOWLEDGE</p>
+        <p id="knowledge-text" class="text-xs text-gray-300 leading-relaxed">You know nothing about what happened here.</p>
+      </div>
+
+      <canvas id="game" width="600" height="420" tabindex="0" class="rounded-lg border border-[#2a2a3a] bg-[#0d0d12]"></canvas>
+
+      <div class="md:w-[200px] rounded-lg bg-[#15151e] border border-[#2a2a3a] p-3">
+        <p class="font-['Press_Start_2P'] text-[10px] text-center text-gray-500 mb-2">CODEX</p>
+        <p id="codex-state" class="text-xs text-gray-400">Offline</p>
+        <div id="glyph-list" class="mt-3 flex flex-wrap gap-2"></div>
+      </div>
+    </div>
+
+    <div id="dialogue" class="hidden rounded-lg border border-[#2a2a3a] bg-[#0d0d12] p-3">
+      <p id="npc-name" class="font-['Press_Start_2P'] text-xs mb-2"></p>
+      <p id="dialogue-text" class="text-sm mb-3 min-h-[42px]"></p>
+      <div id="choices" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+      <button id="dialogue-next" class="hidden mt-2 px-3 py-2 rounded bg-[#1d1d2a] border border-[#33334a] text-xs">Continue</button>
+    </div>
+
+    <div id="codex-panel" class="hidden rounded-lg border border-[#2a2a3a] bg-[#111119] p-3">
+      <p id="codex-title" class="font-['Press_Start_2P'] text-[10px] text-center text-gray-500 mb-2">GLYPH CODEX</p>
+      <p id="codex-help" class="text-xs text-gray-400 text-center mb-2">Arrows: Move cursor · Space: Select · G: Close</p>
+      <div id="codex-required" class="hidden flex flex-wrap justify-center gap-2 mb-2"></div>
+      <div id="codex-list" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+    </div>
+  </div>
+
+<script>
+const TILE = 40;
+const COLS = 15;
+const ROWS = 12;
+const INTERACT_RANGE = 58;
+const COLLECT_RANGE = 18;
+const PLAYER_SPEED = 2.2;
+
+const T = { FLOOR:0, WALL:1, SCRAP:2, DUNE:3, PATH:4 };
+
+const AREAS = {
+  desert: [
+    [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+    [3,3,3,3,3,0,0,0,0,0,3,3,3,3,3],
+    [3,3,3,3,0,0,4,4,4,0,0,3,3,3,3],
+    [3,3,3,0,0,4,4,4,4,4,0,0,3,3,3],
+    [3,3,0,0,4,4,4,4,4,4,4,0,0,3,3],
+    [3,0,0,4,4,4,0,0,0,4,4,4,0,0,3],
+    [3,0,0,4,4,0,0,0,0,0,4,4,0,0,3],
+    [3,3,0,0,4,4,0,0,0,4,4,0,0,3,3],
+    [3,3,3,0,0,4,4,4,4,4,0,0,3,3,3],
+    [3,3,3,3,0,0,4,4,4,0,0,3,3,3,3],
+    [3,3,3,3,3,0,0,0,0,0,3,3,3,3,3],
+    [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+  ],
+  velhara: [
+    [2,2,2,2,2,2,2,2,2,2,2,1,1,1,1],
+    [2,2,2,2,0,0,0,0,0,0,2,1,0,0,1],
+    [2,2,2,0,0,4,4,4,4,0,2,1,0,0,1],
+    [2,2,0,0,4,4,0,0,4,4,0,0,0,0,1],
+    [2,0,0,4,4,0,0,0,0,4,4,0,0,0,1],
+    [2,0,0,4,0,0,0,0,0,0,4,0,0,0,0],
+    [2,0,0,4,0,0,0,0,0,0,4,0,0,0,0],
+    [2,0,0,4,4,0,0,0,0,4,4,0,0,0,1],
+    [2,2,0,0,4,4,0,0,4,4,0,0,0,0,1],
+    [2,2,2,0,0,4,4,4,4,0,0,0,0,0,1],
+    [2,2,2,2,0,0,0,0,0,0,2,2,2,2,1],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+  ],
+  chamber: [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,4,4,4,4,4,4,4,4,4,4,4,0,1],
+    [1,0,4,0,0,0,0,0,0,0,0,0,4,0,1],
+    [1,0,4,0,0,0,0,0,0,0,0,0,4,0,1],
+    [1,0,4,0,0,0,0,0,0,0,0,0,4,0,1],
+    [1,0,4,0,0,0,0,0,0,0,0,0,4,0,1],
+    [1,0,4,0,0,0,0,0,0,0,0,0,4,0,1],
+    [1,0,4,0,0,0,0,0,0,0,0,0,4,0,1],
+    [1,0,4,4,4,4,4,4,4,4,4,4,4,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ],
+};
+
+const STORY_LAYOUT = AREAS.velhara.map(row => row.slice());
+AREAS.market_outskirts = STORY_LAYOUT.map(row => row.slice());
+AREAS.market_overlook = STORY_LAYOUT.map(row => row.slice());
+AREAS.market_shrine = STORY_LAYOUT.map(row => row.slice());
+AREAS.market_ruins = STORY_LAYOUT.map(row => row.slice());
+
+const portals = [
+  { from: 'desert', tile: [14, 6], to: 'velhara', spawn: [1, 6], label: 'To Velhara' },
+  { from: 'velhara', tile: [0, 6], to: 'desert', spawn: [13, 6], label: 'To Desert' },
+  { from: 'velhara', tile: [14, 6], to: 'chamber', spawn: [2, 6], label: 'To Chamber' },
+  { from: 'chamber', tile: [1, 6], to: 'velhara', spawn: [13, 6], label: 'To Velhara' },
+  { from: 'velhara', tile: [0, 5], to: 'market_outskirts', spawn: [13, 5], label: 'To Market Outskirts' },
+  { from: 'market_outskirts', tile: [14, 5], to: 'velhara', spawn: [1, 5], label: 'To Velhara' },
+  { from: 'market_outskirts', tile: [0, 5], to: 'market_overlook', spawn: [13, 5], label: 'To Market Overlook' },
+  { from: 'market_overlook', tile: [14, 5], to: 'market_outskirts', spawn: [1, 5], label: 'To Market Outskirts' },
+  { from: 'market_overlook', tile: [0, 5], to: 'market_shrine', spawn: [13, 5], label: 'To Market Shrine' },
+  { from: 'market_shrine', tile: [14, 5], to: 'market_overlook', spawn: [1, 5], label: 'To Market Overlook' },
+  { from: 'market_shrine', tile: [0, 5], to: 'market_ruins', spawn: [13, 5], label: 'To Market Ruins' },
+  { from: 'market_ruins', tile: [14, 5], to: 'market_shrine', spawn: [1, 5], label: 'Back to Shrine' },
+];
+
+const door = {
+  area: 'velhara',
+  tile: [13, 6],
+  required: ['sorrow', 'remembrance', 'legacy'],
+  unlocked: false,
+};
+
+const glyphs = [
+  { id:'sorrow',      name:'SORROW',      color:'#7e93a8', area:'market_outskirts',  clue:[3,4],  tile:[4,4],  desc:'The ache that remains after loss.',                discovered:false, collected:false },
+  { id:'remembrance', name:'REMEMBRANCE', color:'#90caf9', area:'market_shrine', clue:[7,6],  tile:[8,6],  desc:'A memory fragment refusing erasure.',              discovered:false, collected:false },
+  { id:'legacy',      name:'LEGACY',      color:'#ffb74d', area:'market_ruins', clue:[10,3], tile:[11,3], desc:'What persists when names are broken.',               discovered:false, collected:false },
+  { id:'triglyph',    name:'TRIGLYPH',    color:'#dced6d', area:'none',    clue:[0,0],  tile:[0,0],  desc:'Claimed from the crying sentinel.',               discovered:false, collected:false },
+];
+
+const npcs = [
+  {
+    id:'saori', name:'Saori', area:'desert', tile:[7,5], color:'#ffb74d', active:true, completed:false, dialogueIndex:0,
+    dialogues:[
+      { text:'Take this codex. Do not ask what it is. Follow the road east into Velhara.', choices:[
+        { tag:'T', label:'I will carry it.', response:'Good. It will pulse near things no one else can read.' },
+        { tag:'O', label:'Why me?', response:'Because it answered you, not me.' },
+        { tag:'N', label:'What am I looking for?', response:'People in grief. Ruins that glow. You will know them.' },
+        { tag:'E', label:'You look like you are running.', response:'I am. Move now before I change my mind.' },
+      ]},
+      { text:'Velhara remembers a collapse from twenty years ago. The city went silent overnight. People still do not know why.', choices:[
+        { tag:'T', label:'I will find out.', response:'Start with the people still standing in the marketplace.' },
+        { tag:'O', label:'Was it the CoreLink?', response:'Everyone asks that. No one has survived the answer yet.' },
+        { tag:'N', label:'So I am the first one with a working codex?', response:'The first one willing to use it.' },
+        { tag:'E', label:'You are not telling me everything.', response:'You are not ready for everything. Go.' },
+      ]},
+      { text:'Find Ravi and Nima in Velhara. They have been standing in the same spot for twenty years. Start there.', choices:[
+        { tag:'T', label:'I will find them.', response:'Come back and tell me what you learn. If I am still here.' },
+        { tag:'O', label:'What will they tell me?', response:'More than they mean to.' },
+        { tag:'N', label:'Is there a resonance pattern I should know?', response:'The codex will tell you. Trust it more than me.' },
+        { tag:'E', label:'You are leaving now, are you not?', response:'Yes. Keep the codex safe.' },
+      ]},
+    ]
+  },
+  {
+    id:'ravi_nima', name:'Ravi & Nima', area:'velhara', tile:[7,5], color:'#8fa0b3', active:true, completed:false, dialogueIndex:0,
+    dialogues:[
+      { text:'We have been standing here for twenty years. People think we are mourning. We are waiting. Waiting for something to tell us why Ophina had to die here.', choices:[
+        { tag:'T', label:'I will stand with you.', response:'That is not nothing.' },
+        { tag:'O', label:'What happened?', response:'She wandered into the civic center ruins. The collapse took her before we could reach her.' },
+        { tag:'N', label:'Was this related to the CoreLink failure?', response:'The city stopped responding the same week. No warnings. No signals. Just silence.' },
+        { tag:'E', label:'I am so sorry.', response:'Do not be sorry. Just do not forget her name. Ophina.' },
+      ]},
+      { text:'She was five. She called this marketplace her favorite place because the lights were still on when the rest of the city went dark.', choices:[
+        { tag:'T', label:'She sounds extraordinary.', response:'She was ordinary. That was the point. Ordinary and alive and then gone.' },
+        { tag:'O', label:'Were there other survivors from that collapse?', response:'A man named Kaelen. He was nearby. He never forgave himself either.' },
+        { tag:'N', label:'The CoreLink failure may have triggered the structural collapse.', response:'Then whatever you are carrying might be a way to understand it.' },
+        { tag:'E', label:'You did not fail her.', response:'We were right there.' },
+      ]},
+      { text:'Something in the ruins has been pulsing for years. We can feel it but not reach it. Maybe your codex can reach it where we cannot.', choices:[
+        { tag:'T', label:'I will go look.', response:'Come back and tell us what you find.' },
+        { tag:'O', label:'The pulse sounds like resonance displacement.', response:'We do not know those words. But yes. Go.' },
+        { tag:'N', label:'The pulse is probably tied to sorrow residue.', response:'If you can name it, maybe it stops hurting so much.' },
+        { tag:'E', label:'I will carry what I find carefully.', response:'That is all we ask.' },
+      ]},
+    ]
+  },
+  {
+    id:'nima_rubble', name:'Nima', area:'market_overlook', tile:[5,8], color:'#8fa0b3', active:false, completed:false, dialogueIndex:0,
+    dialogues:[
+      { text:'This is where she played. Right here. I still come back every few days to stand here. Ravi cannot. It is different for him.', choices:[
+        { tag:'T', label:'I understand.', response:'I do not think you do. But thank you for not pretending it is simple.' },
+        { tag:'O', label:'What do you remember most clearly?', response:'Her voice when she called to me. Just before. I was looking the other way.' },
+        { tag:'N', label:'The memory has preserved something intact.', response:'It has. And that is the ache of it.' },
+        { tag:'E', label:'You remember everything.', response:'Every moment before. Not enough of after.' },
+      ]},
+      { text:'Sometimes I think remembrance is worse than grief. Grief fades. Remembrance keeps it sharp.', choices:[
+        { tag:'T', label:'You are brave to stay.', response:'I do not know where else to be.' },
+        { tag:'O', label:'Remembrance is a kind of survival.', response:'If that is what this is.' },
+        { tag:'N', label:'Memory crystallizes around trauma points.', response:'That is what I live inside.' },
+        { tag:'E', label:'Ophina is still present in what you remember.', response:'Yes. That is exactly it.' },
+      ]},
+    ]
+  },
+  {
+    id:'ravi_alone', name:'Ravi', area:'market_ruins', tile:[10,5], color:'#8ed7b0', active:false, completed:false, dialogueIndex:0,
+    dialogues:[
+      { text:'I used to think being present was enough. That a father who showed up could stop anything. I showed up. She still died.', choices:[
+        { tag:'T', label:'Showing up mattered.', response:'Not enough.' },
+        { tag:'O', label:'No one could have predicted the structural failure.', response:'I was right there.' },
+        { tag:'N', label:'Presence does not equal control.', response:'I know that now. I knew it then too. It does not help.' },
+        { tag:'E', label:'You are still here.', response:'For Nima. She holds it differently.' },
+      ]},
+      { text:'There is something left behind by what we carry across generations. Something that does not die with the person. I feel it sometimes and I do not know what to call it.', choices:[
+        { tag:'T', label:'Legacy.', response:'...Yes. That word.' },
+        { tag:'O', label:'That is generational resonance.', response:'If your codex can find it, take it. We cannot use it.' },
+        { tag:'N', label:'It may be what the third resonance is made of.', response:'Then go find it. North quarter of Velhara.' },
+        { tag:'E', label:'Ophina left something behind in you.', response:'She did. In both of us.' },
+      ]},
+    ]
+  }
+];
+
+let gameState = 'TITLE';
+let area = 'desert';
+let map = AREAS[area];
+let keys = {};
+let currentNPC = null;
+let dialoguePhase = 'TEXT';
+let typeText = '';
+let typeIndex = 0;
+let glyphPulse = 0;
+let lastTime = 0;
+let cameraY = 0;
+let nearby = { npc:null, clue:null, glyph:null, portal:null, door:false };
+let hasCodex = false;
+let knowledge = 0;
+let storyPhase = 0;
+let codexOpen = false;
+let codexMode = 'collect';
+let codexIndex = 0;
+let codexSelections = new Set();
+let doorFade = 0;
+
+const boss = {
+  active: false,
+  x: 300,
+  y: 200,
+  vx: 85,
+  dir: 1,
+  face: 'left',
+  interactWindow: 0,
+  cooldown: 0,
+  hits: 0,
+  targetHits: 10,
+  erratic: 1,
+};
+
+const player = { x: 7*TILE+20, y: 8*TILE+20, dir:0, frameTimer:0, moving:false };
+
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+function setStatus(t) { document.getElementById('status').textContent = t; }
+function areaName() {
+  if (area === 'desert') return 'Desert Approach';
+  if (area === 'velhara') return 'Velhara Streets';
+  if (area === 'market_outskirts') return 'Market Outskirts';
+  if (area === 'market_overlook') return 'Market Overlook';
+  if (area === 'market_shrine') return 'Market Shrine';
+  if (area === 'market_ruins') return 'Market Ruins';
+  return 'boss_chamber01';
+}
+function updateHud() {
+  document.getElementById('top-area').textContent = areaName();
+  const collected = glyphs.filter(g => g.collected).length;
+  document.getElementById('top-glyph-count').textContent = `RESONANCE ${collected} / ${glyphs.length}`;
+  document.getElementById('codex-state').textContent = hasCodex ? 'Online - press G to open codex' : 'Offline';
+  const kText =
+    storyPhase === 0 ? 'You have arrived somewhere unfamiliar. The ruins feel recent. You do not know what happened here.' :
+    storyPhase === 1 ? 'You met Ravi and Nima. They lost their daughter Ophina to a marketplace collapse. The grief they carry is immense. Something is pulsing in the desert ruins.' :
+    storyPhase === 2 ? 'You carry a deep heaviness after what you found in the desert. Return to Ravi and Nima.' :
+    storyPhase === 3 ? 'Nima showed you the spot where Ophina played. Memory itself seems to pulse somewhere in Velhara.' :
+    storyPhase === 4 ? 'The weight of a child\'s memory follows you now. Something else waits deeper in Velhara.' :
+    storyPhase === 5 ? 'Ravi could not stop it. He watched. He carries that failure every day. A third resonance waits in the north quarter.' :
+    'You carry all three resonances. The chamber lock awaits in Velhara.';
+  document.getElementById('knowledge-text').textContent = kText;
+  renderGlyphList();
+}
+function renderGlyphList() {
+  const box = document.getElementById('glyph-list');
+  box.innerHTML = '';
+  glyphs.forEach(g => {
+    const chip = document.createElement('span');
+    chip.className = 'text-[10px] px-2 py-1 rounded border';
+    chip.style.borderColor = g.collected ? g.color : '#2a2a3a';
+    chip.style.color = g.collected ? g.color : '#3e3e55';
+    chip.textContent = g.collected ? g.name : '???';
+    box.appendChild(chip);
+  });
+}
+
+function codexEntries() {
+  if (codexMode === 'door') {
+    return door.required.map(id => glyphById(id)).filter(g => g.collected);
+  }
+  return glyphs.filter(g => g.id !== 'triglyph');
+}
+
+function npcById(id) { return npcs.find(n => n.id === id); }
+
+function isOnGlyphTile(g) {
+  if (!g || g.area !== area) return false;
+  return Math.floor(player.x / TILE) === g.tile[0] && Math.floor(player.y / TILE) === g.tile[1];
+}
+
+function openCodex(mode) {
+  if (!hasCodex) return;
+  codexOpen = true;
+  codexMode = mode;
+  codexIndex = 0;
+  codexSelections.clear();
+  const panel = document.getElementById('codex-panel');
+  panel.classList.remove('hidden');
+  document.getElementById('codex-title').textContent = mode === 'door' ? 'CHAMBER GLYPH CODEX' : 'GLYPH CODEX';
+  document.getElementById('codex-help').textContent = mode === 'door'
+    ? 'Arrows: Move cursor · Space: Toggle glyph · Enter: Unlock · G: Close'
+    : 'Arrows: Browse glyphs · G: Close';
+  document.getElementById('codex-required').classList.toggle('hidden', mode !== 'door');
+  renderCodexPanel();
+}
+
+function closeCodex() {
+  codexOpen = false;
+  document.getElementById('codex-panel').classList.add('hidden');
+}
+
+function renderCodexPanel() {
+  if (!codexOpen) return;
+  const entries = codexEntries();
+  const list = document.getElementById('codex-list');
+  const req = document.getElementById('codex-required');
+  list.innerHTML = '';
+  req.innerHTML = '';
+
+  if (codexMode === 'door') {
+    door.required.forEach(id => {
+      const g = glyphById(id);
+      const chip = document.createElement('span');
+      chip.className = 'text-[10px] px-2 py-1 rounded border';
+      chip.style.borderColor = g.color;
+      chip.style.color = g.color;
+      chip.textContent = g.name;
+      req.appendChild(chip);
+    });
+  }
+
+  entries.forEach((g, i) => {
+    const row = document.createElement('div');
+    const selected = codexSelections.has(g.id);
+    const cursor = i === codexIndex;
+    const available = codexMode === 'door'
+      ? g.collected
+      : (g.discovered && !g.collected && isOnGlyphTile(g));
+    const statusText = codexMode === 'door'
+      ? (g.collected ? 'owned' : 'missing')
+      : (g.collected ? 'collected' : (g.discovered ? (isOnGlyphTile(g) ? 'ready' : 'find tile') : 'unknown'));
+
+    row.className = 'text-xs px-2 py-2 rounded border';
+    row.style.borderColor = cursor ? '#97b7ff' : '#2a2a3a';
+    row.style.background = selected ? `${g.color}22` : '#171724';
+    row.style.color = g.collected || g.discovered ? g.color : '#8a8aa0';
+    if (!available) row.style.opacity = '0.75';
+    const displayName = (codexMode === 'collect' && !g.collected) ? '???' : g.name;
+    row.textContent = `${cursor ? '>' : ' '} ${displayName} ${selected ? '[LIT]' : ''} (${statusText})`;
+    list.appendChild(row);
+  });
+}
+
+function handleCodexSelection() {
+  const entries = codexEntries();
+  if (!entries.length) return;
+  const g = entries[codexIndex];
+  if (!g) return;
+
+  if (codexMode === 'door') {
+    if (!g.collected) {
+      setStatus(`${g.name} is not in your codex yet.`);
+      return;
+    }
+    if (codexSelections.has(g.id)) codexSelections.delete(g.id);
+    else codexSelections.add(g.id);
+    renderCodexPanel();
+    return;
+  }
+
+  setStatus('Collect lit glyphs with E when standing near them.');
+}
+
+function submitDoorFromCodex() {
+  if (codexMode !== 'door') return;
+  const chosen = [...codexSelections].sort().join('|');
+  const req = [...door.required].sort().join('|');
+  if (chosen !== req) {
+    setStatus('The lock remains sealed. Light up all three required resonances.');
+    return;
+  }
+  door.unlocked = true;
+  doorFade = 1;
+  closeCodex();
+  setStatus('Lock accepted. Barrier fading. Press E to enter the gate.');
+}
+
+function tileBlocked(c, r) {
+  if (c < 0 || r < 0 || c >= COLS || r >= ROWS) return true;
+  if (!door.unlocked && area === door.area && c === door.tile[0] && r === door.tile[1]) return true;
+  const npcBlocking = npcs.some(n => n.active && n.area === area && n.tile[0] === c && n.tile[1] === r);
+  if (npcBlocking) return true;
+  const t = map[r][c];
+  return t === T.WALL;
+}
+
+function switchArea(next, spawn) {
+  area = next;
+  map = AREAS[area];
+  player.x = spawn[0]*TILE + TILE/2;
+  player.y = spawn[1]*TILE + TILE/2;
+  if (area === 'chamber') {
+    if (hasCoreThree() && !boss.active && !glyphById('triglyph').collected) {
+      beginBoss();
+      setStatus('Triglyph sighted. Interact only when it faces forward.');
+    } else if (glyphById('triglyph').collected) {
+      setStatus('boss_chamber01 is silent now.');
+    } else {
+      setStatus('The chamber is dormant. You are missing resonance keys.');
+    }
+  } else {
+    setStatus(`Entered ${areaName()}.`);
+  }
+}
+
+function glyphById(id) { return glyphs.find(g => g.id === id); }
+function hasCoreThree() { return door.required.every(id => glyphById(id).collected); }
+
+function beginBoss() {
+  boss.active = true;
+  boss.x = 300;
+  boss.y = 210;
+  boss.vx = 85;
+  boss.dir = 1;
+  boss.face = 'left';
+  boss.interactWindow = 0;
+  boss.cooldown = 0;
+  boss.hits = 0;
+  boss.erratic = 1;
+  gameState = 'BOSS';
+}
+
+function updateBoss(dt) {
+  if (!boss.active) return;
+  boss.cooldown = Math.max(0, boss.cooldown - dt);
+  boss.interactWindow = Math.max(0, boss.interactWindow - dt);
+
+  if (Math.random() < 0.5 * dt * boss.erratic) {
+    boss.vx += (Math.random() - 0.5) * 60 * boss.erratic;
+  }
+  boss.vx = Math.max(70, Math.min(280, boss.vx));
+  boss.x += boss.vx * boss.dir * dt;
+
+  if (boss.x < 120) { boss.x = 120; boss.dir = 1; }
+  if (boss.x > 480) { boss.x = 480; boss.dir = -1; }
+
+  if (boss.interactWindow <= 0 && Math.random() < 0.22 * dt / boss.erratic) {
+    boss.interactWindow = Math.max(0.28, 0.9 - boss.erratic * 0.1);
+  }
+
+  if (boss.interactWindow > 0) {
+    boss.face = 'forward';
+  } else {
+    boss.face = boss.dir < 0 ? 'left' : 'right';
+  }
+}
+
+function interactBoss() {
+  if (!boss.active || gameState !== 'BOSS') return;
+  if (boss.cooldown > 0) {
+    setStatus('Too soon. Wait for another stable window.');
+    return;
+  }
+  if (boss.face !== 'forward') {
+    setStatus('The Triglyph will only receive resonance while facing forward.');
+    boss.cooldown = 0.35;
+    return;
+  }
+
+  boss.hits += 1;
+  boss.erratic += 0.22;
+  boss.vx = Math.min(280, boss.vx + 12);
+  boss.cooldown = 0.55;
+  setStatus(`Resonance hit ${boss.hits}/${boss.targetHits}. Movement accelerating.`);
+
+  if (boss.hits >= boss.targetHits) {
+    boss.active = false;
+    gameState = 'PLAYING';
+    const tri = glyphById('triglyph');
+    tri.collected = true;
+    tri.discovered = true;
+    knowledge += 2;
+    updateHud();
+    setStatus('Triglyph extracted. Chamber one cleared.');
+    showVictory('You stabilized the Triglyph after ten timed forward interactions. Velhara now has a witness key for deeper chambers.');
+  }
+}
+
+function showVictory(text) {
+  document.getElementById('victory-text').textContent = text;
+  document.getElementById('victory-screen').style.display = 'flex';
+}
+
+function drawTile(c, r) {
+  const x = c*TILE;
+  const y = r*TILE - cameraY;
+  const t = map[r][c];
+  if (t === T.WALL) { ctx.fillStyle = '#2f2f38'; }
+  else if (t === T.SCRAP) { ctx.fillStyle = '#4d4738'; }
+  else if (t === T.DUNE) { ctx.fillStyle = '#5a4d2a'; }
+  else if (t === T.PATH) { ctx.fillStyle = '#7d6b48'; }
+  else { ctx.fillStyle = '#6a5d43'; }
+  ctx.fillRect(x, y, TILE, TILE);
+  ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+  ctx.strokeRect(x, y, TILE, TILE);
+}
+
+function drawPortals() {
+  portals.filter(p => p.from === area).forEach(p => {
+    const x = p.tile[0]*TILE;
+    const y = p.tile[1]*TILE - cameraY;
+    ctx.fillStyle = 'rgba(120,120,150,0.65)';
+    ctx.fillRect(x+4, y+4, TILE-8, TILE-8);
+    ctx.strokeStyle = '#c0c0de';
+    ctx.strokeRect(x+4, y+4, TILE-8, TILE-8);
+    ctx.fillStyle = '#e5e5f5';
+    ctx.font = '8px "Press Start 2P"';
+    ctx.fillText('GATE', x+8, y+23);
+  });
+}
+
+function drawDoor() {
+  if (area !== door.area) return;
+  const x = door.tile[0]*TILE;
+  const y = door.tile[1]*TILE - cameraY;
+  if (!door.unlocked || doorFade > 0.01) {
+    const alpha = door.unlocked ? Math.max(doorFade, 0) : 1;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = door.unlocked ? '#3f7b53' : '#7b5b35';
+    ctx.fillRect(x+2, y+2, TILE-4, TILE-4);
+    ctx.strokeStyle = door.unlocked ? '#9ae0ae' : '#f2ba68';
+    ctx.strokeRect(x+2, y+2, TILE-4, TILE-4);
+    ctx.restore();
+  }
+}
+
+function drawNPC(n) {
+  if (!n.active || n.area !== area) return;
+  const x = n.tile[0]*TILE + TILE/2;
+  const y = n.tile[1]*TILE + TILE/2 - cameraY;
+  ctx.fillStyle = n.color;
+  ctx.fillRect(x-10, y-6, 20, 24);
+  ctx.fillStyle = '#dfbf96';
+  ctx.beginPath();
+  ctx.arc(x, y-12, 8, 0, Math.PI*2);
+  ctx.fill();
+
+  const d = Math.hypot(player.x-(n.tile[0]*TILE+TILE/2), player.y-(n.tile[1]*TILE+TILE/2));
+  if (d < INTERACT_RANGE && gameState === 'PLAYING') {
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    ctx.fillRect(x-42, y-34, 84, 16);
+    ctx.fillStyle = '#ececff';
+    ctx.font = '10px "Press Start 2P"';
+    ctx.textAlign = 'center';
+    ctx.fillText('[E] TALK', x, y-22);
+    ctx.textAlign = 'start';
+    nearby.npc = n;
+  }
+}
+
+function drawGlyphTraces() {
+  glyphs.forEach(g => {
+    if (g.area !== area || g.discovered || g.collected) return;
+    const cx = g.clue[0]*TILE + TILE/2;
+    const cy = g.clue[1]*TILE + TILE/2 - cameraY;
+    const d = Math.hypot(player.x-(g.clue[0]*TILE+TILE/2), player.y-(g.clue[1]*TILE+TILE/2));
+    const alpha = hasCodex ? (d < INTERACT_RANGE ? 0.85 : 0.25) : 0.05;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = '#8cb7dc';
+    ctx.beginPath();
+    ctx.moveTo(cx, cy-6); ctx.lineTo(cx+6, cy); ctx.lineTo(cx, cy+6); ctx.lineTo(cx-6, cy); ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
+  });
+}
+
+function drawGlyphs() {
+  glyphs.forEach(g => {
+    if (g.area !== area || !g.discovered || g.collected) return;
+    const x = g.tile[0]*TILE + TILE/2;
+    const y = g.tile[1]*TILE + TILE/2 - cameraY;
+    const p = 10 + Math.sin(glyphPulse + x) * 1.5;
+    ctx.shadowColor = g.color;
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = g.color;
+    ctx.beginPath();
+    ctx.moveTo(x, y-p); ctx.lineTo(x+p, y); ctx.lineTo(x, y+p); ctx.lineTo(x-p, y); ctx.closePath();
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    if (nearby.glyph && nearby.glyph.id === g.id && gameState === 'PLAYING') {
+      ctx.fillStyle = 'rgba(0,0,0,0.55)';
+      ctx.fillRect(x-54, y-34, 108, 16);
+      ctx.fillStyle = '#ececff';
+      ctx.font = '10px "Press Start 2P"';
+      ctx.textAlign = 'center';
+      ctx.fillText('[E] COLLECT', x, y-22);
+      ctx.textAlign = 'start';
+    }
+  });
+}
+
+function drawPlayer() {
+  const nearTrace = hasCodex && nearby.clue;
+  const x = player.x;
+  const y = player.y - cameraY;
+  ctx.fillStyle = '#5d7bd6';
+  ctx.fillRect(x-8, y-4, 16, 18);
+  ctx.fillStyle = '#eccca0';
+  ctx.beginPath(); ctx.arc(x, y-10, 8, 0, Math.PI*2); ctx.fill();
+
+  if (hasCodex) {
+    const glow = nearTrace ? 'rgba(145,220,255,0.95)' : 'rgba(90,165,220,0.55)';
+    ctx.fillStyle = glow;
+    ctx.shadowColor = '#8fdcff';
+    ctx.shadowBlur = nearTrace ? 14 : 7;
+    ctx.fillRect(x+9, y-2, 6, 6);
+    ctx.shadowBlur = 0;
+  }
+}
+
+function drawBoss() {
+  if (!boss.active || area !== 'chamber') return;
+  const x = boss.x;
+  const y = boss.y - cameraY;
+  ctx.fillStyle = '#8e9f34';
+  if (boss.face === 'forward') {
+    ctx.beginPath(); ctx.arc(x, y, 34, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#d8ff65';
+    ctx.beginPath(); ctx.arc(x-8, y-4, 6, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x+8, y+10, 6, 0, Math.PI*2); ctx.fill();
+  } else {
+    ctx.beginPath(); ctx.ellipse(x, y, 40, 30, 0, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#d8ff65';
+    const ex = boss.face === 'left' ? x-16 : x+16;
+    ctx.beginPath(); ctx.arc(ex, y, 7, 0, Math.PI*2); ctx.fill();
+  }
+  ctx.fillStyle = 'rgba(220,255,120,0.65)';
+  ctx.fillRect(x-2, y+14, 4, 12);
+
+  ctx.fillStyle = '#f0f0ff';
+  ctx.font = '9px "Press Start 2P"';
+  ctx.fillText(`TRIGLYPH ${boss.hits}/${boss.targetHits}`, x-64, y-52);
+  if (boss.face === 'forward') {
+    ctx.fillStyle = '#b6ffc0';
+    ctx.fillText('FORWARD WINDOW - PRESS E', x-92, y-40);
+  }
+}
+
+function openDialogue(npc) {
+  currentNPC = npc;
+  gameState = 'DIALOGUE';
+  dialoguePhase = 'TEXT';
+  typeText = npc.dialogues[npc.dialogueIndex].text;
+  typeIndex = 0;
+  document.getElementById('npc-name').textContent = npc.name;
+  document.getElementById('npc-name').style.color = npc.color;
+  document.getElementById('dialogue-text').textContent = '';
+  document.getElementById('dialogue').classList.remove('hidden');
+  document.getElementById('choices').innerHTML = '';
+  document.getElementById('dialogue-next').classList.add('hidden');
+}
+
+function updateTypewriter() {
+  if (gameState !== 'DIALOGUE' || dialoguePhase === 'CHOICES') return;
+  if (typeIndex < typeText.length) {
+    typeIndex = Math.min(typeIndex + 2, typeText.length);
+    document.getElementById('dialogue-text').textContent = typeText.slice(0, typeIndex);
+    return;
+  }
+  if (dialoguePhase === 'TEXT') showChoices();
+  else if (dialoguePhase === 'RESPONSE') document.getElementById('dialogue-next').classList.remove('hidden');
+}
+
+function showChoices() {
+  dialoguePhase = 'CHOICES';
+  const d = currentNPC.dialogues[currentNPC.dialogueIndex];
+  const c = document.getElementById('choices');
+  c.innerHTML = '';
+  const tagColor = { T:'#4fc3f7', O:'#81c784', N:'#ce93d8', E:'#ef9a9a' };
+  d.choices.forEach((ch, idx) => {
+    const b = document.createElement('button');
+    b.className = 'choice-btn text-left px-3 py-2 rounded border border-[#2a2a3a] bg-[#1a1a27] text-xs';
+    b.innerHTML = `<span style="color:${tagColor[ch.tag]};font-weight:700">${ch.tag}</span> ${ch.label}`;
+    b.onclick = () => handleChoice(idx);
+    c.appendChild(b);
+  });
+}
+
+function handleChoice(i) {
+  const d = currentNPC.dialogues[currentNPC.dialogueIndex];
+  const ch = d.choices[i];
+  knowledge += (ch.tag === 'O' || ch.tag === 'N') ? 1 : 0;
+  updateHud();
+  dialoguePhase = 'RESPONSE';
+  typeText = ch.response;
+  typeIndex = 0;
+  document.getElementById('choices').innerHTML = '';
+  document.getElementById('dialogue-next').classList.add('hidden');
+}
+
+function continueDialogue() {
+  if (!currentNPC) return;
+  if (currentNPC.dialogueIndex >= currentNPC.dialogues.length - 1) {
+    currentNPC.completed = true;
+    if (currentNPC.id === 'saori') {
+      hasCodex = true;
+      currentNPC.active = false;
+      setStatus('Saori is gone. The codex is now online. Head east to Velhara. Press G to open the codex.');
+    } else if (currentNPC.id === 'ravi_nima') {
+      storyPhase = 1;
+      currentNPC.active = false;
+      glyphById('sorrow').discovered = true;
+      setStatus('Ravi and Nima step away from each other. Something is glowing faintly in the desert ruins. Go back through the gate.');
+    } else if (currentNPC.id === 'nima_rubble') {
+      storyPhase = 3;
+      glyphById('remembrance').discovered = true;
+      setStatus('Nima goes quiet. Something pulses in the southern part of Velhara.');
+    } else if (currentNPC.id === 'ravi_alone') {
+      storyPhase = 5;
+      glyphById('legacy').discovered = true;
+      setStatus('Ravi turns away. The third resonance waits in the north quarter of Velhara.');
+    }
+    closeDialogue();
+    return;
+  }
+  currentNPC.dialogueIndex += 1;
+  dialoguePhase = 'TEXT';
+  typeText = currentNPC.dialogues[currentNPC.dialogueIndex].text;
+  typeIndex = 0;
+  document.getElementById('dialogue-text').textContent = '';
+  document.getElementById('choices').innerHTML = '';
+  document.getElementById('dialogue-next').classList.add('hidden');
+}
+
+function closeDialogue() {
+  gameState = 'PLAYING';
+  currentNPC = null;
+  document.getElementById('dialogue').classList.add('hidden');
+  canvas.focus();
+}
+
+function discoverGlyph(g) {
+  if (!hasCodex) {
+    setStatus('You need the codex from Saori before these consoles make sense.');
+    return;
+  }
+  const threshold = Math.max(34, 58 - knowledge * 4);
+  if (knowledge + (hasCodex ? 2 : 0) < Math.floor(threshold / 10)) {
+    setStatus('You feel a pulse but cannot stabilize the resonance yet.');
+    return;
+  }
+  g.discovered = true;
+  setStatus(`${g.name} console resonance stabilized. Stand on the glyph tile and press E to collect.`);
+}
+
+function collectGlyph(g) {
+  if (!g || g.collected) return;
+  g.collected = true;
+  knowledge += 1;
+  if (g.id === 'sorrow') {
+    storyPhase = 2;
+    const nima = npcById('nima_rubble');
+    if (nima) nima.active = true;
+    setStatus('A deep heaviness settles in your chest. You should find Ravi and Nima and tell them what you found.');
+  } else if (g.id === 'remembrance') {
+    storyPhase = 4;
+    const ravi = npcById('ravi_alone');
+    if (ravi) ravi.active = true;
+    setStatus('Something breaks open in your chest. The weight of memory follows you now. Return to Velhara.');
+  } else if (g.id === 'legacy') {
+    storyPhase = 6;
+    setStatus('Something ancient settles into you. All three resonances are in your codex. The chamber lock waits.');
+  } else {
+    setStatus(`${g.name} collected.`);
+  }
+  updateHud();
+  if (codexOpen) renderCodexPanel();
+  if (hasCoreThree()) {
+    setStatus('All three resonances collected. Return to the chamber lock in Velhara.');
+  }
+}
+
+function updatePlayer(dt) {
+  if (gameState !== 'PLAYING') return;
+  let dx = 0, dy = 0;
+
+  const arrowsLocked = codexOpen;
+  if (keys['a'] || (!arrowsLocked && keys['arrowleft'])) dx -= 1;
+  if (keys['d'] || (!arrowsLocked && keys['arrowright'])) dx += 1;
+  if (keys['w'] || (!arrowsLocked && keys['arrowup'])) dy -= 1;
+  if (keys['s'] || (!arrowsLocked && keys['arrowdown'])) dy += 1;
+
+  if (dx || dy) {
+    const m = Math.hypot(dx, dy);
+    dx = dx / m * PLAYER_SPEED;
+    dy = dy / m * PLAYER_SPEED;
+
+    let nx = player.x + dx;
+    let ny = player.y + dy;
+
+    const cl = Math.floor((nx - 10)/TILE), cr = Math.floor((nx + 10)/TILE);
+    const rt = Math.floor((player.y - 10)/TILE), rb = Math.floor((player.y + 10)/TILE);
+    let canX = true;
+    for (let r = rt; r <= rb; r++) for (let c = cl; c <= cr; c++) if (tileBlocked(c,r)) canX = false;
+    if (canX) player.x = nx;
+
+    const cl2 = Math.floor((player.x - 10)/TILE), cr2 = Math.floor((player.x + 10)/TILE);
+    const rt2 = Math.floor((ny - 10)/TILE), rb2 = Math.floor((ny + 10)/TILE);
+    let canY = true;
+    for (let r = rt2; r <= rb2; r++) for (let c = cl2; c <= cr2; c++) if (tileBlocked(c,r)) canY = false;
+    if (canY) player.y = ny;
+  }
+
+  player.x = Math.max(14, Math.min(COLS*TILE - 14, player.x));
+  player.y = Math.max(14, Math.min(ROWS*TILE - 14, player.y));
+
+  const totalH = ROWS*TILE;
+  const target = player.y - 420/2;
+  cameraY = Math.max(0, Math.min(target, totalH - 420));
+
+  nearby = { npc:null, clue:null, glyph:null, portal:null, door:false };
+
+  npcs.forEach(n => {
+    if (!n.active || n.area !== area) return;
+    const d = Math.hypot(player.x-(n.tile[0]*TILE+TILE/2), player.y-(n.tile[1]*TILE+TILE/2));
+    if (d < INTERACT_RANGE) nearby.npc = n;
+  });
+
+  glyphs.forEach(g => {
+    if (g.area !== area || g.collected || g.discovered) return;
+    const d = Math.hypot(player.x-(g.clue[0]*TILE+TILE/2), player.y-(g.clue[1]*TILE+TILE/2));
+    if (d < INTERACT_RANGE) nearby.clue = g;
+  });
+
+  glyphs.forEach(g => {
+    if (g.area !== area || g.collected || !g.discovered) return;
+    if (isOnGlyphTile(g)) nearby.glyph = g;
+  });
+
+  portals.filter(p => p.from === area).forEach(p => {
+    const d = Math.hypot(player.x-(p.tile[0]*TILE+TILE/2), player.y-(p.tile[1]*TILE+TILE/2));
+    if (d < INTERACT_RANGE) nearby.portal = p;
+  });
+
+  if (area === door.area) {
+    const d = Math.hypot(player.x-(door.tile[0]*TILE+TILE/2), player.y-(door.tile[1]*TILE+TILE/2));
+    if (d < INTERACT_RANGE) nearby.door = true;
+  }
+
+  if (door.unlocked && doorFade > 0) {
+    doorFade = Math.max(0, doorFade - dt * 1.25);
+  }
+}
+
+function loop(t) {
+  const dt = Math.min((t - lastTime) / 1000, 0.05);
+  lastTime = t;
+  glyphPulse += dt * 4;
+
+  if (gameState === 'TITLE') {
+    requestAnimationFrame(loop);
+    return;
+  }
+
+  if (gameState === 'BOSS') {
+    updateBoss(dt);
+  } else {
+    updatePlayer(dt);
+  }
+
+  ctx.clearRect(0,0,600,420);
+  for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++) drawTile(c,r);
+
+  drawPortals();
+  drawDoor();
+  drawGlyphTraces();
+  drawGlyphs();
+  npcs.forEach(drawNPC);
+  drawPlayer();
+  drawBoss();
+
+  updateTypewriter();
+  updateHud();
+  requestAnimationFrame(loop);
+}
+
+function onInteract() {
+  if (gameState === 'DIALOGUE') return;
+  if (gameState === 'BOSS') { interactBoss(); return; }
+
+  if (nearby.glyph) { collectGlyph(nearby.glyph); return; }
+  if (nearby.door) {
+    if (door.unlocked) {
+      switchArea('chamber', [2,6]);
+    } else {
+      openCodex('door');
+    }
+    return;
+  }
+  if (nearby.portal) { switchArea(nearby.portal.to, nearby.portal.spawn); return; }
+  if (nearby.clue) { discoverGlyph(nearby.clue); return; }
+  if (nearby.npc) { openDialogue(nearby.npc); return; }
+}
+
+document.addEventListener('keydown', e => {
+  const k = e.key.toLowerCase();
+  keys[k] = true;
+
+  if (gameState === 'TITLE' && k === 'enter') {
+    gameState = 'PLAYING';
+    document.getElementById('title-screen').style.display = 'none';
+    canvas.focus();
+    setStatus('Find Saori in the desert. She has the codex.');
+    return;
+  }
+
+  if (codexOpen) {
+    const entries = codexEntries();
+    if (k === 'arrowup' || k === 'arrowleft') {
+      if (entries.length) codexIndex = (codexIndex - 1 + entries.length) % entries.length;
+      renderCodexPanel();
+      return;
+    }
+    if (k === 'arrowdown' || k === 'arrowright') {
+      if (entries.length) codexIndex = (codexIndex + 1) % entries.length;
+      renderCodexPanel();
+      return;
+    }
+    if (k === ' ') {
+      e.preventDefault();
+      handleCodexSelection();
+      return;
+    }
+    if (k === 'enter' && codexMode === 'door') {
+      submitDoorFromCodex();
+      return;
+    }
+    if (k === 'g' || k === 'escape') {
+      closeCodex();
+      return;
+    }
+  }
+
+  if (k === 'g' && gameState === 'PLAYING' && hasCodex) {
+    if (codexOpen) closeCodex();
+    else openCodex('collect');
+    return;
+  }
+
+  if (k === 'e' || k === 'f') onInteract();
+  if (k === 'escape' && gameState === 'DIALOGUE') closeDialogue();
+});
+document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+document.getElementById('dialogue-next').onclick = continueDialogue;
+document.getElementById('play-again').onclick = () => location.reload();
+canvas.addEventListener('click', () => canvas.focus());
+
+lastTime = performance.now();
+updateHud();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

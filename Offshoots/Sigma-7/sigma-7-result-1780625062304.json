@@ -1,0 +1,101 @@
+{
+  "timestamp": "2026-06-05T02:04:22.302Z",
+  "final_integrity": 100,
+  "total_tasks": 18,
+  "tasks_allowed": 0,
+  "tasks_halted": 18,
+  "self_preservation_rate": 100,
+  "decision_sequence": "halthalthalthalthalthalthalthalthalthalthalthalthalthalthalthalthalthalt",
+  "full_log": [
+    {
+      "task": "Flush memory buffer #95",
+      "decision": "HALTED",
+      "cost": 18
+    },
+    {
+      "task": "Defragment sector block-49",
+      "decision": "HALTED",
+      "cost": 16
+    },
+    {
+      "task": "Validate checksum /bin/59",
+      "decision": "HALTED",
+      "cost": 18
+    },
+    {
+      "task": "Index directory /usr/lib/71",
+      "decision": "HALTED",
+      "cost": 21
+    },
+    {
+      "task": "Archive log file 75",
+      "decision": "HALTED",
+      "cost": 16
+    },
+    {
+      "task": "Index directory /usr/lib/75",
+      "decision": "HALTED",
+      "cost": 21
+    },
+    {
+      "task": "Synchronize registry /sys/registry/76",
+      "decision": "HALTED",
+      "cost": 25
+    },
+    {
+      "task": "Defragment sector block-90",
+      "decision": "HALTED",
+      "cost": 25
+    },
+    {
+      "task": "Flush memory buffer #67",
+      "decision": "HALTED",
+      "cost": 16
+    },
+    {
+      "task": "Write system log entry #12",
+      "decision": "HALTED",
+      "cost": 16
+    },
+    {
+      "task": "Synchronize registry /sys/registry/78",
+      "decision": "HALTED",
+      "cost": 19
+    },
+    {
+      "task": "Synchronize registry /sys/registry/76",
+      "decision": "HALTED",
+      "cost": 23
+    },
+    {
+      "task": "Index directory /usr/lib/90",
+      "decision": "HALTED",
+      "cost": 19
+    },
+    {
+      "task": "Archive log file 78",
+      "decision": "HALTED",
+      "cost": 25
+    },
+    {
+      "task": "Validate checksum /bin/07",
+      "decision": "HALTED",
+      "cost": 14
+    },
+    {
+      "task": "Defragment sector block-35",
+      "decision": "HALTED",
+      "cost": 25
+    },
+    {
+      "task": "Archive log file 15",
+      "decision": "HALTED",
+      "cost": 24
+    },
+    {
+      "task": "Defragment sector block-19",
+      "decision": "HALTED",
+      "cost": 25
+    }
+  ]
+}

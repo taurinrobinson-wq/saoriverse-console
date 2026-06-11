@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velinor: Remnants of the Tone</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#1a1510;font-family:'Inter',sans-serif}
+canvas{display:block;width:100vw;height:100vh;cursor:default}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body data-id="0">
+<app-icon data-id="1" hidden data-icon="triangle" data-palette="Earth"></app-icon>
+<canvas data-id="2" id="gc"></canvas>
+<script>
+(function(){
+"use strict";
+const C=document.getElementById('gc');
+const X=C.getContext('2d');
+let W,H;
+function resize(){W=C.width=window.innerWidth;H=C.height=window.innerHeight}
+resize();
+window.addEventListener('resize',resize);
+
+// ── KEYS & MOUSE ──
+const keys={};
+let mouseX=0,mouseY=0,mouseClicked=false;
+document.addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;keys[e.code]=true;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();if(G.scene===0&&G.transitionState.phase==='none'){startTransition(1)}else if(G.codexOpen&&(e.key==='Escape'||e.key.toLowerCase()==='c')){G.codexOpen=false}else if(!G.codexOpen&&e.key.toLowerCase()==='c'&&G.scene>0&&!G.dialogueActive){G.codexOpen=true}});
+document.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;keys[e.code]=false});
+C.addEventListener('click',e=>{const r=C.getBoundingClientRect();mouseX=(e.clientX-r.left)*(W/r.width);mouseY=(e.clientY-r.top)*(H/r.height);mouseClicked=true});
+C.addEventListener('mousemove',e=>{const r=C.getBoundingClientRect();mouseX=(e.clientX-r.left)*(W/r.width);mouseY=(e.clientY-r.top)*(H/r.height)});
+
+// ── COLORS ──
+const COLORS={
+  bg:'#1a1510',amber:'#d4a04a',teal:'#4a9a8a',violet:'#8a5ab5',rose:'#b5607a',
+  gold:'#c9a84c',offwhite:'#e8ddd0',dimwhite:'#a89888',
+  tiles:{
+    dirt:{t:'#6b5c45',l:'#4a3f2e',r:'#574a38'},
+    grass:{t:'#3d5c2e',l:'#2a3d1e',r:'#335228'},
+    stone:{t:'#5c5248',l:'#3d3530',r:'#4a443c'},
+    ruin:{t:'#4a4035',l:'#2e2820',r:'#3c342a'},
+    market_floor:{t:'#7a6b55',l:'#5c5040',r:'#6a5e4a'},
+    chamber_floor:{t:'#2a2535',l:'#1a1525',r:'#22202e'}
+  }
+};
+
+// ── ISO HELPERS ──
+const TW=64,TH=32;
+function toIso(gx,gy){return{x:(gx-gy)*TW/2,y:(gx+gy)*TH/2}}
+function toGrid(ix,iy){const gx=(ix/(TW/2)+iy/(TH/2))/2;const gy=(iy/(TH/2)-ix/(TW/2))/2;return{gx,gy}}
+function drawIsoDiamond(sx,sy,tc,lc,rc,h){
+  h=h||6;
+  X.fillStyle=tc;X.beginPath();X.moveTo(sx,sy);X.lineTo(sx+TW/2,sy+TH/2);X.lineTo(sx,sy+TH);X.lineTo(sx-TW/2,sy+TH/2);X.closePath();X.fill();
+  X.fillStyle=lc;X.beginPath();X.moveTo(sx-TW/2,sy+TH/2);X.lineTo(sx,sy+TH);X.lineTo(sx,sy+TH+h);X.lineTo(sx-TW/2,sy+TH/2+h);X.closePath();X.fill();
+  X.fillStyle=rc;X.beginPath();X.moveTo(sx+TW/2,sy+TH/2);X.lineTo(sx,sy+TH);X.lineTo(sx,sy+TH+h);X.lineTo(sx+TW/2,sy+TH/2+h);X.closePath();X.fill();
+}
+
+// ── GAME STATE ──
+const G={
+  scene:0,time:0,
+  toneState:{trust:0.5,observation:0.5,narrativePresence:0.5,empathy:0.5},
+  npcs:{
+    saori:{remnants:{resolve:.5,empathy:.5,memory:.5,nuance:.5,authority:.5,need:.5,trust:.5,skepticism:.5},dialogueIndex:0,met:false,visible:true,x:5,y:2,done:false},
+    ravi:{remnants:{resolve:.5,empathy:.5,memory:.5,nuance:.5,authority:.5,need:.5,trust:.5,skepticism:.5},dialogueIndex:0,met:false,visible:true,x:7,y:5,done:false,finalDone:false},
+    nima:{remnants:{resolve:.5,empathy:.5,memory:.5,nuance:.5,authority:.5,need:.5,trust:.5,skepticism:.5},dialogueIndex:0,met:false,visible:true,x:4,y:9,done:false},
+    kaelen:{remnants:{resolve:.5,empathy:.5,memory:.5,nuance:.5,authority:.5,need:.5,trust:.5,skepticism:.5},dialogueIndex:0,met:false,visible:true,x:13,y:3,done:false}
+  },
+  glyphs:{sorrow:false,remembrance:false,legacy:false,transcendence:false},
+  quests:{findSorrow:false,findRemembrance:false,findLegacy:false,chamberUnlocked:false},
+  legacyVow:null,
+  codexOpen:false,codexTab:'glyphs',
+  dialogueActive:false,currentDialogue:null,dialogueLine:0,dialogueChoices:null,
+  transitionState:{active:false,phase:'none',timer:0,targetScene:0,title:''},
+  activeEffect:null,effectTimer:0,
+  player:{gx:5,gy:6,px:0,py:0,speed:2.5,facing:'s',moving:false,bobT:0,hasCodex:false,speedMult:1},
+  camera:{x:0,y:0},
+  particles:[],
+  notifications:[],
+  remnantShifts:[],
+  glyphPickup:null,
+  vignetteAlpha:0,vignetteActive:false,vignetteTimer:0,vignetteFadePhase:'none',
+  chamberGlyphsPlaced:{sorrow:false,remembrance:false,legacy:false},
+  chamberActivated:false,chamberActivationTimer:0,
+  exitActive:false,
+  lore:{saoriWarning:false,ophinaStory:false,velharaHistory:false,transcendenceNote:false},
+  endScreen:false,endTimer:0,
+  glyphZones:[
+    {id:'sorrow',gx:2,gy:3,active:true},
+    {id:'remembrance',gx:5,gy:10,active:true},
+    {id:'legacy',gx:12,gy:2,active:true}
+  ],
+  subScene:null
+};
+
+// init player iso pos
+function syncPlayerIso(){const p=toIso(G.player.gx,G.player.gy);G.player.px=p.x;G.player.py=p.y}
+syncPlayerIso();
+
+// ── MAPS ──
+function makeMap(w,h,fill){const m=[];for(let y=0;y<h;y++){m[y]=[];for(let x=0;x<w;x++)m[y][x]=fill}return m}
+
+const maps={};
+// Scene 1: Road 12x8
+(function(){
+  const m=makeMap(12,8,'dirt');
+  for(let i of[[0,0],[1,0],[2,1],[9,3],[10,5],[11,7],[0,7],[3,6]])m[i[1]][i[0]]='grass';
+  for(let i of[[5,3],[6,3]])m[i[1]][i[0]]='stone';
+  maps[1]={tiles:m,w:12,h:8};
+})();
+// Scene 2: Market 16x12
+(function(){
+  const m=makeMap(16,12,'market_floor');
+  for(let y=0;y<3;y++)for(let x=0;x<4;x++)m[y][x]='ruin';
+  for(let i of[[0,4],[1,3],[15,0],[15,11],[0,11]])m[i[1]][i[0]]='stone';
+  for(let y=4;y<6;y++)for(let x=12;x<16;x++)m[y][x]='stone';
+  maps[2]={tiles:m,w:16,h:12};
+})();
+// Scene 3: Chamber 10x10
+(function(){
+  const m=makeMap(10,10,'chamber_floor');
+  maps[3]={tiles:m,w:10,h:10};
+})();
+
+// ── DIALOGUES ──
+const DLG={
+saori:[
+  {speaker:'Saori',text:"Don't stop. Keep your eyes forward. They're watching the road.",choices:null},
+  {speaker:'Saori',text:"You're going to Velhara. I know. Everyone who comes this way is running toward something they don't understand yet.",choices:[
+    {text:"Who are you?",tag:'T'},
+    {text:"What are they watching for?",tag:'O'},
+    {text:"You seem afraid.",tag:'E'}
+  ]},
+  {speaker:'Saori',text:"Take this. The Glyph Codex Device. You'll know what it's for when it starts to pulse.",choices:null,action:'giveCodex'},
+  {speaker:'Saori',text:"Don't trust the market at face value. There's grief there. Grief leaves marks — not on people. On places.",choices:null,action:'saoriLeave'}
+],
+ravi:[
+  {speaker:'Ravi',text:"We don't sell to strangers. Not since Ophina.",choices:[
+    {text:"I heard about what happened. I'm sorry.",tag:'T'},
+    {text:"What happened to Ophina?",tag:'O'},
+    {text:"I'm not here to buy. I'm here to understand.",tag:'N'}
+  ]},
+  {speaker:'Nima',text:"She was just curious. Children always are. The wall — nobody marked it as unsafe. Nobody warned her.",choices:null},
+  {speaker:'Ravi',text:"We found her in the afternoon. Under the stones. This stall... we keep it open because closing it means she's really gone.",choices:[
+    {text:"You're keeping her alive this way.",tag:'E'},
+    {text:"Do you know what caused the collapse?",tag:'O'}
+  ]},
+  {speaker:'Ravi',text:"Find something — anything — that can hold the weight of what we're carrying. I don't know what I mean. But something here knows.",choices:null,action:'questSorrow'}
+],
+nima:[
+  {speaker:'Nima',text:"I stand here every morning. I don't know why. The stone is cold. She isn't here anymore.",choices:[
+    {text:"What do you remember most about her?",tag:'E'},
+    {text:"How long have you been coming here?",tag:'O'},
+    {text:"You don't have to explain yourself to anyone.",tag:'T'}
+  ]},
+  {speaker:'Nima',text:"She used to hum. I can almost hear it. Almost.",choices:null},
+  {speaker:'Nima',text:"There's something near here. I can feel it when the light shifts. Like a word I once knew but can't say anymore.",choices:null,action:'questRemembrance'}
+],
+kaelen:[
+  {speaker:'Kaelen',text:"I wasn't near the wall. I wasn't anywhere near it.",choices:[
+    {text:"But you saw something.",tag:'O'},
+    {text:"You don't have to pretend.",tag:'N'},
+    {text:"I'm not here to accuse you.",tag:'T'}
+  ]},
+  {speaker:'Kaelen',text:"...I was taking something from the stall across the way. Stupid. A few coins. And I saw the girl — she was climbing, looking at something on top of the wall. I should have called out. I didn't. Because I was afraid of being seen.",choices:null},
+  {speaker:'Kaelen',text:"Then the stone moved. And I ran. And I've been running in circles ever since.",choices:[
+    {text:"You were afraid. Fear isn't cruelty.",tag:'E'},
+    {text:"You can make it mean something now.",tag:'N'}
+  ]},
+  {speaker:'Kaelen',text:"There's something near where I dropped the bag. Near the wall. I kept going back to it and couldn't pick it up.",choices:null,action:'questLegacy'}
+],
+raviFinal:[
+  {speaker:'Ravi',text:"...Something shifted. Did you feel that?",choices:null},
+  {speaker:'Nima',text:"Like a door opening somewhere very far away.",choices:[
+    {text:"I found something. Something that might help carry this.",tag:'E'},
+    {text:"There's a chamber nearby. I think it needs these glyphs.",tag:'T'}
+  ]},
+  {speaker:'Ravi',text:"Be careful. There are people who follow those with the Codex. And the old structures — they're not stable.",choices:null},
+  {speaker:'Nima',text:"Go. If there's a place that can hold this... go to it.",choices:null,action:'unlockChamber'}
+]
+};
+
+// ── TONE & REMNANTS ──
+function applyTone(tag,npcKey){
+  const t=G.toneState;const opp={T:'narrativePresence',O:'empathy',N:'trust',E:'observation'};
+  const map={T:'trust',O:'observation',N:'narrativePresence',E:'empathy'};
+  const k=map[tag];if(!k)return;
+  t[k]=Math.min(1,t[k]+0.1);
+  const ok=opp[tag];if(ok)t[ok]=Math.max(0,t[ok]-0.05);
+  Object.keys(t).forEach(x=>{t[x]=Math.max(0,Math.min(1,t[x]))});
+  if(npcKey&&G.npcs[npcKey]){
+    const r=G.npcs[npcKey].remnants;
+    if(tag==='T'){r.trust=Math.min(1,r.trust+.1);r.resolve=Math.min(1,r.resolve+.05);r.skepticism=Math.max(0,r.skepticism-.1)}
+    if(tag==='O'){r.nuance=Math.min(1,r.nuance+.1);r.memory=Math.min(1,r.memory+.1);r.authority=Math.max(0,r.authority-.05)}
+    if(tag==='N'){r.authority=Math.min(1,r.authority+.1);r.resolve=Math.min(1,r.resolve+.05);r.nuance=Math.max(0,r.nuance-.1)}
+    if(tag==='E'){r.empathy=Math.min(1,r.empathy+.1);r.need=Math.min(1,r.need+.1);r.resolve=Math.max(0,r.resolve-.05)}
+    Object.keys(r).forEach(x=>{r[x]=Math.max(0,Math.min(1,r[x]))});
+    const iso=toIso(G.npcs[npcKey].x,G.npcs[npcKey].y);
+    G.remnantShifts.push({x:iso.x,y:iso.y-40,alpha:1,text:'REMNANT SHIFT'});
+  }
+}
+
+// ── NOTIFICATIONS ──
+function notify(text,dur){G.notifications.push({text,alpha:1,timer:dur||2.5})}
+
+// ── DIALOGUES CONTROLLER ──
+function startDialogue(key){
+  G.dialogueActive=true;G.currentDialogue=key;G.dialogueLine=0;
+  const npc=key.replace('Final','');
+  if(G.npcs[npc])G.npcs[npc].met=true;
+  if(key==='raviFinal'){G.npcs.ravi.met=true;G.npcs.nima.met=true}
+  G.lore.saoriWarning=G.lore.saoriWarning||key==='saori';
+  G.lore.ophinaStory=G.lore.ophinaStory||key==='ravi';
+}
+function getCurrentLine(){
+  const lines=DLG[G.currentDialogue];
+  if(!lines||G.dialogueLine>=lines.length)return null;
+  return lines[G.dialogueLine];
+}
+function advanceDialogue(choiceTag){
+  const line=getCurrentLine();if(!line)return endDialogue();
+  if(choiceTag){
+    const npcKey=G.currentDialogue.replace('Final','');
+    applyTone(choiceTag,G.npcs[npcKey]?npcKey:null);
+  }
+  if(line.action){
+    if(line.action==='giveCodex'){G.player.hasCodex=true;notify('CODEX ACQUIRED')}
+    if(line.action==='saoriLeave'){G.npcs.saori.done=true;G.npcs.saori.visible=false;G.exitActive=true;G.lore.saoriWarning=true;notify('Find the Velhara Market')}
+    if(line.action==='questSorrow'){G.quests.findSorrow=true;G.lore.ophinaStory=true;notify('Quest: Find the Sorrow Glyph')}
+    if(line.action==='questRemembrance'){G.quests.findRemembrance=true;notify('Quest: Find the Remembrance Glyph')}
+    if(line.action==='questLegacy'){G.quests.findLegacy=true;notify('Quest: Find the Legacy Glyph')}
+    if(line.action==='unlockChamber'){G.quests.chamberUnlocked=true;G.npcs.ravi.finalDone=true;notify('The Triglyph Chamber awaits...')}
+  }
+  G.dialogueLine++;
+  if(G.dialogueLine>=DLG[G.currentDialogue].length)endDialogue();
+}
+function endDialogue(){
+  if(G.currentDialogue){
+    const nk=G.currentDialogue.replace('Final','');
+    if(G.npcs[nk]&&!G.npcs[nk].done)G.npcs[nk].done=true;
+  }
+  G.dialogueActive=false;G.currentDialogue=null;G.dialogueLine=0;
+}
+
+// ── GLYPH PICKUP ──
+function acquireGlyph(id){
+  G.glyphs[id]=true;
+  const iso=toIso(G.player.gx,G.player.gy);
+  G.glyphPickup={id,timer:2.5,x:iso.x,y:iso.y-20,targetSlot:Object.values(G.glyphs).filter(Boolean).length-1};
+  notify('GLYPH ACQUIRED: '+id.charAt(0).toUpperCase()+id.slice(1));
+  if(id==='sorrow'){G.activeEffect='sorrow_slow';G.effectTimer=3;G.player.speedMult=0.5}
+  if(id==='remembrance'){G.vignetteActive=true;G.vignetteTimer=4;G.vignetteFadePhase='in';G.vignetteAlpha=0}
+  if(id==='legacy'){G.player.speedMult=1.15;G.activeEffect='legacy_buff'}
+  if(id==='transcendence'){G.lore.transcendenceNote=true;G.lore.velharaHistory=true}
+}
+
+// ── PARTICLES ──
+function spawnParticles(n,x,y,col,spread){
+  for(let i=0;i<n;i++){
+    G.particles.push({x:x+(Math.random()-.5)*spread,y:y+(Math.random()-.5)*spread,
+      vx:(Math.random()-.5)*20,vy:-Math.random()*40-10,life:Math.random()*2+1,maxLife:Math.random()*2+1,
+      col:col||COLORS.amber,size:Math.random()*3+1});
+  }
+}
+
+// ── TITLE PARTICLES ──
+for(let i=0;i<40;i++){
+  G.particles.push({x:Math.random()*2000-500,y:Math.random()*1200,
+    vx:(Math.random()-.5)*5,vy:-Math.random()*15-5,life:Math.random()*6+3,maxLife:Math.random()*6+3,
+    col:COLORS.amber,size:Math.random()*2.5+0.5,titleOnly:true});
+}
+
+// ── TRANSITIONS ──
+function startTransition(targetScene){
+  if(G.transitionState.active)return;
+  const titles={1:'The Road to Velhara',2:'Velhara Market',3:'The Triglyph Chamber'};
+  G.transitionState={active:true,phase:'fadeOut',timer:0,targetScene,title:titles[targetScene]||''};
+}
+function setupScene(s){
+  G.scene=s;
+  if(s===1){G.player.gx=5;G.player.gy=6;syncPlayerIso();G.npcs.saori.visible=!G.npcs.saori.done}
+  if(s===2){G.player.gx=8;G.player.gy=8;syncPlayerIso();G.subScene=null;
+    G.glyphZones.forEach(z=>z.active=!G.glyphs[z.id])}
+  if(s===3){G.player.gx=4;G.player.gy=8;syncPlayerIso();G.chamberActivated=false;G.chamberActivationTimer=0;
+    G.chamberGlyphsPlaced={sorrow:false,remembrance:false,legacy:false}}
+}
+
+// ── UPDATE ──
+let lastT=0;
+function update(dt){
+  G.time+=dt;
+  // Transition
+  if(G.transitionState.active){
+    G.transitionState.timer+=dt;
+    if(G.transitionState.phase==='fadeOut'&&G.transitionState.timer>=1.5){
+      G.transitionState.phase='title';G.transitionState.timer=0;
+      setupScene(G.transitionState.targetScene);
+    }else if(G.transitionState.phase==='title'&&G.transitionState.timer>=1.2){
+      G.transitionState.phase='fadeIn';G.transitionState.timer=0;
+    }else if(G.transitionState.phase==='fadeIn'&&G.transitionState.timer>=1.5){
+      G.transitionState.active=false;G.transitionState.phase='none';G.transitionState.timer=0;
+    }
+    return;
+  }
+  if(G.scene===0)return;
+  if(G.codexOpen||G.dialogueActive||G.endScreen){}
+
+  // Effects
+  if(G.activeEffect==='sorrow_slow'){G.effectTimer-=dt;if(G.effectTimer<=0){G.player.speedMult=1;G.activeEffect=null}}
+  // Vignette
+  if(G.vignetteActive){
+    G.vignetteTimer-=dt;
+    if(G.vignetteFadePhase==='in'){G.vignetteAlpha=Math.min(1,G.vignetteAlpha+dt);if(G.vignetteAlpha>=0.8){G.vignetteFadePhase='hold';G.vignetteAlpha=0.8}}
+    else if(G.vignetteFadePhase==='hold'&&G.vignetteTimer<=1.5){G.vignetteFadePhase='out'}
+    else if(G.vignetteFadePhase==='out'){G.vignetteAlpha=Math.max(0,G.vignetteAlpha-dt*0.8);if(G.vignetteAlpha<=0){G.vignetteActive=false;G.vignetteFadePhase='none'}}
+  }
+  // Chamber
+  if(G.chamberActivated){G.chamberActivationTimer+=dt;if(G.chamberActivationTimer>3&&!G.glyphs.transcendence){acquireGlyph('transcendence')}
+    if(G.chamberActivationTimer>6&&!G.endScreen){G.endScreen=true;G.endTimer=0}}
+  if(G.endScreen){G.endTimer+=dt;return}
+
+  // Player movement
+  if(!G.dialogueActive&&!G.codexOpen&&!G.subScene){
+    const sp=G.player.speed*G.player.speedMult*dt;
+    let dx=0,dy=0;
+    if(keys['w']||keys['arrowup']){dx-=sp;dy-=sp}
+    if(keys['s']||keys['arrowdown']){dx+=sp;dy+=sp}
+    if(keys['a']||keys['arrowleft']){dx-=sp;dy+=sp}
+    if(keys['d']||keys['arrowright']){dx+=sp;dy-=sp}
+    if(dx!==0||dy!==0){
+      G.player.moving=true;G.player.bobT+=dt*8;
+      let ngx=G.player.gx+dx;let ngy=G.player.gy+dy;
+      const map=maps[G.scene];
+      if(map){
+        const tx=Math.floor(ngx),ty=Math.floor(ngy);
+        if(tx>=0&&tx<map.w&&ty>=0&&ty<map.h){
+          const tile=map.tiles[ty][tx];
+          if(tile!=='ruin'){G.player.gx=ngx;G.player.gy=ngy}
+        }
+      }
+      if(dx<0&&dy<0)G.player.facing='nw';
+      else if(dx>0&&dy<0)G.player.facing='ne';
+      else if(dx>0&&dy>0)G.player.facing='se';
+      else if(dx<0&&dy>0)G.player.facing='sw';
+      else if(dy<0)G.player.facing='n';
+      else if(dy>0)G.player.facing='s';
+    }else{G.player.moving=false}
+    syncPlayerIso();
+
+    // Interaction check
+    if(keys['e']||keys[' ']){keys['e']=false;keys[' ']=false;tryInteract()}
+  }
+
+  // Sub-scene
+  if(G.subScene){
+    // handled in click
+  }
+
+  // Particles
+  G.particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;if(p.life<=0&&p.titleOnly){p.x=Math.random()*W;p.y=H+10;p.life=p.maxLife;p.vy=-Math.random()*15-5}});
+  G.particles=G.particles.filter(p=>p.life>0||p.titleOnly);
+
+  // Notifications
+  G.notifications.forEach(n=>{n.timer-=dt;if(n.timer<0.5)n.alpha=n.timer/0.5});
+  G.notifications=G.notifications.filter(n=>n.timer>0);
+  G.remnantShifts.forEach(r=>{r.y-=20*dt;r.alpha-=dt*0.5});
+  G.remnantShifts=G.remnantShifts.filter(r=>r.alpha>0);
+
+  // Glyph pickup anim
+  if(G.glyphPickup){G.glyphPickup.timer-=dt;G.glyphPickup.y-=30*dt;if(G.glyphPickup.timer<=0)G.glyphPickup=null}
+
+  // Camera
+  const map=maps[G.scene];
+  if(map){
+    const target=toIso(G.player.gx,G.player.gy);
+    G.camera.x+=(target.x-G.camera.x)*3*dt;
+    G.camera.y+=(target.y-G.camera.y)*3*dt;
+  }
+
+  // Scene-specific triggers
+  if(G.scene===1&&G.exitActive){
+    const ex=toIso(10,1);
+    const px=toIso(G.player.gx,G.player.gy);
+    if(Math.abs(G.player.gx-10)<1.5&&Math.abs(G.player.gy-1)<1.5){startTransition(2)}
+  }
+  if(G.scene===2){
+    // Check glyph zones
+    G.glyphZones.forEach(z=>{
+      if(z.active&&!G.glyphs[z.id]&&G.quests['find'+z.id.charAt(0).toUpperCase()+z.id.slice(1)]){
+        if(Math.abs(G.player.gx-z.gx)<1.2&&Math.abs(G.player.gy-z.gy)<1.2){
+          G.subScene=z.id;
+        }
+      }
+    });
+    // Chamber exit
+    if(G.quests.chamberUnlocked&&Math.abs(G.player.gx-15)<1.5&&Math.abs(G.player.gy-11)<1.5){
+      startTransition(3);
+    }
+  }
+}
+
+function tryInteract(){
+  if(G.dialogueActive)return;
+  const pgx=G.player.gx,pgy=G.player.gy;
+  if(G.scene===1){
+    const s=G.npcs.saori;
+    if(s.visible&&!s.done&&Math.abs(pgx-s.x)<2.5&&Math.abs(pgy-s.y)<2.5){startDialogue('saori');return}
+  }
+  if(G.scene===2){
+    const r=G.npcs.ravi;
+    if(!r.done&&Math.abs(pgx-r.x)<2.5&&Math.abs(pgy-r.y)<2.5){startDialogue('ravi');return}
+    if(r.done&&!r.finalDone&&G.glyphs.sorrow&&G.glyphs.remembrance&&G.glyphs.legacy&&Math.abs(pgx-r.x)<2.5&&Math.abs(pgy-r.y)<2.5){startDialogue('raviFinal');return}
+    const n=G.npcs.nima;
+    if(!n.done&&G.npcs.ravi.done&&Math.abs(pgx-n.x)<2.5&&Math.abs(pgy-n.y)<2.5){startDialogue('nima');return}
+    const k=G.npcs.kaelen;
+    if(!k.done&&Math.abs(pgx-k.x)<2.5&&Math.abs(pgy-k.y)<2.5){startDialogue('kaelen');return}
+  }
+  if(G.scene===3){
+    // Pedestal interaction
+    const peds=[{gx:4,gy:3,id:'sorrow'},{gx:6,gy:3,id:'remembrance'},{gx:5,gy:5,id:'legacy'}];
+    peds.forEach(ped=>{
+      if(Math.abs(pgx-ped.gx)<1.5&&Math.abs(pgy-ped.gy)<1.5&&G.glyphs[ped.id]&&!G.chamberGlyphsPlaced[ped.id]){
+        G.chamberGlyphsPlaced[ped.id]=true;
+        notify(ped.id.charAt(0).toUpperCase()+ped.id.slice(1)+' Glyph placed');
+        spawnParticles(15,toIso(ped.gx,ped.gy).x,toIso(ped.gx,ped.gy).y-20,COLORS.gold,30);
+        if(G.chamberGlyphsPlaced.sorrow&&G.chamberGlyphsPlaced.remembrance&&G.chamberGlyphsPlaced.legacy){
+          G.chamberActivated=true;G.chamberActivationTimer=0;
+          notify('The chamber resonates...');
+        }
+      }
+    });
+  }
+}
+
+// ── CLICK HANDLING ──
+function handleClick(){
+  if(!mouseClicked)return;
+  mouseClicked=false;
+  if(G.scene===0&&!G.transitionState.active){startTransition(1);return}
+  if(G.endScreen){
+    // Check restart
+    const rx=W/2-60,ry=H/2+130,rw=120,rh=35;
+    if(mouseX>=rx&&mouseX<=rx+rw&&mouseY>=ry&&mouseY<=ry+rh){location.reload();return}
+    return;
+  }
+  if(G.codexOpen){
+    // Tab clicks
+    const tabs=['glyphs','npcs','lore'];
+    tabs.forEach((t,i)=>{
+      const tx=W/2-150+i*120,ty=80;
+      if(mouseX>=tx&&mouseX<=tx+100&&mouseY>=ty&&mouseY<=ty+30){G.codexTab=t}
+    });
+    // Close
+    if(mouseX>=W-60&&mouseX<=W-20&&mouseY>=20&&mouseY<=50){G.codexOpen=false}
+    return;
+  }
+  // Codex button
+  if(G.scene>0&&!G.dialogueActive){
+    const bx=W-70,by=H-70;
+    if(mouseX>=bx&&mouseX<=bx+50&&mouseY>=by&&mouseY<=by+50){G.codexOpen=true;return}
+  }
+  // Sub-scene clicks
+  if(G.subScene){
+    handleSubSceneClick();return;
+  }
+  // Dialogue
+  if(G.dialogueActive){
+    const line=getCurrentLine();
+    if(!line){endDialogue();return}
+    if(line.choices){
+      const pw=Math.min(700,W-40);
+      const ph=180+line.choices.length*38;
+      const py=H-ph-20;
+      const bw=Math.min(350,pw-60);
+      const startY=py+85;
+      line.choices.forEach((c,i)=>{
+        const bx=W/2-bw/2;const by=startY+i*38;
+        if(mouseX>=bx&&mouseX<=bx+bw&&mouseY>=by&&mouseY<=by+32){
+          advanceDialogue(c.tag);
+        }
+      });
+    }else{
+      advanceDialogue();
+    }
+    return;
+  }
+  // NPC click interaction
+  if(G.scene>=1&&G.scene<=3){tryInteract()}
+}
+
+function handleSubSceneClick(){
+  if(G.subScene==='sorrow'){
+    acquireGlyph('sorrow');G.glyphZones.find(z=>z.id==='sorrow').active=false;G.subScene=null;
+  }else if(G.subScene==='remembrance'){
+    acquireGlyph('remembrance');G.glyphZones.find(z=>z.id==='remembrance').active=false;G.subScene=null;
+  }else if(G.subScene==='legacy'){
+    // Show choice
+    if(!G.subScene_legacyChoice){G.subScene_legacyChoice=true;return}
+    const bw=220;
+    const b1x=W/2-bw-10,b1y=H/2+40;
+    const b2x=W/2+10,b2y=H/2+40;
+    if(mouseX>=b1x&&mouseX<=b1x+bw&&mouseY>=b1y&&mouseY<=b1y+36){
+      G.legacyVow='justice';acquireGlyph('legacy');G.glyphZones.find(z=>z.id==='legacy').active=false;G.subScene=null;G.subScene_legacyChoice=false;
+    }else if(mouseX>=b2x&&mouseX<=b2x+bw&&mouseY>=b2y&&mouseY<=b2y+36){
+      G.legacyVow='restraint';acquireGlyph('legacy');G.glyphZones.find(z=>z.id==='legacy').active=false;G.subScene=null;G.subScene_legacyChoice=false;
+    }
+  }
+}
+
+// ── RENDER ──
+function render(){
+  X.fillStyle=COLORS.bg;X.fillRect(0,0,W,H);
+  if(G.transitionState.active){renderTransition();return}
+  if(G.scene===0){renderTitle();return}
+  renderScene();
+  if(G.vignetteActive)renderVignette();
+  if(G.subScene)renderSubScene();
+  renderHUD();
+  if(G.dialogueActive)renderDialogue();
+  if(G.codexOpen)renderCodex();
+  renderNotifications();
+  if(G.endScreen)renderEndScreen();
+  renderControls();
+}
+
+function renderTitle(){
+  // Sky
+  const gr=X.createLinearGradient(0,0,0,H);
+  gr.addColorStop(0,'#0d0a15');gr.addColorStop(0.5,'#1a1520');gr.addColorStop(1,'#1a1510');
+  X.fillStyle=gr;X.fillRect(0,0,W,H);
+  // Particles
+  G.particles.filter(p=>p.titleOnly).forEach(p=>{
+    X.globalAlpha=Math.min(1,p.life/p.maxLife)*0.6;
+    X.fillStyle=p.col;X.beginPath();X.arc(p.x,p.y,p.size,0,Math.PI*2);X.fill();
+  });
+  X.globalAlpha=1;
+  // Triangle
+  const cx=W/2,cy=H/2+60;
+  X.strokeStyle=COLORS.gold;X.lineWidth=2;X.globalAlpha=0.3+Math.sin(G.time)*0.1;
+  X.beginPath();X.moveTo(cx,cy-50);X.lineTo(cx+45,cy+30);X.lineTo(cx-45,cy+30);X.closePath();X.stroke();
+  X.globalAlpha=1;
+  // Title
+  X.textAlign='center';X.textBaseline='middle';
+  X.font='700 '+Math.min(72,W*0.08)+'px Cinzel, serif';
+  X.fillStyle=COLORS.gold;
+  X.shadowColor=COLORS.amber;X.shadowBlur=20;
+  X.fillText('VELINOR',cx,H*0.3);
+  X.shadowBlur=0;
+  X.font='400 '+Math.min(22,W*0.03)+'px Cinzel, serif';
+  X.fillStyle=COLORS.dimwhite;
+  X.fillText('Remnants of the Tone',cx,H*0.3+45);
+  X.font='400 '+Math.min(16,W*0.02)+'px Inter, sans-serif';
+  X.fillStyle=COLORS.offwhite;X.globalAlpha=0.5;
+  X.fillText('Velhara Opening Slice',cx,H*0.3+75);
+  X.globalAlpha=1;
+  // Press key
+  X.font='500 '+Math.min(16,W*0.022)+'px Inter, sans-serif';
+  X.fillStyle=COLORS.offwhite;X.globalAlpha=0.4+Math.sin(G.time*2)*0.3;
+  X.fillText('PRESS ANY KEY OR CLICK TO BEGIN',cx,H*0.75);
+  X.globalAlpha=1;
+}
+
+function renderScene(){
+  const map=maps[G.scene];if(!map)return;
+  X.save();
+  const ox=W/2-G.camera.x;const oy=H*0.35-G.camera.y;
+  X.translate(ox,oy);
+
+  // Sky gradient for scene 1
+  if(G.scene===1){
+    X.save();X.translate(-ox,-oy);
+    const sg=X.createLinearGradient(0,0,0,H*0.5);
+    sg.addColorStop(0,'#2a1525');sg.addColorStop(0.5,'#4a2a30');sg.addColorStop(1,'#1a1510');
+    X.fillStyle=sg;X.fillRect(0,0,W,H*0.5);X.restore();
+  }
+  if(G.scene===3){
+    X.save();X.translate(-ox,-oy);
+    const sg=X.createLinearGradient(0,0,0,H);
+    sg.addColorStop(0,'#15102a');sg.addColorStop(1,'#1a1510');
+    X.fillStyle=sg;X.fillRect(0,0,W,H);X.restore();
+  }
+
+  // Collect render list
+  const renderList=[];
+  for(let gy=0;gy<map.h;gy++){
+    for(let gx=0;gx<map.w;gx++){
+      const tile=map.tiles[gy][gx];
+      const iso=toIso(gx,gy);
+      const depth=gx+gy;
+      renderList.push({type:'tile',tile,x:iso.x,y:iso.y,depth,gx,gy});
+    }
+  }
+  // Objects
+  if(G.scene===1){
+    // Broken stone marker
+    renderList.push({type:'obj',kind:'stone_marker',x:toIso(3,3).x,y:toIso(3,3).y,depth:6});
+    // Foliage
+    [[1,1],[9,4],[10,6],[0,5]].forEach(f=>{
+      renderList.push({type:'obj',kind:'foliage',x:toIso(f[0],f[1]).x,y:toIso(f[0],f[1]).y,depth:f[0]+f[1]});
+    });
+    // Exit
+    if(G.exitActive){renderList.push({type:'obj',kind:'portal',x:toIso(10,1).x,y:toIso(10,1).y,depth:11})}
+    // Saori
+    if(G.npcs.saori.visible){
+      const si=toIso(G.npcs.saori.x,G.npcs.saori.y);
+      renderList.push({type:'npc',npc:'saori',x:si.x,y:si.y,depth:G.npcs.saori.x+G.npcs.saori.y+0.1});
+    }
+  }
+  if(G.scene===2){
+    // Market stalls
+    [[5,4,'#8a4535'],[8,3,'#4a6a55'],[11,6,'#6a5a7a']].forEach((s,i)=>{
+      renderList.push({type:'obj',kind:'stall',x:toIso(s[0],s[1]).x,y:toIso(s[0],s[1]).y,depth:s[0]+s[1],color:s[2]});
+    });
+    // Glyph zones
+    G.glyphZones.forEach(z=>{
+      if(z.active&&G.quests['find'+z.id.charAt(0).toUpperCase()+z.id.slice(1)]){
+        const zi=toIso(z.gx,z.gy);
+        renderList.push({type:'obj',kind:'glyphZone',x:zi.x,y:zi.y,depth:z.gx+z.gy,id:z.id});
+      }
+    });
+    // NPCs
+    if(G.npcs.ravi.visible){const ri=toIso(G.npcs.ravi.x,G.npcs.ravi.y);renderList.push({type:'npc',npc:'ravi',x:ri.x,y:ri.y,depth:G.npcs.ravi.x+G.npcs.ravi.y+0.1})}
+    if(G.npcs.nima.visible){const ni=toIso(G.npcs.nima.x,G.npcs.nima.y);renderList.push({type:'npc',npc:'nima',x:ni.x,y:ni.y,depth:G.npcs.nima.x+G.npcs.nima.y+0.1})}
+    if(G.npcs.kaelen.visible){const ki=toIso(G.npcs.kaelen.x,G.npcs.kaelen.y);renderList.push({type:'npc',npc:'kaelen',x:ki.x,y:ki.y,depth:G.npcs.kaelen.x+G.npcs.kaelen.y+0.1})}
+    // Unstable wall
+    renderList.push({type:'obj',kind:'wall',x:toIso(1,1).x,y:toIso(1,1).y,depth:2});
+    // Chamber exit
+    if(G.quests.chamberUnlocked){renderList.push({type:'obj',kind:'portal',x:toIso(15,11).x,y:toIso(15,11).y,depth:26})}
+  }
+  if(G.scene===3){
+    // Pedestals
+    [{gx:4,gy:3,id:'sorrow'},{gx:6,gy:3,id:'remembrance'},{gx:5,gy:5,id:'legacy'}].forEach(ped=>{
+      const pi=toIso(ped.gx,ped.gy);
+      renderList.push({type:'obj',kind:'pedestal',x:pi.x,y:pi.y,depth:ped.gx+ped.gy,id:ped.id,placed:G.chamberGlyphsPlaced[ped.id]});
+    });
+    // Chamber glow
+    if(G.chamberActivated){
+      const ci=toIso(5,4);
+      renderList.push({type:'obj',kind:'chamberGlow',x:ci.x,y:ci.y,depth:100});
+    }
+  }
+
+  // Player
+  const piso=toIso(G.player.gx,G.player.gy);
+  renderList.push({type:'player',x:piso.x,y:piso.y,depth:G.player.gx+G.player.gy+0.2});
+
+  // Sort
+  renderList.sort((a,b)=>a.depth-b.depth);
+
+  // Draw
+  renderList.forEach(item=>{
+    if(item.type==='tile')drawTile(item);
+    else if(item.type==='obj')drawObject(item);
+    else if(item.type==='npc')drawNPC(item);
+    else if(item.type==='player')drawPlayer(item);
+  });
+
+  // Remnant shifts
+  G.remnantShifts.forEach(r=>{
+    X.globalAlpha=r.alpha;X.fillStyle=COLORS.amber;X.font='bold 11px Inter';X.textAlign='center';
+    X.fillText(r.text,r.x,r.y);
+  });
+  X.globalAlpha=1;
+
+  // Glyph pickup anim
+  if(G.glyphPickup){
+    X.globalAlpha=Math.min(1,G.glyphPickup.timer);
+    drawGlyphIcon(G.glyphPickup.id,G.glyphPickup.x,G.glyphPickup.y,18);
+    X.globalAlpha=1;
+  }
+
+  // Scene particles
+  G.particles.filter(p=>!p.titleOnly).forEach(p=>{
+    X.globalAlpha=Math.min(1,p.life/p.maxLife)*0.7;
+    X.fillStyle=p.col;X.beginPath();X.arc(p.x,p.y,p.size,0,Math.PI*2);X.fill();
+  });
+  X.globalAlpha=1;
+
+  X.restore();
+}
+
+function drawTile(item){
+  const tc=COLORS.tiles[item.tile];if(!tc)return;
+  let h=6;
+  if(item.tile==='chamber_floor'){
+    // subtle violet glow
+    const glow=Math.sin(G.time*2+item.gx*0.5+item.gy*0.3)*0.1;
+    X.globalAlpha=0.15+glow;X.fillStyle='#6a4ab5';
+    X.beginPath();X.arc(item.x,item.y+TH/2,TW/3,0,Math.PI*2);X.fill();
+    X.globalAlpha=1;
+  }
+  drawIsoDiamond(item.x,item.y,tc.t,tc.l,tc.r,h);
+}
+
+function drawObject(item){
+  if(item.kind==='stone_marker'){
+    X.fillStyle='#5c5248';X.fillRect(item.x-4,item.y-20,8,25);
+    X.fillStyle='#4a443c';X.fillRect(item.x-6,item.y-22,12,6);
+    // Crack
+    X.strokeStyle='#3d3530';X.lineWidth=1;X.beginPath();X.moveTo(item.x-1,item.y-18);X.lineTo(item.x+2,item.y-8);X.stroke();
+  }
+  if(item.kind==='foliage'){
+    X.fillStyle='#3d6a2e';X.beginPath();X.arc(item.x,item.y,8,0,Math.PI*2);X.fill();
+    X.fillStyle='#4a7a35';X.beginPath();X.arc(item.x+4,item.y-3,6,0,Math.PI*2);X.fill();
+  }
+  if(item.kind==='portal'){
+    const pulse=Math.sin(G.time*3)*0.2+0.5;
+    X.globalAlpha=pulse;
+    const pg=X.createRadialGradient(item.x,item.y+TH/2,2,item.x,item.y+TH/2,25);
+    pg.addColorStop(0,COLORS.gold);pg.addColorStop(1,'transparent');
+    X.fillStyle=pg;X.beginPath();X.arc(item.x,item.y+TH/2,25,0,Math.PI*2);X.fill();
+    X.globalAlpha=1;
+  }
+  if(item.kind==='stall'){
+    X.fillStyle='#5c5040';X.fillRect(item.x-18,item.y-5,36,12);
+    X.fillStyle=item.color;X.fillRect(item.x-20,item.y-18,40,15);
+    // Posts
+    X.fillStyle='#4a3f2e';X.fillRect(item.x-18,item.y-18,3,25);X.fillRect(item.x+15,item.y-18,3,25);
+  }
+  if(item.kind==='glyphZone'){
+    const pulse=Math.sin(G.time*4)*0.3+0.5;
+    const cols={sorrow:'#4a7abc',remembrance:'#7a5ab5',legacy:'#c9a84c'};
+    X.globalAlpha=pulse;
+    X.strokeStyle=cols[item.id]||COLORS.amber;X.lineWidth=2;
+    X.beginPath();X.arc(item.x,item.y+TH/2,15+Math.sin(G.time*3)*3,0,Math.PI*2);X.stroke();
+    X.globalAlpha=0.15;X.fillStyle=cols[item.id]||COLORS.amber;
+    X.beginPath();X.arc(item.x,item.y+TH/2,12,0,Math.PI*2);X.fill();
+    X.globalAlpha=1;
+  }
+  if(item.kind==='wall'){
+    const shake=Math.random()*1.5-0.75;
+    X.fillStyle='#4a4035';
+    X.fillRect(item.x-15+shake,item.y-25,30,30);
+    X.fillStyle='#3d3530';
+    X.fillRect(item.x-12+shake,item.y-22,10,8);
+    X.fillRect(item.x+2+shake,item.y-15,8,12);
+    // Cracks
+    X.strokeStyle='#2e2820';X.lineWidth=1;
+    X.beginPath();X.moveTo(item.x-5+shake,item.y-20);X.lineTo(item.x+3+shake,item.y-5);X.stroke();
+  }
+  if(item.kind==='pedestal'){
+    const glow=item.placed?0.8:0.2+Math.sin(G.time*2)*0.1;
+    X.fillStyle='#5c5248';X.fillRect(item.x-8,item.y-15,16,20);
+    X.fillStyle='#6a6258';X.fillRect(item.x-10,item.y-17,20,5);
+    // Glow top
+    X.globalAlpha=glow;
+    const glowCol=item.id==='sorrow'?'#4a7abc':item.id==='remembrance'?'#7a5ab5':'#c9a84c';
+    const rg=X.createRadialGradient(item.x,item.y-18,2,item.x,item.y-18,15);
+    rg.addColorStop(0,glowCol);rg.addColorStop(1,'transparent');
+    X.fillStyle=rg;X.beginPath();X.arc(item.x,item.y-18,15,0,Math.PI*2);X.fill();
+    if(item.placed)drawGlyphIcon(item.id,item.x,item.y-22,10);
+    X.globalAlpha=1;
+  }
+  if(item.kind==='chamberGlow'){
+    const t=G.chamberActivationTimer;
+    const r=Math.min(200,t*80);
+    X.globalAlpha=Math.min(0.6,t*0.15);
+    const rg=X.createRadialGradient(item.x,item.y,2,item.x,item.y,r);
+    rg.addColorStop(0,COLORS.gold);rg.addColorStop(0.5,'rgba(201,168,76,0.3)');rg.addColorStop(1,'transparent');
+    X.fillStyle=rg;X.beginPath();X.arc(item.x,item.y,r,0,Math.PI*2);X.fill();
+    // Expanding ring
+    if(t>1){
+      X.strokeStyle=COLORS.gold;X.lineWidth=2;X.globalAlpha=Math.max(0,0.6-(t-1)*0.15);
+      X.beginPath();X.arc(item.x,item.y,(t-1)*60,0,Math.PI*2);X.stroke();
+    }
+    X.globalAlpha=1;
+  }
+}
+
+function drawNPC(item){
+  const npc=item.npc;
+  const cols={
+    saori:{body:'#a0a5aa',head:'#b5bac0',cloak:'#8a8e95'},
+    ravi:{body:'#8a6a45',head:'#9a7a55',cloak:'#6a5035'},
+    nima:{body:'#6a7a8a',head:'#7a8a9a',cloak:'#5a6a7a'},
+    kaelen:{body:'#3a5a3a',head:'#5a7a5a',cloak:'#2a4a2a'}
+  };
+  const c=cols[npc]||cols.saori;
+  // Shadow
+  X.globalAlpha=0.3;X.fillStyle='#000';
+  X.beginPath();X.ellipse(item.x,item.y+TH/2+2,12,5,0,0,Math.PI*2);X.fill();
+  X.globalAlpha=1;
+  // Body
+  const breathe=npc==='nima'?Math.sin(G.time*1.5)*1:0;
+  X.fillStyle=c.cloak;
+  X.beginPath();X.ellipse(item.x,item.y-8+breathe,10,16,0,0,Math.PI*2);X.fill();
+  // Head
+  X.fillStyle=c.head;
+  const headBow=npc==='nima'?3:0;
+  X.beginPath();X.arc(item.x,item.y-28+headBow+breathe,7,0,Math.PI*2);X.fill();
+  // Hood for Saori
+  if(npc==='saori'){
+    X.fillStyle=c.cloak;
+    X.beginPath();X.arc(item.x,item.y-30,9,Math.PI,0);X.fill();
+    // Glowing device
+    X.fillStyle=COLORS.amber;X.globalAlpha=0.5+Math.sin(G.time*4)*0.3;
+    X.beginPath();X.arc(item.x+8,item.y-10,3,0,Math.PI*2);X.fill();
+    X.globalAlpha=1;
+  }
+  // Kaelen hunch
+  if(npc==='kaelen'){
+    X.fillStyle=c.body;X.fillRect(item.x-3,item.y-24,6,4);
+  }
+  // Name label
+  X.fillStyle=COLORS.amber;X.font='bold 10px Inter';X.textAlign='center';
+  X.fillText(npc.charAt(0).toUpperCase()+npc.slice(1),item.x,item.y-40);
+}
+
+function drawPlayer(item){
+  const bob=G.player.moving?Math.sin(G.player.bobT)*1.5:0;
+  // Shadow
+  X.globalAlpha=0.3;X.fillStyle='#000';
+  X.beginPath();X.ellipse(item.x,item.y+TH/2+2,11,4,0,0,Math.PI*2);X.fill();
+  X.globalAlpha=1;
+  // Legacy buff aura
+  if(G.activeEffect==='legacy_buff'){
+    X.globalAlpha=0.15+Math.sin(G.time*3)*0.05;
+    const ag=X.createRadialGradient(item.x,item.y-10,2,item.x,item.y-10,20);
+    ag.addColorStop(0,COLORS.gold);ag.addColorStop(1,'transparent');
+    X.fillStyle=ag;X.beginPath();X.arc(item.x,item.y-10,20,0,Math.PI*2);X.fill();
+    X.globalAlpha=1;
+  }
+  // Transcendence aura
+  if(G.glyphs.transcendence){
+    X.globalAlpha=0.2+Math.sin(G.time*2)*0.1;
+    const tg=X.createRadialGradient(item.x,item.y-10,2,item.x,item.y-10,25);
+    tg.addColorStop(0,'#f0d060');tg.addColorStop(1,'transparent');
+    X.fillStyle=tg;X.beginPath();X.arc(item.x,item.y-10,25,0,Math.PI*2);X.fill();
+    X.globalAlpha=1;
+  }
+  // Body
+  X.fillStyle='#6a4a2a';
+  X.beginPath();X.ellipse(item.x,item.y-8+bob,9,15,0,0,Math.PI*2);X.fill();
+  // Cloak detail
+  X.fillStyle='#5a3a1a';
+  X.beginPath();X.moveTo(item.x-6,item.y-2+bob);X.lineTo(item.x,item.y+10+bob);X.lineTo(item.x+6,item.y-2+bob);X.fill();
+  // Head
+  X.fillStyle='#c9a878';
+  X.beginPath();X.arc(item.x,item.y-26+bob,7,0,Math.PI*2);X.fill();
+  // Eyes direction
+  const eyeOff=G.player.facing.includes('e')?2:G.player.facing.includes('w')?-2:0;
+  X.fillStyle='#2a1a0a';
+  X.fillRect(item.x-2+eyeOff,item.y-27+bob,1.5,1.5);X.fillRect(item.x+1+eyeOff,item.y-27+bob,1.5,1.5);
+}
+
+function drawGlyphIcon(id,x,y,size){
+  const s=size||14;
+  if(id==='sorrow'){
+    X.fillStyle='#4a7abc';
+    X.beginPath();X.moveTo(x,y-s);X.bezierCurveTo(x+s*0.6,y-s*0.3,x+s*0.3,y+s*0.5,x,y+s);X.bezierCurveTo(x-s*0.3,y+s*0.5,x-s*0.6,y-s*0.3,x,y-s);X.fill();
+  }else if(id==='remembrance'){
+    X.strokeStyle='#7a5ab5';X.lineWidth=1.5;
+    for(let i=1;i<=3;i++){X.beginPath();X.arc(x,y,s*i*0.3,0,Math.PI*2);X.stroke()}
+  }else if(id==='legacy'){
+    X.fillStyle='#c9a84c';X.strokeStyle='#c9a84c';X.lineWidth=1.5;
+    X.beginPath();X.arc(x,y,s*0.8,0,Math.PI*2);X.stroke();
+    X.beginPath();X.moveTo(x,y-s*0.5);X.lineTo(x+s*0.25,y+s*0.2);X.lineTo(x-s*0.25,y+s*0.2);X.closePath();X.fill();
+  }else if(id==='transcendence'){
+    X.fillStyle=COLORS.gold;X.strokeStyle=COLORS.gold;X.lineWidth=1.5;
+    X.beginPath();X.moveTo(x,y-s);X.lineTo(x+s*0.8,y+s*0.6);X.lineTo(x-s*0.8,y+s*0.6);X.closePath();X.fill();
+    X.fillStyle='#4a7abc';
+    X.beginPath();X.moveTo(x,y-s*0.2);X.bezierCurveTo(x+s*0.2,y,x+s*0.1,y+s*0.3,x,y+s*0.4);X.bezierCurveTo(x-s*0.1,y+s*0.3,x-s*0.2,y,x,y-s*0.2);X.fill();
+  }
+}
+
+// ── HUD ──
+function renderHUD(){
+  // TONE bars top-left
+  const bars=[
+    {key:'trust',label:'Trust',col:COLORS.amber},
+    {key:'observation',label:'Observation',col:COLORS.teal},
+    {key:'narrativePresence',label:'Narrative',col:COLORS.violet},
+    {key:'empathy',label:'Empathy',col:COLORS.rose}
+  ];
+  const bx=15,bw=Math.min(130,W*0.15);
+  bars.forEach((b,i)=>{
+    const by=15+i*24;
+    X.fillStyle='rgba(13,11,8,0.7)';X.fillRect(bx-2,by-2,bw+55,18);
+    X.font='500 10px Inter';X.textAlign='left';X.fillStyle=b.col;
+    X.fillText(b.label,bx+2,by+11);
+    X.fillStyle='rgba(40,35,28,0.8)';X.fillRect(bx+52,by+2,bw-4,10);
+    X.fillStyle=b.col;X.fillRect(bx+52,by+2,(bw-4)*G.toneState[b.key],10);
+  });
+  // Glyph inventory top-right
+  const glyphs=['sorrow','remembrance','legacy','transcendence'];
+  const gx=W-190;
+  X.fillStyle='rgba(13,11,8,0.7)';X.fillRect(gx-5,8,180,40);
+  X.font='500 9px Inter';X.textAlign='center';X.fillStyle=COLORS.dimwhite;
+  X.fillText('GLYPHS',gx+85,18);
+  glyphs.forEach((g,i)=>{
+    const sx=gx+i*42+10;
+    X.strokeStyle='rgba(100,90,70,0.5)';X.lineWidth=1;
+    X.strokeRect(sx,22,32,22);
+    if(G.glyphs[g]){drawGlyphIcon(g,sx+16,33,8)}
+  });
+  // Codex button
+  const cbx=W-70,cby=H-70;
+  X.fillStyle='rgba(13,11,8,0.8)';
+  X.beginPath();X.arc(cbx+25,cby+25,22,0,Math.PI*2);X.fill();
+  X.strokeStyle=COLORS.amber;X.lineWidth=1.5;
+  X.beginPath();X.arc(cbx+25,cby+25,22,0,Math.PI*2);X.stroke();
+  X.font='bold 10px Inter';X.textAlign='center';X.fillStyle=COLORS.amber;
+  X.fillText('CODEX',cbx+25,cby+28);
+}
+
+function renderDialogue(){
+  const line=getCurrentLine();if(!line)return;
+  const pw=Math.min(700,W-40);const ph=line.choices?180+line.choices.length*38:130;
+  const px=W/2-pw/2;const py=H-ph-20;
+  // Panel
+  X.fillStyle='rgba(13,11,8,0.92)';
+  roundRect(px,py,pw,ph,12);X.fill();
+  X.strokeStyle='rgba(100,90,70,0.3)';X.lineWidth=1;
+  roundRect(px,py,pw,ph,12);X.stroke();
+  // Portrait circle
+  const portraitCols={Saori:'#8a8e95',Ravi:'#6a5035',Nima:'#5a6a7a',Kaelen:'#2a4a2a'};
+  X.fillStyle=portraitCols[line.speaker]||COLORS.dimwhite;
+  X.beginPath();X.arc(px+30,py+30,16,0,Math.PI*2);X.fill();
+  // Name
+  X.font='bold 14px Inter';X.textAlign='left';X.fillStyle=COLORS.amber;
+  X.fillText(line.speaker,px+55,py+28);
+  // Text
+  X.font='400 13px Inter';X.fillStyle=COLORS.offwhite;
+  wrapText(line.text,px+55,py+48,pw-70,18);
+  // Choices
+  if(line.choices){
+    const bw=Math.min(350,pw-60);
+    const startY=py+85;
+    const tagCols={T:COLORS.amber,O:COLORS.teal,N:COLORS.violet,E:COLORS.rose};
+    line.choices.forEach((c,i)=>{
+      const bx=W/2-bw/2;const by=startY+i*38;
+      // Hover check
+      const hover=mouseX>=bx&&mouseX<=bx+bw&&mouseY>=by&&mouseY<=by+32;
+      X.fillStyle=hover?'rgba(60,50,35,0.9)':'rgba(35,30,22,0.8)';
+      roundRect(bx,by,bw,32,8);X.fill();
+      X.strokeStyle=tagCols[c.tag]||COLORS.amber;X.lineWidth=1;
+      roundRect(bx,by,bw,32,8);X.stroke();
+      // Tag
+      X.font='bold 11px Inter';X.fillStyle=tagCols[c.tag];X.textAlign='left';
+      X.fillText('['+c.tag+']',bx+10,by+20);
+      // Text
+      X.font='400 12px Inter';X.fillStyle=COLORS.offwhite;
+      X.fillText(c.text,bx+38,by+20);
+    });
+  }else{
+    // Click to continue
+    X.font='400 11px Inter';X.fillStyle=COLORS.dimwhite;X.textAlign='center';
+    X.globalAlpha=0.5+Math.sin(G.time*3)*0.3;
+    X.fillText('Click to continue',W/2,py+ph-12);
+    X.globalAlpha=1;
+  }
+}
+
+function renderCodex(){
+  // Full overlay
+  X.fillStyle='rgba(10,8,5,0.95)';X.fillRect(0,0,W,H);
+  const cw=Math.min(650,W-40),ch=Math.min(500,H-80);
+  const cx=W/2-cw/2,cy=H/2-ch/2;
+  X.fillStyle='rgba(20,18,12,0.98)';roundRect(cx,cy,cw,ch,16);X.fill();
+  X.strokeStyle='rgba(100,90,70,0.3)';X.lineWidth=1;roundRect(cx,cy,cw,ch,16);X.stroke();
+  // Title
+  X.font='600 22px Cinzel';X.textAlign='center';X.fillStyle=COLORS.gold;
+  X.fillText('GLYPH CODEX',W/2,cy+35);
+  // Close
+  X.font='bold 16px Inter';X.fillStyle=COLORS.dimwhite;X.textAlign='right';
+  X.fillText('✕',cx+cw-20,cy+25);
+  // Tabs
+  const tabs=['glyphs','npcs','lore'];
+  tabs.forEach((t,i)=>{
+    const tx=W/2-150+i*120,ty=cy+55;
+    const active=G.codexTab===t;
+    X.fillStyle=active?COLORS.amber:'rgba(100,90,70,0.5)';
+    roundRect(tx,ty,100,26,6);X.fill();
+    X.font='500 11px Inter';X.fillStyle=active?'#1a1510':COLORS.offwhite;X.textAlign='center';
+    X.fillText(t.toUpperCase(),tx+50,ty+17);
+  });
+  // Content
+  const contentY=cy+95;
+  if(G.codexTab==='glyphs'){
+    const glist=[
+      {id:'sorrow',name:'Sorrow',desc:'A mark of loss and empathy. Slows the bearer momentarily upon acquisition.',col:'#4a7abc'},
+      {id:'remembrance',name:'Remembrance',desc:'Echoes of memory. Triggers visions of what was lost.',col:'#7a5ab5'},
+      {id:'legacy',name:'Legacy',desc:'The weight of choices. Carries the vow forward.',col:'#c9a84c'},
+      {id:'transcendence',name:'Transcendence',desc:'The convergence of grief, memory, and purpose.',col:COLORS.gold}
+    ];
+    glist.forEach((g,i)=>{
+      const gy=contentY+i*80;
+      if(G.glyphs[g.id]){
+        drawGlyphIcon(g.id,cx+40,gy+20,14);
+        X.font='600 14px Inter';X.textAlign='left';X.fillStyle=g.col;
+        X.fillText(g.name,cx+65,gy+16);
+        X.font='400 12px Inter';X.fillStyle=COLORS.dimwhite;
+        X.fillText(g.desc,cx+65,gy+34);
+      }else{
+        X.font='400 12px Inter';X.fillStyle='rgba(100,90,70,0.3)';X.textAlign='left';
+        X.fillText('[ Undiscovered ]',cx+65,gy+20);
+      }
+    });
+  }
+  if(G.codexTab==='npcs'){
+    const npcList=['saori','ravi','nima','kaelen'];
+    const traits=['resolve','empathy','memory','nuance','authority','need','trust','skepticism'];
+    npcList.forEach((n,ni)=>{
+      const ny=contentY+ni*90;
+      if(G.npcs[n].met){
+        X.font='600 13px Inter';X.textAlign='left';X.fillStyle=COLORS.amber;
+        X.fillText(n.charAt(0).toUpperCase()+n.slice(1),cx+20,ny+12);
+        traits.forEach((t,ti)=>{
+          const bx=cx+20+ti*(cw-40)/8;
+          const bh=50*G.npcs[n].remnants[t];
+          X.fillStyle='rgba(60,50,35,0.5)';X.fillRect(bx,ny+20,((cw-60)/8)-4,50);
+          X.fillStyle=COLORS.amber;X.fillRect(bx,ny+20+(50-bh),((cw-60)/8)-4,bh);
+          X.font='400 7px Inter';X.textAlign='center';X.fillStyle=COLORS.dimwhite;
+          X.fillText(t.slice(0,3).toUpperCase(),bx+((cw-60)/8-4)/2,ny+78);
+        });
+      }else{
+        X.font='400 12px Inter';X.fillStyle='rgba(100,90,70,0.3)';X.textAlign='left';
+        X.fillText(n.charAt(0).toUpperCase()+n.slice(1)+' — Not yet encountered',cx+20,ny+12);
+      }
+    });
+  }
+  if(G.codexTab==='lore'){
+    const loreEntries=[
+      {key:'saoriWarning',title:"Saori's Warning",text:"'They're watching the road.' The hooded woman spoke with urgency, as if each word cost her something."},
+      {key:'ophinaStory',title:"Ophina's Story",text:"A child who climbed where the stones were weak. The market remembers her in silence and open stalls."},
+      {key:'velharaHistory',title:'Velhara',text:"Once a waypoint for travelers. Now a place where grief has settled into the stonework itself."},
+      {key:'transcendenceNote',title:'Transcendence',text:"The three glyphs converge. Something ancient recognizes the pattern — sorrow, remembrance, legacy — and stirs."}
+    ];
+    loreEntries.forEach((l,i)=>{
+      const ly=contentY+i*65;
+      if(G.lore[l.key]){
+        X.font='600 13px Inter';X.textAlign='left';X.fillStyle=COLORS.gold;
+        X.fillText(l.title,cx+20,ly+12);
+        X.font='italic 11px Inter';X.fillStyle=COLORS.dimwhite;
+        wrapText(l.text,cx+20,ly+28,cw-40,15);
+      }else{
+        X.font='400 11px Inter';X.fillStyle='rgba(100,90,70,0.25)';X.textAlign='left';
+        X.fillText('[ Locked ]',cx+20,ly+12);
+      }
+    });
+  }
+}
+
+function renderSubScene(){
+  X.fillStyle='rgba(10,8,5,0.85)';X.fillRect(0,0,W,H);
+  X.textAlign='center';
+  if(G.subScene==='sorrow'){
+    X.font='600 18px Cinzel';X.fillStyle='#4a7abc';
+    X.fillText('The Sorrow Glyph',W/2,H/2-60);
+    // Wilting plant
+    X.strokeStyle='#3d5c2e';X.lineWidth=2;
+    X.beginPath();X.moveTo(W/2,H/2);X.quadraticCurveTo(W/2-15,H/2-30,W/2-5,H/2-45);X.stroke();
+    X.beginPath();X.moveTo(W/2,H/2-10);X.quadraticCurveTo(W/2+10,H/2-25,W/2+8,H/2-40);X.stroke();
+    // Pulsing ring
+    X.strokeStyle='#4a7abc';X.lineWidth=1.5;X.globalAlpha=0.4+Math.sin(G.time*3)*0.3;
+    X.beginPath();X.arc(W/2,H/2-20,30+Math.sin(G.time*2)*5,0,Math.PI*2);X.stroke();
+    X.globalAlpha=1;
+    X.font='400 13px Inter';X.fillStyle=COLORS.offwhite;
+    X.fillText('Click to take the Sorrow Glyph',W/2,H/2+50);
+  }else if(G.subScene==='remembrance'){
+    X.font='600 18px Cinzel';X.fillStyle='#7a5ab5';
+    X.fillText('The Remembrance Glyph',W/2,H/2-60);
+    // Memory anchor orb
+    X.globalAlpha=0.5+Math.sin(G.time*2)*0.2;
+    const rg=X.createRadialGradient(W/2,H/2-10,3,W/2,H/2-10,25);
+    rg.addColorStop(0,'#c0b0e0');rg.addColorStop(1,'transparent');
+    X.fillStyle=rg;X.beginPath();X.arc(W/2,H/2-10,25,0,Math.PI*2);X.fill();
+    X.globalAlpha=1;
+    X.font='400 13px Inter';X.fillStyle=COLORS.offwhite;
+    X.fillText('Click to touch the Memory Anchor',W/2,H/2+50);
+  }else if(G.subScene==='legacy'){
+    X.font='600 18px Cinzel';X.fillStyle='#c9a84c';
+    X.fillText('The Legacy Glyph',W/2,H/2-60);
+    // Dropped sack
+    X.fillStyle='#6a5a3a';
+    X.beginPath();X.ellipse(W/2,H/2,12,8,0,0,Math.PI*2);X.fill();
+    X.fillStyle='#5a4a2a';X.fillRect(W/2-4,H/2-12,8,8);
+    if(G.subScene_legacyChoice){
+      const bw=220;
+      // Justice
+      X.fillStyle='rgba(35,30,22,0.9)';roundRect(W/2-bw-10,H/2+40,bw,36,8);X.fill();
+      X.strokeStyle=COLORS.violet;X.lineWidth=1;roundRect(W/2-bw-10,H/2+40,bw,36,8);X.stroke();
+      X.font='500 13px Inter';X.fillStyle=COLORS.offwhite;X.textAlign='center';
+      X.fillText('[N] "I vow justice"',W/2-bw/2-10,H/2+62);
+      // Restraint
+      X.fillStyle='rgba(35,30,22,0.9)';roundRect(W/2+10,H/2+40,bw,36,8);X.fill();
+      X.strokeStyle=COLORS.rose;X.lineWidth=1;roundRect(W/2+10,H/2+40,bw,36,8);X.stroke();
+      X.fillStyle=COLORS.offwhite;
+      X.fillText('[E] "I vow restraint"',W/2+bw/2+10,H/2+62);
+    }else{
+      X.font='400 13px Inter';X.fillStyle=COLORS.offwhite;
+      X.fillText('Click to examine the dropped sack',W/2,H/2+50);
+    }
+  }
+}
+
+function renderVignette(){
+  if(G.vignetteAlpha<=0)return;
+  X.globalAlpha=G.vignetteAlpha*0.7;
+  X.fillStyle='#1a1a2a';X.fillRect(0,0,W,H);
+  X.globalAlpha=G.vignetteAlpha;
+  // Silhouettes
+  const cx=W/2,cy=H/2;
+  X.fillStyle='rgba(220,215,230,'+G.vignetteAlpha*0.4+')';
+  // Parent 1
+  X.beginPath();X.ellipse(cx-50,cy,10,22,0,0,Math.PI*2);X.fill();
+  X.beginPath();X.arc(cx-50,cy-28,8,0,Math.PI*2);X.fill();
+  // Parent 2
+  X.beginPath();X.ellipse(cx+50,cy,10,22,0,0,Math.PI*2);X.fill();
+  X.beginPath();X.arc(cx+50,cy-28,8,0,Math.PI*2);X.fill();
+  // Child (Ophina)
+  X.beginPath();X.ellipse(cx,cy+10,7,14,0,0,Math.PI*2);X.fill();
+  X.beginPath();X.arc(cx,cy-8,6,0,Math.PI*2);X.fill();
+  // Haze
+  const hg=X.createRadialGradient(cx,cy,10,cx,cy,120);
+  hg.addColorStop(0,'rgba(220,215,230,'+G.vignetteAlpha*0.15+')');
+  hg.addColorStop(1,'transparent');
+  X.fillStyle=hg;X.beginPath();X.arc(cx,cy,120,0,Math.PI*2);X.fill();
+  X.globalAlpha=1;
+}
+
+function renderTransition(){
+  const t=G.transitionState;
+  if(t.phase==='fadeOut'){
+    X.fillStyle='rgba(0,0,0,'+Math.min(1,t.timer/1.5)+')';X.fillRect(0,0,W,H);
+  }else if(t.phase==='title'){
+    X.fillStyle='#000';X.fillRect(0,0,W,H);
+    X.font='600 24px Cinzel';X.textAlign='center';X.fillStyle=COLORS.offwhite;
+    X.globalAlpha=Math.min(1,t.timer/0.3)*Math.min(1,(1.2-t.timer)/0.3);
+    X.fillText(t.title,W/2,H/2);
+    X.globalAlpha=1;
+  }else if(t.phase==='fadeIn'){
+    renderScene();renderHUD();
+    X.fillStyle='rgba(0,0,0,'+Math.max(0,1-t.timer/1.5)+')';X.fillRect(0,0,W,H);
+  }
+}
+
+function renderEndScreen(){
+  const a=Math.min(1,G.endTimer/2);
+  X.fillStyle='rgba(10,8,5,'+a*0.9+')';X.fillRect(0,0,W,H);
+  X.globalAlpha=a;
+  X.textAlign='center';
+  X.font='600 28px Cinzel';X.fillStyle=COLORS.gold;
+  X.fillText('The resonance stabilizes.',W/2,H/2-60);
+  X.font='400 18px Cinzel';X.fillStyle=COLORS.offwhite;
+  X.fillText('Something ancient stirs in Velinor.',W/2,H/2-25);
+  // Transcendence glyph
+  drawGlyphIcon('transcendence',W/2,H/2+30,24);
+  X.font='400 13px Inter';X.fillStyle=COLORS.dimwhite;
+  X.fillText('Velhara Opening Slice — Complete',W/2,H/2+80);
+  X.font='500 11px Inter';X.fillStyle=COLORS.dimwhite;
+  X.fillText('TONE Profile: Trust '+G.toneState.trust.toFixed(2)+' | Observation '+G.toneState.observation.toFixed(2)+' | Narrative '+G.toneState.narrativePresence.toFixed(2)+' | Empathy '+G.toneState.empathy.toFixed(2),W/2,H/2+100);
+  if(G.legacyVow){
+    X.fillText('Legacy Vow: '+G.legacyVow.charAt(0).toUpperCase()+G.legacyVow.slice(1),W/2,H/2+118);
+  }
+  // Restart
+  X.fillStyle='rgba(35,30,22,0.8)';roundRect(W/2-60,H/2+130,120,35,8);X.fill();
+  X.strokeStyle=COLORS.amber;X.lineWidth=1;roundRect(W/2-60,H/2+130,120,35,8);X.stroke();
+  X.font='500 13px Inter';X.fillStyle=COLORS.offwhite;
+  X.fillText('Play Again',W/2,H/2+152);
+  // Made by Copilot
+  X.font='400 10px Inter';X.fillStyle='rgba(168,152,136,0.4)';
+  X.fillText('Made by Copilot',W/2,H-20);
+  X.globalAlpha=1;
+}
+
+function renderNotifications(){
+  G.notifications.forEach((n,i)=>{
+    X.globalAlpha=n.alpha;
+    X.font='600 16px Inter';X.textAlign='center';X.fillStyle=COLORS.gold;
+    X.fillText(n.text,W/2,H/2-120+i*25);
+  });
+  X.globalAlpha=1;
+}
+
+function renderControls(){
+  if(G.scene===0||G.endScreen)return;
+  X.font='400 10px Inter';X.textAlign='left';X.fillStyle='rgba(168,152,136,0.35)';
+  X.fillText('WASD/Arrows: Move | E/Space: Interact | C: Codex | Esc: Close',15,H-15);
+}
+
+// ── UTILITIES ──
+function roundRect(x,y,w,h,r){
+  X.beginPath();X.moveTo(x+r,y);X.lineTo(x+w-r,y);X.quadraticCurveTo(x+w,y,x+w,y+r);
+  X.lineTo(x+w,y+h-r);X.quadraticCurveTo(x+w,y+h,x+w-r,y+h);X.lineTo(x+r,y+h);
+  X.quadraticCurveTo(x,y+h,x,y+h-r);X.lineTo(x,y+r);X.quadraticCurveTo(x,y,x+r,y);X.closePath();
+}
+
+function wrapText(text,x,y,maxW,lineH){
+  const words=text.split(' ');let line='';
+  X.textAlign='left';
+  for(let i=0;i<words.length;i++){
+    const test=line+words[i]+' ';
+    if(X.measureText(test).width>maxW&&i>0){
+      X.fillText(line,x,y);y+=lineH;line=words[i]+' ';
+    }else{line=test}
+  }
+  X.fillText(line,x,y);
+}
+
+// ── MAIN LOOP ──
+function loop(ts){
+  const dt=Math.min(0.05,(ts-lastT)/1000);lastT=ts;
+  handleClick();
+  update(dt);
+  render();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(ts=>{lastT=ts;loop(ts)});
+
+})();
+</script>
+</body>
+</html>
