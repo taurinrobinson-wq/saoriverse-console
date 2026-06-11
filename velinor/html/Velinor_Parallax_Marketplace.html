@@ -531,14 +531,10 @@ function wrapText(text,x,y,maxW,lineH){
 }
 
 // ── MAIN LOOP ──
-// Portrait Loading Instructions:
-// Replace these paths with actual image URLs to your character portraits
-// Example:
-// loadPortrait('ravi', 'path/to/ravi-portrait.png');
-// loadPortrait('nima', 'path/to/nima-portrait.png');
-// loadPortrait('kaelen', 'path/to/kaelen-portrait.png');
-
-// For now, portraits will show as placeholder rectangles
+// Load character portraits
+loadPortrait('ravi','../npcs/Ravi_headshot.png');
+loadPortrait('nima','../npcs/Nima_headshot.png');
+loadPortrait('kaelen','../npcs/Kaelen_headshot.png');
 function loop(ts){
   const dt=(ts-lastT)/1000;
   lastT=ts;
