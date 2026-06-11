@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velinor: Marketplace Parallax - Phase 1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#1a1510;font-family:'Inter',sans-serif}
+canvas{display:block;width:100vw;height:100vh;cursor:default}
+#debug{position:absolute;top:10px;left:10px;color:#d4a04a;font-size:12px;font-family:monospace;z-index:100;background:rgba(0,0,0,0.7);padding:10px;border-radius:4px}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<canvas id="gc"></canvas>
+<div id="debug"></div>
+<script>
+(function(){
+"use strict";
+
+const C=document.getElementById('gc');
+const X=C.getContext('2d');
+const DEBUG=document.getElementById('debug');
+let W,H;
+
+function resize(){W=C.width=window.innerWidth;H=C.height=window.innerHeight}
+resize();
+window.addEventListener('resize',resize);
+
+// ── COLOR PALETTE ──
+const COLORS={
+  bg:'#1a1510',
+  amber:'#d4a04a',
+  teal:'#4a9a8a',
+  violet:'#8a5ab5',
+  rose:'#b5607a',
+  gold:'#c9a84c',
+  offwhite:'#e8ddd0',
+  dimwhite:'#a89888',
+  stone_dark:'#3d3530',
+  stone_mid:'#5c5248',
+  stone_light:'#7a6b55'
+};
+
+// ── INPUT ──
+const keys={};
+let mouseX=0,mouseY=0;
+document.addEventListener('keydown',e=>{
+  keys[e.key.toLowerCase()]=true;
+  keys[e.code]=true;
+  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();
+  if(e.key.toLowerCase()==='e'&&G.playerNearNPC)tryInteract();
+  if(e.key.toLowerCase()==='escape'&&G.dialogueActive)endDialogue();
+});
+document.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;keys[e.code]=false});
+C.addEventListener('mousemove',e=>{const r=C.getBoundingClientRect();mouseX=(e.clientX-r.left)*(W/r.width);mouseY=(e.clientY-r.top)*(H/r.height)});
+
+// ── PORTRAIT LOADING ──
+const portraitCache={};
+function loadPortrait(npcKey,imageUrl){
+  if(portraitCache[npcKey])return;
+  const img=new Image();
+  img.src=imageUrl;
+  img.onload=()=>{portraitCache[npcKey]=img};
+}
+
+// ── GAME STATE ──
+const G={
+  scene:'marketplace',
+  time:0,
+  
+  // Player
+  player:{
+    x:400,
+    y:450,
+    vx:0,vy:0,
+    speed:180,      // pixels per second
+    width:20,height:40,
+    depth:0.9       // Depth 0-1 where 1 = closest/largest
+  },
+  
+  // Camera
+  camera:{
+    x:0,
+    y:0,
+    targetX:0,
+    targetY:0,
+    smoothing:0.1   // Higher = snappier, lower = smoother
+  },
+  
+  // NPCs
+  npcs:{
+    ravi:{x:250,y:350,width:30,height:50,name:'Ravi',met:false,active:true},
+    nima:{x:550,y:360,width:25,height:45,name:'Nima',met:false,active:true},
+    kaelen:{x:700,y:380,width:28,height:48,name:'Kaelen',met:false,active:true}
+  },
+  
+  // Collision
+  stalls:[
+    // Left stalls (player can't go through)
+    {x:80,y:200,w:120,h:250,label:'left_stall_1'},
+    {x:40,y:480,w:100,h:180,label:'left_stall_2'},
+    // Right stalls
+    {x:800,y:210,w:130,h:240,label:'right_stall_1'},
+    {x:850,y:470,w:110,h:190,label:'right_stall_2'}
+  ],
+  
+  // Interaction
+  playerNearNPC:null,
+  interactRange:60,
+  dialogueActive:false,
+  currentNPC:null,
+  
+  // Scene transition
+  sceneDepth:0,
+  nextSceneReady:false
+};
+
+// ── PARALLAX LAYERS ──
+// Each layer: background image data, depth multiplier, parallax speed
+const layers=[
+  {
+    name:'sky',
+    parallaxSpeed:0.05,
+    drawFn:drawSkyLayer,
+    depth:-100
+  },
+  {
+    name:'distant_canyon',
+    parallaxSpeed:0.15,
+    drawFn:drawDistantCanyon,
+    depth:-50
+  },
+  {
+    name:'midground_stalls',
+    parallaxSpeed:0.5,
+    drawFn:drawMidgroundStalls,
+    depth:-10
+  },
+  {
+    name:'stalls',
+    parallaxSpeed:0.85,
+    drawFn:drawStalls,
+    depth:0
+  }
+];
+
+// ── LAYER DRAWING FUNCTIONS ──
+function drawSkyLayer(cameraX,cameraY){
+  // Gradient sky
+  const grad=X.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'#0d0a15');
+  grad.addColorStop(0.3,'#1a1520');
+  grad.addColorStop(1,'#2d1f2a');
+  X.fillStyle=grad;
+  X.fillRect(0,0,W,H);
+  
+  // Distant mountains/canyon walls
+  X.fillStyle='#1a1410';
+  X.fillRect(0,H*0.2,W,H*0.3);
+}
+
+function drawDistantCanyon(cameraX,cameraY){
+  // Mid-tone canyon walls in distance
+  X.fillStyle='#3d2820';
+  X.fillRect(0,H*0.35,W,H*0.25);
+  
+  // Stone texture hint
+  for(let i=0;i<5;i++){
+    X.fillStyle='rgba(60,50,40,0.3)';
+    X.fillRect(i*200-cameraX*0.15,H*0.35,180,H*0.25);
+  }
+}
+
+function drawMidgroundStalls(cameraX,cameraY){
+  // Lighter distant stalls (smaller, higher up)
+  X.fillStyle='#6b5c45';
+  
+  // Distant stall silhouettes
+  X.fillRect(150-cameraX*0.5,200,80,120);
+  X.fillRect(600-cameraX*0.5,210,90,110);
+  X.fillRect(1000-cameraX*0.5,190,85,130);
+}
+
+function drawStalls(cameraX,cameraY){
+  // Main stall objects
+  G.stalls.forEach(stall=>{
+    // Stall body
+    X.fillStyle=COLORS.stone_mid;
+    X.fillRect(stall.x-cameraX,stall.y-cameraY,stall.w,stall.h);
+    
+    // Stall darker edge
+    X.fillStyle=COLORS.stone_dark;
+    X.fillRect(stall.x-cameraX,stall.y-cameraY+stall.h-4,stall.w,4);
+    
+    // Stall lighter top
+    X.fillStyle=COLORS.stone_light;
+    X.fillRect(stall.x-cameraX,stall.y-cameraY,stall.w,3);
+    
+    // Detail lines
+    X.strokeStyle=COLORS.amber;
+    X.lineWidth=1;
+    X.globalAlpha=0.3;
+    for(let i=0;i<3;i++){
+      X.beginPath();
+      X.moveTo(stall.x-cameraX,stall.y-cameraY+(i+1)*stall.h/3);
+      X.lineTo(stall.x-cameraX+stall.w,stall.y-cameraY+(i+1)*stall.h/3);
+      X.stroke();
+    }
+    X.globalAlpha=1;
+  });
+}
+
+// ── SCENE TRANSITIONS ──
+const scenes={
+  marketplace:{
+    worldWidth:1200,
+    worldHeight:600,
+    npcs:['ravi','nima','kaelen'],
+    stalls:G.stalls
+  }
+};
+
+// ── UPDATE ──
+let lastT=0;
+function update(dt){
+  if(dt>0.05)dt=0.05;  // Cap dt for stability
+  G.time+=dt;
+  
+  if(!G.dialogueActive){
+    // Player movement input
+    let moveX=0,moveY=0;
+    if(keys['w']||keys['arrowup'])moveY-=1;
+    if(keys['s']||keys['arrowdown'])moveY+=1;
+    if(keys['a']||keys['arrowleft'])moveX-=1;
+    if(keys['d']||keys['arrowright'])moveX+=1;
+    
+    // Normalize diagonal movement
+    const len=Math.sqrt(moveX*moveX+moveY*moveY);
+    if(len>0){
+      moveX/=len;
+      moveY/=len;
+    }
+    
+    // Apply acceleration
+    G.player.vx=moveX*G.player.speed;
+    G.player.vy=moveY*G.player.speed;
+    
+    // Update position
+    const newX=G.player.x+G.player.vx*dt;
+    const newY=G.player.y+G.player.vy*dt;
+    
+    // Collision detection
+    if(!checkCollision(newX,newY,G.player.width,G.player.height)){
+      G.player.x=newX;
+      G.player.y=newY;
+    }
+    
+    // Boundary check
+    G.player.x=Math.max(10,Math.min(1190,G.player.x));
+    G.player.y=Math.max(10,Math.min(590,G.player.y));
+  }
+  
+  // Update depth based on Y position (0 at top, 1 at bottom)
+  const sceneHeight=scenes[G.scene].worldHeight;
+  G.player.depth=Math.min(1,Math.max(0,G.player.y/sceneHeight));
+  G.sceneDepth=G.player.depth;
+  
+  // Check scene transition (depth > 0.5)
+  if(G.player.depth>0.5&&!G.nextSceneReady){
+    G.nextSceneReady=true;
+    // In future: load next scene
+  }
+  
+  // Camera follows player with smoothing and parallax
+  G.camera.targetX=G.player.x-W/2;
+  G.camera.targetY=G.player.y-H*0.35;
+  G.camera.x+=(G.camera.targetX-G.camera.x)*G.camera.smoothing;
+  G.camera.y+=(G.camera.targetY-G.camera.y)*G.camera.smoothing;
+  
+  // Clamp camera to world bounds
+  const scene=scenes[G.scene];
+  G.camera.x=Math.max(0,Math.min(scene.worldWidth-W,G.camera.x));
+  G.camera.y=Math.max(0,Math.min(scene.worldHeight-H,G.camera.y));
+  
+  // Check distance to NPCs
+  G.playerNearNPC=null;
+  Object.keys(G.npcs).forEach(key=>{
+    const npc=G.npcs[key];
+    const dx=npc.x-G.player.x;
+    const dy=npc.y-G.player.y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<G.interactRange){
+      G.playerNearNPC=key;
+    }
+  });
+}
+
+function checkCollision(x,y,w,h){
+  for(let stall of G.stalls){
+    if(x<stall.x+stall.w&&
+       x+w>stall.x&&
+       y<stall.y+stall.h&&
+       y+h>stall.y){
+      return true;
+    }
+  }
+  return false;
+}
+
+// ── RENDER ──
+function render(){
+  // Clear
+  X.fillStyle=COLORS.bg;
+  X.fillRect(0,0,W,H);
+  
+  // Save and translate for camera
+  X.save();
+  X.translate(-G.camera.x,-G.camera.y);
+  
+  // Draw parallax layers (back to front)
+  layers.forEach(layer=>{
+    layer.drawFn(G.camera.x,G.camera.y);
+  });
+  
+  // Draw NPCs
+  Object.keys(G.npcs).forEach(key=>{
+    const npc=G.npcs[key];
+    drawNPC(npc,key);
+  });
+  
+  // Draw player with scaling based on depth
+  drawPlayer();
+  
+  // Draw interaction indicator
+  if(G.playerNearNPC){
+    const npc=G.npcs[G.playerNearNPC];
+    X.fillStyle=COLORS.amber;
+    X.font='bold 14px Inter';
+    X.textAlign='center';
+    X.fillText('[E] Interact',npc.x,npc.y-70);
+  }
+  
+  X.restore();
+  
+  // HUD
+  renderHUD();
+  
+  // Dialogue
+  if(G.dialogueActive){
+    renderDialogue();
+  }
+  
+  renderControls();
+}
+
+function drawNPC(npc,key){
+  // Shadow
+  X.globalAlpha=0.4;
+  X.fillStyle='#000';
+  X.ellipse(npc.x,npc.y+npc.height/2+3,npc.width/2+2,3,0,0,2*Math.PI);
+  X.fill();
+  X.globalAlpha=1;
+  
+  // Body
+  X.fillStyle=COLORS.stone_mid;
+  X.fillRect(npc.x-npc.width/2,npc.y-npc.height,npc.width,npc.height);
+  
+  // Head
+  X.fillStyle=COLORS.amber;
+  X.beginPath();
+  X.arc(npc.x,npc.y-npc.height-8,8,0,Math.PI*2);
+  X.fill();
+  
+  // Name label
+  X.fillStyle=COLORS.gold;
+  X.font='bold 12px Inter';
+  X.textAlign='center';
+  X.fillText(npc.name,npc.x,npc.y-npc.height-25);
+}
+
+function drawPlayer(){
+  const depth=G.player.depth;
+  const scale=0.4+depth*0.6;  // Scales from 40% (far) to 100% (near)
+  
+  // Shadow (scales with player)
+  X.globalAlpha=Math.max(0.2,depth*0.5);
+  X.fillStyle='#000';
+  X.ellipse(G.player.x,G.player.y+G.player.height*scale/2+2,G.player.width*scale/2+2,2,0,0,2*Math.PI);
+  X.fill();
+  X.globalAlpha=1;
+  
+  // Player body
+  X.save();
+  X.translate(G.player.x,G.player.y);
+  X.scale(scale,scale);
+  
+  X.fillStyle=COLORS.stone_light;
+  X.fillRect(-G.player.width/2,-G.player.height,G.player.width,G.player.height);
+  
+  // Player head
+  X.fillStyle=COLORS.offwhite;
+  X.beginPath();
+  X.arc(0,-G.player.height-6,6,0,Math.PI*2);
+  X.fill();
+  
+  // Eyes
+  X.fillStyle='#000';
+  X.fillRect(-2,-G.player.height-7,2,2);
+  X.fillRect(2,-G.player.height-7,2,2);
+  
+  X.restore();
+}
+
+function renderHUD(){
+  // Depth indicator
+  X.fillStyle=COLORS.amber;
+  X.font='12px monospace';
+  X.textAlign='left';
+  X.fillText(`Depth: ${(G.player.depth*100).toFixed(0)}%`,20,30);
+  X.fillText(`Pos: ${Math.round(G.player.x)},${Math.round(G.player.y)}`,20,50);
+  X.fillText(`Near NPC: ${G.playerNearNPC||'none'}`,20,70);
+}
+
+function renderDialogue(){
+  // Darken background
+  X.fillStyle='rgba(0,0,0,0.7)';
+  X.fillRect(0,0,W,H);
+  
+  // Dialogue box
+  const boxW=600,boxH=200;
+  const boxX=(W-boxW)/2;
+  const boxY=H-boxH-40;
+  
+  // Box background
+  X.fillStyle=COLORS.stone_dark;
+  X.fillRect(boxX,boxY,boxW,boxH);
+  
+  // Box border
+  X.strokeStyle=COLORS.amber;
+  X.lineWidth=2;
+  X.strokeRect(boxX,boxY,boxW,boxH);
+  
+  // NPC Portrait (upper left)
+  const portraitX=30;
+  const portraitY=30;
+  const portraitW=150;
+  const portraitH=180;
+  
+  if(portraitCache[G.currentNPC]){
+    // Draw portrait frame
+    X.fillStyle=COLORS.stone_dark;
+    X.fillRect(portraitX-2,portraitY-2,portraitW+4,portraitH+4);
+    X.strokeStyle=COLORS.amber;
+    X.lineWidth=2;
+    X.strokeRect(portraitX-2,portraitY-2,portraitW+4,portraitH+4);
+    
+    // Draw image
+    X.drawImage(portraitCache[G.currentNPC],portraitX,portraitY,portraitW,portraitH);
+  }else{
+    // Placeholder
+    X.fillStyle=COLORS.stone_mid;
+    X.fillRect(portraitX,portraitY,portraitW,portraitH);
+    X.strokeStyle=COLORS.amber;
+    X.lineWidth=2;
+    X.strokeRect(portraitX,portraitY,portraitW,portraitH);
+    X.fillStyle=COLORS.dimwhite;
+    X.font='12px Inter';
+    X.textAlign='center';
+    X.fillText('No Portrait',portraitX+portraitW/2,portraitY+portraitH/2);
+  }
+  
+  // NPC name (moved right of portrait)
+  X.fillStyle=COLORS.gold;
+  X.font='bold 16px Cinzel';
+  X.textAlign='left';
+  X.fillText(G.currentNPC.charAt(0).toUpperCase()+G.currentNPC.slice(1),portraitX+portraitW+30,portraitY+20);
+  
+  // Dialogue text (right of portrait)
+  X.fillStyle=COLORS.offwhite;
+  X.font='14px Inter';
+  X.textAlign='left';
+  const dialogueText="This is placeholder dialogue. You can customize per NPC and interaction.";
+  wrapText(dialogueText,portraitX+portraitW+30,portraitY+50,W-(portraitX+portraitW+60),20);
+  
+  // Continue indicator
+  X.fillStyle=COLORS.amber;
+  X.globalAlpha=0.5+Math.sin(G.time*3)*0.5;
+  X.font='12px Inter';
+  X.textAlign='right';
+  X.fillText('[E to continue / ESC to close]',W-30,H-50);
+  X.globalAlpha=1;
+}
+
+function renderControls(){
+  X.fillStyle=COLORS.dimwhite;
+  X.font='12px Inter';
+  X.textAlign='right';
+  X.fillText('WASD/Arrows: Move | E: Interact | ESC: Close Dialogue',W-20,H-20);
+}
+
+function tryInteract(){
+  if(!G.playerNearNPC)return;
+  G.dialogueActive=true;
+  G.currentNPC=G.playerNearNPC;
+}
+
+function endDialogue(){
+  G.dialogueActive=false;
+  G.currentNPC=null;
+}
+
+function wrapText(text,x,y,maxW,lineH){
+  const words=text.split(' ');
+  let line='';
+  for(let word of words){
+    const testLine=line+word+' ';
+    const metrics=X.measureText(testLine);
+    if(metrics.width>maxW&&line){
+      X.fillText(line,x,y);
+      line=word+' ';
+      y+=lineH;
+    }else{
+      line=testLine;
+    }
+  }
+  if(line)X.fillText(line,x,y);
+}
+
+// ── MAIN LOOP ──
+// Portrait Loading Instructions:
+// Replace these paths with actual image URLs to your character portraits
+// Example:
+// loadPortrait('ravi', 'path/to/ravi-portrait.png');
+// loadPortrait('nima', 'path/to/nima-portrait.png');
+// loadPortrait('kaelen', 'path/to/kaelen-portrait.png');
+
+// For now, portraits will show as placeholder rectangles
+function loop(ts){
+  const dt=(ts-lastT)/1000;
+  lastT=ts;
+  update(dt);
+  render();
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(ts=>{
+  lastT=ts;
+  loop(ts);
+});
+
+})();
+</script>
+</body>
+</html>
