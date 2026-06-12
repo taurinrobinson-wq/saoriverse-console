@@ -249,7 +249,7 @@ All three variants have access to the same story. The choice affects **tone**, *
 - Velinor respects her insights; sees her as capable of advanced study
 - Lioren is curious about Velinor's knowledge; asks good questions
 - Over time: Intellectual and emotional connection deepens
-- **Intimate moment:** Velinor shares a personal memory; Lioren holds his vulnerability without judgment; they both understand something shifted but neither acts on it
+- **Intimate moment:** Velinor shares a personal memory; Lioren holds her vulnerability without judgment; they both understand something shifted but neither acts on it
 
 **With Ravi (Marketplace guide):**
 - Ravi is somewhat charmed; tries to flirt; Lioren gently maintains boundaries
@@ -445,7 +445,7 @@ All three variants have access to the same story. The choice affects **tone**, *
 - Velinor appreciates Lior(en)'s refusal to fit; sees it as philosophical sophistication
 - Lior(en) is drawn to Velinor's teaching precisely because it holds paradox
 - Over time: Intellectual connection deepens; emotional vulnerability follows
-- **Intimate moment:** Velinor admits uncertainty about what he feels; Lior(en) honors the honesty; they continue the conversation unchanged
+- **Intimate moment:** Velinor admits uncertainty about what she feels; Lior(en) honors the honesty; they continue the conversation unchanged
 
 **With Ravi (Marketplace guide):**
 - Ravi treats Lior(en) as just another person; doesn't make the gender-neutrality weird

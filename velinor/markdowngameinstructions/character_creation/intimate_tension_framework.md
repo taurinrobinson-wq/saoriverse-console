@@ -22,6 +22,41 @@ The game honors that:
 
 ---
 
+## Velinor & Saori: The Foundation of All Connection
+
+### Their History
+
+**Velinor and Saori** are the heart of Velinor's world-building. As teenagers, they were brilliant innovators who created the **Corelink system** together—a shared emotional memory network designed to preserve and transmit emotional wisdom across populations.
+
+When the Cataclysm occurred and the Corelink system activated catastrophically, **Velinor sacrificed her own mind and emotional coherence** to mitigate the damage to those connected to the system. She took on the system's trauma, fragmentation, and emotional scattering so that others would not be completely destroyed.
+
+### Their Present Dynamic
+
+**Saori** has spent the 25 years since the collapse tending to Velinor's needs. She is:
+- Velinor's primary anchor to coherence
+- Her medical and emotional caregiver
+- The person who holds Velinor's history (since Velinor's memory is fragmented)
+- Her partner in the work of preservation and healing
+
+**Velinor** in her current state:
+- Is intelligent but fragmented; her mind works in non-linear ways
+- Carries the distributed trauma of the Corelink failure
+- Is deeply connected to the glyphs (pieces of the Corelink system)
+- Has moments of profound clarity interspersed with confusion
+- Speaks in metaphors and incomplete sentences sometimes, in perfect lucidity at other times
+
+### Why This Matters to the Player's Mentorship
+
+The player meets **Velinor** (not Saori initially in the game canon). Velinor becomes a mentor because:
+- She has lived through the very systems and choices the player is beginning to understand
+- Her fragmentation mirrors the player's own disorientation
+- Her relationship with Saori models a love that goes beyond typical categories: care, dedication, sacrifice, integration
+- Her willingness to connect with the player—despite her fragmentation—shows that mentorship and connection are possible even in broken states
+
+The player's intimate moments with Velinor are therefore **not romantic in nature because they're witnesses to something deeper**: a woman who was destroyed by the very system she created, who is being held together by her partner's dedication, and who still has the clarity and wisdom to guide others.
+
+---
+
 ## Types of Intimate Moments
 
 ### Type 1: The Awkward Pause
@@ -68,7 +103,7 @@ One NPC asks the protagonist a personal question that reveals mutual trust, but 
 VELINOR: "Tell me, Lioren. Have you ever loved someone? Not romantically necessarily, but... truly?"
 [Silence while Lioren considers.]
 LIOREN: "My parents. I loved them both, and losing them... it broke something I'm still trying to understand."
-[Velinor nods slowly. Something in his expression shifts—recognition of her depth.]
+[Velinor nods slowly. Something in her expression shifts—recognition of her depth.]
 VELINOR: "That's the kind of love the glyphs remember. That's what we're trying to preserve."
 [The conversation continues, but something has shifted between them. Not romance. Understanding.]
 ```
@@ -274,9 +309,12 @@ Intimate moments should trigger when:
 
 **Third (Late Game - Attunement 0.7+):**
 - Velinor admits: "I'm uncertain what I feel for you, Lior(en). It transcends the categories I usually use. Perhaps that's what wisdom is—accepting what you can't categorize."
-- He's being honest about his feeling without pursing anything
+- She's being honest about her feeling without pursuing anything
 - "But I do know this: you matter. Your becoming matters."
 - The intimacy is in the honesty, not in any action
+
+**Note on Velinor's Fragmentation:**
+Velinor's intimate moments with the protagonist are unique because they arise from her fragmented state. Her non-linear thinking, her incomplete sentences, her moments of profound clarity interspersed with confusion—these are not deficits. They are wisdom earned through sacrifice. When she connects with the protagonist, she is offering something harder-won than most mentors can offer: the knowledge that meaning persists even when continuity fractures. Her relationship with Saori—who holds her history and grounds her in coherence—models a love that goes beyond typical categories and becomes the template for how she teaches others.
 
 ---
 

@@ -207,17 +207,27 @@ All variants start at Coherence ~40 (severely disoriented from recent grief). St
 
 | Variant | Initial | Growth | Final |
 |---------|---------|--------|-------|
-| Lior | "Sees his quiet pain" | Becomes safe space | Potential slow romance |
-| Lioren | "Recognizes spiritual peer" | Becomes teacher/mentor | Potential deep romance or mutual teaching |
-| Lior(en) | "Sees one who is becoming" | Becomes mirror | Potential romance or sacred partnership |
+| Lior | "Sees his quiet pain" | Becomes safe space | Profound mentorship; boundary honored |
+| Lioren | "Recognizes spiritual peer" | Becomes teacher/mentor | Mutual spiritual recognition; deep mentorship |
+| Lior(en) | "Sees one who is becoming" | Becomes mirror | Sacred partnership; profound understanding |
 
 ### Velinor (The Knowledge Keeper)
 
+**Context:** Velinor is a former co-creator of the Corelink system who sacrificed her emotional coherence to mitigate the system's collapse damage. She has been cared for by Saori for 25 years. Despite her fragmentation, she remains deeply wise and capable of profound mentorship.
+
 | Variant | Initial | Growth | Final |
-|---------|---------|--------|-------|
-| Lior | "Respectful listener" | Becomes philosophical companion | Professional respect; potential quiet romance |
-| Lioren | "Capable of deep work" | Becomes intellectual peer | Mutual respect; potential romance |
-| Lior(en) | "Appreciates complexity" | Becomes fellow paradox-holder | Potential deep intellectual/emotional romance |
+|---------|---------|---------|--------|
+| Lior | "Respectful listener" | Becomes philosophical companion | Deep intellectual mentorship; boundary honored |
+| Lioren | "Capable of deep work" | Becomes intellectual peer | Mutual respect and understanding; mentorship |
+| Lior(en) | "Appreciates complexity" | Becomes fellow paradox-holder | Recognition of shared non-linear wisdom; mentorship |
+
+### Saori (The Caretaker & Mentor)
+
+**Context:** Saori and Velinor created the Corelink system as brilliant teenagers. When it catastrophically activated, Velinor sacrificed herself to mitigate the damage. Saori has spent 25 years tending to Velinor's fragmentation, preserving her history, and holding her stable. Saori represents unconditional care that transcends typical relationship categories.
+
+**In Game Canon:** Saori gives the Codex to the player directly in a desert encounter, becoming a mentor figure who contextualizes the game's mechanical and spiritual systems.
+
+**In GN Canon:** Saori is absent from Volume 1 but is referenced through legend and ritual. Her eventual appearance becomes a major narrative payoff.
 
 ---
 
@@ -265,17 +275,17 @@ All NPCs are 50-60s; protagonist is 20s. This age gap prevents romantic pursuit 
 
 **Lior's Mentorships:**
 - **Elenya:** Becomes a sanctuary figure; teaches him feeling is not weakness. Occasional moment where her tenderness toward him is noticed but not crossed.
-- **Velinor:** Intellectual mentor who gradually asks personal questions. Brief moment where Lior realizes Velinor genuinely cares about his wellbeing.
+- **Velinor:** Intellectual mentor who gradually asks personal questions. Brief moment where Lior realizes Velinor genuinely cares about her wellbeing.
 - **Malrik:** Discipleship relationship; Lior learns both from Malrik's precision and observes his hidden loneliness. Moment of mutual recognition when Malrik admits vulnerability.
 
 **Lioren's Mentorships:**
 - **Elenya:** Mutual spiritual growth; Lioren is Elenya's peer-student. Moment where Elenya's hand lingers too long, then both acknowledge the boundary.
-- **Velinor:** Deep intellectual partnership; Velinor asks Lioren about love and loss. She answers, and he listens with unexpected tenderness.
+- **Velinor:** Deep intellectual partnership; Velinor asks Lioren about love and loss. She answers, and she listens with unexpected tenderness.
 - **Malrik:** Lioren challenges his rigidity; Malrik is drawn to her authenticity. Moment where he nearly says something personal, then catches himself.
 
 **Lior(en)'s Mentorships:**
 - **Elenya:** Mutual recognition of existing between states. Occasional moment of profound understanding that feels almost intimate.
-- **Velinor:** Both hold paradox; they understand each other's complexity. Moment where Velinor admits he's unsure if what he feels is mentorship or something else (and chooses mentorship).
+- **Velinor:** Both hold paradox; they understand each other's complexity. Moment where Velinor admits she's unsure if what she feels is mentorship or something else (and chooses mentorship).
 - **Malrik:** Lior(en) represents everything he can't categorize. Moment where Malrik asks directly: "Have you ever loved someone? Truly?"
 
 ---
