@@ -1,22 +1,16 @@
-I think the architecture is now coming through in my writing for velinor the game:
+# Velinor Story Seeds & Character Arcs
 
-The backstory is that the two of them had recently moved to the market area with their daughter who
-was 5 at the time and very precocious. It was a joyful scene as the two of them watched their
-daughter play around the market stalls being enthralled by all the sights, smells and sounds.
+## Ravi & Nima: Grief & Penance
 
-However, because Ravi and Nima were not familiar with the dangers posed by the constantly collapsing
-Velhara ruins they let Ophina wander too far.
+### Backstory
+Ravi and Nima moved to the market area with their daughter Ophina (age 5), who was precocious and full of wonder. The couple watched joyfully as she played among the market stalls, entranced by sights, sounds, and smells.
 
-The couple watched in horror as they heard the now familiar screach of rusting metal beams, and a
-wall, from the old Velhara civic center building, suddenly collapsed and Ophina was trapped under
-the rubble. She lived for a while but her leg was injured and she could not get free of the rubble.
+Unfamiliar with the dangers of the collapsing Velhara ruins, they allowed Ophina to wander too far. A wall from the old civic center building collapsed, trapping her beneath the rubble. Despite her parents' attempts to sustain her with food and water, Ophina's injured leg prevented escape, and she eventually succumbed.
 
-Ravi and Nima tried to bring her food and water, which helped sustain the girl but she eventually
-succumbed to her injuries as her parents watched helplessly. Since that day they have been unable to
-feel any joy yet chose to stay in the market as penance for what they felt was their fault in
-allowing their beloved daughter to be killed by the collapse.
+Unable to feel joy since that day, Ravi and Nima remain in the market as self-imposed penance for their failure to protect their beloved daughter.
 
-This is all revealed in dialogue over the course of several encounters. Each time the player
+### Revelation Structure
+The truth emerges across multiple encounters, with dialogue options shifting based on collected glyphs. Each time the player
 recovers one of the glyphs it alters the dialogue options the player has with the player. In one
 encounter after collecting teh glyph of Remembrance, the player notices Nima alone looking down at a
 particular spot in the market.
@@ -41,8 +35,7 @@ amoral character), the player get an item that allows them to understand other g
 the Mustard Seed).
 
 The player gets a very different telling of the story when he talks to Ravi after obtaining the
-Glyph of Remembrance. If the player has the Tome of the Mustard Seed, the story enhances Empathy
-stats. Ravi felt something was off that day Ophina got trapped but his trusting nature made him
+Glyph of Remembrance. The story enhances Empathy through dialogue choices. Ravi felt something was off that day Ophina got trapped but his trusting nature made him
 ignore his gut. As a result, he holds deep guilt as he felt his role as Ophina”s father meant that
 he was his daughter’s protector and that no harm could come to her in his presence.
 
@@ -97,7 +90,6 @@ Mythic framing (“the City spoke before I knew how to listen”)
 
 Moral ambiguity (Kaelen’s guilt)
 
-Ritual objects (Tome of the Mustard Seed)
 
 Choice-based emotional pacing (trust, empathy, presence)
 

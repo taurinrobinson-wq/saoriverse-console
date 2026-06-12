@@ -4772,10 +4772,10 @@ aftermath, oddly Kaelen reveals some of the story because he was in the middle o
 noticed the girl wandering too close to the crumbling wall, he was too immersed in trying to steal
 an item from a person's bag though to intervene, and holds a lot of guilt about it, providing a rare
 opportunity for the player to develop empathy for this otherwise amoral character), the player get
-an item that allows them to understand other grief (the Tome of the Mustard Seed).
+an item that allows them to understand other grief. The player gets a very different telling of the story.
 
 The player gets a very different telling of the story when he talks to Ravi after obtaining the
-Glyph of Remembrance. If the player has the Tome of the Mustard Seed, the story enhances Empathy
+Glyph of Remembrance. The player's empathy choices unlock deeper story layers.
 stats. Ravi felt something was off that day Ophina got trapped but his trusting nature made him
 ignore his gut, he holds deep guilt as he felt his role of a father meant that he was his daughters
 knight and armor and that no harm could come to her in his presence. The City taught him the painful
@@ -4901,9 +4901,9 @@ celebration Trust 10 Community, restoration, interdependence Mystic cult Communa
 healer hut Healing ritual Collapse 10 Memory distortion, fear, fracture Skeptic cult Fractured
 Memory Desert ruins Mirage encounter Glyph Category NPC Giver Location Storyline Hook Sorrow Ache
 Nima Market ruins overlook Revealed through grief dialogue after Glyph of Remembrance Remembrance
-Presence Ravi Market shrine Unlocked after empathy dialogue + Tome of the Mustard Seed Legacy Legacy
+Presence Ravi Market shrine Unlocked after empathy dialogue Legacy Legacy
 Ravi/Nima Civic center rubble Final glyph revealed after full story is pieced together Category
 Count Theme NPC Giver Glyph Name Location Storyline Hook Ache 10 Loss, grief, betrayal Nima Sorrow
 Market overlook Revealed through grief dialogue Presence 10 Touch, silence, witness Ravi Remembrance
-Market shrine Dialogue after Tome of Mustard Seed Legacy 10 Family, ancestry, ritual inheritance
+Market shrine Dialogue after empathy encounters Legacy 10 Family, ancestry, ritual inheritance
 Ravi/Nima Legacy Civic center rubble Final glyph after full story

@@ -30,10 +30,8 @@ story though because Nima did not see the actual collapse, just the aftermath, o
 some of the story because he was in the middle of a theft when he noticed the girl wandering too
 close to the crumbling wall, he was too immersed in trying to steal an item from a person's bag
 though to intervene, and holds a lot of guilt about it, providing a rare opportunity for the player
-to develop empathy for this otherwise amoral character), the player get an item that allows them to
-understand other grief (the Tome of the Mustard Seed). The player gets a very different telling of
-the story when he talks to Ravi after obtaining the Glyph of Remembrance. If the player has the Tome
-of the Mustard Seed, the story enhances Empathy stats. Ravi felt something was off that day Ophina
+to develop empathy for this otherwise amoral character). The player gets a very different telling of
+the story when he talks to Ravi after obtaining the Glyph of Remembrance. Ravi felt something was off that day Ophina
 got trapped but his trusting nature made him ignore his gut, he holds deep guilt as he felt his role
 of a father meant that he was his daughters knight and armor and that no harm could come to her in
 his presence. The City taught him the painful lesson of his hubris. He used to be bold and
@@ -87,13 +85,13 @@ a name for the boss and structure the final glyph choice as a moral pivot.
 
 **Follow-up Dialogue Tree:**
 - If player persists with empathy/presence, Nima shares fragmented memory of Ophina’s final days.
-- Unlocks **Tome of the Mustard Seed**: item that enhances Empathy stat and unlocks grief-based dialogue with other NPCs.
+- Unlocks deeper emotional resonance with Ravi and Nima, allowing grief-based dialogue with other NPCs.
 
 ---
 
 ## 🧩 Kaelen’s Confession
 
-**Trigger:** Glyph of Remembrance + Tome of the Mustard Seed  
+**Trigger:** Glyph of Remembrance  
 **Scene:** Kaelen caught in a moment of vulnerability
 
 **Dialogue Beat:**
@@ -111,7 +109,7 @@ a name for the boss and structure the final glyph choice as a moral pivot.
 **Trigger:** Glyph of Remembrance  
 **Scene:** Ravi sits near the shrine
 
-**Dialogue Beat (with Tome):**
+**Dialogue Beat:**
 > “I felt it. Something off. But I trusted the day. Trusted the City. Trusted myself. I was her knight. Her armor. And I failed.”
 
 **Impact:**
@@ -151,7 +149,7 @@ a name for the boss and structure the final glyph choice as a moral pivot.
 ## 🧱 Codespace Implementation Notes
 
 - **Dialogue System:** Branching logic tied to glyph acquisition and stat thresholds  
-- **Item Unlocks:** Tome of the Mustard Seed, Glyph of Contained Loss  
+- **Glyph Unlocks:** Glyph of Contained Loss (fusion glyph from Triglyph encounter)  
 - **Environmental Design:** Market stalls, shrine, civic center ruins, chamber with flooding logic  
 - **Emotional OS Integration:** Dialogue choices reflect witnessing, honoring, metabolizing — not solving or fixing  
 - **Stat Logic:** Empathy and Trust should unlock new dialogue trees and affect NPC behavior over time
