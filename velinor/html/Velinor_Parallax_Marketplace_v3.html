@@ -401,11 +401,16 @@ function render(){
 }
 
 function drawNPC(npc,key){
+  // Apply depth-based scaling like player
+  const npcDepth=npc.y/G.worldHeight;
+  const scale=1.0+npcDepth*0.5;
+  
   // Try to draw sprite image
   if(spriteCache[key]){
     const img=spriteCache[key];
-    // Draw sprite with aspect ratio preserved
-    const displayHeight=npc.height;
+    // Draw sprite with aspect ratio preserved and depth scaling
+    const baseHeight=npc.height;
+    const displayHeight=baseHeight*scale;
     const displayWidth=(img.width/img.height)*displayHeight;
     
     // Shadow
@@ -418,19 +423,22 @@ function drawNPC(npc,key){
     // Draw sprite centered
     X.drawImage(img,npc.x-displayWidth/2,npc.y-displayHeight,displayWidth,displayHeight);
   }else{
-    // Fallback: simple representation
+    // Fallback: simple representation with scaling
+    const displayHeight=npc.height*scale;
+    const displayWidth=npc.width*scale;
+    
     X.globalAlpha=0.4;
     X.fillStyle='#000';
-    X.ellipse(npc.x,npc.y+npc.height/2+3,npc.width/2+2,3,0,0,2*Math.PI);
+    X.ellipse(npc.x,npc.y+displayHeight/2+3,displayWidth/2+2,3,0,0,2*Math.PI);
     X.fill();
     X.globalAlpha=1;
     
     X.fillStyle=COLORS.stone_light;
-    X.fillRect(npc.x-npc.width/2,npc.y-npc.height,npc.width,npc.height);
+    X.fillRect(npc.x-displayWidth/2,npc.y-displayHeight,displayWidth,displayHeight);
     
     X.fillStyle=COLORS.amber;
     X.beginPath();
-    X.arc(npc.x,npc.y-npc.height-8,8,0,Math.PI*2);
+    X.arc(npc.x,npc.y-displayHeight-8,8,0,Math.PI*2);
     X.fill();
   }
   
