@@ -92,18 +92,19 @@ All three variants have access to the same story. The choice affects **tone**, *
 - Malrik sees Lior as reliable but distant
 - Over time: Malrik may realize he's lonely and that Lior doesn't hate him
 - Tension: Lior quietly doubts the Archive's rigid philosophy
+- **Intimate moment:** Malrik admits (rarely) that he values Lior's presence, then returns to professionalism
 
 **With Elenya:**
 - Drawn to spiritual practice without understanding it
 - Elenya senses his grief and doesn't probe; he appreciates this
 - Over time: Elenya becomes someone he can be present with without explanation
-- Potential romance: Slow, based on being seen without judgment
+- **Intimate moment:** Elenya's hand on his shoulder lingers, both recognize something unsaid, then gently release
 
 **With Velinor:**
 - Professional respect; Lior listens to teaching
 - Velinor recognizes Lior's unintegrated state and sees potential
 - Over time: Velinor becomes mentor figure; Lior struggles with vulnerability
-- Potential romance: Built on intellectual respect and eventual emotional honesty
+- **Intimate moment:** Velinor asks directly: "Have you ever loved someone in that way?" Lior's answer becomes a bridge to deeper understanding
 
 **With Ravi (Marketplace guide):**
 - Easy camaraderie; Ravi doesn't pressure explanation
@@ -232,23 +233,23 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 **With Malrik:**
 - Respects his precision; challenges his rigidity gently
-- Malrik is somewhat attracted to her; doesn't know what to do with that
+- Malrik notices her warmth and becomes slightly flustered; doesn't know what to do with that
 - Over time: Malrik realizes that her emotional intelligence is another form of precision
 - Tension: Lioren questions whether he's capable of feeling; Malrik denies it reflexively
-- Potential romance: Built on Malrik learning to value what he can't systematize
+- **Intimate moment:** Malrik nearly reaches for her hand during a difficult conversation, catches himself, maintains professionalism
 
 **With Elenya:**
 - Immediately recognized as spiritual peer
 - Elenya sees Lioren as someone capable of deep glyph work
 - Over time: Elenya teaches; Lioren learns; mutual respect deepens
 - Connection: Spiritual resonance and shared intuitive knowledge
-- Potential romance: Both possibilities (depends on Lioren's choice)
+- **Intimate moment:** Elenya's hand touches Lioren's face to adjust a ritual marking; both feel the boundary moment; both honor it by continuing the ritual
 
 **With Velinor:**
 - Velinor respects her insights; sees her as capable of advanced study
 - Lioren is curious about Velinor's knowledge; asks good questions
-- Over time: Intellectual and emotional connection
-- Potential romance: Built on mutual respect and growing vulnerability
+- Over time: Intellectual and emotional connection deepens
+- **Intimate moment:** Velinor shares a personal memory; Lioren holds his vulnerability without judgment; they both understand something shifted but neither acts on it
 
 **With Ravi (Marketplace guide):**
 - Ravi is somewhat charmed; tries to flirt; Lioren gently maintains boundaries
@@ -429,22 +430,22 @@ All three variants have access to the same story. The choice affects **tone**, *
 **With Malrik:**
 - Lior(en) represents everything his institutional logic can't categorize
 - Malrik is both frustrated and intrigued by the refusal to be fixed
-- Over time: Malrik may come to see that some things resist categorization (including love)
+- Over time: Malrik may come to see that some things resist categorization
 - Tension: Malrik questions what Lior(en) "really" is; Lior(en) refuses the question
-- Potential romance: Built on Malrik learning to accept paradox
+- **Intimate moment:** Malrik asks directly: "Are you lonely? Is that why you keep coming to the rituals?" The question itself is the intimacy; Lior(en)'s answer creates understanding
 
 **With Elenya:**
 - Elenya immediately recognizes Lior(en) as someone "becoming"
 - Lior(en) feels safe in Elenya's space because Elenya doesn't demand resolution
 - Over time: Elenya becomes spiritual guide; Lior(en) becomes her mirror
 - Connection: Shared understanding that some truths don't resolve; they integrate
-- Potential romance: Built on mutual acceptance of non-binary identity and fluidity
+- **Intimate moment:** Elenya and Lior(en) reach for each other in ritual; the touch is profound; both understand the depth and release it gently
 
 **With Velinor:**
 - Velinor appreciates Lior(en)'s refusal to fit; sees it as philosophical sophistication
 - Lior(en) is drawn to Velinor's teaching precisely because it holds paradox
 - Over time: Intellectual connection deepens; emotional vulnerability follows
-- Potential romance: Built on mutual respect for complexity and non-resolution
+- **Intimate moment:** Velinor admits uncertainty about what he feels; Lior(en) honors the honesty; they continue the conversation unchanged
 
 **With Ravi (Marketplace guide):**
 - Ravi treats Lior(en) as just another person; doesn't make the gender-neutrality weird
@@ -501,7 +502,7 @@ All three variants have access to the same story. The choice affects **tone**, *
 | **Dialogue Tone** | Direct, reserved | Thoughtful, reflective | Flexible, code-switching |
 | **NPC Malrik Attn.** | 0.05 → rises slowly | 0.08 → rises slowly | 0.05 → rises very slowly |
 | **NPC Elenya Attn.** | 0.15 → rises mod | 0.25 → rises quickly | 0.28 → rises quickly |
-| **Main Romance** | Elenya or Velinor | Malrik, Elenya, or Velinor | Elenya or Velinor (deepest with Elenya) |
+| Primary Mentorship | Elenya (emotional), Velinor (intellectual) | Elenya (spiritual), Velinor (intellectual) | Elenya (recognition), Velinor (complexity) |
 | **Character Arc** | Loss → Acceptance | Grief → Wisdom | Fragmentation → Integration |
 
 ---

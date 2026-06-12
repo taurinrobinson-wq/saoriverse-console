@@ -159,7 +159,7 @@ All variants start at Coherence ~40 (severely disoriented from recent grief). St
 ### Phase 3: Polish
 - [ ] Add visual art for all three character variants
 - [ ] Create variant-specific opening scene reactions
-- [ ] Test romance options with all variants
+- [ ] Implement intimate tension moments with all NPCs (awkward pauses, vulnerable questions, boundary recognition)
 - [ ] Verify glyph resonance variations
 - [ ] Test endgame Corelink choice with all variants
 
@@ -249,31 +249,34 @@ All variants start at Coherence ~40 (severely disoriented from recent grief). St
 
 ---
 
-## Romance Options (Variant-Specific Notes)
+## Mentorship & Intimate Tension (Variant-Specific Notes)
 
-### Available Romance Paths
+### Relationship Framework (Age-Gap Considerations)
 
-All variants can pursue:
-- **Elenya** (spiritual/emotional connection)
-- **Velinor** (intellectual/contemplative connection)
-- **Malrik** (challenging/transformative connection)
+All NPCs are 50-60s; protagonist is 20s. This age gap prevents romantic pursuit but creates space for:
+- Deep mentorship and spiritual guidance
+- Occasional awkward pauses when connection feels too intimate
+- Questions about the protagonist's own capacity for love (reflective, not pursued)
+- Moments of recognition that transcend romance
 
-### Variant-Specific Romance Dynamics
+**Philosophy:** The NPCs care about the protagonist but respect the boundary. Intimacy is acknowledged, not acted upon.
 
-**Lior's Romances:**
-- **Elenya:** Slow-burn; she helps him learn to feel
-- **Velinor:** Intellectual respect leading to emotional vulnerability
-- **Malrik:** Potential but challenging; would require Malrik to unlearn rigidity
+### Variant-Specific Mentorship Dynamics
 
-**Lioren's Romances:**
-- **Elenya:** Fast-burn; mutual spiritual recognition
-- **Velinor:** Balanced intellectual/emotional; deep mutual respect
-- **Malrik:** Transformative; Malrik must learn to value what he can't systematize
+**Lior's Mentorships:**
+- **Elenya:** Becomes a sanctuary figure; teaches him feeling is not weakness. Occasional moment where her tenderness toward him is noticed but not crossed.
+- **Velinor:** Intellectual mentor who gradually asks personal questions. Brief moment where Lior realizes Velinor genuinely cares about his wellbeing.
+- **Malrik:** Discipleship relationship; Lior learns both from Malrik's precision and observes his hidden loneliness. Moment of mutual recognition when Malrik admits vulnerability.
 
-**Lior(en)'s Romances:**
-- **Elenya:** Deepest option; mutual recognition of non-binary existence
-- **Velinor:** Complex; both hold paradox; potential for unique partnership
-- **Malrik:** Most challenging; requires Malrik to fundamentally shift his worldview
+**Lioren's Mentorships:**
+- **Elenya:** Mutual spiritual growth; Lioren is Elenya's peer-student. Moment where Elenya's hand lingers too long, then both acknowledge the boundary.
+- **Velinor:** Deep intellectual partnership; Velinor asks Lioren about love and loss. She answers, and he listens with unexpected tenderness.
+- **Malrik:** Lioren challenges his rigidity; Malrik is drawn to her authenticity. Moment where he nearly says something personal, then catches himself.
+
+**Lior(en)'s Mentorships:**
+- **Elenya:** Mutual recognition of existing between states. Occasional moment of profound understanding that feels almost intimate.
+- **Velinor:** Both hold paradox; they understand each other's complexity. Moment where Velinor admits he's unsure if what he feels is mentorship or something else (and chooses mentorship).
+- **Malrik:** Lior(en) represents everything he can't categorize. Moment where Malrik asks directly: "Have you ever loved someone? Truly?"
 
 ---
 
