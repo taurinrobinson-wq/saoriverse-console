@@ -1,0 +1,103 @@
+{
+    "backgrounds": [
+        {
+            "id": "civic_amphitheater",
+            "name": "Civic Center Amphitheater (Ruins)",
+            "imagePath": "assets/backgrounds/amphitheater_base.png",
+            "layers": {
+                "background": "assets/backgrounds/amphitheater_base.png",
+                "midground": "assets/mid/amph_theater_mid.png",
+                "foreground": "assets/fg/amphitheater_fg.png",
+                "overlays": [
+                    "overlays/ash_overlay.png",
+                    "overlays/echo_ripple.png"
+                ]
+            },
+            "environmentalTone": 0.75,
+            "notes": "Primary location for Nordia's first glyph, silence-heavy."
+        }
+    ],
+    "npcs": [
+        {
+            "id": "nordia",
+            "name": "Nordia",
+            "role": "Mourning Singer / Companion",
+            "domains": [
+                "Legacy",
+                "Ache"
+            ],
+            "locationId": "civic_amphitheater",
+            "dialogueNodes": [
+                {
+                    "id": "intro_1",
+                    "text": "She stands in the center, singing a lullaby that does not travel."
+                },
+                {
+                    "id": "stand_with_her",
+                    "text": "You stand beside her. The song dies. Do you stay or try to comfort?",
+                    "choices": [
+                        {
+                            "id": "choice_stay",
+                            "text": "Stay silently",
+                            "effects": {
+                                "empathy": 0.02
+                            }
+                        },
+                        {
+                            "id": "choice_speak",
+                            "text": "Speak gently",
+                            "effects": {
+                                "trust": 0.01
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "invite_travel",
+                    "text": "I cannot return alone. Will you go with me?",
+                    "choices": [
+                        {
+                            "id": "accept_travel",
+                            "text": "I will come",
+                            "effects": {
+                                "narrativePresence": 0.05
+                            }
+                        },
+                        {
+                            "id": "decline",
+                            "text": "I need time",
+                            "effects": {}
+                        }
+                    ]
+                }
+            ],
+            "suggestionRules": [
+                {
+                    "when": {
+                        "trust_lt": 0.3
+                    },
+                    "suggestion": "visit_sanctuary"
+                },
+                {
+                    "when": {
+                        "narrativePresence_gt": 0.6
+                    },
+                    "suggestion": "try_desert_path"
+                }
+            ],
+            "notes": "Companion NPC; travels with player when invited. Dialogue nodes here are minimal examples for wiring."
+        }
+    ],
+    "glyphs": [
+        {
+            "id": "primal_oblivion",
+            "name": "Glyph of Primal Oblivion",
+            "domain": "Ache",
+            "locationId": "civic_amphitheater",
+            "isFragment": false,
+            "requirements": [],
+            "triggerType": "presence_and_wait",
+            "description": "Appears when the player stands with Nordia in the amphitheater and doesn't interrupt."
+        }
+    ]
+}

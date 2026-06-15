@@ -1,0 +1,28 @@
+# This file is used by Git to exclude tracked files
+# Unity Ignored Meta Files
+*.meta
+
+# Builds
+*.apk
+*.unitypackage
+
+# Generated
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# IDE
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store

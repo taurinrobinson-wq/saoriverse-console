@@ -1,0 +1,31 @@
+{
+  "glyphs": {
+    "11": {
+      "glyph_name": "Glyph of Infrasensory Oblivion",
+      "owner": "Saori",
+      "remnants_impact": {
+        "memory": -0.06,
+        "empathy": 0.04,
+        "skepticism": 0.02
+      }
+    },
+    "74": {
+      "glyph_name": "Glyph of Dormant Potential",
+      "owner": "Saori",
+      "remnants_impact": {
+        "memory": 0.04,
+        "nuance": 0.03,
+        "trust": 0.02
+      }
+    },
+    "75": {
+      "glyph_name": "Glyph of Mirrored Loss",
+      "owner": "Saori",
+      "remnants_impact": {
+        "empathy": 0.05,
+        "need": 0.04,
+        "skepticism": 0.01
+      }
+    }
+  }
+}

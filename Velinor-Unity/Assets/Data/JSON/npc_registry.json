@@ -1,0 +1,8 @@
+[
+  { "npc_id": "npc_01", "name": "Tala", "reliability": 0.25, "fragment_capacity": 5 },
+  { "npc_id": "npc_02", "name": "Harin", "reliability": 0.55, "fragment_capacity": 4 },
+  { "npc_id": "npc_03", "name": "Miri", "reliability": 0.75, "fragment_capacity": 2 },
+  { "npc_id": "npc_04", "name": "Joro", "reliability": 0.15, "fragment_capacity": 3 },
+  { "npc_id": "npc_05", "name": "Sela", "reliability": 0.48, "fragment_capacity": 3 },
+  { "npc_id": "npc_06", "name": "Vero", "reliability": 0.62, "fragment_capacity": 1 }
+]
