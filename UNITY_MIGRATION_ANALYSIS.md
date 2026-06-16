@@ -32,18 +32,50 @@ The Velinor game consists of **~60 Python game files**, **118 glyphs**, **21+ NP
 | `velinor/engine/scene_manager.py` | Scene transitions & management | ~250 | Core Logic | **HIGH** |
 | `velinor/engine/event_timeline.py` | Event sequencing system | ~200 | System | **HIGH** |
 
-#### B. Emotional OS (TONE System)
+#### B. TONE System (Player Emotional Stats - Hidden)
 | File Path | Purpose | Type | Details |
-|-----------|---------|------|---------|
-| `velinor/engine/trait_system.py` | TONE stat tracking (Empathy, Skepticism, Integration, Awareness) | System | ⚙️ Maps player choices to stat changes |
-| `velinor/engine/coherence_calculator.py` | Coherence calculation (emotional harmony) | Algorithm | 📐 Determines NPC response depth |
-| `velinor/engine/resonance.py` | Emotional resonance between player & NPCs | System | 🔗 Affects dialogue availability |
-| `velinor/game_mechanics/characters.py` | ToneState dataclass (0-100 scale) | Data | 📊 Four-dimensional state space |
+|-----------|---------|------|----------|
+| `velinor/engine/trait_system.py` | TONE stat tracking (Trust, Observation, Narrative Presence, Empathy) | System | ⚙️ Maps player choices to stat changes |
+| `velinor/engine/coherence_calculator.py` | Resonance calculation (emotional harmony) | Algorithm | 📐 Determines NPC response depth |
+| `velinor/engine/resonance.py` | Resonance state & harmonic balance | System | 🔗 Overarching emotional attunement |
+| `velinor/game_mechanics/characters.py` | ToneStats dataclass (0.0-1.0 scale) | Data | 📊 Five-dimensional emotional state |
+
+**TONE Acronym (Player Hidden Stats):**
+- **T**rust — Reliability to NPCs, keeping promises, protecting others
+- **O**bservation — Perception, attentiveness, noticing details and NPC tells
+- **N**arrative Presence — Charisma and agency, boldness, stepping into encounters
+- **E**mpathy — Heart and vulnerability, connection with grief and loss
+- **Resonance** (bonus) — Overarching harmonic balance when all stats are aligned
 
 **Key Metrics:**
-- 4 TONE dimensions tracked simultaneously
-- Coherence = 100 - average_deviation(all TONE stats)
-- Range: 0-100 for each stat
+- 5 TONE dimensions tracked simultaneously (4 primary + Resonance)
+- Resonance increases when TONE stats are balanced and high
+- Range: 0.0-1.0 for each stat (floats, not 0-100)
+- Directly portable as data model
+- **CRITICAL:** Each NPC responds differently to player TONE based on their REMNANTS profile
+
+#### B.2 REMNANTS System (NPC Personality Traits - Hidden)
+| File Path | Purpose | Type | Details |
+|-----------|---------|------|----------|
+| `velinor/engine/npc_manager.py` | NPC personality trait initialization | System | 🎭 Each NPC has unique REMNANTS profile |
+| `velinor/npc_profiles.py` | REMNANTS profile definitions | Data | 📊 8 traits per NPC |
+| `velinor/engine/npc_response_engine.py` | NPC dialogue generation based on REMNANTS | Logic | 🔗 Personality-driven responses |
+
+**REMNANTS Acronym (NPC Personality Traits):**
+- **R**esolve — How firm or principled the NPC is
+- **E**mpathy — Capacity to care, listen, and connect emotionally
+- **M**emory — How much the past shapes their choices
+- **N**uance — Subtlety, complexity, ability to see shades of meaning
+- **A**uthority — Relationship to boundaries, sovereignty, and control
+- **N**eed — What they seek from the player (trust, protection, resources)
+- **T**rust — Baseline openness or suspicion
+- **S**kepticism — Tendency to doubt and withhold
+
+**Key Mechanics:**
+- Each of 21+ NPCs has a unique REMNANTS profile (e.g., Ravi: high empathy/nuance, Kaelen: high skepticism/low trust)
+- NPC responses emerge from comparison between player TONE and NPC REMNANTS
+- High resonance between player TONE and NPC REMNANTS = unlocked dialogue, quests, and influence
+- REMNANTS traits shift based on repeated player interactions
 - Directly portable as data model
 
 #### C. Glyph Cipher System
@@ -71,9 +103,9 @@ Layer 2: Plaintext Truth (emotionally gated)
 ```
 
 **Gate Requirements:**
-- Emotional state must meet specific TONE thresholds
-- Coherence level affects depth of unlock
-- Presence in location required
+- Player TONE must meet specific stat thresholds (Trust, Observation, Narrative Presence, Empathy)
+- Resonance level affects unlock depth and dialogue richness
+- Presence in location required (interact with glyph location)
 
 #### D. NPC System
 | File Path | Purpose | Type | Scale |
@@ -97,10 +129,11 @@ Layer 2: Plaintext Truth (emotionally gated)
 - **Plus 11+ others** (Korrin, Sanor, Tariq, Tovren, Inodora, Dalen, etc.)
 
 **NPC Data Portable Elements:**
-- Personality profiles (JSON/YAML)
-- Emotional gate thresholds
+- REMNANTS personality profiles (8-trait system per NPC)
+- TONE-based dialogue and encounter gating
 - Dialogue trees (story-based)
-- NPC-specific glyph relationships
+- NPC-specific glyph relationships and affinities
+- NPC influence scores and resonance calculations
 
 #### E. Story & Ending System
 | File Path | Purpose | Type | Scale |
@@ -111,11 +144,12 @@ Layer 2: Plaintext Truth (emotionally gated)
 | `velinor/engine/scene_manager.py` | Scene transitions | Logic | Flow control |
 
 **Story Structure:**
-- **6 Major Endings** determined by TONE trajectory
+- **6 Major Endings** determined by TONE trajectory and Resonance state
 - **30+ Scenes/Locations** (marketplace, forest, swamp, desert, ruins, etc.)
 - **Collapse Event** as pivotal narrative moment
 - **Choice Consequences** tracked across sessions
-- **Remnants System** (corrupted Corelink data) as thematic element
+- **Remnants** (narrative element) — Corrupted Corelink data as thematic material
+- **REMNANTS System** (mechanical) — NPC personality traits that govern all interactions
 
 #### F. Dialogue & Interaction Systems
 | File Path | Purpose | Type |
@@ -279,7 +313,7 @@ Captain_Veynar, Dalen, Drossel, Inodora, Kaelen, Korrin, Mariel, Nima, Ravi, San
   "layer_0": "Poetic fragment",
   "layer_1": "NPC perspective",
   "layer_2": "Plaintext truth",
-  "required_gates": ["coherence > 70", "empathy > 50"],
+  "required_gates": ["resonance > 0.70", "empathy > 0.50"],
   "tags": ["collapse", "memory", "fear", "fracture"]
 }
 ```
@@ -289,10 +323,10 @@ Captain_Veynar, Dalen, Drossel, Inodora, Kaelen, Korrin, Mariel, Nima, Ravi, San
 
 | File | Records | Format | Type | Portable |
 |------|---------|--------|------|----------|
-| `npc_profiles.json` | 21+ | JSON | NPC definitions | ✅ **YES** |
-| `npc_registry.json` | 21+ | JSON | NPC registry | ✅ **YES** |
-| `npc_remnants_profiles.json` | 21+ | JSON | NPC emotional profiles | ✅ **YES** |
-| `npc_state.json` | State | JSON | Current NPC states | ✅ **YES** |
+| `npc_profiles.json` | 21+ | JSON | NPC definitions (names, roles, locations) | ✅ **YES** |
+| `npc_registry.json` | 21+ | JSON | NPC registry and availability | ✅ **YES** |
+| `npc_remnants_profiles.json` | 21+ | JSON | NPC REMNANTS trait profiles (8-trait system) | ✅ **YES** |
+| `npc_state.json` | State | JSON | Current NPC states and resonance with player | ✅ **YES** |
 | `npc_profiles.py` | 21+ | Python | Legacy NPC definitions | ⚠️ Convert to JSON |
 
 **Key NPC Fields:**
@@ -381,7 +415,7 @@ Captain_Veynar, Dalen, Drossel, Inodora, Kaelen, Korrin, Mariel, Nima, Ravi, San
 
 | Document | Covers | Portable Content |
 |-----------|--------|------------------|
-| `TONE_STAT_SYSTEM.md` | TONE mechanics (4-dimensional emotional space) | ✅ Core mechanics definition |
+| `TONE_STAT_SYSTEM.md` | TONE mechanics (5-dimensional: Trust, Observation, Narrative Presence, Empathy, Resonance) | ✅ Core mechanics definition |
 | `04_collapse_mechanics.md` | Collapse event mechanics | ✅ Story trigger system |
 | `05_EMOTIONAL_OS_MECHANICS_INTEGRATION.md` | Emotional OS integration | ✅ System design |
 | `05_npc_reaction_library.md` | NPC response patterns | ✅ Dialogue patterns |
@@ -513,27 +547,29 @@ WebM/MP4 → Unity VideoPlayer
 
 #### C. Game Logic (Mostly Portable)
 - ✅ **Trait System logic** (TONE tracking algorithm)
-  - 4-dimensional stat space
-  - Clamping rules (0-100)
-  - Stat modification math
+  - 5-dimensional stat space (Trust, Observation, Narrative Presence, Empathy + Resonance)
+  - Clamping rules (0.0-1.0 float scale)
+  - Stat modification math and ripple effects
   - Portable: Direct C# translation
 
-- ✅ **Coherence Calculator**
-  - Formula: `100 - avg_deviation(empathy, skepticism, integration, awareness)`
+- ✅ **Resonance Calculator**
+  - Resonance increases when TONE stats are balanced and high
+  - Drives glyph unlock conditions and NPC dialogue depth
   - Portable: Direct implementation
 
 - ✅ **NPC Response Engine logic**
-  - Emotional gate checking
-  - Coherence-based response selection
+  - Emotional gate checking (TONE thresholds)
+  - REMNANTS-based response selection
+  - Resonance-weighted dialogue branching
   - Portable: Direct translation
 
 - ✅ **Glyph Cipher Engine logic**
-  - Layer unlock mechanics
-  - Gate requirement checking
+  - Layer unlock mechanics (3-tier cipher structure)
+  - Gate requirement checking against player TONE
   - Portable: Direct translation
 
 - ✅ **Ending System**
-  - 6 ending conditions based on TONE state
+  - 6 ending conditions based on TONE state and Resonance
   - Portable: Decision tree implementation
 
 - ✅ **Skill System mechanics**
@@ -671,7 +707,7 @@ velinor/
 │   ├── orchestrator.py               # Game loop
 │   ├── game_state.py                 # State persistence
 │   ├── trait_system.py               # TONE tracking ✅
-│   ├── coherence_calculator.py       # Emotional harmony ✅
+│   ├── coherence_calculator.py       # Resonance calculation ✅
 │   ├── npc_manager.py                # NPC management ✅
 │   ├── npc_response_engine.py        # NPC dialogue ✅
 │   ├── scene_manager.py              # Scene transitions
@@ -773,9 +809,9 @@ velinor/
 - [ ] Import graphics assets
 
 ### Phase 2: Core Logic (Weeks 5-8)
-- [ ] Implement coherence calculator
+- [ ] Implement resonance calculator
 - [ ] Implement glyph cipher engine
-- [ ] Implement NPC manager
+- [ ] Implement NPC manager with REMNANTS profiles
 - [ ] Implement skill system
 - [ ] Implement ending system
 

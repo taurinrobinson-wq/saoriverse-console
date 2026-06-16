@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Velinor.unity
     guid: 9759198760f938e4aa27bd40cd9a780f
+  - enabled: 1
+    path: Assets/Scenes/GamplayScene.unity
+    guid: 5dc257a261749874b926d39b7bf79c50
   m_configObjects: {}
