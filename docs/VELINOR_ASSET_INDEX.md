@@ -16,7 +16,8 @@ A comprehensive catalog of free Unity Store assets available for the Velinor pro
 4. [Vegetation & Nature Assets](#vegetation--nature-assets) **NEW**
 5. [Specialized Assets](#specialized-assets)
 6. [Sample Projects & Tutorials](#sample-projects--tutorials)
-7. [Implementation Strategy](#implementation-strategy)
+7. [On Hold - Fresh Project Required](#on-hold---fresh-project-required) **⏸️**
+8. [Implementation Strategy](#implementation-strategy)
 
 ---
 
@@ -280,39 +281,7 @@ A comprehensive catalog of free Unity Store assets available for the Velinor pro
 
 ### Environmental Systems
 
-#### **HDRP Environment Template**
-- **Type:** Lighting & Rendering System
-- **Creator:** Far From Here Studio
-- **Location:** `Far From Here Studio/Complete ProjectsTutorials/`
-- **File:** `.FarFromHereStudio Template HDRP Environment-content__271079.tmp`
-- **Description:** Professional HDRP setup with atmospheric lighting and rendering
-- **Best For:**
-  - Lighting system reference
-  - Atmospheric effects
-  - Professional rendering setup
-  - Time-of-day systems
-
-#### **Surface Gradient Bump Mapping Samples**
-- **Type:** Shader/Material Reference
-- **Creator:** Unity Technologies
-- **Location:** `Unity Technologies/Complete ProjectsTutorials/`
-- **File:** `.Surface Gradient Bump Mapping Samples-content__240786.tmp`
-- **Description:** Advanced material techniques and shader samples
-- **Best For:**
-  - High-quality material creation
-  - Surface detail techniques
-  - Shader learning reference
-
-#### **Time Ghost Environment**
-- **Type:** Complete Scene Reference
-- **Creator:** Unity Technologies
-- **Location:** `Unity Technologies/Complete ProjectsUnity Tech Demos/`
-- **File:** `.Time Ghost Environment-content__298911.tmp`
-- **Description:** Full environmental scene with advanced rendering techniques
-- **Best For:**
-  - Complete scene structure reference
-  - Advanced lighting setup
-  - Professional environment design patterns
+⚠️ **Note:** Some specialized environmental packages (HDRP Environment Template, Surface Gradient Bump Mapping Samples, Time Ghost Environment) require fresh project import and are documented in the [On Hold section](#on-hold---fresh-project-required) below. These are available as reference materials but not currently integrated.
 
 ---
 
@@ -326,6 +295,75 @@ A comprehensive catalog of free Unity Store assets available for the Velinor pro
   - System architecture reference
   - Best practice patterns
   - Component interaction examples
+
+---
+
+## On Hold - Fresh Project Required
+
+⏸️ **Status:** Not currently integrated into Velinor-Unity project. These packages require fresh, empty projects to import properly.
+
+**Why on hold:** Direct import into an existing project with other assets would cause conflicts or incompatibilities. These are available as reference materials and can be selectively mined for components (shaders, animation rigs, lighting setups) if needed in the future.
+
+### Reference & Research Assets
+
+#### **Time Ghost Environment**
+- **Type:** Complete Scene Reference
+- **Creator:** Unity Technologies
+- **Location:** `D:\Velinor\Asset Store-5.x\Unity Technologies/Complete ProjectsUnity Tech Demos/`
+- **File:** `.Time Ghost Environment-content__298911.tmp`
+- **Size:** ~500 MB
+- **Description:** Full environmental scene with advanced rendering techniques
+- **Value for Velinor:**
+  - Professional environment design patterns
+  - Advanced lighting setup reference
+  - Scene optimization techniques
+- **Future Use:** Selective component extraction (lighting rigs, material libraries)
+
+#### **Book of the Dead**
+- **Type:** Character Animation & Visual Showcase
+- **Creator:** Unity Technologies
+- **Location:** `D:\Velinor\Asset Store-5.x\Unity Technologies/Complete ProjectsVisual Demos/`
+- **Description:** Premium character animation demo with advanced visual effects
+- **Value for Velinor:**
+  - Character animation controller patterns
+  - Advanced character effects
+  - Visual polish reference
+- **Future Use:** Animation rig and state machine reference for NPC characters
+
+#### **HDRP Environment Template**
+- **Type:** Lighting & Rendering System (High Definition RP)
+- **Creator:** Far From Here Studio
+- **Location:** `D:\Velinor\Asset Store-5.x\Far From Here Studio/Complete ProjectsTutorials/`
+- **File:** `.FarFromHereStudio Template HDRP Environment-content__271079.tmp`
+- **Size:** ~300 MB
+- **Description:** Professional HDRP setup with atmospheric lighting and rendering
+- **Note:** Uses High Definition Render Pipeline (HDRP) vs. Velinor's URP
+- **Value for Velinor:**
+  - Lighting system patterns (convertible to URP)
+  - Atmospheric effects setup
+  - Time-of-day system reference
+- **Future Use:** URP-equivalent adaptations of lighting techniques
+
+#### **Surface Gradient Bump Mapping Samples**
+- **Type:** Shader/Material Reference
+- **Creator:** Unity Technologies
+- **Location:** `D:\Velinor\Asset Store-5.x\Unity Technologies/Complete ProjectsTutorials/`
+- **File:** `.Surface Gradient Bump Mapping Samples-content__240786.tmp`
+- **Size:** ~100 MB
+- **Description:** Advanced material techniques and shader samples
+- **Value for Velinor:**
+  - High-quality material creation techniques
+  - Surface detail shader patterns
+  - Advanced normal mapping approaches
+- **Future Use:** Reference for creating professional material libraries
+
+### Integration Pathway (When Ready)
+
+If needed in the future, these can be integrated by:
+1. **Creating a temporary fresh project** with the package
+2. **Extracting specific components** (shaders, animation controllers, material libraries)
+3. **Adapting to URP/Velinor architecture** as needed
+4. **Importing selectively** into main project
 
 ---
 

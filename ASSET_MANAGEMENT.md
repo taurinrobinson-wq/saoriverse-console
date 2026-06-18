@@ -70,6 +70,27 @@ git push origin main
 
 ---
 
+## Special Constraint Packages
+
+The following asset packs require **fresh, empty Unity projects** to import properly. They are **NOT currently integrated** into Velinor but are available in `D:\Velinor\Asset Store-5.x\` for future reference:
+
+| Package | Creator | Size | Reason On Hold | Future Use |
+|---------|---------|------|----------------|------------|
+| **Time Ghost Environment** | Unity Technologies | ~500 MB | Requires fresh project | Reference for professional environment design |
+| **Book of the Dead** | Unity Technologies | ~2 GB | Requires fresh project | Character animation reference |
+| **HDRP Environment Template** | Far From Here Studio | ~300 MB | Requires fresh project (HDRP vs URP) | Advanced lighting setup reference |
+| **Surface Gradient Bump Mapping** | Unity Technologies | ~100 MB | Requires fresh project | Shader/material technique reference |
+
+**Integration Strategy:** These packages can be selectively mined for:
+- Individual material/shader samples
+- Animation controller patterns
+- Lighting setup approaches
+- Scene structure examples
+
+But direct import into the Velinor-Unity project would require careful extraction and adaptation.
+
+---
+
 ## What IS Tracked (Commit These)
 
 ```
