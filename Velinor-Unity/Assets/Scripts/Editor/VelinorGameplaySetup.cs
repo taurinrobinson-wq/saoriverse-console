@@ -2,6 +2,10 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public class VelinorGameplaySetup
 {
@@ -164,11 +168,13 @@ public class VelinorGameplaySetup
         deviceRectField?.SetValue(codexDevice, deviceRect);
 
         // ===== STEP 7: Create Input Manager for UI =====
+#if ENABLE_INPUT_SYSTEM
         PlayerInput playerInput = player.GetComponent<PlayerInput>();
         if (playerInput == null)
         {
             playerInput = player.AddComponent<PlayerInput>();
         }
+#endif
 
         // ===== STEP 8: Create Lighting =====
         GameObject lightObj = new GameObject("DirectionalLight");
