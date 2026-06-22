@@ -13,6 +13,17 @@ public class VelinorGameplaySceneSetup
         // Open GamplayScene
         Scene scene = EditorSceneManager.OpenScene("Assets/Scenes/GamplayScene.unity", OpenSceneMode.Single);
         
+        // Clean up existing objects to prevent duplicates
+        GameObject[] existingObjects = scene.GetRootGameObjects();
+        foreach (GameObject obj in existingObjects)
+        {
+            if (obj.name == "Player" || obj.name == "Ground" || obj.name == "NPC_Tala" || obj.name == "Pedestal" || obj.name == "PromptCanvas")
+            {
+                Object.DestroyImmediate(obj);
+                Debug.Log($"Cleaned up existing {obj.name}");
+            }
+        }
+        
         // Get or create Main Camera
         GameObject cameraObj = GameObject.Find("Main Camera");
         if (cameraObj == null)
