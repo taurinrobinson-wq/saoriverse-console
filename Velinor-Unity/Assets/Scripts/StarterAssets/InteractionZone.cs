@@ -18,7 +18,7 @@ namespace StarterAssets
             _interactable = GetComponent<IInteractable>();
             
             // Find the prompt UI
-            _prompt = FindObjectOfType<InteractionPrompt>();
+            _prompt = FindAnyObjectByType<InteractionPrompt>();
             
             if (_interactable == null)
             {

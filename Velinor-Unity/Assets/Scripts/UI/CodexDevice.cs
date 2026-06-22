@@ -49,11 +49,11 @@ public class CodexDevice : MonoBehaviour
         // Navigation buttons when device is visible
         if (isVisible)
         {
-            if (Input.GetKeyDown(KeyCode.Left) || Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
                 PreviousPage();
             }
-            if (Input.GetKeyDown(KeyCode.Right) || Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
                 NextPage();
             }

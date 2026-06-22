@@ -1,10 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SaoriIntro : MonoBehaviour
 {
     [SerializeField] private float interactionDistance = 5f;
-    [SerializeField] private float dialogueDuration = 4f;
     
     private GameObject player;
     private bool hasTriggered = false;
@@ -112,7 +112,7 @@ public class SaoriIntro : MonoBehaviour
 
     private void ShowDialogue(string message, float duration)
     {
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = FindAnyObjectByType<Canvas>();
         if (canvas == null) return;
 
         Text dialogueText = canvas.GetComponentInChildren<Text>();
@@ -125,7 +125,7 @@ public class SaoriIntro : MonoBehaviour
 
     private void HideDialogue()
     {
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = FindAnyObjectByType<Canvas>();
         if (canvas == null) return;
 
         Text dialogueText = canvas.GetComponentInChildren<Text>();
