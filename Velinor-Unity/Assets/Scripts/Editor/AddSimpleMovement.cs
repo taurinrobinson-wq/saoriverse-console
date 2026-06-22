@@ -27,9 +27,9 @@ public class AddSimpleMovement
         if (cameraObj != null)
         {
             cameraObj.transform.SetParent(player.transform);
-            cameraObj.transform.localPosition = new Vector3(0, 0.6f, 0);
+            cameraObj.transform.localPosition = new Vector3(0, 1.2f, -2.5f);  // Third-person position
             cameraObj.transform.localRotation = Quaternion.identity;
-            Debug.Log("✅ Made Camera child of Player");
+            Debug.Log("✅ Made Camera child of Player (third-person position)");
         }
 
         // Add simple movement script

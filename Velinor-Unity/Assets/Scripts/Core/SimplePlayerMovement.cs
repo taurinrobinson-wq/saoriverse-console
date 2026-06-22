@@ -8,7 +8,7 @@ public class SimplePlayerMovement : MonoBehaviour
     private float sprintSpeed = 10f;
     private float gravity = -9.81f;
     private float velocityY = 0f;
-    private float mouseSensitivity = 2f;
+    private float mouseSensitivity = 4f;  // Increased for snappier response
     private float camPitch = 0f;
 
     void Start()
@@ -26,10 +26,16 @@ public class SimplePlayerMovement : MonoBehaviour
         {
             Debug.LogError("No Camera found in Player or children!");
         }
+        else
+        {
+            // Position camera behind and above player for third-person view
+            mainCam.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
+        }
 
         // Lock cursor to game
         Cursor.lockState = CursorLockMode.Locked;
-        Debug.Log("✅ Movement active - WASD to move, Mouse to look, Space to jump");
+        Debug.Log("✅ Third-person controller active!");
+        Debug.Log("WASD = Move | Mouse = Free look | Shift = Sprint | Space = Jump | ESC = Unlock cursor");
     }
 
     void Update()
