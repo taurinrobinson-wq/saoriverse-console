@@ -8,8 +8,14 @@ public class SimplePlayerMovement : MonoBehaviour
     private float sprintSpeed = 10f;
     private float gravity = -9.81f;
     private float velocityY = 0f;
-    private float mouseSensitivity = 4f;  // Increased for snappier response
+    private float mouseSensitivity = 4f;
     private float camPitch = 0f;
+    
+    // Camera zoom
+    private float cameraDistance = 2.5f;
+    private float minZoom = 0.5f;
+    private float maxZoom = 5f;
+    private float zoomSpeed = 1f;
 
     void Start()
     {
@@ -86,6 +92,20 @@ public class SimplePlayerMovement : MonoBehaviour
             camPitch -= mouseY * mouseSensitivity;
             camPitch = Mathf.Clamp(camPitch, -90f, 90f);
             mainCam.transform.localRotation = Quaternion.Euler(camPitch, 0, 0);
+        }
+
+        // Zoom with mouse wheel
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+        {
+            cameraDistance -= scroll * zoomSpeed;
+            cameraDistance = Mathf.Clamp(cameraDistance, minZoom, maxZoom);
+            
+            // Update camera position based on zoom distance
+            if (mainCam != null)
+            {
+                mainCam.transform.localPosition = new Vector3(0, 1.2f, -cameraDistance);
+            }
         }
 
         // Unlock cursor on ESC
