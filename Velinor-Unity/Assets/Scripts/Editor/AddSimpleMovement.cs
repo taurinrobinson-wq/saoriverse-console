@@ -13,13 +13,6 @@ public class AddSimpleMovement
             return;
         }
 
-        // Add simple movement script
-        if (player.GetComponent<SimplePlayerMovement>() == null)
-        {
-            player.AddComponent<SimplePlayerMovement>();
-            Debug.Log("✅ Added SimplePlayerMovement to Player");
-        }
-
         // Ensure CharacterController exists
         if (player.GetComponent<CharacterController>() == null)
         {
@@ -29,10 +22,27 @@ public class AddSimpleMovement
             Debug.Log("✅ Added CharacterController");
         }
 
+        // Find Main Camera and make it a child of Player
+        GameObject cameraObj = GameObject.Find("Main Camera");
+        if (cameraObj != null)
+        {
+            cameraObj.transform.SetParent(player.transform);
+            cameraObj.transform.localPosition = new Vector3(0, 0.6f, 0);
+            cameraObj.transform.localRotation = Quaternion.identity;
+            Debug.Log("✅ Made Camera child of Player");
+        }
+
+        // Add simple movement script
+        if (player.GetComponent<SimplePlayerMovement>() == null)
+        {
+            player.AddComponent<SimplePlayerMovement>();
+            Debug.Log("✅ Added SimplePlayerMovement to Player");
+        }
+
         Debug.Log("Ready to play!");
         Debug.Log("Controls:");
         Debug.Log("  WASD = Move");
         Debug.Log("  SPACE = Jump");
-        Debug.Log("  MOUSE = Look around");
+        Debug.Log("  MOUSE = Free look (full 360)");
     }
 }

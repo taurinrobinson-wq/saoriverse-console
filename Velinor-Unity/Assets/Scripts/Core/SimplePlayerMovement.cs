@@ -5,6 +5,7 @@ public class SimplePlayerMovement : MonoBehaviour
     private CharacterController cc;
     private Camera mainCam;
     private float moveSpeed = 5f;
+    private float sprintSpeed = 10f;
     private float gravity = -9.81f;
     private float velocityY = 0f;
     private float mouseSensitivity = 2f;
@@ -18,33 +19,40 @@ public class SimplePlayerMovement : MonoBehaviour
             cc = gameObject.AddComponent<CharacterController>();
             cc.height = 2f;
             cc.radius = 0.5f;
-            Debug.Log("Added CharacterController to Player");
         }
 
-        mainCam = Camera.main;
+        mainCam = GetComponentInChildren<Camera>();
         if (mainCam == null)
         {
-            Debug.LogError("No Main Camera found!");
+            Debug.LogError("No Camera found in Player or children!");
         }
 
-        Debug.Log("✅ SimplePlayerMovement active on " + gameObject.name);
-        Debug.Log("🎮 WASD=Move, Mouse=Look, Space=Jump, Shift=Sprint");
+        // Lock cursor to game
+        Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log("✅ Movement active - WASD to move, Mouse to look, Space to jump");
     }
 
     void Update()
     {
-        // Get input
+        // Get movement input
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        // Movement
+        // Check if sprinting
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
+        float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
+
+        // Calculate movement direction relative to player's forward/right
         Vector3 moveDirection = (transform.forward * vertical + transform.right * horizontal).normalized;
+
+        // Apply gravity
         velocityY += gravity * Time.deltaTime;
 
-        Vector3 velocity = moveDirection * moveSpeed + Vector3.up * velocityY;
+        // Move player
+        Vector3 velocity = moveDirection * currentSpeed + Vector3.up * velocityY;
         cc.Move(velocity * Time.deltaTime);
 
-        // Ground check
+        // Check if grounded
         if (cc.isGrounded)
         {
             velocityY = 0f;
@@ -60,18 +68,24 @@ public class SimplePlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        // Rotate player body left/right
+        // Rotate player body (yaw) - camera follows since it's a child
         if (mouseX != 0)
         {
             transform.Rotate(0, mouseX * mouseSensitivity, 0);
         }
 
-        // Rotate camera up/down (pitch)
+        // Rotate camera up/down (pitch only)
         if (mainCam != null && mouseY != 0)
         {
             camPitch -= mouseY * mouseSensitivity;
             camPitch = Mathf.Clamp(camPitch, -90f, 90f);
             mainCam.transform.localRotation = Quaternion.Euler(camPitch, 0, 0);
+        }
+
+        // Unlock cursor on ESC
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
