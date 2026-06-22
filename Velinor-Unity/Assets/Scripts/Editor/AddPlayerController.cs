@@ -5,7 +5,7 @@ using StarterAssets;
 public class AddPlayerController
 {
     [MenuItem("Velinor/Add Player Controller to Scene")]
-    public static void AddPlayerController()
+    public static void Setup()
     {
         // Find Player object
         GameObject player = GameObject.Find("Player");
