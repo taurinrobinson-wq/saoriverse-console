@@ -194,11 +194,14 @@ public class CreateMinimalScene
         RectTransform btn1TextRect = btn1TextGO.AddComponent<RectTransform>();
         btn1TextRect.anchorMin = Vector2.zero;
         btn1TextRect.anchorMax = Vector2.one;
+        btn1TextRect.offsetMin = Vector2.zero;
+        btn1TextRect.offsetMax = Vector2.zero;
         TextMeshProUGUI btn1Text = btn1TextGO.AddComponent<TextMeshProUGUI>();
         btn1Text.text = "Option 1";
         btn1Text.fontSize = 28;
         btn1Text.alignment = TextAlignmentOptions.Center;
         btn1Text.color = Color.white;
+        btn1Button.interactable = true;
 
         // Option button 2 (right side, bottom of panel)
         GameObject btn2GO = new GameObject("OptionButton2");
@@ -217,11 +220,14 @@ public class CreateMinimalScene
         RectTransform btn2TextRect = btn2TextGO.AddComponent<RectTransform>();
         btn2TextRect.anchorMin = Vector2.zero;
         btn2TextRect.anchorMax = Vector2.one;
+        btn2TextRect.offsetMin = Vector2.zero;
+        btn2TextRect.offsetMax = Vector2.zero;
         TextMeshProUGUI btn2Text = btn2TextGO.AddComponent<TextMeshProUGUI>();
         btn2Text.text = "Option 2";
         btn2Text.fontSize = 28;
         btn2Text.alignment = TextAlignmentOptions.Center;
         btn2Text.color = Color.white;
+        btn2Button.interactable = true;
 
         // Add NPC interaction script
         NPCInteraction npcInteraction = npc.AddComponent<NPCInteraction>();

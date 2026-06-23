@@ -47,7 +47,7 @@ public class SimplePlayerMovement : MonoBehaviour
         // Lock cursor to game
         Cursor.lockState = CursorLockMode.Locked;
         Debug.Log("✅ Third-person controller active!");
-        Debug.Log("WASD = Move | Mouse = Free look | Shift = Sprint | Space = Jump | ESC = Unlock cursor");
+        Debug.Log("WASD = Move | Right Mouse = Look Around | Shift = Sprint | Space = Jump | ESC = Unlock cursor");
     }
 
     void Update()
@@ -90,16 +90,8 @@ public class SimplePlayerMovement : MonoBehaviour
         Vector3 velocity = moveDirection * currentSpeed + Vector3.up * velocityY;
         cc.Move(velocity * Time.deltaTime);
 
-        // Mouse look (only if NOT hovering over UI and dialogue is NOT open)
-        bool isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-        
-        // Check if dialogue panel is open
-        bool isDialogueOpen = false;
-        Transform dialoguePanel = transform.root.Find("DialogueCanvas/DialoguePanel");
-        if (dialoguePanel != null)
-            isDialogueOpen = dialoguePanel.gameObject.activeSelf;
-        
-        if (!isPointerOverUI && !isDialogueOpen)
+        // Mouse look (only when RIGHT MOUSE BUTTON is held down)
+        if (Input.GetMouseButton(1))
         {
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
