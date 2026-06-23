@@ -6,7 +6,7 @@ public class SimplePlayerMovement : MonoBehaviour
     private Camera mainCam;
     private float moveSpeed = 5f;
     private float sprintSpeed = 10f;
-    private float gravity = -9.81f;
+    private float gravity = 9.81f;
     private float velocityY = 0f;
     private float mouseSensitivity = 4f;
     private float camPitch = 0f;
@@ -22,21 +22,20 @@ public class SimplePlayerMovement : MonoBehaviour
         cc = GetComponent<CharacterController>();
         if (cc == null)
         {
-            cc = gameObject.AddComponent<CharacterController>();
-            cc.height = 2f;
-            cc.radius = 0.5f;
+            Debug.LogError("NO CHARACTER CONTROLLER!");
+            return;
         }
 
-        mainCam = GetComponentInChildren<Camera>();
+        mainCam = Camera.main;
         if (mainCam == null)
         {
-            Debug.LogError("No Camera found in Player or children!");
+            Debug.LogError("NO MAIN CAMERA!");
+            return;
         }
-        else
-        {
-            // Position camera behind and above player for third-person view
-            mainCam.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
-        }
+
+        // Position camera behind and above player for third-person view
+        mainCam.transform.SetParent(transform);
+        mainCam.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
 
         // Lock cursor to game
         Cursor.lockState = CursorLockMode.Locked;
@@ -46,6 +45,8 @@ public class SimplePlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (cc == null) return;
+
         // Get movement input
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -57,24 +58,19 @@ public class SimplePlayerMovement : MonoBehaviour
         // Calculate movement direction relative to player's forward/right
         Vector3 moveDirection = (transform.forward * vertical + transform.right * horizontal).normalized;
 
-        // Apply gravity
-        velocityY += gravity * Time.deltaTime;
+        // Apply gravity - only when falling
+        if (!cc.isGrounded)
+        {
+            velocityY -= gravity * Time.deltaTime;
+        }
+        else
+        {
+            velocityY = -0.1f; // Small negative to keep grounded
+        }
 
         // Move player
         Vector3 velocity = moveDirection * currentSpeed + Vector3.up * velocityY;
         cc.Move(velocity * Time.deltaTime);
-
-        // Check if grounded
-        if (cc.isGrounded)
-        {
-            velocityY = 0f;
-            if (vertical != 0 || horizontal != 0)
-                Debug.Log($"✅ Grounded | Pos: {transform.position.y:F2} | VelY: {velocityY}");
-        }
-        else
-        {
-            Debug.LogWarning($"❌ FALLING | Pos: {transform.position.y:F2} | VelY: {velocityY:F2}");
-        }
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
@@ -84,6 +80,34 @@ public class SimplePlayerMovement : MonoBehaviour
 
         // Mouse look
         float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Rotate player body horizontally (yaw)
+        transform.Rotate(0, mouseX * mouseSensitivity, 0);
+
+        // Rotate camera vertically (pitch)
+        camPitch -= mouseY * mouseSensitivity;
+        camPitch = Mathf.Clamp(camPitch, -90f, 90f);
+        mainCam.transform.localRotation = Quaternion.Euler(camPitch, 0, 0);
+
+        // Mouse wheel zoom
+        float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollDelta != 0)
+        {
+            cameraDistance -= scrollDelta * zoomSpeed;
+            cameraDistance = Mathf.Clamp(cameraDistance, minZoom, maxZoom);
+            mainCam.transform.localPosition = new Vector3(0, 1.2f, -cameraDistance);
+        }
+
+        // Unlock cursor
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked
+                ? CursorLockMode.Confined
+                : CursorLockMode.Locked;
+        }
+    }
+}
         float mouseY = Input.GetAxis("Mouse Y");
 
         // Rotate player body (yaw) - camera follows since it's a child
