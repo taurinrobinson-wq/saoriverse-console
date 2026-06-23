@@ -128,11 +128,17 @@ public class CreateMinimalScene
         Object.DestroyImmediate(npcVis.GetComponent<Collider>());
         npcVis.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.2f, 0.8f, 1f);
 
-        // Trigger collider for detection
-        CapsuleCollider npcCollider = npc.AddComponent<CapsuleCollider>();
-        npcCollider.radius = 0.5f;
-        npcCollider.height = 2f;
-        npcCollider.isTrigger = true;
+        // SOLID collider for physics blocking (prevents player walking through)
+        CapsuleCollider npcSolidCollider = npc.AddComponent<CapsuleCollider>();
+        npcSolidCollider.radius = 0.5f;
+        npcSolidCollider.height = 2f;
+        npcSolidCollider.isTrigger = false;  // SOLID - blocks player
+
+        // TRIGGER collider for wider interaction detection (larger radius)
+        CapsuleCollider npcTriggerCollider = npc.AddComponent<CapsuleCollider>();
+        npcTriggerCollider.radius = 0.8f;
+        npcTriggerCollider.height = 2.5f;
+        npcTriggerCollider.isTrigger = true;  // TRIGGER - for OnTriggerStay detection
 
         // Rigidbody for physics collision
         Rigidbody npcRb = npc.AddComponent<Rigidbody>();

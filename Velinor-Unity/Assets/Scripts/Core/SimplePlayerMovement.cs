@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SimplePlayerMovement : MonoBehaviour
 {
@@ -84,17 +85,22 @@ public class SimplePlayerMovement : MonoBehaviour
         Vector3 velocity = moveDirection * currentSpeed + Vector3.up * velocityY;
         cc.Move(velocity * Time.deltaTime);
 
-        // Mouse look
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        // Mouse look (only if NOT hovering over UI)
+        bool isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        
+        if (!isPointerOverUI)
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
 
-        // Rotate player body horizontally (yaw)
-        transform.Rotate(0, mouseX * mouseSensitivity, 0);
+            // Rotate player body horizontally (yaw)
+            transform.Rotate(0, mouseX * mouseSensitivity, 0);
 
-        // Rotate camera vertically (pitch)
-        camPitch -= mouseY * mouseSensitivity;
-        camPitch = Mathf.Clamp(camPitch, -90f, 90f);
-        mainCam.transform.localRotation = Quaternion.Euler(camPitch, 0, 0);
+            // Rotate camera vertically (pitch)
+            camPitch -= mouseY * mouseSensitivity;
+            camPitch = Mathf.Clamp(camPitch, -90f, 90f);
+            mainCam.transform.localRotation = Quaternion.Euler(camPitch, 0, 0);
+        }
 
         // Mouse wheel zoom
         float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
