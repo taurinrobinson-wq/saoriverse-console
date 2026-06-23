@@ -36,7 +36,6 @@ public class GlyphObject : Interactable
     {
         if (other.CompareTag("Player"))
         {
-            showPrompt = false;
             InteractionUI.Instance?.HidePrompt();
         }
     }
