@@ -152,16 +152,16 @@ public class CreateMinimalScene
         dialogueCanvasGO.AddComponent<CanvasScaler>();
         dialogueCanvasGO.AddComponent<GraphicRaycaster>();
 
-        // Dialogue panel at bottom
+        // Dialogue panel at CENTER of screen (easier to see and interact with)
         GameObject panelGO = new GameObject("DialoguePanel");
         panelGO.transform.SetParent(dialogueCanvasGO.transform);
         RectTransform panelRect = panelGO.AddComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0.5f, 0);
-        panelRect.anchorMax = new Vector2(0.5f, 0);
-        panelRect.anchoredPosition = new Vector2(0, 50);
-        panelRect.sizeDelta = new Vector2(600, 150);
+        panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+        panelRect.anchorMax = new Vector2(0.5f, 0.5f);
+        panelRect.anchoredPosition = new Vector2(0, -150);  // Below center
+        panelRect.sizeDelta = new Vector2(700, 200);  // Larger for better visibility
         Image panelImage = panelGO.AddComponent<Image>();
-        panelImage.color = new Color(0.1f, 0.1f, 0.15f, 0.9f);
+        panelImage.color = new Color(0.1f, 0.1f, 0.15f, 0.95f);
 
         // Dialogue text
         GameObject textGO = new GameObject("DialogueText");
@@ -177,17 +177,18 @@ public class CreateMinimalScene
         dialogueText.alignment = TextAlignmentOptions.TopLeft;
         dialogueText.color = Color.white;
 
-        // Option button 1
+        // Option button 1 (left side, bottom of panel)
         GameObject btn1GO = new GameObject("OptionButton1");
         btn1GO.transform.SetParent(panelGO.transform);
         RectTransform btn1Rect = btn1GO.AddComponent<RectTransform>();
         btn1Rect.anchorMin = new Vector2(0, 0);
         btn1Rect.anchorMax = new Vector2(0.5f, 0);
-        btn1Rect.offsetMin = new Vector2(10, 5);
-        btn1Rect.offsetMax = new Vector2(-5, 40);
+        btn1Rect.offsetMin = new Vector2(20, 20);
+        btn1Rect.offsetMax = new Vector2(-10, 70);
         Image btn1Image = btn1GO.AddComponent<Image>();
         btn1Image.color = new Color(0.2f, 0.6f, 0.2f, 1f);
-        btn1GO.AddComponent<Button>();
+        Button btn1Button = btn1GO.AddComponent<Button>();
+        btn1Button.targetGraphic = btn1Image;
         GameObject btn1TextGO = new GameObject("Text");
         btn1TextGO.transform.SetParent(btn1GO.transform);
         RectTransform btn1TextRect = btn1TextGO.AddComponent<RectTransform>();
@@ -195,21 +196,22 @@ public class CreateMinimalScene
         btn1TextRect.anchorMax = Vector2.one;
         TextMeshProUGUI btn1Text = btn1TextGO.AddComponent<TextMeshProUGUI>();
         btn1Text.text = "Option 1";
-        btn1Text.fontSize = 24;
+        btn1Text.fontSize = 28;
         btn1Text.alignment = TextAlignmentOptions.Center;
         btn1Text.color = Color.white;
 
-        // Option button 2
+        // Option button 2 (right side, bottom of panel)
         GameObject btn2GO = new GameObject("OptionButton2");
         btn2GO.transform.SetParent(panelGO.transform);
         RectTransform btn2Rect = btn2GO.AddComponent<RectTransform>();
         btn2Rect.anchorMin = new Vector2(0.5f, 0);
         btn2Rect.anchorMax = new Vector2(1f, 0);
-        btn2Rect.offsetMin = new Vector2(5, 5);
-        btn2Rect.offsetMax = new Vector2(-10, 40);
+        btn2Rect.offsetMin = new Vector2(10, 20);
+        btn2Rect.offsetMax = new Vector2(-20, 70);
         Image btn2Image = btn2GO.AddComponent<Image>();
         btn2Image.color = new Color(0.6f, 0.2f, 0.2f, 1f);
-        btn2GO.AddComponent<Button>();
+        Button btn2Button = btn2GO.AddComponent<Button>();
+        btn2Button.targetGraphic = btn2Image;
         GameObject btn2TextGO = new GameObject("Text");
         btn2TextGO.transform.SetParent(btn2GO.transform);
         RectTransform btn2TextRect = btn2TextGO.AddComponent<RectTransform>();
@@ -217,7 +219,7 @@ public class CreateMinimalScene
         btn2TextRect.anchorMax = Vector2.one;
         TextMeshProUGUI btn2Text = btn2TextGO.AddComponent<TextMeshProUGUI>();
         btn2Text.text = "Option 2";
-        btn2Text.fontSize = 24;
+        btn2Text.fontSize = 28;
         btn2Text.alignment = TextAlignmentOptions.Center;
         btn2Text.color = Color.white;
 

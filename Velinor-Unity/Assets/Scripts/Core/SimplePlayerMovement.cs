@@ -38,6 +38,11 @@ public class SimplePlayerMovement : MonoBehaviour
         // Position camera behind and above player for third-person view
         mainCam.transform.SetParent(transform);
         mainCam.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
+        mainCam.transform.localRotation = Quaternion.identity;  // Start with no rotation
+        
+        // Initialize camera pitch to look slightly forward/up (not down at floor)
+        camPitch = 15f;  // Look slightly upward by default
+        mainCam.transform.localRotation = Quaternion.Euler(camPitch, 0, 0);
 
         // Lock cursor to game
         Cursor.lockState = CursorLockMode.Locked;
@@ -85,10 +90,16 @@ public class SimplePlayerMovement : MonoBehaviour
         Vector3 velocity = moveDirection * currentSpeed + Vector3.up * velocityY;
         cc.Move(velocity * Time.deltaTime);
 
-        // Mouse look (only if NOT hovering over UI)
+        // Mouse look (only if NOT hovering over UI and dialogue is NOT open)
         bool isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         
-        if (!isPointerOverUI)
+        // Check if dialogue panel is open
+        bool isDialogueOpen = false;
+        Transform dialoguePanel = transform.root.Find("DialogueCanvas/DialoguePanel");
+        if (dialoguePanel != null)
+            isDialogueOpen = dialoguePanel.gameObject.activeSelf;
+        
+        if (!isPointerOverUI && !isDialogueOpen)
         {
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
