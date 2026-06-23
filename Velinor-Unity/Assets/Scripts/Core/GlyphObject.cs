@@ -6,7 +6,6 @@ public class GlyphObject : Interactable
 
     void Start()
     {
-        gameObject.tag = "Interactable";
         // Add trigger collider
         SphereCollider collider = GetComponent<SphereCollider>();
         if (collider == null)

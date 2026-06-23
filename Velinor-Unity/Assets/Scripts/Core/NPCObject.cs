@@ -6,7 +6,6 @@ public class NPCObject : Interactable
 
     void Start()
     {
-        gameObject.tag = "Interactable";
         // Add trigger collider
         BoxCollider collider = GetComponent<BoxCollider>();
         if (collider == null)
