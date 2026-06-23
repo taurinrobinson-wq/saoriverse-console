@@ -77,7 +77,10 @@ public class NPCInteraction : MonoBehaviour
         // Check debounce and E-key press
         bool canOpenDialogue = (Time.time - lastDialogueCloseTime) >= dialogueInputCooldown;
         if (Input.GetKeyDown(KeyCode.E) && canOpenDialogue)
+        {
+            Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcName}");
             OpenDialogue();
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -93,6 +96,7 @@ public class NPCInteraction : MonoBehaviour
     void OpenDialogue()
     {
         isDialogueOpen = true;
+        Debug.Log($"🟣 OpenDialogue called for {npcName}");
 
         // Use cached panel reference instead of searching with Transform.Find
         if (dialoguePanel != null)
@@ -115,10 +119,14 @@ public class NPCInteraction : MonoBehaviour
             if (button2Text != null)
                 button2Text.text = "I don't need anything.";
         }
+
+        Debug.Log($"🟢 Button 1 ready: {(button1 != null ? "YES" : "NO")}");
+        Debug.Log($"🔴 Button 2 ready: {(button2 != null ? "YES" : "NO")}");
     }
 
     void AskName()
     {
+        Debug.Log($"🟢 BUTTON 1 CLICKED");
         if (dialogueText != null)
             dialogueText.text = "It's Ravi. I gotta go.";
 
@@ -135,6 +143,7 @@ public class NPCInteraction : MonoBehaviour
 
     void CloseDialogue()
     {
+        Debug.Log($"🟣 CloseDialogue called - Dialogue closing");
         isDialogueOpen = false;
         lastDialogueCloseTime = Time.time;
 
