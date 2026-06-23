@@ -76,7 +76,7 @@ public class CreateMinimalScene
 
         // ===== CREATE INTERACTIVE GLYPH =====
         GameObject glyph = new GameObject("Glyph_TestObject");
-        glyph.transform.position = new Vector3(5, 0.67f, 0);  // 0.67 = glyph radius
+        glyph.transform.position = new Vector3(5, 1.466f, 0);  // Aligned with player center height
         
         // Visual: cyan sphere (0.67 scale = 1/3 of player height)
         GameObject glyphVis = GameObject.CreatePrimitive(PrimitiveType.Sphere);
