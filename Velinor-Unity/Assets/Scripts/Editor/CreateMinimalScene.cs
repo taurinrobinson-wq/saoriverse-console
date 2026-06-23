@@ -47,6 +47,13 @@ public class CreateMinimalScene
         cc.radius = 0.5f;
         cc.center = new Vector3(0, 1, 0);  // Offset so CC extends from y=0 to y=2
         
+        // Trigger collider for interaction detection (separate from CharacterController)
+        CapsuleCollider triggerCollider = player.AddComponent<CapsuleCollider>();
+        triggerCollider.radius = 0.6f;
+        triggerCollider.height = 2f;
+        triggerCollider.center = new Vector3(0, 1, 0);
+        triggerCollider.isTrigger = true;
+        
         // Visual: blue cylinder (2 units tall, 1 unit diameter)
         GameObject playerVis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         playerVis.name = "Visual";
