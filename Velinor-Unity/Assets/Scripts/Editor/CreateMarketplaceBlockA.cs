@@ -10,7 +10,7 @@ public class CreateMarketplaceBlockA
     public static void CreateScene()
     {
         // Clear existing scene
-        foreach (GameObject go in Object.FindObjectsOfType<GameObject>())
+        foreach (GameObject go in Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
         {
             if (go.scene.name != null && go.name != "EventSystem")
                 Object.DestroyImmediate(go);
@@ -291,7 +291,7 @@ public class CreateMarketplaceBlockA
         cameraObj.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
 
         Camera cam = cameraObj.AddComponent<Camera>();
-        cam.clearFlags = CameraClearFlags.SkyBox;
+        cam.clearFlags = CameraClearFlags.Skybox;
 
         AudioListener audioListener = cameraObj.AddComponent<AudioListener>();
     }
@@ -363,16 +363,16 @@ public class CreateMarketplaceBlockA
         npcInteraction.npcName = npcName;
 
         // Find dialogue canvas
-        Canvas dialogueCanvas = Object.FindObjectOfType<Canvas>();
+        Canvas dialogueCanvas = Object.FindAnyObjectByType<Canvas>();
         if (dialogueCanvas != null && dialogueCanvas.name == "DialogueCanvas")
             npcInteraction.dialogueCanvas = dialogueCanvas;
 
         // Find dialogue text
-        TextMeshProUGUI dialogueText = Object.FindObjectOfType<TextMeshProUGUI>();
+        TextMeshProUGUI dialogueText = Object.FindAnyObjectByType<TextMeshProUGUI>();
         npcInteraction.dialogueText = dialogueText;
 
         // Find buttons
-        Button[] buttons = Object.FindObjectsOfType<Button>();
+        Button[] buttons = Object.FindObjectsByType<Button>(FindObjectsSortMode.None);
         foreach (Button btn in buttons)
         {
             if (btn.name == "OptionButton1")
