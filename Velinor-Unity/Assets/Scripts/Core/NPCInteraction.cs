@@ -11,6 +11,8 @@ public class NPCInteraction : MonoBehaviour
     public GameObject optionButton2;
     
     private float interactionRange = 3f;
+    private float dialogueInputCooldown = 0.15f;  // Debounce time after closing dialogue
+    private float lastDialogueCloseTime = -1f;   // Track when dialogue was last closed
 
     void OnTriggerEnter(Collider other)
     {
@@ -26,7 +28,10 @@ public class NPCInteraction : MonoBehaviour
             {
                 InteractionUI.Instance?.ShowPrompt($"Press E to talk to {npcName}");
 
-                if (Input.GetKeyDown(KeyCode.E))
+                // Check if we're past the debounce period after closing dialogue
+                bool canOpenDialogue = (Time.time - lastDialogueCloseTime) >= dialogueInputCooldown;
+
+                if (Input.GetKeyDown(KeyCode.E) && canOpenDialogue)
                 {
                     Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcName}");
                     OpenDialogue();
@@ -132,6 +137,7 @@ public class NPCInteraction : MonoBehaviour
     void CloseDialogue()
     {
         Debug.Log($"🟣 CloseDialogue called!");
+        lastDialogueCloseTime = Time.time;  // Record when dialogue was closed
         if (dialogueCanvas != null)
         {
             // Hide the dialogue panel
