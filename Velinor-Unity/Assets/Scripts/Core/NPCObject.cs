@@ -34,7 +34,7 @@ public class NPCObject : Interactable
         }
     }
 
-    override protected void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
