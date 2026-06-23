@@ -12,7 +12,6 @@ public class NPCInteraction : MonoBehaviour
     public GameObject interactPrompt;
     
     private bool playerInRange = false;
-    private int dialogueState = 0;
 
     void OnTriggerEnter(Collider other)
     {
@@ -47,8 +46,6 @@ public class NPCInteraction : MonoBehaviour
     {
         if (dialogueCanvas != null)
             dialogueCanvas.gameObject.SetActive(true);
-        
-        dialogueState = 0;
 
         if (dialogueText != null)
             dialogueText.text = "Hello there, what can I do for you?";
@@ -120,7 +117,5 @@ public class NPCInteraction : MonoBehaviour
             optionButton1.SetActive(false);
         if (optionButton2 != null)
             optionButton2.SetActive(false);
-        
-        dialogueState = 0;
     }
 }

@@ -60,11 +60,9 @@ public class SimplePlayerMovement : MonoBehaviour
         Vector3 moveDirection = (transform.forward * vertical + transform.right * horizontal).normalized;
 
         // ===== JUMP FIRST =====
-        bool didJump = false;
         if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
         {
             velocityY = 5f;
-            didJump = true;
             Debug.Log($"🎯 JUMP!");
         }
 
