@@ -1,0 +1,441 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEditor;
+using TMPro;
+using UnityEngine.UI;
+
+public class CreateMarketplaceBlockA
+{
+    [MenuItem("Velinor/Create Marketplace Block A Scene")]
+    public static void CreateScene()
+    {
+        // Clear existing scene
+        foreach (GameObject go in Object.FindObjectsOfType<GameObject>())
+        {
+            if (go.scene.name != null && go.name != "EventSystem")
+                Object.DestroyImmediate(go);
+        }
+
+        Debug.Log("🏪 Creating Marketplace Block A scene...");
+
+        // === GROUND ===
+        CreateGround();
+
+        // === MARKET STALLS (Left & Right Barriers) ===
+        CreateLeftStallBarrier();
+        CreateRightStallBarrier();
+
+        // === LIGHTING ===
+        CreateLighting();
+
+        // === UI SYSTEM ===
+        CreateEventSystem();
+        CreateInteractionUI();
+        CreateDialogueUI();
+
+        // === PLAYER ===
+        CreatePlayer();
+
+        // === NPCs ===
+        CreateNPCs();
+
+        // === GLYPH ===
+        CreateGlyph();
+
+        // === FORWARD EXIT TRIGGER ===
+        CreateExitTrigger();
+
+        Debug.Log("✅ Marketplace Block A scene created successfully!");
+    }
+
+    static void CreateGround()
+    {
+        GameObject groundObj = new GameObject("Ground");
+        groundObj.transform.position = new Vector3(10, 0, 10);
+
+        // Create ground plane (20×20)
+        MeshFilter mf = groundObj.AddComponent<MeshFilter>();
+        MeshRenderer mr = groundObj.AddComponent<MeshRenderer>();
+        
+        // Simple quad for ground
+        Mesh groundMesh = new Mesh();
+        groundMesh.vertices = new Vector3[]
+        {
+            new Vector3(-10, 0, -10),
+            new Vector3(10, 0, -10),
+            new Vector3(10, 0, 10),
+            new Vector3(-10, 0, 10)
+        };
+        groundMesh.triangles = new int[] { 0, 2, 1, 0, 3, 2 };
+        groundMesh.RecalculateNormals();
+        mf.mesh = groundMesh;
+
+        // Create material for ground (brown/dirt color)
+        Material groundMat = new Material(Shader.Find("Standard"));
+        groundMat.color = new Color(0.6f, 0.5f, 0.4f, 1f);
+        mr.material = groundMat;
+
+        // Add collider
+        BoxCollider groundCollider = groundObj.AddComponent<BoxCollider>();
+        groundCollider.size = new Vector3(20, 0.1f, 20);
+        groundCollider.center = Vector3.zero;
+
+        // Add rigidbody
+        Rigidbody groundRb = groundObj.AddComponent<Rigidbody>();
+        groundRb.isKinematic = true;
+        groundRb.useGravity = false;
+    }
+
+    static void CreateLeftStallBarrier()
+    {
+        // Create 8 stalls along x=2, z=0→20
+        float[] zPositions = { 1.5f, 4f, 6.5f, 9f, 11.5f, 14f, 16.5f, 19f };
+
+        foreach (float z in zPositions)
+        {
+            CreateStall("LeftStall", new Vector3(2, 1.5f, z));
+        }
+    }
+
+    static void CreateRightStallBarrier()
+    {
+        // Create 8 stalls along x=18, z=0→20
+        float[] zPositions = { 1.5f, 4f, 6.5f, 9f, 11.5f, 14f, 16.5f, 19f };
+
+        foreach (float z in zPositions)
+        {
+            CreateStall("RightStall", new Vector3(18, 1.5f, z));
+        }
+    }
+
+    static void CreateStall(string name, Vector3 position)
+    {
+        GameObject stallObj = new GameObject(name);
+        stallObj.transform.position = position;
+
+        // Create visual mesh (simple cube for now)
+        GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        visual.name = "Visual";
+        visual.transform.SetParent(stallObj.transform);
+        visual.transform.localPosition = Vector3.zero;
+        visual.transform.localScale = new Vector3(2, 3, 3);
+
+        // Remove primitive collider
+        Object.DestroyImmediate(visual.GetComponent<Collider>());
+
+        // Create material (wooden stall color)
+        Material stallMat = new Material(Shader.Find("Standard"));
+        stallMat.color = new Color(0.7f, 0.6f, 0.4f, 1f);
+        visual.GetComponent<MeshRenderer>().material = stallMat;
+
+        // Add collider for blocking
+        BoxCollider stallCollider = stallObj.AddComponent<BoxCollider>();
+        stallCollider.size = new Vector3(2, 3, 3);
+
+        // Add rigidbody
+        Rigidbody stallRb = stallObj.AddComponent<Rigidbody>();
+        stallRb.isKinematic = true;
+        stallRb.useGravity = false;
+    }
+
+    static void CreateLighting()
+    {
+        GameObject lightObj = new GameObject("DirectionalLight");
+        Light light = lightObj.AddComponent<Light>();
+        light.type = LightType.Directional;
+        light.intensity = 1.3f;
+        light.color = new Color(1f, 0.95f, 0.7f); // Warm, dusty tone
+        lightObj.transform.rotation = Quaternion.Euler(45, -30, 0);
+    }
+
+    static void CreateEventSystem()
+    {
+        GameObject esObj = new GameObject("EventSystem");
+        esObj.AddComponent<EventSystem>();
+        GraphicRaycaster raycaster = esObj.AddComponent<GraphicRaycaster>();
+        StandaloneInputModule inputModule = esObj.AddComponent<StandaloneInputModule>();
+    }
+
+    static void CreateInteractionUI()
+    {
+        GameObject canvasObj = new GameObject("InteractionCanvas");
+        Canvas canvas = canvasObj.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+        CanvasScaler scaler = canvasObj.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+
+        InteractionUI interactionUI = canvasObj.AddComponent<InteractionUI>();
+    }
+
+    static void CreateDialogueUI()
+    {
+        GameObject canvasObj = new GameObject("DialogueCanvas");
+        Canvas canvas = canvasObj.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+        CanvasScaler scaler = canvasObj.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+
+        // Create dialogue panel
+        GameObject panelObj = new GameObject("DialoguePanel");
+        panelObj.transform.SetParent(canvasObj.transform);
+        RectTransform panelRect = panelObj.AddComponent<RectTransform>();
+        panelRect.anchoredPosition = new Vector2(0, -150);
+        panelRect.sizeDelta = new Vector2(700, 200);
+
+        // Panel background
+        Image panelImage = panelObj.AddComponent<Image>();
+        panelImage.color = new Color(0.1f, 0.1f, 0.15f, 0.95f);
+
+        // Dialogue text
+        GameObject textObj = new GameObject("DialogueText");
+        textObj.transform.SetParent(panelObj.transform);
+        RectTransform textRect = textObj.AddComponent<RectTransform>();
+        textRect.anchoredPosition = new Vector2(-300, 80);
+        textRect.sizeDelta = new Vector2(650, 150);
+
+        TextMeshProUGUI dialogueText = textObj.AddComponent<TextMeshProUGUI>();
+        dialogueText.text = "Dialogue text";
+        dialogueText.fontSize = 32;
+        dialogueText.color = Color.white;
+        dialogueText.alignment = TextAlignmentOptions.TopLeft;
+
+        // Button 1 (green)
+        GameObject button1Obj = CreateDialogueButton("OptionButton1", panelObj.transform, new Vector2(-100, -60), Color.green);
+        TextMeshProUGUI button1Text = button1Obj.GetComponentInChildren<TextMeshProUGUI>();
+        button1Text.text = "Option 1";
+
+        // Button 2 (red)
+        GameObject button2Obj = CreateDialogueButton("OptionButton2", panelObj.transform, new Vector2(100, -60), new Color(1, 0, 0, 1));
+        TextMeshProUGUI button2Text = button2Obj.GetComponentInChildren<TextMeshProUGUI>();
+        button2Text.text = "Option 2";
+
+        panelObj.SetActive(false);
+    }
+
+    static GameObject CreateDialogueButton(string name, Transform parent, Vector2 position, Color color)
+    {
+        GameObject buttonObj = new GameObject(name);
+        buttonObj.transform.SetParent(parent);
+
+        RectTransform buttonRect = buttonObj.AddComponent<RectTransform>();
+        buttonRect.anchoredPosition = position;
+        buttonRect.sizeDelta = new Vector2(150, 60);
+
+        Image buttonImage = buttonObj.AddComponent<Image>();
+        buttonImage.color = color;
+
+        Button button = buttonObj.AddComponent<Button>();
+        Navigation nav = button.navigation;
+        nav.mode = Navigation.Mode.None;
+        button.navigation = nav;
+
+        // Add text to button
+        GameObject textObj = new GameObject("Text");
+        textObj.transform.SetParent(buttonObj.transform);
+        RectTransform textRect = textObj.AddComponent<RectTransform>();
+        textRect.anchoredPosition = Vector2.zero;
+        textRect.sizeDelta = Vector2.zero;
+
+        TextMeshProUGUI buttonText = textObj.AddComponent<TextMeshProUGUI>();
+        buttonText.text = name;
+        buttonText.fontSize = 28;
+        buttonText.color = Color.white;
+        buttonText.alignment = TextAlignmentOptions.Center;
+
+        return buttonObj;
+    }
+
+    static void CreatePlayer()
+    {
+        GameObject playerObj = new GameObject("Player");
+        playerObj.tag = "Player";
+        playerObj.transform.position = new Vector3(10, 1, 3);
+
+        // Character controller
+        CharacterController cc = playerObj.AddComponent<CharacterController>();
+        cc.height = 2f;
+        cc.radius = 0.5f;
+        cc.center = new Vector3(0, 1, 0);
+
+        // Add player script
+        playerObj.AddComponent<SimplePlayerMovement>();
+
+        // Add visual (blue cylinder)
+        GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        visualObj.name = "Visual";
+        visualObj.transform.SetParent(playerObj.transform);
+        visualObj.transform.localPosition = new Vector3(0, 0, 0);
+        visualObj.transform.localScale = new Vector3(1, 2, 1);
+
+        // Remove primitive collider
+        Object.DestroyImmediate(visualObj.GetComponent<Collider>());
+
+        // Create blue material
+        Material playerMat = new Material(Shader.Find("Standard"));
+        playerMat.color = new Color(0.2f, 0.5f, 1f, 1f);
+        visualObj.GetComponent<MeshRenderer>().material = playerMat;
+
+        // Interaction trigger collider
+        CapsuleCollider triggerCollider = playerObj.AddComponent<CapsuleCollider>();
+        triggerCollider.isTrigger = true;
+        triggerCollider.radius = 0.6f;
+        triggerCollider.height = 2f;
+        triggerCollider.center = new Vector3(0, 1, 0);
+
+        // Camera as child
+        GameObject cameraObj = new GameObject("MainCamera");
+        cameraObj.tag = "MainCamera";
+        cameraObj.transform.SetParent(playerObj.transform);
+        cameraObj.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
+
+        Camera cam = cameraObj.AddComponent<Camera>();
+        cam.clearFlags = CameraClearFlags.SkyBox;
+
+        AudioListener audioListener = cameraObj.AddComponent<AudioListener>();
+    }
+
+    static void CreateNPCs()
+    {
+        Vector3[] npcPositions = new Vector3[]
+        {
+            new Vector3(10, 1.97f, 8),
+            new Vector3(7, 1.97f, 10),
+            new Vector3(13, 1.97f, 10),
+            new Vector3(10, 1.97f, 13),
+            new Vector3(10, 1.97f, 16)
+        };
+
+        string[] npcNames = { "Merchant", "Blacksmith", "Healer", "Bard", "Sage" };
+
+        for (int i = 0; i < npcPositions.Length; i++)
+        {
+            CreateNPC(npcPositions[i], npcNames[i]);
+        }
+    }
+
+    static void CreateNPC(Vector3 position, string npcName)
+    {
+        GameObject npcObj = new GameObject($"NPC_{npcName}");
+        npcObj.transform.position = position;
+
+        // Visual (purple capsule)
+        GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        visualObj.name = "Visual";
+        visualObj.transform.SetParent(npcObj.transform);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(1, 2, 1);
+
+        // Remove primitive collider
+        Object.DestroyImmediate(visualObj.GetComponent<Collider>());
+
+        // Create purple material
+        Material npcMat = new Material(Shader.Find("Standard"));
+        npcMat.color = new Color(0.7f, 0.3f, 0.9f, 1f);
+        visualObj.GetComponent<MeshRenderer>().material = npcMat;
+
+        // Solid collider (blocks movement)
+        CapsuleCollider solidCollider = npcObj.AddComponent<CapsuleCollider>();
+        solidCollider.isTrigger = false;
+        solidCollider.radius = 0.5f;
+        solidCollider.height = 2f;
+        solidCollider.center = new Vector3(0, 1, 0);
+
+        // Trigger collider (detects interaction)
+        GameObject triggerObj = new GameObject("InteractionTrigger");
+        triggerObj.transform.SetParent(npcObj.transform);
+        triggerObj.transform.localPosition = Vector3.zero;
+
+        CapsuleCollider triggerCollider = triggerObj.AddComponent<CapsuleCollider>();
+        triggerCollider.isTrigger = true;
+        triggerCollider.radius = 0.8f;
+        triggerCollider.height = 2f;
+        triggerCollider.center = new Vector3(0, 1, 0);
+
+        // Rigidbody
+        Rigidbody rb = npcObj.AddComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
+        // NPC interaction script
+        NPCInteraction npcInteraction = npcObj.AddComponent<NPCInteraction>();
+        npcInteraction.npcName = npcName;
+
+        // Find dialogue canvas
+        Canvas dialogueCanvas = Object.FindObjectOfType<Canvas>();
+        if (dialogueCanvas != null && dialogueCanvas.name == "DialogueCanvas")
+            npcInteraction.dialogueCanvas = dialogueCanvas;
+
+        // Find dialogue text
+        TextMeshProUGUI dialogueText = Object.FindObjectOfType<TextMeshProUGUI>();
+        npcInteraction.dialogueText = dialogueText;
+
+        // Find buttons
+        Button[] buttons = Object.FindObjectsOfType<Button>();
+        foreach (Button btn in buttons)
+        {
+            if (btn.name == "OptionButton1")
+                npcInteraction.optionButton1 = btn.gameObject;
+            else if (btn.name == "OptionButton2")
+                npcInteraction.optionButton2 = btn.gameObject;
+        }
+    }
+
+    static void CreateGlyph()
+    {
+        GameObject glyphObj = new GameObject("Glyph");
+        glyphObj.transform.position = new Vector3(10, 0.67f, 6);
+
+        // Visual (cyan sphere)
+        GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        visualObj.name = "Visual";
+        visualObj.transform.SetParent(glyphObj.transform);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(0.67f, 0.67f, 0.67f);
+
+        // Remove primitive collider
+        Object.DestroyImmediate(visualObj.GetComponent<Collider>());
+
+        // Create glowing cyan material
+        Material glyphMat = new Material(Shader.Find("Standard"));
+        glyphMat.color = new Color(0, 0.9f, 1f, 1f);
+        glyphMat.SetFloat("_Glossiness", 0.8f);
+        visualObj.GetComponent<MeshRenderer>().material = glyphMat;
+
+        // Trigger collider
+        SphereCollider triggerCollider = glyphObj.AddComponent<SphereCollider>();
+        triggerCollider.isTrigger = true;
+        triggerCollider.radius = 0.5f;
+
+        // Glyph script
+        GlyphObject glyphScript = glyphObj.AddComponent<GlyphObject>();
+    }
+
+    static void CreateExitTrigger()
+    {
+        GameObject exitObj = new GameObject("ExitTrigger_BlockB");
+        exitObj.transform.position = new Vector3(10, 1, 20);
+
+        // Large trigger area for exit
+        BoxCollider exitCollider = exitObj.AddComponent<BoxCollider>();
+        exitCollider.isTrigger = true;
+        exitCollider.size = new Vector3(6, 3, 1);
+        exitCollider.center = Vector3.zero;
+
+        // Visual indicator (semi-transparent plane)
+        GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        visualObj.name = "Visual";
+        visualObj.transform.SetParent(exitObj.transform);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(6, 3, 0.5f);
+
+        // Remove primitive collider
+        Object.DestroyImmediate(visualObj.GetComponent<Collider>());
+
+        // Create semi-transparent material
+        Material exitMat = new Material(Shader.Find("Standard"));
+        exitMat.color = new Color(1, 1, 0, 0.3f);
+        visualObj.GetComponent<MeshRenderer>().material = exitMat;
+    }
+}
