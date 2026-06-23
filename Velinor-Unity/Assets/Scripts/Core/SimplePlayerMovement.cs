@@ -114,7 +114,23 @@ public class SimplePlayerMovement : MonoBehaviour
             mainCam.transform.localPosition = new Vector3(0, 1.2f, -cameraDistance);
         }
 
-        // Unlock cursor
+        // Auto-manage cursor lock based on dialogue state
+        bool isDialogueOpen = false;
+        Transform dialoguePanel = transform.root.Find("DialogueCanvas/DialoguePanel");
+        if (dialoguePanel != null)
+            isDialogueOpen = dialoguePanel.gameObject.activeSelf;
+
+        // Unlock cursor when dialogue is open (so user can click buttons)
+        if (isDialogueOpen)
+        {
+            Cursor.lockState = CursorLockMode.Confined;  // Visible but confined to window
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;  // Hidden during gameplay
+        }
+
+        // Allow escape to manually toggle if needed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = Cursor.lockState == CursorLockMode.Locked
