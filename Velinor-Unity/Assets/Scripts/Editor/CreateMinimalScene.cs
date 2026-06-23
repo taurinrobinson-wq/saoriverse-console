@@ -110,7 +110,7 @@ public class CreateMinimalScene
 
         // ===== CREATE NPC WITH DIALOGUE =====
         GameObject npc = new GameObject("NPC_MaleVillager");
-        npc.transform.position = new Vector3(-5, 1, 0);
+        npc.transform.position = new Vector3(-5, 1.97f, 0);  // Fixed height to spawn above ground
 
         // Visual: purple capsule
         GameObject npcVis = GameObject.CreatePrimitive(PrimitiveType.Capsule);
@@ -119,13 +119,18 @@ public class CreateMinimalScene
         npcVis.transform.localPosition = Vector3.zero;
         npcVis.transform.localScale = new Vector3(1f, 1f, 1f);
         Object.DestroyImmediate(npcVis.GetComponent<Collider>());
-        npcVis.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.2f, 0.8f, 1f);  // Purple
+        npcVis.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.2f, 0.8f, 1f);
 
         // Trigger collider for detection
         CapsuleCollider npcCollider = npc.AddComponent<CapsuleCollider>();
         npcCollider.radius = 0.5f;
         npcCollider.height = 2f;
         npcCollider.isTrigger = true;
+
+        // Rigidbody for physics collision
+        Rigidbody npcRb = npc.AddComponent<Rigidbody>();
+        npcRb.isKinematic = true;
+        npcRb.useGravity = false;
 
         // Create dialogue canvas (bottom-anchored, Screen Space Overlay)
         GameObject dialogueCanvasGO = new GameObject("DialogueCanvas");
@@ -143,7 +148,7 @@ public class CreateMinimalScene
         panelRect.anchoredPosition = new Vector2(0, 50);
         panelRect.sizeDelta = new Vector2(600, 150);
         Image panelImage = panelGO.AddComponent<Image>();
-        panelImage.color = new Color(0.1f, 0.1f, 0.15f, 0.9f);  // Dark gray
+        panelImage.color = new Color(0.1f, 0.1f, 0.15f, 0.9f);
 
         // Dialogue text
         GameObject textGO = new GameObject("DialogueText");
@@ -168,7 +173,7 @@ public class CreateMinimalScene
         btn1Rect.offsetMin = new Vector2(10, 5);
         btn1Rect.offsetMax = new Vector2(-5, 40);
         Image btn1Image = btn1GO.AddComponent<Image>();
-        btn1Image.color = new Color(0.2f, 0.6f, 0.2f, 1f);  // Green
+        btn1Image.color = new Color(0.2f, 0.6f, 0.2f, 1f);
         btn1GO.AddComponent<Button>();
         GameObject btn1TextGO = new GameObject("Text");
         btn1TextGO.transform.SetParent(btn1GO.transform);
@@ -190,7 +195,7 @@ public class CreateMinimalScene
         btn2Rect.offsetMin = new Vector2(5, 5);
         btn2Rect.offsetMax = new Vector2(-10, 40);
         Image btn2Image = btn2GO.AddComponent<Image>();
-        btn2Image.color = new Color(0.6f, 0.2f, 0.2f, 1f);  // Red
+        btn2Image.color = new Color(0.6f, 0.2f, 0.2f, 1f);
         btn2GO.AddComponent<Button>();
         GameObject btn2TextGO = new GameObject("Text");
         btn2TextGO.transform.SetParent(btn2GO.transform);
@@ -203,27 +208,6 @@ public class CreateMinimalScene
         btn2Text.alignment = TextAlignmentOptions.Center;
         btn2Text.color = Color.white;
 
-        // Interact prompt UI (near player)
-        GameObject promptGO = new GameObject("InteractPrompt");
-        promptGO.transform.SetParent(dialogueCanvasGO.transform);
-        RectTransform promptRect = promptGO.AddComponent<RectTransform>();
-        promptRect.anchorMin = new Vector2(0.5f, 1);
-        promptRect.anchorMax = new Vector2(0.5f, 1);
-        promptRect.anchoredPosition = new Vector2(0, -50);
-        promptRect.sizeDelta = new Vector2(300, 50);
-        Image promptImage = promptGO.AddComponent<Image>();
-        promptImage.color = new Color(0.2f, 0.2f, 0.2f, 0.8f);
-        GameObject promptTextGO = new GameObject("Text");
-        promptTextGO.transform.SetParent(promptGO.transform);
-        RectTransform promptTextRect = promptTextGO.AddComponent<RectTransform>();
-        promptTextRect.anchorMin = Vector2.zero;
-        promptTextRect.anchorMax = Vector2.one;
-        TextMeshProUGUI promptText = promptTextGO.AddComponent<TextMeshProUGUI>();
-        promptText.text = "Press E to talk";
-        promptText.fontSize = 24;
-        promptText.alignment = TextAlignmentOptions.Center;
-        promptText.color = Color.yellow;
-
         // Add NPC interaction script
         NPCInteraction npcInteraction = npc.AddComponent<NPCInteraction>();
         npcInteraction.npcName = "Ravi";
@@ -231,17 +215,14 @@ public class CreateMinimalScene
         npcInteraction.dialogueText = dialogueText;
         npcInteraction.optionButton1 = btn1GO;
         npcInteraction.optionButton2 = btn2GO;
-        npcInteraction.interactPrompt = promptGO;
 
-        // Hide UI initially
-        dialogueCanvasGO.SetActive(true);
+        // Hide dialogue UI initially (will show via InteractionUI when in range)
         panelGO.SetActive(false);
-        promptGO.SetActive(false);
 
         EditorSceneManager.SaveScene(scene, "Assets/Scenes/GamplayScene.unity");
         Debug.Log("✅ Scene created - Simple 20x20 platform");
         Debug.Log("🎮 Press Space to jump!");
         Debug.Log("✨ Cyan glyph at (5, 1.466, 0) - press E to interact!");
-        Debug.Log("🟣 Purple NPC at (-5, 1, 0) - press E to talk!");
+        Debug.Log("🟣 Purple NPC at (-5, 1.97, 0) - press E to talk!");
     }
 }

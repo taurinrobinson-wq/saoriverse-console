@@ -9,17 +9,23 @@ public class NPCInteraction : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public GameObject optionButton1;
     public GameObject optionButton2;
-    public GameObject interactPrompt;
     
-    private bool playerInRange = false;
+    private float interactionRange = 3f;
 
-    void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
-            if (interactPrompt != null)
-                interactPrompt.SetActive(true);
+            float distance = Vector3.Distance(transform.position, other.transform.position);
+            if (distance <= interactionRange)
+            {
+                InteractionUI.Instance?.ShowPrompt($"Press E to talk to {npcName}");
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    OpenDialogue();
+                }
+            }
         }
     }
 
@@ -27,18 +33,8 @@ public class NPCInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = false;
-            if (interactPrompt != null)
-                interactPrompt.SetActive(false);
+            InteractionUI.Instance?.HidePrompt();
             CloseDialogue();
-        }
-    }
-
-    void Update()
-    {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            OpenDialogue();
         }
     }
 
