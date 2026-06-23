@@ -34,6 +34,11 @@ public class CreateEnvironmentScene
         groundCollider.isTrigger = false;  // Explicitly set to NOT trigger
         groundCollider.size = new Vector3(50, 1, 50);  // Match the visual scale
         
+        // Add Rigidbody as Static to make it solid physics ground
+        Rigidbody groundRb = ground.AddComponent<Rigidbody>();
+        groundRb.isKinematic = true;  // Static physics object
+        groundRb.useGravity = false;
+        
         Renderer groundRenderer = ground.GetComponent<Renderer>();
         Material groundMat = new Material(Shader.Find("Standard"));
         groundMat.color = new Color(0.4f, 0.4f, 0.4f, 1f);
