@@ -46,17 +46,8 @@ public class NPCInteraction : MonoBehaviour
             button2Text = optionButton2.GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        // Set up listeners once instead of RemoveAllListeners every time dialogue opens
-        if (button1 != null)
-        {
-            button1.onClick.RemoveAllListeners();
-            button1.onClick.AddListener(AskName);
-        }
-        if (button2 != null)
-        {
-            button2.onClick.RemoveAllListeners();
-            button2.onClick.AddListener(CloseDialogue);
-        }
+        // Button listeners will be set up dynamically in OpenDialogue
+        // This keeps performance optimized while allowing state-based listener updates
     }
 
     void OnTriggerEnter(Collider other)
@@ -111,6 +102,13 @@ public class NPCInteraction : MonoBehaviour
             optionButton1.SetActive(true);
             if (button1Text != null)
                 button1Text.text = "What's your name?";
+            
+            // Reset Button 1 listener to initial state (AskName)
+            if (button1 != null)
+            {
+                button1.onClick.RemoveAllListeners();
+                button1.onClick.AddListener(AskName);
+            }
         }
 
         if (optionButton2 != null)
@@ -118,6 +116,13 @@ public class NPCInteraction : MonoBehaviour
             optionButton2.SetActive(true);
             if (button2Text != null)
                 button2Text.text = "I don't need anything.";
+            
+            // Set Button 2 listener to close dialogue
+            if (button2 != null)
+            {
+                button2.onClick.RemoveAllListeners();
+                button2.onClick.AddListener(CloseDialogue);
+            }
         }
 
         Debug.Log($"🟢 Button 1 ready: {(button1 != null ? "YES" : "NO")}");
@@ -135,6 +140,13 @@ public class NPCInteraction : MonoBehaviour
             optionButton1.SetActive(true);
             if (button1Text != null)
                 button1Text.text = "Okay.";
+            
+            // Update button 1 listener for the "Okay." state to close dialogue
+            if (button1 != null)
+            {
+                button1.onClick.RemoveAllListeners();
+                button1.onClick.AddListener(CloseDialogue);
+            }
         }
 
         if (optionButton2 != null)
