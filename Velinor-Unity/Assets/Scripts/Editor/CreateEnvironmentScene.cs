@@ -24,22 +24,24 @@ public class CreateEnvironmentScene
         camObj.AddComponent<AudioListener>();
 
         // ===== CREATE GROUND =====
-        GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        ground.name = "Ground";
+        GameObject ground = new GameObject("Ground");
         ground.transform.position = new Vector3(0, -0.5f, 0);
         ground.transform.localScale = new Vector3(50, 1, 50);
         
-        // Use existing collider from primitive and scale it to match the visual size
-        BoxCollider groundCollider = ground.GetComponent<BoxCollider>();
-        groundCollider.isTrigger = false;  // Explicitly set to NOT trigger
-        groundCollider.size = new Vector3(50, 1, 50);  // Match the visual scale
+        // Add collider
+        BoxCollider groundCollider = ground.AddComponent<BoxCollider>();
+        groundCollider.isTrigger = false;
         
-        // Add Rigidbody as Static to make it solid physics ground
+        // Add static Rigidbody
         Rigidbody groundRb = ground.AddComponent<Rigidbody>();
-        groundRb.isKinematic = true;  // Static physics object
+        groundRb.isKinematic = true;
         groundRb.useGravity = false;
         
-        Renderer groundRenderer = ground.GetComponent<Renderer>();
+        // Add basic visual (cube renderer)
+        MeshFilter groundMesh = ground.AddComponent<MeshFilter>();
+        groundMesh.mesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
+        
+        MeshRenderer groundRenderer = ground.AddComponent<MeshRenderer>();
         Material groundMat = new Material(Shader.Find("Standard"));
         groundMat.color = new Color(0.4f, 0.4f, 0.4f, 1f);
         groundRenderer.material = groundMat;

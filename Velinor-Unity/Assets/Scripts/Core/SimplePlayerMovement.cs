@@ -68,6 +68,12 @@ public class SimplePlayerMovement : MonoBehaviour
         if (cc.isGrounded)
         {
             velocityY = 0f;
+            if (vertical != 0 || horizontal != 0)
+                Debug.Log($"✅ Grounded | Pos: {transform.position.y:F2} | VelY: {velocityY}");
+        }
+        else
+        {
+            Debug.LogWarning($"❌ FALLING | Pos: {transform.position.y:F2} | VelY: {velocityY:F2}");
         }
 
         // Jump
