@@ -10,7 +10,7 @@ public class CreateMarketplaceBlockA
     public static void CreateScene()
     {
         // Clear existing scene
-        foreach (GameObject go in Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None))
+        foreach (GameObject go in Object.FindObjectsByType<GameObject>())
         {
             if (go.scene.name != null && go.name != "EventSystem")
                 Object.DestroyImmediate(go);
@@ -372,7 +372,7 @@ public class CreateMarketplaceBlockA
         npcInteraction.dialogueText = dialogueText;
 
         // Find buttons
-        Button[] buttons = Object.FindObjectsByType<Button>(FindObjectsSortMode.None);
+        Button[] buttons = Object.FindObjectsByType<Button>();
         foreach (Button btn in buttons)
         {
             if (btn.name == "OptionButton1")
