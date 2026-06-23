@@ -35,7 +35,7 @@ public class CreateMinimalScene
         groundVis.transform.localPosition = Vector3.zero;
         groundVis.transform.localScale = new Vector3(20, 2, 20);
         Object.DestroyImmediate(groundVis.GetComponent<Collider>());
-        groundVis.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        groundVis.GetComponent<MeshRenderer>().sharedMaterial.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 
         // ===== CREATE PLAYER =====
         GameObject player = new GameObject("Player");
@@ -61,7 +61,7 @@ public class CreateMinimalScene
         playerVis.transform.localPosition = new Vector3(0, 1, 0);  // Align with CC
         playerVis.transform.localScale = new Vector3(1f, 1f, 1f);  // Natural size
         Object.DestroyImmediate(playerVis.GetComponent<Collider>());
-        playerVis.GetComponent<MeshRenderer>().material.color = new Color(0.2f, 0.5f, 0.9f, 1f);
+        playerVis.GetComponent<MeshRenderer>().sharedMaterial.color = new Color(0.2f, 0.5f, 0.9f, 1f);
         
         // Movement script
         player.AddComponent<SimplePlayerMovement>();
@@ -93,7 +93,7 @@ public class CreateMinimalScene
         glyphVis.transform.localPosition = Vector3.zero;
         glyphVis.transform.localScale = new Vector3(0.67f, 0.67f, 0.67f);
         Object.DestroyImmediate(glyphVis.GetComponent<Collider>());
-        glyphVis.GetComponent<MeshRenderer>().material.color = new Color(0, 1, 1, 1);  // Cyan
+        glyphVis.GetComponent<MeshRenderer>().sharedMaterial.color = new Color(0, 1, 1, 1);  // Cyan
         
         // Trigger collider for interaction detection
         SphereCollider glyphCollider = glyph.AddComponent<SphereCollider>();
@@ -126,7 +126,7 @@ public class CreateMinimalScene
         npcVis.transform.localPosition = Vector3.zero;
         npcVis.transform.localScale = new Vector3(1f, 1f, 1f);
         Object.DestroyImmediate(npcVis.GetComponent<Collider>());
-        npcVis.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.2f, 0.8f, 1f);
+        npcVis.GetComponent<MeshRenderer>().sharedMaterial.color = new Color(0.8f, 0.2f, 0.8f, 1f);
 
         // SOLID collider for physics blocking (prevents player walking through)
         CapsuleCollider npcSolidCollider = npc.AddComponent<CapsuleCollider>();
