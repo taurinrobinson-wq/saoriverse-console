@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class GlyphObject : Interactable
 {
-    private bool showPrompt = false;
-
     void Start()
     {
         // Add trigger collider
@@ -16,14 +14,13 @@ public class GlyphObject : Interactable
         collider.radius = interactionRange;
     }
 
-    void OnTriggerStay(Collider other)
+    override protected void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             float distance = Vector3.Distance(transform.position, other.transform.position);
             if (distance <= interactionRange)
             {
-                showPrompt = true;
                 // Show prompt UI if it exists
                 InteractionUI.Instance?.ShowPrompt("Press E to examine glyph");
 
@@ -35,7 +32,7 @@ public class GlyphObject : Interactable
         }
     }
 
-    void OnTriggerExit(Collider other)
+    override protected void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

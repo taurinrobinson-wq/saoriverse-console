@@ -16,7 +16,7 @@ public class NPCObject : Interactable
         collider.size = new Vector3(1, 2, 1);
     }
 
-    void OnTriggerStay(Collider other)
+    override protected void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -34,7 +34,7 @@ public class NPCObject : Interactable
         }
     }
 
-    void OnTriggerExit(Collider other)
+    override protected void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
