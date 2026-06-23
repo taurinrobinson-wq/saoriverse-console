@@ -116,9 +116,9 @@ public class SimplePlayerMovement : MonoBehaviour
 
         // Auto-manage cursor lock based on dialogue state
         bool isDialogueOpen = false;
-        Transform dialoguePanel = transform.root.Find("DialogueCanvas/DialoguePanel");
+        GameObject dialoguePanel = GameObject.Find("DialoguePanel");  // Search entire scene
         if (dialoguePanel != null)
-            isDialogueOpen = dialoguePanel.gameObject.activeSelf;
+            isDialogueOpen = dialoguePanel.activeSelf;
 
         // Debug: Log cursor state and dialogue panel status every frame
         if (Input.GetKeyDown(KeyCode.D))  // Press D to debug
@@ -133,12 +133,10 @@ public class SimplePlayerMovement : MonoBehaviour
         if (isDialogueOpen)
         {
             Cursor.lockState = CursorLockMode.Confined;  // Visible but confined to window
-            Debug.Log($"🟢 Cursor CONFINED (dialogue open)");
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;  // Hidden during gameplay
-            Debug.Log($"🔴 Cursor LOCKED (dialogue closed)");
         }
 
         // Allow escape to manually toggle if needed
