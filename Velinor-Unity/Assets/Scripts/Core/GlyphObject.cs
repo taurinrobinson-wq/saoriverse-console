@@ -44,13 +44,14 @@ public class GlyphObject : Interactable
     {
         if (!hasInteracted)
         {
-            Debug.Log("🔷 First interaction with glyph! Prompt will not appear again.");
+            Debug.Log("🔷 Glyph examined! It disappears.");
             hasInteracted = true;
             InteractionUI.Instance?.HidePrompt();
+            gameObject.SetActive(false);  // Glyph vanishes after first interaction
         }
         else
         {
-            Debug.Log("🔷 Glyph already examined. (Interactions happen here)");
+            Debug.Log("🔷 This glyph was already examined.");
         }
     }
 }
