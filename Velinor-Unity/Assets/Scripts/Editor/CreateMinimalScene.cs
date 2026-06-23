@@ -59,6 +59,15 @@ public class CreateMinimalScene
         cc.radius = 0.5f;
         cc.center = new Vector3(0, 1, 0);  // Center at feet
         
+        // Add visual mesh (capsule)
+        MeshFilter playerMesh = player.AddComponent<MeshFilter>();
+        playerMesh.mesh = Resources.GetBuiltinResource<Mesh>("Capsule.fbx");
+        
+        MeshRenderer playerRenderer = player.AddComponent<MeshRenderer>();
+        Material playerMat = new Material(Shader.Find("Standard"));
+        playerMat.color = new Color(0.2f, 0.5f, 0.9f, 1f);  // Blue
+        playerRenderer.material = playerMat;
+        
         // Movement script
         SimplePlayerMovement movement = player.AddComponent<SimplePlayerMovement>();
         

@@ -76,6 +76,11 @@ public class SimplePlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
         {
             velocityY = 5f;
+            Debug.Log($"JUMP! IsGrounded: {cc.isGrounded}");
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log($"Space pressed but NOT grounded: {cc.isGrounded}");
         }
 
         // Mouse look
