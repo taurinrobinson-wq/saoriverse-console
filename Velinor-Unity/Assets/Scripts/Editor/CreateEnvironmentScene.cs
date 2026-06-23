@@ -24,13 +24,14 @@ public class CreateEnvironmentScene
         camObj.AddComponent<AudioListener>();
 
         // ===== CREATE GROUND =====
-        GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
         ground.name = "Ground";
         ground.transform.position = Vector3.zero;
-        ground.transform.localScale = new Vector3(50, 1, 50);
+        ground.transform.localScale = new Vector3(50, 0.2f, 50);
+        
         Object.DestroyImmediate(ground.GetComponent<Collider>());
         BoxCollider groundCollider = ground.AddComponent<BoxCollider>();
-        groundCollider.size = new Vector3(50, 0.1f, 50);
+        groundCollider.size = new Vector3(1, 1, 1);  // Normalized for scaled cube
         
         Renderer groundRenderer = ground.GetComponent<Renderer>();
         Material groundMat = new Material(Shader.Find("Standard"));
