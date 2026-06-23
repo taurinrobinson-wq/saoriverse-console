@@ -11,40 +11,80 @@ public class NPCInteraction : MonoBehaviour
     public GameObject optionButton2;
     
     private float interactionRange = 3f;
-    private float dialogueInputCooldown = 0.15f;  // Debounce time after closing dialogue
-    private float lastDialogueCloseTime = -1f;   // Track when dialogue was last closed
+    private float dialogueInputCooldown = 0.15f;
+    private float lastDialogueCloseTime = -1f;
+    
+    // === OPTIMIZATION: Cache references to avoid repeated GetComponent/Find calls ===
+    private Transform dialoguePanel;
+    private Button button1;
+    private Button button2;
+    private TextMeshProUGUI button1Text;
+    private TextMeshProUGUI button2Text;
+    private bool isDialogueOpen = false;
+    private bool playerInRange = false;
+
+    void Awake()
+    {
+        CacheDialogueReferences();
+    }
+
+    void CacheDialogueReferences()
+    {
+        // Cache panel reference once (not every frame with Transform.Find)
+        if (dialogueCanvas != null)
+            dialoguePanel = dialogueCanvas.transform.Find("DialoguePanel");
+
+        // Cache button components (not every time we open dialogue)
+        if (optionButton1 != null)
+        {
+            button1 = optionButton1.GetComponent<Button>();
+            button1Text = optionButton1.GetComponentInChildren<TextMeshProUGUI>();
+        }
+        if (optionButton2 != null)
+        {
+            button2 = optionButton2.GetComponent<Button>();
+            button2Text = optionButton2.GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        // Set up listeners once instead of RemoveAllListeners every time dialogue opens
+        if (button1 != null)
+        {
+            button1.onClick.RemoveAllListeners();
+            button1.onClick.AddListener(AskName);
+        }
+        if (button2 != null)
+        {
+            button2.onClick.RemoveAllListeners();
+            button2.onClick.AddListener(CloseDialogue);
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"🟣 OnTriggerEnter: {other.gameObject.name}, tag: {other.tag}");
+        if (other.CompareTag("Player"))
+            playerInRange = true;
     }
 
     protected virtual void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            float distance = Vector3.Distance(transform.position, other.transform.position);
-            if (distance <= interactionRange)
-            {
-                InteractionUI.Instance?.ShowPrompt($"Press E to talk to {npcName}");
+        // Only process if player and not already in dialogue
+        if (!other.CompareTag("Player") || isDialogueOpen)
+            return;
 
-                // Check if we're past the debounce period after closing dialogue
-                bool canOpenDialogue = (Time.time - lastDialogueCloseTime) >= dialogueInputCooldown;
+        // Show interaction prompt
+        InteractionUI.Instance?.ShowPrompt($"Press E to talk to {npcName}");
 
-                if (Input.GetKeyDown(KeyCode.E) && canOpenDialogue)
-                {
-                    Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcName}");
-                    OpenDialogue();
-                }
-            }
-        }
+        // Check debounce and E-key press
+        bool canOpenDialogue = (Time.time - lastDialogueCloseTime) >= dialogueInputCooldown;
+        if (Input.GetKeyDown(KeyCode.E) && canOpenDialogue)
+            OpenDialogue();
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"🟣 Player left NPC interaction range");
+            playerInRange = false;
             InteractionUI.Instance?.HidePrompt();
             CloseDialogue();
         }
@@ -52,102 +92,56 @@ public class NPCInteraction : MonoBehaviour
 
     void OpenDialogue()
     {
-        Debug.Log($"🟣 OpenDialogue called. Canvas: {dialogueCanvas}");
-        if (dialogueCanvas != null)
-        {
-            dialogueCanvas.gameObject.SetActive(true);
-            // Find and show the dialogue panel
-            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
-            Debug.Log($"🟣 Panel found: {panelTransform}");
-            if (panelTransform != null)
-            {
-                panelTransform.gameObject.SetActive(true);
-                Debug.Log($"🟣 Panel ACTIVATED - should be visible now");
-            }
-        }
+        isDialogueOpen = true;
+
+        // Use cached panel reference instead of searching with Transform.Find
+        if (dialoguePanel != null)
+            dialoguePanel.gameObject.SetActive(true);
 
         if (dialogueText != null)
             dialogueText.text = "Hello there, what can I do for you?";
 
-        if (optionButton1 != null)
-            optionButton1.SetActive(true);
-        if (optionButton2 != null)
-            optionButton2.SetActive(true);
-
+        // Use cached button references - no GetComponent calls
         if (optionButton1 != null)
         {
-            TextMeshProUGUI buttonText = optionButton1.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null)
-                buttonText.text = "What's your name?";
-
-            Button button = optionButton1.GetComponent<Button>();
-            if (button != null)
-            {
-                Debug.Log($"🟢 Button 1 setup - interactable: {button.interactable}");
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(AskName);
-                button.onClick.AddListener(() => Debug.Log("🟢 BUTTON 1 CLICKED"));
-            }
+            optionButton1.SetActive(true);
+            if (button1Text != null)
+                button1Text.text = "What's your name?";
         }
 
         if (optionButton2 != null)
         {
-            TextMeshProUGUI buttonText = optionButton2.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null)
-                buttonText.text = "I don't need anything.";
-
-            Button button = optionButton2.GetComponent<Button>();
-            if (button != null)
-            {
-                Debug.Log($"🔴 Button 2 setup - interactable: {button.interactable}");
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(CloseDialogue);
-                button.onClick.AddListener(() => Debug.Log("🔴 BUTTON 2 CLICKED"));
-            }
+            optionButton2.SetActive(true);
+            if (button2Text != null)
+                button2Text.text = "I don't need anything.";
         }
     }
 
     void AskName()
     {
-        Debug.Log($"🟢 AskName called!");
         if (dialogueText != null)
             dialogueText.text = "It's Ravi. I gotta go.";
 
         if (optionButton1 != null)
+        {
             optionButton1.SetActive(true);
+            if (button1Text != null)
+                button1Text.text = "Okay.";
+        }
+
         if (optionButton2 != null)
             optionButton2.SetActive(false);
-
-        if (optionButton1 != null)
-        {
-            TextMeshProUGUI buttonText = optionButton1.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null)
-                buttonText.text = "Okay.";
-
-            Button button = optionButton1.GetComponent<Button>();
-            if (button != null)
-            {
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(CloseDialogue);
-                button.onClick.AddListener(() => Debug.Log("🟢 BUTTON 1 CLICKED (Okay)"));
-            }
-        }
     }
 
     void CloseDialogue()
     {
-        Debug.Log($"🟣 CloseDialogue called!");
-        lastDialogueCloseTime = Time.time;  // Record when dialogue was closed
-        if (dialogueCanvas != null)
-        {
-            // Hide the dialogue panel
-            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
-            if (panelTransform != null)
-            {
-                panelTransform.gameObject.SetActive(false);
-                Debug.Log($"🟣 Panel DEACTIVATED");
-            }
-        }
+        isDialogueOpen = false;
+        lastDialogueCloseTime = Time.time;
+
+        // Use cached panel reference instead of searching with Transform.Find
+        if (dialoguePanel != null)
+            dialoguePanel.gameObject.SetActive(false);
+
         if (optionButton1 != null)
             optionButton1.SetActive(false);
         if (optionButton2 != null)
