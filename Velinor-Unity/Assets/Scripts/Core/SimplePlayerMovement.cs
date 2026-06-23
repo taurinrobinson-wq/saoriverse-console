@@ -10,6 +10,7 @@ public class SimplePlayerMovement : MonoBehaviour
     private float velocityY = 0f;
     private float mouseSensitivity = 4f;
     private float camPitch = 0f;
+    private bool wasGroundedLastFrame = false;  // Track grounded state
     
     // Camera zoom
     private float cameraDistance = 2.5f;
@@ -58,30 +59,32 @@ public class SimplePlayerMovement : MonoBehaviour
         // Calculate movement direction relative to player's forward/right
         Vector3 moveDirection = (transform.forward * vertical + transform.right * horizontal).normalized;
 
-        // Apply gravity - only when falling
+        // ===== JUMP FIRST =====
+        bool didJump = false;
+        if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
+        {
+            velocityY = 5f;
+            didJump = true;
+            Debug.Log($"🎯 JUMP!");
+        }
+
+        // Apply gravity and grounding logic
         if (!cc.isGrounded)
         {
             velocityY -= gravity * Time.deltaTime;
         }
         else
         {
-            velocityY = -0.1f; // Small negative to keep grounded
+            // Only reset velocity to -0.1 if we JUST landed (weren't grounded last frame)
+            if (!wasGroundedLastFrame)
+            {
+                velocityY = -0.1f;
+            }
         }
 
         // Move player
         Vector3 velocity = moveDirection * currentSpeed + Vector3.up * velocityY;
         cc.Move(velocity * Time.deltaTime);
-
-        // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
-        {
-            velocityY = 5f;
-            Debug.Log($"JUMP! IsGrounded: {cc.isGrounded}");
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log($"Space pressed but NOT grounded: {cc.isGrounded}");
-        }
 
         // Mouse look
         float mouseX = Input.GetAxis("Mouse X");
@@ -111,5 +114,8 @@ public class SimplePlayerMovement : MonoBehaviour
                 ? CursorLockMode.Confined
                 : CursorLockMode.Locked;
         }
+
+        // Update grounded state for next frame
+        wasGroundedLastFrame = cc.isGrounded;
     }
 }

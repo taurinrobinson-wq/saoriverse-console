@@ -15,66 +15,56 @@ public class CreateMinimalScene
         GameObject defaultCam = GameObject.Find("Main Camera");
         if (defaultCam != null) Object.DestroyImmediate(defaultCam);
 
+        // ===== CREATE GROUND =====
+        GameObject ground = new GameObject("Ground");
+        ground.transform.position = new Vector3(0, 0, 0);
+        
+        BoxCollider groundCol = ground.AddComponent<BoxCollider>();
+        groundCol.size = new Vector3(20, 2, 20);  // Simple: 20x20 platform, 2 tall
+        
+        Rigidbody groundRb = ground.AddComponent<Rigidbody>();
+        groundRb.isKinematic = true;
+        groundRb.useGravity = false;
+        
+        // Visual: gray cube, no scaling tricks
+        GameObject groundVis = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        groundVis.name = "Visual";
+        groundVis.transform.SetParent(ground.transform);
+        groundVis.transform.localPosition = Vector3.zero;
+        groundVis.transform.localScale = new Vector3(20, 2, 20);
+        Object.DestroyImmediate(groundVis.GetComponent<Collider>());
+        groundVis.GetComponent<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+        // ===== CREATE PLAYER =====
+        GameObject player = new GameObject("Player");
+        player.transform.position = new Vector3(0, 1, 0);  // Bottom at y=0 (ground top), top at y=2
+        player.tag = "Player";
+        
+        CharacterController cc = player.AddComponent<CharacterController>();
+        cc.height = 2f;
+        cc.radius = 0.5f;
+        cc.center = new Vector3(0, 1, 0);  // Offset so CC extends from y=0 to y=2
+        
+        // Visual: blue cylinder (2 units tall, 1 unit diameter)
+        GameObject playerVis = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        playerVis.name = "Visual";
+        playerVis.transform.SetParent(player.transform);
+        playerVis.transform.localPosition = new Vector3(0, 1, 0);  // Align with CC
+        playerVis.transform.localScale = new Vector3(1f, 1f, 1f);  // Natural size
+        Object.DestroyImmediate(playerVis.GetComponent<Collider>());
+        playerVis.GetComponent<MeshRenderer>().material.color = new Color(0.2f, 0.5f, 0.9f, 1f);
+        
+        // Movement script
+        player.AddComponent<SimplePlayerMovement>();
+
         // ===== CREATE CAMERA =====
         GameObject camObj = new GameObject("Main Camera");
         Camera cam = camObj.AddComponent<Camera>();
         cam.tag = "MainCamera";
         cam.backgroundColor = new Color(0.3f, 0.5f, 0.7f, 1f);
         camObj.AddComponent<AudioListener>();
-
-        // ===== CREATE GROUND (SIMPLE BOX) =====
-        GameObject ground = new GameObject("Ground");
-        ground.transform.position = Vector3.zero;
-        
-        // Add collider - NO SCALING TRICKS
-        BoxCollider groundCol = ground.AddComponent<BoxCollider>();
-        groundCol.size = new Vector3(100, 2, 100);  // Large flat platform
-        groundCol.isTrigger = false;
-        
-        // Add Rigidbody - STATIC
-        Rigidbody groundRb = ground.AddComponent<Rigidbody>();
-        groundRb.isKinematic = true;
-        groundRb.useGravity = false;
-        
-        // Add visual mesh
-        MeshFilter mf = ground.AddComponent<MeshFilter>();
-        mf.mesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
-        
-        MeshRenderer mr = ground.AddComponent<MeshRenderer>();
-        Material mat = new Material(Shader.Find("Standard"));
-        mat.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-        mr.material = mat;
-        
-        // Scale for visual appearance only (collider uses absolute size)
-        ground.transform.localScale = new Vector3(50, 1, 50);
-
-        // ===== CREATE PLAYER =====
-        GameObject player = new GameObject("Player");
-        player.transform.position = new Vector3(0, 3, -10);  // WELL ABOVE GROUND
-        player.tag = "Player";
-        
-        // CharacterController component
-        CharacterController cc = player.AddComponent<CharacterController>();
-        cc.height = 2f;
-        cc.radius = 0.5f;
-        cc.center = new Vector3(0, 1, 0);  // Center at feet
-        
-        // Add visual mesh (capsule)
-        MeshFilter playerMesh = player.AddComponent<MeshFilter>();
-        playerMesh.mesh = Resources.GetBuiltinResource<Mesh>("Capsule.fbx");
-        
-        MeshRenderer playerRenderer = player.AddComponent<MeshRenderer>();
-        Material playerMat = new Material(Shader.Find("Standard"));
-        playerMat.color = new Color(0.2f, 0.5f, 0.9f, 1f);  // Blue
-        playerRenderer.material = playerMat;
-        
-        // Movement script
-        SimplePlayerMovement movement = player.AddComponent<SimplePlayerMovement>();
-        
-        // Add camera as child
         camObj.transform.SetParent(player.transform);
         camObj.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
-        camObj.transform.localRotation = Quaternion.identity;
 
         // ===== CREATE LIGHT =====
         GameObject lightObj = new GameObject("DirectionalLight");
@@ -83,12 +73,8 @@ public class CreateMinimalScene
         light.intensity = 1.2f;
         lightObj.transform.rotation = Quaternion.Euler(50, -30, 0);
 
-        // Save scene
         EditorSceneManager.SaveScene(scene, "Assets/Scenes/GamplayScene.unity");
-
-        Debug.Log("✅ MINIMAL SCENE CREATED");
-        Debug.Log("📍 Player spawns at (0, 3, -10) - WELL ABOVE GROUND");
-        Debug.Log("🟫 Ground is at (0, 0, 0) with collider size 100x2x100");
-        Debug.Log("Use WASD to move, Space to jump");
+        Debug.Log("✅ Scene created - Simple 20x20 platform");
+        Debug.Log("🎮 Press Space to jump!");
     }
 }
