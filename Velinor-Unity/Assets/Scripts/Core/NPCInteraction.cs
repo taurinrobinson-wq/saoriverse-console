@@ -12,6 +12,11 @@ public class NPCInteraction : MonoBehaviour
     
     private float interactionRange = 3f;
 
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"🟣 OnTriggerEnter: {other.gameObject.name}, tag: {other.tag}");
+    }
+
     protected virtual void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -23,6 +28,7 @@ public class NPCInteraction : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    Debug.Log($"🟣 Talking to {npcName}");
                     OpenDialogue();
                 }
             }
@@ -40,8 +46,16 @@ public class NPCInteraction : MonoBehaviour
 
     void OpenDialogue()
     {
+        Debug.Log($"🟣 OpenDialogue called. Canvas: {dialogueCanvas}");
         if (dialogueCanvas != null)
+        {
             dialogueCanvas.gameObject.SetActive(true);
+            // Find and show the dialogue panel
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            Debug.Log($"🟣 Panel found: {panelTransform}");
+            if (panelTransform != null)
+                panelTransform.gameObject.SetActive(true);
+        }
 
         if (dialogueText != null)
             dialogueText.text = "Hello there, what can I do for you?";
@@ -108,7 +122,12 @@ public class NPCInteraction : MonoBehaviour
     void CloseDialogue()
     {
         if (dialogueCanvas != null)
-            dialogueCanvas.gameObject.SetActive(false);
+        {
+            // Hide the dialogue panel
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            if (panelTransform != null)
+                panelTransform.gameObject.SetActive(false);
+        }
         if (optionButton1 != null)
             optionButton1.SetActive(false);
         if (optionButton2 != null)
