@@ -17,6 +17,14 @@ public class CreateMinimalScene
         GameObject defaultCam = GameObject.Find("Main Camera");
         if (defaultCam != null) Object.DestroyImmediate(defaultCam);
 
+        // Ensure EventSystem exists (for UI click detection)
+        if (GameObject.Find("EventSystem") == null)
+        {
+            GameObject eventSystemGO = new GameObject("EventSystem");
+            eventSystemGO.AddComponent<EventSystem>();
+            eventSystemGO.AddComponent<StandaloneInputModule>();
+        }
+
         // ===== CREATE GROUND =====
         GameObject ground = new GameObject("Ground");
         ground.transform.position = new Vector3(0, 0, 0);
@@ -197,6 +205,11 @@ public class CreateMinimalScene
         btn1Image.color = new Color(0.2f, 0.6f, 0.2f, 1f);
         Button btn1Button = btn1GO.AddComponent<Button>();
         btn1Button.targetGraphic = btn1Image;
+        btn1Button.interactable = true;
+        // Set navigation to None so button responds to clicks properly
+        Navigation nav1 = new Navigation();
+        nav1.mode = Navigation.Mode.None;
+        btn1Button.navigation = nav1;
         GameObject btn1TextGO = new GameObject("Text");
         btn1TextGO.transform.SetParent(btn1GO.transform);
         RectTransform btn1TextRect = btn1TextGO.AddComponent<RectTransform>();
@@ -209,7 +222,6 @@ public class CreateMinimalScene
         btn1Text.fontSize = 28;
         btn1Text.alignment = TextAlignmentOptions.Center;
         btn1Text.color = Color.white;
-        btn1Button.interactable = true;
 
         // Option button 2 (right side, bottom of panel)
         GameObject btn2GO = new GameObject("OptionButton2");
@@ -223,6 +235,11 @@ public class CreateMinimalScene
         btn2Image.color = new Color(0.6f, 0.2f, 0.2f, 1f);
         Button btn2Button = btn2GO.AddComponent<Button>();
         btn2Button.targetGraphic = btn2Image;
+        btn2Button.interactable = true;
+        // Set navigation to None so button responds to clicks properly
+        Navigation nav2 = new Navigation();
+        nav2.mode = Navigation.Mode.None;
+        btn2Button.navigation = nav2;
         GameObject btn2TextGO = new GameObject("Text");
         btn2TextGO.transform.SetParent(btn2GO.transform);
         RectTransform btn2TextRect = btn2TextGO.AddComponent<RectTransform>();
@@ -235,7 +252,6 @@ public class CreateMinimalScene
         btn2Text.fontSize = 28;
         btn2Text.alignment = TextAlignmentOptions.Center;
         btn2Text.color = Color.white;
-        btn2Button.interactable = true;
 
         // Add NPC interaction script
         NPCInteraction npcInteraction = npc.AddComponent<NPCInteraction>();
