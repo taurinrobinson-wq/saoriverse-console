@@ -26,8 +26,8 @@ public class CreateEnvironmentScene
         // ===== CREATE GROUND =====
         GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
         ground.name = "Ground";
-        ground.transform.position = Vector3.zero;
-        ground.transform.localScale = new Vector3(50, 0.2f, 50);
+        ground.transform.position = new Vector3(0, -0.5f, 0);
+        ground.transform.localScale = new Vector3(50, 1, 50);
         
         Object.DestroyImmediate(ground.GetComponent<Collider>());
         BoxCollider groundCollider = ground.AddComponent<BoxCollider>();
