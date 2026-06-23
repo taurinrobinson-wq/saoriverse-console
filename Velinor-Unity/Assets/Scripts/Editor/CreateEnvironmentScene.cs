@@ -29,9 +29,10 @@ public class CreateEnvironmentScene
         ground.transform.position = new Vector3(0, -0.5f, 0);
         ground.transform.localScale = new Vector3(50, 1, 50);
         
-        // Use existing collider from primitive, just configure it
+        // Use existing collider from primitive and scale it to match the visual size
         BoxCollider groundCollider = ground.GetComponent<BoxCollider>();
         groundCollider.isTrigger = false;  // Explicitly set to NOT trigger
+        groundCollider.size = new Vector3(50, 1, 50);  // Match the visual scale
         
         Renderer groundRenderer = ground.GetComponent<Renderer>();
         Material groundMat = new Material(Shader.Find("Standard"));
