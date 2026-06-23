@@ -120,14 +120,25 @@ public class SimplePlayerMovement : MonoBehaviour
         if (dialoguePanel != null)
             isDialogueOpen = dialoguePanel.gameObject.activeSelf;
 
+        // Debug: Log cursor state and dialogue panel status every frame
+        if (Input.GetKeyDown(KeyCode.D))  // Press D to debug
+        {
+            Debug.Log($"🐛 DEBUG - Dialogue Panel found: {dialoguePanel != null}");
+            Debug.Log($"🐛 DEBUG - Dialogue Panel active: {isDialogueOpen}");
+            Debug.Log($"🐛 DEBUG - Cursor locked: {Cursor.lockState}");
+            Debug.Log($"🐛 DEBUG - Cursor position: {Input.mousePosition}");
+        }
+
         // Unlock cursor when dialogue is open (so user can click buttons)
         if (isDialogueOpen)
         {
             Cursor.lockState = CursorLockMode.Confined;  // Visible but confined to window
+            Debug.Log($"🟢 Cursor CONFINED (dialogue open)");
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;  // Hidden during gameplay
+            Debug.Log($"🔴 Cursor LOCKED (dialogue closed)");
         }
 
         // Allow escape to manually toggle if needed

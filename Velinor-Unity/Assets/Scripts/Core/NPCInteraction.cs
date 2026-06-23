@@ -28,7 +28,7 @@ public class NPCInteraction : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log($"🟣 Talking to {npcName}");
+                    Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcName}");
                     OpenDialogue();
                 }
             }
@@ -39,6 +39,7 @@ public class NPCInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log($"🟣 Player left NPC interaction range");
             InteractionUI.Instance?.HidePrompt();
             CloseDialogue();
         }
@@ -54,7 +55,10 @@ public class NPCInteraction : MonoBehaviour
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             Debug.Log($"🟣 Panel found: {panelTransform}");
             if (panelTransform != null)
+            {
                 panelTransform.gameObject.SetActive(true);
+                Debug.Log($"🟣 Panel ACTIVATED - should be visible now");
+            }
         }
 
         if (dialogueText != null)
@@ -74,8 +78,10 @@ public class NPCInteraction : MonoBehaviour
             Button button = optionButton1.GetComponent<Button>();
             if (button != null)
             {
+                Debug.Log($"🟢 Button 1 setup - interactable: {button.interactable}");
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(AskName);
+                button.onClick.AddListener(() => Debug.Log("🟢 BUTTON 1 CLICKED"));
             }
         }
 
@@ -88,14 +94,17 @@ public class NPCInteraction : MonoBehaviour
             Button button = optionButton2.GetComponent<Button>();
             if (button != null)
             {
+                Debug.Log($"🔴 Button 2 setup - interactable: {button.interactable}");
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(CloseDialogue);
+                button.onClick.AddListener(() => Debug.Log("🔴 BUTTON 2 CLICKED"));
             }
         }
     }
 
     void AskName()
     {
+        Debug.Log($"🟢 AskName called!");
         if (dialogueText != null)
             dialogueText.text = "It's Ravi. I gotta go.";
 
@@ -115,18 +124,23 @@ public class NPCInteraction : MonoBehaviour
             {
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(CloseDialogue);
+                button.onClick.AddListener(() => Debug.Log("🟢 BUTTON 1 CLICKED (Okay)"));
             }
         }
     }
 
     void CloseDialogue()
     {
+        Debug.Log($"🟣 CloseDialogue called!");
         if (dialogueCanvas != null)
         {
             // Hide the dialogue panel
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null)
+            {
                 panelTransform.gameObject.SetActive(false);
+                Debug.Log($"🟣 Panel DEACTIVATED");
+            }
         }
         if (optionButton1 != null)
             optionButton1.SetActive(false);
