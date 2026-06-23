@@ -29,9 +29,9 @@ public class CreateEnvironmentScene
         ground.transform.position = new Vector3(0, -0.5f, 0);
         ground.transform.localScale = new Vector3(50, 1, 50);
         
-        Object.DestroyImmediate(ground.GetComponent<Collider>());
-        BoxCollider groundCollider = ground.AddComponent<BoxCollider>();
-        groundCollider.size = new Vector3(1, 1, 1);  // Normalized for scaled cube
+        // Use existing collider from primitive, just configure it
+        BoxCollider groundCollider = ground.GetComponent<BoxCollider>();
+        groundCollider.isTrigger = false;  // Explicitly set to NOT trigger
         
         Renderer groundRenderer = ground.GetComponent<Renderer>();
         Material groundMat = new Material(Shader.Find("Standard"));
