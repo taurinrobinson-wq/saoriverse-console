@@ -256,11 +256,8 @@ public class CreateMinimalScene
 
         // Add NPC interaction script
         NPCInteraction npcInteraction = npc.AddComponent<NPCInteraction>();
-        npcInteraction.npcName = "Ravi";
-        npcInteraction.dialogueCanvas = dialogueCanvas;
-        npcInteraction.dialogueText = dialogueText;
-        npcInteraction.optionButton1 = btn1GO;
-        npcInteraction.optionButton2 = btn2GO;
+        // NPCInteraction now uses serialized fields npcId and startingPassageId
+        // DialogueManager handles UI - no need to set canvas/buttons here
 
         // Hide dialogue UI initially (will show via InteractionUI when in range)
         panelGO.SetActive(false);

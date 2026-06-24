@@ -180,7 +180,7 @@ public class VelinorSceneSetup
 
         // Add SimpleNPC script
         SimpleNPC simpleNpc = npc.AddComponent<SimpleNPC>();
-        simpleNpc.npcName = "Tala";
+        // Configure npcId and startingPassageId in the Inspector or via SerializedProperty
 
         // ===== STEP 7: Create Pedestal =====
         GameObject pedestal = GameObject.CreatePrimitive(PrimitiveType.Cube);

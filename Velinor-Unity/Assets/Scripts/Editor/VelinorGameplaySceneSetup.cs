@@ -219,7 +219,7 @@ public class VelinorGameplaySceneSetup
 
         // NPC dialogue
         SimpleNPC simpleNpc = npc.AddComponent<SimpleNPC>();
-        simpleNpc.npcName = "Tala";
+        // Configure npcId and startingPassageId in the Inspector
 
         // Add bobbing animation
         AddBobbingAnimation(npc);

@@ -374,53 +374,9 @@ public class CreateMarketplaceBlockA
         // NPC interaction script
         NPCInteraction npcInteraction = npcObj.AddComponent<NPCInteraction>();
         Debug.Log($"✅ Added NPCInteraction to {npcName}");
-        npcInteraction.npcName = npcName;
-
-        // Find dialogue canvas by name
-        Canvas[] canvases = Object.FindObjectsByType<Canvas>();
-        Canvas dialogueCanvas = null;
-        foreach (Canvas c in canvases)
-        {
-            if (c.name == "DialogueCanvas")
-            {
-                dialogueCanvas = c;
-                break;
-            }
-        }
-        if (dialogueCanvas != null)
-            npcInteraction.dialogueCanvas = dialogueCanvas;
-
-        // Find dialogue text specifically (DialoguePanel -> DialogueText)
-        if (dialogueCanvas != null)
-        {
-            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
-            if (panelTransform != null)
-            {
-                Transform textTransform = panelTransform.Find("DialogueText");
-                if (textTransform != null)
-                {
-                    TextMeshProUGUI dialogueText = textTransform.GetComponent<TextMeshProUGUI>();
-                    npcInteraction.dialogueText = dialogueText;
-                }
-            }
-        }
-
-        // Find buttons by searching under DialoguePanel
-        if (dialogueCanvas != null)
-        {
-            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
-            if (panelTransform != null)
-            {
-                Button[] buttons = panelTransform.GetComponentsInChildren<Button>();
-                foreach (Button btn in buttons)
-                {
-                    if (btn.name == "OptionButton1")
-                        npcInteraction.optionButton1 = btn.gameObject;
-                    else if (btn.name == "OptionButton2")
-                        npcInteraction.optionButton2 = btn.gameObject;
-                }
-            }
-        }
+        // NPCInteraction now uses DialogueManager for UI
+        // Set npcId and startingPassageId in the Inspector
+        // UI management (canvas, buttons) is handled by DialogueManager singleton
     }
 
     static void CreateGlyph()
