@@ -12,6 +12,7 @@ public class SimplePlayerMovement : MonoBehaviour
     private float mouseSensitivity = 4f;
     private float camPitch = 0f;
     private bool wasGroundedLastFrame = false;  // Track grounded state
+    private bool isMovementLocked = false;  // Lock movement during dialogue
     
     // Camera zoom
     private float cameraDistance = 2.5f;
@@ -53,6 +54,20 @@ public class SimplePlayerMovement : MonoBehaviour
     void Update()
     {
         if (cc == null) return;
+
+        // If movement is locked (dialogue open), skip input processing
+        if (isMovementLocked)
+        {
+            // Still apply gravity to keep grounded check accurate
+            if (!cc.isGrounded)
+                velocityY -= gravity * Time.deltaTime;
+            else
+                velocityY = -0.1f;
+
+            cc.Move(Vector3.up * velocityY * Time.deltaTime);
+            wasGroundedLastFrame = cc.isGrounded;
+            return;
+        }
 
         // Get movement input
         float horizontal = Input.GetAxis("Horizontal");
@@ -149,5 +164,17 @@ public class SimplePlayerMovement : MonoBehaviour
 
         // Update grounded state for next frame
         wasGroundedLastFrame = cc.isGrounded;
+    }
+
+    /// <summary>
+    /// Called by NPCInteraction to lock/unlock player movement during dialogue
+    /// </summary>
+    public void LockMovement(bool locked)
+    {
+        isMovementLocked = locked;
+        if (locked)
+            Debug.Log("🔒 PLAYER MOVEMENT LOCKED (Dialogue open)");
+        else
+            Debug.Log("🔓 PLAYER MOVEMENT UNLOCKED (Dialogue closed)");
     }
 }
