@@ -1,59 +1,196 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 /// <summary>
 /// NPCInteraction: Per-NPC GameObject script that detects player proximity and initiates dialogue.
 /// 
+/// Dual-Mode Operation:
+/// - PRIMARY: Use DialogueManager if available (new system with JSON stories and stat tracking)
+/// - FALLBACK: Simple hardcoded dialogue with state machine (when DialogueManager not found)
+/// 
 /// Responsibilities:
 /// - Detect when player enters/exits trigger range
-/// - Show/hide interaction prompt via InteractionUI
+/// - Show/hide interaction prompt
 /// - Listen for E-key press
-/// - Call DialogueManager.StartDialogue() with npcId and startingPassageId
-/// 
-/// Non-Responsibilities:
-/// - Does NOT contain dialogue text
-/// - Does NOT manage UI elements
-/// - Does NOT modify stats or REMNANTS/TONE
-/// - Does NOT store NPC state
+/// - Call DialogueManager.StartDialogue() OR use simple dialogue fallback
 /// </summary>
 public class NPCInteraction : MonoBehaviour
 {
-    [SerializeField] private string npcId;
-    [SerializeField] private string startingPassageId;
+    [SerializeField] private string npcId = "Ravi";
+    [SerializeField] private string startingPassageId = "ravi_dialogue";
 
     private bool playerInRange = false;
+    private float interactionRange = 3f;
+    
+    // Simple dialogue fallback (when DialogueManager not available)
+    private int dialogueState = 0;
+    private Canvas dialogueCanvas;
+    private TextMeshProUGUI dialogueBodyText;
+    private Button optionButton1;
+    private Button optionButton2;
 
-    private void Update()
+    void Start()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        // Cache dialogue UI elements for fallback mode
+        dialogueCanvas = FindObjectOfType<Canvas>();
+        if (dialogueCanvas != null && dialogueCanvas.name == "DialogueCanvas")
         {
-            if (DialogueManager.Instance != null)
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            if (panelTransform != null)
             {
-                DialogueManager.Instance.StartDialogue(npcId, startingPassageId);
-            }
-            else
-            {
-                Debug.LogError("[NPCInteraction] DialogueManager.Instance not found");
+                dialogueBodyText = panelTransform.Find("DialogueBodyText")?.GetComponent<TextMeshProUGUI>();
+                Transform containerTransform = panelTransform.Find("ChoiceButtonContainer");
+                if (containerTransform != null && containerTransform.childCount >= 2)
+                {
+                    optionButton1 = containerTransform.GetChild(0)?.GetComponent<Button>();
+                    optionButton2 = containerTransform.GetChild(1)?.GetComponent<Button>();
+                }
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            InteractionUI.Instance?.ShowPrompt($"Press E to talk to {npcId}");
-            Debug.Log($"[NPCInteraction] Player entered range of NPC '{npcId}'");
+            Debug.Log($"🟣 Player entered {npcId} interaction range");
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            InteractionUI.Instance?.HidePrompt();
-            Debug.Log($"[NPCInteraction] Player left range of NPC '{npcId}'");
+            Debug.Log($"🟣 Player left {npcId} interaction range");
+            CloseDialogue();
+        }
+    }
+
+    void Update()
+    {
+        if (!playerInRange) return;
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj == null) return;
+
+        float playerDistance = Vector3.Distance(transform.position, playerObj.transform.position);
+        if (playerDistance > interactionRange) return;
+
+        // Show prompt
+        ShowInteractionPrompt();
+
+        // Check for E key
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcId}");
+            OpenDialogue();
+        }
+    }
+
+    void ShowInteractionPrompt()
+    {
+        Canvas interactionCanvas = GameObject.Find("InteractionCanvas")?.GetComponent<Canvas>();
+        if (interactionCanvas != null)
+        {
+            TextMeshProUGUI promptText = interactionCanvas.transform.Find("PromptText")?.GetComponent<TextMeshProUGUI>();
+            if (promptText != null)
+            {
+                promptText.text = $"Press E to talk to {npcId}";
+            }
+        }
+    }
+
+    void OpenDialogue()
+    {
+        // Try DialogueManager first (new system with JSON stories)
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        if (dialogueManager != null)
+        {
+            Debug.Log($"✅ Using DialogueManager for {npcId}");
+            dialogueManager.StartDialogue(npcId, startingPassageId);
+            return;
+        }
+
+        // Fallback: Use simple hardcoded dialogue
+        Debug.Log($"⚠️ DialogueManager not found, using simple fallback dialogue for {npcId}");
+        UseSimpleDialogue();
+    }
+
+    void UseSimpleDialogue()
+    {
+        if (dialogueCanvas == null)
+        {
+            Debug.LogWarning("No DialogueCanvas found for simple dialogue fallback!");
+            return;
+        }
+
+        Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+        if (panelTransform != null)
+            panelTransform.gameObject.SetActive(true);
+
+        if (dialogueState == 0)
+        {
+            // Initial greeting
+            if (dialogueBodyText != null)
+                dialogueBodyText.text = "Hello there, what can I do for you?";
+
+            SetupButton(optionButton1, "What's your name?", () =>
+            {
+                dialogueState = 1;
+                UseSimpleDialogue();
+            });
+
+            SetupButton(optionButton2, "I don't need anything.", CloseDialogue);
+        }
+        else if (dialogueState == 1)
+        {
+            // Response to name question
+            if (dialogueBodyText != null)
+                dialogueBodyText.text = $"It's {npcId}. I gotta go.";
+
+            SetupButton(optionButton1, "Okay.", CloseDialogue);
+            if (optionButton2 != null)
+                optionButton2.gameObject.SetActive(false);
+        }
+    }
+
+    void SetupButton(Button button, string buttonText, UnityEngine.Events.UnityAction action)
+    {
+        if (button == null) return;
+
+        button.gameObject.SetActive(true);
+        TextMeshProUGUI btnTextComponent = button.GetComponentInChildren<TextMeshProUGUI>();
+        if (btnTextComponent != null)
+            btnTextComponent.text = buttonText;
+
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(action);
+    }
+
+    void CloseDialogue()
+    {
+        Debug.Log($"🟣 CloseDialogue called for {npcId}");
+        
+        if (dialogueCanvas != null)
+        {
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            if (panelTransform != null)
+                panelTransform.gameObject.SetActive(false);
+        }
+
+        // Reset dialogue state
+        dialogueState = 0;
+
+        // Hide prompt
+        Canvas interactionCanvas = GameObject.Find("InteractionCanvas")?.GetComponent<Canvas>();
+        if (interactionCanvas != null)
+        {
+            TextMeshProUGUI promptText = interactionCanvas.transform.Find("PromptText")?.GetComponent<TextMeshProUGUI>();
+            if (promptText != null)
+                promptText.text = "";
         }
     }
 }
