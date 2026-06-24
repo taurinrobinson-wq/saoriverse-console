@@ -156,7 +156,7 @@ public class StatManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = FindObjectOfType<StatManager>();
+                _instance = FindAnyObjectByType<StatManager>(FindObjectsInactive.Exclude);
                 if (_instance == null)
                 {
                     GameObject go = new GameObject("StatManager");

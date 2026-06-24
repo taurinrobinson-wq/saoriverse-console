@@ -183,9 +183,13 @@ public class DialogueManager : MonoBehaviour
 
         // Lock cursor and disable player movement
         Cursor.lockState = CursorLockMode.None;
-        var playerController = FindObjectOfType<PlayerController>();
-        if (playerController != null)
+        // Note: PlayerController may not exist; this is optional
+        var playerController = FindAnyObjectByType<MonoBehaviour>(FindObjectsInactive.Exclude);
+        if (playerController != null && playerController.TryGetComponent<CharacterController>(out var charController))
+        {
+            // If player has CharacterController, we'll disable the root GameObject
             playerController.enabled = false;
+        }
 
         // Display starting passage
         DisplayPassage(startingPassageId);
@@ -220,9 +224,12 @@ public class DialogueManager : MonoBehaviour
 
         // Re-lock cursor and re-enable player movement
         Cursor.lockState = CursorLockMode.Locked;
-        var playerController = FindObjectOfType<PlayerController>();
-        if (playerController != null)
+        // Note: Re-enable player movement if it was disabled
+        var playerController = FindAnyObjectByType<MonoBehaviour>(FindObjectsInactive.Exclude);
+        if (playerController != null && playerController.TryGetComponent<CharacterController>(out var charController))
+        {
             playerController.enabled = true;
+        }
 
         Debug.Log("[DialogueManager] Dialogue ended");
     }
@@ -365,7 +372,7 @@ public class DialogueManager : MonoBehaviour
                 float amount = kvp.Value;
 
                 // Convert tone name string to ToneType enum
-                if (System.Enum.TryParse<StatManager.ToneType>(toneName, ignoreCase: true, out var toneType))
+                if (System.Enum.TryParse<ToneType>(toneName, ignoreCase: true, out var toneType))
                 {
                     StatManager.Instance.AdjustPlayerTone(toneType, amount, activeNpcId);
                     Debug.Log($"[DialogueManager] Applied tone effect: {toneName} += {amount}");

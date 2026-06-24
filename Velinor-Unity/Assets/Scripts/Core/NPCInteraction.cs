@@ -19,7 +19,6 @@ public class NPCInteraction : MonoBehaviour
 {
     [SerializeField] private string npcId;
     [SerializeField] private string startingPassageId;
-    [SerializeField] private float interactionRange = 3f;
 
     private bool playerInRange = false;
 
