@@ -17,7 +17,6 @@ public class NPCInteraction : MonoBehaviour
     
     // === INTERNAL STATE ===
     private bool isDialogueOpen = false;
-    private bool playerInRange = false;
     private int currentDialogueIndex = 0;
     private float dialogueInputCooldown = 0.15f;
     private float lastDialogueCloseTime = -1f;
@@ -59,12 +58,6 @@ public class NPCInteraction : MonoBehaviour
             playerMovement = playerObj.GetComponent<SimplePlayerMovement>();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-            playerInRange = true;
-    }
-
     void OnTriggerStay(Collider other)
     {
         // Only process if player is in range and no dialogue already open
@@ -87,7 +80,6 @@ public class NPCInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = false;
             InteractionUI.Instance?.HidePrompt();
             CloseDialogue();
         }

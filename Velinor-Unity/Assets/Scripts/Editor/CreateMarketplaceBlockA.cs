@@ -304,8 +304,7 @@ public class CreateMarketplaceBlockA
 
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
-
-        AudioListener audioListener = cameraObj.AddComponent<AudioListener>();
+        // Note: AudioListener already exists in default scene setup - do not add another
     }
 
     static void CreateNPCs()
