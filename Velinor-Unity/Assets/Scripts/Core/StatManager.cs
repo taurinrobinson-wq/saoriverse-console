@@ -263,13 +263,31 @@ public class StatManager : MonoBehaviour
             if (jsonAsset == null)
             {
                 Debug.LogWarning($"[StatManager] Could not load NPC state from Resources/{jsonPath}.json - file not found");
+                Debug.LogWarning("[StatManager] DEBUGGING: Checking what's in Resources/velinor/data/...");
+                // List what we can actually find
+                TextAsset[] allAssets = Resources.LoadAll<TextAsset>("velinor/data");
+                Debug.LogWarning($"[StatManager] Found {allAssets.Length} TextAssets in velinor/data");
+                foreach (TextAsset asset in allAssets)
+                {
+                    Debug.LogWarning($"[StatManager]   - {asset.name}");
+                }
                 Debug.Log("[StatManager] Proceeding with empty state. Call LoadStateFromJson() with full path to load manually.");
                 stateLoaded = true;
                 return;
             }
 
+            Debug.Log($"[StatManager] Loaded TextAsset: {jsonAsset.name}");
             string jsonText = jsonAsset.text;
+            Debug.Log($"[StatManager] JSON text length: {jsonText.Length} characters");
+
             NpcStateJson stateJson = JsonUtility.FromJson<NpcStateJson>(jsonText);
+
+            if (stateJson == null)
+            {
+                Debug.LogError("[StatManager] Failed to deserialize NPC state JSON");
+                stateLoaded = true;
+                return;
+            }
 
             // Load NPC REMNANTS
             npcRemnants.Clear();

@@ -129,15 +129,29 @@ public class DialogueManager : MonoBehaviour
             if (jsonAsset == null)
             {
                 Debug.LogError($"[DialogueManager] Failed to load story JSON from Resources/{jsonPath}");
+                Debug.LogError("[DialogueManager] DEBUGGING: Checking what's in Resources/velinor/stories/...");
+                // List what we can actually find
+                TextAsset[] allAssets = Resources.LoadAll<TextAsset>("velinor/stories");
+                Debug.LogError($"[DialogueManager] Found {allAssets.Length} TextAssets in velinor/stories");
+                foreach (TextAsset asset in allAssets)
+                {
+                    Debug.LogError($"[DialogueManager]   - {asset.name}");
+                }
                 return;
             }
 
+            Debug.Log($"[DialogueManager] Loaded TextAsset: {jsonAsset.name}");
             string jsonText = jsonAsset.text;
+            Debug.Log($"[DialogueManager] JSON text length: {jsonText.Length} characters");
+
             StoryJson storyData = JsonUtility.FromJson<StoryJson>(jsonText);
 
             if (storyData == null || storyData.passages == null)
             {
                 Debug.LogError("[DialogueManager] Failed to deserialize story JSON");
+                Debug.LogError($"[DialogueManager] storyData is null: {storyData == null}");
+                if (storyData != null)
+                    Debug.LogError($"[DialogueManager] passages is null: {storyData.passages == null}");
                 return;
             }
 
