@@ -52,15 +52,15 @@ public class SetupVelinorNarrativeScene
 
         Debug.Log("✅ Created DialogueCanvas");
 
-        // ===== STEP 4: Create DialoguePanel (background) =====
+        // ===== STEP 4: Create DialoguePanel (background - bottom 30% of screen) =====
         GameObject panelObj = new GameObject("DialoguePanel");
         panelObj.transform.SetParent(canvasObj.transform, false);
         Image panelImage = panelObj.AddComponent<Image>();
         panelImage.color = new Color(0, 0, 0, 0.8f); // Semi-transparent black
 
         RectTransform panelRect = panelObj.GetComponent<RectTransform>();
-        panelRect.anchorMin = Vector2.zero;
-        panelRect.anchorMax = Vector2.one;
+        panelRect.anchorMin = new Vector2(0, 0);      // Bottom-left
+        panelRect.anchorMax = new Vector2(1, 0.3f);   // Full width, 30% height
         panelRect.offsetMin = Vector2.zero;
         panelRect.offsetMax = Vector2.zero;
 
