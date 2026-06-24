@@ -46,7 +46,7 @@ public class GlyphObject : Interactable
         {
             Debug.Log("🔷 Glyph examined! It disappears.");
             hasInteracted = true;
-            InteractionUI.Instance?.HidePrompt();
+            InteractionUI.Instance?.HidePrompt();  // IMPORTANT: Hide prompt before deactivating
             gameObject.SetActive(false);  // Glyph vanishes after first interaction
         }
         else

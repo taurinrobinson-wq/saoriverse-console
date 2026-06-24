@@ -375,9 +375,6 @@ public class CreateMarketplaceBlockA
         NPCInteraction npcInteraction = npcObj.AddComponent<NPCInteraction>();
         Debug.Log($"✅ Added NPCInteraction to {npcName}");
         npcInteraction.npcName = npcName;
-        
-        // Set per-NPC dialogue content
-        SetNPCDialogue(npcInteraction, npcName);
 
         // Find dialogue canvas by name
         Canvas[] canvases = Object.FindObjectsByType<Canvas>();
@@ -504,72 +501,5 @@ public class CreateMarketplaceBlockA
         rb.useGravity = false;
 
         Debug.Log("✅ Back barrier created - player cannot fall off back edge");
-    }
-
-    static void SetNPCDialogue(NPCInteraction npc, string npcName)
-    {
-        // Set unique dialogue for each NPC
-        switch (npcName)
-        {
-            case "Merchant":
-                npc.npcDialogueLines = new string[]
-                {
-                    "Welcome to my stall!",
-                    "I have the finest wares in the marketplace.",
-                    "Would you like to see what I'm selling?"
-                };
-                npc.npcOptions = new string[] { "Show me your wares", "Not interested" };
-                break;
-
-            case "Blacksmith":
-                npc.npcDialogueLines = new string[]
-                {
-                    "The name's Blacksmith.",
-                    "I forge the strongest weapons this side of Velinor.",
-                    "Bring me rare materials and I'll craft something special."
-                };
-                npc.npcOptions = new string[] { "Tell me about your craft", "Goodbye" };
-                break;
-
-            case "Healer":
-                npc.npcDialogueLines = new string[]
-                {
-                    "Greetings, traveler.",
-                    "I mend both wounds and spirits.",
-                    "Seek my aid whenever you are troubled."
-                };
-                npc.npcOptions = new string[] { "I need healing", "I'm fine" };
-                break;
-
-            case "Bard":
-                npc.npcDialogueLines = new string[]
-                {
-                    "Ah, a new face in the marketplace!",
-                    "I compose tales of adventure and mystery.",
-                    "Perhaps I shall write a song about you?"
-                };
-                npc.npcOptions = new string[] { "Tell me a story", "No thanks" };
-                break;
-
-            case "Sage":
-                npc.npcDialogueLines = new string[]
-                {
-                    "Welcome, seeker of knowledge.",
-                    "I have studied the ancient ways of Velinor.",
-                    "What questions trouble your mind?"
-                };
-                npc.npcOptions = new string[] { "Teach me something", "I'll be on my way" };
-                break;
-
-            default:
-                // Generic dialogue if NPC name doesn't match
-                npc.npcDialogueLines = new string[]
-                {
-                    "Hello there.",
-                    "What brings you to the marketplace?"
-                };
-                npc.npcOptions = new string[] { "Just looking around", "Goodbye" };
-                break;
-        }
     }
 }
