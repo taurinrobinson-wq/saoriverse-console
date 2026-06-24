@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
@@ -9,21 +10,14 @@ public class CreateMarketplaceBlockA
     [MenuItem("Velinor/Create Marketplace Block A Scene")]
     public static void CreateScene()
     {
-        Debug.Log("🏪 Starting Marketplace Block A scene creation...");
+        Debug.Log("🏪 Starting fresh Marketplace Block A scene creation...");
         
-        // Clear existing scene - completely wipe everything except EventSystem
-        GameObject[] allObjects = Object.FindObjectsByType<GameObject>();
-        foreach (GameObject go in allObjects)
-        {
-            // Keep EventSystem, destroy everything else
-            if (go.name != "EventSystem")
-            {
-                Debug.Log($"🗑️  Destroying {go.name}");
-                Object.DestroyImmediate(go);
-            }
-        }
-
-        Debug.Log("🏪 Creating Marketplace Block A scene...");
+        // Create completely new scene
+        var newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);
+        Debug.Log($"✅ Created new scene: {newScene.name}");
+        
+        // Now populate the fresh scene
+        Debug.Log("🏪 Populating Marketplace Block A scene...");
 
         // === GROUND ===
         CreateGround();
@@ -55,7 +49,9 @@ public class CreateMarketplaceBlockA
         // === BACK BARRIER ===
         CreateBackBarrier();
 
-        Debug.Log("✅ Marketplace Block A scene created successfully!");
+        // Save the new scene
+        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/MarketplaceBlockA.unity");
+        Debug.Log("✅ Marketplace Block A scene created and saved successfully!");
     }
 
     static void CreateGround()

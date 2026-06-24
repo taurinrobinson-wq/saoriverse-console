@@ -1,5 +1,7 @@
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using System.IO;
 using System.Reflection;
 
 public class ScriptDiagnostics
@@ -42,5 +44,29 @@ public class ScriptDiagnostics
         Debug.Log("🔄 Forcing script recompilation...");
         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
         Debug.Log("✅ Recompilation triggered. Wait for compiler to finish.");
+    }
+    
+    [MenuItem("Velinor/Diagnostics/Clean Old Scenes")]
+    public static void CleanOldScenes()
+    {
+        Debug.Log("🧹 Cleaning up old scene files with broken references...");
+        
+        string[] scenesToClean = {
+            "Assets/Velinor.unity",
+            "Assets/Scenes/TestScene.unity",
+            "Assets/Scenes/GamplayScene.unity"
+        };
+        
+        foreach (string scenePath in scenesToClean)
+        {
+            if (File.Exists(scenePath))
+            {
+                Debug.Log($"🗑️  Deleting {scenePath}");
+                AssetDatabase.DeleteAsset(scenePath);
+            }
+        }
+        
+        Debug.Log("✅ Old scenes cleaned. Refresh will complete in a moment.");
+        AssetDatabase.Refresh();
     }
 }
