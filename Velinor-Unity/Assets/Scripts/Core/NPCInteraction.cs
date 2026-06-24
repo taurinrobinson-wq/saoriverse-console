@@ -58,7 +58,4 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 }
-            optionButton2.SetActive(false);
-    }
-}
 
