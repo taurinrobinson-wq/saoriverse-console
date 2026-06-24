@@ -159,12 +159,12 @@ public class SetupVelinorNarrativeScene
         Debug.Log("✅ Created ChoiceButtonPrefab");
 
         // ===== STEP 9: Wire DialogueManager serialized fields =====
-        dialogueManager.npcNameText = nameText;
-        dialogueManager.bodyText = bodyText;
-        dialogueManager.choiceButtonContainer = containerObj.transform;
-        dialogueManager.choiceButtonPrefab = buttonPrefabObj;
-        dialogueManager.dialogueCanvasGroup = canvasObj.GetComponent<CanvasGroup>();
-        dialogueManager.dialogueCanvas = canvas;
+        dialogueManager.NpcNameText = nameText;
+        dialogueManager.BodyText = bodyText;
+        dialogueManager.ChoiceButtonContainer = containerObj.transform;
+        dialogueManager.ChoiceButtonPrefab = buttonPrefabObj;
+        dialogueManager.DialogueCanvasGroup = canvasObj.GetComponent<CanvasGroup>();
+        dialogueManager.DialogueCanvas = canvas;
 
         Debug.Log("✅ Wired DialogueManager serialized fields");
 

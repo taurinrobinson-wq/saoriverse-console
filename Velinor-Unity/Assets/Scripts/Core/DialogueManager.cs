@@ -93,6 +93,14 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private CanvasGroup dialogueCanvasGroup;
     [SerializeField] private Canvas dialogueCanvas;
 
+    // Public properties for editor setup access
+    public TextMeshProUGUI NpcNameText { get => npcNameText; set => npcNameText = value; }
+    public TextMeshProUGUI BodyText { get => bodyText; set => bodyText = value; }
+    public Transform ChoiceButtonContainer { get => choiceButtonContainer; set => choiceButtonContainer = value; }
+    public GameObject ChoiceButtonPrefab { get => choiceButtonPrefab; set => choiceButtonPrefab = value; }
+    public CanvasGroup DialogueCanvasGroup { get => dialogueCanvasGroup; set => dialogueCanvasGroup = value; }
+    public Canvas DialogueCanvas { get => dialogueCanvas; set => dialogueCanvas = value; }
+
     #endregion
 
     #region Initialization
