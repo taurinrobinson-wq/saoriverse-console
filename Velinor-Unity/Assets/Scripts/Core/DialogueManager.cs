@@ -28,12 +28,10 @@ public class DialogueManager : MonoBehaviour
     [System.Serializable]
     public class StoryChoice
     {
-        public string id;
         public string text;              // Choice button label
         public string target;            // Next passage ID
         public Dictionary<string, float> tone_effects = new Dictionary<string, float>();
         public Dictionary<string, float> npc_resonance = new Dictionary<string, float>();
-        public Dictionary<string, object> dice_check;
         public string mark_story_beat;
     }
 
@@ -41,34 +39,20 @@ public class DialogueManager : MonoBehaviour
     [System.Serializable]
     public class StoryPassage
     {
-        public string id;
-        public string text;              // Full passage text
-        public string background;        // Scene background reference
-        public string npc;               // NPC present in this scene (can be null)
+        public string pid;               // Passage ID
+        public string name;              // Passage name
+        public string text;              // Full passage text (may contain inline markup)
         public List<string> tags = new List<string>();
         public List<StoryChoice> choices = new List<StoryChoice>();
-        public Dictionary<string, float> tone_effects_on_enter = new Dictionary<string, float>();
-        public List<string> glyph_rewards = new List<string>();
-    }
-
-    /// <summary>Deserializes metadata from story JSON.</summary>
-    [System.Serializable]
-    public class StoryMetadata
-    {
-        public string author;
-        public string region;
-        public string created_at;
     }
 
     /// <summary>Root structure for story JSON deserialization.</summary>
     [System.Serializable]
     public class StoryJson
     {
-        public string title;
-        public string version;
-        public string start;
-        public StoryMetadata metadata;
-        public Dictionary<string, StoryPassage> passages = new Dictionary<string, StoryPassage>();
+        public string name;              // Story title
+        public string startnode;         // Starting passage ID
+        public List<StoryPassage> passages = new List<StoryPassage>();
     }
 
     #endregion
@@ -143,16 +127,22 @@ public class DialogueManager : MonoBehaviour
             string jsonText = jsonAsset.text;
             StoryJson storyData = JsonUtility.FromJson<StoryJson>(jsonText);
 
-            if (storyData == null)
+            if (storyData == null || storyData.passages == null)
             {
                 Debug.LogError("[DialogueManager] Failed to deserialize story JSON");
                 return;
             }
 
-            passages = storyData.passages;
+            // Convert passages array into dictionary keyed by pid
+            passages = new Dictionary<string, StoryPassage>();
+            foreach (StoryPassage passage in storyData.passages)
+            {
+                passages[passage.pid] = passage;
+            }
+
             storyLoaded = true;
             
-            Debug.Log($"[DialogueManager] Story loaded successfully. {passages.Count} passages found.");
+            Debug.Log($"[DialogueManager] Story loaded successfully. {passages.Count} passages found. Starting node: {storyData.startnode}");
         }
         catch (Exception ex)
         {

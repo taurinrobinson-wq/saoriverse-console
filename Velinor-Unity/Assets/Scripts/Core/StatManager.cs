@@ -189,6 +189,8 @@ public class StatManager : MonoBehaviour
     // Current encounter counter
     private int encounterCount = 0;
 
+    private bool stateLoaded = false;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -199,6 +201,15 @@ public class StatManager : MonoBehaviour
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        // Automatically load NPC state from Resources on startup
+        if (!stateLoaded)
+        {
+            LoadStateFromResources();
         }
     }
 
@@ -235,6 +246,56 @@ public class StatManager : MonoBehaviour
         catch (System.Exception ex)
         {
             Debug.LogError($"[StatManager] Failed to load state from {path}: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Load NPC state from Resources/velinor/data/npc_state.json.
+    /// Called automatically on Start() if state not already loaded.
+    /// </summary>
+    private void LoadStateFromResources()
+    {
+        try
+        {
+            string jsonPath = "velinor/data/npc_state";
+            TextAsset jsonAsset = Resources.Load<TextAsset>(jsonPath);
+
+            if (jsonAsset == null)
+            {
+                Debug.LogWarning($"[StatManager] Could not load NPC state from Resources/{jsonPath}.json - file not found");
+                Debug.Log("[StatManager] Proceeding with empty state. Call LoadStateFromJson() with full path to load manually.");
+                stateLoaded = true;
+                return;
+            }
+
+            string jsonText = jsonAsset.text;
+            NpcStateJson stateJson = JsonUtility.FromJson<NpcStateJson>(jsonText);
+
+            // Load NPC REMNANTS
+            npcRemnants.Clear();
+            foreach (var kvp in stateJson.npc_profiles)
+            {
+                npcRemnants[kvp.Key] = kvp.Value.remnants.Clone();
+            }
+
+            // Load influence map
+            influenceMap = stateJson.influence_map;
+
+            // Load history
+            history = stateJson.history ?? new List<EncounterRecord>();
+            encounterCount = history.Count;
+
+            stateLoaded = true;
+
+            Debug.Log($"[StatManager] Loaded NPC state from Resources/{jsonPath}");
+            Debug.Log($"[StatManager] Loaded {npcRemnants.Count} NPC profiles");
+            Debug.Log($"[StatManager] Influence map has {influenceMap.Count} entries");
+            Debug.Log($"[StatManager] History has {history.Count} encounters");
+        }
+        catch (System.Exception ex)
+        {
+            stateLoaded = true;
+            Debug.LogError($"[StatManager] Failed to load NPC state from Resources: {ex.Message}");
         }
     }
 
