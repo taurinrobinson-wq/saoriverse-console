@@ -17,9 +17,30 @@ public class SetupVelinorNarrativeScene
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
         {
-            mainCamera.transform.position = new Vector3(0, 1, -5);
+            mainCamera.transform.position = new Vector3(0, 2, -8);
             mainCamera.transform.rotation = Quaternion.identity;
         }
+
+        // ===== STEP 0: Create Ground =====
+        GameObject groundObj = new GameObject("Ground");
+        GameObject groundMesh = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        groundMesh.name = "GroundMesh";
+        groundMesh.transform.SetParent(groundObj.transform);
+        groundMesh.transform.localPosition = Vector3.zero;
+        groundMesh.transform.localScale = new Vector3(20, 1, 20);
+
+        // Remove physics collider (we'll use the plane collider that's already there)
+        Collider groundCollider = groundMesh.GetComponent<Collider>();
+        if (groundCollider != null)
+            groundCollider.isTrigger = false; // Keep it solid for player walking
+
+        // Color the ground
+        Renderer groundRenderer = groundMesh.GetComponent<Renderer>();
+        Material groundMat = new Material(Shader.Find("Standard"));
+        groundMat.color = new Color(0.3f, 0.3f, 0.3f, 1f);
+        groundRenderer.material = groundMat;
+
+        Debug.Log("✅ Created Ground");
 
         // ===== STEP 1: Create StatManager =====
         GameObject statManagerObj = new GameObject("StatManager");
@@ -171,11 +192,14 @@ public class SetupVelinorNarrativeScene
         // ===== STEP 10: Create Player =====
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
-        playerObj.transform.position = new Vector3(0, 0, 0);
+        playerObj.transform.position = new Vector3(0, 1, 0);
 
         CharacterController charController = playerObj.AddComponent<CharacterController>();
         charController.height = 2f;
         charController.radius = 0.5f;
+
+        // Add simple player controller for movement
+        SimplePlayerController playerController = playerObj.AddComponent<SimplePlayerController>();
 
         // Add a simple body renderer for visualization
         GameObject bodyMesh = GameObject.CreatePrimitive(PrimitiveType.Capsule);
@@ -194,13 +218,24 @@ public class SetupVelinorNarrativeScene
 
         Debug.Log("✅ Created Player");
 
-        // ===== STEP 11: Create NPCs =====
-        CreateTestNPC("Ravi", new Vector3(3, 0, 5), "ravi_dialogue");
-        CreateTestNPC("Nima", new Vector3(-3, 0, 5), "nima_dialogue");
+        // ===== STEP 11: Add Lighting =====
+        RenderSettings.ambientLight = new Color(0.5f, 0.5f, 0.5f, 1f);
+        
+        GameObject lightObj = new GameObject("DirectionalLight");
+        Light light = lightObj.AddComponent<Light>();
+        light.type = LightType.Directional;
+        light.intensity = 1f;
+        lightObj.transform.rotation = Quaternion.Euler(50f, -30f, 0f);
+        
+        Debug.Log("✅ Added Lighting");
+
+        // ===== STEP 12: Create NPCs =====
+        CreateTestNPC("Ravi", new Vector3(5, 0.5f, 3), "ravi_dialogue");
+        CreateTestNPC("Nima", new Vector3(-5, 0.5f, 3), "nima_dialogue");
 
         Debug.Log("✅ Created NPCs");
 
-        // ===== STEP 12: Save Scene =====
+        // ===== STEP 13: Save Scene =====
         EditorSceneManager.SaveScene(scene, "Assets/Scenes/VelinorNarrativeTest.unity");
         Debug.Log("✅ Scene saved as VelinorNarrativeTest.unity");
 
@@ -208,16 +243,28 @@ public class SetupVelinorNarrativeScene
             "═══════════════════════════════════════════════════════════\n" +
             "🎭 VELINOR NARRATIVE TEST SCENE CREATED\n" +
             "═══════════════════════════════════════════════════════════\n" +
-            "✅ StatManager (singleton) - Auto-loads npc_state.json\n" +
-            "✅ DialogueManager (singleton) - Auto-loads sample_story.json\n" +
-            "✅ DialogueCanvas with complete UI hierarchy\n" +
-            "✅ Player with CharacterController\n" +
-            "✅ 2 Test NPCs (Ravi, Nima) with NPCInteraction\n" +
+            "✅ Ground plane (20x20 walkable area)\n" +
+            "✅ Player with CharacterController + simple movement\n" +
+            "✅ 2 Test NPCs: Ravi (green) at (5,0,3), Nima (yellow) at (-5,0,3)\n" +
+            "✅ DialogueCanvas (bottom 30% of screen)\n" +
+            "✅ StatManager + DialogueManager singletons\n" +
+            "✅ Ambient lighting for visibility\n" +
             "\n" +
-            "📋 NEXT STEPS:\n" +
-            "1. In Inspector, set each NPC's npcId (e.g., 'Ravi', 'Nima')\n" +
-            "2. Set each NPC's startingPassageId (e.g., 'ravi_dialogue')\n" +
-            "3. Press Play and press 'E' near an NPC to start dialogue\n" +
+            "🎮 CONTROLS:\n" +
+            "  - WASD: Move around\n" +
+            "  - Space: Jump\n" +
+            "  - E: Interact with NPCs (when in range, green prompt shows)\n" +
+            "\n" +
+            "📋 BEFORE PLAYING:\n" +
+            "1. Select Ravi in Hierarchy\n" +
+            "   - Inspector > NPCInteraction script\n" +
+            "   - Set npcId = \"Ravi\"\n" +
+            "   - Set startingPassageId = \"ravi_dialogue\"\n" +
+            "2. Select Nima in Hierarchy\n" +
+            "   - Inspector > NPCInteraction script\n" +
+            "   - Set npcId = \"Nima\"\n" +
+            "   - Set startingPassageId = \"nima_dialogue\"\n" +
+            "3. Press Play and walk toward an NPC!\n" +
             "═══════════════════════════════════════════════════════════");
     }
 
@@ -226,27 +273,27 @@ public class SetupVelinorNarrativeScene
         GameObject npcObj = new GameObject(npcId);
         npcObj.transform.position = position;
 
-        // Add mesh for visibility
-        GameObject meshObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        // Add mesh for visibility - make it bigger (3 units tall)
+        GameObject meshObj = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         meshObj.name = "Mesh";
         meshObj.transform.SetParent(npcObj.transform);
         meshObj.transform.localPosition = Vector3.zero;
-        meshObj.transform.localScale = new Vector3(1, 2, 1);
+        meshObj.transform.localScale = new Vector3(0.8f, 1.5f, 0.8f);
 
         // Remove physics collider, we'll add our own trigger
         Collider meshCollider = meshObj.GetComponent<Collider>();
         if (meshCollider != null)
             Object.DestroyImmediate(meshCollider);
 
-        // Color the NPC
+        // Color the NPC - make them distinct
         Renderer meshRenderer = meshObj.GetComponent<Renderer>();
         Material npcMat = new Material(Shader.Find("Standard"));
-        npcMat.color = npcId == "Ravi" ? Color.green : Color.yellow;
+        npcMat.color = npcId == "Ravi" ? new Color(0.2f, 1f, 0.2f, 1f) : new Color(1f, 1f, 0.2f, 1f); // Bright green or yellow
         meshRenderer.material = npcMat;
 
-        // Add trigger collider
+        // Add trigger collider (larger radius for easier interaction)
         SphereCollider triggerCollider = npcObj.AddComponent<SphereCollider>();
-        triggerCollider.radius = 2f;
+        triggerCollider.radius = 3f;
         triggerCollider.isTrigger = true;
 
         // Add rigid body (kinematic, for trigger detection)
