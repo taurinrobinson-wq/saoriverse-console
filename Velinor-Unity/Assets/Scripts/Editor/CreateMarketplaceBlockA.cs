@@ -9,11 +9,18 @@ public class CreateMarketplaceBlockA
     [MenuItem("Velinor/Create Marketplace Block A Scene")]
     public static void CreateScene()
     {
-        // Clear existing scene
-        foreach (GameObject go in Object.FindObjectsByType<GameObject>())
+        Debug.Log("🏪 Starting Marketplace Block A scene creation...");
+        
+        // Clear existing scene - completely wipe everything except EventSystem
+        GameObject[] allObjects = Object.FindObjectsByType<GameObject>();
+        foreach (GameObject go in allObjects)
         {
-            if (go.scene.name != null && go.name != "EventSystem")
+            // Keep EventSystem, destroy everything else
+            if (go.name != "EventSystem")
+            {
+                Debug.Log($"🗑️  Destroying {go.name}");
                 Object.DestroyImmediate(go);
+            }
         }
 
         Debug.Log("🏪 Creating Marketplace Block A scene...");
@@ -368,6 +375,7 @@ public class CreateMarketplaceBlockA
 
         // NPC interaction script
         NPCInteraction npcInteraction = npcObj.AddComponent<NPCInteraction>();
+        Debug.Log($"✅ Added NPCInteraction to {npcName}");
         npcInteraction.npcName = npcName;
 
         // Find dialogue canvas by name
