@@ -9,50 +9,113 @@ public class SetupVelinorNarrativeScene
     [MenuItem("Velinor/Create Narrative Test Scene")]
     public static void CreateNarrativeTestScene()
     {
-        // Create new scene
-        var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);
-        scene.name = "VelinorNarrativeTest";
+        Debug.Log("🎭 Creating Velinor Narrative Test Scene (based on Marketplace Block A)...");
+        
+        // Create completely new scene
+        var newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);
+        Debug.Log($"✅ Created new scene: {newScene.name}");
 
-        // Get the main camera from default setup
-        Camera mainCamera = Camera.main;
-        if (mainCamera != null)
-        {
-            mainCamera.transform.position = new Vector3(0, 2, -8);
-            mainCamera.transform.rotation = Quaternion.identity;
-        }
+        // Populate the scene using Marketplace Block A structure
+        CreateGround();
+        CreateLighting();
+        CreateEventSystem();
+        CreateDialogueUI();
+        CreatePlayer();
+        CreateNPCs();
 
-        // ===== STEP 0: Create Ground =====
+        // Save the new scene
+        EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/VelinorNarrativeTest.unity");
+        Debug.Log("✅ Velinor Narrative Test scene created and saved successfully!");
+
+        Debug.Log("\n" +
+            "═══════════════════════════════════════════════════════════\n" +
+            "🎭 VELINOR NARRATIVE TEST SCENE CREATED\n" +
+            "═══════════════════════════════════════════════════════════\n" +
+            "✅ Ground (20×20 walkable area)\n" +
+            "✅ Player with CharacterController (third-person camera)\n" +
+            "✅ 2 Test NPCs: Ravi and Nima (purple capsules)\n" +
+            "✅ DialogueCanvas with UI hierarchy\n" +
+            "✅ StatManager + DialogueManager singletons\n" +
+            "✅ Proper lighting\n" +
+            "\n" +
+            "🎮 CONTROLS:\n" +
+            "  - WASD: Move\n" +
+            "  - Mouse: Look around\n" +
+            "  - E: Interact with NPCs (when close)\n" +
+            "\n" +
+            "📋 BEFORE PLAYING:\n" +
+            "1. Select NPC_Ravi in Hierarchy\n" +
+            "   - Set NPCInteraction npcId = \"Ravi\"\n" +
+            "   - Set startingPassageId = \"ravi_dialogue\"\n" +
+            "2. Select NPC_Nima in Hierarchy\n" +
+            "   - Set NPCInteraction npcId = \"Nima\"\n" +
+            "   - Set startingPassageId = \"nima_dialogue\"\n" +
+            "3. Press Play!\n" +
+            "═══════════════════════════════════════════════════════════");
+    }
+
+    static void CreateGround()
+    {
         GameObject groundObj = new GameObject("Ground");
-        GameObject groundMesh = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        groundMesh.name = "GroundMesh";
-        groundMesh.transform.SetParent(groundObj.transform);
-        groundMesh.transform.localPosition = Vector3.zero;
-        groundMesh.transform.localScale = new Vector3(20, 1, 20);
+        groundObj.transform.position = new Vector3(10, 0, 10);
 
-        // Remove physics collider (we'll use the plane collider that's already there)
-        Collider groundCollider = groundMesh.GetComponent<Collider>();
-        if (groundCollider != null)
-            groundCollider.isTrigger = false; // Keep it solid for player walking
+        // Create ground plane (20×20)
+        MeshFilter mf = groundObj.AddComponent<MeshFilter>();
+        MeshRenderer mr = groundObj.AddComponent<MeshRenderer>();
+        
+        Mesh groundMesh = new Mesh();
+        groundMesh.vertices = new Vector3[]
+        {
+            new Vector3(-10, 0, -10),
+            new Vector3(10, 0, -10),
+            new Vector3(10, 0, 10),
+            new Vector3(-10, 0, 10)
+        };
+        groundMesh.triangles = new int[] { 0, 2, 1, 0, 3, 2 };
+        groundMesh.RecalculateNormals();
+        mf.mesh = groundMesh;
 
-        // Color the ground
-        Renderer groundRenderer = groundMesh.GetComponent<Renderer>();
         Material groundMat = new Material(Shader.Find("Standard"));
-        groundMat.color = new Color(0.3f, 0.3f, 0.3f, 1f);
-        groundRenderer.material = groundMat;
+        groundMat.color = new Color(0.6f, 0.5f, 0.4f, 1f);
+        mr.material = groundMat;
+
+        BoxCollider groundCollider = groundObj.AddComponent<BoxCollider>();
+        groundCollider.size = new Vector3(20, 0.1f, 20);
+        groundCollider.center = Vector3.zero;
+
+        Rigidbody groundRb = groundObj.AddComponent<Rigidbody>();
+        groundRb.isKinematic = true;
+        groundRb.useGravity = false;
 
         Debug.Log("✅ Created Ground");
+    }
 
-        // ===== STEP 1: Create StatManager =====
-        GameObject statManagerObj = new GameObject("StatManager");
-        statManagerObj.AddComponent<StatManager>();
-        Debug.Log("✅ Created StatManager singleton");
+    static void CreateLighting()
+    {
+        RenderSettings.ambientLight = new Color(0.5f, 0.5f, 0.5f, 1f);
+        
+        GameObject lightObj = new GameObject("DirectionalLight");
+        Light light = lightObj.AddComponent<Light>();
+        light.type = LightType.Directional;
+        light.intensity = 1f;
+        lightObj.transform.rotation = Quaternion.Euler(50f, -30f, 0f);
 
-        // ===== STEP 2: Create DialogueManager =====
-        GameObject dialogueManagerObj = new GameObject("DialogueManager");
-        DialogueManager dialogueManager = dialogueManagerObj.AddComponent<DialogueManager>();
-        Debug.Log("✅ Created DialogueManager singleton");
+        Debug.Log("✅ Added Lighting");
+    }
 
-        // ===== STEP 3: Create DialogueCanvas =====
+    static void CreateEventSystem()
+    {
+        // EventSystem for UI interaction
+        GameObject esObj = new GameObject("EventSystem");
+        esObj.AddComponent<EventSystem>();
+        esObj.AddComponent<StandaloneInputModule>();
+
+        Debug.Log("✅ Created EventSystem");
+    }
+
+    static void CreateDialogueUI()
+    {
+        // DialogueCanvas
         GameObject canvasObj = new GameObject("DialogueCanvas");
         Canvas canvas = canvasObj.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -64,30 +127,25 @@ public class SetupVelinorNarrativeScene
         canvasRect.offsetMax = Vector2.zero;
 
         canvasObj.AddComponent<GraphicRaycaster>();
-        canvasObj.AddComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = canvasObj.AddComponent<CanvasGroup>();
 
-        // Add Canvas Scaler
         CanvasScaler scaler = canvasObj.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
 
-        Debug.Log("✅ Created DialogueCanvas");
-
-        // ===== STEP 4: Create DialoguePanel (background - bottom 30% of screen) =====
+        // DialoguePanel (bottom 30%)
         GameObject panelObj = new GameObject("DialoguePanel");
         panelObj.transform.SetParent(canvasObj.transform, false);
         Image panelImage = panelObj.AddComponent<Image>();
-        panelImage.color = new Color(0, 0, 0, 0.8f); // Semi-transparent black
+        panelImage.color = new Color(0, 0, 0, 0.8f);
 
         RectTransform panelRect = panelObj.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0, 0);      // Bottom-left
-        panelRect.anchorMax = new Vector2(1, 0.3f);   // Full width, 30% height
+        panelRect.anchorMin = new Vector2(0, 0);
+        panelRect.anchorMax = new Vector2(1, 0.3f);
         panelRect.offsetMin = Vector2.zero;
         panelRect.offsetMax = Vector2.zero;
 
-        Debug.Log("✅ Created DialoguePanel");
-
-        // ===== STEP 5: Create NPCNameText =====
+        // NPCNameText
         GameObject nameTextObj = new GameObject("NPCNameText");
         nameTextObj.transform.SetParent(panelObj.transform, false);
         TextMeshProUGUI nameText = nameTextObj.AddComponent<TextMeshProUGUI>();
@@ -103,9 +161,7 @@ public class SetupVelinorNarrativeScene
         nameRect.anchoredPosition = new Vector2(40, -40);
         nameRect.sizeDelta = new Vector2(400, 80);
 
-        Debug.Log("✅ Created NPCNameText");
-
-        // ===== STEP 6: Create DialogueBody Text =====
+        // DialogueBodyText
         GameObject bodyTextObj = new GameObject("DialogueBodyText");
         bodyTextObj.transform.SetParent(panelObj.transform, false);
         TextMeshProUGUI bodyText = bodyTextObj.AddComponent<TextMeshProUGUI>();
@@ -113,7 +169,7 @@ public class SetupVelinorNarrativeScene
         bodyText.fontSize = 32;
         bodyText.alignment = TextAlignmentOptions.TopLeft;
         bodyText.color = Color.white;
-        bodyText.wordWrappingRatios = 0.3f; // Wrap words naturally
+        bodyText.wordWrappingRatios = 0.3f;
 
         RectTransform bodyRect = bodyTextObj.GetComponent<RectTransform>();
         bodyRect.anchorMin = new Vector2(0, 1);
@@ -122,9 +178,7 @@ public class SetupVelinorNarrativeScene
         bodyRect.anchoredPosition = new Vector2(40, -140);
         bodyRect.sizeDelta = new Vector2(-80, 400);
 
-        Debug.Log("✅ Created DialogueBodyText");
-
-        // ===== STEP 7: Create ChoiceButtonContainer =====
+        // ChoiceButtonContainer
         GameObject containerObj = new GameObject("ChoiceButtonContainer");
         containerObj.transform.SetParent(panelObj.transform, false);
 
@@ -140,9 +194,7 @@ public class SetupVelinorNarrativeScene
         containerRect.anchoredPosition = new Vector2(40, 40);
         containerRect.sizeDelta = new Vector2(-80, 150);
 
-        Debug.Log("✅ Created ChoiceButtonContainer");
-
-        // ===== STEP 8: Create Choice Button Prefab =====
+        // ChoiceButtonPrefab
         GameObject buttonPrefabObj = new GameObject("ChoiceButtonPrefab");
         buttonPrefabObj.transform.SetParent(containerObj.transform, false);
 
@@ -159,7 +211,6 @@ public class SetupVelinorNarrativeScene
         RectTransform btnRect = buttonPrefabObj.GetComponent<RectTransform>();
         btnRect.sizeDelta = new Vector2(0, 50);
 
-        // Add text to button
         GameObject btnTextObj = new GameObject("Text");
         btnTextObj.transform.SetParent(buttonPrefabObj.transform, false);
         TextMeshProUGUI btnText = btnTextObj.AddComponent<TextMeshProUGUI>();
@@ -174,137 +225,130 @@ public class SetupVelinorNarrativeScene
         btnTextRect.offsetMin = Vector2.zero;
         btnTextRect.offsetMax = Vector2.zero;
 
-        // Hide prefab
         buttonPrefabObj.SetActive(false);
 
-        Debug.Log("✅ Created ChoiceButtonPrefab");
+        // Create StatManager and DialogueManager
+        GameObject statManagerObj = new GameObject("StatManager");
+        statManagerObj.AddComponent<StatManager>();
 
-        // ===== STEP 9: Wire DialogueManager serialized fields =====
+        GameObject dialogueManagerObj = new GameObject("DialogueManager");
+        DialogueManager dialogueManager = dialogueManagerObj.AddComponent<DialogueManager>();
+        
+        // Wire DialogueManager
         dialogueManager.NpcNameText = nameText;
         dialogueManager.BodyText = bodyText;
         dialogueManager.ChoiceButtonContainer = containerObj.transform;
         dialogueManager.ChoiceButtonPrefab = buttonPrefabObj;
-        dialogueManager.DialogueCanvasGroup = canvasObj.GetComponent<CanvasGroup>();
+        dialogueManager.DialogueCanvasGroup = canvasGroup;
         dialogueManager.DialogueCanvas = canvas;
 
-        Debug.Log("✅ Wired DialogueManager serialized fields");
-
-        // ===== STEP 10: Create Player =====
-        GameObject playerObj = new GameObject("Player");
-        playerObj.tag = "Player";
-        playerObj.transform.position = new Vector3(0, 1, 0);
-
-        CharacterController charController = playerObj.AddComponent<CharacterController>();
-        charController.height = 2f;
-        charController.radius = 0.5f;
-
-        // Add simple player controller for movement
-        SimplePlayerController playerController = playerObj.AddComponent<SimplePlayerController>();
-
-        // Add a simple body renderer for visualization
-        GameObject bodyMesh = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        bodyMesh.name = "PlayerBody";
-        bodyMesh.transform.SetParent(playerObj.transform);
-        bodyMesh.transform.localPosition = Vector3.zero;
-        bodyMesh.transform.localScale = Vector3.one;
-        Collider bodyCollider = bodyMesh.GetComponent<Collider>();
-        if (bodyCollider != null)
-            Object.DestroyImmediate(bodyCollider);
-
-        Renderer bodyRenderer = bodyMesh.GetComponent<Renderer>();
-        Material playerMat = new Material(Shader.Find("Standard"));
-        playerMat.color = Color.blue;
-        bodyRenderer.material = playerMat;
-
-        Debug.Log("✅ Created Player");
-
-        // ===== STEP 11: Add Lighting =====
-        RenderSettings.ambientLight = new Color(0.5f, 0.5f, 0.5f, 1f);
-        
-        GameObject lightObj = new GameObject("DirectionalLight");
-        Light light = lightObj.AddComponent<Light>();
-        light.type = LightType.Directional;
-        light.intensity = 1f;
-        lightObj.transform.rotation = Quaternion.Euler(50f, -30f, 0f);
-        
-        Debug.Log("✅ Added Lighting");
-
-        // ===== STEP 12: Create NPCs =====
-        CreateTestNPC("Ravi", new Vector3(5, 0.5f, 3), "ravi_dialogue");
-        CreateTestNPC("Nima", new Vector3(-5, 0.5f, 3), "nima_dialogue");
-
-        Debug.Log("✅ Created NPCs");
-
-        // ===== STEP 13: Save Scene =====
-        EditorSceneManager.SaveScene(scene, "Assets/Scenes/VelinorNarrativeTest.unity");
-        Debug.Log("✅ Scene saved as VelinorNarrativeTest.unity");
-
-        Debug.Log("\n" +
-            "═══════════════════════════════════════════════════════════\n" +
-            "🎭 VELINOR NARRATIVE TEST SCENE CREATED\n" +
-            "═══════════════════════════════════════════════════════════\n" +
-            "✅ Ground plane (20x20 walkable area)\n" +
-            "✅ Player with CharacterController + simple movement\n" +
-            "✅ 2 Test NPCs: Ravi (green) at (5,0,3), Nima (yellow) at (-5,0,3)\n" +
-            "✅ DialogueCanvas (bottom 30% of screen)\n" +
-            "✅ StatManager + DialogueManager singletons\n" +
-            "✅ Ambient lighting for visibility\n" +
-            "\n" +
-            "🎮 CONTROLS:\n" +
-            "  - WASD: Move around\n" +
-            "  - Space: Jump\n" +
-            "  - E: Interact with NPCs (when in range, green prompt shows)\n" +
-            "\n" +
-            "📋 BEFORE PLAYING:\n" +
-            "1. Select Ravi in Hierarchy\n" +
-            "   - Inspector > NPCInteraction script\n" +
-            "   - Set npcId = \"Ravi\"\n" +
-            "   - Set startingPassageId = \"ravi_dialogue\"\n" +
-            "2. Select Nima in Hierarchy\n" +
-            "   - Inspector > NPCInteraction script\n" +
-            "   - Set npcId = \"Nima\"\n" +
-            "   - Set startingPassageId = \"nima_dialogue\"\n" +
-            "3. Press Play and walk toward an NPC!\n" +
-            "═══════════════════════════════════════════════════════════");
+        Debug.Log("✅ Created DialogueUI and wired DialogueManager");
     }
 
-    static void CreateTestNPC(string npcId, Vector3 position, string startingPassageId)
+    static void CreatePlayer()
     {
-        GameObject npcObj = new GameObject(npcId);
+        GameObject playerObj = new GameObject("Player");
+        playerObj.tag = "Player";
+        playerObj.transform.position = new Vector3(10, 0, 0);
+        playerObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
+
+        // Character controller
+        CharacterController charController = playerObj.AddComponent<CharacterController>();
+        charController.height = 1.8f;
+        charController.radius = 0.25f;
+        charController.center = new Vector3(0, 0.9f, 0);
+
+        // Visual (blue capsule)
+        GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        visualObj.name = "Visual";
+        visualObj.transform.SetParent(playerObj.transform);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(1, 1, 1);
+
+        Object.DestroyImmediate(visualObj.GetComponent<Collider>());
+
+        Material playerMat = new Material(Shader.Find("Standard"));
+        playerMat.color = Color.blue;
+        visualObj.GetComponent<MeshRenderer>().material = playerMat;
+
+        // Rigidbody
+        Rigidbody rb = playerObj.AddComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
+        // Camera
+        GameObject cameraObj = new GameObject("MainCamera");
+        cameraObj.tag = "MainCamera";
+        cameraObj.transform.SetParent(playerObj.transform);
+        cameraObj.transform.localPosition = new Vector3(0, 0.79f, -1.65f);
+
+        Camera cam = cameraObj.AddComponent<Camera>();
+        cam.clearFlags = CameraClearFlags.Skybox;
+
+        Debug.Log("✅ Created Player");
+    }
+
+    static void CreateNPCs()
+    {
+        Vector3[] npcPositions = new Vector3[]
+        {
+            new Vector3(10, 0.66f, 8),
+            new Vector3(10, 0.66f, 13)
+        };
+
+        string[] npcNames = { "Ravi", "Nima" };
+
+        for (int i = 0; i < npcPositions.Length; i++)
+        {
+            CreateNPC(npcPositions[i], npcNames[i]);
+        }
+    }
+
+    static void CreateNPC(Vector3 position, string npcName)
+    {
+        GameObject npcObj = new GameObject($"NPC_{npcName}");
         npcObj.transform.position = position;
+        npcObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
-        // Add mesh for visibility - make it bigger (3 units tall)
-        GameObject meshObj = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        meshObj.name = "Mesh";
-        meshObj.transform.SetParent(npcObj.transform);
-        meshObj.transform.localPosition = Vector3.zero;
-        meshObj.transform.localScale = new Vector3(0.8f, 1.5f, 0.8f);
+        // Visual (purple capsule)
+        GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        visualObj.name = "Visual";
+        visualObj.transform.SetParent(npcObj.transform);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(1, 1, 1);
 
-        // Remove physics collider, we'll add our own trigger
-        Collider meshCollider = meshObj.GetComponent<Collider>();
-        if (meshCollider != null)
-            Object.DestroyImmediate(meshCollider);
+        Object.DestroyImmediate(visualObj.GetComponent<Collider>());
 
-        // Color the NPC - make them distinct
-        Renderer meshRenderer = meshObj.GetComponent<Renderer>();
         Material npcMat = new Material(Shader.Find("Standard"));
-        npcMat.color = npcId == "Ravi" ? new Color(0.2f, 1f, 0.2f, 1f) : new Color(1f, 1f, 0.2f, 1f); // Bright green or yellow
-        meshRenderer.material = npcMat;
+        npcMat.color = new Color(0.7f, 0.3f, 0.9f, 1f);
+        visualObj.GetComponent<MeshRenderer>().material = npcMat;
 
-        // Add trigger collider (larger radius for easier interaction)
-        SphereCollider triggerCollider = npcObj.AddComponent<SphereCollider>();
-        triggerCollider.radius = 3f;
+        // Solid collider (blocks movement)
+        CapsuleCollider solidCollider = npcObj.AddComponent<CapsuleCollider>();
+        solidCollider.isTrigger = false;
+        solidCollider.radius = 0.25f;
+        solidCollider.height = 1.8f;
+        solidCollider.center = new Vector3(0, 0.9f, 0);
+
+        // Trigger collider (detects interaction)
+        GameObject triggerObj = new GameObject("InteractionTrigger");
+        triggerObj.transform.SetParent(npcObj.transform);
+        triggerObj.transform.localPosition = Vector3.zero;
+
+        CapsuleCollider triggerCollider = triggerObj.AddComponent<CapsuleCollider>();
         triggerCollider.isTrigger = true;
+        triggerCollider.radius = 0.5f;
+        triggerCollider.height = 1.8f;
+        triggerCollider.center = new Vector3(0, 0.9f, 0);
 
-        // Add rigid body (kinematic, for trigger detection)
+        // Rigidbody
         Rigidbody rb = npcObj.AddComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.useGravity = false;
 
-        // Add NPCInteraction script
-        NPCInteraction interaction = npcObj.AddComponent<NPCInteraction>();
-        // Note: npcId and startingPassageId must be set via Inspector or SerializedProperty
+        // NPC interaction script
+        NPCInteraction npcInteraction = npcObj.AddComponent<NPCInteraction>();
 
-        Debug.Log($"✅ Created NPC: {npcId} at {position}");
+        Debug.Log($"✅ Created NPC: {npcName} at {position}");
     }
 }
