@@ -45,6 +45,9 @@ public class CreateMarketplaceBlockA
         // === FORWARD EXIT TRIGGER ===
         CreateExitTrigger();
 
+        // === BACK BARRIER ===
+        CreateBackBarrier();
+
         Debug.Log("✅ Marketplace Block A scene created successfully!");
     }
 
@@ -93,7 +96,7 @@ public class CreateMarketplaceBlockA
 
         foreach (float z in zPositions)
         {
-            CreateStall("LeftStall", new Vector3(2, 1.5f, z));
+            CreateStall("LeftStall", new Vector3(2, 0.165f, z));
         }
     }
 
@@ -104,7 +107,7 @@ public class CreateMarketplaceBlockA
 
         foreach (float z in zPositions)
         {
-            CreateStall("RightStall", new Vector3(18, 1.5f, z));
+            CreateStall("RightStall", new Vector3(18, 0.165f, z));
         }
     }
 
@@ -118,7 +121,8 @@ public class CreateMarketplaceBlockA
         visual.name = "Visual";
         visual.transform.SetParent(stallObj.transform);
         visual.transform.localPosition = Vector3.zero;
-        visual.transform.localScale = new Vector3(2, 3, 3);
+        // SCALE: Half the player's height (0.66 base × 0.5 = 0.33 on Y)
+        visual.transform.localScale = new Vector3(0.66f, 0.33f, 0.66f);
 
         // Remove primitive collider
         Object.DestroyImmediate(visual.GetComponent<Collider>());
@@ -128,9 +132,9 @@ public class CreateMarketplaceBlockA
         stallMat.color = new Color(0.7f, 0.6f, 0.4f, 1f);
         visual.GetComponent<MeshRenderer>().material = stallMat;
 
-        // Add collider for blocking
+        // Add collider for blocking - scaled to match visual
         BoxCollider stallCollider = stallObj.AddComponent<BoxCollider>();
-        stallCollider.size = new Vector3(2, 3, 3);
+        stallCollider.size = new Vector3(0.66f, 0.33f, 0.66f);
 
         // Add rigidbody
         Rigidbody stallRb = stallObj.AddComponent<Rigidbody>();
@@ -251,13 +255,15 @@ public class CreateMarketplaceBlockA
     {
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
-        playerObj.transform.position = new Vector3(10, 1, 3);
+        playerObj.transform.position = new Vector3(10, 0.66f, 3);
+        // SCALE: Reduce player by 1/3 for proper proportions
+        playerObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
-        // Character controller
+        // Character controller - sized for scaled player
         CharacterController cc = playerObj.AddComponent<CharacterController>();
-        cc.height = 2f;
-        cc.radius = 0.5f;
-        cc.center = new Vector3(0, 1, 0);
+        cc.height = 1.32f;  // 2 × 0.66 scale
+        cc.radius = 0.33f;  // 0.5 × 0.66 scale
+        cc.center = new Vector3(0, 0.66f, 0);  // 1 × 0.66 scale
 
         // Add player script
         playerObj.AddComponent<SimplePlayerMovement>();
@@ -266,8 +272,8 @@ public class CreateMarketplaceBlockA
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(playerObj.transform);
-        visualObj.transform.localPosition = new Vector3(0, 0, 0);
-        visualObj.transform.localScale = new Vector3(1, 2, 1);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(1, 1, 1);  // Already scaled via parent
 
         // Remove primitive collider
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
@@ -280,15 +286,15 @@ public class CreateMarketplaceBlockA
         // Interaction trigger collider
         CapsuleCollider triggerCollider = playerObj.AddComponent<CapsuleCollider>();
         triggerCollider.isTrigger = true;
-        triggerCollider.radius = 0.6f;
-        triggerCollider.height = 2f;
-        triggerCollider.center = new Vector3(0, 1, 0);
+        triggerCollider.radius = 0.33f;  // 0.5 × 0.66 scale
+        triggerCollider.height = 1.32f;  // 2 × 0.66 scale
+        triggerCollider.center = new Vector3(0, 0.66f, 0);  // 1 × 0.66 scale
 
         // Camera as child
         GameObject cameraObj = new GameObject("MainCamera");
         cameraObj.tag = "MainCamera";
         cameraObj.transform.SetParent(playerObj.transform);
-        cameraObj.transform.localPosition = new Vector3(0, 1.2f, -2.5f);
+        cameraObj.transform.localPosition = new Vector3(0, 0.79f, -1.65f);  // Scaled position (1.2 × 0.66, -2.5 × 0.66)
 
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
@@ -300,11 +306,11 @@ public class CreateMarketplaceBlockA
     {
         Vector3[] npcPositions = new Vector3[]
         {
-            new Vector3(10, 1.97f, 8),
-            new Vector3(7, 1.97f, 10),
-            new Vector3(13, 1.97f, 10),
-            new Vector3(10, 1.97f, 13),
-            new Vector3(10, 1.97f, 16)
+            new Vector3(10, 0.66f, 8),
+            new Vector3(7, 0.66f, 10),
+            new Vector3(13, 0.66f, 10),
+            new Vector3(10, 0.66f, 13),
+            new Vector3(10, 0.66f, 16)
         };
 
         string[] npcNames = { "Merchant", "Blacksmith", "Healer", "Bard", "Sage" };
@@ -319,13 +325,15 @@ public class CreateMarketplaceBlockA
     {
         GameObject npcObj = new GameObject($"NPC_{npcName}");
         npcObj.transform.position = position;
+        // SCALE: Match player height (0.66)
+        npcObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         // Visual (purple capsule)
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(npcObj.transform);
         visualObj.transform.localPosition = Vector3.zero;
-        visualObj.transform.localScale = new Vector3(1, 2, 1);
+        visualObj.transform.localScale = new Vector3(1, 1, 1);  // Already scaled via parent
 
         // Remove primitive collider
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
@@ -335,12 +343,12 @@ public class CreateMarketplaceBlockA
         npcMat.color = new Color(0.7f, 0.3f, 0.9f, 1f);
         visualObj.GetComponent<MeshRenderer>().material = npcMat;
 
-        // Solid collider (blocks movement)
+        // Solid collider (blocks movement) - SCALED FOR PLAYER SIZE
         CapsuleCollider solidCollider = npcObj.AddComponent<CapsuleCollider>();
         solidCollider.isTrigger = false;
-        solidCollider.radius = 0.5f;
-        solidCollider.height = 2f;
-        solidCollider.center = new Vector3(0, 1, 0);
+        solidCollider.radius = 0.25f;   // 0.5 × 0.5 (0.5 base scaled)
+        solidCollider.height = 1.8f;    // Scaled appropriately
+        solidCollider.center = new Vector3(0, 0.9f, 0);
 
         // Trigger collider (detects interaction)
         GameObject triggerObj = new GameObject("InteractionTrigger");
@@ -349,9 +357,9 @@ public class CreateMarketplaceBlockA
 
         CapsuleCollider triggerCollider = triggerObj.AddComponent<CapsuleCollider>();
         triggerCollider.isTrigger = true;
-        triggerCollider.radius = 0.8f;
-        triggerCollider.height = 2f;
-        triggerCollider.center = new Vector3(0, 1, 0);
+        triggerCollider.radius = 0.5f;  // Larger radius for interaction range
+        triggerCollider.height = 1.8f;
+        triggerCollider.center = new Vector3(0, 0.9f, 0);
 
         // Rigidbody
         Rigidbody rb = npcObj.AddComponent<Rigidbody>();
@@ -362,30 +370,57 @@ public class CreateMarketplaceBlockA
         NPCInteraction npcInteraction = npcObj.AddComponent<NPCInteraction>();
         npcInteraction.npcName = npcName;
 
-        // Find dialogue canvas
-        Canvas dialogueCanvas = Object.FindAnyObjectByType<Canvas>();
-        if (dialogueCanvas != null && dialogueCanvas.name == "DialogueCanvas")
+        // Find dialogue canvas by name
+        Canvas[] canvases = Object.FindObjectsByType<Canvas>();
+        Canvas dialogueCanvas = null;
+        foreach (Canvas c in canvases)
+        {
+            if (c.name == "DialogueCanvas")
+            {
+                dialogueCanvas = c;
+                break;
+            }
+        }
+        if (dialogueCanvas != null)
             npcInteraction.dialogueCanvas = dialogueCanvas;
 
-        // Find dialogue text
-        TextMeshProUGUI dialogueText = Object.FindAnyObjectByType<TextMeshProUGUI>();
-        npcInteraction.dialogueText = dialogueText;
-
-        // Find buttons
-        Button[] buttons = Object.FindObjectsByType<Button>();
-        foreach (Button btn in buttons)
+        // Find dialogue text specifically (DialoguePanel -> DialogueText)
+        if (dialogueCanvas != null)
         {
-            if (btn.name == "OptionButton1")
-                npcInteraction.optionButton1 = btn.gameObject;
-            else if (btn.name == "OptionButton2")
-                npcInteraction.optionButton2 = btn.gameObject;
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            if (panelTransform != null)
+            {
+                Transform textTransform = panelTransform.Find("DialogueText");
+                if (textTransform != null)
+                {
+                    TextMeshProUGUI dialogueText = textTransform.GetComponent<TextMeshProUGUI>();
+                    npcInteraction.dialogueText = dialogueText;
+                }
+            }
+        }
+
+        // Find buttons by searching under DialoguePanel
+        if (dialogueCanvas != null)
+        {
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            if (panelTransform != null)
+            {
+                Button[] buttons = panelTransform.GetComponentsInChildren<Button>();
+                foreach (Button btn in buttons)
+                {
+                    if (btn.name == "OptionButton1")
+                        npcInteraction.optionButton1 = btn.gameObject;
+                    else if (btn.name == "OptionButton2")
+                        npcInteraction.optionButton2 = btn.gameObject;
+                }
+            }
         }
     }
 
     static void CreateGlyph()
     {
         GameObject glyphObj = new GameObject("Glyph");
-        glyphObj.transform.position = new Vector3(10, 0.67f, 6);
+        glyphObj.transform.position = new Vector3(10, 0.5f, 6);
 
         // Visual (cyan sphere)
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -403,10 +438,15 @@ public class CreateMarketplaceBlockA
         glyphMat.SetFloat("_Glossiness", 0.8f);
         visualObj.GetComponent<MeshRenderer>().material = glyphMat;
 
-        // Trigger collider
+        // PHYSICAL COLLIDER (blocks movement)
+        SphereCollider physicalCollider = glyphObj.AddComponent<SphereCollider>();
+        physicalCollider.isTrigger = false;
+        physicalCollider.radius = 0.3f;
+
+        // INTERACTION TRIGGER (larger range for detection)
         SphereCollider triggerCollider = glyphObj.AddComponent<SphereCollider>();
         triggerCollider.isTrigger = true;
-        triggerCollider.radius = 0.5f;
+        triggerCollider.radius = 1.0f;
 
         // Glyph script
         GlyphObject glyphScript = glyphObj.AddComponent<GlyphObject>();
@@ -437,5 +477,23 @@ public class CreateMarketplaceBlockA
         Material exitMat = new Material(Shader.Find("Standard"));
         exitMat.color = new Color(1, 1, 0, 0.3f);
         visualObj.GetComponent<MeshRenderer>().material = exitMat;
+    }
+
+    static void CreateBackBarrier()
+    {
+        GameObject barrierObj = new GameObject("BackBarrier");
+        barrierObj.transform.position = new Vector3(10, 2.5f, 0);
+
+        // Invisible wall to prevent falling off back edge
+        BoxCollider barrierCollider = barrierObj.AddComponent<BoxCollider>();
+        barrierCollider.isTrigger = false;
+        barrierCollider.size = new Vector3(50, 5, 1);
+
+        // Rigidbody
+        Rigidbody rb = barrierObj.AddComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
+        Debug.Log("✅ Back barrier created - player cannot fall off back edge");
     }
 }

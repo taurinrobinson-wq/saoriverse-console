@@ -23,6 +23,9 @@ public class NPCInteraction : MonoBehaviour
     private bool isDialogueOpen = false;
     private bool playerInRange = false;
 
+    // === MULTI-NPC TRACKING: Only one NPC can be in dialogue at a time ===
+    private static NPCInteraction currentActiveNPC = null;
+
     void Awake()
     {
         CacheDialogueReferences();
@@ -58,8 +61,12 @@ public class NPCInteraction : MonoBehaviour
 
     protected virtual void OnTriggerStay(Collider other)
     {
-        // Only process if player and not already in dialogue
-        if (!other.CompareTag("Player") || isDialogueOpen)
+        // Only process if player is in range
+        if (!other.CompareTag("Player"))
+            return;
+
+        // If another NPC is active, don't show this NPC's prompt
+        if (currentActiveNPC != null && currentActiveNPC != this)
             return;
 
         // Show interaction prompt
@@ -70,6 +77,11 @@ public class NPCInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && canOpenDialogue)
         {
             Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcName}");
+            
+            // Close any other active NPC dialogue first
+            if (currentActiveNPC != null && currentActiveNPC != this)
+                currentActiveNPC.CloseDialogue();
+            
             OpenDialogue();
         }
     }
@@ -80,13 +92,17 @@ public class NPCInteraction : MonoBehaviour
         {
             playerInRange = false;
             InteractionUI.Instance?.HidePrompt();
-            CloseDialogue();
+            
+            // Only close if this NPC is the active one
+            if (currentActiveNPC == this)
+                CloseDialogue();
         }
     }
 
     void OpenDialogue()
     {
         isDialogueOpen = true;
+        currentActiveNPC = this;  // Mark this NPC as the active dialogue partner
         Debug.Log($"🟣 OpenDialogue called for {npcName}");
 
         // Use cached panel reference instead of searching with Transform.Find
@@ -133,15 +149,15 @@ public class NPCInteraction : MonoBehaviour
     {
         Debug.Log($"🟢 BUTTON 1 CLICKED");
         if (dialogueText != null)
-            dialogueText.text = "It's Ravi. I gotta go.";
+            dialogueText.text = $"My name is {npcName}. Nice to meet you!";
 
         if (optionButton1 != null)
         {
             optionButton1.SetActive(true);
             if (button1Text != null)
-                button1Text.text = "Okay.";
+                button1Text.text = "Thanks!";
             
-            // Update button 1 listener for the "Okay." state to close dialogue
+            // Update button 1 listener for the "Thanks!" state to close dialogue
             if (button1 != null)
             {
                 button1.onClick.RemoveAllListeners();
@@ -158,6 +174,10 @@ public class NPCInteraction : MonoBehaviour
         Debug.Log($"🟣 CloseDialogue called - Dialogue closing");
         isDialogueOpen = false;
         lastDialogueCloseTime = Time.time;
+
+        // Only clear currentActiveNPC if this NPC is the one closing
+        if (currentActiveNPC == this)
+            currentActiveNPC = null;
 
         // Use cached panel reference instead of searching with Transform.Find
         if (dialoguePanel != null)
