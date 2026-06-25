@@ -74,9 +74,10 @@ public class SetupVelinorTestScene
         groundMat.color = new Color(0.6f, 0.5f, 0.4f, 1f);
         mr.material = groundMat;
 
+        // Collider positioned slightly above ground to prevent z-fighting
         BoxCollider groundCollider = groundObj.AddComponent<BoxCollider>();
-        groundCollider.size = new Vector3(20, 0.1f, 20);
-        groundCollider.center = Vector3.zero;
+        groundCollider.size = new Vector3(20, 0.01f, 20);
+        groundCollider.center = new Vector3(0, -0.005f, 0);
 
         Rigidbody groundRb = groundObj.AddComponent<Rigidbody>();
         groundRb.isKinematic = true;
@@ -156,7 +157,7 @@ public class SetupVelinorTestScene
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
 
-        // DialoguePanel (bottom 30%)
+        // DialoguePanel (bottom 25% - smaller than before)
         GameObject panelObj = new GameObject("DialoguePanel");
         panelObj.transform.SetParent(canvasObj.transform, false);
         Image panelImage = panelObj.AddComponent<Image>();
@@ -164,16 +165,16 @@ public class SetupVelinorTestScene
 
         RectTransform panelRect = panelObj.GetComponent<RectTransform>();
         panelRect.anchorMin = new Vector2(0, 0);
-        panelRect.anchorMax = new Vector2(1, 0.3f);
+        panelRect.anchorMax = new Vector2(1, 0.25f);
         panelRect.offsetMin = Vector2.zero;
         panelRect.offsetMax = Vector2.zero;
 
-        // NPCNameText
+        // NPCNameText (smaller)
         GameObject nameTextObj = new GameObject("NPCNameText");
         nameTextObj.transform.SetParent(panelObj.transform, false);
         TextMeshProUGUI nameText = nameTextObj.AddComponent<TextMeshProUGUI>();
         nameText.text = "[NPC Name]";
-        nameText.fontSize = 56;
+        nameText.fontSize = 36;
         nameText.alignment = TextAlignmentOptions.TopLeft;
         nameText.color = Color.white;
 
@@ -181,15 +182,15 @@ public class SetupVelinorTestScene
         nameRect.anchorMin = new Vector2(0, 1);
         nameRect.anchorMax = new Vector2(0, 1);
         nameRect.pivot = new Vector2(0, 1);
-        nameRect.anchoredPosition = new Vector2(40, -40);
-        nameRect.sizeDelta = new Vector2(400, 80);
+        nameRect.anchoredPosition = new Vector2(20, -15);
+        nameRect.sizeDelta = new Vector2(300, 50);
 
-        // DialogueBodyText
+        // DialogueBodyText (smaller)
         GameObject bodyTextObj = new GameObject("DialogueBodyText");
         bodyTextObj.transform.SetParent(panelObj.transform, false);
         TextMeshProUGUI bodyText = bodyTextObj.AddComponent<TextMeshProUGUI>();
         bodyText.text = "[Dialogue will appear here]";
-        bodyText.fontSize = 32;
+        bodyText.fontSize = 24;
         bodyText.alignment = TextAlignmentOptions.TopLeft;
         bodyText.color = Color.white;
 
@@ -197,15 +198,15 @@ public class SetupVelinorTestScene
         bodyRect.anchorMin = new Vector2(0, 1);
         bodyRect.anchorMax = new Vector2(1, 1);
         bodyRect.pivot = new Vector2(0, 1);
-        bodyRect.anchoredPosition = new Vector2(40, -140);
-        bodyRect.sizeDelta = new Vector2(-80, 200);
+        bodyRect.anchoredPosition = new Vector2(20, -65);
+        bodyRect.sizeDelta = new Vector2(-40, 100);
 
         // ChoiceButtonContainer
         GameObject containerObj = new GameObject("ChoiceButtonContainer");
         containerObj.transform.SetParent(panelObj.transform, false);
 
         VerticalLayoutGroup layoutGroup = containerObj.AddComponent<VerticalLayoutGroup>();
-        layoutGroup.spacing = 10;
+        layoutGroup.spacing = 5;
         layoutGroup.childForceExpandHeight = false;
         layoutGroup.childForceExpandWidth = true;
 
@@ -213,8 +214,8 @@ public class SetupVelinorTestScene
         containerRect.anchorMin = new Vector2(0, 0);
         containerRect.anchorMax = Vector2.one;
         containerRect.pivot = new Vector2(0, 0);
-        containerRect.anchoredPosition = new Vector2(40, 40);
-        containerRect.sizeDelta = new Vector2(-80, 150);
+        containerRect.anchoredPosition = new Vector2(20, 10);
+        containerRect.sizeDelta = new Vector2(-40, 80);
 
         // ChoiceButtonPrefab (will be duplicated by code)
         GameObject buttonPrefabObj = new GameObject("ChoiceButtonPrefab");
@@ -231,13 +232,13 @@ public class SetupVelinorTestScene
         btn.colors = colors;
 
         RectTransform btnRect = buttonPrefabObj.GetComponent<RectTransform>();
-        btnRect.sizeDelta = new Vector2(0, 50);
+        btnRect.sizeDelta = new Vector2(0, 35);
 
         GameObject btnTextObj = new GameObject("Text");
         btnTextObj.transform.SetParent(buttonPrefabObj.transform, false);
         TextMeshProUGUI btnText = btnTextObj.AddComponent<TextMeshProUGUI>();
         btnText.text = "[Choice Text]";
-        btnText.fontSize = 28;
+        btnText.fontSize = 20;
         btnText.alignment = TextAlignmentOptions.Center;
         btnText.color = Color.white;
 
@@ -254,7 +255,8 @@ public class SetupVelinorTestScene
     {
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
-        playerObj.transform.position = new Vector3(0, 0, 0);
+        playerObj.transform.position = new Vector3(0, 1f, -5f);
+        playerObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         // Character controller
         CharacterController charController = playerObj.AddComponent<CharacterController>();
@@ -262,11 +264,15 @@ public class SetupVelinorTestScene
         charController.radius = 0.25f;
         charController.center = new Vector3(0, 0.9f, 0);
 
+        // Add player movement script
+        playerObj.AddComponent<SimplePlayerController>();
+
         // Visual (blue capsule)
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(playerObj.transform);
         visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(1, 1, 1);
 
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
         Material playerMat = new Material(Shader.Find("Standard"));
@@ -278,11 +284,11 @@ public class SetupVelinorTestScene
         rb.isKinematic = true;
         rb.useGravity = false;
 
-        // Camera
+        // Camera (offset behind player)
         GameObject cameraObj = new GameObject("MainCamera");
         cameraObj.tag = "MainCamera";
         cameraObj.transform.SetParent(playerObj.transform);
-        cameraObj.transform.localPosition = new Vector3(0, 0.79f, -1.65f);
+        cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
 
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
@@ -291,13 +297,15 @@ public class SetupVelinorTestScene
     static void CreateRavi()
     {
         GameObject raviObj = new GameObject("NPC_Ravi");
-        raviObj.transform.position = new Vector3(0, 0, 5);
+        raviObj.transform.position = new Vector3(0, 1f, 5f);
+        raviObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         // Visual (purple capsule)
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(raviObj.transform);
         visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(1, 1, 1);
 
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
         Material raviMat = new Material(Shader.Find("Standard"));
