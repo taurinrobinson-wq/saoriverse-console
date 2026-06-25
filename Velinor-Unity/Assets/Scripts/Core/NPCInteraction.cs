@@ -61,9 +61,11 @@ public class NPCInteraction : MonoBehaviour
 
     void CacheUIElements()
     {
-        dialogueCanvas = FindAnyObjectByType<Canvas>();
-        if (dialogueCanvas != null && dialogueCanvas.name == "DialogueCanvas")
+        // Find DialogueCanvas specifically by name
+        GameObject dialogueCanvasObj = GameObject.Find("DialogueCanvas");
+        if (dialogueCanvasObj != null)
         {
+            dialogueCanvas = dialogueCanvasObj.GetComponent<Canvas>();
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null)
             {
@@ -81,6 +83,10 @@ public class NPCInteraction : MonoBehaviour
                     Debug.Log($"🟣 {npcId}: Cached UI elements");
                 }
             }
+        }
+        else
+        {
+            Debug.LogError("DialogueCanvas not found in scene!");
         }
     }
 
