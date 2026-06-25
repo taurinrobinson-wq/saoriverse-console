@@ -22,7 +22,11 @@ public class SetupVelinorTestScene
         CreateDialogueUI();
         CreatePlayer();
         CreateRavi();
-        CreateStatAndDialogueManagers();
+        
+        // NOTE: StatManager + DialogueManager are optional
+        // They're available if you want to use JSON dialogue later
+        // For now, simple hardcoded dialogue works without them
+        // CreateStatAndDialogueManagers();
 
         // Save scene
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), "Assets/Scenes/VelinorTestScene.unity");

@@ -140,9 +140,8 @@
         "need": 0.25,
         "trust": 0.45,
         "skepticism": 0.4
-      },
-      "active": false
-    }
+      }
+    },
     "Mariel": {
       "name": "Mariel",
       "remnants": {
