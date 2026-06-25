@@ -210,6 +210,11 @@ public class SetupVelinorTestScene
         layoutGroup.spacing = 5;
         layoutGroup.childForceExpandHeight = false;
         layoutGroup.childForceExpandWidth = true;
+        layoutGroup.padding = new RectOffset(0, 0, 0, 0);
+
+        ContentSizeFitter contentSizeFitter = containerObj.AddComponent<ContentSizeFitter>();
+        contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
         RectTransform containerRect = containerObj.GetComponent<RectTransform>();
         containerRect.anchorMin = new Vector2(0, 0);
@@ -239,7 +244,11 @@ public class SetupVelinorTestScene
         btn.colors = colors;
 
         RectTransform btnRect = buttonObj.GetComponent<RectTransform>();
-        btnRect.sizeDelta = new Vector2(0, 35);
+        btnRect.sizeDelta = new Vector2(350, 35);
+
+        LayoutElement layoutElement = buttonObj.AddComponent<LayoutElement>();
+        layoutElement.preferredWidth = 350;
+        layoutElement.preferredHeight = 35;
 
         GameObject btnTextObj = new GameObject("Text");
         btnTextObj.transform.SetParent(buttonObj.transform, false);

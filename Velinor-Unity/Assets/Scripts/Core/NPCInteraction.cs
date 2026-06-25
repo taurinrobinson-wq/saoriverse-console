@@ -174,6 +174,11 @@ public class NPCInteraction : MonoBehaviour
             panelTransform.gameObject.SetActive(true);
             Debug.Log($"🟣 Panel activated for {npcId}");
             
+            // Force layout rebuild immediately after activating panel
+            RectTransform panelRect = panelTransform as RectTransform;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
+            Debug.Log($"🟢 Initial layout rebuild after panel activation");
+            
             // Update NPC name
             if (npcNameText != null)
             {
@@ -182,7 +187,6 @@ public class NPCInteraction : MonoBehaviour
             }
             
             // Debug panel state
-            RectTransform panelRect = panelTransform.GetComponent<RectTransform>();
             if (panelRect != null)
             {
                 Debug.Log($"📊 DialoguePanel: size={panelRect.sizeDelta}, pos={panelRect.anchoredPosition}");
@@ -211,11 +215,12 @@ public class NPCInteraction : MonoBehaviour
                 CloseDialogue();
             });
             
-            // Force layout rebuild to ensure buttons are positioned correctly
-            if (optionButton1 != null && optionButton2 != null)
+            // Force layout rebuild AFTER buttons are set up
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            if (panelTransform != null && optionButton1 != null && optionButton2 != null)
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(panelTransform as RectTransform);
-                Debug.Log($"🟢 Layout rebuilt for dialogue panel");
+                Debug.Log($"🟢 Final layout rebuild after button setup");
             }
         }
         else if (dialogueState == 1)
