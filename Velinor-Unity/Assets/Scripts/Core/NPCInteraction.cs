@@ -170,6 +170,13 @@ public class NPCInteraction : MonoBehaviour
         {
             panelTransform.gameObject.SetActive(true);
             Debug.Log($"🟣 Panel activated for {npcId}");
+            
+            // Debug panel state
+            RectTransform panelRect = panelTransform.GetComponent<RectTransform>();
+            if (panelRect != null)
+            {
+                Debug.Log($"📊 DialoguePanel: size={panelRect.sizeDelta}, pos={panelRect.anchoredPosition}");
+            }
         }
 
         if (dialogueState == 0)
@@ -193,6 +200,13 @@ public class NPCInteraction : MonoBehaviour
                 Debug.Log($"🟢 Button 2 clicked");
                 CloseDialogue();
             });
+            
+            // Force layout rebuild to ensure buttons are positioned correctly
+            if (optionButton1 != null && optionButton2 != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelTransform as RectTransform);
+                Debug.Log($"🟢 Layout rebuilt for dialogue panel");
+            }
         }
         else if (dialogueState == 1)
         {
@@ -236,6 +250,20 @@ public class NPCInteraction : MonoBehaviour
 
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
+        
+        // Debug button visibility
+        RectTransform btnRect = button.GetComponent<RectTransform>();
+        if (btnRect != null)
+        {
+            Debug.Log($"📊 Button '{buttonText}' properties:");
+            Debug.Log($"  - Size: {btnRect.sizeDelta}");
+            Debug.Log($"  - Position: {btnRect.anchoredPosition}");
+            Debug.Log($"  - LocalScale: {btnRect.localScale}");
+            Debug.Log($"  - Active: {button.gameObject.activeSelf}");
+            Debug.Log($"  - Image color: {button.GetComponent<Image>()?.color}");
+            Debug.Log($"  - Text color: {btnTextComponent?.color}");
+        }
+        
         Debug.Log($"🟢 Button '{buttonText}' is now interactive");
     }
 
