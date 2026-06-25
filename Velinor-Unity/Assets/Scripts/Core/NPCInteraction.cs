@@ -21,7 +21,6 @@ public class NPCInteraction : MonoBehaviour
     [SerializeField] private string startingPassageId = "ravi_dialogue";
 
     private bool playerInRange = false;
-    private float interactionRange = 3f;
     
     // Simple dialogue fallback (when DialogueManager not available)
     private int dialogueState = 0;
@@ -55,7 +54,7 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log($"🟣 Player entered {npcId} interaction range");
+            Debug.Log($"🟣 Player entered {npcId} interaction trigger");
         }
     }
 
@@ -64,7 +63,8 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log($"🟣 Player left {npcId} interaction range");
+            Debug.Log($"🟣 Player left {npcId} interaction trigger");
+            HideInteractionPrompt();
             CloseDialogue();
         }
     }
@@ -73,21 +73,15 @@ public class NPCInteraction : MonoBehaviour
     {
         if (!playerInRange) return;
 
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj == null) return;
-
-        float playerDistance = Vector3.Distance(transform.position, playerObj.transform.position);
-        if (playerDistance > interactionRange) return;
-
-        // Show prompt
-        ShowInteractionPrompt();
-
-        // Check for E key
+        // Check for E key to open dialogue
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcId}");
             OpenDialogue();
         }
+        
+        // Show prompt while in range
+        ShowInteractionPrompt();
     }
 
     void ShowInteractionPrompt()
@@ -99,6 +93,19 @@ public class NPCInteraction : MonoBehaviour
             if (promptText != null)
             {
                 promptText.text = $"Press E to talk to {npcId}";
+            }
+        }
+    }
+
+    void HideInteractionPrompt()
+    {
+        Canvas interactionCanvas = GameObject.Find("InteractionCanvas")?.GetComponent<Canvas>();
+        if (interactionCanvas != null)
+        {
+            TextMeshProUGUI promptText = interactionCanvas.transform.Find("PromptText")?.GetComponent<TextMeshProUGUI>();
+            if (promptText != null)
+            {
+                promptText.text = "";
             }
         }
     }
@@ -178,7 +185,7 @@ public class NPCInteraction : MonoBehaviour
         {
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null)
-                panelTransform.gameObject.SetActive(false);
+                panelTransform.gameObject.SetActive(false);  // HIDE the dialogue panel
         }
 
         // Reset dialogue state

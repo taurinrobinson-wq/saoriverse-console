@@ -157,9 +157,10 @@ public class SetupVelinorTestScene
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
 
-        // DialoguePanel (bottom 25% - smaller than before)
+        // DialoguePanel (bottom 25% - starts hidden)
         GameObject panelObj = new GameObject("DialoguePanel");
         panelObj.transform.SetParent(canvasObj.transform, false);
+        panelObj.SetActive(false);  // START HIDDEN
         Image panelImage = panelObj.AddComponent<Image>();
         panelImage.color = new Color(0, 0, 0, 0.8f);
 
@@ -255,12 +256,12 @@ public class SetupVelinorTestScene
     {
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
-        playerObj.transform.position = new Vector3(0, 1f, -5f);
+        playerObj.transform.position = new Vector3(0, 0.66f, -5f);
         playerObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         // Character controller
         CharacterController charController = playerObj.AddComponent<CharacterController>();
-        charController.height = 1.8f;
+        charController.height = 1.32f;  // 1.8 × 0.66
         charController.radius = 0.25f;
         charController.center = new Vector3(0, 0.9f, 0);
 
@@ -288,7 +289,7 @@ public class SetupVelinorTestScene
         GameObject cameraObj = new GameObject("MainCamera");
         cameraObj.tag = "MainCamera";
         cameraObj.transform.SetParent(playerObj.transform);
-        cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
+        cameraObj.transform.localPosition = new Vector3(0, 0.79f, -1.65f);
 
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
@@ -297,7 +298,7 @@ public class SetupVelinorTestScene
     static void CreateRavi()
     {
         GameObject raviObj = new GameObject("NPC_Ravi");
-        raviObj.transform.position = new Vector3(0, 1f, 5f);
+        raviObj.transform.position = new Vector3(0, 0.66f, 5f);
         raviObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         // Visual (purple capsule)
@@ -312,21 +313,21 @@ public class SetupVelinorTestScene
         raviMat.color = new Color(0.7f, 0.3f, 0.9f, 1f);
         visualObj.GetComponent<MeshRenderer>().material = raviMat;
 
-        // Solid collider (blocks movement)
+        // Solid collider (BLOCKS movement - this is what stops player from passing through)
         CapsuleCollider solidCollider = raviObj.AddComponent<CapsuleCollider>();
-        solidCollider.isTrigger = false;
+        solidCollider.isTrigger = false;  // NOT a trigger - blocks movement
         solidCollider.radius = 0.25f;
         solidCollider.height = 1.8f;
         solidCollider.center = new Vector3(0, 0.9f, 0);
 
-        // Trigger collider (detects interaction)
+        // Separate trigger collider (detects interaction - use child GameObject)
         GameObject triggerObj = new GameObject("InteractionTrigger");
         triggerObj.transform.SetParent(raviObj.transform);
         triggerObj.transform.localPosition = Vector3.zero;
 
         CapsuleCollider triggerCollider = triggerObj.AddComponent<CapsuleCollider>();
-        triggerCollider.isTrigger = true;
-        triggerCollider.radius = 0.5f;
+        triggerCollider.isTrigger = true;  // This IS a trigger - just for detection
+        triggerCollider.radius = 0.5f;  // Larger for easier detection
         triggerCollider.height = 1.8f;
         triggerCollider.center = new Vector3(0, 0.9f, 0);
 

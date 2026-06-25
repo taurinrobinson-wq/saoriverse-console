@@ -18,19 +18,10 @@ public class SimplePlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         mainCamera = GetComponentInChildren<Camera>();
-        
-        // Lock cursor to center of screen
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        // Toggle cursor lock with ESC
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.Confined : CursorLockMode.Locked;
-        }
-
         HandleMovement();
         HandleMouseLook();
     }
@@ -73,6 +64,9 @@ public class SimplePlayerController : MonoBehaviour
 
     void HandleMouseLook()
     {
+        // Only look when right-clicking
+        if (!Input.GetMouseButton(1)) return;  // Right mouse button
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
