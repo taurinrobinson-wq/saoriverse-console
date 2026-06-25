@@ -34,8 +34,8 @@ public class NPCInteraction : MonoBehaviour
     // Dialogue Sequence
     private RaviDialogueSequence dialogueSequence;
     
-    // NPC Stats (Ravi's canonical values)
-    private NPCStats raviStats;
+    // NPC Stats (Ravi's canonical values) - public for stat display
+    public NPCStats raviStats;
 
     void Start()
     {

@@ -104,26 +104,25 @@ public class StatDisplayUI : MonoBehaviour
 
         // Find the NPC currently in dialogue (if any)
         NPCInteraction npc = FindAnyObjectByType<NPCInteraction>();
-        if (npc == null)
+        if (npc == null || npc.raviStats == null)
         {
-            npcStatsText.text = "<b>NPC STATS</b>\n(No NPC in range)";
+            npcStatsText.text = "<b>NPC STATS (RAVI)</b>\n(No stats available)";
             return;
         }
 
-        // Get Ravi's stats through reflection (they're private in NPCInteraction)
-        // For now, show a placeholder
+        // Display Ravi's actual REMNANTS stats
         string display = "<b>NPC STATS (RAVI)</b>\n";
         display += $"<size=20>";
         display += $"\n<color=magenta>REMNANTS:</color>\n";
-        display += $"  Resolve:     ??? \n";
-        display += $"  Empathy:     ??? \n";
-        display += $"  Memory:      ??? \n";
-        display += $"  Nuance:      ??? \n";
-        display += $"  Authority:   ??? \n";
-        display += $"  Need:        ??? \n";
-        display += $"  Trust:       ??? \n";
-        display += $"  Skepticism:  ??? \n";
-        display += $"</size>\n\n<size=16>(Stats update visible when dialogue starts)</size>";
+        display += $"  Resolve:     {npc.raviStats.Resolve:F2}\n";
+        display += $"  Empathy:     {npc.raviStats.Empathy:F2}\n";
+        display += $"  Memory:      {npc.raviStats.Memory:F2}\n";
+        display += $"  Nuance:      {npc.raviStats.Nuance:F2}\n";
+        display += $"  Authority:   {npc.raviStats.Authority:F2}\n";
+        display += $"  Need:        {npc.raviStats.Need:F2}\n";
+        display += $"  Trust:       {npc.raviStats.Trust:F2}\n";
+        display += $"  Skepticism:  {npc.raviStats.Skepticism:F2}\n";
+        display += $"</size>";
 
         npcStatsText.text = display;
     }

@@ -272,15 +272,19 @@ public class SetupVelinorTestScene
         btnTextObj.transform.SetParent(buttonObj.transform, false);
         TextMeshProUGUI btnText = btnTextObj.AddComponent<TextMeshProUGUI>();
         btnText.text = "[Choice Text]";
-        btnText.fontSize = 20;
+        btnText.fontSize = 14;  // Reduced from 20 for better fit
         btnText.alignment = TextAlignmentOptions.Center;
         btnText.color = Color.white;
+        btnText.enableWordWrapping = true;  // Enable wrapping
+        btnText.horizontalMapping = TextureMappingOptions.Character;
+        btnText.verticalMapping = TextureMappingOptions.Character;
+        btnText.overflowMode = TextOverflowModes.Truncate;  // Truncate if text too long
 
         RectTransform btnTextRect = btnTextObj.GetComponent<RectTransform>();
         btnTextRect.anchorMin = Vector2.zero;
         btnTextRect.anchorMax = Vector2.one;
-        btnTextRect.offsetMin = Vector2.zero;
-        btnTextRect.offsetMax = Vector2.zero;
+        btnTextRect.offsetMin = new Vector2(5, 5);  // Padding
+        btnTextRect.offsetMax = new Vector2(-5, -5);
 
         buttonObj.SetActive(true);
     }
