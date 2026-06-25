@@ -44,6 +44,11 @@ public class NPCInteraction : MonoBehaviour
                 {
                     optionButton1 = containerTransform.GetChild(0)?.GetComponent<Button>();
                     optionButton2 = containerTransform.GetChild(1)?.GetComponent<Button>();
+                    
+                    Debug.Log($"🟣 NPCInteraction ({npcId}): Found DialogueCanvas UI elements");
+                    Debug.Log($"  - Body text: {(dialogueBodyText != null ? "✅" : "❌")}");
+                    Debug.Log($"  - Button 1: {(optionButton1 != null ? "✅" : "❌")}");
+                    Debug.Log($"  - Button 2: {(optionButton2 != null ? "✅" : "❌")}");
                 }
             }
         }
@@ -71,7 +76,36 @@ public class NPCInteraction : MonoBehaviour
 
     void Update()
     {
+        // Check for player in range using overlap sphere (more reliable than trigger collider on child)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
+        bool playerDetected = false;
+        
+        foreach (Collider col in colliders)
+        {
+            if (col.CompareTag("Player"))
+            {
+                playerDetected = true;
+                break;
+            }
+        }
+        
+        if (playerDetected && !playerInRange)
+        {
+            playerInRange = true;
+            Debug.Log($"🟣 Player detected near {npcId}");
+        }
+        else if (!playerDetected && playerInRange)
+        {
+            playerInRange = false;
+            Debug.Log($"🟣 Player left {npcId}");
+            HideInteractionPrompt();
+            CloseDialogue();
+        }
+
         if (!playerInRange) return;
+
+        // Show prompt while in range
+        ShowInteractionPrompt();
 
         // Check for E key to open dialogue
         if (Input.GetKeyDown(KeyCode.E))
@@ -79,9 +113,6 @@ public class NPCInteraction : MonoBehaviour
             Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcId}");
             OpenDialogue();
         }
-        
-        // Show prompt while in range
-        ShowInteractionPrompt();
     }
 
     void ShowInteractionPrompt()
@@ -136,29 +167,48 @@ public class NPCInteraction : MonoBehaviour
 
         Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
         if (panelTransform != null)
+        {
             panelTransform.gameObject.SetActive(true);
+            Debug.Log($"🟣 Panel activated for {npcId}");
+        }
 
         if (dialogueState == 0)
         {
             // Initial greeting
             if (dialogueBodyText != null)
+            {
                 dialogueBodyText.text = "Hello there, what can I do for you?";
+                Debug.Log($"🟣 Set dialogue text to greeting");
+            }
 
             SetupButton(optionButton1, "What's your name?", () =>
             {
+                Debug.Log($"🟢 Button 1 clicked");
                 dialogueState = 1;
                 UseSimpleDialogue();
             });
 
-            SetupButton(optionButton2, "I don't need anything.", CloseDialogue);
+            SetupButton(optionButton2, "I don't need anything.", () =>
+            {
+                Debug.Log($"🟢 Button 2 clicked");
+                CloseDialogue();
+            });
         }
         else if (dialogueState == 1)
         {
             // Response to name question
             if (dialogueBodyText != null)
+            {
                 dialogueBodyText.text = $"It's {npcId}. I gotta go.";
+                Debug.Log($"🟣 Set dialogue text to response");
+            }
 
-            SetupButton(optionButton1, "Okay.", CloseDialogue);
+            SetupButton(optionButton1, "Okay.", () =>
+            {
+                Debug.Log($"🟢 Okay button clicked");
+                CloseDialogue();
+            });
+            
             if (optionButton2 != null)
                 optionButton2.gameObject.SetActive(false);
         }
@@ -166,15 +216,27 @@ public class NPCInteraction : MonoBehaviour
 
     void SetupButton(Button button, string buttonText, UnityEngine.Events.UnityAction action)
     {
-        if (button == null) return;
+        if (button == null)
+        {
+            Debug.LogWarning($"🔴 Button is null! Cannot set up button for text: {buttonText}");
+            return;
+        }
 
         button.gameObject.SetActive(true);
         TextMeshProUGUI btnTextComponent = button.GetComponentInChildren<TextMeshProUGUI>();
         if (btnTextComponent != null)
+        {
             btnTextComponent.text = buttonText;
+            Debug.Log($"🟢 Set button text: {buttonText}");
+        }
+        else
+        {
+            Debug.LogWarning($"🔴 Could not find TextMeshProUGUI in button!");
+        }
 
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
+        Debug.Log($"🟢 Button '{buttonText}' is now interactive");
     }
 
     void CloseDialogue()
