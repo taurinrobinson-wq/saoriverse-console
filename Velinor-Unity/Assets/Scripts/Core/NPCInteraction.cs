@@ -261,7 +261,6 @@ public class NPCInteraction : MonoBehaviour
                 optionButton2.gameObject.SetActive(false);
             
             // Force layout rebuild to ensure button is properly positioned
-            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null && optionButton1 != null)
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(panelTransform as RectTransform);
