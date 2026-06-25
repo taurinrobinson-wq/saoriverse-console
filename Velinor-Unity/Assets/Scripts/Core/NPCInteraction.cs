@@ -1,38 +1,66 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 /// <summary>
-/// NPCInteraction: Per-NPC GameObject script that detects player proximity and initiates dialogue.
+/// NPCInteraction: Per-NPC dialogue handler with TONE/REMNANTS integration.
 /// 
-/// Dual-Mode Operation:
-/// - PRIMARY: Use DialogueManager if available (new system with JSON stories and stat tracking)
-/// - FALLBACK: Simple hardcoded dialogue with state machine (when DialogueManager not found)
-/// 
-/// Responsibilities:
-/// - Detect when player enters/exits trigger range
-/// - Show/hide interaction prompt
-/// - Listen for E-key press
-/// - Call DialogueManager.StartDialogue() OR use simple dialogue fallback
+/// Features:
+/// - Multi-round dialogue sequences
+/// - TONE choice labeling (T/O/N/E)
+/// - REMNANTS stat effects
+/// - Name reveal mechanics
+/// - Consistent button styling
 /// </summary>
 public class NPCInteraction : MonoBehaviour
 {
     [SerializeField] private string npcId = "Ravi";
-    [SerializeField] private string startingPassageId = "ravi_dialogue";
-
-    private bool playerInRange = false;
     
-    // Simple dialogue fallback (when DialogueManager not available)
-    private int dialogueState = 0;
+    private bool playerInRange = false;
+    private int currentRound = 0;
+    private bool dialogueActive = false;
+    
+    // UI References
     private Canvas dialogueCanvas;
     private TextMeshProUGUI npcNameText;
     private TextMeshProUGUI dialogueBodyText;
     private Button optionButton1;
     private Button optionButton2;
+    private Button optionButton3;
+    private Button optionButton4;
+    private Transform choiceContainer;
+    
+    // Dialogue Sequence
+    private RaviDialogueSequence dialogueSequence;
+    
+    // NPC Stats (Ravi's canonical values)
+    private NPCStats raviStats;
 
     void Start()
     {
-        // Cache dialogue UI elements for fallback mode
+        // Initialize dialogue sequence for Ravi
+        dialogueSequence = new RaviDialogueSequence();
+        
+        // Initialize NPC stats with Ravi's canonical values
+        raviStats = new NPCStats
+        {
+            Resolve = 0.3f,
+            Empathy = 0.9f,
+            Memory = 0.9f,
+            Nuance = 0.7f,
+            Authority = 0.3f,
+            Need = 0.9f,
+            Trust = 0.1f,
+            Skepticism = 0.9f
+        };
+        
+        // Cache UI elements
+        CacheUIElements();
+    }
+
+    void CacheUIElements()
+    {
         dialogueCanvas = FindAnyObjectByType<Canvas>();
         if (dialogueCanvas != null && dialogueCanvas.name == "DialogueCanvas")
         {
@@ -41,45 +69,24 @@ public class NPCInteraction : MonoBehaviour
             {
                 npcNameText = panelTransform.Find("NPCNameText")?.GetComponent<TextMeshProUGUI>();
                 dialogueBodyText = panelTransform.Find("DialogueBodyText")?.GetComponent<TextMeshProUGUI>();
-                Transform containerTransform = panelTransform.Find("ChoiceButtonContainer");
-                if (containerTransform != null && containerTransform.childCount >= 2)
+                choiceContainer = panelTransform.Find("ChoiceButtonContainer");
+                
+                if (choiceContainer != null && choiceContainer.childCount >= 4)
                 {
-                    optionButton1 = containerTransform.GetChild(0)?.GetComponent<Button>();
-                    optionButton2 = containerTransform.GetChild(1)?.GetComponent<Button>();
+                    optionButton1 = choiceContainer.GetChild(0)?.GetComponent<Button>();
+                    optionButton2 = choiceContainer.GetChild(1)?.GetComponent<Button>();
+                    optionButton3 = choiceContainer.GetChild(2)?.GetComponent<Button>();
+                    optionButton4 = choiceContainer.GetChild(3)?.GetComponent<Button>();
                     
-                    Debug.Log($"🟣 NPCInteraction ({npcId}): Found DialogueCanvas UI elements");
-                    Debug.Log($"  - NPC name text: {(npcNameText != null ? "✅" : "❌")}");
-                    Debug.Log($"  - Body text: {(dialogueBodyText != null ? "✅" : "❌")}");
-                    Debug.Log($"  - Button 1: {(optionButton1 != null ? "✅" : "❌")}");
-                    Debug.Log($"  - Button 2: {(optionButton2 != null ? "✅" : "❌")}");
+                    Debug.Log($"🟣 {npcId}: Cached UI elements");
                 }
             }
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-            Debug.Log($"🟣 Player entered {npcId} interaction trigger");
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            Debug.Log($"🟣 Player left {npcId} interaction trigger");
-            HideInteractionPrompt();
-            CloseDialogue();
-        }
-    }
-
     void Update()
     {
-        // Check for player in range using overlap sphere (more reliable than trigger collider on child)
+        // Detect player proximity using OverlapSphere
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
         bool playerDetected = false;
         
@@ -100,20 +107,17 @@ public class NPCInteraction : MonoBehaviour
         else if (!playerDetected && playerInRange)
         {
             playerInRange = false;
-            Debug.Log($"🟣 Player left {npcId}");
-            HideInteractionPrompt();
             CloseDialogue();
+            HideInteractionPrompt();
         }
 
         if (!playerInRange) return;
 
-        // Show prompt while in range
         ShowInteractionPrompt();
 
-        // Check for E key to open dialogue
-        if (Input.GetKeyDown(KeyCode.E))
+        // E key to open dialogue
+        if (Input.GetKeyDown(KeyCode.E) && !dialogueActive)
         {
-            Debug.Log($"🟣 E-KEY PRESSED - Talking to {npcId}");
             OpenDialogue();
         }
     }
@@ -146,198 +150,220 @@ public class NPCInteraction : MonoBehaviour
 
     void OpenDialogue()
     {
-        // Try DialogueManager first (new system with JSON stories)
-        DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
-        if (dialogueManager != null)
-        {
-            Debug.Log($"✅ Using DialogueManager for {npcId}");
-            dialogueManager.StartDialogue(npcId, startingPassageId);
-            return;
-        }
-
-        // Fallback: Use simple hardcoded dialogue
-        Debug.Log($"⚠️ DialogueManager not found, using simple fallback dialogue for {npcId}");
-        UseSimpleDialogue();
-    }
-
-    void UseSimpleDialogue()
-    {
+        dialogueActive = true;
+        currentRound = 0;
+        
         if (dialogueCanvas == null)
         {
-            Debug.LogWarning("No DialogueCanvas found for simple dialogue fallback!");
+            CacheUIElements();
+        }
+        
+        ShowDialogueRound();
+    }
+
+    void ShowDialogueRound()
+    {
+        if (currentRound >= dialogueSequence.rounds.Count)
+        {
+            // Dialogue complete
+            Debug.Log($"🟣 {npcId}: Dialogue sequence complete");
+            CloseDialogue();
             return;
         }
 
         Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
-        if (panelTransform != null)
+        if (panelTransform == null)
         {
-            panelTransform.gameObject.SetActive(true);
-            Debug.Log($"🟣 Panel activated for {npcId}");
-            
-            // Force layout rebuild immediately after activating panel
-            RectTransform panelRect = panelTransform as RectTransform;
-            LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
-            Debug.Log($"🟢 Initial layout rebuild after panel activation");
-            
-            // Update NPC name
-            if (npcNameText != null)
-            {
-                npcNameText.text = npcId;
-                Debug.Log($"🟣 Set NPC name to: {npcId}");
-            }
-            
-            // Debug panel state
-            if (panelRect != null)
-            {
-                Debug.Log($"📊 DialoguePanel: size={panelRect.sizeDelta}, pos={panelRect.anchoredPosition}");
-            }
-        }
-
-        if (dialogueState == 0)
-        {
-            // Initial greeting
-            if (dialogueBodyText != null)
-            {
-                dialogueBodyText.text = "Hello there, what can I do for you?";
-                Debug.Log($"🟣 Set dialogue text to greeting");
-            }
-
-            SetupButton(optionButton1, "What's your name?", () =>
-            {
-                Debug.Log($"🟢 Button 1 clicked");
-                dialogueState = 1;
-                UseSimpleDialogue();
-            });
-
-            SetupButton(optionButton2, "I don't need anything.", () =>
-            {
-                Debug.Log($"🟢 Button 2 clicked");
-                CloseDialogue();
-            });
-            
-            // Force layout rebuild AFTER buttons are set up
-            if (panelTransform != null && optionButton1 != null && optionButton2 != null)
-            {
-                LayoutRebuilder.ForceRebuildLayoutImmediate(panelTransform as RectTransform);
-                Debug.Log($"🟢 Final layout rebuild after button setup");
-            }
-        }
-        else if (dialogueState == 1)
-        {
-            // Response to name question
-            if (dialogueBodyText != null)
-            {
-                dialogueBodyText.text = $"It's {npcId}. I gotta go.";
-                Debug.Log($"🟣 Set dialogue text to response");
-            }
-
-            // Ensure button1 is visible with proper styling
-            if (optionButton1 != null)
-            {
-                optionButton1.gameObject.SetActive(true);
-                
-                // Restore button styling (in case it was modified)
-                Image btnImage = optionButton1.GetComponent<Image>();
-                if (btnImage != null)
-                {
-                    btnImage.color = new Color(0.2f, 0.2f, 0.2f, 1f);  // Dark gray background
-                }
-                
-                ColorBlock colors = optionButton1.colors;
-                colors.normalColor = new Color(0.2f, 0.2f, 0.2f, 1f);
-                colors.highlightedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
-                colors.pressedColor = new Color(0.1f, 0.1f, 0.1f, 1f);
-                optionButton1.colors = colors;
-            }
-            
-            SetupButton(optionButton1, "Okay.", () =>
-            {
-                Debug.Log($"🟢 Okay button clicked");
-                CloseDialogue();
-            });
-            
-            // Hide button2
-            if (optionButton2 != null)
-                optionButton2.gameObject.SetActive(false);
-            
-            // Force layout rebuild to ensure button is properly positioned
-            if (panelTransform != null && optionButton1 != null)
-            {
-                LayoutRebuilder.ForceRebuildLayoutImmediate(panelTransform as RectTransform);
-                Debug.Log($"🟢 Layout rebuilt for response state");
-            }
-        }
-    }
-
-    void SetupButton(Button button, string buttonText, UnityEngine.Events.UnityAction action)
-    {
-        if (button == null)
-        {
-            Debug.LogWarning($"🔴 Button is null! Cannot set up button for text: {buttonText}");
+            Debug.LogError("DialoguePanel not found!");
             return;
         }
 
-        button.gameObject.SetActive(true);
-        TextMeshProUGUI btnTextComponent = button.GetComponentInChildren<TextMeshProUGUI>();
-        if (btnTextComponent != null)
+        panelTransform.gameObject.SetActive(true);
+        RectTransform panelRect = panelTransform as RectTransform;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
+
+        DialogueRound round = dialogueSequence.rounds[currentRound];
+        
+        // Show NPC name (or "???" if not revealed)
+        if (npcNameText != null)
         {
-            btnTextComponent.text = buttonText;
-            Debug.Log($"🟢 Set button text: {buttonText}");
+            npcNameText.text = dialogueSequence.playerKnowsName ? "Ravi" : "???";
         }
-        else
+        
+        // Show NPC's line
+        if (dialogueBodyText != null)
         {
-            Debug.LogWarning($"🔴 Could not find TextMeshProUGUI in button!");
+            dialogueBodyText.text = round.npcLine;
         }
 
+        // Show the 4 TONE choices
+        SetupChoiceButtons(round);
+    }
+
+    void SetupChoiceButtons(DialogueRound round)
+    {
+        // Hide all buttons first
+        if (optionButton1 != null) optionButton1.gameObject.SetActive(false);
+        if (optionButton2 != null) optionButton2.gameObject.SetActive(false);
+        if (optionButton3 != null) optionButton3.gameObject.SetActive(false);
+        if (optionButton4 != null) optionButton4.gameObject.SetActive(false);
+
+        // Setup each button with corresponding choice
+        Button[] buttons = { optionButton1, optionButton2, optionButton3, optionButton4 };
+        
+        for (int i = 0; i < round.choices.Count && i < buttons.Length; i++)
+        {
+            DialogueChoice choice = round.choices[i];
+            Button btn = buttons[i];
+            int choiceIndex = i;  // Capture for closure
+            
+            SetupChoiceButton(btn, choice, () => OnChoiceSelected(choiceIndex));
+        }
+
+        // Force layout rebuild
+        if (choiceContainer != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(choiceContainer as RectTransform);
+        }
+    }
+
+    void SetupChoiceButton(Button button, DialogueChoice choice, UnityEngine.Events.UnityAction action)
+    {
+        if (button == null) return;
+
+        button.gameObject.SetActive(true);
+
+        // Set button text with TONE label
+        TextMeshProUGUI btnText = button.GetComponentInChildren<TextMeshProUGUI>();
+        if (btnText != null)
+        {
+            btnText.text = $"({choice.toneType}) {choice.playerLine}";
+        }
+
+        // Ensure consistent dark gray styling
+        Image btnImage = button.GetComponent<Image>();
+        if (btnImage != null)
+        {
+            btnImage.color = new Color(0.2f, 0.2f, 0.2f, 1f);
+        }
+
+        ColorBlock colors = button.colors;
+        colors.normalColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+        colors.highlightedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
+        colors.pressedColor = new Color(0.1f, 0.1f, 0.1f, 1f);
+        button.colors = colors;
+
+        // Set button action
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
         
-        // Debug button visibility
-        RectTransform btnRect = button.GetComponent<RectTransform>();
-        if (btnRect != null)
+        Debug.Log($"🟢 Setup button: ({choice.toneType}) - {choice.playerLine}");
+    }
+
+    void OnChoiceSelected(int choiceIndex)
+    {
+        DialogueRound round = dialogueSequence.rounds[currentRound];
+        DialogueChoice choice = round.choices[choiceIndex];
+
+        Debug.Log($"🟢 Player chose ({choice.toneType}): {choice.playerLine}");
+        
+        // Apply REMNANTS effects
+        foreach (var kvp in choice.remnantEffects)
         {
-            Debug.Log($"📊 Button '{buttonText}' properties:");
-            Debug.Log($"  - Size: {btnRect.sizeDelta}");
-            Debug.Log($"  - Position: {btnRect.anchoredPosition}");
-            Debug.Log($"  - LocalScale: {btnRect.localScale}");
-            Debug.Log($"  - Active: {button.gameObject.activeSelf}");
-            Debug.Log($"  - Image color: {button.GetComponent<Image>()?.color}");
-            Debug.Log($"  - Text color: {btnTextComponent?.color}");
+            ApplyRemnantEffect(kvp.Key, kvp.Value);
+        }
+
+        // Check for name reveal (NarrativePresence choice)
+        if (choice.toneType == 'N')
+        {
+            dialogueSequence.playerKnowsName = true;
+            Debug.Log($"✨ Player learned {npcId}'s name!");
+        }
+
+        // Move to next round
+        currentRound++;
+        
+        // Show dialogue panel again
+        Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+        if (panelTransform != null)
+        {
+            panelTransform.gameObject.SetActive(true);
+        }
+
+        // Show next round or end dialogue
+        if (currentRound < dialogueSequence.rounds.Count)
+        {
+            ShowDialogueRound();
+        }
+        else
+        {
+            CloseDialogue();
+        }
+    }
+
+    void ApplyRemnantEffect(string remnantName, float delta)
+    {
+        // Apply to Ravi's stats
+        switch (remnantName)
+        {
+            case "Resolve": raviStats.Resolve = Mathf.Clamp01(raviStats.Resolve + delta * 0.05f); break;
+            case "Empathy": raviStats.Empathy = Mathf.Clamp01(raviStats.Empathy + delta * 0.05f); break;
+            case "Memory": raviStats.Memory = Mathf.Clamp01(raviStats.Memory + delta * 0.05f); break;
+            case "Nuance": raviStats.Nuance = Mathf.Clamp01(raviStats.Nuance + delta * 0.05f); break;
+            case "Authority": raviStats.Authority = Mathf.Clamp01(raviStats.Authority + delta * 0.05f); break;
+            case "Need": raviStats.Need = Mathf.Clamp01(raviStats.Need + delta * 0.05f); break;
+            case "Trust": raviStats.Trust = Mathf.Clamp01(raviStats.Trust + delta * 0.05f); break;
+            case "Skepticism": raviStats.Skepticism = Mathf.Clamp01(raviStats.Skepticism + delta * 0.05f); break;
         }
         
-        Debug.Log($"🟢 Button '{buttonText}' is now interactive");
+        Debug.Log($"📊 {remnantName} {(delta > 0 ? "+" : "")}{delta}: {raviStats.GetRemnant(remnantName):F2}");
     }
 
     void CloseDialogue()
     {
-        Debug.Log($"🟣 CloseDialogue called for {npcId}");
+        dialogueActive = false;
+        currentRound = 0;
         
         if (dialogueCanvas != null)
         {
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null)
             {
-                panelTransform.gameObject.SetActive(false);  // HIDE the dialogue panel
-                
-                // Reset NPC name text
-                if (npcNameText != null)
-                {
-                    npcNameText.text = "[NPC Name]";
-                }
+                panelTransform.gameObject.SetActive(false);
             }
         }
-
-        // Reset dialogue state
-        dialogueState = 0;
-
-        // Hide prompt
-        Canvas interactionCanvas = GameObject.Find("InteractionCanvas")?.GetComponent<Canvas>();
-        if (interactionCanvas != null)
-        {
-            TextMeshProUGUI promptText = interactionCanvas.transform.Find("PromptText")?.GetComponent<TextMeshProUGUI>();
-            if (promptText != null)
-                promptText.text = "";
-        }
+        
+        Debug.Log($"🟣 {npcId} dialogue closed");
     }
 }
+
+/// <summary>
+/// NPCStats: Tracks a single NPC's emotional state.
+/// </summary>
+public class NPCStats
+{
+    public float Resolve;
+    public float Empathy;
+    public float Memory;
+    public float Nuance;
+    public float Authority;
+    public float Need;
+    public float Trust;
+    public float Skepticism;
+
+    public float GetRemnant(string name)
+    {
+        return name switch
+        {
+            "Resolve" => Resolve,
+            "Empathy" => Empathy,
+            "Memory" => Memory,
+            "Nuance" => Nuance,
+            "Authority" => Authority,
+            "Need" => Need,
+            "Trust" => Trust,
+            "Skepticism" => Skepticism,
+            _ => 0f
+        };
+    }
 

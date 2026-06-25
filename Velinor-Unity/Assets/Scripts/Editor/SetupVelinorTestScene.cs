@@ -39,13 +39,20 @@ public class SetupVelinorTestScene
             "✅ Ground (20×20 walkable area)\n" +
             "✅ Player with CharacterController\n" +
             "✅ 1 Test NPC: Ravi (purple capsule)\n" +
-            "✅ Simple dialogue system\n" +
-            "✅ DialogueManager + StatManager ready\n" +
+            "✅ 3-Round Dialogue System with TONE/REMNANTS\n" +
+            "✅ Name Reveal Mechanics\n" +
+            "✅ Stat-Based NPC Responses\n" +
             "\n" +
             "🎮 CONTROLS:\n" +
             "  - WASD: Move\n" +
             "  - Mouse: Look around\n" +
             "  - E: Talk to Ravi (when close)\n" +
+            "\n" +
+            "💬 DIALOGUE:\n" +
+            "  3 rounds of conversation with Ravi\n" +
+            "  4 TONE choices per round: (T)rust, (O)bservation, (N)arrative, (E)mpathy\n" +
+            "  Name starts as '???' - revealed on Narrative choice\n" +
+            "  Each choice affects Ravi's REMNANTS stats\n" +
             "═══════════════════════════════════════════════════════════");
     }
 
@@ -221,11 +228,13 @@ public class SetupVelinorTestScene
         containerRect.anchorMax = Vector2.one;
         containerRect.pivot = new Vector2(0, 0);
         containerRect.anchoredPosition = new Vector2(20, 10);
-        containerRect.sizeDelta = new Vector2(-40, 80);
+        containerRect.sizeDelta = new Vector2(-40, 150);  // Increased height for 4 buttons
 
-        // Create two dialogue option buttons
+        // Create four dialogue option buttons (one for each TONE: T/O/N/E)
         CreateDialogueButton(containerObj, "OptionButton1");
         CreateDialogueButton(containerObj, "OptionButton2");
+        CreateDialogueButton(containerObj, "OptionButton3");
+        CreateDialogueButton(containerObj, "OptionButton4");
     }
 
     static void CreateDialogueButton(GameObject parent, string buttonName)
