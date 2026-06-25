@@ -275,7 +275,7 @@ public class SetupVelinorTestScene
         btnText.fontSize = 14;  // Reduced from 20 for better fit
         btnText.alignment = TextAlignmentOptions.Center;
         btnText.color = Color.white;
-        btnText.enableWordWrapping = true;  // Enable wrapping
+        btnText.textWrappingMode = TextWrappingModes.Normal;  // Enable text wrapping
         btnText.horizontalMapping = TextureMappingOptions.Character;
         btnText.verticalMapping = TextureMappingOptions.Character;
         btnText.overflowMode = TextOverflowModes.Truncate;  // Truncate if text too long
