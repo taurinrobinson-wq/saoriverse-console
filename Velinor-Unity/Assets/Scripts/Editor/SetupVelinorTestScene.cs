@@ -20,6 +20,7 @@ public class SetupVelinorTestScene
         CreateEventSystem();
         CreateInteractionUI();
         CreateDialogueUI();
+        CreateStatDisplay();
         CreatePlayer();
         CreateRavi();
         
@@ -144,6 +145,14 @@ public class SetupVelinorTestScene
 
         // Tag it for retrieval
         canvasObj.name = "InteractionCanvas";
+    }
+
+    static void CreateStatDisplay()
+    {
+        // Create stat display game object
+        GameObject statDisplayObj = new GameObject("StatDisplayUI");
+        statDisplayObj.AddComponent<StatDisplayUI>();
+        Debug.Log("✅ Stat display UI created");
     }
 
     static void CreateDialogueUI()
@@ -291,8 +300,9 @@ public class SetupVelinorTestScene
         charController.center = new Vector3(0, 0.33f, 0);  // Lowered center to keep character grounded
 
         // Add player movement script
-        playerObj.AddComponent<SimplePlayerController>();
-
+        playerObj.AddComponent<SimplePlayerController>();        
+        // Add player stats tracking
+        playerObj.AddComponent<PlayerStats>();
         // Visual (blue capsule) - scaled child, root stays 1,1,1
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
