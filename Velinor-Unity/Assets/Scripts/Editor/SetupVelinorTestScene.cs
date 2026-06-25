@@ -120,7 +120,7 @@ public class SetupVelinorTestScene
         TextMeshProUGUI promptText = promptObj.AddComponent<TextMeshProUGUI>();
         promptText.text = "";
         promptText.fontSize = 36;
-        promptText.alignment = TextAlignmentOptions.TopCenter;
+        promptText.alignment = TextAlignmentOptions.Top;
         promptText.color = Color.white;
 
         RectTransform promptRect = promptObj.GetComponent<RectTransform>();

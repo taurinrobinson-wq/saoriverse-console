@@ -33,7 +33,7 @@ public class NPCInteraction : MonoBehaviour
     void Start()
     {
         // Cache dialogue UI elements for fallback mode
-        dialogueCanvas = FindObjectOfType<Canvas>();
+        dialogueCanvas = FindAnyObjectByType<Canvas>();
         if (dialogueCanvas != null && dialogueCanvas.name == "DialogueCanvas")
         {
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
@@ -106,7 +106,7 @@ public class NPCInteraction : MonoBehaviour
     void OpenDialogue()
     {
         // Try DialogueManager first (new system with JSON stories)
-        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
         if (dialogueManager != null)
         {
             Debug.Log($"✅ Using DialogueManager for {npcId}");
