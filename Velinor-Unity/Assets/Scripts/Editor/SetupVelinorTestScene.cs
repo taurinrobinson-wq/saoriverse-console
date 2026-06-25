@@ -271,24 +271,26 @@ public class SetupVelinorTestScene
     {
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
-        playerObj.transform.position = new Vector3(0, 0.44f, -5f);
-        playerObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
+        // Root stays at scale (1,1,1) - never scale the root!
+        playerObj.transform.position = new Vector3(0, 0.66f, -5f);
+        playerObj.transform.localScale = Vector3.one;
 
-        // Character controller
+        // Character controller - dimensions match the scaled visual capsule
+        // Default capsule: 2 units tall, 0.5 radius; at 0.66 scale = 1.32 tall, 0.33 radius
         CharacterController charController = playerObj.AddComponent<CharacterController>();
-        charController.height = 1.32f;  // 1.8 × 0.66
-        charController.radius = 0.25f;
-        charController.center = new Vector3(0, -0.3f, 0);
+        charController.height = 1.32f;   // 2.0 * 0.66
+        charController.radius = 0.33f;   // 0.5 * 0.66
+        charController.center = new Vector3(0, 0.66f, 0);  // Center at half height
 
         // Add player movement script
         playerObj.AddComponent<SimplePlayerController>();
 
-        // Visual (blue capsule)
+        // Visual (blue capsule) - scaled child, root stays 1,1,1
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(playerObj.transform);
-        visualObj.transform.localPosition = Vector3.zero;  // y=0 relative to parent
-        visualObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);  // Only scale the visual
 
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
         Material playerMat = new Material(Shader.Find("Standard"));
@@ -300,11 +302,11 @@ public class SetupVelinorTestScene
         rb.isKinematic = true;
         rb.useGravity = false;
 
-        // Camera (offset behind player)
+        // Camera (offset behind player, at eye height of unscaled player)
         GameObject cameraObj = new GameObject("MainCamera");
         cameraObj.tag = "MainCamera";
         cameraObj.transform.SetParent(playerObj.transform);
-        cameraObj.transform.localPosition = new Vector3(0, 0.79f, -1.65f);
+        cameraObj.transform.localPosition = new Vector3(0, 0.57f, -1.65f);
 
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
@@ -313,27 +315,28 @@ public class SetupVelinorTestScene
     static void CreateRavi()
     {
         GameObject raviObj = new GameObject("NPC_Ravi");
-        raviObj.transform.position = new Vector3(0, 0.44f, 5f);
-        raviObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
+        // Root stays at scale (1,1,1) - never scale the root!
+        raviObj.transform.position = new Vector3(0, 0.66f, 5f);
+        raviObj.transform.localScale = Vector3.one;
 
-        // Visual (purple capsule)
+        // Visual (purple capsule) - scaled child only
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(raviObj.transform);
-        visualObj.transform.localPosition = Vector3.zero;  // y=0 relative to parent
-        visualObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
+        visualObj.transform.localPosition = Vector3.zero;
+        visualObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);  // Only scale the visual
 
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
         Material raviMat = new Material(Shader.Find("Standard"));
         raviMat.color = new Color(0.7f, 0.3f, 0.9f, 1f);
         visualObj.GetComponent<MeshRenderer>().material = raviMat;
 
-        // Solid collider (BLOCKS movement - this is what stops player from passing through)
+        // Solid collider (BLOCKS movement - dimensions match scaled visual)
         CapsuleCollider solidCollider = raviObj.AddComponent<CapsuleCollider>();
         solidCollider.isTrigger = false;  // NOT a trigger - blocks movement
-        solidCollider.radius = 0.25f;
-        solidCollider.height = 1.8f;
-        solidCollider.center = new Vector3(0, 0.9f, 0);
+        solidCollider.radius = 0.33f;    // 0.5 * 0.66
+        solidCollider.height = 1.32f;    // 2.0 * 0.66
+        solidCollider.center = new Vector3(0, 0.66f, 0);  // Center at half height
 
         // Separate trigger collider (detects interaction - use child GameObject)
         GameObject triggerObj = new GameObject("InteractionTrigger");
@@ -342,9 +345,9 @@ public class SetupVelinorTestScene
 
         CapsuleCollider triggerCollider = triggerObj.AddComponent<CapsuleCollider>();
         triggerCollider.isTrigger = true;  // This IS a trigger - just for detection
-        triggerCollider.radius = 0.5f;  // Larger for easier detection
-        triggerCollider.height = 1.8f;
-        triggerCollider.center = new Vector3(0, 0.9f, 0);
+        triggerCollider.radius = 0.5f;     // Slightly larger for easier detection
+        triggerCollider.height = 1.32f;    // Match solid collider height
+        triggerCollider.center = new Vector3(0, 0.66f, 0);
 
         // Rigidbody
         Rigidbody rb = raviObj.AddComponent<Rigidbody>();
