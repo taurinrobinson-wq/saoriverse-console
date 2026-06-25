@@ -272,14 +272,14 @@ public class SetupVelinorTestScene
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
         // Root stays at scale (1,1,1) - never scale the root!
-        playerObj.transform.position = new Vector3(0, 0, -5f);
+        playerObj.transform.position = new Vector3(0, 0.66f, -5f);  // Raised to prevent ground sinking
         playerObj.transform.localScale = Vector3.one;
 
         // Character controller - use standard unscaled dimensions
         CharacterController charController = playerObj.AddComponent<CharacterController>();
         charController.height = 1.8f;      // Standard unscaled capsule height
         charController.radius = 0.3f;      // Standard unscaled capsule radius
-        charController.center = new Vector3(0, 0.9f, 0);  // Center at half height
+        charController.center = new Vector3(0, 0.33f, 0);  // Lowered center to keep character grounded
 
         // Add player movement script
         playerObj.AddComponent<SimplePlayerController>();
@@ -305,7 +305,7 @@ public class SetupVelinorTestScene
         GameObject cameraObj = new GameObject("MainCamera");
         cameraObj.tag = "MainCamera";
         cameraObj.transform.SetParent(playerObj.transform);
-        cameraObj.transform.localPosition = new Vector3(0, 1.6f, -1.65f);
+        cameraObj.transform.localPosition = new Vector3(0, 1.03f, -1.65f);  // Adjusted for raised root
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
     }
@@ -314,7 +314,7 @@ public class SetupVelinorTestScene
     {
         GameObject raviObj = new GameObject("NPC_Ravi");
         // Root stays at scale (1,1,1) - never scale the root!
-        raviObj.transform.position = new Vector3(0, 0, 5f);
+        raviObj.transform.position = new Vector3(0, 0.66f, 5f);  // Raised to prevent ground sinking
         raviObj.transform.localScale = Vector3.one;
 
         // Visual (purple capsule) - scaled child only
@@ -334,7 +334,7 @@ public class SetupVelinorTestScene
         solidCollider.isTrigger = false;  // NOT a trigger - blocks movement
         solidCollider.radius = 0.3f;      // Standard unscaled radius
         solidCollider.height = 1.8f;      // Standard unscaled height
-        solidCollider.center = new Vector3(0, 0.9f, 0);  // Center at half height
+        solidCollider.center = new Vector3(0, 0.33f, 0);  // Lowered center to keep NPC grounded
 
         // Separate trigger collider (detects interaction - use child GameObject)
         GameObject triggerObj = new GameObject("InteractionTrigger");
@@ -345,7 +345,7 @@ public class SetupVelinorTestScene
         triggerCollider.isTrigger = true;  // This IS a trigger - just for detection
         triggerCollider.radius = 0.3f;     // Match solid collider
         triggerCollider.height = 1.8f;     // Match solid collider
-        triggerCollider.center = new Vector3(0, 0.9f, 0);
+        triggerCollider.center = new Vector3(0, 0.33f, 0);  // Match solid collider
 
         // Rigidbody
         Rigidbody rb = raviObj.AddComponent<Rigidbody>();
