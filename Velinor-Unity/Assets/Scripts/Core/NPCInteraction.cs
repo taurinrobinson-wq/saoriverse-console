@@ -25,6 +25,7 @@ public class NPCInteraction : MonoBehaviour
     // Simple dialogue fallback (when DialogueManager not available)
     private int dialogueState = 0;
     private Canvas dialogueCanvas;
+    private TextMeshProUGUI npcNameText;
     private TextMeshProUGUI dialogueBodyText;
     private Button optionButton1;
     private Button optionButton2;
@@ -38,6 +39,7 @@ public class NPCInteraction : MonoBehaviour
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null)
             {
+                npcNameText = panelTransform.Find("NPCNameText")?.GetComponent<TextMeshProUGUI>();
                 dialogueBodyText = panelTransform.Find("DialogueBodyText")?.GetComponent<TextMeshProUGUI>();
                 Transform containerTransform = panelTransform.Find("ChoiceButtonContainer");
                 if (containerTransform != null && containerTransform.childCount >= 2)
@@ -46,6 +48,7 @@ public class NPCInteraction : MonoBehaviour
                     optionButton2 = containerTransform.GetChild(1)?.GetComponent<Button>();
                     
                     Debug.Log($"🟣 NPCInteraction ({npcId}): Found DialogueCanvas UI elements");
+                    Debug.Log($"  - NPC name text: {(npcNameText != null ? "✅" : "❌")}");
                     Debug.Log($"  - Body text: {(dialogueBodyText != null ? "✅" : "❌")}");
                     Debug.Log($"  - Button 1: {(optionButton1 != null ? "✅" : "❌")}");
                     Debug.Log($"  - Button 2: {(optionButton2 != null ? "✅" : "❌")}");
@@ -171,6 +174,13 @@ public class NPCInteraction : MonoBehaviour
             panelTransform.gameObject.SetActive(true);
             Debug.Log($"🟣 Panel activated for {npcId}");
             
+            // Update NPC name
+            if (npcNameText != null)
+            {
+                npcNameText.text = npcId;
+                Debug.Log($"🟣 Set NPC name to: {npcId}");
+            }
+            
             // Debug panel state
             RectTransform panelRect = panelTransform.GetComponent<RectTransform>();
             if (panelRect != null)
@@ -275,7 +285,15 @@ public class NPCInteraction : MonoBehaviour
         {
             Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null)
+            {
                 panelTransform.gameObject.SetActive(false);  // HIDE the dialogue panel
+                
+                // Reset NPC name text
+                if (npcNameText != null)
+                {
+                    npcNameText.text = "[NPC Name]";
+                }
+            }
         }
 
         // Reset dialogue state
