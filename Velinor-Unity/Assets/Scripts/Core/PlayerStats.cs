@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// PlayerStats: Tracks player TONE/REMNANTS emotional dimensions.
