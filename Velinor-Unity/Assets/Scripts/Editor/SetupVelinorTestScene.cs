@@ -308,9 +308,6 @@ public class SetupVelinorTestScene
         cameraObj.transform.localPosition = new Vector3(0, 1.6f, -1.65f);
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
-
-        Camera cam = cameraObj.AddComponent<Camera>();
-        cam.clearFlags = CameraClearFlags.Skybox;
     }
 
     static void CreateRavi()
