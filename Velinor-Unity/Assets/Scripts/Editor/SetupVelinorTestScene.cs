@@ -218,25 +218,31 @@ public class SetupVelinorTestScene
         containerRect.anchoredPosition = new Vector2(20, 10);
         containerRect.sizeDelta = new Vector2(-40, 80);
 
-        // ChoiceButtonPrefab (will be duplicated by code)
-        GameObject buttonPrefabObj = new GameObject("ChoiceButtonPrefab");
-        buttonPrefabObj.transform.SetParent(containerObj.transform, false);
+        // Create two dialogue option buttons
+        CreateDialogueButton(containerObj, "OptionButton1");
+        CreateDialogueButton(containerObj, "OptionButton2");
+    }
 
-        Image btnImage = buttonPrefabObj.AddComponent<Image>();
+    static void CreateDialogueButton(GameObject parent, string buttonName)
+    {
+        GameObject buttonObj = new GameObject(buttonName);
+        buttonObj.transform.SetParent(parent.transform, false);
+
+        Image btnImage = buttonObj.AddComponent<Image>();
         btnImage.color = new Color(0.2f, 0.2f, 0.2f, 1f);
 
-        Button btn = buttonPrefabObj.AddComponent<Button>();
+        Button btn = buttonObj.AddComponent<Button>();
         ColorBlock colors = btn.colors;
         colors.normalColor = new Color(0.2f, 0.2f, 0.2f, 1f);
         colors.highlightedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
         colors.pressedColor = new Color(0.1f, 0.1f, 0.1f, 1f);
         btn.colors = colors;
 
-        RectTransform btnRect = buttonPrefabObj.GetComponent<RectTransform>();
+        RectTransform btnRect = buttonObj.GetComponent<RectTransform>();
         btnRect.sizeDelta = new Vector2(0, 35);
 
         GameObject btnTextObj = new GameObject("Text");
-        btnTextObj.transform.SetParent(buttonPrefabObj.transform, false);
+        btnTextObj.transform.SetParent(buttonObj.transform, false);
         TextMeshProUGUI btnText = btnTextObj.AddComponent<TextMeshProUGUI>();
         btnText.text = "[Choice Text]";
         btnText.fontSize = 20;
@@ -249,7 +255,7 @@ public class SetupVelinorTestScene
         btnTextRect.offsetMin = Vector2.zero;
         btnTextRect.offsetMax = Vector2.zero;
 
-        buttonPrefabObj.SetActive(false);
+        buttonObj.SetActive(true);
     }
 
     static void CreatePlayer()
