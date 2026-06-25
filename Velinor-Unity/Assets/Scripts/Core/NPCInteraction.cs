@@ -366,4 +366,4 @@ public class NPCStats
             _ => 0f
         };
     }
-
+}
