@@ -272,15 +272,14 @@ public class SetupVelinorTestScene
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
         // Root stays at scale (1,1,1) - never scale the root!
-        playerObj.transform.position = new Vector3(0, 0.66f, -5f);
+        playerObj.transform.position = new Vector3(0, 0, -5f);
         playerObj.transform.localScale = Vector3.one;
 
-        // Character controller - dimensions match the scaled visual capsule
-        // Default capsule: 2 units tall, 0.5 radius; at 0.66 scale = 1.32 tall, 0.33 radius
+        // Character controller - use standard unscaled dimensions
         CharacterController charController = playerObj.AddComponent<CharacterController>();
-        charController.height = 1.32f;   // 2.0 * 0.66
-        charController.radius = 0.33f;   // 0.5 * 0.66
-        charController.center = new Vector3(0, 0.66f, 0);  // Center at half height
+        charController.height = 1.8f;      // Standard unscaled capsule height
+        charController.radius = 0.3f;      // Standard unscaled capsule radius
+        charController.center = new Vector3(0, 0.9f, 0);  // Center at half height
 
         // Add player movement script
         playerObj.AddComponent<SimplePlayerController>();
@@ -302,11 +301,13 @@ public class SetupVelinorTestScene
         rb.isKinematic = true;
         rb.useGravity = false;
 
-        // Camera (offset behind player, at eye height of unscaled player)
+        // Camera (offset behind player, at eye height)
         GameObject cameraObj = new GameObject("MainCamera");
         cameraObj.tag = "MainCamera";
         cameraObj.transform.SetParent(playerObj.transform);
-        cameraObj.transform.localPosition = new Vector3(0, 0.57f, -1.65f);
+        cameraObj.transform.localPosition = new Vector3(0, 1.6f, -1.65f);
+        Camera cam = cameraObj.AddComponent<Camera>();
+        cam.clearFlags = CameraClearFlags.Skybox;
 
         Camera cam = cameraObj.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.Skybox;
@@ -316,7 +317,7 @@ public class SetupVelinorTestScene
     {
         GameObject raviObj = new GameObject("NPC_Ravi");
         // Root stays at scale (1,1,1) - never scale the root!
-        raviObj.transform.position = new Vector3(0, 0.66f, 5f);
+        raviObj.transform.position = new Vector3(0, 0, 5f);
         raviObj.transform.localScale = Vector3.one;
 
         // Visual (purple capsule) - scaled child only
@@ -331,12 +332,12 @@ public class SetupVelinorTestScene
         raviMat.color = new Color(0.7f, 0.3f, 0.9f, 1f);
         visualObj.GetComponent<MeshRenderer>().material = raviMat;
 
-        // Solid collider (BLOCKS movement - dimensions match scaled visual)
+        // Solid collider (BLOCKS movement - use standard unscaled dimensions)
         CapsuleCollider solidCollider = raviObj.AddComponent<CapsuleCollider>();
         solidCollider.isTrigger = false;  // NOT a trigger - blocks movement
-        solidCollider.radius = 0.33f;    // 0.5 * 0.66
-        solidCollider.height = 1.32f;    // 2.0 * 0.66
-        solidCollider.center = new Vector3(0, 0.66f, 0);  // Center at half height
+        solidCollider.radius = 0.3f;      // Standard unscaled radius
+        solidCollider.height = 1.8f;      // Standard unscaled height
+        solidCollider.center = new Vector3(0, 0.9f, 0);  // Center at half height
 
         // Separate trigger collider (detects interaction - use child GameObject)
         GameObject triggerObj = new GameObject("InteractionTrigger");
@@ -345,9 +346,9 @@ public class SetupVelinorTestScene
 
         CapsuleCollider triggerCollider = triggerObj.AddComponent<CapsuleCollider>();
         triggerCollider.isTrigger = true;  // This IS a trigger - just for detection
-        triggerCollider.radius = 0.5f;     // Slightly larger for easier detection
-        triggerCollider.height = 1.32f;    // Match solid collider height
-        triggerCollider.center = new Vector3(0, 0.66f, 0);
+        triggerCollider.radius = 0.3f;     // Match solid collider
+        triggerCollider.height = 1.8f;     // Match solid collider
+        triggerCollider.center = new Vector3(0, 0.9f, 0);
 
         // Rigidbody
         Rigidbody rb = raviObj.AddComponent<Rigidbody>();

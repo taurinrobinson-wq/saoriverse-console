@@ -231,14 +231,42 @@ public class NPCInteraction : MonoBehaviour
                 Debug.Log($"🟣 Set dialogue text to response");
             }
 
+            // Ensure button1 is visible with proper styling
+            if (optionButton1 != null)
+            {
+                optionButton1.gameObject.SetActive(true);
+                
+                // Restore button styling (in case it was modified)
+                Image btnImage = optionButton1.GetComponent<Image>();
+                if (btnImage != null)
+                {
+                    btnImage.color = new Color(0.2f, 0.2f, 0.2f, 1f);  // Dark gray background
+                }
+                
+                ColorBlock colors = optionButton1.colors;
+                colors.normalColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+                colors.highlightedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
+                colors.pressedColor = new Color(0.1f, 0.1f, 0.1f, 1f);
+                optionButton1.colors = colors;
+            }
+            
             SetupButton(optionButton1, "Okay.", () =>
             {
                 Debug.Log($"🟢 Okay button clicked");
                 CloseDialogue();
             });
             
+            // Hide button2
             if (optionButton2 != null)
                 optionButton2.gameObject.SetActive(false);
+            
+            // Force layout rebuild to ensure button is properly positioned
+            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+            if (panelTransform != null && optionButton1 != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelTransform as RectTransform);
+                Debug.Log($"🟢 Layout rebuilt for response state");
+            }
         }
     }
 
