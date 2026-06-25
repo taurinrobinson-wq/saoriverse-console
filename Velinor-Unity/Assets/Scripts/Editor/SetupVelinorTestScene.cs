@@ -256,14 +256,14 @@ public class SetupVelinorTestScene
     {
         GameObject playerObj = new GameObject("Player");
         playerObj.tag = "Player";
-        playerObj.transform.position = new Vector3(0, 0.66f, -5f);
+        playerObj.transform.position = new Vector3(0, 0.44f, -5f);
         playerObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         // Character controller
         CharacterController charController = playerObj.AddComponent<CharacterController>();
         charController.height = 1.32f;  // 1.8 × 0.66
         charController.radius = 0.25f;
-        charController.center = new Vector3(0, 0.9f, 0);
+        charController.center = new Vector3(0, -0.3f, 0);
 
         // Add player movement script
         playerObj.AddComponent<SimplePlayerController>();
@@ -272,8 +272,8 @@ public class SetupVelinorTestScene
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(playerObj.transform);
-        visualObj.transform.localPosition = Vector3.zero;
-        visualObj.transform.localScale = new Vector3(1, 1, 1);
+        visualObj.transform.localPosition = Vector3.zero;  // y=0 relative to parent
+        visualObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
         Material playerMat = new Material(Shader.Find("Standard"));
@@ -298,15 +298,15 @@ public class SetupVelinorTestScene
     static void CreateRavi()
     {
         GameObject raviObj = new GameObject("NPC_Ravi");
-        raviObj.transform.position = new Vector3(0, 0.66f, 5f);
+        raviObj.transform.position = new Vector3(0, 0.44f, 5f);
         raviObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         // Visual (purple capsule)
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
         visualObj.transform.SetParent(raviObj.transform);
-        visualObj.transform.localPosition = Vector3.zero;
-        visualObj.transform.localScale = new Vector3(1, 1, 1);
+        visualObj.transform.localPosition = Vector3.zero;  // y=0 relative to parent
+        visualObj.transform.localScale = new Vector3(0.66f, 0.66f, 0.66f);
 
         Object.DestroyImmediate(visualObj.GetComponent<Collider>());
         Material raviMat = new Material(Shader.Find("Standard"));

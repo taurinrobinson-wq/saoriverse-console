@@ -3,7 +3,7 @@ using UnityEngine;
 public class SimplePlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 3f;
     [SerializeField] private float groundDrag = 5f;
     [SerializeField] private float airDrag = 2f;
     [SerializeField] private float mouseSensitivity = 100f;
