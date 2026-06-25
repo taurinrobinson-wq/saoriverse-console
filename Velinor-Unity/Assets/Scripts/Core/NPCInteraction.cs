@@ -216,7 +216,6 @@ public class NPCInteraction : MonoBehaviour
             });
             
             // Force layout rebuild AFTER buttons are set up
-            Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
             if (panelTransform != null && optionButton1 != null && optionButton2 != null)
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(panelTransform as RectTransform);
