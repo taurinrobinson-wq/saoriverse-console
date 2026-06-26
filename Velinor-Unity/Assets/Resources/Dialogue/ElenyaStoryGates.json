@@ -465,6 +465,58 @@
               "unlocksGates": ["elenya_senses_presence"]
             }
           ]
+        },
+        {
+          "segmentId": "elenya_act5_seg3_shrine_domain",
+          "title": "The Mountain Shrine: Where Presence Lives",
+          "dialogueContext": "Elenya speaks about her work at the shrine and what draws people to her",
+          "npcLine": "The shrine is not about ritual or doctrine. It's about bearing witness. People come here carrying weight they can't name. I listen. I hold space. And somehow, the weight becomes bearable.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act5_midpoint",
+              "gateType": "story_gate",
+              "requirement": "elenya_senses_presence",
+              "threshold": 0.0,
+              "description": "Elenya's body has sensed Malrik's presence"
+            },
+            {
+              "gateId": "empathy_mature",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.65,
+              "description": "Player can perceive Elenya's spiritual work"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "ε"],
+          "elenyaTone": "grounded_teaching",
+          "playerChoices": [
+            {
+              "toneId": "T_witness",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You're describing what you do when Malrik is near—you bear witness. You hold space for his confusion.",
+              "elenyaResponse": "I do. And it tears me apart, because I recognize exactly what he's confused about. It's the same ache I performed a ritual to forget.",
+              "statEffects": {
+                "empathy": 0.15,
+                "elenya_influence": 0.15
+              },
+              "unlocksGates": ["elenya_sees_her_pattern"]
+            },
+            {
+              "toneId": "N_teaching",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "Your students don't know they're learning from someone who chose to forget the person she loved most. That's the deepest teaching.",
+              "elenyaResponse": "They learn presence through my presence with them. And I teach release because I know the cost of holding on. Every word I speak about letting go comes from standing in his marketplace, calling him nothing but his name.",
+              "statEffects": {
+                "empathy": 0.2,
+                "observation": 0.1
+              },
+              "unlocksGates": ["elenya_accepts_contradiction"]
+            }
+          ]
         }
       ]
     },
@@ -506,6 +558,58 @@
                 "observation": 0.15
               },
               "unlocksGates": ["elenya_ritual_cracks"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act6_seg2_mystic_philosophy",
+          "title": "The Way of Presence and Release",
+          "dialogueContext": "Elenya speaks about her conflict with the Skeptics and what she knows about human healing",
+          "npcLine": "The Skeptics believe the world can be fixed through evidence and structure. But I've learned—through my own breaking—that some wounds need presence, not analysis. Meaning lives in the space between order and chaos.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act6_foundation",
+              "gateType": "story_gate",
+              "requirement": "elenya_ritual_cracks",
+              "threshold": 0.0,
+              "description": "Elenya's ritual of forgetting has cracked"
+            },
+            {
+              "gateId": "narrative_mature",
+              "gateType": "tone_stat",
+              "requirement": "narrativepresence",
+              "threshold": 0.65,
+              "description": "Player has developed narrative understanding"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "β"],
+          "elenyaTone": "wise_sorrowing",
+          "playerChoices": [
+            {
+              "toneId": "O_observation",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "But he's teaching order because of the same wound. You're both trying to honor what you can't quite name.",
+              "elenyaResponse": "Yes. His preservation is my release. His structure is my dissolution. And when I see him working in his Archive, cataloguing fragments... I see myself too. We're both grieving.",
+              "statEffects": {
+                "observation": 0.15,
+                "empathy": 0.1
+              },
+              "unlocksGates": ["elenya_sees_mirror"]
+            },
+            {
+              "toneId": "N_bridge",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "Your philosophies aren't contradictions. They're two languages for the same truth about what it means to survive.",
+              "elenyaResponse": "Then perhaps the building debate isn't about which approach is right. It's about learning to speak both languages. To honor both preservation and release.",
+              "statEffects": {
+                "empathy": 0.2,
+                "elenya_influence": 0.2
+              },
+              "unlocksGates": ["elenya_envisions_integration"]
             }
           ]
         }
@@ -608,6 +712,57 @@
                 "elenya_influence": 0.25
               },
               "unlocksGates": ["elenya_integrated_wisdom"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act7_seg3_sacred_integration",
+          "title": "The Building as Covenant",
+          "dialogueContext": "Elenya speaks about the Shared Archive Building and what she wants it to represent",
+          "npcLine": "The building doesn't belong to the Skeptics or the Mystics. It belongs to both. I want to place offerings—flame, cloth, meaning—alongside his precise catalogues. Because both honor what was lost.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act7_midpoint",
+              "gateType": "story_gate",
+              "requirement": "elenya_accepts_her_choice",
+              "threshold": 0.0,
+              "description": "Elenya has accepted the necessity of her choice"
+            },
+            {
+              "gateId": "coherence_bridge",
+              "gateType": "coherence",
+              "requirement": "player_integrated",
+              "threshold": 0.7,
+              "description": "Player has developed integrated perspective on both worldviews"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "α"],
+          "elenyaTone": "visionary_tender",
+          "playerChoices": [
+            {
+              "toneId": "O_wisdom",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "He fears that ritual will compromise the integrity of the Archive. But what if the ritual IS the integrity?",
+              "elenyaResponse": "That's what I'm trying to show him. That sacred and preserved aren't opposites. They're different ways of honoring the same wound.",
+              "statEffects": {
+                "observation": 0.15
+              },
+              "unlocksGates": ["elenya_holds_vision"]
+            },
+            {
+              "toneId": "T_covenant",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You're not asking him to change his approach. You're asking him to expand it. To see that structure and meaning, preservation and presence, can coexist.",
+              "elenyaResponse": "Yes. And I'm asking it by living it. By standing in the building with him. By being present while he preserves. By honoring what we lost together.",
+              "statEffects": {
+                "empathy": 0.2,
+                "elenya_influence": 0.25
+              },
+              "unlocksGates": ["elenya_becomes_bridge"]
             }
           ]
         }
