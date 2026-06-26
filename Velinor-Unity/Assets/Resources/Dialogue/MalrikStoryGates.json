@@ -1,0 +1,777 @@
+{
+  "npc": "Malrik",
+  "npcFullName": "Archivist Malrik",
+  "storyTitle": "The Full Arc: Malrik & Elenya",
+  "storylineType": "romantic_discovery",
+  "description": "Before the collapse, Malrik and Elenya were lovers. The cataclysm severed their shared memory. They woke as strangers bound by invisible gravity.",
+  
+  "acts": [
+    {
+      "actNumber": 1,
+      "actTitle": "The Professor and the Older Student",
+      "timeframe": "pre_collapse",
+      "emotionalTheme": "discomfort_with_presence",
+      "description": "Malrik's first encounters with Elenya challenge his need for order and precision.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act1_seg1_classroom",
+          "title": "Memory and the Body",
+          "dialogueContext": "After Malrik's lecture on cultural memory preservation",
+          "npcLine": "You teach that structures preserve memory... but do you believe memory is only what can be recorded?",
+          
+          "requiredGates": [
+            {
+              "gateId": "act1_intro",
+              "gateType": "story_gate",
+              "requirement": "player_met_malrik",
+              "threshold": 0.0,
+              "description": "Player has met Malrik at least once"
+            }
+          ],
+          
+          "emotionalSignals": ["ε", "β"],
+          "malrikTone": "challenged_intrigued",
+          "playerChoices": [
+            {
+              "toneId": "T_order",
+              "toneType": "T",
+              "toneName": "Trust (Order)",
+              "playerLine": "Memory is what can be verified. Structure is how we keep it safe.",
+              "malrikResponse": "Verified by whom? And safe from what—forgetting, or feeling?",
+              "statEffects": {
+                "empathy": -0.05,
+                "observation": 0.1
+              },
+              "unlocksGates": ["malrik_respects_logic"]
+            },
+            {
+              "toneId": "O_presence",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "Maybe memory is also about the moment you recall it, not just the record.",
+              "malrikResponse": "That's... not a measurable variable.",
+              "statEffects": {
+                "empathy": 0.1,
+                "observation": 0.05
+              },
+              "unlocksGates": ["malrik_sees_nuance"]
+            },
+            {
+              "toneId": "N_embodiment",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "Some memories live in the body, not the mind.",
+              "malrikResponse": "...",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["malrik_touched"]
+            }
+          ]
+        },
+        {
+          "segmentId": "malrik_act1_seg2_afterclass",
+          "title": "The Question Left Behind",
+          "dialogueContext": "Malrik lingers by his desk, processing what Elenya said",
+          "npcLine": "If you've ever loved someone... you know that some memories live in places even structures can't reach.",
+          
+          "requiredGates": [
+            {
+              "gateId": "seg1_complete",
+              "gateType": "story_gate",
+              "requirement": "malrik_act1_seg1_classroom",
+              "threshold": 0.0,
+              "description": "Completed first classroom dialogue"
+            },
+            {
+              "gateId": "empathy_threshold",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.6,
+              "description": "Requires moderate empathy to notice Malrik's vulnerability"
+            }
+          ],
+          
+          "emotionalSignals": ["γ", "α"],
+          "malrikTone": "vulnerable_confused",
+          "playerChoices": [
+            {
+              "toneId": "T_acknowledgement",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You sound like you're speaking from experience.",
+              "malrikResponse": "I'm speaking from something I can't quite articulate. Perhaps that was her point.",
+              "statEffects": {
+                "empathy": 0.1,
+                "malrik_influence": 0.1
+              },
+              "unlocksGates": ["malrik_opens_to_player"]
+            },
+            {
+              "toneId": "N_presence",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "It sounds like she challenged everything you believe in.",
+              "malrikResponse": "Challenged? Yes. Still is, in a way I don't entirely understand.",
+              "statEffects": {
+                "empathy": 0.15,
+                "malrik_influence": 0.15
+              },
+              "unlocksGates": ["malrik_trusts_player"]
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "actNumber": 2,
+      "actTitle": "The Lighthouse",
+      "timeframe": "pre_collapse",
+      "emotionalTheme": "shared_sanctuary",
+      "description": "Malrik's sanctuary becomes a place where two worldviews meet without conflict.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act2_seg1_lighthouse_first",
+          "title": "An Unexpected Presence",
+          "dialogueContext": "Malrik arrives at the lighthouse to find Elenya already there",
+          "npcLine": "You're in my spot. This is where I think. Where I breathe.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act2_unlock",
+              "gateType": "story_gate",
+              "requirement": "malrik_act1_seg2_afterclass",
+              "threshold": 0.0,
+              "description": "Completed Act 1 foundation"
+            },
+            {
+              "gateId": "malrik_trust",
+              "gateType": "tone_stat",
+              "requirement": "trust",
+              "threshold": 0.5,
+              "description": "Minimum trust to proceed with shared space"
+            }
+          ],
+          
+          "emotionalSignals": ["β", "ε"],
+          "malrikTone": "territorial_softening",
+          "playerChoices": [
+            {
+              "toneId": "T_invitation",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "Maybe she's here for the same reason you are.",
+              "malrikResponse": "She's here for the presence. I'm here for the absence of presence. There's a difference.",
+              "statEffects": {
+                "empathy": 0.05
+              },
+              "unlocksGates": ["malrik_shares_lighthouse"]
+            },
+            {
+              "toneId": "O_understanding",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "It seems like the lighthouse calls to people who need stillness.",
+              "malrikResponse": "Stillness. Yes. Perhaps that's what she's looking for too.",
+              "statEffects": {
+                "empathy": 0.1,
+                "observation": 0.1
+              },
+              "unlocksGates": ["malrik_sees_pattern"]
+            },
+            {
+              "toneId": "N_bridge",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "You could ask her to stay. Or join her.",
+              "malrikResponse": "That's... not how I typically approach uncertainty.",
+              "statEffects": {
+                "empathy": 0.15,
+                "malrik_influence": 0.2
+              },
+              "unlocksGates": ["malrik_opens_heart"]
+            }
+          ]
+        },
+        {
+          "segmentId": "malrik_act2_seg2_shared_space",
+          "title": "Lunch in Silence",
+          "dialogueContext": "Weeks of visiting the lighthouse together. Today, player witnesses it.",
+          "npcLine": "She doesn't ask me to explain myself. Neither do you, when we share this space.",
+          
+          "requiredGates": [
+            {
+              "gateId": "lighthouse_visits",
+              "gateType": "story_gate",
+              "requirement": "malrik_shares_lighthouse",
+              "threshold": 0.0,
+              "description": "Malrik has allowed player into his sanctuary"
+            },
+            {
+              "gateId": "empathy_development",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.7,
+              "description": "High empathy to understand the intimacy of shared silence"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "ε"],
+          "malrikTone": "peaceful_tender",
+          "playerChoices": [
+            {
+              "toneId": "O_witness",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "You look different here. Less... defended.",
+              "malrikResponse": "This place teaches me what being present means. It's not something I understood before.",
+              "statEffects": {
+                "empathy": 0.1
+              },
+              "unlocksGates": ["malrik_vulnerable"]
+            },
+            {
+              "toneId": "T_reciprocal",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "Whatever this is—you and her—it's real. I can see that.",
+              "malrikResponse": "It is. And it terrifies me. Because I have no framework for something I can't measure or control.",
+              "statEffects": {
+                "empathy": 0.15,
+                "malrik_influence": 0.15
+              },
+              "unlocksGates": ["malrik_admits_love_concept"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 3,
+      "actTitle": "The Love They Never Named",
+      "timeframe": "pre_collapse",
+      "emotionalTheme": "unspoken_devotion",
+      "description": "A love that exists in presence rather than words. Quiet. Real. Vulnerable to loss.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act3_seg1_debates",
+          "title": "Precision vs. Presence",
+          "dialogueContext": "Malrik and Elenya debate at the lighthouse, player observes",
+          "npcLine": "She says truth is found in presence. I believe it's found in order. And yet... perhaps we're both describing the same thing in different languages.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act3_foundation",
+              "gateType": "story_gate",
+              "requirement": "malrik_admits_love_concept",
+              "threshold": 0.0,
+              "description": "Malrik has opened about his confusion regarding love"
+            },
+            {
+              "gateId": "high_coherence",
+              "gateType": "coherence",
+              "requirement": "player_balance",
+              "threshold": 0.7,
+              "description": "Player must have balanced emotional perspective"
+            }
+          ],
+          
+          "emotionalSignals": ["ε", "α"],
+          "malrikTone": "contemplative_seeking",
+          "playerChoices": [
+            {
+              "toneId": "T_both_right",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "Maybe she's teaching you that presence IS a kind of order. Just not the kind you expected.",
+              "malrikResponse": "Order emerging from chaos rather than imposed upon it. That's... a revolutionary thought.",
+              "statEffects": {
+                "empathy": 0.1,
+                "observation": 0.1
+              },
+              "unlocksGates": ["malrik_synthesizes"]
+            }
+          ]
+        },
+        {
+          "segmentId": "malrik_act3_seg2_unseen_connection",
+          "title": "The Geometry of Feeling",
+          "dialogueContext": "Player notices Malrik watching Elenya when she's not looking",
+          "npcLine": "I didn't know I was capable of this. Looking at her and feeling... not confused, but complete somehow. Like a structure finally making sense.",
+          
+          "requiredGates": [
+            {
+              "gateId": "observation_high",
+              "gateType": "tone_stat",
+              "requirement": "observation",
+              "threshold": 0.75,
+              "description": "High observation to notice subtle emotional dynamics"
+            },
+            {
+              "gateId": "malrik_vulnerability",
+              "gateType": "story_gate",
+              "requirement": "malrik_vulnerable",
+              "threshold": 0.0,
+              "description": "Malrik has shown vulnerability"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "α"],
+          "malrikTone": "awed_gentle",
+          "playerChoices": [
+            {
+              "toneId": "N_recognition",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "That's what love is. A structure that finally makes sense.",
+              "malrikResponse": "Then I understand now. She's my lighthouse. I'm her order. Together we're... something whole.",
+              "statEffects": {
+                "empathy": 0.15,
+                "malrik_influence": 0.2
+              },
+              "unlocksGates": ["malrik_names_love"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 4,
+      "actTitle": "The Cataclysm",
+      "timeframe": "collapse_event",
+      "emotionalTheme": "loss_severance",
+      "description": "The world breaks. Memory shatters. Their shared history is erased.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act4_seg1_waking_alone",
+          "title": "Waking in Ruin",
+          "dialogueContext": "Post-collapse. Malrik awakens without memory of Elenya, but with an ache he can't name",
+          "npcLine": "I woke in the rubble with no memory of her. Only this... hollow place where something lived. Like reaching for a name I once knew.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act4_trigger",
+              "gateType": "story_gate",
+              "requirement": "malrik_names_love",
+              "threshold": 0.0,
+              "description": "Completed pre-collapse arc"
+            }
+          ],
+          
+          "emotionalSignals": ["θ", "γ"],
+          "malrikTone": "lost_grieving_unaware",
+          "playerChoices": [
+            {
+              "toneId": "T_compassion",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You're describing someone important. Someone you loved.",
+              "malrikResponse": "Love? I... I don't have the word for what I lost. Only the hole where it was.",
+              "statEffects": {
+                "empathy": 0.1
+              },
+              "unlocksGates": ["malrik_glimpses_loss"]
+            },
+            {
+              "toneId": "N_bearing_witness",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "That hollow place—it remembers. Your body remembers even when your mind doesn't.",
+              "malrikResponse": "Then my body is better than my mind. My mind only offers silence.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["malrik_body_remembers"]
+            }
+          ]
+        },
+        {
+          "segmentId": "malrik_act4_seg2_rebuilding_as_archivist",
+          "title": "Building the Archive",
+          "dialogueContext": "Years later. Malrik explains why he became the Archivist.",
+          "npcLine": "I became the Archivist because memory is all we have left. And because I'm grieving something I can't name. Perhaps I'm trying to reconstruct it one broken piece at a time.",
+          
+          "requiredGates": [
+            {
+              "gateId": "collapse_processed",
+              "gateType": "story_gate",
+              "requirement": "malrik_glimpses_loss",
+              "threshold": 0.0,
+              "description": "Player has processed Malrik's loss with him"
+            },
+            {
+              "gateId": "empathy_mature",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.75,
+              "description": "Mature empathy to understand Malrik's unconscious grief"
+            }
+          ],
+          
+          "emotionalSignals": ["β", "ε"],
+          "malrikTone": "obsessed_methodical",
+          "playerChoices": [
+            {
+              "toneId": "O_observation",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "You're not just building an archive. You're building a memorial to whoever she was.",
+              "malrikResponse": "I... yes. I suppose I am. Every catalogued object is a prayer to a name I've forgotten.",
+              "statEffects": {
+                "empathy": 0.1,
+                "observation": 0.15
+              },
+              "unlocksGates": ["malrik_acknowledges_grief"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 5,
+      "actTitle": "Two Strangers with a Shared Gravity",
+      "timeframe": "post_collapse_years",
+      "emotionalTheme": "body_memory",
+      "description": "Malrik and Elenya exist near each other, bound by invisible forces neither understands.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act5_seg1_marketplace_stranger",
+          "title": "In Passing",
+          "dialogueContext": "Malrik encounters Elenya in the marketplace. His response is disproportionate to a stranger.",
+          "npcLine": "When she moves through the marketplace, something in me... responds. My body recognizes something my mind has lost.",
+          
+          "requiredGates": [
+            {
+              "gateId": "post_collapse_era",
+              "gateType": "story_gate",
+              "requirement": "malrik_acknowledges_grief",
+              "threshold": 0.0,
+              "description": "Established post-collapse timeline"
+            }
+          ],
+          
+          "emotionalSignals": ["γ", "ε"],
+          "malrikTone": "confused_drawn",
+          "playerChoices": [
+            {
+              "toneId": "N_truth",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "That's not coincidence. That's resonance. Your souls recognize each other even when your memories don't.",
+              "malrikResponse": "That's... not a rational explanation. And yet I have no other framework that fits.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["malrik_senses_truth"]
+            }
+          ]
+        },
+        {
+          "segmentId": "malrik_act5_seg2_always_says_her_name",
+          "title": "A Name That Means Something",
+          "dialogueContext": "Player notices Malrik always says 'Elenya' without the title, like recalling an intimate habit",
+          "npcLine": "I call her 'Elenya' without thinking. Not 'High Seer.' Just... Elenya. Like my tongue remembers what my mind forgot.",
+          
+          "requiredGates": [
+            {
+              "gateId": "malrik_senses_resonance",
+              "gateType": "story_gate",
+              "requirement": "malrik_senses_truth",
+              "threshold": 0.0,
+              "description": "Malrik has begun to sense deeper connection"
+            },
+            {
+              "gateId": "observation_expert",
+              "gateType": "tone_stat",
+              "requirement": "observation",
+              "threshold": 0.8,
+              "description": "Very high observation to catch linguistic patterns"
+            }
+          ],
+          
+          "emotionalSignals": ["Ω", "α"],
+          "malrikTone": "vulnerable_discovering",
+          "playerChoices": [
+            {
+              "toneId": "T_safe_space",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You're remembering through language. Your body knows her name.",
+              "malrikResponse": "Then my body is closer to the truth than my mind. I should listen to it more often.",
+              "statEffects": {
+                "empathy": 0.15,
+                "malrik_influence": 0.15
+              },
+              "unlocksGates": ["malrik_trusts_embodied_knowing"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 6,
+      "actTitle": "The Broken Lantern",
+      "timeframe": "post_collapse_present",
+      "emotionalTheme": "crack_in_amnesia",
+      "description": "A broken object becomes a key. Memory stirs. The wall of forgetting cracks.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act6_seg1_the_lantern_discovery",
+          "title": "Recognition Without Memory",
+          "dialogueContext": "Elenya finds a lighthouse lantern and speaks its meaning to player. Malrik, elsewhere, pauses—something triggers.",
+          "npcLine": "I was cataloguing broken objects when I felt... a pull. Toward a lighthouse lantern I've never seen before. My hands knew to repair it before my mind understood why.",
+          
+          "requiredGates": [
+            {
+              "gateId": "bodies_converge",
+              "gateType": "story_gate",
+              "requirement": "malrik_trusts_embodied_knowing",
+              "threshold": 0.0,
+              "description": "Malrik trusts his embodied knowing"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "ε"],
+          "malrikTone": "compelled_uncertain",
+          "playerChoices": [
+            {
+              "toneId": "O_pattern",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "You've repaired this object a thousand times. But never this one until now. What changed?",
+              "malrikResponse": "The object didn't change. But something in me recognized it. Claimed it. Loved it.",
+              "statEffects": {
+                "observation": 0.15
+              },
+              "unlocksGates": ["malrik_acts_on_intuition"]
+            }
+          ]
+        },
+        {
+          "segmentId": "malrik_act6_seg2_lighthouse_restoration",
+          "title": "A Place Worth Fixing",
+          "dialogueContext": "Malrik restores the lighthouse reading room. Elenya is drawn to it. They stand together in the light.",
+          "npcLine": "I restored the lighthouse because its structure had historical significance. That is what I tell myself. But the truth is simpler and more terrifying—something in me knew this was where I needed to be.",
+          
+          "requiredGates": [
+            {
+              "gateId": "malrik_acts_intuitive",
+              "gateType": "story_gate",
+              "requirement": "malrik_acts_on_intuition",
+              "threshold": 0.0,
+              "description": "Malrik has acted on his intuitive knowledge"
+            },
+            {
+              "gateId": "high_empathy_and_coherence",
+              "gateType": "coherence",
+              "requirement": "player_integrated",
+              "threshold": 0.8,
+              "description": "Player has deep emotional integration to witness this moment"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "α", "Ω"],
+          "malrikTone": "trembling_on_edge",
+          "playerChoices": [
+            {
+              "toneId": "N_presence_witness",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "You're not rebuilding a structure. You're building a bridge back to her.",
+              "malrikResponse": "I didn't know until she arrived. Until she stood in the restored light. And then... then memory moved. Not clear, but felt. Undeniable.",
+              "statEffects": {
+                "empathy": 0.2,
+                "malrik_influence": 0.25
+              },
+              "unlocksGates": ["malrik_ready_for_recognition"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 7,
+      "actTitle": "The Restoration",
+      "timeframe": "post_collapse_present",
+      "emotionalTheme": "recognition",
+      "description": "Fragments return. Not full memory, but enough. The ache becomes a name. The absence becomes presence.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act7_seg1_lighthouse_reunion",
+          "title": "Two Halves of a Broken Circle",
+          "dialogueContext": "Malrik and Elenya stand together in the restored lighthouse light",
+          "npcLine": "I remember... something. Someone. A presence. And I remember losing it. That ache that never quite went away—she was the shape of it.",
+          
+          "requiredGates": [
+            {
+              "gateId": "malrik_ready",
+              "gateType": "story_gate",
+              "requirement": "malrik_ready_for_recognition",
+              "threshold": 0.0,
+              "description": "Malrik has restored the space where memory can return"
+            },
+            {
+              "gateId": "player_high_empathy",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.8,
+              "description": "Player has cultivated high empathy for this sacred moment"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "Ω", "α"],
+          "malrikTone": "breaking_open",
+          "playerChoices": [
+            {
+              "toneId": "T_witness",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You don't need full memory. Your heart remembers her.",
+              "malrikResponse": "My heart... yes. It's been remembering this whole time. Every time I said her name, every time I felt drawn to that lighthouse. My heart was writing a love letter to a woman I couldn't consciously remember.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["malrik_names_love_again"]
+            },
+            {
+              "toneId": "N_embodied_truth",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "She severed the memory deliberately. To survive. To protect herself. Can you forgive that?",
+              "malrikResponse": "Forgive? I'm grateful. She saved herself. And yet... here we both are. In the same lighthouse. The geometry of feeling doesn't require memory. Only presence.",
+              "statEffects": {
+                "empathy": 0.2,
+                "malrik_influence": 0.2
+              },
+              "unlocksGates": ["malrik_accepts_paradox"]
+            }
+          ]
+        },
+        {
+          "segmentId": "malrik_act7_seg2_acknowledgment",
+          "title": "Precision and Presence",
+          "dialogueContext": "Malrik speaks the truth he's discovered: they do not return to who they were",
+          "npcLine": "We are not the same people we were before. The collapse changed us. But this—standing here, recognizing each other through the ruins—this might be something stronger than what we had. Because it's chosen.",
+          
+          "requiredGates": [
+            {
+              "gateId": "malrik_names_love_gate",
+              "gateType": "story_gate",
+              "requirement": "malrik_names_love_again",
+              "threshold": 0.0,
+              "description": "Malrik has named his love again"
+            },
+            {
+              "gateId": "paradox_acceptance",
+              "gateType": "story_gate",
+              "requirement": "malrik_accepts_paradox",
+              "threshold": 0.0,
+              "description": "Malrik has accepted the paradox of lost memory and recovered love"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "α", "ε"],
+          "malrikTone": "integrated_whole",
+          "playerChoices": [
+            {
+              "toneId": "T_integration",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You've integrated both parts of yourself—the seeker of order and the one capable of presence.",
+              "malrikResponse": "She taught me that order and presence aren't contradictions. They're different languages for the same truth. And now I speak both.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["malrik_story_complete"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 8,
+      "actTitle": "What They Hold Now",
+      "timeframe": "post_collapse_present_forward",
+      "emotionalTheme": "paradox_and_wholeness",
+      "description": "A new love built from ruin. Recognition without full memory. Presence despite amnesia.",
+      
+      "segments": [
+        {
+          "segmentId": "malrik_act8_seg1_epilogue_choice",
+          "title": "Two Paths Forward",
+          "dialogueContext": "Malrik contemplates the paradox of his love. Player can influence his choice.",
+          "npcLine": "I have a choice now. I can spend my life trying to reconstruct the past we lost. Or I can accept that the past is gone, and build something new from what remains. She has already made her choice—to let the past go, to survive the present.",
+          
+          "requiredGates": [
+            {
+              "gateId": "malrik_complete",
+              "gateType": "story_gate",
+              "requirement": "malrik_story_complete",
+              "threshold": 0.0,
+              "description": "Malrik has completed his arc of recognition"
+            },
+            {
+              "gateId": "wisdom_threshold",
+              "gateType": "coherence",
+              "requirement": "player_wisdom",
+              "threshold": 0.75,
+              "description": "Player has developed wisdom about paradox and loss"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "ε", "α"],
+          "malrikTone": "choosing_presence",
+          "playerChoices": [
+            {
+              "toneId": "T_release",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "Let go of trying to reconstruct. What matters is that you're here now, together, present.",
+              "malrikResponse": "You're right. The archive is important—it honors what was lost. But I've been preserving the past at the cost of the present. That ends now. Elenya chose to live. So will I.",
+              "statEffects": {
+                "empathy": 0.2
+              },
+              "unlocksGates": ["malrik_chooses_future"]
+            },
+            {
+              "toneId": "N_synthesis",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "Both. Archive the memory of your love. And live it new with her. Don't choose—integrate.",
+              "malrikResponse": "Integration. Yes. That's the word. The archive as a memorial to what we were. Our life together as the proof of what we've become.",
+              "statEffects": {
+                "empathy": 0.25,
+                "observation": 0.15
+              },
+              "unlocksGates": ["malrik_integrated_wholeness"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  
+  "epilogueMoments": [
+    {
+      "momentId": "malrik_lighthouse_proposal",
+      "description": "In the restored lighthouse, Malrik and Elenya stand in the light. The silence between them is full.",
+      "trigger": "malrik_integrated_wholeness",
+      "emotionalSignals": ["λ", "α", "Ω"],
+      "npcLine": "I don't remember the exact words I spoke before. But I remember this: that you were worth every attempt to arrange the world correctly. That loving you taught me the difference between order and presence. And that I would like to spend however much time we have left learning both with you."
+    }
+  ]
+}

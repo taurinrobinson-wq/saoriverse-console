@@ -298,3 +298,314 @@ else" to protect themselves from the full weight of continuity.
 **Optional Dialogue Gate**: If player has high Empathy (75+), they can choose dialogue that acknowledges the cost: "I know this is harder than you expected." NPCs respond with gratitude or with honest admission that restoration may have been a mistake.
 
 ---
+
+## MALRIK — THE FULL ARC
+
+*Deep Third Person • Cinematic • Emotional Interior*
+
+### Overview
+
+Malrik's story is a complete 8-act narrative arc that traces his journey from pre-collapse precision-seeker to post-collapse archivist struggling with grief he cannot name. The arc culminates in recognition of his lost love—Elenya—and the paradox of rebuilding connection from fragmented memory.
+
+**Core Premise**: Before the cataclysm, Malrik and Elenya were lovers. The collapse severed their shared memory. They woke as strangers, each holding an ache they couldn't articulate. This story arc reveals that ache, traces its origins, and explores whether love can exist without memory—whether recognition is stronger than recollection.
+
+**Story Significance**: This is a full, playable romantic story disguised as an emotional discovery narrative. It demonstrates how the gate system creates progressive emotional revelation.
+
+---
+
+### Act 1: The Professor and the Older Student (Pre-Collapse)
+
+**Emotional Theme**: Discomfort with Presence • Intellectual Challenge
+
+**Context**: Before the collapse, Malrik was a young professor of historical systems and architectural memory. Elenya was an older student in his classroom, already deep into her spiritual apprenticeship. Their relationship began as intellectual collision—two worldviews that couldn't reconcile, yet were drawn to each other's certainty.
+
+**Key Dialogue Moment**:
+
+After a lecture on preservation of cultural memory, Elenya approaches Malrik's desk:
+
+**Elenya**: "You teach that structures preserve memory. But do you believe memory is only what can be recorded?"
+
+**Malrik**: "Memory is what can be verified."
+
+**Elenya**: "Some memories live in the body, not the mind."
+
+His pen freezes. She smiles—soft, knowing, devastating—and walks away.
+
+**What This Moment Does**: Introduces the central tension: order vs. presence. Malrik's need to verify vs. Elenya's knowledge of embodied truth. Their eventual love will be built on learning that these aren't contradictions—they're different languages for the same truth.
+
+**Gate Progression**:
+- **Segment 1 Unlock**: Player has met Malrik (story_gate: "player_met_malrik")
+- **Segment 2 Unlock**: Completed Segment 1 + Empathy >= 0.6 (tone_stat gate)
+  
+**Dialogue Choices** demonstrate player's understanding of what Malrik is struggling with:
+- **Trust/Order Path**: "Memory is what can be verified. Structure is how we keep it safe." → Malrik respects the logic but remains challenged
+- **Observation Path**: "Maybe memory is also about the moment you recall it." → Malrik sees nuance; the wall softens slightly
+- **Narrative Presence Path**: "Some memories live in the body, not the mind." → Malrik is *touched* by this understanding
+
+The dialogue choices don't just progress the story—they establish player's TONE profile, which determines which later dialogue reveals will be available.
+
+---
+
+### Act 2: The Lighthouse (Pre-Collapse)
+
+**Emotional Theme**: Shared Sanctuary • Finding Stillness Together
+
+**Context**: The lighthouse becomes Malrik's sanctuary—a place of stillness, order, geometric light patterns. He goes there to think. One day, Elenya is already there, meditating cross-legged on the stone.
+
+**What Happens**: Rather than conflict, they discover the lighthouse is big enough for both their needs. Malrik's need for order doesn't clash with Elenya's presence—they complement each other. They begin having lunch together in silence. Not the brittle silence of discomfort, but something softer. Something that asks nothing of him.
+
+**Key Moment**: 
+
+After weeks of shared lunches:
+
+**Malrik** (internal, narrated to player): "I learned something at the lighthouse. That being understood doesn't require explanation. That she could sit beside me and I wouldn't need to defend my silence."
+
+**What This Establishes**: Love through presence, not performance. The lighthouse becomes their metaphor—a place where opposing needs (her presence, his solitude) coexist without conflict.
+
+**Gate Progression**:
+- **Segment 1**: Player must reach the lighthouse with Malrik initially. Gate: story_gate "player_met_malrik", tone_stat "trust" >= 0.5
+- **Segment 2**: Player must witness multiple shared moments. Gate: story_gate "malrik_shares_lighthouse", tone_stat "empathy" >= 0.7
+
+**Dialogue Consequences**: If player has high observation, they can choose dialogue that leads to Malrik admitting: "She makes me less defended. I don't know if that's wisdom or weakness." The question haunts him.
+
+---
+
+### Act 3: The Love They Never Named (Pre-Collapse)
+
+**Emotional Theme**: Unspoken Devotion • The Geometry of Feeling
+
+**Context**: Weeks become months. Malrik and Elenya develop a quiet relationship that exists primarily in presence rather than words. He watches her. She softens when he enters a space. They've never kissed. They've barely held hands. But something is happening that feels enormous to both of them.
+
+**What Happens**: Malrik realizes he loves her. Not dramatically. Not through a moment of realization. But slowly, the way stone erodes—shaped by forces he doesn't understand. He loves her precision of attention. Her maddening certainty. The way she challenges him without trying to win. The way she makes him feel seen without demanding anything in return.
+
+**Key Realization** (player witnesses):
+
+**Malrik** (to player): "I didn't know I was capable of this. Looking at her and feeling... not confused, but complete somehow. Like a structure finally making sense."
+
+**Gate Progression**:
+- Requires completion of Acts 1 & 2
+- Gate: coherence >= 0.7 (player must have balanced emotional perspective)
+- Gate: observation >= 0.75 (player must notice the subtle emotional dynamics)
+
+**Dialogue Choice Impact**: 
+
+If player says: "That's what love is. A structure that finally makes sense."
+
+Malrik responds: "Then I understand now. She's my lighthouse. I'm her order. Together we're... something whole."
+
+This unlocks gate: "malrik_names_love" — a crucial pivot point for future acts.
+
+---
+
+### Act 4: The Cataclysm (Collapse Event)
+
+**Emotional Theme**: Loss • Severance • Unnameable Grief
+
+**Context**: The world breaks. The cataclysm comes without warning. Structures collapse. Memory shatters. 
+
+**What Happens**: Malrik wakes in the rubble with no memory of her. No memory of the lighthouse. No memory of the lunches or the debates or the warmth she had coaxed out of him. He remembers his temperament. He remembers his discipline. He remembers the comfort of order. But the part of him that had learned how to love is gone.
+
+**The Grief He Doesn't Know He Has**: He becomes obsessed with reconstruction. He becomes the Archivist not because he understands the old technology, but because he's the only one stubborn enough to try to make sense of the fragments left behind. He catalogues broken devices, shattered books, pieces of structures whose purposes are lost. He does this obsessively, convinced that if he can reconstruct the past, he can prevent future loss.
+
+He doesn't know he's grieving.
+
+He doesn't know what he lost.
+
+**Key Admission** (very late in dialogue tree):
+
+**Malrik** (after player has shown consistent empathy): "...there are gaps. Not errors—gaps. Whole sections of my personal record just thin out. Like something was lifted out cleanly. I've tried to reconstruct the missing pieces, but there's nothing to reconstruct. It's absence, not damage."
+
+A long pause.
+
+**Malrik**: "I'm grieving something I can't name."
+
+**Gate Progression**:
+- Requires story_gate "malrik_names_love" (from Act 3)
+- Requires high empathy manifestation over multiple conversations
+- Gate: tone_stat "empathy" >= 0.75 (to notice Malrik's unconscious grief)
+
+---
+
+### Act 5: Two Strangers with a Shared Gravity (Post-Collapse • Years Later)
+
+**Emotional Theme**: Body Memory • Invisible Attraction
+
+**Context**: They see each other often in the marketplace. Neither knows why their bodies respond to each other. Malrik always says her name without the title. Elenya always softens when she speaks to him. Their bodies remember what their minds have lost.
+
+**Key Observation** (player can notice):
+
+When Malrik and Elenya are in the same space, there's a visible tension between them—not conflict, but recognition held at bay. Malrik's hand almost touches hers when passing a ritual object. He pulls back. She pretends not to notice.
+
+**What This Establishes**: Love at the level of bodies, instinct, survival-knowledge. They're drawn to each other by forces they don't consciously understand.
+
+**Gate Progression**:
+- Requires completion of prior acts
+- Gate: story_gate "malrik_acknowledges_grief" (Malrik has admitted to grieving something unnamed)
+- Gate: tone_stat "observation" >= 0.8 (player must be perceptive enough to notice the tension)
+
+**Optional Dialogue**:
+
+If player brings this dynamic to Malrik's attention:
+
+**Player**: "You and Elenya... there's something there."
+
+**Malrik**: "There is. And I have no framework for what it is. She's important to our community's work. But when she enters a room, my breathing changes. I don't understand that."
+
+---
+
+### Act 6: The Broken Lantern (Post-Collapse • Present Day)
+
+**Emotional Theme**: Crack in Amnesia • Memory Stirring
+
+**Context**: A broken lighthouse lantern is found. This object becomes the key that begins to unlock what was sealed.
+
+**What Happens**:
+
+**For Elenya** (parallel scene): She encounters the broken lantern during ritual work. She touches it gently. Something catches in her throat. She says softly: "Someone I once knew would have fixed this immediately. Just like that—illumination. His name was... I don't remember his name."
+
+She laughs, but it's broken.
+
+**For Malrik** (elsewhere in the Archive): He pauses at the same moment, hand drifting to a stone table he doesn't consciously recognize. He feels a pull. A compulsion. He must restore this lighthouse lantern.
+
+**Why**: His body remembers what his mind has forgotten. The lighthouse was theirs.
+
+**Key Dialogue** (Malrik to player):
+
+**Malrik**: "I was cataloguing broken objects when I felt... a pull. Toward a lighthouse lantern I've never seen before. My hands knew to repair it before my mind understood why."
+
+A pause. His voice is uncertain.
+
+**Malrik**: "Do you believe in memory that exists outside of consciousness?"
+
+**Gate Progression**:
+- Requires story_gate "malrik_senses_truth" (player has confirmed that resonance is real)
+- Requires high coherence or high empathy
+- This gate acts as a *trigger* for the next segment's availability
+
+**Dialogue Path**:
+
+**Player**: "That's not coincidence. That's resonance. Your souls recognize each other even when your memories don't."
+
+**Malrik**: "That's not a rational explanation."
+
+**Player**: "And yet you have no other framework that fits."
+
+**Malrik** (quietly): "No. I don't."
+
+This dialogue unlocks gate: "malrik_senses_truth_confirmed"
+
+---
+
+### Act 7: The Restoration (Post-Collapse • Present Day)
+
+**Emotional Theme**: Recognition • Paradox • Rebuilding
+
+**Context**: Malrik restores the lighthouse reading room because "the structure had historical significance." But that's a lie. He doesn't know why he needs to fix it—only that he does.
+
+When Elenya arrives, drawn by something she can't name, they stand together in the restored light.
+
+**The Moment**:
+
+The air thickens. Memory stirs. Fragments return:
+
+- The silence they shared.
+- The debates.
+- The laughter.
+- The warmth.
+- The collapse.
+- The ache.
+- The forgetting.
+
+**Key Dialogue**:
+
+**Malrik** (voice breaking): "I remember... something. Someone. A presence. And I remember losing it."
+
+**Elenya** (closing her eyes): "I remember loving someone. And I remember choosing to forget because the half-memory was killing me."
+
+**Malrik** (staring at her): "You did what?"
+
+**Elenya** (small, sad smile): "I didn't know it was you. But my heart did."
+
+**Gate Progression**:
+- Requires story_gate "malrik_acts_on_intuition" (Malrik has restored the lighthouse)
+- Requires high coherence OR (high empathy AND high observation)
+- This is a *major* gate—unlocking it opens the final acts of the story
+
+**Dialogue Choices**:
+
+**Choice 1 - Trust Path**:
+"You don't need full memory. Your heart remembers her."
+
+Malrik responds: "My heart... yes. It's been remembering this whole time. Every time I said her name, every time I felt drawn to that lighthouse. My heart was writing a love letter to a woman I couldn't consciously remember."
+
+Effect: Unlocks gate "malrik_names_love_again"
+
+**Choice 2 - Narrative Presence Path**:
+"She severed the memory deliberately. To survive. To protect herself. Can you forgive that?"
+
+Malrik responds: "Forgive? I'm grateful. She saved herself. And yet... here we both are. In the same lighthouse. The geometry of feeling doesn't require memory. Only presence."
+
+Effect: Unlocks gate "malrik_accepts_paradox" — a deeper gate requiring player to understand that love exists independent of memory.
+
+---
+
+### Act 8: What They Hold Now (Post-Collapse • Present & Forward)
+
+**Emotional Theme**: Paradox and Wholeness • Building New Love from Ruins
+
+**Context**: The full truth is revealed. Malrik and Elenya do not return to who they were. They cannot. They hold both truths:
+
+- Who they were before the collapse.
+- Who they became after.
+- What they lost.
+- What they regained.
+- What they can never fully restore.
+
+**Their New Love**:
+
+It is not a story of certainty or compatibility.
+
+It is a story of **recognition**.
+
+Of **paradox**.
+
+Of **two people who found each other twice**—once in innocence, once in ruin.
+
+And this time, they do not turn away.
+
+**Key Dialogue** (Malrik's final admission):
+
+**Malrik**: "I have a choice now. I can spend my life trying to reconstruct the past we lost. Or I can accept that the past is gone, and build something new from what remains. She has already made her choice—to let the past go, to survive the present."
+
+**Possible Player Response 1** (Trust path):
+"Let go of trying to reconstruct. What matters is that you're here now, together, present."
+
+Malrik: "You're right. The archive is important—it honors what was lost. But I've been preserving the past at the cost of the present. That ends now. Elenya chose to live. So will I."
+
+**Possible Player Response 2** (Narrative Presence path):
+"Both. Archive the memory of your love. And live it new with her. Don't choose—integrate."
+
+Malrik: "Integration. Yes. That's the word. The archive as a memorial to what we were. Our life together as the proof of what we've become."
+
+**Gate Progression**:
+- Requires both prior gates: "malrik_names_love_again" AND "malrik_accepts_paradox"
+- Requires high empathy (75+) or high coherence (80+)
+
+**Epilogue Moment**:
+
+In the restored lighthouse, Malrik and Elenya stand in the light. The silence between them is full.
+
+**Malrik**: "I don't remember the exact words I spoke before. But I remember this: that you were worth every attempt to arrange the world correctly. That loving you taught me the difference between order and presence. And that I would like to spend however much time we have left learning both with you."
+
+They do not kiss. They do not need to.
+
+They simply exist together in the light—two people who lost each other and found a way back.
+
+**Rewards for Completing Malrik's Arc**:
+- **New Glyph**: Glyph of Recovered Lighthouse (Joy/Legacy hybrid)
+- **Stat Changes**: Empathy +5, Coherence +8, Observation +3
+- **Influence**: Malrik +0.5, Elenya +0.3
+- **Unlocked Dialogue**: New conversations with both Malrik and Elenya reflecting their renewed connection
+- **Ending Variation**: Access to "Lighthouse Restored" ending where Malrik and Elenya's relationship influences the community's path forward
+
+---
