@@ -18,44 +18,43 @@ using TMPro;
 /// - Coherence gates (emotional integration)
 /// - Influence gates (relationship with Malrik)
 /// </summary>
-[System.Serializable]
-public class MalrikStoryData
-{
-    public string npc;
-    public string npcFullName;
-    public string storyTitle;
-    public List<MalrikAct> acts = new List<MalrikAct>();
-}
-
-[System.Serializable]
-public class MalrikAct
-{
-    public int actNumber;
-    public string actTitle;
-    public string timeframe;
-    public string emotionalTheme;
-    public List<MalrikSegment> segments = new List<MalrikSegment>();
-}
-
-[System.Serializable]
-public class MalrikSegment
-{
-    public string segmentId;
-    public int act;
-    public string title;
-    public string npcLine;
-    public List<DialogueGate> requiredGates = new List<DialogueGate>();
-    public List<DialogueChoice> choices = new List<DialogueChoice>();
-    public string emotionalTheme;
-    public bool completedByPlayer = false;
-}
 
 public class MalrikDialogueSequence : MonoBehaviour
 {
+    [System.Serializable]
+    public class MalrikStoryData
+    {
+        public string npc;
+        public string npcFullName;
+        public string storyTitle;
+        public List<MalrikAct> acts = new List<MalrikAct>();
+    }
+
+    [System.Serializable]
+    public class MalrikAct
+    {
+        public int actNumber;
+        public string actTitle;
+        public string timeframe;
+        public string emotionalTheme;
+        public List<MalrikSegment> segments = new List<MalrikSegment>();
+    }
+
+    [System.Serializable]
+    public class MalrikSegment
+    {
+        public string segmentId;
+        public int act;
+        public string title;
+        public string npcLine;
+        public List<DialogueGate> requiredGates = new List<DialogueGate>();
+        public List<DialogueChoice> choices = new List<DialogueChoice>();
+        public string emotionalTheme;
+        public bool completedByPlayer = false;
+    }
+
     private static MalrikStoryData storyData;
     private DialogueGateEvaluator gateEvaluator;
-    private int currentActIndex = 0;
-    private int currentSegmentIndex = 0;
     private Dictionary<string, MalrikSegment> segmentMap = new Dictionary<string, MalrikSegment>();
 
     void Awake()

@@ -11,6 +11,64 @@ namespace VelinorGame.Core
     /// </summary>
     public class ElenyaDialogueSequence : MonoBehaviour
     {
+        [System.Serializable]
+        public class ElenyaStoryData
+        {
+            public string npc;
+            public string npcFullName;
+            public string storyTitle;
+            public string storylineType;
+            public string description;
+            public List<ElenyaAct> acts;
+            public List<ElenyaEpilogueMoment> epilogueMoments;
+        }
+
+        [System.Serializable]
+        public class ElenyaAct
+        {
+            public int actNumber;
+            public string actTitle;
+            public string timeframe;
+            public string emotionalTheme;
+            public string description;
+            public List<ElenyaSegment> segments;
+        }
+
+        [System.Serializable]
+        public class ElenyaSegment
+        {
+            public string segmentId;
+            public string title;
+            public string dialogueContext;
+            public string npcLine;
+            public List<DialogueGate> requiredGates;
+            public List<string> emotionalSignals;
+            public string elenyaTone;
+            public List<ElenyaChoice> playerChoices;
+        }
+
+        [System.Serializable]
+        public class ElenyaChoice
+        {
+            public string toneId;
+            public char toneType;
+            public string toneName;
+            public string playerLine;
+            public string elenyaResponse;
+            public Dictionary<string, float> statEffects;
+            public List<string> unlocksGates;
+        }
+
+        [System.Serializable]
+        public class ElenyaEpilogueMoment
+        {
+            public string momentId;
+            public string description;
+            public string trigger;
+            public List<string> emotionalSignals;
+            public string elenyaLine;
+        }
+
         [SerializeField] private string storyJsonPath = "Dialogue/ElenyaStoryGates";
         private ElenyaStoryData storyData;
         private Dictionary<string, bool> completedSegments = new Dictionary<string, bool>();
@@ -215,63 +273,5 @@ namespace VelinorGame.Core
         {
             return storyData;
         }
-    }
-
-    [System.Serializable]
-    public class ElenyaStoryData
-    {
-        public string npc;
-        public string npcFullName;
-        public string storyTitle;
-        public string storylineType;
-        public string description;
-        public List<ElenyaAct> acts;
-        public List<ElenyaEpilogueMoment> epilogueMoments;
-    }
-
-    [System.Serializable]
-    public class ElenyaAct
-    {
-        public int actNumber;
-        public string actTitle;
-        public string timeframe;
-        public string emotionalTheme;
-        public string description;
-        public List<ElenyaSegment> segments;
-    }
-
-    [System.Serializable]
-    public class ElenyaSegment
-    {
-        public string segmentId;
-        public string title;
-        public string dialogueContext;
-        public string npcLine;
-        public List<DialogueGate> requiredGates;
-        public List<string> emotionalSignals;
-        public string elenyaTone;
-        public List<ElenyaChoice> playerChoices;
-    }
-
-    [System.Serializable]
-    public class ElenyaChoice
-    {
-        public string toneId;
-        public char toneType;
-        public string toneName;
-        public string playerLine;
-        public string elenyaResponse;
-        public Dictionary<string, float> statEffects;
-        public List<string> unlocksGates;
-    }
-
-    [System.Serializable]
-    public class ElenyaEpilogueMoment
-    {
-        public string momentId;
-        public string description;
-        public string trigger;
-        public List<string> emotionalSignals;
-        public string elenyaLine;
     }
 }

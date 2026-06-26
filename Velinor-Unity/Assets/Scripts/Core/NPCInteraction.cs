@@ -320,7 +320,7 @@ public class NPCInteraction : MonoBehaviour
     {
         if (segment is MalrikDialogueSequence.MalrikSegment malrikSeg)
             return malrikSeg.segmentId;
-        if (segment is ElenyaDialogueSequence.ElenyaSegment elenyaSeg)
+        if (segment is VelinorGame.Core.ElenyaDialogueSequence.ElenyaSegment elenyaSeg)
             return elenyaSeg.segmentId;
         return "";
     }
@@ -665,6 +665,64 @@ public class NPCInteraction : MonoBehaviour
         }
         
         Debug.Log($"📊 {remnantName} {(delta > 0 ? "+" : "")}{delta}: {raviStats.GetRemnant(remnantName):F2}");
+    }
+
+    void ApplyGateBasedStatEffects(Dictionary<string, float> statEffects, NPCStats npcStats)
+    {
+        if (statEffects == null || npcStats == null)
+            return;
+
+        foreach (var kvp in statEffects)
+        {
+            string statName = kvp.Key;
+            float delta = kvp.Value;
+
+            // Apply to NPC stats
+            switch (statName)
+            {
+                case "empathy":
+                    npcStats.Empathy = Mathf.Clamp01(npcStats.Empathy + delta);
+                    break;
+                case "resolve":
+                    npcStats.Resolve = Mathf.Clamp01(npcStats.Resolve + delta);
+                    break;
+                case "memory":
+                    npcStats.Memory = Mathf.Clamp01(npcStats.Memory + delta);
+                    break;
+                case "nuance":
+                    npcStats.Nuance = Mathf.Clamp01(npcStats.Nuance + delta);
+                    break;
+                case "authority":
+                    npcStats.Authority = Mathf.Clamp01(npcStats.Authority + delta);
+                    break;
+                case "need":
+                    npcStats.Need = Mathf.Clamp01(npcStats.Need + delta);
+                    break;
+                case "trust":
+                    npcStats.Trust = Mathf.Clamp01(npcStats.Trust + delta);
+                    break;
+                case "skepticism":
+                    npcStats.Skepticism = Mathf.Clamp01(npcStats.Skepticism + delta);
+                    break;
+                case "observation":
+                    // Observation is a player stat, not NPC stat - store as influence for now
+                    Debug.LogWarning($"⚠️ Observation effect in NPC choice: {delta}");
+                    break;
+                case "malrik_influence":
+                    // Relationship tracking
+                    Debug.Log($"💜 Malrik relationship: +{delta}");
+                    break;
+                case "elenya_influence":
+                    // Relationship tracking
+                    Debug.Log($"💚 Elenya relationship: +{delta}");
+                    break;
+                default:
+                    Debug.LogWarning($"⚠️ Unknown stat effect: {statName}");
+                    break;
+            }
+
+            Debug.Log($"📊 {npcId}.{statName} {(delta > 0 ? "+" : "")}{delta}");
+        }
     }
 
     void CloseDialogue()
