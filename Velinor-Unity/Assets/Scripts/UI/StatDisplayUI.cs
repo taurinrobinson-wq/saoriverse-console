@@ -104,24 +104,50 @@ public class StatDisplayUI : MonoBehaviour
 
         // Find the NPC currently in dialogue (if any)
         NPCInteraction npc = FindAnyObjectByType<NPCInteraction>();
-        if (npc == null || npc.raviStats == null)
+        if (npc == null)
         {
-            npcStatsText.text = "<b>NPC STATS (RAVI)</b>\n(No stats available)";
+            npcStatsText.text = "<b>NPC STATS</b>\n(No NPC found)";
             return;
         }
 
-        // Display Ravi's actual REMNANTS stats
-        string display = "<b>NPC STATS (RAVI)</b>\n";
+        // Determine which NPC is active and display their stats
+        NPCStats activeStats = null;
+        string npcName = "UNKNOWN";
+
+        if (npc.npcId == "Ravi" && npc.raviStats != null)
+        {
+            activeStats = npc.raviStats;
+            npcName = "RAVI";
+        }
+        else if (npc.npcId == "Malrik" && npc.malrikStats != null)
+        {
+            activeStats = npc.malrikStats;
+            npcName = "MALRIK (Archivist)";
+        }
+        else if (npc.npcId == "Elenya" && npc.elenyaStats != null)
+        {
+            activeStats = npc.elenyaStats;
+            npcName = "ELENYA (High Seer)";
+        }
+
+        if (activeStats == null)
+        {
+            npcStatsText.text = $"<b>NPC STATS ({npcName})</b>\n(No stats loaded)";
+            return;
+        }
+
+        // Display NPC's REMNANTS stats
+        string display = $"<b>NPC STATS ({npcName})</b>\n";
         display += $"<size=20>";
         display += $"\n<color=magenta>REMNANTS:</color>\n";
-        display += $"  Resolve:     {npc.raviStats.Resolve:F2}\n";
-        display += $"  Empathy:     {npc.raviStats.Empathy:F2}\n";
-        display += $"  Memory:      {npc.raviStats.Memory:F2}\n";
-        display += $"  Nuance:      {npc.raviStats.Nuance:F2}\n";
-        display += $"  Authority:   {npc.raviStats.Authority:F2}\n";
-        display += $"  Need:        {npc.raviStats.Need:F2}\n";
-        display += $"  Trust:       {npc.raviStats.Trust:F2}\n";
-        display += $"  Skepticism:  {npc.raviStats.Skepticism:F2}\n";
+        display += $"  Resolve:     {activeStats.Resolve:F2}\n";
+        display += $"  Empathy:     {activeStats.Empathy:F2}\n";
+        display += $"  Memory:      {activeStats.Memory:F2}\n";
+        display += $"  Nuance:      {activeStats.Nuance:F2}\n";
+        display += $"  Authority:   {activeStats.Authority:F2}\n";
+        display += $"  Need:        {activeStats.Need:F2}\n";
+        display += $"  Trust:       {activeStats.Trust:F2}\n";
+        display += $"  Skepticism:  {activeStats.Skepticism:F2}\n";
         display += $"</size>";
 
         npcStatsText.text = display;

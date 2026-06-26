@@ -17,7 +17,7 @@ using VelinorGame.Core;
 /// </summary>
 public class NPCInteraction : MonoBehaviour
 {
-    [SerializeField] private string npcId = "Ravi";
+    [SerializeField] public string npcId = "Ravi";
     
     private bool playerInRange = false;
     private int currentRound = 0;
