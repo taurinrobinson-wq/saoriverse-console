@@ -62,6 +62,10 @@ public class MalrikDialogueSequence : MonoBehaviour
     {
         LoadStoryData();
         gateEvaluator = GetComponent<DialogueGateEvaluator>() ?? gameObject.AddComponent<DialogueGateEvaluator>();
+        
+        // Initialize first-time gates for this NPC
+        gateEvaluator.MarkSegmentComplete("player_met_malrik");
+        Debug.Log($"🟣 Initialized first-time gate: player_met_malrik");
     }
 
     private void LoadStoryData()

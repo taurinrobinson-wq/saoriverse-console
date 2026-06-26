@@ -88,20 +88,11 @@ public class NPCInteraction : MonoBehaviour
         raviDialogueSequence = new RaviDialogueSequence();
         currentDialogueSequence = raviDialogueSequence;
         
-        // Initialize NPC stats with Ravi's canonical values
-        raviStats = new NPCStats
-        {
-            Resolve = 0.3f,
-            Empathy = 0.9f,
-            Memory = 0.9f,
-            Nuance = 0.7f,
-            Authority = 0.3f,
-            Need = 0.9f,
-            Trust = 0.1f,
-            Skepticism = 0.9f
-        };
+        // Load Ravi's REMNANTS stats from NPCRemnantData
+        raviStats = NPCRemnantData.GetNPCStats("Ravi");
         
         Debug.Log($"✅ Initialized {npcId} (3-round dialogue)");
+        Debug.Log($"🟣 Ravi REMNANTS: Resolve={raviStats.Resolve} Empathy={raviStats.Empathy} Memory={raviStats.Memory} Nuance={raviStats.Nuance} Authority={raviStats.Authority} Need={raviStats.Need} Trust={raviStats.Trust} Skepticism={raviStats.Skepticism}");
     }
 
     void InitializeMalrik()
@@ -114,21 +105,11 @@ public class NPCInteraction : MonoBehaviour
         }
         currentDialogueSequence = malrikDialogueSequence;
         
-        // Initialize NPC stats (Malrik's canonical values would go here)
-        // For now, initialize with neutral/default values
-        malrikStats = new NPCStats
-        {
-            Resolve = 0.5f,
-            Empathy = 0.5f,
-            Memory = 0.5f,
-            Nuance = 0.5f,
-            Authority = 0.5f,
-            Need = 0.5f,
-            Trust = 0.5f,
-            Skepticism = 0.5f
-        };
+        // Load Malrik's REMNANTS stats from NPCRemnantData
+        malrikStats = NPCRemnantData.GetNPCStats("Malrik");
         
         Debug.Log($"✅ Initialized {npcId} (8-act gate-based dialogue)");
+        Debug.Log($"🟣 Malrik REMNANTS: Resolve={malrikStats.Resolve} Empathy={malrikStats.Empathy} Memory={malrikStats.Memory} Nuance={malrikStats.Nuance} Authority={malrikStats.Authority} Need={malrikStats.Need} Trust={malrikStats.Trust} Skepticism={malrikStats.Skepticism}");
     }
 
     void InitializeElenya()
@@ -141,20 +122,11 @@ public class NPCInteraction : MonoBehaviour
         }
         currentDialogueSequence = elenyaDialogueSequence;
         
-        // Initialize NPC stats
-        elenyaStats = new NPCStats
-        {
-            Resolve = 0.5f,
-            Empathy = 0.5f,
-            Memory = 0.5f,
-            Nuance = 0.5f,
-            Authority = 0.5f,
-            Need = 0.5f,
-            Trust = 0.5f,
-            Skepticism = 0.5f
-        };
+        // Load Elenya's REMNANTS stats from NPCRemnantData
+        elenyaStats = NPCRemnantData.GetNPCStats("Elenya");
         
         Debug.Log($"✅ Initialized {npcId} (8-act gate-based dialogue)");
+        Debug.Log($"🟣 Elenya REMNANTS: Resolve={elenyaStats.Resolve} Empathy={elenyaStats.Empathy} Memory={elenyaStats.Memory} Nuance={elenyaStats.Nuance} Authority={elenyaStats.Authority} Need={elenyaStats.Need} Trust={elenyaStats.Trust} Skepticism={elenyaStats.Skepticism}");
     }
 
     void CacheUIElements()
@@ -276,10 +248,21 @@ public class NPCInteraction : MonoBehaviour
 
     void ShowGateBasedDialogue()
     {
+        Debug.Log($"🔵 ShowGateBasedDialogue called for {npcId}");
+        
         // Get available segments based on gates
         List<object> availableSegments = GetAvailableSegments();
         
-        if (availableSegments == null || availableSegments.Count == 0)
+        if (availableSegments == null)
+        {
+            Debug.LogError($"🔴 GetAvailableSegments returned NULL for {npcId}");
+            CloseDialogue();
+            return;
+        }
+
+        Debug.Log($"🟡 Found {availableSegments.Count} available segments for {npcId}");
+        
+        if (availableSegments.Count == 0)
         {
             Debug.Log($"🔒 No dialogue available for {npcId} (gates not open)");
             CloseDialogue();
@@ -290,6 +273,7 @@ public class NPCInteraction : MonoBehaviour
         object segment = availableSegments[0];
         currentSegmentId = GetSegmentId(segment);
         
+        Debug.Log($"🟢 Showing segment: {currentSegmentId}");
         ShowGateBasedSegment(segment);
     }
 

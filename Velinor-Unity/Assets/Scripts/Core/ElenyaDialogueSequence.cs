@@ -84,6 +84,14 @@ namespace VelinorGame.Core
         private void Start()
         {
             LoadStoryData();
+            
+            // Initialize first-time gates for this NPC (mark as "met" for first dialogue)
+            var gateEval = GetComponent<DialogueGateEvaluator>();
+            if (gateEval != null)
+            {
+                gateEval.MarkSegmentComplete("player_met_elenya");
+                Debug.Log($"🟣 Initialized first-time gate: player_met_elenya");
+            }
         }
 
         /// <summary>
