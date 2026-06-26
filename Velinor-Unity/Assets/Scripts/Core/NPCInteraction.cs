@@ -2,12 +2,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using VelinorGame.Core;
 
 /// <summary>
-/// NPCInteraction: Per-NPC dialogue handler with TONE/REMNANTS integration.
+/// NPCInteraction: Multi-NPC dialogue handler with gate-based progression.
 /// 
 /// Features:
-/// - Multi-round dialogue sequences
+/// - Multi-NPC support (Ravi, Malrik, Elenya)
+/// - Gate-based story progression
 /// - TONE choice labeling (T/O/N/E)
 /// - REMNANTS stat effects
 /// - Name reveal mechanics
@@ -31,16 +33,60 @@ public class NPCInteraction : MonoBehaviour
     private Button optionButton4;
     private Transform choiceContainer;
     
-    // Dialogue Sequence
-    private RaviDialogueSequence dialogueSequence;
+    // Dialogue Sequences - support for multiple NPCs
+    private RaviDialogueSequence raviDialogueSequence;
+    private MalrikDialogueSequence malrikDialogueSequence;
+    private ElenyaDialogueSequence elenyaDialogueSequence;
     
-    // NPC Stats (Ravi's canonical values) - public for stat display
+    // Gate evaluator for story progression
+    private DialogueGateEvaluator gateEvaluator;
+    
+    // Current dialogue state
+    private object currentDialogueSequence;  // Can be Ravi/Malrik/Elenya sequence
+    private string currentSegmentId;  // For gate-based systems
+    
+    // NPC Stats - public for stat display
     public NPCStats raviStats;
+    public NPCStats malrikStats;
+    public NPCStats elenyaStats;
 
     void Start()
     {
+        // Initialize gate evaluator (works for all NPCs)
+        gateEvaluator = GetComponent<DialogueGateEvaluator>();
+        if (gateEvaluator == null)
+        {
+            gateEvaluator = gameObject.AddComponent<DialogueGateEvaluator>();
+        }
+
+        // Initialize appropriate dialogue sequence and NPC stats based on npcId
+        if (npcId == "Ravi")
+        {
+            InitializeRavi();
+        }
+        else if (npcId == "Malrik")
+        {
+            InitializeMalrik();
+        }
+        else if (npcId == "Elenya")
+        {
+            InitializeElenya();
+        }
+        else
+        {
+            Debug.LogError($"Unknown NPC ID: {npcId}. Expected 'Ravi', 'Malrik', or 'Elenya'");
+            InitializeRavi();  // Fallback
+        }
+        
+        // Cache UI elements
+        CacheUIElements();
+    }
+
+    void InitializeRavi()
+    {
         // Initialize dialogue sequence for Ravi
-        dialogueSequence = new RaviDialogueSequence();
+        raviDialogueSequence = new RaviDialogueSequence();
+        currentDialogueSequence = raviDialogueSequence;
         
         // Initialize NPC stats with Ravi's canonical values
         raviStats = new NPCStats
@@ -55,8 +101,60 @@ public class NPCInteraction : MonoBehaviour
             Skepticism = 0.9f
         };
         
-        // Cache UI elements
-        CacheUIElements();
+        Debug.Log($"✅ Initialized {npcId} (3-round dialogue)");
+    }
+
+    void InitializeMalrik()
+    {
+        // Load Malrik's dialogue sequence from JSON
+        malrikDialogueSequence = GetComponent<MalrikDialogueSequence>();
+        if (malrikDialogueSequence == null)
+        {
+            malrikDialogueSequence = gameObject.AddComponent<MalrikDialogueSequence>();
+        }
+        currentDialogueSequence = malrikDialogueSequence;
+        
+        // Initialize NPC stats (Malrik's canonical values would go here)
+        // For now, initialize with neutral/default values
+        malrikStats = new NPCStats
+        {
+            Resolve = 0.5f,
+            Empathy = 0.5f,
+            Memory = 0.5f,
+            Nuance = 0.5f,
+            Authority = 0.5f,
+            Need = 0.5f,
+            Trust = 0.5f,
+            Skepticism = 0.5f
+        };
+        
+        Debug.Log($"✅ Initialized {npcId} (8-act gate-based dialogue)");
+    }
+
+    void InitializeElenya()
+    {
+        // Load Elenya's dialogue sequence from JSON
+        elenyaDialogueSequence = GetComponent<ElenyaDialogueSequence>();
+        if (elenyaDialogueSequence == null)
+        {
+            elenyaDialogueSequence = gameObject.AddComponent<ElenyaDialogueSequence>();
+        }
+        currentDialogueSequence = elenyaDialogueSequence;
+        
+        // Initialize NPC stats
+        elenyaStats = new NPCStats
+        {
+            Resolve = 0.5f,
+            Empathy = 0.5f,
+            Memory = 0.5f,
+            Nuance = 0.5f,
+            Authority = 0.5f,
+            Need = 0.5f,
+            Trust = 0.5f,
+            Skepticism = 0.5f
+        };
+        
+        Debug.Log($"✅ Initialized {npcId} (8-act gate-based dialogue)");
     }
 
     void CacheUIElements()
@@ -163,13 +261,254 @@ public class NPCInteraction : MonoBehaviour
         {
             CacheUIElements();
         }
+
+        if (npcId == "Ravi")
+        {
+            // Ravi uses simple 3-round dialogue
+            ShowDialogueRound();
+        }
+        else if (npcId == "Malrik" || npcId == "Elenya")
+        {
+            // Malrik/Elenya use gate-based dialogue
+            ShowGateBasedDialogue();
+        }
+    }
+
+    void ShowGateBasedDialogue()
+    {
+        // Get available segments based on gates
+        List<object> availableSegments = GetAvailableSegments();
         
-        ShowDialogueRound();
+        if (availableSegments == null || availableSegments.Count == 0)
+        {
+            Debug.Log($"🔒 No dialogue available for {npcId} (gates not open)");
+            CloseDialogue();
+            return;
+        }
+
+        // For now, show the first available segment
+        object segment = availableSegments[0];
+        currentSegmentId = GetSegmentId(segment);
+        
+        ShowGateBasedSegment(segment);
+    }
+
+    List<object> GetAvailableSegments()
+    {
+        if (npcId == "Malrik")
+        {
+            var malrikSeq = currentDialogueSequence as MalrikDialogueSequence;
+            if (malrikSeq != null)
+            {
+                var segments = malrikSeq.GetAvailableSegments(PlayerStats.Get(), this, "Malrik");
+                return new List<object>(segments.ConvertAll(x => (object)x));
+            }
+        }
+        else if (npcId == "Elenya")
+        {
+            var elenyaSeq = currentDialogueSequence as ElenyaDialogueSequence;
+            if (elenyaSeq != null)
+            {
+                var segments = elenyaSeq.GetAvailableSegments(PlayerStats.Get(), this, "Elenya");
+                return new List<object>(segments.ConvertAll(x => (object)x));
+            }
+        }
+        return null;
+    }
+
+    string GetSegmentId(object segment)
+    {
+        if (segment is MalrikDialogueSequence.MalrikSegment malrikSeg)
+            return malrikSeg.segmentId;
+        if (segment is ElenyaDialogueSequence.ElenyaSegment elenyaSeg)
+            return elenyaSeg.segmentId;
+        return "";
+    }
+
+    void ShowGateBasedSegment(object segment)
+    {
+        Transform panelTransform = dialogueCanvas.transform.Find("DialoguePanel");
+        if (panelTransform == null)
+        {
+            Debug.LogError("DialoguePanel not found!");
+            return;
+        }
+
+        panelTransform.gameObject.SetActive(true);
+        RectTransform panelRect = panelTransform as RectTransform;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
+
+        // Display NPC name
+        if (npcNameText != null)
+        {
+            npcNameText.text = npcId;
+        }
+
+        // Extract dialogue properties using reflection for compatibility
+        string npcLine = "";
+        List<object> choices = new List<object>();
+        
+        var npcLineProperty = segment.GetType().GetProperty("npcLine");
+        var choicesProperty = segment.GetType().GetProperty("playerChoices");
+        
+        if (npcLineProperty != null)
+            npcLine = (string)npcLineProperty.GetValue(segment);
+        
+        if (choicesProperty != null)
+        {
+            var choicesList = choicesProperty.GetValue(segment) as System.Collections.IList;
+            if (choicesList != null)
+            {
+                foreach (var choice in choicesList)
+                    choices.Add(choice);
+            }
+        }
+
+        if (dialogueBodyText != null)
+        {
+            dialogueBodyText.text = npcLine;
+        }
+
+        // Setup buttons with choices
+        SetupGateBasedChoiceButtons(choices);
+    }
+
+    void SetupGateBasedChoiceButtons(List<object> choices)
+    {
+        // Hide all buttons first
+        if (optionButton1 != null) optionButton1.gameObject.SetActive(false);
+        if (optionButton2 != null) optionButton2.gameObject.SetActive(false);
+        if (optionButton3 != null) optionButton3.gameObject.SetActive(false);
+        if (optionButton4 != null) optionButton4.gameObject.SetActive(false);
+
+        Button[] buttons = { optionButton1, optionButton2, optionButton3, optionButton4 };
+        
+        for (int i = 0; i < choices.Count && i < buttons.Length; i++)
+        {
+            object choice = choices[i];
+            Button btn = buttons[i];
+            int choiceIndex = i;
+            
+            SetupGateBasedChoiceButton(btn, choice, () => OnGateBasedChoiceSelected(choiceIndex, choices));
+        }
+
+        if (choiceContainer != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(choiceContainer as RectTransform);
+        }
+    }
+
+    void SetupGateBasedChoiceButton(Button button, object choice, UnityEngine.Events.UnityAction action)
+    {
+        if (button == null) return;
+
+        button.gameObject.SetActive(true);
+
+        string playerLine = "";
+        char toneType = ' ';
+
+        // Handle both DialogueChoice (from Malrik) and ElenyaChoice
+        if (choice is DialogueChoice dialogueChoice)
+        {
+            playerLine = dialogueChoice.playerLine;
+            toneType = dialogueChoice.toneType;
+        }
+        else
+        {
+            // Try to use reflection for custom choice types
+            var playerLineProperty = choice.GetType().GetProperty("playerLine");
+            var toneTypeProperty = choice.GetType().GetProperty("toneType");
+            
+            if (playerLineProperty != null)
+                playerLine = (string)playerLineProperty.GetValue(choice);
+            if (toneTypeProperty != null)
+                toneType = (char)toneTypeProperty.GetValue(choice);
+        }
+
+        // Set button text with TONE label
+        TextMeshProUGUI btnText = button.GetComponentInChildren<TextMeshProUGUI>();
+        if (btnText != null)
+        {
+            btnText.text = $"({toneType}) {playerLine}";
+        }
+
+        // Ensure consistent dark gray styling
+        Image btnImage = button.GetComponent<Image>();
+        if (btnImage != null)
+        {
+            btnImage.color = new Color(0.2f, 0.2f, 0.2f, 1f);
+        }
+
+        ColorBlock colors = button.colors;
+        colors.normalColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+        colors.highlightedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
+        colors.pressedColor = new Color(0.1f, 0.1f, 0.1f, 1f);
+        button.colors = colors;
+
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(action);
+        
+        Debug.Log($"🟢 Setup button: ({toneType}) - {playerLine}");
+    }
+
+    void OnGateBasedChoiceSelected(int choiceIndex, List<object> choices)
+    {
+        if (choiceIndex < 0 || choiceIndex >= choices.Count)
+            return;
+
+        object choice = choices[choiceIndex];
+        
+        // Get stat effects - handle both DialogueChoice and custom choice types
+        Dictionary<string, float> statEffects = null;
+        
+        if (choice is DialogueChoice dialogueChoice)
+        {
+            statEffects = dialogueChoice.remnantEffects;
+        }
+        else
+        {
+            // Try to use reflection for custom choice types
+            var statEffectsProperty = choice.GetType().GetProperty("statEffects");
+            if (statEffectsProperty != null)
+                statEffects = (Dictionary<string, float>)statEffectsProperty.GetValue(choice);
+        }
+
+        // Apply stat effects appropriately based on NPC
+        if (npcId == "Malrik")
+        {
+            ApplyGateBasedStatEffects(statEffects, malrikStats);
+            Debug.Log($"🟢 Malrik choice selected");
+        }
+        else if (npcId == "Elenya")
+        {
+            ApplyGateBasedStatEffects(statEffects, elenyaStats);
+            Debug.Log($"🟢 Elenya choice selected");
+        }
+
+        // Mark this segment as completed
+        if (npcId == "Malrik")
+        {
+            var malrikSeq = currentDialogueSequence as MalrikDialogueSequence;
+            if (malrikSeq != null)
+                malrikSeq.CompleteSegment(currentSegmentId);
+        }
+        else if (npcId == "Elenya")
+        {
+            var elenyaSeq = currentDialogueSequence as VelinorGame.Core.ElenyaDialogueSequence;
+            if (elenyaSeq != null)
+                elenyaSeq.CompleteSegment(currentSegmentId);
+        }
+
+        // Close and prepare for next dialogue
+        CloseDialogue();
     }
 
     void ShowDialogueRound()
     {
-        if (currentRound >= dialogueSequence.rounds.Count)
+        if (raviDialogueSequence == null)
+            return;
+
+        if (currentRound >= raviDialogueSequence.rounds.Count)
         {
             // Dialogue complete
             Debug.Log($"🟣 {npcId}: Dialogue sequence complete");
@@ -188,12 +527,12 @@ public class NPCInteraction : MonoBehaviour
         RectTransform panelRect = panelTransform as RectTransform;
         LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
 
-        DialogueRound round = dialogueSequence.rounds[currentRound];
+        DialogueRound round = raviDialogueSequence.rounds[currentRound];
         
         // Show NPC name (or "???" if not revealed)
         if (npcNameText != null)
         {
-            npcNameText.text = dialogueSequence.playerKnowsName ? "Ravi" : "???";
+            npcNameText.text = raviDialogueSequence.playerKnowsName ? "Ravi" : "???";
         }
         
         // Show NPC's line
@@ -268,7 +607,10 @@ public class NPCInteraction : MonoBehaviour
 
     void OnChoiceSelected(int choiceIndex)
     {
-        DialogueRound round = dialogueSequence.rounds[currentRound];
+        if (raviDialogueSequence == null)
+            return;
+
+        DialogueRound round = raviDialogueSequence.rounds[currentRound];
         DialogueChoice choice = round.choices[choiceIndex];
 
         Debug.Log($"🟢 Player chose ({choice.toneType}): {choice.playerLine}");
@@ -282,7 +624,7 @@ public class NPCInteraction : MonoBehaviour
         // Check for name reveal (NarrativePresence choice)
         if (choice.toneType == 'N')
         {
-            dialogueSequence.playerKnowsName = true;
+            raviDialogueSequence.playerKnowsName = true;
             Debug.Log($"✨ Player learned {npcId}'s name!");
         }
 
@@ -297,7 +639,7 @@ public class NPCInteraction : MonoBehaviour
         }
 
         // Show next round or end dialogue
-        if (currentRound < dialogueSequence.rounds.Count)
+        if (currentRound < raviDialogueSequence.rounds.Count)
         {
             ShowDialogueRound();
         }
