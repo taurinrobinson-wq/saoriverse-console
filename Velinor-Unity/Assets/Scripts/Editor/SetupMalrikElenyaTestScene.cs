@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 /// <summary>
@@ -107,7 +110,7 @@ public class SetupMalrikElenyaTestScene
 
         TextMeshProUGUI promptText = promptObj.AddComponent<TextMeshProUGUI>();
         promptText.text = "Press E to talk";
-        promptText.alignment = TextAlignmentOptions.TopCenter;
+        promptText.alignment = TextAlignmentOptions.Top | TextAlignmentOptions.Center;
         promptText.fontSize = 36;
     }
 
