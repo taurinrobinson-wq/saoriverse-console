@@ -13,6 +13,60 @@
       "description": "Elenya becomes the High Seer, teaching compassion without attachment. But something in her trembles when asked about Malrik.",
       "segments": [
         {
+          "segmentId": "elenya_act1_seg0_intro",
+          "title": "The Seer's Sanctuary",
+          "dialogueContext": "First meeting with Elenya in her meditation space - no prerequisites",
+          "npcLine": "Welcome. I've been expecting you—though I didn't know when. Sit. Let's see what brought you here.",
+          "requiredGates": [],
+          "requiredStats": [],
+          "requiredGlyphs": [],
+          "requiredCoherence": 0,
+          "requiredTone": [],
+          "emotionalSignals": [],
+          "elenyaTone": "neutral",
+          "playerChoices": [
+            {
+              "toneId": "E_openness",
+              "toneType": "E",
+              "toneName": "Empathy",
+              "playerLine": "I feel like something changed in the world. Something fundamental. Can you help me understand?",
+              "elenyaResponse": "You feel it in your bones. That's good. Too many people think only with their minds. Yes, something shifted. We're all finding our way through it.",
+              "statEffects": {
+                "empathy": 0.1
+              },
+              "unlocksGates": [
+                "elenya_intro_complete"
+              ]
+            },
+            {
+              "toneId": "O_presence",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "People say you understand things others don't. What do you see that they miss?",
+              "elenyaResponse": "I see the patterns beneath chaos. I see what people long for before they know they're longing. Come closer—let me see what you carry with you.",
+              "statEffects": {
+                "observation": 0.05
+              },
+              "unlocksGates": [
+                "elenya_intro_complete"
+              ]
+            },
+            {
+              "toneId": "N_intuition",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "I think our meeting isn't random. I think it means something.",
+              "elenyaResponse": "Nothing is random. Everything is a thread in an ongoing story. You're here because the story needs you here. That's enough.",
+              "statEffects": {
+                "empathy": 0.1
+              },
+              "unlocksGates": [
+                "elenya_intro_complete"
+              ]
+            }
+          ]
+        },
+        {
           "segmentId": "elenya_act5_seg1_teacher_contradiction",
           "title": "Compassion Without Possession",
           "dialogueContext": "Elenya teaches her followers. A student asks about attachment.",
@@ -489,60 +543,6 @@
       "emotionalTheme": "fascination_with_rigidity",
       "description": "Elenya encounters Malrik's precision and becomes fascinated by his struggle to control meaning through structure.",
       "segments": [
-        {
-          "segmentId": "elenya_act1_seg0_intro",
-          "title": "The Seer's Sanctuary",
-          "dialogueContext": "First meeting with Elenya in her meditation space - no prerequisites",
-          "npcLine": "Welcome. I've been expecting you—though I didn't know when. Sit. Let's see what brought you here.",
-          "requiredGates": [],
-          "requiredStats": [],
-          "requiredGlyphs": [],
-          "requiredCoherence": 0,
-          "requiredTone": [],
-          "emotionalSignals": [],
-          "elenyaTone": "neutral",
-          "playerChoices": [
-            {
-              "toneId": "E_openness",
-              "toneType": "E",
-              "toneName": "Empathy",
-              "playerLine": "I feel like something changed in the world. Something fundamental. Can you help me understand?",
-              "elenyaResponse": "You feel it in your bones. That's good. Too many people think only with their minds. Yes, something shifted. We're all finding our way through it.",
-              "statEffects": {
-                "empathy": 0.1
-              },
-              "unlocksGates": [
-                "elenya_intro_complete"
-              ]
-            },
-            {
-              "toneId": "O_presence",
-              "toneType": "O",
-              "toneName": "Observation",
-              "playerLine": "People say you understand things others don't. What do you see that they miss?",
-              "elenyaResponse": "I see the patterns beneath chaos. I see what people long for before they know they're longing. Come closer—let me see what you carry with you.",
-              "statEffects": {
-                "observation": 0.05
-              },
-              "unlocksGates": [
-                "elenya_intro_complete"
-              ]
-            },
-            {
-              "toneId": "N_intuition",
-              "toneType": "N",
-              "toneName": "Narrative Presence",
-              "playerLine": "I think our meeting isn't random. I think it means something.",
-              "elenyaResponse": "Nothing is random. Everything is a thread in an ongoing story. You're here because the story needs you here. That's enough.",
-              "statEffects": {
-                "empathy": 0.1
-              },
-              "unlocksGates": [
-                "elenya_intro_complete"
-              ]
-            }
-          ]
-        },
         {
           "segmentId": "elenya_act1_seg1_classroom",
           "title": "Between Memory and Verification",

@@ -13,6 +13,60 @@
       "description": "Malrik and Elenya exist near each other, bound by invisible forces neither understands.",
       "segments": [
         {
+          "segmentId": "malrik_act1_seg0_intro",
+          "title": "The Archivist's Study",
+          "dialogueContext": "First meeting with Malrik in his archive study - no prerequisites",
+          "npcLine": "You've come seeking something. Everyone who enters here seeks something. What is it you want to know?",
+          "requiredGates": [],
+          "requiredStats": [],
+          "requiredGlyphs": [],
+          "requiredCoherence": 0,
+          "requiredTone": [],
+          "emotionalSignals": [],
+          "malrikTone": "neutral",
+          "playerChoices": [
+            {
+              "toneId": "T_clarity",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "I'm looking for answers. For clarity about what happened.",
+              "malrikResponse": "Clarity is a structure we build from fragments. I can help you build it.",
+              "statEffects": {
+                "empathy": 0.05
+              },
+              "unlocksGates": [
+                "malrik_intro_complete"
+              ]
+            },
+            {
+              "toneId": "O_observation",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "I want to understand how things work. How memory and meaning connect.",
+              "malrikResponse": "A worthy question. Most people ask what to believe. Few ask how believing works.",
+              "statEffects": {
+                "observation": 0.1
+              },
+              "unlocksGates": [
+                "malrik_intro_complete"
+              ]
+            },
+            {
+              "toneId": "N_presence",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "I'm here because something in me knew I needed to find you.",
+              "malrikResponse": "Strange. I organized my life around preventing unexpected arrivals. Yet here you are.",
+              "statEffects": {
+                "empathy": 0.1
+              },
+              "unlocksGates": [
+                "malrik_intro_complete"
+              ]
+            }
+          ]
+        },
+        {
           "segmentId": "malrik_act5_seg1_marketplace_stranger",
           "title": "In Passing",
           "dialogueContext": "Malrik encounters Elenya in the marketplace. His response is disproportionate to a stranger.",
@@ -533,60 +587,6 @@
       "emotionalTheme": "discomfort_with_presence",
       "description": "Malrik's first encounters with Elenya challenge his need for order and precision.",
       "segments": [
-        {
-          "segmentId": "malrik_act1_seg0_intro",
-          "title": "The Archivist's Study",
-          "dialogueContext": "First meeting with Malrik in his archive study - no prerequisites",
-          "npcLine": "You've come seeking something. Everyone who enters here seeks something. What is it you want to know?",
-          "requiredGates": [],
-          "requiredStats": [],
-          "requiredGlyphs": [],
-          "requiredCoherence": 0,
-          "requiredTone": [],
-          "emotionalSignals": [],
-          "malrikTone": "neutral",
-          "playerChoices": [
-            {
-              "toneId": "T_clarity",
-              "toneType": "T",
-              "toneName": "Trust",
-              "playerLine": "I'm looking for answers. For clarity about what happened.",
-              "malrikResponse": "Clarity is a structure we build from fragments. I can help you build it.",
-              "statEffects": {
-                "empathy": 0.05
-              },
-              "unlocksGates": [
-                "malrik_intro_complete"
-              ]
-            },
-            {
-              "toneId": "O_observation",
-              "toneType": "O",
-              "toneName": "Observation",
-              "playerLine": "I want to understand how things work. How memory and meaning connect.",
-              "malrikResponse": "A worthy question. Most people ask what to believe. Few ask how believing works.",
-              "statEffects": {
-                "observation": 0.1
-              },
-              "unlocksGates": [
-                "malrik_intro_complete"
-              ]
-            },
-            {
-              "toneId": "N_presence",
-              "toneType": "N",
-              "toneName": "Narrative Presence",
-              "playerLine": "I'm here because something in me knew I needed to find you.",
-              "malrikResponse": "Strange. I organized my life around preventing unexpected arrivals. Yet here you are.",
-              "statEffects": {
-                "empathy": 0.1
-              },
-              "unlocksGates": [
-                "malrik_intro_complete"
-              ]
-            }
-          ]
-        },
         {
           "segmentId": "malrik_act1_seg1_classroom",
           "title": "Memory and the Body",
