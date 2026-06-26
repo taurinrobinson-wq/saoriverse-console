@@ -11,6 +11,13 @@ public class SetupMalrikElenyaTestScene
     [MenuItem("Velinor/Create Malrik & Elenya Test Scene")]
     public static void CreateTestScene()
     {
+        // Prevent scene creation during play mode
+        if (EditorApplication.isPlaying)
+        {
+            EditorUtility.DisplayDialog("Cannot Create Scene", "Scene creation is disabled during play mode. Please exit play mode first.", "OK");
+            return;
+        }
+        
         // Create new scene
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
         scene.name = "MalrikElenyaTest";

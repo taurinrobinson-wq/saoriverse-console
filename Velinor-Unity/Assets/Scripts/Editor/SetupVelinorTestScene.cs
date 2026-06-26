@@ -10,6 +10,13 @@ public class SetupVelinorTestScene
     [MenuItem("Velinor/Create Simple Test Scene (1 NPC)")]
     public static void CreateSimpleTestScene()
     {
+        // Prevent scene creation during play mode
+        if (EditorApplication.isPlaying)
+        {
+            EditorUtility.DisplayDialog("Cannot Create Scene", "Scene creation is disabled during play mode. Please exit play mode first.", "OK");
+            return;
+        }
+        
         Debug.Log("🎭 Creating simple Velinor test scene with 1 NPC (Ravi)...");
         
         // Create completely new scene

@@ -247,7 +247,7 @@ namespace VelinorGame.Core
         public string title;
         public string dialogueContext;
         public string npcLine;
-        public List<DialogueGateEvaluator.DialogueGate> requiredGates;
+        public List<DialogueGate> requiredGates;
         public List<string> emotionalSignals;
         public string elenyaTone;
         public List<ElenyaChoice> playerChoices;
