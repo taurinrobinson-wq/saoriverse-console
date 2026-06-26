@@ -41,16 +41,17 @@ public class MalrikDialogueSequence : MonoBehaviour
     }
 
     [System.Serializable]
-    public class MalrikSegment
+    public class MalrikSegment : DialogueSegment
     {
-        public string segmentId;
-        public int act;
-        public string title;
-        public string npcLine;
-        public List<DialogueGate> requiredGates = new List<DialogueGate>();
-        public List<DialogueChoice> choices = new List<DialogueChoice>();
-        public string emotionalTheme;
-        public bool completedByPlayer = false;
+        // Inherits from DialogueSegment:
+        // - segmentId
+        // - act
+        // - title
+        // - npcLine
+        // - requiredGates
+        // - choices
+        // - emotionalTheme
+        // - completedByPlayer
     }
 
     private static MalrikStoryData storyData;

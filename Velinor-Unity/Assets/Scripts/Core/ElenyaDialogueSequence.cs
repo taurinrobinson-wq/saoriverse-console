@@ -35,13 +35,20 @@ namespace VelinorGame.Core
         }
 
         [System.Serializable]
-        public class ElenyaSegment
+        public class ElenyaSegment : DialogueSegment
         {
-            public string segmentId;
-            public string title;
+            // Inherits from DialogueSegment:
+            // - segmentId
+            // - act
+            // - title
+            // - npcLine
+            // - requiredGates
+            // - choices
+            // - emotionalTheme
+            // - completedByPlayer
+            
+            // Elenya-specific fields
             public string dialogueContext;
-            public string npcLine;
-            public List<DialogueGate> requiredGates;
             public List<string> emotionalSignals;
             public string elenyaTone;
             public List<ElenyaChoice> playerChoices;
