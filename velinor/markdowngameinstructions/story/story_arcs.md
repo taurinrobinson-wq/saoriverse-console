@@ -609,3 +609,331 @@ They simply exist together in the light—two people who lost each other and fou
 - **Ending Variation**: Access to "Lighthouse Restored" ending where Malrik and Elenya's relationship influences the community's path forward
 
 ---
+
+## ELENYA — THE FULL ARC
+
+**Storyine Type**: Spiritual Discovery • Paradox & Mercy • Ritual and Release
+
+**Core Premise**: Before the collapse, Elenya loved Malrik—not with romance conventions, but with contemplative presence. She was a spiritual apprentice, and her love was expressed through witnessing, through being present, through the quiet integrity of two people learning each other without grasping.
+
+After the collapse, she woke with an unbearable ache and half-memory. She couldn't consciously remember Malrik, but her body remembered him. That phantom limb of the heart became unbearable.
+
+So she made a choice: **she performed a ritual of forgetting—a deliberate act of release to survive.**
+
+This is Elenya's arc: the journey from that choice toward its acceptance, and then toward the paradox of recognition without full restoration.
+
+---
+
+### Act 1: The Older Student and the Professor (Pre-Collapse)
+
+**Emotional Theme**: Fascination with Rigidity • The Seed of Teaching
+
+**Context**: Elenya, already a spiritual apprentice, encounters Malrik's brilliant certainty. She doesn't fall in love with his ideas—she falls in love with his struggle to hold the world still through structure.
+
+**Key Dialogue**:
+
+After a university lecture on memory preservation, Elenya approaches him:
+
+**Elenya**: "You teach that structures preserve memory. But do you believe memory is only what can be recorded?"
+
+**Malrik** (not looking up): "Memory is what can be verified."
+
+**Elenya** (gently): "Some memories live in the body, not the mind. It is if you've ever loved someone."
+
+His pen freezes. She walks away before he can recover.
+
+**Gate Progression**:
+- Acts as introduction to Elenya's arc
+- No gates required—available early if player meets Elenya
+
+**Dialogue Choices**:
+
+**Choice 1 - Observation Path**:
+"He seems very committed to what he believes. Do you think that's wisdom or fear?"
+
+Elenya: "Perhaps the truest fear is the fear of what can't be measured. He's trying so hard to find solid ground."
+
+Effect: Elenya influence +0.1, Observation +0.1
+
+**Choice 2 - Narrative Presence Path**:
+"You're trying to teach him something he's not ready to learn."
+
+Elenya: "Not ready. Or perhaps... afraid to learn. But he listened. That matters."
+
+Effect: Elenya influence +0.15, Empathy +0.15
+
+---
+
+### Act 2: The Lighthouse (Pre-Collapse)
+
+**Emotional Theme**: Sacred Space • Presence Without Explanation
+
+**Context**: Elenya meditates at the lighthouse and Malrik appears—drawn by the same gravity. Over weeks, they build a ritual of shared silence.
+
+**Key Dialogue**:
+
+**Elenya**: "I came here to sit with the stillness. I didn't expect to find anyone—but somehow I'm not surprised."
+
+**Malrik** (confused): "How did you know I'd be here?"
+
+**Elenya**: "I didn't. But I knew. Just as I know you understand why."
+
+They never fully explain it to each other. They just begin eating lunch together in silence—the silence of two people learning each other through presence alone.
+
+**Gate Progression**:
+- Requires Elenya influence 0.3+ (established baseline affinity)
+- Requires Empathy 0.6+ (capacity to understand silent intimacy)
+
+**Key Moment**:
+
+**Elenya**: "He doesn't ask me to explain myself. I don't ask him to change. We've simply learned that silence between two people can be full."
+
+**Dialogue Choices**:
+
+**Choice 1 - Trust Path**:
+"You've changed him. He's lighter here."
+
+Elenya: "Not changed. Remembered. He remembers how to be before the world told him to defend."
+
+Effect: Elenya influence +0.15, Empathy +0.1
+
+**Choice 2 - Narrative Presence Path**:
+"You hold space for him without asking him to be different. That's rare."
+
+Elenya: "Presence is not asking. It's simply witnessing. He's learning that witnessed, he doesn't have to defend."
+
+Effect: Elenya influence +0.2, Narrative Presence +0.1
+
+---
+
+### Act 3: The Love She Didn't Expect (Pre-Collapse)
+
+**Emotional Theme**: Devotion Without Grasping • Tenderness
+
+**Context**: Elenya realizes she loves Malrik—not despite his rigidity, but because his certainty was beautiful precisely because it was his. She loves him without possession, without expecting him to be different.
+
+**Key Dialogue**:
+
+**Elenya**: "I didn't know I could love someone whose worldview contradicted mine so completely. And yet—his certainty was beautiful because it was his. Not because it was right."
+
+She never speaks the word "love" to him. She expresses it through presence, through the way she lets him teach her about structure while she teaches him about presence.
+
+**Gate Progression**:
+- Requires story_gate "elenya_recognizes_love_beginning" (prior act completion)
+- Requires Coherence 0.7+ (player has balanced perspective)
+- Requires Empathy 0.75+ (capacity for unconditional love)
+
+**Dialogue Choices**:
+
+**Choice 1 - Narrative Presence Path**:
+"Love that doesn't need to change the other person—that's its own kind of wisdom."
+
+Elenya: "Yes. I learned that with him. That presence is enough. That witnessing is a form of devotion."
+
+Effect: Elenya influence +0.2, Empathy +0.15, Narrative Presence +0.1
+
+---
+
+### Act 4: The Cataclysm (Collapse Event)
+
+**Emotional Theme**: Loss and Severance • The Unbearable Ache
+
+**Context**: The world breaks. Elenya wakes in the rubble with no memory of Malrik. Only an unbearable ache—a phantom limb of the heart.
+
+**Key Dialogue**:
+
+**Elenya**: "I woke in the rubble with no memory of him. Only this... phantom limb of the heart. A presence with no name. A love I could feel but not trace. It was unbearable."
+
+She tries to meditate through it. She tries to breathe through it. It won't pass.
+
+**Gate Progression**:
+- Acts as turning point in Elenya's arc
+- Requires completion of Acts 1-3
+
+**Dialogue Choices**:
+
+**Choice 1 - Trust Path**:
+"Your body remembers even when your mind doesn't. That's not nothing."
+
+Elenya: "My body remembers. And the remembering was killing me. I couldn't meditate through it. I couldn't breathe through it."
+
+Effect: Empathy +0.15, Elenya influence +0.1
+
+---
+
+### Act 5: The Ritual of Forgetting (Post-Collapse)
+
+**Emotional Theme**: Mercy and Release • The Choice to Let Go
+
+**Context**: Elenya makes a difficult choice—she performs a ritual of deliberate forgetting. She severs the half-memory that haunts her to survive.
+
+This is not a act of betrayal or cowardice. It is an act of mercy—toward herself and, though she doesn't know it, toward Malrik.
+
+**Key Dialogue**:
+
+**Elenya**: "I made a choice. Not out of cowardice. But out of mercy. I performed a ritual of forgetting—an act of release, a surrender of the half-memory that haunted me. I let go of the fragments I couldn't understand, the tenderness that had no context, the ache that had no name."
+
+Afterward, she felt lighter. Not healed—never healed. But able to breathe again.
+
+**Gate Progression**:
+- Requires Narrative Presence 0.75+ (spiritual maturity to understand ritual magic)
+- This gate is *profound*—unlocking it opens deeper understanding of Elenya's character
+
+**Dialogue Choices**:
+
+**Choice 1 - Observation Path**:
+"You didn't erase him. You released him to survive. That's not the same as betrayal."
+
+Elenya: "I know. And yet... I still don't know if it was wisdom or the most profound betrayal. Perhaps it was both."
+
+Effect: Observation +0.15, Coherence +0.1, Elenya influence +0.1
+
+---
+
+### Act 6: The High Seer (Post-Collapse Years)
+
+**Emotional Theme**: Teaching What She Cannot Practice • Hidden Contradiction
+
+**Context**: Elenya becomes the High Seer, teaching compassion without attachment, presence without possession, love without expectation. But when followers ask about Malrik, her voice falters.
+
+She teaches from the wound, not from wisdom.
+
+**Key Dialogue**:
+
+**Elenya**: "I teach compassion without attachment. Presence without possession. Love without expectation. But when followers ask about Malrik, my voice always trembles. I teach what I failed to live."
+
+**Gate Progression**:
+- Requires story_gate "elenya_ritual_complete" (prior act completion)
+- Requires Empathy 0.7+ (recognition of her own brokenness)
+
+**Dialogue Choices**:
+
+**Choice 1 - Narrative Presence Path**:
+"Your trembling is the answer. You're teaching what you couldn't practice."
+
+Elenya: "Yes. My students don't understand that the most profound teachings come from where we are broken. I teach what I failed to live."
+
+Effect: Empathy +0.15, Narrative Presence +0.1, Elenya influence +0.2
+
+---
+
+### Act 7: The Broken Lantern & Recognition (Post-Collapse Present)
+
+**Emotional Theme**: Cracks in Forgetting • Body Memory
+
+**Context**: A broken lighthouse lantern becomes a key. Elenya touches it and something catches in her throat. The ritual of forgetting cracks open.
+
+**Key Dialogue**:
+
+**Elenya**: "I found a broken lantern. Lighthouse, probably. I touched it and something in me recognized. 'Someone I once knew would have fixed this. Just like that—illumination.' I laughed. And my hand went to my chest. Why did that hurt?"
+
+Then, drawn by something she can't name, she comes to the restored lighthouse. Malrik is there. And the ache becomes a name.
+
+**Gate Progression**:
+- Requires Observation 0.8+ (noticing subtle body signals)
+- Requires story_gate "malrik_restores_lighthouse" (Malrik has completed his arc)
+- This is a major gate—the turning point of reconciliation
+
+**Key Moment**:
+
+The air thickens. Memory stirs. Fragments return:
+
+- The silence they shared.
+- The debates.
+- The laughter.
+- The warmth.
+- The collapse.
+- The ache.
+- The forgetting.
+
+**Elenya**: "I remember loving someone. And I remember choosing to forget because the half-memory was killing me."
+
+**Malrik** (staring): "You did what?"
+
+**Elenya** (small, sad smile): "I didn't know it was you. But my heart did."
+
+**Dialogue Choices**:
+
+**Choice 1 - Trust Path**:
+"Your choice was an act of love. You saved yourself so you could be here now."
+
+Elenya: "That's... yes. That's what I couldn't see before. The mercy of what I did. To let him go so he could become someone new. And so I could survive to meet him again."
+
+Effect: Elenya influence +0.25, Empathy +0.2, Coherence +0.15
+
+**Choice 2 - Narrative Presence Path**:
+"You didn't betray. You survived. Can you finally forgive yourself for that?"
+
+Elenya: "That's the hardest forgiveness. But yes. I'm beginning to."
+
+Effect: Elenya influence +0.2, Empathy +0.15, Narrative Presence +0.15
+
+---
+
+### Act 8: What She Holds Now (Post-Collapse Present & Forward)
+
+**Emotional Theme**: Paradox and Grace • Integration
+
+**Context**: Elenya does not return to who she was. She cannot. She holds both truths:
+
+- Who she was before the collapse.
+- Who she became after.
+- What she lost.
+- What she regained.
+- What she can never fully restore.
+
+**Her New Understanding**:
+
+Her teaching was broken because it came from a wound. Now it can be whole because she's integrated the wound.
+
+She can finally teach: "Sometimes the most loving act is the one that lets go. And sometimes grace arrives as a second meeting."
+
+**Key Dialogue**:
+
+**Elenya**: "I taught my students compassion without attachment. Presence without possession. But I was teaching from a wound, not wisdom. Now I understand: sometimes the most loving act is the one that lets go. And sometimes grace arrives as a second meeting. We are here. Changed, wiser, ready for what comes next."
+
+**Gate Progression**:
+- Requires both prior gates: story_gate "elenya_accepts_ritual" AND story_gate "malrik_restores_lighthouse"
+- Requires Coherence 0.75+ (wisdom to hold paradox)
+- Requires Empathy 0.8+ (capacity to honor both choice and reunion)
+
+**Epilogue Moment**:
+
+In the restored lighthouse, Elenya and Malrik stand together. She does not move to touch him, but her presence shifts. The ache transforms into presence.
+
+**Elenya**: "I chose to forget you once. Not because you weren't worth remembering, but because remembering was burning me. Now I choose to remember—but differently. Not clinging to what was, but present for what is."
+
+They do not need the full memory back. They need each other. And that is enough.
+
+**Rewards for Completing Elenya's Arc**:
+- **New Glyph**: Glyph of Severed Covenant (Ache/Legacy hybrid)
+- **Stat Changes**: Empathy +5, Coherence +8, Narrative Presence +5
+- **Influence**: Elenya +0.5, Malrik +0.3
+- **Unlocked Dialogue**: New conversations with Elenya reflecting her integrated wisdom
+- **Teaching Impact**: Elenya's rituals become more personally resonant; her students recognize authentic teaching
+- **Ending Variation**: Access to "Lighthouse Restored" ending where both perspectives shape community healing
+
+---
+
+### Malrik & Elenya: Interdependent Arcs
+
+**Mirror Structure**:
+
+- Malrik's arc: Grieves without knowing it → Recognition of loss → Integration of paradox
+- Elenya's arc: Knows and chooses forgetting → Cracks in the ritual → Integration of choice
+
+- Malrik: Structured mind, fluid heart
+- Elenya: Fluid spirit, grounded choice
+
+- Both arcs culminate in the same moment: the restored lighthouse
+- Both arcs require player wisdom to unlock
+- Both arcs transform each other
+
+**Rewards for Completing Both Arcs**:
+- **New Glyph**: Glyph of Paradox Reconciled (Joy/Legacy/Ache hybrid - unique to this path)
+- **Stat Changes**: Empathy +10, Coherence +15, Observation +5, Narrative Presence +5
+- **Influence**: Both Malrik and Elenya +0.5 each
+- **Community Impact**: Their renewed relationship influences community stability and healing
+- **Ending Variation**: Access to "Lighthouse Restored & Integrated" ending where Malrik and Elenya's story becomes a foundational narrative for post-collapse meaning-making
+
+---

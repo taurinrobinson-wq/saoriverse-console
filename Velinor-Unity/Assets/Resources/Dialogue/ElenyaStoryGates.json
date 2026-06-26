@@ -1,0 +1,689 @@
+{
+  "npc": "Elenya",
+  "npcFullName": "High Seer Elenya",
+  "storyTitle": "The Full Arc: Elenya's Ritual of Release and Return",
+  "storylineType": "spiritual_discovery_paradox",
+  "description": "Before the collapse, Elenya loved Malrik. After, she chose to sever the memory to survive. This arc reveals that choice, its cost, and the paradox of rebuilding connection with someone she deliberately forgot.",
+  
+  "acts": [
+    {
+      "actNumber": 1,
+      "actTitle": "The Older Student and the Professor",
+      "timeframe": "pre_collapse",
+      "emotionalTheme": "fascination_with_rigidity",
+      "description": "Elenya encounters Malrik's precision and becomes fascinated by his struggle to control meaning through structure.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act1_seg1_classroom",
+          "title": "Between Memory and Verification",
+          "dialogueContext": "After Malrik's lecture on cultural memory preservation",
+          "npcLine": "You teach that structures preserve memory. But do you believe memory is only what can be recorded?",
+          
+          "requiredGates": [
+            {
+              "gateId": "act1_intro",
+              "gateType": "story_gate",
+              "requirement": "player_met_elenya",
+              "threshold": 0.0,
+              "description": "Player has met Elenya at least once"
+            }
+          ],
+          
+          "emotionalSignals": ["ε", "α"],
+          "elenyaTone": "teacher_seeking_truth",
+          "playerChoices": [
+            {
+              "toneId": "O_curiosity",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "He seems very committed to what he believes. Do you think that's wisdom or fear?",
+              "elenyaResponse": "Perhaps the truest fear is the fear of what can't be measured. He's trying so hard to find solid ground.",
+              "statEffects": {
+                "observation": 0.1
+              },
+              "unlocksGates": ["elenya_sees_malrik_clearly"]
+            },
+            {
+              "toneId": "N_insight",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "You're trying to teach him something he's not ready to learn.",
+              "elenyaResponse": "Not ready. Or perhaps... afraid to learn. But he listened. That matters.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["elenya_recognizes_potential"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act1_seg2_classroom_end",
+          "title": "The Seed of Challenge",
+          "dialogueContext": "After class, Elenya speaks to Malrik directly",
+          "npcLine": "Some memories live in the body, not the mind. It is if you've ever loved someone.",
+          
+          "requiredGates": [
+            {
+              "gateId": "seg1_complete",
+              "gateType": "story_gate",
+              "requirement": "elenya_act1_seg1_classroom",
+              "threshold": 0.0,
+              "description": "Completed first classroom observation"
+            },
+            {
+              "gateId": "narrative_threshold",
+              "gateType": "tone_stat",
+              "requirement": "narrativepresence",
+              "threshold": 0.5,
+              "description": "Requires narrative presence to witness this subtle challenge"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "ε"],
+          "elenyaTone": "provocative_tender",
+          "playerChoices": [
+            {
+              "toneId": "T_compassion",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You're speaking to him as if you know him already.",
+              "elenyaResponse": "I don't. But I recognize the armor. Love always lives beneath it.",
+              "statEffects": {
+                "empathy": 0.1,
+                "elenya_influence": 0.1
+              },
+              "unlocksGates": ["elenya_opens_to_player"]
+            },
+            {
+              "toneId": "N_presence",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "You're leaving him something to reach for.",
+              "elenyaResponse": "Everyone deserves to know that presence matters. That being known matters. Even people who think they don't.",
+              "statEffects": {
+                "empathy": 0.15,
+                "elenya_influence": 0.15
+              },
+              "unlocksGates": ["elenya_teacher_revealed"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 2,
+      "actTitle": "The Lighthouse",
+      "timeframe": "pre_collapse",
+      "emotionalTheme": "sacred_space",
+      "description": "Elenya and Malrik discover they both seek the lighthouse. Their sanctuary becomes shared.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act2_seg1_lighthouse_discovery",
+          "title": "An Expected Presence",
+          "dialogueContext": "Elenya meditates at the lighthouse, Malrik arrives",
+          "npcLine": "I came here to sit with the stillness. I didn't expect to find anyone—but somehow I'm not surprised.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act2_unlock",
+              "gateType": "story_gate",
+              "requirement": "elenya_teacher_revealed",
+              "threshold": 0.0,
+              "description": "Completed Act 1 foundation"
+            },
+            {
+              "gateId": "elenya_empathy",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.6,
+              "description": "Minimum empathy to understand her spiritual presence"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "ε"],
+          "elenyaTone": "welcoming_present",
+          "playerChoices": [
+            {
+              "toneId": "O_recognition",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "You knew he'd come. You were waiting.",
+              "elenyaResponse": "I wasn't waiting. But I knew. Just as I know you understand why.",
+              "statEffects": {
+                "observation": 0.1
+              },
+              "unlocksGates": ["elenya_intuition_honored"]
+            },
+            {
+              "toneId": "N_sacredness",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "This place is sacred to both of you. That's why it matters.",
+              "elenyaResponse": "Sacred space doesn't need agreement. It just needs two people willing to be present in it.",
+              "statEffects": {
+                "empathy": 0.1,
+                "elenya_influence": 0.2
+              },
+              "unlocksGates": ["elenya_holds_space"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act2_seg2_shared_silence",
+          "title": "Presence Without Explanation",
+          "dialogueContext": "Weeks of silent lunches together at the lighthouse",
+          "npcLine": "He doesn't ask me to explain myself. I don't ask him to change. We've simply learned that silence between two people can be full.",
+          
+          "requiredGates": [
+            {
+              "gateId": "lighthouse_shared",
+              "gateType": "story_gate",
+              "requirement": "elenya_holds_space",
+              "threshold": 0.0,
+              "description": "Elenya has held sacred space with Malrik"
+            },
+            {
+              "gateId": "high_empathy",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.75,
+              "description": "High empathy to understand the intimacy of shared silence"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "λ"],
+          "elenyaTone": "grounded_joyful",
+          "playerChoices": [
+            {
+              "toneId": "T_witness",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You've changed him. He's lighter here.",
+              "elenyaResponse": "Not changed. Remembered. He remembers how to be before the world told him to defend.",
+              "statEffects": {
+                "empathy": 0.1,
+                "elenya_influence": 0.15
+              },
+              "unlocksGates": ["elenya_recognizes_love_beginning"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 3,
+      "actTitle": "The Love She Didn't Expect",
+      "timeframe": "pre_collapse",
+      "emotionalTheme": "devotion_without_grasping",
+      "description": "Elenya realizes she loves him, but loves him in her way—without possession, with gentle holding.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act3_seg1_tenderness",
+          "title": "The Softening",
+          "dialogueContext": "Elenya observes Malrik's changes and feels her own transformation",
+          "npcLine": "I didn't know I could love someone whose worldview contradicted mine so completely. And yet—his certainty was beautiful because it was his. Not because it was right.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act3_foundation",
+              "gateType": "story_gate",
+              "requirement": "elenya_recognizes_love_beginning",
+              "threshold": 0.0,
+              "description": "Elenya has recognized love beginning"
+            },
+            {
+              "gateId": "player_coherence",
+              "gateType": "coherence",
+              "requirement": "player_balance",
+              "threshold": 0.7,
+              "description": "Player must have balanced emotional perspective"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "α"],
+          "elenyaTone": "contemplative_amazed",
+          "playerChoices": [
+            {
+              "toneId": "N_acceptance",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "Love that doesn't need to change the other person—that's its own kind of wisdom.",
+              "elenyaResponse": "Yes. I learned that with him. That presence is enough. That witnessing is a form of devotion.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["elenya_names_love"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act3_seg2_unspoken_vow",
+          "title": "The Covenant of Presence",
+          "dialogueContext": "Elenya and Malrik's love deepens silently, without words",
+          "npcLine": "We never spoke the word. We never needed to. Our love lived in how we were together. In the way he let me teach him that presence matters. In the way I let him show me that structure can be a form of care.",
+          
+          "requiredGates": [
+            {
+              "gateId": "elenya_names_love_gate",
+              "gateType": "story_gate",
+              "requirement": "elenya_names_love",
+              "threshold": 0.0,
+              "description": "Elenya has named her love"
+            },
+            {
+              "gateId": "observation_deep",
+              "gateType": "tone_stat",
+              "requirement": "observation",
+              "threshold": 0.75,
+              "description": "High observation to notice the grace of their unspoken covenant"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "α", "Ω"],
+          "elenyaTone": "sacred_quiet",
+          "playerChoices": [
+            {
+              "toneId": "T_reverence",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "What you created together—that was real. Whether words were spoken or not.",
+              "elenyaResponse": "It was. And because it was real, when it was taken, it left a mark that couldn't be erased. Even when I tried.",
+              "statEffects": {
+                "empathy": 0.15,
+                "elenya_influence": 0.2
+              },
+              "unlocksGates": ["elenya_loves_completely"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 4,
+      "actTitle": "The Cataclysm",
+      "timeframe": "collapse_event",
+      "emotionalTheme": "loss_and_severance",
+      "description": "The world breaks. Elenya wakes with an unbearable ache and a half-memory she can't reconcile.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act4_seg1_waking_ghost",
+          "title": "The Ache Without a Name",
+          "dialogueContext": "Post-collapse. Elenya awakens with no conscious memory but with unbearable emotional pain",
+          "npcLine": "I woke in the rubble with no memory of him. Only this... phantom limb of the heart. A presence with no name. A love I could feel but not trace.",
+          
+          "requiredGates": [
+            {
+              "gateId": "act4_trigger",
+              "gateType": "story_gate",
+              "requirement": "elenya_loves_completely",
+              "threshold": 0.0,
+              "description": "Completed pre-collapse arc"
+            }
+          ],
+          
+          "emotionalSignals": ["θ", "γ"],
+          "elenyaTone": "haunted_seeking",
+          "playerChoices": [
+            {
+              "toneId": "T_compassion",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "Your body remembers even when your mind doesn't. That's not nothing.",
+              "elenyaResponse": "My body remembers. And the remembering was killing me. I couldn't meditate through it. I couldn't breathe through it.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["elenya_glimpses_pain"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act4_seg2_ritual_of_forgetting",
+          "title": "The Choice to Release",
+          "dialogueContext": "Elenya describes her ritual of deliberate forgetting",
+          "npcLine": "I made a choice. Not out of cowardice. But out of mercy. I performed a ritual of forgetting—an act of release, a surrender of the half-memory that haunted me.",
+          
+          "requiredGates": [
+            {
+              "gateId": "collapse_processed",
+              "gateType": "story_gate",
+              "requirement": "elenya_glimpses_pain",
+              "threshold": 0.0,
+              "description": "Player has processed Elenya's post-collapse loss with her"
+            },
+            {
+              "gateId": "narrative_high",
+              "gateType": "tone_stat",
+              "requirement": "narrativepresence",
+              "threshold": 0.75,
+              "description": "High narrative presence to understand the spiritual significance"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "β"],
+          "elenyaTone": "resolved_mournful",
+          "playerChoices": [
+            {
+              "toneId": "O_understanding",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "You didn't erase him. You released him to survive. That's not the same as betrayal.",
+              "elenyaResponse": "I know. And yet... I still don't know if it was wisdom or the most profound betrayal. Perhaps it was both.",
+              "statEffects": {
+                "observation": 0.15
+              },
+              "unlocksGates": ["elenya_holds_paradox"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 5,
+      "actTitle": "The High Seer",
+      "timeframe": "post_collapse_years",
+      "emotionalTheme": "teaching_what_she_cannot_practice",
+      "description": "Elenya becomes the High Seer, teaching compassion without attachment. But something in her trembles when asked about Malrik.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act5_seg1_teacher_contradiction",
+          "title": "Compassion Without Possession",
+          "dialogueContext": "Elenya teaches her followers. A student asks about attachment.",
+          "npcLine": "I teach compassion without attachment. Presence without possession. Love without expectation. But when followers ask about Malrik, my voice always falters.",
+          
+          "requiredGates": [
+            {
+              "gateId": "post_collapse_era",
+              "gateType": "story_gate",
+              "requirement": "elenya_holds_paradox",
+              "threshold": 0.0,
+              "description": "Established post-collapse timeline"
+            }
+          ],
+          
+          "emotionalSignals": ["α", "β"],
+          "elenyaTone": "teaching_hiding",
+          "playerChoices": [
+            {
+              "toneId": "N_truth",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "Your trembling is the answer. You're teaching what you couldn't practice.",
+              "elenyaResponse": "Yes. My students don't understand that the most profound teachings come from where we are broken. I teach what I failed to live.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["elenya_admits_contradiction"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act5_seg2_marketplace_recognition",
+          "title": "Body Knows",
+          "dialogueContext": "Elenya sees Malrik in the marketplace. Her body responds before her mind",
+          "npcLine": "When he walks through the marketplace, something in me recognizes. My chest tightens. My breath changes. My voice becomes careful, like holding something fragile.",
+          
+          "requiredGates": [
+            {
+              "gateId": "elenya_admits_contradiction_gate",
+              "gateType": "story_gate",
+              "requirement": "elenya_admits_contradiction",
+              "threshold": 0.0,
+              "description": "Elenya has admitted her teaching contradicts her experience"
+            },
+            {
+              "gateId": "observation_master",
+              "gateType": "tone_stat",
+              "requirement": "observation",
+              "threshold": 0.8,
+              "description": "Very high observation to notice Elenya's body memory"
+            }
+          ],
+          
+          "emotionalSignals": ["γ", "ε"],
+          "elenyaTone": "confused_drawn",
+          "playerChoices": [
+            {
+              "toneId": "O_witness",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "Your body is wiser than your ritual of forgetting. It remembers what your mind can't.",
+              "elenyaResponse": "My body betrays me. Or it saves me. I still don't know which.",
+              "statEffects": {
+                "observation": 0.15,
+                "elenya_influence": 0.15
+              },
+              "unlocksGates": ["elenya_senses_presence"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 6,
+      "actTitle": "The Broken Lantern",
+      "timeframe": "post_collapse_present",
+      "emotionalTheme": "crack_in_forgetting",
+      "description": "A broken object becomes a key. The ritual of forgetting cracks open.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act6_seg1_lantern_recognition",
+          "title": "Fragment and Echo",
+          "dialogueContext": "Elenya encounters a broken lighthouse lantern during ritual work",
+          "npcLine": "I found a broken lantern. Lighthouse, probably. I touched it and something caught in my throat. 'Someone I once knew would have fixed this. Just like that—illumination.' I laughed. And then I asked: What was his name?",
+          
+          "requiredGates": [
+            {
+              "gateId": "bodies_converge",
+              "gateType": "story_gate",
+              "requirement": "elenya_senses_presence",
+              "threshold": 0.0,
+              "description": "Elenya's body has recognized presence"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "ε"],
+          "elenyaTone": "startled_remembering",
+          "playerChoices": [
+            {
+              "toneId": "O_perception",
+              "toneType": "O",
+              "toneName": "Observation",
+              "playerLine": "The lantern—it's not asking you to remember his name. It's reminding you that you once knew it.",
+              "elenyaResponse": "The ritual of forgetting is thinner than I thought. One object, one touch, and the walls crack.",
+              "statEffects": {
+                "observation": 0.15
+              },
+              "unlocksGates": ["elenya_ritual_cracks"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 7,
+      "actTitle": "The Restoration",
+      "timeframe": "post_collapse_present",
+      "emotionalTheme": "return_and_reckoning",
+      "description": "Elenya is drawn to the restored lighthouse. Malrik is there. The ache becomes a name.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act7_seg1_lighthouse_return",
+          "title": "Recognition in Light",
+          "dialogueContext": "Elenya arrives at the restored lighthouse where Malrik stands",
+          "npcLine": "I didn't know why I came here. I only knew I had to. And when I saw him standing in the restored light, memory moved. Not clear. But felt. Undeniable.",
+          
+          "requiredGates": [
+            {
+              "gateId": "elenya_ritual_cracks_gate",
+              "gateType": "story_gate",
+              "requirement": "elenya_ritual_cracks",
+              "threshold": 0.0,
+              "description": "Elenya's ritual of forgetting has begun to crack"
+            },
+            {
+              "gateId": "player_high_empathy",
+              "gateType": "tone_stat",
+              "requirement": "empathy",
+              "threshold": 0.8,
+              "description": "Player has cultivated high empathy for this sacred moment"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "Ω", "α"],
+          "elenyaTone": "trembling_opening",
+          "playerChoices": [
+            {
+              "toneId": "T_truth",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "You don't need the full memory back. He's here. That's enough.",
+              "elenyaResponse": "But I owe him the truth. That I severed this deliberately. That I chose to forget him.",
+              "statEffects": {
+                "empathy": 0.15
+              },
+              "unlocksGates": ["elenya_ready_to_confess"]
+            },
+            {
+              "toneId": "N_grace",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "You did what you had to do to survive. Can you forgive yourself for that?",
+              "elenyaResponse": "That's the hardest forgiveness. But yes. I'm beginning to.",
+              "statEffects": {
+                "empathy": 0.2,
+                "elenya_influence": 0.2
+              },
+              "unlocksGates": ["elenya_accepts_her_choice"]
+            }
+          ]
+        },
+        {
+          "segmentId": "elenya_act7_seg2_confession",
+          "title": "The Choice Revealed",
+          "dialogueContext": "Elenya speaks to Malrik about her ritual of deliberate forgetting",
+          "npcLine": "I remember loving someone. And I remember choosing to forget because the half-memory was killing me. I didn't know it was you. But my heart did.",
+          
+          "requiredGates": [
+            {
+              "gateId": "ready_to_confess_gate",
+              "gateType": "story_gate",
+              "requirement": "elenya_ready_to_confess",
+              "threshold": 0.0,
+              "description": "Elenya is ready to confess her deliberate forgetting"
+            },
+            {
+              "gateId": "accepts_choice_gate",
+              "gateType": "story_gate",
+              "requirement": "elenya_accepts_her_choice",
+              "threshold": 0.0,
+              "description": "Elenya has accepted the necessity of her choice"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "α", "β"],
+          "elenyaTone": "vulnerable_honest",
+          "playerChoices": [
+            {
+              "toneId": "N_presence_witness",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "Your choice was an act of love. You saved yourself so you could be here now.",
+              "elenyaResponse": "That's... yes. That's what I couldn't see before. The mercy of what I did. To let him go so he could become someone new. And so I could survive to meet him again.",
+              "statEffects": {
+                "empathy": 0.2,
+                "elenya_influence": 0.25
+              },
+              "unlocksGates": ["elenya_integrated_wisdom"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "actNumber": 8,
+      "actTitle": "What She Holds Now",
+      "timeframe": "post_collapse_present_forward",
+      "emotionalTheme": "paradox_and_grace",
+      "description": "Elenya holds the paradox of her choice. She did not betray. She survived. And somehow, they're here together.",
+      
+      "segments": [
+        {
+          "segmentId": "elenya_act8_seg1_epilogue_integration",
+          "title": "The Wisdom of What Was Lost",
+          "dialogueContext": "Elenya contemplates her ritual of forgetting and its necessity",
+          "npcLine": "I taught my students compassion without attachment. Presence without possession. But I was teaching from a wound, not wisdom. Now I understand: sometimes the most loving act is the one that lets go. And sometimes grace arrives as a second meeting.",
+          
+          "requiredGates": [
+            {
+              "gateId": "elenya_integrated_gate",
+              "gateType": "story_gate",
+              "requirement": "elenya_integrated_wisdom",
+              "threshold": 0.0,
+              "description": "Elenya has integrated the wisdom of her choice"
+            },
+            {
+              "gateId": "wisdom_threshold",
+              "gateType": "coherence",
+              "requirement": "player_wisdom",
+              "threshold": 0.75,
+              "description": "Player has developed wisdom about paradox and mercy"
+            }
+          ],
+          
+          "emotionalSignals": ["λ", "ε", "α"],
+          "elenyaTone": "integrated_teaching",
+          "playerChoices": [
+            {
+              "toneId": "T_compassion",
+              "toneType": "T",
+              "toneName": "Trust",
+              "playerLine": "Your students can now learn from both—the teaching and the wound that taught it.",
+              "elenyaResponse": "Yes. I can finally teach what I know instead of what I wish I'd lived. And that's its own kind of wholeness.",
+              "statEffects": {
+                "empathy": 0.2
+              },
+              "unlocksGates": ["elenya_story_complete"]
+            },
+            {
+              "toneId": "N_synthesis",
+              "toneType": "N",
+              "toneName": "Narrative Presence",
+              "playerLine": "You've become who you needed to become. Through the forgetting and back through the remembering.",
+              "elenyaResponse": "We both have. He needed to grieve without knowing what he was grieving. I needed to survive by letting go. And now we're here—changed, wiser, ready for what comes next.",
+              "statEffects": {
+                "empathy": 0.25,
+                "observation": 0.15
+              },
+              "unlocksGates": ["elenya_wisdom_complete"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  
+  "epilogueMoments": [
+    {
+      "momentId": "elenya_lighthouse_acceptance",
+      "description": "In the restored lighthouse, Elenya and Malrik stand together. She places her hand where his almost touches.",
+      "trigger": "elenya_wisdom_complete",
+      "emotionalSignals": ["λ", "α", "Ω"],
+      "elenyaLine": "I chose to forget you once. Not because you weren't worth remembering, but because remembering was burning me. Now I choose to remember—but differently. Not clinging to what was, but present for what is."
+    }
+  ]
+}
