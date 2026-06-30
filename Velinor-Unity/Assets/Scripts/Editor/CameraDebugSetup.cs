@@ -74,7 +74,7 @@ namespace Velinor.Editor
             }
 
             // Check for cameras
-            Camera[] cameras = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
+            Camera[] cameras = Object.FindObjectsByType<Camera>();
             Debug.Log($"\nCameras in scene: {cameras.Length}");
             foreach (Camera cam in cameras)
             {
@@ -82,7 +82,7 @@ namespace Velinor.Editor
             }
 
             // Check for lights
-            Light[] lights = Object.FindObjectsByType<Light>(FindObjectsSortMode.None);
+            Light[] lights = Object.FindObjectsByType<Light>();
             Debug.Log($"\nLights in scene: {lights.Length}");
             foreach (Light light in lights)
             {
@@ -90,11 +90,11 @@ namespace Velinor.Editor
             }
 
             // Check for AudioListener
-            AudioListener[] listeners = Object.FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
+            AudioListener[] listeners = Object.FindObjectsByType<AudioListener>();
             Debug.Log($"\nAudioListeners in scene: {listeners.Length}");
 
             // Check for AudioSource
-            AudioSource[] sources = Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+            AudioSource[] sources = Object.FindObjectsByType<AudioSource>();
             Debug.Log($"\nAudioSources in scene: {sources.Length}");
 
             Debug.Log("========================================\n");
