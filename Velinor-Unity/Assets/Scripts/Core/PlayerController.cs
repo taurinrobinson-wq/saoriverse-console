@@ -3,192 +3,165 @@ using UnityEngine;
 namespace Velinor.Core
 {
     /// <summary>
-    /// Third-person character controller with simple movement.
-    /// Supports: walk, turn, crouch, squeeze through gaps.
-    /// No jump, sprint, or stamina.
+    /// PlayerController - First-person and third-person character movement
+    /// 
+    /// Controls:
+    /// - WASD: Move forward/backward/strafe left/right
+    /// - Mouse: Look around (first-person) or rotate camera (third-person)
+    /// - Space: Jump
+    /// - Shift: Sprint (2x speed)
+    /// - ESC: Toggle cursor lock
+    /// - E: Interact
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private float walkSpeed = 3f;
-        [SerializeField] private float turnSpeed = 5f;
+        [Header("Movement")]
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float sprintSpeed = 10f;
+        [SerializeField] private float jumpForce = 5f;
         [SerializeField] private float groundDrag = 5f;
-        [SerializeField] private float groundAcceleration = 10f;
+        [SerializeField] private float airDrag = 2f;
 
-        [SerializeField] private CharacterController characterController;
-        [SerializeField] private Transform cameraFollowTarget; // Where camera aims
+        [Header("Ground Check")]
+        [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private float groundCheckDistance = 0.2f;
 
-        private Vector3 velocity;
-        private Animator animator;
+        [Header("Camera")]
+        [SerializeField] private Camera mainCamera;
+        [SerializeField] private float mouseSensitivity = 2f;
+        [SerializeField] private float maxLookAngle = 90f;
+
+        private Rigidbody rb;
+        private bool isGrounded;
+        private float yRotation = 0f;
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
-            if (characterController == null)
-                characterController = GetComponent<CharacterController>();
+            rb = GetComponent<Rigidbody>();
+            
+            if (rb == null)
+            {
+                rb = gameObject.AddComponent<Rigidbody>();
+                rb.mass = 1;
+                rb.drag = groundDrag;
+                rb.angularDrag = 0.05f;
+                rb.useGravity = true;
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+
+            if (mainCamera == null)
+            {
+                mainCamera = Camera.main;
+            }
+
+            // Set ground layer to all layers if not configured
+            if (groundLayer == 0)
+            {
+                groundLayer = -1;
+            }
+
+            // Lock and hide cursor
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Update()
         {
-            HandleInput();
-            ApplyGravity();
-            Move();
+            // Check if grounded using raycast
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + rb.velocity.y * Time.deltaTime, groundLayer);
+
+            // Apply drag based on ground state
+            rb.drag = isGrounded ? groundDrag : airDrag;
+
+            // Handle input
+            HandleMovement();
+            HandleJump();
+            HandleCamera();
+            HandleCursorToggle();
+            HandleInteraction();
         }
 
-        /// <summary>
-        /// Handles player input for movement and actions.
-        /// </summary>
-        private void HandleInput()
+        private void HandleMovement()
         {
-            // Movement input (WASD or analog stick)
+            // Get input
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
-            // Construct movement direction relative to camera forward
-            Vector3 moveDirection = GetMovementDirection(horizontal, vertical);
+            // Determine speed
+            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
 
-            // Apply movement
-            ApplyMovement(moveDirection);
+            // Calculate movement direction relative to player facing direction
+            Vector3 moveDirection = transform.forward * vertical + transform.right * horizontal;
+            moveDirection.y = 0; // Don't move up/down with WASD
+            moveDirection = moveDirection.normalized;
 
-            // Rotation
-            if (moveDirection.magnitude > 0.1f)
-            {
-                RotateTowards(moveDirection);
-            }
+            // Apply velocity
+            rb.velocity = new Vector3(
+                moveDirection.x * currentSpeed,
+                rb.velocity.y, // Preserve vertical velocity (gravity, jump)
+                moveDirection.z * currentSpeed
+            );
+        }
 
-            // Crouch (optional)
-            if (Input.GetKey(KeyCode.C))
+        private void HandleJump()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
-                animator.SetBool("IsCrouching", true);
-            }
-            else
-            {
-                animator.SetBool("IsCrouching", false);
-            }
-
-            // Interaction
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                HandleInteraction();
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // Reset vertical
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
         }
 
-        /// <summary>
-        /// Calculates movement direction relative to camera forward.
-        /// </summary>
-        private Vector3 GetMovementDirection(float horizontal, float vertical)
+        private void HandleCamera()
         {
-            Transform cameraTransform = Camera.main.transform;
+            if (mainCamera == null) return;
 
-            Vector3 forward = cameraTransform.forward;
-            Vector3 right = cameraTransform.right;
+            // Get mouse input
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-            // Remove Y component so movement is always grounded
-            forward.y = 0;
-            right.y = 0;
+            // Rotate player left/right (Y rotation)
+            transform.Rotate(0, mouseX, 0);
 
-            forward.Normalize();
-            right.Normalize();
-
-            return (forward * vertical + right * horizontal).normalized;
+            // Rotate camera up/down (X rotation, clamped)
+            yRotation -= mouseY;
+            yRotation = Mathf.Clamp(yRotation, -maxLookAngle, maxLookAngle);
+            mainCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
         }
 
-        /// <summary>
-        /// Applies movement to velocity.
-        /// </summary>
-        private void ApplyMovement(Vector3 moveDirection)
+        private void HandleCursorToggle()
         {
-            if (moveDirection.magnitude > 0.1f)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Vector3 targetVelocity = moveDirection * walkSpeed;
-                velocity.x = Mathf.Lerp(velocity.x, targetVelocity.x, groundAcceleration * Time.deltaTime);
-                velocity.z = Mathf.Lerp(velocity.z, targetVelocity.z, groundAcceleration * Time.deltaTime);
-
-                animator.SetFloat("Speed", walkSpeed);
-            }
-            else
-            {
-                velocity.x = Mathf.Lerp(velocity.x, 0, groundDrag * Time.deltaTime);
-                velocity.z = Mathf.Lerp(velocity.z, 0, groundDrag * Time.deltaTime);
-
-                animator.SetFloat("Speed", 0);
-            }
-        }
-
-        /// <summary>
-        /// Rotates character to face movement direction.
-        /// </summary>
-        private void RotateTowards(Vector3 direction)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-        }
-
-        /// <summary>
-        /// Applies gravity (simple downward force).
-        /// </summary>
-        private void ApplyGravity()
-        {
-            if (characterController.isGrounded)
-            {
-                velocity.y = -2f; // Small negative value to keep grounded
-            }
-            else
-            {
-                velocity.y -= 9.81f * Time.deltaTime;
-            }
-        }
-
-        /// <summary>
-        /// Moves the character using CharacterController.
-        /// </summary>
-        private void Move()
-        {
-            characterController.Move(velocity * Time.deltaTime);
-        }
-
-        /// <summary>
-        /// Handles interaction with nearby objects.
-        /// </summary>
-        private void HandleInteraction()
-        {
-            // Raycast forward to find interactable objects
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, 2f))
-            {
-                var interactable = hit.collider.GetComponent<IInteractable>();
-                if (interactable != null)
+                if (Cursor.lockState == CursorLockMode.Locked)
                 {
-                    interactable.Interact(gameObject);
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
             }
         }
 
-        /// <summary>
-        /// Allows squeeze-through animations (low-poly movement).
-        /// </summary>
-        public void SqueezeThrough(Vector3 targetPosition)
+        private void HandleInteraction()
         {
-            // Transition character to squeeze animation and move to target
-            StartCoroutine(SqueezeThroughCoroutine(targetPosition));
-        }
-
-        private System.Collections.IEnumerator SqueezeThroughCoroutine(Vector3 targetPosition)
-        {
-            animator.SetTrigger("Squeeze");
-            float duration = 1f;
-            float elapsed = 0f;
-
-            Vector3 startPos = transform.position;
-            while (elapsed < duration)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                elapsed += Time.deltaTime;
-                transform.position = Vector3.Lerp(startPos, targetPosition, elapsed / duration);
-                yield return null;
+                RaycastHit hit;
+                if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 2f))
+                {
+                    var interactable = hit.collider.GetComponent<IInteractable>();
+                    if (interactable != null)
+                    {
+                        interactable.Interact(gameObject);
+                    }
+                }
             }
-
-            transform.position = targetPosition;
         }
+
+        public bool IsGrounded => isGrounded;
     }
+
 
     /// <summary>
     /// Interface for interactable objects in the world.
