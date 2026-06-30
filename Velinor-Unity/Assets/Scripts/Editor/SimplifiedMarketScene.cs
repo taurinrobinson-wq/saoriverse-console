@@ -211,11 +211,11 @@ namespace Velinor.Editor
 
         private static void AddSimpleForegroundElements(Transform parent)
         {
-            // Ground plane
+            // Ground plane - positioned at Y=0 as base level
             GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
             ground.name = "Ground";
             ground.transform.parent = parent;
-            ground.transform.position = Vector3.zero;
+            ground.transform.position = Vector3.zero; // At Y=0
             ground.transform.localScale = new Vector3(15, 1, 15);
 
             Object.DestroyImmediate(ground.GetComponent<Collider>());
@@ -260,9 +260,10 @@ namespace Velinor.Editor
         {
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
-            player.transform.position = new Vector3(0, 1, -3);
+            // Position player ON the ground at Y=0, centered in scene
+            player.transform.position = new Vector3(0, 1, 0);
 
-            // Visual representation
+            // Visual representation - green capsule
             GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.transform.parent = player.transform;
             visual.transform.localPosition = Vector3.zero;
@@ -272,7 +273,7 @@ namespace Velinor.Editor
 
             MeshRenderer vmr = visual.GetComponent<MeshRenderer>();
             Material playerMat = new Material(Shader.Find("Standard"));
-            playerMat.color = new Color(0.2f, 0.8f, 0.3f);
+            playerMat.color = new Color(0.2f, 0.8f, 0.3f); // Green
             vmr.material = playerMat;
 
             // Physics
@@ -287,14 +288,17 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-            // Camera
+            // Camera - positioned above player's head, looking forward
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
             cameraObj.transform.localPosition = new Vector3(0, 0.6f, 0);
+            cameraObj.transform.localRotation = Quaternion.identity;
 
             Camera cam = cameraObj.AddComponent<Camera>();
             cam.orthographic = true;
-            cam.orthographicSize = 5;
+            cam.orthographicSize = 8; // Increased to see more of the scene
+            cam.nearClipPlane = -100; // Allow viewing behind camera
+            cam.farClipPlane = 100;   // Allow viewing far ahead
             cam.cullingMask = -1;
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.08f, 0.08f, 0.08f, 1f);
@@ -305,7 +309,7 @@ namespace Velinor.Editor
             player.AddComponent<PlayerController>();
 
             player.layer = LayerMask.NameToLayer("Default");
-            Debug.Log("  ✅ Player created with built-in camera");
+            Debug.Log("  ✅ Player created with built-in camera (standing on ground at Y=0)");
         }
 
         private static void VerifyAndFixCamera()
