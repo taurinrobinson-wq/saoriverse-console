@@ -47,6 +47,14 @@ namespace Velinor.Core
             SetLayerRecursive(managers, LayerMask.NameToLayer("Default"));
 
             Debug.Log("✅ Market scene structure created and organized!");
+            Debug.Log("📋 NEXT STEPS:");
+            Debug.Log("1. Create these layers in Project Settings > Tags and Layers:");
+            Debug.Log("   - Slot 9: Background");
+            Debug.Log("   - Slot 10: Midgroup");
+            Debug.Log("   - Slot 11: Foreground");
+            Debug.Log("   - Slot 12: Effects");
+            Debug.Log("2. Once layers are created, run this menu option again to assign layers");
+            Debug.Log("3. Start populating Background/Midground/Foreground containers with assets");
 
             #endif
         }
@@ -57,13 +65,21 @@ namespace Velinor.Core
             if (existing != null) return existing.gameObject;
 
             GameObject container = new GameObject(name);
-            container.tag = "SceneContainer";
+            // Tag assignment removed - tag doesn't need to exist for scene organization
             return container;
         }
 
         private static void SetLayerRecursive(GameObject obj, int layer)
         {
             if (obj == null) return;
+            
+            // Validate layer is in valid range
+            if (layer < 0 || layer > 31)
+            {
+                Debug.LogWarning($"⚠️ Layer {layer} is out of valid range [0-31]. This layer needs to be created in Project Settings > Layers.");
+                return;
+            }
+            
             obj.layer = layer;
             foreach (Transform child in obj.transform)
             {
