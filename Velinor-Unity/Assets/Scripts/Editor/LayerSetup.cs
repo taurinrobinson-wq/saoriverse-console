@@ -2,6 +2,7 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.SceneManagement;
 #endif
 
 namespace Velinor.Core
@@ -61,14 +62,28 @@ namespace Velinor.Core
             if (anyCreated)
             {
                 tagManager.ApplyModifiedProperties();
+                tagManager.ApplyModifiedPropertiesWithoutUndo();
                 Debug.Log("✅ All required layers created successfully!");
+                
+                // Verify layers were created
+                EditorApplication.delayCall += VerifyLayers;
             }
             else
             {
                 Debug.Log("✅ All required layers already exist!");
+                VerifyLayers();
             }
 
             Debug.Log("\n📋 Next step: Go to Velinor → Scene Setup → Organize Market Scene");
+        }
+
+        private static void VerifyLayers()
+        {
+            Debug.Log("\n✅ LAYER VERIFICATION:");
+            Debug.Log($"  Background: {(LayerMask.NameToLayer("Background") != -1 ? "✓ Found" : "✗ Missing")}");
+            Debug.Log($"  Midground:  {(LayerMask.NameToLayer("Midground") != -1 ? "✓ Found" : "✗ Missing")}");
+            Debug.Log($"  Foreground: {(LayerMask.NameToLayer("Foreground") != -1 ? "✓ Found" : "✗ Missing")}");
+            Debug.Log($"  Effects:    {(LayerMask.NameToLayer("Effects") != -1 ? "✓ Found" : "✗ Missing")}");
         }
 
         #endif

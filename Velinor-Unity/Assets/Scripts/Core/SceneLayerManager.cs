@@ -38,13 +38,13 @@ namespace Velinor.Core
             GameObject effects = FindOrCreateContainer("Effects");
             GameObject managers = FindOrCreateContainer("Managers");
 
-            // Assign layers
-            SetLayerRecursive(background, LayerMask.NameToLayer("Background"));
-            SetLayerRecursive(midground, LayerMask.NameToLayer("Midground"));
-            SetLayerRecursive(foreground, LayerMask.NameToLayer("Foreground"));
-            SetLayerRecursive(characters, LayerMask.NameToLayer("Default"));
-            SetLayerRecursive(effects, LayerMask.NameToLayer("Effects"));
-            SetLayerRecursive(managers, LayerMask.NameToLayer("Default"));
+            // Assign layers (use Default if custom layer doesn't exist)
+            AssignLayerSafely(background, "Background");
+            AssignLayerSafely(midground, "Midground");
+            AssignLayerSafely(foreground, "Foreground");
+            AssignLayerSafely(characters, "Default");
+            AssignLayerSafely(effects, "Effects");
+            AssignLayerSafely(managers, "Default");
 
             Debug.Log("✅ Market scene structure created and organized!");
             Debug.Log("📋 NEXT STEPS:");
@@ -67,6 +67,20 @@ namespace Velinor.Core
             GameObject container = new GameObject(name);
             // Tag assignment removed - tag doesn't need to exist for scene organization
             return container;
+        }
+
+        private static void AssignLayerSafely(GameObject obj, string layerName)
+        {
+            int layer = LayerMask.NameToLayer(layerName);
+            
+            if (layer == -1)
+            {
+                // Layer doesn't exist, use Default (layer 0) instead
+                Debug.LogWarning($"⚠️ Layer '{layerName}' not found. Assigning to Default layer instead. Run 'Create Required Layers' menu if you want custom layers.");
+                layer = 0; // Default layer
+            }
+            
+            SetLayerRecursive(obj, layer);
         }
 
         private static void SetLayerRecursive(GameObject obj, int layer)
