@@ -80,6 +80,22 @@ namespace Velinor.Core
             if (mainCamera == null)
             {
                 mainCamera = Camera.main;
+                
+                // If no Main Camera found, look for any camera
+                if (mainCamera == null)
+                {
+                    mainCamera = FindAnyObjectByType<Camera>();
+                }
+                
+                // If still no camera, create one
+                if (mainCamera == null)
+                {
+                    GameObject cameraObj = new GameObject("Main Camera");
+                    mainCamera = cameraObj.AddComponent<Camera>();
+                    cameraObj.tag = "MainCamera";
+                    cameraObj.AddComponent<AudioListener>();
+                    Debug.Log("⚠️ No camera found. Created new Main Camera.");
+                }
             }
 
             if (mainCamera == null) return;
@@ -88,9 +104,10 @@ namespace Velinor.Core
             mainCamera.transform.position = new Vector3(0, 1.5f, -5f);
             mainCamera.transform.LookAt(new Vector3(0, 0, 10f));
 
-            // Configure culling masks to render layers in correct order
-            // This ensures proper z-buffer handling for depth layering
-            mainCamera.cullingMask = ~(1 << LayerMask.NameToLayer("UI")); // Render everything except UI
+            // Configure culling masks - render everything by default
+            mainCamera.cullingMask = -1; // Render all layers
+            
+            Debug.Log("✅ Camera configured at position (0, 1.5, -5) looking at market center");
         }
 
         private void ConfigureLighting()
