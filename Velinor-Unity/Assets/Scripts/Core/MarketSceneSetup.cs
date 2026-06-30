@@ -100,14 +100,26 @@ namespace Velinor.Core
 
             if (mainCamera == null) return;
 
-            // Position camera for market view (can be adjusted in Editor)
-            mainCamera.transform.position = new Vector3(0, 1.5f, -5f);
-            mainCamera.transform.LookAt(new Vector3(0, 0, 10f));
+            // Ensure MainCamera tag is set
+            if (mainCamera.gameObject.tag != "MainCamera")
+                mainCamera.gameObject.tag = "MainCamera";
 
-            // Configure culling masks - render everything by default
-            mainCamera.cullingMask = -1; // Render all layers
+            // ORTHOGRAPHIC SETUP for 2D parallax environment
+            mainCamera.orthographic = true;
+            mainCamera.orthographicSize = 5f; // Controls zoom level
             
-            Debug.Log("✅ Camera configured at position (0, 1.5, -5) looking at market center");
+            // Position camera for 2D parallax (Z depth handles sorting)
+            mainCamera.transform.position = new Vector3(0, 0, -10f);
+            mainCamera.transform.rotation = Quaternion.identity; // Face forward
+            
+            // Render settings for parallax layers
+            mainCamera.cullingMask = -1; // Render all layers
+            mainCamera.clearFlags = CameraClearFlags.SolidColor;
+            mainCamera.backgroundColor = new Color(0.08f, 0.08f, 0.08f, 1f); // Neutral dark (RGB ~20/20/20)
+            mainCamera.depth = 0;
+            
+            Debug.Log("✅ Camera configured (Orthographic, Size 5) at (0, 0, -10) for 2D parallax");
+            Debug.Log("✅ MainCamera tag confirmed, cullingMask: all layers, background: neutral dark");
         }
 
         private void ConfigureLighting()
@@ -143,6 +155,111 @@ namespace Velinor.Core
         {
             // Distance factor: 1.0 = midground, 0.5 = distant, 0.3 = very distant
             obj.transform.localScale *= distanceFactor;
+        }
+
+        /// <summary>
+        /// Verify camera configuration is correct for 2D parallax
+        /// </summary>
+        public void VerifyCamera()
+        {
+            Debug.Log("\n=== CAMERA VERIFICATION ===");
+            
+            Camera cam = Camera.main;
+            if (cam == null)
+            {
+                cam = FindAnyObjectByType<Camera>();
+            }
+
+            if (cam == null)
+            {
+                Debug.LogError("❌ NO CAMERA FOUND in scene!");
+                return;
+            }
+
+            bool allGood = true;
+
+            // Check MainCamera tag
+            if (cam.gameObject.tag != "MainCamera")
+            {
+                Debug.LogWarning($"❌ Camera missing MainCamera tag (current: {cam.gameObject.tag})");
+                allGood = false;
+            }
+            else
+            {
+                Debug.Log("✅ MainCamera tag correct");
+            }
+
+            // Check orthographic
+            if (!cam.orthographic)
+            {
+                Debug.LogWarning("❌ Camera is PERSPECTIVE (should be ORTHOGRAPHIC for 2D parallax)");
+                allGood = false;
+            }
+            else
+            {
+                Debug.Log("✅ Camera is orthographic");
+            }
+
+            // Check orthographic size
+            if (Mathf.Abs(cam.orthographicSize - 5f) > 0.1f)
+            {
+                Debug.LogWarning($"❌ OrthographicSize is {cam.orthographicSize} (should be ~5)");
+                allGood = false;
+            }
+            else
+            {
+                Debug.Log($"✅ OrthographicSize: {cam.orthographicSize}");
+            }
+
+            // Check position
+            Vector3 expectedPos = new Vector3(0, 0, -10f);
+            if (Vector3.Distance(cam.transform.position, expectedPos) > 0.1f)
+            {
+                Debug.LogWarning($"❌ Camera position is {cam.transform.position} (should be ~{expectedPos})");
+                allGood = false;
+            }
+            else
+            {
+                Debug.Log($"✅ Camera position: {cam.transform.position}");
+            }
+
+            // Check culling mask
+            if (cam.cullingMask != -1)
+            {
+                Debug.LogWarning($"❌ Culling mask is {cam.cullingMask} (should be -1 to render all layers)");
+                allGood = false;
+            }
+            else
+            {
+                Debug.Log("✅ Culling mask: all layers");
+            }
+
+            // Check clear flags
+            if (cam.clearFlags != CameraClearFlags.SolidColor)
+            {
+                Debug.LogWarning($"❌ Clear flags are {cam.clearFlags} (should be SolidColor)");
+                allGood = false;
+            }
+            else
+            {
+                Debug.Log("✅ Clear flags: SolidColor");
+            }
+
+            // Check background color
+            Color expectedBg = new Color(0.08f, 0.08f, 0.08f, 1f);
+            if (Vector4.Distance(cam.backgroundColor, expectedBg) > 0.05f)
+            {
+                Debug.LogWarning($"❌ Background color is {cam.backgroundColor} (should be neutral dark)");
+            }
+            else
+            {
+                Debug.Log($"✅ Background color: neutral dark");
+            }
+
+            Debug.Log("=== END VERIFICATION ===\n");
+            
+            if (allGood)
+                Debug.Log("🎉 Camera is properly configured for 2D parallax!");
         }
     }
 }
