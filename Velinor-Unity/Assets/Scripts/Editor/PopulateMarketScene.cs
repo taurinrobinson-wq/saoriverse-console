@@ -75,8 +75,8 @@ namespace Velinor.Editor
 
         private static void AddBackgroundRocks(Transform parent)
         {
-            // Kyle's Rock Pack location
-            string rocksPath = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/";
+            // Kyle's Rock Pack location - prefabs are in themed subdirectories
+            string rocksPath = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/";
             
             // Load rock prefabs and place in background
             string[] rockPrefabs = new string[]
@@ -123,29 +123,31 @@ namespace Velinor.Editor
 
         private static void AddMarketStructures(Transform parent)
         {
-            // Mediterranean Ruins Kit location (note the special dash character)
-            string ruinsPath = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/";
+            // Mediterranean Ruins Kit location - prefabs are in category subdirectories
+            string floorsPath = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Floors/";
+            string roofsPath = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/";
 
-            // Market structure prefabs
-            string[] stallPrefabs = new string[]
+            // Market structure prefabs - floors
+            string[] floorPrefabs = new string[]
             {
                 "Ruins_Floor_A.prefab",
                 "Ruins_Floor_B.prefab",
-                "Roof.A.prefab",
-                "Roof.B.prefab"
+                "Ruins_Floor_C.prefab",
+                "Ruins_Floor_D.prefab"
             };
 
-            Vector3[] positions = new Vector3[]
+            Vector3[] floorPositions = new Vector3[]
             {
                 new Vector3(-8, 0, 5),    // Left market floor
                 new Vector3(8, 0, 5),    // Right market floor
-                new Vector3(0, 2, 8),    // Center roof
-                new Vector3(-10, 2, 10)  // Left roof structure
+                new Vector3(-5, 0, 10),  // Center floor
+                new Vector3(5, 0, 10)    // Right center floor
             };
 
-            for (int i = 0; i < stallPrefabs.Length && i < positions.Length; i++)
+            // Load floor prefabs
+            for (int i = 0; i < floorPrefabs.Length && i < floorPositions.Length; i++)
             {
-                string prefabPath = ruinsPath + stallPrefabs[i];
+                string prefabPath = floorsPath + floorPrefabs[i];
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
 
                 if (prefab != null)
@@ -153,11 +155,48 @@ namespace Velinor.Editor
                     GameObject instance = PrefabUtility.InstantiatePrefab(prefab, parent) as GameObject;
                     if (instance != null)
                     {
-                        instance.name = stallPrefabs[i].Replace(".prefab", "");
-                        instance.transform.position = positions[i];
-                        instance.transform.rotation = Quaternion.Euler(0, Random.Range(0, 4) * 90f, 0);
+                        instance.name = floorPrefabs[i].Replace(".prefab", "");
+                        instance.transform.position = floorPositions[i];
                         SetLayerRecursive(instance, LayerMask.NameToLayer("Midground"));
-                        Debug.Log($"  ✅ {stallPrefabs[i]} placed at {positions[i]}");
+                        Debug.Log($"  ✅ {floorPrefabs[i]} placed at {floorPositions[i]}");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"  ⚠️  Could not load {prefabPath}");
+                }
+            }
+
+            // Load roof prefabs for variety
+            string[] roofPrefabs = new string[]
+            {
+                "Ruins_Roof_A.001.prefab",
+                "Ruins_Roof_A.002.prefab",
+                "Ruins_Roof_A.003.prefab"
+            };
+
+            Vector3[] roofPositions = new Vector3[]
+            {
+                new Vector3(-10, 3, 8),   // Left roof
+                new Vector3(10, 3, 8),   // Right roof
+                new Vector3(0, 3, 12)    // Center roof
+            };
+
+            for (int i = 0; i < roofPrefabs.Length && i < roofPositions.Length; i++)
+            {
+                string prefabPath = roofsPath + roofPrefabs[i];
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+
+                if (prefab != null)
+                {
+                    GameObject instance = PrefabUtility.InstantiatePrefab(prefab, parent) as GameObject;
+                    if (instance != null)
+                    {
+                        instance.name = roofPrefabs[i].Replace(".prefab", "");
+                        instance.transform.position = roofPositions[i];
+                        instance.transform.rotation = Quaternion.Euler(0, Random.Range(0, 2) * 180f, 0);
+                        SetLayerRecursive(instance, LayerMask.NameToLayer("Midground"));
+                        Debug.Log($"  ✅ {roofPrefabs[i]} placed at {roofPositions[i]}");
                     }
                 }
                 else
@@ -170,7 +209,7 @@ namespace Velinor.Editor
         private static void AddForegroundProps(Transform parent)
         {
             // Kyle's Rock Pack small props
-            string rocksPath = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/";
+            string rocksPath = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/";
 
             string[] propPrefabs = new string[]
             {
@@ -254,8 +293,8 @@ namespace Velinor.Editor
                     {
                         Rigidbody rb = playerInstance.AddComponent<Rigidbody>();
                         rb.mass = 1;
-                        rb.drag = 0;
-                        rb.angularDrag = 0.05f;
+                        rb.linearDamping = 0;
+                        rb.angularDamping = 0.05f;
                         rb.useGravity = true;
                         rb.isKinematic = false;
                         rb.constraints = RigidbodyConstraints.FreezeRotation;
