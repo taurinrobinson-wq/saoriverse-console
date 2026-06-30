@@ -65,6 +65,10 @@ namespace Velinor.Editor
             Debug.Log("📷 Configuring camera...");
             VerifyAndFixCamera();
 
+            // Step 6: Setup audio/music
+            Debug.Log("🎵 Setting up audio...");
+            SetupAudio();
+
             Debug.Log("✅ SIMPLIFIED MARKETPLACE READY!\n");
             Debug.Log("🎮 Press Play to explore. Camera should render properly.\n");
 
@@ -74,7 +78,7 @@ namespace Velinor.Editor
         private static Transform GetOrCreateContainer(string name)
         {
             // Find ALL instances of this container name (handles duplicates)
-            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include);
             GameObject existing = null;
             int duplicateCount = 0;
 
@@ -338,6 +342,33 @@ namespace Velinor.Editor
                 mainCam.clearFlags = CameraClearFlags.SolidColor;
                 mainCam.backgroundColor = new Color(0.08f, 0.08f, 0.08f, 1f);
                 Debug.Log("  ✅ Main camera configured");
+            }
+        }
+
+        private static void SetupAudio()
+        {
+            // Try to find or create AudioManager
+            AudioManager audioManager = Object.FindAnyObjectByType<AudioManager>();
+            if (audioManager == null)
+            {
+                // Create AudioManager GameObject if missing
+                GameObject audioManagerGO = new GameObject("AudioManager");
+                audioManager = audioManagerGO.AddComponent<AudioManager>();
+                Debug.Log("  ✅ Created AudioManager");
+            }
+
+            // Try to find or create MarketSceneAudioSetup
+            MarketSceneAudioSetup sceneAudio = Object.FindAnyObjectByType<MarketSceneAudioSetup>();
+            if (sceneAudio == null)
+            {
+                // Create MarketSceneAudioSetup GameObject if missing
+                GameObject sceneAudioGO = new GameObject("MarketSceneAudio");
+                sceneAudio = sceneAudioGO.AddComponent<MarketSceneAudioSetup>();
+                Debug.Log("  ✅ Created MarketSceneAudioSetup");
+            }
+            else
+            {
+                Debug.Log("  ✅ Audio components found in scene");
             }
         }
     }
