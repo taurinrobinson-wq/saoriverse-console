@@ -73,9 +73,43 @@ namespace Velinor.Editor
 
         private static Transform GetOrCreateContainer(string name)
         {
-            GameObject existing = GameObject.Find(name);
+            // Find ALL instances of this container name (handles duplicates)
+            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            GameObject existing = null;
+            int duplicateCount = 0;
+
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name == name && obj.transform.parent == null) // Root-level objects only
+                {
+                    if (existing == null)
+                    {
+                        existing = obj;
+                    }
+                    else
+                    {
+                        // Delete duplicate
+                        Object.DestroyImmediate(obj);
+                        duplicateCount++;
+                    }
+                }
+            }
+
+            if (duplicateCount > 0)
+            {
+                Debug.Log($"  🧹 Removed {duplicateCount} duplicate '{name}' containers");
+            }
+
+            // Use existing or create new
             if (existing != null)
+            {
+                // Clear all children
+                foreach (Transform child in existing.transform)
+                {
+                    Object.DestroyImmediate(child.gameObject);
+                }
                 return existing.transform;
+            }
 
             GameObject container = new GameObject(name);
             return container.transform;
