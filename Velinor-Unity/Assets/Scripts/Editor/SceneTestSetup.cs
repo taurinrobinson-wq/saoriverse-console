@@ -63,7 +63,7 @@ namespace Velinor.Core
             Debug.Log("✅ Created Test Mountain (Background)");
 
             // Add simple lighting if none exists
-            if (FindObjectOfType<Light>() == null)
+            if (Object.FindAnyObjectByType<Light>() == null)
             {
                 GameObject lightObj = new GameObject("Directional Light");
                 Light light = lightObj.AddComponent<Light>();
