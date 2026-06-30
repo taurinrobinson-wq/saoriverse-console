@@ -33,10 +33,9 @@ namespace Velinor.Core
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Light mainLight;
 
-        [Header("Depth of Field Settings")]
-        [SerializeField] private bool enableDepthOfField = true;
-        [SerializeField] private float focusDistance = 15f;
-        [SerializeField] private float aperture = 16f;
+        [Header("Depth of Field Settings (For Future Post-Processing)")]
+        // These settings are prepared for future post-processing implementation
+        // Currently using built-in URP depth of field via camera
 
         [Header("Lighting")]
         [SerializeField] private Color duskColor = new Color(1f, 0.7f, 0.4f);
@@ -98,7 +97,7 @@ namespace Velinor.Core
         {
             if (mainLight == null)
             {
-                mainLight = FindObjectOfType<Light>();
+                mainLight = FindAnyObjectByType<Light>();
             }
 
             if (mainLight == null) return;

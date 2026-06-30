@@ -77,7 +77,7 @@ namespace Velinor.Core
         public static GameObject[] GetObjectsInLayer(string layerName)
         {
             int layer = LayerMask.NameToLayer(layerName);
-            var allObjects = FindObjectsOfType<GameObject>();
+            var allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
             var layerObjects = System.Array.FindAll(allObjects, obj => obj.layer == layer);
             return layerObjects;
         }

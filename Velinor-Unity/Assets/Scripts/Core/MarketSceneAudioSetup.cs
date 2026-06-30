@@ -15,7 +15,7 @@ namespace Velinor.Core
         private void Awake()
         {
             // Find or create AudioManager in scene
-            audioManager = FindObjectOfType<AudioManager>();
+            audioManager = FindAnyObjectByType<AudioManager>();
             
             if (audioManager == null)
             {
