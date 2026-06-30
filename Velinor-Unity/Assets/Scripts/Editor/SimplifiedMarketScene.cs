@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using Velinor.Core;
 
 namespace Velinor.Editor
 {
@@ -243,8 +244,8 @@ namespace Velinor.Editor
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
             rb.mass = 1;
-            rb.drag = 5;
-            rb.angularDrag = 0.05f;
+            rb.linearDamping = 5;
+            rb.angularDamping = 0.05f;
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
