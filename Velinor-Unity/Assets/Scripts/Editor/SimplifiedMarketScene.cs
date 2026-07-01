@@ -522,7 +522,7 @@ namespace Velinor.Editor
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
-            collider.center = new Vector3(0, 0.5f, 0); // Capsule center relative to player root
+            collider.center = new Vector3(0, -0.4f, 0); // Position so capsule bottom is near ground
             collider.isTrigger = false; // IMPORTANT: Must not be a trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
@@ -652,10 +652,11 @@ namespace Velinor.Editor
                 CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
                 capsule.radius = 0.4f;
                 capsule.height = 1.8f;
-                capsule.center = new Vector3(0, 0, 0); // At root center
+                capsule.center = new Vector3(0, -0.4f, 0); // Position capsule so bottom touches ground at Y=0
                 capsule.isTrigger = false;
                 Debug.Log("  ✅ Added CapsuleCollider to character root");
                 Debug.Log($"    - Position: center={capsule.center}, radius={capsule.radius}, height={capsule.height}");
+                Debug.Log($"    - Capsule extends from Y={-0.4 - 0.9} to Y={-0.4 + 0.9} (relative to root)");
             }
             else
             {
