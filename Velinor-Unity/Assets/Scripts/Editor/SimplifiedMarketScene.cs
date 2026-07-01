@@ -91,33 +91,44 @@ namespace Velinor.Editor
                 }
             }
 
+            // Clean up any null components (missing scripts) globally before scene creation
+            // This prevents "referenced script missing" errors
+            allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include);
+            foreach (GameObject obj in allObjects)
+            {
+                Component[] comps = obj.GetComponents<Component>();
+                for (int i = comps.Length - 1; i >= 0; i--)
+                {
+                    if (comps[i] == null)
+                    {
+                        Object.DestroyImmediate(comps[i]);
+                    }
+                }
+            }
+
             Debug.Log("📐 SPATIAL GRID LAYOUT:");
             Debug.Log("   MarketOrigin: (0, 0, 0)");
+            Debug.Log("   UnifiedGround: 30×30m stone surface");
             Debug.Log("   StallRowA: X=-10 (left side stalls at Z=0,5,10)");
             Debug.Log("   StallRowB: X=+10 (right side stalls at Z=0,5,10)");
-            Debug.Log("   CenterWalkway: X=0 from Z=-2 to Z=15");
 
-            // Step 1: Ground plane
-            Debug.Log("🌍 Creating ground plane...");
-            CreateGroundPlane(fgRoot);
+            // Step 1: Create unified ground (replaces separate ground + walkway)
+            Debug.Log("🌍 Creating unified ground plane...");
+            CreateUnifiedGround(fgRoot);
 
-            // Step 2: Walkway (center path)
-            Debug.Log("🛤️  Creating center walkway...");
-            CreateCenterWalkway(fgRoot);
-
-            // Step 3: Market stalls (Row A - left side)
+            // Step 2: Market stalls (Row A - left side)
             Debug.Log("🏪 Creating Row A (left side stalls)...");
             CreateStallRow(mgRoot, StallRowAX, "Stall_A");
 
-            // Step 4: Market stalls (Row B - right side)
+            // Step 3: Market stalls (Row B - right side)
             Debug.Log("🏪 Creating Row B (right side stalls)...");
             CreateStallRow(mgRoot, StallRowBX, "Stall_B");
 
-            // Step 5: Background rocks (parallax depth)
+            // Step 4: Background rocks (parallax depth)
             Debug.Log("🏔️  Creating background parallax layer...");
             CreateBackgroundRocks(bgRoot);
 
-            // Step 6: Player at market origin
+            // Step 5: Player at market origin
             Debug.Log("👤 Adding player...");
             if (charRoot == null)
             {
@@ -126,15 +137,15 @@ namespace Velinor.Editor
             }
             AddPlayer(charRoot);
 
-            // Step 7: Audio
+            // Step 6: Audio
             Debug.Log("🎵 Setting up audio...");
             SetupAudio();
 
             Debug.Log("\n✅ STRUCTURED MARKETPLACE READY!\n");
             Debug.Log("📐 Grid Summary:");
+            Debug.Log("   Ground: Unified 30×30m stone surface");
             Debug.Log("   Row A (X=-10): Stalls at Z=0, Z=5, Z=10");
             Debug.Log("   Row B (X=+10): Stalls at Z=0, Z=5, Z=10");
-            Debug.Log("   Walkway (X=0): Center path for navigation");
             Debug.Log("   Player: Spawned at origin (0, 0.9, 0)");
             Debug.Log("   Camera: First-person from player eyes\n");
             Debug.Log("🎮 Press Play to explore\n");
@@ -217,28 +228,29 @@ namespace Velinor.Editor
             return container.transform;
         }
 
-        private static void CreateGroundPlane(Transform parent)
+        private static void CreateUnifiedGround(Transform parent)
         {
-            // Use a cube instead of plane (plane is infinitely thin and hard to see)
+            // UNIFIED GROUND: Single 30×30m surface with stone path material
+            // Replaces separate ground + walkway objects for consistent physics
             GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
             ground.name = "Ground";
             ground.transform.parent = parent;
-            ground.transform.position = new Vector3(0, 0f, 0); // At Y=0 (ground level)
-            ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30×30m, 0.2m thick (larger + thicker for stability)
+            ground.transform.position = new Vector3(0, 0f, 0); // Centered at origin
+            ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30×30m area, 0.2m thick
 
             Object.DestroyImmediate(ground.GetComponent<Collider>());
 
             MeshRenderer mr = ground.GetComponent<MeshRenderer>();
             Material mat = new Material(Shader.Find("Standard"));
-            mat.color = new Color(0.4f, 0.35f, 0.3f); // Earth brown
+            mat.color = new Color(0.5f, 0.48f, 0.45f); // Stone path color (was walkway color)
             mr.material = mat;
 
             BoxCollider collider = ground.AddComponent<BoxCollider>();
             collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
-            collider.center = Vector3.zero; // CRITICAL: Center at 0,0,0 of this cube
-            collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
+            collider.center = Vector3.zero;
+            collider.isTrigger = false;
 
-            // Add kinematic Rigidbody for proper physics (prevents dynamic objects from tunneling through)
+            // Add kinematic Rigidbody for proper physics
             Rigidbody groundRb = ground.AddComponent<Rigidbody>();
             groundRb.isKinematic = true;
             groundRb.useGravity = false;
@@ -246,56 +258,9 @@ namespace Velinor.Editor
             groundRb.angularDamping = 0;
 
             ground.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Ground (visible brown cube) at Y=0, 30×30m with physics");
-            
-            // Verify collider and rigidbody were created properly
-            BoxCollider bc = ground.GetComponent<BoxCollider>();
-            if (bc != null)
-            {
-                Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
-                Debug.Log($"    - Ground Position: {ground.transform.position}, Scale: {ground.transform.localScale}");
-                Debug.Log($"    - Collider bounds: min={bc.bounds.min}, max={bc.bounds.max}");
-                Debug.Log($"    - Rigidbody: isKinematic={groundRb.isKinematic}, useGravity={groundRb.useGravity}");
-            }
-        }
-
-        private static void CreateCenterWalkway(Transform parent)
-        {
-            // Walkway from Z=-2 to Z=15, X=-3 to X=3, Y=0 level (uses cube for visibility)
-            GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            walkway.name = "Walkway_Center";
-            walkway.transform.parent = parent;
-            walkway.transform.position = new Vector3(0, 0f, 6.5f); // Centered on Z-axis, at ground level
-            walkway.transform.localScale = new Vector3(6, 0.2f, 17); // 6m wide × 17m long × 0.2m thick (match ground thickness)
-
-            Object.DestroyImmediate(walkway.GetComponent<Collider>());
-
-            MeshRenderer mr = walkway.GetComponent<MeshRenderer>();
-            Material mat = new Material(Shader.Find("Standard"));
-            mat.color = new Color(0.5f, 0.48f, 0.45f); // Stone path
-            mr.material = mat;
-
-            BoxCollider collider = walkway.AddComponent<BoxCollider>();
-            collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
-            collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
-
-            // Add kinematic Rigidbody for proper physics (IDENTICAL to ground for consistency)
-            Rigidbody walkwayRb = walkway.AddComponent<Rigidbody>();
-            walkwayRb.isKinematic = true;
-            walkwayRb.useGravity = false;
-            walkwayRb.linearDamping = 0;
-            walkwayRb.angularDamping = 0;
-
-            walkway.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Center walkway (visible stone cube): (-3,0,-2) to (3,0,15) - PHYSICS SYNCHRONIZED WITH GROUND");
-            
-            // Verify collider was created properly
-            BoxCollider bc = walkway.GetComponent<BoxCollider>();
-            if (bc != null)
-            {
-                Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
-                Debug.Log($"    - Rigidbody: isKinematic={walkwayRb.isKinematic}, useGravity={walkwayRb.useGravity}");
-            }
+            Debug.Log("  ✅ Unified ground (30×30m stone surface) - single physics surface for entire marketplace");
+            Debug.Log($"    - BoxCollider: size={collider.size}, center={collider.center}, isTrigger={collider.isTrigger}");
+            Debug.Log($"    - Rigidbody: isKinematic={groundRb.isKinematic}, useGravity={groundRb.useGravity}");
         }
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
@@ -318,12 +283,12 @@ namespace Velinor.Editor
                     GameObject stall = PrefabUtility.InstantiatePrefab(stallPrefab, parent) as GameObject;
                     stall.name = $"{stallPrefix}_{i + 1}";
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
-                    stall.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f); // INCREASED from 0.5 to make stalls thicker/more visible
+                    stall.transform.localScale = new Vector3(2f, 1f, 2f); // Cube-like: 2m wide × 1m tall × 2m deep
                     
                     // Fix materials with Standard shader (beige stone color)
                     FixMaterialsWithStandard(stall, new Color(0.8f, 0.75f, 0.65f));
                     
-                    Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - 1.5x scale");
+                    Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - cube-like (2×1×2)");
                 }
                 else
                 {
@@ -331,8 +296,8 @@ namespace Velinor.Editor
                     GameObject stall = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     stall.name = $"{stallPrefix}_{i + 1}_Fallback";
                     stall.transform.parent = parent;
-                    stall.transform.position = new Vector3(stallX, 0.75f, stallZPositions[i]); // Raised to sit on ground properly
-                    stall.transform.localScale = new Vector3(2, 1.5f, 1.5f); // Thick cube: 2m wide, 1.5m tall and deep
+                    stall.transform.position = new Vector3(stallX, 0.5f, stallZPositions[i]); // Centered on ground
+                    stall.transform.localScale = new Vector3(2, 1, 2); // Cube: 2m wide × 1m tall × 2m deep
 
                     Object.DestroyImmediate(stall.GetComponent<Collider>());
                     MeshRenderer mr = stall.GetComponent<MeshRenderer>();
@@ -342,12 +307,12 @@ namespace Velinor.Editor
 
                     stall.AddComponent<BoxCollider>();
                     stall.layer = LayerMask.NameToLayer("Midground");
-                    Debug.LogWarning($"  ⚠️  EmbersStorm prefab not found, using fallback cube (2×1.5×1.5m)");
+                    Debug.LogWarning($"  ⚠️  EmbersStorm prefab not found, using fallback cube (2×1×2m)");
                 }
             }
 
             string sideLabel = stallX < 0 ? "left (X=-10)" : "right (X=+10)";
-            Debug.Log($"  ✅ Stall row ({sideLabel}) created at Z=0, Z=5, Z=10 - THICKER + INTEGRATED WITH GROUND");
+            Debug.Log($"  ✅ Stall row ({sideLabel}) created - cube-like structures (wider, not taller)");
         }
 
         private static void CreateBackgroundRocks(Transform parent)
@@ -445,42 +410,32 @@ namespace Velinor.Editor
                 player.transform.position = new Vector3(0, 0.9f, 0); // Set to eye level (0.9m above ground)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
-                // AGGRESSIVE cleanup: Destroy ALL MonoBehaviour scripts except Animator
-                // This removes any broken/missing script references
+                // CRITICAL FIX: Remove null components (missing scripts) FIRST
+                // before trying to access any MonoBehaviours on the entire hierarchy
+                foreach (Transform child in player.GetComponentsInChildren<Transform>())
+                {
+                    Component[] allComps = child.GetComponents<Component>();
+                    for (int i = allComps.Length - 1; i >= 0; i--)
+                    {
+                        if (allComps[i] == null)
+                        {
+                            Object.DestroyImmediate(allComps[i]);
+                        }
+                    }
+                }
+                
+                // NOW do aggressive script cleanup: Destroy ALL MonoBehaviour scripts except Animator
                 MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>();
                 foreach (MonoBehaviour mb in allMonoBehaviours)
                 {
                     if (mb != null)
                     {
                         string scriptName = mb.GetType().Name;
-                        // Keep ONLY Animator, destroy everything else for now
+                        // Keep ONLY Animator, destroy everything else
                         if (!scriptName.Contains("Animator"))
                         {
                             Object.DestroyImmediate(mb);
-                            Debug.Log($"  🗑️  Destroyed {scriptName} (will re-add movement later)");
-                        }
-                    }
-                }
-                
-                // Remove any null components (broken scripts) on root and ALL children
-                Component[] rootComponents = player.GetComponents<Component>();
-                foreach (Component comp in rootComponents)
-                {
-                    if (comp == null)
-                    {
-                        Object.DestroyImmediate(comp);
-                    }
-                }
-                
-                // Also clean up children to catch any broken scripts on child objects
-                foreach (Transform child in player.GetComponentsInChildren<Transform>())
-                {
-                    Component[] childComps = child.GetComponents<Component>();
-                    foreach (Component comp in childComps)
-                    {
-                        if (comp == null)
-                        {
-                            Object.DestroyImmediate(comp);
+                            Debug.Log($"  🗑️  Destroyed {scriptName}");
                         }
                     }
                 }
