@@ -314,9 +314,58 @@ namespace Velinor.Editor
                 }
             }
 
-            // Use proven capsule player (StarterAssets requires complex setup, defer for later)
+            // Try to load StarterAssets character
+            GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
+            
+            if (playerPrefab != null)
+            {
+                Debug.Log("  ℹ️  Found PlayerArmature prefab, loading...");
+                GameObject player = PrefabUtility.InstantiatePrefab(playerPrefab, parent) as GameObject;
+                player.name = "Player";
+                player.transform.position = Vector3.zero;
+                
+                // Disable any conflicting controller scripts
+                MonoBehaviour[] scripts = player.GetComponentsInChildren<MonoBehaviour>();
+                foreach (MonoBehaviour script in scripts)
+                {
+                    string scriptName = script.GetType().Name;
+                    if (scriptName == "ThirdPersonController" || 
+                        scriptName == "InputManager" || 
+                        scriptName == "StarterAssetsInputs")
+                    {
+                        Debug.Log($"  ℹ️  Disabling conflicting script: {scriptName}");
+                        script.enabled = false;
+                    }
+                }
+                
+                // Create our own eye-level camera
+                GameObject cameraObj = new GameObject("MainCamera");
+                cameraObj.transform.parent = player.transform;
+                cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
+
+                Camera cam = cameraObj.AddComponent<Camera>();
+                cam.orthographic = true;
+                cam.orthographicSize = 6;
+                cam.nearClipPlane = -100;
+                cam.farClipPlane = 100;
+                cam.tag = "MainCamera";
+                cam.clearFlags = CameraClearFlags.SolidColor;
+                cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
+                cam.depth = 0;
+
+                cameraObj.AddComponent<AudioListener>();
+
+                // Add our controller
+                if (player.GetComponent<PlayerController>() == null)
+                    player.AddComponent<PlayerController>();
+
+                Debug.Log("  ✅ StarterAssets character loaded with custom controller");
+                return;
+            }
+
+            // Fallback to capsule if prefab not found
+            Debug.LogWarning("  ⚠️  StarterAssets prefab not found, using capsule player");
             AddPlayerFallback(parent);
-            Debug.Log("  ✅ Using capsule player (StarterAssets integration deferred)");
         }
 
         private static void AddPlayerFallback(Transform parent)
