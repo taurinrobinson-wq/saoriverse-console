@@ -180,10 +180,6 @@ namespace Velinor.Core
             Debug.Log($"🎵 Now playing: {label}");
         }
 
-            if (!string.IsNullOrEmpty(trackName))
-                Debug.Log($"🎵 Now playing: {trackName}");
-        }
-
         /// <summary>
         /// Crossfade between two tracks (e.g., market music → dialogue music)
         /// </summary>
