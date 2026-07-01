@@ -463,10 +463,25 @@ namespace Velinor.Editor
                     Debug.Log($"    - Collider on {c.gameObject.name}: {c.GetType().Name}, bounds={c.bounds}, trigger={c.isTrigger}");
                 }
 
-                // Add our controller to player
-                PlayerController controller = player.GetComponent<PlayerController>();
-                if (controller == null)
-                    player.AddComponent<PlayerController>();
+                // Add our controller to player (with error handling)
+                try
+                {
+                    PlayerController controller = player.GetComponent<PlayerController>();
+                    if (controller == null)
+                    {
+                        controller = player.AddComponent<PlayerController>();
+                        Debug.Log("  ✅ PlayerController added to character");
+                    }
+                    else
+                    {
+                        Debug.Log("  ✅ PlayerController already present on character");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning($"  ⚠️  Could not add PlayerController: {ex.Message}");
+                    Debug.Log("     Player will use physics-based movement from Rigidbody instead");
+                }
 
                 Debug.Log("  ✅ StarterAssets character ready with custom camera and controller");
                 return;
@@ -536,7 +551,16 @@ namespace Velinor.Editor
             cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
 
             cameraObj.AddComponent<AudioListener>();
-            player.AddComponent<PlayerController>();
+            
+            try
+            {
+                player.AddComponent<PlayerController>();
+                Debug.Log("  ✅ PlayerController added to fallback player");
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"  ⚠️  Could not add PlayerController to fallback: {ex.Message}");
+            }
 
             player.layer = LayerMask.NameToLayer("Default");
             Debug.Log("  ⚠️  Using fallback capsule player (preferred prefab not found)");
