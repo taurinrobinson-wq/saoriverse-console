@@ -396,13 +396,17 @@ namespace Velinor.Editor
                 player.transform.localPosition = Vector3.zero;
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
-                // SIMPLIFIED: Don't touch internal prefab structure
-                // Just disable scripts at top level only
-                ThirdPersonController tpc = player.GetComponent<ThirdPersonController>();
-                if (tpc != null)
+                // SIMPLIFIED: Use reflection to disable ThirdPersonController by name
+                // (avoids namespace import issues with StarterAssets)
+                MonoBehaviour[] components = player.GetComponents<MonoBehaviour>();
+                foreach (MonoBehaviour comp in components)
                 {
-                    tpc.enabled = false;
-                    Debug.Log("  ℹ️  Disabled ThirdPersonController on root");
+                    if (comp != null && comp.GetType().Name == "ThirdPersonController")
+                    {
+                        comp.enabled = false;
+                        Debug.Log("  ℹ️  Disabled ThirdPersonController via reflection");
+                        break;
+                    }
                 }
                 
                 // Add our camera as a sibling, not nested
