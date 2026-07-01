@@ -224,9 +224,17 @@ namespace Velinor.Editor
 
             BoxCollider collider = ground.AddComponent<BoxCollider>();
             collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
+            collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
 
             ground.layer = LayerMask.NameToLayer("Foreground");
             Debug.Log("  ✅ Ground (visible brown cube) at Y=-0.05 to Y=+0.05, 20×20m");
+            
+            // Verify collider was created properly
+            BoxCollider bc = ground.GetComponent<BoxCollider>();
+            if (bc != null)
+            {
+                Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
+            }
         }
 
         private static void CreateCenterWalkway(Transform parent)
@@ -247,9 +255,18 @@ namespace Velinor.Editor
 
             BoxCollider collider = walkway.AddComponent<BoxCollider>();
             collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
+            collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
 
             walkway.layer = LayerMask.NameToLayer("Foreground");
             Debug.Log("  ✅ Center walkway (visible stone cube): (-3,0,-2) to (3,0,15)");
+            
+            // Verify collider was created properly
+            BoxCollider bc = walkway.GetComponent<BoxCollider>();
+            if (bc != null)
+            {
+                Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
+            }
+        }
         }
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
@@ -477,12 +494,14 @@ namespace Velinor.Editor
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
+            collider.isTrigger = false; // IMPORTANT: Must not be a trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
             rb.mass = 1;
-            rb.linearDamping = 5;
+            rb.linearDamping = 0; // Changed from 5 to 0 for proper physics
             rb.angularDamping = 0.05f;
             rb.useGravity = true;
+            rb.isKinematic = false; // Ensure it's not kinematic
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
             GameObject cameraObj = new GameObject("CameraHolder");
@@ -550,12 +569,25 @@ namespace Velinor.Editor
 
         private static void SetupCharacterPhysics(GameObject character)
         {
+            Debug.Log("🔧 Setting up character physics...");
+            
+            // First, disable ALL scripts that might interfere (CharacterController, Animator scripts, etc.)
+            MonoBehaviour[] allScripts = character.GetComponentsInChildren<MonoBehaviour>();
+            foreach (MonoBehaviour script in allScripts)
+            {
+                if (script != null && script.GetType().Name != "PlayerController")
+                {
+                    script.enabled = false;
+                    Debug.Log($"  ℹ️  Disabled script: {script.GetType().Name}");
+                }
+            }
+            
             // Ensure character has a Rigidbody for gravity and collision
             Rigidbody rb = character.GetComponent<Rigidbody>();
             if (rb == null)
             {
                 rb = character.AddComponent<Rigidbody>();
-                Debug.Log("  ℹ️  Added Rigidbody to character");
+                Debug.Log("  ℹ️  Added Rigidbody to character root");
             }
             
             // Configure Rigidbody for player movement
@@ -563,23 +595,38 @@ namespace Velinor.Editor
             rb.linearDamping = 0; // No air friction
             rb.angularDamping = 0.05f;
             rb.useGravity = true;
+            rb.isKinematic = false; // MUST be false for gravity to work
             rb.constraints = RigidbodyConstraints.FreezeRotation; // Prevent unwanted rotation
+            Debug.Log($"  ✅ Rigidbody: mass={rb.mass}, useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             
-            // Check for colliders (StarterAssets should have them)
+            // Check for colliders and ENSURE NONE ARE TRIGGERS
             Collider[] colliders = character.GetComponentsInChildren<Collider>();
+            Debug.Log($"  ℹ️  Found {colliders.Length} collider(s) on character and children");
+            
             if (colliders.Length == 0)
             {
                 Debug.LogWarning("  ⚠️  No colliders found on character. Adding CapsuleCollider...");
                 CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
                 capsule.radius = 0.4f;
                 capsule.height = 1.8f;
+                capsule.isTrigger = false;
+                Debug.Log("  ✅ Added CapsuleCollider to character root");
             }
             else
             {
-                Debug.Log($"  ✅ Character has {colliders.Length} collider(s) from prefab");
+                // Make sure none are triggers
+                foreach (Collider col in colliders)
+                {
+                    if (col.isTrigger)
+                    {
+                        col.isTrigger = false;
+                        Debug.Log($"  ⚠️  Fixed trigger collider on {col.gameObject.name}: isTrigger=false");
+                    }
+                    Debug.Log($"    - {col.gameObject.name}: {col.GetType().Name} (trigger={col.isTrigger})");
+                }
             }
             
-            Debug.Log("  ✅ Character physics configured for gravity and collision");
+            Debug.Log("  ✅ Character physics fully configured");
         }
 
         private static void SetupAudio()
