@@ -7,20 +7,31 @@ using Velinor.Core;
 namespace Velinor.Editor
 {
     /// <summary>
-    /// SimplifiedMarketScene - Create a clean, textured marketplace without material loading issues
+    /// SimplifiedMarketScene - Creates a structured Velinor marketplace with spatial grid
     /// 
-    /// Approach: 
-    /// - Load mesh-only geometry from assets
-    /// - Apply simple, reliable materials
-    /// - Create proper colliders
-    /// - Position everything correctly for depth
+    /// Follows Velinor spatial rules:
+    /// - 1 Unity unit = 1 meter
+    /// - Ground plane at Y = 0
+    /// - Objects placed on coordinate grid (integer positions)
+    /// - Two side rows of market stalls + center walkway
+    /// - Camera positioned at spatial anchor (0, 5, -10) with 20° tilt
     /// </summary>
-    public class SimplifiedMarketScene
+    public class SimplifiedMarketScene : MonoBehaviour
     {
-        [MenuItem("Velinor/Scene Setup/Populate Simple Scene (No Materials Issues)")]
+        // Spatial anchors (Velinor marketplace grid)
+        private const float StallRowAX = -10f;  // Left side stalls
+        private const float StallRowBX = 10f;   // Right side stalls
+        private const float CenterWalkwayX = 0f;
+
+        private const float CameraPositionX = 0f;
+        private const float CameraPositionY = 5f;
+        private const float CameraPositionZ = -10f;
+        private const float CameraRotationX = 20f; // Tilted view
+
+        [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
         public static void PopulateSimpleScene()
         {
-            Debug.Log("\n🏗️  CREATING SIMPLIFIED MARKETPLACE SCENE\n");
+            Debug.Log("\n🏗️  CREATING STRUCTURED VELINOR MARKETPLACE\n");
 
             Scene activeScene = SceneManager.GetActiveScene();
             if (activeScene.name != "Marketplace")
@@ -45,32 +56,52 @@ namespace Velinor.Editor
             foreach (Transform child in charRoot)
                 Object.DestroyImmediate(child.gameObject);
 
-            // Step 1: Add simple background geometry (rocks)
-            Debug.Log("📦 Creating background rocks...");
-            AddSimpleBackgroundRocks(bgRoot);
+            Debug.Log("📐 SPATIAL GRID LAYOUT:");
+            Debug.Log("   MarketOrigin: (0, 0, 0)");
+            Debug.Log("   StallRowA: X=-10 (left side stalls at Z=0,5,10)");
+            Debug.Log("   StallRowB: X=+10 (right side stalls at Z=0,5,10)");
+            Debug.Log("   CenterWalkway: X=0 from Z=-2 to Z=15");
 
-            // Step 2: Add simple market structures (platforms, pillars)
-            Debug.Log("🏛️  Creating market structures...");
-            AddSimpleMarketStructures(mgRoot);
+            // Step 1: Ground plane
+            Debug.Log("🌍 Creating ground plane...");
+            CreateGroundPlane(fgRoot);
 
-            // Step 3: Add foreground ground and props
-            Debug.Log("🪨 Creating foreground elements...");
-            AddSimpleForegroundElements(fgRoot);
+            // Step 2: Walkway (center path)
+            Debug.Log("🛤️  Creating center walkway...");
+            CreateCenterWalkway(fgRoot);
 
-            // Step 4: Add player
+            // Step 3: Market stalls (Row A - left side)
+            Debug.Log("🏪 Creating Row A (left side stalls)...");
+            CreateStallRow(mgRoot, StallRowAX, "Stall_A");
+
+            // Step 4: Market stalls (Row B - right side)
+            Debug.Log("🏪 Creating Row B (right side stalls)...");
+            CreateStallRow(mgRoot, StallRowBX, "Stall_B");
+
+            // Step 5: Background rocks (parallax depth)
+            Debug.Log("🏔️  Creating background parallax layer...");
+            CreateBackgroundRocks(bgRoot);
+
+            // Step 6: Player at market origin
             Debug.Log("👤 Adding player...");
             AddPlayer(charRoot);
 
-            // Step 5: Verify camera
-            Debug.Log("📷 Configuring camera...");
-            VerifyAndFixCamera();
+            // Step 7: Main camera at anchor point
+            Debug.Log("📷 Configuring main camera...");
+            ConfigureMainCamera();
 
-            // Step 6: Setup audio/music
+            // Step 8: Audio
             Debug.Log("🎵 Setting up audio...");
             SetupAudio();
 
-            Debug.Log("✅ SIMPLIFIED MARKETPLACE READY!\n");
-            Debug.Log("🎮 Press Play to explore. Camera should render properly.\n");
+            Debug.Log("\n✅ STRUCTURED MARKETPLACE READY!\n");
+            Debug.Log("📐 Grid Summary:");
+            Debug.Log("   Row A (X=-10): Stalls at Z=0, Z=5, Z=10");
+            Debug.Log("   Row B (X=+10): Stalls at Z=0, Z=5, Z=10");
+            Debug.Log("   Walkway (X=0): Center path for navigation");
+            Debug.Log("   Player: Spawned at origin (0, 0.9, 0)");
+            Debug.Log("   Camera: At (0, 5, -10) looking down 20°\n");
+            Debug.Log("🎮 Press Play to explore\n");
 
             EditorSceneManager.MarkSceneDirty(activeScene);
         }
@@ -119,13 +150,87 @@ namespace Velinor.Editor
             return container.transform;
         }
 
-        private static void AddSimpleBackgroundRocks(Transform parent)
+        private static void CreateGroundPlane(Transform parent)
         {
-            // Create simple rocky mountains in background using cubes/capsules
-            string[] rockNames = { "BackRock_Left", "BackRock_Center", "BackRock_Right", "BackRock_FarLeft" };
-            Vector3[] positions = { new Vector3(-15, 8, 20), new Vector3(0, 10, 25), new Vector3(15, 7, 22), new Vector3(-20, 6, 28) };
-            Vector3[] scales = { new Vector3(8, 12, 6), new Vector3(10, 15, 8), new Vector3(7, 10, 5), new Vector3(6, 8, 4) };
-            Color[] colors = { new Color(0.4f, 0.4f, 0.35f), new Color(0.45f, 0.42f, 0.38f), new Color(0.42f, 0.41f, 0.36f), new Color(0.38f, 0.37f, 0.33f) };
+            GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            ground.name = "Ground";
+            ground.transform.parent = parent;
+            ground.transform.position = Vector3.zero; // Y=0 world ground level
+            ground.transform.localScale = new Vector3(10, 1, 10); // 20×20 meter plane
+
+            Object.DestroyImmediate(ground.GetComponent<Collider>());
+
+            MeshRenderer mr = ground.GetComponent<MeshRenderer>();
+            Material mat = new Material(Shader.Find("Standard"));
+            mat.color = new Color(0.4f, 0.35f, 0.3f); // Earth brown
+            mr.material = mat;
+
+            BoxCollider collider = ground.AddComponent<BoxCollider>();
+            collider.size = new Vector3(10, 0.1f, 10);
+
+            ground.layer = LayerMask.NameToLayer("Foreground");
+            Debug.Log("  ✅ Ground plane at Y=0, 20×20m");
+        }
+
+        private static void CreateCenterWalkway(Transform parent)
+        {
+            // Walkway from Z=-2 to Z=15, X=-3 to X=3, Y=0.01f (slightly above ground)
+            GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            walkway.name = "Walkway_Center";
+            walkway.transform.parent = parent;
+            walkway.transform.position = new Vector3(0, 0.01f, 6.5f); // Centered on Z-axis
+            walkway.transform.localScale = new Vector3(3, 1, 8.5f); // 6m wide × 17m long
+
+            Object.DestroyImmediate(walkway.GetComponent<Collider>());
+
+            MeshRenderer mr = walkway.GetComponent<MeshRenderer>();
+            Material mat = new Material(Shader.Find("Standard"));
+            mat.color = new Color(0.5f, 0.48f, 0.45f); // Stone path
+            mr.material = mat;
+
+            BoxCollider collider = walkway.AddComponent<BoxCollider>();
+            collider.size = new Vector3(3, 0.05f, 8.5f);
+
+            walkway.layer = LayerMask.NameToLayer("Foreground");
+            Debug.Log("  ✅ Center walkway: (-3,0,-2) to (3,0,15)");
+        }
+
+        private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
+        {
+            // Three stalls per row at Z=0, Z=5, Z=10
+            // All at Y=0.5 (half-height, snapped to grid)
+            float[] stallZPositions = { 0f, 5f, 10f };
+
+            for (int i = 0; i < stallZPositions.Length; i++)
+            {
+                GameObject stall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                stall.name = $"{stallPrefix}{i + 1}";
+                stall.transform.parent = parent;
+                stall.transform.position = new Vector3(stallX, 0.5f, stallZPositions[i]);
+                stall.transform.localScale = new Vector3(1, 1, 1); // Standard 1×1×1 stall (snapped to grid)
+
+                Object.DestroyImmediate(stall.GetComponent<Collider>());
+
+                MeshRenderer mr = stall.GetComponent<MeshRenderer>();
+                Material mat = new Material(Shader.Find("Standard"));
+                mat.color = new Color(0.65f, 0.6f, 0.5f); // Tan wood
+                mr.material = mat;
+
+                stall.AddComponent<BoxCollider>();
+                stall.layer = LayerMask.NameToLayer("Midground");
+            }
+
+            string sideLabel = stallX < 0 ? "left (X=-10)" : "right (X=+10)";
+            Debug.Log($"  ✅ Created 3 stalls ({sideLabel}) at Z=0, Z=5, Z=10");
+        }
+
+        private static void CreateBackgroundRocks(Transform parent)
+        {
+            // Distant parallax rocks at Z=25+ for depth perception
+            // Positioned to frame the marketplace without blocking view
+            string[] rockNames = { "Rock_BackLeft", "Rock_BackCenter", "Rock_BackRight" };
+            Vector3[] positions = { new Vector3(-8, 3, 25), new Vector3(0, 4, 28), new Vector3(8, 3, 26) };
+            Vector3[] scales = { new Vector3(2, 3, 2), new Vector3(2.5f, 3.5f, 2.5f), new Vector3(2, 3, 2) };
 
             for (int i = 0; i < rockNames.Length; i++)
             {
@@ -133,137 +238,40 @@ namespace Velinor.Editor
                 rock.name = rockNames[i];
                 rock.transform.parent = parent;
                 rock.transform.position = positions[i];
-                rock.transform.localScale = scales[i];
+                
+                // Enforce 3-unit maximum dimension rule
+                Vector3 scale = scales[i];
+                if (scale.x > 3 || scale.y > 3 || scale.z > 3)
+                {
+                    Debug.LogWarning($"  ⚠️  {rockNames[i]} scale {scale} exceeds 3m limit, clamping");
+                    scale.x = Mathf.Min(scale.x, 3);
+                    scale.y = Mathf.Min(scale.y, 3);
+                    scale.z = Mathf.Min(scale.z, 3);
+                }
+                rock.transform.localScale = scale;
 
-                // Remove collider, we'll add a simple one
                 Object.DestroyImmediate(rock.GetComponent<Collider>());
 
-                // Apply simple material
                 MeshRenderer mr = rock.GetComponent<MeshRenderer>();
                 Material mat = new Material(Shader.Find("Standard"));
-                mat.color = colors[i];
+                mat.color = new Color(0.4f, 0.4f, 0.35f); // Gray stone
                 mr.material = mat;
 
-                // Add simple collider
                 rock.AddComponent<BoxCollider>();
-
                 rock.layer = LayerMask.NameToLayer("Background");
-                Debug.Log($"  ✅ {rockNames[i]} created");
-            }
-        }
-
-        private static void AddSimpleMarketStructures(Transform parent)
-        {
-            // Create simple market platforms and pillars
-            
-            // Platforms (floors)
-            string[] platformNames = { "Platform_Left", "Platform_Right", "Platform_Center_A", "Platform_Center_B" };
-            Vector3[] platformPos = { new Vector3(-8, 0.5f, 5), new Vector3(8, 0.5f, 5), new Vector3(-5, 0.5f, 10), new Vector3(5, 0.5f, 10) };
-            Vector3[] platformScale = { new Vector3(6, 0.5f, 6), new Vector3(6, 0.5f, 6), new Vector3(5, 0.5f, 5), new Vector3(5, 0.5f, 5) };
-            Color platformColor = new Color(0.65f, 0.6f, 0.5f); // Tan stone
-
-            for (int i = 0; i < platformNames.Length; i++)
-            {
-                GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                platform.name = platformNames[i];
-                platform.transform.parent = parent;
-                platform.transform.position = platformPos[i];
-                platform.transform.localScale = platformScale[i];
-
-                Object.DestroyImmediate(platform.GetComponent<Collider>());
-
-                MeshRenderer mr = platform.GetComponent<MeshRenderer>();
-                Material mat = new Material(Shader.Find("Standard"));
-                mat.color = platformColor;
-                mr.material = mat;
-
-                platform.AddComponent<BoxCollider>();
-                platform.layer = LayerMask.NameToLayer("Midground");
             }
 
-            // Pillars (support structures)
-            string[] pillarNames = { "Pillar_Left", "Pillar_Right", "Pillar_Center" };
-            Vector3[] pillarPos = { new Vector3(-10, 1.5f, 8), new Vector3(10, 1.5f, 8), new Vector3(0, 1.5f, 12) };
-            Vector3[] pillarScale = { new Vector3(1, 3, 1), new Vector3(1, 3, 1), new Vector3(1.5f, 4, 1.5f) };
-            Color pillarColor = new Color(0.55f, 0.52f, 0.45f); // Darker stone
-
-            for (int i = 0; i < pillarNames.Length; i++)
-            {
-                GameObject pillar = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                pillar.name = pillarNames[i];
-                pillar.transform.parent = parent;
-                pillar.transform.position = pillarPos[i];
-                pillar.transform.localScale = pillarScale[i];
-
-                Object.DestroyImmediate(pillar.GetComponent<Collider>());
-
-                MeshRenderer mr = pillar.GetComponent<MeshRenderer>();
-                Material mat = new Material(Shader.Find("Standard"));
-                mat.color = pillarColor;
-                mr.material = mat;
-
-                pillar.AddComponent<BoxCollider>();
-                pillar.layer = LayerMask.NameToLayer("Midground");
-            }
-
-            Debug.Log($"  ✅ Created {platformNames.Length} platforms and {pillarNames.Length} pillars");
-        }
-
-        private static void AddSimpleForegroundElements(Transform parent)
-        {
-            // Ground plane - positioned at Y=0 as base level
-            GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            ground.name = "Ground";
-            ground.transform.parent = parent;
-            ground.transform.position = Vector3.zero; // At Y=0
-            ground.transform.localScale = new Vector3(15, 1, 15);
-
-            Object.DestroyImmediate(ground.GetComponent<Collider>());
-
-            MeshRenderer mr = ground.GetComponent<MeshRenderer>();
-            Material groundMat = new Material(Shader.Find("Standard"));
-            groundMat.color = new Color(0.6f, 0.55f, 0.5f); // Brown-tan
-            mr.material = groundMat;
-
-            ground.AddComponent<BoxCollider>();
-            ground.layer = LayerMask.NameToLayer("Foreground");
-
-            // Small rocks scattered
-            string[] rockNames = { "Scatter_Rock_1", "Scatter_Rock_2", "Scatter_Rock_3", "Scatter_Rock_4" };
-            Vector3[] rockPos = { new Vector3(-5, 0.3f, -1), new Vector3(6, 0.3f, 0), new Vector3(-3, 0.3f, 1), new Vector3(4, 0.3f, -2) };
-            Vector3[] rockScale = { new Vector3(1.5f, 1, 1), new Vector3(1.2f, 0.9f, 1), new Vector3(1, 1.2f, 0.8f), new Vector3(1.3f, 0.8f, 1.1f) };
-            Color rockColor = new Color(0.5f, 0.48f, 0.45f);
-
-            for (int i = 0; i < rockNames.Length; i++)
-            {
-                GameObject rock = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                rock.name = rockNames[i];
-                rock.transform.parent = parent;
-                rock.transform.position = rockPos[i];
-                rock.transform.localScale = rockScale[i];
-
-                Object.DestroyImmediate(rock.GetComponent<Collider>());
-
-                MeshRenderer rockMr = rock.GetComponent<MeshRenderer>();
-                Material rockMat = new Material(Shader.Find("Standard"));
-                rockMat.color = rockColor;
-                rockMr.material = rockMat;
-
-                rock.AddComponent<BoxCollider>();
-                rock.layer = LayerMask.NameToLayer("Foreground");
-            }
-
-            Debug.Log($"  ✅ Ground plane and {rockNames.Length} scatter rocks created");
+            Debug.Log("  ✅ Background parallax rocks at Z=25+ (depth layer)");
         }
 
         private static void AddPlayer(Transform parent)
         {
+            // Player spawns at market origin on the ground
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
-            // Position player ON the ground at Y=0, centered in scene
-            player.transform.position = new Vector3(0, 1, 0);
+            player.transform.position = new Vector3(0, 0.9f, 0); // Y=0.9 (standing on ground, 1.8m height)
 
-            // Visual representation - green capsule
+            // Visual: Green capsule (character height 1.8m)
             GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.transform.parent = player.transform;
             visual.transform.localPosition = Vector3.zero;
@@ -278,8 +286,8 @@ namespace Velinor.Editor
 
             // Physics
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
-            collider.radius = 0.5f;
-            collider.height = 2f;
+            collider.radius = 0.4f;
+            collider.height = 1.8f; // Standard character height
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
             rb.mass = 1;
@@ -288,91 +296,72 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-            // Camera - positioned above player's head, looking forward
+            // Camera (eye-level)
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
-            cameraObj.transform.localPosition = new Vector3(0, 0.6f, 0);
-            cameraObj.transform.localRotation = Quaternion.identity;
+            cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0); // Eyes at 1.8m height
 
             Camera cam = cameraObj.AddComponent<Camera>();
             cam.orthographic = true;
-            cam.orthographicSize = 8; // Increased to see more of the scene
-            cam.nearClipPlane = -100; // Allow viewing behind camera
-            cam.farClipPlane = 100;   // Allow viewing far ahead
+            cam.orthographicSize = 6;
+            cam.nearClipPlane = -100;
+            cam.farClipPlane = 100;
             cam.cullingMask = -1;
             cam.clearFlags = CameraClearFlags.SolidColor;
-            cam.backgroundColor = new Color(0.08f, 0.08f, 0.08f, 1f);
+            cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
 
-            AudioListener listener = cameraObj.AddComponent<AudioListener>();
-
-            // Movement controller
+            cameraObj.AddComponent<AudioListener>();
             player.AddComponent<PlayerController>();
 
             player.layer = LayerMask.NameToLayer("Default");
-            Debug.Log("  ✅ Player created with built-in camera (standing on ground at Y=0)");
+            Debug.Log("  ✅ Player spawned at market origin (0, 0.9, 0) - height 1.8m");
         }
 
-        private static void VerifyAndFixCamera()
+        private static void ConfigureMainCamera()
         {
-            // Get the player's camera
-            PlayerController pc = Object.FindAnyObjectByType<PlayerController>();
-            if (pc != null)
-            {
-                Camera cam = pc.GetComponentInChildren<Camera>();
-                if (cam != null)
-                {
-                    cam.orthographic = true;
-                    cam.orthographicSize = 5;
-                    cam.cullingMask = -1;
-                    cam.clearFlags = CameraClearFlags.SolidColor;
-                    cam.backgroundColor = new Color(0.08f, 0.08f, 0.08f, 1f);
-                    Debug.Log("  ✅ Camera verified and configured");
-                    return;
-                }
-            }
+            // Create main camera at fixed spatial anchor
+            GameObject cameraGO = new GameObject("MainCamera");
+            cameraGO.transform.position = new Vector3(CameraPositionX, CameraPositionY, CameraPositionZ);
+            cameraGO.transform.rotation = Quaternion.Euler(CameraRotationX, 0, 0); // 20° tilt for overview
 
-            // Fallback: find main camera
-            Camera mainCam = Camera.main;
-            if (mainCam == null)
-            {
-                mainCam = Object.FindAnyObjectByType<Camera>();
-            }
+            Camera cam = cameraGO.AddComponent<Camera>();
+            cam.orthographic = true;
+            cam.orthographicSize = 6;
+            cam.nearClipPlane = -100;
+            cam.farClipPlane = 100;
+            cam.clearFlags = CameraClearFlags.SolidColor;
+            cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
+            cam.tag = "MainCamera";
 
-            if (mainCam != null)
-            {
-                mainCam.orthographic = true;
-                mainCam.orthographicSize = 5;
-                mainCam.cullingMask = -1;
-                mainCam.clearFlags = CameraClearFlags.SolidColor;
-                mainCam.backgroundColor = new Color(0.08f, 0.08f, 0.08f, 1f);
-                Debug.Log("  ✅ Main camera configured");
-            }
+            cameraGO.AddComponent<AudioListener>();
+
+            Debug.Log($"  ✅ Main camera at ({CameraPositionX}, {CameraPositionY}, {CameraPositionZ})");
+            Debug.Log($"     Rotation: ({CameraRotationX}°, 0°, 0°) tilted down");
+            Debug.Log($"     Orthographic size: 6");
         }
 
         private static void SetupAudio()
         {
-            // Try to find or create AudioManager
+            // Find or create AudioManager
             AudioManager audioManager = Object.FindAnyObjectByType<AudioManager>();
             if (audioManager == null)
             {
-                // Create AudioManager GameObject if missing
                 GameObject audioManagerGO = new GameObject("AudioManager");
                 audioManager = audioManagerGO.AddComponent<AudioManager>();
                 Debug.Log("  ✅ Created AudioManager");
             }
 
-            // Try to find or create MarketSceneAudioSetup
+            // Find or create MarketSceneAudioSetup
             MarketSceneAudioSetup sceneAudio = Object.FindAnyObjectByType<MarketSceneAudioSetup>();
             if (sceneAudio == null)
             {
-                // Create MarketSceneAudioSetup GameObject if missing
                 GameObject sceneAudioGO = new GameObject("MarketSceneAudio");
                 sceneAudio = sceneAudioGO.AddComponent<MarketSceneAudioSetup>();
-                Debug.Log("  ✅ Created MarketSceneAudioSetup");
+                Debug.Log("  ✅ Created MarketSceneAudioSetup (Glass Horizon will loop)");
             }
             else
             {
-                Debug.Log("  ✅ Audio components found in scene");
+                Debug.Log("  ✅ Audio system ready");
             }
         }
     }
