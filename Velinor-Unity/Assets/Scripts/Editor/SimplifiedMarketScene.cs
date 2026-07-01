@@ -440,31 +440,31 @@ namespace Velinor.Editor
                 player.transform.position = new Vector3(0, 0.9f, 0); // Set to eye level (0.9m above ground)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
-                // Remove ANY missing script components (these cause "referenced script missing" errors)
-                // Use GetComponents to check each one
-                Component[] allComponents = player.GetComponents<Component>();
-                foreach (Component comp in allComponents)
+                // AGGRESSIVE cleanup: Destroy ALL MonoBehaviour scripts except Animator
+                // This removes any broken/missing script references
+                MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>();
+                foreach (MonoBehaviour mb in allMonoBehaviours)
                 {
-                    if (comp == null)
+                    if (mb != null)
                     {
-                        Debug.LogWarning("  🗑️  Found null component (missing script), removing...");
-                        Object.DestroyImmediate(comp);
+                        string scriptName = mb.GetType().Name;
+                        // Keep ONLY Animator, destroy everything else for now
+                        if (!scriptName.Contains("Animator"))
+                        {
+                            Object.DestroyImmediate(mb);
+                            Debug.Log($"  🗑️  Destroyed {scriptName} (will re-add movement later)");
+                        }
                     }
                 }
                 
-                // Also check children for missing scripts
-                Component[] childComponents = player.GetComponentsInChildren<Component>();
-                int missingCount = 0;
-                foreach (Component comp in childComponents)
+                // Remove any null components (broken scripts)
+                Component[] rootComponents = player.GetComponents<Component>();
+                foreach (Component comp in rootComponents)
                 {
                     if (comp == null)
                     {
-                        missingCount++;
+                        Object.DestroyImmediate(comp);
                     }
-                }
-                if (missingCount > 0)
-                {
-                    Debug.LogWarning($"  ⚠️  Found {missingCount} missing script components in children");
                 }
                 
                 // SIMPLIFIED: Use reflection to disable ThirdPersonController by name
@@ -651,24 +651,11 @@ namespace Velinor.Editor
             Debug.Log("🔧 Setting up character physics...");
             Debug.Log($"  Character position: {character.transform.position}");
             
-            // CRITICAL: Destroy ThirdPersonController script FIRST (before removing CharacterController)
-            // because ThirdPersonController has a dependency on CharacterController
-            MonoBehaviour[] allScripts = character.GetComponentsInChildren<MonoBehaviour>();
-            foreach (MonoBehaviour script in allScripts)
-            {
-                if (script != null && script.GetType().Name == "ThirdPersonController")
-                {
-                    Debug.Log($"  🗑️  Destroying ThirdPersonController script (it depends on CharacterController)");
-                    Object.DestroyImmediate(script);
-                }
-            }
-            
-            // NOW we can remove the CharacterController (and other colliders)
+            // Remove any remaining colliders (should be cleaned up already, but be safe)
             Collider[] existingColliders = character.GetComponentsInChildren<Collider>();
-            Debug.Log($"  🗑️  Found {existingColliders.Length} existing collider(s), removing all...");
+            Debug.Log($"  Cleaning up {existingColliders.Length} collider(s)...");
             foreach (Collider col in existingColliders)
             {
-                Debug.Log($"      - Removing {col.gameObject.name} ({col.GetType().Name})");
                 Object.DestroyImmediate(col);
             }
             
@@ -689,6 +676,28 @@ namespace Velinor.Editor
                         // KEEP Animator enabled for animations
                         Debug.Log($"    - Keeping {scriptName} enabled (animation)");
                     }
+                    else if (scriptName == "SimpleCharacterMovement")
+                    {
+                        // KEEP our movement script enabled
+                        script.enabled = true;
+                    }
+                    else if (scriptName != "Transform" && scriptName != "Rigidbody" && scriptName != "CapsuleCollider")
+                    {
+                        // Disable all other scripts to prevent conflicts
+                        script.enabled = false;
+                        Debug.Log($"    - Disabled {scriptName} (unknown script)");
+                    }
+                }
+            }
+            
+            // Final cleanup pass: Remove any null (missing script) components
+            Component[] finalCheck = character.GetComponents<Component>();
+            foreach (Component comp in finalCheck)
+            {
+                if (comp == null)
+                {
+                    Debug.LogWarning("    - Removing null component (missing script reference)");
+                    Object.DestroyImmediate(comp);
                 }
             }
             
