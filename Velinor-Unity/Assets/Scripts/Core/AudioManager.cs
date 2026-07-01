@@ -202,7 +202,7 @@ namespace Velinor.Core
             Debug.Log($"  Time.timeScale: {Time.timeScale}");
             
             // Check for AudioListener
-            AudioListener[] listeners = FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
+            AudioListener[] listeners = FindObjectsByType<AudioListener>();
             Debug.Log($"  AudioListeners in scene: {listeners.Length}");
             foreach (var listener in listeners)
                 Debug.Log($"    - {listener.gameObject.name} (enabled: {listener.enabled})");
