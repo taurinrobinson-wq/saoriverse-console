@@ -227,16 +227,22 @@ namespace Velinor.Editor
             collider.center = Vector3.zero; // CRITICAL: Center at 0,0,0 of this cube
             collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
 
+            // Add kinematic Rigidbody for proper physics (prevents dynamic objects from tunneling through)
+            Rigidbody groundRb = ground.AddComponent<Rigidbody>();
+            groundRb.isKinematic = true;
+            groundRb.useGravity = false;
+
             ground.layer = LayerMask.NameToLayer("Foreground");
             Debug.Log("  ✅ Ground (visible brown cube) at Y=-0.05 to Y=+0.05, 20×20m");
             
-            // Verify collider was created properly
+            // Verify collider and rigidbody were created properly
             BoxCollider bc = ground.GetComponent<BoxCollider>();
             if (bc != null)
             {
                 Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
                 Debug.Log($"    - Ground Position: {ground.transform.position}, Scale: {ground.transform.localScale}");
                 Debug.Log($"    - Collider bounds: min={bc.bounds.min}, max={bc.bounds.max}");
+                Debug.Log($"    - Rigidbody: isKinematic={groundRb.isKinematic}, useGravity={groundRb.useGravity}");
             }
         }
 
@@ -260,6 +266,11 @@ namespace Velinor.Editor
             collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
             collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
 
+            // Add kinematic Rigidbody for proper physics
+            Rigidbody walkwayRb = walkway.AddComponent<Rigidbody>();
+            walkwayRb.isKinematic = true;
+            walkwayRb.useGravity = false;
+
             walkway.layer = LayerMask.NameToLayer("Foreground");
             Debug.Log("  ✅ Center walkway (visible stone cube): (-3,0,-2) to (3,0,15)");
             
@@ -268,6 +279,7 @@ namespace Velinor.Editor
             if (bc != null)
             {
                 Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
+                Debug.Log($"    - Rigidbody: isKinematic={walkwayRb.isKinematic}, useGravity={walkwayRb.useGravity}");
             }
         }
 
@@ -522,7 +534,7 @@ namespace Velinor.Editor
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
-            collider.center = new Vector3(0, -0.4f, 0); // Position so capsule bottom is near ground
+            collider.center = new Vector3(0, 0, 0); // Capsule center at character root = ground contact
             collider.isTrigger = false; // IMPORTANT: Must not be a trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
@@ -536,6 +548,8 @@ namespace Velinor.Editor
             Debug.Log($"  ✅ Fallback player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             Debug.Log($"    - Player position: {player.transform.position}");
             Debug.Log($"    - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
+            Debug.Log($"    - Capsule bottom in world space: Y={0.9 - 0.9}=0 (touches ground)");
+            Debug.Log($"    - Capsule top in world space: Y={0.9 + 0.9}=1.8");
 
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
@@ -652,11 +666,12 @@ namespace Velinor.Editor
                 CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
                 capsule.radius = 0.4f;
                 capsule.height = 1.8f;
-                capsule.center = new Vector3(0, -0.4f, 0); // Position capsule so bottom touches ground at Y=0
+                capsule.center = new Vector3(0, 0, 0); // Capsule center at character root height = ground contact
                 capsule.isTrigger = false;
                 Debug.Log("  ✅ Added CapsuleCollider to character root");
                 Debug.Log($"    - Position: center={capsule.center}, radius={capsule.radius}, height={capsule.height}");
-                Debug.Log($"    - Capsule extends from Y={-0.4 - 0.9} to Y={-0.4 + 0.9} (relative to root)");
+                Debug.Log($"    - Capsule extends from Y={-0.9} to Y={0.9} (relative to character root at Y=0.9)");
+                Debug.Log($"    - In world space: bottom at Y={0.9 - 0.9}=0 (ground level), top at Y={0.9 + 0.9}=1.8");
             }
             else
             {
