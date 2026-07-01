@@ -437,6 +437,7 @@ namespace Velinor.Editor
                 
                 player.name = "Player";
                 player.transform.localPosition = Vector3.zero;
+                player.transform.position = new Vector3(0, 0.9f, 0); // Set to eye level (0.9m above ground)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
                 // Remove ANY missing script components (these cause "referenced script missing" errors)
@@ -657,24 +658,34 @@ namespace Velinor.Editor
             Debug.Log("🔧 Setting up character physics...");
             Debug.Log($"  Character position: {character.transform.position}");
             
-            // First, disable ALL scripts that might interfere (CharacterController, Animator scripts, etc.)
+            // CRITICAL: Destroy ThirdPersonController script FIRST (before removing CharacterController)
+            // because ThirdPersonController has a dependency on CharacterController
             MonoBehaviour[] allScripts = character.GetComponentsInChildren<MonoBehaviour>();
             foreach (MonoBehaviour script in allScripts)
             {
-                if (script != null && script.GetType().Name != "PlayerController")
+                if (script != null && script.GetType().Name == "ThirdPersonController")
                 {
-                    script.enabled = false;
+                    Debug.Log($"  🗑️  Destroying ThirdPersonController script (it depends on CharacterController)");
+                    Object.DestroyImmediate(script);
                 }
             }
             
-            // CRITICAL: Remove ALL existing colliders (child or root) - StarterAssets has trigger colliders on body parts
-            // These interfere with physics collision
+            // NOW we can remove the CharacterController (and other colliders)
             Collider[] existingColliders = character.GetComponentsInChildren<Collider>();
             Debug.Log($"  🗑️  Found {existingColliders.Length} existing collider(s), removing all...");
             foreach (Collider col in existingColliders)
             {
-                Debug.Log($"      - Removing {col.gameObject.name} ({col.GetType().Name}, trigger={col.isTrigger})");
+                Debug.Log($"      - Removing {col.gameObject.name} ({col.GetType().Name})");
                 Object.DestroyImmediate(col);
+            }
+            
+            // Disable any remaining scripts that might interfere
+            foreach (MonoBehaviour script in character.GetComponentsInChildren<MonoBehaviour>())
+            {
+                if (script != null)
+                {
+                    script.enabled = false;
+                }
             }
             
             // Ensure character has a Rigidbody for gravity and collision
@@ -686,19 +697,19 @@ namespace Velinor.Editor
             
             // Configure Rigidbody for player movement
             rb.mass = 1;
-            rb.linearDamping = 0; // No air friction
+            rb.linearDamping = 0;
             rb.angularDamping = 0.05f;
             rb.useGravity = true;
-            rb.isKinematic = false; // MUST be false for gravity to work
-            rb.constraints = RigidbodyConstraints.FreezeRotation; // Prevent unwanted rotation
+            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
             Debug.Log($"  ✅ Rigidbody configured: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             
             // Create ONE clean capsule collider for physics collision
             CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
             capsule.radius = 0.4f;
             capsule.height = 1.8f;
-            capsule.center = new Vector3(0, 0, 0); // Centered at character root
-            capsule.isTrigger = false; // CRITICAL: Must NOT be trigger
+            capsule.center = new Vector3(0, 0, 0);
+            capsule.isTrigger = false;
             Debug.Log($"  ✅ CapsuleCollider created:");
             Debug.Log($"      - Center: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
             Debug.Log($"      - isTrigger: {capsule.isTrigger}");
