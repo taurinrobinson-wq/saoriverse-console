@@ -472,7 +472,7 @@ namespace Velinor.Editor
                     foreach (Component comp in toDestroy)
                     {
                         Object.DestroyImmediate(comp, allowDestroyingAssets: true);
-                        Debug.LogWarning($"  🗑️  Removed null component (missing script) on {t.gameObject.name}");
+                        Debug.Log($"  🗑️  Removed null component (missing script) on {t.gameObject.name}");
                     }
                 }
                 
@@ -674,8 +674,7 @@ namespace Velinor.Editor
             MeshRenderer[] renderers = character.GetComponentsInChildren<MeshRenderer>(includeInactive: true);
             if (renderers.Length == 0)
             {
-                Debug.LogWarning("  ⚠️  No MeshRenderers found on character model (may be using SkinnedMeshRenderer instead)");
-                // Try SkinnedMeshRenderer as fallback
+                // Try SkinnedMeshRenderer as fallback (humanoid characters use this)
                 SkinnedMeshRenderer[] skinnedRenderers = character.GetComponentsInChildren<SkinnedMeshRenderer>(includeInactive: true);
                 if (skinnedRenderers.Length > 0)
                 {
@@ -687,7 +686,10 @@ namespace Velinor.Editor
                         renderer.sharedMaterials = mats;
                     }
                     Debug.Log($"  ✅ Applied materials to {skinnedRenderers.Length} SkinnedMeshRenderers on character");
+                    return;
                 }
+                // Only warn if BOTH MeshRenderer and SkinnedMeshRenderer not found
+                Debug.LogWarning("  ⚠️  No MeshRenderers or SkinnedMeshRenderers found on character model");
                 return;
             }
             
