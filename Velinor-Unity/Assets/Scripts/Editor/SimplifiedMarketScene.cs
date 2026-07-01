@@ -503,6 +503,11 @@ namespace Velinor.Editor
                 // Set up physics for proper collision with ground
                 SetupCharacterPhysics(player);
                 
+                // Add simple movement script for WASD + Mouse input
+                SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
+                movement.mainCamera = cam;
+                Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
+                
                 // Log character collider info after setup for debugging
                 Collider[] finalColliders = player.GetComponentsInChildren<Collider>();
                 Debug.Log($"  📊 COLLIDER DEBUG INFO:");
@@ -514,23 +519,7 @@ namespace Velinor.Editor
                     Debug.Log($"    - Collider on {c.gameObject.name}: {c.GetType().Name}, bounds={c.bounds}, trigger={c.isTrigger}");
                 }
 
-                // Add our controller to player (with error handling)
-                try
-                {
-                    PlayerController controller = player.GetComponent<PlayerController>();
-                    if (controller == null)
-                    {
-                        // DON'T add PlayerController here - it causes "referenced script missing" errors
-                        // Character works fine with physics-based movement from Rigidbody
-                        Debug.Log("  ℹ️  Skipping PlayerController (not needed - using physics-based movement)");
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogWarning($"  ⚠️  PlayerController issue: {ex.Message}");
-                }
-
-                Debug.Log("  ✅ StarterAssets character ready with custom camera and controller");
+                Debug.Log("  ✅ StarterAssets character ready with movement and camera");
                 return;
             }
             catch (System.Exception ex)
@@ -604,10 +593,13 @@ namespace Velinor.Editor
 
             cameraObj.AddComponent<AudioListener>();
             
-            Debug.Log("  ℹ️  Fallback player ready (physics-based, no input controller needed)");
+            // Add simple movement script for WASD + Mouse input
+            SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
+            movement.mainCamera = cam;
+            Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
 
             player.layer = LayerMask.NameToLayer("Default");
-            Debug.Log("  ⚠️  Using fallback capsule player (preferred prefab not found)");
+            Debug.Log("  ⚠️  Using fallback capsule player (with physics and input control)");
         }
 
         private static void FixMaterialsWithStandard(GameObject obj, Color color)
@@ -702,7 +694,12 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
+            
+            // Give character a small downward velocity to help settle on ground
+            rb.linearVelocity = new Vector3(0, -0.1f, 0);
+            
             Debug.Log($"  ✅ Rigidbody configured: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
+            Debug.Log($"      - Initial downward velocity applied to settle character on ground");
             
             // Create ONE clean capsule collider for physics collision
             CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
