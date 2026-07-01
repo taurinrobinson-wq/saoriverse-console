@@ -14,7 +14,7 @@ namespace Velinor.Core
         [SerializeField] private float groundDrag = 5f;
 
         [Header("Ground Check")]
-        [SerializeField] private float groundCheckDistance = 0.1f;
+        [SerializeField] private float groundCheckDistance = 1.5f;
 
         [Header("Camera")]
         public Camera mainCamera;

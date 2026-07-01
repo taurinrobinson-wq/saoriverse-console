@@ -223,8 +223,8 @@ namespace Velinor.Editor
             GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
             ground.name = "Ground";
             ground.transform.parent = parent;
-            ground.transform.position = new Vector3(0, -0.05f, 0); // Slightly below Y=0
-            ground.transform.localScale = new Vector3(20, 0.1f, 20); // 20×20m, 0.1m thick
+            ground.transform.position = new Vector3(0, 0f, 0); // At Y=0 (ground level)
+            ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30×30m, 0.2m thick (larger + thicker for stability)
 
             Object.DestroyImmediate(ground.GetComponent<Collider>());
 
@@ -242,9 +242,11 @@ namespace Velinor.Editor
             Rigidbody groundRb = ground.AddComponent<Rigidbody>();
             groundRb.isKinematic = true;
             groundRb.useGravity = false;
+            groundRb.linearDamping = 0;
+            groundRb.angularDamping = 0;
 
             ground.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Ground (visible brown cube) at Y=-0.05 to Y=+0.05, 20×20m");
+            Debug.Log("  ✅ Ground (visible brown cube) at Y=0, 30×30m with physics");
             
             // Verify collider and rigidbody were created properly
             BoxCollider bc = ground.GetComponent<BoxCollider>();
@@ -263,8 +265,8 @@ namespace Velinor.Editor
             GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Cube);
             walkway.name = "Walkway_Center";
             walkway.transform.parent = parent;
-            walkway.transform.position = new Vector3(0, 0.01f, 6.5f); // Centered on Z-axis, slightly above ground
-            walkway.transform.localScale = new Vector3(6, 0.05f, 17); // 6m wide × 17m long × 0.05m thick
+            walkway.transform.position = new Vector3(0, 0f, 6.5f); // Centered on Z-axis, at ground level
+            walkway.transform.localScale = new Vector3(6, 0.2f, 17); // 6m wide × 17m long × 0.2m thick (match ground thickness)
 
             Object.DestroyImmediate(walkway.GetComponent<Collider>());
 
@@ -277,13 +279,15 @@ namespace Velinor.Editor
             collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
             collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
 
-            // Add kinematic Rigidbody for proper physics
+            // Add kinematic Rigidbody for proper physics (IDENTICAL to ground for consistency)
             Rigidbody walkwayRb = walkway.AddComponent<Rigidbody>();
             walkwayRb.isKinematic = true;
             walkwayRb.useGravity = false;
+            walkwayRb.linearDamping = 0;
+            walkwayRb.angularDamping = 0;
 
             walkway.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Center walkway (visible stone cube): (-3,0,-2) to (3,0,15)");
+            Debug.Log("  ✅ Center walkway (visible stone cube): (-3,0,-2) to (3,0,15) - PHYSICS SYNCHRONIZED WITH GROUND");
             
             // Verify collider was created properly
             BoxCollider bc = walkway.GetComponent<BoxCollider>();
@@ -314,12 +318,12 @@ namespace Velinor.Editor
                     GameObject stall = PrefabUtility.InstantiatePrefab(stallPrefab, parent) as GameObject;
                     stall.name = $"{stallPrefix}_{i + 1}";
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
-                    stall.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    stall.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f); // INCREASED from 0.5 to make stalls thicker/more visible
                     
                     // Fix materials with Standard shader (beige stone color)
                     FixMaterialsWithStandard(stall, new Color(0.8f, 0.75f, 0.65f));
                     
-                    Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]})");
+                    Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - 1.5x scale");
                 }
                 else
                 {
@@ -327,8 +331,8 @@ namespace Velinor.Editor
                     GameObject stall = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     stall.name = $"{stallPrefix}_{i + 1}_Fallback";
                     stall.transform.parent = parent;
-                    stall.transform.position = new Vector3(stallX, 0.5f, stallZPositions[i]);
-                    stall.transform.localScale = new Vector3(1, 1, 1);
+                    stall.transform.position = new Vector3(stallX, 0.75f, stallZPositions[i]); // Raised to sit on ground properly
+                    stall.transform.localScale = new Vector3(2, 1.5f, 1.5f); // Thick cube: 2m wide, 1.5m tall and deep
 
                     Object.DestroyImmediate(stall.GetComponent<Collider>());
                     MeshRenderer mr = stall.GetComponent<MeshRenderer>();
@@ -338,12 +342,12 @@ namespace Velinor.Editor
 
                     stall.AddComponent<BoxCollider>();
                     stall.layer = LayerMask.NameToLayer("Midground");
-                    Debug.LogWarning($"  ⚠️  EmbersStorm prefab not found, using fallback cube");
+                    Debug.LogWarning($"  ⚠️  EmbersStorm prefab not found, using fallback cube (2×1.5×1.5m)");
                 }
             }
 
             string sideLabel = stallX < 0 ? "left (X=-10)" : "right (X=+10)";
-            Debug.Log($"  ✅ Stall row ({sideLabel}) created at Z=0, Z=5, Z=10");
+            Debug.Log($"  ✅ Stall row ({sideLabel}) created at Z=0, Z=5, Z=10 - THICKER + INTEGRATED WITH GROUND");
         }
 
         private static void CreateBackgroundRocks(Transform parent)
@@ -352,7 +356,8 @@ namespace Velinor.Editor
             string[] rockPrefabs = { ROCK_PREFAB_PATH_1, ROCK_PREFAB_PATH_2, ROCK_PREFAB_PATH_3 };
 
             string[] rockNames = { "Rock_BackLeft", "Rock_BackCenter", "Rock_BackRight" };
-            Vector3[] basePositions = { new Vector3(-8, 0, 20), new Vector3(0, 0, 25), new Vector3(8, 0, 22) };
+            // REPOSITIONED: Closer and more visible in scene (Z=12-15 instead of Z=20-25)
+            Vector3[] basePositions = { new Vector3(-12, 0, 12), new Vector3(0, 0, 15), new Vector3(12, 0, 13) };
 
             for (int i = 0; i < rockNames.Length; i++)
             {
@@ -363,12 +368,12 @@ namespace Velinor.Editor
                     GameObject rock = PrefabUtility.InstantiatePrefab(rockPrefab, parent) as GameObject;
                     rock.name = rockNames[i];
                     rock.transform.position = basePositions[i];
-                    rock.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                    rock.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f); // INCREASED for better visibility
                     
                     // Fix materials with Standard shader (gray-brown rock color)
                     FixMaterialsWithStandard(rock, new Color(0.55f, 0.52f, 0.48f));
                     rock.layer = LayerMask.NameToLayer("Background");
-                    Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]}");
+                    Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]} - 2.5x scale");
                 }
                 else
                 {
@@ -377,7 +382,7 @@ namespace Velinor.Editor
                     rock.name = $"{rockNames[i]}_Fallback";
                     rock.transform.parent = parent;
                     rock.transform.position = basePositions[i];
-                    rock.transform.localScale = new Vector3(2, 2, 2);
+                    rock.transform.localScale = new Vector3(3, 3, 3); // LARGER fallback cubes
 
                     Object.DestroyImmediate(rock.GetComponent<Collider>());
                     MeshRenderer mr = rock.GetComponent<MeshRenderer>();
@@ -387,11 +392,11 @@ namespace Velinor.Editor
 
                     rock.AddComponent<BoxCollider>();
                     rock.layer = LayerMask.NameToLayer("Background");
-                    Debug.LogWarning($"  ⚠️  Kyle's Rock Pack prefab not found at {rockPrefabs[i]}, using fallback cube");
+                    Debug.LogWarning($"  ⚠️  Kyle's Rock Pack prefab not found at {rockPrefabs[i]}, using fallback cube (3×3×3m)");
                 }
             }
 
-            Debug.Log("  ✅ Background terrain loaded at distance (parallax depth)");
+            Debug.Log("  ✅ Background terrain repositioned closer to scene - now visible from marketplace");
         }
 
         private static void AddPlayer(Transform parent)
