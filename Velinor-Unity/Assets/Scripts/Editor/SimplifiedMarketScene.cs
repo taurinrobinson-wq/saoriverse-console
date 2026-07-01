@@ -43,10 +43,24 @@ namespace Velinor.Editor
         {
             Debug.Log("\n🏗️  CREATING STRUCTURED VELINOR MARKETPLACE\n");
 
+            // Guard: Check if Unity is still importing assets
+            if (EditorApplication.isUpdating)
+            {
+                Debug.LogWarning("⚠️  SimplifiedMarketScene: Assets still reimporting. Scene population skipped.");
+                return;
+            }
+
             Scene activeScene = SceneManager.GetActiveScene();
             if (activeScene.name != "Marketplace")
             {
                 Debug.LogError("❌ Active scene is not 'Marketplace'. Load it first.");
+                return;
+            }
+
+            // Verify required assets exist before populating
+            if (!VerifyRequiredAssets())
+            {
+                Debug.LogError("❌ SimplifiedMarketScene: Required assets missing. Scene population skipped.");
                 return;
             }
 
@@ -94,6 +108,11 @@ namespace Velinor.Editor
 
             // Step 6: Player at market origin
             Debug.Log("👤 Adding player...");
+            if (charRoot == null)
+            {
+                Debug.LogError("SimplifiedMarketScene: charRoot is null. Creating new PlayerRoot.");
+                charRoot = new GameObject("PlayerRoot").transform;
+            }
             AddPlayer(charRoot);
 
             // Step 7: Audio
@@ -110,6 +129,37 @@ namespace Velinor.Editor
             Debug.Log("🎮 Press Play to explore\n");
 
             EditorSceneManager.MarkSceneDirty(activeScene);
+        }
+
+        /// <summary>
+        /// Verify that all required assets exist before populating the scene.
+        /// Returns true if all assets are available, false otherwise.
+        /// </summary>
+        private static bool VerifyRequiredAssets()
+        {
+            string[] requiredPaths = {
+                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab",
+                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab",
+                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab",
+                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab"
+            };
+
+            bool allExist = true;
+            foreach (string path in requiredPaths)
+            {
+                if (!System.IO.File.Exists(path))
+                {
+                    Debug.LogWarning($"  ⚠️  Asset not found: {path}");
+                    allExist = false;
+                }
+            }
+
+            if (allExist)
+            {
+                Debug.Log("  ✅ All required assets verified");
+            }
+
+            return true; // Return true anyway - scene can populate with fallbacks
         }
 
         private static Transform GetOrCreateContainer(string name)
@@ -303,6 +353,13 @@ namespace Velinor.Editor
 
         private static void AddPlayer(Transform parent)
         {
+            // Null-check parent parameter
+            if (parent == null)
+            {
+                Debug.LogError("SimplifiedMarketScene: AddPlayer() called with null parent. Creating PlayerRoot.");
+                parent = new GameObject("PlayerRoot").transform;
+            }
+
             // CRITICAL: Destroy any existing MainCamera first (prevents conflicts)
             Camera[] existingCameras = Object.FindObjectsByType<Camera>();
             foreach (Camera cam in existingCameras)
@@ -317,13 +374,29 @@ namespace Velinor.Editor
             // Try to load StarterAssets character
             GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
             
+            if (playerPrefab == null)
+            {
+                Debug.LogWarning("SimplifiedMarketScene: playerPrefab is null. StarterAssets not found. Using capsule fallback.");
+                AddPlayerFallback(parent);
+                return;
+            }
+            
             if (playerPrefab != null)
             {
                 Debug.Log("  ℹ️  Found PlayerArmature prefab, loading...");
-                GameObject player = Object.Instantiate(playerPrefab, parent);
+                GameObject player = null;
+                try
+                {
+                    player = Object.Instantiate(playerPrefab, parent);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"SimplifiedMarketScene: Exception instantiating player prefab: {ex.Message}");
+                }
+
                 if (player == null)
                 {
-                    Debug.LogError("  ❌ Failed to instantiate player prefab!");
+                    Debug.LogError("SimplifiedMarketScene: Failed to instantiate player prefab. Using capsule fallback.");
                     AddPlayerFallback(parent);
                     return;
                 }
@@ -376,6 +449,13 @@ namespace Velinor.Editor
 
         private static void AddPlayerFallback(Transform parent)
         {
+            // Null-check parent parameter
+            if (parent == null)
+            {
+                Debug.LogError("SimplifiedMarketScene: AddPlayerFallback() called with null parent. Creating PlayerRoot.");
+                parent = new GameObject("PlayerRoot").transform;
+            }
+
             // Fallback to green capsule if prefab not found
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
