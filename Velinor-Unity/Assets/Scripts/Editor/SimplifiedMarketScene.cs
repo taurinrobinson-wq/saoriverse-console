@@ -217,10 +217,12 @@ namespace Velinor.Editor
 
         private static void CreateBackgroundRocks(Transform parent)
         {
-            // Distant parallax rocks at Z=25+ for depth perception
-            // Positioned to frame the marketplace without blocking view
+            // Distant background terrain at Z=20+ to frame the marketplace
+            // Positioned at ground level (Y adjusted so bottom sits at Y=0)
             string[] rockNames = { "Rock_BackLeft", "Rock_BackCenter", "Rock_BackRight" };
-            Vector3[] positions = { new Vector3(-8, 3, 25), new Vector3(0, 4, 28), new Vector3(8, 3, 26) };
+            
+            // Positions: X varies, Z in distance, Y will be adjusted per scale
+            Vector3[] basePositions = { new Vector3(-8, 0, 20), new Vector3(0, 0, 25), new Vector3(8, 0, 22) };
             Vector3[] scales = { new Vector3(2, 3, 2), new Vector3(2.5f, 3.5f, 2.5f), new Vector3(2, 3, 2) };
 
             for (int i = 0; i < rockNames.Length; i++)
@@ -228,7 +230,6 @@ namespace Velinor.Editor
                 GameObject rock = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 rock.name = rockNames[i];
                 rock.transform.parent = parent;
-                rock.transform.position = positions[i];
                 
                 // Enforce 3-unit maximum dimension rule
                 Vector3 scale = scales[i];
@@ -240,6 +241,12 @@ namespace Velinor.Editor
                     scale.z = Mathf.Min(scale.z, 3);
                 }
                 rock.transform.localScale = scale;
+                
+                // Position: X and Z from basePositions, Y adjusted so bottom sits on ground (Y=0)
+                // For a cube at Y with height H, bottom is at Y - H/2, so: Y - H/2 = 0 → Y = H/2
+                Vector3 finalPos = basePositions[i];
+                finalPos.y = scale.y / 2f; // Position so bottom sits at Y=0
+                rock.transform.position = finalPos;
 
                 Object.DestroyImmediate(rock.GetComponent<Collider>());
 
@@ -252,7 +259,7 @@ namespace Velinor.Editor
                 rock.layer = LayerMask.NameToLayer("Background");
             }
 
-            Debug.Log("  ✅ Background parallax rocks at Z=25+ (depth layer)");
+            Debug.Log("  ✅ Background terrain positioned at ground level (parallax depth)");
         }
 
         private static void AddPlayer(Transform parent)
