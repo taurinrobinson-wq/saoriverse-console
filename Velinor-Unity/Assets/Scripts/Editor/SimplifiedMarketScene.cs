@@ -457,13 +457,26 @@ namespace Velinor.Editor
                     }
                 }
                 
-                // Remove any null components (broken scripts)
+                // Remove any null components (broken scripts) on root and ALL children
                 Component[] rootComponents = player.GetComponents<Component>();
                 foreach (Component comp in rootComponents)
                 {
                     if (comp == null)
                     {
                         Object.DestroyImmediate(comp);
+                    }
+                }
+                
+                // Also clean up children to catch any broken scripts on child objects
+                foreach (Transform child in player.GetComponentsInChildren<Transform>())
+                {
+                    Component[] childComps = child.GetComponents<Component>();
+                    foreach (Component comp in childComps)
+                    {
+                        if (comp == null)
+                        {
+                            Object.DestroyImmediate(comp);
+                        }
                     }
                 }
                 
