@@ -61,7 +61,9 @@ namespace Velinor.Core
             if (rb == null) return;
 
             // Ground check using raycast with LAYER MASK (only hit Foreground layer)
-            // This prevents false negatives from hitting stalls or other objects
+            // Raycast originates from character root position, pointing down
+            // Character is at eye level (Y=0.9), collider bottom is at Y=0
+            // So we raycast from Y=0.9 down 1.5 units, which reaches Y=-0.6 (well below ground at Y=0)
             int foregroundMask = LayerMask.GetMask("Foreground");
             isGrounded = Physics.Raycast(transform.position, Vector3.down, out lastGroundHit, groundCheckDistance, foregroundMask);
 

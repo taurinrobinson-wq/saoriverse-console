@@ -449,15 +449,37 @@ namespace Velinor.Editor
                 
                 // FIRST PASS: Remove ANY null components (broken/missing scripts) before doing anything else
                 // This prevents "referenced script missing" errors
+                // CRITICAL: Do this recursively on ALL transforms to catch deep hierarchy issues
+                Component[] nullsToRemove = new Component[50]; // Pre-alloc array
+                int nullCount = 0;
+                
                 foreach (Transform t in player.GetComponentsInChildren<Transform>(includeInactive: true))
                 {
                     Component[] comps = t.GetComponents<Component>();
-                    for (int i = comps.Length - 1; i >= 0; i--)
+                    for (int i = 0; i < comps.Length; i++)
                     {
-                        if (comps[i] == null)
+                        try
                         {
-                            Object.DestroyImmediate(comps[i], allowDestroyingAssets: true);
+                            // Try to access type - null components will throw
+                            var type = comps[i].GetType();
                         }
+                        catch
+                        {
+                            // This component is null/broken
+                            if (nullCount >= nullsToRemove.Length)
+                                System.Array.Resize(ref nullsToRemove, nullsToRemove.Length * 2);
+                            nullsToRemove[nullCount++] = comps[i];
+                        }
+                    }
+                }
+                
+                // Now destroy all null components
+                for (int i = 0; i < nullCount; i++)
+                {
+                    if (nullsToRemove[i] != null)
+                    {
+                        Object.DestroyImmediate(nullsToRemove[i], allowDestroyingAssets: true);
+                        Debug.LogWarning($"  🗑️  Destroyed null/missing component on {nullsToRemove[i].gameObject.name}");
                     }
                 }
                 
@@ -737,18 +759,25 @@ namespace Velinor.Editor
             CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
             capsule.radius = 0.4f;
             capsule.height = 1.8f;
-            capsule.center = new Vector3(0, 0.9f, 0);  // Center at Y=0.9 so bottom touches ground at Y=0
+            // CRITICAL FIX: Center must be at (0, 0, 0) so capsule spans from Y=0 to Y=1.8
+            // Character is at Y=0.9, so world capsule center = 0.9 + 0 = 0.9 ✓
+            // Bottom = 0.9 - 0.9 = 0 ✓, Top = 0.9 + 0.9 = 1.8 ✓
+            capsule.center = Vector3.zero;  // NOT (0, 0.9, 0)!
             capsule.isTrigger = false;
             Debug.Log($"  ✅ CapsuleCollider created:");
-            Debug.Log($"      - Center: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
+            Debug.Log($"      - Center offset: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
+            Debug.Log($"      - Character position: {character.transform.position}");
             Debug.Log($"      - isTrigger: {capsule.isTrigger}");
-            Debug.Log($"      - World space: bottom at Y=0 (ground), top at Y=1.8 (head)");
             
             // Debug: Check if collider actually touches ground
             Bounds capsuleBounds = capsule.bounds;
-            Debug.Log($"  📊 COLLIDER BOUNDS:");
-            Debug.Log($"      - Bounds Center: {capsuleBounds.center}");
+            Debug.Log($"  📊 COLLIDER BOUNDS (FIXED):");
+            Debug.Log($"      - Bounds Center (world): {capsuleBounds.center}");
             Debug.Log($"      - Min Y: {capsuleBounds.min.y}, Max Y: {capsuleBounds.max.y}");
+            if (Mathf.Abs(capsuleBounds.min.y - 0f) < 0.05f)
+                Debug.Log($"      ✅ CORRECT - Bottom at Y≈0 (ground level)");
+            else
+                Debug.LogWarning($"      ⚠️  WRONG - Bottom at Y={capsuleBounds.min.y}, should be Y=0!");
             Debug.Log($"  ✅ Character physics ready for collision");
         }
 
