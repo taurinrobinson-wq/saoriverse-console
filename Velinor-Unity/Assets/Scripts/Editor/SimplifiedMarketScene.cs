@@ -447,60 +447,73 @@ namespace Velinor.Editor
                 player.transform.position = new Vector3(0, 0.9f, 0); // Set to eye level (0.9m above ground)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
-                // FIRST PASS: Remove ANY null components (broken/missing scripts) before doing anything else
-                // This prevents "referenced script missing" errors
-                // CRITICAL: Do this recursively on ALL transforms to catch deep hierarchy issues
-                Component[] nullsToRemove = new Component[50]; // Pre-alloc array
-                int nullCount = 0;
-                
+                // ========== CLEANUP PHASE 1: Remove null/broken components FIRST ==========
+                // This must happen BEFORE we try to fix materials or disable scripts
+                int nullsRemoved = 0;
                 foreach (Transform t in player.GetComponentsInChildren<Transform>(includeInactive: true))
                 {
-                    Component[] comps = t.GetComponents<Component>();
-                    for (int i = 0; i < comps.Length; i++)
+                    // Get all components and filter those that are null
+                    System.Collections.Generic.List<Component> toDestroy = new System.Collections.Generic.List<Component>();
+                    
+                    foreach (Component comp in t.GetComponents<Component>())
                     {
+                        // If accessing the type throws, it's a null component (missing script)
                         try
                         {
-                            // Try to access type - null components will throw
-                            var type = comps[i].GetType();
+                            var _ = comp.GetType();
                         }
                         catch
                         {
-                            // This component is null/broken
-                            if (nullCount >= nullsToRemove.Length)
-                                System.Array.Resize(ref nullsToRemove, nullsToRemove.Length * 2);
-                            nullsToRemove[nullCount++] = comps[i];
+                            toDestroy.Add(comp);
+                            nullsRemoved++;
                         }
                     }
-                }
-                
-                // Now destroy all null components
-                for (int i = 0; i < nullCount; i++)
-                {
-                    if (nullsToRemove[i] != null)
+                    
+                    foreach (Component comp in toDestroy)
                     {
-                        Object.DestroyImmediate(nullsToRemove[i], allowDestroyingAssets: true);
-                        Debug.LogWarning($"  🗑️  Destroyed null/missing component on {nullsToRemove[i].gameObject.name}");
+                        Object.DestroyImmediate(comp, allowDestroyingAssets: true);
+                        Debug.LogWarning($"  🗑️  Removed null component (missing script) on {t.gameObject.name}");
                     }
                 }
                 
-                // SECOND PASS: Destroy unwanted MonoBehaviour scripts except Animator
+                if (nullsRemoved > 0)
+                    Debug.Log($"  ✅ Removed {nullsRemoved} null/broken components from hierarchy");
+                
+                // ========== CLEANUP PHASE 2: Destroy unwanted scripts (keep Animator) ==========
                 MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>(includeInactive: true);
+                int destroyedCount = 0;
+                
                 foreach (MonoBehaviour mb in allMonoBehaviours)
                 {
-                    if (mb != null)
+                    if (mb == null) continue; // Skip if already null
+                    
+                    string scriptName = mb.GetType().Name;
+                    
+                    // Keep ONLY Animator, destroy everything else
+                    if (!scriptName.Contains("Animator"))
                     {
-                        string scriptName = mb.GetType().Name;
-                        // Keep ONLY Animator, destroy everything else
-                        if (!scriptName.Contains("Animator"))
-                        {
-                            Object.DestroyImmediate(mb, allowDestroyingAssets: true);
-                            Debug.Log($"  🗑️  Destroyed {scriptName}");
-                        }
+                        Object.DestroyImmediate(mb, allowDestroyingAssets: true);
+                        destroyedCount++;
+                        Debug.Log($"  🗑️  Destroyed {scriptName}");
                     }
                 }
                 
-                // SIMPLIFIED: Use reflection to disable ThirdPersonController by name
-                // (avoids namespace import issues with StarterAssets)
+                Debug.Log($"  ✅ Cleaned up {destroyedCount} unwanted scripts from character hierarchy");
+                
+                // Verify Animator still exists after cleanup
+                Animator animator = player.GetComponent<Animator>();
+                if (animator == null)
+                {
+                    Debug.LogWarning("  ⚠️  WARNING: Animator was destroyed! Looking for it in children...");
+                    animator = player.GetComponentInChildren<Animator>();
+                    if (animator != null)
+                        Debug.Log($"  ✅ Found Animator on child: {animator.gameObject.name}");
+                }
+                
+                // ========== APPLY MATERIALS (null components are now gone) ==========
+                FixCharacterMaterials(player);
+
+                // ========== DISABLE UNWANTED CONTROL SCRIPTS ==========
                 MonoBehaviour[] components = player.GetComponents<MonoBehaviour>();
                 foreach (MonoBehaviour comp in components)
                 {
@@ -512,7 +525,7 @@ namespace Velinor.Editor
                     }
                 }
                 
-                // Add our camera as a sibling, not nested
+                // ========== CREATE CAMERA ==========
                 GameObject cameraObj = new GameObject("MainCamera");
                 cameraObj.transform.parent = player.transform;
                 cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
@@ -529,13 +542,10 @@ namespace Velinor.Editor
 
                 cameraObj.AddComponent<AudioListener>();
 
-                // Fix materials on character (avoid pink)
-                FixCharacterMaterials(player);
-
-                // Set up physics for proper collision with ground
+                // ========== SETUP PHYSICS ==========
                 SetupCharacterPhysics(player);
                 
-                // Add simple movement script for WASD + Mouse input
+                // ========== ADD MOVEMENT SCRIPT ==========
                 SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
                 movement.mainCamera = cam;
                 Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
@@ -660,10 +670,24 @@ namespace Velinor.Editor
             Material characterMat = new Material(Shader.Find("Standard"));
             characterMat.color = new Color(0.85f, 0.8f, 0.75f); // Tan/beige skin tone
             
-            MeshRenderer[] renderers = character.GetComponentsInChildren<MeshRenderer>();
+            // Search for renderers recursively - they may be deeply nested
+            MeshRenderer[] renderers = character.GetComponentsInChildren<MeshRenderer>(includeInactive: true);
             if (renderers.Length == 0)
             {
-                Debug.LogWarning("  ⚠️  No MeshRenderers found on character model");
+                Debug.LogWarning("  ⚠️  No MeshRenderers found on character model (may be using SkinnedMeshRenderer instead)");
+                // Try SkinnedMeshRenderer as fallback
+                SkinnedMeshRenderer[] skinnedRenderers = character.GetComponentsInChildren<SkinnedMeshRenderer>(includeInactive: true);
+                if (skinnedRenderers.Length > 0)
+                {
+                    foreach (SkinnedMeshRenderer renderer in skinnedRenderers)
+                    {
+                        Material[] mats = new Material[renderer.sharedMaterials.Length];
+                        for (int i = 0; i < mats.Length; i++)
+                            mats[i] = characterMat;
+                        renderer.sharedMaterials = mats;
+                    }
+                    Debug.Log($"  ✅ Applied materials to {skinnedRenderers.Length} SkinnedMeshRenderers on character");
+                }
                 return;
             }
             
@@ -675,7 +699,7 @@ namespace Velinor.Editor
                 renderer.sharedMaterials = mats;
             }
             
-            Debug.Log($"  ✅ Applied materials to {renderers.Length} renderers on character");
+            Debug.Log($"  ✅ Applied materials to {renderers.Length} MeshRenderers on character");
         }
 
         private static void SetupCharacterPhysics(GameObject character)
@@ -683,54 +707,12 @@ namespace Velinor.Editor
             Debug.Log("🔧 Setting up character physics...");
             Debug.Log($"  Character position: {character.transform.position}");
             
-            // Remove any remaining colliders (should be cleaned up already, but be safe)
+            // Remove any remaining colliders from the prefab (may exist on root or children)
             Collider[] existingColliders = character.GetComponentsInChildren<Collider>();
             Debug.Log($"  Cleaning up {existingColliders.Length} collider(s)...");
             foreach (Collider col in existingColliders)
             {
                 Object.DestroyImmediate(col);
-            }
-            
-            // Disable ONLY input/control scripts, keep animation systems enabled
-            foreach (MonoBehaviour script in character.GetComponentsInChildren<MonoBehaviour>())
-            {
-                if (script != null)
-                {
-                    string scriptName = script.GetType().Name;
-                    // Only disable control/input scripts, NOT animation systems
-                    if (scriptName == "ThirdPersonUserControl" || scriptName == "ThirdPersonCharacterController")
-                    {
-                        script.enabled = false;
-                        Debug.Log($"    - Disabled {scriptName} (control script)");
-                    }
-                    else if (scriptName.Contains("Animator"))
-                    {
-                        // KEEP Animator enabled for animations
-                        Debug.Log($"    - Keeping {scriptName} enabled (animation)");
-                    }
-                    else if (scriptName == "SimpleCharacterMovement")
-                    {
-                        // KEEP our movement script enabled
-                        script.enabled = true;
-                    }
-                    else if (scriptName != "Transform" && scriptName != "Rigidbody" && scriptName != "CapsuleCollider")
-                    {
-                        // Disable all other scripts to prevent conflicts
-                        script.enabled = false;
-                        Debug.Log($"    - Disabled {scriptName} (unknown script)");
-                    }
-                }
-            }
-            
-            // Final cleanup pass: Remove any null (missing script) components
-            Component[] finalCheck = character.GetComponents<Component>();
-            foreach (Component comp in finalCheck)
-            {
-                if (comp == null)
-                {
-                    Debug.LogWarning("    - Removing null component (missing script reference)");
-                    Object.DestroyImmediate(comp);
-                }
             }
             
             // Ensure character has a Rigidbody for gravity and collision
