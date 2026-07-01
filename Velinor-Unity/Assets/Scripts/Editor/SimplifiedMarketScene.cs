@@ -31,12 +31,10 @@ namespace Velinor.Editor
         // Asset paths
         private const string EMBERS_WALL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab";
         private const string EMBERS_ROOF_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.prefab";
-        private const string EMBERS_MATERIAL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Materials/PaintedPlaster014_1K-PNG_Color.mat";
         
         private const string ROCK_PREFAB_PATH_1 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab";
         private const string ROCK_PREFAB_PATH_2 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab";
         private const string ROCK_PREFAB_PATH_3 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab";
-        private const string ROCK_MATERIAL_PATH = "Assets/Kyle's Rock Pack/Kyle Fuji/Materials/M_arid_rocks_1.mat";
         
         private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Prefab/Dry7509.prefab";
 
@@ -225,8 +223,8 @@ namespace Velinor.Editor
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
                     stall.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     
-                    // Apply EmbersStorm material
-                    ApplyMaterialToPrefab(stall, EMBERS_MATERIAL_PATH);
+                    // Fix materials with Standard shader (beige stone color)
+                    FixMaterialsWithStandard(stall, new Color(0.8f, 0.75f, 0.65f));
                     
                     Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]})");
                 }
@@ -274,8 +272,8 @@ namespace Velinor.Editor
                     rock.transform.position = basePositions[i];
                     rock.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     
-                    // Apply Kyle's Rock Pack material
-                    ApplyMaterialToPrefab(rock, ROCK_MATERIAL_PATH);
+                    // Fix materials with Standard shader (gray-brown rock color)
+                    FixMaterialsWithStandard(rock, new Color(0.55f, 0.52f, 0.48f));
                     rock.layer = LayerMask.NameToLayer("Background");
                     Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]}");
                 }
@@ -370,27 +368,23 @@ namespace Velinor.Editor
             Debug.Log("  ⚠️  Using fallback capsule player (preferred prefab not found)");
         }
 
-        private static void ApplyMaterialToPrefab(GameObject obj, string materialPath)
+        private static void FixMaterialsWithStandard(GameObject obj, Color color)
         {
-            // Load and apply material to all renderers in the prefab
-            Material mat = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
-            
-            if (mat == null)
-            {
-                Debug.LogWarning($"  ⚠️  Could not load material at {materialPath}");
-                return;
-            }
+            // Replace all materials with a clean Standard shader material
+            // This fixes any broken/pink materials in the prefabs
+            Material standardMat = new Material(Shader.Find("Standard"));
+            standardMat.color = color;
             
             MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
             {
                 Material[] mats = new Material[renderer.sharedMaterials.Length];
                 for (int i = 0; i < mats.Length; i++)
-                    mats[i] = mat;
+                    mats[i] = standardMat;
                 renderer.sharedMaterials = mats;
             }
             
-            Debug.Log($"  ✅ Applied material to {obj.name}");
+            Debug.Log($"  ℹ️  Fixed materials on {obj.name} (color: {color})");
         }
 
         private static void SetupAudio()
