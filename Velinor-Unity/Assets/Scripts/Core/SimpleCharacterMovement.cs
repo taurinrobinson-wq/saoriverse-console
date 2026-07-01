@@ -22,6 +22,7 @@ namespace Velinor.Core
         private Rigidbody rb;
         private bool isGrounded;
         private float yRotation = 0f;
+        private Animator animator;
 
         private void Start()
         {
@@ -30,6 +31,12 @@ namespace Velinor.Core
             {
                 Debug.LogWarning("SimpleCharacterMovement: No Rigidbody found");
                 return;
+            }
+
+            animator = GetComponent<Animator>();
+            if (animator == null)
+            {
+                Debug.LogWarning("SimpleCharacterMovement: No Animator found - animations disabled");
             }
 
             if (mainCamera == null)
@@ -76,11 +83,40 @@ namespace Velinor.Core
             // Apply drag
             rb.linearDamping = isGrounded ? groundDrag : 1f;
             
+            // Update animator parameters for animations
+            if (animator != null)
+            {
+                // Speed for walk/run blend tree (0=idle, 1=walk, 2=run)
+                float horizontalSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
+                animator.SetFloat("Speed", horizontalSpeed / moveSpeed); // Normalize to 0-1 range
+                animator.SetFloat("MotionSpeed", horizontalSpeed);
+                animator.SetBool("Grounded", isGrounded);
+                
+                if (!isGrounded)
+                {
+                    animator.SetBool("FreeFall", true);
+                }
+                else if (isGrounded && animator.GetBool("FreeFall"))
+                {
+                    animator.SetBool("FreeFall", false);
+                }
+            }
+            
             // Handle jumping
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 5f, rb.linearVelocity.z);
+                
+                if (animator != null)
+                {
+                    animator.SetBool("Jump", true);
+                }
+                
                 Debug.Log("Jump!");
+            }
+            else if (isGrounded && animator != null && animator.GetBool("Jump"))
+            {
+                animator.SetBool("Jump", false);
             }
         }
 
