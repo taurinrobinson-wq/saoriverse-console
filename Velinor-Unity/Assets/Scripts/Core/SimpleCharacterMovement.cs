@@ -157,6 +157,44 @@ namespace Velinor.Core
             Debug.Log("Character landed!");
         }
 
+        /// <summary>
+        /// Called by animation event when footstep occurs during walk/run
+        /// Single event for both left and right feet
+        /// </summary>
+        public void OnFootstep()
+        {
+            // Footstep animation event
+            // Can add footstep sound or particle effect here
+            Debug.Log("Footstep!");
+        }
+
+        /// <summary>
+        /// Called by animation event for left foot landing (if using separate events)
+        /// </summary>
+        public void FootstepL()
+        {
+            // Left footstep event
+            Debug.Log("Left footstep!");
+        }
+
+        /// <summary>
+        /// Called by animation event for right foot landing (if using separate events)
+        /// </summary>
+        public void FootstepR()
+        {
+            // Right footstep event
+            Debug.Log("Right footstep!");
+        }
+
+        /// <summary>
+        /// Called by animation event when jump animation starts
+        /// </summary>
+        public void OnJump()
+        {
+            // Jump animation started
+            Debug.Log("Jump animation triggered!");
+        }
+
         public bool IsGrounded => isGrounded;
     }
 }
