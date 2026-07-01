@@ -371,53 +371,41 @@ namespace Velinor.Editor
                 }
             }
 
-            // Try to load StarterAssets character
-            GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
-            
-            if (playerPrefab == null)
+            // Try to load StarterAssets character - but use fallback on ANY failure
+            try
             {
-                Debug.LogWarning("SimplifiedMarketScene: playerPrefab is null. StarterAssets not found. Using capsule fallback.");
-                AddPlayerFallback(parent);
-                return;
-            }
-            
-            if (playerPrefab != null)
-            {
-                Debug.Log("  ℹ️  Found PlayerArmature prefab, loading...");
-                GameObject player = null;
-                try
+                GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
+                
+                if (playerPrefab == null)
                 {
-                    player = Object.Instantiate(playerPrefab, parent);
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogError($"SimplifiedMarketScene: Exception instantiating player prefab: {ex.Message}");
-                }
-
-                if (player == null)
-                {
-                    Debug.LogError("SimplifiedMarketScene: Failed to instantiate player prefab. Using capsule fallback.");
+                    Debug.LogWarning("SimplifiedMarketScene: playerPrefab asset not found. Using capsule fallback.");
                     AddPlayerFallback(parent);
                     return;
                 }
-                player.name = "Player";
-                player.transform.localPosition = Vector3.zero;
                 
-                // Disable any conflicting controller scripts
-                MonoBehaviour[] scripts = player.GetComponentsInChildren<MonoBehaviour>();
-                foreach (MonoBehaviour script in scripts)
+                // Instantiate prefab as-is, don't modify its internal structure
+                GameObject player = Object.Instantiate(playerPrefab, parent) as GameObject;
+                if (player == null)
                 {
-                    string scriptName = script.GetType().Name;
-                    if (scriptName == "ThirdPersonController" || 
-                        scriptName == "InputManager" || 
-                        scriptName == "StarterAssetsInputs")
-                    {
-                        Debug.Log($"  ℹ️  Disabling conflicting script: {scriptName}");
-                        script.enabled = false;
-                    }
+                    Debug.LogError("SimplifiedMarketScene: Object.Instantiate returned null. Using capsule fallback.");
+                    AddPlayerFallback(parent);
+                    return;
                 }
                 
-                // Create our own eye-level camera
+                player.name = "Player";
+                player.transform.localPosition = Vector3.zero;
+                Debug.Log("  ✅ StarterAssets character instantiated successfully");
+                
+                // SIMPLIFIED: Don't touch internal prefab structure
+                // Just disable scripts at top level only
+                ThirdPersonController tpc = player.GetComponent<ThirdPersonController>();
+                if (tpc != null)
+                {
+                    tpc.enabled = false;
+                    Debug.Log("  ℹ️  Disabled ThirdPersonController on root");
+                }
+                
+                // Add our camera as a sibling, not nested
                 GameObject cameraObj = new GameObject("MainCamera");
                 cameraObj.transform.parent = player.transform;
                 cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
@@ -434,17 +422,20 @@ namespace Velinor.Editor
 
                 cameraObj.AddComponent<AudioListener>();
 
-                // Add our controller
-                if (player.GetComponent<PlayerController>() == null)
+                // Add our controller to player
+                PlayerController controller = player.GetComponent<PlayerController>();
+                if (controller == null)
                     player.AddComponent<PlayerController>();
 
-                Debug.Log("  ✅ StarterAssets character loaded with custom controller");
+                Debug.Log("  ✅ StarterAssets character ready with custom camera and controller");
                 return;
             }
-
-            // Fallback to capsule if prefab not found
-            Debug.LogWarning("  ⚠️  StarterAssets prefab not found, using capsule player");
-            AddPlayerFallback(parent);
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"SimplifiedMarketScene: Exception loading StarterAssets: {ex.Message}\\n{ex.StackTrace}");
+                AddPlayerFallback(parent);
+                return;
+            }
         }
 
         private static void AddPlayerFallback(Transform parent)
