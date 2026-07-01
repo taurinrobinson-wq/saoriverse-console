@@ -224,6 +224,7 @@ namespace Velinor.Editor
 
             BoxCollider collider = ground.AddComponent<BoxCollider>();
             collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
+            collider.center = Vector3.zero; // CRITICAL: Center at 0,0,0 of this cube
             collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
 
             ground.layer = LayerMask.NameToLayer("Foreground");
@@ -234,6 +235,8 @@ namespace Velinor.Editor
             if (bc != null)
             {
                 Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
+                Debug.Log($"    - Ground Position: {ground.transform.position}, Scale: {ground.transform.localScale}");
+                Debug.Log($"    - Collider bounds: min={bc.bounds.min}, max={bc.bounds.max}");
             }
         }
 
@@ -448,6 +451,17 @@ namespace Velinor.Editor
 
                 // Set up physics for proper collision with ground
                 SetupCharacterPhysics(player);
+                
+                // Log character collider info after setup for debugging
+                Collider[] finalColliders = player.GetComponentsInChildren<Collider>();
+                Debug.Log($"  📊 COLLIDER DEBUG INFO:");
+                Debug.Log($"    - Character root position: {player.transform.position}");
+                Debug.Log($"    - Character Rigidbody useGravity: {player.GetComponent<Rigidbody>()?.useGravity}");
+                Debug.Log($"    - Total colliders on character: {finalColliders.Length}");
+                foreach (Collider c in finalColliders)
+                {
+                    Debug.Log($"    - Collider on {c.gameObject.name}: {c.GetType().Name}, bounds={c.bounds}, trigger={c.isTrigger}");
+                }
 
                 // Add our controller to player
                 PlayerController controller = player.GetComponent<PlayerController>();
@@ -493,6 +507,7 @@ namespace Velinor.Editor
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
+            collider.center = new Vector3(0, 0.5f, 0); // Capsule center relative to player root
             collider.isTrigger = false; // IMPORTANT: Must not be a trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
@@ -502,6 +517,10 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.isKinematic = false; // Ensure it's not kinematic
             rb.constraints = RigidbodyConstraints.FreezeRotation;
+            
+            Debug.Log($"  ✅ Fallback player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
+            Debug.Log($"    - Player position: {player.transform.position}");
+            Debug.Log($"    - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
 
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
@@ -569,6 +588,7 @@ namespace Velinor.Editor
         private static void SetupCharacterPhysics(GameObject character)
         {
             Debug.Log("🔧 Setting up character physics...");
+            Debug.Log($"  Character position: {character.transform.position}");
             
             // First, disable ALL scripts that might interfere (CharacterController, Animator scripts, etc.)
             MonoBehaviour[] allScripts = character.GetComponentsInChildren<MonoBehaviour>();
@@ -608,8 +628,10 @@ namespace Velinor.Editor
                 CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
                 capsule.radius = 0.4f;
                 capsule.height = 1.8f;
+                capsule.center = new Vector3(0, 0, 0); // At root center
                 capsule.isTrigger = false;
                 Debug.Log("  ✅ Added CapsuleCollider to character root");
+                Debug.Log($"    - Position: center={capsule.center}, radius={capsule.radius}, height={capsule.height}");
             }
             else
             {
@@ -621,7 +643,22 @@ namespace Velinor.Editor
                         col.isTrigger = false;
                         Debug.Log($"  ⚠️  Fixed trigger collider on {col.gameObject.name}: isTrigger=false");
                     }
-                    Debug.Log($"    - {col.gameObject.name}: {col.GetType().Name} (trigger={col.isTrigger})");
+                    
+                    // Log detailed info for BoxColliders and CapsuleColliders
+                    if (col is BoxCollider bc)
+                    {
+                        Debug.Log($"    - {col.gameObject.name}: BoxCollider (center={bc.center}, size={bc.size}, trigger={col.isTrigger})");
+                        Debug.Log($"      bounds: min={bc.bounds.min}, max={bc.bounds.max}");
+                    }
+                    else if (col is CapsuleCollider cc)
+                    {
+                        Debug.Log($"    - {col.gameObject.name}: CapsuleCollider (center={cc.center}, radius={cc.radius}, height={cc.height}, trigger={col.isTrigger})");
+                        Debug.Log($"      bounds: min={cc.bounds.min}, max={cc.bounds.max}");
+                    }
+                    else
+                    {
+                        Debug.Log($"    - {col.gameObject.name}: {col.GetType().Name} (trigger={col.isTrigger})");
+                    }
                 }
             }
             
