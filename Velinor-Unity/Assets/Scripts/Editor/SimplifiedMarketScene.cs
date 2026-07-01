@@ -80,6 +80,17 @@ namespace Velinor.Editor
             foreach (Transform child in charRoot)
                 Object.DestroyImmediate(child.gameObject);
 
+            // CRITICAL: Also destroy any stray Player objects in the scene
+            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include);
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name == "Player" && obj.transform.parent == null)
+                {
+                    Debug.Log("  🗑️  Destroying stray root-level Player object");
+                    Object.DestroyImmediate(obj);
+                }
+            }
+
             Debug.Log("📐 SPATIAL GRID LAYOUT:");
             Debug.Log("   MarketOrigin: (0, 0, 0)");
             Debug.Log("   StallRowA: X=-10 (left side stalls at Z=0,5,10)");
@@ -427,6 +438,33 @@ namespace Velinor.Editor
                 player.name = "Player";
                 player.transform.localPosition = Vector3.zero;
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
+                
+                // Remove ANY missing script components (these cause "referenced script missing" errors)
+                // Use GetComponents to check each one
+                Component[] allComponents = player.GetComponents<Component>();
+                foreach (Component comp in allComponents)
+                {
+                    if (comp == null)
+                    {
+                        Debug.LogWarning("  🗑️  Found null component (missing script), removing...");
+                        Object.DestroyImmediate(comp);
+                    }
+                }
+                
+                // Also check children for missing scripts
+                Component[] childComponents = player.GetComponentsInChildren<Component>();
+                int missingCount = 0;
+                foreach (Component comp in childComponents)
+                {
+                    if (comp == null)
+                    {
+                        missingCount++;
+                    }
+                }
+                if (missingCount > 0)
+                {
+                    Debug.LogWarning($"  ⚠️  Found {missingCount} missing script components in children");
+                }
                 
                 // SIMPLIFIED: Use reflection to disable ThirdPersonController by name
                 // (avoids namespace import issues with StarterAssets)
