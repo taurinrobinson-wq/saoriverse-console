@@ -31,9 +31,13 @@ namespace Velinor.Editor
         // Asset paths
         private const string EMBERS_WALL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab";
         private const string EMBERS_ROOF_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.prefab";
+        private const string EMBERS_MATERIAL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Materials/PaintedPlaster014_1K-PNG_Color.mat";
+        
         private const string ROCK_PREFAB_PATH_1 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab";
         private const string ROCK_PREFAB_PATH_2 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab";
         private const string ROCK_PREFAB_PATH_3 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab";
+        private const string ROCK_MATERIAL_PATH = "Assets/Kyle's Rock Pack/Kyle Fuji/Materials/M_arid_rocks_1.mat";
+        
         private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Prefab/Dry7509.prefab";
 
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
@@ -219,10 +223,10 @@ namespace Velinor.Editor
                     GameObject stall = PrefabUtility.InstantiatePrefab(stallPrefab, parent) as GameObject;
                     stall.name = $"{stallPrefix}_{i + 1}";
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
-                    stall.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Scale down to fit grid
+                    stall.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     
-                    // Fix pink materials (assign default material if missing)
-                    FixPinkMaterials(stall);
+                    // Apply EmbersStorm material
+                    ApplyMaterialToPrefab(stall, EMBERS_MATERIAL_PATH);
                     
                     Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]})");
                 }
@@ -270,7 +274,8 @@ namespace Velinor.Editor
                     rock.transform.position = basePositions[i];
                     rock.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     
-                    FixPinkMaterials(rock);
+                    // Apply Kyle's Rock Pack material
+                    ApplyMaterialToPrefab(rock, ROCK_MATERIAL_PATH);
                     rock.layer = LayerMask.NameToLayer("Background");
                     Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]}");
                 }
@@ -365,33 +370,27 @@ namespace Velinor.Editor
             Debug.Log("  ⚠️  Using fallback capsule player (preferred prefab not found)");
         }
 
-        private static void FixPinkMaterials(GameObject obj)
+        private static void ApplyMaterialToPrefab(GameObject obj, string materialPath)
         {
-            // Replace magenta/pink materials with valid Standard shader materials
-            // Uses sharedMaterial in edit mode to avoid instantiation warnings
-            MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
+            // Load and apply material to all renderers in the prefab
+            Material mat = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
             
+            if (mat == null)
+            {
+                Debug.LogWarning($"  ⚠️  Could not load material at {materialPath}");
+                return;
+            }
+            
+            MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
             {
-                Material[] sharedMats = renderer.sharedMaterials;
-                bool needsUpdate = false;
-                
-                for (int i = 0; i < sharedMats.Length; i++)
-                {
-                    if (sharedMats[i] == null || sharedMats[i].shader == null || 
-                        sharedMats[i].shader.name.Contains("Hidden/InternalErrorShader"))
-                    {
-                        Material newMat = new Material(Shader.Find("Standard"));
-                        newMat.color = new Color(0.6f, 0.6f, 0.6f);
-                        sharedMats[i] = newMat;
-                        needsUpdate = true;
-                        Debug.LogWarning($"  ⚠️  Fixed invalid shader on {renderer.gameObject.name}, applied gray material");
-                    }
-                }
-                
-                if (needsUpdate)
-                    renderer.sharedMaterials = sharedMats;
+                Material[] mats = new Material[renderer.sharedMaterials.Length];
+                for (int i = 0; i < mats.Length; i++)
+                    mats[i] = mat;
+                renderer.sharedMaterials = mats;
             }
+            
+            Debug.Log($"  ✅ Applied material to {obj.name}");
         }
 
         private static void SetupAudio()
