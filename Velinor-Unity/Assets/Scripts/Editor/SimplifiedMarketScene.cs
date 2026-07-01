@@ -31,9 +31,10 @@ namespace Velinor.Editor
         // Asset paths
         private const string EMBERS_WALL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab";
         private const string EMBERS_ROOF_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.prefab";
-        private const string ROCK_PREFAB_PATH = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1.prefab";
+        private const string ROCK_PREFAB_PATH_1 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab";
+        private const string ROCK_PREFAB_PATH_2 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab";
+        private const string ROCK_PREFAB_PATH_3 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab";
         private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Prefab/Dry7509.prefab";
-        private const string PLAYER_PREFAB_PATH = "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab";
 
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
         public static void PopulateSimpleScene()
@@ -253,29 +254,23 @@ namespace Velinor.Editor
         private static void CreateBackgroundRocks(Transform parent)
         {
             // Load Kyle's Rock Pack prefabs for background terrain
-            string[] rockPrefabs = {
-                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1.prefab",
-                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2.prefab",
-                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3.prefab"
-            };
+            string[] rockPrefabs = { ROCK_PREFAB_PATH_1, ROCK_PREFAB_PATH_2, ROCK_PREFAB_PATH_3 };
 
             string[] rockNames = { "Rock_BackLeft", "Rock_BackCenter", "Rock_BackRight" };
             Vector3[] basePositions = { new Vector3(-8, 0, 20), new Vector3(0, 0, 25), new Vector3(8, 0, 22) };
 
             for (int i = 0; i < rockNames.Length; i++)
             {
-                GameObject rockPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(rockPrefabs[i % rockPrefabs.Length]);
+                GameObject rockPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(rockPrefabs[i]);
                 
                 if (rockPrefab != null)
                 {
                     GameObject rock = PrefabUtility.InstantiatePrefab(rockPrefab, parent) as GameObject;
                     rock.name = rockNames[i];
                     rock.transform.position = basePositions[i];
-                    rock.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f); // Scaled for marketplace
+                    rock.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     
-                    // Fix pink materials
                     FixPinkMaterials(rock);
-                    
                     rock.layer = LayerMask.NameToLayer("Background");
                     Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]}");
                 }
@@ -296,7 +291,7 @@ namespace Velinor.Editor
 
                     rock.AddComponent<BoxCollider>();
                     rock.layer = LayerMask.NameToLayer("Background");
-                    Debug.LogWarning($"  ⚠️  Kyle's Rock Pack not found, using fallback cube");
+                    Debug.LogWarning($"  ⚠️  Kyle's Rock Pack prefab not found at {rockPrefabs[i]}, using fallback cube");
                 }
             }
 
@@ -316,52 +311,9 @@ namespace Velinor.Editor
                 }
             }
 
-            // Load StarterAssets Third Person Controller prefab
-            GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PLAYER_PREFAB_PATH);
-            
-            if (playerPrefab == null)
-            {
-                Debug.LogError($"❌ Could not find player prefab at {PLAYER_PREFAB_PATH}");
-                Debug.LogWarning("  Falling back to simple player capsule");
-                AddPlayerFallback(parent);
-                return;
-            }
-
-            // Instantiate player
-            GameObject player = PrefabUtility.InstantiatePrefab(playerPrefab, parent) as GameObject;
-            player.name = "Player";
-            player.transform.position = new Vector3(0, 0, 0); // Ground level
-            
-            // Disable any cameras that came with the prefab
-            Camera[] prefabCameras = player.GetComponentsInChildren<Camera>();
-            foreach (Camera cam in prefabCameras)
-            {
-                cam.enabled = false;
-            }
-
-            // ALWAYS create our own MainCamera (guaranteed to work)
-            GameObject cameraObj = new GameObject("MainCamera");
-            cameraObj.transform.parent = player.transform;
-            cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
-
-            Camera cam_main = cameraObj.AddComponent<Camera>();
-            cam_main.orthographic = true;
-            cam_main.orthographicSize = 6;
-            cam_main.nearClipPlane = -100;
-            cam_main.farClipPlane = 100;
-            cam_main.tag = "MainCamera";
-            cam_main.clearFlags = CameraClearFlags.SolidColor;
-            cam_main.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
-            cam_main.depth = 0;
-
-            cameraObj.AddComponent<AudioListener>();
-
-            // Add our PlayerController script
-            if (player.GetComponent<PlayerController>() == null)
-                player.AddComponent<PlayerController>();
-
-            Debug.Log("  ✅ Third Person Character loaded at origin (0, 0, 0)");
-            Debug.Log("  ✅ MainCamera created and tagged (first-person view ready)");
+            // Use proven capsule player (StarterAssets requires complex setup, defer for later)
+            AddPlayerFallback(parent);
+            Debug.Log("  ✅ Using capsule player (StarterAssets integration deferred)");
         }
 
         private static void AddPlayerFallback(Transform parent)
@@ -416,22 +368,29 @@ namespace Velinor.Editor
         private static void FixPinkMaterials(GameObject obj)
         {
             // Replace magenta/pink materials with valid Standard shader materials
-            // This handles missing shader references in imported assets
+            // Uses sharedMaterial in edit mode to avoid instantiation warnings
             MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
             
             foreach (MeshRenderer renderer in renderers)
             {
-                foreach (Material mat in renderer.materials)
+                Material[] sharedMats = renderer.sharedMaterials;
+                bool needsUpdate = false;
+                
+                for (int i = 0; i < sharedMats.Length; i++)
                 {
-                    // Check if material has invalid shader (shows as magenta)
-                    if (mat.shader == null || mat.shader.name.Contains("Hidden/InternalErrorShader"))
+                    if (sharedMats[i] == null || sharedMats[i].shader == null || 
+                        sharedMats[i].shader.name.Contains("Hidden/InternalErrorShader"))
                     {
                         Material newMat = new Material(Shader.Find("Standard"));
-                        newMat.color = new Color(0.6f, 0.6f, 0.6f); // Gray fallback
-                        renderer.material = newMat;
+                        newMat.color = new Color(0.6f, 0.6f, 0.6f);
+                        sharedMats[i] = newMat;
+                        needsUpdate = true;
                         Debug.LogWarning($"  ⚠️  Fixed invalid shader on {renderer.gameObject.name}, applied gray material");
                     }
                 }
+                
+                if (needsUpdate)
+                    renderer.sharedMaterials = sharedMats;
             }
         }
 
