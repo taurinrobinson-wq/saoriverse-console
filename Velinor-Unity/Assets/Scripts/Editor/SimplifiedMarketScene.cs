@@ -208,11 +208,12 @@ namespace Velinor.Editor
 
         private static void CreateGroundPlane(Transform parent)
         {
-            GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            // Use a cube instead of plane (plane is infinitely thin and hard to see)
+            GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
             ground.name = "Ground";
             ground.transform.parent = parent;
-            ground.transform.position = Vector3.zero; // Y=0 world ground level
-            ground.transform.localScale = new Vector3(10, 1, 10); // 20×20 meter plane
+            ground.transform.position = new Vector3(0, -0.05f, 0); // Slightly below Y=0
+            ground.transform.localScale = new Vector3(20, 0.1f, 20); // 20×20m, 0.1m thick
 
             Object.DestroyImmediate(ground.GetComponent<Collider>());
 
@@ -222,20 +223,20 @@ namespace Velinor.Editor
             mr.material = mat;
 
             BoxCollider collider = ground.AddComponent<BoxCollider>();
-            collider.size = new Vector3(10, 0.1f, 10);
+            collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
 
             ground.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Ground plane at Y=0, 20×20m");
+            Debug.Log("  ✅ Ground (visible brown cube) at Y=-0.05 to Y=+0.05, 20×20m");
         }
 
         private static void CreateCenterWalkway(Transform parent)
         {
-            // Walkway from Z=-2 to Z=15, X=-3 to X=3, Y=0.01f (slightly above ground)
-            GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            // Walkway from Z=-2 to Z=15, X=-3 to X=3, Y=0 level (uses cube for visibility)
+            GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Cube);
             walkway.name = "Walkway_Center";
             walkway.transform.parent = parent;
-            walkway.transform.position = new Vector3(0, 0.01f, 6.5f); // Centered on Z-axis
-            walkway.transform.localScale = new Vector3(3, 1, 8.5f); // 6m wide × 17m long
+            walkway.transform.position = new Vector3(0, 0.01f, 6.5f); // Centered on Z-axis, slightly above ground
+            walkway.transform.localScale = new Vector3(6, 0.05f, 17); // 6m wide × 17m long × 0.05m thick
 
             Object.DestroyImmediate(walkway.GetComponent<Collider>());
 
@@ -245,10 +246,10 @@ namespace Velinor.Editor
             mr.material = mat;
 
             BoxCollider collider = walkway.AddComponent<BoxCollider>();
-            collider.size = new Vector3(3, 0.05f, 8.5f);
+            collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
 
             walkway.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Center walkway: (-3,0,-2) to (3,0,15)");
+            Debug.Log("  ✅ Center walkway (visible stone cube): (-3,0,-2) to (3,0,15)");
         }
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
