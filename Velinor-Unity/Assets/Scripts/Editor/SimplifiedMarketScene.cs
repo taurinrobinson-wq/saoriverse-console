@@ -320,9 +320,15 @@ namespace Velinor.Editor
             if (playerPrefab != null)
             {
                 Debug.Log("  ℹ️  Found PlayerArmature prefab, loading...");
-                GameObject player = PrefabUtility.InstantiatePrefab(playerPrefab, parent) as GameObject;
+                GameObject player = Object.Instantiate(playerPrefab, parent);
+                if (player == null)
+                {
+                    Debug.LogError("  ❌ Failed to instantiate player prefab!");
+                    AddPlayerFallback(parent);
+                    return;
+                }
                 player.name = "Player";
-                player.transform.position = Vector3.zero;
+                player.transform.localPosition = Vector3.zero;
                 
                 // Disable any conflicting controller scripts
                 MonoBehaviour[] scripts = player.GetComponentsInChildren<MonoBehaviour>();
