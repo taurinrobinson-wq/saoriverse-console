@@ -267,7 +267,6 @@ namespace Velinor.Editor
                 Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
             }
         }
-        }
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
         {
