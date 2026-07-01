@@ -426,6 +426,12 @@ namespace Velinor.Editor
 
                 cameraObj.AddComponent<AudioListener>();
 
+                // Fix materials on character (avoid pink)
+                FixCharacterMaterials(player);
+
+                // Set up physics for proper collision with ground
+                SetupCharacterPhysics(player);
+
                 // Add our controller to player
                 PlayerController controller = player.GetComponent<PlayerController>();
                 if (controller == null)
@@ -515,6 +521,64 @@ namespace Velinor.Editor
             }
             
             Debug.Log($"  ℹ️  Fixed materials on {obj.name} (color: {color})");
+        }
+
+        private static void FixCharacterMaterials(GameObject character)
+        {
+            // Apply a tan/beige material to all renderers to avoid pink default
+            Material characterMat = new Material(Shader.Find("Standard"));
+            characterMat.color = new Color(0.85f, 0.8f, 0.75f); // Tan/beige skin tone
+            
+            MeshRenderer[] renderers = character.GetComponentsInChildren<MeshRenderer>();
+            if (renderers.Length == 0)
+            {
+                Debug.LogWarning("  ⚠️  No MeshRenderers found on character model");
+                return;
+            }
+            
+            foreach (MeshRenderer renderer in renderers)
+            {
+                Material[] mats = new Material[renderer.sharedMaterials.Length];
+                for (int i = 0; i < mats.Length; i++)
+                    mats[i] = characterMat;
+                renderer.sharedMaterials = mats;
+            }
+            
+            Debug.Log($"  ✅ Applied materials to {renderers.Length} renderers on character");
+        }
+
+        private static void SetupCharacterPhysics(GameObject character)
+        {
+            // Ensure character has a Rigidbody for gravity and collision
+            Rigidbody rb = character.GetComponent<Rigidbody>();
+            if (rb == null)
+            {
+                rb = character.AddComponent<Rigidbody>();
+                Debug.Log("  ℹ️  Added Rigidbody to character");
+            }
+            
+            // Configure Rigidbody for player movement
+            rb.mass = 1;
+            rb.linearDamping = 0; // No air friction
+            rb.angularDamping = 0.05f;
+            rb.useGravity = true;
+            rb.constraints = RigidbodyConstraints.FreezeRotation; // Prevent unwanted rotation
+            
+            // Check for colliders (StarterAssets should have them)
+            Collider[] colliders = character.GetComponentsInChildren<Collider>();
+            if (colliders.Length == 0)
+            {
+                Debug.LogWarning("  ⚠️  No colliders found on character. Adding CapsuleCollider...");
+                CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
+                capsule.radius = 0.4f;
+                capsule.height = 1.8f;
+            }
+            else
+            {
+                Debug.Log($"  ✅ Character has {colliders.Length} collider(s) from prefab");
+            }
+            
+            Debug.Log("  ✅ Character physics configured for gravity and collision");
         }
 
         private static void SetupAudio()
