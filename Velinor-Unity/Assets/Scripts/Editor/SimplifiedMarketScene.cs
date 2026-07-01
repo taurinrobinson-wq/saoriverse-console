@@ -220,6 +220,9 @@ namespace Velinor.Editor
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
                     stall.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Scale down to fit grid
                     
+                    // Fix pink materials (assign default material if missing)
+                    FixPinkMaterials(stall);
+                    
                     Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]})");
                 }
                 else
@@ -270,6 +273,9 @@ namespace Velinor.Editor
                     rock.transform.position = basePositions[i];
                     rock.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f); // Scaled for marketplace
                     
+                    // Fix pink materials
+                    FixPinkMaterials(rock);
+                    
                     rock.layer = LayerMask.NameToLayer("Background");
                     Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]}");
                 }
@@ -299,6 +305,17 @@ namespace Velinor.Editor
 
         private static void AddPlayer(Transform parent)
         {
+            // CRITICAL: Destroy any existing MainCamera first (prevents conflicts)
+            Camera[] existingCameras = Object.FindObjectsByType<Camera>();
+            foreach (Camera cam in existingCameras)
+            {
+                if (cam.CompareTag("MainCamera"))
+                {
+                    Debug.Log("  🗑️ Destroying existing MainCamera to prevent conflicts");
+                    Object.DestroyImmediate(cam.gameObject);
+                }
+            }
+
             // Load StarterAssets Third Person Controller prefab
             GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PLAYER_PREFAB_PATH);
             
@@ -315,43 +332,36 @@ namespace Velinor.Editor
             player.name = "Player";
             player.transform.position = new Vector3(0, 0, 0); // Ground level
             
-            // Remove default camera if it exists (use player's camera or add our own)
-            Camera[] cameras = player.GetComponentsInChildren<Camera>();
-            if (cameras.Length == 0)
+            // Disable any cameras that came with the prefab
+            Camera[] prefabCameras = player.GetComponentsInChildren<Camera>();
+            foreach (Camera cam in prefabCameras)
             {
-                // No camera, add eye-level one
-                GameObject cameraObj = new GameObject("CameraHolder");
-                cameraObj.transform.parent = player.transform;
-                cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
-
-                Camera cam = cameraObj.AddComponent<Camera>();
-                cam.orthographic = true;
-                cam.orthographicSize = 6;
-                cam.nearClipPlane = -100;
-                cam.farClipPlane = 100;
-                cam.tag = "MainCamera";
-                cam.clearFlags = CameraClearFlags.SolidColor;
-                cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
-
-                cameraObj.AddComponent<AudioListener>();
+                cam.enabled = false;
             }
-            else
-            {
-                // Use first camera
-                cameras[0].tag = "MainCamera";
-                cameras[0].orthographic = true;
-                cameras[0].orthographicSize = 6;
-                cameras[0].nearClipPlane = -100;
-                cameras[0].farClipPlane = 100;
-                cameras[0].clearFlags = CameraClearFlags.SolidColor;
-                cameras[0].backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
-            }
+
+            // ALWAYS create our own MainCamera (guaranteed to work)
+            GameObject cameraObj = new GameObject("MainCamera");
+            cameraObj.transform.parent = player.transform;
+            cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
+
+            Camera cam_main = cameraObj.AddComponent<Camera>();
+            cam_main.orthographic = true;
+            cam_main.orthographicSize = 6;
+            cam_main.nearClipPlane = -100;
+            cam_main.farClipPlane = 100;
+            cam_main.tag = "MainCamera";
+            cam_main.clearFlags = CameraClearFlags.SolidColor;
+            cam_main.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
+            cam_main.depth = 0;
+
+            cameraObj.AddComponent<AudioListener>();
 
             // Add our PlayerController script
             if (player.GetComponent<PlayerController>() == null)
                 player.AddComponent<PlayerController>();
 
             Debug.Log("  ✅ Third Person Character loaded at origin (0, 0, 0)");
+            Debug.Log("  ✅ MainCamera created and tagged (first-person view ready)");
         }
 
         private static void AddPlayerFallback(Transform parent)
@@ -401,6 +411,28 @@ namespace Velinor.Editor
 
             player.layer = LayerMask.NameToLayer("Default");
             Debug.Log("  ⚠️  Using fallback capsule player (preferred prefab not found)");
+        }
+
+        private static void FixPinkMaterials(GameObject obj)
+        {
+            // Replace magenta/pink materials with valid Standard shader materials
+            // This handles missing shader references in imported assets
+            MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
+            
+            foreach (MeshRenderer renderer in renderers)
+            {
+                foreach (Material mat in renderer.materials)
+                {
+                    // Check if material has invalid shader (shows as magenta)
+                    if (mat.shader == null || mat.shader.name.Contains("Hidden/InternalErrorShader"))
+                    {
+                        Material newMat = new Material(Shader.Find("Standard"));
+                        newMat.color = new Color(0.6f, 0.6f, 0.6f); // Gray fallback
+                        renderer.material = newMat;
+                        Debug.LogWarning($"  ⚠️  Fixed invalid shader on {renderer.gameObject.name}, applied gray material");
+                    }
+                }
+            }
         }
 
         private static void SetupAudio()
