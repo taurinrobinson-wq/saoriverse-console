@@ -60,8 +60,10 @@ namespace Velinor.Core
         {
             if (rb == null) return;
 
-            // Ground check using raycast - CAPTURE HIT INFO
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, out lastGroundHit, groundCheckDistance);
+            // Ground check using raycast with LAYER MASK (only hit Foreground layer)
+            // This prevents false negatives from hitting stalls or other objects
+            int foregroundMask = LayerMask.GetMask("Foreground");
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, out lastGroundHit, groundCheckDistance, foregroundMask);
 
             // Handle input
             HandleMovement();

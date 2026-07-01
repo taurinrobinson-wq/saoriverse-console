@@ -224,7 +224,7 @@ namespace Velinor.Editor
             ground.name = "Ground";
             ground.transform.parent = parent;
             ground.transform.position = new Vector3(0, 0f, 0); // At Y=0 (ground level)
-            ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30×30m, 0.2m thick (larger + thicker for stability)
+            ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30×30m, 0.2m thick
 
             Object.DestroyImmediate(ground.GetComponent<Collider>());
 
@@ -234,39 +234,39 @@ namespace Velinor.Editor
             mr.material = mat;
 
             BoxCollider collider = ground.AddComponent<BoxCollider>();
-            collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
-            collider.center = Vector3.zero; // CRITICAL: Center at 0,0,0 of this cube
-            collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
+            collider.size = new Vector3(1, 1, 1);
+            collider.center = Vector3.zero;
+            collider.isTrigger = false;
 
-            // Add kinematic Rigidbody for proper physics (prevents dynamic objects from tunneling through)
+            // Add kinematic Rigidbody for proper physics
             Rigidbody groundRb = ground.AddComponent<Rigidbody>();
             groundRb.isKinematic = true;
             groundRb.useGravity = false;
             groundRb.linearDamping = 0;
             groundRb.angularDamping = 0;
 
+            // CRITICAL: Set to "Foreground" layer so raycast can detect it
             ground.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Ground (visible brown cube) at Y=0, 30×30m with physics");
             
-            // Verify collider and rigidbody were created properly
-            BoxCollider bc = ground.GetComponent<BoxCollider>();
-            if (bc != null)
+            // Ensure all children are also on Foreground layer
+            foreach (Transform child in ground.GetComponentsInChildren<Transform>())
             {
-                Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
-                Debug.Log($"    - Ground Position: {ground.transform.position}, Scale: {ground.transform.localScale}");
-                Debug.Log($"    - Collider bounds: min={bc.bounds.min}, max={bc.bounds.max}");
-                Debug.Log($"    - Rigidbody: isKinematic={groundRb.isKinematic}, useGravity={groundRb.useGravity}");
+                child.gameObject.layer = LayerMask.NameToLayer("Foreground");
             }
+
+            Debug.Log("  ✅ Ground (30×30m) - Layer: Foreground, Physics: Kinematic");
+            Debug.Log($"    - BoxCollider: size={collider.size}, center={collider.center}");
+            Debug.Log($"    - Collider bounds: min={collider.bounds.min}, max={collider.bounds.max}");
         }
 
         private static void CreateCenterWalkway(Transform parent)
         {
-            // Walkway from Z=-2 to Z=15, X=-3 to X=3, Y=0 level (uses cube for visibility)
+            // Walkway from Z=-2 to Z=15, X=-3 to X=3, Y=0 level
             GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Cube);
             walkway.name = "Walkway_Center";
             walkway.transform.parent = parent;
-            walkway.transform.position = new Vector3(0, 0f, 6.5f); // Centered on Z-axis, at ground level
-            walkway.transform.localScale = new Vector3(6, 0.2f, 17); // 6m wide × 17m long × 0.2m thick (match ground thickness)
+            walkway.transform.position = new Vector3(0, 0f, 6.5f);
+            walkway.transform.localScale = new Vector3(6, 0.2f, 17); // 6m wide × 17m long × 0.2m thick
 
             Object.DestroyImmediate(walkway.GetComponent<Collider>());
 
@@ -276,26 +276,28 @@ namespace Velinor.Editor
             mr.material = mat;
 
             BoxCollider collider = walkway.AddComponent<BoxCollider>();
-            collider.size = new Vector3(1, 1, 1); // Normalized to cube's local scale
-            collider.isTrigger = false; // IMPORTANT: Must not be a trigger for physics collision
+            collider.size = new Vector3(1, 1, 1);
+            collider.isTrigger = false;
 
-            // Add kinematic Rigidbody for proper physics (IDENTICAL to ground for consistency)
+            // Add kinematic Rigidbody (identical to ground)
             Rigidbody walkwayRb = walkway.AddComponent<Rigidbody>();
             walkwayRb.isKinematic = true;
             walkwayRb.useGravity = false;
             walkwayRb.linearDamping = 0;
             walkwayRb.angularDamping = 0;
 
+            // CRITICAL: Set to "Foreground" layer so raycast can detect it
             walkway.layer = LayerMask.NameToLayer("Foreground");
-            Debug.Log("  ✅ Center walkway (visible stone cube): (-3,0,-2) to (3,0,15) - PHYSICS SYNCHRONIZED WITH GROUND");
             
-            // Verify collider was created properly
-            BoxCollider bc = walkway.GetComponent<BoxCollider>();
-            if (bc != null)
+            // Ensure all children are also on Foreground layer
+            foreach (Transform child in walkway.GetComponentsInChildren<Transform>())
             {
-                Debug.Log($"    - BoxCollider: size={bc.size}, center={bc.center}, isTrigger={bc.isTrigger}");
-                Debug.Log($"    - Rigidbody: isKinematic={walkwayRb.isKinematic}, useGravity={walkwayRb.useGravity}");
+                child.gameObject.layer = LayerMask.NameToLayer("Foreground");
             }
+
+            Debug.Log("  ✅ Walkway_Center (6×0.2×17m) - Layer: Foreground, Physics: Kinematic");
+            Debug.Log($"    - BoxCollider: size={collider.size}, center={collider.center}");
+            Debug.Log($"    - Collider bounds: min={collider.bounds.min}, max={collider.bounds.max}");
         }
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
@@ -445,42 +447,32 @@ namespace Velinor.Editor
                 player.transform.position = new Vector3(0, 0.9f, 0); // Set to eye level (0.9m above ground)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
-                // AGGRESSIVE cleanup: Destroy ALL MonoBehaviour scripts except Animator
-                // This removes any broken/missing script references
-                MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>();
+                // FIRST PASS: Remove ANY null components (broken/missing scripts) before doing anything else
+                // This prevents "referenced script missing" errors
+                foreach (Transform t in player.GetComponentsInChildren<Transform>(includeInactive: true))
+                {
+                    Component[] comps = t.GetComponents<Component>();
+                    for (int i = comps.Length - 1; i >= 0; i--)
+                    {
+                        if (comps[i] == null)
+                        {
+                            Object.DestroyImmediate(comps[i], allowDestroyingAssets: true);
+                        }
+                    }
+                }
+                
+                // SECOND PASS: Destroy unwanted MonoBehaviour scripts except Animator
+                MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>(includeInactive: true);
                 foreach (MonoBehaviour mb in allMonoBehaviours)
                 {
                     if (mb != null)
                     {
                         string scriptName = mb.GetType().Name;
-                        // Keep ONLY Animator, destroy everything else for now
+                        // Keep ONLY Animator, destroy everything else
                         if (!scriptName.Contains("Animator"))
                         {
-                            Object.DestroyImmediate(mb);
-                            Debug.Log($"  🗑️  Destroyed {scriptName} (will re-add movement later)");
-                        }
-                    }
-                }
-                
-                // Remove any null components (broken scripts) on root and ALL children
-                Component[] rootComponents = player.GetComponents<Component>();
-                foreach (Component comp in rootComponents)
-                {
-                    if (comp == null)
-                    {
-                        Object.DestroyImmediate(comp);
-                    }
-                }
-                
-                // Also clean up children to catch any broken scripts on child objects
-                foreach (Transform child in player.GetComponentsInChildren<Transform>())
-                {
-                    Component[] childComps = child.GetComponents<Component>();
-                    foreach (Component comp in childComps)
-                    {
-                        if (comp == null)
-                        {
-                            Object.DestroyImmediate(comp);
+                            Object.DestroyImmediate(mb, allowDestroyingAssets: true);
+                            Debug.Log($"  🗑️  Destroyed {scriptName}");
                         }
                     }
                 }
