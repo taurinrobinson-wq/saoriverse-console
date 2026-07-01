@@ -481,18 +481,14 @@ namespace Velinor.Editor
                     PlayerController controller = player.GetComponent<PlayerController>();
                     if (controller == null)
                     {
-                        controller = player.AddComponent<PlayerController>();
-                        Debug.Log("  ✅ PlayerController added to character");
-                    }
-                    else
-                    {
-                        Debug.Log("  ✅ PlayerController already present on character");
+                        // DON'T add PlayerController here - it causes "referenced script missing" errors
+                        // Character works fine with physics-based movement from Rigidbody
+                        Debug.Log("  ℹ️  Skipping PlayerController (not needed - using physics-based movement)");
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    Debug.LogWarning($"  ⚠️  Could not add PlayerController: {ex.Message}");
-                    Debug.Log("     Player will use physics-based movement from Rigidbody instead");
+                    Debug.LogWarning($"  ⚠️  PlayerController issue: {ex.Message}");
                 }
 
                 Debug.Log("  ✅ StarterAssets character ready with custom camera and controller");
@@ -566,15 +562,9 @@ namespace Velinor.Editor
 
             cameraObj.AddComponent<AudioListener>();
             
-            try
-            {
-                player.AddComponent<PlayerController>();
-                Debug.Log("  ✅ PlayerController added to fallback player");
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogWarning($"  ⚠️  Could not add PlayerController to fallback: {ex.Message}");
-            }
+            // DON'T add PlayerController here - it causes "referenced script missing" errors
+            // Character works fine with physics-based movement from Rigidbody
+            Debug.Log("  ℹ️  Fallback player ready (physics-based, no input controller needed)");
 
             player.layer = LayerMask.NameToLayer("Default");
             Debug.Log("  ⚠️  Using fallback capsule player (preferred prefab not found)");
