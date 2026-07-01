@@ -7,14 +7,19 @@ using Velinor.Core;
 namespace Velinor.Editor
 {
     /// <summary>
-    /// SimplifiedMarketScene - Creates a structured Velinor marketplace with spatial grid
+    /// SimplifiedMarketScene - Creates a structured Velinor marketplace with real assets
+    /// 
+    /// Uses:
+    /// - EmbersStorm Mediterranean Ruins for market stalls/buildings
+    /// - Kyle's Rock Pack for terrain and background
+    /// - Dry Trees for atmosphere
+    /// - StarterAssets Third Person Controller for player
     /// 
     /// Follows Velinor spatial rules:
     /// - 1 Unity unit = 1 meter
     /// - Ground plane at Y = 0
     /// - Objects placed on coordinate grid (integer positions)
     /// - Two side rows of market stalls + center walkway
-    /// - Camera positioned at spatial anchor (0, 5, -10) with 20° tilt
     /// </summary>
     public class SimplifiedMarketScene : MonoBehaviour
     {
@@ -22,6 +27,13 @@ namespace Velinor.Editor
         private const float StallRowAX = -10f;  // Left side stalls
         private const float StallRowBX = 10f;   // Right side stalls
         private const float CenterWalkwayX = 0f;
+        
+        // Asset paths
+        private const string EMBERS_WALL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab";
+        private const string EMBERS_ROOF_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.prefab";
+        private const string ROCK_PREFAB_PATH = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1.prefab";
+        private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Prefab/Dry7509.prefab";
+        private const string PLAYER_PREFAB_PATH = "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab";
 
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
         public static void PopulateSimpleScene()
@@ -188,104 +200,181 @@ namespace Velinor.Editor
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
         {
-            // Three stalls per row at Z=0, Z=5, Z=10
-            // All at Y=0.5 (half-height, snapped to grid)
+            // Load EmbersStorm wall prefabs for market stalls
+            string[] wallPaths = {
+                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab",
+                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_B.prefab",
+                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_C.prefab"
+            };
+
             float[] stallZPositions = { 0f, 5f, 10f };
 
             for (int i = 0; i < stallZPositions.Length; i++)
             {
-                GameObject stall = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                stall.name = $"{stallPrefix}{i + 1}";
-                stall.transform.parent = parent;
-                stall.transform.position = new Vector3(stallX, 0.5f, stallZPositions[i]);
-                stall.transform.localScale = new Vector3(1, 1, 1); // Standard 1×1×1 stall (snapped to grid)
+                GameObject stallPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(wallPaths[i]);
+                
+                if (stallPrefab != null)
+                {
+                    GameObject stall = PrefabUtility.InstantiatePrefab(stallPrefab, parent) as GameObject;
+                    stall.name = $"{stallPrefix}_{i + 1}";
+                    stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
+                    stall.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Scale down to fit grid
+                    
+                    Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]})");
+                }
+                else
+                {
+                    // Fallback to cube if prefab not found
+                    GameObject stall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    stall.name = $"{stallPrefix}_{i + 1}_Fallback";
+                    stall.transform.parent = parent;
+                    stall.transform.position = new Vector3(stallX, 0.5f, stallZPositions[i]);
+                    stall.transform.localScale = new Vector3(1, 1, 1);
 
-                Object.DestroyImmediate(stall.GetComponent<Collider>());
+                    Object.DestroyImmediate(stall.GetComponent<Collider>());
+                    MeshRenderer mr = stall.GetComponent<MeshRenderer>();
+                    Material mat = new Material(Shader.Find("Standard"));
+                    mat.color = new Color(0.65f, 0.6f, 0.5f);
+                    mr.material = mat;
 
-                MeshRenderer mr = stall.GetComponent<MeshRenderer>();
-                Material mat = new Material(Shader.Find("Standard"));
-                mat.color = new Color(0.65f, 0.6f, 0.5f); // Tan wood
-                mr.material = mat;
-
-                stall.AddComponent<BoxCollider>();
-                stall.layer = LayerMask.NameToLayer("Midground");
+                    stall.AddComponent<BoxCollider>();
+                    stall.layer = LayerMask.NameToLayer("Midground");
+                    Debug.LogWarning($"  ⚠️  EmbersStorm prefab not found, using fallback cube");
+                }
             }
 
             string sideLabel = stallX < 0 ? "left (X=-10)" : "right (X=+10)";
-            Debug.Log($"  ✅ Created 3 stalls ({sideLabel}) at Z=0, Z=5, Z=10");
+            Debug.Log($"  ✅ Stall row ({sideLabel}) created at Z=0, Z=5, Z=10");
         }
 
         private static void CreateBackgroundRocks(Transform parent)
         {
-            // Distant background terrain at Z=20+ to frame the marketplace
-            // Positioned at ground level (Y adjusted so bottom sits at Y=0)
+            // Load Kyle's Rock Pack prefabs for background terrain
+            string[] rockPrefabs = {
+                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1.prefab",
+                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2.prefab",
+                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3.prefab"
+            };
+
             string[] rockNames = { "Rock_BackLeft", "Rock_BackCenter", "Rock_BackRight" };
-            
-            // Positions: X varies, Z in distance, Y will be adjusted per scale
             Vector3[] basePositions = { new Vector3(-8, 0, 20), new Vector3(0, 0, 25), new Vector3(8, 0, 22) };
-            Vector3[] scales = { new Vector3(2, 3, 2), new Vector3(2.5f, 3.5f, 2.5f), new Vector3(2, 3, 2) };
 
             for (int i = 0; i < rockNames.Length; i++)
             {
-                GameObject rock = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                rock.name = rockNames[i];
-                rock.transform.parent = parent;
+                GameObject rockPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(rockPrefabs[i % rockPrefabs.Length]);
                 
-                // Enforce 3-unit maximum dimension rule
-                Vector3 scale = scales[i];
-                if (scale.x > 3 || scale.y > 3 || scale.z > 3)
+                if (rockPrefab != null)
                 {
-                    Debug.LogWarning($"  ⚠️  {rockNames[i]} scale {scale} exceeds 3m limit, clamping");
-                    scale.x = Mathf.Min(scale.x, 3);
-                    scale.y = Mathf.Min(scale.y, 3);
-                    scale.z = Mathf.Min(scale.z, 3);
+                    GameObject rock = PrefabUtility.InstantiatePrefab(rockPrefab, parent) as GameObject;
+                    rock.name = rockNames[i];
+                    rock.transform.position = basePositions[i];
+                    rock.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f); // Scaled for marketplace
+                    
+                    rock.layer = LayerMask.NameToLayer("Background");
+                    Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]}");
                 }
-                rock.transform.localScale = scale;
-                
-                // Position: X and Z from basePositions, Y adjusted so bottom sits on ground (Y=0)
-                // For a cube at Y with height H, bottom is at Y - H/2, so: Y - H/2 = 0 → Y = H/2
-                Vector3 finalPos = basePositions[i];
-                finalPos.y = scale.y / 2f; // Position so bottom sits at Y=0
-                rock.transform.position = finalPos;
+                else
+                {
+                    // Fallback to cube
+                    GameObject rock = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    rock.name = $"{rockNames[i]}_Fallback";
+                    rock.transform.parent = parent;
+                    rock.transform.position = basePositions[i];
+                    rock.transform.localScale = new Vector3(2, 2, 2);
 
-                Object.DestroyImmediate(rock.GetComponent<Collider>());
+                    Object.DestroyImmediate(rock.GetComponent<Collider>());
+                    MeshRenderer mr = rock.GetComponent<MeshRenderer>();
+                    Material mat = new Material(Shader.Find("Standard"));
+                    mat.color = new Color(0.4f, 0.4f, 0.35f);
+                    mr.material = mat;
 
-                MeshRenderer mr = rock.GetComponent<MeshRenderer>();
-                Material mat = new Material(Shader.Find("Standard"));
-                mat.color = new Color(0.4f, 0.4f, 0.35f); // Gray stone
-                mr.material = mat;
-
-                rock.AddComponent<BoxCollider>();
-                rock.layer = LayerMask.NameToLayer("Background");
+                    rock.AddComponent<BoxCollider>();
+                    rock.layer = LayerMask.NameToLayer("Background");
+                    Debug.LogWarning($"  ⚠️  Kyle's Rock Pack not found, using fallback cube");
+                }
             }
 
-            Debug.Log("  ✅ Background terrain positioned at ground level (parallax depth)");
+            Debug.Log("  ✅ Background terrain loaded at distance (parallax depth)");
         }
 
         private static void AddPlayer(Transform parent)
         {
-            // Player spawns at market origin on the ground
+            // Load StarterAssets Third Person Controller prefab
+            GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PLAYER_PREFAB_PATH);
+            
+            if (playerPrefab == null)
+            {
+                Debug.LogError($"❌ Could not find player prefab at {PLAYER_PREFAB_PATH}");
+                Debug.LogWarning("  Falling back to simple player capsule");
+                AddPlayerFallback(parent);
+                return;
+            }
+
+            // Instantiate player
+            GameObject player = PrefabUtility.InstantiatePrefab(playerPrefab, parent) as GameObject;
+            player.name = "Player";
+            player.transform.position = new Vector3(0, 0, 0); // Ground level
+            
+            // Remove default camera if it exists (use player's camera or add our own)
+            Camera[] cameras = player.GetComponentsInChildren<Camera>();
+            if (cameras.Length == 0)
+            {
+                // No camera, add eye-level one
+                GameObject cameraObj = new GameObject("CameraHolder");
+                cameraObj.transform.parent = player.transform;
+                cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
+
+                Camera cam = cameraObj.AddComponent<Camera>();
+                cam.orthographic = true;
+                cam.orthographicSize = 6;
+                cam.nearClipPlane = -100;
+                cam.farClipPlane = 100;
+                cam.tag = "MainCamera";
+                cam.clearFlags = CameraClearFlags.SolidColor;
+                cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
+
+                cameraObj.AddComponent<AudioListener>();
+            }
+            else
+            {
+                // Use first camera
+                cameras[0].tag = "MainCamera";
+                cameras[0].orthographic = true;
+                cameras[0].orthographicSize = 6;
+                cameras[0].nearClipPlane = -100;
+                cameras[0].farClipPlane = 100;
+                cameras[0].clearFlags = CameraClearFlags.SolidColor;
+                cameras[0].backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
+            }
+
+            // Add our PlayerController script
+            if (player.GetComponent<PlayerController>() == null)
+                player.AddComponent<PlayerController>();
+
+            Debug.Log("  ✅ Third Person Character loaded at origin (0, 0, 0)");
+        }
+
+        private static void AddPlayerFallback(Transform parent)
+        {
+            // Fallback to green capsule if prefab not found
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
-            player.transform.position = new Vector3(0, 0.9f, 0); // Y=0.9 (standing on ground, 1.8m height)
+            player.transform.position = new Vector3(0, 0.9f, 0);
 
-            // Visual: Green capsule (character height 1.8m)
             GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.transform.parent = player.transform;
             visual.transform.localPosition = Vector3.zero;
             visual.name = "Model";
 
             Object.DestroyImmediate(visual.GetComponent<Collider>());
-
             MeshRenderer vmr = visual.GetComponent<MeshRenderer>();
             Material playerMat = new Material(Shader.Find("Standard"));
-            playerMat.color = new Color(0.2f, 0.8f, 0.3f); // Green
+            playerMat.color = new Color(0.2f, 0.8f, 0.3f);
             vmr.material = playerMat;
 
-            // Physics
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
-            collider.height = 1.8f; // Standard character height
+            collider.height = 1.8f;
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
             rb.mass = 1;
@@ -294,27 +383,24 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-            // Camera (eye-level, first-person)
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
-            cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0); // Eyes at 1.8m height
+            cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
 
             Camera cam = cameraObj.AddComponent<Camera>();
             cam.orthographic = true;
             cam.orthographicSize = 6;
             cam.nearClipPlane = -100;
             cam.farClipPlane = 100;
-            cam.cullingMask = -1;
+            cam.tag = "MainCamera";
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
-            cam.tag = "MainCamera"; // IMPORTANT: This is the main rendering camera
 
             cameraObj.AddComponent<AudioListener>();
             player.AddComponent<PlayerController>();
 
             player.layer = LayerMask.NameToLayer("Default");
-            Debug.Log("  ✅ Player spawned at market origin (0, 0.9, 0) - height 1.8m");
-            Debug.Log("  ✅ Player's camera is MainCamera for first-person control");
+            Debug.Log("  ⚠️  Using fallback capsule player (preferred prefab not found)");
         }
 
         private static void SetupAudio()
