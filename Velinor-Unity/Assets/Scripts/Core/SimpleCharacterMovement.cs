@@ -16,7 +16,7 @@ namespace Velinor.Core
         [SerializeField] private float groundCheckDistance = 0.1f;
 
         [Header("Camera")]
-        [SerializeField] private Camera mainCamera;
+        public Camera mainCamera;
         [SerializeField] private float mouseSensitivity = 2f;
 
         private Rigidbody rb;
@@ -75,6 +75,13 @@ namespace Velinor.Core
 
             // Apply drag
             rb.linearDamping = isGrounded ? groundDrag : 1f;
+            
+            // Handle jumping
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 5f, rb.linearVelocity.z);
+                Debug.Log("Jump!");
+            }
         }
 
         private void HandleCamera()

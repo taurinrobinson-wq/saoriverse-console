@@ -563,7 +563,7 @@ namespace Velinor.Editor
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
-            collider.center = new Vector3(0, 0, 0); // Centered at player root
+            collider.center = new Vector3(0, 0.9f, 0);  // Center at Y=0.9 so bottom touches ground at Y=0
             collider.isTrigger = false; // CRITICAL: Must NOT be trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
@@ -573,10 +573,11 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
+            rb.linearVelocity = new Vector3(0, -2f, 0);  // Help settle on ground
             
             Debug.Log($"  ✅ Fallback player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
-            Debug.Log($"      - CapsuleCollider: center={collider.center}, isTrigger={collider.isTrigger}");
-            Debug.Log($"      - World: bottom at Y=0 (ground), top at Y=1.8");
+            Debug.Log($"      - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
+            Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
 
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
@@ -671,12 +672,23 @@ namespace Velinor.Editor
                 Object.DestroyImmediate(col);
             }
             
-            // Disable any remaining scripts that might interfere
+            // Disable ONLY input/control scripts, keep animation systems enabled
             foreach (MonoBehaviour script in character.GetComponentsInChildren<MonoBehaviour>())
             {
                 if (script != null)
                 {
-                    script.enabled = false;
+                    string scriptName = script.GetType().Name;
+                    // Only disable control/input scripts, NOT animation systems
+                    if (scriptName == "ThirdPersonUserControl" || scriptName == "ThirdPersonCharacterController")
+                    {
+                        script.enabled = false;
+                        Debug.Log($"    - Disabled {scriptName} (control script)");
+                    }
+                    else if (scriptName.Contains("Animator"))
+                    {
+                        // KEEP Animator enabled for animations
+                        Debug.Log($"    - Keeping {scriptName} enabled (animation)");
+                    }
                 }
             }
             
@@ -695,23 +707,30 @@ namespace Velinor.Editor
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             
-            // Give character a small downward velocity to help settle on ground
-            rb.linearVelocity = new Vector3(0, -0.1f, 0);
+            // Give character downward velocity to help settle on ground
+            rb.linearVelocity = new Vector3(0, -2f, 0);  // Stronger downward to ensure settling
             
             Debug.Log($"  ✅ Rigidbody configured: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
-            Debug.Log($"      - Initial downward velocity applied to settle character on ground");
+            Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
+            Debug.Log($"      - Character position: {character.transform.position}");
             
             // Create ONE clean capsule collider for physics collision
             CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
             capsule.radius = 0.4f;
             capsule.height = 1.8f;
-            capsule.center = new Vector3(0, 0, 0);
+            capsule.center = new Vector3(0, 0.9f, 0);  // Center at Y=0.9 so bottom touches ground at Y=0
             capsule.isTrigger = false;
             Debug.Log($"  ✅ CapsuleCollider created:");
             Debug.Log($"      - Center: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
             Debug.Log($"      - isTrigger: {capsule.isTrigger}");
             Debug.Log($"      - World space: bottom at Y=0 (ground), top at Y=1.8 (head)");
-            Debug.Log("  ✅ Character physics ready for collision");
+            
+            // Debug: Check if collider actually touches ground
+            Bounds capsuleBounds = capsule.bounds;
+            Debug.Log($"  📊 COLLIDER BOUNDS:");
+            Debug.Log($"      - Bounds Center: {capsuleBounds.center}");
+            Debug.Log($"      - Min Y: {capsuleBounds.min.y}, Max Y: {capsuleBounds.max.y}");
+            Debug.Log($"  ✅ Character physics ready for collision");
         }
 
         private static void SetupAudio()
