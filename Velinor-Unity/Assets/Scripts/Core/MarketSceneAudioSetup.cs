@@ -24,12 +24,24 @@ namespace Velinor.Core
                 audioManager = audioManagerObj.AddComponent<AudioManager>();
                 Debug.LogWarning("⚠️ AudioManager not found in scene. Creating new one.");
             }
+            else
+            {
+                Debug.Log("✅ AudioManager found in scene");
+            }
         }
 
         private void Start()
         {
             // Start Glass Horizon as market atmosphere
-            StartMarketSoundscape();
+            if (audioManager != null)
+            {
+                Debug.Log("🎵 MarketSceneAudioSetup.Start() - Calling StartMarketSoundscape()...");
+                StartMarketSoundscape();
+            }
+            else
+            {
+                Debug.LogError("❌ AudioManager is null! Cannot start market soundscape");
+            }
         }
 
         /// <summary>
@@ -38,8 +50,16 @@ namespace Velinor.Core
         /// </summary>
         public void StartMarketSoundscape()
         {
-            audioManager.PlayMarketSoundscape();
-            Debug.Log("🎵 Market soundscape started: Glass Horizon (looping)");
+            if (audioManager != null)
+            {
+                Debug.Log("🎵 Calling AudioManager.PlayMarketSoundscape()...");
+                audioManager.PlayMarketSoundscape();
+                Debug.Log("🎵 Market soundscape started: Glass Horizon (looping)");
+            }
+            else
+            {
+                Debug.LogError("❌ Cannot start soundscape - AudioManager is null");
+            }
         }
 
         /// <summary>

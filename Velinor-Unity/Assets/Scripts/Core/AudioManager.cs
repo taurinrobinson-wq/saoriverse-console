@@ -63,31 +63,81 @@ namespace Velinor.Core
         private void LoadAudioClips()
         {
             // Load all music clips from Resources/Music folder
-            // This assumes your music files are in Assets/Music/ (visible as Resources)
+            // Files must be in Assets/Resources/Music/ (without extension in path)
+            
+            Debug.Log("🎵 AudioManager: Loading audio clips from Resources/Music...");
             
             if (glassHorizonClip == null)
+            {
                 glassHorizonClip = Resources.Load<AudioClip>("Music/Glass-Horizon");
+                if (glassHorizonClip != null)
+                    Debug.Log("  ✅ Glass-Horizon loaded");
+                else
+                    Debug.LogWarning("  ❌ Glass-Horizon NOT FOUND - check Assets/Resources/Music/");
+            }
             
             if (strangeSerenitySfxClip == null)
+            {
                 strangeSerenitySfxClip = Resources.Load<AudioClip>("Music/A-strange-serenity-_fade_");
+                if (strangeSerenitySfxClip != null)
+                    Debug.Log("  ✅ A-strange-serenity loaded");
+                else
+                    Debug.LogWarning("  ❌ A-strange-serenity NOT FOUND");
+            }
             
             if (intoTheCodexClip == null)
+            {
                 intoTheCodexClip = Resources.Load<AudioClip>("Music/Into-the-codex");
+                if (intoTheCodexClip != null)
+                    Debug.Log("  ✅ Into-the-codex loaded");
+                else
+                    Debug.LogWarning("  ❌ Into-the-codex NOT FOUND");
+            }
             
             if (travelingAlongClip == null)
+            {
                 travelingAlongClip = Resources.Load<AudioClip>("Music/Traveling-along");
+                if (travelingAlongClip != null)
+                    Debug.Log("  ✅ Traveling-along loaded");
+                else
+                    Debug.LogWarning("  ❌ Traveling-along NOT FOUND");
+            }
             
             if (sorrowWalksClip == null)
+            {
                 sorrowWalksClip = Resources.Load<AudioClip>("Music/Sorrow-walks");
+                if (sorrowWalksClip != null)
+                    Debug.Log("  ✅ Sorrow-walks loaded");
+                else
+                    Debug.LogWarning("  ❌ Sorrow-walks NOT FOUND");
+            }
             
             if (simpleClip == null)
+            {
                 simpleClip = Resources.Load<AudioClip>("Music/Simple");
+                if (simpleClip != null)
+                    Debug.Log("  ✅ Simple loaded");
+                else
+                    Debug.LogWarning("  ❌ Simple NOT FOUND");
+            }
             
             if (ambienceClip == null)
+            {
                 ambienceClip = Resources.Load<AudioClip>("Music/Some-ambience-");
+                if (ambienceClip != null)
+                    Debug.Log("  ✅ Some-ambience loaded");
+                else
+                    Debug.LogWarning("  ❌ Some-ambience NOT FOUND");
+            }
             
             if (velinorFadesSfxClip == null)
+            {
                 velinorFadesSfxClip = Resources.Load<AudioClip>("Music/Velinor-fades-_effect_");
+                if (velinorFadesSfxClip != null)
+                    Debug.Log("  ✅ Velinor-fades loaded");
+                else
+                    Debug.LogWarning("  ❌ Velinor-fades NOT FOUND");
+            }
         }
 
         /// <summary>
@@ -105,7 +155,15 @@ namespace Velinor.Core
         {
             if (clip == null)
             {
-                Debug.LogWarning($"AudioManager: Clip is null. Cannot play.");
+                Debug.LogWarning($"AudioManager: Clip '{trackName}' is null. Cannot play.");
+                Debug.LogWarning("  Make sure audio files are in Assets/Resources/Music/");
+                Debug.LogWarning("  File must end in .ogg or .mp3, Resource path does NOT include extension");
+                return;
+            }
+
+            if (musicSource == null)
+            {
+                Debug.LogError("AudioManager: musicSource is null!");
                 return;
             }
 
@@ -117,6 +175,10 @@ namespace Velinor.Core
             musicSource.clip = clip;
             musicSource.Play();
             currentTrack = clip;
+
+            string label = string.IsNullOrEmpty(trackName) ? clip.name : trackName;
+            Debug.Log($"🎵 Now playing: {label}");
+        }
 
             if (!string.IsNullOrEmpty(trackName))
                 Debug.Log($"🎵 Now playing: {trackName}");
