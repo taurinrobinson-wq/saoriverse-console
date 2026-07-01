@@ -41,12 +41,23 @@ namespace Velinor.Core
         {
             if (musicSource == null)
             {
-                musicSource = gameObject.AddComponent<AudioSource>();
+                try
+                {
+                    musicSource = gameObject.AddComponent<AudioSource>();
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning($"AudioManager: Failed to create AudioSource - {ex.Message}. Retrying...");
+                    musicSource = gameObject.AddComponent<AudioSource>();
+                }
             }
 
-            musicSource.loop = autoLoopMusic;
-            musicSource.volume = musicVolume;
-            musicSource.playOnAwake = false;
+            if (musicSource != null)
+            {
+                musicSource.loop = autoLoopMusic;
+                musicSource.volume = musicVolume;
+                musicSource.playOnAwake = false;
+            }
         }
 
         private void LoadAudioClips()

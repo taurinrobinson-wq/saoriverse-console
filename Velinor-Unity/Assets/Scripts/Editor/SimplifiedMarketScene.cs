@@ -333,7 +333,8 @@ namespace Velinor.Editor
             cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
             cam.tag = "MainCamera";
 
-            cameraGO.AddComponent<AudioListener>();
+            // DO NOT add AudioListener here - player's camera already has one!
+            // Only one AudioListener allowed per scene
 
             Debug.Log($"  ✅ Main camera at ({CameraPositionX}, {CameraPositionY}, {CameraPositionZ})");
             Debug.Log($"     Rotation: ({CameraRotationX}°, 0°, 0°) tilted down");
