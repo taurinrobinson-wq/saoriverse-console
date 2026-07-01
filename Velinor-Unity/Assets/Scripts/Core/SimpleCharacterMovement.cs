@@ -1,4 +1,5 @@
 using UnityEngine;
+#pragma warning disable CS0618  // Suppress Input Manager deprecation warning (still functional)
 
 namespace Velinor.Core
 {
@@ -145,6 +146,18 @@ namespace Velinor.Core
             }
         }
 
+        /// <summary>
+        /// Called by animation event when character lands after jump
+        /// Triggered by the JumpLand animation's AnimationEvent
+        /// </summary>
+        public void OnLand()
+        {
+            // Character landed - animation event callback
+            // Can add landing effects here (dust, sound, etc.)
+            Debug.Log("Character landed!");
+        }
+
         public bool IsGrounded => isGrounded;
     }
 }
+#pragma warning restore CS0618
