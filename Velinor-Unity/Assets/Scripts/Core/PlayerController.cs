@@ -43,8 +43,8 @@ namespace Velinor.Core
             {
                 rb = gameObject.AddComponent<Rigidbody>();
                 rb.mass = 1;
-                rb.drag = groundDrag;
-                rb.angularDrag = 0.05f;
+                rb.linearDamping = groundDrag;
+                rb.angularDamping = 0.05f;
                 rb.useGravity = true;
                 rb.constraints = RigidbodyConstraints.FreezeRotation;
             }
@@ -67,10 +67,10 @@ namespace Velinor.Core
         private void Update()
         {
             // Check if grounded using raycast
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + rb.velocity.y * Time.deltaTime, groundLayer);
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + rb.linearVelocity.y * Time.deltaTime, groundLayer);
 
             // Apply drag based on ground state
-            rb.drag = isGrounded ? groundDrag : airDrag;
+            rb.linearDamping = isGrounded ? groundDrag : airDrag;
 
             // Handle input
             HandleMovement();
@@ -95,9 +95,9 @@ namespace Velinor.Core
             moveDirection = moveDirection.normalized;
 
             // Apply velocity
-            rb.velocity = new Vector3(
+            rb.linearVelocity = new Vector3(
                 moveDirection.x * currentSpeed,
-                rb.velocity.y, // Preserve vertical velocity (gravity, jump)
+                rb.linearVelocity.y, // Preserve vertical velocity (gravity, jump)
                 moveDirection.z * currentSpeed
             );
         }
@@ -106,7 +106,7 @@ namespace Velinor.Core
         {
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // Reset vertical
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z); // Reset vertical
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
         }

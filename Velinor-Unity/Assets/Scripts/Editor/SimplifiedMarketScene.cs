@@ -23,11 +23,6 @@ namespace Velinor.Editor
         private const float StallRowBX = 10f;   // Right side stalls
         private const float CenterWalkwayX = 0f;
 
-        private const float CameraPositionX = 0f;
-        private const float CameraPositionY = 5f;
-        private const float CameraPositionZ = -10f;
-        private const float CameraRotationX = 20f; // Tilted view
-
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
         public static void PopulateSimpleScene()
         {
@@ -86,11 +81,7 @@ namespace Velinor.Editor
             Debug.Log("👤 Adding player...");
             AddPlayer(charRoot);
 
-            // Step 7: Main camera at anchor point
-            Debug.Log("📷 Configuring main camera...");
-            ConfigureMainCamera();
-
-            // Step 8: Audio
+            // Step 7: Audio
             Debug.Log("🎵 Setting up audio...");
             SetupAudio();
 
@@ -100,7 +91,7 @@ namespace Velinor.Editor
             Debug.Log("   Row B (X=+10): Stalls at Z=0, Z=5, Z=10");
             Debug.Log("   Walkway (X=0): Center path for navigation");
             Debug.Log("   Player: Spawned at origin (0, 0.9, 0)");
-            Debug.Log("   Camera: At (0, 5, -10) looking down 20°\n");
+            Debug.Log("   Camera: First-person from player eyes\n");
             Debug.Log("🎮 Press Play to explore\n");
 
             EditorSceneManager.MarkSceneDirty(activeScene);
@@ -296,7 +287,7 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-            // Camera (eye-level)
+            // Camera (eye-level, first-person)
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
             cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0); // Eyes at 1.8m height
@@ -309,36 +300,14 @@ namespace Velinor.Editor
             cam.cullingMask = -1;
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
+            cam.tag = "MainCamera"; // IMPORTANT: This is the main rendering camera
 
             cameraObj.AddComponent<AudioListener>();
             player.AddComponent<PlayerController>();
 
             player.layer = LayerMask.NameToLayer("Default");
             Debug.Log("  ✅ Player spawned at market origin (0, 0.9, 0) - height 1.8m");
-        }
-
-        private static void ConfigureMainCamera()
-        {
-            // Create main camera at fixed spatial anchor
-            GameObject cameraGO = new GameObject("MainCamera");
-            cameraGO.transform.position = new Vector3(CameraPositionX, CameraPositionY, CameraPositionZ);
-            cameraGO.transform.rotation = Quaternion.Euler(CameraRotationX, 0, 0); // 20° tilt for overview
-
-            Camera cam = cameraGO.AddComponent<Camera>();
-            cam.orthographic = true;
-            cam.orthographicSize = 6;
-            cam.nearClipPlane = -100;
-            cam.farClipPlane = 100;
-            cam.clearFlags = CameraClearFlags.SolidColor;
-            cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
-            cam.tag = "MainCamera";
-
-            // DO NOT add AudioListener here - player's camera already has one!
-            // Only one AudioListener allowed per scene
-
-            Debug.Log($"  ✅ Main camera at ({CameraPositionX}, {CameraPositionY}, {CameraPositionZ})");
-            Debug.Log($"     Rotation: ({CameraRotationX}°, 0°, 0°) tilted down");
-            Debug.Log($"     Orthographic size: 6");
+            Debug.Log("  ✅ Player's camera is MainCamera for first-person control");
         }
 
         private static void SetupAudio()
