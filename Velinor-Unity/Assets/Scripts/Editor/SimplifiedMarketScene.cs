@@ -521,31 +521,34 @@ namespace Velinor.Editor
             visual.transform.localPosition = Vector3.zero;
             visual.name = "Model";
 
-            Object.DestroyImmediate(visual.GetComponent<Collider>());
+            // Remove the collider from the visual primitive (it gets created automatically)
+            Collider visualCollider = visual.GetComponent<Collider>();
+            if (visualCollider != null)
+                Object.DestroyImmediate(visualCollider);
+
             MeshRenderer vmr = visual.GetComponent<MeshRenderer>();
             Material playerMat = new Material(Shader.Find("Standard"));
             playerMat.color = new Color(0.2f, 0.8f, 0.3f);
             vmr.material = playerMat;
 
+            // Add collider to ROOT (not visual child)
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
-            collider.center = new Vector3(0, 0, 0); // Capsule center at character root = ground contact
-            collider.isTrigger = false; // IMPORTANT: Must not be a trigger
+            collider.center = new Vector3(0, 0, 0); // Centered at player root
+            collider.isTrigger = false; // CRITICAL: Must NOT be trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
             rb.mass = 1;
-            rb.linearDamping = 0; // Changed from 5 to 0 for proper physics
+            rb.linearDamping = 0;
             rb.angularDamping = 0.05f;
             rb.useGravity = true;
-            rb.isKinematic = false; // Ensure it's not kinematic
+            rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             
             Debug.Log($"  ✅ Fallback player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
-            Debug.Log($"    - Player position: {player.transform.position}");
-            Debug.Log($"    - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
-            Debug.Log($"    - Capsule bottom in world space: Y={0.9 - 0.9}=0 (touches ground)");
-            Debug.Log($"    - Capsule top in world space: Y={0.9 + 0.9}=1.8");
+            Debug.Log($"      - CapsuleCollider: center={collider.center}, isTrigger={collider.isTrigger}");
+            Debug.Log($"      - World: bottom at Y=0 (ground), top at Y=1.8");
 
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
@@ -562,8 +565,6 @@ namespace Velinor.Editor
 
             cameraObj.AddComponent<AudioListener>();
             
-            // DON'T add PlayerController here - it causes "referenced script missing" errors
-            // Character works fine with physics-based movement from Rigidbody
             Debug.Log("  ℹ️  Fallback player ready (physics-based, no input controller needed)");
 
             player.layer = LayerMask.NameToLayer("Default");
@@ -625,8 +626,17 @@ namespace Velinor.Editor
                 if (script != null && script.GetType().Name != "PlayerController")
                 {
                     script.enabled = false;
-                    Debug.Log($"  ℹ️  Disabled script: {script.GetType().Name}");
                 }
+            }
+            
+            // CRITICAL: Remove ALL existing colliders (child or root) - StarterAssets has trigger colliders on body parts
+            // These interfere with physics collision
+            Collider[] existingColliders = character.GetComponentsInChildren<Collider>();
+            Debug.Log($"  🗑️  Found {existingColliders.Length} existing collider(s), removing all...");
+            foreach (Collider col in existingColliders)
+            {
+                Debug.Log($"      - Removing {col.gameObject.name} ({col.GetType().Name}, trigger={col.isTrigger})");
+                Object.DestroyImmediate(col);
             }
             
             // Ensure character has a Rigidbody for gravity and collision
@@ -634,7 +644,6 @@ namespace Velinor.Editor
             if (rb == null)
             {
                 rb = character.AddComponent<Rigidbody>();
-                Debug.Log("  ℹ️  Added Rigidbody to character root");
             }
             
             // Configure Rigidbody for player movement
@@ -644,55 +653,19 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.isKinematic = false; // MUST be false for gravity to work
             rb.constraints = RigidbodyConstraints.FreezeRotation; // Prevent unwanted rotation
-            Debug.Log($"  ✅ Rigidbody: mass={rb.mass}, useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
+            Debug.Log($"  ✅ Rigidbody configured: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             
-            // Check for colliders and ENSURE NONE ARE TRIGGERS
-            Collider[] colliders = character.GetComponentsInChildren<Collider>();
-            Debug.Log($"  ℹ️  Found {colliders.Length} collider(s) on character and children");
-            
-            if (colliders.Length == 0)
-            {
-                Debug.LogWarning("  ⚠️  No colliders found on character. Adding CapsuleCollider...");
-                CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
-                capsule.radius = 0.4f;
-                capsule.height = 1.8f;
-                capsule.center = new Vector3(0, 0, 0); // Capsule center at character root height = ground contact
-                capsule.isTrigger = false;
-                Debug.Log("  ✅ Added CapsuleCollider to character root");
-                Debug.Log($"    - Position: center={capsule.center}, radius={capsule.radius}, height={capsule.height}");
-                Debug.Log($"    - Capsule extends from Y={-0.9} to Y={0.9} (relative to character root at Y=0.9)");
-                Debug.Log($"    - In world space: bottom at Y={0.9 - 0.9}=0 (ground level), top at Y={0.9 + 0.9}=1.8");
-            }
-            else
-            {
-                // Make sure none are triggers
-                foreach (Collider col in colliders)
-                {
-                    if (col.isTrigger)
-                    {
-                        col.isTrigger = false;
-                        Debug.Log($"  ⚠️  Fixed trigger collider on {col.gameObject.name}: isTrigger=false");
-                    }
-                    
-                    // Log detailed info for BoxColliders and CapsuleColliders
-                    if (col is BoxCollider bc)
-                    {
-                        Debug.Log($"    - {col.gameObject.name}: BoxCollider (center={bc.center}, size={bc.size}, trigger={col.isTrigger})");
-                        Debug.Log($"      bounds: min={bc.bounds.min}, max={bc.bounds.max}");
-                    }
-                    else if (col is CapsuleCollider cc)
-                    {
-                        Debug.Log($"    - {col.gameObject.name}: CapsuleCollider (center={cc.center}, radius={cc.radius}, height={cc.height}, trigger={col.isTrigger})");
-                        Debug.Log($"      bounds: min={cc.bounds.min}, max={cc.bounds.max}");
-                    }
-                    else
-                    {
-                        Debug.Log($"    - {col.gameObject.name}: {col.GetType().Name} (trigger={col.isTrigger})");
-                    }
-                }
-            }
-            
-            Debug.Log("  ✅ Character physics fully configured");
+            // Create ONE clean capsule collider for physics collision
+            CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
+            capsule.radius = 0.4f;
+            capsule.height = 1.8f;
+            capsule.center = new Vector3(0, 0, 0); // Centered at character root
+            capsule.isTrigger = false; // CRITICAL: Must NOT be trigger
+            Debug.Log($"  ✅ CapsuleCollider created:");
+            Debug.Log($"      - Center: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
+            Debug.Log($"      - isTrigger: {capsule.isTrigger}");
+            Debug.Log($"      - World space: bottom at Y=0 (ground), top at Y=1.8 (head)");
+            Debug.Log("  ✅ Character physics ready for collision");
         }
 
         private static void SetupAudio()
