@@ -24,6 +24,11 @@ namespace Velinor.Core
         private bool isGrounded;
         private float yRotation = 0f;
         private Animator animator;
+        
+        // Debug tracking
+        private RaycastHit lastGroundHit;
+        private float debugLogTimer = 0f;
+        private const float DEBUG_LOG_INTERVAL = 0.5f; // Log every 0.5 seconds
 
         private void Start()
         {
@@ -55,13 +60,31 @@ namespace Velinor.Core
         {
             if (rb == null) return;
 
-            // Ground check using raycast
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+            // Ground check using raycast - CAPTURE HIT INFO
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, out lastGroundHit, groundCheckDistance);
 
             // Handle input
             HandleMovement();
             HandleCamera();
             HandleCursorToggle();
+            
+            // Debug logging
+            DebugGroundState();
+        }
+        
+        private void DebugGroundState()
+        {
+            debugLogTimer += Time.deltaTime;
+            if (debugLogTimer >= DEBUG_LOG_INTERVAL)
+            {
+                debugLogTimer = 0f;
+                
+                string groundInfo = isGrounded 
+                    ? $"✅ GROUNDED - Object: '{lastGroundHit.collider.gameObject.name}' | Position: {transform.position:F2} | Hit: {lastGroundHit.point:F2}"
+                    : $"❌ FREEFALL - Position: {transform.position:F2} | Velocity: {rb.linearVelocity:F2}";
+                
+                Debug.Log($"[PLAYER STATE] {groundInfo}");
+            }
         }
 
         private void HandleMovement()
@@ -196,6 +219,26 @@ namespace Velinor.Core
         }
 
         public bool IsGrounded => isGrounded;
+        
+        /// <summary>
+        /// Visual debug: Draw raycast line in scene view
+        /// </summary>
+        private void OnDrawGizmos()
+        {
+            if (!Application.isPlaying) return;
+            
+            // Draw ground detection raycast
+            Vector3 rayStart = transform.position;
+            Vector3 rayEnd = rayStart + Vector3.down * groundCheckDistance;
+            
+            // Green line if grounded, red if in freefall
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawLine(rayStart, rayEnd);
+            
+            // Mark the raycast endpoint
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(rayEnd, 0.1f);
+        }
     }
 }
 #pragma warning restore CS0618
