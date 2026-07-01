@@ -44,6 +44,7 @@ namespace Velinor.Core
                 try
                 {
                     musicSource = gameObject.AddComponent<AudioSource>();
+                    Debug.Log("🎵 AudioManager: Created new AudioSource");
                 }
                 catch (System.Exception ex)
                 {
@@ -57,6 +58,18 @@ namespace Velinor.Core
                 musicSource.loop = autoLoopMusic;
                 musicSource.volume = musicVolume;
                 musicSource.playOnAwake = false;
+                
+                Debug.Log($"🎵 AudioSource configured:");
+                Debug.Log($"  - Volume: {musicSource.volume}");
+                Debug.Log($"  - Muted: {musicSource.mute}");
+                Debug.Log($"  - Loop: {musicSource.loop}");
+                Debug.Log($"  - Enabled: {musicSource.enabled}");
+                Debug.Log($"  - PlayOnAwake: {musicSource.playOnAwake}");
+                Debug.Log($"  - OutputAudioMixerGroup: {musicSource.outputAudioMixerGroup}");
+            }
+            else
+            {
+                Debug.LogError("❌ AudioManager: Failed to create or find AudioSource!");
             }
         }
 
@@ -178,6 +191,21 @@ namespace Velinor.Core
 
             string label = string.IsNullOrEmpty(trackName) ? clip.name : trackName;
             Debug.Log($"🎵 Now playing: {label}");
+            
+            // Debug: Check if audio is actually playing
+            Debug.Log($"  AudioSource.isPlaying: {musicSource.isPlaying}");
+            Debug.Log($"  AudioSource.time: {musicSource.time}");
+            Debug.Log($"  AudioSource.volume: {musicSource.volume}");
+            Debug.Log($"  AudioSource.mute: {musicSource.mute}");
+            Debug.Log($"  AudioSource.enabled: {musicSource.enabled}");
+            Debug.Log($"  gameObject.activeSelf: {gameObject.activeSelf}");
+            Debug.Log($"  Time.timeScale: {Time.timeScale}");
+            
+            // Check for AudioListener
+            AudioListener[] listeners = FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
+            Debug.Log($"  AudioListeners in scene: {listeners.Length}");
+            foreach (var listener in listeners)
+                Debug.Log($"    - {listener.gameObject.name} (enabled: {listener.enabled})");
         }
 
         /// <summary>
