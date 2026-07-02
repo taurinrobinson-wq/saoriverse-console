@@ -24,8 +24,8 @@ namespace Velinor.Editor
     public class SimplifiedMarketScene : MonoBehaviour
     {
         // Spatial anchors (Velinor marketplace grid)
-        private const float StallRowAX = -10f;  // Left side stalls
-        private const float StallRowBX = 10f;   // Right side stalls
+        private const float StallRowAX = -7f;   // Left side stalls
+        private const float StallRowBX = 7f;    // Right side stalls
         private const float CenterWalkwayX = 0f;
         
         // Asset paths
@@ -336,26 +336,13 @@ namespace Velinor.Editor
                     stall.name = $"{stallPrefix}_{i + 1}";
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
                     
-                    // Apply user-optimized scale: 3x wide (long), 0.225 height and depth
-                    stall.transform.localScale = new Vector3(3f, 0.225f, 0.225f);
+                    // Apply 1:1 scale for stalls
+                    stall.transform.localScale = new Vector3(1f, 1f, 1f);
                     
-                    // Recalculate colliders for non-uniform scaling
-                    Collider[] colliders = stall.GetComponentsInChildren<Collider>();
-                    foreach (Collider col in colliders)
-                    {
-                        if (col is BoxCollider box)
-                        {
-                            // BoxCollider scales automatically, but may need tweaking
-                            // Keep as-is for now, user can manually adjust if needed
-                        }
-                        else if (col is CapsuleCollider cap)
-                        {
-                            // Capsule colliders don't scale non-uniformly well
-                            // May need manual adjustment
-                        }
-                    }
+                    // Fix pink materials on tent (replace with Standard shader)
+                    AssetPackManager.FixPropMaterials(stall);
                     
-                    Debug.Log($"  ✅ Tent stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - custom scale (3, 0.225, 0.225)");
+                    Debug.Log($"  ✅ Tent stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - scale (1, 1, 1)");
                 }
                 else
                 {
@@ -363,8 +350,8 @@ namespace Velinor.Editor
                     GameObject stall = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     stall.name = $"{stallPrefix}_{i + 1}_Fallback";
                     stall.transform.parent = parent;
-                    stall.transform.position = new Vector3(stallX, 0.75f, stallZPositions[i]);
-                    stall.transform.localScale = new Vector3(3f, 0.225f, 0.225f);
+                    stall.transform.position = new Vector3(stallX, 0.5f, stallZPositions[i]);
+                    stall.transform.localScale = new Vector3(1f, 1f, 1f);
 
                     Object.DestroyImmediate(stall.GetComponent<Collider>());
                     MeshRenderer mr = stall.GetComponent<MeshRenderer>();
@@ -378,8 +365,8 @@ namespace Velinor.Editor
                 }
             }
 
-            string sideLabel = stallX < 0 ? "left (X=-10)" : "right (X=+10)";
-            Debug.Log($"  ✅ Market tent stalls ({sideLabel}) created - optimized scale for player approach");
+            string sideLabel = stallX < 0 ? "left (X=-7)" : "right (X=+7)";
+            Debug.Log($"  ✅ Market tent stalls ({sideLabel}) created");
         }
 
         private static void CreateBackgroundRocks(Transform parent)
