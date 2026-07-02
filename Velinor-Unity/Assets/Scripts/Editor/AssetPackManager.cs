@@ -112,21 +112,21 @@ namespace Velinor.Editor
                 // English Oak Set
                 new TreeAsset(
                     "English Oak - Full Leaf",
-                    "Assets/3 English Oak Set/Oak.FBX",
+                    "Assets/3 English Oak Set/Oak.fbx",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Fully leafed English oak tree (summer)"
                 ),
                 new TreeAsset(
                     "English Oak - Bare",
-                    "Assets/3 English Oak Set/Bare_Oak.FBX",
+                    "Assets/3 English Oak Set/Bare_Oak.fbx",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Bare winter oak (seasonal variety)"
                 ),
                 new TreeAsset(
                     "English Oak - Bent",
-                    "Assets/3 English Oak Set/Bent_Oak.FBX",
+                    "Assets/3 English Oak Set/Bent_Oak.fbx",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Bent oak for visual interest"
@@ -135,14 +135,14 @@ namespace Velinor.Editor
                 // Dry Trees
                 new TreeAsset(
                     "Dry Tree 1",
-                    "Assets/Dry_Trees/Model/Dry3333.FBX",
+                    "Assets/Dry_Trees/Model/Dry3333.fbx",
                     new Vector3(2.5f, 2.5f, 2.5f),
                     AssetPackType.DryTrees,
                     "Dead/dying tree for arid areas"
                 ),
                 new TreeAsset(
                     "Dry Tree 2",
-                    "Assets/Dry_Trees/Model/Dry4910.FBX",
+                    "Assets/Dry_Trees/Model/Dry4910.fbx",
                     new Vector3(2.5f, 2.5f, 2.5f),
                     AssetPackType.DryTrees,
                     "Low-poly dried tree variant"
@@ -419,7 +419,29 @@ namespace Velinor.Editor
             if (parent != null)
                 instance.transform.parent = parent;
 
+            // Fix any broken materials on the prop
+            FixPropMaterials(instance);
+
             return instance;
+        }
+
+        /// <summary>
+        /// Fix broken/pink materials on a prop by replacing with Standard shader
+        /// </summary>
+        private static void FixPropMaterials(GameObject prop)
+        {
+            // Create a default material with Standard shader for props
+            Material standardMat = new Material(Shader.Find("Standard"));
+            standardMat.color = new Color(0.7f, 0.7f, 0.7f); // Light gray for props
+            
+            MeshRenderer[] renderers = prop.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                Material[] mats = new Material[renderer.sharedMaterials.Length];
+                for (int i = 0; i < mats.Length; i++)
+                    mats[i] = standardMat;
+                renderer.sharedMaterials = mats;
+            }
         }
 
         /// <summary>
@@ -480,6 +502,9 @@ namespace Velinor.Editor
             
             if (parent != null)
                 instance.transform.parent = parent;
+
+            // Fix any broken materials on the tree
+            FixPropMaterials(instance);
 
             return instance;
         }

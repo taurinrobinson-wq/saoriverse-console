@@ -36,7 +36,7 @@ namespace Velinor.Editor
         private const string ROCK_PREFAB_PATH_2 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab";
         private const string ROCK_PREFAB_PATH_3 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab";
         
-        private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Prefab/Dry7509.prefab";
+        private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Model/Dry7509.fbx";
 
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
         public static void PopulateSimpleScene()
@@ -823,19 +823,11 @@ namespace Velinor.Editor
                 MeshRenderer groundRenderer = ground.GetComponent<MeshRenderer>();
                 if (groundRenderer != null)
                 {
-                    // Try to load Kyle's Rock Pack - Arid material
-                    Material groundMat = AssetDatabase.LoadAssetAtPath<Material>(
-                        "Assets/Kyle's Rock Pack/Materials/M_arid_rocks_1.mat");
-                    
-                    if (groundMat != null)
-                    {
-                        groundRenderer.material = groundMat;
-                        Debug.Log("  ✅ Applied Kyle's Rock Pack (Arid) to ground plane");
-                    }
-                    else
-                    {
-                        Debug.LogWarning("  ⚠️  Kyle's Rock Pack material not found - keeping default");
-                    }
+                    // Apply Standard shader material to ground (fallback approach)
+                    Material groundMat = new Material(Shader.Find("Standard"));
+                    groundMat.color = new Color(0.6f, 0.55f, 0.5f); // Tan/dirt color
+                    groundRenderer.material = groundMat;
+                    Debug.Log("  ✅ Applied Standard shader to ground plane (tan color)");
                 }
             }
 
@@ -844,19 +836,11 @@ namespace Velinor.Editor
                 MeshRenderer walkwayRenderer = walkway.GetComponent<MeshRenderer>();
                 if (walkwayRenderer != null)
                 {
-                    // Try to load EmbersStorm tiles for walkway
-                    Material walkwayMat = AssetDatabase.LoadAssetAtPath<Material>(
-                        "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Materials/Tiles038.mat");
-                    
-                    if (walkwayMat != null)
-                    {
-                        walkwayRenderer.material = walkwayMat;
-                        Debug.Log("  ✅ Applied EmbersStorm Tiles to walkway");
-                    }
-                    else
-                    {
-                        Debug.LogWarning("  ⚠️  EmbersStorm Tiles not found - keeping default");
-                    }
+                    // Apply Standard shader material to walkway (fallback approach)
+                    Material walkwayMat = new Material(Shader.Find("Standard"));
+                    walkwayMat.color = new Color(0.5f, 0.5f, 0.5f); // Gray stone color
+                    walkwayRenderer.material = walkwayMat;
+                    Debug.Log("  ✅ Applied Standard shader to walkway (gray color)");
                 }
             }
         }
@@ -900,10 +884,10 @@ namespace Velinor.Editor
             // Tree prefab paths (with fallbacks)
             string[] treePrefabs = new string[]
             {
-                "Assets/DreamTree2/Model/DreamTree.fbx",
-                "Assets/3 English Oak Set/Models/Oak.fbx",
-                "Assets/3 English Oak Set/Models/Bare_Oak.fbx",
-                "Assets/Dry_Trees/Dry3333.fbx",
+                "Assets/DreamTree2/Mesh/DreamTree.FBX",
+                "Assets/3 English Oak Set/Oak.fbx",
+                "Assets/3 English Oak Set/Bare_Oak.fbx",
+                "Assets/Dry_Trees/Model/Dry3333.fbx",
             };
 
             int treeCount = 0;
@@ -944,8 +928,8 @@ namespace Velinor.Editor
 
             string[] propPrefabs = new string[]
             {
-                "Assets/GreenBugGames/Stump_old.fbx",
-                "Assets/SeedMesh/Succulents/Succulent_01.fbx",
+                "Assets/GreenBugGames/Scan Stump Vol.1/Stump_old.fbx",
+                "Assets/SeedMesh/Succulents/Succulent_EcheveriaRosalinda_var1.fbx",
             };
 
             int propCount = 0;
