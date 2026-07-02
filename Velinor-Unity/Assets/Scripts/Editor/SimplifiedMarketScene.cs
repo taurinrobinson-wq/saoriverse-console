@@ -95,7 +95,7 @@ namespace Velinor.Editor
             Debug.Log("   MarketOrigin: (0, 0, 0)");
             Debug.Log("   StallRowA: X=-10 (left side stalls at Z=0,5,10)");
             Debug.Log("   StallRowB: X=+10 (right side stalls at Z=0,5,10)");
-            Debug.Log("   CenterWalkway: X=±20 from Z=-2 to Z=15 (flanked by stalls at ±7)");
+            Debug.Log("   CenterWalkway: X=±10 from Z=-2 to Z=15 (flanked by stalls at ±7)");
 
             // Step 1: Ground plane
             Debug.Log("🌍 Creating ground plane...");
@@ -284,12 +284,12 @@ namespace Velinor.Editor
 
         private static void CreateCenterWalkway(Transform parent)
         {
-            // Walkway from Z=-2 to Z=15, X=-20 to X=20 (extends beyond stalls at ±7)
+            // Walkway from Z=-2 to Z=15, X=-10 to X=10 (extends beyond stalls at ±7)
             GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Cube);
             walkway.name = "Walkway_Center";
             walkway.transform.parent = parent;
             walkway.transform.position = new Vector3(0, 0f, 6.5f);
-            walkway.transform.localScale = new Vector3(40, 0.2f, 17); // 40m wide × 17m long × 0.2m thick
+            walkway.transform.localScale = new Vector3(20, 0.2f, 17); // 20m wide × 17m long × 0.2m thick
 
             Object.DestroyImmediate(walkway.GetComponent<Collider>());
 
@@ -300,7 +300,7 @@ namespace Velinor.Editor
 
             // CRITICAL: Collider size must match mesh scale
             BoxCollider collider = walkway.AddComponent<BoxCollider>();
-            collider.size = new Vector3(40, 0.2f, 17);  // Match mesh scale!
+            collider.size = new Vector3(20, 0.2f, 17);  // Match mesh scale!
             collider.isTrigger = false;
 
             // Add kinematic Rigidbody (identical to ground)
@@ -319,11 +319,11 @@ namespace Velinor.Editor
                 child.gameObject.layer = LayerMask.NameToLayer("Foreground");
             }
 
-            Debug.Log("  ✅ Walkway_Center (40×0.2×17m) - Extends to X=±20 - Layer: Foreground");
+            Debug.Log("  ✅ Walkway_Center (20×0.2×17m) - Extends to X=±10 - Layer: Foreground");
             Debug.Log($"    - Scale: {walkway.transform.localScale}, Position: {walkway.transform.position}");
             Debug.Log($"    - BoxCollider: size={collider.size}, center={collider.center}");
             Debug.Log($"    - Collider bounds: min={collider.bounds.min}, max={collider.bounds.max}");
-            Debug.Log("    - Game design: Stalls at X=±7, safe walkway extends to X=±20");
+            Debug.Log("    - Game design: Stalls at X=±7, safe walkway extends to X=±10");
         }
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
