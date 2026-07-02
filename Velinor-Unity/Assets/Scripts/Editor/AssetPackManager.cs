@@ -497,15 +497,6 @@ namespace Velinor.Editor
 
             return instance;
         }
-        {
-            List<TreeAsset> results = new List<TreeAsset>();
-            foreach (var tree in GetTreeAssets())
-            {
-                if (tree.pack == pack)
-                    results.Add(tree);
-            }
-            return results;
-        }
 
         /// <summary>
         /// Get materials by surface type
