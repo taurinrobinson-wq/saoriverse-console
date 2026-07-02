@@ -461,7 +461,7 @@ namespace Velinor.Editor
                 
                 player.name = "Player";
                 player.transform.localPosition = Vector3.zero;
-                player.transform.position = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
+                player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
                 // ========== CLEANUP PHASE 1: Remove null/broken components FIRST ==========
@@ -545,7 +545,7 @@ namespace Velinor.Editor
                 // ========== CREATE CAMERA ==========
                 GameObject cameraObj = new GameObject("MainCamera");
                 cameraObj.transform.parent = player.transform;
-                cameraObj.transform.localPosition = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
+                cameraObj.transform.localPosition = new Vector3(0, 1.6f, 0); // Eye height (1.6m above ground)
 
                 Camera cam = cameraObj.AddComponent<Camera>();
                 cam.orthographic = true;
@@ -601,11 +601,11 @@ namespace Velinor.Editor
             // Fallback to green capsule if prefab not found
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
-            player.transform.position = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
+            player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
 
             GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.transform.parent = player.transform;
-            visual.transform.localPosition = Vector3.zero;
+            visual.transform.localPosition = new Vector3(0, 0.9f, 0);  // Match collider center
             visual.name = "Model";
 
             // Remove the collider from the visual primitive (it gets created automatically)
@@ -622,7 +622,7 @@ namespace Velinor.Editor
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
-            collider.center = new Vector3(0, 0.5f, 0);  // Adjusted for scaled vegetation
+            collider.center = new Vector3(0, 0.9f, 0);  // Center at 0.9 so bottom is at Y=0 (ground level)
             collider.isTrigger = false; // CRITICAL: Must NOT be trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
@@ -640,7 +640,7 @@ namespace Velinor.Editor
 
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
-            cameraObj.transform.localPosition = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
+            cameraObj.transform.localPosition = new Vector3(0, 1.6f, 0); // Eye height (1.6m above ground)
 
             Camera cam = cameraObj.AddComponent<Camera>();
             cam.orthographic = true;
