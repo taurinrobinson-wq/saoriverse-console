@@ -103,7 +103,7 @@ namespace Velinor.Editor
                 // Dream Tree 2
                 new TreeAsset(
                     "Dream Tree 2",
-                    "Assets/DreamTree2/Model/DreamTree.fbx",
+                    "Assets/DreamTree2/Mesh/DreamTree.FBX",
                     new Vector3(2f, 2f, 2f),
                     AssetPackType.DreamTree2,
                     "Stylized dream tree with custom bark/leaf materials"
@@ -112,21 +112,21 @@ namespace Velinor.Editor
                 // English Oak Set
                 new TreeAsset(
                     "English Oak - Full Leaf",
-                    "Assets/3 English Oak Set/Models/Oak.fbx",
+                    "Assets/3 English Oak Set/Models/Oak.FBX",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Fully leafed English oak tree (summer)"
                 ),
                 new TreeAsset(
                     "English Oak - Bare",
-                    "Assets/3 English Oak Set/Models/Bare_Oak.fbx",
+                    "Assets/3 English Oak Set/Models/Bare_Oak.FBX",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Bare winter oak (seasonal variety)"
                 ),
                 new TreeAsset(
                     "English Oak - Bent",
-                    "Assets/3 English Oak Set/Models/Bent_Oak.fbx",
+                    "Assets/3 English Oak Set/Models/Bent_Oak.FBX",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Bent oak for visual interest"
@@ -135,14 +135,14 @@ namespace Velinor.Editor
                 // Dry Trees
                 new TreeAsset(
                     "Dry Tree 1",
-                    "Assets/Dry_Trees/Dry3333.fbx",
+                    "Assets/Dry_Trees/Model/Dry3333.FBX",
                     new Vector3(2.5f, 2.5f, 2.5f),
                     AssetPackType.DryTrees,
                     "Dead/dying tree for arid areas"
                 ),
                 new TreeAsset(
                     "Dry Tree 2",
-                    "Assets/Dry_Trees/Dry4910.fbx",
+                    "Assets/Dry_Trees/Model/Dry4910.FBX",
                     new Vector3(2.5f, 2.5f, 2.5f),
                     AssetPackType.DryTrees,
                     "Low-poly dried tree variant"
@@ -195,28 +195,28 @@ namespace Velinor.Editor
                 // Kyle's Rock Pack - Ground materials
                 new MaterialAsset(
                     "Rock - Arid 1",
-                    "Assets/Kyle's Rock Pack/Materials/M_arid_rocks_1.mat",
+                    "Assets/Kyle's Rock Pack/Kyle Fuji/Materials/M_arid_rocks_1.mat",
                     AssetPackType.KylesRockPack,
                     "ground",
                     "Desert/arid stone texture"
                 ),
                 new MaterialAsset(
                     "Rock - Arid 2",
-                    "Assets/Kyle's Rock Pack/Materials/M_arid_rocks_2.mat",
+                    "Assets/Kyle's Rock Pack/Kyle Fuji/Materials/M_arid_rocks_2.mat",
                     AssetPackType.KylesRockPack,
                     "ground",
                     "Arid stone variant 2"
                 ),
                 new MaterialAsset(
                     "Rock - Mossy 1",
-                    "Assets/Kyle's Rock Pack/Materials/M_mossy_rocks_1.mat",
+                    "Assets/Kyle's Rock Pack/Kyle Fuji/Materials/M_mossy_rocks_1.mat",
                     AssetPackType.KylesRockPack,
                     "ground",
                     "Moss-covered stones (forest aesthetic)"
                 ),
                 new MaterialAsset(
                     "Rock - Snow 1",
-                    "Assets/Kyle's Rock Pack/Materials/M_snow_rocks_1.mat",
+                    "Assets/Kyle's Rock Pack/Kyle Fuji/Materials/M_snow_rocks_1.mat",
                     AssetPackType.KylesRockPack,
                     "ground",
                     "Snow-covered rocks (winter)"
