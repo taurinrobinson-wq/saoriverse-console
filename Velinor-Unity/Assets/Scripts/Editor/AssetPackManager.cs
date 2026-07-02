@@ -428,7 +428,7 @@ namespace Velinor.Editor
         /// <summary>
         /// Fix broken/pink materials on a prop by replacing with Standard shader
         /// </summary>
-        private static void FixPropMaterials(GameObject prop)
+        public static void FixPropMaterials(GameObject prop)
         {
             // Create a default material with Standard shader for props
             Material standardMat = new Material(Shader.Find("Standard"));
