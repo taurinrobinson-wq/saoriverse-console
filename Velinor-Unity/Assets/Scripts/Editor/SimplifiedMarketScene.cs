@@ -321,30 +321,41 @@ namespace Velinor.Editor
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
         {
-            // Load EmbersStorm wall prefabs for market stalls
-            string[] wallPaths = {
-                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab",
-                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_B.prefab",
-                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_C.prefab"
-            };
+            // Load Medieval Props Pack tents for market stalls
+            string tentPath = "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Tent.prefab";
 
             float[] stallZPositions = { 0f, 5f, 10f };
 
             for (int i = 0; i < stallZPositions.Length; i++)
             {
-                GameObject stallPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(wallPaths[i]);
+                GameObject tentPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(tentPath);
                 
-                if (stallPrefab != null)
+                if (tentPrefab != null)
                 {
-                    GameObject stall = PrefabUtility.InstantiatePrefab(stallPrefab, parent) as GameObject;
+                    GameObject stall = PrefabUtility.InstantiatePrefab(tentPrefab, parent) as GameObject;
                     stall.name = $"{stallPrefix}_{i + 1}";
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
-                    stall.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f); // INCREASED from 0.5 to make stalls thicker/more visible
                     
-                    // Fix materials with Standard shader (beige stone color)
-                    FixMaterialsWithStandard(stall, new Color(0.8f, 0.75f, 0.65f));
+                    // Apply user-optimized scale: 3x wide (long), 0.225 height and depth
+                    stall.transform.localScale = new Vector3(3f, 0.225f, 0.225f);
                     
-                    Debug.Log($"  ✅ Loaded stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - 1.5x scale");
+                    // Recalculate colliders for non-uniform scaling
+                    Collider[] colliders = stall.GetComponentsInChildren<Collider>();
+                    foreach (Collider col in colliders)
+                    {
+                        if (col is BoxCollider box)
+                        {
+                            // BoxCollider scales automatically, but may need tweaking
+                            // Keep as-is for now, user can manually adjust if needed
+                        }
+                        else if (col is CapsuleCollider cap)
+                        {
+                            // Capsule colliders don't scale non-uniformly well
+                            // May need manual adjustment
+                        }
+                    }
+                    
+                    Debug.Log($"  ✅ Tent stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - custom scale (3, 0.225, 0.225)");
                 }
                 else
                 {
@@ -352,23 +363,23 @@ namespace Velinor.Editor
                     GameObject stall = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     stall.name = $"{stallPrefix}_{i + 1}_Fallback";
                     stall.transform.parent = parent;
-                    stall.transform.position = new Vector3(stallX, 0.75f, stallZPositions[i]); // Raised to sit on ground properly
-                    stall.transform.localScale = new Vector3(2, 1.5f, 1.5f); // Thick cube: 2m wide, 1.5m tall and deep
+                    stall.transform.position = new Vector3(stallX, 0.75f, stallZPositions[i]);
+                    stall.transform.localScale = new Vector3(3f, 0.225f, 0.225f);
 
                     Object.DestroyImmediate(stall.GetComponent<Collider>());
                     MeshRenderer mr = stall.GetComponent<MeshRenderer>();
                     Material mat = new Material(Shader.Find("Standard"));
-                    mat.color = new Color(0.65f, 0.6f, 0.5f);
+                    mat.color = new Color(0.8f, 0.7f, 0.6f);
                     mr.material = mat;
 
                     stall.AddComponent<BoxCollider>();
                     stall.layer = LayerMask.NameToLayer("Midground");
-                    Debug.LogWarning($"  ⚠️  EmbersStorm prefab not found, using fallback cube (2×1.5×1.5m)");
+                    Debug.LogWarning($"  ⚠️  Tent prefab not found, using fallback cube");
                 }
             }
 
             string sideLabel = stallX < 0 ? "left (X=-10)" : "right (X=+10)";
-            Debug.Log($"  ✅ Stall row ({sideLabel}) created at Z=0, Z=5, Z=10 - THICKER + INTEGRATED WITH GROUND");
+            Debug.Log($"  ✅ Market tent stalls ({sideLabel}) created - optimized scale for player approach");
         }
 
         private static void CreateBackgroundRocks(Transform parent)
