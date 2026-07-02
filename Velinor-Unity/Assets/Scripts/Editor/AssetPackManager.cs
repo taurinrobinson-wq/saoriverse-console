@@ -147,31 +147,6 @@ namespace Velinor.Editor
                     AssetPackType.DryTrees,
                     "Low-poly dried tree variant"
                 ),
-
-                // Stumps (from Scan Stumps)
-                new TreeAsset(
-                    "Tree Stump - Fresh",
-                    "Assets/GreenBugGames/Scan Stump Vol.1/Stump_fresh.fbx",
-                    new Vector3(1f, 1f, 1f),
-                    AssetPackType.ScanStumps,
-                    "Photogrammetry fresh tree stump"
-                ),
-                new TreeAsset(
-                    "Tree Stump - Old",
-                    "Assets/GreenBugGames/Scan Stump Vol.1/Stump_old.fbx",
-                    new Vector3(1f, 1f, 1f),
-                    AssetPackType.ScanStumps,
-                    "Weathered old stump (seating/props)"
-                ),
-
-                // Succulents/Ground Vegetation
-                new TreeAsset(
-                    "Succulent Plant",
-                    "Assets/SeedMesh/Succulents/Succulent_EcheveriaRosalinda_var1.fbx",
-                    new Vector3(0.5f, 0.5f, 0.5f),
-                    AssetPackType.Succulents,
-                    "Small decorative succulent plant"
-                ),
             };
 
             return trees;
@@ -230,43 +205,7 @@ namespace Velinor.Editor
                 ),
 
                 // EmbersStorm - Mediterranean materials
-                new MaterialAsset(
-                    "Brick - Mediterranean",
-                    "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Materials/Bricks037.mat",
-                    AssetPackType.EmbersStorm,
-                    "wall",
-                    "Mediterranean red bricks"
-                ),
-                new MaterialAsset(
-                    "Tiles - Mediterranean",
-                    "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Materials/Tiles038.mat",
-                    AssetPackType.EmbersStorm,
-                    "floor",
-                    "Ceramic tiles (marketplace walkway)"
-                ),
-                new MaterialAsset(
-                    "Plaster - Mediterranean",
-                    "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Materials/PaintedPlaster010.mat",
-                    AssetPackType.EmbersStorm,
-                    "wall",
-                    "Aged plaster wall"
-                ),
 
-                // Country House - Interior materials
-                new MaterialAsset(
-                    "Wood - Country House",
-                    "Assets/ALP_Assets/Materials/OldHouseMapWood01.mat",
-                    AssetPackType.CountryHouse,
-                    "wood",
-                    "Old European wood texture"
-                ),
-                new MaterialAsset(
-                    "Glass - Interior",
-                    "Assets/ALP_Assets/Materials/Glass.mat",
-                    AssetPackType.CountryHouse,
-                    "wall",
-                    "Aged glass (windows/doors)"
-                ),
 
                 // Dream Tree 2 - Grass/Ground
                 new MaterialAsset(
@@ -278,13 +217,7 @@ namespace Velinor.Editor
                 ),
 
                 // Dry Trees - Bark texture
-                new MaterialAsset(
-                    "Bark - Dead Tree",
-                    "Assets/Dry_Trees/Bark.mat",
-                    AssetPackType.DryTrees,
-                    "wood",
-                    "Dry/dead bark texture"
-                ),
+
             };
 
             return materials;
