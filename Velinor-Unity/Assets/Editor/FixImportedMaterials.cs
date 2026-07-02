@@ -162,6 +162,57 @@ public static class FixImportedMaterials
                             report.AppendLine($"[REASSIGN] {pPath} - renderer '{r.gameObject.name}' slot {i} -> {AssetDatabase.GetAssetPath(pick)}");
                             Debug.Log($"[FixImportedMaterials] Reassigned material on {pPath} -> {AssetDatabase.GetAssetPath(pick)}");
                         }
+                        else if (mat != null && (mat.shader == null || mat.shader.name.Contains("Hidden/InternalError")))
+                        {
+                            // Create a fallback material in an AutoFixedMaterials folder next to the prefab
+                            string prefabFolder = folder;
+                            string autofixFolder = Path.Combine(prefabFolder, "AutoFixedMaterials").Replace("\\", "/");
+                            if (!AssetDatabase.IsValidFolder(autofixFolder))
+                            {
+                                // create folder under prefabFolder
+                                AssetDatabase.CreateFolder(prefabFolder, "AutoFixedMaterials");
+                            }
+
+                            string baseName = Path.GetFileNameWithoutExtension(pPath);
+                            string matAssetPath = Path.Combine(autofixFolder, baseName + "_slot" + i + ".mat").Replace("\\", "/");
+
+                            Shader fallbackShader = srpActive ? Shader.Find("Universal Render Pipeline/Lit") : Shader.Find("Standard");
+                            Material newMat = new Material(fallbackShader != null ? fallbackShader : Shader.Find("Standard"));
+
+                            // attempt to assign textures from nearby textures
+                            var texGuids = AssetDatabase.FindAssets("t:Texture2D", new[] { prefabFolder });
+                            foreach (var tg in texGuids)
+                            {
+                                string tpath = AssetDatabase.GUIDToAssetPath(tg);
+                                string tname = Path.GetFileNameWithoutExtension(tpath).ToLower();
+                                var tex = AssetDatabase.LoadAssetAtPath<Texture>(tpath);
+                                if (tex == null) continue;
+                                if (tname.Contains("albedo") || tname.Contains("diffuse"))
+                                {
+                                    if (newMat.HasProperty("_MainTex")) newMat.SetTexture("_MainTex", tex);
+                                    if (newMat.HasProperty("_BaseMap")) newMat.SetTexture("_BaseMap", tex);
+                                }
+                                else if (tname.Contains("normal") || tname.Contains("nrm"))
+                                {
+                                    if (newMat.HasProperty("_BumpMap")) newMat.SetTexture("_BumpMap", tex);
+                                }
+                                else if (tname.Contains("metal") || tname.Contains("metallic"))
+                                {
+                                    if (newMat.HasProperty("_MetallicGlossMap")) newMat.SetTexture("_MetallicGlossMap", tex);
+                                }
+                                else if (tname.Contains("mask") || tname.Contains("ao"))
+                                {
+                                    if (newMat.HasProperty("_OcclusionMap")) newMat.SetTexture("_OcclusionMap", tex);
+                                }
+                            }
+
+                            AssetDatabase.CreateAsset(newMat, matAssetPath);
+                            AssetDatabase.SaveAssets();
+                            mats[i] = newMat;
+                            prefabChanged = true;
+                            report.AppendLine($"[AUTO-FALLBACK] {pPath} - renderer '{r.gameObject.name}' slot {i} -> {matAssetPath}");
+                            Debug.Log($"[FixImportedMaterials] Created fallback material {matAssetPath} for {pPath}");
+                        }
                     }
                 }
 
