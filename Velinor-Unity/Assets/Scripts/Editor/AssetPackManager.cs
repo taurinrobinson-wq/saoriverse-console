@@ -112,21 +112,21 @@ namespace Velinor.Editor
                 // English Oak Set
                 new TreeAsset(
                     "English Oak - Full Leaf",
-                    "Assets/3 English Oak Set/Models/Oak.FBX",
+                    "Assets/3 English Oak Set/Oak.FBX",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Fully leafed English oak tree (summer)"
                 ),
                 new TreeAsset(
                     "English Oak - Bare",
-                    "Assets/3 English Oak Set/Models/Bare_Oak.FBX",
+                    "Assets/3 English Oak Set/Bare_Oak.FBX",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Bare winter oak (seasonal variety)"
                 ),
                 new TreeAsset(
                     "English Oak - Bent",
-                    "Assets/3 English Oak Set/Models/Bent_Oak.FBX",
+                    "Assets/3 English Oak Set/Bent_Oak.FBX",
                     new Vector3(1.5f, 1.5f, 1.5f),
                     AssetPackType.EnglishOakSet,
                     "Bent oak for visual interest"
@@ -148,26 +148,17 @@ namespace Velinor.Editor
                     "Low-poly dried tree variant"
                 ),
 
-                // URP Tree Models
-                new TreeAsset(
-                    "URP Tree Variant 1",
-                    "Assets/Tree_Packs/URP_Tree_Pack/Models/Tree1.fbx",
-                    new Vector3(1.2f, 1.2f, 1.2f),
-                    AssetPackType.URPTreeModels,
-                    "URP-optimized tree model (check path)"
-                ),
-
                 // Stumps (from Scan Stumps)
                 new TreeAsset(
                     "Tree Stump - Fresh",
-                    "Assets/GreenBugGames/Stump_fresh.fbx",
+                    "Assets/GreenBugGames/Scan Stump Vol.1/Stump_fresh.fbx",
                     new Vector3(1f, 1f, 1f),
                     AssetPackType.ScanStumps,
                     "Photogrammetry fresh tree stump"
                 ),
                 new TreeAsset(
                     "Tree Stump - Old",
-                    "Assets/GreenBugGames/Stump_old.fbx",
+                    "Assets/GreenBugGames/Scan Stump Vol.1/Stump_old.fbx",
                     new Vector3(1f, 1f, 1f),
                     AssetPackType.ScanStumps,
                     "Weathered old stump (seating/props)"
@@ -176,7 +167,7 @@ namespace Velinor.Editor
                 // Succulents/Ground Vegetation
                 new TreeAsset(
                     "Succulent Plant",
-                    "Assets/SeedMesh/Succulents/Succulent_01.fbx",
+                    "Assets/SeedMesh/Succulents/Succulent_EcheveriaRosalinda_var1.fbx",
                     new Vector3(0.5f, 0.5f, 0.5f),
                     AssetPackType.Succulents,
                     "Small decorative succulent plant"
