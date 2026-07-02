@@ -816,17 +816,14 @@ namespace Velinor.Editor
 
         private static void FixVegetationMaterials(GameObject obj)
         {
-            // Replace broken/pink materials on vegetation with Standard shader
-            Material standardMat = new Material(Shader.Find("Standard"));
-            standardMat.color = new Color(0.6f, 0.5f, 0.4f); // Greenish-brown for trees
-            
-            MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer renderer in renderers)
+            // Use AssetPackManager's safer material fixer which only replaces broken/incompatible materials
+            try
             {
-                Material[] mats = new Material[renderer.sharedMaterials.Length];
-                for (int i = 0; i < mats.Length; i++)
-                    mats[i] = standardMat;
-                renderer.sharedMaterials = mats;
+                AssetPackManager.FixPropMaterials(obj);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"FixVegetationMaterials: fallback failed: {ex.Message}");
             }
         }
 
