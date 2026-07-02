@@ -426,21 +426,71 @@ namespace Velinor.Editor
         }
 
         /// <summary>
-        /// Fix broken/pink materials on a prop by replacing with Standard shader
+        /// Fix broken/pink materials on a prop by replacing only missing or error materials.
+        /// Prefers SRP-friendly shaders (URP) when a render pipeline asset is present.
         /// </summary>
         public static void FixPropMaterials(GameObject prop)
         {
-            // Create a default material with Standard shader for props
-            Material standardMat = new Material(Shader.Find("Standard"));
-            standardMat.color = new Color(0.7f, 0.7f, 0.7f); // Light gray for props
-            
+            if (prop == null) return;
+
+            // Determine preferred replacement shader: URP Lit if using SRP, otherwise Standard
+            Shader replacementShader = null;
+            try
+            {
+                var rp = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline;
+                if (rp != null)
+                {
+                    replacementShader = Shader.Find("Universal Render Pipeline/Lit");
+                }
+            }
+            catch
+            {
+                // ignore
+            }
+
+            if (replacementShader == null)
+                replacementShader = Shader.Find("Standard");
+
             MeshRenderer[] renderers = prop.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
             {
-                Material[] mats = new Material[renderer.sharedMaterials.Length];
-                for (int i = 0; i < mats.Length; i++)
-                    mats[i] = standardMat;
-                renderer.sharedMaterials = mats;
+                var shared = renderer.sharedMaterials;
+                bool replacedAny = false;
+
+                for (int i = 0; i < shared.Length; i++)
+                {
+                    Material m = shared[i];
+
+                    bool needsReplace = false;
+                    if (m == null)
+                        needsReplace = true;
+                    else
+                    {
+                        Shader s = m.shader;
+                        if (s == null) needsReplace = true;
+                        else
+                        {
+                            string sname = s.name ?? string.Empty;
+                            // Common indicator of broken shader/material
+                            if (sname.Contains("Hidden/InternalError") || m.name.ToLower().Contains("default"))
+                                needsReplace = true;
+                            // If project uses URP but material uses Standard shader, replace with URP Lit
+                            else if (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null && sname.Contains("Standard"))
+                                needsReplace = true;
+                        }
+                    }
+
+                    if (needsReplace)
+                    {
+                        Material newMat = new Material(replacementShader);
+                        newMat.color = new Color(0.7f, 0.7f, 0.7f);
+                        shared[i] = newMat;
+                        replacedAny = true;
+                    }
+                }
+
+                if (replacedAny)
+                    renderer.sharedMaterials = shared;
             }
         }
 
