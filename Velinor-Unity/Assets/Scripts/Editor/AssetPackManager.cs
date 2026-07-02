@@ -520,9 +520,10 @@ namespace Velinor.Editor
             Object prefab = AssetDatabase.LoadAssetAtPath<Object>(prefabPath);
             if (prefab == null)
             {
-                Debug.LogWarning($"  ⚠️  Asset not found: {prefabPath}");
+                Debug.LogError($"❌ FAILED TO LOAD: {prefabPath}");
                 return null;
             }
+            Debug.Log($"✅ Loaded: {prefabPath}");
             return prefab as GameObject;
         }
 
@@ -597,6 +598,67 @@ namespace Velinor.Editor
             }
             
             Debug.Log("================================");
+        }
+
+        /// <summary>
+        /// Validate all asset paths and report which ones are missing
+        /// </summary>
+        public static void ValidateAllAssets()
+        {
+            Debug.Log("\n🔍 VALIDATING ALL ASSET PATHS...\n");
+            
+            int foundCount = 0;
+            int missingCount = 0;
+
+            // Validate trees
+            foreach (var tree in GetAllTrees())
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath<Object>(tree.prefabPath);
+                if (obj != null)
+                {
+                    Debug.Log($"✅ TREE: {tree.name}");
+                    foundCount++;
+                }
+                else
+                {
+                    Debug.LogError($"❌ MISSING TREE: {tree.name} at {tree.prefabPath}");
+                    missingCount++;
+                }
+            }
+
+            // Validate materials
+            foreach (var mat in GetAllMaterials())
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath<Object>(mat.materialPath);
+                if (obj != null)
+                {
+                    Debug.Log($"✅ MATERIAL: {mat.name}");
+                    foundCount++;
+                }
+                else
+                {
+                    Debug.LogError($"❌ MISSING MATERIAL: {mat.name} at {mat.materialPath}");
+                    missingCount++;
+                }
+            }
+
+            // Validate props
+            foreach (var prop in GetAllProps())
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath<Object>(prop.prefabPath);
+                if (obj != null)
+                {
+                    Debug.Log($"✅ PROP: {prop.name}");
+                    foundCount++;
+                }
+                else
+                {
+                    Debug.LogError($"❌ MISSING PROP: {prop.name} at {prop.prefabPath}");
+                    missingCount++;
+                }
+            }
+
+            Debug.Log($"\n📊 VALIDATION COMPLETE: {foundCount} found, {missingCount} MISSING\n");
         }
     }
 }

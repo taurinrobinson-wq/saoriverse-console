@@ -155,6 +155,12 @@ namespace Velinor.Editor
             EditorSceneManager.MarkSceneDirty(activeScene);
         }
 
+        [MenuItem("Velinor/Tools/Validate All Assets")]
+        public static void ValidateAllAssets()
+        {
+            AssetPackManager.ValidateAllAssets();
+        }
+
         /// <summary>
         /// Verify that all required assets exist before populating the scene.
         /// Returns true if all assets are available, false otherwise.
