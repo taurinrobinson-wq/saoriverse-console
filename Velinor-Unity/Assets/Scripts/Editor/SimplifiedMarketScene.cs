@@ -463,7 +463,7 @@ namespace Velinor.Editor
                 
                 player.name = "Player";
                 player.transform.localPosition = Vector3.zero;
-                player.transform.position = new Vector3(0, 0.9f, 0); // Set to eye level (0.9m above ground)
+                player.transform.position = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
                 // ========== CLEANUP PHASE 1: Remove null/broken components FIRST ==========
@@ -547,7 +547,7 @@ namespace Velinor.Editor
                 // ========== CREATE CAMERA ==========
                 GameObject cameraObj = new GameObject("MainCamera");
                 cameraObj.transform.parent = player.transform;
-                cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
+                cameraObj.transform.localPosition = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
 
                 Camera cam = cameraObj.AddComponent<Camera>();
                 cam.orthographic = true;
@@ -603,7 +603,7 @@ namespace Velinor.Editor
             // Fallback to green capsule if prefab not found
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
-            player.transform.position = new Vector3(0, 0.9f, 0);
+            player.transform.position = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
 
             GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.transform.parent = player.transform;
@@ -624,7 +624,7 @@ namespace Velinor.Editor
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
-            collider.center = new Vector3(0, 0.9f, 0);  // Center at Y=0.9 so bottom touches ground at Y=0
+            collider.center = new Vector3(0, 0.5f, 0);  // Adjusted for scaled vegetation
             collider.isTrigger = false; // CRITICAL: Must NOT be trigger
 
             Rigidbody rb = player.AddComponent<Rigidbody>();
@@ -642,7 +642,7 @@ namespace Velinor.Editor
 
             GameObject cameraObj = new GameObject("CameraHolder");
             cameraObj.transform.parent = player.transform;
-            cameraObj.transform.localPosition = new Vector3(0, 0.9f, 0);
+            cameraObj.transform.localPosition = new Vector3(0, 0.5f, 0); // Adjusted for scaled vegetation
 
             Camera cam = cameraObj.AddComponent<Camera>();
             cam.orthographic = true;
@@ -809,6 +809,22 @@ namespace Velinor.Editor
             }
         }
 
+        private static void FixVegetationMaterials(GameObject obj)
+        {
+            // Replace broken/pink materials on vegetation with Standard shader
+            Material standardMat = new Material(Shader.Find("Standard"));
+            standardMat.color = new Color(0.6f, 0.5f, 0.4f); // Greenish-brown for trees
+            
+            MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                Material[] mats = new Material[renderer.sharedMaterials.Length];
+                for (int i = 0; i < mats.Length; i++)
+                    mats[i] = standardMat;
+                renderer.sharedMaterials = mats;
+            }
+        }
+
         /// <summary>
         /// Apply real materials from asset packs to ground and walkway
         /// </summary>
@@ -903,9 +919,13 @@ namespace Velinor.Editor
                     treeInstance.name = $"Tree_{i:00}";
                     treeInstance.transform.parent = vegRoot;
                     
-                    // Randomize scale slightly for variety
+                    // Apply a much smaller overall scale (trees were oversized)
+                    float globalScale = 0.35f; // Reduced from 1.0
                     float scaleVariation = Random.Range(0.8f, 1.2f);
-                    treeInstance.transform.localScale *= scaleVariation;
+                    treeInstance.transform.localScale *= (globalScale * scaleVariation);
+                    
+                    // Fix any broken materials (convert pink to gray)
+                    FixVegetationMaterials(treeInstance);
                     
                     treeCount++;
                 }
@@ -1004,6 +1024,7 @@ namespace Velinor.Editor
 
                     if (prop != null)
                     {
+                        prop.transform.localScale *= 0.4f; // Scale down props to match vegetation scale
                         Debug.Log($"[MARKETPLACE SETUP] ✅ Placed {container.name} at stall {i + 1}, pos {j + 1}");
                         totalPropsPlaced++;
                     }
@@ -1040,6 +1061,7 @@ namespace Velinor.Editor
 
                     if (prop != null)
                     {
+                        prop.transform.localScale *= 0.4f; // Scale down props to match vegetation scale
                         Debug.Log($"[MARKETPLACE SETUP] ✨ Placed {deco.name} as marketplace decoration");
                         totalPropsPlaced++;
                     }
