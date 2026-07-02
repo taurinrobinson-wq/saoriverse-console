@@ -464,7 +464,27 @@ namespace Velinor.Editor
                 player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
-                // ========== CLEANUP PHASE 1: Remove null/broken components FIRST ==========
+                // ========== AGGRESSIVE CLEANUP: Remove ALL missing script references ==========
+                // Use SerializedObject to find and destroy components with missing scripts
+                SerializedObject so = new SerializedObject(player);
+                SerializedProperty prop = so.FindProperty("m_Component");
+                
+                if (prop != null && prop.isArray)
+                {
+                    // Iterate backwards to safely remove elements
+                    for (int i = prop.arraySize - 1; i >= 0; i--)
+                    {
+                        SerializedProperty componentRef = prop.GetArrayElementAtIndex(i).FindPropertyRelative("component");
+                        if (componentRef.objectReferenceValue == null)
+                        {
+                            Debug.Log($"  🗑️  Removing null component reference at index {i}");
+                            prop.DeleteArrayElementAtIndex(i);
+                        }
+                    }
+                    so.ApplyModifiedProperties();
+                }
+                
+                // ========== CLEANUP PHASE 1: Remove null/broken components ==========
                 // This must happen BEFORE we try to fix materials or disable scripts
                 int nullsRemoved = 0;
                 foreach (Transform t in player.GetComponentsInChildren<Transform>(includeInactive: true))
@@ -760,10 +780,10 @@ namespace Velinor.Editor
             CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
             capsule.radius = 0.4f;
             capsule.height = 1.8f;
-            // CRITICAL FIX: Center must be at (0, 0, 0) so capsule spans from Y=0 to Y=1.8
-            // Character is at Y=0.9, so world capsule center = 0.9 + 0 = 0.9 ✓
+            // CRITICAL: Center at (0, 0.9, 0) so capsule spans from Y=0 to Y=1.8
+            // Character at Y=0, capsule center offset (0, 0.9, 0) = world Y=0.9
             // Bottom = 0.9 - 0.9 = 0 ✓, Top = 0.9 + 0.9 = 1.8 ✓
-            capsule.center = Vector3.zero;  // NOT (0, 0.9, 0)!
+            capsule.center = new Vector3(0, 0.9f, 0);
             capsule.isTrigger = false;
             Debug.Log($"  ✅ CapsuleCollider created:");
             Debug.Log($"      - Center offset: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
