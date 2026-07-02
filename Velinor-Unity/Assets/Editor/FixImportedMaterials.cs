@@ -13,6 +13,31 @@ public static class FixImportedMaterials
         FixImportedMaterialsInFolder("Assets/ImportedAssets");
     }
 
+    [MenuItem("Tools/Fix Imported Materials/Run on Diagnosed Packs")]
+    public static void FixOnDiagnosedPacks()
+    {
+        string[] folders = new string[] {
+            "Assets/Kyle's Rock Pack",
+            "Assets/DreamTree2",
+            "Assets/Dry_Trees",
+            "Assets/Medieval Props Pack 01",
+            "Assets/EmbersStorm – Mediterranean Ruins Building Kit",
+            "Assets/3 English Oak Set"
+        };
+
+        foreach (var f in folders)
+        {
+            if (AssetDatabase.IsValidFolder(f))
+            {
+                FixImportedMaterialsInFolder(f);
+            }
+            else
+            {
+                Debug.Log($"[FixImportedMaterials] Folder not found: {f}");
+            }
+        }
+    }
+
     public static void FixImportedMaterialsInFolder(string rootFolder)
     {
         var report = new StringBuilder();
