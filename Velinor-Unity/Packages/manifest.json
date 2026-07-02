@@ -1,12 +1,12 @@
 {
   "dependencies": {
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.inputsystem": "1.7.0",
+    "com.unity.inputsystem": "1.19.0",
     "com.unity.microsoft.gdk": "1.6.0",
     "com.unity.microsoft.gdk.tools": "1.6.0",
-    "com.unity.purchasing": "5.3.1",
+    "com.unity.purchasing": "5.4.0",
     "com.unity.textmeshpro": "3.0.6",
-    "com.unity.timeline": "1.7.6",
+    "com.unity.timeline": "1.8.12",
     "com.unity.ugui": "1.0.0",
     "com.unity.modules.jsonserialize": "1.0.0",
     "com.unity.modules.physics": "1.0.0"
