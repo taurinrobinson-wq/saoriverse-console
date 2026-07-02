@@ -464,26 +464,6 @@ namespace Velinor.Editor
                 player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
                 
-                // ========== AGGRESSIVE CLEANUP: Remove ALL missing script references ==========
-                // Use SerializedObject to find and destroy components with missing scripts
-                SerializedObject so = new SerializedObject(player);
-                SerializedProperty prop = so.FindProperty("m_Component");
-                
-                if (prop != null && prop.isArray)
-                {
-                    // Iterate backwards to safely remove elements
-                    for (int i = prop.arraySize - 1; i >= 0; i--)
-                    {
-                        SerializedProperty componentRef = prop.GetArrayElementAtIndex(i).FindPropertyRelative("component");
-                        if (componentRef.objectReferenceValue == null)
-                        {
-                            Debug.Log($"  🗑️  Removing null component reference at index {i}");
-                            prop.DeleteArrayElementAtIndex(i);
-                        }
-                    }
-                    so.ApplyModifiedProperties();
-                }
-                
                 // ========== CLEANUP PHASE 1: Remove null/broken components ==========
                 // This must happen BEFORE we try to fix materials or disable scripts
                 int nullsRemoved = 0;
