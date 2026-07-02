@@ -25,7 +25,31 @@ namespace Velinor.Editor
             TheShed,
             URPTreeModels,
             CountryHouse,
+            MedievalProps,
             None
+        }
+
+        /// <summary>
+        /// Prop asset definitions for marketplace decorations
+        /// </summary>
+        public class PropAsset
+        {
+            public string name;
+            public string prefabPath;
+            public Vector3 scale;
+            public AssetPackType pack;
+            public string propType; // "container", "furniture", "decoration", "transport"
+            public string description;
+
+            public PropAsset(string name, string prefabPath, Vector3 scale, AssetPackType pack, string propType, string description)
+            {
+                this.name = name;
+                this.prefabPath = prefabPath;
+                this.scale = scale;
+                this.pack = pack;
+                this.propType = propType;
+                this.description = description;
+            }
         }
 
         /// <summary>
@@ -275,7 +299,133 @@ namespace Velinor.Editor
             return materials;
         }
 
-        // ========== HELPER METHODS ==========
+        // ========== PROP ASSETS ==========
+        
+        private static List<PropAsset> GetPropAssets()
+        {
+            List<PropAsset> props = new List<PropAsset>
+            {
+                // Medieval Props Pack 01 - Containers
+                new PropAsset(
+                    "Barrel",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Barrel 01.prefab",
+                    new Vector3(1f, 1f, 1f),
+                    AssetPackType.MedievalProps,
+                    "container",
+                    "Wooden barrel for stall storage"
+                ),
+                new PropAsset(
+                    "Clay Pot",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Clay Pot.prefab",
+                    new Vector3(0.8f, 0.8f, 0.8f),
+                    AssetPackType.MedievalProps,
+                    "container",
+                    "Large clay storage pot"
+                ),
+                new PropAsset(
+                    "Wooden Box 01",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Wooden Box 01.prefab",
+                    new Vector3(1f, 1f, 1f),
+                    AssetPackType.MedievalProps,
+                    "container",
+                    "Storage crate for market goods"
+                ),
+                new PropAsset(
+                    "Crate 01",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Crate_01.prefab",
+                    new Vector3(0.9f, 0.9f, 0.9f),
+                    AssetPackType.MedievalProps,
+                    "container",
+                    "Wooden shipping crate"
+                ),
+                new PropAsset(
+                    "Crate 02",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Crate_02.prefab",
+                    new Vector3(0.9f, 0.9f, 0.9f),
+                    AssetPackType.MedievalProps,
+                    "container",
+                    "Wooden shipping crate (variant)"
+                ),
+                new PropAsset(
+                    "Bucket",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Wooden_Bucket_1.prefab",
+                    new Vector3(0.7f, 0.7f, 0.7f),
+                    AssetPackType.MedievalProps,
+                    "container",
+                    "Wooden water bucket"
+                ),
+
+                // Medieval Props Pack 01 - Furniture
+                new PropAsset(
+                    "Table",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Old_Table.prefab",
+                    new Vector3(1.2f, 1.2f, 1.2f),
+                    AssetPackType.MedievalProps,
+                    "furniture",
+                    "Old wooden market table"
+                ),
+                new PropAsset(
+                    "Handcart",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab",
+                    new Vector3(1.1f, 1.1f, 1.1f),
+                    AssetPackType.MedievalProps,
+                    "transport",
+                    "Medieval merchant handcart with barrel"
+                ),
+                new PropAsset(
+                    "Tent",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Tent.prefab",
+                    new Vector3(1.3f, 1.3f, 1.3f),
+                    AssetPackType.MedievalProps,
+                    "furniture",
+                    "Market stall tent/canopy"
+                ),
+                new PropAsset(
+                    "Palette",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Palette.prefab",
+                    new Vector3(1f, 1f, 1f),
+                    AssetPackType.MedievalProps,
+                    "furniture",
+                    "Wooden palette for goods display"
+                ),
+
+                // Medieval Props Pack 01 - Decorations
+                new PropAsset(
+                    "Clay Mug",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Clay Mug 2.prefab",
+                    new Vector3(0.5f, 0.5f, 0.5f),
+                    AssetPackType.MedievalProps,
+                    "decoration",
+                    "Clay drinking mug (display)"
+                ),
+                new PropAsset(
+                    "Vase 1",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_1.prefab",
+                    new Vector3(0.8f, 0.8f, 0.8f),
+                    AssetPackType.MedievalProps,
+                    "decoration",
+                    "Decorative clay vase"
+                ),
+                new PropAsset(
+                    "Vase 2",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_2.prefab",
+                    new Vector3(0.7f, 0.7f, 0.7f),
+                    AssetPackType.MedievalProps,
+                    "decoration",
+                    "Decorative clay vase (variant)"
+                ),
+                new PropAsset(
+                    "Rope",
+                    "Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Rope.prefab",
+                    new Vector3(1f, 1f, 1f),
+                    AssetPackType.MedievalProps,
+                    "decoration",
+                    "Coiled rope for stall decoration"
+                ),
+            };
+
+            return props;
+        }
 
         /// <summary>
         /// Get all available tree assets
@@ -294,9 +444,59 @@ namespace Velinor.Editor
         }
 
         /// <summary>
-        /// Get trees by asset pack
+        /// Get all available prop assets
         /// </summary>
-        public static List<TreeAsset> GetTreesByPack(AssetPackType pack)
+        public static List<PropAsset> GetAllProps()
+        {
+            return GetPropAssets();
+        }
+
+        /// <summary>
+        /// Get props by type (container, furniture, decoration, transport)
+        /// </summary>
+        public static List<PropAsset> GetPropsByType(string propType)
+        {
+            List<PropAsset> results = new List<PropAsset>();
+            foreach (var prop in GetPropAssets())
+            {
+                if (prop.propType == propType)
+                    results.Add(prop);
+            }
+            return results;
+        }
+
+        /// <summary>
+        /// Get props by asset pack
+        /// </summary>
+        public static List<PropAsset> GetPropsByPack(AssetPackType pack)
+        {
+            List<PropAsset> results = new List<PropAsset>();
+            foreach (var prop in GetPropAssets())
+            {
+                if (prop.pack == pack)
+                    results.Add(prop);
+            }
+            return results;
+        }
+
+        /// <summary>
+        /// Place a prop in the scene
+        /// </summary>
+        public static GameObject PlaceProp(PropAsset asset, Vector3 position, Transform parent = null)
+        {
+            GameObject prefab = LoadAsset(asset.prefabPath);
+            if (prefab == null)
+                return null;
+
+            GameObject instance = Object.Instantiate(prefab, position, Quaternion.identity);
+            instance.name = asset.name;
+            instance.transform.localScale = asset.scale;
+            
+            if (parent != null)
+                instance.transform.parent = parent;
+
+            return instance;
+        }
         {
             List<TreeAsset> results = new List<TreeAsset>();
             foreach (var tree in GetTreeAssets())
@@ -388,6 +588,7 @@ namespace Velinor.Editor
             Debug.Log("====== ASSET PACK MANAGER ======");
             Debug.Log($"✅ Trees available: {GetAllTrees().Count}");
             Debug.Log($"✅ Materials available: {GetAllMaterials().Count}");
+            Debug.Log($"✅ Props available: {GetAllProps().Count}");
             
             foreach (var tree in GetAllTrees())
             {
@@ -397,6 +598,11 @@ namespace Velinor.Editor
             foreach (var mat in GetAllMaterials())
             {
                 Debug.Log($"  🎨 {mat.name} ({mat.surfaceType}) - {mat.description}");
+            }
+
+            foreach (var prop in GetAllProps())
+            {
+                Debug.Log($"  🏺 {prop.name} ({prop.propType}) - {prop.description}");
             }
             
             Debug.Log("================================");

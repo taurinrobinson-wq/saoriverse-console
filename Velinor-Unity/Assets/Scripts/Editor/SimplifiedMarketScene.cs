@@ -965,23 +965,102 @@ namespace Velinor.Editor
         /// </summary>
         private static void EnhanceStalls(Transform mgRoot)
         {
-            // Find all stall objects
-            Transform[] stallTransforms = mgRoot.GetComponentsInChildren<Transform>();
+            Debug.Log("[MARKETPLACE SETUP] 🏪 Enhancing marketplace stalls with Medieval Props...");
+
+            // Get stall areas and place appropriate props
+            // Stalls: 2 rows (A: Z=0,5,10 | B: Z=0,5,10) with X=-5 (row A) and X=5 (row B)
             
-            int stallsEnhanced = 0;
-            foreach (Transform stallTransform in stallTransforms)
+            Vector3[] stallPositions = new Vector3[]
             {
-                if (stallTransform.name.Contains("Stall_"))
+                new Vector3(-5, 0.3f, 0),    // Stall A1
+                new Vector3(-5, 0.3f, 5),   // Stall A2
+                new Vector3(-5, 0.3f, 10),  // Stall A3
+                new Vector3(5, 0.3f, 0),    // Stall B1
+                new Vector3(5, 0.3f, 5),    // Stall B2
+                new Vector3(5, 0.3f, 10),   // Stall B3
+            };
+
+            // Get containers (barrels, crates, pots) for stalls
+            var containers = AssetPackManager.GetPropsByType("container");
+            if (containers.Count == 0)
+            {
+                Debug.LogWarning("[MARKETPLACE SETUP] ⚠️  No container props found! Skipping stall prop placement.");
+                return;
+            }
+
+            // Place containers on stalls
+            int totalPropsPlaced = 0;
+            for (int i = 0; i < stallPositions.Length; i++)
+            {
+                Vector3 pos = stallPositions[i];
+                
+                // Place 1-2 containers per stall (variation)
+                int numContainers = (i % 2 == 0) ? 2 : 1;
+                
+                for (int j = 0; j < numContainers; j++)
                 {
-                    // Add visual variety to each stall
-                    // Could add props, different materials, roofs, etc.
-                    // For now, this is a placeholder for future enhancement
+                    // Offset containers slightly so they don't overlap
+                    Vector3 containerPos = pos + new Vector3(j * 1.2f - 0.6f, 0, 0);
                     
-                    stallsEnhanced++;
+                    // Cycle through available containers
+                    int containerIdx = (i * numContainers + j) % containers.Count;
+                    var container = containers[containerIdx];
+                    
+                    GameObject prop = AssetPackManager.PlaceProp(
+                        container,
+                        containerPos,
+                        mgRoot
+                    );
+
+                    if (prop != null)
+                    {
+                        Debug.Log($"[MARKETPLACE SETUP] ✅ Placed {container.name} at stall {i + 1}, pos {j + 1}");
+                        totalPropsPlaced++;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[MARKETPLACE SETUP] ⚠️  Failed to load {container.name}");
+                    }
                 }
             }
 
-            Debug.Log($"  ✅ Prepared {stallsEnhanced} stalls for prop enhancement");
+            // Add decorative elements (vases, rope) around marketplace perimeter
+            var decorations = AssetPackManager.GetPropsByType("decoration");
+            if (decorations.Count > 0)
+            {
+                // Place decorations at corners/edges
+                Vector3[] decorationSpots = new Vector3[]
+                {
+                    new Vector3(-8, 0.3f, -3),
+                    new Vector3(8, 0.3f, -3),
+                    new Vector3(-8, 0.3f, 15),
+                    new Vector3(8, 0.3f, 15),
+                };
+
+                for (int i = 0; i < decorationSpots.Length; i++)
+                {
+                    int decIdx = i % decorations.Count;
+                    var deco = decorations[decIdx];
+                    
+                    GameObject prop = AssetPackManager.PlaceProp(
+                        deco,
+                        decorationSpots[i],
+                        mgRoot
+                    );
+
+                    if (prop != null)
+                    {
+                        Debug.Log($"[MARKETPLACE SETUP] ✨ Placed {deco.name} as marketplace decoration");
+                        totalPropsPlaced++;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[MARKETPLACE SETUP] ⚠️  Failed to load {deco.name}");
+                    }
+                }
+            }
+
+            Debug.Log($"[MARKETPLACE SETUP] 🏪 Stall enhancement complete! Total props placed: {totalPropsPlaced}");
         }
     }
 }

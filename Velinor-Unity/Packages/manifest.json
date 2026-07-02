@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.asset-manager-for-unity": "1.11.0",
     "com.unity.inputsystem": "1.19.0",
     "com.unity.microsoft.gdk": "1.6.0",
     "com.unity.microsoft.gdk.tools": "1.6.0",
