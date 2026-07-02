@@ -216,6 +216,46 @@ public static class FixImportedMaterials
                     }
                 }
 
+                // Additional: handle Standard materials missing textures (appear as blobs)
+                for (int i = 0; i < mats.Length; i++)
+                {
+                    var mat = mats[i];
+                    if (mat == null) continue;
+                    string sname = mat.shader != null ? mat.shader.name : "";
+                    if (sname == "Standard")
+                    {
+                        bool hasMain = mat.HasProperty("_MainTex") && mat.GetTexture("_MainTex") != null;
+                        if (!hasMain)
+                        {
+                            // try to assign textures from the prefab folder
+                            string prefabFolder = Path.GetDirectoryName(pPath);
+                            bool assigned = TryAssignTexturesFromFolder(mat, prefabFolder);
+                            if (assigned)
+                            {
+                                prefabChanged = true;
+                                report.AppendLine($"[PATCH-MAT] {pPath} - assigned textures to Standard material on '{r.gameObject.name}' slot {i}");
+                                Debug.Log($"[FixImportedMaterials] Assigned textures to Standard material in {pPath} for renderer {r.gameObject.name}");
+                            }
+                            else
+                            {
+                                // create a fallback material if still missing
+                                string autofixFolder = Path.Combine(Path.GetDirectoryName(pPath), "AutoFixedMaterials").Replace("\\", "/");
+                                if (!AssetDatabase.IsValidFolder(autofixFolder))
+                                {
+                                    AssetDatabase.CreateFolder(Path.GetDirectoryName(pPath), "AutoFixedMaterials");
+                                }
+                                string matAssetPath = Path.Combine(autofixFolder, Path.GetFileNameWithoutExtension(pPath) + "_std_slot" + i + ".mat").Replace("\\", "/");
+                                Material newMat = new Material(Shader.Find("Standard"));
+                                AssetDatabase.CreateAsset(newMat, matAssetPath);
+                                mats[i] = newMat;
+                                prefabChanged = true;
+                                report.AppendLine($"[AUTO-STD] {pPath} - created Standard fallback {matAssetPath} for renderer '{r.gameObject.name}' slot {i}");
+                                Debug.Log($"[FixImportedMaterials] Created Standard fallback material {matAssetPath} for {pPath}");
+                            }
+                        }
+                    }
+                }
+
                 if (anyDefault)
                 {
                     r.sharedMaterials = mats;
@@ -272,6 +312,38 @@ public static class FixImportedMaterials
 
         // no candidate found
         return false;
+    }
+
+    static bool TryAssignTexturesFromFolder(Material mat, string folder)
+    {
+        if (string.IsNullOrEmpty(folder) || !AssetDatabase.IsValidFolder(folder)) return false;
+        var texGuids = AssetDatabase.FindAssets("t:Texture2D", new[] { folder });
+        var textures = texGuids.Select(g => AssetDatabase.GUIDToAssetPath(g)).ToList();
+        bool assigned = false;
+        foreach (var p in textures)
+        {
+            string name = Path.GetFileNameWithoutExtension(p).ToLower();
+            var tex = AssetDatabase.LoadAssetAtPath<Texture>(p);
+            if (tex == null) continue;
+            if (!assigned && (name.Contains("albedo") || name.Contains("diffuse") || name.Contains("base")))
+            {
+                if (mat.HasProperty("_MainTex")) { mat.SetTexture("_MainTex", tex); assigned = true; }
+                if (mat.HasProperty("_BaseMap")) { mat.SetTexture("_BaseMap", tex); assigned = true; }
+            }
+            if (name.Contains("normal") || name.Contains("nrm"))
+            {
+                if (mat.HasProperty("_BumpMap")) { mat.SetTexture("_BumpMap", tex); assigned = true; }
+            }
+            if (name.Contains("metal") || name.Contains("metallic"))
+            {
+                if (mat.HasProperty("_MetallicGlossMap")) { mat.SetTexture("_MetallicGlossMap", tex); assigned = true; }
+            }
+            if (name.Contains("mask") || name.Contains("ao"))
+            {
+                if (mat.HasProperty("_OcclusionMap")) { mat.SetTexture("_OcclusionMap", tex); assigned = true; }
+            }
+        }
+        return assigned;
     }
 }
 #endif
