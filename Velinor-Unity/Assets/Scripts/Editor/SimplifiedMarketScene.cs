@@ -242,7 +242,7 @@ namespace Velinor.Editor
             GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
             ground.name = "Ground";
             ground.transform.parent = parent;
-            ground.transform.position = new Vector3(0, 0f, 0); // At Y=0 (ground level)
+            ground.transform.position = new Vector3(0, -0.1f, 0); // Position so top surface is at Y=0
             ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30×30m, 0.2m thick
 
             Object.DestroyImmediate(ground.GetComponent<Collider>());
@@ -252,8 +252,10 @@ namespace Velinor.Editor
             mat.color = new Color(0.4f, 0.35f, 0.3f); // Earth brown
             mr.material = mat;
 
+            // CRITICAL FIX: Collider size must match the scaled mesh
+            // Mesh scale (30, 0.2, 30) means collider should be (30, 0.2, 30)
             BoxCollider collider = ground.AddComponent<BoxCollider>();
-            collider.size = new Vector3(1, 1, 1);
+            collider.size = new Vector3(30, 0.2f, 30);  // Match mesh scale!
             collider.center = Vector3.zero;
             collider.isTrigger = false;
 
@@ -264,7 +266,7 @@ namespace Velinor.Editor
             groundRb.linearDamping = 0;
             groundRb.angularDamping = 0;
 
-            // CRITICAL: Set to "Foreground" layer so raycast can detect it
+            // CRITICAL: Set to "Foreground" layer so collision works
             ground.layer = LayerMask.NameToLayer("Foreground");
             
             // Ensure all children are also on Foreground layer
@@ -274,8 +276,10 @@ namespace Velinor.Editor
             }
 
             Debug.Log("  ✅ Ground (30×30m) - Layer: Foreground, Physics: Kinematic");
+            Debug.Log($"    - Position: {ground.transform.position}, Scale: {ground.transform.localScale}");
             Debug.Log($"    - BoxCollider: size={collider.size}, center={collider.center}");
             Debug.Log($"    - Collider bounds: min={collider.bounds.min}, max={collider.bounds.max}");
+            Debug.Log($"    - Ground top surface at Y=0");
         }
 
         private static void CreateCenterWalkway(Transform parent)
