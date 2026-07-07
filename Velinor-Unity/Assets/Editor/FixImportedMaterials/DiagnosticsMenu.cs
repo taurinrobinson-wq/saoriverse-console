@@ -14,5 +14,11 @@ public static class DiagnosticsMenu
     {
         TentMaterialConverter.ConvertTentExtractedMaterials();
     }
+
+    [MenuItem("Tools/Asset Repair/[STEP 1] Comprehensive Repair All Asset Packs")]
+    public static void ComprehensiveRepair()
+    {
+        ComprehensiveAssetRepair.RepairAllAssetPacks();
+    }
 }
 #endif
