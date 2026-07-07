@@ -72,7 +72,7 @@ public static class MaterialConverter
 
             bool changed = false;
             if ((mainTex == null || mainTex == Texture2D.whiteTexture) &&
-                TextureAutoAssigner.TryAutoAssignTexture(mat, mPath, new[] { "_MainTex", "_BaseMap" }, new[] { "_albedo", "_diffuse", "_base" }))
+                TextureAutoAssigner.TryAutoAssignTexture(mat, mPath, new[] { "_MainTex", "_BaseMap" }, new[] { "_albedo", "_diffuse", "_base", "_roughness" }))
                 changed = true;
 
             if (bump == null &&
@@ -86,6 +86,18 @@ public static class MaterialConverter
             if (occ == null &&
                 TextureAutoAssigner.TryAutoAssignTexture(mat, mPath, new[] { "_OcclusionMap" }, new[] { "_mask", "_masks", "_ao" }))
                 changed = true;
+
+            // Fallback: if still no _MainTex, assign white to prevent pink rendering
+            if (mat.HasProperty("_MainTex") && mat.GetTexture("_MainTex") == null)
+            {
+                mat.SetTexture("_MainTex", Texture2D.whiteTexture);
+                changed = true;
+            }
+            if (mat.HasProperty("_BaseMap") && mat.GetTexture("_BaseMap") == null && !mat.HasProperty("_MainTex"))
+            {
+                mat.SetTexture("_BaseMap", Texture2D.whiteTexture);
+                changed = true;
+            }
 
             if (changed)
             {

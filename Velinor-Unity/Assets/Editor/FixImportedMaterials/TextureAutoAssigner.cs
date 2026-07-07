@@ -9,7 +9,25 @@ public static class TextureAutoAssigner
     public static bool TryAutoAssignTexture(Material mat, string matPath, string[] propsToTry, string[] namePatterns)
     {
         string folder = Path.GetDirectoryName(matPath).Replace("\\", "/");
-        var textures = FolderCache.GetTextures(folder);
+        var textures = new System.Collections.Generic.List<string>();
+        
+        // Add textures from immediate folder
+        textures.AddRange(FolderCache.GetTextures(folder));
+        
+        // Also search in sibling folders (e.g., if materials are in Materials/, look in Textures/)
+        string parentFolder = Path.GetDirectoryName(folder).Replace("\\", "/");
+        if (!string.IsNullOrEmpty(parentFolder) && AssetDatabase.IsValidFolder(parentFolder))
+        {
+            var subFolders = AssetDatabase.GetSubFolders(parentFolder);
+            foreach (var sub in subFolders)
+            {
+                if (sub != folder)
+                {
+                    textures.AddRange(FolderCache.GetTextures(sub));
+                }
+            }
+        }
+        
         Texture bestTex = null;
         int bestScore = 0;
 
@@ -48,7 +66,23 @@ public static class TextureAutoAssigner
     {
         if (string.IsNullOrEmpty(folder) || !AssetDatabase.IsValidFolder(folder)) return false;
 
-        var textures = FolderCache.GetTextures(folder.Replace("\\", "/"));
+        var textures = new System.Collections.Generic.List<string>();
+        textures.AddRange(FolderCache.GetTextures(folder.Replace("\\", "/")));
+        
+        // Also search in sibling folders
+        string parentFolder = Path.GetDirectoryName(folder).Replace("\\", "/");
+        if (!string.IsNullOrEmpty(parentFolder) && AssetDatabase.IsValidFolder(parentFolder))
+        {
+            var subFolders = AssetDatabase.GetSubFolders(parentFolder);
+            foreach (var sub in subFolders)
+            {
+                if (sub != folder)
+                {
+                    textures.AddRange(FolderCache.GetTextures(sub));
+                }
+            }
+        }
+        
         bool assigned = false;
 
         foreach (var p in textures)
@@ -59,7 +93,7 @@ public static class TextureAutoAssigner
 
             // Albedo / base
             if (name.EndsWith("_albedo") || name.EndsWith("_diffuse") || name.EndsWith("_base") ||
-                name.Contains("albedo") || name.Contains("diffuse") || name.Contains("base"))
+                name.Contains("albedo") || name.Contains("diffuse") || name.Contains("base") || name.Contains("roughness"))
             {
                 if (mat.HasProperty("_MainTex")) { mat.SetTexture("_MainTex", tex); assigned = true; }
                 if (mat.HasProperty("_BaseMap")) { mat.SetTexture("_BaseMap", tex); assigned = true; }
