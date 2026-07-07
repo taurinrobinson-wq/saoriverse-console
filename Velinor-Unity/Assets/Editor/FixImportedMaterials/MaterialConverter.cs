@@ -25,6 +25,18 @@ public static class MaterialConverter
             var mat = AssetDatabase.LoadAssetAtPath<Material>(mPath);
             if (mat == null) continue;
 
+            // If shader is missing or broken, apply a safe fallback shader and attempt to rebind textures
+            if (mat.shader == null || (mat.shader.name != null && mat.shader.name.Contains("Hidden/InternalError")))
+            {
+                Shader fallback = urpLit != null ? urpLit : Shader.Find("Standard");
+                if (fallback != null)
+                {
+                    mat.shader = fallback;
+                    if (!dryRun) EditorUtility.SetDirty(mat);
+                    report.LogMaterialFallback(mPath, mat.shader != null ? mat.shader.name : "(null)");
+                }
+            }
+
             Texture mainTex = null, bump = null, metallic = null, occ = null;
             if (mat.HasProperty("_MainTex")) mainTex = mat.GetTexture("_MainTex");
             if (mat.HasProperty("_BumpMap")) bump = mat.GetTexture("_BumpMap");

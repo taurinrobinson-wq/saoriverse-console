@@ -37,6 +37,12 @@ public class ReportBuilder
         _sb.AppendLine($"[PATCH] {path} - assigned missing textures");
     }
 
+    public void LogMaterialFallback(string path, string newShader)
+    {
+        _fallbackCount++;
+        _sb.AppendLine($"[MAT-FALLBACK] {path} -> shader set to '{newShader}'");
+    }
+
     public void LogReassign(string prefabPath, string rendererName, int slot, string matPath)
     {
         _reassignedCount++;

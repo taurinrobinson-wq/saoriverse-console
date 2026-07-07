@@ -21,18 +21,32 @@ public static class FixImportedMaterials
             "Assets/EmbersStorm – Mediterranean Ruins Building Kit",
             "Assets/3 English Oak Set"
         };
+        var report = new ReportBuilder();
+        var dryRun = EditorPrefs.GetBool("FixImportedMaterials_DryRun", false);
+
+        FolderCache.Clear();
+        var processed = new System.Collections.Generic.HashSet<string>();
 
         foreach (var f in folders)
         {
             if (AssetDatabase.IsValidFolder(f))
             {
-                RunOnFolder(f);
+                MaterialConverter.ProcessMaterialsInFolder(f, dryRun, report);
+                PrefabMaterialFixer.ProcessPrefabsInFolder(f, dryRun, report);
             }
             else
             {
                 Debug.Log($"[FixImportedMaterials] Folder not found: {f}");
             }
         }
+
+        if (!dryRun)
+        {
+            AssetDatabase.SaveAssets();
+        }
+
+        FolderCache.Clear();
+        report.FinalizeAndWrite();
     }
 
     [MenuItem("Tools/Fix Imported Materials/Toggle Dry Run")]
