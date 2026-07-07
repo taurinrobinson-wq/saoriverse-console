@@ -472,6 +472,247 @@ Post-collapse transport:
 
 ---
 
+## 🜁 Glyph System Overview
+
+Glyphs are the **emotional operating system** of the post-collapse world — a symbolic language that emerged organically from survivors who could no longer rely on pre-collapse cognition, memory, or linguistic coherence. They are not magic. They are not artifacts. They are **emotional logic made visible**, the natural evolution of a species trying to rebuild meaning after the Corelink shattered their minds.
+
+Glyphs encode **emotional states**, **cognitive patterns**, **survival strategies**, and **communal rituals**. They are the bridge between the fractured past and the emerging future.
+
+### 🜁 1. What Glyphs Are
+
+Glyphs are **emotional constructs** that manifest when a survivor (or the player) reaches a moment of emotional clarity, resonance, or recognition. They are:
+
+- **Emotional crystallizations**
+- **Memory anchors**
+- **Cognitive stabilizers**
+- **Communal rituals made symbolic**
+- **Fragments of the old Corelink emotional network**
+- **Survival heuristics encoded visually**
+
+Glyphs are not learned through study. They are **felt**, then revealed.
+
+They appear when the player:
+
+- Witnesses grief
+- Makes a difficult choice
+- Stabilizes their coherence
+- Acknowledges another's pain
+- Participates in communal ritual
+- Confronts fracture
+- Rebuilds trust
+- Honors legacy
+- Experiences joy
+
+Glyphs are the **new language of Velinor**, born from collapse-born survivors who needed a way to communicate emotional truths when memory and speech became unreliable.
+
+### 🜁 2. Why Glyphs Emerged
+
+Glyphs emerged because the Corelink collapse destroyed:
+
+- Linguistic fluency
+- Emotional regulation
+- Memory continuity
+- Shared cultural knowledge
+- Interpersonal trust
+- The ability to articulate complex feelings
+
+Survivors needed a way to communicate:
+
+- Grief
+- Boundaries
+- Trust
+- Presence
+- Fear
+- Legacy
+- Joy
+
+But their minds could no longer hold full sentences, histories, or narratives. Glyphs became:
+
+- **Shortcuts for emotional meaning**
+- **Ritualized communication**
+- **Anchors for fragmented cognition**
+- **Symbols that bypass broken memory pathways**
+
+Glyphs are the **post-collapse emotional OS**, replacing the Corelink's failed network with a decentralized, human-driven system.
+
+### 🜁 3. The Seven Glyph Categories
+
+Each glyph belongs to one of seven emotional categories. These categories map directly onto Velinor's emotional physics and collapse psychology.
+
+#### Collapse
+Memory distortion, fear, fracture, unreliability of perception.  
+Glyphs: Fractured Memory, Mirage Echo, Hollow Pact, Shattered Corridor, Stolen Memory, Quiet Collapse, etc.  
+NPCs: Archivist Malrik, Drossel, Kaelen, Orvak, Coren, Dalen.
+
+#### Sovereignty
+Boundaries, choice, clarity, restraint, personal agency.  
+Glyphs: Measured Step, Boundary Stone, Iron Boundary, Interruptive Restraint, Hidden Passage, etc.  
+NPCs: Malrik, Veynar, Coren, Drossel, Dalen.
+
+#### Presence
+Touch, silence, witness, emotional anchoring.  
+Glyphs: Tender Witness, Veiled Silence, Echo Communion, Remembrance, Steadfast Witness, etc.  
+NPCs: Helia, Elenya, Inodora, Korrin, Nima.
+
+#### Ache
+Loss, grief, betrayal, emotional wounds.  
+Glyphs: Betrayal Scar, Broken Vessel, Sewn Ache, Sorrow, Primal Oblivion, Echoed Longing, etc.  
+NPCs: Dalen, Mariel, Nordia, Ravi & Nima, Sealina.
+
+#### Legacy
+Family, ancestry, ritual inheritance, continuity.  
+Glyphs: Ancestral Record, Sand Memories, Emotional Inheritance, Echoed Breath, Returning Song, Legacy, etc.  
+NPCs: Malrik, Inodora, Nordia, Mariel, Kaelen.
+
+#### Joy
+Play, reunion, creative spark, communal celebration.  
+Glyphs: Sky Revelry, Blooming Path, Crafted Wonder, Arrival, Verdant Reunion, Dawn Petals, etc.  
+NPCs: Elenya, Lira, Rasha, Sera, Juria & Korinth.
+
+#### Trust
+Community, restoration, interdependence, shared survival.  
+Glyphs: Covenant Flame, Shared Survival, Binding Cloth, Whispered Pact, Mutual Passage, Apprehension, etc.  
+NPCs: Veynar, Elenya, Mariel, Korrin, Kaelen, Rasha.
+
+These categories are the **emotional architecture** of Velinor.
+
+### 🜁 4. How Glyphs Manifest
+
+Glyphs manifest when the player reaches an emotional threshold. This threshold is defined by:
+
+- **Player coherence level**
+- **NPC emotional state**
+- **Environmental resonance**
+- **Narrative choices**
+- **Presence, silence, or witness**
+- **Ritual participation**
+- **Acceptance of uncertainty**
+- **Acknowledgment of grief**
+- **Recognition of fracture**
+
+Glyph manifestation is not random. It is **earned**.
+
+#### Manifestation Conditions
+
+- Completing an emotional ritual
+- Witnessing a moment of grief
+- Mediating conflict
+- Choosing restraint
+- Accepting uncertainty
+- Participating in communal celebration
+- Rebuilding trust
+- Honoring legacy
+- Facing collapse without turning away
+
+When a glyph manifests, the world reacts:
+
+- Screen distortion
+- Color shifts
+- Heartbeat audio
+- Slowed movement
+- Emotional resonance
+- Memory flashes
+- Environmental stabilization or destabilization
+
+Glyphs are **felt first**, then seen.
+
+### 🜁 5. Glyphs as Gameplay Systems
+
+Glyphs are not collectibles — they are **mechanics**.
+
+#### Glyph Functions
+
+- Stabilize emotional coherence
+- Unlock traversal abilities
+- Reveal hidden paths
+- Interface with relic towers
+- Calm or influence NPCs
+- Trigger memory reconstruction
+- Open sealed chambers
+- Anchor unstable environments
+- Unlock narrative branches
+
+Glyphs are the player's primary tool for navigating Velinor's emotional and physical instability.
+
+### 🜁 6. NPC Glyph Roles
+
+Every glyph is tied to an NPC whose emotional arc embodies the glyph's meaning.
+
+NPCs are:
+
+- Teachers
+- Witnesses
+- Carriers of emotional lineage
+- Fragments of the old world
+- Embodiments of collapse-born psychology
+
+NPC glyph arcs provide:
+
+- Emotional quests
+- Narrative progression
+- Memory fragments
+- Settlement dynamics
+- Relational consequences
+
+NPCs do not "give" glyphs — they **reveal** them when the player reaches resonance.
+
+### 🜁 7. Glyph Progression
+
+Glyph progression is nonlinear and emotional.
+
+#### Progression Pathways
+
+- **Collapse → Sovereignty**
+- **Ache → Presence**
+- **Legacy → Trust**
+- **Joy → Trust**
+- **Collapse → Ache → Legacy**
+
+Glyphs form **emotional constellations**, not skill trees.
+
+The player's emotional journey determines which glyphs appear and in what order.
+
+### 🜁 8. Glyphs and the Relic Grid
+
+Glyphs interface with the Relic Grid — Velinor's attempt to restore coherence.
+
+Glyphs allow the player to:
+
+- Decode signals
+- Stabilize towers
+- Repair emotional resonance nodes
+- Unlock memory archives
+- Influence settlement communication
+- Access Corelink remnants
+
+Glyphs are the **key** to understanding Velinor's decades-long struggle to fix what broke.
+
+### 🜁 9. Glyphs and the Collapse Timeline
+
+Glyphs map directly onto the collapse timeline:
+
+- **Years 0–5:** Collapse glyphs dominate
+- **Years 5–15:** Ache, Presence, Sovereignty emerge
+- **Years 15–25:** Legacy, Trust, Joy flourish
+
+This mirrors the emotional evolution of survivors.
+
+### 🜁 10. Glyphs as Emotional Physics
+
+Glyphs are the visible expression of Velinor's emotional physics:
+
+- Collapse creates fracture
+- Fracture creates ache
+- Ache creates presence
+- Presence creates legacy
+- Legacy creates trust
+- Trust creates joy
+- Joy creates coherence
+
+Glyphs are the **laws of emotional motion** in Velinor.
+
+---
+
 ## Open Questions for Future Development
 
 - How does Velinor's relic grid influence different settlements?
