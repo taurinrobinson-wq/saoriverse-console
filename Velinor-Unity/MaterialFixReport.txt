@@ -1,0 +1,6 @@
+Material Fix Report
+7/2/2026 11:01:44 AM
+Project SRP active: False
+[SKIP-CONVERT] Assets/3 English Oak Set/textures/Bare_Branches_Merged.mat (SRP inactive or URP shader not found)
+[SKIP-CONVERT] Assets/3 English Oak Set/textures/Leaves_Merged.mat (SRP inactive or URP shader not found)
+[SKIP-CONVERT] Assets/3 English Oak Set/textures/Trunk_Seamless.mat (SRP inactive or URP shader not found)

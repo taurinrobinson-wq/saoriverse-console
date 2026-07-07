@@ -1,0 +1,211 @@
+Material Diagnostics Report
+7/6/2026 5:55:21 PM
+
+Project SRP active: False
+
+[PROBLEM] Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_6_br.prefab -> Renderer: rock_6_br Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_6_tl.prefab -> Renderer: rock_6_tl Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_6_tr.prefab -> Renderer: rock_6_tr Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_7_bl.prefab -> Renderer: rock_7_bl Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_7_br.prefab -> Renderer: rock_7_br Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_7_tl.prefab -> Renderer: rock_7_tl Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_7_tr.prefab -> Renderer: rock_7_tr Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/DreamTree.prefab -> Renderer: DreamTree Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/DreamTree.prefab -> Renderer: DreamTree Slot:1 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/DreamTree.prefab -> Renderer: DreamTree lod1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/DreamTree.prefab -> Renderer: DreamTree lod1 Slot:1 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/DreamTree.prefab -> Renderer: DreamTree lod2 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/DreamTree.prefab -> Renderer: DreamTree lod2 Slot:1 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/grass plant 01.prefab -> Renderer: grass plant 01 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/grass plant 02.prefab -> Renderer: grass plant 01 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/DreamTree2/Prefab/grass plant 03.prefab -> Renderer: grass plant 01 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry3333.prefab -> Renderer: Dry3333 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry3333.prefab -> Renderer: Dry8873LOD Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry3333.prefab -> Renderer: Dry8873LOD013 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry3333.prefab -> Renderer: Dry8873LOD014 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4195.prefab -> Renderer: Dry4195 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4195.prefab -> Renderer: Dry8873LOD Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4195.prefab -> Renderer: Dry8873LOD007 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4195.prefab -> Renderer: Dry8873LOD008 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4910.prefab -> Renderer: Dry4910 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4910.prefab -> Renderer: Dry8873LOD Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4910.prefab -> Renderer: Dry8873LOD005 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry4910.prefab -> Renderer: Dry8873LOD006 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry5818.prefab -> Renderer: Dry5818 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry5818.prefab -> Renderer: Dry8873LOD Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry5818.prefab -> Renderer: Dry8873LOD003 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry5818.prefab -> Renderer: Dry8873LOD004 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry6524.prefab -> Renderer: Dry6524 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry6524.prefab -> Renderer: Dry8873LOD Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry6524.prefab -> Renderer: Dry8873LOD009 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry6524.prefab -> Renderer: Dry8873LOD010 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry7509.prefab -> Renderer: Dry7509 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry7509.prefab -> Renderer: Dry8873LOD Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry7509.prefab -> Renderer: Dry8873LOD001 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry7509.prefab -> Renderer: Dry8873LOD002 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry8872.prefab -> Renderer: Dry8872 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry8872.prefab -> Renderer: Dry8873LOD Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry8872.prefab -> Renderer: Dry8873LOD011 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Dry_Trees/Prefab/Dry8872.prefab -> Renderer: Dry8873LOD012 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Barrel 01.prefab -> Renderer: Barrel_Irons_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Barrel 01.prefab -> Renderer: Barrel_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Clay Mug 2.prefab -> Renderer: Clay Mug 2 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Clay Pot.prefab -> Renderer: Body Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Clay Pot.prefab -> Renderer: Lid Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Clay_Mug.prefab -> Renderer: Clay_Mug Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Crate_01.prefab -> Renderer: Crate_01 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Crate_02.prefab -> Renderer: Crate_02 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Crate_03.prefab -> Renderer: Crate_03 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Folding_Ladder.prefab -> Renderer: Ladder_Metal_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Folding_Ladder.prefab -> Renderer: Ladder_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Chain_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Handcart_Barrel Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Rope_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Shaft_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Wheel_inner_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Wheel_metal_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Wooden_floor_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Handcart.prefab -> Renderer: Wooden_rails_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Old_Table.prefab -> Renderer: Old_Table Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Palette.prefab -> Renderer: Palette Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Rope.prefab -> Renderer: Rope Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Tent.prefab -> Renderer: Tent_Cloth_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Tent.prefab -> Renderer: Tent_Rope_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Tent.prefab -> Renderer: Tent_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_1.prefab -> Renderer: Body Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_1.prefab -> Renderer: Handle Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_1.prefab -> Renderer: Lid Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_2.prefab -> Renderer: Vase_2_Body Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_2.prefab -> Renderer: Vase_2_Lid Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_3.prefab -> Renderer: Vase_3 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_4.prefab -> Renderer: Vase_4 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Vase_5.prefab -> Renderer: Vase_5 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Wooden Box 01.prefab -> Renderer: Wooden Box 01 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Handle_Iron_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Handle_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Iron_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/High Definition Render Pipeline (HDRP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Barrel 01.prefab -> Renderer: Barrel_Irons_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Barrel 01.prefab -> Renderer: Barrel_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Clay Mug 2.prefab -> Renderer: Clay Mug 2 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Clay Pot.prefab -> Renderer: Body Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Clay Pot.prefab -> Renderer: Lid Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Clay_Mug.prefab -> Renderer: Clay_Mug Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Crate_01.prefab -> Renderer: Crate_01 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Crate_02.prefab -> Renderer: Crate_02 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Crate_03.prefab -> Renderer: Crate_03 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Folding_Ladder.prefab -> Renderer: Ladder_Metal_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Folding_Ladder.prefab -> Renderer: Ladder_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Chain_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Handcart_Barrel Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Rope_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Shaft_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Wheel_inner_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Wheel_metal_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Wooden_floor_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Handcart.prefab -> Renderer: Wooden_rails_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Old_Table.prefab -> Renderer: Old_Table Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Palette.prefab -> Renderer: Palette Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Rope.prefab -> Renderer: Rope Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Tent.prefab -> Renderer: Tent_Cloth_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Tent.prefab -> Renderer: Tent_Rope_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Tent.prefab -> Renderer: Tent_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_1.prefab -> Renderer: Body Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_1.prefab -> Renderer: Handle Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_1.prefab -> Renderer: Lid Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_2.prefab -> Renderer: Vase_2_Body Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_2.prefab -> Renderer: Vase_2_Lid Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_3.prefab -> Renderer: Vase_3 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_4.prefab -> Renderer: Vase_4 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Vase_5.prefab -> Renderer: Vase_5 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Wooden Box 01.prefab -> Renderer: Wooden Box 01 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Handle_Iron_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Handle_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Iron_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/Medieval Props Pack 01/Universal Render Pipeline(URP)/Prefabs/Wooden_Bucket_1.prefab -> Renderer: Bucket_Wood_low Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Doors/Door.B.prefab -> Renderer: Door.B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Doors/Door.C.prefab -> Renderer: Door.C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Doors/Door.C.prefab -> Renderer: Door.C Slot:1 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Floors/Ruins_Floor_A.prefab -> Renderer: Ruins_Floor_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Floors/Ruins_Floor_B.prefab -> Renderer: Ruins_Floor_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Floors/Ruins_Floor_C.prefab -> Renderer: Ruins_Floor_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.1.prefab -> Renderer: Roof.A.1 Slot:1 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.prefab -> Renderer: Roof.A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.B.1.prefab -> Renderer: Roof.B.1 Slot:1 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.B.prefab -> Renderer: Roof.B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.C.1.prefab -> Renderer: Roof.C.1 Slot:1 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.C.prefab -> Renderer: Roof.C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.001.prefab -> Renderer: Ruins_Roof_A.001 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.002.prefab -> Renderer: Ruins_Roof_A.002 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.003.prefab -> Renderer: Ruins_Roof_A.003 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.004.prefab -> Renderer: Ruins_Roof_A.004 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.005.prefab -> Renderer: Ruins_Roof_A.005 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.006.prefab -> Renderer: Ruins_Roof_A.006 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.007.prefab -> Renderer: Ruins_Roof_A.007 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.008.prefab -> Renderer: Ruins_Roof_A.008 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.009.prefab -> Renderer: Ruins_Roof_A.009 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.010.prefab -> Renderer: Ruins_Roof_A.010 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.011.prefab -> Renderer: Ruins_Roof_A.011 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.012.prefab -> Renderer: Ruins_Roof_A.012 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_A.prefab -> Renderer: Ruins_Roof_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_B.prefab -> Renderer: Ruins_Roof_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_C.prefab -> Renderer: Ruins_Roof_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Ruins_Roof_D.prefab -> Renderer: Ruins_Roof_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Ramp_A.prefab -> Renderer: Ruins_Ramp_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Ramp_B.prefab -> Renderer: Ruins_Ramp_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Ramp_C.prefab -> Renderer: Ruins_Ramp_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Ramp_D.prefab -> Renderer: Ruins_Ramp_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Stairs_A.prefab -> Renderer: Ruins_Stairs_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Stairs_B.prefab -> Renderer: Ruins_Stairs_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Stairs_C.prefab -> Renderer: Ruins_Stairs_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Stairs/Ruins_Stairs_D.prefab -> Renderer: Ruins_Stairs_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Arch_A.prefab -> Renderer: Ruins_Arch_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Arch_B.prefab -> Renderer: Ruins_Arch_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Arch_D.prefab -> Renderer: Ruins_Arch_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_BrokenWall_A.1.prefab -> Renderer: Ruins_BrokenWall_A.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_BrokenWall_A.prefab -> Renderer: Ruins_BrokenWall_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_BrokenWall_B.1.prefab -> Renderer: Ruins_BrokenWall_B.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_BrokenWall_B.prefab -> Renderer: Ruins_BrokenWall_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_BrokenWall_C.1.prefab -> Renderer: Ruins_BrokenWall_C.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_BrokenWall_D.1.prefab -> Renderer: Ruins_BrokenWall_D.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_BrokenWall_D.prefab -> Renderer: Ruins_BrokenWall_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Corner_A.prefab -> Renderer: Ruins_Corner_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Corner_B.prefab -> Renderer: Ruins_Corner_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Corner_D.prefab -> Renderer: Ruins_Corner_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_RoofWall_A.prefab -> Renderer: Ruins_RoofWall_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_RoofWall_B.prefab -> Renderer: Ruins_RoofWall_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_RoofWall_C.prefab -> Renderer: Ruins_RoofWall_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_RoofWall_D.prefab -> Renderer: Ruins_RoofWall_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_A.1.prefab -> Renderer: Ruins_Wall_Alt_A.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_A.prefab -> Renderer: Ruins_Wall_Alt_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_B.1.prefab -> Renderer: Ruins_Wall_Alt_B.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_B.prefab -> Renderer: Ruins_Wall_Alt_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_C.1.prefab -> Renderer: Ruins_Wall_Alt_C.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_C.prefab -> Renderer: Ruins_Wall_Alt_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_D.1.prefab -> Renderer: Ruins_Wall_Alt_D.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Alt_D.prefab -> Renderer: Ruins_Wall_Alt_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Door_A.prefab -> Renderer: Ruins_Wall_Door_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Door_B.prefab -> Renderer: Ruins_Wall_Door_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Door_C.prefab -> Renderer: Ruins_Wall_Door_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Door_D.prefab -> Renderer: Ruins_Wall_Door_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab -> Renderer: Ruins_Wall_Plain_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_B.prefab -> Renderer: Ruins_Wall_Plain_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_C.prefab -> Renderer: Ruins_Wall_Plain_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_D.prefab -> Renderer: Ruins_Wall_Plain_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Short_A.prefab -> Renderer: Ruins_Wall_Short_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Short_B.prefab -> Renderer: Ruins_Wall_Short_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Short_C.prefab -> Renderer: Ruins_Wall_Short_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Short_D.prefab -> Renderer: Ruins_Wall_Short_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Window_A.prefab -> Renderer: Ruins_Wall_Window_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Window_B.prefab -> Renderer: Ruins_Wall_Window_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Window_C.prefab -> Renderer: Ruins_Wall_Window_C Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Window_D.prefab -> Renderer: Ruins_Wall_Window_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_WallCap_A.1.prefab -> Renderer: Ruins_WallCap_A.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_WallCap_A.prefab -> Renderer: Ruins_WallCap_A Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_WallCap_B.1.prefab -> Renderer: Ruins_WallCap_B.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_WallCap_B.prefab -> Renderer: Ruins_WallCap_B Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_WallCap_D.1.prefab -> Renderer: Ruins_WallCap_D.1 Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+[PROBLEM] Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_WallCap_D.prefab -> Renderer: Ruins_WallCap_D Slot:0 Shader: Hidden/InternalErrorShader Notes: broken shader, no _MainTex texture
+
+Scanned prefabs: 758
+Problems found: 203

@@ -56,5 +56,8 @@
     "**/archive/**": true
   },
   "python.analysis.autoImportCompletions": true,
-  "python-envs.defaultEnvManager": "ms-python.python:system"
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "cSpell.words": [
+    "Velinor"
+  ]
 }
