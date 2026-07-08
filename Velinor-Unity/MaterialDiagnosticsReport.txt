@@ -1,8 +1,8 @@
 Material Diagnostics Report
-7/8/2026 10:06:07 AM
+7/6/2026 6:45:12 PM
 
-Project SRP active: True
+Project SRP active: False
 
 
-Scanned prefabs: 759
+Scanned prefabs: 758
 Problems found: 0
