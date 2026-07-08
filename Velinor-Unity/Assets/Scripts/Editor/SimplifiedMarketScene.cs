@@ -27,15 +27,15 @@ namespace Velinor.Editor
         private const float StallRowAX = -7f;   // Left side stalls
         private const float StallRowBX = 7f;    // Right side stalls
         private const float CenterWalkwayX = 0f;
-        
+
         // Asset paths
         private const string EMBERS_WALL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab";
         private const string EMBERS_ROOF_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.prefab";
-        
+
         private const string ROCK_PREFAB_PATH_1 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab";
         private const string ROCK_PREFAB_PATH_2 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab";
         private const string ROCK_PREFAB_PATH_3 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab";
-        
+
         private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Model/Dry7509.fbx";
 
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
@@ -53,8 +53,14 @@ namespace Velinor.Editor
             Scene activeScene = SceneManager.GetActiveScene();
             if (activeScene.name != "Marketplace")
             {
-                Debug.LogError("❌ Active scene is not 'Marketplace'. Load it first.");
-                return;
+                Debug.Log("⚠️  Marketplace scene not active. Auto-loading...");
+                if (!LoadMarketplaceScene())
+                {
+                    Debug.LogError("❌ Failed to load Marketplace scene. Scene population skipped.");
+                    return;
+                }
+                activeScene = SceneManager.GetActiveScene();
+                Debug.Log("✅ Marketplace scene loaded successfully.");
             }
 
             // Verify required assets exist before populating
@@ -268,7 +274,7 @@ namespace Velinor.Editor
 
             // CRITICAL: Set to "Foreground" layer so collision works
             ground.layer = LayerMask.NameToLayer("Foreground");
-            
+
             // Ensure all children are also on Foreground layer
             foreach (Transform child in ground.GetComponentsInChildren<Transform>())
             {
@@ -312,7 +318,7 @@ namespace Velinor.Editor
 
             // CRITICAL: Set to "Foreground" layer so collision works
             walkway.layer = LayerMask.NameToLayer("Foreground");
-            
+
             // Ensure all children are also on Foreground layer
             foreach (Transform child in walkway.GetComponentsInChildren<Transform>())
             {
@@ -336,19 +342,19 @@ namespace Velinor.Editor
             for (int i = 0; i < stallZPositions.Length; i++)
             {
                 GameObject tentPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(tentPath);
-                
+
                 if (tentPrefab != null)
                 {
                     GameObject stall = PrefabUtility.InstantiatePrefab(tentPrefab, parent) as GameObject;
                     stall.name = $"{stallPrefix}_{i + 1}";
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
-                    
+
                     // Apply 1:1 scale for stalls
                     stall.transform.localScale = new Vector3(1f, 1f, 1f);
-                    
+
                     // Fix pink materials on tent (replace with Standard shader)
                     AssetPackManager.FixPropMaterials(stall);
-                    
+
                     Debug.Log($"  ✅ Tent stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - scale (1, 1, 1)");
                 }
                 else
@@ -388,14 +394,14 @@ namespace Velinor.Editor
             for (int i = 0; i < rockNames.Length; i++)
             {
                 GameObject rockPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(rockPrefabs[i]);
-                
+
                 if (rockPrefab != null)
                 {
                     GameObject rock = PrefabUtility.InstantiatePrefab(rockPrefab, parent) as GameObject;
                     rock.name = rockNames[i];
                     rock.transform.position = basePositions[i];
                     rock.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f); // INCREASED for better visibility
-                    
+
                     // Fix materials with Standard shader (gray-brown rock color)
                     FixMaterialsWithStandard(rock, new Color(0.55f, 0.52f, 0.48f));
                     rock.layer = LayerMask.NameToLayer("Background");
@@ -449,14 +455,14 @@ namespace Velinor.Editor
             try
             {
                 GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
-                
+
                 if (playerPrefab == null)
                 {
                     Debug.LogWarning("SimplifiedMarketScene: playerPrefab asset not found. Using capsule fallback.");
                     AddPlayerFallback(parent);
                     return;
                 }
-                
+
                 // Instantiate prefab as-is, don't modify its internal structure
                 GameObject player = Object.Instantiate(playerPrefab, parent) as GameObject;
                 if (player == null)
@@ -465,12 +471,12 @@ namespace Velinor.Editor
                     AddPlayerFallback(parent);
                     return;
                 }
-                
+
                 player.name = "Player";
                 player.transform.localPosition = Vector3.zero;
                 player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
-                
+
                 // ========== CLEANUP PHASE 1: Remove null/broken components ==========
                 // This must happen BEFORE we try to fix materials or disable scripts
                 int nullsRemoved = 0;
@@ -478,7 +484,7 @@ namespace Velinor.Editor
                 {
                     // Get all components and filter those that are null
                     System.Collections.Generic.List<Component> toDestroy = new System.Collections.Generic.List<Component>();
-                    
+
                     foreach (Component comp in t.GetComponents<Component>())
                     {
                         // If accessing the type throws, it's a null component (missing script)
@@ -492,27 +498,27 @@ namespace Velinor.Editor
                             nullsRemoved++;
                         }
                     }
-                    
+
                     foreach (Component comp in toDestroy)
                     {
                         Object.DestroyImmediate(comp, allowDestroyingAssets: true);
                         Debug.Log($"  🗑️  Removed null component (missing script) on {t.gameObject.name}");
                     }
                 }
-                
+
                 if (nullsRemoved > 0)
                     Debug.Log($"  ✅ Removed {nullsRemoved} null/broken components from hierarchy");
-                
+
                 // ========== CLEANUP PHASE 2: Destroy unwanted scripts (keep Animator) ==========
                 MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>(includeInactive: true);
                 int destroyedCount = 0;
-                
+
                 foreach (MonoBehaviour mb in allMonoBehaviours)
                 {
                     if (mb == null) continue; // Skip if already null
-                    
+
                     string scriptName = mb.GetType().Name;
-                    
+
                     // Keep ONLY Animator, destroy everything else
                     if (!scriptName.Contains("Animator"))
                     {
@@ -521,9 +527,9 @@ namespace Velinor.Editor
                         Debug.Log($"  🗑️  Destroyed {scriptName}");
                     }
                 }
-                
+
                 Debug.Log($"  ✅ Cleaned up {destroyedCount} unwanted scripts from character hierarchy");
-                
+
                 // Verify Animator still exists after cleanup
                 Animator animator = player.GetComponent<Animator>();
                 if (animator == null)
@@ -533,7 +539,7 @@ namespace Velinor.Editor
                     if (animator != null)
                         Debug.Log($"  ✅ Found Animator on child: {animator.gameObject.name}");
                 }
-                
+
                 // ========== APPLY MATERIALS (null components are now gone) ==========
                 FixCharacterMaterials(player);
 
@@ -548,7 +554,7 @@ namespace Velinor.Editor
                         break;
                     }
                 }
-                
+
                 // ========== CREATE CAMERA ==========
                 GameObject cameraObj = new GameObject("MainCamera");
                 cameraObj.transform.parent = player.transform;
@@ -568,12 +574,12 @@ namespace Velinor.Editor
 
                 // ========== SETUP PHYSICS ==========
                 SetupCharacterPhysics(player);
-                
+
                 // ========== ADD MOVEMENT SCRIPT ==========
                 SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
                 movement.mainCamera = cam;
                 Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
-                
+
                 // Log character collider info after setup for debugging
                 Collider[] finalColliders = player.GetComponentsInChildren<Collider>();
                 Debug.Log($"  📊 COLLIDER DEBUG INFO:");
@@ -640,7 +646,7 @@ namespace Velinor.Editor
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.linearVelocity = new Vector3(0, -2f, 0);  // Help settle on ground
-            
+
             Debug.Log($"  ✅ Fallback player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             Debug.Log($"      - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
             Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
@@ -659,7 +665,7 @@ namespace Velinor.Editor
             cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
 
             cameraObj.AddComponent<AudioListener>();
-            
+
             // Add simple movement script for WASD + Mouse input
             SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
             movement.mainCamera = cam;
@@ -675,7 +681,7 @@ namespace Velinor.Editor
             // This fixes any broken/pink materials in the prefabs
             Material standardMat = new Material(Shader.Find("Standard"));
             standardMat.color = color;
-            
+
             MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
             {
@@ -684,7 +690,7 @@ namespace Velinor.Editor
                     mats[i] = standardMat;
                 renderer.sharedMaterials = mats;
             }
-            
+
             Debug.Log($"  ℹ️  Fixed materials on {obj.name} (color: {color})");
         }
 
@@ -693,7 +699,7 @@ namespace Velinor.Editor
             // Apply a tan/beige material to all renderers to avoid pink default
             Material characterMat = new Material(Shader.Find("Standard"));
             characterMat.color = new Color(0.85f, 0.8f, 0.75f); // Tan/beige skin tone
-            
+
             // Search for renderers recursively - they may be deeply nested
             MeshRenderer[] renderers = character.GetComponentsInChildren<MeshRenderer>(includeInactive: true);
             if (renderers.Length == 0)
@@ -716,7 +722,7 @@ namespace Velinor.Editor
                 Debug.LogWarning("  ⚠️  No MeshRenderers or SkinnedMeshRenderers found on character model");
                 return;
             }
-            
+
             foreach (MeshRenderer renderer in renderers)
             {
                 Material[] mats = new Material[renderer.sharedMaterials.Length];
@@ -724,7 +730,7 @@ namespace Velinor.Editor
                     mats[i] = characterMat;
                 renderer.sharedMaterials = mats;
             }
-            
+
             Debug.Log($"  ✅ Applied materials to {renderers.Length} MeshRenderers on character");
         }
 
@@ -732,7 +738,7 @@ namespace Velinor.Editor
         {
             Debug.Log("🔧 Setting up character physics...");
             Debug.Log($"  Character position: {character.transform.position}");
-            
+
             // Remove any remaining colliders from the prefab (may exist on root or children)
             Collider[] existingColliders = character.GetComponentsInChildren<Collider>();
             Debug.Log($"  Cleaning up {existingColliders.Length} collider(s)...");
@@ -740,14 +746,14 @@ namespace Velinor.Editor
             {
                 Object.DestroyImmediate(col);
             }
-            
+
             // Ensure character has a Rigidbody for gravity and collision
             Rigidbody rb = character.GetComponent<Rigidbody>();
             if (rb == null)
             {
                 rb = character.AddComponent<Rigidbody>();
             }
-            
+
             // Configure Rigidbody for player movement
             rb.mass = 1;
             rb.linearDamping = 0;
@@ -755,14 +761,14 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
-            
+
             // Give character downward velocity to help settle on ground
             rb.linearVelocity = new Vector3(0, -2f, 0);  // Stronger downward to ensure settling
-            
+
             Debug.Log($"  ✅ Rigidbody configured: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
             Debug.Log($"      - Character position: {character.transform.position}");
-            
+
             // Create ONE clean capsule collider for physics collision
             CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
             capsule.radius = 0.4f;
@@ -776,7 +782,7 @@ namespace Velinor.Editor
             Debug.Log($"      - Center offset: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
             Debug.Log($"      - Character position: {character.transform.position}");
             Debug.Log($"      - isTrigger: {capsule.isTrigger}");
-            
+
             // Debug: Check if collider actually touches ground
             Bounds capsuleBounds = capsule.bounds;
             Debug.Log($"  📊 COLLIDER BOUNDS (FIXED):");
@@ -871,7 +877,7 @@ namespace Velinor.Editor
         {
             // Define vegetation positions in a ring around marketplace
             // Outer perimeter: Z = -5 to Z = 20 (front to back), X = -15 to X = 15 (left to right)
-            
+
             Vector3[] treePositions = new Vector3[]
             {
                 // Front row (Z = -5)
@@ -913,22 +919,22 @@ namespace Velinor.Editor
             {
                 // Cycle through available tree prefabs
                 string treePrefab = treePrefabs[i % treePrefabs.Length];
-                
+
                 GameObject treePrefabObj = AssetDatabase.LoadAssetAtPath<GameObject>(treePrefab);
                 if (treePrefabObj != null)
                 {
                     GameObject treeInstance = Object.Instantiate(treePrefabObj, treePositions[i], Quaternion.identity);
                     treeInstance.name = $"Tree_{i:00}";
                     treeInstance.transform.parent = vegRoot;
-                    
+
                     // Apply a much smaller overall scale (trees were oversized)
                     float globalScale = 0.35f; // Reduced from 1.0
                     float scaleVariation = Random.Range(0.8f, 1.2f);
                     treeInstance.transform.localScale *= (globalScale * scaleVariation);
-                    
+
                     // Fix any broken materials (convert pink to gray)
                     FixVegetationMaterials(treeInstance);
-                    
+
                     treeCount++;
                 }
                 else
@@ -958,7 +964,7 @@ namespace Velinor.Editor
             for (int i = 0; i < propPositions.Length; i++)
             {
                 string propPrefab = propPrefabs[i % propPrefabs.Length];
-                
+
                 GameObject propPrefabObj = AssetDatabase.LoadAssetAtPath<GameObject>(propPrefab);
                 if (propPrefabObj != null)
                 {
@@ -981,7 +987,7 @@ namespace Velinor.Editor
 
             // Get stall areas and place appropriate props
             // Stalls: 2 rows (A: Z=0,5,10 | B: Z=0,5,10) with X=-5 (row A) and X=5 (row B)
-            
+
             Vector3[] stallPositions = new Vector3[]
             {
                 new Vector3(-5, 0.3f, 0),    // Stall A1
@@ -1005,19 +1011,19 @@ namespace Velinor.Editor
             for (int i = 0; i < stallPositions.Length; i++)
             {
                 Vector3 pos = stallPositions[i];
-                
+
                 // Place 1-2 containers per stall (variation)
                 int numContainers = (i % 2 == 0) ? 2 : 1;
-                
+
                 for (int j = 0; j < numContainers; j++)
                 {
                     // Offset containers slightly so they don't overlap
                     Vector3 containerPos = pos + new Vector3(j * 1.2f - 0.6f, 0, 0);
-                    
+
                     // Cycle through available containers
                     int containerIdx = (i * numContainers + j) % containers.Count;
                     var container = containers[containerIdx];
-                    
+
                     GameObject prop = AssetPackManager.PlaceProp(
                         container,
                         containerPos,
@@ -1054,7 +1060,7 @@ namespace Velinor.Editor
                 {
                     int decIdx = i % decorations.Count;
                     var deco = decorations[decIdx];
-                    
+
                     GameObject prop = AssetPackManager.PlaceProp(
                         deco,
                         decorationSpots[i],
@@ -1075,6 +1081,46 @@ namespace Velinor.Editor
             }
 
             Debug.Log($"[MARKETPLACE SETUP] 🏪 Stall enhancement complete! Total props placed: {totalPropsPlaced}");
+        }
+
+        /// <summary>
+        /// Automatically finds and loads the Marketplace scene.
+        /// Returns true if successful, false otherwise.
+        /// </summary>
+        private static bool LoadMarketplaceScene()
+        {
+            // Search for Marketplace scene in project
+            string[] sceneGuids = AssetDatabase.FindAssets("Marketplace t:Scene");
+
+            if (sceneGuids.Length == 0)
+            {
+                Debug.LogError("❌ Marketplace scene not found in project. Please create a scene named 'Marketplace' and try again.");
+                return false;
+            }
+
+            string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuids[0]);
+            Debug.Log($"📂 Found Marketplace scene at: {scenePath}");
+
+            try
+            {
+                // Save current scene if it's modified
+                Scene currentScene = SceneManager.GetActiveScene();
+                if (currentScene.isDirty && !string.IsNullOrEmpty(currentScene.path))
+                {
+                    Debug.Log($"💾 Saving current scene: {currentScene.name}");
+                    EditorSceneManager.SaveScene(currentScene);
+                }
+
+                // Load Marketplace scene
+                EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+                Debug.Log("✅ Marketplace scene loaded successfully.");
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"❌ Failed to load Marketplace scene: {ex.Message}");
+                return false;
+            }
         }
     }
 }
