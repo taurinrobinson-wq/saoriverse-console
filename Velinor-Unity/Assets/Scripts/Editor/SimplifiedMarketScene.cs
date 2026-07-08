@@ -1,4 +1,4 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
@@ -41,12 +41,12 @@ namespace Velinor.Editor
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
         public static void PopulateSimpleScene()
         {
-            Debug.Log("\n🏗️  CREATING STRUCTURED VELINOR MARKETPLACE\n");
+            Debug.Log("\n≡ƒÅù∩╕Å  CREATING STRUCTURED VELINOR MARKETPLACE\n");
 
             // Guard: Check if Unity is still importing assets
             if (EditorApplication.isUpdating)
             {
-                Debug.LogWarning("⚠️  SimplifiedMarketScene: Assets still reimporting. Scene population skipped.");
+                Debug.LogWarning("ΓÜá∩╕Å  SimplifiedMarketScene: Assets still reimporting. Scene population skipped.");
                 return;
             }
 
@@ -66,7 +66,7 @@ namespace Velinor.Editor
             // Verify required assets exist before populating
             if (!VerifyRequiredAssets())
             {
-                Debug.LogError("❌ SimplifiedMarketScene: Required assets missing. Scene population skipped.");
+                Debug.LogError("Γ¥î SimplifiedMarketScene: Required assets missing. Scene population skipped.");
                 return;
             }
 
@@ -92,39 +92,39 @@ namespace Velinor.Editor
             {
                 if (obj.name == "Player" && obj.transform.parent == null)
                 {
-                    Debug.Log("  🗑️  Destroying stray root-level Player object");
+                    Debug.Log("  ≡ƒùæ∩╕Å  Destroying stray root-level Player object");
                     Object.DestroyImmediate(obj);
                 }
             }
 
-            Debug.Log("📐 SPATIAL GRID LAYOUT:");
+            Debug.Log("≡ƒôÉ SPATIAL GRID LAYOUT:");
             Debug.Log("   MarketOrigin: (0, 0, 0)");
             Debug.Log("   StallRowA: X=-10 (left side stalls at Z=0,5,10)");
             Debug.Log("   StallRowB: X=+10 (right side stalls at Z=0,5,10)");
-            Debug.Log("   CenterWalkway: X=±10 from Z=-2 to Z=15 (flanked by stalls at ±7)");
+            Debug.Log("   CenterWalkway: X=┬▒10 from Z=-2 to Z=15 (flanked by stalls at ┬▒7)");
 
             // Step 1: Ground plane
-            Debug.Log("🌍 Creating ground plane...");
+            Debug.Log("≡ƒîì Creating ground plane...");
             CreateGroundPlane(fgRoot);
 
             // Step 2: Walkway (center path)
-            Debug.Log("🛤️  Creating center walkway...");
+            Debug.Log("≡ƒ¢ñ∩╕Å  Creating center walkway...");
             CreateCenterWalkway(fgRoot);
 
             // Step 3: Market stalls (Row A - left side)
-            Debug.Log("🏪 Creating Row A (left side stalls)...");
+            Debug.Log("≡ƒÅ¬ Creating Row A (left side stalls)...");
             CreateStallRow(mgRoot, StallRowAX, "Stall_A");
 
             // Step 4: Market stalls (Row B - right side)
-            Debug.Log("🏪 Creating Row B (right side stalls)...");
+            Debug.Log("≡ƒÅ¬ Creating Row B (right side stalls)...");
             CreateStallRow(mgRoot, StallRowBX, "Stall_B");
 
             // Step 5: Background rocks (parallax depth)
-            Debug.Log("🏔️  Creating background parallax layer...");
+            Debug.Log("≡ƒÅö∩╕Å  Creating background parallax layer...");
             CreateBackgroundRocks(bgRoot);
 
             // Step 6: Player at market origin
-            Debug.Log("👤 Adding player...");
+            Debug.Log("≡ƒæñ Adding player...");
             if (charRoot == null)
             {
                 Debug.LogError("SimplifiedMarketScene: charRoot is null. Creating new PlayerRoot.");
@@ -133,30 +133,30 @@ namespace Velinor.Editor
             AddPlayer(charRoot);
 
             // Step 7: Audio
-            Debug.Log("🎵 Setting up audio...");
+            Debug.Log("≡ƒÄ╡ Setting up audio...");
             SetupAudio();
 
             // Step 8: Apply real materials
-            Debug.Log("🎨 Applying real materials from asset packs...");
+            Debug.Log("≡ƒÄ¿ Applying real materials from asset packs...");
             ApplyRealMaterials(fgRoot);
 
             // Step 9: Add vegetation ring
-            Debug.Log("🌳 Adding vegetation and trees...");
+            Debug.Log("≡ƒî│ Adding vegetation and trees...");
             Transform vegRoot = GetOrCreateContainer("Vegetation");
             AddVegetationRing(vegRoot);
 
             // Step 10: Enhance stalls with props
-            Debug.Log("🛒 Enhancing stalls with decorative props...");
+            Debug.Log("≡ƒ¢Æ Enhancing stalls with decorative props...");
             EnhanceStalls(mgRoot);
 
-            Debug.Log("\n✅ STRUCTURED MARKETPLACE WITH REAL ASSETS READY!\n");
-            Debug.Log("📐 Grid Summary:");
+            Debug.Log("\nΓ£à STRUCTURED MARKETPLACE WITH REAL ASSETS READY!\n");
+            Debug.Log("≡ƒôÉ Grid Summary:");
             Debug.Log("   Row A (X=-10): Stalls at Z=0, Z=5, Z=10");
             Debug.Log("   Row B (X=+10): Stalls at Z=0, Z=5, Z=10");
             Debug.Log("   Walkway (X=0): Center path for navigation");
             Debug.Log("   Player: Spawned at origin (0, 0.9, 0)");
             Debug.Log("   Camera: First-person from player eyes\n");
-            Debug.Log("🎮 Press Play to explore\n");
+            Debug.Log("≡ƒÄ« Press Play to explore\n");
 
             EditorSceneManager.MarkSceneDirty(activeScene);
         }
@@ -174,7 +174,7 @@ namespace Velinor.Editor
         private static bool VerifyRequiredAssets()
         {
             string[] requiredPaths = {
-                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab",
+                "Assets/EmbersStorm ΓÇô Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab",
                 "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab",
                 "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab",
                 "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab"
@@ -185,14 +185,14 @@ namespace Velinor.Editor
             {
                 if (!System.IO.File.Exists(path))
                 {
-                    Debug.LogWarning($"  ⚠️  Asset not found: {path}");
+                    Debug.LogWarning($"  ΓÜá∩╕Å  Asset not found: {path}");
                     allExist = false;
                 }
             }
 
             if (allExist)
             {
-                Debug.Log("  ✅ All required assets verified");
+                Debug.Log("  Γ£à All required assets verified");
             }
 
             return true; // Return true anyway - scene can populate with fallbacks
@@ -224,7 +224,7 @@ namespace Velinor.Editor
 
             if (duplicateCount > 0)
             {
-                Debug.Log($"  🧹 Removed {duplicateCount} duplicate '{name}' containers");
+                Debug.Log($"  ≡ƒº╣ Removed {duplicateCount} duplicate '{name}' containers");
             }
 
             // Use existing or create new
@@ -249,7 +249,7 @@ namespace Velinor.Editor
             ground.name = "Ground";
             ground.transform.parent = parent;
             ground.transform.position = new Vector3(0, -0.1f, 0); // Position so top surface is at Y=0
-            ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30×30m, 0.2m thick
+            ground.transform.localScale = new Vector3(30, 0.2f, 30); // 30├ù30m, 0.2m thick
 
             Object.DestroyImmediate(ground.GetComponent<Collider>());
 
@@ -281,7 +281,7 @@ namespace Velinor.Editor
                 child.gameObject.layer = LayerMask.NameToLayer("Foreground");
             }
 
-            Debug.Log("  ✅ Ground (30×30m) - Layer: Foreground, Physics: Kinematic");
+            Debug.Log("  Γ£à Ground (30├ù30m) - Layer: Foreground, Physics: Kinematic");
             Debug.Log($"    - Position: {ground.transform.position}, Scale: {ground.transform.localScale}");
             Debug.Log($"    - BoxCollider: size={collider.size}, center={collider.center}");
             Debug.Log($"    - Collider bounds: min={collider.bounds.min}, max={collider.bounds.max}");
@@ -290,12 +290,12 @@ namespace Velinor.Editor
 
         private static void CreateCenterWalkway(Transform parent)
         {
-            // Walkway from Z=-2 to Z=15, X=-10 to X=10 (extends beyond stalls at ±7)
+            // Walkway from Z=-2 to Z=15, X=-10 to X=10 (extends beyond stalls at ┬▒7)
             GameObject walkway = GameObject.CreatePrimitive(PrimitiveType.Cube);
             walkway.name = "Walkway_Center";
             walkway.transform.parent = parent;
             walkway.transform.position = new Vector3(0, 0f, 6.5f);
-            walkway.transform.localScale = new Vector3(20, 0.2f, 17); // 20m wide × 17m long × 0.2m thick
+            walkway.transform.localScale = new Vector3(20, 0.2f, 17); // 20m wide ├ù 17m long ├ù 0.2m thick
 
             Object.DestroyImmediate(walkway.GetComponent<Collider>());
 
@@ -325,11 +325,11 @@ namespace Velinor.Editor
                 child.gameObject.layer = LayerMask.NameToLayer("Foreground");
             }
 
-            Debug.Log("  ✅ Walkway_Center (20×0.2×17m) - Extends to X=±10 - Layer: Foreground");
+            Debug.Log("  Γ£à Walkway_Center (20├ù0.2├ù17m) - Extends to X=┬▒10 - Layer: Foreground");
             Debug.Log($"    - Scale: {walkway.transform.localScale}, Position: {walkway.transform.position}");
             Debug.Log($"    - BoxCollider: size={collider.size}, center={collider.center}");
             Debug.Log($"    - Collider bounds: min={collider.bounds.min}, max={collider.bounds.max}");
-            Debug.Log("    - Game design: Stalls at X=±7, safe walkway extends to X=±10");
+            Debug.Log("    - Game design: Stalls at X=┬▒7, safe walkway extends to X=┬▒10");
         }
 
         private static void CreateStallRow(Transform parent, float stallX, string stallPrefix)
@@ -374,12 +374,12 @@ namespace Velinor.Editor
 
                     stall.AddComponent<BoxCollider>();
                     stall.layer = LayerMask.NameToLayer("Midground");
-                    Debug.LogWarning($"  ⚠️  Tent prefab not found, using fallback cube");
+                    Debug.LogWarning($"  ΓÜá∩╕Å  Tent prefab not found, using fallback cube");
                 }
             }
 
             string sideLabel = stallX < 0 ? "left (X=-7)" : "right (X=+7)";
-            Debug.Log($"  ✅ Market tent stalls ({sideLabel}) created");
+            Debug.Log($"  Γ£à Market tent stalls ({sideLabel}) created");
         }
 
         private static void CreateBackgroundRocks(Transform parent)
@@ -405,7 +405,7 @@ namespace Velinor.Editor
                     // Fix materials with Standard shader (gray-brown rock color)
                     FixMaterialsWithStandard(rock, new Color(0.55f, 0.52f, 0.48f));
                     rock.layer = LayerMask.NameToLayer("Background");
-                    Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]} - 2.5x scale");
+                    Debug.Log($"  Γ£à Loaded rock asset: {rockNames[i]} at {basePositions[i]} - 2.5x scale");
                 }
                 else
                 {
@@ -424,11 +424,11 @@ namespace Velinor.Editor
 
                     rock.AddComponent<BoxCollider>();
                     rock.layer = LayerMask.NameToLayer("Background");
-                    Debug.LogWarning($"  ⚠️  Kyle's Rock Pack prefab not found at {rockPrefabs[i]}, using fallback cube (3×3×3m)");
+                    Debug.LogWarning($"  ΓÜá∩╕Å  Kyle's Rock Pack prefab not found at {rockPrefabs[i]}, using fallback cube (3├ù3├ù3m)");
                 }
             }
 
-            Debug.Log("  ✅ Background terrain repositioned closer to scene - now visible from marketplace");
+            Debug.Log("  Γ£à Background terrain repositioned closer to scene - now visible from marketplace");
         }
 
         private static void AddPlayer(Transform parent)
@@ -446,7 +446,7 @@ namespace Velinor.Editor
             {
                 if (cam.CompareTag("MainCamera"))
                 {
-                    Debug.Log("  🗑️ Destroying existing MainCamera to prevent conflicts");
+                    Debug.Log("  ≡ƒùæ∩╕Å Destroying existing MainCamera to prevent conflicts");
                     Object.DestroyImmediate(cam.gameObject);
                 }
             }
@@ -502,7 +502,7 @@ namespace Velinor.Editor
                     foreach (Component comp in toDestroy)
                     {
                         Object.DestroyImmediate(comp, allowDestroyingAssets: true);
-                        Debug.Log($"  🗑️  Removed null component (missing script) on {t.gameObject.name}");
+                        Debug.Log($"  ≡ƒùæ∩╕Å  Removed null component (missing script) on {t.gameObject.name}");
                     }
                 }
 
@@ -524,7 +524,7 @@ namespace Velinor.Editor
                     {
                         Object.DestroyImmediate(mb, allowDestroyingAssets: true);
                         destroyedCount++;
-                        Debug.Log($"  🗑️  Destroyed {scriptName}");
+                        Debug.Log($"  ≡ƒùæ∩╕Å  Destroyed {scriptName}");
                     }
                 }
 
@@ -534,10 +534,10 @@ namespace Velinor.Editor
                 Animator animator = player.GetComponent<Animator>();
                 if (animator == null)
                 {
-                    Debug.LogWarning("  ⚠️  WARNING: Animator was destroyed! Looking for it in children...");
+                    Debug.LogWarning("  ΓÜá∩╕Å  WARNING: Animator was destroyed! Looking for it in children...");
                     animator = player.GetComponentInChildren<Animator>();
                     if (animator != null)
-                        Debug.Log($"  ✅ Found Animator on child: {animator.gameObject.name}");
+                        Debug.Log($"  Γ£à Found Animator on child: {animator.gameObject.name}");
                 }
 
                 // ========== APPLY MATERIALS (null components are now gone) ==========
@@ -550,7 +550,7 @@ namespace Velinor.Editor
                     if (comp != null && comp.GetType().Name == "ThirdPersonController")
                     {
                         comp.enabled = false;
-                        Debug.Log("  ℹ️  Disabled ThirdPersonController via reflection");
+                        Debug.Log("  Γä╣∩╕Å  Disabled ThirdPersonController via reflection");
                         break;
                     }
                 }
@@ -582,7 +582,7 @@ namespace Velinor.Editor
 
                 // Log character collider info after setup for debugging
                 Collider[] finalColliders = player.GetComponentsInChildren<Collider>();
-                Debug.Log($"  📊 COLLIDER DEBUG INFO:");
+                Debug.Log($"  ≡ƒôè COLLIDER DEBUG INFO:");
                 Debug.Log($"    - Character root position: {player.transform.position}");
                 Debug.Log($"    - Character Rigidbody useGravity: {player.GetComponent<Rigidbody>()?.useGravity}");
                 Debug.Log($"    - Total colliders on character: {finalColliders.Length}");
@@ -591,7 +591,7 @@ namespace Velinor.Editor
                     Debug.Log($"    - Collider on {c.gameObject.name}: {c.GetType().Name}, bounds={c.bounds}, trigger={c.isTrigger}");
                 }
 
-                Debug.Log("  ✅ StarterAssets character ready with movement and camera");
+                Debug.Log("  Γ£à StarterAssets character ready with movement and camera");
                 return;
             }
             catch (System.Exception ex)
@@ -669,10 +669,10 @@ namespace Velinor.Editor
             // Add simple movement script for WASD + Mouse input
             SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
             movement.mainCamera = cam;
-            Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
+            Debug.Log("  Γ£à SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
 
             player.layer = LayerMask.NameToLayer("Default");
-            Debug.Log("  ⚠️  Using fallback capsule player (with physics and input control)");
+            Debug.Log("  ΓÜá∩╕Å  Using fallback capsule player (with physics and input control)");
         }
 
         private static void FixMaterialsWithStandard(GameObject obj, Color color)
@@ -715,11 +715,11 @@ namespace Velinor.Editor
                             mats[i] = characterMat;
                         renderer.sharedMaterials = mats;
                     }
-                    Debug.Log($"  ✅ Applied materials to {skinnedRenderers.Length} SkinnedMeshRenderers on character");
+                    Debug.Log($"  Γ£à Applied materials to {skinnedRenderers.Length} SkinnedMeshRenderers on character");
                     return;
                 }
                 // Only warn if BOTH MeshRenderer and SkinnedMeshRenderer not found
-                Debug.LogWarning("  ⚠️  No MeshRenderers or SkinnedMeshRenderers found on character model");
+                Debug.LogWarning("  ΓÜá∩╕Å  No MeshRenderers or SkinnedMeshRenderers found on character model");
                 return;
             }
 
@@ -736,7 +736,7 @@ namespace Velinor.Editor
 
         private static void SetupCharacterPhysics(GameObject character)
         {
-            Debug.Log("🔧 Setting up character physics...");
+            Debug.Log("≡ƒöº Setting up character physics...");
             Debug.Log($"  Character position: {character.transform.position}");
 
             // Remove any remaining colliders from the prefab (may exist on root or children)
@@ -775,24 +775,24 @@ namespace Velinor.Editor
             capsule.height = 1.8f;
             // CRITICAL: Center at (0, 0.9, 0) so capsule spans from Y=0 to Y=1.8
             // Character at Y=0, capsule center offset (0, 0.9, 0) = world Y=0.9
-            // Bottom = 0.9 - 0.9 = 0 ✓, Top = 0.9 + 0.9 = 1.8 ✓
+            // Bottom = 0.9 - 0.9 = 0 Γ£ô, Top = 0.9 + 0.9 = 1.8 Γ£ô
             capsule.center = new Vector3(0, 0.9f, 0);
             capsule.isTrigger = false;
-            Debug.Log($"  ✅ CapsuleCollider created:");
+            Debug.Log($"  Γ£à CapsuleCollider created:");
             Debug.Log($"      - Center offset: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
             Debug.Log($"      - Character position: {character.transform.position}");
             Debug.Log($"      - isTrigger: {capsule.isTrigger}");
 
             // Debug: Check if collider actually touches ground
             Bounds capsuleBounds = capsule.bounds;
-            Debug.Log($"  📊 COLLIDER BOUNDS (FIXED):");
+            Debug.Log($"  ≡ƒôè COLLIDER BOUNDS (FIXED):");
             Debug.Log($"      - Bounds Center (world): {capsuleBounds.center}");
             Debug.Log($"      - Min Y: {capsuleBounds.min.y}, Max Y: {capsuleBounds.max.y}");
             if (Mathf.Abs(capsuleBounds.min.y - 0f) < 0.05f)
-                Debug.Log($"      ✅ CORRECT - Bottom at Y≈0 (ground level)");
+                Debug.Log($"      Γ£à CORRECT - Bottom at YΓëê0 (ground level)");
             else
-                Debug.LogWarning($"      ⚠️  WRONG - Bottom at Y={capsuleBounds.min.y}, should be Y=0!");
-            Debug.Log($"  ✅ Character physics ready for collision");
+                Debug.LogWarning($"      ΓÜá∩╕Å  WRONG - Bottom at Y={capsuleBounds.min.y}, should be Y=0!");
+            Debug.Log($"  Γ£à Character physics ready for collision");
         }
 
         private static void SetupAudio()
@@ -803,7 +803,7 @@ namespace Velinor.Editor
             {
                 GameObject audioManagerGO = new GameObject("AudioManager");
                 audioManager = audioManagerGO.AddComponent<AudioManager>();
-                Debug.Log("  ✅ Created AudioManager");
+                Debug.Log("  Γ£à Created AudioManager");
             }
 
             // Find or create MarketSceneAudioSetup
@@ -812,11 +812,11 @@ namespace Velinor.Editor
             {
                 GameObject sceneAudioGO = new GameObject("MarketSceneAudio");
                 sceneAudio = sceneAudioGO.AddComponent<MarketSceneAudioSetup>();
-                Debug.Log("  ✅ Created MarketSceneAudioSetup (Glass Horizon will loop)");
+                Debug.Log("  Γ£à Created MarketSceneAudioSetup (Glass Horizon will loop)");
             }
             else
             {
-                Debug.Log("  ✅ Audio system ready");
+                Debug.Log("  Γ£à Audio system ready");
             }
         }
 
@@ -851,7 +851,7 @@ namespace Velinor.Editor
                     Material groundMat = new Material(Shader.Find("Standard"));
                     groundMat.color = new Color(0.6f, 0.55f, 0.5f); // Tan/dirt color
                     groundRenderer.material = groundMat;
-                    Debug.Log("  ✅ Applied Standard shader to ground plane (tan color)");
+                    Debug.Log("  Γ£à Applied Standard shader to ground plane (tan color)");
                 }
             }
 
@@ -864,7 +864,7 @@ namespace Velinor.Editor
                     Material walkwayMat = new Material(Shader.Find("Standard"));
                     walkwayMat.color = new Color(0.5f, 0.5f, 0.5f); // Gray stone color
                     walkwayRenderer.material = walkwayMat;
-                    Debug.Log("  ✅ Applied Standard shader to walkway (gray color)");
+                    Debug.Log("  Γ£à Applied Standard shader to walkway (gray color)");
                 }
             }
         }
@@ -939,11 +939,11 @@ namespace Velinor.Editor
                 }
                 else
                 {
-                    Debug.LogWarning($"  ⚠️  Tree prefab not found: {treePrefab}");
+                    Debug.LogWarning($"  ΓÜá∩╕Å  Tree prefab not found: {treePrefab}");
                 }
             }
 
-            Debug.Log($"  ✅ Placed {treeCount} trees in vegetation ring");
+            Debug.Log($"  Γ£à Placed {treeCount} trees in vegetation ring");
 
             // Add some stumps and succulents for ground detail
             Vector3[] propPositions = new Vector3[]
@@ -975,7 +975,7 @@ namespace Velinor.Editor
                 }
             }
 
-            Debug.Log($"  ✅ Placed {propCount} ground props (stumps/succulents)");
+            Debug.Log($"  Γ£à Placed {propCount} ground props (stumps/succulents)");
         }
 
         /// <summary>
@@ -983,7 +983,7 @@ namespace Velinor.Editor
         /// </summary>
         private static void EnhanceStalls(Transform mgRoot)
         {
-            Debug.Log("[MARKETPLACE SETUP] 🏪 Enhancing marketplace stalls with Medieval Props...");
+            Debug.Log("[MARKETPLACE SETUP] ≡ƒÅ¬ Enhancing marketplace stalls with Medieval Props...");
 
             // Get stall areas and place appropriate props
             // Stalls: 2 rows (A: Z=0,5,10 | B: Z=0,5,10) with X=-5 (row A) and X=5 (row B)
@@ -1002,7 +1002,7 @@ namespace Velinor.Editor
             var containers = AssetPackManager.GetPropsByType("container");
             if (containers.Count == 0)
             {
-                Debug.LogWarning("[MARKETPLACE SETUP] ⚠️  No container props found! Skipping stall prop placement.");
+                Debug.LogWarning("[MARKETPLACE SETUP] ΓÜá∩╕Å  No container props found! Skipping stall prop placement.");
                 return;
             }
 
@@ -1033,12 +1033,12 @@ namespace Velinor.Editor
                     if (prop != null)
                     {
                         prop.transform.localScale *= 0.4f; // Scale down props to match vegetation scale
-                        Debug.Log($"[MARKETPLACE SETUP] ✅ Placed {container.name} at stall {i + 1}, pos {j + 1}");
+                        Debug.Log($"[MARKETPLACE SETUP] Γ£à Placed {container.name} at stall {i + 1}, pos {j + 1}");
                         totalPropsPlaced++;
                     }
                     else
                     {
-                        Debug.LogWarning($"[MARKETPLACE SETUP] ⚠️  Failed to load {container.name}");
+                        Debug.LogWarning($"[MARKETPLACE SETUP] ΓÜá∩╕Å  Failed to load {container.name}");
                     }
                 }
             }
@@ -1070,17 +1070,57 @@ namespace Velinor.Editor
                     if (prop != null)
                     {
                         prop.transform.localScale *= 0.4f; // Scale down props to match vegetation scale
-                        Debug.Log($"[MARKETPLACE SETUP] ✨ Placed {deco.name} as marketplace decoration");
+                        Debug.Log($"[MARKETPLACE SETUP] Γ£¿ Placed {deco.name} as marketplace decoration");
                         totalPropsPlaced++;
                     }
                     else
                     {
-                        Debug.LogWarning($"[MARKETPLACE SETUP] ⚠️  Failed to load {deco.name}");
+                        Debug.LogWarning($"[MARKETPLACE SETUP] ΓÜá∩╕Å  Failed to load {deco.name}");
                     }
                 }
             }
 
-            Debug.Log($"[MARKETPLACE SETUP] 🏪 Stall enhancement complete! Total props placed: {totalPropsPlaced}");
+            Debug.Log($"[MARKETPLACE SETUP] ≡ƒÅ¬ Stall enhancement complete! Total props placed: {totalPropsPlaced}");
+        }
+
+        /// <summary>
+        /// Automatically finds and loads the Marketplace scene.
+        /// Returns true if successful, false otherwise.
+        /// </summary>
+        private static bool LoadMarketplaceScene()
+        {
+            // Search for Marketplace scene in project
+            string[] sceneGuids = AssetDatabase.FindAssets("Marketplace t:Scene");
+
+            if (sceneGuids.Length == 0)
+            {
+                Debug.LogError("Γ¥î Marketplace scene not found in project. Please create a scene named 'Marketplace' and try again.");
+                return false;
+            }
+
+            string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuids[0]);
+            Debug.Log($"≡ƒôé Found Marketplace scene at: {scenePath}");
+
+            try
+            {
+                // Save current scene if it's modified
+                Scene currentScene = SceneManager.GetActiveScene();
+                if (currentScene.isDirty && !string.IsNullOrEmpty(currentScene.path))
+                {
+                    Debug.Log($"≡ƒÆ╛ Saving current scene: {currentScene.name}");
+                    EditorSceneManager.SaveScene(currentScene);
+                }
+
+                // Load Marketplace scene
+                EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+                Debug.Log("Γ£à Marketplace scene loaded successfully.");
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Γ¥î Failed to load Marketplace scene: {ex.Message}");
+                return false;
+            }
         }
 
         /// <summary>
