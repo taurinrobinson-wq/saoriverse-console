@@ -446,28 +446,15 @@ namespace Velinor.Editor
             // Create first-person player with capsule body
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
-            player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
+            player.transform.position = new Vector3(0, 1f, 0); // Position so feet are at ground level
 
-            // Add collider to ROOT for physics
-            CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
-            collider.radius = 0.4f;
-            collider.height = 1.8f;
-            collider.center = new Vector3(0, 0.9f, 0);  // Center at 0.9 so bottom is at Y=0 (ground level)
-            collider.isTrigger = false; // CRITICAL: Must NOT be trigger
+            // Add CharacterController for SimplePlayerController
+            CharacterController cc = player.AddComponent<CharacterController>();
+            cc.height = 1.8f;
+            cc.radius = 0.4f;
+            cc.center = new Vector3(0, 0.9f, 0);  // Center the controller on the player
 
-            // Add Rigidbody for physics
-            Rigidbody rb = player.AddComponent<Rigidbody>();
-            rb.mass = 1;
-            rb.linearDamping = 0;
-            rb.angularDamping = 0.05f;
-            rb.useGravity = true;
-            rb.isKinematic = false;
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
-            rb.linearVelocity = new Vector3(0, -2f, 0);  // Help settle on ground
-
-            Debug.Log($"  ✅ First-person player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
-            Debug.Log($"      - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
-            Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
+            Debug.Log($"  ✅ First-person player CharacterController: height={cc.height}, radius={cc.radius}");
 
             // Create camera as child (first-person POV from player eyes)
             GameObject cameraObj = new GameObject("Camera");
