@@ -1,3 +1,4 @@
+// cSpell:ignore Rigidbody Midground WASD
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
