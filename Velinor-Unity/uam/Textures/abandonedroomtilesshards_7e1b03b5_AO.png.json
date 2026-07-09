@@ -1,0 +1,20 @@
+{
+    "serializationVersion": [
+        4,
+        0
+    ],
+    "path": "Textures/abandonedroomtilesshards_7e1b03b5_AO.png",
+    "assetName": "Broken Tiles (URP)",
+    "assetId": "6a4d4b4ad5767758f0ddd6db",
+    "datasetId": "478ec4ca-b440-4459-a83a-e4157827b08e",
+    "projectId": "87640cd2-3c1a-42d9-868a-33303921b30d",
+    "organizationId": "20067610940234",
+    "versionId": "4c98d6a2-047f-47fe-bc8f-62cbe88406c7",
+    "sequenceNumber": 1,
+    "updated": "2026-07-07T18:54:04.1540000Z",
+    "timestamp": 1783559912,
+    "checksum": "cb9c91239893ec1db04995cfabe0400c",
+    "metaFileChecksum": "cd583293ee49293af45fe277fc2a7ea4",
+    "metaFileTimestamp": 1783559911,
+    "unityGUID": "2949f576941191748a6b94b8067a8d11"
+}

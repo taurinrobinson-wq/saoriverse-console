@@ -481,125 +481,7 @@ namespace Velinor.Editor
             Debug.Log("  ✅ First-person player ready for gameplay");
         }
 
-        private static void FixMaterialsWithStandard(GameObject obj, Color color)
-        {
-            // Replace all materials with a clean Standard shader material
-            // This fixes any broken/pink materials in the prefabs
-            Material standardMat = new Material(Shader.Find("Standard"));
-            standardMat.color = color;
 
-            MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer renderer in renderers)
-            {
-                Material[] mats = new Material[renderer.sharedMaterials.Length];
-                for (int i = 0; i < mats.Length; i++)
-                    mats[i] = standardMat;
-                renderer.sharedMaterials = mats;
-            }
-
-            Debug.Log($"  ℹ️  Fixed materials on {obj.name} (color: {color})");
-        }
-
-        private static void FixCharacterMaterials(GameObject character)
-        {
-            // Apply a tan/beige material to all renderers to avoid pink default
-            Material characterMat = new Material(Shader.Find("Standard"));
-            characterMat.color = new Color(0.85f, 0.8f, 0.75f); // Tan/beige skin tone
-
-            // Search for renderers recursively - they may be deeply nested
-            MeshRenderer[] renderers = character.GetComponentsInChildren<MeshRenderer>(includeInactive: true);
-            if (renderers.Length == 0)
-            {
-                // Try SkinnedMeshRenderer as fallback (humanoid characters use this)
-                SkinnedMeshRenderer[] skinnedRenderers = character.GetComponentsInChildren<SkinnedMeshRenderer>(includeInactive: true);
-                if (skinnedRenderers.Length > 0)
-                {
-                    foreach (SkinnedMeshRenderer renderer in skinnedRenderers)
-                    {
-                        Material[] mats = new Material[renderer.sharedMaterials.Length];
-                        for (int i = 0; i < mats.Length; i++)
-                            mats[i] = characterMat;
-                        renderer.sharedMaterials = mats;
-                    }
-                    Debug.Log($"  ✅ Applied materials to {skinnedRenderers.Length} SkinnedMeshRenderers on character");
-                    return;
-                }
-                // Only warn if BOTH MeshRenderer and SkinnedMeshRenderer not found
-                Debug.LogWarning("  ⚠️  No MeshRenderers or SkinnedMeshRenderers found on character model");
-                return;
-            }
-
-            foreach (MeshRenderer renderer in renderers)
-            {
-                Material[] mats = new Material[renderer.sharedMaterials.Length];
-                for (int i = 0; i < mats.Length; i++)
-                    mats[i] = characterMat;
-                renderer.sharedMaterials = mats;
-            }
-
-            Debug.Log($"  ✅ Applied materials to {renderers.Length} MeshRenderers on character");
-        }
-
-        private static void SetupCharacterPhysics(GameObject character)
-        {
-            Debug.Log("🔧 Setting up character physics...");
-            Debug.Log($"  Character position: {character.transform.position}");
-
-            // Remove any remaining colliders from the prefab (may exist on root or children)
-            Collider[] existingColliders = character.GetComponentsInChildren<Collider>();
-            Debug.Log($"  Cleaning up {existingColliders.Length} collider(s)...");
-            foreach (Collider col in existingColliders)
-            {
-                Object.DestroyImmediate(col);
-            }
-
-            // Ensure character has a Rigidbody for gravity and collision
-            Rigidbody rb = character.GetComponent<Rigidbody>();
-            if (rb == null)
-            {
-                rb = character.AddComponent<Rigidbody>();
-            }
-
-            // Configure Rigidbody for player movement
-            rb.mass = 1;
-            rb.linearDamping = 0;
-            rb.angularDamping = 0.05f;
-            rb.useGravity = true;
-            rb.isKinematic = false;
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
-
-            // Give character downward velocity to help settle on ground
-            rb.linearVelocity = new Vector3(0, -2f, 0);  // Stronger downward to ensure settling
-
-            Debug.Log($"  ✅ Rigidbody configured: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
-            Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
-            Debug.Log($"      - Character position: {character.transform.position}");
-
-            // Create ONE clean capsule collider for physics collision
-            CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
-            capsule.radius = 0.4f;
-            capsule.height = 1.8f;
-            // CRITICAL: Center at (0, 0.9, 0) so capsule spans from Y=0 to Y=1.8
-            // Character at Y=0, capsule center offset (0, 0.9, 0) = world Y=0.9
-            // Bottom = 0.9 - 0.9 = 0 ✓, Top = 0.9 + 0.9 = 1.8 ✓
-            capsule.center = new Vector3(0, 0.9f, 0);
-            capsule.isTrigger = false;
-            Debug.Log($"  ✅ CapsuleCollider created:");
-            Debug.Log($"      - Center offset: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
-            Debug.Log($"      - Character position: {character.transform.position}");
-            Debug.Log($"      - isTrigger: {capsule.isTrigger}");
-
-            // Debug: Check if collider actually touches ground
-            Bounds capsuleBounds = capsule.bounds;
-            Debug.Log($"  📊 COLLIDER BOUNDS (FIXED):");
-            Debug.Log($"      - Bounds Center (world): {capsuleBounds.center}");
-            Debug.Log($"      - Min Y: {capsuleBounds.min.y}, Max Y: {capsuleBounds.max.y}");
-            if (Mathf.Abs(capsuleBounds.min.y - 0f) < 0.05f)
-                Debug.Log($"      ✅ CORRECT - Bottom at Y≈0 (ground level)");
-            else
-                Debug.LogWarning($"      ⚠️  WRONG - Bottom at Y={capsuleBounds.min.y}, should be Y=0!");
-            Debug.Log($"  ✅ Character physics ready for collision");
-        }
 
         private static void SetupAudio()
         {
@@ -623,19 +505,6 @@ namespace Velinor.Editor
             else
             {
                 Debug.Log("  ✅ Audio system ready");
-            }
-        }
-
-        private static void FixVegetationMaterials(GameObject obj)
-        {
-            // Use AssetPackManager's safer material fixer which only replaces broken/incompatible materials
-            try
-            {
-                AssetPackManager.FixPropMaterials(obj);
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogWarning($"FixVegetationMaterials: fallback failed: {ex.Message}");
             }
         }
 
