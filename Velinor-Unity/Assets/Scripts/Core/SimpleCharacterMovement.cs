@@ -12,6 +12,7 @@ namespace Velinor.Core
         [Header("Movement")]
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float groundDrag = 5f;
+        public bool isMovementLocked = false;
 
         [Header("Ground Check")]
         [SerializeField] private float groundCheckDistance = 1.5f;
@@ -19,6 +20,13 @@ namespace Velinor.Core
         [Header("Camera")]
         public Camera mainCamera;
         [SerializeField] private float mouseSensitivity = 2f;
+
+        [Header("Camera Zoom / First Person")]
+        [SerializeField] private float minZoomDistance = 0f; // 0 = First Person Mode
+        [SerializeField] private float maxZoomDistance = 5f;
+        [SerializeField] private float currentZoomDistance = 0f; // Default to 0f (First Person) as requested!
+        [SerializeField] private float zoomSensitivity = 2f;
+        [SerializeField] private SkinnedMeshRenderer playerMesh;
 
         private Rigidbody rb;
         private bool isGrounded;
@@ -50,10 +58,20 @@ namespace Velinor.Core
                 mainCamera = Camera.main;
             }
 
-            // Lock cursor
-            Cursor.lockState = CursorLockMode.Locked;
+            // Find player skinned mesh renderer in children if unassigned
+            if (playerMesh == null)
+            {
+                playerMesh = GetComponentInChildren<SkinnedMeshRenderer>();
+            }
+
+            // Apply initial zoom state
+            ApplyZoom();
+
+            // Start with unlocked, visible cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             
-            Debug.Log("SimpleCharacterMovement: Ready (WASD to move, Mouse to look, ESC to unlock cursor)");
+            Debug.Log("SimpleCharacterMovement: Ready (WASD to move, Right-Click + Drag Mouse to look, Scroll Wheel to Zoom)");
         }
 
         private void Update()
@@ -93,6 +111,19 @@ namespace Velinor.Core
 
         private void HandleMovement()
         {
+            if (isMovementLocked)
+            {
+                rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+                rb.linearDamping = groundDrag;
+                if (animator != null)
+                {
+                    animator.SetFloat("Speed", 0f);
+                    animator.SetFloat("MotionSpeed", 0f);
+                    animator.SetBool("Grounded", isGrounded);
+                }
+                return;
+            }
+
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
@@ -152,24 +183,94 @@ namespace Velinor.Core
         {
             if (mainCamera == null) return;
 
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+            // Handle Zoom Input via Scroll Wheel
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (Mathf.Abs(scroll) > 0.005f)
+            {
+                currentZoomDistance -= scroll * zoomSensitivity;
+                currentZoomDistance = Mathf.Clamp(currentZoomDistance, minZoomDistance, maxZoomDistance);
+            }
 
-            // Rotate character left/right
-            transform.Rotate(0, mouseX, 0);
+            ApplyZoom();
 
-            // Rotate camera up/down
-            yRotation -= mouseY;
-            yRotation = Mathf.Clamp(yRotation, -90f, 90f);
-            mainCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
+            // Only rotate camera when Right-Click (Mouse Button 1) is held down, and movement is not locked (e.g. not in dialogue)
+            if (Input.GetMouseButton(1) && !isMovementLocked)
+            {
+                // Lock and hide the cursor during camera control
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+
+                float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+                float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+                // Rotate character left/right
+                transform.Rotate(0, mouseX, 0);
+
+                // Rotate camera up/down
+                yRotation -= mouseY;
+                yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+                mainCamera.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
+            }
+            else
+            {
+                // Release lock and show cursor when not right-clicking or when movement is locked
+                if (!Input.GetMouseButton(1) || isMovementLocked)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+            }
+        }
+
+        private void ApplyZoom()
+        {
+            if (mainCamera == null) return;
+
+            if (currentZoomDistance <= 0.1f)
+            {
+                // First Person Mode
+                mainCamera.transform.localPosition = new Vector3(0f, 1.60f, 0f);
+                if (playerMesh != null)
+                {
+                    playerMesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                }
+            }
+            else
+            {
+                // Third Person Mode
+                Vector3 headLocalPos = new Vector3(0f, 1.60f, 0f);
+                Vector3 targetLocalPos = headLocalPos - Vector3.forward * currentZoomDistance;
+
+                Vector3 worldHeadPos = transform.TransformPoint(headLocalPos);
+                Vector3 worldTargetPos = transform.TransformPoint(targetLocalPos);
+                Vector3 direction = worldTargetPos - worldHeadPos;
+
+                RaycastHit hit;
+                int cameraClipMask = LayerMask.GetMask("Foreground", "Midground", "Default");
+                if (Physics.Raycast(worldHeadPos, direction.normalized, out hit, direction.magnitude, cameraClipMask))
+                {
+                    Vector3 worldHitPos = hit.point + hit.normal * 0.2f;
+                    mainCamera.transform.position = worldHitPos;
+                }
+                else
+                {
+                    mainCamera.transform.localPosition = targetLocalPos;
+                }
+
+                if (playerMesh != null)
+                {
+                    playerMesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                }
+            }
         }
 
         private void HandleCursorToggle()
         {
+            // Escape remains as a robust escape hatch to free the cursor if needed
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? 
-                    CursorLockMode.None : CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
 

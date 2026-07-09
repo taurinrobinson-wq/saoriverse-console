@@ -11,8 +11,6 @@ namespace Velinor.Editor
     /// 
     /// Uses:
     /// - EmbersStorm Mediterranean Ruins for market stalls/buildings
-    /// - Kyle's Rock Pack for terrain and background
-    /// - Dry Trees for atmosphere
     /// - StarterAssets Third Person Controller for player
     /// 
     /// Follows Velinor spatial rules:
@@ -27,19 +25,24 @@ namespace Velinor.Editor
         private const float StallRowAX = -7f;   // Left side stalls
         private const float StallRowBX = 7f;    // Right side stalls
         private const float CenterWalkwayX = 0f;
-        
+
         // Asset paths
         private const string EMBERS_WALL_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab";
         private const string EMBERS_ROOF_PATH = "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Roofs/Roof.A.prefab";
-        
-        private const string ROCK_PREFAB_PATH_1 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab";
-        private const string ROCK_PREFAB_PATH_2 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab";
-        private const string ROCK_PREFAB_PATH_3 = "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab";
-        
-        private const string TREE_PREFAB_PATH = "Assets/Dry_Trees/Model/Dry7509.fbx";
 
         [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Spatial Grid)")]
         public static void PopulateSimpleScene()
+        {
+            PopulateSimpleSceneInternal(clearExisting: true);
+        }
+
+        [MenuItem("Velinor/Scene Setup/Populate Simple Scene (Preserve Existing)")]
+        public static void PopulateSimpleScenePreserve()
+        {
+            PopulateSimpleSceneInternal(clearExisting: false);
+        }
+
+        private static void PopulateSimpleSceneInternal(bool clearExisting)
         {
             Debug.Log("\n🏗️  CREATING STRUCTURED VELINOR MARKETPLACE\n");
 
@@ -53,8 +56,20 @@ namespace Velinor.Editor
             Scene activeScene = SceneManager.GetActiveScene();
             if (activeScene.name != "Marketplace")
             {
-                Debug.LogError("❌ Active scene is not 'Marketplace'. Load it first.");
-                return;
+                Debug.Log("📂 Loading Marketplace scene...");
+                // Save current scene if it has unsaved changes
+                if (activeScene.isDirty)
+                {
+                    EditorSceneManager.SaveScene(activeScene);
+                }
+                // Load Marketplace scene
+                EditorSceneManager.OpenScene("Assets/Scenes/Marketplace.unity", OpenSceneMode.Single);
+                activeScene = SceneManager.GetActiveScene();
+                if (activeScene.name != "Marketplace")
+                {
+                    Debug.LogError("❌ Failed to load Marketplace scene.");
+                    return;
+                }
             }
 
             // Verify required assets exist before populating
@@ -70,24 +85,35 @@ namespace Velinor.Editor
             Transform fgRoot = GetOrCreateContainer("Foreground");
             Transform charRoot = GetOrCreateContainer("Characters");
 
-            // Clear existing objects
-            foreach (Transform child in bgRoot)
-                Object.DestroyImmediate(child.gameObject);
-            foreach (Transform child in mgRoot)
-                Object.DestroyImmediate(child.gameObject);
-            foreach (Transform child in fgRoot)
-                Object.DestroyImmediate(child.gameObject);
-            foreach (Transform child in charRoot)
-                Object.DestroyImmediate(child.gameObject);
-
-            // CRITICAL: Also destroy any stray Player objects in the scene
-            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include);
-            foreach (GameObject obj in allObjects)
+            // Clear existing objects (optional based on mode)
+            if (clearExisting)
             {
-                if (obj.name == "Player" && obj.transform.parent == null)
+                Debug.Log("🧹 Clearing existing scene objects...");
+                foreach (Transform child in bgRoot)
+                    Object.DestroyImmediate(child.gameObject);
+                foreach (Transform child in mgRoot)
+                    Object.DestroyImmediate(child.gameObject);
+                foreach (Transform child in fgRoot)
+                    Object.DestroyImmediate(child.gameObject);
+                foreach (Transform child in charRoot)
+                    Object.DestroyImmediate(child.gameObject);
+            }
+            else
+            {
+                Debug.Log("⚠️  Preserving existing scene objects (merge mode)");
+            }
+
+            // CRITICAL: Also destroy any stray Player objects in the scene (only if clearing)
+            if (clearExisting)
+            {
+                GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include);
+                foreach (GameObject obj in allObjects)
                 {
-                    Debug.Log("  🗑️  Destroying stray root-level Player object");
-                    Object.DestroyImmediate(obj);
+                    if (obj.name == "Player" && obj.transform.parent == null)
+                    {
+                        Debug.Log("  🗑️  Destroying stray root-level Player object");
+                        Object.DestroyImmediate(obj);
+                    }
                 }
             }
 
@@ -114,8 +140,9 @@ namespace Velinor.Editor
             CreateStallRow(mgRoot, StallRowBX, "Stall_B");
 
             // Step 5: Background rocks (parallax depth)
-            Debug.Log("🏔️  Creating background parallax layer...");
-            CreateBackgroundRocks(bgRoot);
+            // DISABLED: Kyle's Rock Pack not URP compliant - add compatible assets and enable
+            // Debug.Log("🏔️  Creating background parallax layer...");
+            // CreateBackgroundRocks(bgRoot);
 
             // Step 6: Player at market origin
             Debug.Log("👤 Adding player...");
@@ -135,9 +162,10 @@ namespace Velinor.Editor
             ApplyRealMaterials(fgRoot);
 
             // Step 9: Add vegetation ring
-            Debug.Log("🌳 Adding vegetation and trees...");
-            Transform vegRoot = GetOrCreateContainer("Vegetation");
-            AddVegetationRing(vegRoot);
+            // DISABLED: Dry_Trees not URP compliant - add compatible assets and enable
+            // Debug.Log("🌳 Adding vegetation and trees...");
+            // Transform vegRoot = GetOrCreateContainer("Vegetation");
+            // AddVegetationRing(vegRoot);
 
             // Step 10: Enhance stalls with props
             Debug.Log("🛒 Enhancing stalls with decorative props...");
@@ -168,10 +196,7 @@ namespace Velinor.Editor
         private static bool VerifyRequiredAssets()
         {
             string[] requiredPaths = {
-                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab",
-                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_1_tl.prefab",
-                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_2_br.prefab",
-                "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/rock_3_tr.prefab"
+                "Assets/EmbersStorm – Mediterranean Ruins Building Kit/Prefabs/Walls/Ruins_Wall_Plain_A.prefab"
             };
 
             bool allExist = true;
@@ -268,7 +293,7 @@ namespace Velinor.Editor
 
             // CRITICAL: Set to "Foreground" layer so collision works
             ground.layer = LayerMask.NameToLayer("Foreground");
-            
+
             // Ensure all children are also on Foreground layer
             foreach (Transform child in ground.GetComponentsInChildren<Transform>())
             {
@@ -312,7 +337,7 @@ namespace Velinor.Editor
 
             // CRITICAL: Set to "Foreground" layer so collision works
             walkway.layer = LayerMask.NameToLayer("Foreground");
-            
+
             // Ensure all children are also on Foreground layer
             foreach (Transform child in walkway.GetComponentsInChildren<Transform>())
             {
@@ -336,19 +361,19 @@ namespace Velinor.Editor
             for (int i = 0; i < stallZPositions.Length; i++)
             {
                 GameObject tentPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(tentPath);
-                
+
                 if (tentPrefab != null)
                 {
                     GameObject stall = PrefabUtility.InstantiatePrefab(tentPrefab, parent) as GameObject;
                     stall.name = $"{stallPrefix}_{i + 1}";
                     stall.transform.position = new Vector3(stallX, 0, stallZPositions[i]);
-                    
+
                     // Apply 1:1 scale for stalls
                     stall.transform.localScale = new Vector3(1f, 1f, 1f);
-                    
+
                     // Fix pink materials on tent (replace with Standard shader)
                     AssetPackManager.FixPropMaterials(stall);
-                    
+
                     Debug.Log($"  ✅ Tent stall {stallPrefix}_{i + 1} at ({stallX}, 0, {stallZPositions[i]}) - scale (1, 1, 1)");
                 }
                 else
@@ -378,51 +403,10 @@ namespace Velinor.Editor
 
         private static void CreateBackgroundRocks(Transform parent)
         {
-            // Load Kyle's Rock Pack prefabs for background terrain
-            string[] rockPrefabs = { ROCK_PREFAB_PATH_1, ROCK_PREFAB_PATH_2, ROCK_PREFAB_PATH_3 };
-
-            string[] rockNames = { "Rock_BackLeft", "Rock_BackCenter", "Rock_BackRight" };
-            // REPOSITIONED: Closer and more visible in scene (Z=12-15 instead of Z=20-25)
-            Vector3[] basePositions = { new Vector3(-12, 0, 12), new Vector3(0, 0, 15), new Vector3(12, 0, 13) };
-
-            for (int i = 0; i < rockNames.Length; i++)
-            {
-                GameObject rockPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(rockPrefabs[i]);
-                
-                if (rockPrefab != null)
-                {
-                    GameObject rock = PrefabUtility.InstantiatePrefab(rockPrefab, parent) as GameObject;
-                    rock.name = rockNames[i];
-                    rock.transform.position = basePositions[i];
-                    rock.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f); // INCREASED for better visibility
-                    
-                    // Fix materials with Standard shader (gray-brown rock color)
-                    FixMaterialsWithStandard(rock, new Color(0.55f, 0.52f, 0.48f));
-                    rock.layer = LayerMask.NameToLayer("Background");
-                    Debug.Log($"  ✅ Loaded rock asset: {rockNames[i]} at {basePositions[i]} - 2.5x scale");
-                }
-                else
-                {
-                    // Fallback to cube
-                    GameObject rock = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    rock.name = $"{rockNames[i]}_Fallback";
-                    rock.transform.parent = parent;
-                    rock.transform.position = basePositions[i];
-                    rock.transform.localScale = new Vector3(3, 3, 3); // LARGER fallback cubes
-
-                    Object.DestroyImmediate(rock.GetComponent<Collider>());
-                    MeshRenderer mr = rock.GetComponent<MeshRenderer>();
-                    Material mat = new Material(Shader.Find("Standard"));
-                    mat.color = new Color(0.4f, 0.4f, 0.35f);
-                    mr.material = mat;
-
-                    rock.AddComponent<BoxCollider>();
-                    rock.layer = LayerMask.NameToLayer("Background");
-                    Debug.LogWarning($"  ⚠️  Kyle's Rock Pack prefab not found at {rockPrefabs[i]}, using fallback cube (3×3×3m)");
-                }
-            }
-
-            Debug.Log("  ✅ Background terrain repositioned closer to scene - now visible from marketplace");
+            // DISABLED: Kyle's Rock Pack is not URP compliant
+            // To re-enable: Find URP-compatible rock assets and update paths
+            Debug.Log("  ⚠️  CreateBackgroundRocks DISABLED - Kyle's Rock Pack not URP compliant");
+            Debug.Log("     To enable: Add compatible rock assets and update asset paths");
         }
 
         private static void AddPlayer(Transform parent)
@@ -449,14 +433,14 @@ namespace Velinor.Editor
             try
             {
                 GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
-                
+
                 if (playerPrefab == null)
                 {
                     Debug.LogWarning("SimplifiedMarketScene: playerPrefab asset not found. Using capsule fallback.");
                     AddPlayerFallback(parent);
                     return;
                 }
-                
+
                 // Instantiate prefab as-is, don't modify its internal structure
                 GameObject player = Object.Instantiate(playerPrefab, parent) as GameObject;
                 if (player == null)
@@ -465,12 +449,12 @@ namespace Velinor.Editor
                     AddPlayerFallback(parent);
                     return;
                 }
-                
+
                 player.name = "Player";
                 player.transform.localPosition = Vector3.zero;
                 player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
                 Debug.Log("  ✅ StarterAssets character instantiated successfully");
-                
+
                 // ========== CLEANUP PHASE 1: Remove null/broken components ==========
                 // This must happen BEFORE we try to fix materials or disable scripts
                 int nullsRemoved = 0;
@@ -478,7 +462,7 @@ namespace Velinor.Editor
                 {
                     // Get all components and filter those that are null
                     System.Collections.Generic.List<Component> toDestroy = new System.Collections.Generic.List<Component>();
-                    
+
                     foreach (Component comp in t.GetComponents<Component>())
                     {
                         // If accessing the type throws, it's a null component (missing script)
@@ -492,27 +476,27 @@ namespace Velinor.Editor
                             nullsRemoved++;
                         }
                     }
-                    
+
                     foreach (Component comp in toDestroy)
                     {
                         Object.DestroyImmediate(comp, allowDestroyingAssets: true);
                         Debug.Log($"  🗑️  Removed null component (missing script) on {t.gameObject.name}");
                     }
                 }
-                
+
                 if (nullsRemoved > 0)
                     Debug.Log($"  ✅ Removed {nullsRemoved} null/broken components from hierarchy");
-                
+
                 // ========== CLEANUP PHASE 2: Destroy unwanted scripts (keep Animator) ==========
                 MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>(includeInactive: true);
                 int destroyedCount = 0;
-                
+
                 foreach (MonoBehaviour mb in allMonoBehaviours)
                 {
                     if (mb == null) continue; // Skip if already null
-                    
+
                     string scriptName = mb.GetType().Name;
-                    
+
                     // Keep ONLY Animator, destroy everything else
                     if (!scriptName.Contains("Animator"))
                     {
@@ -521,9 +505,9 @@ namespace Velinor.Editor
                         Debug.Log($"  🗑️  Destroyed {scriptName}");
                     }
                 }
-                
+
                 Debug.Log($"  ✅ Cleaned up {destroyedCount} unwanted scripts from character hierarchy");
-                
+
                 // Verify Animator still exists after cleanup
                 Animator animator = player.GetComponent<Animator>();
                 if (animator == null)
@@ -533,7 +517,7 @@ namespace Velinor.Editor
                     if (animator != null)
                         Debug.Log($"  ✅ Found Animator on child: {animator.gameObject.name}");
                 }
-                
+
                 // ========== APPLY MATERIALS (null components are now gone) ==========
                 FixCharacterMaterials(player);
 
@@ -548,7 +532,7 @@ namespace Velinor.Editor
                         break;
                     }
                 }
-                
+
                 // ========== CREATE CAMERA ==========
                 GameObject cameraObj = new GameObject("MainCamera");
                 cameraObj.transform.parent = player.transform;
@@ -568,12 +552,12 @@ namespace Velinor.Editor
 
                 // ========== SETUP PHYSICS ==========
                 SetupCharacterPhysics(player);
-                
+
                 // ========== ADD MOVEMENT SCRIPT ==========
                 SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
                 movement.mainCamera = cam;
                 Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
-                
+
                 // Log character collider info after setup for debugging
                 Collider[] finalColliders = player.GetComponentsInChildren<Collider>();
                 Debug.Log($"  📊 COLLIDER DEBUG INFO:");
@@ -640,7 +624,7 @@ namespace Velinor.Editor
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.linearVelocity = new Vector3(0, -2f, 0);  // Help settle on ground
-            
+
             Debug.Log($"  ✅ Fallback player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             Debug.Log($"      - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
             Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
@@ -659,7 +643,7 @@ namespace Velinor.Editor
             cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
 
             cameraObj.AddComponent<AudioListener>();
-            
+
             // Add simple movement script for WASD + Mouse input
             SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
             movement.mainCamera = cam;
@@ -675,7 +659,7 @@ namespace Velinor.Editor
             // This fixes any broken/pink materials in the prefabs
             Material standardMat = new Material(Shader.Find("Standard"));
             standardMat.color = color;
-            
+
             MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)
             {
@@ -684,7 +668,7 @@ namespace Velinor.Editor
                     mats[i] = standardMat;
                 renderer.sharedMaterials = mats;
             }
-            
+
             Debug.Log($"  ℹ️  Fixed materials on {obj.name} (color: {color})");
         }
 
@@ -693,7 +677,7 @@ namespace Velinor.Editor
             // Apply a tan/beige material to all renderers to avoid pink default
             Material characterMat = new Material(Shader.Find("Standard"));
             characterMat.color = new Color(0.85f, 0.8f, 0.75f); // Tan/beige skin tone
-            
+
             // Search for renderers recursively - they may be deeply nested
             MeshRenderer[] renderers = character.GetComponentsInChildren<MeshRenderer>(includeInactive: true);
             if (renderers.Length == 0)
@@ -716,7 +700,7 @@ namespace Velinor.Editor
                 Debug.LogWarning("  ⚠️  No MeshRenderers or SkinnedMeshRenderers found on character model");
                 return;
             }
-            
+
             foreach (MeshRenderer renderer in renderers)
             {
                 Material[] mats = new Material[renderer.sharedMaterials.Length];
@@ -724,7 +708,7 @@ namespace Velinor.Editor
                     mats[i] = characterMat;
                 renderer.sharedMaterials = mats;
             }
-            
+
             Debug.Log($"  ✅ Applied materials to {renderers.Length} MeshRenderers on character");
         }
 
@@ -732,7 +716,7 @@ namespace Velinor.Editor
         {
             Debug.Log("🔧 Setting up character physics...");
             Debug.Log($"  Character position: {character.transform.position}");
-            
+
             // Remove any remaining colliders from the prefab (may exist on root or children)
             Collider[] existingColliders = character.GetComponentsInChildren<Collider>();
             Debug.Log($"  Cleaning up {existingColliders.Length} collider(s)...");
@@ -740,14 +724,14 @@ namespace Velinor.Editor
             {
                 Object.DestroyImmediate(col);
             }
-            
+
             // Ensure character has a Rigidbody for gravity and collision
             Rigidbody rb = character.GetComponent<Rigidbody>();
             if (rb == null)
             {
                 rb = character.AddComponent<Rigidbody>();
             }
-            
+
             // Configure Rigidbody for player movement
             rb.mass = 1;
             rb.linearDamping = 0;
@@ -755,14 +739,14 @@ namespace Velinor.Editor
             rb.useGravity = true;
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
-            
+
             // Give character downward velocity to help settle on ground
             rb.linearVelocity = new Vector3(0, -2f, 0);  // Stronger downward to ensure settling
-            
+
             Debug.Log($"  ✅ Rigidbody configured: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
             Debug.Log($"      - Character position: {character.transform.position}");
-            
+
             // Create ONE clean capsule collider for physics collision
             CapsuleCollider capsule = character.AddComponent<CapsuleCollider>();
             capsule.radius = 0.4f;
@@ -776,7 +760,7 @@ namespace Velinor.Editor
             Debug.Log($"      - Center offset: {capsule.center}, Radius: {capsule.radius}, Height: {capsule.height}");
             Debug.Log($"      - Character position: {character.transform.position}");
             Debug.Log($"      - isTrigger: {capsule.isTrigger}");
-            
+
             // Debug: Check if collider actually touches ground
             Bounds capsuleBounds = capsule.bounds;
             Debug.Log($"  📊 COLLIDER BOUNDS (FIXED):");
@@ -869,107 +853,10 @@ namespace Velinor.Editor
         /// </summary>
         private static void AddVegetationRing(Transform vegRoot)
         {
-            // Define vegetation positions in a ring around marketplace
-            // Outer perimeter: Z = -5 to Z = 20 (front to back), X = -15 to X = 15 (left to right)
-            
-            Vector3[] treePositions = new Vector3[]
-            {
-                // Front row (Z = -5)
-                new Vector3(-15, 0, -5),
-                new Vector3(-5, 0, -5),
-                new Vector3(5, 0, -5),
-                new Vector3(15, 0, -5),
-                
-                // Left side (X = -15)
-                new Vector3(-15, 0, 0),
-                new Vector3(-15, 0, 5),
-                new Vector3(-15, 0, 10),
-                new Vector3(-15, 0, 15),
-                
-                // Right side (X = 15)
-                new Vector3(15, 0, 0),
-                new Vector3(15, 0, 5),
-                new Vector3(15, 0, 10),
-                new Vector3(15, 0, 15),
-                
-                // Back row (Z = 20)
-                new Vector3(-15, 0, 20),
-                new Vector3(-5, 0, 20),
-                new Vector3(5, 0, 20),
-                new Vector3(15, 0, 20),
-            };
-
-            // Tree prefab paths (with fallbacks)
-            string[] treePrefabs = new string[]
-            {
-                "Assets/DreamTree2/Mesh/DreamTree.FBX",
-                "Assets/3 English Oak Set/Oak.fbx",
-                "Assets/3 English Oak Set/Bare_Oak.fbx",
-                "Assets/Dry_Trees/Model/Dry3333.fbx",
-            };
-
-            int treeCount = 0;
-            for (int i = 0; i < treePositions.Length && treeCount < treePositions.Length; i++)
-            {
-                // Cycle through available tree prefabs
-                string treePrefab = treePrefabs[i % treePrefabs.Length];
-                
-                GameObject treePrefabObj = AssetDatabase.LoadAssetAtPath<GameObject>(treePrefab);
-                if (treePrefabObj != null)
-                {
-                    GameObject treeInstance = Object.Instantiate(treePrefabObj, treePositions[i], Quaternion.identity);
-                    treeInstance.name = $"Tree_{i:00}";
-                    treeInstance.transform.parent = vegRoot;
-                    
-                    // Apply a much smaller overall scale (trees were oversized)
-                    float globalScale = 0.35f; // Reduced from 1.0
-                    float scaleVariation = Random.Range(0.8f, 1.2f);
-                    treeInstance.transform.localScale *= (globalScale * scaleVariation);
-                    
-                    // Fix any broken materials (convert pink to gray)
-                    FixVegetationMaterials(treeInstance);
-                    
-                    treeCount++;
-                }
-                else
-                {
-                    Debug.LogWarning($"  ⚠️  Tree prefab not found: {treePrefab}");
-                }
-            }
-
-            Debug.Log($"  ✅ Placed {treeCount} trees in vegetation ring");
-
-            // Add some stumps and succulents for ground detail
-            Vector3[] propPositions = new Vector3[]
-            {
-                new Vector3(-12, 0, 2),
-                new Vector3(-8, 0, 7),
-                new Vector3(8, 0, 3),
-                new Vector3(12, 0, 12),
-            };
-
-            string[] propPrefabs = new string[]
-            {
-                "Assets/GreenBugGames/Scan Stump Vol.1/Stump_old.fbx",
-                "Assets/SeedMesh/Succulents/Succulent_EcheveriaRosalinda_var1.fbx",
-            };
-
-            int propCount = 0;
-            for (int i = 0; i < propPositions.Length; i++)
-            {
-                string propPrefab = propPrefabs[i % propPrefabs.Length];
-                
-                GameObject propPrefabObj = AssetDatabase.LoadAssetAtPath<GameObject>(propPrefab);
-                if (propPrefabObj != null)
-                {
-                    GameObject propInstance = Object.Instantiate(propPrefabObj, propPositions[i], Quaternion.identity);
-                    propInstance.name = $"Prop_{i:00}";
-                    propInstance.transform.parent = vegRoot;
-                    propCount++;
-                }
-            }
-
-            Debug.Log($"  ✅ Placed {propCount} ground props (stumps/succulents)");
+            // DISABLED: Dry_Trees is not URP compliant
+            // To re-enable: Find URP-compatible tree assets and update paths
+            Debug.Log("  ⚠️  AddVegetationRing DISABLED - Dry_Trees not URP compliant");
+            Debug.Log("     To enable: Add compatible tree assets and update asset paths");
         }
 
         /// <summary>
@@ -981,7 +868,7 @@ namespace Velinor.Editor
 
             // Get stall areas and place appropriate props
             // Stalls: 2 rows (A: Z=0,5,10 | B: Z=0,5,10) with X=-5 (row A) and X=5 (row B)
-            
+
             Vector3[] stallPositions = new Vector3[]
             {
                 new Vector3(-5, 0.3f, 0),    // Stall A1
@@ -1005,19 +892,19 @@ namespace Velinor.Editor
             for (int i = 0; i < stallPositions.Length; i++)
             {
                 Vector3 pos = stallPositions[i];
-                
+
                 // Place 1-2 containers per stall (variation)
                 int numContainers = (i % 2 == 0) ? 2 : 1;
-                
+
                 for (int j = 0; j < numContainers; j++)
                 {
                     // Offset containers slightly so they don't overlap
                     Vector3 containerPos = pos + new Vector3(j * 1.2f - 0.6f, 0, 0);
-                    
+
                     // Cycle through available containers
                     int containerIdx = (i * numContainers + j) % containers.Count;
                     var container = containers[containerIdx];
-                    
+
                     GameObject prop = AssetPackManager.PlaceProp(
                         container,
                         containerPos,
@@ -1054,7 +941,7 @@ namespace Velinor.Editor
                 {
                     int decIdx = i % decorations.Count;
                     var deco = decorations[decIdx];
-                    
+
                     GameObject prop = AssetPackManager.PlaceProp(
                         deco,
                         decorationSpots[i],
