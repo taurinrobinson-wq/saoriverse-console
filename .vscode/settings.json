@@ -20,6 +20,8 @@
   },
   "python.analysis.exclude": [
     "**/.venv/**",
+    "**/__pycache__/**",
+    "**/.*/**",
     "**/archive/**",
     "**/dev_tools/**",
     "**/supabase/**",
@@ -32,15 +34,13 @@
     "**/review_download_before_delete/**": true,
     "**/review_for_deletion/**": true
   },
-  // Prefer ripgrep for fast searches in large repos
-  "search.useRipgrep": true,
   // File generation preferences
   // New markdown files are created in docs/ by default
   "files.defaultFolder": "${workspaceFolder}/docs",
   // Disable extensions that consume significant memory
   "extensions.ignoreRecommendations": true,
   // Reduce memory usage for inline code hints
-  "editor.inlayHints.enabled": false,
+  "editor.inlayHints.enabled": "off",
   // Disable expensive features
   "[python]": {
     "editor.codeActionsOnSave": {}
