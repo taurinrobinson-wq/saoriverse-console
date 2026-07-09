@@ -11,7 +11,8 @@ namespace Velinor.Editor
     /// 
     /// Uses:
     /// - EmbersStorm Mediterranean Ruins for market stalls/buildings
-    /// - StarterAssets Third Person Controller for player
+    /// - StarterAssets Third Person Controller for player model (fallback to first-person capsule)
+    /// - SimplePlayerController for first-person gameplay
     /// 
     /// Follows Velinor spatial rules:
     /// - 1 Unity unit = 1 meter
@@ -429,155 +430,8 @@ namespace Velinor.Editor
                 }
             }
 
-            // Try to load StarterAssets character - but use fallback on ANY failure
-            try
-            {
-                GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
-
-                if (playerPrefab == null)
-                {
-                    Debug.LogWarning("SimplifiedMarketScene: playerPrefab asset not found. Using capsule fallback.");
-                    AddPlayerFallback(parent);
-                    return;
-                }
-
-                // Instantiate prefab as-is, don't modify its internal structure
-                GameObject player = Object.Instantiate(playerPrefab, parent) as GameObject;
-                if (player == null)
-                {
-                    Debug.LogError("SimplifiedMarketScene: Object.Instantiate returned null. Using capsule fallback.");
-                    AddPlayerFallback(parent);
-                    return;
-                }
-
-                player.name = "Player";
-                player.transform.localPosition = Vector3.zero;
-                player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
-                Debug.Log("  ✅ StarterAssets character instantiated successfully");
-
-                // ========== CLEANUP PHASE 1: Remove null/broken components ==========
-                // This must happen BEFORE we try to fix materials or disable scripts
-                int nullsRemoved = 0;
-                foreach (Transform t in player.GetComponentsInChildren<Transform>(includeInactive: true))
-                {
-                    // Get all components and filter those that are null
-                    System.Collections.Generic.List<Component> toDestroy = new System.Collections.Generic.List<Component>();
-
-                    foreach (Component comp in t.GetComponents<Component>())
-                    {
-                        // If accessing the type throws, it's a null component (missing script)
-                        try
-                        {
-                            var _ = comp.GetType();
-                        }
-                        catch
-                        {
-                            toDestroy.Add(comp);
-                            nullsRemoved++;
-                        }
-                    }
-
-                    foreach (Component comp in toDestroy)
-                    {
-                        Object.DestroyImmediate(comp, allowDestroyingAssets: true);
-                        Debug.Log($"  🗑️  Removed null component (missing script) on {t.gameObject.name}");
-                    }
-                }
-
-                if (nullsRemoved > 0)
-                    Debug.Log($"  ✅ Removed {nullsRemoved} null/broken components from hierarchy");
-
-                // ========== CLEANUP PHASE 2: Destroy unwanted scripts (keep Animator) ==========
-                MonoBehaviour[] allMonoBehaviours = player.GetComponentsInChildren<MonoBehaviour>(includeInactive: true);
-                int destroyedCount = 0;
-
-                foreach (MonoBehaviour mb in allMonoBehaviours)
-                {
-                    if (mb == null) continue; // Skip if already null
-
-                    string scriptName = mb.GetType().Name;
-
-                    // Keep ONLY Animator, destroy everything else
-                    if (!scriptName.Contains("Animator"))
-                    {
-                        Object.DestroyImmediate(mb, allowDestroyingAssets: true);
-                        destroyedCount++;
-                        Debug.Log($"  🗑️  Destroyed {scriptName}");
-                    }
-                }
-
-                Debug.Log($"  ✅ Cleaned up {destroyedCount} unwanted scripts from character hierarchy");
-
-                // Verify Animator still exists after cleanup
-                Animator animator = player.GetComponent<Animator>();
-                if (animator == null)
-                {
-                    Debug.LogWarning("  ⚠️  WARNING: Animator was destroyed! Looking for it in children...");
-                    animator = player.GetComponentInChildren<Animator>();
-                    if (animator != null)
-                        Debug.Log($"  ✅ Found Animator on child: {animator.gameObject.name}");
-                }
-
-                // ========== APPLY MATERIALS (null components are now gone) ==========
-                FixCharacterMaterials(player);
-
-                // ========== DISABLE UNWANTED CONTROL SCRIPTS ==========
-                MonoBehaviour[] components = player.GetComponents<MonoBehaviour>();
-                foreach (MonoBehaviour comp in components)
-                {
-                    if (comp != null && comp.GetType().Name == "ThirdPersonController")
-                    {
-                        comp.enabled = false;
-                        Debug.Log("  ℹ️  Disabled ThirdPersonController via reflection");
-                        break;
-                    }
-                }
-
-                // ========== CREATE CAMERA ==========
-                GameObject cameraObj = new GameObject("MainCamera");
-                cameraObj.transform.parent = player.transform;
-                cameraObj.transform.localPosition = new Vector3(0, 1.6f, 0); // Eye height (1.6m above ground)
-
-                Camera cam = cameraObj.AddComponent<Camera>();
-                cam.orthographic = true;
-                cam.orthographicSize = 6;
-                cam.nearClipPlane = -100;
-                cam.farClipPlane = 100;
-                cam.tag = "MainCamera";
-                cam.clearFlags = CameraClearFlags.SolidColor;
-                cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
-                cam.depth = 0;
-
-                cameraObj.AddComponent<AudioListener>();
-
-                // ========== SETUP PHYSICS ==========
-                SetupCharacterPhysics(player);
-
-                // ========== ADD MOVEMENT SCRIPT ==========
-                SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
-                movement.mainCamera = cam;
-                Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
-
-                // Log character collider info after setup for debugging
-                Collider[] finalColliders = player.GetComponentsInChildren<Collider>();
-                Debug.Log($"  📊 COLLIDER DEBUG INFO:");
-                Debug.Log($"    - Character root position: {player.transform.position}");
-                Debug.Log($"    - Character Rigidbody useGravity: {player.GetComponent<Rigidbody>()?.useGravity}");
-                Debug.Log($"    - Total colliders on character: {finalColliders.Length}");
-                foreach (Collider c in finalColliders)
-                {
-                    Debug.Log($"    - Collider on {c.gameObject.name}: {c.GetType().Name}, bounds={c.bounds}, trigger={c.isTrigger}");
-                }
-
-                Debug.Log("  ✅ StarterAssets character ready with movement and camera");
-                return;
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"SimplifiedMarketScene: Exception loading StarterAssets: {ex.Message}\\n{ex.StackTrace}");
-                AddPlayerFallback(parent);
-                return;
-            }
+            // Create first-person player directly (lightweight and fast)
+            AddPlayerFallback(parent);
         }
 
         private static void AddPlayerFallback(Transform parent)
@@ -589,33 +443,19 @@ namespace Velinor.Editor
                 parent = new GameObject("PlayerRoot").transform;
             }
 
-            // Fallback to green capsule if prefab not found
+            // Create first-person player with capsule body
             GameObject player = new GameObject("Player");
             player.transform.parent = parent;
             player.transform.position = new Vector3(0, 0f, 0); // Ground level (Y=0)
 
-            GameObject visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            visual.transform.parent = player.transform;
-            visual.transform.localPosition = new Vector3(0, 0.9f, 0);  // Match collider center
-            visual.name = "Model";
-
-            // Remove the collider from the visual primitive (it gets created automatically)
-            Collider visualCollider = visual.GetComponent<Collider>();
-            if (visualCollider != null)
-                Object.DestroyImmediate(visualCollider);
-
-            MeshRenderer vmr = visual.GetComponent<MeshRenderer>();
-            Material playerMat = new Material(Shader.Find("Standard"));
-            playerMat.color = new Color(0.2f, 0.8f, 0.3f);
-            vmr.material = playerMat;
-
-            // Add collider to ROOT (not visual child)
+            // Add collider to ROOT for physics
             CapsuleCollider collider = player.AddComponent<CapsuleCollider>();
             collider.radius = 0.4f;
             collider.height = 1.8f;
             collider.center = new Vector3(0, 0.9f, 0);  // Center at 0.9 so bottom is at Y=0 (ground level)
             collider.isTrigger = false; // CRITICAL: Must NOT be trigger
 
+            // Add Rigidbody for physics
             Rigidbody rb = player.AddComponent<Rigidbody>();
             rb.mass = 1;
             rb.linearDamping = 0;
@@ -625,32 +465,33 @@ namespace Velinor.Editor
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.linearVelocity = new Vector3(0, -2f, 0);  // Help settle on ground
 
-            Debug.Log($"  ✅ Fallback player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
+            Debug.Log($"  ✅ First-person player Rigidbody: useGravity={rb.useGravity}, isKinematic={rb.isKinematic}");
             Debug.Log($"      - CapsuleCollider: center={collider.center}, radius={collider.radius}, height={collider.height}");
             Debug.Log($"      - Initial downward velocity: {rb.linearVelocity.y}");
 
-            GameObject cameraObj = new GameObject("CameraHolder");
+            // Create camera as child (first-person POV from player eyes)
+            GameObject cameraObj = new GameObject("Camera");
             cameraObj.transform.parent = player.transform;
             cameraObj.transform.localPosition = new Vector3(0, 1.6f, 0); // Eye height (1.6m above ground)
 
             Camera cam = cameraObj.AddComponent<Camera>();
-            cam.orthographic = true;
-            cam.orthographicSize = 6;
-            cam.nearClipPlane = -100;
-            cam.farClipPlane = 100;
+            cam.orthographic = false;
+            cam.fieldOfView = 60f;
+            cam.nearClipPlane = 0.1f;
+            cam.farClipPlane = 1000f;
             cam.tag = "MainCamera";
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.1f, 0.1f, 0.12f, 1f);
 
             cameraObj.AddComponent<AudioListener>();
 
-            // Add simple movement script for WASD + Mouse input
-            SimpleCharacterMovement movement = player.AddComponent<SimpleCharacterMovement>();
-            movement.mainCamera = cam;
-            Debug.Log("  ✅ SimpleCharacterMovement added (WASD to move, Mouse to look, ESC to unlock)");
+            // Add first-person controller script
+            SimplePlayerController fpsController = player.AddComponent<SimplePlayerController>();
+            Debug.Log("  ✅ SimplePlayerController added (First-person FPS controller)");
+            Debug.Log("     - Controls: WASD=move, Mouse=look (right-click to lock), Space=jump, ESC=unlock cursor");
 
             player.layer = LayerMask.NameToLayer("Default");
-            Debug.Log("  ⚠️  Using fallback capsule player (with physics and input control)");
+            Debug.Log("  ✅ First-person player ready for gameplay");
         }
 
         private static void FixMaterialsWithStandard(GameObject obj, Color color)
