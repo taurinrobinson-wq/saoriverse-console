@@ -20,7 +20,7 @@ from velinor.engine.collapse_scene import (
 )
 from velinor.engine.orchestrator import VelinorTwineOrchestrator
 from velinor.engine.core import VelinorEngine, GameSession
-from velinor.engine.trait_system import TraitType
+from velinor.engine.trait_system import TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_TRUST
 
 
 def test_event_timeline_creation():
@@ -40,7 +40,7 @@ def test_event_timeline_creation():
 def test_game_day_progression():
     """TEST 2: Game days advance with proper phase transitions"""
     timeline = EventTimeline()
-    timeline.set_marketplace_state(coherence=75.0, primary_trait="empathy", malrik_elenya_cooperation=85)
+    timeline.set_marketplace_state(coherence=75.0, primary_tone="empathy", malrik_elenya_cooperation=85)
     
     # Advance through pre-collapse phase - should trigger subtle deterioration after day 2
     for day in range(1, 5):
@@ -68,7 +68,7 @@ def test_game_day_progression():
 def test_building_deterioration():
     """TEST 3: Building deteriorates properly with visual indicators"""
     timeline = EventTimeline()
-    timeline.set_marketplace_state(coherence=75.0, primary_trait="empathy", malrik_elenya_cooperation=85)
+    timeline.set_marketplace_state(coherence=75.0, primary_tone="empathy", malrik_elenya_cooperation=85)
     
     # Advance to subtle deterioration phase
     for _ in range(5):
@@ -95,7 +95,7 @@ def test_building_deterioration():
 def test_collapse_trigger():
     """TEST 4: Collapse triggers at proper stability threshold"""
     timeline = EventTimeline()
-    timeline.set_marketplace_state(coherence=75.0, primary_trait="empathy", malrik_elenya_cooperation=85)
+    timeline.set_marketplace_state(coherence=75.0, primary_tone="empathy", malrik_elenya_cooperation=85)
     
     # Advance quickly to collapse
     for _ in range(15):
@@ -141,7 +141,7 @@ def test_npc_stress_progression():
 def test_player_intervention_recording():
     """TEST 6: Player interventions are recorded and affect rebuild potential"""
     timeline = EventTimeline()
-    timeline.set_marketplace_state(coherence=60.0, primary_trait="empathy", malrik_elenya_cooperation=75)
+    timeline.set_marketplace_state(coherence=60.0, primary_tone="empathy", malrik_elenya_cooperation=75)
     
     # Trigger collapse
     for _ in range(15):
@@ -170,7 +170,7 @@ def test_aftermath_path_determination():
     """TEST 7: Aftermath path determined by interventions and coherence"""
     # Test high interventions → Rebuild Together
     timeline_rebuild = EventTimeline()
-    timeline_rebuild.set_marketplace_state(coherence=80.0, primary_trait="empathy", malrik_elenya_cooperation=90)
+    timeline_rebuild.set_marketplace_state(coherence=80.0, primary_tone="empathy", malrik_elenya_cooperation=90)
     timeline_rebuild.trigger_collapse()
     timeline_rebuild.transition_to_phase(CollapsePhase.IMMEDIATE_AFTERMATH)
     
@@ -190,7 +190,7 @@ def test_aftermath_path_determination():
     
     # Test low interventions → Separation
     timeline_sep = EventTimeline()
-    timeline_sep.set_marketplace_state(coherence=40.0, primary_trait="skepticism", malrik_elenya_cooperation=50)
+    timeline_sep.set_marketplace_state(coherence=40.0, primary_tone="skepticism", malrik_elenya_cooperation=50)
     timeline_sep.trigger_collapse()
     timeline_sep.transition_to_phase(CollapsePhase.IMMEDIATE_AFTERMATH)
     
@@ -337,7 +337,7 @@ def test_orchestrator_phase3_integration():
         assert orchestrator.aftermath_scene is not None
         
         # Test marketplace conclusion method
-        orchestrator.set_marketplace_conclusion(coherence=75.0, primary_trait="empathy")
+        orchestrator.set_marketplace_conclusion(coherence=75.0, primary_tone="empathy")
         assert orchestrator.event_timeline.player_marketplace_coherence == 75.0
         assert orchestrator.event_timeline.player_marketplace_primary_trait == "empathy"
         
@@ -384,7 +384,7 @@ def test_coherence_and_traits_phase3():
         )
         
         # Simulate Phase 2 outcome: high empathy coherence
-        orchestrator.set_marketplace_conclusion(coherence=85.0, primary_trait="empathy")
+        orchestrator.set_marketplace_conclusion(coherence=85.0, primary_tone="empathy")
         
         # Verify marketplace state set properly
         assert orchestrator.event_timeline.player_marketplace_coherence == 85.0
@@ -416,7 +416,7 @@ def test_coherence_and_traits_phase3():
 def test_game_state_persistence():
     """TEST 14: Game state can be retrieved for UI display and persistence"""
     timeline = EventTimeline()
-    timeline.set_marketplace_state(coherence=70.0, primary_trait="integration", malrik_elenya_cooperation=80)
+    timeline.set_marketplace_state(coherence=70.0, primary_tone="integration", malrik_elenya_cooperation=80)
     
     # Advance through phases
     for _ in range(10):

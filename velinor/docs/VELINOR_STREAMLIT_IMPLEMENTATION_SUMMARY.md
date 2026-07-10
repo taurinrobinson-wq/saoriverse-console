@@ -43,7 +43,7 @@ improvements outlined in `velinor_streamlit_improvements.md`.
    - Seamless transition back to narrative
 
 6. **NPC Perception System**
-   - Track Trust, Affinity, Understanding per NPC
+   - Track NPC REMNANTS traits (trust, empathy, memory, etc.)
    - Range: -1.0 to +1.0
    - Updated by choices, glyphs, skills
    - Gates special dialogue branches
@@ -98,7 +98,7 @@ class StreamlitGameState:
     tone: ToneStats                     # TONE tracking
     remnants_traits: Dict[str, float]   # REMNANTS tracking
     glyphs: Dict[str, Glyph]           # 6 glyphs with metadata
-    npc_perception: Dict[str, NPCPerception]  # Trust/Affinity/Understanding
+    npc_perception: Dict[str, NPCPerception]  # REMNANTS Traits (trust, empathy, memory, nuance, authority, need, resolve, skepticism)
     skills: Dict[str, Skill]           # Learnable abilities
     fight_counter: int                 # Attack count (0-15)
     dialogue_history: List[str]        # Previous dialogue
@@ -136,7 +136,7 @@ All 8 integration tests pass ✅
 ✅ test_game_state             - Initialization with 6 glyphs, 4 NPCs
 ✅ test_tone_effects           - TONE modifications work correctly
 ✅ test_glyph_operations       - Obtain, use at door, use on NPC
-✅ test_npc_perception         - Trust/Affinity/Understanding updates
+✅ test_npc_perception         - REMNANTS Traits (trust, empathy, memory, nuance, authority, need, resolve, skepticism) updates
 ✅ test_ui_components          - StreamlitUI instantiates properly
 ✅ test_game_engine            - VelinorTwineOrchestrator integration
 ✅ test_serialization          - State converts to JSON correctly

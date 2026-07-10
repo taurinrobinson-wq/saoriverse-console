@@ -52,7 +52,7 @@ Always shows:
 
 Per NPC (-1.0 to +1.0):
 - **Trust** - Safety and reliability
-- **Affinity** - Liking and comfort
+- **REMNANTS Traits** - NPC internal states (empathy, need, memory, etc.)
 - **Understanding** - Being known and seen
 
 💚 = positive, ❤️ = neutral, 💔 = negative

@@ -114,17 +114,22 @@ class StreamlitUI:
                 st.sidebar.markdown(f"⚫ ~~{skill_name}~~ - *locked*")
 
     def render_npc_perception_panel(self, game_state: Any) -> None:
-        """Render NPC perception in sidebar."""
+        """Render NPC perception (REMNANTS traits) in sidebar."""
         st.sidebar.markdown("### 👥 NPC Perception")
 
         perceptions = game_state.npc_perception
 
         for npc_name, perception in perceptions.items():
-            trust_emoji = "💚" if perception.trust > 0.3 else "❤️" if perception.trust > -0.3 else "💔"
+            # Determine emoji based on primary REMNANTS traits
+            trust_val = perception.remnants_profile.trust
+            empathy_val = perception.remnants_profile.empathy
+            trust_emoji = "💚" if trust_val > 0.5 else "❤️" if empathy_val > 0.5 else "💔"
+            
             st.sidebar.markdown(
                 f"{trust_emoji} **{npc_name}** ({perception.emotion})\n"
-                f"  Trust: {perception.trust:+.2f} | "
-                f"Affinity: {perception.affinity:+.2f}"
+                f"  Trust: {trust_val:.2f} | "
+                f"Empathy: {empathy_val:.2f} | "
+                f"Memory: {perception.remnants_profile.memory:.2f}"
             )
 
     # ========================================================================

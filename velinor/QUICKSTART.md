@@ -367,7 +367,7 @@ Always visible on the right:
 **🎯 SKILLS** - Unlockable abilities
 - Gate special dialogue branches
 
-**👥 NPC PERCEPTION** - Trust/Affinity/Understanding
+**👥 NPC PERCEPTION** - REMNANTS Traits (trust, empathy, memory, nuance, authority, need, resolve, skepticism)
 - How each NPC perceives you
 
 ## Files
@@ -410,7 +410,7 @@ Glyphs aren't items—they're stances you can invoke:
 Three dimensions per NPC (-1.0 to +1.0):
 
 - **Trust** - Safety and reliability
-- **Affinity** - Liking and comfort
+- **REMNANTS Traits** - NPC internal states (empathy, need, memory, etc.)
 - **Understanding** - Being known
 
 Use glyphs and skills to shift perception, unlock special dialogue.

@@ -52,23 +52,12 @@ public class AddPlayerController
         GameObject cameraObj = GameObject.Find("Main Camera");
         if (cameraObj != null)
         {
-            cameraObj.transform.position = new Vector3(2f, 2.5f, -5f);
-            cameraObj.transform.LookAt(player.transform.position + Vector3.up);
-            Debug.Log("✅ Positioned Main Camera");
-        }
-
-        // ===== CREATE CAMERA TARGET =====
-        VelinorPlayerController playerCtrl = player.GetComponent<VelinorPlayerController>();
-        if (playerCtrl.CinemachineCameraTarget == null)
-        {
-            GameObject cameraTarget = new GameObject("CameraTarget");
-            cameraTarget.transform.SetParent(player.transform);
-            cameraTarget.transform.localPosition = new Vector3(0, 0.93f, 0);
-            playerCtrl.CinemachineCameraTarget = cameraTarget;
-            Debug.Log("✅ Created CameraTarget");
+            // Camera will be positioned at player head by VelinorPlayerController
+            cameraObj.tag = "MainCamera";
+            Debug.Log("✅ Main Camera configured (first-person, head position)");
         }
 
         Debug.Log("🎮 Player controller setup complete!");
-        Debug.Log("Use WASD to move, mouse to look around, Space to jump, Shift to sprint");
+        Debug.Log("Use WASD to move, mouse to look around, Space to jump, ESC to unlock cursor");
     }
 }

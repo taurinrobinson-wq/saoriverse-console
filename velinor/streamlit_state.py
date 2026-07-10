@@ -101,15 +101,19 @@ class Glyph:
 
 @dataclass
 class NPCPerception:
-    """How an NPC perceives the player, plus their REMNANTS profile."""
+    """How an NPC perceives the player, expressed through their REMNANTS profile.
+    
+    All perception metrics (trust, affinity, understanding) are now expressed through
+    the canonical REMNANTS traits in their profile:
+    - trust → REMNANTS.trust
+    - affinity (how much they like) → REMNANTS.empathy + REMNANTS.need
+    - understanding (how well they understand) → REMNANTS.memory + REMNANTS.nuance
+    """
     name: str
-    trust: float = 0.0  # -1.0 to 1.0: How much they trust the player
-    affinity: float = 0.0  # -1.0 to 1.0: How much they like the player
-    understanding: float = 0.0  # -1.0 to 1.0: How well they understand the player
     emotion: str = "neutral"  # Current emotional state
     last_interaction: Optional[str] = None
     remnants_profile: RemnantTraits = field(
-        default_factory=RemnantTraits)  # Their personality
+        default_factory=RemnantTraits)  # Their personality (includes all perception)
 
     def to_dict(self) -> Dict[str, Any]:
         data = asdict(self)
@@ -376,18 +380,29 @@ class StreamlitGameState:
 
     def update_npc_perception(self, npc_name: str,
                               trust_delta: float = 0.0,
-                              affinity_delta: float = 0.0,
-                              understanding_delta: float = 0.0,
+                              empathy_delta: float = 0.0,
+                              need_delta: float = 0.0,
+                              memory_delta: float = 0.0,
+                              nuance_delta: float = 0.0,
                               emotion: Optional[str] = None) -> None:
-        """Update how an NPC perceives the player."""
+        """Update how an NPC perceives the player via REMNANTS traits.
+        
+        Maps perception changes to canonical REMNANTS traits:
+        - trust_delta → REMNANTS.trust
+        - empathy_delta, need_delta → affinity (how much they like)
+        - memory_delta, nuance_delta → understanding (how well they understand)
+        """
         if npc_name not in self.npc_perception:
             return
 
         npc = self.npc_perception[npc_name]
-        npc.trust = max(-1.0, min(1.0, npc.trust + trust_delta))
-        npc.affinity = max(-1.0, min(1.0, npc.affinity + affinity_delta))
-        npc.understanding = max(-1.0, min(1.0,
-                                npc.understanding + understanding_delta))
+        
+        # Update REMNANTS traits directly (clamped to 0.0-1.0)
+        npc.remnants_profile.trust = max(0.0, min(1.0, npc.remnants_profile.trust + trust_delta))
+        npc.remnants_profile.empathy = max(0.0, min(1.0, npc.remnants_profile.empathy + empathy_delta))
+        npc.remnants_profile.need = max(0.0, min(1.0, npc.remnants_profile.need + need_delta))
+        npc.remnants_profile.memory = max(0.0, min(1.0, npc.remnants_profile.memory + memory_delta))
+        npc.remnants_profile.nuance = max(0.0, min(1.0, npc.remnants_profile.nuance + nuance_delta))
 
         if emotion:
             npc.emotion = emotion
@@ -413,8 +428,8 @@ class StreamlitGameState:
             "timestamp": str(datetime.now())
         })
 
-    def record_choice(self, choice_text: str, tone_effects: Dict[str, float] = None,
-                      npc_resonance: Dict[str, float] = None) -> None:
+    def record_choice(self, choice_text: str, tone_effects: Optional[Dict[str, float]] = None,
+                      npc_resonance: Optional[Dict[str, float]] = None) -> None:
         """Record a choice made by player."""
         self.choices_made.append({
             "text": choice_text,

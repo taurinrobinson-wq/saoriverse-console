@@ -1,6 +1,6 @@
 using UnityEngine;
 using Velinor.Core;
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -12,10 +12,6 @@ namespace StarterAssets
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 2.0f;
-
-		[Tooltip("How fast the character turns to face movement direction")]
-		[Range(0.0f, 0.3f)]
-		public float RotationSmoothTime = 0.12f;
 
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
@@ -33,9 +29,9 @@ namespace StarterAssets
 		[Tooltip("What layers the character uses as ground")]
 		public LayerMask GroundLayers;
 
-		[Header("Cinemachine")]
-		[Tooltip("The follow target set in the Cinemachine Virtual Camera")]
-		public GameObject CinemachineCameraTarget;
+		[Header("First-Person Camera")]
+		[Tooltip("Height of camera from player root")]
+		public float CameraHeight = 0.93f;
 
 		[Tooltip("How far in degrees can you move the camera up")]
 		public float TopClamp = 70.0f;
@@ -43,23 +39,16 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -30.0f;
 
-		[Tooltip("Additional degrees to override the camera")]
-		public float CameraAngleOverride = 0.0f;
-
-		[Tooltip("For locking the camera position on all axis")]
-		public bool LockCameraPosition = false;
-
+		[Tooltip("Mouse look sensitivity")]
 		public Vector2 LookSensitivity = new Vector2(7.5f, 5.0f);
 
-		// cinemachine
-		private float _cinemachineTargetYaw;
-		private float _cinemachineTargetPitch;
+		// camera
+		private float _cameraPitch = 0.0f;
+		private float _cameraYaw = 0.0f;
 
 		// player
 		private float _speed;
 		private float _animationBlend;
-		private float _targetRotation = 0.0f;
-		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
 		private float _gravity = -15.0f;
@@ -91,17 +80,27 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			// For first-person, position camera at player head
+			if (_mainCamera != null)
+			{
+				_mainCamera.transform.SetParent(transform);
+				_mainCamera.transform.localPosition = new Vector3(0, CameraHeight, 0);
+				_mainCamera.transform.localRotation = Quaternion.identity;
+			}
 		}
 
 		private void Start()
 		{
-			_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-
 			_hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 
 			AssignAnimationIDs();
+
+			// Lock and hide cursor
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 		}
 
 		private void Update()
@@ -140,22 +139,27 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
-			if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+			// First-person mouse look
+			if (_input.look.sqrMagnitude >= _threshold)
 			{
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-				_cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * LookSensitivity.x;
-				_cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier * LookSensitivity.y;
+				// Horizontal rotation (turn left/right)
+				_cameraYaw += _input.look.x * deltaTimeMultiplier * LookSensitivity.x;
+
+				// Vertical rotation (look up/down) - applied to camera only
+				_cameraPitch -= _input.look.y * deltaTimeMultiplier * LookSensitivity.y;
+				_cameraPitch = ClampAngle(_cameraPitch, BottomClamp, TopClamp);
 			}
 
-			_cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-			_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+			// Apply rotation to main camera
+			if (_mainCamera != null)
+			{
+				_mainCamera.transform.localRotation = Quaternion.Euler(_cameraPitch, _cameraYaw, 0.0f);
+			}
 
-			CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
-				_cinemachineTargetPitch + CameraAngleOverride,
-				_cinemachineTargetYaw,
-				0.0f
-			);
+			// Rotate player body to face camera direction (for animations and interactions)
+			transform.rotation = Quaternion.Euler(0.0f, _cameraYaw, 0.0f);
 		}
 
 		private void Move()
@@ -188,21 +192,29 @@ namespace StarterAssets
 			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 			if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-			// Normalize input direction
+			// Get movement direction relative to where player is looking (camera forward)
 			Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-			// If there is a move input rotate player when the player is moving
-			if (_input.move != Vector2.zero)
+			// Transform input to world space using camera direction
+			Vector3 moveDirection = Vector3.zero;
+			if (inputDirection.magnitude > 0)
 			{
-				_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-									_mainCamera.transform.eulerAngles.y;
-				float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-					RotationSmoothTime);
+				// Forward relative to camera yaw
+				Vector3 cameraForward = new Vector3(
+					Mathf.Sin(_cameraYaw * Mathf.Deg2Rad),
+					0,
+					Mathf.Cos(_cameraYaw * Mathf.Deg2Rad)
+				).normalized;
 
-				transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+				// Right relative to camera
+				Vector3 cameraRight = new Vector3(
+					Mathf.Cos(_cameraYaw * Mathf.Deg2Rad),
+					0,
+					-Mathf.Sin(_cameraYaw * Mathf.Deg2Rad)
+				).normalized;
+
+				moveDirection = (cameraForward * inputDirection.z + cameraRight * inputDirection.x).normalized;
 			}
-
-			Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
 			// Apply gravity
 			if (Grounded && _verticalVelocity < 0.0f)
@@ -218,7 +230,7 @@ namespace StarterAssets
 			}
 
 			// Move the player
-			_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+			_controller.Move(moveDirection * (_speed * Time.deltaTime) +
 							 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
 			// Update animator
@@ -240,14 +252,18 @@ namespace StarterAssets
 		{
 			if (_input.interact)
 			{
-				Ray ray = new Ray(transform.position + Vector3.up * 0.6f, transform.forward);
-				
-				if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+				// Raycast from camera for first-person interaction
+				if (_mainCamera != null)
 				{
-					IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-					if (interactable != null)
+					Ray ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
+
+					if (Physics.Raycast(ray, out RaycastHit hit, 3f))
 					{
-						interactable.Interact(gameObject);
+						IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+						if (interactable != null)
+						{
+							interactable.Interact(gameObject);
+						}
 					}
 				}
 

@@ -15,7 +15,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from velinor.engine.trait_system import TraitProfiler, TraitType, TraitChoice
+from velinor.engine.trait_system import ToneProfiler, ToneChoice, TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_TRUST
 from velinor.engine.coherence_calculator import CoherenceCalculator
 from velinor.engine.npc_response_engine import NPCResponseEngine
 from velinor.engine.orchestrator import VelinorTwineOrchestrator
@@ -38,7 +38,7 @@ def test_orchestrator_trait_integration():
     )
     
     # Check trait systems exist
-    assert orchestrator.trait_profiler is not None, "TraitProfiler missing"
+    assert orchestrator.trait_profiler is not None, "ToneProfiler missing"
     assert orchestrator.coherence_calculator is not None, "CoherenceCalculator missing"
     assert orchestrator.npc_response_engine is not None, "NPCResponseEngine missing"
     
@@ -71,7 +71,7 @@ def test_trait_recording():
     result = orchestrator.record_trait_choice(
         choice_id="test_choice_1",
         choice_text="Show compassion",
-        primary_trait=TraitType.EMPATHY,
+        primary_tone=TONE_EMPATHY,
         trait_weight=0.3,
         npc_name="Nima",
         scene_name="test",
@@ -88,7 +88,7 @@ def test_trait_recording():
     result = orchestrator.record_trait_choice(
         choice_id="test_choice_2",
         choice_text="Question the premise",
-        primary_trait=TraitType.SKEPTICISM,
+        primary_tone=TONE_OBSERVATION,
         trait_weight=0.3,
         npc_name="Malrik",
         scene_name="test",
@@ -133,22 +133,22 @@ def test_marketplace_branching():
     
     # Create profiler with various coherence levels
     test_cases = [
-        ("High Coherence (100)", 100.0, TraitType.EMPATHY),
-        ("Mixed Coherence (50)", 50.0, TraitType.INTEGRATION),
-        ("Low Coherence (25)", 25.0, TraitType.SKEPTICISM),
+        ("High Coherence (100)", 100.0, TONE_EMPATHY),
+        ("Mixed Coherence (50)", 50.0, TONE_NARRATIVE_PRESENCE),
+        ("Low Coherence (25)", 25.0, TONE_OBSERVATION),
     ]
     
     for test_name, target_coherence, dominant_trait in test_cases:
-        profiler = TraitProfiler("Tester")
+        profiler = ToneProfiler("Tester")
         
         # Build to target coherence
         if target_coherence > 70:
             # High coherence: consistent choices
             for _ in range(5):
-                choice = TraitChoice(
+                choice = ToneChoice(
                     choice_id="test",
                     dialogue_option="Test",
-                    primary_trait=dominant_trait,
+                    primary_tone=dominant_trait,
                     trait_weight=0.3,
                     npc_name="Test",
                     scene_name="Test",
@@ -156,12 +156,12 @@ def test_marketplace_branching():
                 profiler.record_choice(choice)
         elif target_coherence > 40:
             # Mixed: some variation
-            traits = [TraitType.EMPATHY, TraitType.SKEPTICISM, TraitType.INTEGRATION]
+            traits = [TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE]
             for i in range(6):
-                choice = TraitChoice(
+                choice = ToneChoice(
                     choice_id="test",
                     dialogue_option="Test",
-                    primary_trait=traits[i % 3],
+                    primary_tone=traits[i % 3],
                     trait_weight=0.3,
                     npc_name="Test",
                     scene_name="Test",
@@ -169,12 +169,12 @@ def test_marketplace_branching():
                 profiler.record_choice(choice)
         else:
             # Low: all different
-            traits = [TraitType.EMPATHY, TraitType.SKEPTICISM, TraitType.INTEGRATION, TraitType.AWARENESS]
+            traits = [TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_OBSERVATION]
             for i in range(8):
-                choice = TraitChoice(
+                choice = ToneChoice(
                     choice_id="test",
                     dialogue_option="Test",
-                    primary_trait=traits[i % 4],
+                    primary_tone=traits[i % 4],
                     trait_weight=0.3,
                     npc_name="Test",
                     scene_name="Test",
@@ -193,7 +193,7 @@ def test_marketplace_branching():
         # Get branching choices
         choices = scene['get_branching_choices'](
             coherence_level=report.overall_coherence,
-            player_primary_trait=report.primary_pattern,
+            player_primary_tone=report.primary_pattern,
             npc_conflicts=npc_conflicts
         )
         
@@ -217,12 +217,12 @@ def test_coherence_gating():
     scene = create_marketplace_debate_scene()
     
     # High coherence player
-    profiler_high = TraitProfiler("HighCoherence")
+    profiler_high = ToneProfiler("HighCoherence")
     for _ in range(10):
-        choice = TraitChoice(
+        choice = ToneChoice(
             choice_id="test",
             dialogue_option="Test",
-            primary_trait=TraitType.INTEGRATION,
+            primary_tone=TONE_NARRATIVE_PRESENCE,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
@@ -233,13 +233,13 @@ def test_coherence_gating():
     report_high = calc_high.get_coherence_report()
     
     # Low coherence player
-    profiler_low = TraitProfiler("LowCoherence")
-    traits = [TraitType.EMPATHY, TraitType.SKEPTICISM, TraitType.INTEGRATION, TraitType.AWARENESS]
+    profiler_low = ToneProfiler("LowCoherence")
+    traits = [TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_OBSERVATION]
     for i in range(12):
-        choice = TraitChoice(
+        choice = ToneChoice(
             choice_id="test",
             dialogue_option="Test",
-            primary_trait=traits[i % 4],
+            primary_tone=traits[i % 4],
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
@@ -254,13 +254,13 @@ def test_coherence_gating():
     
     choices_high = scene['get_branching_choices'](
         coherence_level=report_high.overall_coherence,
-        player_primary_trait=report_high.primary_pattern,
+        player_primary_tone=report_high.primary_pattern,
         npc_conflicts=npc_conflicts
     )
     
     choices_low = scene['get_branching_choices'](
         coherence_level=report_low.overall_coherence,
-        player_primary_trait=report_low.primary_pattern,
+        player_primary_tone=report_low.primary_pattern,
         npc_conflicts=npc_conflicts
     )
     
@@ -286,11 +286,11 @@ def test_npc_compatibility():
     print("=" * 60)
     
     # Empathetic player
-    profiler_emp = TraitProfiler("Empath")
+    profiler_emp = ToneProfiler("Empath")
     for _ in range(6):
-        choice = TraitChoice(
+        choice = ToneChoice(
             choice_id="test", dialogue_option="Test",
-            primary_trait=TraitType.EMPATHY, trait_weight=0.3,
+            primary_tone=TONE_EMPATHY, trait_weight=0.3,
             npc_name="Test", scene_name="Test",
         )
         profiler_emp.record_choice(choice)
@@ -298,11 +298,11 @@ def test_npc_compatibility():
     engine_emp = NPCResponseEngine(profiler_emp)
     
     # Skeptical player
-    profiler_skep = TraitProfiler("Skeptic")
+    profiler_skep = ToneProfiler("Skeptic")
     for _ in range(6):
-        choice = TraitChoice(
+        choice = ToneChoice(
             choice_id="test", dialogue_option="Test",
-            primary_trait=TraitType.SKEPTICISM, trait_weight=0.3,
+            primary_tone=TONE_OBSERVATION, trait_weight=0.3,
             npc_name="Test", scene_name="Test",
         )
         profiler_skep.record_choice(choice)

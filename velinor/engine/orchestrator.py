@@ -17,7 +17,7 @@ from .core import VelinorEngine, GameSession
 from .npc_system import NPCDialogueSystem
 from velinor.story.story_loader import StoryLoader
 from velinor.story.story_session import StorySession
-from .trait_system import TraitProfiler, TraitChoice, TraitType
+from .tone_system import ToneProfiler, ToneChoice, TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_TRUST
 from .coherence_calculator import CoherenceCalculator
 from .npc_response_engine import NPCResponseEngine
 from .event_timeline import EventTimeline, CollapsePhase, AftermathPath
@@ -92,9 +92,9 @@ class VelinorTwineOrchestrator:
         self.npc_system = npc_system
         
         # Initialize trait system (Phase 1 & 2)
-        self.trait_profiler = TraitProfiler(player_name)
-        self.coherence_calculator = CoherenceCalculator(self.trait_profiler)
-        self.npc_response_engine = NPCResponseEngine(self.trait_profiler)
+        self.tone_profiler = ToneProfiler(player_name)
+        self.coherence_calculator = CoherenceCalculator(self.tone_profiler)
+        self.npc_response_engine = NPCResponseEngine(self.tone_profiler)
         
         # Initialize Phase 3 systems
         self.event_timeline = EventTimeline()
@@ -175,7 +175,7 @@ class VelinorTwineOrchestrator:
         self._log_event('game_started', initial_state)
         
         # Add trait system info to initial state
-        initial_state['trait_profile'] = self.trait_profiler.get_trait_summary()
+        initial_state['tone_profile'] = self.tone_profiler.get_tone_summary()
         
         return self._format_ui_state(initial_state)
     
@@ -249,13 +249,13 @@ class VelinorTwineOrchestrator:
         
         return self._format_ui_state(updated_state)
     
-    def record_trait_choice(
+    def record_tone_choice(
         self,
         choice_id: str,
         choice_text: str,
-        primary_trait: TraitType,
-        trait_weight: float = 0.3,
-        secondary_trait: Optional[TraitType] = None,
+        primary_trait: ToneType,
+        tone_weight: float = 0.3,
+        secondary_trait: Optional[ToneType] = None,
         secondary_weight: float = 0.0,
         npc_name: str = "",
         scene_name: str = "",
@@ -269,11 +269,11 @@ class VelinorTwineOrchestrator:
         Returns:
             Updated trait profile with coherence info
         """
-        trait_choice = TraitChoice(
+        tone_choice = ToneChoice(
             choice_id=choice_id,
             dialogue_option=choice_text,
             primary_trait=primary_trait,
-            trait_weight=trait_weight,
+            tone_weight=tone_weight,
             secondary_trait=secondary_trait,
             secondary_weight=secondary_weight,
             npc_name=npc_name,
@@ -281,13 +281,13 @@ class VelinorTwineOrchestrator:
         )
         
         # Record the choice
-        self.trait_profiler.record_choice(trait_choice)
+        self.tone_profiler.record_choice(tone_choice)
         
         # Get updated coherence report
         coherence_report = self.coherence_calculator.get_coherence_report()
         
         # Log for diagnostics
-        self._log_event('trait_choice', {
+        self._log_event('tone_choice', {
             'choice_id': choice_id,
             'primary_trait': primary_trait.value,
             'npc': npc_name,
@@ -297,7 +297,7 @@ class VelinorTwineOrchestrator:
         })
         
         return {
-            'trait_profile': self.trait_profiler.get_trait_summary(),
+            'tone_profile': self.tone_profiler.get_tone_summary(),
             'coherence_report': {
                 'overall_coherence': coherence_report.overall_coherence,
                 'level': coherence_report.level.name,
@@ -307,11 +307,11 @@ class VelinorTwineOrchestrator:
             }
         }
     
-    def get_trait_status(self) -> Dict[str, Any]:
+    def get_tone_status(self) -> Dict[str, Any]:
         """Get current player trait status for UI display."""
         coherence_report = self.coherence_calculator.get_coherence_report()
         return {
-            'trait_profile': self.trait_profiler.get_trait_summary(),
+            'tone_profile': self.tone_profiler.get_tone_summary(),
             'coherence_report': {
                 'overall_coherence': coherence_report.overall_coherence,
                 'level': coherence_report.level.name,
@@ -851,7 +851,7 @@ class VelinorTwineOrchestrator:
             "rebuild_potential": self.event_timeline.player_interventions.get_rebuild_potential(),
             "player_interventions_count": self.event_timeline.player_interventions.total_intervention_count,
             "coherence": coherence_report.overall_coherence,
-            "primary_trait": self.trait_profiler.get_primary_trait().value if self.trait_profiler.get_primary_trait() else "none"
+            "primary_trait": self.tone_profiler.get_primary_trait().value if self.tone_profiler.get_primary_trait() else "none"
         }
 
     # ============================================================================
@@ -862,7 +862,7 @@ class VelinorTwineOrchestrator:
         """Start the ending sequence after Phase 3 completes"""
         # Set up ending manager with Phase 3 state
         coherence_report = self.coherence_calculator.get_coherence_report()
-        primary_trait = self.trait_profiler.get_primary_trait()
+        primary_trait = self.tone_profiler.get_primary_trait()
         rebuild_advocacy = self.event_timeline.player_interventions.get_rebuild_potential()
         
         self.ending_manager.setup_from_phase3(
@@ -1131,7 +1131,7 @@ class VelinorTwineOrchestrator:
         try:
             # Basic game progress
             status = {
-                "player_name": self.trait_profiler.player_name,
+                "player_name": self.tone_profiler.player_name,
                 "phase": self.event_timeline.current_phase.value if self.event_timeline.current_phase else "unknown",
                 "day": self.event_timeline.current_day,
                 "completed": self.ending_manager.game_completed if self.ending_manager else False,
@@ -1141,7 +1141,7 @@ class VelinorTwineOrchestrator:
             coherence = self.coherence_calculator.get_coherence_report()
             status["coherence_score"] = coherence.overall_coherence
             status["coherence_level"] = coherence.level.value if hasattr(coherence, 'level') else 'UNKNOWN'
-            status["primary_trait"] = self.trait_profiler.get_primary_trait().value
+            status["primary_trait"] = self.tone_profiler.get_primary_trait().value
             
             # Building status
             status["building_stability"] = self.event_timeline.building_status.stability_percent
@@ -1156,7 +1156,7 @@ class VelinorTwineOrchestrator:
         except Exception as e:
             return {
                 "error": str(e),
-                "player_name": self.trait_profiler.player_name if self.trait_profiler else "Unknown",
+                "player_name": self.tone_profiler.player_name if self.tone_profiler else "Unknown",
             }
     
     def process_player_choice(self, choice_index: int) -> Dict[str, Any]:

@@ -18,7 +18,7 @@ An empathetic skeptic is different from a confused person.
 from typing import List, Dict, Tuple, Optional
 from enum import Enum
 from dataclasses import dataclass
-from .trait_system import TraitType, TraitChoice, TraitProfiler, TraitProfile
+from .tone_system import ToneChoice, ToneProfiler, ToneProfile, TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_TRUST
 
 
 class CoherenceLevel(Enum):
@@ -35,11 +35,11 @@ class CoherenceReport:
     """Analysis of player coherence for current state"""
     overall_coherence: float
     level: CoherenceLevel
-    primary_pattern: TraitType
-    secondary_pattern: Optional[TraitType]
+    primary_pattern: ToneType
+    secondary_pattern: Optional[ToneType]
     pattern_strength: float  # How strong is the primary pattern (0-1)
-    last_coherent_choice: Optional[TraitChoice]
-    last_incoherent_choice: Optional[TraitChoice]
+    last_coherent_choice: Optional[ToneChoice]
+    last_incoherent_choice: Optional[ToneChoice]
     contradiction_count: int
     npc_trust_level: str  # How much NPCs trust this player
     dialogue_depth: str  # How deep NPCs go with player
@@ -68,7 +68,7 @@ class CoherenceCalculator:
     3. UI/diagnostics (to show player their pattern)
     """
     
-    def __init__(self, profiler: TraitProfiler):
+    def __init__(self, profiler: ToneProfiler):
         self.profiler = profiler
     
     def calculate_coherence(self) -> float:
@@ -86,21 +86,21 @@ class CoherenceCalculator:
         recent = list(self.profiler.profile.recent_choices)
         
         # Calculate trait consistency in recent choices
-        trait_counts: Dict[TraitType, float] = {
-            trait: 0.0 for trait in TraitType
+        tone_counts: Dict[ToneType, float] = {
+            trait: 0.0 for trait in ToneType
         }
         
         for choice in recent:
-            trait_counts[choice.primary_trait] += choice.trait_weight
+            tone_counts[choice.primary_trait] += choice.tone_weight
             if choice.secondary_trait:
-                trait_counts[choice.secondary_trait] += choice.secondary_weight
+                tone_counts[choice.secondary_trait] += choice.secondary_weight
         
         # Find dominant trait
-        total_weight = sum(trait_counts.values())
+        total_weight = sum(tone_counts.values())
         if total_weight == 0:
             return 50.0
         
-        max_count = max(trait_counts.values())
+        max_count = max(tone_counts.values())
         
         # Calculate how much of the pattern is the dominant trait
         # If one trait is 80%+ of choices = clear pattern = high coherence
@@ -115,7 +115,7 @@ class CoherenceCalculator:
         
         return max(0.0, min(100.0, coherence))
     
-    def get_pattern_analysis(self) -> Tuple[TraitType, Optional[TraitType], float]:
+    def get_pattern_analysis(self) -> Tuple[ToneType, Optional[ToneType], float]:
         """
         Analyze player's trait pattern.
         
@@ -125,19 +125,19 @@ class CoherenceCalculator:
         - Pattern strength (0-1, how pure the pattern is)
         """
         if not self.profiler.profile.recent_choices:
-            return TraitType.INTEGRATION, None, 0.5
+            return TONE_NARRATIVE_PRESENCE, None, 0.5
         
-        trait_counts: Dict[TraitType, float] = {
-            trait: 0.0 for trait in TraitType
+        tone_counts: Dict[ToneType, float] = {
+            trait: 0.0 for trait in ToneType
         }
         
         for choice in self.profiler.profile.recent_choices:
-            trait_counts[choice.primary_trait] += choice.trait_weight
+            tone_counts[choice.primary_trait] += choice.tone_weight
             if choice.secondary_trait:
-                trait_counts[choice.secondary_trait] += choice.secondary_weight
+                tone_counts[choice.secondary_trait] += choice.secondary_weight
         
         sorted_traits = sorted(
-            trait_counts.items(),
+            tone_counts.items(),
             key=lambda x: x[1],
             reverse=True
         )
@@ -148,7 +148,7 @@ class CoherenceCalculator:
         
         total_strength = sum(count for _, count in sorted_traits)
         if total_strength == 0:
-            return TraitType.INTEGRATION, None, 0.5
+            return TONE_NARRATIVE_PRESENCE, None, 0.5
         
         pattern_purity = primary_strength / total_strength
         
@@ -227,7 +227,7 @@ class CoherenceCalculator:
             dialogue_depth=depth,
         )
     
-    def would_be_coherent(self, next_choice: TraitChoice) -> bool:
+    def would_be_coherent(self, next_choice: ToneChoice) -> bool:
         """
         Preview: Is this next choice coherent with the current pattern?
         
@@ -341,7 +341,7 @@ class CoherenceCalculator:
             return 0.3
 
 
-def calculate_dialogue_depth(profiler: TraitProfiler) -> str:
+def calculate_dialogue_depth(profiler: ToneProfiler) -> str:
     """
     Quick helper: Get dialogue depth directly.
     
@@ -352,7 +352,7 @@ def calculate_dialogue_depth(profiler: TraitProfiler) -> str:
     return report.dialogue_depth
 
 
-def should_reveal_secret(profiler: TraitProfiler, secret_type: str) -> bool:
+def should_reveal_secret(profiler: ToneProfiler, secret_type: str) -> bool:
     """
     Decide if NPC should reveal this secret based on player coherence.
     

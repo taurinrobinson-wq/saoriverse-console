@@ -6,8 +6,8 @@ import sys
 sys.path.insert(0, r'd:\saoriverse-console\velinor\engine')
 
 from trait_system import (
-    TraitType, TraitChoice, TraitProfiler, EMPATHY_CHOICE, SKEPTICISM_CHOICE,
-    INTEGRATION_CHOICE, AWARENESS_CHOICE
+    ToneChoice, ToneProfiler,
+    TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_TRUST
 )
 from coherence_calculator import CoherenceCalculator, CoherenceLevel
 from npc_response_engine import NPCResponseEngine
@@ -19,14 +19,14 @@ def test_trait_system():
     print("TEST 1: Basic Trait Tracking")
     print("=" * 60)
     
-    profiler = TraitProfiler("Alyx")
+    profiler = ToneProfiler("Alyx")
     
     # Make a series of empathetic choices
     for i in range(3):
-        choice = TraitChoice(
+        choice = ToneChoice(
             choice_id=f"intro_{i}",
             dialogue_option="Show compassion",
-            primary_trait=TraitType.EMPATHY,
+            primary_tone=TONE_EMPATHY,
             trait_weight=0.3,
             npc_name="Nima",
             scene_name="First Meeting",
@@ -51,46 +51,46 @@ def test_coherence_calculation():
     print("TEST 2: Coherence Calculation")
     print("=" * 60)
     
-    profiler = TraitProfiler("Kai")
+    profiler = ToneProfiler("Kai")
     
     # Build consistent pattern: mostly empathy
     choices = [
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_1",
             dialogue_option="",
-            primary_trait=TraitType.EMPATHY,
+            primary_tone=TONE_EMPATHY,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
         ),
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_2",
             dialogue_option="",
-            primary_trait=TraitType.EMPATHY,
+            primary_tone=TONE_EMPATHY,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
         ),
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_3",
             dialogue_option="",
-            primary_trait=TraitType.EMPATHY,
+            primary_tone=TONE_EMPATHY,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
         ),
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_4",
             dialogue_option="",
-            primary_trait=TraitType.EMPATHY,
+            primary_tone=TONE_EMPATHY,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
         ),
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_5",
             dialogue_option="",
-            primary_trait=TraitType.SKEPTICISM,
+            primary_tone=TONE_OBSERVATION,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
@@ -124,20 +124,20 @@ def test_incoherence():
     print("TEST 3: Incoherence Detection")
     print("=" * 60)
     
-    profiler = TraitProfiler("Rax")
+    profiler = ToneProfiler("Rax")
     
     # Build contradictory pattern
     traits = [
-        TraitType.EMPATHY, TraitType.SKEPTICISM, TraitType.INTEGRATION,
-        TraitType.AWARENESS, TraitType.EMPATHY, TraitType.SKEPTICISM,
-        TraitType.AWARENESS, TraitType.INTEGRATION,
+        TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE,
+        TONE_OBSERVATION, TONE_EMPATHY, TONE_OBSERVATION,
+        TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE,
     ]
     
     for i, trait in enumerate(traits):
-        choice = TraitChoice(
+        choice = ToneChoice(
             choice_id=f"choice_{i}",
             dialogue_option="",
-            primary_trait=trait,
+            primary_tone=trait,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
@@ -164,14 +164,14 @@ def test_npc_response_engine():
     print("TEST 4: NPC Response Engine")
     print("=" * 60)
     
-    profiler = TraitProfiler("Morgan")
+    profiler = ToneProfiler("Morgan")
     
     # Create empathetic player
     for i in range(5):
-        choice = TraitChoice(
+        choice = ToneChoice(
             choice_id=f"empathy_{i}",
             dialogue_option="",
-            primary_trait=TraitType.EMPATHY,
+            primary_tone=TONE_EMPATHY,
             trait_weight=0.3,
             npc_name="Test",
             scene_name="Test",
@@ -200,32 +200,32 @@ def test_trait_choice_presets():
     print("TEST 5: Trait Choice Presets")
     print("=" * 60)
     
-    profiler = TraitProfiler("Sam")
+    profiler = ToneProfiler("Sam")
     
     # Use presets
     choices = [
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_1",
             dialogue_option="Show understanding",
-            primary_trait=TraitType.EMPATHY,
+            primary_tone=TONE_EMPATHY,
             trait_weight=0.3,
             npc_name="Nima",
             scene_name="Marketplace",
         ),
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_2",
             dialogue_option="Ask hard questions",
-            primary_trait=TraitType.SKEPTICISM,
+            primary_tone=TONE_OBSERVATION,
             trait_weight=0.3,
             npc_name="Ravi",
             scene_name="Marketplace",
         ),
-        TraitChoice(
+        ToneChoice(
             choice_id="choice_3",
             dialogue_option="Find common ground",
-            primary_trait=TraitType.INTEGRATION,
+            primary_tone=TONE_NARRATIVE_PRESENCE,
             trait_weight=0.3,
-            secondary_trait=TraitType.AWARENESS,
+            secondary_trait=TONE_OBSERVATION,
             secondary_weight=0.15,
             npc_name="Saori",
             scene_name="Marketplace",

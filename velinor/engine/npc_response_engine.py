@@ -8,7 +8,7 @@ differently to different trait profiles.
 
 Each NPC has:
 - Base personality (how they naturally are)
-- Trait comfort levels (which traits they understand/respect)
+- Tone comfort levels (which traits they understand/respect)
 - Dialogue variants for different player traits
 - State tracking (how they feel about the player right now)
 """
@@ -16,7 +16,7 @@ Each NPC has:
 from typing import Dict, List, Optional, Tuple
 from enum import Enum
 from dataclasses import dataclass, field
-from .trait_system import TraitType, TraitProfiler
+from .tone_system import ToneProfiler, TONE_EMPATHY, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_TRUST
 from .coherence_calculator import CoherenceCalculator, CoherenceLevel
 
 
@@ -32,7 +32,7 @@ class NPCPersonalityType(Enum):
 class DialogueVariant:
     """A dialogue option tailored to a specific player trait"""
     text: str
-    npc_trait_comfort: float  # How much NPC agrees with this trait (0-1)
+    npc_tone_comfort: float  # How much NPC agrees with this trait (0-1)
     relationship_shift: float  # How much this affects relationship (-1 to +1)
     coherence_required: float = 0.0  # Minimum coherence to trigger this variant
 
@@ -52,8 +52,8 @@ class NPCDialogueProfile:
     
     # NPC's own trait preferences
     personality_type: NPCPersonalityType = NPCPersonalityType.INTEGRATOR
-    preferred_traits: List[TraitType] = field(default_factory=list)
-    uncomfortable_traits: List[TraitType] = field(default_factory=list)
+    preferred_traits: List[ToneType] = field(default_factory=list)
+    uncomfortable_traits: List[ToneType] = field(default_factory=list)
 
 
 class NPCResponseEngine:
@@ -63,7 +63,7 @@ class NPCResponseEngine:
     This is called by the main dialogue system to get NPC responses.
     """
     
-    def __init__(self, profiler: TraitProfiler):
+    def __init__(self, profiler: ToneProfiler):
         self.profiler = profiler
         self.calculator = CoherenceCalculator(profiler)
         self.npc_profiles: Dict[str, NPCDialogueProfile] = {}
@@ -113,7 +113,7 @@ class NPCResponseEngine:
     def get_npc_reaction_to_choice(
         self,
         npc_name: str,
-        choice_trait: TraitType,
+        choice_trait: ToneType,
     ) -> str:
         """
         Get NPC's immediate reaction to a player choice.
@@ -134,16 +134,16 @@ class NPCResponseEngine:
         is_coherent = choice_trait == report.primary_pattern
         
         # How does NPC feel about this trait?
-        trait_comfort = self._get_trait_comfort(npc_profile, choice_trait)
+        tone_comfort = self._get_tone_comfort(npc_profile, choice_trait)
         
         # Generate reaction
-        if trait_comfort > 0.8:
+        if tone_comfort > 0.8:
             if is_coherent:
                 return f"{npc_name} nods. 'That's consistent with who you are.'"
             else:
                 return f"{npc_name} looks surprised. 'That's different from what I expected.'"
         
-        elif trait_comfort > 0.5:
+        elif tone_comfort > 0.5:
             if is_coherent:
                 return f"{npc_name} acknowledges what you said."
             else:
@@ -161,7 +161,7 @@ class NPCResponseEngine:
         
         Based on:
         - Player coherence (consistency builds trust)
-        - Trait alignment (NPC respects traits they share)
+        - Tone alignment (NPC respects traits they share)
         - Past interactions
         """
         report = self.calculator.get_coherence_report()
@@ -243,8 +243,8 @@ class NPCResponseEngine:
         self,
         npc_name: str,
         npc_profile: NPCDialogueProfile,
-        player_primary_trait: TraitType,
-        player_secondary_trait: Optional[TraitType],
+        player_primary_trait: ToneType,
+        player_secondary_trait: Optional[ToneType],
         coherence_report,
         dialogue_prompt: str,
         context: Optional[Dict] = None,
@@ -256,7 +256,7 @@ class NPCResponseEngine:
         for actual dialogue generation.
         """
         # Get trait comfort
-        trait_comfort = self._get_trait_comfort(npc_profile, player_primary_trait)
+        tone_comfort = self._get_tone_comfort(npc_profile, player_primary_trait)
         
         # Get dialogue depth
         depth = self.get_npc_dialogue_depth(npc_name)
@@ -268,7 +268,7 @@ class NPCResponseEngine:
         response_descriptor = {
             "npc": npc_name,
             "player_trait": player_primary_trait.value,
-            "trait_comfort": trait_comfort,
+            "tone_comfort": tone_comfort,
             "coherence": coherence_report.overall_coherence,
             "depth": depth,
             "conflict": conflict,
@@ -284,10 +284,10 @@ class NPCResponseEngine:
         else:
             return f"{npc_name} listens carefully."
     
-    def _get_trait_comfort(
+    def _get_tone_comfort(
         self,
         npc_profile: NPCDialogueProfile,
-        trait: TraitType
+        trait: ToneType
     ) -> float:
         """
         How comfortable is this NPC with this trait?
@@ -313,7 +313,7 @@ class NPCResponseEngine:
         # Saori - Integrator, values synthesis and awareness
         saori_profile = NPCDialogueProfile(
             personality_type=NPCPersonalityType.INTEGRATOR,
-            preferred_traits=[TraitType.INTEGRATION, TraitType.AWARENESS],
+            preferred_traits=[TONE_NARRATIVE_PRESENCE, TONE_OBSERVATION],
             uncomfortable_traits=[],
         )
         self.npc_profiles["Saori"] = saori_profile
@@ -321,7 +321,7 @@ class NPCResponseEngine:
         # Ravi - Skeptical, values accountability
         ravi_profile = NPCDialogueProfile(
             personality_type=NPCPersonalityType.SKEPTICAL,
-            preferred_traits=[TraitType.SKEPTICISM, TraitType.AWARENESS],
+            preferred_traits=[TONE_OBSERVATION, TONE_OBSERVATION],
             uncomfortable_traits=[],
         )
         self.npc_profiles["Ravi"] = ravi_profile
@@ -329,7 +329,7 @@ class NPCResponseEngine:
         # Nima - Empathetic, values understanding
         nima_profile = NPCDialogueProfile(
             personality_type=NPCPersonalityType.EMPATHETIC,
-            preferred_traits=[TraitType.EMPATHY, TraitType.INTEGRATION],
+            preferred_traits=[TONE_EMPATHY, TONE_NARRATIVE_PRESENCE],
             uncomfortable_traits=[],
         )
         self.npc_profiles["Nima"] = nima_profile
@@ -337,15 +337,15 @@ class NPCResponseEngine:
         # Malrik - Mixed (merchant, pragmatist)
         malrik_profile = NPCDialogueProfile(
             personality_type=NPCPersonalityType.SKEPTICAL,
-            preferred_traits=[TraitType.SKEPTICISM, TraitType.AWARENESS],
-            uncomfortable_traits=[TraitType.EMPATHY],  # Softness threatens his worldview
+            preferred_traits=[TONE_OBSERVATION, TONE_OBSERVATION],
+            uncomfortable_traits=[TONE_EMPATHY],  # Softness threatens his worldview
         )
         self.npc_profiles["Malrik"] = malrik_profile
         
         # Elenya - Empathetic with integration tendency
         elenya_profile = NPCDialogueProfile(
             personality_type=NPCPersonalityType.EMPATHETIC,
-            preferred_traits=[TraitType.EMPATHY, TraitType.INTEGRATION],
+            preferred_traits=[TONE_EMPATHY, TONE_NARRATIVE_PRESENCE],
             uncomfortable_traits=[],
         )
         self.npc_profiles["Elenya"] = elenya_profile
@@ -353,16 +353,16 @@ class NPCResponseEngine:
         # Coren - Aware, pattern-seeker
         coren_profile = NPCDialogueProfile(
             personality_type=NPCPersonalityType.AWARE,
-            preferred_traits=[TraitType.AWARENESS, TraitType.INTEGRATION],
+            preferred_traits=[TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE],
             uncomfortable_traits=[],
         )
         self.npc_profiles["Coren"] = coren_profile
 
 
 def get_npc_response_for_trait(
-    profiler: TraitProfiler,
+    profiler: ToneProfiler,
     npc_name: str,
-    trait: TraitType,
+    trait: ToneType,
 ) -> str:
     """
     Quick helper: Get NPC response to specific trait.
@@ -373,7 +373,7 @@ def get_npc_response_for_trait(
     return engine.get_npc_reaction_to_choice(npc_name, trait)
 
 
-def should_npc_reveal_hidden_goal(profiler: TraitProfiler, npc_name: str) -> bool:
+def should_npc_reveal_hidden_goal(profiler: ToneProfiler, npc_name: str) -> bool:
     """
     Should NPC reveal their true agenda to player?
     

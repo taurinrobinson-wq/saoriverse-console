@@ -1,49 +1,69 @@
 """
-Trait System for Velinor: Remnants of the Tone
+TONE Tracking System for Velinor: Remnants of the Tone
 
-This module implements the emotional OS trait tracking and pattern recognition system.
+This module implements player TONE stance tracking and REMNANTS effect calculation.
 
 Core principle: The game responds to PATTERNS of player choices, not individual decisions.
-Players have four foundational traits that form through their choices across the game.
+Players develop TONE stances through their choices across the game:
+- Trust: Trusting others, seeking connection
+- Observation: Watching, understanding, pattern recognition
+- Narrative Presence: Assertiveness, being seen, commanding space
+- Empathy: Responding to emotional states, choosing comfort
 
-Traits:
-- Empathy (0-100): Responds to emotional states, chooses comfort over judgment
-- Skepticism (0-100): Questions assumptions, holds others accountable, maintains critical distance
-- Integration (0-100): Holds multiple truths simultaneously, advocates for synthesis
-- Awareness (0-100): Sees subtext, notices body language, recognizes patterns
+Each choice affects both player TONE and NPC REMNANTS traits via canonical mapping:
+- Trust (T) → +Trust, +Resolve; -Skepticism (NPC)
+- Observation (O) → +Nuance, +Memory; -Authority (NPC)
+- Narrative Presence (N) → +Authority, +Resolve; -Nuance (NPC)
+- Empathy (E) → +Empathy, +Need; -Resolve (NPC)
 
-Each trait interaction creates a "weighted history" of the last 5-10 choices.
-NPC behavior responds to the PATTERN (coherent empathist? contradictory skeptic? synthesis advocate?)
-not to individual choices.
-
-Coherence measures the consistency between player's declared traits and actual behavior.
+Coherence measures consistency: Do NPC perceptions match player's actual behavior?
 High coherence = world trusts the player, reveals deeper dialogue
 Low coherence = world is suspicious, keeps distance
 """
 
-from enum import Enum
 from dataclasses import dataclass, field
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 from collections import deque
 import json
 
 
-class TraitType(Enum):
-    """Four foundational traits in Velinor's emotional OS"""
-    EMPATHY = "empathy"
-    SKEPTICISM = "skepticism"
-    INTEGRATION = "integration"
-    AWARENESS = "awareness"
+# TONE Stances (canonical player stats)
+TONE_TRUST = "trust"
+TONE_OBSERVATION = "observation"
+TONE_NARRATIVE_PRESENCE = "narrative_presence"
+TONE_EMPATHY = "empathy"
+
+ALL_TONES = [TONE_TRUST, TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE, TONE_EMPATHY]
+
+# TONE → REMNANTS Mapping (canonical effect rules)
+TONE_TO_REMNANTS_MAPPING = {
+    TONE_TRUST: {
+        "positive": ["trust", "resolve"],
+        "negative": ["skepticism"]
+    },
+    TONE_OBSERVATION: {
+        "positive": ["nuance", "memory"],
+        "negative": ["authority"]
+    },
+    TONE_NARRATIVE_PRESENCE: {
+        "positive": ["authority", "resolve"],
+        "negative": ["nuance"]
+    },
+    TONE_EMPATHY: {
+        "positive": ["empathy", "need"],
+        "negative": ["resolve"]
+    }
+}
 
 
 @dataclass
-class TraitChoice:
-    """A single player choice tagged with trait implications"""
+class ToneChoice:
+    """A single player choice tagged with TONE implications"""
     choice_id: str
     dialogue_option: str
-    primary_trait: TraitType
-    trait_weight: float  # How strongly this choice maps to the trait (0.0-1.0)
-    secondary_trait: Optional[TraitType] = None
+    primary_tone: str  # One of: trust, observation, narrative_presence, empathy
+    tone_weight: float  # How strongly this choice maps to the TONE (0.0-1.0)
+    secondary_tone: Optional[str] = None
     secondary_weight: float = 0.0
     npc_name: str = ""
     scene_name: str = ""
@@ -51,125 +71,133 @@ class TraitChoice:
 
 
 @dataclass
-class TraitProfile:
+class ToneProfile:
     """
-    Current player trait state with history tracking.
+    Current player TONE state with history tracking.
     
-    Traits are on a 0-100 scale, but more importantly we track PATTERNS.
-    A player with high Empathy that makes skeptical choices breaks coherence.
+    TONE stats are on a 0-100 scale, but more importantly we track PATTERNS.
+    A player with high Trust that makes skeptical choices breaks coherence.
     """
+    trust: float = 50.0
+    observation: float = 50.0
+    narrative_presence: float = 50.0
     empathy: float = 50.0
-    skepticism: float = 50.0
-    integration: float = 50.0
-    awareness: float = 50.0
     
-    # Coherence tracks consistency between traits and choices
+    # Coherence tracks consistency between TONE and choices
     coherence: float = 100.0
     
     # History of recent choices for pattern matching
     recent_choices: deque = field(default_factory=lambda: deque(maxlen=10))
     
-    # For tracking secondary traits that emerge during gameplay
-    secondary_traits: Dict[str, float] = field(default_factory=dict)
-    
     # Track which NPCs see player as what
     npc_perceptions: Dict[str, str] = field(default_factory=dict)
 
 
-class TraitProfiler:
+class ToneProfiler:
     """
-    Tracks player traits through choices and pattern recognition.
+    Tracks player TONE through choices and pattern recognition.
     
     This is the core system that drives NPC responses and ending eligibility.
+    Maintains TONE scores and calculates REMNANTS effects on NPCs.
     """
     
     def __init__(self, player_name: str = "Player"):
         self.player_name = player_name
-        self.profile = TraitProfile()
-        self.all_choices: List[TraitChoice] = []
+        self.profile = ToneProfile()
+        self.all_choices: List[ToneChoice] = []
     
-    def record_choice(self, trait_choice: TraitChoice) -> None:
+    def record_choice(self, tone_choice: ToneChoice) -> None:
         """
-        Record a player choice and update trait profile.
+        Record a player choice and update TONE profile.
         
         This doesn't just add raw values. It:
-        1. Updates the trait value
+        1. Updates the TONE value
         2. Records the choice in history
         3. Calculates coherence impact
-        4. Potentially shifts NPC perceptions
+        4. Determines NPC REMNANTS effects via canonical mapping
         """
         # Record the choice
-        self.all_choices.append(trait_choice)
-        self.profile.recent_choices.append(trait_choice)
+        self.all_choices.append(tone_choice)
+        self.profile.recent_choices.append(tone_choice)
         
-        # Update primary trait
-        trait_value = self._get_trait_value(trait_choice.primary_trait)
-        new_value = trait_value + (trait_choice.trait_weight * 10.0)
-        self._set_trait_value(trait_choice.primary_trait, new_value)
+        # Update primary TONE
+        tone_value = self._get_tone_value(tone_choice.primary_tone)
+        new_value = tone_value + (tone_choice.tone_weight * 10.0)
+        self._set_tone_value(tone_choice.primary_tone, new_value)
         
-        # Update secondary trait if present
-        if trait_choice.secondary_trait:
-            secondary_value = self._get_trait_value(trait_choice.secondary_trait)
-            new_secondary = secondary_value + (trait_choice.secondary_weight * 10.0)
-            self._set_trait_value(trait_choice.secondary_trait, new_secondary)
+        # Update secondary TONE if present
+        if tone_choice.secondary_tone:
+            secondary_value = self._get_tone_value(tone_choice.secondary_tone)
+            new_secondary = secondary_value + (tone_choice.secondary_weight * 10.0)
+            self._set_tone_value(tone_choice.secondary_tone, new_secondary)
         
         # Update coherence
-        self._update_coherence(trait_choice)
+        self._update_coherence(tone_choice)
     
-    def get_primary_trait(self) -> TraitType:
+    def get_primary_tone(self) -> str:
         """
-        Determine the player's dominant trait based on recent pattern.
+        Determine the player's dominant TONE based on recent pattern.
         
-        Returns the trait with highest value among recent choices.
-        Not based on current trait scores, but on what the player HAS BEEN DOING lately.
+        Returns the TONE with highest weight in recent choices.
+        Not based on current TONE scores, but on what the player HAS BEEN DOING lately.
         """
-        trait_counts = {trait: 0.0 for trait in TraitType}
+        tone_weights = {tone: 0.0 for tone in ALL_TONES}
         
         for choice in self.profile.recent_choices:
-            trait_counts[choice.primary_trait] += choice.trait_weight
-            if choice.secondary_trait:
-                trait_counts[choice.secondary_trait] += choice.secondary_weight
+            tone_weights[choice.primary_tone] += choice.tone_weight
+            if choice.secondary_tone:
+                tone_weights[choice.secondary_tone] += choice.secondary_weight
         
-        if not trait_counts or max(trait_counts.values()) == 0:
-            return TraitType.INTEGRATION  # Neutral default
+        if not tone_weights or max(tone_weights.values()) == 0:
+            return TONE_OBSERVATION  # Neutral default
         
-        return max(trait_counts, key=trait_counts.get)
+        return max(tone_weights, key=lambda t: tone_weights[t])
     
-    def get_trait_pattern(self) -> Dict[str, float]:
+    def get_tone_pattern(self) -> Dict[str, float]:
         """
-        Return the pattern of traits in recent choices (last 5-10 actions).
+        Return the pattern of TONEs in recent choices (last 5-10 actions).
         
         This is what NPCs actually respond to - the PATTERN not the absolute values.
         """
         if not self.profile.recent_choices:
-            return {trait.value: 0.5 for trait in TraitType}
+            return {tone: 0.25 for tone in ALL_TONES}
         
-        pattern = {trait.value: 0.0 for trait in TraitType}
+        pattern = {tone: 0.0 for tone in ALL_TONES}
         choice_count = len(self.profile.recent_choices)
         
         for choice in self.profile.recent_choices:
-            pattern[choice.primary_trait.value] += choice.trait_weight / choice_count
-            if choice.secondary_trait:
-                pattern[choice.secondary_trait.value] += (
+            pattern[choice.primary_tone] += choice.tone_weight / choice_count
+            if choice.secondary_tone:
+                pattern[choice.secondary_tone] += (
                     choice.secondary_weight / choice_count
                 )
         
         # Normalize to 0-1 range
         max_pattern = max(pattern.values()) if pattern else 1.0
         if max_pattern > 0:
-            for trait in pattern:
-                pattern[trait] = pattern[trait] / max_pattern
+            for tone in pattern:
+                pattern[tone] = pattern[tone] / max_pattern
         
         return pattern
     
+    def get_tone_remnants_effects(self, tone: str) -> Tuple[List[str], List[str]]:
+        """
+        Get the REMNANTS effects for a given TONE choice.
+        
+        Returns tuple of (positive_effects, negative_effects) on NPC traits.
+        """
+        if tone in TONE_TO_REMNANTS_MAPPING:
+            mapping = TONE_TO_REMNANTS_MAPPING[tone]
+            return mapping["positive"], mapping["negative"]
+        return [], []
+    
     def is_coherent(self) -> bool:
         """
-        Is the player's behavior coherent with their pattern?
+        Is the player's behavior coherent with their TONE pattern?
         
         Example:
-        - High empathy player keeps making empathetic choices → Coherent
-        - High skepticism player keeps making skeptical choices → Coherent
-        - High empathy player suddenly makes brutal skeptical choice → Incoherent
+        - High Trust player keeps making trusting choices → Coherent
+        - High Trust player suddenly makes skeptical choice → Incoherent
         
         Incoherence isn't bad - it's just noticed by the world.
         """
@@ -195,59 +223,42 @@ class TraitProfiler:
         May differ from overall pattern based on NPC's own biases and what they've witnessed.
         """
         if npc_name not in self.profile.npc_perceptions:
-            # Default: describe player as their primary trait
-            return f"someone_{self.get_primary_trait().value}"
+            # Default: describe player as their primary TONE
+            return f"someone_{self.get_primary_tone()}"
         
         return self.profile.npc_perceptions[npc_name]
     
-    def get_trait_summary(self) -> Dict[str, any]:
-        """
-        Return full trait state for UI/dialogue system.
-        
-        This is what the dialogue engine consults when deciding NPC responses.
-        """
-        return {
-            "player_name": self.player_name,
-            "primary_trait": self.get_primary_trait().value,
-            "trait_pattern": self.get_trait_pattern(),
-            "trait_scores": {
-                "empathy": self.profile.empathy,
-                "skepticism": self.profile.skepticism,
-                "integration": self.profile.integration,
-                "awareness": self.profile.awareness,
-            },
-            "coherence": self.profile.coherence,
-            "coherence_status": self.get_coherence_status(),
-            "choices_made": len(self.all_choices),
-            "npc_perceptions": self.profile.npc_perceptions,
-        }
+    def set_npc_perception(self, npc_name: str, perception: str) -> None:
+        """Record what an NPC believes about the player"""
+        self.profile.npc_perceptions[npc_name] = perception
     
     # ========== Private Methods ==========
     
-    def _get_trait_value(self, trait: TraitType) -> float:
-        """Get current value of a trait"""
-        if trait == TraitType.EMPATHY:
+    def _get_tone_value(self, tone: str) -> float:
+        """Get current value of a TONE"""
+        if tone == TONE_TRUST:
+            return self.profile.trust
+        elif tone == TONE_OBSERVATION:
+            return self.profile.observation
+        elif tone == TONE_NARRATIVE_PRESENCE:
+            return self.profile.narrative_presence
+        elif tone == TONE_EMPATHY:
             return self.profile.empathy
-        elif trait == TraitType.SKEPTICISM:
-            return self.profile.skepticism
-        elif trait == TraitType.INTEGRATION:
-            return self.profile.integration
-        elif trait == TraitType.AWARENESS:
-            return self.profile.awareness
+        return 50.0
     
-    def _set_trait_value(self, trait: TraitType, value: float) -> None:
-        """Set trait value (clamped to 0-100)"""
+    def _set_tone_value(self, tone: str, value: float) -> None:
+        """Set TONE value (clamped to 0-100)"""
         value = max(0.0, min(100.0, value))
-        if trait == TraitType.EMPATHY:
+        if tone == TONE_TRUST:
+            self.profile.trust = value
+        elif tone == TONE_OBSERVATION:
+            self.profile.observation = value
+        elif tone == TONE_NARRATIVE_PRESENCE:
+            self.profile.narrative_presence = value
+        elif tone == TONE_EMPATHY:
             self.profile.empathy = value
-        elif trait == TraitType.SKEPTICISM:
-            self.profile.skepticism = value
-        elif trait == TraitType.INTEGRATION:
-            self.profile.integration = value
-        elif trait == TraitType.AWARENESS:
-            self.profile.awareness = value
     
-    def _update_coherence(self, new_choice: TraitChoice) -> None:
+    def _update_coherence(self, new_choice: ToneChoice) -> None:
         """
         Update coherence based on whether this choice matches recent pattern.
         
@@ -258,18 +269,18 @@ class TraitProfiler:
             return  # Need at least 2 choices to establish pattern
         
         # Get pattern before this choice
-        pattern = self.get_trait_pattern()
+        pattern = self.get_tone_pattern()
         
         # Does this choice align with dominant pattern?
-        primary_trait_value = pattern.get(new_choice.primary_trait.value, 0.0)
+        primary_tone_value = pattern.get(new_choice.primary_tone, 0.0)
         
-        if primary_trait_value > 0.6:
+        if primary_tone_value > 0.6:
             # Strong alignment with recent pattern
             self.profile.coherence = min(
                 100.0,
                 self.profile.coherence + (new_choice.coherence_bonus or 2.0)
             )
-        elif primary_trait_value < 0.4:
+        elif primary_tone_value < 0.4:
             # Contradicts recent pattern
             self.profile.coherence = max(
                 0.0,
@@ -278,74 +289,47 @@ class TraitProfiler:
         # else: neutral, no change
     
     def to_dict(self) -> dict:
-        """Serialize trait profile to dict for saving"""
+        """Serialize TONE profile to dict for saving"""
         return {
             "player_name": self.player_name,
             "profile": {
+                "trust": self.profile.trust,
+                "observation": self.profile.observation,
+                "narrative_presence": self.profile.narrative_presence,
                 "empathy": self.profile.empathy,
-                "skepticism": self.profile.skepticism,
-                "integration": self.profile.integration,
-                "awareness": self.profile.awareness,
                 "coherence": self.profile.coherence,
             },
             "choices_count": len(self.all_choices),
             "recent_choices": [
                 {
                     "choice_id": c.choice_id,
-                    "primary_trait": c.primary_trait.value,
+                    "primary_tone": c.primary_tone,
                     "npc": c.npc_name,
                     "scene": c.scene_name,
                 }
                 for c in list(self.profile.recent_choices)
-            ]
+            ],
+            "npc_perceptions": self.profile.npc_perceptions,
         }
     
-    @classmethod
-    def from_dict(cls, data: dict) -> "TraitProfiler":
-        """Deserialize trait profile from dict (for loading)"""
-        profiler = cls(player_name=data.get("player_name", "Player"))
-        profile_data = data.get("profile", {})
-        profiler.profile.empathy = profile_data.get("empathy", 50.0)
-        profiler.profile.skepticism = profile_data.get("skepticism", 50.0)
-        profiler.profile.integration = profile_data.get("integration", 50.0)
-        profiler.profile.awareness = profile_data.get("awareness", 50.0)
-        profiler.profile.coherence = profile_data.get("coherence", 100.0)
-        return profiler
-
-
-# ========== Trait Choice Presets ==========
-# Common trait choices for dialogue options throughout the game
-
-EMPATHY_CHOICE = TraitChoice(
-    choice_id="",  # Set by caller
-    dialogue_option="",  # Set by caller
-    primary_trait=TraitType.EMPATHY,
-    trait_weight=0.3,
-    coherence_bonus=1.0,
-)
-
-SKEPTICISM_CHOICE = TraitChoice(
-    choice_id="",
-    dialogue_option="",
-    primary_trait=TraitType.SKEPTICISM,
-    trait_weight=0.3,
-    coherence_bonus=1.0,
-)
-
-INTEGRATION_CHOICE = TraitChoice(
-    choice_id="",
-    dialogue_option="",
-    primary_trait=TraitType.INTEGRATION,
-    trait_weight=0.3,
-    secondary_trait=TraitType.AWARENESS,
-    secondary_weight=0.15,
-    coherence_bonus=2.0,  # Synthesis is harder, more bonus when consistent
-)
-
-AWARENESS_CHOICE = TraitChoice(
-    choice_id="",
-    dialogue_option="",
-    primary_trait=TraitType.AWARENESS,
-    trait_weight=0.25,
-    coherence_bonus=1.0,
-)
+    def get_tone_summary(self) -> Dict[str, Any]:
+        """
+        Return full TONE state for UI/dialogue system.
+        
+        This is what the dialogue engine consults when deciding NPC responses.
+        """
+        return {
+            "player_name": self.player_name,
+            "primary_tone": self.get_primary_tone(),
+            "tone_pattern": self.get_tone_pattern(),
+            "tone_scores": {
+                "trust": self.profile.trust,
+                "observation": self.profile.observation,
+                "narrative_presence": self.profile.narrative_presence,
+                "empathy": self.profile.empathy,
+            },
+            "coherence": self.profile.coherence,
+            "coherence_status": self.get_coherence_status(),
+            "choices_made": len(self.all_choices),
+            "npc_perceptions": self.profile.npc_perceptions,
+        }

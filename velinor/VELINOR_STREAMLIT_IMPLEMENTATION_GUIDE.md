@@ -144,11 +144,17 @@ When player takes action:
 update_npc_perception(
     npc_name="Ravi",
     trust_delta=+0.2,
-    affinity_delta=+0.1,
-    understanding_delta=+0.15,
+    empathy_delta=+0.1,
+    need_delta=+0.05,
+    memory_delta=+0.15,
     emotion="warm"
 )
 ```
+
+Maps to REMNANTS traits:
+- trust_delta → NPC.remnants_profile.trust
+- empathy_delta, need_delta → NPC affinity perception
+- memory_delta → NPC understanding perception
 
 ---
 

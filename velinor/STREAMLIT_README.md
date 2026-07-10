@@ -9,7 +9,7 @@ game with:
 - **REMNANTS System** - Deep emotional trait tracking (Truth, Deception, Competence, etc.)
 - **Glyph Collection** - Unlock glyphs through story beats, use them to unlock chambers
 - **Chamber Mechanics** - Simple click-based fight loop, obtain glyphs
-- **NPC Perception** - Track how each NPC perceives player trust/affinity/understanding
+- **NPC Perception** - Track how each NPC perceives player REMNANTS traits
 - **Skills & Dialogue Banks** - Unlockable skills gate special dialogue branches
 
 ## Quick Start

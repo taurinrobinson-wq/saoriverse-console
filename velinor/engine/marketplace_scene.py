@@ -3,7 +3,7 @@ Marketplace Debate Scene - Phase 2 Implementation
 
 This scene implements the first major branching dialogue from the narrative spine.
 It demonstrates:
-- Trait-based dialogue branching (empathy, skepticism, integration, awareness paths)
+- TONE-based dialogue branching (trust, observation, narrative_presence, empathy paths)
 - Coherence-affected dialogue depth
 - NPC personality compatibility
 - Multiple valid player approaches
@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import List, Dict, Optional, Callable
 from enum import Enum
 
-from .trait_system import TraitType, TraitChoice
+from .trait_system import ToneChoice, TONE_OBSERVATION, TONE_EMPATHY, TONE_TRUST, TONE_NARRATIVE_PRESENCE
 from .coherence_calculator import CoherenceCalculator
 from .scene_manager import SceneModule, SceneState, DialogueOption, SceneAssets
 
@@ -69,7 +69,7 @@ class MarketplaceDebateScene:
     def get_entry_point_choices(self) -> List[Dict]:
         """
         Initial choices for how player approaches the scene.
-        These establish the frame but don't yet commit to a trait.
+        These establish the frame but don't yet commit to a TONE.
         """
         return [
             {
@@ -77,23 +77,23 @@ class MarketplaceDebateScene:
                 'choice_id': 'entry_direct_coren',
                 'npc_response': 'Coren looks relieved to see someone new. "Maybe you can help me make sense of this."',
                 'next_phase': MarketplaceDebatePhase.SETUP,
-                'trait_choice': None,  # Entry doesn't commit trait
+                'tone_choice': None,  # Entry doesn't commit TONE
             },
             {
                 'text': 'Hang back and listen - observe their positions first',
                 'choice_id': 'entry_observe',
                 'npc_response': 'From a distance, you hear fragments. Malrik talks about "preservation." Elenya speaks of "meaning."',
                 'next_phase': MarketplaceDebatePhase.SETUP,
-                'trait_choice': TraitType.AWARENESS,  # Observing builds awareness
-                'trait_weight': 0.2,
+                'tone_choice': TONE_OBSERVATION,  # Observing builds observation
+                'tone_weight': 0.2,
             },
             {
                 'text': 'Ask a marketplace NPC what this is about - get context',
                 'choice_id': 'entry_ask_context',
                 'npc_response': 'A merchant laughs. "They\'ve been at it for months. Archive space. Malrik wants his records organized. Elenya wants mystical practice. Coren thinks they can share. I think they\'re wasting breath."',
                 'next_phase': MarketplaceDebatePhase.SETUP,
-                'trait_choice': TraitType.SKEPTICISM,  # Questioning builds skepticism
-                'trait_weight': 0.15,
+                'tone_choice': TONE_EMPATHY,  # Questioning builds empathy-based understanding
+                'tone_weight': 0.15,
             },
         ]
     
@@ -126,7 +126,7 @@ class MarketplaceDebateScene:
     def get_branching_choices(
         self,
         coherence_level: float,
-        player_primary_trait: TraitType,
+        player_primary_tone: str,
         npc_conflicts: Dict[str, str]
     ) -> List[Dict]:
         """
@@ -145,8 +145,8 @@ class MarketplaceDebateScene:
         choices.append({
             'text': 'Support Coren\'s integration vision: "Why can\'t it be both?"',
             'choice_id': 'branch_empathy_synthesis',
-            'primary_trait': TraitType.EMPATHY,
-            'secondary_trait': TraitType.INTEGRATION,
+            'primary_trait': TONE_EMPATHY,
+            'secondary_trait': TONE_NARRATIVE_PRESENCE,
             'trait_weight': 0.3,
             'secondary_weight': 0.2,
             'npc_name': 'Coren',
@@ -160,7 +160,7 @@ class MarketplaceDebateScene:
         choices.append({
             'text': 'Challenge both sides: "This is a resource dispute, not philosophy."',
             'choice_id': 'branch_skepticism_practical',
-            'primary_trait': TraitType.SKEPTICISM,
+            'primary_trait': TONE_OBSERVATION,
             'trait_weight': 0.3,
             'npc_name': 'Malrik',
             'scene_name': 'marketplace_debate',
@@ -174,8 +174,8 @@ class MarketplaceDebateScene:
             choices.append({
                 'text': 'Name the underlying emotion: "You care about each other. That\'s why this hurts."',
                 'choice_id': 'branch_synthesis_emotional',
-                'primary_trait': TraitType.INTEGRATION,
-                'secondary_trait': TraitType.AWARENESS,
+                'primary_trait': TONE_NARRATIVE_PRESENCE,
+                'secondary_trait': TONE_OBSERVATION,
                 'trait_weight': 0.4,
                 'secondary_weight': 0.3,
                 'npc_name': 'Elenya',
@@ -191,8 +191,8 @@ class MarketplaceDebateScene:
             choices.append({
                 'text': 'Ask probing questions: "What\'s really at stake here?"',
                 'choice_id': 'branch_awareness_questioning',
-                'primary_trait': TraitType.AWARENESS,
-                'secondary_trait': TraitType.SKEPTICISM,
+                'primary_trait': TONE_OBSERVATION,
+                'secondary_trait': TONE_OBSERVATION,
                 'trait_weight': 0.35,
                 'secondary_weight': 0.2,
                 'npc_name': 'Coren',
@@ -203,11 +203,11 @@ class MarketplaceDebateScene:
         
         # ========== EMPATHY WITH MALRIK PATH ==========
         # If player is empathetic and Malrik sees them as ally
-        if npc_conflicts.get('Malrik') == 'ally' or player_primary_trait == TraitType.EMPATHY:
+        if npc_conflicts.get('Malrik') == 'ally' or player_primary_tone == TONE_EMPATHY:
             choices.append({
                 'text': 'Support Malrik\'s concern: "Preservation matters. It\'s fragile."',
                 'choice_id': 'branch_empathy_malrik',
-                'primary_trait': TraitType.EMPATHY,
+                'primary_trait': TONE_EMPATHY,
                 'trait_weight': 0.25,
                 'npc_name': 'Malrik',
                 'scene_name': 'marketplace_debate',
@@ -217,11 +217,11 @@ class MarketplaceDebateScene:
         
         # ========== EMPATHY WITH ELENYA PATH ==========
         # If player is empathetic and Elenya sees them as ally
-        if npc_conflicts.get('Elenya') == 'ally' or player_primary_trait == TraitType.EMPATHY:
+        if npc_conflicts.get('Elenya') == 'ally' or player_primary_tone == TONE_EMPATHY:
             choices.append({
                 'text': 'Support Elenya\'s concern: "Living tradition matters. So does connection."',
                 'choice_id': 'branch_empathy_elenya',
-                'primary_trait': TraitType.EMPATHY,
+                'primary_trait': TONE_EMPATHY,
                 'trait_weight': 0.25,
                 'npc_name': 'Elenya',
                 'scene_name': 'marketplace_debate',
