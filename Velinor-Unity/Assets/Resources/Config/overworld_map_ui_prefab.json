@@ -1,0 +1,206 @@
+{
+  "prefab_name": "OverworldMapUI",
+  "canvas_settings": {
+    "render_mode": "ScreenSpaceOverlay",
+    "scale_mode": "ScaleWithScreenSize"
+  },
+  "map_container": {
+    "image_source": "OverworldMap_Labeled.png",
+    "aspect_ratio": "1:1",
+    "size": "800x800"
+  },
+  "region_buttons": [
+    {
+      "region_id": "archive_district",
+      "button_name": "Btn_archive_district",
+      "position": {
+        "x": 203.7037037037037,
+        "y": 33.33333333333333
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_archive_district",
+        "on_click": "FastTravelTo_archive_district"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    },
+    {
+      "region_id": "shrine_ridge",
+      "button_name": "Btn_shrine_ridge",
+      "position": {
+        "x": 101.85185185185185,
+        "y": 22.22222222222222
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_shrine_ridge",
+        "on_click": "FastTravelTo_shrine_ridge"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    },
+    {
+      "region_id": "market_basin",
+      "button_name": "Btn_market_basin",
+      "position": {
+        "x": 88.88888888888889,
+        "y": 70.37037037037037
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_market_basin",
+        "on_click": "FastTravelTo_market_basin"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    },
+    {
+      "region_id": "desert_expanse",
+      "button_name": "Btn_desert_expanse",
+      "position": {
+        "x": 51.85185185185185,
+        "y": 70.37037037037037
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_desert_expanse",
+        "on_click": "FastTravelTo_desert_expanse"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    },
+    {
+      "region_id": "harbor_lowlands",
+      "button_name": "Btn_harbor_lowlands",
+      "position": {
+        "x": 194.44444444444443,
+        "y": 92.59259259259258
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_harbor_lowlands",
+        "on_click": "FastTravelTo_harbor_lowlands"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    },
+    {
+      "region_id": "swamp_lowlands",
+      "button_name": "Btn_swamp_lowlands",
+      "position": {
+        "x": 120.37037037037037,
+        "y": 111.1111111111111
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_swamp_lowlands",
+        "on_click": "FastTravelTo_swamp_lowlands"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    },
+    {
+      "region_id": "buried_archives",
+      "button_name": "Btn_buried_archives",
+      "position": {
+        "x": 37.03703703703704,
+        "y": 101.85185185185185
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_buried_archives",
+        "on_click": "FastTravelTo_buried_archives"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    },
+    {
+      "region_id": "concourse_ruins",
+      "button_name": "Btn_concourse_ruins",
+      "position": {
+        "x": 175.92592592592592,
+        "y": 59.25925925925925
+      },
+      "size": {
+        "width": 60,
+        "height": 60
+      },
+      "interaction": {
+        "on_hover": "ShowRegionInfo_concourse_ruins",
+        "on_click": "FastTravelTo_concourse_ruins"
+      },
+      "state_colors": {
+        "normal": "#8B7355",
+        "hover": "#D4A574",
+        "disabled": "#5A4A3A",
+        "discovered": "#FFD700"
+      }
+    }
+  ],
+  "info_panel": {
+    "display_mode": "OnHover",
+    "fade_duration": 0.3,
+    "content_fields": [
+      "region_name",
+      "description",
+      "climate",
+      "culture",
+      "primary_npc"
+    ]
+  },
+  "fast_travel_panel": {
+    "display_mode": "OnClick",
+    "confirm_button": true,
+    "travel_time_display": true
+  }
+}

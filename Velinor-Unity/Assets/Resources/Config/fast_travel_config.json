@@ -1,0 +1,247 @@
+{
+  "version": "1.0",
+  "system": "VelharaFastTravel",
+  "map_dimensions": {
+    "width": 4320,
+    "height": 4320
+  },
+  "regions": [
+    {
+      "id": "archive_district",
+      "name": "Archive District",
+      "description": "Ruins of past Velhara - towering structures crumble with age",
+      "map_position": {
+        "x": 1100,
+        "y": 180
+      },
+      "atmosphere": {
+        "climate": "Dry, dusty winds sweep through broken architecture",
+        "culture": "Knowledge keepers preserving fragments of the old world"
+      },
+      "npc": "Archivist Malrik",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    },
+    {
+      "id": "shrine_ridge",
+      "name": "Shrine Ridge",
+      "description": "Ancient temples cling to northern cliffs - sacred and haunted",
+      "map_position": {
+        "x": 550,
+        "y": 120
+      },
+      "atmosphere": {
+        "climate": "Cool, thin air - whispers carry far",
+        "culture": "Spiritual seekers and memory guardians"
+      },
+      "npc": "High Seer Elenya",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    },
+    {
+      "id": "market_basin",
+      "name": "Market Basin",
+      "description": "The living heart of Velhara - bustling with survivors and traders",
+      "map_position": {
+        "x": 480,
+        "y": 380
+      },
+      "atmosphere": {
+        "climate": "Variable, sheltered by surrounding structures",
+        "culture": "Pragmatic merchants and organized community"
+      },
+      "npc": "Ravi & Nima",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    },
+    {
+      "id": "desert_expanse",
+      "name": "Desert & Mountain Expanse",
+      "description": "Vast emptiness where the player begins - sandy dunes meet rocky peaks",
+      "map_position": {
+        "x": 280,
+        "y": 380
+      },
+      "atmosphere": {
+        "climate": "Scorching heat by day, frigid nights",
+        "culture": "Nomadic scavengers and solitary travelers"
+      },
+      "npc": "Saori",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    },
+    {
+      "id": "harbor_lowlands",
+      "name": "Harbor Air Lowlands",
+      "description": "Flooded coastal areas with makeshift watercraft",
+      "map_position": {
+        "x": 1050,
+        "y": 500
+      },
+      "atmosphere": {
+        "climate": "Humid, salt-laden breezes - oppressive heat",
+        "culture": "Fishers and maritime traders"
+      },
+      "npc": "Captain Dalen",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    },
+    {
+      "id": "swamp_lowlands",
+      "name": "Swamid Swamps & Lowlands",
+      "description": "Wetlands thick with vegetation and strange sounds",
+      "map_position": {
+        "x": 650,
+        "y": 600
+      },
+      "atmosphere": {
+        "climate": "Damp, murky - mist clings to everything",
+        "culture": "Herbalists and hidden communities"
+      },
+      "npc": "Keeper",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    },
+    {
+      "id": "buried_archives",
+      "name": "Buried Tomb Archives",
+      "description": "Underground chambers holding secrets of the before-time",
+      "map_position": {
+        "x": 200,
+        "y": 550
+      },
+      "atmosphere": {
+        "climate": "Cool, stable - untouched by surface weather",
+        "culture": "Archaeologists and tomb keepers"
+      },
+      "npc": "Tovren",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    },
+    {
+      "id": "concourse_ruins",
+      "name": "Concourse Ruins",
+      "description": "Central hub where multiple paths converge",
+      "map_position": {
+        "x": 950,
+        "y": 320
+      },
+      "atmosphere": {
+        "climate": "Variable with wind patterns from multiple directions",
+        "culture": "Crossroads merchants and opportunity seekers"
+      },
+      "npc": "Kaelen",
+      "discovered": false,
+      "accessible": true,
+      "ui_data": {
+        "label_offset_x": 0,
+        "label_offset_y": -40,
+        "hover_radius": 50,
+        "icon_size": 32
+      }
+    }
+  ],
+  "travel_system": {
+    "enabled": true,
+    "routes": [
+      {
+        "from": "desert_expanse",
+        "to": "market_basin",
+        "time_minutes": 15,
+        "distance": "Medium"
+      },
+      {
+        "from": "market_basin",
+        "to": "archive_district",
+        "time_minutes": 20,
+        "distance": "Far"
+      },
+      {
+        "from": "market_basin",
+        "to": "shrine_ridge",
+        "time_minutes": 18,
+        "distance": "Far"
+      },
+      {
+        "from": "market_basin",
+        "to": "swamp_lowlands",
+        "time_minutes": 22,
+        "distance": "Very Far"
+      },
+      {
+        "from": "market_basin",
+        "to": "harbor_lowlands",
+        "time_minutes": 25,
+        "distance": "Very Far"
+      },
+      {
+        "from": "market_basin",
+        "to": "buried_archives",
+        "time_minutes": 20,
+        "distance": "Far"
+      },
+      {
+        "from": "concourse_ruins",
+        "to": "archive_district",
+        "time_minutes": 8,
+        "distance": "Close"
+      },
+      {
+        "from": "concourse_ruins",
+        "to": "market_basin",
+        "time_minutes": 10,
+        "distance": "Close"
+      },
+      {
+        "from": "desert_expanse",
+        "to": "buried_archives",
+        "time_minutes": 12,
+        "distance": "Medium"
+      }
+    ],
+    "cost_type": "time",
+    "fast_travel_unlock": "After discovering first glyph"
+  }
+}
