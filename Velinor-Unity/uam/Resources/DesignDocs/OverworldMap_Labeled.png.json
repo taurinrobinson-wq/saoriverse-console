@@ -1,0 +1,20 @@
+{
+    "serializationVersion": [
+        4,
+        0
+    ],
+    "path": "Resources/DesignDocs/OverworldMap_Labeled.png",
+    "assetName": "OverworldMap_Labeled",
+    "assetId": "6a56e93390701e7aae576b64",
+    "datasetId": "154feea8-8ca8-4d2a-add4-6e9c9db83641",
+    "projectId": "87640cd2-3c1a-42d9-868a-33303921b30d",
+    "organizationId": "20067610940234",
+    "versionId": "76f7cffb-178d-47ca-a58c-175220f19f18",
+    "sequenceNumber": 1,
+    "updated": "2026-07-15T01:58:20.9130000Z",
+    "timestamp": 1784080726,
+    "checksum": "4c5e2344c8a03e95328ccdd7265adddb",
+    "metaFileChecksum": "fb7cd4283ef3c714181132ff23107140",
+    "metaFileTimestamp": 1784080725,
+    "unityGUID": "80293e06a3003b9438cab847be63b79d"
+}

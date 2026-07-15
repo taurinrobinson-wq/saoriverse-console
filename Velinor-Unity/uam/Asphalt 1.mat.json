@@ -1,0 +1,20 @@
+{
+    "serializationVersion": [
+        4,
+        0
+    ],
+    "path": "Asphalt 1.mat",
+    "assetName": "Asphalt 1 (URP)",
+    "assetId": "6a4d4b4c594441340fdbd6dd",
+    "datasetId": "ca73dd21-c924-4a11-bda8-416d27110e98",
+    "projectId": "87640cd2-3c1a-42d9-868a-33303921b30d",
+    "organizationId": "20067610940234",
+    "versionId": "02bd28af-8836-49bb-b77d-5f84f1d567d9",
+    "sequenceNumber": 1,
+    "updated": "2026-07-07T18:54:06.5290000Z",
+    "timestamp": 1784078074,
+    "checksum": "c14c8c4efcd2230068a8c61532bcdabc",
+    "metaFileChecksum": "3e655f37db6ec79ae117fdbd9eb0dae5",
+    "metaFileTimestamp": 1784078074,
+    "unityGUID": "b25f822725b47a943acef7c7e5857afc"
+}

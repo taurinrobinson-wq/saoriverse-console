@@ -1,0 +1,20 @@
+{
+    "serializationVersion": [
+        4,
+        0
+    ],
+    "path": "Textures/asphaltrottenbutintact_d59be29c_AO.png",
+    "assetName": "Asphalt 1 (URP)",
+    "assetId": "6a4d4b4c594441340fdbd6dd",
+    "datasetId": "ca73dd21-c924-4a11-bda8-416d27110e98",
+    "projectId": "87640cd2-3c1a-42d9-868a-33303921b30d",
+    "organizationId": "20067610940234",
+    "versionId": "02bd28af-8836-49bb-b77d-5f84f1d567d9",
+    "sequenceNumber": 1,
+    "updated": "2026-07-07T18:54:06.5290000Z",
+    "timestamp": 1784078075,
+    "checksum": "8414e1679ea5f2a67957ae18301be508",
+    "metaFileChecksum": "ac831ae3f6cbbb575046eb0469ab25df",
+    "metaFileTimestamp": 1784078074,
+    "unityGUID": "69960071377065a499b1043fe7006398"
+}
