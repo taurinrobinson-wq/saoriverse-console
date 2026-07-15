@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -238,8 +239,9 @@ namespace Velinor.UI
 
     /// <summary>
     /// RegionButton - Individual button for a region on the map
+    /// Implements modern EventSystem interfaces for hover/click handling
     /// </summary>
-    public class RegionButton : MonoBehaviour
+    public class RegionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private string regionId;
         private OverworldMapUI mapUI;
@@ -254,24 +256,9 @@ namespace Velinor.UI
             image = GetComponent<Image>();
 
             button.onClick.AddListener(OnClick);
-
-            // Add event triggers for hover
-            var eventTrigger = gameObject.AddComponent<EventTrigger>();
-
-            // OnPointerEnter
-            EventTrigger.Entry pointerEnter = new();
-            pointerEnter.eventID = EventTriggerType.PointerEnter;
-            pointerEnter.callback.AddListener(_ => OnPointerEnter());
-            eventTrigger.triggers.Add(pointerEnter);
-
-            // OnPointerExit
-            EventTrigger.Entry pointerExit = new();
-            pointerExit.eventID = EventTriggerType.PointerExit;
-            pointerExit.callback.AddListener(_ => OnPointerExit());
-            eventTrigger.triggers.Add(pointerExit);
         }
 
-        private void OnPointerEnter()
+        public void OnPointerEnter(PointerEventData eventData)
         {
             // Highlight region
             image.color = new Color(0.83f, 0.65f, 0.45f, 0.7f); // Lighter brown
@@ -286,7 +273,7 @@ namespace Velinor.UI
             );
         }
 
-        private void OnPointerExit()
+        public void OnPointerExit(PointerEventData eventData)
         {
             // Restore normal color
             image.color = new Color(0.54f, 0.45f, 0.33f, 0.5f);
