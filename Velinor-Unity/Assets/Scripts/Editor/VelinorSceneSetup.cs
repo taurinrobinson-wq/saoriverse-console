@@ -37,14 +37,14 @@ public class VelinorSceneSetup
         plane.name = "Plane";
         plane.transform.position = Vector3.zero;
         plane.transform.localScale = new Vector3(20, 1, 20);
-        
+
         // Remove the collider that comes with primitive
         Object.DestroyImmediate(plane.GetComponent<Collider>());
-        
+
         // Add box collider as solid ground
         BoxCollider groundCollider = plane.AddComponent<BoxCollider>();
         groundCollider.isTrigger = false;
-        
+
         // ===== STEP 2: Create Player =====
         GameObject player = new GameObject("Player");
         player.transform.position = Vector3.zero;
@@ -73,7 +73,7 @@ public class VelinorSceneSetup
         playerCube.transform.SetParent(player.transform);
         playerCube.transform.localPosition = new Vector3(0, 0.5f, 0);
         playerCube.transform.localScale = new Vector3(0.4f, 1, 0.4f);
-        
+
         // Remove collider from visual cube
         Object.DestroyImmediate(playerCube.GetComponent<Collider>());
 
@@ -87,8 +87,7 @@ public class VelinorSceneSetup
         cameraTarget.transform.localPosition = new Vector3(0, 0.6f, 0);
         cameraTarget.transform.localRotation = Quaternion.identity;
 
-        // Assign camera target to player controller
-        playerController.CinemachineCameraTarget = cameraTarget;
+        // Note: VelinorPlayerController manages camera internally in first-person mode
 
         // ===== STEP 4: Create CodexManager (MUST BE FIRST before NPC/Pedestal) =====
         GameObject codexManager = new GameObject("CodexManager");

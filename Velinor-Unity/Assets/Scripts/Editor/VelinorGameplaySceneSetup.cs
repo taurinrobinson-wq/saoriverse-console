@@ -12,7 +12,7 @@ public class VelinorGameplaySceneSetup
     {
         // Open GamplayScene
         Scene scene = EditorSceneManager.OpenScene("Assets/Scenes/GamplayScene.unity", OpenSceneMode.Single);
-        
+
         // Clean up existing objects to prevent duplicates
         GameObject[] existingObjects = scene.GetRootGameObjects();
         foreach (GameObject obj in existingObjects)
@@ -23,7 +23,7 @@ public class VelinorGameplaySceneSetup
                 Debug.Log($"Cleaned up existing {obj.name}");
             }
         }
-        
+
         // Get or create Main Camera
         GameObject cameraObj = GameObject.Find("Main Camera");
         if (cameraObj == null)
@@ -39,7 +39,7 @@ public class VelinorGameplaySceneSetup
         plane.name = "Ground";
         plane.transform.position = Vector3.zero;
         plane.transform.localScale = new Vector3(20, 1, 20);
-        
+
         Object.DestroyImmediate(plane.GetComponent<Collider>());
         BoxCollider groundCollider = plane.AddComponent<BoxCollider>();
         groundCollider.isTrigger = false;
@@ -80,7 +80,7 @@ public class VelinorGameplaySceneSetup
         playerVisual.transform.localPosition = new Vector3(0, 0.5f, 0);
         playerVisual.transform.localScale = new Vector3(0.4f, 1f, 0.4f);
         Object.DestroyImmediate(playerVisual.GetComponent<Collider>());
-        
+
         Renderer visualRenderer = playerVisual.GetComponent<Renderer>();
         Material visualMat = new Material(Shader.Find("Standard"));
         visualMat.color = Color.white;
@@ -89,12 +89,12 @@ public class VelinorGameplaySceneSetup
         // ===== STEP 3: Setup Camera with Cinemachine-like positioning =====
         cameraObj.transform.position = new Vector3(2f, 2f, -3f);
         cameraObj.transform.rotation = Quaternion.Euler(20f, 0f, 0f);
-        
+
         // Create camera target (what camera looks at)
         GameObject cameraTarget = new GameObject("CameraTarget");
         cameraTarget.transform.SetParent(player.transform);
         cameraTarget.transform.localPosition = new Vector3(0, 0.93f, 0);
-        playerController.CinemachineCameraTarget = cameraTarget;
+        // Note: VelinorPlayerController manages camera internally in first-person mode
 
         // ===== STEP 4: Create Managers =====
         GameObject codexManager = new GameObject("CodexManager");
@@ -104,7 +104,7 @@ public class VelinorGameplaySceneSetup
         GameObject canvasGO = new GameObject("PromptCanvas");
         Canvas canvas = canvasGO.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        
+
         CanvasScaler scaler = canvasGO.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
@@ -137,7 +137,7 @@ public class VelinorGameplaySceneSetup
         dialogueCanvasGO.transform.SetParent(dialogueManagerGO.transform);
         Canvas dialogueCanvas = dialogueCanvasGO.AddComponent<Canvas>();
         dialogueCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        
+
         CanvasScaler dialogueScaler = dialogueCanvasGO.AddComponent<CanvasScaler>();
         dialogueScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 
@@ -202,7 +202,7 @@ public class VelinorGameplaySceneSetup
         npc.transform.localScale = new Vector3(0.5f, 1.2f, 0.5f);
 
         Object.DestroyImmediate(npc.GetComponent<Collider>());
-        
+
         // Interaction trigger
         SphereCollider npcTrigger = npc.AddComponent<SphereCollider>();
         npcTrigger.radius = 1.5f;
@@ -231,7 +231,7 @@ public class VelinorGameplaySceneSetup
         pedestal.transform.localScale = new Vector3(0.8f, 1.2f, 0.8f);
 
         Object.DestroyImmediate(pedestal.GetComponent<Collider>());
-        
+
         // Interaction trigger
         SphereCollider pedestalTrigger = pedestal.AddComponent<SphereCollider>();
         pedestalTrigger.radius = 1.5f;
