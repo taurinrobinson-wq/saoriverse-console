@@ -1,0 +1,10 @@
+# Heavy / ML / audio engine requirements
+# Install in a separate image/container where heavy native libs are acceptable
+numpy==2.1.2
+librosa>=0.10.0
+soundfile>=0.12.0
+scipy>=1.11.0
+openai-whisper>=20230314
+spacy>=3.7.0,<4.0.0
+# Optional (only if used in advanced audio flows)
+# pydub>=0.25.0

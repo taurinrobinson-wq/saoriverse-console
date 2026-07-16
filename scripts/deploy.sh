@@ -1,108 +1,156 @@
 #!/bin/bash
-# Deployment Quick Start Guide for Saoriverse Console
-# Phase 2.3, 2.4, 2.5 System - Production Ready
-# December 2, 2025
+set -e
 
-echo "🚀 SAORIVERSE CONSOLE - DEPLOYMENT AUTOMATION"
-echo "=============================================="
+echo "================================"
+echo "FirstPerson + Velinor Setup"
+echo "DigitalOcean Deployment"
+echo "================================"
+
+# Update system
 echo ""
+echo "Step 1: Updating system packages..."
+apt-get update && apt-get upgrade -y
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-# Pre-flight checks
-echo "${BLUE}[1/5] Pre-flight Checks${NC}"
-echo "  Checking Python environment..."
-python3 --version
-echo "  Checking Git status..."
-git status --short || echo "  ⚠️  Working tree has changes"
-echo "  ✅ Pre-flight complete"
+# Install Docker
 echo ""
-
-# Run tests
-echo "${BLUE}[2/5] Running Test Suite${NC}"
-echo "  Executing all tests..."
-python -m pytest emotional_os/core/firstperson/test_*.py -q --tb=no 2>&1 | tail -3
-TEST_RESULT=$?
-if [ $TEST_RESULT -eq 0 ]; then
-    echo "  ✅ All tests passing"
+echo "Step 2: Installing Docker..."
+if ! command -v docker &> /dev/null; then
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    bash get-docker.sh
+    rm get-docker.sh
 else
-    echo "  ${RED}❌ Tests failed${NC}"
-    exit 1
+    echo "Docker already installed"
 fi
+
+# Install Docker Compose
+echo ""
+echo "Step 3: Installing Docker Compose..."
+if ! command -v docker-compose &> /dev/null; then
+    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+else
+    echo "Docker Compose already installed"
+fi
+
+# Clone/update repo
+echo ""
+echo "Step 4: Cloning/Updating repository..."
+if [ ! -d "/root/saoriverse-console" ]; then
+    cd /root
+    git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
+else
+    cd /root/saoriverse-console
+    git pull origin main
+fi
+
+cd /root/saoriverse-console
+
+# Install Certbot for SSL
+echo ""
+echo "Step 5: Installing Certbot for SSL certificates..."
+apt-get install -y certbot
+
+# Generate SSL certificates for firstperson.chat
+echo ""
+echo "Step 6: Setting up SSL certificates for firstperson.chat..."
+echo "NOTE: Make sure your DNS is pointing to 161.35.227.49 first!"
 echo ""
 
-# Verify imports
-echo "${BLUE}[3/5] Verifying Imports${NC}"
-python3 << 'EOF'
-try:
-    from emotional_os.core.firstperson.repair_module import RepairOrchestrator
-    from emotional_os.core.firstperson.preference_manager import PreferenceManager
-    from emotional_os.core.firstperson.glyph_clustering import GlyphClusteringEngine
-    from emotional_os.core.firstperson.temporal_patterns import TemporalAnalyzer
-    from emotional_os.core.firstperson.context_selector import ContextAwareSelector
-    print("  ✅ All core modules importing successfully")
-except Exception as e:
-    print(f"  ❌ Import failed: {e}")
-    exit(1)
-EOF
+# Check if certificate already exists
+if [ ! -f "/etc/letsencrypt/live/firstperson.chat/fullchain.pem" ]; then
+    echo "Please ensure your DNS records point to 161.35.227.49:"
+    echo "  - firstperson.chat A 161.35.227.49"
+    echo "  - www.firstperson.chat A 161.35.227.49"
+    echo ""
+    read -p "Press ENTER once DNS is set up, or wait 60 seconds..."
+    
+    certbot certonly --standalone \
+      -d firstperson.chat \
+      -d www.firstperson.chat \
+      -m admin@firstperson.chat \
+      --agree-tos \
+      --non-interactive \
+      || echo "Certificate generation failed - you may need to generate manually later"
+else
+    echo "SSL certificate for firstperson.chat already exists"
+fi
+
+# Verify Velinor certificate exists
+echo ""
+echo "Step 7: Checking Velinor SSL certificate..."
+if [ ! -f "/etc/letsencrypt/live/velinor.firstperson.chat/fullchain.pem" ]; then
+    echo "WARNING: Velinor certificate not found. It should exist from previous setup."
+else
+    echo "✓ Velinor certificate found"
+fi
+
+# Create logs directory
+echo ""
+echo "Step 8: Creating log directories..."
+mkdir -p /root/saoriverse-console/logs/velinor
+mkdir -p /root/saoriverse-console/logs/firstperson
+
+# Deploy with Docker Compose
+echo ""
+echo "Step 9: Starting Docker containers..."
+docker-compose -f docker-compose.prod.all.yml down 2>/dev/null || true
+docker-compose -f docker-compose.prod.all.yml up -d
+
+# Wait for services to start
+echo ""
+echo "Step 10: Waiting for services to start (30 seconds)..."
+sleep 30
+
+# Verify services
+echo ""
+echo "Step 11: Verifying services..."
 echo ""
 
-# Generate deployment manifest
-echo "${BLUE}[4/5] Generating Deployment Manifest${NC}"
-cat > /tmp/deployment_manifest.txt << 'MANIFEST'
-DEPLOYMENT MANIFEST - Saoriverse Console
-Generated: $(date)
-Branch: main
-Commit: $(git rev-parse --short HEAD)
+if docker ps | grep -q "velinor_prod"; then
+    echo "✓ Velinor container is running"
+else
+    echo "✗ Velinor container failed to start"
+fi
 
-MODULES DEPLOYED:
-  ✅ repair_module.py (319 lines)
-  ✅ repair_orchestrator.py (259 lines)
-  ✅ preference_manager.py (393 lines)
-  ✅ preference_ui.py (321 lines)
-  ✅ glyph_clustering.py (315 lines)
-  ✅ temporal_patterns.py (342 lines)
-  ✅ context_selector.py (289 lines)
+if docker ps | grep -q "firstperson_prod"; then
+    echo "✓ FirstPerson container is running"
+else
+    echo "✗ FirstPerson container failed to start"
+fi
 
-TESTS DEPLOYED:
-  ✅ 43 Repair Module Tests
-  ✅ 31 Preference Manager Tests
-  ✅ 24 Advanced Learning Tests
-  ✅ 219 Baseline Tests
-  TOTAL: 317/317 Passing
+if docker ps | grep -q "nginx_ssl_proxy"; then
+    echo "✓ Nginx container is running"
+else
+    echo "✗ Nginx container failed to start"
+fi
 
-FEATURES ACTIVE:
-  ✅ Rejection Detection (20+ patterns)
-  ✅ Per-User Preference Learning
-  ✅ Preference Dashboard
-  ✅ Semantic Glyph Clustering
-  ✅ Temporal Pattern Recognition
-  ✅ Context-Aware Selection
-  ✅ Circadian Rhythm Adaptation
+# Show status
+echo ""
+echo "================================"
+echo "Deployment Status"
+echo "================================"
+echo ""
+docker ps --format "table {{.Names}}\t{{.Status}}"
 
-READINESS: PRODUCTION READY ✅
-MANIFEST
-cat /tmp/deployment_manifest.txt
-echo "  ✅ Manifest generated"
+echo ""
+echo "================================"
+echo "Next Steps"
+echo "================================"
+echo ""
+echo "1. Update DNS if not already done:"
+echo "   firstperson.chat A 161.35.227.49"
+echo "   www.firstperson.chat A 161.35.227.49"
+echo ""
+echo "2. Test services:"
+echo "   curl https://firstperson.chat/health"
+echo "   curl https://velinor.firstperson.chat/health"
+echo ""
+echo "3. View logs:"
+echo "   docker-compose -f docker-compose.prod.all.yml logs -f"
+echo ""
+echo "4. Configuration:"
+echo "   - Edit .env for environment variables"
+echo "   - Check docker-compose.prod.all.yml for service config"
 echo ""
 
-# Final summary
-echo "${BLUE}[5/5] Deployment Summary${NC}"
-echo "${GREEN}✅ System Status: READY FOR PRODUCTION${NC}"
-echo ""
-echo "Key Metrics:"
-echo "  • Tests Passing: 317/317 (100%)"
-echo "  • Code Added: 2,923 lines"
-echo "  • Regressions: 0"
-echo "  • Breaking Changes: 0"
-echo "  • Branch: main ($(git rev-parse --short HEAD))"
-echo ""
-echo "Ready to deploy? Run: docker build -t saoriverse:latest ."
-echo "Or deploy directly: git pull origin main && systemctl restart saoriverse"
-echo ""
-echo "${GREEN}🚀 All systems green. Ready for launch!${NC}"
+echo "✓ Setup complete!"

@@ -1,0 +1,76 @@
+# FirstPerson Backend + Frontend in Docker
+
+# ---------- Frontend build stage ----------
+FROM node:20-alpine AS frontend-builder
+WORKDIR /app/firstperson-web
+
+# Upgrade npm to latest
+RUN npm install -g npm@latest
+
+# Install dependencies  
+COPY firstperson-web/package*.json ./
+RUN npm install --legacy-peer-deps
+
+# Copy source files
+COPY firstperson-web/src ./src
+COPY firstperson-web/public ./public
+COPY firstperson-web/tsconfig.json ./
+COPY firstperson-web/next.config.ts ./
+
+# Build Next.js app
+RUN npm run build
+
+
+# ---------- Runtime stage ----------
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Install system dependencies (nginx, curl, ffmpeg for audio processing)
+RUN apt-get update && apt-get install -y \
+    nginx \
+    curl \
+    bash \
+    ffmpeg \
+    libsndfile1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install Python deps
+COPY requirements-backend.txt .
+
+# Install with network retry configuration for better reliability
+RUN pip install --upgrade pip && \
+    pip install --default-timeout=60 \
+                --retries 5 \
+                -r requirements-backend.txt
+
+# Install Node runtime for Next.js
+RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
+
+# Copy backend
+COPY firstperson_backend.py .
+COPY src/ ./src/
+COPY emotional_os/ ./emotional_os/
+COPY firstperson/ ./firstperson/
+
+# Copy frontend build
+COPY --from=frontend-builder /app/firstperson-web/.next ./firstperson-web/.next
+COPY --from=frontend-builder /app/firstperson-web/public ./firstperson-web/public
+COPY firstperson-web/package.json ./firstperson-web/
+
+# Copy nginx config
+COPY nginx.firstperson.conf /etc/nginx/nginx.conf
+
+# Copy entrypoint script
+COPY entrypoint.firstperson.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Expose port 8000 (backend) and 3001 (frontend)
+EXPOSE 8000 3001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Run startup script
+ENTRYPOINT ["/entrypoint.sh"]

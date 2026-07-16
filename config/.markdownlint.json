@@ -1,0 +1,11 @@
+{
+  "extends": "default",
+  "MD013": {
+    "line_length": 100,
+    "code_blocks": false,
+    "tables": false,
+    "url_length": false,
+    "stern": false
+  },
+  "MD033": true
+}
