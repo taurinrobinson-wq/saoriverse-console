@@ -3,10 +3,20 @@
   "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
   "customizations": {
     "codespaces": {
-        "openFiles": [
+      "openFiles": [
         "README.md",
         "src/streamlit_integration/chat_sandbox.py"
-      ]
+      ],
+      "tasks": {
+        "update-index": {
+          "schedule": "0 0 */14 * *",
+          "command": "bash .devcontainer/update_repo_index.sh"
+        },
+        "cleanup-root": {
+          "schedule": "5 0 */14 * *",
+          "command": "bash .devcontainer/cleanup_root.sh"
+        }
+      }
     },
     "vscode": {
       "settings": {
@@ -29,7 +39,7 @@
     "DEFAULT_TONE": "plain"
   },
   "updateContentCommand": "/bin/bash .devcontainer/setup.sh",
-  "postCreateCommand": "/bin/bash .devcontainer/post_create.sh",
+  "postCreateCommand": "/bin/bash .devcontainer/post_create.sh && /bin/bash .devcontainer/update_repo_index.sh",
   // Disabled auto-start of Streamlit to prevent memory exhaustion
   // Run manually with: streamlit run src/streamlit_integration/chat_sandbox.py --server.enableCORS false --server.enableXsrfProtection false
   "portsAttributes": {
