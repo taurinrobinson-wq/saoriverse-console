@@ -138,6 +138,8 @@ public class VelinorSceneSetup : MonoBehaviour
             else
             {
                 Debug.LogWarning("⚠ Could not find UMAGenerator type - UMA may not be properly imported");
+                Debug.LogWarning("Available UMA types:");
+                PrintAvailableUMATypes();
             }
         }
 
@@ -200,7 +202,21 @@ public class VelinorSceneSetup : MonoBehaviour
         }
         return null;
     }
-}
 
-// Need to add using for SceneManager
+    private void PrintAvailableUMATypes()
+    {
+        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            try
+            {
+                var umaTypes = assembly.GetTypes().Where(t => t.Namespace != null && t.Namespace.Contains("UMA"));
+                foreach (var type in umaTypes)
+                {
+                    Debug.Log($"  - {type.FullName}");
+                }
+            }
+            catch { }
+        }
+    }
+}
 
