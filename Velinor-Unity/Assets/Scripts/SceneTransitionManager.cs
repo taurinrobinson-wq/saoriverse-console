@@ -1,113 +1,78 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 /// <summary>
-/// Manages scene transitions for 2.5D traversal.
-/// Preloads the next scene when player reaches 1/3 up the screen.
-/// Transitions when player reaches 1/2 (halfway point).
+/// Central scene transition controller with fade support.
+/// Handles async loading + smooth fade in/out.
+/// Persists across scenes (DontDestroyOnLoad).
 /// </summary>
 public class SceneTransitionManager : MonoBehaviour
 {
-    [Header("Transition Settings")]
-    [SerializeField] private float preloadThreshold = 0.2f; // Preload at 20% (lower for testing)
-    [SerializeField] private float transitionThreshold = 0.5f; // Transition at 50% (halfway)
-    [SerializeField] private string nextSceneName = "";
+    public static SceneTransitionManager Instance;
 
-    [Header("References")]
-    [SerializeField] private PlayerController2D5 playerController;
+    [Header("Fade Settings")]
+    [SerializeField] private CanvasGroup fadeCanvas;
+    [SerializeField] private float fadeDuration = 0.5f;
 
-    [Header("Debug")]
-    [SerializeField] private bool showDebugInfo = true;
-
-    private AsyncOperation asyncLoad;
-    private bool isPreloading = false;
-    private bool isReadyToTransition = false;
-
-    private void Start()
+    private void Awake()
     {
-        if (playerController == null)
-            playerController = FindAnyObjectByType<PlayerController2D5>();
-    }
-
-    private void Update()
-    {
-        if (playerController == null || string.IsNullOrEmpty(nextSceneName))
-            return;
-
-        float playerYNormalized = playerController.GetPlayerYNormalized();
-
-        // Preload scene when player reaches 1/3 up
-        if (playerYNormalized >= preloadThreshold && !isPreloading)
+        if (Instance == null)
         {
-            StartPreloadingScene();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        // Mark ready to transition (at 90% progress, scene is loaded but waiting for activation)
-        if (playerYNormalized >= transitionThreshold && asyncLoad != null && asyncLoad.progress >= 0.9f)
+        else
         {
-            isReadyToTransition = true;
-        }
-
-        // Auto-transition when ready and player continues moving up
-        if (isReadyToTransition && playerYNormalized >= transitionThreshold)
-        {
-            PerformTransition();
-        }
-
-        if (showDebugInfo)
-        {
-            DebugDisplay(playerYNormalized);
+            Destroy(gameObject);
         }
     }
 
-    private void StartPreloadingScene()
+    public void TransitionToScene(string sceneName)
     {
-        if (asyncLoad != null) return;
-
-        // Validate nextSceneName
-        if (string.IsNullOrEmpty(nextSceneName))
-        {
-            Debug.LogError("[Scene Transition] ERROR: nextSceneName is empty! Set it in the Inspector.");
-            return;
-        }
-
-        isPreloading = true;
-        asyncLoad = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
-
-        if (asyncLoad == null)
-        {
-            Debug.LogError($"[Scene Transition] ERROR: Failed to load scene '{nextSceneName}'. Is it in Build Settings?");
-            isPreloading = false;
-            return;
-        }
-
-        asyncLoad.allowSceneActivation = false; // Don't activate yet
-        Debug.Log($"[Scene Transition] Preloading scene: {nextSceneName}");
+        StartCoroutine(LoadSceneRoutine(sceneName));
     }
 
-    private void PerformTransition()
+    private IEnumerator LoadSceneRoutine(string sceneName)
     {
-        if (asyncLoad == null || asyncLoad.progress < 0.9f)
+        // Fade out (black screen)
+        yield return StartCoroutine(Fade(1f));
+
+        // Load scene async
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
+
+        while (!asyncLoad.isDone)
         {
-            Debug.LogWarning("[Scene Transition] Scene not ready for transition yet");
-            return;
+            if (asyncLoad.progress >= 0.9f)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
         }
 
-        asyncLoad.allowSceneActivation = true;
-        isReadyToTransition = false;
-        Debug.Log($"[Scene Transition] Transitioning to: {nextSceneName}");
+        // Fade in (show new scene)
+        yield return StartCoroutine(Fade(0f));
     }
 
-    private void DebugDisplay(float playerYNormalized)
+    private IEnumerator Fade(float targetAlpha)
     {
-        string asyncStatus = "N/A";
-        if (asyncLoad != null)
+        if (fadeCanvas == null)
         {
-            string readyStatus = asyncLoad.progress >= 0.9f ? "READY" : "Loading";
-            asyncStatus = $"{readyStatus}, progress: {asyncLoad.progress:F2}";
+            Debug.LogError("[SceneTransitionManager] fadeCanvas not assigned!");
+            yield break;
         }
 
-        Debug.Log($"[Scene Transition] Player Y: {playerYNormalized:F3} | Preload: {(playerYNormalized >= preloadThreshold ? "✓" : "✗")} | " +
-                  $"Ready: {(isReadyToTransition ? "✓" : "✗")} | Preloading: {(isPreloading ? "In Progress" : "Idle")} | AsyncLoad: {asyncStatus}");
+        float startAlpha = fadeCanvas.alpha;
+        float time = 0f;
+
+        while (time < fadeDuration)
+        {
+            fadeCanvas.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        fadeCanvas.alpha = targetAlpha;
     }
 }
