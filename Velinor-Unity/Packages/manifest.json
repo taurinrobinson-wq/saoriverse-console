@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.inference": "2.6.1",
@@ -14,4 +14,3 @@
     "com.unity.modules.physics": "1.0.0"
   }
 }
-

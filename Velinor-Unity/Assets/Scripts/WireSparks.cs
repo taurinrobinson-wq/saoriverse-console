@@ -19,7 +19,6 @@ public class WireSparks : MonoBehaviour
     [SerializeField] private float positionRandomness = 0.1f;
 
     [Header("Particle Settings")]
-    [SerializeField] private float sparkLifetime = 0.5f;
     [SerializeField] private float sparkEmissionRate = 20f;
 
     private ParticleSystem[] activeSparks;
