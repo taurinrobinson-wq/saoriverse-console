@@ -56,8 +56,29 @@ public class VelinorSceneSetup : MonoBehaviour
         so.ApplyModifiedProperties();
         Debug.Log("✓ Linked UMA character reference");
 
-        // Find and link ground plane if it exists
+        // Find and link ground plane, or create one if it doesn't exist
         Collider groundPlane = FindGroundPlane();
+        if (groundPlane == null)
+        {
+            // Create ground plane
+            GameObject groundObj = new GameObject("GroundPlane");
+            groundObj.transform.position = Vector3.zero;
+
+            // Add collider
+            BoxCollider bc = groundObj.AddComponent<BoxCollider>();
+            bc.size = new Vector3(20, 0.1f, 20);
+
+            // Add invisible renderer to avoid visual clutter
+            MeshFilter mf = groundObj.AddComponent<MeshFilter>();
+            mf.mesh = Resources.GetBuiltinResource<Mesh>("Plane.fbx");
+
+            MeshRenderer mr = groundObj.AddComponent<MeshRenderer>();
+            mr.enabled = false;  // Invisible
+
+            groundPlane = bc;
+            Debug.Log("✓ Created new ground plane (invisible)");
+        }
+
         if (groundPlane != null)
         {
             so = new SerializedObject(pcs);
@@ -68,10 +89,6 @@ public class VelinorSceneSetup : MonoBehaviour
             }
             so.ApplyModifiedProperties();
             Debug.Log($"✓ Linked ground plane: {groundPlane.gameObject.name}");
-        }
-        else
-        {
-            Debug.LogWarning("⚠ No ground plane found - you'll need to assign it manually in Inspector");
         }
 
         Debug.Log("\n=== UMA Character Ready! ===");
