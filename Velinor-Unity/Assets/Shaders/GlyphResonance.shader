@@ -29,11 +29,10 @@ Shader "Velinor/GlyphResonance"
 
         Pass
         {
-            HLSLPROGRAM
+            CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "UnityCG.cginc"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -58,7 +57,7 @@ Shader "Velinor/GlyphResonance"
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = TransformObjectToHClip(v.vertex.xyz);
+                o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.color = v.color;
                 return o;
@@ -75,7 +74,7 @@ Shader "Velinor/GlyphResonance"
 
                 return col + glow;
             }
-            ENDHLSL
+            ENDCG
         }
     }
 }

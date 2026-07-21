@@ -32,8 +32,8 @@ public class GlyphCombinationUI : MonoBehaviour
     [SerializeField] private Color wrongColor = Color.red;
     [SerializeField] private Color neutralColor = Color.white;
 
-    [Header("Animation")]
-    [SerializeField] private float feedbackDuration = 0.5f;
+    // [Header("Animation")]
+    // [SerializeField] private float feedbackDuration = 0.5f;  // Currently unused - kept for future features
 
     public void UpdateGlyphSlot(int index, bool correct)
     {

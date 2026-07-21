@@ -26,7 +26,7 @@ public class SceneSpawnManager : MonoBehaviour
         if (string.IsNullOrEmpty(nextSpawnID))
             return;
 
-        SpawnPoint[] points = FindObjectsOfType<SpawnPoint>();
+        SpawnPoint[] points = FindObjectsByType<SpawnPoint>();
 
         foreach (var p in points)
         {

@@ -45,7 +45,7 @@ public class MemorySequence : MonoBehaviour
             mainCamera = Camera.main;
 
         originalCameraSize = mainCamera.orthographicSize;
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindAnyObjectByType<PlayerMovement>();
     }
 
     public void StartSequence()

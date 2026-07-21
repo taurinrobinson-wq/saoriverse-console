@@ -16,7 +16,6 @@ A private, local-first emotional AI companion with integrated voice interface.
 ```text
 ```
 
-
 ### 2. Run the Application
 
 ```bash
@@ -42,12 +41,14 @@ All source code, assets, and documentation are © 2026 Tauri Robinson. Unauthori
 ### For Public/Licensed Access
 
 If you're interested in using Saoriverse Console or Velinor for:
+
 - **Commercial purposes**
 - **Educational projects**
 - **Research collaboration**
 - **Integration into third-party tools**
 
 **You must:**
+
 1. Request a written licensing agreement
 2. Sign a Non-Disclosure Agreement (NDA)
 3. Agree to terms in `LICENSE_COMMERCIAL.md`
@@ -58,6 +59,7 @@ If you're interested in using Saoriverse Console or Velinor for:
 📋 **Subject**: `Velinor Licensing Request - [Your Name/Organization]`
 
 **Include:**
+
 - Your name and organization
 - Intended use case
 - Technical requirements
@@ -139,7 +141,6 @@ saoriverse-console/
 ```text
 ```
 
-
 **Key Change**: Flat `src/` directory with no deep nesting, single `app.py` entry point.
 
 ##
@@ -162,7 +163,6 @@ pytest tests/integration/
 
 ```text
 ```
-
 
 ##
 
@@ -192,7 +192,6 @@ pytest tests/integration/
 
 ```text
 ```
-
 
 ##
 
@@ -265,7 +264,6 @@ kill -9 <PID>
 
 ```text
 ```
-
 
 ### Import Errors
 
