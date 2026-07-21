@@ -31,7 +31,41 @@ Opens automatically in your browser at `http://localhost:8501`
 
 Configure voice settings in the sidebar when running app.py
 
-##
+---
+
+## 🔐 Licensing & Access
+
+**This repository is PRIVATE and PROPRIETARY.**
+
+All source code, assets, and documentation are © 2026 Tauri Robinson. Unauthorized access, copying, or redistribution is prohibited.
+
+### For Public/Licensed Access
+
+If you're interested in using Saoriverse Console or Velinor for:
+- **Commercial purposes**
+- **Educational projects**
+- **Research collaboration**
+- **Integration into third-party tools**
+
+**You must:**
+1. Request a written licensing agreement
+2. Sign a Non-Disclosure Agreement (NDA)
+3. Agree to terms in `LICENSE_COMMERCIAL.md`
+
+### How to Request Access
+
+📧 **Email**: [your-email@example.com]  
+📋 **Subject**: `Velinor Licensing Request - [Your Name/Organization]`
+
+**Include:**
+- Your name and organization
+- Intended use case
+- Technical requirements
+- Timeline
+
+See `LICENSE_COMMERCIAL.md` and `NDA_TEMPLATE.md` for full licensing terms.
+
+---
 
 ## 📂 Project Organization
 

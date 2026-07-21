@@ -1,3 +1,16 @@
+/*
+ * ============================================================
+ * PROPRIETARY & CONFIDENTIAL
+ * 
+ * © 2026 Tauri Robinson. All rights reserved.
+ * This code is proprietary and may not be redistributed,
+ * modified, or used without explicit written permission.
+ * 
+ * Unauthorized access, modification, or distribution is prohibited.
+ * See LICENSE_COMMERCIAL.md and NDA_TEMPLATE.md for details.
+ * ============================================================
+ */
+
 using UnityEngine;
 using System.Collections.Generic;
 
