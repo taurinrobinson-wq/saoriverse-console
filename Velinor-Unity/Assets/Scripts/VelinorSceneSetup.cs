@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 /// <summary>
 /// Velinor character setup helper.
@@ -21,6 +23,9 @@ public class VelinorSceneSetup : MonoBehaviour
     public void AddUMACharacterToScene()
     {
         Debug.Log("=== Creating UMA Character ===");
+
+        // Ensure UMA infrastructure exists first
+        EnsureUMAInfrastructure();
 
         // Create Player root
         GameObject playerRoot = new GameObject("Player");
@@ -98,6 +103,77 @@ public class VelinorSceneSetup : MonoBehaviour
         Debug.Log("3. Press Play - character should appear and be controllable!");
     }
 
+    private void EnsureUMAInfrastructure()
+    {
+        // Check if UMAGenerator exists by name
+        Transform existingGen = null;
+        foreach (Transform root in SceneManager.GetActiveScene().GetRootGameObjects().Select(g => g.transform))
+        {
+            if (root.gameObject.name == "UMAGenerator")
+            {
+                existingGen = root;
+                break;
+            }
+        }
+
+        if (existingGen != null)
+        {
+            Debug.Log("✓ UMAGenerator already exists");
+        }
+        else
+        {
+            // Create UMA Generator GameObject
+            GameObject umaGenObj = new GameObject("UMAGenerator");
+            umaGenObj.transform.position = Vector3.zero;
+
+            // Add UMAGenerator component by type name
+            System.Type umaGenType = System.Type.GetType("UMA.CharacterSystem.UMAGenerator, Assembly-CSharp");
+            if (umaGenType != null)
+            {
+                umaGenObj.AddComponent(umaGenType);
+                Debug.Log("✓ Created UMAGenerator");
+            }
+            else
+            {
+                Debug.LogWarning("⚠ Could not find UMAGenerator type - UMA may not be properly imported");
+            }
+        }
+
+        // Check if UMAContext exists by name
+        Transform existingContext = null;
+        foreach (Transform root in SceneManager.GetActiveScene().GetRootGameObjects().Select(g => g.transform))
+        {
+            if (root.gameObject.name == "UMAContext")
+            {
+                existingContext = root;
+                break;
+            }
+        }
+
+        if (existingContext != null)
+        {
+            Debug.Log("✓ UMAContext already exists");
+        }
+        else
+        {
+            // Create UMA Context GameObject
+            GameObject contextObj = new GameObject("UMAContext");
+            contextObj.transform.position = Vector3.zero;
+
+            // Add UMAContext component by type name
+            System.Type umaContextType = System.Type.GetType("UMA.CharacterSystem.UMAContext, Assembly-CSharp");
+            if (umaContextType != null)
+            {
+                contextObj.AddComponent(umaContextType);
+                Debug.Log("✓ Created UMAContext");
+            }
+            else
+            {
+                Debug.LogWarning("⚠ Could not find UMAContext type - UMA may not be properly imported");
+            }
+        }
+    }
+
     private Collider FindGroundPlane()
     {
         Collider[] allColliders = FindObjectsByType<Collider>(FindObjectsInactive.Exclude);
@@ -112,3 +188,6 @@ public class VelinorSceneSetup : MonoBehaviour
         return null;
     }
 }
+
+// Need to add using for SceneManager
+
