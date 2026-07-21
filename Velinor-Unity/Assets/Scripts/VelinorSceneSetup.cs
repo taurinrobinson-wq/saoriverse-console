@@ -26,9 +26,6 @@ public class VelinorSceneSetup : MonoBehaviour
     {
         Debug.Log("=== Creating UMA Character ===");
 
-        // Ensure UMA infrastructure exists first
-        EnsureUMAInfrastructure();
-
         // Create Player root
         GameObject playerRoot = new GameObject("Player");
         playerRoot.transform.position = new Vector3(0, 0.5f, 0);
@@ -100,81 +97,58 @@ public class VelinorSceneSetup : MonoBehaviour
 
         Debug.Log("\n=== UMA Character Ready! ===");
         Debug.Log("Next steps:");
-        Debug.Log("1. Add DynamicCharacterAvatar component to UMACharacter child");
-        Debug.Log("2. Customize in DynamicCharacterAvatar inspector");
-        Debug.Log("3. Press Play - character should appear and be controllable!");
+        Debug.Log("1. Select the UMACharacter child object");
+        Debug.Log("2. Add DynamicCharacterAvatar component (will create UMA infrastructure automatically)");
+        Debug.Log("3. Configure character race/appearance in DynamicCharacterAvatar");
+        Debug.Log("4. Press Play - character will render!");
+        Debug.Log("");
+        Debug.Log("TROUBLESHOOTING: If 'no generator' error appears,");
+        Debug.Log("select any GameObject and right-click → 'Create UMA Generator & Context'.");
     }
 
-    private void EnsureUMAInfrastructure()
+    [ContextMenu("Create UMA Generator & Context (Manual)")]
+    public void CreateUMAInfrastructureManually()
     {
-        // Check if UMAGenerator exists by name
-        Transform existingGen = null;
+        Debug.Log("Creating UMA infrastructure...");
+
+        // Try to find existing infrastructure first
         foreach (Transform root in SceneManager.GetActiveScene().GetRootGameObjects().Select(g => g.transform))
         {
             if (root.gameObject.name == "UMAGenerator")
             {
-                existingGen = root;
-                break;
+                Debug.Log("✓ UMAGenerator already exists");
+                return;
             }
         }
 
-        if (existingGen != null)
+        // Create UMAGenerator
+        GameObject genObj = new GameObject("UMAGenerator");
+        genObj.transform.position = Vector3.zero;
+        var genType = GetTypeFromAllAssemblies("UMA.CharacterSystem.UMAGenerator");
+        if (genType != null)
         {
-            Debug.Log("✓ UMAGenerator already exists");
-        }
-        else
-        {
-            // Create UMA Generator GameObject
-            GameObject umaGenObj = new GameObject("UMAGenerator");
-            umaGenObj.transform.position = Vector3.zero;
-
-            // Add UMAGenerator component by type name - search all assemblies
-            System.Type umaGenType = GetTypeFromAllAssemblies("UMA.CharacterSystem.UMAGenerator");
-            if (umaGenType != null)
-            {
-                umaGenObj.AddComponent(umaGenType);
-                Debug.Log("✓ Created UMAGenerator");
-            }
-            else
-            {
-                Debug.LogWarning("⚠ Could not find UMAGenerator type - UMA may not be properly imported");
-                Debug.LogWarning("Available UMA types:");
-                PrintAvailableUMATypes();
-            }
-        }
-
-        // Check if UMAContext exists by name
-        Transform existingContext = null;
-        foreach (Transform root in SceneManager.GetActiveScene().GetRootGameObjects().Select(g => g.transform))
-        {
-            if (root.gameObject.name == "UMAContext")
-            {
-                existingContext = root;
-                break;
-            }
-        }
-
-        if (existingContext != null)
-        {
-            Debug.Log("✓ UMAContext already exists");
+            genObj.AddComponent(genType);
+            Debug.Log("✓ Created UMAGenerator");
         }
         else
         {
-            // Create UMA Context GameObject
-            GameObject contextObj = new GameObject("UMAContext");
-            contextObj.transform.position = Vector3.zero;
+            Debug.LogError("Cannot find UMAGenerator - UMA may not be imported correctly");
+            DestroyImmediate(genObj);
+            return;
+        }
 
-            // Add UMAContext component by type name - search all assemblies
-            System.Type umaContextType = GetTypeFromAllAssemblies("UMA.CharacterSystem.UMAContext");
-            if (umaContextType != null)
-            {
-                contextObj.AddComponent(umaContextType);
-                Debug.Log("✓ Created UMAContext");
-            }
-            else
-            {
-                Debug.LogWarning("⚠ Could not find UMAContext type - UMA may not be properly imported");
-            }
+        // Create UMAContext
+        GameObject ctxObj = new GameObject("UMAContext");
+        ctxObj.transform.position = Vector3.zero;
+        var ctxType = GetTypeFromAllAssemblies("UMA.CharacterSystem.UMAContext");
+        if (ctxType != null)
+        {
+            ctxObj.AddComponent(ctxType);
+            Debug.Log("✓ Created UMAContext");
+        }
+        else
+        {
+            Debug.LogError("Cannot find UMAContext - UMA may not be imported correctly");
         }
     }
 
@@ -201,22 +175,6 @@ public class VelinorSceneSetup : MonoBehaviour
             }
         }
         return null;
-    }
-
-    private void PrintAvailableUMATypes()
-    {
-        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-        {
-            try
-            {
-                var umaTypes = assembly.GetTypes().Where(t => t.Namespace != null && t.Namespace.Contains("UMA"));
-                foreach (var type in umaTypes)
-                {
-                    Debug.Log($"  - {type.FullName}");
-                }
-            }
-            catch { }
-        }
     }
 }
 
