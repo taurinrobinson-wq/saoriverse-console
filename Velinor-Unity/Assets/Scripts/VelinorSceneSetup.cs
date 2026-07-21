@@ -21,9 +21,6 @@ public class VelinorSceneSetup : MonoBehaviour
     public void AddUMACharacterToScene()
     {
         Debug.Log("=== Creating UMA Character ===");
-        
-        // Ensure UMA infrastructure exists first
-        SetupUMAInfrastructure();
 
         // Create Player root
         GameObject playerRoot = new GameObject("Player");
@@ -99,35 +96,6 @@ public class VelinorSceneSetup : MonoBehaviour
         Debug.Log("1. Add DynamicCharacterAvatar component to UMACharacter child");
         Debug.Log("2. Customize in DynamicCharacterAvatar inspector");
         Debug.Log("3. Press Play - character should appear and be controllable!");
-    }
-    
-    private void SetupUMAInfrastructure()
-    {
-        // Check if UMAGenerator exists
-        var umaGenerator = FindObjectOfType<UMA.CharacterSystem.UMAGenerator>();
-        if (umaGenerator != null)
-        {
-            Debug.Log("✓ UMAGenerator already exists");
-            return;
-        }
-        
-        // Create UMA Generator GameObject
-        GameObject umaGenObj = new GameObject("UMAGenerator");
-        umaGenObj.transform.position = Vector3.zero;
-        
-        // Add UMAGenerator component
-        var generator = umaGenObj.AddComponent<UMA.CharacterSystem.UMAGenerator>();
-        Debug.Log("✓ Created UMAGenerator");
-        
-        // Check/create UMAContext
-        var umaContext = FindObjectOfType<UMA.CharacterSystem.UMAContext>();
-        if (umaContext == null)
-        {
-            GameObject contextObj = new GameObject("UMAContext");
-            contextObj.transform.position = Vector3.zero;
-            umaContext = contextObj.AddComponent<UMA.CharacterSystem.UMAContext>();
-            Debug.Log("✓ Created UMAContext");
-        }
     }
 
     private Collider FindGroundPlane()
