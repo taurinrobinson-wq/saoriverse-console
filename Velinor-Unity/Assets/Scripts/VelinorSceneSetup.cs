@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// Velinor character setup helper.
@@ -20,31 +21,31 @@ public class VelinorSceneSetup : MonoBehaviour
     public void AddUMACharacterToScene()
     {
         Debug.Log("=== Creating UMA Character ===");
-        
+
         // Create Player root
         GameObject playerRoot = new GameObject("Player");
         playerRoot.transform.position = new Vector3(0, 0.5f, 0);
         playerRoot.tag = "Player";
         Debug.Log("✓ Created Player GameObject");
-        
+
         // Add CharacterController
         CharacterController cc = playerRoot.AddComponent<CharacterController>();
         cc.height = 2f;
         cc.radius = 0.4f;
         cc.center = new Vector3(0, 1f, 0);
         Debug.Log("✓ Added CharacterController");
-        
+
         // Add PlayerCharacterSetup
         PlayerCharacterSetup pcs = playerRoot.AddComponent<PlayerCharacterSetup>();
         Debug.Log("✓ Added PlayerCharacterSetup");
-        
+
         // Create UMA character child
         GameObject umaObj = new GameObject("UMACharacter");
         umaObj.transform.SetParent(playerRoot.transform);
         umaObj.transform.localPosition = Vector3.zero;
         umaObj.transform.localRotation = Quaternion.identity;
         Debug.Log("✓ Created UMACharacter child GameObject");
-        
+
         // Link references
         SerializedObject so = new SerializedObject(pcs);
         SerializedProperty umaCharTransform = so.FindProperty("umaCharacterTransform");
@@ -54,7 +55,7 @@ public class VelinorSceneSetup : MonoBehaviour
         }
         so.ApplyModifiedProperties();
         Debug.Log("✓ Linked UMA character reference");
-        
+
         // Find and link ground plane if it exists
         Collider groundPlane = FindGroundPlane();
         if (groundPlane != null)
@@ -72,17 +73,17 @@ public class VelinorSceneSetup : MonoBehaviour
         {
             Debug.LogWarning("⚠ No ground plane found - you'll need to assign it manually in Inspector");
         }
-        
+
         Debug.Log("\n=== UMA Character Ready! ===");
         Debug.Log("Next steps:");
         Debug.Log("1. Add DynamicCharacterAvatar component to UMACharacter child");
         Debug.Log("2. Configure character in DynamicCharacterAvatar inspector");
         Debug.Log("3. Press Play to test!");
     }
-    
+
     private Collider FindGroundPlane()
     {
-        Collider[] allColliders = FindObjectsByType<Collider>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        Collider[] allColliders = FindObjectsByType<Collider>(FindObjectsInactive.Exclude);
         foreach (var col in allColliders)
         {
             string name = col.gameObject.name.ToLower();

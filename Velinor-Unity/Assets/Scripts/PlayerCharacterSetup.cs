@@ -26,7 +26,7 @@ public class PlayerCharacterSetup : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float groundDrag = 0.1f;
+
 
     [Header("Depth Scaling (3D/2D Hybrid)")]
     [SerializeField] private float minZ = -5f;
@@ -67,7 +67,7 @@ public class PlayerCharacterSetup : MonoBehaviour
         // Auto-find ground plane collider in scene
         if (groundPlaneCollider == null)
         {
-            Collider[] allColliders = FindObjectsByType<Collider>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            Collider[] allColliders = FindObjectsByType<Collider>(FindObjectsInactive.Exclude);
             foreach (var col in allColliders)
             {
                 if (col.name.ToLower().Contains("ground") || col.name.ToLower().Contains("plane"))
@@ -174,7 +174,7 @@ public class PlayerCharacterSetup : MonoBehaviour
     private void PositionOnSpawnPoint()
     {
         // Try to find a SpawnPoint in the scene
-        SpawnPoint[] spawnPoints = FindObjectsByType<SpawnPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        SpawnPoint[] spawnPoints = FindObjectsByType<SpawnPoint>(FindObjectsInactive.Exclude);
 
         if (spawnPoints.Length == 0)
         {
