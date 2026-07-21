@@ -32,19 +32,14 @@ public class ThirdPersonPlayerSetup : MonoBehaviour
     {
         Debug.Log("=== Creating Third Person Player ===");
 
-        // Load player prefab
-        GameObject playerPrefab = Resources.Load<GameObject>("StarterAssets/Character/PlayerCapsule");
-        if (playerPrefab == null)
-        {
-            // Try alternate path
-            playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
-                "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule.prefab");
-        }
+        // Load player prefab - use PlayerArmature which has rigging and animations
+        GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+            "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
 
         if (playerPrefab == null)
         {
-            Debug.LogError("❌ Cannot find PlayerCapsule prefab!");
-            Debug.LogError("Expected at: Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule.prefab");
+            Debug.LogError("❌ Cannot find PlayerArmature prefab!");
+            Debug.LogError("Expected at: Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab");
             return;
         }
 
@@ -53,7 +48,7 @@ public class ThirdPersonPlayerSetup : MonoBehaviour
         player.name = "Player";
         player.transform.position = new Vector3(playerSpawnX, playerSpawnY, playerSpawnZ);
         player.tag = "Player";
-        Debug.Log("✓ Created Player from prefab");
+        Debug.Log("✓ Created Player from prefab (rigged with animations)");
 
         // Load camera prefab
         GameObject cameraPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
