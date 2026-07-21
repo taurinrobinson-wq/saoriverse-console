@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
+using System.Reflection;
 
 /// <summary>
 /// Velinor character setup helper.
@@ -126,8 +128,8 @@ public class VelinorSceneSetup : MonoBehaviour
             GameObject umaGenObj = new GameObject("UMAGenerator");
             umaGenObj.transform.position = Vector3.zero;
 
-            // Add UMAGenerator component by type name
-            System.Type umaGenType = System.Type.GetType("UMA.CharacterSystem.UMAGenerator, Assembly-CSharp");
+            // Add UMAGenerator component by type name - search all assemblies
+            System.Type umaGenType = GetTypeFromAllAssemblies("UMA.CharacterSystem.UMAGenerator");
             if (umaGenType != null)
             {
                 umaGenObj.AddComponent(umaGenType);
@@ -160,8 +162,8 @@ public class VelinorSceneSetup : MonoBehaviour
             GameObject contextObj = new GameObject("UMAContext");
             contextObj.transform.position = Vector3.zero;
 
-            // Add UMAContext component by type name
-            System.Type umaContextType = System.Type.GetType("UMA.CharacterSystem.UMAContext, Assembly-CSharp");
+            // Add UMAContext component by type name - search all assemblies
+            System.Type umaContextType = GetTypeFromAllAssemblies("UMA.CharacterSystem.UMAContext");
             if (umaContextType != null)
             {
                 contextObj.AddComponent(umaContextType);
@@ -172,6 +174,17 @@ public class VelinorSceneSetup : MonoBehaviour
                 Debug.LogWarning("⚠ Could not find UMAContext type - UMA may not be properly imported");
             }
         }
+    }
+
+    private System.Type GetTypeFromAllAssemblies(string typeName)
+    {
+        foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+        {
+            System.Type type = assembly.GetType(typeName, false);
+            if (type != null)
+                return type;
+        }
+        return null;
     }
 
     private Collider FindGroundPlane()
