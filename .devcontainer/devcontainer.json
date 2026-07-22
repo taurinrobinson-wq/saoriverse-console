@@ -1,6 +1,6 @@
 {
-  "name": "Emotional OS DevContainer",
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
+  "name": "Emotional OS + Darwin DevContainer",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
   "customizations": {
     "codespaces": {
       "openFiles": [
