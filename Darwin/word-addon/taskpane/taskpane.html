@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Darwin - Legal Formatter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="taskpane.css" />
+</head>
+<body>
+    <div class="taskpane-container">
+        <header class="taskpane-header">
+            <h1>Darwin</h1>
+            <p class="subtitle">Legal Text Formatter</p>
+        </header>
+
+        <main class="taskpane-main">
+            <!-- Heading Formatter Section -->
+            <section class="formatter-section">
+                <h2>Heading Formatter</h2>
+                <p class="section-description">
+                    Automatically detect and underline legal headings throughout your document.
+                </p>
+
+                <button id="formatHeadings" class="primary-button">
+                    Format Legal Headings
+                </button>
+
+                <div class="button-description">
+                    Detects and underlines:
+                    <ul>
+                        <li>Interrogatories (No. 1, 2, 3...)</li>
+                        <li>Requests for Production</li>
+                        <li>Requests for Admission</li>
+                        <li>Topics and Document Requests</li>
+                        <li>Section Headings (All Caps)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Future Sections (Placeholder) -->
+            <section class="formatter-section">
+                <h2>Coming Soon</h2>
+                <p class="section-description">
+                    Spacing presets, advanced formatting, and more...
+                </p>
+            </section>
+        </main>
+
+        <footer class="taskpane-footer">
+            <p>Darwin v1 - Legal Heading Formatter</p>
+        </footer>
+    </div>
+
+    <script src="taskpane.js"></script>
+</body>
+</html>

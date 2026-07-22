@@ -1,0 +1,17 @@
+{
+  "name": "darwin-word-addon",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --mode development --https",
+    "dev": "office-addin-debugging start manifest.xml",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "office-addin-debugging": "^6.1.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.76.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
