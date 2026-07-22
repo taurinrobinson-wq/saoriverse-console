@@ -1,6 +1,6 @@
 /**
  * Legal Document Formatting Templates
- * Based on California pleading standards and actual court-filed documents
+ * Based on ACTUAL court-filed documents (Cho v. Mobilitas RFA Response)
  */
 
 const TEMPLATES = {
@@ -8,94 +8,104 @@ const TEMPLATES = {
         name: "California Discovery",
         description: "California discovery document formatting (interrogatories, requests, admissions)",
 
-        // Margins from Cho v. Mobilitas document
+        // Margins from properly formatted Cho v. Mobilitas document
         margins: {
             top: 1152,      // 0.80 inches in twips
-            bottom: 1440,   // 1.0 inch (set negative to -1360 for special formatting)
+            bottom: 1440,   // 1.0 inch
             left: 1620,     // 1.12 inches
             right: 1440     // 1.0 inch
         },
-
-        // Attorney header formatting
+        
+        // Attorney header formatting (name, firm, contact info)
         headerFormatting: {
             fontSize: 12,
             fontName: "Times New Roman",
             bold: false,
             spacing: { before: 0, after: 0 }
         },
-
-        // Case caption formatting
+        
+        // Case caption formatting (ASKING PARTY, RESPONDING PARTY, SET NUMBER)
         captionFormatting: {
             fontSize: 12,
             fontName: "Times New Roman",
-            bold: false,
-            lineSpacing: 1.5,
-            spacing: { before: 240, after: 120 }
+            bold: true,
+            underline: false,
+            lineSpacing: 2.54,      // 304800 twips - nearly triple spacing
+            spacing: { before: 0, after: 0 }
         },
-
-        // Request/Question heading formatting
+        
+        // Request/Response heading formatting (REQUEST FOR ADMISSIONS NO. X)
         headingFormatting: {
             level1: {
                 fontSize: 12,
                 bold: true,
+                underline: true,    // ALL HEADINGS UNDERLINED in formatted doc
                 fontName: "Times New Roman",
-                underline: false,
+                lineSpacing: 2.54,  // 304800 twips
                 spacing: { before: 120, after: 60 },
                 alignment: "left"
             },
             level2: {
                 fontSize: 12,
-                bold: false,
+                bold: true,
+                underline: true,    // Response headings also underlined
                 fontName: "Times New Roman",
+                lineSpacing: 2.54,
                 spacing: { before: 60, after: 60 },
                 alignment: "left"
             }
         },
-
-        // Response text formatting
+        
+        // Request/Response body text formatting
         bodyFormatting: {
             fontSize: 12,
             fontName: "Times New Roman",
-            lineSpacing: 1.0,
+            lineSpacing: 2.54,     // 304800 twips - nearly triple-spaced
             spacing: { before: 0, after: 0 },
             alignment: "left",
             indent: {
-                firstLine: 0,
+                firstLine: 457200,   // 3.825 inches - LARGE indent on questions
                 hanging: 0
             }
         },
-
-        // Table formatting for case caption
-        tableFormatting: {
-            borders: true,
-            cellSpacing: 0,
+        
+        // Introductory text (preamble, "Pursuant to Code of Civil Procedure...")
+        preambleFormatting: {
             fontSize: 12,
-            fontName: "Times New Roman"
+            fontName: "Times New Roman",
+            lineSpacing: 2.54,
+            spacing: { before: 0, after: 0 },
+            alignment: "left",
+            indent: {
+                firstLine: 457200,   // Same large indent as body text
+                hanging: 0
+            }
         },
-
+        
         rules: [
-            "Discovery set number must be clearly identified",
-            "Each request followed by specific response",
-            "Margins: 0.8\" top, 1.12\" left, 1.0\" right",
-            "Font must be Times New Roman 12pt",
-            "Single spacing for body text",
-            "Use REQUEST FOR [TYPE] NO. [#] format",
-            "Use RESPONSE TO REQUEST format",
-            "Include objections and grounds if applicable"
+            "Line spacing: 2.54x (304800 twips) - nearly triple-spaced",
+            "All REQUEST and RESPONSE headings: BOLD + UNDERLINED",
+            "First-line indent on questions/responses: 3.825 inches (457200 twips)",
+            "Margins: 0.80\" top, 1.12\" left, 1.0\" right",
+            "Font: Times New Roman 12pt throughout",
+            "Request/Response pairs properly formatted",
+            "Bold labels in caption (ASKING PARTY, RESPONDING PARTY, SET NUMBER)",
+            "Include objections and legal grounds as applicable",
+            "Preamble text uses same large first-line indent"
         ]
     },
 
     ca_pleading: {
         name: "California Pleading",
         description: "California pleading paper formatting (complaints, answers, motions)",
-
+        
         margins: {
             top: 1440,      // 1 inch
             bottom: 1440,
             left: 1440,
             right: 1440
         },
-
+        
         headingFormatting: {
             level1: {
                 fontSize: 12,
@@ -113,7 +123,7 @@ const TEMPLATES = {
                 alignment: "left"
             }
         },
-
+        
         bodyFormatting: {
             fontSize: 12,
             fontName: "Times New Roman",
@@ -125,7 +135,7 @@ const TEMPLATES = {
                 hanging: 0
             }
         },
-
+        
         rules: [
             "Pleading paper with numbered lines required",
             "Double spacing mandatory",
@@ -141,14 +151,14 @@ const TEMPLATES = {
     contract: {
         name: "Generic Contract",
         description: "Professional contract formatting",
-
+        
         margins: {
             top: 1440,
             bottom: 1440,
             left: 1440,
             right: 1440
         },
-
+        
         headingFormatting: {
             level1: {
                 fontSize: 12,
@@ -159,7 +169,7 @@ const TEMPLATES = {
                 alignment: "left"
             }
         },
-
+        
         bodyFormatting: {
             fontSize: 11,
             fontName: "Arial",
@@ -171,7 +181,7 @@ const TEMPLATES = {
                 hanging: 0
             }
         },
-
+        
         rules: [
             "Arial 11pt font for modern look",
             "1.5 line spacing",
