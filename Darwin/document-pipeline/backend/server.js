@@ -13,6 +13,9 @@ const mammoth = require("mammoth");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// In-memory storage for uploaded files (for MVP)
+let lastUploadedFile = null;
+
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
@@ -42,6 +45,7 @@ const upload = multer({
 });
 
 const TEMPLATES = require("./templates");
+const HEADING_PATTERNS = require("./headingPatterns");
 
 /**
  * GET /api/templates
@@ -68,6 +72,13 @@ app.post("/api/analyze", upload.single("document"), async (req, res) => {
 
         const filePath = req.file.path;
 
+        // Store file path for later reformatting
+        lastUploadedFile = {
+            path: filePath,
+            originalName: req.file.originalname,
+            uploadedAt: Date.now()
+        };
+
         // Extract text and basic info from Word document
         const result = await mammoth.extractRawText({ path: filePath });
 
@@ -80,10 +91,6 @@ app.post("/api/analyze", upload.single("document"), async (req, res) => {
             detectedHeadings: detectHeadings(result.value),
             recommendations: generateRecommendations(result.value)
         };
-
-        // Store file reference for later reformatting
-        req.session = req.session || {};
-        req.session.uploadedFile = filePath;
 
         res.json(analysis);
     } catch (error) {
@@ -104,10 +111,9 @@ app.post("/api/reformat", async (req, res) => {
             return res.status(400).json({ error: "Invalid template" });
         }
 
-        // For now, return a simple reformatted file
-        // This is a proof of concept - full implementation will process the actual docx
-        const fileName = `darwin-reformatted-${template}-${Date.now()}.docx`;
-        const filePath = path.join(__dirname, "../output", fileName);
+        if (!lastUploadedFile) {
+            return res.status(400).json({ error: "No document uploaded" });
+        }
 
         // Create output directory if needed
         const outputDir = path.join(__dirname, "../output");
@@ -115,22 +121,99 @@ app.post("/api/reformat", async (req, res) => {
             fs.mkdirSync(outputDir, { recursive: true });
         }
 
-        // Placeholder: In production, this would process the actual docx using docx library
-        // and apply formatting rules from the template
-        const placeholderContent = Buffer.from(`
-Document reformatted using template: ${TEMPLATES[template].name}
+        // Extract text from the uploaded document
+        const result = await mammoth.extractRawText({ path: lastUploadedFile.path });
+        const text = result.value;
+        const lines = text.split('\n').filter(l => l.trim().length > 0);
 
-Formatting Applied:
-${TEMPLATES[template].rules.map((rule, i) => `${i + 1}. ${rule}`).join('\n')}
-    `);
+        // Import docx functions at top of file if not already done
+        const { Document, Packer, Paragraph, TextRun, UnderlineType, AlignmentType } = require("docx");
+        const templateConfig = TEMPLATES[template];
 
-        fs.writeFileSync(filePath, placeholderContent);
+        // Create paragraphs with template formatting
+        const paragraphs = lines.map(line => {
+            const trimmed = line.trim();
+            let isHeading = false;
+
+            // Check if this line is a heading
+            for (const pattern of HEADING_PATTERNS) {
+                if (pattern.regex.test(trimmed)) {
+                    isHeading = true;
+                    // Apply heading formatting
+                    const headingFormat = templateConfig.headingFormatting.level1;
+                    return new Paragraph({
+                        children: [
+                            new TextRun({
+                                text: trimmed,
+                                bold: headingFormat.bold,
+                                underline: headingFormat.underline ? { type: UnderlineType.SINGLE } : undefined,
+                                size: headingFormat.fontSize * 2, // Convert to half-points
+                                font: headingFormat.fontName
+                            })
+                        ],
+                        spacing: headingFormat.spacing,
+                        line: templateConfig.bodyFormatting.lineSpacing * 240, // Convert to twips
+                        alignment: headingFormat.alignment === "center" ? AlignmentType.CENTER :
+                            headingFormat.alignment === "right" ? AlignmentType.RIGHT : AlignmentType.LEFT
+                    });
+                }
+            }
+
+            // Apply body text formatting
+            if (!isHeading) {
+                const bodyFormat = templateConfig.bodyFormatting;
+                return new Paragraph({
+                    children: [
+                        new TextRun({
+                            text: trimmed,
+                            bold: false,
+                            size: bodyFormat.fontSize * 2,
+                            font: bodyFormat.fontName
+                        })
+                    ],
+                    spacing: bodyFormat.spacing,
+                    line: bodyFormat.lineSpacing * 240, // Convert to twips
+                    alignment: bodyFormat.alignment === "center" ? AlignmentType.CENTER :
+                        bodyFormat.alignment === "right" ? AlignmentType.RIGHT : AlignmentType.LEFT,
+                    indent: {
+                        firstLine: bodyFormat.indent.firstLine,
+                        hanging: bodyFormat.indent.hanging
+                    }
+                });
+            }
+        }).filter(p => p); // Remove undefined paragraphs
+
+        // Create new Word document
+        const doc = new Document({
+            sections: [
+                {
+                    properties: {
+                        page: {
+                            margins: {
+                                top: templateConfig.margins.top,
+                                bottom: templateConfig.margins.bottom,
+                                left: templateConfig.margins.left,
+                                right: templateConfig.margins.right
+                            }
+                        }
+                    },
+                    children: paragraphs
+                }
+            ]
+        });
+
+        // Generate and save the document
+        const fileName = `darwin-reformatted-${template}-${Date.now()}.docx`;
+        const filePath = path.join(outputDir, fileName);
+
+        const buffer = await Packer.toBuffer(doc);
+        fs.writeFileSync(filePath, buffer);
 
         res.json({
             success: true,
             message: "Document reformatted successfully",
             fileName: fileName,
-            template: TEMPLATES[template].name,
+            template: templateConfig.name,
             downloadUrl: `/download/${fileName}`
         });
     } catch (error) {

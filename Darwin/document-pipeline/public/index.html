@@ -1,559 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Darwin Document Pipeline - Legal Document Formatter</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darwin Document Pipeline - Legal Document Formatter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      overflow: hidden;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
 
-    .header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 40px;
-      text-align: center;
-    }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
 
-    .header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-    .header p {
-      font-size: 1.1em;
-      opacity: 0.95;
-    }
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
 
-    .content {
-      padding: 40px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      min-height: 500px;
-    }
+        .content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            min-height: 500px;
+        }
 
-    @media (max-width: 900px) {
-      .content {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
+        @media (max-width: 900px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
 
-    .section {
-      border: 2px solid #e0e0ff;
-      border-radius: 8px;
-      padding: 30px;
-      background: #f8f9ff;
-    }
+        .section {
+            border: 2px solid #e0e0ff;
+            border-radius: 8px;
+            padding: 30px;
+            background: #f8f9ff;
+        }
 
-    .section h2 {
-      color: #667eea;
-      margin-bottom: 20px;
-      font-size: 1.5em;
-      border-bottom: 3px solid #667eea;
-      padding-bottom: 10px;
-    }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
 
-    .upload-area {
-      border: 3px dashed #667eea;
-      border-radius: 8px;
-      padding: 40px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: white;
-    }
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
 
-    .upload-area:hover {
-      border-color: #764ba2;
-      background: #f0f4ff;
-    }
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f4ff;
+        }
 
-    .upload-area.dragover {
-      border-color: #764ba2;
-      background: #e0e0ff;
-    }
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e0e0ff;
+        }
 
-    .upload-area p {
-      color: #667eea;
-      font-size: 1.1em;
-      margin-bottom: 10px;
-    }
+        .upload-area p {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
 
-    .upload-area small {
-      color: #999;
-    }
+        .upload-area small {
+            color: #999;
+        }
 
-    input[type="file"] {
-      display: none;
-    }
+        input[type="file"] {
+            display: none;
+        }
 
-    .file-input-hidden {
-      display: none;
-    }
+        .file-input-hidden {
+            display: none;
+        }
 
-    .templates-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
+        .templates-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
 
-    .template-option {
-      padding: 15px;
-      border: 2px solid #e0e0ff;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: white;
-    }
+        .template-option {
+            padding: 15px;
+            border: 2px solid #e0e0ff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
 
-    .template-option:hover {
-      border-color: #667eea;
-      background: #f0f4ff;
-    }
+        .template-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
 
-    .template-option input[type="radio"] {
-      margin-right: 10px;
-    }
+        .template-option input[type="radio"] {
+            margin-right: 10px;
+        }
 
-    .template-option label {
-      cursor: pointer;
-      display: block;
-    }
+        .template-option label {
+            cursor: pointer;
+            display: block;
+        }
 
-    .template-name {
-      font-weight: bold;
-      color: #667eea;
-      margin-bottom: 5px;
-    }
+        .template-name {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
 
-    .template-description {
-      font-size: 0.9em;
-      color: #666;
-    }
+        .template-description {
+            font-size: 0.9em;
+            color: #666;
+        }
 
-    .analysis-results {
-      background: white;
-      border: 2px solid #e0e0ff;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      display: none;
-    }
+        .analysis-results {
+            background: white;
+            border: 2px solid #e0e0ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
 
-    .analysis-results.visible {
-      display: block;
-    }
+        .analysis-results.visible {
+            display: block;
+        }
 
-    .stat-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #e0e0ff;
-    }
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0ff;
+        }
 
-    .stat-item:last-child {
-      border-bottom: none;
-    }
+        .stat-item:last-child {
+            border-bottom: none;
+        }
 
-    .stat-label {
-      font-weight: bold;
-      color: #667eea;
-    }
+        .stat-label {
+            font-weight: bold;
+            color: #667eea;
+        }
 
-    .stat-value {
-      color: #764ba2;
-    }
+        .stat-value {
+            color: #764ba2;
+        }
 
-    .headings-list {
-      background: white;
-      border: 2px solid #e0e0ff;
-      border-radius: 8px;
-      padding: 15px;
-      max-height: 200px;
-      overflow-y: auto;
-      margin-bottom: 20px;
-      display: none;
-    }
+        .headings-list {
+            background: white;
+            border: 2px solid #e0e0ff;
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            display: none;
+        }
 
-    .headings-list.visible {
-      display: block;
-    }
+        .headings-list.visible {
+            display: block;
+        }
 
-    .heading-item {
-      padding: 8px;
-      margin-bottom: 5px;
-      background: #f0f4ff;
-      border-left: 4px solid #667eea;
-      border-radius: 2px;
-      font-size: 0.9em;
-    }
+        .heading-item {
+            padding: 8px;
+            margin-bottom: 5px;
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            border-radius: 2px;
+            font-size: 0.9em;
+        }
 
-    .heading-type {
-      font-weight: bold;
-      color: #667eea;
-    }
+        .heading-type {
+            font-weight: bold;
+            color: #667eea;
+        }
 
-    .button {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 6px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: bold;
-    }
+        .button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
 
-    .button-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      width: 100%;
-      margin-bottom: 10px;
-    }
+        .button-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 100%;
+            margin-bottom: 10px;
+        }
 
-    .button-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-    }
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
 
-    .button-primary:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
+        .button-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
 
-    .button-secondary {
-      background: white;
-      color: #667eea;
-      border: 2px solid #667eea;
-      margin-right: 10px;
-    }
+        .button-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            margin-right: 10px;
+        }
 
-    .button-secondary:hover {
-      background: #f0f4ff;
-    }
+        .button-secondary:hover {
+            background: #f0f4ff;
+        }
 
-    .status-message {
-      padding: 15px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      display: none;
-    }
+        .status-message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
 
-    .status-message.visible {
-      display: block;
-    }
+        .status-message.visible {
+            display: block;
+        }
 
-    .status-message.success {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
 
-    .status-message.error {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
 
-    .status-message.info {
-      background: #d1ecf1;
-      color: #0c5460;
-      border: 1px solid #bee5eb;
-    }
+        .status-message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
 
-    .footer {
-      background: #f0f4ff;
-      padding: 20px 40px;
-      text-align: center;
-      color: #667eea;
-      font-size: 0.9em;
-    }
+        .footer {
+            background: #f0f4ff;
+            padding: 20px 40px;
+            text-align: center;
+            color: #667eea;
+            font-size: 0.9em;
+        }
 
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(102, 126, 234, 0.3);
-      border-radius: 50%;
-      border-top-color: #667eea;
-      animation: spin 1s ease-in-out infinite;
-    }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            border-top-color: #667eea;
+            animation: spin 1s ease-in-out infinite;
+        }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>🧬 Darwin Document Pipeline</h1>
-      <p>Upload, analyze, and reformat legal documents for court compliance</p>
-    </div>
-
-    <div class="content">
-      <!-- Left: Upload and Analysis -->
-      <div>
-        <div class="section">
-          <h2>📄 Upload Document</h2>
-          
-          <div class="upload-area" id="uploadArea">
-            <p>📁 Drop your .docx file here</p>
-            <small>or click to browse</small>
-            <input type="file" id="fileInput" accept=".docx" />
-          </div>
-
-          <div id="uploadStatus" class="status-message"></div>
-
-          <div id="analysisResults" class="analysis-results">
-            <div class="stat-item">
-              <span class="stat-label">Document:</span>
-              <span class="stat-value" id="fileName">-</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">Paragraphs:</span>
-              <span class="stat-value" id="paragraphCount">-</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">Headings Detected:</span>
-              <span class="stat-value" id="headingCount">-</span>
-            </div>
-          </div>
-
-          <div id="headingsList" class="headings-list">
-            <strong style="color: #667eea;">Detected Legal Headings:</strong>
-            <div id="headingsContent"></div>
-          </div>
-
-          <div id="recommendations" style="display: none; background: white; border: 2px solid #e0e0ff; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
-            <strong style="color: #667eea; display: block; margin-bottom: 10px;">✨ Recommendations:</strong>
-            <div id="recommendationsContent"></div>
-          </div>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 Darwin Document Pipeline</h1>
+            <p>Upload, analyze, and reformat legal documents for court compliance</p>
         </div>
-      </div>
 
-      <!-- Right: Template Selection and Reformat -->
-      <div>
-        <div class="section">
-          <h2>⚙️ Select Template & Reformat</h2>
-          
-          <label style="display: block; margin-bottom: 15px; color: #667eea; font-weight: bold;">
-            Choose a formatting template:
-          </label>
+        <div class="content">
+            <!-- Left: Upload and Analysis -->
+            <div>
+                <div class="section">
+                    <h2>📄 Upload Document</h2>
 
-          <div class="templates-grid" id="templatesGrid"></div>
+                    <div class="upload-area" id="uploadArea">
+                        <p>📁 Drop your .docx file here</p>
+                        <small>or click to browse</small>
+                        <input type="file" id="fileInput" accept=".docx" />
+                    </div>
 
-          <button id="reformatBtn" class="button button-primary" disabled>
-            ✨ Reformat Document
-          </button>
+                    <div id="uploadStatus" class="status-message"></div>
 
-          <div id="reformatStatus" class="status-message"></div>
+                    <div id="analysisResults" class="analysis-results">
+                        <div class="stat-item">
+                            <span class="stat-label">Document:</span>
+                            <span class="stat-value" id="fileName">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Paragraphs:</span>
+                            <span class="stat-value" id="paragraphCount">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Headings Detected:</span>
+                            <span class="stat-value" id="headingCount">-</span>
+                        </div>
+                    </div>
 
-          <div id="downloadSection" style="display: none; background: white; border: 2px solid #667eea; border-radius: 8px; padding: 20px; text-align: center;">
-            <p style="color: #667eea; margin-bottom: 15px;">✅ Document reformatted successfully!</p>
-            <button id="downloadBtn" class="button button-primary">
-              📥 Download Reformatted Document
-            </button>
-          </div>
+                    <div id="headingsList" class="headings-list">
+                        <strong style="color: #667eea;">Detected Legal Headings:</strong>
+                        <div id="headingsContent"></div>
+                    </div>
+
+                    <div id="recommendations"
+                        style="display: none; background: white; border: 2px solid #e0e0ff; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                        <strong style="color: #667eea; display: block; margin-bottom: 10px;">✨ Recommendations:</strong>
+                        <div id="recommendationsContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Template Selection and Reformat -->
+            <div>
+                <div class="section">
+                    <h2>⚙️ Select Template & Reformat</h2>
+
+                    <label style="display: block; margin-bottom: 15px; color: #667eea; font-weight: bold;">
+                        Choose a formatting template:
+                    </label>
+
+                    <div class="templates-grid" id="templatesGrid"></div>
+
+                    <button id="reformatBtn" class="button button-primary" disabled>
+                        ✨ Reformat Document
+                    </button>
+
+                    <div id="reformatStatus" class="status-message"></div>
+
+                    <div id="downloadSection"
+                        style="display: none; background: white; border: 2px solid #667eea; border-radius: 8px; padding: 20px; text-align: center;">
+                        <p style="color: #667eea; margin-bottom: 15px;">✅ Document reformatted successfully!</p>
+                        <button id="downloadBtn" class="button button-primary">
+                            📥 Download Reformatted Document
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="footer">
+            <p>✨ Darwin v2 - Legal Document Pipeline | Powered by intelligent formatting</p>
+        </div>
     </div>
 
-    <div class="footer">
-      <p>✨ Darwin v2 - Legal Document Pipeline | Powered by intelligent formatting</p>
-    </div>
-  </div>
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const analysisResults = document.getElementById('analysisResults');
+        const templatesGrid = document.getElementById('templatesGrid');
+        const reformatBtn = document.getElementById('reformatBtn');
+        const reformatStatus = document.getElementById('reformatStatus');
+        const downloadSection = document.getElementById('downloadSection');
+        const downloadBtn = document.getElementById('downloadBtn');
 
-  <script>
-    const uploadArea = document.getElementById('uploadArea');
-    const fileInput = document.getElementById('fileInput');
-    const uploadStatus = document.getElementById('uploadStatus');
-    const analysisResults = document.getElementById('analysisResults');
-    const templatesGrid = document.getElementById('templatesGrid');
-    const reformatBtn = document.getElementById('reformatBtn');
-    const reformatStatus = document.getElementById('reformatStatus');
-    const downloadSection = document.getElementById('downloadSection');
-    const downloadBtn = document.getElementById('downloadBtn');
+        let selectedTemplate = null;
+        let currentAnalysis = null;
 
-    let selectedTemplate = null;
-    let currentAnalysis = null;
+        // Initialize templates
+        loadTemplates();
 
-    // Initialize templates
-    loadTemplates();
+        // Upload area events
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) handleFileUpload(files[0]);
+        });
 
-    // Upload area events
-    uploadArea.addEventListener('click', () => fileInput.click());
-    uploadArea.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      uploadArea.classList.add('dragover');
-    });
-    uploadArea.addEventListener('dragleave', () => {
-      uploadArea.classList.remove('dragover');
-    });
-    uploadArea.addEventListener('drop', (e) => {
-      e.preventDefault();
-      uploadArea.classList.remove('dragover');
-      const files = e.dataTransfer.files;
-      if (files.length > 0) handleFileUpload(files[0]);
-    });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) handleFileUpload(e.target.files[0]);
+        });
 
-    fileInput.addEventListener('change', (e) => {
-      if (e.target.files.length > 0) handleFileUpload(e.target.files[0]);
-    });
+        reformatBtn.addEventListener('click', reformatDocument);
+        downloadBtn.addEventListener('click', downloadDocument);
 
-    reformatBtn.addEventListener('click', reformatDocument);
-    downloadBtn.addEventListener('click', downloadDocument);
+        async function loadTemplates() {
+            try {
+                const response = await fetch('/api/templates');
+                const templates = await response.json();
 
-    async function loadTemplates() {
-      try {
-        const response = await fetch('/api/templates');
-        const templates = await response.json();
-        
-        templates.forEach((template, idx) => {
-          const label = document.createElement('label');
-          label.className = 'template-option';
-          label.innerHTML = `
+                templates.forEach((template, idx) => {
+                    const label = document.createElement('label');
+                    label.className = 'template-option';
+                    label.innerHTML = `
             <input type="radio" name="template" value="${template.id}" ${idx === 0 ? 'checked' : ''}>
             <div>
               <div class="template-name">${template.name}</div>
               <div class="template-description">${template.description}</div>
             </div>
           `;
-          label.addEventListener('change', (e) => {
-            selectedTemplate = e.target.value;
-            reformatBtn.disabled = !currentAnalysis;
-          });
-          templatesGrid.appendChild(label);
-        });
+                    label.addEventListener('change', (e) => {
+                        selectedTemplate = e.target.value;
+                        reformatBtn.disabled = !currentAnalysis;
+                    });
+                    templatesGrid.appendChild(label);
+                });
 
-        if (templates.length > 0) {
-          selectedTemplate = templates[0].id;
-        }
-      } catch (error) {
-        console.error('Error loading templates:', error);
-        showMessage(uploadStatus, 'Error loading templates', 'error');
-      }
-    }
-
-    async function handleFileUpload(file) {
-      if (!file.name.endsWith('.docx')) {
-        showMessage(uploadStatus, 'Only .docx files are supported', 'error');
-        return;
-      }
-
-      showMessage(uploadStatus, 'Analyzing document... <div class="loading"></div>', 'info');
-
-      const formData = new FormData();
-      formData.append('document', file);
-
-      try {
-        const response = await fetch('/api/analyze', {
-          method: 'POST',
-          body: formData
-        });
-
-        if (!response.ok) throw new Error('Upload failed');
-
-        const analysis = await response.json();
-        currentAnalysis = analysis;
-
-        // Display analysis results
-        document.getElementById('fileName').textContent = analysis.fileName;
-        document.getElementById('paragraphCount').textContent = analysis.paragraphs || '-';
-        document.getElementById('headingCount').textContent = analysis.detectedHeadings.length;
-
-        if (analysis.detectedHeadings.length > 0) {
-          const headingsContent = document.getElementById('headingsContent');
-          headingsContent.innerHTML = analysis.detectedHeadings
-            .map(h => `<div class="heading-item"><span class="heading-type">${h.type}:</span> ${h.text}</div>`)
-            .join('');
-          document.getElementById('headingsList').classList.add('visible');
+                if (templates.length > 0) {
+                    selectedTemplate = templates[0].id;
+                }
+            } catch (error) {
+                console.error('Error loading templates:', error);
+                showMessage(uploadStatus, 'Error loading templates', 'error');
+            }
         }
 
-        if (analysis.recommendations && analysis.recommendations.length > 0) {
-          const recsDiv = document.getElementById('recommendations');
-          recsDiv.style.display = 'block';
-          document.getElementById('recommendationsContent').innerHTML = analysis.recommendations
-            .map(r => `<div style="padding: 8px 0; color: #666;">• ${r}</div>`)
-            .join('');
+        async function handleFileUpload(file) {
+            if (!file.name.endsWith('.docx')) {
+                showMessage(uploadStatus, 'Only .docx files are supported', 'error');
+                return;
+            }
+
+            showMessage(uploadStatus, 'Analyzing document... <div class="loading"></div>', 'info');
+
+            const formData = new FormData();
+            formData.append('document', file);
+
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) throw new Error('Upload failed');
+
+                const analysis = await response.json();
+                currentAnalysis = analysis;
+
+                // Display analysis results
+                document.getElementById('fileName').textContent = analysis.fileName;
+                document.getElementById('paragraphCount').textContent = analysis.paragraphs || '-';
+                document.getElementById('headingCount').textContent = analysis.detectedHeadings.length;
+
+                if (analysis.detectedHeadings.length > 0) {
+                    const headingsContent = document.getElementById('headingsContent');
+                    headingsContent.innerHTML = analysis.detectedHeadings
+                        .map(h => `<div class="heading-item"><span class="heading-type">${h.type}:</span> ${h.text}</div>`)
+                        .join('');
+                    document.getElementById('headingsList').classList.add('visible');
+                }
+
+                if (analysis.recommendations && analysis.recommendations.length > 0) {
+                    const recsDiv = document.getElementById('recommendations');
+                    recsDiv.style.display = 'block';
+                    document.getElementById('recommendationsContent').innerHTML = analysis.recommendations
+                        .map(r => `<div style="padding: 8px 0; color: #666;">• ${r}</div>`)
+                        .join('');
+                }
+
+                analysisResults.classList.add('visible');
+                reformatBtn.disabled = false;
+                showMessage(uploadStatus, '✅ Document analyzed successfully', 'success');
+            } catch (error) {
+                console.error('Error uploading document:', error);
+                showMessage(uploadStatus, 'Error analyzing document: ' + error.message, 'error');
+            }
         }
 
-        analysisResults.classList.add('visible');
-        reformatBtn.disabled = false;
-        showMessage(uploadStatus, '✅ Document analyzed successfully', 'success');
-      } catch (error) {
-        console.error('Error uploading document:', error);
-        showMessage(uploadStatus, 'Error analyzing document: ' + error.message, 'error');
-      }
-    }
+        async function reformatDocument() {
+            if (!selectedTemplate || !currentAnalysis) {
+                showMessage(reformatStatus, 'Please upload a document first', 'error');
+                return;
+            }
 
-    async function reformatDocument() {
-      if (!selectedTemplate || !currentAnalysis) {
-        showMessage(reformatStatus, 'Please upload a document first', 'error');
-        return;
-      }
+            reformatBtn.disabled = true;
+            showMessage(reformatStatus, 'Reformatting document... <div class="loading"></div>', 'info');
 
-      reformatBtn.disabled = true;
-      showMessage(reformatStatus, 'Reformatting document... <div class="loading"></div>', 'info');
+            try {
+                const response = await fetch('/api/reformat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ template: selectedTemplate })
+                });
 
-      try {
-        const response = await fetch('/api/reformat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ template: selectedTemplate })
-        });
+                if (!response.ok) throw new Error('Reformat failed');
 
-        if (!response.ok) throw new Error('Reformat failed');
+                const result = await response.json();
 
-        const result = await response.json();
-        
-        if (result.success) {
-          document.getElementById('downloadBtn').dataset.fileName = result.fileName;
-          downloadSection.style.display = 'block';
-          showMessage(reformatStatus, '✅ Document reformatted successfully using ' + result.template, 'success');
+                if (result.success) {
+                    document.getElementById('downloadBtn').dataset.fileName = result.fileName;
+                    downloadSection.style.display = 'block';
+                    showMessage(reformatStatus, '✅ Document reformatted successfully using ' + result.template, 'success');
+                }
+            } catch (error) {
+                console.error('Error reformatting:', error);
+                showMessage(reformatStatus, 'Error reformatting document: ' + error.message, 'error');
+            } finally {
+                reformatBtn.disabled = false;
+            }
         }
-      } catch (error) {
-        console.error('Error reformatting:', error);
-        showMessage(reformatStatus, 'Error reformatting document: ' + error.message, 'error');
-      } finally {
-        reformatBtn.disabled = false;
-      }
-    }
 
-    function downloadDocument() {
-      const fileName = downloadBtn.dataset.fileName;
-      if (fileName) {
-        window.location.href = `/download/${fileName}`;
-      }
-    }
+        function downloadDocument() {
+            const fileName = downloadBtn.dataset.fileName;
+            if (fileName) {
+                window.location.href = `/download/${fileName}`;
+            }
+        }
 
-    function showMessage(container, message, type) {
-      container.innerHTML = message;
-      container.className = `status-message visible ${type}`;
-    }
-  </script>
+        function showMessage(container, message, type) {
+            container.innerHTML = message;
+            container.className = `status-message visible ${type}`;
+        }
+    </script>
 </body>
+
 </html>
