@@ -1,0 +1,30 @@
+{
+    "name": "darwin-document-pipeline",
+    "version": "2.0.0",
+    "description": "Darwin v2 - Legal Document Formatting Pipeline. Upload Word documents, detect formatting issues, and reformat to court-ready templates.",
+    "main": "backend/server.js",
+    "scripts": {
+        "start": "node backend/server.js",
+        "dev": "nodemon backend/server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "legal",
+        "documents",
+        "formatting",
+        "discovery",
+        "pleading",
+        "contract"
+    ],
+    "author": "Taurin Robinson",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "multer": "^1.4.5-lts.1",
+        "docx": "^8.5.0",
+        "mammoth": "^1.6.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
