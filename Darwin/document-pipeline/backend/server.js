@@ -124,64 +124,161 @@ app.post("/api/reformat", async (req, res) => {
         // Extract text from the uploaded document
         const result = await mammoth.extractRawText({ path: lastUploadedFile.path });
         const text = result.value;
-        const lines = text.split('\n').filter(l => l.trim().length > 0);
 
-        // Import docx functions at top of file if not already done
-        const { Document, Packer, Paragraph, TextRun, UnderlineType, AlignmentType } = require("docx");
+        // Import docx functions
+        const { Document, Packer, Paragraph, TextRun, UnderlineType, AlignmentType, Table, TableRow, TableCell, BorderStyle, WidthType } = require("docx");
         const templateConfig = TEMPLATES[template];
 
-        // Create paragraphs with template formatting
-        const paragraphs = lines.map(line => {
-            const trimmed = line.trim();
-            let isHeading = false;
+        // Parse document structure
+        const docStructure = parseDiscoveryDocument(text);
 
-            // Check if this line is a heading
-            for (const pattern of HEADING_PATTERNS) {
-                if (pattern.regex.test(trimmed)) {
-                    isHeading = true;
-                    // Apply heading formatting
-                    const headingFormat = templateConfig.headingFormatting.level1;
-                    return new Paragraph({
-                        children: [
-                            new TextRun({
-                                text: trimmed,
-                                bold: headingFormat.bold,
-                                underline: headingFormat.underline ? { type: UnderlineType.SINGLE } : undefined,
-                                size: headingFormat.fontSize * 2, // Convert to half-points
-                                font: headingFormat.fontName
-                            })
-                        ],
-                        spacing: headingFormat.spacing,
-                        line: templateConfig.bodyFormatting.lineSpacing * 240, // Convert to twips
-                        alignment: headingFormat.alignment === "center" ? AlignmentType.CENTER :
-                            headingFormat.alignment === "right" ? AlignmentType.RIGHT : AlignmentType.LEFT
-                    });
-                }
-            }
+        // Build document with proper sections
+        const paragraphs = [];
 
-            // Apply body text formatting
-            if (!isHeading) {
-                const bodyFormat = templateConfig.bodyFormatting;
-                return new Paragraph({
-                    children: [
-                        new TextRun({
-                            text: trimmed,
+        // 1. ADD ATTORNEY HEADER (plain paragraphs, no special formatting)
+        if (docStructure.attorneyHeader) {
+            docStructure.attorneyHeader.split('\n').filter(l => l.trim().length > 0).forEach(line => {
+                paragraphs.push(new Paragraph({
+                    children: [new TextRun({
+                        text: line.trim(),
+                        bold: false,
+                        size: 12 * 2,
+                        font: "Times New Roman"
+                    })],
+                    alignment: AlignmentType.LEFT,
+                    line: 12 * 240,
+                    spacing: { before: 0, after: 0 }
+                }));
+            });
+            paragraphs.push(new Paragraph({ text: "", spacing: { before: 120 } }));
+        }
+
+        // 2. ADD PREAMBLE HEADERS (centered, "IN THE MATTER OF...")
+        if (docStructure.preambleHeader) {
+            docStructure.preambleHeader.split('\n').filter(l => l.trim().length > 0).forEach(line => {
+                paragraphs.push(new Paragraph({
+                    children: [new TextRun({
+                        text: line.trim(),
+                        bold: false,
+                        size: 12 * 2,
+                        font: "Times New Roman"
+                    })],
+                    alignment: AlignmentType.CENTER,
+                    line: 12 * 240,
+                    spacing: { before: 0, after: 60 }
+                }));
+            });
+            paragraphs.push(new Paragraph({ text: "", spacing: { before: 120 } }));
+        }
+
+        // 3. ADD CASE CAPTION TABLE (2-column: parties on left, case info on right)
+        if (docStructure.caseCaption) {
+            paragraphs.push(...buildCaptionTable(docStructure.caseCaption));
+            paragraphs.push(new Paragraph({ text: "", spacing: { before: 120 } }));
+        }
+
+        // 4. ADD MAIN SECTION TITLE (centered, bold, underlined)
+        if (docStructure.mainSectionTitle) {
+            paragraphs.push(new Paragraph({
+                children: [
+                    new TextRun({
+                        text: docStructure.mainSectionTitle,
+                        bold: true,
+                        underline: { type: UnderlineType.SINGLE },
+                        size: 12 * 2,
+                        font: "Times New Roman"
+                    })
+                ],
+                alignment: AlignmentType.CENTER,
+                line: 24 * 240, // 24pt spacing
+                spacing: { before: 120, after: 200 }
+            }));
+        }
+
+        // 5. ADD REQUESTS AND RESPONSES
+        if (docStructure.requests && docStructure.requests.length > 0) {
+            docStructure.requests.forEach((request, idx) => {
+                // REQUEST HEADING - bold, underlined, left-aligned, 24pt spacing
+                paragraphs.push(new Paragraph({
+                    children: [new TextRun({
+                        text: request.heading,
+                        bold: true,
+                        underline: { type: UnderlineType.SINGLE },
+                        size: 12 * 2,
+                        font: "Times New Roman"
+                    })],
+                    alignment: AlignmentType.LEFT,
+                    line: 24 * 240,
+                    spacing: { before: 120, after: 60 }
+                }));
+
+                // REQUEST TEXT - 0.5" indent, 24pt spacing
+                if (request.text && request.text.trim().length > 0) {
+                    paragraphs.push(new Paragraph({
+                        children: [new TextRun({
+                            text: request.text.trim(),
                             bold: false,
-                            size: bodyFormat.fontSize * 2,
-                            font: bodyFormat.fontName
-                        })
-                    ],
-                    spacing: bodyFormat.spacing,
-                    line: bodyFormat.lineSpacing * 240, // Convert to twips
-                    alignment: bodyFormat.alignment === "center" ? AlignmentType.CENTER :
-                        bodyFormat.alignment === "right" ? AlignmentType.RIGHT : AlignmentType.LEFT,
-                    indent: {
-                        firstLine: bodyFormat.indent.firstLine,
-                        hanging: bodyFormat.indent.hanging
-                    }
-                });
-            }
-        }).filter(p => p); // Remove undefined paragraphs
+                            size: 12 * 2,
+                            font: "Times New Roman"
+                        })],
+                        alignment: AlignmentType.LEFT,
+                        line: 24 * 240,
+                        indent: { firstLine: 720 }, // 0.5 inch
+                        spacing: { before: 0, after: 120 }
+                    }));
+                }
+
+                // RESPONSE HEADING - bold, underlined, left-aligned, 24pt spacing
+                if (request.responseHeading && request.responseHeading.trim().length > 0) {
+                    paragraphs.push(new Paragraph({
+                        children: [new TextRun({
+                            text: request.responseHeading.trim(),
+                            bold: true,
+                            underline: { type: UnderlineType.SINGLE },
+                            size: 12 * 2,
+                            font: "Times New Roman"
+                        })],
+                        alignment: AlignmentType.LEFT,
+                        line: 24 * 240,
+                        spacing: { before: 60, after: 60 }
+                    }));
+                }
+
+                // RESPONSE TEXT - 0.5" indent, 24pt spacing
+                if (request.responseText && request.responseText.trim().length > 0) {
+                    paragraphs.push(new Paragraph({
+                        children: [new TextRun({
+                            text: request.responseText.trim(),
+                            bold: false,
+                            size: 12 * 2,
+                            font: "Times New Roman"
+                        })],
+                        alignment: AlignmentType.LEFT,
+                        line: 24 * 240,
+                        indent: { firstLine: 720 }, // 0.5 inch
+                        spacing: { before: 0, after: 120 }
+                    }));
+                }
+            });
+        }
+
+        // 6. ADD SIGNATURE BLOCK (12pt spacing)
+        if (docStructure.signatureBlock && docStructure.signatureBlock.trim().length > 0) {
+            paragraphs.push(new Paragraph({ text: "", spacing: { before: 300 } }));
+            docStructure.signatureBlock.split('\n').filter(l => l.trim().length > 0).forEach(line => {
+                paragraphs.push(new Paragraph({
+                    children: [new TextRun({
+                        text: line.trim(),
+                        bold: false,
+                        size: 12 * 2,
+                        font: "Times New Roman"
+                    })],
+                    alignment: AlignmentType.LEFT,
+                    line: 12 * 240,
+                    spacing: { before: 0, after: 0 }
+                }));
+            });
+        }
 
         // Create new Word document
         const doc = new Document({
@@ -245,6 +342,246 @@ app.get("/download/:fileName", (req, res) => {
         res.status(500).json({ error: "Failed to download file" });
     }
 });
+
+/**
+ * Helper: Build 2-column caption table for discovery documents
+ */
+function buildCaptionTable(caption) {
+    const { Table, TableRow, TableCell, Paragraph, TextRun, AlignmentType, BorderStyle, WidthType } = require("docx");
+
+    // Parse caption into left (parties) and right (case info) columns
+    const lines = caption.split('\n').filter(l => l.trim().length > 0);
+    const leftCol = [];
+    const rightCol = [];
+
+    lines.forEach(line => {
+        const trimmed = line.trim();
+        // Heuristic: "Claim No." and "SET" lines go to right column
+        if (trimmed.match(/^(SET\s+NUMBER|CLAIM\s+NO|RESPONSES?)/i)) {
+            rightCol.push(trimmed);
+        } else if (trimmed.match(/^(ASKING|RESPONDING|SET|CLAIM)/i) && trimmed.includes(':')) {
+            // Split "ASKING PARTY: value" into separate parts
+            const [label, ...values] = trimmed.split(':');
+            const value = values.join(':').trim();
+            if (label.match(/^(ASKING|RESPONDENT|RESPONDING)/i)) {
+                leftCol.push(label.trim() + ':');
+                if (value) leftCol.push(value);
+            } else {
+                rightCol.push(label.trim() + ':');
+                if (value) rightCol.push(value);
+            }
+        } else {
+            // Default to left column for party info
+            leftCol.push(trimmed);
+        }
+    });
+
+    // Build table cells with proper formatting
+    const leftCellParagraphs = leftCol.map(line => new Paragraph({
+        children: [new TextRun({
+            text: line,
+            bold: !line.includes('vs.'),
+            size: 12 * 2,
+            font: "Times New Roman"
+        })],
+        alignment: AlignmentType.LEFT,
+        line: 12 * 240,
+        spacing: { before: 0, after: 60 }
+    }));
+
+    const rightCellParagraphs = rightCol.map(line => new Paragraph({
+        children: [new TextRun({
+            text: line,
+            bold: true,
+            size: 12 * 2,
+            font: "Times New Roman"
+        })],
+        alignment: AlignmentType.LEFT,
+        line: 12 * 240,
+        spacing: { before: 0, after: 60 }
+    }));
+
+    // Create 2-column table with no borders
+    const table = new Table({
+        width: { size: 100, type: WidthType.PERCENTAGE },
+        rows: [
+            new TableRow({
+                children: [
+                    new TableCell({
+                        width: { size: 50, type: WidthType.PERCENTAGE },
+                        children: leftCellParagraphs.length > 0 ? leftCellParagraphs : [new Paragraph("")],
+                        borders: {
+                            top: { style: BorderStyle.NONE },
+                            bottom: { style: BorderStyle.NONE },
+                            left: { style: BorderStyle.NONE },
+                            right: { style: BorderStyle.NONE }
+                        }
+                    }),
+                    new TableCell({
+                        width: { size: 50, type: WidthType.PERCENTAGE },
+                        children: rightCellParagraphs.length > 0 ? rightCellParagraphs : [new Paragraph("")],
+                        borders: {
+                            top: { style: BorderStyle.NONE },
+                            bottom: { style: BorderStyle.NONE },
+                            left: { style: BorderStyle.NONE },
+                            right: { style: BorderStyle.NONE }
+                        }
+                    })
+                ]
+            })
+        ]
+    });
+
+    return [table];
+}
+
+/**
+ * Helper: Parse discovery document structure with robust state machine
+ */
+function parseDiscoveryDocument(text) {
+    const lines = text.split('\n');
+
+    const structure = {
+        attorneyHeader: [],
+        preambleHeader: [],
+        caseCaption: [],
+        mainSectionTitle: null,
+        requests: [],
+        signatureBlock: []
+    };
+
+    let state = 'ATTORNEY_HEADER';
+    let blankCount = 0;
+    let capturedFirstCaseMarker = false;
+    let currentRequest = null;
+    let lastWasRequestHeading = false;
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim().toUpperCase();
+        const trimmedLower = line.trim();
+
+        // Skip excessive blank lines
+        if (trimmed.length === 0) {
+            blankCount++;
+            continue;
+        } else {
+            blankCount = 0;
+        }
+
+        // STATE MACHINE
+
+        // Transition to PREAMBLE when we see "IN THE MATTER"
+        if (trimmed.match(/^IN THE MATTER OF/)) {
+            state = 'PREAMBLE_HEADER';
+            structure.preambleHeader.push(trimmedLower);
+            continue;
+        }
+
+        // Continue collecting preamble
+        if (state === 'PREAMBLE_HEADER' && trimmedLower.length > 0) {
+            if (!trimmed.match(/^ASKING|^RESPONDENT|^RESPONDING|^SET|^CLAIM/)) {
+                structure.preambleHeader.push(trimmedLower);
+                continue;
+            } else {
+                state = 'CASE_CAPTION';
+            }
+        }
+
+        // Collect case caption lines (ASKING PARTY, RESPONDENT, SET NUMBER, CLAIM NO)
+        if (state === 'CASE_CAPTION' &&
+            (trimmed.match(/^ASKING PARTY|^RESPONDENT|^RESPONDING PARTY|^SET NUMBER|^CLAIM NO/) ||
+                capturedFirstCaseMarker)) {
+            capturedFirstCaseMarker = true;
+            structure.caseCaption.push(trimmedLower);
+
+            // Look ahead to see if we should transition
+            if (i + 1 < lines.length) {
+                const nextTrimmed = lines[i + 1].trim().toUpperCase();
+                if (nextTrimmed.match(/^RESPONSES TO|^RESPONSES FOR|^REQUEST FOR ADMISSIONS NO/)) {
+                    state = 'DOC_TITLE';
+                }
+            }
+            continue;
+        }
+
+        // Capture document title "RESPONSES TO REQUESTS FOR ADMISSION..."
+        if (trimmed.match(/^RESPONSES? TO REQUESTS? FOR ADMISSIONS?/)) {
+            structure.mainSectionTitle = trimmedLower;
+            state = 'REQUESTS';
+            continue;
+        }
+
+        // Detect REQUEST headings
+        if (trimmed.match(/^REQUEST FOR ADMISSIONS? NO\.? \d+/)) {
+            // Save previous request if exists
+            if (currentRequest && (currentRequest.heading || currentRequest.text)) {
+                structure.requests.push(currentRequest);
+            }
+
+            currentRequest = {
+                heading: trimmedLower,
+                text: null,
+                responseHeading: null,
+                responseText: null
+            };
+            lastWasRequestHeading = true;
+            state = 'REQUESTS';
+            continue;
+        }
+
+        // Detect RESPONSE headings
+        if (trimmed.match(/^RESPONSE TO REQUESTS? FOR ADMISSIONS? NO\.? \d+/)) {
+            if (currentRequest) {
+                currentRequest.responseHeading = trimmedLower;
+                lastWasRequestHeading = false;
+            }
+            continue;
+        }
+
+        // Signature block detection
+        if (state === 'REQUESTS' && i > lines.length - 20 && trimmedLower.length > 5) {
+            if (trimmed.match(/^DATED|^RESPECTFULLY|^SIGNATURE|^PROOF OF|^CERTIFICATE|^ATTORNEY FOR/)) {
+                state = 'SIGNATURE';
+            }
+        }
+
+        // Populate current section
+        if (state === 'ATTORNEY_HEADER' && trimmedLower.length > 0) {
+            if (!trimmed.match(/^IN THE MATTER|^UNINSURED|^UNDERINSURED/)) {
+                structure.attorneyHeader.push(trimmedLower);
+            }
+        } else if (state === 'REQUESTS' && trimmedLower.length > 0 && currentRequest) {
+            if (currentRequest.responseHeading && !trimmed.match(/^REQUEST/)) {
+                // We're in response text
+                currentRequest.responseText = currentRequest.responseText
+                    ? currentRequest.responseText + ' ' + trimmedLower
+                    : trimmedLower;
+            } else if (!currentRequest.responseHeading && !trimmed.match(/^(REQUEST|RESPONSE)/)) {
+                // We're in request text
+                currentRequest.text = currentRequest.text
+                    ? currentRequest.text + ' ' + trimmedLower
+                    : trimmedLower;
+            }
+        } else if (state === 'SIGNATURE' && trimmedLower.length > 0) {
+            structure.signatureBlock.push(trimmedLower);
+        }
+    }
+
+    // Save final request
+    if (currentRequest && (currentRequest.heading || currentRequest.text)) {
+        structure.requests.push(currentRequest);
+    }
+
+    return {
+        attorneyHeader: structure.attorneyHeader.join('\n'),
+        preambleHeader: structure.preambleHeader.join('\n'),
+        caseCaption: structure.caseCaption.join('\n'),
+        mainSectionTitle: structure.mainSectionTitle,
+        requests: structure.requests,
+        signatureBlock: structure.signatureBlock.join('\n')
+    };
+}
 
 /**
  * Helper: Detect legal headings in text

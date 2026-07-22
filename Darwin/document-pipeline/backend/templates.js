@@ -15,7 +15,7 @@ const TEMPLATES = {
             left: 1620,     // 1.12 inches
             right: 1440     // 1.0 inch
         },
-        
+
         // Attorney header formatting (name, firm, contact info)
         headerFormatting: {
             fontSize: 12,
@@ -23,7 +23,7 @@ const TEMPLATES = {
             bold: false,
             spacing: { before: 0, after: 0 }
         },
-        
+
         // Case caption formatting (ASKING PARTY, RESPONDING PARTY, SET NUMBER)
         captionFormatting: {
             fontSize: 12,
@@ -33,7 +33,7 @@ const TEMPLATES = {
             lineSpacing: 2.54,      // 304800 twips - nearly triple spacing
             spacing: { before: 0, after: 0 }
         },
-        
+
         // Request/Response heading formatting (REQUEST FOR ADMISSIONS NO. X)
         headingFormatting: {
             level1: {
@@ -55,7 +55,7 @@ const TEMPLATES = {
                 alignment: "left"
             }
         },
-        
+
         // Request/Response body text formatting
         bodyFormatting: {
             fontSize: 12,
@@ -68,7 +68,7 @@ const TEMPLATES = {
                 hanging: 0
             }
         },
-        
+
         // Introductory text (preamble, "Pursuant to Code of Civil Procedure...")
         preambleFormatting: {
             fontSize: 12,
@@ -81,7 +81,7 @@ const TEMPLATES = {
                 hanging: 0
             }
         },
-        
+
         rules: [
             "Line spacing: 2.54x (304800 twips) - nearly triple-spaced",
             "All REQUEST and RESPONSE headings: BOLD + UNDERLINED",
@@ -98,14 +98,14 @@ const TEMPLATES = {
     ca_pleading: {
         name: "California Pleading",
         description: "California pleading paper formatting (complaints, answers, motions)",
-        
+
         margins: {
             top: 1440,      // 1 inch
             bottom: 1440,
             left: 1440,
             right: 1440
         },
-        
+
         headingFormatting: {
             level1: {
                 fontSize: 12,
@@ -123,7 +123,7 @@ const TEMPLATES = {
                 alignment: "left"
             }
         },
-        
+
         bodyFormatting: {
             fontSize: 12,
             fontName: "Times New Roman",
@@ -135,7 +135,7 @@ const TEMPLATES = {
                 hanging: 0
             }
         },
-        
+
         rules: [
             "Pleading paper with numbered lines required",
             "Double spacing mandatory",
@@ -151,14 +151,14 @@ const TEMPLATES = {
     contract: {
         name: "Generic Contract",
         description: "Professional contract formatting",
-        
+
         margins: {
             top: 1440,
             bottom: 1440,
             left: 1440,
             right: 1440
         },
-        
+
         headingFormatting: {
             level1: {
                 fontSize: 12,
@@ -169,7 +169,7 @@ const TEMPLATES = {
                 alignment: "left"
             }
         },
-        
+
         bodyFormatting: {
             fontSize: 11,
             fontName: "Arial",
@@ -181,7 +181,7 @@ const TEMPLATES = {
                 hanging: 0
             }
         },
-        
+
         rules: [
             "Arial 11pt font for modern look",
             "1.5 line spacing",
