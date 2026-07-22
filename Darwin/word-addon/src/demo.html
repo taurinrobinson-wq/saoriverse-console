@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darwin Legal Heading Formatter - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+            min-height: 600px;
+        }
+
+        @media (max-width: 900px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .document {
+            background: #f8f9ff;
+            border: 2px solid #e0e0ff;
+            border-radius: 8px;
+            padding: 25px;
+            font-size: 0.95em;
+            line-height: 1.8;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .document p {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .document .heading-detected {
+            background: #fff3cd;
+            text-decoration: underline;
+            font-weight: bold;
+            padding: 5px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+            color: #856404;
+        }
+
+        .results {
+            background: white;
+            border: 2px solid #e0e0ff;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .result-item {
+            background: #f0f4ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .result-item .pattern-name {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .result-item .text {
+            color: #555;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+
+        .patterns {
+            background: #f8f9ff;
+            border: 2px solid #e0e0ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .patterns h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .pattern-list {
+            list-style: none;
+        }
+
+        .pattern-list li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #e0e0ff;
+        }
+
+        .pattern-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pattern-list li strong {
+            color: #764ba2;
+        }
+
+        .footer {
+            background: #f0f4ff;
+            padding: 20px 40px;
+            text-align: center;
+            color: #667eea;
+            font-size: 0.9em;
+        }
+
+        .count-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 Darwin Legal Heading Formatter</h1>
+            <p>AI-Powered Legal Document Formatting Demo</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Sample Legal Document</h2>
+                <div class="document" id="document"></div>
+            </div>
+
+            <div class="section">
+                <h2>Detected Headings <span class="count-badge" id="headingCount">0</span></h2>
+                <div class="results" id="results"></div>
+
+                <div class="patterns">
+                    <h3>📋 Detection Patterns</h3>
+                    <ul class="pattern-list" id="patternList"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>✨ Darwin v1 - Legal Heading Formatter | Ready for Word Integration</p>
+        </div>
+    </div>
+
+    <script>
+        // Define heading patterns
+        const HEADING_PATTERNS = [
+            { name: "Interrogatory", pattern: /^Interrogatory\s+No\.\s*\d+/i },
+            { name: "Special Interrogatory", pattern: /^Special\s+Interrogatory\s+No\.\s*\d+/i },
+            { name: "Form Interrogatory", pattern: /^Form\s+Interrogatory\s+No\.\s*\d+/i },
+            { name: "Request for Production", pattern: /^Request\s+(?:for\s+)?Production\s+(?:of\s+)?(?:Documents\s+)?No\.\s*\d+/i },
+            { name: "Request for Admission", pattern: /^Request\s+for\s+Admission\s+No\.\s*\d+/i },
+            { name: "Topic Section", pattern: /^Topic\s+\d+[:\.\s]/i },
+            { name: "Document Request", pattern: /^Document\s+Request\s+No\.\s*\d+/i },
+            { name: "ALL CAPS Section", pattern: /^[A-Z][A-Z\s]{5,}[A-Z]$/i }
+        ];
+
+        const sampleText = `DISCOVERY DOCUMENTS
+
+Interrogatory No. 1
+Please describe the timeline of events that led to the incident on January 15, 2024.
+
+Interrogatory No. 2
+Identify all witnesses who have knowledge of the facts alleged in the complaint.
+
+Special Interrogatory No. 1
+With respect to your response to Interrogatory No. 1, please provide specific dates and times.
+
+Request for Production of Documents No. 1
+Produce all photographs, videos, and recordings related to the incident.
+
+Request for Admission No. 1
+Admit that you were present at the location of the incident on January 15, 2024.
+
+Topic 1: Background and Context
+Provide a detailed explanation of the circumstances surrounding the dispute.
+
+Form Interrogatory No. 10.1
+Have you ever been convicted of a crime?
+
+CONFIDENTIAL SETTLEMENT TERMS
+All parties agree to the following terms and conditions.
+
+Document Request No. 1
+Please provide all communications between the parties from January 2024 to present.`;
+
+        function detectHeadings(text) {
+            const lines = text.split('\n');
+            const detectedHeadings = [];
+
+            lines.forEach((line, index) => {
+                const trimmedLine = line.trim();
+                if (!trimmedLine) return;
+
+                for (const { name, pattern } of HEADING_PATTERNS) {
+                    if (pattern.test(trimmedLine)) {
+                        detectedHeadings.push({
+                            pattern: name,
+                            text: trimmedLine,
+                            lineNum: index + 1
+                        });
+                        break;
+                    }
+                }
+            });
+
+            return detectedHeadings;
+        }
+
+        function renderDocument(text, headings) {
+            const lines = text.split('\n');
+            const headingTexts = new Set(headings.map(h => h.text));
+
+            const html = lines.map(line => {
+                const trimmed = line.trim();
+                if (headingTexts.has(trimmed)) {
+                    return `<p><span class="heading-detected">${line}</span></p>`;
+                }
+                return `<p>${line || '&nbsp;'}</p>`;
+            }).join('');
+
+            document.getElementById('document').innerHTML = html;
+        }
+
+        function renderResults(headings) {
+            const resultsHtml = headings.map(({ pattern, text }) => `
+        <div class="result-item">
+          <div class="pattern-name">✓ ${pattern}</div>
+          <div class="text">${text}</div>
+        </div>
+      `).join('');
+
+            document.getElementById('results').innerHTML = resultsHtml || '<p style="color: #999;">No headings detected</p>';
+            document.getElementById('headingCount').textContent = headings.length;
+        }
+
+        function renderPatterns() {
+            const html = HEADING_PATTERNS.map(({ name, pattern }) =>
+                `<li><strong>${name}:</strong> ${pattern.source}</li>`
+            ).join('');
+            document.getElementById('patternList').innerHTML = html;
+        }
+
+        // Initialize
+        const detectedHeadings = detectHeadings(sampleText);
+        renderDocument(sampleText, detectedHeadings);
+        renderResults(detectedHeadings);
+        renderPatterns();
+    </script>
+</body>
+
+</html>
