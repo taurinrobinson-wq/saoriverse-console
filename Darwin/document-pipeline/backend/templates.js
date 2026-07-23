@@ -1,6 +1,13 @@
 /**
  * Legal Document Formatting Templates
- * Based on ACTUAL court-filed documents (Cho v. Mobilitas RFA Response)
+ * Darwin Style Profile v2 (Finalized)
+ * 
+ * KEY RULES:
+ * - Caption Page (Page 1): 12pt line spacing, no indent, plain text
+ * - Body Pages: 24pt line spacing, 0.5" first-line indent
+ * - Headings: BOLD + UNDERLINE on both pages
+ * - Major titles: Centered
+ * - Request/Response: Left-justified
  */
 
 const TEMPLATES = {
@@ -8,90 +15,84 @@ const TEMPLATES = {
         name: "California Discovery",
         description: "California discovery document formatting (interrogatories, requests, admissions)",
 
-        // Margins from properly formatted Cho v. Mobilitas document
+        // Margins
         margins: {
-            top: 1152,      // 0.80 inches in twips
+            top: 1152,      // 0.80 inches
             bottom: 1440,   // 1.0 inch
-            left: 1620,     // 1.12 inches
+            left: 1440,     // 1.0 inch
             right: 1440     // 1.0 inch
         },
 
-        // Attorney header formatting (name, firm, contact info)
-        headerFormatting: {
+        // CAPTION PAGE (Page 1): 12pt spacing, no indent
+        captionPageFormatting: {
             fontSize: 12,
             fontName: "Times New Roman",
             bold: false,
-            spacing: { before: 0, after: 0 }
+            underline: false,
+            lineSpacing: 12 * 240,  // 12pt = 12 * 240 twips
+            spacing: { before: 0, after: 0 },
+            alignment: "left",
+            indent: { firstLine: 0, hanging: 0 }
         },
 
-        // Case caption formatting (ASKING PARTY, RESPONDING PARTY, SET NUMBER)
-        captionFormatting: {
+        // BODY PAGES: 24pt spacing, 0.5" indent
+        bodyPageFormatting: {
+            fontSize: 12,
+            fontName: "Times New Roman",
+            bold: false,
+            underline: false,
+            lineSpacing: 24 * 240,  // 24pt = 24 * 240 twips
+            spacing: { before: 0, after: 0 },
+            alignment: "left",
+            indent: { firstLine: 720, hanging: 0 }  // 720 twips = 0.5 inches
+        },
+
+        // MAJOR SECTION HEADINGS (centered, bold, underline)
+        majorHeadingFormatting: {
             fontSize: 12,
             fontName: "Times New Roman",
             bold: true,
+            underline: true,
+            lineSpacing: 12 * 240,  // 12pt on caption page
+            spacing: { before: 0, after: 120 },  // 1 blank line
+            alignment: "center",
+            indent: 0
+        },
+
+        // REQUEST/RESPONSE HEADINGS (left-justified, bold, underline)
+        requestResponseHeadingFormatting: {
+            fontSize: 12,
+            fontName: "Times New Roman",
+            bold: true,
+            underline: true,
+            lineSpacing: 24 * 240,  // 24pt on body pages
+            spacing: { before: 0, after: 120 },  // 1 blank line
+            alignment: "left",
+            indent: 0
+        },
+
+        // SIGNATURE BLOCK: 12pt spacing, no indent
+        signatureBlockFormatting: {
+            fontSize: 12,
+            fontName: "Times New Roman",
+            bold: false,
             underline: false,
-            lineSpacing: 2.54,      // 304800 twips - nearly triple spacing
-            spacing: { before: 0, after: 0 }
-        },
-
-        // Request/Response heading formatting (REQUEST FOR ADMISSIONS NO. X)
-        headingFormatting: {
-            level1: {
-                fontSize: 12,
-                bold: true,
-                underline: true,    // ALL HEADINGS UNDERLINED in formatted doc
-                fontName: "Times New Roman",
-                lineSpacing: 2.54,  // 304800 twips
-                spacing: { before: 120, after: 60 },
-                alignment: "left"
-            },
-            level2: {
-                fontSize: 12,
-                bold: true,
-                underline: true,    // Response headings also underlined
-                fontName: "Times New Roman",
-                lineSpacing: 2.54,
-                spacing: { before: 60, after: 60 },
-                alignment: "left"
-            }
-        },
-
-        // Request/Response body text formatting
-        bodyFormatting: {
-            fontSize: 12,
-            fontName: "Times New Roman",
-            lineSpacing: 2.54,     // 304800 twips - nearly triple-spaced
+            lineSpacing: 12 * 240,  // 12pt
             spacing: { before: 0, after: 0 },
             alignment: "left",
-            indent: {
-                firstLine: 457200,   // 3.825 inches - LARGE indent on questions
-                hanging: 0
-            }
-        },
-
-        // Introductory text (preamble, "Pursuant to Code of Civil Procedure...")
-        preambleFormatting: {
-            fontSize: 12,
-            fontName: "Times New Roman",
-            lineSpacing: 2.54,
-            spacing: { before: 0, after: 0 },
-            alignment: "left",
-            indent: {
-                firstLine: 457200,   // Same large indent as body text
-                hanging: 0
-            }
+            indent: 0
         },
 
         rules: [
-            "Line spacing: 2.54x (304800 twips) - nearly triple-spaced",
-            "All REQUEST and RESPONSE headings: BOLD + UNDERLINED",
-            "First-line indent on questions/responses: 3.825 inches (457200 twips)",
-            "Margins: 0.80\" top, 1.12\" left, 1.0\" right",
+            "Caption Page (Page 1): 12pt line spacing, no indent",
+            "Body Pages: 24pt line spacing, 0.5in first-line indent",
+            "Major Section Headings: Bold, Underline, Centered",
+            "Request/Response Headings: Bold, Underline, Left-justified",
             "Font: Times New Roman 12pt throughout",
-            "Request/Response pairs properly formatted",
-            "Bold labels in caption (ASKING PARTY, RESPONDING PARTY, SET NUMBER)",
-            "Include objections and legal grounds as applicable",
-            "Preamble text uses same large first-line indent"
+            "Margins: 1.0in all sides",
+            "Signature block: 12pt spacing",
+            "Proof of Service: 12pt spacing",
+            "Objections: 24pt line spacing with 0.5in indent"
         ]
     },
 

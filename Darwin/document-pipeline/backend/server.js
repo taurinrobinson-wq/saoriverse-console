@@ -171,21 +171,21 @@ app.post("/api/reformat", async (req, res) => {
             paragraphs.push(new Paragraph({ text: "", spacing: { before: 120 } }));
         }
 
-        // 3. ADD MAIN SECTION TITLE FIRST (centered, bold, underlined) - BEFORE caption
+        // 3. ADD MAIN SECTION TITLE (centered, BOLD, UNDERLINED) - caption page uses 12pt
         if (docStructure.mainSectionTitle) {
             paragraphs.push(new Paragraph({
                 children: [
                     new TextRun({
                         text: docStructure.mainSectionTitle,
-                        bold: true,
-                        underline: { type: UnderlineType.SINGLE },
+                        bold: true,  // BOLD
+                        underline: { type: UnderlineType.SINGLE },  // UNDERLINED
                         size: 12 * 2,
                         font: "Times New Roman"
                     })
                 ],
                 alignment: AlignmentType.CENTER,
-                line: 24 * 240, // 24pt spacing
-                spacing: { before: 120, after: 200 }
+                line: 12 * 240,  // 12pt on caption page
+                spacing: { before: 0, after: 120 }  // 1 blank line after
             }));
         }
 
@@ -206,31 +206,31 @@ app.post("/api/reformat", async (req, res) => {
                         font: "Times New Roman"
                     })],
                     alignment: AlignmentType.LEFT,
-                    line: 24 * 240,
-                    spacing: { before: 0, after: 120 }
+                    line: 12 * 240,  // Single line spacing
+                    spacing: { before: 0, after: 0 }
                 }));
             });
             paragraphs.push(new Paragraph({ text: "", spacing: { before: 60 } }));
         }
 
-        // 6. ADD REQUESTS AND RESPONSES
+        // 6. ADD REQUESTS AND RESPONSES (Body pages: 24pt, 0.5" indent, bold+underline headings)
         if (docStructure.requests && docStructure.requests.length > 0) {
             docStructure.requests.forEach((request, idx) => {
-                // REQUEST HEADING - bold, underlined, left-aligned, 24pt spacing
+                // REQUEST HEADING - BOLD, UNDERLINED, 24pt, no indent
                 paragraphs.push(new Paragraph({
                     children: [new TextRun({
                         text: request.heading,
-                        bold: true,
-                        underline: { type: UnderlineType.SINGLE },
+                        bold: true,  // BOLD heading
+                        underline: { type: UnderlineType.SINGLE },  // UNDERLINED
                         size: 12 * 2,
                         font: "Times New Roman"
                     })],
                     alignment: AlignmentType.LEFT,
-                    line: 24 * 240,
-                    spacing: { before: 120, after: 60 }
+                    line: 24 * 240,  // 24pt line spacing
+                    spacing: { before: 0, after: 0 }
                 }));
 
-                // REQUEST TEXT - 0.5" indent, 24pt spacing
+                // REQUEST TEXT - 24pt spacing with 0.5" indent
                 if (request.text && request.text.trim().length > 0) {
                     paragraphs.push(new Paragraph({
                         children: [new TextRun({
@@ -240,29 +240,29 @@ app.post("/api/reformat", async (req, res) => {
                             font: "Times New Roman"
                         })],
                         alignment: AlignmentType.LEFT,
-                        line: 24 * 240,
-                        indent: { firstLine: 720 }, // 0.5 inch
-                        spacing: { before: 0, after: 120 }
+                        line: 24 * 240,  // 24pt line spacing
+                        indent: { firstLine: 720 },  // 0.5" indent
+                        spacing: { before: 0, after: 0 }
                     }));
                 }
 
-                // RESPONSE HEADING - bold, underlined, left-aligned, 24pt spacing
+                // RESPONSE HEADING - BOLD, UNDERLINED, 24pt, no indent
                 if (request.responseHeading && request.responseHeading.trim().length > 0) {
                     paragraphs.push(new Paragraph({
                         children: [new TextRun({
                             text: request.responseHeading.trim(),
-                            bold: true,
-                            underline: { type: UnderlineType.SINGLE },
+                            bold: true,  // BOLD heading
+                            underline: { type: UnderlineType.SINGLE },  // UNDERLINED
                             size: 12 * 2,
                             font: "Times New Roman"
                         })],
                         alignment: AlignmentType.LEFT,
-                        line: 24 * 240,
-                        spacing: { before: 60, after: 60 }
+                        line: 24 * 240,  // 24pt line spacing
+                        spacing: { before: 0, after: 0 }
                     }));
                 }
 
-                // RESPONSE TEXT - 0.5" indent, 24pt spacing
+                // RESPONSE TEXT - 24pt spacing with 0.5" indent
                 if (request.responseText && request.responseText.trim().length > 0) {
                     paragraphs.push(new Paragraph({
                         children: [new TextRun({
@@ -272,9 +272,9 @@ app.post("/api/reformat", async (req, res) => {
                             font: "Times New Roman"
                         })],
                         alignment: AlignmentType.LEFT,
-                        line: 24 * 240,
-                        indent: { firstLine: 720 }, // 0.5 inch
-                        spacing: { before: 0, after: 120 }
+                        line: 24 * 240,  // 24pt line spacing
+                        indent: { firstLine: 720 },  // 0.5" indent
+                        spacing: { before: 0, after: 0 }
                     }));
                 }
             });
@@ -473,7 +473,6 @@ function parseDiscoveryDocument(text) {
     let blankCount = 0;
     let capturedFirstCaseMarker = false;
     let currentRequest = null;
-    let lastWasRequestHeading = false;
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
@@ -497,13 +496,20 @@ function parseDiscoveryDocument(text) {
             continue;
         }
 
-        // Continue collecting preamble
+        // Continue collecting preamble header
         if (state === 'PREAMBLE_HEADER' && trimmedLower.length > 0) {
-            if (!trimmed.match(/^ASKING|^RESPONDENT|^RESPONDING|^SET|^CLAIM/)) {
+            if (!trimmed.match(/^ASKING|^RESPONDENT|^RESPONDING|^SET|^CLAIM|^RESPONSES?/)) {
                 structure.preambleHeader.push(trimmedLower);
                 continue;
             } else {
-                state = 'CASE_CAPTION';
+                // Check if this line is the main title (has "SET" in it - like "SET ONE")
+                if (trimmed.match(/^RESPONSES? TO REQUESTS? FOR.*SET\s+(ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|\d+)/i)) {
+                    structure.mainSectionTitle = trimmedLower;
+                    state = 'CASE_CAPTION';  // Case caption comes next
+                    continue;  // Skip adding this line elsewhere
+                } else {
+                    state = 'CASE_CAPTION';
+                }
             }
         }
 
@@ -514,25 +520,38 @@ function parseDiscoveryDocument(text) {
             capturedFirstCaseMarker = true;
             structure.caseCaption.push(trimmedLower);
 
-            // Look ahead to see if we should transition
+            // Look ahead to see if we should transition to preamble text
             if (i + 1 < lines.length) {
                 const nextTrimmed = lines[i + 1].trim().toUpperCase();
-                if (nextTrimmed.match(/^RESPONSES TO|^RESPONSES FOR|^REQUEST FOR ADMISSIONS NO/)) {
-                    state = 'DOC_TITLE';
+                if (nextTrimmed.match(/^PURSUANT|^THE PARTIES/)) {
+                    state = 'PREAMBLE_TEXT';
                 }
             }
             continue;
         }
 
-        // Capture document title "RESPONSES TO REQUESTS FOR ADMISSION..."
-        if (trimmed.match(/^RESPONSES? TO REQUESTS? FOR ADMISSIONS?/)) {
+        // Capture preamble text ("Pursuant to Code of Civil Procedure...", "THE PARTIES...")
+        if (state === 'PREAMBLE_TEXT' && trimmedLower.length > 0) {
+            if (!trimmed.match(/^REQUEST FOR|^RESPONSES?/)) {
+                structure.preambleText.push(trimmedLower);
+                continue;
+            } else if (trimmed.match(/^REQUEST FOR/)) {
+                state = 'REQUESTS';
+                // Process this line as a request heading (fall through)
+            } else {
+                continue;
+            }
+        }
+
+        // Capture document title if we haven't already (must include "SET")
+        if (trimmed.match(/^RESPONSES? TO REQUESTS? FOR.*SET\s+(ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|\d+)/i) && !structure.mainSectionTitle) {
             structure.mainSectionTitle = trimmedLower;
-            state = 'REQUESTS';
+            state = 'PREAMBLE_TEXT';
             continue;
         }
 
-        // Detect REQUEST headings
-        if (trimmed.match(/^REQUEST FOR ADMISSIONS? NO\.? \d+/)) {
+        // Detect REQUEST headings (REQUEST FOR ADMISSIONS, REQUEST FOR PRODUCTION, etc.)
+        if (trimmed.match(/^REQUEST FOR (ADMISSIONS?|PRODUCTION|INTERROGATORIES|DOCUMENTS) NO\.? (\d+|[A-Z]+)/i)) {
             // Save previous request if exists
             if (currentRequest && (currentRequest.heading || currentRequest.text)) {
                 structure.requests.push(currentRequest);
@@ -544,43 +563,57 @@ function parseDiscoveryDocument(text) {
                 responseHeading: null,
                 responseText: null
             };
-            lastWasRequestHeading = true;
             state = 'REQUESTS';
             continue;
         }
 
-        // Detect RESPONSE headings
-        if (trimmed.match(/^RESPONSE TO REQUESTS? FOR ADMISSIONS? NO\.? \d+/)) {
+        // Detect RESPONSE headings (when explicitly stated)
+        if (trimmed.match(/^RESPONSE TO REQUESTS? FOR (ADMISSIONS?|PRODUCTION|INTERROGATORIES|DOCUMENTS) NO\.? (\d+|[A-Z]+)/i)) {
             if (currentRequest) {
                 currentRequest.responseHeading = trimmedLower;
-                lastWasRequestHeading = false;
             }
             continue;
         }
 
-        // Signature block detection
+        // Detect response text indicators (Responding Party..., Denied, etc.)
+        if (state === 'REQUESTS' && currentRequest && trimmedLower.length > 0) {
+            const isResponseIndicator = trimmed.match(/^RESPONDING PARTY|^OBJECTION|^DENIED|^ADMIT|^REFUSE|^WILL COMPLY|^UNABLE TO COMPLY|^NO DOCUMENTS/i);
+
+            if (isResponseIndicator) {
+                // If we don't have a responseHeading yet, create implicit one
+                if (!currentRequest.responseHeading) {
+                    currentRequest.responseHeading = 'RESPONSE:';
+                }
+            }
+        }
+
+        // Signature block detection (at end of document)
         if (state === 'REQUESTS' && i > lines.length - 20 && trimmedLower.length > 5) {
             if (trimmed.match(/^DATED|^RESPECTFULLY|^SIGNATURE|^PROOF OF|^CERTIFICATE|^ATTORNEY FOR/)) {
                 state = 'SIGNATURE';
             }
         }
 
-        // Populate current section
+        // Populate current section based on state
         if (state === 'ATTORNEY_HEADER' && trimmedLower.length > 0) {
             if (!trimmed.match(/^IN THE MATTER|^UNINSURED|^UNDERINSURED/)) {
                 structure.attorneyHeader.push(trimmedLower);
             }
         } else if (state === 'REQUESTS' && trimmedLower.length > 0 && currentRequest) {
-            if (currentRequest.responseHeading && !trimmed.match(/^REQUEST/)) {
+            if (currentRequest.responseHeading && !trimmed.match(/^REQUEST|^RESPONSE|^ADMISSIONS?|^PRODUCTION|^INTERROGATORIES/)) {
                 // We're in response text
                 currentRequest.responseText = currentRequest.responseText
                     ? currentRequest.responseText + ' ' + trimmedLower
                     : trimmedLower;
-            } else if (!currentRequest.responseHeading && !trimmed.match(/^(REQUEST|RESPONSE)/)) {
+            } else if (!currentRequest.responseHeading && !trimmed.match(/^REQUEST|^RESPONSE|^RESPONDING PARTY|^OBJECTION|^DENIED|^ADMIT/i)) {
                 // We're in request text
                 currentRequest.text = currentRequest.text
                     ? currentRequest.text + ' ' + trimmedLower
                     : trimmedLower;
+            } else if (!currentRequest.responseHeading && trimmed.match(/^RESPONDING PARTY|^OBJECTION|^DENIED|^ADMIT/i)) {
+                // This is response content without explicit heading
+                currentRequest.responseHeading = 'RESPONSE:';
+                currentRequest.responseText = trimmedLower;
             }
         } else if (state === 'SIGNATURE' && trimmedLower.length > 0) {
             structure.signatureBlock.push(trimmedLower);
