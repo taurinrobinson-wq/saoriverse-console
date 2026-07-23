@@ -171,13 +171,7 @@ app.post("/api/reformat", async (req, res) => {
             paragraphs.push(new Paragraph({ text: "", spacing: { before: 120 } }));
         }
 
-        // 3. ADD CASE CAPTION TABLE (2-column: parties on left, case info on right)
-        if (docStructure.caseCaption) {
-            paragraphs.push(...buildCaptionTable(docStructure.caseCaption));
-            paragraphs.push(new Paragraph({ text: "", spacing: { before: 120 } }));
-        }
-
-        // 4. ADD MAIN SECTION TITLE (centered, bold, underlined)
+        // 3. ADD MAIN SECTION TITLE FIRST (centered, bold, underlined) - BEFORE caption
         if (docStructure.mainSectionTitle) {
             paragraphs.push(new Paragraph({
                 children: [
@@ -195,7 +189,31 @@ app.post("/api/reformat", async (req, res) => {
             }));
         }
 
-        // 5. ADD REQUESTS AND RESPONSES
+        // 4. ADD CASE CAPTION TABLE (2-column: parties on left, case info on right)
+        if (docStructure.caseCaption) {
+            paragraphs.push(...buildCaptionTable(docStructure.caseCaption));
+            paragraphs.push(new Paragraph({ text: "", spacing: { before: 120 } }));
+        }
+
+        // 5. ADD PREAMBLE TEXT ("Pursuant to Code of Civil Procedure...")
+        if (docStructure.preambleText) {
+            docStructure.preambleText.split('\n').filter(l => l.trim().length > 0).forEach(line => {
+                paragraphs.push(new Paragraph({
+                    children: [new TextRun({
+                        text: line.trim(),
+                        bold: false,
+                        size: 12 * 2,
+                        font: "Times New Roman"
+                    })],
+                    alignment: AlignmentType.LEFT,
+                    line: 24 * 240,
+                    spacing: { before: 0, after: 120 }
+                }));
+            });
+            paragraphs.push(new Paragraph({ text: "", spacing: { before: 60 } }));
+        }
+
+        // 6. ADD REQUESTS AND RESPONSES
         if (docStructure.requests && docStructure.requests.length > 0) {
             docStructure.requests.forEach((request, idx) => {
                 // REQUEST HEADING - bold, underlined, left-aligned, 24pt spacing
@@ -262,7 +280,7 @@ app.post("/api/reformat", async (req, res) => {
             });
         }
 
-        // 6. ADD SIGNATURE BLOCK (12pt spacing)
+        // 7. ADD SIGNATURE BLOCK (12pt spacing)
         if (docStructure.signatureBlock && docStructure.signatureBlock.trim().length > 0) {
             paragraphs.push(new Paragraph({ text: "", spacing: { before: 300 } }));
             docStructure.signatureBlock.split('\n').filter(l => l.trim().length > 0).forEach(line => {
@@ -446,6 +464,7 @@ function parseDiscoveryDocument(text) {
         preambleHeader: [],
         caseCaption: [],
         mainSectionTitle: null,
+        preambleText: [],
         requests: [],
         signatureBlock: []
     };
@@ -578,6 +597,7 @@ function parseDiscoveryDocument(text) {
         preambleHeader: structure.preambleHeader.join('\n'),
         caseCaption: structure.caseCaption.join('\n'),
         mainSectionTitle: structure.mainSectionTitle,
+        preambleText: structure.preambleText.join('\n'),
         requests: structure.requests,
         signatureBlock: structure.signatureBlock.join('\n')
     };

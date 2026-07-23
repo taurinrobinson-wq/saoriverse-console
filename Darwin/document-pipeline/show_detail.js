@@ -9,7 +9,7 @@ async function show() {
         console.log("=".repeat(80));
         lines.slice(0, 70).forEach((line, idx) => {
             const display = line.length > 75 ? line.substring(0, 75) + '...' : line;
-            console.log(`${String(idx+1).padStart(3)}: ${display}`);
+            console.log(`${String(idx + 1).padStart(3)}: ${display}`);
         });
     } catch (err) {
         console.error(err);
