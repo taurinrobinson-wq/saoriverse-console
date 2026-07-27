@@ -65,7 +65,7 @@ public class SetupVelinorGameplay
         tpc.GroundedRadius = 0.5f;
 
         // Add input
-        player.AddComponent<StarterAssets.StarterAssetsInputs>();
+        player.AddComponent<StarterAssets.VelinorStarterAssetsInputs>();
 
         // ===== CAMERA =====
         GameObject cam = new GameObject("PlayerCamera");

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GlyphInteractionController : MonoBehaviour
@@ -34,7 +35,10 @@ public class GlyphInteractionController : MonoBehaviour
         hasCollected = true;
 
         if (memoryFlashCanvas != null)
+        {
             memoryFlashCanvas.SetActive(true);
+            StartCoroutine(HideFlashAfterDelay());
+        }
 
         GameFlags.Set(successFlag, true);
 
@@ -42,5 +46,14 @@ public class GlyphInteractionController : MonoBehaviour
             glowPulseController.SetActiveVisual(false);
 
         Debug.Log("[GlyphInteractionController] Remembrance collected.");
+    }
+
+    private IEnumerator HideFlashAfterDelay()
+    {
+        yield return new WaitForSeconds(flashDuration);
+        if (memoryFlashCanvas != null)
+        {
+            memoryFlashCanvas.SetActive(false);
+        }
     }
 }

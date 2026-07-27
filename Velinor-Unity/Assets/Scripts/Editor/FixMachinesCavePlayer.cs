@@ -37,16 +37,16 @@ public class FixMachinesCavePlayer : MonoBehaviour
             Debug.Log("✓ CharacterController already exists");
         }
 
-        // 2. Ensure StarterAssetsInputs exists
-        StarterAssets.StarterAssetsInputs starterInput = player.GetComponent<StarterAssets.StarterAssetsInputs>();
+        // 2. Ensure the renamed input component exists
+        StarterAssets.VelinorStarterAssetsInputs starterInput = player.GetComponent<StarterAssets.VelinorStarterAssetsInputs>();
         if (starterInput == null)
         {
-            starterInput = player.AddComponent<StarterAssets.StarterAssetsInputs>();
-            Debug.Log("✓ Added StarterAssetsInputs");
+            starterInput = player.AddComponent<StarterAssets.VelinorStarterAssetsInputs>();
+            Debug.Log("✓ Added VelinorStarterAssetsInputs");
         }
         else
         {
-            Debug.Log("✓ StarterAssetsInputs already exists");
+            Debug.Log("✓ VelinorStarterAssetsInputs already exists");
         }
 
         // 3. Ensure ThirdPersonController exists and is configured

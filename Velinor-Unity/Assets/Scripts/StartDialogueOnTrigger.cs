@@ -1,4 +1,5 @@
 using UnityEngine;
+using StarterAssets;
 
 public class StartDialogueOnTrigger : MonoBehaviour
 {
@@ -24,9 +25,41 @@ public class StartDialogueOnTrigger : MonoBehaviour
 
         hasTriggered = true;
 
+        if (lockPlayerMovement)
+        {
+            var playerController = other.GetComponentInParent<VelinorPlayerController>();
+            if (playerController != null)
+            {
+                playerController.enabled = false;
+            }
+        }
+
         if (DialogueManager.Instance != null)
         {
+            DialogueManager.Instance.OnDialogueEnded -= HandleDialogueEnded;
+            DialogueManager.Instance.OnDialogueEnded += HandleDialogueEnded;
             DialogueManager.Instance.StartDialogue(npcId, startingPassageId, storyResourcePath);
+        }
+    }
+
+    private void HandleDialogueEnded()
+    {
+        if (lockPlayerMovement)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                var playerController = player.GetComponentInChildren<VelinorPlayerController>();
+                if (playerController != null)
+                {
+                    playerController.enabled = true;
+                }
+            }
+        }
+
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.OnDialogueEnded -= HandleDialogueEnded;
         }
     }
 }

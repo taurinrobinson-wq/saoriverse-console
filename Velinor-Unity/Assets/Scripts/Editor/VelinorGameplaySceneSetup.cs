@@ -63,7 +63,7 @@ public class VelinorGameplaySceneSetup
         capCollider.radius = 0.25f;
 
         // Input handling
-        StarterAssetsInputs inputs = player.AddComponent<StarterAssetsInputs>();
+        VelinorStarterAssetsInputs inputs = player.AddComponent<VelinorStarterAssetsInputs>();
         inputs.analogMovement = false;
 
         // Movement controller

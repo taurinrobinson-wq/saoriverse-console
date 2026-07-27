@@ -102,7 +102,7 @@ public class VelinorGameplaySetup
         thirdPersonController.CinemachineCameraTarget = cinemachineTarget;
 
         // ===== STEP 4: Create Input Manager =====
-        StarterAssets.StarterAssetsInputs inputManager = player.AddComponent<StarterAssets.StarterAssetsInputs>();
+        StarterAssets.VelinorStarterAssetsInputs inputManager = player.AddComponent<StarterAssets.VelinorStarterAssetsInputs>();
 
         // ===== STEP 5: Create Saori NPC =====
         GameObject saoriObj = new GameObject("Saori");

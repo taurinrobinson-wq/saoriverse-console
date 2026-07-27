@@ -30,9 +30,9 @@ public class AddPlayerController
         }
 
         // ===== ADD INPUT HANDLER =====
-        if (player.GetComponent<StarterAssetsInputs>() == null)
+        if (player.GetComponent<StarterAssets.VelinorStarterAssetsInputs>() == null)
         {
-            StarterAssetsInputs inputs = player.AddComponent<StarterAssetsInputs>();
+            StarterAssets.VelinorStarterAssetsInputs inputs = player.AddComponent<StarterAssets.VelinorStarterAssetsInputs>();
             inputs.analogMovement = false;
             Debug.Log("✅ Added StarterAssetsInputs");
         }

@@ -56,8 +56,8 @@ public class VelinorSceneSetup
         cc.radius = 0.4f;
         cc.center = new Vector3(0, 1, 0);
 
-        // Add StarterAssetsInputs
-        StarterAssetsInputs inputs = player.AddComponent<StarterAssetsInputs>();
+        // Add the renamed input component
+        VelinorStarterAssetsInputs inputs = player.AddComponent<VelinorStarterAssetsInputs>();
         inputs.analogMovement = false;
 
         // Add VelinorPlayerController
