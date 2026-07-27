@@ -69,7 +69,7 @@
 **Request:**
 ```json
 {
-  "player_name": "Alice"
+  "player_name": "Lior"
 }
 ```
 
@@ -80,7 +80,7 @@
 ```json
 {
   "session_id": "uuid-format-string",
-  "player_name": "Alice",
+  "player_name": "Lior",
   "current_passage": "passage-001",
   "current_npc": "SaoriName",
   "dialogue_text": "Welcome to Velinor...",
@@ -95,11 +95,22 @@
     }
   ],
   "player_state": {
-    "empathy": 50,
-    "skepticism": 50,
-    "integration": 50,
-    "awareness": 50,
-    "coherence": 50
+    "tone_stats": {
+      "truth": 50,
+      "observation": 50,
+      "narrative_presence": 50,
+      "empathy": 50
+    },
+    "remnants_stats": {
+      "resolve": 50,
+      "empathy": 50,
+      "memory": 50,
+      "nuance": 50,
+      "authority": 50,
+      "need": 50,
+      "trust": 50,
+      "skepticism": 50
+    }
   },
   "influence_map": {
     "SaoriName": 0.5,
@@ -161,11 +172,22 @@
     }
   ],
   "player_state": {
-    "empathy": 55,
-    "skepticism": 48,
-    "integration": 52,
-    "awareness": 51,
-    "coherence": 51
+    "tone_stats": {
+      "truth": 50,
+      "observation": 50,
+      "narrative_presence": 50,
+      "empathy": 50
+    },
+    "remnants_stats": {
+      "resolve": 50,
+      "empathy": 50,
+      "memory": 50,
+      "nuance": 50,
+      "authority": 50,
+      "need": 50,
+      "trust": 50,
+      "skepticism": 50
+    }
   },
   "influence_map": {
     "SaoriName": 0.55,
@@ -191,7 +213,7 @@
 - `current_npc` — Name of current NPC (null if narration)
 - `dialogue_text` — Full text to display to player
 - `choices` — Available player choices (array of {id, text})
-- `player_state` — Current TONE stats and coherence
+- `player_state` — Current TONE stats (Truth, Observation, Narrative Presence, Empathy; all start at 50 in equilibrium) and REMNANTS stats (Resolve, Empathy, Memory, Nuance, Authority, Need, Trust, Skepticism; derived from TONE choices)
 - `influence_map` — Relationship values with each NPC (0-1)
 - `active_glyphs` — Currently revealed glyphs
 - `collected_glyphs` — All glyphs collected so far
@@ -237,7 +259,7 @@ GET /api/game/status?session_id=uuid-format-string
 ```json
 {
   "session_id": "uuid-format-string",
-  "player_name": "Alice",
+  "player_name": "Lior",
   "current_passage": "passage-002",
   "current_npc": "SaoriName",
   "dialogue_text": "...",
@@ -253,7 +275,7 @@ GET /api/game/status?session_id=uuid-format-string
       "has_save": true,
       "timestamp": "2025-01-20T15:30:00Z",
       "phase": 1,
-      "player_name": "Alice"
+      "player_name": "Lior"
     },
     {
       "slot": 1,
@@ -349,11 +371,22 @@ GET /api/game/load?session_id=uuid-format-string&slot=0
   "dialogue_text": "...",
   "choices": [...],
   "player_state": {
-    "empathy": 62,
-    "skepticism": 55,
-    "integration": 58,
-    "awareness": 60,
-    "coherence": 58
+    "tone_stats": {
+      "truth": 62,
+      "observation": 55,
+      "narrative_presence": 58,
+      "empathy": 60
+    },
+    "remnants_stats": {
+      "resolve": 55,
+      "empathy": 60,
+      "memory": 58,
+      "nuance": 62,
+      "authority": 50,
+      "need": 52,
+      "trust": 65,
+      "skepticism": 48
+    }
   },
   "influence_map": {...},
   "active_glyphs": [...],
@@ -463,10 +496,10 @@ switch (glyph.revealed_tier) {
   "id": "choice-001",
   "text": "Tell me more",
   "tone_impact": {
-    "empathy": 5,
-    "skepticism": -3,
-    "integration": 2,
-    "awareness": 0
+    "truth": 0,
+    "observation": 0,
+    "narrative_presence": 5,
+    "empathy": -3
   },
   "influence_impact": {
     "SaoriName": 0.1,
@@ -573,25 +606,25 @@ try {
 
 ---
 
-## Data Sync & Coherence
+## Data Sync & Influence
 
-### Coherence Calculation (Backend)
+### TONE & REMNANTS Stat Updates
 
-**Formula:**
-```
-coherence = 100 - average_absolute_deviation(empathy, skepticism, integration, awareness)
-```
+**When choice is taken:**
+1. Backend evaluates choice's `tone_impact` object
+2. For each TONE stat in impact:
+   ```
+   new_tone[stat] = current_tone[stat] + impact_value
+   clamped to [0, 100]
+   ```
+3. Backend calculates REMNANTS stat changes via canonical correlation:
+   - Truth choice → +Trust, +Resolve; -Skepticism
+   - Observation choice → +Nuance, +Memory; -Authority
+   - Narrative Presence choice → +Authority, +Resolve; -Nuance
+   - Empathy choice → +Empathy, +Need; -Resolve
+4. Returns updated `player_state` (both TONE and REMNANTS) in response
 
-**Example:**
-```
-TONE: [60, 55, 62, 58]
-Mean: 58.75
-Deviations: [1.25, 3.75, 3.25, 0.75]
-Avg Deviation: 2.25
-Coherence: 100 - 2.25 = 97.75 (round to 98)
-```
-
-**Frontend:** Should trust backend calculation, not recalculate
+**Frontend:** Should trust backend calculations and update game state accordingly
 
 ### Influence Updates
 
@@ -607,25 +640,25 @@ Coherence: 100 - 2.25 = 97.75 (round to 98)
 
 ---
 
-## Emotional Gates
+## Gate System
 
 ### Gate Types in API
 
-**1. TONE Gates** — Require minimum stat level
+**1. TONE Gates** — Require minimum TONE stat level
 ```json
 {
-  "type": "empathy",
+  "type": "truth",
   "operator": ">=",
   "value": 60
 }
 ```
 
-**2. Coherence Gates** — Require emotional harmony
+**2. REMNANTS Gates** — Require minimum REMNANTS stat level
 ```json
 {
-  "type": "coherence",
+  "type": "empathy",
   "operator": ">=",
-  "value": 75
+  "value": 70
 }
 ```
 
@@ -683,9 +716,9 @@ function ChoiceButtons({ choices }) {
 1. User visits website
    ↓
 
-2. Click "Play" → enters name "Alice"
+2. Click "Play" → enters name "Lior"
    POST /api/game/start
-   Request: { "player_name": "Alice" }
+   Request: { "player_name": "Lior" }
    Response: { 
      "session_id": "abc-123",
      "current_passage": "passage-001",
@@ -771,7 +804,7 @@ function ChoiceButtons({ choices }) {
 ## Start game
 curl -X POST http://localhost:8000/api/game/start \
   -H "Content-Type: application/json" \
-  -d '{"player_name": "Alice"}'
+  -d '{"player_name": "Lior"}'
 
 ## Take action
 curl -X POST http://localhost:8000/api/game/action \

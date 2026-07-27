@@ -3282,7 +3282,7 @@ The following elements from this seed document have been implemented in Velinor'
 - Added Glyph #76 (Shared Dawn) to Glyph_Organizer.csv and JSON
 - Created full encounter sequence in story_arcs.md
 - Updated both NPC profiles in MARKETPLACE_NPC_ROSTER.md with new tools, dialogues, and influence mechanics
-- Integrated with TONE system: Empathy 50+/Trust 50+, Coherence 50+ gates
+- Integrated with TONE system: Empathy 50+/Trust 50+ gates
 - Three-path mechanic: Honor Silence (+0.20 influence), Approach Kindly (+0.15), Expose (-0.15 to -0.25)
 - New tool: Grounded Presence (unlocks at influence 0.5+ both, Presence 70+)
 - Private reflection dialogues created for post-encounter discovery
@@ -3322,8 +3322,7 @@ gaps, missing records 4. **Elenya's Admission** (Late) - Voluntary memory severa
 **Facilitated Encounter** (Endgame) - Acknowledgment of what was lost and choice to honor it
 
 **Trigger Gates**:
-- Coherence 70+ (primary, optional arc gate)
-- Empathy 70+ OR Integration 70+ (must understand necessary trauma)
+- Empathy 70+ OR Memory 70+ (must understand necessary trauma and preserve what was lost)
 - 4+ encounters with Malrik + 4+ encounters with Elenya
 - Possession of Glyph of Fractured Memory + Glyph of Measured Step
 

@@ -9,7 +9,7 @@
 - **Type**: Presence + Joy hybrid
 - **NPCs**: Sera the Herb Novice & Korrin the Gossip
 - **Location**: Market courtyard at first light
-- **Trigger Gate**: Empathy 50+ OR Trust 50+; Coherence 50+; 2+ encounters with each NPC
+- **Trigger Gate**: Empathy 50+ OR Trust 50+; 2+ encounters with each NPC
 - **Mechanic**: Three-path encounter (Observe / Approach / Expose)
 - **Tool Unlock**: Grounded Presence (requires Sera/Korrin influence 0.5+ each + Presence 70+)
 - **Files Modified**: 
@@ -21,7 +21,7 @@
 - **Type**: Ache + Legacy hybrid
 - **NPCs**: Archivist Malrik & High Seer Elenya
 - **Location**: Archive chamber (primary) / Shrine (secondary)
-- **Trigger Gate**: Coherence 70+; Empathy 70+ OR Integration 70+; 4+ encounters each; Glyph of Fractured Memory + Glyph of Measured Step
+- **Trigger Gate**: Empathy 70+ OR Need 70+; 4+ encounters with each NPC; Glyph of Fractured Memory + Glyph of Measured Step
 - **Mechanic**: Five-stage revelation (Subtle Recognition → Body Remembers → Archive Revelation → Elenya's Admission → Facilitated Encounter)
 - **Tool Unlock**: None (but unlocks alternative ending variation)
 - **Status**: Currently referenced in story_arcs.md; needs glyph entry creation in data files
@@ -86,11 +86,11 @@
 
 ### TONE Stat System
 
-**New Gating**:
+**New Gating (TONE/REMNANTS Based)**:
 - **Empathy** 50+ (Shared Dawn primary gate)
 - **Trust** 50+ (Shared Dawn alternative gate)
-- **Coherence** 50+ (Shared Dawn secondary gate)
-- **Coherence** 70+ (Severed Bond primary gate; optional arc gate)
+- **Empathy** 70+ (Severed Bond primary gate; revelation arc)
+- **Memory** 60+ (Severed Bond secondary; glyph recovery integration)
 
 **New Tool Requirements**:
 - **Grounded Presence**: Presence 70+ + Sera/Korrin influence 0.5+ each
@@ -100,15 +100,15 @@
 - Sera/Korrin influence changes based on player choice path (three outcomes per encounter)
 - Malrik/Elenya influence increases post-revelation (both +0.25 if facilitated)
 
-### Coherence Implications
+### World State Implications (Velinor Coherence)
 
 **Shared Dawn**:
-- Encounter itself maintains/slightly increases coherence
-- If exposed: Coherence -3 (community fracture)
+- Encounter itself contributes to world coherence restoration
+- If exposed/conflict: Velinor's coherence -3 (community fracture)
 
 **Severed Bond**:
-- Arc requires Coherence 70+ to unlock
-- Facilitated encounter: Coherence +5 (integration of necessary loss)
+- Arc requires high NPC relationship (Memory/Empathy integration) to unlock
+- Facilitated encounter: Velinor's coherence +5 (integration of necessary loss)
 - Ending branch shifts toward Legacy/Acceptance (less toward Transcendence)
 
 ---
@@ -119,11 +119,11 @@
 
 **Phase 2 (Marketplace - Mid-Game)**:
 - Shared Dawn encounter becomes possible
-- Triggers: After 2+ meetings with Sera, 2+ meetings with Korrin, Empathy/Trust 50+, Coherence 50+
+- Triggers: After 2+ meetings with Sera, 2+ meetings with Korrin, Empathy 50+ OR Trust 50+
 
 **Phase 3 (Collapse - Pivot)**:
 - Severed Bond revelation arc becomes possible  
-- Triggers: After Coherence 70+, Empathy 70+/Integration 70+, 4+ encounters with Malrik, 4+ encounters with Elenya
+- Triggers: After Empathy 70+ OR Need 70+, 4+ encounters with Malrik, 4+ encounters with Elenya
 
 **Phase 4 (Endings - Late Game)**:
 - Both arcs inform final NPC interactions and ending branches

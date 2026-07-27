@@ -293,11 +293,11 @@ resonate more deeply.
 - [ ] Implement Grounded Presence tool mechanics in NPC system
 - [ ] Implement Sacred Silence tool mechanics in NPC system
 - [ ] Create "Shared Dawn" encounter script with three pathways
-- [ ] Gate encounter on Empathy/Trust/Coherence stats
+- [ ] Gate encounter on Empathy 50+/Trust 50+ stat requirements
 - [ ] Create "Shared Dawn" private reflection dialogues for Sera and Korrin
 - [ ] Implement Glyph of Severed Covenant in engine
 - [ ] Create multi-stage revelation script for Malrik/Elenya arc
-- [ ] Gate Severed Bond arc on Coherence 70+ + encounter counts
+- [ ] Gate Severed Bond arc on Empathy 70+ or Need 70+ + encounter counts with Malrik/Elenya
 - [ ] Create facilitated encounter scene between Malrik and Elenya
 - [ ] Update NPC response pools with new dialogue trees
 - [ ] Create ripple effects (Nima, Kaelen, Merchants noticing changes)

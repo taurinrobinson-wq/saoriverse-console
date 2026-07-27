@@ -216,7 +216,7 @@ He becomes sharper, more dangerous—not emotional, but armed with layered insig
 1. Added Glyph #76 to Glyph_Organizer.csv and JSON
 2. Full encounter sequence in story_arcs.md
 3. Updated NPC profiles with tools, dialogues, influence mechanics
-4. Integrated with TONE system (Empathy 50+, Trust 50+, Coherence 50+)
+4. Integrated with TONE system (Empathy 50+, Trust 50+)
 5. Three-path mechanic: Honor Silence, Approach Kindly, Expose
 6. New tool: Grounded Presence (unlocks at influence 0.5+ both, Presence 70+)
 

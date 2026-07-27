@@ -1,0 +1,60 @@
+{
+    "name": "Remembrance Search",
+    "startnode": "remembrance_start",
+    "passages": [
+        {
+            "pid": "remembrance_start",
+            "name": "remembrance_start",
+            "setting_description": "The Codex trembles in your hand. A faint pulse flickers somewhere ahead, almost too soft to name.",
+            "prompt": "The corridor hums with a faint pulse. A soft glow appears near the cracked wall, brightening as you step closer.",
+            "choices": [
+                {
+                    "text": "Approach the glow",
+                    "target": "remembrance_interact",
+                    "tone_effects": [
+                        {
+                            "key": "Observation",
+                            "value": 0.02
+                        }
+                    ],
+                    "npc_resonance": [
+                        {
+                            "key": "Kaelen",
+                            "value": 0.01
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pid": "remembrance_interact",
+            "name": "remembrance_interact",
+            "shared_beat": "On interaction, the glow flashes. A brief, fragmented image fills the screen — something from the player’s past, unclear and out of order. The projection settles into the player’s palm. The glyph becomes tangible.",
+            "choices": [
+                {
+                    "text": "Take the remembrance",
+                    "target": "remembrance_end",
+                    "tone_effects": [
+                        {
+                            "key": "Empathy",
+                            "value": 0.03
+                        }
+                    ],
+                    "npc_resonance": [
+                        {
+                            "key": "Kaelen",
+                            "value": 0.03
+                        }
+                    ],
+                    "data_hook": "set_flag:obtained_remembrance=true"
+                }
+            ]
+        },
+        {
+            "pid": "remembrance_end",
+            "name": "remembrance_end",
+            "text": "The glyph settles into your hand as the memory fades. The path onward opens.",
+            "choices": []
+        }
+    ]
+}

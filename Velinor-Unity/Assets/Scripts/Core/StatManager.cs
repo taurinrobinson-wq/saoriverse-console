@@ -9,11 +9,10 @@ using UnityEngine.Serialization;
 /// </summary>
 public enum ToneType
 {
-    Courage,
-    Empathy,
+    Truth,
     Observation,
-    Wisdom,
-    NarrativePresence
+    NarrativePresence,
+    Empathy
 }
 
 /// <summary>
@@ -170,11 +169,10 @@ public class StatManager : MonoBehaviour
     // Player TONE stats
     private Dictionary<ToneType, float> playerTone = new Dictionary<ToneType, float>
     {
-        { ToneType.Courage, 0f },
-        { ToneType.Empathy, 0f },
+        { ToneType.Truth, 0f },
         { ToneType.Observation, 0f },
-        { ToneType.Wisdom, 0f },
-        { ToneType.NarrativePresence, 0f }
+        { ToneType.NarrativePresence, 0f },
+        { ToneType.Empathy, 0f }
     };
 
     // NPC REMNANTS stats
@@ -358,12 +356,11 @@ public class StatManager : MonoBehaviour
     /// Adjust player TONE stat.
     /// Automatically applies TONE→REMNANTS correlation to all NPCs.
     /// 
-    /// Correlation rules:
-    /// - Narrative Presence ↑ → Resolve ↑, Authority ↑; Nuance ↓, Empathy ↓
-    /// - Observation ↑ → Nuance ↑, Memory ↑; Authority ↓
-    /// - Empathy ↑ → Empathy ↑, Need ↑; Resolve ↓
-    /// - Courage ↑ → Resolve ↑, Authority ↑; Nuance ↓, Empathy ↓
-    /// - Wisdom ↑ → Memory ↑, Nuance ↑; Skepticism ↓
+    /// Canonical correlation rules:
+    /// - Truth (T) → Trust ↑, Resolve ↑; Skepticism ↓
+    /// - Observation (O) → Nuance ↑, Memory ↑; Authority ↓
+    /// - Narrative Presence (N) → Authority ↑, Resolve ↑; Nuance ↓
+    /// - Empathy (E) → Empathy ↑, Need ↑; Resolve ↓
     /// </summary>
     public void AdjustPlayerTone(ToneType tone, float amount, string activeNpcId)
     {
@@ -389,83 +386,28 @@ public class StatManager : MonoBehaviour
 
             switch (tone)
             {
-                case ToneType.NarrativePresence:
-                    if (toneAmount > 0)
-                    {
-                        changes[RemnantType.Resolve] = toneAmount;
-                        changes[RemnantType.Authority] = toneAmount * 0.75f;
-                        changes[RemnantType.Nuance] = -toneAmount * 0.75f;
-                        changes[RemnantType.Empathy] = -toneAmount * 0.5f;
-                    }
-                    else
-                    {
-                        changes[RemnantType.Resolve] = toneAmount;
-                        changes[RemnantType.Authority] = toneAmount * 0.75f;
-                        changes[RemnantType.Nuance] = -toneAmount * 0.75f;
-                        changes[RemnantType.Empathy] = -toneAmount * 0.5f;
-                    }
+                case ToneType.Truth:
+                    changes[RemnantType.Trust] = toneAmount;
+                    changes[RemnantType.Resolve] = toneAmount * 0.75f;
+                    changes[RemnantType.Skepticism] = -toneAmount * 0.5f;
                     break;
 
                 case ToneType.Observation:
-                    if (toneAmount > 0)
-                    {
-                        changes[RemnantType.Nuance] = toneAmount;
-                        changes[RemnantType.Memory] = toneAmount;
-                        changes[RemnantType.Authority] = -toneAmount * 0.5f;
-                    }
-                    else
-                    {
-                        changes[RemnantType.Nuance] = toneAmount;
-                        changes[RemnantType.Memory] = toneAmount;
-                        changes[RemnantType.Authority] = -toneAmount * 0.5f;
-                    }
+                    changes[RemnantType.Nuance] = toneAmount;
+                    changes[RemnantType.Memory] = toneAmount * 0.75f;
+                    changes[RemnantType.Authority] = -toneAmount * 0.5f;
+                    break;
+
+                case ToneType.NarrativePresence:
+                    changes[RemnantType.Authority] = toneAmount;
+                    changes[RemnantType.Resolve] = toneAmount * 0.75f;
+                    changes[RemnantType.Nuance] = -toneAmount * 0.5f;
                     break;
 
                 case ToneType.Empathy:
-                    if (toneAmount > 0)
-                    {
-                        changes[RemnantType.Empathy] = toneAmount;
-                        changes[RemnantType.Need] = toneAmount * 0.75f;
-                        changes[RemnantType.Resolve] = -toneAmount * 0.5f;
-                    }
-                    else
-                    {
-                        changes[RemnantType.Empathy] = toneAmount;
-                        changes[RemnantType.Need] = toneAmount * 0.75f;
-                        changes[RemnantType.Resolve] = -toneAmount * 0.5f;
-                    }
-                    break;
-
-                case ToneType.Courage:
-                    if (toneAmount > 0)
-                    {
-                        changes[RemnantType.Resolve] = toneAmount;
-                        changes[RemnantType.Authority] = toneAmount * 0.75f;
-                        changes[RemnantType.Nuance] = -toneAmount * 0.75f;
-                        changes[RemnantType.Empathy] = -toneAmount * 0.5f;
-                    }
-                    else
-                    {
-                        changes[RemnantType.Resolve] = toneAmount;
-                        changes[RemnantType.Authority] = toneAmount * 0.75f;
-                        changes[RemnantType.Nuance] = -toneAmount * 0.75f;
-                        changes[RemnantType.Empathy] = -toneAmount * 0.5f;
-                    }
-                    break;
-
-                case ToneType.Wisdom:
-                    if (toneAmount > 0)
-                    {
-                        changes[RemnantType.Memory] = toneAmount;
-                        changes[RemnantType.Nuance] = toneAmount * 0.75f;
-                        changes[RemnantType.Skepticism] = -toneAmount * 0.5f;
-                    }
-                    else
-                    {
-                        changes[RemnantType.Memory] = toneAmount;
-                        changes[RemnantType.Nuance] = toneAmount * 0.75f;
-                        changes[RemnantType.Skepticism] = -toneAmount * 0.5f;
-                    }
+                    changes[RemnantType.Empathy] = toneAmount;
+                    changes[RemnantType.Need] = toneAmount * 0.75f;
+                    changes[RemnantType.Resolve] = -toneAmount * 0.5f;
                     break;
             }
 

@@ -61,12 +61,11 @@ When a character card is hovered/focused:
 ║  Age: 27-28                           ║
 ║  Status: Newly arrived, grieving      ║
 ║                                        ║
-║  Base Stats:                           ║
-║  • Coherence: 40 (disoriented)        ║
-║  • Empathy: 55 (present, open)        ║
-║  • Observation: 50 (attentive)        ║
-║  • Presence: 45 (uncertain)           ║
-║  • Memory: 35 (fragmented)            ║
+║  **Base Stats:**                       ║
+║  • Truth: ⚖ (in equilibrium)           ║
+║  • Observation: ⚖ (in equilibrium)     ║
+║  • Narrative Presence: ⚖ (in equilibrium) ║
+║  • Empathy: ⚖ (in equilibrium)         ║
 ║                                        ║
 ║  Dialogue Signature:                   ║
 ║  Direct, reserved, occasionally       ║
@@ -89,12 +88,13 @@ When a character card is hovered/focused:
 - Clothing: simple, functional—archival tunic over travel-worn layers
 - Movement: deliberate, economical
 
-**Stat Baseline:**
-- Coherence: 40
-- Empathy: 55
-- Observation: 50
-- Presence: 45
-- Memory: 35
+**TONE Stat Baseline (Player Only):**
+- Truth: ⚖ (in equilibrium)
+- Observation: ⚖ (in equilibrium)
+- Narrative Presence: ⚖ (in equilibrium)
+- Empathy: ⚖ (in equilibrium)
+
+*All TONE stats start at perfect equilibrium. Stats shift through player choices during gameplay.*
 
 **Dialogue Signature:**
 - Direct, without flourish
@@ -195,15 +195,18 @@ When a character card is hovered/focused:
 - Character uses integrated name
 - Dialogue adjusts fluidly, code-switching between both baselines depending on context
 - Visual: purely androgynous (shoulder-length hair, no gendered adornment)
-- Stats: baseline average between Lior and Lioren (Coherence: 40.5, Empathy: 55.5, Observation: 49.5, Presence: 45.5, Memory: 35)
+- TONE Stats: Identical baseline to Lior and Lioren (all in equilibrium)
 - NPC dialogue: some NPCs use "Lior(en)" if familiar; others may use just "Lior" or "Lioren"; creates dialogue variation
 
+*All player variants have identical TONE stat mechanics; differences are narrative and perceptual only.*
+
 **Stat Baseline (if "Lior(en)" selected):**
-- Coherence: 40.5 (slightly more grounded than Lior)
-- Empathy: 55.5 (balanced emotional/analytical)
-- Observation: 49.5 (intuitive and systematic)
-- Presence: 45.5 (uncertain of social space)
-- Memory: 35 (equal fragmentation)
+- Truth: ⚖ (in equilibrium)
+- Observation: ⚖ (in equilibrium)
+- Narrative Presence: ⚖ (in equilibrium)
+- Empathy: ⚖ (in equilibrium)
+
+*All variants start with identical TONE mechanics.*
 
 **Dialogue Signature:**
 - Flexible, shifting between direct and reflective

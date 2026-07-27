@@ -82,12 +82,13 @@ coherence = 100 - average_deviation(empathy, skepticism, integration, awareness)
 **Meaning:**
 - **High coherence (80-100):** Emotional alignment, strong sense of self
 - **Medium coherence (40-80):** Mixed signals, growing understanding
-- **Low coherence (0-40):** Conflict, internal contradiction
+- **Mixed coherence (40-80):** Mixed signals from Velinor; players see contradictory NPC behaviors; reality feels uncertain
+- **Low coherence (0-40):** Velinor's fragmentation severe; conflict widespread; system collapse imminent
 
 **Impact:**
-- Higher coherence unlocks deeper NPC responses
-- Low coherence triggers doubt/crisis responses
-- Coherence progression determines which ending is reachable
+- Higher Velinor coherence enables deeper NPC relationships and story integration
+- Low Velinor coherence triggers crisis/conflict scenarios
+- **Player's TONE/REMNANTS stats determine which endings are reachable** (not coherence progression)
 
 **Files to Modify:**
 - `velinor/engine/coherence_calculator.py` — Coherence calculation logic
@@ -168,8 +169,8 @@ Tier 3 (Plaintext Layer) → Decoded meaning
 - Lead to rare/premium endings
 
 **NEW (Post-2.0):**
-- **Glyph #76 (Shared Dawn)** — Joy/Presence hybrid. Catalytic tryst between Sera & Korrin. Unlocks Grounded Presence tool. Gated on Empathy 50+/Trust 50+, Coherence 50+, multi-NPC encounters.
-- **Glyph of Severed Covenant** — Ache/Legacy hybrid. Malrik & Elenya pre-collapse bond revelation. Unlocks alternative ending branches. Gated on Coherence 70+, Empathy 70+/Integration 70+, 4+ encounters with each NPC.
+- **Glyph #76 (Shared Dawn)** — Joy/Presence hybrid. Catalytic tryst between Sera & Korrin. Unlocks Grounded Presence tool. Gated on Empathy 50+/Trust 50+, multi-NPC encounters.
+- **Glyph of Severed Covenant** — Ache/Legacy hybrid. Malrik & Elenya pre-collapse bond revelation. Unlocks alternative ending branches. Gated on Empathy 70+/Memory 70+, 4+ encounters with each NPC.
 
 ### 3-Tier Cipher
 

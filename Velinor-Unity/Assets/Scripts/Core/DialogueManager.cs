@@ -26,13 +26,45 @@ public class DialogueManager : MonoBehaviour
     
     /// <summary>Deserializes choice objects from story JSON.</summary>
     [System.Serializable]
+    public class StringFloatEntry
+    {
+        public string key;
+        public float value;
+    }
+
+    [System.Serializable]
+    public class StringFloatMap
+    {
+        public List<StringFloatEntry> entries = new List<StringFloatEntry>();
+
+        public Dictionary<string, float> ToDictionary()
+        {
+            var result = new Dictionary<string, float>();
+            if (entries == null) return result;
+
+            foreach (var entry in entries)
+            {
+                if (entry == null || string.IsNullOrWhiteSpace(entry.key))
+                    continue;
+
+                result[entry.key] = entry.value;
+            }
+
+            return result;
+        }
+    }
+
+    /// <summary>Deserializes choice objects from story JSON.</summary>
+    [System.Serializable]
     public class StoryChoice
     {
         public string text;              // Choice button label
         public string target;            // Next passage ID
-        public Dictionary<string, float> tone_effects = new Dictionary<string, float>();
-        public Dictionary<string, float> npc_resonance = new Dictionary<string, float>();
+        public StringFloatMap tone_effects = new StringFloatMap();
+        public StringFloatMap npc_resonance = new StringFloatMap();
         public string mark_story_beat;
+        public string system_trigger;
+        public string data_hook;
     }
 
     /// <summary>Deserializes passage objects from story JSON.</summary>
@@ -42,7 +74,11 @@ public class DialogueManager : MonoBehaviour
         public string pid;               // Passage ID
         public string name;              // Passage name
         public string text;              // Full passage text (may contain inline markup)
+        public string prompt;            // Optional prompt text from the narrative guide
+        public string shared_beat;       // Optional shared beat text from the narrative guide
+        public string setting_description;
         public List<string> tags = new List<string>();
+        public List<string> required_flags = new List<string>();
         public List<StoryChoice> choices = new List<StoryChoice>();
     }
 
@@ -81,6 +117,10 @@ public class DialogueManager : MonoBehaviour
     private string currentPassageId;
     private string activeNpcId;
     private bool isDialogueActive = false;
+    private string activeStoryResourcePath = "velinor/stories/sample_story";
+
+    public event Action OnDialogueEnded;
+    public bool IsDialogueActive => isDialogueActive;
 
     #endregion
 
@@ -109,66 +149,54 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        LoadStoryJson();
+        LoadStoryFromResource(activeStoryResourcePath);
     }
 
     /// <summary>
     /// Load story JSON from Resources folder and deserialize into passages dictionary.
-    /// Expected path: Resources/velinor/stories/sample_story.json
     /// </summary>
-    private void LoadStoryJson()
+    public bool LoadStoryFromResource(string resourcePath)
     {
-        if (storyLoaded)
-            return;
+        if (string.IsNullOrEmpty(resourcePath))
+            resourcePath = activeStoryResourcePath;
+
+        if (storyLoaded && resourcePath == activeStoryResourcePath)
+            return true;
 
         try
         {
-            string jsonPath = "velinor/stories/sample_story";
-            TextAsset jsonAsset = Resources.Load<TextAsset>(jsonPath);
-
+            TextAsset jsonAsset = Resources.Load<TextAsset>(resourcePath);
             if (jsonAsset == null)
             {
-                Debug.LogError($"[DialogueManager] Failed to load story JSON from Resources/{jsonPath}");
-                Debug.LogError("[DialogueManager] DEBUGGING: Checking what's in Resources/velinor/stories/...");
-                // List what we can actually find
-                TextAsset[] allAssets = Resources.LoadAll<TextAsset>("velinor/stories");
-                Debug.LogError($"[DialogueManager] Found {allAssets.Length} TextAssets in velinor/stories");
-                foreach (TextAsset asset in allAssets)
-                {
-                    Debug.LogError($"[DialogueManager]   - {asset.name}");
-                }
-                return;
+                Debug.LogError($"[DialogueManager] Failed to load story JSON from Resources/{resourcePath}");
+                return false;
             }
 
             Debug.Log($"[DialogueManager] Loaded TextAsset: {jsonAsset.name}");
             string jsonText = jsonAsset.text;
-            Debug.Log($"[DialogueManager] JSON text length: {jsonText.Length} characters");
-
             StoryJson storyData = JsonUtility.FromJson<StoryJson>(jsonText);
 
             if (storyData == null || storyData.passages == null)
             {
                 Debug.LogError("[DialogueManager] Failed to deserialize story JSON");
-                Debug.LogError($"[DialogueManager] storyData is null: {storyData == null}");
-                if (storyData != null)
-                    Debug.LogError($"[DialogueManager] passages is null: {storyData.passages == null}");
-                return;
+                return false;
             }
 
-            // Convert passages array into dictionary keyed by pid
             passages = new Dictionary<string, StoryPassage>();
             foreach (StoryPassage passage in storyData.passages)
             {
                 passages[passage.pid] = passage;
             }
 
+            activeStoryResourcePath = resourcePath;
             storyLoaded = true;
-            
-            Debug.Log($"[DialogueManager] Story loaded successfully. {passages.Count} passages found. Starting node: {storyData.startnode}");
+            Debug.Log($"[DialogueManager] Story loaded successfully. {passages.Count} passages found.");
+            return true;
         }
         catch (Exception ex)
         {
             Debug.LogError($"[DialogueManager] Exception loading story JSON: {ex.Message}");
+            return false;
         }
     }
 
@@ -184,7 +212,12 @@ public class DialogueManager : MonoBehaviour
     /// <param name="startingPassageId">Starting passage ID (e.g., "ravi_dialogue")</param>
     public void StartDialogue(string npcId, string startingPassageId)
     {
-        if (!storyLoaded)
+        StartDialogue(npcId, startingPassageId, activeStoryResourcePath);
+    }
+
+    public void StartDialogue(string npcId, string startingPassageId, string storyResourcePath)
+    {
+        if (!LoadStoryFromResource(storyResourcePath))
         {
             Debug.LogWarning("[DialogueManager] Story not loaded yet");
             return;
@@ -253,6 +286,7 @@ public class DialogueManager : MonoBehaviour
             playerController.enabled = true;
         }
 
+        OnDialogueEnded?.Invoke();
         Debug.Log("[DialogueManager] Dialogue ended");
     }
 
@@ -275,6 +309,19 @@ public class DialogueManager : MonoBehaviour
         StoryPassage passage = passages[passageId];
         currentPassageId = passageId;
 
+        if (passage.required_flags != null && passage.required_flags.Count > 0)
+        {
+            foreach (string requiredFlag in passage.required_flags)
+            {
+                if (!GameFlags.Get(requiredFlag))
+                {
+                    Debug.LogWarning($"[DialogueManager] Passage '{passageId}' blocked by missing flag '{requiredFlag}'.");
+                    EndDialogue();
+                    return;
+                }
+            }
+        }
+
         // Render NPC name
         if (npcNameText != null)
         {
@@ -284,7 +331,16 @@ public class DialogueManager : MonoBehaviour
         // Render passage text
         if (bodyText != null)
         {
-            bodyText.text = passage.text;
+            string displayText = passage.text;
+            if (string.IsNullOrWhiteSpace(displayText))
+            {
+                List<string> parts = new List<string>();
+                if (!string.IsNullOrWhiteSpace(passage.prompt)) parts.Add(passage.prompt);
+                if (!string.IsNullOrWhiteSpace(passage.shared_beat)) parts.Add(passage.shared_beat);
+                displayText = string.Join("\n\n", parts);
+            }
+
+            bodyText.text = displayText;
         }
 
         // Clear previous choice buttons
@@ -364,15 +420,71 @@ public class DialogueManager : MonoBehaviour
 
     #region Choice Resolution
 
+    private bool TryResolveToneType(string toneName, out ToneType toneType)
+    {
+        toneType = default;
+        if (string.IsNullOrWhiteSpace(toneName))
+            return false;
+
+        if (Enum.TryParse<ToneType>(toneName, ignoreCase: true, out toneType))
+            return true;
+
+        switch (toneName.ToLowerInvariant())
+        {
+            case "courage":
+                toneType = ToneType.Truth;
+                return true;
+            case "wisdom":
+                toneType = ToneType.Observation;
+                return true;
+            case "narrativepresence":
+            case "narrative_presence":
+                toneType = ToneType.NarrativePresence;
+                return true;
+            case "truth":
+                toneType = ToneType.Truth;
+                return true;
+            case "observation":
+                toneType = ToneType.Observation;
+                return true;
+            case "empathy":
+                toneType = ToneType.Empathy;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void HandleChoiceHooks(StoryChoice choice)
+    {
+        if (!string.IsNullOrWhiteSpace(choice.system_trigger))
+        {
+            if (choice.system_trigger.StartsWith("transition:", StringComparison.OrdinalIgnoreCase))
+            {
+                string sceneName = choice.system_trigger.Substring("transition:".Length).Trim();
+                if (SceneTransitionManager.Instance != null)
+                    SceneTransitionManager.Instance.TransitionToScene(sceneName);
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(choice.data_hook))
+        {
+            if (choice.data_hook.StartsWith("set_flag:", StringComparison.OrdinalIgnoreCase))
+            {
+                string flagExpression = choice.data_hook.Substring("set_flag:".Length).Trim();
+                string[] parts = flagExpression.Split('=');
+                if (parts.Length == 2)
+                {
+                    string flagName = parts[0].Trim();
+                    bool flagValue = bool.TryParse(parts[1].Trim(), out var parsed) ? parsed : true;
+                    GameFlags.Set(flagName, flagValue);
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Called when player clicks a choice button.
-    /// 
-    /// Flow:
-    /// 1. Apply tone_effects via StatManager.AdjustPlayerTone()
-    /// 2. Apply npc_resonance via StatManager.ApplyNpcResonance()
-    ///    (StatManager internally cascades changes through influence_map)
-    /// 3. Call StatManager.LogEncounter() with the tone_effects
-    /// 4. Move to next passage: DisplayPassage(choice.target)
     /// </summary>
     private void OnChoiceSelected(StoryChoice choice)
     {
@@ -384,17 +496,15 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log($"[DialogueManager] Choice selected: {choice.text}");
 
-        // Step 1: Apply tone effects to player TONE
-        // Each tone type gets adjusted independently
-        if (choice.tone_effects != null && choice.tone_effects.Count > 0)
+        var toneEffects = choice.tone_effects?.ToDictionary() ?? new Dictionary<string, float>();
+        if (toneEffects.Count > 0)
         {
-            foreach (var kvp in choice.tone_effects)
+            foreach (var kvp in toneEffects)
             {
                 string toneName = kvp.Key;
                 float amount = kvp.Value;
 
-                // Convert tone name string to ToneType enum
-                if (System.Enum.TryParse<ToneType>(toneName, ignoreCase: true, out var toneType))
+                if (TryResolveToneType(toneName, out var toneType))
                 {
                     StatManager.Instance.AdjustPlayerTone(toneType, amount, activeNpcId);
                     Debug.Log($"[DialogueManager] Applied tone effect: {toneName} += {amount}");
@@ -406,11 +516,10 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        // Step 2: Apply NPC resonance
-        // Each NPC resonance value is converted to REMNANTS changes and cascaded
-        if (choice.npc_resonance != null && choice.npc_resonance.Count > 0)
+        var npcResonance = choice.npc_resonance?.ToDictionary() ?? new Dictionary<string, float>();
+        if (npcResonance.Count > 0)
         {
-            foreach (var kvp in choice.npc_resonance)
+            foreach (var kvp in npcResonance)
             {
                 string npcName = kvp.Key;
                 float resonanceValue = kvp.Value;
@@ -420,14 +529,13 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        // Step 3: Log encounter with tone effects
-        // StatManager stores a snapshot of all NPC states after this choice
-        if (choice.tone_effects != null && choice.tone_effects.Count > 0)
+        if (toneEffects.Count > 0)
         {
-            StatManager.Instance.LogEncounter(choice.tone_effects);
+            StatManager.Instance.LogEncounter(toneEffects);
         }
 
-        // Step 4: Move to next passage
+        HandleChoiceHooks(choice);
+
         string targetPassageId = choice.target;
         if (string.IsNullOrEmpty(targetPassageId))
         {

@@ -43,12 +43,13 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 ### Character Baseline
 
-**Stats:**
-- Coherence: 40 (disoriented; recent trauma)
-- Empathy: 55 (present and open, but guarded)
-- Observation: 50 (attentive; notices patterns)
-- Presence: 45 (uncertain of social role; not commanding)
-- Memory: 35 (fragmented; recent loss blocks recall)
+**TONE Stats (Player Only - All in Equilibrium):**
+- Truth: ⚖ (in equilibrium)
+- Observation: ⚖ (in equilibrium)
+- Narrative Presence: ⚖ (in equilibrium)
+- Empathy: ⚖ (in equilibrium)
+
+*Stats shift through player TONE choices during gameplay, not fixed progression.*
 
 **Philosophy (Internal):**
 - "Loss is permanent. Acceptance is survival."
@@ -114,25 +115,19 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 ---
 
-### Mechanical Notes
+**Mechanical Notes**
 
-**Stat Progression:**
-- Coherence rises when: Making choices independently, experiencing moments of clarity
-- Empathy rises when: Witnessing others' pain, choosing compassion over efficiency
-- Observation rises when: Studying NPCs, solving pattern-based puzzles
-- Presence rises when: Standing up to authority, speaking truth despite fear
-- Memory rises when: Unlocking glyphs, recovering parent memories
+**TONE System:** All player variants start with identical TONE stats in perfect equilibrium. Differences between variants are narrative and perceptual (how NPCs respond), not mechanical.
 
-**Glyph Resonance (Gender-Specific):**
-- **Sovereignty glyphs**: Respond strongly (male-coded autonomy resonance)
-- **Trust glyphs**: Respond moderately (masculine trust patterns)
-- **Joy glyphs**: Respond weakly (difficulty accessing unguarded joy)
+**Glyph Resonance:** Glyphs respond to the player's TONE-driven choices and resulting REMNANTS stat shifts, not to gender expression.
 
-**NPC Attunement:**
-- Malrik: Starts at 0.05 (minimal); rises with demonstrated competence
-- Elenya: Starts at 0.15 (she senses him immediately); rises with ritual attendance
-- Velinor: Starts at 0.10 (professional); rises with philosophical conversations
-- Ravi: Starts at 0.20 (warm); rises with casual interaction
+**NPC Attunement (Variance by Perception, Not Mechanics):**
+- Malrik: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Elenya: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Velinor: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Ravi: Initial perception influenced by variant; attunement shifts through player TONE choices
+
+*All variants have identical mechanical depth; variant differences are how NPCs perceive and respond.*
 
 ---
 
@@ -186,12 +181,13 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 ### Character Baseline
 
-**Stats:**
-- Coherence: 41 (slightly more grounded than Lior; emotional presence stabilizes)
-- Empathy: 56 (deeply felt; able to be present with others' pain)
-- Observation: 49 (intuitive more than analytical; reads people well)
-- Presence: 46 (more commanding than Lior; people listen when she speaks)
-- Memory: 35 (same fragmentation; loss blocks recall equally)
+**TONE Stats (Player Only - All in Equilibrium):**
+- Truth: ⚖ (in equilibrium)
+- Observation: ⚖ (in equilibrium)
+- Narrative Presence: ⚖ (in equilibrium)
+- Empathy: ⚖ (in equilibrium)
+
+*Stats shift through player TONE choices during gameplay, not fixed progression.*
 
 **Philosophy (Internal):**
 - "Grief teaches us what matters. Honor that teaching."
@@ -258,25 +254,19 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 ---
 
-### Mechanical Notes
+**Mechanical Notes**
 
-**Stat Progression:**
-- Coherence rises when: Finding emotional clarity through reflection, accepting losses
-- Empathy rises when: Supporting others, choosing compassion despite personal cost
-- Observation rises when: Studying emotional patterns in NPCs, intuitive breakthroughs
-- Presence rises when: Expressing truth authentically, holding space for others
-- Memory rises when: Unlocking glyphs tied to healing, recovering mother's memory particularly
+**TONE System:** All player variants start with identical TONE stats in perfect equilibrium. Differences between variants are narrative and perceptual (how NPCs respond), not mechanical.
 
-**Glyph Resonance (Gender-Specific):**
-- **Legacy glyphs**: Respond strongly (female-coded ancestral resonance)
-- **Presence glyphs**: Respond strongly (spiritual embodiment)
-- **Collapse glyphs**: Respond with intense emotion (traumatic patterns)
+**Glyph Resonance:** Glyphs respond to the player's TONE-driven choices and resulting REMNANTS stat shifts, not to gender expression.
 
-**NPC Attunement:**
-- Malrik: Starts at 0.08 (wary; she threatens his systems); rises slowly with patience
-- Elenya: Starts at 0.25 (immediate recognition); rises quickly through ritual work
-- Velinor: Starts at 0.15 (professional + respectful); rises with intellectual engagement
-- Ravi: Starts at 0.22 (flirtation + genuine interest); rises through friendly interaction
+**NPC Attunement (Variance by Perception, Not Mechanics):**
+- Malrik: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Elenya: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Velinor: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Ravi: Initial perception influenced by variant; attunement shifts through player TONE choices
+
+*All variants have identical mechanical depth; variant differences are how NPCs perceive and respond.*
 
 ---
 
@@ -331,12 +321,13 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 ### Character Baseline
 
-**Stats:**
-- Coherence: 40.5 (average of both; slightly more grounded than Lior)
-- Empathy: 55.5 (balanced between logic and emotion)
-- Observation: 49.5 (intuitive and systematic; sees both patterns)
-- Presence: 45.5 (uncertain of social role; could go either direction)
-- Memory: 35 (equal fragmentation)
+**TONE Stats (Player Only - All in Equilibrium):**
+- Truth: ⚖ (in equilibrium)
+- Observation: ⚖ (in equilibrium)
+- Narrative Presence: ⚖ (in equilibrium)
+- Empathy: ⚖ (in equilibrium)
+
+*Stats shift through player TONE choices during gameplay, not fixed progression.*
 
 **Philosophy (Internal):**
 - "I don't fit neatly. Maybe that's the point."
@@ -454,25 +445,19 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 ---
 
-### Mechanical Notes
+**Mechanical Notes**
 
-**Stat Progression:**
-- Coherence rises when: Holding paradox, refusing to choose prematurely, finding integration
-- Empathy rises when: Being present to multiple perspectives, validating complexity
-- Observation rises when: Studying how systems categorize and exclude, seeing beyond categories
-- Presence rises when: Speaking truth about ambiguity, modeling non-binary existence
-- Memory rises when: Unlocking glyphs tied to identity fluidity, recovering both parents' memories equally
+**TONE System:** All player variants start with identical TONE stats in perfect equilibrium. Differences between variants are narrative and perceptual (how NPCs respond), not mechanical.
 
-**Glyph Resonance (Non-Binary Specific):**
-- **All glyphs**: Respond with slightly different resonance than gendered variants
-- **Integration glyphs** (if any exist): Respond strongly (identity is integration itself)
-- **Transformation glyphs**: Respond strongly (identity as continuous becoming)
+**Glyph Resonance:** Glyphs respond to the player's TONE-driven choices and resulting REMNANTS stat shifts, not to gender expression.
 
-**NPC Attunement:**
-- Malrik: Starts at 0.05 (uncomfortable; threatens his categories); rises slowly with patience
-- Elenya: Starts at 0.28 (strong immediate recognition); rises quickly through shared understanding
-- Velinor: Starts at 0.18 (intellectual respect; appreciates complexity); rises with philosophical conversation
-- Ravi: Starts at 0.22 (warm, uncomplicated); rises through normal friendship
+**NPC Attunement (Variance by Perception, Not Mechanics):**
+- Malrik: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Elenya: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Velinor: Initial perception influenced by variant; attunement shifts through player TONE choices
+- Ravi: Initial perception influenced by variant; attunement shifts through player TONE choices
+
+*All variants have identical mechanical depth; variant differences are how NPCs perceive and respond.*
 
 ---
 
@@ -490,18 +475,19 @@ All three variants have access to the same story. The choice affects **tone**, *
 
 ---
 
-## Comparative Chart
+## Comparative Chart: TONE System Clarity
 
 | Aspect | Lior | Lioren | Lior(en) |
-|--------|------|--------|---------|
-| **Coherence** | 40 | 41 | 40.5 |
-| **Empathy** | 55 | 56 | 55.5 |
-| **Observation** | 50 | 49 | 49.5 |
-| **Presence** | 45 | 46 | 45.5 |
-| **Memory** | 35 | 35 | 35 |
+|--------|------|--------|----------|
+| **TONE Stats** | All in equilibrium ⚖ | All in equilibrium ⚖ | All in equilibrium ⚖ |
 | **Dialogue Tone** | Direct, reserved | Thoughtful, reflective | Flexible, code-switching |
-| **NPC Malrik Attn.** | 0.05 → rises slowly | 0.08 → rises slowly | 0.05 → rises very slowly |
-| **NPC Elenya Attn.** | 0.15 → rises mod | 0.25 → rises quickly | 0.28 → rises quickly |
+| **NPC Perception** | Competent, quiet | Emotionally aware | Paradoxical, becoming |
+| **Narrative Arc** | Quiet competence → vulnerability | Emotional openness → wisdom | Paradox-holding → integration |
+| **Initial Malrik Response** | Respects competence | Notices contradictions | Frustrated by refusal to categorize |
+| **Initial Elenya Response** | Senses quiet grief | Recognizes spiritual peer | Perceives one living paradox |
+| **Initial Velinor Response** | Sees patient listener | Perceives intellectual capacity | Appreciates complexity-holding |
+
+**Critical Note:** All variants have identical TONE stat mechanics. The "Initial Response" row reflects how NPCs *perceive* the variant, not mechanical differences.
 | Primary Mentorship | Elenya (emotional), Velinor (intellectual) | Elenya (spiritual), Velinor (intellectual) | Elenya (recognition), Velinor (complexity) |
 | **Character Arc** | Loss → Acceptance | Grief → Wisdom | Fragmentation → Integration |
 

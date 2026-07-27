@@ -23,7 +23,9 @@ This document serves as a quick reference and integration guide for all characte
 
 ### Path 1: LIOR (Male Variant)
 
-**Starting Stats:** Coherence 40 | Empathy 55 | Observation 50 | Presence 45 | Memory 35
+**Starting TONE Stats:** Truth ⚖ | Observation ⚖ | Narrative Presence ⚖ | Empathy ⚖ (All in equilibrium)
+
+**Visual Presentation:** Lean, dark hair short, practical clothing, angular features
 
 **Archetype:** The Quiet Observer  
 - Direct, reserved, occasionally vulnerable
@@ -31,15 +33,17 @@ This document serves as a quick reference and integration guide for all characte
 - Drawn to institutional order (Malrik) and ritual presence (Elenya)
 - Character arc: Acceptance of loss → Recognition of what matters
 
-**Visual:** Lean, dark hair short, practical clothing, angular features  
 **Pronouns:** he/him  
 **NPC First Impressions:** Malrik (respects competence), Elenya (senses grief)
+**Mechanical Note:** Stat shifts result from player TONE choices, not fixed progression
 
 ---
 
 ### Path 2: LIOREN (Female Variant)
 
-**Starting Stats:** Coherence 41 | Empathy 56 | Observation 49 | Presence 46 | Memory 35
+**Starting TONE Stats:** Truth ⚖ | Observation ⚖ | Narrative Presence ⚖ | Empathy ⚖ (All in equilibrium)
+
+**Visual Presentation:** Lean, dark hair longer/braided, ritual-influenced clothing, expressive features
 
 **Archetype:** The Reflective Healer  
 - Thoughtful, emotionally available, grounded in intuition
@@ -47,15 +51,17 @@ This document serves as a quick reference and integration guide for all characte
 - Drawn to spiritual practice (Elenya) and philosophical challenge (Velinor)
 - Character arc: Grief as teaching → Wisdom and integration
 
-**Visual:** Lean, dark hair longer/braided, ritual-influenced clothing, expressive features  
 **Pronouns:** she/her  
 **NPC First Impressions:** Elenya (spiritual recognition), Velinor (intellectual respect)
+**Mechanical Note:** Stat shifts result from player TONE choices, not fixed progression
 
 ---
 
 ### Path 3: LIOR(EN) (Nonbinary Variant)
 
-**Starting Stats:** Coherence 40.5 | Empathy 55.5 | Observation 49.5 | Presence 45.5 | Memory 35
+**Starting TONE Stats:** Truth ⚖ | Observation ⚖ | Narrative Presence ⚖ | Empathy ⚖ (All in equilibrium)
+
+**Visual Presentation:** Lean, dark hair shoulder-length/unstyled, truly androgynous clothing, neutral features
 
 **Archetype:** The Becoming One  
 - Flexible, code-switching, comfortable with uncertainty
@@ -63,9 +69,9 @@ This document serves as a quick reference and integration guide for all characte
 - Drawn to both institutional (Malrik) and spiritual (Elenya) worlds; transcends both
 - Character arc: Fragmentation → Integration (without resolution)
 
-**Visual:** Lean, dark hair shoulder-length/unstyled, truly androgynous clothing, neutral features  
 **Pronouns:** they/them (primary) or he/him or she/her (secondary choice)  
-**Secondary Mechanic:** Upon selection, player chooses secondary name (Lior, Lioren, or Lior(en)) which affects NPC address and subtle stat/dialogue shifts
+**Secondary Mechanic:** Upon selection, player chooses secondary name (Lior, Lioren, or Lior(en)) which affects NPC address and dialogue shifts
+**Mechanical Note:** Stat shifts result from player TONE choices, not fixed progression
 
 ---
 
@@ -103,17 +109,23 @@ Lior(en): "Welcome, Lior(en). They work well."
 
 See `dialogue_pronoun_system.md` for full technical specs.
 
-### 3. Stat Baselines & Progression
+### 3. TONE System & Stat Progression
 
-All variants start at Coherence ~40 (severely disoriented from recent grief). Stat progression differs slightly based on choices:
+**Critical Principle:** The player character is the ONLY character in the game using the TONE stat system. All player variants (Lior, Lioren, Lior(en)) start with all TONE stats in perfect equilibrium.
 
-| Stat | Lior | Lioren | Lior(en) | Unlock At |
-|------|------|--------|---------|-----------|
-| Coherence | 40 | 41 | 40.5 | Independent decisions |
-| Empathy | 55 | 56 | 55.5 | Supporting others |
-| Observation | 50 | 49 | 49.5 | Pattern recognition |
-| Presence | 45 | 46 | 45.5 | Standing up to authority |
-| Memory | 35 | 35 | 35 | Glyph discoveries |
+**TONE Stats (Player Only):**
+- **Truth (T):** Conviction, honesty, personal code
+- **Observation (O):** Attention to detail, pattern recognition, context awareness
+- **Narrative Presence (N):** Authority, command presence, story shaping
+- **Empathy (E):** Compassion, emotional openness, relational understanding
+
+**How TONE Choices Drive REMNANTS Stat Shifts:**
+- **Trust (player choice)** → raises Trust, Resolve; lowers Skepticism
+- **Observation (player choice)** → raises Nuance, Memory; lowers Authority
+- **Narrative Presence (player choice)** → raises Authority, Resolve; lowers Nuance
+- **Empathy (player choice)** → raises Empathy, Need; lowers Resolve
+
+All three player variants shift REMNANTS stats identically based on the same TONE choices made during gameplay. The variants differ in visual presentation and NPC perceptions, not in starting stats or stat mechanics.
 
 ---
 
@@ -171,45 +183,49 @@ All variants start at Coherence ~40 (severely disoriented from recent grief). St
 
 ---
 
-## Character Stat Comparison
+## Character Expression Comparison
+
+**Important:** All three variants have identical TONE stat mechanics. The differences below reflect how NPCs *perceive* and *interact with* each variant, not mechanical differences.
 
 ### Lior (Direct, Observant)
-- **Strong in:** Observation, adaptability to Malrik's system
-- **Weak in:** Presence (quiet, not commanding), emotional expression
-- **Best for:** Players who value quiet competence, methodical learning
-- **Romance:** Slow-burn; builds through respect and eventual vulnerability
+- **NPC Perception:** Malrik sees competence; Elenya senses quiet pain
+- **Narrative Arc:** Quiet competence → gradual vulnerability
+- **Best for:** Players who value reserved, methodical protagonists
+- **Mentorship Pattern:** Builds trust through demonstration, then deepens through recognition
 
 ### Lioren (Reflective, Intuitive)
-- **Strong in:** Empathy, spiritual resonance, commanding presence
-- **Weak in:** Systematic thinking (learns through intuition first)
-- **Best for:** Players who value emotional depth, relational learning
-- **Romance:** Faster-burn; builds through emotional recognition
+- **NPC Perception:** Elenya recognizes spiritual peer; Velinor sees capable intellect
+- **Narrative Arc:** Emotional openness → wisdom integration
+- **Best for:** Players who value emotionally available, relational protagonists
+- **Mentorship Pattern:** Builds connection through presence, then deepens through mutual recognition
 
 ### Lior(en) (Flexible, Paradoxical)
-- **Strong in:** Holding multiple perspectives, refusing categorization
-- **Weak in:** None specifically; balanced across all dimensions
-- **Best for:** Players who value complexity, rejecting binary choices
-- **Romance:** Deepest with Elenya (who also transcends categories); unique with Malrik (who must learn paradox)
+- **NPC Perception:** All NPCs recognize complexity; some are intrigued, others initially uncertain
+- **Narrative Arc:** Paradox-holding → integrated understanding
+- **Best for:** Players who value protagonists that refuse binary categorization
+- **Mentorship Pattern:** Builds recognition through genuine understanding, deepens through shared complexity
 
 ---
 
 ## NPC Response Variation
 
+**Note:** NPC REMNANTS stats are fixed and independent of player variant selection. What changes is how NPCs perceive and interact with the player variant, not their own stat systems.
+
 ### Malrik (The Archivist)
 
 | Variant | Initial | Growth | Final |
 |---------|---------|--------|-------|
-| Lior | "Competent worker" | Realizes he's lonely | Learns that precision can't hold love |
-| Lioren | "Technically competent; confusing" | Realizes intuition is also precision | Learns to value what he can't categorize |
-| Lior(en) | "Refuses categorization" | Frustrated then intrigued | Learns that paradox is not weakness |
+| Lior | Respects competence | Recognizes shared precision | Learns that precision can't hold love |
+| Lioren | Notices contradictions | Intrigued by her authority | Learns to value what he can't categorize |
+| Lior(en) | Frustrated by refusal to categorize | Recognizes kindred complexity | Learns that paradox is not weakness |
 
 ### Elenya (The High Seer)
 
 | Variant | Initial | Growth | Final |
 |---------|---------|--------|-------|
-| Lior | "Sees his quiet pain" | Becomes safe space | Profound mentorship; boundary honored |
-| Lioren | "Recognizes spiritual peer" | Becomes teacher/mentor | Mutual spiritual recognition; deep mentorship |
-| Lior(en) | "Sees one who is becoming" | Becomes mirror | Sacred partnership; profound understanding |
+| Lior | Senses quiet grief beneath competence | Becomes safe harbor for vulnerability | Deep mentorship from spiritual knowing |
+| Lioren | Recognizes spiritual peer and capacity | Becomes mutual teacher and student | Profound mentorship and mutual growth |
+| Lior(en) | Perceives one living paradox | Becomes mirror and witness | Sacred recognition of shared becoming |
 
 ### Velinor (The Knowledge Keeper)
 
@@ -217,15 +233,17 @@ All variants start at Coherence ~40 (severely disoriented from recent grief). St
 
 | Variant | Initial | Growth | Final |
 |---------|---------|---------|--------|
-| Lior | "Respectful listener" | Becomes philosophical companion | Deep intellectual mentorship; boundary honored |
-| Lioren | "Capable of deep work" | Becomes intellectual peer | Mutual respect and understanding; mentorship |
-| Lior(en) | "Appreciates complexity" | Becomes fellow paradox-holder | Recognition of shared non-linear wisdom; mentorship |
+| Lior | Recognizes patient, precise listening | Philosophical companionship emerges | Deep intellectual kinship |
+| Lioren | Perceives genuine intellectual capability | Becomes peer in complex thinking | Mutual recognition and profound mentorship |
+| Lior(en) | Appreciates refusal of simple categories | Kindred paradox-holder recognized | Shared non-linear wisdom and deep understanding |
 
 ### Saori (The Caretaker & Mentor)
 
 **Context:** Saori and Velinor created the Corelink system as brilliant teenagers. When it catastrophically activated, Velinor sacrificed herself to mitigate the damage. Saori has spent 25 years tending to Velinor's fragmentation, preserving her history, and holding her stable. Saori represents unconditional care that transcends typical relationship categories.
 
-**In Game Canon:** Saori gives the Codex to the player directly in a desert encounter, becoming a mentor figure who contextualizes the game's mechanical and spiritual systems.
+**In Game Canon:** Saori gives the Codex to the player directly in a desert encounter. She perceives the player's TONE choices through her deep spiritual attunement, making her a unique mentor figure who contextualizes both the mechanical and spiritual systems.
+
+**Variant Perception:** Saori's perception of the player variant is less about visual presentation and more about recognizing the player's capacity to hold contradiction—much like she has done for Velinor.
 
 **In GN Canon:** Saori is absent from Volume 1 but is referenced through legend and ritual. Her eventual appearance becomes a major narrative payoff.
 
@@ -233,29 +251,39 @@ All variants start at Coherence ~40 (severely disoriented from recent grief). St
 
 ## Key Design Decisions
 
-### 1. Pronouns Are Character, Not Cosmetic
+### 1. TONE Stats Are Universal; Variants Are Perceptual
+
+- All player variants use the identical TONE system (Truth, Observation, Narrative Presence, Empathy)
+- All variants start with TONE stats in perfect equilibrium
+- TONE choices drive REMNANTS stat shifts identically across all variants
+- Mechanical differences are zero; narrative/perceptual differences are profound
+
+### 2. Pronouns Are Character, Not Cosmetic
 
 - Pronouns affect how NPCs perceive and interact with the player
-- Stat baselines reflect how different gender expressions navigate the world
+- Gender expression shapes NPC initial attitudes and mentorship approaches
 - Dialogue itself shifts based on pronouns (institutional respect, spiritual recognition, etc.)
 
-### 2. Nonbinary Is Specific, Not Default
+### 3. Nonbinary Is Specific, Not Default
 
 - "Lior(en)" is not a compromise or middle ground
-- It's a specific identity with its own stat profile and narrative function
+- It's a specific identity with its own narrative function and NPC perceptions
 - Secondary name choice adds extra layer of player agency within nonbinary path
+- All variants have identical mechanical depth via TONE choices
 
-### 3. All Paths Lead to Same Themes
+### 4. All Paths Lead to Same Themes
 
 - Every variant grapples with love, loss, autonomy, and systems
 - The game's story doesn't change; the lens through which it's viewed does
 - Endgame choice (Restart vs. Abandon Corelink) is available to all variants
+- TONE-driven stat progression is identical for all variants
 
-### 4. Visual Differentiation Without Oversexualization
+### 5. Visual Differentiation Without Oversexualization
 
 - Variants differ in hair length, clothing aesthetic, and presentation
 - No variants are sexualized or reduced to sexual appeal
 - All variants are competent, capable, and worthy protagonists
+- Mechanical depth comes from TONE choices, not from visual difference
 
 ---
 
@@ -333,18 +361,29 @@ PLAYER = {
     "character_variant": "lior" | "lioren" | "lior(en)",
     "character_name": "Lior" | "Lioren" | "Lior(en)",
     "pronouns": "he/him" | "she/her" | "they/them",
-    "stats": {
-        "coherence": 40,
-        "empathy": 55,
-        "observation": 50,
-        "presence": 45,
-        "memory": 35,
+    # TONE STATS (Player only) - Start in equilibrium
+    "tone_stats": {
+        "truth": 50,        # Shifts with Truth choices
+        "observation": 50,  # Shifts with Observation choices
+        "narrative_presence": 50,  # Shifts with Narrative Presence choices
+        "empathy": 50,      # Shifts with Empathy choices
+    },
+    # REMNANTS STATS (Derived from TONE choices)
+    "remnants_stats": {
+        "resolve": 50,      # Raised by Trust, Narrative Presence; lowered by Empathy
+        "empathy": 50,      # Raised by Empathy; no raises from others
+        "memory": 50,       # Raised by Observation
+        "nuance": 50,       # Raised by Observation; lowered by Narrative Presence
+        "authority": 50,    # Raised by Narrative Presence; lowered by Observation
+        "need": 50,         # Raised by Empathy; no lowers from others
+        "trust": 50,        # Raised by Trust; no lowers from others
+        "skepticism": 50,   # Lowered by Trust; no raises from others
     },
     "npc_attunement": {
-        "malrik": 0.05,
-        "elenya": 0.15,
-        "velinor": 0.10,
-        "ravi": 0.20,
+        "malrik": 0.50,     # Starts neutral; shifts based on player choices
+        "elenya": 0.50,     # Starts neutral; shifts based on player choices
+        "velinor": 0.50,    # Starts neutral; shifts based on player choices
+        "ravi": 0.50,       # Starts neutral; shifts based on player choices
     },
     # ... other game state fields
 }
@@ -358,6 +397,21 @@ When displaying dialogue:
 2. Look up player pronouns: player.pronouns = "they/them"
 3. Replace tokens: "Lior(en) shows their work."
 4. Display: MALRIK: "Lior(en) shows their work."
+```
+
+### TONE Choice Integration
+
+When player makes a story choice:
+```
+1. Identify choice type: Trust | Observation | Narrative Presence | Empathy
+2. Increment corresponding TONE stat: player.tone_stats[choice_type] += 1
+3. Apply TONE→REMNANTS conversion:
+   - if Trust: remnants.trust += 1; remnants.resolve += 1; remnants.skepticism -= 1
+   - if Observation: remnants.nuance += 1; remnants.memory += 1; remnants.authority -= 1
+   - if Narrative Presence: remnants.authority += 1; remnants.resolve += 1; remnants.nuance -= 1
+   - if Empathy: remnants.empathy += 1; remnants.need += 1; remnants.resolve -= 1
+4. Update NPC attunement based on choice alignment
+5. Display consequence or NPC reaction
 ```
 
 ---

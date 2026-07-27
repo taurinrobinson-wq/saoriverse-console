@@ -163,12 +163,13 @@ The player is suddenly **completely alone** in the small town:
 
 ### The Player's Initial State
 
-**Stat Baseline (Arrival):**
-- **Coherence**: 40 (significant memory gaps; significant emotional dysregulation)
-- **Empathy**: 55 (strong capacity, shaped by mother's healing work and community care)
-- **Observation**: 50 (trained in reading land, plants, people by rural survival)
-- **Presence**: 45 (quiet, introspective; not comfortable in crowds yet)
-- **Memory**: 35 (fragmented; Corelink was never part of their development)
+**TONE Stats (All in Equilibrium):**
+- **Truth:** ⚖ (in equilibrium)
+- **Observation:** ⚖ (in equilibrium)
+- **Narrative Presence:** ⚖ (in equilibrium)
+- **Empathy:** ⚖ (in equilibrium)
+
+**Note:** All player variants start with identical TONE stats in perfect equilibrium. Stat shifts occur through player TONE-based choices during gameplay, not from initial variance.
 
 **Emotional State:**
 - **Grief**: Primary (their loss is recent and raw)
@@ -241,21 +242,21 @@ When the player touches a glyph, they feel a strange resonance:
 - Tastes of mother's herbal teas
 - The sound of father's voice
 - The feeling of being held
-- **Stat gains**: +5 to relevant stats + conditional Coherence +2
+- **Consciousness Integration**: +5 per glyph (Memory Coherence tracking)
 
 **Mid Game (Glyphs 20-40):** Emotional Context
 - The player begins to understand their parents' *relationship*
 - How they grieved together
 - How they loved each other
 - How they tried to protect the player
-- **Stat gains**: +10 to relevant stats + conditional Coherence +3 per discovery
+- **Consciousness Integration**: +10 per discovery (Memory Coherence tracking)
 
 **Late Game (Glyphs 50-70):** Philosophical Integration
 - The player understands their parents' *worldviews*
 - Father's archive philosophy: "Memory must be preserved, even if imperfect"
 - Mother's healing philosophy: "Presence and action matter more than knowledge"
 - How these opposing views created the player's own balanced perspective
-- **Stat gains**: +15 to relevant stats + Coherence +5 per major discovery
+- **Consciousness Integration**: +15 per discovery (Memory Coherence tracking)
 
 **End Game (Octoglyph):** Full Consciousness Integration
 - The player's fragmented identity becomes whole
@@ -526,17 +527,22 @@ Velinor is fascinated by the player because the player was never part of the sys
 
 ## Part 10: Mechanical Integration
 
-### Player-Specific Stat Modifiers
+### Player-Specific TONE/REMNANTS Modifiers
 
-**Unintegrated Starting Bonus:**
-- All REMNANTS stats start 5-10 points higher than they would for an integrated person
-- Coherence starts lower (40 instead of 50) because unintegrated minds lack the framework
-- But Empathy, Observation, and Presence start higher because the player was raised in community
+**Unintegrated Starting State:**
+- Player begins with all TONE stats in perfect equilibrium (Truth, Observation, Narrative Presence, Empathy all at 50)
+- REMNANTS stats also start at 50 (neutral state)
+- Player is unintegrated into Corelink, but this is a narrative advantage, not a mechanical penalty
 
-**Glyph Discovery Modifier:**
-- Each glyph discovered grants **+5 Coherence** to the player specifically (representing memory recovery)
-- For integrated NPCs, glyphs grant narrative/emotional bonuses, not coherence
-- By the Octoglyph, the player should reach Coherence 90+
+**Glyph Discovery Mechanism:**
+- Each glyph discovered reveals aspects of parent memories through TONE-aligned dialogue choices
+- Collecting glyphs doesn't grant stats directly; instead, players make TONE choices *about* the glyph's meaning
+- These TONE choices drive REMNANTS stat shifts via the canonical correlation system
+
+**World-State: Velinor's Coherence**
+- The player's TONE-driven choices affect *Velinor's overall coherence* (world fragmentation metric)
+- High player TONE consistency + positive NPC relationships = higher Velinor coherence
+- This is tracked separately from character stats but influenced by all choices
 
 **Corelink Choice Modifier (Ending):**
 - If player chooses **Restart Corelink**: They offer themselves as a "baseline consciousness" to help calibrate the system—fully aware they're making a choice their parents were never given
@@ -544,24 +550,25 @@ Velinor is fascinated by the player because the player was never part of the sys
 
 ### The Attunement-to-Parents System
 
-As the player collects glyphs, a hidden system tracks their philosophical alignment:
+As the player collects glyphs, their TONE choices build philosophical alignment:
 
 ```
-Mother's Philosophy Score (Presence + Empathy + Resolve):
-  Higher score → Player values presence, action, and heart
+Mother's Philosophy Score (Empathy + Trust + Resolve):
+  Higher score → Player values presence, action, and connection
   
 Father's Philosophy Score (Memory + Observation + Nuance):
   Higher score → Player values knowledge, preservation, and complexity
   
-Player's Own Philosophy (Autonomy score):
+Player's Own Philosophy (Autonomy):
   Higher score → Player rejects both/chooses own path
 ```
 
 **These three scores determine**:
 - How Malrik & Elenya respond in late-game encounters
-- Which ending path the Octoglyph presents
+- Which ending path the Octoglyph presents (via TONE/REMNANTS combinations)
 - How NPCs perceive the player in the final chamber
 - The epilogue's tone and content
+- Velinor's overall coherence restoration level
 
 ---
 
@@ -582,18 +589,18 @@ The **6 Endings** matrix combines:
 
 **The Player's philosophy score influences both axes.**
 
-### The Final Chamber Dialogue
+### The Final Chamber Dialogue (TONE/REMNANTS Driven)
 
-In Saori's chamber, before making the Corelink choice, the player is offered a moment of reflection:
+In Saori's chamber, before making the Corelink choice, the player is offered a moment of reflection based on their strongest TONE stat patterns and resulting REMNANTS shifts:
 
-**If Coherence 85+:**
-> **Saori:** "You've recovered the fragments of your parents' lives. You understand now what they lost, and what they saved you from. So now: what will you do with this knowledge? Will you restore what they lost? Or honor what they protected?"
+**If Trust is dominant (Trust 70+):**
+> **Saori:** "You've recovered the fragments of your parents' lives. You understand now what they lost, and what they saved you from. You've learned to trust again despite that loss. So now: will you restore a system that promises connection, knowing connection can break? Or honor what protected you?"
 
-**If Empathy 85+:**
-> **Saori:** "You've carried the grief of this city—not just your own, but Ravi's, Nima's, Malrik's, Elenya's. Everyone's loss has become a little bit your loss. So now: will you restore a system that promises connection, knowing connection can break? Or build something slower, smaller, more human?"
+**If Empathy is dominant (Empathy 70+):**
+> **Saori:** "You've carried the grief of this city—not just your own, but Ravi's, Nima's, Malrik's, Elenya's. Everyone's loss has become a little bit your loss. You feel what they feel. So now: will you restore a system that connects all that pain? Or build something slower, smaller, more human?"
 
-**If Observation 85+:**
-> **Saori:** "You've seen the patterns. The collapse wasn't accidental. The Corelink system was broken from its design. Velinor and I tried to preserve the best of what it could be, but we were flawed. So now: do you trust that the system can be better? Or do you believe humanity needs to be separate from it?"
+**If Observation is dominant (Nuance 70+):**
+> **Saori:** "You've seen the patterns. The collapse wasn't accidental. The Corelink system was broken from its design. Velinor and I tried to preserve the best of what it could be, but we were flawed. You understand that. So now: do you trust the system can be better? Or do you believe humanity needs to be separate from it?"
 
 ---
 

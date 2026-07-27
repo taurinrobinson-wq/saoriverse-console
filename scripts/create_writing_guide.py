@@ -452,7 +452,6 @@ add_heading_with_line(doc, "The Player (Lior)", 2)
 doc.add_paragraph()
 doc.add_paragraph("Background: Rural refugee from small town; came to Velhara seeking solutions/meaning")
 doc.add_paragraph("Core wound: Lost an 'anchor person' (family member or mentor) — this is WHY they came to Velhara")
-doc.add_paragraph("Current state: Coherence 40-41 (disoriented); Empathy 55+ (naturally open to listening)")
 doc.add_paragraph("Role: Mirror for NPCs. When Lior witnesses their stories without looking away, NPCs begin to heal.")
 doc.add_paragraph()
 
