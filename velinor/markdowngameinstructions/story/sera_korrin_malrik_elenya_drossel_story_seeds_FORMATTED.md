@@ -233,9 +233,9 @@ He becomes sharper, more dangerous—not emotional, but armed with layered insig
 
 - Five-stage revelation progression mapped
 - Integrated with existing glyphs (Fractured Memory, Measured Step, Boundary Stone, Covenant Flame)
-- Trigger gates: Coherence 70+, Empathy 70+ OR Integration 70+, 4+ encounters each NPC
+- Trigger gates: Empathy 70+, Observation 70+, 4+ encounters each NPC
 - Endgame facilitated encounter script created
-- Mechanical impact: Glyph of Severed Covenant (Ache + Legacy hybrid), influence +0.25 both, Empathy +3, Coherence +5
+- Mechanical impact: Glyph of Severed Covenant (Ache + Legacy hybrid), Malrik REMNANTS: +Need, +Memory, -Skepticism; Elenya REMNANTS: +Empathy, +Resolve; Empathy +3, Observation +2
 
 ### System Impact
 

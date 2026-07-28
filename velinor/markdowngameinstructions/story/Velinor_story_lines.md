@@ -437,9 +437,10 @@ her burden.
 shared with her family. • Unlocks a unique resonance buff: Bonded Presence (NPCs open faster when
 the player listens). • Shows she trusts the player enough to reveal her ache.
 
-3\. Resonance Tool Upgrade• If the player already holds the Staff of Resonance, Nima teaches a
-hidden attunement gesture. • The staff glows differently when empathy is chosen over conquest. •
-This upgrade is only possible through her bond.
+3. Resonance Tool Upgrade
+• If the player already holds the Staff of Resonance, Nima teaches a hidden TONE alignment gesture.
+• The staff glows differently when empathy is chosen over conquest.
+• This upgrade is only possible through her bond.
 
 \---
 

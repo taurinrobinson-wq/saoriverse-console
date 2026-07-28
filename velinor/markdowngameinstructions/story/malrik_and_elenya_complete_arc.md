@@ -275,8 +275,6 @@ The Malrik & Elenya arc intersects with the broader **Building Debate** arc—a 
 | 3: Archive Revelation | Empathy 65+ | Conditional (no unlock) | Deepens emotional impact; NPC Remnant: +Nuance |
 | 4: Full Recovery | Empathy 70 + Observation 70, both glyphs | Glyph of Severed Covenant | Final memory restoration; NPC Remnants: +Memory, +Nuance, +Empathy |
 
-### Attunement System
-
 ### Player TONE Coherence System
 
 The system tracks **TONE Coherence** based on consistency of player emotional choices:
@@ -988,15 +986,15 @@ Elenya speaks in:
 - Attended Elenya's acknowledgment ritual
 - Hold both Glyph of Sparks Lost AND Glyph of Measured Step
 
-### Attunement Score
+### TONE Alignment Score
 
-The system tracks hidden **Attunement** based on player emotional engagement:
+The system tracks hidden **TONE Alignment** based on player emotional consistency:
 
 ```
-Attunement = (empathy-weighted choices with Malrik) + (presence-weighted choices with Elenya)
+TONE Alignment = (Empathy consistency with Malrik) + (Observation consistency with Elenya)
 
-If Attunement:
-  ≤ 0.10   → Correlation between characters = -0.5 (tension stays hidden)
+If TONE Alignment:
+  ≤ 0.10   → NPC Correlation = -0.5 (tension stays hidden)
   0.10-0.25 → Correlation = 0.0 (independence, no visible change)
   > 0.25   → Correlation = +0.5 (mutual awareness visible, dialogue shifts)
 ```
