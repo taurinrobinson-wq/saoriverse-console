@@ -7,10 +7,10 @@
 - All associated glyphs with locations and mechanical effects
 - Progressive revelation stages (4-stage discovery system)
 - Complete dialogue scripts and body memory cues
-- The Building Debate integration context
+- The Building Debate context
 - Coren's mediating role in the Triad
 - Player gating requirements and triggers
-- Mechanical stat tracking and attunement systems
+- TONE stat tracking and REMNANTS effects
 
 ---
 
@@ -57,7 +57,7 @@ Their story is about:
    - Location: The Shared Archive Building (Inside Chambers)
    - Story: Malrik navigates interior while Elenya's offerings (flowers, marks, songs) surround him
    - Love Subtext: "Where his eyes linger on her offerings... he never removes them"
-   - Mechanical Note: +Presence hybrid, reveals internal conflict through gaze/body language
+   - Mechanical Note: +Narrative Presence, +Empathy hybrid; reveals internal conflict through gaze/body language; NPC Remnants: +Need, +Nuance
 
 **Elenya's Primary Glyphs:**
 1. **Glyph of Covenant Flame** (ID 51 | Building Debate Integration)
@@ -79,17 +79,17 @@ Their story is about:
    - Mechanical Role: Acts as third point in Triad conflict resolution
 
 **Landmark Glyphs (Player Discovery):**
-1. **Glyph of Sparks Lost** (Presence Category - Hybrid)
+1. **Glyph of Sparks Lost** (Empathy + Observation Hybrid)
    - Triggered By: Broken lantern moment in Elenya's ritual space
    - Description: *For the light that flickers in forgotten places. For the hands that once reached toward brightness. For the love that persists even when its origins are severed.*
-   - Mechanical Effects: +2 Presence, +1 Empathy; Unlocks hidden dialogue with both characters
+   - Mechanical Effects: +2 Empathy, +1 Observation; Unlocks hidden dialogue with both characters; NPC Remnant: +Empathy, +Memory
    - Prerequisite: Part of 4-stage progressive revelation
 
-2. **Glyph of Severed Covenant** (Ache + Legacy Hybrid - Final Unlock)
+2. **Glyph of Severed Covenant** (Empathy + Memory Hybrid - Final Unlock)
    - Triggered By: Full memory recovery moment
    - Description: *For bonds that break not out of cruelty, but necessity. For the love that persists even when its origins are forgotten. For the wisdom to know that some connections survive their own destruction.*
-   - Mechanical Effects: +3 Empathy, +3 Legacy recognition, +5 Coherence
-   - Final Gate: Empathy 70 + Presence 70 combined
+   - Mechanical Effects: +3 Empathy, +2 Observation; NPC Remnants: +Memory, +Empathy, +Nuance
+   - Final Gate: Empathy 70 + Observation 70 combined
 
 ---
 
@@ -123,7 +123,7 @@ Their story is about:
 
 ---
 
-### STAGE 2: The Body Remembers (Mid Game | Coherence 70+)
+### STAGE 2: The Body Remembers (Mid Game | Empathy 60+ OR Observation 60+)
 
 **Trigger Condition:** Player has attended 4+ Elenya rituals AND 4+ Malrik archive sessions
 
@@ -184,12 +184,12 @@ This keeps the ache without forcing explicit recognition—*the love is implied,
 
 ---
 
-### STAGE 4: Memory Recovery & Layered Truth (Late Game | Coherence 70+ AND Empathy 70+)
+### STAGE 4: Memory Recovery & Layered Truth (Late Game | Empathy 70+ AND Observation 70+)
 
 **Trigger Condition:** 
 - Player holds Glyph of Sparks Lost AND Glyph of Measured Step
 - 4+ encounters with each character
-- Coherence 70 + Empathy 70 combined
+- Empathy 70 + Observation 70 combined
 
 **The Restoration Moment:**
 
@@ -217,7 +217,7 @@ Long silence.
 
 **Elenya:** (small smile) "That was the point."
 
-**Glyph Unlock:** **Glyph of Severed Covenant** (+3 Empathy, +3 Legacy, +5 Coherence)
+**Glyph Unlock:** **Glyph of Severed Covenant** (+3 Empathy, +2 Observation; NPC Remnants: +Memory, +Empathy, +Nuance)
 
 ---
 
@@ -264,29 +264,37 @@ The Malrik & Elenya arc intersects with the broader **Building Debate** arc—a 
 **Minimum Requirements:**
 - 4+ encounters with Malrik (Archive sequences)
 - 4+ encounters with Elenya (Shrine/ritual sequences)
-- Coherence 70+ AND (Empathy 70+ OR Integration 70+)
+- Empathy 60+ AND Observation 60+
 
 ### To Unlock Each Stage
 
 | Stage | Requirement | Glyph Unlock | Effect |
 |-------|-----------|--------------|--------|
 | 1: Recognition | 4+ encounters each | None | Narrative tension emerges |
-| 2: Body Remembers | Presence 60+, Coherence 60+ | Glyph of Sparks Lost | +Presence +Empathy dialogue |
-| 3: Archive Revelation | Empathy 65+ | Conditional (no unlock) | Deepens emotional impact |
-| 4: Full Recovery | Empathy 70 + Presence 70, both glyphs | Glyph of Severed Covenant | Final memory restoration |
+| 2: Body Remembers | Empathy 60+, Observation 60+ | Glyph of Sparks Lost | +Empathy, +Observation dialogue; NPC Remnant increases (Memory, Empathy) |
+| 3: Archive Revelation | Empathy 65+ | Conditional (no unlock) | Deepens emotional impact; NPC Remnant: +Nuance |
+| 4: Full Recovery | Empathy 70 + Observation 70, both glyphs | Glyph of Severed Covenant | Final memory restoration; NPC Remnants: +Memory, +Nuance, +Empathy |
 
 ### Attunement System
 
-The system tracks hidden **Attunement** based on player emotional engagement:
+### Player TONE Coherence System
+
+The system tracks **TONE Coherence** based on consistency of player emotional choices:
 
 ```
-Attunement = (empathy-weighted choices with Malrik) + (presence-weighted choices with Elenya)
+Coherence = consistency of emotional TONE patterns (Empathy, Observation, Trust, Narrative Presence)
 
-If Attunement:
-  ≤ 0.10   → Correlation between characters = -0.5 (tension stays hidden, dialogue cold)
-  0.10-0.25 → Correlation = 0.0 (independence, neutral dialogue)
-  > 0.25   → Correlation = +0.5 (mutual awareness visible, dialogue shifts warmth)
+If Coherence (measured as consistency of TONE stat choices):
+  Low      → NPCs perceive player as unpredictable; dialogue remains cautious
+  Medium   → NPCs notice player patterns; growing openness
+  High     → NPCs trust player's emotional alignment; intimate dialogue unlocks
 ```
+
+Both Malrik and Elenya respond to:
+- **High Empathy**: Opens vulnerable dialogue about their connection
+- **High Observation**: Allows player to notice body language, unspoken tension
+- **High Narrative Presence**: Enables player to shape their reconciliation
+- **High Trust**: Deepens emotional openness from both NPCs
 
 
 
@@ -500,17 +508,17 @@ But his hand lingered on the stone table for a moment too long.
 
 **Player Choices** (based on TONE stat alignment):
 
-| Choice | Stat Bonus | Dialogue Branch |
-|--------|-----------|-----------------|
-| A: "That stone looks like it was used for something important" | +Observation | Malrik: "Clearly you're not looking carefully." (closes dialogue) |
-| B: "You seem to have a great affection for this place" | +Empathy | Malrik: "I don't have affection. I have responsibility." (hesitates) |
-| C: "Why do you never call her High Seer Elenya?" | +Narrative Presence | Malrik: "Why are you asking questions you already know the answer to?" (deflects, irritated) |
-| D: "There's something you're not saying about this room" | +Presence | Malrik pauses. Long silence. "Yes. Well. Not now." (shifts uncomfortably) |
+| Choice | TONE Stat | Dialogue Branch | NPC REMNANTS Effect |
+|--------|-----------|-----------------|--------------------| 
+| A: "That stone looks like it was used for something important" | +Observation | Malrik: "Clearly you're not looking carefully." (closes dialogue) | +Memory (subtle) |
+| B: "You seem to have a great affection for this place" | +Empathy | Malrik: "I don't have affection. I have responsibility." (hesitates) | +Need, +Empathy |
+| C: "Why do you never call her High Seer Elenya?" | +Observation +Empathy | Malrik: "Why are you asking questions you already know the answer to?" (deflects, irritated) | +Memory, +Nuance |
+| D: "There's something you're not saying about this room" | +Narrative Presence | Malrik pauses. Long silence. "Yes. Well. Not now." (shifts uncomfortably) | +Need, +Resolve (internal conflict) |
 
 **Glyph Mechanical Effect**:
 If player has Glyph of Sparks Lost, Malrik's responses carry additional weight. He becomes slightly more vulnerable, though he would never admit it.
 
-- Choice C or D with high Empathy/Presence: Malrik's "correlation" with the player increases (+0.1 Attunement), setting up future dialogue openings
+- Choice C or D with high Empathy/Observation: Malrik's REMNANTS (Memory, Need) increase, setting up future dialogue openings; NPC Nuance increases
 
 ### ENCOUNTER 3: Elenya's Ritual of Remembrance
 
@@ -534,17 +542,17 @@ The irony: she's speaking directly about Malrik without knowing it.
 
 **Player Choices**:
 
-| Choice | Stat Bonus | Dialogue Branch |
-|--------|-----------|-----------------|
-| A: "That sounds like regret" | +Observation | Elenya: "Regret and wisdom are not opposites." |
-| B: "Do you think they would have wanted to be forgotten?" | +Empathy | Elenya: (voice trembles slightly) "I hope they understood it was an act of love." |
-| C: "Is this about Malrik?" | +Narrative Presence | Elenya: (shocked) "How did you—no. I don't know. Please don't ask." |
-| D: Say nothing, meditate with her | +Presence | Elenya: (after ritual) "You understand something most don't. That some stories don't have endings." |
+| Choice | TONE Stat | Dialogue Branch | NPC REMNANTS Effect |
+|--------|-----------|-----------------|--------------------| 
+| A: "That sounds like regret" | +Observation | Elenya: "Regret and wisdom are not opposites." | +Nuance, +Memory |
+| B: "Do you think they would have wanted to be forgotten?" | +Empathy | Elenya: (voice trembles slightly) "I hope they understood it was an act of love." | +Need, +Empathy |
+| C: "Is this about Malrik?" | +Narrative Presence +Observation | Elenya: (shocked) "How did you—no. I don't know. Please don't ask." | +Memory, +Empathy, -Skepticism |
+| D: Say nothing, meditate with her | +Empathy +Trust | Elenya: (after ritual) "You understand something most don't. That some stories don't have endings." | +Trust, +Empathy, +Nuance |
 
 **Glyph Mechanical Effect**:
-- If player has Glyph of Sparks Lost and chooses C, Elenya's Attunement with player increases significantly
+- If player has Glyph of Sparks Lost and chooses C, Elenya's REMNANTS (Memory, Empathy, Nuance) increase significantly
 - Player can unlock hidden dialogue in future encounters
-- Elenya becomes slightly more open about her past
+- Elenya becomes slightly more open about her past; NPC Skepticism decreases
 
 ### ENCOUNTER 4: The Repair Motivation (Malrik's Secret Arc)
 
@@ -556,7 +564,7 @@ Malrik approaches the player with unusual directness:
 
 **Malrik**: "I need assistance with something practical. The archives are a disgrace. The shared reading chamber hasn't been maintained in years. I intend to restore it. Not for sentimental reasons. For functional clarity."
 
-But if you have high Empathy/Presence or have encountered the Glyph of Sparks Lost, you can read between the lines:
+But if you have high Empathy or have encountered the Glyph of Sparks Lost, you can read between the lines:
 
 He wants to restore the lighthouse reading room.
 
@@ -566,12 +574,12 @@ He doesn't know why he wants this. He just knows it's necessary—as if his body
 
 **Player Choices**:
 
-| Choice | Effect |
-|--------|--------|
-| A: Agree to help without questions | Malrik becomes slightly more comfortable around you; you gain access to the restoration quest |
-| B: "This seems personal" | Malrik: "Your assessment is imprecise. It's institutional." (defensive, but his hesitation betrays him) |
-| C: "This is about Elenya, isn't it?" | Malrik: (long, tense silence) "I don't know what you mean." (voice tight, controlled) |
-| D: Decline to help | Malrik: "Fine. I'll manage alone." (walks away, but seems diminished) |
+| Choice | TONE Stat | Effect | NPC REMNANTS |
+|--------|-----------|--------|--------------|
+| A: Agree to help without questions | +Empathy | Malrik becomes slightly more comfortable around you; you gain access to the restoration quest | +Need, +Trust |
+| B: "This seems personal" | +Observation | Malrik: "Your assessment is imprecise. It's institutional." (defensive, but his hesitation betrays him) | +Memory, +Nuance |
+| C: "This is about Elenya, isn't it?" | +Narrative Presence +Observation | Malrik: (long, tense silence) "I don't know what you mean." (voice tight, controlled) | +Resolve, +Memory |
+| D: Decline to help | -Empathy | Malrik: "Fine. I'll manage alone." (walks away, but seems diminished) | -Need, +Skepticism |
 
 **If Player Helps with Restoration**:
 
@@ -582,7 +590,7 @@ During the work, small moments surface:
 - He becomes noticeably more patient, almost gentle
 - He speaks about the lighthouse in a way that reveals deep knowledge: "The light was visible from three directions. Useful. Symbolically significant. Though I don't know why I'm noting the symbolism."
 
-**Glyph Unlock**: **Glyph of Measured Step** (Sovereignty + Presence hybrid)
+**Glyph Unlock**: **Glyph of Measured Step** (Narrative Presence + Empathy hybrid)
 
 *For the careful walking back toward what was. For the hands that rebuild what memory destroyed. For choosing to repair even when the reason is forgotten.*
 
@@ -665,25 +673,25 @@ The ending is **not** about reunion or rejection. It's about **layered coexisten
 
 **Malrik & Elenya** (together): "We don't have to choose today. We just have to know the truth."
 
-**Possible Dialogue Paths**:
+**Possible Dialogue Paths** (gated by player TONE):
 
-| Path | Description | Outcome |
-|------|-------------|---------|
-| **Reconciliation** | Player encourages them to rebuild their connection | They become closer; affect dialogue and influence mechanics; relationship visible to community |
-| **Respectful Distance** | Player honors their past but suggests they maintain friendship | They remain connected but autonomous; mutual respect visible; supports both character arcs |
-| **Cautious Exploration** | Player suggests they take time to know each other anew | They spend time together without commitment; slow rebuilding; uncertain but hopeful |
-| **Protect the Past** | Player suggests they leave the memory alone | They consciously return to not-remembering; mutual understanding deepens; they're sad but at peace |
+| Path | TONE Requirement | Description | Outcome | NPC REMNANTS |
+|------|------------------|-------------|---------|--------------|
+| **Reconciliation** | Empathy 70+ | Player encourages them to rebuild their connection | They become closer; dialogue shifts intimate; relationship visible to community | +Empathy, +Trust, +Memory |
+| **Respectful Distance** | Observation 70+ | Player honors their past but suggests they maintain friendship | They remain connected but autonomous; mutual respect visible; supports both character arcs | +Nuance, +Memory, +Resolve |
+| **Cautious Exploration** | Empathy 60+, Observation 60+ | Player suggests they take time to know each other anew | They spend time together without commitment; slow rebuilding; uncertain but hopeful | +Empathy, +Nuance, +Memory |
+| **Protect the Past** | Narrative Presence 70+ | Player suggests they leave the memory alone | They consciously return to not-remembering; mutual understanding deepens; they're sad but at peace | +Resolve, +Need, +Trust |
 
 ### Glyph Unlock: The Severed Covenant
 
-**Glyph of Severed Covenant** (Ache + Legacy hybrid)
+**Glyph of Severed Covenant** (Empathy + Memory hybrid)
 
 *For the bonds that break not out of cruelty, but necessity. For the love that persists even when its origins are forgotten. For the wisdom to know that some connections survive their own destruction.*
 
 **Mechanical Effects**:
 - +3 Empathy
-- +3 Legacy recognition
-- +5 Coherence (understanding layered truth)
+- +2 Observation
+- NPC Remnants: +Memory, +Nuance, +Empathy (understanding layered truth)
 - Influences ending possibilities
 - Affects NPC community perception: other survivors notice the change in Malrik and Elenya
 

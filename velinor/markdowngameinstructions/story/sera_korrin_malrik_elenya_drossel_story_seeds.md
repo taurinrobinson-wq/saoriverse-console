@@ -645,7 +645,7 @@ is nearby.
 
 Sera admits that Korrin’s chaos unsettles her — but also makes her feel alive.
 
-This arc could unlock a Presence + Trust hybrid glyph, something like:
+This arc could unlock an Empathy + Trust hybrid glyph, something like:
 
 Glyph of Lingering Witness — when silence holds a truth too fragile to speak.
 
@@ -719,7 +719,7 @@ gives the player a glimpse of what’s worth protecting
 
 makes gossip a mechanic — the player’s choices affect how the moment is remembered
 
-You could even tie it to a Presence + Joy hybrid glyph:
+You could even tie it to an Empathy + Joy (Presence domain) hybrid glyph:
 
 Glyph of Shared Dawn — when two souls meet in quiet light, and choose tenderness over certainty.
 

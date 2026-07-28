@@ -126,7 +126,7 @@ Here’s how it could ripple through design:
 🎼 TONE Stat System
 
 • T — Trust Hidden measure of how reliable the player feels to NPCs. Impacts whether guarded
-characters open up. • O — Observation Tracks perception and wisdom. Governs subtle discoveries:
+characters open up. • O — Observation Tracks perception and pattern-recognition. Governs subtle discoveries:
 gestures, glyph traces, hidden tomes. • N — Narrative Presence Reflects charisma and agency.
 Determines how boldly the player steps into encounters and how story branches unfold. • E — Empathy
 The heart of Velinor. Unlocks grief glyphs, deepens resonance, and allows NPCs to share their most
@@ -173,26 +173,24 @@ stalls → \+Perception, \+Resonance • Freeze and observe → \+Perception, \+
 
 \---
 
-🧑‍🤝‍🧑 NPC Resonance Mechanic
+🧑‍🤝‍🧑 NPC REMNANTS Mechanic
 
-• Resonance Meter (Hidden): Each NPC has a private resonance score with the player. • Dialogue
-Shifts: As resonance rises, NPCs share deeper fragments of memory. If it falls, they remain guarded
-or evasive. • Unique Resonance Traits:• Some NPCs respond more to empathy (they open when listened
-to). • Others respond to wisdom (they trust restraint). • Others respond to charisma (they need
-boldness).
+• REMNANTS Affinity (Hidden): Each NPC has private REMNANTS trait shifts based on player TONE choices.
+• Dialogue Shifts: As REMNANTS change, NPCs share deeper fragments of memory. If REMNANTS values clash, they remain guarded or evasive.
+• Unique REMNANTS Responses:
+  • Some NPCs respond more to Empathy (they open when listened to) → +Empathy REMNANTS
+  • Others respond to Observation (they trust restraint) → +Memory, +Nuance REMNANTS
+  • Others respond to Narrative Presence (they need boldness) → +Resolve, +Authority REMNANTS
 
-• Outcome: When the player meets an NPC later, the experience is colored by past choices — the same
-character feels different depending on resonance history.
+• Outcome: When the player meets an NPC later, the experience is colored by past TONE choices — the same character feels different depending on REMNANTS history.
 
 \---
 
 🎭 Narrative Impact
 
-• Branching Encounters: Every choice is both story and stat. Even small decisions ripple forward. •
-NPC Re‑encounters: Meeting the same NPC twice is never the same — resonance history alters tone,
-dialogue, and even glyph unlocks. • Quest Progression: Stats influence which glyphs can be
-recovered. For example, high empathy unlocks grief glyphs, while high wisdom unlocks sovereignty
-glyphs.
+• Branching Encounters: Every choice is both story and stat. Even small decisions ripple forward.
+• NPC Re-encounters: Meeting the same NPC twice is never the same — TONE and REMNANTS history alters tone, dialogue, and even glyph unlocks.
+• Quest Progression: TONE stats influence which glyphs can be recovered. For example, high Empathy unlocks Ache/Presence glyphs, while high Observation unlocks Collapse/Legacy glyphs.
 
 \---
 

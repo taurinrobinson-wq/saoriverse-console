@@ -38,7 +38,7 @@ them prepares the player emotionally for the final confrontation.
 **Trigger**: Optional arc, available after player has:
 - Had 4+ encounters with Malrik (Archive sequences)
 - Had 4+ encounters with Elenya (Shrine/ritual sequences)
-- Achieved Coherence 70+ AND (Empathy 70+ OR Integration 70+)
+- Empathy 60+ AND Observation 60+
 - Collected Glyph of Fractured Memory and Glyph of Measured Step
 
 **Premise**: Before the cataclysm, Malrik and Elenya were lovers. The Corelink collapse severed their shared memory. They woke near each other, confused, with an ache they couldn't articulate. Elenya, desperate to protect herself from the pain of recognizing what was lost, deliberately severed her own memory of him. Malrik was left holding the ghost of something—a connection he can feel but not recall, an intimacy lodged in his body but erased from his mind.
@@ -97,13 +97,13 @@ A breath. Her hand drifts unconsciously to her sternum.
 
 ---
 
-**The Glyph of Sparks Lost** (Presence hybrid — unlocks when player witnesses the lantern moment):
+**The Glyph of Sparks Lost** (Empathy + Observation hybrid — unlocks when player witnesses the lantern moment):
 - Symbol: a small lantern with a faint, incomplete halo — a sunrise that never fully rose
-- Meaning: Presence as recognition of what once illuminated us. Presence as standing in the dimness without forcing light. Presence as the ache of a spark remembered by the body, not the mind.
+- Meaning: Emotional recognition of what once illuminated us. Standing in the dimness without forcing light. The resonance of a spark remembered by the body, not the mind.
 - **Using it near Malrik**: The glyph hums softly. Malrik pauses with involuntary recognition—not dramatic, not with full memory, but with a subtle shift like hearing a melody he can't place. He might say: "Strange… I feel like I've seen that lantern before" or "Why does this make me feel… warm?"
 
-**The Mechanism (High Empathy/Narrative Presence Gate)**:
-If player has Empathy 70+ or Narrative Presence 75+, activating this glyph near Malrik catalyzes a
+**The Mechanism (High Empathy OR High Observation Gate)**:
+If player has Empathy 65+ or Observation 65+, activating this glyph near Malrik catalyzes a
 behavioral shift. He becomes motivated—almost compulsively—to focus on rebuilding the collapsed
 shared archive space he and Elenya were previously forced to share.
 
@@ -177,10 +177,10 @@ choice.
 **Rewards & Consequences**:
 
 **Rewards**:
-- New glyph unlocks: **Glyph of Severed Covenant** (Ache + Legacy hybrid) — represents bonds cut to survive
-- Malrik influence +0.25
-- Elenya influence +0.25
-- Empathy +3, Coherence +5 (recognition of necessary trauma)
+- New glyph unlocks: **Glyph of Severed Covenant** (Empathy + Memory hybrid) — represents bonds cut to survive
+- Malrik REMNANTS: +Need, +Memory, -Skepticism
+- Elenya REMNANTS: +Empathy, +Memory, +Nuance
+- Empathy +3, Observation +2 (recognition of necessary trauma)
 - Unlock ending variations where Malrik & Elenya's relationship is recontextualized
 
 **Consequences**:

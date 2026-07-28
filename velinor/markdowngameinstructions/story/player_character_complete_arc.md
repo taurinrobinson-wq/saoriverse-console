@@ -242,27 +242,31 @@ When the player touches a glyph, they feel a strange resonance:
 - Tastes of mother's herbal teas
 - The sound of father's voice
 - The feeling of being held
-- **Consciousness Integration**: +5 per glyph (Memory Coherence tracking)
+- **Consciousness Recovery**: TONE alignment stabilizes (player begins forming consistent emotional patterns)
+- REMNANTS effects: +Memory, +Need (connecting with parents' emotional legacy)
 
 **Mid Game (Glyphs 20-40):** Emotional Context
 - The player begins to understand their parents' *relationship*
 - How they grieved together
 - How they loved each other
 - How they tried to protect the player
-- **Consciousness Integration**: +10 per discovery (Memory Coherence tracking)
+- **Consciousness Recovery**: TONE alignment deepens (emotional understanding solidifies)
+- REMNANTS effects: +Empathy, +Memory, +Nuance (understanding parents' relationship contexts)
 
 **Late Game (Glyphs 50-70):** Philosophical Integration
 - The player understands their parents' *worldviews*
 - Father's archive philosophy: "Memory must be preserved, even if imperfect"
 - Mother's healing philosophy: "Presence and action matter more than knowledge"
 - How these opposing views created the player's own balanced perspective
-- **Consciousness Integration**: +15 per discovery (Memory Coherence tracking)
+- **Consciousness Recovery**: TONE alignment crystallizes (philosophical worldviews become clear)
+- REMNANTS effects: +Nuance, +Memory (integrating opposed worldviews)
 
-**End Game (Octoglyph):** Full Consciousness Integration
-- The player's fragmented identity becomes whole
+**End Game (Octoglyph):** Full Consciousness Recovery
+- The player's fragmented identity becomes whole through unified TONE alignment
 - They realize their parents' grief was actually **their** story too
 - The Corelink system that integrated their parents had a shadow: the player, unintegrated but shaped by their loss
 - They can now choose what Corelink means for the future
+- REMNANTS effects: +Resolve, +Empathy, +Nuance (complete emotional integration)
 
 ---
 
@@ -380,7 +384,7 @@ At the Octoglyph, the player finally faces the question that has driven their en
 4. First 10 glyphs unlock surface memories (mother's hands, father's voice)
 
 **Stat Progression:**
-- Coherence: 40 → 50 (stabilizing)
+- Coherence: 40 → 50 (TONE consistency stabilizing: Empathy/Trust alignment begins)
 - Empathy: 55 → 65 (connecting to NPCs' grief)
 - Observation: 50 → 60 (learning to read the city)
 - Presence: 45 → 55 (becoming visible)
@@ -391,7 +395,7 @@ At the Octoglyph, the player finally faces the question that has driven their en
 
 ---
 
-### ACT II: Understanding & Integration
+### ACT II: Understanding & Emotional Alignment
 
 **Goal:** The player must understand the deeper stories of the city (Building Debate, Malrik & Elenya, etc.)
 
@@ -403,7 +407,7 @@ At the Octoglyph, the player finally faces the question that has driven their en
 5. Glyphs 20-40 unlock emotional context and parental philosophies
 
 **Stat Progression:**
-- Coherence: 50 → 65 (understanding the deep stories)
+- Coherence: 50 → 65 (TONE consistency deepening: Observation + Empathy hybrid understanding)
 - Empathy: 65 → 75 (holding multiple griefs simultaneously)
 - Observation: 60 → 70 (seeing the patterns of loss)
 - Presence: 55 → 70 (becoming a real presence in others' stories)
@@ -419,13 +423,13 @@ At the Octoglyph, the player finally faces the question that has driven their en
 **Goal:** The player must actively choose which philosophical path resonates
 
 **Key Moments:**
-1. Building Debate forces player to choose: Malrik's preservation or Elenya's sacred integration?
+1. Building Debate forces player to choose: Malrik's preservation (Observation-aligned) or Elenya's sacred wisdom (Empathy-aligned)?
 2. Archive restoration: Does history matter for its own sake, or only as it serves present life?
 3. Shrine rituals: Does ritual carry power, or is it just human meaning-making?
-4. Glyphs 40-60 unlock philosophical integration (parents' opposed worldviews)
+4. Glyphs 40-60 unlock philosophical alignment patterns (parents' opposed TONE signatures)
 
 **Stat Progression:**
-- Coherence: 65 → 75 (synthesizing contradictions)
+- Coherence: 65 → 75 (TONE synthesis: holding both parents' worldviews simultaneously)
 - Empathy: 75 → 80 (understanding why people believe what they believe)
 - Observation: 70 → 75 (seeing beyond surface to deeper patterns)
 - Presence: 70 → 80 (becoming a presence that can hold complexity)
@@ -448,7 +452,7 @@ At the Octoglyph, the player finally faces the question that has driven their en
 5. **The player makes the final choice about Corelink (Restart vs. Abandon)**
 
 **Stat Progression:**
-- Coherence: 75 → 90+ (almost complete integration)
+- Coherence: 75 → 90+ (TONE mastery: complete philosophical autonomy achieved)
 - Empathy: 80 → 85 (compassion without despair)
 - Observation: 75 → 80 (seeing the full picture)
 - Presence: 80 → 85 (being fully present at the convergence)
@@ -548,27 +552,27 @@ Velinor is fascinated by the player because the player was never part of the sys
 - If player chooses **Restart Corelink**: They offer themselves as a "baseline consciousness" to help calibrate the system—fully aware they're making a choice their parents were never given
 - If player chooses **Abandon Corelink**: They become the living embodiment of an alternative—proof that humanity can thrive without technological memory systems
 
-### The Attunement-to-Parents System
+### The Player's Philosophy Alignment System
 
 As the player collects glyphs, their TONE choices build philosophical alignment:
 
 ```
-Mother's Philosophy Score (Empathy + Trust + Resolve):
+Mother's Philosophy Alignment (Empathy + Trust + Resolve REMNANTS):
   Higher score → Player values presence, action, and connection
   
-Father's Philosophy Score (Memory + Observation + Nuance):
+Father's Philosophy Alignment (Memory + Observation + Nuance REMNANTS):
   Higher score → Player values knowledge, preservation, and complexity
   
-Player's Own Philosophy (Autonomy):
-  Higher score → Player rejects both/chooses own path
+Player's Own Philosophy (Narrative Presence + Autonomy):
+  Higher score → Player rejects both/chooses own independent path
 ```
 
-**These three scores determine**:
-- How Malrik & Elenya respond in late-game encounters
+**These three alignments determine**:
+- How Malrik & Elenya respond in late-game encounters (NPC REMNANTS shifts)
 - Which ending path the Octoglyph presents (via TONE/REMNANTS combinations)
 - How NPCs perceive the player in the final chamber
 - The epilogue's tone and content
-- Velinor's overall coherence restoration level
+- Velinor's overall stability and NPC relationship outcomes
 
 ---
 
