@@ -37,7 +37,37 @@ public class SceneTransitionManager : MonoBehaviour
         }
         else
         {
+            if (Instance.fadeCanvas == null)
+            {
+                Instance.fadeCanvas = this.fadeCanvas;
+            }
             Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (fadeCanvas == null)
+        {
+            GameObject fadeObj = GameObject.Find("FadeOverlay");
+            if (fadeObj != null)
+            {
+                fadeCanvas = fadeObj.GetComponent<CanvasGroup>();
+            }
+            if (fadeCanvas == null)
+            {
+                fadeCanvas = Object.FindFirstObjectByType<CanvasGroup>();
+            }
         }
     }
 

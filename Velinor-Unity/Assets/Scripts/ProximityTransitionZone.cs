@@ -20,6 +20,9 @@ using UnityEngine;
 public class ProximityTransitionZone : MonoBehaviour
 {
     [Header("Transition Settings")]
+#if UNITY_EDITOR
+    [SerializeField] private UnityEditor.SceneAsset targetSceneAsset;
+#endif
     [SerializeField] private string targetScene;
     [SerializeField] private bool requireKeyPress = false;
     [SerializeField] private KeyCode interactKey = KeyCode.E;
@@ -27,10 +30,40 @@ public class ProximityTransitionZone : MonoBehaviour
 
     private bool playerInside = false;
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (targetSceneAsset != null)
+        {
+            targetScene = targetSceneAsset.name;
+        }
+        else if (!string.IsNullOrEmpty(targetScene))
+        {
+            string[] guids = UnityEditor.AssetDatabase.FindAssets(targetScene + " t:Scene");
+            if (guids != null && guids.Length > 0)
+            {
+                string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[0]);
+                targetSceneAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(path);
+            }
+        }
+    }
+#endif
+
     private void OnTriggerEnter2D(Collider2D other)
+    {
+        HandleTriggerEnter(other.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        HandleTriggerEnter(other.gameObject);
+    }
+
+    private void HandleTriggerEnter(GameObject other)
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log($"[ProximityTransitionZone] Player entered {gameObject.name}. Triggering transition to {targetScene}...");
             playerInside = true;
 
             if (!requireKeyPress)
@@ -41,6 +74,16 @@ public class ProximityTransitionZone : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other)
+    {
+        HandleTriggerExit(other.gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        HandleTriggerExit(other.gameObject);
+    }
+
+    private void HandleTriggerExit(GameObject other)
     {
         if (other.CompareTag("Player"))
             playerInside = false;

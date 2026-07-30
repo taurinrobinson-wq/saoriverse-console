@@ -12,6 +12,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manages player spawn points when loading scenes.
@@ -21,25 +22,93 @@ public class SceneSpawnManager : MonoBehaviour
 {
     public static string nextSpawnID = "";
 
+    [Header("Default Spawning Settings")]
+    [Tooltip("If the scene is loaded directly without an active transition, which spawn ID should the player start at?")]
+    [SerializeField] private string defaultSpawnID = "Default";
+
+    private bool hasSpawnedInCurrentScene = false;
+
+    private void OnEnable()
+    {
+        Debug.Log("[SceneSpawnManager] OnEnable called!");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("[SceneSpawnManager] OnDisable called!");
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
     {
-        if (string.IsNullOrEmpty(nextSpawnID))
-            return;
+        Debug.Log("[SceneSpawnManager] Start called!");
+        // Try spawning in Start in case OnSceneLoaded was missed for the initial scene
+        TriggerSpawn(SceneManager.GetActiveScene().name);
+    }
 
-        SpawnPoint[] points = FindObjectsByType<SpawnPoint>();
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"[SceneSpawnManager] OnSceneLoaded called for scene: {scene.name}");
+        hasSpawnedInCurrentScene = false; // Reset for new scene load
+        TriggerSpawn(scene.name);
+    }
+
+    private void TriggerSpawn(string sceneName)
+    {
+        Debug.Log($"[SceneSpawnManager] TriggerSpawn called! hasSpawnedInCurrentScene={hasSpawnedInCurrentScene}, nextSpawnID='{nextSpawnID}', defaultSpawnID='{defaultSpawnID}'");
+        if (hasSpawnedInCurrentScene)
+        {
+            Debug.Log("[SceneSpawnManager] Already spawned in current scene, returning.");
+            return;
+        }
+
+        string spawnToUse = string.IsNullOrEmpty(nextSpawnID) ? defaultSpawnID : nextSpawnID;
+        Debug.Log($"[SceneSpawnManager] spawnToUse determined as: '{spawnToUse}'");
+
+        if (string.IsNullOrEmpty(spawnToUse))
+        {
+            Debug.Log("[SceneSpawnManager] spawnToUse is empty, returning.");
+            return;
+        }
+
+        SpawnPoint[] points = FindObjectsByType<SpawnPoint>(FindObjectsInactive.Exclude);
+        Debug.Log($"[SceneSpawnManager] Found {points.Length} SpawnPoints in the scene.");
 
         foreach (var p in points)
         {
-            if (p.SpawnID == nextSpawnID)
+            Debug.Log($"[SceneSpawnManager] Checking SpawnPoint: '{p.gameObject.name}' with SpawnID='{p.SpawnID}'");
+            if (p.SpawnID == spawnToUse)
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 if (player != null)
                 {
-                    player.transform.position = p.transform.position;
-                    Debug.Log($"[SceneSpawnManager] Player spawned at: {nextSpawnID}");
+                    // Use Teleport if PlayerController2D5 is present to ensure immediate scale update
+                    var p25 = player.GetComponent<PlayerController2D5>();
+                    if (p25 != null)
+                    {
+                        p25.Teleport(p.transform.position);
+                        Debug.Log("[SceneSpawnManager] Teleported player via PlayerController2D5.");
+                    }
+                    else
+                    {
+                        player.transform.position = p.transform.position;
+                    }
+                    
+                    hasSpawnedInCurrentScene = true;
+                    Debug.Log($"[SceneSpawnManager] Player successfully spawned at point '{spawnToUse}' (Position: {p.transform.position}) in scene '{sceneName}'");
+                }
+                else
+                {
+                    Debug.LogWarning("[SceneSpawnManager] Player GameObject NOT found by tag 'Player'!");
                 }
                 break;
             }
+        }
+
+        if (!hasSpawnedInCurrentScene)
+        {
+            Debug.LogWarning($"[SceneSpawnManager] No SpawnPoint found with ID '{spawnToUse}'!");
         }
 
         nextSpawnID = "";
