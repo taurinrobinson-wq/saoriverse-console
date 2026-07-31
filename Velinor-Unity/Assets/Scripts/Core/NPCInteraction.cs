@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using VelinorGame.Core;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 /// <summary>
 /// NPCInteraction: Multi-NPC dialogue handler with gate-based progression.
@@ -192,11 +195,23 @@ public class NPCInteraction : MonoBehaviour
         ShowInteractionPrompt();
 
         // E key to open dialogue
-        if (Input.GetKeyDown(KeyCode.E) && !dialogueActive)
+        bool interactPressed = false;
+#if ENABLE_INPUT_SYSTEM
+        if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            interactPressed = true;
+        }
+#else
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            interactPressed = true;
+        }
+#endif
+        if (interactPressed && !dialogueActive)
         {
             OpenDialogue();
         }
-    }
+}
 
     void ShowInteractionPrompt()
     {

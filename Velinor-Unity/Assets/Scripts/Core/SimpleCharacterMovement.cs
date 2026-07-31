@@ -1,4 +1,7 @@
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 #pragma warning disable CS0618  // Suppress Input Manager deprecation warning (still functional)
 
 namespace Velinor.Core
@@ -124,11 +127,24 @@ namespace Velinor.Core
                 return;
             }
 
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            float horizontal = 0f;
+            float vertical = 0f;
+
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current != null)
+            {
+                if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) vertical += 1f;
+                if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed) vertical -= 1f;
+                if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed) horizontal -= 1f;
+                if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) horizontal += 1f;
+            }
+#else
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+#endif
 
             // Calculate movement direction
-            Vector3 moveDirection = transform.forward * vertical + transform.right * horizontal;
+Vector3 moveDirection = transform.forward * vertical + transform.right * horizontal;
             moveDirection.y = 0; // Don't move up/down with WASD
             moveDirection = moveDirection.normalized;
 
@@ -162,10 +178,22 @@ namespace Velinor.Core
             }
             
             // Handle jumping
+            bool jumpPressed = false;
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                jumpPressed = true;
+            }
+#else
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
+                jumpPressed = true;
+            }
+#endif
+            if (jumpPressed && isGrounded)
+            {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 5f, rb.linearVelocity.z);
-                
+
                 if (animator != null)
                 {
                     animator.SetBool("Jump", true);
@@ -184,7 +212,15 @@ namespace Velinor.Core
             if (mainCamera == null) return;
 
             // Handle Zoom Input via Scroll Wheel
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            float scroll = 0f;
+#if ENABLE_INPUT_SYSTEM
+            if (Mouse.current != null)
+            {
+                scroll = Mouse.current.scroll.ReadValue().y * 0.01f; // Normalize scroll
+            }
+#else
+            scroll = Input.GetAxis("Mouse ScrollWheel");
+#endif
             if (Mathf.Abs(scroll) > 0.005f)
             {
                 currentZoomDistance -= scroll * zoomSensitivity;
@@ -194,14 +230,38 @@ namespace Velinor.Core
             ApplyZoom();
 
             // Only rotate camera when Right-Click (Mouse Button 1) is held down, and movement is not locked (e.g. not in dialogue)
-            if (Input.GetMouseButton(1) && !isMovementLocked)
+            bool rightClickHeld = false;
+#if ENABLE_INPUT_SYSTEM
+            if (Mouse.current != null && Mouse.current.rightButton.isPressed)
+            {
+                rightClickHeld = true;
+            }
+#else
+            if (Input.GetMouseButton(1))
+            {
+                rightClickHeld = true;
+            }
+#endif
+
+            if (rightClickHeld && !isMovementLocked)
             {
                 // Lock and hide the cursor during camera control
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
 
-                float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-                float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+                float mouseX = 0f;
+                float mouseY = 0f;
+#if ENABLE_INPUT_SYSTEM
+                if (Mouse.current != null)
+                {
+                    Vector2 delta = Mouse.current.delta.ReadValue();
+                    mouseX = delta.x * mouseSensitivity * 0.1f;
+                    mouseY = delta.y * mouseSensitivity * 0.1f;
+                }
+#else
+                mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+                mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+#endif
 
                 // Rotate character left/right
                 transform.Rotate(0, mouseX, 0);
@@ -214,7 +274,7 @@ namespace Velinor.Core
             else
             {
                 // Release lock and show cursor when not right-clicking or when movement is locked
-                if (!Input.GetMouseButton(1) || isMovementLocked)
+                if (!rightClickHeld || isMovementLocked)
                 {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
@@ -267,7 +327,19 @@ namespace Velinor.Core
         private void HandleCursorToggle()
         {
             // Escape remains as a robust escape hatch to free the cursor if needed
+            bool escapePressed = false;
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                escapePressed = true;
+            }
+#else
             if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                escapePressed = true;
+            }
+#endif
+            if (escapePressed)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;

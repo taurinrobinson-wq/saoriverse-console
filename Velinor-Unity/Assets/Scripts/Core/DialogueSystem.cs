@@ -2,9 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
+
 namespace Velinor.Core
 {
-    /// <summary>
+/// <summary>
     /// Represents a single dialogue line with optional emotional effects.
     /// </summary>
     [System.Serializable]
@@ -132,11 +136,24 @@ namespace Velinor.Core
             // Wait before allowing next line or auto-advance
             yield return new WaitForSeconds(2f);
             
+            bool advancePressed = false;
+#if ENABLE_INPUT_SYSTEM
+            if ((Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame) || 
+                (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame))
+            {
+                advancePressed = true;
+            }
+#else
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                advancePressed = true;
+            }
+#endif
+            if (advancePressed)
             {
                 NextLine();
             }
-        }
+}
 
         /// <summary>
         /// Displays choices if the current line has them.

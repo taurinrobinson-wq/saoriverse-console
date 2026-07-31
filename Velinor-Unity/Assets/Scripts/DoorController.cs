@@ -12,12 +12,13 @@
  */
 
 using UnityEngine;
+using Velinor.Core;
 
 /// <summary>
 /// Controls door animation and chamber entrance activation.
 /// Links to a trigger collider that gates entry to a chamber.
 /// </summary>
-public class DoorController : MonoBehaviour
+public class DoorController : MonoBehaviour, IInteractable
 {
     [Header("Door Animation")]
     [SerializeField] private Animator animator;
@@ -48,5 +49,10 @@ public class DoorController : MonoBehaviour
             chamberEntranceCollider.enabled = true;
 
         Debug.Log("[DoorController] Door opened!");
+    }
+
+    public void Interact(GameObject player)
+    {
+        OpenDoor();
     }
 }

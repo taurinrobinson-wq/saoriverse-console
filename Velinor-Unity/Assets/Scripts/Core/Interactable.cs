@@ -1,4 +1,7 @@
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public abstract class Interactable : MonoBehaviour
 {
@@ -19,7 +22,19 @@ public abstract class Interactable : MonoBehaviour
             float distance = Vector3.Distance(transform.position, other.transform.position);
             if (distance <= interactionRange)
             {
+                bool interactPressed = false;
+#if ENABLE_INPUT_SYSTEM
+                if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    interactPressed = true;
+                }
+#else
                 if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactPressed = true;
+                }
+#endif
+                if (interactPressed)
                 {
                     Interact();
                 }
