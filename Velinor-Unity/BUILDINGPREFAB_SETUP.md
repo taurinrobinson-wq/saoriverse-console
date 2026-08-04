@@ -1,6 +1,8 @@
-# BuildingPrefab Scene - Dialogue System Setup Guide
+# BuildingPrefab.unity - Dialogue System Setup Guide
 
-**Purpose:** Complete wiring guide for integrating the canonical DialogueManager into BuildingPrefab.scene using safe, explicit field assignments.
+**Purpose:** Complete wiring guide for integrating the canonical DialogueManager into BuildingPrefab.unity using safe, explicit field assignments.
+
+**File Location:** `Assets/Scenes/BuildingPrefab.unity`
 
 ---
 
@@ -12,7 +14,7 @@ The DialogueManager uses a **canonical wiring approach** that prevents Unity AI 
 
 ## Step 1: Scene Hierarchy Structure
 
-Your BuildingPrefab.scene should have this hierarchy:
+Your BuildingPrefab.unity should have this hierarchy:
 
 ```
 BuildingPrefab
@@ -183,7 +185,7 @@ If you see ✗ errors, fix the missing assignments and re-run validation.
 
 ---
 
-## Step 7: Test the Dialogue System
+## Step 7: Test the Dialogue System in BuildingPrefab.unity
 
 1. **Add NPCInteraction script** to Saori (or target NPC)
 2. **In Start(), call:**
@@ -191,7 +193,7 @@ If you see ✗ errors, fix the missing assignments and re-run validation.
    DialogueManager.Instance.StartDialogue("Saori", "market_entry", "velinor/stories/sample_story");
    ```
 
-3. **Play scene**
+3. **Play BuildingPrefab.unity**
 4. **Interact with NPC** → DialoguePanel should appear
 5. **Verify:**
    - Dialogue text displays correctly
@@ -259,7 +261,7 @@ DialogueManager.Instance.ValidateDialoguePanel();
 
 ## Next Steps
 
-1. ✅ Wire BuildingPrefab.scene following this guide
+1. ✅ Wire BuildingPrefab.unity following this guide
 2. ✅ Run ValidateDialoguePanel to verify
 3. ✅ Add Saori NPC with interaction trigger
 4. ✅ Test with sample dialogue
@@ -268,4 +270,4 @@ DialogueManager.Instance.ValidateDialoguePanel();
 
 ---
 
-**This guide ensures BuildingPrefab.scene is properly configured for the canonical dialogue system without any AI-introduced errors or drift.**
+**This guide ensures BuildingPrefab.unity is properly configured for the canonical dialogue system without any AI-introduced errors or drift.**

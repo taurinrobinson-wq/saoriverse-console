@@ -211,12 +211,14 @@ This prevents Unity AI from accidentally introducing terminology drift.
 
 ## Quick Unity AI Instruction
 
-> **Instruction for Unity AI:**
+> **Instruction for Unity AI (for BuildingPrefab.unity):**
 > 
 > Do NOT auto-bind DialogueManager fields. Do NOT search for buttons by name. 
 > Do NOT parse choice text to determine tone.
 > 
 > **ONLY:** Explicitly assign fields from the Inspector following the canonical field reference.
+> 
+> Scene: Assets/Scenes/BuildingPrefab.unity
 > 
 > Fields to assign:
 > - dialogueCanvas (Canvas)
