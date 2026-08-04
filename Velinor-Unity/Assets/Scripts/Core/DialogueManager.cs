@@ -64,10 +64,28 @@ public class DialogueManager : MonoBehaviour
 
     public static DialogueManager Instance { get; private set; }
 
-    [Header("UI References")]
+    [Header("Root Panel")]
     [SerializeField] private Canvas dialogueCanvas;
-    [SerializeField] private TextMeshProUGUI npcNameText;
-    [SerializeField] private TextMeshProUGUI bodyText;
+    public GameObject dialoguePanel => dialogueCanvas != null ? dialogueCanvas.gameObject : null;
+
+    [Header("Text Fields")]
+    [SerializeField] private TextMeshProUGUI bodyText;              // Dialogue prompt/passage text
+    [SerializeField] private TextMeshProUGUI npcNameText;           // NPC name/speaker
+    [SerializeField] private TextMeshProUGUI sharedBeatText;        // Shared beat display
+    
+    [Header("Choice Buttons")]
+    [SerializeField] private Button btnT;                           // Trust button
+    [SerializeField] private Button btnO;                           // Observation button
+    [SerializeField] private Button btnN;                           // NarrativePresence button
+    [SerializeField] private Button btnE;                           // Empathy button
+
+    [Header("Choice Button Labels")]
+    [SerializeField] private TextMeshProUGUI txtT;                  // Trust choice text
+    [SerializeField] private TextMeshProUGUI txtO;                  // Observation choice text
+    [SerializeField] private TextMeshProUGUI txtN;                  // NarrativePresence choice text
+    [SerializeField] private TextMeshProUGUI txtE;                  // Empathy choice text
+
+    [Header("Fallback (Dynamic Spawning)")]
     [SerializeField] private Transform choiceButtonContainer;
     [SerializeField] private GameObject _choiceButtonPrefab;
 
@@ -94,7 +112,27 @@ public class DialogueManager : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         if (Application.isPlaying) DontDestroyOnLoad(gameObject);
+        
+        // Canonical validation checks
+        if (dialogueCanvas == null) Debug.LogWarning("[DialogueManager] DialogueCanvas is not assigned in Inspector.");
+        if (bodyText == null) Debug.LogWarning("[DialogueManager] bodyText is not assigned in Inspector.");
+        if (npcNameText == null) Debug.LogWarning("[DialogueManager] npcNameText is not assigned in Inspector.");
+        if (sharedBeatText == null) Debug.LogWarning("[DialogueManager] sharedBeatText is not assigned in Inspector.");
+
+        // Button validation
+        if (btnT == null) Debug.LogWarning("[DialogueManager] btnT (Trust button) is not assigned in Inspector.");
+        if (btnO == null) Debug.LogWarning("[DialogueManager] btnO (Observation button) is not assigned in Inspector.");
+        if (btnN == null) Debug.LogWarning("[DialogueManager] btnN (NarrativePresence button) is not assigned in Inspector.");
+        if (btnE == null) Debug.LogWarning("[DialogueManager] btnE (Empathy button) is not assigned in Inspector.");
+
+        // Button label validation
+        if (txtT == null) Debug.LogWarning("[DialogueManager] txtT (Trust label) is not assigned in Inspector.");
+        if (txtO == null) Debug.LogWarning("[DialogueManager] txtO (Observation label) is not assigned in Inspector.");
+        if (txtN == null) Debug.LogWarning("[DialogueManager] txtN (NarrativePresence label) is not assigned in Inspector.");
+        if (txtE == null) Debug.LogWarning("[DialogueManager] txtE (Empathy label) is not assigned in Inspector.");
+
         if (dialogueCanvas != null) dialogueCanvas.enabled = false;
+        if (sharedBeatText != null) sharedBeatText.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -152,28 +190,70 @@ public class DialogueManager : MonoBehaviour
 
     private void AutoBindUI()
     {
-        if (dialogueCanvas == null) dialogueCanvas = FindAnyObjectByType<Canvas>();
+        if (dialogueCanvas == null) 
+        {
+            // Try to find by name first
+            var go = GameObject.Find("DialogueCanvas");
+            if (go != null) dialogueCanvas = go.GetComponent<Canvas>();
+            
+            if (dialogueCanvas == null) dialogueCanvas = FindAnyObjectByType<Canvas>();
+        }
+
         if (dialogueCanvas != null)
         {
+            if (choiceButtonContainer == null) 
+            {
+                choiceButtonContainer = dialogueCanvas.transform.Find("DialoguePanel");
+                if (choiceButtonContainer == null)
+                {
+                    // Search deeper
+                    var allRects = dialogueCanvas.GetComponentsInChildren<RectTransform>(true);
+                    foreach (var rt in allRects) if (rt.name == "DialoguePanel") { choiceButtonContainer = rt; break; }
+                }
+            }
+
             if (npcNameText == null) npcNameText = FindTextMeshInCanvas("NPCLineText");
             if (bodyText == null) bodyText = FindTextMeshInCanvas("DialogueBodyText");
-            if (choiceButtonContainer == null) choiceButtonContainer = dialogueCanvas.transform.Find("DialoguePanel");
         }
     }
 
     private Button FindButtonInCanvas(string name)
     {
         if (dialogueCanvas == null) return null;
+        
+        // Try known container first
+        if (choiceButtonContainer != null)
+        {
+            var btnTrans = choiceButtonContainer.Find(name);
+            if (btnTrans != null) return btnTrans.GetComponent<Button>();
+            
+            var allButtons = choiceButtonContainer.GetComponentsInChildren<Button>(true);
+            foreach (var b in allButtons) if (b.name == name) return b;
+        }
+
+        // Fallback to direct path from canvas
         var trans = dialogueCanvas.transform.Find("DialoguePanel/" + name);
         if (trans != null) return trans.GetComponent<Button>();
+        
         return null;
     }
 
     private TextMeshProUGUI FindTextMeshInCanvas(string name)
     {
         if (dialogueCanvas == null) return null;
+        
+        if (choiceButtonContainer != null)
+        {
+            var tTrans = choiceButtonContainer.Find(name);
+            if (tTrans != null) return tTrans.GetComponent<TextMeshProUGUI>();
+
+            var allTexts = choiceButtonContainer.GetComponentsInChildren<TextMeshProUGUI>(true);
+            foreach (var t in allTexts) if (t.name == name) return t;
+        }
+
         var trans = dialogueCanvas.transform.Find("DialoguePanel/" + name);
         if (trans != null) return trans.GetComponent<TextMeshProUGUI>();
+        
         return null;
     }
 
@@ -187,47 +267,40 @@ public class DialogueManager : MonoBehaviour
 
         ClearButtons();
 
-        // Check for pre-placed static buttons
-        Button btnT = FindButtonInCanvas("ChoiceButton_T");
-        Button btnO = FindButtonInCanvas("ChoiceButton_O");
-        Button btnN = FindButtonInCanvas("ChoiceButton_N");
-        Button btnE = FindButtonInCanvas("ChoiceButton_E");
-
+        // Use explicitly assigned buttons (preferred method)
         if (btnT != null || btnO != null || btnN != null || btnE != null)
         {
+            // Map choices to buttons by ToneType
+            Button[] buttons = { btnT, btnO, btnN, btnE };
+            TextMeshProUGUI[] labels = { txtT, txtO, txtN, txtE };
+            ToneType[] tones = { ToneType.Trust, ToneType.Observation, ToneType.NarrativePresence, ToneType.Empathy };
+
             foreach (var choice in p.choices)
             {
-                Button targetBtn = null;
-
-                switch (choice.tone)
+                int toneIndex = -1;
+                for (int i = 0; i < tones.Length; i++)
                 {
-                    case ToneType.Trust:
-                        targetBtn = btnT;
+                    if (choice.tone == tones[i])
+                    {
+                        toneIndex = i;
                         break;
-
-                    case ToneType.Observation:
-                        targetBtn = btnO;
-                        break;
-
-                    case ToneType.NarrativePresence:
-                        targetBtn = btnN;
-                        break;
-
-                    case ToneType.Empathy:
-                        targetBtn = btnE;
-                        break;
+                    }
                 }
 
-                if (targetBtn != null)
+                if (toneIndex >= 0 && buttons[toneIndex] != null)
                 {
+                    Button targetBtn = buttons[toneIndex];
                     targetBtn.gameObject.SetActive(true);
-                    var textMesh = targetBtn.GetComponentInChildren<TextMeshProUGUI>();
-                    if (textMesh != null) textMesh.text = choice.playerLine;
+                    
+                    if (labels[toneIndex] != null)
+                        labels[toneIndex].text = choice.playerLine;
+                    
                     targetBtn.onClick.RemoveAllListeners();
                     targetBtn.onClick.AddListener(() => OnChoiceMade(choice));
                 }
             }
         }
+        // Fallback to dynamic button spawning if no static buttons assigned
         else if (_choiceButtonPrefab != null && choiceButtonContainer != null)
         {
             foreach (var choice in p.choices)
@@ -311,19 +384,14 @@ public class DialogueManager : MonoBehaviour
 
     private void ClearButtons()
     {
-        Button btnT = FindButtonInCanvas("ChoiceButton_T");
-        Button btnO = FindButtonInCanvas("ChoiceButton_O");
-        Button btnN = FindButtonInCanvas("ChoiceButton_N");
-        Button btnE = FindButtonInCanvas("ChoiceButton_E");
+        // Clear explicitly assigned buttons
+        if (btnT != null) btnT.gameObject.SetActive(false);
+        if (btnO != null) btnO.gameObject.SetActive(false);
+        if (btnN != null) btnN.gameObject.SetActive(false);
+        if (btnE != null) btnE.gameObject.SetActive(false);
 
-        if (btnT != null || btnO != null || btnN != null || btnE != null)
-        {
-            if (btnT != null) btnT.gameObject.SetActive(false);
-            if (btnO != null) btnO.gameObject.SetActive(false);
-            if (btnN != null) btnN.gameObject.SetActive(false);
-            if (btnE != null) btnE.gameObject.SetActive(false);
-        }
-        else if (choiceButtonContainer != null && choiceButtonContainer.name != "DialoguePanel")
+        // Clear dynamically spawned buttons (fallback mode)
+        if (choiceButtonContainer != null && (btnT == null && btnO == null && btnN == null && btnE == null))
         {
             foreach (Transform child in choiceButtonContainer)
             {
@@ -339,5 +407,138 @@ public class DialogueManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         OnDialogueEnded?.Invoke();
+    }
+
+    /// <summary>
+    /// Diagnostic method to validate all DialoguePanel wiring.
+    /// Run via: Select DialogueManager > Right-click > ValidateDialoguePanel
+    /// </summary>
+    [ContextMenu("ValidateDialoguePanel")]
+    public void ValidateDialoguePanel()
+    {
+        Debug.Log("═══════════════════════════════════════════════════════════");
+        Debug.Log("VALIDATING DIALOGUE PANEL WIRING");
+        Debug.Log("═══════════════════════════════════════════════════════════");
+
+        bool allValid = true;
+
+        // Canvas validation
+        if (dialogueCanvas != null) 
+            Debug.Log("✓ DialogueCanvas: ASSIGNED");
+        else 
+        {
+            Debug.LogError("✗ DialogueCanvas: NOT ASSIGNED - Panel will not display.");
+            allValid = false;
+        }
+
+        // Text fields validation
+        if (bodyText != null) 
+            Debug.Log("✓ bodyText: ASSIGNED");
+        else 
+        {
+            Debug.LogError("✗ bodyText: NOT ASSIGNED - Dialogue text won't display.");
+            allValid = false;
+        }
+
+        if (npcNameText != null) 
+            Debug.Log("✓ npcNameText: ASSIGNED");
+        else 
+        {
+            Debug.LogWarning("⚠ npcNameText: NOT ASSIGNED (optional).");
+        }
+
+        if (sharedBeatText != null) 
+            Debug.Log("✓ sharedBeatText: ASSIGNED");
+        else 
+        {
+            Debug.LogWarning("⚠ sharedBeatText: NOT ASSIGNED (optional).");
+        }
+
+        // Button validation
+        Debug.Log("\nCHOICE BUTTONS:");
+        if (btnT != null) 
+            Debug.Log("  ✓ btnT (Trust): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ btnT (Trust): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        if (btnO != null) 
+            Debug.Log("  ✓ btnO (Observation): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ btnO (Observation): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        if (btnN != null) 
+            Debug.Log("  ✓ btnN (NarrativePresence): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ btnN (NarrativePresence): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        if (btnE != null) 
+            Debug.Log("  ✓ btnE (Empathy): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ btnE (Empathy): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        // Button label validation
+        Debug.Log("\nBUTTON LABELS:");
+        if (txtT != null) 
+            Debug.Log("  ✓ txtT (Trust label): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ txtT (Trust label): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        if (txtO != null) 
+            Debug.Log("  ✓ txtO (Observation label): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ txtO (Observation label): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        if (txtN != null) 
+            Debug.Log("  ✓ txtN (NarrativePresence label): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ txtN (NarrativePresence label): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        if (txtE != null) 
+            Debug.Log("  ✓ txtE (Empathy label): ASSIGNED");
+        else 
+        {
+            Debug.LogError("  ✗ txtE (Empathy label): NOT ASSIGNED");
+            allValid = false;
+        }
+
+        // Fallback validation
+        Debug.Log("\nFALLBACK (if no static buttons):");
+        if (_choiceButtonPrefab != null) 
+            Debug.Log("  ✓ choiceButtonPrefab: ASSIGNED");
+        else 
+            Debug.LogWarning("  ⚠ choiceButtonPrefab: NOT ASSIGNED (only needed for dynamic mode).");
+
+        if (choiceButtonContainer != null) 
+            Debug.Log("  ✓ choiceButtonContainer: ASSIGNED");
+        else 
+            Debug.LogWarning("  ⚠ choiceButtonContainer: NOT ASSIGNED (only needed for dynamic mode).");
+
+        Debug.Log("═══════════════════════════════════════════════════════════");
+        if (allValid)
+            Debug.Log("✓ ALL VALIDATION CHECKS PASSED - DialoguePanel is properly wired!");
+        else
+            Debug.LogError("✗ VALIDATION FAILED - Fix the missing assignments above.");
+        Debug.Log("═══════════════════════════════════════════════════════════");
     }
 }
