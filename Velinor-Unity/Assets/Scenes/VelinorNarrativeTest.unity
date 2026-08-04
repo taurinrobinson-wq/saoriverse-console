@@ -440,13 +440,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 156769583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2032294018}
+  m_Script: {fileID: 11500000, guid: 210cf70d30c6d044db9c7abf4ba49371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimplePlayerController
   moveSpeed: 5
-  groundDrag: 5
   jumpForce: 5
-  gravity: 9.8
+  mouseSensitivity: 100
 --- !u!143 &156769585
 CharacterController:
   m_ObjectHideFlags: 0
@@ -630,7 +629,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -798,7 +797,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
   npcId: 
-  startingPassageId: 
+  startPassageId: market_entry
+  interactionRadius: 2.5
+  raviStats: {fileID: 0}
+  malrikStats: {fileID: 0}
+  elenyaStats: {fileID: 0}
+  saoriStats: {fileID: 0}
 --- !u!54 &524288948
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1130,7 +1134,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
   npcId: 
-  startingPassageId: 
+  startPassageId: market_entry
+  interactionRadius: 2.5
+  raviStats: {fileID: 0}
+  malrikStats: {fileID: 0}
+  elenyaStats: {fileID: 0}
+  saoriStats: {fileID: 0}
 --- !u!54 &733627680
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1274,7 +1283,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1361,12 +1370,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d0fb63a8231e4d937118652772d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  dialogueCanvas: {fileID: 1756091659}
   npcNameText: {fileID: 486585655}
   bodyText: {fileID: 765495041}
   choiceButtonContainer: {fileID: 454392696}
-  choiceButtonPrefab: {fileID: 575945463}
-  dialogueCanvasGroup: {fileID: 1756091657}
-  dialogueCanvas: {fileID: 1756091659}
+  _choiceButtonPrefab: {fileID: 0}
 --- !u!4 &788441494
 Transform:
   m_ObjectHideFlags: 0
@@ -2178,7 +2186,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_UseReflectionProbes: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2300,21 +2308,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!115 &2032294018
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: SimplePlayerController
-  m_Namespace: 
-  m_AssemblyName: Assembly-CSharp
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

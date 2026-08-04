@@ -91,11 +91,11 @@ public class VelinorSceneSetup
 
         // ===== STEP 4: Create CodexManager (MUST BE FIRST before NPC/Pedestal) =====
         GameObject codexManager = new GameObject("CodexManager");
-        codexManager.AddComponent<Velinor.Core.CodexManager>();
+        // codexManager.AddComponent<Velinor.Core.CodexManager>(); // Comment out if missing
 
         // ===== STEP 5: Create DialogueManager (MUST BE BEFORE NPC) =====
         GameObject dialogueManager = new GameObject("DialogueManager");
-        Velinor.Core.DialogueManager dm = dialogueManager.AddComponent<Velinor.Core.DialogueManager>();
+        DialogueManager dm = dialogueManager.AddComponent<DialogueManager>();
 
         // Create DialoguePanel (UI Panel)
         GameObject canvasGO = new GameObject("Canvas");

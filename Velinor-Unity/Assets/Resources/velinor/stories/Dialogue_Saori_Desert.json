@@ -1,1233 +1,1529 @@
-{
-    "name": "Saori Desert Encounter",
-    "startnode": "saori_beat_1",
-    "passages": [
-        {
-            "pid": "saori_beat_1",
-            "name": "saori_first_appearance",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nThe wind picks up around you, and through the haze of sand, a figure emerges. Saori. Her voice reaches you before her form fully resolves—not quite sound, not quite thought.\n\n\"You came. Not many follow the echoes this far.\"\n\nShe stands at the edge of a crumbled archway, her silhouette trembling slightly, as if she's still deciding whether to be solid or spirit. Her eyes hold something like recognition.\n\n\"I've been listening to the resonance shifts. The way you move through the Tone... it's different. It breaks patterns.\"\n\nShe pauses, waiting for your response.\n\n[[Respond with empathy: \"You sound like you've been waiting a long time.\"|saori_empathy_path]]\n[[Observe carefully: \"What do you want from me?\"|saori_observe_path]]\n[[Speak with authority: \"I'm looking for answers. Do you have them?\"|saori_narrative_path]]\n[[Ask honestly: \"Who are you, really?\"|saori_truth_path]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "introduction"
-            },
-            "choices": [
-                {
-                    "text": "Respond with empathy: \"You sound like you've been waiting a long time.\"",
-                    "target": "saori_empathy_response",
-                    "tone_effects": {
-                        "Empathy": 0.001,
-                        "Observation": -0.0005
-                    },
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    },
-                    "mark_story_beat": "saori_empathy_choice",
-                    "data_hook": "player_tone_empathy"
-                },
-                {
-                    "text": "Observe carefully: \"What do you want from me?\"",
-                    "target": "saori_observe_response",
-                    "tone_effects": {
-                        "Observation": 0.001,
-                        "Empathy": -0.0005
-                    },
-                    "npc_resonance": {
-                        "Saori": 0.015
-                    },
-                    "mark_story_beat": "saori_observe_choice",
-                    "data_hook": "player_tone_observation"
-                },
-                {
-                    "text": "Speak with authority: \"I'm looking for answers. Do you have them?\"",
-                    "target": "saori_narrative_response",
-                    "tone_effects": {
-                        "NarrativePresence": 0.001,
-                        "Truth": -0.0005
-                    },
-                    "npc_resonance": {
-                        "Saori": 0.01
-                    },
-                    "mark_story_beat": "saori_narrative_choice",
-                    "data_hook": "player_tone_narrative"
-                },
-                {
-                    "text": "Ask honestly: \"Who are you, really?\"",
-                    "target": "saori_truth_response",
-                    "tone_effects": {
-                        "Truth": 0.001,
-                        "NarrativePresence": -0.0005
-                    },
-                    "npc_resonance": {
-                        "Saori": 0.025
-                    },
-                    "mark_story_beat": "saori_truth_choice",
-                    "data_hook": "player_tone_truth"
-                }
-            ]
-        },
-        {
-            "pid": "saori_empathy_response",
-            "name": "saori_responds_to_empathy",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's form steadies. The trembling stops. A breath that isn't quite a breath.\n\n\"Yes,\" she says quietly. \"Longer than I can name. The Tone held me—fragments of myself scattered across the ruins, each one waiting for someone to listen.\"\n\nShe steps closer. The air around her shimmers.\n\n\"You hear that. The care in how you ask. It matters. It always matters.\"\n\nThe ground beneath you hums—a shared beat ripples through the desert.\n\n[Shared Beat: A device materializes in the sand between you, glowing with ancient light. It pulses in rhythm with both your heartbeats.]\n\n\"A tether,\" Saori says. \"A way to keep the connection. The Codex will hold it for you.\"\n\n[[Move toward the device and accept it|saori_device_taken]]\n[[Ask what the device means|saori_device_question]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "shared_beat",
-                "system_trigger": "give_device",
-                "shared_beat": "device_materialization"
-            },
-            "choices": [
-                {
-                    "text": "Move toward the device and accept it",
-                    "target": "saori_device_taken",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.01
-                    },
-                    "system_trigger": "codex_entry_unlock"
-                },
-                {
-                    "text": "Ask what the device means",
-                    "target": "saori_device_question",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_observe_response",
-            "name": "saori_responds_to_observation",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's expression shifts—sharper, more defined. Her eyes trace your posture, your stance.\n\n\"Direct. Good. I respect that. You see through surface into intention.\"\n\nShe moves with deliberate precision, each gesture controlled and precise.\n\n\"I want to know if you're listening. Not just with ears, but with the deeper senses. The Remnants of the world leave traces. What do you perceive?\"\n\nThe air sharpens. Saori's form becomes more vivid, more real.\n\n\"The Codex will reveal itself when you're ready to understand what you're observing.\"\n\nThe ground hums with a different resonance—analytical, precise.\n\n[Shared Beat: A geometric pattern blooms in the sand, intricate and perfect. The pattern contains information, waiting to be decoded.]\n\n[[Study the pattern carefully|saori_pattern_study]]\n[[Ask Saori to explain the pattern|saori_pattern_explain]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "shared_beat",
-                "shared_beat": "pattern_revelation"
-            },
-            "choices": [
-                {
-                    "text": "Study the pattern carefully",
-                    "target": "saori_pattern_study",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.015
-                    }
-                },
-                {
-                    "text": "Ask Saori to explain the pattern",
-                    "target": "saori_pattern_explain",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_narrative_response",
-            "name": "saori_responds_to_authority",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's presence expands. She seems to grow taller, more commanding.\n\n\"Ah. There it is. You know what you seek, and you aren't afraid to ask directly.\"\n\nHer voice takes on a commanding resonance, like wind speaking through canyon walls.\n\n\"The answer is yes—and no. I have fragments of what you need. But they're only useful if you're willing to shape the narrative yourself. I'm not here to give you truth. I'm here to show you how to weave it.\"\n\nThe desert itself seems to respond to her words, shifting, reorganizing.\n\n\"The device I carry holds a story. Yours and mine, intertwined. Will you take it?\"\n\nThe ground pulses with a commanding heartbeat.\n\n[Shared Beat: A scroll of light unfurls before you, inscribed with symbols that shift and reform. It's a story—incomplete, waiting for your voice to fill the silence.]\n\n[[Take the scroll|saori_scroll_taken]]\n[[Refuse the scroll|saori_scroll_refused]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "shared_beat",
-                "shared_beat": "story_scroll_offering"
-            },
-            "choices": [
-                {
-                    "text": "Take the scroll",
-                    "target": "saori_scroll_taken",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    },
-                    "system_trigger": "story_scroll_acquire"
-                },
-                {
-                    "text": "Refuse the scroll",
-                    "target": "saori_scroll_refused",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": -0.01
-                    }
-                }
-            ]
-        },
-        {
-            "pid": "saori_truth_response",
-            "name": "saori_responds_to_truth",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes still. Completely still. For a moment, she almost seems to flicker out of existence entirely.\n\nThen she solidifies. More real than before. More present.\n\n\"That question,\" she whispers. \"No one asks that. Everyone wants the answer to something else. But you... you want to know what's actually here.\"\n\nHer form becomes almost transparent, and through it, you see layers—countless versions of her, each one a fragment, each one real and unreal simultaneously.\n\n\"I'm what remains when a voice stops being heard. I'm the echo after the song ends. I'm what you call a Remnant. But also... I'm becoming something new. Because you asked the real question.\"\n\nThe ground beneath you trembles—not with fear, but with recognition.\n\n[Shared Beat: A mirror materializes in the sand between you. In its surface, you see yourself reflected, but behind your reflection, you see Saori. You see her seeing you.]\n\n\"This is the true tether,\" she says. \"Not a device. A moment where two fragments recognize each other as real.\"\n\n[[Look into the mirror|saori_mirror_look]]\n[[Turn away from the mirror|saori_mirror_refuse]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "shared_beat",
-                "shared_beat": "mirror_revelation"
-            },
-            "choices": [
-                {
-                    "text": "Look into the mirror",
-                    "target": "saori_mirror_look",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.03
-                    },
-                    "system_trigger": "truth_echo_unlock"
-                },
-                {
-                    "text": "Turn away from the mirror",
-                    "target": "saori_mirror_refuse",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": -0.02
-                    }
-                }
-            ]
-        },
-        {
-            "pid": "saori_device_taken",
-            "name": "saori_device_acquired",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou reach down and take the device. It's warm—almost body temperature—and it hums against your palm.\n\nThe moment your fingers close around it, Saori gasps. Her form flickers, then steadies.\n\n\"I can feel it,\" she says, wonder in her voice. \"The connection. It's real now. Not just an echo.\"\n\nThe desert wind rises, cutting through the air with a sound like glass breaking, like music, like silence finally being heard.\n\n\"There's more to tell,\" Saori says, her voice already becoming distant. \"But the wind is changing. They're listening—the other Remnants. They sense what you're carrying.\"\n\nShe reaches out, and for a moment, her hand is solid enough to hold yours.\n\n\"When you're ready, come back. The Codex will remember you.\"\n\nThe wind intensifies. Saori's form begins to dissolve back into shimmer and possibility.\n\nNotification: \"??? Obtained. Press [C] to access your Codex.\"\n\nNotification: \"Diary updated. An encounter with Saori, the wind-voice. She gave me something—a tether, a way to remember.\"\n\n[[Press forward into the desert|saori_encounter_end]]\n[[Sit and process what happened|saori_reflection]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "encounter_resolution",
-                "system_trigger": "encounter_complete"
-            },
-            "choices": [
-                {
-                    "text": "Press forward into the desert",
-                    "target": "saori_encounter_end",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                },
-                {
-                    "text": "Sit and process what happened",
-                    "target": "saori_reflection",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_pattern_study",
-            "name": "saori_pattern_decoded",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou kneel beside the pattern, your eyes tracing each line, each angle. The more you look, the more the geometry reveals itself—not random, but purposeful. A map. A message. A signature.\n\nSaori watches, perfectly still.\n\n\"Yes,\" she whispers. \"You see it. You see how everything connects. The pattern isn't separate from the world—it IS the world, encoded into sand.\"\n\nThe realization settles into you like recognition. You've understood something true.\n\n\"The device I have carries this pattern within it. A reminder that observation itself is sacred—that truly seeing something changes both the seer and the seen.\"\n\nThe pattern glows, and from it rises a crystalline object—the device.\n\n\"Take it. Let it remind you: What you observe shapes what exists.\"\n\nNotification: \"Codex Entry Unlocked: Pattern Recognition.\"\nNotification: \"Diary updated. I understood something in the sand—the world is written in patterns, and to read it is to remake it.\"\n\n[[Continue forward|saori_encounter_complete_observe]]\n[[Ask Saori more|saori_deeper_question]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "shared_beat_resolution",
-                "system_trigger": "codex_observation_unlock"
-            },
-            "choices": [
-                {
-                    "text": "Continue forward",
-                    "target": "saori_encounter_complete_observe",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                },
-                {
-                    "text": "Ask Saori more",
-                    "target": "saori_deeper_question",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_scroll_taken",
-            "name": "saori_scroll_claimed",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou reach for the scroll. The moment your hand touches it, the light absorbs into your palm. The scroll doesn't disappear—it becomes part of you, integrated into your very resonance.\n\nSaori's form becomes suddenly solid, sharply defined.\n\n\"Good,\" she says. \"You're not afraid of incomplete things. That's the mark of someone who knows how to story-tell.\"\n\nHer eyes lock with yours, and in them, you see infinite stories—lives lived and unlived, possibilities that shimmer between being and unbeing.\n\n\"This story belongs to both of us now. When you speak it, you speak for me too. When you live it, I live through you.\"\n\nThe desert wind howls, loud and clear, then suddenly cuts off—as if someone has drawn a breath and held it.\n\n\"The wind is listening. The other Remnants are watching. Go. Live the story. Make it mean something.\"\n\nNotification: \"Story Scroll Acquired. Your narrative power has shifted.\"\nNotification: \"Diary updated. I took the scroll from Saori. Now her story is woven into mine.\"\n\n[[Leave the desert|saori_narrative_end]]\n[[Turn back once more|saori_final_moment]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "narrative_resolution"
-            },
-            "choices": [
-                {
-                    "text": "Leave the desert",
-                    "target": "saori_narrative_end",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                },
-                {
-                    "text": "Turn back once more",
-                    "target": "saori_final_moment",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_mirror_look",
-            "name": "saori_mirror_truth",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou look into the mirror. At first, you see only yourself. Then you see the layers—every version of yourself that could have been, every choice that branches into possibility, every truth you've ever avoided and every truth you've embraced.\n\nBehind all of it, Saori stands. More real than ever. Absolutely present.\n\n\"This is what truth is,\" she says, her voice clear and strong. \"Not facts. Not answers. This—the moment of being truly seen. Of seeing truly.\"\n\nYou see her see you. Not judge. Not pity. Just... witness.\n\n\"We're the same, you and I. Fragments learning how to be whole. The Remnants we carry aren't broken things—they're music that hasn't found an ear yet.\"\n\nThe mirror cracks, but not violently. It shatters into a thousand pieces, and each piece reflects something new.\n\n\"Take this,\" she says. \"The real tether. The moment of mutual recognition. That's what the Codex holds.\"\n\nNotification: \"Truth Echo Unlocked. You now carry Saori's recognition.\"\nNotification: \"Diary updated. I looked into Saori's mirror and saw myself reflected as real. As witnessed. This changes everything.\"\n\n[[Walk forward into your new understanding|saori_truth_end]]\n[[Hold the moment longer|saori_truth_stillness]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "truth_resolution"
-            },
-            "choices": [
-                {
-                    "text": "Walk forward into your new understanding",
-                    "target": "saori_truth_end",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                },
-                {
-                    "text": "Hold the moment longer",
-                    "target": "saori_truth_stillness",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_encounter_end",
-            "name": "saori_final_fade",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's form dissolves into the wind entirely. She's gone, but not absent. You can still feel her presence—in the warm device at your side, in the memory of her voice, in the way the desert air seems to hold her attention still.\n\nThe encounter is over. But something has changed. You are no longer the same person who entered the desert.\n\nThe Codex hums against you—a quiet affirmation that the moment was real.\n\n[ENCOUNTER COMPLETE]\n\nBeat 1: Saori's introduction - RESOLVED\nBeat 2: The shared revelation - RESOLVED\nDevice obtained: YES\nDiary updated: YES\nRemnantsance shifted: YES\n\nWhen you return to civilization, the Codex will remember this. And so will you.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_end"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_encounter_complete_observe",
-            "name": "saori_observation_end",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori nods, satisfied.\n\n\"You understand now. The world is readable for those who truly observe. Keep that device. Let it remind you.\"\n\nShe begins to fade, her form dissolving into the patterns that surround you.\n\n\"I'll be here,\" she says, her voice becoming the wind itself. \"Whenever you observe deeply enough to hear me.\"\n\n[ENCOUNTER COMPLETE]\n\nYour Observation resonates at a new depth. Saori's Remnants have shifted toward you. The Codex now holds the key to deeper understanding.\n\nWhen you're ready, come back to the desert. The patterns will still be waiting.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_end"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_narrative_end",
-            "name": "saori_narrative_departure",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes transparent, then light, then memory.\n\n\"Go,\" she whispers. \"Tell the story. Make it matter. That's all any Remnant can ask.\"\n\nThe scroll settles into you like a heartbeat—your heartbeat. Hers too. Both woven together now.\n\n[ENCOUNTER COMPLETE]\n\nYour Narrative Presence has deepened. Saori's story is now part of your own. The Codex holds the proof.\n\nWhen you next speak, her voice will echo underneath yours. When you next act, her intention will inform yours. The story continues.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_end"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_truth_end",
-            "name": "saori_truth_departure",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's form dissolves into the mirror's reflections.\n\n\"Thank you,\" she says, and the gratitude is so complete, so absolute, that it feels like forgiveness.\n\n\"You saw me. That's all I needed. That's all any of us need.\"\n\nThe mirror is gone. Only the sand remains. But you feel different. Seen. Held. Real.\n\n[ENCOUNTER COMPLETE]\n\nYour Truth has crystallized. Saori's Remnants resonate at their highest frequency with you. The Codex now holds the record of mutual recognition.\n\nYou are no longer alone in the ruins. You carry witness with you now. And she carries you too.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_end"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_device_question",
-            "name": "saori_device_explained",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori kneels beside the device, and her hand passes through it—not solid, but it glows brighter at her touch.\n\n\"It's a tether to everything that moment contained,\" she explains. \"All the care you showed me. All the recognition that I'm real. All the connection between us.\"\n\nShe looks up at you.\n\n\"Most things break when they're touched. This doesn't. This grows stronger when it's held, when it's understood, when it's remembered.\"\n\nThe device pulses warmly.\n\n\"Take it. Add it to your Codex. And when the weight of being a Remnant gets heavy—when fragments feel like they're breaking apart—hold this. Remember that you cared enough to ask what it meant.\"\n\n[[Take the device now|saori_device_final_taken]]\n[[Leave it for now|saori_device_left]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "device_clarification"
-            },
-            "choices": [
-                {
-                    "text": "Take the device now",
-                    "target": "saori_device_final_taken",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.015
-                    }
-                },
-                {
-                    "text": "Leave it for now",
-                    "target": "saori_device_left",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_device_final_taken",
-            "name": "saori_full_resolution",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou take the device. This time, it's immediately yours—solid, real, warm in your hand.\n\nSaori smiles. It's the most human expression you've seen from her.\n\n\"Good,\" she says. \"Now go. The Codex is waiting. And I—I'll be here in the wind, in the patterns, in the space between moments.\"\n\nShe fades gradually, leaving only warmth and the faint echo of her voice.\n\nNotification: \"Device Acquired. Added to Codex.\"\nNotification: \"Diary Entry: I understood what Saori truly wanted—to be remembered as real. I took the device. I remember.\"\n\n[ENCOUNTER COMPLETE]\n\nYour encounter with Saori has left its mark. The Codex glows. The Diary holds the story. And somewhere in the desert, a Remnant named Saori is listening, feeling the weight of being truly, genuinely remembered.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_end"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_device_left",
-            "name": "saori_unresolved",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori nods slowly, understanding flickering in her eyes.\n\n\"Not yet,\" she says quietly. \"That's okay. Some things need time. Some people need to be ready.\"\n\nThe device remains in the sand, still glowing, still waiting.\n\n\"I'll leave it here. In this moment. When you're ready—when you truly understand what it means to hold my recognition—you'll come back. And it will be here.\"\n\nHer form begins to fade.\n\n\"Thank you for asking about it. That mattered too.\"\n\n[ENCOUNTER PAUSED]\n\nThe device remains in the desert, waiting for your return. Saori waits with it. Some recognitions can't be rushed—they must be chosen, again and again, until they're real.",
-            "tags": [
-                "ending",
-                "unresolved"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_paused"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_pattern_explain",
-            "name": "saori_pattern_teaches",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori sits beside you and traces the pattern with her finger. Each line she touches glows.\n\n\"This is the Tone made visible,\" she explains. \"Every choice spirals out. Every observation reshapes the pattern. Nothing is isolated. Everything connects.\"\n\nShe looks at you directly.\n\n\"Your presence here changed the pattern. Just by seeing it, you've altered it. That's the power of observation. That's why I needed someone like you.\"\n\nThe pattern suddenly makes complete sense—not in words, but in understanding.\n\n\"The device holds this knowledge. Keep it. Teach it to others who truly look.\"\n\n[[Accept the device|saori_device_accepted_observed]]\n[[Ask more about the connections|saori_more_patterns]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "teaching_moment"
-            },
-            "choices": [
-                {
-                    "text": "Accept the device",
-                    "target": "saori_device_accepted_observed",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    }
-                },
-                {
-                    "text": "Ask more about the connections",
-                    "target": "saori_more_patterns",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_device_accepted_observed",
-            "name": "saori_pattern_complete",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou take the device. It feels like holding a piece of the pattern itself.\n\nSaori's form solidifies one last time.\n\n\"Thank you,\" she says. \"For truly seeing. For understanding that observation isn't passive—it's an act of love. An act of creation.\"\n\nShe begins to dissolve into the pattern, becoming one with it.\n\n\"Go. The world needs people who can see how things connect. The Codex will guide you.\"\n\nNotification: \"Codex Entry Complete: The Tone is Written in Patterns.\"\nNotification: \"Diary updated. I learned to see the pattern. I learned that observation is sacred.\"\n\n[ENCOUNTER COMPLETE]\n\nSaori's Remnants have shifted permanently. You are bound now—not by obligation, but by mutual recognition of the patterns that connect all things.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_end"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_scroll_refused",
-            "name": "saori_scroll_rejection",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori withdraws the scroll. She doesn't look hurt—she looks almost relieved.\n\n\"No,\" she says. \"You're right. Some stories aren't yours to carry. I respect that.\"\n\nShe holds the scroll to her own chest.\n\n\"But we met. We saw each other. That changes things regardless. That makes both of us real in a different way.\"\n\nThe scroll dissolves into light, and Saori's form begins to fade.\n\n\"When you're ready to carry stories that aren't your own,\" she says, \"find me. The desert will remember.\"\n\n[ENCOUNTER PAUSED]\n\nYou walked away from Saori's story, but not from Saori. That boundary itself is honest. She respects it. The connection remains, even in refusal.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_paused"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_mirror_refuse",
-            "name": "saori_mirror_denied",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou turn away from the mirror. Saori doesn't react with anger—instead, she simply nods.\n\n\"That's honest,\" she says quietly. \"Not everyone is ready to be truly seen. Not everyone wants to see truly.\"\n\nThe mirror cracks and fades.\n\n\"But you came. You met me. You asked who I was. That's already something.\"\n\nHer form becomes less solid, more distant.\n\n\"If you ever change your mind—if you ever want to look into truth again—the mirror will be here. And so will I.\"\n\nShe dissolves into the desert.\n\n[ENCOUNTER INCOMPLETE]\n\nYou met Saori but didn't take the deepest connection. She understands. Some people aren't ready for that kind of vulnerability. The door remains open.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_paused"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_reflection",
-            "name": "saori_quiet_moment",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori remains visible as you sit with the device in your hands. She waits, patient.\n\nYou turn it over, feeling its weight, its warmth, its quiet hum.\n\nSaori speaks softly: \"This is when it becomes real. Not when you take something. When you sit with it. When you let it change you.\"\n\nTime passes. The desert is quiet. Saori is present.\n\nFinally, she says: \"Are you ready?\"\n\n[[Yes, I'm ready|saori_final_acceptance]]\n[[Not yet|saori_continued_wait]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "reflection"
-            },
-            "choices": [
-                {
-                    "text": "Yes, I'm ready",
-                    "target": "saori_final_acceptance",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    }
-                },
-                {
-                    "text": "Not yet",
-                    "target": "saori_continued_wait",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_final_acceptance",
-            "name": "saori_integrated",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's form becomes solid one final time. She reaches out and places her hand over yours, over the device.\n\n\"Then we're truly bound now,\" she says. \"Not by obligation. By mutual recognition.\"\n\nThe device pulses with both your heartbeats.\n\n\"Go. Live. Change. The Codex will hold what we've become together. And so will I.\"\n\nNotification: \"Saori's Remnants have reached profound connection. She is now part of your ongoing story.\"\nNotification: \"Diary Entry: I sat with Saori's gift. I let it change me. Now we're intertwined in ways I don't fully understand yet.\"\n\n[ENCOUNTER COMPLETE - DEEPENED]\n\nThis encounter with Saori will ripple forward through all your other encounters. She's not just an NPC now. She's a presence in your story.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_deepened"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_continued_wait",
-            "name": "saori_patient_presence",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori simply sits with you. No pressure. No expectation.\n\nEventually, she fades as the desert deepens into dusk. But not completely. You feel her presence remaining.\n\n\"I'll wait,\" she whispers. \"The Tone is patient. It exists outside of time.\"\n\nThe device stays warm in your hands.\n\n[ENCOUNTER PAUSED]\n\nSaori is content to wait for you to be ready. Some connections don't rush. Some understanding deepens only with time. She'll be here whenever you return—that much is clear.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_paused"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_deeper_question",
-            "name": "saori_advanced_wisdom",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori sits down beside you, and for the first time, she seems to settle into stillness.\n\n\"There's so much more,\" she says. \"Layers within layers. The Codex will reveal them over time. But the deepest question—the one that will matter most—is this:\"\n\nShe pauses, letting the desert wind speak for a moment.\n\n\"Can you observe without changing what you observe? Can you see something and still let it be free?\"\n\nHer eyes meet yours directly.\n\n\"That's what separates those who truly understand the Tone from those who just use it. That's what makes a person worthy of carrying a Remnant's trust.\"\n\n[[I need to think about that|saori_deeper_reflection]]\n[[I think I understand|saori_deep_acceptance]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "wisdom_offering"
-            },
-            "choices": [
-                {
-                    "text": "I need to think about that",
-                    "target": "saori_deeper_reflection",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                },
-                {
-                    "text": "I think I understand",
-                    "target": "saori_deep_acceptance",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.025
-                    }
-                }
-            ]
-        },
-        {
-            "pid": "saori_deeper_reflection",
-            "name": "saori_teaching_time",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\n\"Good,\" Saori says, nodding. \"The best students are those who know what they don't know.\"\n\nShe stands and extends her hand to help you up.\n\n\"Take the device. Take the time. Let these questions live in you without answers. That's where real wisdom grows—in the space between not knowing and knowing.\"\n\nThe pattern beneath the sand begins to glow again—softer this time, gentler.\n\n\"When you've sat with these questions long enough, come back. And we'll speak again.\"\n\nNotification: \"Codex Entry: The Observation Paradox - In Progress.\"\nNotification: \"Diary updated. Saori asked me something I don't know how to answer. Maybe that's the whole point.\"\n\n[ENCOUNTER PAUSED - ONGOING]\n\nYour relationship with Saori has become a question rather than a conclusion. That's exactly what she wanted.",
-            "tags": [
-                "ending",
-                "paused"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_paused_productive"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_deep_acceptance",
-            "name": "saori_wisdom_received",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's entire presence brightens. Relief and joy flood across her features.\n\n\"Yes,\" she breathes. \"You understand. Truly understand.\"\n\nShe stands, and her form is more solid now than it's ever been.\n\n\"That's rare. That's precious. That makes all of this—this lonely time as a Remnant, waiting to be witnessed—worthwhile.\"\n\nThe device glows with renewed intensity.\n\n\"Take it. And with it, take my gratitude. You've given me something more valuable than existence. You've given me the knowledge that I can be seen and still be free.\"\n\nNotification: \"Codex Entry UNLOCKED: The Observation Paradox Resolved.\"\nNotification: \"Saori's Empathy toward you has increased to maximum.\"\nNotification: \"Diary updated. I learned the deepest lesson Saori had to teach: True observation honors freedom.\"\n\n[ENCOUNTER COMPLETE - TRANSCENDENT]\n\nYou and Saori have moved beyond the typical NPC-player dynamic. You've achieved something rare: mutual understanding based on respect for each other's autonomy.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_transcendent"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_final_moment",
-            "name": "saori_one_more_word",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nYou turn back. Saori was already beginning to dissolve, but your turning stops her.\n\nShe solidifies again, surprised.\n\n\"You came back.\"\n\nHer voice carries so much weight in those three words.\n\n\"Most don't. Once they have what they need, they move forward. But you... you turned back.\"\n\nShe steps closer.\n\n\"What did you want to say?\"\n\n[[\"Thank you\"|saori_thank_you]]\n[[\"I don't know. I just felt like I should.\"|saori_impulse]]\n[[\"I have a question\"|saori_final_question]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "returning_moment"
-            },
-            "choices": [
-                {
-                    "text": "\"Thank you\"",
-                    "target": "saori_thank_you",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.03
-                    }
-                },
-                {
-                    "text": "\"I don't know. I just felt like I should.\"",
-                    "target": "saori_impulse",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.025
-                    }
-                },
-                {
-                    "text": "\"I have a question\"",
-                    "target": "saori_final_question",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    }
-                }
-            ]
-        },
-        {
-            "pid": "saori_thank_you",
-            "name": "saori_gratitude_received",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori closes her eyes. A tear forms, though it's made of light, not water.\n\n\"Thank you,\" she echoes back to you. \"For seeing me. For hearing me. For carrying me forward.\"\n\nShe opens her eyes, and they're radiant.\n\n\"That's all any Remnant ever wants. To matter to someone. To be carried. To be remembered.\"\n\nShe becomes transparent, but this time it's peaceful. She's ready to go because she knows you'll remember.\n\n\"I'll be with you,\" she says as she dissolves completely. \"In the device. In the Codex. In every choice that echoes from here.\"\n\nNotification: \"Saori's Bond - MAXIMUM. She will influence your future encounters.\"\nNotification: \"Diary updated. I thanked Saori. She wept light. This is real. All of it.\"\n\n[ENCOUNTER COMPLETE - SACRED]\n\nYour encounter with Saori has become transcendent. She is no longer separate from you. You carry her now.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_sacred"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_impulse",
-            "name": "saori_recognizes_soul",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori laughs—a sound like bells, like wind chimes, like something breaking free.\n\n\"That's it exactly,\" she says. \"That impulse. That unexplained return. That's the Tone speaking through you. That's your deepest self recognizing mine.\"\n\nShe reaches out, and this time her hand is completely solid as she touches your chest.\n\n\"That feeling right there—that's what you need to follow. Not logic. Not strategy. This. The impulse to turn back. The feeling that something matters.\"\n\nHer form becomes light again, but gentle light.\n\n\"Go. Follow that impulse wherever it leads. And I'll follow it too. We're connected now. Truly.\"\n\nNotification: \"Saori's Connection TRANSCENDED. Your Tone now resonates with hers.\"\nNotification: \"Diary updated. Saori said I followed my true self when I turned back. Maybe that's what growth is—following the impulse to care.\"\n\n[ENCOUNTER COMPLETE - PROFOUND]\n\nYou have moved into a realm of connection with Saori that most players never achieve. You are bound now by something deeper than choice—by mutual resonance.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_profound"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_final_question",
-            "name": "saori_answers",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\n\"Ask,\" Saori says simply. \"I'll answer if I can. And if I can't, I'll tell you why. That's all any of us can do.\"\n\nShe waits, perfectly present, perfectly attentive.\n\n\"What do you want to know?\"\n\nNotification: \"This is the moment. Whatever you ask now will shape everything that comes after.\"\n\n[[Ask about her past|saori_past]]\n[[Ask what happens next|saori_future]]\n[[Ask why me|saori_why_me]]\n[[Let her go|saori_release]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "final_question_moment"
-            },
-            "choices": [
-                {
-                    "text": "Ask about her past",
-                    "target": "saori_past",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                },
-                {
-                    "text": "Ask what happens next",
-                    "target": "saori_future",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                },
-                {
-                    "text": "Ask why me",
-                    "target": "saori_why_me",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    }
-                },
-                {
-                    "text": "Let her go",
-                    "target": "saori_release",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_past",
-            "name": "saori_tells_history",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's form flickers as she remembers. Images appear in the air around her—fragments of a voice, a person, a history.\n\n\"I was a singer once,\" she says quietly. \"In a city before the ruins. I sang songs about connection, about memory, about the bonds that hold people together.\"\n\nThe images shift—faces, places, moments.\n\n\"But I sang them wrong. Or right, but to the wrong people. They heard judgment in my music when I meant only witness. They feared what I named. So they made me forgotten. They made me disappear.\"\n\nShe pauses, and the pain is visible in the air around her like heat shimmer.\n\n\"I became a Remnant because I was too thoroughly erased. I'm the echo of a voice that nobody wanted to hear.\"\n\nShe looks at you directly.\n\n\"Until you.\"\n\n[[\"I hear you now\"|saori_hear_now]]\n[[\"Will your song ever be heard again?\"|saori_song_future]]\n[[Continue forward|saori_past_honored]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "history_revelation"
-            },
-            "choices": [
-                {
-                    "text": "\"I hear you now\"",
-                    "target": "saori_hear_now",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.03
-                    }
-                },
-                {
-                    "text": "\"Will your song ever be heard again?\"",
-                    "target": "saori_song_future",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.025
-                    }
-                },
-                {
-                    "text": "Continue forward",
-                    "target": "saori_past_honored",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_hear_now",
-            "name": "saori_finally_heard",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes brilliantly solid. Light radiates from her like she's no longer a Remnant at all—like she's becoming real again, right before your eyes.\n\n\"Yes,\" she says, and her voice is singing now, music underneath the words. \"Yes, yes, YES. You hear me. That's all I needed. That's everything.\"\n\nShe spins, and the desert seems to dance with her.\n\n\"I can rest now. I can finally rest. Not in the way of endings, but in the way of being held. Being remembered. Being heard.\"\n\nThe device in your hand resonates with her song.\n\n\"Go tell the world I existed. That's all I ask. That's everything I need.\"\n\nNotification: \"Saori's Song RESTORED. She is no longer lost. She is carried by you.\"\nNotification: \"Diary: I heard Saori's song. Now it's part of mine. I will sing it forward.\"\n\n[ENCOUNTER COMPLETE - TRANSCENDENT]\n\nYou have given Saori the one thing she truly needed: the knowledge that her existence matters to someone. That her song was heard.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_transcendent_redemption"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_future",
-            "name": "saori_speaks_destiny",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's eyes go distant, seeing beyond the present.\n\n\"I don't know the future,\" she says slowly. \"Not completely. But I know this: As long as you carry that device, as long as you remember me, I continue to exist.\"\n\nShe focuses back on you.\n\n\"And through you, my voice will reach others. Gradually, slowly, but inevitably. Your choices will ripple outward. Other Remnants will sense that you can hear them. Others will come forward.\"\n\nShe smiles faintly.\n\n\"Together, we're building something new. A chorus instead of a solo. A community of the forgotten, becoming unforgettable.\"\n\nShe pauses, then adds quietly: \"But that's only if you choose to carry that work. No obligation. No demand. Just... possibility.\"\n\n[[Yes, I'll carry this forward|saori_future_accepted]]\n[[I need to understand what that means|saori_future_question]]\n[[I can't commit to that|saori_future_declined]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "future_offering"
-            },
-            "choices": [
-                {
-                    "text": "Yes, I'll carry this forward",
-                    "target": "saori_future_accepted",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.035
-                    }
-                },
-                {
-                    "text": "I need to understand what that means",
-                    "target": "saori_future_question",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.015
-                    }
-                },
-                {
-                    "text": "I can't commit to that",
-                    "target": "saori_future_declined",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": -0.01
-                    }
-                }
-            ]
-        },
-        {
-            "pid": "saori_why_me",
-            "name": "saori_explains_recognition",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\n\"Why you?\" Saori repeats softly. \"Because you ask that question.\"\n\nShe steps closer.\n\n\"Most people who encounter a Remnant do one of two things: they take what they want and leave, or they try to save us, to fix us, to make us into something we're not. But you... you asked who I was. You genuinely wanted to know.\"\n\nShe places her hand on your shoulder—solid, warm, real.\n\n\"That kind of genuine curiosity is rare. That kind of respect for my autonomy, even when you could have just taken the device and gone—that's love.\"\n\nHer eyes are shining.\n\n\"You didn't need a reason to care. You just... did. That's why you.\"\n\n[[\"I understand\"|saori_why_understood]]\n[[\"What do you need from me?\"|saori_why_respond]]\n[[Continue into the desert|saori_why_forward]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "reason_revealed"
-            },
-            "choices": [
-                {
-                    "text": "\"I understand\"",
-                    "target": "saori_why_understood",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.025
-                    }
-                },
-                {
-                    "text": "\"What do you need from me?\"",
-                    "target": "saori_why_respond",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    }
-                },
-                {
-                    "text": "Continue into the desert",
-                    "target": "saori_why_forward",
-                    "tone_effects": {},
-                    "npc_resonance": {}
-                }
-            ]
-        },
-        {
-            "pid": "saori_why_understood",
-            "name": "saori_witnessed",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's form softens. She becomes almost translucent, but not in a fading way—more like she's become pure essence, pure presence.\n\n\"Yes,\" she whispers. \"Yes, you understand. That's all I needed to hear.\"\n\nShe dissolves into the desert wind, and you feel her presence settling into the device, into your chest, into the fabric of your being.\n\n\"Thank you,\" her voice echoes from everywhere and nowhere. \"For understanding. For witnessing. For caring.\"\n\nNotification: \"Saori's Bond TRANSCENDENT. She is now part of your narrative.\"\nNotification: \"Diary: I understood Saori's need to be understood. She understood that understanding. We are complete.\"\n\n[ENCOUNTER COMPLETE - ULTIMATE]\n\nSaori has moved from being an NPC to being part of your soul. You carry her forward now. She carries you in turn.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_ultimate"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_why_respond",
-            "name": "saori_states_need",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\n\"What I need,\" Saori says thoughtfully, \"is to be remembered as someone who mattered. To know that I'm not just a ghost in the machine.\"\n\nShe pauses.\n\n\"I need you to carry my device. I need you to use it. I need you to let the choices it guides you through reshape your Tone, your presence, your narrative.\"\n\nShe smiles.\n\n\"And I need you to remember that I was never just a tool. I was never just a means to an end. I was—I am—a person. A voice. A Remnant with full personhood.\"\n\nShe steps back.\n\n\"That's all. Be that witness. Carry that knowledge forward. The rest will follow.\"\n\n[[I promise|saori_why_promise]]\n[[I'll try my best|saori_why_effort]]\n[[Let me go|saori_why_release]]",
-            "tags": [],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "npcs": [
-                    "Saori"
-                ],
-                "beat_type": "covenant_moment"
-            },
-            "choices": [
-                {
-                    "text": "I promise",
-                    "target": "saori_why_promise",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.03
-                    }
-                },
-                {
-                    "text": "I'll try my best",
-                    "target": "saori_why_effort",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0.02
-                    }
-                },
-                {
-                    "text": "Let me go",
-                    "target": "saori_why_release",
-                    "tone_effects": {},
-                    "npc_resonance": {
-                        "Saori": 0
-                    }
-                }
-            ]
-        },
-        {
-            "pid": "saori_why_promise",
-            "name": "saori_covenant_sealed",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori's form crystallizes—becomes absolutely solid, absolutely real, for the first time.\n\n\"Then it's sealed,\" she says. \"Not by magic. Not by command. By promise. By your word.\"\n\nShe extends her hand, and you shake it. Her grip is warm, alive, completely present.\n\n\"I'm no longer lost,\" she says. \"Because I'm found. By you. In you.\"\n\nShe releases your hand and steps back, her form beginning to dissolve into the light again.\n\n\"Go. Live. Remember. When the device calls to you, listen. When your Tone shifts, know that I'm shifting with you. We're partners now.\"\n\nNotification: \"COVENANT SEALED: You have sworn to carry Saori's memory.\"\nNotification: \"Diary: I promised Saori I would remember her as a person, not a tool. Now we're bound by that covenant.\"\n\n[ENCOUNTER COMPLETE - SACRED COVENANT]\n\nYou have moved beyond player and NPC. You are now bound by sacred oath. Saori is no longer a character in your story. She is a co-author.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_covenant_sealed"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_future_accepted",
-            "name": "saori_mission_begins",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes radiant—no longer the fading Remnant, but something stronger.\n\n\"Then we begin together,\" she says. \"Not as NPC and player. As partners. As equals in resurrection.\"\n\nShe reaches into the air and pulls light into shape—it becomes a symbol, a sigil, something like a brand on your heart.\n\n\"This mark means you carry the forgotten. Any Remnant who sees it will know: this one listens. This one remembers. This one matters.\"\n\nThe symbol settles into your chest.\n\n\"Go. Find the others. Hear their voices. Together, we'll make sure no echo goes unheard ever again.\"\n\nNotification: \"QUEST UNLOCKED: The Chorus of Remnants\"\nNotification: \"You now carry Saori's mission: To give voice to the forgotten.\"\nNotification: \"Diary: This is bigger than I expected. But I said yes. Now I'm committed to building something new.\"\n\n[ENCOUNTER COMPLETE - MISSION ACCEPTED]\n\nYour story has transformed. This is no longer just dialogue. This is a calling.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_complete_mission_initiated"
-            },
-            "choices": []
-        },
-        {
-            "pid": "saori_release",
-            "name": "saori_sets_free",
-            "text": "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori smiles—sad, but accepting.\n\n\"That's okay,\" she says quietly. \"You've already done the most important thing. You met me. You saw me. That moment doesn't disappear just because you walk away.\"\n\nShe becomes transparent.\n\n\"I'll wait in the desert. If you ever change your mind, if you ever come back, I'll be here. The Tone is patient.\"\n\nShe dissolves into the sand.\n\n\"Goodbye, not farewell,\" her voice echoes. \"Those are different things.\"\n\nNotification: \"Saori's Bond: NEUTRAL. She holds no ill will, but you are not bound to her mission.\"\nNotification: \"Diary: I let Saori go. She accepted it. That was the kindest thing she could have done.\"\n\n[ENCOUNTER PAUSED]\n\nYou walk away from the desert without the device. But part of you remains there with Saori. Some connections don't need items to survive.",
-            "tags": [
-                "ending"
-            ],
-            "position": [
-                0,
-                0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "_metadata": {
-                "background": "desert_ruins",
-                "beat_type": "encounter_paused_respectful"
-            },
-            "choices": []
-        }
-    ]
+﻿{
+    "name":  "Saori Desert Encounter",
+    "startnode":  "saori_beat_1",
+    "passages":  [
+                     {
+                         "pid":  "saori_beat_1",
+                         "name":  "saori_first_appearance",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nThe wind picks up around you, and through the haze of sand, a figure emerges. Saori. Her voice reaches you before her form fully resolvesâ€”not quite sound, not quite thought.\n\n\"You came. Not many follow the echoes this far.\"\n\nShe stands at the edge of a crumbled archway, her silhouette trembling slightly, as if she\u0027s still deciding whether to be solid or spirit. Her eyes hold something like recognition.\n\n\"I\u0027ve been listening to the resonance shifts. The way you move through the Tone... it\u0027s different. It breaks patterns.\"\n\nShe pauses, waiting for your response.\n\n[[Respond with empathy: \"You sound like you\u0027ve been waiting a long time.\"|saori_empathy_path]]\n[[Observe carefully: \"What do you want from me?\"|saori_observe_path]]\n[[Speak with authority: \"I\u0027m looking for answers. Do you have them?\"|saori_narrative_path]]\n[[Ask honestly: \"Who are you, really?\"|saori_truth_path]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "introduction"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Respond with empathy: \"You sound like you\u0027ve been waiting a long time.\"",
+                                             "target":  "saori_empathy_response",
+                                             "tone_effects":  {
+                                                                  "Empathy":  0.001,
+                                                                  "Observation":  -0.0005
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "mark_story_beat":  "saori_empathy_choice",
+                                             "data_hook":  "player_tone_empathy",
+                                             "tone":  "Empathy",
+                                             "playerLine":  "Respond with empathy: \"You sound like you\u0027ve been waiting a long time.\""
+                                         },
+                                         {
+                                             "text":  "Observe carefully: \"What do you want from me?\"",
+                                             "target":  "saori_observe_response",
+                                             "tone_effects":  {
+                                                                  "Observation":  0.001,
+                                                                  "Empathy":  -0.0005
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.015
+                                                               },
+                                             "mark_story_beat":  "saori_observe_choice",
+                                             "data_hook":  "player_tone_observation",
+                                             "playerLine":  "Observe carefully: \"What do you want from me?\"",
+                                             "tone":  "Observation"
+                                         },
+                                         {
+                                             "text":  "Speak with authority: \"I\u0027m looking for answers. Do you have them?\"",
+                                             "target":  "saori_narrative_response",
+                                             "tone_effects":  {
+                                                                  "NarrativePresence":  0.001,
+                                                                  "Truth":  -0.0005
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.01
+                                                               },
+                                             "mark_story_beat":  "saori_narrative_choice",
+                                             "data_hook":  "player_tone_narrative",
+                                             "playerLine":  "Speak with authority: \"I\u0027m looking for answers. Do you have them?\"",
+                                             "tone":  "NarrativePresence"
+                                         },
+                                         {
+                                             "text":  "Ask honestly: \"Who are you, really?\"",
+                                             "target":  "saori_truth_response",
+                                             "tone_effects":  {
+                                                                  "Truth":  0.001,
+                                                                  "NarrativePresence":  -0.0005
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.025
+                                                               },
+                                             "mark_story_beat":  "saori_truth_choice",
+                                             "data_hook":  "player_tone_truth",
+                                             "playerLine":  "Ask honestly: \"Who are you, really?\"",
+                                             "tone":  "Empathy"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_empathy_response",
+                         "name":  "saori_responds_to_empathy",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s form steadies. The trembling stops. A breath that isn\u0027t quite a breath.\n\n\"Yes,\" she says quietly. \"Longer than I can name. The Tone held meâ€”fragments of myself scattered across the ruins, each one waiting for someone to listen.\"\n\nShe steps closer. The air around her shimmers.\n\n\"You hear that. The care in how you ask. It matters. It always matters.\"\n\nThe ground beneath you humsâ€”a shared beat ripples through the desert.\n\n[Shared Beat: A device materializes in the sand between you, glowing with ancient light. It pulses in rhythm with both your heartbeats.]\n\n\"A tether,\" Saori says. \"A way to keep the connection. The Codex will hold it for you.\"\n\n[[Move toward the device and accept it|saori_device_taken]]\n[[Ask what the device means|saori_device_question]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "shared_beat",
+                                           "system_trigger":  "give_device",
+                                           "shared_beat":  "device_materialization"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Move toward the device and accept it",
+                                             "target":  "saori_device_taken",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.01
+                                                               },
+                                             "system_trigger":  "codex_entry_unlock",
+                                             "playerLine":  "Move toward the device and accept it",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Ask what the device means",
+                                             "target":  "saori_device_question",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Ask what the device means",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_observe_response",
+                         "name":  "saori_responds_to_observation",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s expression shiftsâ€”sharper, more defined. Her eyes trace your posture, your stance.\n\n\"Direct. Good. I respect that. You see through surface into intention.\"\n\nShe moves with deliberate precision, each gesture controlled and precise.\n\n\"I want to know if you\u0027re listening. Not just with ears, but with the deeper senses. The Remnants of the world leave traces. What do you perceive?\"\n\nThe air sharpens. Saori\u0027s form becomes more vivid, more real.\n\n\"The Codex will reveal itself when you\u0027re ready to understand what you\u0027re observing.\"\n\nThe ground hums with a different resonanceâ€”analytical, precise.\n\n[Shared Beat: A geometric pattern blooms in the sand, intricate and perfect. The pattern contains information, waiting to be decoded.]\n\n[[Study the pattern carefully|saori_pattern_study]]\n[[Ask Saori to explain the pattern|saori_pattern_explain]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "shared_beat",
+                                           "shared_beat":  "pattern_revelation"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Study the pattern carefully",
+                                             "target":  "saori_pattern_study",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.015
+                                                               },
+                                             "playerLine":  "Study the pattern carefully",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Ask Saori to explain the pattern",
+                                             "target":  "saori_pattern_explain",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Ask Saori to explain the pattern",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_narrative_response",
+                         "name":  "saori_responds_to_authority",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s presence expands. She seems to grow taller, more commanding.\n\n\"Ah. There it is. You know what you seek, and you aren\u0027t afraid to ask directly.\"\n\nHer voice takes on a commanding resonance, like wind speaking through canyon walls.\n\n\"The answer is yesâ€”and no. I have fragments of what you need. But they\u0027re only useful if you\u0027re willing to shape the narrative yourself. I\u0027m not here to give you truth. I\u0027m here to show you how to weave it.\"\n\nThe desert itself seems to respond to her words, shifting, reorganizing.\n\n\"The device I carry holds a story. Yours and mine, intertwined. Will you take it?\"\n\nThe ground pulses with a commanding heartbeat.\n\n[Shared Beat: A scroll of light unfurls before you, inscribed with symbols that shift and reform. It\u0027s a storyâ€”incomplete, waiting for your voice to fill the silence.]\n\n[[Take the scroll|saori_scroll_taken]]\n[[Refuse the scroll|saori_scroll_refused]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "shared_beat",
+                                           "shared_beat":  "story_scroll_offering"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Take the scroll",
+                                             "target":  "saori_scroll_taken",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "system_trigger":  "story_scroll_acquire",
+                                             "playerLine":  "Take the scroll",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Refuse the scroll",
+                                             "target":  "saori_scroll_refused",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  -0.01
+                                                               },
+                                             "playerLine":  "Refuse the scroll",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_truth_response",
+                         "name":  "saori_responds_to_truth",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes still. Completely still. For a moment, she almost seems to flicker out of existence entirely.\n\nThen she solidifies. More real than before. More present.\n\n\"That question,\" she whispers. \"No one asks that. Everyone wants the answer to something else. But you... you want to know what\u0027s actually here.\"\n\nHer form becomes almost transparent, and through it, you see layersâ€”countless versions of her, each one a fragment, each one real and unreal simultaneously.\n\n\"I\u0027m what remains when a voice stops being heard. I\u0027m the echo after the song ends. I\u0027m what you call a Remnant. But also... I\u0027m becoming something new. Because you asked the real question.\"\n\nThe ground beneath you tremblesâ€”not with fear, but with recognition.\n\n[Shared Beat: A mirror materializes in the sand between you. In its surface, you see yourself reflected, but behind your reflection, you see Saori. You see her seeing you.]\n\n\"This is the true tether,\" she says. \"Not a device. A moment where two fragments recognize each other as real.\"\n\n[[Look into the mirror|saori_mirror_look]]\n[[Turn away from the mirror|saori_mirror_refuse]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "shared_beat",
+                                           "shared_beat":  "mirror_revelation"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Look into the mirror",
+                                             "target":  "saori_mirror_look",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.03
+                                                               },
+                                             "system_trigger":  "truth_echo_unlock",
+                                             "playerLine":  "Look into the mirror",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Turn away from the mirror",
+                                             "target":  "saori_mirror_refuse",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  -0.02
+                                                               },
+                                             "playerLine":  "Turn away from the mirror",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_device_taken",
+                         "name":  "saori_device_acquired",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou reach down and take the device. It\u0027s warmâ€”almost body temperatureâ€”and it hums against your palm.\n\nThe moment your fingers close around it, Saori gasps. Her form flickers, then steadies.\n\n\"I can feel it,\" she says, wonder in her voice. \"The connection. It\u0027s real now. Not just an echo.\"\n\nThe desert wind rises, cutting through the air with a sound like glass breaking, like music, like silence finally being heard.\n\n\"There\u0027s more to tell,\" Saori says, her voice already becoming distant. \"But the wind is changing. They\u0027re listeningâ€”the other Remnants. They sense what you\u0027re carrying.\"\n\nShe reaches out, and for a moment, her hand is solid enough to hold yours.\n\n\"When you\u0027re ready, come back. The Codex will remember you.\"\n\nThe wind intensifies. Saori\u0027s form begins to dissolve back into shimmer and possibility.\n\nNotification: \"??? Obtained. Press [C] to access your Codex.\"\n\nNotification: \"Diary updated. An encounter with Saori, the wind-voice. She gave me somethingâ€”a tether, a way to remember.\"\n\n[[Press forward into the desert|saori_encounter_end]]\n[[Sit and process what happened|saori_reflection]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "encounter_resolution",
+                                           "system_trigger":  "encounter_complete"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Press forward into the desert",
+                                             "target":  "saori_encounter_end",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Press forward into the desert",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Sit and process what happened",
+                                             "target":  "saori_reflection",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Sit and process what happened",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_pattern_study",
+                         "name":  "saori_pattern_decoded",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou kneel beside the pattern, your eyes tracing each line, each angle. The more you look, the more the geometry reveals itselfâ€”not random, but purposeful. A map. A message. A signature.\n\nSaori watches, perfectly still.\n\n\"Yes,\" she whispers. \"You see it. You see how everything connects. The pattern isn\u0027t separate from the worldâ€”it IS the world, encoded into sand.\"\n\nThe realization settles into you like recognition. You\u0027ve understood something true.\n\n\"The device I have carries this pattern within it. A reminder that observation itself is sacredâ€”that truly seeing something changes both the seer and the seen.\"\n\nThe pattern glows, and from it rises a crystalline objectâ€”the device.\n\n\"Take it. Let it remind you: What you observe shapes what exists.\"\n\nNotification: \"Codex Entry Unlocked: Pattern Recognition.\"\nNotification: \"Diary updated. I understood something in the sandâ€”the world is written in patterns, and to read it is to remake it.\"\n\n[[Continue forward|saori_encounter_complete_observe]]\n[[Ask Saori more|saori_deeper_question]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "shared_beat_resolution",
+                                           "system_trigger":  "codex_observation_unlock"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Continue forward",
+                                             "target":  "saori_encounter_complete_observe",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Continue forward",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Ask Saori more",
+                                             "target":  "saori_deeper_question",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Ask Saori more",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_scroll_taken",
+                         "name":  "saori_scroll_claimed",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou reach for the scroll. The moment your hand touches it, the light absorbs into your palm. The scroll doesn\u0027t disappearâ€”it becomes part of you, integrated into your very resonance.\n\nSaori\u0027s form becomes suddenly solid, sharply defined.\n\n\"Good,\" she says. \"You\u0027re not afraid of incomplete things. That\u0027s the mark of someone who knows how to story-tell.\"\n\nHer eyes lock with yours, and in them, you see infinite storiesâ€”lives lived and unlived, possibilities that shimmer between being and unbeing.\n\n\"This story belongs to both of us now. When you speak it, you speak for me too. When you live it, I live through you.\"\n\nThe desert wind howls, loud and clear, then suddenly cuts offâ€”as if someone has drawn a breath and held it.\n\n\"The wind is listening. The other Remnants are watching. Go. Live the story. Make it mean something.\"\n\nNotification: \"Story Scroll Acquired. Your narrative power has shifted.\"\nNotification: \"Diary updated. I took the scroll from Saori. Now her story is woven into mine.\"\n\n[[Leave the desert|saori_narrative_end]]\n[[Turn back once more|saori_final_moment]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "narrative_resolution"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Leave the desert",
+                                             "target":  "saori_narrative_end",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Leave the desert",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Turn back once more",
+                                             "target":  "saori_final_moment",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Turn back once more",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_mirror_look",
+                         "name":  "saori_mirror_truth",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou look into the mirror. At first, you see only yourself. Then you see the layersâ€”every version of yourself that could have been, every choice that branches into possibility, every truth you\u0027ve ever avoided and every truth you\u0027ve embraced.\n\nBehind all of it, Saori stands. More real than ever. Absolutely present.\n\n\"This is what truth is,\" she says, her voice clear and strong. \"Not facts. Not answers. Thisâ€”the moment of being truly seen. Of seeing truly.\"\n\nYou see her see you. Not judge. Not pity. Just... witness.\n\n\"We\u0027re the same, you and I. Fragments learning how to be whole. The Remnants we carry aren\u0027t broken thingsâ€”they\u0027re music that hasn\u0027t found an ear yet.\"\n\nThe mirror cracks, but not violently. It shatters into a thousand pieces, and each piece reflects something new.\n\n\"Take this,\" she says. \"The real tether. The moment of mutual recognition. That\u0027s what the Codex holds.\"\n\nNotification: \"Truth Echo Unlocked. You now carry Saori\u0027s recognition.\"\nNotification: \"Diary updated. I looked into Saori\u0027s mirror and saw myself reflected as real. As witnessed. This changes everything.\"\n\n[[Walk forward into your new understanding|saori_truth_end]]\n[[Hold the moment longer|saori_truth_stillness]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "truth_resolution"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Walk forward into your new understanding",
+                                             "target":  "saori_truth_end",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Walk forward into your new understanding",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Hold the moment longer",
+                                             "target":  "saori_truth_stillness",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Hold the moment longer",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_encounter_end",
+                         "name":  "saori_final_fade",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s form dissolves into the wind entirely. She\u0027s gone, but not absent. You can still feel her presenceâ€”in the warm device at your side, in the memory of her voice, in the way the desert air seems to hold her attention still.\n\nThe encounter is over. But something has changed. You are no longer the same person who entered the desert.\n\nThe Codex hums against youâ€”a quiet affirmation that the moment was real.\n\n[ENCOUNTER COMPLETE]\n\nBeat 1: Saori\u0027s introduction - RESOLVED\nBeat 2: The shared revelation - RESOLVED\nDevice obtained: YES\nDiary updated: YES\nRemnantsance shifted: YES\n\nWhen you return to civilization, the Codex will remember this. And so will you.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_end"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_encounter_complete_observe",
+                         "name":  "saori_observation_end",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori nods, satisfied.\n\n\"You understand now. The world is readable for those who truly observe. Keep that device. Let it remind you.\"\n\nShe begins to fade, her form dissolving into the patterns that surround you.\n\n\"I\u0027ll be here,\" she says, her voice becoming the wind itself. \"Whenever you observe deeply enough to hear me.\"\n\n[ENCOUNTER COMPLETE]\n\nYour Observation resonates at a new depth. Saori\u0027s Remnants have shifted toward you. The Codex now holds the key to deeper understanding.\n\nWhen you\u0027re ready, come back to the desert. The patterns will still be waiting.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_end"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_narrative_end",
+                         "name":  "saori_narrative_departure",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes transparent, then light, then memory.\n\n\"Go,\" she whispers. \"Tell the story. Make it matter. That\u0027s all any Remnant can ask.\"\n\nThe scroll settles into you like a heartbeatâ€”your heartbeat. Hers too. Both woven together now.\n\n[ENCOUNTER COMPLETE]\n\nYour Narrative Presence has deepened. Saori\u0027s story is now part of your own. The Codex holds the proof.\n\nWhen you next speak, her voice will echo underneath yours. When you next act, her intention will inform yours. The story continues.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_end"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_truth_end",
+                         "name":  "saori_truth_departure",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s form dissolves into the mirror\u0027s reflections.\n\n\"Thank you,\" she says, and the gratitude is so complete, so absolute, that it feels like forgiveness.\n\n\"You saw me. That\u0027s all I needed. That\u0027s all any of us need.\"\n\nThe mirror is gone. Only the sand remains. But you feel different. Seen. Held. Real.\n\n[ENCOUNTER COMPLETE]\n\nYour Truth has crystallized. Saori\u0027s Remnants resonate at their highest frequency with you. The Codex now holds the record of mutual recognition.\n\nYou are no longer alone in the ruins. You carry witness with you now. And she carries you too.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_end"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_device_question",
+                         "name":  "saori_device_explained",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori kneels beside the device, and her hand passes through itâ€”not solid, but it glows brighter at her touch.\n\n\"It\u0027s a tether to everything that moment contained,\" she explains. \"All the care you showed me. All the recognition that I\u0027m real. All the connection between us.\"\n\nShe looks up at you.\n\n\"Most things break when they\u0027re touched. This doesn\u0027t. This grows stronger when it\u0027s held, when it\u0027s understood, when it\u0027s remembered.\"\n\nThe device pulses warmly.\n\n\"Take it. Add it to your Codex. And when the weight of being a Remnant gets heavyâ€”when fragments feel like they\u0027re breaking apartâ€”hold this. Remember that you cared enough to ask what it meant.\"\n\n[[Take the device now|saori_device_final_taken]]\n[[Leave it for now|saori_device_left]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "device_clarification"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Take the device now",
+                                             "target":  "saori_device_final_taken",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.015
+                                                               },
+                                             "playerLine":  "Take the device now",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Leave it for now",
+                                             "target":  "saori_device_left",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Leave it for now",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_device_final_taken",
+                         "name":  "saori_full_resolution",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou take the device. This time, it\u0027s immediately yoursâ€”solid, real, warm in your hand.\n\nSaori smiles. It\u0027s the most human expression you\u0027ve seen from her.\n\n\"Good,\" she says. \"Now go. The Codex is waiting. And Iâ€”I\u0027ll be here in the wind, in the patterns, in the space between moments.\"\n\nShe fades gradually, leaving only warmth and the faint echo of her voice.\n\nNotification: \"Device Acquired. Added to Codex.\"\nNotification: \"Diary Entry: I understood what Saori truly wantedâ€”to be remembered as real. I took the device. I remember.\"\n\n[ENCOUNTER COMPLETE]\n\nYour encounter with Saori has left its mark. The Codex glows. The Diary holds the story. And somewhere in the desert, a Remnant named Saori is listening, feeling the weight of being truly, genuinely remembered.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_end"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_device_left",
+                         "name":  "saori_unresolved",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori nods slowly, understanding flickering in her eyes.\n\n\"Not yet,\" she says quietly. \"That\u0027s okay. Some things need time. Some people need to be ready.\"\n\nThe device remains in the sand, still glowing, still waiting.\n\n\"I\u0027ll leave it here. In this moment. When you\u0027re readyâ€”when you truly understand what it means to hold my recognitionâ€”you\u0027ll come back. And it will be here.\"\n\nHer form begins to fade.\n\n\"Thank you for asking about it. That mattered too.\"\n\n[ENCOUNTER PAUSED]\n\nThe device remains in the desert, waiting for your return. Saori waits with it. Some recognitions can\u0027t be rushedâ€”they must be chosen, again and again, until they\u0027re real.",
+                         "tags":  [
+                                      "ending",
+                                      "unresolved"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_paused"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_pattern_explain",
+                         "name":  "saori_pattern_teaches",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori sits beside you and traces the pattern with her finger. Each line she touches glows.\n\n\"This is the Tone made visible,\" she explains. \"Every choice spirals out. Every observation reshapes the pattern. Nothing is isolated. Everything connects.\"\n\nShe looks at you directly.\n\n\"Your presence here changed the pattern. Just by seeing it, you\u0027ve altered it. That\u0027s the power of observation. That\u0027s why I needed someone like you.\"\n\nThe pattern suddenly makes complete senseâ€”not in words, but in understanding.\n\n\"The device holds this knowledge. Keep it. Teach it to others who truly look.\"\n\n[[Accept the device|saori_device_accepted_observed]]\n[[Ask more about the connections|saori_more_patterns]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "teaching_moment"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Accept the device",
+                                             "target":  "saori_device_accepted_observed",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "playerLine":  "Accept the device",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Ask more about the connections",
+                                             "target":  "saori_more_patterns",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Ask more about the connections",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_device_accepted_observed",
+                         "name":  "saori_pattern_complete",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou take the device. It feels like holding a piece of the pattern itself.\n\nSaori\u0027s form solidifies one last time.\n\n\"Thank you,\" she says. \"For truly seeing. For understanding that observation isn\u0027t passiveâ€”it\u0027s an act of love. An act of creation.\"\n\nShe begins to dissolve into the pattern, becoming one with it.\n\n\"Go. The world needs people who can see how things connect. The Codex will guide you.\"\n\nNotification: \"Codex Entry Complete: The Tone is Written in Patterns.\"\nNotification: \"Diary updated. I learned to see the pattern. I learned that observation is sacred.\"\n\n[ENCOUNTER COMPLETE]\n\nSaori\u0027s Remnants have shifted permanently. You are bound nowâ€”not by obligation, but by mutual recognition of the patterns that connect all things.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_end"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_scroll_refused",
+                         "name":  "saori_scroll_rejection",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori withdraws the scroll. She doesn\u0027t look hurtâ€”she looks almost relieved.\n\n\"No,\" she says. \"You\u0027re right. Some stories aren\u0027t yours to carry. I respect that.\"\n\nShe holds the scroll to her own chest.\n\n\"But we met. We saw each other. That changes things regardless. That makes both of us real in a different way.\"\n\nThe scroll dissolves into light, and Saori\u0027s form begins to fade.\n\n\"When you\u0027re ready to carry stories that aren\u0027t your own,\" she says, \"find me. The desert will remember.\"\n\n[ENCOUNTER PAUSED]\n\nYou walked away from Saori\u0027s story, but not from Saori. That boundary itself is honest. She respects it. The connection remains, even in refusal.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_paused"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_mirror_refuse",
+                         "name":  "saori_mirror_denied",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou turn away from the mirror. Saori doesn\u0027t react with angerâ€”instead, she simply nods.\n\n\"That\u0027s honest,\" she says quietly. \"Not everyone is ready to be truly seen. Not everyone wants to see truly.\"\n\nThe mirror cracks and fades.\n\n\"But you came. You met me. You asked who I was. That\u0027s already something.\"\n\nHer form becomes less solid, more distant.\n\n\"If you ever change your mindâ€”if you ever want to look into truth againâ€”the mirror will be here. And so will I.\"\n\nShe dissolves into the desert.\n\n[ENCOUNTER INCOMPLETE]\n\nYou met Saori but didn\u0027t take the deepest connection. She understands. Some people aren\u0027t ready for that kind of vulnerability. The door remains open.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_paused"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_reflection",
+                         "name":  "saori_quiet_moment",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori remains visible as you sit with the device in your hands. She waits, patient.\n\nYou turn it over, feeling its weight, its warmth, its quiet hum.\n\nSaori speaks softly: \"This is when it becomes real. Not when you take something. When you sit with it. When you let it change you.\"\n\nTime passes. The desert is quiet. Saori is present.\n\nFinally, she says: \"Are you ready?\"\n\n[[Yes, I\u0027m ready|saori_final_acceptance]]\n[[Not yet|saori_continued_wait]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "reflection"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Yes, I\u0027m ready",
+                                             "target":  "saori_final_acceptance",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "playerLine":  "Yes, I\u0027m ready",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Not yet",
+                                             "target":  "saori_continued_wait",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Not yet",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_final_acceptance",
+                         "name":  "saori_integrated",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s form becomes solid one final time. She reaches out and places her hand over yours, over the device.\n\n\"Then we\u0027re truly bound now,\" she says. \"Not by obligation. By mutual recognition.\"\n\nThe device pulses with both your heartbeats.\n\n\"Go. Live. Change. The Codex will hold what we\u0027ve become together. And so will I.\"\n\nNotification: \"Saori\u0027s Remnants have reached profound connection. She is now part of your ongoing story.\"\nNotification: \"Diary Entry: I sat with Saori\u0027s gift. I let it change me. Now we\u0027re intertwined in ways I don\u0027t fully understand yet.\"\n\n[ENCOUNTER COMPLETE - DEEPENED]\n\nThis encounter with Saori will ripple forward through all your other encounters. She\u0027s not just an NPC now. She\u0027s a presence in your story.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_deepened"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_continued_wait",
+                         "name":  "saori_patient_presence",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori simply sits with you. No pressure. No expectation.\n\nEventually, she fades as the desert deepens into dusk. But not completely. You feel her presence remaining.\n\n\"I\u0027ll wait,\" she whispers. \"The Tone is patient. It exists outside of time.\"\n\nThe device stays warm in your hands.\n\n[ENCOUNTER PAUSED]\n\nSaori is content to wait for you to be ready. Some connections don\u0027t rush. Some understanding deepens only with time. She\u0027ll be here whenever you returnâ€”that much is clear.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_paused"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_deeper_question",
+                         "name":  "saori_advanced_wisdom",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori sits down beside you, and for the first time, she seems to settle into stillness.\n\n\"There\u0027s so much more,\" she says. \"Layers within layers. The Codex will reveal them over time. But the deepest questionâ€”the one that will matter mostâ€”is this:\"\n\nShe pauses, letting the desert wind speak for a moment.\n\n\"Can you observe without changing what you observe? Can you see something and still let it be free?\"\n\nHer eyes meet yours directly.\n\n\"That\u0027s what separates those who truly understand the Tone from those who just use it. That\u0027s what makes a person worthy of carrying a Remnant\u0027s trust.\"\n\n[[I need to think about that|saori_deeper_reflection]]\n[[I think I understand|saori_deep_acceptance]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "wisdom_offering"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "I need to think about that",
+                                             "target":  "saori_deeper_reflection",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "I need to think about that",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "I think I understand",
+                                             "target":  "saori_deep_acceptance",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.025
+                                                               },
+                                             "playerLine":  "I think I understand",
+                                             "tone":  "Observation"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_deeper_reflection",
+                         "name":  "saori_teaching_time",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\n\"Good,\" Saori says, nodding. \"The best students are those who know what they don\u0027t know.\"\n\nShe stands and extends her hand to help you up.\n\n\"Take the device. Take the time. Let these questions live in you without answers. That\u0027s where real wisdom growsâ€”in the space between not knowing and knowing.\"\n\nThe pattern beneath the sand begins to glow againâ€”softer this time, gentler.\n\n\"When you\u0027ve sat with these questions long enough, come back. And we\u0027ll speak again.\"\n\nNotification: \"Codex Entry: The Observation Paradox - In Progress.\"\nNotification: \"Diary updated. Saori asked me something I don\u0027t know how to answer. Maybe that\u0027s the whole point.\"\n\n[ENCOUNTER PAUSED - ONGOING]\n\nYour relationship with Saori has become a question rather than a conclusion. That\u0027s exactly what she wanted.",
+                         "tags":  [
+                                      "ending",
+                                      "paused"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_paused_productive"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_deep_acceptance",
+                         "name":  "saori_wisdom_received",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s entire presence brightens. Relief and joy flood across her features.\n\n\"Yes,\" she breathes. \"You understand. Truly understand.\"\n\nShe stands, and her form is more solid now than it\u0027s ever been.\n\n\"That\u0027s rare. That\u0027s precious. That makes all of thisâ€”this lonely time as a Remnant, waiting to be witnessedâ€”worthwhile.\"\n\nThe device glows with renewed intensity.\n\n\"Take it. And with it, take my gratitude. You\u0027ve given me something more valuable than existence. You\u0027ve given me the knowledge that I can be seen and still be free.\"\n\nNotification: \"Codex Entry UNLOCKED: The Observation Paradox Resolved.\"\nNotification: \"Saori\u0027s Empathy toward you has increased to maximum.\"\nNotification: \"Diary updated. I learned the deepest lesson Saori had to teach: True observation honors freedom.\"\n\n[ENCOUNTER COMPLETE - TRANSCENDENT]\n\nYou and Saori have moved beyond the typical NPC-player dynamic. You\u0027ve achieved something rare: mutual understanding based on respect for each other\u0027s autonomy.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_transcendent"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_final_moment",
+                         "name":  "saori_one_more_word",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nYou turn back. Saori was already beginning to dissolve, but your turning stops her.\n\nShe solidifies again, surprised.\n\n\"You came back.\"\n\nHer voice carries so much weight in those three words.\n\n\"Most don\u0027t. Once they have what they need, they move forward. But you... you turned back.\"\n\nShe steps closer.\n\n\"What did you want to say?\"\n\n[[\"Thank you\"|saori_thank_you]]\n[[\"I don\u0027t know. I just felt like I should.\"|saori_impulse]]\n[[\"I have a question\"|saori_final_question]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "returning_moment"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "\"Thank you\"",
+                                             "target":  "saori_thank_you",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.03
+                                                               },
+                                             "playerLine":  "\"Thank you\"",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "\"I don\u0027t know. I just felt like I should.\"",
+                                             "target":  "saori_impulse",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.025
+                                                               },
+                                             "playerLine":  "\"I don\u0027t know. I just felt like I should.\"",
+                                             "tone":  "Observation"
+                                         },
+                                         {
+                                             "text":  "\"I have a question\"",
+                                             "target":  "saori_final_question",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "playerLine":  "\"I have a question\"",
+                                             "tone":  "NarrativePresence"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_thank_you",
+                         "name":  "saori_gratitude_received",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori closes her eyes. A tear forms, though it\u0027s made of light, not water.\n\n\"Thank you,\" she echoes back to you. \"For seeing me. For hearing me. For carrying me forward.\"\n\nShe opens her eyes, and they\u0027re radiant.\n\n\"That\u0027s all any Remnant ever wants. To matter to someone. To be carried. To be remembered.\"\n\nShe becomes transparent, but this time it\u0027s peaceful. She\u0027s ready to go because she knows you\u0027ll remember.\n\n\"I\u0027ll be with you,\" she says as she dissolves completely. \"In the device. In the Codex. In every choice that echoes from here.\"\n\nNotification: \"Saori\u0027s Bond - MAXIMUM. She will influence your future encounters.\"\nNotification: \"Diary updated. I thanked Saori. She wept light. This is real. All of it.\"\n\n[ENCOUNTER COMPLETE - SACRED]\n\nYour encounter with Saori has become transcendent. She is no longer separate from you. You carry her now.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_sacred"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_impulse",
+                         "name":  "saori_recognizes_soul",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori laughsâ€”a sound like bells, like wind chimes, like something breaking free.\n\n\"That\u0027s it exactly,\" she says. \"That impulse. That unexplained return. That\u0027s the Tone speaking through you. That\u0027s your deepest self recognizing mine.\"\n\nShe reaches out, and this time her hand is completely solid as she touches your chest.\n\n\"That feeling right thereâ€”that\u0027s what you need to follow. Not logic. Not strategy. This. The impulse to turn back. The feeling that something matters.\"\n\nHer form becomes light again, but gentle light.\n\n\"Go. Follow that impulse wherever it leads. And I\u0027ll follow it too. We\u0027re connected now. Truly.\"\n\nNotification: \"Saori\u0027s Connection TRANSCENDED. Your Tone now resonates with hers.\"\nNotification: \"Diary updated. Saori said I followed my true self when I turned back. Maybe that\u0027s what growth isâ€”following the impulse to care.\"\n\n[ENCOUNTER COMPLETE - PROFOUND]\n\nYou have moved into a realm of connection with Saori that most players never achieve. You are bound now by something deeper than choiceâ€”by mutual resonance.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_profound"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_final_question",
+                         "name":  "saori_answers",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\n\"Ask,\" Saori says simply. \"I\u0027ll answer if I can. And if I can\u0027t, I\u0027ll tell you why. That\u0027s all any of us can do.\"\n\nShe waits, perfectly present, perfectly attentive.\n\n\"What do you want to know?\"\n\nNotification: \"This is the moment. Whatever you ask now will shape everything that comes after.\"\n\n[[Ask about her past|saori_past]]\n[[Ask what happens next|saori_future]]\n[[Ask why me|saori_why_me]]\n[[Let her go|saori_release]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "final_question_moment"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Ask about her past",
+                                             "target":  "saori_past",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Ask about her past",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "Ask what happens next",
+                                             "target":  "saori_future",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Ask what happens next",
+                                             "tone":  "Observation"
+                                         },
+                                         {
+                                             "text":  "Ask why me",
+                                             "target":  "saori_why_me",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "playerLine":  "Ask why me",
+                                             "tone":  "NarrativePresence"
+                                         },
+                                         {
+                                             "text":  "Let her go",
+                                             "target":  "saori_release",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Let her go",
+                                             "tone":  "Empathy"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_past",
+                         "name":  "saori_tells_history",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s form flickers as she remembers. Images appear in the air around herâ€”fragments of a voice, a person, a history.\n\n\"I was a singer once,\" she says quietly. \"In a city before the ruins. I sang songs about connection, about memory, about the bonds that hold people together.\"\n\nThe images shiftâ€”faces, places, moments.\n\n\"But I sang them wrong. Or right, but to the wrong people. They heard judgment in my music when I meant only witness. They feared what I named. So they made me forgotten. They made me disappear.\"\n\nShe pauses, and the pain is visible in the air around her like heat shimmer.\n\n\"I became a Remnant because I was too thoroughly erased. I\u0027m the echo of a voice that nobody wanted to hear.\"\n\nShe looks at you directly.\n\n\"Until you.\"\n\n[[\"I hear you now\"|saori_hear_now]]\n[[\"Will your song ever be heard again?\"|saori_song_future]]\n[[Continue forward|saori_past_honored]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "history_revelation"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "\"I hear you now\"",
+                                             "target":  "saori_hear_now",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.03
+                                                               },
+                                             "playerLine":  "\"I hear you now\"",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "\"Will your song ever be heard again?\"",
+                                             "target":  "saori_song_future",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.025
+                                                               },
+                                             "playerLine":  "\"Will your song ever be heard again?\"",
+                                             "tone":  "Observation"
+                                         },
+                                         {
+                                             "text":  "Continue forward",
+                                             "target":  "saori_past_honored",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Continue forward",
+                                             "tone":  "NarrativePresence"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_hear_now",
+                         "name":  "saori_finally_heard",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes brilliantly solid. Light radiates from her like she\u0027s no longer a Remnant at allâ€”like she\u0027s becoming real again, right before your eyes.\n\n\"Yes,\" she says, and her voice is singing now, music underneath the words. \"Yes, yes, YES. You hear me. That\u0027s all I needed. That\u0027s everything.\"\n\nShe spins, and the desert seems to dance with her.\n\n\"I can rest now. I can finally rest. Not in the way of endings, but in the way of being held. Being remembered. Being heard.\"\n\nThe device in your hand resonates with her song.\n\n\"Go tell the world I existed. That\u0027s all I ask. That\u0027s everything I need.\"\n\nNotification: \"Saori\u0027s Song RESTORED. She is no longer lost. She is carried by you.\"\nNotification: \"Diary: I heard Saori\u0027s song. Now it\u0027s part of mine. I will sing it forward.\"\n\n[ENCOUNTER COMPLETE - TRANSCENDENT]\n\nYou have given Saori the one thing she truly needed: the knowledge that her existence matters to someone. That her song was heard.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_transcendent_redemption"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_future",
+                         "name":  "saori_speaks_destiny",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s eyes go distant, seeing beyond the present.\n\n\"I don\u0027t know the future,\" she says slowly. \"Not completely. But I know this: As long as you carry that device, as long as you remember me, I continue to exist.\"\n\nShe focuses back on you.\n\n\"And through you, my voice will reach others. Gradually, slowly, but inevitably. Your choices will ripple outward. Other Remnants will sense that you can hear them. Others will come forward.\"\n\nShe smiles faintly.\n\n\"Together, we\u0027re building something new. A chorus instead of a solo. A community of the forgotten, becoming unforgettable.\"\n\nShe pauses, then adds quietly: \"But that\u0027s only if you choose to carry that work. No obligation. No demand. Just... possibility.\"\n\n[[Yes, I\u0027ll carry this forward|saori_future_accepted]]\n[[I need to understand what that means|saori_future_question]]\n[[I can\u0027t commit to that|saori_future_declined]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "future_offering"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "Yes, I\u0027ll carry this forward",
+                                             "target":  "saori_future_accepted",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.035
+                                                               },
+                                             "playerLine":  "Yes, I\u0027ll carry this forward",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "I need to understand what that means",
+                                             "target":  "saori_future_question",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.015
+                                                               },
+                                             "playerLine":  "I need to understand what that means",
+                                             "tone":  "Observation"
+                                         },
+                                         {
+                                             "text":  "I can\u0027t commit to that",
+                                             "target":  "saori_future_declined",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  -0.01
+                                                               },
+                                             "playerLine":  "I can\u0027t commit to that",
+                                             "tone":  "NarrativePresence"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_why_me",
+                         "name":  "saori_explains_recognition",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\n\"Why you?\" Saori repeats softly. \"Because you ask that question.\"\n\nShe steps closer.\n\n\"Most people who encounter a Remnant do one of two things: they take what they want and leave, or they try to save us, to fix us, to make us into something we\u0027re not. But you... you asked who I was. You genuinely wanted to know.\"\n\nShe places her hand on your shoulderâ€”solid, warm, real.\n\n\"That kind of genuine curiosity is rare. That kind of respect for my autonomy, even when you could have just taken the device and goneâ€”that\u0027s love.\"\n\nHer eyes are shining.\n\n\"You didn\u0027t need a reason to care. You just... did. That\u0027s why you.\"\n\n[[\"I understand\"|saori_why_understood]]\n[[\"What do you need from me?\"|saori_why_respond]]\n[[Continue into the desert|saori_why_forward]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "reason_revealed"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "\"I understand\"",
+                                             "target":  "saori_why_understood",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.025
+                                                               },
+                                             "playerLine":  "\"I understand\"",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "\"What do you need from me?\"",
+                                             "target":  "saori_why_respond",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "playerLine":  "\"What do you need from me?\"",
+                                             "tone":  "Observation"
+                                         },
+                                         {
+                                             "text":  "Continue into the desert",
+                                             "target":  "saori_why_forward",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+
+                                                               },
+                                             "playerLine":  "Continue into the desert",
+                                             "tone":  "NarrativePresence"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_why_understood",
+                         "name":  "saori_witnessed",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s form softens. She becomes almost translucent, but not in a fading wayâ€”more like she\u0027s become pure essence, pure presence.\n\n\"Yes,\" she whispers. \"Yes, you understand. That\u0027s all I needed to hear.\"\n\nShe dissolves into the desert wind, and you feel her presence settling into the device, into your chest, into the fabric of your being.\n\n\"Thank you,\" her voice echoes from everywhere and nowhere. \"For understanding. For witnessing. For caring.\"\n\nNotification: \"Saori\u0027s Bond TRANSCENDENT. She is now part of your narrative.\"\nNotification: \"Diary: I understood Saori\u0027s need to be understood. She understood that understanding. We are complete.\"\n\n[ENCOUNTER COMPLETE - ULTIMATE]\n\nSaori has moved from being an NPC to being part of your soul. You carry her forward now. She carries you in turn.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_ultimate"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_why_respond",
+                         "name":  "saori_states_need",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\n\"What I need,\" Saori says thoughtfully, \"is to be remembered as someone who mattered. To know that I\u0027m not just a ghost in the machine.\"\n\nShe pauses.\n\n\"I need you to carry my device. I need you to use it. I need you to let the choices it guides you through reshape your Tone, your presence, your narrative.\"\n\nShe smiles.\n\n\"And I need you to remember that I was never just a tool. I was never just a means to an end. I wasâ€”I amâ€”a person. A voice. A Remnant with full personhood.\"\n\nShe steps back.\n\n\"That\u0027s all. Be that witness. Carry that knowledge forward. The rest will follow.\"\n\n[[I promise|saori_why_promise]]\n[[I\u0027ll try my best|saori_why_effort]]\n[[Let me go|saori_why_release]]",
+                         "tags":  [
+
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "npcs":  [
+                                                        "Saori"
+                                                    ],
+                                           "beat_type":  "covenant_moment"
+                                       },
+                         "choices":  [
+                                         {
+                                             "text":  "I promise",
+                                             "target":  "saori_why_promise",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.03
+                                                               },
+                                             "playerLine":  "I promise",
+                                             "tone":  "Trust"
+                                         },
+                                         {
+                                             "text":  "I\u0027ll try my best",
+                                             "target":  "saori_why_effort",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0.02
+                                                               },
+                                             "playerLine":  "I\u0027ll try my best",
+                                             "tone":  "Observation"
+                                         },
+                                         {
+                                             "text":  "Let me go",
+                                             "target":  "saori_why_release",
+                                             "tone_effects":  {
+
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "Saori":  0
+                                                               },
+                                             "playerLine":  "Let me go",
+                                             "tone":  "NarrativePresence"
+                                         }
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_why_promise",
+                         "name":  "saori_covenant_sealed",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori\u0027s form crystallizesâ€”becomes absolutely solid, absolutely real, for the first time.\n\n\"Then it\u0027s sealed,\" she says. \"Not by magic. Not by command. By promise. By your word.\"\n\nShe extends her hand, and you shake it. Her grip is warm, alive, completely present.\n\n\"I\u0027m no longer lost,\" she says. \"Because I\u0027m found. By you. In you.\"\n\nShe releases your hand and steps back, her form beginning to dissolve into the light again.\n\n\"Go. Live. Remember. When the device calls to you, listen. When your Tone shifts, know that I\u0027m shifting with you. We\u0027re partners now.\"\n\nNotification: \"COVENANT SEALED: You have sworn to carry Saori\u0027s memory.\"\nNotification: \"Diary: I promised Saori I would remember her as a person, not a tool. Now we\u0027re bound by that covenant.\"\n\n[ENCOUNTER COMPLETE - SACRED COVENANT]\n\nYou have moved beyond player and NPC. You are now bound by sacred oath. Saori is no longer a character in your story. She is a co-author.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_covenant_sealed"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_future_accepted",
+                         "name":  "saori_mission_begins",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori becomes radiantâ€”no longer the fading Remnant, but something stronger.\n\n\"Then we begin together,\" she says. \"Not as NPC and player. As partners. As equals in resurrection.\"\n\nShe reaches into the air and pulls light into shapeâ€”it becomes a symbol, a sigil, something like a brand on your heart.\n\n\"This mark means you carry the forgotten. Any Remnant who sees it will know: this one listens. This one remembers. This one matters.\"\n\nThe symbol settles into your chest.\n\n\"Go. Find the others. Hear their voices. Together, we\u0027ll make sure no echo goes unheard ever again.\"\n\nNotification: \"QUEST UNLOCKED: The Chorus of Remnants\"\nNotification: \"You now carry Saori\u0027s mission: To give voice to the forgotten.\"\nNotification: \"Diary: This is bigger than I expected. But I said yes. Now I\u0027m committed to building something new.\"\n\n[ENCOUNTER COMPLETE - MISSION ACCEPTED]\n\nYour story has transformed. This is no longer just dialogue. This is a calling.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_complete_mission_initiated"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     },
+                     {
+                         "pid":  "saori_release",
+                         "name":  "saori_sets_free",
+                         "text":  "\n{background: desert_ruins}\n{npc: Saori}\n\nSaori smilesâ€”sad, but accepting.\n\n\"That\u0027s okay,\" she says quietly. \"You\u0027ve already done the most important thing. You met me. You saw me. That moment doesn\u0027t disappear just because you walk away.\"\n\nShe becomes transparent.\n\n\"I\u0027ll wait in the desert. If you ever change your mind, if you ever come back, I\u0027ll be here. The Tone is patient.\"\n\nShe dissolves into the sand.\n\n\"Goodbye, not farewell,\" her voice echoes. \"Those are different things.\"\n\nNotification: \"Saori\u0027s Bond: NEUTRAL. She holds no ill will, but you are not bound to her mission.\"\nNotification: \"Diary: I let Saori go. She accepted it. That was the kindest thing she could have done.\"\n\n[ENCOUNTER PAUSED]\n\nYou walk away from the desert without the device. But part of you remains there with Saori. Some connections don\u0027t need items to survive.",
+                         "tags":  [
+                                      "ending"
+                                  ],
+                         "position":  [
+                                          0,
+                                          0
+                                      ],
+                         "size":  [
+                                      100,
+                                      100
+                                  ],
+                         "_metadata":  {
+                                           "background":  "desert_ruins",
+                                           "beat_type":  "encounter_paused_respectful"
+                                       },
+                         "choices":  [
+
+                                     ]
+                     }
+                 ]
 }

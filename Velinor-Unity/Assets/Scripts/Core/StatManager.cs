@@ -1,612 +1,315 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine.Serialization;
+using System.Linq;
 
-/// <summary>
-/// ToneType: Player TONE stats (emotional/narrative resonance qualities)
-/// These represent the player's playstyle and choices throughout the narrative.
-/// </summary>
-public enum ToneType
-{
-    Truth,
-    Observation,
-    NarrativePresence,
-    Empathy
-}
+public enum ToneType { Trust, Observation, NarrativePresence, Empathy }
+public enum RemnantType { Resolve, Empathy, Memory, Nuance, Authority, Need, Trust, Skepticism }
 
-/// <summary>
-/// RemnantType: NPC REMNANTS stats (personality traits shaped by player choices)
-/// These are what NPCs are "made of" - fragments reshaped by the player's resonance.
-/// Range: 0.1 (recessive) to 0.9 (dominant), never at absolute extremes.
-/// </summary>
-public enum RemnantType
-{
-    Resolve,           // Firmness, conviction, backbone
-    Empathy,           // Emotional openness, compassion
-    Memory,            // Recall of past, context awareness
-    Nuance,            // Subtlety, shades of gray, complexity
-    Authority,         // Command presence, decisiveness
-    Need,              // Vulnerability, dependence, connection desire
-    Trust,             // Confidence in others
-    Skepticism         // Doubt, caution, suspicion
-}
-
-/// <summary>
-/// Remnants: Holds all 8 trait values for a single NPC.
-/// Serializable for JSON deserialization.
-/// </summary>
-[System.Serializable]
+[Serializable]
 public class Remnants
 {
-    public float resolve = 0.6f;
-    public float empathy = 0.7f;
-    public float memory = 0.6f;
-    public float nuance = 0.4f;
-    public float authority = 0.5f;
-    public float need = 0.5f;
-    public float trust = 0.7f;
-    public float skepticism = 0.2f;
+    public float resolve = 0.5f, empathy = 0.5f, memory = 0.5f, nuance = 0.5f;
+    public float authority = 0.5f, need = 0.5f, trust = 0.5f, skepticism = 0.5f;
 
-    public Remnants Clone()
-    {
-        return new Remnants
-        {
-            resolve = this.resolve,
-            empathy = this.empathy,
-            memory = this.memory,
-            nuance = this.nuance,
-            authority = this.authority,
-            need = this.need,
-            trust = this.trust,
-            skepticism = this.skepticism
-        };
-    }
-
-    public float Get(RemnantType type)
-    {
-        return type switch
-        {
-            RemnantType.Resolve => resolve,
-            RemnantType.Empathy => empathy,
-            RemnantType.Memory => memory,
-            RemnantType.Nuance => nuance,
-            RemnantType.Authority => authority,
-            RemnantType.Need => need,
-            RemnantType.Trust => trust,
-            RemnantType.Skepticism => skepticism,
-            _ => 0f
-        };
-    }
-
-    public void Set(RemnantType type, float value)
-    {
-        switch (type)
-        {
-            case RemnantType.Resolve: resolve = value; break;
-            case RemnantType.Empathy: empathy = value; break;
-            case RemnantType.Memory: memory = value; break;
-            case RemnantType.Nuance: nuance = value; break;
-            case RemnantType.Authority: authority = value; break;
-            case RemnantType.Need: need = value; break;
-            case RemnantType.Trust: trust = value; break;
-            case RemnantType.Skepticism: skepticism = value; break;
-        }
-    }
-}
-
-/// <summary>
-/// NpcProfile: Mirrors the structure from npc_profiles.json.
-/// Serializable for JSON deserialization.
-/// </summary>
-[System.Serializable]
-public class NpcProfile
-{
-    public string name;
-    public Remnants remnants;
-}
-
-/// <summary>
-/// EncounterRecord: Tracks a single dialogue choice in history.
-/// Mirrors the structure from npc_state.json history.
-/// </summary>
-[System.Serializable]
-public class EncounterRecord
-{
-    public int encounter;
-    public Dictionary<string, float> tone_effects;
-    public Dictionary<string, NpcProfile> npc_profiles;
-}
-
-/// <summary>
-/// NpcStateJson: Root structure for npc_state.json.
-/// Mirrors exactly what is loaded from disk.
-/// </summary>
-[System.Serializable]
-public class NpcStateJson
-{
-    public Dictionary<string, NpcProfile> npc_profiles;
-    public Dictionary<string, Dictionary<string, float>> influence_map;
-    public List<EncounterRecord> history;
-}
-
-/// <summary>
-/// StatManager (Singleton)
-/// 
-/// Core narrative simulation engine that manages:
-/// - Player TONE stats (player's playstyle)
-/// - NPC REMNANTS stats (NPC personalities shaped by choices)
-/// - Influence map (weighted social graph)
-/// - History of encounters
-/// 
-/// When player makes choices:
-/// 1. Tone effects update player TONE
-/// 2. TONE→REMNANTS correlation automatically adjusts all NPCs
-/// 3. NPC resonance applies direct changes to specific NPCs
-/// 4. Changes cascade through influence_map to connected NPCs
-/// 5. Encounter is logged to history
-/// </summary>
-public class StatManager : MonoBehaviour
-{
-    private static StatManager _instance;
-    public static StatManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindAnyObjectByType<StatManager>(FindObjectsInactive.Exclude);
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject("StatManager");
-                    _instance = go.AddComponent<StatManager>();
-                }
-            }
-            return _instance;
-        }
-    }
-
-    // Player TONE stats
-    private Dictionary<ToneType, float> playerTone = new Dictionary<ToneType, float>
-    {
-        { ToneType.Truth, 0f },
-        { ToneType.Observation, 0f },
-        { ToneType.NarrativePresence, 0f },
-        { ToneType.Empathy, 0f }
+    public float Get(RemnantType t) => t switch {
+        RemnantType.Resolve => resolve, RemnantType.Empathy => empathy, RemnantType.Memory => memory,
+        RemnantType.Nuance => nuance, RemnantType.Authority => authority, RemnantType.Need => need,
+        RemnantType.Trust => trust, RemnantType.Skepticism => skepticism, _ => 0f
     };
 
-    // NPC REMNANTS stats
+    public void Set(RemnantType t, float v) {
+        float val = Mathf.Clamp(v, 0.1f, 0.9f);
+        switch (t) {
+            case RemnantType.Resolve: resolve = val; break;
+            case RemnantType.Empathy: empathy = val; break;
+            case RemnantType.Memory: memory = val; break;
+            case RemnantType.Nuance: nuance = val; break;
+            case RemnantType.Authority: authority = val; break;
+            case RemnantType.Need: need = val; break;
+            case RemnantType.Trust: trust = val; break;
+            case RemnantType.Skepticism: skepticism = val; break;
+        }
+    }
+    public Remnants Clone() => (Remnants)this.MemberwiseClone();
+}
+
+[Serializable]
+public class NpcProfile 
+{ 
+    public string name; 
+    public int npcTier = 2;  // 1=Tier1 (0.03), 2=Tier2 (0.02), 3=Tier3 (0.01)
+    public Remnants remnants; 
+}
+
+public class StatManager : MonoBehaviour
+{
+    public static StatManager Instance { get; private set; }
+
+    // Player TONE properties synced with the playerTone dictionary
+    public float toneTrust { get => playerTone[ToneType.Trust]; set => playerTone[ToneType.Trust] = value; }
+    public float toneObservation { get => playerTone[ToneType.Observation]; set => playerTone[ToneType.Observation] = value; }
+    public float toneNarrativePresence { get => playerTone[ToneType.NarrativePresence]; set => playerTone[ToneType.NarrativePresence] = value; }
+    public float toneEmpathy { get => playerTone[ToneType.Empathy]; set => playerTone[ToneType.Empathy] = value; }
+
+    // Saori REMNANTS properties synced with npcRemnants dictionary
+    public float saoriTrust { get => GetSaoriRemnant(RemnantType.Trust); set => SetSaoriRemnant(RemnantType.Trust, value); }
+    public float saoriResolve { get => GetSaoriRemnant(RemnantType.Resolve); set => SetSaoriRemnant(RemnantType.Resolve, value); }
+    public float saoriSkepticism { get => GetSaoriRemnant(RemnantType.Skepticism); set => SetSaoriRemnant(RemnantType.Skepticism, value); }
+    public float saoriNuance { get => GetSaoriRemnant(RemnantType.Nuance); set => SetSaoriRemnant(RemnantType.Nuance, value); }
+    public float saoriMemory { get => GetSaoriRemnant(RemnantType.Memory); set => SetSaoriRemnant(RemnantType.Memory, value); }
+    public float saoriAuthority { get => GetSaoriRemnant(RemnantType.Authority); set => SetSaoriRemnant(RemnantType.Authority, value); }
+    public float saoriEmpathy { get => GetSaoriRemnant(RemnantType.Empathy); set => SetSaoriRemnant(RemnantType.Empathy, value); }
+    public float saoriNeed { get => GetSaoriRemnant(RemnantType.Need); set => SetSaoriRemnant(RemnantType.Need, value); }
+
+    private float GetSaoriRemnant(RemnantType t)
+    {
+        if (npcRemnants.TryGetValue("Saori", out var r)) return r.Get(t);
+        return 0.5f;
+    }
+
+    private void SetSaoriRemnant(RemnantType t, float val)
+    {
+        if (!npcRemnants.TryGetValue("Saori", out var r))
+        {
+            r = new Remnants();
+            npcRemnants["Saori"] = r;
+        }
+        r.Set(t, val);
+    }
+
+    private Dictionary<ToneType, float> playerTone = new Dictionary<ToneType, float> {
+        { ToneType.Trust, 0.5f }, { ToneType.Observation, 0.5f },
+        { ToneType.NarrativePresence, 0.5f }, { ToneType.Empathy, 0.5f }
+    };
     private Dictionary<string, Remnants> npcRemnants = new Dictionary<string, Remnants>();
-
-    // Influence map: NPC → { otherNPC: multiplier }
+    private Dictionary<string, int> npcTiers = new Dictionary<string, int>();  // NPC tier for drift magnitude
     private Dictionary<string, Dictionary<string, float>> influenceMap = new Dictionary<string, Dictionary<string, float>>();
+    private Dictionary<string, Dictionary<string, float>> cascadingRelationships = new Dictionary<string, Dictionary<string, float>>();
 
-    // Encounter history
-    private List<EncounterRecord> history = new List<EncounterRecord>();
-
-    // Current encounter counter
-    private int encounterCount = 0;
-
-    private bool stateLoaded = false;
+    [Serializable]
+    private class NpcStateJson
+    {
+        public Dictionary<string, NpcProfile> npc_profiles;
+        public Dictionary<string, Dictionary<string, float>> influence_map;
+    }
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+        if (Application.isPlaying) DontDestroyOnLoad(gameObject);
+        LoadInitialState();
+    }
+
+    private void LoadInitialState()
+    {
+        npcRemnants["Saori"] = new Remnants();
+        npcRemnants["Ravi"] = new Remnants();
+        npcRemnants["Nima"] = new Remnants();
+        
+        // Default to Tier 2
+        npcTiers["Saori"] = 1;
+        npcTiers["Ravi"] = 1;
+        npcTiers["Nima"] = 1;
+
+        TextAsset stateAsset = Resources.Load<TextAsset>("velinor/data/npc_state");
+        if (stateAsset != null)
         {
-            Destroy(gameObject);
+            try
+            {
+                var root = Newtonsoft.Json.JsonConvert.DeserializeObject<NpcStateJson>(stateAsset.text);
+                if (root != null)
+                {
+                    if (root.npc_profiles != null)
+                    {
+                        foreach (var kvp in root.npc_profiles)
+                        {
+                            if (kvp.Value != null && kvp.Value.remnants != null)
+                            {
+                                npcRemnants[kvp.Key] = kvp.Value.remnants;
+                                npcTiers[kvp.Key] = kvp.Value.npcTier;
+                            }
+                        }
+                    }
+                    if (root.influence_map != null)
+                    {
+                        influenceMap = root.influence_map;
+                    }
+                    Debug.Log($"[StatManager] Successfully loaded {npcRemnants.Count} NPC profiles and {influenceMap.Count} influence map nodes.");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[StatManager] Failed to deserialize npc_state: {e.Message}");
+            }
         }
         else
         {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.LogError("[StatManager] npc_state.json not found in Resources/velinor/data/npc_state");
         }
+        
+        LoadCascadingRelationships();
     }
 
-    private void Start()
+    public void ApplyTone(ToneType tone)
     {
-        // Automatically load NPC state from Resources on startup
-        if (!stateLoaded)
-        {
-            LoadStateFromResources();
-        }
+        AdjustPlayerTone(tone, 0.01f, "Saori");
     }
 
-    /// <summary>
-    /// Load complete NPC state from npc_state.json.
-    /// Initializes REMNANTS, influence map, and history.
-    /// </summary>
-    public void LoadStateFromJson(string path)
-    {
-        try
-        {
-            string json = System.IO.File.ReadAllText(path);
-            NpcStateJson stateJson = JsonUtility.FromJson<NpcStateJson>(json);
-
-            // Load NPC REMNANTS
-            npcRemnants.Clear();
-            foreach (var kvp in stateJson.npc_profiles)
-            {
-                npcRemnants[kvp.Key] = kvp.Value.remnants.Clone();
-            }
-
-            // Load influence map
-            influenceMap = stateJson.influence_map;
-
-            // Load history
-            history = stateJson.history ?? new List<EncounterRecord>();
-            encounterCount = history.Count;
-
-            Debug.Log($"[StatManager] Loaded state from {path}");
-            Debug.Log($"[StatManager] Loaded {npcRemnants.Count} NPC profiles");
-            Debug.Log($"[StatManager] Influence map has {influenceMap.Count} entries");
-            Debug.Log($"[StatManager] History has {history.Count} encounters");
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"[StatManager] Failed to load state from {path}: {ex.Message}");
-        }
-    }
-
-    /// <summary>
-    /// Load NPC state from Resources/velinor/data/npc_state.json.
-    /// Called automatically on Start() if state not already loaded.
-    /// </summary>
-    private void LoadStateFromResources()
-    {
-        try
-        {
-            string jsonPath = "velinor/data/npc_state";
-            TextAsset jsonAsset = Resources.Load<TextAsset>(jsonPath);
-
-            if (jsonAsset == null)
-            {
-                Debug.LogWarning($"[StatManager] Could not load NPC state from Resources/{jsonPath}.json - file not found");
-                Debug.LogWarning("[StatManager] DEBUGGING: Checking what's in Resources/velinor/data/...");
-                // List what we can actually find
-                TextAsset[] allAssets = Resources.LoadAll<TextAsset>("velinor/data");
-                Debug.LogWarning($"[StatManager] Found {allAssets.Length} TextAssets in velinor/data");
-                foreach (TextAsset asset in allAssets)
-                {
-                    Debug.LogWarning($"[StatManager]   - {asset.name}");
-                }
-                Debug.Log("[StatManager] Proceeding with empty state. Call LoadStateFromJson() with full path to load manually.");
-                stateLoaded = true;
-                return;
-            }
-
-            Debug.Log($"[StatManager] Loaded TextAsset: {jsonAsset.name}");
-            string jsonText = jsonAsset.text;
-            Debug.Log($"[StatManager] JSON text length: {jsonText.Length} characters");
-
-            NpcStateJson stateJson = JsonUtility.FromJson<NpcStateJson>(jsonText);
-
-            if (stateJson == null)
-            {
-                Debug.LogError("[StatManager] Failed to deserialize NPC state JSON");
-                stateLoaded = true;
-                return;
-            }
-
-            // Load NPC REMNANTS
-            npcRemnants.Clear();
-            foreach (var kvp in stateJson.npc_profiles)
-            {
-                npcRemnants[kvp.Key] = kvp.Value.remnants.Clone();
-            }
-
-            // Load influence map
-            influenceMap = stateJson.influence_map;
-
-            // Load history
-            history = stateJson.history ?? new List<EncounterRecord>();
-            encounterCount = history.Count;
-
-            stateLoaded = true;
-
-            Debug.Log($"[StatManager] Loaded NPC state from Resources/{jsonPath}");
-            Debug.Log($"[StatManager] Loaded {npcRemnants.Count} NPC profiles");
-            Debug.Log($"[StatManager] Influence map has {influenceMap.Count} entries");
-            Debug.Log($"[StatManager] History has {history.Count} encounters");
-        }
-        catch (System.Exception ex)
-        {
-            stateLoaded = true;
-            Debug.LogError($"[StatManager] Failed to load NPC state from Resources: {ex.Message}");
-        }
-    }
-
-    /// <summary>
-    /// Save current state to npc_state.json.
-    /// Includes all NPC REMNANTS, influence map, and history.
-    /// </summary>
-    public void SaveStateToJson(string path)
-    {
-        try
-        {
-            // Build save structure
-            var stateJson = new NpcStateJson
-            {
-                npc_profiles = new Dictionary<string, NpcProfile>(),
-                influence_map = influenceMap,
-                history = history
-            };
-
-            // Convert REMNANTS back to NpcProfile format
-            foreach (var kvp in npcRemnants)
-            {
-                stateJson.npc_profiles[kvp.Key] = new NpcProfile
-                {
-                    name = kvp.Key,
-                    remnants = kvp.Value.Clone()
-                };
-            }
-
-            string json = JsonUtility.ToJson(stateJson, true);
-            System.IO.File.WriteAllText(path, json);
-
-            Debug.Log($"[StatManager] Saved state to {path}");
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"[StatManager] Failed to save state to {path}: {ex.Message}");
-        }
-    }
-
-    /// <summary>
-    /// Adjust player TONE stat.
-    /// Automatically applies TONE→REMNANTS correlation to all NPCs.
-    /// 
-    /// Canonical correlation rules:
-    /// - Truth (T) → Trust ↑, Resolve ↑; Skepticism ↓
-    /// - Observation (O) → Nuance ↑, Memory ↑; Authority ↓
-    /// - Narrative Presence (N) → Authority ↑, Resolve ↑; Nuance ↓
-    /// - Empathy (E) → Empathy ↑, Need ↑; Resolve ↓
-    /// </summary>
     public void AdjustPlayerTone(ToneType tone, float amount, string activeNpcId)
     {
-        if (amount == 0) return;
-
-        // Update player TONE
-        playerTone[tone] += amount;
-        Debug.Log($"[StatManager] Player {tone} += {amount} (now {playerTone[tone]})");
-
-        // Apply TONE→REMNANTS correlation to ALL NPCs
-        ApplyToneToRemnantCorrelation(tone, amount);
-    }
-
-    /// <summary>
-    /// Apply TONE stat change to all NPC REMNANTS via correlation mapping.
-    /// This creates the "ripple effect" where player choices reshape all NPC personalities.
-    /// </summary>
-    private void ApplyToneToRemnantCorrelation(ToneType tone, float toneAmount)
-    {
-        foreach (var npcId in npcRemnants.Keys)
-        {
-            var changes = new Dictionary<RemnantType, float>();
-
-            switch (tone)
-            {
-                case ToneType.Truth:
-                    changes[RemnantType.Trust] = toneAmount;
-                    changes[RemnantType.Resolve] = toneAmount * 0.75f;
-                    changes[RemnantType.Skepticism] = -toneAmount * 0.5f;
+        playerTone[tone] = Mathf.Clamp01(playerTone[tone] + amount);
+        foreach (var npc in npcRemnants.Keys) {
+            // Use tier-based drift magnitude
+            float driftMagnitude = GetDriftMagnitudeForNpc(npc) * amount;
+            var r = npcRemnants[npc];
+            switch (tone) {
+                case ToneType.Trust:
+                    r.Set(RemnantType.Trust, r.trust + driftMagnitude);
+                    r.Set(RemnantType.Resolve, r.resolve + driftMagnitude);
+                    r.Set(RemnantType.Skepticism, r.skepticism - driftMagnitude);
                     break;
-
                 case ToneType.Observation:
-                    changes[RemnantType.Nuance] = toneAmount;
-                    changes[RemnantType.Memory] = toneAmount * 0.75f;
-                    changes[RemnantType.Authority] = -toneAmount * 0.5f;
+                    r.Set(RemnantType.Nuance, r.nuance + driftMagnitude);
+                    r.Set(RemnantType.Memory, r.memory + driftMagnitude);
+                    r.Set(RemnantType.Authority, r.authority - driftMagnitude);
                     break;
-
                 case ToneType.NarrativePresence:
-                    changes[RemnantType.Authority] = toneAmount;
-                    changes[RemnantType.Resolve] = toneAmount * 0.75f;
-                    changes[RemnantType.Nuance] = -toneAmount * 0.5f;
+                    r.Set(RemnantType.Authority, r.authority + driftMagnitude);
+                    r.Set(RemnantType.Resolve, r.resolve + driftMagnitude);
+                    r.Set(RemnantType.Nuance, r.nuance - driftMagnitude);
                     break;
-
                 case ToneType.Empathy:
-                    changes[RemnantType.Empathy] = toneAmount;
-                    changes[RemnantType.Need] = toneAmount * 0.75f;
-                    changes[RemnantType.Resolve] = -toneAmount * 0.5f;
+                    r.Set(RemnantType.Empathy, r.empathy + driftMagnitude);
+                    r.Set(RemnantType.Need, r.need + driftMagnitude);
+                    r.Set(RemnantType.Resolve, r.resolve - driftMagnitude);
                     break;
             }
-
-            // Apply correlation changes without cascading (avoid double-cascade)
-            if (changes.Count > 0)
-            {
-                ApplyRemnantChangesDirectly(npcId, changes);
-            }
+        }
+        
+        // After drift, apply cascading influence to connected NPCs
+        if (!string.IsNullOrEmpty(activeNpcId))
+        {
+            ApplyCascadingDrift(activeNpcId);
+            CheckThresholds(activeNpcId);
         }
     }
 
-    /// <summary>
-    /// Apply resonance changes to specific NPCs.
-    /// Converts resonance dict into REMNANTS changes.
-    /// Positive resonance increases Trust/Empathy.
-    /// Negative resonance increases Skepticism/decreases Trust.
-    /// Then cascades through influence_map.
-    /// </summary>
-    public void ApplyNpcResonance(string activeNpcId, Dictionary<string, float> resonanceDict)
+    public void ApplyNpcResonance(string npcId, Dictionary<string, float> resonance)
     {
-        foreach (var kvp in resonanceDict)
-        {
-            string targetNpcId = kvp.Key;
-            float resonanceAmount = kvp.Value;
-
-            if (resonanceAmount == 0) continue;
-
-            // Convert resonance to REMNANTS changes
-            var remnantChanges = new Dictionary<RemnantType, float>();
-
-            if (resonanceAmount > 0)
-            {
-                // Positive resonance: trust and openness
-                remnantChanges[RemnantType.Trust] = resonanceAmount;
-                remnantChanges[RemnantType.Empathy] = resonanceAmount * 0.3f;
-                remnantChanges[RemnantType.Skepticism] = -resonanceAmount * 0.2f;
-            }
-            else
-            {
-                // Negative resonance: distrust and caution
-                remnantChanges[RemnantType.Trust] = resonanceAmount;
-                remnantChanges[RemnantType.Skepticism] = -resonanceAmount * 0.3f;
-                remnantChanges[RemnantType.Empathy] = resonanceAmount * 0.2f;
-            }
-
-            Debug.Log($"[StatManager] Applying resonance to {targetNpcId}: {resonanceAmount}");
-            CascadeRemnantChanges(targetNpcId, remnantChanges);
-        }
-    }
-
-    /// <summary>
-    /// Cascade REMNANTS changes to target NPC and propagate through influence_map.
-    /// 
-    /// Flow:
-    /// 1. Apply changes directly to target NPC (clamped 0.1-0.9)
-    /// 2. For each NPC influenced by target, apply influence multiplier
-    /// 3. Recursively cascade to secondary NPCs
-    /// </summary>
-    public void CascadeRemnantChanges(string npcId, Dictionary<RemnantType, float> changes)
-    {
-        if (changes.Count == 0) return;
-        if (!npcRemnants.ContainsKey(npcId))
-        {
-            Debug.LogWarning($"[StatManager] NPC {npcId} not found in REMNANTS");
-            return;
-        }
-
-        Remnants remnants = npcRemnants[npcId];
-
-        // Apply direct changes to target NPC
-        foreach (var kvp in changes)
-        {
-            RemnantType traitType = kvp.Key;
-            float delta = kvp.Value;
-
-            float oldValue = remnants.Get(traitType);
-            float newValue = Mathf.Clamp(oldValue + delta, 0.1f, 0.9f);
-            remnants.Set(traitType, newValue);
-
-            Debug.Log($"[StatManager] {npcId}.{traitType}: {oldValue:F2} → {newValue:F2} (Δ {delta:F2})");
-        }
-
-        // Propagate to influenced NPCs through influence_map
-        if (influenceMap.ContainsKey(npcId))
-        {
-            foreach (var influencedKvp in influenceMap[npcId])
-            {
-                string influencedNpcId = influencedKvp.Key;
-                float multiplier = influencedKvp.Value;
-
-                if (!npcRemnants.ContainsKey(influencedNpcId))
-                    continue;
-
-                // Apply influence changes to influenced NPC
-                var influencedChanges = new Dictionary<RemnantType, float>();
-                foreach (var changeKvp in changes)
-                {
-                    // Apply multiplier to each change
-                    influencedChanges[changeKvp.Key] = changeKvp.Value * multiplier;
+        foreach (var kvp in resonance) {
+            string targetNpc = kvp.Key;
+            float amount = kvp.Value;
+            if (npcRemnants.TryGetValue(targetNpc, out var r)) {
+                r.Set(RemnantType.Trust, r.trust + amount);
+                if (influenceMap.TryGetValue(targetNpc, out var connections)) {
+                    foreach (var conn in connections) {
+                        string connectedNpc = conn.Key;
+                        float multiplier = conn.Value;
+                        if (npcRemnants.TryGetValue(connectedNpc, out var connRemnants)) {
+                            float cascadedAmount = amount * multiplier;
+                            connRemnants.Set(RemnantType.Trust, connRemnants.trust + cascadedAmount);
+                            Debug.Log($"[StatManager] Cascaded resonance shift from {targetNpc} to {connectedNpc}: {cascadedAmount:F4} (multiplier: {multiplier})");
+                        }
+                    }
                 }
-
-                Debug.Log($"[StatManager] Cascading from {npcId} to {influencedNpcId} (multiplier {multiplier})");
-                ApplyRemnantChangesDirectly(influencedNpcId, influencedChanges);
             }
         }
     }
 
-    /// <summary>
-    /// Apply REMNANTS changes directly without further cascading.
-    /// Used by correlation and direct influence application.
-    /// </summary>
-    private void ApplyRemnantChangesDirectly(string npcId, Dictionary<RemnantType, float> changes)
+    public float GetPlayerTone(ToneType tone) => playerTone[tone];
+    public Remnants GetNpcRemnants(string npcId) => npcRemnants.TryGetValue(npcId, out var r) ? r : null;
+    
+    private float GetDriftMagnitudeForNpc(string npcId)
     {
-        if (!npcRemnants.ContainsKey(npcId))
-            return;
-
-        Remnants remnants = npcRemnants[npcId];
-
-        foreach (var kvp in changes)
-        {
-            RemnantType traitType = kvp.Key;
-            float delta = kvp.Value;
-
-            float oldValue = remnants.Get(traitType);
-            float newValue = Mathf.Clamp(oldValue + delta, 0.1f, 0.9f);
-            remnants.Set(traitType, newValue);
-        }
-    }
-
-    /// <summary>
-    /// Log an encounter to history after a dialogue choice.
-    /// Matches the structure in npc_state.json history.
-    /// </summary>
-    public void LogEncounter(Dictionary<string, float> toneEffects)
-    {
-        encounterCount++;
-
-        // Snapshot current NPC profiles
-        var npcSnapshot = new Dictionary<string, NpcProfile>();
-        foreach (var kvp in npcRemnants)
-        {
-            npcSnapshot[kvp.Key] = new NpcProfile
-            {
-                name = kvp.Key,
-                remnants = kvp.Value.Clone()
-            };
-        }
-
-        var record = new EncounterRecord
-        {
-            encounter = encounterCount,
-            tone_effects = toneEffects,
-            npc_profiles = npcSnapshot
+        if (!npcTiers.TryGetValue(npcId, out int tier)) tier = 2;
+        return tier switch {
+            1 => 0.03f,
+            2 => 0.02f,
+            3 => 0.01f,
+            _ => 0.01f
         };
-
-        history.Add(record);
-        Debug.Log($"[StatManager] Encounter #{encounterCount} logged with {toneEffects.Count} tone effects");
     }
-
-    // ========== PUBLIC ACCESSORS ==========
-
-    public Dictionary<ToneType, float> GetPlayerTone()
+    
+    private void LoadCascadingRelationships()
     {
-        return new Dictionary<ToneType, float>(playerTone);
-    }
-
-    public float GetPlayerTone(ToneType tone)
-    {
-        return playerTone.ContainsKey(tone) ? playerTone[tone] : 0f;
-    }
-
-    public Dictionary<string, Remnants> GetNpcRemnants()
-    {
-        // Return deep copy to prevent external modification
-        var copy = new Dictionary<string, Remnants>();
-        foreach (var kvp in npcRemnants)
+        TextAsset cascadeAsset = Resources.Load<TextAsset>("velinor/data/cascading_relationships");
+        if (cascadeAsset != null)
         {
-            copy[kvp.Key] = kvp.Value.Clone();
+            try
+            {
+                cascadingRelationships = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, float>>>(cascadeAsset.text);
+                Debug.Log($"[StatManager] Loaded cascading relationships for {cascadingRelationships.Count} NPCs.");
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[StatManager] Failed to load cascading relationships: {e.Message}");
+                cascadingRelationships = new Dictionary<string, Dictionary<string, float>>();
+            }
         }
-        return copy;
+    }
+    
+    private void ApplyCascadingDrift(string interactedNpcName)
+    {
+        // Micro-drift: ±0.001f to connected NPCs
+        if (!cascadingRelationships.TryGetValue(interactedNpcName, out var connections)) return;
+        
+        foreach (var conn in connections)
+        {
+            string connectedNpc = conn.Key;
+            float amount = conn.Value * 0.001f;  // Cascading magnitude is always ±0.001
+            
+            if (npcRemnants.TryGetValue(connectedNpc, out var r))
+            {
+                r.Set(RemnantType.Trust, r.trust + amount);
+                Debug.Log($"[StatManager] Cascading drift: {interactedNpcName} influenced {connectedNpc} by {amount:F4}");
+            }
+        }
+    }
+    
+    private void CheckThresholds(string npcId)
+    {
+        if (npcId != "Nima") return;  // Only Nima has phase thresholds for now
+        
+        if (!npcRemnants.TryGetValue("Nima", out var nima)) return;
+        
+        // Phase 1: Guarded Grief (softening border)
+        if (!GameFlags.Get("nima_phase1_soften") && 
+            nima.skepticism <= 0.60f && nima.authority <= 0.60f && nima.nuance >= 0.67f)
+        {
+            GameFlags.Set("nima_phase1_soften", true);
+            Debug.Log("[StatManager] THRESHOLD: Nima Phase 1 - Guarded Grief (softening)");
+        }
+        
+        // Phase 2: Revelation (Ophina photo reveal)
+        if (!GameFlags.Get("nima_phase2_photo") && 
+            nima.skepticism <= 0.50f && nima.authority <= 0.40f && 
+            nima.memory >= 0.65f && nima.need >= 0.87f)
+        {
+            GameFlags.Set("nima_phase2_photo", true);
+            Debug.Log("[StatManager] THRESHOLD: Nima Phase 2 - Revelation (photo)");
+        }
+        
+        // Phase 3: Release (able to leave marketplace)
+        if (!GameFlags.Get("nima_phase3_release") && 
+            nima.resolve >= 0.85f && nima.trust >= 0.60f && 
+            nima.memory >= 0.70f && nima.skepticism <= 0.40f)
+        {
+            GameFlags.Set("nima_phase3_release", true);
+            Debug.Log("[StatManager] THRESHOLD: Nima Phase 3 - Release (marketplace exit)");
+        }
     }
 
-    public Remnants GetNpcRemnants(string npcId)
-    {
-        return npcRemnants.ContainsKey(npcId) ? npcRemnants[npcId].Clone() : null;
-    }
-
-    public Dictionary<string, Dictionary<string, float>> GetInfluenceMap()
-    {
-        return new Dictionary<string, Dictionary<string, float>>(influenceMap);
-    }
-
-    public List<EncounterRecord> GetHistory()
-    {
-        return new List<EncounterRecord>(history);
-    }
-
-    public int GetEncounterCount()
-    {
-        return encounterCount;
-    }
+    // History and logging placeholder
+    public void LogEncounter(Dictionary<string, float> effects) {}
 }
+
+// LEGACY STUBS
+public class PlayerStats : MonoBehaviour { public static PlayerStats Get() => null; public float GetRemnant(string s) => 0f; }
+public class NPCStats : MonoBehaviour { public float Resolve, Empathy, Memory, Nuance, Authority, Need, Trust, Skepticism; public float GetRemnant(string s) => 0f; }
+public class DialogueSegment { public string segmentId; public string npcLine; public bool completedByPlayer; public List<DialogueChoice> playerChoices; }
+public class DialogueGateEvaluator : MonoBehaviour { public void MarkSegmentComplete(string s) {} }
+public class MalrikDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) {} }
+public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) {} }
+namespace VelinorGame.Core { public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) {} } }

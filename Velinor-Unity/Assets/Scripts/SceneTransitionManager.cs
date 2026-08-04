@@ -66,7 +66,7 @@ public class SceneTransitionManager : MonoBehaviour
             }
             if (fadeCanvas == null)
             {
-                fadeCanvas = Object.FindFirstObjectByType<CanvasGroup>();
+                fadeCanvas = Object.FindAnyObjectByType<CanvasGroup>();
             }
         }
     }

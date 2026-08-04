@@ -1,4 +1,5 @@
 using UnityEngine;
+using Velinor.Core;
 
 public class SimpleNPC : MonoBehaviour
 {

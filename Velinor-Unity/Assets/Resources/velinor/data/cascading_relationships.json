@@ -1,0 +1,32 @@
+{
+    "Ravi": {
+        "Kaelen": 0.5,
+        "Saori": 0.3
+    },
+    "Nima": {
+        "Willy": 0.6,
+        "Saori": 0.4
+    },
+    "Saori": {
+        "Ravi": 0.4,
+        "Nima": 0.3
+    },
+    "Kaelen": {
+        "Ravi": 0.5
+    },
+    "Willy": {
+        "Nima": 0.5
+    },
+    "Elenya": {
+        "Malrik": 0.6,
+        "Sealina": 0.4
+    },
+    "Malrik": {
+        "Elenya": 0.5,
+        "Sealina": 0.3
+    },
+    "Sealina": {
+        "Elenya": 0.4,
+        "Malrik": 0.3
+    }
+}

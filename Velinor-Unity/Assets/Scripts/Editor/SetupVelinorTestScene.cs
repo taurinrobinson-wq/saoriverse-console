@@ -58,8 +58,8 @@ public class SetupVelinorTestScene
             "\n" +
             "💬 DIALOGUE:\n" +
             "  3 rounds of conversation with Ravi\n" +
-            "  4 TONE choices per round: (T)rust, (O)bservation, (N)arrative, (E)mpathy\n" +
-            "  Name starts as '???' - revealed on Narrative choice\n" +
+            "  4 TONE choices per round: (T)rust, (O)bservation, (N)arrative Presence, (E)mpathy\n" +
+            "  Name starts as '???' - revealed on NarrativePresence choice\n" +
             "  Each choice affects Ravi's REMNANTS stats\n" +
             "═══════════════════════════════════════════════════════════");
     }

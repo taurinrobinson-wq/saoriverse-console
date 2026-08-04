@@ -130,7 +130,7 @@ public class VelinorGameplaySceneSetup
 
         // ===== STEP 6: Create DialogueManager =====
         GameObject dialogueManagerGO = new GameObject("DialogueManager");
-        Velinor.Core.DialogueManager dm = dialogueManagerGO.AddComponent<Velinor.Core.DialogueManager>();
+        DialogueManager dm = dialogueManagerGO.AddComponent<DialogueManager>();
 
         // Create dialogue UI
         GameObject dialogueCanvasGO = new GameObject("DialogueCanvas");

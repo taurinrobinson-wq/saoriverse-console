@@ -1,6 +1,7 @@
 {
   "npc_profiles": {
     "Archivist Malrik": {
+      "npcTier": 3,
       "cluster": "Archive Network",
       "temporal_role": "Keeper of the Past",
       "domains": [
@@ -22,6 +23,7 @@
       "description": "Maintains the Archive, shows fragmented data chambers, records the collapse"
     },
     "High Seer Elenya": {
+      "npcTier": 3,
       "cluster": "Archive Network",
       "temporal_role": "Keeper of the Past",
       "domains": [
@@ -43,6 +45,7 @@
       "description": "Keeper of rituals, bridges Unopened Heart glyph, emotional practices"
     },
     "Sealina": {
+      "npcTier": 2,
       "cluster": "Archive Network",
       "temporal_role": "Keeper of the Past",
       "domains": [
@@ -63,6 +66,7 @@
       "description": "Carries songs of what was lost, teaches grief as remembrance"
     },
     "Lark": {
+      "npcTier": 2,
       "cluster": "Archive Network",
       "temporal_role": "Keeper of the Past",
       "domains": [
@@ -82,6 +86,7 @@
       "description": "Ritual keeper, maintains ceremonial practices"
     },
     "Nordia the Mourning Singer": {
+      "npcTier": 2,
       "cluster": "Archive Network",
       "temporal_role": "Keeper of the Past",
       "domains": [
@@ -102,6 +107,7 @@
       "description": "Makes grief audible, transforms loss into art and meaning"
     },
     "Ravi": {
+      "npcTier": 1,
       "cluster": "Present Circle",
       "temporal_role": "Present Dweller",
       "domains": [
@@ -121,6 +127,7 @@
       "description": "Grounded, embodied, teaches sensory presence"
     },
     "Nima": {
+      "npcTier": 1,
       "cluster": "Present Circle",
       "temporal_role": "Present Dweller",
       "domains": [
@@ -128,16 +135,16 @@
       ],
       "glyphs": 1,
       "remnants": {
-        "resolve": 0.65,
-        "empathy": 0.9,
-        "memory": 0.5,
-        "nuance": 0.6,
-        "authority": 0.45,
-        "need": 0.8,
-        "trust": 0.7,
-        "skepticism": 0.55
+        "resolve": 0.80,
+        "empathy": 0.60,
+        "memory": 0.60,
+        "nuance": 0.65,
+        "authority": 0.70,
+        "need": 0.85,
+        "trust": 0.40,
+        "skepticism": 0.75
       },
-      "description": "Sensitive to emotional undercurrents, unsure why"
+      "description": "Aggressive, distrustful, authoritative, guarded - masks vulnerability with demanding presence"
     },
     "Sera the Herb Novice": {
       "cluster": "Present Circle",
@@ -238,6 +245,7 @@
       "description": "Optimistic, trusting, extends capacity for joy"
     },
     "Kaelen the Suspected Thief": {
+      "npcTier": 1,
       "cluster": "Wound Weavers",
       "temporal_role": "Wound Bearer / Bridge",
       "domains": [
@@ -651,6 +659,7 @@
       "description": "Desert Widow from the Wound Weavers"
     },
     "Saori": {
+      "npcTier": 1,
       "cluster": "Archive Network",
       "temporal_role": "Oracle",
       "domains": [

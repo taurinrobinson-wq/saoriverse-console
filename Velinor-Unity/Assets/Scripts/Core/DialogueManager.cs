@@ -1,551 +1,343 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 /// <summary>
-/// DialogueManager: Singleton that manages story narrative progression and dialogue UI.
-/// 
-/// Responsibilities:
-/// - Load and parse story JSON (sample_story.json)
-/// - Display passages and render choices
-/// - Call StatManager to apply tone_effects and npc_resonance
-/// - Cascade changes through StatManager (no duplication)
-/// - Manage dialogue UI (single shared canvas)
-/// 
-/// Non-Responsibilities:
-/// - Does NOT store TONE or REMNANTS (StatManager owns this)
-/// - Does NOT store NPC state (StatManager owns this)
-/// - Does NOT simplify the narrative structure
-/// - Treats story JSON as authoritative source
+/// DialogueManager: Singleton that manages dynamic story narrative progression.
+/// Handles T/O/N/E choices, Shared Beats, System Triggers, and Data Hooks.
 /// </summary>
 public class DialogueManager : MonoBehaviour
 {
-    #region Nested JSON Serialization Classes
-    
-    /// <summary>Deserializes choice objects from story JSON.</summary>
-    [System.Serializable]
-    public class StringFloatEntry
-    {
-        public string key;
-        public float value;
-    }
+    #region JSON Data Structures
 
-    [System.Serializable]
-    public class StringFloatMap
+    [Serializable]
+    public class StringFloatEntry { public string key; public float value; }
+
+    [Serializable]
+    public class ToneResonanceMap
     {
         public List<StringFloatEntry> entries = new List<StringFloatEntry>();
-
         public Dictionary<string, float> ToDictionary()
         {
-            var result = new Dictionary<string, float>();
-            if (entries == null) return result;
-
-            foreach (var entry in entries)
-            {
-                if (entry == null || string.IsNullOrWhiteSpace(entry.key))
-                    continue;
-
-                result[entry.key] = entry.value;
-            }
-
-            return result;
+            var dict = new Dictionary<string, float>();
+            foreach (var e in entries) if (!string.IsNullOrEmpty(e.key)) dict[e.key] = e.value;
+            return dict;
         }
     }
 
-    /// <summary>Deserializes choice objects from story JSON.</summary>
-    [System.Serializable]
+    [Serializable]
     public class StoryChoice
     {
-        public string text;              // Choice button label
-        public string target;            // Next passage ID
-        public StringFloatMap tone_effects = new StringFloatMap();
-        public StringFloatMap npc_resonance = new StringFloatMap();
-        public string mark_story_beat;
-        public string system_trigger;
-        public string data_hook;
+        public ToneType tone;            // Explicit tone type (canonical)
+        public string playerLine;        // Button label (player's choice text)
+        public string npcResponse;       // NPC's response text
+        public string target;            // Next passage PID
+        public string shared_beat;       // Text shown AFTER choice
+        public string system_trigger;    // e.g., "give_device"
+        public string data_hook;         // e.g., "met_saori=true"
+        public ToneResonanceMap tone_effects = new ToneResonanceMap();
+        public ToneResonanceMap npc_resonance = new ToneResonanceMap();
     }
 
-    /// <summary>Deserializes passage objects from story JSON.</summary>
-    [System.Serializable]
+    [Serializable]
     public class StoryPassage
     {
-        public string pid;               // Passage ID
-        public string name;              // Passage name
-        public string text;              // Full passage text (may contain inline markup)
-        public string prompt;            // Optional prompt text from the narrative guide
-        public string shared_beat;       // Optional shared beat text from the narrative guide
-        public string setting_description;
-        public List<string> tags = new List<string>();
+        public string pid;
+        public string name;
+        public string text;              // Initial prompt/setting
         public List<string> required_flags = new List<string>();
         public List<StoryChoice> choices = new List<StoryChoice>();
     }
 
-    /// <summary>Root structure for story JSON deserialization.</summary>
-    [System.Serializable]
+    [Serializable]
     public class StoryJson
     {
-        public string name;              // Story title
-        public string startnode;         // Starting passage ID
+        public string name;
+        public string startnode;
         public List<StoryPassage> passages = new List<StoryPassage>();
     }
 
     #endregion
 
-    #region Singleton
+    public static DialogueManager Instance { get; private set; }
 
-    private static DialogueManager instance;
-    public static DialogueManager Instance => instance;
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    #endregion
-
-    #region State
-
-    private Dictionary<string, StoryPassage> passages = new Dictionary<string, StoryPassage>();
-    private string currentPassageId;
-    private string activeNpcId;
-    private bool isDialogueActive = false;
-    private string activeStoryResourcePath = "velinor/stories/sample_story";
-
-    public event Action OnDialogueEnded;
-    public bool IsDialogueActive => isDialogueActive;
-
-    #endregion
-
-    #region UI References
-
+    [Header("UI References")]
+    [SerializeField] private Canvas dialogueCanvas;
     [SerializeField] private TextMeshProUGUI npcNameText;
     [SerializeField] private TextMeshProUGUI bodyText;
     [SerializeField] private Transform choiceButtonContainer;
-    [SerializeField] private GameObject choiceButtonPrefab;
-    [SerializeField] private CanvasGroup dialogueCanvasGroup;
-    [SerializeField] private Canvas dialogueCanvas;
+    [SerializeField] private GameObject _choiceButtonPrefab;
 
-    // Public properties for editor setup access
-    public TextMeshProUGUI NpcNameText { get => npcNameText; set => npcNameText = value; }
-    public TextMeshProUGUI BodyText { get => bodyText; set => bodyText = value; }
-    public Transform ChoiceButtonContainer { get => choiceButtonContainer; set => choiceButtonContainer = value; }
-    public GameObject ChoiceButtonPrefab { get => choiceButtonPrefab; set => choiceButtonPrefab = value; }
-    public CanvasGroup DialogueCanvasGroup { get => dialogueCanvasGroup; set => dialogueCanvasGroup = value; }
-    public Canvas DialogueCanvas { get => dialogueCanvas; set => dialogueCanvas = value; }
+    // Compatibility Properties for Editor scripts
+    public GameObject dialogueUIPanel { 
+        get => dialogueCanvas != null ? dialogueCanvas.gameObject : null; 
+        set { if (value != null) dialogueCanvas = value.GetComponent<Canvas>(); }
+    }
+    public TextMeshProUGUI speakerNameText { get => npcNameText; set => npcNameText = value; }
+    public TextMeshProUGUI dialogueText { get => bodyText; set => bodyText = value; }
+    public Transform choicesContainer { get => choiceButtonContainer; set => choiceButtonContainer = value; }
+    public GameObject choiceButtonPrefab { get => _choiceButtonPrefab; set => _choiceButtonPrefab = value; }
 
-    #endregion
+    private Dictionary<string, StoryPassage> passages = new Dictionary<string, StoryPassage>();
+    private string activeNpcId;
+    private bool isDialogueActive = false;
+    private string activeStoryPath = "velinor/stories/sample_story";
 
-    #region Initialization
+    public bool IsDialogueActive => isDialogueActive;
+    public event Action OnDialogueEnded;
 
-    private bool storyLoaded = false;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+        if (Application.isPlaying) DontDestroyOnLoad(gameObject);
+        if (dialogueCanvas != null) dialogueCanvas.enabled = false;
+    }
 
     private void Start()
     {
-        LoadStoryFromResource(activeStoryResourcePath);
+        LoadStory(activeStoryPath);
     }
 
-    /// <summary>
-    /// Load story JSON from Resources folder and deserialize into passages dictionary.
-    /// </summary>
-    public bool LoadStoryFromResource(string resourcePath)
+    public bool LoadStory(string path)
     {
-        if (string.IsNullOrEmpty(resourcePath))
-            resourcePath = activeStoryResourcePath;
-
-        if (storyLoaded && resourcePath == activeStoryResourcePath)
-            return true;
+        if (string.IsNullOrEmpty(path)) path = activeStoryPath;
+        TextAsset asset = Resources.Load<TextAsset>(path);
+        if (asset == null) return false;
 
         try
         {
-            TextAsset jsonAsset = Resources.Load<TextAsset>(resourcePath);
-            if (jsonAsset == null)
-            {
-                Debug.LogError($"[DialogueManager] Failed to load story JSON from Resources/{resourcePath}");
-                return false;
-            }
-
-            Debug.Log($"[DialogueManager] Loaded TextAsset: {jsonAsset.name}");
-            string jsonText = jsonAsset.text;
-            StoryJson storyData = JsonUtility.FromJson<StoryJson>(jsonText);
-
-            if (storyData == null || storyData.passages == null)
-            {
-                Debug.LogError("[DialogueManager] Failed to deserialize story JSON");
-                return false;
-            }
-
-            passages = new Dictionary<string, StoryPassage>();
-            foreach (StoryPassage passage in storyData.passages)
-            {
-                passages[passage.pid] = passage;
-            }
-
-            activeStoryResourcePath = resourcePath;
-            storyLoaded = true;
-            Debug.Log($"[DialogueManager] Story loaded successfully. {passages.Count} passages found.");
+            StoryJson data = JsonUtility.FromJson<StoryJson>(asset.text);
+            passages.Clear();
+            foreach (var p in data.passages) passages[p.pid] = p;
+            activeStoryPath = path;
             return true;
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Debug.LogError($"[DialogueManager] Exception loading story JSON: {ex.Message}");
+            Debug.LogError($"[DialogueManager] Load Error: {e.Message}");
             return false;
         }
     }
 
-    #endregion
+    public void StartDialogue(string npcId, string startPid) => StartDialogue(npcId, startPid, activeStoryPath);
 
-    #region Public API
-
-    /// <summary>
-    /// Start dialogue with specific NPC at starting passage.
-    /// This is called by NPCInteraction.cs when player interacts with NPC.
-    /// </summary>
-    /// <param name="npcId">NPC identifier (e.g., "Ravi", "Nima") - must match npc_profiles.json keys</param>
-    /// <param name="startingPassageId">Starting passage ID (e.g., "ravi_dialogue")</param>
-    public void StartDialogue(string npcId, string startingPassageId)
+    public void StartDialogue(string npcId, string startPid, string storyPath)
     {
-        StartDialogue(npcId, startingPassageId, activeStoryResourcePath);
-    }
-
-    public void StartDialogue(string npcId, string startingPassageId, string storyResourcePath)
-    {
-        if (!LoadStoryFromResource(storyResourcePath))
+        if (!string.IsNullOrEmpty(storyPath) && storyPath != activeStoryPath) LoadStory(storyPath);
+        
+        // Auto-resolve startPid to first available or saori_beat_1/market_entry if the specified startPid isn't found
+        if (!passages.ContainsKey(startPid))
         {
-            Debug.LogWarning("[DialogueManager] Story not loaded yet");
-            return;
+            if (passages.ContainsKey("market_entry")) startPid = "market_entry";
+            else if (passages.ContainsKey("saori_beat_1")) startPid = "saori_beat_1";
+            else if (passages.Count > 0) startPid = new List<string>(passages.Keys)[0];
         }
 
-        if (!passages.ContainsKey(startingPassageId))
-        {
-            Debug.LogError($"[DialogueManager] Starting passage '{startingPassageId}' not found in story");
-            return;
-        }
+        if (!passages.ContainsKey(startPid)) return;
 
         activeNpcId = npcId;
         isDialogueActive = true;
         
-        // Show UI
-        if (dialogueCanvas != null)
-            dialogueCanvas.enabled = true;
+        AutoBindUI();
 
-        // Lock cursor and disable player movement
+        if (dialogueCanvas != null) dialogueCanvas.enabled = true;
         Cursor.lockState = CursorLockMode.None;
-        // Note: PlayerController may not exist; this is optional
-        var playerController = FindAnyObjectByType<MonoBehaviour>(FindObjectsInactive.Exclude);
-        if (playerController != null && playerController.TryGetComponent<CharacterController>(out var charController))
-        {
-            // If player has CharacterController, we'll disable the root GameObject
-            playerController.enabled = false;
-        }
-
-        // Display starting passage
-        DisplayPassage(startingPassageId);
-
-        Debug.Log($"[DialogueManager] Dialogue started with NPC '{npcId}' at passage '{startingPassageId}'");
+        Cursor.visible = true;
+        DisplayPassage(startPid);
     }
 
-    /// <summary>
-    /// End current dialogue and return to gameplay.
-    /// </summary>
-    public void EndDialogue()
+    private void AutoBindUI()
     {
-        if (!isDialogueActive)
-            return;
-
-        isDialogueActive = false;
-        activeNpcId = null;
-        currentPassageId = null;
-
-        // Hide UI
+        if (dialogueCanvas == null) dialogueCanvas = FindAnyObjectByType<Canvas>();
         if (dialogueCanvas != null)
-            dialogueCanvas.enabled = false;
+        {
+            if (npcNameText == null) npcNameText = FindTextMeshInCanvas("NPCLineText");
+            if (bodyText == null) bodyText = FindTextMeshInCanvas("DialogueBodyText");
+            if (choiceButtonContainer == null) choiceButtonContainer = dialogueCanvas.transform.Find("DialoguePanel");
+        }
+    }
 
-        // Clear choice buttons
-        if (choiceButtonContainer != null)
+    private Button FindButtonInCanvas(string name)
+    {
+        if (dialogueCanvas == null) return null;
+        var trans = dialogueCanvas.transform.Find("DialoguePanel/" + name);
+        if (trans != null) return trans.GetComponent<Button>();
+        return null;
+    }
+
+    private TextMeshProUGUI FindTextMeshInCanvas(string name)
+    {
+        if (dialogueCanvas == null) return null;
+        var trans = dialogueCanvas.transform.Find("DialoguePanel/" + name);
+        if (trans != null) return trans.GetComponent<TextMeshProUGUI>();
+        return null;
+    }
+
+    private void DisplayPassage(string pid)
+    {
+        if (!passages.TryGetValue(pid, out var p)) { EndDialogue(); return; }
+        foreach (var flag in p.required_flags) { if (!GameFlags.Get(flag)) { EndDialogue(); return; } }
+
+        if (npcNameText != null) npcNameText.text = activeNpcId;
+        if (bodyText != null) bodyText.text = p.text;
+
+        ClearButtons();
+
+        // Check for pre-placed static buttons
+        Button btnT = FindButtonInCanvas("ChoiceButton_T");
+        Button btnO = FindButtonInCanvas("ChoiceButton_O");
+        Button btnN = FindButtonInCanvas("ChoiceButton_N");
+        Button btnE = FindButtonInCanvas("ChoiceButton_E");
+
+        if (btnT != null || btnO != null || btnN != null || btnE != null)
+        {
+            foreach (var choice in p.choices)
+            {
+                Button targetBtn = null;
+
+                switch (choice.tone)
+                {
+                    case ToneType.Trust:
+                        targetBtn = btnT;
+                        break;
+
+                    case ToneType.Observation:
+                        targetBtn = btnO;
+                        break;
+
+                    case ToneType.NarrativePresence:
+                        targetBtn = btnN;
+                        break;
+
+                    case ToneType.Empathy:
+                        targetBtn = btnE;
+                        break;
+                }
+
+                if (targetBtn != null)
+                {
+                    targetBtn.gameObject.SetActive(true);
+                    var textMesh = targetBtn.GetComponentInChildren<TextMeshProUGUI>();
+                    if (textMesh != null) textMesh.text = choice.playerLine;
+                    targetBtn.onClick.RemoveAllListeners();
+                    targetBtn.onClick.AddListener(() => OnChoiceMade(choice));
+                }
+            }
+        }
+        else if (_choiceButtonPrefab != null && choiceButtonContainer != null)
+        {
+            foreach (var choice in p.choices)
+            {
+                GameObject btnObj = Instantiate(_choiceButtonPrefab, choiceButtonContainer);
+                btnObj.GetComponentInChildren<TextMeshProUGUI>().text = choice.playerLine;
+                btnObj.GetComponent<Button>().onClick.AddListener(() => OnChoiceMade(choice));
+            }
+        }
+    }
+
+    private void OnChoiceMade(StoryChoice choice) => StartCoroutine(ResolveChoice(choice));
+
+    private IEnumerator ResolveChoice(StoryChoice choice)
+    {
+        ClearButtons();
+        if (StatManager.Instance != null)
+        {
+            foreach (var t in choice.tone_effects.ToDictionary())
+            {
+                StatManager.Instance.AdjustPlayerTone(ParseTone(t.Key), t.Value, activeNpcId);
+                // Dynamically register emotional tags in the player's Codex state
+                if (Velinor.Core.CodexManager.Instance != null)
+                {
+                    Velinor.Core.CodexManager.Instance.AddEmotionalTag(t.Key);
+                }
+            }
+            StatManager.Instance.ApplyNpcResonance(activeNpcId, choice.npc_resonance.ToDictionary());
+        }
+
+        ProcessDataHook(choice.data_hook);
+        ProcessSystemTrigger(choice.system_trigger);
+
+        if (!string.IsNullOrEmpty(choice.shared_beat))
+        {
+            var sharedBeatText = FindTextMeshInCanvas("SharedBeatText");
+            if (sharedBeatText != null)
+            {
+                sharedBeatText.text = choice.shared_beat;
+                sharedBeatText.gameObject.SetActive(true);
+                yield return new WaitForSeconds(4f);
+                sharedBeatText.gameObject.SetActive(false);
+                sharedBeatText.text = "";
+            }
+            else
+            {
+                bodyText.text = choice.shared_beat;
+                yield return new WaitForSeconds(4f);
+            }
+        }
+
+        if (!string.IsNullOrEmpty(choice.target)) DisplayPassage(choice.target);
+        else EndDialogue();
+    }
+
+    private void ProcessDataHook(string hook)
+    {
+        if (string.IsNullOrEmpty(hook)) return;
+        if (hook.Contains("=")) {
+            string[] parts = hook.Split('=');
+            if (parts.Length == 2) GameFlags.Set(parts[0].Trim(), bool.Parse(parts[1].Trim()));
+        }
+        if (hook.StartsWith("append_diary:")) DiaryManager.Instance?.AddEntry(hook.Substring("append_diary:".Length));
+    }
+
+    private void ProcessSystemTrigger(string trigger)
+    {
+        if (string.IsNullOrEmpty(trigger)) return;
+        var ui = FindAnyObjectByType<DialogueUIController>();
+        if (ui != null) ui.TriggerSystemEvent(trigger);
+    }
+
+    private ToneType ParseTone(string s)
+    {
+        if (string.Equals(s, "Truth", StringComparison.OrdinalIgnoreCase))
+            return ToneType.Trust;
+        if (string.Equals(s, "Narrative", StringComparison.OrdinalIgnoreCase))
+            return ToneType.NarrativePresence;
+        return Enum.TryParse<ToneType>(s, true, out var t) ? t : ToneType.Trust;
+    }
+
+    private void ClearButtons()
+    {
+        Button btnT = FindButtonInCanvas("ChoiceButton_T");
+        Button btnO = FindButtonInCanvas("ChoiceButton_O");
+        Button btnN = FindButtonInCanvas("ChoiceButton_N");
+        Button btnE = FindButtonInCanvas("ChoiceButton_E");
+
+        if (btnT != null || btnO != null || btnN != null || btnE != null)
+        {
+            if (btnT != null) btnT.gameObject.SetActive(false);
+            if (btnO != null) btnO.gameObject.SetActive(false);
+            if (btnN != null) btnN.gameObject.SetActive(false);
+            if (btnE != null) btnE.gameObject.SetActive(false);
+        }
+        else if (choiceButtonContainer != null && choiceButtonContainer.name != "DialoguePanel")
         {
             foreach (Transform child in choiceButtonContainer)
             {
                 Destroy(child.gameObject);
             }
         }
+    }
 
-        // Re-lock cursor and re-enable player movement
+    public void EndDialogue()
+    {
+        isDialogueActive = false;
+        if (dialogueCanvas != null) dialogueCanvas.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
-        // Note: Re-enable player movement if it was disabled
-        var playerController = FindAnyObjectByType<MonoBehaviour>(FindObjectsInactive.Exclude);
-        if (playerController != null && playerController.TryGetComponent<CharacterController>(out var charController))
-        {
-            playerController.enabled = true;
-        }
-
+        Cursor.visible = false;
         OnDialogueEnded?.Invoke();
-        Debug.Log("[DialogueManager] Dialogue ended");
     }
-
-    #endregion
-
-    #region Passage Display
-
-    /// <summary>
-    /// Display a passage: render text, show NPC name, render choice buttons.
-    /// Each button calls OnChoiceSelected when clicked.
-    /// </summary>
-    private void DisplayPassage(string passageId)
-    {
-        if (!passages.ContainsKey(passageId))
-        {
-            Debug.LogError($"[DialogueManager] Passage '{passageId}' not found");
-            return;
-        }
-
-        StoryPassage passage = passages[passageId];
-        currentPassageId = passageId;
-
-        if (passage.required_flags != null && passage.required_flags.Count > 0)
-        {
-            foreach (string requiredFlag in passage.required_flags)
-            {
-                if (!GameFlags.Get(requiredFlag))
-                {
-                    Debug.LogWarning($"[DialogueManager] Passage '{passageId}' blocked by missing flag '{requiredFlag}'.");
-                    EndDialogue();
-                    return;
-                }
-            }
-        }
-
-        // Render NPC name
-        if (npcNameText != null)
-        {
-            npcNameText.text = activeNpcId ?? "Unknown";
-        }
-
-        // Render passage text
-        if (bodyText != null)
-        {
-            string displayText = passage.text;
-            if (string.IsNullOrWhiteSpace(displayText))
-            {
-                List<string> parts = new List<string>();
-                if (!string.IsNullOrWhiteSpace(passage.prompt)) parts.Add(passage.prompt);
-                if (!string.IsNullOrWhiteSpace(passage.shared_beat)) parts.Add(passage.shared_beat);
-                displayText = string.Join("\n\n", parts);
-            }
-
-            bodyText.text = displayText;
-        }
-
-        // Clear previous choice buttons
-        ClearChoiceButtons();
-
-        // Render choice buttons
-        if (passage.choices != null && passage.choices.Count > 0)
-        {
-            foreach (StoryChoice choice in passage.choices)
-            {
-                CreateChoiceButton(choice);
-            }
-        }
-        else
-        {
-            // No choices - end dialogue automatically
-            Debug.Log("[DialogueManager] Passage has no choices. Ending dialogue.");
-            Invoke(nameof(EndDialogue), 2f);
-        }
-
-        Debug.Log($"[DialogueManager] Displayed passage: {passageId}");
-    }
-
-    #endregion
-
-    #region Choice Button Management
-
-    /// <summary>
-    /// Create a button for a choice and add to UI.
-    /// </summary>
-    private void CreateChoiceButton(StoryChoice choice)
-    {
-        if (choiceButtonContainer == null || choiceButtonPrefab == null)
-        {
-            Debug.LogError("[DialogueManager] choiceButtonContainer or choiceButtonPrefab not assigned");
-            return;
-        }
-
-        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceButtonContainer);
-        Button button = buttonObj.GetComponent<Button>();
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-
-        if (button == null)
-        {
-            Debug.LogError("[DialogueManager] Choice button prefab missing Button component");
-            Destroy(buttonObj);
-            return;
-        }
-
-        if (buttonText != null)
-        {
-            buttonText.text = choice.text;
-        }
-
-        // Create a local copy to avoid closure issues
-        StoryChoice localChoice = choice;
-        button.onClick.AddListener(() => OnChoiceSelected(localChoice));
-
-        Debug.Log($"[DialogueManager] Created choice button: {choice.text}");
-    }
-
-    /// <summary>
-    /// Remove all choice buttons from the UI.
-    /// </summary>
-    private void ClearChoiceButtons()
-    {
-        if (choiceButtonContainer == null)
-            return;
-
-        foreach (Transform child in choiceButtonContainer)
-        {
-            Destroy(child.gameObject);
-        }
-    }
-
-    #endregion
-
-    #region Choice Resolution
-
-    private bool TryResolveToneType(string toneName, out ToneType toneType)
-    {
-        toneType = default;
-        if (string.IsNullOrWhiteSpace(toneName))
-            return false;
-
-        if (Enum.TryParse<ToneType>(toneName, ignoreCase: true, out toneType))
-            return true;
-
-        switch (toneName.ToLowerInvariant())
-        {
-            case "courage":
-                toneType = ToneType.Truth;
-                return true;
-            case "wisdom":
-                toneType = ToneType.Observation;
-                return true;
-            case "narrativepresence":
-            case "narrative_presence":
-                toneType = ToneType.NarrativePresence;
-                return true;
-            case "truth":
-                toneType = ToneType.Truth;
-                return true;
-            case "observation":
-                toneType = ToneType.Observation;
-                return true;
-            case "empathy":
-                toneType = ToneType.Empathy;
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    private void HandleChoiceHooks(StoryChoice choice)
-    {
-        if (!string.IsNullOrWhiteSpace(choice.system_trigger))
-        {
-            if (choice.system_trigger.StartsWith("transition:", StringComparison.OrdinalIgnoreCase))
-            {
-                string sceneName = choice.system_trigger.Substring("transition:".Length).Trim();
-                if (SceneTransitionManager.Instance != null)
-                    SceneTransitionManager.Instance.TransitionToScene(sceneName);
-            }
-        }
-
-        if (!string.IsNullOrWhiteSpace(choice.data_hook))
-        {
-            if (choice.data_hook.StartsWith("set_flag:", StringComparison.OrdinalIgnoreCase))
-            {
-                string flagExpression = choice.data_hook.Substring("set_flag:".Length).Trim();
-                string[] parts = flagExpression.Split('=');
-                if (parts.Length == 2)
-                {
-                    string flagName = parts[0].Trim();
-                    bool flagValue = bool.TryParse(parts[1].Trim(), out var parsed) ? parsed : true;
-                    GameFlags.Set(flagName, flagValue);
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Called when player clicks a choice button.
-    /// </summary>
-    private void OnChoiceSelected(StoryChoice choice)
-    {
-        if (!isDialogueActive || StatManager.Instance == null)
-        {
-            Debug.LogWarning("[DialogueManager] Cannot process choice: dialogue inactive or StatManager missing");
-            return;
-        }
-
-        Debug.Log($"[DialogueManager] Choice selected: {choice.text}");
-
-        var toneEffects = choice.tone_effects?.ToDictionary() ?? new Dictionary<string, float>();
-        if (toneEffects.Count > 0)
-        {
-            foreach (var kvp in toneEffects)
-            {
-                string toneName = kvp.Key;
-                float amount = kvp.Value;
-
-                if (TryResolveToneType(toneName, out var toneType))
-                {
-                    StatManager.Instance.AdjustPlayerTone(toneType, amount, activeNpcId);
-                    Debug.Log($"[DialogueManager] Applied tone effect: {toneName} += {amount}");
-                }
-                else
-                {
-                    Debug.LogWarning($"[DialogueManager] Unknown tone type: {toneName}");
-                }
-            }
-        }
-
-        var npcResonance = choice.npc_resonance?.ToDictionary() ?? new Dictionary<string, float>();
-        if (npcResonance.Count > 0)
-        {
-            foreach (var kvp in npcResonance)
-            {
-                string npcName = kvp.Key;
-                float resonanceValue = kvp.Value;
-
-                StatManager.Instance.ApplyNpcResonance(npcName, new Dictionary<string, float> { { npcName, resonanceValue } });
-                Debug.Log($"[DialogueManager] Applied resonance: {npcName} += {resonanceValue}");
-            }
-        }
-
-        if (toneEffects.Count > 0)
-        {
-            StatManager.Instance.LogEncounter(toneEffects);
-        }
-
-        HandleChoiceHooks(choice);
-
-        string targetPassageId = choice.target;
-        if (string.IsNullOrEmpty(targetPassageId))
-        {
-            Debug.LogWarning("[DialogueManager] Choice has no target passage. Ending dialogue.");
-            EndDialogue();
-            return;
-        }
-
-        DisplayPassage(targetPassageId);
-    }
-
-    #endregion
 }

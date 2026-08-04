@@ -15,7 +15,7 @@ public static class SetupSpawningMenu
         // ==========================================
         var scene1 = EditorSceneManager.OpenScene(scenePath1, OpenSceneMode.Single);
 
-        var transitionManagerObj1 = Object.FindFirstObjectByType<SceneTransitionManager>();
+        var transitionManagerObj1 = Object.FindAnyObjectByType<SceneTransitionManager>();
         if (transitionManagerObj1 != null)
         {
             // Remove any missing or invalid components first to clean up
@@ -52,7 +52,7 @@ public static class SetupSpawningMenu
         // ==========================================
         var scene2 = EditorSceneManager.OpenScene(scenePath2, OpenSceneMode.Single);
 
-        var transitionManagerObj2 = Object.FindFirstObjectByType<SceneTransitionManager>();
+        var transitionManagerObj2 = Object.FindAnyObjectByType<SceneTransitionManager>();
         if (transitionManagerObj2 != null)
         {
             // Remove any missing or invalid components first

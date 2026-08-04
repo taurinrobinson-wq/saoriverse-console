@@ -1,5 +1,6 @@
 using UnityEngine;
 using StarterAssets;
+using Velinor.Core;
 
 public class StartDialogueOnTrigger : MonoBehaviour
 {
