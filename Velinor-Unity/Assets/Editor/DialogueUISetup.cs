@@ -1,4 +1,5 @@
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,14 +10,14 @@ public class DialogueUISetup : EditorWindow
     public static void SetupDialogueUI()
     {
         // Find existing DialogueManager
-        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
         if (dialogueManager == null)
         {
             EditorUtility.DisplayDialog("Error", "DialogueManager not found in scene!", "OK");
             return;
         }
 
-        Transform dialogueCanvas = dialogueManager.GetType().GetField("dialogueCanvas", 
+        Canvas dialogueCanvas = dialogueManager.GetType().GetField("dialogueCanvas", 
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             ?.GetValue(dialogueManager) as Canvas;
 
@@ -25,6 +26,8 @@ public class DialogueUISetup : EditorWindow
             EditorUtility.DisplayDialog("Error", "DialogueCanvas not assigned to DialogueManager!", "OK");
             return;
         }
+
+        Transform dialogueCanvasTransform = dialogueCanvas.transform;
 
         // Load LiberationSans font asset
         TextMeshProUGUI sampleText = dialogueManager.GetType().GetField("bodyText", 
@@ -38,7 +41,7 @@ public class DialogueUISetup : EditorWindow
         }
 
         // Find or create DialoguePanel
-        Transform dialoguePanel = dialogueCanvas.transform.Find("DialoguePanel");
+        Transform dialoguePanel = dialogueCanvasTransform.Find("DialoguePanel");
         if (dialoguePanel == null)
         {
             EditorUtility.DisplayDialog("Error", "DialoguePanel not found as child of DialogueCanvas!", "OK");
