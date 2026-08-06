@@ -3,6 +3,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class DialogueUISetup : EditorWindow
 {
