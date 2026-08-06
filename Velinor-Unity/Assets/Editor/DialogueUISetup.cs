@@ -113,8 +113,9 @@ public class DialogueUISetup : EditorWindow
         colors.pressedColor = new Color(0.6f, 0.6f, 0.6f, 1f);
         buttonComponent.colors = colors;
 
-        // Create text child
-        GameObject textGO = new GameObject(label + "Text");
+        // Create text child - name it so it can be found
+        string textChildName = buttonName + "Text";  // e.g., "TrustButtonText"
+        GameObject textGO = new GameObject(textChildName);
         textGO.transform.SetParent(buttonGO.transform, false);
         RectTransform textRT = textGO.AddComponent<RectTransform>();
         textRT.anchoredPosition = Vector2.zero;
@@ -178,11 +179,11 @@ public class DialogueUISetup : EditorWindow
         AssignField(dmType, dialogueManager, flags, "btnN", "NarrativePresenceButton");
         AssignField(dmType, dialogueManager, flags, "btnE", "EmpathyButton");
 
-        // Tone choice labels (TextMeshProUGUI inside buttons)
-        AssignTextField(dmType, dialogueManager, flags, "txtT", "TrustButtonTrustText");
-        AssignTextField(dmType, dialogueManager, flags, "txtO", "ObservationButtonObservationText");
-        AssignTextField(dmType, dialogueManager, flags, "txtN", "NarrativePresenceButtonNarrativeText");
-        AssignTextField(dmType, dialogueManager, flags, "txtE", "EmpathyButtonEmpathyText");
+        // Tone choice labels (TextMeshProUGUI inside buttons) - fix naming
+        AssignTextField(dmType, dialogueManager, flags, "txtT", "TrustButtonText");
+        AssignTextField(dmType, dialogueManager, flags, "txtO", "ObservationButtonText");
+        AssignTextField(dmType, dialogueManager, flags, "txtN", "NarrativePresenceButtonText");
+        AssignTextField(dmType, dialogueManager, flags, "txtE", "EmpathyButtonText");
 
         EditorUtility.SetDirty(dialogueManager);
         Debug.Log("✓ All DialogueManager references assigned");
