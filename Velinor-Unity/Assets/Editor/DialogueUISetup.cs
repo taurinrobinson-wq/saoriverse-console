@@ -9,197 +9,152 @@ public class DialogueUISetup : EditorWindow
     [MenuItem("Tools/Setup Dialogue UI in Current Scene")]
     public static void SetupDialogueUI()
     {
-        // Find existing DialogueManager
-        DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
-        if (dialogueManager == null)
-        {
-            EditorUtility.DisplayDialog("Error", "DialogueManager not found in scene!", "OK");
-            return;
-        }
-
-        Canvas dialogueCanvas = dialogueManager.GetType().GetField("dialogueCanvas", 
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.GetValue(dialogueManager) as Canvas;
-
-        if (dialogueCanvas == null)
-        {
-            EditorUtility.DisplayDialog("Error", "DialogueCanvas not assigned to DialogueManager!", "OK");
-            return;
-        }
-
-        Transform dialogueCanvasTransform = dialogueCanvas.transform;
-
-        // Load LiberationSans font asset
-        TextMeshProUGUI sampleText = dialogueManager.GetType().GetField("bodyText", 
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.GetValue(dialogueManager) as TextMeshProUGUI;
-
-        TMP_FontAsset liberationFont = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
+        // Find all TextMeshProUGUI elements and assign font
+        TMP_FontAsset liberationFont = LoadLiberationSansFont();
         if (liberationFont == null)
         {
-            Debug.LogWarning("LiberationSans SDF font not found in Resources!");
-        }
-
-        // Find or create DialoguePanel
-        Transform dialoguePanel = dialogueCanvasTransform.Find("DialoguePanel");
-        if (dialoguePanel == null)
-        {
-            EditorUtility.DisplayDialog("Error", "DialoguePanel not found as child of DialogueCanvas!", "OK");
-            return;
-        }
-
-        // Create NPC Name Text if missing
-        Transform npcNameTransform = dialoguePanel.Find("NPCNameText");
-        if (npcNameTransform == null)
-        {
-            npcNameTransform = CreateTextElement("NPCNameText", dialoguePanel, liberationFont);
-            var rectTransform = npcNameTransform as RectTransform;
-            rectTransform.anchorMin = new Vector2(0, 1);
-            rectTransform.anchorMax = new Vector2(1, 1);
-            rectTransform.anchoredPosition = new Vector2(0, -20);
-            rectTransform.sizeDelta = new Vector2(-40, 40);
-        }
-
-        // Create Shared Beat Text if missing
-        Transform sharedBeatTransform = dialoguePanel.Find("SharedBeatText");
-        if (sharedBeatTransform == null)
-        {
-            sharedBeatTransform = CreateTextElement("SharedBeatText", dialoguePanel, liberationFont);
-            var rectTransform = sharedBeatTransform as RectTransform;
-            rectTransform.anchorMin = new Vector2(0, 0);
-            rectTransform.anchorMax = new Vector2(1, 0);
-            rectTransform.anchoredPosition = new Vector2(0, 20);
-            rectTransform.sizeDelta = new Vector2(-40, 60);
-        }
-
-        // Create Choice Buttons Container if missing
-        Transform choicesContainer = dialoguePanel.Find("ChoicesContainer");
-        if (choicesContainer == null)
-        {
-            GameObject choicesObj = new GameObject("ChoicesContainer");
-            choicesContainer = choicesObj.transform;
-            choicesContainer.SetParent(dialoguePanel);
-            var choicesRect = choicesObj.AddComponent<RectTransform>();
-            choicesRect.anchorMin = new Vector2(0, 0);
-            choicesRect.anchorMax = new Vector2(1, 0);
-            choicesRect.anchoredPosition = new Vector2(0, 120);
-            choicesRect.sizeDelta = new Vector2(-40, 200);
-
-            var layoutGroup = choicesObj.AddComponent<VerticalLayoutGroup>();
-            layoutGroup.childForceExpandHeight = false;
-            layoutGroup.spacing = 10;
-        }
-
-        // Create 4 Tone Buttons
-        string[] toneNames = { "Trust", "Observation", "NarrativePresence", "Empathy" };
-        Button[] buttons = new Button[4];
-        TextMeshProUGUI[] buttonLabels = new TextMeshProUGUI[4];
-
-        for (int i = 0; i < 4; i++)
-        {
-            Transform buttonTransform = choicesContainer.Find(toneNames[i] + "Button");
-            if (buttonTransform == null)
+            EditorUtility.DisplayDialog("Error", "Could not load LiberationSans SDF font!\n\nSearching for it in project...", "OK");
+            // Try to find it manually
+            string[] fontGuids = AssetDatabase.FindAssets("LiberationSans SDF t:TMP_FontAsset");
+            if (fontGuids.Length > 0)
             {
-                GameObject buttonObj = new GameObject(toneNames[i] + "Button");
-                buttonTransform = buttonObj.transform;
-                buttonTransform.SetParent(choicesContainer);
-
-                var rectTransform = buttonObj.AddComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(150, 40);
-
-                var image = buttonObj.AddComponent<Image>();
-                image.color = new Color(0.3f, 0.3f, 0.3f, 1);
-
-                buttons[i] = buttonObj.AddComponent<Button>();
-                buttons[i].targetGraphic = image;
-
-                // Create button label
-                GameObject labelObj = new GameObject("Label");
-                labelObj.transform.SetParent(buttonTransform);
-                var labelRect = labelObj.AddComponent<RectTransform>();
-                labelRect.anchorMin = Vector2.zero;
-                labelRect.anchorMax = Vector2.one;
-                labelRect.offsetMin = Vector2.zero;
-                labelRect.offsetMax = Vector2.zero;
-
-                buttonLabels[i] = labelObj.AddComponent<TextMeshProUGUI>();
-                buttonLabels[i].text = toneNames[i];
-                buttonLabels[i].fontSize = 24;
-                buttonLabels[i].alignment = TextAlignmentOptions.Center;
-                buttonLabels[i].color = Color.white;
-                if (liberationFont != null)
-                {
-                    buttonLabels[i].font = liberationFont;
-                }
+                string fontPath = AssetDatabase.GUIDToAssetPath(fontGuids[0]);
+                liberationFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(fontPath);
+                Debug.Log("Found font at: " + fontPath);
             }
             else
             {
-                buttons[i] = buttonTransform.GetComponent<Button>();
-                buttonLabels[i] = buttonTransform.Find("Label")?.GetComponent<TextMeshProUGUI>();
+                EditorUtility.DisplayDialog("Error", "LiberationSans SDF font not found in project!", "OK");
+                return;
             }
         }
 
-        // Assign all references to DialogueManager via reflection
-        var dialogueManagerType = dialogueManager.GetType();
-
-        dialogueManagerType.GetField("npcNameText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, npcNameTransform.GetComponent<TextMeshProUGUI>());
-
-        dialogueManagerType.GetField("sharedBeatText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, sharedBeatTransform.GetComponent<TextMeshProUGUI>());
-
-        dialogueManagerType.GetField("choiceButtonContainer", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, choicesContainer);
-
-        dialogueManagerType.GetField("btnT", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttons[0]);
-
-        dialogueManagerType.GetField("btnO", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttons[1]);
-
-        dialogueManagerType.GetField("btnN", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttons[2]);
-
-        dialogueManagerType.GetField("btnE", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttons[3]);
-
-        dialogueManagerType.GetField("txtT", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttonLabels[0]);
-
-        dialogueManagerType.GetField("txtO", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttonLabels[1]);
-
-        dialogueManagerType.GetField("txtN", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttonLabels[2]);
-
-        dialogueManagerType.GetField("txtE", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.SetValue(dialogueManager, buttonLabels[3]);
-
-        // Mark scene as dirty
-        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-
-        EditorUtility.DisplayDialog("Success", "Dialogue UI setup complete!\n\nAll missing UI elements created and wired up.", "OK");
-        Debug.Log("✅ Dialogue UI Setup Complete!");
-    }
-
-    private static Transform CreateTextElement(string name, Transform parent, TMP_FontAsset font)
-    {
-        GameObject textObj = new GameObject(name);
-        textObj.transform.SetParent(parent);
-
-        var rectTransform = textObj.AddComponent<RectTransform>();
-        var textMesh = textObj.AddComponent<TextMeshProUGUI>();
-
-        textMesh.text = name;
-        textMesh.fontSize = 20;
-        textMesh.color = Color.white;
-        textMesh.alignment = TextAlignmentOptions.Center;
-
-        if (font != null)
+        // Find all TextMeshPro UI elements and assign font
+        TextMeshProUGUI[] allTextElements = FindObjectsByType<TextMeshProUGUI>(FindObjectsSortMode.None);
+        int count = 0;
+        foreach (TextMeshProUGUI textElement in allTextElements)
         {
-            textMesh.font = font;
+            if (textElement.font == null)
+            {
+                textElement.font = liberationFont;
+                count++;
+                Debug.Log($"✓ Assigned font to {textElement.gameObject.name}");
+            }
         }
 
-        return textObj.transform;
+        // Find DialogueManager and assign UI references if they're missing
+        DialogueManager dialogueManager = FindAnyObjectByType<DialogueManager>();
+        if (dialogueManager != null)
+        {
+            AssignDialogueManagerReferences(dialogueManager, liberationFont);
+        }
+
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+        EditorUtility.DisplayDialog("Success", $"Dialogue UI Setup Complete!\n\nAssigned fonts to {count} text elements.", "OK");
+        Debug.Log($"✅ Dialogue UI Setup Complete! Assigned fonts to {count} elements.");
+    }
+
+    private static TMP_FontAsset LoadLiberationSansFont()
+    {
+        // Try multiple possible paths
+        string[] possiblePaths = new string[]
+        {
+            "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+            "Assets/TextMesh Pro/Fonts & Materials/LiberationSans SDF.asset",
+            "Packages/com.unity.textmeshpro/Fonts & Materials/LiberationSans SDF.asset"
+        };
+
+        foreach (string path in possiblePaths)
+        {
+            TMP_FontAsset font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(path);
+            if (font != null)
+            {
+                Debug.Log("Loaded font from: " + path);
+                return font;
+            }
+        }
+
+        // Last resort: search by name
+        string[] guids = AssetDatabase.FindAssets("LiberationSans SDF t:TMP_FontAsset");
+        if (guids.Length > 0)
+        {
+            string fontPath = AssetDatabase.GUIDToAssetPath(guids[0]);
+            return AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(fontPath);
+        }
+
+        return null;
+    }
+
+    private static void AssignDialogueManagerReferences(DialogueManager dialogueManager, TMP_FontAsset font)
+    {
+        var dialogueManagerType = dialogueManager.GetType();
+        var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+
+        // Try to find and assign existing UI elements
+        TextMeshProUGUI bodyText = FindTextElementByName("DialogueBodyText");
+        if (bodyText != null)
+        {
+            dialogueManagerType.GetField("bodyText", flags)?.SetValue(dialogueManager, bodyText);
+            if (bodyText.font == null) bodyText.font = font;
+        }
+
+        TextMeshProUGUI npcNameText = FindTextElementByName("NPCNameText");
+        if (npcNameText != null)
+        {
+            dialogueManagerType.GetField("npcNameText", flags)?.SetValue(dialogueManager, npcNameText);
+            if (npcNameText.font == null) npcNameText.font = font;
+        }
+
+        TextMeshProUGUI npcLineText = FindTextElementByName("NPCLineText");
+        if (npcLineText != null)
+        {
+            dialogueManagerType.GetField("npcNameText", flags)?.SetValue(dialogueManager, npcLineText);
+            if (npcLineText.font == null) npcLineText.font = font;
+        }
+
+        TextMeshProUGUI sharedBeatText = FindTextElementByName("SharedBeatText");
+        if (sharedBeatText != null)
+        {
+            dialogueManagerType.GetField("sharedBeatText", flags)?.SetValue(dialogueManager, sharedBeatText);
+            if (sharedBeatText.font == null) sharedBeatText.font = font;
+        }
+
+        // Find choice buttons
+        Button trustBtn = FindButtonByName("TrustButton");
+        if (trustBtn != null) dialogueManagerType.GetField("btnT", flags)?.SetValue(dialogueManager, trustBtn);
+
+        Button obsBtn = FindButtonByName("ObservationButton");
+        if (obsBtn != null) dialogueManagerType.GetField("btnO", flags)?.SetValue(dialogueManager, obsBtn);
+
+        Button narrativeBtn = FindButtonByName("NarrativePresenceButton");
+        if (narrativeBtn != null) dialogueManagerType.GetField("btnN", flags)?.SetValue(dialogueManager, narrativeBtn);
+
+        Button empathyBtn = FindButtonByName("EmpathyButton");
+        if (empathyBtn != null) dialogueManagerType.GetField("btnE", flags)?.SetValue(dialogueManager, empathyBtn);
+
+        Debug.Log("✓ DialogueManager references assigned");
+    }
+
+    private static TextMeshProUGUI FindTextElementByName(string name)
+    {
+        TextMeshProUGUI[] elements = FindObjectsByType<TextMeshProUGUI>(FindObjectsSortMode.None);
+        foreach (TextMeshProUGUI element in elements)
+        {
+            if (element.gameObject.name == name)
+                return element;
+        }
+        return null;
+    }
+
+    private static Button FindButtonByName(string name)
+    {
+        Button[] buttons = FindObjectsByType<Button>(FindObjectsSortMode.None);
+        foreach (Button button in buttons)
+        {
+            if (button.gameObject.name == name)
+                return button;
+        }
+        return null;
     }
 }
+
