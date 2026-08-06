@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 public class NPCInteraction : MonoBehaviour
@@ -20,7 +21,7 @@ public class NPCInteraction : MonoBehaviour
         if (playerDetected)
         {
             if (!playerInRange) { playerInRange = true; ShowPrompt(true); }
-            if (Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.IsDialogueActive)
+            if (Keyboard.current.eKey.wasPressedThisFrame && !DialogueManager.Instance.IsDialogueActive)
                 DialogueManager.Instance.StartDialogue(npcId, startPassageId);
         }
         else if (playerInRange) { playerInRange = false; ShowPrompt(false); }
