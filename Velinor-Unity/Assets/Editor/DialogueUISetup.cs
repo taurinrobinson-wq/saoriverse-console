@@ -30,13 +30,14 @@ public class DialogueUISetup : EditorWindow
         }
 
         // Find all TextMeshPro UI elements and assign font
-        TextMeshProUGUI[] allTextElements = FindObjectsByType<TextMeshProUGUI>(FindObjectsSortMode.None);
+        TextMeshProUGUI[] allTextElements = FindObjectsByType<TextMeshProUGUI>();
         int count = 0;
         foreach (TextMeshProUGUI textElement in allTextElements)
         {
             if (textElement.font == null)
             {
                 textElement.font = liberationFont;
+                EditorUtility.SetDirty(textElement);  // Serialize the change
                 count++;
                 Debug.Log($"✓ Assigned font to {textElement.gameObject.name}");
             }
@@ -49,7 +50,11 @@ public class DialogueUISetup : EditorWindow
             AssignDialogueManagerReferences(dialogueManager, liberationFont);
         }
 
-        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+        // Mark scene as dirty only in edit mode
+        if (!EditorApplication.isPlaying)
+        {
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+        }
         EditorUtility.DisplayDialog("Success", $"Dialogue UI Setup Complete!\n\nAssigned fonts to {count} text elements.", "OK");
         Debug.Log($"✅ Dialogue UI Setup Complete! Assigned fonts to {count} elements.");
     }
@@ -89,6 +94,7 @@ public class DialogueUISetup : EditorWindow
     {
         var dialogueManagerType = dialogueManager.GetType();
         var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+        bool anyChanges = false;
 
         // Try to find and assign existing UI elements
         TextMeshProUGUI bodyText = FindTextElementByName("DialogueBodyText");
@@ -96,6 +102,8 @@ public class DialogueUISetup : EditorWindow
         {
             dialogueManagerType.GetField("bodyText", flags)?.SetValue(dialogueManager, bodyText);
             if (bodyText.font == null) bodyText.font = font;
+            EditorUtility.SetDirty(bodyText);
+            anyChanges = true;
         }
 
         TextMeshProUGUI npcNameText = FindTextElementByName("NPCNameText");
@@ -103,6 +111,8 @@ public class DialogueUISetup : EditorWindow
         {
             dialogueManagerType.GetField("npcNameText", flags)?.SetValue(dialogueManager, npcNameText);
             if (npcNameText.font == null) npcNameText.font = font;
+            EditorUtility.SetDirty(npcNameText);
+            anyChanges = true;
         }
 
         TextMeshProUGUI npcLineText = FindTextElementByName("NPCLineText");
@@ -110,6 +120,8 @@ public class DialogueUISetup : EditorWindow
         {
             dialogueManagerType.GetField("npcNameText", flags)?.SetValue(dialogueManager, npcLineText);
             if (npcLineText.font == null) npcLineText.font = font;
+            EditorUtility.SetDirty(npcLineText);
+            anyChanges = true;
         }
 
         TextMeshProUGUI sharedBeatText = FindTextElementByName("SharedBeatText");
@@ -117,6 +129,8 @@ public class DialogueUISetup : EditorWindow
         {
             dialogueManagerType.GetField("sharedBeatText", flags)?.SetValue(dialogueManager, sharedBeatText);
             if (sharedBeatText.font == null) sharedBeatText.font = font;
+            EditorUtility.SetDirty(sharedBeatText);
+            anyChanges = true;
         }
 
         // Find choice buttons
@@ -132,12 +146,15 @@ public class DialogueUISetup : EditorWindow
         Button empathyBtn = FindButtonByName("EmpathyButton");
         if (empathyBtn != null) dialogueManagerType.GetField("btnE", flags)?.SetValue(dialogueManager, empathyBtn);
 
+        // Serialize DialogueManager changes
+        EditorUtility.SetDirty(dialogueManager);
+
         Debug.Log("✓ DialogueManager references assigned");
     }
 
     private static TextMeshProUGUI FindTextElementByName(string name)
     {
-        TextMeshProUGUI[] elements = FindObjectsByType<TextMeshProUGUI>(FindObjectsSortMode.None);
+        TextMeshProUGUI[] elements = FindObjectsByType<TextMeshProUGUI>();
         foreach (TextMeshProUGUI element in elements)
         {
             if (element.gameObject.name == name)
@@ -148,7 +165,7 @@ public class DialogueUISetup : EditorWindow
 
     private static Button FindButtonByName(string name)
     {
-        Button[] buttons = FindObjectsByType<Button>(FindObjectsSortMode.None);
+        Button[] buttons = FindObjectsByType<Button>();
         foreach (Button button in buttons)
         {
             if (button.gameObject.name == name)
