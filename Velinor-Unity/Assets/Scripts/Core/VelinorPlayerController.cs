@@ -81,12 +81,22 @@ namespace StarterAssets
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
 
-			// For first-person, position camera at player head
+			// Smart camera positioning:
+			// If camera is already far from player origin (third-person), leave it
+			// Otherwise, position for first-person at player head
 			if (_mainCamera != null)
 			{
-				_mainCamera.transform.SetParent(transform);
-				_mainCamera.transform.localPosition = new Vector3(0, CameraHeight, 0);
-				_mainCamera.transform.localRotation = Quaternion.identity;
+				float distFromOrigin = _mainCamera.transform.localPosition.magnitude;
+				
+				// If camera is more than 1 unit away, assume it's third-person and leave it alone
+				if (distFromOrigin < 1f)
+				{
+					// First-person: position at player head
+					_mainCamera.transform.SetParent(transform);
+					_mainCamera.transform.localPosition = new Vector3(0, CameraHeight, 0);
+					_mainCamera.transform.localRotation = Quaternion.identity;
+				}
+				// Else: camera is already positioned for third-person, don't override
 			}
 		}
 
@@ -98,18 +108,43 @@ namespace StarterAssets
 
 			AssignAnimationIDs();
 
-			// Lock and hide cursor
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
+			// For third-person, set camera to look slightly down at player
+			// Check if camera is positioned for third-person
+			if (_mainCamera != null)
+			{
+				float distFromOrigin = _mainCamera.transform.localPosition.magnitude;
+				if (distFromOrigin > 1f)
+				{
+					// Third-person: look slightly downward
+					_cameraPitch = -15f;
+				}
+			}
 		}
 
 		private void Update()
 		{
 			_hasAnimator = TryGetComponent(out _animator);
 
+			// Hybrid Interaction Model: Cursor management
+			if (_input.rightClickHeld)
+			{
+				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
+			}
+			else
+			{
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+			}
+
 			GroundedCheck();
 			Move();
 			HandleInteraction();
+            
+            if (Time.frameCount % 60 == 0)
+            {
+                Debug.Log($"[VPC] Move Input: {_input.moveInput}, RightClick: {_input.rightClickHeld}, Grounded: {Grounded}, Speed: {_speed}");
+            }
 		}
 
 		private void LateUpdate()
@@ -139,16 +174,19 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
+			// Hybrid Interaction Model: Get look input (only when right-click held)
+			Vector2 lookInput = _input.GetLook();
+
 			// First-person mouse look
-			if (_input.look.sqrMagnitude >= _threshold)
+			if (lookInput.sqrMagnitude >= _threshold)
 			{
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
 				// Horizontal rotation (turn left/right)
-				_cameraYaw += _input.look.x * deltaTimeMultiplier * LookSensitivity.x;
+				_cameraYaw += lookInput.x * deltaTimeMultiplier * LookSensitivity.x;
 
 				// Vertical rotation (look up/down) - applied to camera only
-				_cameraPitch -= _input.look.y * deltaTimeMultiplier * LookSensitivity.y;
+				_cameraPitch -= lookInput.y * deltaTimeMultiplier * LookSensitivity.y;
 				_cameraPitch = ClampAngle(_cameraPitch, BottomClamp, TopClamp);
 			}
 
@@ -164,16 +202,19 @@ namespace StarterAssets
 
 		private void Move()
 		{
+			// Hybrid Interaction Model: Get movement input (always active)
+			Vector2 moveInput = _input.GetMove();
+
 			// Set target speed to walk speed only (no sprint)
 			float targetSpeed = MoveSpeed;
 
 			// If there is no input, set the target speed to 0
-			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+			if (moveInput == Vector2.zero) targetSpeed = 0.0f;
 
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
 			float speedOffset = 0.1f;
-			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+			float inputMagnitude = _input.analogMovement ? moveInput.magnitude : 1f;
 
 			// Accelerate or decelerate to target speed
 			if (currentHorizontalSpeed < targetSpeed - speedOffset ||
@@ -192,25 +233,28 @@ namespace StarterAssets
 			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 			if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-			// Get movement direction relative to where player is looking (camera forward)
-			Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+			// ISOMETRIC FIX: Use fixed camera angle (30 degrees) for consistent WASD mapping
+			// This makes movement direction independent of camera yaw rotation
+			Vector3 inputDirection = new Vector3(moveInput.x, 0.0f, moveInput.y).normalized;
 
-			// Transform input to world space using camera direction
 			Vector3 moveDirection = Vector3.zero;
 			if (inputDirection.magnitude > 0)
 			{
-				// Forward relative to camera yaw
+				// For isometric: assume camera is looking at ~30 degree angle
+				// Forward direction is toward +Z, Right is toward +X
+				// This makes WASD always map to the same world directions
+				const float isometricAngle = 0f; // 0 degrees = straight forward in world space
+				
 				Vector3 cameraForward = new Vector3(
-					Mathf.Sin(_cameraYaw * Mathf.Deg2Rad),
+					Mathf.Sin(isometricAngle * Mathf.Deg2Rad),
 					0,
-					Mathf.Cos(_cameraYaw * Mathf.Deg2Rad)
+					Mathf.Cos(isometricAngle * Mathf.Deg2Rad)
 				).normalized;
 
-				// Right relative to camera
 				Vector3 cameraRight = new Vector3(
-					Mathf.Cos(_cameraYaw * Mathf.Deg2Rad),
+					Mathf.Cos(isometricAngle * Mathf.Deg2Rad),
 					0,
-					-Mathf.Sin(_cameraYaw * Mathf.Deg2Rad)
+					-Mathf.Sin(isometricAngle * Mathf.Deg2Rad)
 				).normalized;
 
 				moveDirection = (cameraForward * inputDirection.z + cameraRight * inputDirection.x).normalized;
@@ -250,14 +294,64 @@ namespace StarterAssets
 
 		private void HandleInteraction()
 		{
+			// Raycast from camera for hover-based interactables
+			if (_mainCamera != null)
+			{
+				Ray ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
+
+				if (Physics.Raycast(ray, out RaycastHit hit, 5f))
+				{
+					IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+					if (interactable != null)
+					{
+						// Call OnHover if the interactable supports it
+						if (interactable is IInteractableHoverable hoverableInteractable)
+						{
+							hoverableInteractable.OnHover();
+						}
+
+						// Hybrid Interaction Model: Left-click always available (when cursor visible)
+						bool leftClickPressed = false;
+#if ENABLE_INPUT_SYSTEM
+						if (UnityEngine.InputSystem.Mouse.current != null)
+						{
+							leftClickPressed = UnityEngine.InputSystem.Mouse.current.leftButton.wasPressedThisFrame;
+						}
+#else
+						leftClickPressed = Input.GetMouseButtonDown(0);
+#endif
+
+						if (leftClickPressed && Cursor.visible)
+						{
+							interactable.Interact(gameObject);
+						}
+					}
+				}
+			}
+
+			// E-key interaction
 			if (_input.interact)
 			{
-				// Raycast from camera for first-person interaction
-				if (_mainCamera != null)
+				bool interacted = false;
+
+				// 1. Proximity check (new fallback)
+				Collider[] nearby = Physics.OverlapSphere(transform.position, 3.0f);
+				foreach (var col in nearby)
+				{
+					IInteractable interactable = col.GetComponent<IInteractable>();
+					if (interactable != null)
+					{
+						interactable.Interact(gameObject);
+						interacted = true;
+						break;
+					}
+				}
+
+				// 2. Raycast fallback if proximity didn't find anything
+				if (!interacted && _mainCamera != null)
 				{
 					Ray ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
-
-					if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+					if (Physics.Raycast(ray, out RaycastHit hit, 5f))
 					{
 						IInteractable interactable = hit.collider.GetComponent<IInteractable>();
 						if (interactable != null)
@@ -270,6 +364,7 @@ namespace StarterAssets
 				_input.interact = false; // Consume the input
 			}
 		}
+
 
 		private void OnDrawGizmosSelected()
 		{

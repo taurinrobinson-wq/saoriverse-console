@@ -1,19 +1,20 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Velinor.Core;
 
-public class NPCInteraction : MonoBehaviour
+public class NPCInteraction : MonoBehaviour, IInteractable
 {
-    [SerializeField] public string npcId = "Ravi";
-    [SerializeField] public string startPassageId = "market_entry";
+    [SerializeField] public string npcId = "Saori";
+    [SerializeField] public string startPassageId = "saori_beat_1";
     [SerializeField] public float interactionRadius = 2.5f;
 
     private bool playerInRange = false;
 
     private void Update()
     {
+        // Keep proximity check for prompt display only
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
         bool playerDetected = false;
         foreach (var col in colliders) if (col.CompareTag("Player")) { playerDetected = true; break; }
@@ -21,16 +22,25 @@ public class NPCInteraction : MonoBehaviour
         if (playerDetected)
         {
             if (!playerInRange) { playerInRange = true; ShowPrompt(true); }
-            if (Keyboard.current.eKey.wasPressedThisFrame && !DialogueManager.Instance.IsDialogueActive)
-                DialogueManager.Instance.StartDialogue(npcId, startPassageId);
         }
         else if (playerInRange) { playerInRange = false; ShowPrompt(false); }
+    }
+
+    public void Interact(GameObject player)
+    {
+        if (!DialogueManager.Instance.IsDialogueActive)
+        {
+            DialogueManager.Instance.StartDialogue(npcId, startPassageId);
+        }
     }
 
     private void ShowPrompt(bool show)
     {
         var ui = FindAnyObjectByType<DialogueUIController>();
-        if (ui != null && show) ui.ShowNotification($"Press [E] to talk to {npcId}");
+        if (ui != null)
+        {
+            ui.SetNotificationActive("Press E to Interact", show);
+        }
     }
 
     private void OnDrawGizmosSelected()

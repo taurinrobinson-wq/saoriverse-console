@@ -1,0 +1,6 @@
+﻿<Solution>
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="PipelineShowRoom_AD.csproj" />
+  <Project Path="URPWizard.csproj" />
+</Solution>

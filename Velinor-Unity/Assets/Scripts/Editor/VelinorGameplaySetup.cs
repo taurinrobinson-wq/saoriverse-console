@@ -174,6 +174,22 @@ public class VelinorGameplaySetup
         {
             playerInput = player.AddComponent<PlayerInput>();
         }
+        
+        // Load and assign the InputActionAsset to prevent NullReferenceException
+        InputActionAsset inputActionsAsset = AssetDatabase.LoadAssetAtPath<InputActionAsset>(
+            "Assets/StarterAssets/InputSystem_Actions.inputactions");
+        
+        if (inputActionsAsset != null)
+        {
+            playerInput.actions = inputActionsAsset;
+            playerInput.defaultControlScheme = "KeyboardMouse";
+            playerInput.defaultActionMap = "Player";
+            Debug.Log("✓ Assigned InputActionAsset to PlayerInput with 'Player' action map");
+        }
+        else
+        {
+            Debug.LogError("❌ Could not find InputSystem_Actions.inputactions at Assets/StarterAssets/InputSystem_Actions.inputactions");
+        }
 #endif
 
         // ===== STEP 8: Create Lighting =====

@@ -184,14 +184,44 @@ public class DialogueUIController : MonoBehaviour
         Debug.Log("Interact [E] pressed");
     }
 
+    private void EnsureReferences()
+    {
+        if (notificationPanel == null || notificationPanel.gameObject == null || notificationText == null || notificationText.gameObject == null)
+        {
+            var canvas = GameObject.Find("DialogueCanvas");
+            if (canvas == null) canvas = GameObject.Find("UI_Canvas");
+            if (canvas != null)
+            {
+                var prompt = canvas.transform.Find("InteractionPrompt");
+                if (prompt == null) prompt = canvas.transform.Find("NotificationPanel");
+                
+                if (prompt != null)
+                {
+                    notificationPanel = prompt.GetComponent<CanvasGroup>();
+                    if (notificationPanel == null) notificationPanel = prompt.gameObject.AddComponent<CanvasGroup>();
+                    notificationText = prompt.GetComponentInChildren<TextMeshProUGUI>();
+                }
+            }
+        }
+    }
+
     // Show notification
     public void ShowNotification(string text)
     {
+        EnsureReferences();
         if (notificationText == null || notificationPanel == null) return;
         
         notificationText.text = text;
         StopAllCoroutines();
         StartCoroutine(FadeNotificationRoutine());
+    }
+
+    public void SetNotificationActive(string text, bool active)
+    {
+        EnsureReferences();
+        if (notificationText == null || notificationPanel == null) return;
+        notificationText.text = text;
+        notificationPanel.alpha = active ? 1f : 0f;
     }
 
     private IEnumerator FadeNotificationRoutine()

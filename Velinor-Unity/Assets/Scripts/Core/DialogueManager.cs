@@ -190,10 +190,11 @@ public class DialogueManager : MonoBehaviour
 
     private void AutoBindUI()
     {
-        if (dialogueCanvas == null) 
+        // Check if current references are missing or destroyed (common in DontDestroyOnLoad across scenes)
+        if (dialogueCanvas == null || dialogueCanvas.gameObject == null) 
         {
-            // Try to find by name first
             var go = GameObject.Find("DialogueCanvas");
+            if (go == null) go = GameObject.Find("UI_Canvas");
             if (go != null) dialogueCanvas = go.GetComponent<Canvas>();
             
             if (dialogueCanvas == null) dialogueCanvas = FindAnyObjectByType<Canvas>();
@@ -201,20 +202,37 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogueCanvas != null)
         {
-            if (choiceButtonContainer == null) 
+            // Always try to re-find these if they are missing or from a different scene
+            if (choiceButtonContainer == null || choiceButtonContainer.gameObject == null) 
             {
-                choiceButtonContainer = dialogueCanvas.transform.Find("DialoguePanel");
+                // Prioritize ChoicesGridContainer or ChoicesContainer
+                choiceButtonContainer = dialogueCanvas.transform.Find("DialoguePanel/ChoicesGridContainer");
                 if (choiceButtonContainer == null)
-                {
-                    // Search deeper
-                    var allRects = dialogueCanvas.GetComponentsInChildren<RectTransform>(true);
-                    foreach (var rt in allRects) if (rt.name == "DialoguePanel") { choiceButtonContainer = rt; break; }
-                }
+                    choiceButtonContainer = dialogueCanvas.transform.Find("DialoguePanel/ChoicesContainer");
+                if (choiceButtonContainer == null)
+                    choiceButtonContainer = dialogueCanvas.transform.Find("DialoguePanel");
             }
 
-            if (npcNameText == null) npcNameText = FindTextMeshInCanvas("NPCLineText");
-            if (bodyText == null) bodyText = FindTextMeshInCanvas("DialogueBodyText");
+            if (npcNameText == null || npcNameText.gameObject == null) npcNameText = FindTextMeshInCanvas("NPCNameText");
+            if (bodyText == null || bodyText.gameObject == null) bodyText = FindTextMeshInCanvas("NPCDialogueText");
+            
+            // Re-bind buttons if they are missing
+            if (btnT == null || btnT.gameObject == null) btnT = FindButtonInCanvas("ChoiceButton_T");
+            if (btnO == null || btnO.gameObject == null) btnO = FindButtonInCanvas("ChoiceButton_O");
+            if (btnN == null || btnN.gameObject == null) btnN = FindButtonInCanvas("ChoiceButton_N");
+            if (btnE == null || btnE.gameObject == null) btnE = FindButtonInCanvas("ChoiceButton_E");
+            
+            if (txtT == null || txtT.gameObject == null) txtT = FindTextMeshInButton(btnT);
+            if (txtO == null || txtO.gameObject == null) txtO = FindTextMeshInButton(btnO);
+            if (txtN == null || txtN.gameObject == null) txtN = FindTextMeshInButton(btnN);
+            if (txtE == null || txtE.gameObject == null) txtE = FindTextMeshInButton(btnE);
         }
+    }
+
+    private TextMeshProUGUI FindTextMeshInButton(Button btn)
+    {
+        if (btn == null) return null;
+        return btn.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private Button FindButtonInCanvas(string name)
