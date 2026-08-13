@@ -1,4 +1,7 @@
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public class NPCObject : Interactable
 {
@@ -26,7 +29,20 @@ public class NPCObject : Interactable
                 // Show prompt UI if it exists
                 InteractionUI.Instance?.ShowPrompt($"Press E to talk to {npcName}");
 
+                bool interactPressed = false;
+#if ENABLE_INPUT_SYSTEM
+                if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    interactPressed = true;
+                }
+#else
                 if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactPressed = true;
+                }
+#endif
+
+                if (interactPressed)
                 {
                     Interact();
                 }

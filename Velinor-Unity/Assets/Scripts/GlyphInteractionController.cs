@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public class GlyphInteractionController : MonoBehaviour
 {
@@ -23,7 +26,21 @@ public class GlyphInteractionController : MonoBehaviour
     private void Update()
     {
         if (hasCollected || !GameFlags.Get(requiredFlag)) return;
+
+        bool interactPressed = false;
+#if ENABLE_INPUT_SYSTEM
+        if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            interactPressed = true;
+        }
+#else
         if (Input.GetKeyDown(KeyCode.E))
+        {
+            interactPressed = true;
+        }
+#endif
+
+        if (interactPressed)
         {
             CollectGlyph();
         }

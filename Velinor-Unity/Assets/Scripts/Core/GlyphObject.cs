@@ -1,4 +1,7 @@
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public class GlyphObject : Interactable
 {
@@ -24,7 +27,20 @@ public class GlyphObject : Interactable
                 // Show prompt UI if it exists
                 InteractionUI.Instance?.ShowPrompt("Press E to examine glyph");
 
+                bool interactPressed = false;
+#if ENABLE_INPUT_SYSTEM
+                if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    interactPressed = true;
+                }
+#else
                 if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactPressed = true;
+                }
+#endif
+
+                if (interactPressed)
                 {
                     Interact();
                 }

@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public class DiaryController : MonoBehaviour
 {
@@ -46,13 +49,28 @@ public class DiaryController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N) && !isAnimating)
+        bool nPressed = false;
+        bool rightPressed = false;
+
+#if ENABLE_INPUT_SYSTEM
+        var keyboard = Keyboard.current;
+        if (keyboard != null)
+        {
+            if (keyboard.nKey.wasPressedThisFrame) nPressed = true;
+            if (keyboard.rightArrowKey.wasPressedThisFrame) rightPressed = true;
+        }
+#else
+        if (Input.GetKeyDown(KeyCode.N)) nPressed = true;
+        if (Input.GetKeyDown(KeyCode.RightArrow)) rightPressed = true;
+#endif
+
+        if (nPressed && !isAnimating)
         {
             if (!diaryOpen) StartCoroutine(OpenDiary());
             else StartCoroutine(CloseDiary());
         }
 
-        if (diaryOpen && Input.GetKeyDown(KeyCode.RightArrow))
+        if (diaryOpen && rightPressed)
         {
             StartCoroutine(TurnPage());
         }

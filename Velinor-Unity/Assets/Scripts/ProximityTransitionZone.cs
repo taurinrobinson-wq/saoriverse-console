@@ -12,6 +12,9 @@
  */
 
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 /// <summary>
 /// Attach to a trigger collider to create a proximity-based scene transition.
@@ -27,6 +30,7 @@ public class ProximityTransitionZone : MonoBehaviour
     [SerializeField] private bool requireKeyPress = false;
     [SerializeField] private KeyCode interactKey = KeyCode.E;
     [SerializeField] private string spawnIDForNextScene = "";
+    [SerializeField] private float spawnGracePeriod = 0.5f;
 
     private bool playerInside = false;
 
@@ -63,8 +67,15 @@ public class ProximityTransitionZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"[ProximityTransitionZone] Player entered {gameObject.name}. Triggering transition to {targetScene}...");
             playerInside = true;
+
+            if (Time.timeSinceLevelLoad < spawnGracePeriod)
+            {
+                Debug.Log($"[ProximityTransitionZone] Player inside {gameObject.name} during spawn grace period ({Time.timeSinceLevelLoad:F2}s). Transition ignored.");
+                return;
+            }
+
+            Debug.Log($"[ProximityTransitionZone] Player entered {gameObject.name}. Triggering transition to {targetScene}...");
 
             if (!requireKeyPress)
             {
@@ -91,7 +102,22 @@ public class ProximityTransitionZone : MonoBehaviour
 
     private void Update()
     {
-        if (requireKeyPress && playerInside && Input.GetKeyDown(interactKey))
+        if (!requireKeyPress || !playerInside) return;
+
+        bool isPressed = false;
+#if ENABLE_INPUT_SYSTEM
+        var keyboard = Keyboard.current;
+        if (keyboard != null)
+        {
+            if (interactKey == KeyCode.E && keyboard.eKey.wasPressedThisFrame) isPressed = true;
+            else if (interactKey == KeyCode.Space && keyboard.spaceKey.wasPressedThisFrame) isPressed = true;
+            else if (interactKey == KeyCode.Return && keyboard.enterKey.wasPressedThisFrame) isPressed = true;
+        }
+#else
+        if (Input.GetKeyDown(interactKey)) isPressed = true;
+#endif
+
+        if (isPressed)
         {
             TriggerTransition();
         }

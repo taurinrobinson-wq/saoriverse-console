@@ -12,6 +12,9 @@
  */
 
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 /// <summary>
 /// 2.5D player controller for side-scrolling cave traversal.
@@ -103,10 +106,21 @@ public class PlayerController2D5 : MonoBehaviour
         Vector2 input = Vector2.zero;
 
         // Get raw input
-        if (Input.GetKey(KeyCode.D)) input.x += 1f;
-        if (Input.GetKey(KeyCode.A)) input.x -= 1f;
-        if (Input.GetKey(KeyCode.W)) input.y += 1f;
-        if (Input.GetKey(KeyCode.S)) input.y -= 1f;
+#if ENABLE_INPUT_SYSTEM
+        var keyboard = Keyboard.current;
+        if (keyboard != null)
+        {
+            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) input.x += 1f;
+            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) input.x -= 1f;
+            if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) input.y += 1f;
+            if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) input.y -= 1f;
+        }
+#else
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) input.x += 1f;
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) input.x -= 1f;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) input.y += 1f;
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) input.y -= 1f;
+#endif
 
         // Calculate world movement
         Vector3 moveDir = new Vector3(input.x, input.y, 0).normalized;

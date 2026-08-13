@@ -1,5 +1,8 @@
 using UnityEngine;
 using Velinor.Core;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 namespace StarterAssets
 {
@@ -54,8 +57,22 @@ namespace StarterAssets
 
         private void Update()
         {
-            // Check for E key when player is in zone
-            if (_playerInZone && Input.GetKeyDown(KeyCode.E) && _interactable != null)
+            if (!_playerInZone || _interactable == null) return;
+
+            bool interactPressed = false;
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                interactPressed = true;
+            }
+#else
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                interactPressed = true;
+            }
+#endif
+
+            if (interactPressed)
             {
                 Debug.Log($"Interacting with {gameObject.name}");
                 _interactable.Interact(GameObject.FindGameObjectWithTag("Player"));
