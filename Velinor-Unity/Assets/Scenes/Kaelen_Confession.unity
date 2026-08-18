@@ -189,7 +189,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10}
   m_Enabled: 1
-  m_Script: {fileID: 11500000000, guid: b6a2f07b0ab3a4f2a82f4691ecfa4047, type: 3}
+  m_Script: {fileID: 11500000, guid: cdba57528551c114fa0003599d868430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
     npcId: Kaelen
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21}
   m_Enabled: 1
-  m_Script: {fileID: 11500000000, guid: 6ea0f2f4316f65d1f083319ef8a7fdb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 854d0fb63a8231e4d937118652772d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &24
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24}
   m_Enabled: 1
-  m_Script: {fileID: 11500000000, guid: 4062c80b2b8f324d1bf241f7e774ef65, type: 3}
+  m_Script: {fileID: 11500000, guid: f00140109341e9a40baf790020baf326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &27
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabAsset: {fileID: 0}
   m_Enabled: 1
-  m_Script: {fileID: 11500000000, guid: 7f1c4f30d544d4fd3b8d734a70f3f936, type: 3}
+  m_Script: {fileID: 11500000, guid: e8c6b6391d455d047b744ddeb6759d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &30

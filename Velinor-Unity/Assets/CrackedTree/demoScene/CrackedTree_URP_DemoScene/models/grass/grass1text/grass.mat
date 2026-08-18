@@ -797,6 +797,7 @@ Material:
     - _UseShadowThreshold: 1
     - _VertexColorMode: 0
     - _WorkflowMode: 1
+    - _XRMotionVectorsPass: 1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 3
     - _ZTestModeDistortion: 4
@@ -816,7 +817,7 @@ Material:
     - _CarPaint2_CTF0s: {r: 1, g: 1, b: 1, a: 1}
     - _CarPaint2_CTSpreads: {r: 1, g: 1, b: 1, a: 1}
     - _ClearcoatNormalMap_SO: {r: 1, g: 1, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.96164125, b: 0.7122642, a: 1}
+    - _Color: {r: 1, g: 0.9616413, b: 0.7122642, a: 1}
     - _DiffusionProfileAsset: {r: 2.2888926e+38, g: 1.2389358e-26, b: 7.69327e-37, a: 0.00018220427}
     - _DiffusionProfileAsset0: {r: 0, g: 0, b: 0, a: 0}
     - _DiffusionProfileAsset1: {r: 0, g: 0, b: 0, a: 0}

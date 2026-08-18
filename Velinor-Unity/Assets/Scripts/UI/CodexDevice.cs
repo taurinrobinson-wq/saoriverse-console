@@ -194,7 +194,7 @@ public class CodexDevice : MonoBehaviour
     private void UpdateDeviceDisplay()
     {
         // Update UI to show current page of glyphs
-        Debug.Log($"📖 Device Page: {currentGlyphPage + 1}");
+        Debug.Log($"Device Page: {currentGlyphPage + 1}");
     }
 
     private void InitializeGlyphs()

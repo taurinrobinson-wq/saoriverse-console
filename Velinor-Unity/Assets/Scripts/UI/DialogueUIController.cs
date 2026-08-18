@@ -1,275 +1,213 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
+/// <summary>
+/// Handles ONLY NPC Dialogue UI
+/// Triggered by: E key + player near NPC
+/// Not responsible for: Diary (DiaryController), Codex (CodexController)
+/// </summary>
 public class DialogueUIController : MonoBehaviour
 {
-    [Header("UI Panels")]
-    public CanvasGroup codexPanel;
-    public CanvasGroup diaryPanel;
-    public CanvasGroup notificationPanel;
-    public TextMeshProUGUI notificationText;
+    [Header("Dialogue Panel")]
+    public CanvasGroup dialoguePanel;
+    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI npcNameText;
+
+    [Header("Fonts")]
+    public TMP_FontAsset dialogueFont;
+
+    private Canvas _cachedCanvas;
+
+#if ENABLE_INPUT_SYSTEM
+    private InputAction _interactAction;
+
+    private void OnEnable()
+    {
+        _interactAction = new InputAction("Interact", binding: "<Keyboard>/e");
+        _interactAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _interactAction?.Disable();
+    }
+#endif
+
+    private void Awake()
+    {
+        // Find DialoguePanel in UI_Canvas
+        Canvas[] allCanvases = FindObjectsByType<Canvas>();
+        foreach (Canvas c in allCanvases)
+        {
+            if (c.gameObject.name == "UI_Canvas")
+            {
+                _cachedCanvas = c;
+                
+                Transform dialoguePanelT = FindPanelRecursive(c.transform, "DialoguePanel");
+                if (dialoguePanelT != null)
+                {
+                    dialoguePanel = dialoguePanelT.GetComponent<CanvasGroup>();
+                    dialogueText = dialoguePanelT.Find("Text")?.GetComponent<TextMeshProUGUI>();
+                    npcNameText = dialoguePanelT.Find("NPCName")?.GetComponent<TextMeshProUGUI>();
+                    Debug.Log("[UI] DialoguePanel found and assigned");
+                }
+                break;
+            }
+        }
+    }
+
+    private Transform FindPanelRecursive(Transform parent, string panelName)
+    {
+        if (parent.name == panelName)
+            return parent;
+
+        foreach (Transform child in parent)
+        {
+            Transform result = FindPanelRecursive(child, panelName);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    private void Start()
+    {
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.alpha = 0f;
+            dialoguePanel.blocksRaycasts = false;
+            dialoguePanel.interactable = false;
+            Debug.Log("[UI] DialoguePanel initialized (hidden)");
+        }
+    }
 
     private void Update()
     {
+        // FORCE canvas to stay active if it got deactivated
+        if (_cachedCanvas != null && !_cachedCanvas.gameObject.activeSelf)
+        {
+            _cachedCanvas.gameObject.SetActive(true);
+            Debug.LogWarning("[UI] Canvas GameObject was deactivated - re-activating it!");
+        }
+        
+        // Also ensure Canvas component is enabled (DialogueManager disables it)
+        if (_cachedCanvas != null && !_cachedCanvas.enabled)
+        {
+            _cachedCanvas.enabled = true;
+            Debug.LogWarning("[UI] Canvas component was disabled - re-enabling it!");
+        }
+
+        bool ePressed = false;
+
 #if ENABLE_INPUT_SYSTEM
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.cKey.wasPressedThisFrame)
-            {
-                ToggleCodex();
-            }
-            if (Keyboard.current.nKey.wasPressedThisFrame)
-            {
-                ToggleDiary();
-            }
-        }
-#else
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ToggleCodex();
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            ToggleDiary();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TryInteract();
-        }
+        if (_interactAction != null && _interactAction.WasPressedThisFrame())
+            ePressed = true;
+
+        var keyboard = Keyboard.current;
+        if (keyboard != null && keyboard.eKey.wasPressedThisFrame)
+            ePressed = true;
 #endif
-    }
 
-    public void ToggleCodex()
-    {
-        if (codexPanel == null) return;
-        bool opening = codexPanel.alpha < 0.5f;
-        codexPanel.alpha = opening ? 1f : 0f;
-        codexPanel.blocksRaycasts = opening;
-        codexPanel.interactable = opening;
-        
-        if (opening)
-        {
-            UpdateCodexUI();
-        }
-    }
-
-    private void UpdateCodexUI()
-    {
-        var codexImage = codexPanel.transform.Find("CodexImage");
-        if (codexImage == null) return;
-
-        // Clear previous
-        foreach (Transform child in codexImage)
-        {
-            Destroy(child.gameObject);
-        }
-
-        if (Velinor.Core.CodexManager.Instance == null) return;
-        var state = Velinor.Core.CodexManager.Instance.State;
-
-        GameObject textObj = new GameObject("CodexText");
-        textObj.transform.SetParent(codexImage, false);
-        var textMesh = textObj.AddComponent<TextMeshProUGUI>();
-        textMesh.fontSize = 20;
-        textMesh.color = Color.white;
-        textMesh.alignment = TextAlignmentOptions.Center;
-
-        string fullContent = "<b>🌌 CODEX DEVICE</b>\n\n";
-        fullContent += $"Resonance Level: <color=#00FFFF>{state.ResonanceLevel * 100:F1}%</color>\n\n";
-        fullContent += "<b>Active Emotional Tags:</b>\n";
-        if (state.ActiveTags.Count == 0)
-        {
-            fullContent += "<i>None. Converse with others to unlock emotional resonance.</i>\n";
-        }
-        else
-        {
-            foreach (var tag in state.ActiveTags)
-            {
-                fullContent += $"• <color=#FFAAAA>{tag}</color>\n";
-            }
-        }
-
-        fullContent += "\n<b>Resolved Glyphs:</b>\n";
-        if (state.ResolvedGlyphIds.Count == 0)
-        {
-            fullContent += "<i>None yet. Discover hidden glyph structures in the world.</i>";
-        }
-        else
-        {
-            fullContent += $"• {state.ResolvedGlyphIds.Count} glyphs resolved.";
-        }
-
-        textMesh.text = fullContent;
-    }
-
-    public void ToggleDiary()
-    {
-        if (diaryPanel == null) return;
-        bool opening = diaryPanel.alpha < 0.5f;
-        diaryPanel.alpha = opening ? 1f : 0f;
-        diaryPanel.blocksRaycasts = opening;
-        diaryPanel.interactable = opening;
-        
-        if (opening)
-        {
-            UpdateDiaryUI();
-        }
-    }
-
-    private void UpdateDiaryUI()
-    {
-        var viewport = diaryPanel.transform.Find("Viewport");
-        if (viewport == null) return;
-        var content = viewport.Find("Content");
-        if (content == null) return;
-
-        // Clear previous
-        foreach (Transform child in content)
-        {
-            Destroy(child.gameObject);
-        }
-
-        if (DiaryManager.Instance == null) return;
-        var entries = DiaryManager.Instance.GetEntries();
-
-        GameObject textObj = new GameObject("DiaryText");
-        textObj.transform.SetParent(content, false);
-        var textMesh = textObj.AddComponent<TextMeshProUGUI>();
-        textMesh.fontSize = 18;
-        textMesh.color = Color.white;
-        textMesh.lineSpacing = 1.2f;
-
-        string fullContent = "<b>📖 DIARY ENTRIES</b>\n\n";
-        if (entries.Count == 0)
-        {
-            fullContent += "<i>No entries yet. Explore the ruins and speak to Remnants.</i>";
-        }
-        else
-        {
-            foreach (var entry in entries)
-            {
-                fullContent += $"<color=#8888FF>[{entry.timestamp}]</color>\n{entry.content}\n\n";
-            }
-        }
-        textMesh.text = fullContent;
-
-        var layout = content.GetComponent<VerticalLayoutGroup>();
-        if (layout == null)
-        {
-            layout = content.gameObject.AddComponent<VerticalLayoutGroup>();
-            layout.childControlHeight = true;
-            layout.childControlWidth = true;
-            layout.childForceExpandHeight = false;
-            layout.childForceExpandWidth = true;
-            layout.padding = new RectOffset(10, 10, 10, 10);
-            layout.spacing = 10;
-        }
-
-        var fitter = content.GetComponent<ContentSizeFitter>();
-        if (fitter == null)
-        {
-            fitter = content.gameObject.AddComponent<ContentSizeFitter>();
-            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-        }
+        if (ePressed)
+            TryInteract();
     }
 
     private void TryInteract()
     {
-        Debug.Log("Interact [E] pressed");
+        Debug.Log("[UI] E Pressed - Would interact with NPC (dialogue system)");
+        // TODO: Wire to NPC proximity check and DialogueManager
     }
 
-    private void EnsureReferences()
+    /// <summary>
+    /// Show dialogue from NPC (called by DialogueManager or NPC)
+    /// </summary>
+    public void ShowDialogue(string npcName, string text)
     {
-        if (notificationPanel == null || notificationPanel.gameObject == null || notificationText == null || notificationText.gameObject == null)
+        if (dialoguePanel == null)
         {
-            var canvas = GameObject.Find("DialogueCanvas");
-            if (canvas == null) canvas = GameObject.Find("UI_Canvas");
-            if (canvas != null)
-            {
-                var prompt = canvas.transform.Find("InteractionPrompt");
-                if (prompt == null) prompt = canvas.transform.Find("NotificationPanel");
-                
-                if (prompt != null)
-                {
-                    notificationPanel = prompt.GetComponent<CanvasGroup>();
-                    if (notificationPanel == null) notificationPanel = prompt.gameObject.AddComponent<CanvasGroup>();
-                    notificationText = prompt.GetComponentInChildren<TextMeshProUGUI>();
-                }
-            }
+            Debug.LogError("[UI] DialoguePanel not assigned!");
+            return;
         }
+
+        if (npcNameText != null) npcNameText.text = npcName;
+        if (dialogueText != null) dialogueText.text = text;
+
+        dialoguePanel.alpha = 1f;
+        dialoguePanel.blocksRaycasts = true;
+        dialoguePanel.interactable = true;
+        Debug.Log($"[UI] Showing dialogue from {npcName}");
     }
 
-    // Show notification
-    public void ShowNotification(string text)
+    /// <summary>
+    /// Hide dialogue panel
+    /// </summary>
+    public void HideDialogue()
     {
-        EnsureReferences();
-        if (notificationText == null || notificationPanel == null) return;
-        
-        notificationText.text = text;
-        StopAllCoroutines();
-        StartCoroutine(FadeNotificationRoutine());
+        if (dialoguePanel == null) return;
+
+        dialoguePanel.alpha = 0f;
+        dialoguePanel.blocksRaycasts = false;
+        dialoguePanel.interactable = false;
+        Debug.Log("[UI] Dialogue hidden");
     }
 
+    // ======= NOTIFICATION/SYSTEM EVENT METHODS (for other systems to call) =======
+
+    /// <summary>
+    /// Show/hide interaction prompt (called by NPCInteraction, NPCs, etc.)
+    /// </summary>
     public void SetNotificationActive(string text, bool active)
     {
-        EnsureReferences();
-        if (notificationText == null || notificationPanel == null) return;
-        notificationText.text = text;
-        notificationPanel.alpha = active ? 1f : 0f;
+        // TODO: Wire to actual notification/prompt UI
+        Debug.Log($"[UI] Notification: {text} (Active: {active})");
     }
 
-    private IEnumerator FadeNotificationRoutine()
-    {
-        // Fade in
-        yield return StartCoroutine(FadeCanvasGroup(notificationPanel, 1f, 0.1f));
-        // Wait 3s
-        yield return new WaitForSeconds(3f);
-        // Fade out
-        yield return StartCoroutine(FadeCanvasGroup(notificationPanel, 0f, 1f));
-    }
-
-    private IEnumerator FadeCanvasGroup(CanvasGroup cg, float targetAlpha, float duration)
-    {
-        float startAlpha = cg.alpha;
-        float time = 0;
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            cg.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
-            yield return null;
-        }
-        cg.alpha = targetAlpha;
-    }
-
-    // Trigger system events
+    /// <summary>
+    /// Trigger system events (called by DialogueManager)
+    /// Examples: give_device, diary_update, codex_entry_unlock, etc.
+    /// </summary>
     public void TriggerSystemEvent(string eventName)
     {
-        switch(eventName)
+        switch (eventName)
         {
             case "give_device":
-                ShowNotification("??? Obtained. Press [C] to access Codex.");
+                Debug.Log("[UI] EVENT: Player received codex device!");
+                // Unlock codex in CodexController
+                var codexController = FindAnyObjectByType<CodexController>();
+                if (codexController != null)
+                {
+                    codexController.UnlockCodex();
+                    Debug.Log("[UI] CodexController.UnlockCodex() called");
+                }
+                else
+                {
+                    Debug.LogWarning("[UI] CodexController not found in scene!");
+                }
                 break;
             case "diary_update":
-                ShowNotification("Diary updated. Press [N] to access.");
+                Debug.Log("[UI] EVENT: Diary has been updated");
                 break;
             case "codex_entry_unlock":
-                ShowNotification("Codex Updated: Pattern Recognition unlocked.");
+                Debug.Log("[UI] EVENT: Codex entry unlocked");
                 break;
             case "truth_echo_unlock":
-                ShowNotification("Codex Updated: Truth Echo unlocked.");
+                Debug.Log("[UI] EVENT: Truth Echo unlocked in Codex");
                 break;
             case "story_scroll_acquire":
-                ShowNotification("Story Scroll Acquired.");
+                Debug.Log("[UI] EVENT: Story Scroll acquired");
                 break;
             case "encounter_complete":
-                ShowNotification("Encounter Complete: Saori's Remnants updated.");
+                Debug.Log("[UI] EVENT: Encounter complete");
+                break;
+            default:
+                Debug.Log($"[UI] EVENT: {eventName}");
                 break;
         }
     }
 }
+

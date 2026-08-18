@@ -33,9 +33,18 @@ public class ProximityTransitionZone : MonoBehaviour
     [SerializeField] private float spawnGracePeriod = 0.5f;
 
     private bool playerInside = false;
+    private bool transitionTriggered = false;
+    private Collider cachedCollider;
+    private Collider2D cachedCollider2D;
+
+    private void Awake()
+    {
+        cachedCollider = GetComponent<Collider>();
+        cachedCollider2D = GetComponent<Collider2D>();
+    }
 
 #if UNITY_EDITOR
-    private void OnValidate()
+private void OnValidate()
     {
         if (targetSceneAsset != null)
         {
@@ -68,20 +77,27 @@ public class ProximityTransitionZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = true;
-
-            if (Time.timeSinceLevelLoad < spawnGracePeriod)
-            {
-                Debug.Log($"[ProximityTransitionZone] Player inside {gameObject.name} during spawn grace period ({Time.timeSinceLevelLoad:F2}s). Transition ignored.");
-                return;
-            }
-
-            Debug.Log($"[ProximityTransitionZone] Player entered {gameObject.name}. Triggering transition to {targetScene}...");
-
-            if (!requireKeyPress)
-            {
-                TriggerTransition();
-            }
+            CheckAutoTrigger(other);
         }
+    }
+
+    private void CheckAutoTrigger(GameObject player)
+    {
+        if (transitionTriggered || requireKeyPress) return;
+
+        // Use pivot position to check if player is actually "at" the trigger
+        if (!IsPlayerPivotInside(player)) return;
+
+        if (Time.timeSinceLevelLoad < spawnGracePeriod) return;
+
+        TriggerTransition();
+    }
+
+    private bool IsPlayerPivotInside(GameObject player)
+    {
+        if (cachedCollider != null) return cachedCollider.bounds.Contains(player.transform.position);
+        if (cachedCollider2D != null) return cachedCollider2D.OverlapPoint(player.transform.position);
+        return false;
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -102,7 +118,19 @@ public class ProximityTransitionZone : MonoBehaviour
 
     private void Update()
     {
-        if (!requireKeyPress || !playerInside) return;
+        if (!playerInside || transitionTriggered) return;
+
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null) return;
+
+        if (!requireKeyPress)
+        {
+            CheckAutoTrigger(player);
+            return;
+        }
+
+        // Key press logic: Player must be at trigger
+        if (!IsPlayerPivotInside(player)) return;
 
         bool isPressed = false;
 #if ENABLE_INPUT_SYSTEM
@@ -125,11 +153,16 @@ public class ProximityTransitionZone : MonoBehaviour
 
     private void TriggerTransition()
     {
+        if (transitionTriggered) return;
+
         if (string.IsNullOrEmpty(targetScene))
         {
             Debug.LogError("[ProximityTransitionZone] targetScene is not set!");
             return;
         }
+
+        transitionTriggered = true;
+        Debug.Log($"[ProximityTransitionZone] Triggering transition to {targetScene}...");
 
         // Set spawn point for next scene
         if (!string.IsNullOrEmpty(spawnIDForNextScene))

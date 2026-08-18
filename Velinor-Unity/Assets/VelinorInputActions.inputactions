@@ -1,0 +1,74 @@
+{
+    "name": "VelinorInputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "e5c8e3a1-7c5e-4b7e-8e3a-1c7c5e4b7e8e",
+            "actions": [
+                {
+                    "name": "Toggle_Diary",
+                    "type": "Button",
+                    "id": "d4c8e3a1-7c5e-4b7e-8e3a-1c7c5e4b7e8e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Toggle_Codex",
+                    "type": "Button",
+                    "id": "c3c8e3a1-7c5e-4b7e-8e3a-1c7c5e4b7e8e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "b2c8e3a1-7c5e-4b7e-8e3a-1c7c5e4b7e8e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a1c8e3a1-7c5e-4b7e-8e3a-1c7c5e4b7e8e",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle_Diary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90c8e3a1-7c5e-4b7e-8e3a-1c7c5e4b7e8e",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle_Codex",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8fba8e3a-1c7c-5e4b-7e8e-3a1c7c5e4b7e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

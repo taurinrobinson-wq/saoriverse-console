@@ -188,7 +188,7 @@ public class DialogueManager : MonoBehaviour
         DisplayPassage(startPid);
     }
 
-    private void AutoBindUI()
+    public void AutoBindUI()
     {
         // Check if current references are missing or destroyed (common in DontDestroyOnLoad across scenes)
         if (dialogueCanvas == null || dialogueCanvas.gameObject == null) 
@@ -215,6 +215,7 @@ public class DialogueManager : MonoBehaviour
 
             if (npcNameText == null || npcNameText.gameObject == null) npcNameText = FindTextMeshInCanvas("NPCNameText");
             if (bodyText == null || bodyText.gameObject == null) bodyText = FindTextMeshInCanvas("NPCDialogueText");
+            if (sharedBeatText == null || sharedBeatText.gameObject == null) sharedBeatText = FindTextMeshInCanvas("SharedBeatText");
             
             // Re-bind buttons if they are missing
             if (btnT == null || btnT.gameObject == null) btnT = FindButtonInCanvas("ChoiceButton_T");

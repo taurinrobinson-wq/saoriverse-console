@@ -2451,7 +2451,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1331098280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2944b2114481094cb3394b72e62c68f, type: 3}
+  m_Script: {fileID: 11500000, guid: f00140109341e9a40baf790020baf326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   TrustTone: 0.5
