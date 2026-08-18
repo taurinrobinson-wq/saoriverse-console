@@ -40,6 +40,10 @@ public class DialogueUIController : MonoBehaviour
 
     private void Awake()
     {
+        // Mark this controller as persistent across scenes
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("[UI] DialogueUIController marked as persistent across scenes");
+
         // Find DialoguePanel in UI_Canvas
         Canvas[] allCanvases = FindObjectsByType<Canvas>();
         foreach (Canvas c in allCanvases)

@@ -17,6 +17,7 @@ public class CodexController : MonoBehaviour
     public CanvasGroup codexPanel;
     public Transform viewport;
     public Image codexImage;
+    public Sprite codexBackgroundSprite;  // Assign Glyph_Codex2.png in Inspector
 
     [Header("Navigation")]
     public TextMeshProUGUI glyphNameText;
@@ -61,6 +62,10 @@ public class CodexController : MonoBehaviour
 
     private void Awake()
     {
+        // Mark this controller as persistent across scenes
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("[Codex] CodexController marked as persistent across scenes");
+
         // Find CodexPanel in UI_Canvas
         Canvas[] allCanvases = FindObjectsByType<Canvas>();
         foreach (Canvas c in allCanvases)
@@ -122,6 +127,20 @@ public class CodexController : MonoBehaviour
             codexPanel.blocksRaycasts = false;
             codexPanel.interactable = false;
             Debug.Log("[Codex] CodexPanel initialized (hidden)");
+        }
+
+        // Assign the codex background sprite if provided
+        if (codexImage != null && codexBackgroundSprite != null)
+        {
+            codexImage.sprite = codexBackgroundSprite;
+            codexImage.type = Image.Type.Simple;
+            codexImage.preserveAspect = true;
+            Debug.Log($"[Codex] Codex background sprite assigned: {codexBackgroundSprite.name}");
+            Debug.Log($"[Codex] Image component: enabled={codexImage.enabled}, raycastTarget={codexImage.raycastTarget}");
+        }
+        else if (codexImage != null && codexBackgroundSprite == null)
+        {
+            Debug.LogWarning("[Codex] codexBackgroundSprite is not assigned in Inspector!");
         }
 
         // For testing: allow access if not requiring device
@@ -205,10 +224,10 @@ public class CodexController : MonoBehaviour
         codexPanel.blocksRaycasts = opening;
         codexPanel.interactable = opening;
 
-        // Set overlay color
+        // Set image color to WHITE so sprite shows (not black)
         if (codexImage != null)
         {
-            codexImage.color = opening ? new Color(0, 0, 0, 0.8f) : new Color(0, 0, 0, 0);
+            codexImage.color = opening ? new Color(1, 1, 1, 1f) : new Color(1, 1, 1, 0);
             Debug.Log($"[Codex] Image color set to {codexImage.color}");
         }
 

@@ -38,6 +38,13 @@ public class DiaryController : MonoBehaviour
     private InputAction _nextPageAction;
     private InputAction _prevPageAction;
 
+    private void Awake()
+    {
+        // Mark this controller as persistent across scenes
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("[Diary] DiaryController marked as persistent across scenes");
+    }
+
     private void OnEnable()
     {
         _nextPageAction = new InputAction("NextPage", binding: "<Keyboard>/rightArrow");

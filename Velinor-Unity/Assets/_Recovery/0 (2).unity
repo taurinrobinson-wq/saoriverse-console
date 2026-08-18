@@ -174,59 +174,6 @@ Transform:
   - {fileID: 1318043999}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &106761838
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 106761840}
-  - component: {fileID: 106761839}
-  m_Layer: 0
-  m_Name: Codex Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &106761839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106761838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29425e826a988f04fbd463b610c74a8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CodexController
-  codexPanel: {fileID: 0}
-  viewport: {fileID: 0}
-  codexImage: {fileID: 0}
-  codexBackgroundSprite: {fileID: 21300000, guid: 5d5bdad2f8b0d684cb62db0e9a8346af, type: 3}
-  glyphNameText: {fileID: 0}
-  nextPageBtn: {fileID: 0}
-  prevPageBtn: {fileID: 0}
-  codexFont: {fileID: 0}
-  requiresCodexDevice: 0
---- !u!4 &106761840
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106761838}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 502.94293, y: 256.30426, z: -106.53479}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182047851
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,11 +543,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &561413085 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4506911830062765317, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
-  m_PrefabInstance: {fileID: 1121762014313669527}
-  m_PrefabAsset: {fileID: 0}
 --- !u!28 &789732214
 Texture2D:
   m_ObjectHideFlags: 0
@@ -1450,6 +1392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1616405114}
   - component: {fileID: 1616405113}
+  - component: {fileID: 1616405115}
   m_Layer: 0
   m_Name: UIController
   m_TagString: Untagged
@@ -1488,6 +1431,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1616405115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616405112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29425e826a988f04fbd463b610c74a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CodexController
+  codexPanel: {fileID: 0}
+  viewport: {fileID: 0}
+  codexImage: {fileID: 0}
+  glyphNameText: {fileID: 0}
+  nextPageBtn: {fileID: 0}
+  prevPageBtn: {fileID: 0}
+  codexFont: {fileID: 0}
+  requiresCodexDevice: 0
 --- !u!1 &1662531326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,6 +2548,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6326592892544795900, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326592892544795900, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326592892544795900, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326592892544795900, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6522532991356500535, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2684,10 +2663,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4506911830062765317, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5828066028452034402}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
 --- !u!114 &2099670723847929085 stripped
 MonoBehaviour:
@@ -2727,18 +2703,6 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 8586848117150933635, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
   m_PrefabInstance: {fileID: 1121762014313669527}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5828066028452034402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561413085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e24643f3d635f64f848b17c0c58d28f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIPersistenceManager
 --- !u!224 &6302017402367088563 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 418814179188818143, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
@@ -2855,4 +2819,3 @@ SceneRoots:
   - {fileID: 1543128805}
   - {fileID: 1121762014313669527}
   - {fileID: 1616405114}
-  - {fileID: 106761840}
