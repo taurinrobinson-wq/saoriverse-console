@@ -81,7 +81,7 @@ namespace Velinor.Core
         private void OnButtonClicked()
         {
             Debug.Log($"[GlyphUI] Button clicked for {glyphData.glyphName}");
-            
+
             // Find and notify CodexController
             var codexController = FindAnyObjectByType<CodexController>();
             if (codexController != null)

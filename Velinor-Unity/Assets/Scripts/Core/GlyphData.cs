@@ -16,7 +16,7 @@ namespace Velinor.Core
         public void OnValidate()
         {
             if (string.IsNullOrEmpty(glyphName))
-                glyphName = gameObject.name;
+                glyphName = this.name;
         }
     }
 }

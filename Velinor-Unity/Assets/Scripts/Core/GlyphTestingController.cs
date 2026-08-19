@@ -37,10 +37,10 @@ public class GlyphTestingController : MonoBehaviour
         // Add listeners to toggles
         if (sorrowToggle != null)
             sorrowToggle.onValueChanged.AddListener(OnSorrowToggled);
-        
+
         if (remembranceToggle != null)
             remembranceToggle.onValueChanged.AddListener(OnRemembranceToggled);
-        
+
         if (legacyToggle != null)
             legacyToggle.onValueChanged.AddListener(OnLegacyToggled);
 
@@ -111,10 +111,10 @@ public class GlyphTestingController : MonoBehaviour
     {
         if (sorrowToggle != null)
             sorrowToggle.onValueChanged.RemoveListener(OnSorrowToggled);
-        
+
         if (remembranceToggle != null)
             remembranceToggle.onValueChanged.RemoveListener(OnRemembranceToggled);
-        
+
         if (legacyToggle != null)
             legacyToggle.onValueChanged.RemoveListener(OnLegacyToggled);
     }

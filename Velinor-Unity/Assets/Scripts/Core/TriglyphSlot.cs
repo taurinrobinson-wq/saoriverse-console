@@ -11,7 +11,9 @@ namespace Velinor.Core
     {
         [SerializeField] private Image slotImage;
         [SerializeField] private Button button;
-    [SerializeField] public int slotIndex;  // 0, 1, or 2
+        [SerializeField] public int slotIndex;  // 0, 1, or 2
+        [SerializeField] private Color emptySlotColor = new Color(0.2f, 0.2f, 0.3f, 0.7f);
+
         public bool isFilled { get; private set; }
         public GlyphUI placedGlyph { get; private set; }
 
