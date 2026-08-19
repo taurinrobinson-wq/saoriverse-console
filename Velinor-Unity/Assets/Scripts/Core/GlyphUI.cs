@@ -10,13 +10,14 @@ namespace Velinor.Core
     /// </summary>
     public class GlyphUI : MonoBehaviour
     {
-        [SerializeField] private Image iconImage;
+        [SerializeField] private Image _iconImage;
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private GameObject glowHighlight;
         [SerializeField] private Button button;
 
         public GlyphData glyphData { get; private set; }
         public bool isCollected { get; set; }
+        public Image iconImage => _iconImage;
 
         private void Start()
         {
@@ -33,9 +34,9 @@ namespace Velinor.Core
         {
             glyphData = data;
 
-            if (iconImage != null && data.icon != null)
+            if (_iconImage != null && data.icon != null)
             {
-                iconImage.sprite = data.icon;
+                _iconImage.sprite = data.icon;
             }
 
             if (nameText != null)

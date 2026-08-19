@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Velinor.Core;
 
 /// <summary>
 /// Manages the complete glyph placement workflow.
@@ -169,5 +170,30 @@ public class GlyphPlacementManager : MonoBehaviour
             placementPrompt.text = "";
         if (statusMessage != null)
             statusMessage.enabled = false;
+    }
+
+    /// <summary>
+    /// Called when a TriglyphSlot is clicked.
+    /// Places the currently selected glyph from CodexController into the slot.
+    /// </summary>
+    public void OnTriglyphSlotClicked(TriglyphSlot slot)
+    {
+        if (slot == null)
+        {
+            Debug.LogError("[GlyphPlacementManager] TriglyphSlot is null!");
+            return;
+        }
+
+        // Get the currently selected glyph from CodexController
+        CodexController codexController = FindAnyObjectByType<CodexController>();
+        if (codexController == null)
+        {
+            Debug.LogError("[GlyphPlacementManager] CodexController not found!");
+            return;
+        }
+
+        // Note: Need to access selectedGlyph from CodexController
+        // For now, this is a placeholder - will need to expose selectedGlyph as public property
+        Debug.Log($"[GlyphPlacementManager] Triglyph slot clicked at slot {slot.slotIndex}");
     }
 }
