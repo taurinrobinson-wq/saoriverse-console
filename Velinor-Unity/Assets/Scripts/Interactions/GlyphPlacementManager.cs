@@ -27,7 +27,6 @@ public class GlyphPlacementManager : MonoBehaviour
     private List<GlyphSelectable> selectedGlyphs = new List<GlyphSelectable>();
     private GlyphSelectable currentSelectedGlyph = null;
     private const int GLYPHS_NEEDED = 3;
-    private bool isPlacementActive = false;
 
     private void Update()
     {
@@ -107,8 +106,6 @@ public class GlyphPlacementManager : MonoBehaviour
     /// </summary>
     private IEnumerator TriggerDoorOpening()
     {
-        isPlacementActive = false;
-
         // Show status message
         if (statusMessage != null)
         {
@@ -159,7 +156,6 @@ public class GlyphPlacementManager : MonoBehaviour
     {
         selectedGlyphs.Clear();
         currentSelectedGlyph = null;
-        isPlacementActive = false;
 
         // Hide slot visuals
         if (glyphSlot_Sorrow != null)
