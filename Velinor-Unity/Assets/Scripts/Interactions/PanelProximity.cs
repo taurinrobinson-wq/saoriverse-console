@@ -10,10 +10,17 @@ public class PanelProximity : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"[PanelProximity] OnTriggerEnter: {other.gameObject.name}, tag={other.tag}");
         if (other.CompareTag("Player"))
         {
+            Debug.Log("[PanelProximity] Player detected! Showing prompt.");
             if (interactionPrompt != null)
+            {
                 interactionPrompt.SetActive(true);
+                Debug.Log("[PanelProximity] Prompt activated.");
+            }
+            else
+                Debug.LogError("[PanelProximity] interactionPrompt is NULL!");
         }
     }
 
@@ -21,6 +28,7 @@ public class PanelProximity : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("[PanelProximity] Player left. Hiding prompt.");
             if (interactionPrompt != null)
                 interactionPrompt.SetActive(false);
         }

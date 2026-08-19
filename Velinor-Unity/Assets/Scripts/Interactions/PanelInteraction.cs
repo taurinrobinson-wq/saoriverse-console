@@ -16,16 +16,22 @@ public class PanelInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        if (playerInRange)
         {
-            InteractWithPanel();
+            if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                Debug.Log("[PanelInteraction] E key pressed while in range!");
+                InteractWithPanel();
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"[PanelInteraction] OnTriggerEnter: {other.gameObject.name}, tag={other.tag}");
         if (other.CompareTag("Player"))
         {
+            Debug.Log("[PanelInteraction] Player in range!");
             playerInRange = true;
             ShowPrompt(true);
         }
@@ -35,6 +41,7 @@ public class PanelInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("[PanelInteraction] Player left range.");
             playerInRange = false;
             ShowPrompt(false);
         }
