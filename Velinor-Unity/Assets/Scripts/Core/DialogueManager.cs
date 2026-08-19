@@ -131,7 +131,12 @@ public class DialogueManager : MonoBehaviour
         if (txtN == null) Debug.LogWarning("[DialogueManager] txtN (NarrativePresence label) is not assigned in Inspector.");
         if (txtE == null) Debug.LogWarning("[DialogueManager] txtE (Empathy label) is not assigned in Inspector.");
 
-        if (dialogueCanvas != null) dialogueCanvas.enabled = false;
+        // Ensure dialogue canvas is disabled at startup
+        if (dialogueCanvas != null)
+        {
+            dialogueCanvas.enabled = false;
+            Debug.Log("[DialogueManager] Dialogue canvas disabled on initialization.");
+        }
         if (sharedBeatText != null) sharedBeatText.gameObject.SetActive(false);
     }
 

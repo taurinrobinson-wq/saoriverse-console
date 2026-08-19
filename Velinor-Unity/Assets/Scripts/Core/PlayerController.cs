@@ -82,6 +82,13 @@ namespace Velinor.Core
 
         private void HandleMovement()
         {
+            // Check if movement is allowed (disabled when panels are open)
+            if (!InputManager.IsMovementEnabled())
+            {
+                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+                return;
+            }
+
             // Get input
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");

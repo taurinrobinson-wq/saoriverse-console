@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using Velinor.Core;
 
 /// <summary>
 /// Handles player interaction with the panel.
 /// When the player presses E while in range, activates the triglyph panel UI and codex.
+/// Also disables player movement while panels are open.
 /// </summary>
 public class PanelInteraction : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class PanelInteraction : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactionPrompt;  // "Press E to access panel"
 
     private bool playerInRange = false;
+    private bool panelsOpen = false;
+    private GameObject dialogueCanvas;  // Reference to ensure it stays hidden
 
     private void Update()
     {
@@ -23,6 +27,13 @@ public class PanelInteraction : MonoBehaviour
                 Debug.Log("[PanelInteraction] E key pressed while in range!");
                 InteractWithPanel();
             }
+        }
+        
+        // Listen for C key to close panels (codex toggle)
+        if (panelsOpen && Keyboard.current != null && Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            Debug.Log("[PanelInteraction] C key pressed - closing panels");
+            CloseAllPanels();
         }
     }
 
@@ -44,6 +55,12 @@ public class PanelInteraction : MonoBehaviour
             Debug.Log("[PanelInteraction] Player left range.");
             playerInRange = false;
             ShowPrompt(false);
+            
+            // Close panels if player leaves trigger area
+            if (panelsOpen)
+            {
+                CloseAllPanels();
+            }
         }
     }
 
@@ -59,14 +76,56 @@ public class PanelInteraction : MonoBehaviour
 
     private void InteractWithPanel()
     {
+        // Find and cache the dialogue canvas if not already cached
+        if (dialogueCanvas == null)
+        {
+            var canvas = GameObject.Find("DialogueCanvas");
+            if (canvas != null) dialogueCanvas = canvas;
+        }
+        
         if (triglyphPanelUI != null)
             triglyphPanelUI.SetActive(true);
 
         if (codexUI != null)
             codexUI.SetActive(true);
 
+        // Ensure dialogue canvas is hidden while panels are open
+        if (dialogueCanvas != null)
+        {
+            var canvasComponent = dialogueCanvas.GetComponent<Canvas>();
+            if (canvasComponent != null) canvasComponent.enabled = false;
+        }
+
         ShowPrompt(false);
+        panelsOpen = true;
+
+        // Disable movement while panels are open
+        InputManager.DisableMovement();
 
         Debug.Log("[Panel] Triglyph Panel and Codex activated!");
+    }
+
+    private void CloseAllPanels()
+    {
+        if (triglyphPanelUI != null)
+            triglyphPanelUI.SetActive(false);
+
+        if (codexUI != null)
+            codexUI.SetActive(false);
+
+        panelsOpen = false;
+        ShowPrompt(playerInRange);
+
+        // Re-enable movement when panels are closed
+        InputManager.EnableMovement();
+
+        // Note: Keep dialogue canvas hidden unless explicitly started by an NPC
+        if (dialogueCanvas != null)
+        {
+            var canvasComponent = dialogueCanvas.GetComponent<Canvas>();
+            if (canvasComponent != null) canvasComponent.enabled = false;
+        }
+
+        Debug.Log("[Panel] Triglyph Panel and Codex deactivated!");
     }
 }
