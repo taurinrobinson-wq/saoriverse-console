@@ -3147,7 +3147,7 @@ RectTransform:
   m_GameObject: {fileID: 2000000021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3000000014}
@@ -3158,7 +3158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.1}
   m_AnchorMax: {x: 0.9, y: 0.9}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 163}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2000000021
@@ -4370,6 +4370,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 542721173946634972, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 542721173946634972, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1075713634082994417, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4393,6 +4401,14 @@ PrefabInstance:
     - target: {fileID: 1075713634082994417, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783488452286519815, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783488452286519815, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -92
       objectReference: {fileID: 0}
     - target: {fileID: 1856679064706030777, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4522,6 +4538,49 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 1725184632}
+    - target: {fileID: 2716793992039148252, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -285
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_text
+      value: 'What is this strange device?
+
+        I''m not sure why she left so
+        suddenly. such a strange person'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_margin.z
+      value: 37.892944
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.7879268
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.8207547
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278241745
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757097004433770600, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3446706388036412150, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4773,6 +4832,42 @@ PrefabInstance:
     - target: {fileID: 7120337486395394505, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483370524719817806, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.a
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483370524719817806, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483370524719817806, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483370524719817806, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665475510290936339, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -285
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662796767818242889, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.a
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662796767818242889, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662796767818242889, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662796767818242889, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+using System.Linq;
+using Velinor.Core;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -10,6 +13,11 @@ using UnityEngine.InputSystem;
 /// Handles ONLY Codex UI (Glyph system)
 /// Triggered by: C key + player has received codex from Saori
 /// Independent from DialogueUIController and DiaryController
+/// 
+/// Features:
+/// - Display glyphs in a 9-slot grid
+/// - Dynamic glyph population and removal
+/// - Glyph selection for triglyph panel placement
 /// </summary>
 public class CodexController : MonoBehaviour
 {
@@ -17,7 +25,7 @@ public class CodexController : MonoBehaviour
     public CanvasGroup codexPanel;
     public Transform viewport;
     public Image codexImage;
-    public Sprite codexBackgroundSprite;  // Assign Glyph_Codex2.png in Inspector
+    public Sprite codexBackgroundSprite;
 
     [Header("Navigation")]
     public TextMeshProUGUI glyphNameText;
@@ -28,8 +36,16 @@ public class CodexController : MonoBehaviour
     public TMP_FontAsset codexFont;
 
     [Header("Codex Access")]
-    public bool requiresCodexDevice = true;  // Set to false for testing
+    public bool requiresCodexDevice = true;
     private bool playerHasCodex = false;
+
+    [Header("Glyph Management")]
+    [SerializeField] private GameObject glyphUIPrefab;
+    [SerializeField] private List<GlyphSlot> slotsPage1 = new List<GlyphSlot>();
+    [SerializeField] private List<GlyphSlot> slotsPage2 = new List<GlyphSlot>();
+
+    private List<GlyphUI> activeGlyphs = new List<GlyphUI>();
+    private GlyphUI selectedGlyph;
 
     private int _currentCodexPage = 0;
     private const int GlyphsPerPage = 9;
@@ -340,4 +356,169 @@ public class CodexController : MonoBehaviour
         Debug.Log($"[Codex] New entry unlocked: {entryName}");
         // TODO: Wire to actual codex data system
     }
+
+    #region === GLYPH MANAGEMENT ===
+
+    /// <summary>
+    /// Add a glyph to the active glyphs list and assign it to the next available slot.
+    /// </summary>
+    public void AddGlyph(GlyphData data)
+    {
+        if (data == null)
+        {
+            Debug.LogError("[Codex] Cannot add null glyph data!");
+            return;
+        }
+
+        // Check if glyph already exists
+        if (activeGlyphs.Any(g => g.glyphData == data))
+        {
+            Debug.LogWarning($"[Codex] Glyph {data.glyphName} already in active list!");
+            return;
+        }
+
+        // Create GlyphUI instance
+        if (glyphUIPrefab == null)
+        {
+            Debug.LogError("[Codex] glyphUIPrefab is not assigned!");
+            return;
+        }
+
+        GameObject glyphUIPrefabInstance = Instantiate(glyphUIPrefab);
+        GlyphUI glyphUI = glyphUIPrefabInstance.GetComponent<GlyphUI>();
+
+        if (glyphUI == null)
+        {
+            Debug.LogError("[Codex] Instantiated prefab does not have GlyphUI component!");
+            Destroy(glyphUIPrefabInstance);
+            return;
+        }
+
+        glyphUI.Initialize(data);
+        activeGlyphs.Add(glyphUI);
+
+        // Assign to next available slot
+        AssignGlyphToNextAvailableSlot(glyphUI);
+
+        Debug.Log($"[Codex] Added glyph: {data.glyphName}");
+    }
+
+    /// <summary>
+    /// Remove a glyph from the active glyphs list and clear it from all slots.
+    /// </summary>
+    public void RemoveGlyph(GlyphData data)
+    {
+        if (data == null)
+        {
+            Debug.LogError("[Codex] Cannot remove null glyph data!");
+            return;
+        }
+
+        GlyphUI glyphToRemove = activeGlyphs.FirstOrDefault(g => g.glyphData == data);
+        if (glyphToRemove == null)
+        {
+            Debug.LogWarning($"[Codex] Glyph {data.glyphName} not found in active list!");
+            return;
+        }
+
+        activeGlyphs.Remove(glyphToRemove);
+        ClearGlyphFromSlots(data);
+        Destroy(glyphToRemove.gameObject);
+
+        Debug.Log($"[Codex] Removed glyph: {data.glyphName}");
+    }
+
+    /// <summary>
+    /// Assign a glyph to the next available slot (page 1 first, then page 2).
+    /// </summary>
+    private void AssignGlyphToNextAvailableSlot(GlyphUI glyph)
+    {
+        if (glyph == null) return;
+
+        // Try page 1 slots first
+        foreach (var slot in slotsPage1)
+        {
+            if (slot != null && !slot.isFilled)
+            {
+                slot.SetGlyph(glyph);
+                Debug.Log($"[Codex] Assigned {glyph.glyphData.glyphName} to Page 1 slot");
+                return;
+            }
+        }
+
+        // Try page 2 slots
+        foreach (var slot in slotsPage2)
+        {
+            if (slot != null && !slot.isFilled)
+            {
+                slot.SetGlyph(glyph);
+                Debug.Log($"[Codex] Assigned {glyph.glyphData.glyphName} to Page 2 slot");
+                return;
+            }
+        }
+
+        Debug.LogWarning($"[Codex] No available slots for {glyph.glyphData.glyphName}!");
+    }
+
+    /// <summary>
+    /// Clear a glyph from all slots where it appears.
+    /// </summary>
+    private void ClearGlyphFromSlots(GlyphData data)
+    {
+        // Clear from page 1
+        foreach (var slot in slotsPage1)
+        {
+            if (slot != null && slot.glyphUI != null && slot.glyphUI.glyphData == data)
+            {
+                slot.Clear();
+            }
+        }
+
+        // Clear from page 2
+        foreach (var slot in slotsPage2)
+        {
+            if (slot != null && slot.glyphUI != null && slot.glyphUI.glyphData == data)
+            {
+                slot.Clear();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Called when a glyph is selected (usually from a slot button click).
+    /// </summary>
+    public void OnGlyphSelected(GlyphUI glyph)
+    {
+        if (glyph == null) return;
+
+        // Deselect previous glyph
+        if (selectedGlyph != null)
+        {
+            selectedGlyph.Deselect();
+        }
+
+        selectedGlyph = glyph;
+        selectedGlyph.Select();
+
+        // Update the glyph name display
+        if (glyphNameText != null)
+        {
+            glyphNameText.text = glyph.glyphData.glyphName;
+        }
+
+        Debug.Log($"[Codex] Glyph selected: {glyph.glyphData.glyphName}");
+    }
+
+    /// <summary>
+    /// Called when a slot is clicked (for potential future interactions).
+    /// </summary>
+    public void OnSlotClicked(GlyphSlot slot)
+    {
+        if (slot == null || slot.glyphUI == null) return;
+
+        Debug.Log($"[Codex] Slot clicked with glyph: {slot.glyphUI.glyphData.glyphName}");
+        OnGlyphSelected(slot.glyphUI);
+    }
+
+    #endregion
 }
