@@ -73,7 +73,7 @@ public class CodexController : MonoBehaviour
             if (c.gameObject.name == "UI_Canvas")
             {
                 _cachedCanvas = c;
-                
+
                 Transform codexPanelT = FindPanelRecursive(c.transform, "CodexPanel");
                 if (codexPanelT != null)
                 {
@@ -83,7 +83,7 @@ public class CodexController : MonoBehaviour
                     glyphNameText = codexPanelT.Find("Navigation/GlyphName")?.GetComponent<TextMeshProUGUI>();
                     nextPageBtn = codexPanelT.Find("Navigation/NextBtn")?.GetComponent<Button>();
                     prevPageBtn = codexPanelT.Find("Navigation/PrevBtn")?.GetComponent<Button>();
-                    
+
                     Debug.Log("[Codex] CodexPanel found and assigned");
                 }
                 break;
@@ -159,7 +159,7 @@ public class CodexController : MonoBehaviour
             _cachedCanvas.gameObject.SetActive(true);
             Debug.LogWarning("[Codex] Canvas GameObject was deactivated - re-activating it!");
         }
-        
+
         // Also ensure Canvas component is enabled (DialogueManager disables it)
         if (_cachedCanvas != null && !_cachedCanvas.enabled)
         {
@@ -266,47 +266,60 @@ public class CodexController : MonoBehaviour
     {
         if (codexPanel == null) return;
 
-        // TODO: Wire this to actual CodexManager or game data system
-        // For now, show placeholder text
+        // Get glyphs from database
+        var allGlyphs = GlyphsDatabase.GetAllGlyphs();
 
         if (glyphNameText != null)
         {
-            glyphNameText.text = $"Codex - Page {_currentCodexPage + 1}";
+            int totalPages = Mathf.CeilToInt((float)allGlyphs.Count / GlyphsPerPage);
+            glyphNameText.text = $"Codex - Page {_currentCodexPage + 1} of {totalPages}";
         }
 
-        // Debug: Check and visualize the grid slots
+        // Populate the glyph grid with sprites
         Transform gridT = codexPanel.transform.Find("GlyphGrid");
         if (gridT != null)
         {
             Debug.Log($"[Codex] GlyphGrid found with {gridT.childCount} children (slots)");
+
             for (int i = 0; i < gridT.childCount; i++)
             {
                 Transform slot = gridT.GetChild(i);
                 Image slotImage = slot.GetComponent<Image>();
-                RectTransform slotRect = slot.GetComponent<RectTransform>();
-                
-                Debug.Log($"[Codex]   Slot_{i}: Image={slotImage != null}, Size={slotRect?.sizeDelta}, " +
-                    $"Color={slotImage?.color}, Active={slot.gameObject.activeSelf}");
-                
-                // If slot doesn't have Image, add a debug one
+
+                // Calculate which glyph to show on this page
+                int glyphIndex = (_currentCodexPage * GlyphsPerPage) + i;
+
                 if (slotImage == null)
                 {
                     slotImage = slot.gameObject.AddComponent<Image>();
-                    slotImage.color = new Color(0.2f, 0.2f, 0.2f, 1f);  // Dark gray for visibility
-                    Debug.Log($"[Codex]   ⚠ Slot_{i} had NO Image - added placeholder!");
+                }
+
+                if (glyphIndex < allGlyphs.Count)
+                {
+                    // Show glyph sprite
+                    slotImage.sprite = allGlyphs[glyphIndex].sprite;
+                    slotImage.color = Color.white;
+
+                    // Try to add GlyphSelectable component for interaction
+                    if (slot.GetComponent<GlyphSelectable>() == null)
+                    {
+                        GlyphSelectable glyphSelect = slot.gameObject.AddComponent<GlyphSelectable>();
+                        glyphSelect.SetGlyphName(allGlyphs[glyphIndex].name);
+                    }
+
+                    Debug.Log($"[Codex]   Slot_{i}: {allGlyphs[glyphIndex].name}");
+                }
+                else
+                {
+                    // Empty slot
+                    slotImage.sprite = null;
+                    slotImage.color = new Color(0.15f, 0.15f, 0.15f, 1f);
                 }
             }
         }
         else
         {
             Debug.LogWarning("[Codex] GlyphGrid not found!");
-        }
-
-        // Log all CodexPanel children for structure debugging
-        Debug.Log($"[Codex] CodexPanel children count: {codexPanel.transform.childCount}");
-        foreach (Transform child in codexPanel.transform)
-        {
-            Debug.Log($"[Codex]   - Child: {child.name}, Active: {child.gameObject.activeSelf}");
         }
     }
 

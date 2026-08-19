@@ -17,7 +17,7 @@ public class GlyphSelectable : MonoBehaviour, IPointerClickHandler
     {
         // Find the placement manager in the scene
         placementManager = FindAnyObjectByType<GlyphPlacementManager>();
-        
+
         if (canvasGroup == null)
             canvasGroup = GetComponent<CanvasGroup>();
     }
@@ -45,6 +45,11 @@ public class GlyphSelectable : MonoBehaviour, IPointerClickHandler
         isSelected = false;
         if (canvasGroup != null)
             canvasGroup.alpha = 0.6f;
+    }
+
+    public void SetGlyphName(string name)
+    {
+        glyphName = name;
     }
 
     public bool IsSelected => isSelected;
