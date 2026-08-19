@@ -4,19 +4,26 @@ using UnityEngine.InputSystem;
 using Velinor.Core;
 
 /// <summary>
-/// Handles player interaction with the panel.
-/// When the player presses E while in range, activates the triglyph panel UI and codex.
-/// Also disables player movement while panels are open.
+/// Handles player interaction with the triglyph panel at specific location.
+/// When player presses E while in range:
+/// 1. Activates the TriglyphPanelUI (from InteractionUICanvas)
+/// 2. Shows the CodexPanel via CodexController (from UI_Canvas)
+/// 3. Disables player movement
+/// 
+/// When player presses C or leaves trigger:
+/// 1. Closes all panels
+/// 2. Re-enables player movement
 /// </summary>
 public class PanelInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject triglyphPanelUI;
-    [SerializeField] private GameObject codexUI;
-    [SerializeField] private TextMeshProUGUI interactionPrompt;  // "Press E to access panel"
+    [SerializeField] private GameObject codexUI;  // Legacy reference - no longer used
+    [SerializeField] private TextMeshProUGUI interactionPrompt;
 
     private bool playerInRange = false;
     private bool panelsOpen = false;
-    private GameObject dialogueCanvas;  // Reference to ensure it stays hidden
+    private CodexController codexController;
+
 
     private void Update()
     {
@@ -76,17 +83,25 @@ public class PanelInteraction : MonoBehaviour
 
     private void InteractWithPanel()
     {
-        // Find and cache the dialogue canvas if not already cached
-        if (dialogueCanvas == null)
+        // Find CodexController on first interaction
+        if (codexController == null)
         {
-            var canvas = GameObject.Find("DialogueCanvas");
-            if (canvas != null) dialogueCanvas = canvas;
+            codexController = FindAnyObjectByType<CodexController>();
+            if (codexController == null)
+            {
+                Debug.LogError("[PanelInteraction] CodexController not found in scene!");
+            }
+            else
+            {
+                Debug.Log("[PanelInteraction] CodexController found and cached");
+            }
         }
 
         Debug.Log($"[PanelInteraction] InteractWithPanel called");
         Debug.Log($"[PanelInteraction] triglyphPanelUI is null: {triglyphPanelUI == null}");
-        Debug.Log($"[PanelInteraction] codexUI is null: {codexUI == null}");
+        Debug.Log($"[PanelInteraction] codexController is null: {codexController == null}");
 
+        // Activate the triglyph panel (from InteractionUICanvas)
         if (triglyphPanelUI != null)
         {
             triglyphPanelUI.SetActive(true);
@@ -97,25 +112,15 @@ public class PanelInteraction : MonoBehaviour
             Debug.LogError("[PanelInteraction] triglyphPanelUI is NULL - not assigned in inspector!");
         }
 
-        if (codexUI != null)
+        // Show the codex via CodexController (from UI_Canvas)
+        if (codexController != null)
         {
-            codexUI.SetActive(true);
-            Debug.Log($"[PanelInteraction] Activated codexUI, now active: {codexUI.activeSelf}");
+            codexController.ToggleCodex();
+            Debug.Log("[PanelInteraction] Called CodexController.ToggleCodex()");
         }
         else
         {
-            Debug.LogError("[PanelInteraction] codexUI is NULL - not assigned in inspector!");
-        }
-
-        // Ensure dialogue canvas is hidden while panels are open
-        if (dialogueCanvas != null)
-        {
-            var canvasComponent = dialogueCanvas.GetComponent<Canvas>();
-            if (canvasComponent != null)
-            {
-                canvasComponent.enabled = false;
-                Debug.Log("[PanelInteraction] DialogueCanvas disabled");
-            }
+            Debug.LogError("[PanelInteraction] CodexController not available - codex will not show!");
         }
 
         ShowPrompt(false);
@@ -128,26 +133,24 @@ public class PanelInteraction : MonoBehaviour
     }
 
 
+
     private void CloseAllPanels()
     {
         if (triglyphPanelUI != null)
             triglyphPanelUI.SetActive(false);
 
-        if (codexUI != null)
-            codexUI.SetActive(false);
+        // Close the codex via CodexController
+        if (codexController != null)
+        {
+            codexController.ToggleCodex();
+            Debug.Log("[PanelInteraction] Called CodexController.ToggleCodex() to close");
+        }
 
         panelsOpen = false;
         ShowPrompt(playerInRange);
 
         // Re-enable movement when panels are closed
         InputManager.EnableMovement();
-
-        // Note: Keep dialogue canvas hidden unless explicitly started by an NPC
-        if (dialogueCanvas != null)
-        {
-            var canvasComponent = dialogueCanvas.GetComponent<Canvas>();
-            if (canvasComponent != null) canvasComponent.enabled = false;
-        }
 
         Debug.Log("[Panel] Triglyph Panel and Codex deactivated!");
     }
