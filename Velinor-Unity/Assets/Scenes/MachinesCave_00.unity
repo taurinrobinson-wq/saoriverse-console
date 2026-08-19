@@ -2972,7 +2972,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2000000006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 2728c18581c67d54b92628b509f4708e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelProximity
   interactionPrompt: {fileID: 0}
@@ -2985,7 +2985,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2000000006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: bbac854a7b994bb4d829ce18ccf3d7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelInteraction
   triglyphPanelUI: {fileID: 0}
@@ -3391,7 +3391,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2000000024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 01bbfc2924df944478f03bc7760599f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlyphPlacementManager
   screenRumbleOverlay: {fileID: 2000000022}
@@ -3414,7 +3414,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2000000024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: c9ff5e90a8e55cf438fd1d94f11c1bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorAnimationController
   doorCutout: {fileID: 0}
@@ -3430,7 +3430,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2000000024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: d071532dc6cf48f4596c5b34da659a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransitionController
   fadeOverlay: {fileID: 0}
@@ -3584,7 +3584,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3000000001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ff56cbb71bf0bd42837b9f58f8339cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlyphSelectable
   glyphName: Glyph of Sorrow
@@ -3666,7 +3666,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3000000005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ff56cbb71bf0bd42837b9f58f8339cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlyphSelectable
   glyphName: Glyph of Remembrance
@@ -3748,7 +3748,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3000000009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000000000000000f000000000000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ff56cbb71bf0bd42837b9f58f8339cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlyphSelectable
   glyphName: Glyph of Legacy
