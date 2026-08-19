@@ -28,7 +28,7 @@ public class PanelInteraction : MonoBehaviour
                 InteractWithPanel();
             }
         }
-        
+
         // Listen for C key to close panels (codex toggle)
         if (panelsOpen && Keyboard.current != null && Keyboard.current.cKey.wasPressedThisFrame)
         {
@@ -55,7 +55,7 @@ public class PanelInteraction : MonoBehaviour
             Debug.Log("[PanelInteraction] Player left range.");
             playerInRange = false;
             ShowPrompt(false);
-            
+
             // Close panels if player leaves trigger area
             if (panelsOpen)
             {
@@ -82,18 +82,40 @@ public class PanelInteraction : MonoBehaviour
             var canvas = GameObject.Find("DialogueCanvas");
             if (canvas != null) dialogueCanvas = canvas;
         }
-        
+
+        Debug.Log($"[PanelInteraction] InteractWithPanel called");
+        Debug.Log($"[PanelInteraction] triglyphPanelUI is null: {triglyphPanelUI == null}");
+        Debug.Log($"[PanelInteraction] codexUI is null: {codexUI == null}");
+
         if (triglyphPanelUI != null)
+        {
             triglyphPanelUI.SetActive(true);
+            Debug.Log($"[PanelInteraction] Activated triglyphPanelUI, now active: {triglyphPanelUI.activeSelf}");
+        }
+        else
+        {
+            Debug.LogError("[PanelInteraction] triglyphPanelUI is NULL - not assigned in inspector!");
+        }
 
         if (codexUI != null)
+        {
             codexUI.SetActive(true);
+            Debug.Log($"[PanelInteraction] Activated codexUI, now active: {codexUI.activeSelf}");
+        }
+        else
+        {
+            Debug.LogError("[PanelInteraction] codexUI is NULL - not assigned in inspector!");
+        }
 
         // Ensure dialogue canvas is hidden while panels are open
         if (dialogueCanvas != null)
         {
             var canvasComponent = dialogueCanvas.GetComponent<Canvas>();
-            if (canvasComponent != null) canvasComponent.enabled = false;
+            if (canvasComponent != null)
+            {
+                canvasComponent.enabled = false;
+                Debug.Log("[PanelInteraction] DialogueCanvas disabled");
+            }
         }
 
         ShowPrompt(false);
@@ -104,6 +126,7 @@ public class PanelInteraction : MonoBehaviour
 
         Debug.Log("[Panel] Triglyph Panel and Codex activated!");
     }
+
 
     private void CloseAllPanels()
     {

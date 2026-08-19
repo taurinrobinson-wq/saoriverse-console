@@ -6,20 +6,9 @@ namespace Velinor.Core
     /// InputManager: Global input state manager for controlling when player can move.
     /// Used to disable movement keys when panels (Codex, Dialogue, Diary, Triglyph) are open.
     /// </summary>
-    public class InputManager : MonoBehaviour
+    public static class InputManager
     {
-        private static InputManager instance;
         private static bool movementEnabled = true;
-
-        private void Awake()
-        {
-            if (instance != null && instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            instance = this;
-        }
 
         /// <summary>
         /// Check if player movement is currently allowed.
