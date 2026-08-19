@@ -277,8 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97f9a7649bc9a04bae2f0b9c67f941f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VignetteGenerator
-  intensity: 0.75
-  vignetteColor: {r: 0.09, g: 0.09, b: 0.09, a: 0.85}
 --- !u!114 &140771818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,52 +638,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &477384493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 477384495}
-  - component: {fileID: 477384494}
-  m_Layer: 0
-  m_Name: SFX_Looper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &477384494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477384493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c2b52f78972c85429ee75ab7899d759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  soundEffect: {fileID: 8300000, guid: f09cb7c21f5a8af438c8e4f06cd255ad, type: 3}
-  volume: 0.5
---- !u!4 &477384495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477384493}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39748, y: 0.07878, z: 99.95364}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &561413085 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4506911830062765317, guid: ceb25568fec4d8548a78b64f6d572358, type: 3}
@@ -741,8 +693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97f9a7649bc9a04bae2f0b9c67f941f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  intensity: 0.75
-  vignetteColor: {r: 0.09, g: 0.09, b: 0.09, a: 0.85}
 --- !u!114 &583288159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,8 +1720,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97f9a7649bc9a04bae2f0b9c67f941f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  intensity: 0.75
-  vignetteColor: {r: 0.09, g: 0.09, b: 0.09, a: 0.85}
 --- !u!114 &1442105981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2975,7 +2923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2728c18581c67d54b92628b509f4708e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelProximity
-  interactionPrompt: {fileID: 0}
+  interactionPrompt: {fileID: 3000000030}
 --- !u!114 &2000000010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2988,8 +2936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbac854a7b994bb4d829ce18ccf3d7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelInteraction
-  triglyphPanelUI: {fileID: 0}
-  codexUI: {fileID: 0}
+  triglyphPanelUI: {fileID: 2000000021}
+  codexUI: {fileID: 2000000019}
+  interactionPrompt: {fileID: 3000000030}
 --- !u!1 &2000000011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,24 +3506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37f54077697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a7934ebf03e3e2740b9dee3e1fe2d975, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &3000000004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3639,24 +3570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37f54077697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d15d4b53ff9935d4da02fa713ed58d26, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &3000000008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3721,24 +3634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37f54077697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4bf428202ef72b0438cfdb09a4ba89f7, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &3000000012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3874,24 +3769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37f54077697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a7934ebf03e3e2740b9dee3e1fe2d975, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3000000020
 GameObject:
   m_ObjectHideFlags: 0
@@ -3940,24 +3817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37f54077697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d15d4b53ff9935d4da02fa713ed58d26, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3000000023
 GameObject:
   m_ObjectHideFlags: 0
@@ -4006,24 +3865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37f54077697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4bf428202ef72b0438cfdb09a4ba89f7, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3000000026
 GameObject:
   m_ObjectHideFlags: 0
@@ -5031,6 +4872,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5636073822744533782, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
+      propertyPath: maxY
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636073822744533782, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
+      propertyPath: minScale
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531005511697555702, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7948732866325835248, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5049,7 +4902,6 @@ SceneRoots:
   - {fileID: 236533038}
   - {fileID: 929506350}
   - {fileID: 45936604}
-  - {fileID: 477384495}
   - {fileID: 397171036}
   - {fileID: 1746648829}
   - {fileID: 867641125}
