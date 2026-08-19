@@ -2866,7 +2866,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2000000007}
   - component: {fileID: 2000000008}
-  - component: {fileID: 2000000012}
+  - component: {fileID: 2000000031}
   - component: {fileID: 2000000009}
   - component: {fileID: 2000000010}
   m_Layer: 0
@@ -2912,7 +2912,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 3, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!54 &2000000012
+--- !u!54 &2000000031
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
