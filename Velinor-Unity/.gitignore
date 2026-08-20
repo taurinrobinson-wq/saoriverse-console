@@ -26,3 +26,13 @@
 # OS
 Thumbs.db
 .DS_Store
+
+# Asset Store Packages (Large binary assets, can be re-downloaded)
+/Assets/Modern_Bench Pack/
+/Assets/Rocks and Vegetation Pack/
+/Assets/SeedMesh/
+/Assets/Tree_Packs/
+/Assets/3D Models/
+/Assets/TerrainDemoScene_URP/
+/Assets/TerrainToolsDemo/
+/Assets/CrackedTree/
