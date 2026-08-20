@@ -89,13 +89,18 @@ public class GlyphGridSetup : MonoBehaviour
 
     private static void CreateSlotsForPage(Transform pageParent, int startIndex, int slotCount)
     {
+        // Null check for pageParent
+        if (pageParent == null)
+        {
+            Debug.LogError($"[Glyph Setup] pageParent is null! Cannot create slots starting at index {startIndex}");
+            return;
+        }
+
         // Grid layout: 3x3
         // Each slot is approximately 30% width, 30% height within the page
         float slotWidth = 0.28f;  // ~80 pixels in a typical 300px grid
         float slotHeight = 0.28f;
         float spacing = 0.02f;
-
-        int[] gridPositions = new int[] { 0, 1, 2 }; // 3x3 grid
 
         for (int i = 0; i < slotCount; i++)
         {
@@ -106,8 +111,17 @@ public class GlyphGridSetup : MonoBehaviour
             float xStart = 0.05f + (col * (slotWidth + spacing));
             float yStart = 0.95f - (row * (slotHeight + spacing)) - slotHeight;
 
-            // Check if slot already exists
-            Transform existingSlot = pageParent.Find($"Slot_{startIndex + i}");
+            // Check if slot already exists (with null safety)
+            Transform existingSlot = null;
+            try
+            {
+                existingSlot = pageParent.Find($"Slot_{startIndex + i}");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[Glyph Setup] Error finding slot: {e.Message}");
+            }
+
             if (existingSlot != null)
             {
                 Debug.Log($"[Glyph Setup] Slot_{startIndex + i} already exists, skipping creation");
@@ -143,6 +157,19 @@ public class GlyphGridSetup : MonoBehaviour
 
     private static void PopulateCodexControllerSlots(CodexController codexController, Transform page1, Transform page2)
     {
+        // Null checks
+        if (codexController == null)
+        {
+            Debug.LogError("[Glyph Setup] CodexController is null!");
+            return;
+        }
+
+        if (page1 == null || page2 == null)
+        {
+            Debug.LogError("[Glyph Setup] page1 or page2 is null!");
+            return;
+        }
+
         // Use reflection to set the private fields
         System.Reflection.FieldInfo slotsPage1Field = typeof(CodexController).GetField("slotsPage1",
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -169,28 +196,42 @@ public class GlyphGridSetup : MonoBehaviour
         // Add Page1 slots (0-8)
         for (int i = 0; i < 9; i++)
         {
-            Transform slotTransform = page1.Find($"Slot_{i}");
-            if (slotTransform != null)
+            try
             {
-                GlyphSlot glyphSlot = slotTransform.GetComponent<GlyphSlot>();
-                if (glyphSlot != null)
+                Transform slotTransform = page1.Find($"Slot_{i}");
+                if (slotTransform != null)
                 {
-                    slotsPage1List.Add(glyphSlot);
+                    GlyphSlot glyphSlot = slotTransform.GetComponent<GlyphSlot>();
+                    if (glyphSlot != null)
+                    {
+                        slotsPage1List.Add(glyphSlot);
+                    }
                 }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[Glyph Setup] Error adding slot {i} to page1: {e.Message}");
             }
         }
 
         // Add Page2 slots (9-17)
         for (int i = 9; i < 18; i++)
         {
-            Transform slotTransform = page2.Find($"Slot_{i}");
-            if (slotTransform != null)
+            try
             {
-                GlyphSlot glyphSlot = slotTransform.GetComponent<GlyphSlot>();
-                if (glyphSlot != null)
+                Transform slotTransform = page2.Find($"Slot_{i}");
+                if (slotTransform != null)
                 {
-                    slotsPage2List.Add(glyphSlot);
+                    GlyphSlot glyphSlot = slotTransform.GetComponent<GlyphSlot>();
+                    if (glyphSlot != null)
+                    {
+                        slotsPage2List.Add(glyphSlot);
+                    }
                 }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[Glyph Setup] Error adding slot {i} to page2: {e.Message}");
             }
         }
 
