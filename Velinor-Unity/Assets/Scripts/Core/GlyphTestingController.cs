@@ -9,17 +9,17 @@ using Velinor.Core;
 public class GlyphTestingController : MonoBehaviour
 {
     [Header("Testing Toggles")]
-    [SerializeField] private Toggle sorrowToggle;
-    [SerializeField] private Toggle remembranceToggle;
-    [SerializeField] private Toggle legacyToggle;
+    [SerializeField] public Toggle sorrowToggle;
+    [SerializeField] public Toggle remembranceToggle;
+    [SerializeField] public Toggle legacyToggle;
 
     [Header("Glyph Data")]
-    [SerializeField] private GlyphData sorrowData;
-    [SerializeField] private GlyphData remembranceData;
-    [SerializeField] private GlyphData legacyData;
+    [SerializeField] public GlyphData sorrowData;
+    [SerializeField] public GlyphData remembranceData;
+    [SerializeField] public GlyphData legacyData;
 
     [Header("Controllers")]
-    [SerializeField] private CodexController codexController;
+    [SerializeField] public CodexController codexController;
 
     private void Start()
     {
