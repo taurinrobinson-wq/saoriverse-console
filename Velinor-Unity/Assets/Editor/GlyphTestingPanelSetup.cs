@@ -140,7 +140,7 @@ namespace Velinor.Editor
             RectTransform labelRect = labelGO.GetComponent<RectTransform>();
             labelText.text = glyphName;
             labelText.fontSize = 24;
-            labelText.alignment = TextAlignmentOptions.MiddleLeft;
+            labelText.alignment = TextAlignmentOptions.Center;
             labelRect.sizeDelta = new Vector2(150, 30);
 
             // Rename for clarity
