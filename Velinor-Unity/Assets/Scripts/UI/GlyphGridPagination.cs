@@ -5,11 +5,14 @@ using Velinor.Core;
 /// <summary>
 /// Handles pagination between Glyph Grid pages.
 /// Simply toggles GlyphGrid_Pg1 and GlyphGrid_Pg2 visibility.
+/// Prevents navigation beyond first/last pages.
 /// </summary>
 public class GlyphGridPagination : MonoBehaviour
 {
     [SerializeField] private GameObject glyphGridPage1;
     [SerializeField] private GameObject glyphGridPage2;
+    [SerializeField] private Button btnNext;
+    [SerializeField] private Button btnPrev;
 
     private bool isOnPage1 = true;
 
@@ -19,51 +22,66 @@ public class GlyphGridPagination : MonoBehaviour
         if (glyphGridPage1 != null) glyphGridPage1.SetActive(true);
         if (glyphGridPage2 != null) glyphGridPage2.SetActive(false);
         isOnPage1 = true;
+
+        // Update button states
+        UpdateButtonStates();
     }
 
     /// <summary>
-    /// Called by Btn_Next - goes to next page
+    /// Called by Btn_Next - goes to next page (only if not on last page)
     /// </summary>
     public void NextPage()
     {
-        if (isOnPage1)
+        if (!isOnPage1 || glyphGridPage2 == null)
         {
-            // Switch to Page 2
-            glyphGridPage1.SetActive(false);
-            glyphGridPage2.SetActive(true);
-            isOnPage1 = false;
-            Debug.Log("[Glyph Pagination] Switched to Page 2");
+            Debug.LogWarning("[Glyph Pagination] Cannot go to next page - already on last page or Page 2 not found");
+            return;
         }
-        else
-        {
-            // Loop back to Page 1
-            glyphGridPage2.SetActive(false);
-            glyphGridPage1.SetActive(true);
-            isOnPage1 = true;
-            Debug.Log("[Glyph Pagination] Switched to Page 1");
-        }
+
+        // Switch to Page 2
+        glyphGridPage1.SetActive(false);
+        glyphGridPage2.SetActive(true);
+        isOnPage1 = false;
+        Debug.Log("[Glyph Pagination] Switched to Page 2");
+
+        UpdateButtonStates();
     }
 
     /// <summary>
-    /// Called by Btn_Prev - goes to previous page
+    /// Called by Btn_Prev - goes to previous page (only if not on first page)
     /// </summary>
     public void PreviousPage()
     {
-        if (isOnPage1)
+        if (isOnPage1 || glyphGridPage1 == null)
         {
-            // Loop to Page 2
-            glyphGridPage1.SetActive(false);
-            glyphGridPage2.SetActive(true);
-            isOnPage1 = false;
-            Debug.Log("[Glyph Pagination] Switched to Page 2");
+            Debug.LogWarning("[Glyph Pagination] Cannot go to previous page - already on first page or Page 1 not found");
+            return;
         }
-        else
+
+        // Switch to Page 1
+        glyphGridPage2.SetActive(false);
+        glyphGridPage1.SetActive(true);
+        isOnPage1 = true;
+        Debug.Log("[Glyph Pagination] Switched to Page 1");
+
+        UpdateButtonStates();
+    }
+
+    /// <summary>
+    /// Update button interactability based on current page
+    /// </summary>
+    private void UpdateButtonStates()
+    {
+        if (btnNext != null)
         {
-            // Switch to Page 1
-            glyphGridPage2.SetActive(false);
-            glyphGridPage1.SetActive(true);
-            isOnPage1 = true;
-            Debug.Log("[Glyph Pagination] Switched to Page 1");
+            // Disable Next button if on last page
+            btnNext.interactable = isOnPage1;
+        }
+
+        if (btnPrev != null)
+        {
+            // Disable Prev button if on first page
+            btnPrev.interactable = !isOnPage1;
         }
     }
 
