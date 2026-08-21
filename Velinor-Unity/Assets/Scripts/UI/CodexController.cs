@@ -506,7 +506,24 @@ public class CodexController : MonoBehaviour
             glyphNameText.text = glyph.glyphData.glyphName;
         }
 
+        // Notify puzzle controller for puzzle selection tracking
+        // (separate from codex "viewing" selection)
+        NotifyPuzzleController(glyph);
+
         Debug.Log($"[Codex] Glyph selected: {glyph.glyphData.glyphName}");
+    }
+
+    /// <summary>
+    /// Notify the puzzle controller when a glyph is clicked
+    /// This allows the puzzle controller to track selections independently
+    /// </summary>
+    private void NotifyPuzzleController(GlyphUI glyph)
+    {
+        TriglyphPuzzleController puzzleController = FindAnyObjectByType<TriglyphPuzzleController>();
+        if (puzzleController != null)
+        {
+            puzzleController.OnGlyphClickedForPuzzle(glyph);
+        }
     }
 
     /// <summary>
