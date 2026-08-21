@@ -3,6 +3,10 @@ using TMPro;
 using System.Collections.Generic;
 using Velinor.Core;
 
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
+
 /// <summary>
 /// Manages the Triglyph Puzzle workflow:
 /// 1. Player selects 3 glyphs from Codex
@@ -88,7 +92,7 @@ public class TriglyphPuzzleController : MonoBehaviour
         {
             selectedGlyphs.Remove(glyphUI);
             glyphUI.Deselect();
-            Debug.Log($"[Triglyph Puzzle] Deselected {glyphUI.GlyphData.glyphName}");
+            Debug.Log($"[Triglyph Puzzle] Deselected {glyphUI.glyphData.glyphName}");
         }
         else
         {
@@ -97,7 +101,7 @@ public class TriglyphPuzzleController : MonoBehaviour
             {
                 selectedGlyphs.Add(glyphUI);
                 glyphUI.Select();
-                Debug.Log($"[Triglyph Puzzle] Selected {glyphUI.GlyphData.glyphName} ({selectedGlyphs.Count}/{RequiredGlyphCount})");
+                Debug.Log($"[Triglyph Puzzle] Selected {glyphUI.glyphData.glyphName} ({selectedGlyphs.Count}/{RequiredGlyphCount})");
             }
             else
             {
@@ -164,7 +168,7 @@ public class TriglyphPuzzleController : MonoBehaviour
             if (triglyphSlots[i] != null)
             {
                 triglyphSlots[i].SetGlyph(selectedGlyphs[i]);
-                Debug.Log($"[Triglyph Puzzle] Placed {selectedGlyphs[i].GlyphData.glyphName} in slot {i}");
+                Debug.Log($"[Triglyph Puzzle] Placed {selectedGlyphs[i].glyphData.glyphName} in slot {i}");
             }
         }
 
