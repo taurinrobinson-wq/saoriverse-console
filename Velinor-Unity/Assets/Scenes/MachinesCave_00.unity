@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29425e826a988f04fbd463b610c74a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodexController
-  codexPanel: {fileID: 0}
-  viewport: {fileID: 0}
+  codexPanel: {fileID: 4396602572619553770}
+  viewport: {fileID: 2438469151434139759}
   codexImage: {fileID: 0}
   codexBackgroundSprite: {fileID: 21300000, guid: 5d5bdad2f8b0d684cb62db0e9a8346af, type: 3}
   glyphNameText: {fileID: 0}
@@ -8002,6 +8002,7 @@ GameObject:
   - component: {fileID: 3763451859235976944}
   - component: {fileID: 4918429183269559164}
   - component: {fileID: 4396602572619553770}
+  - component: {fileID: 5615349808035042102}
   m_Layer: 5
   m_Name: CodexPanel
   m_TagString: Untagged
@@ -8613,6 +8614,30 @@ RectTransform:
   m_AnchoredPosition: {x: 608, y: 182}
   m_SizeDelta: {x: 878, y: 1189}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5615349808035042102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169876138574237221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1713f90b7889ef5438b69cc548574dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriglyphPuzzleController
+  codexController: {fileID: 106761839}
+  codexPanel: {fileID: 4169876138574237221}
+  triglyphPanel: {fileID: 2000000021}
+  mountainOverlay_Sealed: {fileID: 1969284005}
+  mountainOverlay_Unsealed: {fileID: 1969284001}
+  doorSprite: {fileID: 2500000032}
+  doorOpenPosition: {x: 550.6, y: 472, z: 0}
+  doorOpenSpeed: 1.5
+  triglyphSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &5644984055524666066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9768,6 +9793,7 @@ GameObject:
   - component: {fileID: 3388868714521777265}
   - component: {fileID: 6472180008114677188}
   - component: {fileID: 7763023896039356018}
+  - component: {fileID: 8430922126166584006}
   m_Layer: 5
   m_Name: NotificationPanel
   m_TagString: Untagged
@@ -9775,6 +9801,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8430922126166584006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430922126166584005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4589296649120754daa75d1e85dfcdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NotificationPanelController
+  notificationPanel: {fileID: 3388868714521777265}
+  notificationText: {fileID: 2238726871770890059}
+  fadeDuration: 0.3
 --- !u!224 &8441262526446954879
 RectTransform:
   m_ObjectHideFlags: 0

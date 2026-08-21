@@ -24,7 +24,6 @@ public class CodexController : MonoBehaviour
     [Header("Codex Panel")]
     public CanvasGroup codexPanel;
     public Transform viewport;
-    public Image codexImage;
     public Sprite codexBackgroundSprite;
 
     [Header("Navigation")]
@@ -94,7 +93,6 @@ public class CodexController : MonoBehaviour
                 if (codexPanelT != null)
                 {
                     codexPanel = codexPanelT.GetComponent<CanvasGroup>();
-                    codexImage = codexPanelT.GetComponent<Image>();
                     viewport = codexPanelT.Find("Viewport");
                     glyphNameText = codexPanelT.Find("Navigation/GlyphName")?.GetComponent<TextMeshProUGUI>();
                     nextPageBtn = codexPanelT.Find("Navigation/NextBtn")?.GetComponent<Button>();
@@ -143,20 +141,6 @@ public class CodexController : MonoBehaviour
             codexPanel.blocksRaycasts = false;
             codexPanel.interactable = false;
             Debug.Log("[Codex] CodexPanel initialized (hidden)");
-        }
-
-        // Assign the codex background sprite if provided
-        if (codexImage != null && codexBackgroundSprite != null)
-        {
-            codexImage.sprite = codexBackgroundSprite;
-            codexImage.type = Image.Type.Simple;
-            codexImage.preserveAspect = true;
-            Debug.Log($"[Codex] Codex background sprite assigned: {codexBackgroundSprite.name}");
-            Debug.Log($"[Codex] Image component: enabled={codexImage.enabled}, raycastTarget={codexImage.raycastTarget}");
-        }
-        else if (codexImage != null && codexBackgroundSprite == null)
-        {
-            Debug.LogWarning("[Codex] codexBackgroundSprite is not assigned in Inspector!");
         }
 
         // For testing: allow access if not requiring device
@@ -239,13 +223,6 @@ public class CodexController : MonoBehaviour
         codexPanel.alpha = opening ? 1f : 0f;
         codexPanel.blocksRaycasts = opening;
         codexPanel.interactable = opening;
-
-        // Set image color to WHITE so sprite shows (not black)
-        if (codexImage != null)
-        {
-            codexImage.color = opening ? new Color(1, 1, 1, 1f) : new Color(1, 1, 1, 0);
-            Debug.Log($"[Codex] Image color set to {codexImage.color}");
-        }
 
         // Activate/deactivate viewport
         if (viewport != null)
