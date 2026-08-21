@@ -1,16 +1,16 @@
 Category,Count,Theme,NPC Giver,Glyph,Location,Storyline
 Legacy,1,"Family, ancestry, ritual inheritance",Kaelen,Glyph of Legacy,Civic Center Rubble,Kaelen reveals he witnessed the collapse and was too focused on theft to intervene.
 Legacy,2,"Family, ancestry, ritual inheritance",Archivist Malrik,Glyph of Ancestral Record,Desert tomb archives,Inheritance rationalized as historical evidence.
-Legacy,3,"Family, ancestry, ritual inheritance",Lark - Community Mason,Glyph of Shared Weight,River bridge,"A collapsed bridge traps children; the player helps rescue them, recalling Ravi and Nima’s story and feeling a sense of rebalancing."
-Legacy,4,"Family, ancestry, ritual inheritance",Mariel the Weaver,Glyph of Worn Cloth,Community Alcove,The player learns to appreciate the warmth provided by cloth woven by others’ hands.
-Legacy,5,"Family, ancestry, ritual inheritance",Archivist Malrik,Glyph of Sand Memories,Desert archive chamber,"Malrik insists legacy is record, not myth. Names etched in dust reveal identity’s fragile persistence."
+Legacy,3,"Family, ancestry, ritual inheritance",Lark - Community Mason,Glyph of Shared Weight,River bridge,"A collapsed bridge traps children; the player helps rescue them, recalling Ravi and Nimaâ€™s story and feeling a sense of rebalancing."
+Legacy,4,"Family, ancestry, ritual inheritance",Mariel the Weaver,Glyph of Worn Cloth,Community Alcove,The player learns to appreciate the warmth provided by cloth woven by othersâ€™ hands.
+Legacy,5,"Family, ancestry, ritual inheritance",Archivist Malrik,Glyph of Sand Memories,Desert archive chamber,"Malrik insists legacy is record, not myth. Names etched in dust reveal identityâ€™s fragile persistence."
 Legacy,6,"Family, ancestry, ritual inheritance",Inodora - Story Teller,Glyph of Emotional Inheritance,Community Fire Circle,"Families gather to pass stories from elder to child. The glyph manifests when the player accepts a story, understanding legacy as shared memory."
 Ache,7,"Loss, grief, betrayal",Saori,Glyph of Infrasensory Oblivion,Chamber of Delayed Echoes,A dark void surrounded by faint rings teaches that abandonment sometimes arrives before it is felt.
 Ache,8,"Loss, grief, betrayal",Seyla - Archivist of Lineage,Glyph of Dislocated Attachment,Hall of Ancestral Echoes,Families fractured by collapse; love and fear pull in opposite directions.
-Ache,9,"Loss, grief, betrayal",Ravi & Nima,Glyph of Sorrow,Market Square,Ophina died in a collapse; the pedestal reacts to grief and slows the player’s movement.
+Ache,9,"Loss, grief, betrayal",Ravi & Nima,Glyph of Sorrow,Market Square,Ophina died in a collapse; the pedestal reacts to grief and slows the playerâ€™s movement.
 Ache,10,"Loss, grief, betrayal",Tessa - Desert Widow,Glyph of Desert Vigil,Desert Outskirts,"Grief after collapse is quiet, daily, and lonely. The glyph manifests when the player sits with her long enough to understand her isolation."
 Ache,11,"Loss, grief, betrayal",Dalen the Rusted Guide,Glyph of Betrayal Scar,Caravan Ruins,Dalen trusted collapsing intel; his charges died. His scars teach that betrayal leaves marks we survive with.
-Collapse,12,"Loss, grief, betrayal",Sanor - Silent Elder,Glyph of Silent Ache,Abandoned Shelter,Sanor hasn’t spoken since collapse; silence reveals the ache of words that will never be said.
+Collapse,12,"Loss, grief, betrayal",Sanor - Silent Elder,Glyph of Silent Ache,Abandoned Shelter,Sanor hasnâ€™t spoken since collapse; silence reveals the ache of words that will never be said.
 Ache,13,"Loss, grief, betrayal",Mariel the Weaver,Glyph of Repairing Loss,Community Weaving Workshop,Mariel weaves salvaged threads into memorial cloth. Grief becomes care when shared.
 Ache,14,"Loss, grief, betrayal",Thoran - Market Artisan,Glyph of Honest Expression,Market Stall,"The player commissions a mask showing their true ache and wears it publicly, choosing honesty over performance."
 Sovereignty,15,"Boundaries, choice, clarity",Dakrin - Safety Overseer,Glyph of Emotional Pause,Testing Grounds,Dakrin teaches interruption: the ability to pause before acting on anger or despair.
@@ -25,14 +25,14 @@ Sovereignty,23,"Boundaries, choice, clarity",Drossel the Cloaked,Glyph of Masked
 Sovereignty,24,"Boundaries, choice, clarity",Drossel the Cloaked,Glyph of Venomous Choice,Swamp Grounds,The player faces a poisoned choice: betray Kaelen or protect him.
 Presence,25,"Touch, silence, witness",Nima,Glyph of Remembrance,Market Overlook,The shrine hums with aching resonance; memories flood the player.
 Presence,26,"Touch, silence, witness",Sera the Herb Novice,Glyph of Healing Presence,Herb Alcove,Sera lacks confidence in herself and sometimes feels like there's something she's forgetting. Collecting this glyph causes her so feel a greater sense of resolve.
-Presence,27,"Touch, silence, witness",Korrin the Gossip,Glyph of Listening Silence,Informant’s Alcove,Silence becomes discernment; listening reveals truth beneath noise.
+Presence,27,"Touch, silence, witness",Korrin the Gossip,Glyph of Listening Silence,Informantâ€™s Alcove,"Korrinâ€™s quiet presence draws out truths people never meant to share. He listens without speaking, collecting fragments that slip through the cracks of conversation. His silence unsettles some, comforts others, but always reveals more than anyone intended"..
 Presence,28,"Touch, silence, witness",Inodora - Story Teller,Glyph of Steadfast Witness,Old Well,Presence anchors fear when the player stays through the night.
 Joy,29,"Play, reunion, creative spark",Sera the Herb Novice,Glyph of Verdant Reunion,Garden Annex,Herbs bloom only when tended together; joy emerges through shared care.
 Joy,30,"Play, reunion, creative spark",Sera the Herb Novice,Glyph of Dawn Petals,Garden Annex,Blossoms open at dawn; joy is fleeting and must be appreciated.
 Joy,31,"Play, reunion, creative spark",Sera the Herb Novice,Glyph of Laughter's Balm,Market Courtyard,Herbal tea lightens sorrow; shared laughter emerges.
 Joy,32,"Play, reunion, creative spark",Tala - Market Cook,Glyph of Shared Feast,Community Cooking Fire,Cooking together becomes a communal act of reunion.
 Joy,33,"Play, reunion, creative spark",Rasha - Ferry Operator,Glyph of Arrival,Harbor Dock,Arrival after danger brings relief and joy.
-Joy,34,"Play, reunion, creative spark",Lira - Skilled Boatmaker,Glyph of Crafted Wonder,Boatwright’s Workshop,Launching a new boat reveals joy born from repaired materials.
+Joy,34,"Play, reunion, creative spark",Lira - Skilled Boatmaker,Glyph of Crafted Wonder,Boatwrightâ€™s Workshop,Launching a new boat reveals joy born from repaired materials.
 Joy,35,"Play, reunion, creative spark",Juria & Korinth,Glyph of Trade Celebration,Harbor Market,Joy emerges even in transactional exchange.
 Trust,36,"Community, restoration, interdependence",Elenya - Community Coordinator,Glyph of Shared Survival,Ridge Shelter,The player participates in a coordinated survival effort.
 Trust,37,"Community, restoration, interdependence",Tovren the Cartwright,Glyph of Shared Burden,Merchant Caravan,Survival depends on bearing weight together.
@@ -54,7 +54,7 @@ Collapse,52,"Memory distortion, fear, the fracture",Korrin,Glyph of Fractured Ru
 Collapse,53,"Memory distortion, fear, the fracture",Orvak,Glyph of Quiet Collapse,Collapsed Watchtower,Small routines of survival reveal slow erosion.
 Trust,54,"Community, restoration, interdependence",Kaelen,Glyph of Apprehension,Swamp Dock,Trust and fear coexist; the player must choose alignment.
 Presence,55,"Touch, silence, witness",Saori,Glyph of Dormant Potential,Hidden Console,Pressing the cracked console reveals latent memory potential.
-Ache,56,"Loss, grief, betrayal",Saori,Glyph of Mirrored Loss,Mirror Chamber,The player discerns Saori’s real expression among distortions.
+Ache,56,"Loss, grief, betrayal",Saori,Glyph of Mirrored Loss,Mirror Chamber,The player discerns Saoriâ€™s real expression among distortions.
 Joy,57,"Longing, creative spark, quiet intimacy",Sera & Korrin,Glyph of Shared Dawn,Market Courtyard,A quiet moment reveals unexpected connection.
 Ache,58,"Loss, grief, betrayal",Saori,Glyph of Sensory Oblivion,Chamber of Delayed Echoes,Abandonment subtly sensed but unclear.
 Ache,59,"Loss, grief, betrayal",Tessa,Glyph of Primal Oblivion,Desert Outskirts,Raw abandonment fully felt.
