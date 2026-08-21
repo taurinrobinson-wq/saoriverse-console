@@ -22,14 +22,13 @@ public class TriglyphPuzzleController : MonoBehaviour
     [SerializeField] private GameObject mountainOverlay_Sealed;
     [SerializeField] private GameObject mountainOverlay_Unsealed;
     [SerializeField] private Transform doorSprite;
-    [SerializeField] private TextMeshProUGUI puzzlePromptText;
-
-    [Header("Triglyph Slots")]
-    [SerializeField] private TriglyphSlot[] triglyphSlots = new TriglyphSlot[3];
 
     [Header("Door Animation")]
     [SerializeField] private Vector3 doorOpenPosition = new Vector3(550.6f, 472f, 0);
     [SerializeField] private float doorOpenSpeed = 1.5f;
+
+    [Header("Triglyph Slots")]
+    [SerializeField] private TriglyphSlot[] triglyphSlots = new TriglyphSlot[3];
 
     private List<GlyphUI> selectedGlyphs = new List<GlyphUI>();
     private const int RequiredGlyphCount = 3;
@@ -57,10 +56,7 @@ public class TriglyphPuzzleController : MonoBehaviour
 
     private void Start()
     {
-        // Hide prompt initially
-        if (puzzlePromptText != null)
-            puzzlePromptText.text = "";
-
+        // Start with no prompt displayed
         Debug.Log("[Triglyph Puzzle] Controller initialized");
     }
 
@@ -114,21 +110,20 @@ public class TriglyphPuzzleController : MonoBehaviour
     }
 
     /// <summary>
-    /// Update the "Press E to add to panel" prompt
+    /// Update the "Press E to add to panel" prompt via notification system
     /// </summary>
     private void UpdatePrompt()
     {
-        if (puzzlePromptText == null) return;
+        NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        if (notificationPanel == null) return;
 
         if (selectedGlyphs.Count == RequiredGlyphCount)
         {
-            puzzlePromptText.text = "Press E to add selected glyphs to panel";
-            puzzlePromptText.color = new Color(1, 1, 0, 1); // Yellow
+            notificationPanel.ShowNotification("Press E to add selected glyphs to panel", duration: 10f);
         }
-        else
+        else if (selectedGlyphs.Count > 0)
         {
-            puzzlePromptText.text = $"Select glyphs: {selectedGlyphs.Count}/{RequiredGlyphCount}";
-            puzzlePromptText.color = new Color(1, 1, 1, 1); // White
+            notificationPanel.ShowNotification($"Select glyphs: {selectedGlyphs.Count}/{RequiredGlyphCount}", duration: 3f);
         }
     }
 
@@ -173,8 +168,9 @@ public class TriglyphPuzzleController : MonoBehaviour
         }
 
         // Hide prompt
-        if (puzzlePromptText != null)
-            puzzlePromptText.text = "";
+        NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        if (notificationPanel != null)
+            notificationPanel.ShowNotification("", duration: 0.1f);
 
         // Trigger the door sequence
         StartCoroutine(TriggerDoorSequence());

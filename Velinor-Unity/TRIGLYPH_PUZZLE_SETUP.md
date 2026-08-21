@@ -29,9 +29,10 @@ This is automatic via `GlyphTestingController` or actual game pickup event.
    - **Mountain Overlay Sealed**: Drag MountainOverlay_Sealed
    - **Mountain Overlay Unsealed**: Drag MountainOverlay_Unsealed
    - **Door Sprite**: Drag the DoorSprite
-   - **Puzzle Prompt Text**: Drag a TextMeshPro text object (or create one)
    - **Door Open Position**: X=550.6, Y=472 (will animate from current position to this)
    - **Door Open Speed**: 1.5 (adjust for faster/slower animation)
+
+**Note:** Puzzle prompts automatically display in your centralized **NotificationPanel**. No separate text field needed!
 
 ### Step 2: Add/Wire Triglyph Slots
 
