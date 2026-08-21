@@ -24,8 +24,8 @@ public class TriglyphPuzzleController : MonoBehaviour
     [SerializeField] private TriglyphSlot[] triglyphSlots = new TriglyphSlot[3];
 
     [Header("Door Animation")]
-    [SerializeField] private Vector3 doorOpenPosition = new Vector3(0, 5, 0);
-    [SerializeField] private float doorOpenSpeed = 2f;
+    [SerializeField] private Vector3 doorOpenPosition = new Vector3(550.6f, 472f, 0);
+    [SerializeField] private float doorOpenSpeed = 1.5f;
 
     private List<GlyphUI> selectedGlyphs = new List<GlyphUI>();
     private const int RequiredGlyphCount = 3;

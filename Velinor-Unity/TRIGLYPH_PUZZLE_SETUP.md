@@ -30,6 +30,8 @@ This is automatic via `GlyphTestingController` or actual game pickup event.
    - **Mountain Overlay Unsealed**: Drag MountainOverlay_Unsealed
    - **Door Sprite**: Drag the DoorSprite
    - **Puzzle Prompt Text**: Drag a TextMeshPro text object (or create one)
+   - **Door Open Position**: X=550.6, Y=472 (will animate from current position to this)
+   - **Door Open Speed**: 1.5 (adjust for faster/slower animation)
 
 ### Step 2: Add/Wire Triglyph Slots
 
