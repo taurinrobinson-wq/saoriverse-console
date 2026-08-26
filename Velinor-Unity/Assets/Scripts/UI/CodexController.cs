@@ -40,40 +40,32 @@ public class CodexController : MonoBehaviour
 
     [Header("Glyph Management")]
     [SerializeField] private GameObject glyphUIPrefab;
-    [SerializeField] private List<GlyphSlot> slotsPage1 = new List<GlyphSlot>();
-    [SerializeField] private List<GlyphSlot> slotsPage2 = new List<GlyphSlot>();
+    [SerializeField] private List<GlyphSlot> allSlots = new List<GlyphSlot>();  // All 18 slots globally numbered (0-17)
 
     private List<GlyphUI> activeGlyphs = new List<GlyphUI>();
     private GlyphUI selectedGlyph;
+    private GlyphSlot selectedSlot;  // Track which slot is visually highlighted
 
     private int _currentCodexPage = 0;
-    private const int GlyphsPerPage = 9;
+    private const int SlotsPerPage = 9;
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _toggleCodexAction;
-    private InputAction _leftAction;
-    private InputAction _rightAction;
 
     private void OnEnable()
     {
         _toggleCodexAction = new InputAction("ToggleCodex", binding: "<Keyboard>/c");
-        _leftAction = new InputAction("Left", binding: "<Keyboard>/leftArrow");
-        _rightAction = new InputAction("Right", binding: "<Keyboard>/rightArrow");
-
         _toggleCodexAction.Enable();
-        _leftAction.Enable();
-        _rightAction.Enable();
     }
 
     private void OnDisable()
     {
         _toggleCodexAction?.Disable();
-        _leftAction?.Disable();
-        _rightAction?.Disable();
     }
 #endif
 
     private Canvas _cachedCanvas;
+    private TriglyphPuzzleController _triglyphController; // ← Cache to avoid FindAnyObjectByType every frame
 
     private void Awake()
     {
@@ -106,6 +98,9 @@ public class CodexController : MonoBehaviour
 
         if (nextPageBtn != null) nextPageBtn.onClick.AddListener(NextPage);
         if (prevPageBtn != null) prevPageBtn.onClick.AddListener(PrevPage);
+
+        // Cache TriglyphPuzzleController to check sequence status without FindAnyObjectByType every frame
+        _triglyphController = FindAnyObjectByType<TriglyphPuzzleController>();
     }
 
     private Transform FindPanelRecursive(Transform parent, string panelName)
@@ -153,6 +148,12 @@ public class CodexController : MonoBehaviour
 
     private void Update()
     {
+        // ← SKIP if puzzle sequence is running (let TriggerDoorSequence control the panels)
+        if (_triglyphController != null && _triglyphController.IsSequenceInProgress)
+        {
+            return; // Don't interfere during sequence
+        }
+
         // FORCE canvas to stay active if it got deactivated
         if (_cachedCanvas != null && !_cachedCanvas.gameObject.activeSelf)
         {
@@ -168,25 +169,15 @@ public class CodexController : MonoBehaviour
         }
 
         bool cPressed = false;
-        bool leftPressed = false;
-        bool rightPressed = false;
 
 #if ENABLE_INPUT_SYSTEM
         if (_toggleCodexAction != null && _toggleCodexAction.WasPressedThisFrame())
             cPressed = true;
 
-        if (_leftAction != null && _leftAction.WasPressedThisFrame())
-            leftPressed = true;
-
-        if (_rightAction != null && _rightAction.WasPressedThisFrame())
-            rightPressed = true;
-
         var keyboard = Keyboard.current;
         if (keyboard != null)
         {
             if (keyboard.cKey.wasPressedThisFrame) cPressed = true;
-            if (keyboard.leftArrowKey.wasPressedThisFrame) leftPressed = true;
-            if (keyboard.rightArrowKey.wasPressedThisFrame) rightPressed = true;
         }
 #endif
 
@@ -202,11 +193,8 @@ public class CodexController : MonoBehaviour
             }
         }
 
-        if (codexPanel != null && codexPanel.alpha > 0.5f)
-        {
-            if (leftPressed) PrevPage();
-            if (rightPressed) NextPage();
-        }
+        // Arrow key navigation disabled - only button clicks allowed
+        // This ensures UI buttons are the primary interaction method
     }
 
     public void ToggleCodex()
@@ -236,14 +224,32 @@ public class CodexController : MonoBehaviour
             _currentCodexPage = 0;
             UpdateCodexUI();
         }
+        else
+        {
+            // When closing Codex, deselect any selected glyph
+            if (selectedSlot != null)
+            {
+                selectedSlot.Unhighlight();
+                selectedSlot = null;
+            }
+            if (selectedGlyph != null)
+            {
+                selectedGlyph.Deselect();
+                selectedGlyph = null;
+            }
+        }
 
         Debug.Log($"[Codex] Codex panel now {(opening ? "OPEN" : "CLOSED")}");
     }
 
     public void NextPage()
     {
-        _currentCodexPage++;
-        UpdateCodexUI();
+        int maxPages = Mathf.CeilToInt((float)allSlots.Count / SlotsPerPage);
+        if (_currentCodexPage < maxPages - 1)
+        {
+            _currentCodexPage++;
+            UpdateCodexUI();
+        }
     }
 
     public void PrevPage()
@@ -259,60 +265,45 @@ public class CodexController : MonoBehaviour
     {
         if (codexPanel == null) return;
 
-        // Get glyphs from database
-        var allGlyphs = GlyphsDatabase.GetAllGlyphs();
-
         if (glyphNameText != null)
         {
-            int totalPages = Mathf.CeilToInt((float)allGlyphs.Count / GlyphsPerPage);
+            int totalPages = Mathf.CeilToInt((float)allSlots.Count / SlotsPerPage);
             glyphNameText.text = $"Codex - Page {_currentCodexPage + 1} of {totalPages}";
         }
 
-        // Populate the glyph grid with sprites
-        Transform gridT = codexPanel.transform.Find("GlyphGrid");
+        // Look for pagination grids: GlyphGrid_Pg1, GlyphGrid_Pg2, etc.
+        string gridName = $"GlyphGrid_Pg{_currentCodexPage + 1}";
+        Transform gridT = codexPanel.transform.Find(gridName);
+
+        if (gridT == null)
+        {
+            // Fallback: try to find just "GlyphGrid" (non-paginated layout)
+            gridT = codexPanel.transform.Find("GlyphGrid");
+        }
+
         if (gridT != null)
         {
-            Debug.Log($"[Codex] GlyphGrid found with {gridT.childCount} children (slots)");
+            Debug.Log($"[Codex] {gridName} found with {gridT.childCount} children (slots)");
 
+            // Update the grid to display the GlyphSlot components
+            // The slots already contain the collected glyphs via SetGlyph()
             for (int i = 0; i < gridT.childCount; i++)
             {
-                Transform slot = gridT.GetChild(i);
-                Image slotImage = slot.GetComponent<Image>();
+                Transform slotTransform = gridT.GetChild(i);
+                GlyphSlot glyphSlot = slotTransform.GetComponent<GlyphSlot>();
 
-                // Calculate which glyph to show on this page
-                int glyphIndex = (_currentCodexPage * GlyphsPerPage) + i;
-
-                if (slotImage == null)
+                if (glyphSlot != null)
                 {
-                    slotImage = slot.gameObject.AddComponent<Image>();
-                }
-
-                if (glyphIndex < allGlyphs.Count)
-                {
-                    // Show glyph sprite
-                    slotImage.sprite = allGlyphs[glyphIndex].sprite;
-                    slotImage.color = Color.white;
-
-                    // Try to add GlyphSelectable component for interaction
-                    if (slot.GetComponent<GlyphSelectable>() == null)
-                    {
-                        GlyphSelectable glyphSelect = slot.gameObject.AddComponent<GlyphSelectable>();
-                        glyphSelect.SetGlyphName(allGlyphs[glyphIndex].name);
-                    }
-
-                    Debug.Log($"[Codex]   Slot_{i}: {allGlyphs[glyphIndex].name}");
-                }
-                else
-                {
-                    // Empty slot
-                    slotImage.sprite = null;
-                    slotImage.color = new Color(0.15f, 0.15f, 0.15f, 1f);
+                    // The GlyphSlot already manages its own display
+                    // Just ensure it's visible
+                    slotTransform.gameObject.SetActive(true);
+                    Debug.Log($"[Codex]   Slot_{i}: Active, Filled={glyphSlot.isFilled}");
                 }
             }
         }
         else
         {
-            Debug.LogWarning("[Codex] GlyphGrid not found!");
+            Debug.LogWarning($"[Codex] {gridName} not found! Check CodexPanel hierarchy for GlyphGrid_Pg1, GlyphGrid_Pg2, etc.");
         }
     }
 
@@ -354,14 +345,17 @@ public class CodexController : MonoBehaviour
             return;
         }
 
-        // Create GlyphUI instance
+        // Create GlyphUI instance (inactive - will be displayed via GlyphSlot)
         if (glyphUIPrefab == null)
         {
             Debug.LogError("[Codex] glyphUIPrefab is not assigned!");
             return;
         }
 
-        GameObject glyphUIPrefabInstance = Instantiate(glyphUIPrefab);
+        // Instantiate as child of codex panel but inactive
+        Transform parentTransform = codexPanel != null ? codexPanel.transform : null;
+        GameObject glyphUIPrefabInstance = Instantiate(glyphUIPrefab, parentTransform);
+        glyphUIPrefabInstance.SetActive(false);
         GlyphUI glyphUI = glyphUIPrefabInstance.GetComponent<GlyphUI>();
 
         if (glyphUI == null)
@@ -406,30 +400,21 @@ public class CodexController : MonoBehaviour
     }
 
     /// <summary>
-    /// Assign a glyph to the next available slot (page 1 first, then page 2).
+    /// Assign a glyph to the next available slot in global sequence (0-17).
     /// </summary>
     private void AssignGlyphToNextAvailableSlot(GlyphUI glyph)
     {
         if (glyph == null) return;
 
-        // Try page 1 slots first
-        foreach (var slot in slotsPage1)
-        {
-            if (slot != null && !slot.isFilled)
-            {
-                slot.SetGlyph(glyph);
-                Debug.Log($"[Codex] Assigned {glyph.glyphData.glyphName} to Page 1 slot");
-                return;
-            }
-        }
+        Debug.Log($"[Codex] Looking for slot... Total slots: {allSlots.Count}");
 
-        // Try page 2 slots
-        foreach (var slot in slotsPage2)
+        // Iterate through all slots in global order
+        foreach (var slot in allSlots)
         {
             if (slot != null && !slot.isFilled)
             {
                 slot.SetGlyph(glyph);
-                Debug.Log($"[Codex] Assigned {glyph.glyphData.glyphName} to Page 2 slot");
+                Debug.Log($"[Codex] Assigned {glyph.glyphData.glyphName} to next available slot");
                 return;
             }
         }
@@ -442,17 +427,8 @@ public class CodexController : MonoBehaviour
     /// </summary>
     private void ClearGlyphFromSlots(GlyphData data)
     {
-        // Clear from page 1
-        foreach (var slot in slotsPage1)
-        {
-            if (slot != null && slot.glyphUI != null && slot.glyphUI.glyphData == data)
-            {
-                slot.Clear();
-            }
-        }
-
-        // Clear from page 2
-        foreach (var slot in slotsPage2)
+        // Clear from all slots
+        foreach (var slot in allSlots)
         {
             if (slot != null && slot.glyphUI != null && slot.glyphUI.glyphData == data)
             {
@@ -463,19 +439,63 @@ public class CodexController : MonoBehaviour
 
     /// <summary>
     /// Called when a glyph is selected (usually from a slot button click).
+    /// Toggles selection if clicking the same glyph twice.
     /// </summary>
     public void OnGlyphSelected(GlyphUI glyph)
     {
         if (glyph == null) return;
 
-        // Deselect previous glyph
+        // Check if clicking the same glyph again (toggle behavior)
+        if (selectedGlyph == glyph)
+        {
+            Debug.Log($"[Codex] Toggling off glyph: {glyph.glyphData.glyphName}");
+            selectedGlyph.Deselect();
+            selectedGlyph = null;
+
+            if (selectedSlot != null)
+            {
+                selectedSlot.Unhighlight();
+                selectedSlot = null;
+            }
+
+            if (glyphNameText != null)
+            {
+                glyphNameText.text = "Codex";
+            }
+
+            // Notify puzzle controller of deselection
+            NotifyPuzzleController(null);
+            return;
+        }
+
+        // Deselect previous glyph and unhighlight its slot
         if (selectedGlyph != null)
         {
+            Debug.Log($"[Codex] Deselecting previous glyph: {selectedGlyph.glyphData.glyphName}");
             selectedGlyph.Deselect();
         }
 
+        if (selectedSlot != null)
+        {
+            Debug.Log($"[Codex] Unhighlighting previous slot: {selectedSlot.gameObject.name}");
+            selectedSlot.Unhighlight();
+        }
+
+        // Select new glyph
         selectedGlyph = glyph;
         selectedGlyph.Select();
+
+        // Find and highlight the slot containing this glyph
+        foreach (var slot in allSlots)
+        {
+            if (slot != null && slot.glyphUI == glyph)
+            {
+                selectedSlot = slot;
+                slot.Highlight();
+                Debug.Log($"[Codex] Highlighting slot: {slot.gameObject.name}");
+                break;
+            }
+        }
 
         // Update the glyph name display
         if (glyphNameText != null)
@@ -484,7 +504,6 @@ public class CodexController : MonoBehaviour
         }
 
         // Notify puzzle controller for puzzle selection tracking
-        // (separate from codex "viewing" selection)
         NotifyPuzzleController(glyph);
 
         Debug.Log($"[Codex] Glyph selected: {glyph.glyphData.glyphName}");

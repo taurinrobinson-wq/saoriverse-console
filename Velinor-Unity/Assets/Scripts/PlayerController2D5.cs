@@ -55,9 +55,9 @@ public class PlayerController2D5 : MonoBehaviour
         cachedSpriteRenderer = spriteRenderer != null ? spriteRenderer : GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
-        
+
         currentPosition = transform.position;
-        
+
         // Immediate scale calculation for first frame
         UpdateDepthScaling(true);
         ApplyTransform();
@@ -67,7 +67,7 @@ public class PlayerController2D5 : MonoBehaviour
             animIDSpeed = Animator.StringToHash("Speed");
             animIDGrounded = Animator.StringToHash("Grounded");
             animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-            
+
             animator.SetBool(animIDGrounded, true);
             animator.SetFloat(animIDMotionSpeed, 1f);
         }
@@ -81,7 +81,6 @@ public class PlayerController2D5 : MonoBehaviour
             currentPosition = transform.position;
             UpdateDepthScaling(true); // Force immediate scale to prevent lerp popping/shrinking
             ApplyTransform();
-            Debug.Log($"[PlayerController2D5] External position sync: {currentPosition}, Scale updated immediately.");
         }
 
         HandleMovement();
@@ -154,13 +153,13 @@ public class PlayerController2D5 : MonoBehaviour
         // Calculate scale based on Y position (closer to camera/bottom = larger, farther/top = smaller)
         float yRange = maxY - minY;
         if (yRange <= 0.001f) yRange = 0.001f;
-        float yNormalized = (currentPosition.y - minY) / yRange; 
+        float yNormalized = (currentPosition.y - minY) / yRange;
         yNormalized = Mathf.Clamp01(yNormalized);
 
         // Larger at minY (closest), smaller at maxY (farthest)
         // Since we want larger at bottom (minY), it should be Lerp(maxScale, minScale, yNormalized)
         float targetScale = Mathf.Lerp(maxScale, minScale, yNormalized);
-        
+
         if (immediate)
             currentScale = targetScale;
         else

@@ -38,6 +38,14 @@ namespace Velinor.Core
             {
                 _iconImage.sprite = data.icon;
             }
+            else if (_iconImage == null)
+            {
+                Debug.LogWarning($"[GlyphUI] _iconImage is not assigned on {gameObject.name}!");
+            }
+            else if (data.icon == null)
+            {
+                Debug.LogWarning($"[GlyphUI] GlyphData {data.glyphName} has no icon sprite assigned!");
+            }
 
             if (nameText != null)
             {

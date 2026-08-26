@@ -12,12 +12,36 @@ namespace Velinor.Core
         [SerializeField] private Image slotImage;
         [SerializeField] private Button button;
         [SerializeField] private Color emptySlotColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
+        [SerializeField] private Color selectedColor = new Color(1f, 1f, 0.5f, 1f); // Yellow-tinted for selection
+        [SerializeField] private Color highlightColor = new Color(1.2f, 1.2f, 1.2f, 1f); // Brightened
 
         public bool isFilled { get; private set; }
         public GlyphUI glyphUI { get; private set; }
+        public bool isSelected { get; private set; }
 
         private void Start()
         {
+            // Auto-find Image if not assigned
+            if (slotImage == null)
+            {
+                slotImage = GetComponent<Image>();
+                if (slotImage == null)
+                {
+                    Debug.LogWarning($"[GlyphSlot] No Image component found on {gameObject.name}!");
+                }
+            }
+
+            // Auto-find or create Button if not assigned
+            if (button == null)
+            {
+                button = GetComponent<Button>();
+                if (button == null)
+                {
+                    button = gameObject.AddComponent<Button>();
+                    Debug.Log($"[GlyphSlot] Created Button component on {gameObject.name}");
+                }
+            }
+
             if (button != null)
             {
                 button.onClick.AddListener(OnSlotClicked);
@@ -75,6 +99,44 @@ namespace Velinor.Core
             if (codexController != null)
             {
                 codexController.OnSlotClicked(this);
+            }
+        }
+
+        /// <summary>
+        /// Highlight this slot to show it's selected.
+        /// </summary>
+        public void Highlight()
+        {
+            isSelected = true;
+            if (slotImage != null && isFilled)
+            {
+                slotImage.color = selectedColor;
+                Debug.Log($"[GlyphSlot] {gameObject.name} highlighted");
+            }
+        }
+
+        /// <summary>
+        /// Remove highlight from this slot.
+        /// </summary>
+        public void Unhighlight()
+        {
+            isSelected = false;
+            if (slotImage != null)
+            {
+                if (isFilled)
+                {
+                    slotImage.color = Color.white;
+                    Debug.Log($"[GlyphSlot] {gameObject.name} unhighlighted - restored to white");
+                }
+                else
+                {
+                    slotImage.color = emptySlotColor;
+                    Debug.Log($"[GlyphSlot] {gameObject.name} unhighlighted - restored to empty color");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[GlyphSlot] {gameObject.name} - slotImage is null in Unhighlight!");
             }
         }
 

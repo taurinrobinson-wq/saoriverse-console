@@ -19,6 +19,18 @@ namespace Velinor.Core
 
         private void Start()
         {
+            // Auto-find or create Button component if not assigned
+            if (button == null)
+            {
+                button = GetComponent<Button>();
+
+                if (button == null)
+                {
+                    button = gameObject.AddComponent<Button>();
+                    Debug.Log($"[TriglyphSlot {slotIndex}] Created Button component");
+                }
+            }
+
             if (button != null)
             {
                 button.onClick.AddListener(OnSlotClicked);
