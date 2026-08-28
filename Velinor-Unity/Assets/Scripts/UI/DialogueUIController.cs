@@ -51,7 +51,7 @@ public class DialogueUIController : MonoBehaviour
             if (c.gameObject.name == "UI_Canvas")
             {
                 _cachedCanvas = c;
-                
+
                 Transform dialoguePanelT = FindPanelRecursive(c.transform, "DialoguePanel");
                 if (dialoguePanelT != null)
                 {
@@ -98,7 +98,7 @@ public class DialogueUIController : MonoBehaviour
             _cachedCanvas.gameObject.SetActive(true);
             Debug.LogWarning("[UI] Canvas GameObject was deactivated - re-activating it!");
         }
-        
+
         // Also ensure Canvas component is enabled (DialogueManager disables it)
         if (_cachedCanvas != null && !_cachedCanvas.enabled)
         {
@@ -108,7 +108,7 @@ public class DialogueUIController : MonoBehaviour
 
         // E key handling is now done by PlayerController2D5.HandleInteraction()
         // This was a duplicate handler - removed to avoid conflicts
-        
+
         // Keep this section commented for reference:
         // #if ENABLE_INPUT_SYSTEM
         // if (_interactAction != null && _interactAction.WasPressedThisFrame())
@@ -117,7 +117,7 @@ public class DialogueUIController : MonoBehaviour
         // if (keyboard != null && keyboard.eKey.wasPressedThisFrame)
         //     ePressed = true;
         // #endif
-        
+
         // if (ePressed)
         //     TryInteract();
     }

@@ -131,7 +131,7 @@ public class PlayerController2D5 : MonoBehaviour
         Vector3 newPosition = currentPosition + movement;
         newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
-        
+
         // Use CharacterController for collision detection
         if (characterController != null && characterController.enabled)
         {
@@ -180,16 +180,23 @@ public class PlayerController2D5 : MonoBehaviour
 
         if (ePressed)
         {
-            // Check for IInteractable objects in proximity (1.5 unit radius)
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
+            // Check for IInteractable objects in proximity (1.0 unit radius)
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
+            Debug.Log($"[PlayerController2D5] E pressed - Found {colliders.Length} colliders in range");
+            
             foreach (var col in colliders)
             {
+                Debug.Log($"[PlayerController2D5]   - Checking collider: {col.gameObject.name} (tag: {col.gameObject.tag})");
                 IInteractable interactable = col.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
-                    Debug.Log($"[PlayerController2D5] Interacting with {col.gameObject.name}");
+                    Debug.Log($"[PlayerController2D5] ✓ Found IInteractable on {col.gameObject.name} - calling Interact()");
                     interactable.Interact(gameObject);
                     break; // Only interact with the first one found
+                }
+                else
+                {
+                    Debug.Log($"[PlayerController2D5]   - No IInteractable component on {col.gameObject.name}");
                 }
             }
         }
