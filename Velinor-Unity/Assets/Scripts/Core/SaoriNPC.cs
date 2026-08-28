@@ -54,6 +54,7 @@ namespace Velinor.Core
 
             // Check if player is in range (for proximity indication)
             Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+            Debug.Log($"[SaoriNPC] Position: {transform.position}, Radius: {interactionRadius}, Found colliders: {colliders.Length}");
             bool wasInRange = playerInRange;
             playerInRange = false;
 
@@ -63,6 +64,7 @@ namespace Velinor.Core
                 {
                     playerInRange = true;
                     player = col.gameObject;
+                    Debug.Log($"[SaoriNPC] Found player at {col.transform.position}, distance: {Vector3.Distance(transform.position, col.transform.position):F2}m");
                     break;
                 }
             }

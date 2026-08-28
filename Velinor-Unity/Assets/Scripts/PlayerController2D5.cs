@@ -182,11 +182,11 @@ public class PlayerController2D5 : MonoBehaviour
         {
             // Check for IInteractable objects in proximity (1.0 unit radius)
             Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
-            Debug.Log($"[PlayerController2D5] E pressed - Found {colliders.Length} colliders in range");
-            
+            Debug.Log($"[PlayerController2D5] Player Position: {transform.position}, Radius: 1.0f, Found {colliders.Length} colliders in range");
+
             foreach (var col in colliders)
             {
-                Debug.Log($"[PlayerController2D5]   - Checking collider: {col.gameObject.name} (tag: {col.gameObject.tag})");
+                Debug.Log($"[PlayerController2D5]   - Checking collider: {col.gameObject.name} at position {col.transform.position} (tag: {col.gameObject.tag})");
                 IInteractable interactable = col.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
