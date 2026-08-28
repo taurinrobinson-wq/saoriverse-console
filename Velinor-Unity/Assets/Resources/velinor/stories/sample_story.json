@@ -17,7 +17,10 @@
                     "data_hook": "met_saori=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Trust", "value": 0.02}
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "tone_str": "Trust",
@@ -31,7 +34,10 @@
                     "data_hook": "met_saori=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Observation", "value": 0.02}
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "tone_str": "Observation",
@@ -45,7 +51,10 @@
                     "data_hook": "met_saori=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "NarrativePresence", "value": 0.02}
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "tone_str": "NarrativePresence",
@@ -59,12 +68,18 @@
                     "data_hook": "met_saori=true|saori_empathy_shown=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Empathy", "value": 0.02}
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "npc_resonance": {
                         "entries": [
-                            {"key": "Saori", "value": 0.03}
+                            {
+                                "key": "Saori",
+                                "value": 0.03
+                            }
                         ]
                     },
                     "tone_str": "Empathy",
@@ -87,7 +102,10 @@
                     "data_hook": "received_saori_device=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Trust", "value": 0.03}
+                            {
+                                "key": "Trust",
+                                "value": 0.03
+                            }
                         ]
                     },
                     "tone_str": "Trust",
@@ -101,7 +119,10 @@
                     "data_hook": "received_saori_device=true|saori_questioned=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Observation", "value": 0.03}
+                            {
+                                "key": "Observation",
+                                "value": 0.03
+                            }
                         ]
                     },
                     "tone_str": "Observation",
@@ -115,7 +136,10 @@
                     "data_hook": "received_saori_device=true|saori_connection_noted=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "NarrativePresence", "value": 0.03}
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.03
+                            }
                         ]
                     },
                     "tone_str": "NarrativePresence",
@@ -129,12 +153,18 @@
                     "data_hook": "received_saori_device=true|saori_emotional_connection=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Empathy", "value": 0.04}
+                            {
+                                "key": "Empathy",
+                                "value": 0.04
+                            }
                         ]
                     },
                     "npc_resonance": {
                         "entries": [
-                            {"key": "Saori", "value": 0.05}
+                            {
+                                "key": "Saori",
+                                "value": 0.05
+                            }
                         ]
                     },
                     "tone_str": "Empathy",
@@ -157,7 +187,10 @@
                     "data_hook": "saori_warned=true|saori_will_return=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Trust", "value": 0.02}
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "tone_str": "Trust",
@@ -171,7 +204,10 @@
                     "data_hook": "saori_warned=true|tone_system_explained=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Observation", "value": 0.02}
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "tone_str": "Observation",
@@ -185,7 +221,10 @@
                     "data_hook": "saori_warned=true|player_aware=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "NarrativePresence", "value": 0.03}
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.03
+                            }
                         ]
                     },
                     "tone_str": "NarrativePresence",
@@ -199,12 +238,18 @@
                     "data_hook": "saori_warned=true|saori_support_pledged=true",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Empathy", "value": 0.03}
+                            {
+                                "key": "Empathy",
+                                "value": 0.03
+                            }
                         ]
                     },
                     "npc_resonance": {
                         "entries": [
-                            {"key": "Saori", "value": 0.04}
+                            {
+                                "key": "Saori",
+                                "value": 0.04
+                            }
                         ]
                     },
                     "tone_str": "Empathy",
@@ -227,7 +272,10 @@
                     "data_hook": "append_diary:Met Saori in the desert. She gave me a strange device and warned me about the market. There is something greater at play here—something she knows but will not fully reveal. I feel like our meeting was no accident.",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Trust", "value": 0.01}
+                            {
+                                "key": "Trust",
+                                "value": 0.01
+                            }
                         ]
                     },
                     "tone_str": "Trust",
@@ -241,7 +289,10 @@
                     "data_hook": "append_diary:Met Saori in the desert. She gave me a device and disappeared into the storm. She spoke cryptically about fate and timing. I have so many unanswered questions.",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Observation", "value": 0.01}
+                            {
+                                "key": "Observation",
+                                "value": 0.01
+                            }
                         ]
                     },
                     "tone_str": "Observation",
@@ -255,7 +306,10 @@
                     "data_hook": "append_diary:Saori—that is her name. She vanished into the desert like a phantom, but I know I will see her again. Our destinies are entwined somehow.",
                     "tone_effects": {
                         "entries": [
-                            {"key": "NarrativePresence", "value": 0.02}
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "tone_str": "NarrativePresence",
@@ -269,12 +323,18 @@
                     "data_hook": "append_diary:Saori. She trusted me. She believed in me. I don't know what the future holds, but I know I will honor that trust. We will meet again.",
                     "tone_effects": {
                         "entries": [
-                            {"key": "Empathy", "value": 0.02}
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
                         ]
                     },
                     "npc_resonance": {
                         "entries": [
-                            {"key": "Saori", "value": 0.06}
+                            {
+                                "key": "Saori",
+                                "value": 0.06
+                            }
                         ]
                     },
                     "tone_str": "Empathy",

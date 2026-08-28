@@ -452,7 +452,9 @@ public class DialogueManager : MonoBehaviour
             var sharedBeatText = FindTextMeshInCanvas("SharedBeatText");
             if (sharedBeatText != null)
             {
+                sharedBeatText.text = "";
                 sharedBeatText.text = choice.shared_beat;
+                sharedBeatText.ForceMeshUpdate();
                 sharedBeatText.gameObject.SetActive(true);
                 yield return new WaitForSeconds(6f);  // Increased from 4s to 6s for better readability
                 sharedBeatText.gameObject.SetActive(false);
@@ -460,7 +462,13 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                bodyText.text = choice.shared_beat;
+                // Fallback: show shared_beat in main bodyText
+                if (bodyText != null)
+                {
+                    bodyText.text = "";
+                    bodyText.text = choice.shared_beat;
+                    bodyText.ForceMeshUpdate();
+                }
                 yield return new WaitForSeconds(6f);  // Increased from 4s to 6s for better readability
             }
         }

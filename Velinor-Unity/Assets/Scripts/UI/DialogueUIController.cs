@@ -139,15 +139,26 @@ public class DialogueUIController : MonoBehaviour
             return;
         }
 
-        if (npcNameText != null) npcNameText.text = npcName;
-        if (dialogueText != null) dialogueText.text = text;
+        // CRITICAL: Clear text fields first to avoid text stacking/duplication
+        if (npcNameText != null)
+        {
+            npcNameText.text = "";
+            npcNameText.text = npcName;
+        }
+        if (dialogueText != null)
+        {
+            dialogueText.text = "";
+            dialogueText.text = text;
+            // Force TextMeshPro to rebuild the mesh immediately
+            dialogueText.ForceMeshUpdate();
+        }
 
         // CRITICAL: Must activate the gameObject AND set alpha for visibility
         dialoguePanel.gameObject.SetActive(true);
         dialoguePanel.alpha = 1f;
         dialoguePanel.blocksRaycasts = true;
         dialoguePanel.interactable = true;
-        Debug.Log($"[UI] Showing dialogue from {npcName}");
+        Debug.Log($"[UI] Showing dialogue from {npcName}: {text.Substring(0, Mathf.Min(40, text.Length))}...");
     }
 
     /// <summary>
