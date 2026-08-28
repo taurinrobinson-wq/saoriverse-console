@@ -289,6 +289,18 @@ public class DialogueManager : MonoBehaviour
 
         if (npcNameText != null) npcNameText.text = activeNpcId;
         if (bodyText != null) bodyText.text = p.text;
+        
+        // CRITICAL: Show the dialogue in DialogueUIController (which uses the UI_Canvas)
+        var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
+        if (dialogueUIController != null)
+        {
+            dialogueUIController.ShowDialogue(activeNpcId, p.text);
+            Debug.Log("[DialogueManager] Showing dialogue via DialogueUIController");
+        }
+        else
+        {
+            Debug.LogError("[DialogueManager] DialogueUIController not found!");
+        }
 
         ClearButtons();
 
@@ -430,6 +442,15 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         if (dialogueCanvas != null) dialogueCanvas.enabled = false;
+        
+        // Hide dialogue via DialogueUIController
+        var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
+        if (dialogueUIController != null)
+        {
+            dialogueUIController.HideDialogue();
+            Debug.Log("[DialogueManager] Hiding dialogue via DialogueUIController");
+        }
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         OnDialogueEnded?.Invoke();
