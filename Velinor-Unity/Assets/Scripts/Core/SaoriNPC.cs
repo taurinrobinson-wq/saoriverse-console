@@ -8,7 +8,7 @@ namespace Velinor.Core
     {
         [SerializeField] private string npcId = "Saori";
         [SerializeField] private string startPassageId = "saori_beat_1";
-        [SerializeField] private float interactionRadius = 1.0f;
+        [SerializeField] private float interactionRadius = 3.0f; // Increased to 3.0m to test E-press
 
         private bool playerInRange = false;
         private GameObject player;
@@ -35,7 +35,8 @@ namespace Velinor.Core
             capsule.isTrigger = false; // Non-trigger collider for CharacterController collision
             capsule.height = 1.5f;
             capsule.radius = 0.3f;
-            Debug.Log("[SaoriNPC] CapsuleCollider configured for proper collision");
+            capsule.enabled = true; // ENSURE collider is enabled
+            Debug.Log("[SaoriNPC] CapsuleCollider configured and enabled for proper collision");
         }
 
         private void OnTriggerStay(Collider other)

@@ -180,9 +180,9 @@ public class PlayerController2D5 : MonoBehaviour
 
         if (ePressed)
         {
-            // Check for IInteractable objects in proximity (1.0 unit radius)
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
-            Debug.Log($"[PlayerController2D5] Player Position: {transform.position}, Radius: 1.0f, Found {colliders.Length} colliders in range");
+            // Check for IInteractable objects in proximity (3.0 unit radius for testing)
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 3.0f);
+            Debug.Log($"[PlayerController2D5] Player Position: {transform.position}, Radius: 3.0f, Found {colliders.Length} colliders in range");
 
             foreach (var col in colliders)
             {
