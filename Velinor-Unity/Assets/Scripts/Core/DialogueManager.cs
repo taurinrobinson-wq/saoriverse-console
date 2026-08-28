@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
         public string data_hook;         // e.g., "met_saori=true"
         public ToneResonanceMap tone_effects = new ToneResonanceMap();
         public ToneResonanceMap npc_resonance = new ToneResonanceMap();
-        
+
         // Parse tone string to enum after deserialization
         public void ParseTone()
         {
@@ -486,14 +486,14 @@ public class DialogueManager : MonoBehaviour
     private void ProcessDataHook(string hook)
     {
         if (string.IsNullOrEmpty(hook)) return;
-        
+
         // Support multiple hooks separated by pipe: "flag=value|append_diary:text|another_flag=value"
         string[] hooks = hook.Split('|');
         foreach (var singleHook in hooks)
         {
             string trimmedHook = singleHook.Trim();
             if (string.IsNullOrEmpty(trimmedHook)) continue;
-            
+
             // Handle flag assignment: "flagname=value"
             if (trimmedHook.Contains("=") && !trimmedHook.StartsWith("append_diary:"))
             {
@@ -509,7 +509,7 @@ public class DialogueManager : MonoBehaviour
                     }
                 }
             }
-            
+
             // Handle diary append: "append_diary:text"
             if (trimmedHook.StartsWith("append_diary:"))
             {
@@ -561,7 +561,7 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         // Don't disable dialogueCanvas - let DialogueUIController manage UI_Canvas
-        
+
         // Hide dialogue via DialogueUIController
         var controller = FindAnyObjectByType<DialogueUIController>();
         if (controller != null)
