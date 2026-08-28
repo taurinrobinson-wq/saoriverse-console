@@ -228,14 +228,14 @@ public class DialogueManager : MonoBehaviour
             if (btnO == null || btnO.gameObject == null) btnO = FindButtonInCanvas("ChoiceButton_O");
             if (btnN == null || btnN.gameObject == null) btnN = FindButtonInCanvas("ChoiceButton_N");
             if (btnE == null || btnE.gameObject == null) btnE = FindButtonInCanvas("ChoiceButton_E");
-            
+
             Debug.Log($"[DialogueManager.AutoBindUI] Buttons found - T:{(btnT != null ? "✓" : "✗")} O:{(btnO != null ? "✓" : "✗")} N:{(btnN != null ? "✓" : "✗")} E:{(btnE != null ? "✓" : "✗")}");
 
             if (txtT == null || txtT.gameObject == null) txtT = FindTextMeshInButton(btnT);
             if (txtO == null || txtO.gameObject == null) txtO = FindTextMeshInButton(btnO);
             if (txtN == null || txtN.gameObject == null) txtN = FindTextMeshInButton(btnN);
             if (txtE == null || txtE.gameObject == null) txtE = FindTextMeshInButton(btnE);
-            
+
             Debug.Log($"[DialogueManager.AutoBindUI] TextMesh found - T:{(txtT != null ? "✓" : "✗")} O:{(txtO != null ? "✓" : "✗")} N:{(txtN != null ? "✓" : "✗")} E:{(txtE != null ? "✓" : "✗")}");
         }
     }
@@ -336,13 +336,22 @@ public class DialogueManager : MonoBehaviour
             foreach (var choice in p.choices)
             {
                 int toneIndex = -1;
+                Debug.Log($"[DialogueManager] Processing choice with tone: {choice.tone}");
+                
                 for (int i = 0; i < tones.Length; i++)
                 {
                     if (choice.tone == tones[i])
                     {
                         toneIndex = i;
+                        Debug.Log($"[DialogueManager] ✓ Tone match found! choice.tone={choice.tone} equals tones[{i}]={tones[i]}");
                         break;
                     }
+                }
+                
+                if (toneIndex < 0)
+                {
+                    Debug.LogWarning($"[DialogueManager] ✗ NO TONE MATCH! choice.tone='{choice.tone}' (type: {choice.tone.GetType()})");
+                    Debug.LogWarning($"[DialogueManager]   Available tones: {string.Join(", ", tones)}");
                 }
 
                 if (toneIndex >= 0 && buttons[toneIndex] != null)
@@ -360,7 +369,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"[DialogueManager] ✗ Could not activate {toneNames[toneIndex]} - button is null or invalid tone");
+                    Debug.LogWarning($"[DialogueManager] ✗ Could not activate {(toneIndex >= 0 ? toneNames[toneIndex] : "unknown")} - button is null or invalid tone (toneIndex={toneIndex})");
                 }
             }
         }
