@@ -8,7 +8,7 @@ namespace Velinor.Core
     {
         [SerializeField] private string npcId = "Saori";
         [SerializeField] private string startPassageId = "saori_beat_1";
-        [SerializeField] private float interactionRadius = 3.0f; // Increased to 3.0m to test E-press
+        [SerializeField] private float interactionRadius = 2.0f; // Detection radius for proximity prompt
 
         private bool playerInRange = false;
         private GameObject player;
@@ -16,6 +16,11 @@ namespace Velinor.Core
 
         private void Start()
         {
+            // Position SaoriNPC near the player spawn point for interaction to work
+            // Player spawns at (-4, -5.4, 0), place NPC within 2m for E-press detection
+            transform.position = new Vector3(-4f, -3.5f, 0f);
+            Debug.Log($"[SaoriNPC] Repositioned to {transform.position} for player interaction");
+
             // Clean up colliders: keep only CapsuleCollider, remove SphereCollider
             SphereCollider sphere = GetComponent<SphereCollider>();
             if (sphere != null)
@@ -55,7 +60,6 @@ namespace Velinor.Core
 
             // Check if player is in range (for proximity indication)
             Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
-            Debug.Log($"[SaoriNPC] Position: {transform.position}, Radius: {interactionRadius}, Found colliders: {colliders.Length}");
             bool wasInRange = playerInRange;
             playerInRange = false;
 
@@ -65,7 +69,6 @@ namespace Velinor.Core
                 {
                     playerInRange = true;
                     player = col.gameObject;
-                    Debug.Log($"[SaoriNPC] Found player at {col.transform.position}, distance: {Vector3.Distance(transform.position, col.transform.position):F2}m");
                     break;
                 }
             }
