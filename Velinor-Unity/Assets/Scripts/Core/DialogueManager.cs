@@ -454,14 +454,14 @@ public class DialogueManager : MonoBehaviour
             {
                 sharedBeatText.text = choice.shared_beat;
                 sharedBeatText.gameObject.SetActive(true);
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(6f);  // Increased from 4s to 6s for better readability
                 sharedBeatText.gameObject.SetActive(false);
                 sharedBeatText.text = "";
             }
             else
             {
                 bodyText.text = choice.shared_beat;
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(6f);  // Increased from 4s to 6s for better readability
             }
         }
 
