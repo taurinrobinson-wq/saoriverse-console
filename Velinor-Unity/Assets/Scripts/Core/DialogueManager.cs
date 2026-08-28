@@ -31,7 +31,8 @@ public class DialogueManager : MonoBehaviour
     [Serializable]
     public class StoryChoice
     {
-        public ToneType tone;            // Explicit tone type (canonical)
+        [SerializeField] private string tone_str;  // JSON deserializes as string
+        public ToneType tone;                       // Runtime enum value
         public string playerLine;        // Button label (player's choice text)
         public string npcResponse;       // NPC's response text
         public string target;            // Next passage PID
@@ -40,6 +41,13 @@ public class DialogueManager : MonoBehaviour
         public string data_hook;         // e.g., "met_saori=true"
         public ToneResonanceMap tone_effects = new ToneResonanceMap();
         public ToneResonanceMap npc_resonance = new ToneResonanceMap();
+        
+        // Parse tone string to enum after deserialization
+        public void ParseTone()
+        {
+            tone = DialogueManager.ParseTone(tone_str);
+            Debug.Log($"[StoryChoice] Parsed tone_str='{tone_str}' to ToneType.{tone}");
+        }
     }
 
     [Serializable]
@@ -156,8 +164,17 @@ public class DialogueManager : MonoBehaviour
         {
             StoryJson data = JsonUtility.FromJson<StoryJson>(asset.text);
             passages.Clear();
-            foreach (var p in data.passages) passages[p.pid] = p;
+            foreach (var p in data.passages)
+            {
+                // Parse tone strings to enums for all choices
+                foreach (var choice in p.choices)
+                {
+                    choice.ParseTone();
+                }
+                passages[p.pid] = p;
+            }
             activeStoryPath = path;
+            Debug.Log($"[DialogueManager] Loaded story with {passages.Count} passages");
             return true;
         }
         catch (Exception e)
@@ -337,7 +354,7 @@ public class DialogueManager : MonoBehaviour
             {
                 int toneIndex = -1;
                 Debug.Log($"[DialogueManager] Processing choice with tone: {choice.tone}");
-                
+
                 for (int i = 0; i < tones.Length; i++)
                 {
                     if (choice.tone == tones[i])
@@ -347,7 +364,7 @@ public class DialogueManager : MonoBehaviour
                         break;
                     }
                 }
-                
+
                 if (toneIndex < 0)
                 {
                     Debug.LogWarning($"[DialogueManager] ✗ NO TONE MATCH! choice.tone='{choice.tone}' (type: {choice.tone.GetType()})");
@@ -447,7 +464,7 @@ public class DialogueManager : MonoBehaviour
         if (ui != null) ui.TriggerSystemEvent(trigger);
     }
 
-    private ToneType ParseTone(string s)
+    public static ToneType ParseTone(string s)
     {
         if (string.Equals(s, "Truth", StringComparison.OrdinalIgnoreCase))
             return ToneType.Trust;
