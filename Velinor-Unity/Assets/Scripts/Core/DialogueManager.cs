@@ -228,11 +228,15 @@ public class DialogueManager : MonoBehaviour
             if (btnO == null || btnO.gameObject == null) btnO = FindButtonInCanvas("ChoiceButton_O");
             if (btnN == null || btnN.gameObject == null) btnN = FindButtonInCanvas("ChoiceButton_N");
             if (btnE == null || btnE.gameObject == null) btnE = FindButtonInCanvas("ChoiceButton_E");
+            
+            Debug.Log($"[DialogueManager.AutoBindUI] Buttons found - T:{(btnT != null ? "✓" : "✗")} O:{(btnO != null ? "✓" : "✗")} N:{(btnN != null ? "✓" : "✗")} E:{(btnE != null ? "✓" : "✗")}");
 
             if (txtT == null || txtT.gameObject == null) txtT = FindTextMeshInButton(btnT);
             if (txtO == null || txtO.gameObject == null) txtO = FindTextMeshInButton(btnO);
             if (txtN == null || txtN.gameObject == null) txtN = FindTextMeshInButton(btnN);
             if (txtE == null || txtE.gameObject == null) txtE = FindTextMeshInButton(btnE);
+            
+            Debug.Log($"[DialogueManager.AutoBindUI] TextMesh found - T:{(txtT != null ? "✓" : "✗")} O:{(txtO != null ? "✓" : "✗")} N:{(txtN != null ? "✓" : "✗")} E:{(txtE != null ? "✓" : "✗")}");
         }
     }
 
@@ -250,16 +254,29 @@ public class DialogueManager : MonoBehaviour
         if (choiceButtonContainer != null)
         {
             var btnTrans = choiceButtonContainer.Find(name);
-            if (btnTrans != null) return btnTrans.GetComponent<Button>();
+            if (btnTrans != null)
+            {
+                Debug.Log($"[DialogueManager] Found button '{name}' in choiceButtonContainer");
+                return btnTrans.GetComponent<Button>();
+            }
 
             var allButtons = choiceButtonContainer.GetComponentsInChildren<Button>(true);
-            foreach (var b in allButtons) if (b.name == name) return b;
+            foreach (var b in allButtons) if (b.name == name)
+            {
+                Debug.Log($"[DialogueManager] Found button '{name}' via GetComponentsInChildren");
+                return b;
+            }
         }
 
         // Fallback to direct path from canvas
         var trans = dialogueCanvas.transform.Find("DialoguePanel/" + name);
-        if (trans != null) return trans.GetComponent<Button>();
+        if (trans != null)
+        {
+            Debug.Log($"[DialogueManager] Found button '{name}' via DialoguePanel path");
+            return trans.GetComponent<Button>();
+        }
 
+        Debug.LogWarning($"[DialogueManager] ✗ Could not find button '{name}'");
         return null;
     }
 
@@ -289,7 +306,7 @@ public class DialogueManager : MonoBehaviour
 
         if (npcNameText != null) npcNameText.text = activeNpcId;
         if (bodyText != null) bodyText.text = p.text;
-        
+
         // CRITICAL: Show the dialogue in DialogueUIController (which uses the UI_Canvas)
         var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
         if (dialogueUIController != null)
@@ -311,6 +328,10 @@ public class DialogueManager : MonoBehaviour
             Button[] buttons = { btnT, btnO, btnN, btnE };
             TextMeshProUGUI[] labels = { txtT, txtO, txtN, txtE };
             ToneType[] tones = { ToneType.Trust, ToneType.Observation, ToneType.NarrativePresence, ToneType.Empathy };
+            string[] toneNames = { "Trust", "Observation", "NarrativePresence", "Empathy" };
+
+            Debug.Log($"[DialogueManager] Button state - T:{(btnT != null ? "✓" : "✗")} O:{(btnO != null ? "✓" : "✗")} N:{(btnN != null ? "✓" : "✗")} E:{(btnE != null ? "✓" : "✗")}");
+            Debug.Log($"[DialogueManager] Processing {p.choices.Count} choices from passage {p.pid}");
 
             foreach (var choice in p.choices)
             {
@@ -334,6 +355,12 @@ public class DialogueManager : MonoBehaviour
 
                     targetBtn.onClick.RemoveAllListeners();
                     targetBtn.onClick.AddListener(() => OnChoiceMade(choice));
+
+                    Debug.Log($"[DialogueManager] ✓ Activated button {toneNames[toneIndex]}: '{choice.playerLine}'");
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] ✗ Could not activate {toneNames[toneIndex]} - button is null or invalid tone");
                 }
             }
         }
@@ -442,7 +469,7 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         if (dialogueCanvas != null) dialogueCanvas.enabled = false;
-        
+
         // Hide dialogue via DialogueUIController
         var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
         if (dialogueUIController != null)
@@ -450,7 +477,7 @@ public class DialogueManager : MonoBehaviour
             dialogueUIController.HideDialogue();
             Debug.Log("[DialogueManager] Hiding dialogue via DialogueUIController");
         }
-        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         OnDialogueEnded?.Invoke();
