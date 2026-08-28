@@ -12,6 +12,7 @@ namespace Velinor.Core
 
         private bool playerInRange = false;
         private GameObject player;
+        private bool notificationShown = false;
 
         private void Start()
         {
@@ -53,7 +54,9 @@ namespace Velinor.Core
 
             // Check if player is in range (for proximity indication)
             Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+            bool wasInRange = playerInRange;
             playerInRange = false;
+            
             foreach (var col in colliders)
             {
                 if (col.CompareTag("Player"))
@@ -61,6 +64,30 @@ namespace Velinor.Core
                     playerInRange = true;
                     player = col.gameObject;
                     break;
+                }
+            }
+
+            // Show notification when entering range
+            if (playerInRange && !notificationShown)
+            {
+                NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+                if (notificationPanel != null)
+                {
+                    notificationPanel.ShowNotification($"Press E to talk to {npcId}", duration: 10f);
+                    notificationShown = true;
+                    Debug.Log($"[SaoriNPC] Showing interaction prompt");
+                }
+            }
+
+            // Hide notification when leaving range
+            if (!playerInRange && notificationShown)
+            {
+                NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+                if (notificationPanel != null)
+                {
+                    notificationPanel.HideNotification();
+                    notificationShown = false;
+                    Debug.Log($"[SaoriNPC] Hiding interaction prompt");
                 }
             }
         }
