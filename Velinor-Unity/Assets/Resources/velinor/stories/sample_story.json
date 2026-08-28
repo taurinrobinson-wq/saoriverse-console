@@ -5,15 +5,15 @@
                      {
                          "pid":  "market_entry",
                          "name":  "Saori Desert Intro",
-                         "text":  "A windswept desert stretches between two jagged mountain ridges. Saori approaches, studying you with a calm, assessing gaze.\n\nSAORI: â€˜You are on your way to the market?â€™",
+                         "text":  "A windswept desert stretches between two jagged mountain ridges. Saori approaches, studying you with a calm, assessing gaze.\n\nSAORI: 'You are on your way to the market?'",
                          "required_flags":  [
 
                                             ],
                          "choices":  [
                                          {
-                                             "text":  "(T) Choice: â€˜Yes, I am looking for work, food, and a place to stay.â€™",
+                                             "text":  "(T) Choice: 'Yes, I am looking for work, food, and a place to stay.'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -25,12 +25,12 @@
                                                                               ]
                                                               },
                                              "tone":  "Trust",
-                                             "playerLine":  "â€˜Yes, I am looking for work, food, and a place to stay.â€™"
+                                             "playerLine":  "'Yes, I am looking for work, food, and a place to stay.'"
                                          },
                                          {
-                                             "text":  "(O) Choice: â€˜You are on your way somewhere too?â€™",
+                                             "text":  "(O) Choice: 'You are on your way somewhere too?'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -42,12 +42,12 @@
                                                                               ]
                                                               },
                                              "tone":  "Observation",
-                                             "playerLine":  "â€˜You are on your way somewhere too?â€™"
+                                             "playerLine":  "'You are on your way somewhere too?'"
                                          },
                                          {
-                                             "text":  "(N) Choice: â€˜Well, anything is better than the middle of this desert.â€™",
+                                             "text":  "(N) Choice: 'Well, anything is better than the middle of this desert.'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -59,12 +59,12 @@
                                                                               ]
                                                               },
                                              "tone":  "NarrativePresence",
-                                             "playerLine":  "â€˜Well, anything is better than the middle of this desert.â€™"
+                                             "playerLine":  "'Well, anything is better than the middle of this desert.'"
                                          },
                                          {
-                                             "text":  "(E) Choice: â€˜I want to see if I can make myself useful and fill my belly while Iâ€™m at it.â€™",
+                                             "text":  "(E) Choice: 'I want to see if I can make myself useful and fill my belly while I'm at it.'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -84,22 +84,22 @@
                                                                                ]
                                                                },
                                              "tone":  "Empathy",
-                                             "playerLine":  "â€˜I want to see if I can make myself useful and fill my belly while Iâ€™m at it.â€™"
+                                             "playerLine":  "'I want to see if I can make myself useful and fill my belly while I'm at it.'"
                                          }
                                      ]
                      },
                      {
                          "pid":  "saori_beat_1",
                          "name":  "Saori Desert Intro Alternate",
-                         "text":  "A windswept desert stretches between two jagged mountain ridges. Saori approaches, studying you with a calm, assessing gaze.\n\nSAORI: â€˜You are on your way to the market?â€™",
+                         "text":  "A windswept desert stretches between two jagged mountain ridges. Saori approaches, studying you with a calm, assessing gaze.\n\nSAORI: 'You are on your way to the market?'",
                          "required_flags":  [
 
                                             ],
                          "choices":  [
                                          {
-                                             "text":  "(T) Choice: â€˜Yes, I am looking for work, food, and a place to stay.â€™",
+                                             "text":  "(T) Choice: 'Yes, I am looking for work, food, and a place to stay.'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -111,12 +111,12 @@
                                                                               ]
                                                               },
                                              "tone":  "Trust",
-                                             "playerLine":  "â€˜Yes, I am looking for work, food, and a place to stay.â€™"
+                                             "playerLine":  "'Yes, I am looking for work, food, and a place to stay.'"
                                          },
                                          {
-                                             "text":  "(O) Choice: â€˜You are on your way somewhere too?â€™",
+                                             "text":  "(O) Choice: 'You are on your way somewhere too?'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -128,12 +128,12 @@
                                                                               ]
                                                               },
                                              "tone":  "Observation",
-                                             "playerLine":  "â€˜You are on your way somewhere too?â€™"
+                                             "playerLine":  "'You are on your way somewhere too?'"
                                          },
                                          {
-                                             "text":  "(N) Choice: â€˜Well, anything is better than the middle of this desert.â€™",
+                                             "text":  "(N) Choice: 'Well, anything is better than the middle of this desert.'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -145,12 +145,12 @@
                                                                               ]
                                                               },
                                              "tone":  "NarrativePresence",
-                                             "playerLine":  "â€˜Well, anything is better than the middle of this desert.â€™"
+                                             "playerLine":  "'Well, anything is better than the middle of this desert.'"
                                          },
                                          {
-                                             "text":  "(E) Choice: â€˜I want to see if I can make myself useful and fill my belly while Iâ€™m at it.â€™",
+                                             "text":  "(E) Choice: 'I want to see if I can make myself useful and fill my belly while I'm at it.'",
                                              "target":  "saori_beat_2",
-                                             "shared_beat":  "Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: \u0027You should take this.\u0027 She presses a strange device into your hands.",
+                                             "shared_beat":  "Saori's expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening. SAORI: 'You should take this.' She presses a strange device into your hands.",
                                              "system_trigger":  "give_device",
                                              "data_hook":  "met_saori=true",
                                              "tone_effects":  {
@@ -170,21 +170,21 @@
                                                                                ]
                                                                },
                                              "tone":  "Empathy",
-                                             "playerLine":  "â€˜I want to see if I can make myself useful and fill my belly while Iâ€™m at it.â€™"
+                                             "playerLine":  "'I want to see if I can make myself useful and fill my belly while I'm at it.'"
                                          }
                                      ]
                      },
                      {
                          "pid":  "saori_beat_2",
                          "name":  "Saori Device Departure",
-                         "text":  "Saori steps back, already half-turned away.\n\nSAORI: â€˜I must go.â€™",
+                         "text":  "Saori steps back, already half-turned away.\n\nSAORI: 'I must go.'",
                          "required_flags":  [
 
                                             ],
                          "choices":  [
                                          {
-                                             "text":  "(T) Choice: â€˜Waitâ€¦ what is this thing? Who are you?â€™",
-                                             "shared_beat":  "She starts to say more â€” SAORI: \u0027Iâ€™m sure weâ€™ll meetâ€”\u0027 But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
+                                             "text":  "(T) Choice: 'Wait... what is this thing? Who are you?'",
+                                             "shared_beat":  "She starts to say more â€” SAORI: 'I'm sure we'll meetâ€”' But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
                                              "system_trigger":  "diary_update",
                                              "data_hook":  "append_diary:Met Saori in the desert ruins. She gave me a deviceâ€”a tether of recognitionâ€”before disappearing into the sandstorm.",
                                              "tone_effects":  {
@@ -196,11 +196,11 @@
                                                                               ]
                                                               },
                                              "tone":  "Trust",
-                                             "playerLine":  "â€˜Waitâ€¦ what is this thing? Who are you?â€™"
+                                             "playerLine":  "'Wait... what is this thing? Who are you?'"
                                          },
                                          {
-                                             "text":  "(O) Choice: â€˜Iâ€™ve never seen anything like this beforeâ€¦ wait, I didnâ€™t get your nameâ€”â€™",
-                                             "shared_beat":  "She starts to say more â€” SAORI: \u0027Iâ€™m sure weâ€™ll meetâ€”\u0027 But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
+                                             "text":  "(O) Choice: 'I've never seen anything like this before... wait, I didn't get your nameâ€”'",
+                                             "shared_beat":  "She starts to say more â€” SAORI: 'I'm sure we'll meetâ€”' But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
                                              "system_trigger":  "diary_update",
                                              "data_hook":  "append_diary:Met Saori in the desert ruins. She gave me a deviceâ€”a tether of recognitionâ€”before disappearing into the sandstorm.",
                                              "tone_effects":  {
@@ -212,11 +212,11 @@
                                                                               ]
                                                               },
                                              "tone":  "Observation",
-                                             "playerLine":  "â€˜Iâ€™ve never seen anything like this beforeâ€¦ wait, I didnâ€™t get your nameâ€”â€™"
+                                             "playerLine":  "'I've never seen anything like this before... wait, I didn't get your nameâ€”'"
                                          },
                                          {
-                                             "text":  "(N) Choice: â€˜Iâ€™ve seen a lot of strange things in my life, butâ€¦ wait, you areâ€”?â€™",
-                                             "shared_beat":  "She starts to say more â€” SAORI: \u0027Iâ€™m sure weâ€™ll meetâ€”\u0027 But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
+                                             "text":  "(N) Choice: 'I've seen a lot of strange things in my life, but... wait, you areâ€”?'",
+                                             "shared_beat":  "She starts to say more â€” SAORI: 'I'm sure we'll meetâ€”' But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
                                              "system_trigger":  "diary_update",
                                              "data_hook":  "append_diary:Met Saori in the desert ruins. She gave me a deviceâ€”a tether of recognitionâ€”before disappearing into the sandstorm.",
                                              "tone_effects":  {
@@ -228,11 +228,11 @@
                                                                               ]
                                                               },
                                              "tone":  "NarrativePresence",
-                                             "playerLine":  "â€˜Iâ€™ve seen a lot of strange things in my life, butâ€¦ wait, you areâ€”?â€™"
+                                             "playerLine":  "'I've seen a lot of strange things in my life, but... wait, you areâ€”?'"
                                          },
                                          {
-                                             "text":  "(E) Choice: â€˜Iâ€™m feeling so confused. Please, tell me your name.â€™",
-                                             "shared_beat":  "She starts to say more â€” SAORI: \u0027Iâ€™m sure weâ€™ll meetâ€”\u0027 But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
+                                             "text":  "(E) Choice: 'I'm feeling so confused. Please, tell me your name.'",
+                                             "shared_beat":  "She starts to say more â€” SAORI: 'I'm sure we'll meetâ€”' But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
                                              "system_trigger":  "diary_update",
                                              "data_hook":  "append_diary:Met Saori in the desert ruins. She gave me a deviceâ€”a tether of recognitionâ€”before disappearing into the sandstorm.",
                                              "tone_effects":  {
@@ -244,7 +244,7 @@
                                                                               ]
                                                               },
                                              "tone":  "Empathy",
-                                             "playerLine":  "â€˜Iâ€™m feeling so confused. Please, tell me your name.â€™"
+                                             "playerLine":  "'I'm feeling so confused. Please, tell me your name.'"
                                          }
                                      ]
                      }
