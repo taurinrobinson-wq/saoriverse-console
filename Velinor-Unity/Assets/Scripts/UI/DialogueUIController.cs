@@ -142,6 +142,8 @@ public class DialogueUIController : MonoBehaviour
         if (npcNameText != null) npcNameText.text = npcName;
         if (dialogueText != null) dialogueText.text = text;
 
+        // CRITICAL: Must activate the gameObject AND set alpha for visibility
+        dialoguePanel.gameObject.SetActive(true);
         dialoguePanel.alpha = 1f;
         dialoguePanel.blocksRaycasts = true;
         dialoguePanel.interactable = true;
@@ -155,6 +157,7 @@ public class DialogueUIController : MonoBehaviour
     {
         if (dialoguePanel == null) return;
 
+        dialoguePanel.gameObject.SetActive(false);
         dialoguePanel.alpha = 0f;
         dialoguePanel.blocksRaycasts = false;
         dialoguePanel.interactable = false;
