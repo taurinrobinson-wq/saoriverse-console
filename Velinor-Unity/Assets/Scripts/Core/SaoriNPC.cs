@@ -6,27 +6,40 @@ namespace Velinor.Core
 {
     public class SaoriNPC : MonoBehaviour, IInteractable
     {
-        public string npcName = "Saori";
-        public string dialogueText = "Welcome to the ruins. Be careful out there.";
+        [SerializeField] private string npcId = "Saori";
+        [SerializeField] private string startPassageId = "saori_beat_1";
+        [SerializeField] private float interactionRadius = 3f;
 
-        private GameObject dialogueCanvas;
-        private TextMeshProUGUI nameText;
-        private TextMeshProUGUI bodyText;
-        private GameObject dialoguePanel;
+        private bool playerInRange = false;
+        private GameObject player;
 
         private void Start()
         {
-            dialogueCanvas = GameObject.Find("DialogueCanvas");
-            if (dialogueCanvas != null)
+            // Clean up colliders: keep only CapsuleCollider, remove SphereCollider
+            SphereCollider sphere = GetComponent<SphereCollider>();
+            if (sphere != null)
             {
-                var panel = dialogueCanvas.transform.Find("DialoguePanel");
-                if (panel != null)
-                {
-                    dialoguePanel = panel.gameObject;
-                    nameText = panel.Find("NPCNameText")?.GetComponent<TextMeshProUGUI>();
-                    bodyText = panel.Find("DialogueBodyText")?.GetComponent<TextMeshProUGUI>();
-                }
+                DestroyImmediate(sphere);
+                Debug.Log("[SaoriNPC] Removed redundant SphereCollider");
             }
+
+            // Ensure CapsuleCollider exists and is configured correctly
+            CapsuleCollider capsule = GetComponent<CapsuleCollider>();
+            if (capsule == null)
+            {
+                capsule = gameObject.AddComponent<CapsuleCollider>();
+                Debug.Log("[SaoriNPC] Added CapsuleCollider for interaction");
+            }
+
+            capsule.isTrigger = false; // Non-trigger collider for CharacterController collision
+            capsule.height = 2f;
+            capsule.radius = 0.5f;
+            Debug.Log("[SaoriNPC] CapsuleCollider configured for proper collision");
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            // This is now handled by CharacterController collision
         }
 
         private void Update()
@@ -37,26 +50,47 @@ namespace Velinor.Core
                 transform.LookAt(Camera.main.transform);
                 transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + 180, 0);
             }
-        }
 
-        public void Interact(GameObject player)
-        {
-            if (dialoguePanel != null)
+            // Check if player is in range (for proximity indication)
+            Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+            playerInRange = false;
+            foreach (var col in colliders)
             {
-                dialoguePanel.SetActive(true);
-                if (nameText != null) nameText.text = npcName;
-                if (bodyText != null) bodyText.text = dialogueText;
-                
-                // For testing, hide it after 3 seconds
-                CancelInvoke("HideDialogue");
-                Invoke("HideDialogue", 3f);
+                if (col.CompareTag("Player"))
+                {
+                    playerInRange = true;
+                    player = col.gameObject;
+                    break;
+                }
             }
         }
 
-        private void HideDialogue()
+        public void Interact(GameObject triggeringPlayer)
         {
-            if (dialoguePanel != null)
-                dialoguePanel.SetActive(false);
+            // Check if DialogueManager exists
+            if (DialogueManager.Instance == null)
+            {
+                Debug.LogError("[SaoriNPC] DialogueManager.Instance not found!");
+                return;
+            }
+
+            // Only start dialogue if not already active
+            if (!DialogueManager.Instance.IsDialogueActive)
+            {
+                Debug.Log($"[SaoriNPC] Starting dialogue: npcId={npcId}, passageId={startPassageId}");
+                DialogueManager.Instance.StartDialogue(npcId, startPassageId);
+            }
+            else
+            {
+                Debug.Log("[SaoriNPC] Dialogue already active");
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            // Visualize interaction range in editor
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, interactionRadius);
         }
     }
 }

@@ -15,6 +15,7 @@ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
+using Velinor.Core;
 
 /// <summary>
 /// 2.5D player controller for side-scrolling cave traversal.
@@ -84,6 +85,7 @@ public class PlayerController2D5 : MonoBehaviour
         }
 
         HandleMovement();
+        HandleInteraction();
         UpdateDepthScaling(false);
         ApplyTransform();
     }
@@ -125,10 +127,22 @@ public class PlayerController2D5 : MonoBehaviour
         Vector3 moveDir = new Vector3(input.x, input.y, 0).normalized;
         Vector3 movement = moveDir * moveSpeed * Time.deltaTime;
 
-        // Apply movement with bounds
-        currentPosition += movement;
-        currentPosition.x = Mathf.Clamp(currentPosition.x, minX, maxX);
-        currentPosition.y = Mathf.Clamp(currentPosition.y, minY, maxY);
+        // Clamp to bounds
+        Vector3 newPosition = currentPosition + movement;
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+        newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+        
+        // Use CharacterController for collision detection
+        if (characterController != null && characterController.enabled)
+        {
+            characterController.Move(newPosition - transform.position);
+            currentPosition = transform.position;
+        }
+        else
+        {
+            // Fallback if no CharacterController
+            currentPosition = newPosition;
+        }
 
         // Update Animator
         if (animator != null)
@@ -145,6 +159,39 @@ public class PlayerController2D5 : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+        }
+    }
+
+    private void HandleInteraction()
+    {
+        bool ePressed = false;
+#if ENABLE_INPUT_SYSTEM
+        var keyboard = Keyboard.current;
+        if (keyboard != null && keyboard.eKey.wasPressedThisFrame)
+        {
+            ePressed = true;
+        }
+#else
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ePressed = true;
+        }
+#endif
+
+        if (ePressed)
+        {
+            // Check for IInteractable objects in proximity (3 unit radius)
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 3f);
+            foreach (var col in colliders)
+            {
+                IInteractable interactable = col.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    Debug.Log($"[PlayerController2D5] Interacting with {col.gameObject.name}");
+                    interactable.Interact(gameObject);
+                    break; // Only interact with the first one found
+                }
+            }
         }
     }
 

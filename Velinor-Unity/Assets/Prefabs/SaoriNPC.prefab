@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7357808270867602510}
-  - component: {fileID: 2700514998077066114}
-  - component: {fileID: 3862359263492418904}
   - component: {fileID: 2569617091804279117}
   - component: {fileID: 1620429656783822549}
   - component: {fileID: 1707097777683743104}
@@ -37,46 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2700514998077066114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7672789636862336269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de43a84463e06f147b14105ed2c6dbf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
-  npcId: Saori
-  startPassageId: market_entry
-  interactionRadius: 2.5
-  raviStats: {fileID: 0}
-  malrikStats: {fileID: 0}
-  elenyaStats: {fileID: 0}
-  saoriStats: {fileID: 0}
---- !u!135 &3862359263492418904
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7672789636862336269}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.8
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &2569617091804279117
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -169,5 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3b872eaa3631f41a9d5c71636fc6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.SaoriNPC
-  npcName: Saori
-  dialogueText: Welcome to the ruins. Be careful out there.
+  npcId: Saori
+  startPassageId: saori_beat_1
+  interactionRadius: 3
