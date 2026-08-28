@@ -106,25 +106,26 @@ public class DialogueUIController : MonoBehaviour
             Debug.LogWarning("[UI] Canvas component was disabled - re-enabling it!");
         }
 
-        bool ePressed = false;
-
-#if ENABLE_INPUT_SYSTEM
-        if (_interactAction != null && _interactAction.WasPressedThisFrame())
-            ePressed = true;
-
-        var keyboard = Keyboard.current;
-        if (keyboard != null && keyboard.eKey.wasPressedThisFrame)
-            ePressed = true;
-#endif
-
-        if (ePressed)
-            TryInteract();
+        // E key handling is now done by PlayerController2D5.HandleInteraction()
+        // This was a duplicate handler - removed to avoid conflicts
+        
+        // Keep this section commented for reference:
+        // #if ENABLE_INPUT_SYSTEM
+        // if (_interactAction != null && _interactAction.WasPressedThisFrame())
+        //     ePressed = true;
+        // var keyboard = Keyboard.current;
+        // if (keyboard != null && keyboard.eKey.wasPressedThisFrame)
+        //     ePressed = true;
+        // #endif
+        
+        // if (ePressed)
+        //     TryInteract();
     }
 
     private void TryInteract()
     {
-        Debug.Log("[UI] E Pressed - Would interact with NPC (dialogue system)");
-        // TODO: Wire to NPC proximity check and DialogueManager
+        Debug.Log("[UI] E Pressed - This is now handled by PlayerController2D5.HandleInteraction()");
+        // E key interaction is handled by PlayerController2D5 which calls Interact() on IInteractable objects
     }
 
     /// <summary>

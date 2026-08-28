@@ -8,7 +8,7 @@ namespace Velinor.Core
     {
         [SerializeField] private string npcId = "Saori";
         [SerializeField] private string startPassageId = "saori_beat_1";
-        [SerializeField] private float interactionRadius = 3f;
+        [SerializeField] private float interactionRadius = 1.5f;
 
         private bool playerInRange = false;
         private GameObject player;
@@ -56,7 +56,7 @@ namespace Velinor.Core
             Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
             bool wasInRange = playerInRange;
             playerInRange = false;
-            
+
             foreach (var col in colliders)
             {
                 if (col.CompareTag("Player"))
