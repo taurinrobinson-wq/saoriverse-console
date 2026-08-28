@@ -5,6 +5,7 @@
                      {
                          "pid":  "market_entry",
                          "name":  "Saori Desert Intro",
+                         "conversationId": "saori_encounter_01",
                          "text":  "A windswept desert stretches between two jagged mountain ridges. Saori approaches, studying you with a calm, assessing gaze.\n\nSAORI: 'You are on your way to the market?'",
                          "required_flags":  [
 
@@ -91,6 +92,7 @@
                      {
                          "pid":  "saori_beat_1",
                          "name":  "Saori Desert Intro Alternate",
+                         "conversationId": "saori_encounter_01",
                          "text":  "A windswept desert stretches between two jagged mountain ridges. Saori approaches, studying you with a calm, assessing gaze.\n\nSAORI: 'You are on your way to the market?'",
                          "required_flags":  [
 
@@ -177,6 +179,7 @@
                      {
                          "pid":  "saori_beat_2",
                          "name":  "Saori Device Departure",
+                         "conversationId": "saori_encounter_01",
                          "text":  "Saori steps back, already half-turned away.\n\nSAORI: 'I must go.'",
                          "required_flags":  [
 
@@ -247,6 +250,35 @@
                                              "playerLine":  "'I'm feeling so confused. Please, tell me your name.'"
                                          }
                                      ]
+                     },
+                     {
+                         "pid":  "saori_encounter_01_dismissal",
+                         "name":  "Saori Already Spoke",
+                         "text":  "Saori shakes her head, her expression unreadable.\n\nSAORI: 'I have nothing more to say.'",
+                         "conversationId":  "saori_encounter_01_dismissal",
+                         "required_flags":  [
+
+                                            ],
+                         "choices":  [
+                                         {
+                                             "text":  "Leave the conversation.",
+                                             "target":  "DIALOGUE_END",
+                                             "tone_str":  "Trust",
+                                             "playerLine":  "Leave the conversation.",
+                                             "tone_effects":  {
+                                                                  "entries":  [
+
+                                                                              ]
+                                                              },
+                                             "npc_resonance":  {
+                                                                   "entries":  [
+
+                                                                               ]
+                                                               }
+                                         }
+                                     ]
                      }
                  ]
 }
+
+

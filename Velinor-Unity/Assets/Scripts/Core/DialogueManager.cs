@@ -56,6 +56,7 @@ public class DialogueManager : MonoBehaviour
         public string pid;
         public string name;
         public string text;              // Initial prompt/setting
+        public string conversationId;    // Groups related passages into coherent dialogue packages
         public List<string> required_flags = new List<string>();
         public List<StoryChoice> choices = new List<StoryChoice>();
     }
@@ -200,12 +201,34 @@ public class DialogueManager : MonoBehaviour
 
         if (!passages.ContainsKey(startPid)) return;
 
+        // Check if this conversation package has already been completed
+        var startPassage = passages[startPid];
+        if (!string.IsNullOrEmpty(startPassage.conversationId))
+        {
+            string completionFlag = $"{startPassage.conversationId}_completed";
+            if (GameFlags.Get(completionFlag))
+            {
+                Debug.Log($"[DialogueManager] Conversation '{startPassage.conversationId}' already completed. Looking for dismissal passage.");
+                // Try to find a dismissal passage for this conversation
+                string dismissalPid = $"{startPassage.conversationId}_dismissal";
+                if (passages.ContainsKey(dismissalPid))
+                {
+                    startPid = dismissalPid;
+                    Debug.Log($"[DialogueManager] Routing to dismissal passage: {dismissalPid}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] No dismissal passage found for conversation '{startPassage.conversationId}'");
+                }
+            }
+        }
+
         activeNpcId = npcId;
         isDialogueActive = true;
 
         AutoBindUI();
 
-        if (dialogueCanvas != null) dialogueCanvas.enabled = true;
+        // Don't enable dialogueCanvas - let DialogueUIController manage UI_Canvas visibility
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         DisplayPassage(startPid);
@@ -442,19 +465,62 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (!string.IsNullOrEmpty(choice.target)) DisplayPassage(choice.target);
-        else EndDialogue();
+        // Handle target passage
+        if (!string.IsNullOrEmpty(choice.target))
+        {
+            if (choice.target == "DIALOGUE_END")
+            {
+                EndDialogue();
+            }
+            else
+            {
+                DisplayPassage(choice.target);
+            }
+        }
+        else
+        {
+            EndDialogue();
+        }
     }
 
     private void ProcessDataHook(string hook)
     {
         if (string.IsNullOrEmpty(hook)) return;
-        if (hook.Contains("="))
+        
+        // Support multiple hooks separated by pipe: "flag=value|append_diary:text|another_flag=value"
+        string[] hooks = hook.Split('|');
+        foreach (var singleHook in hooks)
         {
-            string[] parts = hook.Split('=');
-            if (parts.Length == 2) GameFlags.Set(parts[0].Trim(), bool.Parse(parts[1].Trim()));
+            string trimmedHook = singleHook.Trim();
+            if (string.IsNullOrEmpty(trimmedHook)) continue;
+            
+            // Handle flag assignment: "flagname=value"
+            if (trimmedHook.Contains("=") && !trimmedHook.StartsWith("append_diary:"))
+            {
+                string[] parts = trimmedHook.Split('=');
+                if (parts.Length == 2)
+                {
+                    string key = parts[0].Trim();
+                    string value = parts[1].Trim();
+                    if (bool.TryParse(value, out var boolValue))
+                    {
+                        GameFlags.Set(key, boolValue);
+                        Debug.Log($"[DialogueManager] Data hook: {key} = {boolValue}");
+                    }
+                }
+            }
+            
+            // Handle diary append: "append_diary:text"
+            if (trimmedHook.StartsWith("append_diary:"))
+            {
+                string entryText = trimmedHook.Substring("append_diary:".Length);
+                if (DiaryManager.Instance != null)
+                {
+                    DiaryManager.Instance.AddEntry(entryText);
+                    Debug.Log($"[DialogueManager] Data hook: appended diary entry");
+                }
+            }
         }
-        if (hook.StartsWith("append_diary:")) DiaryManager.Instance?.AddEntry(hook.Substring("append_diary:".Length));
     }
 
     private void ProcessSystemTrigger(string trigger)
@@ -494,13 +560,13 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         isDialogueActive = false;
-        if (dialogueCanvas != null) dialogueCanvas.enabled = false;
-
+        // Don't disable dialogueCanvas - let DialogueUIController manage UI_Canvas
+        
         // Hide dialogue via DialogueUIController
-        var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
-        if (dialogueUIController != null)
+        var controller = FindAnyObjectByType<DialogueUIController>();
+        if (controller != null)
         {
-            dialogueUIController.HideDialogue();
+            controller.HideDialogue();
             Debug.Log("[DialogueManager] Hiding dialogue via DialogueUIController");
         }
 
