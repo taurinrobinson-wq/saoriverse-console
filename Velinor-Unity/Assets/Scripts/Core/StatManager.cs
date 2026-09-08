@@ -12,15 +12,24 @@ public class Remnants
     public float resolve = 0.5f, empathy = 0.5f, memory = 0.5f, nuance = 0.5f;
     public float authority = 0.5f, need = 0.5f, trust = 0.5f, skepticism = 0.5f;
 
-    public float Get(RemnantType t) => t switch {
-        RemnantType.Resolve => resolve, RemnantType.Empathy => empathy, RemnantType.Memory => memory,
-        RemnantType.Nuance => nuance, RemnantType.Authority => authority, RemnantType.Need => need,
-        RemnantType.Trust => trust, RemnantType.Skepticism => skepticism, _ => 0f
+    public float Get(RemnantType t) => t switch
+    {
+        RemnantType.Resolve => resolve,
+        RemnantType.Empathy => empathy,
+        RemnantType.Memory => memory,
+        RemnantType.Nuance => nuance,
+        RemnantType.Authority => authority,
+        RemnantType.Need => need,
+        RemnantType.Trust => trust,
+        RemnantType.Skepticism => skepticism,
+        _ => 0f
     };
 
-    public void Set(RemnantType t, float v) {
+    public void Set(RemnantType t, float v)
+    {
         float val = Mathf.Clamp(v, 0.1f, 0.9f);
-        switch (t) {
+        switch (t)
+        {
             case RemnantType.Resolve: resolve = val; break;
             case RemnantType.Empathy: empathy = val; break;
             case RemnantType.Memory: memory = val; break;
@@ -35,11 +44,11 @@ public class Remnants
 }
 
 [Serializable]
-public class NpcProfile 
-{ 
-    public string name; 
+public class NpcProfile
+{
+    public string name;
     public int npcTier = 2;  // 1=Tier1 (0.03), 2=Tier2 (0.02), 3=Tier3 (0.01)
-    public Remnants remnants; 
+    public Remnants remnants;
 }
 
 public class StatManager : MonoBehaviour
@@ -107,7 +116,7 @@ public class StatManager : MonoBehaviour
         npcRemnants["Saori"] = new Remnants();
         npcRemnants["Ravi"] = new Remnants();
         npcRemnants["Nima"] = new Remnants();
-        
+
         // Default to Tier 2
         npcTiers["Saori"] = 1;
         npcTiers["Ravi"] = 1;
@@ -148,7 +157,7 @@ public class StatManager : MonoBehaviour
         {
             Debug.LogError("[StatManager] npc_state.json not found in Resources/velinor/data/npc_state");
         }
-        
+
         LoadCascadingRelationships();
     }
 
@@ -160,11 +169,13 @@ public class StatManager : MonoBehaviour
     public void AdjustPlayerTone(ToneType tone, float amount, string activeNpcId)
     {
         playerTone[tone] = Mathf.Clamp01(playerTone[tone] + amount);
-        foreach (var npc in npcRemnants.Keys) {
+        foreach (var npc in npcRemnants.Keys)
+        {
             // Use tier-based drift magnitude
             float driftMagnitude = GetDriftMagnitudeForNpc(npc) * amount;
             var r = npcRemnants[npc];
-            switch (tone) {
+            switch (tone)
+            {
                 case ToneType.Trust:
                     r.Set(RemnantType.Trust, r.trust + driftMagnitude);
                     r.Set(RemnantType.Resolve, r.resolve + driftMagnitude);
@@ -187,7 +198,7 @@ public class StatManager : MonoBehaviour
                     break;
             }
         }
-        
+
         // After drift, apply cascading influence to connected NPCs
         if (!string.IsNullOrEmpty(activeNpcId))
         {
@@ -198,16 +209,21 @@ public class StatManager : MonoBehaviour
 
     public void ApplyNpcResonance(string npcId, Dictionary<string, float> resonance)
     {
-        foreach (var kvp in resonance) {
+        foreach (var kvp in resonance)
+        {
             string targetNpc = kvp.Key;
             float amount = kvp.Value;
-            if (npcRemnants.TryGetValue(targetNpc, out var r)) {
+            if (npcRemnants.TryGetValue(targetNpc, out var r))
+            {
                 r.Set(RemnantType.Trust, r.trust + amount);
-                if (influenceMap.TryGetValue(targetNpc, out var connections)) {
-                    foreach (var conn in connections) {
+                if (influenceMap.TryGetValue(targetNpc, out var connections))
+                {
+                    foreach (var conn in connections)
+                    {
                         string connectedNpc = conn.Key;
                         float multiplier = conn.Value;
-                        if (npcRemnants.TryGetValue(connectedNpc, out var connRemnants)) {
+                        if (npcRemnants.TryGetValue(connectedNpc, out var connRemnants))
+                        {
                             float cascadedAmount = amount * multiplier;
                             connRemnants.Set(RemnantType.Trust, connRemnants.trust + cascadedAmount);
                             Debug.Log($"[StatManager] Cascaded resonance shift from {targetNpc} to {connectedNpc}: {cascadedAmount:F4} (multiplier: {multiplier})");
@@ -220,18 +236,26 @@ public class StatManager : MonoBehaviour
 
     public float GetPlayerTone(ToneType tone) => playerTone[tone];
     public Remnants GetNpcRemnants(string npcId) => npcRemnants.TryGetValue(npcId, out var r) ? r : null;
-    
+
+    public void SetNpcRemnants(string npcId, Remnants remnants)
+    {
+        if (string.IsNullOrEmpty(npcId)) return;
+        npcRemnants[npcId] = remnants;
+        Debug.Log($"[StatManager] Set Remnants for NPC '{npcId}'");
+    }
+
     private float GetDriftMagnitudeForNpc(string npcId)
     {
         if (!npcTiers.TryGetValue(npcId, out int tier)) tier = 2;
-        return tier switch {
+        return tier switch
+        {
             1 => 0.03f,
             2 => 0.02f,
             3 => 0.01f,
             _ => 0.01f
         };
     }
-    
+
     private void LoadCascadingRelationships()
     {
         TextAsset cascadeAsset = Resources.Load<TextAsset>("velinor/data/cascading_relationships");
@@ -249,17 +273,17 @@ public class StatManager : MonoBehaviour
             }
         }
     }
-    
+
     private void ApplyCascadingDrift(string interactedNpcName)
     {
         // Micro-drift: ±0.001f to connected NPCs
         if (!cascadingRelationships.TryGetValue(interactedNpcName, out var connections)) return;
-        
+
         foreach (var conn in connections)
         {
             string connectedNpc = conn.Key;
             float amount = conn.Value * 0.001f;  // Cascading magnitude is always ±0.001
-            
+
             if (npcRemnants.TryGetValue(connectedNpc, out var r))
             {
                 r.Set(RemnantType.Trust, r.trust + amount);
@@ -267,33 +291,33 @@ public class StatManager : MonoBehaviour
             }
         }
     }
-    
+
     private void CheckThresholds(string npcId)
     {
         if (npcId != "Nima") return;  // Only Nima has phase thresholds for now
-        
+
         if (!npcRemnants.TryGetValue("Nima", out var nima)) return;
-        
+
         // Phase 1: Guarded Grief (softening border)
-        if (!GameFlags.Get("nima_phase1_soften") && 
+        if (!GameFlags.Get("nima_phase1_soften") &&
             nima.skepticism <= 0.60f && nima.authority <= 0.60f && nima.nuance >= 0.67f)
         {
             GameFlags.Set("nima_phase1_soften", true);
             Debug.Log("[StatManager] THRESHOLD: Nima Phase 1 - Guarded Grief (softening)");
         }
-        
+
         // Phase 2: Revelation (Ophina photo reveal)
-        if (!GameFlags.Get("nima_phase2_photo") && 
-            nima.skepticism <= 0.50f && nima.authority <= 0.40f && 
+        if (!GameFlags.Get("nima_phase2_photo") &&
+            nima.skepticism <= 0.50f && nima.authority <= 0.40f &&
             nima.memory >= 0.65f && nima.need >= 0.87f)
         {
             GameFlags.Set("nima_phase2_photo", true);
             Debug.Log("[StatManager] THRESHOLD: Nima Phase 2 - Revelation (photo)");
         }
-        
+
         // Phase 3: Release (able to leave marketplace)
-        if (!GameFlags.Get("nima_phase3_release") && 
-            nima.resolve >= 0.85f && nima.trust >= 0.60f && 
+        if (!GameFlags.Get("nima_phase3_release") &&
+            nima.resolve >= 0.85f && nima.trust >= 0.60f &&
             nima.memory >= 0.70f && nima.skepticism <= 0.40f)
         {
             GameFlags.Set("nima_phase3_release", true);
@@ -302,14 +326,14 @@ public class StatManager : MonoBehaviour
     }
 
     // History and logging placeholder
-    public void LogEncounter(Dictionary<string, float> effects) {}
+    public void LogEncounter(Dictionary<string, float> effects) { }
 }
 
 // LEGACY STUBS
 public class PlayerStats : MonoBehaviour { public static PlayerStats Get() => null; public float GetRemnant(string s) => 0f; }
 public class NPCStats : MonoBehaviour { public float Resolve, Empathy, Memory, Nuance, Authority, Need, Trust, Skepticism; public float GetRemnant(string s) => 0f; }
 public class DialogueSegment { public string segmentId; public string npcLine; public bool completedByPlayer; public List<DialogueChoice> playerChoices; }
-public class DialogueGateEvaluator : MonoBehaviour { public void MarkSegmentComplete(string s) {} }
-public class MalrikDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) {} }
-public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) {} }
-namespace VelinorGame.Core { public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) {} } }
+public class DialogueGateEvaluator : MonoBehaviour { public void MarkSegmentComplete(string s) { } }
+public class MalrikDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) { } }
+public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) { } }
+namespace VelinorGame.Core { public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) { } } }

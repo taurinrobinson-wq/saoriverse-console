@@ -1,0 +1,568 @@
+{
+    "scene_id": "willy_glyph_01",
+    "conversation_id": "willy_concourse_ruins",
+    "required_flags": [
+        "met_saori == true",
+        "obtain_codex == true"
+    ],
+    "beats": [
+        {
+            "id": 1,
+            "type": "npc_turn",
+            "active_speaker": "Willy",
+            "prompt": "A strange man is digging through the rubble. He looks up and notices you. \"Careful. That pile shifts. Saw a man lose a leg under one just like it. Ah-hahaha *cough* terrible, terrible thing.\"",
+            "tone_choices": [
+                {
+                    "tone": "T",
+                    "label": "Trust",
+                    "text": "I'm not from around here.",
+                    "result_text": "You admit your unfamiliarity with the ruins, and Willy's expression softens slightly.",
+                    "npc_response": "Hah. Then you're lucky ya still got all yah limbs. This place eats newcomers first.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 1
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "trust",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "O",
+                    "label": "Observation",
+                    "text": "You know this place pretty well I see.",
+                    "result_text": "You assess Willy's expertise with a direct compliment.",
+                    "npc_response": "Know it? Ha. I've bled in half these piles. Ya learn fast when the rubble teaches the lessons.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "memory",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "N",
+                    "label": "Narrative",
+                    "text": "Something led me here, I need to get to it.",
+                    "result_text": "You speak with purpose, drawing Willy's curiosity about what drives you.",
+                    "npc_response": "Led ya? Hah. Everyone's chasin somethin in these ruins. Most of it stays buried—except when I'm chasin it. Ah-hahaha—cough.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": -1
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "Losing a leg… that must have been awful for him.",
+                    "result_text": "You express concern for the injured man, and Willy grunts acknowledgment.",
+                    "npc_response": "Awful for him, yeah. But the rubble don't care. It just falls where it feels.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 1
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "empathy",
+                            "delta": 1
+                        }
+                    ]
+                }
+            ],
+            "system_triggers": [],
+            "next_beat_id": 2
+        },
+        {
+            "id": 2,
+            "type": "npc_shared",
+            "shared_dialogue": [
+                {
+                    "speaker": "Willy",
+                    "text": "Anyway, whatever you're after… it's under that mess. And you're not gettin' ta it today."
+                }
+            ],
+            "system_triggers": [],
+            "next_beat_id": 3
+        },
+        {
+            "id": 3,
+            "type": "npc_turn",
+            "active_speaker": "Willy",
+            "prompt": "He's dismissive, but maybe I can convince him.",
+            "tone_choices": [
+                {
+                    "tone": "T",
+                    "label": "Trust",
+                    "text": "I don't have time to wait. Show me how to get through it.",
+                    "result_text": "You command with authority, and Willy respects the directness.",
+                    "npc_response": "Hah. Straight to orders, eh? Ya got spine! Fine, fine… I'll take a look. But if it falls, I'm runnin'. And maybe laughin' ah-hahaha *cough*.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "resolve",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "O",
+                    "label": "Observation",
+                    "text": "You've worked these piles for years. You know how to move them safely.",
+                    "result_text": "You appeal to Willy's experience and skill, flattering his expertise.",
+                    "npc_response": "Flattery? Ha. Rubble don't care how long I've known it. But ya ain't wrong. I can shift a few things without gettin' crushed.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "authority",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "N",
+                    "label": "Narrative",
+                    "text": "Whatever's under there matters. I'm not leaving without trying.",
+                    "result_text": "You speak with quiet determination, and Willy sees your resolve reflected in your bearing.",
+                    "npc_response": "Matters, huh? Everything matters to someone. Fine. I'll poke at it. Just don't blame me if the whole thing decides today's the day.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "need",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "If someone got hurt here before… maybe helping me keeps it from happening again.",
+                    "result_text": "You suggest that helping you might prevent future tragedy, and Willy's cynicism wavers.",
+                    "npc_response": "Heh. Guilt trip, eh? *cough*. Fine. Fine. I'll help. Just don't start cryin' if it bites back.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 1
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "empathy",
+                            "delta": 1
+                        }
+                    ]
+                }
+            ],
+            "system_triggers": [],
+            "next_beat_id": 4
+        },
+        {
+            "id": 4,
+            "type": "player_inner",
+            "active_speaker": "Player",
+            "prompt": "*Willy works through the debris, shifting heavy stones with surprising efficiency. The pile groans, settles, groans again. Sweat beads on his brow. Finally, the way clears.*",
+            "tone_choices": [
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "Watch and observe",
+                    "result_text": "You watch Willy work, noting the strain in his movements and the determination in his face.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": []
+                }
+            ],
+            "system_triggers": [],
+            "next_beat_id": 5
+        },
+        {
+            "id": 5,
+            "type": "npc_turn",
+            "active_speaker": "Willy",
+            "prompt": "The debris clears. A cracked glyph console flickers to life, unstable, trembling with residual energy. He stops you before you can approach. \"Hey there, hold on one sec. I don' work for free.\"",
+            "tone_choices": [
+                {
+                    "tone": "T",
+                    "label": "Trust",
+                    "text": "Oh yeah, right of course. I don't have much right now….",
+                    "result_text": "You acknowledge the debt with honesty about your empty pockets.",
+                    "npc_response": "Yeah, figures. Anyway… ya don' need that metal thing, do ya?",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "trust",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "O",
+                    "label": "Observation",
+                    "text": "Yeah, you were working pretty hard. I don't have much… what do you want.",
+                    "result_text": "You acknowledge his effort and ask directly what he expects in return.",
+                    "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ah…keep a lookout while I take a closer peek at it…if ya catch my drift.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "authority",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "N",
+                    "label": "Narrative",
+                    "text": "Yes, of course. You work hard, you get something, right. Uh…I don't have much…",
+                    "result_text": "You speak the language of fair exchange, acknowledging the social contract.",
+                    "npc_response": "Yeah, clearly. You look like ya haven't eaten in a while. Anyway, leave me to my ways and we'll call it even.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 1
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": 1
+                        }
+                    ]
+                },
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "Sorry, Willy… I didn't even ask your name. You've been really helpful. What can I do for you.",
+                    "result_text": "You apologize and ask Willy's name, treating him with genuine respect.",
+                    "npc_response": "Meh, don't get all mushy on me. Bleck. Just get outta here, will ya.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 1
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Willy",
+                            "stat": "empathy",
+                            "delta": 1
+                        }
+                    ]
+                }
+            ],
+            "system_triggers": [
+                {
+                    "type": "update_dialogue_names",
+                    "data": [
+                        "Willy"
+                    ]
+                }
+            ],
+            "next_beat_id": 6
+        },
+        {
+            "id": 6,
+            "type": "player_inner",
+            "active_speaker": "Player",
+            "prompt": "*You step forward toward the Glyph of Sorrow. As your hand touches its surface, the world becomes heavy. Your limbs feel weighted, as if carrying something invisible—grief, perhaps, or the accumulated loss of this place.*",
+            "tone_choices": [
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "Accept the weight",
+                    "result_text": "You let the heaviness settle into you, carrying it forward as part of your burden.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": []
+                }
+            ],
+            "system_triggers": [
+                {
+                    "type": "diary_append",
+                    "data": [
+                        "willy_concourse_glyph"
+                    ]
+                },
+                {
+                    "type": "close_dialogue"
+                },
+                {
+                    "type": "activate_proximity_tracker",
+                    "data": [
+                        "next_glyph"
+                    ]
+                }
+            ],
+            "next_beat_id": 0
+        },
+        {
+            "id": 999,
+            "type": "npc_turn",
+            "active_speaker": "Willy",
+            "prompt": "We have nothing more to say.",
+            "tone_choices": [
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "Leave",
+                    "result_text": "You nod to him and step back, letting him return to his work among the rubble.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": []
+                }
+            ],
+            "system_triggers": [
+                {
+                    "type": "close_dialogue"
+                }
+            ],
+            "next_beat_id": 0
+        }
+    ]
+}

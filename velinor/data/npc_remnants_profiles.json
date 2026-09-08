@@ -109,14 +109,14 @@
       ],
       "glyphs": 1,
       "remnants": {
-        "resolve": 0.75,
+        "resolve": 0.4,
         "empathy": 0.8,
-        "memory": 0.5,
-        "nuance": 0.55,
+        "memory": 0.7,
+        "nuance": 0.6,
         "authority": 0.6,
-        "need": 0.65,
-        "trust": 0.8,
-        "skepticism": 0.6
+        "need": 0.7,
+        "trust": 0.7,
+        "skepticism": 0.5
       },
       "description": "Grounded, embodied, teaches sensory presence"
     },
@@ -128,14 +128,14 @@
       ],
       "glyphs": 1,
       "remnants": {
-        "resolve": 0.65,
-        "empathy": 0.9,
+        "resolve": 0.6,
+        "empathy": 0.6,
         "memory": 0.5,
         "nuance": 0.6,
-        "authority": 0.45,
-        "need": 0.8,
-        "trust": 0.7,
-        "skepticism": 0.55
+        "authority": 0.7,
+        "need": 0.7,
+        "trust": 0.5,
+        "skepticism": 0.8
       },
       "description": "Sensitive to emotional undercurrents, unsure why"
     },

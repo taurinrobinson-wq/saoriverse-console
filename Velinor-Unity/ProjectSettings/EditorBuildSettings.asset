@@ -8,12 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScene.unity
     guid: 701d8f17e793cd4458b4e9a14130de25
+  - enabled: 1
+    path: Assets/Scenes/Desert_Saori_Meeting.unity
+    guid: a6ae80d59e39c464dad8283c585c74f5
+  - enabled: 1
+    path: Assets/Scenes/DesertToMarketTrek_00.unity
+    guid: b1b0c1cad848b2649a1528bad0b583e6
+  - enabled: 1
+    path: Assets/Scenes/DesertToMarketTrek_01.unity
+    guid: 4fc14e23bfe90ab4c86b398de6fb1f10
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_00.unity
+    guid: 186da5e04c0ec124f8754c17a699c763
   - enabled: 0
     path: Assets/Scenes/GamplayScene.unity
     guid: 8483082fca683054eb66b8382fbc4107
-  - enabled: 0
-    path: Assets/Scenes/MachinesCave.unity
-    guid: 256772935fe090d46939dd28eeea8489
   - enabled: 1
     path: Assets/Prefabs/MachinesCave_00.unity
     guid: 782ac52927cccf043a6b8041e36f70b6

@@ -1,0 +1,626 @@
+{
+    "name": "Nima's Second Encounter",
+    "startnode": "nima_02_passage_1",
+    "passages": [
+        {
+            "pid": "nima_02_passage_1",
+            "name": "Market Stall - Nima Working",
+            "conversationId": "nima_encounter_02",
+            "active_speaker": "Nima",
+            "text": "You again. I didn't think you'd come back this way. The marketplace isn't exactly welcoming to newcomers.",
+            "scene_context": "Nima stands at a narrow stall, arranging bundles of dried herbs and cloth. Her hands move with practiced efficiency, but she watches you carefully as you approach.",
+            "required_flags": [
+                "met_nima",
+                "market_discovery_progression_1"
+            ],
+            "choices": [
+                {
+                    "tone_str": "Trust",
+                    "playerLine": "I wanted to see if you had any work available. Your stall looks organized.",
+                    "npcResponse": "NIMA: \"Work? That's not something you trade for with compliments. But you're not wrong. I run a tight operation.\"",
+                    "target": "nima_02_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.005
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Observation",
+                    "playerLine": "Those bundles are sorted by weight and color. That takes precision.",
+                    "npcResponse": "NIMA: \"Most people don't notice details like that. Maybe you're more observant than I thought.\"",
+                    "target": "nima_02_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.015
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "NarrativePresence",
+                    "playerLine": "I've been thinking about what you said. About belonging.",
+                    "npcResponse": "NIMA: \"That kind of thinking gets dangerous out here. Most people who think too much stop acting soon enough.\"",
+                    "target": "nima_02_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.01
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Empathy",
+                    "playerLine": "Working at a stall like this… it must be exhausting. How long have you been doing this?",
+                    "npcResponse": "NIMA: \"Exhausting? That's a word for people who know what rest feels like. This is just survival.\"",
+                    "target": "nima_02_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pid": "nima_02_passage_2",
+            "name": "Nima's Offer",
+            "conversationId": "nima_encounter_02",
+            "active_speaker": "Nima",
+            "text": "Look. There's work if you're willing to do it. Nothing glamorous. Distribution runs, some inventory work.",
+            "choices": [
+                {
+                    "tone_str": "Trust",
+                    "playerLine": "I'm ready. Where do I start?",
+                    "npcResponse": "NIMA: \"Starting is the easy part. Not getting yourself killed is harder.\"",
+                    "target": "nima_02_passage_3_hired",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.005
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Observation",
+                    "playerLine": "What happens if I mess up a run?",
+                    "npcResponse": "NIMA: \"Consequences. The kind that teach you fast. I don't repeat myself.\"",
+                    "target": "nima_02_passage_3_hired",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.015
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "NarrativePresence",
+                    "playerLine": "Before I decide, I need to know what I'm getting into.",
+                    "npcResponse": "NIMA: \"You're getting into survival. The rest depends on who you decide to trust.\"",
+                    "target": "nima_02_passage_3_hired",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.01
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Empathy",
+                    "playerLine": "I appreciate the offer. I know you don't have to extend it.",
+                    "npcResponse": "NIMA: \"I'm not extending charity. I'm extending opportunity. What you do with it is on you.\"",
+                    "target": "nima_02_passage_3_hired",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pid": "nima_02_passage_3_hired",
+            "name": "Nima - First Job Instructions",
+            "conversationId": "nima_encounter_02",
+            "active_speaker": "Nima",
+            "text": "First run is tomorrow at dawn. Meet me at the eastern gate. Don't be late. Don't be followed.",
+            "system_trigger": "add_job|add_relationship",
+            "data_hook": "job_nima_distribution=active|nima_reputation=0.25",
+            "choices": [
+                {
+                    "tone_str": "Trust",
+                    "playerLine": "I'll be there. You won't regret this.",
+                    "npcResponse": "NIMA: \"Regret is a luxury. Don't make me find out.\"",
+                    "target": "nima_02_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.005
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Observation",
+                    "playerLine": "Eastern gate. Dawn. No followers. I understand the parameters.",
+                    "npcResponse": "NIMA: \"Parameters. You talk like someone from before the collapse. That's not necessarily a good thing.\"",
+                    "target": "nima_02_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.015
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "NarrativePresence",
+                    "playerLine": "Dawn at the eastern gate. I'll write it down so I don't forget.",
+                    "npcResponse": "NIMA: \"Writing things down is a risk. Memory is safer out here.\"",
+                    "target": "nima_02_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.01
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Empathy",
+                    "playerLine": "I know you're taking a risk with me. Thank you.",
+                    "npcResponse": "NIMA: \"I'm not. This is self-interest. You're useful. Don't confuse that with friendship.\"",
+                    "target": "nima_02_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pid": "nima_02_passage_4_close",
+            "name": "Work Assignment Accepted",
+            "conversationId": "nima_encounter_02",
+            "active_speaker": "PlayerInner",
+            "text": "A job. A real foothold. It's not trust yet, but it's something.",
+            "system_trigger": "close_dialogue|update_game_state",
+            "data_hook": "nima_encounter_02_complete=true",
+            "choices": []
+        }
+    ]
+}

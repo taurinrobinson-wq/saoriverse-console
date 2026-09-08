@@ -1,0 +1,626 @@
+{
+    "name": "Ravi Individual Encounter 01",
+    "startnode": "ravi_encounter_01_start",
+    "passages": [
+        {
+            "pid": "ravi_01_passage_1",
+            "name": "Collapsed Building - Ravi Working",
+            "conversationId": "ravi_encounter_01",
+            "active_speaker": "Ravi",
+            "text": "You find Ravi working among the rubble of the old marketplace building. He moves with measured purpose, organizing stones into stacks.",
+            "scene_context": "The collapsed structure looms like a broken monument. Ravi works methodically, his movements practiced and deliberate. He doesn't notice you watching at first.",
+            "required_flags": [
+                "met_ravi",
+                "market_discovery_progression_1"
+            ],
+            "choices": [
+                {
+                    "tone_str": "Trust",
+                    "playerLine": "I came to help. Where should I start?",
+                    "npcResponse": "RAVI: \"People who offer help often don't understand the cost. Are you sure?\"",
+                    "target": "ravi_01_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.005
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Observation",
+                    "playerLine": "How long has this section been unstable?",
+                    "npcResponse": "RAVI: \"Long enough. The weather hastens what time would eventually do.\"",
+                    "target": "ravi_01_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.015
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "NarrativePresence",
+                    "playerLine": "This structure meant something to people, didn't it?",
+                    "npcResponse": "RAVI: \"All structures mean something. Then they stop mattering.\"",
+                    "target": "ravi_01_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.01
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Empathy",
+                    "playerLine": "You carry this place inside you. I can see it.",
+                    "npcResponse": "RAVI: \"Carrying things is what we do out here. It's the only weight that won't break our backs.\"",
+                    "target": "ravi_01_passage_2",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pid": "ravi_01_passage_2",
+            "name": "Ravi's Task",
+            "conversationId": "ravi_encounter_01",
+            "active_speaker": "Ravi",
+            "text": "RAVI: \"These stones need organizing. The weight distribution matters. If you're staying, do it carefully.\"",
+            "choices": [
+                {
+                    "tone_str": "Trust",
+                    "playerLine": "I won't let you down.",
+                    "npcResponse": "RAVI: \"People usually do. I've stopped being surprised by it.\"",
+                    "target": "ravi_01_passage_3_working",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.005
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Observation",
+                    "playerLine": "What's the structural priority here?",
+                    "npcResponse": "RAVI: \"Base first, then work up. Never rush it. A collapse teaches you that lesson once.\"",
+                    "target": "ravi_01_passage_3_working",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.015
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "NarrativePresence",
+                    "playerLine": "I understand. Precision and patience.",
+                    "npcResponse": "RAVI: \"Most people mistake haste for progress. They're not the same thing.\"",
+                    "target": "ravi_01_passage_3_working",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.01
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Empathy",
+                    "playerLine": "I see the weight this carries for you. I'll help you bear it.",
+                    "npcResponse": "RAVI: \"That's kind. But kindness doesn't rebuild buildings.\"",
+                    "target": "ravi_01_passage_3_working",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pid": "ravi_01_passage_3_working",
+            "name": "Working Together",
+            "conversationId": "ravi_encounter_01",
+            "active_speaker": "Ravi",
+            "text": "You work in silence for a time. Ravi's instructions are sparse but clear. Gradually, the pattern becomes obvious—precision, patience, structure.",
+            "system_trigger": "add_job|add_relationship",
+            "data_hook": "job_ravi_rebuilding=active|ravi_reputation=0.2",
+            "choices": [
+                {
+                    "tone_str": "Trust",
+                    "playerLine": "This will take a long time to finish.",
+                    "npcResponse": "RAVI: \"Most worthwhile things do. Time is one resource we still have.\"",
+                    "target": "ravi_01_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.005
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Observation",
+                    "playerLine": "You're rebuilding this as a memorial?",
+                    "npcResponse": "RAVI: \"I'm rebuilding it as a necessity. The memorial is just what it is when the work is done.\"",
+                    "target": "ravi_01_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.015
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.015
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "NarrativePresence",
+                    "playerLine": "There's purpose in the slow work. I can feel it.",
+                    "npcResponse": "RAVI: \"Purpose keeps us from falling into the cracks that buildings leave behind.\"",
+                    "target": "ravi_01_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Observation",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": 0.02
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": -0.01
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone_str": "Empathy",
+                    "playerLine": "I'm glad you're not alone in this.",
+                    "npcResponse": "RAVI: \"Alone is safer. But maybe… safety isn't everything anymore.\"",
+                    "target": "ravi_01_passage_4_close",
+                    "tone_effects": {
+                        "entries": [
+                            {
+                                "key": "Trust",
+                                "value": 0.005
+                            },
+                            {
+                                "key": "Observation",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "NarrativePresence",
+                                "value": -0.01
+                            },
+                            {
+                                "key": "Empathy",
+                                "value": 0.02
+                            }
+                        ]
+                    },
+                    "remnants_effects": [
+                        {
+                            "target": "Ravi",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Ravi",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pid": "ravi_01_passage_4_close",
+            "name": "Work Bond Formed",
+            "conversationId": "ravi_encounter_01",
+            "active_speaker": "PlayerInner",
+            "text": "Work done in silence can mean more than words. Sometimes showing up is enough.",
+            "system_trigger": "close_dialogue|update_game_state",
+            "data_hook": "ravi_encounter_01_complete=true",
+            "choices": []
+        }
+    ]
+}

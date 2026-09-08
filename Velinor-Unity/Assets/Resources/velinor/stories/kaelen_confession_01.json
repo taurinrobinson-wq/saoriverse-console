@@ -1,264 +1,43 @@
-﻿{
-    "name":  "Kaelen Confession",
-    "startnode":  "kaelen_beat_1",
-    "passages":  [
-                     {
-                         "pid":  "kaelen_beat_1",
-                         "name":  "kaelen_intro",
-                         "setting_description":  "The corridor behind the marketplace is quiet. Dust drifts through the late afternoon light. Footsteps approach from behind, light and practiced, almost nonexistent.",
-                         "prompt":  "KAELEN: \"Hey! You! Youâ€™re that newcomer, right? The one those two were staring at. Look... I shouldn\u0027t be talking to you. But I saw you with them. And I need to say something.\"",
-                         "choices":  [
-                                         {
-                                             "text":  "Ah! You just came out of nowhere! Uh, what is it?",
-                                             "target":  "kaelen_beat_2",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Truth",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.02
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "tone":  "Trust",
-                                             "playerLine":  "Ah! You just came out of nowhere! Uh, what is it?"
-                                         },
-                                         {
-                                             "text":  "Why me?",
-                                             "target":  "kaelen_beat_2",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Observation",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.01
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "tone":  "Observation",
-                                             "playerLine":  "Why me?"
-                                         },
-                                         {
-                                             "text":  "Youâ€™re hiding something?",
-                                             "target":  "kaelen_beat_2",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "NarrativePresence",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.01
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "tone":  "NarrativePresence",
-                                             "playerLine":  "Youâ€™re hiding something?"
-                                         },
-                                         {
-                                             "text":  "...Are you alright?",
-                                             "target":  "kaelen_beat_2",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Empathy",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.03
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "tone":  "Empathy",
-                                             "playerLine":  "...Are you alright?"
-                                         }
-                                     ]
-                     },
-                     {
-                         "pid":  "kaelen_beat_2",
-                         "name":  "kaelen_probe",
-                         "prompt":  "KAELEN: \"...That thing. On your belt. Where did you get something like that?\"",
-                         "choices":  [
-                                         {
-                                             "text":  "It was given to me by someone in the desert.",
-                                             "target":  "kaelen_beat_3",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Truth",
-                                                                                      "value":  0.04
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.02
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "tone":  "Trust",
-                                             "playerLine":  "It was given to me by someone in the desert."
-                                         },
-                                         {
-                                             "text":  "Iâ€™m following its resonance. It led me here.",
-                                             "target":  "kaelen_beat_3",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Observation",
-                                                                                      "value":  0.04
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.01
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "tone":  "Observation",
-                                             "playerLine":  "Iâ€™m following its resonance. It led me here."
-                                         }
-                                     ]
-                     },
-                     {
-                         "pid":  "kaelen_beat_3",
-                         "name":  "kaelen_confession",
-                         "shared_beat":  "Kaelenâ€™s posture collapses. He looks down at his hands, his voice thinning as he offers up a confession he cannot carry alone. KAELEN: \"I was there. When it happened. The collapse. The girl. She was chasing a scent. I was chasing a wallet. I could\u0027ve stopped her. I should\u0027ve. But I was focused on the lift. I froze like a coward.\"",
-                         "choices":  [
-                                         {
-                                             "text":  "You should tell them.",
-                                             "target":  "kaelen_end",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Truth",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.03
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "system_trigger":  "transition:Remembrance_Search",
-                                             "data_hook":  "set_flag:kaelen_confessed=true",
-                                             "tone":  "Trust",
-                                             "playerLine":  "You should tell them."
-                                         },
-                                         {
-                                             "text":  "What exactly happened?",
-                                             "target":  "kaelen_end",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Observation",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.02
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "system_trigger":  "transition:Remembrance_Search",
-                                             "data_hook":  "set_flag:kaelen_confessed=true",
-                                             "tone":  "Observation",
-                                             "playerLine":  "What exactly happened?"
-                                         },
-                                         {
-                                             "text":  "You donâ€™t owe me this confession.",
-                                             "target":  "kaelen_end",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "NarrativePresence",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.01
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "system_trigger":  "transition:Remembrance_Search",
-                                             "data_hook":  "set_flag:kaelen_confessed=true",
-                                             "tone":  "NarrativePresence",
-                                             "playerLine":  "You donâ€™t owe me this confession."
-                                         },
-                                         {
-                                             "text":  "...You froze. People freeze. That doesnâ€™t make you a monster.",
-                                             "target":  "kaelen_end",
-                                             "tone_effects":  {
-                                                                  "entries":  [
-                                                                                  {
-                                                                                      "key":  "Empathy",
-                                                                                      "value":  0.03
-                                                                                  }
-                                                                              ]
-                                                              },
-                                             "npc_resonance":  {
-                                                                   "entries":  [
-                                                                                   {
-                                                                                       "key":  "Kaelen",
-                                                                                       "value":  0.04
-                                                                                   }
-                                                                               ]
-                                                               },
-                                             "system_trigger":  "transition:Remembrance_Search",
-                                             "data_hook":  "set_flag:kaelen_confessed=true",
-                                             "tone":  "Empathy",
-                                             "playerLine":  "...You froze. People freeze. That doesnâ€™t make you a monster."
-                                         }
-                                     ]
-                     },
-                     {
-                         "pid":  "kaelen_end",
-                         "name":  "kaelen_end",
-                         "text":  "The corridor seems to breathe with the weight of the memory. The path ahead opens.",
-                         "choices":  [
-
-                                     ]
-                     }
-                 ]
+{
+  "scene_id": "kaelen_confession_01",
+  "required_flags": ["completed_willy == true"],
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Kaelen",
+      "prompt": "KAELEN: \"Hey! You! You're that newcomer, right? Look... I shouldn't be talking to you. But I saw you with them. And I need to say something.\"",
+      "tone_choices": [
+        {"tone": "T", "label": "Trust", "text": "Ah! You came out of nowhere! What is it?", "npc_response": "KAELEN: \"It's important!\"", "tone_effects": [{"stat": "Trust", "delta": 0.02}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.005}], "remnants_effects": [{"target": "Kaelen", "stat": "resolve", "delta": 0.01}, {"target": "Kaelen", "stat": "trust", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": -0.01}, {"target": "Kaelen", "stat": "memory", "delta": -0.01}]},
+        {"tone": "O", "label": "Observation", "text": "Why me?", "npc_response": "KAELEN: \"Because you don't belong to this place yet.\"", "tone_effects": [{"stat": "Trust", "delta": -0.015}, {"stat": "Observation", "delta": 0.02}, {"stat": "NarrativePresence", "delta": 0.005}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "nuance", "delta": 0.01}, {"target": "Kaelen", "stat": "memory", "delta": 0.01}, {"target": "Kaelen", "stat": "authority", "delta": -0.01}, {"target": "Kaelen", "stat": "need", "delta": -0.01}]},
+        {"tone": "N", "label": "NarrativePresence", "text": "You're hiding something?", "npc_response": "KAELEN: \"Everyone's hiding something.\"", "tone_effects": [{"stat": "Trust", "delta": -0.01}, {"stat": "Observation", "delta": 0.005}, {"stat": "NarrativePresence", "delta": 0.02}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "authority", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": 0.01}, {"target": "Kaelen", "stat": "resolve", "delta": -0.01}, {"target": "Kaelen", "stat": "empathy", "delta": -0.01}]},
+        {"tone": "E", "label": "Empathy", "text": "Are you alright?", "npc_response": "KAELEN: \"Don't ask me that!\"", "tone_effects": [{"stat": "Trust", "delta": 0.005}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.02}], "remnants_effects": [{"target": "Kaelen", "stat": "empathy", "delta": 0.01}, {"target": "Kaelen", "stat": "need", "delta": 0.01}, {"target": "Kaelen", "stat": "nuance", "delta": -0.01}, {"target": "Kaelen", "stat": "trust", "delta": -0.01}]}
+      ],
+      "next_beat_id": 2
+    },
+    {
+      "id": 2,
+      "type": "npc_turn",
+      "active_speaker": "Kaelen",
+      "prompt": "KAELEN: \"That thing. On your belt. The Codex. Where'd you get something like that?\"",
+      "tone_choices": [
+        {"tone": "T", "label": "Trust", "text": "Someone in the desert gave it to me.", "npc_response": "KAELEN: \"You're luckier than you look.\"", "tone_effects": [{"stat": "Trust", "delta": 0.02}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.005}], "remnants_effects": [{"target": "Kaelen", "stat": "resolve", "delta": 0.01}, {"target": "Kaelen", "stat": "trust", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": -0.01}, {"target": "Kaelen", "stat": "memory", "delta": -0.01}]},
+        {"tone": "O", "label": "Observation", "text": "I'm following its resonance.", "npc_response": "KAELEN: \"This place has a way of leading people into trouble.\"", "tone_effects": [{"stat": "Trust", "delta": -0.015}, {"stat": "Observation", "delta": 0.02}, {"stat": "NarrativePresence", "delta": 0.005}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "nuance", "delta": 0.01}, {"target": "Kaelen", "stat": "memory", "delta": 0.01}, {"target": "Kaelen", "stat": "authority", "delta": -0.01}, {"target": "Kaelen", "stat": "need", "delta": -0.01}]}
+      ],
+      "next_beat_id": 3
+    },
+    {
+      "id": 3,
+      "type": "npc_turn",
+      "active_speaker": "Kaelen",
+      "prompt": "KAELEN: \"I was there. When it happened. The collapse. I could've stopped it. I should've. But I froze.\"",
+      "tone_choices": [
+        {"tone": "T", "label": "Trust", "text": "You should tell them.", "npc_response": "KAELEN: \"Easy for you to say.\"", "tone_effects": [{"stat": "Trust", "delta": 0.02}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.005}], "remnants_effects": [{"target": "Kaelen", "stat": "resolve", "delta": 0.01}, {"target": "Kaelen", "stat": "trust", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": -0.01}, {"target": "Kaelen", "stat": "memory", "delta": -0.01}]},
+        {"tone": "O", "label": "Observation", "text": "What exactly happened?", "npc_response": "KAELEN: \"The wall groaned. A brace snapped.\"", "tone_effects": [{"stat": "Trust", "delta": -0.015}, {"stat": "Observation", "delta": 0.02}, {"stat": "NarrativePresence", "delta": 0.005}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "nuance", "delta": 0.01}, {"target": "Kaelen", "stat": "memory", "delta": 0.01}, {"target": "Kaelen", "stat": "authority", "delta": -0.01}, {"target": "Kaelen", "stat": "need", "delta": -0.01}]},
+        {"tone": "N", "label": "NarrativePresence", "text": "You don't owe me this confession.", "npc_response": "KAELEN: \"It's leaking out of me.\"", "tone_effects": [{"stat": "Trust", "delta": -0.01}, {"stat": "Observation", "delta": 0.005}, {"stat": "NarrativePresence", "delta": 0.02}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "authority", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": 0.01}, {"target": "Kaelen", "stat": "resolve", "delta": -0.01}, {"target": "Kaelen", "stat": "empathy", "delta": -0.01}]},
+        {"tone": "E", "label": "Empathy", "text": "You froze. People freeze.", "npc_response": "KAELEN: \"You didn't hear the stone drop.\"", "tone_effects": [{"stat": "Trust", "delta": 0.005}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.02}], "remnants_effects": [{"target": "Kaelen", "stat": "empathy", "delta": 0.01}, {"target": "Kaelen", "stat": "need", "delta": 0.01}, {"target": "Kaelen", "stat": "nuance", "delta": -0.01}, {"target": "Kaelen", "stat": "trust", "delta": -0.01}]}
+      ],
+      "next_beat_id": 0
+    }
+  ]
 }

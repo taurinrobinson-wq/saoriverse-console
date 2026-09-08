@@ -1,0 +1,49 @@
+{
+    "name": "The Search for Remembrance",
+    "startnode": "search_remembrance_01_passage_1",
+    "passages": [
+        {
+            "pid": "search_remembrance_01_passage_1",
+            "name": "The Disturbance",
+            "conversationId": "search_remembrance_01",
+            "active_speaker": "System",
+            "scene_context": "The Codex trembles in your hand. A faint pulse flickers somewhere ahead.",
+            "required_flags": [
+                "kaelen_confessed == true"
+            ],
+            "text": "DEV NOTE: This pulse is the CoreLink node destabilizing after Kaelen's confession. The player should see a soft glow in the environment.",
+            "choices": []
+        },
+        {
+            "pid": "search_remembrance_01_passage_2",
+            "name": "The Activation",
+            "conversationId": "search_remembrance_01",
+            "active_speaker": "System",
+            "scene_context": "A faint pulsing glow appears near the cracked wall. It brightens slightly when the player moves toward it.",
+            "text": "DEV NOTE: No text tells the player to move. The glow itself is the affordance. The pulse frequency increases as the player approaches. Press E to interact.",
+            "choices": []
+        },
+        {
+            "pid": "search_remembrance_01_passage_3",
+            "name": "Interaction",
+            "conversationId": "search_remembrance_01",
+            "active_speaker": "System",
+            "scene_context": "On interaction, the glow flashes. A brief, fragmented image fills the screen — something from the player's past, unclear and out of order.",
+            "text": "DEV NOTE: This is the first hint that the player's walkabouts are surfacing their own buried memories. The image should be abstract, not literal. The projection settles into the player's palm.",
+            "system_trigger": "glyph_remembrance_stabilization",
+            "data_hook": "obtained_remembrance=true",
+            "choices": []
+        },
+        {
+            "pid": "search_remembrance_01_passage_4",
+            "name": "The Residual Echo",
+            "conversationId": "search_remembrance_01",
+            "active_speaker": "System",
+            "scene_context": "The corridor stays still. The Codex warms slightly.",
+            "text": "DEV NOTE: The system quiets after activation. No further interaction needed. The Glyph of Remembrance has been obtained.",
+            "system_trigger": "close_dialogue|set_flag",
+            "data_hook": "search_remembrance_complete=true",
+            "choices": []
+        }
+    ]
+}

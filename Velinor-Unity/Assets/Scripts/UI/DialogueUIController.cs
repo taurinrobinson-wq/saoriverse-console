@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using Velinor.Core;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -287,8 +288,8 @@ public class DialogueUIController : MonoBehaviour
                 Debug.Log("[UI] EVENT: Encounter complete");
                 break;
             case "npc_disappear":
-                Debug.Log("[UI] EVENT: NPC fading out");
-                FadeOutNPC();
+                Debug.Log("[UI] EVENT: NPC exiting stage left");
+                ExitNPCStageLeft();
                 break;
             default:
                 Debug.Log($"[UI] EVENT: {eventName}");
@@ -297,162 +298,132 @@ public class DialogueUIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Fade out the NPC character sprite/renderer over time (for narrative departures)
-    /// Searches the scene for the NPC's SpriteRenderer component and fades it
+    /// NPC exits stage left: first turns to face left, then walks off-screen
+    /// Disables animator and billboard effect to allow proper rotation control
     /// </summary>
-    private void FadeOutNPC()
+    private void ExitNPCStageLeft()
     {
-        Debug.Log("[UI] FadeOutNPC() called - searching for NPC renderer to fade out");
-
-        List<SkinnedMeshRenderer> skinnedMeshRenderers = new List<SkinnedMeshRenderer>();
-        SpriteRenderer spriteRenderer = null;
         GameObject npcGameObject = DialogueManager.Instance.GetCurrentNPCGameObject();
-
-        // If we have the NPC GameObject reference, search within it
-        if (npcGameObject != null)
+        if (npcGameObject == null)
         {
-            Debug.Log($"[UI] Searching for renderers within NPC: {npcGameObject.name}");
-
-            // Priority 1: Collect ALL SkinnedMeshRenderers (3D rigged characters often have multiple parts)
-            var allSkinnedMeshRenderers = npcGameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-            foreach (var smr in allSkinnedMeshRenderers)
-            {
-                string name = smr.gameObject.name.ToLower();
-                if (!name.Contains("background") && !name.Contains("effect") && !name.Contains("particle"))
-                {
-                    skinnedMeshRenderers.Add(smr);
-                    Debug.Log($"[UI] Found NPC SkinnedMeshRenderer in hierarchy: {smr.gameObject.name}");
-                }
-            }
-
-            // Fallback: Look for SpriteRenderer if no SkinnedMeshRenderers found
-            if (skinnedMeshRenderers.Count == 0)
-            {
-                var spriteRenderersInNPC = npcGameObject.GetComponentsInChildren<SpriteRenderer>();
-                foreach (var sr in spriteRenderersInNPC)
-                {
-                    string name = sr.gameObject.name.ToLower();
-                    if (!name.Contains("background") && !name.Contains("effect") && !name.Contains("particle"))
-                    {
-                        spriteRenderer = sr;
-                        Debug.Log($"[UI] Found NPC SpriteRenderer in hierarchy: {sr.gameObject.name}");
-                        break;
-                    }
-                }
-            }
+            Debug.LogError("[UI] No NPC GameObject - cannot exit");
+            return;
         }
 
-        // If found SkinnedMeshRenderers, fade them all out
-        if (skinnedMeshRenderers.Count > 0)
+        // Disable the billboard LookAt effect in NPCDialogueDriver (or legacy SaoriNPC)
+        NPCDialogueDriver npcDriver = npcGameObject.GetComponent<NPCDialogueDriver>();
+        if (npcDriver != null)
         {
-            Debug.Log($"[UI] Starting fade-out for {skinnedMeshRenderers.Count} SkinnedMeshRenderer(s)");
-            StartCoroutine(FadeOutMultipleSkinnedMeshCoroutine(skinnedMeshRenderers, 1.5f));
-        }
-        // Otherwise try SpriteRenderer
-        else if (spriteRenderer != null)
-        {
-            Debug.Log($"[UI] Starting SpriteRenderer fade-out for {spriteRenderer.gameObject.name}");
-            StartCoroutine(FadeOutSpriteCoroutine(spriteRenderer, 1.5f));
+            npcDriver.SetExitingState(true);
+            Debug.Log("[UI] NPCDialogueDriver billboard effect disabled for exit");
         }
         else
         {
-            Debug.LogWarning("[UI] NPC renderer not found. Ensure the NPC has a SkinnedMeshRenderer or SpriteRenderer component.");
+            // Fallback for legacy SaoriNPC if NPCDialogueDriver not found
+            SaoriNPC saoriNPC = npcGameObject.GetComponent<SaoriNPC>();
+            if (saoriNPC != null)
+            {
+                saoriNPC.SetExitingState(true);
+                Debug.Log("[UI] SaoriNPC billboard effect disabled for exit (legacy)");
+            }
         }
+
+        // CRITICAL: Disable animator immediately so it doesn't interfere with our transform changes
+        Animator npcAnimator = npcGameObject.GetComponent<Animator>();
+        if (npcAnimator != null)
+        {
+            npcAnimator.enabled = false;
+            Debug.Log("[UI] NPC animator DISABLED to prevent animation interference");
+        }
+
+        // Force X rotation to 0
+        Transform npcTransform = npcGameObject.transform;
+        Vector3 currentEuler = npcTransform.localEulerAngles;
+        currentEuler.x = 0f;
+        npcTransform.localEulerAngles = currentEuler;
+        Debug.Log($"[UI] NPC localRotation.x set to 0");
+        StartCoroutine(ExitNPCStageLeftSequence(npcGameObject));
     }
 
     /// <summary>
-    /// Coroutine to fade out a SkinnedMeshRenderer's material alpha over specified duration
+    /// Exit sequence: turn left (0.8s), then walk off screen (2.5s)
+    /// Animator is already disabled, so we just move the transform
     /// </summary>
-    private System.Collections.IEnumerator FadeOutSkinnedMeshCoroutine(SkinnedMeshRenderer skinnedMeshRenderer, float duration)
+    private System.Collections.IEnumerator ExitNPCStageLeftSequence(GameObject npcGameObject)
     {
-        float elapsed = 0f;
-        Material materialInstance = new Material(skinnedMeshRenderer.material);
-        skinnedMeshRenderer.material = materialInstance;
-        Color startColor = materialInstance.color;
+        Transform transform = npcGameObject.transform;
+        Vector3 startPosition = transform.position;
+        Vector3 startEuler = transform.localEulerAngles;
 
-        while (elapsed < duration)
+        // Phase 1: Rotation to face left (0.8 seconds)
+        Debug.Log("[UI] Phase 1: Turning to face left");
+
+        float turnDuration = 0.8f;
+        float elapsed = 0f;
+
+        while (elapsed < turnDuration)
         {
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
-            Color newColor = startColor;
-            newColor.a = alpha;
-            materialInstance.color = newColor;
+            float t = elapsed / turnDuration;
+            float easeT = 1f - Mathf.Pow(1f - t, 2f); // Ease-out
+
+            Vector3 currentEuler = transform.localEulerAngles;
+            currentEuler.y = Mathf.Lerp(startEuler.y, 270f, easeT);
+            currentEuler.x = 0f; // Force X to 0 every frame
+            transform.localEulerAngles = currentEuler;
+
             yield return null;
         }
 
-        // Ensure alpha is exactly 0 at end
-        Color finalColor = startColor;
-        finalColor.a = 0f;
-        materialInstance.color = finalColor;
-        Debug.Log("[UI] NPC SkinnedMeshRenderer fade-out complete");
-    }
+        // Ensure final rotation (X must be exactly 0)
+        Vector3 finalEuler = transform.localEulerAngles;
+        finalEuler.y = 270f;
+        finalEuler.x = 0f;
+        transform.localEulerAngles = finalEuler;
 
-    /// <summary>
-    /// Coroutine to fade out multiple SkinnedMeshRenderers' material alpha over specified duration
-    /// </summary>
-    private System.Collections.IEnumerator FadeOutMultipleSkinnedMeshCoroutine(List<SkinnedMeshRenderer> skinnedMeshRenderers, float duration)
-    {
-        // Create material instances for each renderer
-        List<Material> materialInstances = new List<Material>();
-        List<Color> startColors = new List<Color>();
+        Debug.Log($"[UI] Turn complete - final rotation: {transform.localEulerAngles}");
 
+        // Phase 2: Walk off screen (2.5 seconds)
+        Debug.Log("[UI] Phase 2: Walking off screen");
+
+        float walkDuration = 2.5f;
+        elapsed = 0f;
+        Vector3 targetPosition = startPosition;
+        targetPosition.x = -10f;
+
+        while (elapsed < walkDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / walkDuration;
+
+            // Linear movement during walk
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+            // Keep X rotation at 0 throughout walk
+            Vector3 currentEuler = transform.localEulerAngles;
+            currentEuler.x = 0f;
+            transform.localEulerAngles = currentEuler;
+
+            yield return null;
+        }
+
+        // Ensure final position and rotation
+        transform.position = targetPosition;
+        finalEuler = transform.localEulerAngles;
+        finalEuler.x = 0f;
+        transform.localEulerAngles = finalEuler;
+
+        Debug.Log("[UI] NPC walk complete - disabling renderers");
+        // Disable all renderers
+        SkinnedMeshRenderer[] skinnedMeshRenderers = npcGameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (var smr in skinnedMeshRenderers)
         {
-            Material materialInstance = new Material(smr.material);
-            smr.material = materialInstance;
-            materialInstances.Add(materialInstance);
-            startColors.Add(materialInstance.color);
+            smr.enabled = false;
         }
 
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
-
-            // Update all materials in parallel
-            for (int i = 0; i < materialInstances.Count; i++)
-            {
-                Color newColor = startColors[i];
-                newColor.a = alpha;
-                materialInstances[i].color = newColor;
-            }
-            yield return null;
-        }
-
-        // Ensure alpha is exactly 0 at end for all materials
-        for (int i = 0; i < materialInstances.Count; i++)
-        {
-            Color finalColor = startColors[i];
-            finalColor.a = 0f;
-            materialInstances[i].color = finalColor;
-        }
-        Debug.Log("[UI] NPC SkinnedMeshRenderer fade-out complete");
+        Debug.Log("[UI] NPC has left the scene");
     }
 
-    /// <summary>
-    /// Coroutine to fade out a SpriteRenderer's alpha over specified duration
-    /// </summary>
-    private System.Collections.IEnumerator FadeOutSpriteCoroutine(SpriteRenderer spriteRenderer, float duration)
-    {
-        float elapsed = 0f;
-        Color startColor = spriteRenderer.color;
 
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
-            Color newColor = startColor;
-            newColor.a = alpha;
-            spriteRenderer.color = newColor;
-            yield return null;
-        }
-
-        // Ensure alpha is exactly 0 at end
-        Color finalColor = startColor;
-        finalColor.a = 0f;
-        spriteRenderer.color = finalColor;
-        Debug.Log("[UI] NPC sprite fade-out complete");
-    }
 }
 

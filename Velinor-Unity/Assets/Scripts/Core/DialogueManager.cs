@@ -29,6 +29,25 @@ public class DialogueManager : MonoBehaviour
     }
 
     [Serializable]
+    public class RemnantsEffect
+    {
+        public string target = "activeNpcId";  // "activeNpcId", "Ravi", "Nima", etc.
+        public string stat = "";               // "resolve", "trust", "memory", etc.
+        public float delta = 0f;               // +0.01 or -0.01
+    }
+
+    [Serializable]
+    public class RemnantsEffects
+    {
+        public string target = "activeNpcId";  // "activeNpcId", "Ravi", "Nima", etc.
+        public int trust_delta = 0;
+        public int alert_delta = 0;
+        public int guard_delta = 0;
+        public int grief_delta = 0;
+        public int reputation_delta = 0;
+    }
+
+    [Serializable]
     public class SharedBeatLine
     {
         public string speaker;           // NPC name or "Player" or "Shared"
@@ -43,12 +62,15 @@ public class DialogueManager : MonoBehaviour
         public string playerLine;        // Button label (player's choice text)
         public string npcResponse;       // NPC's response text
         public string target;            // Next passage PID
+        public string result_text;       // Player action description (e.g., "You approach...")
         public string shared_beat;       // Text shown AFTER choice (string for backward compatibility)
         public List<SharedBeatLine> shared_beat_lines;  // Array for multi-speaker
         public string system_trigger;    // e.g., "give_device"
         public string data_hook;         // e.g., "met_saori=true"
         public ToneResonanceMap tone_effects = new ToneResonanceMap();
         public ToneResonanceMap npc_resonance = new ToneResonanceMap();
+        public List<RemnantsEffect> remnants_effects = new List<RemnantsEffect>();  // NEW: Array-based remnants (stat changes)
+        public RemnantsEffects remnants_effects_legacy = new RemnantsEffects();  // LEGACY: Old format (for backward compat)
 
         // Parse tone string to enum after deserialization
         public void ParseTone()
@@ -73,6 +95,7 @@ public class DialogueManager : MonoBehaviour
         public List<SharedBeatLine> shared_beat;  // Multi-speaker lines
         public string system_trigger;    // System events (moved from choice level for NPC-only turns)
         public string data_hook;         // Data hooks (moved from choice level for NPC-only turns)
+        public List<BeatSystemTrigger> system_triggers_list = new List<BeatSystemTrigger>();  // Array-based system triggers from beats
     }
 
     [Serializable]
@@ -129,6 +152,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject currentNPCGameObject;  // Stores reference to NPC that initiated dialogue
     private bool isDialogueActive = false;
     private string activeStoryPath = "velinor/stories/sample_story";
+    private HashSet<string> revealedNpcNames = new HashSet<string>();  // Track which NPC names have been revealed
 
     public bool IsDialogueActive => isDialogueActive;
     public event Action OnDialogueEnded;
@@ -247,6 +271,7 @@ public class DialogueManager : MonoBehaviour
         currentConversationId = finalPassage.conversationId;
         Debug.Log($"[DialogueManager] Starting dialogue - npcId: {npcId}, conversationId: {currentConversationId}, startPid: {startPid}");
 
+        revealedNpcNames.Clear();  // Reset revealed names for new dialogue
         isDialogueActive = true;
 
         AutoBindUI();
@@ -255,6 +280,353 @@ public class DialogueManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         DisplayPassage(startPid);
+    }
+
+    /// <summary>
+    /// New TextAsset-based dialogue loading method for NPCDialogueDriver.
+    /// Supports multi-NPC scenes by using conversationId to filter passages.
+    /// Handles both passages-based and beats-based JSON formats.
+    /// </summary>
+    public void StartDialogue(TextAsset jsonFile, string conversationId, string npcName, bool isMultiNpcScene, string startPassageId = "", GameObject npcGameObject = null)
+    {
+        if (jsonFile == null)
+        {
+            Debug.LogError("[DialogueManager] StartDialogue: jsonFile is null");
+            return;
+        }
+
+        try
+        {
+            // Try parsing as passages-based format first
+            StoryJson data = JsonUtility.FromJson<StoryJson>(jsonFile.text);
+
+            if (data != null && data.passages != null && data.passages.Count > 0)
+            {
+                // Passages-based format
+                passages.Clear();
+                foreach (var p in data.passages)
+                {
+                    foreach (var choice in p.choices)
+                    {
+                        choice.ParseTone();
+                    }
+                    passages[p.pid] = p;
+                }
+                Debug.Log($"[DialogueManager] Loaded {passages.Count} passages from {jsonFile.name} for conversation '{conversationId}'");
+            }
+            else
+            {
+                // Try parsing as beats-based format
+                Debug.Log($"[DialogueManager] No passages found, attempting to parse as beats-based format");
+                ConvertBeatsToPassages(jsonFile.text, conversationId);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[DialogueManager] Error parsing dialogue JSON: {e.Message}");
+            return;
+        }
+
+        // Determine starting passage
+        string startPid = startPassageId;
+
+        // If no start passage specified, find first passage in conversationId
+        if (string.IsNullOrEmpty(startPid))
+        {
+            foreach (var kvp in passages)
+            {
+                if (kvp.Value.conversationId == conversationId)
+                {
+                    startPid = kvp.Key;
+                    break;
+                }
+            }
+        }
+
+        // Fallback if still not found
+        if (string.IsNullOrEmpty(startPid) && passages.Count > 0)
+        {
+            startPid = new List<string>(passages.Keys)[0];
+        }
+
+        if (!passages.ContainsKey(startPid))
+        {
+            Debug.LogError($"[DialogueManager] Start passage '{startPid}' not found in dialogue JSON");
+            return;
+        }
+
+        // Setup dialogue context
+        activeNpcId = npcName;
+        currentNPCGameObject = npcGameObject;
+        currentConversationId = conversationId;
+
+        Debug.Log($"[DialogueManager] Starting dialogue from TextAsset: npcName={npcName}, conversationId={conversationId}, startPid={startPid}, isMultiNpc={isMultiNpcScene}");
+
+        // Check if this conversation has already been completed
+        string completionFlag = $"{conversationId}_completed";
+        if (GameFlags.Get(completionFlag))
+        {
+            Debug.Log($"[DialogueManager] Conversation '{conversationId}' already completed. Looking for dismissal dialogue.");
+            string dismissalPid = $"beat_999";  // Look for dismissal beat (beat ID 999 is reserved for dismissals)
+
+            if (passages.ContainsKey(dismissalPid))
+            {
+                startPid = dismissalPid;
+                Debug.Log($"[DialogueManager] Found dismissal passage: {dismissalPid}");
+            }
+            else
+            {
+                Debug.LogWarning($"[DialogueManager] No dismissal passage found for conversation '{conversationId}'");
+                // Continue with normal start if no dismissal exists
+            }
+        }
+
+        revealedNpcNames.Clear();  // Reset revealed names for new dialogue
+        isDialogueActive = true;
+        AutoBindUI();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        DisplayPassage(startPid);
+    }
+
+    /// <summary>
+    /// Converts beat-based JSON format to passages for dialogue display.
+    /// Maps each beat to a passage entry so the rest of the system can use it.
+    /// </summary>
+    private void ConvertBeatsToPassages(string jsonText, string conversationId)
+    {
+        try
+        {
+            // Create a wrapper to parse beats
+            BeatBasedStoryJson beatData = JsonUtility.FromJson<BeatBasedStoryJson>(jsonText);
+
+            if (beatData == null || beatData.beats == null || beatData.beats.Length == 0)
+            {
+                Debug.LogError("[DialogueManager] Failed to parse beats or beats array is empty");
+                return;
+            }
+
+            passages.Clear();
+
+            // Convert each beat to a passage entry
+            foreach (var beat in beatData.beats)
+            {
+                string beatPid = $"beat_{beat.id}";
+
+                // Special handling for shared dialogue beats
+                if (beat.type == "npc_shared" && beat.shared_dialogue != null && beat.shared_dialogue.Length > 0)
+                {
+                    // Create passages for each speaker in the shared dialogue
+                    for (int i = 0; i < beat.shared_dialogue.Length; i++)
+                    {
+                        var speaker = beat.shared_dialogue[i];
+                        string sharedPid = $"beat_{beat.id}_shared_{i}";
+
+                        // Create auto-advance choice to next shared speaker or next beat
+                        StoryChoice autoChoice = new StoryChoice
+                        {
+                            playerLine = "[Continue]",
+                            npcResponse = "",
+                            target = (i < beat.shared_dialogue.Length - 1) ? $"beat_{beat.id}_shared_{i + 1}" : $"beat_{beat.next_beat_id}",
+                            tone = ToneType.Trust  // Dummy value for auto-advance
+                        };
+
+                        StoryPassage sharedPassage = new StoryPassage
+                        {
+                            pid = sharedPid,
+                            conversationId = conversationId,
+                            active_speaker = speaker.speaker,
+                            text = speaker.text,
+                            choices = new List<StoryChoice> { autoChoice }
+                        };
+
+                        passages[sharedPid] = sharedPassage;
+                    }
+
+                    // Update the main beat to point to the first shared speaker
+                    string beatPid_mainShared = $"beat_{beat.id}_shared_0";
+                    StoryPassage mainSharedPassage = new StoryPassage
+                    {
+                        pid = beatPid,
+                        conversationId = conversationId,
+                        active_speaker = "Shared",
+                        text = $"[Shared dialogue: {beat.shared_dialogue.Length} speakers]",
+                        choices = new List<StoryChoice>
+                        {
+                            new StoryChoice
+                            {
+                                playerLine = "[Listen]",
+                                npcResponse = "",
+                                target = beatPid_mainShared,
+                                tone = ToneType.Trust
+                            }
+                        }
+                    };
+                    passages[beatPid] = mainSharedPassage;
+                    continue;  // Skip normal choice processing for shared beats
+                }
+
+                // Normal beat processing (player posture or npc_turn)
+                StoryPassage passage = new StoryPassage
+                {
+                    pid = beatPid,
+                    conversationId = conversationId,
+                    active_speaker = beat.active_speaker,
+                    text = beat.prompt ?? $"Beat {beat.id}",
+                    choices = new List<StoryChoice>()
+                };
+
+                // Store system_triggers from beat level
+                if (beat.system_triggers != null && beat.system_triggers.Length > 0)
+                {
+                    StoreSystemTriggersInPassage(passage, beat.system_triggers);
+                }
+
+                // Determine target for this beat's choices (where player choices lead)
+                string choiceTarget = beat.next_beat_id > 0 ? $"beat_{beat.next_beat_id}" : "DIALOGUE_END";
+
+                // Convert tone choices to story choices
+                if (beat.tone_choices != null && beat.tone_choices.Length > 0)
+                {
+                    foreach (var toneChoice in beat.tone_choices)
+                    {
+                        StoryChoice choice = new StoryChoice
+                        {
+                            playerLine = toneChoice.text,
+                            npcResponse = toneChoice.npc_response ?? "",
+                            result_text = toneChoice.result_text ?? "",  // Player action description
+                            target = choiceTarget,  // SET THE TARGET FOR THIS CHOICE
+                            tone_effects = new ToneResonanceMap(),
+                            npc_resonance = new ToneResonanceMap()
+                        };
+
+                        // Convert tone string (T/O/N/E) to ToneType enum
+                        choice.tone = ParseTone(toneChoice.tone);
+
+                        // Convert tone effects
+                        if (toneChoice.tone_effects != null)
+                        {
+                            foreach (var effect in toneChoice.tone_effects)
+                            {
+                                choice.tone_effects.entries.Add(new StringFloatEntry { key = effect.stat, value = effect.delta });
+                            }
+                        }
+
+                        // Convert remnants effects
+                        if (toneChoice.remnants_effects != null)
+                        {
+                            foreach (var remnant in toneChoice.remnants_effects)
+                            {
+                                RemnantsEffect remEffect = new RemnantsEffect
+                                {
+                                    target = remnant.target,
+                                    stat = remnant.stat,
+                                    delta = remnant.delta
+                                };
+                                choice.remnants_effects.Add(remEffect);
+                            }
+                        }
+
+                        passage.choices.Add(choice);
+                    }
+                }
+                else
+                {
+                    // For NPC turns/player inner with no player choices, create an auto-advance choice
+                    if (beat.next_beat_id > 0)
+                    {
+                        StoryChoice autoChoice = new StoryChoice
+                        {
+                            playerLine = "[Continue]",
+                            npcResponse = "",
+                            target = $"beat_{beat.next_beat_id}",
+                            tone = ToneType.Trust  // Dummy value for auto-advance
+                        };
+                        passage.choices.Add(autoChoice);
+                    }
+                }
+
+                passages[beatPid] = passage;
+            }
+
+            Debug.Log($"[DialogueManager] Converted {passages.Count} beats to passages for conversation '{conversationId}'");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[DialogueManager] Error converting beats to passages: {ex.Message}");
+        }
+    }
+
+    // Data classes for beat-based format support
+    [System.Serializable]
+    private class BeatBasedStoryJson
+    {
+        public string scene_id;
+        public string[] required_flags;
+        public BeatData[] beats;
+    }
+
+    [System.Serializable]
+    private class BeatData
+    {
+        public int id;
+        public string type;
+        public string active_speaker;
+        public string prompt;
+        public BeatToneChoice[] tone_choices;
+        public BeatSharedDialogue[] shared_dialogue;  // For "npc_shared" type beats
+        public BeatSystemTrigger[] system_triggers;   // For system effects
+        public int next_beat_id = 0;  // Points to next beat ID, or 0 to end
+    }
+
+    [System.Serializable]
+    private class BeatSharedDialogue
+    {
+        public string speaker;
+        public string text;
+    }
+
+    [System.Serializable]
+    public class BeatSystemTrigger
+    {
+        public string type;
+        public string[] data;
+    }
+
+    [System.Serializable]
+    private class BeatToneChoice
+    {
+        public string tone;
+        public string text;
+        public string result_text;  // Player action description (e.g., "You approach...")
+        public string npc_response;
+        public BeatEffect[] tone_effects;
+        public BeatRemnantEffect[] remnants_effects;
+    }
+
+    [System.Serializable]
+    private class BeatEffect
+    {
+        public string stat;
+        public float delta;
+    }
+
+    [System.Serializable]
+    private class BeatRemnantEffect
+    {
+        public string target;
+        public string stat;
+        public float delta;
+    }
+
+    /// <summary>
+    /// Check if DialogueManager supports TextAsset-based loading.
+    /// Used by NPCDialogueDriver to determine which method to call.
+    /// </summary>
+    public bool CanLoadFromTextAsset()
+    {
+        return true; // This method always exists now
     }
 
     public void AutoBindUI()
@@ -379,33 +751,56 @@ public class DialogueManager : MonoBehaviour
 
         // Update DialogueUIController - always clear and show fresh passage
         var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
-        if (dialogueUIController != null)
-        {
-            string displayName = GetDisplayName(activeNpcId);
 
-            // For multi-speaker passages, show first speaker's name or use active_speaker
+        // SKIP UI display for shared dialogue beats - they flow seamlessly
+        bool isSharedDialogue = !string.IsNullOrEmpty(p.active_speaker) &&
+                                (p.active_speaker == "Shared" || p.active_speaker == "shared");
+
+        if (!isSharedDialogue && dialogueUIController != null)
+        {
+            string displayName = GetDisplayNameForDialogue(activeNpcId);
+            string dialogueText = p.text;
+
+            // For multi-speaker passages, show speaker's name (with generic if not revealed)
             if (!string.IsNullOrEmpty(p.active_speaker))
             {
-                if (p.active_speaker == "Shared" && p.shared_beat != null && p.shared_beat.Count > 0)
+                if (p.active_speaker != "Player")
                 {
-                    // For shared beats, show the first speaker's name
-                    displayName = p.shared_beat[0].speaker;
+                    // Use the active speaker (Nima, Ravi, etc.) with appropriate display name
+                    displayName = GetDisplayNameForDialogue(p.active_speaker);
                 }
-                else if (p.active_speaker != "Player")
+                else if (p.active_speaker == "Player")
                 {
-                    // Use the active speaker (Nima, Ravi, etc.)
-                    displayName = p.active_speaker;
+                    // Format player inner thoughts in italics
+                    dialogueText = $"<i>{p.text}</i>";
+                    displayName = "";  // No speaker name for inner thoughts
                 }
             }
 
-            dialogueUIController.ShowDialogue(displayName, p.text);
+            dialogueUIController.ShowDialogue(displayName, dialogueText);
             // Store active_speaker for UI to use
             dialogueUIController.currentActiveSpeaker = p.active_speaker;
             Debug.Log($"[DialogueManager] Displaying passage: {pid} (speaker: {p.active_speaker}, display name: {displayName})");
         }
-        else
+        else if (isSharedDialogue)
+        {
+            Debug.Log($"[DialogueManager] Skipping UI display for shared dialogue beat {pid} - will auto-advance seamlessly");
+        }
+        else if (dialogueUIController == null)
         {
             Debug.LogError("[DialogueManager] DialogueUIController not found!");
+        }
+
+        // Process system triggers from this passage
+        if (p.system_triggers_list != null && p.system_triggers_list.Count > 0)
+        {
+            ProcessSystemTriggersFromPassage(p.system_triggers_list);
+        }
+
+        // Process legacy system_trigger string if present
+        if (!string.IsNullOrEmpty(p.system_trigger))
+        {
+            ProcessSystemTrigger(p.system_trigger);
         }
 
         ClearButtons();
@@ -448,16 +843,27 @@ public class DialogueManager : MonoBehaviour
     {
         if (!passages.TryGetValue(pid, out var p)) return;
 
-        // Only show choices if this is a Player turn
-        bool isPlayerTurn = string.IsNullOrEmpty(p.active_speaker) || p.active_speaker == "Player";
-        Debug.Log($"[DialogueManager] DisplayChoicesForPassage - pid: {pid}, active_speaker: '{p.active_speaker}', isPlayerTurn: {isPlayerTurn}, choicesCount: {p.choices.Count}");
+        // Show player choices if this passage has any choices
+        // active_speaker only indicates who is speaking the prompt, not whether player can respond
+        bool hasPlayerChoices = p.choices != null && p.choices.Count > 0;
+        Debug.Log($"[DialogueManager] DisplayChoicesForPassage - pid: {pid}, active_speaker: '{p.active_speaker}', hasChoices: {hasPlayerChoices}, choicesCount: {p.choices.Count}");
 
-        if (!isPlayerTurn)
+        if (!hasPlayerChoices)
         {
-            // This is an NPC turn or shared beat - don't show choices
-            Debug.Log($"[DialogueManager] NPC/Shared turn detected - no choices shown. Will transition automatically after delay.");
-            // Auto-advance after a short delay (user can click to advance)
-            StartCoroutine(AutoAdvanceDialogue(pid));
+            // No player choices - auto-advance
+            // For shared dialogue beats, skip displaying them entirely (seamless flow)
+            if (p.active_speaker == "Shared" || p.active_speaker == "shared")
+            {
+                Debug.Log($"[DialogueManager] Skipping display of shared dialogue beat {pid} - auto-advancing seamlessly");
+                // Jump directly to next beat without showing
+                StartCoroutine(AutoAdvanceDialogue(pid, skipDisplay: true));
+            }
+            else
+            {
+                Debug.Log($"[DialogueManager] No player choices available. Will transition automatically after delay.");
+                // Auto-advance after a short delay (user can click to advance)
+                StartCoroutine(AutoAdvanceDialogue(pid));
+            }
             return;
         }
 
@@ -525,12 +931,19 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private IEnumerator AutoAdvanceDialogue(string currentPid)
+    private IEnumerator AutoAdvanceDialogue(string currentPid, bool skipDisplay = false)
     {
-        // Display NPC-only turn for a brief moment, allowing player to click to continue
-        // For now, just show it for 1 second then auto-advance
-        // TODO: Add click-to-continue mechanic
-        yield return new WaitForSeconds(1f);
+        // For shared dialogue (skipDisplay=true), advance immediately without waiting
+        if (!skipDisplay)
+        {
+            // Display NPC-only turn for a brief moment, allowing player to click to continue
+            yield return new WaitForSeconds(1f);
+        }
+        else
+        {
+            // Seamless advance for shared dialogue
+            yield return new WaitForEndOfFrame();
+        }
 
         // Check if current passage has a target to advance to
         if (passages.TryGetValue(currentPid, out var currentPassage))
@@ -547,6 +960,12 @@ public class DialogueManager : MonoBehaviour
     {
         ClearButtons();
 
+        // Execute player action if specified (e.g., approach, freeze, wander)
+        if (!string.IsNullOrEmpty(choice.result_text) && PlayerActionHandler.Instance != null)
+        {
+            PlayerActionHandler.Instance.ExecutePlayerAction(choice.result_text);
+        }
+
         // Apply tone effects and resonance
         if (StatManager.Instance != null)
         {
@@ -559,6 +978,9 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             StatManager.Instance.ApplyNpcResonance(activeNpcId, choice.npc_resonance.ToDictionary());
+
+            // NEW: Apply direct remnants effects (for multi-NPC encounters)
+            ApplyRemnantsEffects(choice.remnants_effects);
         }
 
         ProcessDataHook(choice.data_hook);
@@ -603,12 +1025,18 @@ public class DialogueManager : MonoBehaviour
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
                     if (dialogueUIController != null)
                     {
-                        string displayName = GetDisplayName(activeNpcId);
+                        string displayName = GetDisplayNameForDialogue(activeNpcId);
 
                         // Check active speaker for multi-speaker passages
                         if (!string.IsNullOrEmpty(nextPassage.active_speaker) && nextPassage.active_speaker != "Player")
                         {
-                            displayName = nextPassage.active_speaker;
+                            displayName = GetDisplayNameForDialogue(nextPassage.active_speaker);
+                        }
+                        else if (nextPassage.active_speaker == "Player")
+                        {
+                            // Format player inner thoughts in italics
+                            fullText = $"<i>{fullText}</i>";
+                            displayName = "";  // No speaker name for inner thoughts
                         }
 
                         dialogueUIController.ShowDialogue(displayName, fullText);
@@ -628,6 +1056,116 @@ public class DialogueManager : MonoBehaviour
         }
 
         yield return null;  // Return control without waiting
+    }
+
+    /// <summary>
+    /// Apply direct Remnants effects (as array of stat changes).
+    /// Each effect specifies target NPC, stat name, and delta value.
+    /// If target is "activeNpcId", expands to the currently active NPC.
+    /// Otherwise, targets the NPC specified by name (e.g., "Ravi", "Nima").
+    /// </summary>
+    private void ApplyRemnantsEffects(List<RemnantsEffect> effectsList)
+    {
+        if (StatManager.Instance == null) return;
+        if (effectsList == null || effectsList.Count == 0) return;
+
+        foreach (var effect in effectsList)
+        {
+            if (effect == null) continue;
+
+            // Determine target NPC: expand "activeNpcId" to actual NPC name
+            string targetNpcId = effect.target == "activeNpcId" ? activeNpcId : effect.target;
+            if (string.IsNullOrEmpty(targetNpcId)) continue;
+
+            var npcRemnants = StatManager.Instance.GetNpcRemnants(targetNpcId);
+            if (npcRemnants == null)
+            {
+                Debug.LogWarning($"[DialogueManager] No Remnants found for NPC '{targetNpcId}'. Creating new entry.");
+                npcRemnants = new Remnants();
+                StatManager.Instance.SetNpcRemnants(targetNpcId, npcRemnants);
+            }
+
+            // Map stat name string to RemnantType and apply delta
+            RemnantType? statType = effect.stat switch
+            {
+                "resolve" => RemnantType.Resolve,
+                "empathy" => RemnantType.Empathy,
+                "memory" => RemnantType.Memory,
+                "nuance" => RemnantType.Nuance,
+                "authority" => RemnantType.Authority,
+                "need" => RemnantType.Need,
+                "trust" => RemnantType.Trust,
+                "skepticism" => RemnantType.Skepticism,
+                _ => null
+            };
+
+            if (statType.HasValue)
+            {
+                float current = npcRemnants.Get(statType.Value);
+                float newValue = current + effect.delta;
+                npcRemnants.Set(statType.Value, newValue);
+                Debug.Log($"[DialogueManager] {targetNpcId} {effect.stat}: {current:F3} → {newValue:F3} (delta: {effect.delta:+0.00;-0.00})");
+            }
+            else
+            {
+                Debug.LogWarning($"[DialogueManager] Unknown remnants stat: '{effect.stat}'");
+            }
+        }
+    }
+
+    private void ApplyRemnantsEffects(RemnantsEffects effects)
+    {
+        if (StatManager.Instance == null) return;
+        if (effects == null) return;
+
+        // Determine target NPC: expand "activeNpcId" to actual NPC name
+        string targetNpcId = effects.target == "activeNpcId" ? activeNpcId : effects.target;
+        if (string.IsNullOrEmpty(targetNpcId)) return;
+
+        var npcRemnants = StatManager.Instance.GetNpcRemnants(targetNpcId);
+        if (npcRemnants == null)
+        {
+            Debug.LogWarning($"[DialogueManager] No Remnants found for NPC '{targetNpcId}'. Creating new entry.");
+            npcRemnants = new Remnants();
+            StatManager.Instance.SetNpcRemnants(targetNpcId, npcRemnants);
+        }
+
+        // Apply deltas to corresponding remnants
+        // Map: trust_delta -> RemnantType.Trust, alert_delta -> Skepticism, grief_delta -> Need/Memory, etc.
+        if (effects.trust_delta != 0)
+        {
+            float current = npcRemnants.Get(RemnantType.Trust);
+            npcRemnants.Set(RemnantType.Trust, current + effects.trust_delta * 0.1f);  // Scale by 0.1 for 0-1 range
+            Debug.Log($"[DialogueManager] Applied trust_delta {effects.trust_delta} to {targetNpcId}: {current:F3} -> {npcRemnants.Get(RemnantType.Trust):F3}");
+        }
+
+        if (effects.alert_delta != 0)
+        {
+            float current = npcRemnants.Get(RemnantType.Skepticism);
+            npcRemnants.Set(RemnantType.Skepticism, current + effects.alert_delta * 0.1f);
+            Debug.Log($"[DialogueManager] Applied alert_delta {effects.alert_delta} to {targetNpcId}: {current:F3} -> {npcRemnants.Get(RemnantType.Skepticism):F3}");
+        }
+
+        if (effects.guard_delta != 0)
+        {
+            float current = npcRemnants.Get(RemnantType.Authority);
+            npcRemnants.Set(RemnantType.Authority, current + effects.guard_delta * 0.1f);
+            Debug.Log($"[DialogueManager] Applied guard_delta {effects.guard_delta} to {targetNpcId}: {current:F3} -> {npcRemnants.Get(RemnantType.Authority):F3}");
+        }
+
+        if (effects.grief_delta != 0)
+        {
+            float current = npcRemnants.Get(RemnantType.Memory);
+            npcRemnants.Set(RemnantType.Memory, current + effects.grief_delta * 0.1f);
+            Debug.Log($"[DialogueManager] Applied grief_delta {effects.grief_delta} to {targetNpcId}: {current:F3} -> {npcRemnants.Get(RemnantType.Memory):F3}");
+        }
+
+        if (effects.reputation_delta != 0)
+        {
+            float current = npcRemnants.Get(RemnantType.Resolve);
+            npcRemnants.Set(RemnantType.Resolve, current + effects.reputation_delta * 0.1f);
+            Debug.Log($"[DialogueManager] Applied reputation_delta {effects.reputation_delta} to {targetNpcId}: {current:F3} -> {npcRemnants.Get(RemnantType.Resolve):F3}");
+        }
     }
 
     private void ProcessDataHook(string hook)
@@ -670,6 +1208,127 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Convert system triggers array into StoryPassage format for later processing.
+    /// Triggers are processed when the passage is displayed, not at conversion time.
+    /// </summary>
+    private void StoreSystemTriggersInPassage(StoryPassage passage, BeatSystemTrigger[] triggers)
+    {
+        if (triggers == null || triggers.Length == 0) return;
+
+        foreach (var trigger in triggers)
+        {
+            if (trigger != null && !string.IsNullOrEmpty(trigger.type))
+            {
+                passage.system_triggers_list.Add(trigger);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Process system triggers when a passage is displayed.
+    /// Handles diary_append, update_dialogue_names, close_dialogue, etc.
+    /// </summary>
+    private void ProcessSystemTriggersFromPassage(List<BeatSystemTrigger> triggers)
+    {
+        foreach (var trigger in triggers)
+        {
+            if (trigger == null || string.IsNullOrEmpty(trigger.type)) continue;
+
+            if (trigger.type == "diary_append" && trigger.data != null && trigger.data.Length > 0)
+            {
+                // Map diary key to content and append the entry
+                string entryKey = trigger.data[0];
+                string entryText = DiaryEntriesMapping.GetEntry(entryKey);
+                if (DiaryManager.Instance != null)
+                {
+                    DiaryManager.Instance.AddEntry(entryText);
+                    Debug.Log($"[DialogueManager] System trigger: diary_append '{entryKey}'");
+                }
+            }
+            else if (trigger.type == "update_dialogue_names" && trigger.data != null && trigger.data.Length > 0)
+            {
+                // Reveal NPC names in this dialogue session
+                foreach (string npcName in trigger.data)
+                {
+                    revealedNpcNames.Add(npcName);
+                    Debug.Log($"[DialogueManager] System trigger: update_dialogue_names - revealed '{npcName}'");
+                }
+
+                // Update UI to show the currently active NPC's real name
+                var ui = FindAnyObjectByType<DialogueUIController>();
+                if (ui != null && ui.npcNameText != null && !string.IsNullOrEmpty(activeNpcId))
+                {
+                    ui.npcNameText.text = activeNpcId;
+                    Debug.Log($"[DialogueManager] Updated UI name to '{activeNpcId}'");
+                }
+            }
+            else if (trigger.type == "close_dialogue")
+            {
+                Debug.Log($"[DialogueManager] System trigger: close_dialogue");
+                ProcessSystemTrigger("close_dialogue");
+            }
+            else if (trigger.type == "activate_proximity_tracker")
+            {
+                Debug.Log($"[DialogueManager] System trigger: activate_proximity_tracker");
+
+                // Find and activate the proximity tracker
+                var tracker = FindAnyObjectByType<ProximityTrackerUI>();
+                if (tracker != null)
+                {
+                    // Look for a glyph collider in the current scene (tagged as "Glyph" or by name)
+                    Collider glyphCollider = null;
+
+                    // First try finding by tag
+                    GameObject glyphObj = GameObject.FindGameObjectWithTag("Glyph");
+                    if (glyphObj != null)
+                    {
+                        glyphCollider = glyphObj.GetComponent<Collider>();
+                    }
+
+                    // Fallback: search by name pattern
+                    if (glyphCollider == null)
+                    {
+                        foreach (Collider col in FindObjectsByType<Collider>())
+                        {
+                            if (col.name.Contains("Glyph") || col.name.Contains("glyph"))
+                            {
+                                glyphCollider = col;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (glyphCollider != null)
+                    {
+                        tracker.StartTracking(glyphCollider);
+                        Debug.Log($"[DialogueManager] Proximity tracker started for glyph: {glyphCollider.name}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[DialogueManager] No glyph collider found for proximity tracker");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("[DialogueManager] ProximityTrackerUI not found in scene");
+                }
+            }
+            else if (trigger.type == "codex_pulse" && trigger.data != null && trigger.data.Length > 0)
+            {
+                string pulseData = trigger.data[0];
+                Debug.Log($"[DialogueManager] System trigger: codex_pulse '{pulseData}'");
+                ProcessSystemTrigger($"codex_pulse:{pulseData}");
+            }
+            else
+            {
+                // Generic trigger passthrough
+                Debug.Log($"[DialogueManager] System trigger: {trigger.type}");
+                ProcessSystemTrigger(trigger.type);
+            }
+        }
+    }
+
     private void ProcessSystemTrigger(string trigger)
     {
         if (string.IsNullOrEmpty(trigger)) return;
@@ -688,10 +1347,25 @@ public class DialogueManager : MonoBehaviour
 
     public static ToneType ParseTone(string s)
     {
+        if (string.IsNullOrEmpty(s)) return ToneType.Trust;
+
+        // Handle short codes
+        if (s.Equals("T", StringComparison.OrdinalIgnoreCase))
+            return ToneType.Trust;
+        if (s.Equals("O", StringComparison.OrdinalIgnoreCase))
+            return ToneType.Observation;
+        if (s.Equals("N", StringComparison.OrdinalIgnoreCase))
+            return ToneType.NarrativePresence;
+        if (s.Equals("E", StringComparison.OrdinalIgnoreCase))
+            return ToneType.Empathy;
+
+        // Handle full names and aliases
         if (string.Equals(s, "Truth", StringComparison.OrdinalIgnoreCase))
             return ToneType.Trust;
         if (string.Equals(s, "Narrative", StringComparison.OrdinalIgnoreCase))
             return ToneType.NarrativePresence;
+
+        // Try parsing as full enum name
         return Enum.TryParse<ToneType>(s, true, out var t) ? t : ToneType.Trust;
     }
 
@@ -703,6 +1377,41 @@ public class DialogueManager : MonoBehaviour
     /// <summary>
     /// Get the display name for an NPC. If the player hasn't learned their actual name,
     /// show a placeholder like "Older Woman", "Young Woman", "Young Man", etc.
+    /// Checks both GameFlags and the current dialogue session's revealed names.
+    /// </summary>
+    private string GetDisplayNameForDialogue(string npcId)
+    {
+        // Check if name was revealed in this dialogue session
+        if (revealedNpcNames.Contains(npcId))
+        {
+            Debug.Log($"[DialogueManager] {npcId}: Name revealed in this session - displaying '{npcId}'");
+            return npcId;
+        }
+
+        // Check if the player has learned this NPC's name via GameFlags
+        string learnedNameFlag = $"{npcId.ToLower()}_name_learned";
+        if (GameFlags.Get(learnedNameFlag))
+        {
+            Debug.Log($"[DialogueManager] {npcId}: Name already learned - displaying '{npcId}'");
+            revealedNpcNames.Add(npcId);  // Add to session tracking
+            return npcId;  // Return actual name
+        }
+
+        // Return placeholder name if not yet learned
+        string displayName = npcId switch
+        {
+            "Saori" => "Older Woman",
+            "Nima" => "Young Woman",
+            "Ravi" => "Young Man",
+            _ => npcId  // Fallback to actual name if no placeholder defined
+        };
+
+        Debug.Log($"[DialogueManager] {npcId}: Name not yet learned - displaying placeholder '{displayName}'");
+        return displayName;
+    }
+
+    /// <summary>
+    /// Static version for backwards compatibility
     /// </summary>
     public static string GetDisplayName(string npcId)
     {

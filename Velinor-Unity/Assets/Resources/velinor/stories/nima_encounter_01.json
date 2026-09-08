@@ -1,0 +1,503 @@
+{
+    "scene_id": "nima_encounter_01",
+    "required_flags": [
+        "kaelen_confessed == true"
+    ],
+    "beats": [
+        {
+            "id": 1,
+            "type": "player_posture",
+            "active_speaker": "Player",
+            "prompt": "She hasn't noticed me. She is entirely lost in thought. Nima stands alone in the market square, staring at a cracked patch of ground. The ambient noise feels distant around her stillness.",
+            "tone_choices": [
+                {
+                    "tone": "T",
+                    "label": "Trust",
+                    "text": "Step toward her slowly.",
+                    "result_text": "You cross the open space, making no effort to hide your approach.",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": 0.005
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone": "O",
+                    "label": "Observation",
+                    "text": "Observe from a distance.",
+                    "result_text": "You stay near the edge of the fountain, noting her rigid posture.",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": -0.01
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone": "N",
+                    "label": "NarrativePresence",
+                    "text": "Circle the square, avoiding her gaze.",
+                    "result_text": "You move past the shuttered stalls, trying to treat the area normally.",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": -0.01
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "Move close, but stay silent.",
+                    "result_text": "You approach slowly, stopping just within her awareness, offering presence without words.",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": 0.02
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ],
+            "next_beat_id": 2
+        },
+        {
+            "id": 2,
+            "type": "npc_turn",
+            "active_speaker": "Nima",
+            "prompt": "NIMA: \"You picked a bad day to come here.\" Nima shifts her stance slightly. Her voice breaks the silence.",
+            "tone_choices": [
+                {
+                    "tone": "T",
+                    "label": "Trust",
+                    "text": "What's different about today?",
+                    "npc_response": "NIMA: \"It's the day the ground took her. One year. I thought it'd feel different. It doesn't.\"",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": 0.005
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone": "O",
+                    "label": "Observation",
+                    "text": "Ravi mentioned this place… I didn't know why.",
+                    "npc_response": "NIMA: \"He shouldn't have. Not today. He talks when he's hurting. I… don't.\"",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": -0.01
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone": "N",
+                    "label": "NarrativePresence",
+                    "text": "You came back here for a reason.",
+                    "npc_response": "NIMA: \"Reason? No. I just end up here. My feet know the way better than my head.\"",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": -0.01
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone": "E",
+                    "label": "Empathy",
+                    "text": "You look… heavier than before.",
+                    "npc_response": "NIMA: \"The date does that. A year's worth of remembering sits right behind the ribs.\"",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": 0.02
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "empathy",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ],
+            "next_beat_id": 3
+        },
+        {
+            "id": 3,
+            "type": "npc_turn",
+            "active_speaker": "Nima",
+            "prompt": "NIMA: \"I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I just… don't.\"",
+            "tone_choices": [],
+            "next_beat_id": 4
+        },
+        {
+            "id": 4,
+            "type": "npc_turn",
+            "active_speaker": "Nima",
+            "prompt": "NIMA: \"This is where she was trapped. The ground shifted. The wall came down. No one could reach her.\"",
+            "tone_choices": [
+                {
+                    "tone": "T",
+                    "label": "Trust",
+                    "text": "I'm sorry.",
+                    "npc_response": "NIMA: \"Heh. Sorry doesn't move stone. Doesn't change anything.\"",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": 0.005
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": -0.01
+                        }
+                    ]
+                },
+                {
+                    "tone": "O",
+                    "label": "Observation",
+                    "text": "What happened?",
+                    "npc_response": "NIMA: \"She wandered off. Just a few steps. Then she was gone. I didn't see it. I should've. That's all I know. The rest is dust.\"",
+                    "tone_effects": [
+                        {
+                            "stat": "Trust",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "Observation",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "NarrativePresence",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "Empathy",
+                            "delta": -0.01
+                        }
+                    ],
+                    "remnants_effects": [
+                        {
+                            "target": "Nima",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "memory",
+                            "delta": 0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "authority",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Nima",
+                            "stat": "need",
+                            "delta": -0.01
+                        }
+                    ]
+                }
+            ],
+            "next_beat_id": 0
+        }
+    ]
+}

@@ -19,7 +19,7 @@ public class DiaryData
 public class DiaryManager : MonoBehaviour
 {
     public static DiaryManager Instance { get; private set; }
-    
+
     private string diaryPath;
     private DiaryData diaryData = new DiaryData();
 
@@ -28,7 +28,7 @@ public class DiaryManager : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         if (Application.isPlaying) DontDestroyOnLoad(gameObject);
-        
+
         diaryPath = Path.Combine(Application.persistentDataPath, "PlayerDiary.json");
         LoadDiary();
     }
@@ -43,6 +43,17 @@ public class DiaryManager : MonoBehaviour
         diaryData.entries.Add(entry);
         SaveDiary();
         Debug.Log($"[DiaryManager] Entry Added: {content}");
+
+        // Show notification
+        NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        if (notificationPanel != null)
+        {
+            notificationPanel.ShowNotification("Diary updated. Press N to view diary", duration: 4f);
+        }
+        else
+        {
+            Debug.LogWarning("[DiaryManager] NotificationPanelController not found!");
+        }
     }
 
     private void SaveDiary()
@@ -71,6 +82,6 @@ public class DiaryManager : MonoBehaviour
             Debug.LogError($"[DiaryManager] Load Error: {e.Message}");
         }
     }
-    
+
     public List<DiaryEntry> GetEntries() => new List<DiaryEntry>(diaryData.entries);
 }

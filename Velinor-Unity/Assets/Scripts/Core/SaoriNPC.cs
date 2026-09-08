@@ -7,17 +7,45 @@ namespace Velinor.Core
     public class SaoriNPC : MonoBehaviour, IInteractable
     {
         [SerializeField] private string npcId = "Saori";
-        [SerializeField] private string startPassageId = "market_entry";  // Changed from saori_beat_1 to match new story flow
-        [SerializeField] private float interactionRadius = 0.8f; // Detection radius for proximity prompt
+        [SerializeField] private string startPassageId = "market_entry";
+        [SerializeField] private float interactionRadius = 0.8f;
+
+        [Header("Transform Configuration")]
+        [SerializeField] private Vector3 npcScale = new Vector3(1.8f, 1.8f, 1.8f);  // Configurable scale
+        [SerializeField] private bool useDefaultScale = true;  // Toggle to use or customize scale
+
+        [Header("Collider Configuration")]
+        [SerializeField] private float colliderHeight = 1.5f;
+        [SerializeField] private float colliderRadius = 0.3f;
+        [SerializeField] private bool useDefaultCollider = true;  // Toggle to use or customize collider
+
+        [Header("Billboard Effect")]
+        [SerializeField] private bool enableBillboardEffect = true;  // Toggle billboard LookAt on/off
 
         private bool playerInRange = false;
         private GameObject player;
         private bool notificationShown = false;
+        private bool isExiting = false;  // Flag to disable billboard effect during exit animation
 
         private void Start()
         {
-            // Scale down Asuna to match player size
-            transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
+            // CRITICAL: Fix X rotation that's baked into the Asuna skeleton (-16.753 degrees)
+            // This must happen first, before any other transforms
+            Vector3 eulerAngles = transform.localEulerAngles;
+            eulerAngles.x = 0f;
+            transform.localEulerAngles = eulerAngles;
+            Debug.Log("[SaoriNPC] X rotation corrected to 0 (Asuna skeleton fix)");
+
+            // Apply scale if enabled
+            if (useDefaultScale)
+            {
+                transform.localScale = npcScale;
+                Debug.Log($"[SaoriNPC] Applied scale: {npcScale}");
+            }
+            else
+            {
+                Debug.Log($"[SaoriNPC] Scale customization disabled - keeping current scale: {transform.localScale}");
+            }
 
             // Clean up colliders: keep only CapsuleCollider, remove SphereCollider
             SphereCollider sphere = GetComponent<SphereCollider>();
@@ -36,10 +64,21 @@ namespace Velinor.Core
             }
 
             capsule.isTrigger = false; // Non-trigger collider for CharacterController collision
-            capsule.height = 1.5f;
-            capsule.radius = 0.3f;
+
+            // Apply collider configuration if enabled
+            if (useDefaultCollider)
+            {
+                capsule.height = colliderHeight;
+                capsule.radius = colliderRadius;
+                Debug.Log($"[SaoriNPC] Applied collider: height={colliderHeight}, radius={colliderRadius}");
+            }
+            else
+            {
+                Debug.Log($"[SaoriNPC] Collider customization disabled - keeping current dimensions");
+            }
+
             capsule.enabled = true; // ENSURE collider is enabled
-            Debug.Log("[SaoriNPC] CapsuleCollider configured and enabled for proper collision");
+            Debug.Log("[SaoriNPC] CapsuleCollider enabled for proper collision");
         }
 
         private void OnTriggerStay(Collider other)
@@ -49,10 +88,15 @@ namespace Velinor.Core
 
         private void Update()
         {
-            // Billboard effect - face the camera
-            if (Camera.main != null)
+            // Billboard effect - face the camera (but not during exit animation or if disabled!)
+            if (enableBillboardEffect && !isExiting && Camera.main != null)
             {
                 transform.LookAt(Camera.main.transform);
+
+                // CRITICAL: Force X rotation to 0 after LookAt to preserve upright posture
+                Vector3 eulerAngles = transform.localEulerAngles;
+                eulerAngles.x = 0f;
+                transform.localEulerAngles = eulerAngles;
             }
 
             // Check if player is in range (for proximity indication)
@@ -115,6 +159,16 @@ namespace Velinor.Core
             {
                 Debug.Log("[SaoriNPC] Dialogue already active");
             }
+        }
+
+        /// <summary>
+        /// Called by DialogueUIController when NPC exit animation starts
+        /// Disables the billboard LookAt effect so rotation can be controlled
+        /// </summary>
+        public void SetExitingState(bool exiting)
+        {
+            isExiting = exiting;
+            Debug.Log($"[SaoriNPC] Exit state set to: {exiting}");
         }
 
         private void OnDrawGizmosSelected()

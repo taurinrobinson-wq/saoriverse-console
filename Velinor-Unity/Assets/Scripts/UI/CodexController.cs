@@ -353,6 +353,13 @@ public class CodexController : MonoBehaviour
     {
         playerHasCodex = true;
         Debug.Log("[Codex] Codex unlocked! Player can now press C to open Codex");
+
+        // Show notification to player
+        var notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        if (notificationPanel != null)
+        {
+            notificationPanel.ShowNotification("Codex Received. Press C to access.", duration: 5f);
+        }
     }
 
     /// <summary>
