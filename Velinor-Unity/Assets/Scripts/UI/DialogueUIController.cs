@@ -56,9 +56,13 @@ public class DialogueUIController : MonoBehaviour
                 if (dialoguePanelT != null)
                 {
                     dialoguePanel = dialoguePanelT.GetComponent<CanvasGroup>();
-                    dialogueText = dialoguePanelT.Find("Text")?.GetComponent<TextMeshProUGUI>();
+                    // Look for NPCDialogueText, then fall back to Text
+                    dialogueText = dialoguePanelT.Find("NPCDialogueText")?.GetComponent<TextMeshProUGUI>();
+                    if (dialogueText == null)
+                        dialogueText = dialoguePanelT.Find("Text")?.GetComponent<TextMeshProUGUI>();
+
                     npcNameText = dialoguePanelT.Find("NPCName")?.GetComponent<TextMeshProUGUI>();
-                    Debug.Log("[UI] DialoguePanel found and assigned");
+                    Debug.Log($"[UI] DialoguePanel found and assigned (dialogueText: {(dialogueText != null ? "✓" : "✗")}, npcNameText: {(npcNameText != null ? "✓" : "✗")})");
                 }
                 break;
             }
@@ -130,6 +134,7 @@ public class DialogueUIController : MonoBehaviour
 
     /// <summary>
     /// Show dialogue from NPC (called by DialogueManager or NPC)
+    /// Clears previous text and starts fresh
     /// </summary>
     public void ShowDialogue(string npcName, string text)
     {
@@ -139,7 +144,7 @@ public class DialogueUIController : MonoBehaviour
             return;
         }
 
-        // CRITICAL: Clear text fields first to avoid text stacking/duplication
+        // For initial dialogue, clear everything
         if (npcNameText != null)
         {
             npcNameText.text = "";
@@ -149,16 +154,32 @@ public class DialogueUIController : MonoBehaviour
         {
             dialogueText.text = "";
             dialogueText.text = text;
-            // Force TextMeshPro to rebuild the mesh immediately
             dialogueText.ForceMeshUpdate();
         }
 
-        // CRITICAL: Must activate the gameObject AND set alpha for visibility
+        // Activate the panel
         dialoguePanel.gameObject.SetActive(true);
         dialoguePanel.alpha = 1f;
         dialoguePanel.blocksRaycasts = true;
         dialoguePanel.interactable = true;
-        Debug.Log($"[UI] Showing dialogue from {npcName}: {text.Substring(0, Mathf.Min(40, text.Length))}...");
+        Debug.Log($"[UI] Showing dialogue from {npcName}");
+    }
+
+    /// <summary>
+    /// Append dialogue text for continuous conversation
+    /// Adds to existing text instead of replacing it
+    /// </summary>
+    public void AppendDialogue(string text)
+    {
+        if (dialoguePanel == null || dialogueText == null)
+            return;
+
+        if (!string.IsNullOrEmpty(text))
+        {
+            dialogueText.text += text;
+            dialogueText.ForceMeshUpdate();
+            Debug.Log("[UI] Appended text to dialogue");
+        }
     }
 
     /// <summary>

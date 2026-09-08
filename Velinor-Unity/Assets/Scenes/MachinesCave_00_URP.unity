@@ -313,8 +313,6 @@ MonoBehaviour:
   - {fileID: 468512161}
   - {fileID: 170729256}
   - {fileID: 1711050932}
-  selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
-  deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
 --- !u!4 &106761840
 Transform:
   m_ObjectHideFlags: 0
@@ -5341,8 +5339,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.96836174, b: 0.8820755, a: 1}
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5404,13 +5402,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759335828}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: 0.23456976, z: -0.10938167, w: 0.8754261}
-  m_LocalPosition: {x: -2.71, y: 5.49, z: -4.15}
+  m_LocalRotation: {x: 0.438804, y: 0.22688222, z: -0.115527436, w: 0.8617592}
+  m_LocalPosition: {x: -4.56, y: 1.59, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 604712594}
-  m_LocalEulerAnglesHint: {x: 50, y: 30, z: 0}
+  m_LocalEulerAnglesHint: {x: 53.97, y: 29.5, z: 0}
 --- !u!114 &1759335831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8274,11 +8272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1123908768008577626, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1123908768008577626, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1123908768008577626, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_LocalScale.z
@@ -8318,7 +8316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1123908768008577626, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 170
+      value: 258
       objectReference: {fileID: 0}
     - target: {fileID: 1123908768008577626, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8765,7 +8763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: -60}
+  m_AnchoredPosition: {x: 25, y: -43}
   m_SizeDelta: {x: 800, y: 140}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1775264354832854532
@@ -11004,7 +11002,7 @@ RectTransform:
   m_GameObject: {fileID: 4169876138574237221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2438469151434139759}
@@ -11015,7 +11013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 608, y: 182}
+  m_AnchoredPosition: {x: 670, y: 260}
   m_SizeDelta: {x: 878, y: 1189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5615349808035042102
@@ -11039,7 +11037,6 @@ MonoBehaviour:
   doorOpenPosition: {x: 1031, y: 1030}
   doorAnimationDuration: 6
   panelFadeDuration: 1
-  doorBlockCollider: {fileID: 2000000005}
   sceneTransitionCollider: {fileID: 1096872670}
   doorOpenSoundEffect: {fileID: 8300000, guid: 1febefda8f032844eac75179837475b6, type: 3}
   audioSource: {fileID: 0}
@@ -12321,7 +12318,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 23}
-  m_SizeDelta: {x: 850, y: 320}
+  m_SizeDelta: {x: 850, y: 480}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!225 &8441262526446954880
 CanvasGroup:
@@ -12663,8 +12660,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -302, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -0, y: -17}
+  m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

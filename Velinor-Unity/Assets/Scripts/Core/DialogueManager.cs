@@ -339,20 +339,20 @@ public class DialogueManager : MonoBehaviour
         return null;
     }
 
-    private void DisplayPassage(string pid)
+    private void DisplayPassage(string pid, bool isFirstPassage = false)
     {
         if (!passages.TryGetValue(pid, out var p)) { EndDialogue(); return; }
         foreach (var flag in p.required_flags) { if (!GameFlags.Get(flag)) { EndDialogue(); return; } }
 
         if (npcNameText != null) npcNameText.text = activeNpcId;
-        if (bodyText != null) bodyText.text = p.text;
 
-        // CRITICAL: Show the dialogue in DialogueUIController (which uses the UI_Canvas)
+        // Update DialogueUIController - always clear and show fresh passage
         var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
         if (dialogueUIController != null)
         {
-            dialogueUIController.ShowDialogue(activeNpcId, p.text);
-            Debug.Log("[DialogueManager] Showing dialogue via DialogueUIController");
+            string displayName = GetDisplayName(activeNpcId);
+            dialogueUIController.ShowDialogue(displayName, p.text);
+            Debug.Log($"[DialogueManager] Displaying passage: {pid} (display name: {displayName})");
         }
         else
         {
@@ -360,6 +360,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         ClearButtons();
+        DisplayChoicesForPassage(pid);
+    }
+
+    private void DisplayChoicesForPassage(string pid)
+    {
+        if (!passages.TryGetValue(pid, out var p)) return;
 
         // Use explicitly assigned buttons (preferred method)
         if (btnT != null || btnO != null || btnN != null || btnE != null)
@@ -430,12 +436,13 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator ResolveChoice(StoryChoice choice)
     {
         ClearButtons();
+
+        // Apply tone effects and resonance
         if (StatManager.Instance != null)
         {
             foreach (var t in choice.tone_effects.ToDictionary())
             {
                 StatManager.Instance.AdjustPlayerTone(ParseTone(t.Key), t.Value, activeNpcId);
-                // Dynamically register emotional tags in the player's Codex state
                 if (Velinor.Core.CodexManager.Instance != null)
                 {
                     Velinor.Core.CodexManager.Instance.AddEmotionalTag(t.Key);
@@ -447,33 +454,14 @@ public class DialogueManager : MonoBehaviour
         ProcessDataHook(choice.data_hook);
         ProcessSystemTrigger(choice.system_trigger);
 
+        // Build the response text: shared beat (NPC reaction to choice)
+        string responseText = "";
         if (!string.IsNullOrEmpty(choice.shared_beat))
         {
-            var sharedBeatText = FindTextMeshInCanvas("SharedBeatText");
-            if (sharedBeatText != null)
-            {
-                sharedBeatText.text = "";
-                sharedBeatText.text = choice.shared_beat;
-                sharedBeatText.ForceMeshUpdate();
-                sharedBeatText.gameObject.SetActive(true);
-                yield return new WaitForSeconds(6f);  // Increased from 4s to 6s for better readability
-                sharedBeatText.gameObject.SetActive(false);
-                sharedBeatText.text = "";
-            }
-            else
-            {
-                // Fallback: show shared_beat in main bodyText
-                if (bodyText != null)
-                {
-                    bodyText.text = "";
-                    bodyText.text = choice.shared_beat;
-                    bodyText.ForceMeshUpdate();
-                }
-                yield return new WaitForSeconds(6f);  // Increased from 4s to 6s for better readability
-            }
+            responseText = $"<b>{activeNpcId}:</b> {choice.shared_beat}\n\n";
         }
 
-        // Handle target passage
+        // Handle target passage - show NPC response + next prompt immediately
         if (!string.IsNullOrEmpty(choice.target))
         {
             if (choice.target == "DIALOGUE_END")
@@ -482,13 +470,33 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                DisplayPassage(choice.target);
+                // Load next passage to get its prompt text
+                if (passages.TryGetValue(choice.target, out var nextPassage))
+                {
+                    // Combine NPC response with next passage's prompt
+                    string fullText = responseText + nextPassage.text;
+                    
+                    // Display combined text and immediately show next choices
+                    var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
+                    if (dialogueUIController != null)
+                    {
+                        string displayName = GetDisplayName(activeNpcId);
+                        dialogueUIController.ShowDialogue(displayName, fullText);
+                        Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (display name: {displayName})");
+                    }
+                    
+                    // Set up choices from the target passage
+                    ClearButtons();
+                    DisplayChoicesForPassage(choice.target);
+                }
             }
         }
         else
         {
             EndDialogue();
         }
+
+        yield return null;  // Return control without waiting
     }
 
     private void ProcessDataHook(string hook)
@@ -545,6 +553,29 @@ public class DialogueManager : MonoBehaviour
         if (string.Equals(s, "Narrative", StringComparison.OrdinalIgnoreCase))
             return ToneType.NarrativePresence;
         return Enum.TryParse<ToneType>(s, true, out var t) ? t : ToneType.Trust;
+    }
+
+    /// <summary>
+    /// Get the display name for an NPC. If the player hasn't learned their actual name,
+    /// show a placeholder like "Older Woman", "Young Woman", "Young Man", etc.
+    /// </summary>
+    public static string GetDisplayName(string npcId)
+    {
+        // Check if the player has learned this NPC's name
+        string learnedNameFlag = $"{npcId.ToLower()}_name_learned";
+        if (GameFlags.Get(learnedNameFlag))
+        {
+            return npcId;  // Return actual name
+        }
+
+        // Return placeholder name if not yet learned
+        return npcId switch
+        {
+            "Saori" => "Older Woman",
+            "Nima" => "Young Woman",
+            "Ravi" => "Young Man",
+            _ => npcId  // Fallback to actual name if no placeholder defined
+        };
     }
 
     private void ClearButtons()

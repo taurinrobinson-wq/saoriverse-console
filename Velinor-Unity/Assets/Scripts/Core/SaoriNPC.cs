@@ -7,7 +7,7 @@ namespace Velinor.Core
     public class SaoriNPC : MonoBehaviour, IInteractable
     {
         [SerializeField] private string npcId = "Saori";
-        [SerializeField] private string startPassageId = "saori_beat_1";
+        [SerializeField] private string startPassageId = "market_entry";  // Changed from saori_beat_1 to match new story flow
         [SerializeField] private float interactionRadius = 3.0f; // Detection radius for proximity prompt
 
         private bool playerInRange = false;
