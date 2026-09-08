@@ -28,6 +28,7 @@ public class TriglyphPuzzleController : MonoBehaviour
     [SerializeField] private float doorAnimationDuration = 6f; // 6 seconds for clearly visible movement
     [SerializeField] private float panelFadeDuration = 1f; // Time to fade out codex panel
     [SerializeField] private Collider sceneTransitionCollider;
+    [SerializeField] private Collider doorCollider;  // Blocks player until puzzle solved, then deactivates
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip doorOpenSoundEffect;
@@ -226,15 +227,11 @@ public class TriglyphPuzzleController : MonoBehaviour
             Debug.LogWarning("[Triglyph Puzzle] ⚠️ triglyphPanel reference NOT SET in Inspector!");
         }
 
-        // IMMEDIATELY DISABLE CODEX CANVAS to prevent it from re-enabling during animation
+        // IMMEDIATELY DISABLE CODEX GAMEOBJECT to prevent CodexController from re-enabling it
         if (codexPanel != null)
         {
-            Canvas codexCanvas = codexPanel.GetComponent<Canvas>();
-            if (codexCanvas != null)
-            {
-                codexCanvas.enabled = false;
-                Debug.Log("[Triglyph Puzzle] Codex Canvas disabled to prevent re-enabling");
-            }
+            codexPanel.SetActive(false);
+            Debug.Log("[Triglyph Puzzle] Codex panel GameObject deactivated to prevent re-enabling");
         }
 
         // Play door opening sound effect
@@ -263,7 +260,11 @@ public class TriglyphPuzzleController : MonoBehaviour
         // FADE OUT THE CODEX PANEL smoothly (not instant)
         yield return StartCoroutine(FadeOutPanel(codexPanel, panelFadeDuration));
 
-        Debug.Log("[Triglyph Puzzle] Panels hidden");
+        Debug.Log("[Triglyph Puzzle] Panels hidden - NOW unlocking CodexController");
+
+        // UNLOCK CodexController AFTER fade completes (not before!)
+        // This prevents CodexController from re-enabling the Codex during the fade-out
+        sequenceInProgress = false;
 
         // Activate scene transition collider
         Debug.Log("[Triglyph Puzzle] Attempting to activate scene transition collider...");
@@ -326,8 +327,18 @@ public class TriglyphPuzzleController : MonoBehaviour
             Debug.LogError("[Triglyph Puzzle] ⚠️ FAILED TO FIND COLLIDER! Check the scene hierarchy for a disabled collider that should trigger scene transition.");
         }
 
+        // Deactivate DoorCollider to allow player to pass through
+        if (doorCollider != null)
+        {
+            doorCollider.enabled = false;
+            Debug.Log($"[Triglyph Puzzle] ✅ Door collider DEACTIVATED. Player can now pass through.");
+        }
+        else
+        {
+            Debug.LogWarning("[Triglyph Puzzle] ⚠️ doorCollider reference NOT SET in Inspector. Player may not be able to proceed.");
+        }
+
         puzzleCompleted = true;
-        sequenceInProgress = false; // ← UNLOCK: Sequence complete, CodexController can update again
         Debug.Log("[Triglyph Puzzle] ✅ Puzzle completed! Player can now transition to next scene.");
     }
 

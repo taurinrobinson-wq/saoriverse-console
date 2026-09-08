@@ -205,6 +205,21 @@ public class CodexController : MonoBehaviour
             return;
         }
 
+        // GUARD: Do not allow toggling during puzzle sequence
+        TriglyphPuzzleController triglyph = FindAnyObjectByType<TriglyphPuzzleController>();
+        if (triglyph != null && triglyph.IsSequenceInProgress)
+        {
+            Debug.Log("[Codex] Cannot toggle - puzzle sequence in progress!");
+            return;
+        }
+
+        // GUARD: Do not allow re-opening if codexPanel is deactivated
+        if (!codexPanel.gameObject.activeSelf && codexPanel.alpha < 0.5f)
+        {
+            Debug.Log("[Codex] Cannot toggle - codexPanel GameObject is deactivated!");
+            return;
+        }
+
         bool opening = codexPanel.alpha < 0.5f;
         Debug.Log($"[Codex] ToggleCodex: opening={opening}");
 
