@@ -344,8 +344,6 @@ public class DialogueManager : MonoBehaviour
         if (!passages.TryGetValue(pid, out var p)) { EndDialogue(); return; }
         foreach (var flag in p.required_flags) { if (!GameFlags.Get(flag)) { EndDialogue(); return; } }
 
-        if (npcNameText != null) npcNameText.text = activeNpcId;
-
         // Update DialogueUIController - always clear and show fresh passage
         var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
         if (dialogueUIController != null)
@@ -458,7 +456,7 @@ public class DialogueManager : MonoBehaviour
         string responseText = "";
         if (!string.IsNullOrEmpty(choice.shared_beat))
         {
-            responseText = $"<b>{activeNpcId}:</b> {choice.shared_beat}\n\n";
+            responseText = $"{choice.shared_beat}\n\n";
         }
 
         // Handle target passage - show NPC response + next prompt immediately
@@ -475,7 +473,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     // Combine NPC response with next passage's prompt
                     string fullText = responseText + nextPassage.text;
-                    
+
                     // Display combined text and immediately show next choices
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
                     if (dialogueUIController != null)
@@ -484,7 +482,7 @@ public class DialogueManager : MonoBehaviour
                         dialogueUIController.ShowDialogue(displayName, fullText);
                         Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (display name: {displayName})");
                     }
-                    
+
                     // Set up choices from the target passage
                     ClearButtons();
                     DisplayChoicesForPassage(choice.target);
@@ -565,17 +563,21 @@ public class DialogueManager : MonoBehaviour
         string learnedNameFlag = $"{npcId.ToLower()}_name_learned";
         if (GameFlags.Get(learnedNameFlag))
         {
+            Debug.Log($"[DialogueManager] {npcId}: Name already learned - displaying '{npcId}'");
             return npcId;  // Return actual name
         }
 
         // Return placeholder name if not yet learned
-        return npcId switch
+        string displayName = npcId switch
         {
             "Saori" => "Older Woman",
             "Nima" => "Young Woman",
             "Ravi" => "Young Man",
             _ => npcId  // Fallback to actual name if no placeholder defined
         };
+
+        Debug.Log($"[DialogueManager] {npcId}: Name not yet learned - displaying placeholder '{displayName}'");
+        return displayName;
     }
 
     private void ClearButtons()

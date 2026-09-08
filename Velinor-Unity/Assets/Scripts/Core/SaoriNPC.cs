@@ -79,7 +79,8 @@ namespace Velinor.Core
                 NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
                 if (notificationPanel != null)
                 {
-                    notificationPanel.ShowNotification($"Press E to talk to {npcId}", duration: 10f);
+                    string displayName = DialogueManager.GetDisplayName(npcId);
+                    notificationPanel.ShowNotification($"Press E to talk to {displayName}", duration: 10f);
                     notificationShown = true;
                     Debug.Log($"[SaoriNPC] Showing interaction prompt");
                 }
