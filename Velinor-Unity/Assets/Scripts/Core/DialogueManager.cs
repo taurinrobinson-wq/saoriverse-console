@@ -126,6 +126,7 @@ public class DialogueManager : MonoBehaviour
     private Dictionary<string, StoryPassage> passages = new Dictionary<string, StoryPassage>();
     private string activeNpcId;
     private string currentConversationId;  // Tracks which conversation is currently active
+    private GameObject currentNPCGameObject;  // Stores reference to NPC that initiated dialogue
     private bool isDialogueActive = false;
     private string activeStoryPath = "velinor/stories/sample_story";
 
@@ -202,7 +203,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(string npcId, string startPid) => StartDialogue(npcId, startPid, activeStoryPath);
 
-    public void StartDialogue(string npcId, string startPid, string storyPath)
+    public void StartDialogue(string npcId, string startPid, string storyPath, GameObject npcGameObject = null)
     {
         if (!string.IsNullOrEmpty(storyPath) && storyPath != activeStoryPath) LoadStory(storyPath);
 
@@ -239,6 +240,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         activeNpcId = npcId;
+        currentNPCGameObject = npcGameObject;  // Store NPC reference for fade-out
 
         // Store the conversation ID for later completion tracking
         var finalPassage = passages[startPid];
@@ -692,6 +694,11 @@ public class DialogueManager : MonoBehaviour
             return ToneType.NarrativePresence;
         return Enum.TryParse<ToneType>(s, true, out var t) ? t : ToneType.Trust;
     }
+
+    /// <summary>
+    /// Returns the GameObject of the NPC that initiated the current dialogue
+    /// </summary>
+    public GameObject GetCurrentNPCGameObject() => currentNPCGameObject;
 
     /// <summary>
     /// Get the display name for an NPC. If the player hasn't learned their actual name,

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -301,47 +302,132 @@ public class DialogueUIController : MonoBehaviour
     /// </summary>
     private void FadeOutNPC()
     {
-        Debug.Log("[UI] FadeOutNPC() called - searching for NPC sprite/renderer to fade out");
+        Debug.Log("[UI] FadeOutNPC() called - searching for NPC renderer to fade out");
 
+        List<SkinnedMeshRenderer> skinnedMeshRenderers = new List<SkinnedMeshRenderer>();
         SpriteRenderer spriteRenderer = null;
+        GameObject npcGameObject = DialogueManager.Instance.GetCurrentNPCGameObject();
 
-        // Strategy 1: Search scene for any SpriteRenderer with "Asuna" in its parent name
-        var allSpriteRenderers = FindObjectsByType<SpriteRenderer>();
-        foreach (var sr in allSpriteRenderers)
+        // If we have the NPC GameObject reference, search within it
+        if (npcGameObject != null)
         {
-            if (sr.gameObject.name.Contains("Asuna") || sr.gameObject.name.Contains("Character"))
-            {
-                spriteRenderer = sr;
-                Debug.Log($"[UI] Found NPC sprite via name matching: {sr.gameObject.name}");
-                break;
-            }
-        }
+            Debug.Log($"[UI] Searching for renderers within NPC: {npcGameObject.name}");
 
-        // Strategy 2: If not found, try getting the first visible SpriteRenderer (likely the NPC)
-        if (spriteRenderer == null && allSpriteRenderers.Length > 0)
-        {
-            // Skip UI sprites - only look for world-space sprites
-            foreach (var sr in allSpriteRenderers)
+            // Priority 1: Collect ALL SkinnedMeshRenderers (3D rigged characters often have multiple parts)
+            var allSkinnedMeshRenderers = npcGameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (var smr in allSkinnedMeshRenderers)
             {
-                // Check if it's a world-space renderer (not on a Canvas)
-                if (sr.GetComponentInParent<Canvas>() == null && sr.gameObject.layer != LayerMask.NameToLayer("UI"))
+                string name = smr.gameObject.name.ToLower();
+                if (!name.Contains("background") && !name.Contains("effect") && !name.Contains("particle"))
                 {
-                    spriteRenderer = sr;
-                    Debug.Log($"[UI] Found NPC sprite via world-space search: {sr.gameObject.name}");
-                    break;
+                    skinnedMeshRenderers.Add(smr);
+                    Debug.Log($"[UI] Found NPC SkinnedMeshRenderer in hierarchy: {smr.gameObject.name}");
+                }
+            }
+
+            // Fallback: Look for SpriteRenderer if no SkinnedMeshRenderers found
+            if (skinnedMeshRenderers.Count == 0)
+            {
+                var spriteRenderersInNPC = npcGameObject.GetComponentsInChildren<SpriteRenderer>();
+                foreach (var sr in spriteRenderersInNPC)
+                {
+                    string name = sr.gameObject.name.ToLower();
+                    if (!name.Contains("background") && !name.Contains("effect") && !name.Contains("particle"))
+                    {
+                        spriteRenderer = sr;
+                        Debug.Log($"[UI] Found NPC SpriteRenderer in hierarchy: {sr.gameObject.name}");
+                        break;
+                    }
                 }
             }
         }
 
-        if (spriteRenderer != null)
+        // If found SkinnedMeshRenderers, fade them all out
+        if (skinnedMeshRenderers.Count > 0)
         {
-            Debug.Log($"[UI] Starting fade-out coroutine for {spriteRenderer.gameObject.name}");
+            Debug.Log($"[UI] Starting fade-out for {skinnedMeshRenderers.Count} SkinnedMeshRenderer(s)");
+            StartCoroutine(FadeOutMultipleSkinnedMeshCoroutine(skinnedMeshRenderers, 1.5f));
+        }
+        // Otherwise try SpriteRenderer
+        else if (spriteRenderer != null)
+        {
+            Debug.Log($"[UI] Starting SpriteRenderer fade-out for {spriteRenderer.gameObject.name}");
             StartCoroutine(FadeOutSpriteCoroutine(spriteRenderer, 1.5f));
         }
         else
         {
-            Debug.LogWarning("[UI] NPC sprite/renderer not found. Ensure the NPC has a SpriteRenderer component.");
+            Debug.LogWarning("[UI] NPC renderer not found. Ensure the NPC has a SkinnedMeshRenderer or SpriteRenderer component.");
         }
+    }
+
+    /// <summary>
+    /// Coroutine to fade out a SkinnedMeshRenderer's material alpha over specified duration
+    /// </summary>
+    private System.Collections.IEnumerator FadeOutSkinnedMeshCoroutine(SkinnedMeshRenderer skinnedMeshRenderer, float duration)
+    {
+        float elapsed = 0f;
+        Material materialInstance = new Material(skinnedMeshRenderer.material);
+        skinnedMeshRenderer.material = materialInstance;
+        Color startColor = materialInstance.color;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            Color newColor = startColor;
+            newColor.a = alpha;
+            materialInstance.color = newColor;
+            yield return null;
+        }
+
+        // Ensure alpha is exactly 0 at end
+        Color finalColor = startColor;
+        finalColor.a = 0f;
+        materialInstance.color = finalColor;
+        Debug.Log("[UI] NPC SkinnedMeshRenderer fade-out complete");
+    }
+
+    /// <summary>
+    /// Coroutine to fade out multiple SkinnedMeshRenderers' material alpha over specified duration
+    /// </summary>
+    private System.Collections.IEnumerator FadeOutMultipleSkinnedMeshCoroutine(List<SkinnedMeshRenderer> skinnedMeshRenderers, float duration)
+    {
+        // Create material instances for each renderer
+        List<Material> materialInstances = new List<Material>();
+        List<Color> startColors = new List<Color>();
+
+        foreach (var smr in skinnedMeshRenderers)
+        {
+            Material materialInstance = new Material(smr.material);
+            smr.material = materialInstance;
+            materialInstances.Add(materialInstance);
+            startColors.Add(materialInstance.color);
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+
+            // Update all materials in parallel
+            for (int i = 0; i < materialInstances.Count; i++)
+            {
+                Color newColor = startColors[i];
+                newColor.a = alpha;
+                materialInstances[i].color = newColor;
+            }
+            yield return null;
+        }
+
+        // Ensure alpha is exactly 0 at end for all materials
+        for (int i = 0; i < materialInstances.Count; i++)
+        {
+            Color finalColor = startColors[i];
+            finalColor.a = 0f;
+            materialInstances[i].color = finalColor;
+        }
+        Debug.Log("[UI] NPC SkinnedMeshRenderer fade-out complete");
     }
 
     /// <summary>

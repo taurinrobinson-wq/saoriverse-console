@@ -109,7 +109,7 @@ namespace Velinor.Core
             if (!DialogueManager.Instance.IsDialogueActive)
             {
                 Debug.Log($"[SaoriNPC] Starting dialogue: npcId={npcId}, passageId={startPassageId}");
-                DialogueManager.Instance.StartDialogue(npcId, startPassageId);
+                DialogueManager.Instance.StartDialogue(npcId, startPassageId, "", gameObject);
             }
             else
             {
