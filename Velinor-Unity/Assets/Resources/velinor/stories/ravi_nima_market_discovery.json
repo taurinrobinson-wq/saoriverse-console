@@ -406,10 +406,6 @@
         {
           "speaker": "Nima",
           "text": "Ravi, take your own advice."
-        },
-        {
-          "speaker": "Ravi",
-          "text": "Nima… I can't have someone else… anyway, be careful."
         }
       ],
       "system_triggers": [
@@ -427,7 +423,7 @@
       "id": 4,
       "type": "npc_turn",
       "active_speaker": "Ravi",
-      "prompt": "Ravi mentioned an unstable building… and a daughter.",
+      "prompt": "Nima… I can't have someone else… anyway, be careful.",
       "tone_choices": [
         {
           "tone": "T",
@@ -611,6 +607,14 @@
               "stat": "trust",
               "delta": -0.01
             }
+          ]
+        }
+      ],
+      "system_triggers": [
+        {
+          "type": "diary_append",
+          "data": [
+            "Ravi mentioned an unstable building… and a daughter."
           ]
         }
       ],

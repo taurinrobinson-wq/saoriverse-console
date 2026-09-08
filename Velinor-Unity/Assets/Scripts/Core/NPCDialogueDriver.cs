@@ -20,6 +20,7 @@ namespace Velinor.Core
         [SerializeField] private string npcName = "NPC";           // "Saori", "Nima", "Ravi", "Willy", "Kaelen"
         [SerializeField] private string startPassageId = "start";  // Fallback start passage
         [SerializeField] private bool isMultiNpcScene = false;     // Set true for scenes like ravi_nima_market_discovery
+        [SerializeField] private string multiNpcDisplayName = "[Multiple NPCs]";  // Display name for multi-NPC scenes, e.g. "Young Man and Woman"
 
         [Header("Movement")]
         [SerializeField] private NPCController npcController;      // Optional movement driver
@@ -88,7 +89,7 @@ namespace Velinor.Core
             {
                 capsule.height = colliderHeight;
                 capsule.radius = colliderRadius;
-                Debug.Log($"[NPCDialogueDriver] {npcName}: Applied collider height={colliderHeight}, radius={colliderRadius}");
+                // Debug.Log($"[NPCDialogueDriver] {npcName}: Applied collider height={colliderHeight}, radius={colliderRadius}");
             }
 
             capsule.enabled = true;
@@ -193,6 +194,7 @@ namespace Velinor.Core
                 {
                     playerInRange = true;
                     player = col.gameObject;
+                    // Debug.Log($"[NPCDialogueDriver] {npcName}: Player detected in range!");
                     break;
                 }
             }
@@ -203,8 +205,8 @@ namespace Velinor.Core
                 NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
                 if (notificationPanel != null)
                 {
-                    // For multi-NPC scenes, show generic "[Multiple NPCs]" instead of specific name
-                    string displayName = isMultiNpcScene ? "[Multiple NPCs]" : npcName;
+                    // For multi-NPC scenes, use the customizable multiNpcDisplayName instead of specific name
+                    string displayName = isMultiNpcScene ? multiNpcDisplayName : npcName;
                     notificationPanel.ShowNotification($"Press G to talk to {displayName}", duration: 10f);
                     notificationShown = true;
                     Debug.Log($"[NPCDialogueDriver] {npcName}: Showing interaction prompt (display: {displayName})");

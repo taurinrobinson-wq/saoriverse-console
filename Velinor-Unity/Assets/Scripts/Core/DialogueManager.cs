@@ -446,24 +446,8 @@ public class DialogueManager : MonoBehaviour
 
                     // Update the main beat to point to the first shared speaker
                     string beatPid_mainShared = $"beat_{beat.id}_shared_0";
-                    StoryPassage mainSharedPassage = new StoryPassage
-                    {
-                        pid = beatPid,
-                        conversationId = conversationId,
-                        active_speaker = "Shared",
-                        text = $"[Shared dialogue: {beat.shared_dialogue.Length} speakers]",
-                        choices = new List<StoryChoice>
-                        {
-                            new StoryChoice
-                            {
-                                playerLine = "[Listen]",
-                                npcResponse = "",
-                                target = beatPid_mainShared,
-                                tone = ToneType.Trust
-                            }
-                        }
-                    };
-                    passages[beatPid] = mainSharedPassage;
+                    // Skip the intermediate prompt and jump directly to the first speaker
+                    passages[beatPid] = passages[beatPid_mainShared];
                     continue;  // Skip normal choice processing for shared beats
                 }
 
@@ -756,6 +740,19 @@ public class DialogueManager : MonoBehaviour
         bool isSharedDialogue = !string.IsNullOrEmpty(p.active_speaker) &&
                                 (p.active_speaker == "Shared" || p.active_speaker == "shared");
 
+        // Process system triggers BEFORE displaying the passage
+        // This ensures name reveals happen before the UI is updated
+        if (p.system_triggers_list != null && p.system_triggers_list.Count > 0)
+        {
+            ProcessSystemTriggersFromPassage(p.system_triggers_list);
+        }
+
+        // Process legacy system_trigger string if present
+        if (!string.IsNullOrEmpty(p.system_trigger))
+        {
+            ProcessSystemTrigger(p.system_trigger);
+        }
+
         if (!isSharedDialogue && dialogueUIController != null)
         {
             string displayName = GetDisplayNameForDialogue(activeNpcId);
@@ -789,18 +786,6 @@ public class DialogueManager : MonoBehaviour
         else if (dialogueUIController == null)
         {
             Debug.LogError("[DialogueManager] DialogueUIController not found!");
-        }
-
-        // Process system triggers from this passage
-        if (p.system_triggers_list != null && p.system_triggers_list.Count > 0)
-        {
-            ProcessSystemTriggersFromPassage(p.system_triggers_list);
-        }
-
-        // Process legacy system_trigger string if present
-        if (!string.IsNullOrEmpty(p.system_trigger))
-        {
-            ProcessSystemTrigger(p.system_trigger);
         }
 
         ClearButtons();
