@@ -33,6 +33,12 @@ public class PanelInteraction : MonoBehaviour
         {
             if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
             {
+                // Don't handle E if the triglyph puzzle panel is active - let TriglyphPuzzleController handle it
+                if (triglyphPanelUI != null && triglyphPanelUI.activeSelf)
+                {
+                    return;
+                }
+
                 Debug.Log("[PanelInteraction] E key pressed while in range!");
                 InteractWithPanel();
             }

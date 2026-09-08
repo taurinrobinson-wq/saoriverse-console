@@ -1,0 +1,230 @@
+Perfect — then what you need is **not** a high‑level design doc.  
+You need **Codespace‑ready implementation instructions**: explicit, modular, step‑sequenced, and written in a way that Codespace can execute without hallucinating or improvising.
+
+Below is the **first deliverable**: a *unified, production‑grade instruction set* that tells Codespace exactly how to integrate your asset biomes into Velinor’s project structure. It is written in the same style as your prior Codespace instructions: declarative, explicit, and implementation‑oriented.
+
+If you want, I can generate **additional modules** (lighting, biome prefabs, Corelink node construction, glyph pedestal system, etc.) in the same format.
+
+---
+
+# **CODESPACE IMPLEMENTATION INSTRUCTIONS — VELHARA WORLD BIOME SYSTEM**
+
+These instructions tell Codespace exactly how to integrate the four Velhara world layers into the Unity project using the assets you’ve collected.
+
+You can paste this directly into Codespace.
+
+---
+
+## **1. Create the Velhara World Structure**
+
+**Task:**  
+Create a folder hierarchy in `Assets/World/` that reflects the four world layers.
+
+**Instructions to Codespace:**
+
+```
+Create the following folder structure under Assets/World/:
+
+1. RuralVelhara/
+   - Prefabs/
+   - Materials/
+   - Scenes/
+   - Props/
+   - Vegetation/
+   - Terrain/
+
+2. RuinedVelhara/
+   - Prefabs/
+   - Materials/
+   - Scenes/
+   - Props/
+   - Architecture/
+   - Terrain/
+
+3. DeepPlaces/
+   - Prefabs/
+   - Materials/
+   - Scenes/
+   - Props/
+   - Caves/
+   - Bioluminescence/
+
+4. Corelink/
+   - Prefabs/
+   - Materials/
+   - Scenes/
+   - Props/
+   - Architecture/
+   - FX/
+```
+
+---
+
+## **2. Import and Normalize Assets**
+
+**Task:**  
+For each asset pack, Codespace must import it into the correct biome folder and normalize materials, naming, and prefabs.
+
+**Instructions to Codespace:**
+
+```
+For each imported Unity package, perform the following steps:
+
+1. Import the package into a temporary folder under Assets/_ImportedRaw/[PackageName].
+
+2. Move ONLY the following into the appropriate biome folder:
+   - Models
+   - Materials
+   - Prefabs
+   - Textures
+
+3. Rename all imported assets using the format:
+   [Biome]_[AssetType]_[OriginalName]
+
+   Example:
+   Rural_Tree_Oak01
+   Ruined_Column_BrokenA
+   Deep_CaveWall_01
+   Corelink_Panel_LightStrip01
+
+4. Convert all materials to URP-compatible materials using Unity’s material upgrader.
+
+5. Delete the _ImportedRaw folder after normalization.
+```
+
+---
+
+## **3. Create Biome Prefab Libraries**
+
+Each biome needs a **Prefab Library** that Velinor can pull from during scene construction.
+
+**Instructions to Codespace:**
+
+```
+For each biome folder, create a PrefabLibrary.asset ScriptableObject at:
+Assets/World/[Biome]/PrefabLibrary.asset
+
+The ScriptableObject must contain:
+- A list of environment prefabs
+- A list of prop prefabs
+- A list of terrain detail prefabs (trees, rocks, foliage)
+- A list of architectural prefabs (if applicable)
+
+Expose these lists in the inspector for manual assignment.
+```
+
+---
+
+## **4. Build Biome Template Scenes**
+
+Codespace must generate **template scenes** for each biome so you can quickly prototype.
+
+**Instructions to Codespace:**
+
+```
+Create the following scenes:
+
+Assets/World/RuralVelhara/Scenes/Rural_Template.unity
+Assets/World/RuinedVelhara/Scenes/Ruined_Template.unity
+Assets/World/DeepPlaces/Scenes/Deep_Template.unity
+Assets/World/Corelink/Scenes/Corelink_Template.unity
+
+Each scene must include:
+- A flat terrain plane
+- A directional light
+- A basic skybox
+- A player spawn point
+- A biome-specific lighting profile (empty placeholder)
+- A biome-specific post-processing volume (empty placeholder)
+```
+
+---
+
+## **5. Implement Biome Managers**
+
+Each biome needs a **BiomeManager** component that controls lighting, fog, color grading, and ambient audio.
+
+**Instructions to Codespace:**
+
+```
+Create a BiomeManager.cs script with the following responsibilities:
+
+- Holds references to:
+  - Lighting profile
+  - Fog settings
+  - Ambient audio
+  - Post-processing profile
+  - Weather controller (optional)
+
+- Provides a public method:
+  ApplyBiomeSettings()
+
+- When ApplyBiomeSettings() is called:
+  - Set RenderSettings.ambientLight
+  - Set fog color and density
+  - Apply post-processing profile
+  - Trigger ambient audio
+
+Create four derived classes:
+- RuralBiomeManager.cs
+- RuinedBiomeManager.cs
+- DeepBiomeManager.cs
+- CorelinkBiomeManager.cs
+
+Each derived class overrides default settings with biome-specific values.
+```
+
+---
+
+## **6. Create Biome Transition System**
+
+This allows the player to move between Rural → Ruined → Deep → Corelink without hard scene loads.
+
+**Instructions to Codespace:**
+
+```
+Create a BiomeTransitionTrigger.cs script with:
+
+- public BiomeManager targetBiome;
+- OnTriggerEnter:
+    targetBiome.ApplyBiomeSettings();
+
+Place this script on trigger volumes in the world.
+
+Ensure the system supports:
+- Smooth lighting transitions
+- Smooth fog transitions
+- Smooth audio transitions
+```
+
+---
+
+## **7. Prepare for Missing Biomes (Future Assets)**
+
+Codespace must create placeholder folders for:
+
+```
+Assets/World/DesertVelhara/
+Assets/World/SwampVelhara/
+```
+
+These will be populated when you download the desert and swamp packs.
+
+Start with that and then we can make a plan for the following:
+
+### **A. Lighting Profiles for Each Biome**  
+(URP/HDRP settings, color grading, fog, volumetrics)
+
+### **B. Scene Layout Blueprints**  
+(Where to place ruins, how to structure Corelink nodes, how to build Deep Places)
+
+### **C. Glyph Pedestal System**  
+(Interactables, shaders, resonance effects)
+
+### **D. Corelink Node Architecture**  
+(How to build the pristine sci-fi interiors)
+
+### **E. NPC Region Setup**  
+(Elenya’s mountains, Malrik’s desert, thieves’ swamp)
+
+Just tell me which module you want next and I will generate Codespace-ready instructions for it.

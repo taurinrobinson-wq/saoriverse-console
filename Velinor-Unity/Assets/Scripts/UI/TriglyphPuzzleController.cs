@@ -228,8 +228,46 @@ public class TriglyphPuzzleController : MonoBehaviour
             return;
         }
 
+        // Validate that selected glyphs are exactly: Sorrow, Legacy, and Remembrance
+        if (!IsValidGlyphCombination())
+        {
+            string message = "Invalid glyph combination! You need: Sorrow, Legacy, and Remembrance";
+            Debug.LogWarning("[Triglyph Puzzle] " + message);
+
+            // Show notification to player
+            NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+            if (notificationPanel != null)
+            {
+                notificationPanel.ShowNotification(message, duration: 3f);
+            }
+            return;
+        }
+
         Debug.Log("[Triglyph Puzzle] Confirming puzzle placement...");
         PlaceGlyphsOnPanel();
+    }
+
+    /// <summary>
+    /// Check if selected glyphs are the correct combination for opening the door
+    /// </summary>
+    private bool IsValidGlyphCombination()
+    {
+        if (selectedGlyphs.Count != 3)
+            return false;
+
+        HashSet<string> selectedNames = new HashSet<string>();
+        foreach (GlyphUI glyphUI in selectedGlyphs)
+        {
+            if (glyphUI.glyphData != null)
+            {
+                selectedNames.Add(glyphUI.glyphData.glyphName);
+            }
+        }
+
+        // Must contain exactly these three glyphs
+        return selectedNames.Contains("Sorrow") &&
+               selectedNames.Contains("Legacy") &&
+               selectedNames.Contains("Remembrance");
     }
 
     /// <summary>

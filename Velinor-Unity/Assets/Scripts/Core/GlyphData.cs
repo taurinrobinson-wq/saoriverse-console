@@ -9,9 +9,18 @@ namespace Velinor.Core
     [CreateAssetMenu(fileName = "New Glyph", menuName = "Velinor/Glyph Data", order = 1)]
     public class GlyphData : ScriptableObject
     {
-        [SerializeField] public string glyphName;
-        [SerializeField] public Sprite icon;
-        [SerializeField] public string description;
+        [SerializeField]
+        [Tooltip("Display name of the glyph in the codex")]
+        public string glyphName;
+
+        [SerializeField]
+        [Tooltip("Icon sprite displayed in the codex UI")]
+        public Sprite icon;
+
+        [SerializeField]
+        [TextArea(3, 5)]
+        [Tooltip("Poetic or descriptive text about this glyph")]
+        public string description;
 
         public void OnValidate()
         {

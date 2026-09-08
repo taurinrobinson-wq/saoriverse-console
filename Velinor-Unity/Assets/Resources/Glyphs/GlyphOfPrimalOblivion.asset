@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f725f558a3a71ef4c9363e796a435dc1, type: 3}
-  m_Name: GlyphOfSorrow
+  m_Name: GlyphOfPrimalOblivion 1
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphData
-  glyphName: Sorrow
-  icon: {fileID: 21300000, guid: a7934ebf03e3e2740b9dee3e1fe2d975, type: 3}
-  description: 'A symbol of grief that cannot yet be spoken. '
+  glyphName: Primal Oblivion
+  icon: {fileID: 21300000, guid: 6d8f99456b7e6bb469e9c3200fb47caf, type: 3}
+  description: The ache is felt deeply and the loss becomes emotionally real.

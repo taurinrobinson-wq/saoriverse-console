@@ -1,0 +1,140 @@
+This is actually a really solid starting architecture. You can absolutely build Velinor on top of this—but I’d tune a few things so it matches where you are right now and doesn’t overcomplicate your life.
+
+I’ll keep this focused and concrete.
+
+---
+
+### 1. Interaction system (raycast + abstract Interactable)
+
+**Good:**
+
+- **Abstract `Interactable` base:** Great idea. Future‑you will thank you when doors, glyphs, NPCs, photos, etc. all share the same `OnInteract(PlayerSystem player)` pattern.
+- **Raycast from camera:** This is a clean way to unify interaction instead of every object having its own trigger.
+
+**Suggestions:**
+
+- **Don’t mix systems yet.**  
+  Right now you already have a proximity/trigger‑based “Press E to talk” flow working. This raycast system is *different* (look‑at based). I’d either:
+  - fully switch to raycast interaction, or  
+  - keep your trigger‑based system for now and introduce raycast later.
+
+  Running both at once will get confusing fast.
+
+- **Prompt text ownership:**  
+  You’re already using world‑space prompts (“Press E to talk to Ravi”). If you move to raycast, decide:  
+  - either: always use screen‑space prompt text from `PlayerInteraction`,  
+  - or: let each `Interactable` manage its own prompt UI.  
+  Mixing both will feel messy.
+
+---
+
+### 2. GlyphPedestal + resonance
+
+**Good:**
+
+- **Emotion enum:** Perfect. This will plug directly into your emotional OS later.
+- **Activation radius vs max resonance radius:** Nice separation—one for “comes alive,” one for “device senses it.”
+- **Overriding `OnInteract`:** Exactly how the base class should be used.
+
+**Suggestions:**
+
+- **Avoid `GameObject.FindGameObjectWithTag` in `Start()`.**  
+  You already have a `PlayerSystem.Instance`. Use that instead and cache the transform there, or pass the player in via `OnInteract`. `Find` is fragile and slow.
+
+- **Don’t `SetActive(false)` the whole pedestal yet.**  
+  For debugging and iteration, I’d:
+  - hide the glyph visual,  
+  - disable interaction,  
+  - maybe change material/animation.  
+
+  Turning the whole object off makes it harder to tweak later and can break references.
+
+- **Resonance update spam:**  
+  `Update()` calling `PlayerSystem.Instance.UpdateResonance` every frame from multiple pedestals is fine for now, but later you may want a manager that tracks “closest active glyph” instead of every glyph pinging the player.
+
+---
+
+### 3. PlayerSystem (movement, crouch, resonance, stats)
+
+**Good:**
+
+- **Centralized emotional/stat logic:** This is exactly where glyph effects should live.
+- **Resonance device on G:** Great hook for your “emotional scanner” fantasy.
+- **`CollectGlyph(GlyphEmotion emotion)`:** Clean, extendable entry point.
+
+**Suggestions:**
+
+- **Be careful with `static PlayerSystem Instance`.**  
+  It’s fine for now, but:
+  - make sure there’s only one in the scene,  
+  - consider later moving to dependency injection or a GameManager if things grow.
+
+- **Movement coupling:**  
+  You’re adjusting `baseSpeed` and `currentSpeed` here, but your actual movement script (the one that moves the player) needs to *use* `currentSpeed`. Make sure that’s wired, or this logic will silently do nothing.
+
+- **Permanent stat changes:**  
+  `baseSpeed *= 0.7f` is permanent. That’s thematically cool for Sorrow, but I’d:
+  - at least comment it clearly,  
+  - maybe store an originalBaseSpeed if you ever want to undo or balance it.
+
+---
+
+### 4. Additive scenes, caves, doors
+
+**Good:**
+
+- **Additive loading for caves:** This is exactly how studios hide loading.
+- **Door as `Interactable` subclass:** Perfect—same pattern as glyphs and NPCs.
+
+**Suggestions:**
+
+- **Don’t implement additive loading yet.**  
+  You’re still in “one test scene, one platform, one NPC, one glyph” land. I’d:
+  - keep everything in a single scene until your core loop (move → interact → talk → absorb glyph) feels great,  
+  - then introduce additive scenes once you actually need them.
+
+- **Boss door check:**  
+  When you do implement it, keep it dead simple at first:
+
+  ```csharp
+  if (player.collectedGlyphs.Count >= requiredGlyphs)
+  {
+      // open door
+  }
+  else
+  {
+      // maybe show "It won't budge yet."
+  }
+  ```
+
+  No need for complex multi‑glyph logic until the basic version feels good.
+
+---
+
+### 5. Biggest meta‑suggestion: match complexity to where you are
+
+Right now you have:
+
+- working movement  
+- working camera  
+- working NPC interaction  
+- working dialogue flow  
+
+That’s huge.
+
+I’d suggest this order next:
+
+1. **Convert your existing NPC + glyph to use the `Interactable` base class** (but keep your current proximity/prompt style—no need to switch to raycast yet).
+2. **Add one real glyph with a simple effect** (e.g., Sorrow slows you slightly, maybe tints the screen).
+3. **Add one simple door that only opens if you’ve collected that glyph.**
+4. **Only after that** think about:
+   - resonance device feedback,  
+   - additive cave scenes,  
+   - empathy‑gated dialogue options.
+
+You’re on a very good track. The Gemini architecture is solid; the main risk is just taking on too much “future system” complexity before your current slice is fully fun and stable.
+
+If you want, next step we can:
+
+- rewrite your current NPC and glyph to inherit from `Interactable` cleanly, or  
+- design the *first real* glyph effect in Velinor (what Sorrow actually does to the player beyond speed).

@@ -1,20 +1,21 @@
 ﻿{
-    "name": "Velinor Core Story - Saori Encounter",
-    "startnode": "market_entry",
+    "name": "Velinor Core Story - Saori Desert Encounter",
+    "startnode": "desert_intro",
     "passages": [
         {
-            "pid": "market_entry",
-            "name": "Saori Desert Intro",
+            "pid": "desert_intro",
+            "name": "Older Woman in the Desert",
             "conversationId": "saori_encounter_01",
             "text": "You are on your way to the market?",
-            "required_flags": [],
+            "required_flags": [
+                "press_start==true"
+            ],
             "choices": [
                 {
-                    "text": "(T) Yes, I am looking for work, food, and a place to stay.",
-                    "target": "saori_react_to_choice",
-                    "shared_beat": "Work exists, if you know where to look.",
-                    "system_trigger": "",
-                    "data_hook": "met_saori=true",
+                    "text": "(T) Yes. I'm looking for work, food, and a place to stay.",
+                    "target": "saori_first_react",
+                    "shared_beat": "I cannot offer any of that.",
+                    "data_hook": "met_older_woman=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -24,14 +25,13 @@
                         ]
                     },
                     "tone_str": "Trust",
-                    "playerLine": "Yes, I am looking for work, food, and a place to stay."
+                    "playerLine": "Yes. I'm looking for work, food, and a place to stay."
                 },
                 {
-                    "text": "(O) You are on your way somewhere too?",
-                    "target": "saori_react_to_choice",
-                    "shared_beat": "I am.",
-                    "system_trigger": "",
-                    "data_hook": "met_saori=true",
+                    "text": "(O) You're headed somewhere too?",
+                    "target": "saori_first_react",
+                    "shared_beat": "A question for a question. Interesting.",
+                    "data_hook": "met_older_woman=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -41,14 +41,13 @@
                         ]
                     },
                     "tone_str": "Observation",
-                    "playerLine": "You are on your way somewhere too?"
+                    "playerLine": "You're headed somewhere too?"
                 },
                 {
-                    "text": "(N) Well, anything is better than the middle of this desert.",
-                    "target": "saori_react_to_choice",
-                    "shared_beat": "True enough.",
-                    "system_trigger": "",
-                    "data_hook": "met_saori=true",
+                    "text": "(N) Anything is better than being stuck out here.",
+                    "target": "saori_first_react",
+                    "shared_beat": "In theory.",
+                    "data_hook": "met_older_woman=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -58,14 +57,13 @@
                         ]
                     },
                     "tone_str": "NarrativePresence",
-                    "playerLine": "Well, anything is better than the middle of this desert."
+                    "playerLine": "Anything is better than being stuck out here."
                 },
                 {
-                    "text": "(E) I want to see if I can make myself useful and fill my belly while I'm at it.",
-                    "target": "saori_react_to_choice",
-                    "shared_beat": "A practical heart. Good.",
-                    "system_trigger": "",
-                    "data_hook": "met_saori=true|saori_empathy_shown=true",
+                    "text": "(E) I just want to be useful… and maybe get a meal.",
+                    "target": "saori_first_react",
+                    "shared_beat": "A practical instinct. Good.",
+                    "data_hook": "met_older_woman=true|older_woman_empathy_shown=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -77,29 +75,29 @@
                     "npc_resonance": {
                         "entries": [
                             {
-                                "key": "Saori",
+                                "key": "OlderWoman",
                                 "value": 0.03
                             }
                         ]
                     },
                     "tone_str": "Empathy",
-                    "playerLine": "I want to see if I can make myself useful and fill my belly while I'm at it."
+                    "playerLine": "I just want to be useful… and maybe get a meal."
                 }
             ]
         },
         {
-            "pid": "saori_react_to_choice",
-            "name": "Saori's Device",
+            "pid": "saori_first_react",
+            "name": "The Device",
             "conversationId": "saori_encounter_01",
-            "text": "You should take this. It will help you understand what you are about to encounter.",
+            "text": "Take this.",
             "required_flags": [],
             "choices": [
                 {
-                    "text": "(T) I trust you. I'll take it.",
-                    "target": "saori_device_given",
-                    "shared_beat": "Good. Keep it close.",
+                    "text": "(T) I… alright. I'll take it.",
+                    "target": "saori_device_sharedbeat",
+                    "shared_beat": "Keep it close.",
                     "system_trigger": "give_device",
-                    "data_hook": "received_saori_device=true",
+                    "data_hook": "received_older_woman_device=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -109,14 +107,14 @@
                         ]
                     },
                     "tone_str": "Trust",
-                    "playerLine": "I trust you. I'll take it."
+                    "playerLine": "I… alright. I'll take it."
                 },
                 {
-                    "text": "(O) What is this thing exactly? How does it work?",
-                    "target": "saori_device_given",
-                    "shared_beat": "You will understand when the moment comes. For now, trust the device.",
+                    "text": "(O) What is this? Why give it to me?",
+                    "target": "saori_device_sharedbeat",
+                    "shared_beat": "Later.",
                     "system_trigger": "give_device",
-                    "data_hook": "received_saori_device=true|saori_questioned=true",
+                    "data_hook": "received_older_woman_device=true|older_woman_questioned=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -126,14 +124,14 @@
                         ]
                     },
                     "tone_str": "Observation",
-                    "playerLine": "What is this thing exactly? How does it work?"
+                    "playerLine": "What is this? Why give it to me?"
                 },
                 {
-                    "text": "(N) This feels significant. More significant than it appears.",
-                    "target": "saori_device_given",
-                    "shared_beat": "Yes. More significant than most would ever comprehend.",
+                    "text": "(N) This feels… important.",
+                    "target": "saori_device_sharedbeat",
+                    "shared_beat": "Most things are, once you look closely.",
                     "system_trigger": "give_device",
-                    "data_hook": "received_saori_device=true|saori_connection_noted=true",
+                    "data_hook": "received_older_woman_device=true|older_woman_significance_noted=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -143,14 +141,14 @@
                         ]
                     },
                     "tone_str": "NarrativePresence",
-                    "playerLine": "This feels significant. More significant than it appears."
+                    "playerLine": "This feels… important."
                 },
                 {
-                    "text": "(E) Thank you. I don't know why, but I feel like you truly care about my survival.",
-                    "target": "saori_device_given",
-                    "shared_beat": "I do what I must.",
+                    "text": "(E) Thank you. I don't understand, but… thank you.",
+                    "target": "saori_device_sharedbeat",
+                    "shared_beat": "Understanding isn't required.",
                     "system_trigger": "give_device",
-                    "data_hook": "received_saori_device=true|saori_emotional_connection=true",
+                    "data_hook": "received_older_woman_device=true|older_woman_emotional_connection=true",
                     "tone_effects": {
                         "entries": [
                             {
@@ -162,204 +160,126 @@
                     "npc_resonance": {
                         "entries": [
                             {
-                                "key": "Saori",
+                                "key": "OlderWoman",
                                 "value": 0.05
                             }
                         ]
                     },
                     "tone_str": "Empathy",
-                    "playerLine": "Thank you. I don't know why, but I feel like you truly care about my survival."
+                    "playerLine": "Thank you. I don't understand, but… thank you."
                 }
             ]
         },
         {
-            "pid": "saori_device_given",
-            "name": "Saori's Warning",
+            "pid": "saori_device_sharedbeat",
+            "name": "Her Urgency",
             "conversationId": "saori_encounter_01",
-            "text": "The market is not what it seems. They will try to use you. Use the device—and use your voice to resist them.",
+            "text": "I have to go.",
             "required_flags": [],
             "choices": [
                 {
-                    "text": "(T) I will. I won't let them control me.",
-                    "target": "saori_departure",
-                    "shared_beat": "Then we will meet again. When the time is right.",
-                    "system_trigger": "",
-                    "data_hook": "saori_warned=true|saori_will_return=true",
+                    "text": "(T) Wait—what is this thing?",
+                    "target": "saori_departing",
+                    "shared_beat": "No time.",
+                    "data_hook": "older_woman_departing=true",
                     "tone_effects": {
                         "entries": [
                             {
                                 "key": "Trust",
-                                "value": 0.02
+                                "value": 0.01
                             }
                         ]
                     },
                     "tone_str": "Trust",
-                    "playerLine": "I will. I won't let them control me."
+                    "playerLine": "Wait—what is this thing?"
                 },
                 {
-                    "text": "(O) Use my voice? What does that mean exactly?",
-                    "target": "saori_departure",
-                    "shared_beat": "Your emotional resonance. The tone of your choices. That is your voice. And it matters.",
-                    "system_trigger": "",
-                    "data_hook": "saori_warned=true|tone_system_explained=true",
+                    "text": "(O) I didn't get your name—",
+                    "target": "saori_departing",
+                    "shared_beat": "Later.",
+                    "data_hook": "older_woman_departing=true",
                     "tone_effects": {
                         "entries": [
                             {
                                 "key": "Observation",
-                                "value": 0.02
+                                "value": 0.01
                             }
                         ]
                     },
                     "tone_str": "Observation",
-                    "playerLine": "Use my voice? What does that mean exactly?"
+                    "playerLine": "I didn't get your name—"
                 },
                 {
-                    "text": "(N) The market is just the beginning, isn't it? There's something larger happening.",
-                    "target": "saori_departure",
-                    "shared_beat": "You see clearly. That will serve you well.",
-                    "system_trigger": "",
-                    "data_hook": "saori_warned=true|player_aware=true",
+                    "text": "(N) You're just… leaving?",
+                    "target": "saori_departing",
+                    "shared_beat": "The wind is shifting.",
+                    "data_hook": "older_woman_departing=true",
                     "tone_effects": {
                         "entries": [
                             {
                                 "key": "NarrativePresence",
-                                "value": 0.03
+                                "value": 0.02
                             }
                         ]
                     },
                     "tone_str": "NarrativePresence",
-                    "playerLine": "The market is just the beginning, isn't it? There's something larger happening."
+                    "playerLine": "You're just… leaving?"
                 },
                 {
-                    "text": "(E) I'm afraid. But I'm more determined now than ever to understand what's happening.",
-                    "target": "saori_departure",
-                    "shared_beat": "Fear is wisdom. Use it. You are not alone in this.",
-                    "system_trigger": "",
-                    "data_hook": "saori_warned=true|saori_support_pledged=true",
+                    "text": "(E) Please—just tell me something.",
+                    "target": "saori_departing",
+                    "shared_beat": "I would, if I could.",
+                    "data_hook": "older_woman_departing=true",
                     "tone_effects": {
                         "entries": [
                             {
                                 "key": "Empathy",
-                                "value": 0.03
+                                "value": 0.02
                             }
                         ]
                     },
                     "npc_resonance": {
                         "entries": [
                             {
-                                "key": "Saori",
+                                "key": "OlderWoman",
                                 "value": 0.04
                             }
                         ]
                     },
                     "tone_str": "Empathy",
-                    "playerLine": "I'm afraid. But I'm more determined now than ever to understand what's happening."
+                    "playerLine": "Please—just tell me something."
                 }
             ]
         },
         {
-            "pid": "saori_departure",
-            "name": "Saori's Farewell",
+            "pid": "saori_departing",
+            "name": "The Wind Cuts Her Voice",
             "conversationId": "saori_encounter_01",
-            "text": "Go to the market. Let fate guide your next steps. But remember what I have told you.",
+            "text": "She starts to say more, but the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
             "required_flags": [],
             "choices": [
                 {
-                    "text": "(T) Wait—what's your name?",
-                    "target": "saori_encounter_01_dismissal",
-                    "shared_beat": "I am Saori. And you will understand, when understanding becomes necessary.",
-                    "system_trigger": "diary_update",
-                    "data_hook": "saori_name_learned=true|append_diary:Met an older woman in the desert. She gave me a strange device and warned me about the market. There is something greater at play here—something she knows but will not fully reveal. I feel like our meeting was no accident.",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Trust",
-                                "value": 0.01
-                            }
-                        ]
-                    },
-                    "tone_str": "Trust",
-                    "playerLine": "Wait—what's your name?"
-                },
-                {
-                    "text": "(O) How will I find you again?",
-                    "target": "saori_encounter_01_dismissal",
-                    "shared_beat": "My name is Saori. When the time is right, we will find each other.",
-                    "system_trigger": "diary_update",
-                    "data_hook": "saori_name_learned=true|append_diary:Met an older woman in the desert. She gave me a device and disappeared into the storm. She spoke cryptically about fate and timing. I have so many unanswered questions. Her name is Saori.",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Observation",
-                                "value": 0.01
-                            }
-                        ]
-                    },
-                    "tone_str": "Observation",
-                    "playerLine": "How will I find you again?"
-                },
-                {
-                    "text": "(N) This meeting feels written in the stars somehow. Like it was always meant to be.",
-                    "target": "saori_encounter_01_dismissal",
-                    "shared_beat": "Perhaps it was. Or perhaps we are writing it together, one choice at a time.",
-                    "system_trigger": "diary_update",
-                    "data_hook": "saori_name_learned=true|append_diary:Saori—that is her name. She vanished into the desert like a phantom, but I know I will see her again. Our destinies are entwined somehow.",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "NarrativePresence",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "tone_str": "NarrativePresence",
-                    "playerLine": "This meeting feels written in the stars somehow. Like it was always meant to be."
-                },
-                {
-                    "text": "(E) You've changed me already. Thank you for believing in me, even though we just met.",
-                    "target": "saori_encounter_01_dismissal",
-                    "shared_beat": "We are more connected than you know. Trust yourself.",
-                    "system_trigger": "diary_update",
-                    "data_hook": "saori_name_learned=true|append_diary:Saori. She trusted me. She believed in me. I don't know what the future holds, but I know I will honor that trust. We will meet again.",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Empathy",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "npc_resonance": {
-                        "entries": [
-                            {
-                                "key": "Saori",
-                                "value": 0.06
-                            }
-                        ]
-                    },
-                    "tone_str": "Empathy",
-                    "playerLine": "You've changed me already. Thank you for believing in me, even though we just met."
+                    "text": "Close the dialogue and continue toward the market.",
+                    "target": "DIALOGUE_END",
+                    "system_trigger": "npc_disappear|diary_update",
+                    "data_hook": "append_diary:Met an older woman in the desert. She gave me a strange device and vanished before I could ask anything real. I don't know her name. I don't know why she helped me. But I can't shake the feeling she'll matter later.",
+                    "tone_str": "",
+                    "playerLine": "Close the dialogue and continue toward the market."
                 }
             ]
         },
         {
             "pid": "saori_encounter_01_dismissal",
-            "name": "Saori Already Spoke",
-            "text": "The device warms against your palm. You know there is nothing more to say.",
-            "conversationId": "saori_encounter_01_dismissal",
+            "name": "Older Woman - Already Spoken",
+            "conversationId": "saori_encounter_01",
+            "text": "The device warms against your palm. There is nothing more she can—or will—tell you.",
             "required_flags": [],
             "choices": [
                 {
-                    "text": "Close the dialogue and head to the market.",
+                    "text": "Close the dialogue and continue.",
                     "target": "DIALOGUE_END",
-                    "tone_str": "Trust",
-                    "playerLine": "Close the dialogue and head to the market.",
-                    "tone_effects": {
-                        "entries": []
-                    },
-                    "npc_resonance": {
-                        "entries": []
-                    }
+                    "tone_str": "",
+                    "playerLine": "Close the dialogue and continue."
                 }
             ]
         }

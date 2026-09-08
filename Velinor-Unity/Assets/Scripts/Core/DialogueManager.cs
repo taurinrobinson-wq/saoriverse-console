@@ -125,6 +125,7 @@ public class DialogueManager : MonoBehaviour
 
     private Dictionary<string, StoryPassage> passages = new Dictionary<string, StoryPassage>();
     private string activeNpcId;
+    private string currentConversationId;  // Tracks which conversation is currently active
     private bool isDialogueActive = false;
     private string activeStoryPath = "velinor/stories/sample_story";
 
@@ -238,6 +239,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         activeNpcId = npcId;
+
+        // Store the conversation ID for later completion tracking
+        var finalPassage = passages[startPid];
+        currentConversationId = finalPassage.conversationId;
+        Debug.Log($"[DialogueManager] Starting dialogue - npcId: {npcId}, conversationId: {currentConversationId}, startPid: {startPid}");
+
         isDialogueActive = true;
 
         AutoBindUI();
@@ -622,8 +629,17 @@ public class DialogueManager : MonoBehaviour
     private void ProcessSystemTrigger(string trigger)
     {
         if (string.IsNullOrEmpty(trigger)) return;
-        var ui = FindAnyObjectByType<DialogueUIController>();
-        if (ui != null) ui.TriggerSystemEvent(trigger);
+
+        // Support multiple triggers separated by pipe: "npc_disappear|diary_update"
+        string[] triggers = trigger.Split('|');
+        foreach (var singleTrigger in triggers)
+        {
+            string trimmedTrigger = singleTrigger.Trim();
+            if (string.IsNullOrEmpty(trimmedTrigger)) continue;
+
+            var ui = FindAnyObjectByType<DialogueUIController>();
+            if (ui != null) ui.TriggerSystemEvent(trimmedTrigger);
+        }
     }
 
     public static ToneType ParseTone(string s)
@@ -682,6 +698,14 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        // Mark conversation as completed if we have a valid conversation ID
+        if (!string.IsNullOrEmpty(currentConversationId))
+        {
+            string completionFlag = $"{currentConversationId}_completed";
+            GameFlags.Set(completionFlag, true);
+            Debug.Log($"[DialogueManager] Setting completion flag: {completionFlag}");
+        }
+
         isDialogueActive = false;
         // Don't disable dialogueCanvas - let DialogueUIController manage UI_Canvas
 

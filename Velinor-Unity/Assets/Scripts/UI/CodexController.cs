@@ -299,10 +299,15 @@ public class CodexController : MonoBehaviour
     {
         if (codexPanel == null) return;
 
-        if (glyphNameText != null)
+        if (glyphNameText != null && selectedGlyph == null)
         {
             int totalPages = Mathf.CeilToInt((float)allSlots.Count / SlotsPerPage);
             glyphNameText.text = $"Codex - Page {_currentCodexPage + 1} of {totalPages}";
+            Debug.Log("[Codex] UpdateCodexUI: glyphNameText updated with page number (selectedGlyph was null)");
+        }
+        else if (selectedGlyph != null && glyphNameText != null)
+        {
+            Debug.Log("[Codex] UpdateCodexUI: selectedGlyph is NOT null, skipping page text update");
         }
 
         // Look for pagination grids: GlyphGrid_Pg1, GlyphGrid_Pg2, etc.
@@ -487,6 +492,14 @@ public class CodexController : MonoBehaviour
         if (isPuzzleMode)
         {
             Debug.Log($"[Codex] Puzzle mode - delegating to TriglyphPuzzleController");
+
+            // Still update the glyph name display so player knows which glyph they're selecting
+            if (glyphNameText != null)
+            {
+                Debug.Log($"[Codex] Puzzle mode: Setting glyphNameText to '{glyph.glyphData.glyphName}'");
+                glyphNameText.text = glyph.glyphData.glyphName;
+            }
+
             NotifyPuzzleController(glyph);
             return;
         }
@@ -555,7 +568,13 @@ public class CodexController : MonoBehaviour
         // Update the glyph name display
         if (glyphNameText != null)
         {
+            Debug.Log($"[Codex] SelectGlyph: Setting glyphNameText to '{glyph.glyphData.glyphName}' (selectedGlyph={selectedGlyph})");
             glyphNameText.text = glyph.glyphData.glyphName;
+            Debug.Log($"[Codex] SelectGlyph: glyphNameText.text is now: '{glyphNameText.text}'");
+        }
+        else
+        {
+            Debug.LogError("[Codex] SelectGlyph: glyphNameText is NULL! Cannot display glyph name");
         }
 
         // Notify puzzle controller for puzzle selection tracking

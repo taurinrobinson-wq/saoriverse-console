@@ -285,10 +285,83 @@ public class DialogueUIController : MonoBehaviour
             case "encounter_complete":
                 Debug.Log("[UI] EVENT: Encounter complete");
                 break;
+            case "npc_disappear":
+                Debug.Log("[UI] EVENT: NPC fading out");
+                FadeOutNPC();
+                break;
             default:
                 Debug.Log($"[UI] EVENT: {eventName}");
                 break;
         }
+    }
+
+    /// <summary>
+    /// Fade out the NPC image/button over time (for narrative departures)
+    /// </summary>
+    private void FadeOutNPC()
+    {
+        // Find the NPC button (usually in dialogue UI container)
+        // Common paths: Canvas/UI_Canvas/DialoguePanel/NPCButton or similar
+        Transform dialoguePanelT = _cachedCanvas?.transform.Find("DialoguePanel");
+        if (dialoguePanelT == null)
+        {
+            Debug.LogWarning("[UI] DialoguePanel not found for NPC fade-out");
+            return;
+        }
+
+        // Look for NPC button/image - try common names
+        Image npcImage = null;
+        Transform npcButtonT = dialoguePanelT.Find("NPCButton");
+        if (npcButtonT != null)
+        {
+            npcImage = npcButtonT.GetComponent<Image>();
+        }
+        else
+        {
+            // Try finding any child Image with "NPC" in name
+            foreach (Transform child in dialoguePanelT)
+            {
+                if (child.name.Contains("NPC") && child.GetComponent<Image>() != null)
+                {
+                    npcImage = child.GetComponent<Image>();
+                    break;
+                }
+            }
+        }
+
+        if (npcImage != null)
+        {
+            StartCoroutine(FadeOutImageCoroutine(npcImage, 1.5f));
+        }
+        else
+        {
+            Debug.LogWarning("[UI] NPC image/button not found for fade-out effect");
+        }
+    }
+
+    /// <summary>
+    /// Coroutine to fade out an image over specified duration
+    /// </summary>
+    private System.Collections.IEnumerator FadeOutImageCoroutine(Image image, float duration)
+    {
+        float elapsed = 0f;
+        Color startColor = image.color;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            Color newColor = startColor;
+            newColor.a = alpha;
+            image.color = newColor;
+            yield return null;
+        }
+
+        // Ensure alpha is exactly 0 at end
+        Color finalColor = startColor;
+        finalColor.a = 0f;
+        image.color = finalColor;
+        Debug.Log("[UI] NPC fade-out complete");
     }
 }
 

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f725f558a3a71ef4c9363e796a435dc1, type: 3}
-  m_Name: GlyphOfSorrow
+  m_Name: GlyphOfEchoedBreath
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphData
-  glyphName: Sorrow
-  icon: {fileID: 21300000, guid: a7934ebf03e3e2740b9dee3e1fe2d975, type: 3}
-  description: 'A symbol of grief that cannot yet be spoken. '
+  glyphName: Echoed Breath
+  icon: {fileID: 21300000, guid: c890285f94223ff428e9e00b25f9a494, type: 3}
+  description: A symbol of living inheritance carried through breath itself.
