@@ -18,6 +18,7 @@ namespace Velinor.Core
         public GlyphData glyphData { get; private set; }
         public bool isCollected { get; set; }
         public Image iconImage => _iconImage;
+        public GameObject glowHighlightChild => glowHighlight;
 
         private void Start()
         {
@@ -25,6 +26,17 @@ namespace Velinor.Core
             {
                 button.onClick.AddListener(OnButtonClicked);
             }
+        }
+
+        private void OnEnable()
+        {
+            Debug.Log($"[GlyphUI] {gameObject.name} OnEnable - now visible");
+        }
+
+        private void OnDisable()
+        {
+            Debug.LogWarning($"[GlyphUI] {gameObject.name} OnDisable - BEING HIDDEN!");
+            Debug.LogWarning($"[GlyphUI] Stack trace: {System.Environment.StackTrace}");
         }
 
         /// <summary>
@@ -55,6 +67,11 @@ namespace Velinor.Core
             if (glowHighlight != null)
             {
                 glowHighlight.SetActive(false);
+                Debug.Log($"[GlyphUI] {data.glyphName} - glowHighlight FOUND and deactivated");
+            }
+            else
+            {
+                Debug.LogError($"[GlyphUI] {data.glyphName} - glowHighlight IS NULL! Not assigned in Inspector!");
             }
 
             isCollected = false;
@@ -70,7 +87,15 @@ namespace Velinor.Core
             if (glowHighlight != null)
             {
                 glowHighlight.SetActive(true);
-                Debug.Log($"[GlyphUI] {glyphData.glyphName} selected");
+
+                // Ensure the Image component is enabled
+                Image highlightImage = glowHighlight.GetComponent<Image>();
+                if (highlightImage != null)
+                {
+                    highlightImage.enabled = true;
+                    highlightImage.color = new Color(1f, 1f, 0f, 0.5f);
+                    Debug.Log($"[GlyphUI] {glyphData.glyphName} selected - highlight activated");
+                }
             }
         }
 
@@ -82,7 +107,18 @@ namespace Velinor.Core
             if (glowHighlight != null)
             {
                 glowHighlight.SetActive(false);
-                Debug.Log($"[GlyphUI] {glyphData.glyphName} deselected");
+
+                // Also disable the Image component to be thorough
+                Image highlightImage = glowHighlight.GetComponent<Image>();
+                if (highlightImage != null)
+                {
+                    highlightImage.enabled = false;
+                    Debug.Log($"[GlyphUI] {glyphData.glyphName} deselected - glowHighlight + Image DEACTIVATED");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[GlyphUI] {glyphData.glyphName} deselected but glowHighlight is NULL!");
             }
         }
 

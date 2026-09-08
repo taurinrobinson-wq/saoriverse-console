@@ -17,6 +17,12 @@ public class GlyphObject : Interactable
         collider.radius = interactionRange;
     }
 
+    void Update()
+    {
+        // Spin the glyph object slowly
+        transform.Rotate(0, 45f * Time.deltaTime, 0);  // 45 degrees per second on Y axis
+    }
+
     override protected void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))

@@ -129,4 +129,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.SaoriNPC
   npcId: Saori
   startPassageId: saori_beat_1
-  interactionRadius: 3
+  interactionRadius: 1.5

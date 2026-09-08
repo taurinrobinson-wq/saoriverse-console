@@ -26,6 +26,14 @@ public class CodexController : MonoBehaviour
     public Transform viewport;
     public Sprite codexBackgroundSprite;
 
+    [Header("Puzzle Mode")]
+    [SerializeField] private GameObject triglyphPanelUI;  // Reference to puzzle panel to detect if puzzle mode is active
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip selectGlyphSound;
+    [SerializeField] private AudioClip deselectGlyphSound;
+    private AudioSource audioSource;
+
     [Header("Navigation")]
     public TextMeshProUGUI glyphNameText;
     public Button nextPageBtn;
@@ -56,6 +64,17 @@ public class CodexController : MonoBehaviour
     {
         _toggleCodexAction = new InputAction("ToggleCodex", binding: "<Keyboard>/c");
         _toggleCodexAction.Enable();
+
+        // Get or create AudioSource for sound effects
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.playOnAwake = false;
+            }
+        }
     }
 
     private void OnDisable()
@@ -460,11 +479,44 @@ public class CodexController : MonoBehaviour
     {
         if (glyph == null) return;
 
+        // Check if puzzle mode is active (TriglyphPanelUI is open)
+        bool isPuzzleMode = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
+
+        // In puzzle mode, ONLY notify puzzle controller and skip ALL slot management
+        // (TriglyphPuzzleController handles multi-selection, GlyphUI handles visual highlighting)
+        if (isPuzzleMode)
+        {
+            Debug.Log($"[Codex] Puzzle mode - delegating to TriglyphPuzzleController");
+            NotifyPuzzleController(glyph);
+            return;
+        }
+
+        // CODEX VIEWING MODE: Single selection for glyph info display
+        // Highlight slot for visual feedback
+        foreach (var slot in allSlots)
+        {
+            if (slot != null && slot.glyphUI == glyph)
+            {
+                if (selectedSlot != null && selectedSlot != slot)
+                {
+                    selectedSlot.Unhighlight();
+                }
+                selectedSlot = slot;
+                slot.Highlight();
+                Debug.Log($"[Codex] Highlighting slot: {slot.gameObject.name}");
+                break;
+            }
+        }
+
         // Check if clicking the same glyph again (toggle behavior)
         if (selectedGlyph == glyph)
         {
             Debug.Log($"[Codex] Toggling off glyph: {glyph.glyphData.glyphName}");
             selectedGlyph.Deselect();
+
+            // Play deselect sound
+            PlayDeselectSound();
+
             selectedGlyph = null;
 
             if (selectedSlot != null)
@@ -488,29 +540,17 @@ public class CodexController : MonoBehaviour
         {
             Debug.Log($"[Codex] Deselecting previous glyph: {selectedGlyph.glyphData.glyphName}");
             selectedGlyph.Deselect();
-        }
 
-        if (selectedSlot != null)
-        {
-            Debug.Log($"[Codex] Unhighlighting previous slot: {selectedSlot.gameObject.name}");
-            selectedSlot.Unhighlight();
+            // Play deselect sound
+            PlayDeselectSound();
         }
 
         // Select new glyph
         selectedGlyph = glyph;
         selectedGlyph.Select();
 
-        // Find and highlight the slot containing this glyph
-        foreach (var slot in allSlots)
-        {
-            if (slot != null && slot.glyphUI == glyph)
-            {
-                selectedSlot = slot;
-                slot.Highlight();
-                Debug.Log($"[Codex] Highlighting slot: {slot.gameObject.name}");
-                break;
-            }
-        }
+        // Play select sound
+        PlaySelectSound();
 
         // Update the glyph name display
         if (glyphNameText != null)
@@ -522,6 +562,38 @@ public class CodexController : MonoBehaviour
         NotifyPuzzleController(glyph);
 
         Debug.Log($"[Codex] Glyph selected: {glyph.glyphData.glyphName}");
+    }
+
+    /// <summary>
+    /// Play sound when glyph is selected
+    /// </summary>
+    private void PlaySelectSound()
+    {
+        if (audioSource != null && selectGlyphSound != null)
+        {
+            audioSource.PlayOneShot(selectGlyphSound);
+            Debug.Log("[Codex] Playing select glyph sound");
+        }
+        else if (selectGlyphSound == null)
+        {
+            Debug.LogWarning("[Codex] Select glyph sound not assigned in Inspector!");
+        }
+    }
+
+    /// <summary>
+    /// Play sound when glyph is deselected
+    /// </summary>
+    private void PlayDeselectSound()
+    {
+        if (audioSource != null && deselectGlyphSound != null)
+        {
+            audioSource.PlayOneShot(deselectGlyphSound);
+            Debug.Log("[Codex] Playing deselect glyph sound");
+        }
+        else if (deselectGlyphSound == null)
+        {
+            Debug.LogWarning("[Codex] Deselect glyph sound not assigned in Inspector!");
+        }
     }
 
     /// <summary>

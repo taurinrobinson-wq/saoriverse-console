@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
       propertyPath: m_Name
-      value: FreeTestCharacterAsunaMasterPrefab 1
+      value: FreeTestCharacterAsunaMasterPrefab(RPG)
       objectReference: {fileID: 0}
     - target: {fileID: 3300290974145808757, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
       propertyPath: 'm_Bones.Array.data[8]'
@@ -187,6 +187,10 @@ PrefabInstance:
     - target: {fileID: 5088985317888283100, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
       propertyPath: 'm_Bones.Array.data[303]'
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
       propertyPath: m_Controller
@@ -286,20 +290,25 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8964817264103805430}
+      addedObject: {fileID: 6488045703600189512}
   m_SourcePrefab: {fileID: 100100000, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
---- !u!114 &8964817264103805430
+--- !u!1 &6255253104708151373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e1731dd636f6874eb5a9435655f8273, type: 3}
+  m_PrefabInstance: {fileID: 6489254265398547740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6488045703600189512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 6489254265398547740}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6255253104708151373}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e3b872eaa3631f41a9d5c71636fc6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.SaoriNPC
-  npcId: Nima
-  startPassageId: saori_beat_1
-  interactionRadius: 3
+  npcId: Saori
+  startPassageId: market_entry
+  interactionRadius: 0.8

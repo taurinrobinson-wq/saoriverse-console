@@ -1,0 +1,12 @@
+{
+    "asset": "73420e28248f18d49a8b33b553c06bad",
+    "fileName": "01a05af4-40b2-7ef2-b8ea-03bcbeb44da2_Preview.jpg",
+    "prompt": "",
+    "negativePrompt": "",
+    "model": "scenario-texture-upscale-v3",
+    "modelName": "",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Upscale"
+}

@@ -65,6 +65,29 @@ namespace Velinor.Core
             glyphUI = glyph;
             isFilled = true;
 
+            // Do NOT activate the entire GlyphUI - the slot already displays the icon via slotImage
+            // Instead, reparent only the Highlight child so it appears over this slot
+            Transform highlight = glyph.glowHighlightChild?.transform;
+            if (highlight != null)
+            {
+                highlight.SetParent(transform, false);
+
+                // Make highlight fill the entire slot by stretching it
+                RectTransform highlightRect = highlight.GetComponent<RectTransform>();
+                if (highlightRect != null)
+                {
+                    // Set to stretch/fill mode with small padding
+                    highlightRect.anchorMin = Vector2.zero;
+                    highlightRect.anchorMax = Vector2.one;
+                    highlightRect.offsetMin = new Vector2(3, 3);  // 3px padding
+                    highlightRect.offsetMax = new Vector2(-3, -3);
+                    highlightRect.sizeDelta = Vector2.zero;
+                    highlightRect.localPosition = Vector3.zero;
+                }
+
+                Debug.Log($"[GlyphSlot] Reparented and resized highlight to fill slot");
+            }
+
             if (slotImage != null && glyph.iconImage != null)
             {
                 slotImage.sprite = glyph.iconImage.sprite;

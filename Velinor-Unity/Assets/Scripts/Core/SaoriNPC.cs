@@ -8,7 +8,7 @@ namespace Velinor.Core
     {
         [SerializeField] private string npcId = "Saori";
         [SerializeField] private string startPassageId = "market_entry";  // Changed from saori_beat_1 to match new story flow
-        [SerializeField] private float interactionRadius = 3.0f; // Detection radius for proximity prompt
+        [SerializeField] private float interactionRadius = 0.8f; // Detection radius for proximity prompt
 
         private bool playerInRange = false;
         private GameObject player;
@@ -16,10 +16,8 @@ namespace Velinor.Core
 
         private void Start()
         {
-            // Position SaoriNPC near the player spawn point for interaction to work
-            // Player spawns at (0, -5.4, 0), place NPC very close for reliable detection
-            transform.position = new Vector3(0.5f, -4.5f, 0f);
-            Debug.Log($"[SaoriNPC] Repositioned to {transform.position} for player interaction");
+            // Scale down Asuna to match player size
+            transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
 
             // Clean up colliders: keep only CapsuleCollider, remove SphereCollider
             SphereCollider sphere = GetComponent<SphereCollider>();
@@ -55,7 +53,6 @@ namespace Velinor.Core
             if (Camera.main != null)
             {
                 transform.LookAt(Camera.main.transform);
-                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + 180, 0);
             }
 
             // Check if player is in range (for proximity indication)

@@ -1,0 +1,12 @@
+{
+    "asset": "75d4b9a57d531cd498251ffd58dc32ca",
+    "fileName": "01a05aec-b241-7cdd-8818-b354ad2e73ef_Preview.png",
+    "prompt": "a glowing orb of light",
+    "negativePrompt": "",
+    "model": "gemini-3.1-flash-texture",
+    "modelName": "Gemini 3.1 Nano Banana 2",
+    "customSeed": 1488580088,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation"
+}

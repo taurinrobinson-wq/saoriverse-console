@@ -32,6 +32,8 @@ public class TriglyphPuzzleController : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip doorOpenSoundEffect;
+    [SerializeField] private AudioClip selectGlyphSound;
+    [SerializeField] private AudioClip deselectGlyphSound;
     [SerializeField] private AudioSource audioSource;
 
     [Header("Victory Message")]
@@ -53,6 +55,17 @@ public class TriglyphPuzzleController : MonoBehaviour
         _confirmPuzzleAction = new InputAction("ConfirmPuzzle", binding: "<Keyboard>/e");
         _confirmPuzzleAction.Enable();
         _confirmPuzzleAction.performed += OnConfirmPuzzle;
+
+        // Get or create AudioSource for door sound
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.playOnAwake = false;
+            }
+        }
     }
 
     private void OnDisable()
@@ -111,6 +124,7 @@ public class TriglyphPuzzleController : MonoBehaviour
         {
             selectedGlyphs.Remove(glyphUI);
             glyphUI.Deselect();
+            PlayDeselectSound();
             Debug.Log($"[Triglyph Puzzle] Deselected {glyphUI.glyphData.glyphName}");
         }
         else
@@ -120,6 +134,7 @@ public class TriglyphPuzzleController : MonoBehaviour
             {
                 selectedGlyphs.Add(glyphUI);
                 glyphUI.Select();
+                PlaySelectSound();
                 Debug.Log($"[Triglyph Puzzle] Selected {glyphUI.glyphData.glyphName} ({selectedGlyphs.Count}/{RequiredGlyphCount})");
             }
             else
@@ -147,6 +162,55 @@ public class TriglyphPuzzleController : MonoBehaviour
         else if (selectedGlyphs.Count > 0)
         {
             notificationPanel.ShowNotification($"Select glyphs: {selectedGlyphs.Count}/{RequiredGlyphCount}", duration: 3f);
+        }
+    }
+
+    /// <summary>
+    /// Reset the puzzle selection state when triglyph panel is opened.
+    /// Clears any previously selected glyphs and deselects their UI.
+    /// </summary>
+    public void ResetSelection()
+    {
+        for (int i = selectedGlyphs.Count - 1; i >= 0; i--)
+        {
+            if (selectedGlyphs[i] != null)
+            {
+                selectedGlyphs[i].Deselect();
+            }
+        }
+        selectedGlyphs.Clear();
+        Debug.Log("[Triglyph Puzzle] Selection reset for new puzzle session");
+    }
+
+    /// <summary>
+    /// Play sound when glyph is selected
+    /// </summary>
+    private void PlaySelectSound()
+    {
+        if (audioSource != null && selectGlyphSound != null)
+        {
+            audioSource.PlayOneShot(selectGlyphSound);
+            Debug.Log("[Triglyph Puzzle] Playing select glyph sound");
+        }
+        else if (selectGlyphSound == null)
+        {
+            Debug.LogWarning("[Triglyph Puzzle] Select glyph sound not assigned in Inspector!");
+        }
+    }
+
+    /// <summary>
+    /// Play sound when glyph is deselected
+    /// </summary>
+    private void PlayDeselectSound()
+    {
+        if (audioSource != null && deselectGlyphSound != null)
+        {
+            audioSource.PlayOneShot(deselectGlyphSound);
+            Debug.Log("[Triglyph Puzzle] Playing deselect glyph sound");
+        }
+        else if (deselectGlyphSound == null)
+        {
+            Debug.LogWarning("[Triglyph Puzzle] Deselect glyph sound not assigned in Inspector!");
         }
     }
 
@@ -227,13 +291,6 @@ public class TriglyphPuzzleController : MonoBehaviour
             Debug.LogWarning("[Triglyph Puzzle] ⚠️ triglyphPanel reference NOT SET in Inspector!");
         }
 
-        // IMMEDIATELY DISABLE CODEX GAMEOBJECT to prevent CodexController from re-enabling it
-        if (codexPanel != null)
-        {
-            codexPanel.SetActive(false);
-            Debug.Log("[Triglyph Puzzle] Codex panel GameObject deactivated to prevent re-enabling");
-        }
-
         // Play door opening sound effect
         if (doorOpenSoundEffect != null && audioSource != null)
         {
@@ -257,18 +314,10 @@ public class TriglyphPuzzleController : MonoBehaviour
         // Animate door opening (6 seconds linear movement - now clearly visible)
         yield return StartCoroutine(AnimateDoor());
 
-        // FADE OUT THE CODEX PANEL smoothly (not instant)
-        yield return StartCoroutine(FadeOutPanel(codexPanel, panelFadeDuration));
-
-        Debug.Log("[Triglyph Puzzle] Panels hidden - NOW unlocking CodexController");
-
-        // UNLOCK CodexController AFTER fade completes (not before!)
-        // This prevents CodexController from re-enabling the Codex during the fade-out
-        sequenceInProgress = false;
-
-        // Activate scene transition collider
-        Debug.Log("[Triglyph Puzzle] Attempting to activate scene transition collider...");
-        Debug.Log($"[Triglyph Puzzle] sceneTransitionCollider reference status: {(sceneTransitionCollider != null ? "NOT NULL" : "NULL")}");
+        // ACTIVATE COLLIDERS BEFORE fading canvas (so coroutine doesn't stop if TriglyphPuzzleController is disabled)
+        Debug.Log("[Triglyph Puzzle] ===== ATTEMPTING COLLIDER ACTIVATION =====");
+        Debug.Log($"[Triglyph Puzzle] sceneTransitionCollider reference status: {(sceneTransitionCollider != null ? "ASSIGNED" : "NULL - will auto-find")}");
+        Debug.Log($"[Triglyph Puzzle] doorCollider reference status: {(doorCollider != null ? "ASSIGNED" : "NULL")}");
 
         if (sceneTransitionCollider == null)
         {
@@ -318,8 +367,9 @@ public class TriglyphPuzzleController : MonoBehaviour
 
         if (sceneTransitionCollider != null)
         {
-            Debug.Log($"[Triglyph Puzzle] Enabling collider. Current state: {sceneTransitionCollider.enabled}");
+            Debug.Log($"[Triglyph Puzzle] Scene collider BEFORE: enabled={sceneTransitionCollider.enabled}, isTrigger={sceneTransitionCollider.isTrigger}, name={sceneTransitionCollider.gameObject.name}");
             sceneTransitionCollider.enabled = true;
+            Debug.Log($"[Triglyph Puzzle] Scene collider AFTER: enabled={sceneTransitionCollider.enabled}");
             Debug.Log($"[Triglyph Puzzle] ✅ Scene transition collider ACTIVATED. New state: {sceneTransitionCollider.enabled}");
         }
         else
@@ -330,12 +380,34 @@ public class TriglyphPuzzleController : MonoBehaviour
         // Deactivate DoorCollider to allow player to pass through
         if (doorCollider != null)
         {
+            Debug.Log($"[Triglyph Puzzle] Door collider BEFORE: enabled={doorCollider.enabled}, isTrigger={doorCollider.isTrigger}, name={doorCollider.gameObject.name}");
             doorCollider.enabled = false;
+            Debug.Log($"[Triglyph Puzzle] Door collider AFTER: enabled={doorCollider.enabled}");
             Debug.Log($"[Triglyph Puzzle] ✅ Door collider DEACTIVATED. Player can now pass through.");
         }
         else
         {
-            Debug.LogWarning("[Triglyph Puzzle] ⚠️ doorCollider reference NOT SET in Inspector. Player may not be able to proceed.");
+            Debug.LogWarning("[Triglyph Puzzle] ⚠️ doorCollider NOT assigned in Inspector! Door will remain blocked.");
+        }
+
+        // NOW FADE OUT THE CODEX PANEL smoothly (after colliders are activated)
+        Debug.Log("[Triglyph Puzzle] About to start FadeOutPanel coroutine...");
+        yield return StartCoroutine(FadeOutPanel(codexPanel, panelFadeDuration));
+        Debug.Log("[Triglyph Puzzle] *** FADEOUTPANEL COMPLETED - RESUMING MAIN COROUTINE ***");
+
+        try
+        {
+            Debug.Log("[Triglyph Puzzle] Panels hidden - NOW unlocking CodexController");
+
+            // UNLOCK CodexController AFTER fade completes (not before!)
+            // This prevents CodexController from re-enabling the Codex during the fade-out
+            sequenceInProgress = false;
+            Debug.Log("[Triglyph Puzzle] sequenceInProgress set to FALSE");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[Triglyph Puzzle] Exception after FadeOutPanel: {ex.Message}\n{ex.StackTrace}");
+            throw;
         }
 
         puzzleCompleted = true;

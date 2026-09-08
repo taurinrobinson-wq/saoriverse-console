@@ -125,6 +125,13 @@ public class PanelInteraction : MonoBehaviour
             triglyphPanelUI.SetActive(true);
             Debug.Log($"[PanelInteraction] Activated triglyphPanelUI, now active: {triglyphPanelUI.activeSelf}");
 
+            // Reset the puzzle selection state for this new session
+            TriglyphPuzzleController puzzleController = FindAnyObjectByType<TriglyphPuzzleController>();
+            if (puzzleController != null)
+            {
+                puzzleController.ResetSelection();
+            }
+
             // Show cursor since player needs to interact with the puzzle UI
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
