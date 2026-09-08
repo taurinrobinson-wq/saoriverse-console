@@ -363,7 +363,17 @@ public class DialogueManager : MonoBehaviour
     private void DisplayPassage(string pid, bool isFirstPassage = false)
     {
         if (!passages.TryGetValue(pid, out var p)) { EndDialogue(); return; }
-        foreach (var flag in p.required_flags) { if (!GameFlags.Get(flag)) { EndDialogue(); return; } }
+
+        // Check required flags with support for comparison syntax: "flag_name==true", "flag_name==false"
+        foreach (var flagExpr in p.required_flags)
+        {
+            if (!CheckFlagExpression(flagExpr))
+            {
+                Debug.LogWarning($"[DialogueManager] Required flag check failed: {flagExpr}. Ending dialogue.");
+                EndDialogue();
+                return;
+            }
+        }
 
         // Update DialogueUIController - always clear and show fresh passage
         var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
@@ -398,6 +408,38 @@ public class DialogueManager : MonoBehaviour
 
         ClearButtons();
         DisplayChoicesForPassage(pid);
+    }
+
+    /// <summary>
+    /// Check if a flag expression is satisfied.
+    /// Supports: "flag_name" (flag exists and is true), "flag_name==true", "flag_name==false"
+    /// </summary>
+    private bool CheckFlagExpression(string expr)
+    {
+        if (string.IsNullOrEmpty(expr)) return true;  // Empty requirement = pass
+
+        // Handle comparison syntax: "flag_name==value"
+        if (expr.Contains("=="))
+        {
+            string[] parts = expr.Split(new string[] { "==" }, System.StringSplitOptions.None);
+            if (parts.Length == 2)
+            {
+                string key = parts[0].Trim();
+                string expectedValue = parts[1].Trim().ToLower();
+
+                if (expectedValue == "true")
+                    return GameFlags.Get(key, false);
+                else if (expectedValue == "false")
+                    return !GameFlags.Get(key, false);
+            }
+        }
+        else
+        {
+            // Simple flag check: "flag_name" means flag must be true
+            return GameFlags.Get(expr, false);
+        }
+
+        return false;  // Invalid expression = fail
     }
 
     private void DisplayChoicesForPassage(string pid)

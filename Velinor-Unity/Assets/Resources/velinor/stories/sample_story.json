@@ -7,9 +7,7 @@
             "name": "Older Woman in the Desert",
             "conversationId": "saori_encounter_01",
             "text": "You are on your way to the market?",
-            "required_flags": [
-                "press_start==true"
-            ],
+            "required_flags": [],
             "choices": [
                 {
                     "text": "(T) Yes. I'm looking for work, food, and a place to stay.",

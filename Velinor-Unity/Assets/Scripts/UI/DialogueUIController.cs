@@ -296,56 +296,61 @@ public class DialogueUIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Fade out the NPC image/button over time (for narrative departures)
+    /// Fade out the NPC character sprite/renderer over time (for narrative departures)
+    /// Searches the scene for the NPC's SpriteRenderer component and fades it
     /// </summary>
     private void FadeOutNPC()
     {
-        // Find the NPC button (usually in dialogue UI container)
-        // Common paths: Canvas/UI_Canvas/DialoguePanel/NPCButton or similar
-        Transform dialoguePanelT = _cachedCanvas?.transform.Find("DialoguePanel");
-        if (dialoguePanelT == null)
+        Debug.Log("[UI] FadeOutNPC() called - searching for NPC sprite/renderer to fade out");
+
+        SpriteRenderer spriteRenderer = null;
+
+        // Strategy 1: Search scene for any SpriteRenderer with "Asuna" in its parent name
+        var allSpriteRenderers = FindObjectsByType<SpriteRenderer>();
+        foreach (var sr in allSpriteRenderers)
         {
-            Debug.LogWarning("[UI] DialoguePanel not found for NPC fade-out");
-            return;
+            if (sr.gameObject.name.Contains("Asuna") || sr.gameObject.name.Contains("Character"))
+            {
+                spriteRenderer = sr;
+                Debug.Log($"[UI] Found NPC sprite via name matching: {sr.gameObject.name}");
+                break;
+            }
         }
 
-        // Look for NPC button/image - try common names
-        Image npcImage = null;
-        Transform npcButtonT = dialoguePanelT.Find("NPCButton");
-        if (npcButtonT != null)
+        // Strategy 2: If not found, try getting the first visible SpriteRenderer (likely the NPC)
+        if (spriteRenderer == null && allSpriteRenderers.Length > 0)
         {
-            npcImage = npcButtonT.GetComponent<Image>();
-        }
-        else
-        {
-            // Try finding any child Image with "NPC" in name
-            foreach (Transform child in dialoguePanelT)
+            // Skip UI sprites - only look for world-space sprites
+            foreach (var sr in allSpriteRenderers)
             {
-                if (child.name.Contains("NPC") && child.GetComponent<Image>() != null)
+                // Check if it's a world-space renderer (not on a Canvas)
+                if (sr.GetComponentInParent<Canvas>() == null && sr.gameObject.layer != LayerMask.NameToLayer("UI"))
                 {
-                    npcImage = child.GetComponent<Image>();
+                    spriteRenderer = sr;
+                    Debug.Log($"[UI] Found NPC sprite via world-space search: {sr.gameObject.name}");
                     break;
                 }
             }
         }
 
-        if (npcImage != null)
+        if (spriteRenderer != null)
         {
-            StartCoroutine(FadeOutImageCoroutine(npcImage, 1.5f));
+            Debug.Log($"[UI] Starting fade-out coroutine for {spriteRenderer.gameObject.name}");
+            StartCoroutine(FadeOutSpriteCoroutine(spriteRenderer, 1.5f));
         }
         else
         {
-            Debug.LogWarning("[UI] NPC image/button not found for fade-out effect");
+            Debug.LogWarning("[UI] NPC sprite/renderer not found. Ensure the NPC has a SpriteRenderer component.");
         }
     }
 
     /// <summary>
-    /// Coroutine to fade out an image over specified duration
+    /// Coroutine to fade out a SpriteRenderer's alpha over specified duration
     /// </summary>
-    private System.Collections.IEnumerator FadeOutImageCoroutine(Image image, float duration)
+    private System.Collections.IEnumerator FadeOutSpriteCoroutine(SpriteRenderer spriteRenderer, float duration)
     {
         float elapsed = 0f;
-        Color startColor = image.color;
+        Color startColor = spriteRenderer.color;
 
         while (elapsed < duration)
         {
@@ -353,15 +358,15 @@ public class DialogueUIController : MonoBehaviour
             float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
             Color newColor = startColor;
             newColor.a = alpha;
-            image.color = newColor;
+            spriteRenderer.color = newColor;
             yield return null;
         }
 
         // Ensure alpha is exactly 0 at end
         Color finalColor = startColor;
         finalColor.a = 0f;
-        image.color = finalColor;
-        Debug.Log("[UI] NPC fade-out complete");
+        spriteRenderer.color = finalColor;
+        Debug.Log("[UI] NPC sprite fade-out complete");
     }
 }
 
