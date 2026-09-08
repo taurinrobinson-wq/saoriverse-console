@@ -13,16 +13,18 @@ using Velinor.Core;
 /// When player presses C or leaves trigger:
 /// 1. Closes all panels
 /// 2. Re-enables player movement
+/// 
+/// All prompts show via NotificationPanelController only (no separate interact prompt UI).
 /// </summary>
 public class PanelInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject triglyphPanelUI;
     [SerializeField] private GameObject codexUI;  // Legacy reference - no longer used
-    [SerializeField] private TextMeshProUGUI interactionPrompt;
 
     private bool playerInRange = false;
     private bool panelsOpen = false;
     private CodexController codexController;
+    private NotificationPanelController notificationPanel;
 
 
     private void Update()
@@ -73,11 +75,27 @@ public class PanelInteraction : MonoBehaviour
 
     private void ShowPrompt(bool show)
     {
-        if (interactionPrompt != null)
+        if (notificationPanel == null)
         {
-            interactionPrompt.enabled = show;
+            notificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        }
+
+        if (notificationPanel != null)
+        {
             if (show)
-                interactionPrompt.text = "Press E to access panel";
+            {
+                notificationPanel.ShowNotification("Press E to access triglyph panel", duration: 10f);
+                Debug.Log("[PanelInteraction] Showing prompt via NotificationPanel");
+            }
+            else
+            {
+                notificationPanel.ShowNotification("", duration: 0.1f);
+                Debug.Log("[PanelInteraction] Hiding prompt via NotificationPanel");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[PanelInteraction] NotificationPanelController not found!");
         }
     }
 
@@ -106,6 +124,11 @@ public class PanelInteraction : MonoBehaviour
         {
             triglyphPanelUI.SetActive(true);
             Debug.Log($"[PanelInteraction] Activated triglyphPanelUI, now active: {triglyphPanelUI.activeSelf}");
+
+            // Show cursor since player needs to interact with the puzzle UI
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Debug.Log("[PanelInteraction] Cursor shown for triglyph panel interaction");
         }
         else
         {
@@ -145,6 +168,11 @@ public class PanelInteraction : MonoBehaviour
             codexController.ToggleCodex();
             Debug.Log("[PanelInteraction] Called CodexController.ToggleCodex() to close");
         }
+
+        // Lock cursor since UI panels are closed
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Debug.Log("[PanelInteraction] Cursor locked (panels closed)");
 
         panelsOpen = false;
         ShowPrompt(playerInRange);

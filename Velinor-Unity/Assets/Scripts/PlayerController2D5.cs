@@ -164,21 +164,21 @@ public class PlayerController2D5 : MonoBehaviour
 
     private void HandleInteraction()
     {
-        bool ePressed = false;
+        bool dialogueKeyPressed = false;
 #if ENABLE_INPUT_SYSTEM
         var keyboard = Keyboard.current;
-        if (keyboard != null && keyboard.eKey.wasPressedThisFrame)
+        if (keyboard != null && keyboard.gKey.wasPressedThisFrame)
         {
-            ePressed = true;
+            dialogueKeyPressed = true;
         }
 #else
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            ePressed = true;
+            dialogueKeyPressed = true;
         }
 #endif
 
-        if (ePressed)
+        if (dialogueKeyPressed)
         {
             // Check for IInteractable objects in proximity (3.0 unit radius)
             Collider[] colliders = Physics.OverlapSphere(transform.position, 3.0f);

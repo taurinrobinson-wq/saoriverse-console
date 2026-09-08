@@ -29,6 +29,13 @@ public class DialogueManager : MonoBehaviour
     }
 
     [Serializable]
+    public class SharedBeatLine
+    {
+        public string speaker;           // NPC name or "Player" or "Shared"
+        public string text;              // The line of dialogue
+    }
+
+    [Serializable]
     public class StoryChoice
     {
         [SerializeField] private string tone_str;  // JSON deserializes as string
@@ -36,7 +43,8 @@ public class DialogueManager : MonoBehaviour
         public string playerLine;        // Button label (player's choice text)
         public string npcResponse;       // NPC's response text
         public string target;            // Next passage PID
-        public string shared_beat;       // Text shown AFTER choice
+        public string shared_beat;       // Text shown AFTER choice (string for backward compatibility)
+        public List<SharedBeatLine> shared_beat_lines;  // Array for multi-speaker
         public string system_trigger;    // e.g., "give_device"
         public string data_hook;         // e.g., "met_saori=true"
         public ToneResonanceMap tone_effects = new ToneResonanceMap();
@@ -55,10 +63,16 @@ public class DialogueManager : MonoBehaviour
     {
         public string pid;
         public string name;
-        public string text;              // Initial prompt/setting
+        public string text;              // Initial prompt/setting or NPC dialogue
         public string conversationId;    // Groups related passages into coherent dialogue packages
+        public string active_speaker;    // "Player", "Nima", "Ravi", "Shared", etc.
+        public string scene_context;     // Optional scene description (not shown in dialogue UI)
         public List<string> required_flags = new List<string>();
         public List<StoryChoice> choices = new List<StoryChoice>();
+        public Dictionary<string, string> npc_responses;  // Tone-dependent NPC replies: "Trust" -> "response text"
+        public List<SharedBeatLine> shared_beat;  // Multi-speaker lines
+        public string system_trigger;    // System events (moved from choice level for NPC-only turns)
+        public string data_hook;         // Data hooks (moved from choice level for NPC-only turns)
     }
 
     [Serializable]
@@ -349,8 +363,26 @@ public class DialogueManager : MonoBehaviour
         if (dialogueUIController != null)
         {
             string displayName = GetDisplayName(activeNpcId);
+
+            // For multi-speaker passages, show first speaker's name or use active_speaker
+            if (!string.IsNullOrEmpty(p.active_speaker))
+            {
+                if (p.active_speaker == "Shared" && p.shared_beat != null && p.shared_beat.Count > 0)
+                {
+                    // For shared beats, show the first speaker's name
+                    displayName = p.shared_beat[0].speaker;
+                }
+                else if (p.active_speaker != "Player")
+                {
+                    // Use the active speaker (Nima, Ravi, etc.)
+                    displayName = p.active_speaker;
+                }
+            }
+
             dialogueUIController.ShowDialogue(displayName, p.text);
-            Debug.Log($"[DialogueManager] Displaying passage: {pid} (display name: {displayName})");
+            // Store active_speaker for UI to use
+            dialogueUIController.currentActiveSpeaker = p.active_speaker;
+            Debug.Log($"[DialogueManager] Displaying passage: {pid} (speaker: {p.active_speaker}, display name: {displayName})");
         }
         else
         {
@@ -364,6 +396,19 @@ public class DialogueManager : MonoBehaviour
     private void DisplayChoicesForPassage(string pid)
     {
         if (!passages.TryGetValue(pid, out var p)) return;
+
+        // Only show choices if this is a Player turn
+        bool isPlayerTurn = string.IsNullOrEmpty(p.active_speaker) || p.active_speaker == "Player";
+        Debug.Log($"[DialogueManager] DisplayChoicesForPassage - pid: {pid}, active_speaker: '{p.active_speaker}', isPlayerTurn: {isPlayerTurn}, choicesCount: {p.choices.Count}");
+
+        if (!isPlayerTurn)
+        {
+            // This is an NPC turn or shared beat - don't show choices
+            Debug.Log($"[DialogueManager] NPC/Shared turn detected - no choices shown. Will transition automatically after delay.");
+            // Auto-advance after a short delay (user can click to advance)
+            StartCoroutine(AutoAdvanceDialogue(pid));
+            return;
+        }
 
         // Use explicitly assigned buttons (preferred method)
         if (btnT != null || btnO != null || btnN != null || btnE != null)
@@ -429,6 +474,22 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private IEnumerator AutoAdvanceDialogue(string currentPid)
+    {
+        // Display NPC-only turn for a brief moment, allowing player to click to continue
+        // For now, just show it for 1 second then auto-advance
+        // TODO: Add click-to-continue mechanic
+        yield return new WaitForSeconds(1f);
+
+        // Check if current passage has a target to advance to
+        if (passages.TryGetValue(currentPid, out var currentPassage))
+        {
+            // For shared beats and NPC turns, look for a way to get to next turn
+            // This is a simple auto-advance - in a real system, you'd want click-to-continue
+            Debug.Log($"[DialogueManager] Auto-advancing from NPC turn: {currentPid}");
+        }
+    }
+
     private void OnChoiceMade(StoryChoice choice) => StartCoroutine(ResolveChoice(choice));
 
     private IEnumerator ResolveChoice(StoryChoice choice)
@@ -471,16 +532,37 @@ public class DialogueManager : MonoBehaviour
                 // Load next passage to get its prompt text
                 if (passages.TryGetValue(choice.target, out var nextPassage))
                 {
+                    string npcResponse = nextPassage.text;
+
+                    // Check if this passage has tone-dependent responses
+                    if (nextPassage.npc_responses != null && nextPassage.npc_responses.Count > 0)
+                    {
+                        string toneKey = choice.tone.ToString();
+                        if (nextPassage.npc_responses.TryGetValue(toneKey, out var toneResponse))
+                        {
+                            npcResponse = toneResponse;
+                            Debug.Log($"[DialogueManager] Using tone-dependent response for {toneKey}: {toneResponse}");
+                        }
+                    }
+
                     // Combine NPC response with next passage's prompt
-                    string fullText = responseText + nextPassage.text;
+                    string fullText = responseText + npcResponse;
 
                     // Display combined text and immediately show next choices
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
                     if (dialogueUIController != null)
                     {
                         string displayName = GetDisplayName(activeNpcId);
+
+                        // Check active speaker for multi-speaker passages
+                        if (!string.IsNullOrEmpty(nextPassage.active_speaker) && nextPassage.active_speaker != "Player")
+                        {
+                            displayName = nextPassage.active_speaker;
+                        }
+
                         dialogueUIController.ShowDialogue(displayName, fullText);
-                        Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (display name: {displayName})");
+                        dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
+                        Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (speaker: {nextPassage.active_speaker}, display name: {displayName})");
                     }
 
                     // Set up choices from the target passage
@@ -611,9 +693,57 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("[DialogueManager] Hiding dialogue via DialogueUIController");
         }
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Only lock cursor if no other interactive UI panels are active
+        if (!IsOtherUIPanelActive())
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Debug.Log("[DialogueManager] Cursor locked (no other UI active)");
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Debug.Log("[DialogueManager] Cursor unlocked (other UI panel is active)");
+        }
         OnDialogueEnded?.Invoke();
+    }
+
+    /// <summary>
+    /// Check if Codex, Triglyph Puzzle, or other interactive UIs are active
+    /// </summary>
+    private bool IsOtherUIPanelActive()
+    {
+        // Check if CodexController has active panel
+        var codexController = FindAnyObjectByType<CodexController>();
+        if (codexController != null && codexController.codexPanel != null)
+        {
+            if (codexController.codexPanel.alpha > 0.5f && codexController.codexPanel.interactable)
+            {
+                Debug.Log("[DialogueManager] CodexPanel is active");
+                return true;
+            }
+        }
+
+        // Check if TriglyphPuzzleController has active panel
+        var triglyphController = FindAnyObjectByType<TriglyphPuzzleController>();
+        if (triglyphController != null)
+        {
+            // Try to find triglyph panel in the scene
+            var triglyphPanel = GameObject.Find("TriglyphPanel");
+            if (triglyphPanel != null && triglyphPanel.activeSelf)
+            {
+                // Check if it's also visible (has CanvasGroup alpha > 0.5)
+                var canvasGroup = triglyphPanel.GetComponent<CanvasGroup>();
+                if (canvasGroup == null || canvasGroup.alpha > 0.5f)
+                {
+                    Debug.Log("[DialogueManager] TriglyphPanel is active");
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /// <summary>

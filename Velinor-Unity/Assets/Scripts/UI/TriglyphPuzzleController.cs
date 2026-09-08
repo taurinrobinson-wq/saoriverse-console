@@ -280,19 +280,37 @@ public class TriglyphPuzzleController : MonoBehaviour
                 sceneTransitionCollider = transitionZone.GetComponent<Collider>();
                 Debug.Log($"[Triglyph Puzzle] Found ProximityTransitionZone, collider retrieved: {(sceneTransitionCollider != null ? "SUCCESS" : "FAILED")}");
             }
-            else
+
+            // Try to find by GameObject name
+            if (sceneTransitionCollider == null)
             {
-                Debug.Log("[Triglyph Puzzle] ProximityTransitionZone not found, trying to find SceneCollider GameObject...");
-                // Try to find by GameObject name
+                Debug.Log("[Triglyph Puzzle] Trying to find SceneCollider or similar named GameObject...");
                 GameObject sceneColliderGO = GameObject.Find("SceneCollider");
+                if (sceneColliderGO == null)
+                    sceneColliderGO = GameObject.Find("Scene Collider");
+                if (sceneColliderGO == null)
+                    sceneColliderGO = GameObject.Find("SceneTransition");
+                if (sceneColliderGO == null)
+                    sceneColliderGO = GameObject.Find("TransitionZone");
+
                 if (sceneColliderGO != null)
                 {
                     sceneTransitionCollider = sceneColliderGO.GetComponent<Collider>();
-                    Debug.Log($"[Triglyph Puzzle] Found SceneCollider GameObject, collider retrieved: {(sceneTransitionCollider != null ? "SUCCESS" : "FAILED")}");
+                    Debug.Log($"[Triglyph Puzzle] Found {sceneColliderGO.name}, collider retrieved: {(sceneTransitionCollider != null ? "SUCCESS" : "FAILED")}");
                 }
                 else
                 {
-                    Debug.LogError("[Triglyph Puzzle] Could not find SceneCollider GameObject!");
+                    Debug.LogWarning("[Triglyph Puzzle] Could not find SceneCollider by name, searching for any disabled collider with 'scene' in parent name...");
+                    Collider[] allColliders = FindObjectsByType<Collider>();
+                    foreach (Collider col in allColliders)
+                    {
+                        if (!col.enabled && (col.gameObject.name.ToLower().Contains("scene") || col.transform.parent?.name.ToLower().Contains("scene") == true))
+                        {
+                            sceneTransitionCollider = col;
+                            Debug.Log($"[Triglyph Puzzle] Found disabled collider in '{col.gameObject.name}'");
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -305,7 +323,7 @@ public class TriglyphPuzzleController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[Triglyph Puzzle] ⚠️ FAILED TO FIND COLLIDER! Cannot enable transition zone.");
+            Debug.LogError("[Triglyph Puzzle] ⚠️ FAILED TO FIND COLLIDER! Check the scene hierarchy for a disabled collider that should trigger scene transition.");
         }
 
         puzzleCompleted = true;

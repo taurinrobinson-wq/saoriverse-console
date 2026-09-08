@@ -80,7 +80,7 @@ namespace Velinor.Core
                 if (notificationPanel != null)
                 {
                     string displayName = DialogueManager.GetDisplayName(npcId);
-                    notificationPanel.ShowNotification($"Press E to talk to {displayName}", duration: 10f);
+                    notificationPanel.ShowNotification($"Press G to talk to {displayName}", duration: 10f);
                     notificationShown = true;
                     Debug.Log($"[SaoriNPC] Showing interaction prompt");
                 }

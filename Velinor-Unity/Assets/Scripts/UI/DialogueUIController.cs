@@ -22,13 +22,14 @@ public class DialogueUIController : MonoBehaviour
     public TMP_FontAsset dialogueFont;
 
     private Canvas _cachedCanvas;
+    public string currentActiveSpeaker = "Player";  // Track who is speaking for UI logic
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _interactAction;
 
     private void OnEnable()
     {
-        _interactAction = new InputAction("Interact", binding: "<Keyboard>/e");
+        _interactAction = new InputAction("Interact", binding: "<Keyboard>/g");
         _interactAction.Enable();
     }
 
@@ -45,10 +46,10 @@ public class DialogueUIController : MonoBehaviour
     {
         var codexController = FindAnyObjectByType<CodexController>();
         if (codexController == null) return false;
-        
+
         // Check if codex panel is visible and interactable
-        return codexController.codexPanel != null && 
-               codexController.codexPanel.alpha > 0.5f && 
+        return codexController.codexPanel != null &&
+               codexController.codexPanel.alpha > 0.5f &&
                codexController.codexPanel.interactable;
     }
 
@@ -196,11 +197,11 @@ public class DialogueUIController : MonoBehaviour
         // Activate the panel
         dialoguePanel.gameObject.SetActive(true);
         dialoguePanel.alpha = 1f;
-        
+
         // If codex is active, don't block raycasts so glyphs can be clicked
         // Dialogue buttons should still work even with blocksRaycasts = false
         dialoguePanel.blocksRaycasts = !IsCodexActive();
-        
+
         dialoguePanel.interactable = true;
         Debug.Log($"[UI] Showing dialogue from {npcName} (blocksRaycasts: {dialoguePanel.blocksRaycasts})");
     }

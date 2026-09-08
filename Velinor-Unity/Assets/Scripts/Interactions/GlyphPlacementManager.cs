@@ -123,6 +123,11 @@ public class GlyphPlacementManager : MonoBehaviour
         if (codexUI != null)
             codexUI.SetActive(false);
 
+        // Lock cursor since UI panels are closed
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Debug.Log("[GlyphPlacementManager] Cursor locked (panels closed during sequence)");
+
         // Activate screen rumble
         if (screenRumbleOverlay != null)
             screenRumbleOverlay.SetActive(true);

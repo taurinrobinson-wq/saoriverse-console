@@ -27,7 +27,7 @@ public class NPCObject : Interactable
             if (distance <= interactionRange)
             {
                 // Show prompt UI if it exists
-                InteractionUI.Instance?.ShowPrompt($"Press E to talk to {npcName}");
+                InteractionUI.Instance?.ShowPrompt($"Press G to talk to {npcName}");
 
                 bool interactPressed = false;
 #if ENABLE_INPUT_SYSTEM
@@ -65,7 +65,7 @@ public class NPCObject : Interactable
             Debug.Log($"💬 First dialogue with {npcName}!");
             hasInteracted = true;
         }
-        
+
         Debug.Log($"💬 Opening dialogue with {npcName}...");
         // TODO: Open dialogue UI here
     }
