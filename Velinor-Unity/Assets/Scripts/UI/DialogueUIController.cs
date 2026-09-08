@@ -38,6 +38,20 @@ public class DialogueUIController : MonoBehaviour
     }
 #endif
 
+    /// <summary>
+    /// Check if CodexController has active glyphs that need clicking
+    /// </summary>
+    private bool IsCodexActive()
+    {
+        var codexController = FindAnyObjectByType<CodexController>();
+        if (codexController == null) return false;
+        
+        // Check if codex panel is visible and interactable
+        return codexController.codexPanel != null && 
+               codexController.codexPanel.alpha > 0.5f && 
+               codexController.codexPanel.interactable;
+    }
+
     private void Awake()
     {
         // Mark this controller as persistent across scenes
@@ -61,7 +75,23 @@ public class DialogueUIController : MonoBehaviour
                     if (dialogueText == null)
                         dialogueText = dialoguePanelT.Find("Text")?.GetComponent<TextMeshProUGUI>();
 
-                    npcNameText = dialoguePanelT.Find("NPCName")?.GetComponent<TextMeshProUGUI>();
+                    // Look for NPC name text with multiple variations
+                    npcNameText = dialoguePanelT.Find("NPCNameText")?.GetComponent<TextMeshProUGUI>();
+                    if (npcNameText == null)
+                        npcNameText = dialoguePanelT.Find("NPCName")?.GetComponent<TextMeshProUGUI>();
+                    if (npcNameText == null)
+                        npcNameText = dialoguePanelT.Find("NPC Name")?.GetComponent<TextMeshProUGUI>();
+                    if (npcNameText == null)
+                        npcNameText = dialoguePanelT.Find("NpcName")?.GetComponent<TextMeshProUGUI>();
+                    if (npcNameText == null)
+                    {
+                        // Log all children for debugging
+                        Debug.LogWarning("[UI] Could not find NPC name text component. DialoguePanel children:");
+                        foreach (Transform child in dialoguePanelT)
+                        {
+                            Debug.LogWarning($"  - {child.name} (TextMeshProUGUI: {child.GetComponent<TextMeshProUGUI>() != null})");
+                        }
+                    }
                     Debug.Log($"[UI] DialoguePanel found and assigned (dialogueText: {(dialogueText != null ? "✓" : "✗")}, npcNameText: {(npcNameText != null ? "✓" : "✗")})");
                 }
                 break;
@@ -149,20 +179,30 @@ public class DialogueUIController : MonoBehaviour
         {
             npcNameText.text = "";
             npcNameText.text = npcName;
+            Debug.Log($"[UI] Set NPC name to: {npcName}");
+        }
+        else
+        {
+            Debug.LogWarning("[UI] npcNameText is null - cannot set NPC name!");
         }
         if (dialogueText != null)
         {
             dialogueText.text = "";
             dialogueText.text = text;
             dialogueText.ForceMeshUpdate();
+            Debug.Log($"[UI] Set dialogue text (length: {text.Length})");
         }
 
         // Activate the panel
         dialoguePanel.gameObject.SetActive(true);
         dialoguePanel.alpha = 1f;
-        dialoguePanel.blocksRaycasts = true;
+        
+        // If codex is active, don't block raycasts so glyphs can be clicked
+        // Dialogue buttons should still work even with blocksRaycasts = false
+        dialoguePanel.blocksRaycasts = !IsCodexActive();
+        
         dialoguePanel.interactable = true;
-        Debug.Log($"[UI] Showing dialogue from {npcName}");
+        Debug.Log($"[UI] Showing dialogue from {npcName} (blocksRaycasts: {dialoguePanel.blocksRaycasts})");
     }
 
     /// <summary>
