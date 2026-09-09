@@ -601,13 +601,35 @@ public class DialogueUIController : MonoBehaviour
         waitingForPlayerContinue = true;
         Debug.Log("[DialogueUIController] Waiting for player to continue...");
         
-        // TODO: Show visual continue button/prompt here
-        // For now, just wait for the flag to be set by OnPlayerContinue()
-        
         while (waitingForPlayerContinue)
             yield return null;
             
         Debug.Log("[DialogueUIController] Player continued.");
+    }
+
+    /// <summary>
+    /// Show visual indicator that player can continue.
+    /// Displays continue prompt (could be button or text).
+    /// </summary>
+    public System.Collections.IEnumerator ShowContinuePrompt()
+    {
+        // Show visual indicator on the E button
+        // For now, find the E button and make it visible with "CONTINUE" text
+        var choiceButtons = FindToneButtons();
+        if (choiceButtons != null && choiceButtons.Count >= 4)
+        {
+            var eButton = choiceButtons[3];  // E button is the 4th
+            eButton.gameObject.SetActive(true);
+            
+            var btnText = eButton.GetComponentInChildren<TextMeshProUGUI>();
+            if (btnText != null)
+            {
+                btnText.text = "[Press E or Click]";
+                Debug.Log("[UI] Continue prompt shown on E button");
+            }
+        }
+        
+        yield return null;
     }
 
     /// <summary>
