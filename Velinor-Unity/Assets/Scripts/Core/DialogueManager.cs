@@ -1015,36 +1015,19 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
-                    // Combine NPC response with any shared beat
-                    string fullText = responseText + npcResponse;
-
-                    // Display combined text and immediately show next choices
-                    var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
-                    if (dialogueUIController != null)
+                    // For beats-based dialogue, the npc_response is just shown, then we flow to the target
+                    // Display the NPC response if there is one
+                    if (!string.IsNullOrEmpty(responseText))
                     {
-                        string displayName = GetDisplayNameForDialogue(activeNpcId);
-
-                        // Check active speaker for multi-speaker passages
-                        if (!string.IsNullOrEmpty(nextPassage.active_speaker) && nextPassage.active_speaker != "Player")
+                        var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
+                        if (dialogueUIController != null)
                         {
-                            displayName = GetDisplayNameForDialogue(nextPassage.active_speaker);
+                            dialogueUIController.ShowDialogue("", responseText);
+                            Debug.Log($"[DialogueManager] Showing NPC response, then advancing to target: {choice.target}");
                         }
-                        else if (nextPassage.active_speaker == "Player")
-                        {
-                            // Only italicize if this is a pure player inner thought with no NPC response
-                            if (string.IsNullOrEmpty(choice.npc_response))
-                            {
-                                fullText = $"<i>{fullText}</i>";
-                            }
-                            displayName = "";  // No speaker name for inner thoughts
-                        }
-
-                        dialogueUIController.ShowDialogue(displayName, fullText);
-                        dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
-                        Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (speaker: {nextPassage.active_speaker}, display name: {displayName})");
                     }
 
-                    // Process system triggers from the target passage BEFORE showing choices
+                    // Process system triggers from the target passage BEFORE displaying it
                     if (nextPassage.system_triggers_list != null && nextPassage.system_triggers_list.Count > 0)
                     {
                         ProcessSystemTriggersFromPassage(nextPassage.system_triggers_list);
@@ -1055,9 +1038,9 @@ public class DialogueManager : MonoBehaviour
                         ProcessSystemTrigger(nextPassage.system_trigger);
                     }
 
-                    // Set up choices from the target passage
+                    // Now display the target beat/passage, which handles its own display and choices
                     ClearButtons();
-                    DisplayChoicesForPassage(choice.target);
+                    DisplayPassage(choice.target);
                 }
             }
         }
