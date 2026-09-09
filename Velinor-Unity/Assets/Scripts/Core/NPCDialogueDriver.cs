@@ -102,45 +102,28 @@ namespace Velinor.Core
             {
                 try
                 {
-                    // Try parsing as passages-based format first
-                    DialogueManager.StoryJson storyData = JsonUtility.FromJson<DialogueManager.StoryJson>(dialogueJson.text);
+                    // Parse as pure beats-based format (new unified format)
+                    DialogueJson dialogueData = JsonUtility.FromJson<DialogueJson>(dialogueJson.text);
 
-                    if (storyData != null && storyData.passages != null && storyData.passages.Count > 0)
+                    if (dialogueData != null && dialogueData.beats != null && dialogueData.beats.Length > 0)
                     {
-                        // Passages-based format
-                        if (!string.IsNullOrEmpty(storyData.passages[0].conversationId))
+                        // Auto-populate conversationId from first beat's conversationId
+                        if (!string.IsNullOrEmpty(dialogueData.beats[0].conversationId))
                         {
-                            conversationId = storyData.passages[0].conversationId;
+                            conversationId = dialogueData.beats[0].conversationId;
                         }
 
-                        if (!string.IsNullOrEmpty(storyData.startnode))
+                        // Auto-populate startPassageId from startnode or default to "beat_1"
+                        if (!string.IsNullOrEmpty(dialogueData.startnode))
                         {
-                            startPassageId = storyData.startnode;
+                            startPassageId = dialogueData.startnode;
+                        }
+                        else
+                        {
+                            startPassageId = "beat_1";
                         }
 
-                        Debug.Log($"[NPCDialogueDriver] Auto-populated from passages-based JSON: conversationId='{conversationId}', startPassageId='{startPassageId}'");
-                    }
-                    else
-                    {
-                        // Try parsing as beats-based format
-                        BeatBasedStoryJson beatData = JsonUtility.FromJson<BeatBasedStoryJson>(dialogueJson.text);
-
-                        if (beatData != null)
-                        {
-                            // Use scene_id as conversationId for beat-based files
-                            if (!string.IsNullOrEmpty(beatData.scene_id))
-                            {
-                                conversationId = beatData.scene_id;
-                            }
-
-                            // Use first beat's ID as startPassageId
-                            if (beatData.beats != null && beatData.beats.Length > 0)
-                            {
-                                startPassageId = $"beat_{beatData.beats[0].id}";
-                            }
-
-                            Debug.Log($"[NPCDialogueDriver] Auto-populated from beats-based JSON: conversationId='{conversationId}', startPassageId='{startPassageId}'");
-                        }
+                        Debug.Log($"[NPCDialogueDriver] Auto-populated from beats JSON: conversationId='{conversationId}', startPassageId='{startPassageId}'");
                     }
 
                     // Mark this JSON as processed
@@ -239,23 +222,17 @@ namespace Velinor.Core
 
             if (dialogueJson == null)
             {
-                Debug.LogWarning($"[NPCDialogueDriver] {npcName}: dialogueJson TextAsset not assigned");
+                Debug.LogError($"[NPCDialogueDriver] {npcName}: dialogueJson TextAsset not assigned in Inspector!");
                 return;
             }
 
-            Debug.Log($"[NPCDialogueDriver] {npcName}: Starting dialogue - conversationId={conversationId}, startPassageId={startPassageId}");
+            Debug.Log($"[NPCDialogueDriver] {npcName}: Starting dialogue - conversationId={conversationId}, startBeatId={startPassageId}");
 
-            // Use new TextAsset-based method if available, otherwise fall back
-            if (dialogueManager.CanLoadFromTextAsset())
-            {
-                dialogueManager.StartDialogue(dialogueJson, conversationId, npcName, isMultiNpcScene, startPassageId, gameObject);
-            }
-            else
-            {
-                // Fallback for backward compatibility (legacy method)
-                Debug.LogWarning($"[NPCDialogueDriver] {npcName}: DialogueManager doesn't support TextAsset method, using legacy approach");
-                dialogueManager.StartDialogue(npcName, startPassageId, "", gameObject);
-            }
+            // Load the dialogue JSON
+            dialogueManager.LoadDialogue(dialogueJson);
+            
+            // Start dialogue at specified beat
+            dialogueManager.StartDialogue(npcName, startPassageId);
         }
 
         /// <summary>

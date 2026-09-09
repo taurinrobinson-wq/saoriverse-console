@@ -6,7 +6,7 @@ public class StartDialogueOnTrigger : MonoBehaviour
 {
     [Header("Dialogue")]
     [SerializeField] private string npcId = "Kaelen";
-    [SerializeField] private string startingPassageId = "kaelen_beat_1";
+    [SerializeField] private string startingPassageId = "beat_1";
     [SerializeField] private string storyResourcePath = "velinor/stories/kaelen_confession_01";
     [SerializeField] private string requiredFlag = "completed_willy";
     [SerializeField] private bool requireFlag = true;
@@ -37,9 +37,22 @@ public class StartDialogueOnTrigger : MonoBehaviour
 
         if (DialogueManager.Instance != null)
         {
+            // Load the dialogue JSON from resource path
+            var json = Resources.Load<TextAsset>(storyResourcePath);
+            if (json == null)
+            {
+                Debug.LogError($"[StartDialogueOnTrigger] Failed to load dialogue JSON from '{storyResourcePath}'");
+                return;
+            }
+
+            DialogueManager.Instance.LoadDialogue(json);
+
+            // Subscribe to dialogue end event
             DialogueManager.Instance.OnDialogueEnded -= HandleDialogueEnded;
             DialogueManager.Instance.OnDialogueEnded += HandleDialogueEnded;
-            DialogueManager.Instance.StartDialogue(npcId, startingPassageId, storyResourcePath);
+            
+            // Start dialogue at specified beat
+            DialogueManager.Instance.StartDialogue(npcId, startingPassageId);
         }
     }
 

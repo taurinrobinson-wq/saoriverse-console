@@ -25,6 +25,16 @@ public class DialogueUIController : MonoBehaviour
 
     private Canvas _cachedCanvas;
     public string currentActiveSpeaker = "Player";  // Track who is speaking for UI logic
+    
+    // NEW: UI completion signal system
+    private bool isDisplaying = false;
+    private System.Action onDisplayComplete;
+    
+    // NEW: Player continue signal system (for manual dialogue advancement)
+    private bool waitingForPlayerContinue = false;
+    private System.Action onPlayerContinue;
+
+    private const float MINIMUM_DISPLAY_DURATION = 0.5f;  // Minimum time before continue button can appear
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _interactAction;
@@ -143,6 +153,19 @@ public class DialogueUIController : MonoBehaviour
             Debug.LogWarning("[UI] Canvas component was disabled - re-enabling it!");
         }
 
+        // Handle continue input (Space key or left mouse click)
+        if (waitingForPlayerContinue)
+        {
+            bool spacePressedThisFrame = Input.GetKeyDown(KeyCode.Space);
+            bool mousePressedThisFrame = Input.GetMouseButtonDown(0);
+            
+            if (spacePressedThisFrame || mousePressedThisFrame)
+            {
+                Debug.Log("[UI] Continue input detected");
+                OnPlayerContinue();
+            }
+        }
+
         // E key handling is now done by PlayerController2D5.HandleInteraction()
         // This was a duplicate handler - removed to avoid conflicts
 
@@ -167,7 +190,8 @@ public class DialogueUIController : MonoBehaviour
 
     /// <summary>
     /// Show dialogue from NPC (called by DialogueManager or NPC)
-    /// Clears previous text and starts fresh
+    /// Clears previous text and starts fresh.
+    /// Integrates with UI completion signal system.
     /// </summary>
     public void ShowDialogue(string npcName, string text)
     {
@@ -176,6 +200,9 @@ public class DialogueUIController : MonoBehaviour
             Debug.LogError("[UI] DialoguePanel not assigned!");
             return;
         }
+
+        // Mark as displaying - WaitForDisplayComplete() will now wait for this
+        isDisplaying = true;
 
         // For initial dialogue, clear everything
         if (npcNameText != null)
@@ -206,6 +233,21 @@ public class DialogueUIController : MonoBehaviour
 
         dialoguePanel.interactable = true;
         Debug.Log($"[UI] Showing dialogue from {npcName} (blocksRaycasts: {dialoguePanel.blocksRaycasts})");
+
+        // Start coroutine to complete after minimum display duration
+        // This prevents immediate completion and gives the UI time to render
+        StopCoroutine("CompleteDisplayAfterDuration");
+        StartCoroutine(CompleteDisplayAfterDuration());
+    }
+
+    /// <summary>
+    /// Wait for minimum display duration, then signal text is complete.
+    /// This ensures text has time to render before next phase.
+    /// </summary>
+    private System.Collections.IEnumerator CompleteDisplayAfterDuration()
+    {
+        yield return new WaitForSeconds(MINIMUM_DISPLAY_DURATION);
+        OnTextFinished();
     }
 
     /// <summary>
@@ -228,6 +270,28 @@ public class DialogueUIController : MonoBehaviour
     /// <summary>
     /// Hide dialogue panel
     /// </summary>
+    /// <summary>
+    /// Show continue prompt indicator (e.g., "[SPACE to continue]")
+    /// </summary>
+    public void ShowContinuePrompt()
+    {
+        if (dialogueText != null)
+        {
+            // Append continue prompt to dialogue text
+            dialogueText.text += "\n\n<size=70%><color=#CCCCCC>[Press SPACE or CLICK to continue]</color></size>";
+            dialogueText.ForceMeshUpdate();
+            Debug.Log("[UI] Continue prompt shown");
+        }
+    }
+
+    private void HideButton(Transform button)
+    {
+        if (button != null)
+        {
+            button.gameObject.SetActive(false);
+        }
+    }
+
     public void HideDialogue()
     {
         if (dialoguePanel == null) return;
@@ -424,6 +488,260 @@ public class DialogueUIController : MonoBehaviour
         Debug.Log("[UI] NPC has left the scene");
     }
 
+    // ======= NEW: UI COMPLETION SIGNAL SYSTEM =======
+
+    /// <summary>
+    /// Show text with optional completion callback.
+    /// Marks the UI as displaying and calls onComplete when text is fully rendered.
+    /// Wire your typewriter/text animation to call OnTextFinished() when done.
+    /// </summary>
+    public void ShowText(string text, System.Action onComplete = null)
+    {
+        isDisplaying = true;
+        onDisplayComplete = onComplete;
+
+        // Make dialogue panel visible
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.alpha = 1f;
+            dialoguePanel.blocksRaycasts = true;
+            dialoguePanel.interactable = true;
+        }
+
+        if (dialogueText != null)
+        {
+            dialogueText.text = text;
+        }
+
+        // If no animation, complete immediately
+        OnTextFinished();
+    }
+
+    /// <summary>
+    /// Call this when text animation (typewriter, fade, etc.) completes.
+    /// Signals that the UI is ready for the next beat.
+    /// </summary>
+    private void OnTextFinished()
+    {
+        isDisplaying = false;
+        onDisplayComplete?.Invoke();
+        onDisplayComplete = null;
+    }
+
+    /// <summary>
+    /// Wait for text display to complete (animation, typewriter, etc.).
+    /// Returns immediately if no animation is in progress.
+    /// </summary>
+    public System.Collections.IEnumerator WaitForDisplayComplete()
+    {
+        while (isDisplaying)
+            yield return null;
+    }
+
+    /// <summary>
+    /// Signal that the player should continue (e.g., show continue button).
+    /// Waits for player to click/press continue key.
+    /// </summary>
+    public System.Collections.IEnumerator WaitForPlayerContinue()
+    {
+        waitingForPlayerContinue = true;
+        Debug.Log("[DialogueUIController] Waiting for player to continue...");
+        
+        // TODO: Show visual continue button/prompt here
+        // For now, just wait for the flag to be set by OnPlayerContinue()
+        
+        while (waitingForPlayerContinue)
+            yield return null;
+            
+        Debug.Log("[DialogueUIController] Player continued.");
+    }
+
+    /// <summary>
+    /// Call this when player clicks continue button or presses continue key.
+    /// Signals that dialogue should advance.
+    /// </summary>
+    public void OnPlayerContinue()
+    {
+        if (waitingForPlayerContinue)
+        {
+            waitingForPlayerContinue = false;
+            onPlayerContinue?.Invoke();
+            onPlayerContinue = null;
+        }
+    }
+
+    // ======= NEW: BEAT SYSTEM METHODS =======
+
+    /// <summary>
+    /// Show speaker name for the current beat.
+    /// Clears name if passed an empty string.
+    /// </summary>
+    public void ShowSpeaker(string name)
+    {
+        if (npcNameText == null)
+        {
+            Debug.LogWarning("[UI] npcNameText not found");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(name))
+        {
+            npcNameText.gameObject.SetActive(false);
+        }
+        else
+        {
+            npcNameText.gameObject.SetActive(true);
+            npcNameText.text = name;
+        }
+    }
+
+    /// <summary>
+    /// Hide the speaker name text.
+    /// </summary>
+    public void HideSpeaker()
+    {
+        if (npcNameText != null)
+        {
+            npcNameText.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Clear all choice buttons and remove listeners.
+    /// </summary>
+    public void ClearButtons()
+    {
+        // Find all button components in the dialogue panel that might be choice buttons
+        if (dialoguePanel != null)
+        {
+            var buttons = dialoguePanel.GetComponentsInChildren<Button>();
+            foreach (var btn in buttons)
+            {
+                // Only hide buttons that look like choice buttons (not part of core UI)
+                if (btn.name.Contains("Choice") || btn.name.Contains("Button"))
+                {
+                    btn.gameObject.SetActive(false);
+                    btn.onClick.RemoveAllListeners();
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Display tone choice buttons for the current beat.
+    /// Populates existing T/O/N/E buttons with player dialogue options.
+    /// </summary>
+    public void ShowChoices(BeatData beat, System.Action<BeatChoice> onChoiceSelected)
+    {
+        Debug.Log($"[UI] ShowChoices called with {beat?.choices?.Length ?? 0} choices");
+        
+        if (beat?.choices == null || beat.choices.Length == 0)
+        {
+            Debug.Log("[UI] ShowChoices returning - no choices to show");
+            return;
+        }
+
+        // Make dialogue panel visible
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.alpha = 1f;
+            dialoguePanel.blocksRaycasts = true;
+            dialoguePanel.interactable = true;
+            Debug.Log("[UI] Dialogue panel made visible and interactive");
+        }
+
+        ClearButtons();
+
+        // Find the T/O/N/E buttons that already exist in the scene
+        var choiceButtons = FindToneButtons();
+        Debug.Log($"[UI] Found {choiceButtons?.Count ?? 0} tone buttons (T/O/N/E)");
+        
+        if (choiceButtons == null || choiceButtons.Count == 0)
+        {
+            Debug.LogWarning("[UI] No T/O/N/E choice buttons found in ChoicesContainer");
+            return;
+        }
+
+        // Populate buttons with player dialogue options
+        for (int i = 0; i < beat.choices.Length && i < choiceButtons.Count; i++)
+        {
+            var choice = beat.choices[i];
+            var btn = choiceButtons[i];
+
+            btn.gameObject.SetActive(true);
+
+            // Set button text to the player's dialogue option (playerLine)
+            var btnText = btn.GetComponentInChildren<TextMeshProUGUI>();
+            if (btnText != null)
+            {
+                btnText.text = choice.playerLine;
+                Debug.Log($"[UI] Button {i}: Set to '{btnText.text}'");
+            }
+
+            // Add listener for choice selection
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(() =>
+            {
+                Debug.Log($"[UI] Choice selected: {choice.playerLine}");
+                onChoiceSelected?.Invoke(choice);
+            });
+        }
+
+        Debug.Log($"[UI] Successfully populated {beat.choices.Length} choice buttons");
+    }
+
+    /// <summary>
+    /// Find the T/O/N/E tone buttons in ChoicesContainer.
+    /// Returns them in order: T, O, N, E
+    /// </summary>
+    private List<Button> FindToneButtons()
+    {
+        if (dialoguePanel == null)
+        {
+            Debug.LogError("[UI] dialoguePanel is null");
+            return null;
+        }
+
+        // Find ChoicesContainer
+        Transform choicesContainer = dialoguePanel.transform.Find("ChoicesContainer");
+        if (choicesContainer == null)
+        {
+            Debug.LogError("[UI] ChoicesContainer not found in DialoguePanel");
+            return null;
+        }
+
+        // Look for T/O/N/E buttons in order
+        var buttons = new List<Button>();
+        string[] toneNames = { "T", "O", "N", "E" };
+
+        foreach (string toneName in toneNames)
+        {
+            // Try exact name match (just "T", "O", etc.)
+            Transform btnTransform = choicesContainer.Find($"ChoiceButton_{toneName}");
+            if (btnTransform == null)
+            {
+                // Try alternative naming
+                btnTransform = choicesContainer.Find(toneName);
+            }
+            
+            if (btnTransform != null)
+            {
+                var btn = btnTransform.GetComponent<Button>();
+                if (btn != null)
+                {
+                    buttons.Add(btn);
+                    Debug.Log($"[UI] Found tone button: {toneName}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[UI] Tone button '{toneName}' not found in ChoicesContainer");
+            }
+        }
+
+        return buttons.Count > 0 ? buttons : null;
+    }
 
 }
+
 

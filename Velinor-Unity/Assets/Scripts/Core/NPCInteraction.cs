@@ -6,8 +6,12 @@ using Velinor.Core;
 
 public class NPCInteraction : MonoBehaviour, IInteractable
 {
+    [Header("Dialogue")]
+    [SerializeField] private TextAsset dialogueJson;  // Should be set to saori_desert_encounter_01.json
     [SerializeField] public string npcId = "Saori";
-    [SerializeField] public string startPassageId = "saori_beat_1";
+    [SerializeField] public string startPassageId = "desert_intro";
+    
+    [Header("Interaction")]
     [SerializeField] public float interactionRadius = 2.5f;
 
     private bool playerInRange = false;
@@ -30,6 +34,17 @@ public class NPCInteraction : MonoBehaviour, IInteractable
     {
         if (!DialogueManager.Instance.IsDialogueActive)
         {
+            // Load dialogue JSON if assigned
+            if (dialogueJson != null)
+            {
+                DialogueManager.Instance.LoadDialogue(dialogueJson);
+            }
+            else
+            {
+                Debug.LogError("[NPCInteraction] Dialogue JSON not assigned in Inspector!");
+                return;
+            }
+
             DialogueManager.Instance.StartDialogue(npcId, startPassageId);
         }
     }

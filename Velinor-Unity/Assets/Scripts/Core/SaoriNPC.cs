@@ -7,8 +7,11 @@ namespace Velinor.Core
     public class SaoriNPC : MonoBehaviour, IInteractable
     {
         [SerializeField] private string npcId = "Saori";
-        [SerializeField] private string startPassageId = "market_entry";
+        [SerializeField] private string startPassageId = "desert_intro";
         [SerializeField] private float interactionRadius = 0.8f;
+        
+        [Header("Dialogue")]
+        [SerializeField] private TextAsset dialogueJson;  // Should be set to saori_desert_encounter_01.json
 
         [Header("Transform Configuration")]
         [SerializeField] private Vector3 npcScale = new Vector3(1.8f, 1.8f, 1.8f);  // Configurable scale
@@ -120,8 +123,7 @@ namespace Velinor.Core
                 NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
                 if (notificationPanel != null)
                 {
-                    string displayName = DialogueManager.GetDisplayName(npcId);
-                    notificationPanel.ShowNotification($"Press G to talk to {displayName}", duration: 10f);
+                    notificationPanel.ShowNotification($"Press G to talk to {npcId}", duration: 10f);
                     notificationShown = true;
                     Debug.Log($"[SaoriNPC] Showing interaction prompt");
                 }
@@ -152,8 +154,19 @@ namespace Velinor.Core
             // Only start dialogue if not already active
             if (!DialogueManager.Instance.IsDialogueActive)
             {
-                Debug.Log($"[SaoriNPC] Starting dialogue: npcId={npcId}, passageId={startPassageId}");
-                DialogueManager.Instance.StartDialogue(npcId, startPassageId, "", gameObject);
+                // Load dialogue JSON if assigned
+                if (dialogueJson != null)
+                {
+                    DialogueManager.Instance.LoadDialogue(dialogueJson);
+                }
+                else
+                {
+                    Debug.LogError("[SaoriNPC] Dialogue JSON not assigned in Inspector!");
+                    return;
+                }
+
+                Debug.Log($"[SaoriNPC] Starting dialogue: npcId={npcId}, beatId={startPassageId}");
+                DialogueManager.Instance.StartDialogue(npcId, startPassageId);
             }
             else
             {

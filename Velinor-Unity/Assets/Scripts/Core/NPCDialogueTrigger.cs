@@ -10,16 +10,16 @@ namespace Velinor.Core
     public class NPCDialogueTrigger : MonoBehaviour
     {
         [SerializeField]
+        [Tooltip("The dialogue JSON file to load")]
+        private TextAsset dialogueJson;  // REQUIRED - must be assigned in Inspector
+
+        [SerializeField]
         [Tooltip("The NPC ID (e.g., 'Saori', 'Ravi', 'Nima')")]
         private string npcId = "Saori";
 
         [SerializeField]
-        [Tooltip("The starting passage ID in the story JSON")]
-        private string startPassageId = "market_entry";
-
-        [SerializeField]
-        [Tooltip("Path to story JSON file (leave empty for default)")]
-        private string storyPath = "";
+        [Tooltip("The starting beat ID in the story JSON (e.g., 'beat_1', 'desert_intro')")]
+        private string startBeatId = "beat_1";
 
         /// <summary>
         /// Call this from OnClick listener - no parameters needed!
@@ -32,16 +32,19 @@ namespace Velinor.Core
                 return;
             }
 
-            if (string.IsNullOrEmpty(storyPath))
+            if (dialogueJson == null)
             {
-                DialogueManager.Instance.StartDialogue(npcId, startPassageId);
-            }
-            else
-            {
-                DialogueManager.Instance.StartDialogue(npcId, startPassageId, storyPath);
+                Debug.LogError("[NPCDialogueTrigger] Dialogue JSON not assigned in Inspector!");
+                return;
             }
 
-            Debug.Log($"[NPCDialogueTrigger] Started dialogue with {npcId}, passage: {startPassageId}");
+            // Load the dialogue JSON
+            DialogueManager.Instance.LoadDialogue(dialogueJson);
+            
+            // Start dialogue at the specified beat
+            DialogueManager.Instance.StartDialogue(npcId, startBeatId);
+
+            Debug.Log($"[NPCDialogueTrigger] Started dialogue with {npcId}, beat: {startBeatId}");
         }
     }
 }

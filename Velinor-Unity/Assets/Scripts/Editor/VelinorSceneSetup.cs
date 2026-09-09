@@ -152,11 +152,8 @@ public class VelinorSceneSetup
         choicesRect.offsetMin = Vector2.zero;
         choicesRect.offsetMax = Vector2.zero;
 
-        // Assign UI references to DialogueManager
-        dm.dialogueUIPanel = dialoguePanel;
-        dm.speakerNameText = speakerText;
-        dm.dialogueText = dialogueText;
-        dm.choicesContainer = choicesContainer.transform;
+        // Note: DialogueUIController will find this UI automatically via FindPanelRecursive()
+        // in the actual scene. These Editor setup scripts just create the visual structure.
 
         // ===== STEP 6: Create NPC_Tala (now managers exist) =====
         GameObject npc = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
