@@ -1029,6 +1029,7 @@ public class DialogueManager : MonoBehaviour
                     // Check the target beat's type to determine how to display
                     // Only npc_turn beats have NPC responses
                     bool shouldShowNpcResponse = nextPassage.beat_type == "npc_turn";
+                    Debug.Log($"[DialogueManager] ResolveChoice: choice.target={choice.target}, beat_type={nextPassage.beat_type}, shouldShowNpcResponse={shouldShowNpcResponse}, npcResponse='{npcResponse}'");
                     
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
                     if (shouldShowNpcResponse && dialogueUIController != null)
@@ -1050,7 +1051,7 @@ public class DialogueManager : MonoBehaviour
 
                         dialogueUIController.ShowDialogue(displayName, fullText);
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
-                        Debug.Log($"[DialogueManager] Showing NPC response from npc_turn beat: {choice.target}");
+                        Debug.Log($"[DialogueManager] ✓ Showing NPC response from npc_turn beat: {choice.target} (displayName='{displayName}', text='{fullText}')");
                         
                         // For npc_turn beats, just show choices
                         ClearButtons();
@@ -1059,7 +1060,7 @@ public class DialogueManager : MonoBehaviour
                     else
                     {
                         // For player_posture and npc_shared beats, use DisplayPassage to show the beat's content
-                        Debug.Log($"[DialogueManager] Beat type {nextPassage.beat_type} doesn't need NPC response, using DisplayPassage");
+                        Debug.Log($"[DialogueManager] ✗ Beat type {nextPassage.beat_type} doesn't need NPC response, using DisplayPassage. npcResponse was='{npcResponse}'");
                         ClearButtons();
                         DisplayPassage(choice.target);
                     }
