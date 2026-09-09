@@ -608,6 +608,39 @@ public class DialogueUIController : MonoBehaviour
     }
 
     /// <summary>
+    /// Show the continue button (E tone) for player to advance dialogue.
+    /// </summary>
+    public System.Collections.IEnumerator ShowContinueButton()
+    {
+        var choiceButtons = FindToneButtons();
+        if (choiceButtons != null && choiceButtons.Count >= 4)
+        {
+            // Clear all buttons first
+            for (int i = 0; i < choiceButtons.Count; i++)
+            {
+                choiceButtons[i].gameObject.SetActive(false);
+            }
+            
+            // Show only E button with "Continue" text
+            var eButton = choiceButtons[3];
+            eButton.gameObject.SetActive(true);
+            
+            var btnText = eButton.GetComponentInChildren<TextMeshProUGUI>();
+            if (btnText != null)
+            {
+                btnText.text = "Continue";
+                Debug.Log("[UI] Continue button shown");
+            }
+            
+            // Set up the continue button listener
+            eButton.onClick.RemoveAllListeners();
+            eButton.onClick.AddListener(() => OnPlayerContinue());
+        }
+        
+        yield return null;
+    }
+
+    /// <summary>
     /// Call this when player clicks continue button or presses continue key.
     /// Signals that dialogue should advance.
     /// </summary>
