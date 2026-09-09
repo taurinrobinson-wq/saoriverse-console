@@ -1005,10 +1005,14 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
                     
-                    // If still no NPC response, use the next passage's text
+                    // If still no NPC response, use the next passage's text (but only if it's not a shared dialogue beat)
                     if (string.IsNullOrEmpty(npcResponse))
                     {
-                        npcResponse = nextPassage.text;
+                        // Don't use nextPassage.text if it's a shared dialogue beat - those flow seamlessly
+                        if (nextPassage.active_speaker != "Shared" && nextPassage.active_speaker != "shared")
+                        {
+                            npcResponse = nextPassage.text;
+                        }
                     }
 
                     // Combine NPC response with any shared beat
