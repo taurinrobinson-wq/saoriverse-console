@@ -1023,17 +1023,21 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
-                    // Combine NPC response with any shared beat
-                    string fullText = responseText + npcResponse;
-
                     // Check if this choice has an NPC response to display
-                    // This should be shown regardless of the target beat's type
                     bool hasNpcResponse = !string.IsNullOrEmpty(npcResponse);
                     
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
                     if (hasNpcResponse && dialogueUIController != null)
                     {
-                        // Display the NPC response first
+                        // Combine NPC response with the target passage text in one display
+                        string combinedText = npcResponse;
+                        
+                        // Add the next passage's text if it exists and isn't an npc_turn (which has its own choices)
+                        if (!string.IsNullOrEmpty(nextPassage.text))
+                        {
+                            combinedText += "\n\n" + nextPassage.text;
+                        }
+
                         string displayName = GetDisplayNameForDialogue(activeNpcId);
 
                         // Check active speaker for multi-speaker passages
@@ -1044,26 +1048,25 @@ public class DialogueManager : MonoBehaviour
                         else if (nextPassage.active_speaker == "Player")
                         {
                             // Format player inner thoughts in italics
-                            fullText = $"<i>{fullText}</i>";
+                            combinedText = $"<i>{combinedText}</i>";
                             displayName = "";  // No speaker name for inner thoughts
                         }
 
-                        dialogueUIController.ShowDialogue(displayName, fullText);
+                        // Display NPC response + next passage text together
+                        dialogueUIController.ShowDialogue(displayName, combinedText);
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
-                        Debug.Log($"[DialogueManager] ✓ Showing NPC response: {choice.target} (displayName='{displayName}')");
+                        Debug.Log($"[DialogueManager] ✓ Showing combined NPC response + passage: {choice.target}");
                         
-                        // Minimal yield to let UI render the response before showing choices
-                        yield return new WaitForSeconds(0.1f);
-                        
-                        // Display the target beat choices/content
+                        // Show choices based on target beat type
                         ClearButtons();
                         if (nextPassage.beat_type == "npc_turn")
                         {
                             DisplayChoicesForPassage(choice.target);
                         }
-                        else
+                        else if (!string.IsNullOrEmpty(nextPassage.text))
                         {
-                            DisplayPassage(choice.target);
+                            // For shared/posture beats with text already shown, just show their choices
+                            DisplayChoicesForPassage(choice.target);
                         }
                     }
                     else
