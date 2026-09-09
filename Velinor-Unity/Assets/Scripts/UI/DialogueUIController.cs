@@ -39,16 +39,26 @@ public class DialogueUIController : MonoBehaviour
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _interactAction;
+    private InputAction _continueAction;
+    private InputAction _clickAction;
 
     private void OnEnable()
     {
         _interactAction = new InputAction("Interact", binding: "<Keyboard>/g");
         _interactAction.Enable();
+        
+        _continueAction = new InputAction("Continue", binding: "<Keyboard>/space");
+        _continueAction.Enable();
+        
+        _clickAction = new InputAction("Click", binding: "<Mouse>/leftButton");
+        _clickAction.Enable();
     }
 
     private void OnDisable()
     {
         _interactAction?.Disable();
+        _continueAction?.Disable();
+        _clickAction?.Disable();
     }
 #endif
 
@@ -163,10 +173,15 @@ public class DialogueUIController : MonoBehaviour
         // Handle continue input (Space key or left mouse click)
         if (waitingForPlayerContinue)
         {
+#if ENABLE_INPUT_SYSTEM
+            bool spacePressedThisFrame = _continueAction?.WasPressedThisFrame() ?? false;
+            bool clickPressedThisFrame = _clickAction?.WasPressedThisFrame() ?? false;
+#else
             bool spacePressedThisFrame = Input.GetKeyDown(KeyCode.Space);
-            bool mousePressedThisFrame = Input.GetMouseButtonDown(0);
+            bool clickPressedThisFrame = Input.GetMouseButtonDown(0);
+#endif
             
-            if (spacePressedThisFrame || mousePressedThisFrame)
+            if (spacePressedThisFrame || clickPressedThisFrame)
             {
                 Debug.Log("[UI] Continue input detected");
                 OnPlayerContinue();
