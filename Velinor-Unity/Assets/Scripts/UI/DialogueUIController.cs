@@ -598,13 +598,26 @@ public class DialogueUIController : MonoBehaviour
     /// </summary>
     public System.Collections.IEnumerator WaitForPlayerContinue()
     {
-        waitingForPlayerContinue = true;
-        Debug.Log("[DialogueUIController] Waiting for player to continue...");
+       waitingForPlayerContinue = true;
+       Debug.Log("[DialogueUIController] Waiting for player to continue...");
         
-        while (waitingForPlayerContinue)
-            yield return null;
+       while (waitingForPlayerContinue)
+           yield return null;
             
-        Debug.Log("[DialogueUIController] Player continued.");
+       Debug.Log("[DialogueUIController] Player continued.");
+    }
+
+    /// <summary>
+    /// Called when player presses continue (Space or Click).
+    /// Signals that dialogue should advance.
+    /// </summary>
+    private void OnPlayerContinue()
+    {
+       if (waitingForPlayerContinue)
+       {
+           waitingForPlayerContinue = false;
+           Debug.Log("[DialogueUIController] OnPlayerContinue invoked");
+       }
     }
 
     // ======= BEAT SYSTEM METHODS =======
