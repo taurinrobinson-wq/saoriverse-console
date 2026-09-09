@@ -2,66 +2,89 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// A single dialogue beat (passage in JSON).
-/// This structure maps directly to the JSON format without transformation.
+/// A unified dialogue beat structure.
+/// Empty fields are simply not displayed. Same system, different content.
 /// </summary>
 [Serializable]
 public class BeatData
 {
-    [SerializeField] public string pid;                    // "desert_intro"
-    [SerializeField] public string name;                   // "Older Woman in the Desert"
-    [SerializeField] public string conversationId;         // "saori_encounter_01"
-    [SerializeField] public string text;                   // NPC's line
-    [SerializeField] public BeatChoice[] choices;          // player choices
-    [SerializeField] public string[] required_flags;       // flags needed to see this beat
+    [SerializeField] public int id;                        // 1, 2, 3, etc. or use pid for passages
+    [SerializeField] public string pid;                    // "desert_intro" (passages format) or null (beats)
+    [SerializeField] public string type;                   // "player_posture", "npc_turn", "npc_shared"
+    [SerializeField] public string active_speaker;         // "Player", "Nima", "Ravi", "Shared", etc.
+    [SerializeField] public string setting_description;    // Scene context (optional)
+    [SerializeField] public string prompt;                 // Main dialogue line (NPC speech or player thought)
+    [SerializeField] public string shared_beat;            // Automatic NPC response (shown then auto-advances)
+    [SerializeField] public BeatChoice[] tone_choices;     // Player choice options
+    [SerializeField] public string[] required_flags;       // Flags needed to see this beat
+    [SerializeField] public SystemTrigger[] system_triggers; // Actions to trigger
+    [SerializeField] public float next_beat_id;            // Next beat ID (supports decimals like 3.1)
 
-    // Inferred at load time
-    [NonSerialized] public DialogueMode mode;              // computed based on content
+    // Backwards compat fields (for passages format)
+    [SerializeField] public string name;                   // (passages only)
+    [SerializeField] public string conversationId;         // (passages only)
+    [SerializeField] public BeatChoice[] choices;          // (passages only - alias for tone_choices)
+
+    [NonSerialized] public DialogueMode mode;
 }
 
 /// <summary>
-/// A single choice in a beat. Maps directly to JSON choice structure.
+/// A single player choice within a beat.
+/// Empty fields (empty strings) are simply not displayed.
 /// </summary>
 [Serializable]
 public class BeatChoice
 {
-    [SerializeField] public string text;                   // "(T) Yeah. I'm looking for work..."
-    [SerializeField] public string target;                 // "saori_first_react"
-    [SerializeField] public string shared_beat;            // NPC's response to this choice
-    [SerializeField] public string data_hook;              // "met_older_woman=true"
-    [SerializeField] public string system_trigger;         // "give_device" (optional)
-    [SerializeField] public EffectWrapper tone_effects;    // TONE effects
-    [SerializeField] public EffectWrapper npc_resonance;   // NPC affinity (optional)
-    [SerializeField] public string tone_str;               // "Trust", "Observation", etc.
-    [SerializeField] public string playerLine;             // without tone prefix
-
-    // Derived at load time
-    [NonSerialized] public string tone;                    // "T", "O", "N", "E"
+    [SerializeField] public string tone;                   // "T", "O", "N", "E", "C"
+    [SerializeField] public string label;                  // "Trust", "Observation", "NarrativePresence", "Empathy"
+    [SerializeField] public string text;                   // Player's spoken line or choice text
+    [SerializeField] public string result_text;            // Immediate feedback after choice (empty = skip)
+    [SerializeField] public string npc_response;           // NPC's reply (empty = skip)
+    [SerializeField] public BeatEffect[] tone_effects;     // TONE stat changes
+    [SerializeField] public BeatEffect[] remnants_effects; // NPC REMNANTS changes
+    [SerializeField] public float target;                  // Next beat ID (or 0 for end)
+    
+    // Backwards compat
+    [SerializeField] public string tone_str;               // (passages format: derives tone)
+    [SerializeField] public string playerLine;             // (passages format)
+    [SerializeField] public string shared_beat;            // (passages format)
+    [SerializeField] public string data_hook;              // (passages format)
+    [SerializeField] public string system_trigger;         // (passages format)
 }
 
 /// <summary>
-/// Wrapper for the effects { "entries": [...] } structure in JSON.
+/// A single TONE or REMNANTS effect.
 /// </summary>
 [Serializable]
-public class EffectEntry
+public class BeatEffect
 {
-    [SerializeField] public string key;
-    [SerializeField] public float value;
-}
-
-[Serializable]
-public class EffectWrapper
-{
-    [SerializeField] public EffectEntry[] entries;
+    [SerializeField] public string stat;
+    [SerializeField] public float delta;
+    [SerializeField] public string target;                 // For remnants: "Nima", "Ravi", "activeNpcId", etc.
 }
 
 /// <summary>
-/// Root structure matching JSON exactly.
+/// A system trigger (diary update, close dialogue, etc.)
+/// </summary>
+[Serializable]
+public class SystemTrigger
+{
+    [SerializeField] public string type;                   // "diary_append", "close_dialogue", etc.
+    [SerializeField] public string[] data;                 // Type-specific data
+}
+
+/// <summary>
+/// Root structure for dialogue JSON files.
+/// Supports both passages and beats formats.
 /// </summary>
 [Serializable]
 public class DialogueJson
 {
-    [SerializeField] public string name;
-    [SerializeField] public string startnode;
-    [SerializeField] public BeatData[] passages;
+    [SerializeField] public string name;                   // (passages format)
+    [SerializeField] public string startnode;              // (passages format)
+    [SerializeField] public BeatData[] passages;           // (passages format)
+    
+    [SerializeField] public string scene_id;               // (beats format)
+    [SerializeField] public string[] required_flags;       // (beats format)
+    [SerializeField] public BeatData[] beats;              // (beats format)
 }
