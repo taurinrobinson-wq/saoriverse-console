@@ -314,15 +314,8 @@ public class DialogueManager : MonoBehaviour
         if (npc != null)
             return npc;
 
-        // Fallback: search for any object with the NPC name
-        foreach (var obj in FindObjectsOfType<NPCDialogueDriver>())
-        {
-            if (obj.gameObject.name == activeNpcId)
-                return obj.gameObject;
-        }
-
-        // Last resort: search legacy SaoriNPC
-        foreach (var obj in FindObjectsOfType<SaoriNPC>())
+        // Fallback: search all GameObjects in scene for matching name
+        foreach (var obj in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
         {
             if (obj.gameObject.name == activeNpcId)
                 return obj.gameObject;
