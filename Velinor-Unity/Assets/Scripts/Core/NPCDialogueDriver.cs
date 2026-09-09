@@ -188,23 +188,12 @@ namespace Velinor.Core
             bool wasInRange = playerInRange;
             playerInRange = false;
 
-            // Debug: log what colliders are found
-            if (colliders.Length > 0)
-            {
-                Debug.Log($"[NPCDialogueDriver] {npcName}: OverlapSphere found {colliders.Length} colliders at {transform.position}");
-                foreach (var col in colliders)
-                {
-                    Debug.Log($"  - {col.gameObject.name} (Tag: {col.tag}, IsTrigger: {col.isTrigger})");
-                }
-            }
-
             foreach (var col in colliders)
             {
                 if (col.CompareTag("Player"))
                 {
                     playerInRange = true;
                     player = col.gameObject;
-                    // Debug.Log($"[NPCDialogueDriver] {npcName}: Player detected in range!");
                     break;
                 }
             }
