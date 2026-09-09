@@ -8,7 +8,7 @@ using UnityEngine;
 [Serializable]
 public class BeatData
 {
-    [SerializeField] public int id;                        // 1, 2, 3, etc. or use pid for passages
+    [SerializeField] public float id;                       // 1, 2, 3, 3.1, etc. or use pid for passages
     [SerializeField] public string pid;                    // "desert_intro" (passages format) or null (beats)
     [SerializeField] public string type;                   // "player_posture", "npc_turn", "npc_shared"
     [SerializeField] public string active_speaker;         // "Player", "Nima", "Ravi", "Shared", etc.
