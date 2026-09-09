@@ -129,9 +129,13 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
             dialogueUI.ShowText(beat.shared_beat);
+            dialogueUI.ShowSharedBeat(beat.shared_beat);
             StartCoroutine(AutoAdvanceAfterSharedBeat(beat));
             return;
         }
+
+        // Hide shared beat text when showing prompt
+        dialogueUI.HideSharedBeat();
 
         // Show prompt (main beat text)
         dialogueUI.ShowSpeaker(beat.active_speaker ?? "");

@@ -19,6 +19,7 @@ public class DialogueUIController : MonoBehaviour
     public CanvasGroup dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI npcNameText;
+    public TextMeshProUGUI sharedBeatText;
 
     [Header("Fonts")]
     public TMP_FontAsset dialogueFont;
@@ -96,6 +97,12 @@ public class DialogueUIController : MonoBehaviour
                         npcNameText = dialoguePanelT.Find("NPC Name")?.GetComponent<TextMeshProUGUI>();
                     if (npcNameText == null)
                         npcNameText = dialoguePanelT.Find("NpcName")?.GetComponent<TextMeshProUGUI>();
+                    
+                    // Look for shared beat text
+                    sharedBeatText = dialoguePanelT.Find("SharedBeatText")?.GetComponent<TextMeshProUGUI>();
+                    if (sharedBeatText == null)
+                        sharedBeatText = dialoguePanelT.Find("SharedBeat")?.GetComponent<TextMeshProUGUI>();
+                    
                     if (npcNameText == null)
                     {
                         // Log all children for debugging
@@ -105,7 +112,7 @@ public class DialogueUIController : MonoBehaviour
                             Debug.LogWarning($"  - {child.name} (TextMeshProUGUI: {child.GetComponent<TextMeshProUGUI>() != null})");
                         }
                     }
-                    Debug.Log($"[UI] DialoguePanel found and assigned (dialogueText: {(dialogueText != null ? "✓" : "✗")}, npcNameText: {(npcNameText != null ? "✓" : "✗")})");
+                    Debug.Log($"[UI] DialoguePanel found and assigned (dialogueText: {(dialogueText != null ? "✓" : "✗")}, npcNameText: {(npcNameText != null ? "✓" : "✗")}, sharedBeatText: {(sharedBeatText != null ? "✓" : "✗")})");
                 }
                 break;
             }
@@ -515,6 +522,38 @@ public class DialogueUIController : MonoBehaviour
 
         // If no animation, complete immediately
         OnTextFinished();
+    }
+
+    /// <summary>
+    /// Show or hide shared beat text (auto-advance dialogue).
+    /// Only displays if sharedBeatText exists and content is not empty.
+    /// </summary>
+    public void ShowSharedBeat(string text)
+    {
+        if (sharedBeatText == null)
+            return;
+
+        if (string.IsNullOrEmpty(text))
+        {
+            sharedBeatText.gameObject.SetActive(false);
+        }
+        else
+        {
+            sharedBeatText.gameObject.SetActive(true);
+            sharedBeatText.text = text;
+            Debug.Log($"[UI] Shared beat text displayed: {text}");
+        }
+    }
+
+    /// <summary>
+    /// Hide shared beat text element.
+    /// </summary>
+    public void HideSharedBeat()
+    {
+        if (sharedBeatText != null)
+        {
+            sharedBeatText.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
