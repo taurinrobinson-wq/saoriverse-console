@@ -1038,31 +1038,32 @@ public class DialogueManager : MonoBehaviour
                         }
                         else if (nextPassage.active_speaker == "Player")
                         {
-                            // Format player inner thoughts in italics
                             npcResponse = $"<i>{npcResponse}</i>";
-                            displayName = "";  // No speaker name for inner thoughts
+                            displayName = "";
                         }
 
                         // Display the NPC response
                         dialogueUIController.ShowDialogue(displayName, npcResponse);
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
-                        Debug.Log($"[DialogueManager] ✓ Showing NPC response: {choice.target} (displayName='{displayName}')");
+                        Debug.Log($"[DialogueManager] ✓ Showing NPC response: {choice.target}");
                         
-                        // Show choices for the target beat (don't clear buttons, let choices appear below response)
+                        // Pause to let player read the response before showing next beat
+                        yield return new WaitForSeconds(2.0f);
+                        
+                        // Show the target beat
+                        ClearButtons();
                         if (nextPassage.beat_type == "npc_turn")
                         {
                             DisplayChoicesForPassage(choice.target);
                         }
                         else
                         {
-                            // For shared/posture beats, display their content then choices
                             DisplayPassage(choice.target);
                         }
                     }
                     else
                     {
-                        // No NPC response, just display the target beat immediately
-                        Debug.Log($"[DialogueManager] No NPC response for choice targeting {choice.target} (beat_type={nextPassage.beat_type})");
+                        // No NPC response, display target beat immediately
                         ClearButtons();
                         DisplayPassage(choice.target);
                     }
