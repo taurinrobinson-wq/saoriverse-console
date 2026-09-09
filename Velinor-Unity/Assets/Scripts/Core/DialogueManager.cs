@@ -60,7 +60,8 @@ public class DialogueManager : MonoBehaviour
         [SerializeField] private string tone_str;  // JSON deserializes as string
         public ToneType tone;                       // Runtime enum value
         public string playerLine;        // Button label (player's choice text)
-        public string npcResponse;       // NPC's response text
+        public string npc_response;      // NPC's response text (matches JSON field name)
+        public string npcResponse { get { return npc_response; } set { npc_response = value; } }  // Backward compat property
         public string target;            // Next passage PID
         public string result_text;       // Player action description (e.g., "You approach...")
         public string shared_beat;       // Text shown AFTER choice (string for backward compatibility)
