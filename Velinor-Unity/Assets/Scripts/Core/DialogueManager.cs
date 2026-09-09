@@ -1037,7 +1037,7 @@ public class DialogueManager : MonoBehaviour
                         dialogueUIController.ShowDialogue("", fullResponse);
                         Debug.Log($"[DialogueManager] Showing NPC response. Next will advance to: {choice.target}");
                         
-                        // Show a continue button that advances to the target passage
+                        // Create a temporary passage with a continue choice to advance to the target
                         ClearButtons();
                         StoryChoice continueChoice = new StoryChoice
                         {
@@ -1046,11 +1046,20 @@ public class DialogueManager : MonoBehaviour
                             tone = ToneType.Trust
                         };
                         
-                        var continueButton = CreateButton(0, continueChoice, "[Continue]");
-                        if (continueButton != null)
+                        // Create a temporary passage for the continue button
+                        StoryPassage continuePassage = new StoryPassage
                         {
-                            Debug.Log($"[DialogueManager] Created continue button to advance to {choice.target}");
-                        }
+                            pid = "_continue_",
+                            conversationId = currentConversationId,
+                            text = fullResponse,
+                            choices = new List<StoryChoice> { continueChoice }
+                        };
+                        
+                        // Display the continue button
+                        DisplayChoicesForPassage("_continue_");
+                        // But first we need to add it to passages temporarily
+                        passages["_continue_"] = continuePassage;
+                        DisplayChoicesForPassage("_continue_");
                     }
                     else
                     {
