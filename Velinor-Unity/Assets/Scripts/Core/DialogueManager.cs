@@ -132,8 +132,8 @@ public class DialogueManager : MonoBehaviour
         if (!string.IsNullOrEmpty(beat.shared_beat) && !hasChoices)
         {
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-            dialogueUI.ShowText(beat.shared_beat);
-            dialogueUI.ShowSharedBeat(beat.shared_beat);
+            dialogueUI.ShowText(StripSpeakerPrefix(beat.shared_beat));
+            dialogueUI.ShowSharedBeat(StripSpeakerPrefix(beat.shared_beat));
             StartCoroutine(AutoAdvanceAfterSharedBeat(beat));
             return;
         }
@@ -145,12 +145,12 @@ public class DialogueManager : MonoBehaviour
             
             // Show prompt
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-            dialogueUI.ShowText(beat.prompt ?? "");
+            dialogueUI.ShowText(StripSpeakerPrefix(beat.prompt ?? ""));
             
             // Show shared_beat if it exists (displayed along with prompt)
             if (!string.IsNullOrEmpty(beat.shared_beat))
             {
-                dialogueUI.ShowSharedBeat(beat.shared_beat);
+                dialogueUI.ShowSharedBeat(StripSpeakerPrefix(beat.shared_beat));
             }
             
             // Show choices
@@ -168,7 +168,27 @@ public class DialogueManager : MonoBehaviour
         // No choices and no shared_beat - just show prompt
         dialogueUI.HideSharedBeat();
         dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-        dialogueUI.ShowText(beat.prompt ?? "");
+        dialogueUI.ShowText(StripSpeakerPrefix(beat.prompt ?? ""));
+    }
+
+    private string StripSpeakerPrefix(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return text;
+        
+        // Match pattern like "SPEAKER: \"text\"" or "SPEAKER: text"
+        int colonIndex = text.IndexOf(":");
+        if (colonIndex > 0 && colonIndex < text.Length - 1)
+        {
+            string afterColon = text.Substring(colonIndex + 1).TrimStart();
+            // Remove surrounding quotes if present
+            if (afterColon.StartsWith("\"") && afterColon.EndsWith("\""))
+            {
+                return afterColon.Substring(1, afterColon.Length - 2);
+            }
+            return afterColon;
+        }
+        return text;
     }
 
     private IEnumerator AutoAdvanceAfterSharedBeat(BeatData beat)
@@ -203,10 +223,19 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.Log($"[DialogueManager] Showing npc_response: {choice.npc_response}");
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-            dialogueUI.ShowText(choice.npc_response);
+            dialogueUI.ShowText(StripSpeakerPrefix(choice.npc_response));
             yield return dialogueUI.WaitForDisplayComplete();
             
-            // After npc_response displays, show E "Continue" button and wait for player to click it
+            // If beat has a shared_beat, it already provides closure/transition, so just advance
+            if (!string.IsNullOrEmpty(beat.shared_beat))
+            {
+                float targetBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
+                Debug.Log($"[DialogueManager] Beat has shared_beat, advancing directly to: {targetBeatId}");
+                AdvanceToBeat(targetBeatId);
+                yield break;
+            }
+            
+            // Otherwise, show E "Continue" button and wait for player to click it
             BeatData continueBeat = new BeatData
             {
                 id = beat.id,
@@ -226,13 +255,13 @@ public class DialogueManager : MonoBehaviour
             
             // Show the continue button and wait for player to click
             bool continueClicked = false;
-            float targetBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
-            Debug.Log($"[DialogueManager] Continue button will advance to beat: {targetBeatId}");
+            float nextBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
+            Debug.Log($"[DialogueManager] Continue button will advance to beat: {nextBeatId}");
             dialogueUI.ShowChoices(continueBeat, choice => 
             {
-                Debug.Log($"[DialogueManager] Continue button clicked, advancing to beat: {targetBeatId}");
+                Debug.Log($"[DialogueManager] Continue button clicked, advancing to beat: {nextBeatId}");
                 continueClicked = true;
-                AdvanceToBeat(targetBeatId);
+                AdvanceToBeat(nextBeatId);
             });
             
             yield break;
