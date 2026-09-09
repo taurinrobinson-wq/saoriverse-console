@@ -57,18 +57,21 @@ public class PlayerController2D5 : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
 
-        // If no CharacterController exists, create one
-        if (characterController == null)
+        // Ensure player has a collider for collision detection (but not CharacterController - manual movement)
+        if (GetComponent<Collider>() == null && characterController == null)
         {
-            Debug.LogWarning("[PlayerController2D5] CharacterController NOT FOUND on player! Creating one now.");
-            characterController = gameObject.AddComponent<CharacterController>();
-            characterController.height = 1.8f;
-            characterController.radius = 0.3f;
-            Debug.Log("[PlayerController2D5] CharacterController created with height=1.8, radius=0.3");
+            CapsuleCollider capsule = gameObject.AddComponent<CapsuleCollider>();
+            capsule.height = 1.8f;
+            capsule.radius = 0.3f;
+            Debug.Log("[PlayerController2D5] CapsuleCollider created with height=1.8, radius=0.3");
         }
-        else
+
+        // If CharacterController was added, remove it since this controller does manual movement
+        if (characterController != null)
         {
-            Debug.Log($"[PlayerController2D5] CharacterController found and enabled={characterController.enabled}");
+            Debug.LogWarning("[PlayerController2D5] Removing CharacterController - this controller uses manual movement, not physics");
+            DestroyImmediate(characterController);
+            characterController = null;
         }
 
         currentPosition = transform.position;
