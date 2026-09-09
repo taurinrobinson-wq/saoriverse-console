@@ -97,6 +97,7 @@ public class DialogueManager : MonoBehaviour
         public string system_trigger;    // System events (moved from choice level for NPC-only turns)
         public string data_hook;         // Data hooks (moved from choice level for NPC-only turns)
         public List<BeatSystemTrigger> system_triggers_list = new List<BeatSystemTrigger>();  // Array-based system triggers from beats
+        public bool is_shared_beat = false;  // Flag to indicate this is part of a shared dialogue sequence
     }
 
     [Serializable]
@@ -439,7 +440,8 @@ public class DialogueManager : MonoBehaviour
                             conversationId = conversationId,
                             active_speaker = speaker.speaker,
                             text = speaker.text,
-                            choices = new List<StoryChoice> { autoChoice }
+                            choices = new List<StoryChoice> { autoChoice },
+                            is_shared_beat = true  // Mark as part of shared dialogue
                         };
 
                         passages[sharedPid] = sharedPassage;
@@ -1018,9 +1020,8 @@ public class DialogueManager : MonoBehaviour
                     // Combine NPC response with any shared beat
                     string fullText = responseText + npcResponse;
 
-                    // For shared dialogue beats, don't show the NPC response yet - let DisplayPassage handle it
-                    bool isSharedTarget = !string.IsNullOrEmpty(nextPassage.active_speaker) &&
-                                         (nextPassage.active_speaker == "Ravi" || nextPassage.active_speaker == "Nima");
+                    // Check if target is a shared dialogue beat (first passage of a shared sequence)
+                    bool isSharedTarget = nextPassage.is_shared_beat;
                     
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
                     if (!isSharedTarget && dialogueUIController != null)
