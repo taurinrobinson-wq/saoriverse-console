@@ -49,6 +49,20 @@ namespace Velinor.Core
                 rb.constraints = RigidbodyConstraints.FreezeRotation;
             }
 
+            // Ensure player has a collider for NPC interaction detection
+            if (GetComponent<Collider>() == null)
+            {
+                CapsuleCollider capsule = gameObject.AddComponent<CapsuleCollider>();
+                capsule.height = 1.8f;
+                capsule.radius = 0.3f;
+            }
+
+            // Ensure player has "Player" tag
+            if (gameObject.tag != "Player")
+            {
+                gameObject.tag = "Player";
+            }
+
             if (mainCamera == null)
             {
                 mainCamera = Camera.main;
