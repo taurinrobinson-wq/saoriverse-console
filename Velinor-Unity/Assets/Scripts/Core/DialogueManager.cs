@@ -304,5 +304,32 @@ public class DialogueManager : MonoBehaviour
         OnDialogueEnded?.Invoke();
     }
 
+    public GameObject GetCurrentNPCGameObject()
+    {
+        if (string.IsNullOrEmpty(activeNpcId))
+            return null;
+
+        // Try to find NPC by name in scene
+        GameObject npc = GameObject.Find(activeNpcId);
+        if (npc != null)
+            return npc;
+
+        // Fallback: search for any object with the NPC name
+        foreach (var obj in FindObjectsOfType<NPCDialogueDriver>())
+        {
+            if (obj.gameObject.name == activeNpcId)
+                return obj.gameObject;
+        }
+
+        // Last resort: search legacy SaoriNPC
+        foreach (var obj in FindObjectsOfType<SaoriNPC>())
+        {
+            if (obj.gameObject.name == activeNpcId)
+                return obj.gameObject;
+        }
+
+        return null;
+    }
+
     public bool IsDialogueActive => isDialogueActive;
 }
