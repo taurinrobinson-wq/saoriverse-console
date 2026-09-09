@@ -633,9 +633,12 @@ public class DialogueUIController : MonoBehaviour
     /// </summary>
     public void ShowChoices(BeatData beat, System.Action<BeatChoice> onChoiceSelected)
     {
-        Debug.Log($"[UI] ShowChoices called with {beat?.choices?.Length ?? 0} choices");
+        // Support both 'choices' (passages format) and 'tone_choices' (beats format)
+        BeatChoice[] choicesToShow = beat?.tone_choices ?? beat?.choices;
         
-        if (beat?.choices == null || beat.choices.Length == 0)
+        Debug.Log($"[UI] ShowChoices called with {choicesToShow?.Length ?? 0} choices");
+        
+        if (choicesToShow == null || choicesToShow.Length == 0)
         {
             Debug.Log("[UI] ShowChoices returning - no choices to show");
             return;
@@ -663,18 +666,20 @@ public class DialogueUIController : MonoBehaviour
         }
 
         // Populate buttons with player dialogue options
-        for (int i = 0; i < beat.choices.Length && i < choiceButtons.Count; i++)
+        for (int i = 0; i < choicesToShow.Length && i < choiceButtons.Count; i++)
         {
-            var choice = beat.choices[i];
+            var choice = choicesToShow[i];
             var btn = choiceButtons[i];
 
             btn.gameObject.SetActive(true);
 
-            // Set button text to the player's dialogue option (playerLine)
+            // Set button text to the player's dialogue option
             var btnText = btn.GetComponentInChildren<TextMeshProUGUI>();
             if (btnText != null)
             {
-                btnText.text = choice.playerLine;
+                // Support both 'playerLine' (passages format) and 'text' (beats format)
+                string displayText = choice.text ?? choice.playerLine ?? "[No text]";
+                btnText.text = displayText;
                 Debug.Log($"[UI] Button {i}: Set to '{btnText.text}'");
             }
 
@@ -682,7 +687,7 @@ public class DialogueUIController : MonoBehaviour
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(() =>
             {
-                Debug.Log($"[UI] Choice selected: {choice.playerLine}");
+                Debug.Log($"[UI] Choice selected: {choice.text ?? choice.playerLine}");
                 onChoiceSelected?.Invoke(choice);
             });
         }
