@@ -607,54 +607,7 @@ public class DialogueUIController : MonoBehaviour
         Debug.Log("[DialogueUIController] Player continued.");
     }
 
-    /// <summary>
-    /// Show the continue button (E tone) for player to advance dialogue.
-    /// </summary>
-    public System.Collections.IEnumerator ShowContinueButton()
-    {
-        var choiceButtons = FindToneButtons();
-        if (choiceButtons != null && choiceButtons.Count >= 4)
-        {
-            // Clear all buttons first
-            for (int i = 0; i < choiceButtons.Count; i++)
-            {
-                choiceButtons[i].gameObject.SetActive(false);
-            }
-            
-            // Show only E button with "Continue" text
-            var eButton = choiceButtons[3];
-            eButton.gameObject.SetActive(true);
-            
-            var btnText = eButton.GetComponentInChildren<TextMeshProUGUI>();
-            if (btnText != null)
-            {
-                btnText.text = "Continue";
-                Debug.Log("[UI] Continue button shown");
-            }
-            
-            // Set up the continue button listener
-            eButton.onClick.RemoveAllListeners();
-            eButton.onClick.AddListener(() => OnPlayerContinue());
-        }
-        
-        yield return null;
-    }
-
-    /// <summary>
-    /// Call this when player clicks continue button or presses continue key.
-    /// Signals that dialogue should advance.
-    /// </summary>
-    public void OnPlayerContinue()
-    {
-        if (waitingForPlayerContinue)
-        {
-            waitingForPlayerContinue = false;
-            onPlayerContinue?.Invoke();
-            onPlayerContinue = null;
-        }
-    }
-
-    // ======= NEW: BEAT SYSTEM METHODS =======
+    // ======= BEAT SYSTEM METHODS =======
 
     /// <summary>
     /// Show speaker name for the current beat.
@@ -713,7 +666,7 @@ public class DialogueUIController : MonoBehaviour
 
     /// <summary>
     /// Display tone choice buttons for the current beat.
-    /// Populates existing T/O/N/E buttons with player dialogue options.
+    /// Populates existing T/O/N/E buttons with player dialogue options, matching by tone.
     /// </summary>
     public void ShowChoices(BeatData beat, System.Action<BeatChoice> onChoiceSelected)
     {
@@ -749,12 +702,37 @@ public class DialogueUIController : MonoBehaviour
             return;
         }
 
-        // Populate buttons with player dialogue options
-        for (int i = 0; i < choicesToShow.Length && i < choiceButtons.Count; i++)
+        // Map tone names to button indices
+        var toneToButtonIndex = new System.Collections.Generic.Dictionary<string, int>
         {
-            var choice = choicesToShow[i];
-            var btn = choiceButtons[i];
+            { "T", 0 },
+            { "O", 1 },
+            { "N", 2 },
+            { "E", 3 }
+        };
 
+        // For each choice, activate the button that corresponds to its tone
+        foreach (var choice in choicesToShow)
+        {
+            if (string.IsNullOrEmpty(choice.tone))
+            {
+                Debug.LogWarning("[UI] Choice has no tone specified");
+                continue;
+            }
+
+            if (!toneToButtonIndex.TryGetValue(choice.tone, out int btnIndex))
+            {
+                Debug.LogWarning($"[UI] Unknown tone '{choice.tone}' - skipping choice");
+                continue;
+            }
+
+            if (btnIndex >= choiceButtons.Count)
+            {
+                Debug.LogWarning($"[UI] Button index {btnIndex} out of range");
+                continue;
+            }
+
+            var btn = choiceButtons[btnIndex];
             btn.gameObject.SetActive(true);
 
             // Set button text to the player's dialogue option
@@ -764,7 +742,7 @@ public class DialogueUIController : MonoBehaviour
                 // Support both 'playerLine' (passages format) and 'text' (beats format)
                 string displayText = choice.text ?? choice.playerLine ?? "[No text]";
                 btnText.text = displayText;
-                Debug.Log($"[UI] Button {i}: Set to '{btnText.text}'");
+                Debug.Log($"[UI] Button {choice.tone}: Set to '{btnText.text}'");
             }
 
             // Add listener for choice selection

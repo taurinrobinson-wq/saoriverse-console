@@ -187,9 +187,6 @@ public class DialogueManager : MonoBehaviour
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
             dialogueUI.ShowText(choice.npc_response);
             yield return dialogueUI.WaitForDisplayComplete();
-            // Show continue button and wait for player to proceed
-            yield return dialogueUI.ShowContinueButton();
-            yield return dialogueUI.WaitForPlayerContinue();
         }
 
         // 4. Advance to next beat or end dialogue
