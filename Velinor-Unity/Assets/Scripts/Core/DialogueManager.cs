@@ -187,8 +187,34 @@ public class DialogueManager : MonoBehaviour
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
             dialogueUI.ShowText(choice.npc_response);
             yield return dialogueUI.WaitForDisplayComplete();
-            // After npc_response displays, wait for player to continue
-            yield return dialogueUI.WaitForPlayerContinue();
+            
+            // After npc_response displays, show E "Continue" button and wait for player to click it
+            BeatData continueBeat = new BeatData
+            {
+                id = beat.id,
+                active_speaker = beat.active_speaker,
+                tone_choices = new BeatChoice[]
+                {
+                    new BeatChoice
+                    {
+                        tone = "E",
+                        label = "Continue",
+                        text = "Continue",
+                        result_text = "",
+                        npc_response = ""
+                    }
+                }
+            };
+            
+            // Show the continue button and wait for player to click
+            bool continueClicked = false;
+            dialogueUI.ShowChoices(continueBeat, choice => 
+            {
+                continueClicked = true;
+                AdvanceToBeat(beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1));
+            });
+            
+            yield break;
         }
 
         // 4. Advance to next beat or end dialogue
