@@ -991,10 +991,11 @@ public class DialogueManager : MonoBehaviour
                 // Load next passage to get its prompt text
                 if (passages.TryGetValue(choice.target, out var nextPassage))
                 {
-                    string npcResponse = nextPassage.text;
-
-                    // Check if this passage has tone-dependent responses
-                    if (nextPassage.npc_responses != null && nextPassage.npc_responses.Count > 0)
+                    // Use choice's NPC response first (for beats-based format with npc_response field)
+                    string npcResponse = choice.npc_response ?? "";
+                    
+                    // If no direct NPC response on choice, check the next passage for tone-dependent responses
+                    if (string.IsNullOrEmpty(npcResponse) && nextPassage.npc_responses != null && nextPassage.npc_responses.Count > 0)
                     {
                         string toneKey = choice.tone.ToString();
                         if (nextPassage.npc_responses.TryGetValue(toneKey, out var toneResponse))
@@ -1003,8 +1004,14 @@ public class DialogueManager : MonoBehaviour
                             Debug.Log($"[DialogueManager] Using tone-dependent response for {toneKey}: {toneResponse}");
                         }
                     }
+                    
+                    // If still no NPC response, use the next passage's text
+                    if (string.IsNullOrEmpty(npcResponse))
+                    {
+                        npcResponse = nextPassage.text;
+                    }
 
-                    // Combine NPC response with next passage's prompt
+                    // Combine NPC response with any shared beat
                     string fullText = responseText + npcResponse;
 
                     // Display combined text and immediately show next choices
