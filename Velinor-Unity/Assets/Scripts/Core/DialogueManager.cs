@@ -132,8 +132,8 @@ public class DialogueManager : MonoBehaviour
         if (!string.IsNullOrEmpty(beat.shared_beat) && !hasChoices)
         {
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-            dialogueUI.ShowText(StripSpeakerPrefix(beat.shared_beat));
-            dialogueUI.ShowSharedBeat(StripSpeakerPrefix(beat.shared_beat));
+            dialogueUI.ShowText(beat.shared_beat);
+            dialogueUI.ShowSharedBeat(beat.shared_beat);
             StartCoroutine(AutoAdvanceAfterSharedBeat(beat));
             return;
         }
@@ -145,12 +145,12 @@ public class DialogueManager : MonoBehaviour
             
             // Show prompt
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-            dialogueUI.ShowText(StripSpeakerPrefix(beat.prompt ?? ""));
+            dialogueUI.ShowText(beat.prompt ?? "");
             
             // Show shared_beat if it exists (displayed along with prompt)
             if (!string.IsNullOrEmpty(beat.shared_beat))
             {
-                dialogueUI.ShowSharedBeat(StripSpeakerPrefix(beat.shared_beat));
+                dialogueUI.ShowSharedBeat(beat.shared_beat);
             }
             
             // Show choices
@@ -168,27 +168,7 @@ public class DialogueManager : MonoBehaviour
         // No choices and no shared_beat - just show prompt
         dialogueUI.HideSharedBeat();
         dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-        dialogueUI.ShowText(StripSpeakerPrefix(beat.prompt ?? ""));
-    }
-
-    private string StripSpeakerPrefix(string text)
-    {
-        if (string.IsNullOrEmpty(text))
-            return text;
-        
-        // Match pattern like "SPEAKER: \"text\"" or "SPEAKER: text"
-        int colonIndex = text.IndexOf(":");
-        if (colonIndex > 0 && colonIndex < text.Length - 1)
-        {
-            string afterColon = text.Substring(colonIndex + 1).TrimStart();
-            // Remove surrounding quotes if present
-            if (afterColon.StartsWith("\"") && afterColon.EndsWith("\""))
-            {
-                return afterColon.Substring(1, afterColon.Length - 2);
-            }
-            return afterColon;
-        }
-        return text;
+        dialogueUI.ShowText(beat.prompt ?? "");
     }
 
     private IEnumerator AutoAdvanceAfterSharedBeat(BeatData beat)
@@ -223,7 +203,7 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.Log($"[DialogueManager] Showing npc_response: {choice.npc_response}");
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-            dialogueUI.ShowText(StripSpeakerPrefix(choice.npc_response));
+            dialogueUI.ShowText(choice.npc_response);
             yield return dialogueUI.WaitForDisplayComplete();
             
             // If beat has a shared_beat, it already provides closure/transition, so just advance

@@ -98,7 +98,7 @@
       "type": "npc_turn",
       "active_speaker": "Nima",
       "setting_description": "",
-      "prompt": "NIMA: \"What do you want anyway? We don't trust outsiders.\"",
+      "prompt": "What do you want anyway? We don't trust outsiders.",
       "shared_beat": "",
       "tone_choices": [
         {
@@ -106,7 +106,7 @@
           "label": "Trust",
           "text": "I'm trying to find work. I'm new here.",
           "result_text": "",
-          "npc_response": "NIMA: \"Work is scarce for people who actually belong here. Intentions don't fill empty bellies.\"",
+          "npc_response": "Work is scarce for people who actually belong here. Intentions don't fill empty bellies.",
           "tone_effects": [
             { "stat": "trust", "delta": 0.02 },
             { "stat": "observation", "delta": -0.015 },
@@ -125,7 +125,7 @@
           "label": "Observation",
           "text": "I don't mean to make you feel uncomfortable. It's been a long trip, any place to rest around here?",
           "result_text": "",
-          "npc_response": "NIMA: \"Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.\"",
+          "npc_response": "Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.",
           "tone_effects": [
             { "stat": "trust", "delta": -0.015 },
             { "stat": "observation", "delta": 0.02 },
@@ -144,7 +144,7 @@
           "label": "NarrativePresence",
           "text": "I've heard the market is a place to find work. I'm not here to cause trouble.",
           "result_text": "",
-          "npc_response": "NIMA: \"Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.\"",
+          "npc_response": "Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.",
           "tone_effects": [
             { "stat": "trust", "delta": -0.01 },
             { "stat": "observation", "delta": 0.005 },
@@ -163,7 +163,7 @@
           "label": "Empathy",
           "text": "I'm not here to bother anyone. I've had a long road… that's all.",
           "result_text": "",
-          "npc_response": "NIMA: \"Everyone out here has a long road behind them. It doesn't make the ground any softer.\"",
+          "npc_response": "Everyone out here has a long road behind them. It doesn't make the ground any softer.",
           "tone_effects": [
             { "stat": "trust", "delta": 0.005 },
             { "stat": "observation", "delta": -0.01 },
@@ -186,7 +186,7 @@
       "type": "npc_turn",
       "active_speaker": "Ravi",
       "setting_description": "",
-      "prompt": "RAVI: \"You should be careful about who you reveal yourself to. There's been some 'activity' lately… The buildings are… unstable. Our daughter…\"",
+      "prompt": "You should be careful about who you reveal yourself to. There's been some 'activity' lately… The buildings are… unstable. Our daughter…",
       "shared_beat": "",
       "tone_choices": [
         {
@@ -212,7 +212,7 @@
       "type": "npc_turn",
       "active_speaker": "Nima",
       "setting_description": "",
-      "prompt": "NIMA: \"Ravi, take your own advice.\"",
+      "prompt": "Ravi, take your own advice.",
       "shared_beat": "",
       "tone_choices": [
         {
@@ -233,15 +233,15 @@
       "type": "npc_turn",
       "active_speaker": "Ravi",
       "setting_description": "",
-      "prompt": "RAVI: \"Nima… I can't have someone else…\"",
-      "shared_beat": "RAVI: \"Anyway… I hope you will be careful.\"",
+      "prompt": "Nima… I can't have someone else…",
+      "shared_beat": "Anyway… I hope you will be careful.",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "You are right to be wary of me. I want to earn your trust.",
           "result_text": "",
-          "npc_response": "RAVI: \"Trust is a heavy thing to ask for out here. Just keep your head down.\"",
+          "npc_response": "Trust is a heavy thing to ask for out here. Just keep your head down.",
           "tone_effects": [
             { "stat": "trust", "delta": 0.02 },
             { "stat": "observation", "delta": -0.015 },
@@ -260,7 +260,7 @@
           "label": "Observation",
           "text": "It's not my business but… did something happen to your daughter?",
           "result_text": "",
-          "npc_response": "RAVI: \"The stones don't care who they fall on. That's all there is to see.\"",
+          "npc_response": "The stones don't care who they fall on. That's all there is to see.",
           "tone_effects": [
             { "stat": "trust", "delta": -0.015 },
             { "stat": "observation", "delta": 0.02 },
@@ -279,7 +279,7 @@
           "label": "NarrativePresence",
           "text": "I've had some… losses… I don't need you to get into details.",
           "result_text": "",
-          "npc_response": "RAVI: \"Then you know how the air feels after the dust clears. It stays in your throat.\"",
+          "npc_response": "Then you know how the air feels after the dust clears. It stays in your throat.",
           "tone_effects": [
             { "stat": "trust", "delta": -0.01 },
             { "stat": "observation", "delta": 0.005 },
@@ -298,7 +298,7 @@
           "label": "Empathy",
           "text": "I don't know what happened to your daughter, but you seem really… impacted. Let me know if I can help with something.",
           "result_text": "",
-          "npc_response": "RAVI: \"There's nothing to repair now. Some things stay broken.\"",
+          "npc_response": "There's nothing to repair now. Some things stay broken.",
           "tone_effects": [
             { "stat": "trust", "delta": 0.005 },
             { "stat": "observation", "delta": -0.01 },
