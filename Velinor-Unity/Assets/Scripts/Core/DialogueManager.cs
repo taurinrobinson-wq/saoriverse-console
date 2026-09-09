@@ -1052,6 +1052,9 @@ public class DialogueManager : MonoBehaviour
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
                         Debug.Log($"[DialogueManager] ✓ Showing NPC response: {choice.target} (displayName='{displayName}')");
                         
+                        // Wait for player to read the NPC response before showing choices
+                        yield return new WaitForSeconds(2.5f);
+                        
                         // For npc_turn beats, just show choices
                         // For other beats, use DisplayPassage to show the beat's content
                         ClearButtons();
