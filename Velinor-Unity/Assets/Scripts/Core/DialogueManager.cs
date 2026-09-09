@@ -1015,19 +1015,6 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
-                    // For beats-based dialogue, the npc_response is just shown, then we flow to the target
-                    // Display the NPC response if there is one
-                    string fullResponse = responseText + npcResponse;
-                    if (!string.IsNullOrEmpty(fullResponse))
-                    {
-                        var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
-                        if (dialogueUIController != null)
-                        {
-                            dialogueUIController.ShowDialogue("", fullResponse);
-                            Debug.Log($"[DialogueManager] Showing NPC response, then advancing to target: {choice.target}");
-                        }
-                    }
-
                     // Process system triggers from the target passage BEFORE displaying it
                     if (nextPassage.system_triggers_list != null && nextPassage.system_triggers_list.Count > 0)
                     {
@@ -1039,9 +1026,38 @@ public class DialogueManager : MonoBehaviour
                         ProcessSystemTrigger(nextPassage.system_trigger);
                     }
 
-                    // Now display the target beat/passage, which handles its own display and choices
-                    ClearButtons();
-                    DisplayPassage(choice.target);
+                    // For beats-based dialogue, the npc_response is shown first, then we flow to target
+                    string fullResponse = responseText + npcResponse;
+                    
+                    var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
+                    
+                    // If there's an NPC response, show it with an auto-continue button
+                    if (!string.IsNullOrEmpty(fullResponse) && dialogueUIController != null)
+                    {
+                        dialogueUIController.ShowDialogue("", fullResponse);
+                        Debug.Log($"[DialogueManager] Showing NPC response. Next will advance to: {choice.target}");
+                        
+                        // Show a continue button that advances to the target passage
+                        ClearButtons();
+                        StoryChoice continueChoice = new StoryChoice
+                        {
+                            playerLine = "[Continue]",
+                            target = choice.target,
+                            tone = ToneType.Trust
+                        };
+                        
+                        var continueButton = CreateButton(0, continueChoice, "[Continue]");
+                        if (continueButton != null)
+                        {
+                            Debug.Log($"[DialogueManager] Created continue button to advance to {choice.target}");
+                        }
+                    }
+                    else
+                    {
+                        // No NPC response, just go directly to the target passage
+                        ClearButtons();
+                        DisplayPassage(choice.target);
+                    }
                 }
             }
         }
