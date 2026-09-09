@@ -1052,7 +1052,10 @@ public class DialogueManager : MonoBehaviour
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
                         Debug.Log($"[DialogueManager] ✓ Showing NPC response: {choice.target} (displayName='{displayName}')");
                         
-                        // Immediately display the target beat choices/content
+                        // Minimal yield to let UI render the response before showing choices
+                        yield return new WaitForSeconds(0.1f);
+                        
+                        // Display the target beat choices/content
                         ClearButtons();
                         if (nextPassage.beat_type == "npc_turn")
                         {
