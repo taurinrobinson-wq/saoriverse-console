@@ -474,8 +474,8 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "What do you mean by 'activity'? Is there danger here?",
-          "npc_response": "RAVI: \"The market used to be steady. Now... things shift. Walls fail. People vanish. It's not safe the way it was.\"",
+          "text": "It's not my business but… did something happen to your daughter?",
+          "npc_response": "RAVI: \"The stones don't care who they fall on. That's all there is to see.\"",
           "tone_effects": [
             {
               "stat": "trust",
