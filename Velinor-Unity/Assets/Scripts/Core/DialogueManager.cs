@@ -138,23 +138,37 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // Hide shared beat text when showing prompt
-        dialogueUI.HideSharedBeat();
+        // If there are choices, show prompt + shared_beat + choices together
+        if (hasChoices)
+        {
+            dialogueUI.HideSharedBeat();
+            
+            // Show prompt
+            dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
+            dialogueUI.ShowText(beat.prompt ?? "");
+            
+            // Show shared_beat if it exists (displayed along with prompt)
+            if (!string.IsNullOrEmpty(beat.shared_beat))
+            {
+                dialogueUI.ShowSharedBeat(beat.shared_beat);
+            }
+            
+            // Show choices
+            if (beat.tone_choices != null && beat.tone_choices.Length > 0)
+            {
+                dialogueUI.ShowChoices(beat, choice => StartCoroutine(ResolveChoiceCoroutine(beat, choice)));
+            }
+            else if (beat.choices != null && beat.choices.Length > 0)
+            {
+                dialogueUI.ShowChoices(beat, choice => StartCoroutine(ResolveChoiceCoroutine(beat, choice)));
+            }
+            return;
+        }
 
-        // Show prompt (main beat text)
+        // No choices and no shared_beat - just show prompt
+        dialogueUI.HideSharedBeat();
         dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
         dialogueUI.ShowText(beat.prompt ?? "");
-
-        // Show choices if they exist
-        if (beat.tone_choices != null && beat.tone_choices.Length > 0)
-        {
-            dialogueUI.ShowChoices(beat, choice => StartCoroutine(ResolveChoiceCoroutine(beat, choice)));
-        }
-        else if (beat.choices != null && beat.choices.Length > 0)
-        {
-            // Backwards compat: passages format uses "choices" key
-            dialogueUI.ShowChoices(beat, choice => StartCoroutine(ResolveChoiceCoroutine(beat, choice)));
-        }
     }
 
     private IEnumerator AutoAdvanceAfterSharedBeat(BeatData beat)
@@ -224,17 +238,7 @@ public class DialogueManager : MonoBehaviour
             yield break;
         }
 
-        // 4. Show shared_beat if it exists (this happens after player chooses)
-        if (!string.IsNullOrEmpty(beat.shared_beat))
-        {
-            Debug.Log($"[DialogueManager] Showing shared_beat: {beat.shared_beat}");
-            dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
-            dialogueUI.ShowText(beat.shared_beat);
-            dialogueUI.ShowSharedBeat(beat.shared_beat);
-            yield return dialogueUI.WaitForDisplayComplete();
-        }
-
-        // 5. Advance to next beat or end dialogue
+        // 4. Advance to next beat or end dialogue
         float nextId = choice.target > 0 ? choice.target : (beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1));
         AdvanceToBeat(nextId);
     }
