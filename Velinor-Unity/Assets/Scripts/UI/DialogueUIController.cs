@@ -684,15 +684,17 @@ public class DialogueUIController : MonoBehaviour
             }
 
             // Add listener for choice selection
+            // Capture choice by local variable to avoid closure issues
+            var selectedChoice = choice;
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(() =>
             {
-                Debug.Log($"[UI] Choice selected: {choice.text ?? choice.playerLine}");
-                onChoiceSelected?.Invoke(choice);
+                Debug.Log($"[UI] Choice selected: {selectedChoice.text ?? selectedChoice.playerLine}");
+                onChoiceSelected?.Invoke(selectedChoice);
             });
         }
 
-        Debug.Log($"[UI] Successfully populated {beat.choices.Length} choice buttons");
+        Debug.Log($"[UI] Successfully populated {choicesToShow.Length} choice buttons");
     }
 
     /// <summary>
