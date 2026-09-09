@@ -1040,6 +1040,17 @@ public class DialogueManager : MonoBehaviour
                         Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (speaker: {nextPassage.active_speaker}, display name: {displayName})");
                     }
 
+                    // Process system triggers from the target passage BEFORE showing choices
+                    if (nextPassage.system_triggers_list != null && nextPassage.system_triggers_list.Count > 0)
+                    {
+                        ProcessSystemTriggersFromPassage(nextPassage.system_triggers_list);
+                    }
+                    
+                    if (!string.IsNullOrEmpty(nextPassage.system_trigger))
+                    {
+                        ProcessSystemTrigger(nextPassage.system_trigger);
+                    }
+
                     // Set up choices from the target passage
                     ClearButtons();
                     DisplayChoicesForPassage(choice.target);
