@@ -1017,12 +1017,13 @@ public class DialogueManager : MonoBehaviour
 
                     // For beats-based dialogue, the npc_response is just shown, then we flow to the target
                     // Display the NPC response if there is one
-                    if (!string.IsNullOrEmpty(responseText))
+                    string fullResponse = responseText + npcResponse;
+                    if (!string.IsNullOrEmpty(fullResponse))
                     {
                         var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
                         if (dialogueUIController != null)
                         {
-                            dialogueUIController.ShowDialogue("", responseText);
+                            dialogueUIController.ShowDialogue("", fullResponse);
                             Debug.Log($"[DialogueManager] Showing NPC response, then advancing to target: {choice.target}");
                         }
                     }
