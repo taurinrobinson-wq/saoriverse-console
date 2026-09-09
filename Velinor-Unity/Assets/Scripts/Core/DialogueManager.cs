@@ -1052,14 +1052,10 @@ public class DialogueManager : MonoBehaviour
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
                         Debug.Log($"[DialogueManager] ✓ Showing NPC response: {choice.target} (displayName='{displayName}')");
                         
-                        // Only pause if we're on an npc_turn beat to give player time to read response
-                        if (nextPassage.beat_type == "npc_turn")
-                        {
-                            yield return new WaitForSeconds(2.0f);
-                        }
+                        // Pause to give player time to read the response before next beat shows
+                        yield return new WaitForSeconds(2.0f);
                         
-                        // For npc_turn beats, just show choices
-                        // For other beats, use DisplayPassage to show the beat's content
+                        // Now display the target beat
                         ClearButtons();
                         if (nextPassage.beat_type == "npc_turn")
                         {
@@ -1072,7 +1068,7 @@ public class DialogueManager : MonoBehaviour
                     }
                     else
                     {
-                        // No NPC response, just display the target beat
+                        // No NPC response, just display the target beat immediately
                         Debug.Log($"[DialogueManager] No NPC response for choice targeting {choice.target} (beat_type={nextPassage.beat_type})");
                         ClearButtons();
                         DisplayPassage(choice.target);
