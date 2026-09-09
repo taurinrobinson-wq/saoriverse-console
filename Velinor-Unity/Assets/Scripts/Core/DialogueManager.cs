@@ -1027,8 +1027,11 @@ public class DialogueManager : MonoBehaviour
                         }
                         else if (nextPassage.active_speaker == "Player")
                         {
-                            // Format player inner thoughts in italics
-                            fullText = $"<i>{fullText}</i>";
+                            // Only italicize if this is a pure player inner thought with no NPC response
+                            if (string.IsNullOrEmpty(choice.npc_response))
+                            {
+                                fullText = $"<i>{fullText}</i>";
+                            }
                             displayName = "";  // No speaker name for inner thoughts
                         }
 
