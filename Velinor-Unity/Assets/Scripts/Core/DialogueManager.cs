@@ -124,8 +124,12 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log($"[DialogueManager] Displaying beat: {beat.pid ?? beat.id.ToString()} (mode: {beat.mode})");
 
-        // Show shared_beat if it exists (auto-advance dialogue)
-        if (!string.IsNullOrEmpty(beat.shared_beat))
+        // Check if beat has choices
+        bool hasChoices = (beat.tone_choices != null && beat.tone_choices.Length > 0) ||
+                         (beat.choices != null && beat.choices.Length > 0);
+
+        // Show shared_beat if it exists AND there are NO choices (auto-advance dialogue)
+        if (!string.IsNullOrEmpty(beat.shared_beat) && !hasChoices)
         {
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
             dialogueUI.ShowText(beat.shared_beat);
@@ -220,7 +224,17 @@ public class DialogueManager : MonoBehaviour
             yield break;
         }
 
-        // 4. Advance to next beat or end dialogue
+        // 4. Show shared_beat if it exists (this happens after player chooses)
+        if (!string.IsNullOrEmpty(beat.shared_beat))
+        {
+            Debug.Log($"[DialogueManager] Showing shared_beat: {beat.shared_beat}");
+            dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
+            dialogueUI.ShowText(beat.shared_beat);
+            dialogueUI.ShowSharedBeat(beat.shared_beat);
+            yield return dialogueUI.WaitForDisplayComplete();
+        }
+
+        // 5. Advance to next beat or end dialogue
         float nextId = choice.target > 0 ? choice.target : (beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1));
         AdvanceToBeat(nextId);
     }
