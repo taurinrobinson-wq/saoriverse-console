@@ -11,51 +11,25 @@
       "active_speaker": "Player",
       "setting_description": "The Velhara marketplace thrums with afternoon energy. Vendors shout prices, crowds move in tight currents. Near the fountain, two figures stand completely still against the rushing crowd, staring at you.",
       "prompt": "They're staring at me. What should I do.",
+      "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "Step toward the figures",
           "result_text": "You approach with open body language. The man's expression shifts slightly.",
+          "npc_response": "",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.02
-            },
-            {
-              "stat": "observation",
-              "delta": -0.015
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.005
-            }
+            { "stat": "trust", "delta": 0.02 },
+            { "stat": "observation", "delta": -0.015 },
+            { "stat": "narrative", "delta": -0.01 },
+            { "stat": "empathy", "delta": 0.005 }
           ],
           "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "memory",
-              "delta": -0.01
-            }
+            { "target": "activeNpcId", "stat": "resolve", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "trust", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "skepticism", "delta": -0.01 },
+            { "target": "activeNpcId", "stat": "memory", "delta": -0.01 }
           ]
         },
         {
@@ -63,45 +37,18 @@
           "label": "Observation",
           "text": "Keep your distance",
           "result_text": "You maintain space, watching carefully. Both of them notice your caution.",
+          "npc_response": "",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.015
-            },
-            {
-              "stat": "observation",
-              "delta": 0.02
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.005
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "stat": "trust", "delta": -0.015 },
+            { "stat": "observation", "delta": 0.02 },
+            { "stat": "narrative", "delta": 0.005 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "need",
-              "delta": -0.01
-            }
+            { "target": "activeNpcId", "stat": "nuance", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "memory", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "authority", "delta": -0.01 },
+            { "target": "activeNpcId", "stat": "need", "delta": -0.01 }
           ]
         },
         {
@@ -109,45 +56,18 @@
           "label": "NarrativePresence",
           "text": "Explore the stalls",
           "result_text": "You wander the marketplace, examining merchant goods. After a moment, you notice them watching you still.",
+          "npc_response": "",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.01
-            },
-            {
-              "stat": "observation",
-              "delta": 0.005
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.02
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "stat": "trust", "delta": -0.01 },
+            { "stat": "observation", "delta": 0.005 },
+            { "stat": "narrative", "delta": 0.02 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "target": "activeNpcId", "stat": "authority", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "skepticism", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "resolve", "delta": -0.01 },
+            { "target": "activeNpcId", "stat": "empathy", "delta": -0.01 }
           ]
         },
         {
@@ -155,467 +75,248 @@
           "label": "Empathy",
           "text": "Freeze and observe",
           "result_text": "You stop completely. Your stillness meets theirs. Time feels different here.",
+          "npc_response": "",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.005
-            },
-            {
-              "stat": "observation",
-              "delta": -0.01
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.02
-            }
+            { "stat": "trust", "delta": 0.005 },
+            { "stat": "observation", "delta": -0.01 },
+            { "stat": "narrative", "delta": -0.01 },
+            { "stat": "empathy", "delta": 0.02 }
           ],
           "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "trust",
-              "delta": -0.01
-            }
+            { "target": "activeNpcId", "stat": "empathy", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "need", "delta": 0.01 },
+            { "target": "activeNpcId", "stat": "nuance", "delta": -0.01 },
+            { "target": "activeNpcId", "stat": "trust", "delta": -0.01 }
           ]
         }
       ],
+      "system_triggers": [],
       "next_beat_id": 2
     },
     {
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Nima",
+      "setting_description": "",
       "prompt": "NIMA: \"What do you want anyway? We don't trust outsiders.\"",
+      "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "I'm trying to find work. I'm new here.",
+          "result_text": "",
           "npc_response": "NIMA: \"Work is scarce for people who actually belong here. Intentions don't fill empty bellies.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.02
-            },
-            {
-              "stat": "observation",
-              "delta": -0.015
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.005
-            }
+            { "stat": "trust", "delta": 0.02 },
+            { "stat": "observation", "delta": -0.015 },
+            { "stat": "narrative", "delta": -0.01 },
+            { "stat": "empathy", "delta": 0.005 }
           ],
           "remnants_effects": [
-            {
-              "target": "Nima",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "memory",
-              "delta": -0.01
-            }
+            { "target": "Nima", "stat": "resolve", "delta": 0.01 },
+            { "target": "Nima", "stat": "trust", "delta": 0.01 },
+            { "target": "Nima", "stat": "skepticism", "delta": -0.01 },
+            { "target": "Nima", "stat": "memory", "delta": -0.01 }
           ]
         },
         {
           "tone": "O",
           "label": "Observation",
           "text": "I don't mean to make you feel uncomfortable. It's been a long trip, any place to rest around here?",
+          "result_text": "",
           "npc_response": "NIMA: \"Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.015
-            },
-            {
-              "stat": "observation",
-              "delta": 0.02
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.005
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "stat": "trust", "delta": -0.015 },
+            { "stat": "observation", "delta": 0.02 },
+            { "stat": "narrative", "delta": 0.005 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [
-            {
-              "target": "Nima",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "need",
-              "delta": -0.01
-            }
+            { "target": "Nima", "stat": "nuance", "delta": 0.01 },
+            { "target": "Nima", "stat": "memory", "delta": 0.01 },
+            { "target": "Nima", "stat": "authority", "delta": -0.01 },
+            { "target": "Nima", "stat": "need", "delta": -0.01 }
           ]
         },
         {
           "tone": "N",
           "label": "NarrativePresence",
           "text": "I've heard the market is a place to find work. I'm not here to cause trouble.",
+          "result_text": "",
           "npc_response": "NIMA: \"Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.01
-            },
-            {
-              "stat": "observation",
-              "delta": 0.005
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.02
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "stat": "trust", "delta": -0.01 },
+            { "stat": "observation", "delta": 0.005 },
+            { "stat": "narrative", "delta": 0.02 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [
-            {
-              "target": "Nima",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "target": "Nima", "stat": "authority", "delta": 0.01 },
+            { "target": "Nima", "stat": "skepticism", "delta": 0.01 },
+            { "target": "Nima", "stat": "resolve", "delta": -0.01 },
+            { "target": "Nima", "stat": "empathy", "delta": -0.01 }
           ]
         },
         {
           "tone": "E",
           "label": "Empathy",
           "text": "I'm not here to bother anyone. I've had a long road… that's all.",
+          "result_text": "",
           "npc_response": "NIMA: \"Everyone out here has a long road behind them. It doesn't make the ground any softer.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.005
-            },
-            {
-              "stat": "observation",
-              "delta": -0.01
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.02
-            }
+            { "stat": "trust", "delta": 0.005 },
+            { "stat": "observation", "delta": -0.01 },
+            { "stat": "narrative", "delta": -0.01 },
+            { "stat": "empathy", "delta": 0.02 }
           ],
           "remnants_effects": [
-            {
-              "target": "Nima",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "trust",
-              "delta": -0.01
-            }
+            { "target": "Nima", "stat": "empathy", "delta": 0.01 },
+            { "target": "Nima", "stat": "need", "delta": 0.01 },
+            { "target": "Nima", "stat": "nuance", "delta": -0.01 },
+            { "target": "Nima", "stat": "trust", "delta": -0.01 }
           ]
         }
       ],
+      "system_triggers": [],
       "next_beat_id": 3
     },
     {
       "id": 3,
-      "type": "npc_shared",
-      "active_speaker": "Shared",
-      "prompt": "The man and woman converse between themselves.",
-      "tone_choices": [],
-      "shared_dialogue": [
+      "type": "npc_turn",
+      "active_speaker": "Ravi",
+      "setting_description": "",
+      "prompt": "RAVI: \"You should be careful about who you reveal yourself to. There's been some 'activity' lately… The buildings are… unstable. Our daughter…\"",
+      "shared_beat": "",
+      "tone_choices": [
         {
-          "speaker": "Ravi",
-          "text": "You should be careful about who you reveal yourself to. There's been some 'activity' lately… The buildings are… unstable. Our daughter…"
-        },
-        {
-          "speaker": "Nima",
-          "text": "Ravi, take your own advice."
+          "tone": "E",
+          "label": "Continue",
+          "text": "Continue",
+          "result_text": "",
+          "npc_response": "",
+          "tone_effects": [],
+          "remnants_effects": []
         }
       ],
       "system_triggers": [
         {
           "type": "update_dialogue_names",
-          "data": [
-            "Ravi",
-            "Nima"
-          ]
+          "data": ["Ravi", "Nima"]
         }
       ],
+      "next_beat_id": 3.1
+    },
+    {
+      "id": 3.1,
+      "type": "npc_turn",
+      "active_speaker": "Nima",
+      "setting_description": "",
+      "prompt": "NIMA: \"Ravi, take your own advice.\"",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "E",
+          "label": "Continue",
+          "text": "Continue",
+          "result_text": "",
+          "npc_response": "",
+          "tone_effects": [],
+          "remnants_effects": []
+        }
+      ],
+      "system_triggers": [],
       "next_beat_id": 4
     },
     {
       "id": 4,
       "type": "npc_turn",
       "active_speaker": "Ravi",
-      "prompt": "Nima… I can't have someone else… anyway, be careful.",
+      "setting_description": "",
+      "prompt": "RAVI: \"Nima… I can't have someone else…\"",
+      "shared_beat": "RAVI: \"Anyway… I hope you will be careful.\"",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "You are right to be wary of me. I want to earn your trust.",
+          "result_text": "",
           "npc_response": "RAVI: \"Trust is a heavy thing to ask for out here. Just keep your head down.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.02
-            },
-            {
-              "stat": "observation",
-              "delta": -0.015
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.005
-            }
+            { "stat": "trust", "delta": 0.02 },
+            { "stat": "observation", "delta": -0.015 },
+            { "stat": "narrative", "delta": -0.01 },
+            { "stat": "empathy", "delta": 0.005 }
           ],
           "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": -0.01
-            }
+            { "target": "Ravi", "stat": "resolve", "delta": 0.01 },
+            { "target": "Ravi", "stat": "trust", "delta": 0.01 },
+            { "target": "Ravi", "stat": "skepticism", "delta": -0.01 },
+            { "target": "Ravi", "stat": "memory", "delta": -0.01 }
           ]
         },
         {
           "tone": "O",
           "label": "Observation",
           "text": "It's not my business but… did something happen to your daughter?",
+          "result_text": "",
           "npc_response": "RAVI: \"The stones don't care who they fall on. That's all there is to see.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.015
-            },
-            {
-              "stat": "observation",
-              "delta": 0.02
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.005
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "stat": "trust", "delta": -0.015 },
+            { "stat": "observation", "delta": 0.02 },
+            { "stat": "narrative", "delta": 0.005 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": -0.01
-            }
+            { "target": "Ravi", "stat": "nuance", "delta": 0.01 },
+            { "target": "Ravi", "stat": "memory", "delta": 0.01 },
+            { "target": "Ravi", "stat": "authority", "delta": -0.01 },
+            { "target": "Ravi", "stat": "need", "delta": -0.01 }
           ]
         },
         {
           "tone": "N",
           "label": "NarrativePresence",
           "text": "I've had some… losses… I don't need you to get into details.",
+          "result_text": "",
           "npc_response": "RAVI: \"Then you know how the air feels after the dust clears. It stays in your throat.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.01
-            },
-            {
-              "stat": "observation",
-              "delta": 0.005
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.02
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "stat": "trust", "delta": -0.01 },
+            { "stat": "observation", "delta": 0.005 },
+            { "stat": "narrative", "delta": 0.02 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": -0.01
-            }
+            { "target": "Ravi", "stat": "authority", "delta": 0.01 },
+            { "target": "Ravi", "stat": "skepticism", "delta": 0.01 },
+            { "target": "Ravi", "stat": "resolve", "delta": -0.01 },
+            { "target": "Ravi", "stat": "empathy", "delta": -0.01 }
           ]
         },
         {
           "tone": "E",
           "label": "Empathy",
           "text": "I don't know what happened to your daughter, but you seem really… impacted. Let me know if I can help with something.",
+          "result_text": "",
           "npc_response": "RAVI: \"There's nothing to repair now. Some things stay broken.\"",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.005
-            },
-            {
-              "stat": "observation",
-              "delta": -0.01
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.02
-            }
+            { "stat": "trust", "delta": 0.005 },
+            { "stat": "observation", "delta": -0.01 },
+            { "stat": "narrative", "delta": -0.01 },
+            { "stat": "empathy", "delta": 0.02 }
           ],
           "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": -0.01
-            }
+            { "target": "Ravi", "stat": "empathy", "delta": 0.01 },
+            { "target": "Ravi", "stat": "need", "delta": 0.01 },
+            { "target": "Ravi", "stat": "nuance", "delta": -0.01 },
+            { "target": "Ravi", "stat": "trust", "delta": -0.01 }
           ]
         }
       ],
       "system_triggers": [
         {
           "type": "diary_append",
-          "data": [
-            "Ravi mentioned an unstable building… and a daughter."
-          ]
+          "data": ["Ravi mentioned an unstable building… and a daughter."]
         }
       ],
       "next_beat_id": 5
@@ -624,92 +325,30 @@
       "id": 5,
       "type": "player_posture",
       "active_speaker": "Player",
+      "setting_description": "",
       "prompt": "This thing… I need to figure out what this is.",
+      "shared_beat": "",
       "tone_choices": [
         {
           "tone": "E",
           "label": "Empathy",
           "text": "End dialogue and investigate this codex signal",
           "result_text": "You turn your focus inward, following the pull of something ancient and resonant.",
+          "npc_response": "",
           "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0
-            },
-            {
-              "stat": "observation",
-              "delta": 0
-            },
-            {
-              "stat": "narrative",
-              "delta": 0
-            },
-            {
-              "stat": "empathy",
-              "delta": 0
-            }
+            { "stat": "trust", "delta": 0 },
+            { "stat": "observation", "delta": 0 },
+            { "stat": "narrative", "delta": 0 },
+            { "stat": "empathy", "delta": 0 }
           ],
           "remnants_effects": []
         }
       ],
       "system_triggers": [
-        {
-          "type": "diary_append",
-          "data": [
-            "market_discovery_daughter_hint"
-          ]
-        },
-        {
-          "type": "close_dialogue"
-        },
-        {
-          "type": "activate_proximity_tracker"
-        },
-        {
-          "type": "codex_pulse",
-          "data": [
-            "glyph_signature"
-          ]
-        }
-      ],
-      "next_beat_id": 0
-    },
-    {
-      "id": 999,
-      "type": "npc_turn",
-      "active_speaker": "Nima",
-      "prompt": "We have nothing more to say.",
-      "tone_choices": [
-        {
-          "tone": "E",
-          "label": "Empathy",
-          "text": "Leave",
-          "result_text": "You step back from the figures, letting them return to their vigil.",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0
-            },
-            {
-              "stat": "observation",
-              "delta": 0
-            },
-            {
-              "stat": "narrative",
-              "delta": 0
-            },
-            {
-              "stat": "empathy",
-              "delta": 0
-            }
-          ],
-          "remnants_effects": []
-        }
-      ],
-      "system_triggers": [
-        {
-          "type": "close_dialogue"
-        }
+        { "type": "diary_append", "data": ["market_discovery_daughter_hint"] },
+        { "type": "close_dialogue" },
+        { "type": "activate_proximity_tracker" },
+        { "type": "codex_pulse", "data": {"strength": 0.8} }
       ],
       "next_beat_id": 0
     }
