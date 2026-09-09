@@ -102,28 +102,28 @@ namespace Velinor.Core
             {
                 try
                 {
-                    // Parse as pure beats-based format (new unified format)
                     DialogueJson dialogueData = JsonUtility.FromJson<DialogueJson>(dialogueJson.text);
 
-                    if (dialogueData != null && dialogueData.beats != null && dialogueData.beats.Length > 0)
+                    if (dialogueData != null)
                     {
-                        // Auto-populate conversationId from first beat's conversationId
-                        if (!string.IsNullOrEmpty(dialogueData.beats[0].conversationId))
+                        // Try passages format first
+                        if (dialogueData.passages != null && dialogueData.passages.Length > 0)
                         {
-                            conversationId = dialogueData.beats[0].conversationId;
+                            if (!string.IsNullOrEmpty(dialogueData.passages[0].conversationId))
+                                conversationId = dialogueData.passages[0].conversationId;
+                            
+                            startPassageId = !string.IsNullOrEmpty(dialogueData.startnode) 
+                                ? dialogueData.startnode 
+                                : dialogueData.passages[0].pid;
+                            
+                            Debug.Log($"[NPCDialogueDriver] Auto-populated from passages JSON: conversationId='{conversationId}', startPassageId='{startPassageId}'");
                         }
-
-                        // Auto-populate startPassageId from startnode or default to "beat_1"
-                        if (!string.IsNullOrEmpty(dialogueData.startnode))
+                        // Try beats format
+                        else if (dialogueData.beats != null && dialogueData.beats.Length > 0)
                         {
-                            startPassageId = dialogueData.startnode;
+                            startPassageId = "1"; // Default to first beat
+                            Debug.Log($"[NPCDialogueDriver] Auto-populated from beats JSON: startPassageId='{startPassageId}'");
                         }
-                        else
-                        {
-                            startPassageId = "beat_1";
-                        }
-
-                        Debug.Log($"[NPCDialogueDriver] Auto-populated from beats JSON: conversationId='{conversationId}', startPassageId='{startPassageId}'");
                     }
 
                     // Mark this JSON as processed
