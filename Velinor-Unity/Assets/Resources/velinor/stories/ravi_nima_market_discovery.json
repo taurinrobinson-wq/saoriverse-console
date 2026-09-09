@@ -622,7 +622,7 @@
     },
     {
       "id": 5,
-      "type": "player_inner",
+      "type": "player_posture",
       "active_speaker": "Player",
       "prompt": "This thing… I need to figure out what this is.",
       "tone_choices": [

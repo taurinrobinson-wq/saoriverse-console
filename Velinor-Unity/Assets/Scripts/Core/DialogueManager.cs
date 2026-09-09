@@ -90,6 +90,7 @@ public class DialogueManager : MonoBehaviour
         public string conversationId;    // Groups related passages into coherent dialogue packages
         public string active_speaker;    // "Player", "Nima", "Ravi", "Shared", etc.
         public string scene_context;     // Optional scene description (not shown in dialogue UI)
+        public string beat_type;         // Beat type: "player_posture", "npc_turn", "npc_shared"
         public List<string> required_flags = new List<string>();
         public List<StoryChoice> choices = new List<StoryChoice>();
         public Dictionary<string, string> npc_responses;  // Tone-dependent NPC replies: "Trust" -> "response text"
@@ -438,6 +439,7 @@ public class DialogueManager : MonoBehaviour
                         {
                             pid = sharedPid,
                             conversationId = conversationId,
+                            beat_type = "npc_shared",
                             active_speaker = speaker.speaker,
                             text = speaker.text,
                             choices = new List<StoryChoice> { autoChoice },
@@ -455,10 +457,14 @@ public class DialogueManager : MonoBehaviour
                 }
 
                 // Normal beat processing (player posture or npc_turn)
+                // Normalize player_inner to player_posture
+                string beatType = beat.type == "player_inner" ? "player_posture" : beat.type;
+                
                 StoryPassage passage = new StoryPassage
                 {
                     pid = beatPid,
                     conversationId = conversationId,
+                    beat_type = beatType,
                     active_speaker = beat.active_speaker,
                     text = beat.prompt ?? $"Beat {beat.id}",
                     choices = new List<StoryChoice>()
@@ -1020,13 +1026,14 @@ public class DialogueManager : MonoBehaviour
                     // Combine NPC response with any shared beat
                     string fullText = responseText + npcResponse;
 
-                    // Check if target is a shared dialogue beat (first passage of a shared sequence)
-                    bool isSharedTarget = nextPassage.is_shared_beat;
+                    // Check the target beat's type to determine how to display
+                    // Only npc_turn beats have NPC responses
+                    bool shouldShowNpcResponse = nextPassage.beat_type == "npc_turn";
                     
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
-                    if (!isSharedTarget && dialogueUIController != null)
+                    if (shouldShowNpcResponse && dialogueUIController != null)
                     {
-                        // For regular passages, display the NPC response first
+                        // For npc_turn beats, display the NPC response first
                         string displayName = GetDisplayNameForDialogue(activeNpcId);
 
                         // Check active speaker for multi-speaker passages
@@ -1043,15 +1050,16 @@ public class DialogueManager : MonoBehaviour
 
                         dialogueUIController.ShowDialogue(displayName, fullText);
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
-                        Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (speaker: {nextPassage.active_speaker}, display name: {displayName})");
+                        Debug.Log($"[DialogueManager] Showing NPC response from npc_turn beat: {choice.target}");
                         
-                        // For regular passages, just show choices
+                        // For npc_turn beats, just show choices
                         ClearButtons();
                         DisplayChoicesForPassage(choice.target);
                     }
                     else
                     {
-                        // For shared dialogue beats, use DisplayPassage to show both text and choices
+                        // For player_posture and npc_shared beats, use DisplayPassage to show the beat's content
+                        Debug.Log($"[DialogueManager] Beat type {nextPassage.beat_type} doesn't need NPC response, using DisplayPassage");
                         ClearButtons();
                         DisplayPassage(choice.target);
                     }
