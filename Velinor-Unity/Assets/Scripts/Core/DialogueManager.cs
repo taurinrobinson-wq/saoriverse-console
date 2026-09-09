@@ -1005,7 +1005,7 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
                     
-                    // If still no NPC response, use the next passage's text (but only if it's not a shared dialogue beat)
+                    // If still no NPC response, use the next passage's text (but not for shared dialogue beats)
                     if (string.IsNullOrEmpty(npcResponse))
                     {
                         // Don't use nextPassage.text if it's a shared dialogue beat - those flow seamlessly
@@ -1015,58 +1015,35 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
-                    // Process system triggers from the target passage BEFORE displaying it
-                    if (nextPassage.system_triggers_list != null && nextPassage.system_triggers_list.Count > 0)
+                    // Combine NPC response with any shared beat
+                    string fullText = responseText + npcResponse;
+
+                    // Display combined text and immediately show next choices
+                    var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
+                    if (dialogueUIController != null)
                     {
-                        ProcessSystemTriggersFromPassage(nextPassage.system_triggers_list);
-                    }
-                    
-                    if (!string.IsNullOrEmpty(nextPassage.system_trigger))
-                    {
-                        ProcessSystemTrigger(nextPassage.system_trigger);
+                        string displayName = GetDisplayNameForDialogue(activeNpcId);
+
+                        // Check active speaker for multi-speaker passages
+                        if (!string.IsNullOrEmpty(nextPassage.active_speaker) && nextPassage.active_speaker != "Player")
+                        {
+                            displayName = GetDisplayNameForDialogue(nextPassage.active_speaker);
+                        }
+                        else if (nextPassage.active_speaker == "Player")
+                        {
+                            // Format player inner thoughts in italics
+                            fullText = $"<i>{fullText}</i>";
+                            displayName = "";  // No speaker name for inner thoughts
+                        }
+
+                        dialogueUIController.ShowDialogue(displayName, fullText);
+                        dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
+                        Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (speaker: {nextPassage.active_speaker}, display name: {displayName})");
                     }
 
-                    // For beats-based dialogue, the npc_response is shown first, then we flow to target
-                    string fullResponse = responseText + npcResponse;
-                    
-                    var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
-                    
-                    // If there's an NPC response, show it with an auto-continue button
-                    if (!string.IsNullOrEmpty(fullResponse) && dialogueUIController != null)
-                    {
-                        dialogueUIController.ShowDialogue("", fullResponse);
-                        Debug.Log($"[DialogueManager] Showing NPC response. Next will advance to: {choice.target}");
-                        
-                        // Create a temporary passage with a continue choice to advance to the target
-                        ClearButtons();
-                        StoryChoice continueChoice = new StoryChoice
-                        {
-                            playerLine = "[Continue]",
-                            target = choice.target,
-                            tone = ToneType.Trust
-                        };
-                        
-                        // Create a temporary passage for the continue button
-                        StoryPassage continuePassage = new StoryPassage
-                        {
-                            pid = "_continue_",
-                            conversationId = currentConversationId,
-                            text = fullResponse,
-                            choices = new List<StoryChoice> { continueChoice }
-                        };
-                        
-                        // Display the continue button
-                        DisplayChoicesForPassage("_continue_");
-                        // But first we need to add it to passages temporarily
-                        passages["_continue_"] = continuePassage;
-                        DisplayChoicesForPassage("_continue_");
-                    }
-                    else
-                    {
-                        // No NPC response, just go directly to the target passage
-                        ClearButtons();
-                        DisplayPassage(choice.target);
-                    }
+                    // Set up choices from the target passage
+                    ClearButtons();
+                    DisplayChoicesForPassage(choice.target);
                 }
             }
         }
