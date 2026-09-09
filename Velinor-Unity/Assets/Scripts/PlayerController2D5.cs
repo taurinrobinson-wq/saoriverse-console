@@ -57,9 +57,14 @@ public class PlayerController2D5 : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
 
+        // If no CharacterController exists, create one
         if (characterController == null)
         {
-            Debug.LogWarning("[PlayerController2D5] CharacterController NOT FOUND on player! Collisions will not work.");
+            Debug.LogWarning("[PlayerController2D5] CharacterController NOT FOUND on player! Creating one now.");
+            characterController = gameObject.AddComponent<CharacterController>();
+            characterController.height = 1.8f;
+            characterController.radius = 0.3f;
+            Debug.Log("[PlayerController2D5] CharacterController created with height=1.8, radius=0.3");
         }
         else
         {
