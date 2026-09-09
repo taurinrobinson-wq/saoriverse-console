@@ -208,10 +208,13 @@ public class DialogueManager : MonoBehaviour
             
             // Show the continue button and wait for player to click
             bool continueClicked = false;
+            float targetBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
+            Debug.Log($"[DialogueManager] Continue button will advance to beat: {targetBeatId}");
             dialogueUI.ShowChoices(continueBeat, choice => 
             {
+                Debug.Log($"[DialogueManager] Continue button clicked, advancing to beat: {targetBeatId}");
                 continueClicked = true;
-                AdvanceToBeat(beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1));
+                AdvanceToBeat(targetBeatId);
             });
             
             yield break;
