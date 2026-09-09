@@ -57,6 +57,15 @@ public class PlayerController2D5 : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
 
+        if (characterController == null)
+        {
+            Debug.LogWarning("[PlayerController2D5] CharacterController NOT FOUND on player! Collisions will not work.");
+        }
+        else
+        {
+            Debug.Log($"[PlayerController2D5] CharacterController found and enabled={characterController.enabled}");
+        }
+
         currentPosition = transform.position;
 
         // Immediate scale calculation for first frame
