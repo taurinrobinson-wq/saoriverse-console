@@ -1018,10 +1018,14 @@ public class DialogueManager : MonoBehaviour
                     // Combine NPC response with any shared beat
                     string fullText = responseText + npcResponse;
 
-                    // Display combined text and immediately show next choices
+                    // For shared dialogue beats, don't show the NPC response yet - let DisplayPassage handle it
+                    bool isSharedTarget = !string.IsNullOrEmpty(nextPassage.active_speaker) &&
+                                         (nextPassage.active_speaker == "Ravi" || nextPassage.active_speaker == "Nima");
+                    
                     var dialogueUIController = FindAnyObjectByType<DialogueUIController>();
-                    if (dialogueUIController != null)
+                    if (!isSharedTarget && dialogueUIController != null)
                     {
+                        // For regular passages, display the NPC response first
                         string displayName = GetDisplayNameForDialogue(activeNpcId);
 
                         // Check active speaker for multi-speaker passages
@@ -1039,11 +1043,17 @@ public class DialogueManager : MonoBehaviour
                         dialogueUIController.ShowDialogue(displayName, fullText);
                         dialogueUIController.currentActiveSpeaker = nextPassage.active_speaker;
                         Debug.Log($"[DialogueManager] Showing NPC response + next passage: {choice.target} (speaker: {nextPassage.active_speaker}, display name: {displayName})");
+                        
+                        // For regular passages, just show choices
+                        ClearButtons();
+                        DisplayChoicesForPassage(choice.target);
                     }
-
-                    // Set up choices from the target passage
-                    ClearButtons();
-                    DisplayChoicesForPassage(choice.target);
+                    else
+                    {
+                        // For shared dialogue beats, use DisplayPassage to show both text and choices
+                        ClearButtons();
+                        DisplayPassage(choice.target);
+                    }
                 }
             }
         }
