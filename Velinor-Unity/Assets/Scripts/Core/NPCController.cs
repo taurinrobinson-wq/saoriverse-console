@@ -10,7 +10,7 @@ namespace Velinor.Core
     /// Requires: CharacterController, Animator
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
-    public class NPCController : MonoBehaviour
+    public class NPCController : MonoBehaviour, IInteractable
     {
         [Header("Movement")]
         [SerializeField] private float moveSpeed = 2.0f;
@@ -20,6 +20,10 @@ namespace Velinor.Core
         [Header("Physics")]
         [SerializeField] private float gravity = -15.0f;
         [SerializeField] private float terminalVelocity = 53.0f;
+
+        [Header("Dialogue")]
+        [SerializeField] private string npcId;
+        [SerializeField] private string startBeatId = "1";
 
         private CharacterController characterController;
         private Animator animator;
@@ -47,6 +51,12 @@ namespace Velinor.Core
                 // Cache animator hashes
                 animIDSpeed = Animator.StringToHash("Speed");
                 animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            }
+
+            // Auto-populate npcId from gameObject name if not set
+            if (string.IsNullOrEmpty(npcId))
+            {
+                npcId = gameObject.name;
             }
 
             Debug.Log($"[NPCController] {gameObject.name}: Initialized");
@@ -193,6 +203,23 @@ namespace Velinor.Core
             float motionSpeed = currentSpeed > 0 ? 1.0f : 0.0f;
             animator.SetFloat(animIDSpeed, currentSpeed);
             animator.SetFloat(animIDMotionSpeed, motionSpeed);
+        }
+
+        /// <summary>
+        /// Called when player interacts with this NPC.
+        /// </summary>
+        public void Interact(GameObject player)
+        {
+            Debug.Log($"[NPCController] {gameObject.name} interacting with player");
+            var dialogueManager = FindAnyObjectByType<DialogueManager>();
+            if (dialogueManager != null)
+            {
+                dialogueManager.StartDialogue(npcId, startBeatId);
+            }
+            else
+            {
+                Debug.LogError("[NPCController] DialogueManager not found in scene!");
+            }
         }
     }
 }
