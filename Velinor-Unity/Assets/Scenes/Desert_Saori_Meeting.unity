@@ -1352,6 +1352,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7358547498081987968, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
+      propertyPath: npcName
+      value: Older Woman
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358547498081987968, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
       propertyPath: dialogueJson
       value: 
       objectReference: {fileID: 4900000, guid: 2d4d1a66620e0b14caad6d0286e7297f, type: 3}
@@ -1367,9 +1371,13 @@ PrefabInstance:
       propertyPath: startPassageId
       value: desert_intro
       objectReference: {fileID: 0}
+    - target: {fileID: 7358547498081987968, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
+      propertyPath: interactionRadius
+      value: 0.86
+      objectReference: {fileID: 0}
     - target: {fileID: 7948732866325835248, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
       propertyPath: m_Name
-      value: NPCController
+      value: Saori
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3302,20 +3310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d0fb63a8231e4d937118652772d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  dialogueCanvas: {fileID: 8699776103234011412}
-  bodyText: {fileID: 2238726871770890059}
-  npcNameText: {fileID: 4528026122505157555}
-  sharedBeatText: {fileID: 2278611022070741810}
-  btnT: {fileID: 6288574556857875547}
-  btnO: {fileID: 6931616304733207975}
-  btnN: {fileID: 2170701007886842230}
-  btnE: {fileID: 2294026381814879145}
-  txtT: {fileID: 2378385315441504810}
-  txtO: {fileID: 4289821377739707786}
-  txtN: {fileID: 7950162325451368912}
-  txtE: {fileID: 2883652514589377817}
-  choiceButtonContainer: {fileID: 747212559702238024}
-  _choiceButtonPrefab: {fileID: 2000220524889621443}
+  dialogueJson: {fileID: 0}
 --- !u!4 &1543128805
 Transform:
   m_ObjectHideFlags: 0
@@ -3376,6 +3371,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 8441262526446954880}
   dialogueText: {fileID: 2238726871770890059}
   npcNameText: {fileID: 4528026122505157555}
+  sharedBeatText: {fileID: 0}
   dialogueFont: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
   currentActiveSpeaker: Player
 --- !u!4 &1616405114
@@ -15671,6 +15667,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 8441262526446954880}
   dialogueText: {fileID: 2238726871770890059}
   npcNameText: {fileID: 4528026122505157555}
+  sharedBeatText: {fileID: 0}
   dialogueFont: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
   currentActiveSpeaker: Player
 --- !u!1 &4977478859836551838
@@ -18000,6 +17997,7 @@ MonoBehaviour:
   npcId: Saori
   startPassageId: market_entry
   interactionRadius: 2
+  dialogueJson: {fileID: 0}
   npcScale: {x: 1.25, y: 1.25, z: 1.25}
   useDefaultScale: 1
   colliderHeight: 2
