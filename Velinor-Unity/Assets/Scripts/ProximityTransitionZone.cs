@@ -96,7 +96,7 @@ private void OnValidate()
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"[ProximityTransitionZone] OnTriggerEnter called with: {other.gameObject.name} (tag: {other.tag})");
+        Debug.Log($"[ProximityTransitionZone] OnTriggerEnter called with: {other.gameObject.name} (tag: {other.tag}) at Time.timeSinceLevelLoad={Time.timeSinceLevelLoad:F4}");
         HandleTriggerEnter(other.gameObject);
     }
 
@@ -105,7 +105,7 @@ private void OnValidate()
         Debug.Log($"[ProximityTransitionZone] HandleTriggerEnter - other.tag={other.tag}, Player tag check: {other.CompareTag("Player")}");
         if (other.CompareTag("Player"))
         {
-            Debug.Log("[ProximityTransitionZone] Player detected! Setting playerInside=true");
+            Debug.Log($"[ProximityTransitionZone] Player detected! Setting playerInside=true. playerHasExitedOnce={playerHasExitedOnce}");
             playerInside = true;
             CheckAutoTrigger(other);
         }
