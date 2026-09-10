@@ -41,6 +41,16 @@ public class ProximityTransitionZone : MonoBehaviour
     {
         cachedCollider = GetComponent<Collider>();
         cachedCollider2D = GetComponent<Collider2D>();
+        
+        // Ensure collider is set as trigger
+        if (cachedCollider != null)
+        {
+            cachedCollider.isTrigger = true;
+        }
+        if (cachedCollider2D != null)
+        {
+            cachedCollider2D.isTrigger = true;
+        }
     }
 
 #if UNITY_EDITOR
