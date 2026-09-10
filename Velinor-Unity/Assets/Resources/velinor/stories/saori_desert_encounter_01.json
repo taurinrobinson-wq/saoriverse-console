@@ -17,7 +17,10 @@
           "result_text": "",
           "npc_response": "I cannot offer any of that.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.02 }
+            { "stat": "trust", "delta": 0.02 },
+            { "stat": "observation", "delta": -0.015 },
+            { "stat": "narrative", "delta": -0.01 },
+            { "stat": "empathy", "delta": 0.005 }
           ],
           "remnants_effects": [],
           "system_triggers": ["met_older_woman=true"]
@@ -29,7 +32,10 @@
           "result_text": "",
           "npc_response": "A question for a question. Interesting.",
           "tone_effects": [
-            { "stat": "observation", "delta": 0.02 }
+            { "stat": "trust", "delta": -0.015 },
+            { "stat": "observation", "delta": 0.02 },
+            { "stat": "narrative", "delta": 0.005 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [],
           "system_triggers": ["met_older_woman=true"]
@@ -41,7 +47,10 @@
           "result_text": "",
           "npc_response": "Hm... In theory...",
           "tone_effects": [
-            { "stat": "narrative", "delta": 0.02 }
+            { "stat": "trust", "delta": -0.01 },
+            { "stat": "observation", "delta": 0.005 },
+            { "stat": "narrative", "delta": 0.02 },
+            { "stat": "empathy", "delta": -0.01 }
           ],
           "remnants_effects": [],
           "system_triggers": ["met_older_woman=true"]
@@ -53,6 +62,9 @@
           "result_text": "",
           "npc_response": "A practical instinct. Good.",
           "tone_effects": [
+            { "stat": "trust", "delta": 0.005 },
+            { "stat": "observation", "delta": -0.01 },
+            { "stat": "narrative", "delta": -0.01 },
             { "stat": "empathy", "delta": 0.02 }
           ],
           "remnants_effects": [
@@ -79,7 +91,10 @@
           "result_text": "",
           "npc_response": "Keep it close.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.03 }
+            { "stat": "trust", "delta": 0.03 },
+            { "stat": "observation", "delta": -0.0225 },
+            { "stat": "narrative", "delta": -0.015 },
+            { "stat": "empathy", "delta": 0.0075 }
           ],
           "remnants_effects": [],
           "system_triggers": ["give_device", "received_older_woman_device=true"]
@@ -91,7 +106,10 @@
           "result_text": "",
           "npc_response": "Later.",
           "tone_effects": [
-            { "stat": "observation", "delta": 0.03 }
+            { "stat": "trust", "delta": -0.0225 },
+            { "stat": "observation", "delta": 0.03 },
+            { "stat": "narrative", "delta": 0.0075 },
+            { "stat": "empathy", "delta": -0.015 }
           ],
           "remnants_effects": [],
           "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_questioned=true"]
@@ -103,7 +121,10 @@
           "result_text": "",
           "npc_response": "Most things are, once you look closely.",
           "tone_effects": [
-            { "stat": "narrative", "delta": 0.03 }
+            { "stat": "trust", "delta": -0.015 },
+            { "stat": "observation", "delta": 0.0075 },
+            { "stat": "narrative", "delta": 0.03 },
+            { "stat": "empathy", "delta": -0.015 }
           ],
           "remnants_effects": [],
           "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_significance_noted=true"]
@@ -115,6 +136,9 @@
           "result_text": "",
           "npc_response": "Understanding isn't required.",
           "tone_effects": [
+            { "stat": "trust", "delta": 0.01 },
+            { "stat": "observation", "delta": -0.015 },
+            { "stat": "narrative", "delta": -0.015 },
             { "stat": "empathy", "delta": 0.04 }
           ],
           "remnants_effects": [
@@ -141,7 +165,10 @@
           "result_text": "",
           "npc_response": "No time.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.01 }
+            { "stat": "trust", "delta": 0.01 },
+            { "stat": "observation", "delta": -0.0075 },
+            { "stat": "narrative", "delta": -0.005 },
+            { "stat": "empathy", "delta": 0.0025 }
           ],
           "remnants_effects": [],
           "system_triggers": ["older_woman_departing=true"]
@@ -153,7 +180,10 @@
           "result_text": "",
           "npc_response": "Later.",
           "tone_effects": [
-            { "stat": "observation", "delta": 0.01 }
+            { "stat": "trust", "delta": -0.0075 },
+            { "stat": "observation", "delta": 0.01 },
+            { "stat": "narrative", "delta": 0.0025 },
+            { "stat": "empathy", "delta": -0.005 }
           ],
           "remnants_effects": [],
           "system_triggers": ["older_woman_departing=true"]
@@ -165,7 +195,10 @@
           "result_text": "",
           "npc_response": "The wind is shifting.",
           "tone_effects": [
-            { "stat": "narrative", "delta": 0.02 }
+            { "stat": "trust", "delta": -0.005 },
+            { "stat": "observation", "delta": 0.0025 },
+            { "stat": "narrative", "delta": 0.02 },
+            { "stat": "empathy", "delta": -0.005 }
           ],
           "remnants_effects": [],
           "system_triggers": ["older_woman_departing=true"]
@@ -177,6 +210,9 @@
           "result_text": "",
           "npc_response": "I would, if I could.",
           "tone_effects": [
+            { "stat": "trust", "delta": 0.005 },
+            { "stat": "observation", "delta": -0.01 },
+            { "stat": "narrative", "delta": -0.01 },
             { "stat": "empathy", "delta": 0.02 }
           ],
           "remnants_effects": [
