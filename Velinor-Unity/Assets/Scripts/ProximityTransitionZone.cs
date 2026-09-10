@@ -34,6 +34,7 @@ public class ProximityTransitionZone : MonoBehaviour
 
     private bool playerInside = false;
     private bool transitionTriggered = false;
+    private bool playerHasExitedOnce = false;
     private Collider cachedCollider;
     private Collider2D cachedCollider2D;
 
@@ -41,6 +42,32 @@ public class ProximityTransitionZone : MonoBehaviour
     {
         cachedCollider = GetComponent<Collider>();
         cachedCollider2D = GetComponent<Collider2D>();
+    }
+
+    private void Start()
+    {
+        // Ensure there's a Rigidbody to own this trigger collider
+        // Trigger colliders without a Rigidbody don't always register collisions
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.isKinematic = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            Debug.Log("[ProximityTransitionZone] Added missing Rigidbody to trigger collider");
+        }
+
+        // Force physics engine to recognize the collider by toggling it
+        if (cachedCollider != null)
+        {
+            cachedCollider.enabled = false;
+            cachedCollider.enabled = true;
+        }
+        if (cachedCollider2D != null)
+        {
+            cachedCollider2D.enabled = false;
+            cachedCollider2D.enabled = true;
+        }
     }
 
 #if UNITY_EDITOR
@@ -69,13 +96,16 @@ private void OnValidate()
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"[ProximityTransitionZone] OnTriggerEnter called with: {other.gameObject.name} (tag: {other.tag})");
         HandleTriggerEnter(other.gameObject);
     }
 
     private void HandleTriggerEnter(GameObject other)
     {
+        Debug.Log($"[ProximityTransitionZone] HandleTriggerEnter - other.tag={other.tag}, Player tag check: {other.CompareTag("Player")}");
         if (other.CompareTag("Player"))
         {
+            Debug.Log("[ProximityTransitionZone] Player detected! Setting playerInside=true");
             playerInside = true;
             CheckAutoTrigger(other);
         }
@@ -83,20 +113,43 @@ private void OnValidate()
 
     private void CheckAutoTrigger(GameObject player)
     {
-        if (transitionTriggered || requireKeyPress) return;
+        Debug.Log($"[ProximityTransitionZone] CheckAutoTrigger called. transitionTriggered={transitionTriggered}, requireKeyPress={requireKeyPress}");
+        if (transitionTriggered || requireKeyPress) 
+        {
+            Debug.Log("[ProximityTransitionZone] CheckAutoTrigger blocked: transitionTriggered or requireKeyPress");
+            return;
+        }
 
-        // Use pivot position to check if player is actually "at" the trigger
-        if (!IsPlayerPivotInside(player)) return;
+        // Grace period only applies to first entry on scene load
+        // If player has exited and re-entered, skip grace period
+        float timeSinceLoad = Time.timeSinceLevelLoad;
+        bool withinGracePeriod = timeSinceLoad < spawnGracePeriod && !playerHasExitedOnce;
+        Debug.Log($"[ProximityTransitionZone] Time.timeSinceLevelLoad={timeSinceLoad:F3}, spawnGracePeriod={spawnGracePeriod}, playerHasExitedOnce={playerHasExitedOnce}, withinGracePeriod={withinGracePeriod}");
+        if (withinGracePeriod) 
+        {
+            Debug.Log("[ProximityTransitionZone] CheckAutoTrigger blocked: within grace period");
+            return;
+        }
 
-        if (Time.timeSinceLevelLoad < spawnGracePeriod) return;
-
+        Debug.Log("[ProximityTransitionZone] All checks passed! Triggering transition...");
         TriggerTransition();
     }
 
     private bool IsPlayerPivotInside(GameObject player)
     {
-        if (cachedCollider != null) return cachedCollider.bounds.Contains(player.transform.position);
-        if (cachedCollider2D != null) return cachedCollider2D.OverlapPoint(player.transform.position);
+        if (cachedCollider != null) 
+        {
+            bool contains = cachedCollider.bounds.Contains(player.transform.position);
+            Debug.Log($"[ProximityTransitionZone] IsPlayerPivotInside (3D): Player pos={player.transform.position}, Collider bounds={cachedCollider.bounds}, Contains={contains}");
+            return contains;
+        }
+        if (cachedCollider2D != null) 
+        {
+            bool overlaps = cachedCollider2D.OverlapPoint(player.transform.position);
+            Debug.Log($"[ProximityTransitionZone] IsPlayerPivotInside (2D): Player pos={player.transform.position}, OverlapPoint={overlaps}");
+            return overlaps;
+        }
+        Debug.Log("[ProximityTransitionZone] IsPlayerPivotInside: No collider cached!");
         return false;
     }
 
@@ -113,7 +166,10 @@ private void OnValidate()
     private void HandleTriggerExit(GameObject other)
     {
         if (other.CompareTag("Player"))
+        {
             playerInside = false;
+            playerHasExitedOnce = true;
+        }
     }
 
     private void Update()
