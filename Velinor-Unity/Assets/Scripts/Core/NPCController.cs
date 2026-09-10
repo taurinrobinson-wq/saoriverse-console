@@ -24,6 +24,7 @@ namespace Velinor.Core
         [Header("Dialogue")]
         [SerializeField] private string npcId;
         [SerializeField] private string startBeatId = "1";
+        [SerializeField] private string dialogueJsonPath; // Path relative to Resources/
 
         private CharacterController characterController;
         private Animator animator;
@@ -211,10 +212,28 @@ namespace Velinor.Core
         public void Interact(GameObject player)
         {
             Debug.Log($"[NPCController] {gameObject.name} interacting with player");
-            var dialogueManager = FindAnyObjectByType<DialogueManager>();
+            var dialogueManager = DialogueManager.Instance;
             if (dialogueManager != null)
             {
-                dialogueManager.StartDialogue(npcId, startBeatId);
+                // Load the dialogue JSON for this NPC first
+                if (string.IsNullOrEmpty(dialogueJsonPath))
+                {
+                    Debug.LogError($"[NPCController] No dialogueJsonPath configured for {gameObject.name}");
+                    return;
+                }
+
+                TextAsset dialogueJson = Resources.Load<TextAsset>(dialogueJsonPath);
+                
+                if (dialogueJson != null)
+                {
+                    dialogueManager.LoadDialogue(dialogueJson);
+                    dialogueManager.StartDialogue(npcId, startBeatId);
+                    Debug.Log($"[NPCController] Loaded dialogue for {npcId} from {dialogueJsonPath}");
+                }
+                else
+                {
+                    Debug.LogError($"[NPCController] Could not load dialogue JSON: {dialogueJsonPath}");
+                }
             }
             else
             {
