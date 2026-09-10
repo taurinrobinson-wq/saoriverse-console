@@ -62,7 +62,7 @@ public class DiaryManager : MonoBehaviour
         try
         {
             string json = JsonUtility.ToJson(diaryData, true);
-            File.WriteAllText(diaryPath, json);
+            File.WriteAllText(diaryPath, json, System.Text.Encoding.UTF8);
         }
         catch (Exception e)
         {
@@ -75,7 +75,7 @@ public class DiaryManager : MonoBehaviour
         if (!File.Exists(diaryPath)) return;
         try
         {
-            string json = File.ReadAllText(diaryPath);
+            string json = File.ReadAllText(diaryPath, System.Text.Encoding.UTF8);
             diaryData = JsonUtility.FromJson<DiaryData>(json);
         }
         catch (Exception e)

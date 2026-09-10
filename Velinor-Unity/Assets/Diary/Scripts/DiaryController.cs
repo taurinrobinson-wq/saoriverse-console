@@ -162,17 +162,26 @@ public class DiaryController : MonoBehaviour
     {
         if (textDisplay != null)
         {
-            textDisplay.text = (entries != null && currentIndex < entries.Count) ? entries[currentIndex] : "";
+            if (entries != null && entries.Count > 0)
+            {
+                // Display all entries as bullet points on one page
+                string bulletText = "• " + string.Join("\n\n• ", entries);
+                textDisplay.text = bulletText;
+            }
+            else
+            {
+                textDisplay.text = "";
+            }
         }
 
         if (nextButton != null)
         {
-            nextButton.interactable = entries != null && currentIndex < entries.Count - 1;
+            nextButton.interactable = false;
         }
 
         if (prevButton != null)
         {
-            prevButton.interactable = currentIndex > 0;
+            prevButton.interactable = false;
         }
     }
 
@@ -207,7 +216,7 @@ public class DiaryController : MonoBehaviour
             var displayEntries = new List<string>();
             foreach (var entry in diaryEntries)
             {
-                displayEntries.Add($"{entry.timestamp}\n{entry.content}");
+                displayEntries.Add(entry.content);
             }
             SetEntries(displayEntries);
             Debug.Log($"[Diary] Loaded {displayEntries.Count} entries from DiaryManager");
