@@ -433,7 +433,7 @@
       "shared_beat": "",
       "tone_choices": [
         {
-          "tone": "E",
+          "tone": "T",
           "label": "Continue",
           "text": "Close the dialogue and continue toward the market.",
           "result_text": "",

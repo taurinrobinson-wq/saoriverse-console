@@ -20,16 +20,44 @@
           "result_text": "You approach with open body language. The man's expression shifts slightly.",
           "npc_response": "",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.02 },
-            { "stat": "observation", "delta": -0.015 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.005 }
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
           ],
           "remnants_effects": [
-            { "target": "activeNpcId", "stat": "resolve", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "trust", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "skepticism", "delta": -0.01 },
-            { "target": "activeNpcId", "stat": "memory", "delta": -0.01 }
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -39,16 +67,44 @@
           "result_text": "You maintain space, watching carefully. Both of them notice your caution.",
           "npc_response": "",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.015 },
-            { "stat": "observation", "delta": 0.02 },
-            { "stat": "narrative", "delta": 0.005 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [
-            { "target": "activeNpcId", "stat": "nuance", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "memory", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "authority", "delta": -0.01 },
-            { "target": "activeNpcId", "stat": "need", "delta": -0.01 }
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -58,16 +114,44 @@
           "result_text": "You wander the marketplace, examining merchant goods. After a moment, you notice them watching you still.",
           "npc_response": "",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.01 },
-            { "stat": "observation", "delta": 0.005 },
-            { "stat": "narrative", "delta": 0.02 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [
-            { "target": "activeNpcId", "stat": "authority", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "skepticism", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "resolve", "delta": -0.01 },
-            { "target": "activeNpcId", "stat": "empathy", "delta": -0.01 }
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -77,16 +161,44 @@
           "result_text": "You stop completely. Your stillness meets theirs. Time feels different here.",
           "npc_response": "",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.005 },
-            { "stat": "observation", "delta": -0.01 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.02 }
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
           ],
           "remnants_effects": [
-            { "target": "activeNpcId", "stat": "empathy", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "need", "delta": 0.01 },
-            { "target": "activeNpcId", "stat": "nuance", "delta": -0.01 },
-            { "target": "activeNpcId", "stat": "trust", "delta": -0.01 }
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
           ]
         }
       ],
@@ -108,16 +220,44 @@
           "result_text": "",
           "npc_response": "Work is scarce for people who actually belong here. Intentions don't fill empty bellies.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.02 },
-            { "stat": "observation", "delta": -0.015 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.005 }
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
           ],
           "remnants_effects": [
-            { "target": "Nima", "stat": "resolve", "delta": 0.01 },
-            { "target": "Nima", "stat": "trust", "delta": 0.01 },
-            { "target": "Nima", "stat": "skepticism", "delta": -0.01 },
-            { "target": "Nima", "stat": "memory", "delta": -0.01 }
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -127,16 +267,44 @@
           "result_text": "",
           "npc_response": "Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.015 },
-            { "stat": "observation", "delta": 0.02 },
-            { "stat": "narrative", "delta": 0.005 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [
-            { "target": "Nima", "stat": "nuance", "delta": 0.01 },
-            { "target": "Nima", "stat": "memory", "delta": 0.01 },
-            { "target": "Nima", "stat": "authority", "delta": -0.01 },
-            { "target": "Nima", "stat": "need", "delta": -0.01 }
+            {
+              "target": "Nima",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "need",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -146,16 +314,44 @@
           "result_text": "",
           "npc_response": "Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.01 },
-            { "stat": "observation", "delta": 0.005 },
-            { "stat": "narrative", "delta": 0.02 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [
-            { "target": "Nima", "stat": "authority", "delta": 0.01 },
-            { "target": "Nima", "stat": "skepticism", "delta": 0.01 },
-            { "target": "Nima", "stat": "resolve", "delta": -0.01 },
-            { "target": "Nima", "stat": "empathy", "delta": -0.01 }
+            {
+              "target": "Nima",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -165,16 +361,44 @@
           "result_text": "",
           "npc_response": "Everyone out here has a long road behind them. It doesn't make the ground any softer.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.005 },
-            { "stat": "observation", "delta": -0.01 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.02 }
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
           ],
           "remnants_effects": [
-            { "target": "Nima", "stat": "empathy", "delta": 0.01 },
-            { "target": "Nima", "stat": "need", "delta": 0.01 },
-            { "target": "Nima", "stat": "nuance", "delta": -0.01 },
-            { "target": "Nima", "stat": "trust", "delta": -0.01 }
+            {
+              "target": "Nima",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": -0.01
+            }
           ]
         }
       ],
@@ -190,7 +414,7 @@
       "shared_beat": "",
       "tone_choices": [
         {
-          "tone": "E",
+          "tone": "T",
           "label": "Continue",
           "text": "Continue",
           "result_text": "",
@@ -202,7 +426,10 @@
       "system_triggers": [
         {
           "type": "update_dialogue_names",
-          "data": ["Ravi", "Nima"]
+          "data": [
+            "Ravi",
+            "Nima"
+          ]
         }
       ],
       "next_beat_id": 3.1
@@ -216,7 +443,7 @@
       "shared_beat": "",
       "tone_choices": [
         {
-          "tone": "E",
+          "tone": "T",
           "label": "Continue",
           "text": "Continue",
           "result_text": "",
@@ -243,16 +470,44 @@
           "result_text": "",
           "npc_response": "Trust is a heavy thing to ask for out here. Just keep your head down.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.02 },
-            { "stat": "observation", "delta": -0.015 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.005 }
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
           ],
           "remnants_effects": [
-            { "target": "Ravi", "stat": "resolve", "delta": 0.01 },
-            { "target": "Ravi", "stat": "trust", "delta": 0.01 },
-            { "target": "Ravi", "stat": "skepticism", "delta": -0.01 },
-            { "target": "Ravi", "stat": "memory", "delta": -0.01 }
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -262,16 +517,44 @@
           "result_text": "",
           "npc_response": "The stones don't care who they fall on. That's all there is to see.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.015 },
-            { "stat": "observation", "delta": 0.02 },
-            { "stat": "narrative", "delta": 0.005 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [
-            { "target": "Ravi", "stat": "nuance", "delta": 0.01 },
-            { "target": "Ravi", "stat": "memory", "delta": 0.01 },
-            { "target": "Ravi", "stat": "authority", "delta": -0.01 },
-            { "target": "Ravi", "stat": "need", "delta": -0.01 }
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -281,16 +564,44 @@
           "result_text": "",
           "npc_response": "Then you know how the air feels after the dust clears. It stays in your throat.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.01 },
-            { "stat": "observation", "delta": 0.005 },
-            { "stat": "narrative", "delta": 0.02 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [
-            { "target": "Ravi", "stat": "authority", "delta": 0.01 },
-            { "target": "Ravi", "stat": "skepticism", "delta": 0.01 },
-            { "target": "Ravi", "stat": "resolve", "delta": -0.01 },
-            { "target": "Ravi", "stat": "empathy", "delta": -0.01 }
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ]
         },
         {
@@ -300,23 +611,53 @@
           "result_text": "",
           "npc_response": "There's nothing to repair now. Some things stay broken.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.005 },
-            { "stat": "observation", "delta": -0.01 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.02 }
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
           ],
           "remnants_effects": [
-            { "target": "Ravi", "stat": "empathy", "delta": 0.01 },
-            { "target": "Ravi", "stat": "need", "delta": 0.01 },
-            { "target": "Ravi", "stat": "nuance", "delta": -0.01 },
-            { "target": "Ravi", "stat": "trust", "delta": -0.01 }
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": -0.01
+            }
           ]
         }
       ],
       "system_triggers": [
         {
           "type": "diary_append",
-          "data": ["Ravi mentioned an unstable building… and a daughter."]
+          "data": [
+            "Ravi mentioned an unstable building… and a daughter."
+          ]
         }
       ],
       "next_beat_id": 5
@@ -336,19 +677,45 @@
           "result_text": "",
           "npc_response": "",
           "tone_effects": [
-            { "stat": "trust", "delta": 0 },
-            { "stat": "observation", "delta": 0 },
-            { "stat": "narrative", "delta": 0 },
-            { "stat": "empathy", "delta": 0 }
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
           ],
           "remnants_effects": []
         }
       ],
       "system_triggers": [
-        { "type": "diary_append", "data": ["market_discovery_daughter_hint"] },
-        { "type": "close_dialogue" },
-        { "type": "activate_proximity_tracker" },
-        { "type": "codex_pulse", "data": {"strength": 0.8} }
+        {
+          "type": "diary_append",
+          "data": [
+            "market_discovery_daughter_hint"
+          ]
+        },
+        {
+          "type": "close_dialogue"
+        },
+        {
+          "type": "activate_proximity_tracker"
+        },
+        {
+          "type": "codex_pulse",
+          "data": {
+            "strength": 0.8
+          }
+        }
       ],
       "next_beat_id": 0
     }
