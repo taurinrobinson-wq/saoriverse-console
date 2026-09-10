@@ -14,7 +14,7 @@
           "tone": "T",
           "label": "Trust",
           "text": "Yeah. I'm looking for work, food, and a place to stay.",
-          "result_text": "You speak plainly about your needs.",
+          "result_text": "",
           "npc_response": "I cannot offer any of that.",
           "tone_effects": [
             { "stat": "trust", "delta": 0.02 }
@@ -26,7 +26,7 @@
           "tone": "O",
           "label": "Observation",
           "text": "Looks you're headed somewhere too?",
-          "result_text": "You ask a question instead of answering.",
+          "result_text": "",
           "npc_response": "A question for a question. Interesting.",
           "tone_effects": [
             { "stat": "observation", "delta": 0.02 }
@@ -38,7 +38,7 @@
           "tone": "N",
           "label": "NarrativePresence",
           "text": "Anything is better than being stuck out here.",
-          "result_text": "You speak with weary honesty.",
+          "result_text": "",
           "npc_response": "Hm... In theory...",
           "tone_effects": [
             { "stat": "narrative", "delta": 0.02 }
@@ -50,7 +50,7 @@
           "tone": "E",
           "label": "Empathy",
           "text": "I just wanna be useful… and maybe get a meal.",
-          "result_text": "You speak with vulnerable honesty.",
+          "result_text": "",
           "npc_response": "A practical instinct. Good.",
           "tone_effects": [
             { "stat": "empathy", "delta": 0.02 }
@@ -76,7 +76,7 @@
           "tone": "T",
           "label": "Trust",
           "text": "I… alright. I'll take it.",
-          "result_text": "You accept the device without hesitation.",
+          "result_text": "",
           "npc_response": "Keep it close.",
           "tone_effects": [
             { "stat": "trust", "delta": 0.03 }
@@ -88,7 +88,7 @@
           "tone": "O",
           "label": "Observation",
           "text": "What is this? Why give it to me?",
-          "result_text": "You study the object carefully before taking it.",
+          "result_text": "",
           "npc_response": "Later.",
           "tone_effects": [
             { "stat": "observation", "delta": 0.03 }
@@ -100,7 +100,7 @@
           "tone": "N",
           "label": "NarrativePresence",
           "text": "This feels… important.",
-          "result_text": "You recognize the weight of the moment.",
+          "result_text": "",
           "npc_response": "Most things are, once you look closely.",
           "tone_effects": [
             { "stat": "narrative", "delta": 0.03 }
@@ -112,7 +112,7 @@
           "tone": "E",
           "label": "Empathy",
           "text": "Thank you. I don't understand, but… thank you.",
-          "result_text": "You receive the gift with genuine gratitude.",
+          "result_text": "",
           "npc_response": "Understanding isn't required.",
           "tone_effects": [
             { "stat": "empathy", "delta": 0.04 }
@@ -138,7 +138,7 @@
           "tone": "T",
           "label": "Trust",
           "text": "Wait—what is this thing?",
-          "result_text": "You reach out with questions.",
+          "result_text": "",
           "npc_response": "No time.",
           "tone_effects": [
             { "stat": "trust", "delta": 0.01 }
@@ -150,7 +150,7 @@
           "tone": "O",
           "label": "Observation",
           "text": "I didn't get your name—",
-          "result_text": "You try to gather more information.",
+          "result_text": "",
           "npc_response": "Later.",
           "tone_effects": [
             { "stat": "observation", "delta": 0.01 }
@@ -162,7 +162,7 @@
           "tone": "N",
           "label": "NarrativePresence",
           "text": "You're just… leaving?",
-          "result_text": "You witness the strangeness of this farewell.",
+          "result_text": "",
           "npc_response": "The wind is shifting.",
           "tone_effects": [
             { "stat": "narrative", "delta": 0.02 }
@@ -174,7 +174,7 @@
           "tone": "E",
           "label": "Empathy",
           "text": "Please—just tell me something.",
-          "result_text": "You appeal with genuine emotion.",
+          "result_text": "",
           "npc_response": "I would, if I could.",
           "tone_effects": [
             { "stat": "empathy", "delta": 0.02 }
