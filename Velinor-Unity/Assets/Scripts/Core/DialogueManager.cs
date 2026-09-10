@@ -364,9 +364,25 @@ public class DialogueManager : MonoBehaviour
         if (triggers == null || triggers.Length == 0)
             return;
 
+        // Process diary_update FIRST to ensure its notification is shown
+        foreach (var trigger in triggers)
+        {
+            if (trigger == "diary_update" && diaryEntries != null && diaryEntries.Length > 0)
+            {
+                Debug.Log($"[DialogueManager] Passing {diaryEntries.Length} diary entries to TriggerSystemEvent");
+                dialogueUI.TriggerSystemEvent(trigger, diaryEntries);
+                break;
+            }
+        }
+
+        // Then process all other triggers
         foreach (var trigger in triggers)
         {
             if (string.IsNullOrEmpty(trigger))
+                continue;
+
+            // Skip diary_update since we already processed it
+            if (trigger == "diary_update")
                 continue;
 
             // Handle flag-based triggers (e.g., "met_older_woman=true", "obtain_codex=true")
@@ -378,7 +394,6 @@ public class DialogueManager : MonoBehaviour
                     string flagName = parts[0].Trim();
                     string flagValue = parts[1].Trim();
                     
-                    // Set the flag in some flag system (TODO: implement flag manager if needed)
                     Debug.Log($"[DialogueManager] Flag set: {flagName} = {flagValue}");
                     
                     // Special handling for obtain_codex
@@ -390,22 +405,8 @@ public class DialogueManager : MonoBehaviour
                 }
             }
 
-            // Handle trigger names directly (e.g., "give_device", "diary_update", "npc_disappear")
-            if (trigger == "diary_update" && diaryEntries != null && diaryEntries.Length > 0)
-            {
-                // Pass diary entries to the event
-                Debug.Log($"[DialogueManager] Passing {diaryEntries.Length} diary entries to TriggerSystemEvent");
-                dialogueUI.TriggerSystemEvent(trigger, diaryEntries);
-            }
-            else if (trigger == "diary_update")
-            {
-                Debug.LogWarning($"[DialogueManager] diary_update trigger received but no entries (diaryEntries: {(diaryEntries == null ? "null" : diaryEntries.Length.ToString())})");
-                dialogueUI.TriggerSystemEvent(trigger);
-            }
-            else
-            {
-                dialogueUI.TriggerSystemEvent(trigger);
-            }
+            // Handle other trigger names directly (e.g., "give_device", "npc_disappear")
+            dialogueUI.TriggerSystemEvent(trigger);
             Debug.Log($"[DialogueManager] System trigger executed: {trigger}");
         }
     }
