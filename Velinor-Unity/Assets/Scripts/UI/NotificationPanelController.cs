@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -21,6 +22,8 @@ public class NotificationPanelController : MonoBehaviour
 
     private Canvas _cachedCanvas;
     private Coroutine _currentFadeCoroutine;
+    private Queue<(string text, float duration)> _notificationQueue = new Queue<(string, float)>();
+    private bool _isShowingNotification = false;
 
     private void Awake()
     {
@@ -92,9 +95,30 @@ public class NotificationPanelController : MonoBehaviour
 
     /// <summary>
     /// Show a notification with optional auto-hide after duration
+    /// Queues notifications to ensure none are skipped
     /// </summary>
     public void ShowNotification(string text, float duration = 3f)
     {
+        _notificationQueue.Enqueue((text, duration));
+        Debug.Log($"[Notification] Queued: {text} (queue size: {_notificationQueue.Count})");
+        
+        if (!_isShowingNotification)
+        {
+            ProcessNextNotification();
+        }
+    }
+
+    private void ProcessNextNotification()
+    {
+        if (_notificationQueue.Count == 0)
+        {
+            _isShowingNotification = false;
+            return;
+        }
+
+        _isShowingNotification = true;
+        var (text, duration) = _notificationQueue.Dequeue();
+
         if (notificationText != null)
         {
             notificationText.text = text;
@@ -138,6 +162,9 @@ public class NotificationPanelController : MonoBehaviour
         
         // Fade out
         yield return StartCoroutine(FadeTo(0f, fadeDuration));
+        
+        // Process next notification in queue
+        ProcessNextNotification();
     }
 
     private IEnumerator FadeTo(float targetAlpha, float duration)
