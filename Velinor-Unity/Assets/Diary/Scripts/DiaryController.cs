@@ -199,6 +199,24 @@ public class DiaryController : MonoBehaviour
     public IEnumerator OpenDiary()
     {
         Debug.Log("[Diary] OpenDiary coroutine started!");
+        
+        // Fetch entries from DiaryManager before opening
+        if (DiaryManager.Instance != null)
+        {
+            var diaryEntries = DiaryManager.Instance.GetEntries();
+            var displayEntries = new List<string>();
+            foreach (var entry in diaryEntries)
+            {
+                displayEntries.Add($"{entry.timestamp}\n{entry.content}");
+            }
+            SetEntries(displayEntries);
+            Debug.Log($"[Diary] Loaded {displayEntries.Count} entries from DiaryManager");
+        }
+        else
+        {
+            Debug.LogWarning("[Diary] DiaryManager.Instance not found!");
+        }
+        
         isAnimating = true;
         diaryOpen = true;
         cg.interactable = true;

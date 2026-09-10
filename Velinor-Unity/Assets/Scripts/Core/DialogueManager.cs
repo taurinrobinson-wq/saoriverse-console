@@ -239,27 +239,20 @@ public class DialogueManager : MonoBehaviour
             yield break;
         }
 
-        // 4. No npc_response: Check if there are choices to show
-        bool hasChoices = (beat.tone_choices != null && beat.tone_choices.Length > 0) ||
-                         (beat.choices != null && beat.choices.Length > 0);
+        // 4. No npc_response: Use choice's target to determine next beat
+        float choiceTarget = choice.target > 0 ? choice.target : beat.next_beat_id;
         
-        if (hasChoices)
+        if (choiceTarget <= 0)
         {
-            // Show the choices and wait for player selection
-            dialogueUI.ShowChoices(beat, choice => StartCoroutine(ResolveChoiceCoroutine(beat, choice)));
-            yield break;
-        }
-
-        // 5. No npc_response and no choices: check if we should end dialogue or advance
-        if (beat.next_beat_id <= 0)
-        {
-            // next_beat_id is 0 or negative = end dialogue
+            // Choice or beat indicates end of dialogue
+            Debug.Log($"[DialogueManager] Choice target is {choice.target}, ending dialogue");
             EndDialogue();
         }
         else
         {
-            // Advance to next beat
-            AdvanceToBeat(beat.next_beat_id);
+            // Advance to the choice's target beat
+            Debug.Log($"[DialogueManager] Advancing to beat from choice target: {choiceTarget}");
+            AdvanceToBeat(choiceTarget);
         }
     }
 
