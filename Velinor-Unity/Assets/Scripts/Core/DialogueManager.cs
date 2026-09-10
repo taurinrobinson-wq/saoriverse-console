@@ -191,7 +191,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log($"[DialogueManager] Showing result_text: {choice.result_text}");
             dialogueUI.ShowSpeaker("");
             dialogueUI.ShowText(choice.result_text);
-            yield return dialogueUI.WaitForDisplayComplete();
+            yield return new WaitForEndOfFrame(); // Just let UI render
         }
 
         // 2. Apply tone and remnants effects
@@ -204,18 +204,9 @@ public class DialogueManager : MonoBehaviour
             Debug.Log($"[DialogueManager] Showing npc_response: {choice.npc_response}");
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
             dialogueUI.ShowText(choice.npc_response);
-            yield return dialogueUI.WaitForDisplayComplete();
+            dialogueUI.HideSharedBeat();
             
-            // If beat has a shared_beat, it already provides closure/transition, so just advance
-            if (!string.IsNullOrEmpty(beat.shared_beat))
-            {
-                float targetBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
-                Debug.Log($"[DialogueManager] Beat has shared_beat, advancing directly to: {targetBeatId}");
-                AdvanceToBeat(targetBeatId);
-                yield break;
-            }
-            
-            // Otherwise, show E "Continue" button and wait for player to click it
+            // Always show E "Continue" button and wait for player to click it
             BeatData continueBeat = new BeatData
             {
                 id = beat.id,
@@ -233,23 +224,29 @@ public class DialogueManager : MonoBehaviour
                 }
             };
             
-            // Show the continue button and wait for player to click
-            bool continueClicked = false;
             float nextBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
             Debug.Log($"[DialogueManager] Continue button will advance to beat: {nextBeatId}");
+            
             dialogueUI.ShowChoices(continueBeat, choice => 
             {
                 Debug.Log($"[DialogueManager] Continue button clicked, advancing to beat: {nextBeatId}");
-                continueClicked = true;
                 AdvanceToBeat(nextBeatId);
             });
             
             yield break;
         }
 
-        // 4. Advance to next beat or end dialogue
-        float nextId = choice.target > 0 ? choice.target : (beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1));
-        AdvanceToBeat(nextId);
+        // 4. No npc_response: if result_text was shown, check if we should end dialogue or advance
+        if (beat.next_beat_id <= 0)
+        {
+            // next_beat_id is 0 or negative = end dialogue
+            EndDialogue();
+        }
+        else
+        {
+            // Advance to next beat
+            AdvanceToBeat(beat.next_beat_id);
+        }
     }
 
     private void AdvanceToBeat(float beatId)
@@ -359,8 +356,7 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         currentBeat = null;
-        dialogueUI.ClearButtons();
-        dialogueUI.HideSpeaker();
+        dialogueUI.HideDialogue();
         Debug.Log("[DialogueManager] Dialogue ended");
         OnDialogueEnded?.Invoke();
     }

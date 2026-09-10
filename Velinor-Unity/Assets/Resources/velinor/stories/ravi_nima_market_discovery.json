@@ -333,7 +333,7 @@
           "tone": "E",
           "label": "Empathy",
           "text": "End dialogue and investigate this codex signal",
-          "result_text": "You turn your focus inward, following the pull of something ancient and resonant.",
+          "result_text": "",
           "npc_response": "",
           "tone_effects": [
             { "stat": "trust", "delta": 0 },

@@ -535,7 +535,7 @@ public class DialogueUIController : MonoBehaviour
             dialogueText.text = text;
         }
 
-        // If no animation, complete immediately
+        // Complete immediately (no delay) - text appears instantly
         OnTextFinished();
     }
 
