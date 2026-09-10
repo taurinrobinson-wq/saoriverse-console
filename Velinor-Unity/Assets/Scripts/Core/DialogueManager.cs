@@ -96,6 +96,13 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(string npcId, string startBeatId)
     {
+        // Clear diary at start of each dialogue session
+        var diaryManager = FindAnyObjectByType<DiaryManager>();
+        if (diaryManager != null)
+        {
+            diaryManager.ClearDiary();
+        }
+
         activeNpcId = npcId;
         isDialogueActive = true;
 

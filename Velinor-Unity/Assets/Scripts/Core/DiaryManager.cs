@@ -85,4 +85,11 @@ public class DiaryManager : MonoBehaviour
     }
 
     public List<DiaryEntry> GetEntries() => new List<DiaryEntry>(diaryData.entries);
+
+    public void ClearDiary()
+    {
+        diaryData.entries.Clear();
+        SaveDiary();
+        Debug.Log("[DiaryManager] Diary cleared");
+    }
 }
