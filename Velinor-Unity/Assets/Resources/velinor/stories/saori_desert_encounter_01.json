@@ -1,285 +1,213 @@
-﻿{
-    "name": "Velinor Core Story - Saori Desert Encounter",
-    "startnode": "desert_intro",
-    "passages": [
+{
+  "scene_id": "saori_desert_encounter_01",
+  "required_flags": [],
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Saori",
+      "setting_description": "You encounter an older woman on the desert road, dust swirling around her weathered robes.",
+      "prompt": "You are on your way to the market?",
+      "shared_beat": "",
+      "tone_choices": [
         {
-            "pid": "desert_intro",
-            "name": "Older Woman in the Desert",
-            "conversationId": "saori_encounter_01",
-            "text": "You are on your way to the market?",
-            "required_flags": [],
-            "choices": [
-                {
-                    "text": "(T) Yeah. I'm looking for work, food, and a place to stay.",
-                    "target": "saori_first_react",
-                    "shared_beat": "I cannot offer any of that.",
-                    "data_hook": "met_older_woman=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Trust",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "tone_str": "Trust",
-                    "playerLine": "Yeah. I'm looking for work, food, and a place to stay."
-                },
-                {
-                    "text": "(O) Looks you're headed somewhere too?",
-                    "target": "saori_first_react",
-                    "shared_beat": "A question for a question. Interesting.",
-                    "data_hook": "met_older_woman=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Observation",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "tone_str": "Observation",
-                    "playerLine": "Looks you're headed somewhere too?"
-                },
-                {
-                    "text": "(N) Anything is better than being stuck out here.",
-                    "target": "saori_first_react",
-                    "shared_beat": "Hm... In theory...",
-                    "data_hook": "met_older_woman=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "NarrativePresence",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "tone_str": "NarrativePresence",
-                    "playerLine": "Anything is better than being stuck out here."
-                },
-                {
-                    "text": "(E) I just wanna be useful… and maybe get a meal.",
-                    "target": "saori_first_react",
-                    "shared_beat": "A practical instinct. Good.",
-                    "data_hook": "met_older_woman=true|older_woman_empathy_shown=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Empathy",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "npc_resonance": {
-                        "entries": [
-                            {
-                                "key": "OlderWoman",
-                                "value": 0.03
-                            }
-                        ]
-                    },
-                    "tone_str": "Empathy",
-                    "playerLine": "I just wanna be useful… and maybe get a meal."
-                }
-            ]
+          "tone": "T",
+          "label": "Trust",
+          "text": "Yeah. I'm looking for work, food, and a place to stay.",
+          "result_text": "You speak plainly about your needs.",
+          "npc_response": "I cannot offer any of that.",
+          "tone_effects": [
+            { "stat": "trust", "delta": 0.02 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["met_older_woman=true"]
         },
         {
-            "pid": "saori_first_react",
-            "name": "The Device",
-            "conversationId": "saori_encounter_01",
-            "text": "Here. You should take this.",
-            "required_flags": [],
-            "choices": [
-                {
-                    "text": "(T) I… alright. I'll take it.",
-                    "target": "saori_device_sharedbeat",
-                    "shared_beat": "Keep it close.",
-                    "system_trigger": "give_device",
-                    "data_hook": "received_older_woman_device=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Trust",
-                                "value": 0.03
-                            }
-                        ]
-                    },
-                    "tone_str": "Trust",
-                    "playerLine": "I… alright. I'll take it."
-                },
-                {
-                    "text": "(O) What is this? Why give it to me?",
-                    "target": "saori_device_sharedbeat",
-                    "shared_beat": "Later.",
-                    "system_trigger": "give_device",
-                    "data_hook": "received_older_woman_device=true|older_woman_questioned=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Observation",
-                                "value": 0.03
-                            }
-                        ]
-                    },
-                    "tone_str": "Observation",
-                    "playerLine": "What is this? Why give it to me?"
-                },
-                {
-                    "text": "(N) This feels… important.",
-                    "target": "saori_device_sharedbeat",
-                    "shared_beat": "Most things are, once you look closely.",
-                    "system_trigger": "give_device",
-                    "data_hook": "received_older_woman_device=true|older_woman_significance_noted=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "NarrativePresence",
-                                "value": 0.03
-                            }
-                        ]
-                    },
-                    "tone_str": "NarrativePresence",
-                    "playerLine": "This feels… important."
-                },
-                {
-                    "text": "(E) Thank you. I don't understand, but… thank you.",
-                    "target": "saori_device_sharedbeat",
-                    "shared_beat": "Understanding isn't required.",
-                    "system_trigger": "give_device",
-                    "data_hook": "received_older_woman_device=true|older_woman_emotional_connection=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Empathy",
-                                "value": 0.04
-                            }
-                        ]
-                    },
-                    "npc_resonance": {
-                        "entries": [
-                            {
-                                "key": "OlderWoman",
-                                "value": 0.05
-                            }
-                        ]
-                    },
-                    "tone_str": "Empathy",
-                    "playerLine": "Thank you. I don't understand, but… thank you."
-                }
-            ]
+          "tone": "O",
+          "label": "Observation",
+          "text": "Looks you're headed somewhere too?",
+          "result_text": "You ask a question instead of answering.",
+          "npc_response": "A question for a question. Interesting.",
+          "tone_effects": [
+            { "stat": "observation", "delta": 0.02 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["met_older_woman=true"]
         },
         {
-            "pid": "saori_device_sharedbeat",
-            "name": "Her Urgency",
-            "conversationId": "saori_encounter_01",
-            "text": "I have to go.",
-            "required_flags": [],
-            "choices": [
-                {
-                    "text": "(T) Wait—what is this thing?",
-                    "target": "saori_departing",
-                    "shared_beat": "No time.",
-                    "data_hook": "older_woman_departing=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Trust",
-                                "value": 0.01
-                            }
-                        ]
-                    },
-                    "tone_str": "Trust",
-                    "playerLine": "Wait—what is this thing?"
-                },
-                {
-                    "text": "(O) I didn't get your name—",
-                    "target": "saori_departing",
-                    "shared_beat": "Later.",
-                    "data_hook": "older_woman_departing=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Observation",
-                                "value": 0.01
-                            }
-                        ]
-                    },
-                    "tone_str": "Observation",
-                    "playerLine": "I didn't get your name—"
-                },
-                {
-                    "text": "(N) You're just… leaving?",
-                    "target": "saori_departing",
-                    "shared_beat": "The wind is shifting.",
-                    "data_hook": "older_woman_departing=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "NarrativePresence",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "tone_str": "NarrativePresence",
-                    "playerLine": "You're just… leaving?"
-                },
-                {
-                    "text": "(E) Please—just tell me something.",
-                    "target": "saori_departing",
-                    "shared_beat": "I would, if I could.",
-                    "data_hook": "older_woman_departing=true",
-                    "tone_effects": {
-                        "entries": [
-                            {
-                                "key": "Empathy",
-                                "value": 0.02
-                            }
-                        ]
-                    },
-                    "npc_resonance": {
-                        "entries": [
-                            {
-                                "key": "OlderWoman",
-                                "value": 0.04
-                            }
-                        ]
-                    },
-                    "tone_str": "Empathy",
-                    "playerLine": "Please—just tell me something."
-                }
-            ]
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "Anything is better than being stuck out here.",
+          "result_text": "You speak with weary honesty.",
+          "npc_response": "Hm... In theory...",
+          "tone_effects": [
+            { "stat": "narrative", "delta": 0.02 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["met_older_woman=true"]
         },
         {
-            "pid": "saori_departing",
-            "name": "The Wind Cuts Her Voice",
-            "conversationId": "saori_encounter_01",
-            "text": "She starts to say more, but the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
-            "required_flags": [],
-            "choices": [
-                {
-                    "text": "Close the dialogue and continue toward the market.",
-                    "target": "DIALOGUE_END",
-                    "system_trigger": "npc_disappear|diary_update",
-                    "data_hook": "append_diary:Met an older woman in the desert. She gave me a strange device and vanished before I could ask anything real. I don't know her name. I don't know why she helped me. But I can't shake the feeling she'll matter later.",
-                    "tone_str": "",
-                    "playerLine": "Close the dialogue and continue toward the market."
-                }
-            ]
-        },
-        {
-            "pid": "saori_encounter_01_dismissal",
-            "name": "Older Woman - Already Spoken",
-            "conversationId": "saori_encounter_01",
-            "text": "The device warms against your palm. There is nothing more she can—or will—tell you.",
-            "required_flags": [],
-            "choices": [
-                {
-                    "text": "Close the dialogue and continue.",
-                    "target": "DIALOGUE_END",
-                    "tone_str": "",
-                    "playerLine": "Close the dialogue and continue."
-                }
-            ]
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I just wanna be useful… and maybe get a meal.",
+          "result_text": "You speak with vulnerable honesty.",
+          "npc_response": "A practical instinct. Good.",
+          "tone_effects": [
+            { "stat": "empathy", "delta": 0.02 }
+          ],
+          "remnants_effects": [
+            { "target": "Saori", "stat": "resolve", "delta": 0.03 },
+            { "target": "Saori", "stat": "trust", "delta": 0.03 }
+          ],
+          "system_triggers": ["met_older_woman=true", "older_woman_empathy_shown=true"]
         }
-    ]
+      ],
+      "next_beat_id": 2
+    },
+    {
+      "id": 2,
+      "type": "npc_turn",
+      "active_speaker": "Saori",
+      "setting_description": "The older woman reaches into her robes and produces a strange device, its surface humming faintly.",
+      "prompt": "Here. You should take this.",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "I… alright. I'll take it.",
+          "result_text": "You accept the device without hesitation.",
+          "npc_response": "Keep it close.",
+          "tone_effects": [
+            { "stat": "trust", "delta": 0.03 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["give_device", "received_older_woman_device=true"]
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "What is this? Why give it to me?",
+          "result_text": "You study the object carefully before taking it.",
+          "npc_response": "Later.",
+          "tone_effects": [
+            { "stat": "observation", "delta": 0.03 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_questioned=true"]
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "This feels… important.",
+          "result_text": "You recognize the weight of the moment.",
+          "npc_response": "Most things are, once you look closely.",
+          "tone_effects": [
+            { "stat": "narrative", "delta": 0.03 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_significance_noted=true"]
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "Thank you. I don't understand, but… thank you.",
+          "result_text": "You receive the gift with genuine gratitude.",
+          "npc_response": "Understanding isn't required.",
+          "tone_effects": [
+            { "stat": "empathy", "delta": 0.04 }
+          ],
+          "remnants_effects": [
+            { "target": "Saori", "stat": "resolve", "delta": 0.05 },
+            { "target": "Saori", "stat": "trust", "delta": 0.05 }
+          ],
+          "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_emotional_connection=true"]
+        }
+      ],
+      "next_beat_id": 3
+    },
+    {
+      "id": 3,
+      "type": "npc_turn",
+      "active_speaker": "Saori",
+      "setting_description": "The older woman's gaze becomes urgent, scanning the horizon as if watching for something.",
+      "prompt": "I have to go.",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Wait—what is this thing?",
+          "result_text": "You reach out with questions.",
+          "npc_response": "No time.",
+          "tone_effects": [
+            { "stat": "trust", "delta": 0.01 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["older_woman_departing=true"]
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "I didn't get your name—",
+          "result_text": "You try to gather more information.",
+          "npc_response": "Later.",
+          "tone_effects": [
+            { "stat": "observation", "delta": 0.01 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["older_woman_departing=true"]
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "You're just… leaving?",
+          "result_text": "You witness the strangeness of this farewell.",
+          "npc_response": "The wind is shifting.",
+          "tone_effects": [
+            { "stat": "narrative", "delta": 0.02 }
+          ],
+          "remnants_effects": [],
+          "system_triggers": ["older_woman_departing=true"]
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "Please—just tell me something.",
+          "result_text": "You appeal with genuine emotion.",
+          "npc_response": "I would, if I could.",
+          "tone_effects": [
+            { "stat": "empathy", "delta": 0.02 }
+          ],
+          "remnants_effects": [
+            { "target": "Saori", "stat": "resolve", "delta": 0.04 },
+            { "target": "Saori", "stat": "trust", "delta": 0.04 }
+          ],
+          "system_triggers": ["older_woman_departing=true"]
+        }
+      ],
+      "next_beat_id": 4
+    },
+    {
+      "id": 4,
+      "type": "narrative",
+      "active_speaker": "Narrator",
+      "setting_description": "",
+      "prompt": "She starts to say more, but the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "C",
+          "label": "Continue",
+          "text": "Close the dialogue and continue toward the market.",
+          "result_text": "",
+          "npc_response": "",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": ["npc_disappear", "diary_update", "obtain_codex=true"]
+        }
+      ],
+      "next_beat_id": null
+    }
+  ]
 }
