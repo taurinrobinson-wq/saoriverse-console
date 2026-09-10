@@ -148,6 +148,9 @@
       "setting_description": "The older woman reaches into her robes and produces a strange device, its surface humming faintly.",
       "prompt": "Here. You should take this.",
       "shared_beat": "",
+      "diary_entries": [
+        "She gave me a strange device. What does it do?"
+      ],
       "tone_choices": [
         {
           "tone": "T",
@@ -431,6 +434,9 @@
       "setting_description": "",
       "prompt": "She starts to say more, but the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
       "shared_beat": "",
+      "diary_entries": [
+        "Met a mysterious older woman. She didn't give me her name."
+      ],
       "tone_choices": [
         {
           "tone": "T",

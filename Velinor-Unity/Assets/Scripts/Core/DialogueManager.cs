@@ -198,8 +198,8 @@ public class DialogueManager : MonoBehaviour
         ApplyToneEffects(choice.tone_effects);
         ApplyRemnantsEffects(choice.remnants_effects);
         
-        // 2b. Process system triggers from the choice
-        ProcessSystemTriggers(choice.system_triggers);
+        // 2b. Process system triggers from the choice (pass beat's diary entries)
+        ProcessSystemTriggers(choice.system_triggers, beat.diary_entries);
 
         // 3. Show npc_response if it exists
         if (!string.IsNullOrEmpty(choice.npc_response))
@@ -366,7 +366,7 @@ public class DialogueManager : MonoBehaviour
         };
     }
 
-    private void ProcessSystemTriggers(string[] triggers)
+    private void ProcessSystemTriggers(string[] triggers, string[] diaryEntries = null)
     {
         if (triggers == null || triggers.Length == 0)
             return;
@@ -398,7 +398,15 @@ public class DialogueManager : MonoBehaviour
             }
 
             // Handle trigger names directly (e.g., "give_device", "diary_update", "npc_disappear")
-            dialogueUI.TriggerSystemEvent(trigger);
+            if (trigger == "diary_update" && diaryEntries != null && diaryEntries.Length > 0)
+            {
+                // Pass diary entries to the event
+                dialogueUI.TriggerSystemEvent(trigger, diaryEntries);
+            }
+            else
+            {
+                dialogueUI.TriggerSystemEvent(trigger);
+            }
             Debug.Log($"[DialogueManager] System trigger executed: {trigger}");
         }
     }

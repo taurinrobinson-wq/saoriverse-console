@@ -340,7 +340,7 @@ public class DialogueUIController : MonoBehaviour
     /// Trigger system events (called by DialogueManager)
     /// Examples: give_device, diary_update, codex_entry_unlock, etc.
     /// </summary>
-    public void TriggerSystemEvent(string eventName)
+    public void TriggerSystemEvent(string eventName, string[] diaryEntries = null)
     {
         switch (eventName)
         {
@@ -359,7 +359,29 @@ public class DialogueUIController : MonoBehaviour
                 }
                 break;
             case "diary_update":
-                Debug.Log("[UI] EVENT: Diary has been updated");
+                if (diaryEntries != null && diaryEntries.Length > 0)
+                {
+                    var diaryManager = FindAnyObjectByType<DiaryManager>();
+                    if (diaryManager != null)
+                    {
+                        foreach (var entry in diaryEntries)
+                        {
+                            if (!string.IsNullOrEmpty(entry))
+                            {
+                                diaryManager.AddEntry(entry);
+                                Debug.Log($"[UI] EVENT: Diary entry added - {entry}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[UI] DiaryManager not found in scene!");
+                    }
+                }
+                else
+                {
+                    Debug.Log("[UI] EVENT: Diary update triggered but no entries provided");
+                }
                 break;
             case "codex_entry_unlock":
                 Debug.Log("[UI] EVENT: Codex entry unlocked");
