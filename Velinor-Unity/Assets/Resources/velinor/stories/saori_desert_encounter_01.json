@@ -17,13 +17,27 @@
           "result_text": "",
           "npc_response": "I cannot offer any of that.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.02 },
-            { "stat": "observation", "delta": -0.015 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.005 }
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["met_older_woman=true"]
+          "system_triggers": [
+            "met_older_woman=true"
+          ]
         },
         {
           "tone": "O",
@@ -32,13 +46,27 @@
           "result_text": "",
           "npc_response": "A question for a question. Interesting.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.015 },
-            { "stat": "observation", "delta": 0.02 },
-            { "stat": "narrative", "delta": 0.005 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["met_older_woman=true"]
+          "system_triggers": [
+            "met_older_woman=true"
+          ]
         },
         {
           "tone": "N",
@@ -47,13 +75,27 @@
           "result_text": "",
           "npc_response": "Hm... In theory...",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.01 },
-            { "stat": "observation", "delta": 0.005 },
-            { "stat": "narrative", "delta": 0.02 },
-            { "stat": "empathy", "delta": -0.01 }
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["met_older_woman=true"]
+          "system_triggers": [
+            "met_older_woman=true"
+          ]
         },
         {
           "tone": "E",
@@ -62,16 +104,39 @@
           "result_text": "",
           "npc_response": "A practical instinct. Good.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.005 },
-            { "stat": "observation", "delta": -0.01 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.02 }
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
           ],
           "remnants_effects": [
-            { "target": "Saori", "stat": "resolve", "delta": 0.03 },
-            { "target": "Saori", "stat": "trust", "delta": 0.03 }
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": 0.03
+            },
+            {
+              "target": "Saori",
+              "stat": "trust",
+              "delta": 0.03
+            }
           ],
-          "system_triggers": ["met_older_woman=true", "older_woman_empathy_shown=true"]
+          "system_triggers": [
+            "met_older_woman=true",
+            "older_woman_empathy_shown=true"
+          ]
         }
       ],
       "next_beat_id": 2
@@ -91,28 +156,59 @@
           "result_text": "",
           "npc_response": "Keep it close.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.03 },
-            { "stat": "observation", "delta": -0.0225 },
-            { "stat": "narrative", "delta": -0.015 },
-            { "stat": "empathy", "delta": 0.0075 }
+            {
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "stat": "observation",
+              "delta": -0.0225
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.015
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.0075
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["give_device", "received_older_woman_device=true"]
+          "system_triggers": [
+            "give_device",
+            "received_older_woman_device=true"
+          ]
         },
         {
           "tone": "O",
           "label": "Observation",
           "text": "What is this? Why give it to me?",
           "result_text": "",
-          "npc_response": "Later.",
+          "npc_response": "I appreciate your curiosity, but I cannot explain right now",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.0225 },
-            { "stat": "observation", "delta": 0.03 },
-            { "stat": "narrative", "delta": 0.0075 },
-            { "stat": "empathy", "delta": -0.015 }
+            {
+              "stat": "trust",
+              "delta": -0.0225
+            },
+            {
+              "stat": "observation",
+              "delta": 0.03
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.0075
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.015
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_questioned=true"]
+          "system_triggers": [
+            "give_device",
+            "received_older_woman_device=true",
+            "older_woman_questioned=true"
+          ]
         },
         {
           "tone": "N",
@@ -121,31 +217,71 @@
           "result_text": "",
           "npc_response": "Most things are, once you look closely.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.015 },
-            { "stat": "observation", "delta": 0.0075 },
-            { "stat": "narrative", "delta": 0.03 },
-            { "stat": "empathy", "delta": -0.015 }
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.0075
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.03
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.015
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_significance_noted=true"]
+          "system_triggers": [
+            "give_device",
+            "received_older_woman_device=true",
+            "older_woman_significance_noted=true"
+          ]
         },
         {
           "tone": "E",
           "label": "Empathy",
           "text": "Thank you. I don't understand, but… thank you.",
           "result_text": "",
-          "npc_response": "Understanding isn't required.",
+          "npc_response": "Understanding isn't required. We'll see each other again, I think.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.01 },
-            { "stat": "observation", "delta": -0.015 },
-            { "stat": "narrative", "delta": -0.015 },
-            { "stat": "empathy", "delta": 0.04 }
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.015
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.04
+            }
           ],
           "remnants_effects": [
-            { "target": "Saori", "stat": "resolve", "delta": 0.05 },
-            { "target": "Saori", "stat": "trust", "delta": 0.05 }
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": 0.05
+            },
+            {
+              "target": "Saori",
+              "stat": "trust",
+              "delta": 0.05
+            }
           ],
-          "system_triggers": ["give_device", "received_older_woman_device=true", "older_woman_emotional_connection=true"]
+          "system_triggers": [
+            "give_device",
+            "received_older_woman_device=true",
+            "older_woman_emotional_connection=true"
+          ]
         }
       ],
       "next_beat_id": 3
@@ -165,61 +301,125 @@
           "result_text": "",
           "npc_response": "No time.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.01 },
-            { "stat": "observation", "delta": -0.0075 },
-            { "stat": "narrative", "delta": -0.005 },
-            { "stat": "empathy", "delta": 0.0025 }
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.0075
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.0025
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["older_woman_departing=true"]
+          "system_triggers": [
+            "older_woman_departing=true"
+          ]
         },
         {
           "tone": "O",
           "label": "Observation",
           "text": "I didn't get your name—",
           "result_text": "",
-          "npc_response": "Later.",
+          "npc_response": "Later... I must go.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.0075 },
-            { "stat": "observation", "delta": 0.01 },
-            { "stat": "narrative", "delta": 0.0025 },
-            { "stat": "empathy", "delta": -0.005 }
+            {
+              "stat": "trust",
+              "delta": -0.0075
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.0025
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["older_woman_departing=true"]
+          "system_triggers": [
+            "older_woman_departing=true"
+          ]
         },
         {
           "tone": "N",
           "label": "NarrativePresence",
           "text": "You're just… leaving?",
           "result_text": "",
-          "npc_response": "The wind is shifting.",
+          "npc_response": "I must. Can't explain.",
           "tone_effects": [
-            { "stat": "trust", "delta": -0.005 },
-            { "stat": "observation", "delta": 0.0025 },
-            { "stat": "narrative", "delta": 0.02 },
-            { "stat": "empathy", "delta": -0.005 }
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.0025
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
           ],
           "remnants_effects": [],
-          "system_triggers": ["older_woman_departing=true"]
+          "system_triggers": [
+            "older_woman_departing=true"
+          ]
         },
         {
           "tone": "E",
           "label": "Empathy",
           "text": "Please—just tell me something.",
           "result_text": "",
-          "npc_response": "I would, if I could.",
+          "npc_response": "I would, if I could. You'll understand in time.",
           "tone_effects": [
-            { "stat": "trust", "delta": 0.005 },
-            { "stat": "observation", "delta": -0.01 },
-            { "stat": "narrative", "delta": -0.01 },
-            { "stat": "empathy", "delta": 0.02 }
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
           ],
           "remnants_effects": [
-            { "target": "Saori", "stat": "resolve", "delta": 0.04 },
-            { "target": "Saori", "stat": "trust", "delta": 0.04 }
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": 0.04
+            },
+            {
+              "target": "Saori",
+              "stat": "trust",
+              "delta": 0.04
+            }
           ],
-          "system_triggers": ["older_woman_departing=true"]
+          "system_triggers": [
+            "older_woman_departing=true"
+          ]
         }
       ],
       "next_beat_id": 4
@@ -233,14 +433,18 @@
       "shared_beat": "",
       "tone_choices": [
         {
-          "tone": "C",
+          "tone": "E",
           "label": "Continue",
           "text": "Close the dialogue and continue toward the market.",
           "result_text": "",
           "npc_response": "",
           "tone_effects": [],
           "remnants_effects": [],
-          "system_triggers": ["npc_disappear", "diary_update", "obtain_codex=true"]
+          "system_triggers": [
+            "npc_disappear",
+            "diary_update",
+            "obtain_codex=true"
+          ]
         }
       ],
       "next_beat_id": null
