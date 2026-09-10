@@ -46,10 +46,16 @@ public class ProximityTransitionZone : MonoBehaviour
         if (cachedCollider != null)
         {
             cachedCollider.isTrigger = true;
+            Debug.Log($"[ProximityTransitionZone] Set 3D collider as trigger on {gameObject.name}");
         }
         if (cachedCollider2D != null)
         {
             cachedCollider2D.isTrigger = true;
+            Debug.Log($"[ProximityTransitionZone] Set 2D collider as trigger on {gameObject.name}");
+        }
+        if (cachedCollider == null && cachedCollider2D == null)
+        {
+            Debug.LogWarning($"[ProximityTransitionZone] No collider found on {gameObject.name}!");
         }
     }
 
@@ -84,9 +90,11 @@ private void OnValidate()
 
     private void HandleTriggerEnter(GameObject other)
     {
+        Debug.Log($"[ProximityTransitionZone] OnTriggerEnter called with {other.name} (tag: {other.tag})");
         if (other.CompareTag("Player"))
         {
             playerInside = true;
+            Debug.Log("[ProximityTransitionZone] Player entered trigger zone!");
             CheckAutoTrigger(other);
         }
     }
