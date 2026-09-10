@@ -43,6 +43,7 @@ public class BeatChoice
     [SerializeField] public BeatEffect[] tone_effects;     // TONE stat changes
     [SerializeField] public BeatEffect[] remnants_effects; // NPC REMNANTS changes
     [SerializeField] public float target;                  // Next beat ID (or 0 for end)
+    [SerializeField] public string[] system_triggers;      // Array of system triggers to execute
     
     // Backwards compat
     [SerializeField] public string tone_str;               // (passages format: derives tone)

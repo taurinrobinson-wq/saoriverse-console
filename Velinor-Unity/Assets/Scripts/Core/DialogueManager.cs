@@ -197,6 +197,9 @@ public class DialogueManager : MonoBehaviour
         // 2. Apply tone and remnants effects
         ApplyToneEffects(choice.tone_effects);
         ApplyRemnantsEffects(choice.remnants_effects);
+        
+        // 2b. Process system triggers from the choice
+        ProcessSystemTriggers(choice.system_triggers);
 
         // 3. Show npc_response if it exists
         if (!string.IsNullOrEmpty(choice.npc_response))
@@ -350,6 +353,43 @@ public class DialogueManager : MonoBehaviour
             "skepticism" => RemnantType.Skepticism,
             _ => RemnantType.Trust
         };
+    }
+
+    private void ProcessSystemTriggers(string[] triggers)
+    {
+        if (triggers == null || triggers.Length == 0)
+            return;
+
+        foreach (var trigger in triggers)
+        {
+            if (string.IsNullOrEmpty(trigger))
+                continue;
+
+            // Handle flag-based triggers (e.g., "met_older_woman=true", "obtain_codex=true")
+            if (trigger.Contains("="))
+            {
+                var parts = trigger.Split('=');
+                if (parts.Length == 2)
+                {
+                    string flagName = parts[0].Trim();
+                    string flagValue = parts[1].Trim();
+                    
+                    // Set the flag in some flag system (TODO: implement flag manager if needed)
+                    Debug.Log($"[DialogueManager] Flag set: {flagName} = {flagValue}");
+                    
+                    // Special handling for obtain_codex
+                    if (flagName == "obtain_codex" && flagValue.ToLower() == "true")
+                    {
+                        dialogueUI.TriggerSystemEvent("give_device");
+                    }
+                    continue;
+                }
+            }
+
+            // Handle trigger names directly (e.g., "give_device", "diary_update", "npc_disappear")
+            dialogueUI.TriggerSystemEvent(trigger);
+            Debug.Log($"[DialogueManager] System trigger executed: {trigger}");
+        }
     }
 
     private void EndDialogue()
