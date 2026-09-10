@@ -401,7 +401,13 @@ public class DialogueManager : MonoBehaviour
             if (trigger == "diary_update" && diaryEntries != null && diaryEntries.Length > 0)
             {
                 // Pass diary entries to the event
+                Debug.Log($"[DialogueManager] Passing {diaryEntries.Length} diary entries to TriggerSystemEvent");
                 dialogueUI.TriggerSystemEvent(trigger, diaryEntries);
+            }
+            else if (trigger == "diary_update")
+            {
+                Debug.LogWarning($"[DialogueManager] diary_update trigger received but no entries (diaryEntries: {(diaryEntries == null ? "null" : diaryEntries.Length.ToString())})");
+                dialogueUI.TriggerSystemEvent(trigger);
             }
             else
             {

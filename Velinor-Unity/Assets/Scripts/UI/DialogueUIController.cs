@@ -414,7 +414,7 @@ public class DialogueUIController : MonoBehaviour
         GameObject npcGameObject = DialogueManager.Instance.GetCurrentNPCGameObject();
         if (npcGameObject == null)
         {
-            Debug.LogError("[UI] No NPC GameObject - cannot exit");
+            Debug.LogWarning("[UI] No NPC GameObject - NPC exit animation skipped (this is OK if dialogue is already ending)");
             return;
         }
 

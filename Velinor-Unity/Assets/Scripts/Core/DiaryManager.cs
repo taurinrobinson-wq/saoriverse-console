@@ -49,6 +49,7 @@ public class DiaryManager : MonoBehaviour
         if (notificationPanel != null)
         {
             notificationPanel.ShowNotification("Diary updated. Press N to view diary", duration: 4f);
+            Debug.Log("[DiaryManager] Notification shown");
         }
         else
         {
