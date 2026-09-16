@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TitleScreenManager : MonoBehaviour
@@ -12,8 +13,17 @@ public class TitleScreenManager : MonoBehaviour
 #endif
     [SerializeField] private string targetScene = "MachinesCave_01";
 
+    [Header("--- EYE ANIMATION ---")]
+    [SerializeField] private UnityEngine.UI.Image characterOverlayImage;
+    [SerializeField] private Sprite eyesPartOpenSprite;
+    [SerializeField] private Sprite eyesOpenSprite;
+
+    [Header("--- AUDIO ---")]
+    [SerializeField] private AudioClip startButtonSound;
+    private AudioSource audioSource;
+
     private CanvasGroup canvasGroup;
-    private bool transitioning = false;
+private bool transitioning = false;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -41,12 +51,24 @@ public class TitleScreenManager : MonoBehaviour
         {
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
         }
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
     }
 
     public void StartGame()
     {
         if (transitioning) return;
         
+        if (audioSource != null && startButtonSound != null)
+        {
+            audioSource.PlayOneShot(startButtonSound);
+        }
+
         Debug.Log($"[TitleScreenManager] StartGame button pressed. Transitioning to {targetScene}...");
         StartCoroutine(GlitchTransition());
     }
@@ -54,6 +76,24 @@ public class TitleScreenManager : MonoBehaviour
     private IEnumerator GlitchTransition()
     {
         transitioning = true;
+        
+        // --- EYE SEQUENCE START ---
+        if (characterOverlayImage != null)
+        {
+            if (eyesPartOpenSprite != null)
+            {
+                characterOverlayImage.sprite = eyesPartOpenSprite;
+                yield return new WaitForSeconds(0.15f);
+            }
+            
+            if (eyesOpenSprite != null)
+            {
+                characterOverlayImage.sprite = eyesOpenSprite;
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        // --- EYE SEQUENCE END ---
+
         float glitchDuration = 0.5f;
         float elapsed = 0f;
 

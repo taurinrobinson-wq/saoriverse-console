@@ -407,50 +407,72 @@ public class DialogueUIController : MonoBehaviour
 
     /// <summary>
     /// NPC exits stage left: first turns to face left, then walks off-screen
-    /// Disables animator and billboard effect to allow proper rotation control
     /// </summary>
     private void ExitNPCStageLeft()
     {
         GameObject npcGameObject = DialogueManager.Instance.GetCurrentNPCGameObject();
         if (npcGameObject == null)
         {
-            Debug.LogWarning("[UI] No NPC GameObject - NPC exit animation skipped (this is OK if dialogue is already ending)");
+            Debug.LogWarning("[UI] No NPC GameObject - NPC exit animation skipped");
             return;
         }
 
-        // Disable the billboard LookAt effect in NPCDialogueDriver (or legacy SaoriNPC)
+        // Disable billboard LookAt effect
         NPCDialogueDriver npcDriver = npcGameObject.GetComponent<NPCDialogueDriver>();
         if (npcDriver != null)
         {
             npcDriver.SetExitingState(true);
-            Debug.Log("[UI] NPCDialogueDriver billboard effect disabled for exit");
+        }
+
+        // 1. Preferred method: Use NPCController for walking animation
+        NPCController controller = npcGameObject.GetComponent<NPCController>();
+        if (controller != null)
+        {
+            Debug.Log("[UI] Using NPCController for exit sequence");
+            
+            // Disable gravity so she doesn't drop to the floor level
+            controller.useGravity = false;
+            
+            // Maintain current Y position for the target
+            Vector3 targetPos = npcGameObject.transform.position;
+            targetPos.x = -15f; 
+            controller.MoveTo(targetPos, 2.5f); // Increased speed to 2.5f
+
+            // Start cleanup watcher
+            StartCoroutine(DisableNPCOnceOffscreen(npcGameObject, -10f));
         }
         else
         {
-            // Fallback for legacy SaoriNPC if NPCDialogueDriver not found
-            SaoriNPC saoriNPC = npcGameObject.GetComponent<SaoriNPC>();
-            if (saoriNPC != null)
-            {
-                saoriNPC.SetExitingState(true);
-                Debug.Log("[UI] SaoriNPC billboard effect disabled for exit (legacy)");
-            }
-        }
+            // 2. Fallback: Manual slide (legacy behavior)
+            Debug.Log("[UI] NPCController not found, using manual slide fallback");
+            
+            // Disable animator so it doesn't fight the manual transform updates
+            Animator npcAnimator = npcGameObject.GetComponent<Animator>();
+            if (npcAnimator != null) npcAnimator.enabled = false;
 
-        // CRITICAL: Disable animator immediately so it doesn't interfere with our transform changes
-        Animator npcAnimator = npcGameObject.GetComponent<Animator>();
-        if (npcAnimator != null)
+            StartCoroutine(ExitNPCStageLeftSequence(npcGameObject));
+        }
+    }
+
+    /// <summary>
+    /// Watcher to disable NPC once they are far enough to the left
+    /// </summary>
+    private System.Collections.IEnumerator DisableNPCOnceOffscreen(GameObject npcGameObject, float xLimit)
+    {
+        while (npcGameObject != null && npcGameObject.transform.position.x > xLimit)
         {
-            npcAnimator.enabled = false;
-            Debug.Log("[UI] NPC animator DISABLED to prevent animation interference");
+            yield return new WaitForSeconds(0.5f);
         }
 
-        // Force X rotation to 0
-        Transform npcTransform = npcGameObject.transform;
-        Vector3 currentEuler = npcTransform.localEulerAngles;
-        currentEuler.x = 0f;
-        npcTransform.localEulerAngles = currentEuler;
-        Debug.Log($"[UI] NPC localRotation.x set to 0");
-        StartCoroutine(ExitNPCStageLeftSequence(npcGameObject));
+        if (npcGameObject != null)
+        {
+            Debug.Log("[UI] NPC reached offscreen limit, disabling renderers");
+            foreach (var smr in npcGameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                smr.enabled = false;
+            }
+            npcGameObject.SetActive(false); // Fully disable
+        }
     }
 
     /// <summary>
@@ -458,7 +480,7 @@ public class DialogueUIController : MonoBehaviour
     /// Animator is already disabled, so we just move the transform
     /// </summary>
     private System.Collections.IEnumerator ExitNPCStageLeftSequence(GameObject npcGameObject)
-    {
+{
         Transform transform = npcGameObject.transform;
         Vector3 startPosition = transform.position;
         Vector3 startEuler = transform.localEulerAngles;

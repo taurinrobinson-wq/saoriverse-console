@@ -232,7 +232,7 @@ namespace Velinor.Core
             dialogueManager.LoadDialogue(dialogueJson);
             
             // Start dialogue at specified beat
-            dialogueManager.StartDialogue(npcName, startPassageId);
+            dialogueManager.StartDialogue(gameObject.name, startPassageId);
         }
 
         /// <summary>

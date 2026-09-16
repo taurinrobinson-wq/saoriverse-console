@@ -57,21 +57,20 @@ public class PlayerController2D5 : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
 
-        // Ensure player has a collider for collision detection (but not CharacterController - manual movement)
-        if (GetComponent<Collider>() == null && characterController == null)
+        // ENSURE skinWidth is optimized for small colliders
+        if (characterController != null)
         {
+            characterController.skinWidth = 0.03f;
+            characterController.minMoveDistance = 0f;
+        }
+
+        // Ensure player has a collider for collision detection
+        if (GetComponent<Collider>() == null && characterController == null)
+{
             CapsuleCollider capsule = gameObject.AddComponent<CapsuleCollider>();
             capsule.height = 1.8f;
             capsule.radius = 0.3f;
             Debug.Log("[PlayerController2D5] CapsuleCollider created with height=1.8, radius=0.3");
-        }
-
-        // If CharacterController was added, remove it since this controller does manual movement
-        if (characterController != null)
-        {
-            Debug.LogWarning("[PlayerController2D5] Removing CharacterController - this controller uses manual movement, not physics");
-            DestroyImmediate(characterController);
-            characterController = null;
         }
 
         currentPosition = transform.position;
@@ -122,6 +121,15 @@ public class PlayerController2D5 : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 input = Vector2.zero;
+
+        // Force currentPosition to stay on the Z=0 plane to prevent drift
+        currentPosition.z = 0;
+        if (transform.position.z != 0)
+        {
+            Vector3 pos = transform.position;
+            pos.z = 0;
+            transform.position = pos;
+        }
 
         // Get raw input
 #if ENABLE_INPUT_SYSTEM
@@ -239,13 +247,10 @@ public class PlayerController2D5 : MonoBehaviour
 
     private void ApplyTransform()
     {
+        currentPosition.z = 0;
+        
         if (characterController != null && characterController.enabled)
         {
-            // If using CharacterController, we must move via the controller to avoid conflicts,
-            // or just snap the transform if we've already calculated the clamped currentPosition.
-            // But since HandleMovement is calculating currentPosition manually (kinematic-like),
-            // snapping transform.position is correct, but we must account for CC's internal state.
-            // Disable CC temporarily to teleport if needed, but here we just set it.
             transform.position = currentPosition;
         }
         else

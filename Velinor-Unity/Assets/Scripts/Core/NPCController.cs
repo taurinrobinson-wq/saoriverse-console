@@ -26,8 +26,11 @@ namespace Velinor.Core
         [SerializeField] private string startBeatId = "1";
         [SerializeField] private string dialogueJsonPath; // Path relative to Resources/
 
+        [Header("Runtime State")]
+        public bool useGravity = true;
+
         private CharacterController characterController;
-        private Animator animator;
+private Animator animator;
         private float currentSpeed = 0.0f;
         private float verticalVelocity = 0.0f;
 
@@ -65,11 +68,29 @@ namespace Velinor.Core
 
         private void Update()
         {
-            ApplyGravity();
+            if (useGravity)
+            {
+                ApplyGravity();
+            }
+            else
+            {
+                verticalVelocity = 0f;
+            }
+        }
+
+        // Animation Event Handlers
+        private void OnFootstep(AnimationEvent animationEvent)
+        {
+            // Dummy handler to prevent errors
+        }
+
+        private void OnLand(AnimationEvent animationEvent)
+        {
+            // Dummy handler to prevent errors
         }
 
         private void ApplyGravity()
-        {
+{
             if (characterController == null) return;
 
             verticalVelocity += gravity * Time.deltaTime;
@@ -106,18 +127,24 @@ namespace Velinor.Core
 
             while (Vector3.Distance(transform.position, flatTarget) > 0.1f)
             {
-                if (characterController == null) break;
-
                 Vector3 direction = (flatTarget - transform.position).normalized;
 
-                // Move character
-                Vector3 movement = direction * speed * Time.deltaTime;
-                movement.y = verticalVelocity * Time.deltaTime;
-                characterController.Move(movement);
+                if (useGravity && characterController != null)
+                {
+                    // Move character with physics
+                    Vector3 movement = direction * speed * Time.deltaTime;
+                    movement.y = verticalVelocity * Time.deltaTime;
+                    characterController.Move(movement);
+                }
+                else
+                {
+                    // Cinematic movement - bypass physics to prevent sliding or falling
+                    transform.position += direction * speed * Time.deltaTime;
+                }
 
                 // Rotate towards direction of movement
                 if (direction.sqrMagnitude > 0.001f)
-                {
+{
                     Quaternion targetRotation = Quaternion.LookRotation(direction);
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
                 }
