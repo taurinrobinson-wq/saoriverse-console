@@ -20,6 +20,7 @@ public class BeatData
     [SerializeField] public string[] required_flags;       // Flags needed to see this beat
     [SerializeField] public SystemTrigger[] system_triggers; // Actions to trigger
     [SerializeField] public float next_beat_id;            // Next beat ID (supports decimals like 3.1)
+    [SerializeField] public string portrait_expression;    // NPC expression for dialogue portrait (e.g. "worried", "relieved")
 
     // Backwards compat fields (for passages format)
     [SerializeField] public string name;                   // (passages only)

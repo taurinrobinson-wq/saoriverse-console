@@ -20,6 +20,7 @@ public class DialogueUIController : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI npcNameText;
     public TextMeshProUGUI sharedBeatText;
+    public Image npcPortraitImage;  // Portrait image for NPC expressions
 
     [Header("Fonts")]
     public TMP_FontAsset dialogueFont;
@@ -113,15 +114,14 @@ public class DialogueUIController : MonoBehaviour
                     if (sharedBeatText == null)
                         sharedBeatText = dialoguePanelT.Find("SharedBeat")?.GetComponent<TextMeshProUGUI>();
                     
+                    // Look for NPC portrait image
+                    npcPortraitImage = dialoguePanelT.Find("NPCImage")?.GetComponent<Image>();
+                    if (npcPortraitImage == null)
+                        npcPortraitImage = dialoguePanelT.Find("NPC Image")?.GetComponent<Image>();
+                    if (npcPortraitImage == null)
+                        npcPortraitImage = dialoguePanelT.Find("Portrait")?.GetComponent<Image>();
+                    
                     if (npcNameText == null)
-                    {
-                        // Log all children for debugging
-                        Debug.LogWarning("[UI] Could not find NPC name text component. DialoguePanel children:");
-                        foreach (Transform child in dialoguePanelT)
-                        {
-                            Debug.LogWarning($"  - {child.name} (TextMeshProUGUI: {child.GetComponent<TextMeshProUGUI>() != null})");
-                        }
-                    }
                     Debug.Log($"[UI] DialoguePanel found and assigned (dialogueText: {(dialogueText != null ? "✓" : "✗")}, npcNameText: {(npcNameText != null ? "✓" : "✗")}, sharedBeatText: {(sharedBeatText != null ? "✓" : "✗")})");
                 }
                 break;
