@@ -209,7 +209,7 @@
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Nima",
-      "portrait_expression": "worried",
+      "portrait_expression": "disgusted",
       "setting_description": "",
       "prompt": "What do you want anyway? We don't trust outsiders.",
       "shared_beat": "",
@@ -220,7 +220,7 @@
           "text": "I'm trying to find work. I'm new here.",
           "result_text": "",
           "npc_response": "Work is scarce for people who actually belong here. Intentions don't fill empty bellies.",
-          "portrait_expression_on_response": "disgusted",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -268,7 +268,7 @@
           "text": "I don't mean to make you feel uncomfortable. It's been a long trip, any place to rest around here?",
           "result_text": "",
           "npc_response": "Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.",
-          "portrait_expression_on_response": "neutral",
+          "portrait_expression_on_response": "resigned",
           "tone_effects": [
             {
               "stat": "trust",
@@ -316,7 +316,7 @@
           "text": "I've heard the market is a place to find work. I'm not here to cause trouble.",
           "result_text": "",
           "npc_response": "Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.",
-          "portrait_expression_on_response": "disgusted",
+          "portrait_expression_on_response": "dismissive",
           "tone_effects": [
             {
               "stat": "trust",
@@ -364,7 +364,7 @@
           "text": "I'm not here to bother anyone. I've had a long road… that's all.",
           "result_text": "",
           "npc_response": "Everyone out here has a long road behind them. It doesn't make the ground any softer.",
-          "portrait_expression_on_response": "relieved",
+          "portrait_expression_on_response": "determined",
           "tone_effects": [
             {
               "stat": "trust",
@@ -444,7 +444,7 @@
       "id": 3.1,
       "type": "npc_turn",
       "active_speaker": "Nima",
-      "portrait_expression": "anger",
+      "portrait_expression": "disgusted",
       "setting_description": "",
       "prompt": "Ravi, take your own advice.",
       "shared_beat": "",
@@ -525,7 +525,7 @@
           "text": "It's not my business but… did something happen to your daughter?",
           "result_text": "",
           "npc_response": "The stones don't care who they fall on. That's all there is to see.",
-          "portrait_expression_on_response": "neutral",
+          "portrait_expression_on_response": "resigned",
           "tone_effects": [
             {
               "stat": "trust",
@@ -621,7 +621,7 @@
           "text": "I don't know what happened to your daughter, but you seem really… impacted. Let me know if I can help with something.",
           "result_text": "",
           "npc_response": "There's nothing to repair now. Some things stay broken.",
-          "portrait_expression_on_response": "touched",
+          "portrait_expression_on_response": "sad",
           "tone_effects": [
             {
               "stat": "trust",
