@@ -414,7 +414,7 @@
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Ravi",
-      "portrait_expression": "haunted",
+      "portrait_expression": "resigned",
       "setting_description": "",
       "prompt": "You should be careful about who you reveal yourself to. There's been some 'activity' lately… The buildings are… unstable. Our daughter…",
       "shared_beat": "",
@@ -477,7 +477,7 @@
           "text": "You are right to be wary of me. I want to earn your trust.",
           "result_text": "",
           "npc_response": "Trust is a heavy thing to ask for out here. Just keep your head down.",
-          "portrait_expression_on_response": "relieved",
+          "portrait_expression_on_response": "frustrated",
           "tone_effects": [
             {
               "stat": "trust",
