@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private TextAsset dialogueJson;
     private DialogueUIController dialogueUI;
+    private PortraitManager portraitManager;
 
     private Dictionary<string, BeatData> beatsById = new Dictionary<string, BeatData>();
     private Dictionary<float, BeatData> beatsByNumId = new Dictionary<float, BeatData>();
@@ -30,6 +31,14 @@ public class DialogueManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         dialogueUI = FindAnyObjectByType<DialogueUIController>();
+        portraitManager = FindAnyObjectByType<PortraitManager>();
+        if (portraitManager == null)
+        {
+            // Create PortraitManager if it doesn't exist
+            GameObject portraitObj = new GameObject("PortraitManager");
+            portraitManager = portraitObj.AddComponent<PortraitManager>();
+            DontDestroyOnLoad(portraitObj);
+        }
     }
 
     public void LoadDialogue(TextAsset jsonFile)
@@ -103,6 +112,12 @@ public class DialogueManager : MonoBehaviour
             diaryManager.ClearDiary();
         }
 
+        // Clear portrait at start of dialogue (will be populated as beats display)
+        if (portraitManager != null)
+        {
+            portraitManager.HidePortrait();
+        }
+
         activeNpcId = npcId;
         isDialogueActive = true;
 
@@ -128,6 +143,13 @@ public class DialogueManager : MonoBehaviour
     {
         currentBeat = beat;
         dialogueUI.ClearButtons();
+
+        // Show portrait for NPC dialogue (if portrait_expression field exists)
+        if (!string.IsNullOrEmpty(beat.active_speaker) && portraitManager != null)
+        {
+            string expression = !string.IsNullOrEmpty(beat.portrait_expression) ? beat.portrait_expression : "neutral";
+            portraitManager.ShowPortrait(beat.active_speaker, expression);
+        }
 
         Debug.Log($"[DialogueManager] Displaying beat: {beat.pid ?? beat.id.ToString()} (mode: {beat.mode})");
 
@@ -422,6 +444,10 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         currentBeat = null;
+        if (portraitManager != null)
+        {
+            portraitManager.HidePortrait();
+        }
         dialogueUI.HideDialogue();
         Debug.Log("[DialogueManager] Dialogue ended");
         OnDialogueEnded?.Invoke();
