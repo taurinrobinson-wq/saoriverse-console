@@ -234,6 +234,14 @@ public class DialogueManager : MonoBehaviour
         if (!string.IsNullOrEmpty(choice.npc_response))
         {
             Debug.Log($"[DialogueManager] Showing npc_response: {choice.npc_response}");
+            
+            // Show portrait expression for the response (if specified)
+            if (!string.IsNullOrEmpty(choice.portrait_expression_on_response) && portraitManager != null)
+            {
+                portraitManager.ShowPortrait(beat.active_speaker, choice.portrait_expression_on_response);
+                Debug.Log($"[DialogueManager] Showing response portrait: {beat.active_speaker}_{choice.portrait_expression_on_response}");
+            }
+            
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
             dialogueUI.ShowText(choice.npc_response);
             dialogueUI.HideSharedBeat();

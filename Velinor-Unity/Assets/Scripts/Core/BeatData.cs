@@ -42,6 +42,7 @@ public class BeatChoice
     [SerializeField] public string text;                   // Player's spoken line or choice text
     [SerializeField] public string result_text;            // Immediate feedback after choice (empty = skip)
     [SerializeField] public string npc_response;           // NPC's reply (empty = skip)
+    [SerializeField] public string portrait_expression_on_response;  // NPC expression when responding to this choice
     [SerializeField] public BeatEffect[] tone_effects;     // TONE stat changes
     [SerializeField] public BeatEffect[] remnants_effects; // NPC REMNANTS changes
     [SerializeField] public float target;                  // Next beat ID (or 0 for end)
