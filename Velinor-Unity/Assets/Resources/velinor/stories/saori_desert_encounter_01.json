@@ -17,7 +17,7 @@
           "text": "Yeah. I'm looking for work, food, and a place to stay.",
           "result_text": "",
           "npc_response": "I cannot offer any of that.",
-          "portrait_expression_on_response": "mysterious",
+          "portrait_expression_on_response": "sad",
           "tone_effects": [
             {
               "stat": "trust",
@@ -47,7 +47,7 @@
           "text": "Looks you're headed somewhere too?",
           "result_text": "",
           "npc_response": "A question for a question. Interesting.",
-          "portrait_expression_on_response": "awe",
+          "portrait_expression_on_response": "mysterious",
           "tone_effects": [
             {
               "stat": "trust",
@@ -107,7 +107,7 @@
           "text": "I just wanna be useful… and maybe get a meal.",
           "result_text": "",
           "npc_response": "A practical instinct. Good.",
-          "portrait_expression_on_response": "touched",
+          "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
             {
               "stat": "trust",
@@ -164,7 +164,7 @@
           "text": "I… alright. I'll take it.",
           "result_text": "",
           "npc_response": "Keep it close.",
-          "portrait_expression_on_response": "touched",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -195,7 +195,7 @@
           "text": "What is this? Why give it to me?",
           "result_text": "",
           "npc_response": "I appreciate your curiosity, but I cannot explain right now",
-          "portrait_expression_on_response": "awe",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -227,7 +227,7 @@
           "text": "This feels… important.",
           "result_text": "",
           "npc_response": "Most things are, once you look closely.",
-          "portrait_expression_on_response": "awe",
+          "portrait_expression_on_response": "mysterious",
           "tone_effects": [
             {
               "stat": "trust",
@@ -314,7 +314,7 @@
           "text": "Wait—what is this thing?",
           "result_text": "",
           "npc_response": "No time.",
-          "portrait_expression_on_response": "haunted",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
