@@ -201,6 +201,7 @@
             "id": 2,
             "type": "npc_turn",
             "active_speaker": "Nima",
+            "portrait_expression": "worried",
             "prompt": "NIMA: \"You picked a bad day to come here.\" Nima shifts her stance slightly. Her voice breaks the silence.",
             "tone_choices": [
                 {
@@ -208,6 +209,7 @@
                     "label": "Trust",
                     "text": "What's different about today?",
                     "npc_response": "NIMA: \"It's the day the ground took her. One year. I thought it'd feel different. It doesn't.\"",
+                    "portrait_expression_on_response": "resigned",
                     "tone_effects": [
                         {
                             "stat": "Trust",
@@ -254,6 +256,7 @@
                     "label": "Observation",
                     "text": "Ravi mentioned this place… I didn't know why.",
                     "npc_response": "NIMA: \"He shouldn't have. Not today. He talks when he's hurting. I… don't.\"",
+                    "portrait_expression_on_response": "angry",
                     "tone_effects": [
                         {
                             "stat": "Trust",
@@ -300,6 +303,7 @@
                     "label": "NarrativePresence",
                     "text": "You came back here for a reason.",
                     "npc_response": "NIMA: \"Reason? No. I just end up here. My feet know the way better than my head.\"",
+                    "portrait_expression_on_response": "resigned",
                     "tone_effects": [
                         {
                             "stat": "Trust",
@@ -346,6 +350,7 @@
                     "label": "Empathy",
                     "text": "You look… heavier than before.",
                     "npc_response": "NIMA: \"The date does that. A year's worth of remembering sits right behind the ribs.\"",
+                    "portrait_expression_on_response": "touched",
                     "tone_effects": [
                         {
                             "stat": "Trust",
@@ -394,6 +399,7 @@
             "id": 3,
             "type": "npc_turn",
             "active_speaker": "Nima",
+            "portrait_expression": "resigned",
             "prompt": "NIMA: \"I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I just… don't.\"",
             "tone_choices": [],
             "next_beat_id": 4
@@ -402,6 +408,7 @@
             "id": 4,
             "type": "npc_turn",
             "active_speaker": "Nima",
+            "portrait_expression": "worried",
             "prompt": "NIMA: \"This is where she was trapped. The ground shifted. The wall came down. No one could reach her.\"",
             "tone_choices": [
                 {
@@ -409,6 +416,7 @@
                     "label": "Trust",
                     "text": "I'm sorry.",
                     "npc_response": "NIMA: \"Heh. Sorry doesn't move stone. Doesn't change anything.\"",
+                    "portrait_expression_on_response": "disgusted",
                     "tone_effects": [
                         {
                             "stat": "Trust",
