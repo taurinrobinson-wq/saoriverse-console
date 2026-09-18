@@ -15,12 +15,14 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextAsset dialogueJson;
     private DialogueUIController dialogueUI;
     private PortraitManager portraitManager;
+    private VoiceoverManager voiceoverManager;
 
     private Dictionary<string, BeatData> beatsById = new Dictionary<string, BeatData>();
     private Dictionary<float, BeatData> beatsByNumId = new Dictionary<float, BeatData>();
     private BeatData currentBeat;
     private bool isDialogueActive = false;
     private string activeNpcId;
+    private string currentSceneId;
 
     public System.Action OnDialogueEnded;
 
@@ -38,6 +40,15 @@ public class DialogueManager : MonoBehaviour
             GameObject portraitObj = new GameObject("PortraitManager");
             portraitManager = portraitObj.AddComponent<PortraitManager>();
             DontDestroyOnLoad(portraitObj);
+        }
+
+        voiceoverManager = FindAnyObjectByType<VoiceoverManager>();
+        if (voiceoverManager == null)
+        {
+            // Create VoiceoverManager if it doesn't exist
+            GameObject voiceoverObj = new GameObject("VoiceoverManager");
+            voiceoverManager = voiceoverObj.AddComponent<VoiceoverManager>();
+            DontDestroyOnLoad(voiceoverObj);
         }
     }
 
@@ -84,6 +95,7 @@ public class DialogueManager : MonoBehaviour
             // Try beats format
             if (root.beats != null && root.beats.Length > 0)
             {
+                currentSceneId = root.scene_id;  // Capture scene ID for voiceover file paths
                 foreach (var beat in root.beats)
                 {
                     beatsByNumId[beat.id] = beat;
@@ -91,7 +103,7 @@ public class DialogueManager : MonoBehaviour
                     beat.mode = InferMode(beat);
                     Debug.Log($"[DialogueManager] Loaded beat: {beat.id} (mode: {beat.mode})");
                 }
-                Debug.Log($"[DialogueManager] Loaded {beatsByNumId.Count} beats from beats format");
+                Debug.Log($"[DialogueManager] Loaded {beatsByNumId.Count} beats from beats format (scene: {currentSceneId})");
                 return;
             }
 
@@ -149,6 +161,12 @@ public class DialogueManager : MonoBehaviour
         {
             string expression = !string.IsNullOrEmpty(beat.portrait_expression) ? beat.portrait_expression : "neutral";
             portraitManager.ShowPortrait(beat.active_speaker, expression);
+        }
+
+        // Play voiceover for this beat if audio clip is specified
+        if (!string.IsNullOrEmpty(beat.audio_clip) && voiceoverManager != null)
+        {
+            voiceoverManager.PlayVoiceover(currentSceneId, beat.audio_clip);
         }
 
         Debug.Log($"[DialogueManager] Displaying beat: {beat.pid ?? beat.id.ToString()} (mode: {beat.mode})");
@@ -211,6 +229,12 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ResolveChoiceCoroutine(BeatData beat, BeatChoice choice)
     {
+        // Fade out any ongoing voiceover to prevent clipping
+        if (voiceoverManager != null)
+        {
+            voiceoverManager.FadeOutAndStop(0.3f);
+        }
+
         dialogueUI.ClearButtons();
         Debug.Log($"[DialogueManager] Choice selected: {choice.text}");
 
@@ -240,6 +264,12 @@ public class DialogueManager : MonoBehaviour
             {
                 portraitManager.ShowPortrait(beat.active_speaker, choice.portrait_expression_on_response);
                 Debug.Log($"[DialogueManager] Showing response portrait: {beat.active_speaker}_{choice.portrait_expression_on_response}");
+            }
+
+            // Play voiceover for NPC response if audio clip is specified
+            if (!string.IsNullOrEmpty(choice.audio_clip_on_response) && voiceoverManager != null)
+            {
+                voiceoverManager.PlayVoiceover(currentSceneId, choice.audio_clip_on_response);
             }
             
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
@@ -455,6 +485,10 @@ public class DialogueManager : MonoBehaviour
         if (portraitManager != null)
         {
             portraitManager.HidePortrait();
+        }
+        if (voiceoverManager != null)
+        {
+            voiceoverManager.StopVoiceover();
         }
         dialogueUI.HideDialogue();
         Debug.Log("[DialogueManager] Dialogue ended");

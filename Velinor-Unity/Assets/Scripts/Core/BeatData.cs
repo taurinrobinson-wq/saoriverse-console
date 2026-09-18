@@ -21,6 +21,7 @@ public class BeatData
     [SerializeField] public SystemTrigger[] system_triggers; // Actions to trigger
     [SerializeField] public float next_beat_id;            // Next beat ID (supports decimals like 3.1)
     [SerializeField] public string portrait_expression;    // NPC expression for dialogue portrait (e.g. "worried", "relieved")
+    [SerializeField] public string audio_clip;              // Audio filename for NPC dialogue during beat (without extension, .ogg assumed)
 
     // Backwards compat fields (for passages format)
     [SerializeField] public string name;                   // (passages only)
@@ -42,6 +43,7 @@ public class BeatChoice
     [SerializeField] public string text;                   // Player's spoken line or choice text
     [SerializeField] public string result_text;            // Immediate feedback after choice (empty = skip)
     [SerializeField] public string npc_response;           // NPC's reply (empty = skip)
+    [SerializeField] public string audio_clip_on_response;  // Audio filename for NPC response to this tone choice (without extension, .ogg assumed)
     [SerializeField] public string portrait_expression_on_response;  // NPC expression when responding to this choice
     [SerializeField] public BeatEffect[] tone_effects;     // TONE stat changes
     [SerializeField] public BeatEffect[] remnants_effects; // NPC REMNANTS changes
