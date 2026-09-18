@@ -145,7 +145,8 @@ public class DialogueManager : MonoBehaviour
         dialogueUI.ClearButtons();
 
         // Show portrait for NPC dialogue (if portrait_expression field exists)
-        if (!string.IsNullOrEmpty(beat.active_speaker) && portraitManager != null)
+        // Skip portraits for Player perspective beats
+        if (!string.IsNullOrEmpty(beat.active_speaker) && beat.active_speaker != "Player" && portraitManager != null)
         {
             string expression = !string.IsNullOrEmpty(beat.portrait_expression) ? beat.portrait_expression : "neutral";
             portraitManager.ShowPortrait(beat.active_speaker, expression);
