@@ -108,6 +108,15 @@ public class PortraitManager : MonoBehaviour
         }
         else
         {
+            // Try loading as Texture2D and converting to Sprite (fallback)
+            Texture2D tex = Resources.Load<Texture2D>(resourcePath);
+            if (tex != null)
+            {
+                Debug.LogWarning($"[PortraitManager] Portrait loaded as Texture2D (not Sprite): {resourcePath}. Importing as Sprite requires TextureType setting in .meta file.");
+                sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+                portraitCache[key] = sprite;
+                return sprite;
+            }
             Debug.LogWarning($"[PortraitManager] Portrait not found at: {resourcePath}");
         }
 
