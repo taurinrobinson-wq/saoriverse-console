@@ -16,7 +16,6 @@ namespace Velinor.Core
     {
         [Header("Dialogue Configuration")]
         [SerializeField] private TextAsset dialogueJson;           // Assign dialogue JSON in Inspector
-        [SerializeField] private string conversationId;            // e.g. "saori_encounter_01", "nima_encounter_01"
         [SerializeField] private string npcName = "NPC";           // "Saori", "Nima", "Ravi", "Willy", "Kaelen"
         [SerializeField] private string startPassageId = "start";  // Fallback start passage
         [SerializeField] private bool isMultiNpcScene = false;     // Set true for scenes like ravi_nima_market_discovery
@@ -109,14 +108,11 @@ namespace Velinor.Core
                         // Try passages format first
                         if (dialogueData.passages != null && dialogueData.passages.Length > 0)
                         {
-                            if (!string.IsNullOrEmpty(dialogueData.passages[0].conversationId))
-                                conversationId = dialogueData.passages[0].conversationId;
-                            
                             startPassageId = !string.IsNullOrEmpty(dialogueData.startnode) 
                                 ? dialogueData.startnode 
                                 : dialogueData.passages[0].pid;
                             
-                            Debug.Log($"[NPCDialogueDriver] Auto-populated from passages JSON: conversationId='{conversationId}', startPassageId='{startPassageId}'");
+                            Debug.Log($"[NPCDialogueDriver] Auto-populated from passages JSON: startPassageId='{startPassageId}'");
                         }
                         // Try beats format
                         else if (dialogueData.beats != null && dialogueData.beats.Length > 0)
@@ -226,7 +222,7 @@ namespace Velinor.Core
                 return;
             }
 
-            Debug.Log($"[NPCDialogueDriver] {npcName}: Starting dialogue - conversationId={conversationId}, startBeatId={startPassageId}");
+            Debug.Log($"[NPCDialogueDriver] {npcName}: Starting dialogue - startBeatId={startPassageId}");
 
             // Load the dialogue JSON
             dialogueManager.LoadDialogue(dialogueJson);
