@@ -678,6 +678,27 @@
         "skepticism": 0.7
       },
       "description": "Saori, the Oracle—a persistent presence whose remnants stats shift with player decisions."
+    },
+    "Willy": {
+      "npcTier": 1,
+      "cluster": "Present Circle",
+      "temporal_role": "Present Dweller",
+      "domains": [
+        "Ache",
+        "Collapse"
+      ],
+      "glyphs": 0,
+      "remnants": {
+        "resolve": 0.7,
+        "empathy": 0.3,
+        "memory": 0.3,
+        "nuance": 0.3,
+        "authority": 0.4,
+        "need": 0.8,
+        "trust": 0.6,
+        "skepticism": 0.6
+      },
+      "description": "Makes light of others suffering for survival not out of malice, slightly unhinged but harmless"
     }
   },
   "clusters": {
@@ -700,7 +721,8 @@
       "Rasha",
       "Thalma",
       "Tala",
-      "Sybil"
+      "Sybil",
+      "Willy"
     ],
     "Wound Weavers": [
       "Kaelen the Suspected Thief",
