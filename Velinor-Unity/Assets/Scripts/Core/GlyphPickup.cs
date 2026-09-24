@@ -26,6 +26,10 @@ public class GlyphPickup : MonoBehaviour
         }
     }
 
+    [SerializeField] private GameObject visualContainer;
+    [SerializeField] private ParticleSystem collectionEffect;
+    [SerializeField] private float destroyDelay = 1.0f;
+
     private void CollectGlyph()
     {
         if (hasBeenCollected)
@@ -48,8 +52,16 @@ public class GlyphPickup : MonoBehaviour
 
             hasBeenCollected = true;
 
-            // Destroy the pickup object or disable it visually
-            Destroy(gameObject);
+            // Visual feedback
+            if (visualContainer != null) visualContainer.SetActive(false);
+            if (collectionEffect != null) collectionEffect.Play();
+            
+            // Disable collider so it doesn't trigger twice
+            Collider col = GetComponent<Collider>();
+            if (col != null) col.enabled = false;
+
+            // Destroy after delay
+            Destroy(gameObject, destroyDelay);
         }
         else
         {

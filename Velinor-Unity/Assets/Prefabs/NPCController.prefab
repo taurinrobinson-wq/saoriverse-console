@@ -982,7 +982,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43714b68324cc2c409d534d9874f2a2b, type: 2}
+  - {fileID: 2100000, guid: 7fe32118fca6189448db5d820c581d0d, type: 2}
   - {fileID: 2100000, guid: 766fd3ff04aab4745a764d33daac86fa, type: 2}
   - {fileID: 2100000, guid: 8b25e99361ac31d4e9ae83c46aee69ea, type: 2}
   m_StaticBatchInfo:
@@ -2124,8 +2124,9 @@ MonoBehaviour:
   npcName: NPC
   startPassageId: start
   isMultiNpcScene: 0
+  multiNpcDisplayName: '[Multiple NPCs]'
   npcController: {fileID: 0}
-  interactionRadius: 0.8
+  interactionRadius: 0.4
   npcScale: {x: 1.8, y: 1.8, z: 1.8}
   useDefaultScale: 1
   colliderHeight: 1.5
@@ -2174,6 +2175,10 @@ MonoBehaviour:
   rotationSpeed: 5
   gravity: -15
   terminalVelocity: 53
+  npcId: 
+  startBeatId: 1
+  dialogueJsonPath: 
+  useGravity: 1
 --- !u!136 &3274434355405682996
 CapsuleCollider:
   m_ObjectHideFlags: 0

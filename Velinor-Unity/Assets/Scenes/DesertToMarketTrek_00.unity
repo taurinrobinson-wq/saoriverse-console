@@ -906,7 +906,7 @@ Transform:
   m_GameObject: {fileID: 425527402}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: -5.4, z: 0}
+  m_LocalPosition: {x: 0, y: -4.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2441,7 +2441,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5, y: 0.4, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1096872671
 MeshRenderer:
@@ -2509,7 +2509,7 @@ Transform:
   m_GameObject: {fileID: 1096872669}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: -1, z: 0}
+  m_LocalPosition: {x: 0.38, y: -2.25, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2914,7 +2914,7 @@ Transform:
   m_GameObject: {fileID: 1297350345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.4, z: 0}
+  m_LocalPosition: {x: 0, y: -4.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3047,6 +3047,123 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1327639361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1327639363}
+  - component: {fileID: 1327639362}
+  m_Layer: 0
+  m_Name: Spawn_Market_Bottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1327639362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327639361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec54f6f0deeb9a47a18eefdec133571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnPoint
+  spawnID: Market_Bottom
+--- !u!4 &1327639363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327639361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1344924673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1344924676}
+  - component: {fileID: 1344924675}
+  - component: {fileID: 1344924674}
+  m_Layer: 0
+  m_Name: SceneCollider_ToLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1344924674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344924673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c897a89189b2ccf40baf609d38b23c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProximityTransitionZone
+  targetSceneAsset: {fileID: 102900000, guid: 9e14c9c8f9015aa45bd97333414c857d, type: 3}
+  targetScene: MachinesCave_00_URP
+  requireKeyPress: 0
+  interactKey: 101
+  spawnIDForNextScene: FromTrek_Bottom
+  spawnGracePeriod: 0.5
+--- !u!65 &1344924675
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344924673}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.09, y: 0.4, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1344924676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344924673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.36, y: -3.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1407539643
 GameObject:
   m_ObjectHideFlags: 0
@@ -3206,20 +3323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d0fb63a8231e4d937118652772d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  dialogueCanvas: {fileID: 8699776103234011412}
-  bodyText: {fileID: 2238726871770890059}
-  npcNameText: {fileID: 4528026122505157555}
-  sharedBeatText: {fileID: 2278611022070741810}
-  btnT: {fileID: 6288574556857875547}
-  btnO: {fileID: 6931616304733207975}
-  btnN: {fileID: 2170701007886842230}
-  btnE: {fileID: 2294026381814879145}
-  txtT: {fileID: 2378385315441504810}
-  txtO: {fileID: 4289821377739707786}
-  txtN: {fileID: 7950162325451368912}
-  txtE: {fileID: 2883652514589377817}
-  choiceButtonContainer: {fileID: 747212559702238024}
-  _choiceButtonPrefab: {fileID: 2000220524889621443}
+  dialogueJson: {fileID: 0}
 --- !u!4 &1543128805
 Transform:
   m_ObjectHideFlags: 0
@@ -3280,6 +3384,8 @@ MonoBehaviour:
   dialoguePanel: {fileID: 8441262526446954880}
   dialogueText: {fileID: 2238726871770890059}
   npcNameText: {fileID: 4528026122505157555}
+  sharedBeatText: {fileID: 0}
+  npcPortraitImage: {fileID: 0}
   dialogueFont: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
   currentActiveSpeaker: Player
 --- !u!4 &1616405114
@@ -3443,73 +3549,6 @@ MonoBehaviour:
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
---- !u!21 &1725184632
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Space Grotesk - Light Material
-  m_Shader: {fileID: 4800000, guid: 2a8f7495b793df14cac8c031444bd01e, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: -5614121610302043641, guid: 5e9efa50e95f134478c0a62ef608170a, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _CullMode: 0
-    - _FaceDilate: 0
-    - _GradientScale: 10
-    - _MaskSoftnessX: 0
-    - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0
-    - _PerspectiveFilter: 0.875
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.73125
-    - _ScaleX: 1
-    - _ScaleY: 1
-    - _ShaderFlags: 0
-    - _Sharpness: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _TextureHeight: 1024
-    - _TextureWidth: 1024
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
-    - _VertexOffsetX: 0
-    - _VertexOffsetY: 0
-    - _WeightBold: 0.75
-    - _WeightNormal: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1725697643
 GameObject:
   m_ObjectHideFlags: 0
@@ -5561,6 +5600,78 @@ Transform:
   - {fileID: 1766148694}
   - {fileID: 908906434}
   - {fileID: 717471832}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2139690830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2139690833}
+  - component: {fileID: 2139690832}
+  - component: {fileID: 2139690831}
+  m_Layer: 0
+  m_Name: SceneCollider_ToMarket_Bottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2139690831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139690830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c897a89189b2ccf40baf609d38b23c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProximityTransitionZone
+  targetSceneAsset: {fileID: 102900000, guid: a6ae80d59e39c464dad8283c585c74f5, type: 3}
+  targetScene: Desert_Saori_Meeting
+  requireKeyPress: 0
+  interactKey: 101
+  spawnIDForNextScene: FromTrek_Bottom
+  spawnGracePeriod: 0.5
+--- !u!65 &2139690832
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139690830}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20, y: 0.4, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &2139690833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139690830}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -5.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3000000001
@@ -12258,8 +12369,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Glyph of Sorrow
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e9efa50e95f134478c0a62ef608170a, type: 2}
-  m_sharedMaterial: {fileID: 1725184632}
+  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12283,7 +12394,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.85
+  m_fontSize: 47
   m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15575,6 +15686,8 @@ MonoBehaviour:
   dialoguePanel: {fileID: 8441262526446954880}
   dialogueText: {fileID: 2238726871770890059}
   npcNameText: {fileID: 4528026122505157555}
+  sharedBeatText: {fileID: 0}
+  npcPortraitImage: {fileID: 0}
   dialogueFont: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
   currentActiveSpeaker: Player
 --- !u!1 &4977478859836551838
@@ -17904,6 +18017,7 @@ MonoBehaviour:
   npcId: Saori
   startPassageId: market_entry
   interactionRadius: 2
+  dialogueJson: {fileID: 0}
   npcScale: {x: 1.25, y: 1.25, z: 1.25}
   useDefaultScale: 1
   colliderHeight: 2
@@ -21110,7 +21224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1630215206709279923, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.4
+      value: -4.6
       objectReference: {fileID: 0}
     - target: {fileID: 1630215206709279923, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21146,7 +21260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5636073822744533782, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
       propertyPath: maxY
-      value: -1
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 5636073822744533782, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
       propertyPath: minY
@@ -21158,7 +21272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5636073822744533782, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
       propertyPath: minScale
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7531005511697555702, guid: eca64849edfbf0345aad539a14c2ab34, type: 3}
       propertyPath: m_StaticShadowCaster
@@ -22752,3 +22866,6 @@ SceneRoots:
   - {fileID: 6738738689080376096}
   - {fileID: 871069647}
   - {fileID: 1280211222}
+  - {fileID: 1327639363}
+  - {fileID: 2139690833}
+  - {fileID: 1344924676}

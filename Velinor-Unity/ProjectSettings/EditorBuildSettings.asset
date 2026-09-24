@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InsideMarket_00.unity
     guid: 186da5e04c0ec124f8754c17a699c763
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_01.unity
+    guid: 6289114d9e8b1eb4b9e7d9da00f3eae4
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_02.unity
+    guid: d765c09df5ba91742888b3e19808b4f7
   - enabled: 0
     path: Assets/Scenes/GamplayScene.unity
     guid: 8483082fca683054eb66b8382fbc4107
