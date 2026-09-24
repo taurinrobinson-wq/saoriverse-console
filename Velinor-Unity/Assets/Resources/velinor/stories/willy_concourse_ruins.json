@@ -177,6 +177,47 @@
         },
         {
             "id": 3,
+            "type": "player_inner",
+            "active_speaker": "Player",
+            "portrait_expression": "neutral",
+            "prompt": "He's dismissive, but maybe I can convince him.",
+            "tone_choices": [
+                {
+                    "tone": "N",
+                    "label": "Narrative",
+                    "text": "Continue",
+                    "result_text": "You steel yourself and approach.",
+                    "tone_effects": [
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
+                    ],
+                    "remnants_effects": []
+                }
+            ],
+            "system_triggers": [
+                {
+                    "type": "transition_fade",
+                    "data": ["out"]
+                }
+            ],
+            "next_beat_id": 3.5
+        },
+        {
+            "id": 3.5,
             "type": "npc_turn",
             "active_speaker": "Willy",
             "portrait_expression": "neutral",
@@ -215,7 +256,7 @@
                         },
                         {
                             "target": "Willy",
-                            "stat": "respect",
+                            "stat": "authority",
                             "delta": 0.01
                         }
                     ]
@@ -248,7 +289,7 @@
                     "remnants_effects": [
                         {
                             "target": "Willy",
-                            "stat": "pride",
+                            "stat": "memory",
                             "delta": 0.02
                         },
                         {
@@ -335,7 +376,16 @@
                     ]
                 }
             ],
-            "system_triggers": [],
+            "system_triggers": [
+                {
+                    "type": "transition_fade",
+                    "data": ["in"]
+                },
+                {
+                    "type": "debris_clear",
+                    "data": []
+                }
+            ],
             "next_beat_id": 4
         },
         {
@@ -377,8 +427,26 @@
                     "data": [
                         "sorrow"
                     ]
+                },
+                {
+                    "type": "glyph_disappear",
+                    "data": []
                 }
             ],
+            "next_beat_id": 4.5
+        },
+        {
+            "id": 4.5,
+            "type": "npc_shared",
+            "active_speaker": "Willy",
+            "portrait_expression": "neutral",
+            "shared_dialogue": [
+                {
+                    "speaker": "Willy",
+                    "text": "Careful out there."
+                }
+            ],
+            "system_triggers": [],
             "next_beat_id": 5
         },
         {
@@ -429,7 +497,7 @@
                         },
                         {
                             "target": "Willy",
-                            "stat": "respect",
+                            "stat": "authority",
                             "delta": 0.01
                         }
                     ]
@@ -589,13 +657,13 @@
                     "type": "glyph_effect",
                     "data": [
                         "movement_speed",
-                        "slow"
+                        "2"
                     ]
                 },
                 {
                     "type": "diary_append",
                     "data": [
-                        "willy_concourse_glyph"
+                        "Met a scrapper named Willy in the Concourse Ruins. He was an odd character—laughing at suffering, coughing constantly—but helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."
                     ]
                 },
                 {
