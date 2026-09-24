@@ -8,7 +8,7 @@
             "active_speaker": "Willy",
             "portrait_expression": "neutral",
             "setting_description": "The Concourse Ruins, northeast of the market square. Debris litters the corridor. A strange man digs through a shifting pile.",
-            "prompt": "A strange man is digging through the rubble. He looks up and notices you. \"Careful. That pile shifts. Saw a man lose a leg under one just like it. Ah‑hahaha *cough* terrible, terrible thing.\"",
+            "prompt": "Careful. That pile shifts. Saw a man lose a leg under one just like it. Ah‑hahaha *cough* terrible, terrible thing.",
             "tone_choices": [
                 {
                     "tone": "T",
@@ -374,7 +374,9 @@
             "system_triggers": [
                 {
                     "type": "glyph_interaction",
-                    "data": ["sorrow"]
+                    "data": [
+                        "sorrow"
+                    ]
                 }
             ],
             "next_beat_id": 5
@@ -384,11 +386,13 @@
             "type": "npc_turn",
             "active_speaker": "Willy",
             "portrait_expression": "neutral",
-            "prompt": "He stops you before you leave. \"Hey there, hold on one sec. Willy don' work for free.\"",
+            "prompt": "Hey there, hold on one sec. Willy don' work for free.",
             "system_triggers": [
                 {
                     "type": "update_dialogue_names",
-                    "data": ["Willy"]
+                    "data": [
+                        "Willy"
+                    ]
                 }
             ],
             "tone_choices": [
@@ -583,11 +587,16 @@
             "system_triggers": [
                 {
                     "type": "glyph_effect",
-                    "data": ["movement_speed", "slow"]
+                    "data": [
+                        "movement_speed",
+                        "slow"
+                    ]
                 },
                 {
                     "type": "diary_append",
-                    "data": ["willy_concourse_glyph"]
+                    "data": [
+                        "willy_concourse_glyph"
+                    ]
                 },
                 {
                     "type": "close_dialogue"
