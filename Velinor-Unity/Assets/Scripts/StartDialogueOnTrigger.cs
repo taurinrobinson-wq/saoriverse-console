@@ -7,7 +7,7 @@ public class StartDialogueOnTrigger : MonoBehaviour
     [Header("Dialogue")]
     [SerializeField] private string npcId = "Kaelen";
     [SerializeField] private string startingPassageId = "beat_1";
-    [SerializeField] private string storyResourcePath = "velinor/stories/kaelen_confession_01";
+    [SerializeField] private string storyResourcePath = "Dialogue/kaelen_confession_01";
     [SerializeField] private string requiredFlag = "completed_willy";
     [SerializeField] private bool requireFlag = true;
 

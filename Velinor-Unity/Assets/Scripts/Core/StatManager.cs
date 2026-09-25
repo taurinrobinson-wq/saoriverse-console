@@ -122,7 +122,7 @@ public class StatManager : MonoBehaviour
         npcTiers["Ravi"] = 1;
         npcTiers["Nima"] = 1;
 
-        TextAsset stateAsset = Resources.Load<TextAsset>("velinor/data/npc_state");
+        TextAsset stateAsset = Resources.Load<TextAsset>("Data/npc_state");
         if (stateAsset != null)
         {
             try
@@ -155,7 +155,7 @@ public class StatManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[StatManager] npc_state.json not found in Resources/velinor/data/npc_state");
+            Debug.LogError("[StatManager] npc_state.json not found in Resources/Data/npc_state");
         }
 
         LoadCascadingRelationships();
@@ -258,7 +258,7 @@ public class StatManager : MonoBehaviour
 
     private void LoadCascadingRelationships()
     {
-        TextAsset cascadeAsset = Resources.Load<TextAsset>("velinor/data/cascading_relationships");
+        TextAsset cascadeAsset = Resources.Load<TextAsset>("Data/cascading_relationships");
         if (cascadeAsset != null)
         {
             try
