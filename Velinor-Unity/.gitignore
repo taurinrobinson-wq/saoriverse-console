@@ -43,3 +43,10 @@ Thumbs.db
 
 # Generated Assets
 /GeneratedAssets/
+
+# Large Asset Packs (can be re-downloaded)
+/Assets/Modular Sci-Fi Generator Kit/
+/Assets/Modular_SciFi_Pack*/
+/Assets/HD/
+/Assets/HDRP/
+/Assets/AnythingWorldExamples/
