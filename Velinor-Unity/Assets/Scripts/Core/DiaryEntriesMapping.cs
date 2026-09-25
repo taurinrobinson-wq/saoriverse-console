@@ -80,6 +80,17 @@ public static class DiaryEntriesMapping
         {
             "npc_pattern_recognition",
             "I'm beginning to see patterns in the NPCs I meet: they're all connected to loss, to the collapse, to something that's fundamentally broken in this place. And each of them carries a piece of understanding I need."
+        },
+
+        // Scene-Based Observations
+        {
+            "machines_cave_first_visit",
+            "What is this place? The cavern stretches deeper than I can see, filled with the bones of machines—great rusted gears, twisted metal, things that once moved with purpose. Whatever inhabited this cave left it in pieces. The architecture suggests intelligence, construction, intention. But now there's only silence and the slow work of rust."
+        },
+
+        {
+            "marketplace_velhara_observation",
+            "Old Velhara stands before me in full—crumbling, breathing, alive in its decay. The marketplace thrums with the weight of countless transactions, countless griefs. People gather despite the danger. Or perhaps because of it. Some places demand to be inhabited, even if they're slowly falling apart."
         }
     };
 
