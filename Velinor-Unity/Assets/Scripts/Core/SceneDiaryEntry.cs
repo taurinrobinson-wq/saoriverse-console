@@ -1,18 +1,23 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
 
 /// <summary>
 /// Triggers a diary entry when a scene loads for the first time.
 /// Useful for player observations and scene-based narrative moments.
 /// 
 /// Inspector Features:
-/// - Diary Entry Key: The key from DiaryEntriesMapping to append
+/// - Drag Scene File: Drop a scene asset to auto-populate the Diary Entry Key
+/// - Diary Entry Key: Auto-generated as {sceneName}_first_visit or manually set
 /// - Trigger Condition: "first_visit_only" (default) or "always"
 /// - Required Flag: Optional condition that must be met (e.g., "marketplace_visited")
 /// - Reset Button (Editor Only): Manually clear the trigger flag for testing
 /// </summary>
 public class SceneDiaryEntry : MonoBehaviour
 {
+    [SerializeField] private Object sceneAsset;
     [SerializeField] private string diaryEntryKey = "";
     [SerializeField] private string triggerCondition = "first_visit_only";
     [SerializeField] private string requiredFlag = "";
@@ -49,6 +54,25 @@ public class SceneDiaryEntry : MonoBehaviour
     #if UNITY_EDITOR
     private void OnValidate()
     {
+        // Auto-generate diary entry key from scene asset if provided
+        if (sceneAsset != null)
+        {
+            string assetPath = UnityEditor.AssetDatabase.GetAssetPath(sceneAsset);
+            if (assetPath.EndsWith(".unity"))
+            {
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+                string expectedKey = $"{sceneName}_first_visit";
+                
+                // Only auto-populate if the key is empty
+                if (string.IsNullOrEmpty(diaryEntryKey))
+                {
+                    diaryEntryKey = expectedKey;
+                    Debug.Log($"[SceneDiaryEntry] Auto-generated diary key from scene: {diaryEntryKey}");
+                }
+            }
+        }
+
+        // Reset flag if toggled in editor
         if (resetFlagInEditor)
         {
             resetFlagInEditor = false;
