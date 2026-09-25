@@ -30,11 +30,20 @@ public class SceneDiaryEntry : MonoBehaviour
         #if UNITY_EDITOR
         debugFlagName = FlagKey;
         #endif
+        
+        Debug.Log($"[SceneDiaryEntry] OnEnable() called. FlagKey: {FlagKey}");
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    
+    private void Start()
+    {
+        // Handle the case where the scene is already loaded (most common)
+        Debug.Log($"[SceneDiaryEntry] Start() called. Current scene: {gameObject.scene.name}");
+        TriggerDiaryEntry();
     }
 
     #if UNITY_EDITOR
@@ -59,6 +68,15 @@ public class SceneDiaryEntry : MonoBehaviour
 
     public void TriggerDiaryEntry()
     {
+        Debug.Log($"[SceneDiaryEntry] TriggerDiaryEntry() called. Entry Key: '{diaryEntryKey}'");
+        
+        // Validate entry key
+        if (string.IsNullOrEmpty(diaryEntryKey))
+        {
+            Debug.LogWarning("[SceneDiaryEntry] No diary entry key configured!");
+            return;
+        }
+
         // Check if this should only trigger once
         if (triggerCondition == "first_visit_only" && PlayerPrefs.HasKey(FlagKey))
         {
@@ -73,6 +91,13 @@ public class SceneDiaryEntry : MonoBehaviour
             return;
         }
 
+        // Validate DiaryManager exists
+        if (DiaryManager.Instance == null)
+        {
+            Debug.LogError("[SceneDiaryEntry] DiaryManager.Instance is null! Make sure DiaryManager exists in the scene.");
+            return;
+        }
+
         // Get the diary content
         string content = DiaryEntriesMapping.GetEntry(diaryEntryKey);
         if (string.IsNullOrEmpty(content))
@@ -83,13 +108,14 @@ public class SceneDiaryEntry : MonoBehaviour
 
         // Add the entry to the diary
         DiaryManager.Instance.AddEntry(content);
-        Debug.Log($"[SceneDiaryEntry] Added diary entry: '{diaryEntryKey}' in scene '{gameObject.scene.name}'");
+        Debug.Log($"[SceneDiaryEntry] ✓ Successfully added diary entry: '{diaryEntryKey}' in scene '{gameObject.scene.name}'");
 
         // Mark as triggered
         if (triggerCondition == "first_visit_only")
         {
             PlayerPrefs.SetInt(FlagKey, 1);
             PlayerPrefs.Save();
+            Debug.Log($"[SceneDiaryEntry] Saved trigger flag: {FlagKey}");
         }
     }
 
