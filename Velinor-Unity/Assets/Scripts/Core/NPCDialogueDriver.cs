@@ -26,6 +26,7 @@ namespace Velinor.Core
 
         [Header("Interaction")]
         [SerializeField] private float interactionRadius = 0.8f;
+        [SerializeField] private GameObject interactionGlow;      // Visual feedback when in range
 
         [Header("Transform Configuration")]
         [SerializeField] private Vector3 npcScale = new Vector3(1.8f, 1.8f, 1.8f);
@@ -180,6 +181,8 @@ namespace Velinor.Core
             // Show notification when entering range
             if (playerInRange && !notificationShown)
             {
+                if (interactionGlow != null) interactionGlow.SetActive(true);
+                
                 NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
                 if (notificationPanel != null)
                 {
@@ -194,6 +197,8 @@ namespace Velinor.Core
             // Hide notification when leaving range
             if (!playerInRange && notificationShown)
             {
+                if (interactionGlow != null) interactionGlow.SetActive(false);
+                
                 NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
                 if (notificationPanel != null)
                 {
