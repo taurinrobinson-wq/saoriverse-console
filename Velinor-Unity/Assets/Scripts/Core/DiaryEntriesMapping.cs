@@ -85,7 +85,7 @@ public static class DiaryEntriesMapping
         // Scene-Based Observations
         {
             "machines_cave_first_visit",
-            "What is this place? The cavern stretches deeper than I can see, filled with the bones of machines—great rusted gears, twisted metal, things that once moved with purpose. Whatever inhabited this cave left it in pieces. The architecture suggests intelligence, construction, intention. But now there's only silence and the slow work of rust."
+            "What is this place? The machines just started up when I came in."
         },
 
         {
