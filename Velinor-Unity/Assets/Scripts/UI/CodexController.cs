@@ -92,34 +92,90 @@ public class CodexController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Debug.Log("[Codex] CodexController marked as persistent across scenes");
 
+        InitializeReferences();
+    }
+
+    private void InitializeReferences()
+    {
         // Find CodexPanel in UI_Canvas
-        Canvas[] allCanvases = FindObjectsByType<Canvas>();
-        foreach (Canvas c in allCanvases)
+        GameObject panelObj = GameObject.Find("UI_Canvas/CodexPanel");
+        if (panelObj != null)
         {
-            if (c.gameObject.name == "UI_Canvas")
+            codexPanel = panelObj.GetComponent<CanvasGroup>();
+            
+            // New Hierarchy: CodexPanel -> GlyphsBackground -> [Children]
+            Transform glyphsBG = panelObj.transform.Find("GlyphsBackground");
+            if (glyphsBG != null)
             {
-                _cachedCanvas = c;
-
-                Transform codexPanelT = FindPanelRecursive(c.transform, "CodexPanel");
-                if (codexPanelT != null)
-                {
-                    codexPanel = codexPanelT.GetComponent<CanvasGroup>();
-                    viewport = codexPanelT.Find("Viewport");
-                    glyphNameText = codexPanelT.Find("Navigation/GlyphName")?.GetComponent<TextMeshProUGUI>();
-                    nextPageBtn = codexPanelT.Find("Navigation/NextBtn")?.GetComponent<Button>();
-                    prevPageBtn = codexPanelT.Find("Navigation/PrevBtn")?.GetComponent<Button>();
-
-                    Debug.Log("[Codex] CodexPanel found and assigned");
-                }
-                break;
+                viewport = glyphsBG.Find("Viewport");
+                glyphNameText = glyphsBG.Find("Navigation/GlyphName")?.GetComponent<TextMeshProUGUI>();
+                
+                nextPageBtn = glyphsBG.Find("Navigation/NextBtn")?.GetComponent<Button>();
+                if (nextPageBtn == null) nextPageBtn = glyphsBG.Find("Navigation/Btn_Next")?.GetComponent<Button>();
+                
+                prevPageBtn = glyphsBG.Find("Navigation/PrevBtn")?.GetComponent<Button>();
+                if (prevPageBtn == null) prevPageBtn = glyphsBG.Find("Navigation/Btn_Prev")?.GetComponent<Button>();
             }
+            else
+            {
+                // Fallback to root (original logic)
+                viewport = panelObj.transform.Find("Viewport");
+                glyphNameText = panelObj.transform.Find("Navigation/GlyphName")?.GetComponent<TextMeshProUGUI>();
+                nextPageBtn = panelObj.transform.Find("Navigation/NextBtn")?.GetComponent<Button>();
+                prevPageBtn = panelObj.transform.Find("Navigation/PrevBtn")?.GetComponent<Button>();
+            }
+
+            Debug.Log("[Codex] CodexPanel references initialized successfully.");
+        }
+        else
+        {
+            Debug.LogError("[Codex] CodexPanel not found at UI_Canvas/CodexPanel!");
         }
 
         if (nextPageBtn != null) nextPageBtn.onClick.AddListener(NextPage);
         if (prevPageBtn != null) prevPageBtn.onClick.AddListener(PrevPage);
 
-        // Cache TriglyphPuzzleController to check sequence status without FindAnyObjectByType every frame
+        // Auto-discover GlyphSlots in the CodexPanel hierarchy
+        DiscoverGlyphSlots();
+
+        // Cache TriglyphPuzzleController
         _triglyphController = FindAnyObjectByType<TriglyphPuzzleController>();
+    }
+
+    /// <summary>
+    /// Automatically discover all GlyphSlot components in the codex panel hierarchy.
+    /// This ensures slots are populated even if they weren't manually assigned in Inspector.
+    /// </summary>
+    private void DiscoverGlyphSlots()
+    {
+        if (codexPanel == null)
+        {
+            Debug.LogWarning("[Codex] Cannot discover slots - codexPanel is null!");
+            return;
+        }
+
+        // Clear existing list to avoid duplicates
+        allSlots.Clear();
+
+        // Find all GlyphSlot components in the codex panel hierarchy
+        GlyphSlot[] foundSlots = codexPanel.GetComponentsInChildren<GlyphSlot>(includeInactive: true);
+        
+        if (foundSlots.Length == 0)
+        {
+            Debug.LogError("[Codex] No GlyphSlot components found in CodexPanel hierarchy! Check your UI structure.");
+            return;
+        }
+
+        // Add slots to list in order
+        foreach (GlyphSlot slot in foundSlots)
+        {
+            if (slot != null)
+            {
+                allSlots.Add(slot);
+            }
+        }
+
+        Debug.Log($"[Codex] Auto-discovered {allSlots.Count} GlyphSlots in CodexPanel hierarchy");
     }
 
     private Transform FindPanelRecursive(Transform parent, string panelName)
@@ -218,10 +274,22 @@ public class CodexController : MonoBehaviour
 
     public void ToggleCodex()
     {
+        // Re-verify references before toggling
+        if (codexPanel == null) InitializeReferences();
+
         if (codexPanel == null)
         {
-            Debug.LogError("[Codex] codexPanel is NULL");
+            Debug.LogError("[Codex] codexPanel is NULL even after re-initialization!");
             return;
+        }
+
+        bool opening = codexPanel.alpha < 0.5f;
+
+        // When opening codex, rediscover slots in case we loaded a new scene
+        if (opening && allSlots.Count == 0)
+        {
+            Debug.Log("[Codex] Opening codex with no slots - rediscovering slots...");
+            DiscoverGlyphSlots();
         }
 
         // GUARD: Do not allow toggling during puzzle sequence
@@ -239,7 +307,6 @@ public class CodexController : MonoBehaviour
             return;
         }
 
-        bool opening = codexPanel.alpha < 0.5f;
         Debug.Log($"[Codex] ToggleCodex: opening={opening}");
 
         codexPanel.alpha = opening ? 1f : 0f;
@@ -256,6 +323,11 @@ public class CodexController : MonoBehaviour
         if (opening)
         {
             _currentCodexPage = 0;
+            if (viewCtrl != null)
+            {
+                viewCtrl.SwitchView("glyphs");
+            }
+
             UpdateCodexUI();
         }
         else
@@ -312,20 +384,39 @@ public class CodexController : MonoBehaviour
 
         // Look for pagination grids: GlyphGrid_Pg1, GlyphGrid_Pg2, etc.
         string gridName = $"GlyphGrid_Pg{_currentCodexPage + 1}";
-        Transform gridT = codexPanel.transform.Find(gridName);
+        
+        Transform glyphsBG = codexPanel.transform.Find("GlyphsBackground");
+        Transform gridT = glyphsBG != null ? glyphsBG.Find(gridName) : codexPanel.transform.Find(gridName);
 
-        if (gridT == null)
+        if (gridT == null && glyphsBG != null)
         {
-            // Fallback: try to find just "GlyphGrid" (non-paginated layout)
-            gridT = codexPanel.transform.Find("GlyphGrid");
+            // Fallback: try to find just "GlyphGrid"
+            gridT = glyphsBG.Find("GlyphGrid");
+        }
+        else if (gridT == null)
+        {
+             gridT = codexPanel.transform.Find("GlyphGrid");
         }
 
         if (gridT != null)
         {
             Debug.Log($"[Codex] {gridName} found with {gridT.childCount} children (slots)");
 
+            // Hide other pages if they exist
+            if (glyphsBG != null)
+            {
+                foreach (Transform child in glyphsBG)
+                {
+                    if (child.name.StartsWith("GlyphGrid_Pg") && child.name != gridName)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            gridT.gameObject.SetActive(true);
+
             // Update the grid to display the GlyphSlot components
-            // The slots already contain the collected glyphs via SetGlyph()
             for (int i = 0; i < gridT.childCount; i++)
             {
                 Transform slotTransform = gridT.GetChild(i);
@@ -333,10 +424,8 @@ public class CodexController : MonoBehaviour
 
                 if (glyphSlot != null)
                 {
-                    // The GlyphSlot already manages its own display
-                    // Just ensure it's visible
                     slotTransform.gameObject.SetActive(true);
-                    Debug.Log($"[Codex]   Slot_{i}: Active, Filled={glyphSlot.isFilled}");
+                    // Debug.Log($"[Codex]   Slot_{i}: Active, Filled={glyphSlot.isFilled}");
                 }
             }
         }
@@ -382,6 +471,13 @@ public class CodexController : MonoBehaviour
         {
             Debug.LogError("[Codex] Cannot add null glyph data!");
             return;
+        }
+
+        // Safety check: ensure slots are discovered
+        if (allSlots.Count == 0)
+        {
+            Debug.LogWarning("[Codex] No slots available when adding glyph - attempting to discover slots...");
+            DiscoverGlyphSlots();
         }
 
         // Check if glyph already exists
