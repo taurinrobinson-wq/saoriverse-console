@@ -176,6 +176,20 @@ public class CodexController : MonoBehaviour
         }
 
         Debug.Log($"[Codex] Auto-discovered {allSlots.Count} GlyphSlots in CodexPanel hierarchy");
+
+        // Auto-discover triglyphPanelUI if not assigned
+        if (triglyphPanelUI == null)
+        {
+            triglyphPanelUI = GameObject.Find("UI_Canvas/TriglyphPuzzlePanel");
+            if (triglyphPanelUI != null)
+            {
+                Debug.Log("[Codex] Auto-discovered TriglyphPuzzlePanel in scene");
+            }
+            else
+            {
+                Debug.LogWarning("[Codex] TriglyphPuzzlePanel not found in scene - puzzle mode may not work correctly");
+            }
+        }
     }
 
     private Transform FindPanelRecursive(Transform parent, string panelName)
@@ -590,6 +604,10 @@ public class CodexController : MonoBehaviour
     {
         if (glyph == null) return;
 
+        Debug.Log($"[Codex] OnGlyphSelected called for: {glyph.glyphData.glyphName}");
+        Debug.Log($"[Codex] triglyphPanelUI is: {(triglyphPanelUI != null ? triglyphPanelUI.name : "NULL")}");
+        Debug.Log($"[Codex] triglyphPanelUI.activeSelf: {(triglyphPanelUI != null ? triglyphPanelUI.activeSelf : false)}");
+
         // Check if puzzle mode is active (TriglyphPanelUI is open)
         bool isPuzzleMode = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
 
@@ -597,7 +615,7 @@ public class CodexController : MonoBehaviour
         // (TriglyphPuzzleController handles multi-selection, GlyphUI handles visual highlighting)
         if (isPuzzleMode)
         {
-            Debug.Log($"[Codex] Puzzle mode - delegating to TriglyphPuzzleController");
+            Debug.Log($"[Codex] PUZZLE MODE ACTIVE - delegating to TriglyphPuzzleController");
 
             // Still update the glyph name display so player knows which glyph they're selecting
             if (glyphNameText != null)
@@ -610,8 +628,11 @@ public class CodexController : MonoBehaviour
             return;
         }
 
+        Debug.Log($"[Codex] CODEX VIEWING MODE - normal selection");
+
         // CODEX VIEWING MODE: Single selection for glyph info display
         // Highlight slot for visual feedback
+        Debug.Log($"[Codex] Looking for slot with glyphUI, allSlots.Count = {allSlots.Count}");
         foreach (var slot in allSlots)
         {
             if (slot != null && slot.glyphUI == glyph)
@@ -622,7 +643,7 @@ public class CodexController : MonoBehaviour
                 }
                 selectedSlot = slot;
                 slot.Highlight();
-                Debug.Log($"[Codex] Highlighting slot: {slot.gameObject.name}");
+                Debug.Log($"[Codex] ✓ Highlighted slot: {slot.gameObject.name}");
                 break;
             }
         }
