@@ -18,7 +18,7 @@ public class NotificationPanelController : MonoBehaviour
     public TextMeshProUGUI notificationText;
 
     [Header("Animation")]
-    public float fadeDuration = 0.3f;
+    public float fadeDuration = 0.15f;
 
     private Canvas _cachedCanvas;
     private Coroutine _currentFadeCoroutine;
@@ -102,7 +102,7 @@ public class NotificationPanelController : MonoBehaviour
     /// Show a notification with optional auto-hide after duration
     /// Queues notifications to ensure none are skipped
     /// </summary>
-    public void ShowNotification(string text, float duration = 3f)
+    public void ShowNotification(string text, float duration = 1.5f)
     {
         _notificationQueue.Enqueue((text, duration));
         Debug.Log($"[Notification] Queued: {text} (queue size: {_notificationQueue.Count})");
