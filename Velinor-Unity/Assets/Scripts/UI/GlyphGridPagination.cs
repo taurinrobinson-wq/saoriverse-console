@@ -40,7 +40,28 @@ public class GlyphGridPagination : MonoBehaviour
 
         // Switch to Page 2
         glyphGridPage1.SetActive(false);
+        
+        // Disable CanvasGroup on Page 1
+        CanvasGroup cg1 = glyphGridPage1.GetComponent<CanvasGroup>();
+        if (cg1 != null)
+        {
+            cg1.interactable = false;
+            cg1.blocksRaycasts = false;
+            Debug.Log("[Glyph Pagination] Disabled CanvasGroup on Page 1");
+        }
+        
         glyphGridPage2.SetActive(true);
+        
+        // Re-enable CanvasGroup on Page 2
+        CanvasGroup cg2 = glyphGridPage2.GetComponent<CanvasGroup>();
+        if (cg2 != null)
+        {
+            cg2.interactable = true;
+            cg2.blocksRaycasts = true;
+            cg2.alpha = 1f;
+            Debug.Log("[Glyph Pagination] Re-enabled CanvasGroup on Page 2");
+        }
+        
         isOnPage1 = false;
         Debug.Log("[Glyph Pagination] Switched to Page 2");
 
@@ -60,7 +81,28 @@ public class GlyphGridPagination : MonoBehaviour
 
         // Switch to Page 1
         glyphGridPage2.SetActive(false);
+        
+        // Disable CanvasGroup on Page 2
+        CanvasGroup cg2 = glyphGridPage2.GetComponent<CanvasGroup>();
+        if (cg2 != null)
+        {
+            cg2.interactable = false;
+            cg2.blocksRaycasts = false;
+            Debug.Log("[Glyph Pagination] Disabled CanvasGroup on Page 2");
+        }
+        
         glyphGridPage1.SetActive(true);
+        
+        // Re-enable CanvasGroup on Page 1
+        CanvasGroup cg1 = glyphGridPage1.GetComponent<CanvasGroup>();
+        if (cg1 != null)
+        {
+            cg1.interactable = true;
+            cg1.blocksRaycasts = true;
+            cg1.alpha = 1f;
+            Debug.Log("[Glyph Pagination] Re-enabled CanvasGroup on Page 1");
+        }
+        
         isOnPage1 = true;
         Debug.Log("[Glyph Pagination] Switched to Page 1");
 

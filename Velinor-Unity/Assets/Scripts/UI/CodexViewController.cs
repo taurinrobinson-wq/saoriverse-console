@@ -88,7 +88,10 @@ public class CodexViewController : MonoBehaviour
         if (glyphsBackground != null) glyphsBackground.SetActive(true);
         if (mindLogBackground != null) mindLogBackground.SetActive(false);
 
-        // Enable glyphs view elements
+        Debug.Log("[CodexViewController] ShowGlyphsView - glyphGrid_Pg1 is null? " + (glyphGrid_Pg1 == null));
+        Debug.Log("[CodexViewController] ShowGlyphsView - glyphGrid_Pg2 is null? " + (glyphGrid_Pg2 == null));
+
+        // IMPORTANT: Only enable Page 1 by default. Do NOT enable both pages at once or they'll stack and block input!
         if (glyphGrid_Pg1 != null)
         {
             glyphGrid_Pg1.SetActive(true);
@@ -101,19 +104,22 @@ public class CodexViewController : MonoBehaviour
                 cg1.alpha = 1f;
                 Debug.Log("[CodexViewController] Re-enabled CanvasGroup on GlyphGrid_Pg1");
             }
+            else
+            {
+                Debug.Log("[CodexViewController] No CanvasGroup found on GlyphGrid_Pg1");
+            }
         }
         
+        // DISABLE Page 2 - it should only be active when user navigates to it
         if (glyphGrid_Pg2 != null)
         {
-            glyphGrid_Pg2.SetActive(true);
-            // Ensure CanvasGroup is interactable (in case it was disabled)
+            glyphGrid_Pg2.SetActive(false);
             CanvasGroup cg2 = glyphGrid_Pg2.GetComponent<CanvasGroup>();
             if (cg2 != null)
             {
-                cg2.interactable = true;
-                cg2.blocksRaycasts = true;
-                cg2.alpha = 1f;
-                Debug.Log("[CodexViewController] Re-enabled CanvasGroup on GlyphGrid_Pg2");
+                cg2.interactable = false;
+                cg2.blocksRaycasts = false;
+                Debug.Log("[CodexViewController] Disabled CanvasGroup on GlyphGrid_Pg2");
             }
         }
         
