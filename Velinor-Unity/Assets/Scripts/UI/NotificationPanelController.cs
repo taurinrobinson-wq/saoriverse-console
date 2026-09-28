@@ -10,6 +10,11 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Handles ONLY Notification UI (interaction prompts, alerts)
 /// Independent from DialogueUIController, DiaryController, and CodexController
+/// 
+/// Supports interruptible notifications:
+/// - New notification cancels current one's display timer
+/// - Fades to new notification immediately
+/// - Each notification displays for full duration unless interrupted
 /// </summary>
 public class NotificationPanelController : MonoBehaviour
 {
@@ -19,20 +24,18 @@ public class NotificationPanelController : MonoBehaviour
 
     [Header("Animation")]
     public float fadeDuration = 0.15f;
+    public float displayDuration = 3f;
 
     private Canvas _cachedCanvas;
     private Coroutine _currentFadeCoroutine;
-    private Queue<(string text, float duration)> _notificationQueue = new Queue<(string, float)>();
-    private bool _isShowingNotification = false;
-    private bool _canvasChecked = false; // ← Only check canvas state once after initialization
+    private Coroutine _displayTimerCoroutine;  // Separate timer for display duration
+    private bool _canvasChecked = false;
 
     private void Awake()
     {
-        // Mark this controller as persistent across scenes
         DontDestroyOnLoad(gameObject);
         Debug.Log("[Notification] NotificationPanelController marked as persistent across scenes");
 
-        // Find NotificationPanel in UI_Canvas
         Canvas[] allCanvases = FindObjectsByType<Canvas>();
         foreach (Canvas c in allCanvases)
         {
@@ -79,7 +82,6 @@ public class NotificationPanelController : MonoBehaviour
 
     private void Update()
     {
-        // Only check canvas state once after initial setup (performance optimization)
         if (!_canvasChecked && _cachedCanvas != null)
         {
             if (!_cachedCanvas.gameObject.activeSelf)
@@ -99,44 +101,37 @@ public class NotificationPanelController : MonoBehaviour
     }
 
     /// <summary>
-    /// Show a notification with optional auto-hide after duration
-    /// Queues notifications to ensure none are skipped
+    /// Show a notification. If one is already showing, it interrupts and displays immediately.
+    /// New notification will display for full duration unless another comes in.
     /// </summary>
-    public void ShowNotification(string text, float duration = 1.5f)
+    public void ShowNotification(string text, float duration = -1f)
     {
-        _notificationQueue.Enqueue((text, duration));
-        Debug.Log($"[Notification] Queued: {text} (queue size: {_notificationQueue.Count})");
-        
-        if (!_isShowingNotification)
-        {
-            ProcessNextNotification();
-        }
-    }
+        if (duration < 0)
+            duration = displayDuration;
 
-    private void ProcessNextNotification()
-    {
-        if (_notificationQueue.Count == 0)
+        Debug.Log($"[Notification] ShowNotification called: '{text}' (duration: {duration}s)");
+
+        // Cancel current display timer - new notification interrupts it
+        if (_displayTimerCoroutine != null)
         {
-            _isShowingNotification = false;
-            return;
+            StopCoroutine(_displayTimerCoroutine);
+            Debug.Log("[Notification] Display timer interrupted by new notification");
         }
 
-        _isShowingNotification = true;
-        var (text, duration) = _notificationQueue.Dequeue();
-
-        if (notificationText != null)
-        {
-            notificationText.text = text;
-        }
-
-        // Stop any existing fade coroutine
+        // Cancel fade coroutine if one is running
         if (_currentFadeCoroutine != null)
         {
             StopCoroutine(_currentFadeCoroutine);
         }
 
-        // Fade in and auto-hide
-        _currentFadeCoroutine = StartCoroutine(FadeInThenOut(duration));
+        // Update text
+        if (notificationText != null)
+        {
+            notificationText.text = text;
+        }
+
+        // Fade in immediately and start display timer
+        _currentFadeCoroutine = StartCoroutine(FadeInAndStartTimer(duration));
         Debug.Log($"[Notification] Showing: {text}");
     }
 
@@ -150,6 +145,11 @@ public class NotificationPanelController : MonoBehaviour
             StopCoroutine(_currentFadeCoroutine);
         }
 
+        if (_displayTimerCoroutine != null)
+        {
+            StopCoroutine(_displayTimerCoroutine);
+        }
+
         if (notificationPanel != null)
         {
             StartCoroutine(FadeTo(0f, fadeDuration));
@@ -157,19 +157,22 @@ public class NotificationPanelController : MonoBehaviour
         Debug.Log("[Notification] Notification hidden");
     }
 
-    private IEnumerator FadeInThenOut(float displayDuration)
+    private IEnumerator FadeInAndStartTimer(float duration)
     {
         // Fade in
         yield return StartCoroutine(FadeTo(1f, fadeDuration));
         
-        // Show for duration
-        yield return new WaitForSeconds(displayDuration);
+        // Start display timer (can be interrupted by new notification)
+        _displayTimerCoroutine = StartCoroutine(DisplayTimer(duration));
+    }
+
+    private IEnumerator DisplayTimer(float duration)
+    {
+        // Show for duration (can be interrupted)
+        yield return new WaitForSeconds(duration);
         
-        // Fade out
+        // Auto-fade out after duration expires (only if not interrupted)
         yield return StartCoroutine(FadeTo(0f, fadeDuration));
-        
-        // Process next notification in queue
-        ProcessNextNotification();
     }
 
     private IEnumerator FadeTo(float targetAlpha, float duration)
