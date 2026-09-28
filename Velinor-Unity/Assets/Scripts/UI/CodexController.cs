@@ -323,6 +323,9 @@ public class CodexController : MonoBehaviour
         if (opening)
         {
             _currentCodexPage = 0;
+            
+            // Set default view to Glyphs
+            CodexViewController viewCtrl = codexPanel.GetComponent<CodexViewController>();
             if (viewCtrl != null)
             {
                 viewCtrl.SwitchView("glyphs");
