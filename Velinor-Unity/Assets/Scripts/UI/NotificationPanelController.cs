@@ -24,6 +24,7 @@ public class NotificationPanelController : MonoBehaviour
     private Coroutine _currentFadeCoroutine;
     private Queue<(string text, float duration)> _notificationQueue = new Queue<(string, float)>();
     private bool _isShowingNotification = false;
+    private bool _canvasChecked = false; // ← Only check canvas state once after initialization
 
     private void Awake()
     {
@@ -78,18 +79,22 @@ public class NotificationPanelController : MonoBehaviour
 
     private void Update()
     {
-        // FORCE canvas to stay active if it got deactivated
-        if (_cachedCanvas != null && !_cachedCanvas.gameObject.activeSelf)
+        // Only check canvas state once after initial setup (performance optimization)
+        if (!_canvasChecked && _cachedCanvas != null)
         {
-            _cachedCanvas.gameObject.SetActive(true);
-            Debug.LogWarning("[Notification] Canvas was deactivated - re-activating it!");
-        }
-        
-        // Also ensure Canvas component is enabled
-        if (_cachedCanvas != null && !_cachedCanvas.enabled)
-        {
-            _cachedCanvas.enabled = true;
-            Debug.LogWarning("[Notification] Canvas component was disabled - re-enabling it!");
+            if (!_cachedCanvas.gameObject.activeSelf)
+            {
+                _cachedCanvas.gameObject.SetActive(true);
+                Debug.LogWarning("[Notification] Canvas was deactivated - re-activating it!");
+            }
+            
+            if (!_cachedCanvas.enabled)
+            {
+                _cachedCanvas.enabled = true;
+                Debug.LogWarning("[Notification] Canvas component was disabled - re-enabling it!");
+            }
+            
+            _canvasChecked = true;
         }
     }
 

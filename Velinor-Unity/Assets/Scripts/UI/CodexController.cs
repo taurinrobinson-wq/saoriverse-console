@@ -730,10 +730,19 @@ public class CodexController : MonoBehaviour
     /// </summary>
     private void NotifyPuzzleController(GlyphUI glyph)
     {
-        TriglyphPuzzleController puzzleController = FindAnyObjectByType<TriglyphPuzzleController>();
-        if (puzzleController != null)
+        // Use cached controller instead of expensive FindAnyObjectByType
+        if (_triglyphController != null)
         {
-            puzzleController.OnGlyphClickedForPuzzle(glyph);
+            _triglyphController.OnGlyphClickedForPuzzle(glyph);
+        }
+        else
+        {
+            // Fallback: Try to find it once if not cached
+            _triglyphController = FindAnyObjectByType<TriglyphPuzzleController>();
+            if (_triglyphController != null)
+            {
+                _triglyphController.OnGlyphClickedForPuzzle(glyph);
+            }
         }
     }
 

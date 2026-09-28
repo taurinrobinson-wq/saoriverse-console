@@ -46,6 +46,7 @@ public class TriglyphPuzzleController : MonoBehaviour
     private const int RequiredGlyphCount = 3;
     private bool puzzleCompleted = false;
     private bool sequenceInProgress = false; // ← Prevents CodexController from interfering during sequence
+    private NotificationPanelController _cachedNotificationPanel; // ← Cache to avoid FindAnyObjectByType every glyph click
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _confirmPuzzleAction;
@@ -86,7 +87,8 @@ public class TriglyphPuzzleController : MonoBehaviour
 
     private void Start()
     {
-        // Start with no prompt displayed
+        // Cache NotificationPanelController to avoid expensive FindAnyObjectByType on every glyph click
+        _cachedNotificationPanel = FindAnyObjectByType<NotificationPanelController>();
         Debug.Log("[Triglyph Puzzle] Controller initialized");
     }
 
@@ -152,16 +154,20 @@ public class TriglyphPuzzleController : MonoBehaviour
     /// </summary>
     private void UpdatePrompt()
     {
-        NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
-        if (notificationPanel == null) return;
+        // Use cached notification panel instead of expensive FindAnyObjectByType
+        if (_cachedNotificationPanel == null)
+        {
+            _cachedNotificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        }
+        if (_cachedNotificationPanel == null) return;
 
         if (selectedGlyphs.Count == RequiredGlyphCount)
         {
-            notificationPanel.ShowNotification("Press E to add selected glyphs to panel", duration: 10f);
+            _cachedNotificationPanel.ShowNotification("Press E to add selected glyphs to panel", duration: 10f);
         }
         else if (selectedGlyphs.Count > 0)
         {
-            notificationPanel.ShowNotification($"Select glyphs: {selectedGlyphs.Count}/{RequiredGlyphCount}", duration: 3f);
+            _cachedNotificationPanel.ShowNotification($"Select glyphs: {selectedGlyphs.Count}/{RequiredGlyphCount}", duration: 3f);
         }
     }
 
@@ -234,11 +240,14 @@ public class TriglyphPuzzleController : MonoBehaviour
             string message = "Invalid glyph combination! You need: Sorrow, Legacy, and Remembrance";
             Debug.LogWarning("[Triglyph Puzzle] " + message);
 
-            // Show notification to player
-            NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
-            if (notificationPanel != null)
+            // Show notification to player (use cached reference)
+            if (_cachedNotificationPanel == null)
             {
-                notificationPanel.ShowNotification(message, duration: 3f);
+                _cachedNotificationPanel = FindAnyObjectByType<NotificationPanelController>();
+            }
+            if (_cachedNotificationPanel != null)
+            {
+                _cachedNotificationPanel.ShowNotification(message, duration: 3f);
             }
             return;
         }
@@ -292,10 +301,13 @@ public class TriglyphPuzzleController : MonoBehaviour
             }
         }
 
-        // Hide prompt
-        NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
-        if (notificationPanel != null)
-            notificationPanel.ShowNotification("", duration: 0.1f);
+        // Hide prompt (use cached reference)
+        if (_cachedNotificationPanel == null)
+        {
+            _cachedNotificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        }
+        if (_cachedNotificationPanel != null)
+            _cachedNotificationPanel.ShowNotification("", duration: 0.1f);
 
         // Trigger the door sequence
         StartCoroutine(TriggerDoorSequence());
@@ -310,11 +322,14 @@ public class TriglyphPuzzleController : MonoBehaviour
         sequenceInProgress = true; // ← LOCK: Prevent CodexController from interfering
         Debug.Log("[Triglyph Puzzle] Starting door sequence...");
 
-        // Display victory message
-        NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
-        if (notificationPanel != null)
+        // Display victory message (use cached reference)
+        if (_cachedNotificationPanel == null)
         {
-            notificationPanel.ShowNotification(victoryMessage, duration: 5f);
+            _cachedNotificationPanel = FindAnyObjectByType<NotificationPanelController>();
+        }
+        if (_cachedNotificationPanel != null)
+        {
+            _cachedNotificationPanel.ShowNotification(victoryMessage, duration: 5f);
             Debug.Log($"[Triglyph Puzzle] Displayed message: {victoryMessage}");
         }
 
