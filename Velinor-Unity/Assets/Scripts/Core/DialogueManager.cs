@@ -506,7 +506,7 @@ public class DialogueManager : MonoBehaviour
             return npc;
 
         // Fallback: search all GameObjects in scene for matching name
-        foreach (var obj in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+        foreach (var obj in FindObjectsByType<MonoBehaviour>())
         {
             if (obj.gameObject.name == activeNpcId)
                 return obj.gameObject;

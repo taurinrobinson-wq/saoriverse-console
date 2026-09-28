@@ -13,7 +13,7 @@ namespace Velinor.Core
     public class NPCController : MonoBehaviour, IInteractable
     {
         [Header("Movement")]
-        [SerializeField] private float moveSpeed = 2.0f;
+        [SerializeField] private float moveSpeed = 2.0f; // TODO: Implement path-following or movement API for NPCs
         [SerializeField] private float speedChangeRate = 10.0f;
         [SerializeField] private float rotationSpeed = 5.0f;
 

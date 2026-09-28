@@ -16,7 +16,7 @@ public class GlyphVisualEffect : MonoBehaviour
 
     [Header("Glyph Appearance")]
     [SerializeField] private Color glyphColor = new Color(0.2f, 0.6f, 1f, 1f); // Bright blue
-    [SerializeField] private float glowIntensity = 3f;
+    // [SerializeField] private float glowIntensity = 3f; // TODO: Apply to material emission intensity
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 60f;

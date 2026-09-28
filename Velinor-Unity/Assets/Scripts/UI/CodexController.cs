@@ -648,8 +648,8 @@ public class CodexController : MonoBehaviour
             }
 
             // Notify puzzle controller of deselection (always, for immediate state sync)
-            bool isPuzzleMode = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
-            if (isPuzzleMode)
+            bool isPuzzleModeOnDeselect = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
+            if (isPuzzleModeOnDeselect)
             {
                 Debug.Log($"[Codex] Notifying TriglyphPuzzleController to deselect: {glyph.glyphData.glyphName}");
                 NotifyPuzzleControllerDeselect(glyph);
