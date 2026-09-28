@@ -647,10 +647,12 @@ public class CodexController : MonoBehaviour
                 glyphNameText.text = selectedGlyphs.Count > 0 ? selectedGlyphs.Last().glyphData.glyphName : "Codex";
             }
 
-            // Notify puzzle controller of deselection (if no glyphs selected and puzzle mode active)
-            if (selectedGlyphs.Count == 0)
+            // Notify puzzle controller of deselection (always, for immediate state sync)
+            bool isPuzzleMode = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
+            if (isPuzzleMode)
             {
-                NotifyPuzzleController(null);
+                Debug.Log($"[Codex] Notifying TriglyphPuzzleController to deselect: {glyph.glyphData.glyphName}");
+                NotifyPuzzleControllerDeselect(glyph);
             }
             return;
         }
@@ -742,6 +744,28 @@ public class CodexController : MonoBehaviour
             if (_triglyphController != null)
             {
                 _triglyphController.OnGlyphClickedForPuzzle(glyph);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Notify the puzzle controller to deselect a specific glyph
+    /// This ensures state stays in sync when deselecting
+    /// </summary>
+    private void NotifyPuzzleControllerDeselect(GlyphUI glyph)
+    {
+        // Use cached controller instead of expensive FindAnyObjectByType
+        if (_triglyphController != null)
+        {
+            _triglyphController.OnGlyphDeselectedFromCodex(glyph);
+        }
+        else
+        {
+            // Fallback: Try to find it once if not cached
+            _triglyphController = FindAnyObjectByType<TriglyphPuzzleController>();
+            if (_triglyphController != null)
+            {
+                _triglyphController.OnGlyphDeselectedFromCodex(glyph);
             }
         }
     }

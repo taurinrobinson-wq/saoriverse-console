@@ -150,6 +150,32 @@ public class TriglyphPuzzleController : MonoBehaviour
     }
 
     /// <summary>
+    /// Called when a glyph is explicitly deselected in the Codex
+    /// This handles deselection without toggling
+    /// </summary>
+    public void OnGlyphDeselectedFromCodex(GlyphUI glyphUI)
+    {
+        if (glyphUI == null || puzzleCompleted)
+        {
+            return;
+        }
+
+        // Only deselect if we have it in our list
+        if (selectedGlyphs.Contains(glyphUI))
+        {
+            selectedGlyphs.Remove(glyphUI);
+            // NOTE: glyphUI has already been deselected by CodexController, so don't call .Deselect() again
+            PlayDeselectSound();
+            Debug.Log($"[Triglyph Puzzle] Deselected {glyphUI.glyphData.glyphName} (from Codex)");
+            UpdatePrompt();
+        }
+        else
+        {
+            Debug.Log($"[Triglyph Puzzle] Glyph {glyphUI.glyphData.glyphName} was already deselected");
+        }
+    }
+
+    /// <summary>
     /// Update the "Press E to add to panel" prompt via notification system
     /// </summary>
     private void UpdatePrompt()
