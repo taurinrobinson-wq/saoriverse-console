@@ -69,27 +69,35 @@ public class DiaryController : MonoBehaviour
         
         Debug.Log($"[Diary] CanvasGroup found: {(cg != null ? "YES" : "NO")}, RectTransform found: {(rectTransform != null ? "YES" : "NO")}");
         
-        // Set anchors to upper-left corner for proper positioning
-        rectTransform.anchorMin = new Vector2(0, 1);  // Top-left
-        rectTransform.anchorMax = new Vector2(0, 1);  // Top-left
-        rectTransform.pivot = new Vector2(0, 1);      // Top-left pivot
+        // Initial setup for Mind Log mode (no animation defaults)
+        cg.interactable = true;
+        cg.blocksRaycasts = true;
+        cg.alpha = 1f;
         
-        Debug.Log($"[Diary] Anchors set to: Min=(0, 1), Max=(0, 1), Pivot=(0, 1)");
-        
-        // Set the initial closed position
-        rectTransform.anchoredPosition = closedPosition;
-        cg.interactable = false;
-        cg.blocksRaycasts = false;
-        cg.alpha = 0f;
-        
-        Debug.Log($"[Diary] Initial position set to: {rectTransform.anchoredPosition}, alpha: {cg.alpha}");
+        // Fetch entries if possible
+        if (DiaryManager.Instance != null)
+        {
+            SetEntriesFromManager();
+        }
+    }
+
+    public void SetEntriesFromManager()
+    {
+        var diaryEntries = DiaryManager.Instance.GetEntries();
+        var displayEntries = new List<string>();
+        foreach (var entry in diaryEntries)
+        {
+            displayEntries.Add(entry.content);
+        }
+        SetEntries(displayEntries);
+        Debug.Log($"[Diary] Loaded {displayEntries.Count} entries from DiaryManager");
     }
 
     void Update()
     {
-        // CHECK FOR N KEY FIRST (toggle diary open/close)
+        /* 
+        // Handle N key to open Codex in Mind Log mode
         bool nPressed = false;
-
 #if ENABLE_INPUT_SYSTEM
         var keyboard = Keyboard.current;
         if (keyboard != null && keyboard.nKey.wasPressedThisFrame)
@@ -98,18 +106,34 @@ public class DiaryController : MonoBehaviour
 
         if (nPressed)
         {
-            Debug.Log("[Diary] N key pressed - toggling diary");
-            Toggle();
+            CodexController codex = FindAnyObjectByType<CodexController>();
+            CodexViewController view = FindAnyObjectByType<CodexViewController>();
+            
+            if (codex != null)
+            {
+                if (codex.codexPanel != null && codex.codexPanel.alpha < 0.5f)
+                {
+                    codex.ToggleCodex();
+                }
+                
+                if (view != null)
+                {
+                    view.SwitchView("impressions");
+                }
+            }
             return;
         }
+        */
 
-        // Only handle page navigation if diary is open and not animating
-        if (!diaryOpen || isAnimating) return;
-
+        // Only handle page navigation if visible
+        if (cg != null && cg.alpha < 0.5f) return;
+        
+        // Page navigation logic...
         bool nextPressed = false;
         bool prevPressed = false;
 
 #if ENABLE_INPUT_SYSTEM
+        var keyboard = Keyboard.current;
         if (_nextPageAction != null && _nextPageAction.WasPressedThisFrame()) nextPressed = true;
         if (_prevPageAction != null && _prevPageAction.WasPressedThisFrame()) prevPressed = true;
 
@@ -120,14 +144,8 @@ public class DiaryController : MonoBehaviour
         }
 #endif
 
-        if (nextPressed)
-        {
-            NextPage();
-        }
-        else if (prevPressed)
-        {
-            PrevPage();
-        }
+        if (nextPressed) NextPage();
+        else if (prevPressed) PrevPage();
     }
 
     public void Toggle()

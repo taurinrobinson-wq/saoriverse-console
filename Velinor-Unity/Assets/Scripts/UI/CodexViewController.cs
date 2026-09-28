@@ -17,6 +17,10 @@ public class CodexViewController : MonoBehaviour
     [SerializeField] private Button glyphsButton;
     [SerializeField] private Button impressionsButton;
 
+    [Header("View Backgrounds")]
+    [SerializeField] private GameObject glyphsBackground;
+    [SerializeField] private GameObject mindLogBackground;
+
     [Header("Glyphs View Elements")]
     [SerializeField] private GameObject glyphGrid_Pg1;
     [SerializeField] private GameObject glyphGrid_Pg2;
@@ -80,6 +84,10 @@ public class CodexViewController : MonoBehaviour
     /// </summary>
     private void ShowGlyphsView()
     {
+        // Enable backgrounds
+        if (glyphsBackground != null) glyphsBackground.SetActive(true);
+        if (mindLogBackground != null) mindLogBackground.SetActive(false);
+
         // Enable glyphs view elements
         if (glyphGrid_Pg1 != null) glyphGrid_Pg1.SetActive(true);
         if (glyphGrid_Pg2 != null) glyphGrid_Pg2.SetActive(true);
@@ -98,6 +106,10 @@ public class CodexViewController : MonoBehaviour
     /// </summary>
     private void ShowImpressionsView()
     {
+        // Enable backgrounds
+        if (glyphsBackground != null) glyphsBackground.SetActive(false);
+        if (mindLogBackground != null) mindLogBackground.SetActive(true);
+
         // Disable glyphs view elements
         if (glyphGrid_Pg1 != null) glyphGrid_Pg1.SetActive(false);
         if (glyphGrid_Pg2 != null) glyphGrid_Pg2.SetActive(false);
@@ -107,6 +119,16 @@ public class CodexViewController : MonoBehaviour
         if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(true);
         if (impressionsPrevButton != null) impressionsPrevButton.SetActive(true);
         if (impressionsNextButton != null) impressionsNextButton.SetActive(true);
+
+        // Update Mind Log entries if component exists
+        if (mindLogBackground != null)
+        {
+            var diaryCtrl = mindLogBackground.GetComponent<DiaryController>();
+            if (diaryCtrl != null)
+            {
+                diaryCtrl.SetEntriesFromManager();
+            }
+        }
 
         Debug.Log("[CodexViewController] Impressions view enabled");
     }

@@ -51,7 +51,7 @@ public class CodexController : MonoBehaviour
     [SerializeField] private List<GlyphSlot> allSlots = new List<GlyphSlot>();  // All 18 slots globally numbered (0-17)
 
     private List<GlyphUI> activeGlyphs = new List<GlyphUI>();
-    private GlyphUI selectedGlyph;
+    private List<GlyphUI> selectedGlyphs = new List<GlyphUI>();  // Support multi-selection
     private GlyphSlot selectedSlot;  // Track which slot is visually highlighted
 
     private int _currentCodexPage = 0;
@@ -355,10 +355,13 @@ public class CodexController : MonoBehaviour
                 selectedSlot.Unhighlight();
                 selectedSlot = null;
             }
-            if (selectedGlyph != null)
+            if (selectedGlyphs.Count > 0)
             {
-                selectedGlyph.Deselect();
-                selectedGlyph = null;
+                foreach (var sel in selectedGlyphs)
+                {
+                    sel.Deselect();
+                }
+                selectedGlyphs.Clear();
             }
         }
 
@@ -388,15 +391,15 @@ public class CodexController : MonoBehaviour
     {
         if (codexPanel == null) return;
 
-        if (glyphNameText != null && selectedGlyph == null)
+        if (glyphNameText != null && selectedGlyphs.Count == 0)
         {
             int totalPages = Mathf.CeilToInt((float)allSlots.Count / SlotsPerPage);
             glyphNameText.text = $"Codex - Page {_currentCodexPage + 1} of {totalPages}";
-            Debug.Log("[Codex] UpdateCodexUI: glyphNameText updated with page number (selectedGlyph was null)");
+            Debug.Log("[Codex] UpdateCodexUI: glyphNameText updated with page number (no glyphs selected)");
         }
-        else if (selectedGlyph != null && glyphNameText != null)
+        else if (selectedGlyphs.Count > 0 && glyphNameText != null)
         {
-            Debug.Log("[Codex] UpdateCodexUI: selectedGlyph is NOT null, skipping page text update");
+            Debug.Log("[Codex] UpdateCodexUI: glyphs are selected, skipping page text update");
         }
 
         // Look for pagination grids: GlyphGrid_Pg1, GlyphGrid_Pg2, etc.
@@ -610,68 +613,63 @@ public class CodexController : MonoBehaviour
         // ===== ALWAYS DO: General Codex UI Feedback =====
         // This happens whether in puzzle mode or not
 
-        // Highlight slot for visual feedback
+        // Find and highlight the slot for this glyph
         Debug.Log($"[Codex] Looking for slot with glyphUI, allSlots.Count = {allSlots.Count}");
+        GlyphSlot glyphSlot = null;
         foreach (var slot in allSlots)
         {
             if (slot != null && slot.glyphUI == glyph)
             {
-                if (selectedSlot != null && selectedSlot != slot)
-                {
-                    selectedSlot.Unhighlight();
-                }
-                selectedSlot = slot;
-                slot.Highlight();
-                Debug.Log($"[Codex] ✓ Highlighted slot: {slot.gameObject.name}");
+                glyphSlot = slot;
                 break;
             }
         }
 
         // Check if clicking the same glyph again (toggle/deselect behavior)
-        if (selectedGlyph == glyph)
+        if (selectedGlyphs.Contains(glyph))
         {
             Debug.Log($"[Codex] Toggling off glyph: {glyph.glyphData.glyphName}");
-            selectedGlyph.Deselect();
+            selectedGlyphs.Remove(glyph);
+            glyph.Deselect();
 
             // Play deselect sound
             PlayDeselectSound();
 
-            selectedGlyph = null;
-
-            if (selectedSlot != null)
+            // Unhighlight the slot
+            if (glyphSlot != null)
             {
-                selectedSlot.Unhighlight();
-                selectedSlot = null;
+                glyphSlot.Unhighlight();
             }
 
+            // Update name display (show last selected or default)
             if (glyphNameText != null)
             {
-                glyphNameText.text = "Codex";
+                glyphNameText.text = selectedGlyphs.Count > 0 ? selectedGlyphs.Last().glyphData.glyphName : "Codex";
             }
 
-            // Also notify puzzle controller of deselection (if active)
-            NotifyPuzzleController(null);
+            // Notify puzzle controller of deselection (if no glyphs selected and puzzle mode active)
+            if (selectedGlyphs.Count == 0)
+            {
+                NotifyPuzzleController(null);
+            }
             return;
         }
 
-        // Deselect previous glyph and unhighlight its slot
-        if (selectedGlyph != null)
-        {
-            Debug.Log($"[Codex] Deselecting previous glyph: {selectedGlyph.glyphData.glyphName}");
-            selectedGlyph.Deselect();
-
-            // Play deselect sound
-            PlayDeselectSound();
-        }
-
-        // Select new glyph with full UI feedback
-        selectedGlyph = glyph;
-        selectedGlyph.Select();
+        // Add new glyph to selection (multi-select)
+        selectedGlyphs.Add(glyph);
+        glyph.Select();
 
         // Play select sound
         PlaySelectSound();
 
-        // Update the glyph name display
+        // Highlight the slot
+        if (glyphSlot != null)
+        {
+            glyphSlot.Highlight();
+            Debug.Log($"[Codex] ✓ Highlighted slot: {glyphSlot.gameObject.name}");
+        }
+
+        // Update the glyph name display (show most recent selection)
         if (glyphNameText != null)
         {
             Debug.Log($"[Codex] Setting glyphNameText to '{glyph.glyphData.glyphName}'");
@@ -679,11 +677,11 @@ public class CodexController : MonoBehaviour
         }
 
         // ===== OPTIONALLY DO: Puzzle-Specific Behavior =====
-        // If puzzle mode is active, notify the puzzle controller
+        // If puzzle mode is active, notify the puzzle controller with the most recently selected glyph
         bool isPuzzleMode = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
         if (isPuzzleMode)
         {
-            Debug.Log($"[Codex] Puzzle mode active - notifying TriglyphPuzzleController");
+            Debug.Log($"[Codex] Puzzle mode active - notifying TriglyphPuzzleController with most recent selection");
             NotifyPuzzleController(glyph);
         }
         else
@@ -691,7 +689,7 @@ public class CodexController : MonoBehaviour
             Debug.Log($"[Codex] Codex viewing mode - puzzle controller not notified");
         }
 
-        Debug.Log($"[Codex] Glyph selected: {glyph.glyphData.glyphName}");
+        Debug.Log($"[Codex] Glyph selected: {glyph.glyphData.glyphName}. Total selected: {selectedGlyphs.Count}");
     }
 
     /// <summary>
