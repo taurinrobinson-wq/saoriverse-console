@@ -89,9 +89,46 @@ public class CodexViewController : MonoBehaviour
         if (mindLogBackground != null) mindLogBackground.SetActive(false);
 
         // Enable glyphs view elements
-        if (glyphGrid_Pg1 != null) glyphGrid_Pg1.SetActive(true);
-        if (glyphGrid_Pg2 != null) glyphGrid_Pg2.SetActive(true);
-        if (glyphsNavigation != null) glyphsNavigation.SetActive(true);
+        if (glyphGrid_Pg1 != null)
+        {
+            glyphGrid_Pg1.SetActive(true);
+            // Ensure CanvasGroup is interactable (in case it was disabled)
+            CanvasGroup cg1 = glyphGrid_Pg1.GetComponent<CanvasGroup>();
+            if (cg1 != null)
+            {
+                cg1.interactable = true;
+                cg1.blocksRaycasts = true;
+                cg1.alpha = 1f;
+                Debug.Log("[CodexViewController] Re-enabled CanvasGroup on GlyphGrid_Pg1");
+            }
+        }
+        
+        if (glyphGrid_Pg2 != null)
+        {
+            glyphGrid_Pg2.SetActive(true);
+            // Ensure CanvasGroup is interactable (in case it was disabled)
+            CanvasGroup cg2 = glyphGrid_Pg2.GetComponent<CanvasGroup>();
+            if (cg2 != null)
+            {
+                cg2.interactable = true;
+                cg2.blocksRaycasts = true;
+                cg2.alpha = 1f;
+                Debug.Log("[CodexViewController] Re-enabled CanvasGroup on GlyphGrid_Pg2");
+            }
+        }
+        
+        if (glyphsNavigation != null)
+        {
+            glyphsNavigation.SetActive(true);
+            // Ensure CanvasGroup is interactable
+            CanvasGroup cgNav = glyphsNavigation.GetComponent<CanvasGroup>();
+            if (cgNav != null)
+            {
+                cgNav.interactable = true;
+                cgNav.blocksRaycasts = true;
+                cgNav.alpha = 1f;
+            }
+        }
 
         // Disable impressions view elements
         if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(false);
@@ -110,10 +147,39 @@ public class CodexViewController : MonoBehaviour
         if (glyphsBackground != null) glyphsBackground.SetActive(false);
         if (mindLogBackground != null) mindLogBackground.SetActive(true);
 
-        // Disable glyphs view elements
-        if (glyphGrid_Pg1 != null) glyphGrid_Pg1.SetActive(false);
-        if (glyphGrid_Pg2 != null) glyphGrid_Pg2.SetActive(false);
-        if (glyphsNavigation != null) glyphsNavigation.SetActive(false);
+        // Disable glyphs view elements - AND disable their CanvasGroups to prevent input
+        if (glyphGrid_Pg1 != null)
+        {
+            glyphGrid_Pg1.SetActive(false);
+            CanvasGroup cg1 = glyphGrid_Pg1.GetComponent<CanvasGroup>();
+            if (cg1 != null)
+            {
+                cg1.interactable = false;
+                cg1.blocksRaycasts = false;
+            }
+        }
+        
+        if (glyphGrid_Pg2 != null)
+        {
+            glyphGrid_Pg2.SetActive(false);
+            CanvasGroup cg2 = glyphGrid_Pg2.GetComponent<CanvasGroup>();
+            if (cg2 != null)
+            {
+                cg2.interactable = false;
+                cg2.blocksRaycasts = false;
+            }
+        }
+        
+        if (glyphsNavigation != null)
+        {
+            glyphsNavigation.SetActive(false);
+            CanvasGroup cgNav = glyphsNavigation.GetComponent<CanvasGroup>();
+            if (cgNav != null)
+            {
+                cgNav.interactable = false;
+                cgNav.blocksRaycasts = false;
+            }
+        }
 
         // Enable impressions view elements
         if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(true);
