@@ -598,39 +598,18 @@ public class CodexController : MonoBehaviour
 
     /// <summary>
     /// Called when a glyph is selected (usually from a slot button click).
-    /// Toggles selection if clicking the same glyph twice.
+    /// Handles all UI feedback (sounds, highlights, name display) regardless of mode.
+    /// Optionally notifies TriglyphPuzzleController if puzzle mode is active.
     /// </summary>
     public void OnGlyphSelected(GlyphUI glyph)
     {
         if (glyph == null) return;
 
         Debug.Log($"[Codex] OnGlyphSelected called for: {glyph.glyphData.glyphName}");
-        Debug.Log($"[Codex] triglyphPanelUI is: {(triglyphPanelUI != null ? triglyphPanelUI.name : "NULL")}");
-        Debug.Log($"[Codex] triglyphPanelUI.activeSelf: {(triglyphPanelUI != null ? triglyphPanelUI.activeSelf : false)}");
 
-        // Check if puzzle mode is active (TriglyphPanelUI is open)
-        bool isPuzzleMode = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
+        // ===== ALWAYS DO: General Codex UI Feedback =====
+        // This happens whether in puzzle mode or not
 
-        // In puzzle mode, ONLY notify puzzle controller and skip ALL slot management
-        // (TriglyphPuzzleController handles multi-selection, GlyphUI handles visual highlighting)
-        if (isPuzzleMode)
-        {
-            Debug.Log($"[Codex] PUZZLE MODE ACTIVE - delegating to TriglyphPuzzleController");
-
-            // Still update the glyph name display so player knows which glyph they're selecting
-            if (glyphNameText != null)
-            {
-                Debug.Log($"[Codex] Puzzle mode: Setting glyphNameText to '{glyph.glyphData.glyphName}'");
-                glyphNameText.text = glyph.glyphData.glyphName;
-            }
-
-            NotifyPuzzleController(glyph);
-            return;
-        }
-
-        Debug.Log($"[Codex] CODEX VIEWING MODE - normal selection");
-
-        // CODEX VIEWING MODE: Single selection for glyph info display
         // Highlight slot for visual feedback
         Debug.Log($"[Codex] Looking for slot with glyphUI, allSlots.Count = {allSlots.Count}");
         foreach (var slot in allSlots)
@@ -648,7 +627,7 @@ public class CodexController : MonoBehaviour
             }
         }
 
-        // Check if clicking the same glyph again (toggle behavior)
+        // Check if clicking the same glyph again (toggle/deselect behavior)
         if (selectedGlyph == glyph)
         {
             Debug.Log($"[Codex] Toggling off glyph: {glyph.glyphData.glyphName}");
@@ -670,7 +649,7 @@ public class CodexController : MonoBehaviour
                 glyphNameText.text = "Codex";
             }
 
-            // Notify puzzle controller of deselection
+            // Also notify puzzle controller of deselection (if active)
             NotifyPuzzleController(null);
             return;
         }
@@ -685,7 +664,7 @@ public class CodexController : MonoBehaviour
             PlayDeselectSound();
         }
 
-        // Select new glyph
+        // Select new glyph with full UI feedback
         selectedGlyph = glyph;
         selectedGlyph.Select();
 
@@ -695,17 +674,22 @@ public class CodexController : MonoBehaviour
         // Update the glyph name display
         if (glyphNameText != null)
         {
-            Debug.Log($"[Codex] SelectGlyph: Setting glyphNameText to '{glyph.glyphData.glyphName}' (selectedGlyph={selectedGlyph})");
+            Debug.Log($"[Codex] Setting glyphNameText to '{glyph.glyphData.glyphName}'");
             glyphNameText.text = glyph.glyphData.glyphName;
-            Debug.Log($"[Codex] SelectGlyph: glyphNameText.text is now: '{glyphNameText.text}'");
+        }
+
+        // ===== OPTIONALLY DO: Puzzle-Specific Behavior =====
+        // If puzzle mode is active, notify the puzzle controller
+        bool isPuzzleMode = triglyphPanelUI != null && triglyphPanelUI.activeSelf;
+        if (isPuzzleMode)
+        {
+            Debug.Log($"[Codex] Puzzle mode active - notifying TriglyphPuzzleController");
+            NotifyPuzzleController(glyph);
         }
         else
         {
-            Debug.LogError("[Codex] SelectGlyph: glyphNameText is NULL! Cannot display glyph name");
+            Debug.Log($"[Codex] Codex viewing mode - puzzle controller not notified");
         }
-
-        // Notify puzzle controller for puzzle selection tracking
-        NotifyPuzzleController(glyph);
 
         Debug.Log($"[Codex] Glyph selected: {glyph.glyphData.glyphName}");
     }
