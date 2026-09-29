@@ -206,7 +206,9 @@
             "system_triggers": [
                 {
                     "type": "transition_fade",
-                    "data": ["out"]
+                    "data": [
+                        "out"
+                    ]
                 }
             ],
             "next_beat_id": 3.5
@@ -374,7 +376,9 @@
             "system_triggers": [
                 {
                     "type": "transition_fade",
-                    "data": ["in"]
+                    "data": [
+                        "in"
+                    ]
                 },
                 {
                     "type": "debris_clear",
@@ -435,12 +439,7 @@
             "type": "npc_shared",
             "active_speaker": "Willy",
             "portrait_expression": "neutral",
-            "shared_dialogue": [
-                {
-                    "speaker": "Willy",
-                    "text": "Careful out there."
-                }
-            ],
+            "shared_beat": "Careful out there.",
             "system_triggers": [],
             "next_beat_id": 5
         },
@@ -626,7 +625,7 @@
                     "label": "Empathy",
                     "text": "Accept the weight and move forward",
                     "result_text": "You carry the heaviness forward, letting it settle into your bones as part of your journey.",
-                    "npc_response": "[The world awaits your next step.]",
+                    "npc_response": "I should go see Ravi and Nima and tell them what I found",
                     "tone_effects": [
                         {
                             "stat": "trust",
