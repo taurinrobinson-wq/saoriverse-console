@@ -11,7 +11,8 @@ public class BeatData
     [SerializeField] public float id;                       // 1, 2, 3, 3.1, etc. or use pid for passages
     [SerializeField] public string pid;                    // "desert_intro" (passages format) or null (beats)
     [SerializeField] public string type;                   // "player_posture", "npc_turn", "npc_shared"
-    [SerializeField] public string active_speaker;         // "Player", "Nima", "Ravi", "Shared", etc.
+    [SerializeField] public string active_speaker;         // "Player", "Nima", "Ravi", "Shared", etc. (for portrait lookup)
+    [SerializeField] public string display_name;           // Name to display in UI (e.g., "Young Woman" initially, then "Nima") - optional
     [SerializeField] public string setting_description;    // Scene context (optional)
     [SerializeField] public string prompt;                 // Main dialogue line (NPC speech or player thought)
     [SerializeField] public string shared_beat;            // Automatic NPC response (shown then auto-advances)

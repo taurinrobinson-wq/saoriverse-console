@@ -670,7 +670,7 @@ public class DialogueUIController : MonoBehaviour
     /// Show speaker name for the current beat.
     /// Clears name if passed an empty string.
     /// </summary>
-    public void ShowSpeaker(string name)
+    public void ShowSpeaker(string name, string displayName = null)
     {
         if (npcNameText == null)
         {
@@ -685,7 +685,10 @@ public class DialogueUIController : MonoBehaviour
         else
         {
             npcNameText.gameObject.SetActive(true);
-            npcNameText.text = name;
+            // Use displayName if provided, otherwise fall back to name (active_speaker)
+            string nameToDisplay = !string.IsNullOrEmpty(displayName) ? displayName : name;
+            npcNameText.text = nameToDisplay;
+            Debug.Log($"[UI] Speaker name: {nameToDisplay} (active_speaker: {name})");
         }
     }
 

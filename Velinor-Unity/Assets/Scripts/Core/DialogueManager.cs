@@ -181,7 +181,7 @@ public class DialogueManager : MonoBehaviour
         // Show shared_beat if it exists AND there are NO choices (auto-advance dialogue)
         if (!string.IsNullOrEmpty(beat.shared_beat) && !hasChoices)
         {
-            dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
+            dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
             dialogueUI.ShowText(beat.shared_beat);
             dialogueUI.ShowSharedBeat(beat.shared_beat);
             StartCoroutine(AutoAdvanceAfterSharedBeat(beat));
@@ -194,7 +194,7 @@ public class DialogueManager : MonoBehaviour
             dialogueUI.HideSharedBeat();
             
             // Show prompt
-            dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
+            dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
             dialogueUI.ShowText(beat.prompt ?? "");
             
             // Show shared_beat if it exists (displayed along with prompt)
@@ -217,7 +217,7 @@ public class DialogueManager : MonoBehaviour
 
         // No choices and no shared_beat - just show prompt
         dialogueUI.HideSharedBeat();
-        dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
+        dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
         dialogueUI.ShowText(beat.prompt ?? "");
     }
 
@@ -282,7 +282,7 @@ public class DialogueManager : MonoBehaviour
                 voiceoverManager.PlayVoiceover(currentSceneId, choice.audio_clip_on_response);
             }
             
-            dialogueUI.ShowSpeaker(beat.active_speaker ?? "");
+            dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
             dialogueUI.ShowText(choice.npc_response);
             dialogueUI.HideSharedBeat();
             
