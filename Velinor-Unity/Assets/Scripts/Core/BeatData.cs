@@ -42,6 +42,7 @@ public class BeatChoice
     [SerializeField] public string label;                  // "Trust", "Observation", "NarrativePresence", "Empathy"
     [SerializeField] public string text;                   // Player's spoken line or choice text
     [SerializeField] public string result_text;            // Immediate feedback after choice (empty = skip)
+    [SerializeField] public bool show_result_in_notification;  // If true, display result_text in notification panel
     [SerializeField] public string npc_response;           // NPC's reply (empty = skip)
     [SerializeField] public string audio_clip_on_response;  // Audio filename for NPC response to this tone choice (without extension, .ogg assumed)
     [SerializeField] public string portrait_expression_on_response;  // NPC expression when responding to this choice

@@ -238,13 +238,20 @@ public class DialogueManager : MonoBehaviour
         dialogueUI.ClearButtons();
         Debug.Log($"[DialogueManager] Choice selected: {choice.text}");
 
-        // 1. Show result_text if it exists
+        // 1. Handle result_text - either show in notification or skip
         if (!string.IsNullOrEmpty(choice.result_text))
         {
-            Debug.Log($"[DialogueManager] Showing result_text: {choice.result_text}");
-            dialogueUI.ShowSpeaker("");
-            dialogueUI.ShowText(choice.result_text);
-            yield return new WaitForEndOfFrame(); // Just let UI render
+            if (choice.show_result_in_notification)
+            {
+                // Show result_text in notification panel
+                Debug.Log($"[DialogueManager] Showing result_text in notification: {choice.result_text}");
+                dialogueUI.TriggerSystemEvent("show_notification", new string[] { choice.result_text });
+            }
+            else
+            {
+                // Legacy: show in dialogue (invisible, 1 frame flash)
+                Debug.Log($"[DialogueManager] Skipping result_text display (show_result_in_notification=false)");
+            }
         }
 
         // 2. Apply tone and remnants effects
