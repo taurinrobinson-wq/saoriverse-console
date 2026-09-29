@@ -12,6 +12,17 @@ public class PortraitManager : MonoBehaviour
     [SerializeField] private Image portraitImage;
     private Dictionary<string, Sprite> portraitCache = new Dictionary<string, Sprite>();
 
+    /// <summary>
+    /// Maps display names (active_speaker) to portrait asset folder names.
+    /// Allows showing "Lioren" in UI while loading portraits from "Player" folder.
+    /// Add mappings here if character names differ from portrait folder names.
+    /// </summary>
+    private static readonly Dictionary<string, string> CharacterNameToPorfolioName = new Dictionary<string, string>
+    {
+        { "Lioren", "Player" },  // Player character - display as "Lioren" but load from Player folder
+        // Add more mappings as needed: { "DisplayName", "PortraitFolderName" }
+    };
+
     private void Awake()
     {
         if (portraitImage == null)
@@ -87,10 +98,19 @@ public class PortraitManager : MonoBehaviour
 
     /// <summary>
     /// Load a portrait sprite, using cache if available.
-    /// Loads from: Resources/Portraits/{npcName}/{npcName}_{expression}
+    /// Loads from: Resources/Portraits/{portraitFolderName}/{portraitFolderName}_{expression}
+    /// Uses CharacterNameToPorfolioName mapping to resolve display name to folder name.
     /// </summary>
     private Sprite LoadPortraitSprite(string npcName, string expression)
     {
+        // Resolve display name to portrait folder name using mapping
+        string portraitFolderName = npcName;
+        if (CharacterNameToPorfolioName.ContainsKey(npcName))
+        {
+            portraitFolderName = CharacterNameToPorfolioName[npcName];
+            Debug.Log($"[PortraitManager] Mapped '{npcName}' -> '{portraitFolderName}' for portrait loading");
+        }
+
         string key = $"{npcName}_{expression}";
 
         // Check cache first
@@ -98,7 +118,7 @@ public class PortraitManager : MonoBehaviour
             return portraitCache[key];
 
         // Try to load from Resources
-        string resourcePath = $"Portraits/{npcName}/{npcName}_{expression}";
+        string resourcePath = $"Portraits/{portraitFolderName}/{portraitFolderName}_{expression}";
         Sprite sprite = Resources.Load<Sprite>(resourcePath);
 
         if (sprite != null)

@@ -8,7 +8,7 @@
     {
       "id": 1,
       "type": "player_posture",
-      "active_speaker": "Player",
+      "active_speaker": "Lioren",
       "portrait_expression": "neutral",
       "setting_description": "The Velhara marketplace thrums with afternoon energy. Vendors shout prices, crowds move in tight currents. Near the fountain, two figures stand completely still against the rushing crowd, staring at you.",
       "prompt": "They're staring at me. What should I do.",
@@ -218,7 +218,7 @@
         {
           "tone": "T",
           "label": "Trust",
-          "text": "I'm trying to find work. I'm new here.",
+          "text": "I'm trying to find work. My name's Lioren. I'm new here.",
           "result_text": "",
           "npc_response": "Work is scarce for people who actually belong here. Intentions don't fill empty bellies.",
           "portrait_expression_on_response": "neutral",
@@ -266,7 +266,7 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "I don't mean to make you feel uncomfortable. It's been a long trip, any place to rest around here?",
+          "text": "I don't mean to make you feel uncomfortable. My name's Lioren. It's been a long trip, any place to rest around here?",
           "result_text": "",
           "npc_response": "Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.",
           "portrait_expression_on_response": "resigned",
@@ -314,7 +314,7 @@
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "I've heard the market is a place to find work. I'm not here to cause trouble.",
+          "text": "I've heard the market is a place to find work. My name's Lioren. I'm not here to cause trouble.",
           "result_text": "",
           "npc_response": "Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.",
           "portrait_expression_on_response": "dismissive",
@@ -362,7 +362,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I'm not here to bother anyone. I've had a long road… that's all.",
+          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long road… that's all.",
           "result_text": "",
           "npc_response": "Everyone out here has a long road behind them. It doesn't make the ground any softer.",
           "portrait_expression_on_response": "determined",
@@ -417,7 +417,7 @@
       "active_speaker": "Ravi",
       "portrait_expression": "resigned",
       "setting_description": "",
-      "prompt": "You should be careful about who you reveal yourself to. There's been some 'activity' lately… The buildings are… unstable. Our daughter…",
+      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' lately… The buildings are… unstable. Our daughter…",
       "shared_beat": "",
       "tone_choices": [
         {
@@ -678,7 +678,7 @@
     {
       "id": 5,
       "type": "player_posture",
-      "active_speaker": "Player",
+      "active_speaker": "Lioren",
       "portrait_expression": "neutral",
       "setting_description": "",
       "prompt": "This thing… I need to figure out what this is.",

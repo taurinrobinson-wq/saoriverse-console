@@ -178,7 +178,7 @@
         {
             "id": 3,
             "type": "player_inner",
-            "active_speaker": "Player",
+            "active_speaker": "Lioren",
             "portrait_expression": "neutral",
             "prompt": "He's dismissive, but maybe I can convince him.",
             "tone_choices": [
@@ -356,7 +356,7 @@
         {
             "id": 4,
             "type": "player_posture",
-            "active_speaker": "Player",
+            "active_speaker": "Lioren",
             "portrait_expression": "neutral",
             "prompt": "Debris clears. A cracked glyph console flickers to life, unstable, trembling with residual energy.",
             "tone_choices": [
@@ -488,7 +488,7 @@
                 {
                     "tone": "N",
                     "label": "Narrative",
-                    "text": "Yes, of course. You work hard, you get something, right. Uh…I don't have much…",
+                    "text": "Yeah, of course. You work hard, you get something, right. Uh…I don't have much…",
                     "result_text": "Willy appreciates your practical approach.",
                     "show_result_in_notification": true,
                     "npc_response": "Yeah, clearly. You look like ya haven't eaten in a while. Anyway, leave me to my ways and we'll call it even.",
@@ -528,7 +528,7 @@
                     "tone": "E",
                     "label": "Empathy",
                     "text": "Sorry, Willy… I didn't even ask your name. You've been really helpful. What can I do for you.",
-                    "result_text": "Willy is somewhat annoyed at your sudden display of empathy.",
+                    "result_text": "Willy is somewhat annoyed at your sudden display of affection.",
                     "show_result_in_notification": true,
                     "npc_response": "Meh, don't get all mushy on me. Bleck. Just get outta here, will ya.",
                     "npc_portrait_expression": "neutral",
@@ -570,7 +570,7 @@
         {
             "id": 6,
             "type": "player_inner",
-            "active_speaker": "Player",
+            "active_speaker": "Lioren",
             "portrait_expression": "neutral",
             "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders.",
             "tone_choices": [

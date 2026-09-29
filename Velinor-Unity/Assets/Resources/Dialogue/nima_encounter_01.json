@@ -7,7 +7,7 @@
         {
             "id": 1,
             "type": "player_posture",
-            "active_speaker": "Player",
+            "active_speaker": "Lioren",
             "prompt": "She hasn't noticed me. She is entirely lost in thought. Nima stands alone in the market square, staring at a cracked patch of ground. The ambient noise feels distant around her stillness.",
             "tone_choices": [
                 {
