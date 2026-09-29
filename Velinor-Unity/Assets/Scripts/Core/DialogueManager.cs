@@ -156,6 +156,9 @@ public class DialogueManager : MonoBehaviour
         currentBeat = beat;
         dialogueUI.ClearButtons();
 
+        // Process beat-level system triggers (e.g., update_dialogue_names)
+        ProcessBeatSystemTriggers(beat.system_triggers);
+
         // Show portrait for NPC dialogue (if portrait_expression field exists)
         if (!string.IsNullOrEmpty(beat.active_speaker) && portraitManager != null)
         {
@@ -482,6 +485,58 @@ public class DialogueManager : MonoBehaviour
             // Handle other trigger names directly (e.g., "give_device", "npc_disappear")
             dialogueUI.TriggerSystemEvent(trigger);
             Debug.Log($"[DialogueManager] System trigger executed: {trigger}");
+        }
+    }
+
+    /// <summary>
+    /// Process beat-level system triggers (SystemTrigger objects with type and data fields).
+    /// These are executed when the beat is displayed.
+    /// </summary>
+    private void ProcessBeatSystemTriggers(SystemTrigger[] triggers)
+    {
+        if (triggers == null || triggers.Length == 0)
+            return;
+
+        foreach (var trigger in triggers)
+        {
+            if (trigger == null || string.IsNullOrEmpty(trigger.type))
+                continue;
+
+            Debug.Log($"[DialogueManager] Processing beat system trigger: {trigger.type}");
+
+            // Handle update_dialogue_names: replace placeholders with actual names
+            if (trigger.type == "update_dialogue_names" && trigger.data != null && trigger.data.Length > 0)
+            {
+                // Data contains the real names to display
+                // Dialogue will now show actual names in subsequent beats
+                foreach (var name in trigger.data)
+                {
+                    Debug.Log($"[DialogueManager] Character name revealed: {name}");
+                }
+                // The actual name replacement happens when beats display active_speaker
+                // This trigger serves as a narrative marker/notification of the reveal
+                continue;
+            }
+
+            // Handle glyph_collect: trigger glyph collection gameplay
+            if (trigger.type == "glyph_collect")
+            {
+                dialogueUI.TriggerSystemEvent("glyph_collect");
+                Debug.Log($"[DialogueManager] Glyph collect triggered");
+                continue;
+            }
+
+            // Handle close_dialogue: end the dialogue
+            if (trigger.type == "close_dialogue")
+            {
+                dialogueUI.TriggerSystemEvent("close_dialogue");
+                Debug.Log($"[DialogueManager] Close dialogue triggered");
+                continue;
+            }
+
+            // Handle other custom triggers by passing type as event
+            dialogueUI.TriggerSystemEvent(trigger.type, trigger.data);
+            Debug.Log($"[DialogueManager] System trigger executed: {trigger.type}");
         }
     }
 

@@ -209,7 +209,7 @@
     {
       "id": 2,
       "type": "npc_turn",
-      "active_speaker": "Nima",
+      "active_speaker": "Young Woman",
       "portrait_expression": "disgusted",
       "setting_description": "",
       "prompt": "What do you want anyway? We don't trust outsiders.",
@@ -414,7 +414,7 @@
     {
       "id": 3,
       "type": "npc_turn",
-      "active_speaker": "Ravi",
+      "active_speaker": "Young Man",
       "portrait_expression": "resigned",
       "setting_description": "",
       "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' lately… The buildings are… unstable. Our daughter…",
