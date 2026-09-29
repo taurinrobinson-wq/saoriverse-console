@@ -1,0 +1,15 @@
+# QUICK DEPLOYMENT COMMAND FOR DIGITALOCEAN CONSOLE
+# Copy and paste everything below into your droplet console
+
+bash <(curl -s https://raw.githubusercontent.com/taurinrobinson-wq/saoriverse-console/main/deploy.sh)
+
+# The script will:
+# 1. Install Docker and Docker Compose
+# 2. Clone/update the repository
+# 3. Install Certbot and generate SSL certificates for firstperson.chat
+# 4. Start all services (Velinor + FirstPerson)
+# 5. Show you the status
+
+# After it completes, test with:
+# docker ps
+# curl https://firstperson.chat/health
