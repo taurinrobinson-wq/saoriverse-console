@@ -626,6 +626,7 @@
                     "label": "Empathy",
                     "text": "Accept the weight and move forward",
                     "result_text": "You carry the heaviness forward, letting it settle into your bones as part of your journey.",
+                    "npc_response": "[The world awaits your next step.]",
                     "tone_effects": [
                         {
                             "stat": "trust",
