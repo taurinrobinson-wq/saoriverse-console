@@ -18,14 +18,34 @@
                     "npc_response": "Hah. Then you're lucky ya still got all yah limbs. This place eats newcomers first.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0.02},
-                        {"stat": "observation", "delta": -0.015},
-                        {"stat": "narrative", "delta": -0.01},
-                        {"stat": "empathy", "delta": 0.015}
+                        {
+                            "stat": "trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0.015
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "trust", "delta": 0.02},
-                        {"target": "Willy", "stat": "nuance", "delta": -0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        }
                     ]
                 },
                 {
@@ -36,14 +56,34 @@
                     "npc_response": "Know it? Ha. I've bled in half these piles. Ya learn fast when the rubble teaches the lessons.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": -0.01},
-                        {"stat": "observation", "delta": 0.02},
-                        {"stat": "narrative", "delta": 0.01},
-                        {"stat": "empathy", "delta": -0.005}
+                        {
+                            "stat": "trust",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0.01
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": -0.005
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "memory", "delta": 0.02},
-                        {"target": "Willy", "stat": "pride", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "memory",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "pride",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -54,14 +94,34 @@
                     "npc_response": "Led ya? Hah. Everyone's chasin somethin in these ruins. Most of it stays buried—except when I'm chasin it. Ah‑hahaha—cough.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0},
-                        {"stat": "observation", "delta": 0.015},
-                        {"stat": "narrative", "delta": 0.02},
-                        {"stat": "empathy", "delta": -0.01}
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0.015
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "skepticism", "delta": -0.01},
-                        {"target": "Willy", "stat": "authority", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "skepticism",
+                            "delta": -0.01
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "authority",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -72,14 +132,34 @@
                     "npc_response": "Hah. Ain't nothin serious when you're already dead inside, kid. Just an occupational hazard. The dust down here has a way of makin itself at home.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0.005},
-                        {"stat": "observation", "delta": -0.01},
-                        {"stat": "narrative", "delta": -0.01},
-                        {"stat": "empathy", "delta": 0.02}
+                        {
+                            "stat": "trust",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0.02
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "empathy", "delta": 0.02},
-                        {"target": "Willy", "stat": "nuance", "delta": -0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "empathy",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": -0.01
+                        }
                     ]
                 }
             ],
@@ -110,14 +190,34 @@
                     "npc_response": "Hah. Straight to orders, eh? Ya got spine! Fine, fine… I'll take a look. But if it falls, I'm runnin'. And maybe laughin' ah‑hahaha *cough*.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0.02},
-                        {"stat": "observation", "delta": -0.01},
-                        {"stat": "narrative", "delta": -0.005},
-                        {"stat": "empathy", "delta": 0}
+                        {
+                            "stat": "trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": -0.005
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "resolve", "delta": 0.02},
-                        {"target": "Willy", "stat": "authority", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "resolve",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "authority",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -128,14 +228,34 @@
                     "npc_response": "Flattery? Ha. Rubble don't care how long I've known it. But ya ain't wrong. I can shift a few things without gettin' crushed.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": -0.01},
-                        {"stat": "observation", "delta": 0.02},
-                        {"stat": "narrative", "delta": 0.005},
-                        {"stat": "empathy", "delta": -0.01}
+                        {
+                            "stat": "trust",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "memory", "delta": 0.02},
-                        {"target": "Willy", "stat": "nuance", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "memory",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -146,14 +266,34 @@
                     "npc_response": "Matters, huh? Everything matters to someone. Fine. I'll poke at it. Just don't blame me if the whole thing decides today's the day.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0.015},
-                        {"stat": "observation", "delta": -0.005},
-                        {"stat": "narrative", "delta": 0.02},
-                        {"stat": "empathy", "delta": 0.005}
+                        {
+                            "stat": "trust",
+                            "delta": 0.015
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": -0.005
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0.005
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "resolve", "delta": 0.02},
-                        {"target": "Willy", "stat": "nuance", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "resolve",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -164,21 +304,43 @@
                     "npc_response": "Heh. Guilt trip, eh? *cough*. Fine. Fine. I'll help. Just don't start cryin' if it bites back.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0.015},
-                        {"stat": "observation", "delta": -0.01},
-                        {"stat": "narrative", "delta": 0},
-                        {"stat": "empathy", "delta": 0.015}
+                        {
+                            "stat": "trust",
+                            "delta": 0.015
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0.015
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "empathy", "delta": 0.015},
-                        {"target": "Willy", "stat": "resolve", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "empathy",
+                            "delta": 0.015
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "resolve",
+                            "delta": 0.01
+                        }
                     ]
                 }
             ],
             "system_triggers": [
                 {
                     "type": "transition_fade",
-                    "data": ["in"]
+                    "data": [
+                        "in"
+                    ]
                 },
                 {
                     "type": "debris_clear"
@@ -202,10 +364,22 @@
                     "text": "Touch the glyph",
                     "result_text": "You reach out and touch the glyph.",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0},
-                        {"stat": "observation", "delta": 0},
-                        {"stat": "narrative", "delta": 0},
-                        {"stat": "empathy", "delta": 0}
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
                     ],
                     "remnants_effects": []
                 }
@@ -226,7 +400,9 @@
             "system_triggers": [
                 {
                     "type": "update_dialogue_names",
-                    "data": ["Willy"]
+                    "data": [
+                        "Willy"
+                    ]
                 }
             ],
             "tone_choices": [
@@ -238,14 +414,34 @@
                     "npc_response": "Yeah, figures. Anyway… ya don' need that metal thing, do ya?",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0.02},
-                        {"stat": "observation", "delta": -0.01},
-                        {"stat": "narrative", "delta": -0.01},
-                        {"stat": "empathy", "delta": 0.005}
+                        {
+                            "stat": "trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0.005
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "trust", "delta": 0.02},
-                        {"target": "Willy", "stat": "authority", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "trust",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "authority",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -256,14 +452,34 @@
                     "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ah…keep a lookout while I take a closer peek at it…if ya catch my drift.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": -0.01},
-                        {"stat": "observation", "delta": 0.02},
-                        {"stat": "narrative", "delta": 0},
-                        {"stat": "empathy", "delta": -0.005}
+                        {
+                            "stat": "trust",
+                            "delta": -0.01
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": -0.005
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "nuance", "delta": 0.02},
-                        {"target": "Willy", "stat": "skepticism", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": 0.02
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "skepticism",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -274,14 +490,34 @@
                     "npc_response": "Yeah, clearly. You look like ya haven't eaten in a while. Anyway, leave me to my ways and we'll call it even.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": -0.005},
-                        {"stat": "observation", "delta": 0.005},
-                        {"stat": "narrative", "delta": 0.02},
-                        {"stat": "empathy", "delta": -0.01}
+                        {
+                            "stat": "trust",
+                            "delta": -0.005
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0.005
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0.02
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": -0.01
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "nuance", "delta": 0.015},
-                        {"target": "Willy", "stat": "authority", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": 0.015
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "authority",
+                            "delta": 0.01
+                        }
                     ]
                 },
                 {
@@ -292,14 +528,34 @@
                     "npc_response": "Meh, don't get all mushy on me. Bleck. Just get outta here, will ya.",
                     "npc_portrait_expression": "neutral",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0.01},
-                        {"stat": "observation", "delta": -0.015},
-                        {"stat": "narrative", "delta": -0.005},
-                        {"stat": "empathy", "delta": 0.02}
+                        {
+                            "stat": "trust",
+                            "delta": 0.01
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": -0.015
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": -0.005
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0.02
+                        }
                     ],
                     "remnants_effects": [
-                        {"target": "Willy", "stat": "empathy", "delta": 0.015},
-                        {"target": "Willy", "stat": "nuance", "delta": 0.01}
+                        {
+                            "target": "Willy",
+                            "stat": "empathy",
+                            "delta": 0.015
+                        },
+                        {
+                            "target": "Willy",
+                            "stat": "nuance",
+                            "delta": 0.01
+                        }
                     ]
                 }
             ],
@@ -311,19 +567,30 @@
             "type": "player_inner",
             "active_speaker": "Player",
             "portrait_expression": "neutral",
-            "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders. The glyph's resonance still trembles through my limbs.",
+            "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders.",
             "tone_choices": [
                 {
                     "tone": "E",
                     "label": "Empathy",
                     "text": "I should go see Ravi and Nima and tell them what I found.",
                     "result_text": "You carry the weight forward, letting it settle into your bones as part of your journey.",
-                    "npc_response": "[The world awaits your next step.]",
                     "tone_effects": [
-                        {"stat": "trust", "delta": 0},
-                        {"stat": "observation", "delta": 0},
-                        {"stat": "narrative", "delta": 0},
-                        {"stat": "empathy", "delta": 0}
+                        {
+                            "stat": "trust",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "observation",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "narrative",
+                            "delta": 0
+                        },
+                        {
+                            "stat": "empathy",
+                            "delta": 0
+                        }
                     ],
                     "remnants_effects": []
                 }
@@ -331,11 +598,16 @@
             "system_triggers": [
                 {
                     "type": "glyph_effect",
-                    "data": ["movement_speed", "2"]
+                    "data": [
+                        "movement_speed",
+                        "2"
+                    ]
                 },
                 {
                     "type": "diary_append",
-                    "data": ["Met a scrapper named Willy in the Concourse Ruins. He was an odd character—laughing at suffering, coughing constantly—but helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."]
+                    "data": [
+                        "Met a scrapper named Willy in the Concourse Ruins. He was an odd character—laughing at suffering, coughing constantly—but helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."
+                    ]
                 },
                 {
                     "type": "close_dialogue"
