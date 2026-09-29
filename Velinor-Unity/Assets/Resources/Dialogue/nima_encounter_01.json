@@ -8,6 +8,7 @@
             "id": 1,
             "type": "player_posture",
             "active_speaker": "Lioren",
+            "display_name": "Lioren",
             "prompt": "She hasn't noticed me. She is entirely lost in thought. Nima stands alone in the market square, staring at a cracked patch of ground. The ambient noise feels distant around her stillness.",
             "tone_choices": [
                 {
@@ -201,6 +202,7 @@
             "id": 2,
             "type": "npc_turn",
             "active_speaker": "Nima",
+            "display_name": "Nima",
             "portrait_expression": "worried",
             "prompt": "NIMA: \"You picked a bad day to come here.\" Nima shifts her stance slightly. Her voice breaks the silence.",
             "tone_choices": [
