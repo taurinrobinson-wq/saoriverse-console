@@ -166,12 +166,7 @@
             "type": "npc_shared",
             "active_speaker": "Willy",
             "portrait_expression": "neutral",
-            "shared_dialogue": [
-                {
-                    "speaker": "Willy",
-                    "text": "Anyway, whatever you're after… it's under that mess. And you're not gettin' ta it today."
-                }
-            ],
+            "shared_beat": "Anyway, whatever you're after… it's under that mess. And you're not gettin' ta it today.",
             "system_triggers": [],
             "next_beat_id": 3
         },

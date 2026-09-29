@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 6698895843544473161}
   - component: {fileID: 9126226043296945048}
   m_Layer: 5
-  m_Name: UI_Canvas 1
+  m_Name: CompleteScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
