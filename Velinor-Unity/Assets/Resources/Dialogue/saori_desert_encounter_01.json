@@ -444,10 +444,11 @@
     },
     {
       "id": 4,
-      "type": "narrative",
-      "active_speaker": "Narrator",
+      "type": "player_inner",
+      "active_speaker": "Lioren",
+      "portrait_expression": "cautious",
       "setting_description": "",
-      "prompt": "She starts to say more, but the wind surges, swallowing her voice. She turns and disappears down the road, already moving fast.",
+      "prompt": "I couldn't hear what she said, the wind swallowed her voice and she left so suddenly.",
       "shared_beat": "",
       "diary_entries": [
         "Met a mysterious older woman. She didn't give me her name."
