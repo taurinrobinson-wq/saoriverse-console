@@ -7,7 +7,7 @@
       "type": "npc_turn",
       "active_speaker": "Saori",
       "portrait_expression": "mysterious",
-      "setting_description": "You encounter an older woman on the desert road, dust swirling around her weathered robes.",
+      "setting_description": "You spot an older woman moving quickly along the desert road, a bundle of parts strapped under her arm.",
       "prompt": "You are on your way to the market?",
       "shared_beat": "",
       "tone_choices": [
@@ -46,8 +46,8 @@
           "label": "Observation",
           "text": "Looks you're headed somewhere too?",
           "result_text": "",
-          "npc_response": "A question for a question. Interesting.",
-          "portrait_expression_on_response": "mysterious",
+          "npc_response": "I’m just passing through.",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -104,7 +104,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I just wanna be useful… and maybe get a meal.",
+          "text": "I just wanna be useful... and maybe get a meal.",
           "result_text": "",
           "npc_response": "A practical instinct. Good.",
           "portrait_expression_on_response": "guarded_hopefulness",
@@ -151,8 +151,8 @@
       "type": "npc_turn",
       "active_speaker": "Saori",
       "portrait_expression": "determined",
-      "setting_description": "The older woman reaches into her robes and produces a strange device, its surface humming faintly.",
-      "prompt": "Here. You should take this.",
+      "setting_description": "The older woman reaches into her pocket and produces a strange device, its surface humming faintly.",
+      "prompt": "I found this. I can't get it working, maybe you’ll have better luck.",
       "shared_beat": "",
       "diary_entries": [
         "She gave me a strange device. What does it do?"
@@ -163,7 +163,7 @@
           "label": "Trust",
           "text": "I… alright. I'll take it.",
           "result_text": "",
-          "npc_response": "Keep it close.",
+          "npc_response": "Great",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
@@ -224,9 +224,9 @@
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "This feels… important.",
+          "text": "This feels...important.",
           "result_text": "",
-          "npc_response": "Most things are, once you look closely.",
+          "npc_response": "Maybe. I don’t know.",
           "portrait_expression_on_response": "mysterious",
           "tone_effects": [
             {
@@ -256,9 +256,9 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Thank you. I don't understand, but… thank you.",
+          "text": "Thank you. I don't understand, but... thank you.",
           "result_text": "",
-          "npc_response": "Understanding isn't required. We'll see each other again, I think.",
+          "npc_response": "I’m sorry. I can’t explain. I need to go.",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
             {
@@ -311,9 +311,9 @@
         {
           "tone": "T",
           "label": "Trust",
-          "text": "Wait—what is this thing?",
+          "text": "Wait! What is this thing?",
           "result_text": "",
-          "npc_response": "No time.",
+          "npc_response": "Sorry. No time.",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
@@ -371,9 +371,9 @@
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "You're just… leaving?",
+          "text": "You're just... leaving?",
           "result_text": "",
-          "npc_response": "I must. Can't explain.",
+          "npc_response": "Yeah... Just leaving.",
           "portrait_expression_on_response": "haunted",
           "tone_effects": [
             {
@@ -403,7 +403,7 @@
           "label": "Empathy",
           "text": "Please—just tell me something.",
           "result_text": "",
-          "npc_response": "I would, if I could. You'll understand in time.",
+          "npc_response": "I wish I could. Sorry, no time.",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
             {
@@ -447,7 +447,7 @@
       "type": "narrative",
       "active_speaker": "Narrator",
       "setting_description": "",
-      "prompt": "She starts to say more, but the wind surges, swallowing her voice. Her silhouette dissolves back into the storm.",
+      "prompt": "She starts to say more, but the wind surges, swallowing her voice. She turns and disappears down the road, already moving fast.",
       "shared_beat": "",
       "diary_entries": [
         "Met a mysterious older woman. She didn't give me her name."
