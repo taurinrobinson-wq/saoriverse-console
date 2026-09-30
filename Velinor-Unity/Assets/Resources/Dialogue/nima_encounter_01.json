@@ -907,8 +907,463 @@
           "system_triggers": []
         }
       ],
-      "next_beat_id": 0,
+      "next_beat_id": 6,
       "system_triggers": []
+    },
+    {
+      "id": 6,
+      "type": "npc_turn",
+      "active_speaker": "Nima",
+      "display_name": "Nima",
+      "portrait_expression": "vulnerable",
+      "setting_description": "Nima's hand shifts against her clothes. A small, worn photograph slips partially into view, its edges softened and its corners frayed. The surface is creased from years of being held. She does not offer it. She does not hide it. She simply lets it be seen. Her eyes stay fixed on the cracked ground.",
+      "prompt": "This is the moment the player finally sees Ophina.",
+      "audio_clip": "",
+      "shared_beat": "Nima's thumb brushes the photo again, slower this time. Her breathing wavers, just once.",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "She's beautiful.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Yeah… the most beautiful. I wish her beauty could've moved mountains. It did for me.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Stay silent, taking in the photo",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "I'll take your silence as respect.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "I didn't expect to see her.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "A picture's never the same. Trust me… you still haven't seen her.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "This is her.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Yeah. This is all I've got left.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 7,
+      "system_triggers": []
+    },
+    {
+      "id": 7,
+      "type": "npc_turn",
+      "active_speaker": "Nima",
+      "display_name": "Nima",
+      "portrait_expression": "resolute",
+      "setting_description": "Nima closes her hand around the photo, protecting it. Her posture tightens. The air feels thinner, as if the square itself is holding its breath. She finally turns her head slightly toward you.",
+      "prompt": "That thing you're holding… it reacts to everything. I don't know what it is, but I don't trust anything that lights up around grief.",
+      "audio_clip": "",
+      "shared_beat": "Go… please. I won't forget. I won't move on. She turns away, returning to her vigil.",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "I'm trying to figure out what it wants from these ruins.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Whatever it wants… it shouldn't want anything from here. Some places deserve to be left alone.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "It seems to react whenever the memory gets thick.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Then it's reacting to pain. That's all this ground has left.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "It's just a tool. I'm following the lines it shows me.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Tools can still hurt people. Don't assume it understands what it's pointing at.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I think it brought me here to help carry this.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "You can't carry what you didn't lose. Don't break yourself trying to lift our dead.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": [
+        {
+          "type": "set_flag",
+          "key": "nima_shared_loss",
+          "value": true
+        },
+        {
+          "type": "trigger_codex_pulse"
+        }
+      ]
     }
   ]
 }
