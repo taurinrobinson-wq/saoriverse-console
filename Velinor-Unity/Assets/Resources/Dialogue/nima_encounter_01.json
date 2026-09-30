@@ -908,7 +908,13 @@
         }
       ],
       "next_beat_id": 6,
-      "system_triggers": []
+      "system_triggers": [
+        {
+          "type": "show_sprite",
+          "key": "ophina_photo",
+          "duration": "until_scene_end"
+        }
+      ]
     },
     {
       "id": 6,
