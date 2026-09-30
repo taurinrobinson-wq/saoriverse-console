@@ -234,7 +234,7 @@
       "display_name": "Nima",
       "portrait_expression": "worried",
       "setting_description": "",
-      "prompt": "NIMA: \"You picked a bad day to come here.\" Nima shifts her stance slightly. Her voice breaks the silence.",
+      "prompt": "You picked a bad day to come here.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -245,7 +245,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "NIMA: \"It's the day the ground took her. One year. I thought it'd feel different. It doesn't.\"",
+          "npc_response": "It's the day the ground took her. One year. I thought it'd feel different. It doesn't.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "resigned",
           "tone_effects": [
@@ -297,7 +297,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "NIMA: \"He shouldn't have. Not today. He talks when he's hurting. Iâ€¦ don't.\"",
+          "npc_response": "He shouldn't have. Not today. He talks when he's hurting. Iâ€¦ don't.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "angry",
           "tone_effects": [
@@ -349,7 +349,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "NIMA: \"Reason? No. I just end up here. My feet know the way better than my head.\"",
+          "npc_response": "Reason? No. I just end up here. My feet know the way better than my head.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "resigned",
           "tone_effects": [
@@ -401,7 +401,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "NIMA: \"The date does that. A year's worth of remembering sits right behind the ribs.\"",
+          "npc_response": "The date does that. A year's worth of remembering sits right behind the ribs.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "touched",
           "tone_effects": [
@@ -457,7 +457,7 @@
       "display_name": "",
       "portrait_expression": "resigned",
       "setting_description": "",
-      "prompt": "NIMA: \"I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I justâ€¦ don't.\"",
+      "prompt": "I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I justâ€¦ don't.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [],
@@ -471,7 +471,7 @@
       "display_name": "",
       "portrait_expression": "worried",
       "setting_description": "",
-      "prompt": "NIMA: \"This is where she was trapped. The ground shifted. The wall came down. No one could reach her.\"",
+      "prompt": "This is where she was trapped. The ground shifted. The wall came down. No one could reach her.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -482,7 +482,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "NIMA: \"Heh. Sorry doesn't move stone. Doesn't change anything.\"",
+          "npc_response": "Heh. Sorry doesn't move stone. Doesn't change anything.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "disgusted",
           "tone_effects": [
@@ -534,7 +534,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "NIMA: \"She wandered off. Just a few steps. Then she was gone. I didn't see it. I should've. That's all I know. The rest is dust.\"",
+          "npc_response": "She wandered off. Just a few steps. Then she was gone. I didn't see it. I should've. That's all I know. The rest is dust.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
