@@ -5,8 +5,15 @@ using System.Collections.Generic;
 /// <summary>
 /// Manages loading and playing dialogue voiceover audio clips.
 /// Loads .ogg files from Resources/Audio/Voiceover/{scene_id}/{clip_name}.ogg
-/// Handles audio playback, caching, and fade-out when player makes choices.
-/// Gracefully handles missing audio files without errors.
+/// Gracefully skips missing files without errors or warnings.
+/// 
+/// Naming convention for audio files:
+/// {speaker}_{dialogue_id}_{beat_id}[_{tone}][_npc].ogg
+/// 
+/// Examples:
+/// - Saori_desert_encounter_01_1.ogg (Saori's dialogue in beat 1)
+/// - Saori_desert_encounter_01_1_T_npc.ogg (Saori's response to Trust tone)
+/// - Lioren_desert_encounter_01_1_T.ogg (Player's Trust choice)
 /// </summary>
 public class VoiceoverManager : MonoBehaviour
 {
@@ -18,7 +25,6 @@ public class VoiceoverManager : MonoBehaviour
     {
         if (voiceoverAudioSource == null)
         {
-            // Try to find or create an AudioSource for voiceover
             voiceoverAudioSource = GetComponent<AudioSource>();
             if (voiceoverAudioSource == null)
             {
@@ -30,7 +36,32 @@ public class VoiceoverManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Play a pre-loaded voiceover clip directly (fastest method).
+    /// Use this when clips are pre-cached by NPCDialogueDriver.
+    /// </summary>
+    public void PlayVoiceoverClip(AudioClip clip)
+    {
+        if (clip == null)
+        {
+            return;
+        }
+
+        // Stop any existing fade
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+            fadeCoroutine = null;
+        }
+
+        voiceoverAudioSource.clip = clip;
+        voiceoverAudioSource.volume = 1f;
+        voiceoverAudioSource.Play();
+        Debug.Log($"[VoiceoverManager] Playing voiceover clip: {clip.name}");
+    }
+
+    /// <summary>
     /// Play a voiceover clip for a dialogue beat.
+    /// Gracefully skips if file doesn't exist.
     /// </summary>
     public void PlayVoiceover(string sceneId, string clipName)
     {
@@ -54,6 +85,7 @@ public class VoiceoverManager : MonoBehaviour
             voiceoverAudioSource.Play();
             Debug.Log($"[VoiceoverManager] Playing: {sceneId}/{clipName}");
         }
+        // If clip is null (file doesn't exist), we just skip silently
     }
 
     /// <summary>
@@ -111,7 +143,7 @@ public class VoiceoverManager : MonoBehaviour
     /// <summary>
     /// Load a voiceover clip from Resources, using cache if available.
     /// Loads from: Resources/Audio/Voiceover/{sceneId}/{clipName}.ogg
-    /// Returns null if file not found (graceful degradation).
+    /// Returns null if file not found (graceful degradation - no warnings, just skip).
     /// </summary>
     private AudioClip LoadVoiceoverClip(string sceneId, string clipName)
     {
@@ -120,7 +152,12 @@ public class VoiceoverManager : MonoBehaviour
         // Check cache first
         if (voiceoverCache.ContainsKey(key))
         {
-            return voiceoverCache[key];
+            AudioClip cached = voiceoverCache[key];
+            if (cached != null)
+            {
+                Debug.Log($"[VoiceoverManager] Loaded voiceover (cached): {clipName}");
+            }
+            return cached;
         }
 
         // Try to load from Resources
@@ -134,7 +171,9 @@ public class VoiceoverManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"[VoiceoverManager] Voiceover not found at: {resourcePath} (file may not exist yet)");
+            // Cache null so we don't keep trying to load non-existent files
+            voiceoverCache[key] = null;
+            // Silently skip - this is expected when voiceover hasn't been recorded yet
         }
 
         return clip;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Velinor.Core;
+using System.Collections.Generic;
 
 namespace Velinor.Core
 {
@@ -49,6 +50,11 @@ namespace Velinor.Core
 
         // Track which JSON was last processed to detect changes in OnValidate
         private TextAsset lastProcessedJson = null;
+
+        // Audio clip cache: maps "beat_id_tone" to AudioClip for fast playback
+        // Populated in OnValidate when JSON is assigned
+        private Dictionary<string, AudioClip> audioClipCache = new Dictionary<string, AudioClip>();
+        private string currentSceneId = ""; // Cache the scene_id from JSON
 
         private void Awake()
         {
@@ -120,6 +126,9 @@ namespace Velinor.Core
                         {
                             startPassageId = "1"; // Default to first beat
                             Debug.Log($"[NPCDialogueDriver] Auto-populated from beats JSON: startPassageId='{startPassageId}'");
+                            
+                            // Pre-load audio clips for all beats
+                            PreloadAudioClips(dialogueData);
                         }
                     }
 
@@ -131,6 +140,101 @@ namespace Velinor.Core
                     Debug.LogWarning($"[NPCDialogueDriver] Failed to parse JSON for auto-population: {ex.Message}");
                 }
             }
+        }
+
+        /// <summary>
+        /// Pre-load all audio clips referenced in the dialogue JSON.
+        /// Called during OnValidate when JSON is assigned in Inspector.
+        /// This caches clips for O(1) lookup during gameplay, avoiding runtime file reads.
+        /// </summary>
+        private void PreloadAudioClips(DialogueJson dialogueData)
+        {
+            if (dialogueData == null || dialogueData.beats == null)
+            {
+                return;
+            }
+
+            // Clear previous cache
+            audioClipCache.Clear();
+            currentSceneId = dialogueData.scene_id ?? "";
+
+            if (string.IsNullOrEmpty(currentSceneId))
+            {
+                Debug.LogWarning($"[NPCDialogueDriver] {npcName}: scene_id not found in JSON");
+                return;
+            }
+
+            int clipsLoaded = 0;
+
+            // Iterate through all beats
+            foreach (var beat in dialogueData.beats)
+            {
+                if (beat == null)
+                    continue;
+
+                string beatId = beat.id.ToString();
+
+                // Load beat intro audio (e.g., "Saori_scene_1")
+                if (!string.IsNullOrEmpty(beat.audio_clip))
+                {
+                    AudioClip clip = Resources.Load<AudioClip>($"Audio/Voiceover/{currentSceneId}/{beat.audio_clip}");
+                    if (clip != null)
+                    {
+                        audioClipCache[$"{beatId}"] = clip;
+                        clipsLoaded++;
+                    }
+                }
+
+                // Load tone choice audio (player and NPC response)
+                if (beat.tone_choices != null)
+                {
+                    foreach (var choice in beat.tone_choices)
+                    {
+                        if (choice == null)
+                            continue;
+
+                        string tone = choice.tone ?? "";
+
+                        // Player choice audio (e.g., "beat_1_T")
+                        if (!string.IsNullOrEmpty(choice.audio_clip_on_choice))
+                        {
+                            AudioClip clip = Resources.Load<AudioClip>($"Audio/Voiceover/{currentSceneId}/{choice.audio_clip_on_choice}");
+                            if (clip != null)
+                            {
+                                audioClipCache[$"{beatId}_{tone}"] = clip;
+                                clipsLoaded++;
+                            }
+                        }
+
+                        // NPC response audio (e.g., "beat_1_T_npc")
+                        if (!string.IsNullOrEmpty(choice.audio_clip_on_response))
+                        {
+                            AudioClip clip = Resources.Load<AudioClip>($"Audio/Voiceover/{currentSceneId}/{choice.audio_clip_on_response}");
+                            if (clip != null)
+                            {
+                                audioClipCache[$"{beatId}_{tone}_npc"] = clip;
+                                clipsLoaded++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (clipsLoaded > 0)
+            {
+                Debug.Log($"[NPCDialogueDriver] {npcName}: Pre-loaded {clipsLoaded} audio clips from {currentSceneId}");
+            }
+        }
+
+        /// <summary>
+        /// Get a pre-loaded audio clip by beat ID and optional tone.
+        /// Returns null if not found or not pre-loaded.
+        /// </summary>
+        public AudioClip GetAudioClip(string beatId, string tone = "")
+        {
+            string key = string.IsNullOrEmpty(tone) ? beatId : $"{beatId}_{tone}";
+            audioClipCache.TryGetValue(key, out AudioClip clip);
+            return clip;
         }
 
         // Data class for beat-based story format

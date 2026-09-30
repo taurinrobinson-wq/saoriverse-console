@@ -9,14 +9,18 @@
       "portrait_expression": "mysterious",
       "setting_description": "You spot an older woman moving quickly along the desert road, a bundle of parts strapped under her arm.",
       "prompt": "You are on your way to the market?",
+      "audio_clip": "Saori_saori_desert_encounter_01_1",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "Yeah. I'm looking for work, food, and a place to stay.",
+          "audio_clip_on_choice": "Lioren_saori_desert_encounter_01_1_T",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "I cannot offer any of that.",
+          "audio_clip_on_response": "Saori_saori_desert_encounter_01_1_T_npc",
           "portrait_expression_on_response": "sad",
           "tone_effects": [
             {
@@ -45,8 +49,11 @@
           "tone": "O",
           "label": "Observation",
           "text": "Looks you're headed somewhere too?",
+          "audio_clip_on_choice": "Lioren_saori_desert_encounter_01_1_O",
           "result_text": "",
-          "npc_response": "I’m just passing through.",
+          "show_result_in_notification": false,
+          "npc_response": "I'm just passing through.",
+          "audio_clip_on_response": "Saori_saori_desert_encounter_01_1_O_npc",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
@@ -75,8 +82,11 @@
           "tone": "N",
           "label": "NarrativePresence",
           "text": "Anything is better than being stuck out here.",
+          "audio_clip_on_choice": "Lioren_saori_desert_encounter_01_1_N",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Hm... In theory...",
+          "audio_clip_on_response": "Saori_saori_desert_encounter_01_1_N_npc",
           "portrait_expression_on_response": "mysterious",
           "tone_effects": [
             {
@@ -105,8 +115,11 @@
           "tone": "E",
           "label": "Empathy",
           "text": "I just wanna be useful... and maybe get a meal.",
+          "audio_clip_on_choice": "Lioren_saori_desert_encounter_01_1_E",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "A practical instinct. Good.",
+          "audio_clip_on_response": "Saori_saori_desert_encounter_01_1_E_npc",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
             {
@@ -144,7 +157,8 @@
           ]
         }
       ],
-      "next_beat_id": 2
+      "next_beat_id": 2,
+      "system_triggers": []
     },
     {
       "id": 2,
@@ -152,18 +166,19 @@
       "active_speaker": "Saori",
       "portrait_expression": "determined",
       "setting_description": "The older woman reaches into her pocket and produces a strange device, its surface humming faintly.",
-      "prompt": "I found this. I can't get it working, maybe you’ll have better luck.",
+      "prompt": "I found this. I can't get it working, maybe you\u00e2\u20ac\u2122ll have better luck.",
+      "audio_clip": "",
       "shared_beat": "",
-      "diary_entries": [
-        "She gave me a strange device. What does it do?"
-      ],
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
-          "text": "I… alright. I'll take it.",
+          "text": "I\u00e2\u20ac\u00a6 alright. I'll take it.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Great",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
@@ -193,8 +208,11 @@
           "tone": "O",
           "label": "Observation",
           "text": "What is this? Why give it to me?",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "I appreciate your curiosity, but I cannot explain right now",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
@@ -225,8 +243,11 @@
           "tone": "N",
           "label": "NarrativePresence",
           "text": "This feels...important.",
+          "audio_clip_on_choice": "",
           "result_text": "",
-          "npc_response": "Maybe. I don’t know.",
+          "show_result_in_notification": false,
+          "npc_response": "Maybe. I don\u00e2\u20ac\u2122t know.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "mysterious",
           "tone_effects": [
             {
@@ -257,8 +278,11 @@
           "tone": "E",
           "label": "Empathy",
           "text": "Thank you. I don't understand, but... thank you.",
+          "audio_clip_on_choice": "",
           "result_text": "",
-          "npc_response": "I’m sorry. I can’t explain. I need to go.",
+          "show_result_in_notification": false,
+          "npc_response": "I\u00e2\u20ac\u2122m sorry. I can\u00e2\u20ac\u2122t explain. I need to go.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
             {
@@ -297,7 +321,11 @@
           ]
         }
       ],
-      "next_beat_id": 3
+      "next_beat_id": 3,
+      "system_triggers": [],
+      "diary_entries": [
+        "She gave me a strange device. What does it do?"
+      ]
     },
     {
       "id": 3,
@@ -306,14 +334,18 @@
       "portrait_expression": "haunted",
       "setting_description": "The older woman's gaze becomes urgent, scanning the horizon as if watching for something.",
       "prompt": "I have to go.",
+      "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "Wait! What is this thing?",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Sorry. No time.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
@@ -341,9 +373,12 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "I didn't get your name—",
+          "text": "I didn't get your name\u00e2\u20ac\u201d",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Later... I must go.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "mysterious",
           "tone_effects": [
             {
@@ -372,8 +407,11 @@
           "tone": "N",
           "label": "NarrativePresence",
           "text": "You're just... leaving?",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Yeah... Just leaving.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "haunted",
           "tone_effects": [
             {
@@ -401,9 +439,12 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Please—just tell me something.",
+          "text": "Please\u00e2\u20ac\u201djust tell me something.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "I wish I could. Sorry, no time.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
             {
@@ -440,7 +481,8 @@
           ]
         }
       ],
-      "next_beat_id": 4
+      "next_beat_id": 4,
+      "system_triggers": []
     },
     {
       "id": 4,
@@ -449,17 +491,19 @@
       "portrait_expression": "cautious",
       "setting_description": "",
       "prompt": "I couldn't hear what she said. It was like the wind swallowed her voice and she left so suddenly.",
+      "audio_clip": "",
       "shared_beat": "",
-      "diary_entries": [
-        "Met a mysterious older woman. She didn't give me her name, but she gave me this strange device."
-      ],
       "tone_choices": [
         {
           "tone": "T",
           "label": "Continue",
           "text": "Close the dialogue and continue toward the market.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [],
           "remnants_effects": [],
           "system_triggers": [
@@ -469,7 +513,11 @@
           ]
         }
       ],
-      "next_beat_id": null
+      "next_beat_id": null,
+      "system_triggers": [],
+      "diary_entries": [
+        "Met a mysterious older woman. She didn't give me her name, but she gave me this strange device."
+      ]
     }
   ]
 }

@@ -1,43 +1,570 @@
 {
   "scene_id": "kaelen_confession_01",
-  "required_flags": ["completed_willy == true"],
+  "required_flags": [
+    "completed_willy == true"
+  ],
   "beats": [
     {
       "id": 1,
       "type": "npc_turn",
       "active_speaker": "Kaelen",
+      "portrait_expression": "",
+      "setting_description": "",
       "prompt": "KAELEN: \"Hey! You! You're that newcomer, right? Look... I shouldn't be talking to you. But I saw you with them. And I need to say something.\"",
+      "audio_clip": "",
+      "shared_beat": "",
       "tone_choices": [
-        {"tone": "T", "label": "Trust", "text": "Ah! You came out of nowhere! What is it?", "npc_response": "KAELEN: \"It's important!\"", "tone_effects": [{"stat": "Trust", "delta": 0.02}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.005}], "remnants_effects": [{"target": "Kaelen", "stat": "resolve", "delta": 0.01}, {"target": "Kaelen", "stat": "trust", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": -0.01}, {"target": "Kaelen", "stat": "memory", "delta": -0.01}]},
-        {"tone": "O", "label": "Observation", "text": "Why me?", "npc_response": "KAELEN: \"Because you don't belong to this place yet.\"", "tone_effects": [{"stat": "Trust", "delta": -0.015}, {"stat": "Observation", "delta": 0.02}, {"stat": "NarrativePresence", "delta": 0.005}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "nuance", "delta": 0.01}, {"target": "Kaelen", "stat": "memory", "delta": 0.01}, {"target": "Kaelen", "stat": "authority", "delta": -0.01}, {"target": "Kaelen", "stat": "need", "delta": -0.01}]},
-        {"tone": "N", "label": "NarrativePresence", "text": "You're hiding something?", "npc_response": "KAELEN: \"Everyone's hiding something.\"", "tone_effects": [{"stat": "Trust", "delta": -0.01}, {"stat": "Observation", "delta": 0.005}, {"stat": "NarrativePresence", "delta": 0.02}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "authority", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": 0.01}, {"target": "Kaelen", "stat": "resolve", "delta": -0.01}, {"target": "Kaelen", "stat": "empathy", "delta": -0.01}]},
-        {"tone": "E", "label": "Empathy", "text": "Are you alright?", "npc_response": "KAELEN: \"Don't ask me that!\"", "tone_effects": [{"stat": "Trust", "delta": 0.005}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.02}], "remnants_effects": [{"target": "Kaelen", "stat": "empathy", "delta": 0.01}, {"target": "Kaelen", "stat": "need", "delta": 0.01}, {"target": "Kaelen", "stat": "nuance", "delta": -0.01}, {"target": "Kaelen", "stat": "trust", "delta": -0.01}]}
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Ah! You came out of nowhere! What is it?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"It's important!\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Why me?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"Because you don't belong to this place yet.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "Observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": 0.005
+            },
+            {
+              "stat": "Empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "You're hiding something?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"Everyone's hiding something.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "Observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": 0.02
+            },
+            {
+              "stat": "Empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "Are you alright?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"Don't ask me that!\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        }
       ],
-      "next_beat_id": 2
+      "next_beat_id": 2,
+      "system_triggers": []
     },
     {
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Kaelen",
+      "portrait_expression": "",
+      "setting_description": "",
       "prompt": "KAELEN: \"That thing. On your belt. The Codex. Where'd you get something like that?\"",
+      "audio_clip": "",
+      "shared_beat": "",
       "tone_choices": [
-        {"tone": "T", "label": "Trust", "text": "Someone in the desert gave it to me.", "npc_response": "KAELEN: \"You're luckier than you look.\"", "tone_effects": [{"stat": "Trust", "delta": 0.02}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.005}], "remnants_effects": [{"target": "Kaelen", "stat": "resolve", "delta": 0.01}, {"target": "Kaelen", "stat": "trust", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": -0.01}, {"target": "Kaelen", "stat": "memory", "delta": -0.01}]},
-        {"tone": "O", "label": "Observation", "text": "I'm following its resonance.", "npc_response": "KAELEN: \"This place has a way of leading people into trouble.\"", "tone_effects": [{"stat": "Trust", "delta": -0.015}, {"stat": "Observation", "delta": 0.02}, {"stat": "NarrativePresence", "delta": 0.005}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "nuance", "delta": 0.01}, {"target": "Kaelen", "stat": "memory", "delta": 0.01}, {"target": "Kaelen", "stat": "authority", "delta": -0.01}, {"target": "Kaelen", "stat": "need", "delta": -0.01}]}
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Someone in the desert gave it to me.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"You're luckier than you look.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "I'm following its resonance.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"This place has a way of leading people into trouble.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "Observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": 0.005
+            },
+            {
+              "stat": "Empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        }
       ],
-      "next_beat_id": 3
+      "next_beat_id": 3,
+      "system_triggers": []
     },
     {
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Kaelen",
+      "portrait_expression": "",
+      "setting_description": "",
       "prompt": "KAELEN: \"I was there. When it happened. The collapse. I could've stopped it. I should've. But I froze.\"",
+      "audio_clip": "",
+      "shared_beat": "",
       "tone_choices": [
-        {"tone": "T", "label": "Trust", "text": "You should tell them.", "npc_response": "KAELEN: \"Easy for you to say.\"", "tone_effects": [{"stat": "Trust", "delta": 0.02}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.005}], "remnants_effects": [{"target": "Kaelen", "stat": "resolve", "delta": 0.01}, {"target": "Kaelen", "stat": "trust", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": -0.01}, {"target": "Kaelen", "stat": "memory", "delta": -0.01}]},
-        {"tone": "O", "label": "Observation", "text": "What exactly happened?", "npc_response": "KAELEN: \"The wall groaned. A brace snapped.\"", "tone_effects": [{"stat": "Trust", "delta": -0.015}, {"stat": "Observation", "delta": 0.02}, {"stat": "NarrativePresence", "delta": 0.005}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "nuance", "delta": 0.01}, {"target": "Kaelen", "stat": "memory", "delta": 0.01}, {"target": "Kaelen", "stat": "authority", "delta": -0.01}, {"target": "Kaelen", "stat": "need", "delta": -0.01}]},
-        {"tone": "N", "label": "NarrativePresence", "text": "You don't owe me this confession.", "npc_response": "KAELEN: \"It's leaking out of me.\"", "tone_effects": [{"stat": "Trust", "delta": -0.01}, {"stat": "Observation", "delta": 0.005}, {"stat": "NarrativePresence", "delta": 0.02}, {"stat": "Empathy", "delta": -0.01}], "remnants_effects": [{"target": "Kaelen", "stat": "authority", "delta": 0.01}, {"target": "Kaelen", "stat": "skepticism", "delta": 0.01}, {"target": "Kaelen", "stat": "resolve", "delta": -0.01}, {"target": "Kaelen", "stat": "empathy", "delta": -0.01}]},
-        {"tone": "E", "label": "Empathy", "text": "You froze. People freeze.", "npc_response": "KAELEN: \"You didn't hear the stone drop.\"", "tone_effects": [{"stat": "Trust", "delta": 0.005}, {"stat": "Observation", "delta": -0.015}, {"stat": "NarrativePresence", "delta": -0.01}, {"stat": "Empathy", "delta": 0.02}], "remnants_effects": [{"target": "Kaelen", "stat": "empathy", "delta": 0.01}, {"target": "Kaelen", "stat": "need", "delta": 0.01}, {"target": "Kaelen", "stat": "nuance", "delta": -0.01}, {"target": "Kaelen", "stat": "trust", "delta": -0.01}]}
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "You should tell them.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"Easy for you to say.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "What exactly happened?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"The wall groaned. A brace snapped.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "Observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": 0.005
+            },
+            {
+              "stat": "Empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "You don't owe me this confession.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"It's leaking out of me.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "Observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": 0.02
+            },
+            {
+              "stat": "Empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "You froze. People freeze.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "KAELEN: \"You didn't hear the stone drop.\"",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Kaelen",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "Kaelen",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        }
       ],
-      "next_beat_id": 0
+      "next_beat_id": 0,
+      "system_triggers": []
     }
   ]
 }

@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueUIController dialogueUI;
     private PortraitManager portraitManager;
     private VoiceoverManager voiceoverManager;
+    private NPCDialogueDriver activeNpcDriver; // Reference to current NPC for audio clip access
 
     private Dictionary<string, BeatData> beatsById = new Dictionary<string, BeatData>();
     private Dictionary<float, BeatData> beatsByNumId = new Dictionary<float, BeatData>();
@@ -133,6 +134,13 @@ public class DialogueManager : MonoBehaviour
         activeNpcId = npcId;
         isDialogueActive = true;
 
+        // Find the NPC driver by GameObject name to access pre-loaded audio clips
+        GameObject npcGameObject = GameObject.Find(npcId);
+        if (npcGameObject != null)
+        {
+            activeNpcDriver = npcGameObject.GetComponent<NPCDialogueDriver>();
+        }
+
         // Try to find beat by string ID (passages format)
         if (beatsById.TryGetValue(startBeatId, out var beat))
         {
@@ -169,7 +177,25 @@ public class DialogueManager : MonoBehaviour
         // Play voiceover for this beat if audio clip is specified
         if (!string.IsNullOrEmpty(beat.audio_clip) && voiceoverManager != null)
         {
-            voiceoverManager.PlayVoiceover(currentSceneId, beat.audio_clip);
+            // Try to use pre-loaded clip from NPC driver first (faster, no file I/O)
+            if (activeNpcDriver != null)
+            {
+                AudioClip preloadedClip = activeNpcDriver.GetAudioClip(beat.id.ToString());
+                if (preloadedClip != null)
+                {
+                    voiceoverManager.PlayVoiceoverClip(preloadedClip);
+                }
+                else
+                {
+                    // Fallback: load from file if not pre-loaded
+                    voiceoverManager.PlayVoiceover(currentSceneId, beat.audio_clip);
+                }
+            }
+            else
+            {
+                // No NPC driver, load from file
+                voiceoverManager.PlayVoiceover(currentSceneId, beat.audio_clip);
+            }
         }
 
         Debug.Log($"[DialogueManager] Displaying beat: {beat.pid ?? beat.id.ToString()} (mode: {beat.mode})");
@@ -241,6 +267,30 @@ public class DialogueManager : MonoBehaviour
         dialogueUI.ClearButtons();
         Debug.Log($"[DialogueManager] Choice selected: {choice.text}");
 
+        // Play voiceover for player's choice if audio clip is specified
+        if (!string.IsNullOrEmpty(choice.audio_clip_on_choice) && voiceoverManager != null)
+        {
+            // Try to use pre-loaded clip from NPC driver first (faster, no file I/O)
+            if (activeNpcDriver != null)
+            {
+                AudioClip preloadedClip = activeNpcDriver.GetAudioClip(beat.id.ToString(), choice.tone);
+                if (preloadedClip != null)
+                {
+                    voiceoverManager.PlayVoiceoverClip(preloadedClip);
+                }
+                else
+                {
+                    // Fallback: load from file if not pre-loaded
+                    voiceoverManager.PlayVoiceover(currentSceneId, choice.audio_clip_on_choice);
+                }
+            }
+            else
+            {
+                // No NPC driver, load from file
+                voiceoverManager.PlayVoiceover(currentSceneId, choice.audio_clip_on_choice);
+            }
+        }
+
         // 1. Handle result_text - either show in notification or skip
         if (!string.IsNullOrEmpty(choice.result_text))
         {
@@ -279,7 +329,25 @@ public class DialogueManager : MonoBehaviour
             // Play voiceover for NPC response if audio clip is specified
             if (!string.IsNullOrEmpty(choice.audio_clip_on_response) && voiceoverManager != null)
             {
-                voiceoverManager.PlayVoiceover(currentSceneId, choice.audio_clip_on_response);
+                // Try to use pre-loaded clip from NPC driver first (faster, no file I/O)
+                if (activeNpcDriver != null)
+                {
+                    AudioClip preloadedClip = activeNpcDriver.GetAudioClip(beat.id.ToString(), $"{choice.tone}_npc");
+                    if (preloadedClip != null)
+                    {
+                        voiceoverManager.PlayVoiceoverClip(preloadedClip);
+                    }
+                    else
+                    {
+                        // Fallback: load from file if not pre-loaded
+                        voiceoverManager.PlayVoiceover(currentSceneId, choice.audio_clip_on_response);
+                    }
+                }
+                else
+                {
+                    // No NPC driver, load from file
+                    voiceoverManager.PlayVoiceover(currentSceneId, choice.audio_clip_on_response);
+                }
             }
             
             dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);

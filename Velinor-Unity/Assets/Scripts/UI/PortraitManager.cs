@@ -1,16 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
 /// Manages loading and displaying NPC portrait expressions in the dialogue UI.
 /// Loads sprites from Resources/Portraits/{npcName}/{npcName}_{expression}.png
 /// Falls back to neutral expression if specific expression not found.
+/// Supports fade-in transitions when changing portraits.
 /// </summary>
 public class PortraitManager : MonoBehaviour
 {
     [SerializeField] private Image portraitImage;
+    [SerializeField] private float fadeInDuration = 0.3f;  // Duration of fade-in effect in seconds
     private Dictionary<string, Sprite> portraitCache = new Dictionary<string, Sprite>();
+    private CanvasGroup portraitCanvasGroup;
 
     /// <summary>
     /// Maps display names (active_speaker) to portrait asset folder names.
@@ -47,11 +51,22 @@ public class PortraitManager : MonoBehaviour
             }
         }
 
+        // Get or create CanvasGroup for fade effect
+        if (portraitImage != null)
+        {
+            portraitCanvasGroup = portraitImage.GetComponent<CanvasGroup>();
+            if (portraitCanvasGroup == null)
+            {
+                portraitCanvasGroup = portraitImage.gameObject.AddComponent<CanvasGroup>();
+                Debug.Log("[PortraitManager] CanvasGroup added for fade transitions");
+            }
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>
-    /// Load and display a portrait expression for an NPC.
+    /// Load and display a portrait expression for an NPC with fade-in effect.
     /// </summary>
     public void ShowPortrait(string npcName, string expression = "neutral")
     {
@@ -73,9 +88,11 @@ public class PortraitManager : MonoBehaviour
 
         if (sprite != null)
         {
-            portraitImage.sprite = sprite;
             portraitImage.gameObject.SetActive(true);
-            Debug.Log($"[PortraitManager] Displaying portrait: {npcName}_{expression}");
+            // Start fade-in coroutine
+            StopCoroutine(FadeInPortrait(sprite));
+            StartCoroutine(FadeInPortrait(sprite));
+            Debug.Log($"[PortraitManager] Displaying portrait with fade: {npcName}_{expression}");
         }
         else
         {
@@ -155,5 +172,30 @@ public class PortraitManager : MonoBehaviour
                 return result;
         }
         return null;
+    }
+
+    /// <summary>
+    /// Coroutine to fade in a portrait sprite over fadeInDuration seconds.
+    /// Ensures portrait changes have a smooth transition effect.
+    /// </summary>
+    private IEnumerator FadeInPortrait(Sprite sprite)
+    {
+        if (portraitCanvasGroup == null || portraitImage == null)
+            yield break;
+
+        // Set the new sprite immediately but with alpha 0
+        portraitImage.sprite = sprite;
+        portraitCanvasGroup.alpha = 0f;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeInDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            portraitCanvasGroup.alpha = Mathf.Clamp01(elapsedTime / fadeInDuration);
+            yield return null;
+        }
+
+        // Ensure alpha is fully 1 at the end
+        portraitCanvasGroup.alpha = 1f;
     }
 }

@@ -12,14 +12,19 @@
       "portrait_expression": "cautious",
       "setting_description": "The Velhara marketplace thrums with afternoon energy. Vendors shout prices, crowds move in tight currents. Near the fountain, two figures stand completely still against the rushing crowd, staring at you.",
       "prompt": "They're staring at me. What should I do.",
+      "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "Step toward the figures",
+          "audio_clip_on_choice": "",
           "result_text": "You approach with open body language. The man's expression shifts slightly.",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -59,14 +64,19 @@
               "stat": "memory",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "O",
           "label": "Observation",
           "text": "Keep your distance",
+          "audio_clip_on_choice": "",
           "result_text": "You maintain space, watching carefully. Both of them notice your caution.",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -106,14 +116,19 @@
               "stat": "need",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "N",
           "label": "NarrativePresence",
           "text": "Explore the stalls",
+          "audio_clip_on_choice": "",
           "result_text": "You wander the marketplace, examining merchant goods. After a moment, you notice them watching you still.",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -153,14 +168,19 @@
               "stat": "empathy",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "E",
           "label": "Empathy",
           "text": "Freeze and observe",
+          "audio_clip_on_choice": "",
           "result_text": "You stop completely. Your stillness meets theirs. Time feels different here.",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -200,28 +220,32 @@
               "stat": "trust",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         }
       ],
-      "system_triggers": [],
-      "next_beat_id": 2
+      "next_beat_id": 2,
+      "system_triggers": []
     },
     {
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Nima",
-      "display_name": "Young Woman",
       "portrait_expression": "disgusted",
       "setting_description": "",
       "prompt": "What do you want anyway? We don't trust outsiders.",
+      "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "I'm trying to find work. My name's Lioren. I'm new here.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Work is scarce for people who actually belong here. Intentions don't fill empty bellies.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
@@ -262,14 +286,18 @@
               "stat": "memory",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "O",
           "label": "Observation",
           "text": "I don't mean to make you feel uncomfortable. My name's Lioren. It's been a long trip, any place to rest around here?",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "resigned",
           "tone_effects": [
             {
@@ -310,14 +338,18 @@
               "stat": "need",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "N",
           "label": "NarrativePresence",
           "text": "I've heard the market is a place to find work. My name's Lioren. I'm not here to cause trouble.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "dismissive",
           "tone_effects": [
             {
@@ -358,14 +390,18 @@
               "stat": "empathy",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long road… that's all.",
+          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long road\u00e2\u20ac\u00a6 that's all.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Everyone out here has a long road behind them. It doesn't make the ground any softer.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "determined",
           "tone_effects": [
             {
@@ -406,32 +442,40 @@
               "stat": "trust",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         }
       ],
+      "next_beat_id": 3,
       "system_triggers": [],
-      "next_beat_id": 3
+      "display_name": "Young Woman"
     },
     {
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Ravi",
-      "display_name": "Young Man",
       "portrait_expression": "resigned",
       "setting_description": "",
-      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' lately… The buildings are… unstable. Our daughter…",
+      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' lately\u00e2\u20ac\u00a6 The buildings are\u00e2\u20ac\u00a6 unstable. Our daughter\u00e2\u20ac\u00a6",
+      "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Continue",
           "text": "Continue",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [],
-          "remnants_effects": []
+          "remnants_effects": [],
+          "system_triggers": []
         }
       ],
+      "next_beat_id": 3.1,
       "system_triggers": [
         {
           "type": "update_dialogue_names",
@@ -441,47 +485,56 @@
           ]
         }
       ],
-      "next_beat_id": 3.1
+      "display_name": "Young Man"
     },
     {
       "id": 3.1,
       "type": "npc_turn",
       "active_speaker": "Nima",
-      "display_name": "Young Woman",
       "portrait_expression": "disgusted",
       "setting_description": "",
       "prompt": "Ravi, take your own advice.",
+      "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Continue",
           "text": "Continue",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [],
-          "remnants_effects": []
+          "remnants_effects": [],
+          "system_triggers": []
         }
       ],
+      "next_beat_id": 4,
       "system_triggers": [],
-      "next_beat_id": 4
+      "display_name": "Young Woman"
     },
     {
       "id": 4,
       "type": "npc_turn",
       "active_speaker": "Ravi",
-      "display_name": "Ravi",
       "portrait_expression": "determined",
       "setting_description": "",
-      "prompt": "Nima… I can't have someone else…",
-      "shared_beat": "Anyway… I hope you will be careful.",
+      "prompt": "Nima\u00e2\u20ac\u00a6 I can't have someone else\u00e2\u20ac\u00a6",
+      "audio_clip": "",
+      "shared_beat": "Anyway\u00e2\u20ac\u00a6 I hope you will be careful.",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
           "text": "You are right to be wary of me. I want to earn your trust.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Trust is a heavy thing to ask for out here. Just keep your head down.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "frustrated",
           "tone_effects": [
             {
@@ -522,14 +575,18 @@
               "stat": "memory",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "O",
           "label": "Observation",
-          "text": "It's not my business but… did something happen to your daughter?",
+          "text": "It's not my business but\u00e2\u20ac\u00a6 did something happen to your daughter?",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "The stones don't care who they fall on. That's all there is to see.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "resigned",
           "tone_effects": [
             {
@@ -570,14 +627,18 @@
               "stat": "need",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "I've had some… losses… I don't need you to get into details.",
+          "text": "I've had some\u00e2\u20ac\u00a6 losses\u00e2\u20ac\u00a6 I don't need you to get into details.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "Then you know how the air feels after the dust clears. It stays in your throat.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "determined",
           "tone_effects": [
             {
@@ -618,14 +679,18 @@
               "stat": "empathy",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         },
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I don't know what happened to your daughter, but you seem really… impacted. Let me know if I can help with something.",
+          "text": "I don't know what happened to your daughter, but you seem really\u00e2\u20ac\u00a6 impacted. Let me know if I can help with something.",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "There's nothing to repair now. Some things stay broken.",
+          "audio_clip_on_response": "",
           "portrait_expression_on_response": "sad",
           "tone_effects": [
             {
@@ -666,18 +731,20 @@
               "stat": "trust",
               "delta": -0.01
             }
-          ]
+          ],
+          "system_triggers": []
         }
       ],
+      "next_beat_id": 5,
       "system_triggers": [
         {
           "type": "diary_append",
           "data": [
-            "Ravi mentioned an unstable building… and a daughter."
+            "Ravi mentioned an unstable building\u00e2\u20ac\u00a6 and a daughter."
           ]
         }
       ],
-      "next_beat_id": 5
+      "display_name": "Ravi"
     },
     {
       "id": 5,
@@ -685,15 +752,20 @@
       "active_speaker": "Lioren",
       "portrait_expression": "cautious",
       "setting_description": "",
-      "prompt": "This thing… I need to figure out what this is.",
+      "prompt": "This thing\u00e2\u20ac\u00a6 I need to figure out what this is.",
+      "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "E",
           "label": "Empathy",
           "text": "End dialogue and investigate this codex signal",
+          "audio_clip_on_choice": "",
           "result_text": "",
+          "show_result_in_notification": false,
           "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -712,9 +784,11 @@
               "delta": 0
             }
           ],
-          "remnants_effects": []
+          "remnants_effects": [],
+          "system_triggers": []
         }
       ],
+      "next_beat_id": 0,
       "system_triggers": [
         {
           "type": "diary_append",
@@ -734,8 +808,7 @@
             "strength": 0.8
           }
         }
-      ],
-      "next_beat_id": 0
+      ]
     }
   ]
 }
