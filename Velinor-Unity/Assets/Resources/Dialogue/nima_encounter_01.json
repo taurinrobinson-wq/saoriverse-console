@@ -912,14 +912,14 @@
     },
     {
       "id": 6,
-      "type": "npc_turn",
-      "active_speaker": "Nima",
+      "type": "player_posture",
+      "active_speaker": "Lioren",
       "display_name": "Nima",
-      "portrait_expression": "vulnerable",
+      "portrait_expression": "reverent",
       "setting_description": "Nima's hand shifts against her clothes. A small, worn photograph slips partially into view, its edges softened and its corners frayed. The surface is creased from years of being held. She does not offer it. She does not hide it. She simply lets it be seen. Her eyes stay fixed on the cracked ground.",
-      "prompt": "This is the moment the player finally sees Ophina.",
+      "prompt": "Nima's hand shifts against her clothes. A small, worn photograph slips partially into view, its edges softened and its corners frayed. The surface is creased from years of being held. She doesn't offer it. She doesn't hide it. She simply lets it be seen. I'm looking at her. I'm looking at the photograph. This must be Ophina.",
       "audio_clip": "",
-      "shared_beat": "Nima's thumb brushes the photo again, slower this time. Her breathing wavers, just once.",
+      "shared_beat": "Nima's thumb brushes the photo again, slower this time. Her breathing wavers, just once. I don't look away.",
       "tone_choices": [
         {
           "tone": "T",
@@ -1080,7 +1080,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "This is her.",
+          "text": "This is her?",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
