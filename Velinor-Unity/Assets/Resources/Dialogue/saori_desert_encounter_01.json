@@ -158,7 +158,8 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 2,
@@ -325,7 +326,8 @@
       "system_triggers": [],
       "diary_entries": [
         "She gave me a strange device. What does it do?"
-      ]
+      ],
+      "display_name": ""
     },
     {
       "id": 3,
@@ -482,7 +484,8 @@
         }
       ],
       "next_beat_id": 4,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 4,
@@ -517,7 +520,8 @@
       "system_triggers": [],
       "diary_entries": [
         "Met a mysterious older woman. She didn't give me her name, but she gave me this strange device."
-      ]
+      ],
+      "display_name": ""
     }
   ]
 }

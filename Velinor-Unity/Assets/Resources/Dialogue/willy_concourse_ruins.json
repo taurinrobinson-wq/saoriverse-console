@@ -186,7 +186,8 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 2,
@@ -199,7 +200,8 @@
       "shared_beat": "Anyway, whatever you're after\u00e2\u20ac\u00a6 it's under that mess. And you're not gettin' ta it today.",
       "tone_choices": [],
       "next_beat_id": 3,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 3,
@@ -398,7 +400,8 @@
         {
           "type": "glyph_appear"
         }
-      ]
+      ],
+      "display_name": ""
     },
     {
       "id": 4,
@@ -447,7 +450,8 @@
         {
           "type": "glyph_collect"
         }
-      ]
+      ],
+      "display_name": ""
     },
     {
       "id": 5,
@@ -640,7 +644,8 @@
             "Willy"
           ]
         }
-      ]
+      ],
+      "display_name": ""
     },
     {
       "id": 6,
@@ -702,7 +707,8 @@
         {
           "type": "close_dialogue"
         }
-      ]
+      ],
+      "display_name": ""
     }
   ]
 }

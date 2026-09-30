@@ -224,7 +224,8 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 2,
@@ -342,7 +343,8 @@
         }
       ],
       "next_beat_id": 3,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 3,
@@ -564,7 +566,8 @@
         }
       ],
       "next_beat_id": 0,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     }
   ]
 }

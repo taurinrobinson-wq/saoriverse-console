@@ -461,7 +461,8 @@
       "shared_beat": "",
       "tone_choices": [],
       "next_beat_id": 4,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 4,
@@ -579,7 +580,8 @@
         }
       ],
       "next_beat_id": 0,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     }
   ]
 }

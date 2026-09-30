@@ -225,7 +225,8 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": []
+      "system_triggers": [],
+      "display_name": ""
     },
     {
       "id": 2,
@@ -808,7 +809,8 @@
             "strength": 0.8
           }
         }
-      ]
+      ],
+      "display_name": ""
     }
   ]
 }
