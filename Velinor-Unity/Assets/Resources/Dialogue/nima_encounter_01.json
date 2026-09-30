@@ -11,7 +11,7 @@
       "display_name": "Lioren",
       "portrait_expression": "cautious",
       "setting_description": "",
-      "prompt": "She hasn't noticed me. She is entirely lost in thought. Nima stands alone in the market square, staring at a cracked patch of ground. The ambient noise feels distant around her stillness.",
+      "prompt": "<i>She hasn't noticed me. She is entirely lost in thought. Nima stands alone in the market square, staring at a cracked patch of ground. The ambient noise feels distant around her stillness.</i>",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -21,7 +21,7 @@
           "text": "Step toward her slowly.",
           "audio_clip_on_choice": "",
           "result_text": "You cross the open space, making no effort to hide your approach.",
-          "show_result_in_notification": false,
+          "show_result_in_notification": true,
           "npc_response": "",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
@@ -73,7 +73,7 @@
           "text": "Observe from a distance.",
           "audio_clip_on_choice": "",
           "result_text": "You stay near the edge of the fountain, noting her rigid posture.",
-          "show_result_in_notification": false,
+          "show_result_in_notification": true,
           "npc_response": "",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
@@ -125,7 +125,7 @@
           "text": "Circle the square, avoiding her gaze.",
           "audio_clip_on_choice": "",
           "result_text": "You move past the shuttered stalls, trying to treat the area normally.",
-          "show_result_in_notification": false,
+          "show_result_in_notification": true,
           "npc_response": "",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
@@ -177,7 +177,7 @@
           "text": "Move close, but stay silent.",
           "audio_clip_on_choice": "",
           "result_text": "You approach slowly, stopping just within her awareness, offering presence without words.",
-          "show_result_in_notification": false,
+          "show_result_in_notification": true,
           "npc_response": "",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
@@ -293,11 +293,11 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Ravi mentioned this placeâ€¦ I didn't know why.",
+          "text": "Ravi mentioned this place... I didn't know why.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "He shouldn't have. Not today. He talks when he's hurting. Iâ€¦ don't.",
+          "npc_response": "He shouldn't have. Not today. He talks when he's hurting. I... don't.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "angry",
           "tone_effects": [
@@ -345,7 +345,7 @@
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "You came back here for a reason.",
+          "text": "You came back here... for a reason?",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -397,7 +397,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "You lookâ€¦ heavier than before.",
+          "text": "You look... heavier than before.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -454,10 +454,10 @@
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Nima",
-      "display_name": "",
+      "display_name": "Nima",
       "portrait_expression": "resigned",
       "setting_description": "",
-      "prompt": "I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I justâ€¦ don't.",
+      "prompt": "I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I just... can't.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [],
@@ -465,15 +465,238 @@
       "system_triggers": []
     },
     {
+      "id": 2.25,
+      "type": "npc_turn",
+      "active_speaker": "Nima",
+      "display_name": "Nima",
+      "portrait_expression": "determined",
+      "setting_description": "Nima's jaw tightens. She finally acknowledges you directly.",
+      "prompt": "Ravi shouldn't have told you about her.",
+      "audio_clip": "",
+      "shared_beat": "He wants to move forward. I want to stay. I don't know which of us is right.",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "He meant well.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "I know... That's why it hurts.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Maybe he told me because he's worried.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "He worries by talking. I… don't.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "He shared something sacred.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "He did. And I'm angry. But... I guess I understand too.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I'm sure he's grieving too.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Yes. But his grief reaches outward. Mine keeps me here.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": []
+    },
+    {
       "id": 4,
       "type": "npc_turn",
       "active_speaker": "Nima",
-      "display_name": "",
+      "display_name": "Nima",
       "portrait_expression": "worried",
       "setting_description": "",
       "prompt": "This is where she was trapped. The ground shifted. The wall came down. No one could reach her.",
       "audio_clip": "",
-      "shared_beat": "",
+      "shared_beat": "I held her hand through the crack. She was so small. I told her I wouldn't let go. The brace settled further. I felt the slip. I felt the air leave her.",
       "tone_choices": [
         {
           "tone": "T",
@@ -482,7 +705,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Heh. Sorry doesn't move stone. Doesn't change anything.",
+          "npc_response": "Hmph. Sorry doesn't move stone. Doesn't change anything.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "disgusted",
           "tone_effects": [
@@ -578,9 +801,113 @@
             }
           ],
           "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "I shouldn't be here.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "No one should. But here we are. People leave flowers at graves. I stand on the crack. Maybe you're here for the same reason...I don't know",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "You don't have to say more.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Silence says enough. Been saying it for a year.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "Observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "NarrativePresence",
+              "delta": -0.01
+            },
+            {
+              "stat": "Empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Nima",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Nima",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
         }
       ],
-      "next_beat_id": 0,
+      "next_beat_id": 2.25,
       "system_triggers": []
     }
   ]
