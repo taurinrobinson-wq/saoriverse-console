@@ -414,7 +414,7 @@
       "name": "Working Together",
       "conversationId": "ravi_encounter_01",
       "active_speaker": "Ravi",
-      "text": "You work in silence for a time. Ravi's instructions are sparse but clear. Gradually, the pattern becomes obvious\u00e2\u20ac\u201dprecision, patience, structure.",
+      "text": "You work in silence for a time. Ravi's instructions are sparse but clear. Gradually, the pattern becomes obviousâ€”precision, patience, structure.",
       "system_trigger": "add_job|add_relationship",
       "data_hook": "job_ravi_rebuilding=active|ravi_reputation=0.2",
       "choices": [
@@ -565,7 +565,7 @@
         {
           "tone_str": "Empathy",
           "playerLine": "I'm glad you're not alone in this.",
-          "npcResponse": "RAVI: \"Alone is safer. But maybe\u00e2\u20ac\u00a6 safety isn't everything anymore.\"",
+          "npcResponse": "RAVI: \"Alone is safer. But maybeâ€¦ safety isn't everything anymore.\"",
           "target": "ravi_01_passage_4_close",
           "tone_effects": {
             "entries": [

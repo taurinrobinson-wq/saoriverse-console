@@ -16,7 +16,7 @@
           "segmentId": "elenya_act1_seg0_intro",
           "title": "The Seer's Sanctuary",
           "dialogueContext": "First meeting with Elenya in her meditation space - no prerequisites",
-          "npcLine": "Welcome. I've been expecting you\u00e2\u20ac\u201dthough I didn't know when. Sit. Let's see what brought you here.",
+          "npcLine": "Welcome. I've been expecting youâ€”though I didn't know when. Sit. Let's see what brought you here.",
           "requiredGates": [],
           "requiredStats": [],
           "requiredGlyphs": [],
@@ -43,7 +43,7 @@
               "toneType": "O",
               "toneName": "Observation",
               "playerLine": "People say you understand things others don't. What do you see that they miss?",
-              "elenyaResponse": "I see the patterns beneath chaos. I see what people long for before they know they're longing. Come closer\u00e2\u20ac\u201dlet me see what you carry with you.",
+              "elenyaResponse": "I see the patterns beneath chaos. I see what people long for before they know they're longing. Come closerâ€”let me see what you carry with you.",
               "statEffects": {
                 "observation": 0.05
               },
@@ -81,8 +81,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00b2"
+            "Î±",
+            "Î²"
           ],
           "elenyaTone": "teaching_hiding",
           "playerChoices": [
@@ -123,8 +123,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b3",
-            "\u00ce\u00b5"
+            "Î³",
+            "Îµ"
           ],
           "elenyaTone": "confused_drawn",
           "playerChoices": [
@@ -166,8 +166,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00b5"
+            "Î±",
+            "Îµ"
           ],
           "elenyaTone": "grounded_teaching",
           "playerChoices": [
@@ -175,7 +175,7 @@
               "toneId": "T_witness",
               "toneType": "T",
               "toneName": "Trust",
-              "playerLine": "You're describing what you do when Malrik is near\u00e2\u20ac\u201dyou bear witness. You hold space for his confusion.",
+              "playerLine": "You're describing what you do when Malrik is nearâ€”you bear witness. You hold space for his confusion.",
               "elenyaResponse": "I do. And it tears me apart, because I recognize exactly what he's confused about. It's the same ache I performed a ritual to forget.",
               "statEffects": {
                 "empathy": 0.15,
@@ -214,7 +214,7 @@
           "segmentId": "elenya_act6_seg1_lantern_recognition",
           "title": "Fragment and Echo",
           "dialogueContext": "Elenya encounters a broken lighthouse lantern during ritual work",
-          "npcLine": "I found a broken lantern. Lighthouse, probably. I touched it and something caught in my throat. 'Someone I once knew would have fixed this. Just like that\u00e2\u20ac\u201dillumination.' I laughed. And then I asked: What was his name?",
+          "npcLine": "I found a broken lantern. Lighthouse, probably. I touched it and something caught in my throat. 'Someone I once knew would have fixed this. Just like thatâ€”illumination.' I laughed. And then I asked: What was his name?",
           "requiredGates": [
             {
               "gateId": "bodies_converge",
@@ -225,8 +225,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b5"
+            "Î»",
+            "Îµ"
           ],
           "elenyaTone": "startled_remembering",
           "playerChoices": [
@@ -234,7 +234,7 @@
               "toneId": "O_perception",
               "toneType": "O",
               "toneName": "Observation",
-              "playerLine": "The lantern\u00e2\u20ac\u201dit's not asking you to remember his name. It's reminding you that you once knew it.",
+              "playerLine": "The lanternâ€”it's not asking you to remember his name. It's reminding you that you once knew it.",
               "elenyaResponse": "The ritual of forgetting is thinner than I thought. One object, one touch, and the walls crack.",
               "statEffects": {
                 "observation": 0.15
@@ -249,7 +249,7 @@
           "segmentId": "elenya_act6_seg2_mystic_philosophy",
           "title": "The Way of Presence and Release",
           "dialogueContext": "Elenya speaks about her conflict with the Skeptics and what she knows about human healing",
-          "npcLine": "The Skeptics believe the world can be fixed through evidence and structure. But I've learned\u00e2\u20ac\u201dthrough my own breaking\u00e2\u20ac\u201dthat some wounds need presence, not analysis. Meaning lives in the space between order and chaos.",
+          "npcLine": "The Skeptics believe the world can be fixed through evidence and structure. But I've learnedâ€”through my own breakingâ€”that some wounds need presence, not analysis. Meaning lives in the space between order and chaos.",
           "requiredGates": [
             {
               "gateId": "act6_foundation",
@@ -267,8 +267,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00b2"
+            "Î±",
+            "Î²"
           ],
           "elenyaTone": "wise_sorrowing",
           "playerChoices": [
@@ -333,9 +333,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00a9",
-            "\u00ce\u00b1"
+            "Î»",
+            "Î©",
+            "Î±"
           ],
           "elenyaTone": "trembling_opening",
           "playerChoices": [
@@ -390,9 +390,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b1",
-            "\u00ce\u00b2"
+            "Î»",
+            "Î±",
+            "Î²"
           ],
           "elenyaTone": "vulnerable_honest",
           "playerChoices": [
@@ -416,7 +416,7 @@
           "segmentId": "elenya_act7_seg3_sacred_integration",
           "title": "The Building as Covenant",
           "dialogueContext": "Elenya speaks about the Shared Archive Building and what she wants it to represent",
-          "npcLine": "The building doesn't belong to the Skeptics or the Mystics. It belongs to both. I want to place offerings\u00e2\u20ac\u201dflame, cloth, meaning\u00e2\u20ac\u201dalongside his precise catalogues. Because both honor what was lost.",
+          "npcLine": "The building doesn't belong to the Skeptics or the Mystics. It belongs to both. I want to place offeringsâ€”flame, cloth, meaningâ€”alongside his precise catalogues. Because both honor what was lost.",
           "requiredGates": [
             {
               "gateId": "act7_midpoint",
@@ -434,8 +434,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b1"
+            "Î»",
+            "Î±"
           ],
           "elenyaTone": "visionary_tender",
           "playerChoices": [
@@ -499,9 +499,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b5",
-            "\u00ce\u00b1"
+            "Î»",
+            "Îµ",
+            "Î±"
           ],
           "elenyaTone": "integrated_teaching",
           "playerChoices": [
@@ -509,7 +509,7 @@
               "toneId": "T_compassion",
               "toneType": "T",
               "toneName": "Trust",
-              "playerLine": "Your students can now learn from both\u00e2\u20ac\u201dthe teaching and the wound that taught it.",
+              "playerLine": "Your students can now learn from bothâ€”the teaching and the wound that taught it.",
               "elenyaResponse": "Yes. I can finally teach what I know instead of what I wish I'd lived. And that's its own kind of wholeness.",
               "statEffects": {
                 "empathy": 0.2
@@ -523,7 +523,7 @@
               "toneType": "N",
               "toneName": "Narrative Presence",
               "playerLine": "You've become who you needed to become. Through the forgetting and back through the remembering.",
-              "elenyaResponse": "We both have. He needed to grieve without knowing what he was grieving. I needed to survive by letting go. And now we're here\u00e2\u20ac\u201dchanged, wiser, ready for what comes next.",
+              "elenyaResponse": "We both have. He needed to grieve without knowing what he was grieving. I needed to survive by letting go. And now we're hereâ€”changed, wiser, ready for what comes next.",
               "statEffects": {
                 "empathy": 0.25,
                 "observation": 0.15
@@ -558,8 +558,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b5",
-            "\u00ce\u00b1"
+            "Îµ",
+            "Î±"
           ],
           "elenyaTone": "teacher_seeking_truth",
           "playerChoices": [
@@ -613,8 +613,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00b5"
+            "Î±",
+            "Îµ"
           ],
           "elenyaTone": "provocative_tender",
           "playerChoices": [
@@ -661,7 +661,7 @@
           "segmentId": "elenya_act2_seg1_lighthouse_discovery",
           "title": "An Expected Presence",
           "dialogueContext": "Elenya meditates at the lighthouse, Malrik arrives",
-          "npcLine": "I came here to sit with the stillness. I didn't expect to find anyone\u00e2\u20ac\u201dbut somehow I'm not surprised.",
+          "npcLine": "I came here to sit with the stillness. I didn't expect to find anyoneâ€”but somehow I'm not surprised.",
           "requiredGates": [
             {
               "gateId": "act2_unlock",
@@ -679,8 +679,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00b5"
+            "Î±",
+            "Îµ"
           ],
           "elenyaTone": "welcoming_present",
           "playerChoices": [
@@ -735,8 +735,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00bb"
+            "Î±",
+            "Î»"
           ],
           "elenyaTone": "grounded_joyful",
           "playerChoices": [
@@ -763,13 +763,13 @@
       "actTitle": "The Love She Didn't Expect",
       "timeframe": "pre_collapse",
       "emotionalTheme": "devotion_without_grasping",
-      "description": "Elenya realizes she loves him, but loves him in her way\u00e2\u20ac\u201dwithout possession, with gentle holding.",
+      "description": "Elenya realizes she loves him, but loves him in her wayâ€”without possession, with gentle holding.",
       "segments": [
         {
           "segmentId": "elenya_act3_seg1_tenderness",
           "title": "The Softening",
           "dialogueContext": "Elenya observes Malrik's changes and feels her own transformation",
-          "npcLine": "I didn't know I could love someone whose worldview contradicted mine so completely. And yet\u00e2\u20ac\u201dhis certainty was beautiful because it was his. Not because it was right.",
+          "npcLine": "I didn't know I could love someone whose worldview contradicted mine so completely. And yetâ€”his certainty was beautiful because it was his. Not because it was right.",
           "requiredGates": [
             {
               "gateId": "act3_foundation",
@@ -787,8 +787,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b1"
+            "Î»",
+            "Î±"
           ],
           "elenyaTone": "contemplative_amazed",
           "playerChoices": [
@@ -796,7 +796,7 @@
               "toneId": "N_acceptance",
               "toneType": "N",
               "toneName": "Narrative Presence",
-              "playerLine": "Love that doesn't need to change the other person\u00e2\u20ac\u201dthat's its own kind of wisdom.",
+              "playerLine": "Love that doesn't need to change the other personâ€”that's its own kind of wisdom.",
               "elenyaResponse": "Yes. I learned that with him. That presence is enough. That witnessing is a form of devotion.",
               "statEffects": {
                 "empathy": 0.15
@@ -829,9 +829,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b1",
-            "\u00ce\u00a9"
+            "Î»",
+            "Î±",
+            "Î©"
           ],
           "elenyaTone": "sacred_quiet",
           "playerChoices": [
@@ -839,7 +839,7 @@
               "toneId": "T_reverence",
               "toneType": "T",
               "toneName": "Trust",
-              "playerLine": "What you created together\u00e2\u20ac\u201dthat was real. Whether words were spoken or not.",
+              "playerLine": "What you created togetherâ€”that was real. Whether words were spoken or not.",
               "elenyaResponse": "It was. And because it was real, when it was taken, it left a mark that couldn't be erased. Even when I tried.",
               "statEffects": {
                 "empathy": 0.15,
@@ -875,8 +875,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b8",
-            "\u00ce\u00b3"
+            "Î¸",
+            "Î³"
           ],
           "elenyaTone": "haunted_seeking",
           "playerChoices": [
@@ -899,7 +899,7 @@
           "segmentId": "elenya_act4_seg2_ritual_of_forgetting",
           "title": "The Choice to Release",
           "dialogueContext": "Elenya describes her ritual of deliberate forgetting",
-          "npcLine": "I made a choice. Not out of cowardice. But out of mercy. I performed a ritual of forgetting\u00e2\u20ac\u201dan act of release, a surrender of the half-memory that haunted me.",
+          "npcLine": "I made a choice. Not out of cowardice. But out of mercy. I performed a ritual of forgettingâ€”an act of release, a surrender of the half-memory that haunted me.",
           "requiredGates": [
             {
               "gateId": "collapse_processed",
@@ -917,8 +917,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00b2"
+            "Î±",
+            "Î²"
           ],
           "elenyaTone": "resolved_mournful",
           "playerChoices": [
@@ -946,11 +946,11 @@
       "description": "In the restored lighthouse, Elenya and Malrik stand together. She places her hand where his almost touches.",
       "trigger": "elenya_wisdom_complete",
       "emotionalSignals": [
-        "\u00ce\u00bb",
-        "\u00ce\u00b1",
-        "\u00ce\u00a9"
+        "Î»",
+        "Î±",
+        "Î©"
       ],
-      "elenyaLine": "I chose to forget you once. Not because you weren't worth remembering, but because remembering was burning me. Now I choose to remember\u00e2\u20ac\u201dbut differently. Not clinging to what was, but present for what is."
+      "elenyaLine": "I chose to forget you once. Not because you weren't worth remembering, but because remembering was burning me. Now I choose to rememberâ€”but differently. Not clinging to what was, but present for what is."
     }
   ],
   "scene_id": "",

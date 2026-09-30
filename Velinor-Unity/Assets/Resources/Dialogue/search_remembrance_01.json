@@ -28,7 +28,7 @@
       "name": "Interaction",
       "conversationId": "search_remembrance_01",
       "active_speaker": "System",
-      "scene_context": "On interaction, the glow flashes. A brief, fragmented image fills the screen \u00e2\u20ac\u201d something from the player's past, unclear and out of order.",
+      "scene_context": "On interaction, the glow flashes. A brief, fragmented image fills the screen â€” something from the player's past, unclear and out of order.",
       "text": "DEV NOTE: This is the first hint that the player's walkabouts are surfacing their own buried memories. The image should be abstract, not literal. The projection settles into the player's palm.",
       "system_trigger": "glyph_remembrance_stabilization",
       "data_hook": "obtained_remembrance=true",

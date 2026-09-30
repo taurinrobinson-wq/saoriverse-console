@@ -6,6 +6,7 @@
       "id": 1,
       "type": "npc_turn",
       "active_speaker": "Saori",
+      "display_name": "",
       "portrait_expression": "mysterious",
       "setting_description": "You spot an older woman moving quickly along the desert road, a bundle of parts strapped under her arm.",
       "prompt": "You are on your way to the market?",
@@ -158,23 +159,23 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Saori",
+      "display_name": "",
       "portrait_expression": "determined",
       "setting_description": "The older woman reaches into her pocket and produces a strange device, its surface humming faintly.",
-      "prompt": "I found this. I can't get it working, maybe you\u00e2\u20ac\u2122ll have better luck.",
+      "prompt": "I found this. I can't get it working, maybe youâ€™ll have better luck.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
-          "text": "I\u00e2\u20ac\u00a6 alright. I'll take it.",
+          "text": "Iâ€¦ alright. I'll take it.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -247,7 +248,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Maybe. I don\u00e2\u20ac\u2122t know.",
+          "npc_response": "Maybe. I donâ€™t know.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "mysterious",
           "tone_effects": [
@@ -282,7 +283,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "I\u00e2\u20ac\u2122m sorry. I can\u00e2\u20ac\u2122t explain. I need to go.",
+          "npc_response": "Iâ€™m sorry. I canâ€™t explain. I need to go.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
@@ -326,13 +327,13 @@
       "system_triggers": [],
       "diary_entries": [
         "She gave me a strange device. What does it do?"
-      ],
-      "display_name": ""
+      ]
     },
     {
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Saori",
+      "display_name": "",
       "portrait_expression": "haunted",
       "setting_description": "The older woman's gaze becomes urgent, scanning the horizon as if watching for something.",
       "prompt": "I have to go.",
@@ -375,7 +376,7 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "I didn't get your name\u00e2\u20ac\u201d",
+          "text": "I didn't get your nameâ€”",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -441,7 +442,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Please\u00e2\u20ac\u201djust tell me something.",
+          "text": "Pleaseâ€”just tell me something.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -484,13 +485,13 @@
         }
       ],
       "next_beat_id": 4,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 4,
       "type": "player_inner",
       "active_speaker": "Lioren",
+      "display_name": "",
       "portrait_expression": "cautious",
       "setting_description": "",
       "prompt": "I couldn't hear what she said. It was like the wind swallowed her voice and she left so suddenly.",
@@ -520,8 +521,7 @@
       "system_triggers": [],
       "diary_entries": [
         "Met a mysterious older woman. She didn't give me her name, but she gave me this strange device."
-      ],
-      "display_name": ""
+      ]
     }
   ]
 }

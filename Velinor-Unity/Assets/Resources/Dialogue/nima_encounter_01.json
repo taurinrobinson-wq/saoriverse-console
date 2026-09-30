@@ -8,6 +8,7 @@
       "id": 1,
       "type": "player_posture",
       "active_speaker": "Lioren",
+      "display_name": "Lioren",
       "portrait_expression": "cautious",
       "setting_description": "",
       "prompt": "She hasn't noticed me. She is entirely lost in thought. Nima stands alone in the market square, staring at a cracked patch of ground. The ambient noise feels distant around her stillness.",
@@ -224,13 +225,13 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": [],
-      "display_name": "Lioren"
+      "system_triggers": []
     },
     {
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Nima",
+      "display_name": "Nima",
       "portrait_expression": "worried",
       "setting_description": "",
       "prompt": "NIMA: \"You picked a bad day to come here.\" Nima shifts her stance slightly. Her voice breaks the silence.",
@@ -292,11 +293,11 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Ravi mentioned this place\u00e2\u20ac\u00a6 I didn't know why.",
+          "text": "Ravi mentioned this placeâ€¦ I didn't know why.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "NIMA: \"He shouldn't have. Not today. He talks when he's hurting. I\u00e2\u20ac\u00a6 don't.\"",
+          "npc_response": "NIMA: \"He shouldn't have. Not today. He talks when he's hurting. Iâ€¦ don't.\"",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "angry",
           "tone_effects": [
@@ -396,7 +397,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "You look\u00e2\u20ac\u00a6 heavier than before.",
+          "text": "You lookâ€¦ heavier than before.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -447,27 +448,27 @@
         }
       ],
       "next_beat_id": 3,
-      "system_triggers": [],
-      "display_name": "Nima"
+      "system_triggers": []
     },
     {
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Nima",
+      "display_name": "",
       "portrait_expression": "resigned",
       "setting_description": "",
-      "prompt": "NIMA: \"I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I just\u00e2\u20ac\u00a6 don't.\"",
+      "prompt": "NIMA: \"I tell myself to leave. Every morning. Every night. Pack up, walk away. But I don't. I justâ€¦ don't.\"",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [],
       "next_beat_id": 4,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 4,
       "type": "npc_turn",
       "active_speaker": "Nima",
+      "display_name": "",
       "portrait_expression": "worried",
       "setting_description": "",
       "prompt": "NIMA: \"This is where she was trapped. The ground shifted. The wall came down. No one could reach her.\"",
@@ -580,8 +581,7 @@
         }
       ],
       "next_beat_id": 0,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     }
   ]
 }

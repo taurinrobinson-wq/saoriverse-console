@@ -8,6 +8,7 @@
       "id": 1,
       "type": "npc_turn",
       "active_speaker": "Kaelen",
+      "display_name": "",
       "portrait_expression": "",
       "setting_description": "",
       "prompt": "KAELEN: \"Hey! You! You're that newcomer, right? Look... I shouldn't be talking to you. But I saw you with them. And I need to say something.\"",
@@ -224,13 +225,13 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Kaelen",
+      "display_name": "",
       "portrait_expression": "",
       "setting_description": "",
       "prompt": "KAELEN: \"That thing. On your belt. The Codex. Where'd you get something like that?\"",
@@ -343,13 +344,13 @@
         }
       ],
       "next_beat_id": 3,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Kaelen",
+      "display_name": "",
       "portrait_expression": "",
       "setting_description": "",
       "prompt": "KAELEN: \"I was there. When it happened. The collapse. I could've stopped it. I should've. But I froze.\"",
@@ -566,8 +567,7 @@
         }
       ],
       "next_beat_id": 0,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     }
   ]
 }

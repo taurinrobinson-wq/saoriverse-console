@@ -81,8 +81,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b3",
-            "\u00ce\u00b5"
+            "Î³",
+            "Îµ"
           ],
           "malrikTone": "confused_drawn",
           "playerChoices": [
@@ -123,8 +123,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00a9",
-            "\u00ce\u00b1"
+            "Î©",
+            "Î±"
           ],
           "malrikTone": "vulnerable_discovering",
           "playerChoices": [
@@ -148,7 +148,7 @@
           "segmentId": "malrik_act5_seg3_archivist_domain",
           "title": "The Archive: His Kingdom of Order",
           "dialogueContext": "Malrik shows player the Archive, speaking about his work and unconscious purpose",
-          "npcLine": "The Archive is where meaning is preserved. Every fragment I catalog, every inscription I record\u00e2\u20ac\u201dI'm building a memorial to what was lost. Not just objects. Memory itself.",
+          "npcLine": "The Archive is where meaning is preserved. Every fragment I catalog, every inscription I recordâ€”I'm building a memorial to what was lost. Not just objects. Memory itself.",
           "requiredGates": [
             {
               "gateId": "act5_midpoint",
@@ -166,8 +166,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b2",
-            "\u00ce\u00b5"
+            "Î²",
+            "Îµ"
           ],
           "malrikTone": "obsessed_driven",
           "playerChoices": [
@@ -189,7 +189,7 @@
               "toneId": "T_purpose",
               "toneType": "T",
               "toneName": "Trust",
-              "playerLine": "Your leadership of the Skeptics\u00e2\u20ac\u201dit comes from a need to protect others from suffering what you've suffered. From loss without knowing what was lost.",
+              "playerLine": "Your leadership of the Skepticsâ€”it comes from a need to protect others from suffering what you've suffered. From loss without knowing what was lost.",
               "malrikResponse": "I believe in order and evidence because chaos took something from me. That's not leadership. That's fear wearing the mask of philosophy.",
               "statEffects": {
                 "empathy": 0.2,
@@ -213,7 +213,7 @@
         {
           "segmentId": "malrik_act6_seg1_the_lantern_discovery",
           "title": "Recognition Without Memory",
-          "dialogueContext": "Elenya finds a lighthouse lantern and speaks its meaning to player. Malrik, elsewhere, pauses\u00e2\u20ac\u201dsomething triggers.",
+          "dialogueContext": "Elenya finds a lighthouse lantern and speaks its meaning to player. Malrik, elsewhere, pausesâ€”something triggers.",
           "npcLine": "I was cataloguing broken objects when I felt... a pull. Toward a lighthouse lantern I've never seen before. My hands knew to repair it before my mind understood why.",
           "requiredGates": [
             {
@@ -225,8 +225,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b5"
+            "Î»",
+            "Îµ"
           ],
           "malrikTone": "compelled_uncertain",
           "playerChoices": [
@@ -249,7 +249,7 @@
           "segmentId": "malrik_act6_seg2_lighthouse_restoration",
           "title": "A Place Worth Fixing",
           "dialogueContext": "Malrik restores the lighthouse reading room. Elenya is drawn to it. They stand together in the light.",
-          "npcLine": "I restored the lighthouse because its structure had historical significance. That is what I tell myself. But the truth is simpler and more terrifying\u00e2\u20ac\u201dsomething in me knew this was where I needed to be.",
+          "npcLine": "I restored the lighthouse because its structure had historical significance. That is what I tell myself. But the truth is simpler and more terrifyingâ€”something in me knew this was where I needed to be.",
           "requiredGates": [
             {
               "gateId": "malrik_acts_intuitive",
@@ -267,9 +267,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b1",
-            "\u00ce\u00a9"
+            "Î»",
+            "Î±",
+            "Î©"
           ],
           "malrikTone": "trembling_on_edge",
           "playerChoices": [
@@ -311,8 +311,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b2",
-            "\u00ce\u00b5"
+            "Î²",
+            "Îµ"
           ],
           "malrikTone": "rigid_fearful",
           "playerChoices": [
@@ -334,7 +334,7 @@
               "toneId": "O_pattern",
               "toneType": "O",
               "toneName": "Observation",
-              "playerLine": "When you speak about her, your voice changes. Your philosophy softens. That's not weakness\u00e2\u20ac\u201dthat's integration.",
+              "playerLine": "When you speak about her, your voice changes. Your philosophy softens. That's not weaknessâ€”that's integration.",
               "malrikResponse": "Her presence disrupts my clarity. And I hate it. And I... don't want it to stop.",
               "statEffects": {
                 "empathy": 0.2,
@@ -359,7 +359,7 @@
           "segmentId": "malrik_act7_seg1_lighthouse_reunion",
           "title": "Two Halves of a Broken Circle",
           "dialogueContext": "Malrik and Elenya stand together in the restored lighthouse light",
-          "npcLine": "I remember... something. Someone. A presence. And I remember losing it. That ache that never quite went away\u00e2\u20ac\u201dshe was the shape of it.",
+          "npcLine": "I remember... something. Someone. A presence. And I remember losing it. That ache that never quite went awayâ€”she was the shape of it.",
           "requiredGates": [
             {
               "gateId": "malrik_ready",
@@ -377,9 +377,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00a9",
-            "\u00ce\u00b1"
+            "Î»",
+            "Î©",
+            "Î±"
           ],
           "malrikTone": "breaking_open",
           "playerChoices": [
@@ -416,7 +416,7 @@
           "segmentId": "malrik_act7_seg2_acknowledgment",
           "title": "Precision and Presence",
           "dialogueContext": "Malrik speaks the truth he's discovered: they do not return to who they were",
-          "npcLine": "We are not the same people we were before. The collapse changed us. But this\u00e2\u20ac\u201dstanding here, recognizing each other through the ruins\u00e2\u20ac\u201dthis might be something stronger than what we had. Because it's chosen.",
+          "npcLine": "We are not the same people we were before. The collapse changed us. But thisâ€”standing here, recognizing each other through the ruinsâ€”this might be something stronger than what we had. Because it's chosen.",
           "requiredGates": [
             {
               "gateId": "malrik_names_love_gate",
@@ -434,9 +434,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b1",
-            "\u00ce\u00b5"
+            "Î»",
+            "Î±",
+            "Îµ"
           ],
           "malrikTone": "integrated_whole",
           "playerChoices": [
@@ -444,7 +444,7 @@
               "toneId": "T_integration",
               "toneType": "T",
               "toneName": "Trust",
-              "playerLine": "You've integrated both parts of yourself\u00e2\u20ac\u201dthe seeker of order and the one capable of presence.",
+              "playerLine": "You've integrated both parts of yourselfâ€”the seeker of order and the one capable of presence.",
               "malrikResponse": "She taught me that order and presence aren't contradictions. They're different languages for the same truth. And now I speak both.",
               "statEffects": {
                 "empathy": 0.15
@@ -458,8 +458,8 @@
         {
           "segmentId": "malrik_act7_seg3_building_debate",
           "title": "The Archive Building: Boundaries and Sacred Space",
-          "dialogueContext": "Malrik debates the integration of ritual into the Shared Archive Building\u00e2\u20ac\u201da position that challenges his core philosophy",
-          "npcLine": "She wants to place ritual flames in the Archive. Sacred integration, she calls it. I believe structures must remain pure\u00e2\u20ac\u201dpreservation without interpretation. But when I see her vision... I wonder if my purity is just another form of fear.",
+          "dialogueContext": "Malrik debates the integration of ritual into the Shared Archive Buildingâ€”a position that challenges his core philosophy",
+          "npcLine": "She wants to place ritual flames in the Archive. Sacred integration, she calls it. I believe structures must remain pureâ€”preservation without interpretation. But when I see her vision... I wonder if my purity is just another form of fear.",
           "requiredGates": [
             {
               "gateId": "act7_midpoint",
@@ -477,8 +477,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b5"
+            "Î»",
+            "Îµ"
           ],
           "malrikTone": "conflicted_opening",
           "playerChoices": [
@@ -500,7 +500,7 @@
               "toneId": "N_synthesis",
               "toneType": "N",
               "toneName": "Narrative Presence",
-              "playerLine": "She chose to forget to survive. You chose to preserve to grieve. But you're both trying to honor the same thing\u00e2\u20ac\u201dthe love you can't quite remember. The building should reflect both of you.",
+              "playerLine": "She chose to forget to survive. You chose to preserve to grieve. But you're both trying to honor the same thingâ€”the love you can't quite remember. The building should reflect both of you.",
               "malrikResponse": "The building as a memorial to who we were. And who we're becoming. Yes... that's why I kept restoring that lighthouse. I was building a bridge back to her without knowing it.",
               "statEffects": {
                 "empathy": 0.2,
@@ -525,7 +525,7 @@
           "segmentId": "malrik_act8_seg1_epilogue_choice",
           "title": "Two Paths Forward",
           "dialogueContext": "Malrik contemplates the paradox of his love. Player can influence his choice.",
-          "npcLine": "I have a choice now. I can spend my life trying to reconstruct the past we lost. Or I can accept that the past is gone, and build something new from what remains. She has already made her choice\u00e2\u20ac\u201dto let the past go, to survive the present.",
+          "npcLine": "I have a choice now. I can spend my life trying to reconstruct the past we lost. Or I can accept that the past is gone, and build something new from what remains. She has already made her choiceâ€”to let the past go, to survive the present.",
           "requiredGates": [
             {
               "gateId": "malrik_complete",
@@ -543,9 +543,9 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b5",
-            "\u00ce\u00b1"
+            "Î»",
+            "Îµ",
+            "Î±"
           ],
           "malrikTone": "choosing_presence",
           "playerChoices": [
@@ -554,7 +554,7 @@
               "toneType": "T",
               "toneName": "Trust",
               "playerLine": "Let go of trying to reconstruct. What matters is that you're here now, together, present.",
-              "malrikResponse": "You're right. The archive is important\u00e2\u20ac\u201dit honors what was lost. But I've been preserving the past at the cost of the present. That ends now. Elenya chose to live. So will I.",
+              "malrikResponse": "You're right. The archive is importantâ€”it honors what was lost. But I've been preserving the past at the cost of the present. That ends now. Elenya chose to live. So will I.",
               "statEffects": {
                 "empathy": 0.2
               },
@@ -566,7 +566,7 @@
               "toneId": "N_synthesis",
               "toneType": "N",
               "toneName": "Narrative Presence",
-              "playerLine": "Both. Archive the memory of your love. And live it new with her. Don't choose\u00e2\u20ac\u201dintegrate.",
+              "playerLine": "Both. Archive the memory of your love. And live it new with her. Don't chooseâ€”integrate.",
               "malrikResponse": "Integration. Yes. That's the word. The archive as a memorial to what we were. Our life together as the proof of what we've become.",
               "statEffects": {
                 "empathy": 0.25,
@@ -602,8 +602,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b5",
-            "\u00ce\u00b2"
+            "Îµ",
+            "Î²"
           ],
           "malrikTone": "challenged_intrigued",
           "playerChoices": [
@@ -612,7 +612,7 @@
               "toneType": "T",
               "toneName": "Trust (Order)",
               "playerLine": "Memory is what can be verified. Structure is how we keep it safe.",
-              "malrikResponse": "Verified by whom? And safe from what\u00e2\u20ac\u201dforgetting, or feeling?",
+              "malrikResponse": "Verified by whom? And safe from whatâ€”forgetting, or feeling?",
               "statEffects": {
                 "empathy": -0.05,
                 "observation": 0.1
@@ -672,8 +672,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b3",
-            "\u00ce\u00b1"
+            "Î³",
+            "Î±"
           ],
           "malrikTone": "vulnerable_confused",
           "playerChoices": [
@@ -738,8 +738,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b2",
-            "\u00ce\u00b5"
+            "Î²",
+            "Îµ"
           ],
           "malrikTone": "territorial_softening",
           "playerChoices": [
@@ -808,8 +808,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b1",
-            "\u00ce\u00b5"
+            "Î±",
+            "Îµ"
           ],
           "malrikTone": "peaceful_tender",
           "playerChoices": [
@@ -830,7 +830,7 @@
               "toneId": "T_reciprocal",
               "toneType": "T",
               "toneName": "Trust",
-              "playerLine": "Whatever this is\u00e2\u20ac\u201dyou and her\u00e2\u20ac\u201dit's real. I can see that.",
+              "playerLine": "Whatever this isâ€”you and herâ€”it's real. I can see that.",
               "malrikResponse": "It is. And it terrifies me. Because I have no framework for something I can't measure or control.",
               "statEffects": {
                 "empathy": 0.15,
@@ -873,8 +873,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b5",
-            "\u00ce\u00b1"
+            "Îµ",
+            "Î±"
           ],
           "malrikTone": "contemplative_seeking",
           "playerChoices": [
@@ -916,8 +916,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00bb",
-            "\u00ce\u00b1"
+            "Î»",
+            "Î±"
           ],
           "malrikTone": "awed_gentle",
           "playerChoices": [
@@ -961,8 +961,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b8",
-            "\u00ce\u00b3"
+            "Î¸",
+            "Î³"
           ],
           "malrikTone": "lost_grieving_unaware",
           "playerChoices": [
@@ -983,7 +983,7 @@
               "toneId": "N_bearing_witness",
               "toneType": "N",
               "toneName": "Narrative Presence",
-              "playerLine": "That hollow place\u00e2\u20ac\u201dit remembers. Your body remembers even when your mind doesn't.",
+              "playerLine": "That hollow placeâ€”it remembers. Your body remembers even when your mind doesn't.",
               "malrikResponse": "Then my body is better than my mind. My mind only offers silence.",
               "statEffects": {
                 "empathy": 0.15
@@ -1016,8 +1016,8 @@
             }
           ],
           "emotionalSignals": [
-            "\u00ce\u00b2",
-            "\u00ce\u00b5"
+            "Î²",
+            "Îµ"
           ],
           "malrikTone": "obsessed_methodical",
           "playerChoices": [
@@ -1046,9 +1046,9 @@
       "description": "In the restored lighthouse, Malrik and Elenya stand in the light. The silence between them is full.",
       "trigger": "malrik_integrated_wholeness",
       "emotionalSignals": [
-        "\u00ce\u00bb",
-        "\u00ce\u00b1",
-        "\u00ce\u00a9"
+        "Î»",
+        "Î±",
+        "Î©"
       ],
       "npcLine": "I don't remember the exact words I spoke before. But I remember this: that you were worth every attempt to arrange the world correctly. That loving you taught me the difference between order and presence. And that I would like to spend however much time we have left learning both with you."
     }

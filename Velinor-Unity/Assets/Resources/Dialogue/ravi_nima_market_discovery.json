@@ -9,6 +9,7 @@
       "id": 1,
       "type": "player_posture",
       "active_speaker": "Lioren",
+      "display_name": "",
       "portrait_expression": "cautious",
       "setting_description": "The Velhara marketplace thrums with afternoon energy. Vendors shout prices, crowds move in tight currents. Near the fountain, two figures stand completely still against the rushing crowd, staring at you.",
       "prompt": "They're staring at me. What should I do.",
@@ -225,13 +226,13 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 2,
       "type": "npc_turn",
       "active_speaker": "Nima",
+      "display_name": "Young Woman",
       "portrait_expression": "disgusted",
       "setting_description": "",
       "prompt": "What do you want anyway? We don't trust outsiders.",
@@ -397,7 +398,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long road\u00e2\u20ac\u00a6 that's all.",
+          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long roadâ€¦ that's all.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -448,16 +449,16 @@
         }
       ],
       "next_beat_id": 3,
-      "system_triggers": [],
-      "display_name": "Young Woman"
+      "system_triggers": []
     },
     {
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Ravi",
+      "display_name": "Young Man",
       "portrait_expression": "resigned",
       "setting_description": "",
-      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' lately\u00e2\u20ac\u00a6 The buildings are\u00e2\u20ac\u00a6 unstable. Our daughter\u00e2\u20ac\u00a6",
+      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' latelyâ€¦ The buildings areâ€¦ unstable. Our daughterâ€¦",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -485,13 +486,13 @@
             "Nima"
           ]
         }
-      ],
-      "display_name": "Young Man"
+      ]
     },
     {
       "id": 3.1,
       "type": "npc_turn",
       "active_speaker": "Nima",
+      "display_name": "Young Woman",
       "portrait_expression": "disgusted",
       "setting_description": "",
       "prompt": "Ravi, take your own advice.",
@@ -514,18 +515,18 @@
         }
       ],
       "next_beat_id": 4,
-      "system_triggers": [],
-      "display_name": "Young Woman"
+      "system_triggers": []
     },
     {
       "id": 4,
       "type": "npc_turn",
       "active_speaker": "Ravi",
+      "display_name": "Ravi",
       "portrait_expression": "determined",
       "setting_description": "",
-      "prompt": "Nima\u00e2\u20ac\u00a6 I can't have someone else\u00e2\u20ac\u00a6",
+      "prompt": "Nimaâ€¦ I can't have someone elseâ€¦",
       "audio_clip": "",
-      "shared_beat": "Anyway\u00e2\u20ac\u00a6 I hope you will be careful.",
+      "shared_beat": "Anywayâ€¦ I hope you will be careful.",
       "tone_choices": [
         {
           "tone": "T",
@@ -582,7 +583,7 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "It's not my business but\u00e2\u20ac\u00a6 did something happen to your daughter?",
+          "text": "It's not my business butâ€¦ did something happen to your daughter?",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -634,7 +635,7 @@
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "I've had some\u00e2\u20ac\u00a6 losses\u00e2\u20ac\u00a6 I don't need you to get into details.",
+          "text": "I've had someâ€¦ lossesâ€¦ I don't need you to get into details.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -686,7 +687,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I don't know what happened to your daughter, but you seem really\u00e2\u20ac\u00a6 impacted. Let me know if I can help with something.",
+          "text": "I don't know what happened to your daughter, but you seem reallyâ€¦ impacted. Let me know if I can help with something.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -741,19 +742,19 @@
         {
           "type": "diary_append",
           "data": [
-            "Ravi mentioned an unstable building\u00e2\u20ac\u00a6 and a daughter."
+            "Ravi mentioned an unstable buildingâ€¦ and a daughter."
           ]
         }
-      ],
-      "display_name": "Ravi"
+      ]
     },
     {
       "id": 5,
       "type": "player_posture",
       "active_speaker": "Lioren",
+      "display_name": "",
       "portrait_expression": "cautious",
       "setting_description": "",
-      "prompt": "This thing\u00e2\u20ac\u00a6 I need to figure out what this is.",
+      "prompt": "This thingâ€¦ I need to figure out what this is.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -809,8 +810,7 @@
             "strength": 0.8
           }
         }
-      ],
-      "display_name": ""
+      ]
     }
   ]
 }

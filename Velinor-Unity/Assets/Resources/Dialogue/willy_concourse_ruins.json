@@ -6,9 +6,10 @@
       "id": 1,
       "type": "npc_turn",
       "active_speaker": "Willy",
+      "display_name": "",
       "portrait_expression": "neutral",
       "setting_description": "The Concourse Ruins, northeast of the market square. Debris litters the corridor. A strange man digs through a shifting pile.",
-      "prompt": "Careful. That pile shifts. Saw a man lose a leg under one just like it. Ah\u00e2\u20ac\u2018hahaha *cough* terrible, terrible thing.",
+      "prompt": "Careful. That pile shifts. Saw a man lose a leg under one just like it. Ahâ€‘hahaha *cough* terrible, terrible thing.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -105,7 +106,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Led ya? Hah. Everyone's chasin somethin in these ruins. Most of it stays buried\u00e2\u20ac\u201dexcept when I'm chasin it. Ah\u00e2\u20ac\u2018hahaha\u00e2\u20ac\u201dcough.",
+          "npc_response": "Led ya? Hah. Everyone's chasin somethin in these ruins. Most of it stays buriedâ€”except when I'm chasin it. Ahâ€‘hahahaâ€”cough.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -186,27 +187,27 @@
         }
       ],
       "next_beat_id": 2,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 2,
       "type": "npc_shared",
       "active_speaker": "Willy",
+      "display_name": "",
       "portrait_expression": "neutral",
       "setting_description": "",
       "prompt": "",
       "audio_clip": "",
-      "shared_beat": "Anyway, whatever you're after\u00e2\u20ac\u00a6 it's under that mess. And you're not gettin' ta it today.",
+      "shared_beat": "Anyway, whatever you're afterâ€¦ it's under that mess. And you're not gettin' ta it today.",
       "tone_choices": [],
       "next_beat_id": 3,
-      "system_triggers": [],
-      "display_name": ""
+      "system_triggers": []
     },
     {
       "id": 3,
       "type": "player_inner",
       "active_speaker": "Lioren",
+      "display_name": "",
       "portrait_expression": "determined",
       "setting_description": "",
       "prompt": "He's dismissive, but maybe I can convince him.",
@@ -220,7 +221,7 @@
           "audio_clip_on_choice": "",
           "result_text": "The older man recognizes your authority.",
           "show_result_in_notification": true,
-          "npc_response": "Hah. Straight to orders, eh? Ya got spine! Fine, fine\u00e2\u20ac\u00a6 I'll take a look. But if it falls, I'm runnin'. And maybe laughin' ah\u00e2\u20ac\u2018hahaha *cough*.",
+          "npc_response": "Hah. Straight to orders, eh? Ya got spine! Fine, fineâ€¦ I'll take a look. But if it falls, I'm runnin'. And maybe laughin' ahâ€‘hahaha *cough*.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -345,7 +346,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "If someone got hurt here before\u00e2\u20ac\u00a6 maybe helping me keeps it from happening again.",
+          "text": "If someone got hurt here beforeâ€¦ maybe helping me keeps it from happening again.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -400,13 +401,13 @@
         {
           "type": "glyph_appear"
         }
-      ],
-      "display_name": ""
+      ]
     },
     {
       "id": 4,
       "type": "player_posture",
       "active_speaker": "Lioren",
+      "display_name": "",
       "portrait_expression": "resolved",
       "setting_description": "",
       "prompt": "Debris clears. A cracked glyph console flickers to life, unstable, trembling with residual energy.",
@@ -450,13 +451,13 @@
         {
           "type": "glyph_collect"
         }
-      ],
-      "display_name": ""
+      ]
     },
     {
       "id": 5,
       "type": "npc_turn",
       "active_speaker": "Willy",
+      "display_name": "",
       "portrait_expression": "neutral",
       "setting_description": "",
       "prompt": "Hey there, hold on one sec. Willy don' work for free.",
@@ -466,11 +467,11 @@
         {
           "tone": "T",
           "label": "Trust",
-          "text": "Oh yeah, right of course. I don't have much right now\u00e2\u20ac\u00a6.",
+          "text": "Oh yeah, right of course. I don't have much right nowâ€¦.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Yeah, figures. Anyway\u00e2\u20ac\u00a6 ya don' need that metal thing, do ya?",
+          "npc_response": "Yeah, figures. Anywayâ€¦ ya don' need that metal thing, do ya?",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -509,11 +510,11 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Yeah, you were working pretty hard. I don't have much\u00e2\u20ac\u00a6 what do you want.",
+          "text": "Yeah, you were working pretty hard. I don't have muchâ€¦ what do you want.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ah\u00e2\u20ac\u00a6keep a lookout while I take a closer peek at it\u00e2\u20ac\u00a6if ya catch my drift.",
+          "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ahâ€¦keep a lookout while I take a closer peek at itâ€¦if ya catch my drift.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -552,7 +553,7 @@
         {
           "tone": "N",
           "label": "Narrative",
-          "text": "Yeah, of course. You work hard, you get something, right. Uh\u00e2\u20ac\u00a6I don't have much\u00e2\u20ac\u00a6",
+          "text": "Yeah, of course. You work hard, you get something, right. Uhâ€¦I don't have muchâ€¦",
           "audio_clip_on_choice": "",
           "result_text": "Willy appreciates your practical approach.",
           "show_result_in_notification": true,
@@ -595,7 +596,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Sorry, Willy\u00e2\u20ac\u00a6 I didn't even ask your name. You've been really helpful. What can I do for you.",
+          "text": "Sorry, Willyâ€¦ I didn't even ask your name. You've been really helpful. What can I do for you.",
           "audio_clip_on_choice": "",
           "result_text": "Willy is somewhat annoyed at your sudden display of affection.",
           "show_result_in_notification": true,
@@ -644,13 +645,13 @@
             "Willy"
           ]
         }
-      ],
-      "display_name": ""
+      ]
     },
     {
       "id": 6,
       "type": "player_inner",
       "active_speaker": "Lioren",
+      "display_name": "",
       "portrait_expression": "sad",
       "setting_description": "",
       "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders.",
@@ -701,14 +702,13 @@
         {
           "type": "diary_append",
           "data": [
-            "Met a scrapper named Willy in the Concourse Ruins. He was an odd character\u00e2\u20ac\u201dlaughing at suffering, coughing constantly\u00e2\u20ac\u201dbut helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."
+            "Met a scrapper named Willy in the Concourse Ruins. He was an odd characterâ€”laughing at suffering, coughing constantlyâ€”but helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."
           ]
         },
         {
           "type": "close_dialogue"
         }
-      ],
-      "display_name": ""
+      ]
     }
   ]
 }

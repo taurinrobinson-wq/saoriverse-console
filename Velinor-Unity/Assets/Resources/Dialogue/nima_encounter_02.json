@@ -160,7 +160,7 @@
         },
         {
           "tone_str": "Empathy",
-          "playerLine": "Working at a stall like this\u00e2\u20ac\u00a6 it must be exhausting. How long have you been doing this?",
+          "playerLine": "Working at a stall like thisâ€¦ it must be exhausting. How long have you been doing this?",
           "npcResponse": "NIMA: \"Exhausting? That's a word for people who know what rest feels like. This is just survival.\"",
           "target": "nima_02_passage_2",
           "tone_effects": {
