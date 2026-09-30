@@ -567,7 +567,19 @@
         }
       ],
       "next_beat_id": 0,
-      "system_triggers": []
+      "system_triggers": [
+        {
+          "type": "disable_npc",
+          "key": "Kaelen",
+          "note": "Hide Kaelen when leaving InsideMarket_00 after confession"
+        },
+        {
+          "type": "set_flag",
+          "key": "kaelen_confessed",
+          "value": true,
+          "note": "Marks Kaelen's confession about Ophina"
+        }
+      ]
     }
   ]
 }

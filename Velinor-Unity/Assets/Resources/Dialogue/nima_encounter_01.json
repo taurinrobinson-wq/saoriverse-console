@@ -1368,6 +1368,17 @@
         },
         {
           "type": "trigger_codex_pulse"
+        },
+        {
+          "type": "disable_npc",
+          "key": "Nima",
+          "note": "Hide Nima when leaving InsideMarket_00 after shared loss dialogue"
+        },
+        {
+          "type": "set_flag",
+          "key": "nima_encounter_complete",
+          "value": true,
+          "note": "Marks Nima's revelation about Ophina's death"
         }
       ]
     }

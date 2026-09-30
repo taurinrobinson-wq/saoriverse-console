@@ -6,7 +6,7 @@
       "id": 1,
       "type": "npc_turn",
       "active_speaker": "Willy",
-      "display_name": "",
+      "display_name": "Older Man",
       "portrait_expression": "neutral",
       "setting_description": "The Concourse Ruins, northeast of the market square. Debris litters the corridor. A strange man digs through a shifting pile.",
       "prompt": "Careful. That pile shifts. Saw a man lose a leg under one just like it. Ahâ€‘hahaha *cough* terrible, terrible thing.",
@@ -193,7 +193,7 @@
       "id": 2,
       "type": "npc_shared",
       "active_speaker": "Willy",
-      "display_name": "",
+      "display_name": "Older Man",
       "portrait_expression": "neutral",
       "setting_description": "",
       "prompt": "",
@@ -207,7 +207,7 @@
       "id": 3,
       "type": "player_inner",
       "active_speaker": "Lioren",
-      "display_name": "",
+      "display_name": "Lioren",
       "portrait_expression": "determined",
       "setting_description": "",
       "prompt": "He's dismissive, but maybe I can convince him.",
@@ -457,7 +457,7 @@
       "id": 5,
       "type": "npc_turn",
       "active_speaker": "Willy",
-      "display_name": "",
+      "display_name": "Willy",
       "portrait_expression": "neutral",
       "setting_description": "",
       "prompt": "Hey there, hold on one sec. Willy don' work for free.",
@@ -651,7 +651,7 @@
       "id": 6,
       "type": "player_inner",
       "active_speaker": "Lioren",
-      "display_name": "",
+      "display_name": "Lioren",
       "portrait_expression": "sad",
       "setting_description": "",
       "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders.",
@@ -707,6 +707,12 @@
         },
         {
           "type": "close_dialogue"
+        },
+        {
+          "type": "set_flag",
+          "key": "willy_dialogue_complete",
+          "value": true,
+          "note": "Enables Kaelen to appear in InsideMarket_00"
         }
       ]
     }
