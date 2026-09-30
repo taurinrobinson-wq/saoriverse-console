@@ -179,7 +179,7 @@
             "id": 3,
             "type": "player_inner",
             "active_speaker": "Lioren",
-            "portrait_expression": "neutral",
+            "portrait_expression": "determined",
             "prompt": "He's dismissive, but maybe I can convince him.",
             "tone_choices": [
                 {
@@ -357,7 +357,7 @@
             "id": 4,
             "type": "player_posture",
             "active_speaker": "Lioren",
-            "portrait_expression": "neutral",
+            "portrait_expression": "resolved",
             "prompt": "Debris clears. A cracked glyph console flickers to life, unstable, trembling with residual energy.",
             "tone_choices": [
                 {
@@ -571,7 +571,7 @@
             "id": 6,
             "type": "player_inner",
             "active_speaker": "Lioren",
-            "portrait_expression": "neutral",
+            "portrait_expression": "sad",
             "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders.",
             "tone_choices": [
                 {
