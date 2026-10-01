@@ -33,6 +33,45 @@ Material abundance exists. Knowledge does not. Skills can be rediscovered throug
 
 ---
 
+## The Collapse & Survival: The Agro-Research Farm
+
+### The Moment of Failure
+
+The Corelink system did not roar or shatter—it simply broke the part of the human mind that understood the world. Citizens found themselves unable to interpret interfaces, decode alarms, or navigate systems they had relied on completely. The glass city of Velhara became a sealed oven as climate systems drifted and survivors had to escape through emergency hatches, spilling into a world they could no longer cognitively process.
+
+### The Salvation: Embodied Knowledge
+
+What saved the survivors was not technology, science, or planning. It was **embodied memory**—the skills that lived in the body when the mind had failed.
+
+An agro-research test farm stood outside Velhara's enclosure, originally built to study how to grow food in a dying world. When the escaping citizens fled into its fields, starving and confused, they found the only place where anything still grew. The agro-engineers stationed there—people whose cognition was fractured like everyone else's—could not remember why they had been there or how the systems worked. But their **hands remembered the land**.
+
+They shouted instinctive instructions to the crowd:
+- "Take the low-growing roots, they store well"
+- "Grab the red pods, they survive heat"
+- "Fill your sleeves with the small seeds, they sprout fast"
+
+In the chaos, their embodied knowledge became the difference between life and death. The engineered crops from the test farm became the foundation of survival—not because anyone understood agronomy, but because people's bodies recognized the food.
+
+### Agricultural Foundation
+
+The engineered crops that saved the survivors are now the backbone of Velhara's subsistence:
+
+- **Amaranth** — High-protein grain heads, stores long-term, thrives in extreme heat
+- **Lentils** — Hardy root crops that survive drought, provide dense nutrition
+- **Millet** — Small seeds that sprout fast, resistant to poor soil
+- **Teff analogs** — Tiny grains that grow in marginal conditions
+- **Buckwheat hybrids** — Experimental strains that yield quickly and resist heat stress
+- **Bitter greens** — Fast-growing leafy crops that survive high temperatures
+- **Fungi crops** — Grown in caves and sheltered areas, scraped from cave walls
+
+These crops were designed before the collapse to withstand heat, drought, nutrient-poor soil, and rapid biome shifts. They require no complex cognition to recognize or prepare—only that the body remembers hunger when it sees food.
+
+### The Caves: Shelter Without Understanding
+
+The survivors fled toward caves seeking shelter from the climate's violence. Cold, mineral-rich, and dark, caves offered safety that no engineered system could provide. For years after the collapse, people lived in caves, cooking over scavenged metal, boiling water in cracked containers, shaping flatbread from crushed seeds. The engineered crops from the test farm became the seed bank of a new world.
+
+---
+
 ## Architecture & Habitation
 
 ### Where Do They Live?
@@ -85,14 +124,19 @@ They **can** build:
 
 ### Embodied Memory & Specialization
 
-**Some individuals rediscover skills through embodied memory** — not through intellectual understanding, but through muscle memory and intuition.
+**Some individuals rediscover skills through embodied memory** — not through intellectual understanding, but through muscle memory and intuition. This is not cultural transmission or teaching; it is the body remembering what the mind has forgotten.
+
+The most common example in Velhara is **agro-engineering**. Survivors with parents or experience in agriculture retained no intellectual understanding of plant biology or cultivation, yet their hands remembered how to recognize crops, prepare soil, and tend growing things. In the immediate aftermath of the collapse, these fragmented skills meant the difference between starvation and survival.
+
+Other embodied specialists include:
 
 - A former carpenter cannot explain joinery, but their hands can still make a sturdy table
 - A former seamstress cannot design clothing, but can stitch repairs perfectly
 - A former engineer cannot rebuild infrastructure, but can rig a working pulley system
 - A former mason recognizes stone patterns and can repair walls, but cannot explain the principles
+- A former agro-engineer cannot discuss cultivation theory, but can identify which seeds to plant, which roots store long, and when to harvest
 
-This gives Velhara **NPC specialization without civilization**. People are useful not because they understand systems, but because their bodies remember fragments of skill.
+This gives Velhara **NPC specialization without civilization**. People are useful not because they understand systems, but because their bodies remember fragments of skill. The most valued individuals are those whose embodied memory aligns with survival needs: those who can grow food, tend wounds, repair shelter, or predict weather patterns.
 
 ---
 
@@ -144,6 +188,7 @@ The visual signature of Velhara is **post-memory modern tribal**.
 - Smoking pits for preservation
 - Communal storage rooms in larger structures
 - Root cellars in basements and underground areas
+- Cave storage for seeds and preserved roots (temperature stable, protected from weather)
 
 #### Cooking & Preparation
 
@@ -154,15 +199,18 @@ The visual signature of Velhara is **post-memory modern tribal**.
 - Communal kitchens in shared spaces
 - **No electricity** (except rare, fragile salvaged systems)
 - **No industrial manufacturing** of food or tools
+- Traditional preparation methods: flatbread made from crushed seeds, dried root storage, fermented plants, seed-based porridges
 
 #### Reality of Food
 
-- Storage is local, small-scale, and fragile
-- Seasonal variation is extreme
-- Spoilage happens often
-- Trade and barter are essential survival tools
-- "Bad harvest years" can mean starvation
-- Successful food production creates social status
+- **The Foundation**: Engineered crops from the agro-research farm (amaranth, lentils, millet, teff analogs, buckwheat hybrids, bitter greens)
+- **Preservation**: Flatbread shaped from crushed seeds, dried roots, dried greens, fungi scraped from cave walls, foods that require only fire and water
+- **Storage is local, small-scale, and fragile**
+- **Seasonal variation is extreme**
+- **Spoilage happens often** — especially in the seasons of high heat
+- **Trade and barter are essential survival tools**
+- **Bad harvest years can mean starvation**
+- **Successful food production creates social status** — those who can grow food or predict harvests hold power
 
 ---
 
@@ -174,20 +222,25 @@ Velhara operates as a **scavenger-forager society with emerging proto-skills** �
 
 #### Sources of Food & Materials
 
-- Foraging from wild areas
+- **Agro-engineered crops** from the test farm (the foundation of survival)
+  - Hardy varieties designed to withstand heat, drought, poor soil
+  - Crops that store long-term without complex preservation
+  - Seeds and roots that sprout fast and provide dense nutrition
+  - Grown by survivors who retain embodied agricultural knowledge
+- Foraging from wild areas (secondary to cultivated crops)
 - Fishing (rivers, lakes, coastal areas)
 - Small-scale animal trapping
-- Trial-and-error agriculture (gardens and small fields)
-- Scavenging canned and packaged goods from old stores
-- Rediscovery of simple agriculture techniques through embodied knowledge
+- Trial-and-error agriculture (gardens and small fields using techniques remembered through embodied knowledge)
+- Scavenging canned and packaged goods from old stores (decreasing as stocks deplete)
 - Trade and barter within local communities
 
 #### What This Means
 
-- They are **not nomadic** (they inhabit old structures)
-- They are **not tribal in the primitive sense** (they remember technology exists)
-- They are **not fully regressed** (old knowledge fragments emerge)
-- They are **not fully reinvented** (they haven't solved the basic problems again)
+- They are **not nomadic** (they inhabit old structures and tend fields)
+- They are **not tribal in the primitive sense** (they remember technology exists, they remember the agro-farms, they speak of the glass city)
+- They are **not fully regressed** (old knowledge fragments emerge through embodied memory, especially in agriculture)
+- They are **not fully reinvented** (they haven't solved the basic problems again—they are living off engineered crops and salvage)
+- **They are the children of a designed system** — the engineered crops that saved their parents now sustain them, making the boundary between nature and technology invisible
 
 ### Social Structure
 
