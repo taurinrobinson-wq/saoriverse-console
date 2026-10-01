@@ -1,27 +1,25 @@
 {
-  "scene_id": "market_discovery_01",
-  "required_flags": [
-    "met_saori == true",
-    "obtain_codex == true"
-  ],
+  "scene_id": "elenya_act1_seg0_intro",
+  "npc": "Elenya",
+  "npc_full_name": "High Seer Elenya",
   "beats": [
     {
       "id": 1,
-      "type": "player_posture",
-      "active_speaker": "Lioren",
-      "display_name": "Lioren",
-      "portrait_expression": "cautious",
-      "setting_description": "The Velhara marketplace thrums with afternoon energy. Vendors shout prices, crowds move in tight currents. Near the fountain, two figures stand completely still against the rushing crowd, staring at you.",
-      "prompt": "They're staring at me. What should I do.",
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "neutral",
+      "setting_description": "The Seer's Sanctuary",
+      "prompt": "Welcome. I've been expecting you...though I didn't know when. Sit. Let's see what brought you here.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
-          "text": "Step toward the figures",
+          "text": "",
           "audio_clip_on_choice": "",
-          "result_text": "You approach with open body language. The man's expression shifts slightly.",
+          "result_text": "",
           "show_result_in_notification": false,
           "npc_response": "",
           "audio_clip_on_response": "",
@@ -33,37 +31,37 @@
             },
             {
               "stat": "observation",
-              "delta": -0.015
-            },
-            {
-              "stat": "narrative",
               "delta": -0.01
             },
             {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
               "stat": "empathy",
-              "delta": 0.005
+              "delta": 0.01
             }
           ],
           "remnants_effects": [
             {
-              "target": "activeNpcId",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
+              "target": "Elenya",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "activeNpcId",
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "activeNpcId",
-              "stat": "memory",
-              "delta": -0.01
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
             }
           ],
           "system_triggers": []
@@ -71,157 +69,58 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Keep your distance",
+          "text": "People say you understand things others don't. What do you see that they miss?",
           "audio_clip_on_choice": "",
-          "result_text": "You maintain space, watching carefully. Both of them notice your caution.",
+          "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "",
+          "npc_response": "I see the patterns beneath chaos. I see what people long for before they know they're longing. Come closer...let me see what you carry with you.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
             {
-              "stat": "trust",
-              "delta": -0.015
-            },
-            {
-              "stat": "observation",
-              "delta": 0.02
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.005
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
+              "stat": "Observation",
+              "delta": 0.05
             }
           ],
-          "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "need",
-              "delta": -0.01
-            }
-          ],
+          "remnants_effects": [],
           "system_triggers": []
         },
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "Explore the stalls",
+          "text": "I think our meeting isn't random. I think it means something.",
           "audio_clip_on_choice": "",
-          "result_text": "You wander the marketplace, examining merchant goods. After a moment, you notice them watching you still.",
+          "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "",
+          "npc_response": "Nothing is random. Everything is a thread in an ongoing story. You're here because the story needs you here. That's enough.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
             {
-              "stat": "trust",
-              "delta": -0.01
-            },
-            {
-              "stat": "observation",
-              "delta": 0.005
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.02
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
+              "stat": "Empathy",
+              "delta": 0.1
             }
           ],
-          "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ],
+          "remnants_effects": [],
           "system_triggers": []
         },
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Freeze and observe",
+          "text": "I feel like something changed in the world. Something fundamental. Can you help me understand?",
           "audio_clip_on_choice": "",
-          "result_text": "You stop completely. Your stillness meets theirs. Time feels different here.",
+          "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "",
+          "npc_response": "You feel it in your bones. That's good. Too many people think only with their minds. Yes, something shifted. We're all finding our way through it.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
             {
-              "stat": "trust",
-              "delta": 0.005
-            },
-            {
-              "stat": "observation",
-              "delta": -0.01
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.02
+              "stat": "Empathy",
+              "delta": 0.1
             }
           ],
-          "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "trust",
-              "delta": -0.01
-            }
-          ],
+          "remnants_effects": [],
           "system_triggers": []
         }
       ],
@@ -231,24 +130,24 @@
     {
       "id": 2,
       "type": "npc_turn",
-      "active_speaker": "Nima",
-      "display_name": "Young Woman",
-      "portrait_expression": "disgusted",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
       "setting_description": "",
-      "prompt": "What do you want anyway? We don't trust outsiders.",
+      "prompt": "",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
-          "text": "I'm trying to find work. My name's Lioren. I'm new here.",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Work is scarce for people who actually belong here. Intentions don't fill empty bellies.",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "neutral",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -256,37 +155,37 @@
             },
             {
               "stat": "observation",
-              "delta": -0.015
-            },
-            {
-              "stat": "narrative",
               "delta": -0.01
             },
             {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
               "stat": "empathy",
-              "delta": 0.005
+              "delta": 0.01
             }
           ],
           "remnants_effects": [
             {
-              "target": "Nima",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Nima",
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Nima",
-              "stat": "memory",
-              "delta": -0.01
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
             }
           ],
           "system_triggers": []
@@ -294,17 +193,17 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "I don't mean to make you feel uncomfortable. My name's Lioren. It's been a long trip, any place to rest around here?",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Comfort isn't something we trade in anymore. The corners are dry, if you can sleep with one eye open.",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "resigned",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": -0.015
+              "delta": -0.005
             },
             {
               "stat": "observation",
@@ -316,27 +215,27 @@
             },
             {
               "stat": "empathy",
-              "delta": -0.01
+              "delta": -0.005
             }
           ],
           "remnants_effects": [
             {
-              "target": "Nima",
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Nima",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "Nima",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "need",
               "delta": -0.01
             }
@@ -346,13 +245,13 @@
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "I've heard the market is a place to find work. My name's Lioren. I'm not here to cause trouble.",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Trouble usually follows the people who claim they aren't carrying any. Keep your hands where they can be seen.",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "dismissive",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -368,29 +267,29 @@
             },
             {
               "stat": "empathy",
-              "delta": -0.01
+              "delta": -0.005
             }
           ],
           "remnants_effects": [
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "authority",
-              "delta": 0.01
+              "delta": 0.005
             },
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "resolve",
-              "delta": -0.01
+              "delta": -0.005
             },
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "empathy",
-              "delta": -0.01
+              "delta": -0.005
             }
           ],
           "system_triggers": []
@@ -398,25 +297,25 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long roadâ€¦ that's all.",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Everyone out here has a long road behind them. It doesn't make the ground any softer.",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "determined",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0.005
+              "delta": 0.01
             },
             {
               "stat": "observation",
-              "delta": -0.01
+              "delta": -0.005
             },
             {
               "stat": "narrative",
-              "delta": -0.01
+              "delta": -0.005
             },
             {
               "stat": "empathy",
@@ -425,24 +324,24 @@
           ],
           "remnants_effects": [
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "need",
-              "delta": 0.01
+              "delta": 0.005
             },
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "nuance",
-              "delta": -0.01
+              "delta": -0.005
             },
             {
-              "target": "Nima",
+              "target": "Elenya",
               "stat": "trust",
-              "delta": -0.01
+              "delta": 0.005
             }
           ],
           "system_triggers": []
@@ -454,63 +353,220 @@
     {
       "id": 3,
       "type": "npc_turn",
-      "active_speaker": "Ravi",
-      "display_name": "Young Man",
-      "portrait_expression": "resigned",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
       "setting_description": "",
-      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' latelyâ€¦ The buildings areâ€¦ unstable. Our daughterâ€¦",
+      "prompt": "",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
-          "label": "Continue",
-          "text": "Continue",
+          "label": "Trust",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
           "npc_response": "",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
-          "tone_effects": [],
-          "remnants_effects": [],
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
           "system_triggers": []
-        }
-      ],
-      "next_beat_id": 3.1,
-      "system_triggers": [
+        },
         {
-          "type": "update_dialogue_names",
-          "data": [
-            "Ravi",
-            "Nima"
-          ]
-        }
-      ]
-    },
-    {
-      "id": 3.1,
-      "type": "npc_turn",
-      "active_speaker": "Nima",
-      "display_name": "Young Woman",
-      "portrait_expression": "disgusted",
-      "setting_description": "",
-      "prompt": "Ravi, take your own advice.",
-      "audio_clip": "",
-      "shared_beat": "",
-      "tone_choices": [
-        {
-          "tone": "T",
-          "label": "Continue",
-          "text": "Continue",
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
           "npc_response": "",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
-          "tone_effects": [],
-          "remnants_effects": [],
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
           "system_triggers": []
         }
       ],
@@ -520,254 +576,24 @@
     {
       "id": 4,
       "type": "npc_turn",
-      "active_speaker": "Ravi",
-      "display_name": "Ravi",
-      "portrait_expression": "determined",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
       "setting_description": "",
-      "prompt": "Nima... I can't have someone else...",
+      "prompt": "",
       "audio_clip": "",
-      "shared_beat": "Anyway... I hope you will be careful.",
+      "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
-          "text": "You're right to be wary of me. I want to earn your trust.",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Trust is a heavy thing to ask for out here. Just keep your head down.",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "frustrated",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.02
-            },
-            {
-              "stat": "observation",
-              "delta": -0.015
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.005
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "O",
-          "label": "Observation",
-          "text": "It's not my business butâ€¦ did something happen to your daughter?",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "The stones don't care who they fall on. That's all there is to see.",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "resigned",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.015
-            },
-            {
-              "stat": "observation",
-              "delta": 0.02
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.005
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "N",
-          "label": "NarrativePresence",
-          "text": "I've had some... losses... I don't need you to get into details.",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "Then you know how the air feels after the dust clears. It stays in your throat.",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "determined",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.01
-            },
-            {
-              "stat": "observation",
-              "delta": 0.005
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.02
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "E",
-          "label": "Empathy",
-          "text": "I don't know what happened to your daughter, but you seem really... impacted. Let me know if I can help with something.",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "There's nothing to repair now. Some things stay broken.",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "sad",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.005
-            },
-            {
-              "stat": "observation",
-              "delta": -0.01
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.02
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        }
-      ],
-      "next_beat_id": 5,
-      "system_triggers": [
-        {
-          "type": "diary_append",
-          "data": [
-            "Ravi mentioned an unstable building... and a daughter."
-          ]
-        }
-      ]
-    },
-    {
-      "id": 4.5,
-      "type": "npc_turn",
-      "active_speaker": "Ravi",
-      "display_name": "Ravi",
-      "portrait_expression": "neutral",
-      "setting_description": "",
-      "prompt": "If you see anything suspicious in the market, talk to me or Veynar.",
-      "audio_clip": "",
-      "shared_beat": "We keep this place standing by watching out for each other. Me and Veynar move around so you might have to search a bit but you should be able to find at least one of us.",
-      "tone_choices": [
-        {
-          "tone": "T",
-          "label": "Trust",
-          "text": "Yeah sure. I haven't met Veynar but I guess I'll come to you or Veynar if something seems off.",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "Good. Veynar's strict, but he knows how to keep trouble from spreading.",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "determined",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -788,22 +614,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "resolve",
               "delta": 0.005
             }
@@ -813,13 +639,13 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Veynar… I haven't met him yet. Is he easy to deal with?",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Uh huh hum...well... He keeps order. Makes sure thieves don't get comfortable. He's not subtle, but he's effective.",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "neutral",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -840,22 +666,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "memory",
               "delta": 0.005
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "need",
               "delta": -0.01
             }
@@ -865,13 +691,13 @@
         {
           "tone": "N",
           "label": "NarrativePresence",
-          "text": "Yeah I'm new here but I think I'm decent at seeing what's going on around me. I haven't met Veynar but you seem to trust him.",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Well trust is hard to come by, but he's at least consistent. I hope your intuition is as strong as you think it is for your sake.",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "resigned",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -892,22 +718,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "authority",
               "delta": 0.005
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "resolve",
               "delta": -0.005
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "empathy",
               "delta": -0.005
             }
@@ -917,13 +743,13 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I'll do my part. I'm sure its hard to keep this place safe.",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Well its never safe but you know....",
+          "npc_response": "",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "softened",
+          "portrait_expression_on_response": "",
           "tone_effects": [
             {
               "stat": "trust",
@@ -944,22 +770,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "need",
               "delta": 0.005
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "nuance",
               "delta": -0.005
             },
             {
-              "target": "Ravi",
+              "target": "Elenya",
               "stat": "trust",
               "delta": 0.005
             }
@@ -972,19 +798,19 @@
     },
     {
       "id": 5,
-      "type": "player_posture",
-      "active_speaker": "Lioren",
-      "display_name": "Lioren",
-      "portrait_expression": "cautious",
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
       "setting_description": "",
-      "prompt": "This thing... I need to figure out what this is.",
+      "prompt": "",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
-          "tone": "E",
-          "label": "Empathy",
-          "text": "End dialogue and investigate this codex signal",
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -994,62 +820,427 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 6,
+      "system_triggers": []
+    },
+    {
+      "id": 6,
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
           "system_triggers": []
         }
       ],
       "next_beat_id": 0,
-      "system_triggers": [
-        {
-          "type": "diary_append",
-          "data": [
-            "market_discovery_daughter_hint"
-          ]
-        },
-        {
-          "type": "close_dialogue"
-        },
-        {
-          "type": "activate_proximity_tracker"
-        },
-        {
-          "type": "codex_pulse",
-          "data": {
-            "strength": 0.8
-          }
-        },
-        {
-          "type": "disable_npc",
-          "key": "Ravi",
-          "note": "Hide Ravi when leaving InsideMarket_00 after first encounter"
-        },
-        {
-          "type": "disable_npc",
-          "key": "Nima",
-          "note": "Hide Nima when leaving InsideMarket_00 after first encounter"
-        },
-        {
-          "type": "set_flag",
-          "key": "ravi_nima_market_discovery_complete",
-          "value": true,
-          "note": "Marks completion of first market encounter"
-        }
-      ]
+      "system_triggers": []
     }
   ]
 }

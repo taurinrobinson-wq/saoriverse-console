@@ -11,7 +11,7 @@
       "display_name": "",
       "portrait_expression": "",
       "setting_description": "",
-      "prompt": "KAELEN: \"Hey! You! You're that newcomer, right? Look... I shouldn't be talking to you. But I saw you with them. And I need to say something.\"",
+      "prompt": "Hey! You! You're that newcomer, right? Look... I shouldn't be talking to you. But I saw you with them. And I need to say something.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -22,7 +22,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"It's important!\"",
+          "npc_response": "It's important!",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -74,7 +74,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"Because you don't belong to this place yet.\"",
+          "npc_response": "Because you don't belong to this place yet.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -126,7 +126,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"Everyone's hiding something.\"",
+          "npc_response": "Everyone's hiding something.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -178,7 +178,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"Don't ask me that!\"",
+          "npc_response": "Don't ask me that!",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -234,7 +234,7 @@
       "display_name": "",
       "portrait_expression": "",
       "setting_description": "",
-      "prompt": "KAELEN: \"That thing. On your belt. The Codex. Where'd you get something like that?\"",
+      "prompt": "That thing. On your belt. The Codex. Where'd you get something like that?",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -245,7 +245,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"You're luckier than you look.\"",
+          "npc_response": "You're luckier than you look.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -293,11 +293,11 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "I'm following its resonance.",
+          "text": "I'm following its signal.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"This place has a way of leading people into trouble.\"",
+          "npc_response": "This place has a way of leading people into trouble.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -353,7 +353,7 @@
       "display_name": "",
       "portrait_expression": "",
       "setting_description": "",
-      "prompt": "KAELEN: \"I was there. When it happened. The collapse. I could've stopped it. I should've. But I froze.\"",
+      "prompt": "I was there. When it happened. The collapse. I could've stopped it. I should've. But I froze.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -364,7 +364,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"Easy for you to say.\"",
+          "npc_response": "Easy for you to say.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -416,7 +416,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"The wall groaned. A brace snapped.\"",
+          "npc_response": "The wall groaned. A brace snapped.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -468,7 +468,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"It's leaking out of me.\"",
+          "npc_response": "It's leaking out of me.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -520,7 +520,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "KAELEN: \"You didn't hear the stone drop.\"",
+          "npc_response": "You didn't hear the stone drop.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [

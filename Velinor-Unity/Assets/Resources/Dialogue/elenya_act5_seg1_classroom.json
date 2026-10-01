@@ -1,0 +1,1279 @@
+{
+  "scene_id": "elenya_act5_seg1_classroom",
+  "npc": "Elenya",
+  "npc_full_name": "High Seer Elenya",
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "teacher_seeking_truth",
+      "setting_description": "Between Memory and Verification",
+      "prompt": "You teach that structures preserve memory. But do you believe memory is only what can be recorded?",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "He seems very committed to what he believes. Do you think that's wisdom or fear?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Perhaps the truest fear is the fear of what can't be measured. He's trying so hard to find solid ground.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Observation",
+              "delta": 0.1
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "You're trying to teach him something he's not ready to learn.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Not ready. Or perhaps... afraid to learn. But he listened. That matters.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "Empathy",
+              "delta": 0.15
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": []
+    },
+    {
+      "id": 2,
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 3,
+      "system_triggers": []
+    },
+    {
+      "id": 3,
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 4,
+      "system_triggers": []
+    },
+    {
+      "id": 4,
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 5,
+      "system_triggers": []
+    },
+    {
+      "id": 5,
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 6,
+      "system_triggers": []
+    },
+    {
+      "id": 6,
+      "type": "npc_turn",
+      "active_speaker": "Elenya",
+      "display_name": "Elenya",
+      "portrait_expression": "",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "memory",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "NarrativePresence",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "authority",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "resolve",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Elenya",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Elenya",
+              "stat": "need",
+              "delta": 0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "nuance",
+              "delta": -0.005
+            },
+            {
+              "target": "Elenya",
+              "stat": "trust",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": []
+    }
+  ]
+}
