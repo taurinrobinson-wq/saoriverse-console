@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Velinor.UI.Codex;
 
 /// <summary>
-/// Manages toggling between Glyphs and Impressions views on the Codex device.
+/// Manages toggling between Glyphs, Mind Log Primary, and Mind Log Secondary views on the Codex device.
 /// 
 /// Handles enabling/disabling UI elements when switching between:
 /// - Glyphs view: Grid layout with glyph pagination
-/// - Impressions view: Text entries with navigation
+/// - Mind Log Primary view: 3x3 memory fragment grid with selection
+/// - Mind Log Secondary view: Expanded memory view with full text and Back button
 /// 
 /// Does NOT create UI programmatically—only toggles visibility of existing elements.
 /// This preserves all existing systems and dependencies.
@@ -26,7 +28,16 @@ public class CodexViewController : MonoBehaviour
     [SerializeField] private GameObject glyphGrid_Pg2;
     [SerializeField] private GameObject glyphsNavigation;
 
-    [Header("Impressions View Elements")]
+    [Header("Mind Log Primary View Elements")]
+    [SerializeField] private GameObject mindLogPrimaryContainer;
+    [SerializeField] private MemoryGridUI memoryGridUI;
+
+    [Header("Mind Log Secondary View Elements (Expanded)")]
+    [SerializeField] private GameObject mindLogSecondaryContainer;
+    [SerializeField] private MemoryExpandedUI memoryExpandedUI;
+    [SerializeField] private Button mindLogBackButton;
+
+    [Header("Legacy Impressions Elements (if using old system)")]
     [SerializeField] private GameObject impressionsTextDisplay;
     [SerializeField] private GameObject impressionsPrevButton;
     [SerializeField] private GameObject impressionsNextButton;
@@ -40,7 +51,10 @@ public class CodexViewController : MonoBehaviour
             glyphsButton.onClick.AddListener(() => SwitchView("glyphs"));
         
         if (impressionsButton != null)
-            impressionsButton.onClick.AddListener(() => SwitchView("impressions"));
+            impressionsButton.onClick.AddListener(() => SwitchView("mind_log_primary"));
+
+        if (mindLogBackButton != null)
+            mindLogBackButton.onClick.AddListener(() => SwitchView("mind_log_primary"));
     }
 
     private void OnDisable()
@@ -50,7 +64,10 @@ public class CodexViewController : MonoBehaviour
             glyphsButton.onClick.RemoveListener(() => SwitchView("glyphs"));
         
         if (impressionsButton != null)
-            impressionsButton.onClick.RemoveListener(() => SwitchView("impressions"));
+            impressionsButton.onClick.RemoveListener(() => SwitchView("mind_log_primary"));
+
+        if (mindLogBackButton != null)
+            mindLogBackButton.onClick.RemoveListener(() => SwitchView("mind_log_primary"));
     }
 
     private void Start()
@@ -60,7 +77,7 @@ public class CodexViewController : MonoBehaviour
     }
 
     /// <summary>
-    /// Switch between glyphs and impressions views.
+    /// Switch between glyphs, mind_log_primary, and mind_log_secondary views.
     /// </summary>
     public void SwitchView(string viewName)
     {
@@ -69,13 +86,20 @@ public class CodexViewController : MonoBehaviour
         currentView = viewName;
         Debug.Log($"[CodexViewController] Switching to view: {viewName}");
 
-        if (viewName == "glyphs")
+        switch (viewName)
         {
-            ShowGlyphsView();
-        }
-        else if (viewName == "impressions")
-        {
-            ShowImpressionsView();
+            case "glyphs":
+                ShowGlyphsView();
+                break;
+            case "mind_log_primary":
+                ShowMindLogPrimaryView();
+                break;
+            case "mind_log_secondary":
+                ShowMindLogSecondaryView();
+                break;
+            default:
+                Debug.LogWarning($"[CodexViewController] Unknown view: {viewName}");
+                break;
         }
     }
 
@@ -84,7 +108,7 @@ public class CodexViewController : MonoBehaviour
     /// </summary>
     private void ShowGlyphsView()
     {
-        // Enable backgrounds
+        // Enable glyphs background
         if (glyphsBackground != null) glyphsBackground.SetActive(true);
         if (mindLogBackground != null) mindLogBackground.SetActive(false);
 
@@ -136,7 +160,11 @@ public class CodexViewController : MonoBehaviour
             }
         }
 
-        // Disable impressions view elements
+        // Disable Mind Log views
+        DisableMindLogPrimary();
+        DisableMindLogSecondary();
+
+        // Disable legacy impressions elements if they exist
         if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(false);
         if (impressionsPrevButton != null) impressionsPrevButton.SetActive(false);
         if (impressionsNextButton != null) impressionsNextButton.SetActive(false);
@@ -145,15 +173,15 @@ public class CodexViewController : MonoBehaviour
     }
 
     /// <summary>
-    /// Show the Impressions text view with page navigation.
+    /// Show the Mind Log Primary view (3x3 grid of memory fragments).
     /// </summary>
-    private void ShowImpressionsView()
+    private void ShowMindLogPrimaryView()
     {
-        // Enable backgrounds
-        if (glyphsBackground != null) glyphsBackground.SetActive(false);
-        if (mindLogBackground != null) mindLogBackground.SetActive(true);
+        // Enable glyphs background (same as glyphs view)
+        if (glyphsBackground != null) glyphsBackground.SetActive(true);
+        if (mindLogBackground != null) mindLogBackground.SetActive(false);
 
-        // Disable glyphs view elements - AND disable their CanvasGroups to prevent input
+        // Disable glyphs view elements
         if (glyphGrid_Pg1 != null)
         {
             glyphGrid_Pg1.SetActive(false);
@@ -187,26 +215,147 @@ public class CodexViewController : MonoBehaviour
             }
         }
 
-        // Enable impressions view elements
-        if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(true);
-        if (impressionsPrevButton != null) impressionsPrevButton.SetActive(true);
-        if (impressionsNextButton != null) impressionsNextButton.SetActive(true);
-
-        // Update Mind Log entries if component exists
-        if (mindLogBackground != null)
+        // Enable Mind Log Primary view
+        if (mindLogPrimaryContainer != null)
         {
-            var diaryCtrl = mindLogBackground.GetComponent<DiaryController>();
-            if (diaryCtrl != null)
+            mindLogPrimaryContainer.SetActive(true);
+            CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
+            if (cgPrimary != null)
             {
-                diaryCtrl.SetEntriesFromManager();
+                cgPrimary.interactable = true;
+                cgPrimary.blocksRaycasts = true;
+                cgPrimary.alpha = 1f;
             }
         }
 
-        Debug.Log("[CodexViewController] Impressions view enabled");
+        // Disable Mind Log Secondary view
+        DisableMindLogSecondary();
+
+        // Disable legacy impressions elements if they exist
+        if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(false);
+        if (impressionsPrevButton != null) impressionsPrevButton.SetActive(false);
+        if (impressionsNextButton != null) impressionsNextButton.SetActive(false);
+
+        Debug.Log("[CodexViewController] Mind Log Primary view enabled");
+    }
+
+    /// <summary>
+    /// Show the Mind Log Secondary view (expanded memory with full text and back button).
+    /// </summary>
+    private void ShowMindLogSecondaryView()
+    {
+        // Enable mind log background (different from glyphs/primary)
+        if (glyphsBackground != null) glyphsBackground.SetActive(false);
+        if (mindLogBackground != null) mindLogBackground.SetActive(true);
+
+        // Disable glyphs view elements
+        if (glyphGrid_Pg1 != null)
+        {
+            glyphGrid_Pg1.SetActive(false);
+            CanvasGroup cg1 = glyphGrid_Pg1.GetComponent<CanvasGroup>();
+            if (cg1 != null)
+            {
+                cg1.interactable = false;
+                cg1.blocksRaycasts = false;
+            }
+        }
+        
+        if (glyphGrid_Pg2 != null)
+        {
+            glyphGrid_Pg2.SetActive(false);
+            CanvasGroup cg2 = glyphGrid_Pg2.GetComponent<CanvasGroup>();
+            if (cg2 != null)
+            {
+                cg2.interactable = false;
+                cg2.blocksRaycasts = false;
+            }
+        }
+        
+        if (glyphsNavigation != null)
+        {
+            glyphsNavigation.SetActive(false);
+            CanvasGroup cgNav = glyphsNavigation.GetComponent<CanvasGroup>();
+            if (cgNav != null)
+            {
+                cgNav.interactable = false;
+                cgNav.blocksRaycasts = false;
+            }
+        }
+
+        // Disable Mind Log Primary view
+        DisableMindLogPrimary();
+
+        // Enable Mind Log Secondary view
+        if (mindLogSecondaryContainer != null)
+        {
+            mindLogSecondaryContainer.SetActive(true);
+            CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
+            if (cgSecondary != null)
+            {
+                cgSecondary.interactable = true;
+                cgSecondary.blocksRaycasts = true;
+                cgSecondary.alpha = 1f;
+            }
+        }
+
+        // Disable legacy impressions elements if they exist
+        if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(false);
+        if (impressionsPrevButton != null) impressionsPrevButton.SetActive(false);
+        if (impressionsNextButton != null) impressionsNextButton.SetActive(false);
+
+        Debug.Log("[CodexViewController] Mind Log Secondary view enabled");
+    }
+
+    private void DisableMindLogPrimary()
+    {
+        if (mindLogPrimaryContainer != null)
+        {
+            mindLogPrimaryContainer.SetActive(false);
+            CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
+            if (cgPrimary != null)
+            {
+                cgPrimary.interactable = false;
+                cgPrimary.blocksRaycasts = false;
+            }
+        }
+    }
+
+    private void DisableMindLogSecondary()
+    {
+        if (mindLogSecondaryContainer != null)
+        {
+            mindLogSecondaryContainer.SetActive(false);
+            CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
+            if (cgSecondary != null)
+            {
+                cgSecondary.interactable = false;
+                cgSecondary.blocksRaycasts = false;
+            }
+        }
     }
 
     /// <summary>
     /// Get the currently active view.
     /// </summary>
     public string GetCurrentView() => currentView;
+
+    /// <summary>
+    /// Called by MemoryGridUI when a memory fragment is double-clicked and expanded.
+    /// Switches to the Mind Log Secondary view.
+    /// </summary>
+    private void OnMemoryFragmentExpanded(MemoryFragment fragment)
+    {
+        Debug.Log($"[CodexViewController] Memory fragment expanded: {fragment?.fragmentID ?? "null"}");
+        SwitchView("mind_log_secondary");
+    }
+
+    /// <summary>
+    /// Called by MemoryExpandedUI when the Back button is clicked.
+    /// Switches back to the Mind Log Primary view.
+    /// </summary>
+    private void OnExpandedMemoryClosed(MemoryFragment fragment)
+    {
+        Debug.Log($"[CodexViewController] Expanded memory closed for: {fragment?.fragmentID ?? "null"}");
+        SwitchView("mind_log_primary");
+    }
 }
