@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Velinor.UI.Codex;
+using Velinor.Core;
 
 /// <summary>
 /// Manages toggling between Glyphs, Mind Log Primary, and Mind Log Secondary views on the Codex device.
