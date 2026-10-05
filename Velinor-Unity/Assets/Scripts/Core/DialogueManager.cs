@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Velinor.Core;
 
 /// <summary>
 /// Unified dialogue manager for Velinor.
