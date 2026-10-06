@@ -1160,26 +1160,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7737395389030256994, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-      propertyPath: npcNameText
-      value: 
-      objectReference: {fileID: 1360662684}
-    - target: {fileID: 7737395389030256994, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1372512481}
-    - target: {fileID: 7737395389030256994, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1071742229}
-    - target: {fileID: 7737395389030256994, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-      propertyPath: sharedBeatText
-      value: 
-      objectReference: {fileID: 144508053}
-    - target: {fileID: 7737395389030256994, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-      propertyPath: npcPortraitImage
-      value: 
-      objectReference: {fileID: 1905137578}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7619,6 +7599,10 @@ PrefabInstance:
       value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 6852631447202098883, guid: dc53fb23a3b498848ab6cf73d00f9985, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6852631447202098883, guid: dc53fb23a3b498848ab6cf73d00f9985, type: 3}
       propertyPath: m_fontSizeMax
       value: 72
       objectReference: {fileID: 0}
@@ -7630,6 +7614,10 @@ PrefabInstance:
       propertyPath: m_isOrthographic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6852631447202098883, guid: dc53fb23a3b498848ab6cf73d00f9985, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6852631447202098883, guid: dc53fb23a3b498848ab6cf73d00f9985, type: 3}
       propertyPath: m_TextWrappingMode
       value: 1
