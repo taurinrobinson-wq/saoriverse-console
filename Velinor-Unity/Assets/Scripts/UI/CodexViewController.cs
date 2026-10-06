@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Velinor.UI.Codex;
 using Velinor.Core;
+using Velinor.Testing;
 
 /// <summary>
 /// Manages toggling between Glyphs, Mind Log Primary, and Mind Log Secondary views on the Codex device.
@@ -43,7 +44,12 @@ public class CodexViewController : MonoBehaviour
     [SerializeField] private GameObject impressionsPrevButton;
     [SerializeField] private GameObject impressionsNextButton;
 
+    [Header("Testing")]
+    [SerializeField] private MemoryFragmentTestSetup testSetup;
+    [SerializeField] private bool useTestMemories = true;
+
     private string currentView = "glyphs"; // Default to glyphs on startup
+    private bool testMemoriesInitialized = false;
 
     private void OnEnable()
     {
@@ -178,8 +184,20 @@ public class CodexViewController : MonoBehaviour
     /// </summary>
     private void ShowMindLogPrimaryView()
     {
-        // Enable glyphs background (same as glyphs view)
-        if (glyphsBackground != null) glyphsBackground.SetActive(true);
+        // Initialize test memories on first load if enabled and assigned
+        if (useTestMemories && !testMemoriesInitialized && testSetup != null)
+        {
+            testSetup.InitializeTestMemories();
+            testMemoriesInitialized = true;
+            Debug.Log("[CodexViewController] Test memories initialized successfully!");
+        }
+        else if (useTestMemories && !testMemoriesInitialized && testSetup == null)
+        {
+            Debug.Log("[CodexViewController] Test Setup not assigned - using manual loader instead.");
+        }
+
+        // Disable glyphs background and enable Mind Log Primary Container
+        if (glyphsBackground != null) glyphsBackground.SetActive(false);
         if (mindLogBackground != null) mindLogBackground.SetActive(false);
 
         // Disable glyphs view elements
@@ -286,10 +304,27 @@ public class CodexViewController : MonoBehaviour
         // Disable Mind Log Primary view
         DisableMindLogPrimary();
 
-        // Enable Mind Log Secondary view
+        // Enable Mind Log Secondary view and ALL its children
         if (mindLogSecondaryContainer != null)
         {
             mindLogSecondaryContainer.SetActive(true);
+            
+            // Ensure the secondary container has the same position as the primary container
+            RectTransform secondaryRect = mindLogSecondaryContainer.GetComponent<RectTransform>();
+            if (secondaryRect != null)
+            {
+                // Match the primary container's anchoring
+                secondaryRect.anchorMin = Vector2.zero;
+                secondaryRect.anchorMax = Vector2.one;
+                secondaryRect.offsetMin = Vector2.zero;
+                secondaryRect.offsetMax = Vector2.zero;
+                secondaryRect.anchoredPosition = Vector2.zero;
+                
+                // Force canvas update to apply changes
+                Canvas.ForceUpdateCanvases();
+                Debug.Log($"[CodexViewController] Secondary container position reset to: {secondaryRect.anchoredPosition}");
+            }
+            
             CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
             if (cgSecondary != null)
             {
@@ -297,12 +332,29 @@ public class CodexViewController : MonoBehaviour
                 cgSecondary.blocksRaycasts = true;
                 cgSecondary.alpha = 1f;
             }
-        }
 
-        // Disable legacy impressions elements if they exist
-        if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(false);
-        if (impressionsPrevButton != null) impressionsPrevButton.SetActive(false);
-        if (impressionsNextButton != null) impressionsNextButton.SetActive(false);
+            // Disable layout groups to prevent automatic repositioning during child enable
+            LayoutGroup layoutGroup = mindLogSecondaryContainer.GetComponent<LayoutGroup>();
+            if (layoutGroup != null)
+            {
+                layoutGroup.enabled = false;
+            }
+
+            // Enable all children of the secondary container (including TextDisplay, PrevButton, NextButton)
+            foreach (Transform child in mindLogSecondaryContainer.transform)
+            {
+                child.gameObject.SetActive(true);
+                Debug.Log($"[CodexViewController] Enabled child: {child.name}");
+            }
+
+            // Only disable legacy impressions elements if they exist AND are NOT part of the secondary container
+            if (impressionsTextDisplay != null && !impressionsTextDisplay.transform.IsChildOf(mindLogSecondaryContainer.transform))
+                impressionsTextDisplay.SetActive(false);
+            if (impressionsPrevButton != null && !impressionsPrevButton.transform.IsChildOf(mindLogSecondaryContainer.transform))
+                impressionsPrevButton.SetActive(false);
+            if (impressionsNextButton != null && !impressionsNextButton.transform.IsChildOf(mindLogSecondaryContainer.transform))
+                impressionsNextButton.SetActive(false);
+        }
 
         Debug.Log("[CodexViewController] Mind Log Secondary view enabled");
     }

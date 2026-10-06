@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7377630353989819231}
   - component: {fileID: 3778568865226638144}
   - component: {fileID: 712343561326074865}
-  - component: {fileID: 6289093526780323286}
+  - component: {fileID: 4612576510533445346}
   m_Layer: 5
   m_Name: Slot_06
   m_TagString: Untagged
@@ -33,10 +33,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110.3, y: -426.95}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3778568865226638144
 CanvasRenderer:
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6289093526780323286
+--- !u!114 &4612576510533445346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,14 +85,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 132886279860494699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &329071947331449699
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +103,7 @@ GameObject:
   - component: {fileID: 5465770774003863958}
   - component: {fileID: 7809967641039115636}
   m_Layer: 5
-  m_Name: GlyphGrid_Pg2
+  m_Name: MindLogGrid_Pg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +172,7 @@ GameObject:
   - component: {fileID: 1177581195640976620}
   - component: {fileID: 2966896821274286073}
   - component: {fileID: 2409369487125604189}
-  - component: {fileID: 3598106983590733607}
+  - component: {fileID: 130324229433143440}
   m_Layer: 5
   m_Name: Slot_00
   m_TagString: Untagged
@@ -195,10 +194,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110.3, y: -166.75}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2966896821274286073
 CanvasRenderer:
@@ -238,7 +237,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3598106983590733607
+--- !u!114 &130324229433143440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,14 +246,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 708057835862358132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &895331542420317201
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +374,127 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &916663877615679401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4517097741470751649}
+  - component: {fileID: 5891820433276951897}
+  - component: {fileID: 293030638681560736}
+  - component: {fileID: 8682239975584710530}
+  m_Layer: 5
+  m_Name: BackButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4517097741470751649
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916663877615679401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3303671288739284382}
+  m_Father: {fileID: 4889468795442709556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -149.8, y: 178.6}
+  m_SizeDelta: {x: 60, y: 60}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5891820433276951897
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916663877615679401}
+  m_CullTransparentMesh: 1
+--- !u!114 &293030638681560736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916663877615679401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.21960786, g: 0.20000002, b: 0.16078432, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8682239975584710530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916663877615679401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 293030638681560736}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1211322952319743298
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +506,7 @@ GameObject:
   - component: {fileID: 6048764098163925299}
   - component: {fileID: 2506379431767777902}
   - component: {fileID: 703785183742364439}
-  - component: {fileID: 3646276674458986302}
+  - component: {fileID: 3210325659992906435}
   m_Layer: 5
   m_Name: Slot_17
   m_TagString: Untagged
@@ -452,7 +571,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3646276674458986302
+--- !u!114 &3210325659992906435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -461,14 +580,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1211322952319743298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &1240193948544684289
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +886,152 @@ MonoBehaviour:
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
+--- !u!1 &1806456495431861742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5269311974146056308}
+  - component: {fileID: 1883215393761945203}
+  - component: {fileID: 1120093925008506232}
+  - component: {fileID: 985050906552036524}
+  - component: {fileID: 5697115309311218455}
+  m_Layer: 5
+  m_Name: LoadTestMemoriesButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5269311974146056308
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806456495431861742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4988625339800988683}
+  m_Father: {fileID: 303108229101879325}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -51, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1883215393761945203
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806456495431861742}
+  m_CullTransparentMesh: 1
+--- !u!114 &1120093925008506232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806456495431861742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &985050906552036524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806456495431861742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1120093925008506232}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5697115309311218455}
+        m_TargetAssemblyTypeName: SimpleTestLoader, Assembly-CSharp
+        m_MethodName: LoadTestMemories
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5697115309311218455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806456495431861742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582519c74dbda7d4db7914b4fb38c9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleTestLoader
 --- !u!1 &1821739068519408739
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +1165,143 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1844193203222710586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3636309179595789325}
+  - component: {fileID: 7629790896264264762}
+  - component: {fileID: 6213538318181594651}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3636309179595789325
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844193203222710586}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5701309703361204471}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 323, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7629790896264264762
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844193203222710586}
+  m_CullTransparentMesh: 1
+--- !u!114 &6213538318181594651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844193203222710586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '>'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281589988
+  m_fontColor: {r: 0.89411765, g: 0.8784314, b: 0.2, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 40
+  m_fontSizeBase: 40
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1948879753384425852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1880,7 @@ GameObject:
   - component: {fileID: 1161170412853200548}
   - component: {fileID: 8214876938797160604}
   - component: {fileID: 5194919097393466084}
-  - component: {fileID: 6315283877425536554}
+  - component: {fileID: 5300057800507024210}
   m_Layer: 5
   m_Name: Slot_05
   m_TagString: Untagged
@@ -1501,10 +1902,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 373.3, y: -296.85}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8214876938797160604
 CanvasRenderer:
@@ -1544,7 +1945,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6315283877425536554
+--- !u!114 &5300057800507024210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1553,14 +1954,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2997382218785014160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &3034177840524353768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,7 +2093,7 @@ GameObject:
   - component: {fileID: 7447622321468466780}
   - component: {fileID: 7176457015980929823}
   - component: {fileID: 1308666145323942899}
-  - component: {fileID: 3277303965482644460}
+  - component: {fileID: 1926870698116114584}
   m_Layer: 5
   m_Name: Slot_02
   m_TagString: Untagged
@@ -1715,10 +2115,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 373.3, y: -166.75}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7176457015980929823
 CanvasRenderer:
@@ -1758,7 +2158,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3277303965482644460
+--- !u!114 &1926870698116114584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1767,14 +2167,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3215692959903989305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &3331906143839765922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,7 +2185,7 @@ GameObject:
   - component: {fileID: 7752482083852875384}
   - component: {fileID: 4264800952131186892}
   - component: {fileID: 7242609864846103314}
-  - component: {fileID: 6332885425755551517}
+  - component: {fileID: 1763145701734571655}
   m_Layer: 5
   m_Name: Slot_10
   m_TagString: Untagged
@@ -1851,7 +2250,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6332885425755551517
+--- !u!114 &1763145701734571655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1860,14 +2259,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3331906143839765922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &3333577932144477550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,7 +2277,7 @@ GameObject:
   - component: {fileID: 6647907092328630349}
   - component: {fileID: 8467752446940488407}
   - component: {fileID: 5312477408481759572}
-  - component: {fileID: 559923054468818616}
+  - component: {fileID: 1377831536229151247}
   m_Layer: 5
   m_Name: Slot_11
   m_TagString: Untagged
@@ -1944,7 +2342,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &559923054468818616
+--- !u!114 &1377831536229151247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1953,14 +2351,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3333577932144477550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &3433902449103836612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,7 +2369,7 @@ GameObject:
   - component: {fileID: 6214669085106062146}
   - component: {fileID: 4326980232706499688}
   - component: {fileID: 684586489239515881}
-  - component: {fileID: 3881903387227328679}
+  - component: {fileID: 588000127307605639}
   m_Layer: 5
   m_Name: Slot_12
   m_TagString: Untagged
@@ -2037,7 +2434,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3881903387227328679
+--- !u!114 &588000127307605639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2046,14 +2443,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3433902449103836612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &3711098437558984690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,7 +2581,7 @@ GameObject:
   - component: {fileID: 5596452638909620363}
   - component: {fileID: 2797133422072732811}
   - component: {fileID: 1582838958572826792}
-  - component: {fileID: 3120206402443088407}
+  - component: {fileID: 7389808224572332948}
   m_Layer: 5
   m_Name: Slot_01
   m_TagString: Untagged
@@ -2207,10 +2603,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.8, y: -166.75}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2797133422072732811
 CanvasRenderer:
@@ -2250,7 +2646,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3120206402443088407
+--- !u!114 &7389808224572332948
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2259,14 +2655,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3715962254535284059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &3727893812956150116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,7 +2709,7 @@ GameObject:
   - component: {fileID: 1465651147981017154}
   - component: {fileID: 1828210830056740960}
   - component: {fileID: 6969708261628228521}
-  - component: {fileID: 4839826346299792054}
+  - component: {fileID: 5616617804612451439}
   m_Layer: 5
   m_Name: Slot_14
   m_TagString: Untagged
@@ -2379,7 +2774,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4839826346299792054
+--- !u!114 &5616617804612451439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2388,14 +2783,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3922884286063253659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &4195675726153273780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2651,6 +3045,143 @@ MonoBehaviour:
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
+--- !u!1 &4521925479915339964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4988625339800988683}
+  - component: {fileID: 7382691164853111725}
+  - component: {fileID: 5988032386657227814}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4988625339800988683
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521925479915339964}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5269311974146056308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7382691164853111725
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521925479915339964}
+  m_CullTransparentMesh: 1
+--- !u!114 &5988032386657227814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521925479915339964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Button
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4765154433437270165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,7 +3379,7 @@ GameObject:
   - component: {fileID: 832804624004415202}
   - component: {fileID: 4389263906639529358}
   - component: {fileID: 8285205957841183928}
-  - component: {fileID: 750865364227732964}
+  - component: {fileID: 307762724969056071}
   m_Layer: 5
   m_Name: Slot_04
   m_TagString: Untagged
@@ -2870,10 +3401,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.8, y: -296.85}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4389263906639529358
 CanvasRenderer:
@@ -2913,7 +3444,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &750865364227732964
+--- !u!114 &307762724969056071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2922,14 +3453,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5060915442149621409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5197547936882688568
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,9 +3543,16 @@ MonoBehaviour:
   glyphGrid_Pg1: {fileID: 1292321029934543302}
   glyphGrid_Pg2: {fileID: 4195675726153273780}
   glyphsNavigation: {fileID: 2029668393570382327}
+  mindLogPrimaryContainer: {fileID: 5209383855821126499}
+  memoryGridUI: {fileID: 4147588589813398017}
+  mindLogSecondaryContainer: {fileID: 8217273026824663653}
+  memoryExpandedUI: {fileID: 3409647718541514340}
+  mindLogBackButton: {fileID: 8682239975584710530}
   impressionsTextDisplay: {fileID: 5448096294799598613}
   impressionsPrevButton: {fileID: 7797223109545321443}
   impressionsNextButton: {fileID: 5207951367217545690}
+  testSetup: {fileID: 0}
+  useTestMemories: 1
 --- !u!114 &7471356998835710382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3079,7 +3616,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9071818848696728838}
+  - {fileID: 6950415914334902078}
   m_Father: {fileID: 4889468795442709556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.88, y: 0.08}
@@ -3198,7 +3735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &303108229101879325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3215,6 +3752,7 @@ RectTransform:
   - {fileID: 4352045189859954584}
   - {fileID: 5465770774003863958}
   - {fileID: 4238662572193108757}
+  - {fileID: 5269311974146056308}
   m_Father: {fileID: 8155801074064711764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3271,7 +3809,7 @@ GameObject:
   - component: {fileID: 6027070069012677040}
   - component: {fileID: 7791482817613491984}
   - component: {fileID: 80866170859480200}
-  - component: {fileID: 8639528073866130689}
+  - component: {fileID: 6677663424691183931}
   m_Layer: 5
   m_Name: Slot_13
   m_TagString: Untagged
@@ -3336,7 +3874,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8639528073866130689
+--- !u!114 &6677663424691183931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3345,14 +3883,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5225553318580856461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5263145862334446645
 GameObject:
   m_ObjectHideFlags: 0
@@ -3364,7 +3901,7 @@ GameObject:
   - component: {fileID: 6767714264502012016}
   - component: {fileID: 6806720153666416453}
   - component: {fileID: 1129690446062338548}
-  - component: {fileID: 4879437904423537823}
+  - component: {fileID: 6181215784132876075}
   m_Layer: 5
   m_Name: Slot_16
   m_TagString: Untagged
@@ -3429,7 +3966,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4879437904423537823
+--- !u!114 &6181215784132876075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3438,14 +3975,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5263145862334446645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5284197237536202534
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,7 +4086,7 @@ GameObject:
   - component: {fileID: 4805797394155556689}
   - component: {fileID: 1745930029901776796}
   - component: {fileID: 7853828292530693297}
-  - component: {fileID: 3535373404434173368}
+  - component: {fileID: 1765505781725327570}
   m_Layer: 5
   m_Name: Slot_07
   m_TagString: Untagged
@@ -3572,10 +4108,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.8, y: -426.95}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1745930029901776796
 CanvasRenderer:
@@ -3615,7 +4151,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3535373404434173368
+--- !u!114 &1765505781725327570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3624,14 +4160,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5299488754234471714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5355249114705539498
 GameObject:
   m_ObjectHideFlags: 0
@@ -3643,7 +4178,7 @@ GameObject:
   - component: {fileID: 6530621511842619234}
   - component: {fileID: 5198385519522130521}
   - component: {fileID: 2971061674931520208}
-  - component: {fileID: 8637329679497592148}
+  - component: {fileID: 2628669121533736130}
   m_Layer: 5
   m_Name: Slot_15
   m_TagString: Untagged
@@ -3708,7 +4243,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8637329679497592148
+--- !u!114 &2628669121533736130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3717,14 +4252,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5355249114705539498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5448096294799598613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,7 +4393,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 37.892944, w: 0}
+  m_margin: {x: 0, y: 70.09454, z: 37.892944, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4244,7 +4778,7 @@ GameObject:
   - component: {fileID: 4343557275697341481}
   - component: {fileID: 6919992481501472740}
   - component: {fileID: 816886504789849373}
-  - component: {fileID: 1540811768223411884}
+  - component: {fileID: 1687086410068209134}
   m_Layer: 5
   m_Name: Slot_08
   m_TagString: Untagged
@@ -4266,10 +4800,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 373.3, y: -426.95}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6919992481501472740
 CanvasRenderer:
@@ -4309,7 +4843,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1540811768223411884
+--- !u!114 &1687086410068209134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4318,14 +4852,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5796665788357940097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5846858786610893099
 GameObject:
   m_ObjectHideFlags: 0
@@ -4524,7 +5057,7 @@ GameObject:
   - component: {fileID: 1148714314858056001}
   - component: {fileID: 1892173316315715962}
   m_Layer: 5
-  m_Name: GlyphName
+  m_Name: MindLogName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4755,7 +5288,7 @@ MonoBehaviour:
   notificationText: {fileID: 0}
   fadeDuration: 0.3
   displayDuration: 3
---- !u!1 &6241376076906759692
+--- !u!1 &6025770337649235063
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4763,50 +5296,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9071818848696728838}
-  - component: {fileID: 2302744093305277977}
-  - component: {fileID: 4267869340346410017}
+  - component: {fileID: 3303671288739284382}
+  - component: {fileID: 4500573309110099073}
+  - component: {fileID: 3878175790816916932}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &9071818848696728838
+--- !u!224 &3303671288739284382
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6241376076906759692}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 6025770337649235063}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 158227264913831750}
+  m_Father: {fileID: 4517097741470751649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2302744093305277977
+--- !u!222 &4500573309110099073
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6241376076906759692}
+  m_GameObject: {fileID: 6025770337649235063}
   m_CullTransparentMesh: 1
---- !u!114 &4267869340346410017
+--- !u!114 &3878175790816916932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6241376076906759692}
+  m_GameObject: {fileID: 6025770337649235063}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -4820,7 +5353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>'
+  m_text: Back
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4829,8 +5362,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281589988
-  m_fontColor: {r: 0.89411765, g: 0.8784314, b: 0.2, a: 1}
+    rgba: 4278514692
+  m_fontColor: {r: 0.015686275, g: 0.95686275, b: 0.015686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4847,8 +5380,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5010,16 +5543,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6775019039465959080}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5701309703361204471}
+  m_Father: {fileID: 158227264913831750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -323.06433, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &886709788164064213
@@ -5133,7 +5666,7 @@ GameObject:
   - component: {fileID: 8390879149832833774}
   - component: {fileID: 1613898608639812905}
   - component: {fileID: 3480438687575949206}
-  - component: {fileID: 7557710477232194042}
+  - component: {fileID: 8551909157463071870}
   m_Layer: 5
   m_Name: Slot_09
   m_TagString: Untagged
@@ -5198,7 +5731,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7557710477232194042
+--- !u!114 &8551909157463071870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5207,14 +5740,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6818997665574527644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &7162124473011797830
 GameObject:
   m_ObjectHideFlags: 0
@@ -5226,7 +5758,7 @@ GameObject:
   - component: {fileID: 965992865526377015}
   - component: {fileID: 7003275779348915352}
   - component: {fileID: 6255185144604244483}
-  - component: {fileID: 48006478993894794}
+  - component: {fileID: 2334430757146989106}
   m_Layer: 5
   m_Name: Slot_03
   m_TagString: Untagged
@@ -5248,10 +5780,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110.3, y: -296.85}
+  m_SizeDelta: {x: 110.6, y: 103.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7003275779348915352
 CanvasRenderer:
@@ -5291,7 +5823,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &48006478993894794
+--- !u!114 &2334430757146989106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5300,14 +5832,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7162124473011797830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c027b27ae60c5af46b273e2018ec3b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 73413254f6bb19e4dbd70102951f4883, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
-  highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &7380232942166188856
 GameObject:
   m_ObjectHideFlags: 0
@@ -5804,7 +6335,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6950415914334902078}
+  - {fileID: 3636309179595789325}
   m_Father: {fileID: 4889468795442709556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.12, y: 0.08}
@@ -6346,9 +6877,11 @@ GameObject:
   - component: {fileID: 4889468795442709556}
   - component: {fileID: 8862241028263874338}
   - component: {fileID: 5138063967797736653}
-  - component: {fileID: 6031598242178656623}
+  - component: {fileID: 3409647718541514340}
+  - component: {fileID: 3504566118508480054}
+  - component: {fileID: 4208561402993828114}
   m_Layer: 5
-  m_Name: MindLogBackground
+  m_Name: MindLogSecondaryContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6369,6 +6902,7 @@ RectTransform:
   - {fileID: 8552528310478145031}
   - {fileID: 5701309703361204471}
   - {fileID: 158227264913831750}
+  - {fileID: 4517097741470751649}
   m_Father: {fileID: 8155801074064711764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6414,7 +6948,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6031598242178656623
+--- !u!114 &3409647718541514340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6423,16 +6957,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 8217273026824663653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e169fd3d16bcdd42a42c7d235fb718e, type: 3}
+  m_Script: {fileID: 11500000, guid: 668bf8e70247cd34f900756806806ae7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DiaryController
-  pageBackground: {fileID: 5138063967797736653}
-  nextButton: {fileID: 8901503696158409867}
-  prevButton: {fileID: 1430247491856517523}
-  textDisplay: {fileID: 4014616337971860742}
-  swingDuration: 0.5
-  openPosition: {x: 300, y: -400}
-  closedPosition: {x: 300, y: -1200}
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.Codex.MemoryExpandedUI
+  panelCanvasGroup: {fileID: 3504566118508480054}
+  memoryIcon: {fileID: 0}
+  titleText: {fileID: 4014616337971860742}
+  expandedText: {fileID: 4014616337971860742}
+  textScrollRect: {fileID: 4208561402993828114}
+  backButton: {fileID: 8682239975584710530}
+  fadeDuration: 0.2
+  codexViewController: {fileID: 2804238367914797267}
+--- !u!225 &3504566118508480054
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8217273026824663653}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &4208561402993828114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8217273026824663653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
+  m_Content: {fileID: 4889468795442709556}
+  m_Horizontal: 1
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 8552528310478145031}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8222969626775926382
 GameObject:
   m_ObjectHideFlags: 0
@@ -6788,8 +7365,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4352045189859954584}
   - component: {fileID: 159661544181248567}
+  - component: {fileID: 4147588589813398017}
   m_Layer: 5
-  m_Name: GlyphGrid_Pg1
+  m_Name: MindLogGrid_Pg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6847,6 +7425,43 @@ MonoBehaviour:
   m_Spacing: {x: 20.9, y: 26.6}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &4147588589813398017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752729778828026806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac596576abae934e91c370aa2d81a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.Codex.MemoryGridUI
+  gridCells:
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  defaultCellTint: {r: 1, g: 1, b: 1, a: 1}
+  selectedCellTint: {r: 1, g: 0.88, b: 0.45, a: 1}
+  doubleClickThreshold: 0.25
+  synopsisText: {fileID: 0}
+  expandedView: {fileID: 0}
+  codexViewController: {fileID: 0}
 --- !u!1001 &4562590897594108421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6935,9 +7550,105 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2135498301486252331, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135498301486252331, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135498301486252331, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135498301486252331, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135498301486252331, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135498301486252331, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645591614699855721, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645591614699855721, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645591614699855721, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645591614699855721, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645591614699855721, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645591614699855721, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004926532451927089, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004926532451927089, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004926532451927089, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004926532451927089, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004926532451927089, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004926532451927089, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974498765016450208, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974498765016450208, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974498765016450208, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974498765016450208, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4322431375969658791, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
       propertyPath: m_Name
       value: DialoguePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7431419577707564593, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665453690468740918, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

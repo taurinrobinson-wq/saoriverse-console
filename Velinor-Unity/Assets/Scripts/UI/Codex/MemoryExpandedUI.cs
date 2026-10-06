@@ -92,9 +92,12 @@ namespace Velinor.UI.Codex
 
             if (titleText != null)
             {
-                titleText.text = string.IsNullOrWhiteSpace(fragment.displayName)
-                    ? fragment.fragmentID
-                    : fragment.displayName;
+                titleText.gameObject.SetActive(false);
+                Debug.Log("[MemoryExpandedUI] Title text hidden in secondary view");
+            }
+            else
+            {
+                Debug.LogWarning("[MemoryExpandedUI] Title Text is NULL!");
             }
 
             if (expandedText != null)
@@ -102,6 +105,23 @@ namespace Velinor.UI.Codex
                 expandedText.text = string.IsNullOrWhiteSpace(fragment.expandedText)
                     ? "No memory details are available for this fragment."
                     : fragment.expandedText;
+
+                // Ensure text displays properly - disable layout constraints
+                LayoutElement layoutElement = expandedText.GetComponent<LayoutElement>();
+                if (layoutElement != null)
+                {
+                    layoutElement.enabled = false;
+                }
+
+                // Force text to wrap properly
+                expandedText.horizontalAlignment = HorizontalAlignmentOptions.Left;
+                expandedText.verticalAlignment = VerticalAlignmentOptions.Top;
+
+                Debug.Log($"[MemoryExpandedUI] Set expanded text (length: {expandedText.text.Length})");
+            }
+            else
+            {
+                Debug.LogWarning("[MemoryExpandedUI] Expanded Text is NULL!");
             }
 
             if (textScrollRect != null)
@@ -167,12 +187,18 @@ namespace Velinor.UI.Codex
         /// <summary>
         /// Hides the expanded overlay using a fade-out animation.
         /// </summary>
-        public void Hide()
+        private void Hide()
         {
             if (panelCanvasGroup == null)
             {
                 Debug.LogError("[MemoryExpandedUI] Cannot hide overlay because CanvasGroup is missing.");
                 return;
+            }
+
+            // Ensure the gameObject is active before starting coroutine
+            if (!gameObject.activeSelf)
+            {
+                gameObject.SetActive(true);
             }
 
             StartFade(0f, deactivateOnComplete: true);
