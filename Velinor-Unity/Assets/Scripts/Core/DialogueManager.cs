@@ -659,10 +659,12 @@ public class DialogueManager : MonoBehaviour
             }
 
             // Load the MindLogAsset from Resources
+            Debug.Log($"[DialogueManager] Attempting to load Mind Log asset: {unlock.assetPath}");
             var asset = Resources.Load<MindLogAsset>(unlock.assetPath);
             if (asset == null)
             {
                 Debug.LogError($"[DialogueManager] Failed to load Mind Log asset: {unlock.assetPath}");
+                Debug.LogError($"[DialogueManager] Trying alternate load from: Assets/Resources/{unlock.assetPath}.asset");
                 continue;
             }
 
