@@ -235,6 +235,17 @@ public class CodexViewController : MonoBehaviour
         }
 
         // Enable Mind Log Primary view
+        // Re-find the container if reference was lost (e.g., after scene reload)
+        if (mindLogPrimaryContainer == null)
+        {
+            mindLogPrimaryContainer = GameObject.Find("MindLogPrimaryContainer");
+            if (mindLogPrimaryContainer == null)
+            {
+                Debug.LogError("[CodexViewController] MindLogPrimaryContainer not found in scene!");
+                return;
+            }
+        }
+
         if (mindLogPrimaryContainer != null)
         {
             mindLogPrimaryContainer.SetActive(true);
@@ -251,6 +262,10 @@ public class CodexViewController : MonoBehaviour
             if (gridController != null)
             {
                 gridController.PopulateFromManager();
+            }
+            else
+            {
+                Debug.LogWarning("[CodexViewController] MemoryGridController not found in MindLogPrimaryContainer!");
             }
         }
 
