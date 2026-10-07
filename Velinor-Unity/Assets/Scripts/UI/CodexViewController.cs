@@ -81,6 +81,23 @@ public class CodexViewController : MonoBehaviour
     {
         // Initialize to glyphs view on startup
         SwitchView("glyphs");
+
+        // Ensure Mind Log containers persist across scene changes
+        if (mindLogPrimaryContainer != null && Application.isPlaying)
+        {
+            DontDestroyOnLoad(mindLogPrimaryContainer);
+            Debug.Log("[CodexViewController] MindLogPrimaryContainer marked as DontDestroyOnLoad");
+        }
+        if (mindLogSecondaryContainer != null && Application.isPlaying)
+        {
+            DontDestroyOnLoad(mindLogSecondaryContainer);
+            Debug.Log("[CodexViewController] MindLogSecondaryContainer marked as DontDestroyOnLoad");
+        }
+        if (glyphsBackground != null && Application.isPlaying)
+        {
+            DontDestroyOnLoad(glyphsBackground);
+            Debug.Log("[CodexViewController] GlyphsBackground marked as DontDestroyOnLoad");
+        }
     }
 
     /// <summary>

@@ -3767,6 +3767,7 @@ GameObject:
   - component: {fileID: 530583394695935266}
   - component: {fileID: 7989079658483908913}
   - component: {fileID: 8365998004169474266}
+  - component: {fileID: 1544328913943178094}
   m_Layer: 5
   m_Name: MindLogPrimaryContainer
   m_TagString: Untagged
@@ -3848,6 +3849,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8822f99709daa0340a07a4fa39d84322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Management.MindLogManager
+--- !u!114 &1544328913943178094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5209383855821126499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8fb19e32302d2f46a8a78344728c288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemoryGridController
+  gridContainer: {fileID: 303108229101879325}
+  synopsisText: {fileID: 1892173316315715962}
+  expandedView: {fileID: 3409647718541514340}
 --- !u!1 &5225553318580856461
 GameObject:
   m_ObjectHideFlags: 0
