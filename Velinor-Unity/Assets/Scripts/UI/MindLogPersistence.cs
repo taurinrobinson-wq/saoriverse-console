@@ -27,13 +27,9 @@ public class MindLogPersistence : MonoBehaviour
             return;
         }
 
-        // Mark containers as DontDestroyOnLoad if they exist
-        if (codexController.mindLogPrimaryContainer != null)
-            DontDestroyOnLoad(codexController.mindLogPrimaryContainer.transform.root.gameObject);
-        if (codexController.mindLogSecondaryContainer != null)
-            DontDestroyOnLoad(codexController.mindLogSecondaryContainer.transform.root.gameObject);
-        if (codexController.glyphsBackground != null)
-            DontDestroyOnLoad(codexController.glyphsBackground.transform.root.gameObject);
+        // Containers persist via CodexPanel's DontDestroyOnLoad (managed by CodexController)
+        // Do NOT mark them individually here - this causes conflicts with scene persistence
+        Debug.Log("[MindLogPersistence] OnEnable: Using CodexPanel's persistence (managed by CodexController)");
     }
 
     private void Update()

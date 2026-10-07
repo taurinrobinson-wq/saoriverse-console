@@ -68,26 +68,9 @@ public class CodexViewController : MonoBehaviour
         if (glyphsBackground == null)
             glyphsBackground = GameObject.Find("GlyphsBackground");
 
-        // Mark containers' ROOT PARENT to persist (DontDestroyOnLoad only works on root objects)
-        if (mindLogPrimaryContainer != null && Application.isPlaying)
-        {
-            Transform root = mindLogPrimaryContainer.transform.root;
-            DontDestroyOnLoad(root.gameObject);
-            Debug.Log("[CodexViewController] Awake: Root of MindLogPrimaryContainer marked as DontDestroyOnLoad");
-        }
-        if (mindLogSecondaryContainer != null && Application.isPlaying)
-        {
-            Transform root = mindLogSecondaryContainer.transform.root;
-            DontDestroyOnLoad(root.gameObject);
-            Debug.Log("[CodexViewController] Awake: Root of MindLogSecondaryContainer marked as DontDestroyOnLoad");
-        }
-        if (glyphsBackground != null && Application.isPlaying)
-        {
-            Transform root = glyphsBackground.transform.root;
-            DontDestroyOnLoad(root.gameObject);
-            Debug.Log("[CodexViewController] Awake: Root of GlyphsBackground marked as DontDestroyOnLoad");
-        }
-
+        // Containers are children of CodexPanel which is already marked as DontDestroyOnLoad by CodexController
+        // Do NOT mark them individually - this causes conflicts with scene persistence
+        
         // Pass container references to CodexController for centralized management
         CodexController codexController = GetComponentInParent<CodexController>();
         if (codexController != null)
@@ -106,7 +89,8 @@ public class CodexViewController : MonoBehaviour
             // Create a GameObject to hold the MindLogPersistence component
             GameObject persistenceHolder = new GameObject("_MindLogPersistenceManager");
             persistence = persistenceHolder.AddComponent<MindLogPersistence>();
-            DontDestroyOnLoad(persistenceHolder);
+            // DO NOT mark persistenceHolder as DontDestroyOnLoad - let it be destroyed normally
+            // The persistence data is stored in static Codex unlock state, not the GameObject
             Debug.Log("[CodexViewController] Awake: Created MindLogPersistenceManager");
         }
     }
@@ -409,13 +393,10 @@ public class CodexViewController : MonoBehaviour
         mindLogPrimaryContainer.SetActive(true);
         Debug.Log($"[CodexViewController] MindLogPrimaryContainer set to active: {mindLogPrimaryContainer.activeSelf}");
         
-        // Ensure the root parent is still marked as DontDestroyOnLoad
+        // Containers persist via CodexPanel's DontDestroyOnLoad (set by CodexController)
+        // Do NOT re-apply DontDestroyOnLoad here - it causes conflicts
         Transform root = mindLogPrimaryContainer.transform.root;
         Debug.Log($"[CodexViewController] Root parent: {root.name}");
-        
-        // Re-apply DontDestroyOnLoad to make sure it persists
-        DontDestroyOnLoad(root.gameObject);
-        Debug.Log("[CodexViewController] Re-applied DontDestroyOnLoad to MindLogPrimaryContainer root");
         
         CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
         if (cgPrimary != null)

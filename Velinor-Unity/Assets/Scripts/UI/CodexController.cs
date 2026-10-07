@@ -93,9 +93,18 @@ public class CodexController : MonoBehaviour
 
     private void Awake()
     {
-        // Mark this controller as persistent across scenes
-        DontDestroyOnLoad(gameObject);
-        Debug.Log("[Codex] CodexController marked as persistent across scenes");
+        // Persist ONLY the CodexPanel root, not individual controllers
+        // This prevents multiple DontDestroyOnLoad conflicts
+        GameObject panelObj = GameObject.Find("UI_Canvas/CodexPanel");
+        if (panelObj != null)
+        {
+            DontDestroyOnLoad(panelObj);
+            Debug.Log("[Codex] CodexPanel marked as persistent across scenes");
+        }
+        else
+        {
+            Debug.LogError("[Codex] CodexPanel not found at UI_Canvas/CodexPanel!");
+        }
 
         InitializeReferences();
     }
