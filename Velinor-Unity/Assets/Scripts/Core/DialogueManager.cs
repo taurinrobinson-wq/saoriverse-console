@@ -611,6 +611,12 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+        // Process Mind Log unlocks from current beat before ending dialogue
+        if (currentBeat != null && currentBeat.mind_log_unlocks != null && currentBeat.mind_log_unlocks.Length > 0)
+        {
+            ProcessMindLogUnlocks(currentBeat.mind_log_unlocks);
+        }
+
         isDialogueActive = false;
         currentBeat = null;
         if (portraitManager != null)
@@ -624,6 +630,46 @@ public class DialogueManager : MonoBehaviour
         dialogueUI.HideDialogue();
         Debug.Log("[DialogueManager] Dialogue ended");
         OnDialogueEnded?.Invoke();
+    }
+
+    /// <summary>
+    /// Process Mind Log unlocks from dialogue beat.
+    /// </summary>
+    private void ProcessMindLogUnlocks(MindLogUnlock[] unlocks)
+    {
+        if (unlocks == null || unlocks.Length == 0)
+        {
+            return;
+        }
+
+        var mindLogManager = MindLogManager.Instance;
+        if (mindLogManager == null)
+        {
+            Debug.LogError("[DialogueManager] MindLogManager not found");
+            return;
+        }
+
+        foreach (var unlock in unlocks)
+        {
+            if (string.IsNullOrEmpty(unlock.assetPath))
+            {
+                Debug.LogWarning("[DialogueManager] Mind Log unlock has empty assetPath");
+                continue;
+            }
+
+            // Load the MindLogAsset from Resources
+            var asset = Resources.Load<MindLogAsset>(unlock.assetPath);
+            if (asset == null)
+            {
+                Debug.LogError($"[DialogueManager] Failed to load Mind Log asset: {unlock.assetPath}");
+                continue;
+            }
+
+            // Convert asset to entry and add to manager
+            var entry = asset.ToEntry();
+            mindLogManager.AddLog(entry);
+            Debug.Log($"[DialogueManager] Added Mind Log: {entry.LogID}");
+        }
     }
 
     public GameObject GetCurrentNPCGameObject()

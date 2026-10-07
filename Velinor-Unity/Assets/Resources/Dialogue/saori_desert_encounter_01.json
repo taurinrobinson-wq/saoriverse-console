@@ -524,8 +524,8 @@
       ],
       "mind_log_unlocks": [
         {
-          "asset_guid": "920ede2975b53bc48b6e08bcdf26a4bd",
-          "asset_path": "MindLogs/MindLog_Saori_Desert_Encounter"
+          "assetPath": "MindLogs/MindLog_Saori_Desert_Encounter",
+          "guid": "920ede2975b53bc48b6e08bcdf26a4bd"
         }
       ]
     }

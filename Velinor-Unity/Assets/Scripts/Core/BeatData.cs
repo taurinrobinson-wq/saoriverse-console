@@ -2,6 +2,16 @@ using System;
 using UnityEngine;
 
 /// <summary>
+/// A Mind Log unlock entry - references a Mind Log asset by path.
+/// </summary>
+[Serializable]
+public class MindLogUnlock
+{
+    [SerializeField] public string assetPath;              // Path to the MindLogAsset (e.g., "MindLogs/MindLog_Saori_Desert_Encounter")
+    [SerializeField] public string guid;                   // GUID of the associated image asset (optional, for reference)
+}
+
+/// <summary>
 /// A unified dialogue beat structure.
 /// Empty fields are simply not displayed. Same system, different content.
 /// </summary>
@@ -17,6 +27,7 @@ public class BeatData
     [SerializeField] public string prompt;                 // Main dialogue line (NPC speech or player thought)
     [SerializeField] public string shared_beat;            // Automatic NPC response (shown then auto-advances)
     [SerializeField] public string[] diary_entries;        // Texts to add to diary when this beat completes
+    [SerializeField] public MindLogUnlock[] mind_log_unlocks; // Mind Log entries to unlock when this beat completes
     [SerializeField] public BeatChoice[] tone_choices;     // Player choice options
     [SerializeField] public string[] required_flags;       // Flags needed to see this beat
     [SerializeField] public SystemTrigger[] system_triggers; // Actions to trigger

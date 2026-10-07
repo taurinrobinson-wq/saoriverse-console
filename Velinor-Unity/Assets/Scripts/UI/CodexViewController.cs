@@ -245,6 +245,13 @@ public class CodexViewController : MonoBehaviour
                 cgPrimary.blocksRaycasts = true;
                 cgPrimary.alpha = 1f;
             }
+
+            // Populate grid from MindLogManager
+            MemoryGridController gridController = mindLogPrimaryContainer.GetComponentInChildren<MemoryGridController>();
+            if (gridController != null)
+            {
+                gridController.PopulateFromManager();
+            }
         }
 
         // Disable Mind Log Secondary view
