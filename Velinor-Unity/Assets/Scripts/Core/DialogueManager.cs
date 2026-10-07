@@ -642,6 +642,7 @@ public class DialogueManager : MonoBehaviour
 
     /// <summary>
     /// Process Mind Log unlocks from dialogue beat.
+    /// This also unlocks the Codex when the first memory is obtained.
     /// </summary>
     private void ProcessMindLogUnlocks(MindLogUnlock[] unlocks)
     {
@@ -656,6 +657,8 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("[DialogueManager] Failed to get or create MindLogManager");
             return;
         }
+
+        bool anySuccessfullyAdded = false;
 
         foreach (var unlock in unlocks)
         {
@@ -679,6 +682,14 @@ public class DialogueManager : MonoBehaviour
             var entry = asset.ToEntry();
             mindLogManager.AddLog(entry);
             Debug.Log($"[DialogueManager] Added Mind Log: {entry.LogID}");
+            anySuccessfullyAdded = true;
+        }
+
+        // If any memories were successfully added, unlock the Codex
+        if (anySuccessfullyAdded)
+        {
+            MindLogPersistence.UnlockCodex();
+            Debug.Log("[DialogueManager] CODEX UNLOCKED - Player can now access the Mind Log!");
         }
     }
 
