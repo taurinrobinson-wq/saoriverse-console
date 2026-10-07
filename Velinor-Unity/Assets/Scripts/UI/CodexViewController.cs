@@ -625,12 +625,16 @@ public class CodexViewController : MonoBehaviour
 
         if (mindLogPrimaryContainer != null)
         {
-            mindLogPrimaryContainer.SetActive(false);
+            // IMPORTANT: Keep active but hide via CanvasGroup
+            // This prevents container destruction while keeping it invisible and non-interactive
+            mindLogPrimaryContainer.SetActive(true);
             CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
             if (cgPrimary != null)
             {
+                cgPrimary.alpha = 0f;  // Invisible
                 cgPrimary.interactable = false;
                 cgPrimary.blocksRaycasts = false;
+                Debug.Log("[CodexViewController] MindLogPrimaryContainer hidden via CanvasGroup (kept active)");
             }
         }
     }
@@ -646,12 +650,16 @@ public class CodexViewController : MonoBehaviour
 
         if (mindLogSecondaryContainer != null)
         {
-            mindLogSecondaryContainer.SetActive(false);
+            // IMPORTANT: Keep active but hide via CanvasGroup
+            // This prevents container destruction while keeping it invisible and non-interactive
+            mindLogSecondaryContainer.SetActive(true);
             CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
             if (cgSecondary != null)
             {
+                cgSecondary.alpha = 0f;  // Invisible
                 cgSecondary.interactable = false;
                 cgSecondary.blocksRaycasts = false;
+                Debug.Log("[CodexViewController] MindLogSecondaryContainer hidden via CanvasGroup (kept active)");
             }
         }
     }
