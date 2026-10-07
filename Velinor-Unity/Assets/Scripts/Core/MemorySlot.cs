@@ -77,6 +77,15 @@ namespace Velinor.Core
             {
                 slotImage.sprite = fragment.icon;
                 slotImage.color = Color.white;
+                Debug.Log($"[MemorySlot] ✓ Set sprite '{fragment.icon.name}' on {gameObject.name}");
+            }
+            else if (slotImage == null)
+            {
+                Debug.LogError($"[MemorySlot] ✗ CANNOT SET SPRITE: slotImage is null on {gameObject.name}!");
+            }
+            else if (fragment.icon == null)
+            {
+                Debug.LogWarning($"[MemorySlot] ✗ CANNOT SET SPRITE: fragment.icon is null for '{fragment.fragmentID}'");
             }
 
             Debug.Log($"[MemorySlot] Set memory '{fragment.fragmentID}' in slot {gameObject.name}");
