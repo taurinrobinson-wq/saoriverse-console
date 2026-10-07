@@ -19,7 +19,7 @@ public class MindLogPersistence : MonoBehaviour
     {
         // Find CodexController for container references
         if (codexController == null)
-            codexController = FindObjectOfType<CodexController>();
+            codexController = FindAnyObjectByType<CodexController>();
         
         if (codexController == null)
         {
@@ -37,7 +37,7 @@ public class MindLogPersistence : MonoBehaviour
         // Ensure CodexController reference is valid
         if (codexController == null)
         {
-            codexController = FindObjectOfType<CodexController>();
+            codexController = FindAnyObjectByType<CodexController>();
             if (codexController == null)
                 return;
         }
@@ -94,7 +94,7 @@ public class MindLogPersistence : MonoBehaviour
         Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now press C to access it");
 
         // Try to find and unlock CodexController
-        var codexController = FindObjectOfType<CodexController>();
+        var codexController = FindAnyObjectByType<CodexController>();
         if (codexController != null)
         {
             codexController.UnlockCodex();
@@ -102,7 +102,7 @@ public class MindLogPersistence : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[MindLogPersistence] ✗ CodexController not found via FindObjectOfType! Trying fallback...");
+            Debug.LogError("[MindLogPersistence] ✗ CodexController not found via FindAnyObjectByType! Trying fallback...");
             
             // Fallback: Try to find CodexPanel and get controller from it
             GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
@@ -194,7 +194,7 @@ public class MindLogPersistence : MonoBehaviour
         }
         
         if (codexController == null)
-            codexController = FindObjectOfType<CodexController>();
+            codexController = FindAnyObjectByType<CodexController>();
         
         isPrimaryProtected = true;
         if (codexController != null && codexController.mindLogPrimaryContainer != null)
@@ -231,7 +231,7 @@ public class MindLogPersistence : MonoBehaviour
         }
         
         if (codexController == null)
-            codexController = FindObjectOfType<CodexController>();
+            codexController = FindAnyObjectByType<CodexController>();
         
         isSecondaryProtected = true;
         if (codexController != null && codexController.mindLogSecondaryContainer != null)

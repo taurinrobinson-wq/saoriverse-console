@@ -83,7 +83,7 @@ public class CodexViewController : MonoBehaviour
         }
 
         // Initialize MindLogPersistence component for container protection
-        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
         if (persistence == null && Application.isPlaying)
         {
             // Create a GameObject to hold the MindLogPersistence component
@@ -303,7 +303,7 @@ public class CodexViewController : MonoBehaviour
         }
 
         // CRITICAL: Ensure Canvas hierarchy is active before enabling container
-        Canvas uiCanvas = FindObjectOfType<Canvas>();
+        Canvas uiCanvas = FindAnyObjectByType<Canvas>();
         if (uiCanvas != null && !uiCanvas.gameObject.activeSelf)
         {
             uiCanvas.gameObject.SetActive(true);
@@ -323,7 +323,7 @@ public class CodexViewController : MonoBehaviour
         if (mindLogBackground != null) mindLogBackground.SetActive(false);
 
         // Get the persistence helper to protect the container
-        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
         if (persistence != null)
         {
             persistence.ProtectPrimaryContainer();
@@ -462,7 +462,7 @@ public class CodexViewController : MonoBehaviour
     private void ShowMindLogSecondaryView()
     {
         // CRITICAL: Ensure Canvas hierarchy is active before enabling container
-        Canvas uiCanvas = FindObjectOfType<Canvas>();
+        Canvas uiCanvas = FindAnyObjectByType<Canvas>();
         if (uiCanvas != null && !uiCanvas.gameObject.activeSelf)
         {
             uiCanvas.gameObject.SetActive(true);
@@ -482,7 +482,7 @@ public class CodexViewController : MonoBehaviour
         if (mindLogBackground != null) mindLogBackground.SetActive(true);
 
         // Get the persistence helper to protect the container
-        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
         if (persistence != null)
         {
             persistence.ProtectSecondaryContainer();
@@ -600,7 +600,7 @@ public class CodexViewController : MonoBehaviour
     private void DisableMindLogPrimary()
     {
         // Unprotect the container first so it can be disabled without re-activation
-        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
         if (persistence != null)
         {
             persistence.UnprotectPrimaryContainer();
@@ -625,7 +625,7 @@ public class CodexViewController : MonoBehaviour
     private void DisableMindLogSecondary()
     {
         // Unprotect the container first so it can be disabled without re-activation
-        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
         if (persistence != null)
         {
             persistence.UnprotectSecondaryContainer();
