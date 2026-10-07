@@ -61,20 +61,76 @@ public class MindLogPersistence : MonoBehaviour
 
     /// <summary>
     /// Unlocks the Codex - called when player receives it from Saori or other dialogue trigger.
+    /// Also enables the CodexPanel UI and CodexViewController button access.
     /// </summary>
     public static void UnlockCodex()
     {
         isCodexUnlocked = true;
         Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now access it");
+
+        // Also unlock in CodexController so C key works
+        var codexController = FindObjectOfType<CodexController>();
+        if (codexController != null)
+        {
+            codexController.UnlockCodex();
+            Debug.Log("[MindLogPersistence] CodexController.UnlockCodex() called");
+        }
+        else
+        {
+            Debug.LogWarning("[MindLogPersistence] CodexController not found - Codex UI may not be fully unlocked");
+        }
+
+        // Initialize CodexViewController views now that Codex is unlocked
+        var codexViewController = FindObjectOfType<CodexViewController>();
+        if (codexViewController != null)
+        {
+            codexViewController.InitializeViewsOnUnlock();
+            Debug.Log("[MindLogPersistence] CodexViewController.InitializeViewsOnUnlock() called");
+        }
+
+        // Ensure CodexPanel is visible now that Codex is unlocked
+        GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
+        if (codexPanel != null)
+        {
+            CanvasGroup cg = codexPanel.GetComponent<CanvasGroup>();
+            if (cg != null)
+            {
+                cg.alpha = 1f;
+                cg.interactable = true;
+                cg.blocksRaycasts = true;
+            }
+        }
     }
 
     /// <summary>
     /// Locks the Codex - called at game start to prevent access before trigger.
+    /// Also hides the CodexPanel UI.
     /// </summary>
     public static void LockCodex()
     {
         isCodexUnlocked = false;
         Debug.Log("[MindLogPersistence] Codex LOCKED - player cannot access it");
+
+        // Hide CodexPanel entirely when locked
+        GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
+        if (codexPanel != null)
+        {
+            CanvasGroup cg = codexPanel.GetComponent<CanvasGroup>();
+            if (cg == null)
+            {
+                cg = codexPanel.AddComponent<CanvasGroup>();
+            }
+
+            // Fade out completely and disable interaction
+            cg.alpha = 0f;
+            cg.interactable = false;
+            cg.blocksRaycasts = false;
+            Debug.Log("[MindLogPersistence] CodexPanel hidden (alpha=0)");
+        }
+        else
+        {
+            Debug.LogWarning("[MindLogPersistence] CodexPanel not found - may not be fully hidden");
+        }
     }
 
     /// <summary>

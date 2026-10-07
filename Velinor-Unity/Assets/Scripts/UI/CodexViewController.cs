@@ -144,6 +144,13 @@ public class CodexViewController : MonoBehaviour
         MindLogPersistence.LockCodex();
         Debug.Log("[CodexViewController] Codex LOCKED at start - player must obtain it from Saori");
 
+        // If Codex is locked, don't show any views at all - entire UI should be hidden
+        if (!MindLogPersistence.IsCodexUnlocked())
+        {
+            Debug.Log("[CodexViewController] Codex locked - skipping view initialization");
+            return;
+        }
+
         // Initialize to glyphs view on startup - but DON'T disable Mind Log containers yet
         // They need to persist and be available when needed
         ShowGlyphsView();
@@ -639,6 +646,17 @@ public class CodexViewController : MonoBehaviour
                 cgSecondary.blocksRaycasts = false;
             }
         }
+    }
+
+    /// <summary>
+    /// Called when Codex is unlocked to initialize the view system.
+    /// Shows the Glyphs view as the default starting view.
+    /// </summary>
+    public void InitializeViewsOnUnlock()
+    {
+        Debug.Log("[CodexViewController] Initializing views now that Codex is UNLOCKED");
+        currentView = ""; // Reset to force ShowGlyphsView() to execute
+        ShowGlyphsView();
     }
 
     /// <summary>

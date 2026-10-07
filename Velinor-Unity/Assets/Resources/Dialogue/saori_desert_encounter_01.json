@@ -248,7 +248,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Maybe. I donâ€™t know.",
+          "npc_response": "Maybe. I don't know.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "mysterious",
           "tone_effects": [
@@ -283,7 +283,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Iâ€™m sorry. I canâ€™t explain. I need to go.",
+          "npc_response": "I'm sorry. I can't explain. I need to go.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
@@ -442,7 +442,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Pleaseâ€”just tell me something.",
+          "text": "Please...just tell me something.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
