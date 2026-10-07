@@ -20,9 +20,31 @@ namespace Velinor.Core
 
         private List<MemorySlot> memorySlots = new List<MemorySlot>();
         private Dictionary<MemorySlot, MemoryFragment> slotToFragment = new Dictionary<MemorySlot, MemoryFragment>();
+        private bool hasInitialized = false;
+
+        private void OnEnable()
+        {
+            // Initialize slots even if Start hasn't been called yet
+            EnsureInitialized();
+        }
 
         private void Start()
         {
+            // Ensure initialized in case OnEnable didn't run
+            EnsureInitialized();
+        }
+
+        /// <summary>
+        /// Ensure the grid controller has discovered all memory slots.
+        /// Called before PopulateFromManager() to guarantee slots are available.
+        /// </summary>
+        private void EnsureInitialized()
+        {
+            if (hasInitialized)
+                return;
+
+            hasInitialized = true;
+
             // Auto-find all MemorySlots in the container
             if (gridContainer == null)
             {
@@ -30,6 +52,7 @@ namespace Velinor.Core
             }
 
             MemorySlot[] slots = gridContainer.GetComponentsInChildren<MemorySlot>();
+            memorySlots.Clear();
             memorySlots.AddRange(slots);
 
             Debug.Log($"[MemoryGridController] Found {memorySlots.Count} memory slots");
@@ -40,6 +63,9 @@ namespace Velinor.Core
         /// </summary>
         public void PopulateFromManager()
         {
+            // Ensure slots are initialized before trying to populate
+            EnsureInitialized();
+
             var mindLogManager = MindLogManager.GetOrCreate();
             if (mindLogManager == null)
             {
@@ -51,6 +77,7 @@ namespace Velinor.Core
             var logList = new List<MindLogEntry>(logs);
 
             Debug.Log($"[MemoryGridController] Retrieved {logList.Count} logs from manager");
+            Debug.Log($"[MemoryGridController] Available slots: {memorySlots.Count}");
 
             // Clear existing selections
             foreach (MemorySlot slot in memorySlots)
