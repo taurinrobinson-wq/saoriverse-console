@@ -34,10 +34,25 @@ namespace Velinor.Testing
                 return;
             }
 
+            // Try to load icon from Resources if not assigned in Inspector
+            Sprite icon = saoriIcon;
+            if (icon == null)
+            {
+                icon = Resources.Load<Sprite>("MindLogs/Saori_Gives_Codex_Desert");
+                if (icon == null)
+                {
+                    Debug.LogWarning("[SaoriMemorySetup] Could not load Saori icon from Resources! Using null (will show empty slot).");
+                }
+                else
+                {
+                    Debug.Log("[SaoriMemorySetup] Loaded Saori icon from Resources/MindLogs/Saori_Gives_Codex_Desert");
+                }
+            }
+
             // Create the memory entry
             var saoriMemory = new MindLogEntry(
                 logID: "memory_saori_desert_encounter",
-                icon: saoriIcon,
+                icon: icon,
                 summaryText: "Mysterious Encounter",
                 fullText: "I met an older woman on the way to the marketplace. I didn't get her name, but she handed me this strange device without much explanation. There was something knowing in her eyes—as if she recognized me, or perhaps knew something about me that I didn't know myself. The device she gave me feels important, though I can't explain why."
             );
