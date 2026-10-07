@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Collections;
 using Velinor.UI.Codex;
 using Velinor.Core;
 using Velinor.Testing;
@@ -85,6 +86,17 @@ public class CodexViewController : MonoBehaviour
             Transform root = glyphsBackground.transform.root;
             DontDestroyOnLoad(root.gameObject);
             Debug.Log("[CodexViewController] Awake: Root of GlyphsBackground marked as DontDestroyOnLoad");
+        }
+
+        // Initialize MindLogPersistence component for container protection
+        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        if (persistence == null && Application.isPlaying)
+        {
+            // Create a GameObject to hold the MindLogPersistence component
+            GameObject persistenceHolder = new GameObject("_MindLogPersistenceManager");
+            persistence = persistenceHolder.AddComponent<MindLogPersistence>();
+            DontDestroyOnLoad(persistenceHolder);
+            Debug.Log("[CodexViewController] Awake: Created MindLogPersistenceManager");
         }
     }
 
@@ -234,6 +246,36 @@ public class CodexViewController : MonoBehaviour
     /// </summary>
     private void ShowMindLogPrimaryView()
     {
+        // CRITICAL: Immediately re-find the container if reference is null
+        // This can happen if the container is destroyed/recreated
+        if (mindLogPrimaryContainer == null)
+        {
+            mindLogPrimaryContainer = GameObject.Find("MindLogPrimaryContainer");
+            if (mindLogPrimaryContainer == null)
+            {
+                Debug.LogError("[CodexViewController] FATAL: MindLogPrimaryContainer not found in scene!");
+                return;
+            }
+            Debug.Log("[CodexViewController] Re-found MindLogPrimaryContainer (reference was null)");
+        }
+
+        Debug.Log("[CodexViewController] ===== START ShowMindLogPrimaryView =====");
+        
+        if (mindLogPrimaryContainer == null)
+        {
+            mindLogPrimaryContainer = GameObject.Find("MindLogPrimaryContainer");
+            Debug.Log($"[CodexViewController] Had to re-find MindLogPrimaryContainer: {(mindLogPrimaryContainer != null ? "FOUND" : "NOT FOUND")}");
+        }
+        
+        if (mindLogPrimaryContainer != null)
+        {
+            Debug.Log($"[CodexViewController] MindLogPrimaryContainer state BEFORE any changes:");
+            Debug.Log($"  - activeSelf: {mindLogPrimaryContainer.activeSelf}");
+            Debug.Log($"  - activeInHierarchy: {mindLogPrimaryContainer.activeInHierarchy}");
+            Debug.Log($"  - Parent: {mindLogPrimaryContainer.transform.parent?.name ?? "ROOT"}");
+            Debug.Log($"  - Parent active: {(mindLogPrimaryContainer.transform.parent != null ? mindLogPrimaryContainer.transform.parent.gameObject.activeSelf : true)}");
+        }
+        
         // Initialize test memories on first load if enabled and assigned
         if (useTestMemories && !testMemoriesInitialized && testSetup != null)
         {
@@ -265,6 +307,18 @@ public class CodexViewController : MonoBehaviour
         // Disable glyphs background and enable Mind Log Primary Container
         if (glyphsBackground != null) glyphsBackground.SetActive(false);
         if (mindLogBackground != null) mindLogBackground.SetActive(false);
+
+        // Get the persistence helper to protect the container
+        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        if (persistence != null)
+        {
+            persistence.ProtectPrimaryContainer();
+            Debug.Log("[CodexViewController] MindLogPersistence activated to protect container");
+        }
+        else
+        {
+            Debug.LogWarning("[CodexViewController] MindLogPersistence not found - container may become invisible!");
+        }
 
         // Disable glyphs view elements
         if (glyphGrid_Pg1 != null)
@@ -325,6 +379,9 @@ public class CodexViewController : MonoBehaviour
         mindLogPrimaryContainer.SetActive(true);
         Debug.Log($"[CodexViewController] MindLogPrimaryContainer set to active: {mindLogPrimaryContainer.activeSelf}");
         
+        // DIAGNOSTIC: Log container state every frame after activation
+        StartCoroutine(LogContainerState("Primary"));
+        
         // Ensure the root parent is still marked as DontDestroyOnLoad
         Transform root = mindLogPrimaryContainer.transform.root;
         Debug.Log($"[CodexViewController] Root parent: {root.name}");
@@ -369,6 +426,23 @@ public class CodexViewController : MonoBehaviour
         if (impressionsPrevButton != null) impressionsPrevButton.SetActive(false);
         if (impressionsNextButton != null) impressionsNextButton.SetActive(false);
 
+        // FINAL DIAGNOSTIC: Check state just before reporting success
+        Debug.Log($"[CodexViewController] ===== FINAL CHECK BEFORE 'view enabled' =====");
+        Debug.Log($"[CodexViewController] MindLogPrimaryContainer.activeSelf: {mindLogPrimaryContainer.activeSelf}");
+        Debug.Log($"[CodexViewController] MindLogPrimaryContainer.activeInHierarchy: {mindLogPrimaryContainer.activeInHierarchy}");
+        if (!mindLogPrimaryContainer.activeInHierarchy)
+        {
+            Debug.LogError("[CodexViewController] CRITICAL: Container is active=true but NOT visible in hierarchy!");
+            Transform checkParent = mindLogPrimaryContainer.transform.parent;
+            int depth = 0;
+            while (checkParent != null && depth < 5)
+            {
+                Debug.LogError($"[CodexViewController] Parent depth {depth}: {checkParent.name} - activeSelf={checkParent.gameObject.activeSelf}, activeInHierarchy={checkParent.gameObject.activeInHierarchy}");
+                checkParent = checkParent.parent;
+                depth++;
+            }
+        }
+
         Debug.Log("[CodexViewController] Mind Log Primary view enabled");
     }
 
@@ -396,6 +470,18 @@ public class CodexViewController : MonoBehaviour
         // Enable mind log background (different from glyphs/primary)
         if (glyphsBackground != null) glyphsBackground.SetActive(false);
         if (mindLogBackground != null) mindLogBackground.SetActive(true);
+
+        // Get the persistence helper to protect the container
+        MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
+        if (persistence != null)
+        {
+            persistence.ProtectSecondaryContainer();
+            Debug.Log("[CodexViewController] MindLogPersistence activated to protect secondary container");
+        }
+        else
+        {
+            Debug.LogWarning("[CodexViewController] MindLogPersistence not found - secondary container may become invisible!");
+        }
 
         // Disable glyphs view elements
         if (glyphGrid_Pg1 != null)
@@ -552,5 +638,45 @@ public class CodexViewController : MonoBehaviour
     {
         Debug.Log($"[CodexViewController] Expanded memory closed for: {fragment?.fragmentID ?? "null"}");
         SwitchView("mind_log_primary");
+    }
+
+    /// <summary>
+    /// Diagnostic coroutine to log container state changes after activation.
+    /// </summary>
+    private IEnumerator LogContainerState(string containerType)
+    {
+        GameObject container = containerType == "Primary" ? mindLogPrimaryContainer : mindLogSecondaryContainer;
+        
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForEndOfFrame();
+            
+            if (container == null)
+            {
+                Debug.LogWarning($"[CodexViewController] Container became null during frame {i}");
+                yield break;
+            }
+            
+            bool activeInHierarchy = container.activeInHierarchy;
+            bool activeSelf = container.activeSelf;
+            bool parentActive = container.transform.parent != null && container.transform.parent.gameObject.activeInHierarchy;
+            
+            Debug.Log($"[CodexViewController] Frame {i}: {containerType} - activeSelf={activeSelf}, activeInHierarchy={activeInHierarchy}, parentActive={parentActive}");
+            
+            if (!activeInHierarchy && activeSelf)
+            {
+                Debug.LogError($"[CodexViewController] ALERT: {containerType} is activeSelf=true but activeInHierarchy=false! Parent must be inactive!");
+                
+                // Walk up the hierarchy and log all parent states
+                Transform current = container.transform.parent;
+                int depth = 0;
+                while (current != null && depth < 10)
+                {
+                    Debug.LogError($"[CodexViewController] Parent at depth {depth}: {current.name}, activeSelf={current.gameObject.activeSelf}, activeInHierarchy={current.gameObject.activeInHierarchy}");
+                    current = current.parent;
+                    depth++;
+                }
+            }
+        }
     }
 }
