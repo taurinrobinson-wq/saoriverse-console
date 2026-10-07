@@ -424,6 +424,7 @@ public class CodexViewController : MonoBehaviour
             cgPrimary.blocksRaycasts = true;
             cgPrimary.alpha = 1f;
             Debug.Log("[CodexViewController] CanvasGroup on MindLogPrimaryContainer configured");
+            Debug.Log($"[CodexViewController] CanvasGroup VERIFIED AFTER SET: alpha={cgPrimary.alpha}, interactable={cgPrimary.interactable}, blocksRaycasts={cgPrimary.blocksRaycasts}");
         }
         else
         {
@@ -432,6 +433,7 @@ public class CodexViewController : MonoBehaviour
             cgPrimary.interactable = true;
             cgPrimary.blocksRaycasts = true;
             cgPrimary.alpha = 1f;
+            Debug.Log($"[CodexViewController] Added CanvasGroup VERIFIED AFTER SET: alpha={cgPrimary.alpha}, interactable={cgPrimary.interactable}, blocksRaycasts={cgPrimary.blocksRaycasts}");
         }
 
         // Populate grid from MindLogManager

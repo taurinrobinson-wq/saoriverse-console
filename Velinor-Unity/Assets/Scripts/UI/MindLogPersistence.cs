@@ -55,6 +55,16 @@ public class MindLogPersistence : MonoBehaviour
                 Debug.LogWarning("[MindLogPersistence] MindLogPrimaryContainer was deactivated while protected! Re-activating...");
                 codexController.mindLogPrimaryContainer.SetActive(true);
             }
+            
+            // Also check CanvasGroup visibility
+            CanvasGroup cgPrimary = codexController.mindLogPrimaryContainer.GetComponent<CanvasGroup>();
+            if (cgPrimary != null && cgPrimary.alpha < 0.5f)
+            {
+                Debug.LogWarning($"[MindLogPersistence] ALERT: MindLogPrimaryContainer CanvasGroup alpha={cgPrimary.alpha} (should be 1)! Re-showing...");
+                cgPrimary.alpha = 1f;
+                cgPrimary.interactable = true;
+                cgPrimary.blocksRaycasts = true;
+            }
         }
 
         if (codexController.mindLogSecondaryContainer != null && isSecondaryProtected)
@@ -63,6 +73,16 @@ public class MindLogPersistence : MonoBehaviour
             {
                 Debug.LogWarning("[MindLogPersistence] MindLogSecondaryContainer was deactivated while protected! Re-activating...");
                 codexController.mindLogSecondaryContainer.SetActive(true);
+            }
+            
+            // Also check CanvasGroup visibility
+            CanvasGroup cgSecondary = codexController.mindLogSecondaryContainer.GetComponent<CanvasGroup>();
+            if (cgSecondary != null && cgSecondary.alpha < 0.5f)
+            {
+                Debug.LogWarning($"[MindLogPersistence] ALERT: MindLogSecondaryContainer CanvasGroup alpha={cgSecondary.alpha} (should be 1)! Re-showing...");
+                cgSecondary.alpha = 1f;
+                cgSecondary.interactable = true;
+                cgSecondary.blocksRaycasts = true;
             }
         }
     }
