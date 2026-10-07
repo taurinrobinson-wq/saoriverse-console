@@ -261,19 +261,32 @@ public class CodexController : MonoBehaviour
 
 #if ENABLE_INPUT_SYSTEM
         if (_toggleCodexAction != null && _toggleCodexAction.WasPressedThisFrame())
+        {
             cPressed = true;
+            Debug.Log("[Codex] C key detected via InputAction");
+        }
 
         var keyboard = Keyboard.current;
-        if (keyboard != null)
+        if (keyboard != null && keyboard.cKey.wasPressedThisFrame)
         {
-            if (keyboard.cKey.wasPressedThisFrame) cPressed = true;
+            cPressed = true;
+            Debug.Log("[Codex] C key detected via Keyboard.current");
+        }
+#else
+        // FALLBACK: Check for C key using legacy input
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            cPressed = true;
+            Debug.Log("[Codex] C key detected via Input.GetKeyDown (legacy)");
         }
 #endif
 
         if (cPressed)
         {
+            Debug.Log($"[Codex] C key pressed! playerHasCodex={playerHasCodex}, requiresCodexDevice={requiresCodexDevice}");
             if (playerHasCodex || !requiresCodexDevice)
             {
+                Debug.Log("[Codex] Conditions met - calling ToggleCodex()");
                 ToggleCodex();
             }
             else
@@ -461,13 +474,19 @@ public class CodexController : MonoBehaviour
     public void UnlockCodex()
     {
         playerHasCodex = true;
-        Debug.Log("[Codex] Codex unlocked! Player can now press C to open Codex");
+        Debug.Log("[Codex] ========== CODEX UNLOCKED ==========");
+        Debug.Log($"[Codex] playerHasCodex = {playerHasCodex}");
+        Debug.Log("[Codex] Player can now press C to open Codex");
 
         // Show notification to player
         var notificationPanel = FindAnyObjectByType<NotificationPanelController>();
         if (notificationPanel != null)
         {
             notificationPanel.ShowNotification("Codex Received. Press C to access.", duration: 5f);
+        }
+        else
+        {
+            Debug.LogWarning("[Codex] NotificationPanel not found - notification not shown");
         }
     }
 
