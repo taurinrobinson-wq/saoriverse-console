@@ -40,13 +40,14 @@ namespace Velinor.Core
         /// </summary>
         public void PopulateFromManager()
         {
-            if (MindLogManager.Instance == null)
+            var mindLogManager = MindLogManager.GetOrCreate();
+            if (mindLogManager == null)
             {
-                Debug.LogError("[MemoryGridController] MindLogManager instance not found!");
+                Debug.LogError("[MemoryGridController] Failed to get or create MindLogManager!");
                 return;
             }
 
-            var logs = MindLogManager.Instance.GetAllLogs();
+            var logs = mindLogManager.GetAllLogs();
             var logList = new List<MindLogEntry>(logs);
 
             // Clear existing selections

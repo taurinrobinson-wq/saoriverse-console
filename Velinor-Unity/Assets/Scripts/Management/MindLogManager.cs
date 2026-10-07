@@ -27,6 +27,30 @@ namespace Velinor.Management
             Debug.Log("[MindLogManager] Initialized as singleton.");
         }
 
+        private void OnEnable()
+        {
+            // Ensure singleton is set even if this object is enabled after another instance
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+        }
+
+        /// <summary>
+        /// Get or create the MindLogManager singleton.
+        /// </summary>
+        public static MindLogManager GetOrCreate()
+        {
+            if (Instance == null)
+            {
+                GameObject obj = new GameObject("MindLogManager");
+                Instance = obj.AddComponent<MindLogManager>();
+                DontDestroyOnLoad(obj);
+                Debug.Log("[MindLogManager] Auto-created singleton instance.");
+            }
+            return Instance;
+        }
+
         /// <summary>
         /// Add or update a log entry.
         /// </summary>

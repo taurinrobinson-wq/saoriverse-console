@@ -643,10 +643,10 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        var mindLogManager = MindLogManager.Instance;
+        var mindLogManager = MindLogManager.GetOrCreate();
         if (mindLogManager == null)
         {
-            Debug.LogError("[DialogueManager] MindLogManager not found");
+            Debug.LogError("[DialogueManager] Failed to get or create MindLogManager");
             return;
         }
 
