@@ -61,12 +61,13 @@ public class MindLogPersistence : MonoBehaviour
 
     /// <summary>
     /// Unlocks the Codex - called when player receives it from Saori or other dialogue trigger.
-    /// Also enables the CodexPanel UI and CodexViewController button access.
+    /// Enables the CodexPanel UI and CodexViewController button access, but does NOT auto-show it.
+    /// User must press C to open it.
     /// </summary>
     public static void UnlockCodex()
     {
         isCodexUnlocked = true;
-        Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now access it");
+        Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now press C to access it");
 
         // Also unlock in CodexController so C key works
         var codexController = FindObjectOfType<CodexController>();
@@ -80,24 +81,17 @@ public class MindLogPersistence : MonoBehaviour
             Debug.LogWarning("[MindLogPersistence] CodexController not found - Codex UI may not be fully unlocked");
         }
 
-        // Initialize CodexViewController views now that Codex is unlocked
-        var codexViewController = FindObjectOfType<CodexViewController>();
-        if (codexViewController != null)
-        {
-            codexViewController.InitializeViewsOnUnlock();
-            Debug.Log("[MindLogPersistence] CodexViewController.InitializeViewsOnUnlock() called");
-        }
-
-        // Ensure CodexPanel is visible now that Codex is unlocked
+        // Enable CodexPanel but do NOT show it - just make it interactive when user presses C
         GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
         if (codexPanel != null)
         {
             CanvasGroup cg = codexPanel.GetComponent<CanvasGroup>();
             if (cg != null)
             {
-                cg.alpha = 1f;
                 cg.interactable = true;
                 cg.blocksRaycasts = true;
+                // Do NOT change alpha - let CodexController's ToggleCodex() handle visibility
+                Debug.Log("[MindLogPersistence] CodexPanel enabled (interactive) - waiting for C key press");
             }
         }
     }

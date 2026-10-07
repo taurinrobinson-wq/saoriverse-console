@@ -168,14 +168,14 @@
       "display_name": "Older Woman",
       "portrait_expression": "determined",
       "setting_description": "The older woman reaches into her pocket and produces a strange device, its surface humming faintly.",
-      "prompt": "I found this. I can't get it working, maybe youâ€™ll have better luck.",
+      "prompt": "I found this. I can't get it working, maybe you'll have better luck.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Trust",
-          "text": "Iâ€¦ alright. I'll take it.",
+          "text": "I... alright. I'll take it.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -376,7 +376,7 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "I didn't get your nameâ€”",
+          "text": "I didn't get your name...",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,

@@ -398,9 +398,6 @@ public class CodexViewController : MonoBehaviour
         mindLogPrimaryContainer.SetActive(true);
         Debug.Log($"[CodexViewController] MindLogPrimaryContainer set to active: {mindLogPrimaryContainer.activeSelf}");
         
-        // DIAGNOSTIC: Log container state every frame after activation
-        StartCoroutine(LogContainerState("Primary"));
-        
         // Ensure the root parent is still marked as DontDestroyOnLoad
         Transform root = mindLogPrimaryContainer.transform.root;
         Debug.Log($"[CodexViewController] Root parent: {root.name}");
@@ -646,17 +643,6 @@ public class CodexViewController : MonoBehaviour
                 cgSecondary.blocksRaycasts = false;
             }
         }
-    }
-
-    /// <summary>
-    /// Called when Codex is unlocked to initialize the view system.
-    /// Shows the Glyphs view as the default starting view.
-    /// </summary>
-    public void InitializeViewsOnUnlock()
-    {
-        Debug.Log("[CodexViewController] Initializing views now that Codex is UNLOCKED");
-        currentView = ""; // Reset to force ShowGlyphsView() to execute
-        ShowGlyphsView();
     }
 
     /// <summary>
