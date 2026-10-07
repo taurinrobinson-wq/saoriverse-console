@@ -1,8 +1,9 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
-  <Project Path="PipelineShowRoom_AD.csproj" />
+  <Project Path="PipelineShowRoom_Editor.csproj" />
   <Project Path="Unity.StarterAssets.Editor.csproj" />
   <Project Path="Unity.StarterAssets.csproj" />
+  <Project Path="PipelineShowRoom_AD.csproj" />
   <Project Path="URPWizard.csproj" />
 </Solution>
