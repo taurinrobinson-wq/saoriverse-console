@@ -61,8 +61,8 @@ public class MindLogPersistence : MonoBehaviour
 
     /// <summary>
     /// Unlocks the Codex - called when player receives it from Saori or other dialogue trigger.
-    /// Enables the CodexPanel UI and CodexViewController button access, but does NOT auto-show views.
-    /// User must press C to open it.
+    /// Enables the CodexPanel UI and CodexViewController button access, but does NOT auto-show it.
+    /// User must press C to open it. Alpha stays at 0 so ToggleCodex() can properly detect it's closed.
     /// </summary>
     public static void UnlockCodex()
     {
@@ -81,18 +81,19 @@ public class MindLogPersistence : MonoBehaviour
             Debug.LogWarning("[MindLogPersistence] CodexController not found - Codex UI may not be fully unlocked");
         }
 
-        // Restore CodexPanel visibility (make alpha=1) so C key handler can work
-        // But views remain hidden - user presses C to actually see content
+        // Enable CodexPanel interactivity but KEEP alpha at 0
+        // ToggleCodex() uses (alpha < 0.5f) to detect if Codex is closed
+        // If we set alpha=1, it will think Codex is open and try to close it on first C press!
         GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
         if (codexPanel != null)
         {
             CanvasGroup cg = codexPanel.GetComponent<CanvasGroup>();
             if (cg != null)
             {
-                cg.alpha = 1f;  // Make panel visible so C key works
+                // Keep alpha at 0 (hidden) but enable interaction
                 cg.interactable = true;
                 cg.blocksRaycasts = true;
-                Debug.Log("[MindLogPersistence] CodexPanel restored to visible - C key is now active");
+                Debug.Log("[MindLogPersistence] CodexPanel unlocked (alpha stays 0, will open on first C press)");
             }
         }
     }
