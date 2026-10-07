@@ -69,25 +69,45 @@ public class MindLogPersistence : MonoBehaviour
         isCodexUnlocked = true;
         Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now press C to access it");
 
-        // Also unlock in CodexController so C key works
+        // Try to find and unlock CodexController
         var codexController = FindObjectOfType<CodexController>();
         if (codexController != null)
         {
             codexController.UnlockCodex();
-            Debug.Log("[MindLogPersistence] CodexController.UnlockCodex() called");
+            Debug.Log("[MindLogPersistence] ✓ CodexController found and unlocked");
         }
         else
         {
-            Debug.LogWarning("[MindLogPersistence] CodexController not found - Codex UI may not be fully unlocked");
+            Debug.LogError("[MindLogPersistence] ✗ CodexController not found via FindObjectOfType! Trying fallback...");
+            
+            // Fallback: Try to find CodexPanel and get controller from it
+            GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
+            if (codexPanel != null)
+            {
+                CodexController controller = codexPanel.GetComponent<CodexController>();
+                if (controller != null)
+                {
+                    controller.UnlockCodex();
+                    Debug.Log("[MindLogPersistence] ✓ CodexController found on CodexPanel and unlocked!");
+                }
+                else
+                {
+                    Debug.LogError("[MindLogPersistence] ✗ CodexPanel has no CodexController component!");
+                }
+            }
+            else
+            {
+                Debug.LogError("[MindLogPersistence] ✗ CodexPanel not found at UI_Canvas/CodexPanel!");
+            }
         }
 
         // Enable CodexPanel interactivity but KEEP alpha at 0
         // ToggleCodex() uses (alpha < 0.5f) to detect if Codex is closed
         // If we set alpha=1, it will think Codex is open and try to close it on first C press!
-        GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
-        if (codexPanel != null)
+        GameObject codexPanel2 = GameObject.Find("UI_Canvas/CodexPanel");
+        if (codexPanel2 != null)
         {
-            CanvasGroup cg = codexPanel.GetComponent<CanvasGroup>();
+            CanvasGroup cg = codexPanel2.GetComponent<CanvasGroup>();
             if (cg != null)
             {
                 // Keep alpha at 0 (hidden) but enable interaction
