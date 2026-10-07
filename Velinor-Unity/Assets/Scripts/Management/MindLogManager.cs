@@ -43,10 +43,19 @@ namespace Velinor.Management
         {
             if (Instance == null)
             {
+                Debug.Log("[MindLogManager] Instance is null, creating new one...");
                 GameObject obj = new GameObject("MindLogManager");
                 Instance = obj.AddComponent<MindLogManager>();
-                DontDestroyOnLoad(obj);
+                // Mark as persistent immediately so it survives scene changes
+                if (Application.isPlaying)
+                {
+                    DontDestroyOnLoad(obj);
+                }
                 Debug.Log("[MindLogManager] Auto-created singleton instance.");
+            }
+            else
+            {
+                Debug.Log($"[MindLogManager] GetOrCreate returning existing instance. Log count: {Instance.logs.Count}");
             }
             return Instance;
         }

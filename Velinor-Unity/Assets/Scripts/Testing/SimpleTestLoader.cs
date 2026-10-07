@@ -13,7 +13,7 @@ public class SimpleTestLoader : MonoBehaviour
     {
         Debug.Log("[SimpleTestLoader] Starting to load test memories...");
         
-        MemoryGridController gridController = FindObjectOfType<MemoryGridController>();
+        MemoryGridController gridController = FindAnyObjectByType<MemoryGridController>();
         if (gridController == null)
         {
             Debug.LogError("[SimpleTestLoader] Could not find MemoryGridController in scene!");

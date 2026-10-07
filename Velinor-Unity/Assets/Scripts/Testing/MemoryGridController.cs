@@ -50,6 +50,8 @@ namespace Velinor.Core
             var logs = mindLogManager.GetAllLogs();
             var logList = new List<MindLogEntry>(logs);
 
+            Debug.Log($"[MemoryGridController] Retrieved {logList.Count} logs from manager");
+
             // Clear existing selections
             foreach (MemorySlot slot in memorySlots)
             {
@@ -65,21 +67,33 @@ namespace Velinor.Core
             {
                 if (index >= memorySlots.Count) break;
 
-                if (log != null && log.Icon != null)
+                if (log == null)
                 {
-                    // Create a temporary MemoryFragment wrapper for the log
-                    var fragment = ScriptableObject.CreateInstance<MemoryFragment>();
-                    fragment.fragmentID = log.LogID;
-                    fragment.displayName = log.LogID;
-                    fragment.icon = log.Icon;
-                    fragment.shortSynopsis = log.SummaryText;
-                    fragment.expandedText = log.FullText;
-                    fragment.tags = new List<string>(log.CombineTags);
-
-                    memorySlots[index].SetMemory(fragment);
-                    slotToFragment[memorySlots[index]] = fragment;
-                    index++;
+                    Debug.LogWarning($"[MemoryGridController] Log entry is NULL!");
+                    continue;
                 }
+
+                Debug.Log($"[MemoryGridController] Log {index}: ID={log.LogID}, Icon={log.Icon}, Summary={log.SummaryText}");
+
+                if (log.Icon == null)
+                {
+                    Debug.LogWarning($"[MemoryGridController] ✗ SKIPPING log '{log.LogID}' - Icon is NULL");
+                    continue;
+                }
+
+                // Create a temporary MemoryFragment wrapper for the log
+                var fragment = ScriptableObject.CreateInstance<MemoryFragment>();
+                fragment.fragmentID = log.LogID;
+                fragment.displayName = log.LogID;
+                fragment.icon = log.Icon;
+                fragment.shortSynopsis = log.SummaryText;
+                fragment.expandedText = log.FullText;
+                fragment.tags = new List<string>(log.CombineTags);
+
+                memorySlots[index].SetMemory(fragment);
+                slotToFragment[memorySlots[index]] = fragment;
+                index++;
+                Debug.Log($"[MemoryGridController] ✓ Added to slot {index - 1}");
             }
 
             // Clear remaining slots
