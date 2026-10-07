@@ -612,10 +612,17 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
+        Debug.Log($"[DialogueManager] EndDialogue called. CurrentBeat: {currentBeat?.id ?? 0}, has mind_log_unlocks: {(currentBeat?.mind_log_unlocks != null && currentBeat.mind_log_unlocks.Length > 0)}");
+        
         // Process Mind Log unlocks from current beat before ending dialogue
         if (currentBeat != null && currentBeat.mind_log_unlocks != null && currentBeat.mind_log_unlocks.Length > 0)
         {
+            Debug.Log($"[DialogueManager] Processing {currentBeat.mind_log_unlocks.Length} mind log unlocks");
             ProcessMindLogUnlocks(currentBeat.mind_log_unlocks);
+        }
+        else
+        {
+            Debug.Log("[DialogueManager] No mind log unlocks to process");
         }
 
         isDialogueActive = false;
