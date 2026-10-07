@@ -29,6 +29,11 @@ public class CodexController : MonoBehaviour
     [Header("Puzzle Mode")]
     [SerializeField] private GameObject triglyphPanelUI;  // Reference to puzzle panel to detect if puzzle mode is active
 
+    [Header("Mind Log Containers")]
+    public GameObject glyphsBackground;
+    public GameObject mindLogPrimaryContainer;
+    public GameObject mindLogSecondaryContainer;
+
     [Header("Audio")]
     [SerializeField] private AudioClip selectGlyphSound;
     [SerializeField] private AudioClip deselectGlyphSound;
@@ -488,6 +493,22 @@ public class CodexController : MonoBehaviour
         {
             Debug.LogWarning("[Codex] NotificationPanel not found - notification not shown");
         }
+    }
+
+    /// <summary>
+    /// Set references to all three UI containers. Called by CodexViewController during setup.
+    /// This centralizes container management and allows MindLogPersistence to access them reliably.
+    /// </summary>
+    public void SetContainerReferences(GameObject glyphsBg, GameObject primaryContainer, GameObject secondaryContainer)
+    {
+        glyphsBackground = glyphsBg;
+        mindLogPrimaryContainer = primaryContainer;
+        mindLogSecondaryContainer = secondaryContainer;
+        
+        Debug.Log("[CodexController] Container references set:");
+        Debug.Log($"  - Glyphs Background: {(glyphsBackground != null ? glyphsBackground.name : "NULL")}");
+        Debug.Log($"  - Mind Log Primary: {(mindLogPrimaryContainer != null ? mindLogPrimaryContainer.name : "NULL")}");
+        Debug.Log($"  - Mind Log Secondary: {(mindLogSecondaryContainer != null ? mindLogSecondaryContainer.name : "NULL")}");
     }
 
     /// <summary>

@@ -88,6 +88,17 @@ public class CodexViewController : MonoBehaviour
             Debug.Log("[CodexViewController] Awake: Root of GlyphsBackground marked as DontDestroyOnLoad");
         }
 
+        // Pass container references to CodexController for centralized management
+        CodexController codexController = GetComponentInParent<CodexController>();
+        if (codexController != null)
+        {
+            codexController.SetContainerReferences(glyphsBackground, mindLogPrimaryContainer, mindLogSecondaryContainer);
+        }
+        else
+        {
+            Debug.LogWarning("[CodexViewController] Could not find CodexController in parent hierarchy");
+        }
+
         // Initialize MindLogPersistence component for container protection
         MindLogPersistence persistence = FindObjectOfType<MindLogPersistence>();
         if (persistence == null && Application.isPlaying)

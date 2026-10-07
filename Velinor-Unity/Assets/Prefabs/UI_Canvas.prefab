@@ -3509,6 +3509,7 @@ GameObject:
   - component: {fileID: 7315374274665168896}
   - component: {fileID: 2804238367914797267}
   - component: {fileID: 7471356998835710382}
+  - component: {fileID: 6672777426661005502}
   m_Layer: 5
   m_Name: CodexPanel
   m_TagString: Untagged
@@ -3622,6 +3623,31 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &6672777426661005502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197547936882688568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29425e826a988f04fbd463b610c74a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CodexController
+  codexPanel: {fileID: 7315374274665168896}
+  viewport: {fileID: 3551064765281523373}
+  codexBackgroundSprite: {fileID: 21300000, guid: ef78b9b1311618b48a92d6a2d15cc38c, type: 3}
+  triglyphPanelUI: {fileID: 0}
+  selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
+  deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
+  glyphNameText: {fileID: 4665222382387263991}
+  nextPageBtn: {fileID: 9209853742837836169}
+  prevPageBtn: {fileID: 6994931906748615895}
+  codexFont: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  requiresCodexDevice: 1
+  glyphUIPrefab: {fileID: 0}
+  allSlots: []
 --- !u!1 &5207951367217545690
 GameObject:
   m_ObjectHideFlags: 0
