@@ -47,7 +47,18 @@ namespace Velinor.Core
                 button.onClick.AddListener(OnSlotClicked);
             }
 
-            // Initialize slot as empty
+            // CRITICAL FIX: Check if MemorySlot has already populated this slot
+            // If there's a MemorySlot component on this GameObject AND it has a sprite already set,
+            // DON'T clear it - the MemorySlot system is using this Image component
+            MemorySlot memorySlot = GetComponent<MemorySlot>();
+            if (memorySlot != null && slotImage != null && slotImage.sprite != null)
+            {
+                Debug.Log($"[GlyphSlot] {gameObject.name} is being used by MemorySlot system - skipping Clear() to preserve sprite");
+                isFilled = false;  // Still mark as unfilled for glyph purposes
+                return;
+            }
+
+            // Initialize slot as empty only if MemorySlot isn't using it
             Clear();
         }
 
@@ -117,6 +128,15 @@ namespace Velinor.Core
         private void OnSlotClicked()
         {
             Debug.Log("[GlyphSlot] Slot clicked");
+
+            // CRITICAL FIX: If MemorySlot is using this slot, don't intercept the click
+            // MemorySlot has its own click handler (IPointerClickHandler)
+            MemorySlot memorySlot = GetComponent<MemorySlot>();
+            if (memorySlot != null)
+            {
+                Debug.Log("[GlyphSlot] This slot is managed by MemorySlot - skipping GlyphSlot click handling");
+                return;
+            }
 
             var codexController = FindAnyObjectByType<CodexController>();
             if (codexController != null)

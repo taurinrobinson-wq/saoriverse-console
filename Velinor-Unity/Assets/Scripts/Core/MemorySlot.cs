@@ -44,15 +44,50 @@ namespace Velinor.Core
                 if (slotImage == null)
                 {
                     Debug.LogWarning($"[MemorySlot] No Image component found on {gameObject.name}!");
+                    return;
                 }
             }
 
-            // We don't need Button component anymore - using IPointerClickHandler instead
-            // But ensure we have a GraphicRaycaster or EventSystem can't detect clicks
+            // CRITICAL: Ensure the Image component is properly configured for rendering
             if (slotImage != null)
             {
-                // slotImage will receive pointer events via IPointerClickHandler
-                Debug.Log($"[MemorySlot] {gameObject.name} ready to receive pointer events");
+                // Make sure the Image component itself is enabled
+                if (!slotImage.enabled)
+                {
+                    slotImage.enabled = true;
+                    Debug.Log($"[MemorySlot] Enabled Image component on {gameObject.name}");
+                }
+
+                // Ensure the Image Type is set to "Simple" for basic rendering
+                if (slotImage.type != Image.Type.Simple)
+                {
+                    slotImage.type = Image.Type.Simple;
+                    Debug.Log($"[MemorySlot] Set Image Type to Simple on {gameObject.name}");
+                }
+
+                // Ensure raycast target is enabled so the component can receive events
+                if (!slotImage.raycastTarget)
+                {
+                    slotImage.raycastTarget = true;
+                    Debug.Log($"[MemorySlot] Enabled Raycast Target on {gameObject.name}");
+                }
+
+                // Check for Canvas Group visibility blockers
+                CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+                if (canvasGroup != null && canvasGroup.alpha < 1f)
+                {
+                    Debug.LogWarning($"[MemorySlot] ⚠ Canvas Group on {gameObject.name} has alpha={canvasGroup.alpha} (less than 1), which will make visuals invisible!");
+                }
+
+                // Check parent Canvas Group
+                CanvasGroup parentCanvasGroup = transform.parent?.GetComponent<CanvasGroup>();
+                if (parentCanvasGroup != null && parentCanvasGroup.alpha < 1f)
+                {
+                    Debug.LogWarning($"[MemorySlot] ⚠ Parent Canvas Group has alpha={parentCanvasGroup.alpha}, which will affect visibility of {gameObject.name}!");
+                }
+
+                // Check and log the initial state for debugging
+                Debug.Log($"[MemorySlot] {gameObject.name} initialized - Image enabled: {slotImage.enabled}, Type: {slotImage.type}, Raycast: {slotImage.raycastTarget}, Sprite: {(slotImage.sprite != null ? slotImage.sprite.name : "None")}");
             }
         }
 
@@ -84,7 +119,29 @@ namespace Velinor.Core
             {
                 slotImage.sprite = fragment.icon;
                 slotImage.color = Color.white;
+                
+                // CRITICAL: Enable the Image component in case it was disabled
+                slotImage.enabled = true;
+                
+                // Ensure native size is preserved or set to preserve aspect
+                if (slotImage.GetComponent<LayoutElement>() == null)
+                {
+                    slotImage.preserveAspect = true;
+                }
+                
+                // Log detailed information for debugging
                 Debug.Log($"[MemorySlot] ✓ Set sprite '{fragment.icon.name}' on {gameObject.name}");
+                Debug.Log($"[MemorySlot] DEBUG: Image enabled={slotImage.enabled}, Type={slotImage.type}, Sprite set={slotImage.sprite != null}, Color={slotImage.color}, PreserveAspect={slotImage.preserveAspect}");
+                
+                // Mark layout for rebuild to ensure UI updates
+                LayoutRebuilder.MarkLayoutForRebuild(slotImage.GetComponent<RectTransform>());
+                
+                // Also check if parent needs layout rebuild
+                RectTransform parentRect = slotImage.GetComponent<RectTransform>().parent as RectTransform;
+                if (parentRect != null)
+                {
+                    LayoutRebuilder.MarkLayoutForRebuild(parentRect);
+                }
             }
             else if (slotImage == null)
             {
