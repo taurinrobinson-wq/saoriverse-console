@@ -106,7 +106,39 @@ public class CodexController : MonoBehaviour
             Debug.LogError("[Codex] CodexPanel not found at UI_Canvas/CodexPanel!");
         }
 
+        // Fix Mind Log container positioning if they're misaligned
+        FixMindLogContainerPositions();
+
         InitializeReferences();
+    }
+
+    private void FixMindLogContainerPositions()
+    {
+        // Fix all Mind Log UI containers to ensure they fill their parent properly
+        string[] containerPaths = new[]
+        {
+            "UI_Canvas/CodexPanel/MindLogPrimaryContainer",
+            "UI_Canvas/CodexPanel/MindLogSecondaryContainer",
+            "UI_Canvas/CodexPanel/GlyphsBackground"
+        };
+
+        foreach (var path in containerPaths)
+        {
+            GameObject container = GameObject.Find(path);
+            if (container != null)
+            {
+                RectTransform rect = container.GetComponent<RectTransform>();
+                if (rect != null)
+                {
+                    // Set anchors to fill parent
+                    rect.anchorMin = Vector2.zero;
+                    rect.anchorMax = Vector2.one;
+                    rect.offsetMin = Vector2.zero;
+                    rect.offsetMax = Vector2.zero;
+                    Debug.Log($"[Codex] Fixed position for {Path.GetFileName(path)}");
+                }
+            }
+        }
     }
 
     private void InitializeReferences()
