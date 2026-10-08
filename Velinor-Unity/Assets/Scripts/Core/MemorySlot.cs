@@ -129,9 +129,7 @@ namespace Velinor.Core
                     slotImage.preserveAspect = true;
                 }
                 
-                // Log detailed information for debugging
                 Debug.Log($"[MemorySlot] ✓ Set sprite '{fragment.icon.name}' on {gameObject.name}");
-                Debug.Log($"[MemorySlot] DEBUG: Image enabled={slotImage.enabled}, Type={slotImage.type}, Sprite set={slotImage.sprite != null}, Color={slotImage.color}, PreserveAspect={slotImage.preserveAspect}");
                 
                 // Mark layout for rebuild to ensure UI updates
                 LayoutRebuilder.MarkLayoutForRebuild(slotImage.GetComponent<RectTransform>());
