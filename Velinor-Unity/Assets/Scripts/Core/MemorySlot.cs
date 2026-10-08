@@ -33,7 +33,7 @@ namespace Velinor.Core
             EnsureComponentsInitialized();
         }
 
-        private void EnsureComponentsInitialized()
+        public void EnsureComponentsInitialized()
         {
             // Auto-find Image if not assigned
             if (slotImage == null)

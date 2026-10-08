@@ -66,6 +66,17 @@ namespace Velinor.Core
             // Ensure slots are initialized before trying to populate
             EnsureInitialized();
 
+            // CRITICAL: Force all slots to initialize their components NOW
+            // This is necessary because OnEnable() might not have fired yet
+            // and SetMemory() needs the Image component to be ready
+            foreach (var slot in memorySlots)
+            {
+                if (slot != null)
+                {
+                    slot.EnsureComponentsInitialized();
+                }
+            }
+
             var mindLogManager = MindLogManager.GetOrCreate();
             if (mindLogManager == null)
             {
