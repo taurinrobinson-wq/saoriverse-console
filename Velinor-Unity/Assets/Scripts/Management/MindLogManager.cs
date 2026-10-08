@@ -16,15 +16,23 @@ namespace Velinor.Management
 
         private void Awake()
         {
+            // CRITICAL FIX: Only apply singleton logic if NOT already initialized
+            // This prevents the manager from destroying itself if re-enabled on a UI container
             if (Instance != null && Instance != this)
             {
-                Destroy(gameObject);
+                // Don't destroy yet - just mark as duplicate and disable
+                Debug.LogWarning("[MindLogManager] Duplicate instance detected. Disabling this one.");
+                enabled = false;
                 return;
             }
 
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("[MindLogManager] Initialized as singleton.");
+            // First time initialization
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+                Debug.Log("[MindLogManager] Initialized as singleton.");
+            }
         }
 
         private void OnEnable()
