@@ -46,7 +46,7 @@ namespace Velinor.Core
                 var mindLogManager = MindLogManager.GetOrCreate();
                 if (mindLogManager != null)
                 {
-                    mindLogManager.ClearAll();
+                    mindLogManager.ClearAllLogs();
                     Debug.Log("[MemoryGridController] Cleared all memory logs on OnDestroy (dev mode)");
                 }
             }
