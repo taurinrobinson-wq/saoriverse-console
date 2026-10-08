@@ -27,7 +27,6 @@ public class CodexViewController : MonoBehaviour
 
     [Header("View Backgrounds")]
     [SerializeField] private GameObject glyphsBackground;
-    [SerializeField] private GameObject mindLogBackground;
 
     [Header("Glyphs View Elements")]
     [SerializeField] private GameObject glyphGrid_Pg1;
@@ -263,22 +262,27 @@ public class CodexViewController : MonoBehaviour
         Debug.Log("[CodexViewController] ShowMindLogPrimaryView() called");
         
         SetAllContainerAlpha(glyphsBackground, 0f);
-        SetAllContainerAlpha(mindLogBackground, 1f);
         SetAllContainerAlpha(mindLogPrimaryContainer, 1f);
         SetAllContainerAlpha(mindLogSecondaryContainer, 0f);
 
         // CRITICAL: Ensure containers are active in hierarchy
         // CanvasGroup alpha doesn't help if the GameObject itself is inactive
-        if (mindLogBackground != null && !mindLogBackground.activeSelf)
+        if (glyphsBackground != null && !glyphsBackground.activeSelf)
         {
-            mindLogBackground.SetActive(true);
-            Debug.Log("[CodexViewController] Activated mindLogBackground");
+            glyphsBackground.SetActive(true);
+            Debug.Log("[CodexViewController] Activated glyphsBackground");
         }
         
         if (mindLogPrimaryContainer != null && !mindLogPrimaryContainer.activeSelf)
         {
             mindLogPrimaryContainer.SetActive(true);
             Debug.Log("[CodexViewController] Activated mindLogPrimaryContainer");
+        }
+        
+        if (mindLogSecondaryContainer != null && !mindLogSecondaryContainer.activeSelf)
+        {
+            mindLogSecondaryContainer.SetActive(true);
+            Debug.Log("[CodexViewController] Activated mindLogSecondaryContainer");
         }
         
         // Initialize test memories on first load if enabled
@@ -338,16 +342,21 @@ public class CodexViewController : MonoBehaviour
         
         // Hide glyphs and primary, show secondary
         SetAllContainerAlpha(glyphsBackground, 0f);
-        SetAllContainerAlpha(mindLogBackground, 1f);
         SetAllContainerAlpha(mindLogPrimaryContainer, 0f);
         SetAllContainerAlpha(mindLogSecondaryContainer, 1f);
 
         // CRITICAL: Ensure containers are active in hierarchy
         // CanvasGroup alpha doesn't help if the GameObject itself is inactive
-        if (mindLogBackground != null && !mindLogBackground.activeSelf)
+        if (glyphsBackground != null && !glyphsBackground.activeSelf)
         {
-            mindLogBackground.SetActive(true);
-            Debug.Log("[CodexViewController] Activated mindLogBackground");
+            glyphsBackground.SetActive(true);
+            Debug.Log("[CodexViewController] Activated glyphsBackground");
+        }
+        
+        if (mindLogPrimaryContainer != null && !mindLogPrimaryContainer.activeSelf)
+        {
+            mindLogPrimaryContainer.SetActive(true);
+            Debug.Log("[CodexViewController] Activated mindLogPrimaryContainer");
         }
         
         if (mindLogSecondaryContainer != null && !mindLogSecondaryContainer.activeSelf)
