@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
+using System.Collections.Generic;
 using Velinor.UI.Codex;
 using Velinor.Core;
 using Velinor.Testing;
+using Velinor.Management;
 
 /// <summary>
 /// Manages toggling between Glyphs, Mind Log Primary, and Mind Log Secondary views on the Codex device.
@@ -338,6 +340,8 @@ public class CodexViewController : MonoBehaviour
         else if (useTestMemories && !testMemoriesInitialized && testSetup == null)
         {
             Debug.Log("[CodexViewController] Test Setup not assigned - using manual loader instead.");
+            EnsureTestMemoriesExist();
+            testMemoriesInitialized = true;
         }
 
         // CRITICAL: Ensure Canvas hierarchy is active before enabling container
@@ -768,5 +772,97 @@ public class CodexViewController : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Create test memories programmatically if MindLogManager is empty.
+    /// This ensures the grid always has something to display for testing click functionality.
+    /// </summary>
+    private void EnsureTestMemoriesExist()
+    {
+        MindLogManager manager = MindLogManager.GetOrCreate();
+        if (manager == null)
+        {
+            Debug.LogError("[CodexViewController] Failed to get MindLogManager!");
+            return;
+        }
+
+        // If manager already has logs, don't add more
+        if (manager.GetLogCount() > 0)
+        {
+            Debug.Log($"[CodexViewController] MindLogManager already has {manager.GetLogCount()} logs - skipping test data creation");
+            return;
+        }
+
+        Debug.Log("[CodexViewController] MindLogManager is empty - creating test memories for UI testing");
+
+        // Create test memories
+        var saoriMemory = new MindLogEntry(
+            logID: "memory_saori_desert_encounter",
+            icon: CreateTestIcon(0),
+            summaryText: "Mysterious Encounter",
+            fullText: "I met an older woman on the way through the desert. She handed me a strange device without much explanation. There was something knowing in her eyes—as if she recognized me, or perhaps knew something about me that I didn't know myself. The device she gave me feels important, though I can't explain why."
+        );
+        saoriMemory.AddCombineTag("saori");
+        saoriMemory.AddCombineTag("encounter");
+        manager.AddLog(saoriMemory);
+        Debug.Log("[CodexViewController] Created test memory: memory_saori_desert_encounter");
+
+        // Create a second test memory for variety
+        var testMemory2 = new MindLogEntry(
+            logID: "memory_test_encounter_2",
+            icon: CreateTestIcon(1),
+            summaryText: "Another Discovery",
+            fullText: "Through my exploration, I've learned more about the world and my place in it. Each encounter brings new insights and questions."
+        );
+        testMemory2.AddCombineTag("discovery");
+        manager.AddLog(testMemory2);
+        Debug.Log("[CodexViewController] Created test memory: memory_test_encounter_2");
+
+        // Create a third test memory
+        var testMemory3 = new MindLogEntry(
+            logID: "memory_test_encounter_3",
+            icon: CreateTestIcon(2),
+            summaryText: "Glimpse of Truth",
+            fullText: "Among the echoes of the past, I found a path forward. The truth, when finally glimpsed, was both simpler and more complex than I expected."
+        );
+        testMemory3.AddCombineTag("revelation");
+        manager.AddLog(testMemory3);
+        Debug.Log("[CodexViewController] Created test memory: memory_test_encounter_3");
+
+        Debug.Log("[CodexViewController] Test memories created successfully!");
+    }
+
+    /// <summary>
+    /// Create a simple placeholder test icon texture.
+    /// In production, you'd use real sprite assets.
+    /// </summary>
+    private Sprite CreateTestIcon(int colorVariant)
+    {
+        Texture2D texture = new Texture2D(64, 64, TextureFormat.RGBA32, false);
+        
+        // Use different colors for each test icon
+        Color[] colors = new Color[]
+        {
+            new Color(0.3f, 0.7f, 1f, 1f),   // Blue
+            new Color(1f, 0.7f, 0.3f, 1f),   // Orange
+            new Color(0.7f, 0.3f, 1f, 1f)    // Purple
+        };
+        
+        Color testColor = colors[colorVariant % colors.Length];
+        Color[] pixels = new Color[64 * 64];
+        
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            pixels[i] = testColor;
+        }
+        
+        texture.SetPixels(pixels);
+        texture.Apply();
+        
+        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f), 100);
+        sprite.name = $"TestIcon_{colorVariant}";
+        
+        return sprite;
     }
 }
