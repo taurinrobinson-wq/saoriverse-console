@@ -132,9 +132,10 @@ public class CodexController : MonoBehaviour
                 RectTransform rect = container.GetComponent<RectTransform>();
                 if (rect != null)
                 {
-                    // CRITICAL: Disable all LayoutGroups on this container and children
-                    // These cause position recalculation every frame, creating drift
-                    LayoutGroup[] layoutGroups = container.GetComponentsInChildren<LayoutGroup>();
+                    // CRITICAL: Disable only LayoutGroups directly on this container
+                    // Do NOT disable children's LayoutGroups (e.g., GridLayoutGroup on MindLogGrid_Pg1)
+                    // Only direct LayoutGroups on this container cause position recalculation drift
+                    LayoutGroup[] layoutGroups = container.GetComponents<LayoutGroup>();
                     foreach (LayoutGroup layoutGroup in layoutGroups)
                     {
                         layoutGroup.enabled = false;
