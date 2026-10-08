@@ -166,7 +166,6 @@ public class CodexViewController : MonoBehaviour
     {
         // Ensure all containers have CanvasGroups and start invisible
         EnsureCanvasGroup(glyphsBackground, false);
-        EnsureCanvasGroup(mindLogBackground, false);
         EnsureCanvasGroup(mindLogPrimaryContainer, false);
         EnsureCanvasGroup(mindLogSecondaryContainer, false);
         
@@ -239,7 +238,6 @@ public class CodexViewController : MonoBehaviour
     private void ShowGlyphsView()
     {
         SetAllContainerAlpha(glyphsBackground, 1f);
-        SetAllContainerAlpha(mindLogBackground, 0f);
         SetAllContainerAlpha(mindLogPrimaryContainer, 0f);
         SetAllContainerAlpha(mindLogSecondaryContainer, 0f);
 
