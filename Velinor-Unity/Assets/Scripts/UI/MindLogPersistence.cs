@@ -48,21 +48,22 @@ public class MindLogPersistence : MonoBehaviour
         {
             if (!codexController.mindLogPrimaryContainer.activeSelf)
             {
-                Debug.LogWarning("[MindLogPersistence] MindLogPrimaryContainer was deactivated while protected! Re-activating...");
+                Debug.LogError("[MindLogPersistence] ALERT: MindLogPrimaryContainer was deactivated while protected! Re-activating immediately...");
                 codexController.mindLogPrimaryContainer.SetActive(true);
+                Debug.LogError($"[MindLogPersistence] Re-activated! Now: activeSelf={codexController.mindLogPrimaryContainer.activeSelf}");
             }
             
             // Also check CanvasGroup visibility
             CanvasGroup cgPrimary = codexController.mindLogPrimaryContainer.GetComponent<CanvasGroup>();
             if (cgPrimary != null && cgPrimary.alpha < 0.5f)
             {
-                Debug.LogWarning($"[MindLogPersistence] ALERT: MindLogPrimaryContainer CanvasGroup alpha={cgPrimary.alpha} (should be 1)! Re-showing...");
+                Debug.LogError($"[MindLogPersistence] ALERT: MindLogPrimaryContainer CanvasGroup alpha={cgPrimary.alpha} (should be 1)! Re-showing...");
                 cgPrimary.alpha = 1f;
                 cgPrimary.interactable = true;
                 cgPrimary.blocksRaycasts = true;
             }
         }
-
+        
         if (codexController.mindLogSecondaryContainer != null && isSecondaryProtected)
         {
             if (!codexController.mindLogSecondaryContainer.activeSelf)

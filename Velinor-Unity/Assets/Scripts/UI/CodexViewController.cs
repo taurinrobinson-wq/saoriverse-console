@@ -93,6 +93,28 @@ public class CodexViewController : MonoBehaviour
             // The persistence data is stored in static Codex unlock state, not the GameObject
             Debug.Log("[CodexViewController] Awake: Created MindLogPersistenceManager");
         }
+
+        // ADD DESTRUCTION TRACKER - will help us catch when containers are destroyed
+        if (mindLogPrimaryContainer != null)
+        {
+            AddDestructionTracker(mindLogPrimaryContainer, "MindLogPrimaryContainer");
+            Transform parent = mindLogPrimaryContainer.transform.parent;
+            while (parent != null)
+            {
+                AddDestructionTracker(parent.gameObject, $"MindLogPrimaryContainer parent: {parent.name}");
+                parent = parent.parent;
+            }
+        }
+    }
+
+    private void AddDestructionTracker(GameObject go, string name)
+    {
+        // Add a simple script to log when this GameObject is destroyed
+        if (go.GetComponent<DestructionTracker>() == null)
+        {
+            DestructionTracker tracker = go.AddComponent<DestructionTracker>();
+            tracker.objectName = name;
+        }
     }
 
     private void OnEnable()
