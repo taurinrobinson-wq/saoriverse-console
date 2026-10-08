@@ -460,14 +460,28 @@ public class CodexViewController : MonoBehaviour
         }
 
         // Populate grid from MindLogManager
-        MemoryGridController gridController = mindLogPrimaryContainer.GetComponentInChildren<MemoryGridController>();
+        // Use a small coroutine to ensure the grid is fully initialized before populating
+        StartCoroutine(PopulateGridWithDelay(mindLogPrimaryContainer));
+        
+        Debug.Log("[CodexViewController] Started grid population coroutine");
+    }
+
+    private System.Collections.IEnumerator PopulateGridWithDelay(GameObject container)
+    {
+        // Wait one frame to allow all UI components to initialize
+        yield return null;
+
+        MemoryGridController gridController = container.GetComponentInChildren<MemoryGridController>();
         if (gridController != null)
         {
             gridController.PopulateFromManager();
+            // Force canvas to refresh visuals immediately
+            Canvas.ForceUpdateCanvases();
+            Debug.Log("[CodexViewController] Grid populated and canvas refreshed");
         }
         else
         {
-            Debug.LogWarning("[CodexViewController] MemoryGridController not found in MindLogPrimaryContainer!");
+            Debug.LogWarning("[CodexViewController] MemoryGridController not found in container!");
         }
 
         // Disable Mind Log Secondary view
