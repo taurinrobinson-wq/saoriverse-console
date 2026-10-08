@@ -20,7 +20,11 @@ namespace Velinor.Core
         private bool isFilled;
         private bool isSelected;
         private float lastClickTime = -1f;
-        private const float DOUBLE_CLICK_THRESHOLD = 0.3f;
+        private const float DOUBLE_CLICK_THRESHOLD = 0.25f;
+        
+        // Track if we're waiting for a potential double-click
+        private bool isWaitingForDoubleClick = false;
+        private System.Collections.Coroutine doubleClickCoroutine;
 
         public bool IsFilled => isFilled;
         public MemoryFragment MemoryFragment => memoryFragment;
@@ -129,19 +133,36 @@ namespace Velinor.Core
                 return;
             }
 
-            // Detect double-click
-            float currentTime = Time.unscaledTime;
-            bool isDoubleClick = (currentTime - lastClickTime) <= DOUBLE_CLICK_THRESHOLD;
-            lastClickTime = currentTime;
-
-            if (isDoubleClick)
+            // If we're already waiting for a double-click, this is the second click
+            if (isWaitingForDoubleClick)
             {
+                // Cancel the pending single-click coroutine
+                if (doubleClickCoroutine != null)
+                {
+                    StopCoroutine(doubleClickCoroutine);
+                    doubleClickCoroutine = null;
+                }
+                isWaitingForDoubleClick = false;
+                
+                // This is a double-click
                 OnMemoryDoubleClicked();
+                return;
             }
-            else
-            {
-                OnMemorySingleClicked();
-            }
+
+            // This is the first click - start waiting for a potential second click
+            isWaitingForDoubleClick = true;
+            doubleClickCoroutine = StartCoroutine(WaitForSecondClick());
+        }
+
+        private System.Collections.IEnumerator WaitForSecondClick()
+        {
+            // Wait for the double-click threshold time
+            yield return new WaitForSeconds(DOUBLE_CLICK_THRESHOLD);
+
+            // If we get here, no second click came in - treat as single click
+            isWaitingForDoubleClick = false;
+            doubleClickCoroutine = null;
+            OnMemorySingleClicked();
         }
 
         private void OnMemorySingleClicked()
@@ -224,6 +245,13 @@ namespace Velinor.Core
 
         private void OnDestroy()
         {
+            // Clean up any pending coroutines
+            if (doubleClickCoroutine != null)
+            {
+                StopCoroutine(doubleClickCoroutine);
+                doubleClickCoroutine = null;
+            }
+
             if (button != null)
             {
                 button.onClick.RemoveListener(OnSlotClicked);
