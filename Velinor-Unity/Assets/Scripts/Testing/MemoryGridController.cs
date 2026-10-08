@@ -51,6 +51,15 @@ namespace Velinor.Core
                 gridContainer = transform;
             }
 
+            // CRITICAL: Disable MemoryGridUI if it exists (old/conflicting system)
+            // We use MemorySlot + MemoryGridController now
+            var oldMemoryGridUI = gridContainer.GetComponent<MemoryGridUI>();
+            if (oldMemoryGridUI != null)
+            {
+                oldMemoryGridUI.enabled = false;
+                Debug.Log("[MemoryGridController] Disabled old MemoryGridUI system (using MemorySlot instead)");
+            }
+
             MemorySlot[] slots = gridContainer.GetComponentsInChildren<MemorySlot>();
             memorySlots.Clear();
             memorySlots.AddRange(slots);
