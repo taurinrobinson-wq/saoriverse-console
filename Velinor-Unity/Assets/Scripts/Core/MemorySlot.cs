@@ -24,7 +24,7 @@ namespace Velinor.Core
         
         // Track if we're waiting for a potential double-click
         private bool isWaitingForDoubleClick = false;
-        private System.Collections.Coroutine doubleClickCoroutine;
+        private Coroutine doubleClickCoroutine;
 
         public bool IsFilled => isFilled;
         public MemoryFragment MemoryFragment => memoryFragment;
