@@ -35,7 +35,6 @@ public class CodexViewController : MonoBehaviour
 
     [Header("Mind Log Primary View Elements")]
     [SerializeField] private GameObject mindLogPrimaryContainer;
-    [SerializeField] private MemoryGridUI memoryGridUI;
 
     [Header("Mind Log Secondary View Elements (Expanded)")]
     [SerializeField] private GameObject mindLogSecondaryContainer;
