@@ -34,6 +34,25 @@ namespace Velinor.Core
             EnsureInitialized();
         }
 
+#if UNITY_EDITOR
+        private void OnDestroy()
+        {
+            // Only clear memory slots when exiting play mode during development.
+            // This preserves state across play sessions for easier testing and prevents
+            // duplicate logs from accumulating when testing the same dialogue repeatedly.
+            // In production, the app clears on launch, not on every scene reload.
+            if (!Application.isPlaying)
+            {
+                var mindLogManager = MindLogManager.GetOrCreate();
+                if (mindLogManager != null)
+                {
+                    mindLogManager.ClearAll();
+                    Debug.Log("[MemoryGridController] Cleared all memory logs on OnDestroy (dev mode)");
+                }
+            }
+        }
+#endif
+
         /// <summary>
         /// Ensure the grid controller has discovered all memory slots.
         /// Called before PopulateFromManager() to guarantee slots are available.
@@ -99,13 +118,9 @@ namespace Velinor.Core
             Debug.Log($"[MemoryGridController] Retrieved {logList.Count} logs from manager");
             Debug.Log($"[MemoryGridController] Available slots: {memorySlots.Count}");
 
-            // Clear existing selections
-            foreach (MemorySlot slot in memorySlots)
-            {
-                slot.Unhighlight();
-                slot.Clear();
-            }
-
+            // CHANGED: No longer clear all slots at the start. This prevents unnecessary
+            // sprite deletion/repopulation that can interfere with rendering.
+            // Slots only clear on OnDestroy (game stop) during development.
             slotToFragment.Clear();
 
             // Populate slots with logs from manager
@@ -157,13 +172,8 @@ namespace Velinor.Core
         /// </summary>
         public void PopulateGrid(List<MemoryFragment> fragments)
         {
-            // Clear existing selections
-            foreach (MemorySlot slot in memorySlots)
-            {
-                slot.Unhighlight();
-                slot.Clear();
-            }
-
+            // CHANGED: No longer clear all slots at the start for consistency with PopulateFromManager().
+            // Slots only clear on OnDestroy (game stop) during development.
             slotToFragment.Clear();
 
             // Populate slots with memories
