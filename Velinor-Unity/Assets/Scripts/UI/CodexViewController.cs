@@ -602,22 +602,7 @@ public class CodexViewController : MonoBehaviour
             }
 
             mindLogSecondaryContainer.SetActive(true);
-            
-            // Ensure the secondary container has the same position as the primary container
-            RectTransform secondaryRect = mindLogSecondaryContainer.GetComponent<RectTransform>();
-            if (secondaryRect != null)
-            {
-                // Match the primary container's anchoring
-                secondaryRect.anchorMin = Vector2.zero;
-                secondaryRect.anchorMax = Vector2.one;
-                secondaryRect.offsetMin = Vector2.zero;
-                secondaryRect.offsetMax = Vector2.zero;
-                secondaryRect.anchoredPosition = Vector2.zero;
-                
-                // Force canvas update to apply changes
-                Canvas.ForceUpdateCanvases();
-                Debug.Log($"[CodexViewController] Secondary container position reset to: {secondaryRect.anchoredPosition}");
-            }
+            Debug.Log("[CodexViewController] MindLogSecondaryContainer activated");
             
             CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
             if (cgSecondary != null)
@@ -627,14 +612,7 @@ public class CodexViewController : MonoBehaviour
                 cgSecondary.alpha = 1f;
             }
 
-            // Disable layout groups to prevent automatic repositioning during child enable
-            LayoutGroup layoutGroup = mindLogSecondaryContainer.GetComponent<LayoutGroup>();
-            if (layoutGroup != null)
-            {
-                layoutGroup.enabled = false;
-            }
-
-            // Enable all children of the secondary container (including TextDisplay, PrevButton, NextButton)
+            // Enable all children of the secondary container
             foreach (Transform child in mindLogSecondaryContainer.transform)
             {
                 child.gameObject.SetActive(true);
