@@ -260,15 +260,31 @@ public class CodexViewController : MonoBehaviour
     /// </summary>
     private void ShowMindLogPrimaryView()
     {
-        // CRITICAL: Immediately re-find the container if reference is null
-        // This can happen if the container is destroyed/recreated
+        // CRITICAL: Immediately re-find the container if reference is null or destroyed
+        // This can happen if the container is destroyed/recreated or reference is lost
         if (mindLogPrimaryContainer == null)
         {
             mindLogPrimaryContainer = GameObject.Find("MindLogPrimaryContainer");
             if (mindLogPrimaryContainer == null)
             {
-                Debug.LogError("[CodexViewController] FATAL: MindLogPrimaryContainer not found in scene!");
-                return;
+                // Try to find it in scene root
+                Canvas[] allCanvases = FindObjectsOfType<Canvas>();
+                foreach (Canvas canvas in allCanvases)
+                {
+                    Transform found = canvas.transform.Find("CodexPanel/MindLogPrimaryContainer");
+                    if (found != null)
+                    {
+                        mindLogPrimaryContainer = found.gameObject;
+                        Debug.Log("[CodexViewController] Found MindLogPrimaryContainer via hierarchy search");
+                        break;
+                    }
+                }
+                
+                if (mindLogPrimaryContainer == null)
+                {
+                    Debug.LogError("[CodexViewController] FATAL: MindLogPrimaryContainer not found in scene! Checked both GameObject.Find() and hierarchy search.");
+                    return;
+                }
             }
             Debug.Log("[CodexViewController] Re-found MindLogPrimaryContainer (reference was null)");
         }
@@ -599,50 +615,70 @@ public class CodexViewController : MonoBehaviour
 
     private void DisableMindLogPrimary()
     {
-        // Unprotect the container first so it can be disabled without re-activation
-        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
-        if (persistence != null)
-        {
-            persistence.UnprotectPrimaryContainer();
-        }
-
         if (mindLogPrimaryContainer != null)
         {
-            // IMPORTANT: Keep active but hide via CanvasGroup
-            // This prevents container destruction while keeping it invisible and non-interactive
-            mindLogPrimaryContainer.SetActive(true);
+            // CRITICAL: NEVER call SetActive(false) on this container
+            // It can cause it to be destroyed by competing systems
+            // ONLY use CanvasGroup to hide it
             CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
             if (cgPrimary != null)
             {
                 cgPrimary.alpha = 0f;  // Invisible
                 cgPrimary.interactable = false;
                 cgPrimary.blocksRaycasts = false;
-                Debug.Log("[CodexViewController] MindLogPrimaryContainer hidden via CanvasGroup (kept active)");
+                Debug.Log("[CodexViewController] MindLogPrimaryContainer hidden via CanvasGroup ONLY (SetActive NOT called - prevents destruction)");
+            }
+            else
+            {
+                // If no CanvasGroup, add one
+                cgPrimary = mindLogPrimaryContainer.AddComponent<CanvasGroup>();
+                cgPrimary.alpha = 0f;
+                cgPrimary.interactable = false;
+                cgPrimary.blocksRaycasts = false;
+                Debug.Log("[CodexViewController] Added CanvasGroup and hid MindLogPrimaryContainer (SetActive NOT called)");
+            }
+
+            // Unprotect only AFTER we've safely hidden it via CanvasGroup
+            MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
+            if (persistence != null)
+            {
+                persistence.UnprotectPrimaryContainer();
+                Debug.Log("[CodexViewController] Unprotected container after CanvasGroup hide");
             }
         }
     }
 
     private void DisableMindLogSecondary()
     {
-        // Unprotect the container first so it can be disabled without re-activation
-        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
-        if (persistence != null)
-        {
-            persistence.UnprotectSecondaryContainer();
-        }
-
         if (mindLogSecondaryContainer != null)
         {
-            // IMPORTANT: Keep active but hide via CanvasGroup
-            // This prevents container destruction while keeping it invisible and non-interactive
-            mindLogSecondaryContainer.SetActive(true);
+            // CRITICAL: NEVER call SetActive(false) on this container
+            // It can cause it to be destroyed by competing systems
+            // ONLY use CanvasGroup to hide it
             CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
             if (cgSecondary != null)
             {
                 cgSecondary.alpha = 0f;  // Invisible
                 cgSecondary.interactable = false;
                 cgSecondary.blocksRaycasts = false;
-                Debug.Log("[CodexViewController] MindLogSecondaryContainer hidden via CanvasGroup (kept active)");
+                Debug.Log("[CodexViewController] MindLogSecondaryContainer hidden via CanvasGroup ONLY (SetActive NOT called - prevents destruction)");
+            }
+            else
+            {
+                // If no CanvasGroup, add one
+                cgSecondary = mindLogSecondaryContainer.AddComponent<CanvasGroup>();
+                cgSecondary.alpha = 0f;
+                cgSecondary.interactable = false;
+                cgSecondary.blocksRaycasts = false;
+                Debug.Log("[CodexViewController] Added CanvasGroup and hid MindLogSecondaryContainer (SetActive NOT called)");
+            }
+
+            // Unprotect only AFTER we've safely hidden it via CanvasGroup
+            MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
+            if (persistence != null)
+            {
+                persistence.UnprotectSecondaryContainer();
+                Debug.Log("[CodexViewController] Unprotected secondary container after CanvasGroup hide");
             }
         }
     }
