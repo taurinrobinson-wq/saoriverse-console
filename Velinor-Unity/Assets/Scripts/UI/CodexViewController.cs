@@ -119,6 +119,57 @@ public class CodexViewController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Fix all Mind Log container positions to prevent drift when switching views.
+    /// Ensures proper RectTransform anchoring and positioning.
+    /// </summary>
+    private void FixMindLogContainerPositions()
+    {
+        Debug.Log("[CodexViewController] ===== FIXING MINDLOG CONTAINER POSITIONS =====");
+        
+        FixContainerPosition(mindLogPrimaryContainer, "MindLogPrimaryContainer");
+        FixContainerPosition(mindLogSecondaryContainer, "MindLogSecondaryContainer");
+    }
+
+    private void FixContainerPosition(GameObject container, string containerName)
+    {
+        if (container == null)
+        {
+            Debug.LogWarning($"[CodexViewController] {containerName} is null - cannot fix position");
+            return;
+        }
+
+        RectTransform rect = container.GetComponent<RectTransform>();
+        if (rect == null)
+        {
+            Debug.LogWarning($"[CodexViewController] {containerName} has no RectTransform - cannot fix position");
+            return;
+        }
+
+        // Store current position for comparison
+        Vector2 oldPos = rect.anchoredPosition;
+        Vector2 oldAnchorMin = rect.anchorMin;
+        Vector2 oldAnchorMax = rect.anchorMax;
+        Vector2 oldOffsetMin = rect.offsetMin;
+        Vector2 oldOffsetMax = rect.offsetMax;
+
+        // Set proper anchoring for full-screen container
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        
+        // Set position to top-left corner
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+
+        // Log the changes
+        Debug.Log($"[CodexViewController] {containerName} position fixed:");
+        Debug.Log($"  Position: {oldPos} → {rect.anchoredPosition}");
+        Debug.Log($"  AnchorMin: {oldAnchorMin} → {rect.anchorMin}");
+        Debug.Log($"  AnchorMax: {oldAnchorMax} → {rect.anchorMax}");
+        Debug.Log($"  OffsetMin: {oldOffsetMin} → {rect.offsetMin}");
+        Debug.Log($"  OffsetMax: {oldOffsetMax} → {rect.offsetMax}");
+    }
+
     private void OnEnable()
     {
         // Only add listeners once; remove old ones first to prevent duplicates
@@ -440,6 +491,9 @@ public class CodexViewController : MonoBehaviour
         Transform root = mindLogPrimaryContainer.transform.root;
         Debug.Log($"[CodexViewController] Root parent: {root.name}");
         
+        // FIX POSITIONS before doing anything else to prevent drift
+        FixMindLogContainerPositions();
+        
         CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
         if (cgPrimary != null)
         {
@@ -589,6 +643,16 @@ public class CodexViewController : MonoBehaviour
         // Enable Mind Log Secondary view and ALL its children
         if (mindLogSecondaryContainer != null)
         {
+            // FIX POSITIONS BEFORE activating to prevent drift
+            FixMindLogContainerPositions();
+
+            // Add tracking for position changes
+            if (mindLogSecondaryContainer.GetComponent<RectTransformTracker>() == null)
+            {
+                mindLogSecondaryContainer.AddComponent<RectTransformTracker>();
+                Debug.Log("[CodexViewController] Added RectTransformTracker to secondary container");
+            }
+
             // Ensure all parent GameObjects in the hierarchy are active
             Transform current = mindLogSecondaryContainer.transform.parent;
             while (current != null)

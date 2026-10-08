@@ -20,11 +20,12 @@ namespace Velinor.Core
         private bool isFilled;
         private bool isSelected;
         private float lastClickTime = -1f;
-        private const float DOUBLE_CLICK_THRESHOLD = 0.25f;
+            private const float DOUBLE_CLICK_THRESHOLD = 0.3f;
         
         // Track if we're waiting for a potential double-click
         private bool isWaitingForDoubleClick = false;
         private Coroutine doubleClickCoroutine;
+            private int clickCount = 0;
 
         public bool IsFilled => isFilled;
         public MemoryFragment MemoryFragment => memoryFragment;
@@ -133,16 +134,22 @@ namespace Velinor.Core
                 return;
             }
 
+            clickCount++;
+            Debug.Log($"[MemorySlot] OnSlotClicked called - clickCount: {clickCount}, isWaitingForDoubleClick: {isWaitingForDoubleClick}");
+
             // If we're already waiting for a double-click, this is the second click
             if (isWaitingForDoubleClick)
             {
+                Debug.Log($"[MemorySlot] Second click detected (clickCount={clickCount}) - firing double-click!");
                 // Cancel the pending single-click coroutine
                 if (doubleClickCoroutine != null)
                 {
                     StopCoroutine(doubleClickCoroutine);
                     doubleClickCoroutine = null;
+                    Debug.Log("[MemorySlot] Stopped pending single-click coroutine");
                 }
                 isWaitingForDoubleClick = false;
+                clickCount = 0;
                 
                 // This is a double-click
                 OnMemoryDoubleClicked();
@@ -150,19 +157,38 @@ namespace Velinor.Core
             }
 
             // This is the first click - start waiting for a potential second click
+            Debug.Log($"[MemorySlot] First click detected (clickCount={clickCount}) - waiting for second click within {DOUBLE_CLICK_THRESHOLD}s...");
             isWaitingForDoubleClick = true;
+            
+            // Cancel any existing coroutine before starting a new one
+            if (doubleClickCoroutine != null)
+            {
+                StopCoroutine(doubleClickCoroutine);
+                Debug.Log("[MemorySlot] Stopped previous coroutine before starting new one");
+            }
+            
             doubleClickCoroutine = StartCoroutine(WaitForSecondClick());
         }
 
         private System.Collections.IEnumerator WaitForSecondClick()
         {
+            Debug.Log($"[MemorySlot] WaitForSecondClick coroutine started");
             // Wait for the double-click threshold time
             yield return new WaitForSeconds(DOUBLE_CLICK_THRESHOLD);
 
             // If we get here, no second click came in - treat as single click
-            isWaitingForDoubleClick = false;
-            doubleClickCoroutine = null;
-            OnMemorySingleClicked();
+            if (isWaitingForDoubleClick)  // Only proceed if still waiting (not cancelled by second click)
+            {
+                Debug.Log($"[MemorySlot] No second click within {DOUBLE_CLICK_THRESHOLD}s - treating as single click (clickCount={clickCount})");
+                isWaitingForDoubleClick = false;
+                clickCount = 0;
+                doubleClickCoroutine = null;
+                OnMemorySingleClicked();
+            }
+            else
+            {
+                Debug.Log("[MemorySlot] WaitForSecondClick exiting early - already processed as double-click");
+            }
         }
 
         private void OnMemorySingleClicked()

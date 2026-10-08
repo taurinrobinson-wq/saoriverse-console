@@ -95,16 +95,10 @@ namespace Velinor.UI.Codex
                 titleText.gameObject.SetActive(false);
                 Debug.Log("[MemoryExpandedUI] Title text hidden in secondary view");
             }
-            else
-            {
-                Debug.LogWarning("[MemoryExpandedUI] Title Text is NULL!");
-            }
 
             if (expandedText != null)
             {
-                expandedText.text = string.IsNullOrWhiteSpace(fragment.expandedText)
-                    ? "No memory details are available for this fragment."
-                    : fragment.expandedText;
+                expandedText.text = fragment.expandedText ?? "";
 
                 // Ensure text displays properly - disable layout constraints
                 LayoutElement layoutElement = expandedText.GetComponent<LayoutElement>();
@@ -116,18 +110,29 @@ namespace Velinor.UI.Codex
                 // Force text to wrap properly
                 expandedText.horizontalAlignment = HorizontalAlignmentOptions.Left;
                 expandedText.verticalAlignment = VerticalAlignmentOptions.Top;
+                
+                // Ensure text is active and visible
+                expandedText.gameObject.SetActive(true);
+                if (expandedText.color.a == 0)
+                {
+                    Color textColor = expandedText.color;
+                    textColor.a = 1f;
+                    expandedText.color = textColor;
+                    Debug.LogWarning("[MemoryExpandedUI] Fixed invisible text (alpha was 0)");
+                }
 
-                Debug.Log($"[MemoryExpandedUI] Set expanded text (length: {expandedText.text.Length})");
+                Debug.Log($"[MemoryExpandedUI] Set expanded text (length: {expandedText.text.Length}, active: {expandedText.gameObject.activeSelf}, alpha: {expandedText.color.a})");
             }
             else
             {
-                Debug.LogWarning("[MemoryExpandedUI] Expanded Text is NULL!");
+                Debug.LogError("[MemoryExpandedUI] Expanded Text is NULL! This field must be assigned in the Inspector to the TextDisplay component in the secondary container.");
             }
 
             if (textScrollRect != null)
             {
                 Canvas.ForceUpdateCanvases();
                 textScrollRect.verticalNormalizedPosition = 1f;
+                Debug.Log("[MemoryExpandedUI] ScrollRect reset to top");
             }
 
             Debug.Log($"[MemoryExpandedUI] Displaying expanded memory '{fragment.fragmentID}'.");
@@ -181,6 +186,18 @@ namespace Velinor.UI.Codex
             }
 
             gameObject.SetActive(true);
+            
+            // Ensure expandedText is visible
+            if (expandedText != null)
+            {
+                expandedText.gameObject.SetActive(true);
+                Debug.Log("[MemoryExpandedUI] Ensured expandedText is active");
+            }
+            else
+            {
+                Debug.LogError("[MemoryExpandedUI] expandedText is NULL - check Inspector assignment!");
+            }
+
             StartFade(1f, deactivateOnComplete: false);
         }
 

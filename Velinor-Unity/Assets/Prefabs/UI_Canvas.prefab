@@ -941,7 +941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5269311974146056308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1201,6 +1201,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1823926986924710756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6393204018197934438}
+  m_Layer: 5
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6393204018197934438
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823926986924710756}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5858007793611211381}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1844193203222710586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3639,6 +3674,9 @@ MonoBehaviour:
   viewport: {fileID: 3551064765281523373}
   codexBackgroundSprite: {fileID: 21300000, guid: ef78b9b1311618b48a92d6a2d15cc38c, type: 3}
   triglyphPanelUI: {fileID: 0}
+  glyphsBackground: {fileID: 0}
+  mindLogPrimaryContainer: {fileID: 0}
+  mindLogSecondaryContainer: {fileID: 0}
   selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
   deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
   glyphNameText: {fileID: 4665222382387263991}
@@ -3794,6 +3832,7 @@ GameObject:
   - component: {fileID: 7989079658483908913}
   - component: {fileID: 8365998004169474266}
   - component: {fileID: 1544328913943178094}
+  - component: {fileID: 7665153486751649459}
   m_Layer: 5
   m_Name: MindLogPrimaryContainer
   m_TagString: Untagged
@@ -3890,6 +3929,18 @@ MonoBehaviour:
   gridContainer: {fileID: 303108229101879325}
   synopsisText: {fileID: 1892173316315715962}
   expandedView: {fileID: 3409647718541514340}
+--- !u!225 &7665153486751649459
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5209383855821126499}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5225553318580856461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4381,12 +4432,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4889468795442709556}
+  m_Father: {fileID: 5858007793611211381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.2}
   m_AnchorMax: {x: 0.9, y: 0.85}
-  m_AnchoredPosition: {x: 22.749996, y: 3.6000519}
-  m_SizeDelta: {x: 3.7000065, y: -50.799908}
+  m_AnchoredPosition: {x: 22.749996, y: 36.10005}
+  m_SizeDelta: {x: 35.700005, y: 14.200092}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8267511872824856112
 CanvasRenderer:
@@ -5931,6 +5982,43 @@ MonoBehaviour:
   button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
+--- !u!1 &7186878236106407932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5858007793611211381}
+  m_Layer: 5
+  m_Name: Viewport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5858007793611211381
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7186878236106407932}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6393204018197934438}
+  - {fileID: 8552528310478145031}
+  m_Father: {fileID: 4889468795442709556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -30}
+  m_SizeDelta: {x: -40, y: -100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7380232942166188856
 GameObject:
   m_ObjectHideFlags: 0
@@ -6972,6 +7060,7 @@ GameObject:
   - component: {fileID: 3409647718541514340}
   - component: {fileID: 3504566118508480054}
   - component: {fileID: 4208561402993828114}
+  - component: {fileID: 4247204770692442592}
   m_Layer: 5
   m_Name: MindLogSecondaryContainer
   m_TagString: Untagged
@@ -6991,7 +7080,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8552528310478145031}
+  - {fileID: 5858007793611211381}
   - {fileID: 5701309703361204471}
   - {fileID: 158227264913831750}
   - {fileID: 4517097741470751649}
@@ -7054,7 +7143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.Codex.MemoryExpandedUI
   panelCanvasGroup: {fileID: 3504566118508480054}
   memoryIcon: {fileID: 0}
-  titleText: {fileID: 4014616337971860742}
+  titleText: {fileID: 0}
   expandedText: {fileID: 4014616337971860742}
   textScrollRect: {fileID: 4208561402993828114}
   backButton: {fileID: 8682239975584710530}
@@ -7092,7 +7181,7 @@ MonoBehaviour:
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 8552528310478145031}
+  m_Viewport: {fileID: 5858007793611211381}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
   m_HorizontalScrollbarVisibility: 0
@@ -7102,6 +7191,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4247204770692442592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8217273026824663653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9f8a7006c49334b9a49cb64c835c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.ScrollRectViewportFixer
 --- !u!1 &8222969626775926382
 GameObject:
   m_ObjectHideFlags: 0
