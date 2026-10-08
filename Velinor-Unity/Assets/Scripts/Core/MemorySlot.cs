@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Velinor.Core;
 using Velinor.UI.Codex;
 
@@ -7,25 +8,21 @@ namespace Velinor.Core
 {
     /// <summary>
     /// Represents a slot in the Mind Log grid where a memory fragment can be displayed.
-    /// Mirrors the GlyphSlot system for consistency.
+    /// Handles single-click (show summary) and double-click (open expanded view) via eventData.clickCount.
     /// </summary>
-    public class MemorySlot : MonoBehaviour
+    public class MemorySlot : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Image slotImage;
-        [SerializeField] private Button button;
         [SerializeField] private Color emptySlotColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
         [SerializeField] private Color selectedColor = new Color(1f, 1f, 0.5f, 1f); // Yellow-tinted for selection
 
         private MemoryFragment memoryFragment;
         private bool isFilled;
         private bool isSelected;
-        private float lastClickTime = -1f;
-            private const float DOUBLE_CLICK_THRESHOLD = 0.3f;
         
-        // Track if we're waiting for a potential double-click
-        private bool isWaitingForDoubleClick = false;
-        private Coroutine doubleClickCoroutine;
-            private int clickCount = 0;
+        // Double-click detection: Manual timing with Invoke()
+        private float doubleClickInterval = 0.25f;
+        private bool isSingleClickPending = false;
 
         public bool IsFilled => isFilled;
         public MemoryFragment MemoryFragment => memoryFragment;
@@ -50,20 +47,12 @@ namespace Velinor.Core
                 }
             }
 
-            // Auto-find or create Button if not assigned
-            if (button == null)
+            // We don't need Button component anymore - using IPointerClickHandler instead
+            // But ensure we have a GraphicRaycaster or EventSystem can't detect clicks
+            if (slotImage != null)
             {
-                button = GetComponent<Button>();
-                if (button == null)
-                {
-                    button = gameObject.AddComponent<Button>();
-                    Debug.Log($"[MemorySlot] Created Button component on {gameObject.name}");
-                }
-            }
-
-            if (button != null && button.onClick.GetPersistentEventCount() == 0)
-            {
-                button.onClick.AddListener(OnSlotClicked);
+                // slotImage will receive pointer events via IPointerClickHandler
+                Debug.Log($"[MemorySlot] {gameObject.name} ready to receive pointer events");
             }
         }
 
@@ -126,7 +115,12 @@ namespace Velinor.Core
             Debug.Log("[MemorySlot] Cleared");
         }
 
-        private void OnSlotClicked()
+        /// <summary>
+        /// Handle pointer clicks using manual double-click detection with Invoke().
+        /// Single-click: show summary (delayed by doubleClickInterval to wait for potential second click)
+        /// Double-click: open expanded view (cancels pending single-click)
+        /// </summary>
+        public void OnPointerClick(PointerEventData eventData)
         {
             if (!isFilled)
             {
@@ -134,60 +128,52 @@ namespace Velinor.Core
                 return;
             }
 
-            clickCount++;
-            Debug.Log($"[MemorySlot] OnSlotClicked called - clickCount: {clickCount}, isWaitingForDoubleClick: {isWaitingForDoubleClick}");
-
-            // If we're already waiting for a double-click, this is the second click
-            if (isWaitingForDoubleClick)
+            // Get the CodexViewController to track which slot was last clicked
+            var codexViewController = FindAnyObjectByType<CodexViewController>();
+            if (codexViewController == null)
             {
-                Debug.Log($"[MemorySlot] Second click detected (clickCount={clickCount}) - firing double-click!");
-                // Cancel the pending single-click coroutine
-                if (doubleClickCoroutine != null)
-                {
-                    StopCoroutine(doubleClickCoroutine);
-                    doubleClickCoroutine = null;
-                    Debug.Log("[MemorySlot] Stopped pending single-click coroutine");
-                }
-                isWaitingForDoubleClick = false;
-                clickCount = 0;
-                
-                // This is a double-click
-                OnMemoryDoubleClicked();
+                Debug.LogError("[MemorySlot] Could not find CodexViewController!");
                 return;
             }
 
-            // This is the first click - start waiting for a potential second click
-            Debug.Log($"[MemorySlot] First click detected (clickCount={clickCount}) - waiting for second click within {DOUBLE_CLICK_THRESHOLD}s...");
-            isWaitingForDoubleClick = true;
-            
-            // Cancel any existing coroutine before starting a new one
-            if (doubleClickCoroutine != null)
+            // If clicking a DIFFERENT slot, cancel any pending double-click on the old slot
+            if (codexViewController.LastClickedSlot != this)
             {
-                StopCoroutine(doubleClickCoroutine);
-                Debug.Log("[MemorySlot] Stopped previous coroutine before starting new one");
+                // Cancel pending single-click on the previous slot
+                if (codexViewController.LastClickedSlot != null)
+                {
+                    codexViewController.LastClickedSlot.CancelPendingSingleClick();
+                }
+                // Update to current slot
+                codexViewController.LastClickedSlot = this;
             }
-            
-            doubleClickCoroutine = StartCoroutine(WaitForSecondClick());
-        }
 
-        private System.Collections.IEnumerator WaitForSecondClick()
-        {
-            Debug.Log($"[MemorySlot] WaitForSecondClick coroutine started");
-            // Wait for the double-click threshold time
-            yield return new WaitForSeconds(DOUBLE_CLICK_THRESHOLD);
-
-            // If we get here, no second click came in - treat as single click
-            if (isWaitingForDoubleClick)  // Only proceed if still waiting (not cancelled by second click)
+            // If no single-click is pending, start one
+            if (!isSingleClickPending)
             {
-                Debug.Log($"[MemorySlot] No second click within {DOUBLE_CLICK_THRESHOLD}s - treating as single click (clickCount={clickCount})");
-                isWaitingForDoubleClick = false;
-                clickCount = 0;
-                doubleClickCoroutine = null;
-                OnMemorySingleClicked();
+                isSingleClickPending = true;
+                Invoke(nameof(ExecuteSingleClick), doubleClickInterval);
             }
             else
             {
-                Debug.Log("[MemorySlot] WaitForSecondClick exiting early - already processed as double-click");
+                // Second click within the interval = double-click
+                CancelPendingSingleClick();
+                OnMemoryDoubleClicked();
+            }
+        }
+
+        private void ExecuteSingleClick()
+        {
+            isSingleClickPending = false;
+            OnMemorySingleClicked();
+        }
+
+        private void CancelPendingSingleClick()
+        {
+            if (isSingleClickPending)
+            {
+                CancelInvoke(nameof(ExecuteSingleClick));
+                isSingleClickPending = false;
             }
         }
 
@@ -271,17 +257,7 @@ namespace Velinor.Core
 
         private void OnDestroy()
         {
-            // Clean up any pending coroutines
-            if (doubleClickCoroutine != null)
-            {
-                StopCoroutine(doubleClickCoroutine);
-                doubleClickCoroutine = null;
-            }
-
-            if (button != null)
-            {
-                button.onClick.RemoveListener(OnSlotClicked);
-            }
+            CancelPendingSingleClick();
         }
     }
 }

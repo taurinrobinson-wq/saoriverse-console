@@ -33,10 +33,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.3, y: -426.95}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3778568865226638144
 CanvasRenderer:
@@ -89,7 +89,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &329071947331449699
@@ -230,10 +229,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.3, y: -166.75}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2966896821274286073
 CanvasRenderer:
@@ -286,7 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &895331542420317201
@@ -620,7 +618,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &1240193948544684289
@@ -1973,10 +1970,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 373.3, y: -296.85}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8214876938797160604
 CanvasRenderer:
@@ -2029,7 +2026,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3034177840524353768
@@ -2186,10 +2182,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 373.3, y: -166.75}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7176457015980929823
 CanvasRenderer:
@@ -2242,7 +2238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3331906143839765922
@@ -2334,7 +2329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3333577932144477550
@@ -2426,7 +2420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3433902449103836612
@@ -2518,7 +2511,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3711098437558984690
@@ -2674,10 +2666,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.8, y: -166.75}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2797133422072732811
 CanvasRenderer:
@@ -2730,7 +2722,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3727893812956150116
@@ -2858,9 +2849,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
+--- !u!1 &3957983687465423741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7548566125408047402}
+  m_Layer: 5
+  m_Name: Viewport (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7548566125408047402
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957983687465423741}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5296416686262540785}
+  m_Father: {fileID: 4889468795442709556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -30}
+  m_SizeDelta: {x: -40, y: -100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4195675726153273780
 GameObject:
   m_ObjectHideFlags: 0
@@ -3472,10 +3498,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.8, y: -296.85}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4389263906639529358
 CanvasRenderer:
@@ -3528,7 +3554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5197547936882688568
@@ -3626,6 +3651,7 @@ MonoBehaviour:
   impressionsNextButton: {fileID: 5207951367217545690}
   testSetup: {fileID: 0}
   useTestMemories: 1
+  LastClickedSlot: {fileID: 0}
 --- !u!114 &7471356998835710382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3839,7 +3865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &303108229101879325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3937,9 +3963,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5209383855821126499}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &5225553318580856461
 GameObject:
@@ -4030,7 +4056,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5263145862334446645
@@ -4122,7 +4147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5284197237536202534
@@ -4251,10 +4275,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.8, y: -426.95}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1745930029901776796
 CanvasRenderer:
@@ -4307,7 +4331,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5355249114705539498
@@ -4399,7 +4422,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5448096294799598613
@@ -4943,10 +4965,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 373.3, y: -426.95}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6919992481501472740
 CanvasRenderer:
@@ -4999,7 +5021,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5846858786610893099
@@ -5253,7 +5274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Glyph of Sorrow
+  m_text: Mind Log
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5887,7 +5908,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &7162124473011797830
@@ -5923,10 +5943,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4352045189859954584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.3, y: -296.85}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7003275779348915352
 CanvasRenderer:
@@ -5979,7 +5999,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  button: {fileID: 0}
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &7186878236106407932
@@ -7067,7 +7086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4889468795442709556
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7080,6 +7099,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7548566125408047402}
   - {fileID: 5858007793611211381}
   - {fileID: 5701309703361204471}
   - {fileID: 158227264913831750}
@@ -7157,8 +7177,8 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8217273026824663653}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
+  m_Alpha: 0
+  m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &4208561402993828114
@@ -7214,6 +7234,7 @@ GameObject:
   - component: {fileID: 7621907938514880044}
   - component: {fileID: 3293165917286793834}
   - component: {fileID: 8428075676457298744}
+  - component: {fileID: 3176872261726122708}
   m_Layer: 5
   m_Name: GlyphsBackground
   m_TagString: Untagged
@@ -7282,6 +7303,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &3176872261726122708
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222969626775926382}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &8245890275349375426
 GameObject:
   m_ObjectHideFlags: 0
@@ -7394,7 +7427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Glyph of Sorrow
+  m_text: Glyphs
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7718,6 +7751,41 @@ MonoBehaviour:
   gridContainer: {fileID: 4352045189859954584}
   synopsisText: {fileID: 1892173316315715962}
   expandedView: {fileID: 3409647718541514340}
+--- !u!1 &9106309822051092739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5296416686262540785}
+  m_Layer: 5
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5296416686262540785
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9106309822051092739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7548566125408047402}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &4562590897594108421
 PrefabInstance:
   m_ObjectHideFlags: 0

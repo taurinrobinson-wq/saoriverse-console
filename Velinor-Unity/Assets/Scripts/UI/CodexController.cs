@@ -94,18 +94,19 @@ public class CodexController : MonoBehaviour
 
     private void Awake()
     {
-        // Persist ONLY the CodexPanel root, not individual controllers
-        // This prevents multiple DontDestroyOnLoad conflicts
+        // UI_Canvas is already marked as DontDestroyOnLoad by UIPersistenceManager
+        // DO NOT mark CodexPanel separately - it will persist as a child of UI_Canvas
+        // Marking both creates conflicting behavior when scenes reload
+        
+        // Verify CodexPanel exists
         GameObject panelObj = GameObject.Find("UI_Canvas/CodexPanel");
-        if (panelObj != null)
-        {
-            DontDestroyOnLoad(panelObj);
-            Debug.Log("[Codex] CodexPanel marked as persistent across scenes");
-        }
-        else
+        if (panelObj == null)
         {
             Debug.LogError("[Codex] CodexPanel not found at UI_Canvas/CodexPanel!");
+            return;
         }
+
+        Debug.Log("[Codex] CodexPanel found and verified (persistence managed by UI_Canvas parent)");
 
         // Fix Mind Log container positioning if they're misaligned
         FixMindLogContainerPositions();
@@ -131,6 +132,21 @@ public class CodexController : MonoBehaviour
                 RectTransform rect = container.GetComponent<RectTransform>();
                 if (rect != null)
                 {
+                    // CRITICAL: Disable all LayoutGroups on this container and children
+                    // These cause position recalculation every frame, creating drift
+                    LayoutGroup[] layoutGroups = container.GetComponentsInChildren<LayoutGroup>();
+                    foreach (LayoutGroup layoutGroup in layoutGroups)
+                    {
+                        layoutGroup.enabled = false;
+                    }
+
+                    // CRITICAL: Disable LayoutElement on container if it exists
+                    LayoutElement layoutElement = container.GetComponent<LayoutElement>();
+                    if (layoutElement != null)
+                    {
+                        layoutElement.enabled = false;
+                    }
+
                     // Set anchors to fill parent
                     rect.anchorMin = Vector2.zero;
                     rect.anchorMax = Vector2.one;

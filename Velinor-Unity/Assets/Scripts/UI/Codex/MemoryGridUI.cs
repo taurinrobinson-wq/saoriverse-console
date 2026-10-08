@@ -310,6 +310,31 @@ namespace Velinor.UI.Codex
 
         private void ConfigureCells()
         {
+            // Guard: if gridCells is empty or all entries are null, this is likely the old MemoryGridUI being disabled
+            // in favor of MemoryGridController. Skip configuration.
+            if (gridCells.Count == 0)
+            {
+                Debug.Log("[MemoryGridUI] ConfigureCells skipped - gridCells is empty (likely using MemoryGridController + MemorySlot instead)");
+                return;
+            }
+
+            // Check if all cells are null/empty (not configured in inspector)
+            bool allCellsEmpty = true;
+            foreach (GridCellBinding cell in gridCells)
+            {
+                if (cell != null && cell.Button != null)
+                {
+                    allCellsEmpty = false;
+                    break;
+                }
+            }
+
+            if (allCellsEmpty)
+            {
+                Debug.Log("[MemoryGridUI] ConfigureCells skipped - all 9 cells are null/unconfigured (likely using MemoryGridController + MemorySlot instead of MemoryGridUI)");
+                return;
+            }
+
             for (int index = 0; index < gridCells.Count; index++)
             {
                 GridCellBinding cell = gridCells[index];

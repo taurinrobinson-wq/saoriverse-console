@@ -50,7 +50,8 @@ namespace Velinor.UI.Codex
             panelCanvasGroup.alpha = 0f;
             panelCanvasGroup.blocksRaycasts = false;
             panelCanvasGroup.interactable = false;
-            gameObject.SetActive(false);
+            // DO NOT call SetActive(false) - use CanvasGroup alpha for visibility control
+            // SetActive(false) prevents the GameObject from rendering even if alpha=1
         }
 
         private void OnEnable()

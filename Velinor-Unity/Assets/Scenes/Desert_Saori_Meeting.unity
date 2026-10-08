@@ -1024,6 +1024,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3274434355405682996, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
+      propertyPath: m_Height
+      value: 2.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274434355405682996, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
+      propertyPath: m_Center.y
+      value: 0.77
+      objectReference: {fileID: 0}
     - target: {fileID: 7358547498081987968, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
       propertyPath: npcName
       value: Older Woman
@@ -1049,6 +1057,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 661519024}
     - target: {fileID: 7358547498081987968, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
+      propertyPath: colliderHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358547498081987968, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
       propertyPath: conversationId
       value: saori_encounter_01
       objectReference: {fileID: 0}
@@ -1062,7 +1074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7358547498081987968, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
       propertyPath: interactionRadius
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7948732866325835248, guid: df20e898477f90643b60d8636a1a3d55, type: 3}
       propertyPath: m_Name

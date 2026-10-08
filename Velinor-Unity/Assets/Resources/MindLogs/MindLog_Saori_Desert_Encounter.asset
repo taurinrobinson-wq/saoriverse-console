@@ -16,11 +16,8 @@ MonoBehaviour:
   displayName: Mysterious Encounter
   icon: {fileID: 21300000, guid: 920ede2975b53bc48b6e08bcdf26a4bd, type: 3}
   summaryText: Mysterious Encounter
-  fullText: "I met an older woman on the way to the marketplace. I didn't get her
-    name, but she handed me this strange device without much explanation.\n\nThere
-    was something knowing in her eyes\u2014as if she recognized me, or perhaps knew
-    something about me that I didn't know myself.\n\nThe device she gave me feels
-    important, though I can't explain why."
+  fullText: I met an older woman on the way to the marketplace. I didn't get her
+    name, but she handed me this strange device without much explanation.
   combineTags:
   - saori
   - desert

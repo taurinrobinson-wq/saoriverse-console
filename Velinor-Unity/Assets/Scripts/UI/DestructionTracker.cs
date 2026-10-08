@@ -1,8 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Utility script to track when GameObjects are destroyed.
-/// Used for debugging container visibility issues.
+/// Utility script to track unexpected destruction of GameObjects.
+/// Silent during scene unload/play stop - only warns about mid-gameplay destruction.
 /// </summary>
 public class DestructionTracker : MonoBehaviour
 {
@@ -10,15 +10,11 @@ public class DestructionTracker : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.LogError($"[DESTRUCTION] {objectName} was DESTROYED! Stack trace follows:");
-        Debug.LogError(System.Environment.StackTrace);
-    }
-
-    private void OnDisable()
-    {
-        if (gameObject.scene.isLoaded)  // Only log if not scene unloading
+        // Only warn about destruction during active gameplay
+        // Silently allow destruction during scene unload or play mode stop
+        if (gameObject.scene.isLoaded && Application.isPlaying)
         {
-            Debug.LogWarning($"[DISABLED] {objectName} was disabled - currently visible: {gameObject.activeSelf}");
+            Debug.LogWarning($"[UNEXPECTED DESTRUCTION] {objectName} was destroyed during gameplay!");
         }
     }
 }

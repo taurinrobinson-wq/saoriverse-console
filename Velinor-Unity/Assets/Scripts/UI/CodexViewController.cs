@@ -60,6 +60,9 @@ public class CodexViewController : MonoBehaviour
     private UnityAction onImpressionsButtonClick;
     private UnityAction onMindLogBackButtonClick;
 
+    // Track last clicked memory slot for double-click detection
+    public MemorySlot LastClickedSlot = null;
+
     private void Awake()
     {
         // Store strong references to containers immediately
@@ -70,7 +73,7 @@ public class CodexViewController : MonoBehaviour
         if (glyphsBackground == null)
             glyphsBackground = GameObject.Find("GlyphsBackground");
 
-        // Containers are children of CodexPanel which is already marked as DontDestroyOnLoad by CodexController
+        // Containers are children of CodexPanel which is already marked as DontDestroyOnLoad by UI_Canvas parent
         // Do NOT mark them individually - this causes conflicts with scene persistence
         
         // Pass container references to CodexController for centralized management
@@ -95,80 +98,8 @@ public class CodexViewController : MonoBehaviour
             // The persistence data is stored in static Codex unlock state, not the GameObject
             Debug.Log("[CodexViewController] Awake: Created MindLogPersistenceManager");
         }
-
-        // ADD DESTRUCTION TRACKER - will help us catch when containers are destroyed
-        if (mindLogPrimaryContainer != null)
-        {
-            AddDestructionTracker(mindLogPrimaryContainer, "MindLogPrimaryContainer");
-            Transform parent = mindLogPrimaryContainer.transform.parent;
-            while (parent != null)
-            {
-                AddDestructionTracker(parent.gameObject, $"MindLogPrimaryContainer parent: {parent.name}");
-                parent = parent.parent;
-            }
-        }
     }
 
-    private void AddDestructionTracker(GameObject go, string name)
-    {
-        // Add a simple script to log when this GameObject is destroyed
-        if (go.GetComponent<DestructionTracker>() == null)
-        {
-            DestructionTracker tracker = go.AddComponent<DestructionTracker>();
-            tracker.objectName = name;
-        }
-    }
-
-    /// <summary>
-    /// Fix all Mind Log container positions to prevent drift when switching views.
-    /// Ensures proper RectTransform anchoring and positioning.
-    /// </summary>
-    private void FixMindLogContainerPositions()
-    {
-        Debug.Log("[CodexViewController] ===== FIXING MINDLOG CONTAINER POSITIONS =====");
-        
-        FixContainerPosition(mindLogPrimaryContainer, "MindLogPrimaryContainer");
-        FixContainerPosition(mindLogSecondaryContainer, "MindLogSecondaryContainer");
-    }
-
-    private void FixContainerPosition(GameObject container, string containerName)
-    {
-        if (container == null)
-        {
-            Debug.LogWarning($"[CodexViewController] {containerName} is null - cannot fix position");
-            return;
-        }
-
-        RectTransform rect = container.GetComponent<RectTransform>();
-        if (rect == null)
-        {
-            Debug.LogWarning($"[CodexViewController] {containerName} has no RectTransform - cannot fix position");
-            return;
-        }
-
-        // Store current position for comparison
-        Vector2 oldPos = rect.anchoredPosition;
-        Vector2 oldAnchorMin = rect.anchorMin;
-        Vector2 oldAnchorMax = rect.anchorMax;
-        Vector2 oldOffsetMin = rect.offsetMin;
-        Vector2 oldOffsetMax = rect.offsetMax;
-
-        // Set proper anchoring for full-screen container
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        
-        // Set position to top-left corner
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
-
-        // Log the changes
-        Debug.Log($"[CodexViewController] {containerName} position fixed:");
-        Debug.Log($"  Position: {oldPos} → {rect.anchoredPosition}");
-        Debug.Log($"  AnchorMin: {oldAnchorMin} → {rect.anchorMin}");
-        Debug.Log($"  AnchorMax: {oldAnchorMax} → {rect.anchorMax}");
-        Debug.Log($"  OffsetMin: {oldOffsetMin} → {rect.offsetMin}");
-        Debug.Log($"  OffsetMax: {oldOffsetMax} → {rect.offsetMax}");
-    }
 
     private void OnEnable()
     {
@@ -210,6 +141,9 @@ public class CodexViewController : MonoBehaviour
 
     private void Start()
     {
+        // Initialize CanvasGroups on all containers and set them to invisible by default
+        InitializeContainerVisibility();
+        
         // CRITICAL: Lock the Codex by default - it should only be accessible after Saori gives it
         MindLogPersistence.LockCodex();
         Debug.Log("[CodexViewController] Codex LOCKED at start - player must obtain it from Saori");
@@ -221,9 +155,44 @@ public class CodexViewController : MonoBehaviour
             return;
         }
 
-        // Initialize to glyphs view on startup - but DON'T disable Mind Log containers yet
-        // They need to persist and be available when needed
+        // Initialize to glyphs view on startup
         ShowGlyphsView();
+    }
+
+    /// <summary>
+    /// Initialize CanvasGroups on all containers and set them to invisible by default.
+    /// This ensures all containers can be toggled via CanvasGroup without SetActive issues.
+    /// </summary>
+    private void InitializeContainerVisibility()
+    {
+        // Ensure all containers have CanvasGroups and start invisible
+        EnsureCanvasGroup(glyphsBackground, false);
+        EnsureCanvasGroup(mindLogBackground, false);
+        EnsureCanvasGroup(mindLogPrimaryContainer, false);
+        EnsureCanvasGroup(mindLogSecondaryContainer, false);
+        
+        Debug.Log("[CodexViewController] All containers initialized with CanvasGroups, set to invisible");
+    }
+
+    /// <summary>
+    /// Ensure a container has a CanvasGroup and set its initial visibility state.
+    /// </summary>
+    private void EnsureCanvasGroup(GameObject container, bool visible)
+    {
+        if (container == null) return;
+
+        CanvasGroup cg = container.GetComponent<CanvasGroup>();
+        if (cg == null)
+        {
+            cg = container.AddComponent<CanvasGroup>();
+            Debug.Log($"[CodexViewController] Added CanvasGroup to {container.name}");
+        }
+
+        cg.alpha = visible ? 1f : 0f;
+        cg.interactable = visible;
+        cg.blocksRaycasts = visible;
+        
+        Debug.Log($"[CodexViewController] {container.name} initialized: alpha={cg.alpha}, interactable={cg.interactable}, blocksRaycasts={cg.blocksRaycasts}");
     }
 
     /// <summary>
@@ -232,8 +201,8 @@ public class CodexViewController : MonoBehaviour
     /// </summary>
     public void SwitchView(string viewName)
     {
-        if (currentView == viewName) return; // Already on this view
-
+        Debug.Log($"[CodexViewController] *** SWITCHVIEW CALLED: {viewName} ***");
+        
         // Check if trying to access Mind Log views while Codex is locked
         if ((viewName == "mind_log_primary" || viewName == "mind_log_secondary") && !MindLogPersistence.IsCodexUnlocked())
         {
@@ -242,17 +211,20 @@ public class CodexViewController : MonoBehaviour
         }
 
         currentView = viewName;
-        Debug.Log($"[CodexViewController] Switching to view: {viewName}");
+        Debug.Log($"[CodexViewController] *** SWITCHING TO VIEW: {viewName} ***");
 
         switch (viewName)
         {
             case "glyphs":
+                Debug.Log("[CodexViewController] Calling ShowGlyphsView()");
                 ShowGlyphsView();
                 break;
             case "mind_log_primary":
+                Debug.Log("[CodexViewController] Calling ShowMindLogPrimaryView()");
                 ShowMindLogPrimaryView();
                 break;
             case "mind_log_secondary":
+                Debug.Log("[CodexViewController] Calling ShowMindLogSecondaryView()");
                 ShowMindLogSecondaryView();
                 break;
             default:
@@ -263,261 +235,68 @@ public class CodexViewController : MonoBehaviour
 
     /// <summary>
     /// Show the Glyphs grid view with pagination controls.
+    /// Sets GlyphsBackground.alpha = 1, all others to 0.
     /// </summary>
     private void ShowGlyphsView()
     {
-        // Enable glyphs background
-        if (glyphsBackground != null) glyphsBackground.SetActive(true);
-        if (mindLogBackground != null) mindLogBackground.SetActive(false);
+        SetAllContainerAlpha(glyphsBackground, 1f);
+        SetAllContainerAlpha(mindLogBackground, 0f);
+        SetAllContainerAlpha(mindLogPrimaryContainer, 0f);
+        SetAllContainerAlpha(mindLogSecondaryContainer, 0f);
 
-        Debug.Log("[CodexViewController] ShowGlyphsView - glyphGrid_Pg1 is null? " + (glyphGrid_Pg1 == null));
-        Debug.Log("[CodexViewController] ShowGlyphsView - glyphGrid_Pg2 is null? " + (glyphGrid_Pg2 == null));
-
-        // IMPORTANT: Only enable Page 1 by default. Do NOT enable both pages at once or they'll stack and block input!
-        if (glyphGrid_Pg1 != null)
+        // CRITICAL: Ensure container is active in hierarchy
+        if (glyphsBackground != null && !glyphsBackground.activeSelf)
         {
-            glyphGrid_Pg1.SetActive(true);
-            // Ensure CanvasGroup is interactable (in case it was disabled)
-            CanvasGroup cg1 = glyphGrid_Pg1.GetComponent<CanvasGroup>();
-            if (cg1 != null)
-            {
-                cg1.interactable = true;
-                cg1.blocksRaycasts = true;
-                cg1.alpha = 1f;
-                Debug.Log("[CodexViewController] Re-enabled CanvasGroup on GlyphGrid_Pg1");
-            }
-            else
-            {
-                Debug.Log("[CodexViewController] No CanvasGroup found on GlyphGrid_Pg1");
-            }
-        }
-        
-        // DISABLE Page 2 - it should only be active when user navigates to it
-        if (glyphGrid_Pg2 != null)
-        {
-            glyphGrid_Pg2.SetActive(false);
-            CanvasGroup cg2 = glyphGrid_Pg2.GetComponent<CanvasGroup>();
-            if (cg2 != null)
-            {
-                cg2.interactable = false;
-                cg2.blocksRaycasts = false;
-                Debug.Log("[CodexViewController] Disabled CanvasGroup on GlyphGrid_Pg2");
-            }
-        }
-        
-        if (glyphsNavigation != null)
-        {
-            glyphsNavigation.SetActive(true);
-            // Ensure CanvasGroup is interactable
-            CanvasGroup cgNav = glyphsNavigation.GetComponent<CanvasGroup>();
-            if (cgNav != null)
-            {
-                cgNav.interactable = true;
-                cgNav.blocksRaycasts = true;
-                cgNav.alpha = 1f;
-            }
+            glyphsBackground.SetActive(true);
+            Debug.Log("[CodexViewController] Activated glyphsBackground");
         }
 
-        // Disable Mind Log views
-        DisableMindLogPrimary();
-        DisableMindLogSecondary();
-
-        // Disable legacy impressions elements if they exist
-        if (impressionsTextDisplay != null) impressionsTextDisplay.SetActive(false);
-        if (impressionsPrevButton != null) impressionsPrevButton.SetActive(false);
-        if (impressionsNextButton != null) impressionsNextButton.SetActive(false);
-
-        Debug.Log("[CodexViewController] Glyphs view enabled");
+        Debug.Log("[CodexViewController] Glyphs view enabled (alpha=1)");
     }
 
     /// <summary>
     /// Show the Mind Log Primary view (3x3 grid of memory fragments).
+    /// Sets MindLogPrimaryContainer.alpha = 1, all others to 0.
     /// </summary>
     private void ShowMindLogPrimaryView()
     {
-        // CRITICAL: Immediately re-find the container if reference is null or destroyed
-        // This can happen if the container is destroyed/recreated or reference is lost
-        if (mindLogPrimaryContainer == null)
-        {
-            mindLogPrimaryContainer = GameObject.Find("MindLogPrimaryContainer");
-            if (mindLogPrimaryContainer == null)
-            {
-                // Try to find it in scene root
-                Canvas[] allCanvases = FindObjectsOfType<Canvas>();
-                foreach (Canvas canvas in allCanvases)
-                {
-                    Transform found = canvas.transform.Find("CodexPanel/MindLogPrimaryContainer");
-                    if (found != null)
-                    {
-                        mindLogPrimaryContainer = found.gameObject;
-                        Debug.Log("[CodexViewController] Found MindLogPrimaryContainer via hierarchy search");
-                        break;
-                    }
-                }
-                
-                if (mindLogPrimaryContainer == null)
-                {
-                    Debug.LogError("[CodexViewController] FATAL: MindLogPrimaryContainer not found in scene! Checked both GameObject.Find() and hierarchy search.");
-                    return;
-                }
-            }
-            Debug.Log("[CodexViewController] Re-found MindLogPrimaryContainer (reference was null)");
-        }
+        Debug.Log("[CodexViewController] ShowMindLogPrimaryView() called");
+        
+        SetAllContainerAlpha(glyphsBackground, 0f);
+        SetAllContainerAlpha(mindLogBackground, 1f);
+        SetAllContainerAlpha(mindLogPrimaryContainer, 1f);
+        SetAllContainerAlpha(mindLogSecondaryContainer, 0f);
 
-        Debug.Log("[CodexViewController] ===== START ShowMindLogPrimaryView =====");
-        
-        if (mindLogPrimaryContainer == null)
+        // CRITICAL: Ensure containers are active in hierarchy
+        // CanvasGroup alpha doesn't help if the GameObject itself is inactive
+        if (mindLogBackground != null && !mindLogBackground.activeSelf)
         {
-            mindLogPrimaryContainer = GameObject.Find("MindLogPrimaryContainer");
-            Debug.Log($"[CodexViewController] Had to re-find MindLogPrimaryContainer: {(mindLogPrimaryContainer != null ? "FOUND" : "NOT FOUND")}");
+            mindLogBackground.SetActive(true);
+            Debug.Log("[CodexViewController] Activated mindLogBackground");
         }
         
-        if (mindLogPrimaryContainer != null)
+        if (mindLogPrimaryContainer != null && !mindLogPrimaryContainer.activeSelf)
         {
-            Debug.Log($"[CodexViewController] MindLogPrimaryContainer state BEFORE any changes:");
-            Debug.Log($"  - activeSelf: {mindLogPrimaryContainer.activeSelf}");
-            Debug.Log($"  - activeInHierarchy: {mindLogPrimaryContainer.activeInHierarchy}");
-            Debug.Log($"  - Parent: {mindLogPrimaryContainer.transform.parent?.name ?? "ROOT"}");
-            Debug.Log($"  - Parent active: {(mindLogPrimaryContainer.transform.parent != null ? mindLogPrimaryContainer.transform.parent.gameObject.activeSelf : true)}");
+            mindLogPrimaryContainer.SetActive(true);
+            Debug.Log("[CodexViewController] Activated mindLogPrimaryContainer");
         }
         
-        // Initialize test memories on first load if enabled and assigned
+        // Initialize test memories on first load if enabled
         if (useTestMemories && !testMemoriesInitialized && testSetup != null)
         {
             testSetup.InitializeTestMemories();
             testMemoriesInitialized = true;
-            Debug.Log("[CodexViewController] Test memories initialized successfully!");
+            Debug.Log("[CodexViewController] Test memories initialized");
         }
         else if (useTestMemories && !testMemoriesInitialized && testSetup == null)
         {
-            Debug.Log("[CodexViewController] Test Setup not assigned - using manual loader instead.");
             EnsureTestMemoriesExist();
             testMemoriesInitialized = true;
         }
-
-        // CRITICAL: Ensure Canvas hierarchy is active before enabling container
-        Canvas uiCanvas = FindAnyObjectByType<Canvas>();
-        if (uiCanvas != null && !uiCanvas.gameObject.activeSelf)
-        {
-            uiCanvas.gameObject.SetActive(true);
-            Debug.Log("[CodexViewController] UI_Canvas was inactive - activated it");
-        }
-
-        // Ensure CodexPanel (container's parent) is active
-        GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
-        if (codexPanel != null && !codexPanel.activeSelf)
-        {
-            codexPanel.SetActive(true);
-            Debug.Log("[CodexViewController] CodexPanel was inactive - activated it");
-        }
-
-        // Disable glyphs background and ENABLE Mind Log background
-        if (glyphsBackground != null) glyphsBackground.SetActive(false);
-        if (mindLogBackground != null) mindLogBackground.SetActive(true);
-
-        // Get the persistence helper to protect the container
-        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
-        if (persistence != null)
-        {
-            persistence.ProtectPrimaryContainer();
-            Debug.Log("[CodexViewController] MindLogPersistence activated to protect container");
-        }
-        else
-        {
-            Debug.LogWarning("[CodexViewController] MindLogPersistence not found - container may become invisible!");
-        }
-
-        // Disable glyphs view elements
-        if (glyphGrid_Pg1 != null)
-        {
-            glyphGrid_Pg1.SetActive(false);
-            CanvasGroup cg1 = glyphGrid_Pg1.GetComponent<CanvasGroup>();
-            if (cg1 != null)
-            {
-                cg1.interactable = false;
-                cg1.blocksRaycasts = false;
-            }
-        }
         
-        if (glyphGrid_Pg2 != null)
-        {
-            glyphGrid_Pg2.SetActive(false);
-            CanvasGroup cg2 = glyphGrid_Pg2.GetComponent<CanvasGroup>();
-            if (cg2 != null)
-            {
-                cg2.interactable = false;
-                cg2.blocksRaycasts = false;
-            }
-        }
-        
-        if (glyphsNavigation != null)
-        {
-            glyphsNavigation.SetActive(false);
-            CanvasGroup cgNav = glyphsNavigation.GetComponent<CanvasGroup>();
-            if (cgNav != null)
-            {
-                cgNav.interactable = false;
-                cgNav.blocksRaycasts = false;
-            }
-        }
-
-        // Enable Mind Log Primary view
-        if (mindLogPrimaryContainer == null)
-        {
-            Debug.LogError("[CodexViewController] MindLogPrimaryContainer reference is null! This should have been set in Awake()");
-            return;
-        }
-
-        Debug.Log($"[CodexViewController] MindLogPrimaryContainer current active state: {mindLogPrimaryContainer.activeSelf}");
-        Debug.Log($"[CodexViewController] MindLogPrimaryContainer parent: {mindLogPrimaryContainer.transform.parent?.name ?? "ROOT"}");
-        
-        // Ensure all parent GameObjects in the hierarchy are active
-        Transform current = mindLogPrimaryContainer.transform.parent;
-        while (current != null)
-        {
-            if (!current.gameObject.activeSelf)
-            {
-                current.gameObject.SetActive(true);
-                Debug.Log($"[CodexViewController] Activated parent: {current.name}");
-            }
-            current = current.parent;
-        }
-        
-        mindLogPrimaryContainer.SetActive(true);
-        Debug.Log($"[CodexViewController] MindLogPrimaryContainer set to active: {mindLogPrimaryContainer.activeSelf}");
-        
-        // Containers persist via CodexPanel's DontDestroyOnLoad (set by CodexController)
-        // Do NOT re-apply DontDestroyOnLoad here - it causes conflicts
-        Transform root = mindLogPrimaryContainer.transform.root;
-        Debug.Log($"[CodexViewController] Root parent: {root.name}");
-        
-        // FIX POSITIONS before doing anything else to prevent drift
-        FixMindLogContainerPositions();
-        
-        CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
-        if (cgPrimary != null)
-        {
-            cgPrimary.interactable = true;
-            cgPrimary.blocksRaycasts = true;
-            cgPrimary.alpha = 1f;
-            Debug.Log("[CodexViewController] CanvasGroup on MindLogPrimaryContainer configured");
-            Debug.Log($"[CodexViewController] CanvasGroup VERIFIED AFTER SET: alpha={cgPrimary.alpha}, interactable={cgPrimary.interactable}, blocksRaycasts={cgPrimary.blocksRaycasts}");
-        }
-        else
-        {
-            Debug.LogWarning("[CodexViewController] No CanvasGroup found on MindLogPrimaryContainer - adding one");
-            cgPrimary = mindLogPrimaryContainer.AddComponent<CanvasGroup>();
-            cgPrimary.interactable = true;
-            cgPrimary.blocksRaycasts = true;
-            cgPrimary.alpha = 1f;
-            Debug.Log($"[CodexViewController] Added CanvasGroup VERIFIED AFTER SET: alpha={cgPrimary.alpha}, interactable={cgPrimary.interactable}, blocksRaycasts={cgPrimary.blocksRaycasts}");
-        }
-
-        // Populate grid from MindLogManager
-        // Use a small coroutine to ensure the grid is fully initialized before populating
+        // Populate grid
         StartCoroutine(PopulateGridWithDelay(mindLogPrimaryContainer));
-        
-        Debug.Log("[CodexViewController] Started grid population coroutine");
+        Debug.Log("[CodexViewController] Mind Log Primary view fully enabled (alpha=1)");
     }
 
     private System.Collections.IEnumerator PopulateGridWithDelay(GameObject container)
@@ -538,7 +317,7 @@ public class CodexViewController : MonoBehaviour
             Debug.LogWarning("[CodexViewController] MemoryGridController not found in container!");
         }
 
-        // Disable Mind Log Secondary view
+        // Ensure secondary view is hidden
         DisableMindLogSecondary();
 
         // Disable legacy impressions elements if they exist
@@ -546,223 +325,84 @@ public class CodexViewController : MonoBehaviour
         if (impressionsPrevButton != null) impressionsPrevButton.SetActive(false);
         if (impressionsNextButton != null) impressionsNextButton.SetActive(false);
 
-        // FINAL DIAGNOSTIC: Check state just before reporting success
-        Debug.Log($"[CodexViewController] ===== FINAL CHECK BEFORE 'view enabled' =====");
-        Debug.Log($"[CodexViewController] MindLogPrimaryContainer.activeSelf: {mindLogPrimaryContainer.activeSelf}");
-        Debug.Log($"[CodexViewController] MindLogPrimaryContainer.activeInHierarchy: {mindLogPrimaryContainer.activeInHierarchy}");
-        if (!mindLogPrimaryContainer.activeInHierarchy)
-        {
-            Debug.LogError("[CodexViewController] CRITICAL: Container is active=true but NOT visible in hierarchy!");
-            Transform checkParent = mindLogPrimaryContainer.transform.parent;
-            int depth = 0;
-            while (checkParent != null && depth < 5)
-            {
-                Debug.LogError($"[CodexViewController] Parent depth {depth}: {checkParent.name} - activeSelf={checkParent.gameObject.activeSelf}, activeInHierarchy={checkParent.gameObject.activeInHierarchy}");
-                checkParent = checkParent.parent;
-                depth++;
-            }
-        }
-
         Debug.Log("[CodexViewController] Mind Log Primary view enabled");
     }
 
     /// <summary>
-    /// Show the Mind Log Secondary view (expanded memory with full text and back button).
+    /// Show the Mind Log Secondary view (expanded memory).
+    /// Sets MindLogSecondaryContainer.alpha = 1, primary and glyphs to 0.
     /// </summary>
     private void ShowMindLogSecondaryView()
     {
-        // CRITICAL: Ensure Canvas hierarchy is active before enabling container
-        Canvas uiCanvas = FindAnyObjectByType<Canvas>();
-        if (uiCanvas != null && !uiCanvas.gameObject.activeSelf)
-        {
-            uiCanvas.gameObject.SetActive(true);
-            Debug.Log("[CodexViewController] UI_Canvas was inactive - activated it");
-        }
+        Debug.Log("[CodexViewController] ShowMindLogSecondaryView() called");
+        
+        // Hide glyphs and primary, show secondary
+        SetAllContainerAlpha(glyphsBackground, 0f);
+        SetAllContainerAlpha(mindLogBackground, 1f);
+        SetAllContainerAlpha(mindLogPrimaryContainer, 0f);
+        SetAllContainerAlpha(mindLogSecondaryContainer, 1f);
 
-        // Ensure CodexPanel (container's parent) is active
-        GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
-        if (codexPanel != null && !codexPanel.activeSelf)
+        // CRITICAL: Ensure containers are active in hierarchy
+        // CanvasGroup alpha doesn't help if the GameObject itself is inactive
+        if (mindLogBackground != null && !mindLogBackground.activeSelf)
         {
-            codexPanel.SetActive(true);
-            Debug.Log("[CodexViewController] CodexPanel was inactive - activated it");
-        }
-
-        // Enable mind log background (different from glyphs/primary)
-        if (glyphsBackground != null) glyphsBackground.SetActive(false);
-        if (mindLogBackground != null) mindLogBackground.SetActive(true);
-
-        // Get the persistence helper to protect the container
-        MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
-        if (persistence != null)
-        {
-            persistence.ProtectSecondaryContainer();
-            Debug.Log("[CodexViewController] MindLogPersistence activated to protect secondary container");
-        }
-        else
-        {
-            Debug.LogWarning("[CodexViewController] MindLogPersistence not found - secondary container may become invisible!");
-        }
-
-        // Disable glyphs view elements
-        if (glyphGrid_Pg1 != null)
-        {
-            glyphGrid_Pg1.SetActive(false);
-            CanvasGroup cg1 = glyphGrid_Pg1.GetComponent<CanvasGroup>();
-            if (cg1 != null)
-            {
-                cg1.interactable = false;
-                cg1.blocksRaycasts = false;
-            }
+            mindLogBackground.SetActive(true);
+            Debug.Log("[CodexViewController] Activated mindLogBackground");
         }
         
-        if (glyphGrid_Pg2 != null)
+        if (mindLogSecondaryContainer != null && !mindLogSecondaryContainer.activeSelf)
         {
-            glyphGrid_Pg2.SetActive(false);
-            CanvasGroup cg2 = glyphGrid_Pg2.GetComponent<CanvasGroup>();
-            if (cg2 != null)
-            {
-                cg2.interactable = false;
-                cg2.blocksRaycasts = false;
-            }
-        }
-        
-        if (glyphsNavigation != null)
-        {
-            glyphsNavigation.SetActive(false);
-            CanvasGroup cgNav = glyphsNavigation.GetComponent<CanvasGroup>();
-            if (cgNav != null)
-            {
-                cgNav.interactable = false;
-                cgNav.blocksRaycasts = false;
-            }
-        }
-
-        // Disable Mind Log Primary view
-        DisableMindLogPrimary();
-
-        // Enable Mind Log Secondary view and ALL its children
-        if (mindLogSecondaryContainer != null)
-        {
-            // FIX POSITIONS BEFORE activating to prevent drift
-            FixMindLogContainerPositions();
-
-            // Add tracking for position changes
-            if (mindLogSecondaryContainer.GetComponent<RectTransformTracker>() == null)
-            {
-                mindLogSecondaryContainer.AddComponent<RectTransformTracker>();
-                Debug.Log("[CodexViewController] Added RectTransformTracker to secondary container");
-            }
-
-            // Ensure all parent GameObjects in the hierarchy are active
-            Transform current = mindLogSecondaryContainer.transform.parent;
-            while (current != null)
-            {
-                if (!current.gameObject.activeSelf)
-                {
-                    current.gameObject.SetActive(true);
-                    Debug.Log($"[CodexViewController] Activated parent: {current.name}");
-                }
-                current = current.parent;
-            }
-
             mindLogSecondaryContainer.SetActive(true);
-            Debug.Log("[CodexViewController] MindLogSecondaryContainer activated");
-            
-            CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
-            if (cgSecondary != null)
-            {
-                cgSecondary.interactable = true;
-                cgSecondary.blocksRaycasts = true;
-                cgSecondary.alpha = 1f;
-            }
-
-            // Enable all children of the secondary container
-            foreach (Transform child in mindLogSecondaryContainer.transform)
-            {
-                child.gameObject.SetActive(true);
-                Debug.Log($"[CodexViewController] Enabled child: {child.name}");
-            }
-
-            // Only disable legacy impressions elements if they exist AND are NOT part of the secondary container
-            if (impressionsTextDisplay != null && !impressionsTextDisplay.transform.IsChildOf(mindLogSecondaryContainer.transform))
-                impressionsTextDisplay.SetActive(false);
-            if (impressionsPrevButton != null && !impressionsPrevButton.transform.IsChildOf(mindLogSecondaryContainer.transform))
-                impressionsPrevButton.SetActive(false);
-            if (impressionsNextButton != null && !impressionsNextButton.transform.IsChildOf(mindLogSecondaryContainer.transform))
-                impressionsNextButton.SetActive(false);
+            Debug.Log("[CodexViewController] Activated mindLogSecondaryContainer");
         }
-
-        Debug.Log("[CodexViewController] Mind Log Secondary view enabled");
+        
+        Debug.Log("[CodexViewController] Mind Log Secondary view fully enabled (alpha=1)");
     }
 
     private void DisableMindLogPrimary()
     {
-        if (mindLogPrimaryContainer != null)
-        {
-            // CRITICAL: NEVER call SetActive(false) on this container
-            // It can cause it to be destroyed by competing systems
-            // ONLY use CanvasGroup to hide it
-            CanvasGroup cgPrimary = mindLogPrimaryContainer.GetComponent<CanvasGroup>();
-            if (cgPrimary != null)
-            {
-                cgPrimary.alpha = 0f;  // Invisible
-                cgPrimary.interactable = false;
-                cgPrimary.blocksRaycasts = false;
-                Debug.Log("[CodexViewController] MindLogPrimaryContainer hidden via CanvasGroup ONLY (SetActive NOT called - prevents destruction)");
-            }
-            else
-            {
-                // If no CanvasGroup, add one
-                cgPrimary = mindLogPrimaryContainer.AddComponent<CanvasGroup>();
-                cgPrimary.alpha = 0f;
-                cgPrimary.interactable = false;
-                cgPrimary.blocksRaycasts = false;
-                Debug.Log("[CodexViewController] Added CanvasGroup and hid MindLogPrimaryContainer (SetActive NOT called)");
-            }
-
-            // Unprotect only AFTER we've safely hidden it via CanvasGroup
-            MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
-            if (persistence != null)
-            {
-                persistence.UnprotectPrimaryContainer();
-                Debug.Log("[CodexViewController] Unprotected container after CanvasGroup hide");
-            }
-        }
+        SetAllContainerAlpha(mindLogPrimaryContainer, 0f);
+        Debug.Log("[CodexViewController] MindLogPrimaryContainer hidden (alpha=0)");
     }
 
     private void DisableMindLogSecondary()
     {
-        if (mindLogSecondaryContainer != null)
-        {
-            // CRITICAL: NEVER call SetActive(false) on this container
-            // It can cause it to be destroyed by competing systems
-            // ONLY use CanvasGroup to hide it
-            CanvasGroup cgSecondary = mindLogSecondaryContainer.GetComponent<CanvasGroup>();
-            if (cgSecondary != null)
-            {
-                cgSecondary.alpha = 0f;  // Invisible
-                cgSecondary.interactable = false;
-                cgSecondary.blocksRaycasts = false;
-                Debug.Log("[CodexViewController] MindLogSecondaryContainer hidden via CanvasGroup ONLY (SetActive NOT called - prevents destruction)");
-            }
-            else
-            {
-                // If no CanvasGroup, add one
-                cgSecondary = mindLogSecondaryContainer.AddComponent<CanvasGroup>();
-                cgSecondary.alpha = 0f;
-                cgSecondary.interactable = false;
-                cgSecondary.blocksRaycasts = false;
-                Debug.Log("[CodexViewController] Added CanvasGroup and hid MindLogSecondaryContainer (SetActive NOT called)");
-            }
+        SetAllContainerAlpha(mindLogSecondaryContainer, 0f);
+        Debug.Log("[CodexViewController] MindLogSecondaryContainer hidden (alpha=0)");
+    }
 
-            // Unprotect only AFTER we've safely hidden it via CanvasGroup
-            MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
-            if (persistence != null)
-            {
-                persistence.UnprotectSecondaryContainer();
-                Debug.Log("[CodexViewController] Unprotected secondary container after CanvasGroup hide");
-            }
+    /// <summary>
+    /// Set alpha on a container and ALL its children CanvasGroups.
+    /// Also sets interactable and blocksRaycasts based on alpha == 1.
+    /// Enforces the rule: only one container may have alpha = 1 at a time.
+    /// </summary>
+    private void SetAllContainerAlpha(GameObject container, float alpha)
+    {
+        if (container == null) return;
+
+        // Clamp alpha to 0 or 1
+        alpha = (alpha >= 0.5f) ? 1f : 0f;
+
+        // Set parent CanvasGroup
+        CanvasGroup cg = container.GetComponent<CanvasGroup>();
+        if (cg == null)
+        {
+            cg = container.AddComponent<CanvasGroup>();
         }
+        cg.alpha = alpha;
+        cg.interactable = (alpha == 1f);
+        cg.blocksRaycasts = (alpha == 1f);
+
+        // Set all child CanvasGroups - they follow parent's visibility rules
+        CanvasGroup[] childCanvasGroups = container.GetComponentsInChildren<CanvasGroup>();
+        foreach (CanvasGroup childCG in childCanvasGroups)
+        {
+            if (childCG == cg) continue; // Skip parent (already set)
+            childCG.interactable = (alpha == 1f);
+            childCG.blocksRaycasts = (alpha == 1f);
+        }
+
+        Debug.Log($"[CodexViewController] {container.name} set to alpha={alpha} (interactable={cg.interactable}, blocksRaycasts={cg.blocksRaycasts})");
     }
 
     /// <summary>
