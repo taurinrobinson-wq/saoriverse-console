@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3778568865226638144
 CanvasRenderer:
@@ -101,8 +101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5465770774003863958}
   - component: {fileID: 7809967641039115636}
-  - component: {fileID: 4055544548897397408}
-  - component: {fileID: 7311599535567455730}
   m_Layer: 5
   m_Name: MindLogGrid_Pg2
   m_TagString: Untagged
@@ -162,67 +160,6 @@ MonoBehaviour:
   m_Spacing: {x: 20.5, y: 26.6}
   m_Constraint: 1
   m_ConstraintCount: 3
---- !u!114 &4055544548897397408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329071947331449699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac596576abae934e91c370aa2d81a1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.Codex.MemoryGridUI
-  gridCells:
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  defaultCellTint: {r: 1, g: 1, b: 1, a: 1}
-  selectedCellTint: {r: 1, g: 0.88, b: 0.45, a: 1}
-  doubleClickThreshold: 0.25
-  synopsisText: {fileID: 1892173316315715962}
-  expandedView: {fileID: 3409647718541514340}
-  codexViewController: {fileID: 2804238367914797267}
---- !u!114 &7311599535567455730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329071947331449699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8fb19e32302d2f46a8a78344728c288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemoryGridController
-  gridContainer: {fileID: 5465770774003863958}
-  synopsisText: {fileID: 1892173316315715962}
-  expandedView: {fileID: 3409647718541514340}
 --- !u!1 &708057835862358132
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +196,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2966896821274286073
 CanvasRenderer:
@@ -2000,7 +1937,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8214876938797160604
 CanvasRenderer:
@@ -2212,7 +2149,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7176457015980929823
 CanvasRenderer:
@@ -2696,7 +2633,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2797133422072732811
 CanvasRenderer:
@@ -3528,7 +3465,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4389263906639529358
 CanvasRenderer:
@@ -3668,7 +3605,6 @@ MonoBehaviour:
   glyphGrid_Pg2: {fileID: 4195675726153273780}
   glyphsNavigation: {fileID: 2029668393570382327}
   mindLogPrimaryContainer: {fileID: 5209383855821126499}
-  memoryGridUI: {fileID: 4147588589813398017}
   mindLogSecondaryContainer: {fileID: 8217273026824663653}
   memoryExpandedUI: {fileID: 3409647718541514340}
   mindLogBackButton: {fileID: 8682239975584710530}
@@ -3726,9 +3662,9 @@ MonoBehaviour:
   viewport: {fileID: 3551064765281523373}
   codexBackgroundSprite: {fileID: 21300000, guid: ef78b9b1311618b48a92d6a2d15cc38c, type: 3}
   triglyphPanelUI: {fileID: 0}
-  glyphsBackground: {fileID: 0}
-  mindLogPrimaryContainer: {fileID: 0}
-  mindLogSecondaryContainer: {fileID: 0}
+  glyphsBackground: {fileID: 5197547936882688568}
+  mindLogPrimaryContainer: {fileID: 5209383855821126499}
+  mindLogSecondaryContainer: {fileID: 8217273026824663653}
   selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
   deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
   glyphNameText: {fileID: 4665222382387263991}
@@ -3737,7 +3673,25 @@ MonoBehaviour:
   codexFont: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
   requiresCodexDevice: 1
   glyphUIPrefab: {fileID: 0}
-  allSlots: []
+  allSlots:
+  - {fileID: 215426740989412391}
+  - {fileID: 8766185668166345115}
+  - {fileID: 7061468449466817784}
+  - {fileID: 1782460576844795897}
+  - {fileID: 7318206292170227863}
+  - {fileID: 4542394990149580978}
+  - {fileID: 7847631330498164962}
+  - {fileID: 8482778754083764071}
+  - {fileID: 4449584754960989105}
+  - {fileID: 8641680003384169687}
+  - {fileID: 8674472025988936156}
+  - {fileID: 7835293653371402685}
+  - {fileID: 1477496163547541275}
+  - {fileID: 4585588162657594967}
+  - {fileID: 541756037499698598}
+  - {fileID: 3446955268648989381}
+  - {fileID: 1049560312680152867}
+  - {fileID: 7628707428897824704}
 --- !u!1 &5207951367217545690
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,7 +4258,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1745930029901776796
 CanvasRenderer:
@@ -4994,7 +4948,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6919992481501472740
 CanvasRenderer:
@@ -5972,7 +5926,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110.6, y: 103.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7003275779348915352
 CanvasRenderer:
@@ -7104,8 +7058,6 @@ GameObject:
   - component: {fileID: 5138063967797736653}
   - component: {fileID: 3409647718541514340}
   - component: {fileID: 3504566118508480054}
-  - component: {fileID: 4208561402993828114}
-  - component: {fileID: 4247204770692442592}
   m_Layer: 5
   m_Name: MindLogSecondaryContainer
   m_TagString: Untagged
@@ -7191,7 +7143,7 @@ MonoBehaviour:
   memoryIcon: {fileID: 0}
   titleText: {fileID: 0}
   expandedText: {fileID: 4014616337971860742}
-  textScrollRect: {fileID: 4208561402993828114}
+  textScrollRect: {fileID: 0}
   backButton: {fileID: 8682239975584710530}
   fadeDuration: 0.2
   codexViewController: {fileID: 2804238367914797267}
@@ -7207,48 +7159,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &4208561402993828114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8217273026824663653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
-  m_Content: {fileID: 4889468795442709556}
-  m_Horizontal: 1
-  m_Vertical: 1
-  m_MovementType: 1
-  m_Elasticity: 0.1
-  m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 5858007793611211381}
-  m_HorizontalScrollbar: {fileID: 0}
-  m_VerticalScrollbar: {fileID: 0}
-  m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
-  m_HorizontalScrollbarSpacing: 0
-  m_VerticalScrollbarSpacing: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4247204770692442592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8217273026824663653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9f8a7006c49334b9a49cb64c835c16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.ScrollRectViewportFixer
 --- !u!1 &8222969626775926382
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,8 +7574,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4352045189859954584}
   - component: {fileID: 159661544181248567}
-  - component: {fileID: 4147588589813398017}
-  - component: {fileID: 8127257590457633439}
   m_Layer: 5
   m_Name: MindLogGrid_Pg1
   m_TagString: Untagged
@@ -7725,67 +7633,6 @@ MonoBehaviour:
   m_Spacing: {x: 20.9, y: 26.6}
   m_Constraint: 1
   m_ConstraintCount: 3
---- !u!114 &4147588589813398017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8752729778828026806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac596576abae934e91c370aa2d81a1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.Codex.MemoryGridUI
-  gridCells:
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  - button: {fileID: 0}
-    iconImage: {fileID: 0}
-    selectionHighlight: {fileID: 0}
-  defaultCellTint: {r: 1, g: 1, b: 1, a: 1}
-  selectedCellTint: {r: 1, g: 0.88, b: 0.45, a: 1}
-  doubleClickThreshold: 0.25
-  synopsisText: {fileID: 1892173316315715962}
-  expandedView: {fileID: 3409647718541514340}
-  codexViewController: {fileID: 2804238367914797267}
---- !u!114 &8127257590457633439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8752729778828026806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8fb19e32302d2f46a8a78344728c288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemoryGridController
-  gridContainer: {fileID: 4352045189859954584}
-  synopsisText: {fileID: 1892173316315715962}
-  expandedView: {fileID: 3409647718541514340}
 --- !u!1 &9106309822051092739
 GameObject:
   m_ObjectHideFlags: 0
@@ -8225,4 +8072,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-
