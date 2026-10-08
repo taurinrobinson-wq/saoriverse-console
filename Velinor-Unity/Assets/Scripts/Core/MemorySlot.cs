@@ -26,7 +26,14 @@ namespace Velinor.Core
         public MemoryFragment MemoryFragment => memoryFragment;
         public bool IsSelected => isSelected;
 
-        private void Start()
+        private void OnEnable()
+        {
+            // Initialize components early, before Start() is called
+            // This ensures slotImage and button are ready when PopulateFromManager() is called
+            EnsureComponentsInitialized();
+        }
+
+        private void EnsureComponentsInitialized()
         {
             // Auto-find Image if not assigned
             if (slotImage == null)
@@ -49,10 +56,16 @@ namespace Velinor.Core
                 }
             }
 
-            if (button != null)
+            if (button != null && button.onClick.GetPersistentEventCount() == 0)
             {
                 button.onClick.AddListener(OnSlotClicked);
             }
+        }
+
+        private void Start()
+        {
+            // Ensure components are initialized (in case OnEnable didn't run)
+            EnsureComponentsInitialized();
 
             // Initialize slot as empty
             Clear();
