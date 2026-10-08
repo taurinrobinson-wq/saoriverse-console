@@ -334,9 +334,9 @@ public class CodexViewController : MonoBehaviour
             Debug.Log("[CodexViewController] CodexPanel was inactive - activated it");
         }
 
-        // Disable glyphs background and enable Mind Log Primary Container
+        // Disable glyphs background and ENABLE Mind Log background
         if (glyphsBackground != null) glyphsBackground.SetActive(false);
-        if (mindLogBackground != null) mindLogBackground.SetActive(false);
+        if (mindLogBackground != null) mindLogBackground.SetActive(true);
 
         // Get the persistence helper to protect the container
         MindLogPersistence persistence = FindAnyObjectByType<MindLogPersistence>();
