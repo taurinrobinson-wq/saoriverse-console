@@ -7664,7 +7664,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4352045189859954584}
   - component: {fileID: 159661544181248567}
- - component: {fileID: 8127257590457633439}
+  - component: {fileID: 4147588589813398017}
+  - component: {fileID: 8127257590457633439}
   m_Layer: 5
   m_Name: MindLogGrid_Pg1
   m_TagString: Untagged
@@ -7724,6 +7725,52 @@ MonoBehaviour:
   m_Spacing: {x: 20.9, y: 26.6}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &4147588589813398017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752729778828026806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac596576abae934e91c370aa2d81a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.Codex.MemoryGridUI
+  gridCells:
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  - button: {fileID: 0}
+    iconImage: {fileID: 0}
+    selectionHighlight: {fileID: 0}
+  defaultCellTint: {r: 1, g: 1, b: 1, a: 1}
+  selectedCellTint: {r: 1, g: 0.88, b: 0.45, a: 1}
+  doubleClickThreshold: 0.25
+  synopsisText: {fileID: 1892173316315715962}
+  expandedView: {fileID: 3409647718541514340}
+  codexViewController: {fileID: 2804238367914797267}
 --- !u!114 &8127257590457633439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8178,5 +8225,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-
 
