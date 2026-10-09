@@ -362,45 +362,11 @@ public class DialogueManager : MonoBehaviour
             dialogueUI.ShowText(choice.npc_response);
             dialogueUI.HideSharedBeat();
             
-            // Only show Continue button for multi-NPC conversations (beat has no player choices)
-            // For single-NPC conversations, proceed directly to next beat
-            if (beat.tone_choices == null || beat.tone_choices.Length == 0)
-            {
-                // Multi-NPC beat: NPC responded to another NPC, player must click Continue
-                Debug.Log($"[DialogueManager] Multi-NPC beat detected (no choices). Adding Continue button.");
-                BeatData continueBeat = new BeatData
-                {
-                    id = beat.id,
-                    active_speaker = beat.active_speaker,
-                    tone_choices = new BeatChoice[]
-                    {
-                        new BeatChoice
-                        {
-                            tone = "E",
-                            label = "Continue",
-                            text = "Continue",
-                            result_text = "",
-                            npc_response = ""
-                        }
-                    }
-                };
-                
-                float nextBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
-                Debug.Log($"[DialogueManager] Continue button will advance to beat: {nextBeatId}");
-                
-                dialogueUI.ShowChoices(continueBeat, choice => 
-                {
-                    Debug.Log($"[DialogueManager] Continue button clicked, advancing to beat: {nextBeatId}");
-                    AdvanceToBeat(nextBeatId);
-                });
-            }
-            else
-            {
-                // Single-NPC conversation: show response, then proceed directly to next beat
-                Debug.Log($"[DialogueManager] Single-NPC beat (has choices). Skipping Continue button, advancing directly to next beat.");
-                float nextBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
-                AdvanceToBeat(nextBeatId);
-            }
+            // Advance to next beat - it will have the appropriate choices defined in JSON
+            // (either 4 tone choices, 1 Continue choice, or 1 End choice)
+            float nextBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
+            Debug.Log($"[DialogueManager] NPC response shown. Advancing to beat: {nextBeatId}");
+            AdvanceToBeat(nextBeatId);
             
             yield break;
         }
