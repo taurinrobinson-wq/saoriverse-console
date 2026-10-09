@@ -361,6 +361,20 @@
     },
     {
       "id": 3,
+      "type": "npc_turn",
+      "active_speaker": "Willy",
+      "display_name": "Older Man",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [],
+      "next_beat_id": 4,
+      "system_triggers": []
+    },
+    {
+      "id": 4,
       "type": "player_inner",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
