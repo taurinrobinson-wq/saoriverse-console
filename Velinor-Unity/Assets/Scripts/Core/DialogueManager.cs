@@ -321,11 +321,15 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.Log($"[DialogueManager] Showing npc_response: {choice.npc_response}");
             
+            // Use npc_speaker if provided (for player_inner beats where NPC responds)
+            // Otherwise fall back to beat.active_speaker
+            string npcSpeaker = !string.IsNullOrEmpty(choice.npc_speaker) ? choice.npc_speaker : beat.active_speaker;
+            
             // Show portrait expression for the response (if specified)
             if (!string.IsNullOrEmpty(choice.portrait_expression_on_response) && portraitManager != null)
             {
-                portraitManager.ShowPortrait(beat.active_speaker, choice.portrait_expression_on_response);
-                Debug.Log($"[DialogueManager] Showing response portrait: {beat.active_speaker}_{choice.portrait_expression_on_response}");
+                portraitManager.ShowPortrait(npcSpeaker, choice.portrait_expression_on_response);
+                Debug.Log($"[DialogueManager] Showing response portrait: {npcSpeaker}_{choice.portrait_expression_on_response}");
             }
 
             // Play voiceover for NPC response if audio clip is specified
@@ -352,9 +356,6 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             
-            // Use npc_speaker if provided (for player_inner beats where NPC responds)
-            // Otherwise fall back to beat.active_speaker
-            string npcSpeaker = !string.IsNullOrEmpty(choice.npc_speaker) ? choice.npc_speaker : beat.active_speaker;
             string npcDisplayName = !string.IsNullOrEmpty(choice.npc_display_name) ? choice.npc_display_name : beat.display_name;
             
             dialogueUI.ShowSpeaker(npcSpeaker ?? "", npcDisplayName);

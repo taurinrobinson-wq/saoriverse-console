@@ -6,7 +6,7 @@
       "id": 1,
       "type": "npc_turn",
       "active_speaker": "Willy",
-      "display_name": "Willy",
+      "display_name": "Older Man",
       "portrait_expression": "neutral",
       "setting_description": "",
       "prompt": "Hey there, hold on one sec. Willy don' work for free.",
