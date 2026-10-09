@@ -26,7 +26,6 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive = false;
     private string activeNpcId;
     private string currentSceneId;
-    private bool lastActionWasNpcResponse = false;  // Track if last shown text was an npc_response
 
     public System.Action OnDialogueEnded;
 
@@ -134,9 +133,6 @@ public class DialogueManager : MonoBehaviour
             portraitManager.HidePortrait();
         }
 
-        // Reset append flag for new dialogue
-        lastActionWasNpcResponse = false;
-
         activeNpcId = npcId;
         isDialogueActive = true;
 
@@ -225,39 +221,14 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueUI.HideSharedBeat();
             
-            // Check if we should append (continuation) or replace text
-            if (lastActionWasNpcResponse)
+            // Show prompt
+            dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
+            dialogueUI.ShowText(beat.prompt ?? "");
+            
+            // Show shared_beat if it exists (displayed along with prompt)
+            if (!string.IsNullOrEmpty(beat.shared_beat))
             {
-                // Continuation beat: append prompt + shared_beat instead of replacing
-                Debug.Log($"[DialogueManager] Continuation beat detected. Appending text instead of replacing.");
-                
-                // Combine prompt and shared_beat into single append text
-                string appendText = beat.prompt ?? "";
-                if (!string.IsNullOrEmpty(beat.shared_beat))
-                {
-                    if (!string.IsNullOrEmpty(appendText))
-                        appendText += "\n" + beat.shared_beat;
-                    else
-                        appendText = beat.shared_beat;
-                }
-                
-                if (!string.IsNullOrEmpty(appendText))
-                {
-                    dialogueUI.AppendText(appendText, useTypewriter: true);
-                }
-                
-                lastActionWasNpcResponse = false;  // Reset flag
-            }
-            else
-            {
-                // Normal beat: show prompt and shared_beat as usual
-                dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
-                dialogueUI.ShowText(beat.prompt ?? "");
-                
-                if (!string.IsNullOrEmpty(beat.shared_beat))
-                {
-                    dialogueUI.ShowSharedBeat(beat.shared_beat);
-                }
+                dialogueUI.ShowSharedBeat(beat.shared_beat);
             }
             
             // Show choices
@@ -275,15 +246,7 @@ public class DialogueManager : MonoBehaviour
         // No choices and no shared_beat - just show prompt
         dialogueUI.HideSharedBeat();
         dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
-        if (lastActionWasNpcResponse)
-        {
-            dialogueUI.AppendText(beat.prompt ?? "", useTypewriter: true);
-            lastActionWasNpcResponse = false;
-        }
-        else
-        {
-            dialogueUI.ShowText(beat.prompt ?? "");
-        }
+        dialogueUI.ShowText(beat.prompt ?? "");
     }
 
     private IEnumerator AutoAdvanceAfterSharedBeat(BeatData beat)
@@ -398,9 +361,6 @@ public class DialogueManager : MonoBehaviour
             dialogueUI.ShowSpeaker(npcSpeaker ?? "", npcDisplayName);
             dialogueUI.ShowText(choice.npc_response);
             dialogueUI.HideSharedBeat();
-            
-            // Mark that we just showed an npc_response so the next beat knows to append instead of replace
-            lastActionWasNpcResponse = true;
             
             // Advance to next beat - it will have the appropriate choices defined in JSON
             // (either 4 tone choices, 1 Continue choice, or 1 End choice)
@@ -649,9 +609,6 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.Log("[DialogueManager] No mind log unlocks to process");
         }
-
-        // Reset append flag
-        lastActionWasNpcResponse = false;
 
         isDialogueActive = false;
         currentBeat = null;
