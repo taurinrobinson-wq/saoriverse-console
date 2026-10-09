@@ -417,8 +417,8 @@
       "shared_beat": "",
       "tone_choices": [
         {
-          "tone": "E",
-          "label": "Empathy",
+          "tone": "T",
+          "label": "Trust",
           "text": "I should go see Ravi and Nima and tell them what I found.",
           "audio_clip_on_choice": "",
           "result_text": "",

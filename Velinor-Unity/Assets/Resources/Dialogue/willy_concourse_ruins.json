@@ -439,7 +439,53 @@
       "setting_description": "",
       "prompt": "",
       "audio_clip": "",
-      "shared_beat": "Well, here's the console. Good luck with that.",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Jobs done. Good luck with that.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 5,
+      "system_triggers": []
+    },
+    {
+      "id": 5,
+      "type": "npc_turn",
+      "active_speaker": "Willy",
+      "display_name": "Older Man",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "Well, best of luck with that thing.",
       "tone_choices": [
         {
           "tone": "T",
@@ -473,17 +519,22 @@
           "system_triggers": []
         }
       ],
-      "next_beat_id": 5,
-      "system_triggers": []
+      "next_beat_id": 6,
+      "system_triggers": [
+        {
+          "type": "transition_fade",
+          "data": []
+        }
+      ]
     },
     {
-      "id": 5,
+      "id": 6,
       "type": "player_posture",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
       "portrait_expression": "resolved",
       "setting_description": "",
-      "prompt": "Debris clears. A cracked glyph console flickers to life, unstable, trembling with residual energy.",
+      "prompt": "Looks like the debris is clear.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -521,10 +572,6 @@
       ],
       "next_beat_id": 0,
       "system_triggers": [
-        {
-          "type": "transition_fade",
-          "data": []
-        },
         {
           "type": "glyph_collect"
         },
