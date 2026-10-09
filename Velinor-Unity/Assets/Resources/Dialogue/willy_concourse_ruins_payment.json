@@ -198,6 +198,169 @@
     },
     {
       "id": 2,
+      "type": "npc_turn",
+      "active_speaker": "Willy",
+      "display_name": "Older Man",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "Well? Ya gonna answer me or what?",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "No, I don't need it. You can have it.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Ha! That's what I like to hear. One less thing to worry about.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "trust",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Actually, I think I do need it. Why are you asking?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Curious, that's all. Plenty of people don't know what they got.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "nuance",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "Yeah, I do. It's important to me.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Fair enough. Can't blame ya for that. Everyone's got their reasons.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "authority",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I... I need to think about it.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Alright, alright. No rush. You seem like you got a lot on your mind.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "empathy",
+              "delta": 0.005
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 3,
+      "system_triggers": []
+    },
+    {
+      "id": 3,
       "type": "player_inner",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
