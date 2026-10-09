@@ -6,7 +6,7 @@
       "id": 1,
       "type": "npc_turn",
       "active_speaker": "Willy",
-      "display_name": "Older Man",
+      "display_name": "Willy",
       "portrait_expression": "neutral",
       "setting_description": "",
       "prompt": "Hey there, hold on one sec. Willy don' work for free.",
@@ -22,7 +22,7 @@
           "show_result_in_notification": false,
           "npc_response": "Yeah, figures. Anyway... ya don' need that metal thing, do ya?",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -65,7 +65,7 @@
           "show_result_in_notification": false,
           "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ah...keep a lookout while I take a closer peek at it...if ya catch my drift.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -108,7 +108,7 @@
           "show_result_in_notification": true,
           "npc_response": "Yeah, clearly. You look like ya haven't eaten in a while. Anyway, leave me to my ways and we'll call it even.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -151,7 +151,7 @@
           "show_result_in_notification": true,
           "npc_response": "Meh, don't get all mushy on me. Bleck. Just get outta here, will ya.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
