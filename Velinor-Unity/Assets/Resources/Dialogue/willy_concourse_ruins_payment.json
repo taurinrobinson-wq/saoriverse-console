@@ -149,7 +149,7 @@
           "audio_clip_on_choice": "",
           "result_text": "Willy is somewhat annoyed at your sudden display of affection.",
           "show_result_in_notification": true,
-          "npc_response": "Meh, don't get all mushy on me. Bleck. Just get outta here, will ya.",
+          "npc_response": "Meh, don't get all mushy on me. Bleck. Why don't you just leave me to my scrappin' ways and get outta here, will ya?",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
@@ -205,7 +205,7 @@
       "setting_description": "",
       "prompt": "",
       "audio_clip": "",
-      "shared_beat": "Yeah, figures. Anyway... ya don' need that metal thing, do ya?",
+      "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
@@ -369,7 +369,39 @@
       "prompt": "",
       "audio_clip": "",
       "shared_beat": "",
-      "tone_choices": [],
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
       "next_beat_id": 4,
       "system_triggers": []
     },
