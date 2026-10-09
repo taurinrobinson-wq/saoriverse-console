@@ -1,0 +1,269 @@
+{
+  "scene_id": "willy_glyph_01_payment",
+  "required_flags": [],
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Willy",
+      "display_name": "Willy",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "Hey there, hold on one sec. Willy don' work for free.",
+      "audio_clip": "",
+      "shared_beat": "Careful out there.",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Oh yeah, right of course. I don't have much right now...",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Yeah, figures. Anyway... ya don' need that metal thing, do ya?",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "target": "Willy",
+              "stat": "authority",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Yeah, you were working pretty hard. I don't have much... what do you want.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ah...keep a lookout while I take a closer peek at it...if ya catch my drift.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "nuance",
+              "delta": 0.02
+            },
+            {
+              "target": "Willy",
+              "stat": "skepticism",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "Yeah, of course. You work hard, you get something, right. Uh...I don't have much...",
+          "audio_clip_on_choice": "",
+          "result_text": "Willy appreciates your practical approach.",
+          "show_result_in_notification": true,
+          "npc_response": "Yeah, clearly. You look like ya haven't eaten in a while. Anyway, leave me to my ways and we'll call it even.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.005
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "nuance",
+              "delta": 0.015
+            },
+            {
+              "target": "Willy",
+              "stat": "authority",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "Sorry, Willy... I didn't even ask your name. You've been really helpful. What can I do for you.",
+          "audio_clip_on_choice": "",
+          "result_text": "Willy is somewhat annoyed at your sudden display of affection.",
+          "show_result_in_notification": true,
+          "npc_response": "Meh, don't get all mushy on me. Bleck. Just get outta here, will ya.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "empathy",
+              "delta": 0.015
+            },
+            {
+              "target": "Willy",
+              "stat": "nuance",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": [
+        {
+          "type": "update_dialogue_names",
+          "data": [
+            "Willy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "player_inner",
+      "active_speaker": "Lioren",
+      "display_name": "Lioren",
+      "portrait_expression": "sad",
+      "setting_description": "",
+      "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I should go see Ravi and Nima and tell them what I found.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": [
+        {
+          "type": "glyph_effect",
+          "data": [
+            "movement_speed",
+            "2"
+          ]
+        },
+        {
+          "type": "diary_append",
+          "data": [
+            "Met a scrapper named Willy in the Concourse Ruins. He was an odd character...laughing at suffering, coughing constantly...but helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."
+          ]
+        },
+        {
+          "type": "close_dialogue"
+        },
+        {
+          "type": "set_flag",
+          "key": "willy_dialogue_complete",
+          "value": true,
+          "note": "Enables Kaelen to appear in InsideMarket_00"
+        }
+      ]
+    }
+  ]
+}

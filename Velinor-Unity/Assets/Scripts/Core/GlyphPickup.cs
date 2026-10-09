@@ -60,6 +60,20 @@ public class GlyphPickup : MonoBehaviour
             Collider col = GetComponent<Collider>();
             if (col != null) col.enabled = false;
 
+            // CRITICAL: If this glyph has an associated NPC with secondary dialogue,
+            // trigger it now. This enables multi-part encounters (e.g., Willy glyph).
+            // The NPC should have secondaryDialogueJson assigned in the inspector.
+            NPCDialogueDriver npcDriver = FindAnyObjectByType<NPCDialogueDriver>();
+            if (npcDriver != null && glyphData.glyphName == "Sorrow")
+            {
+                // Check if Willy NPC has secondary dialogue
+                if (npcDriver.gameObject.name.Contains("Willy") || npcDriver.gameObject.name.Contains("willy"))
+                {
+                    Debug.Log("[GlyphPickup] Triggering Willy secondary dialogue after glyph collection");
+                    npcDriver.TriggerSecondaryDialogue();
+                }
+            }
+
             // Destroy after delay
             Destroy(gameObject, destroyDelay);
         }

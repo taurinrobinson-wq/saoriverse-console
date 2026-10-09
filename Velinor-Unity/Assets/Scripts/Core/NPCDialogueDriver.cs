@@ -17,6 +17,7 @@ namespace Velinor.Core
     {
         [Header("Dialogue Configuration")]
         [SerializeField] private TextAsset dialogueJson;           // Assign dialogue JSON in Inspector
+        [SerializeField] private TextAsset secondaryDialogueJson;  // Optional follow-up dialogue (triggered separately)
         [SerializeField] private string npcName = "NPC";           // "Saori", "Nima", "Ravi", "Willy", "Kaelen"
         [SerializeField] private string startPassageId = "start";  // Fallback start passage
         [SerializeField] private bool isMultiNpcScene = false;     // Set true for scenes like ravi_nima_market_discovery
@@ -338,6 +339,33 @@ namespace Velinor.Core
             
             // Start dialogue at specified beat
             dialogueManager.StartDialogue(gameObject.name, startPassageId);
+        }
+
+        /// <summary>
+        /// Trigger secondary dialogue (e.g., follow-up conversation after event).
+        /// Used for scenes with multi-part encounters (primary + follow-up dialogue).
+        /// </summary>
+        public void TriggerSecondaryDialogue()
+        {
+            if (dialogueManager == null)
+            {
+                Debug.LogWarning($"[NPCDialogueDriver] {npcName}: DialogueManager not found");
+                return;
+            }
+
+            if (secondaryDialogueJson == null)
+            {
+                Debug.LogError($"[NPCDialogueDriver] {npcName}: secondaryDialogueJson TextAsset not assigned in Inspector!");
+                return;
+            }
+
+            Debug.Log($"[NPCDialogueDriver] {npcName}: Starting secondary dialogue");
+
+            // Load the secondary dialogue JSON
+            dialogueManager.LoadDialogue(secondaryDialogueJson);
+            
+            // Start at beat 1 (beginning of secondary dialogue)
+            dialogueManager.StartDialogue(gameObject.name, "1");
         }
 
         /// <summary>
