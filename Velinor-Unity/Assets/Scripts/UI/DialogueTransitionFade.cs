@@ -12,8 +12,8 @@ using System.Collections;
 public class DialogueTransitionFade : MonoBehaviour
 {
     private Image fadeImage;
-    private float fadeDuration = 0.5f;
-    private float holdDuration = 0.5f;
+    private float fadeDuration = 1.2f;  // Longer fade for theatrical effect
+    private float holdDuration = 0.8f;  // Longer pause on black
 
     private void OnEnable()
     {
@@ -55,6 +55,10 @@ public class DialogueTransitionFade : MonoBehaviour
         // Add Image component
         fadeImage = fadeObj.AddComponent<Image>();
         fadeImage.color = new Color(0, 0, 0, 0); // Black, fully transparent
+        
+        // CRITICAL: Make fade overlay non-interactive so it doesn't block clicks
+        // Set to None so it doesn't consume raycasts when transparent
+        fadeImage.raycastTarget = false;
 
         // Set sort order so it's on top
         Canvas fadeCanvas = fadeObj.AddComponent<Canvas>();

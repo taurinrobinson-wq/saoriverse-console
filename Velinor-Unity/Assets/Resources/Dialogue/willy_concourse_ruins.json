@@ -388,12 +388,7 @@
         }
       ],
       "next_beat_id": 4,
-      "system_triggers": [
-        {
-          "type": "transition_fade",
-          "data": []
-        }
-      ]
+      "system_triggers": []
     },
     {
       "id": 4,
@@ -440,6 +435,10 @@
       ],
       "next_beat_id": 5,
       "system_triggers": [
+        {
+          "type": "transition_fade",
+          "data": []
+        },
         {
           "type": "glyph_collect"
         }
