@@ -3,7 +3,7 @@
   "required_flags": [],
   "beats": [
     {
-      "id": "1",
+      "id": 1,
       "type": "npc_turn",
       "active_speaker": "Willy",
       "display_name": "Willy",
@@ -186,7 +186,7 @@
           "npc_portrait_expression": "neutral"
         }
       ],
-      "next_beat_id": "2",
+      "next_beat_id": 2,
       "system_triggers": [
         {
           "type": "update_dialogue_names",
@@ -197,7 +197,7 @@
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "type": "player_inner",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
@@ -239,7 +239,7 @@
           "system_triggers": []
         }
       ],
-      "next_beat_id": "0",
+      "next_beat_id": 0,
       "system_triggers": [
         {
           "type": "glyph_effect",
