@@ -102,6 +102,14 @@ public class DialogueTransitionFade : MonoBehaviour
         yield return StartCoroutine(FadeToAlpha(0f, fadeDuration));
 
         Debug.Log("[DialogueTransitionFade] Lights back up! Scene transition complete.");
+        
+        // 5. CRITICAL: Disable the fade overlay so it doesn't block raycasts
+        // Even though it's transparent, its presence can interfere with button clicks
+        if (fadeImage != null && fadeImage.gameObject != null)
+        {
+            fadeImage.gameObject.SetActive(false);
+            Debug.Log("[DialogueTransitionFade] Fade overlay disabled - dialogue interaction restored");
+        }
     }
 
     private IEnumerator FadeToAlpha(float targetAlpha, float duration)
