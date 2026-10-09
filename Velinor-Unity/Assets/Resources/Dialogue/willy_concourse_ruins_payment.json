@@ -201,6 +201,145 @@
       "type": "player_inner",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "No... no I don't. You can have it.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Actually... I might need it. What are you asking?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "I think I do need it. It's important to me.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I... I need to think about what you're saying.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 3,
+      "system_triggers": []
+    },
+    {
+      "id": 3,
+      "type": "player_inner",
+      "active_speaker": "Lioren",
+      "display_name": "Lioren",
       "portrait_expression": "sad",
       "setting_description": "",
       "prompt": "I suddenly feel so heavy inside like a giant weight is on my shoulders.",
