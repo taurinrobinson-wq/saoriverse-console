@@ -205,6 +205,20 @@
       "setting_description": "",
       "prompt": "",
       "audio_clip": "",
+      "shared_beat": "Yeah, figures. Anyway... ya don' need that metal thing, do ya?",
+      "tone_choices": [],
+      "next_beat_id": 3,
+      "system_triggers": []
+    },
+    {
+      "id": 3,
+      "type": "npc_turn",
+      "active_speaker": "Willy",
+      "display_name": "Older Man",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
@@ -356,11 +370,11 @@
           "system_triggers": []
         }
       ],
-      "next_beat_id": 3,
+      "next_beat_id": 4,
       "system_triggers": []
     },
     {
-      "id": 3,
+      "id": 4,
       "type": "npc_turn",
       "active_speaker": "Willy",
       "display_name": "Older Man",
