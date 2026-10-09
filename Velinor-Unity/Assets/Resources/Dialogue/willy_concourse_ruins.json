@@ -199,7 +199,39 @@
       "prompt": "",
       "audio_clip": "",
       "shared_beat": "Anyway, whatever you're after... it's under that mess. And you're not gettin' ta it today.",
-      "tone_choices": [],
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
       "next_beat_id": 3,
       "system_triggers": []
     },
