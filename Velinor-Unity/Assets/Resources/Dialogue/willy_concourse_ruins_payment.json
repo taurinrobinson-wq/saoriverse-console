@@ -11,7 +11,7 @@
       "setting_description": "",
       "prompt": "Hey there, hold on one sec. Willy don' work for free.",
       "audio_clip": "",
-      "shared_beat": "",
+      "shared_beat": "Careful out there.",
       "tone_choices": [
         {
           "tone": "T",
@@ -20,9 +20,9 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "",
+          "npc_response": "Yeah, figures. Anyway... ya don' need that metal thing, do ya?",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -53,18 +53,19 @@
               "delta": 0.01
             }
           ],
-          "system_triggers": []
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
         },
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Yeah, you were working pretty hard. I don't have much... what do you want?",
+          "text": "Yeah, you were working pretty hard. I don't have much... what do you want.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "",
+          "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ah...keep a lookout while I take a closer peek at it...if ya catch my drift.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -95,7 +96,8 @@
               "delta": 0.01
             }
           ],
-          "system_triggers": []
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
         },
         {
           "tone": "N",
@@ -104,9 +106,9 @@
           "audio_clip_on_choice": "",
           "result_text": "Willy appreciates your practical approach.",
           "show_result_in_notification": true,
-          "npc_response": "",
+          "npc_response": "Yeah, clearly. You look like ya haven't eaten in a while. Anyway, leave me to my ways and we'll call it even.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -137,7 +139,8 @@
               "delta": 0.01
             }
           ],
-          "system_triggers": []
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
         },
         {
           "tone": "E",
@@ -146,9 +149,9 @@
           "audio_clip_on_choice": "",
           "result_text": "Willy is somewhat annoyed at your sudden display of affection.",
           "show_result_in_notification": true,
-          "npc_response": "",
+          "npc_response": "Meh, don't get all mushy on me. Bleck. Just get outta here, will ya.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -179,7 +182,8 @@
               "delta": 0.01
             }
           ],
-          "system_triggers": []
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
         }
       ],
       "next_beat_id": 2,
@@ -194,169 +198,6 @@
     },
     {
       "id": 2,
-      "type": "npc_turn",
-      "active_speaker": "Willy",
-      "display_name": "Older Man",
-      "portrait_expression": "neutral",
-      "setting_description": "",
-      "prompt": "So what do ya say?",
-      "audio_clip": "",
-      "shared_beat": "",
-      "tone_choices": [
-        {
-          "tone": "T",
-          "label": "Trust",
-          "text": "Oh yeah, sure... I understand.",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "stat": "observation",
-              "delta": 0
-            },
-            {
-              "stat": "narrative",
-              "delta": 0
-            },
-            {
-              "stat": "empathy",
-              "delta": 0
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Willy",
-              "stat": "trust",
-              "delta": 0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "O",
-          "label": "Observation",
-          "text": "Right, so you want to keep it then.",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0
-            },
-            {
-              "stat": "observation",
-              "delta": 0.01
-            },
-            {
-              "stat": "narrative",
-              "delta": 0
-            },
-            {
-              "stat": "empathy",
-              "delta": 0
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Willy",
-              "stat": "nuance",
-              "delta": 0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "N",
-          "label": "Narrative",
-          "text": "Yeah, yeah I'm alright with that.",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0
-            },
-            {
-              "stat": "observation",
-              "delta": 0
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Willy",
-              "stat": "authority",
-              "delta": 0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "E",
-          "label": "Empathy",
-          "text": "Yeah, okay... thanks for letting me be...",
-          "audio_clip_on_choice": "",
-          "result_text": "",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0
-            },
-            {
-              "stat": "observation",
-              "delta": 0
-            },
-            {
-              "stat": "narrative",
-              "delta": 0
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.01
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "Willy",
-              "stat": "empathy",
-              "delta": 0.005
-            }
-          ],
-          "system_triggers": []
-        }
-      ],
-      "next_beat_id": 3,
-      "system_triggers": []
-    },
-    {
-      "id": 3,
       "type": "player_inner",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
