@@ -609,8 +609,14 @@ public class CodexController : MonoBehaviour
         // Create GlyphUI instance (inactive - will be displayed via GlyphSlot)
         if (glyphUIPrefab == null)
         {
-            Debug.LogError("[Codex] glyphUIPrefab is not assigned!");
-            return;
+            // Try to load it from resources
+            glyphUIPrefab = Resources.Load<GameObject>("Prefabs/GlyphUI");
+            if (glyphUIPrefab == null)
+            {
+                Debug.LogError("[Codex] glyphUIPrefab is not assigned and cannot be loaded from Resources!");
+                return;
+            }
+            Debug.Log("[Codex] Loaded glyphUIPrefab from Resources as fallback");
         }
 
         // Instantiate as child of codex panel but inactive
