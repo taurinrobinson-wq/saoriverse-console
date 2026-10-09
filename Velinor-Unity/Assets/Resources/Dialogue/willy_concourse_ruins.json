@@ -22,7 +22,7 @@
           "show_result_in_notification": false,
           "npc_response": "Hah. Then you're lucky ya still got all yah limbs. This place eats newcomers first.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -65,7 +65,7 @@
           "show_result_in_notification": false,
           "npc_response": "Know it? Ha. I've bled in half these piles. Ya learn fast when the rubble teaches the lessons.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -108,7 +108,7 @@
           "show_result_in_notification": false,
           "npc_response": "Led ya? Hah. Everyone's chasin somethin in these ruins. Most of it stays buried...except when I'm chasin it. Ah...hahaha *cough*.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -151,7 +151,7 @@
           "show_result_in_notification": false,
           "npc_response": "Hah. Ain't nothin serious when you're already dead inside, kid. Just an occupational hazard. The dust down here has a way of makin itself at home.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
+          "portrait_expression_on_response": "neutral",
           "tone_effects": [
             {
               "stat": "trust",
@@ -191,7 +191,7 @@
     },
     {
       "id": 2,
-      "type": "npc_shared",
+      "type": "npc_turn",
       "active_speaker": "Willy",
       "display_name": "Older Man",
       "portrait_expression": "neutral",
@@ -223,8 +223,9 @@
           "show_result_in_notification": true,
           "npc_response": "Hah. Straight to orders, eh? Ya got spine! Fine, fine... I'll take a look. But if it falls, I'm runnin'. And maybe laughin' ah...hahaha *cough*.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
+          "portrait_expression_on_response": "neutral",
+          "npc_speaker": "Willy",
+          "npc_display_name": "Older Man",
             {
               "stat": "trust",
               "delta": 0.02
@@ -266,8 +267,9 @@
           "show_result_in_notification": false,
           "npc_response": "Flattery? Ha. Rubble don't care how long I've known it. But ya ain't wrong. I can shift a few things without gettin' crushed.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
+          "portrait_expression_on_response": "neutral",
+          "npc_speaker": "Willy",
+          "npc_display_name": "Older Man",
             {
               "stat": "trust",
               "delta": -0.01
@@ -309,8 +311,9 @@
           "show_result_in_notification": true,
           "npc_response": "Matters, huh? Everything matters to someone. Fine. I'll poke at it. Just don't blame me if the whole thing decides today's the day.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
+          "portrait_expression_on_response": "neutral",
+          "npc_speaker": "Willy",
+          "npc_display_name": "Older Man",
             {
               "stat": "trust",
               "delta": 0.015
@@ -352,8 +355,9 @@
           "show_result_in_notification": false,
           "npc_response": "Heh. Guilt trip, eh? *cough*. Fine. Fine. I'll help. Just don't start cryin' if it bites back.",
           "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
+          "portrait_expression_on_response": "neutral",
+          "npc_speaker": "Willy",
+          "npc_display_name": "Older Man",
             {
               "stat": "trust",
               "delta": 0.015

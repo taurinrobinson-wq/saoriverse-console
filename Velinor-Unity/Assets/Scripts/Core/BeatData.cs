@@ -59,6 +59,8 @@ public class BeatChoice
     [SerializeField] public string npc_response;           // NPC's reply (empty = skip)
     [SerializeField] public string audio_clip_on_response;  // Audio filename for NPC response to this tone choice (without extension, .ogg assumed)
     [SerializeField] public string portrait_expression_on_response;  // NPC expression when responding to this choice
+    [SerializeField] public string npc_speaker;            // NPC speaker name for response (e.g. "Willy") - overrides beat.active_speaker
+    [SerializeField] public string npc_display_name;       // NPC display name for response UI
     [SerializeField] public BeatEffect[] tone_effects;     // TONE stat changes
     [SerializeField] public BeatEffect[] remnants_effects; // NPC REMNANTS changes
     [SerializeField] public float target;                  // Next beat ID (or 0 for end)

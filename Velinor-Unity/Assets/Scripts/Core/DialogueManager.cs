@@ -352,7 +352,12 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             
-            dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
+            // Use npc_speaker if provided (for player_inner beats where NPC responds)
+            // Otherwise fall back to beat.active_speaker
+            string npcSpeaker = !string.IsNullOrEmpty(choice.npc_speaker) ? choice.npc_speaker : beat.active_speaker;
+            string npcDisplayName = !string.IsNullOrEmpty(choice.npc_display_name) ? choice.npc_display_name : beat.display_name;
+            
+            dialogueUI.ShowSpeaker(npcSpeaker ?? "", npcDisplayName);
             dialogueUI.ShowText(choice.npc_response);
             dialogueUI.HideSharedBeat();
             

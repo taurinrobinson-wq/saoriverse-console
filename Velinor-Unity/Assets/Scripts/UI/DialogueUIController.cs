@@ -643,6 +643,7 @@ public class DialogueUIController : MonoBehaviour
         // Make dialogue panel visible
         if (dialoguePanel != null)
         {
+            dialoguePanel.gameObject.SetActive(true);
             dialoguePanel.alpha = 1f;
             dialoguePanel.blocksRaycasts = true;
             dialoguePanel.interactable = true;
@@ -818,6 +819,7 @@ public class DialogueUIController : MonoBehaviour
         // Make dialogue panel visible
         if (dialoguePanel != null)
         {
+            dialoguePanel.gameObject.SetActive(true);
             dialoguePanel.alpha = 1f;
             dialoguePanel.blocksRaycasts = true;
             dialoguePanel.interactable = true;
