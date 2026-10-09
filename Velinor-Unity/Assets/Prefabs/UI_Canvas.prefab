@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &329071947331449699
 GameObject:
@@ -133,7 +133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4.699997, y: 1.7999878}
+  m_AnchoredPosition: {x: 14, y: 0}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7809967641039115636
@@ -156,8 +156,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 110.6, y: 103.5}
-  m_Spacing: {x: 20.5, y: 26.6}
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 27, y: 27}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!1 &708057835862358132
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &895331542420317201
 GameObject:
@@ -409,7 +409,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -149.8, y: 178.6}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5891820433276951897
 CanvasRenderer:
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &1240193948544684289
 GameObject:
@@ -763,7 +763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4.699997, y: 1.7999878}
+  m_AnchoredPosition: {x: 14, y: 0}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2233624706967675406
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 110.6, y: 103.5}
-  m_Spacing: {x: 20.9, y: 26.6}
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 27, y: 27}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!1 &1336659480883694626
@@ -1197,143 +1197,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1844193203222710586
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3636309179595789325}
-  - component: {fileID: 7629790896264264762}
-  - component: {fileID: 6213538318181594651}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3636309179595789325
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844193203222710586}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5701309703361204471}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 323, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &7629790896264264762
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844193203222710586}
-  m_CullTransparentMesh: 1
---- !u!114 &6213538318181594651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844193203222710586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: '>'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281589988
-  m_fontColor: {r: 0.89411765, g: 0.8784314, b: 0.2, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1948879753384425852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,7 +1555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &2585811402736938937
@@ -1990,7 +1853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3034177840524353768
 GameObject:
@@ -2202,7 +2065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3331906143839765922
 GameObject:
@@ -2293,7 +2156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3333577932144477550
 GameObject:
@@ -2384,7 +2247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3433902449103836612
 GameObject:
@@ -2475,7 +2338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3711098437558984690
 GameObject:
@@ -2686,7 +2549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &3727893812956150116
 GameObject:
@@ -2813,44 +2676,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
---- !u!1 &3957983687465423741
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7548566125408047402}
-  m_Layer: 5
-  m_Name: Viewport (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7548566125408047402
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3957983687465423741}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5296416686262540785}
-  m_Father: {fileID: 4889468795442709556}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: -40, y: -100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4195675726153273780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,7 +2720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4.699997, y: 1.7999878}
+  m_AnchoredPosition: {x: 14, y: 0}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4893099228732242923
@@ -2916,8 +2743,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 110.6, y: 103.5}
-  m_Spacing: {x: 20.5, y: 26.6}
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 27, y: 27}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!1 &4265987761117935381
@@ -3010,7 +2837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &4500693810323700263
@@ -3103,7 +2930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &4521925479915339964
@@ -3426,7 +3253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5060915442149621409
@@ -3518,7 +3345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5197547936882688568
 GameObject:
@@ -3609,8 +3436,8 @@ MonoBehaviour:
   memoryExpandedUI: {fileID: 3409647718541514340}
   mindLogBackButton: {fileID: 8682239975584710530}
   impressionsTextDisplay: {fileID: 5448096294799598613}
-  impressionsPrevButton: {fileID: 7797223109545321443}
-  impressionsNextButton: {fileID: 5207951367217545690}
+  impressionsPrevButton: {fileID: 0}
+  impressionsNextButton: {fileID: 0}
   testSetup: {fileID: 0}
   useTestMemories: 1
   LastClickedSlot: {fileID: 0}
@@ -3692,139 +3519,6 @@ MonoBehaviour:
   - {fileID: 3446955268648989381}
   - {fileID: 1049560312680152867}
   - {fileID: 7628707428897824704}
---- !u!1 &5207951367217545690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 158227264913831750}
-  - component: {fileID: 1451832027727970054}
-  - component: {fileID: 7923361095435843152}
-  - component: {fileID: 8901503696158409867}
-  m_Layer: 5
-  m_Name: NextButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &158227264913831750
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5207951367217545690}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6950415914334902078}
-  m_Father: {fileID: 4889468795442709556}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.88, y: 0.08}
-  m_AnchorMax: {x: 0.88, y: 0.08}
-  m_AnchoredPosition: {x: -25, y: 37}
-  m_SizeDelta: {x: 60, y: 60}
-  m_Pivot: {x: 0.5, y: 0}
---- !u!222 &1451832027727970054
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5207951367217545690}
-  m_CullTransparentMesh: 1
---- !u!114 &7923361095435843152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5207951367217545690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &8901503696158409867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5207951367217545690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 7923361095435843152}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DiaryController, Assembly-CSharp
-        m_MethodName: NextPage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &5209383855821126499
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,7 +3637,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5209383855821126499}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -4036,7 +3730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5263145862334446645
 GameObject:
@@ -4127,7 +3821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5284197237536202534
 GameObject:
@@ -4311,7 +4005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5355249114705539498
 GameObject:
@@ -4402,7 +4096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5448096294799598613
 GameObject:
@@ -4436,10 +4130,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5858007793611211381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1, y: 0.2}
-  m_AnchorMax: {x: 0.9, y: 0.85}
-  m_AnchoredPosition: {x: 22.749996, y: 36.10005}
-  m_SizeDelta: {x: 35.700005, y: 14.200092}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 226.09496, y: -283.3346}
+  m_SizeDelta: {x: 349.28952, y: 382.2001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8267511872824856112
 CanvasRenderer:
@@ -4537,8 +4231,8 @@ MonoBehaviour:
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 70.09454, z: 37.892944, w: 0}
+  m_pageToDisplay: 2
+  m_margin: {x: -7.7891846, y: 11.5199585, z: -10.523315, w: -13.748047}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4558,6 +4252,8 @@ GameObject:
   - component: {fileID: 3328204358911433624}
   - component: {fileID: 7737395389030256994}
   - component: {fileID: 1025207274114125969}
+  - component: {fileID: 2097733339969173635}
+  - component: {fileID: 1968507559087325318}
   m_Layer: 5
   m_Name: UI_Canvas
   m_TagString: Untagged
@@ -4682,6 +4378,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e24643f3d635f64f848b17c0c58d28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIPersistenceManager
+--- !u!222 &2097733339969173635
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595583802400103763}
+  m_CullTransparentMesh: 1
+--- !u!114 &1968507559087325318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595583802400103763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5637032154357482294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4772,7 +4506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5656089838726025572
@@ -5001,7 +4735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &5846858786610893099
 GameObject:
@@ -5186,7 +4920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &5909778433531489225
@@ -5659,146 +5393,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
---- !u!1 &6775019039465959080
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6950415914334902078}
-  - component: {fileID: 886709788164064213}
-  - component: {fileID: 8133523111438660520}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6950415914334902078
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6775019039465959080}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 158227264913831750}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -323.06433, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &886709788164064213
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6775019039465959080}
-  m_CullTransparentMesh: 1
---- !u!114 &8133523111438660520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6775019039465959080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: <
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281589988
-  m_fontColor: {r: 0.89411765, g: 0.8784314, b: 0.2, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6818997665574527644
 GameObject:
   m_ObjectHideFlags: 0
@@ -5888,7 +5485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &7162124473011797830
 GameObject:
@@ -5979,7 +5576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.MemorySlot
   slotImage: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &7186878236106407932
 GameObject:
@@ -6108,7 +5705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &7398841444343588879
@@ -6483,139 +6080,6 @@ MonoBehaviour:
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
---- !u!1 &7797223109545321443
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5701309703361204471}
-  - component: {fileID: 2400071790239309346}
-  - component: {fileID: 862729493484436679}
-  - component: {fileID: 1430247491856517523}
-  m_Layer: 5
-  m_Name: PrevButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5701309703361204471
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7797223109545321443}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3636309179595789325}
-  m_Father: {fileID: 4889468795442709556}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.12, y: 0.08}
-  m_AnchorMax: {x: 0.12, y: 0.08}
-  m_AnchoredPosition: {x: 26, y: 37}
-  m_SizeDelta: {x: 60, y: 60}
-  m_Pivot: {x: 0.5, y: 0}
---- !u!222 &2400071790239309346
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7797223109545321443}
-  m_CullTransparentMesh: 1
---- !u!114 &862729493484436679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7797223109545321443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &1430247491856517523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7797223109545321443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 862729493484436679}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DiaryController, Assembly-CSharp
-        m_MethodName: PrevPage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &7850009283547663668
 GameObject:
   m_ObjectHideFlags: 0
@@ -7077,10 +6541,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7548566125408047402}
   - {fileID: 5858007793611211381}
-  - {fileID: 5701309703361204471}
-  - {fileID: 158227264913831750}
   - {fileID: 4517097741470751649}
   m_Father: {fileID: 8155801074064711764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7525,7 +6986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.GlyphSlot
   slotImage: {fileID: 0}
   button: {fileID: 0}
-  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
+  emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.78431374}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
 --- !u!1 &8727838044691616529
@@ -7606,7 +7067,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4.699997, y: 1.7999878}
+  m_AnchoredPosition: {x: 14, y: 0}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &159661544181248567
@@ -7629,45 +7090,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 110.6, y: 103.5}
-  m_Spacing: {x: 20.9, y: 26.6}
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 27, y: 27}
   m_Constraint: 1
   m_ConstraintCount: 3
---- !u!1 &9106309822051092739
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5296416686262540785}
-  m_Layer: 5
-  m_Name: Content
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5296416686262540785
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9106309822051092739}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7548566125408047402}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &4562590897594108421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7676,6 +7102,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2067801760482246633}
     m_Modifications:
+    - target: {fileID: 736264849712373445, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
+      propertyPath: m_Color.a
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1239132215375541823, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
       propertyPath: m_text
       value: (T) You seem comfortable here. I am glad I found you. Are you heading
@@ -7959,7 +7389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590510216037814134, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 136
+      value: 143
       objectReference: {fileID: 0}
     - target: {fileID: 7901889029255362742, guid: f12f4d1ffd83a79439f304b7109cab5f, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -399,9 +399,83 @@ public class DialogueUIController : MonoBehaviour
                 Debug.Log("[UI] EVENT: NPC exiting stage left");
                 ExitNPCStageLeft();
                 break;
+            case "transition_fade":
+                Debug.Log("[UI] EVENT: Theatrical transition fade (lights to black)");
+                ExecuteTransitionFade();
+                break;
+            case "debris_clear":
+                Debug.Log("[UI] EVENT: Clearing debris");
+                ClearDebris();
+                break;
+            case "glyph_appear":
+                Debug.Log("[UI] EVENT: Making glyph appear");
+                MakeGlyphAppear();
+                break;
             default:
                 Debug.Log($"[UI] EVENT: {eventName}");
                 break;
+        }
+    }
+
+    /// <summary>
+    /// Execute theatrical transition: fade to black, trigger prop changes, fade back in.
+    /// This allows seamless scene transitions without restarting dialogue.
+    /// </summary>
+    private void ExecuteTransitionFade()
+    {
+        DialogueTransitionFade fadeFX = FindAnyObjectByType<DialogueTransitionFade>();
+        if (fadeFX == null)
+        {
+            fadeFX = gameObject.AddComponent<DialogueTransitionFade>();
+        }
+
+        fadeFX.ExecuteTransitionFade(() =>
+        {
+            Debug.Log("[UI] Fade halfway - executing prop changes");
+            ClearDebris();
+            MakeGlyphAppear();
+        });
+    }
+
+    /// <summary>
+    /// Disable the Debris_Sorrow GameObject to clear the stage
+    /// </summary>
+    private void ClearDebris()
+    {
+        GameObject debris = GameObject.Find("Debris_Sorrow");
+        if (debris != null)
+        {
+            debris.SetActive(false);
+            Debug.Log("[UI] Debris_Sorrow disabled - stage cleared");
+        }
+        else
+        {
+            Debug.LogWarning("[UI] Debris_Sorrow not found in scene!");
+        }
+    }
+
+    /// <summary>
+    /// Enable the sphere collider on GlyphPickup_Sorrow so it can be collected
+    /// </summary>
+    private void MakeGlyphAppear()
+    {
+        GameObject glyphPickup = GameObject.Find("GlyphPickup_Sorrow");
+        if (glyphPickup != null)
+        {
+            SphereCollider collider = glyphPickup.GetComponent<SphereCollider>();
+            if (collider != null)
+            {
+                collider.enabled = true;
+                Debug.Log("[UI] GlyphPickup_Sorrow collider enabled - glyph is now interactive");
+            }
+            else
+            {
+                Debug.LogWarning("[UI] SphereCollider not found on GlyphPickup_Sorrow!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[UI] GlyphPickup_Sorrow not found in scene!");
         }
     }
 

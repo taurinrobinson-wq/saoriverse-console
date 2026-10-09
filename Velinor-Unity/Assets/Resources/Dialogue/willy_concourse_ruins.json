@@ -9,7 +9,7 @@
       "display_name": "Older Man",
       "portrait_expression": "neutral",
       "setting_description": "The Concourse Ruins, northeast of the market square. Debris litters the corridor. A strange man digs through a shifting pile.",
-      "prompt": "Careful. That pile shifts. Saw a man lose a leg under one just like it. Ahâ€‘hahaha *cough* terrible, terrible thing.",
+      "prompt": "Careful. That pile shifts. Saw a man lose a leg under one just like it. Ah...hahaha *cough* terrible, terrible thing.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -106,7 +106,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Led ya? Hah. Everyone's chasin somethin in these ruins. Most of it stays buriedâ€”except when I'm chasin it. Ahâ€‘hahahaâ€”cough.",
+          "npc_response": "Led ya? Hah. Everyone's chasin somethin in these ruins. Most of it stays buried...except when I'm chasin it. Ah...hahaha *cough*.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -198,7 +198,7 @@
       "setting_description": "",
       "prompt": "",
       "audio_clip": "",
-      "shared_beat": "Anyway, whatever you're afterâ€¦ it's under that mess. And you're not gettin' ta it today.",
+      "shared_beat": "Anyway, whatever you're after... it's under that mess. And you're not gettin' ta it today.",
       "tone_choices": [],
       "next_beat_id": 3,
       "system_triggers": []
@@ -221,7 +221,7 @@
           "audio_clip_on_choice": "",
           "result_text": "The older man recognizes your authority.",
           "show_result_in_notification": true,
-          "npc_response": "Hah. Straight to orders, eh? Ya got spine! Fine, fineâ€¦ I'll take a look. But if it falls, I'm runnin'. And maybe laughin' ahâ€‘hahaha *cough*.",
+          "npc_response": "Hah. Straight to orders, eh? Ya got spine! Fine, fine... I'll take a look. But if it falls, I'm runnin'. And maybe laughin' ah...hahaha *cough*.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -346,7 +346,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "If someone got hurt here beforeâ€¦ maybe helping me keeps it from happening again.",
+          "text": "If someone got hurt here before... maybe helping me keeps it from happening again.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -391,15 +391,7 @@
       "system_triggers": [
         {
           "type": "transition_fade",
-          "data": [
-            "in"
-          ]
-        },
-        {
-          "type": "debris_clear"
-        },
-        {
-          "type": "glyph_appear"
+          "data": []
         }
       ]
     },
@@ -467,11 +459,11 @@
         {
           "tone": "T",
           "label": "Trust",
-          "text": "Oh yeah, right of course. I don't have much right nowâ€¦.",
+          "text": "Oh yeah, right of course. I don't have much right now...",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Yeah, figures. Anywayâ€¦ ya don' need that metal thing, do ya?",
+          "npc_response": "Yeah, figures. Anyway... ya don' need that metal thing, do ya?",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -510,11 +502,11 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Yeah, you were working pretty hard. I don't have muchâ€¦ what do you want.",
+          "text": "Yeah, you were working pretty hard. I don't have much... what do you want.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ahâ€¦keep a lookout while I take a closer peek at itâ€¦if ya catch my drift.",
+          "npc_response": "I'm a scrapper, and you just showed me some niiice scrap. Just ah...keep a lookout while I take a closer peek at it...if ya catch my drift.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "",
           "tone_effects": [
@@ -553,7 +545,7 @@
         {
           "tone": "N",
           "label": "Narrative",
-          "text": "Yeah, of course. You work hard, you get something, right. Uhâ€¦I don't have muchâ€¦",
+          "text": "Yeah, of course. You work hard, you get something, right. Uh...I don't have much...",
           "audio_clip_on_choice": "",
           "result_text": "Willy appreciates your practical approach.",
           "show_result_in_notification": true,
@@ -596,7 +588,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Sorry, Willyâ€¦ I didn't even ask your name. You've been really helpful. What can I do for you.",
+          "text": "Sorry, Willy... I didn't even ask your name. You've been really helpful. What can I do for you.",
           "audio_clip_on_choice": "",
           "result_text": "Willy is somewhat annoyed at your sudden display of affection.",
           "show_result_in_notification": true,
@@ -702,7 +694,7 @@
         {
           "type": "diary_append",
           "data": [
-            "Met a scrapper named Willy in the Concourse Ruins. He was an odd characterâ€”laughing at suffering, coughing constantlyâ€”but helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."
+            "Met a scrapper named Willy in the Concourse Ruins. He was an odd character...laughing at suffering, coughing constantly...but helpful and not malicious. He helped me uncover the Glyph of Sorrow, though not without cost. Everything down here has a price."
           ]
         },
         {
