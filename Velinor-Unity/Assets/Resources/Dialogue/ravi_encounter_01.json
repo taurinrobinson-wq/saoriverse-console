@@ -1,4 +1,4 @@
-﻿{
+{
   "scene_id":  "ravi_encounter_01",
   "required_flags":  [
                            "kaelen_dialogue_01_true",
@@ -12,7 +12,7 @@
                        ],
   "beats":  [
                   {
-                      "id":  "1",
+                      "id": 1,
                       "type":  "npc_turn",
                       "active_speaker":  "Ravi",
                       "display_name":  "Ravi",
@@ -76,7 +76,7 @@
 
                                                                    ],
                                                "npc_portrait_expression":  "neutral",
-                                               "next_beat_id":  "1.21"
+                                               "next_beat_id": 1.21
                                            },
                                            {
                                                "tone":  "O",
@@ -132,7 +132,7 @@
 
                                                                    ],
                                                "npc_portrait_expression":  "neutral",
-                                               "next_beat_id":  "1.22"
+                                               "next_beat_id": 1.22
                                            },
                                            {
                                                "tone":  "N",
@@ -188,7 +188,7 @@
 
                                                                    ],
                                                "npc_portrait_expression":  "neutral",
-                                               "next_beat_id":  "1.23"
+                                               "next_beat_id": 1.23
                                            },
                                            {
                                                "tone":  "E",
@@ -253,7 +253,7 @@
                                           ]
                   },
                   {
-                      "id":  "1.21",
+                      "id": 1.21,
                       "type":  "npc_turn",
                       "active_speaker":  "Player",
                       "display_name":  "Lioren",
@@ -479,7 +479,7 @@
                                           ]
                   },
                   {
-                      "id":  "1.22",
+                      "id": 1.22,
                       "type":  "npc_turn",
                       "active_speaker":  "Player",
                       "display_name":  "Lioren",
@@ -705,7 +705,7 @@
                                           ]
                   },
                   {
-                      "id":  "1.23",
+                      "id": 1.23,
                       "type":  "npc_turn",
                       "active_speaker":  "Player",
                       "display_name":  "Lioren",
@@ -931,7 +931,7 @@
                                           ]
                   },
                   {
-                      "id":  "2",
+                      "id": 2,
                       "type":  "npc_turn",
                       "active_speaker":  "Ravi",
                       "display_name":  "Ravi",
@@ -1168,7 +1168,7 @@
                                           ]
                   },
                   {
-                      "id":  "3",
+                      "id": 3,
                       "type":  "npc_turn",
                       "active_speaker":  "",
                       "display_name":  "",
@@ -1405,7 +1405,7 @@
                                           ]
                   },
                   {
-                      "id":  "4",
+                      "id": 4,
                       "type":  "npc_turn",
                       "active_speaker":  "",
                       "display_name":  "",
@@ -1642,7 +1642,7 @@
                                           ]
                   },
                   {
-                      "id":  "5",
+                      "id": 5,
                       "type":  "npc_turn",
                       "active_speaker":  "",
                       "display_name":  "",
@@ -1879,7 +1879,7 @@
                                           ]
                   },
                   {
-                      "id":  "6",
+                      "id": 6,
                       "type":  "npc_turn",
                       "active_speaker":  "",
                       "display_name":  "",
@@ -2121,7 +2121,7 @@
                                           ]
                   },
                   {
-                      "id":  "7",
+                      "id": 7,
                       "type":  "npc_turn",
                       "active_speaker":  "",
                       "display_name":  "",
