@@ -35,22 +35,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral",
           "target": 1.21
@@ -68,22 +89,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral",
           "target": 1.22
@@ -101,22 +143,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral",
           "target": 1.23
@@ -134,22 +197,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.02
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral",
           "target": 2
@@ -204,22 +288,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": -0.01
             }
@@ -255,22 +339,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": -0.01
             }
@@ -306,22 +390,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": -0.01
             }
@@ -357,22 +441,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": -0.01
             }
@@ -428,22 +512,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": -0.01
             }
@@ -479,22 +563,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": -0.01
             }
@@ -530,22 +614,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": -0.01
             }
@@ -581,22 +665,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": -0.01
             }
@@ -652,22 +736,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": -0.01
             }
@@ -703,22 +787,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": -0.01
             }
@@ -754,22 +838,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": -0.01
             }
@@ -805,22 +889,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": 0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": -0.01
             },
             {
-              "target": "Ravi",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": -0.01
             }
@@ -854,22 +938,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -886,22 +991,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -918,22 +1044,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -950,22 +1097,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.02
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         }
@@ -997,22 +1165,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1029,22 +1218,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1061,22 +1271,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1093,22 +1324,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.02
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         }
@@ -1140,22 +1392,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1172,22 +1445,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1204,22 +1498,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1236,22 +1551,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.02
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         }
@@ -1283,22 +1619,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1315,22 +1672,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1347,22 +1725,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1379,22 +1778,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.02
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         }
@@ -1431,22 +1851,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1463,22 +1904,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1495,22 +1957,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1527,22 +2010,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.02
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         }
@@ -1574,22 +2078,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1606,22 +2131,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.015
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1638,22 +2184,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": 0.02
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         },
@@ -1670,22 +2237,43 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0
+              "delta": 0.005
             },
             {
               "stat": "observation",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "narrative",
-              "delta": 0
+              "delta": -0.01
             },
             {
               "stat": "empathy",
-              "delta": 0
+              "delta": 0.02
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "activeNpcId",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "activeNpcId",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral"
         }
