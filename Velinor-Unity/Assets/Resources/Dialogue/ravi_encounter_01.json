@@ -18,7 +18,7 @@
             "display_name": "Ravi",
             "portrait_expression": "neutral",
             "setting_description": "After obtaining the glyphs of sorrow, remembrance, and legacy. You meet Ravi in the desert right outside the marketplace. He looks at you and mixed emotions.",
-            "prompt": "OhÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦hi again Lioren. For some reason, I thought you might\u0027ve actually left by now. Most people can\u0027t cut it out here.",
+            "prompt": "OhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦hi again Lioren. For some reason, I thought you might've actually left by now. Most people can't cut it out here.",
             "audio_clip": "",
             "shared_beat": "",
             "tone_choices": [
@@ -29,7 +29,7 @@
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
-                         "npc_response": "OhÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ Anyone that I should be worried about? I saw Kaelen lurking about keep your wits about you with that guy. I try not to prejudge people, butÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦",
+                         "npc_response": "OhÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ Anyone that I should be worried about? I saw Kaelen lurking about keep your wits about you with that guy. I try not to prejudge people, butÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦",
                          "audio_clip_on_response": "",
                          "portrait_expression_on_response": "",
                          "tone_effects": [
@@ -81,11 +81,11 @@
                        {
                          "tone": "O",
                          "label": "Observation",
-                         "text": "I can see why this place has a harshness to it that I\u0027m not used to, I\u0027m not sure how I feel about some of the people I\u0027ve met, but I\u0027m trying to be open. ",
+                         "text": "I can see why this place has a harshness to it that I'm not used to, I'm not sure how I feel about some of the people I've met, but I'm trying to be open. ",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
-                         "npc_response": "HmÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ hearing that does concern me a little bit being a guard and all. You would let me know if you saw or heard anything right. ",
+                         "npc_response": "HmÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ hearing that does concern me a little bit being a guard and all. You would let me know if you saw or heard anything right. ",
                          "audio_clip_on_response": "",
                          "portrait_expression_on_response": "",
                          "tone_effects": [
@@ -137,7 +137,7 @@
                        {
                          "tone": "N",
                          "label": "Narrative",
-                         "text": "To be honest, I have a lot more questions that I need answered before I think about leaving. Not to mention, I didn\u0027t come all this way just to run back home. ",
+                         "text": "To be honest, I have a lot more questions that I need answered before I think about leaving. Not to mention, I didn't come all this way just to run back home. ",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
@@ -193,11 +193,11 @@
                        {
                          "tone": "E",
                          "label": "Empathy",
-                         "text": "YeahÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ I\u0027m actually surprised you and Nima are still here given what you know I\u0027ve heard about your situation. I\u0027m sorry by the way. I wish I could offer more.",
+                         "text": "YeahÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ I'm actually surprised you and Nima are still here given what you know I've heard about your situation. I'm sorry by the way. I wish I could offer more.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
-                         "npc_response": "WellÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ At least you seem genuine we need more people like that. As far as what you can offer, I suppose you can\u0027t change the past,but try not to add any more misery to the future.",
+                         "npc_response": "WellÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ At least you seem genuine we need more people like that. As far as what you can offer, I suppose you can't change the past,but try not to add any more misery to the future.",
                          "audio_clip_on_response": "",
                          "portrait_expression_on_response": "",
                          "tone_effects": [
@@ -548,7 +548,7 @@
                        {
                          "tone": "O",
                          "label": "Observation",
-                         "text": "I\u0027m sure you mean saw or heard something sketchy. If that\u0027s the case then yes.",
+                         "text": "I'm sure you mean saw or heard something sketchy. If that's the case then yes.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
@@ -723,7 +723,7 @@
                        {
                          "tone": "T",
                          "label": "Trust",
-                         "text": "I\u0027ve thought about it. Daily. I just haven\u0027t really met anyone that seemed willing or able to provide those.",
+                         "text": "I've thought about it. Daily. I just haven't really met anyone that seemed willing or able to provide those.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
@@ -825,7 +825,7 @@
                        {
                          "tone": "N",
                          "label": "Narrative",
-                         "text": "That\u0027s the reason I even came to the marketplace... So far no luck though.",
+                         "text": "That's the reason I even came to the marketplace... So far no luck though.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
@@ -876,7 +876,7 @@
                        {
                          "tone": "E",
                          "label": "Empathy",
-                         "text": "It\u0027s definitely been on my mind. Hoping I can get established soon so I\u0027m not digging around for scraps.",
+                         "text": "It's definitely been on my mind. Hoping I can get established soon so I'm not digging around for scraps.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
@@ -944,11 +944,11 @@
                        {
                          "tone": "T",
                          "label": "Trust",
-                         "text": "To be honest, I\u0027m not sure. I feel a little bit lost these days and overwhelmed. When my mom told me to go east I honestly didn\u0027t know what to expect.",
+                         "text": "To be honest, I'm not sure. I feel a little bit lost these days and overwhelmed. When my mom told me to go east I honestly didn't know what to expect.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
-                         "npc_response": "YeahÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ I get that. When Nima and I came here with each of our parents, I was terrified. She teased me so I wouldn\u0027t freeze up.\nBut hearing you say all thisÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦. WellÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦it tells me you\u0027re not reckless. Being honest about where you\u0027re at matters out here.",
+                         "npc_response": "YeahÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ I get that. When Nima and I came here with each of our parents, I was terrified. She teased me so I wouldn't freeze up.\nBut hearing you say all thisÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦. WellÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦it tells me you're not reckless. Being honest about where you're at matters out here.",
                          "audio_clip_on_response": "",
                          "portrait_expression_on_response": "",
                          "tone_effects": [
@@ -999,11 +999,11 @@
                        {
                          "tone": "O",
                          "label": "Observation",
-                         "text": "I\u0027m trying to get a sense of how things work around here. The terrain, the peopleÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ I\u0027m still piecing it together.",
+                         "text": "I'm trying to get a sense of how things work around here. The terrain, the peopleÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ I'm still piecing it together.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
-                         "npc_response": "Hm. That\u0027s good. Most people don\u0027t pay attention when they first arrive.\nWhen Nima and I came here with each of our parents, I kept my eyes on the ground more than anything else. She said I\u0027d miss something important if I didn\u0027t look up.\nAnd she was right! Out hereÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦noticing the small things keeps you safe.",
+                         "npc_response": "Hm. That's good. Most people don't pay attention when they first arrive.\nWhen Nima and I came here with each of our parents, I kept my eyes on the ground more than anything else. She said I'd miss something important if I didn't look up.\nAnd she was right! Out hereÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦noticing the small things keeps you safe.",
                          "audio_clip_on_response": "",
                          "portrait_expression_on_response": "",
                          "tone_effects": [
@@ -1058,7 +1058,7 @@
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
-                         "npc_response": "That\u0027s smart. Out here, knowing who stands where matters more than you think. I guess, keep your head clear and your eyes openÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦",
+                         "npc_response": "That's smart. Out here, knowing who stands where matters more than you think. I guess, keep your head clear and your eyes openÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦",
                          "audio_clip_on_response": "",
                          "portrait_expression_on_response": "",
                          "tone_effects": [
@@ -1109,11 +1109,11 @@
                        {
                          "tone": "E",
                          "label": "Empathy",
-                         "text": "I feel torn about what to do next. I need to survive out hereÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ but it\u0027s hard to ignore how much people seem to be carrying. It makes everything feel heavier.",
+                         "text": "I feel torn about what to do next. I need to survive out hereÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ but it's hard to ignore how much people seem to be carrying. It makes everything feel heavier.",
                          "audio_clip_on_choice": "",
                          "result_text": "",
                          "show_result_in_notification": false,
-                         "npc_response": "YeahÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ it does get heavy. You need to focus on you andÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ helping others sometimes comes back to help or hurt you... I\u0027m surprised that you notice. Most folks just deal with what\u0027s in front of them. ",
+                         "npc_response": "YeahÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ it does get heavy. You need to focus on you andÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ helping others sometimes comes back to help or hurt you... I'm surprised that you notice. Most folks just deal with what's in front of them. ",
                          "audio_clip_on_response": "",
                          "portrait_expression_on_response": "",
                          "tone_effects": [
@@ -1892,7 +1892,7 @@
                       "choice_field": "npc_response"
                     },
             "audio_clip": "",
-            "shared_beat": "When I was out scouting the desert ridge, I noticed something strange ÃƒÆ’Ã†â€™Ã‚Â¢ÃƒÆ’Ã‚Â¢Ã¢â€šÂ¬Ã…Â¡Ã‚Â¬ÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â an off-metal panel tucked into the mountain face northeast of here. It lookedÃƒÆ’Ã‚Â¢Ã¢â‚¬Å¡Ã‚Â¬Ã‚Â¦ deliberate. If you\u0027re still searching for answers, that might be worth a look.",
+            "shared_beat": "When I was out scouting the desert ridge, I noticed something strange ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â an off-metal panel tucked into the mountain face northeast of here. It lookedÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬Ãƒâ€šÃ‚Â¦ deliberate. If you're still searching for answers, that might be worth a look.",
             "tone_choices": [
                        {
                          "tone": "T",
