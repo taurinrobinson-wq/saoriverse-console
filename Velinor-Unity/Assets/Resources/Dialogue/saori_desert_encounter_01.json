@@ -1,4 +1,4 @@
-{
+﻿{
   "scene_id": "saori_desert_encounter_01",
   "required_flags": [],
   "beats": [
@@ -43,22 +43,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": -0.01
             }
@@ -97,22 +97,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": -0.01
             }
@@ -151,22 +151,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": -0.01
             }
@@ -205,22 +205,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": -0.01
             }
@@ -258,39 +258,39 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": 0.03
+              "delta": 0.02
             },
             {
               "stat": "observation",
-              "delta": -0.0225
-            },
-            {
-              "stat": "narrative",
               "delta": -0.015
             },
             {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
               "stat": "empathy",
-              "delta": 0.0075
+              "delta": 0.005
             }
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": -0.01
             }
@@ -313,16 +313,13 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": -0.0225
-            },
+              "delta": -0.015,            },
             {
               "stat": "observation",
-              "delta": 0.03
-            },
+              "delta": 0.02,            },
             {
               "stat": "narrative",
-              "delta": 0.0075
-            },
+              "delta": 0.005,            },
             {
               "stat": "empathy",
               "delta": -0.015
@@ -330,22 +327,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": -0.01
             }
@@ -373,12 +370,10 @@
             },
             {
               "stat": "observation",
-              "delta": 0.0075
-            },
+              "delta": 0.005,            },
             {
               "stat": "narrative",
-              "delta": 0.03
-            },
+              "delta": 0.02,            },
             {
               "stat": "empathy",
               "delta": -0.015
@@ -386,22 +381,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": -0.01
             }
@@ -442,22 +437,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": -0.01
             }
@@ -503,8 +498,7 @@
             },
             {
               "stat": "observation",
-              "delta": -0.0075
-            },
+              "delta": -0.005,            },
             {
               "stat": "narrative",
               "delta": -0.005
@@ -516,22 +510,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": -0.01
             }
@@ -553,8 +547,7 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": -0.0075
-            },
+              "delta": -0.005,            },
             {
               "stat": "observation",
               "delta": 0.01
@@ -570,22 +563,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "memory",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": -0.01
             }
@@ -624,22 +617,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "authority",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "skepticism",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "resolve",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": -0.01
             }
@@ -678,22 +671,22 @@
           ],
           "remnants_effects": [
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "empathy",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "need",
               "delta": 0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "nuance",
               "delta": -0.01
             },
             {
-              "target": "Saori",
+              "target": "activeNpcId",
               "stat": "trust",
               "delta": -0.01
             }
