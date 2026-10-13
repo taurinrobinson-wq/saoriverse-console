@@ -313,16 +313,19 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": -0.015,            },
+              "delta": -0.015
+            },
             {
               "stat": "observation",
-              "delta": 0.02,            },
+              "delta": 0.02
+            },
             {
               "stat": "narrative",
-              "delta": 0.005,            },
+              "delta": 0.005
+            },
             {
               "stat": "empathy",
-              "delta": -0.015
+              "delta": -0.01
             }
           ],
           "remnants_effects": [
@@ -370,10 +373,12 @@
             },
             {
               "stat": "observation",
-              "delta": 0.005,            },
+              "delta": 0.005
+            },
             {
               "stat": "narrative",
-              "delta": 0.02,            },
+              "delta": 0.02
+            },
             {
               "stat": "empathy",
               "delta": -0.015
@@ -498,7 +503,8 @@
             },
             {
               "stat": "observation",
-              "delta": -0.005,            },
+              "delta": -0.005
+            },
             {
               "stat": "narrative",
               "delta": -0.005
@@ -547,7 +553,8 @@
           "tone_effects": [
             {
               "stat": "trust",
-              "delta": -0.005,            },
+              "delta": -0.005
+            },
             {
               "stat": "observation",
               "delta": 0.01
@@ -743,3 +750,5 @@
     }
   ]
 }
+
+
