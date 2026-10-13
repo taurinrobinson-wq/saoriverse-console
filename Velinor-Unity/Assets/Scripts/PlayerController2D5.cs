@@ -262,6 +262,15 @@ public class PlayerController2D5 : MonoBehaviour
 
     public Vector3 GetPlayerPosition() => currentPosition;
 
+    /// <summary>
+    /// Set the player's movement speed (used by DialogueManager for dialogue effects).
+    /// </summary>
+    public void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+        Debug.Log($"[PlayerController2D5] Move speed changed to: {moveSpeed}");
+    }
+
     // ============================================================
     // ANIMATION EVENT RECEIVERS
     // ============================================================

@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     private string activeNpcId;
     private string currentSceneId;
     private bool lastActionWasNpcResponse = false;  // Track if last shown text was an npc_response
+    private string lastSelectedTone = "";  // Track the player's selected tone for prompt_source resolution
 
     public System.Action OnDialogueEnded;
 
@@ -206,6 +207,9 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log($"[DialogueManager] Displaying beat: {beat.pid ?? beat.id.ToString()} (mode: {beat.mode})");
 
+        // Resolve prompt if it uses prompt_source
+        string resolvedPrompt = ResolvePrompt(beat);
+
         // Check if beat has choices
         bool hasChoices = (beat.tone_choices != null && beat.tone_choices.Length > 0) ||
                          (beat.choices != null && beat.choices.Length > 0);
@@ -230,17 +234,9 @@ public class DialogueManager : MonoBehaviour
             {
                 // Continuation beat: append prompt + shared_beat instead of replacing
                 Debug.Log($"[DialogueManager] Continuation beat detected. Appending text instead of replacing.");
-                
-                // Combine prompt and shared_beat into single append text
-                string appendText = beat.prompt ?? "";
-                if (!string.IsNullOrEmpty(beat.shared_beat))
-                {
-                    if (!string.IsNullOrEmpty(appendText))
-                        appendText += "\n" + beat.shared_beat;
-                    else
-                        appendText = beat.shared_beat;
-                }
-                
+
+                string appendText = BuildContinuationText(beat, resolvedPrompt);
+
                 if (!string.IsNullOrEmpty(appendText))
                 {
                     dialogueUI.AppendText(appendText, useTypewriter: true);
@@ -252,7 +248,7 @@ public class DialogueManager : MonoBehaviour
             {
                 // Normal beat: show prompt and shared_beat as usual
                 dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
-                dialogueUI.ShowText(beat.prompt ?? "");
+                dialogueUI.ShowText(resolvedPrompt ?? "");
                 
                 if (!string.IsNullOrEmpty(beat.shared_beat))
                 {
@@ -277,12 +273,16 @@ public class DialogueManager : MonoBehaviour
         dialogueUI.ShowSpeaker(beat.active_speaker ?? "", beat.display_name);
         if (lastActionWasNpcResponse)
         {
-            dialogueUI.AppendText(beat.prompt ?? "", useTypewriter: true);
+            string appendText = BuildContinuationText(beat, resolvedPrompt);
+            if (!string.IsNullOrEmpty(appendText))
+            {
+                dialogueUI.AppendText(appendText, useTypewriter: true);
+            }
             lastActionWasNpcResponse = false;
         }
         else
         {
-            dialogueUI.ShowText(beat.prompt ?? "");
+            dialogueUI.ShowText(resolvedPrompt ?? "");
         }
     }
 
@@ -295,8 +295,100 @@ public class DialogueManager : MonoBehaviour
         AdvanceToBeat(nextId);
     }
 
+    /// <summary>
+    /// Resolves a beat's prompt, handling prompt_source references.
+    /// If the beat has a prompt_source, fetches the referenced beat's npc_response (or prompt).
+    /// Otherwise, uses the beat's own prompt.
+    /// </summary>
+    private string ResolvePrompt(BeatData beat)
+    {
+        // If no prompt_source, return beat's prompt as-is
+        if (beat.prompt_source == null || beat.prompt_source.type != "previous_choice_response")
+        {
+            return beat.prompt ?? "";
+        }
+
+        // Resolve prompt_source: fetch the prior beat's choice response
+        BeatData priorBeat = GetBeatById(beat.prompt_source.beat_id);
+        if (priorBeat == null)
+        {
+            Debug.LogWarning($"[DialogueManager] prompt_source references unknown beat_id: {beat.prompt_source.beat_id}");
+            return beat.prompt ?? "";
+        }
+
+        // Get the field from the prior beat (usually npc_response from a choice)
+        string sourceText = "";
+        
+        if (beat.prompt_source.choice_field == "npc_response")
+        {
+            // Try to get npc_response from the selected choice
+            if (priorBeat.tone_choices != null && priorBeat.tone_choices.Length > 0)
+            {
+                // Find the choice that matches the last selected tone
+                foreach (var choice in priorBeat.tone_choices)
+                {
+                    if (choice.tone == lastSelectedTone)
+                    {
+                        sourceText = choice.npc_response ?? "";
+                        break;
+                    }
+                }
+            }
+            else if (priorBeat.choices != null && priorBeat.choices.Length > 0)
+            {
+                // For standard choices, use first one's npc_response (or could track selection)
+                sourceText = priorBeat.choices[0].npc_response ?? "";
+            }
+        }
+        else if (beat.prompt_source.choice_field == "prompt")
+        {
+            // Use the prior beat's prompt field
+            sourceText = priorBeat.prompt ?? "";
+        }
+
+        // If we got the source text, return it
+        if (!string.IsNullOrEmpty(sourceText))
+        {
+            return sourceText;
+        }
+
+        // Fallback to beat's own prompt
+        return beat.prompt ?? "";
+    }
+
+    private string BuildContinuationText(BeatData beat, string resolvedPrompt)
+    {
+        bool inheritsPreviousChoiceResponse =
+            beat.prompt_source != null &&
+            beat.prompt_source.type == "previous_choice_response";
+
+        string appendText = inheritsPreviousChoiceResponse ? "" : (resolvedPrompt ?? "");
+
+        if (!string.IsNullOrEmpty(beat.shared_beat))
+        {
+            if (!string.IsNullOrEmpty(appendText))
+            {
+                appendText += "\n";
+            }
+
+            appendText += beat.shared_beat;
+        }
+
+        return appendText;
+    }
+
+    private BeatData GetBeatById(float id)
+    {
+        if (beatsByNumId.TryGetValue(id, out var beat))
+            return beat;
+        return null;
+    }
+
     private IEnumerator ResolveChoiceCoroutine(BeatData beat, BeatChoice choice)
     {
+        // Store the selected tone for prompt_source resolution
+        lastSelectedTone = choice.tone ?? "";
+
         // Fade out any ongoing voiceover to prevent clipping
         if (voiceoverManager != null)
         {
@@ -404,7 +496,9 @@ public class DialogueManager : MonoBehaviour
             
             // Advance to next beat - it will have the appropriate choices defined in JSON
             // (either 4 tone choices, 1 Continue choice, or 1 End choice)
-            float nextBeatId = beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1);
+            float nextBeatId = choice.target > 0
+                ? choice.target
+                : (beat.next_beat_id > 0 ? beat.next_beat_id : (beat.id + 1));
             Debug.Log($"[DialogueManager] NPC response shown. Advancing to beat: {nextBeatId}");
             AdvanceToBeat(nextBeatId);
             
@@ -602,14 +696,69 @@ public class DialogueManager : MonoBehaviour
             // Handle update_dialogue_names: replace placeholders with actual names
             if (trigger.type == "update_dialogue_names" && trigger.data != null && trigger.data.Length > 0)
             {
-                // Data contains the real names to display
-                // Dialogue will now show actual names in subsequent beats
                 foreach (var name in trigger.data)
                 {
                     Debug.Log($"[DialogueManager] Character name revealed: {name}");
                 }
-                // The actual name replacement happens when beats display active_speaker
-                // This trigger serves as a narrative marker/notification of the reveal
+                continue;
+            }
+
+            // Handle set_flag: persist flag globally
+            if (trigger.type == "set_flag")
+            {
+                if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    string flagKey = trigger.data[0];
+                    bool flagValue = trigger.data.Length >= 2 ? trigger.data[1] == "true" : true;
+                    GameFlags.Set(flagKey, flagValue);
+                    Debug.Log($"[DialogueManager] Flag set: {flagKey} = {flagValue}");
+                }
+                continue;
+            }
+
+            // Handle diary_append: create MindLog entry
+            if (trigger.type == "diary_append")
+            {
+                if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    string content = trigger.data[0];
+                    string title = trigger.data.Length >= 2 ? trigger.data[1] : "Encounter Log";
+                    string logID = $"mindlog_{System.DateTime.Now.Ticks}";
+                    
+                    var entry = new MindLogEntry
+                    {
+                        LogID = logID,
+                        Title = title,
+                        Content = content,
+                        Icon = "default_encounter",
+                        Tags = new[] { "encounter", "memory" }
+                    };
+                    
+                    Velinor.Management.MindLogManager.GetOrCreate().AddLog(entry);
+                    Debug.Log($"[DialogueManager] MindLog entry added: {title}");
+                }
+                continue;
+            }
+
+            // Handle movement_speed: apply speed modifier to player
+            if (trigger.type == "movement_speed")
+            {
+                if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    if (float.TryParse(trigger.data[0], out float speedModifier))
+                    {
+                        GameObject player = GameObject.FindGameObjectWithTag("Player");
+                        if (player != null)
+                        {
+                            PlayerController2D5 playerController = player.GetComponent<PlayerController2D5>();
+                            if (playerController != null)
+                            {
+                                playerController.SetMoveSpeed(speedModifier);
+                                Debug.Log($"[DialogueManager] Player speed set to: {speedModifier}");
+                            }
+                        }
+                    }
+                }
                 continue;
             }
 

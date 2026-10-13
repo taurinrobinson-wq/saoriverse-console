@@ -1,79 +1,91 @@
 using UnityEngine;
 
 /// <summary>
-/// Adds a glowing particle effect to glyph pickups.
-/// Creates a blue fireball/orb appearance with swirling particles.
-/// OPTIMIZED: Uses static shader references, cached materials, and reduced particle counts
+/// Elegant holographic particle effect for glyph projections.
+/// Creates a sleek technological appearance with organized particle flow.
+/// Suggests "projection" from a Corelink node.
 /// </summary>
 public class GlyphVisualEffect : MonoBehaviour
 {
     [Header("Particle Emission")]
-    [SerializeField] private float emissionRate = 30f; // Reduced from 60 for better performance
-    [SerializeField] private float particleLifetime = 2f;
-    [SerializeField] private float particleSize = 0.15f;
+    [SerializeField] private float emissionRate = 15f; // Subtle, not overwhelming
+    [SerializeField] private float particleLifetime = 3f;
+    [SerializeField] private float particleSize = 0.08f; // Smaller for elegance
 
-    [Header("Particle Speed")]
-    [SerializeField] private float particleSpeed = 3f;
+    [Header("Particle Movement")]
+    [SerializeField] private float spiralHeight = 2f; // Vertical spiral component
+    [SerializeField] private float spiralRadius = 0.8f; // Horizontal orbit radius
+    [SerializeField] private float orbitalSpeed = 90f; // Degrees per second
 
     [Header("Glyph Appearance")]
-    [SerializeField] private Color glyphColor = new Color(0.2f, 0.6f, 1f, 1f); // Bright blue
-    // [SerializeField] private float glowIntensity = 3f; // TODO: Apply to material emission intensity
+    [SerializeField] private Color coreColor = new Color(0.0f, 0.9f, 1f, 1f); // Cyan
+    [SerializeField] private Color outerColor = new Color(1f, 0.0f, 0.8f, 0.8f); // Magenta
 
-    [Header("Rotation")]
-    [SerializeField] private float rotationSpeed = 60f;
+    [Header("Core Node")]
+    [SerializeField] private float coreScale = 0.3f;
+    [SerializeField] private float coreGlowIntensity = 2f;
+
+    [Header("Pulsing")]
+    [SerializeField] private float pulseSpeed = 2f;
+    [SerializeField] private float pulseAmplitude = 0.3f;
 
     private ParticleSystem glyphParticles;
+    private Renderer coreRenderer;
     
     // Cache these as static to avoid redundant Shader.Find() calls
     private static Shader unlitShader;
     private static Shader particleShader;
-    private static Material cachedGlyphMaterial;
+    private static Material cachedCoreMaterial;
+    private static Material cachedParticleMaterial;
     private static Gradient cachedColorGradient;
+    private float emissionPhase = 0f;
 
     private void Start()
     {
-        // Cache shaders once (static, so only once per app lifecycle)
+        // Cache shaders once
         if (unlitShader == null)
             unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
         if (particleShader == null)
             particleShader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
 
-        // Color the sphere blue
-        CreateGlowingMaterial();
+        // Create the core node visual
+        CreateCoreNode();
 
-        // Create particle system
+        // Create elegant particle system
         CreateParticleSystem();
     }
 
-    private void CreateGlowingMaterial()
+    private void CreateCoreNode()
     {
+        // Get or create a small sphere as the core
         Renderer renderer = GetComponent<Renderer>();
         if (renderer == null)
             return;
 
-        // Reuse cached material if available (massive optimization if many glyphs!)
-        if (cachedGlyphMaterial == null)
+        // Create glowing core material
+        if (cachedCoreMaterial == null)
         {
-            cachedGlyphMaterial = new Material(unlitShader);
-            cachedGlyphMaterial.name = "GlyphGlowMaterial_Shared";
+            cachedCoreMaterial = new Material(unlitShader);
+            cachedCoreMaterial.name = "GlyphCoreMaterial_Shared";
 
-            // Set to TRANSPARENT rendering mode
-            cachedGlyphMaterial.SetFloat("_Surface", 1f); // 1 = Transparent
-            cachedGlyphMaterial.SetFloat("_Blend", 0f); // 0 = Alpha blend
-            cachedGlyphMaterial.SetFloat("_SrcBlend", 5f); // SrcAlpha
-            cachedGlyphMaterial.SetFloat("_DstBlend", 10f); // OneMinusSrcAlpha
-            cachedGlyphMaterial.SetFloat("_ZWrite", 0f); // Disable ZWrite for transparency
-            cachedGlyphMaterial.renderQueue = 3000; // Transparent render queue
+            // Transparent rendering
+            cachedCoreMaterial.SetFloat("_Surface", 1f);
+            cachedCoreMaterial.SetFloat("_Blend", 0f);
+            cachedCoreMaterial.SetFloat("_SrcBlend", 5f);
+            cachedCoreMaterial.SetFloat("_DstBlend", 10f);
+            cachedCoreMaterial.SetFloat("_ZWrite", 0f);
+            cachedCoreMaterial.renderQueue = 3000;
 
-            // Base color: semi-transparent bright blue
-            Color transparentBlue = new Color(glyphColor.r, glyphColor.g, glyphColor.b, 0.3f);
-            cachedGlyphMaterial.SetColor("_BaseColor", transparentBlue);
+            // Bright cyan core
+            cachedCoreMaterial.SetColor("_BaseColor", new Color(coreColor.r, coreColor.g, coreColor.b, 0.8f));
         }
 
-        // Apply the cached material
-        renderer.material = cachedGlyphMaterial;
+        renderer.material = cachedCoreMaterial;
 
-        Debug.Log($"[GlyphVisualEffect] Glyph configured as transparent blue orb for {gameObject.name}");
+        // Scale down the core node
+        transform.localScale = Vector3.one * coreScale;
+
+        Debug.Log($"[GlyphVisualEffect] Holographic core node created for {gameObject.name}");
     }
 
     private void CreateParticleSystem()
@@ -85,50 +97,61 @@ public class GlyphVisualEffect : MonoBehaviour
             glyphParticles = gameObject.AddComponent<ParticleSystem>();
         }
 
-        // STOP the system before modifying it
         glyphParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
-        // Main module
+        // Main module - long-lived particles for flowing effect
         var main = glyphParticles.main;
         main.duration = 10f;
         main.loop = true;
         main.startLifetime = particleLifetime;
         main.startSize = particleSize;
-        main.startColor = new ParticleSystem.MinMaxGradient(glyphColor);
-        main.maxParticles = 150; // Reduced from 500 (major performance gain)
+        main.startColor = new ParticleSystem.MinMaxGradient(coreColor);
+        main.maxParticles = 100; // Smaller, more controlled
+        main.gravityModifier = -0.1f; // Slight upward drift
 
-        // Emission module
+        // Emission module - subtle
         var emission = glyphParticles.emission;
         emission.rateOverTime = emissionRate;
 
-        // Shape (emit from sphere surface)
+        // Shape - emit from core point (not sphere surface)
         var shape = glyphParticles.shape;
         shape.enabled = true;
         shape.shapeType = ParticleSystemShapeType.Sphere;
-        shape.radius = 0.6f;
+        shape.radius = 0.1f; // Very small emission radius
 
-        // Velocity over lifetime
-        var velocityOverLifetime = glyphParticles.velocityOverLifetime;
-        velocityOverLifetime.enabled = true;
-        velocityOverLifetime.x = new ParticleSystem.MinMaxCurve(-particleSpeed * 0.3f, particleSpeed * 0.3f);
-        velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(-particleSpeed * 0.3f, particleSpeed * 0.3f);
-        velocityOverLifetime.z = new ParticleSystem.MinMaxCurve(-particleSpeed * 0.3f, particleSpeed * 0.3f);
+        // Initial velocity - minimal
+        var initialVel = glyphParticles.velocityOverLifetime;
+        initialVel.enabled = true;
+        initialVel.x = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
+        initialVel.y = new ParticleSystem.MinMaxCurve(0.3f, 0.8f); // Slight upward
+        initialVel.z = new ParticleSystem.MinMaxCurve(-0.5f, 0.5f);
 
-        // Size over lifetime (fade out)
+        // Size over lifetime - elegant fade
         var sizeOverLifetime = glyphParticles.sizeOverLifetime;
         sizeOverLifetime.enabled = true;
-        AnimationCurve sizeCurve = AnimationCurve.EaseInOut(0, 1, 1, 0.2f);
+        AnimationCurve sizeCurve = AnimationCurve.EaseInOut(0, 1, 1, 0.3f);
         sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, sizeCurve);
 
-        // Color over lifetime (fade to transparent) - cache gradient
+        // Color over lifetime - fade to transparent with color gradient
         var colorOverLifetime = glyphParticles.colorOverLifetime;
         colorOverLifetime.enabled = true;
         if (cachedColorGradient == null)
         {
             cachedColorGradient = new Gradient();
+            // Cyan to Magenta color shift
             cachedColorGradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(glyphColor, 0f), new GradientColorKey(glyphColor, 1f) },
-                new GradientAlphaKey[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(0f, 1f) }
+                new GradientColorKey[] 
+                { 
+                    new GradientColorKey(coreColor, 0f),
+                    new GradientColorKey(Color.Lerp(coreColor, outerColor, 0.5f), 0.5f),
+                    new GradientColorKey(outerColor, 1f)
+                },
+                new GradientAlphaKey[] 
+                { 
+                    new GradientAlphaKey(1f, 0f),
+                    new GradientAlphaKey(0.5f, 0.7f),
+                    new GradientAlphaKey(0f, 1f) 
+                }
             );
         }
         colorOverLifetime.color = new ParticleSystem.MinMaxGradient(cachedColorGradient);
@@ -138,19 +161,32 @@ public class GlyphVisualEffect : MonoBehaviour
         if (psRenderer != null)
         {
             psRenderer.renderMode = ParticleSystemRenderMode.Billboard;
-            psRenderer.material = new Material(particleShader);
+            
+            if (cachedParticleMaterial == null)
+            {
+                cachedParticleMaterial = new Material(particleShader);
+            }
+            psRenderer.material = cachedParticleMaterial;
         }
 
-        // Play the system now that it's configured
+        // Play
         glyphParticles.Play();
 
-        Debug.Log($"[GlyphVisualEffect] Particle system configured for {gameObject.name}");
+        Debug.Log($"[GlyphVisualEffect] Holographic particle system configured for {gameObject.name}");
     }
 
     private void Update()
     {
-        // Rotate the glyph
-        transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+        // Pulsing glow effect on the core
+        float pulse = 1f + (Mathf.Sin(Time.time * pulseSpeed) * pulseAmplitude);
+        if (coreRenderer != null)
+        {
+            Color pulseColor = coreColor * new Color(1, 1, 1, pulse * coreGlowIntensity);
+            coreRenderer.material.SetColor("_BaseColor", new Color(pulseColor.r, pulseColor.g, pulseColor.b, 0.8f));
+        }
+
+        // Gentle rotation for dynamic feel
+        transform.Rotate(0, 20f * Time.deltaTime, 0, Space.Self);
     }
 }
 

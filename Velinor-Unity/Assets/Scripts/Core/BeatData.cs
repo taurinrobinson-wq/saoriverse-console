@@ -2,6 +2,17 @@ using System;
 using UnityEngine;
 
 /// <summary>
+/// Prompt source - allows a beat to inherit its prompt from a previous beat's choice response.
+/// </summary>
+[Serializable]
+public class PromptSource
+{
+    [SerializeField] public string type;                   // "previous_choice_response"
+    [SerializeField] public float beat_id;                 // ID of the beat whose choice response to use
+    [SerializeField] public string choice_field;           // "npc_response" or "prompt" (if beat is player_inner/posture)
+}
+
+/// <summary>
 /// A Mind Log unlock entry - references a Mind Log asset by path.
 /// </summary>
 [Serializable]
@@ -25,6 +36,7 @@ public class BeatData
     [SerializeField] public string display_name;           // Name to display in UI (e.g., "Young Woman" initially, then "Nima") - optional
     [SerializeField] public string setting_description;    // Scene context (optional)
     [SerializeField] public string prompt;                 // Main dialogue line (NPC speech or player thought)
+    [SerializeField] public PromptSource prompt_source;    // Dynamic prompt from previous beat choice response
     [SerializeField] public string shared_beat;            // Automatic NPC response (shown then auto-advances)
     [SerializeField] public string[] diary_entries;        // Texts to add to diary when this beat completes
     [SerializeField] public MindLogUnlock[] mind_log_unlocks; // Mind Log entries to unlock when this beat completes

@@ -1,629 +1,1701 @@
 {
-  "name": "Ravi Individual Encounter 01",
-  "startnode": "ravi_encounter_01_start",
-  "passages": [
-    {
-      "pid": "ravi_01_passage_1",
-      "name": "Collapsed Building - Ravi Working",
-      "conversationId": "ravi_encounter_01",
-      "active_speaker": "Ravi",
-      "text": "You find Ravi working among the rubble of the old marketplace building. He moves with measured purpose, organizing stones into stacks.",
-      "scene_context": "The collapsed structure looms like a broken monument. Ravi works methodically, his movements practiced and deliberate. He doesn't notice you watching at first.",
-      "required_flags": [
-        "met_ravi",
-        "market_discovery_progression_1"
-      ],
-      "choices": [
-        {
-          "tone_str": "Trust",
-          "playerLine": "I came to help. Where should I start?",
-          "npcResponse": "RAVI: \"People who offer help often don't understand the cost. Are you sure?\"",
-          "target": "ravi_01_passage_2",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": 0.02
-              },
-              {
-                "key": "Observation",
-                "value": -0.015
-              },
-              {
-                "key": "NarrativePresence",
-                "value": -0.015
-              },
-              {
-                "key": "Empathy",
-                "value": 0.005
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "Observation",
-          "playerLine": "How long has this section been unstable?",
-          "npcResponse": "RAVI: \"Long enough. The weather hastens what time would eventually do.\"",
-          "target": "ravi_01_passage_2",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": -0.015
-              },
-              {
-                "key": "Observation",
-                "value": 0.02
-              },
-              {
-                "key": "NarrativePresence",
-                "value": 0.005
-              },
-              {
-                "key": "Empathy",
-                "value": -0.015
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "NarrativePresence",
-          "playerLine": "This structure meant something to people, didn't it?",
-          "npcResponse": "RAVI: \"All structures mean something. Then they stop mattering.\"",
-          "target": "ravi_01_passage_2",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": -0.01
-              },
-              {
-                "key": "Observation",
-                "value": 0.005
-              },
-              {
-                "key": "NarrativePresence",
-                "value": 0.02
-              },
-              {
-                "key": "Empathy",
-                "value": -0.01
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "Empathy",
-          "playerLine": "You carry this place inside you. I can see it.",
-          "npcResponse": "RAVI: \"Carrying things is what we do out here. It's the only weight that won't break our backs.\"",
-          "target": "ravi_01_passage_2",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": 0.005
-              },
-              {
-                "key": "Observation",
-                "value": -0.01
-              },
-              {
-                "key": "NarrativePresence",
-                "value": -0.01
-              },
-              {
-                "key": "Empathy",
-                "value": 0.02
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": -0.01
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "pid": "ravi_01_passage_2",
-      "name": "Ravi's Task",
-      "conversationId": "ravi_encounter_01",
-      "active_speaker": "Ravi",
-      "text": "RAVI: \"These stones need organizing. The weight distribution matters. If you're staying, do it carefully.\"",
-      "choices": [
-        {
-          "tone_str": "Trust",
-          "playerLine": "I won't let you down.",
-          "npcResponse": "RAVI: \"People usually do. I've stopped being surprised by it.\"",
-          "target": "ravi_01_passage_3_working",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": 0.02
-              },
-              {
-                "key": "Observation",
-                "value": -0.015
-              },
-              {
-                "key": "NarrativePresence",
-                "value": -0.015
-              },
-              {
-                "key": "Empathy",
-                "value": 0.005
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "Observation",
-          "playerLine": "What's the structural priority here?",
-          "npcResponse": "RAVI: \"Base first, then work up. Never rush it. A collapse teaches you that lesson once.\"",
-          "target": "ravi_01_passage_3_working",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": -0.015
-              },
-              {
-                "key": "Observation",
-                "value": 0.02
-              },
-              {
-                "key": "NarrativePresence",
-                "value": 0.005
-              },
-              {
-                "key": "Empathy",
-                "value": -0.015
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "NarrativePresence",
-          "playerLine": "I understand. Precision and patience.",
-          "npcResponse": "RAVI: \"Most people mistake haste for progress. They're not the same thing.\"",
-          "target": "ravi_01_passage_3_working",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": -0.01
-              },
-              {
-                "key": "Observation",
-                "value": 0.005
-              },
-              {
-                "key": "NarrativePresence",
-                "value": 0.02
-              },
-              {
-                "key": "Empathy",
-                "value": -0.01
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "Empathy",
-          "playerLine": "I see the weight this carries for you. I'll help you bear it.",
-          "npcResponse": "RAVI: \"That's kind. But kindness doesn't rebuild buildings.\"",
-          "target": "ravi_01_passage_3_working",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": 0.005
-              },
-              {
-                "key": "Observation",
-                "value": -0.01
-              },
-              {
-                "key": "NarrativePresence",
-                "value": -0.01
-              },
-              {
-                "key": "Empathy",
-                "value": 0.02
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": -0.01
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "pid": "ravi_01_passage_3_working",
-      "name": "Working Together",
-      "conversationId": "ravi_encounter_01",
-      "active_speaker": "Ravi",
-      "text": "You work in silence for a time. Ravi's instructions are sparse but clear. Gradually, the pattern becomes obviousâ€”precision, patience, structure.",
-      "system_trigger": "add_job|add_relationship",
-      "data_hook": "job_ravi_rebuilding=active|ravi_reputation=0.2",
-      "choices": [
-        {
-          "tone_str": "Trust",
-          "playerLine": "This will take a long time to finish.",
-          "npcResponse": "RAVI: \"Most worthwhile things do. Time is one resource we still have.\"",
-          "target": "ravi_01_passage_4_close",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": 0.02
-              },
-              {
-                "key": "Observation",
-                "value": -0.015
-              },
-              {
-                "key": "NarrativePresence",
-                "value": -0.015
-              },
-              {
-                "key": "Empathy",
-                "value": 0.005
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "Observation",
-          "playerLine": "You're rebuilding this as a memorial?",
-          "npcResponse": "RAVI: \"I'm rebuilding it as a necessity. The memorial is just what it is when the work is done.\"",
-          "target": "ravi_01_passage_4_close",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": -0.015
-              },
-              {
-                "key": "Observation",
-                "value": 0.02
-              },
-              {
-                "key": "NarrativePresence",
-                "value": 0.005
-              },
-              {
-                "key": "Empathy",
-                "value": -0.015
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "NarrativePresence",
-          "playerLine": "There's purpose in the slow work. I can feel it.",
-          "npcResponse": "RAVI: \"Purpose keeps us from falling into the cracks that buildings leave behind.\"",
-          "target": "ravi_01_passage_4_close",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": -0.01
-              },
-              {
-                "key": "Observation",
-                "value": 0.005
-              },
-              {
-                "key": "NarrativePresence",
-                "value": 0.02
-              },
-              {
-                "key": "Empathy",
-                "value": -0.01
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ]
-        },
-        {
-          "tone_str": "Empathy",
-          "playerLine": "I'm glad you're not alone in this.",
-          "npcResponse": "RAVI: \"Alone is safer. But maybeâ€¦ safety isn't everything anymore.\"",
-          "target": "ravi_01_passage_4_close",
-          "tone_effects": {
-            "entries": [
-              {
-                "key": "Trust",
-                "value": 0.005
-              },
-              {
-                "key": "Observation",
-                "value": -0.01
-              },
-              {
-                "key": "NarrativePresence",
-                "value": -0.01
-              },
-              {
-                "key": "Empathy",
-                "value": 0.02
-              }
-            ]
-          },
-          "remnants_effects": [
-            {
-              "target": "Ravi",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "Ravi",
-              "stat": "trust",
-              "delta": -0.01
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "pid": "ravi_01_passage_4_close",
-      "name": "Work Bond Formed",
-      "conversationId": "ravi_encounter_01",
-      "active_speaker": "PlayerInner",
-      "text": "Work done in silence can mean more than words. Sometimes showing up is enough.",
-      "system_trigger": "close_dialogue|update_game_state",
-      "data_hook": "ravi_encounter_01_complete=true",
-      "choices": []
-    }
+  "scene_id": "ravi_encounter_01",
+  "required_flags": [
+    "kaelen_dialogue_01_true",
+    "willy_dialogue_01_true",
+    "ravi_nima_dialogue_01_true",
+    "saori_desert_dialogue_desert_01_true",
+    "codex__obtained",
+    "sorrow_glyph_obtained",
+    "legacy_glyph_obtained",
+    "remembrance_glyph_obtained"
   ],
-  "scene_id": "",
-  "required_flags": [],
-  "beats": []
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Ravi",
+      "display_name": "Ravi",
+      "portrait_expression": "neutral",
+      "setting_description": "After obtaining the glyphs of sorrow, remembrance, and legacy. You meet Ravi in the desert right outside the marketplace. He looks at you and mixed emotions.",
+      "prompt": "Oh…hi again Lioren. For some reason, I thought you might’ve actually left by now. Most people can’t cut it out here.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "I can tell this place has been full of confusion and odd characters. ",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Oh… Anyone that I should be worried about? I saw Kaelen lurking about keep your wits about you with that guy. I try not to prejudge people, but…",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral",
+          "target": 1.21
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "I can see why this place has a harshness to it that I’m not used to, I’m not sure how I feel about some of the people I’ve met, but I’m trying to be open. ",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Hm… hearing that does concern me a little bit being a guard and all. You would let me know if you saw or heard anything right. ",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral",
+          "target": 1.22
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "To be honest, I have a lot more questions that I need answered before I think about leaving. Not to mention, I didn’t come all this way just to run back home. ",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Well, they say fortune favors the bold. But I would add not the foolish. Have you thought about what you might do for food and shelter and all that? ",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral",
+          "target": 1.23
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "Yeah… I’m actually surprised you and Nima are still here given what you know I’ve heard about your situation. I’m sorry by the way. I wish I could offer more.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Well… At least you seem genuine we need more people like that. As far as what you can offer, I suppose you can’t change the past,but try not to add any more misery to the future.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral",
+          "target": 2
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": []
+    },
+    {
+      "id": 1.21,
+      "type": "player_turn",
+      "active_speaker": "Player",
+      "display_name": "Lioren",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "No, not really.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Not yet.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "Just a few colorful characters, nothing too concerning.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "If there were any concerning characters, I would let you know.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ]
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": []
+    },
+    {
+      "id": 1.22,
+      "type": "player_turn",
+      "active_speaker": "Player",
+      "display_name": "Lioren",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Sure.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "I'm sure you mean saw or heard something sketchy. If that's the case then yes.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "If I feel like something is concerning, then I will let you know.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I see you take your role seriously so yes of course I will do what I can to help.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ]
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": []
+    },
+    {
+      "id": 1.23,
+      "type": "player_turn",
+      "active_speaker": "Player",
+      "display_name": "Lioren",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "I've thought about it. Daily. I just haven't really met anyone that seemed willing or able to provide those.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": -0.015
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.005
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Of course, I need to survive after all.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.015
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.005
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "That's the reason I even came to the marketplace... So far no luck though.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.005
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ]
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "It's definitely been on my mind. Hoping I can get established soon so I'm not digging around for scraps.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.005
+            },
+            {
+              "stat": "observation",
+              "delta": -0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": -0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Ravi",
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "nuance",
+              "delta": -0.01
+            },
+            {
+              "target": "Ravi",
+              "stat": "trust",
+              "delta": -0.01
+            }
+          ]
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": []
+    },
+    {
+      "id": 2,
+      "type": "npc_turn",
+      "active_speaker": "Ravi",
+      "display_name": "Ravi",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "What are your plans now?",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "To be honest, I’m not sure. I feel a little bit lost these days and overwhelmed. When my mom told me to go east I honestly didn’t know what to expect.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Yeah… I get that. When Nima and I came here with each of our parents, I was terrified. She teased me so I wouldn’t freeze up.\nBut hearing you say all this…. Well…it tells me you’re not reckless. Being honest about where you’re at matters out here.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "I’m trying to get a sense of how things work around here. The terrain, the people… I’m still piecing it together.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Hm. That’s good. Most people don’t pay attention when they first arrive.\nWhen Nima and I came here with each of our parents, I kept my eyes on the ground more than anything else. She said I’d miss something important if I didn’t look up.\nAnd she was right! Out here…noticing the small things keeps you safe.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "I think my first step is getting my bearings. I need to understand this place and figure out who I can actually trust.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "That’s smart. Out here, knowing who stands where matters more than you think. I guess, keep your head clear and your eyes open…",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I feel torn about what to do next. I need to survive out here… but it’s hard to ignore how much people seem to be carrying. It makes everything feel heavier.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Yeah… it does get heavy. You need to focus on you and… helping others sometimes comes back to help or hurt you... I’m surprised that you notice. Most folks just deal with what’s in front of them. ",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 3,
+      "system_triggers": []
+    },
+    {
+      "id": 3,
+      "type": "npc_turn",
+      "active_speaker": "",
+      "display_name": "",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 4,
+      "system_triggers": []
+    },
+    {
+      "id": 4,
+      "type": "npc_turn",
+      "active_speaker": "",
+      "display_name": "",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 5,
+      "system_triggers": []
+    },
+    {
+      "id": 5,
+      "type": "npc_turn",
+      "active_speaker": "",
+      "display_name": "",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 6,
+      "system_triggers": []
+    },
+    {
+      "id": 6,
+      "type": "npc_turn",
+      "active_speaker": "",
+      "display_name": "",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 5,
+        "choice_field": "npc_response"
+      },
+      "audio_clip": "",
+      "shared_beat": "When I was out scouting the desert ridge, I noticed something strange — an off-metal panel tucked into the mountain face northeast of here. It looked… deliberate. If you’re still searching for answers, that might be worth a look.",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 7,
+      "system_triggers": []
+    },
+    {
+      "id": 7,
+      "type": "npc_turn",
+      "active_speaker": "",
+      "display_name": "",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": [
+        {
+          "type": "close_dialogue"
+        }
+      ]
+    }
+  ]
 }

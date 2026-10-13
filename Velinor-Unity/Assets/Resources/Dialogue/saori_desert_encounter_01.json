@@ -41,7 +41,28 @@
               "delta": 0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "met_older_woman=true"
           ]
@@ -74,7 +95,28 @@
               "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "met_older_woman=true"
           ]
@@ -107,7 +149,28 @@
               "delta": -0.01
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "met_older_woman=true"
           ]
@@ -143,13 +206,23 @@
           "remnants_effects": [
             {
               "target": "Saori",
-              "stat": "resolve",
-              "delta": 0.03
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "nuance",
+              "delta": -0.01
             },
             {
               "target": "Saori",
               "stat": "trust",
-              "delta": 0.03
+              "delta": -0.01
             }
           ],
           "system_triggers": [
@@ -200,7 +273,28 @@
               "delta": 0.0075
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "give_device",
             "received_older_woman_device=true"
@@ -234,7 +328,28 @@
               "delta": -0.015
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "give_device",
             "received_older_woman_device=true",
@@ -269,7 +384,28 @@
               "delta": -0.015
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "give_device",
             "received_older_woman_device=true",
@@ -307,13 +443,23 @@
           "remnants_effects": [
             {
               "target": "Saori",
-              "stat": "resolve",
-              "delta": 0.05
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "nuance",
+              "delta": -0.01
             },
             {
               "target": "Saori",
               "stat": "trust",
-              "delta": 0.05
+              "delta": -0.01
             }
           ],
           "system_triggers": [
@@ -368,7 +514,28 @@
               "delta": 0.0025
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "skepticism",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "memory",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "older_woman_departing=true"
           ]
@@ -401,7 +568,28 @@
               "delta": -0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "nuance",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "memory",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "authority",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "need",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "older_woman_departing=true"
           ]
@@ -434,7 +622,28 @@
               "delta": -0.005
             }
           ],
-          "remnants_effects": [],
+          "remnants_effects": [
+            {
+              "target": "Saori",
+              "stat": "authority",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "skepticism",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "resolve",
+              "delta": -0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
           "system_triggers": [
             "older_woman_departing=true"
           ]
@@ -470,13 +679,23 @@
           "remnants_effects": [
             {
               "target": "Saori",
-              "stat": "resolve",
-              "delta": 0.04
+              "stat": "empathy",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "need",
+              "delta": 0.01
+            },
+            {
+              "target": "Saori",
+              "stat": "nuance",
+              "delta": -0.01
             },
             {
               "target": "Saori",
               "stat": "trust",
-              "delta": 0.04
+              "delta": -0.01
             }
           ],
           "system_triggers": [

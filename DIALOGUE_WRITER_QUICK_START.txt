@@ -1,0 +1,144 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║         🎮 VELINOR DIALOGUE JSON WRITER - LOCAL EDITION                   ║
+║                                                                            ║
+║              🔒 100% Private • 0% Cloud • All Data Stays Local            ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌─ QUICK START ────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  1. Navigate to: C:\saoriverse-console\Replit\Game-Dialogue-JSON-Writer │
+│                                                                          │
+│  2. Double-click: start-dev-server.bat                                   │
+│                                                                          │
+│  3. Open browser: http://localhost:5173                                  │
+│                                                                          │
+│  ✨ That's it! You're ready to write dialogue!                           │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ FEATURES ───────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  ✅ Write NPC dialogue with 4-tone choices                               │
+│  ✅ Add System Triggers (set_flag, movement_speed, diary_append)        │
+│  ✅ Import existing dialogue from game                                   │
+│  ✅ Export directly to game folder                                       │
+│  ✅ Auto-save to browser                                                 │
+│  ✅ Preview dialogue flow                                                │
+│  ✅ Track tone effects (Trust, Observation, Narrative, Empathy)         │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ WORKFLOW ───────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Write Dialogue                                                          │
+│        ↓                                                                 │
+│  Add System Triggers                                                     │
+│        ↓                                                                 │
+│  Export to Game Folder                                                   │
+│        ↓                                                                 │
+│  Test in Unity                                                           │
+│        ↓                                                                 │
+│  Come back to edit → Repeat                                              │
+│                                                                          │
+│  💡 Import button lets you load game files to edit                       │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ SYSTEM TRIGGERS (New!) ─────────────────────────────────────────────────┐
+│                                                                          │
+│  set_flag                                                                │
+│  └─ Persist flag globally (e.g., "willy_dialogue_complete")             │
+│                                                                          │
+│  movement_speed                                                          │
+│  └─ Change player speed (e.g., 0.5 = half speed)                        │
+│                                                                          │
+│  diary_append                                                            │
+│  └─ Add entry to MindLog (e.g., "Willy Encounter")                      │
+│                                                                          │
+│  close_dialogue                                                          │
+│  └─ End dialogue sequence                                                │
+│                                                                          │
+│  💡 These persist across scenes and appear in game!                      │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ FILES TO READ ──────────────────────────────────────────────────────────┐
+│                                                                          │
+│  📖 GETTING_STARTED.md                                                   │
+│     └─ Complete feature guide & examples                                 │
+│                                                                          │
+│  📖 LOCAL_SETUP_COMPLETE.md                                              │
+│     └─ What you now have & technical details                             │
+│                                                                          │
+│  📖 RUN_LOCALLY.md                                                       │
+│     └─ Setup troubleshooting                                             │
+│                                                                          │
+│  📖 PERSISTENCE_IMPLEMENTATION_GUIDE.md (in saoriverse-console root)     │
+│     └─ How system_triggers work in the game                              │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ EXAMPLE: WILLY PAYMENT DIALOGUE ────────────────────────────────────────┐
+│                                                                          │
+│  1. Import: willy_concourse_ruins_payment.json                           │
+│                                                                          │
+│  2. Add Beat #5 (Payment Dialogue) with system triggers:                 │
+│     • set_flag: "willy_dialogue_complete" (true)                        │
+│     • movement_speed: "0.5" (player moves at half speed)                │
+│     • diary_append: "Met a scrapper named Willy..."                     │
+│     • close_dialogue                                                     │
+│                                                                          │
+│  3. Export to Game Folder                                                │
+│                                                                          │
+│  4. Test in Unity → Effects appear! ✓                                    │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ SECURITY & PRIVACY ─────────────────────────────────────────────────────┐
+│                                                                          │
+│  ✓ All data stays on your machine                                        │
+│  ✓ No internet upload                                                    │
+│  ✓ No cloud sync                                                         │
+│  ✓ Runs locally (http://localhost:5173)                                  │
+│  ✓ Auto-save to browser localStorage                                     │
+│  ✓ Export saves directly to game folder                                  │
+│                                                                          │
+│  Your story ideas are completely safe!                                   │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ TROUBLESHOOTING ────────────────────────────────────────────────────────┐
+│                                                                          │
+│  ❌ "start-dev-server.bat doesn't run"                                   │
+│  ✓ Check: Do you have Node.js installed? (https://nodejs.org/)          │
+│  ✓ Run: validate-setup.bat to check requirements                        │
+│                                                                          │
+│  ❌ "Can't save files"                                                   │
+│  ✓ Use "Copy JSON" button and paste into text editor                    │
+│  ✓ Or manually save to: C:\saoriverse-console\Velinor-Unity\Assets\     │
+│                        Resources\Dialogue\                               │
+│                                                                          │
+│  ❌ "Can't import game files"                                            │
+│  ✓ Browser needs permission - click "Allow" when prompted               │
+│  ✓ Or manually copy JSON from game folder                               │
+│                                                                          │
+│  ❌ "Changes not appearing in game"                                      │
+│  ✓ Verify file was saved to correct folder                              │
+│  ✓ Reload scene in Unity                                                │
+│  ✓ Check Console for errors                                             │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ THAT'S IT! ─────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  🚀 Double-click start-dev-server.bat                                    │
+│  🎮 Open http://localhost:5173                                           │
+│  ✍️  Start writing dialogue                                              │
+│  💾 Export to game folder                                                │
+│  🧪 Test in Unity                                                        │
+│                                                                          │
+│  Your story is safe. Have fun! 🎉                                        │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
