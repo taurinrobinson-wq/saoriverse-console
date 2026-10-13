@@ -722,20 +722,19 @@ public class DialogueManager : MonoBehaviour
                 if (trigger.data != null && trigger.data.Length >= 1)
                 {
                     string content = trigger.data[0];
-                    string title = trigger.data.Length >= 2 ? trigger.data[1] : "Encounter Log";
+                    string summary = trigger.data.Length >= 2 ? trigger.data[1] : "Encounter";
                     string logID = $"mindlog_{System.DateTime.Now.Ticks}";
                     
-                    var entry = new MindLogEntry
-                    {
-                        LogID = logID,
-                        Title = title,
-                        Content = content,
-                        Icon = "default_encounter",
-                        Tags = new[] { "encounter", "memory" }
-                    };
+                    // Load the icon sprite from resources
+                    // For now, use null since we don't have a specific icon sprite asset yet
+                    Sprite iconSprite = null;
+                    
+                    var entry = new MindLogEntry(logID, iconSprite, summary, content);
+                    entry.AddCombineTag("encounter");
+                    entry.AddCombineTag("memory");
                     
                     Velinor.Management.MindLogManager.GetOrCreate().AddLog(entry);
-                    Debug.Log($"[DialogueManager] MindLog entry added: {title}");
+                    Debug.Log($"[DialogueManager] MindLog entry added: {summary}");
                 }
                 continue;
             }
