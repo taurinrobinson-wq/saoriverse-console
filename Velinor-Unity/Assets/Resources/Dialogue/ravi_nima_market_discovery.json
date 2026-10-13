@@ -7,229 +7,6 @@
   "beats": [
     {
       "id": 1,
-      "type": "player_posture",
-      "active_speaker": "Lioren",
-      "display_name": "Lioren",
-      "portrait_expression": "cautious",
-      "setting_description": "The Velhara marketplace thrums with afternoon energy. Vendors shout prices, crowds move in tight currents. Near the fountain, two figures stand completely still against the rushing crowd, staring at you.",
-      "prompt": "They're staring at me. What should I do.",
-      "audio_clip": "",
-      "shared_beat": "",
-      "tone_choices": [
-        {
-          "tone": "T",
-          "label": "Trust",
-          "text": "Step toward the figures",
-          "audio_clip_on_choice": "",
-          "result_text": "You approach with open body language. The man's expression shifts slightly.",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.02
-            },
-            {
-              "stat": "observation",
-              "delta": -0.015
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.005
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "resolve",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "trust",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "skepticism",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "memory",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "O",
-          "label": "Observation",
-          "text": "Keep your distance",
-          "audio_clip_on_choice": "",
-          "result_text": "You maintain space, watching carefully. Both of them notice your caution.",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.015
-            },
-            {
-              "stat": "observation",
-              "delta": 0.02
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.005
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "nuance",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "memory",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "authority",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "need",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "N",
-          "label": "NarrativePresence",
-          "text": "Explore the stalls",
-          "audio_clip_on_choice": "",
-          "result_text": "You wander the marketplace, examining merchant goods. After a moment, you notice them watching you still.",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": -0.01
-            },
-            {
-              "stat": "observation",
-              "delta": 0.005
-            },
-            {
-              "stat": "narrative",
-              "delta": 0.02
-            },
-            {
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "authority",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "skepticism",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "resolve",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "empathy",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        },
-        {
-          "tone": "E",
-          "label": "Empathy",
-          "text": "Freeze and observe",
-          "audio_clip_on_choice": "",
-          "result_text": "You stop completely. Your stillness meets theirs. Time feels different here.",
-          "show_result_in_notification": false,
-          "npc_response": "",
-          "audio_clip_on_response": "",
-          "portrait_expression_on_response": "",
-          "tone_effects": [
-            {
-              "stat": "trust",
-              "delta": 0.005
-            },
-            {
-              "stat": "observation",
-              "delta": -0.01
-            },
-            {
-              "stat": "narrative",
-              "delta": -0.01
-            },
-            {
-              "stat": "empathy",
-              "delta": 0.02
-            }
-          ],
-          "remnants_effects": [
-            {
-              "target": "activeNpcId",
-              "stat": "empathy",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "need",
-              "delta": 0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "nuance",
-              "delta": -0.01
-            },
-            {
-              "target": "activeNpcId",
-              "stat": "trust",
-              "delta": -0.01
-            }
-          ],
-          "system_triggers": []
-        }
-      ],
-      "next_beat_id": 2,
-      "system_triggers": []
-    },
-    {
-      "id": 2,
       "type": "npc_turn",
       "active_speaker": "Nima",
       "display_name": "Young Woman",
@@ -448,11 +225,16 @@
           "system_triggers": []
         }
       ],
-      "next_beat_id": 3,
-      "system_triggers": []
+      "next_beat_id": 2,
+      "system_triggers": [
+        "diary_update"
+      ],
+      "diary_entries": [
+        "I saw two people, a young man and young woman when I arrived at the market. They watched me without saying a word - the silence was intimidating."
+      ]
     },
     {
-      "id": 3,
+      "id": 2,
       "type": "npc_turn",
       "active_speaker": "Ravi",
       "display_name": "Young Man",
@@ -477,7 +259,7 @@
           "system_triggers": []
         }
       ],
-      "next_beat_id": 3.1,
+      "next_beat_id": 3,
       "system_triggers": [
         {
           "type": "update_dialogue_names",
@@ -489,7 +271,7 @@
       ]
     },
     {
-      "id": 3.1,
+      "id": 3,
       "type": "npc_turn",
       "active_speaker": "Nima",
       "display_name": "Young Woman",
@@ -748,7 +530,7 @@
       ]
     },
     {
-      "id": 4.5,
+      "id": 5,
       "type": "npc_turn",
       "active_speaker": "Ravi",
       "display_name": "Ravi",
@@ -967,11 +749,11 @@
           "system_triggers": []
         }
       ],
-      "next_beat_id": 5,
+      "next_beat_id": 6,
       "system_triggers": []
     },
     {
-      "id": 5,
+      "id": 6,
       "type": "player_posture",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
