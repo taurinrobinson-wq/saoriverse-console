@@ -1,4 +1,4 @@
-{
+﻿{
   "scene_id": "nima_encounter_02",
   "required_flags": [
     "met_nima",
@@ -159,7 +159,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "Working at a stall like thisâ€¦ it must be exhausting. How long have you been doing this?",
+          "text": "Working at a stall like this… it must be exhausting. How long have you been doing this?",
           "npc_response": "Exhausting? That's a word for people who know what rest feels like. This is just survival.",
           "tone_effects": [
             {

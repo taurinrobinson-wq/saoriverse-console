@@ -1,4 +1,4 @@
-{
+﻿{
   "scene_id": "market_discovery_01",
   "required_flags": [
     "met_saori == true",
@@ -398,7 +398,7 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long roadâ€¦ that's all.",
+          "text": "I'm not here to bother anyone. My name's Lioren. I've had a long road… that's all.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -458,7 +458,7 @@
       "display_name": "Young Man",
       "portrait_expression": "resigned",
       "setting_description": "",
-      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' latelyâ€¦ The buildings areâ€¦ unstable. Our daughterâ€¦",
+      "prompt": "You should be careful about who you reveal yourself to Lioren. There's been some 'activity' lately… The buildings are… unstable. Our daughter…",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -583,7 +583,7 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "It's not my business butâ€¦ did something happen to your daughter?",
+          "text": "It's not my business but… did something happen to your daughter?",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
