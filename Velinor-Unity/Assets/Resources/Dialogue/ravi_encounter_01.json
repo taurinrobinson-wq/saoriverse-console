@@ -74,7 +74,7 @@
           ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral",
-          "target": 1.21
+          "target": "1.21"
         },
         {
           "tone": "O",
@@ -128,7 +128,7 @@
           ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral",
-          "target": 1.22
+          "target": "1.22"
         },
         {
           "tone": "N",
@@ -182,7 +182,7 @@
           ],
           "system_triggers": [],
           "npc_portrait_expression": "neutral",
-          "target": 1.23
+          "target": "1.23"
         },
         {
           "tone": "E",
@@ -243,7 +243,7 @@
       "system_triggers": []
     },
     {
-      "id": 1.21,
+      "id": "1.21",
       "type": "player_turn",
       "active_speaker": "Player",
       "display_name": "Lioren",
@@ -467,7 +467,7 @@
       "system_triggers": []
     },
     {
-      "id": 1.22,
+      "id": "1.22",
       "type": "player_turn",
       "active_speaker": "Player",
       "display_name": "Lioren",
@@ -691,7 +691,7 @@
       "system_triggers": []
     },
     {
-      "id": 1.23,
+      "id": "1.23",
       "type": "player_turn",
       "active_speaker": "Player",
       "display_name": "Lioren",
