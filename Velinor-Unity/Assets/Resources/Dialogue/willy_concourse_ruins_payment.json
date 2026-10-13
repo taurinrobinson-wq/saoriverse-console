@@ -247,11 +247,11 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Actually, I think I do need it. Why are you asking?",
+          "text": "Actually, Its not mine to give, but its not up to me what you do with it either.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Curious, that's all. Plenty of people don't know what they got.",
+          "npc_response": "True...but sounds like you won't mind either way so...",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
@@ -284,11 +284,11 @@
         {
           "tone": "N",
           "label": "Narrative",
-          "text": "Yeah, I do. It's important to me.",
+          "text": "Who am I to say. You do you.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Fair enough. Can't blame ya for that. Everyone's got their reasons.",
+          "npc_response": "Don't know any other way to be.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
@@ -321,11 +321,11 @@
         {
           "tone": "E",
           "label": "Empathy",
-          "text": "I... I need to think about it.",
+          "text": "You seem like you need it more than I do.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "Alright, alright. No rush. You seem like you got a lot on your mind.",
+          "npc_response": "Aw man. There you go again getting all mushy. Forget it. I'll just leave it alone.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
