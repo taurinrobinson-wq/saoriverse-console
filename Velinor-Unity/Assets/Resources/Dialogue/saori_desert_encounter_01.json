@@ -241,9 +241,14 @@
       "display_name": "Older Woman",
       "portrait_expression": "determined",
       "setting_description": "The older woman reaches into her pocket and produces a strange device, its surface humming faintly.",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
       "prompt": "I found this. I can't get it working, maybe you'll have better luck.",
       "audio_clip": "",
-      "shared_beat": "",
+      "shared_beat": "I found this. I can't get it working, maybe you'll have better luck.",
       "tone_choices": [
         {
           "tone": "T",
@@ -482,9 +487,14 @@
       "display_name": "Older Woman",
       "portrait_expression": "haunted",
       "setting_description": "The older woman's gaze becomes urgent, scanning the horizon as if watching for something.",
-      "prompt": "I have to go.",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
+      "prompt": "",
       "audio_clip": "",
-      "shared_beat": "",
+      "shared_beat": "I have to go.",
       "tone_choices": [
         {
           "tone": "T",
@@ -750,5 +760,3 @@
     }
   ]
 }
-
-

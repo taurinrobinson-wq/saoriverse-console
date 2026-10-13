@@ -196,6 +196,11 @@
       "display_name": "Older Man",
       "portrait_expression": "neutral",
       "setting_description": "",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
       "prompt": "",
       "audio_clip": "",
       "shared_beat": "Anyway, whatever you're after... it's under that mess. And you're not gettin' ta it today.",
@@ -437,6 +442,11 @@
       "display_name": "Older Man",
       "portrait_expression": "neutral",
       "setting_description": "",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
       "prompt": "",
       "audio_clip": "",
       "shared_beat": "",
