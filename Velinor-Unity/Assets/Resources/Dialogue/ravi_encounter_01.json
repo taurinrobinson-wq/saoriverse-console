@@ -1,4 +1,4 @@
-{
+﻿{
   "scene_id":  "ravi_encounter_01",
   "required_flags":  [
                "kaelen_dialogue_01_true",
@@ -18,7 +18,7 @@
           "display_name":  "Ravi",
           "portrait_expression":  "neutral",
           "setting_description":  "After obtaining the glyphs of sorrow, remembrance, and legacy. You meet Ravi in the desert right outside the marketplace. He looks at you and mixed emotions.",
-          "prompt":  "Ohâ€¦hi again Lioren. For some reason, I thought you mightâ€™ve actually left by now. Most people canâ€™t cut it out here.",
+          "prompt":  "Oh…hi again Lioren. For some reason, I thought you might've actually left by now. Most people can't cut it out here.",
           "audio_clip":  "",
           "shared_beat":  "",
           "tone_choices":  [
@@ -29,7 +29,7 @@
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
-                 "npc_response":  "Ohâ€¦ Anyone that I should be worried about? I saw Kaelen lurking about keep your wits about you with that guy. I try not to prejudge people, butâ€¦",
+                 "npc_response":  "Oh… Anyone that I should be worried about? I saw Kaelen lurking about keep your wits about you with that guy. I try not to prejudge people, but…",
                  "audio_clip_on_response":  "",
                  "portrait_expression_on_response":  "",
                  "tone_effects":  [
@@ -81,11 +81,11 @@
              {
                  "tone":  "O",
                  "label":  "Observation",
-                 "text":  "I can see why this place has a harshness to it that Iâ€™m not used to, Iâ€™m not sure how I feel about some of the people Iâ€™ve met, but Iâ€™m trying to be open. ",
+                 "text":  "I can see why this place has a harshness to it that I'm not used to, I'm not sure how I feel about some of the people I've met, but I'm trying to be open. ",
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
-                 "npc_response":  "Hmâ€¦ hearing that does concern me a little bit being a guard and all. You would let me know if you saw or heard anything right. ",
+                 "npc_response":  "Hm… hearing that does concern me a little bit being a guard and all. You would let me know if you saw or heard anything right. ",
                  "audio_clip_on_response":  "",
                  "portrait_expression_on_response":  "",
                  "tone_effects":  [
@@ -137,7 +137,7 @@
              {
                  "tone":  "N",
                  "label":  "Narrative",
-                 "text":  "To be honest, I have a lot more questions that I need answered before I think about leaving. Not to mention, I didnâ€™t come all this way just to run back home. ",
+                 "text":  "To be honest, I have a lot more questions that I need answered before I think about leaving. Not to mention, I didn't come all this way just to run back home. ",
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
@@ -193,11 +193,11 @@
              {
                  "tone":  "E",
                  "label":  "Empathy",
-                 "text":  "Yeahâ€¦ Iâ€™m actually surprised you and Nima are still here given what you know Iâ€™ve heard about your situation. Iâ€™m sorry by the way. I wish I could offer more.",
+                 "text":  "Yeah… I'm actually surprised you and Nima are still here given what you know I've heard about your situation. I'm sorry by the way. I wish I could offer more.",
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
-                 "npc_response":  "Wellâ€¦ At least you seem genuine we need more people like that. As far as what you can offer, I suppose you canâ€™t change the past,but try not to add any more misery to the future.",
+                 "npc_response":  "Well… At least you seem genuine we need more people like that. As far as what you can offer, I suppose you can't change the past,but try not to add any more misery to the future.",
                  "audio_clip_on_response":  "",
                  "portrait_expression_on_response":  "",
                  "tone_effects":  [
@@ -944,11 +944,11 @@
              {
                  "tone":  "T",
                  "label":  "Trust",
-                 "text":  "To be honest, Iâ€™m not sure. I feel a little bit lost these days and overwhelmed. When my mom told me to go east I honestly didnâ€™t know what to expect.",
+                 "text":  "To be honest, I'm not sure. I feel a little bit lost these days and overwhelmed. When my mom told me to go east I honestly didn't know what to expect.",
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
-                 "npc_response":  "Yeahâ€¦ I get that. When Nima and I came here with each of our parents, I was terrified. She teased me so I wouldnâ€™t freeze up.\nBut hearing you say all thisâ€¦. Wellâ€¦it tells me youâ€™re not reckless. Being honest about where youâ€™re at matters out here.",
+                 "npc_response":  "Yeah… I get that. When Nima and I came here with each of our parents, I was terrified. She teased me so I wouldn't freeze up.\nBut hearing you say all this…. Well…it tells me you're not reckless. Being honest about where you're at matters out here.",
                  "audio_clip_on_response":  "",
                  "portrait_expression_on_response":  "",
                  "tone_effects":  [
@@ -999,11 +999,11 @@
              {
                  "tone":  "O",
                  "label":  "Observation",
-                 "text":  "Iâ€™m trying to get a sense of how things work around here. The terrain, the peopleâ€¦ Iâ€™m still piecing it together.",
+                 "text":  "I'm trying to get a sense of how things work around here. The terrain, the people… I'm still piecing it together.",
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
-                 "npc_response":  "Hm. Thatâ€™s good. Most people donâ€™t pay attention when they first arrive.\nWhen Nima and I came here with each of our parents, I kept my eyes on the ground more than anything else. She said Iâ€™d miss something important if I didnâ€™t look up.\nAnd she was right! Out hereâ€¦noticing the small things keeps you safe.",
+                 "npc_response":  "Hm. That's good. Most people don't pay attention when they first arrive.\nWhen Nima and I came here with each of our parents, I kept my eyes on the ground more than anything else. She said I'd miss something important if I didn't look up.\nAnd she was right! Out here…noticing the small things keeps you safe.",
                  "audio_clip_on_response":  "",
                  "portrait_expression_on_response":  "",
                  "tone_effects":  [
@@ -1058,7 +1058,7 @@
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
-                 "npc_response":  "Thatâ€™s smart. Out here, knowing who stands where matters more than you think. I guess, keep your head clear and your eyes openâ€¦",
+                 "npc_response":  "That's smart. Out here, knowing who stands where matters more than you think. I guess, keep your head clear and your eyes open…",
                  "audio_clip_on_response":  "",
                  "portrait_expression_on_response":  "",
                  "tone_effects":  [
@@ -1109,11 +1109,11 @@
              {
                  "tone":  "E",
                  "label":  "Empathy",
-                 "text":  "I feel torn about what to do next. I need to survive out hereâ€¦ but itâ€™s hard to ignore how much people seem to be carrying. It makes everything feel heavier.",
+                 "text":  "I feel torn about what to do next. I need to survive out here… but it's hard to ignore how much people seem to be carrying. It makes everything feel heavier.",
                  "audio_clip_on_choice":  "",
                  "result_text":  "",
                  "show_result_in_notification":  false,
-                 "npc_response":  "Yeahâ€¦ it does get heavy. You need to focus on you andâ€¦ helping others sometimes comes back to help or hurt you... Iâ€™m surprised that you notice. Most folks just deal with whatâ€™s in front of them. ",
+                 "npc_response":  "Yeah… it does get heavy. You need to focus on you and… helping others sometimes comes back to help or hurt you... I'm surprised that you notice. Most folks just deal with what's in front of them. ",
                  "audio_clip_on_response":  "",
                  "portrait_expression_on_response":  "",
                  "tone_effects":  [
@@ -1892,7 +1892,7 @@
               "choice_field":  "npc_response"
           },
           "audio_clip":  "",
-          "shared_beat":  "When I was out scouting the desert ridge, I noticed something strange â€” an off-metal panel tucked into the mountain face northeast of here. It lookedâ€¦ deliberate. If youâ€™re still searching for answers, that might be worth a look.",
+          "shared_beat":  "When I was out scouting the desert ridge, I noticed something strange â€” an off-metal panel tucked into the mountain face northeast of here. It looked… deliberate. If you're still searching for answers, that might be worth a look.",
           "tone_choices":  [
              {
                  "tone":  "T",
