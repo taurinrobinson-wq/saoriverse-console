@@ -754,6 +754,35 @@
     },
     {
       "id": 6,
+      "type": "npc_turn",
+      "active_speaker": "Ravi",
+      "display_name": "Ravi",
+      "portrait_expression": "determined",
+      "setting_description": "",
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "Anyway... I hope you'll be careful.",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 7,
+      "system_triggers": []
+    },
+    {
+      "id": 7,
       "type": "player_posture",
       "active_speaker": "Lioren",
       "display_name": "Lioren",
