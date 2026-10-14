@@ -60,6 +60,20 @@ namespace Velinor.Core
         private void Awake()
         {
             dialogueManager = FindAnyObjectByType<DialogueManager>();
+            
+            // If DialogueManager doesn't exist (e.g., starting play from this scene directly),
+            // get or create it automatically
+            if (dialogueManager == null)
+            {
+                Debug.LogWarning($"[NPCDialogueDriver] {npcName}: DialogueManager not found in scene. Auto-creating...");
+                dialogueManager = DialogueManager.Instance ?? new GameObject("DialogueManager").AddComponent<DialogueManager>();
+                if (dialogueManager == null)
+                {
+                    Debug.LogError($"[NPCDialogueDriver] {npcName}: Failed to create DialogueManager!");
+                    return;
+                }
+                Debug.Log($"[NPCDialogueDriver] {npcName}: DialogueManager created successfully");
+            }
 
             // Fix any baked-in X rotation (e.g., Asuna skeleton)
             Vector3 eulerAngles = transform.localEulerAngles;
@@ -373,6 +387,12 @@ namespace Velinor.Core
         /// </summary>
         public void Interact(GameObject triggeringPlayer)
         {
+            if (dialogueManager == null)
+            {
+                Debug.LogError($"[NPCDialogueDriver] {npcName}: DialogueManager is null in Interact()!");
+                return;
+            }
+            
             if (!dialogueManager.IsDialogueActive)
             {
                 TriggerDialogue();
