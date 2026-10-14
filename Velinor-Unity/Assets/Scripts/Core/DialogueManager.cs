@@ -174,6 +174,13 @@ public class DialogueManager : MonoBehaviour
         // Process beat-level system triggers (e.g., update_dialogue_names)
         ProcessBeatSystemTriggers(beat.system_triggers);
 
+        // Process mind log unlocks immediately when beat is displayed (allows them on any beat, not just final)
+        if (beat.mind_log_unlocks != null && beat.mind_log_unlocks.Length > 0)
+        {
+            Debug.Log($"[DialogueManager] Processing {beat.mind_log_unlocks.Length} mind log unlocks from beat {beat.pid ?? beat.id.ToString()}");
+            ProcessMindLogUnlocks(beat.mind_log_unlocks);
+        }
+
         // Show portrait for NPC dialogue (if portrait_expression field exists)
         if (!string.IsNullOrEmpty(beat.active_speaker) && portraitManager != null)
         {
@@ -787,17 +794,6 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log($"[DialogueManager] EndDialogue called. CurrentBeat: {currentBeat?.id ?? 0}, has mind_log_unlocks: {(currentBeat?.mind_log_unlocks != null && currentBeat.mind_log_unlocks.Length > 0)}");
         
-        // Process Mind Log unlocks from current beat before ending dialogue
-        if (currentBeat != null && currentBeat.mind_log_unlocks != null && currentBeat.mind_log_unlocks.Length > 0)
-        {
-            Debug.Log($"[DialogueManager] Processing {currentBeat.mind_log_unlocks.Length} mind log unlocks");
-            ProcessMindLogUnlocks(currentBeat.mind_log_unlocks);
-        }
-        else
-        {
-            Debug.Log("[DialogueManager] No mind log unlocks to process");
-        }
-
         // Reset append flag
         lastActionWasNpcResponse = false;
 

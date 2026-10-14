@@ -231,6 +231,12 @@
       ],
       "diary_entries": [
         "I saw two people, a young man and young woman when I arrived at the market. They watched me without saying a word - the silence was intimidating."
+      ],
+      "mind_log_unlocks": [
+        {
+          "assetPath": "MindLogs/MindLog_Ravi_Nima_Market_Encounter",
+          "guid": "a7c5e81e1e9bf874ab12a872495c56e0"
+        }
       ]
     },
     {
@@ -864,12 +870,6 @@
           "key": "ravi_nima_market_discovery_complete",
           "value": true,
           "note": "Marks completion of first market encounter"
-        }
-      ],
-      "mind_log_unlocks": [
-        {
-          "assetPath": "MindLogs/MindLog_Ravi_Nima_Market_Encounter",
-          "guid": "a7c5e81e1e9bf874ab12a872495c56e0"
         }
       ]
     }
