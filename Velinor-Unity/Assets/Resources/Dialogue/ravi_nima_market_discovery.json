@@ -759,6 +759,11 @@
       "display_name": "Ravi",
       "portrait_expression": "determined",
       "setting_description": "",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
       "prompt": "",
       "audio_clip": "",
       "shared_beat": "Anyway... I hope you'll be careful.",
@@ -859,6 +864,12 @@
           "key": "ravi_nima_market_discovery_complete",
           "value": true,
           "note": "Marks completion of first market encounter"
+        }
+      ],
+      "mind_log_unlocks": [
+        {
+          "assetPath": "MindLogs/MindLog_Ravi_Nima_Market_Encounter",
+          "guid": "a7c5e81e1e9bf874ab12a872495c56e0"
         }
       ]
     }
