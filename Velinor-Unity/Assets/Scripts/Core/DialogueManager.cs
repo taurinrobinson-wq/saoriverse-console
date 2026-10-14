@@ -37,6 +37,9 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         
+        // Ensure global state manager is created and persists
+        GlobalStateManager.GetOrCreate();
+        
         dialogueUI = FindAnyObjectByType<DialogueUIController>();
         portraitManager = FindAnyObjectByType<PortraitManager>();
         if (portraitManager == null)
