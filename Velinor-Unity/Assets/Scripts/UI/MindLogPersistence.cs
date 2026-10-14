@@ -17,6 +17,9 @@ public class MindLogPersistence : MonoBehaviour
 
     private void OnEnable()
     {
+        // Load persisted state from GameFlags on scene load
+        LoadPersistedState();
+
         // Find CodexController for container references
         if (codexController == null)
             codexController = FindAnyObjectByType<CodexController>();
@@ -30,6 +33,38 @@ public class MindLogPersistence : MonoBehaviour
         // Containers persist via CodexPanel's DontDestroyOnLoad (managed by CodexController)
         // Do NOT mark them individually here - this causes conflicts with scene persistence
         Debug.Log("[MindLogPersistence] OnEnable: Using CodexPanel's persistence (managed by CodexController)");
+    }
+
+    /// <summary>
+    /// Loads the persisted Codex state from GameFlags when this scene loads.
+    /// This ensures the Codex unlock state carries over between scenes.
+    /// Also restores CodexPanel interactivity if Codex was previously unlocked.
+    /// </summary>
+    private void LoadPersistedState()
+    {
+        bool codexUnlockedPersistedValue = GameFlags.Get("codex_unlocked", false);
+        if (codexUnlockedPersistedValue != isCodexUnlocked)
+        {
+            isCodexUnlocked = codexUnlockedPersistedValue;
+            Debug.Log($"[MindLogPersistence] LoadPersistedState: Restored isCodexUnlocked from GameFlags = {isCodexUnlocked}");
+        }
+
+        // If Codex is unlocked, ensure CodexPanel is configured for interaction
+        if (isCodexUnlocked)
+        {
+            GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
+            if (codexPanel != null)
+            {
+                CanvasGroup cg = codexPanel.GetComponent<CanvasGroup>();
+                if (cg != null)
+                {
+                    // Keep alpha at 0 (hidden) but enable interaction
+                    cg.interactable = true;
+                    cg.blocksRaycasts = true;
+                    Debug.Log("[MindLogPersistence] CodexPanel configured for interaction (persisted from previous scene)");
+                }
+            }
+        }
     }
 
     private void Update()
@@ -88,11 +123,13 @@ public class MindLogPersistence : MonoBehaviour
     /// Unlocks the Codex - called when player receives it from Saori or other dialogue trigger.
     /// Enables the CodexPanel UI and CodexViewController button access, but does NOT auto-show it.
     /// User must press C to open it. Alpha stays at 0 so ToggleCodex() can properly detect it's closed.
+    /// Persists across scenes via GameFlags.
     /// </summary>
     public static void UnlockCodex()
     {
         isCodexUnlocked = true;
-        Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now press C to access it");
+        GameFlags.Set("codex_unlocked", true);
+        Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now press C to access it (persisted to GameFlags)");
 
         // Try to find and unlock CodexController
         var codexController = FindAnyObjectByType<CodexController>();
@@ -146,11 +183,13 @@ public class MindLogPersistence : MonoBehaviour
     /// <summary>
     /// Locks the Codex - called at game start to prevent access before trigger.
     /// Also hides the CodexPanel UI.
+    /// Persists across scenes via GameFlags.
     /// </summary>
     public static void LockCodex()
     {
         isCodexUnlocked = false;
-        Debug.Log("[MindLogPersistence] Codex LOCKED - player cannot access it");
+        GameFlags.Set("codex_unlocked", false);
+        Debug.Log("[MindLogPersistence] Codex LOCKED - player cannot access it (persisted to GameFlags)");
 
         // Hide CodexPanel entirely when locked
         GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");

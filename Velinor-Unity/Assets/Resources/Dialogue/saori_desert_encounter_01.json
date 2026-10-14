@@ -246,7 +246,7 @@
         "beat_id": 1,
         "choice_field": "npc_response"
       },
-      "prompt": "I found this. I can't get it working, maybe you'll have better luck.",
+      "prompt": "",
       "audio_clip": "",
       "shared_beat": "I found this. I can't get it working, maybe you'll have better luck.",
       "tone_choices": [
@@ -312,7 +312,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "I appreciate your curiosity, but I cannot explain right now",
+          "npc_response": "I appreciate your curiosity, but I can't explain right now",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "neutral",
           "tone_effects": [
@@ -424,7 +424,7 @@
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
-          "npc_response": "I'm sorry. I can't explain. I need to go.",
+          "npc_response": "I'm sorry. I can't explain.",
           "audio_clip_on_response": "",
           "portrait_expression_on_response": "guarded_hopefulness",
           "tone_effects": [
@@ -494,7 +494,7 @@
       },
       "prompt": "",
       "audio_clip": "",
-      "shared_beat": "I have to go.",
+      "shared_beat": "Anyway... Gotta go.",
       "tone_choices": [
         {
           "tone": "T",

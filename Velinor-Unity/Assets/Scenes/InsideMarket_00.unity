@@ -478,92 +478,6 @@ Transform:
   - {fileID: 979342586}
   m_Father: {fileID: 1493541427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &106761838
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 106761840}
-  - component: {fileID: 106761839}
-  m_Layer: 0
-  m_Name: Codex Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &106761839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106761838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29425e826a988f04fbd463b610c74a8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CodexController
-  codexPanel: {fileID: 761404008}
-  viewport: {fileID: 1435865070}
-  codexBackgroundSprite: {fileID: 21300000, guid: ef78b9b1311618b48a92d6a2d15cc38c, type: 3}
-  triglyphPanelUI: {fileID: 0}
-  selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
-  deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
-  glyphNameText: {fileID: 315904239}
-  nextPageBtn: {fileID: 1153612588}
-  prevPageBtn: {fileID: 539057754}
-  codexFont: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
-  requiresCodexDevice: 1
-  glyphUIPrefab: {fileID: 287781493}
-  allSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!4 &106761840
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106761838}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 502.94293, y: 256.30426, z: -106.53479}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &144508053 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2021527723468371381, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &182047851
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,11 +790,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &287781493 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7491206308485869254, guid: dc53fb23a3b498848ab6cf73d00f9985, type: 3}
-  m_PrefabInstance: {fileID: 3874979746628526789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &298465295
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,6 +904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.NPCDialogueDriver
   dialogueJson: {fileID: 4900000, guid: 422ac970b8391514a98242bd97cdbe60, type: 3}
+  secondaryDialogueJson: {fileID: 0}
   npcName: Nima
   startPassageId: 1
   isMultiNpcScene: 1
@@ -1057,17 +967,6 @@ Transform:
   - {fileID: 2000288608}
   m_Father: {fileID: 2070805426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &315904239 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4665222382387263991, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &326939419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1156,9 +1055,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2804238367914797267, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
+      propertyPath: useTestMemories
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5595583802400103763, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
       propertyPath: m_Name
       value: UI_Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672777426661005502, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
+      propertyPath: requiresCodexDevice
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1714,17 +1621,6 @@ Transform:
   - {fileID: 465727129}
   m_Father: {fileID: 871534160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &539057754 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6994931906748615895, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &539657953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,11 +2142,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!225 &761404008 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 7315374274665168896, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
 --- !u!28 &789732214
 Texture2D:
   m_ObjectHideFlags: 0
@@ -3145,11 +3036,6 @@ Transform:
   - {fileID: 475924023}
   m_Father: {fileID: 1377354517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!225 &1071742229 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 6743176566743641850, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1096872669
 GameObject:
   m_ObjectHideFlags: 0
@@ -3345,17 +3231,6 @@ Transform:
   - {fileID: 1997926483}
   m_Father: {fileID: 1321164829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1153612588 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9209853742837836169, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1160234425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3956,28 +3831,6 @@ Transform:
   - {fileID: 1142436911}
   m_Father: {fileID: 1472466889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1360662684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7518613954394846401, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!114 &1372512481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5041939065273861199, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1377354516
 GameObject:
   m_ObjectHideFlags: 0
@@ -4239,11 +4092,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!224 &1435865070 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3551064765281523373, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1440113543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4689,57 +4537,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1616405112
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1616405114}
-  - component: {fileID: 1616405113}
-  m_Layer: 0
-  m_Name: UIController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1616405113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616405112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a8333f97b7b2dd4992e7a054b80e1c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueUIController
-  dialoguePanel: {fileID: 1071742229}
-  dialogueText: {fileID: 1372512481}
-  npcNameText: {fileID: 1360662684}
-  sharedBeatText: {fileID: 144508053}
-  npcPortraitImage: {fileID: 1905137578}
-  dialogueFont: {fileID: 11400000, guid: a738fc2d96fc725448d37c175b61bff8, type: 2}
-  currentActiveSpeaker: Player
---- !u!4 &1616405114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616405112}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5852,17 +5649,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2000288608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1905137578 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5970113524215575964, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
-  m_PrefabInstance: {fileID: 326939419}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1965762301
 GameObject:
   m_ObjectHideFlags: 0
@@ -8112,8 +7898,6 @@ SceneRoots:
   - {fileID: 1662531328}
   - {fileID: 1543128805}
   - {fileID: 326939419}
-  - {fileID: 1616405114}
-  - {fileID: 106761840}
   - {fileID: 825337637}
   - {fileID: 2000000012}
   - {fileID: 2000000027}

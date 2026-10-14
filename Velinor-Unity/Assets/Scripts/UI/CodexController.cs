@@ -167,6 +167,13 @@ public class CodexController : MonoBehaviour
         {
             codexPanel = panelObj.GetComponent<CanvasGroup>();
             
+            // Cache Canvas component for later checks
+            GameObject canvasObj = GameObject.Find("UI_Canvas");
+            if (canvasObj != null)
+            {
+                _cachedCanvas = canvasObj.GetComponent<Canvas>();
+            }
+            
             // New Hierarchy: CodexPanel -> GlyphsBackground -> [Children]
             Transform glyphsBG = panelObj.transform.Find("GlyphsBackground");
             if (glyphsBG != null)
@@ -289,6 +296,13 @@ public class CodexController : MonoBehaviour
             codexPanel.blocksRaycasts = false;
             codexPanel.interactable = false;
             Debug.Log("[Codex] CodexPanel initialized (hidden)");
+        }
+
+        // Restore Codex unlock state from persisted GameFlags (carries across scenes)
+        if (GameFlags.Get("codex_unlocked", false))
+        {
+            playerHasCodex = true;
+            Debug.Log("[Codex] Restored playerHasCodex=true from GameFlags (persisted from previous scene)");
         }
 
         // For testing: allow access if not requiring device
@@ -538,8 +552,10 @@ public class CodexController : MonoBehaviour
     public void UnlockCodex()
     {
         playerHasCodex = true;
+        GameFlags.Set("codex_unlocked", true);
         Debug.Log("[Codex] ========== CODEX UNLOCKED ==========");
         Debug.Log($"[Codex] playerHasCodex = {playerHasCodex}");
+        Debug.Log("[Codex] Persisted to GameFlags: codex_unlocked = true");
         Debug.Log("[Codex] Player can now press C to open Codex");
 
         // Show notification to player
