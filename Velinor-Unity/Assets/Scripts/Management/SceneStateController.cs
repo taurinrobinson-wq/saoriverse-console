@@ -38,6 +38,9 @@ public class SceneStateController : MonoBehaviour
         [Tooltip("GameObject to act on")]
         public GameObject target;
         
+        [Tooltip("Fallback name to find GameObject by if target reference is broken")]
+        public string targetName;
+        
         [Tooltip("Set target active/inactive")]
         public bool setActive = false;
         
@@ -52,9 +55,20 @@ public class SceneStateController : MonoBehaviour
                 return;
             }
 
-            if (target == null)
+            // Try to get target - use direct reference if available, fall back to Find()
+            GameObject actualTarget = target;
+            if (actualTarget == null && !string.IsNullOrEmpty(targetName))
             {
-                Debug.LogWarning("[SceneStateController] StateAction has no target!");
+                actualTarget = GameObject.Find(targetName);
+                if (actualTarget != null)
+                {
+                    Debug.Log($"[SceneStateController] Found target by name: {targetName}");
+                }
+            }
+
+            if (actualTarget == null)
+            {
+                Debug.LogWarning($"[SceneStateController] StateAction has no target! (direct ref null, targetName: {targetName ?? "empty"})");
                 return;
             }
 
@@ -68,13 +82,13 @@ public class SceneStateController : MonoBehaviour
             {
                 // Disable specific collider
                 targetCollider.enabled = setActive;
-                Debug.Log($"[SceneStateController] {target.name}: Collider {(setActive ? "enabled" : "disabled")}");
+                Debug.Log($"[SceneStateController] {actualTarget.name}: Collider {(setActive ? "enabled" : "disabled")}");
             }
             else
             {
                 // Toggle entire GameObject
-                target.SetActive(setActive);
-                Debug.Log($"[SceneStateController] {target.name}: {(setActive ? "Enabled" : "Disabled")} (flag: {requiredFlag})");
+                actualTarget.SetActive(setActive);
+                Debug.Log($"[SceneStateController] {actualTarget.name}: {(setActive ? "Enabled" : "Disabled")} (flag: {requiredFlag})");
             }
         }
     }
