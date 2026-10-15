@@ -99,12 +99,19 @@ public class BeatEffect
 
 /// <summary>
 /// A system trigger (diary update, close dialogue, etc.)
+/// Supports multiple formats:
+/// - Simple: type only (e.g., "close_dialogue")
+/// - Array data: type + data array (e.g., "set_flag" with data["flagName", "true"])
+/// - Key-value: type + key/value fields (e.g., "disable_npc" with key="Ravi")
 /// </summary>
 [Serializable]
 public class SystemTrigger
 {
-    [SerializeField] public string type;                   // "diary_append", "close_dialogue", etc.
-    [SerializeField] public string[] data;                 // Type-specific data
+    [SerializeField] public string type;                   // "diary_append", "close_dialogue", "disable_npc", "set_flag", etc.
+    [SerializeField] public string[] data;                 // Type-specific data array
+    [SerializeField] public string key;                    // Alternative format: key field (for disable_npc, set_flag)
+    [SerializeField] public string value;                  // Alternative format: value field (for set_flag)
+    [SerializeField] public string note;                   // Optional: documentation/note about this trigger
 }
 
 /// <summary>

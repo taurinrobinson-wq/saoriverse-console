@@ -716,12 +716,35 @@ public class DialogueManager : MonoBehaviour
             // Handle set_flag: persist flag globally
             if (trigger.type == "set_flag")
             {
-                if (trigger.data != null && trigger.data.Length >= 1)
+                // Support both formats: key/value fields or data array
+                string flagKey = null;
+                bool flagValue = true;
+
+                if (!string.IsNullOrEmpty(trigger.key))
                 {
-                    string flagKey = trigger.data[0];
-                    bool flagValue = trigger.data.Length >= 2 ? trigger.data[1] == "true" : true;
+                    flagKey = trigger.key;
+                    if (!string.IsNullOrEmpty(trigger.value))
+                    {
+                        flagValue = trigger.value.ToLower() == "true";
+                    }
+                }
+                else if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    flagKey = trigger.data[0];
+                    if (trigger.data.Length >= 2)
+                    {
+                        flagValue = trigger.data[1].ToLower() == "true";
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(flagKey))
+                {
                     GameFlags.Set(flagKey, flagValue);
                     Debug.Log($"[DialogueManager] Flag set: {flagKey} = {flagValue}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] set_flag trigger has no key specified");
                 }
                 continue;
             }
@@ -784,6 +807,40 @@ public class DialogueManager : MonoBehaviour
             {
                 dialogueUI.TriggerSystemEvent("close_dialogue");
                 Debug.Log($"[DialogueManager] Close dialogue triggered");
+                continue;
+            }
+
+            // Handle disable_npc: hide/disable NPC GameObjects
+            if (trigger.type == "disable_npc")
+            {
+                // Support both formats: key field or data array
+                string npcName = null;
+                if (!string.IsNullOrEmpty(trigger.key))
+                {
+                    npcName = trigger.key;
+                }
+                else if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    npcName = trigger.data[0];
+                }
+
+                if (!string.IsNullOrEmpty(npcName))
+                {
+                    GameObject npcObj = GameObject.Find(npcName);
+                    if (npcObj != null)
+                    {
+                        npcObj.SetActive(false);
+                        Debug.Log($"[DialogueManager] NPC disabled: {npcName}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[DialogueManager] Could not find NPC to disable: {npcName}");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] disable_npc trigger has no key or data specified");
+                }
                 continue;
             }
 
