@@ -1740,7 +1740,7 @@ GameObject:
   - component: {fileID: 331389661903995475}
   - component: {fileID: 2146691956866052217}
   m_Layer: 8
-  m_Name: Ravi_Sprite
+  m_Name: Ravi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1776,13 +1776,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Velinor.Core.NPCDialogueDriver
   dialogueJson: {fileID: 4900000, guid: 422ac970b8391514a98242bd97cdbe60, type: 3}
-  conversationId: market_discovery_01
+  secondaryDialogueJson: {fileID: 0}
   npcName: Ravi
   startPassageId: 1
   isMultiNpcScene: 1
   multiNpcDisplayName: Young Man and Woman
   npcController: {fileID: 0}
   interactionRadius: 0.3
+  interactionGlow: {fileID: 0}
   npcScale: {x: 1, y: 1, z: 1}
   useDefaultScale: 0
   colliderHeight: 1.5

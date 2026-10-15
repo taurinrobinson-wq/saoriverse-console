@@ -861,20 +861,10 @@
           }
         },
         {
-          "type": "disable_npc",
-          "key": "Ravi",
-          "note": "Hide Ravi when leaving InsideMarket_00 after first encounter"
-        },
-        {
-          "type": "disable_npc",
-          "key": "Nima",
-          "note": "Hide Nima when leaving InsideMarket_00 after first encounter"
-        },
-        {
           "type": "set_flag",
           "key": "ravi_nima_market_discovery_complete",
           "value": true,
-          "note": "Marks completion of first market encounter"
+          "note": "Marks completion of first market encounter. NPCs will be disabled on scene reload via SceneStateController"
         }
       ]
     }
