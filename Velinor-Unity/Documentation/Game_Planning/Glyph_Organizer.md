@@ -632,6 +632,44 @@ Elenya gathers the community in the archive building's central chamber to light 
 
 ---
 
+### Helia - Triage Chemist & Distiller
+
+**Category**: Presence
+
+**Theme**: Touch, silence, witness
+
+**Glyph Name**: Glyph of Tender Witness
+
+**Transcendance Glyph**: 
+
+**Location**: Shrine Healing Alcove
+
+**Storyline**:
+A healer tends the wounded survivors in the shrines???not with potions alone, but with presence. She sits with the injured, holding space for their pain without trying to fix it. The glyph manifests when the player joins her in this practice: sitting beside someone in ache, offering nothing but attention. Her hands are gentle, her voice quiet, her eyes steady. She teaches that sometimes presence is the greatest medicine. The player learns that witnessing isn't about words; it's about showing up and staying, even when there's nothing to say. This is touch without agenda, silence as sacred.
+
+**Status**: No
+
+---
+
+### Helia - Triage Chemist & Distiller
+
+**Category**: Presence
+
+**Theme**: Touch, silence, witness
+
+**Glyph Name**: Glyph of Quiet Return
+
+**Transcendance Glyph**: 
+
+**Location**: Shrine Healing Alcove
+
+**Storyline**:
+Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence â€” not action â€” is what brings people back to themselves.
+
+**Status**: No
+
+---
+
 ### Inodora – Storyteller & Folk Chronicler
 
 **Category**: Legacy
@@ -1273,6 +1311,25 @@ Cooks gather survivors around a communal fire to prepare meals. But more than no
 
 **Storyline**:
 The Mask-Maker crafts faces from clay, wood, and scrap???each one a different expression. Buyers choose masks to wear during the seasonal gatherings, allowing them to express emotions they otherwise keep hidden. The Mask-Maker reveals that grief, hidden, doesn't disappear???it calcifies. The glyph manifests when the player commissions a mask that shows their true ache, then wears it publicly, allowing others to witness. This is the courage to stop performing recovery and admit: I am still broken, and that's okay.
+
+**Status**: No
+
+---
+
+### Tovren - Mechanic
+
+**Category**: Sovereignty
+
+**Theme**: Boundaries, choice, clarity
+
+**Glyph Name**: Glyph of Marked Boundaries
+
+**Transcendance Glyph**: 
+
+**Location**: Collapsing trade route.
+
+**Storyline**:
+Tovren teaches the player to mark unstable paths with chalk. Sovereignty is clarity ? boundaries drawn to protect travelers.
 
 **Status**: No
 
