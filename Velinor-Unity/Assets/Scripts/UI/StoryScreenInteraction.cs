@@ -106,12 +106,23 @@ public class StoryScreenInteraction : MonoBehaviour
         // Start dialogue sequence
         if (dialogueManager && !string.IsNullOrEmpty(dialogueJsonFileName))
         {
-            dialogueManager.LoadAndStartDialogue(dialogueJsonFileName);
+            // Load the dialogue JSON file
+            TextAsset dialogueJSON = Resources.Load<TextAsset>($"Dialogue/{dialogueJsonFileName}");
+            if (dialogueJSON != null)
+            {
+                dialogueManager.LoadDialogue(dialogueJSON);
+                // Start dialogue from a specific beat if needed
+                dialogueManager.StartDialogue("player", "start"); // Adjust beat ID as needed
+            }
+            else
+            {
+                Debug.LogWarning($"[StoryScreenInteraction] Could not find dialogue JSON: Dialogue/{dialogueJsonFileName}");
+            }
         }
     }
 
     /// <summary>
-    /// Opens the Codex UI and navigates to Mind Logs page.
+    /// Opens the Codex UI (toggling it on if closed).
     /// </summary>
     private void OpenCodexToMindLogs()
     {
@@ -122,13 +133,12 @@ public class StoryScreenInteraction : MonoBehaviour
         
         if (codexController)
         {
-            codexController.OpenCodex();
-            codexController.NavigateToPage("MindLogs"); // Adjust method name if needed
-            Debug.Log("Codex opened to Mind Logs page.");
+            codexController.ToggleCodex(); // Opens Codex (alpha 1.0, interactive, blocks raycasts)
+            Debug.Log("[StoryScreenInteraction] Codex toggled open.");
         }
         else
         {
-            Debug.LogWarning("CodexController not found in scene!");
+            Debug.LogWarning("[StoryScreenInteraction] CodexController not found in scene!");
         }
     }
 
