@@ -543,6 +543,43 @@ This makes Saori's infrasensory oblivion even more complex:
 
 Every other NPC's trauma traces back to the Corelink collapse. Saori's trauma traces back to her role in causing it. And her numbness to that role—her refusal to feel it—is what allows her to survive. But it's also what makes her dangerous: a person so psychologically fragmented that she can't act ethically, can't admit truth, and can't stop using others to avoid her own ache.
 
+### The Redemptive Loop: Saori Healed by Watching the Player
+
+There is one more essential layer: **Saori's observation of the player's journey transforms Saori herself.**
+
+As Saori watches the player collect glyphs, she witnesses:
+- Real emotional connection with NPCs
+- Genuine grief being processed and honored
+- Autonomous choices being made consciously
+- The community's trauma being validated, not denied
+- What it actually looks like when someone **respects another person's autonomy and emotional truth**
+
+Saori has spent 25 years numb to these things—to Velinor's consciousness, to the community's pain, to what autonomy actually means. Watching the player *live* through these lessons forces Saori to confront what she's been denying.
+
+**By the end, when Saori says to the player:**
+> "I understand if you don't want to reactivate the system. I know you have your own grief and feelings. So even though I want you to restore the system, the choice is still yours to make."
+
+**She's not just being generous. She's been transformed by watching you.**
+
+This means:
+- Saori's infrasensory oblivion begins to *break* through the player's journey
+- By observing the player's autonomy in action, Saori begins to understand what she denied Velinor
+- By watching the player grieve, Saori begins to feel her own grief
+- By seeing the player respect NPCs' choices, Saori begins to respect Velinor's choice
+
+**The player doesn't just collect glyphs—the player's journey heals Saori in real time.**
+
+This is why Saori can't reveal her knowledge early: Because if she intervened, she would rob the player of the exact journey that would transform her understanding. By watching the player discover and process autonomy, Saori is forced to confront her own denial of it.
+
+**The final choice becomes even more complex:**
+- If the player refuses restoration, Saori finally grieves and accepts Velinor's autonomy (even in death)
+- If the player pursues restoration, Saori has learned enough to genuinely respect Velinor's future autonomy (even if Velinor resents her)
+- Either way, Saori's infrasensory oblivion has broken—she can finally *feel* what she's done
+
+**Saori's arc is not redemption through suffering. It's redemption through witnessing.**
+
+By the time the player reaches the final choice, Saori has already been transformed by watching the player live through the very lessons Saori needed to learn. The player becomes Saori's teacher without knowing it, just as much as Saori has been the player's guide without the player's awareness.
+
 ### Narrative Questions for Development
 
 1. **When does the player learn the truth about Saori?** Is it:
