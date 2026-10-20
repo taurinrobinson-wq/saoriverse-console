@@ -375,6 +375,386 @@ This way, the dialogue loader can verify: "Am I in the right scene state for thi
 
 ---
 
+## 13. Concrete Example: MachinesCave Sequence (Complete Implementation)
+
+This section documents the **Triglyph Chamber Cave**, a complex multi-scene narrative puzzle that uses the state system to create a seamless progression through 3 story sequences without allowing the player to replay narrative moments.
+
+### MachinesCave Overview
+
+**Structure:**
+- 1 entrance/exit (MachinesCave_00 and MachinesCave_00_02)
+- 5 hub rooms (MachinesCave_01_01 through 01_05) where player experiences disorientation
+- 4 projection rooms (MachinesCave_02_01 through 02_04) where stories play
+- 4 "B-version" hub rooms (MachinesCave_01_01b through 01_04b) for safe backtracking
+- 1 "B-version" projection room (MachinesCave_02_04b) for safe backtracking
+
+**Total: 16 scene files**
+
+### Scene Flow Diagram
+
+```
+MachinesCave_00 (entrance)
+    ↓
+MachinesCave_01_01 (hub 1)
+    ↓
+MachinesCave_02_01 (story 1 - distorted)
+    ↳ back → MachinesCave_01_01b → up → MachinesCave_02_01
+    ↓
+MachinesCave_01_02 (hub 2 - Mind Log)
+    ↓
+MachinesCave_02_02 (story 2 - less distorted)
+    ↳ back → MachinesCave_01_02b → up → MachinesCave_02_02
+    ↓
+MachinesCave_01_03 (hub 3)
+    ↓
+MachinesCave_02_03 (story 3 - clearer)
+    ↳ back → MachinesCave_01_03b → up → MachinesCave_02_03
+    ↓
+MachinesCave_01_04 (hub 4 - final pressure)
+    ↓
+MachinesCave_02_04 (story final - RESOLVED + glyph + ghost)
+    ↳ back → MachinesCave_01_04b → up → MachinesCave_02_04
+    ↓
+MachinesCave_01_05 (hub exit - two-way)
+    ↑
+    └─→ MachinesCave_02_04b (final safe replay)
+    ↓
+MachinesCave_00_02 (exit)
+```
+
+### Folder Structure
+
+```
+Assets/Scenes/MachinesCave/
+├── MachinesCave_00.unity      (cave entrance)
+├── MachinesCave_01_01.unity   (hub 1)
+├── MachinesCave_01_01b.unity  (hub 1b - backtrack safe)
+├── MachinesCave_02_01.unity   (story 1)
+├── MachinesCave_01_02.unity   (hub 2)
+├── MachinesCave_01_02b.unity  (hub 2b - backtrack safe)
+├── MachinesCave_02_02.unity   (story 2)
+├── MachinesCave_01_03.unity   (hub 3)
+├── MachinesCave_01_03b.unity  (hub 3b - backtrack safe)
+├── MachinesCave_02_03.unity   (story 3)
+├── MachinesCave_01_04.unity   (hub 4)
+├── MachinesCave_01_04b.unity  (hub 4b - backtrack safe)
+├── MachinesCave_02_04.unity   (story final)
+├── MachinesCave_02_04b.unity  (story final b - backtrack safe)
+├── MachinesCave_01_05.unity   (hub exit)
+└── MachinesCave_00_02.unity   (cave exit)
+```
+
+### Scene-by-Scene Breakdown
+
+#### **MachinesCave_00 — Cave Entrance**
+
+**Purpose**: Player solves Triglyph Puzzle to enter cave.
+
+**On Load:**
+- Triglyph Panel UI appears (requires 3 glyphs: Sorrow, Remembrance, Legacy)
+- Codex opens to Glyphs page
+- Cave door is sealed
+
+**Player Actions:**
+- Insert required glyphs into panel
+- Puzzle resolves → cave door opens
+
+**Result:**
+- Collider to next scene enabled
+- Transition → MachinesCave_01_01
+
+**Colliders:**
+- `Collider_To_MachinesCave_01_01` (enabled on puzzle completion)
+
+---
+
+#### **MachinesCave_01_01 — Hub Room (State 1)**
+
+**Purpose**: Establish entry; no escape possible; reinforce one-way progression.
+
+**On Load:**
+- Cave door closing SFX plays
+- Mind Log: *"The door sealed behind me. There's no going back."*
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_01` (enabled - forward only)
+- `Collider_To_MachinesCave_00` (disabled - no escape)
+
+---
+
+#### **MachinesCave_02_01 — Projection Room (State 1)**
+
+**Purpose**: First story sequence; projection is highly distorted.
+
+**On Load:**
+- Triglyph Monster projection visible (heavily distorted/glitched)
+- Projection machine: non-interactable (just visual)
+- Story screen collider: interactable
+
+**Player Actions:**
+- Examines projection → notification: *"The image looks distorted... broken?"*
+- Activates story screen → **Press E**
+- Story Sequence 1 plays (full dialogue, animations, effects)
+- Codex switches to Mind Logs page
+
+**Result:**
+- Story complete → fade transition
+- Collider to exit enabled
+- Transition → MachinesCave_01_02
+
+**Colliders:**
+- `Collider_To_MachinesCave_01_02` (enabled after story completes)
+- `Collider_To_MachinesCave_01_01b` (enabled for backtracking)
+
+---
+
+#### **MachinesCave_01_01b — Hub Room (State 1B - Backtrack Safe)**
+
+**Purpose**: Allow player to return to story room without re-triggering narrative.
+
+**On Load:**
+- No Mind Log
+- No dialogue
+- Visually identical to 01_01
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_01` (enabled - to story)
+- No other exits
+
+---
+
+#### **MachinesCave_01_02 — Hub Room (State 2)**
+
+**Purpose**: Reinforce disorientation after first story.
+
+**On Load:**
+- Mind Log: *"How did I get back here? I don't remember walking..."*
+- This is a different scene, but player perceives it as "the same hallway"
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_02` (enabled - forward)
+
+---
+
+#### **MachinesCave_02_02 — Projection Room (State 2)**
+
+**Purpose**: Second story sequence; projection is less distorted.
+
+**On Load:**
+- Triglyph Monster projection visible (clearer than before)
+- Story screen collider: interactable
+
+**Player Actions:**
+- Activates story screen → Story Sequence 2 plays
+- Emotional impact: memories of Ravi and Nima become more coherent
+
+**Result:**
+- Story complete → fade transition
+- Transition → MachinesCave_01_03
+
+**Colliders:**
+- `Collider_To_MachinesCave_01_03` (enabled after story)
+- `Collider_To_MachinesCave_01_02b` (enabled for backtracking)
+
+---
+
+#### **MachinesCave_01_02b — Hub Room (State 2B - Backtrack Safe)**
+
+**On Load:**
+- No Mind Log
+- Visually identical to 01_02
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_02` (enabled - to story)
+
+---
+
+#### **MachinesCave_01_03 — Hub Room (State 3)**
+
+**Purpose**: Continue emotional pressure.
+
+**On Load:**
+- Mind Log: *(optional deeper reflection)*
+- Door still closed
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_03` (enabled - forward)
+
+---
+
+#### **MachinesCave_02_03 — Projection Room (State 3)**
+
+**Purpose**: Third story sequence; projection nearly fully resolved.
+
+**On Load:**
+- Triglyph Monster projection visible (nearly clear, slight distortion remaining)
+- Story screen collider: interactable
+
+**Player Actions:**
+- Activates story screen → Story Sequence 3 plays
+- Final emotional beat before revelation
+
+**Result:**
+- Story complete → fade transition
+- Transition → MachinesCave_01_04
+
+**Colliders:**
+- `Collider_To_MachinesCave_01_04` (enabled after story)
+- `Collider_To_MachinesCave_01_03b` (enabled for backtracking)
+
+---
+
+#### **MachinesCave_01_03b — Hub Room (State 3B - Backtrack Safe)**
+
+**On Load:**
+- No Mind Log
+- Visually identical to 01_03
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_03` (enabled - to story)
+
+---
+
+#### **MachinesCave_01_04 — Hub Room (State 4)**
+
+**Purpose**: Final emotional pressure before the revelation room.
+
+**On Load:**
+- Mind Log: *"Am I ever going to escape this cave?"*
+- Player feels trapped and desperate
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_04` (enabled - forward)
+
+---
+
+#### **MachinesCave_02_04 — Projection Room (Final State)**
+
+**Purpose**: Glyph collection and Velinor ghost vision happen here.
+
+**On Load:**
+- Triglyph Monster projection visible (FULLY RESOLVED - no distortion)
+- Projection machine: **interactable**
+- Story screen collider: **disabled** (no dialogue, only interactions)
+
+**Player Actions:**
+
+1. **First Interaction:**
+   - Activates projection machine → **Press E**
+   - Projection fades out (1.5 second transition)
+   - Glyph of Contained Loss appears (floating, bobbing)
+   - Notification: *"A glyph appears in place of the projection."*
+
+2. **Second Interaction:**
+   - Activates glyph → **Press E**
+   - Glyph collected (disappears from world)
+   - Mind Log: *"I collected it. The fragment is whole."*
+
+3. **Sequence Trigger:**
+   - Young Velinor (ghost form) appears
+   - She reaches out desperately
+   - She glitches and dissipates
+   - Cave door opening SFX plays (signal: escape is now possible)
+
+**Result:**
+- Collider to exit enabled
+- Transition → MachinesCave_01_05
+
+**Colliders:**
+- `Collider_To_MachinesCave_01_05` (enabled after glyph collected)
+- `Collider_To_MachinesCave_01_04b` (enabled for backtracking)
+
+---
+
+#### **MachinesCave_01_04b — Hub Room (State 4B - Backtrack Safe)**
+
+**On Load:**
+- No Mind Log
+- Visually identical to 01_04
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_04` (enabled - to story)
+
+---
+
+#### **MachinesCave_02_04b — Projection Room (Final State B - Backtrack Safe)**
+
+**Purpose**: Safe version of final projection room for backtracking.
+
+**On Load:**
+- Triglyph Monster projection visible (fully resolved)
+- **No glyph** in this scene
+- **No ghost** in this scene
+- **No collider to progress**
+
+**Colliders:**
+- `Collider_To_MachinesCave_01_05` (enabled - back only)
+
+**Why separate?** If player backtracks and returns to this scene, they don't re-collect the glyph or re-experience the ghost. The narrative has moved past this point.
+
+---
+
+#### **MachinesCave_01_05 — Hub Room (Exit State)**
+
+**Purpose**: Final decision point; allow exit or safe return to final projection room.
+
+**On Load:**
+- Door still closed (but can be passed now)
+- Two collider options are active
+
+**Colliders:**
+- `Collider_To_MachinesCave_02_04b` (up - back to final projection)
+- `Collider_To_MachinesCave_00_02` (down - exit cave)
+
+---
+
+#### **MachinesCave_00_02 — Cave Exit**
+
+**Purpose**: Finalize cave sequence; prevent re-entry.
+
+**On Load:**
+- Cave door closes behind player
+- Mind Log: *"I left the cave. The door sealed behind me. I can't go back."*
+- Triglyph puzzle collider: disabled
+- Sealed cave overlay: enabled
+
+**Result:**
+- Player cannot re-enter cave
+- Velinor-Unity world progression advances
+
+---
+
+### Why This Structure Works
+
+| Feature | Benefit |
+|---------|---------|
+| **4 hub + 4 B-hubs** | Player can backtrack freely without resetting story |
+| **4 projection rooms** | Each state shows progression of projection clarity |
+| **01_05 exit state** | Clear decision point for leaving without narrative lock-in |
+| **00_02 sealed exit** | Prevents cave re-entry; psychological closure |
+| **Mind Logs at each hub** | Validates player's disorientation; explains time skip |
+| **Glyph in final room** | Collection happens where it narratively belongs |
+| **Ghost in final room** | Vision and glyph are inseparable; no replay possible |
+
+### Implementation Checklist
+
+- [ ] Create folder `/Assets/Scenes/MachinesCave/`
+- [ ] Create all 16 scene files (follow naming convention exactly)
+- [ ] Build MachinesCave_00 (entrance with puzzle)
+- [ ] Build MachinesCave_01_01 (hub 1)
+- [ ] Duplicate 01_01 → 01_02, 01_03, 01_04, 01_05 (update colliders)
+- [ ] Build MachinesCave_02_01 (story 1 with distorted projection)
+- [ ] Duplicate 02_01 → 02_02, 02_03, 02_04 (update projection clarity)
+- [ ] Create all B-versions (exact duplicates, minimal colliders)
+- [ ] Attach `ScenePortal.cs` to all colliders
+- [ ] Attach `CaveStateManager.cs` to hub rooms
+- [ ] Attach `GlyphCollectionSequence.cs` to MachinesCave_02_04
+- [ ] Wire Mind Log system
+- [ ] Test full progression flow
+- [ ] Test backtracking at each stage
+
+---
+
 ## Next Steps
 
 1. Create the folder structure in `Assets/Scenes/`
