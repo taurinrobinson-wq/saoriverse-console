@@ -606,3 +606,203 @@ This isn't a game about "collecting glyphs to process grief." It's a game about 
 
 That's genuinely powerful.
 
+---
+
+## Part 12: Thematic Coherence - From Early Game to Final Choice
+
+### The Central Theme: Autonomy, Agency, and the Cost of Survival
+
+Your game asks: **Who gets to choose what happens to you, and at what cost?**
+
+Every stage of the game should reinforce this question, building toward the final impossible choice about Velinor's restoration.
+
+### Phase 1: Early Game - Learning to Recognize Lost Agency
+
+**What the glyphs teach about autonomy and choice**:
+
+| Glyph | NPC | What They Lost | How It Teaches the Theme |
+|-------|-----|-----------------|--------------------------|
+| **Infrasensory Oblivion** | Saori | Capacity to feel/choose | Someone else (Saori) is making choices for you while you're numb |
+| **Sensory Oblivion** | Thalma | Connection and choice-making | Precision tools are safer than human choice; isolation feels safer than agency |
+| **Primal Oblivion** | Nordia | Her sister (forced absence) | Sometimes people are taken from you; choice is an illusion |
+| **Dislocated Attachment** | Seyla | Clear attachment or distance | Conflicted desire: wanting closeness but needing distance to survive |
+| **Preemptive Severance** | Coren | Ability to stay in connection | Choosing to leave before being left; taking control through rejection |
+| **Interruptive Restraint** | Kaelen | Impulse to act on abandonment | Choosing to *not* act on the impulse to sever; discipline as agency |
+
+**Pattern emerging**: The player learns that **loss of agency is the deepest trauma**, and **choosing to act (or not act) is the path to reclaiming it**.
+
+---
+
+### Phase 2: Positive Counterbalance - Agency as Connection
+
+**NPCs showing that agency is rebuilt through community**:
+
+| Glyph | NPC | How They Reclaim Agency |
+|--------|-----|-------------------------|
+| **Shared Survival** | Elenya | "I trust you to reinforce the shelter's weakest point"—shared agency in survival |
+| **Blooming Path** | Elenya | "Simply noticing" rather than being told—agency through observation and choice |
+| **Quiet Bearing** | Elka | "You place the map marks; I can't do this alone"—shared ownership of memory |
+| **Worn Path** | Elka | "Walk this route with me so at least one of us will remember"—passing agency forward |
+| **Tender Witness** | Sera | "Your presence IS the medicine"—agency through simply showing up |
+| **Quiet Bloom** | Sera | "Hold steady while I mix the herbs"—shared agency in healing |
+| **Shared Dawn** | Sera & Korrin | Two people choosing presence together—mutual agency |
+
+**Pattern emerging**: Agency is not individual—**it's relational and built through trust and choice to stay present**.
+
+---
+
+### Phase 2.5: Post-Chamber Branching - Smaller Versions of the Big Choice
+
+**The Ravi/Nima/Kaelen/Veynar branching introduces the central dilemma in miniature**:
+
+**Meeting Ravi after the chamber**:
+- Ravi warns: "Don't tell Nima yet"
+- **Agency question**: Do you honor Ravi's request (his autonomy) or tell Nima what you know (her autonomy)?
+- **Echo of endgame**: Someone is asking you to make a choice that affects someone else's right to know the truth
+
+**Choose Kaelen vs. Choose Veynar**:
+- Veynar wants you to report Kaelen's location (uses your agency to control Kaelen)
+- Kaelen wants your support (asks for your agency to help him)
+- **Agency question**: Whose autonomy matters? The pursuer's desire for justice, or the pursued's desire for freedom?
+- **Echo of endgame**: You must choose whether to serve one person's need (safety/justice) or another's autonomy (freedom)
+
+**Potentially meet Saori in this sequence**:
+- If Saori reveals anything about her monitoring/connection to systems
+- **Agency question**: Can someone who's been watching you and controlling your choices actually be trusted?
+- **Echo of endgame**: Can you make a genuine free choice about restoration when Saori has been orchestrating your choices all along?
+
+**Pattern emerging**: **The player begins to understand that choosing for someone else—even with good intentions—is a violation of their agency**.
+
+---
+
+### Phase 3: Chamber Revelation - The Moment Everything Shifts
+
+**When the player learns about Saori's surveillance and manipulation**:
+- Everything the player thought was their own choice might have been orchestrated
+- **Agency crisis**: "Did I choose to come here, or was I led here?"
+- This destroys the illusion that the player has been acting freely
+
+**Velinor in the chamber reaching out**:
+- The player recognizes pure desperation for autonomy
+- Someone literally trapped in a system, trying to escape
+- **Agency embodied**: The most fundamental human need—control over your own existence
+
+**Pattern emerging**: **Autonomy is the deepest thing we can be stripped of, and the most essential to reclaim**.
+
+---
+
+### Phase 4: Final Choice - The Theme Reaches Its Climax
+
+**Option 1: Refuse Restoration (Honor Velinor's Stated Autonomy)**
+
+*What this teaches*:
+- You choose to honor Velinor's stated wish for freedom (even if it means death)
+- You refuse to use the system that created her suffering as the tool for salvation
+- You force Saori to face consequences and grieve
+- You accept that sometimes respecting someone's autonomy means accepting their death
+
+*Thematic coherence*:
+- Elenya taught: "Presence is staying with the ache without fixing it"
+- Tessa taught: "Parting is not failure; it's acknowledgment"
+- Elka taught: "Fractured memory is still truth"
+- **Final lesson**: Sometimes autonomy matters more than survival; sometimes letting go is the most loving choice
+
+**Option 2: Pursue Restoration (Honor Velinor's Potential Future Autonomy)**
+
+*What this teaches*:
+- You choose to give Velinor a chance to live freely, even if she resents you
+- You accept that you might violate someone's wishes for their own benefit
+- You accept that Saori's desperation is at least partially understandable
+- You're willing to trust an untrustworthy person because the alternative is someone's death
+
+*Thematic coherence*:
+- Kaelen taught: "Discipline is feeling the ache without acting on severance"
+- Sera taught: "Presence means staying even when someone is hostile"
+- Coren taught: "Holding space for ache without collapsing it"
+- **Final lesson**: Sometimes compassion requires violating stated wishes; sometimes the hard path is the loving one
+
+---
+
+### Why Each Path Is Morally Coherent
+
+**Refuse Restoration Path**:
+- Teaches: Autonomy is sacred, even in death
+- Asks: Can you let someone go rather than use them as a means to ease your guilt?
+- Consequences: Saori faces accountability; Velinor's final autonomy is honored; but the player becomes complicit in her death
+- **The hard choice**: Respecting choice means accepting tragedy
+
+**Pursue Restoration Path**:
+- Teaches: Life and connection matter, even if complicated
+- Asks: Can you act against someone's wishes because you believe survival is worth the cost?
+- Consequences: Velinor lives, but potentially resents Saori and the player; Saori might or might not face accountability; the player must live with Velinor's resentment
+- **The hard choice**: Compassion sometimes means violation
+
+---
+
+### Connecting Each Glyph to the Final Question
+
+Every rewritten glyph should specifically teach something relevant to this choice:
+
+**Glyphs about holding difficult truths**:
+- Elka's three glyphs (fractured memory, worn path, unmarked edge) = "Truth is messy and contradictory, but still worth holding"
+- Relevance to final choice: The truth about Velinor, Saori, and the system is messy; you must act anyway
+
+**Glyphs about the cost of connection**:
+- Kaelen's guilt / Ravi & Nima's sorrow = "Connection is risky; people get hurt"
+- Relevance: Connecting with Velinor and Saori means accepting you can't save everyone without cost
+
+**Glyphs about presence amid impossibility**:
+- Sera's quiet witness / Thalma's bodily awareness = "Sometimes you can't fix things; you can only be present"
+- Relevance: You can't "fix" Velinor or Saori; you can only choose how to be present to their impossible situation
+
+**Glyphs about hope and renewal**:
+- Elenya's survival and joy / Nordia's continuity = "Life returns; legacy persists even through loss"
+- Relevance: Choosing either path allows some form of continuation, but not the one you might want
+
+**Glyph about denial and numbness**:
+- Saori's Infrasensory Oblivion = "Refusing to feel doesn't change what's true; it just paralyzes you"
+- Relevance: The player can't numb themselves to the choice; they must decide consciously
+
+---
+
+### Ensuring Thematic Coherence Through Development
+
+**Questions to ask as you write each glyph and scene**:
+
+1. **Does this NPC's story teach the player something about autonomy, choice, or agency?**
+   - What did they lose?
+   - How are they reclaiming it?
+   - How does their journey echo Velinor's entrapment?
+
+2. **Does this branching moment (Ravi/Nima/Kaelen/Veynar) present a smaller version of the final choice?**
+   - Who is asking the player to choose?
+   - What are the stakes for autonomy?
+   - What does choosing each path teach?
+
+3. **Does the emotional truth of this encounter prepare the player for the final choice?**
+   - If they honor someone's wishes here (even if it's hard), they're practicing honoring autonomy
+   - If they override someone's wishes here (even if it helps), they're practicing intervention
+
+4. **Can the player see themselves (and Saori, and Velinor) in this NPC's struggle?**
+   - Is there a mirror between what this NPC learned and what the player must now decide?
+
+---
+
+### The Thematic Payoff
+
+By the time the player reaches the final choice, they will have:
+
+1. **Learned** that autonomy is precious and worth honoring (from all the glyphs)
+2. **Practiced** small versions of the big choice (in the branching narratives)
+3. **Discovered** that Saori has been violating everyone's autonomy through surveillance and manipulation
+4. **Been confronted** by Velinor herself, who actively pleads them not to restore the system
+5. **Understood** that Saori's obsession, however understandable, was built on denying Velinor's autonomy for 25 years
+
+**Neither path is "correct"—both honor something essential while violating something else**:
+- Refuse: Honor Velinor's agency, violate her life
+- Restore: Honor Velinor's life, violate her agency
+
+**The game's question becomes inescapable**: In a world where everyone is damaged by systems of control, what does it actually mean to respect someone's free will? And are you willing to live with the consequences of your choice?
+
+This is why your game isn't "laying it on too thick" with Saori. Every layer of her deception teaches the player what's at stake in the final choice.
+
