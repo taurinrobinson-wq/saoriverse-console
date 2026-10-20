@@ -18,11 +18,20 @@ EditorBuildSettings:
     path: Assets/Scenes/DesertToMarketTrek_01.unity
     guid: 4fc14e23bfe90ab4c86b398de6fb1f10
   - enabled: 1
-    path: Assets/Scenes/InsideMarket_00.unity
-    guid: 186da5e04c0ec124f8754c17a699c763
+    path: Assets/Scenes/InsideMarket_00_01.unity
+    guid: 3003fc9ab3398b043a462db46fb1b7f3
   - enabled: 1
-    path: Assets/Scenes/InsideMarket_01.unity
-    guid: 6289114d9e8b1eb4b9e7d9da00f3eae4
+    path: Assets/Scenes/InsideMarket_00_02.unity
+    guid: da36891b6615fb645898bddc436506dc
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_00_03.unity
+    guid: 64303fcab08f75444a0a3eceb186b81a
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_01_01.unity
+    guid: 4a45b889f2bb0854781f6c4253a87715
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_01_02.unity
+    guid: 17c7c7d7fdd57cf4a825063b8fa19af5
   - enabled: 1
     path: Assets/Scenes/InsideMarket_02.unity
     guid: 34818071c367c5a4d8216635be20d219

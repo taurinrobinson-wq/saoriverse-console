@@ -14,6 +14,10 @@ public class StartDialogueOnTrigger : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private bool lockPlayerMovement = true;
 
+    [Header("Completion Gating")]
+    [SerializeField] private string completionFlag; // Flag to set when dialogue ends (e.g., "ravi_nima_dialogue_complete")
+    [SerializeField] private bool setCompletionFlag = false; // Enable to set completion flag
+
     private bool hasTriggered;
 
     private void OnTriggerEnter(Collider other)
@@ -58,6 +62,13 @@ public class StartDialogueOnTrigger : MonoBehaviour
 
     private void HandleDialogueEnded()
     {
+        // Set completion flag if configured
+        if (setCompletionFlag && !string.IsNullOrEmpty(completionFlag))
+        {
+            GameFlags.Set(completionFlag, true);
+            Debug.Log($"[StartDialogueOnTrigger] Set completion flag: {completionFlag}");
+        }
+
         if (lockPlayerMovement)
         {
             var player = GameObject.FindGameObjectWithTag("Player");
