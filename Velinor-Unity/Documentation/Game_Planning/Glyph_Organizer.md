@@ -133,7 +133,7 @@ This allows any areas that are unmarked to be automatically mapped and re-mapped
 
 ---
 
-### Kaelen - Petty Thief
+### Nima - (Ravi's Partner, Grieving Parent)
 
 **Category**: Legacy
 
