@@ -253,6 +253,29 @@ The glyph activates when the player realizes that legacy is not ancestry or ritu
 
 ---
 
+### Ravi - Market Watchman
+
+**Category**: Sovereignty
+
+**Theme**: Boundaries, choice, clarity
+
+**Glyph Name**: Glyph of Marked Boundaries
+
+**Transcendance Glyph**: Glyph of Transmuted Abandonment
+
+**Location**: Collapsing trade route
+
+**Storyline**:
+Post-triglyph, Ravi admits he trusts too quickly to keep despair at bay. Veynar's rigid vigilance unsettles him: Veynar sees danger everywhere, while Ravi sees nuance. The codex pulses, directing the player to seek the Glyph of Marked Boundaries.
+
+Following the signal, the player finds Veynar sealing off an active path and dismissing Ravi's open-trail markers as fatal softness. "Boundaries are the only thing that keep grief from repeating," he warns. Between their opposing markers, the player activates the glyph pedestal.
+
+Returning the glyph, the player speaks to Ravi with firsthand experience of Veynar's stance. Ravi realizes blind trust invites ruin, yet Veynar's walls kill living connection. Grounded by the player's steadiness, he resolves to choose trust deliberately rather than collapse into it. The glyph reflects the player's own journey: sovereignty is not isolation, but choosing how and when to let others in. The player leaves with a question: should they trust Veynar's judgment, or be wary of what he is trying so hard to keep others away from?
+
+**Status**: Yes
+
+---
+
 ### Ravi & Nima (together)
 
 **Category**: Ache
@@ -408,6 +431,27 @@ The glyph activates when the player feels the same quiet ache in her chest — t
 
 **Storyline**:
 Thalma works with fine gears, coiled wire, and cold bronze, where precision feels safer than people. Before the collapse she had quietly clicked with another engineer, sensing the connection only through the absence of friction; when they were reassigned, the loss registered as a bodily disturbance she never understood. Now, in her alcove, human interaction still triggers that faint echo. When the player hesitates or pulls back, Thalma’s fingers lock around her tools and a hollow thud settles behind her ribs—the involuntary brace of someone expecting to be left. This glyph marks Stage 2: abandonment sensed as a subtle bodily signal, felt but not yet named. The player mirrors this early ache, experiencing her parents’ absence as a flicker beneath awareness.
+
+**Status**: Yes
+
+---
+
+### Nima - Community Leader
+
+**Category**: Presence
+
+**Theme**: Touch, silence, witness
+
+**Glyph Name**: Glyph of Quiet Return
+
+**Transcendance Glyph**: Glyph of Hopeful Renewal
+
+**Location**: Market outskirts
+
+**Storyline**:
+After the player returns from the triglyph chamber and reveals how the marketplace quietly supported Nima, Ophina, and Ravi, Nima is overwhelmed by guilt. Once a central pillar of community life, she now feels undeserving of belonging after shutting everyone out in her grief. The codex updates, directing the player to seek the Glyph of Quiet Return.
+
+Even after the player recovers and brings it to her, Nima remains convinced she has forfeited her place. Nearby, a distraught stranger refuses comfort from anyone in the crowd, yet keeps glancing toward Nima. Recognizing the same hollow ache she carried for a year, Nima instinctively sits beside them in silence. The stranger finally speaks, confiding their loss. In that quiet exchange, Nima understands that her grief does not disqualify her mission — it deepens it. Watching her, the player senses their own path toward belonging may be unfolding as well.
 
 **Status**: Yes
 

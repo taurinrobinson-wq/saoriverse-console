@@ -797,7 +797,128 @@ Every stage of the game should reinforce this question, building toward the fina
 
 ---
 
-### Connecting Each Glyph to the Final Question
+---
+
+## Part 13: Character Deep Dive - Veynar's Hypervigilant Rigidity & the Fragmented Mind
+
+### The Inverse of Saori: Different Trauma Responses to Lost Autonomy
+
+**Saori's response to trauma**: Infrasensory Oblivion → numbness → can't feel the gap in her own mind → denial as survival mechanism
+
+**Veynar's response to trauma**: Hypervigilant rigidity → constant threat detection → can't trust the gap in his own mind → control as survival mechanism
+
+Both lost autonomy over their own consciousness due to the Corelink collapse, but where **Saori shuts down internal sensation**, **Veynar overactivates external threat monitoring**.
+
+### Veynar's Wound: Missing Mental Pieces
+
+**What the Corelink collapse took from Veynar:**
+- Unknown portions of his memory or personality
+- He doesn't know WHAT he's missing (like a phantom limb, but he can't name the limb)
+- This unknown void triggers constant anxiety: *What am I not aware of? Who am I without these pieces?*
+
+**How this manifests as rigidity:**
+- If he can't trust his own mind, he CAN control his external environment
+- Rigid rules, sealed borders, clear boundaries = zones of certainty
+- If everything outside is orderly and predictable, the chaos inside is more manageable
+- Distrust becomes a protective reflex: "Everyone could be lying because I can't trust my own judgment"
+
+**Why he antagonizes Kaelen and Drossel:**
+- Criminals represent *unpredictability*—the thing he fears most
+- Their freedom of movement, their bending of rules = chaos he cannot control
+- Capturing them isn't just law enforcement; it's an attempt to restore order to a world that feels fundamentally chaotic *inside his own mind*
+
+### Ravi as the Opposite Coping Mechanism
+
+**Ravi's wound**: Also likely affected by the collapse, but his response is the inverse of Veynar's
+- Instead of hypervigilance, Ravi chooses **trust and connection** to combat the despair
+- "I trust too quickly to keep despair at bay" = **Ravi actively chooses blindness as a survival strategy**
+- Where Veynar tries to see *everything*, Ravi tries to see *only the good*
+
+**The Glyph of Marked Boundaries as their nexus:**
+- Veynar's sealing-off markers represent control, fear, isolation
+- Ravi's open-trail markers represent connection, hope, risk
+- The player witnesses this as a fundamental incompatibility of coping strategies
+- **Thematic truth**: Neither strategy is "right"—both are trauma responses to the same loss of autonomy
+- Ravi learns from the player's steadiness that there's a middle path: **deliberate trust**, not blind trust
+- Ravi's glyph isn't about Veynar being "wrong"—it's about Ravi learning to *choose* trust consciously rather than collapsing into it
+
+### Veynar's Role in the Autonomy Theme
+
+**Why Veynar deserves equal narrative weight to Kaelen and Saori:**
+
+1. **He represents a different trauma response**: Rigidity, control, hypervigilance
+   - The player has learned about numbness (Saori), guilt (Kaelen/Ravi/Nima), and grief
+   - Veynar adds the fear dimension: fear of the unknown, fear of chaos, fear of lost self
+
+2. **He embodies the player's own fear**: "What if I can't trust my own judgment?"
+   - By the time the player meets Veynar, they've learned to question Saori's trustworthiness
+   - But Veynar forces the player to ask: *Can I trust myself?* (The deeper question)
+
+3. **He is a test of empathy and autonomy**:
+   - The player can dismiss Veynar as "just a rigid antagonist"
+   - **Or** the player can recognize him as someone doing his best with an incomplete self
+   - The player's choice here (trust Veynar's judgment or be wary of his hidden agenda) is a **miniature rehearsal of the final choice**
+   - Just as with Saori: Can someone who's damaged and afraid be trusted to make decisions? Should their trauma override their power?
+
+4. **He could have a redemption arc**: 
+   - What if collecting glyphs doesn't just heal the Transmuted Abandonment pathway, but also begins to heal Veynar?
+   - What if understanding the glyphs—seeing how trauma manifests differently across people—helps Veynar understand his own rigidity as a symptom, not a solution?
+   - The player's journey could become a mirror for Veynar's own potential transformation
+
+### Veynar in the Branching Narrative
+
+**The question Veynar presents**:
+- "Should you trust Veynar's judgment, or be wary of what he is trying so hard to keep others away from?"
+- This isn't just about Kaelen; it's about Veynar himself
+- **What is Veynar keeping away from?** His own fragmented mind? His inability to control the chaos inside?
+
+**Potential story beats**:
+1. **Player encounters Veynar actively sealing borders, dismissing Ravi's open-trail approach**
+   - Veynar's rigidity is presented as unreasonable
+   - Player activates Glyph of Marked Boundaries
+2. **Player learns Veynar's pursuit of Kaelen/Drossel isn't just law enforcement**
+   - It's an obsession rooted in fear
+   - The player can recognize this as trauma, or judge him for it
+3. **Player must decide**: 
+   - Help Veynar apprehend Kaelen (serves Veynar's need for control/closure)?
+   - Warn Kaelen away (honors Kaelen's autonomy/freedom)?
+   - Try to help Veynar understand his own rigidity (attempts healing)?
+
+**The autonomy lesson**:
+- Helping Veynar gain control = validating his trauma response as "good"
+- Helping Kaelen escape = honoring his autonomy, but abandoning Veynar's struggle
+- Understanding Veynar = recognizing his humanity without enabling his rigidity
+- **This parallels the final choice perfectly**: You can't save everyone without cost; you must choose what matters most
+
+---
+
+### Everyone in This Game Lost Autonomy Over Their Own Mind
+
+**The collapse affected everyone**, either directly (with an implant) or indirectly (knowing someone who had one):
+
+| Character | Trauma Type | Coping Response | Autonomy Cost |
+|-----------|-----------|-----------------|---------------|
+| **Saori** | Direct (implant) | Denial/numbness | Can't feel her own guilt or grief |
+| **Kaelen** | Indirect (witnessed death) | Withdrawal/preemptive severance | Isolating himself to avoid further loss |
+| **Ravi** | Indirect (loss of daughter) | Blind trust/collapse into connection | Can't discern who/what to trust |
+| **Nima** | Indirect (loss of daughter) | Guilt/unworthiness | Convinced she doesn't deserve belonging |
+| **Veynar** | Direct or Indirect? (unclear) | Hypervigilance/rigidity | Can't trust his own judgment/mind |
+| **Thalma** | Direct or Indirect? (unclear) | Precision/isolation | Treats tools as safer than people |
+| **Seyla** | Indirect (fragmented community) | Conflicted attachment | Wants closeness and distance simultaneously |
+| **Nordia** | Indirect (loss of sister) | Searching/impossible hope | Clinging to people who are already gone |
+
+**The common thread**: **Everyone is trying to regain autonomy in ways that ironically limit it** (numbness, control, isolation, blind trust, perfectionism, conflict).
+
+**What the glyphs offer**: Not a "cure," but a **reframing**—recognizing the response, understanding why they chose it, and practicing a different way forward.
+
+**Veynar's role in this ecosystem**:
+- He represents the control-based response (rigid structure to compensate for inner chaos)
+- He's not "the antagonist"; he's another person doing their best with incomplete agency
+- The player's ability to see Veynar's humanity (while not excusing his rigidity) is preparation for understanding Saori's desperation (while not excusing her manipulation)
+
+---
+
+
 
 Every rewritten glyph should specifically teach something relevant to this choice:
 
