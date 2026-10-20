@@ -496,25 +496,43 @@ Saori has systems connected to all Corelink systems, including the Triglyph cham
 
 Her denial ("I don't know who that was") is not reactive. It's **pre-calculated deception**.
 
-**This transforms her denial from psychological break into something more disturbing: active manipulation.**
+**This transforms her denial from psychological break into something more subtle and philosophically troubling: not puppet-mastery, but calculated observation.**
 
-She's been monitoring the player's progress. Watching them unknowingly collect fragments of Velinor's consciousness. Waiting for the moment when they've collected enough. All while maintaining the lie that she doesn't know anything.
+She's been monitoring the player's progress. Watching them collect fragments of Velinor's consciousness. But not directing them—just observing what they freely choose to do.
+
+**Why this distinction matters**:
+
+The player's agency is completely genuine:
+- Every choice to visit an NPC is theirs
+- Every conversation and emotional connection is real
+- Every decision to collect a glyph is autonomous
+- The player builds authentic relationships through genuine exploration
+
+But Saori is betting on human nature. She knows that:
+- If someone finds a tool (the codex), they'll use it
+- If someone encounters NPCs in pain, they'll try to help
+- If someone finds glyphs, they'll collect them
+- If someone reaches the chamber, they'll confront what they find
+
+Saori didn't need to puppet the player. She just needed to plant the seed and watch what you'd do with it.
 
 **Why she can't reveal this surveillance**:
-1. Admitting she's been watching destroys any trust
+1. Admitting she's been watching—even without directing—feels like violation
 2. Revealing her connection to the Corelink systems exposes her role in the collapse
-3. Revealing that she *knew* what the player saw in the chamber means admitting she *chose* not to act
-4. She needs the player to continue believing they're acting freely—otherwise why would they keep collecting glyphs?
+3. Revealing that she *knew* what the player would do makes her complicit in letting it happen
+4. She needs the player's choices to remain psychologically "free" in the player's own mind, even if Saori anticipated them
 
 **The player experiences this as**: "I told Saori what I saw, and she denied knowing anything. She seemed numb, isolated, grief-stricken."
 
-**The reality**: Saori had already watched the entire encounter. She chose her words carefully. She maintained her cover while the player remained unaware they were being monitored.
+**The reality**: Saori had already watched the entire encounter. She anticipated you would reach that chamber. She chose her words carefully, denying knowledge while knowing exactly what happened.
+
+This makes the violation more philosophically complex: **Is it less manipulative if Saori merely observed your free choices, knowing in advance what you'd choose? Or is the violation the same—that she knew, and she wanted you to do this, and she's been watching the entire time?**
 
 This makes Saori's infrasensory oblivion even more complex:
 - She's numb to her own guilt (psychological layer)
 - She's denying what she witnessed (psychological layer)
 - She's deliberately lying about monitoring (active deception layer)
-- She's orchestrating the player's quest without consent (manipulation layer)
+- She set conditions in motion knowing what you'd choose, but without controlling it (orchestration through setup, not puppetry)
 
 - She abandoned her own capacity to *feel* what Velinor is going through
 - She abandoned her responsibility to tell the truth
@@ -533,34 +551,35 @@ Every other NPC's trauma traces back to the Corelink collapse. Saori's trauma tr
    - A late-game twist that recontextualizes everything?
    - A discovery that Saori has been monitoring them all along via the codex device?
 
-2. **What happens when the player knows?** Do they:
-   - Confront Saori about the monitoring?
-   - Confront her about the manipulation?
+2. **What happens when the player knows about the monitoring?** Do they:
+   - Confront Saori about watching their progress?
+   - Confront her about not revealing what she knew?
    - Decide to help or harm her?
    - Choose to continue the quest or abandon it?
    - Get a choice about whether Velinor stays in the system or escapes?
 
 3. **Does Saori's denial ever break?** If the player confronts her with the truth, does she:
    - Admit she's been watching all along?
-   - Reveal that she knew exactly what they saw in the chamber?
+   - Reveal that she anticipated they would reach the chamber?
+   - Explain why she couldn't reveal what she knew?
    - Finally feel her grief and guilt?
    - Have a psychological breakdown?
    - Defend her actions as the only way to save Velinor?
-   - Justify the deception as necessary?
+   - Justify the deception as necessary for the player to act freely?
 
 4. **What is Velinor's actual state?** The player will want to know:
    - Is Velinor salvageable, or is she too fragmented?
    - Does reassembling her consciousness = freeing her, or = trapping her more permanently?
    - Can Velinor make choices about her own fate, or is she too fragmented to choose?
-   - How much does Velinor know about Saori's monitoring and manipulation?
+   - How much does Velinor know about Saori's monitoring and waiting?
 
 5. **Does the player realize they were being watched?** Can they discover:
    - That the codex device has two-way communication to Saori?
-   - That Saori knows their location at all times?
-   - That Saori knew about the chamber before they mentioned it?
-   - That the entire questline was orchestrated by her surveillance?
+   - That Saori knows their location and actions in real-time?
+   - That Saori anticipated they would reach the chamber and beyond?
+   - That Saori set the conditions but didn't control the path?
 
-These questions point to the real emotional core of your game: **not just grief and abandonment, but guilt, complicity, surveillance, and the ethics of rescue when built on deception and manipulation**.
+These questions point to the real emotional core of your game: **not just grief and abandonment, but autonomy, trust, and whether genuine agency can exist when someone is observing and anticipating your choices**.
 
 ---
 
@@ -668,8 +687,8 @@ Every stage of the game should reinforce this question, building toward the fina
 
 **Potentially meet Saori in this sequence**:
 - If Saori reveals anything about her monitoring/connection to systems
-- **Agency question**: Can someone who's been watching you and controlling your choices actually be trusted?
-- **Echo of endgame**: Can you make a genuine free choice about restoration when Saori has been orchestrating your choices all along?
+- **Agency question**: Can someone who's been watching you and anticipating your choices actually be trusted?
+- **Echo of endgame**: Can you make a genuine free choice about restoration when Saori has been observing your progress all along and set the conditions in motion?
 
 **Pattern emerging**: **The player begins to understand that choosing for someone else—even with good intentions—is a violation of their agency**.
 
@@ -677,10 +696,12 @@ Every stage of the game should reinforce this question, building toward the fina
 
 ### Phase 3: Chamber Revelation - The Moment Everything Shifts
 
-**When the player learns about Saori's surveillance and manipulation**:
-- Everything the player thought was their own choice might have been orchestrated
-- **Agency crisis**: "Did I choose to come here, or was I led here?"
-- This destroys the illusion that the player has been acting freely
+**When the player learns about Saori's surveillance**:
+- The player realizes Saori has been watching their progress all along via the codex device
+- Saori anticipated the player would reach the chamber and was observing what they did
+- **Agency question**: If someone observed your choices in advance and set the conditions knowing what you'd do, did you really choose freely?
+- **Agency crisis**: "Did I act freely, or did Saori predict and enable this path?"
+- This raises the question: Is genuine autonomy possible when someone is observing and anticipating your choices?
 
 **Velinor in the chamber reaching out**:
 - The player recognizes pure desperation for autonomy
