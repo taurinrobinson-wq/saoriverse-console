@@ -33,26 +33,21 @@ Displays a single texture floating within the projector beam. Features:
 Select the canvas and set these properties:
 
 **RectTransform:**
-- Size Delta: (192, 108) - *Small canvas size; adjust if needed*
 - Position: (0, 0, 0.5) - *Adjust Z to position image within beam*
 - Scale: (1, 1, 1)
 - Rotation: (0, 0, 0)
 
 **Canvas component:**
 - Render Mode: World Space
-- Add CanvasScaler component
-  - UI Scale Mode: Scale with Screen Size
+- Remove the Canvas Scaler component (not needed for World Space)
 
 ### Step 3: Add Projection Image
 
 1. Right-click canvas in hierarchy → UI → Raw Image
 2. Name it `ProjectionImage`
 3. Select it and configure RectTransform:
-   - Anchor Min: (0, 0)
-   - Anchor Max: (1, 1)
-   - Offset Min: (0, 0)
-   - Offset Max: (0, 0)
-   - This makes it fill the entire canvas
+   - Width: 5, Height: 5 (adjust until it looks right)
+   - This makes a small image in the projector beam
 
 ### Step 4: Add TriglyphMonsterProjector Script
 
