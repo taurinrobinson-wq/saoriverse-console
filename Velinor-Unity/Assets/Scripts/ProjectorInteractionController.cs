@@ -60,11 +60,9 @@ public class ProjectorInteractionController : MonoBehaviour
     [SerializeField] private string mindLogText_Final = "I... I don't know what just happened... the projector showed a woman I've never seen... she looked... terrified, like she was trying to get out, and then... she was just gone... This place... it feels like it was built for something I don't understand... everything feels... wrong. At least the cave door opened and I can finally leave. Maybe I should ask around and see if anyone knows anything.";
 
     [Header("Glyph Settings")]
-    [SerializeField] private string glyphName = "Contained Loss";
     [SerializeField] private Sprite glyphSprite;
 
     [Header("Stage 04 Sequence")]
-    [SerializeField] private float glyphFadeInDuration = 1f;
     [SerializeField] private float velinorSequenceDelay = 2f;
     [SerializeField] private float triglyphScreenDisplayDuration = 3f;
     [SerializeField] private GameObject triglyphScreenPanel;
@@ -200,9 +198,9 @@ public class ProjectorInteractionController : MonoBehaviour
     /// Called when player presses E while near projector
     /// Handles different flows based on current stage
     /// </summary>
-    private void OnInteractProjector(InputActionPhase phase)
+    private void OnInteractProjector(InputAction.CallbackContext context)
     {
-        if (projectorDisabled || !playerNearProjector)
+        if (!context.performed || projectorDisabled || !playerNearProjector)
             return;
 
         if (interactionState == InteractionState.None || interactionState == InteractionState.LockedDuringSequence)
@@ -307,10 +305,10 @@ public class ProjectorInteractionController : MonoBehaviour
             yield break;
         stage04SequenceComplete = true;
 
-        // 1. Fade out projector image
+        // 1. Hide and disable the projector display
         if (projectorDisplay != null)
         {
-            projectorDisplay.HideProjection();
+            projectorDisplay.gameObject.SetActive(false);
         }
 
         yield return new WaitForSeconds(1f);

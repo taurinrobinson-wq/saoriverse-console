@@ -21,7 +21,6 @@ public class ScreenInteractionController : MonoBehaviour
 
     [Header("Interaction Settings")]
     [SerializeField] private string interactionPrompt = "Press E to Access Screen";
-    [SerializeField] private float interactionDistance = 3f;
 
     [Header("Mind Log Screen")]
     [SerializeField] private GameObject mindLogPrimaryScreen;
@@ -119,9 +118,9 @@ public class ScreenInteractionController : MonoBehaviour
     /// Called when player presses E to access the screen
     /// Opens the Codex on Mind Log Primary Screen
     /// </summary>
-    private void OnAccessScreen(InputActionPhase phase)
+    private void OnAccessScreen(InputAction.CallbackContext context)
     {
-        if (!playerNearScreen || screenAccessGranted)
+        if (!context.performed || !playerNearScreen || screenAccessGranted)
             return;
 
         screenAccessGranted = true;
@@ -130,11 +129,11 @@ public class ScreenInteractionController : MonoBehaviour
         // Hide the access prompt
         HideAccessPrompt();
 
-        // Open Codex if not already open
+        // Toggle Codex if not already open
         if (codexController != null)
         {
-            codexController.OpenCodex();
-            Debug.Log("[Screen Interaction] Codex opened");
+            codexController.ToggleCodex();
+            Debug.Log("[Screen Interaction] Codex toggled");
         }
 
         // Show Mind Log Primary Screen

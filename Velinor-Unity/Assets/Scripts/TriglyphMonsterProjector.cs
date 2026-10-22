@@ -39,7 +39,7 @@ public class TriglyphMonsterProjector : MonoBehaviour
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
 
         if (projectorController == null)
-            projectorController = FindObjectOfType<ProjectorEffectController>();
+            projectorController = FindAnyObjectByType<ProjectorEffectController>();
 
         basePosition = transform.position;
 

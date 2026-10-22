@@ -13,9 +13,7 @@ public class GlyphVisualEffect : MonoBehaviour
     [SerializeField] private float particleSize = 0.08f; // Smaller for elegance
 
     [Header("Particle Movement")]
-    [SerializeField] private float spiralHeight = 2f; // Vertical spiral component
-    [SerializeField] private float spiralRadius = 0.8f; // Horizontal orbit radius
-    [SerializeField] private float orbitalSpeed = 90f; // Degrees per second
+    // Spiral animation is updated in Update() - see UpdateParticleAnimation()
 
     [Header("Glyph Appearance")]
     [SerializeField] private Color coreColor = new Color(0.0f, 0.9f, 1f, 1f); // Cyan
@@ -38,7 +36,6 @@ public class GlyphVisualEffect : MonoBehaviour
     private static Material cachedCoreMaterial;
     private static Material cachedParticleMaterial;
     private static Gradient cachedColorGradient;
-    private float emissionPhase = 0f;
 
     private void Start()
     {

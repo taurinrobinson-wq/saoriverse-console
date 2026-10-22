@@ -38,7 +38,7 @@ public class StoryScreenInteraction : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueManager = FindAnyObjectByType<DialogueManager>();
         
         // Ensure screen is hidden initially
         if (storyScreenCanvasGroup)
@@ -128,7 +128,7 @@ public class StoryScreenInteraction : MonoBehaviour
     {
         if (codexController == null)
         {
-            codexController = FindObjectOfType<CodexController>();
+            codexController = FindAnyObjectByType<CodexController>();
         }
         
         if (codexController)
