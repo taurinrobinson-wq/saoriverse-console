@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 /// - Stage 01-03: Player interacts → adds Mind Log with distorted descriptions → can interact again
 /// - Stage 04: Player interacts → final Mind Log → collects Glyph of Contained Loss → 
 ///           Velinor sequence plays → door opens → final Mind Log added
+/// - B-Variants: Projector disabled (set projectorDisabled = true in inspector)
 /// </summary>
 public class ProjectorInteractionController : MonoBehaviour
 {
@@ -25,8 +26,18 @@ public class ProjectorInteractionController : MonoBehaviour
         Stage04   // "The image looks fully resolved now... It's even smiling..."
     }
 
+    [System.Serializable]
+    public enum InteractionState
+    {
+        None,
+        CanInteract,
+        WaitingForGlyph,
+        LockedDuringSequence
+    }
+
     [Header("Stage Configuration")]
     [SerializeField] private ProjectorStage currentStage = ProjectorStage.Stage01;
+    [SerializeField] private bool projectorDisabled = false;
 
     [Header("References")]
     [SerializeField] private Collider projectorCollider;
@@ -63,10 +74,10 @@ public class ProjectorInteractionController : MonoBehaviour
     [SerializeField] private Collider sceneTransitionCollider;
 
     private bool playerNearProjector = false;
-    private bool projectorInteractionActive = false;
-    private bool stage04GlyphCollected = false;
+    private InteractionState interactionState = InteractionState.None;
+    private bool stage04ReadyForSequence = false;
+    private bool waitingForGlyphCollect = false;
     private bool stage04SequenceComplete = false;
-    private int interactionCount = 0; // Track interactions for stage 04
     private NotificationPanelController _cachedNotificationPanel;
     private MindLogController _cachedMindLogController;
 
@@ -99,8 +110,15 @@ public class ProjectorInteractionController : MonoBehaviour
 
     private void Update()
     {
+        if (projectorDisabled)
+            return;
+
 #if !ENABLE_INPUT_SYSTEM
-        if (Input.GetKeyDown(KeyCode.E) && playerNearProjector && projectorInteractionActive)
+        if (Input.GetKeyDown(KeyCode.E) && playerNearProjector && interactionState == InteractionState.CanInteract)
+        {
+            OnInteractProjector(default);
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && playerNearProjector && interactionState == InteractionState.WaitingForGlyph)
         {
             OnInteractProjector(default);
         }
@@ -108,15 +126,37 @@ public class ProjectorInteractionController : MonoBehaviour
     }
 
     /// <summary>
+    /// Centralized helper for prompt display/hiding
+    /// </summary>
+    private void SetPrompt(string text, bool active)
+    {
+        if (_cachedNotificationPanel == null)
+            return;
+
+        if (active)
+        {
+            _cachedNotificationPanel.ShowNotification(text);
+        }
+        else
+        {
+            _cachedNotificationPanel.HideNotification();
+        }
+    }
+
+    /// <summary>
     /// Called when player enters projector collider
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
+        if (projectorDisabled)
+            return;
+
         if (other.CompareTag("Player"))
         {
             playerNearProjector = true;
-            projectorInteractionActive = true;
-            ShowInteractPrompt();
+            if (interactionState == InteractionState.None)
+                interactionState = InteractionState.CanInteract;
+            SetPrompt("Press E to Interact with Projector", true);
             Debug.Log("[Projector Interaction] Player near projector");
         }
     }
@@ -126,11 +166,15 @@ public class ProjectorInteractionController : MonoBehaviour
     /// </summary>
     private void OnTriggerExit(Collider other)
     {
+        if (projectorDisabled)
+            return;
+
         if (other.CompareTag("Player"))
         {
             playerNearProjector = false;
-            projectorInteractionActive = false;
-            HideInteractPrompt();
+            if (interactionState != InteractionState.LockedDuringSequence)
+                interactionState = InteractionState.None;
+            SetPrompt("", false);
             Debug.Log("[Projector Interaction] Player left projector area");
         }
     }
@@ -140,23 +184,17 @@ public class ProjectorInteractionController : MonoBehaviour
         string prompt = "Press E to Interact with Projector";
         
         // Stage 04: After glyph collected, show "interact again" prompt
-        if (currentStage == ProjectorStage.Stage04 && stage04GlyphCollected && !stage04SequenceComplete)
+        if (currentStage == ProjectorStage.Stage04 && waitingForGlyphCollect)
         {
-            prompt = "Press E to interact with the Projector";
+            prompt = "Press E to collect the glyph";
         }
         
-        if (_cachedNotificationPanel != null)
-        {
-            _cachedNotificationPanel.ShowNotification(prompt);
-        }
+        SetPrompt(prompt, true);
     }
 
     private void HideInteractPrompt()
     {
-        if (_cachedNotificationPanel != null)
-        {
-            _cachedNotificationPanel.HideNotification();
-        }
+        SetPrompt("", false);
     }
 
     /// <summary>
@@ -165,7 +203,10 @@ public class ProjectorInteractionController : MonoBehaviour
     /// </summary>
     private void OnInteractProjector(InputActionPhase phase)
     {
-        if (!playerNearProjector || !projectorInteractionActive)
+        if (projectorDisabled || !playerNearProjector)
+            return;
+
+        if (interactionState == InteractionState.None || interactionState == InteractionState.LockedDuringSequence)
             return;
 
         Debug.Log($"[Projector Interaction] Interaction triggered - Stage: {currentStage}");
@@ -190,7 +231,7 @@ public class ProjectorInteractionController : MonoBehaviour
     private void HandleEarlyStageInteraction()
     {
         HideInteractPrompt();
-        projectorInteractionActive = false;
+        interactionState = InteractionState.None;
 
         string mindLogText = currentStage switch
         {
@@ -213,14 +254,14 @@ public class ProjectorInteractionController : MonoBehaviour
     /// </summary>
     private void HandleStage04Interaction()
     {
-        if (!stage04GlyphCollected)
+        if (!stage04ReadyForSequence)
         {
             // First interaction: Show Mind Log, prepare glyph
             HandleStage04FirstInteraction();
         }
-        else if (!stage04SequenceComplete)
+        else if (!stage04SequenceComplete && waitingForGlyphCollect)
         {
-            // Second interaction: Play sequence
+            // Second interaction: Collect glyph and play sequence
             HandleStage04SequenceStart();
         }
     }
@@ -228,7 +269,7 @@ public class ProjectorInteractionController : MonoBehaviour
     private void HandleStage04FirstInteraction()
     {
         HideInteractPrompt();
-        projectorInteractionActive = false;
+        interactionState = InteractionState.None;
 
         // Add Mind Log about the resolved image
         AddMindLog(mindLogImage_Stage04, mindLogText_Stage04_Initial);
@@ -241,22 +282,20 @@ public class ProjectorInteractionController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (_cachedNotificationPanel != null)
-        {
-            _cachedNotificationPanel.ShowNotification("Press E to collect the glyph");
-        }
-
-        projectorInteractionActive = true;
+        waitingForGlyphCollect = true;
+        stage04ReadyForSequence = true;
+        interactionState = InteractionState.WaitingForGlyph;
+        SetPrompt("Press E to collect the glyph", true);
     }
 
     private void HandleStage04SequenceStart()
     {
         HideInteractPrompt();
-        projectorInteractionActive = false;
+        interactionState = InteractionState.LockedDuringSequence;
+        waitingForGlyphCollect = false;
 
         // Collect glyph
         CollectGlyph();
-        stage04GlyphCollected = true;
 
         // Play the complex sequence
         StartCoroutine(PlayStage04Sequence());
@@ -264,6 +303,11 @@ public class ProjectorInteractionController : MonoBehaviour
 
     private IEnumerator PlayStage04Sequence()
     {
+        // Safety lock: prevent sequence from running twice
+        if (stage04SequenceComplete)
+            yield break;
+        stage04SequenceComplete = true;
+
         // 1. Fade out projector image
         if (projectorDisplay != null)
         {
@@ -314,7 +358,9 @@ public class ProjectorInteractionController : MonoBehaviour
         // 9. Add final Mind Log with Velinor image
         AddMindLog(mindLogImage_Velinor, mindLogText_Final);
 
-        stage04SequenceComplete = true;
+        // 10. Lock all interaction
+        interactionState = InteractionState.None;
+        SetPrompt("", false);
         Debug.Log("[Projector Interaction] Stage 04 sequence complete");
     }
 
@@ -343,17 +389,17 @@ public class ProjectorInteractionController : MonoBehaviour
         {
             // TODO: Create proper glyph data and add to codex
             // This depends on your glyph system structure
-            Debug.Log($"[Projector Interaction] Glyph '{glyphName}' collected");
+            Debug.Log("[Projector Interaction] Glyph collected and sequence ready");
         }
     }
 
     private IEnumerator ReenableInteractionAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        if (playerNearProjector)
+        if (playerNearProjector && !projectorDisabled)
         {
-            projectorInteractionActive = true;
-            ShowInteractPrompt();
+            interactionState = InteractionState.CanInteract;
+            SetPrompt("Press E to Interact with Projector", true);
         }
     }
 
