@@ -1,5 +1,6 @@
 using UnityEngine;
 using Velinor.Core;
+using Velinor.Management;
 using System.Collections;
 
 #if ENABLE_INPUT_SYSTEM
@@ -79,7 +80,6 @@ public class ProjectorInteractionController : MonoBehaviour
     private bool waitingForGlyphCollect = false;
     private bool stage04SequenceComplete = false;
     private NotificationPanelController _cachedNotificationPanel;
-    private MindLogController _cachedMindLogController;
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _interactProjectorAction;
@@ -104,7 +104,6 @@ public class ProjectorInteractionController : MonoBehaviour
     private void Start()
     {
         _cachedNotificationPanel = FindAnyObjectByType<NotificationPanelController>();
-        _cachedMindLogController = FindAnyObjectByType<MindLogController>();
         Debug.Log($"[Projector Interaction] Controller initialized - Stage: {currentStage}");
     }
 
@@ -365,19 +364,35 @@ public class ProjectorInteractionController : MonoBehaviour
     }
 
     /// <summary>
-    /// Adds a Mind Log entry
+    /// Adds a Mind Log entry using the MindLogManager
     /// </summary>
     private void AddMindLog(string imageKey, string text)
     {
-        if (_cachedMindLogController != null)
+        var manager = MindLogManager.GetOrCreate();
+        if (manager == null)
         {
-            _cachedMindLogController.AddMindLogEntry(imageKey, text);
-            Debug.Log($"[Projector Interaction] Mind Log added: {text.Substring(0, Mathf.Min(50, text.Length))}...");
+            Debug.LogError("[Projector Interaction] Failed to get MindLogManager");
+            return;
         }
-        else
+
+        // Load the sprite from resources
+        Sprite icon = Resources.Load<Sprite>($"MindLogImages/{imageKey}");
+        if (icon == null)
         {
-            Debug.LogWarning("[Projector Interaction] MindLogController not found");
+            Debug.LogWarning($"[Projector Interaction] Mind log image not found: {imageKey}");
         }
+
+        // Create a new Mind Log entry with a unique ID
+        string logID = $"projector_{System.DateTime.Now.Ticks}";
+        var entry = new MindLogEntry(
+            logID,
+            icon,
+            "Projector Vision",  // Summary text
+            text                 // Full text
+        );
+
+        manager.AddLog(entry);
+        Debug.Log($"[Projector Interaction] Mind Log added: {text.Substring(0, Mathf.Min(50, text.Length))}...");
     }
 
     /// <summary>
