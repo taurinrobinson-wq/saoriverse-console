@@ -31,6 +31,6 @@ Material:
     - _EdgeSoftness: 1.1
     - _NearBrightness: 2.6
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.5152033, b: 0.337, a: 0.25}
+    - _BaseColor: {r: 1, g: 0.6043217, b: 0.337, a: 0.25}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

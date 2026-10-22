@@ -33,9 +33,9 @@ Displays a single texture floating within the projector beam. Features:
 Select the canvas and set these properties:
 
 **RectTransform:**
-- Size Delta: (1920, 1080)
+- Size Delta: (192, 108) - *Small canvas size; adjust if needed*
 - Position: (0, 0, 0.5) - *Adjust Z to position image within beam*
-- Scale: (0.5, 0.5, 0.5) - *Adjust for desired size*
+- Scale: (1, 1, 1)
 - Rotation: (0, 0, 0)
 
 **Canvas component:**
