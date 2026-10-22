@@ -1,63 +1,82 @@
-/*
- * ============================================================
- * PROPRIETARY & CONFIDENTIAL
- * 
- * © 2026 Tauri Robinson. All rights reserved.
- * This code is proprietary and may not be redistributed,
- * modified, or used without explicit written permission.
- * 
- * Unauthorized access, modification, or distribution is prohibited.
- * See LICENSE_COMMERCIAL.md and NDA_TEMPLATE.md for details.
- * ============================================================
- */
-
 using UnityEngine;
 
 /// <summary>
-/// 2D-optimized pulsing glow animation for sprite overlays.
-/// Works directly with SpriteRenderer and optional Point Light.
-/// No materials or emission properties required.
+/// Optimized glow animation for sprites and 3D lights.
+/// Provides a smooth, rhythmic non-random pulse.
 /// </summary>
 public class MachinePulseGlow2D : MonoBehaviour
 {
-    [Header("Pulse Settings")]
+    public enum LightTypeMode { SmoothPulse, FluorescentFlicker }
+
+    [Header("Settings")]
+    public LightTypeMode mode = LightTypeMode.SmoothPulse;
+    public float minIntensity = 0.5f;
+    public float maxIntensity = 2.0f;
+    public float pulsePeriod = 2.0f; // Seconds for one full cycle
+    public Color glowColor = Color.cyan;
+
+    [Header("Fluorescent Settings (Optional)")]
+    public float flickerFreq = 25f;
+    public float buzzChance = 0.05f;
+
+    [Header("References")]
     public Light glowLight;
     public SpriteRenderer spriteRenderer;
 
-    [SerializeField] private float minIntensity = 0.5f;
-    [SerializeField] private float maxIntensity = 2.0f;
-    [SerializeField] private float pulseSpeed = 2f;
-
-    [Header("Color Settings")]
-    [SerializeField] private Color glowColor = Color.cyan;
-
-    private float elapsedTime = 0f;
+    private float currentBuzzTime = 0f;
+    private float elapsedTime;
 
     private void Start()
     {
-        if (spriteRenderer == null)
-            spriteRenderer = GetComponent<SpriteRenderer>();
-
-        elapsedTime = Random.Range(0f, 1f / pulseSpeed);
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        // Add some random offset so not all lights pulse at the exact same moment
+        elapsedTime = Random.Range(0f, pulsePeriod);
     }
 
     private void Update()
     {
         elapsedTime += Time.deltaTime;
+        float factor = 0f;
 
-        float pulse = Mathf.Sin(elapsedTime * pulseSpeed * Mathf.PI) * 0.5f + 0.5f;
+        if (mode == LightTypeMode.SmoothPulse)
+        {
+            // Rhythmic sine wave pulse
+            // pulsePeriod determines the speed (2.0s period = 0.5Hz)
+            float freq = (Mathf.PI * 2f) / pulsePeriod;
+            factor = (Mathf.Sin(elapsedTime * freq) + 1f) / 2f;
+        }
+        else
+        {
+            // High frequency flicker (kept as secondary mode)
+            float noise = Mathf.PerlinNoise(elapsedTime * flickerFreq, 0f);
+            factor = Mathf.Lerp(0.6f, 1.0f, noise);
 
-        // Animate light intensity
-        if (glowLight != null)
-            glowLight.intensity = Mathf.Lerp(minIntensity, maxIntensity, pulse);
+            if (currentBuzzTime > 0)
+            {
+                currentBuzzTime -= Time.deltaTime;
+                factor *= Random.Range(0.2f, 0.4f);
+            }
+            else if (Random.value < buzzChance)
+            {
+                currentBuzzTime = Random.Range(0.05f, 0.12f);
+            }
+        }
 
-        // Animate sprite color and alpha
+        float currentInt = Mathf.Lerp(minIntensity, maxIntensity, factor);
+
         if (spriteRenderer != null)
         {
-            float alpha = Mathf.Lerp(minIntensity, maxIntensity, pulse);
             Color c = glowColor;
-            c.a = alpha;
+            c.a = factor; 
             spriteRenderer.color = c;
+        }
+
+        if (glowLight != null)
+        {
+            glowLight.intensity = currentInt;
+            glowLight.color = glowColor;
         }
     }
 }
+
+

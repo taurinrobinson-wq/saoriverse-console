@@ -157,16 +157,82 @@ public class PlayerController2D5 : MonoBehaviour
         newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
 
-        // Use CharacterController for collision detection
+        // 2D & 3D Obstacle Collision Handling with independent X and Y axis sliding
+        if (movement.sqrMagnitude > 0.000001f)
+        {
+            Vector2 colOffset = new Vector2(0f, 0.25f);
+            float colRadius = 0.35f;
+
+            // Test X movement independently
+            Vector2 checkPosX = new Vector2(currentPosition.x + movement.x, currentPosition.y) + colOffset;
+            bool blockedX = false;
+
+            Collider2D[] hits2DX = Physics2D.OverlapCircleAll(checkPosX, colRadius);
+            foreach (var h2d in hits2DX)
+            {
+                if (!h2d.isTrigger && h2d.gameObject != gameObject && !h2d.transform.IsChildOf(transform))
+                {
+                    blockedX = true;
+                    break;
+                }
+            }
+
+            if (!blockedX && Physics.CheckSphere(new Vector3(checkPosX.x, checkPosX.y, 0f), colRadius, ~0, QueryTriggerInteraction.Ignore))
+            {
+                Collider[] hits3D = Physics.OverlapSphere(new Vector3(checkPosX.x, checkPosX.y, 0f), colRadius, ~0, QueryTriggerInteraction.Ignore);
+                foreach (var h in hits3D)
+                {
+                    if (h.gameObject != gameObject && !h.transform.IsChildOf(transform))
+                    {
+                        blockedX = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!blockedX)
+            {
+                currentPosition.x = Mathf.Clamp(currentPosition.x + movement.x, minX, maxX);
+            }
+
+            // Test Y movement independently
+            Vector2 checkPosY = new Vector2(currentPosition.x, currentPosition.y + movement.y) + colOffset;
+            bool blockedY = false;
+
+            Collider2D[] hits2DY = Physics2D.OverlapCircleAll(checkPosY, colRadius);
+            foreach (var h2d in hits2DY)
+            {
+                if (!h2d.isTrigger && h2d.gameObject != gameObject && !h2d.transform.IsChildOf(transform))
+                {
+                    blockedY = true;
+                    break;
+                }
+            }
+
+            if (!blockedY && Physics.CheckSphere(new Vector3(checkPosY.x, checkPosY.y, 0f), colRadius, ~0, QueryTriggerInteraction.Ignore))
+            {
+                Collider[] hits3D = Physics.OverlapSphere(new Vector3(checkPosY.x, checkPosY.y, 0f), colRadius, ~0, QueryTriggerInteraction.Ignore);
+                foreach (var h in hits3D)
+                {
+                    if (h.gameObject != gameObject && !h.transform.IsChildOf(transform))
+                    {
+                        blockedY = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!blockedY)
+            {
+                currentPosition.y = Mathf.Clamp(currentPosition.y + movement.y, minY, maxY);
+            }
+        }
+
+        // Use CharacterController for collision detection if present and enabled
         if (characterController != null && characterController.enabled)
         {
-            characterController.Move(newPosition - transform.position);
+            characterController.Move(currentPosition - transform.position);
             currentPosition = transform.position;
-        }
-        else
-        {
-            // Fallback if no CharacterController
-            currentPosition = newPosition;
         }
 
         // Update Animator

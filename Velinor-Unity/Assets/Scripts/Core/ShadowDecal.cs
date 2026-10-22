@@ -2,152 +2,95 @@ using UnityEngine;
 
 /// <summary>
 /// Adds a dynamic shadow decal under a character/object in 2.5D games.
-/// The shadow fades based on height above the ground plane.
+/// Optimized for XY plane side-scrolling views.
 /// Attach to any character or glyph that needs a shadow.
 /// </summary>
 public class ShadowDecal : MonoBehaviour
 {
     [Header("Shadow Settings")]
-    [SerializeField] private float shadowHeight = 0.01f; // How far above ground the shadow is positioned
-    [SerializeField] private float shadowScale = 1.5f; // Size of shadow quad
-    [SerializeField] private float maxHeightForShadow = 3f; // Height at which shadow becomes invisible
-    [SerializeField] private Color shadowColor = new Color(0, 0, 0, 0.6f); // Shadow color with alpha
-    [SerializeField] private Texture2D shadowTexture; // Circular gradient shadow texture
+    [SerializeField] private float footOffset = 0.5f; // Distance from player root to feet
+    [SerializeField] private float shadowScale = 1.0f; // Base size of shadow
+    [SerializeField] private Color shadowColor = new Color(0, 0, 0, 0.5f); // Shadow color with alpha
+    [SerializeField] private float sortingOrderOffset = -1; // Render behind the player
 
-    private GameObject shadowQuad;
-    private MeshRenderer shadowRenderer;
-    private Material shadowMaterial;
-    private float baseY;
+    private GameObject shadowObj;
+    private SpriteRenderer shadowRenderer;
 
     private void Start()
     {
         CreateShadowDecal();
-        baseY = transform.position.y;
     }
 
     private void CreateShadowDecal()
     {
-        // Create a simple quad for the shadow
-        shadowQuad = new GameObject("ShadowDecal");
-        shadowQuad.transform.SetParent(transform);
-        shadowQuad.transform.localPosition = new Vector3(0, -shadowHeight, 0.1f); // Slightly in front of character
-        shadowQuad.transform.localRotation = Quaternion.Euler(90, 0, 0); // Rotate to lie flat on ground
-        shadowQuad.transform.localScale = new Vector3(shadowScale, 1f, shadowScale);
+        shadowObj = new GameObject("ShadowVisual");
+        shadowObj.transform.SetParent(transform);
+        shadowObj.transform.localPosition = new Vector3(0, -footOffset, 0.05f); // Slightly behind player on Z
+        shadowObj.transform.localRotation = Quaternion.identity;
+        shadowObj.transform.localScale = new Vector3(shadowScale, shadowScale * 0.3f, 1f); // Ellipse shape
 
-        // Add mesh filter and renderer
-        MeshFilter meshFilter = shadowQuad.AddComponent<MeshFilter>();
-        shadowRenderer = shadowQuad.AddComponent<MeshRenderer>();
-
-        // Create a simple quad mesh
-        meshFilter.mesh = CreateQuadMesh();
-
-        // Create shadow material
-        if (shadowTexture == null)
+        shadowRenderer = shadowObj.AddComponent<SpriteRenderer>();
+        shadowRenderer.sprite = CreateShadowSprite();
+        shadowRenderer.color = shadowColor;
+        
+        // Match player sorting
+        SpriteRenderer playerSr = GetComponentInChildren<SpriteRenderer>();
+        if (playerSr != null)
         {
-            // Create a simple white texture if none provided
-            shadowTexture = new Texture2D(64, 64, TextureFormat.ARGB32, false);
-            FillWithRadialGradient(shadowTexture);
+            shadowRenderer.sortingLayerID = playerSr.sortingLayerID;
+            shadowRenderer.sortingOrder = playerSr.sortingOrder + (int)sortingOrderOffset;
+        }
+        else
+        {
+            shadowRenderer.sortingOrder = -1;
         }
 
-        // Use URP Unlit shader for transparency
-        Shader unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
-        if (unlitShader == null)
-            unlitShader = Shader.Find("Unlit/Transparent");
-
-        shadowMaterial = new Material(unlitShader);
-        shadowMaterial.name = "ShadowMaterial";
-        shadowMaterial.SetTexture("_BaseMap", shadowTexture);
-        shadowMaterial.SetColor("_BaseColor", shadowColor);
-        shadowMaterial.SetFloat("_Surface", 1); // Transparent surface
-        shadowMaterial.SetFloat("_Blend", 0); // Alpha blend
-        shadowMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        shadowMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        shadowMaterial.SetInt("_ZWrite", 0);
-        shadowMaterial.renderQueue = 3000;
-
-        shadowRenderer.material = shadowMaterial;
-
-        // Hide shadow in editor
-        shadowQuad.hideFlags = HideFlags.HideInHierarchy;
+        // Hide shadow in hierarchy to keep it clean
+        shadowObj.hideFlags = HideFlags.HideInHierarchy;
     }
 
-    private Mesh CreateQuadMesh()
+    private Sprite CreateShadowSprite()
     {
-        Mesh mesh = new Mesh();
-        mesh.name = "ShadowQuad";
+        int res = 64;
+        Texture2D tex = new Texture2D(res, res, TextureFormat.RGBA32, false);
+        Color[] pixels = new Color[res * res];
+        Vector2 center = new Vector2(res / 2f, res / 2f);
+        float radius = res / 2f;
 
-        Vector3[] vertices = new Vector3[]
+        for (int y = 0; y < res; y++)
         {
-            new Vector3(-0.5f, 0, -0.5f),
-            new Vector3(0.5f, 0, -0.5f),
-            new Vector3(0.5f, 0, 0.5f),
-            new Vector3(-0.5f, 0, 0.5f)
-        };
-
-        int[] triangles = new int[] { 0, 2, 1, 0, 3, 2 };
-
-        Vector2[] uv = new Vector2[]
-        {
-            new Vector2(0, 0),
-            new Vector2(1, 0),
-            new Vector2(1, 1),
-            new Vector2(0, 1)
-        };
-
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.uv = uv;
-        mesh.RecalculateNormals();
-        return mesh;
-    }
-
-    private void FillWithRadialGradient(Texture2D texture)
-    {
-        Color[] pixels = new Color[texture.width * texture.height];
-        Vector2 center = new Vector2(texture.width / 2f, texture.height / 2f);
-        float maxDistance = Vector2.Distance(Vector2.zero, center);
-
-        for (int y = 0; y < texture.height; y++)
-        {
-            for (int x = 0; x < texture.width; x++)
+            for (int x = 0; x < res; x++)
             {
-                Vector2 pixelPos = new Vector2(x, y);
-                float distance = Vector2.Distance(pixelPos, center);
-                float alpha = 1f - (distance / maxDistance);
-                alpha = Mathf.Clamp01(alpha);
-                pixels[y * texture.width + x] = new Color(0, 0, 0, alpha);
+                float dist = Vector2.Distance(new Vector2(x, y), center);
+                float alpha = Mathf.Clamp01(1f - (dist / radius));
+                alpha = Mathf.Pow(alpha, 2); // Sharper falloff
+                pixels[y * res + x] = new Color(1, 1, 1, alpha);
             }
         }
 
-        texture.SetPixels(pixels);
-        texture.Apply();
+        tex.SetPixels(pixels);
+        tex.Apply();
+        return Sprite.Create(tex, new Rect(0, 0, res, res), new Vector2(0.5f, 0.5f));
     }
 
     private void Update()
     {
-        if (shadowQuad == null)
-            return;
-
-        // Calculate height above base ground
-        float heightAboveGround = transform.position.y - baseY;
-
-        // Fade shadow based on height
-        float shadowAlpha = Mathf.Clamp01(1f - (heightAboveGround / maxHeightForShadow));
-        Color shadowColorWithAlpha = shadowColor;
-        shadowColorWithAlpha.a = shadowColor.a * shadowAlpha;
-        shadowMaterial.SetColor("_BaseColor", shadowColorWithAlpha);
-
-        // Update shadow position (follow character horizontally)
-        shadowQuad.transform.localPosition = new Vector3(0, -shadowHeight, 0.1f);
+        if (shadowObj == null) return;
+        
+        // Keep shadow at feet even if parent rotates
+        shadowObj.transform.localPosition = new Vector3(0, -footOffset, 0.05f);
+        shadowObj.transform.rotation = Quaternion.identity; 
     }
 
-    public void SetShadowColor(Color newColor)
+    public void SetShadowColor(Color color)
     {
-        shadowColor = newColor;
+        shadowColor = color;
+        if (shadowRenderer != null) shadowRenderer.color = color;
     }
 
-    public void SetMaxHeight(float newMaxHeight)
+    public void SetFootOffset(float offset)
     {
-        maxHeightForShadow = newMaxHeight;
+        footOffset = offset;
     }
 }
+

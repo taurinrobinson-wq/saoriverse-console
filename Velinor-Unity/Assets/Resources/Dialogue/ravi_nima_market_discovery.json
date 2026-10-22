@@ -1,5 +1,6 @@
 ﻿{
   "scene_id": "market_discovery_01",
+  "completionFlag": "ravi_nima_market_discovery_complete",
   "required_flags": [
     "met_saori == true",
     "obtain_codex == true"
