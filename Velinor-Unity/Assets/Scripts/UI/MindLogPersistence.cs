@@ -124,16 +124,8 @@ public class MindLogPersistence : MonoBehaviour
     /// </summary>
     public static void UnlockCodex()
     {
-        var codexController = FindAnyObjectByType<CodexController>();
-        if (codexController != null)
-        {
-            codexController.UnlockCodex();
-        }
-        else
-        {
-            Debug.LogWarning("[MindLogPersistence] CodexController not found");
-        }
-    }
+        // This is no longer needed - user controls unlock manually
+        Debug.Log("[MindLogPersistence] UnlockCodex called (user controls unlock state)");
     }
 
     /// <summary>

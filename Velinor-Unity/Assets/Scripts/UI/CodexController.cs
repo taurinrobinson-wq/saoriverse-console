@@ -51,7 +51,6 @@ public class CodexController : MonoBehaviour
     [Header("Codex Access")]
     public bool requiresCodexDevice = true;
     private bool playerHasCodex = false;
-    private bool openToMindLogs = false;  // Flag to open directly to Mind Logs on next toggle
 
     [Header("Glyph Management")]
     [SerializeField] private GameObject glyphUIPrefab;
@@ -447,26 +446,11 @@ public class CodexController : MonoBehaviour
         {
             _currentCodexPage = 0;
             
-            // Determine which view to open
-            string viewToOpen = "glyphs";  // Default to glyphs
-            Debug.Log($"[Codex] ToggleCodex opening - openToMindLogs flag: {openToMindLogs}");
-            if (openToMindLogs)
-            {
-                viewToOpen = "mind_log_primary";  // Open to Mind Logs if just unlocked
-                openToMindLogs = false;  // Only do this once
-                Debug.Log("[Codex] Opening to Mind Log view (first access after unlock)");
-            }
-            
-            // Set default view
+            // Always open to Glyphs view by default
             CodexViewController viewCtrl = codexPanel.GetComponent<CodexViewController>();
             if (viewCtrl != null)
             {
-                Debug.Log($"[Codex] CodexViewController found - switching to view: {viewToOpen}");
-                viewCtrl.SwitchView(viewToOpen);
-            }
-            else
-            {
-                Debug.LogError("[Codex] CodexViewController NOT found on codexPanel!");
+                viewCtrl.SwitchView("glyphs");
             }
 
             UpdateCodexUI();
@@ -577,16 +561,6 @@ public class CodexController : MonoBehaviour
         {
             Debug.LogWarning($"[Codex] {gridName} not found! Check CodexPanel hierarchy for GlyphGrid_Pg1, GlyphGrid_Pg2, etc.");
         }
-    }
-
-    /// <summary>
-    /// Call this to set the Codex to open to Mind Logs on next toggle
-    /// </summary>
-    public void UnlockCodex()
-    {
-        playerHasCodex = true;
-        openToMindLogs = true;  // Open directly to Mind Logs on next C press
-        Debug.Log("[Codex] Codex unlocked - will open to Mind Logs on next C press");
     }
 
     /// <summary>

@@ -400,6 +400,7 @@ public class ProjectorInteractionController : MonoBehaviour
     /// <summary>
     /// Adds a Mind Log entry using the MindLogManager
     /// Loads from the corresponding MindLogAsset for the current stage
+    /// Shows notification so player knows to press C to view it
     /// </summary>
     private void AddMindLog(string imageKey, string text)
     {
@@ -434,6 +435,12 @@ public class ProjectorInteractionController : MonoBehaviour
 
         manager.AddLog(mindLogEntry);
         Debug.Log($"[Projector Interaction] Mind Log added from asset '{assetPath}': {mindLogEntry.DisplayName}");
+        
+        // Show notification to player
+        if (_cachedNotificationPanel != null)
+        {
+            _cachedNotificationPanel.ShowNotification("A new mind log was added. Press C to view.");
+        }
     }
 
     /// <summary>
