@@ -39,6 +39,19 @@ public class VelinorScreenSetupMenu
             Debug.Log("[Velinor Setup] Added ScreenSequenceController script");
         }
 
+        // Assign the collider to the controller
+        if (controller != null)
+        {
+            SerializedObject controllerSO = new SerializedObject(controller);
+            SerializedProperty colliderProp = controllerSO.FindProperty("screenAccessCollider");
+            if (colliderProp != null)
+            {
+                colliderProp.objectReferenceValue = collider2D;
+                controllerSO.ApplyModifiedProperties();
+                Debug.Log("[Velinor Setup] Assigned BoxCollider2D to ScreenSequenceController.screenAccessCollider");
+            }
+        }
+
         // NOTE: Mind Log UI is already in UI_Canvas prefab (MindLogPrimaryContainer)
         // Controller will reference it via Inspector assignment
         Debug.Log("[Velinor Setup] Mind Log UI already exists in UI_Canvas prefab - assign MindLogPrimaryContainer to controller");

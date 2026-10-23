@@ -81,6 +81,20 @@ public class ScreenSequenceController : MonoBehaviour
                 audioSource.playOnAwake = false;
             }
         }
+
+        // Auto-detect collider if not assigned
+        if (screenAccessCollider == null)
+        {
+            screenAccessCollider = GetComponent<Collider>();
+            if (screenAccessCollider != null)
+            {
+                Debug.Log($"[Screen Sequence] Auto-detected Collider on {gameObject.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"[Screen Sequence] No Collider found on {gameObject.name}! Screen access won't work.");
+            }
+        }
         
         Debug.Log($"[Screen Sequence {sequenceStageID}] Controller initialized");
     }
