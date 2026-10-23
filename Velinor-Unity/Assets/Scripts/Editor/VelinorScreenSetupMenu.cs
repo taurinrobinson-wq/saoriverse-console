@@ -167,28 +167,44 @@ public class VelinorScreenSetupMenu
     {
         Debug.Log("[Velinor Setup] Starting Projector Interaction System setup...");
 
-        // Find or create root container
-        GameObject projectorRoot = FindOrCreateGameObject("ProjectorInteraction", null);
-
-        // Create ProjectorInteractionTrigger
-        GameObject triggerObj = FindOrCreateGameObject("ProjectorInteractionTrigger", projectorRoot.transform);
-
-        // Add BoxCollider2D
-        BoxCollider2D collider2D = triggerObj.GetComponent<BoxCollider2D>();
-        if (collider2D == null)
+        // Look for existing Collider_ProjectorBase
+        GameObject projectorBase = GameObject.Find("Collider_ProjectorBase");
+        if (projectorBase == null)
         {
-            collider2D = triggerObj.AddComponent<BoxCollider2D>();
-            collider2D.isTrigger = true;
-            collider2D.size = new Vector2(3f, 3f);
-            Debug.Log("[Velinor Setup] Added BoxCollider2D (trigger) to ProjectorInteractionTrigger");
+            // Fallback: create new ProjectorInteractionTrigger
+            GameObject projectorRoot = FindOrCreateGameObject("ProjectorInteraction", null);
+            projectorBase = FindOrCreateGameObject("ProjectorInteractionTrigger", projectorRoot.transform);
+
+            // Add BoxCollider2D if needed
+            Collider2D collider2D = projectorBase.GetComponent<Collider2D>();
+            if (collider2D == null)
+            {
+                collider2D = projectorBase.AddComponent<BoxCollider2D>();
+                ((BoxCollider2D)collider2D).size = new Vector2(3f, 3f);
+                collider2D.isTrigger = true;
+                Debug.Log("[Velinor Setup] Added BoxCollider2D (trigger) to ProjectorInteractionTrigger");
+            }
+            Debug.Log("[Velinor Setup] Created new ProjectorInteractionTrigger (Collider_ProjectorBase not found in scene)");
+        }
+        else
+        {
+            Debug.Log("[Velinor Setup] Found existing Collider_ProjectorBase - using it for projector interaction");
+            
+            // Ensure it's a trigger
+            Collider2D collider = projectorBase.GetComponent<Collider2D>();
+            if (collider != null && !collider.isTrigger)
+            {
+                collider.isTrigger = true;
+                Debug.Log("[Velinor Setup] Enabled 'Is Trigger' on Collider_ProjectorBase");
+            }
         }
 
         // Add ProjectorInteractionController
-        ProjectorInteractionController projectorController = triggerObj.GetComponent<ProjectorInteractionController>();
+        ProjectorInteractionController projectorController = projectorBase.GetComponent<ProjectorInteractionController>();
         if (projectorController == null)
         {
-            projectorController = triggerObj.AddComponent<ProjectorInteractionController>();
-            Debug.Log("[Velinor Setup] Added ProjectorInteractionController script");
+            projectorController = projectorBase.AddComponent<ProjectorInteractionController>();
+            Debug.Log("[Velinor Setup] Added ProjectorInteractionController script to Collider_ProjectorBase");
         }
 
         Debug.Log("[Velinor Setup] Projector Interaction System setup complete!");
