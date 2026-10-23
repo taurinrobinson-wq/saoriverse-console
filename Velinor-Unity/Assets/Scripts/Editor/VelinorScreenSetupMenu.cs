@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.SceneHierarchy;
+using UnityEngine.UI;
 
 /// <summary>
 /// Editor menu for setting up Velinor screen sequences and projector interactions
