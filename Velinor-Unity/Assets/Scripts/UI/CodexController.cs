@@ -116,16 +116,6 @@ public class CodexController : MonoBehaviour
 
         Debug.Log("[Codex] CodexPanel found and verified (persistence managed by UI_Canvas parent)");
 
-        // Check if this is a duplicate CodexController (one already exists on persistent UI_Canvas)
-        CodexController[] allControllers = FindObjectsOfType<CodexController>();
-        if (allControllers.Length > 1)
-        {
-            // Multiple instances exist - destroy this one and keep the persistent one
-            Debug.LogWarning($"[Codex] Found {allControllers.Length} CodexController instances. Destroying scene instance to keep only persistent one.");
-            Destroy(gameObject);
-            return;
-        }
-
         // Fix Mind Log container positioning if they're misaligned
         FixMindLogContainerPositions();
 
