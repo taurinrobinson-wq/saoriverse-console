@@ -141,7 +141,7 @@ public class ProjectorInteractionController : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when player enters projector collider
+    /// Called when player enters projector collider (3D physics)
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
@@ -159,9 +159,45 @@ public class ProjectorInteractionController : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when player exits projector collider
+    /// Called when player enters projector collider (2D physics)
+    /// </summary>
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (projectorDisabled)
+            return;
+
+        if (other.CompareTag("Player"))
+        {
+            playerNearProjector = true;
+            if (interactionState == InteractionState.None)
+                interactionState = InteractionState.CanInteract;
+            SetPrompt("Press E to Interact with Projector", true);
+            Debug.Log("[Projector Interaction] Player near projector");
+        }
+    }
+
+    /// <summary>
+    /// Called when player exits projector collider (3D physics)
     /// </summary>
     private void OnTriggerExit(Collider other)
+    {
+        if (projectorDisabled)
+            return;
+
+        if (other.CompareTag("Player"))
+        {
+            playerNearProjector = false;
+            if (interactionState != InteractionState.LockedDuringSequence)
+                interactionState = InteractionState.None;
+            SetPrompt("", false);
+            Debug.Log("[Projector Interaction] Player left projector area");
+        }
+    }
+
+    /// <summary>
+    /// Called when player exits projector collider (2D physics)
+    /// </summary>
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (projectorDisabled)
             return;

@@ -108,8 +108,32 @@ public class ScreenSequenceController : MonoBehaviour
             Debug.Log("[Screen Sequence] Player near screen");
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (sequenceCompleted || sequenceInProgress)
+            return;
+            
+        if (other.CompareTag("Player"))
+        {
+            playerNearScreen = true;
+            SetPrompt("Press E to Access Screen", true);
+            Debug.Log("[Screen Sequence] Player near screen");
+        }
+    }
     
     private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerNearScreen = false;
+            if (!sequenceInProgress)
+                SetPrompt("", false);
+            Debug.Log("[Screen Sequence] Player left screen area");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
