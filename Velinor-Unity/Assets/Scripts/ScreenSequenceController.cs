@@ -25,7 +25,7 @@ public class ScreenSequenceController : MonoBehaviour
     [Header("References")]
     [SerializeField] private CodexController codexController;
     [SerializeField] private GameObject screenImagePanel;
-    [SerializeField] private Collider screenAccessCollider;
+    [SerializeField] private Collider2D screenAccessCollider;
     
     [Header("Sequence Configuration")]
     [SerializeField] private int sequenceStageID = 1;  // Which stage (1-4)
@@ -79,20 +79,6 @@ public class ScreenSequenceController : MonoBehaviour
             {
                 audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.playOnAwake = false;
-            }
-        }
-
-        // Auto-detect collider if not assigned
-        if (screenAccessCollider == null)
-        {
-            screenAccessCollider = GetComponent<Collider>();
-            if (screenAccessCollider != null)
-            {
-                Debug.Log($"[Screen Sequence] Auto-detected Collider on {gameObject.name}");
-            }
-            else
-            {
-                Debug.LogWarning($"[Screen Sequence] No Collider found on {gameObject.name}! Screen access won't work.");
             }
         }
         
