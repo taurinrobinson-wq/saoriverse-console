@@ -38,6 +38,8 @@ public class CodexController : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioClip selectGlyphSound;
     [SerializeField] private AudioClip deselectGlyphSound;
+    [SerializeField] private AudioClip selectMindLogSound;
+    [SerializeField] private AudioClip deselectMindLogSound;
     private AudioSource audioSource;
 
     [Header("Navigation")]
@@ -856,6 +858,40 @@ public class CodexController : MonoBehaviour
         else if (deselectGlyphSound == null)
         {
             Debug.LogWarning("[Codex] Deselect glyph sound not assigned in Inspector!");
+        }
+    }
+
+    /// <summary>
+    /// Public method: Play sound when Mind Log is selected
+    /// Called by MemorySlot or MemoryGridUI when a Mind Log item is selected
+    /// </summary>
+    public void PlaySelectMindLogSound()
+    {
+        if (audioSource != null && selectMindLogSound != null)
+        {
+            audioSource.PlayOneShot(selectMindLogSound);
+            Debug.Log("[Codex] Playing select mind log sound");
+        }
+        else if (selectMindLogSound == null)
+        {
+            Debug.LogWarning("[Codex] Select mind log sound not assigned in Inspector!");
+        }
+    }
+
+    /// <summary>
+    /// Public method: Play sound when Mind Log is deselected
+    /// Called by MemorySlot or MemoryGridUI when a Mind Log item is deselected
+    /// </summary>
+    public void PlayDeselectMindLogSound()
+    {
+        if (audioSource != null && deselectMindLogSound != null)
+        {
+            audioSource.PlayOneShot(deselectMindLogSound);
+            Debug.Log("[Codex] Playing deselect mind log sound");
+        }
+        else if (deselectMindLogSound == null)
+        {
+            Debug.LogWarning("[Codex] Deselect mind log sound not assigned in Inspector!");
         }
     }
 

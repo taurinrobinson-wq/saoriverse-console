@@ -316,6 +316,13 @@ namespace Velinor.Core
             {
                 slotImage.color = selectedColor;
                 Debug.Log($"[MemorySlot] {gameObject.name} highlighted");
+                
+                // Play selection sound
+                var codexController = FindAnyObjectByType<CodexController>();
+                if (codexController != null)
+                {
+                    codexController.PlaySelectMindLogSound();
+                }
             }
         }
 
@@ -331,6 +338,13 @@ namespace Velinor.Core
                 {
                     slotImage.color = Color.white;
                     Debug.Log($"[MemorySlot] {gameObject.name} unhighlighted - restored to white");
+                    
+                    // Play deselection sound
+                    var codexController = FindAnyObjectByType<CodexController>();
+                    if (codexController != null)
+                    {
+                        codexController.PlayDeselectMindLogSound();
+                    }
                 }
                 else
                 {
