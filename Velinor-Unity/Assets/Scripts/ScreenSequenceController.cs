@@ -77,8 +77,15 @@ public class ScreenSequenceController : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null)
             {
-                audioSource = gameObject.AddComponent<AudioSource>();
-                audioSource.playOnAwake = false;
+                try
+                {
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                    audioSource.playOnAwake = false;
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning($"[Screen Sequence] Failed to create AudioSource: {ex.Message}");
+                }
             }
         }
         
