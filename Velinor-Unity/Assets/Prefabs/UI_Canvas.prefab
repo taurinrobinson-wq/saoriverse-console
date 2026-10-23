@@ -1652,11 +1652,13 @@ MonoBehaviour:
   mindLogSecondaryContainer: {fileID: 8217273026824663653}
   selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
   deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
+  selectMindLogSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
+  deselectMindLogSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
   glyphNameText: {fileID: 4665222382387263991}
   nextPageBtn: {fileID: 9209853742837836169}
   prevPageBtn: {fileID: 6994931906748615895}
   codexFont: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
-  requiresCodexDevice: 1
+  requiresCodexDevice: 0
   glyphUIPrefab: {fileID: 5575408212348127439}
   allSlots:
   - {fileID: 0}
@@ -3352,6 +3354,8 @@ MonoBehaviour:
   mindLogSecondaryContainer: {fileID: 8217273026824663653}
   selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
   deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
+  selectMindLogSound: {fileID: 0}
+  deselectMindLogSound: {fileID: 0}
   glyphNameText: {fileID: 4665222382387263991}
   nextPageBtn: {fileID: 9209853742837836169}
   prevPageBtn: {fileID: 6994931906748615895}
@@ -3494,7 +3498,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5209383855821126499}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -6573,7 +6577,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8222969626775926382}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
