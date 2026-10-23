@@ -194,18 +194,10 @@ public class CodexViewController : MonoBehaviour
 
     /// <summary>
     /// Switch between glyphs, mind_log_primary, and mind_log_secondary views.
-    /// Blocks Mind Log access if Codex is locked (not yet obtained from Saori).
     /// </summary>
     public void SwitchView(string viewName)
     {
         Debug.Log($"[CodexViewController] *** SWITCHVIEW CALLED: {viewName} ***");
-        
-        // Check if trying to access Mind Log views while Codex is locked
-        if ((viewName == "mind_log_primary" || viewName == "mind_log_secondary") && !MindLogPersistence.IsCodexUnlocked())
-        {
-            Debug.LogWarning($"[CodexViewController] BLOCKED: Cannot access Mind Log - Codex is LOCKED! Must obtain it from Saori first.");
-            return;
-        }
 
         currentView = viewName;
         Debug.Log($"[CodexViewController] *** SWITCHING TO VIEW: {viewName} ***");
