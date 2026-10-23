@@ -400,7 +400,6 @@ public class ProjectorInteractionController : MonoBehaviour
     /// <summary>
     /// Adds a Mind Log entry using the MindLogManager
     /// Loads from the corresponding MindLogAsset for the current stage
-    /// Also unlocks the Codex on first Mind Log to allow player to view it
     /// </summary>
     private void AddMindLog(string imageKey, string text)
     {
@@ -409,14 +408,6 @@ public class ProjectorInteractionController : MonoBehaviour
         {
             Debug.LogError("[Projector Interaction] Failed to get MindLogManager");
             return;
-        }
-
-        // Unlock Codex on first interaction so player can view Mind Logs
-        bool wasUnlocked = MindLogPersistence.IsCodexUnlocked();
-        if (!wasUnlocked)
-        {
-            MindLogPersistence.UnlockCodex();
-            Debug.Log("[Projector Interaction] Codex unlocked to allow Mind Log access");
         }
 
         // Load the MindLogAsset based on the current stage

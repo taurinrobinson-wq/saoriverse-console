@@ -580,40 +580,13 @@ public class CodexController : MonoBehaviour
     }
 
     /// <summary>
-    /// Call this when player encounters Saori and receives codex device
+    /// Call this to set the Codex to open to Mind Logs on next toggle
     /// </summary>
     public void UnlockCodex()
     {
         playerHasCodex = true;
         openToMindLogs = true;  // Open directly to Mind Logs on next C press
-        GameFlags.Set("codex_unlocked", true);
-        Debug.Log("[Codex] ========== CODEX UNLOCKED ==========");
-        Debug.Log($"[Codex] playerHasCodex = {playerHasCodex}");
-        Debug.Log("[Codex] Persisted to GameFlags: codex_unlocked = true");
-        Debug.Log("[Codex] Player can now press C to open Codex");
-        Debug.Log("[Codex] Will open to Mind Logs on first access");
-
-        // If Codex is already open, immediately switch to Mind Log view
-        if (codexPanel != null && codexPanel.alpha > 0)
-        {
-            var viewCtrl = codexPanel.GetComponent<CodexViewController>();
-            if (viewCtrl != null)
-            {
-                viewCtrl.SwitchView("mind_log_primary");
-                Debug.Log("[Codex] Codex already open - switched to Mind Log view immediately");
-            }
-        }
-
-        // Show notification to player
-        var notificationPanel = FindAnyObjectByType<NotificationPanelController>();
-        if (notificationPanel != null)
-        {
-            notificationPanel.ShowNotification("Codex Received. Press C to access.", duration: 5f);
-        }
-        else
-        {
-            Debug.LogWarning("[Codex] NotificationPanel not found - notification not shown");
-        }
+        Debug.Log("[Codex] Codex unlocked - will open to Mind Logs on next C press");
     }
 
     /// <summary>

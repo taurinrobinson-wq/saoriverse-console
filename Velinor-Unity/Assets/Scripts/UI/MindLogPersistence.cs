@@ -120,93 +120,18 @@ public class MindLogPersistence : MonoBehaviour
     }
 
     /// <summary>
-    /// Unlocks the Codex - called when player receives it from Saori or other dialogue trigger.
-    /// Enables the CodexPanel UI and CodexViewController button access, but does NOT auto-show it.
-    /// User must press C to open it. Alpha stays at 0 so ToggleCodex() can properly detect it's closed.
-    /// Persists across scenes via GameFlags.
+    /// Unlocks the Codex to open to Mind Logs view
     /// </summary>
     public static void UnlockCodex()
     {
-        isCodexUnlocked = true;
-        GameFlags.Set("codex_unlocked", true);
-        Debug.Log("[MindLogPersistence] Codex UNLOCKED - player can now press C to access it (persisted to GameFlags)");
-
-        // Try to find and unlock CodexController
-        CodexController codexController = null;
-        
-        // Primary method: FindAnyObjectByType
-        codexController = FindAnyObjectByType<CodexController>();
-        
+        var codexController = FindAnyObjectByType<CodexController>();
         if (codexController != null)
         {
             codexController.UnlockCodex();
-            Debug.Log("[MindLogPersistence] ✓ CodexController found and unlocked");
         }
         else
         {
-            Debug.LogWarning("[MindLogPersistence] ⚠ CodexController not found via FindAnyObjectByType - searching scene hierarchy...");
-            
-            // Fallback 1: Look in hierarchy for CodexPanel and search its children
-            GameObject codexPanel = GameObject.Find("UI_Canvas/CodexPanel");
-            if (codexPanel == null)
-            {
-                // Fallback 1b: Try alternative paths
-                codexPanel = GameObject.Find("CodexPanel");
-            }
-            
-            if (codexPanel != null)
-            {
-                Debug.Log("[MindLogPersistence] Found CodexPanel, searching for CodexController component...");
-                
-                // Try GetComponent first
-                CodexController controller = codexPanel.GetComponent<CodexController>();
-                if (controller != null)
-                {
-                    controller.UnlockCodex();
-                    Debug.Log("[MindLogPersistence] ✓ CodexController found on CodexPanel itself and unlocked!");
-                    return;
-                }
-                
-                // Try searching children
-                controller = codexPanel.GetComponentInChildren<CodexController>(true);
-                if (controller != null)
-                {
-                    controller.UnlockCodex();
-                    Debug.Log("[MindLogPersistence] ✓ CodexController found in CodexPanel children and unlocked!");
-                    return;
-                }
-                
-                Debug.LogError("[MindLogPersistence] ✗ CodexPanel found but has no CodexController component!");
-            }
-            else
-            {
-                Debug.LogError("[MindLogPersistence] ✗ CodexPanel not found in hierarchy!");
-            }
-        }
-
-        // Enable CodexPanel interactivity but KEEP alpha at 0
-        // ToggleCodex() uses (alpha < 0.5f) to detect if Codex is closed
-        // If we set alpha=1, it will think Codex is open and try to close it on first C press!
-        GameObject codexPanelObj = GameObject.Find("UI_Canvas/CodexPanel");
-        if (codexPanelObj == null)
-        {
-            codexPanelObj = GameObject.Find("CodexPanel");
-        }
-        
-        if (codexPanelObj != null)
-        {
-            CanvasGroup cg = codexPanelObj.GetComponent<CanvasGroup>();
-            if (cg != null)
-            {
-                // Keep alpha at 0 (hidden) but enable interaction
-                cg.interactable = true;
-                cg.blocksRaycasts = true;
-                Debug.Log("[MindLogPersistence] CodexPanel unlocked (alpha stays 0, will open on first C press)");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("[MindLogPersistence] ⚠ CodexPanel not found - couldn't enable interactivity");
+            Debug.LogWarning("[MindLogPersistence] CodexController not found");
         }
     }
     }
