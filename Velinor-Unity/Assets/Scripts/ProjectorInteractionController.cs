@@ -41,7 +41,7 @@ public class ProjectorInteractionController : MonoBehaviour
     [SerializeField] private bool projectorDisabled = false;
 
     [Header("References")]
-    [SerializeField] private Collider projectorCollider;
+    [SerializeField] private Collider2D projectorCollider;
     [SerializeField] private CodexController codexController;
     [SerializeField] private TriglyphMonsterProjector projectorDisplay;
 
