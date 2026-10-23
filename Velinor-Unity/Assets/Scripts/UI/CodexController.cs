@@ -564,6 +564,15 @@ public class CodexController : MonoBehaviour
     }
 
     /// <summary>
+    /// Unlock the Codex - allows player to access it
+    /// </summary>
+    public void UnlockCodex()
+    {
+        playerHasCodex = true;
+        Debug.Log("[Codex] Codex unlocked");
+    }
+
+    /// <summary>
     /// Set references to all three UI containers. Called by CodexViewController during setup.
     /// This centralizes container management and allows MindLogPersistence to access them reliably.
     /// </summary>
