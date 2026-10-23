@@ -39,22 +39,9 @@ public class VelinorScreenSetupMenu
             Debug.Log("[Velinor Setup] Added ScreenSequenceController script");
         }
 
-        // Create MindLogPrimaryScreen panel
-        GameObject mindLogScreen = FindOrCreateGameObject("MindLogPrimaryScreen", screenRoot.transform);
-        Canvas mindLogCanvas = mindLogScreen.GetComponent<Canvas>();
-        if (mindLogCanvas == null)
-        {
-            mindLogCanvas = mindLogScreen.AddComponent<Canvas>();
-            mindLogCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            Debug.Log("[Velinor Setup] Added Canvas to MindLogPrimaryScreen");
-        }
-        CanvasGroup mindLogCanvasGroup = mindLogScreen.GetComponent<CanvasGroup>();
-        if (mindLogCanvasGroup == null)
-        {
-            mindLogCanvasGroup = mindLogScreen.AddComponent<CanvasGroup>();
-            Debug.Log("[Velinor Setup] Added CanvasGroup to MindLogPrimaryScreen");
-        }
-        mindLogScreen.SetActive(false);
+        // NOTE: Mind Log UI is already in UI_Canvas prefab (MindLogPrimaryContainer)
+        // Controller will reference it via Inspector assignment
+        Debug.Log("[Velinor Setup] Mind Log UI already exists in UI_Canvas prefab - assign MindLogPrimaryContainer to controller");
 
         // Create ScreenImagePanel with sample structure
         GameObject screenImagePanel = FindOrCreateGameObject("ScreenImagePanel", screenRoot.transform);
@@ -156,10 +143,10 @@ public class VelinorScreenSetupMenu
         Debug.Log("[Velinor Setup] Screen Sequence System setup complete!");
         Debug.Log("[Velinor Setup] Next steps:");
         Debug.Log("  1. Assign CodexController reference to ScreenSequenceController");
-        Debug.Log("  2. Assign Mind Log Primary Screen reference");
-        Debug.Log("  3. Assign Screen Image Panel reference");
-        Debug.Log("  4. Customize hotspot positions and animations");
-        Debug.Log("  5. Add your screen image texture to BackgroundImage");
+        Debug.Log("  2. Assign ScreenImagePanel reference to ScreenSequenceController");
+        Debug.Log("  3. Customize hotspot positions and animations");
+        Debug.Log("  4. Add your screen image texture to BackgroundImage");
+        Debug.Log("  NOTE: Mind Log UI uses existing UI_Canvas/MindLogPrimaryContainer - no separate setup needed");
     }
 
     [MenuItem(MENU_ROOT + "Setup Projector Interaction System")]

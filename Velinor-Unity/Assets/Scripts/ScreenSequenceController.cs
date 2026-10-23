@@ -24,7 +24,6 @@ public class ScreenSequenceController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private CodexController codexController;
-    [SerializeField] private GameObject mindLogPrimaryScreen;
     [SerializeField] private GameObject screenImagePanel;
     [SerializeField] private Collider screenAccessCollider;
     
