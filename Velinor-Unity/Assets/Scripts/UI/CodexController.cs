@@ -62,6 +62,7 @@ public class CodexController : MonoBehaviour
 
     private int _currentCodexPage = 0;
     private const int SlotsPerPage = 9;
+    private bool isCodexOpen = false;  // Explicit state to track open/closed status
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _toggleCodexAction;
@@ -405,7 +406,9 @@ public class CodexController : MonoBehaviour
             return;
         }
 
-        bool opening = codexPanel.alpha < 0.5f;
+        // Toggle the state
+        bool opening = !isCodexOpen;
+        isCodexOpen = opening;
 
         // When opening codex, rediscover slots in case we loaded a new scene
         if (opening && allSlots.Count == 0)
@@ -419,6 +422,7 @@ public class CodexController : MonoBehaviour
         if (triglyph != null && triglyph.IsSequenceInProgress)
         {
             Debug.Log("[Codex] Cannot toggle - puzzle sequence in progress!");
+            isCodexOpen = !opening;  // Revert state on guard exit
             return;
         }
 
@@ -426,6 +430,7 @@ public class CodexController : MonoBehaviour
         if (!codexPanel.gameObject.activeSelf && codexPanel.alpha < 0.5f)
         {
             Debug.Log("[Codex] Cannot toggle - codexPanel GameObject is deactivated!");
+            isCodexOpen = !opening;  // Revert state on guard exit
             return;
         }
 

@@ -276,8 +276,8 @@ public class ProjectorInteractionController : MonoBehaviour
 
         AddMindLog(mindLogImage_Stage01, mindLogText);
 
-        // Allow re-interaction after brief delay
-        StartCoroutine(ReenableInteractionAfterDelay(1f));
+        // Allow re-interaction after longer delay so player can read the notification
+        StartCoroutine(ReenableInteractionAfterDelay(3f));
     }
 
     /// <summary>
