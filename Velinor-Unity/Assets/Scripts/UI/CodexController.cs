@@ -51,6 +51,7 @@ public class CodexController : MonoBehaviour
     [Header("Codex Access")]
     public bool requiresCodexDevice = true;
     private bool playerHasCodex = false;
+    private bool openToMindLogs = false;  // Flag to open directly to Mind Logs on next toggle
 
     [Header("Glyph Management")]
     [SerializeField] private GameObject glyphUIPrefab;
@@ -318,6 +319,10 @@ public class CodexController : MonoBehaviour
             playerHasCodex = true;
             Debug.Log("[Codex] TEST MODE: Codex access enabled (no device required)");
         }
+        else if (!playerHasCodex)
+        {
+            Debug.Log($"[Codex] Device required - playerHasCodex={playerHasCodex}. Player must obtain Codex to access.");
+        }
     }
 
     private void Update()
@@ -326,6 +331,12 @@ public class CodexController : MonoBehaviour
         if (_triglyphController != null && _triglyphController.IsSequenceInProgress)
         {
             return; // Don't interfere during sequence
+        }
+
+        // Allow access if not requiring device (supports toggling during play mode)
+        if (!requiresCodexDevice)
+        {
+            playerHasCodex = true;
         }
 
         // FORCE canvas to stay active if it got deactivated
@@ -436,11 +447,26 @@ public class CodexController : MonoBehaviour
         {
             _currentCodexPage = 0;
             
-            // Set default view to Glyphs
+            // Determine which view to open
+            string viewToOpen = "glyphs";  // Default to glyphs
+            Debug.Log($"[Codex] ToggleCodex opening - openToMindLogs flag: {openToMindLogs}");
+            if (openToMindLogs)
+            {
+                viewToOpen = "mind_log_primary";  // Open to Mind Logs if just unlocked
+                openToMindLogs = false;  // Only do this once
+                Debug.Log("[Codex] Opening to Mind Log view (first access after unlock)");
+            }
+            
+            // Set default view
             CodexViewController viewCtrl = codexPanel.GetComponent<CodexViewController>();
             if (viewCtrl != null)
             {
-                viewCtrl.SwitchView("glyphs");
+                Debug.Log($"[Codex] CodexViewController found - switching to view: {viewToOpen}");
+                viewCtrl.SwitchView(viewToOpen);
+            }
+            else
+            {
+                Debug.LogError("[Codex] CodexViewController NOT found on codexPanel!");
             }
 
             UpdateCodexUI();
@@ -559,11 +585,24 @@ public class CodexController : MonoBehaviour
     public void UnlockCodex()
     {
         playerHasCodex = true;
+        openToMindLogs = true;  // Open directly to Mind Logs on next C press
         GameFlags.Set("codex_unlocked", true);
         Debug.Log("[Codex] ========== CODEX UNLOCKED ==========");
         Debug.Log($"[Codex] playerHasCodex = {playerHasCodex}");
         Debug.Log("[Codex] Persisted to GameFlags: codex_unlocked = true");
         Debug.Log("[Codex] Player can now press C to open Codex");
+        Debug.Log("[Codex] Will open to Mind Logs on first access");
+
+        // If Codex is already open, immediately switch to Mind Log view
+        if (codexPanel != null && codexPanel.alpha > 0)
+        {
+            var viewCtrl = codexPanel.GetComponent<CodexViewController>();
+            if (viewCtrl != null)
+            {
+                viewCtrl.SwitchView("mind_log_primary");
+                Debug.Log("[Codex] Codex already open - switched to Mind Log view immediately");
+            }
+        }
 
         // Show notification to player
         var notificationPanel = FindAnyObjectByType<NotificationPanelController>();

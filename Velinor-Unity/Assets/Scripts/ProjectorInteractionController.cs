@@ -41,7 +41,7 @@ public class ProjectorInteractionController : MonoBehaviour
     [SerializeField] private bool projectorDisabled = false;
 
     [Header("References")]
-    [SerializeField] private Collider2D projectorCollider;
+    [SerializeField] private Collider projectorCollider;
     [SerializeField] private CodexController codexController;
     [SerializeField] private TriglyphMonsterProjector projectorDisplay;
 
@@ -399,6 +399,8 @@ public class ProjectorInteractionController : MonoBehaviour
 
     /// <summary>
     /// Adds a Mind Log entry using the MindLogManager
+    /// Loads from the corresponding MindLogAsset for the current stage
+    /// Also unlocks the Codex on first Mind Log to allow player to view it
     /// </summary>
     private void AddMindLog(string imageKey, string text)
     {
@@ -409,24 +411,38 @@ public class ProjectorInteractionController : MonoBehaviour
             return;
         }
 
-        // Load the sprite from resources
-        Sprite icon = Resources.Load<Sprite>($"MindLogImages/{imageKey}");
-        if (icon == null)
+        // Unlock Codex on first interaction so player can view Mind Logs
+        bool wasUnlocked = MindLogPersistence.IsCodexUnlocked();
+        if (!wasUnlocked)
         {
-            Debug.LogWarning($"[Projector Interaction] Mind log image not found: {imageKey}");
+            MindLogPersistence.UnlockCodex();
+            Debug.Log("[Projector Interaction] Codex unlocked to allow Mind Log access");
         }
 
-        // Create a new Mind Log entry with a unique ID
-        string logID = $"projector_{System.DateTime.Now.Ticks}";
-        var entry = new MindLogEntry(
-            logID,
-            icon,
-            "Projector Vision",  // Summary text
-            text                 // Full text
-        );
+        // Load the MindLogAsset based on the current stage
+        // Convert stage enum to asset name: Stage01 -> MindLog_Triglyph_Monster_Stage01
+        string stageName = currentStage.ToString();  // "Stage01", "Stage02", etc.
+        string assetPath = $"MindLogs/MindLog_Triglyph_Monster_{stageName}";
+        var asset = Resources.Load<MindLogAsset>(assetPath);
+        
+        if (asset == null)
+        {
+            Debug.LogError($"[Projector Interaction] Failed to load Mind Log asset: {assetPath}");
+            // If asset not found, create a basic entry with provided text
+            string logID = $"projector_{System.DateTime.Now.Ticks}";
+            var entry = new MindLogEntry(logID, null, "Unknown", text);
+            manager.AddLog(entry);
+            return;
+        }
 
-        manager.AddLog(entry);
-        Debug.Log($"[Projector Interaction] Mind Log added: {text.Substring(0, Mathf.Min(50, text.Length))}...");
+        // Convert the asset to a MindLogEntry (gets displayName, icon, summaryText, etc. from asset)
+        var mindLogEntry = asset.ToEntry();
+        
+        // Override the full text with the stage-specific text from the scene config
+        mindLogEntry.FullText = text;
+
+        manager.AddLog(mindLogEntry);
+        Debug.Log($"[Projector Interaction] Mind Log added from asset '{assetPath}': {mindLogEntry.DisplayName}");
     }
 
     /// <summary>

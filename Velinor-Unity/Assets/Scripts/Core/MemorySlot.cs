@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 using Velinor.Core;
 using Velinor.UI.Codex;
 
@@ -13,6 +14,7 @@ namespace Velinor.Core
     public class MemorySlot : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Image slotImage;
+        [SerializeField] private TextMeshProUGUI displayNameText;  // Label showing the memory's display name
         [SerializeField] private Color emptySlotColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
         [SerializeField] private Color selectedColor = new Color(1f, 1f, 0.5f, 1f); // Yellow-tinted for selection
 
@@ -45,6 +47,16 @@ namespace Velinor.Core
                 {
                     Debug.LogWarning($"[MemorySlot] No Image component found on {gameObject.name}!");
                     return;
+                }
+            }
+
+            // Auto-find TextMeshProUGUI if not assigned (look in children for label)
+            if (displayNameText == null)
+            {
+                displayNameText = GetComponentInChildren<TextMeshProUGUI>();
+                if (displayNameText == null)
+                {
+                    Debug.LogWarning($"[MemorySlot] No TextMeshProUGUI component found in children of {gameObject.name}!");
                 }
             }
 
@@ -150,6 +162,19 @@ namespace Velinor.Core
                 Debug.LogWarning($"[MemorySlot] ✗ CANNOT SET SPRITE: fragment.icon is null for '{fragment.fragmentID}'");
             }
 
+            // Set the display name text if available
+            if (displayNameText != null && !string.IsNullOrEmpty(fragment.displayName))
+            {
+                displayNameText.text = fragment.displayName;
+                displayNameText.enabled = true;
+                Debug.Log($"[MemorySlot] ✓ Set display name '{fragment.displayName}' on {gameObject.name}");
+            }
+            else if (displayNameText != null)
+            {
+                displayNameText.text = "";
+                Debug.Log($"[MemorySlot] No display name for fragment '{fragment.fragmentID}'");
+            }
+
             Debug.Log($"[MemorySlot] Set memory '{fragment.fragmentID}' in slot {gameObject.name}");
         }
 
@@ -165,6 +190,11 @@ namespace Velinor.Core
             {
                 slotImage.sprite = null;
                 slotImage.color = emptySlotColor;
+            }
+
+            if (displayNameText != null)
+            {
+                displayNameText.text = "";
             }
 
             Debug.Log("[MemorySlot] Cleared");

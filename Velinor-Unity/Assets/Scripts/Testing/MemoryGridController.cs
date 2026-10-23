@@ -137,16 +137,11 @@ namespace Velinor.Core
 
                 Debug.Log($"[MemoryGridController] Log {index}: ID={log.LogID}, Icon={log.Icon}, Summary={log.SummaryText}");
 
-                if (log.Icon == null)
-                {
-                    Debug.LogWarning($"[MemoryGridController] ✗ SKIPPING log '{log.LogID}' - Icon is NULL");
-                    continue;
-                }
-
-                // Create a temporary MemoryFragment wrapper for the log
+                // Create a temporary MemoryFragment wrapper for the log (icon can be null)
                 var fragment = ScriptableObject.CreateInstance<MemoryFragment>();
                 fragment.fragmentID = log.LogID;
-                fragment.displayName = log.LogID;
+                // Use the MindLogEntry's display name (from the asset or dynamically set)
+                fragment.displayName = log.DisplayName;
                 fragment.icon = log.Icon;
                 fragment.shortSynopsis = log.SummaryText;
                 fragment.expandedText = log.FullText;

@@ -12,6 +12,7 @@ namespace Velinor.Core
     public class MindLogEntry
     {
         public string LogID;                    // Unique identifier (e.g., "memory_saori_desert_encounter")
+        public string DisplayName;              // User-friendly display name (e.g., "Triglyph Monster - Stage One")
         public Sprite Icon;                     // Grid icon displayed in primary view
         public string SummaryText;              // Short synopsis (2-3 words, shown on single-click)
         public string FullText;                 // Expanded memory text (shown in secondary view)
@@ -25,6 +26,21 @@ namespace Velinor.Core
         public MindLogEntry(string logID, Sprite icon, string summaryText, string fullText)
         {
             LogID = logID;
+            DisplayName = logID;  // Default to LogID if displayName not provided
+            Icon = icon;
+            SummaryText = summaryText;
+            FullText = fullText;
+            CombineTags = new List<string>();
+            CombinationResultID = null;
+        }
+
+        /// <summary>
+        /// Create a new mind log entry with explicit display name.
+        /// </summary>
+        public MindLogEntry(string logID, string displayName, Sprite icon, string summaryText, string fullText)
+        {
+            LogID = logID;
+            DisplayName = displayName;
             Icon = icon;
             SummaryText = summaryText;
             FullText = fullText;

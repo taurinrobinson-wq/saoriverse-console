@@ -33,7 +33,7 @@ namespace Velinor.Core
         /// </summary>
         public MindLogEntry ToEntry()
         {
-            var entry = new MindLogEntry(logID, icon, summaryText, fullText);
+            var entry = new MindLogEntry(logID, displayName, icon, summaryText, fullText);
             entry.CombineTags = new List<string>(combineTags);
             return entry;
         }
