@@ -173,13 +173,22 @@ public class ScreenSequenceController : MonoBehaviour
         
         // Open Codex on Mind Log view
         if (codexController != null)
+        {
             codexController.ToggleCodex();
+            
+            // Explicitly switch to mind_log_primary view as requested
+            CodexViewController viewCtrl = codexController.GetComponentInChildren<CodexViewController>(true);
+            if (viewCtrl != null)
+            {
+                viewCtrl.SwitchView("mind_log_primary");
+            }
+        }
         
         // Show screen image panel
         if (screenImagePanel != null)
             screenImagePanel.SetActive(true);
         
-        Debug.Log($"[Screen Sequence {sequenceStageID}] Sequence started");
+        Debug.Log($"[Screen Sequence {sequenceStageID}] Sequence started with Mind Log Primary view");
     }
     
     /// <summary>

@@ -66,11 +66,19 @@ public class PlayerController2D5 : MonoBehaviour
 
         // Ensure player has a collider for collision detection
         if (GetComponent<Collider>() == null && characterController == null)
-{
-            CapsuleCollider capsule = gameObject.AddComponent<CapsuleCollider>();
-            capsule.height = 1.8f;
-            capsule.radius = 0.3f;
-            Debug.Log("[PlayerController2D5] CapsuleCollider created with height=1.8, radius=0.3");
+        {
+            SphereCollider sphere = gameObject.AddComponent<SphereCollider>();
+            sphere.radius = 0.3f;
+            sphere.center = Vector3.zero;
+            Debug.Log("[PlayerController2D5] SphereCollider created with radius=0.3 at base");
+        }
+
+        // Optimize CharacterController for 2.5D (depth is Y, not height)
+        if (characterController != null)
+        {
+            characterController.height = 0.2f;
+            characterController.center = Vector3.zero;
+            characterController.radius = 0.3f;
         }
 
         currentPosition = transform.position;
