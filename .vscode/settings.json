@@ -18,15 +18,28 @@
     "**/review_download_before_delete": true,
     "**/review_for_deletion": true
   },
+  // Only analyze specific directories to avoid performance issues
+  "python.analysis.include": [
+    "CaseGrid/**",
+    "DraftShift/**",
+    "src/**",
+    "velinor/**",
+    "backend/**",
+    "frontend/**",
+    "config/**",
+    "tests/**",
+    "scripts/**",
+    "tools/**",
+    "core/**"
+  ],
   "python.analysis.exclude": [
     "**/.venv/**",
     "**/__pycache__/**",
     "**/.*/**",
-    "**/archive/**",
-    "**/dev_tools/**",
-    "**/supabase/**",
-    "**/logs/**",
-    "**/node_modules/**"
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/*.egg-info/**"
   ],
   // Exclude archived folders from search
   "search.exclude": {
