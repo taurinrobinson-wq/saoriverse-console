@@ -206,6 +206,14 @@ MonoBehaviour:
   codexPanel: {fileID: 4396602572619553770}
   viewport: {fileID: 2438469151434139759}
   codexBackgroundSprite: {fileID: 21300000, guid: 5d5bdad2f8b0d684cb62db0e9a8346af, type: 3}
+  triglyphPanelUI: {fileID: 0}
+  glyphsBackground: {fileID: 0}
+  mindLogPrimaryContainer: {fileID: 0}
+  mindLogSecondaryContainer: {fileID: 0}
+  selectGlyphSound: {fileID: 0}
+  deselectGlyphSound: {fileID: 0}
+  selectMindLogSound: {fileID: 0}
+  deselectMindLogSound: {fileID: 0}
   glyphNameText: {fileID: 3145812797158824724}
   nextPageBtn: {fileID: 1777711324276402430}
   prevPageBtn: {fileID: 5984887451063588599}
@@ -389,6 +397,16 @@ MonoBehaviour:
   sparkleSpeed: 0.3
   sparkleAppearChance: 0.02
   sparkleColor: {r: 1, g: 1, b: 1, a: 1}
+  sparkleScale: 0.3
+  distribution: 0
+  minRadius: 0.2
+  maxRadius: 0.8
+  areaSize: {x: 1, y: 1}
+  wirePoints: []
+  wireJitter: 0.05
+  flickerLight: {fileID: 0}
+  minFlickerIntensity: 0
+  maxFlickerIntensity: 1
 --- !u!114 &182047854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,12 +419,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda961895d71e4149b57be4f49032e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinePulseGlow2D
-  glowLight: {fileID: 0}
-  spriteRenderer: {fileID: 182047855}
+  mode: 0
   minIntensity: 0.5
   maxIntensity: 1.5
-  pulseSpeed: 1
+  pulsePeriod: 2
   glowColor: {r: 0.38431373, g: 1, b: 1, a: 1}
+  flickerFreq: 25
+  buzzChance: 0.05
+  glowLight: {fileID: 0}
+  spriteRenderer: {fileID: 182047855}
 --- !u!212 &182047855
 SpriteRenderer:
   serializedVersion: 2
@@ -724,6 +745,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GlyphPickup
   glyphData: {fileID: 11400000, guid: 2687db02a73195642a4d0b49d47243fb, type: 2}
   hasBeenCollected: 0
+  visualContainer: {fileID: 0}
+  collectionEffect: {fileID: 0}
+  destroyDelay: 1
 --- !u!135 &466228129
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2900,6 +2924,16 @@ MonoBehaviour:
   sparkleSpeed: 0.3
   sparkleAppearChance: 0.02
   sparkleColor: {r: 1, g: 1, b: 1, a: 1}
+  sparkleScale: 0.3
+  distribution: 0
+  minRadius: 0.2
+  maxRadius: 0.8
+  areaSize: {x: 1, y: 1}
+  wirePoints: []
+  wireJitter: 0.05
+  flickerLight: {fileID: 0}
+  minFlickerIntensity: 0
+  maxFlickerIntensity: 1
 --- !u!114 &1318044001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2912,12 +2946,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda961895d71e4149b57be4f49032e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinePulseGlow2D
-  glowLight: {fileID: 0}
-  spriteRenderer: {fileID: 1318044002}
+  mode: 0
   minIntensity: 0.5
   maxIntensity: 1.5
-  pulseSpeed: 1
+  pulsePeriod: 2
   glowColor: {r: 0.48235294, g: 1, b: 1, a: 1}
+  flickerFreq: 25
+  buzzChance: 0.05
+  glowLight: {fileID: 0}
+  spriteRenderer: {fileID: 1318044002}
 --- !u!212 &1318044002
 SpriteRenderer:
   serializedVersion: 2
@@ -3364,6 +3401,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GlyphPickup
   glyphData: {fileID: 11400000, guid: 976a5265347189141932a747f023834d, type: 2}
   hasBeenCollected: 0
+  visualContainer: {fileID: 0}
+  collectionEffect: {fileID: 0}
+  destroyDelay: 1
 --- !u!135 &1491386003
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3514,20 +3554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d0fb63a8231e4d937118652772d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  dialogueCanvas: {fileID: 8699776103234011412}
-  bodyText: {fileID: 2238726871770890059}
-  npcNameText: {fileID: 4528026122505157555}
-  sharedBeatText: {fileID: 0}
-  btnT: {fileID: 6288574556857875547}
-  btnO: {fileID: 6931616304733207975}
-  btnN: {fileID: 2170701007886842230}
-  btnE: {fileID: 2294026381814879145}
-  txtT: {fileID: 2378385315441504810}
-  txtO: {fileID: 4289821377739707786}
-  txtN: {fileID: 7950162325451368912}
-  txtE: {fileID: 2883652514589377817}
-  choiceButtonContainer: {fileID: 747212559702238024}
-  _choiceButtonPrefab: {fileID: 2000220524889621443}
+  dialogueJson: {fileID: 0}
 --- !u!4 &1543128805
 Transform:
   m_ObjectHideFlags: 0
@@ -3686,7 +3713,10 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   npcNameText: {fileID: 0}
+  sharedBeatText: {fileID: 0}
+  npcPortraitImage: {fileID: 0}
   dialogueFont: {fileID: 0}
+  currentActiveSpeaker: Player
 --- !u!4 &1616405114
 Transform:
   m_ObjectHideFlags: 0
@@ -3856,73 +3886,6 @@ MonoBehaviour:
   emptySlotColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.5}
   selectedColor: {r: 1, g: 1, b: 0.5, a: 1}
   highlightColor: {r: 1.2, g: 1.2, b: 1.2, a: 1}
---- !u!21 &1725184632
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Space Grotesk - Light Material
-  m_Shader: {fileID: 4800000, guid: 2a8f7495b793df14cac8c031444bd01e, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: -5614121610302043641, guid: 5e9efa50e95f134478c0a62ef608170a, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _CullMode: 0
-    - _FaceDilate: 0
-    - _GradientScale: 10
-    - _MaskSoftnessX: 0
-    - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0
-    - _PerspectiveFilter: 0.875
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.73125
-    - _ScaleX: 1
-    - _ScaleY: 1
-    - _ShaderFlags: 0
-    - _Sharpness: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _TextureHeight: 1024
-    - _TextureWidth: 1024
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
-    - _VertexOffsetX: 0
-    - _VertexOffsetY: 0
-    - _WeightBold: 0.75
-    - _WeightNormal: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1725697643
 GameObject:
   m_ObjectHideFlags: 0
@@ -5009,7 +4972,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PanelInteraction
   triglyphPanelUI: {fileID: 2000000021}
   codexUI: {fileID: 2000000019}
-  interactionPrompt: {fileID: 3000000032}
 --- !u!1 &2000000011
 GameObject:
   m_ObjectHideFlags: 0
@@ -5556,6 +5518,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GlyphPickup
   glyphData: {fileID: 11400000, guid: 4872c0e6e5533ac409c0021908943276, type: 2}
   hasBeenCollected: 0
+  visualContainer: {fileID: 0}
+  collectionEffect: {fileID: 0}
+  destroyDelay: 1
 --- !u!135 &2010433752
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6303,8 +6268,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6440,8 +6405,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6577,8 +6542,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7906,8 +7871,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press <color=#FFD700><b>[E]</b></color> to Interact
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8234,8 +8199,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Glyph of Sorrow
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e9efa50e95f134478c0a62ef608170a, type: 2}
-  m_sharedMaterial: {fileID: 1725184632}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9169,7 +9134,10 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   npcNameText: {fileID: 0}
+  sharedBeatText: {fileID: 0}
+  npcPortraitImage: {fileID: 0}
   dialogueFont: {fileID: 0}
+  currentActiveSpeaker: Player
 --- !u!1 &4977478859836551838
 GameObject:
   m_ObjectHideFlags: 0
@@ -9407,7 +9375,10 @@ MonoBehaviour:
   doorAnimationDuration: 6
   panelFadeDuration: 1
   sceneTransitionCollider: {fileID: 1096872670}
+  doorCollider: {fileID: 0}
   doorOpenSoundEffect: {fileID: 8300000, guid: cdea19fa004f5ca458566094e4df92d0, type: 3}
+  selectGlyphSound: {fileID: 0}
+  deselectGlyphSound: {fileID: 0}
   audioSource: {fileID: 0}
   victoryMessage: Glyphs Received. Door Activated
   triglyphSlots:
@@ -10177,8 +10148,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TEST NOTIFICATION - CAN YOU SEE THIS?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10666,6 +10637,7 @@ MonoBehaviour:
   notificationPanel: {fileID: 3388868714521777265}
   notificationText: {fileID: 2238726871770890059}
   fadeDuration: 0.3
+  displayDuration: 3
 --- !u!224 &8441262526446954879
 RectTransform:
   m_ObjectHideFlags: 0

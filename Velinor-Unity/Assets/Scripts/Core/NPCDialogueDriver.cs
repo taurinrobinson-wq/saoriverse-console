@@ -22,9 +22,10 @@ namespace Velinor.Core
         [SerializeField] private string startPassageId = "start";  // Fallback start passage
         [SerializeField] private bool isMultiNpcScene = false;     // Set true for scenes like ravi_nima_market_discovery
         [SerializeField] private string multiNpcDisplayName = "[Multiple NPCs]";  // Display name for multi-NPC scenes, e.g. "Young Man and Woman"
+        [SerializeField] private string completionFlag;            // The flag that marks this dialogue as completed (auto-populated)
 
         [Header("Movement")]
-        [SerializeField] private NPCController npcController;      // Optional movement driver
+[SerializeField] private NPCController npcController;      // Optional movement driver
 
         [Header("Interaction")]
         [SerializeField] private float interactionRadius = 0.8f;
@@ -127,8 +128,15 @@ namespace Velinor.Core
 
                     if (dialogueData != null)
                     {
+                        // Auto-populate completionFlag if it exists in JSON
+                        if (!string.IsNullOrEmpty(dialogueData.completionFlag))
+                        {
+                            completionFlag = dialogueData.completionFlag;
+                            Debug.Log($"[NPCDialogueDriver] Auto-populated completionFlag='{completionFlag}'");
+                        }
+
                         // Try passages format first
-                        if (dialogueData.passages != null && dialogueData.passages.Length > 0)
+if (dialogueData.passages != null && dialogueData.passages.Length > 0)
                         {
                             startPassageId = !string.IsNullOrEmpty(dialogueData.startnode) 
                                 ? dialogueData.startnode 
@@ -387,10 +395,20 @@ namespace Velinor.Core
         /// </summary>
         public void Interact(GameObject triggeringPlayer)
         {
+            // Lazy initialization in case Awake() hasn't run yet (scene played directly)
             if (dialogueManager == null)
             {
-                Debug.LogError($"[NPCDialogueDriver] {npcName}: DialogueManager is null in Interact()!");
-                return;
+                dialogueManager = FindAnyObjectByType<DialogueManager>();
+                if (dialogueManager == null)
+                {
+                    Debug.LogWarning($"[NPCDialogueDriver] {npcName}: DialogueManager not found. Auto-creating...");
+                    dialogueManager = DialogueManager.Instance ?? new GameObject("DialogueManager").AddComponent<DialogueManager>();
+                }
+                if (dialogueManager == null)
+                {
+                    Debug.LogError($"[NPCDialogueDriver] {npcName}: Failed to initialize DialogueManager!");
+                    return;
+                }
             }
             
             if (!dialogueManager.IsDialogueActive)
@@ -441,5 +459,61 @@ namespace Velinor.Core
         public string NPCName => npcName;
         public bool IsExiting => isExiting;
         public NPCController Controller => npcController;
+
+        [ContextMenu("Reset Dialogue Flags")]
+        public void ResetDialogueFlags()
+        {
+            if (string.IsNullOrEmpty(completionFlag))
+            {
+                Debug.LogWarning($"[NPCDialogueDriver] {npcName}: No completionFlag assigned or found in JSON.");
+                return;
+            }
+
+            GameFlags.Set(completionFlag, false);
+            Debug.Log($"[NPCDialogueDriver] {npcName}: Reset flag '{completionFlag}' to false.");
+            
+            // Also try to re-enable associated GameObjects if they were disabled by SceneStateController
+            SceneStateController sceneController = FindAnyObjectByType<SceneStateController>();
+            if (sceneController != null)
+            {
+                sceneController.RefreshState();
+            }
+        }
+
+        [ContextMenu("Reset and Re-enable NPC")]
+        public void ResetAndReenable()
+        {
+            ResetDialogueFlags();
+            
+            // Explicitly re-enable this NPC
+            gameObject.SetActive(true);
+            
+            // If it's a multi-NPC scene, try to find the others
+            if (isMultiNpcScene)
+            {
+                NPCDialogueDriver[] allDrivers = Object.FindObjectsByType<NPCDialogueDriver>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                foreach (var driver in allDrivers)
+                {
+                    if (driver.completionFlag == this.completionFlag)
+                    {
+                        driver.gameObject.SetActive(true);
+                        Debug.Log($"[NPCDialogueDriver] Re-enabled sibling NPC: {driver.npcName}");
+                    }
+                }
+            }
+        }
+
+        [ContextMenu("Clear ALL Game Flags")]
+        public void ClearAllGameFlags()
+        {
+            GameFlags.Clear();
+            Debug.Log("[NPCDialogueDriver] Cleared ALL GameFlags.");
+            
+            SceneStateController sceneController = FindAnyObjectByType<SceneStateController>();
+            if (sceneController != null)
+            {
+                sceneController.RefreshState();
+            }
+        }
     }
 }

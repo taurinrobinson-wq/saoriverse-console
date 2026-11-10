@@ -55,6 +55,12 @@ public class StatManager : MonoBehaviour
 {
     public static StatManager Instance { get; private set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void Init()
+    {
+        Instance = null;
+    }
+
     // Player TONE properties synced with the playerTone dictionary
     public float toneTrust { get => playerTone[ToneType.Trust]; set => playerTone[ToneType.Trust] = value; }
     public float toneObservation { get => playerTone[ToneType.Observation]; set => playerTone[ToneType.Observation] = value; }
@@ -329,11 +335,17 @@ public class StatManager : MonoBehaviour
     public void LogEncounter(Dictionary<string, float> effects) { }
 }
 
-// LEGACY STUBS
+// LEGACY STUBS - Mark as obsolete to signal migration
+[System.Obsolete("Use StatManager instead")]
 public class PlayerStats : MonoBehaviour { public static PlayerStats Get() => null; public float GetRemnant(string s) => 0f; }
+[System.Obsolete("Use StatManager instead")]
 public class NPCStats : MonoBehaviour { public float Resolve, Empathy, Memory, Nuance, Authority, Need, Trust, Skepticism; public float GetRemnant(string s) => 0f; }
+[System.Obsolete("Use StatManager instead")]
 public class DialogueSegment { public string segmentId; public string npcLine; public bool completedByPlayer; public List<DialogueChoice> playerChoices; }
+[System.Obsolete("Use StatManager instead")]
 public class DialogueGateEvaluator : MonoBehaviour { public void MarkSegmentComplete(string s) { } }
+[System.Obsolete("Use StatManager instead")]
 public class MalrikDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) { } }
+[System.Obsolete("Use StatManager instead")]
 public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) { } }
-namespace VelinorGame.Core { public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) { } } }
+namespace VelinorGame.Core { [System.Obsolete("Use StatManager instead")] public class ElenyaDialogueSequence : MonoBehaviour { public void CompleteSegment(string s) { } } }

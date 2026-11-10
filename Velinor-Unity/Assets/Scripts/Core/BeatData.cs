@@ -126,6 +126,7 @@ public class DialogueJson
     [SerializeField] public BeatData[] passages;           // (passages format)
     
     [SerializeField] public string scene_id;               // (beats format)
+    [SerializeField] public string completionFlag;         // (beats format) - Flag that marks this dialogue as completed
     [SerializeField] public string[] required_flags;       // (beats format)
-    [SerializeField] public BeatData[] beats;              // (beats format)
+[SerializeField] public BeatData[] beats;              // (beats format)
 }

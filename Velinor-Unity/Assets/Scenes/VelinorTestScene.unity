@@ -150,7 +150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de43a84463e06f147b14105ed2c6dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
+  dialogueJson: {fileID: 0}
   npcId: Ravi
+  startPassageId: desert_intro
+  interactionRadius: 2.5
+  raviStats: {fileID: 0}
+  malrikStats: {fileID: 0}
+  elenyaStats: {fileID: 0}
+  saoriStats: {fileID: 0}
 --- !u!54 &72245426
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2454,18 +2461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f00140109341e9a40baf790020baf326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  TrustTone: 0.5
-  ObservationTone: 0.5
-  NarrativeTone: 0.5
-  EmpathyTone: 0.5
-  Resolve: 0.5
-  Empathy: 0.5
-  Memory: 0.5
-  Nuance: 0.5
-  Authority: 0.5
-  Need: 0.5
-  Trust: 0.5
-  Skepticism: 0.5
 --- !u!114 &1331098283
 MonoBehaviour:
   m_ObjectHideFlags: 0

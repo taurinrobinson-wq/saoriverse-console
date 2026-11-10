@@ -14,6 +14,12 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void Init()
+    {
+        Instance = null;
+    }
+
     [SerializeField] private TextAsset dialogueJson;
     private DialogueUIController dialogueUI;
     private PortraitManager portraitManager;

@@ -257,6 +257,16 @@ MonoBehaviour:
   sparkleSpeed: 0.3
   sparkleAppearChance: 0.02
   sparkleColor: {r: 1, g: 1, b: 1, a: 1}
+  sparkleScale: 0.3
+  distribution: 0
+  minRadius: 0.2
+  maxRadius: 0.8
+  areaSize: {x: 1, y: 1}
+  wirePoints: []
+  wireJitter: 0.05
+  flickerLight: {fileID: 0}
+  minFlickerIntensity: 0
+  maxFlickerIntensity: 1
 --- !u!114 &182047854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,12 +279,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda961895d71e4149b57be4f49032e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinePulseGlow2D
-  glowLight: {fileID: 0}
-  spriteRenderer: {fileID: 182047855}
+  mode: 0
   minIntensity: 0.5
   maxIntensity: 1.5
-  pulseSpeed: 1
+  pulsePeriod: 2
   glowColor: {r: 0.38431373, g: 1, b: 1, a: 1}
+  flickerFreq: 25
+  buzzChance: 0.05
+  glowLight: {fileID: 0}
+  spriteRenderer: {fileID: 182047855}
 --- !u!212 &182047855
 SpriteRenderer:
   serializedVersion: 2
@@ -1772,6 +1785,16 @@ MonoBehaviour:
   sparkleSpeed: 0.3
   sparkleAppearChance: 0.02
   sparkleColor: {r: 1, g: 1, b: 1, a: 1}
+  sparkleScale: 0.3
+  distribution: 0
+  minRadius: 0.2
+  maxRadius: 0.8
+  areaSize: {x: 1, y: 1}
+  wirePoints: []
+  wireJitter: 0.05
+  flickerLight: {fileID: 0}
+  minFlickerIntensity: 0
+  maxFlickerIntensity: 1
 --- !u!114 &1318044001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1784,12 +1807,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda961895d71e4149b57be4f49032e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinePulseGlow2D
-  glowLight: {fileID: 0}
-  spriteRenderer: {fileID: 1318044002}
+  mode: 0
   minIntensity: 0.5
   maxIntensity: 1.5
-  pulseSpeed: 1
+  pulsePeriod: 2
   glowColor: {r: 0.48235294, g: 1, b: 1, a: 1}
+  flickerFreq: 25
+  buzzChance: 0.05
+  glowLight: {fileID: 0}
+  spriteRenderer: {fileID: 1318044002}
 --- !u!212 &1318044002
 SpriteRenderer:
   serializedVersion: 2

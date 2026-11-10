@@ -796,6 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de43a84463e06f147b14105ed2c6dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
+  dialogueJson: {fileID: 0}
   npcId: 
   startPassageId: market_entry
   interactionRadius: 2.5
@@ -1133,6 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de43a84463e06f147b14105ed2c6dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
+  dialogueJson: {fileID: 0}
   npcId: 
   startPassageId: market_entry
   interactionRadius: 2.5
@@ -1370,11 +1372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d0fb63a8231e4d937118652772d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  dialogueCanvas: {fileID: 1756091659}
-  npcNameText: {fileID: 486585655}
-  bodyText: {fileID: 765495041}
-  choiceButtonContainer: {fileID: 454392696}
-  _choiceButtonPrefab: {fileID: 0}
+  dialogueJson: {fileID: 0}
 --- !u!4 &788441494
 Transform:
   m_ObjectHideFlags: 0

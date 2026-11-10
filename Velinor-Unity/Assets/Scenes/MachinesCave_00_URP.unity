@@ -207,8 +207,13 @@ MonoBehaviour:
   viewport: {fileID: 1311648043}
   codexBackgroundSprite: {fileID: 21300000, guid: ef78b9b1311618b48a92d6a2d15cc38c, type: 3}
   triglyphPanelUI: {fileID: 2000000021}
+  glyphsBackground: {fileID: 0}
+  mindLogPrimaryContainer: {fileID: 0}
+  mindLogSecondaryContainer: {fileID: 0}
   selectGlyphSound: {fileID: 8300000, guid: 2668dfd6bf6319b44b4fe250664c01e0, type: 3}
   deselectGlyphSound: {fileID: 8300000, guid: 66e53505c6ac29c4f97b07e05ebb27b0, type: 3}
+  selectMindLogSound: {fileID: 0}
+  deselectMindLogSound: {fileID: 0}
   glyphNameText: {fileID: 591019541}
   nextPageBtn: {fileID: 591019540}
   prevPageBtn: {fileID: 591019539}
@@ -299,6 +304,16 @@ MonoBehaviour:
   sparkleSpeed: 0.3
   sparkleAppearChance: 0.02
   sparkleColor: {r: 1, g: 1, b: 1, a: 1}
+  sparkleScale: 0.3
+  distribution: 0
+  minRadius: 0.2
+  maxRadius: 0.8
+  areaSize: {x: 1, y: 1}
+  wirePoints: []
+  wireJitter: 0.05
+  flickerLight: {fileID: 0}
+  minFlickerIntensity: 0
+  maxFlickerIntensity: 1
 --- !u!114 &182047854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,12 +326,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda961895d71e4149b57be4f49032e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinePulseGlow2D
-  glowLight: {fileID: 0}
-  spriteRenderer: {fileID: 182047855}
+  mode: 0
   minIntensity: 0.5
   maxIntensity: 1.5
-  pulseSpeed: 1
+  pulsePeriod: 2
   glowColor: {r: 0.38431373, g: 1, b: 1, a: 1}
+  flickerFreq: 25
+  buzzChance: 0.05
+  glowLight: {fileID: 0}
+  spriteRenderer: {fileID: 182047855}
 --- !u!212 &182047855
 SpriteRenderer:
   serializedVersion: 2
@@ -970,11 +988,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1625357165}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!222 &591019542
+CanvasRenderer:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_CullTransparentMesh: 1
 --- !u!1 &604712593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1035,14 @@ Transform:
   - {fileID: 1182891855}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!222 &663067073
+CanvasRenderer:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_CullTransparentMesh: 1
 --- !u!1 &697948582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,11 +1496,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1625357165}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!222 &887268875
+CanvasRenderer:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_CullTransparentMesh: 1
 --- !u!1 &908906433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2756,6 +2798,16 @@ MonoBehaviour:
   sparkleSpeed: 0.3
   sparkleAppearChance: 0.02
   sparkleColor: {r: 1, g: 1, b: 1, a: 1}
+  sparkleScale: 0.3
+  distribution: 0
+  minRadius: 0.2
+  maxRadius: 0.8
+  areaSize: {x: 1, y: 1}
+  wirePoints: []
+  wireJitter: 0.05
+  flickerLight: {fileID: 0}
+  minFlickerIntensity: 0
+  maxFlickerIntensity: 1
 --- !u!114 &1318044001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2768,12 +2820,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda961895d71e4149b57be4f49032e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachinePulseGlow2D
-  glowLight: {fileID: 0}
-  spriteRenderer: {fileID: 1318044002}
+  mode: 0
   minIntensity: 0.5
   maxIntensity: 1.5
-  pulseSpeed: 1
+  pulsePeriod: 2
   glowColor: {r: 0.48235294, g: 1, b: 1, a: 1}
+  flickerFreq: 25
+  buzzChance: 0.05
+  glowLight: {fileID: 0}
+  spriteRenderer: {fileID: 1318044002}
 --- !u!212 &1318044002
 SpriteRenderer:
   serializedVersion: 2
@@ -3483,7 +3538,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1625357165}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -3494,7 +3549,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1625357165}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -3505,7 +3560,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1625357165}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -3515,6 +3570,22 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 6743176566743641850, guid: 2cea79e3f2ef1c040b327aee9b816917, type: 3}
   m_PrefabInstance: {fileID: 1625357165}
   m_PrefabAsset: {fileID: 0}
+--- !u!222 &1625357171
+CanvasRenderer:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_CullTransparentMesh: 1
+--- !u!222 &1625357172
+CanvasRenderer:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_CullTransparentMesh: 1
 --- !u!222 &1655191816
 CanvasRenderer:
   m_ObjectHideFlags: 0

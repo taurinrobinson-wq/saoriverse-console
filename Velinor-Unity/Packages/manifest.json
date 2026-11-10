@@ -8,6 +8,7 @@
     "com.unity.burst": "1.8.30",
     "com.unity.charactercontroller": "1.4.5",
     "com.unity.cinemachine": "3.1.7",
+    "com.unity.cloud.gltfast": "6.20.0",
     "com.unity.collab-proxy": "2.12.4",
     "com.unity.collections": "6.4.0",
     "com.unity.ext.nunit": "2.0.5",

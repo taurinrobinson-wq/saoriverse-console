@@ -544,8 +544,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Choice 4
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -681,8 +681,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press <color=#FFD700><b>[E]</b></color> to Interact
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1645,8 +1645,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Choice 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1932,8 +1932,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: NPC NAME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2069,8 +2069,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Glyph of Sorrow
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e9efa50e95f134478c0a62ef608170a, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2206,8 +2206,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: NPC Dialogue placeholder text...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2343,8 +2343,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Choice 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2480,8 +2480,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Diary updated. Press [N] to access.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2686,8 +2686,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Choice 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2823,8 +2823,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 467eaf67df89fca44b3f482ab995c2e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3254,15 +3254,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8333f97b7b2dd4992e7a054b80e1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueUIController
-  codexPanel: {fileID: 4887726471321075214}
-  diaryPanel: {fileID: 8318856119947797061}
-  notificationPanel: {fileID: 7276829679798181086}
-  notificationText: {fileID: 2109536371012525238}
-  glyphNameText: {fileID: 8086758879764079007}
-  nextPageBtn: {fileID: 2946540775669723992}
-  prevPageBtn: {fileID: 8854295800258612936}
-  codexFont: {fileID: 11400000, guid: 5e9efa50e95f134478c0a62ef608170a, type: 2}
-  diaryFont: {fileID: 11400000, guid: b6a0e157e0512574d89f5c9e792892de, type: 2}
+  dialoguePanel: {fileID: 0}
+  dialogueText: {fileID: 0}
+  npcNameText: {fileID: 0}
+  sharedBeatText: {fileID: 0}
+  npcPortraitImage: {fileID: 0}
+  dialogueFont: {fileID: 0}
+  currentActiveSpeaker: Player
 --- !u!1 &8539665162980638637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3698,7 +3696,7 @@ PrefabInstance:
     - target: {fileID: 3338260271535012078, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: b6a0e157e0512574d89f5c9e792892de, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3338260271535012078, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_fontColor.b
       value: 0.1
@@ -3718,7 +3716,7 @@ PrefabInstance:
     - target: {fileID: 3338260271535012078, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3338260271535012078, guid: bb16762277a7e7a41a3cf6725a3a25c0, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901

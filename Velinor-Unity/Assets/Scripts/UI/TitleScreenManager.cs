@@ -23,26 +23,11 @@ public class TitleScreenManager : MonoBehaviour
     private AudioSource audioSource;
 
     private CanvasGroup canvasGroup;
-private bool transitioning = false;
+    private bool transitioning = false;
 
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        if (openingSceneAsset != null)
-        {
-            targetScene = openingSceneAsset.name;
-        }
-        else if (!string.IsNullOrEmpty(targetScene))
-        {
-            string[] guids = UnityEditor.AssetDatabase.FindAssets(targetScene + " t:Scene");
-            if (guids != null && guids.Length > 0)
-            {
-                string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[0]);
-                openingSceneAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(path);
-            }
-        }
-    }
-#endif
+    [Header("--- UI PANELS ---")]
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject settingsPanel;
 
     private void Start()
     {
@@ -58,6 +43,9 @@ private bool transitioning = false;
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false;
         }
+
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+        if (settingsPanel != null) settingsPanel.SetActive(false);
     }
 
     public void StartGame()
@@ -77,6 +65,10 @@ private bool transitioning = false;
     {
         transitioning = true;
         
+        // Start loading the scene in the background as soon as we press start
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetScene);
+        asyncLoad.allowSceneActivation = false;
+
         // --- EYE SEQUENCE START ---
         if (characterOverlayImage != null)
         {
@@ -115,29 +107,62 @@ private bool transitioning = false;
         if (canvasGroup != null) canvasGroup.alpha = 1f;
         transform.localScale = Vector3.one;
 
-        // Transition to next scene
+        // If we have a SceneTransitionManager, we can use its fade out before activating the scene
         if (SceneTransitionManager.Instance != null)
         {
-            SceneTransitionManager.Instance.TransitionToScene(targetScene);
+            // Trigger a quick fade out to black
+            yield return StartCoroutine(FadeToBlack(0.3f));
+            
+            // The scene should be almost loaded by now
+            while (asyncLoad.progress < 0.9f)
+            {
+                yield return null;
+            }
+            
+            asyncLoad.allowSceneActivation = true;
         }
         else
         {
-            SceneManager.LoadScene(targetScene);
+            // Fallback: just wait for load and activate
+            while (asyncLoad.progress < 0.9f)
+            {
+                yield return null;
+            }
+            asyncLoad.allowSceneActivation = true;
         }
     }
 
-    private IEnumerator FadeToBlack()
+    private IEnumerator FadeToBlack(float duration)
     {
-        float fadeDuration = 0.5f;
         float elapsed = 0f;
-
-        while (elapsed < fadeDuration)
+        while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            if (canvasGroup != null) canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
             yield return null;
         }
+        if (canvasGroup != null) canvasGroup.alpha = 0f;
+    }
 
-        canvasGroup.alpha = 0f;
+    public void OpenSettings()
+{
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
+        if (settingsPanel != null) settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+        if (settingsPanel != null) settingsPanel.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("[TitleScreenManager] Quitting game...");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

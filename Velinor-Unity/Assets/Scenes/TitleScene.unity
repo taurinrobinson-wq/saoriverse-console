@@ -169,6 +169,353 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &25833381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 25833382}
+  - component: {fileID: 25833384}
+  - component: {fileID: 25833383}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &25833382
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25833381}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 703629685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &25833383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25833381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: NEW GAME
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_sharedMaterial: {fileID: -1059712005433529561, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 3437684454
+  m_fontColor: {r: 0.9, g: 0.9, b: 0.9, a: 0.8}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 40
+  m_fontSizeBase: 40
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: -9.905457, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &25833384
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25833381}
+  m_CullTransparentMesh: 1
+--- !u!213 &108365657
+Sprite:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 64
+    height: 64
+  m_Offset: {x: 0, y: 0}
+  m_Border: {x: 0, y: 0, z: 0, w: 0}
+  m_PixelsToUnits: 100
+  m_Pivot: {x: 0.5, y: 0.5}
+  m_Extrude: 0
+  m_IsPolygon: 0
+  m_PackingTag: 
+  m_RenderDataKey:
+    00000000000000000000000000000000: 0
+  m_AtlasTags: []
+  m_SpriteAtlas: {fileID: 0}
+  m_RD:
+    serializedVersion: 3
+    texture: {fileID: 1958304180}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes:
+    - serializedVersion: 2
+      firstByte: 0
+      indexCount: 15
+      topology: 0
+      baseVertex: 0
+      firstVertex: 0
+      vertexCount: 7
+      localAABB:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+    m_IndexBuffer: 060005000400030004000500010004000300000001000300020001000000
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 7
+      m_Channels:
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 3
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 1
+        offset: 0
+        format: 0
+        dimension: 2
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      m_DataSize: 152
+      _typelessdata: 7b142e3e0ad7a33e000000000ad7a33e0ad7a3be000000000ad7a33e7b142e3e00000000295c8fbe0ad7a33e0000000052b89ebe0ad7a3be000000000ad7a3becdcc4c3e000000000ad7a3be52b89ebe000000000000000000000000000000000000443f0000803f0000803f000000000000803f0000443f0000803d0000803f0000803c00000000000000000000503f000000000000803c
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 64
+      height: 64
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: -1, y: -1}
+    settingsRaw: 64
+    uvTransform: {x: 100, y: 32, z: 100, w: 32}
+    downscaleMultiplier: 1
+  m_AtlasRD:
+    serializedVersion: 3
+    texture: {fileID: 1958304180}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes:
+    - serializedVersion: 2
+      firstByte: 0
+      indexCount: 15
+      topology: 0
+      baseVertex: 0
+      firstVertex: 0
+      vertexCount: 7
+      localAABB:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+    m_IndexBuffer: 060005000400030004000500010004000300000001000300020001000000
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 7
+      m_Channels:
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 3
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 1
+        offset: 0
+        format: 0
+        dimension: 2
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      m_DataSize: 152
+      _typelessdata: 7b142e3e0ad7a33e000000000ad7a33e0ad7a3be000000000ad7a33e7b142e3e00000000295c8fbe0ad7a33e0000000052b89ebe0ad7a3be000000000ad7a3becdcc4c3e000000000ad7a3be52b89ebe000000000000000000000000000000000000443f0000803f0000803f000000000000803f0000443f0000803d0000803f0000803c00000000000000000000503f000000000000803c
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 64
+      height: 64
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: -1, y: -1}
+    settingsRaw: 64
+    uvTransform: {x: 100, y: 32, z: 100, w: 32}
+    downscaleMultiplier: 1
+  m_PhysicsShape: []
+  m_Bones: []
+  m_ScriptableObjects: []
+  m_SpriteID: 
 --- !u!1 &305882771
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +595,52 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!1 &398369472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398369474}
+  - component: {fileID: 398369473}
+  m_Layer: 0
+  m_Name: SceneTransitionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &398369473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398369472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c6b6391d455d047b744ddeb6759d8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneTransitionManager
+  fadeCanvas: {fileID: 2055926317}
+  fadeDuration: 0.5
+--- !u!4 &398369474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398369472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &497422928
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +778,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497422928}
   m_CullTransparentMesh: 1
+--- !u!1 &511104148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511104149}
+  - component: {fileID: 511104151}
+  - component: {fileID: 511104150}
+  m_Layer: 0
+  m_Name: SeparatorLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &511104149
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511104148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 972472686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: 0, y: 2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &511104150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511104148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.3}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &511104151
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511104148}
+  m_CullTransparentMesh: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +945,343 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &543141631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543141632}
+  - component: {fileID: 543141634}
+  - component: {fileID: 543141633}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &543141632
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543141631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1810523596}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &543141633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543141631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: SETTINGS
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_sharedMaterial: {fileID: -1059712005433529561, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 3437684454
+  m_fontColor: {r: 0.9, g: 0.9, b: 0.9, a: 0.8}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 40
+  m_fontSizeBase: 40
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &543141634
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543141631}
+  m_CullTransparentMesh: 1
+--- !u!1 &703629684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703629685}
+  - component: {fileID: 703629686}
+  - component: {fileID: 703629687}
+  m_Layer: 0
+  m_Name: NEW GAMEButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703629685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703629684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 70, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 25833382}
+  m_Father: {fileID: 1351616030}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703629686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703629684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1599864797}
+        m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &703629687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703629684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac519a1f8c26f1442862d98d55ac2cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.UIButtonHover
+  hoverScale: 1.05
+  clickScale: 0.95
+  transitionSpeed: 15
+  useColorTransition: 1
+  hoverColor: {r: 0.77254903, g: 0.627451, b: 0.15686275, a: 0.9}
+  clickColor: {r: 0.1764706, g: 0.29411766, b: 0.21960784, a: 1}
+  targetGraphic: {fileID: 0}
+--- !u!1 &804013658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 804013660}
+  - component: {fileID: 804013659}
+  m_Layer: 0
+  m_Name: Player_ShadowVisual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &804013659
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804013658}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 108365657}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.64, y: 0.64}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!4 &804013660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804013658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2, y: -5.4, z: -0.05}
+  m_LocalScale: {x: 5.958339, y: 1.3750001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822523271
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +1340,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da7ccf9fccebf0440ab838ece8501b67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce6831f9dee01dd458183060ced774a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -789,6 +1594,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936925877}
   m_CullTransparentMesh: 1
+--- !u!1 &972472685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972472686}
+  - component: {fileID: 972472687}
+  - component: {fileID: 972472688}
+  m_Layer: 0
+  m_Name: CONTINUEButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &972472686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972472685}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1686348629}
+  - {fileID: 511104149}
+  m_Father: {fileID: 1351616030}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &972472687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972472685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &972472688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972472685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac519a1f8c26f1442862d98d55ac2cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.UIButtonHover
+  hoverScale: 1.05
+  clickScale: 0.95
+  transitionSpeed: 15
+  useColorTransition: 1
+  hoverColor: {r: 0.77254903, g: 0.627451, b: 0.15686275, a: 0.9}
+  clickColor: {r: 0.1764706, g: 0.29411766, b: 0.21960784, a: 1}
+  targetGraphic: {fileID: 0}
 --- !u!21 &1034524330
 Material:
   serializedVersion: 8
@@ -922,6 +1825,143 @@ Material:
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!1 &1116143079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1116143080}
+  - component: {fileID: 1116143082}
+  - component: {fileID: 1116143081}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1116143080
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116143079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1553257334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1116143081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116143079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: EXTRAS
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_sharedMaterial: {fileID: -1059712005433529561, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 3437684454
+  m_fontColor: {r: 0.9, g: 0.9, b: 0.9, a: 0.8}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 40
+  m_fontSizeBase: 40
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1116143082
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116143079}
+  m_CullTransparentMesh: 1
 --- !u!1 &1182881338
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +1978,6 @@ GameObject:
   - component: {fileID: 1182881343}
   - component: {fileID: 1182881346}
   - component: {fileID: 1182881345}
-  - component: {fileID: 1182881347}
   - component: {fileID: 1182881348}
   m_Layer: 0
   m_Name: StartButton
@@ -946,7 +1985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1182881339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -968,7 +2007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.15}
   m_AnchorMax: {x: 0.5, y: 0.15}
-  m_AnchoredPosition: {x: 0, y: -54}
+  m_AnchoredPosition: {x: -641.07, y: 76.5}
   m_SizeDelta: {x: 320, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1182881340
@@ -1048,7 +2087,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 4d8093f3869f194449accbf64d933669, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1136,20 +2175,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 4
   m_TargetDisplay: 0
---- !u!114 &1182881347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182881338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac519a1f8c26f1442862d98d55ac2cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.UIButtonHover
-  hoverScale: 1.05
-  transitionSpeed: 12
 --- !u!95 &1182881348
 Animator:
   serializedVersion: 7
@@ -1172,6 +2197,87 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1351616029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1351616030}
+  - component: {fileID: 1351616032}
+  - component: {fileID: 1351616031}
+  m_Layer: 0
+  m_Name: MainMenuPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1351616030
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351616029}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 703629685}
+  - {fileID: 972472686}
+  - {fileID: 1810523596}
+  - {fileID: 1553257334}
+  m_Father: {fileID: 1599864801}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 314.60004, y: -223.09998}
+  m_SizeDelta: {x: -514.59985, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1351616031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351616029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &1351616032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351616029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 3
+  m_Spacing: 30
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1452077734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +2895,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5707963
+      scalar: 8.726646
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1841,7 +2947,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 200
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -1901,7 +3007,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 5
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -1909,7 +3015,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 18, y: 10, z: 1}
+    m_Scale: {x: 30, y: 10, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -2611,17 +3717,17 @@ ParticleSystem:
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 0
+        ctime0: 19275
         ctime1: 32768
-        ctime2: 65535
+        ctime2: 49344
         ctime3: 0
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 0
+        atime0: 18311
         atime1: 32768
-        atime2: 65535
+        atime2: 49344
         atime3: 0
         atime4: 0
         atime5: 0
@@ -6278,6 +7384,103 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507578908}
   m_CullTransparentMesh: 1
+--- !u!1 &1553257333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1553257334}
+  - component: {fileID: 1553257335}
+  - component: {fileID: 1553257336}
+  m_Layer: 0
+  m_Name: EXTRASButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1553257334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553257333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -140, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1116143080}
+  m_Father: {fileID: 1351616030}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1553257335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553257333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1553257336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553257333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac519a1f8c26f1442862d98d55ac2cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.UIButtonHover
+  hoverScale: 1.05
+  clickScale: 0.95
+  transitionSpeed: 15
+  useColorTransition: 1
+  hoverColor: {r: 0.77254903, g: 0.627451, b: 0.15686275, a: 0.9}
+  clickColor: {r: 0.1764706, g: 0.29411766, b: 0.21960784, a: 1}
+  targetGraphic: {fileID: 0}
 --- !u!1 &1599864796
 GameObject:
   m_ObjectHideFlags: 0
@@ -6317,6 +7520,8 @@ MonoBehaviour:
   eyesPartOpenSprite: {fileID: 21300000, guid: 73cbd0f6c0866b74a8b4af3d375f5e42, type: 3}
   eyesOpenSprite: {fileID: 21300000, guid: d7a9ae73372d48847bf3fa91e859d5ae, type: 3}
   startButtonSound: {fileID: 8300000, guid: e44f26c350ce6cf499a3da6706436b69, type: 3}
+  mainMenuPanel: {fileID: 1351616029}
+  settingsPanel: {fileID: 0}
 --- !u!114 &1599864798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6397,6 +7602,8 @@ RectTransform:
   - {fileID: 1698336737}
   - {fileID: 1696541057}
   - {fileID: 1182881339}
+  - {fileID: 1351616030}
+  - {fileID: 2055926320}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -70.372, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6501,6 +7708,143 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1686348628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686348629}
+  - component: {fileID: 1686348631}
+  - component: {fileID: 1686348630}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1686348629
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686348628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 972472686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1686348630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686348628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: CONTINUE
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_sharedMaterial: {fileID: -1059712005433529561, guid: 5a67e69eb754d5a40ad518f1c5f95712, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 3437684454
+  m_fontColor: {r: 0.9, g: 0.9, b: 0.9, a: 0.8}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 40
+  m_fontSizeBase: 40
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1686348631
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686348628}
+  m_CullTransparentMesh: 1
 --- !u!1 &1696541056
 GameObject:
   m_ObjectHideFlags: 0
@@ -6533,7 +7877,7 @@ RectTransform:
   m_GameObject: {fileID: 1696541056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1811564012}
@@ -6541,7 +7885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.8}
   m_AnchorMax: {x: 0.5, y: 0.8}
-  m_AnchoredPosition: {x: 0, y: -427}
+  m_AnchoredPosition: {x: 0, y: -505.7}
   m_SizeDelta: {x: 800, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1696541058
@@ -6564,7 +7908,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75d966a194b0ddb4dbb57948fbcc176f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e85027650b00754b80446486c8cc0c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6701,7 +8045,7 @@ RectTransform:
   m_GameObject: {fileID: 1698336736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.06375, y: 1.06375, z: 1.06375}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1599864801}
@@ -6773,6 +8117,103 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!1 &1810523595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1810523596}
+  - component: {fileID: 1810523597}
+  - component: {fileID: 1810523598}
+  m_Layer: 0
+  m_Name: SETTINGSButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1810523596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810523595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -70, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 543141632}
+  m_Father: {fileID: 1351616030}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1810523597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810523595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1810523598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810523595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac519a1f8c26f1442862d98d55ac2cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.UI.UIButtonHover
+  hoverScale: 1.05
+  clickScale: 0.95
+  transitionSpeed: 15
+  useColorTransition: 1
+  hoverColor: {r: 0.77254903, g: 0.627451, b: 0.15686275, a: 0.9}
+  clickColor: {r: 0.1764706, g: 0.29411766, b: 0.21960784, a: 1}
+  targetGraphic: {fileID: 0}
 --- !u!1 &1811564011
 GameObject:
   m_ObjectHideFlags: 0
@@ -6923,6 +8364,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941853872}
   m_CullTransparentMesh: 1
+--- !u!28 &1958304180
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 4
+  m_Width: 64
+  m_Height: 64
+  m_CompleteImageSize: 16384
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 16384
+  _typelessdata: ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff01ffffff02ffffff02ffffff03ffffff03ffffff04ffffff04ffffff04ffffff04ffffff04ffffff04ffffff04ffffff03ffffff03ffffff02ffffff02ffffff01ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff01ffffff02ffffff03ffffff04ffffff04ffffff05ffffff06ffffff06ffffff07ffffff07ffffff07ffffff07ffffff07ffffff07ffffff07ffffff06ffffff06ffffff05ffffff04ffffff04ffffff03ffffff02ffffff01ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff03ffffff04ffffff05ffffff06ffffff07ffffff08ffffff09ffffff09ffffff0affffff0bffffff0bffffff0bffffff0bffffff0bffffff0bffffff0bffffff0affffff09ffffff09ffffff08ffffff07ffffff06ffffff05ffffff04ffffff03ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff03ffffff04ffffff05ffffff07ffffff08ffffff09ffffff0bffffff0cffffff0dffffff0effffff0effffff0fffffff0fffffff10ffffff10ffffff10ffffff0fffffff0fffffff0effffff0effffff0dffffff0cffffff0bffffff09ffffff08ffffff07ffffff05ffffff04ffffff03ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff04ffffff05ffffff07ffffff09ffffff0affffff0cffffff0dffffff0fffffff10ffffff11ffffff12ffffff13ffffff14ffffff14ffffff15ffffff15ffffff15ffffff14ffffff14ffffff13ffffff12ffffff11ffffff10ffffff0fffffff0dffffff0cffffff0affffff09ffffff07ffffff05ffffff04ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff03ffffff05ffffff07ffffff09ffffff0bffffff0cffffff0effffff10ffffff12ffffff13ffffff15ffffff16ffffff17ffffff18ffffff19ffffff1affffff1affffff1affffff1affffff1affffff19ffffff18ffffff17ffffff16ffffff15ffffff13ffffff12ffffff10ffffff0effffff0cffffff0bffffff09ffffff07ffffff05ffffff03ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff04ffffff06ffffff08ffffff0affffff0cffffff0effffff11ffffff13ffffff15ffffff17ffffff18ffffff1affffff1cffffff1dffffff1effffff1fffffff1fffffff20ffffff20ffffff20ffffff1fffffff1fffffff1effffff1dffffff1cffffff1affffff18ffffff17ffffff15ffffff13ffffff11ffffff0effffff0cffffff0affffff08ffffff06ffffff04ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff04ffffff07ffffff09ffffff0bffffff0effffff10ffffff13ffffff15ffffff17ffffff1affffff1cffffff1effffff20ffffff21ffffff23ffffff24ffffff25ffffff25ffffff26ffffff26ffffff26ffffff25ffffff25ffffff24ffffff23ffffff21ffffff20ffffff1effffff1cffffff1affffff17ffffff15ffffff13ffffff10ffffff0effffff0bffffff09ffffff07ffffff04ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff07ffffff0affffff0cffffff0fffffff12ffffff14ffffff17ffffff1affffff1cffffff1fffffff21ffffff23ffffff25ffffff27ffffff29ffffff2affffff2bffffff2cffffff2cffffff2dffffff2cffffff2cffffff2bffffff2affffff29ffffff27ffffff25ffffff23ffffff21ffffff1fffffff1cffffff1affffff17ffffff14ffffff12ffffff0fffffff0cffffff0affffff07ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff07ffffff0affffff0dffffff10ffffff13ffffff16ffffff19ffffff1cffffff1fffffff22ffffff24ffffff27ffffff29ffffff2cffffff2effffff2fffffff31ffffff32ffffff33ffffff33ffffff33ffffff33ffffff33ffffff32ffffff31ffffff2fffffff2effffff2cffffff29ffffff27ffffff24ffffff22ffffff1fffffff1cffffff19ffffff16ffffff13ffffff10ffffff0dffffff0affffff07ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff07ffffff0affffff0dffffff10ffffff13ffffff17ffffff1affffff1dffffff21ffffff24ffffff27ffffff2affffff2dffffff30ffffff32ffffff34ffffff36ffffff38ffffff39ffffff3affffff3affffff3bffffff3affffff3affffff39ffffff38ffffff36ffffff34ffffff32ffffff30ffffff2dffffff2affffff27ffffff24ffffff21ffffff1dffffff1affffff17ffffff13ffffff10ffffff0dffffff0affffff07ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff04ffffff07ffffff0affffff0dffffff10ffffff14ffffff17ffffff1bffffff1fffffff22ffffff26ffffff29ffffff2dffffff30ffffff33ffffff36ffffff39ffffff3bffffff3dffffff3fffffff40ffffff41ffffff42ffffff42ffffff42ffffff41ffffff40ffffff3fffffff3dffffff3bffffff39ffffff36ffffff33ffffff30ffffff2dffffff29ffffff26ffffff22ffffff1fffffff1bffffff17ffffff14ffffff10ffffff0dffffff0affffff07ffffff04ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff02ffffff04ffffff07ffffff0affffff0dffffff10ffffff14ffffff18ffffff1bffffff1fffffff23ffffff27ffffff2bffffff2fffffff33ffffff36ffffff3affffff3dffffff40ffffff42ffffff44ffffff46ffffff48ffffff49ffffff4affffff4affffff4affffff49ffffff48ffffff46ffffff44ffffff42ffffff40ffffff3dffffff3affffff36ffffff33ffffff2fffffff2bffffff27ffffff23ffffff1fffffff1bffffff18ffffff14ffffff10ffffff0dffffff0affffff07ffffff04ffffff02ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff06ffffff09ffffff0cffffff10ffffff13ffffff17ffffff1bffffff20ffffff24ffffff28ffffff2cffffff31ffffff35ffffff39ffffff3dffffff40ffffff44ffffff47ffffff4affffff4cffffff4effffff50ffffff51ffffff52ffffff52ffffff52ffffff51ffffff50ffffff4effffff4cffffff4affffff47ffffff44ffffff40ffffff3dffffff39ffffff35ffffff31ffffff2cffffff28ffffff24ffffff20ffffff1bffffff17ffffff13ffffff10ffffff0cffffff09ffffff06ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff08ffffff0bffffff0fffffff13ffffff17ffffff1bffffff1fffffff24ffffff28ffffff2dffffff32ffffff36ffffff3bffffff3fffffff43ffffff47ffffff4bffffff4effffff51ffffff54ffffff56ffffff58ffffff59ffffff5affffff5affffff5affffff59ffffff58ffffff56ffffff54ffffff51ffffff4effffff4bffffff47ffffff43ffffff3fffffff3bffffff36ffffff32ffffff2dffffff28ffffff24ffffff1fffffff1bffffff17ffffff13ffffff0fffffff0bffffff08ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff02ffffff04ffffff07ffffff0affffff0effffff12ffffff16ffffff1affffff1fffffff23ffffff28ffffff2dffffff32ffffff37ffffff3cffffff40ffffff45ffffff4affffff4effffff52ffffff56ffffff59ffffff5cffffff5effffff60ffffff62ffffff62ffffff63ffffff62ffffff62ffffff60ffffff5effffff5cffffff59ffffff56ffffff52ffffff4effffff4affffff45ffffff40ffffff3cffffff37ffffff32ffffff2dffffff28ffffff23ffffff1fffffff1affffff16ffffff12ffffff0effffff0affffff07ffffff04ffffff02ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff09ffffff0cffffff10ffffff14ffffff19ffffff1dffffff22ffffff27ffffff2cffffff32ffffff37ffffff3cffffff41ffffff46ffffff4bffffff50ffffff55ffffff59ffffff5dffffff61ffffff64ffffff67ffffff69ffffff6affffff6bffffff6cffffff6bffffff6affffff69ffffff67ffffff64ffffff61ffffff5dffffff59ffffff55ffffff50ffffff4bffffff46ffffff41ffffff3cffffff37ffffff32ffffff2cffffff27ffffff22ffffff1dffffff19ffffff14ffffff10ffffff0cffffff09ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff02ffffff04ffffff07ffffff0bffffff0effffff13ffffff17ffffff1cffffff21ffffff26ffffff2bffffff31ffffff36ffffff3cffffff41ffffff47ffffff4cffffff52ffffff57ffffff5cffffff60ffffff65ffffff69ffffff6cffffff6fffffff72ffffff73ffffff74ffffff75ffffff74ffffff73ffffff72ffffff6fffffff6cffffff69ffffff65ffffff60ffffff5cffffff57ffffff52ffffff4cffffff47ffffff41ffffff3cffffff36ffffff31ffffff2bffffff26ffffff21ffffff1cffffff17ffffff13ffffff0effffff0bffffff07ffffff04ffffff02ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff09ffffff0cffffff11ffffff15ffffff1affffff1fffffff24ffffff29ffffff2fffffff35ffffff3bffffff40ffffff46ffffff4cffffff52ffffff58ffffff5dffffff63ffffff68ffffff6dffffff71ffffff75ffffff78ffffff7bffffff7cffffff7effffff7effffff7effffff7cffffff7bffffff78ffffff75ffffff71ffffff6dffffff68ffffff63ffffff5dffffff58ffffff52ffffff4cffffff46ffffff40ffffff3bffffff35ffffff2fffffff29ffffff24ffffff1fffffff1affffff15ffffff11ffffff0cffffff09ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff04ffffff07ffffff0affffff0effffff13ffffff17ffffff1cffffff22ffffff27ffffff2dffffff33ffffff39ffffff3fffffff45ffffff4bffffff52ffffff58ffffff5effffff64ffffff6affffff6fffffff74ffffff79ffffff7dffffff81ffffff84ffffff86ffffff87ffffff88ffffff87ffffff86ffffff84ffffff81ffffff7dffffff79ffffff74ffffff6fffffff6affffff64ffffff5effffff58ffffff52ffffff4bffffff45ffffff3fffffff39ffffff33ffffff2dffffff27ffffff22ffffff1cffffff17ffffff13ffffff0effffff0affffff07ffffff04ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff02ffffff05ffffff08ffffff0cffffff10ffffff15ffffff1affffff1fffffff24ffffff2affffff30ffffff36ffffff3dffffff43ffffff4affffff50ffffff57ffffff5dffffff64ffffff6affffff71ffffff76ffffff7cffffff81ffffff86ffffff8affffff8dffffff8fffffff91ffffff91ffffff91ffffff8fffffff8dffffff8affffff86ffffff81ffffff7cffffff76ffffff71ffffff6affffff64ffffff5dffffff57ffffff50ffffff4affffff43ffffff3dffffff36ffffff30ffffff2affffff24ffffff1fffffff1affffff15ffffff10ffffff0cffffff08ffffff05ffffff02ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff06ffffff09ffffff0dffffff12ffffff17ffffff1cffffff21ffffff27ffffff2dffffff33ffffff3affffff40ffffff47ffffff4effffff55ffffff5cffffff63ffffff6affffff71ffffff77ffffff7effffff84ffffff89ffffff8effffff93ffffff96ffffff99ffffff9bffffff9bffffff9bffffff99ffffff96ffffff93ffffff8effffff89ffffff84ffffff7effffff77ffffff71ffffff6affffff63ffffff5cffffff55ffffff4effffff47ffffff40ffffff3affffff33ffffff2dffffff27ffffff21ffffff1cffffff17ffffff12ffffff0dffffff09ffffff06ffffff03ffffff01ffffff00ffffff00ffffff00ffffff01ffffff04ffffff07ffffff0bffffff0fffffff13ffffff18ffffff1effffff23ffffff29ffffff30ffffff36ffffff3dffffff44ffffff4bffffff52ffffff59ffffff60ffffff68ffffff6fffffff76ffffff7effffff85ffffff8bffffff91ffffff97ffffff9cffffffa0ffffffa3ffffffa5ffffffa6ffffffa5ffffffa3ffffffa0ffffff9cffffff97ffffff91ffffff8bffffff85ffffff7effffff76ffffff6fffffff68ffffff60ffffff59ffffff52ffffff4bffffff44ffffff3dffffff36ffffff30ffffff29ffffff23ffffff1effffff18ffffff13ffffff0fffffff0bffffff07ffffff04ffffff01ffffff00ffffff00ffffff00ffffff02ffffff04ffffff08ffffff0cffffff10ffffff15ffffff1affffff20ffffff25ffffff2cffffff32ffffff39ffffff40ffffff47ffffff4effffff56ffffff5dffffff65ffffff6dffffff74ffffff7cffffff84ffffff8bffffff92ffffff99ffffff9fffffffa5ffffffaaffffffadffffffafffffffb0ffffffafffffffadffffffaaffffffa5ffffff9fffffff99ffffff92ffffff8bffffff84ffffff7cffffff74ffffff6dffffff65ffffff5dffffff56ffffff4effffff47ffffff40ffffff39ffffff32ffffff2cffffff25ffffff20ffffff1affffff15ffffff10ffffff0cffffff08ffffff04ffffff02ffffff00ffffff00ffffff00ffffff02ffffff05ffffff09ffffff0dffffff11ffffff16ffffff1cffffff21ffffff27ffffff2effffff34ffffff3bffffff42ffffff4affffff51ffffff59ffffff61ffffff69ffffff71ffffff79ffffff81ffffff89ffffff91ffffff99ffffffa1ffffffa8ffffffaeffffffb3ffffffb7ffffffbaffffffbbffffffbaffffffb7ffffffb3ffffffaeffffffa8ffffffa1ffffff99ffffff91ffffff89ffffff81ffffff79ffffff71ffffff69ffffff61ffffff59ffffff51ffffff4affffff42ffffff3bffffff34ffffff2effffff27ffffff21ffffff1cffffff16ffffff11ffffff0dffffff09ffffff05ffffff02ffffff00ffffff00ffffff01ffffff03ffffff06ffffff09ffffff0effffff12ffffff17ffffff1dffffff23ffffff29ffffff2fffffff36ffffff3dffffff44ffffff4cffffff54ffffff5cffffff64ffffff6cffffff75ffffff7dffffff86ffffff8effffff97ffffff9fffffffa8ffffffafffffffb6ffffffbdffffffc1ffffffc5ffffffc6ffffffc5ffffffc1ffffffbdffffffb6ffffffafffffffa8ffffff9fffffff97ffffff8effffff86ffffff7dffffff75ffffff6cffffff64ffffff5cffffff54ffffff4cffffff44ffffff3dffffff36ffffff2fffffff29ffffff23ffffff1dffffff17ffffff12ffffff0effffff09ffffff06ffffff03ffffff01ffffff00ffffff01ffffff03ffffff06ffffff0affffff0effffff13ffffff18ffffff1effffff24ffffff2affffff31ffffff38ffffff3fffffff46ffffff4effffff56ffffff5effffff67ffffff6fffffff78ffffff81ffffff8affffff93ffffff9cffffffa5ffffffaeffffffb6ffffffbeffffffc6ffffffcbffffffcfffffffd1ffffffcfffffffcbffffffc6ffffffbeffffffb6ffffffaeffffffa5ffffff9cffffff93ffffff8affffff81ffffff78ffffff6fffffff67ffffff5effffff56ffffff4effffff46ffffff3fffffff38ffffff31ffffff2affffff24ffffff1effffff18ffffff13ffffff0effffff0affffff06ffffff03ffffff01ffffff00ffffff01ffffff04ffffff07ffffff0bffffff0fffffff14ffffff19ffffff1fffffff25ffffff2bffffff32ffffff39ffffff40ffffff48ffffff50ffffff58ffffff60ffffff69ffffff72ffffff7bffffff84ffffff8dffffff96ffffffa0ffffffaaffffffb3ffffffbdffffffc6ffffffceffffffd5ffffffdaffffffdcffffffdaffffffd5ffffffceffffffc6ffffffbdffffffb3ffffffaaffffffa0ffffff96ffffff8dffffff84ffffff7bffffff72ffffff69ffffff60ffffff58ffffff50ffffff48ffffff40ffffff39ffffff32ffffff2bffffff25ffffff1fffffff19ffffff14ffffff0fffffff0bffffff07ffffff04ffffff01ffffff00ffffff01ffffff04ffffff07ffffff0bffffff0fffffff14ffffff1affffff1fffffff25ffffff2cffffff33ffffff3affffff41ffffff49ffffff51ffffff59ffffff62ffffff6affffff73ffffff7cffffff86ffffff8fffffff99ffffffa3ffffffadffffffb7ffffffc1ffffffcbffffffd5ffffffdeffffffe5ffffffe7ffffffe5ffffffdeffffffd5ffffffcbffffffc1ffffffb7ffffffadffffffa3ffffff99ffffff8fffffff86ffffff7cffffff73ffffff6affffff62ffffff59ffffff51ffffff49ffffff41ffffff3affffff33ffffff2cffffff25ffffff1fffffff1affffff14ffffff0fffffff0bffffff07ffffff04ffffff01ffffff00ffffff01ffffff04ffffff07ffffff0bffffff10ffffff15ffffff1affffff20ffffff26ffffff2cffffff33ffffff3affffff42ffffff4affffff52ffffff5affffff62ffffff6bffffff74ffffff7effffff87ffffff91ffffff9bffffffa5ffffffafffffffbaffffffc5ffffffcfffffffdaffffffe5ffffffeefffffff3ffffffeeffffffe5ffffffdaffffffcfffffffc5ffffffbaffffffafffffffa5ffffff9bffffff91ffffff87ffffff7effffff74ffffff6bffffff62ffffff5affffff52ffffff4affffff42ffffff3affffff33ffffff2cffffff26ffffff20ffffff1affffff15ffffff10ffffff0bffffff07ffffff04ffffff01ffffff00ffffff01ffffff04ffffff07ffffff0bffffff10ffffff15ffffff1affffff20ffffff26ffffff2dffffff33ffffff3bffffff42ffffff4affffff52ffffff5affffff63ffffff6cffffff75ffffff7effffff88ffffff91ffffff9bffffffa6ffffffb0ffffffbbffffffc6ffffffd1ffffffdcffffffe7fffffff3fffffffffffffff3ffffffe7ffffffdcffffffd1ffffffc6ffffffbbffffffb0ffffffa6ffffff9bffffff91ffffff88ffffff7effffff75ffffff6cffffff63ffffff5affffff52ffffff4affffff42ffffff3bffffff33ffffff2dffffff26ffffff20ffffff1affffff15ffffff10ffffff0bffffff07ffffff04ffffff01ffffff00ffffff01ffffff04ffffff07ffffff0bffffff10ffffff15ffffff1affffff20ffffff26ffffff2cffffff33ffffff3affffff42ffffff4affffff52ffffff5affffff62ffffff6bffffff74ffffff7effffff87ffffff91ffffff9bffffffa5ffffffafffffffbaffffffc5ffffffcfffffffdaffffffe5ffffffeefffffff3ffffffeeffffffe5ffffffdaffffffcfffffffc5ffffffbaffffffafffffffa5ffffff9bffffff91ffffff87ffffff7effffff74ffffff6bffffff62ffffff5affffff52ffffff4affffff42ffffff3affffff33ffffff2cffffff26ffffff20ffffff1affffff15ffffff10ffffff0bffffff07ffffff04ffffff01ffffff00ffffff01ffffff04ffffff07ffffff0bffffff0fffffff14ffffff1affffff1fffffff25ffffff2cffffff33ffffff3affffff41ffffff49ffffff51ffffff59ffffff62ffffff6affffff73ffffff7cffffff86ffffff8fffffff99ffffffa3ffffffadffffffb7ffffffc1ffffffcbffffffd5ffffffdeffffffe5ffffffe7ffffffe5ffffffdeffffffd5ffffffcbffffffc1ffffffb7ffffffadffffffa3ffffff99ffffff8fffffff86ffffff7cffffff73ffffff6affffff62ffffff59ffffff51ffffff49ffffff41ffffff3affffff33ffffff2cffffff25ffffff1fffffff1affffff14ffffff0fffffff0bffffff07ffffff04ffffff01ffffff00ffffff01ffffff04ffffff07ffffff0bffffff0fffffff14ffffff19ffffff1fffffff25ffffff2bffffff32ffffff39ffffff40ffffff48ffffff50ffffff58ffffff60ffffff69ffffff72ffffff7bffffff84ffffff8dffffff96ffffffa0ffffffaaffffffb3ffffffbdffffffc6ffffffceffffffd5ffffffdaffffffdcffffffdaffffffd5ffffffceffffffc6ffffffbdffffffb3ffffffaaffffffa0ffffff96ffffff8dffffff84ffffff7bffffff72ffffff69ffffff60ffffff58ffffff50ffffff48ffffff40ffffff39ffffff32ffffff2bffffff25ffffff1fffffff19ffffff14ffffff0fffffff0bffffff07ffffff04ffffff01ffffff00ffffff01ffffff03ffffff06ffffff0affffff0effffff13ffffff18ffffff1effffff24ffffff2affffff31ffffff38ffffff3fffffff46ffffff4effffff56ffffff5effffff67ffffff6fffffff78ffffff81ffffff8affffff93ffffff9cffffffa5ffffffaeffffffb6ffffffbeffffffc6ffffffcbffffffcfffffffd1ffffffcfffffffcbffffffc6ffffffbeffffffb6ffffffaeffffffa5ffffff9cffffff93ffffff8affffff81ffffff78ffffff6fffffff67ffffff5effffff56ffffff4effffff46ffffff3fffffff38ffffff31ffffff2affffff24ffffff1effffff18ffffff13ffffff0effffff0affffff06ffffff03ffffff01ffffff00ffffff01ffffff03ffffff06ffffff09ffffff0effffff12ffffff17ffffff1dffffff23ffffff29ffffff2fffffff36ffffff3dffffff44ffffff4cffffff54ffffff5cffffff64ffffff6cffffff75ffffff7dffffff86ffffff8effffff97ffffff9fffffffa8ffffffafffffffb6ffffffbdffffffc1ffffffc5ffffffc6ffffffc5ffffffc1ffffffbdffffffb6ffffffafffffffa8ffffff9fffffff97ffffff8effffff86ffffff7dffffff75ffffff6cffffff64ffffff5cffffff54ffffff4cffffff44ffffff3dffffff36ffffff2fffffff29ffffff23ffffff1dffffff17ffffff12ffffff0effffff09ffffff06ffffff03ffffff01ffffff00ffffff00ffffff02ffffff05ffffff09ffffff0dffffff11ffffff16ffffff1cffffff21ffffff27ffffff2effffff34ffffff3bffffff42ffffff4affffff51ffffff59ffffff61ffffff69ffffff71ffffff79ffffff81ffffff89ffffff91ffffff99ffffffa1ffffffa8ffffffaeffffffb3ffffffb7ffffffbaffffffbbffffffbaffffffb7ffffffb3ffffffaeffffffa8ffffffa1ffffff99ffffff91ffffff89ffffff81ffffff79ffffff71ffffff69ffffff61ffffff59ffffff51ffffff4affffff42ffffff3bffffff34ffffff2effffff27ffffff21ffffff1cffffff16ffffff11ffffff0dffffff09ffffff05ffffff02ffffff00ffffff00ffffff00ffffff02ffffff04ffffff08ffffff0cffffff10ffffff15ffffff1affffff20ffffff25ffffff2cffffff32ffffff39ffffff40ffffff47ffffff4effffff56ffffff5dffffff65ffffff6dffffff74ffffff7cffffff84ffffff8bffffff92ffffff99ffffff9fffffffa5ffffffaaffffffadffffffafffffffb0ffffffafffffffadffffffaaffffffa5ffffff9fffffff99ffffff92ffffff8bffffff84ffffff7cffffff74ffffff6dffffff65ffffff5dffffff56ffffff4effffff47ffffff40ffffff39ffffff32ffffff2cffffff25ffffff20ffffff1affffff15ffffff10ffffff0cffffff08ffffff04ffffff02ffffff00ffffff00ffffff00ffffff01ffffff04ffffff07ffffff0bffffff0fffffff13ffffff18ffffff1effffff23ffffff29ffffff30ffffff36ffffff3dffffff44ffffff4bffffff52ffffff59ffffff60ffffff68ffffff6fffffff76ffffff7effffff85ffffff8bffffff91ffffff97ffffff9cffffffa0ffffffa3ffffffa5ffffffa6ffffffa5ffffffa3ffffffa0ffffff9cffffff97ffffff91ffffff8bffffff85ffffff7effffff76ffffff6fffffff68ffffff60ffffff59ffffff52ffffff4bffffff44ffffff3dffffff36ffffff30ffffff29ffffff23ffffff1effffff18ffffff13ffffff0fffffff0bffffff07ffffff04ffffff01ffffff00ffffff00ffffff00ffffff01ffffff03ffffff06ffffff09ffffff0dffffff12ffffff17ffffff1cffffff21ffffff27ffffff2dffffff33ffffff3affffff40ffffff47ffffff4effffff55ffffff5cffffff63ffffff6affffff71ffffff77ffffff7effffff84ffffff89ffffff8effffff93ffffff96ffffff99ffffff9bffffff9bffffff9bffffff99ffffff96ffffff93ffffff8effffff89ffffff84ffffff7effffff77ffffff71ffffff6affffff63ffffff5cffffff55ffffff4effffff47ffffff40ffffff3affffff33ffffff2dffffff27ffffff21ffffff1cffffff17ffffff12ffffff0dffffff09ffffff06ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff02ffffff05ffffff08ffffff0cffffff10ffffff15ffffff1affffff1fffffff24ffffff2affffff30ffffff36ffffff3dffffff43ffffff4affffff50ffffff57ffffff5dffffff64ffffff6affffff71ffffff76ffffff7cffffff81ffffff86ffffff8affffff8dffffff8fffffff91ffffff91ffffff91ffffff8fffffff8dffffff8affffff86ffffff81ffffff7cffffff76ffffff71ffffff6affffff64ffffff5dffffff57ffffff50ffffff4affffff43ffffff3dffffff36ffffff30ffffff2affffff24ffffff1fffffff1affffff15ffffff10ffffff0cffffff08ffffff05ffffff02ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff04ffffff07ffffff0affffff0effffff13ffffff17ffffff1cffffff22ffffff27ffffff2dffffff33ffffff39ffffff3fffffff45ffffff4bffffff52ffffff58ffffff5effffff64ffffff6affffff6fffffff74ffffff79ffffff7dffffff81ffffff84ffffff86ffffff87ffffff88ffffff87ffffff86ffffff84ffffff81ffffff7dffffff79ffffff74ffffff6fffffff6affffff64ffffff5effffff58ffffff52ffffff4bffffff45ffffff3fffffff39ffffff33ffffff2dffffff27ffffff22ffffff1cffffff17ffffff13ffffff0effffff0affffff07ffffff04ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff09ffffff0cffffff11ffffff15ffffff1affffff1fffffff24ffffff29ffffff2fffffff35ffffff3bffffff40ffffff46ffffff4cffffff52ffffff58ffffff5dffffff63ffffff68ffffff6dffffff71ffffff75ffffff78ffffff7bffffff7cffffff7effffff7effffff7effffff7cffffff7bffffff78ffffff75ffffff71ffffff6dffffff68ffffff63ffffff5dffffff58ffffff52ffffff4cffffff46ffffff40ffffff3bffffff35ffffff2fffffff29ffffff24ffffff1fffffff1affffff15ffffff11ffffff0cffffff09ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff02ffffff04ffffff07ffffff0bffffff0effffff13ffffff17ffffff1cffffff21ffffff26ffffff2bffffff31ffffff36ffffff3cffffff41ffffff47ffffff4cffffff52ffffff57ffffff5cffffff60ffffff65ffffff69ffffff6cffffff6fffffff72ffffff73ffffff74ffffff75ffffff74ffffff73ffffff72ffffff6fffffff6cffffff69ffffff65ffffff60ffffff5cffffff57ffffff52ffffff4cffffff47ffffff41ffffff3cffffff36ffffff31ffffff2bffffff26ffffff21ffffff1cffffff17ffffff13ffffff0effffff0bffffff07ffffff04ffffff02ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff09ffffff0cffffff10ffffff14ffffff19ffffff1dffffff22ffffff27ffffff2cffffff32ffffff37ffffff3cffffff41ffffff46ffffff4bffffff50ffffff55ffffff59ffffff5dffffff61ffffff64ffffff67ffffff69ffffff6affffff6bffffff6cffffff6bffffff6affffff69ffffff67ffffff64ffffff61ffffff5dffffff59ffffff55ffffff50ffffff4bffffff46ffffff41ffffff3cffffff37ffffff32ffffff2cffffff27ffffff22ffffff1dffffff19ffffff14ffffff10ffffff0cffffff09ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff02ffffff04ffffff07ffffff0affffff0effffff12ffffff16ffffff1affffff1fffffff23ffffff28ffffff2dffffff32ffffff37ffffff3cffffff40ffffff45ffffff4affffff4effffff52ffffff56ffffff59ffffff5cffffff5effffff60ffffff62ffffff62ffffff63ffffff62ffffff62ffffff60ffffff5effffff5cffffff59ffffff56ffffff52ffffff4effffff4affffff45ffffff40ffffff3cffffff37ffffff32ffffff2dffffff28ffffff23ffffff1fffffff1affffff16ffffff12ffffff0effffff0affffff07ffffff04ffffff02ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff08ffffff0bffffff0fffffff13ffffff17ffffff1bffffff1fffffff24ffffff28ffffff2dffffff32ffffff36ffffff3bffffff3fffffff43ffffff47ffffff4bffffff4effffff51ffffff54ffffff56ffffff58ffffff59ffffff5affffff5affffff5affffff59ffffff58ffffff56ffffff54ffffff51ffffff4effffff4bffffff47ffffff43ffffff3fffffff3bffffff36ffffff32ffffff2dffffff28ffffff24ffffff1fffffff1bffffff17ffffff13ffffff0fffffff0bffffff08ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff06ffffff09ffffff0cffffff10ffffff13ffffff17ffffff1bffffff20ffffff24ffffff28ffffff2cffffff31ffffff35ffffff39ffffff3dffffff40ffffff44ffffff47ffffff4affffff4cffffff4effffff50ffffff51ffffff52ffffff52ffffff52ffffff51ffffff50ffffff4effffff4cffffff4affffff47ffffff44ffffff40ffffff3dffffff39ffffff35ffffff31ffffff2cffffff28ffffff24ffffff20ffffff1bffffff17ffffff13ffffff10ffffff0cffffff09ffffff06ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff02ffffff04ffffff07ffffff0affffff0dffffff10ffffff14ffffff18ffffff1bffffff1fffffff23ffffff27ffffff2bffffff2fffffff33ffffff36ffffff3affffff3dffffff40ffffff42ffffff44ffffff46ffffff48ffffff49ffffff4affffff4affffff4affffff49ffffff48ffffff46ffffff44ffffff42ffffff40ffffff3dffffff3affffff36ffffff33ffffff2fffffff2bffffff27ffffff23ffffff1fffffff1bffffff18ffffff14ffffff10ffffff0dffffff0affffff07ffffff04ffffff02ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff04ffffff07ffffff0affffff0dffffff10ffffff14ffffff17ffffff1bffffff1fffffff22ffffff26ffffff29ffffff2dffffff30ffffff33ffffff36ffffff39ffffff3bffffff3dffffff3fffffff40ffffff41ffffff42ffffff42ffffff42ffffff41ffffff40ffffff3fffffff3dffffff3bffffff39ffffff36ffffff33ffffff30ffffff2dffffff29ffffff26ffffff22ffffff1fffffff1bffffff17ffffff14ffffff10ffffff0dffffff0affffff07ffffff04ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff07ffffff0affffff0dffffff10ffffff13ffffff17ffffff1affffff1dffffff21ffffff24ffffff27ffffff2affffff2dffffff30ffffff32ffffff34ffffff36ffffff38ffffff39ffffff3affffff3affffff3bffffff3affffff3affffff39ffffff38ffffff36ffffff34ffffff32ffffff30ffffff2dffffff2affffff27ffffff24ffffff21ffffff1dffffff1affffff17ffffff13ffffff10ffffff0dffffff0affffff07ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff07ffffff0affffff0dffffff10ffffff13ffffff16ffffff19ffffff1cffffff1fffffff22ffffff24ffffff27ffffff29ffffff2cffffff2effffff2fffffff31ffffff32ffffff33ffffff33ffffff33ffffff33ffffff33ffffff32ffffff31ffffff2fffffff2effffff2cffffff29ffffff27ffffff24ffffff22ffffff1fffffff1cffffff19ffffff16ffffff13ffffff10ffffff0dffffff0affffff07ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff05ffffff07ffffff0affffff0cffffff0fffffff12ffffff14ffffff17ffffff1affffff1cffffff1fffffff21ffffff23ffffff25ffffff27ffffff29ffffff2affffff2bffffff2cffffff2cffffff2dffffff2cffffff2cffffff2bffffff2affffff29ffffff27ffffff25ffffff23ffffff21ffffff1fffffff1cffffff1affffff17ffffff14ffffff12ffffff0fffffff0cffffff0affffff07ffffff05ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff04ffffff07ffffff09ffffff0bffffff0effffff10ffffff13ffffff15ffffff17ffffff1affffff1cffffff1effffff20ffffff21ffffff23ffffff24ffffff25ffffff25ffffff26ffffff26ffffff26ffffff25ffffff25ffffff24ffffff23ffffff21ffffff20ffffff1effffff1cffffff1affffff17ffffff15ffffff13ffffff10ffffff0effffff0bffffff09ffffff07ffffff04ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff04ffffff06ffffff08ffffff0affffff0cffffff0effffff11ffffff13ffffff15ffffff17ffffff18ffffff1affffff1cffffff1dffffff1effffff1fffffff1fffffff20ffffff20ffffff20ffffff1fffffff1fffffff1effffff1dffffff1cffffff1affffff18ffffff17ffffff15ffffff13ffffff11ffffff0effffff0cffffff0affffff08ffffff06ffffff04ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff03ffffff05ffffff07ffffff09ffffff0bffffff0cffffff0effffff10ffffff12ffffff13ffffff15ffffff16ffffff17ffffff18ffffff19ffffff1affffff1affffff1affffff1affffff1affffff19ffffff18ffffff17ffffff16ffffff15ffffff13ffffff12ffffff10ffffff0effffff0cffffff0bffffff09ffffff07ffffff05ffffff03ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff03ffffff04ffffff05ffffff07ffffff09ffffff0affffff0cffffff0dffffff0fffffff10ffffff11ffffff12ffffff13ffffff14ffffff14ffffff15ffffff15ffffff15ffffff14ffffff14ffffff13ffffff12ffffff11ffffff10ffffff0fffffff0dffffff0cffffff0affffff09ffffff07ffffff05ffffff04ffffff03ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff03ffffff04ffffff05ffffff07ffffff08ffffff09ffffff0bffffff0cffffff0dffffff0effffff0effffff0fffffff0fffffff10ffffff10ffffff10ffffff0fffffff0fffffff0effffff0effffff0dffffff0cffffff0bffffff09ffffff08ffffff07ffffff05ffffff04ffffff03ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff02ffffff03ffffff04ffffff05ffffff06ffffff07ffffff08ffffff09ffffff09ffffff0affffff0bffffff0bffffff0bffffff0bffffff0bffffff0bffffff0bffffff0affffff09ffffff09ffffff08ffffff07ffffff06ffffff05ffffff04ffffff03ffffff02ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff01ffffff02ffffff03ffffff04ffffff04ffffff05ffffff06ffffff06ffffff07ffffff07ffffff07ffffff07ffffff07ffffff07ffffff07ffffff06ffffff06ffffff05ffffff04ffffff04ffffff03ffffff02ffffff01ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff01ffffff02ffffff02ffffff03ffffff03ffffff04ffffff04ffffff04ffffff04ffffff04ffffff04ffffff04ffffff03ffffff03ffffff02ffffff02ffffff01ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff01ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00ffffff00
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+--- !u!1 &2055926316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2055926320}
+  - component: {fileID: 2055926319}
+  - component: {fileID: 2055926318}
+  - component: {fileID: 2055926317}
+  m_Layer: 0
+  m_Name: FadeOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!225 &2055926317
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055926316}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &2055926318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055926316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2055926319
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055926316}
+  m_CullTransparentMesh: 1
+--- !u!224 &2055926320
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055926316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1599864801}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!82 &535035448679793827
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7501,3 +9076,5 @@ SceneRoots:
   - {fileID: 1599864801}
   - {fileID: 7411214385260338270}
   - {fileID: 1452077737}
+  - {fileID: 804013660}
+  - {fileID: 398369474}

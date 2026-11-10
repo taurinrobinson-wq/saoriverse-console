@@ -27,8 +27,9 @@ public class PlayerController2D5 : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float verticalMoveSpeedMultiplier = 0.6f; // Slower vertical movement for perspective depth
     [SerializeField] private float minX = -10f;
-    [SerializeField] private float maxX = 10f;
+[SerializeField] private float maxX = 10f;
     [SerializeField] private float minY = -5f;
     [SerializeField] private float maxY = 5f;
 
@@ -110,9 +111,9 @@ public class PlayerController2D5 : MonoBehaviour
 
         HandleMovement();
         HandleInteraction();
-        UpdateDepthScaling(false);
+        UpdateDepthScaling(true); // Changed to immediate to prevent 'catching up' lag during movement
         ApplyTransform();
-    }
+}
 
     /// <summary>
     /// Teleports the player to a new position and updates scale immediately.
@@ -157,11 +158,12 @@ public class PlayerController2D5 : MonoBehaviour
 #endif
 
         // Calculate world movement
-        Vector3 moveDir = new Vector3(input.x, input.y, 0).normalized;
+        Vector3 moveDir = new Vector3(input.x, input.y * verticalMoveSpeedMultiplier, 0);
+        if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
         Vector3 movement = moveDir * moveSpeed * Time.deltaTime;
 
         // Clamp to bounds
-        Vector3 newPosition = currentPosition + movement;
+Vector3 newPosition = currentPosition + movement;
         newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
 
@@ -247,9 +249,14 @@ public class PlayerController2D5 : MonoBehaviour
         if (animator != null)
         {
             // StarterAssets blend tree: 0=idle, 2=walk, 6=run
-            float speedParam = input.sqrMagnitude > 0.01f ? 2.0f : 0f;
+            bool isMoving = input.sqrMagnitude > 0.01f;
+            float speedParam = isMoving ? 2.0f : 0f;
+            
+            // Scale playback speed based on moveSpeed relative to the 'standard' walk speed of 3.0
+            float motionSpeedScale = isMoving ? (moveSpeed / 3.0f) : 1f;
+
             animator.SetFloat(animIDSpeed, speedParam);
-            animator.SetFloat(animIDMotionSpeed, 1f);
+            animator.SetFloat(animIDMotionSpeed, motionSpeedScale);
             animator.SetBool(animIDGrounded, true);
         }
 

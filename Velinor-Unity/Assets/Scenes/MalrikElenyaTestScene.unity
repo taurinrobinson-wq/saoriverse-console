@@ -1544,7 +1544,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de43a84463e06f147b14105ed2c6dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
+  dialogueJson: {fileID: 0}
   npcId: Malrik
+  startPassageId: desert_intro
+  interactionRadius: 2.5
+  raviStats: {fileID: 0}
+  malrikStats: {fileID: 0}
+  elenyaStats: {fileID: 0}
+  saoriStats: {fileID: 0}
 --- !u!54 &953280741
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3559,7 +3566,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de43a84463e06f147b14105ed2c6dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteraction
+  dialogueJson: {fileID: 0}
   npcId: Elenya
+  startPassageId: desert_intro
+  interactionRadius: 2.5
+  raviStats: {fileID: 0}
+  malrikStats: {fileID: 0}
+  elenyaStats: {fileID: 0}
+  saoriStats: {fileID: 0}
 --- !u!54 &1943026965
 Rigidbody:
   m_ObjectHideFlags: 0
