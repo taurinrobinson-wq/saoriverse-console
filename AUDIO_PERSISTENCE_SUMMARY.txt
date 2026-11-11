@@ -1,0 +1,316 @@
+================================================================================
+                    AUDIO PERSISTENCE - COMPLETE! 
+================================================================================
+
+WHAT WAS DONE:
+
+1. Updated AudioManager.cs
+   - Added singleton pattern (private static AudioManager instance)
+   - Implemented DontDestroyOnLoad() for scene persistence
+   - Added Instance property for cross-scene access
+   - Added IsMusicContinuing() method
+   - Added ResumeMusic() method
+   - New Inspector option: "Persist Across Scenes" (enabled by default)
+
+2. Created SceneAudioController.cs
+   - Template for scene-specific audio behavior
+   - Attach to any scene for easy configuration
+   - Configurable options: override music, fade out, scene name tracking
+
+3. Created 4 Documentation Files
+   - AUDIO_SCENE_PERSISTENCE_GUIDE.md (Complete Technical Guide)
+   - AUDIO_PERSISTENCE_QUICK_REFERENCE.md (Quick Lookup)
+   - AUDIO_PERSISTENCE_EXAMPLES.md (7 Real-World Scenarios)
+   - AUDIO_PERSISTENCE_SETUP_CHECKLIST.md (Step-by-Step Implementation)
+
+================================================================================
+                            HOW IT WORKS:
+================================================================================
+
+BEFORE (Old Behavior):
+  Scene A (Music Playing) 
+      ↓ Scene Transition 
+  Scene B (Music Stops) ❌
+
+AFTER (New Behavior):
+  Scene A (Music Playing: Glass Horizon)
+      ↓ Scene Transition
+  Scene B (Music Continues: Glass Horizon) ✅
+      OR (Crossfades to new track if configured)
+      OR (Fades to silence if requested)
+
+KEY MECHANISM:
+- Uses DontDestroyOnLoad() to survive scene unloads
+- Singleton pattern ensures only one AudioManager exists
+- Scenes can check IsMusicContinuing() and decide what to do
+
+================================================================================
+                            QUICK START:
+================================================================================
+
+Step 1: Open your scene with AudioManager in Inspector
+        ✅ Verify "Persist Across Scenes" = ON (default)
+
+Step 2: Test a scene transition
+        Load Scene A → Transition to Scene B
+        ✅ Music should continue smoothly
+
+Step 3: For scenes that need different music:
+        AudioManager.Instance.CrossfadeToTrack(newClip, "Scene Name");
+
+Step 4: For scenes that need silence:
+        AudioManager.Instance.StopMusic(fadeOutDuration: 1.5f);
+
+================================================================================
+                            PUBLIC API:
+================================================================================
+
+QUERY METHODS:
+  AudioManager.Instance                  - Get singleton instance
+  AudioManager.Instance.IsPlaying()      - Check if music is playing
+  AudioManager.Instance.IsMusicContinuing() - Check if continuing from prev scene
+  AudioManager.Instance.GetCurrentTrack() - Get current audio clip
+  AudioManager.Instance.GetMusicVolume()  - Get volume (0-1)
+
+PLAYBACK CONTROL:
+  AudioManager.Instance.PlayMusicTrack(clip, "Name") - Play immediately
+  AudioManager.Instance.CrossfadeToTrack(clip, "Name") - Smooth transition
+  AudioManager.Instance.StopMusic(duration) - Fade out and stop
+  AudioManager.Instance.ResumeMusic() - Resume if paused
+  AudioManager.Instance.SetMusicVolume(0.5f) - Set volume (0-1)
+
+================================================================================
+                        COMMON PATTERNS:
+================================================================================
+
+PATTERN A: Continue Previous Music (No Code Needed!)
+  // Do nothing - music continues automatically
+  
+PATTERN B: Specific Music for This Scene
+  public class MyScene : MonoBehaviour
+  {
+      [SerializeField] private AudioClip sceneMusic;
+      
+      private void Start()
+      {
+          if (!AudioManager.Instance.IsMusicContinuing())
+          {
+              AudioManager.Instance.CrossfadeToTrack(sceneMusic, "Scene Name");
+          }
+      }
+  }
+
+PATTERN C: Silence for This Scene
+  public class BossScene : MonoBehaviour
+  {
+      private void Start()
+      {
+          AudioManager.Instance.StopMusic(fadeOutDuration: 1.5f);
+      }
+  }
+
+PATTERN D: Force Music Change
+  AudioManager.Instance.CrossfadeToTrack(newClip, "New Track");
+
+================================================================================
+                            FILES CREATED:
+================================================================================
+
+Code Files:
+  C:\saoriverse-console\Velinor-Unity\Assets\Scripts\Core\AudioManager.cs
+  C:\saoriverse-console\Velinor-Unity\Assets\Scripts\Core\SceneAudioController.cs
+
+Documentation:
+  C:\saoriverse-console\Velinor-Unity\Documentation\AUDIO_SCENE_PERSISTENCE_GUIDE.md
+  C:\saoriverse-console\Velinor-Unity\Documentation\AUDIO_PERSISTENCE_QUICK_REFERENCE.md
+  C:\saoriverse-console\Velinor-Unity\Documentation\AUDIO_PERSISTENCE_EXAMPLES.md
+  C:\saoriverse-console\Velinor-Unity\Documentation\AUDIO_PERSISTENCE_SETUP_CHECKLIST.md
+
+================================================================================
+                          KEY FEATURES:
+================================================================================
+
+✅ Music continues across scene transitions
+✅ Scenes can override with new tracks
+✅ Smooth crossfades (2-3 seconds, configurable)
+✅ Scenes can request silence (with fade-out)
+✅ Singleton pattern (one instance only)
+✅ DontDestroyOnLoad() (survives scene unloads)
+✅ Full public API for complete control
+✅ Debug logging with 🎵 emoji prefix
+✅ Inspector configuration options
+✅ IsMusicContinuing() query method
+
+================================================================================
+                            SETUP CHECKLIST:
+================================================================================
+
+Immediate:
+  [ ] Review AudioManager.cs changes
+  [ ] Check Inspector: "Persist Across Scenes" = ON
+  [ ] Test one scene transition
+  [ ] Read AUDIO_PERSISTENCE_QUICK_REFERENCE.md
+
+Short Term:
+  [ ] Update each scene with audio code
+  [ ] Test all scene transitions
+  [ ] Debug any audio issues
+  [ ] Adjust crossfade duration (2-3 sec recommended)
+
+Medium Term:
+  [ ] Add volume ducking for dialogue scenes
+  [ ] Implement conditional music based on game state
+  [ ] Optimize audio performance if needed
+  [ ] Polish transitions
+
+================================================================================
+                          DO's AND DON'Ts:
+================================================================================
+
+DO:
+  ✅ Use AudioManager.Instance to access from anywhere
+  ✅ Check IsMusicContinuing() before playing new music
+  ✅ Use CrossfadeToTrack() for smooth transitions
+  ✅ Keep AudioManager enabled at all times
+  ✅ Use DontDestroyOnLoad() (it's automatic now)
+
+DON'T:
+  ❌ Create AudioManager in every scene
+  ❌ Call DontDestroyOnLoad() manually from your scripts
+  ❌ Access musicSource directly from other classes
+  ❌ Disable the AudioManager GameObject
+  ❌ Instantiate multiple AudioManagers
+
+================================================================================
+                            TECH DETAILS:
+================================================================================
+
+Singleton Pattern:
+  - Prevents duplicate AudioManagers from being created
+  - Only first instance is kept, others are destroyed
+  - Accessible globally via AudioManager.Instance
+
+DontDestroyOnLoad():
+  - When SceneManager.LoadScene() is called, scene GameObjects are destroyed
+  - DontDestroyOnLoad() marks an object to survive unload
+  - AudioManager GameObject persists across scene transitions
+  - Audio continues uninterrupted
+
+Scene Transition Flow:
+  Scene A loaded → Music starts playing
+      ↓
+  Player triggers scene transition
+      ↓
+  SceneManager.LoadScene("Scene B") called
+      ↓
+  Scene A GameObjects destroyed (except AudioManager)
+      ↓
+  Scene B loads
+      ↓
+  AudioManager.musicSource continues playing from before
+      ↓
+  Scene B Start() can check IsMusicContinuing()
+      ↓
+  Scene B decides: continue, change, or silence
+
+================================================================================
+                        EXAMPLE SCENARIOS:
+================================================================================
+
+Scenario 1: Continue Market Music in Shop
+  Market: Glass Horizon plays
+  Transition to Shop
+  Shop: Glass Horizon continues (no code needed)
+  Result: Seamless audio experience
+
+Scenario 2: Boss Fight Requires Silence
+  Forest: Traveling Along plays
+  Transition to Boss Arena
+  Boss Arena: AudioManager.Instance.StopMusic(2f)
+  Result: Music fades out, boss encounter in silence
+
+Scenario 3: Different Music for Cavern
+  Forest: Traveling Along plays
+  Transition to Cavern
+  Cavern: AudioManager.Instance.CrossfadeToTrack(cavernMusic)
+  Result: Smooth crossfade to spooky cavern music
+
+Scenario 4: Dialogue On Top of Music
+  Scene: Simple background music
+  NPC starts talking:
+    AudioManager.Instance.SetMusicVolume(0.3f)
+    Play voiceover on separate AudioSource
+  Dialogue ends:
+    AudioManager.Instance.SetMusicVolume(0.7f)
+  Result: Background music + dialogue simultaneously
+
+================================================================================
+                          TROUBLESHOOTING:
+================================================================================
+
+Problem: Music stops when scene transitions
+Solution: Check "Persist Across Scenes" is ON in Inspector
+
+Problem: Two instances of AudioManager exist
+Solution: The singleton pattern prevents duplicates, but:
+  - Ensure only one AudioManager in startup scene
+  - Check no other scenes have AudioManager instances
+  - Review scene loading code
+
+Problem: Music doesn't play at all
+Solution:
+  - Verify AudioManager is enabled in Inspector
+  - Check audio clips are assigned
+  - Ensure AudioListener exists in scene
+  - Check Time.timeScale isn't 0
+
+Problem: Audio crackling during crossfade
+Solution: Increase crossfadeDuration in Inspector (try 2-3 seconds)
+
+Problem: Music volume too low/high
+Solution: Adjust musicVolume in Inspector or use SetMusicVolume()
+
+================================================================================
+                        NEXT STEPS:
+================================================================================
+
+1. Start Here:
+   Read: AUDIO_PERSISTENCE_QUICK_REFERENCE.md (5 min)
+
+2. Then:
+   Test one scene transition to verify it works (5 min)
+
+3. Understand:
+   Read: AUDIO_SCENE_PERSISTENCE_GUIDE.md (15 min)
+
+4. Implement:
+   Follow: AUDIO_PERSISTENCE_SETUP_CHECKLIST.md (1-2 hours)
+
+5. Optimize:
+   Review: AUDIO_PERSISTENCE_EXAMPLES.md (30 min)
+
+6. Polish:
+   Adjust crossfade duration, volumes, and transitions to your preference
+
+================================================================================
+                            SUMMARY:
+================================================================================
+
+Your audio system is now ENHANCED with:
+
+✨ Seamless audio persistence across scene transitions
+✨ Automatic scene music continuation
+✨ Smooth crossfading between tracks
+✨ Optional silence for specific scenes
+✨ Full public API for complete control
+✨ Singleton pattern for clean architecture
+✨ DontDestroyOnLoad() for reliable persistence
+✨ Comprehensive documentation and examples
+
+Music continues to play when players transition between scenes,
+creating a more immersive gaming experience. Scenes can override
+the music when needed, and silence is an option for special moments.
+
+Ready to go! 🎉
+
+================================================================================

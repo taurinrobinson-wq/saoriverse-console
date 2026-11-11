@@ -1,0 +1,552 @@
+{
+  "scene_id": "tala_glyph_02_barbed_kinship",
+  "required_flags": ["tala_unbarred_door_complete"],
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "sad",
+      "setting_description": "Tala's Cookstall After Closing - quiet, dimly lit",
+      "prompt": "My mother is coming to the marketplace. After nearly a decade, she's finally... I don't know what I'm supposed to do with that.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Listen",
+          "text": "You sound worried. Tell me what happened between you two.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "We both survived something neither of us should have survived. And somehow, that made us hate each other for it.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "sad",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.04
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "sad"
+        },
+        {
+          "tone": "O",
+          "label": "Question",
+          "text": "How long has it been since you've spoken?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "A decade. Since I left the caves. We haven't had a real conversation since before the collapse. She remembers me as someone I'm not anymore.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "skeptical",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "cautious"
+        },
+        {
+          "tone": "N",
+          "label": "Suggest",
+          "text": "Maybe it's better to leave old things alone.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "That's what I thought. But she reached out. And I... I can't ignore that.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": -0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": -0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        },
+        {
+          "tone": "E",
+          "label": "Offer",
+          "text": "Then talk to her. Not to fix things. Just to... exist together.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "That's the problem. I don't know if I can exist with her without fighting. But you've lost both your parents, haven't you? How do you... how did you accept that?",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "sad",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.04
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.05
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.04
+            },
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "sad"
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": []
+    },
+    {
+      "id": 2,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "sad",
+      "setting_description": "Tala's Cookstall After Closing - night",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
+      "prompt": "",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Share",
+          "text": "I didn't accept it well at first. But I realized—my parents loved me even in their mistakes. That doesn't disappear just because they're gone.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "My mother thinks all she did was hurt me. My father... I barely knew him before the collapse. And I've spent so long being angry at them both for not being what I needed.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "curious",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "curious"
+        },
+        {
+          "tone": "O",
+          "label": "Question",
+          "text": "What would you want to hear from her? Not an apology necessarily—what would matter?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "I don't know. Recognition, maybe? That what happened to us was real, and we both survived it differently.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "cautious",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "cautious"
+        }
+      ],
+      "next_beat_id": 3,
+      "system_triggers": []
+    },
+    {
+      "id": 3,
+      "type": "event_sequence",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "exhaustion",
+      "setting_description": "Tala's Cookstall - Tala's mother arrives",
+      "prompt": "Tala's mother appears at the stall. She looks older than memory, worn in ways Tala didn't anticipate. The air between them is careful, fragile.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "You came. I wasn't sure you would.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "cautious",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "cautious"
+        }
+      ],
+      "next_beat_id": 4,
+      "system_triggers": []
+    },
+    {
+      "id": 4,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala's Mother",
+      "portrait_expression": "skeptical",
+      "setting_description": "Tala's Cookstall",
+      "prompt": "I wanted to see you. I've wanted to for a long time. But I didn't know if you'd want to see me.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": ""
+        }
+      ],
+      "next_beat_id": 5,
+      "system_triggers": []
+    },
+    {
+      "id": 5,
+      "type": "event_sequence",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "determined",
+      "setting_description": "Tala's Cookstall - after dinner",
+      "prompt": "Dinner is prepared. They eat together in silence that feels less hostile than before. Then her mother begins speaking about the old days, her voice taking on that sentimental tone that always made Tala defensive.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Do you remember the gardens? Before everything fell apart? You used to help me tend them.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "resolved",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "resolved"
+        }
+      ],
+      "next_beat_id": 6,
+      "system_triggers": []
+    },
+    {
+      "id": 6,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "angry",
+      "setting_description": "Tala's Cookstall",
+      "prompt": "I remember gardens. I remember you telling me stories. I remember waiting for you to notice I was scared. That's what I remember.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": ""
+        }
+      ],
+      "next_beat_id": 7,
+      "system_triggers": []
+    },
+    {
+      "id": 7,
+      "type": "event_sequence",
+      "active_speaker": "Tala's Mother",
+      "display_name": "Tala's Mother",
+      "portrait_expression": "sad",
+      "setting_description": "Tala's Cookstall - silence follows",
+      "prompt": "The conversation falters. Her mother's expression tightens with pain. Tala feels the impulse to leave, to end this before it fractures further. Then, her mother does something unexpected.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "The food you made... it was good. And this—the stall, your work. It's impressive, Tala. I suppose... thank you.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        }
+      ],
+      "next_beat_id": 8,
+      "system_triggers": []
+    },
+    {
+      "id": 8,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "resolved",
+      "setting_description": "Tala's Cookstall - moment of understanding",
+      "prompt": "Tala realizes something in that moment. Her mother didn't fix anything. Didn't erase the pain or change the past. But she acknowledged what Tala had built. Not as redemption. As recognition.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Accept",
+          "text": "I know you did the best you could. I know now that the best you could do... was what you could do.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Yes. That's... yes.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "resolved",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.04
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.05
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.05
+            },
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.03
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "resolved"
+        }
+      ],
+      "next_beat_id": 9,
+      "system_triggers": []
+    },
+    {
+      "id": 9,
+      "type": "player_inner",
+      "active_speaker": "Lioren",
+      "display_name": "Lioren",
+      "portrait_expression": "curious",
+      "setting_description": "Tala's Cookstall - after the visit ends",
+      "prompt": "After Tala's mother leaves, Tala sits quietly for a long time. The kinship between them remains barbed—sharp and unresolved in places. But it's no longer being treated as dead.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Reflect",
+          "text": "Some things can't be fixed. But they can be held.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": [
+        {
+          "type": "glyph_effect",
+          "data": ["ache_resonance", "3"]
+        },
+        {
+          "type": "diary_append",
+          "data": ["Tala's mother came to the marketplace. Their conversation was difficult—neither of them can erase what happened. But Tala learned that pain and love can exist at the same time. Her kinship with her mother remains barbed, but it's no longer something to be ashamed of."]
+        },
+        {
+          "type": "close_dialogue"
+        },
+        {
+          "type": "set_flag",
+          "key": "tala_barbed_kinship_complete",
+          "value": true,
+          "note": "Enables third Tala encounter and potential glyph unlock"
+        }
+      ]
+    }
+  ]
+}
+

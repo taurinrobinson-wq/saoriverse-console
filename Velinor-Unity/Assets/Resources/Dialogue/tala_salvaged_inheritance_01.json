@@ -1,0 +1,601 @@
+{
+  "scene_id": "tala_glyph_03_salvaged_inheritance",
+  "required_flags": ["tala_barbed_kinship_complete"],
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "sad",
+      "setting_description": "Tala's Cookstall - morning after community announcement",
+      "prompt": "They're organizing a community celebration. Ten years since the marketplace was resettled. And they've asked me to cook for it.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Encourage",
+          "text": "That's an honor. They trust your work.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "It's an enormous responsibility. And I'm questioning whether I deserve it. These skills... I learned them out of necessity in the caves. That's not the same as a real inheritance.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "skeptical",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "skeptical"
+        },
+        {
+          "tone": "O",
+          "label": "Question",
+          "text": "What makes something a real inheritance versus something you just learned?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "That's the question, isn't it? My parents taught me to cook, to assess food, to make something from nothing. But they also... they tried to keep me fed while the world ended. I don't know if I owe them respect for that or resentment.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        },
+        {
+          "tone": "N",
+          "label": "Practical",
+          "text": "What do you need to prepare? I'll help.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Everything. We'll need to salvage. The marketplace has scraps and damaged goods, but I can work with them. Like I always do.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        },
+        {
+          "tone": "E",
+          "label": "Support",
+          "text": "Whatever you create will matter. Because you're making it with intention.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "I hope you're right. The community is counting on me to feed them. That's not something I can disappoint them on.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.03
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": [
+        {
+          "type": "quest_begin",
+          "data": ["community_celebration_preparation"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "event_sequence",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "determined",
+      "setting_description": "Marketplace and Communal Cooking Fire - preparation days",
+      "prompt": "Days pass. Tala and Lioren salvage tough roots, damaged grain, bitter leaves, and discarded scraps. The work is painstaking—checking each item with practiced hands, nothing wasted, everything considered.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Observe",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "You watch her as she works. Checking grain by touch. Turning her knife before cutting. Humming an old song—something from before the collapse. Saving portions for someone who hasn't eaten.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "resolved",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "resolved"
+        }
+      ],
+      "next_beat_id": 3,
+      "system_triggers": []
+    },
+    {
+      "id": 3,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "skeptical",
+      "setting_description": "Communal Cooking Fire - evening",
+      "prompt": "I see traces of my mother in the way I touch this grain. My father in the way I save what others discard. But I don't want to call it inheritance. That feels like I'm... claiming something I have no right to.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Listen",
+          "text": "Tell me more about what you see.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "My mother had this way of checking things. Not with her eyes—with her hands. She taught me that. And my father... he was the one who made sure nothing was wasted, even when there was plenty. Both of them did it out of love, even if that's not how it felt when they were doing it to me.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "sad",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "sad"
+        },
+        {
+          "tone": "O",
+          "label": "Reflect",
+          "text": "Those aren't small things. They're how people survive and build community.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Maybe. But I learned those things because I had to, not because I was ready. I was a child, and they threw survival at me faster than I could catch it.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "sad",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "sad"
+        }
+      ],
+      "next_beat_id": 4,
+      "system_triggers": []
+    },
+    {
+      "id": 4,
+      "type": "event_sequence",
+      "active_speaker": "Narrator",
+      "display_name": "",
+      "portrait_expression": "neutral",
+      "setting_description": "Communal Cooking Fire - day of celebration, during preparation",
+      "prompt": "The day of the celebration arrives. Most of the food is prepared. The marketplace is decorated. Community members are gathering. Then, without warning, a storm sweeps through.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Heavy rain. Sudden. The fire beneath the communal cookpot starts to fail. Food left out begins to soak. Tala's face goes white.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 5,
+      "system_triggers": []
+    },
+    {
+      "id": 5,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "angry",
+      "setting_description": "Communal Cooking Fire - storm raging",
+      "prompt": "This is ruined. All of it. I've ruined the celebration. I've ruined everything the community needed from me.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Stop her spiral",
+          "text": "Wait. This isn't failure. This is what happens. This is what your parents taught you to do.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "What do you mean? Everything is—",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "skeptical",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "skeptical"
+        }
+      ],
+      "next_beat_id": 6,
+      "system_triggers": []
+    },
+    {
+      "id": 6,
+      "type": "npc_turn",
+      "active_speaker": "Lioren",
+      "display_name": "Lioren",
+      "portrait_expression": "resolved",
+      "setting_description": "Communal Cooking Fire - in the storm",
+      "prompt": "When my family had a failed harvest, we didn't abandon dinner. We salvaged what we could. And my parents didn't apologize for what the weather did. They made do.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": ""
+        }
+      ],
+      "next_beat_id": 7,
+      "system_triggers": []
+    },
+    {
+      "id": 7,
+      "type": "event_sequence",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "determined",
+      "setting_description": "Communal Cooking Fire - in the storm",
+      "prompt": "Tala stares at the ruined food. At the rain. At Lioren. Then, something shifts in her understanding. She reaches for what remains—the grain still good, the roots salvageable, the portions not yet destroyed.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Come on. Help me gather what's left. My parents taught me this. Maybe not by name. Maybe not on purpose. But they did.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        }
+      ],
+      "next_beat_id": 8,
+      "system_triggers": []
+    },
+    {
+      "id": 8,
+      "type": "event_sequence",
+      "active_speaker": "Narrator",
+      "display_name": "",
+      "portrait_expression": "neutral",
+      "setting_description": "Communal Cooking Fire - after salvage, evening celebration",
+      "prompt": "The meal is smaller than planned. But it's genuine. Made from what the storm couldn't take and what Tala and Lioren managed to salvage. The community gathers. People eat. Some compliment the meal. Some simply nod with understanding.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": ""
+        }
+      ],
+      "next_beat_id": 9,
+      "system_triggers": []
+    },
+    {
+      "id": 9,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "resolved",
+      "setting_description": "Communal Cooking Fire - after celebration",
+      "prompt": "Watching the community eat and exist together, Tala realizes something she's been too angry to see. Her inheritance isn't a burden they placed on her. It's a gift they gave her—the resourcefulness to survive. The knowledge that nothing is wasted. The understanding that love sometimes looks like adaptation.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Accept",
+          "text": "Your parents gave you everything you needed to do this. That's not a mistake you're overcoming. That's a legacy you're living.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "I think... I think I finally understand. Not that everything they did was right, but that they were trying. And I'm not undoing them by making it better. I'm continuing them.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "resolved",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.04
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.05
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.05
+            },
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.04
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "resolved"
+        }
+      ],
+      "next_beat_id": 10,
+      "system_triggers": []
+    },
+    {
+      "id": 10,
+      "type": "player_inner",
+      "active_speaker": "Lioren",
+      "display_name": "Lioren",
+      "portrait_expression": "curious",
+      "setting_description": "Communal Cooking Fire - after everyone has left",
+      "prompt": "Tala smiles at what they've created together. For the first time, I see her recognize herself in her parents' work. Not as a victim of their choices. As a bearer of their knowledge. As someone who can choose what to do with it.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Reflect",
+          "text": "Inheritance isn't always about getting something good handed to you. Sometimes it's learning to survive, and then choosing to do it with grace.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": [
+        {
+          "type": "glyph_effect",
+          "data": ["legacy_resonance", "3"]
+        },
+        {
+          "type": "diary_append",
+          "data": ["The storm ruined most of the celebration's food. But in that moment, Tala stopped seeing her parents' teachings as a burden and recognized them as a gift—the resourcefulness to make do, the knowledge to salvage, the grace to keep going. She's not defined by what happened to her. She's defined by what she chose to do with it."]
+        },
+        {
+          "type": "close_dialogue"
+        },
+        {
+          "type": "set_flag",
+          "key": "tala_salvaged_inheritance_complete",
+          "value": true,
+          "note": "All three Tala glyphs now available for unlock"
+        },
+        {
+          "type": "npc_relationship_update",
+          "data": ["tala", "best_friend"]
+        }
+      ]
+    }
+  ]
+}
+
+
+

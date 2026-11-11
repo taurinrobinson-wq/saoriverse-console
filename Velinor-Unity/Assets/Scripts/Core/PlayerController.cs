@@ -182,13 +182,4 @@ namespace Velinor.Core
 
         public bool IsGrounded => isGrounded;
     }
-
-
-    /// <summary>
-    /// Interface for interactable objects in the world.
-    /// </summary>
-    public interface IInteractable
-    {
-        void Interact(GameObject player);
-    }
 }

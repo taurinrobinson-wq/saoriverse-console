@@ -14,6 +14,7 @@ public class DialogueTransitionFade : MonoBehaviour
     private Image fadeImage;
     private float fadeDuration = 1.2f;  // Longer fade for theatrical effect
     private float holdDuration = 0.8f;  // Longer pause on black
+    private GlyphDepthAdjusterTrigger glyphAdjusterTrigger;
 
     private void OnEnable()
     {
@@ -27,6 +28,19 @@ public class DialogueTransitionFade : MonoBehaviour
             {
                 Debug.LogWarning("[DialogueTransitionFade] TransitionFadeImage not found. Creating one...");
                 CreateFadeImage();
+            }
+        }
+
+        // Find or create the glyph depth adjuster trigger
+        if (glyphAdjusterTrigger == null)
+        {
+            glyphAdjusterTrigger = FindAnyObjectByType<GlyphDepthAdjusterTrigger>();
+            
+            if (glyphAdjusterTrigger == null)
+            {
+                Debug.Log("[DialogueTransitionFade] GlyphDepthAdjusterTrigger not found. Creating one...");
+                GameObject triggerObj = new GameObject("GlyphDepthAdjusterTrigger");
+                glyphAdjusterTrigger = triggerObj.AddComponent<GlyphDepthAdjusterTrigger>();
             }
         }
     }
@@ -92,6 +106,9 @@ public class DialogueTransitionFade : MonoBehaviour
 
         Debug.Log("[DialogueTransitionFade] Fade complete, screen is black. Props are now being rearranged...");
 
+        // 1a. Notify glyph depth adjusters that transition has started
+        glyphAdjusterTrigger?.OnTransitionStarted();
+
         // 2. While screen is black, trigger the system events (debris_clear, glyph_appear)
         onFadeComplete?.Invoke();
 
@@ -100,6 +117,9 @@ public class DialogueTransitionFade : MonoBehaviour
 
         // 4. Fade back in (alpha 255 → 0)
         yield return StartCoroutine(FadeToAlpha(0f, fadeDuration));
+
+        // 4a. Notify glyph depth adjusters that transition is completing (fade-in done)
+        glyphAdjusterTrigger?.OnTransitionCompleted();
 
         Debug.Log("[DialogueTransitionFade] Lights back up! Scene transition complete.");
         

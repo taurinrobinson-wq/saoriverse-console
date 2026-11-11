@@ -362,7 +362,31 @@
         }
       ],
       "next_beat_id": 3,
-      "system_triggers": []
+      "system_triggers": [
+        {
+          "type": "unlock_system",
+          "data": [
+            "inventory"
+          ]
+        },
+        {
+          "type": "unlock_npc_preference",
+          "data": [
+            "Willy",
+            "copper_wire",
+            "motor_parts",
+            "old_circuitry"
+          ]
+        },
+        {
+          "type": "system_notification",
+          "data": [
+            "Inventory Unlocked",
+            "Useful materials can be collected while exploring.",
+            "Press I to view your Inventory"
+          ]
+        }
+      ]
     },
     {
       "id": 3,
@@ -373,7 +397,7 @@
       "setting_description": "",
       "prompt_source": {
         "type": "previous_choice_response",
-        "beat_id": 1,
+        "beat_id": 2,
         "choice_field": "npc_response"
       },
       "prompt": "",
@@ -382,7 +406,7 @@
       "tone_choices": [
         {
           "tone": "T",
-          "label": "Trust",
+          "label": "Continue",
           "text": "Continue",
           "audio_clip_on_choice": "",
           "result_text": "",

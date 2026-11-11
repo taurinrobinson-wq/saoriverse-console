@@ -11,7 +11,7 @@ Shader "Custom/PlayerBodyHeightMask"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline" }
+        Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline" "Queue"="Geometry" }
         LOD 100
 
         Pass
@@ -22,6 +22,16 @@ Shader "Custom/PlayerBodyHeightMask"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            
+            // URP Keywords
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile_fog
+            #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
+            #pragma multi_compile _ _FORWARD_PLUS
+
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
@@ -36,6 +46,8 @@ Shader "Custom/PlayerBodyHeightMask"
                 float4 positionCS : SV_POSITION;
                 float3 positionWS : TEXCOORD0;
                 float3 normalWS : TEXCOORD1;
+                float4 shadowCoord : TEXCOORD2;
+                float3 positionOS : TEXCOORD3;
             };
 
             CBUFFER_START(UnityPerMaterial)
@@ -48,30 +60,90 @@ Shader "Custom/PlayerBodyHeightMask"
             Varyings vert(Attributes input)
             {
                 Varyings output;
-                output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
-                output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
+                output.positionCS = vertexInput.positionCS;
+                output.positionWS = vertexInput.positionWS;
                 output.normalWS = TransformObjectToWorldNormal(input.normalOS);
+                output.shadowCoord = GetShadowCoord(vertexInput);
+                output.positionOS = input.positionOS.xyz;
                 return output;
             }
 
-            float4 frag(Varyings input) : SV_Target
+            half4 frag(Varyings input) : SV_Target
             {
-                // Determine if we are in the head or torso based on LOCAL Y position
-                // Note: Armature_Mesh local space Y is roughly 0 (feet) to 1.8 (head)
-                // We need the local position. Let's pass it from vert.
-                
-                // Re-calculating local Y by transforming back or passing it.
-                float3 posOS = TransformWorldToObject(input.positionWS);
-                float mask = saturate((posOS.y - _HeadThreshold) * 100.0); // Sharp transition
-                
+                // Preserve height mask logic (Local Y)
+                float mask = saturate((input.positionOS.y - _HeadThreshold) * 100.0);
                 float3 albedo = lerp(_ClothColor.rgb, _SkinColor.rgb, mask);
                 
-                // Simple lighting
-                float3 lightDir = _MainLightPosition.xyz;
-                float diffuse = saturate(dot(normalize(input.normalWS), lightDir));
-                float3 finalColor = albedo * (diffuse * _MainLightColor.rgb + 0.2); // + ambient
+                // Prepare URP lighting data
+                InputData inputData = (InputData)0;
+                inputData.positionWS = input.positionWS;
+                inputData.normalWS = normalize(input.normalWS);
+                inputData.viewDirectionWS = SafeNormalize(GetCameraPositionWS() - input.positionWS);
                 
-                return float4(finalColor, 1.0);
+                #if defined(_MAIN_LIGHT_SHADOWS_SCREEN) && !defined(_SURFACE_TYPE_TRANSPARENT)
+                    inputData.shadowCoord = ComputeScreenPos(input.positionCS);
+                #else
+                    inputData.shadowCoord = input.shadowCoord;
+                #endif
+
+                inputData.bakedGI = SampleSH(inputData.normalWS);
+                inputData.shadowMask = half4(1, 1, 1, 1);
+                
+                SurfaceData surfaceData = (SurfaceData)0;
+                surfaceData.albedo = albedo;
+                surfaceData.metallic = 0.0;
+                surfaceData.specular = 0.0;
+                surfaceData.smoothness = _Smoothness;
+                surfaceData.occlusion = 1.0;
+                surfaceData.alpha = 1.0;
+
+                return UniversalFragmentPBR(inputData, surfaceData);
+            }
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "ShadowCaster"
+            Tags { "LightMode"="ShadowCaster" }
+
+            ZWrite On
+            ZTest LEqual
+            ColorMask 0
+
+            HLSLPROGRAM
+            #pragma vertex ShadowPassVertex
+            #pragma fragment ShadowPassFragment
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
+
+            struct Attributes
+            {
+                float4 positionOS   : POSITION;
+                float3 normalOS     : NORMAL;
+            };
+
+            struct Varyings
+            {
+                float4 positionCS   : SV_POSITION;
+            };
+
+            float3 _LightDirection;
+
+            Varyings ShadowPassVertex(Attributes input)
+            {
+                Varyings output;
+                float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
+                float3 normalWS = TransformObjectToWorldNormal(input.normalOS);
+                output.positionCS = TransformWorldToHClip(ApplyShadowBias(positionWS, normalWS, _LightDirection));
+                return output;
+            }
+
+            half4 ShadowPassFragment(Varyings input) : SV_TARGET
+            {
+                return 0;
             }
             ENDHLSL
         }

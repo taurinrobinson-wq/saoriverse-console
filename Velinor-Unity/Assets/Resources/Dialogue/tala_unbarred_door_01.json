@@ -1,0 +1,560 @@
+{
+  "scene_id": "tala_glyph_01_unbarred_door",
+  "required_flags": ["inventory_unlocked"],
+  "beats": [
+    {
+      "id": 1,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "curious",
+      "setting_description": "Tala's Market Cookstall - afternoon activity, smell of cooking",
+      "prompt": "Hey! You look like someone who doesn't mind getting their hands dirty. I need help salvaging some ingredients from the marketplace. Most of it's damaged or spoiled, but if you know what to look for... well, some things can be made safe.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "I'd be happy to help. I need to understand how things work here anyway.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Good. You've got that look about you—like you're willing to learn instead of just take. That's rare.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "target": "Tala",
+              "stat": "authority",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "I noticed you throw a lot of food away. What criteria are you using to decide what's salvageable?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Sharp eye. Most people don't ask. It's about texture, smell, color—learned it the hard way when you're trying to feed people without getting them sick.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0.03
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.02
+            },
+            {
+              "target": "Tala",
+              "stat": "respect",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "I could use the work. What's the pay?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Bits, if you stick around. For now? Meal and maybe some salvage for yourself. I don't have much to spare, but I don't ask people to work hungry.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": -0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "You care about the people who eat your food. That matters.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "It's practical. Dead customers are bad for business. But... yeah. I suppose it matters.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "resolved",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.03
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.02
+            },
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        }
+      ],
+      "next_beat_id": 2,
+      "system_triggers": [
+        {
+          "type": "update_dialogue_names",
+          "data": ["Tala"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "determined",
+      "setting_description": "Tala's Market Cookstall - working side by side",
+      "prompt_source": {
+        "type": "previous_choice_response",
+        "beat_id": 1,
+        "choice_field": "npc_response"
+      },
+      "prompt": "Come on then. I'll show you what I mean. Most people's instinct is wrong about food—they see damage and think it's all ruined. But damage isn't always death.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Learn",
+          "text": "Show me. I want to understand.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "There's a reason I asked if you were willing to learn. This isn't something you can do halfway.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        },
+        {
+          "tone": "O",
+          "label": "Ask",
+          "text": "What's the distinction? What makes food safe versus dangerous after damage?",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Context and time. A bruised apple can still be eaten. Grain with moisture and time becomes something else entirely. You learn the difference or you poison people.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0.03
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "respect",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "determined"
+        }
+      ],
+      "next_beat_id": 3,
+      "system_triggers": [
+        {
+          "type": "unlock_npc_preference",
+          "data": ["Tala", "salvageable_ingredients", "kitchen_supplies", "cooking_fuel"]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "event_sequence",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "cautious",
+      "setting_description": "Later - Tala's living quarters behind cookstall",
+      "prompt": "After several days of work, Tala stops to observe you more carefully. There's a slight shift in how she regards you—less guarded.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Continue",
+          "text": "Continue",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "You don't have somewhere to sleep, do you? I've seen how you look at night—exhausted but nowhere to go.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "cautious",
+          "tone_effects": [],
+          "remnants_effects": [],
+          "system_triggers": [],
+          "npc_portrait_expression": "cautious"
+        }
+      ],
+      "next_beat_id": 4,
+      "system_triggers": []
+    },
+    {
+      "id": 4,
+      "type": "npc_turn",
+      "active_speaker": "Tala",
+      "display_name": "Tala",
+      "portrait_expression": "cautious",
+      "setting_description": "Tala's living quarters behind cookstall",
+      "prompt": "The room behind my stall is... it's the only space that's entirely mine. I haven't shared it with anyone since I left the caves. But I have more space than I use, and you work well. If you can help with the evening prep and keep things clean, you can stay here.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Accept",
+          "text": "Thank you. I'll earn my place here.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "Don't thank me. This is practical. You work, you stay. You stop being useful, you find somewhere else.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.04
+            },
+            {
+              "stat": "observation",
+              "delta": 0.01
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.04
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "O",
+          "label": "Understand",
+          "text": "You're sharing your private space. That means something, whether you say it or not.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "...",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "skeptical",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.02
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.01
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.03
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "distant"
+        },
+        {
+          "tone": "N",
+          "label": "Practical",
+          "text": "I need somewhere to sleep. I won't take advantage of that.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "That's all I need to know.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "nuance",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        },
+        {
+          "tone": "E",
+          "label": "Grateful",
+          "text": "Thank you. Truly. I was starting to wonder where I'd end up.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "It's practical. You can stay. Now come on, there's evening prep to finish before the market closes.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "determined",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.03
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Tala",
+              "stat": "trust",
+              "delta": 0.03
+            }
+          ],
+          "system_triggers": [],
+          "npc_portrait_expression": "neutral"
+        }
+      ],
+      "next_beat_id": 5,
+      "system_triggers": [
+        {
+          "type": "set_location",
+          "data": ["tala_living_quarters", "home"]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "player_inner",
+      "active_speaker": "Lioren",
+      "display_name": "Lioren",
+      "portrait_expression": "resolved",
+      "setting_description": "Tala's room - small, clean, sparse but lived-in",
+      "prompt": "Standing in this small room, I realize for the first time since arriving in Velinor that I have a place. Not temporary. Not borrowed. Tala protects this space, and she's chosen to share it with me. The gesture is quiet, unadorned. But it's real.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Reflect",
+          "text": "This is the beginning of something. Not a rescue. A choice.",
+          "audio_clip_on_choice": "",
+          "result_text": "",
+          "show_result_in_notification": false,
+          "npc_response": "",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [],
+          "system_triggers": []
+        }
+      ],
+      "next_beat_id": 0,
+      "system_triggers": [
+        {
+          "type": "glyph_effect",
+          "data": ["trust_resonance", "3"]
+        },
+        {
+          "type": "diary_append",
+          "data": ["Tala offered me shelter. Not charity. Partnership. She taught me to see value in what others discard, and in return, she made room for me in her life. I'm beginning to understand that trust is sometimes an unbarred door."]
+        },
+        {
+          "type": "close_dialogue"
+        },
+        {
+          "type": "set_flag",
+          "key": "tala_unbarred_door_complete",
+          "value": true,
+          "note": "Enables second Tala encounter and potential glyph unlock"
+        }
+      ]
+    }
+  ]
+}

@@ -8,14 +8,18 @@ namespace Velinor.Core
     /// 
     /// Integrates with MarketSceneSetup for dusk atmosphere
     /// Manages looping music with crossfading support
+    /// Persists across scene transitions (DontDestroyOnLoad)
     /// </summary>
     public class AudioManager : MonoBehaviour
     {
+        private static AudioManager instance;
+
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioClip currentTrack;
         [SerializeField] private float musicVolume = 0.7f;
         [SerializeField] private bool autoLoopMusic = true;
         [SerializeField] private float crossfadeDuration = 2f;
+        [SerializeField] private bool persistAcrossScenes = true;
 
         // Track references
         [Header("Available Tracks")]
@@ -33,6 +37,23 @@ namespace Velinor.Core
 
         private void OnEnable()
         {
+            // Singleton pattern: ensure only one AudioManager exists
+            if (instance == null)
+            {
+                instance = this;
+                if (persistAcrossScenes)
+                {
+                    DontDestroyOnLoad(gameObject);
+                    Debug.Log("🎵 AudioManager: Set to persist across scenes (DontDestroyOnLoad)");
+                }
+            }
+            else if (instance != this)
+            {
+                Debug.LogWarning("🎵 AudioManager: Another instance exists. Destroying this one.");
+                Destroy(gameObject);
+                return;
+            }
+
             InitializeAudioSource();
             LoadAudioClips();
         }
@@ -236,5 +257,37 @@ namespace Velinor.Core
         public float GetMusicVolume() => musicVolume;
         public bool IsPlaying() => musicSource.isPlaying;
         public AudioClip GetCurrentTrack() => currentTrack;
+
+        /// <summary>
+        /// Get the singleton instance (for cross-scene access)
+        /// </summary>
+        public static AudioManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    Debug.LogWarning("🎵 AudioManager: Instance is null. Creating new one.");
+                }
+                return instance;
+            }
+        }
+
+        /// <summary>
+        /// Check if audio is still playing from previous scene
+        /// </summary>
+        public bool IsMusicContinuing() => IsPlaying() && currentTrack != null;
+
+        /// <summary>
+        /// Resume music if paused (useful for scene transitions)
+        /// </summary>
+        public void ResumeMusic()
+        {
+            if (musicSource != null && !musicSource.isPlaying && currentTrack != null)
+            {
+                musicSource.Play();
+                Debug.Log($"🎵 Resumed: {currentTrack.name}");
+            }
+        }
     }
 }
