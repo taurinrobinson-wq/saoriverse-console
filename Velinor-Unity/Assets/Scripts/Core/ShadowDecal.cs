@@ -83,6 +83,7 @@ public class ShadowDecal : MonoBehaviour
     private void CreateShadowDecal()
     {
         shadowObj = new GameObject(gameObject.name + "_ShadowVisual");
+        shadowObj.hideFlags = HideFlags.DontSave;
         // Do NOT parent to this object to avoid inherited rotation whiplash
         shadowObj.transform.position = transform.position;
         shadowObj.transform.rotation = Quaternion.identity;
@@ -146,8 +147,8 @@ public class ShadowDecal : MonoBehaviour
             Vector3 lightDir = mainLight.transform.forward;
             
             // If the light is from the 'right', cast shadow 'left'
-            currentOffset.x = -lightDir.x * lightOffsetMultiplier;
-            currentOffset.y = -lightDir.y * 0.2f; // Keep y offset small to stay at feet
+            currentOffset.x += -lightDir.x * lightOffsetMultiplier;
+            currentOffset.y += -lightDir.y * 0.2f; // Add light offset to the manual placement
 
             // Dynamic Tinting: Blend base shadow with a cool tint for ambient depth
             // Warm lights (red/orange) create cool shadows (blue/purple)
@@ -191,9 +192,9 @@ shadowObj.transform.position = shadowWorldPos;
         shadowRenderer.color = new Color(currentShadowColor.r, currentShadowColor.g, currentShadowColor.b, currentAlpha);
         
         // Scale includes the parent's scale for depth perception, but remains world-aligned
-        float worldScale = transform.lossyScale.x;
+        float worldScale = Mathf.Abs(transform.lossyScale.x);
         shadowObj.transform.localScale = new Vector3(
-            worldScale * shadowScale * (1f + shadowSkew) * currentStrideWidth, 
+            worldScale * shadowScale * (1f + shadowSkew) * currentStrideWidth,
             worldScale * shadowScale * 0.3f, 
             1f
         );

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 2
+  m_Component:
+  - m_Script: {fileID: 11500000, guid: 8f4b3c2e1f8a4d5c6e7f8a9b0c1d2e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ItemId: copper_wire
+  m_DisplayName: Copper Wire
+  m_Description: Salvaged copper electrical wire useful for repairs and crafting
+  m_Category: Material
+  m_Icon: {fileID: 0}
+  m_Tags:
+  - Metal
+  - Electrical
+  m_BaseValue: 2
+  m_MaxStackSize: 99

@@ -29,10 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _GlowIntensity: 5
-    - _OutlineWidth: 0.01
+    - _GlowIntensity: 2.31
+    - _OutlineWidth: 0.0069
     - _Threshold: 0.05
     m_Colors:
+    - _EmissionColor: {r: 0.8862745, g: 0.74509805, b: 0.5019608, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
