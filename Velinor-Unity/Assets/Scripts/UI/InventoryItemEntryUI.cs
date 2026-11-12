@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Velinor.Core;
+using Velinor.Inventory;
 
 namespace Velinor.UI
 {
