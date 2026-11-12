@@ -96,10 +96,10 @@ namespace Velinor.UI
 
             if (entry != null)
             {
-                entry.SetItem(itemDef, quantity);
+                entry.Initialize(itemDef, quantity);
                 displayedItems[itemId] = entry;
             }
-        }
+}
 
         private void RemoveItemDisplay(string itemId)
         {

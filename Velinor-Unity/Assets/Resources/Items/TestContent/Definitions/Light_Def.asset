@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57eef9bcf45c69b40a3c7ce8a17a2504, type: 3}
+  m_Name: Light_Def
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Inventory.SchematicDefinition
+  schematicItem: {fileID: 11400000, guid: da51710a2befa1e479d54f8d19c13503, type: 2}
+  ingredients:
+  - item: {fileID: 11400000, guid: 27f29ff57de231948b4c2a102ee06cfb, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: a80bb0b592a667e4bb10485edd845db1, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: a8b52b1b6ac6e8243855512bc1018cd6, type: 2}
+    quantity: 1
+  resultItem: {fileID: 11400000, guid: 89579e2e727fbe2499011f3b123437d9, type: 2}
+  resultQuantity: 1

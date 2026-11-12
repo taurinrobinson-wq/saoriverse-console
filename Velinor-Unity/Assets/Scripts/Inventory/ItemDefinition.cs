@@ -68,7 +68,8 @@ namespace Velinor.Inventory
         CraftedItem,
         Food,
         PersonalItem,
-        KeyItem
+        KeyItem,
+        Schematic
     }
 
     /// <summary>

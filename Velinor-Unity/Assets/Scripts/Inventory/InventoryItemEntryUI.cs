@@ -1,29 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 namespace Velinor.Inventory
 {
     /// <summary>
     /// InventoryItemEntryUI: Single row in inventory list.
-    /// Shows item icon, name, quantity, and description on hover.
-    /// 
-    /// Expected hierarchy:
-    /// - HorizontalLayoutGroup (root)
-    ///   - Image (icon)
-    ///   - VerticalLayoutGroup
-    ///     - Text (name)
-    ///     - Text (quantity)
-    ///   - (optional) Tooltip or inspector panel for details
+    /// Shows item icon, name, quantity, and demand info.
     /// </summary>
     public class InventoryItemEntryUI : MonoBehaviour
     {
+        [Header("Main Display")]
         [SerializeField] private Image itemIcon;
-        [SerializeField] private Text itemNameText;
-        [SerializeField] private Text itemQuantityText;
+        [SerializeField] private TextMeshProUGUI itemNameText;
+        [SerializeField] private TextMeshProUGUI itemQuantityText;
         [SerializeField] private Button entryButton;
+        [SerializeField] private Image selectionHighlight;
+
+        [Header("Demand Info")]
+        [SerializeField] private GameObject demandRoot;
+        [SerializeField] private Button demandToggleCarrot;
+        [SerializeField] private Transform demandContainer;
+        [SerializeField] private GameObject demandEntryPrefab;
+
+        [Header("Ingredients")]
+        [SerializeField] private GameObject ingredientRoot;
+        [SerializeField] private Transform ingredientContainer;
+        [SerializeField] private GameObject ingredientEntryPrefab;
 
         private ItemDefinition itemDefinition;
         private int currentQuantity;
+        private bool isSelected = false;
+        private System.Action<InventoryItemEntryUI> onClickedCallback;
 
         private void Start()
         {
@@ -31,89 +40,130 @@ namespace Velinor.Inventory
             {
                 entryButton.onClick.AddListener(OnEntryClicked);
             }
+            if (demandToggleCarrot != null)
+            {
+                demandToggleCarrot.onClick.AddListener(ToggleDemandPanel);
+            }
+            if (demandRoot != null)
+            {
+                demandRoot.SetActive(false);
+            }
+            if (ingredientRoot != null)
+            {
+                ingredientRoot.SetActive(false);
+            }
+            UpdateSelectionVisual();
         }
 
-        /// <summary>
-        /// Initialize this entry with item data
-        /// </summary>
-        public void Initialize(ItemDefinition item, int quantity)
+        public void Initialize(ItemDefinition item, int quantity, System.Action<InventoryItemEntryUI> onClicked = null)
         {
             itemDefinition = item;
             currentQuantity = quantity;
+            onClickedCallback = onClicked;
 
-            // Set icon
             if (itemIcon != null && item.Icon != null)
             {
                 itemIcon.sprite = item.Icon;
             }
 
-            // Set name
             if (itemNameText != null)
             {
                 itemNameText.text = item.DisplayName;
             }
 
-            // Set quantity
             UpdateQuantityDisplay();
-
-            Debug.Log($"[InventoryItemEntryUI] Initialized: {item.DisplayName} x{quantity}");
         }
 
-        /// <summary>
-        /// Update quantity display
-        /// </summary>
+        public void ClearIngredients()
+        {
+            if (ingredientContainer == null) return;
+            foreach (Transform child in ingredientContainer) Destroy(child.gameObject);
+            if (ingredientRoot != null) ingredientRoot.SetActive(false);
+        }
+
+        public void AddIngredient(string name, int qty, bool satisfied)
+        {
+            if (ingredientEntryPrefab == null || ingredientContainer == null) return;
+            if (ingredientRoot != null) ingredientRoot.SetActive(true);
+            
+            var entry = Instantiate(ingredientEntryPrefab, ingredientContainer);
+            var texts = entry.GetComponentsInChildren<TextMeshProUGUI>();
+            if (texts.Length >= 2)
+            {
+                texts[0].text = name;
+                texts[1].text = $"x{qty}";
+                texts[1].color = satisfied ? Color.green : Color.red;
+            }
+        }
+
         public void SetQuantity(int quantity)
         {
             currentQuantity = quantity;
             UpdateQuantityDisplay();
         }
 
-        /// <summary>
-        /// Internal helper to update quantity text
-        /// </summary>
+        public void SetSelected(bool selected)
+        {
+            isSelected = selected;
+            UpdateSelectionVisual();
+        }
+
+        public void SetGrayedOut(bool grayed)
+        {
+            if (itemIcon != null) itemIcon.color = grayed ? new Color(0.5f, 0.5f, 0.5f, 0.5f) : Color.white;
+            if (itemNameText != null) itemNameText.color = grayed ? Color.gray : Color.white;
+        }
+
+        public void AddDemand(string npcName, int bitsOffered)
+        {
+            if (demandEntryPrefab == null || demandContainer == null) return;
+            
+            var entry = Instantiate(demandEntryPrefab, demandContainer);
+            var texts = entry.GetComponentsInChildren<TextMeshProUGUI>();
+            // Assume 0 is NPC Name, 1 is Bits
+            if (texts.Length >= 2)
+            {
+                texts[0].text = npcName;
+                texts[1].text = $"{bitsOffered} Bits";
+            }
+        }
+
         private void UpdateQuantityDisplay()
         {
             if (itemQuantityText != null)
             {
-                if (currentQuantity > 1)
+                itemQuantityText.text = currentQuantity > 1 ? $"x{currentQuantity}" : "";
+            }
+        }
+
+        private void UpdateSelectionVisual()
+        {
+            if (selectionHighlight != null)
+            {
+                selectionHighlight.enabled = isSelected;
+            }
+        }
+
+        private void OnEntryClicked()
+        {
+            onClickedCallback?.Invoke(this);
+        }
+
+        private void ToggleDemandPanel()
+        {
+            if (demandRoot != null)
+            {
+                demandRoot.SetActive(!demandRoot.activeSelf);
+                // Rotate carrot if needed
+                if (demandToggleCarrot != null)
                 {
-                    itemQuantityText.text = $"x{currentQuantity}";
-                }
-                else
-                {
-                    itemQuantityText.text = "";  // Hide for single item
+                    demandToggleCarrot.transform.localRotation = Quaternion.Euler(0, 0, demandRoot.activeSelf ? -90 : 0);
                 }
             }
         }
 
-        /// <summary>
-        /// Called when player clicks this inventory entry
-        /// </summary>
-        private void OnEntryClicked()
-        {
-            if (itemDefinition == null)
-                return;
-
-            Debug.Log($"[InventoryItemEntryUI] Selected: {itemDefinition.DisplayName}");
-
-            // TODO: Show item details panel or tooltip
-            // For now, just log for debugging
-        }
-
-        /// <summary>
-        /// Get the item definition for external queries
-        /// </summary>
-        public ItemDefinition GetItemDefinition()
-        {
-            return itemDefinition;
-        }
-
-        /// <summary>
-        /// Get current quantity
-        /// </summary>
-        public int GetQuantity()
-        {
-            return currentQuantity;
-        }
+        public ItemDefinition Item => itemDefinition;
+        public int Quantity => currentQuantity;
+        public bool IsSelected => isSelected;
     }
 }

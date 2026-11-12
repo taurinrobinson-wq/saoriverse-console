@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57eef9bcf45c69b40a3c7ce8a17a2504, type: 3}
+  m_Name: Stim_Def
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Inventory.SchematicDefinition
+  schematicItem: {fileID: 11400000, guid: bb315165afc72964fa1e747614c6d8cf, type: 2}
+  ingredients:
+  - item: {fileID: 11400000, guid: a80bb0b592a667e4bb10485edd845db1, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: a8b52b1b6ac6e8243855512bc1018cd6, type: 2}
+    quantity: 1
+  resultItem: {fileID: 11400000, guid: d029ad4b7e879f44ab174982f5a06022, type: 2}
+  resultQuantity: 1

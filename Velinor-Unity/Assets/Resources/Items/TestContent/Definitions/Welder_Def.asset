@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57eef9bcf45c69b40a3c7ce8a17a2504, type: 3}
+  m_Name: Welder_Def
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Inventory.SchematicDefinition
+  schematicItem: {fileID: 11400000, guid: aa1e760b71826344996661fbf1ab9c23, type: 2}
+  ingredients:
+  - item: {fileID: 11400000, guid: 472e9aa26a4d8f743922adb8e86ddabc, type: 2}
+    quantity: 3
+  - item: {fileID: 11400000, guid: a8b52b1b6ac6e8243855512bc1018cd6, type: 2}
+    quantity: 2
+  resultItem: {fileID: 11400000, guid: 9adc54ba05fc62d44ab9d27b551214d3, type: 2}
+  resultQuantity: 1

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e984ea02b4f43b499307b7439ea1beb, type: 3}
+  m_Name: Schematic_Ration
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Inventory.ItemDefinition
+  itemId: schematic_ration
+  displayName: Ration Schematic
+  description: Instructions to build a Survival Ration.
+  icon: {fileID: 0}
+  worldPrefab: {fileID: 0}
+  category: 6
+  tags: 
+  maxStackSize: 99
+  baseValue: 0
