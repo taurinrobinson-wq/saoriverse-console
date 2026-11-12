@@ -18,11 +18,17 @@ Three UI systems need to be added to your UI_Canvas:
 
 ### Create InventoryItemEntry Prefab
 
+**NOTE:** You need a Canvas first. If you don't have one:
+- Right-click in Hierarchy → UI → Panel (this creates a Canvas automatically)
+- Then delete the Panel and follow the steps below
+
 1. **Create new GameObject**
-   - Right-click in Hierarchy → 2D Object → Panel
+   - Right-click in Hierarchy → UI → Panel (you should see "UI" option)
    - Name: `InventoryItemEntry`
    - Position: (0, 0, 0)
    - Size: (100, 100)
+   - **Parent it to UI_Canvas (drag into hierarchy under UI_Canvas)**
+   - Then delete the Canvas it created (you already have UI_Canvas)
 
 2. **Add child elements:**
    - Image (Icon)
@@ -65,9 +71,10 @@ Three UI systems need to be added to your UI_Canvas:
 ### Create TradeItemEntry Prefab
 
 1. **Create new GameObject**
-   - Right-click in Hierarchy → 2D Object → Panel
+   - Right-click in Hierarchy → UI → Panel
    - Name: `TradeItemEntry`
    - Size: (150, 60)
+   - **Parent it to UI_Canvas**
 
 2. **Add child elements:**
    - Image (Icon)
@@ -109,9 +116,8 @@ Three UI systems need to be added to your UI_Canvas:
 ### In Your UI_Canvas Prefab
 
 1. **Create a Panel for Inventory**
-   - Right-click in Hierarchy → 2D Object → Panel
+   - Right-click on UI_Canvas in Hierarchy → UI → Panel
    - Name: `InventoryPanel`
-   - Parent: UI_Canvas
    - Position: (0, 0, 0)
    - Size: (400, 600)
    - Anchor: left (or customize as needed)
@@ -120,31 +126,31 @@ Three UI systems need to be added to your UI_Canvas:
 2. **Add child containers:**
 
    **A. Header**
-   - Create Panel
+   - Right-click on InventoryPanel → UI → Panel
    - Name: `Header`
    - Size: (400, 50)
    - Anchor: top-stretch
-   - Add TextMeshPro ("Inventory")
+   - Right-click on Header → TextMeshPro - Text
+   - Text: "Inventory"
    - Font Size: 24
    - Alignment: Center
 
    **B. Scroll View (for items)**
-   - Create Scroll View
+   - Right-click on InventoryPanel → UI → Scroll View
    - Name: `ItemsScroll`
-   - Parent: InventoryPanel
    - Size: (400, 550)
    - Anchor: fill
    - Offset: (0, 0, 0, -50)
    - **In Viewport/Content:**
-     - Create Layout Group
-     - Name: `ItemsContainer`
-     - Component: Grid Layout Group
+     - The Content object is automatically created
+     - Rename it to: `ItemsContainer`
+     - Add Component: Grid Layout Group
        - Cell Size: (100, 100)
        - Spacing: (10, 10)
        - Constraint: Flexible (or fixed columns = 3)
 
    **C. Empty Label (shown when inventory is empty)**
-   - Create TextMeshPro
+   - Right-click on InventoryPanel → TextMeshPro - Text
    - Name: `EmptyLabel`
    - Text: "Inventory Empty"
    - Size: (400, 100)
@@ -175,51 +181,59 @@ Three UI systems need to be added to your UI_Canvas:
 ### In Your UI_Canvas Prefab
 
 1. **Create a Panel for Trading**
-   - Right-click in Hierarchy → 2D Object → Panel
+   - Right-click on UI_Canvas → UI → Panel
    - Name: `TradePanel`
-   - Parent: UI_Canvas
    - Position: (400, 0, 0) (offset to the right)
    - Size: (400, 600)
    - Color: Semi-transparent dark
-   - **Initially deactivated** (should be invisible until trade starts)
+   - **Check the box "Active"** — we'll disable it via script when not trading
 
 2. **Add child components:**
 
    **A. Header**
-   - Panel
+   - Right-click on TradePanel → UI → Panel
    - Name: `Header`
    - Size: (400, 50)
-   - TextMeshPro ("Trade with NPC")
+   - Right-click on Header → TextMeshPro - Text
    - Name: `NPCNameLabel`
+   - Text: "Trade with NPC"
    - Font Size: 20
 
    **B. Wanted Items Section**
-   - Panel
+   - Right-click on TradePanel → UI → Panel
    - Name: `WantedSection`
    - Size: (400, 200)
    - Position: (0, 400, 0)
-   - TextMeshPro Label ("NPC Wants:")
-   - Scroll View with ItemsContainer
-     - Component: Vertical Layout Group
+   - Right-click on WantedSection → TextMeshPro - Text
+   - Text: "NPC Wants:"
+   - Right-click on WantedSection → UI → Scroll View
+   - Name: `WantedScroll`
+   - Rename the Content to: `WantedItemsContainer`
+   - Add Component: Vertical Layout Group
      - Child Force Expand: Width checked
      - Spacing: 5
 
    **C. Offered Items Section**
-   - Panel
+   - Right-click on TradePanel → UI → Panel
    - Name: `OfferedSection`
    - Size: (400, 200)
    - Position: (0, 150, 0)
-   - TextMeshPro Label ("NPC Offers:")
-   - Scroll View with ItemsContainer
-     - Component: Vertical Layout Group
+   - Right-click on OfferedSection → TextMeshPro - Text
+   - Text: "NPC Offers:"
+   - Right-click on OfferedSection → UI → Scroll View
+   - Name: `OfferedScroll`
+   - Rename the Content to: `OfferedItemsContainer`
+   - Add Component: Vertical Layout Group
 
    **D. Status & Trade Button**
-   - TextMeshPro ("Ready to trade!")
+   - Right-click on TradePanel → TextMeshPro - Text
    - Name: `StatusLabel`
-   - Button ("Trade")
+   - Text: "Ready to trade!"
+   - Right-click on TradePanel → UI → Button
    - Name: `TradeButton`
    - Size: (200, 50)
    - Anchor: bottom-center
+   - Edit the Text child: "Trade"
 
 3. **Add TradeUIPanel Component**
    - Select TradePanel
@@ -227,11 +241,11 @@ Three UI systems need to be added to your UI_Canvas:
    - Search for `TradeUIPanel`
    - Assign:
      - **NPC Name Label** → NPCNameLabel
-     - **Wanted Items Container** → (WantedSection's ItemsContainer)
-     - **Offered Items Container** → (OfferedSection's ItemsContainer)
+     - **Wanted Items Container** → WantedItemsContainer
+     - **Offered Items Container** → OfferedItemsContainer
      - **Trade Item Entry Prefab** → TradeItemEntry.prefab
      - **Trade Button** → TradeButton
-     - **Trade Button Label** → TradeButton's TextMeshPro
+     - **Trade Button Label** → TradeButton's Text child
      - **Status Label** → StatusLabel
      - **Panel Canvas Group** → (the TradePanel's CanvasGroup - add if missing)
 
