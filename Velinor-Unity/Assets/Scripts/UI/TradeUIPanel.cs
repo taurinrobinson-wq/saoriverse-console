@@ -79,37 +79,21 @@ namespace Velinor.UI
                 Destroy(child.gameObject);
             }
 
-            // Display what NPC wants (their preferences)
-            var profile = currentNPC.TradeProfile;
-            var itemDb = inventoryService.ItemDatabase;
-
-            // Show preferred items NPC wants
-            foreach (var preferredItem in profile.PreferredItems)
+            // Display what NPC wants (generic message since we can't see preferences directly)
+            if (wantedItemsContainer != null)
             {
-                var itemDef = itemDb.Get(preferredItem);
-                if (itemDef != null)
-                {
-                    CreateWantedItemDisplay(itemDef, 1);
-                }
+                var labelGO = new GameObject("WantedLabel");
+                labelGO.transform.SetParent(wantedItemsContainer);
+                var labelText = labelGO.AddComponent<TextMeshProUGUI>();
+                labelText.text = "NPC wants salvage, tools, or materials";
+                labelText.fontSize = 14;
             }
 
-            // Show what NPC would pay for the wanted items
-            // This is calculated based on profile preferences
-            // For simplicity, we'll show a fixed bits amount for demonstration
-            CreateOfferedBitsDisplay(50); // This would be calculated by profile.CalculateOfferedPrice()
+            // Show what NPC offers (Bits payment)
+            // For simplicity, show a fixed amount
+            CreateOfferedBitsDisplay(50);
 
             UpdateTradeButtonState();
-        }
-
-        private void CreateWantedItemDisplay(ItemDefinition itemDef, int quantity)
-        {
-            var entryGO = Instantiate(tradeItemEntryPrefab, wantedItemsContainer);
-            var entry = entryGO.GetComponent<TradeItemEntryUI>();
-
-            if (entry != null)
-            {
-                entry.SetItem(itemDef, quantity);
-            }
         }
 
         private void CreateOfferedBitsDisplay(int amount)
