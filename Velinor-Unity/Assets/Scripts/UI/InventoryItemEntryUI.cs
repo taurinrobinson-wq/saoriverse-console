@@ -33,13 +33,13 @@ namespace Velinor.UI
             currentQuantity = quantity;
 
             if (itemName != null)
-                itemName.text = item.displayName;
+                itemName.text = item.DisplayName;
 
             if (quantityLabel != null)
                 quantityLabel.text = showQuantityPrefix ? $"{quantityPrefix}{quantity}" : $"{quantity}";
 
-            if (itemIcon != null && item.icon != null)
-                itemIcon.sprite = item.icon;
+            if (itemIcon != null && item.Icon != null)
+                itemIcon.sprite = item.Icon;
         }
 
         public void SetQuantity(int quantity)
@@ -63,3 +63,4 @@ namespace Velinor.UI
         }
     }
 }
+

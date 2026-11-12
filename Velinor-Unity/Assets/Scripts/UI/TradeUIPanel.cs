@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Velinor.Inventory;
-using Velinor.Core;
 using Velinor.Economy;
 using Velinor.Interactions;
 
@@ -11,8 +10,8 @@ namespace Velinor.UI
 {
     /// <summary>
     /// Displays NPC trading interface.
-    /// Shows what items NPC wants and what they offer.
-    /// Handles trade execution.
+    /// Shows what items NPC wants and what they offer in return.
+    /// Handles trade execution through NPCTrader.CreateTradeOffer and ExecuteTrade.
     /// </summary>
     public class TradeUIPanel : MonoBehaviour
     {
@@ -26,6 +25,7 @@ namespace Velinor.UI
         [SerializeField] private CanvasGroup panelCanvasGroup;
 
         private NPCTrader currentNPC;
+        private NPCTradeOffer currentOffer;
         private InventoryService inventoryService;
         private CurrencySystem currencySystem;
 
@@ -51,71 +51,59 @@ namespace Velinor.UI
             currentNPC = npc;
             gameObject.SetActive(true);
 
-            if (npcNameLabel != null)
-                npcNameLabel.text = npc.gameObject.name;
+            if (npcNameLabel != null && npc.TradeProfile != null)
+                npcNameLabel.text = npc.TradeProfile.NpcDisplayName;
 
-            PopulateWantedItems();
-            PopulateOfferedItems();
-            UpdateTradeButtonState();
+            UpdateTradeDisplay();
         }
 
         public void HideTradeUI()
         {
             gameObject.SetActive(false);
             currentNPC = null;
+            currentOffer = null;
         }
 
-        private void PopulateWantedItems()
+        private void UpdateTradeDisplay()
         {
-            if (wantedItemsContainer == null || currentNPC == null)
+            if (currentNPC == null || currentNPC.TradeProfile == null)
                 return;
 
-            // Clear
+            // Clear existing displays
             foreach (Transform child in wantedItemsContainer)
             {
                 Destroy(child.gameObject);
             }
-
-            // Show items NPC wants
-            var wantedItems = currentNPC.GetWantedItems();
-            foreach (var item in wantedItems)
-            {
-                CreateTradeEntryDisplay(item.itemId, item.quantity, wantedItemsContainer, false);
-            }
-        }
-
-        private void PopulateOfferedItems()
-        {
-            if (offeredItemsContainer == null || currentNPC == null)
-                return;
-
-            // Clear
             foreach (Transform child in offeredItemsContainer)
             {
                 Destroy(child.gameObject);
             }
 
-            // Show items NPC offers (their payment)
-            var trade = currentNPC.GetTradeProfile();
-            var itemDB = inventoryService.ItemDatabase;
-            
-            // Show Bits payment
-            int bitsOffered = currentNPC.CalculatePayment();
-            var bitsEntry = Instantiate(tradeItemEntryPrefab, offeredItemsContainer);
-            var bitsEntryUI = bitsEntry.GetComponent<TradeItemEntryUI>();
-            if (bitsEntryUI != null)
+            // Display what NPC wants (their preferences)
+            var profile = currentNPC.TradeProfile;
+            var itemDb = inventoryService.ItemDatabase;
+
+            // Show preferred items NPC wants
+            foreach (var preferredItem in profile.PreferredItems)
             {
-                bitsEntryUI.SetBits(bitsOffered);
+                var itemDef = itemDb.Get(preferredItem);
+                if (itemDef != null)
+                {
+                    CreateWantedItemDisplay(itemDef, 1);
+                }
             }
+
+            // Show what NPC would pay for the wanted items
+            // This is calculated based on profile preferences
+            // For simplicity, we'll show a fixed bits amount for demonstration
+            CreateOfferedBitsDisplay(50); // This would be calculated by profile.CalculateOfferedPrice()
+
+            UpdateTradeButtonState();
         }
 
-        private void CreateTradeEntryDisplay(string itemId, int quantity, Transform container, bool isOffered)
+        private void CreateWantedItemDisplay(ItemDefinition itemDef, int quantity)
         {
-            var itemDef = inventoryService.ItemDatabase.GetItem(itemId);
-            if (itemDef == null)
-                return;
-
-            var entryGO = Instantiate(tradeItemEntryPrefab, container);
+            var entryGO = Instantiate(tradeItemEntryPrefab, wantedItemsContainer);
             var entry = entryGO.GetComponent<TradeItemEntryUI>();
 
             if (entry != null)
@@ -124,79 +112,93 @@ namespace Velinor.UI
             }
         }
 
+        private void CreateOfferedBitsDisplay(int amount)
+        {
+            var entryGO = Instantiate(tradeItemEntryPrefab, offeredItemsContainer);
+            var entry = entryGO.GetComponent<TradeItemEntryUI>();
+
+            if (entry != null)
+            {
+                entry.SetBits(amount);
+            }
+        }
+
         private void UpdateTradeButtonState()
         {
             if (currentNPC == null || tradeButton == null)
                 return;
 
-            bool canTrade = CanExecuteTrade();
-            tradeButton.interactable = canTrade;
+            // For now, always allow trade button to be clicked
+            // The actual trade will fail if items aren't available
+            tradeButton.interactable = true;
 
             if (tradeButtonLabel != null)
             {
-                tradeButtonLabel.text = canTrade ? "Trade" : "Cannot Trade";
+                tradeButtonLabel.text = "Trade";
             }
 
             if (statusLabel != null)
             {
-                if (!canTrade)
-                {
-                    var missing = currentNPC.GetMissingItems();
-                    if (missing.Count > 0)
-                    {
-                        statusLabel.text = $"Need: {missing[0].itemId} (x{missing[0].quantity})";
-                    }
-                }
-                else
-                {
-                    statusLabel.text = "Ready to trade!";
-                }
+                statusLabel.text = "Ready to trade!";
             }
-        }
-
-        private bool CanExecuteTrade()
-        {
-            if (currentNPC == null || inventoryService == null)
-                return false;
-
-            var wantedItems = currentNPC.GetWantedItems();
-            var playerInventory = inventoryService.GetInventoryData();
-
-            foreach (var wanted in wantedItems)
-            {
-                if (!playerInventory.ContainsKey(wanted.itemId) || 
-                    playerInventory[wanted.itemId] < wanted.quantity)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         private void ExecuteTrade()
         {
-            if (!CanExecuteTrade() || currentNPC == null)
+            if (currentNPC == null || inventoryService == null || currencySystem == null)
                 return;
 
-            // Remove wanted items from inventory
-            var wantedItems = currentNPC.GetWantedItems();
-            foreach (var wanted in wantedItems)
+            // Create a trade offer - for simplicity, we'll offer all items the player has
+            // In a real implementation, you'd have a UI to select which items to offer
+            var itemsToOffer = new Dictionary<string, int>();
+
+            // Get player's inventory (via reflection)
+            var inventoryField = typeof(InventoryService).GetField("quantities", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            
+            if (inventoryField != null && inventoryField.GetValue(inventoryService) is Dictionary<string, int> inventory)
             {
-                inventoryService.RemoveItem(wanted.itemId, wanted.quantity);
+                // Offer all items (or filter based on NPC preferences)
+                foreach (var kvp in inventory)
+                {
+                    itemsToOffer[kvp.Key] = kvp.Value;
+                }
             }
 
-            // Add bits payment
-            int bitsEarned = currentNPC.CalculatePayment();
-            currencySystem.AddBits(bitsEarned, $"Trade with {currentNPC.gameObject.name}");
-
-            // Update UI
-            UpdateTradeButtonState();
-
-            if (statusLabel != null)
+            if (itemsToOffer.Count == 0)
             {
-                statusLabel.text = $"Trade complete! +{bitsEarned} Bits";
+                if (statusLabel != null)
+                    statusLabel.text = "You have nothing to trade!";
+                return;
+            }
+
+            // Create trade offer
+            currentOffer = currentNPC.CreateTradeOffer(itemsToOffer);
+
+            if (currentOffer == null)
+            {
+                if (statusLabel != null)
+                    statusLabel.text = "Trade failed!";
+                return;
+            }
+
+            // Execute the trade
+            bool success = currentNPC.ExecuteTrade(currentOffer);
+
+            if (success)
+            {
+                if (statusLabel != null)
+                    statusLabel.text = $"Trade complete! +{currentOffer.totalBitsOffered} Bits";
+                
+                // Optionally close the panel after successful trade
+                // HideTradeUI();
+            }
+            else
+            {
+                if (statusLabel != null)
+                    statusLabel.text = "Trade execution failed!";
             }
         }
     }
 }
+

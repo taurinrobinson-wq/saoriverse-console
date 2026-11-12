@@ -18,13 +18,13 @@ namespace Velinor.UI
         public void SetItem(ItemDefinition item, int quantity)
         {
             if (itemNameLabel != null)
-                itemNameLabel.text = item.displayName;
+                itemNameLabel.text = item.DisplayName;
 
             if (quantityLabel != null)
                 quantityLabel.text = $"x{quantity}";
 
-            if (itemIcon != null && item.icon != null)
-                itemIcon.sprite = item.icon;
+            if (itemIcon != null && item.Icon != null)
+                itemIcon.sprite = item.Icon;
         }
 
         public void SetBits(int amount)
@@ -44,3 +44,4 @@ namespace Velinor.UI
         }
     }
 }
+

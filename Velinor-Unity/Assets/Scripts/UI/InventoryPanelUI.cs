@@ -1,8 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using Velinor.Inventory;
-using Velinor.Core;
 
 namespace Velinor.UI
 {
@@ -26,9 +26,8 @@ namespace Velinor.UI
             inventoryService = InventoryService.Instance;
             if (inventoryService != null)
             {
-                inventoryService.OnItemAdded += OnItemAdded;
-                inventoryService.OnItemRemoved += OnItemRemoved;
                 inventoryService.OnInventoryChanged += OnInventoryChanged;
+                inventoryService.OnInventoryCleared += OnInventoryCleared;
                 
                 // Initial population
                 RefreshDisplay();
@@ -41,23 +40,16 @@ namespace Velinor.UI
         {
             if (inventoryService != null)
             {
-                inventoryService.OnItemAdded -= OnItemAdded;
-                inventoryService.OnItemRemoved -= OnItemRemoved;
                 inventoryService.OnInventoryChanged -= OnInventoryChanged;
+                inventoryService.OnInventoryCleared -= OnInventoryCleared;
             }
         }
 
-        private void OnItemAdded(string itemId, int quantity)
+        private void OnInventoryChanged(string itemId, int quantity)
         {
-            UpdateItemDisplay(itemId, quantity);
-        }
-
-        private void OnItemRemoved(string itemId, int quantity)
-        {
-            var inventory = inventoryService.GetInventoryData();
-            if (inventory.ContainsKey(itemId))
+            if (quantity > 0)
             {
-                UpdateItemDisplay(itemId, inventory[itemId]);
+                UpdateItemDisplay(itemId, quantity);
             }
             else
             {
@@ -65,7 +57,7 @@ namespace Velinor.UI
             }
         }
 
-        private void OnInventoryChanged()
+        private void OnInventoryCleared()
         {
             RefreshDisplay();
         }
@@ -92,7 +84,7 @@ namespace Velinor.UI
                 return;
             }
 
-            var itemDef = inventoryService.ItemDatabase.GetItem(itemId);
+            var itemDef = inventoryService.ItemDatabase.Get(itemId);
             if (itemDef == null)
             {
                 Debug.LogWarning($"[InventoryPanelUI] Item definition not found: {itemId}");
@@ -129,11 +121,16 @@ namespace Velinor.UI
             }
             displayedItems.Clear();
 
-            // Repopulate from inventory
-            var inventory = inventoryService.GetInventoryData();
-            foreach (var kvp in inventory)
+            // Repopulate from inventory (via reflection since InventoryService doesn't expose dict)
+            var inventoryField = typeof(InventoryService).GetField("quantities", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            
+            if (inventoryField != null && inventoryField.GetValue(inventoryService) is Dictionary<string, int> inventory)
             {
-                CreateItemDisplay(kvp.Key, kvp.Value);
+                foreach (var kvp in inventory)
+                {
+                    CreateItemDisplay(kvp.Key, kvp.Value);
+                }
             }
 
             UpdateEmptyState();
@@ -166,3 +163,4 @@ namespace Velinor.UI
         }
     }
 }
+
