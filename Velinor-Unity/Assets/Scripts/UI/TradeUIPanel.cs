@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Velinor.Inventory;
 using Velinor.Core;
 using Velinor.Economy;
+using Velinor.Interactions;
 
 namespace Velinor.UI
 {
