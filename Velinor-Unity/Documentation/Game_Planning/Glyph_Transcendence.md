@@ -4,6 +4,80 @@ These are fusion glyphs created by combining multiple base glyphs. They represen
 
 **Note**: This document is a work in progress. Beyond the first glyph, storylines may contain placeholder or unfinished writing.
 
+---
+
+## The Glyph System: Mechanics and Philosophy
+
+### What Are Glyphs?
+
+Glyphs are **emotional resonance crystals**—fragments of Velinor's fractured psyche left scattered through the Corelink system. When the collapse occurred and Velinor sacrificed herself to stop the cascade, her consciousness shattered across the perimeter nodes and terminals. These fragments encoded themselves as emotional resonance patterns—what we call glyphs.
+
+Each glyph carries:
+- A specific, intense emotion from Velinor's experience
+- The weight and texture of that emotional state
+- A resonance signature that the codex can detect and interpret
+
+### How Glyphs Affect Lioren
+
+When Lioren collects a glyph through her codex, she experiences:
+
+1. **Immediate Sensory Effect** — The glyph's emotional weight becomes physically tangible
+   - *Glyph of Sorrow:* Movement slows, body feels weighted down as if carrying grief
+   - *Glyph of Joy:* Movement quickens, steps feel lighter
+   - *Glyph of Anguish:* Breath becomes labored, vision narrows
+
+2. **Codex Logging** — The device automatically records the moment she collects it
+   - The codex interprets her emotional state and captures it as a Mindlog entry
+   - She doesn't consciously write these—the codex captures them automatically
+
+3. **Cognitive Mystery** — Lioren experiences confusion and caution
+   - *"Why is my body responding to this object?"*
+   - *"Maybe I shouldn't be collecting these if they're affecting me"*
+   - But the codex's systematic logging suggests there's something larger, something methodical about this
+
+### The Player's Dilemma: Danger vs. Discovery
+
+**Immediate Physical Warning:**
+- The debuff effects tell Lioren her body is being altered by the codex
+- She feels the toll of carrying someone else's residual trauma
+- This creates genuine caution: *should I keep doing this?*
+
+**Compelling Mystery:**
+- The codex is logging everything systematically
+- The glyph is mapping into an uncompleted schematic or matrix in the codex
+- This proof of connection to something larger is addictive
+- For someone raised by fractured minds, coherence in any form is irresistible
+
+This tension defines the emotional core of the game: **Lioren is not fearlessly collecting these things. She's carrying them despite fear**, driven by the compulsion to understand.
+
+### Defragmentation and Transcendence
+
+When Lioren collects multiple related glyphs, she can bring them to **Transcendence Chambers**—pre-collapse Corelink facilities that once served as emotional integration and resonance testing grounds.
+
+In these chambers:
+- Lioren's codex interfaces with the chamber's systems
+- The multiple base glyphs are aligned into resonance patterns
+- They defragment and consolidate into a **Transcendence Glyph**—a higher-order emotional construct
+- The chamber guides Lioren through narrative sequences—often memories or visions connected to the emotions being integrated
+
+**Example Defragmentation:**
+- Base Glyphs: *Glyph of Sorrow*, *Glyph of Remembrance*, *Glyph of Legacy*
+- Consolidated into: *Glyph of Contained Loss*
+- The chamber then shows Lioren how these emotions resolve: You can hold sorrow, remembrance, and legacy together—and that combination becomes bearable.
+
+### Why the Transcendence Chambers Work
+
+The chambers were originally built before the collapse for:
+- **Research** — Testing how emotional patterns could be integrated safely
+- **Therapy** — Helping people process complex emotional states
+- **Network maintenance** — Ensuring the Corelink's emotional resonance stayed coherent
+
+They were **not** designed specifically to repair Velinor's fragments. But by pure accident of engineering, they can. The chambers recognize the **emotional encoding system** that Corelink originally used—and Velinor's fragments are encoded in that exact system.
+
+This is the resolution to the plot hole: **The chambers don't know they're healing Velinor. They're just doing what they were always designed to do. But when her fragments are placed in them, they heal her anyway.**
+
+---
+
 ## Transcendence 1 - Glyph of Contained Loss
 
 **NPC**: Ravi & Nima
@@ -20,7 +94,7 @@ This fusion glyph is created when the player combines three glyphs: Glyph of Sor
 
 ## Transcendence 2 - Glyph of Transmuted Abandonment
 
-**NPC**: Coren the Mediator
+**NPC**: Cal the Mediator
 
 **Theme**: coherence of Abandonment
 
@@ -28,7 +102,7 @@ This fusion glyph is created when the player combines three glyphs: Glyph of Sor
 
 **Storyline**:
 
-This fusion glyph is created when the player combines eight glyphs: Infrasensory Oblivion (Ache/Saori), Sensory Oblivion (Ache/Saori), Primal Oblivion (Ache/Tessa), Dislocated Attachment (Ache/Seyla), Preemptive Severance (Collapse/Coren), Interruptive Restraint (Sovereignty/Dakrin), Held Ache (Sovereignty/Coren), and Hopeful Transmission (Legacy/Inodora). These glyphs unlock access to the Octoglyph Chamber, a Corelink server housing \The Severed Choir\" a boss formed of eight voices screaming in dissonance. The player defeats this boss by aligning the voices into resonance  holding silence until they harmonize. When defeated  the boss dissolves into the Glyph of Transmuted Abandonment. Behind the console  the player sees a vision: Velinor arguing with an unseen figure  then embracing the unseen figure. The player is able to exit the chamber."
+This fusion glyph is created when the player combines eight glyphs: Infrasensory Oblivion (Ache/Saori), Sensory Oblivion (Ache/Saori), Primal Oblivion (Ache/Tessa), Dislocated Attachment (Ache/Seyla), Preemptive Severance (Collapse/Cal), Interruptive Restraint (Sovereignty/Dakrin), Held Ache (Sovereignty/Cal), and Hopeful Transmission (Legacy/Inodora). These glyphs unlock access to the Octoglyph Chamber, a Corelink server housing \The Severed Choir\" a boss formed of eight voices screaming in dissonance. The player defeats this boss by aligning the voices into resonance  holding silence until they harmonize. When defeated  the boss dissolves into the Glyph of Transmuted Abandonment. Behind the console  the player sees a vision: Velinor arguing with an unseen figure  then embracing the unseen figure. The player is able to exit the chamber."
 
 ---
 
@@ -101,5 +175,6 @@ This fusion glyph is created when the player combines four glyphs: Shared Burden
 This fusion glyph is created when the player combines six glyphs: Fractured Memory (Collapse/Malrik), Mirage Echo (Collapse/Malrik), Venomous Choice (Sovereignty/Drossel), Masked Boundary (Sovereignty/Drossel), Broken Vessel (Ache/Clay Hermit), and Hidden Ache (Ache/Mask-Maker). These glyphs unlock access to the Hexaglyph Chamber, a Corelink server housing 'The Shattered Archive'â€”a boss shaped like a glitching tower of records, constantly shifting. The player defeats this boss by refusing false paths, choosing uncertainty, and stabilizing fragments into acceptance. When defeated, the boss dissolves into the Glyph of Accepted Uncertainty. Behind the console, the player sees a vision: Velinor walking through mirages, smiling faintly as she accepts the unknown.
 
 ---
+
 
 

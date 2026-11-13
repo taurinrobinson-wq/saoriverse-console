@@ -1,6 +1,6 @@
-# Malrik & Elenya: A Severed Bond Reawakening
+﻿# Malrik & Elenya: A Severed Bond Reawakening
 
-## 🔴 CRITICAL UPDATE: Comprehensive Integration Document
+## ðŸ”´ CRITICAL UPDATE: Comprehensive Integration Document
 
 **This document now includes:**
 - Full narrative arc (pre-collapse through recognition)
@@ -8,7 +8,7 @@
 - Progressive revelation stages (4-stage discovery system)
 - Complete dialogue scripts and body memory cues
 - The Building Debate context
-- Coren's mediating role in the Triad
+- Cal's mediating role in the Triad
 - Player gating requirements and triggers
 - TONE stat tracking and REMNANTS effects
 
@@ -16,7 +16,7 @@
 
 ## Story Overview
 
-Malrik and Elenya represent one of Velinor's most intricate emotional arcs—a relationship fractured by the Cataclysm's destruction of memory, rebuilt through the player's discovery, and ultimately transformed through the recognition that love persists even when its origins are forgotten.
+Malrik and Elenya represent one of Velinor's most intricate emotional arcsâ€”a relationship fractured by the Cataclysm's destruction of memory, rebuilt through the player's discovery, and ultimately transformed through the recognition that love persists even when its origins are forgotten.
 
 Their story is about:
 - **Memory loss as romantic tragedy**: They were lovers before the collapse, but woke up as strangers
@@ -25,7 +25,7 @@ Their story is about:
 - **Embodied memory**: Their bodies remember what their minds cannot
 - **Layered reconciliation**: If restored, they must hold both who they were and who they became
 - **The Building Debate**: Their philosophical conflict becomes literal in the Archive restoration project
-- **Paradox-holding**: Coren's role mediating between Malrik's preservation logic and Elenya's sacred vision
+- **Paradox-holding**: Cal's role mediating between Malrik's preservation logic and Elenya's sacred vision
 
 ---
 
@@ -43,7 +43,7 @@ Their story is about:
 
 2. **Glyph of Mirage Echo** (ID 63 | Collapse Domain)
    - Location: Desert Heat (Illusion Trial)
-   - Narrative: Player navigates desert with Malrik, who points out mirages—false water, false paths, false homes
+   - Narrative: Player navigates desert with Malrik, who points out miragesâ€”false water, false paths, false homes
    - Theme: Reality vs. illusion, systems broadcasting phantom signals
    - Connection: Both about distorted memory and loss
 
@@ -51,7 +51,7 @@ Their story is about:
    - Location: The Shared Archive Building (Marketplace)
    - Story: Malrik inscribes preservation boundaries
    - Love Subtext: "His love for memory-keeping masks fear of losing Elenya's vision"
-   - Dialogue Cue: "His discipline isn't just method—it's a cage he built to contain his own longing"
+   - Dialogue Cue: "His discipline isn't just methodâ€”it's a cage he built to contain his own longing"
 
 4. **Glyph of Measured Step** (ID 23 | Building Debate Integration)
    - Location: The Shared Archive Building (Inside Chambers)
@@ -71,10 +71,10 @@ Their story is about:
    - Story: Both communities must tend the space together. Both must sacrifice.
    - Mature Lesson: "Neither vision is diminished by sharing space. If anything, they deepen each other."
 
-**Mediator Glyph (Coren's Role):**
+**Mediator Glyph (Cal's Role):**
 1. **Glyph of Held Ache** (ID 22 | Building Debate Centerpiece)
    - Location: The Shared Archive Building (Central Chamber)
-   - Story: Coren stands between Malrik and Elenya holding BOTH truths without compromise
+   - Story: Cal stands between Malrik and Elenya holding BOTH truths without compromise
    - Player Understanding: "Holding paradox is not weakness but the deepest strength"
    - Mechanical Role: Acts as third point in Triad conflict resolution
 
@@ -100,7 +100,7 @@ Their story is about:
 **What Player Notices:**
 - Malrik's dialogue around Elenya carries tenderness that doesn't match "colleague" relationship
 - Elenya actively avoids Malrik or becomes unusually formal when he's present
-- There's visible tension between them—not conflict, but *recognition held at bay*
+- There's visible tension between themâ€”not conflict, but *recognition held at bay*
 
 **Specific Moments:**
 
@@ -116,7 +116,7 @@ Their story is about:
 
 **Body Language Cues:**
 - In ritual space, they stand near each other without making eye contact
-- Visible tension—not conflict, but recognition held at distance
+- Visible tensionâ€”not conflict, but recognition held at distance
 - When passing ritual objects, Malrik's hand almost touches hers. He pulls back. She pretends not to notice.
 
 **Glyph Availability at This Stage:** None yet (requires Stage 2+)
@@ -134,25 +134,25 @@ Their story is about:
 **Elenya's Reaction:**
 She pauses. Her voice becomes soft, almost to herself:
 
-> "Look at this… the lantern's lost its spark. Funny. I'm sure someone I once knew—someone I should remember—would have seen this and started tinkering immediately. Just like that... illumination."
+> "Look at thisâ€¦ the lantern's lost its spark. Funny. I'm sure someone I once knewâ€”someone I should rememberâ€”would have seen this and started tinkering immediately. Just like that... illumination."
 
 She laughs, but it catches in her throat. She doesn't know why she said his name. She doesn't know why the thought comforts her.
 
-**What This Reveals:** Her body remembers before her mind catches up. The broken lantern echoes a memory she carries in her muscles, not her conscious mind—**lighthouse lunches, philosophical debates, a young professor and spiritual student, light as metaphor for their entire dynamic.**
+**What This Reveals:** Her body remembers before her mind catches up. The broken lantern echoes a memory she carries in her muscles, not her conscious mindâ€”**lighthouse lunches, philosophical debates, a young professor and spiritual student, light as metaphor for their entire dynamic.**
 
 **The Deeper Admission:**
 
 Elenya then speaks to the player directly:
 
-> "There was someone… I think. A presence. When I reach for the memory, all I find is this… pressure. Like a sealed door in my own mind."
+> "There was someoneâ€¦ I think. A presence. When I reach for the memory, all I find is thisâ€¦ pressure. Like a sealed door in my own mind."
 
 (Her hand drifts unconsciously to her sternum)
 
-> "I know I closed it. I can feel the shape of the choice. But the reason… the reason is gone."
+> "I know I closed it. I can feel the shape of the choice. But the reasonâ€¦ the reason is gone."
 
 **Optional Player Dialogue:**
 - Player: "Do you think he knows?"
-- Elenya: "…I don't know what he knows. I only know what I couldn't carry. Some things… you set down because holding them breaks you."
+- Elenya: "â€¦I don't know what he knows. I only know what I couldn't carry. Some thingsâ€¦ you set down because holding them breaks you."
 
 **Glyph Unlock:** **Glyph of Sparks Lost** (+2 Presence, +1 Empathy)
 
@@ -166,7 +166,7 @@ Elenya then speaks to the player directly:
 
 Malrik admits to player:
 
-> "…there are gaps. Not errors—gaps. Whole sections of my personal record just… thin out. Like something was lifted out cleanly."
+> "â€¦there are gaps. Not errorsâ€”gaps. Whole sections of my personal record justâ€¦ thin out. Like something was lifted out cleanly."
 
 A beat of silence.
 
@@ -176,9 +176,9 @@ A beat of silence.
 
 Malrik opens slightly more, revealing the wound without naming it:
 
-> "Elenya never understood why I kept such meticulous records. She said memory should breathe, not be pinned down. I used to think she was reckless. Now I'm not sure if she was right… or if I've simply lost something I can't name."
+> "Elenya never understood why I kept such meticulous records. She said memory should breathe, not be pinned down. I used to think she was reckless. Now I'm not sure if she was rightâ€¦ or if I've simply lost something I can't name."
 
-This keeps the ache without forcing explicit recognition—*the love is implied, not stated.*
+This keeps the ache without forcing explicit recognitionâ€”*the love is implied, not stated.*
 
 **What This Reveals:** Malrik is grieving a connection he cannot articulate. His body remembers what his mind cannot. His longing for her is quiet, unspoken, respectful, confused.
 
@@ -193,7 +193,7 @@ This keeps the ache without forcing explicit recognition—*the love is implied,
 
 **The Restoration Moment:**
 
-The lighthouse reading room is restored to its former beauty. Malrik and Elenya stand together in the space, and memory begins to return in fragments—not as perfect clarity, but as *layered truth*.
+The lighthouse reading room is restored to its former beauty. Malrik and Elenya stand together in the space, and memory begins to return in fragmentsâ€”not as perfect clarity, but as *layered truth*.
 
 **What They Consciously Remember:**
 1. Who they were (young, in love, trying to bridge impossible differences)
@@ -213,7 +213,7 @@ The lighthouse reading room is restored to its former beauty. Malrik and Elenya 
 
 Long silence.
 
-**Malrik:** "That's the most irrational thing you've ever done. I find it… I can't categorize it."
+**Malrik:** "That's the most irrational thing you've ever done. I find itâ€¦ I can't categorize it."
 
 **Elenya:** (small smile) "That was the point."
 
@@ -225,29 +225,29 @@ Long silence.
 
 ### Why This Matters Mechanically
 
-The Malrik & Elenya arc intersects with the broader **Building Debate** arc—a philosophical conflict about how to rebuild the Archive building in Marketplace. This creates a **Triad Conflict**:
+The Malrik & Elenya arc intersects with the broader **Building Debate** arcâ€”a philosophical conflict about how to rebuild the Archive building in Marketplace. This creates a **Triad Conflict**:
 
 | Position | NPC | Philosophy | Glyph |
 |----------|-----|-----------|-------|
 | Preservation (Archive) | Malrik | "Records must be kept exact and safe" | Boundary Stone, Measured Step |
 | Sacred Integration | Elenya | "The space must serve spiritual community" | Covenant Flame, Shared Survival |
-| Paradox-Holding | Coren | "Both visions strengthen each other" | Held Ache (Centerpiece) |
+| Paradox-Holding | Cal | "Both visions strengthen each other" | Held Ache (Centerpiece) |
 
 ### The Narrative Arc of the Building Debate
 
 **ACT II: DEBATE EMERGES**
 - Boundary Stone: Malrik establishes position (fear of losing Elenya's vision hidden)
 - Measured Step: Player sees internal conflict (love revealed through gaze, through where his eyes linger)
-- Held Ache begins: Coren appears to mediate
+- Held Ache begins: Cal appears to mediate
 
 **ACT II-III: LOVE STORY CRYSTALLIZES**
 - Player witnesses Malrik's yearning for her offerings (flowers, ritual marks)
 - Player sees Elenya's hurt at his dismissal
-- Understanding dawns: This isn't philosophical—it's *personal*
+- Understanding dawns: This isn't philosophicalâ€”it's *personal*
 
 **ACT III: VISION CONTEST**
 - Covenant Flame: Elenya demonstrates why sacred vision matters
-- Held Ache continues: Coren holds paradox steady
+- Held Ache continues: Cal holds paradox steady
 - Shared Survival begins: Time-sharing arrangement proposed
 
 **ACT III/IV: INTEGRATION CHALLENGE**
@@ -283,9 +283,9 @@ The system tracks **TONE Coherence** based on consistency of player emotional ch
 Coherence = consistency of emotional TONE patterns (Empathy, Observation, Trust, Narrative Presence)
 
 If Coherence (measured as consistency of TONE stat choices):
-  Low      → NPCs perceive player as unpredictable; dialogue remains cautious
-  Medium   → NPCs notice player patterns; growing openness
-  High     → NPCs trust player's emotional alignment; intimate dialogue unlocks
+  Low      â†’ NPCs perceive player as unpredictable; dialogue remains cautious
+  Medium   â†’ NPCs notice player patterns; growing openness
+  High     â†’ NPCs trust player's emotional alignment; intimate dialogue unlocks
 ```
 
 Both Malrik and Elenya respond to:
@@ -298,7 +298,7 @@ Both Malrik and Elenya respond to:
 
 ### Malrik's Role
 
-Before the Cataclysm, Malrik was a young *Archivist* working with the Corelink system—studying how emotional data could be stored, preserved, and accessed. He was:
+Before the Cataclysm, Malrik was a young *Archivist* working with the Corelink systemâ€”studying how emotional data could be stored, preserved, and accessed. He was:
 - Brilliant but already somewhat rigid in his thinking
 - Passionate about precision and meaning-making through data
 - Less emotionally fluent than intellectually sharp
@@ -306,7 +306,7 @@ Before the Cataclysm, Malrik was a young *Archivist* working with the Corelink s
 
 ### Elenya's Role
 
-Before the Cataclysm, Elenya was a spiritual apprentice—studying contemplative practice, philosophy, and what would become the foundation of her role as High Seer. She was:
+Before the Cataclysm, Elenya was a spiritual apprenticeâ€”studying contemplative practice, philosophy, and what would become the foundation of her role as High Seer. She was:
 - Intuitive and deeply curious about consciousness
 - Open-hearted, prone to seeing meaning in paradox
 - Drawn to connection and witnessing
@@ -314,7 +314,7 @@ Before the Cataclysm, Elenya was a spiritual apprentice—studying contemplative
 
 ### How They Met
 
-They met through the Corelink archives—Elenya was studying how the system recorded emotional patterns, looking for spiritual significance in the data. Malrik was maintaining those records, frustrated by the "noise" in the emotional streams.
+They met through the Corelink archivesâ€”Elenya was studying how the system recorded emotional patterns, looking for spiritual significance in the data. Malrik was maintaining those records, frustrated by the "noise" in the emotional streams.
 
 Elenya didn't see noise. She saw meaning.
 
@@ -322,7 +322,7 @@ This infuriated him. It also fascinated him.
 
 ### Lighthouse Lunches
 
-Their primary memory together (that Elenya will unconsciously echo) was spending lunch at a *lighthouse overlooking the ruins*—a structure Malrik had been studying, partly for its information architecture, partly because it was quiet and away from people.
+Their primary memory together (that Elenya will unconsciously echo) was spending lunch at a *lighthouse overlooking the ruins*â€”a structure Malrik had been studying, partly for its information architecture, partly because it was quiet and away from people.
 
 Elenya would come find him there.
 
@@ -336,7 +336,7 @@ These sessions were Malrik's first experience of emotional intimacy that didn't 
 
 ### The Love
 
-Malrik fell deeply—not in a dramatic way, but completely. He felt:
+Malrik fell deeplyâ€”not in a dramatic way, but completely. He felt:
 - Seen by her in a way that terrified him
 - Drawn to her spiritual certainty in ways he couldn't categorize
 - That she represented a kind of truth he could never access through data
@@ -352,17 +352,17 @@ Elenya felt something equally real but different:
 
 The collapse was imminent (though they didn't know it).
 
-Elenya sensed something shifting in the world—a kind of fracture in the fabric of meaning itself. She was afraid, and her fear made her honest with Malrik:
+Elenya sensed something shifting in the worldâ€”a kind of fracture in the fabric of meaning itself. She was afraid, and her fear made her honest with Malrik:
 
 **Elenya**: "I love you. But I don't think we're built for the same kind of truth. You need certainty. I've learned to live in paradox. I don't know how to be small enough to fit inside the kind of order you need."
 
-**Malrik**: "You could learn. I could learn differently. We could—"
+**Malrik**: "You could learn. I could learn differently. We couldâ€”"
 
 **Elenya**: "You're not built that way. And I can't spend my life loving someone while I'm slowly disappointing them."
 
 It wasn't a rejection of his love. It was a recognition of an incompatibility she couldn't bridge without losing herself.
 
-Malrik, in his pain, took it as complete rejection—confirmation that his betrayal of his own worldview had cost him everything.
+Malrik, in his pain, took it as complete rejectionâ€”confirmation that his betrayal of his own worldview had cost him everything.
 
 ---
 
@@ -391,7 +391,7 @@ Elenya woke with:
 
 Here's where Elenya's character deepens: she chose to sever her own memory.
 
-As she began to reconstruct herself in the ruins, she felt the ghost of a profound loss—a relationship that had mattered, a person she had loved, something that had been taken. But she had no context for it. It was a phantom limb, a wound without a wound.
+As she began to reconstruct herself in the ruins, she felt the ghost of a profound lossâ€”a relationship that had mattered, a person she had loved, something that had been taken. But she had no context for it. It was a phantom limb, a wound without a wound.
 
 She made a choice: **to cut that thread deliberately**.
 
@@ -404,7 +404,7 @@ She did this because:
 1. She sensed that the loss was permanent
 2. She believed that honoring love sometimes meant letting it go completely
 3. She feared that half-remembering would trap her in grief
-4. She wanted to teach her followers that not all losses can be reconciled—some must be metabolized into the spiritual practice itself
+4. She wanted to teach her followers that not all losses can be reconciledâ€”some must be metabolized into the spiritual practice itself
 
 ---
 
@@ -412,7 +412,7 @@ She did this because:
 
 ### Malrik's Path
 
-After the collapse, Malrik became the **Archivist**—the keeper of the corrupted Corelink records. He:
+After the collapse, Malrik became the **Archivist**â€”the keeper of the corrupted Corelink records. He:
 - Spent years studying the glitched emotional data
 - Became obsessed with preservation and precision
 - Developed an almost fearful attachment to order as a way to prevent future loss
@@ -421,11 +421,11 @@ After the collapse, Malrik became the **Archivist**—the keeper of the corrupte
 
 His speech became more clipped, his patience shorter, his worldview harder.
 
-Unknown to him, his obsession with order was a response to heartbreak—a way of telling himself that if he could just categorize everything perfectly, he would never lose something precious again.
+Unknown to him, his obsession with order was a response to heartbreakâ€”a way of telling himself that if he could just categorize everything perfectly, he would never lose something precious again.
 
 ### Elenya's Path
 
-After the collapse, Elenya became the **High Seer**—a spiritual leader teaching:
+After the collapse, Elenya became the **High Seer**â€”a spiritual leader teaching:
 - Compassion without attachment
 - Presence without possession
 - Love for all beings without the expectation of reciprocal understanding
@@ -437,7 +437,7 @@ But when her followers asked about Malrik (because they noticed a tension, a str
 
 **Follower**: "High Seer, isn't Archivist Malrik a soul worthy of love?"
 
-**Elenya**: "Why… yes. I mean, it's complicated…"
+**Elenya**: "Whyâ€¦ yes. I mean, it's complicatedâ€¦"
 
 That hesitation contains the entire truth: she does love him. She chose to forget him to protect them both. And now she can't explain why she carries such tenderness for a man she claims not to know.
 
@@ -446,8 +446,8 @@ That hesitation contains the entire truth: she does love him. She chose to forge
 They see each other in the marketplace. They speak with formal courtesy. They avoid extended interaction.
 
 But:
-- Malrik never calls her "High Seer Elenya"—he just says "Elenya," which breaks his own rule about propriety
-- Elenya's voice changes when she speaks to him—softer, more careful, like she's holding something fragile
+- Malrik never calls her "High Seer Elenya"â€”he just says "Elenya," which breaks his own rule about propriety
+- Elenya's voice changes when she speaks to himâ€”softer, more careful, like she's holding something fragile
 - They notice things about each other that betray old knowledge
 - Their followers sense an unspoken history
 - The air between them feels like a word that was never finished
@@ -462,17 +462,17 @@ But:
 
 **The Scene**:
 
-Elenya encounters a broken lantern—a small lighthouse, still and dark, its light permanently extinguished.
+Elenya encounters a broken lanternâ€”a small lighthouse, still and dark, its light permanently extinguished.
 
 She pauses. Her hand goes to her chest.
 
-**Elenya**: "Look at this… the lantern's lost its spark. Funny. I'm sure someone I once knew—someone I should remember—would have seen this and started tinkering immediately and… just like that… illumination."
+**Elenya**: "Look at thisâ€¦ the lantern's lost its spark. Funny. I'm sure someone I once knewâ€”someone I should rememberâ€”would have seen this and started tinkering immediately andâ€¦ just like thatâ€¦ illumination."
 
 She doesn't remember Malrik's name. She doesn't remember *being* with him at the lighthouse.
 
 But her body remembers.
 
-The broken lantern is a trigger—a symbol that bypasses her conscious mind and hits something older, deeper.
+The broken lantern is a triggerâ€”a symbol that bypasses her conscious mind and hits something older, deeper.
 
 **Glyph Unlock**: **Glyph of Sparks Lost** (Presence Category)
 
@@ -492,9 +492,9 @@ The broken lantern is a trigger—a symbol that bypasses her conscious mind and 
 
 Malrik leads the player through the glitching Corelink records, explaining the corruption with his characteristic clipped precision:
 
-**Malrik**: "This chamber is lying to you. Oh—don't misunderstand. It's a machine; it has no conscience. I mean the data is false. No. Yes. You don't understand. Few do. Systems rarely intend anything. They follow orders like dogs—only more loyal, and far less aware of the damage they cause."
+**Malrik**: "This chamber is lying to you. Ohâ€”don't misunderstand. It's a machine; it has no conscience. I mean the data is false. No. Yes. You don't understand. Few do. Systems rarely intend anything. They follow orders like dogsâ€”only more loyal, and far less aware of the damage they cause."
 
-As you move deeper into the archive, you pass the spot where he and Elenya used to sit together—though neither of them consciously remembers it.
+As you move deeper into the archive, you pass the spot where he and Elenya used to sit togetherâ€”though neither of them consciously remembers it.
 
 The glyph hums slightly.
 
@@ -524,13 +524,13 @@ If player has Glyph of Sparks Lost, Malrik's responses carry additional weight. 
 
 **The Scene**:
 
-Elenya is performing a ritual of *Release*—teaching her followers how to honor loss without being trapped by it. She speaks in metaphors, but her words carry extra weight when you know her history:
+Elenya is performing a ritual of *Release*â€”teaching her followers how to honor loss without being trapped by it. She speaks in metaphors, but her words carry extra weight when you know her history:
 
 **Elenya**: "We are taught that love means holding. But sometimes love means letting the beloved go completely. Not because they are unworthy. But because they are sacred enough that we will not diminish them by our grasping."
 
 She closes her eyes.
 
-**Elenya**: "There was someone once… I don't remember their face. But I remember the feeling of knowing they existed. And I remember that the kindest thing I could do was forget them entirely, rather than let them haunt me as a phantom."
+**Elenya**: "There was someone onceâ€¦ I don't remember their face. But I remember the feeling of knowing they existed. And I remember that the kindest thing I could do was forget them entirely, rather than let them haunt me as a phantom."
 
 The irony: she's speaking directly about Malrik without knowing it.
 
@@ -544,7 +544,7 @@ The irony: she's speaking directly about Malrik without knowing it.
 |--------|-----------|-----------------|--------------------| 
 | A: "That sounds like regret" | +Observation | Elenya: "Regret and wisdom are not opposites." | +Nuance, +Memory |
 | B: "Do you think they would have wanted to be forgotten?" | +Empathy | Elenya: (voice trembles slightly) "I hope they understood it was an act of love." | +Need, +Empathy |
-| C: "Is this about Malrik?" | +Narrative Presence +Observation | Elenya: (shocked) "How did you—no. I don't know. Please don't ask." | +Memory, +Empathy, -Skepticism |
+| C: "Is this about Malrik?" | +Narrative Presence +Observation | Elenya: (shocked) "How did youâ€”no. I don't know. Please don't ask." | +Memory, +Empathy, -Skepticism |
 | D: Say nothing, meditate with her | +Empathy +Trust | Elenya: (after ritual) "You understand something most don't. That some stories don't have endings." | +Trust, +Empathy, +Nuance |
 
 **Glyph Mechanical Effect**:
@@ -568,7 +568,7 @@ He wants to restore the lighthouse reading room.
 
 The space where he and Elenya used to sit.
 
-He doesn't know why he wants this. He just knows it's necessary—as if his body remembers something his mind forgot.
+He doesn't know why he wants this. He just knows it's necessaryâ€”as if his body remembers something his mind forgot.
 
 **Player Choices**:
 
@@ -584,7 +584,7 @@ He doesn't know why he wants this. He just knows it's necessary—as if his body
 During the work, small moments surface:
 
 - Malrik touches the stone table where the lantern sits, and his hand lingers
-- He retrieves a small object from beneath the rubble—an old journal, his own, with sketches of Elenya's face (though he doesn't recognize it)
+- He retrieves a small object from beneath the rubbleâ€”an old journal, his own, with sketches of Elenya's face (though he doesn't recognize it)
 - He becomes noticeably more patient, almost gentle
 - He speaks about the lighthouse in a way that reveals deep knowledge: "The light was visible from three directions. Useful. Symbolically significant. Though I don't know why I'm noting the symbolism."
 
@@ -606,15 +606,15 @@ The lighthouse reading room is restored. Light streams through again.
 
 Malrik is there alone at first, sitting at the stone table. When Elenya arrives (drawn there by something she can't name), they make eye contact for the first time with full awareness between them.
 
-**Elenya**: "I… I don't know why I came here."
+**Elenya**: "Iâ€¦ I don't know why I came here."
 
 **Malrik**: "I restored it. The data suggested it was historically important."
 
 But they're both lying. They both *know* something is here.
 
-The glyphs in the player's possession—Glyph of Sparks Lost, Glyph of Measured Step—begin to resonate.
+The glyphs in the player's possessionâ€”Glyph of Sparks Lost, Glyph of Measured Stepâ€”begin to resonate.
 
-**Elenya**: "There's something about this place. I can almost…"
+**Elenya**: "There's something about this place. I can almostâ€¦"
 
 **Malrik**: "Yes. I feel it too. Which is imprecise of me."
 
@@ -637,7 +637,7 @@ But in pieces:
 
 **The Scene**:
 
-Elenya and Malrik stand together in the restored lighthouse room. Memory is returning—not as perfect clarity, but as *layered truth*.
+Elenya and Malrik stand together in the restored lighthouse room. Memory is returningâ€”not as perfect clarity, but as *layered truth*.
 
 They remember:
 1. **Who they were**: Young, in love, trying to bridge impossible differences
@@ -655,7 +655,7 @@ They remember:
 
 Long silence.
 
-**Malrik**: "That's the most irrational thing you've ever done. I find it… I can't categorize it."
+**Malrik**: "That's the most irrational thing you've ever done. I find itâ€¦ I can't categorize it."
 
 **Elenya**: (small smile) "That was the point."
 
@@ -698,189 +698,189 @@ The ending is **not** about reunion or rejection. It's about **layered coexisten
 ## Progression Diagram
 
 ```
-TIMELINE: Memory → Rupture → Isolation → Discovery → Recognition → Reconciliation
+TIMELINE: Memory â†’ Rupture â†’ Isolation â†’ Discovery â†’ Recognition â†’ Reconciliation
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     PRE-COLLAPSE: THE LIGHTHOUSE                            │
-│                                                                               │
-│              Malrik (Archivist)              Elenya (Spiritual)             │
-│                  [Young]                          [Young]                    │
-│              Rigid, Brilliant              Intuitive, Open-hearted          │
-│                    ▼                                ▼                        │
-│                                                                               │
-│                      LIGHTHOUSE LUNCHES                                      │
-│                     (Shared Memory)                                          │
-│                   Connection · Silence                                       │
-│                  Intimacy · Understanding                                    │
-│                                                                               │
-│         ┌─────────────────────────────────┐                                  │
-│         │    Malrik Falls In Love         │                                  │
-│         │  (Betrays Own Worldview)        │                                  │
-│         └─────────────────────────────────┘                                  │
-│                                                                               │
-│         ┌──────────────────────────────────┐                                 │
-│         │  Elenya Feels Mutual Tenderness  │                                 │
-│         │ But Fears Incompatibility        │                                 │
-│         └──────────────────────────────────┘                                 │
-│                                                                               │
-│  Malrik's Internal: "She sees through me"                                   │
-│  Elenya's Internal: "I can't hold this weight"                              │
-│                                                                               │
-│                ╔═══════════════════╗                                         │
-│                ║  THE REJECTION    ║                                         │
-│                ║  (Soft, Honest)   ║                                         │
-│                ╚═══════════════════╝                                         │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    THE CATACLYSM: MEMORY FRACTURE                            │
-│                                                                               │
-│     System Collapse → Emotional Data Shatters → Identity Rupture           │
-│                                                                               │
-│    Malrik Wakes: "I studied the archives… but why do I feel…"             │
-│    Elenya Wakes: "Something sacred is missing… I don't know what…"         │
-│                                                                               │
-│              ┌─────────────────────────────────────────┐                     │
-│              │  ELENYA'S RADICAL CHOICE:               │                     │
-│              │  DELIBERATE MEMORY SEVERING             │                     │
-│              │  "I will cut this thread completely"    │                     │
-│              └─────────────────────────────────────────┘                     │
-│                                                                               │
-│   Elenya's Logic: "Half-remembering is torture. Full forgetting is          │
-│                    liberation. I choose liberation for us both."            │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                  POST-COLLAPSE: STRANGER YEARS                               │
-│                                                                               │
-│    Malrik (Archivist)         │         Elenya (High Seer)                 │
-│         [Older]               │              [Older]                        │
-│                                │                                             │
-│  • Obsessed with Preservation  │  • Teaching Release & Letting Go          │
-│  • Rigid, Clipped, Impatient   │  • Gentle, Metaphorical, Wise            │
-│  • Avoids Emotional Closeness  │  • Spiritually Open, Emotionally Guarded  │
-│  • Hidden Wound: Fear          │  • Hidden Wound: Tenderness for Him       │
-│                                │                                             │
-│           FORMAL DISTANCE                                                   │
-│           • Marketplace nods    • Careful courtesy                         │
-│           • She never calls     • He never calls her by title             │
-│             him by formal       • His voice changes when she             │
-│             title              speaks                                      │
-│           • Their followers     • The air between them feels             │
-│             sense something       unfinished                              │
-│                                │                                             │
-│         [25 YEARS PASS]                                                     │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                 PLAYER DISCOVERY: GLYPHS & RECOGNITION                       │
-│                                                                               │
-│  ENCOUNTER 1: Broken Lantern                                                │
-│  └─ Elenya sees a broken lighthouse, feels phantom limb of memory          │
-│     Glyph of Sparks Lost Unlocked                                          │
-│                                                                               │
-│  ENCOUNTER 2: Archive Chamber with Malrik                                   │
-│  └─ Player notices his hesitation, his knowledge that runs too deep        │
-│     Glyph of Measured Step Unlocked                                         │
-│                                                                               │
-│  ENCOUNTER 3: Elenya's Ritual                                               │
-│  └─ She speaks about someone she deliberately forgot                       │
-│     Player can confront her about Malrik                                    │
-│                                                                               │
-│  ENCOUNTER 4: Malrik's Repair Mission                                       │
-│  └─ He "needs" to restore the lighthouse reading room                      │
-│     His body remembers what his mind cannot                                 │
-│                                                                               │
-│              [GLYPHS ACT AS MEMORY KEYS]                                     │
-│              [EMPATHY + PRESENCE = AWARENESS]                               │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│              THE RESTORATION & MEMORY RECOVERY                               │
-│                                                                               │
-│  The lighthouse reading room is restored to its former beauty              │
-│                                                                               │
-│           Malrik waits there, alone              Elenya arrives             │
-│           Not remembering why he came           Not knowing why she came   │
-│                                                                               │
-│                   THE GLYPHS BEGIN TO RESONATE                              │
-│                                                                               │
-│        ╔══════════════════════════════════════════════════════╗             │
-│        ║         MEMORY RETURNS IN FRAGMENTS:                 ║             │
-│        ║                                                      ║             │
-│        ║  • The texture of sitting together                  ║             │
-│        ║  • The sensation of being understood               ║             │
-│        ║  • The taste of tea                                ║             │
-│        ║  • The pain of necessary parting                   ║             │
-│        ║  • The weight of deliberate forgetting             ║             │
-│        ╚══════════════════════════════════════════════════════╝             │
-│                                                                               │
-│        "I remember loving you."                                             │
-│        "I remember choosing to forget you. For both our sakes."            │
-│        "I understand now why."                                             │
-│                                                                               │
-│        ╔══════════════════════════════════════════════════════╗             │
-│        ║   THEY HOLD FOUR TRUTHS SIMULTANEOUSLY:              ║             │
-│        ║                                                      ║             │
-│        ║  1. Who They Were (young, in love, bridging)        ║             │
-│        ║  2. What Happened (collapse, severance, loss)       ║             │
-│        ║  3. Who They Became (archivist, seer, separate)     ║             │
-│        ║  4. Why It Happened (incompatibility, not cruelty)  ║             │
-│        ╚══════════════════════════════════════════════════════╝             │
-│                                                                               │
-│  "We don't have to choose today. We just have to know the truth."          │
-│                                                                               │
-│  Glyph of Severed Covenant Unlocked                                         │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│               THE CHOICE: FOUR POSSIBLE ENDINGS                              │
-│                                                                               │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │ PATH A: RECONCILIATION                                              │   │
-│  │ They rebuild their connection with eyes open.                      │   │
-│  │ They become visible partners in community.                         │   │
-│  │ Outcome: +Community Awareness of Their Bond                        │   │
-│  │          +Dialogue Changes with Both NPCs                          │   │
-│  │          +Influence Mechanics Shift                                │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                               │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │ PATH B: RESPECTFUL DISTANCE                                         │   │
-│  │ They honor their past but choose to remain friends, not lovers.    │   │
-│  │ Both find peace in mutual understanding.                           │   │
-│  │ Outcome: +Mature Relationship Model                                │   │
-│  │          +Both Available for Other Connections                     │   │
-│  │          +Deepened Mutual Respect                                  │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                               │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │ PATH C: CAUTIOUS EXPLORATION                                        │   │
-│  │ They agree to know each other anew, slowly, without commitment.    │   │
-│  │ The possibility remains open; the story continues.                 │   │
-│  │ Outcome: +Uncertain but Hopeful Tone                               │   │
-│  │          +Dialogue Branch: "What Could Be"                         │   │
-│  │          +Affects Later Game Events                                │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                               │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │ PATH D: HONOR THE PAST, PROTECT IT                                 │   │
-│  │ They consciously decide to return to not-remembering.             │   │
-│  │ They choose to preserve the sanctity of Elenya's original choice. │   │
-│  │ Outcome: +Bittersweet Maturity                                     │   │
-│  │          +Philosophical Closure                                    │   │
-│  │          +Deep Mutual Understanding                                │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                               │
-│    ALL PATHS LEAD TO: Understanding. Connection. Respect.                   │
-│    NO PATH IS "WRONG" — THEY ARE DIFFERENT TRUTHS                          │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                     PRE-COLLAPSE: THE LIGHTHOUSE                            â”‚
+â”‚                                                                               â”‚
+â”‚              Malrik (Archivist)              Elenya (Spiritual)             â”‚
+â”‚                  [Young]                          [Young]                    â”‚
+â”‚              Rigid, Brilliant              Intuitive, Open-hearted          â”‚
+â”‚                    â–¼                                â–¼                        â”‚
+â”‚                                                                               â”‚
+â”‚                      LIGHTHOUSE LUNCHES                                      â”‚
+â”‚                     (Shared Memory)                                          â”‚
+â”‚                   Connection Â· Silence                                       â”‚
+â”‚                  Intimacy Â· Understanding                                    â”‚
+â”‚                                                                               â”‚
+â”‚         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                                  â”‚
+â”‚         â”‚    Malrik Falls In Love         â”‚                                  â”‚
+â”‚         â”‚  (Betrays Own Worldview)        â”‚                                  â”‚
+â”‚         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                                  â”‚
+â”‚                                                                               â”‚
+â”‚         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                                 â”‚
+â”‚         â”‚  Elenya Feels Mutual Tenderness  â”‚                                 â”‚
+â”‚         â”‚ But Fears Incompatibility        â”‚                                 â”‚
+â”‚         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                                 â”‚
+â”‚                                                                               â”‚
+â”‚  Malrik's Internal: "She sees through me"                                   â”‚
+â”‚  Elenya's Internal: "I can't hold this weight"                              â”‚
+â”‚                                                                               â”‚
+â”‚                â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—                                         â”‚
+â”‚                â•‘  THE REJECTION    â•‘                                         â”‚
+â”‚                â•‘  (Soft, Honest)   â•‘                                         â”‚
+â”‚                â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•                                         â”‚
+â”‚                                                                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                    THE CATACLYSM: MEMORY FRACTURE                            â”‚
+â”‚                                                                               â”‚
+â”‚     System Collapse â†’ Emotional Data Shatters â†’ Identity Rupture           â”‚
+â”‚                                                                               â”‚
+â”‚    Malrik Wakes: "I studied the archivesâ€¦ but why do I feelâ€¦"             â”‚
+â”‚    Elenya Wakes: "Something sacred is missingâ€¦ I don't know whatâ€¦"         â”‚
+â”‚                                                                               â”‚
+â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                     â”‚
+â”‚              â”‚  ELENYA'S RADICAL CHOICE:               â”‚                     â”‚
+â”‚              â”‚  DELIBERATE MEMORY SEVERING             â”‚                     â”‚
+â”‚              â”‚  "I will cut this thread completely"    â”‚                     â”‚
+â”‚              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                     â”‚
+â”‚                                                                               â”‚
+â”‚   Elenya's Logic: "Half-remembering is torture. Full forgetting is          â”‚
+â”‚                    liberation. I choose liberation for us both."            â”‚
+â”‚                                                                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                  POST-COLLAPSE: STRANGER YEARS                               â”‚
+â”‚                                                                               â”‚
+â”‚    Malrik (Archivist)         â”‚         Elenya (High Seer)                 â”‚
+â”‚         [Older]               â”‚              [Older]                        â”‚
+â”‚                                â”‚                                             â”‚
+â”‚  â€¢ Obsessed with Preservation  â”‚  â€¢ Teaching Release & Letting Go          â”‚
+â”‚  â€¢ Rigid, Clipped, Impatient   â”‚  â€¢ Gentle, Metaphorical, Wise            â”‚
+â”‚  â€¢ Avoids Emotional Closeness  â”‚  â€¢ Spiritually Open, Emotionally Guarded  â”‚
+â”‚  â€¢ Hidden Wound: Fear          â”‚  â€¢ Hidden Wound: Tenderness for Him       â”‚
+â”‚                                â”‚                                             â”‚
+â”‚           FORMAL DISTANCE                                                   â”‚
+â”‚           â€¢ Marketplace nods    â€¢ Careful courtesy                         â”‚
+â”‚           â€¢ She never calls     â€¢ He never calls her by title             â”‚
+â”‚             him by formal       â€¢ His voice changes when she             â”‚
+â”‚             title              speaks                                      â”‚
+â”‚           â€¢ Their followers     â€¢ The air between them feels             â”‚
+â”‚             sense something       unfinished                              â”‚
+â”‚                                â”‚                                             â”‚
+â”‚         [25 YEARS PASS]                                                     â”‚
+â”‚                                                                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                 PLAYER DISCOVERY: GLYPHS & RECOGNITION                       â”‚
+â”‚                                                                               â”‚
+â”‚  ENCOUNTER 1: Broken Lantern                                                â”‚
+â”‚  â””â”€ Elenya sees a broken lighthouse, feels phantom limb of memory          â”‚
+â”‚     Glyph of Sparks Lost Unlocked                                          â”‚
+â”‚                                                                               â”‚
+â”‚  ENCOUNTER 2: Archive Chamber with Malrik                                   â”‚
+â”‚  â””â”€ Player notices his hesitation, his knowledge that runs too deep        â”‚
+â”‚     Glyph of Measured Step Unlocked                                         â”‚
+â”‚                                                                               â”‚
+â”‚  ENCOUNTER 3: Elenya's Ritual                                               â”‚
+â”‚  â””â”€ She speaks about someone she deliberately forgot                       â”‚
+â”‚     Player can confront her about Malrik                                    â”‚
+â”‚                                                                               â”‚
+â”‚  ENCOUNTER 4: Malrik's Repair Mission                                       â”‚
+â”‚  â””â”€ He "needs" to restore the lighthouse reading room                      â”‚
+â”‚     His body remembers what his mind cannot                                 â”‚
+â”‚                                                                               â”‚
+â”‚              [GLYPHS ACT AS MEMORY KEYS]                                     â”‚
+â”‚              [EMPATHY + PRESENCE = AWARENESS]                               â”‚
+â”‚                                                                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚              THE RESTORATION & MEMORY RECOVERY                               â”‚
+â”‚                                                                               â”‚
+â”‚  The lighthouse reading room is restored to its former beauty              â”‚
+â”‚                                                                               â”‚
+â”‚           Malrik waits there, alone              Elenya arrives             â”‚
+â”‚           Not remembering why he came           Not knowing why she came   â”‚
+â”‚                                                                               â”‚
+â”‚                   THE GLYPHS BEGIN TO RESONATE                              â”‚
+â”‚                                                                               â”‚
+â”‚        â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—             â”‚
+â”‚        â•‘         MEMORY RETURNS IN FRAGMENTS:                 â•‘             â”‚
+â”‚        â•‘                                                      â•‘             â”‚
+â”‚        â•‘  â€¢ The texture of sitting together                  â•‘             â”‚
+â”‚        â•‘  â€¢ The sensation of being understood               â•‘             â”‚
+â”‚        â•‘  â€¢ The taste of tea                                â•‘             â”‚
+â”‚        â•‘  â€¢ The pain of necessary parting                   â•‘             â”‚
+â”‚        â•‘  â€¢ The weight of deliberate forgetting             â•‘             â”‚
+â”‚        â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•             â”‚
+â”‚                                                                               â”‚
+â”‚        "I remember loving you."                                             â”‚
+â”‚        "I remember choosing to forget you. For both our sakes."            â”‚
+â”‚        "I understand now why."                                             â”‚
+â”‚                                                                               â”‚
+â”‚        â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—             â”‚
+â”‚        â•‘   THEY HOLD FOUR TRUTHS SIMULTANEOUSLY:              â•‘             â”‚
+â”‚        â•‘                                                      â•‘             â”‚
+â”‚        â•‘  1. Who They Were (young, in love, bridging)        â•‘             â”‚
+â”‚        â•‘  2. What Happened (collapse, severance, loss)       â•‘             â”‚
+â”‚        â•‘  3. Who They Became (archivist, seer, separate)     â•‘             â”‚
+â”‚        â•‘  4. Why It Happened (incompatibility, not cruelty)  â•‘             â”‚
+â”‚        â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•             â”‚
+â”‚                                                                               â”‚
+â”‚  "We don't have to choose today. We just have to know the truth."          â”‚
+â”‚                                                                               â”‚
+â”‚  Glyph of Severed Covenant Unlocked                                         â”‚
+â”‚                                                                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚               THE CHOICE: FOUR POSSIBLE ENDINGS                              â”‚
+â”‚                                                                               â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚  â”‚ PATH A: RECONCILIATION                                              â”‚   â”‚
+â”‚  â”‚ They rebuild their connection with eyes open.                      â”‚   â”‚
+â”‚  â”‚ They become visible partners in community.                         â”‚   â”‚
+â”‚  â”‚ Outcome: +Community Awareness of Their Bond                        â”‚   â”‚
+â”‚  â”‚          +Dialogue Changes with Both NPCs                          â”‚   â”‚
+â”‚  â”‚          +Influence Mechanics Shift                                â”‚   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚                                                                               â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚  â”‚ PATH B: RESPECTFUL DISTANCE                                         â”‚   â”‚
+â”‚  â”‚ They honor their past but choose to remain friends, not lovers.    â”‚   â”‚
+â”‚  â”‚ Both find peace in mutual understanding.                           â”‚   â”‚
+â”‚  â”‚ Outcome: +Mature Relationship Model                                â”‚   â”‚
+â”‚  â”‚          +Both Available for Other Connections                     â”‚   â”‚
+â”‚  â”‚          +Deepened Mutual Respect                                  â”‚   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚                                                                               â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚  â”‚ PATH C: CAUTIOUS EXPLORATION                                        â”‚   â”‚
+â”‚  â”‚ They agree to know each other anew, slowly, without commitment.    â”‚   â”‚
+â”‚  â”‚ The possibility remains open; the story continues.                 â”‚   â”‚
+â”‚  â”‚ Outcome: +Uncertain but Hopeful Tone                               â”‚   â”‚
+â”‚  â”‚          +Dialogue Branch: "What Could Be"                         â”‚   â”‚
+â”‚  â”‚          +Affects Later Game Events                                â”‚   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚                                                                               â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚  â”‚ PATH D: HONOR THE PAST, PROTECT IT                                 â”‚   â”‚
+â”‚  â”‚ They consciously decide to return to not-remembering.             â”‚   â”‚
+â”‚  â”‚ They choose to preserve the sanctity of Elenya's original choice. â”‚   â”‚
+â”‚  â”‚ Outcome: +Bittersweet Maturity                                     â”‚   â”‚
+â”‚  â”‚          +Philosophical Closure                                    â”‚   â”‚
+â”‚  â”‚          +Deep Mutual Understanding                                â”‚   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚                                                                               â”‚
+â”‚    ALL PATHS LEAD TO: Understanding. Connection. Respect.                   â”‚
+â”‚    NO PATH IS "WRONG" â€” THEY ARE DIFFERENT TRUTHS                          â”‚
+â”‚                                                                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -899,13 +899,13 @@ Malrik speaks in:
 ### Example Dialogue Lines
 
 **On the Archives**:
-> "This chamber is lying to you. Oh—don't misunderstand. It's a machine; it has no conscience. I mean the data is false. No. Yes. You don't understand. Few do. Systems rarely intend anything. They follow orders like dogs—only more loyal, and far less aware of the damage they cause."
+> "This chamber is lying to you. Ohâ€”don't misunderstand. It's a machine; it has no conscience. I mean the data is false. No. Yes. You don't understand. Few do. Systems rarely intend anything. They follow orders like dogsâ€”only more loyal, and far less aware of the damage they cause."
 
 **On Order**:
-> "Love is irrelevant. Well—no. Nevermind. Order is necessary. Without structure, memory dissolves. Without memory, people… you've seen what happens. I don't have time to love order. I respect its consequences."
+> "Love is irrelevant. Wellâ€”no. Nevermind. Order is necessary. Without structure, memory dissolves. Without memory, peopleâ€¦ you've seen what happens. I don't have time to love order. I respect its consequences."
 
 **On Elenya (Unconscious Slip)**:
-> "I don't have affection. I have responsibility. She—the High Seer, I mean—Elenya—she doesn't understand the weight of what we lost. But that's not… that's not her role to understand."
+> "I don't have affection. I have responsibility. Sheâ€”the High Seer, I meanâ€”Elenyaâ€”she doesn't understand the weight of what we lost. But that's notâ€¦ that's not her role to understand."
 
 **When Player Notices Tension**:
 > "You're observant. Imprecise observation, but observant. She's a capable spiritual leader. I'm an adequate archivist. We occupy different domains. That's all."
@@ -926,16 +926,16 @@ Elenya speaks in:
 ### Example Dialogue Lines
 
 **On the Lighthouse**:
-> "There's something about light… the way it persists even when the source is broken. It still illuminates. It still reaches. Even when no one intended for it to."
+> "There's something about lightâ€¦ the way it persists even when the source is broken. It still illuminates. It still reaches. Even when no one intended for it to."
 
 **On Love**:
 > "We are taught that love means holding. But sometimes love means letting completely. Not because they are unworthy, but because they are sacred enough that we will not diminish them by our grasping."
 
 **On Malrik (Conscious Awareness)**:
-> "Why… yes, Archivist Malrik is a soul worthy of love. I mean, it's complicated. We have… we share history, but neither of us remembers why. And perhaps that's wisdom, not tragedy. Perhaps some bonds are meant to rest."
+> "Whyâ€¦ yes, Archivist Malrik is a soul worthy of love. I mean, it's complicated. We haveâ€¦ we share history, but neither of us remembers why. And perhaps that's wisdom, not tragedy. Perhaps some bonds are meant to rest."
 
 **When Memory Returns**:
-> "I remember choosing to forget. I remember that it was the most loving thing I could do. I still believe that. And I also believe that knowing the truth now… changes nothing except everything."
+> "I remember choosing to forget. I remember that it was the most loving thing I could do. I still believe that. And I also believe that knowing the truth nowâ€¦ changes nothing except everything."
 
 ---
 
@@ -958,7 +958,7 @@ Elenya speaks in:
 - If player helps Malrik and Elenya reconnect: "Ah. So some things can be fixed. I'll keep that in mind."
 
 **Community Ripple**:
-- If players reconcile them, the marketplace shifts—more people visit Elenya's shrine; more people seek Malrik's counsel
+- If players reconcile them, the marketplace shiftsâ€”more people visit Elenya's shrine; more people seek Malrik's counsel
 - If players honor their separation, community members speak of them with philosophical respect
 - Followers of Elenya discuss what it means to love well by letting go
 - Scholars working with Malrik note his patience increasing slightly
@@ -970,18 +970,18 @@ Elenya speaks in:
 ### Stat Gating
 
 **To unlock Malrik's hidden vulnerability**:
-- Empathy ≥ 60 OR Presence ≥ 60
+- Empathy â‰¥ 60 OR Presence â‰¥ 60
 - Multiple encounters with Archive Chamber
 - Glyph of Sparks Lost in possession
 
 **To unlock Elenya's memory confession**:
-- Empathy ≥ 70
-- Presence ≥ 65
+- Empathy â‰¥ 70
+- Presence â‰¥ 65
 - Attended at least 2 of her spiritual rituals
 - Glyph of Sparks Lost in possession
 
 **To unlock full memory recovery**:
-- Empathy ≥ 70 + Presence ≥ 70 (combined Presence score)
+- Empathy â‰¥ 70 + Presence â‰¥ 70 (combined Presence score)
 - Completed Malrik's repair quest
 - Attended Elenya's acknowledgment ritual
 - Hold both Glyph of Sparks Lost AND Glyph of Measured Step
@@ -994,9 +994,9 @@ The system tracks hidden **TONE Alignment** based on player emotional consistenc
 TONE Alignment = (Empathy consistency with Malrik) + (Observation consistency with Elenya)
 
 If TONE Alignment:
-  ≤ 0.10   → NPC Correlation = -0.5 (tension stays hidden)
-  0.10-0.25 → Correlation = 0.0 (independence, no visible change)
-  > 0.25   → Correlation = +0.5 (mutual awareness visible, dialogue shifts)
+  â‰¤ 0.10   â†’ NPC Correlation = -0.5 (tension stays hidden)
+  0.10-0.25 â†’ Correlation = 0.0 (independence, no visible change)
+  > 0.25   â†’ Correlation = +0.5 (mutual awareness visible, dialogue shifts)
 ```
 
 ### Glyph Effects on Dialogue
@@ -1018,10 +1018,10 @@ The lighthouse reading room is restored. Malrik and Elenya stand together. The g
 ### Dialogue Progression
 
 **Elenya** (voice trembling):
-"I… I remember something. It's not clear. But I remember this place. And I remember… a feeling."
+"Iâ€¦ I remember something. It's not clear. But I remember this place. And I rememberâ€¦ a feeling."
 
 **Malrik** (clinically, but voice tight):
-"That's not possible. Memory doesn't return without trigger data. Unless the glyphs are—"
+"That's not possible. Memory doesn't return without trigger data. Unless the glyphs areâ€”"
 
 (He stops himself, seeing her face)
 
@@ -1035,7 +1035,7 @@ The lighthouse reading room is restored. Malrik and Elenya stand together. The g
 "What choice?"
 
 **Elenya**:
-"To sever the memory completely. To cut that thread so thoroughly that half-remembering couldn't haunt us. I thought… I thought it was the kindest thing I could do."
+"To sever the memory completely. To cut that thread so thoroughly that half-remembering couldn't haunt us. I thoughtâ€¦ I thought it was the kindest thing I could do."
 
 Long silence.
 
@@ -1046,7 +1046,7 @@ Long silence.
 "I made both of us forget. So we wouldn't spend 25 years grieving something we couldn't name."
 
 **Malrik**:
-"That's not… that's the most irrational—"
+"That's notâ€¦ that's the most irrationalâ€”"
 
 (He stops, something shifting in his expression)
 
@@ -1116,11 +1116,11 @@ glyph_severed_covenant = [boolean]
 
 Malrik and Elenya's arc embodies the core themes of the game:
 
-1. **Memory as Tragedy & Transformation**: They lost each other, not to death, but to forgetting—and that forgetting was an act of love
+1. **Memory as Tragedy & Transformation**: They lost each other, not to death, but to forgettingâ€”and that forgetting was an act of love
 2. **Incompatibility as Depth**: They don't fit together perfectly, and that's what makes them real
-3. **Layered Truth Over Simple Resolution**: The ending isn't "they reunite" or "they move on"—it's "they hold all four truths simultaneously"
+3. **Layered Truth Over Simple Resolution**: The ending isn't "they reunite" or "they move on"â€”it's "they hold all four truths simultaneously"
 4. **The Body Remembers**: Their connection survives even when their conscious minds have severed it
-5. **Presence as Spiritual Practice**: Being witnessed, being known, being chosen—not for perfection, but for wholeness
+5. **Presence as Spiritual Practice**: Being witnessed, being known, being chosenâ€”not for perfection, but for wholeness
 
 Their story shows that in Velinor, love doesn't always triumph. But it also never fully disappears.
 
@@ -1138,3 +1138,4 @@ It transforms. It echoes. It persists as a question: "How do we hold what we've 
 - [ ] Integrate with Glyph system mechanics
 - [ ] Test stat gating and attunement score calculations
 - [ ] Record voice lines (if audio is planned)
+

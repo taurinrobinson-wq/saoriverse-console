@@ -1,4 +1,4 @@
-"""
+﻿"""
 Velinor Phase 2 Test Interface - Trait System + Marketplace Debate
 ===================================================================
 
@@ -30,7 +30,7 @@ from marketplace_scene import create_marketplace_debate_scene
 
 st.set_page_config(
     page_title="Velinor Phase 2: Trait System & Marketplace Debate",
-    page_icon="🧠",
+    page_icon="ðŸ§ ",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -170,7 +170,7 @@ def render_trait_meters() -> None:
     profile = st.session_state.trait_profiler.get_trait_summary()
     traits = profile['trait_scores']
     
-    st.markdown("### 🧭 Trait Profile")
+    st.markdown("### ðŸ§­ Trait Profile")
     
     col1, col2 = st.columns(2)
     
@@ -262,7 +262,7 @@ def render_coherence_status() -> None:
 
 def render_sidebar_info() -> None:
     """Render information sidebar"""
-    st.sidebar.markdown("### 📊 Player Status")
+    st.sidebar.markdown("### ðŸ“Š Player Status")
     profile = st.session_state.trait_profiler.get_trait_summary()
     st.sidebar.metric("Choices Made", profile['choices_made'])
     
@@ -286,7 +286,7 @@ def render_welcome() -> None:
     """Render welcome screen"""
     st.markdown("""
     <div style='text-align: center; padding: 40px;'>
-        <h1>🧠 Velinor: Phase 2</h1>
+        <h1>ðŸ§  Velinor: Phase 2</h1>
         <h2>Trait System & Marketplace Debate</h2>
         <p style='font-size: 18px; color: #666;'>
             Your choices shape who you are.<br>
@@ -296,13 +296,13 @@ def render_welcome() -> None:
     """, unsafe_allow_html=True)
     
     st.markdown("""
-    ## 🎭 The Marketplace Debate
+    ## ðŸŽ­ The Marketplace Debate
     
     A conflict is unfolding in the marketplace square. Three factions,
     three perspectives, one contested space.
     
     **What you'll experience:**
-    - Meet Malrik (Skeptical), Elenya (Empathetic), and Coren (Integrator)
+    - Meet Malrik (Skeptical), Elenya (Empathetic), and Cal (Integrator)
     - Choose your approach to their conflict
     - Watch the world respond to your trait pattern
     - See how coherence affects dialogue depth
@@ -317,13 +317,13 @@ def render_welcome() -> None:
     ---
     """)
     
-    if st.button("🚀 Begin the Marketplace Debate", use_container_width=True):
+    if st.button("ðŸš€ Begin the Marketplace Debate", use_container_width=True):
         st.session_state.scene_phase = "intro"
         st.rerun()
 
 def render_intro_phase() -> None:
     """Render scene introduction and entry choices"""
-    st.markdown("## 🎭 The Marketplace Square")
+    st.markdown("## ðŸŽ­ The Marketplace Square")
     
     # Show intro narration
     scene = st.session_state.marketplace_scene
@@ -356,7 +356,7 @@ def render_intro_phase() -> None:
 
 def render_setup_phase() -> None:
     """Render debate setup narration"""
-    st.markdown("## 🗣️ The Debate Unfolds")
+    st.markdown("## ðŸ—£ï¸ The Debate Unfolds")
     
     scene = st.session_state.marketplace_scene
     st.markdown(scene['setup_narration'])
@@ -377,18 +377,18 @@ def render_setup_phase() -> None:
         st.info(f"**Elenya** ({elenya_conflict})")
     
     with col3:
-        coren_conflict = st.session_state.npc_response_engine.get_npc_conflict_level('Coren')
-        st.info(f"**Coren** ({coren_conflict})")
+        Cal_conflict = st.session_state.npc_response_engine.get_npc_conflict_level('Cal')
+        st.info(f"**Cal** ({Cal_conflict})")
     
     st.markdown("---")
     
-    if st.button("Continue to dialogue choices →", use_container_width=True):
+    if st.button("Continue to dialogue choices â†’", use_container_width=True):
         st.session_state.show_branching = True
         st.rerun()
 
 def render_branching_phase() -> None:
     """Render main dialogue branching choices"""
-    st.markdown("## 💭 What Do You Say?")
+    st.markdown("## ðŸ’­ What Do You Say?")
     
     # Get available choices based on coherence
     profiler = st.session_state.trait_profiler
@@ -397,7 +397,7 @@ def render_branching_phase() -> None:
     npc_conflicts = {
         'Malrik': st.session_state.npc_response_engine.get_npc_conflict_level('Malrik'),
         'Elenya': st.session_state.npc_response_engine.get_npc_conflict_level('Elenya'),
-        'Coren': st.session_state.npc_response_engine.get_npc_conflict_level('Coren'),
+        'Cal': st.session_state.npc_response_engine.get_npc_conflict_level('Cal'),
     }
     
     scene = st.session_state.marketplace_scene
@@ -416,7 +416,7 @@ def render_branching_phase() -> None:
         
         choice_text = choice['text']
         if locked:
-            choice_text += " 🔒 (Requires coherence)"
+            choice_text += " ðŸ”’ (Requires coherence)"
         
         if st.button(
             choice_text,
@@ -437,7 +437,7 @@ def render_branching_phase() -> None:
             
             # Show response
             st.markdown("---")
-            st.markdown("### 🎭 The Response")
+            st.markdown("### ðŸŽ­ The Response")
             st.markdown(f"<div class='npc-response'>{choice['response']}</div>", unsafe_allow_html=True)
             
             # Show consequence
@@ -446,7 +446,7 @@ def render_branching_phase() -> None:
             # Update coherence for display
             st.session_state.show_branching = False
             
-            if st.button("See the Resolution →", use_container_width=True):
+            if st.button("See the Resolution â†’", use_container_width=True):
                 st.session_state.scene_phase = "resolution"
                 st.rerun()
             
@@ -454,7 +454,7 @@ def render_branching_phase() -> None:
 
 def render_resolution_phase() -> None:
     """Render scene resolution"""
-    st.markdown("## 📖 The Resolution")
+    st.markdown("## ðŸ“– The Resolution")
     
     # Get last choice made
     if st.session_state.choices_log:
@@ -476,9 +476,9 @@ def render_resolution_phase() -> None:
     st.markdown(scene['exit_narration'])
     
     st.markdown("---")
-    st.success("✨ Marketplace Debate Complete")
+    st.success("âœ¨ Marketplace Debate Complete")
     
-    if st.button("🔄 Reset and Try Different Choices", use_container_width=True):
+    if st.button("ðŸ”„ Reset and Try Different Choices", use_container_width=True):
         st.session_state.trait_profiler = TraitProfiler("Player")
         st.session_state.coherence_calculator = CoherenceCalculator(st.session_state.trait_profiler)
         st.session_state.npc_response_engine = NPCResponseEngine(st.session_state.trait_profiler)
@@ -494,14 +494,14 @@ def main():
     """Main application"""
     
     # Render sidebar
-    st.sidebar.markdown("# 📊 Trait Dashboard")
+    st.sidebar.markdown("# ðŸ“Š Trait Dashboard")
     render_sidebar_info()
     render_trait_meters()
     render_coherence_status()
     
     st.sidebar.markdown("---")
     st.sidebar.markdown("""
-    ### 📚 How Traits Work
+    ### ðŸ“š How Traits Work
     
     Your choices build trait patterns. NPCs notice patterns, not individual choices.
     
@@ -510,8 +510,8 @@ def main():
     - **Integration**: Holding multiple truths
     - **Awareness**: Noticing patterns
     
-    **High Coherence** → NPCs reveal more  
-    **Low Coherence** → NPCs stay guarded
+    **High Coherence** â†’ NPCs reveal more  
+    **Low Coherence** â†’ NPCs stay guarded
     """)
     
     # Main content
@@ -530,3 +530,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

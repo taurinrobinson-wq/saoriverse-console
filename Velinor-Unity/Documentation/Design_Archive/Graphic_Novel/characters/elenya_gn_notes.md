@@ -1,10 +1,10 @@
-# Elenya — Graphic Novel Canon Notes
+﻿# Elenya â€” Graphic Novel Canon Notes
 
 ## GN-Specific Profile Updates
 
 This document contains **graphic novel-specific notes** for Elenya's character in *Velinor: The Archivist and the Seer*.
 
-For the comprehensive Elenya profile (game + general lore), see `velinor/markdowngameinstructions/characters/malrik_elenya_coren.md` and `malrik_and_elenya_complete_arc.md`.
+For the comprehensive Elenya profile (game + general lore), see `velinor/markdowngameinstructions/characters/malrik_elenya_Cal.md` and `malrik_and_elenya_complete_arc.md`.
 
 ---
 
@@ -26,7 +26,7 @@ She is the one who:
 
 ### What Elenya Doesn't Know She Knows (Volume 1)
 - That Lior's object is the Codex
-- That the Codex carries **their** shared memory—hers and Malrik's
+- That the Codex carries **their** shared memoryâ€”hers and Malrik's
 - That she will play a crucial role in helping both Lior and Malrik understand what the Codex means
 
 ### What Elenya Actively Hides (Volume 1)
@@ -81,7 +81,7 @@ She is the one who:
 
 ### The Revelation (Chapter 12)
 - During a final ritual, Elenya acknowledges that the object Lior carries holds memory
-- Specifically, a **severed bond**—a love that was intentionally broken
+- Specifically, a **severed bond**â€”a love that was intentionally broken
 
 **Elenya's dialogue:**
 > "This is a memory of something that was severed. A bond. A love. Something that remembers itself even when the mind forgot."
@@ -92,7 +92,7 @@ She is the one who:
 **Elenya (looking away):**
 > "That's what comes next. But first, understand this: the Archive is not the only place memory is kept. Sometimes it lives in people. And sometimes, it waits in objects for the right person to carry it home."
 
-**Subtext**: The memory is *ours*—mine and Malrik's. But I cannot tell you that yet. You must discover it. Lior must help us remember.
+**Subtext**: The memory is *ours*â€”mine and Malrik's. But I cannot tell you that yet. You must discover it. Lior must help us remember.
 
 ---
 
@@ -173,7 +173,7 @@ She is the one who:
 ### About the Future
 - That Volume 2 will be her story (parallel to Malrik's Volume 1)
 - That the Codex revelation will force both her and Malrik to confront what they've hidden
-- That Lior's discovery is not accident, but design—the Codex was *waiting* for her
+- That Lior's discovery is not accident, but designâ€”the Codex was *waiting* for her
 
 ---
 
@@ -192,7 +192,7 @@ She is the one who:
 > "You carry something. I'm not sure what. But it carries you."
 
 ### Internal Monologue (What She's Not Saying)
-> "I know that presence across the marketplace. I know the shape of that grief. I know because I buried it in myself so I could survive. But now she is here—this young woman who carries something that remembers what I had to forget. Perhaps this is the path home."
+> "I know that presence across the marketplace. I know the shape of that grief. I know because I buried it in myself so I could survive. But now she is hereâ€”this young woman who carries something that remembers what I had to forget. Perhaps this is the path home."
 
 ---
 
@@ -225,7 +225,7 @@ She is the one who:
 
 ### The Ritual Space
 - Candlelight, shadows, intimate despite potentially being large
-- Elenya at the center, but not hierarchical—present as one who holds space, not one who dominates
+- Elenya at the center, but not hierarchicalâ€”present as one who holds space, not one who dominates
 - Sense of safety and being witnessed
 
 ---
@@ -233,10 +233,10 @@ She is the one who:
 ## Thematic Role (Volume 1)
 
 Elenya represents:
-1. **The alternative to institutions** – Spiritual practice as a valid way of knowing
-2. **The cost of self-protection** – Memory severed as survival
-3. **The hidden lover** – Her grief is the shadow side of Malrik's philosophy
-4. **The spiritual guide** – She recognizes Lior's role before either Lior or Malrik do
+1. **The alternative to institutions** â€“ Spiritual practice as a valid way of knowing
+2. **The cost of self-protection** â€“ Memory severed as survival
+3. **The hidden lover** â€“ Her grief is the shadow side of Malrik's philosophy
+4. **The spiritual guide** â€“ She recognizes Lior's role before either Lior or Malrik do
 
 Her arc across the volumes:
 - **Volume 1**: Mysterious presence, tuned to Lior's emergence
@@ -258,3 +258,4 @@ These questions shape the development of Elenya's character in volumes 2 and bey
 ---
 
 This completes the GN-specific character notes for Elenya.
+

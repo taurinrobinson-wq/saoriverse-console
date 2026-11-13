@@ -1,4 +1,4 @@
-# VELINOR NARRATIVE WRITING GUIDE
+﻿# VELINOR NARRATIVE WRITING GUIDE
 
 *A focused tool for writing dialogue and scenes*
 
@@ -7,74 +7,74 @@
 Here is the rest of your Tier 1 and Tier 1.5 dialogue framework for the **Ravi & Nima**, **Kaelen**, and **Nima Alone** encounters.  
 To make this immediately ready for implementation, the structure mimics the compact, data-driven style of your Willy encounter: it presents a clean **Prompt \-\> TONE Response Matrix \-\> Unified Shared Beat** loop, limits dialogue lengths strictly to your writing guide's rules (no heavy tags, 2-3 sentences max), and leaves data hooks ready for Unity parsing.
 
-## **1\. SAORI — DESERT AND MOUNTAIN EXPANSE (Tier 1\)**
+## **1\. SAORI â€” DESERT AND MOUNTAIN EXPANSE (Tier 1\)**
 
 **Data Hook:** scene\_id: desert\_mountain\_01 | required\_flags: press\_start \== true
 
 ### **Beat 1: Player Start**
 
-**Setting Description:** A windswept desert stretches between two jagged mountain ridges. Sand drags across the ground in long ribbons, and the air tastes metallic. In the distance, the player can make out the silhouette of Velhara Marketplace — a cluster of structures, pipes, and towers half‑buried in dust. The PC only knows they must reach the market for work, shelter, and food. A figure emerges from the sand and wind, stepping into clarity as if the storm itself released her. Saori approaches, studying the PC with a calm, assessing gaze.
+**Setting Description:** A windswept desert stretches between two jagged mountain ridges. Sand drags across the ground in long ribbons, and the air tastes metallic. In the distance, the player can make out the silhouette of Velhara Marketplace â€” a cluster of structures, pipes, and towers halfâ€‘buried in dust. The PC only knows they must reach the market for work, shelter, and food. A figure emerges from the sand and wind, stepping into clarity as if the storm itself released her. Saori approaches, studying the PC with a calm, assessing gaze.
 
-**Prompt:** SAORI: “You are on your way to the market?”
+**Prompt:** SAORI: â€œYou are on your way to the market?â€
 
-**(T) Choice:** “Yes, I am looking for work, food, and a place to stay.” 
+**(T) Choice:** â€œYes, I am looking for work, food, and a place to stay.â€ 
 
-SAORI: “Sorry, I can offer none of those.”
+SAORI: â€œSorry, I can offer none of those.â€
 
-**(O) Choice:** “You are on your way somewhere too?” 
+**(O) Choice:** â€œYou are on your way somewhere too?â€ 
 
-SAORI: “Ah, a question with a question. How mysterious.”
+SAORI: â€œAh, a question with a question. How mysterious.â€
 
-**(N) Choice:** “Well, anything is better than the middle of this desert.” 
+**(N) Choice:** â€œWell, anything is better than the middle of this desert.â€ 
 
-SAORI: “Agreed… at least in theory.”
+SAORI: â€œAgreedâ€¦ at least in theory.â€
 
-**(E) Choice:** “I want to see if I can make myself useful and fill my belly while I’m at it.” 
+**(E) Choice:** â€œI want to see if I can make myself useful and fill my belly while Iâ€™m at it.â€ 
 
-SAORI: “Well aren’t you a saint? I like those who work for the collective.”
+SAORI: â€œWell arenâ€™t you a saint? I like those who work for the collective.â€
 
 ### **Shared Beat: The Device**
 
-**Shared Beat:** Saori’s expression shifts — not toward the player, but past them. She glances over her shoulder, posture tightening, as if listening for something carried on the wind. Her attention flickers away from the conversation, urgency rising beneath her calm exterior. SAORI: “You should take this.” She presses a strange device into the player’s hands, her eyes still scanning the horizon.
+**Shared Beat:** Saoriâ€™s expression shifts â€” not toward the player, but past them. She glances over her shoulder, posture tightening, as if listening for something carried on the wind. Her attention flickers away from the conversation, urgency rising beneath her calm exterior. SAORI: â€œYou should take this.â€ She presses a strange device into the playerâ€™s hands, her eyes still scanning the horizon.
 
-**SYSTEM TRIGGER:** Notification UI → "??? Obtained. Press \[C\] to access."
+**SYSTEM TRIGGER:** Notification UI â†’ "??? Obtained. Press \[C\] to access."
 
 ### **Beat 2: Player Questions the Device**
 
 **Setting Description:** Saori steps back, already half-turned away. 
 
-SAORI: “I must go.”
+SAORI: â€œI must go.â€
 
-**(T) Choice:** “Wait… what is this thing? Who are you?”  
+**(T) Choice:** â€œWaitâ€¦ what is this thing? Who are you?â€  
 
-SAORI: “Sorry, no time. Good luck.”
+SAORI: â€œSorry, no time. Good luck.â€
 
-**(O) Choice:** “I’ve never seen anything like this before… wait, I didn’t get your name—”  
+**(O) Choice:** â€œIâ€™ve never seen anything like this beforeâ€¦ wait, I didnâ€™t get your nameâ€”â€  
 
-SAORI: “Can’t talk. It will all make sense… maybe.”
+SAORI: â€œCanâ€™t talk. It will all make senseâ€¦ maybe.â€
 
-**(N) Choice:** “I’ve seen a lot of strange things in my life, but… wait, you are—?”  
+**(N) Choice:** â€œIâ€™ve seen a lot of strange things in my life, butâ€¦ wait, you areâ€”?â€  
 
-SAORI: “I’m sure you have. No time, gotta run.”
+SAORI: â€œIâ€™m sure you have. No time, gotta run.â€
 
-**(E) Choice:** “I’m feeling so confused. Please, tell me your name.”  
+**(E) Choice:** â€œIâ€™m feeling so confused. Please, tell me your name.â€  
 
-SAORI: “Confusion is healthy… no time to chat. Good luck\!”
+SAORI: â€œConfusion is healthyâ€¦ no time to chat. Good luck\!â€
 
 ### **Shared Beat: The Wind Cuts Her Voice**
 
-**Shared Beat:** She starts to say more — 
+**Shared Beat:** She starts to say more â€” 
 
-SAORI: “I’m sure we’ll meet—” But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm as quickly as she appeared.
+SAORI: â€œIâ€™m sure weâ€™ll meetâ€”â€ But the wind surges, swallowing her voice. Her silhouette dissolves back into the storm as quickly as she appeared.
 
-**SYSTEM TRIGGER:** Notification UI → "Diary updated. Press \[N\] to access."
+**SYSTEM TRIGGER:** Notification UI â†’ "Diary updated. Press \[N\] to access."
 
 **DATA HOOK:** Append entry to PlayerDiary.json.
 
 * 
 
 
-## **2\. RAVI & NIMA — MARKETPLACE DISCOVERY (Tier 1\)**
+## **2\. RAVI & NIMA â€” MARKETPLACE DISCOVERY (Tier 1\)**
 
 ## **Data Hook: scene\_id: market\_discovery\_01 | required\_flags: met\_saori \== true; obtain\_codex \== true**
 
@@ -82,11 +82,11 @@ SAORI: “I’m sure we’ll meet—” But the wind surges, swallowing her voic
 
 **Setting Description:** The Velhara marketplace thrums with afternoon energy. Vendors shout prices, crowds move in tight currents. Near the fountain, two figures stand completely still against the rushing crowd, staring at you.
 
-**Prompt:** *They’re staring at me. What should I do.*
+**Prompt:** *Theyâ€™re staring at me. What should I do.*
 
 **(T) Choice:** Step toward the figures
 
-You approach with open body language. The man’s expression shifts slightly.
+You approach with open body language. The manâ€™s expression shifts slightly.
 
 **(O) Choice:** Keep your distance
 
@@ -100,57 +100,57 @@ You wander the marketplace, examining merchant goods. After a moment, you notice
 
 You stop completely. Your stillness meets theirs. Time feels different here.
 
-### **Beat 2: Nima’s Border Defense**
+### **Beat 2: Nimaâ€™s Border Defense**
 
-**Prompt:** NIMA: “What do you want anyway? We don’t trust outsiders.”
+**Prompt:** NIMA: â€œWhat do you want anyway? We donâ€™t trust outsiders.â€
 
-**(T) Choice:** “I’m trying to find work. I’m new here.”
+**(T) Choice:** â€œIâ€™m trying to find work. Iâ€™m new here.â€
 
-NIMA: “Work is scarce for people who actually belong here. Intentions don’t fill empty bellies.”
+NIMA: â€œWork is scarce for people who actually belong here. Intentions donâ€™t fill empty bellies.â€
 
-**(O) Choice:** “I don’t mean to make you feel uncomfortable. It’s been a long trip, any place to rest around here?”
+**(O) Choice:** â€œI donâ€™t mean to make you feel uncomfortable. Itâ€™s been a long trip, any place to rest around here?â€
 
-NIMA: “Comfort isn’t something we trade in anymore. The corners are dry, if you can sleep with one eye open.”
+NIMA: â€œComfort isnâ€™t something we trade in anymore. The corners are dry, if you can sleep with one eye open.â€
 
-**(N) Choice:** “I’ve heard the market is a place to find work. I’m not here to cause trouble.”
+**(N) Choice:** â€œIâ€™ve heard the market is a place to find work. Iâ€™m not here to cause trouble.â€
 
-NIMA: “Trouble usually follows the people who claim they aren’t carrying any. Keep your hands where they can be seen.”
+NIMA: â€œTrouble usually follows the people who claim they arenâ€™t carrying any. Keep your hands where they can be seen.â€
 
-**(E) Choice:** “I’m not here to bother anyone. I’ve had a long road… that’s all.”
+**(E) Choice:** â€œIâ€™m not here to bother anyone. Iâ€™ve had a long roadâ€¦ thatâ€™s all.â€
 
-NIMA: “Everyone out here has a long road behind them. It doesn’t make the ground any softer.”
+NIMA: â€œEveryone out here has a long road behind them. It doesnâ€™t make the ground any softer.â€
 
-**Shared Beat:** RAVI: “You should be careful about who you reveal yourself to. There’s been some ‘activity’ lately… The buildings are… unstable. Our daughter…” NIMA: “Ravi, take your own advice.” RAVI: “Nima… I can’t have someone else… anyway, be careful.”
+**Shared Beat:** RAVI: â€œYou should be careful about who you reveal yourself to. Thereâ€™s been some â€˜activityâ€™ latelyâ€¦ The buildings areâ€¦ unstable. Our daughterâ€¦â€ NIMA: â€œRavi, take your own advice.â€ RAVI: â€œNimaâ€¦ I canâ€™t have someone elseâ€¦ anyway, be careful.â€
 
-**SYSTEM TRIGGER:** Notification UI → Dialogue Names updated from “???” to “Ravi” and “Nima”.
+**SYSTEM TRIGGER:** Notification UI â†’ Dialogue Names updated from â€œ???â€ to â€œRaviâ€ and â€œNimaâ€.
 
 ### **Beat 3: The Daughter Prompt**
 
-**SYSTEM TRIGGER:** Display Notification UI → Diary updated.
+**SYSTEM TRIGGER:** Display Notification UI â†’ Diary updated.
 
 **DATA HOOK:** Append market\_discovery\_daughter\_hint to PlayerDiary.json.
 
-**Prompt:** *Ravi mentioned an unstable building… and a daughter.*
+**Prompt:** *Ravi mentioned an unstable buildingâ€¦ and a daughter.*
 
-**(T) Choice:** “You are right to be wary of me. I want to earn your trust.”
+**(T) Choice:** â€œYou are right to be wary of me. I want to earn your trust.â€
 
-RAVI: “Trust is a heavy thing to ask for out here. Just keep your head down.”
+RAVI: â€œTrust is a heavy thing to ask for out here. Just keep your head down.â€
 
-**(O) Choice:** “It’s not my business but… did something happen to your daughter?”
+**(O) Choice:** â€œItâ€™s not my business butâ€¦ did something happen to your daughter?â€
 
-RAVI: “The stones don’t care who they fall on. That’s all there is to see.”
+RAVI: â€œThe stones donâ€™t care who they fall on. Thatâ€™s all there is to see.â€
 
-**(N) Choice:** “I’ve had some… losses… I don’t need you to get into details.”
+**(N) Choice:** â€œIâ€™ve had someâ€¦ lossesâ€¦ I donâ€™t need you to get into details.â€
 
-RAVI: “Then you know how the air feels after the dust clears. It stays in your throat.”
+RAVI: â€œThen you know how the air feels after the dust clears. It stays in your throat.â€
 
-**(E) Choice:** “I don’t know what happened to your daughter, but you seem really… impacted. Let me know if I can help with something.”
+**(E) Choice:** â€œI donâ€™t know what happened to your daughter, but you seem reallyâ€¦ impacted. Let me know if I can help with something.â€
 
-RAVI: “There’s nothing to repair now. Some things stay broken.”
+RAVI: â€œThereâ€™s nothing to repair now. Some things stay broken.â€
 
-**Shared Beat:** PC (inner thought): This thing… I need to figure out what this is. System: Dialogue window closes. Proximity tracker activates. Codex begins pulsing—slow, warm light that accelerates as you approach a glyph signature.
+**Shared Beat:** PC (inner thought): This thingâ€¦ I need to figure out what this is. System: Dialogue window closes. Proximity tracker activates. Codex begins pulsingâ€”slow, warm light that accelerates as you approach a glyph signature.
 
-## **3\. WILLY — THE CONCOURSE RUINS (Tier 1\)**
+## **3\. WILLY â€” THE CONCOURSE RUINS (Tier 1\)**
 
 **Data Hook:** scene\_id: willy\_glyph\_01 | required\_flags: none
 
@@ -158,45 +158,45 @@ RAVI: “There’s nothing to repair now. Some things stay broken.”
 
 **Setting Description:** The Concourse Ruins, northeast of the market square. Debris litters the corridor. A strange man digs through a shifting pile.
 
-**Prompt:** A strange man is digging through the rubble. He looks up and notices you. DD: “Careful. That pile shifts. Saw a man lose a leg under one just like it. Ah‑hahaha \*cough\* terrible, terrible thing.”
+**Prompt:** A strange man is digging through the rubble. He looks up and notices you. DD: â€œCareful. That pile shifts. Saw a man lose a leg under one just like it. Ahâ€‘hahaha \*cough\* terrible, terrible thing.â€
 
-**(T) Choice:** “I’m not from around here.”
+**(T) Choice:** â€œIâ€™m not from around here.â€
 
-DD: “Hah. Then you’re lucky ya still got all yah limbs. This place eats newcomers first.”
+DD: â€œHah. Then youâ€™re lucky ya still got all yah limbs. This place eats newcomers first.â€
 
-**(O) Choice:** “You know this place pretty well I see.”
+**(O) Choice:** â€œYou know this place pretty well I see.â€
 
-DD: “Know it? Ha. I’ve bled in half these piles. Ya learn fast when the rubble teaches the lessons.”
+DD: â€œKnow it? Ha. Iâ€™ve bled in half these piles. Ya learn fast when the rubble teaches the lessons.â€
 
-**(N) Choice:** “Something led me here, I need to get to it.”
+**(N) Choice:** â€œSomething led me here, I need to get to it.â€
 
-DD: “Led ya? Hah. Everyone’s chasin somethin in these ruins. Most of it stays buried—except when I’m chasin it. Ah‑hahaha—cough.”
+DD: â€œLed ya? Hah. Everyoneâ€™s chasin somethin in these ruins. Most of it stays buriedâ€”except when Iâ€™m chasin it. Ahâ€‘hahahaâ€”cough.â€
 
-**(E) Choice:** “Losing a leg… that must have been awful for him.”
+**(E) Choice:** â€œLosing a legâ€¦ that must have been awful for him.â€
 
-DD: “Awful for him, yeah. But the rubble don’t care. It just falls where it feels.”
+DD: â€œAwful for him, yeah. But the rubble donâ€™t care. It just falls where it feels.â€
 
-**Shared Beat:** DD: “Anyway, whatever you’re after… it’s under that mess. And you’re not gettin’ ta it today.”
+**Shared Beat:** DD: â€œAnyway, whatever youâ€™re afterâ€¦ itâ€™s under that mess. And youâ€™re not gettinâ€™ ta it today.â€
 
 ### **Beat 2: Pushing for Help**
 
-**Prompt:** *He’s dismissive, but maybe I can convince him.*
+**Prompt:** *Heâ€™s dismissive, but maybe I can convince him.*
 
-**(T) Choice:** “I don’t have time to wait. Show me how to get through it.”
+**(T) Choice:** â€œI donâ€™t have time to wait. Show me how to get through it.â€
 
-DD: “Hah. Straight to orders, eh? Ya got spine\! Fine, fine… I’ll take a look. But if it falls, I’m runnin’. And maybe laughin’ ah‑hahaha \*cough\*.”
+DD: â€œHah. Straight to orders, eh? Ya got spine\! Fine, fineâ€¦ Iâ€™ll take a look. But if it falls, Iâ€™m runninâ€™. And maybe laughinâ€™ ahâ€‘hahaha \*cough\*.â€
 
-**(O) Choice:** “You’ve worked these piles for years. You know how to move them safely.”
+**(O) Choice:** â€œYouâ€™ve worked these piles for years. You know how to move them safely.â€
 
-DD: “Flattery? Ha. Rubble don’t care how long I’ve known it. But ya ain’t wrong. I can shift a few things without gettin’ crushed.”
+DD: â€œFlattery? Ha. Rubble donâ€™t care how long Iâ€™ve known it. But ya ainâ€™t wrong. I can shift a few things without gettinâ€™ crushed.â€
 
-**(N) Choice:** “Whatever’s under there matters. I’m not leaving without trying.”
+**(N) Choice:** â€œWhateverâ€™s under there matters. Iâ€™m not leaving without trying.â€
 
-DD: “Matters, huh? Everything matters to someone. Fine. I’ll poke at it. Just don’t blame me if the whole thing decides today’s the day.”
+DD: â€œMatters, huh? Everything matters to someone. Fine. Iâ€™ll poke at it. Just donâ€™t blame me if the whole thing decides todayâ€™s the day.â€
 
-**(E) Choice:** “If someone got hurt here before… maybe helping me keeps it from happening again.”
+**(E) Choice:** â€œIf someone got hurt here beforeâ€¦ maybe helping me keeps it from happening again.â€
 
-DD: “Heh. Guilt trip, eh? \*cough\*. Fine. Fine. I’ll help. Just don’t start cryin’ if it bites back.”
+DD: â€œHeh. Guilt trip, eh? \*cough\*. Fine. Fine. Iâ€™ll help. Just donâ€™t start cryinâ€™ if it bites back.â€
 
 ### **Beat 3: The Glyph of Sorrow**
 
@@ -208,51 +208,51 @@ DD: “Heh. Guilt trip, eh? \*cough\*. Fine. Fine. I’ll help. Just don’t sta
 
 ### **Beat 4: Payment**
 
-**Prompt:** He stops me before I leave. WILLY: “Hey there, hold on one sec. Willy don’t work for free.”
+**Prompt:** He stops me before I leave. WILLY: â€œHey there, hold on one sec. Willy donâ€™t work for free.â€
 
-**SYSTEM TRIGGER:** UI Dialogue Name updated from “???” to “Willy”.
+**SYSTEM TRIGGER:** UI Dialogue Name updated from â€œ???â€ to â€œWillyâ€.
 
-**(T) Choice:** “Oh yeah, right of course. I don’t have much right now….”
+**(T) Choice:** â€œOh yeah, right of course. I donâ€™t have much right nowâ€¦.â€
 
-WILLY: “Yeah, figures. Anyway… ya don’ need that metal thing, do ya?”
+WILLY: â€œYeah, figures. Anywayâ€¦ ya donâ€™ need that metal thing, do ya?â€
 
-**(O) Choice:** “Yeah, you were working pretty hard. I don’t have much… what do you want.”
+**(O) Choice:** â€œYeah, you were working pretty hard. I donâ€™t have muchâ€¦ what do you want.â€
 
-WILLY: “I’m a scrapper, and you just showed me some niiice scrap. Just ah…keep a lookout while I take a closer peek at it…if ya catch my drift.”
+WILLY: â€œIâ€™m a scrapper, and you just showed me some niiice scrap. Just ahâ€¦keep a lookout while I take a closer peek at itâ€¦if ya catch my drift.â€
 
-**(N) Choice:** “Yes, of course. You work hard, you get something, right. Uh…I don’t have much…”
+**(N) Choice:** â€œYes, of course. You work hard, you get something, right. Uhâ€¦I donâ€™t have muchâ€¦â€
 
-WILLY: “Yeah, clearly. You look like ya haven’t eaten in a while. Anyway, leave me to my ways and we’ll call it even.”
+WILLY: â€œYeah, clearly. You look like ya havenâ€™t eaten in a while. Anyway, leave me to my ways and weâ€™ll call it even.â€
 
-**(E) Choice:** “Sorry, Willy… I didn’t even ask your name. You’ve been really helpful. What can I do for you.”
+**(E) Choice:** â€œSorry, Willyâ€¦ I didnâ€™t even ask your name. Youâ€™ve been really helpful. What can I do for you.â€
 
-WILLY: “Meh, don’t get all mushy on me. Bleck. Just get outta here, will ya.”
+WILLY: â€œMeh, donâ€™t get all mushy on me. Bleck. Just get outta here, will ya.â€
 
 ### **Beat 5: Return to Marketplace**
 
-**Shared Beat:** System: Player returns to the marketplace, still heavy from the glyph’s resonance. Ravi and Nima are gone. Kaelen is present instead, initiating the next Tier‑1 encounter.
+**Shared Beat:** System: Player returns to the marketplace, still heavy from the glyphâ€™s resonance. Ravi and Nima are gone. Kaelen is present instead, initiating the next Tierâ€‘1 encounter.
 
-## **4\. KAELEN — THE CONFESSION SCENE (Tier 1.5)**
+## **4\. KAELEN â€” THE CONFESSION SCENE (Tier 1.5)**
 
 **Data Hook:** scene\_id: kaelen\_confession\_01 | required\_flags: completed\_willy \== true
 
 ### **Beat 1: The Approach**
 
-**Setting Description:** The corridor behind the marketplace is quiet. Dust drifts from the collapsed civic wall, catching the late afternoon light. Footsteps drift behind you—light, practiced, almost non-existent.
+**Setting Description:** The corridor behind the marketplace is quiet. Dust drifts from the collapsed civic wall, catching the late afternoon light. Footsteps drift behind youâ€”light, practiced, almost non-existent.
 
-**Prompt:** KAELEN: "Hey\! You\! You’re that newcomer, right? The one those two were staring at. Look... I shouldn't be talking to you. But I saw you with them. And I need to say something."
+**Prompt:** KAELEN: "Hey\! You\! Youâ€™re that newcomer, right? The one those two were staring at. Look... I shouldn't be talking to you. But I saw you with them. And I need to say something."
 
-**(T) Choice:** "Ah\! You just…came out of nowhere\! Uh what is it?”
+**(T) Choice:** "Ah\! You justâ€¦came out of nowhere\! Uh what is it?â€
 
-KAELEN: "sorry? Look\! Ugh\! It’s important\! Okay?"
+KAELEN: "sorry? Look\! Ugh\! Itâ€™s important\! Okay?"
 
 **(O) Choice:** "Why me?"
 
 KAELEN: "Because you don't belong to this place yet. You don't have a side. Not yet..."
 
-**(N) Choice:** "You’re… hiding something?"
+**(N) Choice:** "Youâ€™reâ€¦ hiding something?"
 
-KAELEN: "Well… everyone’s hiding something in this place. I’m just worse at it."
+KAELEN: "Wellâ€¦ everyoneâ€™s hiding something in this place. Iâ€™m just worse at it."
 
 **(E) Choice:** "...Are you alright?"
 
@@ -260,21 +260,21 @@ KAELEN: "Don't ask me that\! Don't look at me like that\! I don't deserve kindne
 
 ### **Beat 2: The Codex Interaction**
 
-**Setting Description:** Kaelen shifts his weight awkwardly. His eyes flick to the Codex on your belt—not subtle, not polite. It is the kind of look someone gives a pouch they might grab if things go bad.
+**Setting Description:** Kaelen shifts his weight awkwardly. His eyes flick to the Codex on your beltâ€”not subtle, not polite. It is the kind of look someone gives a pouch they might grab if things go bad.
 
-**Prompt:** KAELEN: “…That thing. On your belt. Where’d you get something like that?”
+**Prompt:** KAELEN: â€œâ€¦That thing. On your belt. Whereâ€™d you get something like that?â€
 
-**(T) Choice:** “It was given to me by someone in the desert.”
+**(T) Choice:** â€œIt was given to me by someone in the desert.â€
 
-KAELEN: “Someone in the desert? You’re luckier than you look.”
+KAELEN: â€œSomeone in the desert? Youâ€™re luckier than you look.â€
 
-**(O) Choice:** “I’m following its resonance. It led me here.”
+**(O) Choice:** â€œIâ€™m following its resonance. It led me here.â€
 
-KAELEN: “Resonance... right. This place has a way of leading people into trouble.”
+KAELEN: â€œResonance... right. This place has a way of leading people into trouble.â€
 
 ### **Beat 3: The Confession**
 
-**Shared Beat:** Kaelen’s posture collapses. He looks down at his hands, his voice thinning as he offers up a confession he cannot carry alone. KAELEN: "I was there. When it happened. The collapse. The girl. She was chasing a scent. I was chasing a wallet. I could've stopped her. I should've. But I was... focused on the lift. I froze like a coward."
+**Shared Beat:** Kaelenâ€™s posture collapses. He looks down at his hands, his voice thinning as he offers up a confession he cannot carry alone. KAELEN: "I was there. When it happened. The collapse. The girl. She was chasing a scent. I was chasing a wallet. I could've stopped her. I should've. But I was... focused on the lift. I froze like a coward."
 
 **(T) Choice:** "You should tell them."
 
@@ -288,7 +288,7 @@ KAELEN: "The wall groaned. A single brace snapped. If my hands hadn't been in so
 
 KAELEN: "I owe it to the wall. I owe it to anyone who isn't them. It's leaking out of me, alright?"
 
-**(E) Choice:** "...You froze. People freeze. That doesn’t make you a monster."
+**(E) Choice:** "...You froze. People freeze. That doesnâ€™t make you a monster."
 
 KAELEN: "You didn't hear the stone drop. If you did, you wouldn't try to clear my name so fast."
 
@@ -302,7 +302,7 @@ KAELEN: "You didn't hear the stone drop. If you did, you wouldn't try to clear m
 
 * **Setting Description:** The Codex trembles in your hand. A faint pulse flickers somewhere ahead.
 
-* **DEV NOTE:** This pulse is the CoreLink node destabilizing after Kaelen’s confession. The player should see a soft glow in the environment.
+* **DEV NOTE:** This pulse is the CoreLink node destabilizing after Kaelenâ€™s confession. The player should see a soft glow in the environment.
 
 ### **Beat 2: The Activation**
 
@@ -314,11 +314,11 @@ KAELEN: "You didn't hear the stone drop. If you did, you wouldn't try to clear m
 
 ### **Shared Beat: Interaction**
 
-* **Setting Description:** On interaction, the glow flashes. A brief, fragmented image fills the screen — something from the player’s past, unclear and out of order.
+* **Setting Description:** On interaction, the glow flashes. A brief, fragmented image fills the screen â€” something from the playerâ€™s past, unclear and out of order.
 
-* **DEV NOTE:** This is the first hint that the player’s walkabouts are surfacing their own buried memories. The image should be abstract, not literal.
+* **DEV NOTE:** This is the first hint that the playerâ€™s walkabouts are surfacing their own buried memories. The image should be abstract, not literal.
 
-* **Shared Beat:** The projection settles into the player’s palm.
+* **Shared Beat:** The projection settles into the playerâ€™s palm.
 
 * **SYSTEM TRIGGER:** The Codex stabilizes the projection. The glyph becomes tangible.
 
@@ -332,7 +332,7 @@ KAELEN: "You didn't hear the stone drop. If you did, you wouldn't try to clear m
 
 * **DATA HOOK:** set\_flag: obtained\_remembrance \= true
 
-## **5\. NIMA ALONE — PRELUDING THE LEGACY (Tier 1.5)**
+## **5\. NIMA ALONE â€” PRELUDING THE LEGACY (Tier 1.5)**
 
 **Data Hook:** scene\_id: nima\_alone\_01 | required\_flags: kaelen\_confessed \== true
 
@@ -362,55 +362,55 @@ KAELEN: "You didn't hear the stone drop. If you did, you wouldn't try to clear m
 
 **(E) Choice:** "You don't have to say more."  NIMA: "The silence says it anyway. It has been saying it for months."
 
-**Shared Beat:** NIMA: "I held her hand through the crack. She was so small. I told her I wouldn't let go." (Her fingers tighten against her clothes) "The brace settled further. I felt the slip. I felt the air leave her." The Codex pulses faintly—a cold, heavy oscillation.
+**Shared Beat:** NIMA: "I held her hand through the crack. She was so small. I told her I wouldn't let go." (Her fingers tighten against her clothes) "The brace settled further. I felt the slip. I felt the air leave her." The Codex pulses faintlyâ€”a cold, heavy oscillation.
 
 ### **Beat 2.5: The Face She Cannot Say**
 
-**Setting Description:** Nima’s hand shifts against her clothes. A small, worn photograph slips partially into view, its edges softened and its corners frayed. The surface is creased from years of being held. She does not offer it. She does not hide it. She simply lets it be seen. Her eyes stay fixed on the cracked ground.
+**Setting Description:** Nimaâ€™s hand shifts against her clothes. A small, worn photograph slips partially into view, its edges softened and its corners frayed. The surface is creased from years of being held. She does not offer it. She does not hide it. She simply lets it be seen. Her eyes stay fixed on the cracked ground.
 
 **Prompt:** *This is the moment the player finally sees Ophina.*
 
-**(T) Choice:** “She’s beautiful.”
+**(T) Choice:** â€œSheâ€™s beautiful.â€
 
-NIMA: “Yeah… the most beautiful. I wish her beauty could’ve moved mountains. It did for me.”
+NIMA: â€œYeahâ€¦ the most beautiful. I wish her beauty couldâ€™ve moved mountains. It did for me.â€
 
 **(O) Choice:** (Stay silent, taking in the photo)
 
-NIMA: “I’ll take your silence as respect.”
+NIMA: â€œIâ€™ll take your silence as respect.â€
 
-**(N) Choice:** “I didn’t expect to see her.”
+**(N) Choice:** â€œI didnâ€™t expect to see her.â€
 
-NIMA: “A picture’s never the same. Trust me… you still haven’t seen her.”
+NIMA: â€œA pictureâ€™s never the same. Trust meâ€¦ you still havenâ€™t seen her.â€
 
-**(E) Choice:** “This is her.”
+**(E) Choice:** â€œThis is her.â€
 
-NIMA: “Yeah. This is all I’ve got left.”
+NIMA: â€œYeah. This is all Iâ€™ve got left.â€
 
-**Shared Beat:** Nima’s thumb brushes the photo again, slower this time. Her breathing wavers, just once.
+**Shared Beat:** Nimaâ€™s thumb brushes the photo again, slower this time. Her breathing wavers, just once.
 
 ### **Beat 3: The Door**
 
 **Setting Description:** Nima closes her hand around the photo, protecting it. Her posture tightens. The air feels thinner, as if the square itself is holding its breath. She finally turns her head slightly toward you.
 
-**Prompt:** NIMA: “That thing you’re holding… it reacts to everything. I don’t know what it is, but I don’t trust anything that lights up around grief.”
+**Prompt:** NIMA: â€œThat thing youâ€™re holdingâ€¦ it reacts to everything. I donâ€™t know what it is, but I donâ€™t trust anything that lights up around grief.â€
 
 **(T) Choice:** "I'm trying to figure out what it wants from these ruins."
 
-NIMA: “Whatever it wants… it shouldn’t want anything from here. Some places deserve to be left alone.”
+NIMA: â€œWhatever it wantsâ€¦ it shouldnâ€™t want anything from here. Some places deserve to be left alone.â€
 
 **(O) Choice:** "It seems to react whenever the memory gets thick."
 
-NIMA: “Then it’s reacting to pain. That’s all this ground has left.”
+NIMA: â€œThen itâ€™s reacting to pain. Thatâ€™s all this ground has left.â€
 
 **(N) Choice:** "It's just a tool. I'm following the lines it shows me."
 
-NIMA: “Tools can still hurt people. Don’t assume it understands what it’s pointing at.”
+NIMA: â€œTools can still hurt people. Donâ€™t assume it understands what itâ€™s pointing at.â€
 
 **(E) Choice:** "I think it brought me here to help carry this."
 
-NIMA: “You can’t carry what you didn’t lose. Don’t break yourself trying to lift our dead.”
+NIMA: â€œYou canâ€™t carry what you didnâ€™t lose. Donâ€™t break yourself trying to lift our dead.â€
 
-**Shared Beat:** NIMA: “Go… please. I won’t forget. I won’t move on.” She turns away, returning to her vigil.
+**Shared Beat:** NIMA: â€œGoâ€¦ please. I wonâ€™t forget. I wonâ€™t move on.â€ She turns away, returning to her vigil.
 
 **SYSTEM TRIGGER:** set\_flag: nima\_shared\_loss \= true
 
@@ -438,7 +438,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** Sealina's hands stop trembling as the images resonate. The glyph emerges, a soft golden light binding the generations.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Hopeful Transmission Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Hopeful Transmission Obtained."
 
 **Glyph 02: Glyph of Legacy**
 
@@ -460,7 +460,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** The ruins tremble softly. A golden-violet glyph rises from the dust, carrying the weight of a family story forward.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Legacy Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Legacy Obtained."
 
 **Glyph 03: Glyph of Ancestral Record**
 
@@ -482,7 +482,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** As the names are recited, the air shimmers. The glyph of the Ancestral Record manifests, illuminating the archive.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Ancestral Record Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Ancestral Record Obtained."
 
 **Glyph 04: Glyph of Echoed Breath**
 
@@ -504,7 +504,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** The glyph manifests as the rhythm of the breathing aligns. Ancestors sustained in every breath drawn by the living.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Echoed Breath Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Echoed Breath Obtained."
 
 **Glyph 05: Glyph of Shared Weight**
 
@@ -526,7 +526,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** The bridge holds. The glyph of Shared Weight emerges, a symbol of the strength found in others.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Shared Weight Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Shared Weight Obtained."
 
 **Glyph 06: Glyph of Worn Cloth**
 
@@ -548,7 +548,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** The warmth of the cloth anchors you. The glyph of Worn Cloth fades into your skin, a reminder of human care.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Worn Cloth Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Worn Cloth Obtained."
 
 **Glyph 07: Glyph of Sand Memories**
 
@@ -570,7 +570,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** The glyph of Sand Memories reveals itself, proving that even data carries the ache of identity against forgetting.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Sand Memories Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Sand Memories Obtained."
 
 **Glyph 08: Glyph of Emotional Inheritance**
 
@@ -592,7 +592,7 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** The glyph of Emotional Inheritance manifests when you accept the fire, understanding legacy as warmth that survives only through transmission.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Emotional Inheritance Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Emotional Inheritance Obtained."
 
 **Glyph 09: Glyph of Covenant**
 
@@ -612,9 +612,9 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **(E) Choice:** "They look... lonely." VELKA: "Loneliness is the echo of a promise unkept."
 
-**Shared Beat:** The glyph forms when you honor the remains, realizing legacy is a covenant—the living bound to remember the dead.
+**Shared Beat:** The glyph forms when you honor the remains, realizing legacy is a covenantâ€”the living bound to remember the dead.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Covenant Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Covenant Obtained."
 
 **Glyph 10: Glyph of Returning Song**
 
@@ -636,45 +636,45 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Shared Beat:** A song sung across generations returns. Legacy is revealed as ache transformed into transmission.
 
-**SYSTEM TRIGGER:** Notification UI → "Glyph of Returning Song Obtained."
+**SYSTEM TRIGGER:** Notification UI â†’ "Glyph of Returning Song Obtained."
 
 ### **Cluster 02: The Fractured Echoes (Glyphs 11-20)**
 
-* # **GLYPH 11 — Infrasensory Oblivion (Corrected)**
+* # **GLYPH 11 â€” Infrasensory Oblivion (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_11\_data | location: Chamber of Delayed Echoes | npc: Saori
 
 * **Setting Description:**  
 
-* The chamber hums with a low, sub‑audible vibration. Saori stands beside the console, her hand hovering over the controls, eyes narrowed as if listening to something beneath the noise.
+* The chamber hums with a low, subâ€‘audible vibration. Saori stands beside the console, her hand hovering over the controls, eyes narrowed as if listening to something beneath the noise.
 
 * **Prompt:**  
 
-* SAORI: “It’s louder today. The machine remembers more than it should.”
+* SAORI: â€œItâ€™s louder today. The machine remembers more than it should.â€
 
-* **(T) Choice:** “The vibrations… they’re getting stronger.”
+* **(T) Choice:** â€œThe vibrationsâ€¦ theyâ€™re getting stronger.â€
 
-* **SAORI:** “Strong enough to shake loose what we buried.”
+* **SAORI:** â€œStrong enough to shake loose what we buried.â€
 
-* **(O) Choice:** “What is this machine trying to say?”
+* **(O) Choice:** â€œWhat is this machine trying to say?â€
 
-* **SAORI:** “Everything. But only in frequencies we weren’t meant to hear.”
+* **SAORI:** â€œEverything. But only in frequencies we werenâ€™t meant to hear.â€
 
-* **(N) Choice:** “It’s just mechanical noise.”
+* **(N) Choice:** â€œItâ€™s just mechanical noise.â€
 
-* **SAORI:** “Noise is just meaning we haven’t decoded yet.”
+* **SAORI:** â€œNoise is just meaning we havenâ€™t decoded yet.â€
 
-* **(E) Choice:** “It feels like it’s trying to remember something.”
+* **(E) Choice:** â€œIt feels like itâ€™s trying to remember something.â€
 
-* **SAORI:** “Memory is a vibration. This place is full of it.”
+* **SAORI:** â€œMemory is a vibration. This place is full of it.â€
 
 * **Shared Beat:**  
 
-* The hum deepens, syncing with your pulse. Saori steps back, watching your reaction with unsettling calm. The chamber’s frequency folds inward, numbing your senses as the glyph rises from the console in a deep indigo pulse.
+* The hum deepens, syncing with your pulse. Saori steps back, watching your reaction with unsettling calm. The chamberâ€™s frequency folds inward, numbing your senses as the glyph rises from the console in a deep indigo pulse.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Infrasensory Oblivion Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Infrasensory Oblivion Obtained.â€
 
-* # **GLYPH 12 — Primal Oblivion (Corrected)**
+* # **GLYPH 12 â€” Primal Oblivion (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_12\_data | location: Civic Center Ruins Amphitheater | npc: Nordia
 
@@ -684,31 +684,31 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* NORDIA: “Listen. This is the sound the earth made when it broke.”
+* NORDIA: â€œListen. This is the sound the earth made when it broke.â€
 
-* **(T) Choice:** “That sound… it’s ancient.”
+* **(T) Choice:** â€œThat soundâ€¦ itâ€™s ancient.â€
 
-* **NORDIA:** “Older than collapse. Older than memory.”
+* **NORDIA:** â€œOlder than collapse. Older than memory.â€
 
-* **(O) Choice:** “Is this how the collapse sounded?”
+* **(O) Choice:** â€œIs this how the collapse sounded?â€
 
-* **NORDIA:** “The collapse was only the echo.”
+* **NORDIA:** â€œThe collapse was only the echo.â€
 
-* **(N) Choice:** “It’s just an acoustic trick.”
+* **(N) Choice:** â€œItâ€™s just an acoustic trick.â€
 
-* **NORDIA:** “Then why does your spine react?”
+* **NORDIA:** â€œThen why does your spine react?â€
 
-* **(E) Choice:** “It sounds like the earth is screaming.”
+* **(E) Choice:** â€œIt sounds like the earth is screaming.â€
 
-* **NORDIA:** “The earth never stopped.”
+* **NORDIA:** â€œThe earth never stopped.â€
 
 * **Shared Beat:**  
 
-* Her chant intensifies, vibrating the air until a glass shard shatters at your feet. The sound peaks—raw, feral—and the glyph erupts from the resonance, jagged and terrifying.
+* Her chant intensifies, vibrating the air until a glass shard shatters at your feet. The sound peaksâ€”raw, feralâ€”and the glyph erupts from the resonance, jagged and terrifying.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Primal Oblivion Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Primal Oblivion Obtained.â€
 
-* # **GLYPH 13 — Dislocated Attachment (Corrected)**
+* # **GLYPH 13 â€” Dislocated Attachment (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_13\_data | location: Hall of Ancestral Echoes | npc: Seyla
 
@@ -718,31 +718,31 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* SEYLA: “It won’t stay together. Nothing does anymore.”
+* SEYLA: â€œIt wonâ€™t stay together. Nothing does anymore.â€
 
-* **(T) Choice:** “The weave is too damaged to fix.”
+* **(T) Choice:** â€œThe weave is too damaged to fix.â€
 
-* **SEYLA:** “I know. But I keep trying anyway.”
+* **SEYLA:** â€œI know. But I keep trying anyway.â€
 
-* **(O) Choice:** “Why does the thread resist you?”
+* **(O) Choice:** â€œWhy does the thread resist you?â€
 
-* **SEYLA:** “Because it remembers what it used to hold.”
+* **SEYLA:** â€œBecause it remembers what it used to hold.â€
 
-* **(N) Choice:** “You need better tools.”
+* **(N) Choice:** â€œYou need better tools.â€
 
-* **SEYLA:** “Tools don’t fix what’s already forgotten.”
+* **SEYLA:** â€œTools donâ€™t fix whatâ€™s already forgotten.â€
 
-* **(E) Choice:** “It’s hard when things don’t fit together anymore.”
+* **(E) Choice:** â€œItâ€™s hard when things donâ€™t fit together anymore.â€
 
-* **SEYLA:** “Hard… and familiar.”
+* **SEYLA:** â€œHardâ€¦ and familiar.â€
 
 * **Shared Beat:**  
 
-* The tapestry snaps, threads floating upward like severed nerves. Seyla’s breath catches as the glyph forms from the drifting fibers, fractured and shimmering.
+* The tapestry snaps, threads floating upward like severed nerves. Seylaâ€™s breath catches as the glyph forms from the drifting fibers, fractured and shimmering.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Dislocated Attachment Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Dislocated Attachment Obtained.â€
 
-* # **GLYPH 14 — Sorrow (Corrected)**
+* # **GLYPH 14 â€” Sorrow (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_14\_data | location: Market Square | npc: Ravi & Nima
 
@@ -752,33 +752,33 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* RAVI: “She used to play here.”
+* RAVI: â€œShe used to play here.â€
 
-* NIMA: “The stones still remember her steps.”
+* NIMA: â€œThe stones still remember her steps.â€
 
-* **(T) Choice:** “This place carries your daughter’s name.”
+* **(T) Choice:** â€œThis place carries your daughterâ€™s name.â€
 
-* **RAVI:** “Everything here does.”
+* **RAVI:** â€œEverything here does.â€
 
-* **(O) Choice:** “What is the fountain hiding?”
+* **(O) Choice:** â€œWhat is the fountain hiding?â€
 
-* **NIMA:** “Only what we couldn’t save.”
+* **NIMA:** â€œOnly what we couldnâ€™t save.â€
 
-* **(N) Choice:** “The market has changed since the collapse.”
+* **(N) Choice:** â€œThe market has changed since the collapse.â€
 
-* **RAVI:** “We changed with it.”
+* **RAVI:** â€œWe changed with it.â€
 
-* **(E) Choice:** “I can feel the ache in the stones.”
+* **(E) Choice:** â€œI can feel the ache in the stones.â€
 
-* **NIMA:** “Then you’re listening correctly.”
+* **NIMA:** â€œThen youâ€™re listening correctly.â€
 
 * **Shared Beat:**  
 
-* A tear falls into the dry basin. Dust shifts, crystallizing around the salt. The glyph rises—cold, heavy, shaped by shared loss.
+* A tear falls into the dry basin. Dust shifts, crystallizing around the salt. The glyph risesâ€”cold, heavy, shaped by shared loss.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Sorrow Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Sorrow Obtained.â€
 
-* # **GLYPH 15 — Widow’s Cry (Corrected)**
+* # **GLYPH 15 â€” Widowâ€™s Cry (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_15\_data | location: Shrine of Loss | npc: Tessa
 
@@ -788,31 +788,31 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* TESSA: “I sing because silence would kill me.”
+* TESSA: â€œI sing because silence would kill me.â€
 
-* **(T) Choice:** “Your voice… it cuts through the smoke.”
+* **(T) Choice:** â€œYour voiceâ€¦ it cuts through the smoke.â€
 
-* **TESSA:** “It has to.”
+* **TESSA:** â€œIt has to.â€
 
-* **(O) Choice:** “How long has this song been sung?”
+* **(O) Choice:** â€œHow long has this song been sung?â€
 
-* **TESSA:** “Since the first loss.”
+* **TESSA:** â€œSince the first loss.â€
 
-* **(N) Choice:** “The smoke is getting thick.”
+* **(N) Choice:** â€œThe smoke is getting thick.â€
 
-* **TESSA:** “It hides what we can’t bear to see.”
+* **TESSA:** â€œIt hides what we canâ€™t bear to see.â€
 
-* **(E) Choice:** “The grief in your song is absolute.”
+* **(E) Choice:** â€œThe grief in your song is absolute.â€
 
-* **TESSA:** “Absolute grief is the only honest kind.”
+* **TESSA:** â€œAbsolute grief is the only honest kind.â€
 
 * **Shared Beat:**  
 
-* Her lament peaks, rippling the veil. The sound fractures into a crystalline shard that vibrates with agony—the glyph manifesting from pure lament.
+* Her lament peaks, rippling the veil. The sound fractures into a crystalline shard that vibrates with agonyâ€”the glyph manifesting from pure lament.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Widow’s Cry Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Widowâ€™s Cry Obtained.â€
 
-* # **GLYPH 16 — Betrayal (Corrected)**
+* # **GLYPH 16 â€” Betrayal (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_16\_data | location: Scar Caravan Ruins | npc: Dalen
 
@@ -822,31 +822,31 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* DALEN: “They said they’d wait. They didn’t.”
+* DALEN: â€œThey said theyâ€™d wait. They didnâ€™t.â€
 
-* **(T) Choice:** “They left you here to burn.”
+* **(T) Choice:** â€œThey left you here to burn.â€
 
-* **DALEN:** “And they didn’t look back.”
+* **DALEN:** â€œAnd they didnâ€™t look back.â€
 
-* **(O) Choice:** “Who held the torch?”
+* **(O) Choice:** â€œWho held the torch?â€
 
-* **DALEN:** “Someone I trusted.”
+* **DALEN:** â€œSomeone I trusted.â€
 
-* **(N) Choice:** “This site is a total loss.”
+* **(N) Choice:** â€œThis site is a total loss.â€
 
-* **DALEN:** “Loss is the only truth left.”
+* **DALEN:** â€œLoss is the only truth left.â€
 
-* **(E) Choice:** “The fire didn’t just take the caravan.”
+* **(E) Choice:** â€œThe fire didnâ€™t just take the caravan.â€
 
-* **DALEN:** “It took everything.”
+* **DALEN:** â€œIt took everything.â€
 
 * **Shared Beat:**  
 
-* Oil stains flare with ghostly green flame. Dalen steps back as the glyph rises from the heat—sharp, acidic, born from betrayal.
+* Oil stains flare with ghostly green flame. Dalen steps back as the glyph rises from the heatâ€”sharp, acidic, born from betrayal.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Betrayal Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Betrayal Obtained.â€
 
-* # **GLYPH 17 — Broken Vessel (Corrected)**
+* # **GLYPH 17 â€” Broken Vessel (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_17\_data | location: Kiln Ruins | npc: Kiv
 
@@ -856,69 +856,69 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* KIV: “I keep trying to rebuild it. I don’t know why.”
+* KIV: â€œI keep trying to rebuild it. I donâ€™t know why.â€
 
-* **(T) Choice:** “It will never be whole again.”
+* **(T) Choice:** â€œIt will never be whole again.â€
 
-* **KIV:** “I know. But my hands don’t listen.”
+* **KIV:** â€œI know. But my hands donâ€™t listen.â€
 
-* **(O) Choice:** “How did the kiln fail?”
+* **(O) Choice:** â€œHow did the kiln fail?â€
 
-* **KIV:** “Heat shifted. Structure cracked. Everything followed.”
+* **KIV:** â€œHeat shifted. Structure cracked. Everything followed.â€
 
-* **(N) Choice:** “Clean up the debris first.”
+* **(N) Choice:** â€œClean up the debris first.â€
 
-* **KIV:** “Debris is all that’s left.”
+* **KIV:** â€œDebris is all thatâ€™s left.â€
 
-* **(E) Choice:** “The shape of the loss is all that’s left.”
+* **(E) Choice:** â€œThe shape of the loss is all thatâ€™s left.â€
 
-* **KIV:** “And it still hurts.”
+* **KIV:** â€œAnd it still hurts.â€
 
 * **Shared Beat:**  
 
 * The shards tremble, rattling against each other. The empty space between them glows, forming the fragile, hollow glyph.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Broken Vessel Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Broken Vessel Obtained.â€
 
-* # **GLYPH 18 — Silent Ache (Corrected)**
+* # **GLYPH 18 â€” Silent Ache (Corrected)**
 
 * **Data Hook:** scene\_id: glyph\_18\_data | location: Abandoned Shrine | npc: Sanor
 
 * **Setting Description:**  
 
-* Dust motes drift in a single beam of light. The shrine’s bells are gone, their hooks empty. Sanor sits beneath the beam, lips moving in a prayer that makes no sound.
+* Dust motes drift in a single beam of light. The shrineâ€™s bells are gone, their hooks empty. Sanor sits beneath the beam, lips moving in a prayer that makes no sound.
 
 * **Prompt:**  
 
-* SANOR: “Silence is all I have left. It answers more honestly than any bell.”
+* SANOR: â€œSilence is all I have left. It answers more honestly than any bell.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “The bells are gone, but you’re still here.”
+* **(T) Choice:** â€œThe bells are gone, but youâ€™re still here.â€
 
-* **SANOR:** “Someone has to remember what they meant.”
+* **SANOR:** â€œSomeone has to remember what they meant.â€
 
-* **(O) Choice:** “What are you asking for?”
+* **(O) Choice:** â€œWhat are you asking for?â€
 
-* **SANOR:** “Something the silence refuses to give.”
+* **SANOR:** â€œSomething the silence refuses to give.â€
 
-* **(N) Choice:** “This place is empty.”
+* **(N) Choice:** â€œThis place is empty.â€
 
-* **SANOR:** “Empty places echo the loudest.”
+* **SANOR:** â€œEmpty places echo the loudest.â€
 
-* **(E) Choice:** “The silence here is heavier than any noise.”
+* **(E) Choice:** â€œThe silence here is heavier than any noise.â€
 
-* **SANOR:** “Heavy things sink. I’m still sinking.”
+* **SANOR:** â€œHeavy things sink. Iâ€™m still sinking.â€
 
 * ### **Shared Beat:**
 
-* The light shifts, illuminating a hidden etching beneath the dust. Sanor’s breath catches as the silence thickens, pressing against your chest. The glyph forms from the dust itself—pale, shimmering, shaped by quiet ache.
+* The light shifts, illuminating a hidden etching beneath the dust. Sanorâ€™s breath catches as the silence thickens, pressing against your chest. The glyph forms from the dust itselfâ€”pale, shimmering, shaped by quiet ache.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Silent Ache Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Silent Ache Obtained.â€
 
-* # **GLYPH 19 — Sewn Ache (Corrected)**
+* # **GLYPH 19 â€” Sewn Ache (Corrected)**
 
-* **Data Hook:** scene\_id: glyph\_19\_data | location: Shrine Keeper’s Alcove | npc: Mariel
+* **Data Hook:** scene\_id: glyph\_19\_data | location: Shrine Keeperâ€™s Alcove | npc: Mariel
 
 * **Setting Description:**  
 
@@ -926,179 +926,179 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* MARIEL: “Every stitch remembers something. I wish I didn’t.”
+* MARIEL: â€œEvery stitch remembers something. I wish I didnâ€™t.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “You’re binding more than just fabric.”
+* **(T) Choice:** â€œYouâ€™re binding more than just fabric.â€
 
-* **MARIEL:** “Binding keeps things from falling apart. Even when they should.”
+* **MARIEL:** â€œBinding keeps things from falling apart. Even when they should.â€
 
-* **(O) Choice:** “What is the purpose of this shroud?”
+* **(O) Choice:** â€œWhat is the purpose of this shroud?â€
 
-* **MARIEL:** “To cover what hurts. To reveal what hurts more.”
+* **MARIEL:** â€œTo cover what hurts. To reveal what hurts more.â€
 
-* **(N) Choice:** “The stitching is uneven.”
+* **(N) Choice:** â€œThe stitching is uneven.â€
 
-* **MARIEL:** “Grief isn’t straight.”
+* **MARIEL:** â€œGrief isnâ€™t straight.â€
 
-* **(E) Choice:** “Every stitch feels like a heartbeat.”
+* **(E) Choice:** â€œEvery stitch feels like a heartbeat.â€
 
-* **MARIEL:** “Some hearts only beat in cloth now.”
+* **MARIEL:** â€œSome hearts only beat in cloth now.â€
 
 * ### **Shared Beat:**
 
-* Her needle slips, pricking her thumb. A drop of blood sinks into the cloth, spreading like ink. The threads glow, weaving themselves into a trembling web. The glyph emerges from the pattern—aching, luminous, sewn from loss.
+* Her needle slips, pricking her thumb. A drop of blood sinks into the cloth, spreading like ink. The threads glow, weaving themselves into a trembling web. The glyph emerges from the patternâ€”aching, luminous, sewn from loss.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Sewn Ache Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Sewn Ache Obtained.â€
 
-* # **GLYPH 20 — Sandbound Echo (Corrected)**
+* # **GLYPH 20 â€” Sandbound Echo (Corrected)**
 
-* *(You didn’t paste Glyph 20, but I’ll create one that fits your cluster theme and your existing placeholder style. If you already have a placeholder, you can replace it with this.)*
+* *(You didnâ€™t paste Glyph 20, but Iâ€™ll create one that fits your cluster theme and your existing placeholder style. If you already have a placeholder, you can replace it with this.)*
 
 * **Data Hook:** scene\_id: glyph\_20\_data | location: Desert Memory Vault | npc: Archivist Malrik
 
 * **Setting Description:**  
 
-* A chamber carved directly into the desert stone. Sand pours through cracks in the ceiling in thin streams, collecting in patterned drifts. Malrik kneels beside a half‑buried console, brushing sand away with reverence.
+* A chamber carved directly into the desert stone. Sand pours through cracks in the ceiling in thin streams, collecting in patterned drifts. Malrik kneels beside a halfâ€‘buried console, brushing sand away with reverence.
 
 * **Prompt:**  
 
-* MALRIK: “The desert keeps what we forget. It returns only what we’re ready to face.”
+* MALRIK: â€œThe desert keeps what we forget. It returns only what weâ€™re ready to face.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “The sand feels… intentional.”
+* **(T) Choice:** â€œThe sand feelsâ€¦ intentional.â€
 
-* **MALRIK:** “It always falls where memory is weakest.”
+* **MALRIK:** â€œIt always falls where memory is weakest.â€
 
-* **(O) Choice:** “What are you trying to uncover?”
+* **(O) Choice:** â€œWhat are you trying to uncover?â€
 
-* **MALRIK:** “Names. Stories. The pieces collapse tried to erase.”
+* **MALRIK:** â€œNames. Stories. The pieces collapse tried to erase.â€
 
-* **(N) Choice:** “This vault is barely holding together.”
+* **(N) Choice:** â€œThis vault is barely holding together.â€
 
-* **MALRIK:** “Memory rarely holds.”
+* **MALRIK:** â€œMemory rarely holds.â€
 
-* **(E) Choice:** “It feels like the sand is listening.”
+* **(E) Choice:** â€œIt feels like the sand is listening.â€
 
-* **MALRIK:** “It listens better than people do.”
+* **MALRIK:** â€œIt listens better than people do.â€
 
 * ### **Shared Beat:**
 
-* A stream of sand shifts direction, flowing toward the console as if pulled by a hidden current. Malrik steps back, eyes widening. The sand forms a spiraling pattern, glowing from within. The glyph rises—an echo bound in grains, fragile and ancient.
+* A stream of sand shifts direction, flowing toward the console as if pulled by a hidden current. Malrik steps back, eyes widening. The sand forms a spiraling pattern, glowing from within. The glyph risesâ€”an echo bound in grains, fragile and ancient.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Sandbound Echo Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Sandbound Echo Obtained.â€
 
-# **GLYPH 21 — Interruptive Restraint (Dakrin, Trial Warden)**
+# **GLYPH 21 â€” Interruptive Restraint (Dakrin, Trial Warden)**
 
 **Data Hook: scene\_id: glyph\_21\_data | location: Trial Grounds (Reclaimed by Nature) | npc: Dakrin**
 
 **Setting Description:**  
 
-**Vines coil around old trial markers. The ritual grounds feel half‑alive, half‑forgotten. Dakrin stands in the center, posture rigid, watching you with the calm of someone who has seen countless breaking points.**
+**Vines coil around old trial markers. The ritual grounds feel halfâ€‘alive, halfâ€‘forgotten. Dakrin stands in the center, posture rigid, watching you with the calm of someone who has seen countless breaking points.**
 
 **Prompt:**  
 
-**DAKRIN: “The trial begins the moment you feel the impulse. What will you do with it?”**
+**DAKRIN: â€œThe trial begins the moment you feel the impulse. What will you do with it?â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “The anger… it’s rising.”**
+**(T) Choice: â€œThe angerâ€¦ itâ€™s rising.â€**
 
-**DAKRIN: “Then hold it. Do not let it choose for you.”**
+**DAKRIN: â€œThen hold it. Do not let it choose for you.â€**
 
-**(O) Choice: “What am I supposed to interrupt?”**
+**(O) Choice: â€œWhat am I supposed to interrupt?â€**
 
-**DAKRIN: “Yourself. The part that lunges before it thinks.”**
+**DAKRIN: â€œYourself. The part that lunges before it thinks.â€**
 
-**(N) Choice: “I don’t want to be here.”**
+**(N) Choice: â€œI donâ€™t want to be here.â€**
 
-**DAKRIN: “Wanting is irrelevant. Breath is what matters.”**
+**DAKRIN: â€œWanting is irrelevant. Breath is what matters.â€**
 
-**(E) Choice: “I feel like I might break.”**
+**(E) Choice: â€œI feel like I might break.â€**
 
-**DAKRIN: “Break inward, not outward. That is restraint.”**
+**DAKRIN: â€œBreak inward, not outward. That is restraint.â€**
 
 ### **Shared Beat:**
 
-**The ground trembles as your pulse spikes. Dakrin steps closer, her voice low and steady. You inhale, stopping the impulse mid‑surge. The vines tighten around the trial markers, glowing faintly. The glyph manifests—cool, controlled, interruptive.**
+**The ground trembles as your pulse spikes. Dakrin steps closer, her voice low and steady. You inhale, stopping the impulse midâ€‘surge. The vines tighten around the trial markers, glowing faintly. The glyph manifestsâ€”cool, controlled, interruptive.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Interruptive Restraint Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Interruptive Restraint Obtained.â€**
 
-# **GLYPH 22 — Held Ache (Coren the Mediator)**
+# **GLYPH 22 â€” Held Ache (Cal the Mediator)**
 
-**Data Hook: scene\_id: glyph\_22\_data | location: Market Concourse | npc: Coren**
+**Data Hook: scene\_id: glyph\_22\_data | location: Market Concourse | npc: Cal**
 
 **Setting Description:**  
 
-**Two survivors argue near a collapsed stall, voices sharp. Coren stands between them, hands raised—not to silence, but to hold space.**
+**Two survivors argue near a collapsed stall, voices sharp. Cal stands between them, hands raisedâ€”not to silence, but to hold space.**
 
 **Prompt:**  
 
-**COREN: “Do not fix them. Witness them.”**
+**Cal: â€œDo not fix them. Witness them.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “I want to help them find resolution.”**
+**(T) Choice: â€œI want to help them find resolution.â€**
 
-**COREN: “Resolution is a luxury. Ache is the truth.”**
+**Cal: â€œResolution is a luxury. Ache is the truth.â€**
 
-**(O) Choice: “What are they fighting over?”**
+**(O) Choice: â€œWhat are they fighting over?â€**
 
-**COREN: “Pain. It always looks like something else.”**
+**Cal: â€œPain. It always looks like something else.â€**
 
-**(N) Choice: “This isn’t my business.”**
+**(N) Choice: â€œThis isnâ€™t my business.â€**
 
-**COREN: “Then stand with me. That is enough.”**
+**Cal: â€œThen stand with me. That is enough.â€**
 
-**(E) Choice: “I can feel both sides hurting.”**
+**(E) Choice: â€œI can feel both sides hurting.â€**
 
-**COREN: “Good. Hold that. Do not collapse it.”**
+**Cal: â€œGood. Hold that. Do not collapse it.â€**
 
 ### **Shared Beat:**
 
-**The argument softens—not resolved, but witnessed. Coren nods as the ache settles into the air, thick and honest. The glyph rises from the tension, shimmering with quiet sovereignty.**
+**The argument softensâ€”not resolved, but witnessed. Cal nods as the ache settles into the air, thick and honest. The glyph rises from the tension, shimmering with quiet sovereignty.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Held Ache Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Held Ache Obtained.â€**
 
-# **GLYPH 23 — Measured Step (Archivist Malrik)**
+# **GLYPH 23 â€” Measured Step (Archivist Malrik)**
 
 **Data Hook: scene\_id: glyph\_23\_data | location: Archive Interior (Reclaimed Chambers) | npc: Malrik**
 
 **Setting Description:**  
 
-**The archive’s interior is unstable—floors bowed, beams cracked. Malrik moves with deliberate precision, each step chosen, not taken.**
+**The archiveâ€™s interior is unstableâ€”floors bowed, beams cracked. Malrik moves with deliberate precision, each step chosen, not taken.**
 
 **Prompt:**  
 
-**MALRIK: “Walk with intention. The archive rewards discipline.”**
+**MALRIK: â€œWalk with intention. The archive rewards discipline.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “Why are you moving so slowly?”**
+**(T) Choice: â€œWhy are you moving so slowly?â€**
 
-**MALRIK: “Speed collapses what little remains.”**
+**MALRIK: â€œSpeed collapses what little remains.â€**
 
-**(O) Choice: “What are we protecting?”**
+**(O) Choice: â€œWhat are we protecting?â€**
 
-**MALRIK: “Memory. And the fragile people who carry it.”**
+**MALRIK: â€œMemory. And the fragile people who carry it.â€**
 
-**(N) Choice: “This place is falling apart.”**
+**(N) Choice: â€œThis place is falling apart.â€**
 
-**MALRIK: “So are we. Step carefully.”**
+**MALRIK: â€œSo are we. Step carefully.â€**
 
-**(E) Choice: “Your steps feel… ritualistic.”**
+**(E) Choice: â€œYour steps feelâ€¦ ritualistic.â€**
 
-**MALRIK: “Ritual is how we survive what we cannot repair.”**
+**MALRIK: â€œRitual is how we survive what we cannot repair.â€**
 
 ### **Shared Beat:**
 
-**A beam groans overhead. You match Malrik’s pace, moving with measured discipline. The chamber stabilizes for a moment, long enough for the glyph to pulse into existence—steady, intentional.**
+**A beam groans overhead. You match Malrikâ€™s pace, moving with measured discipline. The chamber stabilizes for a moment, long enough for the glyph to pulse into existenceâ€”steady, intentional.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Measured Step Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Measured Step Obtained.â€**
 
-# **GLYPH 24 — Boundary Stone (Archivist Malrik)**
+# **GLYPH 24 â€” Boundary Stone (Archivist Malrik)**
 
 **Data Hook: scene\_id: glyph\_24\_data | location: Shared Archive Entrance | npc: Malrik**
 
@@ -1108,33 +1108,33 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Prompt:**  
 
-**MALRIK: “Preservation requires limits. Without them, memory dissolves.”**
+**MALRIK: â€œPreservation requires limits. Without them, memory dissolves.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “These boundaries feel rigid.”**
+**(T) Choice: â€œThese boundaries feel rigid.â€**
 
-**MALRIK: “Rigidity is how we keep the past intact.”**
+**MALRIK: â€œRigidity is how we keep the past intact.â€**
 
-**(O) Choice: “Who decides what gets preserved?”**
+**(O) Choice: â€œWho decides what gets preserved?â€**
 
-**MALRIK: “Those willing to bear the burden.”**
+**MALRIK: â€œThose willing to bear the burden.â€**
 
-**(N) Choice: “This seems excessive.”**
+**(N) Choice: â€œThis seems excessive.â€**
 
-**MALRIK: “Excess is safer than loss.”**
+**MALRIK: â€œExcess is safer than loss.â€**
 
-**(E) Choice: “You’re protecting something fragile.”**
+**(E) Choice: â€œYouâ€™re protecting something fragile.â€**
 
-**MALRIK: “Everything worth remembering is fragile.”**
+**MALRIK: â€œEverything worth remembering is fragile.â€**
 
 ### **Shared Beat:**
 
-**You help place a boundary stone. The air shifts—structured, defined, heavy with intention. The glyph rises from the marked threshold, glowing with clarity and cost.**
+**You help place a boundary stone. The air shiftsâ€”structured, defined, heavy with intention. The glyph rises from the marked threshold, glowing with clarity and cost.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Boundary Stone Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Boundary Stone Obtained.â€**
 
-# **GLYPH 25 — Marked Boundaries (Tovren the Cartwright)**
+# **GLYPH 25 â€” Marked Boundaries (Tovren the Cartwright)**
 
 **Data Hook: scene\_id: glyph\_25\_data | location: Collapsing Trade Route | npc: Tovren**
 
@@ -1144,33 +1144,33 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Prompt:**  
 
-**TOVREN: “Paths lie. Marks don’t.”**
+**TOVREN: â€œPaths lie. Marks donâ€™t.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “These markings… they’re everywhere.”**
+**(T) Choice: â€œThese markingsâ€¦ theyâ€™re everywhere.â€**
 
-**TOVREN: “Because danger is everywhere.”**
+**TOVREN: â€œBecause danger is everywhere.â€**
 
-**(O) Choice: “How do you know where to draw?”**
+**(O) Choice: â€œHow do you know where to draw?â€**
 
-**TOVREN: “The ground tells me. I listen.”**
+**TOVREN: â€œThe ground tells me. I listen.â€**
 
-**(N) Choice: “This route is hopeless.”**
+**(N) Choice: â€œThis route is hopeless.â€**
 
-**TOVREN: “Hopelessness is just unmarked risk.”**
+**TOVREN: â€œHopelessness is just unmarked risk.â€**
 
-**(E) Choice: “You’re protecting travelers.”**
+**(E) Choice: â€œYouâ€™re protecting travelers.â€**
 
-**TOVREN: “Someone has to.”**
+**TOVREN: â€œSomeone has to.â€**
 
 ### **Shared Beat:**
 
-**A stone shifts underfoot. Tovren grabs your arm, pulling you back. The chalk glows faintly, forming the glyph—clarity carved into danger.**
+**A stone shifts underfoot. Tovren grabs your arm, pulling you back. The chalk glows faintly, forming the glyphâ€”clarity carved into danger.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Marked Boundaries Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Marked Boundaries Obtained.â€**
 
-# **GLYPH 26 — Reckless Trial (Dalen the Rusted Guide)**
+# **GLYPH 26 â€” Reckless Trial (Dalen the Rusted Guide)**
 
 **Data Hook: scene\_id: glyph\_26\_data | location: Desert Trial Grounds | npc: Dalen**
 
@@ -1180,33 +1180,33 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Prompt:**  
 
-**DALEN: “Sovereignty isn’t given. It’s risked.”**
+**DALEN: â€œSovereignty isnâ€™t given. Itâ€™s risked.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “I’ll take the risk.”**
+**(T) Choice: â€œIâ€™ll take the risk.â€**
 
-**DALEN: “Good. Risk reveals truth.”**
+**DALEN: â€œGood. Risk reveals truth.â€**
 
-**(O) Choice: “What’s the trial?”**
+**(O) Choice: â€œWhatâ€™s the trial?â€**
 
-**DALEN: “Whatever scares you most.”**
+**DALEN: â€œWhatever scares you most.â€**
 
-**(N) Choice: “I don’t want reckless sovereignty.”**
+**(N) Choice: â€œI donâ€™t want reckless sovereignty.â€**
 
-**DALEN: “Then you want none at all.”**
+**DALEN: â€œThen you want none at all.â€**
 
-**(E) Choice: “I’m not sure I’m ready.”**
+**(E) Choice: â€œIâ€™m not sure Iâ€™m ready.â€**
 
-**DALEN: “No one is. That’s the point.”**
+**DALEN: â€œNo one is. Thatâ€™s the point.â€**
 
 ### **Shared Beat:**
 
-**Heat distorts the air. You step forward anyway. Dalen smirks as the ground cracks beneath your feet. The glyph rises—wild, sharp, born of chosen danger.**
+**Heat distorts the air. You step forward anyway. Dalen smirks as the ground cracks beneath your feet. The glyph risesâ€”wild, sharp, born of chosen danger.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Reckless Trial Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Reckless Trial Obtained.â€**
 
-# **GLYPH 27 — Iron Boundary (Captain Veynar)**
+# **GLYPH 27 â€” Iron Boundary (Captain Veynar)**
 
 **Data Hook: scene\_id: glyph\_27\_data | location: Trial Grounds | npc: Veynar**
 
@@ -1216,35 +1216,35 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Prompt:**  
 
-**VEYNAR: “Law is the boundary. Break it, and everything breaks with you.”**
+**VEYNAR: â€œLaw is the boundary. Break it, and everything breaks with you.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “You enforce too harshly.”**
+**(T) Choice: â€œYou enforce too harshly.â€**
 
-**VEYNAR: “Harshness keeps people alive.”**
+**VEYNAR: â€œHarshness keeps people alive.â€**
 
-**(O) Choice: “Who set these laws?”**
+**(O) Choice: â€œWho set these laws?â€**
 
-**VEYNAR: “Those who survived long enough to write them.”**
+**VEYNAR: â€œThose who survived long enough to write them.â€**
 
-**(N) Choice: “This boundary feels oppressive.”**
+**(N) Choice: â€œThis boundary feels oppressive.â€**
 
-**VEYNAR: “Oppression is just protection with bad timing.”**
+**VEYNAR: â€œOppression is just protection with bad timing.â€**
 
-**(E) Choice: “You look exhausted.”**
+**(E) Choice: â€œYou look exhausted.â€**
 
-**VEYNAR: “Boundaries wear down their keepers.”**
+**VEYNAR: â€œBoundaries wear down their keepers.â€**
 
 ### **Shared Beat:**
 
-**Veynar slams his spear into the ground. The earth vibrates, forming a metallic ring around the barricade. The glyph rises—unyielding, iron‑bound.**
+**Veynar slams his spear into the ground. The earth vibrates, forming a metallic ring around the barricade. The glyph risesâ€”unyielding, ironâ€‘bound.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Iron Boundary Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Iron Boundary Obtained.â€**
 
-# **GLYPH 28 — Hidden Passage (Kaelen the Suspected Thief)**
+# **GLYPH 28 â€” Hidden Passage (Kaelen the Suspected Thief)**
 
-**Data Hook: scene\_id: glyph\_28\_data | location: Thieves’ Lair | npc: Kaelen**
+**Data Hook: scene\_id: glyph\_28\_data | location: Thievesâ€™ Lair | npc: Kaelen**
 
 **Setting Description:**  
 
@@ -1252,107 +1252,107 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 **Prompt:**  
 
-**KAELEN: “Sovereignty isn’t always loud. Sometimes it’s the choice no one sees.”**
+**KAELEN: â€œSovereignty isnâ€™t always loud. Sometimes itâ€™s the choice no one sees.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “Show me the route.”**
+**(T) Choice: â€œShow me the route.â€**
 
-**KAELEN: “Only if you can keep a secret.”**
+**KAELEN: â€œOnly if you can keep a secret.â€**
 
-**(O) Choice: “Why hide this passage?”**
+**(O) Choice: â€œWhy hide this passage?â€**
 
-**KAELEN: “Because freedom dies when everyone knows the way out.”**
+**KAELEN: â€œBecause freedom dies when everyone knows the way out.â€**
 
-**(N) Choice: “This feels illegal.”**
+**(N) Choice: â€œThis feels illegal.â€**
 
-**KAELEN: “Illegal is just another word for necessary.”**
+**KAELEN: â€œIllegal is just another word for necessary.â€**
 
-**(E) Choice: “You look scared.”**
+**(E) Choice: â€œYou look scared.â€**
 
-**KAELEN: “Fear keeps me alive.”**
+**KAELEN: â€œFear keeps me alive.â€**
 
 ### **Shared Beat:**
 
-**Kaelen reveals a hidden latch. The wall shifts, opening a narrow corridor. The shadows pulse, forming the glyph—choice carved in secrecy.**
+**Kaelen reveals a hidden latch. The wall shifts, opening a narrow corridor. The shadows pulse, forming the glyphâ€”choice carved in secrecy.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Hidden Passage Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Hidden Passage Obtained.â€**
 
-# **GLYPH 29 — Masked Boundary (Drossel the Cloaked)**
+# **GLYPH 29 â€” Masked Boundary (Drossel the Cloaked)**
 
 **Data Hook: scene\_id: glyph\_29\_data | location: Market Concourse, Shadowed Stalls | npc: Drossel**
 
 **Setting Description:**  
 
-**Drossel stands half‑hidden behind a stall, cloak blending into the shadows. His smile is unreadable.**
+**Drossel stands halfâ€‘hidden behind a stall, cloak blending into the shadows. His smile is unreadable.**
 
 **Prompt:**  
 
-**DROSSEL: “Not all boundaries are honest. Some protect by deceiving.”**
+**DROSSEL: â€œNot all boundaries are honest. Some protect by deceiving.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “You’re hiding something.”**
+**(T) Choice: â€œYouâ€™re hiding something.â€**
 
-**DROSSEL: “Of course. That’s how masks work.”**
+**DROSSEL: â€œOf course. Thatâ€™s how masks work.â€**
 
-**(O) Choice: “Why conceal the boundary?”**
+**(O) Choice: â€œWhy conceal the boundary?â€**
 
-**DROSSEL: “Because clarity invites attack.”**
+**DROSSEL: â€œBecause clarity invites attack.â€**
 
-**(N) Choice: “I don’t trust this.”**
+**(N) Choice: â€œI donâ€™t trust this.â€**
 
-**DROSSEL: “Good. Trust is a trap.”**
+**DROSSEL: â€œGood. Trust is a trap.â€**
 
-**(E) Choice: “You seem… conflicted.”**
+**(E) Choice: â€œYou seemâ€¦ conflicted.â€**
 
-**DROSSEL: “Conflicted people make the best liars.”**
+**DROSSEL: â€œConflicted people make the best liars.â€**
 
 ### **Shared Beat:**
 
-**A shadow shifts behind him. The stall’s fabric ripples, forming a dark veil. The glyph emerges—masked, shifting, deceptive.**
+**A shadow shifts behind him. The stallâ€™s fabric ripples, forming a dark veil. The glyph emergesâ€”masked, shifting, deceptive.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Masked Boundary Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Masked Boundary Obtained.â€**
 
-# **GLYPH 30 — Venomous Choice (Drossel the Cloaked)**
+# **GLYPH 30 â€” Venomous Choice (Drossel the Cloaked)**
 
 **Data Hook: scene\_id: glyph\_30\_data | location: Swamp Trial Grounds | npc: Drossel**
 
 **Setting Description:**  
 
-**The swamp trial grounds are quiet, suffocating. Drossel stands at the center, holding two tokens—one marked with Kaelen’s name, one blank.**
+**The swamp trial grounds are quiet, suffocating. Drossel stands at the center, holding two tokensâ€”one marked with Kaelenâ€™s name, one blank.**
 
 **Prompt:**  
 
-**DROSSEL: “Every choice poisons something. Pick one.”**
+**DROSSEL: â€œEvery choice poisons something. Pick one.â€**
 
 ### **Tone Matrix**
 
-**(T) Choice: “I’ll protect Kaelen.”**
+**(T) Choice: â€œIâ€™ll protect Kaelen.â€**
 
-**DROSSEL: “Then someone else will pay.”**
+**DROSSEL: â€œThen someone else will pay.â€**
 
-**(O) Choice: “What happens if I choose the blank token?”**
+**(O) Choice: â€œWhat happens if I choose the blank token?â€**
 
-**DROSSEL: “Blank choices still kill trust.”**
+**DROSSEL: â€œBlank choices still kill trust.â€**
 
-**(N) Choice: “I refuse this test.”**
+**(N) Choice: â€œI refuse this test.â€**
 
-**DROSSEL: “Refusal is just another venom.”**
+**DROSSEL: â€œRefusal is just another venom.â€**
 
-**(E) Choice: “Why are you making me do this?”**
+**(E) Choice: â€œWhy are you making me do this?â€**
 
-**DROSSEL: “Because sovereignty hurts.”**
+**DROSSEL: â€œBecause sovereignty hurts.â€**
 
 ### **Shared Beat:**
 
-**The swamp air thickens. You choose—whatever you choose. The ground pulses, splitting into branching veins of light and shadow. The glyph rises—venomous, fractured, born from poisoned sovereignty.**
+**The swamp air thickens. You chooseâ€”whatever you choose. The ground pulses, splitting into branching veins of light and shadow. The glyph risesâ€”venomous, fractured, born from poisoned sovereignty.**
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Venomous Choice Obtained.”**
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Venomous Choice Obtained.â€**
 
 ### **Cluster 04: The Migration Echoes (Glyphs 31-40)**
 
-* # **GLYPH 31 — Sensory Oblivion (Thalma)**
+* # **GLYPH 31 â€” Sensory Oblivion (Thalma)**
 
 * **Data Hook:** scene\_id: glyph\_31\_data | location: Resonance Chamber | npc: Thalma
 
@@ -1362,33 +1362,33 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* THALMA: “Do not strain to hear. Let the silence touch you instead.”
+* THALMA: â€œDo not strain to hear. Let the silence touch you instead.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “The walls… they’re vibrating.”
+* **(T) Choice:** â€œThe wallsâ€¦ theyâ€™re vibrating.â€
 
-* **THALMA:** “They remember every voice that ever passed through.”
+* **THALMA:** â€œThey remember every voice that ever passed through.â€
 
-* **(O) Choice:** “Is this what true stillness feels like?”
+* **(O) Choice:** â€œIs this what true stillness feels like?â€
 
-* **THALMA:** “Stillness is only the absence of panic.”
+* **THALMA:** â€œStillness is only the absence of panic.â€
 
-* **(N) Choice:** “This place feels like a grave.”
+* **(N) Choice:** â€œThis place feels like a grave.â€
 
-* **THALMA:** “Graves are loud. This is something else.”
+* **THALMA:** â€œGraves are loud. This is something else.â€
 
-* **(E) Choice:** “I can feel the history in the stone.”
+* **(E) Choice:** â€œI can feel the history in the stone.â€
 
-* **THALMA:** “Then you’re finally listening.”
+* **THALMA:** â€œThen youâ€™re finally listening.â€
 
 * ### **Shared Beat:**
 
-* You place your hand on the wall. The silence presses back—heavy, intimate, unyielding. Thalma nods as you stop trying to fill the emptiness and simply witness it. The glyph rises from the stone, a pulse of sensory absence.
+* You place your hand on the wall. The silence presses backâ€”heavy, intimate, unyielding. Thalma nods as you stop trying to fill the emptiness and simply witness it. The glyph rises from the stone, a pulse of sensory absence.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Sensory Oblivion Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Sensory Oblivion Obtained.â€
 
-* # **GLYPH 32 — Remembrance (Nima)**
+* # **GLYPH 32 â€” Remembrance (Nima)**
 
 * **Data Hook:** scene\_id: glyph\_remembrance\_data | location: Market Overlook | npc: Nima
 
@@ -1398,71 +1398,71 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* NIMA: “I come here when the memories get too loud.”
+* NIMA: â€œI come here when the memories get too loud.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I am listening.”
+* **(T) Choice:** â€œI am listening.â€
 
-* **NIMA:** “Then hear what the silence refuses to forget.”
+* **NIMA:** â€œThen hear what the silence refuses to forget.â€
 
-* **(O) Choice:** “Tell me what you see.”
+* **(O) Choice:** â€œTell me what you see.â€
 
-* **NIMA:** “Only what I failed to hold.”
+* **NIMA:** â€œOnly what I failed to hold.â€
 
-* **(N) Choice:** “We should move on.”
+* **(N) Choice:** â€œWe should move on.â€
 
-* **NIMA:** “Moving on is just forgetting with better timing.”
+* **NIMA:** â€œMoving on is just forgetting with better timing.â€
 
-* **(E) Choice:** “I understand this ache.”
+* **(E) Choice:** â€œI understand this ache.â€
 
-* **NIMA:** “Then you know why I stay.”
+* **NIMA:** â€œThen you know why I stay.â€
 
 * ### **Shared Beat:**
 
-* The shrine hums softly. Memories surge—your own, vivid and painful. Nima doesn’t look at you, but she feels the shift. The glyph forms in the air, warm and aching.
+* The shrine hums softly. Memories surgeâ€”your own, vivid and painful. Nima doesnâ€™t look at you, but she feels the shift. The glyph forms in the air, warm and aching.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Remembrance Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Remembrance Obtained.â€
 
-* # **GLYPH 33 — Veiled Silence (High Seer Elenya)**
+* # **GLYPH 33 â€” Veiled Silence (High Seer Elenya)**
 
 * **Data Hook:** scene\_id: glyph\_33\_data | location: Hidden Mountain Shrine | npc: Elenya
 
 * **Setting Description:**  
 
-* Deep within echo‑less caverns, sound is swallowed whole. Elenya stands beneath a stone arch, veil drawn, her presence steady and unreadable.
+* Deep within echoâ€‘less caverns, sound is swallowed whole. Elenya stands beneath a stone arch, veil drawn, her presence steady and unreadable.
 
 * **Prompt:**  
 
-* ELENYA: “Do not fear the quiet. It reveals what noise hides.”
+* ELENYA: â€œDo not fear the quiet. It reveals what noise hides.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “This silence is sacred.”
+* **(T) Choice:** â€œThis silence is sacred.â€
 
-* **ELENYA:** “Sacred things demand stillness.”
+* **ELENYA:** â€œSacred things demand stillness.â€
 
-* **(O) Choice:** “Is this where you come to hide?”
+* **(O) Choice:** â€œIs this where you come to hide?â€
 
-* **ELENYA:** “I come here to be seen.”
+* **ELENYA:** â€œI come here to be seen.â€
 
-* **(N) Choice:** “I can’t take this quiet.”
+* **(N) Choice:** â€œI canâ€™t take this quiet.â€
 
-* **ELENYA:** “Then the quiet is doing its work.”
+* **ELENYA:** â€œThen the quiet is doing its work.â€
 
-* **(E) Choice:** “It feels safe here.”
+* **(E) Choice:** â€œIt feels safe here.â€
 
-* **ELENYA:** “Safety is just silence without judgment.”
+* **ELENYA:** â€œSafety is just silence without judgment.â€
 
 * ### **Shared Beat:**
 
 * You remain still. The hush thickens, wrapping around you like a veil. Elenya watches without speaking. The glyph reveals itself in the quiet, a soft shimmer in the air.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Veiled Silence Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Veiled Silence Obtained.â€
 
-* # **GLYPH 34 — Fragrant Silence (Sera)**
+* # **GLYPH 34 â€” Fragrant Silence (Sera)**
 
-* **Data Hook:** scene\_id: glyph\_34\_data | location: Herb‑lined Shrine Alcove | npc: Sera
+* **Data Hook:** scene\_id: glyph\_34\_data | location: Herbâ€‘lined Shrine Alcove | npc: Sera
 
 * **Setting Description:**  
 
@@ -1470,39 +1470,39 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* SERA: “Breathe. Let the scent carry what words cannot.”
+* SERA: â€œBreathe. Let the scent carry what words cannot.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “The scent… it centers me.”
+* **(T) Choice:** â€œThe scentâ€¦ it centers me.â€
 
-* **SERA:** “That’s its purpose.”
+* **SERA:** â€œThatâ€™s its purpose.â€
 
-* **(O) Choice:** “What herb is this?”
+* **(O) Choice:** â€œWhat herb is this?â€
 
-* **SERA:** “Sage. For grounding what trembles.”
+* **SERA:** â€œSage. For grounding what trembles.â€
 
-* **(N) Choice:** “It’s overpowering.”
+* **(N) Choice:** â€œItâ€™s overpowering.â€
 
-* **SERA:** “Only if you resist it.”
+* **SERA:** â€œOnly if you resist it.â€
 
-* **(E) Choice:** “It reminds me of home.”
+* **(E) Choice:** â€œIt reminds me of home.â€
 
-* **SERA:** “Then let it hold you.”
+* **SERA:** â€œThen let it hold you.â€
 
 * ### **Shared Beat:**
 
-* The fragrance settles around you, warm and steady. Sera’s presence softens. The silence becomes gentle, carrying healing in its scent. The glyph blooms from the air, subtle and fragrant.
+* The fragrance settles around you, warm and steady. Seraâ€™s presence softens. The silence becomes gentle, carrying healing in its scent. The glyph blooms from the air, subtle and fragrant.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Fragrant Silence Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Fragrant Silence Obtained.â€
 
-* # **GLYPH 35 — Serpent’s Silence (Drossel)**
+* # **GLYPH 35 â€” Serpentâ€™s Silence (Drossel)**
 
-* *(Already completed — included here for continuity.)*
+* *(Already completed â€” included here for continuity.)*
 
-* # **GLYPH 36 — Quiet Bloom (Sera)**
+* # **GLYPH 36 â€” Quiet Bloom (Sera)**
 
-* **Data Hook:** scene\_id: glyph\_36\_data | location: Shrine Keeper’s Hut | npc: Sera
+* **Data Hook:** scene\_id: glyph\_36\_data | location: Shrine Keeperâ€™s Hut | npc: Sera
 
 * **Setting Description:**  
 
@@ -1510,69 +1510,69 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* SERA: “Care is a boundary too. It tells someone they matter.”
+* SERA: â€œCare is a boundary too. It tells someone they matter.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Let me help you.”
+* **(T) Choice:** â€œLet me help you.â€
 
-* **SERA:** “Help is shared, not taken.”
+* **SERA:** â€œHelp is shared, not taken.â€
 
-* **(O) Choice:** “How long have you done this?”
+* **(O) Choice:** â€œHow long have you done this?â€
 
-* **SERA:** “Since the collapse taught me what pain needs.”
+* **SERA:** â€œSince the collapse taught me what pain needs.â€
 
-* **(N) Choice:** “It’s just a scratch.”
+* **(N) Choice:** â€œItâ€™s just a scratch.â€
 
-* **SERA:** “Small wounds still deserve tending.”
+* **SERA:** â€œSmall wounds still deserve tending.â€
 
-* **(E) Choice:** “Your hands are steady.”
+* **(E) Choice:** â€œYour hands are steady.â€
 
-* **SERA:** “Steady hands keep people alive.”
+* **SERA:** â€œSteady hands keep people alive.â€
 
 * ### **Shared Beat:**
 
-* You hold the bandage while she works. The quiet between you blooms—trust forming in the space where care is exchanged. The glyph rises from the warmth of shared survival.
+* You hold the bandage while she works. The quiet between you bloomsâ€”trust forming in the space where care is exchanged. The glyph rises from the warmth of shared survival.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Quiet Bloom Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Quiet Bloom Obtained.â€
 
-* # **GLYPH 37 — Listening Silence (Korrin)**
+* # **GLYPH 37 â€” Listening Silence (Korrin)**
 
-* **Data Hook:** scene\_id: glyph\_37\_data | location: Informant’s Alcove | npc: Korrin
+* **Data Hook:** scene\_id: glyph\_37\_data | location: Informantâ€™s Alcove | npc: Korrin
 
 * **Setting Description:**  
 
-* A cramped alcove lit by a single lantern. Korrin sits with his back to the wall, offering half‑truths with a sly smile.
+* A cramped alcove lit by a single lantern. Korrin sits with his back to the wall, offering halfâ€‘truths with a sly smile.
 
 * **Prompt:**  
 
-* KORRIN: “I’ll tell you something. But only if you listen past the words.”
+* KORRIN: â€œIâ€™ll tell you something. But only if you listen past the words.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I’m listening.”
+* **(T) Choice:** â€œIâ€™m listening.â€
 
-* **KORRIN:** “Good. Most people only hear themselves.”
+* **KORRIN:** â€œGood. Most people only hear themselves.â€
 
-* **(O) Choice:** “Is that the whole truth?”
+* **(O) Choice:** â€œIs that the whole truth?â€
 
-* **KORRIN:** “Truth comes in layers.”
+* **KORRIN:** â€œTruth comes in layers.â€
 
-* **(N) Choice:** “You’re wasting my time.”
+* **(N) Choice:** â€œYouâ€™re wasting my time.â€
 
-* **KORRIN:** “Time reveals more than I do.”
+* **KORRIN:** â€œTime reveals more than I do.â€
 
-* **(E) Choice:** “I hear the weight in your words.”
+* **(E) Choice:** â€œI hear the weight in your words.â€
 
-* **KORRIN:** “Then you’re closer than most.”
+* **KORRIN:** â€œThen youâ€™re closer than most.â€
 
 * ### **Shared Beat:**
 
-* You resist the urge to respond. The silence stretches, becoming a witness. Korrin’s expression shifts—respect, maybe. The glyph forms in the quiet, listening back.
+* You resist the urge to respond. The silence stretches, becoming a witness. Korrinâ€™s expression shiftsâ€”respect, maybe. The glyph forms in the quiet, listening back.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Listening Silence Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Listening Silence Obtained.â€
 
-* # **GLYPH 38 — Tender Witness (Helia)**
+* # **GLYPH 38 â€” Tender Witness (Helia)**
 
 * **Data Hook:** scene\_id: glyph\_38\_data | location: Shrine Healing Alcove | npc: Helia
 
@@ -1582,33 +1582,33 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* HELIA: “Stay with them. That’s all they need.”
+* HELIA: â€œStay with them. Thatâ€™s all they need.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “How do you do it?”
+* **(T) Choice:** â€œHow do you do it?â€
 
-* **HELIA:** “I stopped trying to fix what cannot be fixed.”
+* **HELIA:** â€œI stopped trying to fix what cannot be fixed.â€
 
-* **(O) Choice:** “What do they need most?”
+* **(O) Choice:** â€œWhat do they need most?â€
 
-* **HELIA:** “A witness who doesn’t flinch.”
+* **HELIA:** â€œA witness who doesnâ€™t flinch.â€
 
-* **(N) Choice:** “It’s too heavy here.”
+* **(N) Choice:** â€œItâ€™s too heavy here.â€
 
-* **HELIA:** “Then let it rest on both of us.”
+* **HELIA:** â€œThen let it rest on both of us.â€
 
-* **(E) Choice:** “I will stay with you.”
+* **(E) Choice:** â€œI will stay with you.â€
 
-* **HELIA:** “Then they won’t be alone.”
+* **HELIA:** â€œThen they wonâ€™t be alone.â€
 
 * ### **Shared Beat:**
 
-* You sit beside a wounded survivor. Helia nods, approving your stillness. The air warms with shared presence. The glyph rises—tender, steady, born from witness.
+* You sit beside a wounded survivor. Helia nods, approving your stillness. The air warms with shared presence. The glyph risesâ€”tender, steady, born from witness.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Tender Witness Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Tender Witness Obtained.â€
 
-* # **GLYPH 39 — Echo Communion (Elka)**
+* # **GLYPH 39 â€” Echo Communion (Elka)**
 
 * **Data Hook:** scene\_id: glyph\_39\_data | location: Abandoned Shrine Node | npc: Elka
 
@@ -1618,33 +1618,33 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* ELKA: “Touch it. Let the echoes show you what remains.”
+* ELKA: â€œTouch it. Let the echoes show you what remains.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Can you still hear them?”
+* **(T) Choice:** â€œCan you still hear them?â€
 
-* **ELKA:** “Only the ones who refuse to fade.”
+* **ELKA:** â€œOnly the ones who refuse to fade.â€
 
-* **(O) Choice:** “Is the system awake?”
+* **(O) Choice:** â€œIs the system awake?â€
 
-* **ELKA:** “Awake enough to ache.”
+* **ELKA:** â€œAwake enough to ache.â€
 
-* **(N) Choice:** “It’s just residual energy.”
+* **(N) Choice:** â€œItâ€™s just residual energy.â€
 
-* **ELKA:** “Residuals are still real.”
+* **ELKA:** â€œResiduals are still real.â€
 
-* **(E) Choice:** “It feels like a funeral.”
+* **(E) Choice:** â€œIt feels like a funeral.â€
 
-* **ELKA:** “Funerals are where communion begins.”
+* **ELKA:** â€œFunerals are where communion begins.â€
 
 * ### **Shared Beat:**
 
-* Your palms meet the interface. A billion ghost‑minds brush against your awareness—soft, distant, grieving. Elka bows her head. The glyph rises from the pulse of shared memory.
+* Your palms meet the interface. A billion ghostâ€‘minds brush against your awarenessâ€”soft, distant, grieving. Elka bows her head. The glyph rises from the pulse of shared memory.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Echo Communion Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Echo Communion Obtained.â€
 
-* # **GLYPH 40 — Steadfast Witness (Inodora)**
+* # **GLYPH 40 â€” Steadfast Witness (Inodora)**
 
 * **Data Hook:** scene\_id: glyph\_40\_data | location: Old Communal Well | npc: Inodora
 
@@ -1654,107 +1654,107 @@ I have updated the first 10 glyphs to match the formatting of the Glyph 35 examp
 
 * **Prompt:**  
 
-* INODORA: “Stay with me. The night is long.”
+* INODORA: â€œStay with me. The night is long.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Keep talking.”
+* **(T) Choice:** â€œKeep talking.â€
 
-* **INODORA:** “Talking keeps the dark honest.”
+* **INODORA:** â€œTalking keeps the dark honest.â€
 
-* **(O) Choice:** “Are these stories true?”
+* **(O) Choice:** â€œAre these stories true?â€
 
-* **INODORA:** “Truth is just a story that survived.”
+* **INODORA:** â€œTruth is just a story that survived.â€
 
-* **(N) Choice:** “It’s too cold for this.”
+* **(N) Choice:** â€œItâ€™s too cold for this.â€
 
-* **INODORA:** “Cold is easier when shared.”
+* **INODORA:** â€œCold is easier when shared.â€
 
-* **(E) Choice:** “I will hold vigil with you.”
+* **(E) Choice:** â€œI will hold vigil with you.â€
 
-* **INODORA:** “Then we’ll make it to dawn.”
+* **INODORA:** â€œThen weâ€™ll make it to dawn.â€
 
 * ### **Shared Beat:**
 
-* You stay through the night. Inodora’s stories weave around you, steady and warm. Dawn breaks, revealing the glyph—steadfast, patient, born from vigil.
+* You stay through the night. Inodoraâ€™s stories weave around you, steady and warm. Dawn breaks, revealing the glyphâ€”steadfast, patient, born from vigil.
 
 * **SYSTEM TRIGGER:**
 
 ### **Cluster 05: The Joyous Resurgence (Glyphs 41-50)**
 
-# **GLYPH 41 — Sky Revelry (High Seer Elenya)**
+# **GLYPH 41 â€” Sky Revelry (High Seer Elenya)**
 
 **Data Hook:** scene\_id: glyph\_41\_data | location: Festival Peaks | npc: High Seer Elenya
 
 **Setting Description:**  
 
-A mountain plateau under a star‑filled sky. Music rings through the air, dancers move in spirals, and pine smoke drifts from ceremonial fires. Elenya stands at the center, guiding the festival’s rhythm with subtle gestures.
+A mountain plateau under a starâ€‘filled sky. Music rings through the air, dancers move in spirals, and pine smoke drifts from ceremonial fires. Elenya stands at the center, guiding the festivalâ€™s rhythm with subtle gestures.
 
 **Prompt:**  
 
-ELENYA: “Joy is a ritual. Join us.”
+ELENYA: â€œJoy is a ritual. Join us.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “The energy here… it’s infectious.”
+**(T) Choice:** â€œThe energy hereâ€¦ itâ€™s infectious.â€
 
-**ELENYA:** “Let it carry you.”
+**ELENYA:** â€œLet it carry you.â€
 
-**(O) Choice:** “Is this how the mountain celebrates?”
+**(O) Choice:** â€œIs this how the mountain celebrates?â€
 
-**ELENYA:** “The mountain remembers joy better than people do.”
+**ELENYA:** â€œThe mountain remembers joy better than people do.â€
 
-**(N) Choice:** “It feels like a distraction from the ruin.”
+**(N) Choice:** â€œIt feels like a distraction from the ruin.â€
 
-**ELENYA:** “Distraction is just healing in disguise.”
+**ELENYA:** â€œDistraction is just healing in disguise.â€
 
-**(E) Choice:** “I can feel the community binding together.”
+**(E) Choice:** â€œI can feel the community binding together.â€
 
-**ELENYA:** “That bond is the true ceremony.”
+**ELENYA:** â€œThat bond is the true ceremony.â€
 
 ### **Shared Beat:**
 
-You dance, laugh, breathe with the crowd. The sky seems to pulse with the rhythm. Elenya raises her hands, and the revelry peaks—joy becoming a blessing. The glyph manifests in the starlight, bright and communal.
+You dance, laugh, breathe with the crowd. The sky seems to pulse with the rhythm. Elenya raises her hands, and the revelry peaksâ€”joy becoming a blessing. The glyph manifests in the starlight, bright and communal.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Sky Revelry Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Sky Revelry Obtained.â€
 
-# **GLYPH 42 — Blooming Path (High Seer Elenya)**
+# **GLYPH 42 â€” Blooming Path (High Seer Elenya)**
 
 **Data Hook:** scene\_id: glyph\_42\_data | location: Alpine Reunion Trails | npc: High Seer Elenya
 
 **Setting Description:**  
 
-A hidden trail winding through thawing snow. Rare alpine flowers push through the frost, each bloom a survivor of winter’s brutality. Elenya walks ahead, touching petals with reverence.
+A hidden trail winding through thawing snow. Rare alpine flowers push through the frost, each bloom a survivor of winterâ€™s brutality. Elenya walks ahead, touching petals with reverence.
 
 **Prompt:**  
 
-ELENYA: “Every bloom is a memory that refused to die.”
+ELENYA: â€œEvery bloom is a memory that refused to die.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “The path is beautiful.”
+**(T) Choice:** â€œThe path is beautiful.â€
 
-**ELENYA:** “Beauty is just resilience in disguise.”
+**ELENYA:** â€œBeauty is just resilience in disguise.â€
 
-**(O) Choice:** “Do these flowers bloom every year?”
+**(O) Choice:** â€œDo these flowers bloom every year?â€
 
-**ELENYA:** “Only when the mountain forgives the cold.”
+**ELENYA:** â€œOnly when the mountain forgives the cold.â€
 
-**(N) Choice:** “They’re fragile.”
+**(N) Choice:** â€œTheyâ€™re fragile.â€
 
-**ELENYA:** “Fragile things teach us how to endure.”
+**ELENYA:** â€œFragile things teach us how to endure.â€
 
-**(E) Choice:** “This feels like a promise.”
+**(E) Choice:** â€œThis feels like a promise.â€
 
-**ELENYA:** “A promise of return.”
+**ELENYA:** â€œA promise of return.â€
 
 ### **Shared Beat:**
 
-You kneel beside a bloom. Elenya watches as you trace its petals. The trail warms, the flowers glow faintly. The glyph rises from the thaw—renewal made visible.
+You kneel beside a bloom. Elenya watches as you trace its petals. The trail warms, the flowers glow faintly. The glyph rises from the thawâ€”renewal made visible.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Blooming Path Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Blooming Path Obtained.â€
 
-# **GLYPH 43 — Verdant Reunion (Sera the Herb Novice)**
+# **GLYPH 43 â€” Verdant Reunion (Sera the Herb Novice)**
 
 **Data Hook:** scene\_id: glyph\_43\_data | location: Shrine Garden | npc: Sera
 
@@ -1764,69 +1764,69 @@ A garden recovering from harsh thaw. New shoots push through dark soil. Sera kne
 
 **Prompt:**  
 
-SERA: “Growth is slow. But never solitary.”
+SERA: â€œGrowth is slow. But never solitary.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “They need plenty of water.”
+**(T) Choice:** â€œThey need plenty of water.â€
 
-**SERA:** “And patience.”
+**SERA:** â€œAnd patience.â€
 
-**(O) Choice:** “What’s the best way to cultivate these?”
+**(O) Choice:** â€œWhatâ€™s the best way to cultivate these?â€
 
-**SERA:** “With hands that care more than they hurry.”
+**SERA:** â€œWith hands that care more than they hurry.â€
 
-**(N) Choice:** “It’s slow work.”
+**(N) Choice:** â€œItâ€™s slow work.â€
 
-**SERA:** “Slow work lasts.”
+**SERA:** â€œSlow work lasts.â€
 
-**(E) Choice:** “I like the way they lean toward the light.”
+**(E) Choice:** â€œI like the way they lean toward the light.â€
 
-**SERA:** “Everything living does.”
+**SERA:** â€œEverything living does.â€
 
 ### **Shared Beat:**
 
-You tend the soil with her. The shoots respond, straightening toward the sun. The garden breathes with shared effort. The glyph emerges from the new green—joy as communal growth.
+You tend the soil with her. The shoots respond, straightening toward the sun. The garden breathes with shared effort. The glyph emerges from the new greenâ€”joy as communal growth.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Verdant Reunion Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Verdant Reunion Obtained.â€
 
-# **GLYPH 44 — Dawn Petals (Sera the Herb Novice)**
+# **GLYPH 44 â€” Dawn Petals (Sera the Herb Novice)**
 
 **Data Hook:** scene\_id: glyph\_44\_data | location: Shrine Garden | npc: Sera
 
 **Setting Description:**  
 
-The garden at first light. Delicate petals unfurl only at dawn, catching the sun’s earliest warmth. Sera stands quietly, waiting for the bloom.
+The garden at first light. Delicate petals unfurl only at dawn, catching the sunâ€™s earliest warmth. Sera stands quietly, waiting for the bloom.
 
 **Prompt:**  
 
-SERA: “Watch. They only trust the first light.”
+SERA: â€œWatch. They only trust the first light.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “It’s worth the early start.”
+**(T) Choice:** â€œItâ€™s worth the early start.â€
 
-**SERA:** “Dawn rewards those who show up.”
+**SERA:** â€œDawn rewards those who show up.â€
 
-**(O) Choice:** “Why do they bloom at dawn?”
+**(O) Choice:** â€œWhy do they bloom at dawn?â€
 
-**SERA:** “Because hope wakes early.”
+**SERA:** â€œBecause hope wakes early.â€
 
-**(N) Choice:** “It’s too quiet here.”
+**(N) Choice:** â€œItâ€™s too quiet here.â€
 
-**SERA:** “Quiet is how blossoms speak.”
+**SERA:** â€œQuiet is how blossoms speak.â€
 
-**(E) Choice:** “They look hopeful.”
+**(E) Choice:** â€œThey look hopeful.â€
 
-**SERA:** “Hope is their language.”
+**SERA:** â€œHope is their language.â€
 
 ### **Shared Beat:**
 
-The petals unfurl. Sera smiles softly. The light catches on the bloom, forming the glyph—gentle, bright, born of shared hope.
+The petals unfurl. Sera smiles softly. The light catches on the bloom, forming the glyphâ€”gentle, bright, born of shared hope.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Dawn Petals Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Dawn Petals Obtained.â€
 
-# **GLYPH 45 — Laughter’s Balm (Sera the Herb Novice)**
+# **GLYPH 45 â€” Laughterâ€™s Balm (Sera the Herb Novice)**
 
 **Data Hook:** scene\_id: glyph\_45\_data | location: Market Shrine Courtyard | npc: Sera
 
@@ -1836,69 +1836,69 @@ A courtyard filled with herbal tea, old stories, and soft laughter. Sera pours y
 
 **Prompt:**  
 
-SERA: “Laughter is medicine. Even now.”
+SERA: â€œLaughter is medicine. Even now.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “That’s a good memory.”
+**(T) Choice:** â€œThatâ€™s a good memory.â€
 
-**SERA:** “Good memories keep us upright.”
+**SERA:** â€œGood memories keep us upright.â€
 
-**(O) Choice:** “Do you laugh often, Sera?”
+**(O) Choice:** â€œDo you laugh often, Sera?â€
 
-**SERA:** “Only when someone reminds me how.”
+**SERA:** â€œOnly when someone reminds me how.â€
 
-**(N) Choice:** “It feels odd to laugh now.”
+**(N) Choice:** â€œIt feels odd to laugh now.â€
 
-**SERA:** “Odd things heal.”
+**SERA:** â€œOdd things heal.â€
 
-**(E) Choice:** “I needed this.”
+**(E) Choice:** â€œI needed this.â€
 
-**SERA:** “So did I.”
+**SERA:** â€œSo did I.â€
 
 ### **Shared Beat:**
 
-You share a story. Sera laughs—light, genuine. Others join in. The courtyard brightens, and the glyph forms from the warmth of shared humor.
+You share a story. Sera laughsâ€”light, genuine. Others join in. The courtyard brightens, and the glyph forms from the warmth of shared humor.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Laughter’s Balm Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Laughterâ€™s Balm Obtained.â€
 
-# **GLYPH 46 — Shared Feast (Tala the Market Cook)**
+# **GLYPH 46 â€” Shared Feast (Tala the Market Cook)**
 
 **Data Hook:** scene\_id: glyph\_46\_data | location: Communal Cooking Fire | npc: Tala
 
 **Setting Description:**  
 
-A crackling fire at the market’s center. Tala stirs a pot, shouting instructions and jokes. People gather, hungry and hopeful.
+A crackling fire at the marketâ€™s center. Tala stirs a pot, shouting instructions and jokes. People gather, hungry and hopeful.
 
 **Prompt:**  
 
-TALA: “Grab a knife. Joy tastes better when shared.”
+TALA: â€œGrab a knife. Joy tastes better when shared.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “Pass me the seasoning.”
+**(T) Choice:** â€œPass me the seasoning.â€
 
-**TALA:** “Good. You’re learning.”
+**TALA:** â€œGood. Youâ€™re learning.â€
 
-**(O) Choice:** “It smells amazing.”
+**(O) Choice:** â€œIt smells amazing.â€
 
-**TALA:** “Smell is half the feast.”
+**TALA:** â€œSmell is half the feast.â€
 
-**(N) Choice:** “I’m just here to help.”
+**(N) Choice:** â€œIâ€™m just here to help.â€
 
-**TALA:** “Helping is half the ritual.”
+**TALA:** â€œHelping is half the ritual.â€
 
-**(E) Choice:** “Everyone seems lighter.”
+**(E) Choice:** â€œEveryone seems lighter.â€
 
-**TALA:** “Food does that.”
+**TALA:** â€œFood does that.â€
 
 ### **Shared Beat:**
 
-You chop, stir, laugh with the crowd. The fire flares warmly. The glyph rises from the shared meal—joy as nourishment.
+You chop, stir, laugh with the crowd. The fire flares warmly. The glyph rises from the shared mealâ€”joy as nourishment.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Shared Feast Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Shared Feast Obtained.â€
 
-# **GLYPH 47 — Hidden Warmth (Sybil the Loner)**
+# **GLYPH 47 â€” Hidden Warmth (Sybil the Loner)**
 
 **Data Hook:** scene\_id: glyph\_47\_data | location: Hidden Forest Campsite | npc: Sybil
 
@@ -1908,33 +1908,33 @@ A secluded forest clearing. Sybil sits by a small fire, whistling a haunting mel
 
 **Prompt:**  
 
-SYBIL: “Didn’t expect company. But… stay if you want.”
+SYBIL: â€œDidnâ€™t expect company. Butâ€¦ stay if you want.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “That melody is beautiful.”
+**(T) Choice:** â€œThat melody is beautiful.â€
 
-**SYBIL:** “It’s the only thing that listens.”
+**SYBIL:** â€œItâ€™s the only thing that listens.â€
 
-**(O) Choice:** “Where did you learn it?”
+**(O) Choice:** â€œWhere did you learn it?â€
 
-**SYBIL:** “From someone I miss.”
+**SYBIL:** â€œFrom someone I miss.â€
 
-**(N) Choice:** “You’re a long way from the market.”
+**(N) Choice:** â€œYouâ€™re a long way from the market.â€
 
-**SYBIL:** “Distance keeps me steady.”
+**SYBIL:** â€œDistance keeps me steady.â€
 
-**(E) Choice:** “I’m glad I found you.”
+**(E) Choice:** â€œIâ€™m glad I found you.â€
 
-**SYBIL:** “I… didn’t mind it.”
+**SYBIL:** â€œIâ€¦ didnâ€™t mind it.â€
 
 ### **Shared Beat:**
 
-She plays the melody again. You hum along. Her smile—small, fleeting—breaks through her walls. The glyph rises from the warmth of connection.
+She plays the melody again. You hum along. Her smileâ€”small, fleetingâ€”breaks through her walls. The glyph rises from the warmth of connection.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Hidden Warmth Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Hidden Warmth Obtained.â€
 
-# **GLYPH 48 — Arrival (Rasha the Ferry Operator)**
+# **GLYPH 48 â€” Arrival (Rasha the Ferry Operator)**
 
 **Data Hook:** scene\_id: glyph\_48\_data | location: Harbor at Dawn | npc: Rasha
 
@@ -1944,35 +1944,35 @@ The harbor glows with dawn. Travelers step off boats, exhausted but relieved. Ra
 
 **Prompt:**  
 
-RASHA: “Every arrival is a small miracle.”
+RASHA: â€œEvery arrival is a small miracle.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “Welcome back.”
+**(T) Choice:** â€œWelcome back.â€
 
-**RASHA:** “Feels good to say that.”
+**RASHA:** â€œFeels good to say that.â€
 
-**(O) Choice:** “How was the crossing?”
+**(O) Choice:** â€œHow was the crossing?â€
 
-**RASHA:** “Rough. But they made it.”
+**RASHA:** â€œRough. But they made it.â€
 
-**(N) Choice:** “Looks like a rough journey.”
+**(N) Choice:** â€œLooks like a rough journey.â€
 
-**RASHA:** “Journeys worth taking usually are.”
+**RASHA:** â€œJourneys worth taking usually are.â€
 
-**(E) Choice:** “I’m happy you made it.”
+**(E) Choice:** â€œIâ€™m happy you made it.â€
 
-**RASHA:** “Me too.”
+**RASHA:** â€œMe too.â€
 
 ### **Shared Beat:**
 
-A traveler embraces a loved one. Rasha nods, eyes soft. The glyph rises from the joy of homecoming—warm, steady.
+A traveler embraces a loved one. Rasha nods, eyes soft. The glyph rises from the joy of homecomingâ€”warm, steady.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Arrival Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Arrival Obtained.â€
 
-# **GLYPH 49 — Crafted Wonder (Lira the Boatmaker)**
+# **GLYPH 49 â€” Crafted Wonder (Lira the Boatmaker)**
 
-**Data Hook:** scene\_id: glyph\_49\_data | location: Boatwright’s Workshop | npc: Lira
+**Data Hook:** scene\_id: glyph\_49\_data | location: Boatwrightâ€™s Workshop | npc: Lira
 
 **Setting Description:**  
 
@@ -1980,33 +1980,33 @@ Sawdust fills the air. A new boat rests on the slipway, gleaming with fresh varn
 
 **Prompt:**  
 
-LIRA: “She’s ready. Want to see her first touch of water?”
+LIRA: â€œSheâ€™s ready. Want to see her first touch of water?â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “She’s beautiful.”
+**(T) Choice:** â€œSheâ€™s beautiful.â€
 
-**LIRA:** “Beauty is just effort made visible.”
+**LIRA:** â€œBeauty is just effort made visible.â€
 
-**(O) Choice:** “What’s the wood made of?”
+**(O) Choice:** â€œWhatâ€™s the wood made of?â€
 
-**LIRA:** “Driftwood. Broken things reborn.”
+**LIRA:** â€œDriftwood. Broken things reborn.â€
 
-**(N) Choice:** “Will it hold?”
+**(N) Choice:** â€œWill it hold?â€
 
-**LIRA:** “Only one way to know.”
+**LIRA:** â€œOnly one way to know.â€
 
-**(E) Choice:** “You poured a lot of heart into this.”
+**(E) Choice:** â€œYou poured a lot of heart into this.â€
 
-**LIRA:** “Heart is the only tool that never breaks.”
+**LIRA:** â€œHeart is the only tool that never breaks.â€
 
 ### **Shared Beat:**
 
-The boat slides into the water. It floats, steady and proud. Lira exhales, relieved. The glyph rises from the maiden voyage—joy crafted by hand.
+The boat slides into the water. It floats, steady and proud. Lira exhales, relieved. The glyph rises from the maiden voyageâ€”joy crafted by hand.
 
-**SYSTEM TRIGGER:** Notification UI → “Glyph of Crafted Wonder Obtained.”
+**SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Crafted Wonder Obtained.â€
 
-# **GLYPH 50 — Trade Celebration (Juria & Korinth)**
+# **GLYPH 50 â€” Trade Celebration (Juria & Korinth)**
 
 **Data Hook:** scene\_id: glyph\_50\_data | location: Bustling Harbor Market | npc: Juria & Korinth
 
@@ -2016,73 +2016,73 @@ Crates overflow with goods. Traders haggle, laugh, and clap each other on the ba
 
 **Prompt:**  
 
-JURIA: “A good trade keeps the world turning.”
+JURIA: â€œA good trade keeps the world turning.â€
 
-KORINTH: “And keeps us fed.”
+KORINTH: â€œAnd keeps us fed.â€
 
 ### **Tone Matrix**
 
-**(T) Choice:** “A good trade, it seems.”
+**(T) Choice:** â€œA good trade, it seems.â€
 
-**JURIA:** “One of our best.”
+**JURIA:** â€œOne of our best.â€
 
-**(O) Choice:** “Is this the best you can do?”
+**(O) Choice:** â€œIs this the best you can do?â€
 
-**KORINTH:** “Challenge accepted.”
+**KORINTH:** â€œChallenge accepted.â€
 
-**(N) Choice:** “I’m just watching.”
+**(N) Choice:** â€œIâ€™m just watching.â€
 
-**JURIA:** “Watching is how you learn.”
+**JURIA:** â€œWatching is how you learn.â€
 
-**(E) Choice:** “It’s nice to see some profit.”
+**(E) Choice:** â€œItâ€™s nice to see some profit.â€
 
-**KORINTH:** “Profit is joy with numbers.”
+**KORINTH:** â€œProfit is joy with numbers.â€
 
 ### **Shared Beat:**
 
-They laugh, sealing the deal. The market brightens with shared success. The glyph rises from the joy of exchange—lively, communal.
+They laugh, sealing the deal. The market brightens with shared success. The glyph rises from the joy of exchangeâ€”lively, communal.
 
-**SYSTEM TRIGGER: Notification UI → “Glyph of Trade Celebration Obtained.”** 
+**SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Trade Celebration Obtained.â€** 
 
 ### **Cluster 06: The Covenant Pulse (Glyphs 51-60)**
 
-* # **GLYPH 51 — Covenant Flame (High Seer Elenya)**
+* # **GLYPH 51 â€” Covenant Flame (High Seer Elenya)**
 
 * **Data Hook:** scene\_id: glyph\_51\_data | location: Shared Archive Building | npc: High Seer Elenya
 
 * **Setting Description:**  
 
-* The Archive’s central chamber flickers with the Covenant Flame. Shadows stretch across preservation vaults. Elenya stands near the flame, her hand hovering close but never touching.
+* The Archiveâ€™s central chamber flickers with the Covenant Flame. Shadows stretch across preservation vaults. Elenya stands near the flame, her hand hovering close but never touching.
 
 * **Prompt:**  
 
-* ELENYA: “This fire keeps our memory alive. Treat it like breath.”
+* ELENYA: â€œThis fire keeps our memory alive. Treat it like breath.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Let’s keep the fire lit.”
+* **(T) Choice:** â€œLetâ€™s keep the fire lit.â€
 
-* **ELENYA:** “Yes. Let it steady us.”
+* **ELENYA:** â€œYes. Let it steady us.â€
 
-* **(O) Choice:** “Is this for show or function?”
+* **(O) Choice:** â€œIs this for show or function?â€
 
-* **ELENYA:** “Function. Ritual is just function with reverence.”
+* **ELENYA:** â€œFunction. Ritual is just function with reverence.â€
 
-* **(N) Choice:** “It’s just a fire. It won’t save the records.”
+* **(N) Choice:** â€œItâ€™s just a fire. It wonâ€™t save the records.â€
 
-* **ELENYA:** “Then help me save what it can.”
+* **ELENYA:** â€œThen help me save what it can.â€
 
-* **(E) Choice:** “This feels like a heartbeat for the city.”
+* **(E) Choice:** â€œThis feels like a heartbeat for the city.â€
 
-* **ELENYA:** “Then you understand.”
+* **ELENYA:** â€œThen you understand.â€
 
 * ### **Shared Beat:**
 
-* The flame steadies, its glow warming the vaults. Elenya nods as the chamber feels less like a tomb and more like a living space. The glyph rises from the fire—binding preservation to ritual.
+* The flame steadies, its glow warming the vaults. Elenya nods as the chamber feels less like a tomb and more like a living space. The glyph rises from the fireâ€”binding preservation to ritual.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Covenant Flame Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Covenant Flame Obtained.â€
 
-* # **GLYPH 52 — Shared Survival (High Seer Elenya)**
+* # **GLYPH 52 â€” Shared Survival (High Seer Elenya)**
 
 * **Data Hook:** scene\_id: glyph\_52\_data | location: Alpine Shelter | npc: High Seer Elenya
 
@@ -2092,33 +2092,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* ELENYA: “Survival is shared. No one lasts alone.”
+* ELENYA: â€œSurvival is shared. No one lasts alone.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I’ll take the first watch.”
+* **(T) Choice:** â€œIâ€™ll take the first watch.â€
 
-* **ELENYA:** “Good. We rely on each other.”
+* **ELENYA:** â€œGood. We rely on each other.â€
 
-* **(O) Choice:** “We’re running low on fuel.”
+* **(O) Choice:** â€œWeâ€™re running low on fuel.â€
 
-* **ELENYA:** “I’ll ration what remains.”
+* **ELENYA:** â€œIâ€™ll ration what remains.â€
 
-* **(N) Choice:** “This shelter won’t last the night.”
+* **(N) Choice:** â€œThis shelter wonâ€™t last the night.â€
 
-* **ELENYA:** “Then we hold it together.”
+* **ELENYA:** â€œThen we hold it together.â€
 
-* **(E) Choice:** “Are you holding up okay?”
+* **(E) Choice:** â€œAre you holding up okay?â€
 
-* **ELENYA:** “Enough to keep them warm.”
+* **ELENYA:** â€œEnough to keep them warm.â€
 
 * ### **Shared Beat:**
 
-* You settle into the circle, sharing warmth and vigilance. The fire brightens as the group leans into each other’s presence. The glyph emerges—survival as a communal bond.
+* You settle into the circle, sharing warmth and vigilance. The fire brightens as the group leans into each otherâ€™s presence. The glyph emergesâ€”survival as a communal bond.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Shared Survival Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Shared Survival Obtained.â€
 
-* # **GLYPH 53 — Shared Burden (Tovren the Cartwright)**
+* # **GLYPH 53 â€” Shared Burden (Tovren the Cartwright)**
 
 * **Data Hook:** scene\_id: glyph\_53\_data | location: Merchant Caravan | npc: Tovren
 
@@ -2128,33 +2128,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* TOVREN: “This cart won’t move unless we move it together.”
+* TOVREN: â€œThis cart wonâ€™t move unless we move it together.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “On three\! Push\!”
+* **(T) Choice:** â€œOn three\! Push\!â€
 
-* **TOVREN:** “Three\!”
+* **TOVREN:** â€œThree\!â€
 
-* **(O) Choice:** “The axle is bent.”
+* **(O) Choice:** â€œThe axle is bent.â€
 
-* **TOVREN:** “I know. But we can still shift it.”
+* **TOVREN:** â€œI know. But we can still shift it.â€
 
-* **(N) Choice:** “We’re going to lose the cargo.”
+* **(N) Choice:** â€œWeâ€™re going to lose the cargo.â€
 
-* **TOVREN:** “Not if we fight for it.”
+* **TOVREN:** â€œNot if we fight for it.â€
 
-* **(E) Choice:** “I’ve got the weight, Tovren.”
+* **(E) Choice:** â€œIâ€™ve got the weight, Tovren.â€
 
-* **TOVREN:** “Thank you.”
+* **TOVREN:** â€œThank you.â€
 
 * ### **Shared Beat:**
 
-* You push together. The cart lurches free, clearing the mud. Tovren exhales, relieved. The glyph rises from the strain—burden shared, survival earned.
+* You push together. The cart lurches free, clearing the mud. Tovren exhales, relieved. The glyph rises from the strainâ€”burden shared, survival earned.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Shared Burden Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Shared Burden Obtained.â€
 
-* # **GLYPH 54 — Binding Cloth (Mariel the Weaver)**
+* # **GLYPH 54 â€” Binding Cloth (Mariel the Weaver)**
 
 * **Data Hook:** scene\_id: glyph\_54\_data | location: Shrine Alcove | npc: Mariel
 
@@ -2164,33 +2164,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* MARIEL: “Every thread binds a life. Add yours.”
+* MARIEL: â€œEvery thread binds a life. Add yours.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I’ll start the stitch.”
+* **(T) Choice:** â€œIâ€™ll start the stitch.â€
 
-* **MARIEL:** “Steady. Let the thread guide you.”
+* **MARIEL:** â€œSteady. Let the thread guide you.â€
 
-* **(O) Choice:** “The weave is complex.”
+* **(O) Choice:** â€œThe weave is complex.â€
 
-* **MARIEL:** “Complexity is how stories stay strong.”
+* **MARIEL:** â€œComplexity is how stories stay strong.â€
 
-* **(N) Choice:** “Why bother? It’s just fabric.”
+* **(N) Choice:** â€œWhy bother? Itâ€™s just fabric.â€
 
-* **MARIEL:** “Fabric is memory you can touch.”
+* **MARIEL:** â€œFabric is memory you can touch.â€
 
-* **(E) Choice:** “It feels like a story.”
+* **(E) Choice:** â€œIt feels like a story.â€
 
-* **MARIEL:** “It is.”
+* **MARIEL:** â€œIt is.â€
 
 * ### **Shared Beat:**
 
-* The cloth grows beneath your hands. Threads bind together, forming a shroud of shared lives. The glyph emerges—binding, protective.
+* The cloth grows beneath your hands. Threads bind together, forming a shroud of shared lives. The glyph emergesâ€”binding, protective.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Binding Cloth Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Binding Cloth Obtained.â€
 
-* # **GLYPH 55 — Weary Justice (Captain Veynar)**
+* # **GLYPH 55 â€” Weary Justice (Captain Veynar)**
 
 * **Data Hook:** scene\_id: glyph\_55\_data | location: Market Concourse | npc: Captain Veynar
 
@@ -2200,33 +2200,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* VEYNAR: “Order doesn’t rest. Neither do I.”
+* VEYNAR: â€œOrder doesnâ€™t rest. Neither do I.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “What’s the situation?”
+* **(T) Choice:** â€œWhatâ€™s the situation?â€
 
-* **VEYNAR:** “Crowd’s on edge. I’m holding the line.”
+* **VEYNAR:** â€œCrowdâ€™s on edge. Iâ€™m holding the line.â€
 
-* **(O) Choice:** “You look exhausted, Captain.”
+* **(O) Choice:** â€œYou look exhausted, Captain.â€
 
-* **VEYNAR:** “Exhaustion is part of the job.”
+* **VEYNAR:** â€œExhaustion is part of the job.â€
 
-* **(N) Choice:** “This order is failing.”
+* **(N) Choice:** â€œThis order is failing.â€
 
-* **VEYNAR:** “Not while I stand.”
+* **VEYNAR:** â€œNot while I stand.â€
 
-* **(E) Choice:** “I’m here to help, if you need.”
+* **(E) Choice:** â€œIâ€™m here to help, if you need.â€
 
-* **VEYNAR:** “Then stand with me.”
+* **VEYNAR:** â€œThen stand with me.â€
 
 * ### **Shared Beat:**
 
-* You take position beside him. The crowd settles, sensing the reinforced boundary. The glyph rises—justice worn thin but still standing.
+* You take position beside him. The crowd settles, sensing the reinforced boundary. The glyph risesâ€”justice worn thin but still standing.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Weary Justice Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Weary Justice Obtained.â€
 
-* # **GLYPH 56 — Thieves’ Honor (Kaelen)**
+* # **GLYPH 56 â€” Thievesâ€™ Honor (Kaelen)**
 
 * **Data Hook:** scene\_id: glyph\_56\_data | location: Swamp Clearing | npc: Kaelen
 
@@ -2236,33 +2236,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* KAELEN: “Honor’s rare out here. Don’t waste mine.”
+* KAELEN: â€œHonorâ€™s rare out here. Donâ€™t waste mine.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I’m not here for your gear.”
+* **(T) Choice:** â€œIâ€™m not here for your gear.â€
 
-* **KAELEN:** “Good. I hate thieves who steal from thieves.”
+* **KAELEN:** â€œGood. I hate thieves who steal from thieves.â€
 
-* **(O) Choice:** “Who do you serve, Kaelen?”
+* **(O) Choice:** â€œWho do you serve, Kaelen?â€
 
-* **KAELEN:** “Myself. And sometimes Drossel.”
+* **KAELEN:** â€œMyself. And sometimes Drossel.â€
 
-* **(N) Choice:** “Honor doesn’t exist in the swamp.”
+* **(N) Choice:** â€œHonor doesnâ€™t exist in the swamp.â€
 
-* **KAELEN:** “Then you haven’t looked hard enough.”
+* **KAELEN:** â€œThen you havenâ€™t looked hard enough.â€
 
-* **(E) Choice:** “I’m here to offer help.”
+* **(E) Choice:** â€œIâ€™m here to offer help.â€
 
-* **KAELEN:** “Help is dangerous.”
+* **KAELEN:** â€œHelp is dangerous.â€
 
 * ### **Shared Beat:**
 
-* Kaelen speaks of Drossel—loyalty tangled, painful, real. The glyph rises from the confession—honor as an anchor, not a debt.
+* Kaelen speaks of Drosselâ€”loyalty tangled, painful, real. The glyph rises from the confessionâ€”honor as an anchor, not a debt.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Thieves’ Honor Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Thievesâ€™ Honor Obtained.â€
 
-* # **GLYPH 57 — Whispered Pact (Korrin the Gossip)**
+* # **GLYPH 57 â€” Whispered Pact (Korrin the Gossip)**
 
 * **Data Hook:** scene\_id: glyph\_57\_data | location: Market Alcove | npc: Korrin
 
@@ -2272,33 +2272,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* KORRIN: “This stays between us. Understand?”
+* KORRIN: â€œThis stays between us. Understand?â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Tell me who said it.”
+* **(T) Choice:** â€œTell me who said it.â€
 
-* **KORRIN:** “Fine. But quietly.”
+* **KORRIN:** â€œFine. But quietly.â€
 
-* **(O) Choice:** “Is this confirmed?”
+* **(O) Choice:** â€œIs this confirmed?â€
 
-* **KORRIN:** “My ear never lies.”
+* **KORRIN:** â€œMy ear never lies.â€
 
-* **(N) Choice:** “I don’t care about rumors.”
+* **(N) Choice:** â€œI donâ€™t care about rumors.â€
 
-* **KORRIN:** “Then you’re wasting my breath.”
+* **KORRIN:** â€œThen youâ€™re wasting my breath.â€
 
-* **(E) Choice:** “I won’t repeat this.”
+* **(E) Choice:** â€œI wonâ€™t repeat this.â€
 
-* **KORRIN:** “Good. I trust that.”
+* **KORRIN:** â€œGood. I trust that.â€
 
 * ### **Shared Beat:**
 
-* You choose silence. Korrin nods, sealing the pact. The glyph rises—trust formed through restraint.
+* You choose silence. Korrin nods, sealing the pact. The glyph risesâ€”trust formed through restraint.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Whispered Pact Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Whispered Pact Obtained.â€
 
-* # **GLYPH 58 — Broken Promise (Korrin the Gossip)**
+* # **GLYPH 58 â€” Broken Promise (Korrin the Gossip)**
 
 * **Data Hook:** scene\_id: glyph\_58\_data | location: Merchant Alcove | npc: Korrin
 
@@ -2308,33 +2308,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* KORRIN: “I shouldn’t have trusted them.”
+* KORRIN: â€œI shouldnâ€™t have trusted them.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “You need to fix this.”
+* **(T) Choice:** â€œYou need to fix this.â€
 
-* **KORRIN:** “I can’t.”
+* **KORRIN:** â€œI canâ€™t.â€
 
-* **(O) Choice:** “What did you trade?”
+* **(O) Choice:** â€œWhat did you trade?â€
 
-* **KORRIN:** “Something I shouldn’t have.”
+* **KORRIN:** â€œSomething I shouldnâ€™t have.â€
 
-* **(N) Choice:** “Promises are cheap anyway.”
+* **(N) Choice:** â€œPromises are cheap anyway.â€
 
-* **KORRIN:** “Not this one.”
+* **KORRIN:** â€œNot this one.â€
 
-* **(E) Choice:** “I’m sorry you were betrayed.”
+* **(E) Choice:** â€œIâ€™m sorry you were betrayed.â€
 
-* **KORRIN:** “I… didn’t expect you to say that.”
+* **KORRIN:** â€œIâ€¦ didnâ€™t expect you to say that.â€
 
 * ### **Shared Beat:**
 
-* The silence thickens. Korrin’s grief settles into the alcove. The glyph rises—fragile, cold, shaped by broken trust.
+* The silence thickens. Korrinâ€™s grief settles into the alcove. The glyph risesâ€”fragile, cold, shaped by broken trust.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Broken Promise Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Broken Promise Obtained.â€
 
-* # **GLYPH 59 — Serpent’s Tongue (Korrin the Gossip)**
+* # **GLYPH 59 â€” Serpentâ€™s Tongue (Korrin the Gossip)**
 
 * **Data Hook:** scene\_id: glyph\_59\_data | location: Market Square | npc: Korrin
 
@@ -2344,33 +2344,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* KORRIN: “Words can build or break. Watch closely.”
+* KORRIN: â€œWords can build or break. Watch closely.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “That’s a lie, Korrin.”
+* **(T) Choice:** â€œThatâ€™s a lie, Korrin.â€
 
-* **KORRIN:** “Caught me.”
+* **KORRIN:** â€œCaught me.â€
 
-* **(O) Choice:** “What’s the angle?”
+* **(O) Choice:** â€œWhatâ€™s the angle?â€
 
-* **KORRIN:** “Always an angle.”
+* **KORRIN:** â€œAlways an angle.â€
 
-* **(N) Choice:** “Keep talking.”
+* **(N) Choice:** â€œKeep talking.â€
 
-* **KORRIN:** “Gladly.”
+* **KORRIN:** â€œGladly.â€
 
-* **(E) Choice:** “Stop hurting them.”
+* **(E) Choice:** â€œStop hurting them.â€
 
-* **KORRIN:** “They’ll live.”
+* **KORRIN:** â€œTheyâ€™ll live.â€
 
 * ### **Shared Beat:**
 
-* His words coil through the crowd. You discern the poison beneath the charm. The glyph rises—speech as danger, trust as discernment.
+* His words coil through the crowd. You discern the poison beneath the charm. The glyph risesâ€”speech as danger, trust as discernment.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Serpent’s Tongue Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Serpentâ€™s Tongue Obtained.â€
 
-* # **GLYPH 60 — Mutual Passage (Rasha)**
+* # **GLYPH 60 â€” Mutual Passage (Rasha)**
 
 * **Data Hook:** scene\_id: glyph\_60\_data | location: Harbor Dock | npc: Rasha
 
@@ -2380,109 +2380,109 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* RASHA: “Watch. This is trust without speech.”
+* RASHA: â€œWatch. This is trust without speech.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I can help with the ropes.”
+* **(T) Choice:** â€œI can help with the ropes.â€
 
-* **RASHA:** “Good. Follow my lead.”
+* **RASHA:** â€œGood. Follow my lead.â€
 
-* **(O) Choice:** “How long have you two worked together?”
+* **(O) Choice:** â€œHow long have you two worked together?â€
 
-* **RASHA:** “Long enough to stop talking.”
+* **RASHA:** â€œLong enough to stop talking.â€
 
-* **(N) Choice:** “It seems efficient.”
+* **(N) Choice:** â€œIt seems efficient.â€
 
-* **RASHA:** “Efficiency is earned.”
+* **RASHA:** â€œEfficiency is earned.â€
 
-* **(E) Choice:** “There’s a lot of respect here.”
+* **(E) Choice:** â€œThereâ€™s a lot of respect here.â€
 
-* **RASHA:** “Respect keeps boats afloat.”
+* **RASHA:** â€œRespect keeps boats afloat.â€
 
 * ### **Shared Beat:**
 
-* You join their rhythm. The boat launches smoothly, carried by shared labor. The glyph rises—interdependence forged through action.
+* You join their rhythm. The boat launches smoothly, carried by shared labor. The glyph risesâ€”interdependence forged through action.
 
-* **SYSTEM TRIGGER: Notification UI → “Glyph of Mutual Passage Obtained.”** 
+* **SYSTEM TRIGGER: Notification UI â†’ â€œGlyph of Mutual Passage Obtained.â€** 
 
 \-----
 
 ### **Cluster 07: The Encrypted Void (Glyphs 61-70)**
 
-* # **GLYPH 61 — Preemptive Severance (Coren the Mediator)**
+* # **GLYPH 61 â€” Preemptive Severance (Cal the Mediator)**
 
-* **Data Hook:** scene\_id: glyph\_61\_data | location: Mountain Fortress | npc: Coren
+* **Data Hook:** scene\_id: glyph\_61\_data | location: Mountain Fortress | npc: Cal
 
 * **Setting Description:**  
 
-* Cold air cuts through the fortress encampment. Walls rise like jagged teeth. Coren stands near a barricade, her posture rigid, her voice sharper than usual.
+* Cold air cuts through the fortress encampment. Walls rise like jagged teeth. Cal stands near a barricade, her posture rigid, her voice sharper than usual.
 
 * **Prompt:**  
 
-* COREN: “Sometimes survival means cutting ties before they cut you.”
+* Cal: â€œSometimes survival means cutting ties before they cut you.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Is defense really just destruction?”
+* **(T) Choice:** â€œIs defense really just destruction?â€
 
-* **COREN:** “Fear makes destruction look like safety.”
+* **Cal:** â€œFear makes destruction look like safety.â€
 
-* **(O) Choice:** “Who are you trying to keep out?”
+* **(O) Choice:** â€œWho are you trying to keep out?â€
 
-* **COREN:** “Anyone who might break what’s left.”
+* **Cal:** â€œAnyone who might break whatâ€™s left.â€
 
-* **(N) Choice:** “This logic is broken.”
+* **(N) Choice:** â€œThis logic is broken.â€
 
-* **COREN:** “Broken logic is still logic when you’re afraid.”
+* **Cal:** â€œBroken logic is still logic when youâ€™re afraid.â€
 
-* **(E) Choice:** “It must be lonely, cutting everything away.”
+* **(E) Choice:** â€œIt must be lonely, cutting everything away.â€
 
-* **COREN:** “Lonely… and quiet.”
+* **Cal:** â€œLonelyâ€¦ and quiet.â€
 
 * ### **Shared Beat:**
 
-* Coren’s gaze softens for a moment. The fortress wind howls, revealing the false choices fear creates. The glyph manifests—cold, sharp, severed.
+* Calâ€™s gaze softens for a moment. The fortress wind howls, revealing the false choices fear creates. The glyph manifestsâ€”cold, sharp, severed.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Preemptive Severance Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Preemptive Severance Obtained.â€
 
-* # **GLYPH 62 — Fractured Memory (Archivist Malrik)**
+* # **GLYPH 62 â€” Fractured Memory (Archivist Malrik)**
 
 * **Data Hook:** scene\_id: glyph\_62\_data | location: Archive Chamber | npc: Malrik
 
 * **Setting Description:**  
 
-* Corrupted data‑glass flickers with millions of disjointed moments. Malrik stands frozen, overwhelmed by the collapse of coherence.
+* Corrupted dataâ€‘glass flickers with millions of disjointed moments. Malrik stands frozen, overwhelmed by the collapse of coherence.
 
 * **Prompt:**  
 
-* MALRIK: “The archive is trying to remember… but it can’t.”
+* MALRIK: â€œThe archive is trying to rememberâ€¦ but it canâ€™t.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Can we repair the archive?”
+* **(T) Choice:** â€œCan we repair the archive?â€
 
-* **MALRIK:** “Repair? Maybe. Restore? Never.”
+* **MALRIK:** â€œRepair? Maybe. Restore? Never.â€
 
-* **(O) Choice:** “Whose memories are these?”
+* **(O) Choice:** â€œWhose memories are these?â€
 
-* **MALRIK:** “Everyone’s. No one’s. They’re all mixed.”
+* **MALRIK:** â€œEveryoneâ€™s. No oneâ€™s. Theyâ€™re all mixed.â€
 
-* **(N) Choice:** “Let them fade.”
+* **(N) Choice:** â€œLet them fade.â€
 
-* **MALRIK:** “Fading is another kind of death.”
+* **MALRIK:** â€œFading is another kind of death.â€
 
-* **(E) Choice:** “Even fragments are worth holding.”
+* **(E) Choice:** â€œEven fragments are worth holding.â€
 
-* **MALRIK:** “Fragments are all we have.”
+* **MALRIK:** â€œFragments are all we have.â€
 
 * ### **Shared Beat:**
 
-* The glass pulses, scattering images like broken stars. Malrik steadies himself. The glyph rises—fractured, flickering, refusing to disappear.
+* The glass pulses, scattering images like broken stars. Malrik steadies himself. The glyph risesâ€”fractured, flickering, refusing to disappear.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Fractured Memory Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Fractured Memory Obtained.â€
 
-* # **GLYPH 63 — Mirage Echo (Archivist Malrik)**
+* # **GLYPH 63 â€” Mirage Echo (Archivist Malrik)**
 
 * **Data Hook:** scene\_id: glyph\_63\_data | location: Desert Illusion Trial | npc: Malrik
 
@@ -2492,33 +2492,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* MALRIK: “The desert shows what we want… not what is.”
+* MALRIK: â€œThe desert shows what we wantâ€¦ not what is.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “None of this is real.”
+* **(T) Choice:** â€œNone of this is real.â€
 
-* **MALRIK:** “Real enough to hurt.”
+* **MALRIK:** â€œReal enough to hurt.â€
 
-* **(O) Choice:** “Why does the tech keep broadcasting?”
+* **(O) Choice:** â€œWhy does the tech keep broadcasting?â€
 
-* **MALRIK:** “Because ghosts cling to signal.”
+* **MALRIK:** â€œBecause ghosts cling to signal.â€
 
-* **(N) Choice:** “We’re chasing ghosts.”
+* **(N) Choice:** â€œWeâ€™re chasing ghosts.â€
 
-* **MALRIK:** “Ghosts chase us too.”
+* **MALRIK:** â€œGhosts chase us too.â€
 
-* **(E) Choice:** “It hurts, seeing what isn’t there.”
+* **(E) Choice:** â€œIt hurts, seeing what isnâ€™t there.â€
 
-* **MALRIK:** “Illusions always hurt more than truth.”
+* **MALRIK:** â€œIllusions always hurt more than truth.â€
 
 * ### **Shared Beat:**
 
-* You dismiss a mirage. The heat shifts, revealing emptiness beneath longing. The glyph forms—an echo of what never was.
+* You dismiss a mirage. The heat shifts, revealing emptiness beneath longing. The glyph formsâ€”an echo of what never was.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Mirage Echo Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Mirage Echo Obtained.â€
 
-* # **GLYPH 64 — Shattered Corridor (Dalen the Rusted Guide)**
+* # **GLYPH 64 â€” Shattered Corridor (Dalen the Rusted Guide)**
 
 * **Data Hook:** scene\_id: glyph\_64\_data | location: Unstable Ruins | npc: Dalen
 
@@ -2528,33 +2528,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* DALEN: “Step where I step. Collapse remembers me.”
+* DALEN: â€œStep where I step. Collapse remembers me.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Is this path safe?”
+* **(T) Choice:** â€œIs this path safe?â€
 
-* **DALEN:** “Safe enough if you trust me.”
+* **DALEN:** â€œSafe enough if you trust me.â€
 
-* **(O) Choice:** “You’ve walked this before?”
+* **(O) Choice:** â€œYouâ€™ve walked this before?â€
 
-* **DALEN:** “Walked. Crawled. Survived.”
+* **DALEN:** â€œWalked. Crawled. Survived.â€
 
-* **(N) Choice:** “This is reckless.”
+* **(N) Choice:** â€œThis is reckless.â€
 
-* **DALEN:** “Reckless is how we learn.”
+* **DALEN:** â€œReckless is how we learn.â€
 
-* **(E) Choice:** “I trust your lead.”
+* **(E) Choice:** â€œI trust your lead.â€
 
-* **DALEN:** “Then keep close.”
+* **DALEN:** â€œThen keep close.â€
 
 * ### **Shared Beat:**
 
-* A section of corridor collapses behind you. Dalen doesn’t flinch. The glyph rises—fracture embodied in scars and survival.
+* A section of corridor collapses behind you. Dalen doesnâ€™t flinch. The glyph risesâ€”fracture embodied in scars and survival.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Shattered Corridor Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Shattered Corridor Obtained.â€
 
-* # **GLYPH 65 — Fractured Oath (Captain Veynar)**
+* # **GLYPH 65 â€” Fractured Oath (Captain Veynar)**
 
 * **Data Hook:** scene\_id: glyph\_65\_data | location: Guard Barracks | npc: Veynar
 
@@ -2564,33 +2564,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* VEYNAR: “An oath means nothing if no one remains to uphold it.”
+* VEYNAR: â€œAn oath means nothing if no one remains to uphold it.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Will they return?”
+* **(T) Choice:** â€œWill they return?â€
 
-* **VEYNAR:** “Not to me.”
+* **VEYNAR:** â€œNot to me.â€
 
-* **(O) Choice:** “What broke your oath?”
+* **(O) Choice:** â€œWhat broke your oath?â€
 
-* **VEYNAR:** “Silence. And fear.”
+* **VEYNAR:** â€œSilence. And fear.â€
 
-* **(N) Choice:** “Your soldiers have left you.”
+* **(N) Choice:** â€œYour soldiers have left you.â€
 
-* **VEYNAR:** “I know.”
+* **VEYNAR:** â€œI know.â€
 
-* **(E) Choice:** “You’re still standing, Captain.”
+* **(E) Choice:** â€œYouâ€™re still standing, Captain.â€
 
-* **VEYNAR:** “Someone has to.”
+* **VEYNAR:** â€œSomeone has to.â€
 
 * ### **Shared Beat:**
 
-* The banners shift in a faint breeze. Veynar’s jaw tightens. The glyph rises—fracture in vows, fracture in community.
+* The banners shift in a faint breeze. Veynarâ€™s jaw tightens. The glyph risesâ€”fracture in vows, fracture in community.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Fractured Oath Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Fractured Oath Obtained.â€
 
-* # **GLYPH 66 — Stolen Memory (Kaelen the Suspected Thief)**
+* # **GLYPH 66 â€” Stolen Memory (Kaelen the Suspected Thief)**
 
 * **Data Hook:** scene\_id: glyph\_66\_data | location: Market Ruins | npc: Kaelen
 
@@ -2600,33 +2600,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* KAELEN: “Stories vanish here. Sometimes I help them vanish.”
+* KAELEN: â€œStories vanish here. Sometimes I help them vanish.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “You’re stealing stories now?”
+* **(T) Choice:** â€œYouâ€™re stealing stories now?â€
 
-* **KAELEN:** “Stories weigh too much.”
+* **KAELEN:** â€œStories weigh too much.â€
 
-* **(O) Choice:** “How do you do it?”
+* **(O) Choice:** â€œHow do you do it?â€
 
-* **KAELEN:** “I listen. Then I erase.”
+* **KAELEN:** â€œI listen. Then I erase.â€
 
-* **(N) Choice:** “This is poison.”
+* **(N) Choice:** â€œThis is poison.â€
 
-* **KAELEN:** “Everything here is.”
+* **KAELEN:** â€œEverything here is.â€
 
-* **(E) Choice:** “They don’t know who they are anymore.”
+* **(E) Choice:** â€œThey donâ€™t know who they are anymore.â€
 
-* **KAELEN:** “Maybe that’s mercy.”
+* **KAELEN:** â€œMaybe thatâ€™s mercy.â€
 
 * ### **Shared Beat:**
 
-* A name slips from your mind for a moment—gone, then back. Kaelen watches. The glyph rises—memory stolen, identity fractured.
+* A name slips from your mind for a momentâ€”gone, then back. Kaelen watches. The glyph risesâ€”memory stolen, identity fractured.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Stolen Memory Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Stolen Memory Obtained.â€
 
-* # **GLYPH 67 — Hollow Pact (Drossel the Cloaked)**
+* # **GLYPH 67 â€” Hollow Pact (Drossel the Cloaked)**
 
 * **Data Hook:** scene\_id: glyph\_67\_data | location: Market Rumor Circles | npc: Drossel
 
@@ -2636,35 +2636,35 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* DROSSEL: “A pact is only as real as the trust behind it.”
+* DROSSEL: â€œA pact is only as real as the trust behind it.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I don’t need your pacts.”
+* **(T) Choice:** â€œI donâ€™t need your pacts.â€
 
-* **DROSSEL:** “Everyone needs something.”
+* **DROSSEL:** â€œEveryone needs something.â€
 
-* **(O) Choice:** “What’s the price?”
+* **(O) Choice:** â€œWhatâ€™s the price?â€
 
-* **DROSSEL:** “Cheaper than truth.”
+* **DROSSEL:** â€œCheaper than truth.â€
 
-* **(N) Choice:** “You’re hollow.”
+* **(N) Choice:** â€œYouâ€™re hollow.â€
 
-* **DROSSEL:** “Hollow things echo best.”
+* **DROSSEL:** â€œHollow things echo best.â€
 
-* **(E) Choice:** “I wish you were sincere.”
+* **(E) Choice:** â€œI wish you were sincere.â€
 
-* **DROSSEL:** “Sincerity is expensive.”
+* **DROSSEL:** â€œSincerity is expensive.â€
 
 * ### **Shared Beat:**
 
-* His promise dissolves the moment it’s spoken. The glyph rises—empty, echoing, hollow.
+* His promise dissolves the moment itâ€™s spoken. The glyph risesâ€”empty, echoing, hollow.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Hollow Pact Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Hollow Pact Obtained.â€
 
-* # **GLYPH 68 — Cloaked Fracture (Drossel the Cloaked)**
+* # **GLYPH 68 â€” Cloaked Fracture (Drossel the Cloaked)**
 
-* **Data Hook:** scene\_id: glyph\_68\_data | location: Thieves’ Lair | npc: Drossel
+* **Data Hook:** scene\_id: glyph\_68\_data | location: Thievesâ€™ Lair | npc: Drossel
 
 * **Setting Description:**  
 
@@ -2672,33 +2672,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* DROSSEL: “Truth bends. So do corridors.”
+* DROSSEL: â€œTruth bends. So do corridors.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “What are you controlling?”
+* **(T) Choice:** â€œWhat are you controlling?â€
 
-* **DROSSEL:** “Only what you let me.”
+* **DROSSEL:** â€œOnly what you let me.â€
 
-* **(O) Choice:** “This feels like a maze.”
+* **(O) Choice:** â€œThis feels like a maze.â€
 
-* **DROSSEL:** “Mazes reveal character.”
+* **DROSSEL:** â€œMazes reveal character.â€
 
-* **(N) Choice:** “I want out.”
+* **(N) Choice:** â€œI want out.â€
 
-* **DROSSEL:** “Then stop following me.”
+* **DROSSEL:** â€œThen stop following me.â€
 
-* **(E) Choice:** “I can sense the deceit.”
+* **(E) Choice:** â€œI can sense the deceit.â€
 
-* **DROSSEL:** “Good. You’re learning.”
+* **DROSSEL:** â€œGood. Youâ€™re learning.â€
 
 * ### **Shared Beat:**
 
-* The corridor fractures, splitting into mirrored paths. Drossel vanishes. The glyph rises—fracture orchestrated by deceit.
+* The corridor fractures, splitting into mirrored paths. Drossel vanishes. The glyph risesâ€”fracture orchestrated by deceit.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Cloaked Fracture Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Cloaked Fracture Obtained.â€
 
-* # **GLYPH 69 — Fractured Rumor (Korrin the Gossip)**
+* # **GLYPH 69 â€” Fractured Rumor (Korrin the Gossip)**
 
 * **Data Hook:** scene\_id: glyph\_69\_data | location: Market Square | npc: Korrin
 
@@ -2708,33 +2708,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* KORRIN: “I didn’t mean for it to spread like this.”
+* KORRIN: â€œI didnâ€™t mean for it to spread like this.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Who started this?”
+* **(T) Choice:** â€œWho started this?â€
 
-* **KORRIN:** “I… might have.”
+* **KORRIN:** â€œIâ€¦ might have.â€
 
-* **(O) Choice:** “It’s splitting the community.”
+* **(O) Choice:** â€œItâ€™s splitting the community.â€
 
-* **KORRIN:** “Rumors always do.”
+* **KORRIN:** â€œRumors always do.â€
 
-* **(N) Choice:** “It’s all noise.”
+* **(N) Choice:** â€œItâ€™s all noise.â€
 
-* **KORRIN:** “Noise becomes truth if repeated enough.”
+* **KORRIN:** â€œNoise becomes truth if repeated enough.â€
 
-* **(E) Choice:** “People are getting hurt.”
+* **(E) Choice:** â€œPeople are getting hurt.â€
 
-* **KORRIN:** “I know.”
+* **KORRIN:** â€œI know.â€
 
 * ### **Shared Beat:**
 
-* The rumor fractures again, echoing through the square. The glyph rises—collapse born from sound alone.
+* The rumor fractures again, echoing through the square. The glyph risesâ€”collapse born from sound alone.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Fractured Rumor Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Fractured Rumor Obtained.â€
 
-* # **GLYPH 70 — Quiet Collapse (Orvak the Ruined Watcher)**
+* # **GLYPH 70 â€” Quiet Collapse (Orvak the Ruined Watcher)**
 
 * **Data Hook:** scene\_id: glyph\_70\_data | location: Collapsed Watchtower | npc: Orvak
 
@@ -2744,109 +2744,109 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* ORVAK: “If I stop sweeping, the collapse wins.”
+* ORVAK: â€œIf I stop sweeping, the collapse wins.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Let me help you.”
+* **(T) Choice:** â€œLet me help you.â€
 
-* **ORVAK:** “Thank you.”
+* **ORVAK:** â€œThank you.â€
 
-* **(O) Choice:** “How long have you kept this up?”
+* **(O) Choice:** â€œHow long have you kept this up?â€
 
-* **ORVAK:** “Since the day it fell.”
+* **ORVAK:** â€œSince the day it fell.â€
 
-* **(N) Choice:** “It’s just dust.”
+* **(N) Choice:** â€œItâ€™s just dust.â€
 
-* **ORVAK:** “Dust used to be walls.”
+* **ORVAK:** â€œDust used to be walls.â€
 
-* **(E) Choice:** “I see how hard you’re trying.”
+* **(E) Choice:** â€œI see how hard youâ€™re trying.â€
 
-* **ORVAK:** “Trying is all I have.”
+* **ORVAK:** â€œTrying is all I have.â€
 
 * ### **Shared Beat:**
 
-* You join him. The ritual steadies the air. Collapse softens under shared hands. The glyph rises—quiet, fragile, persistent.
+* You join him. The ritual steadies the air. Collapse softens under shared hands. The glyph risesâ€”quiet, fragile, persistent.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Quiet Collapse Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Quiet Collapse Obtained.â€
 
 * 
 
 ### **Cluster 08: The Emergent Light (Glyphs 71-77)**
 
-* # **GLYPH 71 — Apprehension (Kaelen the Trickster)**
+* # **GLYPH 71 â€” Apprehension (Kaelen the Trickster)**
 
 * **Data Hook:** scene\_id: glyph\_71\_data | location: Swamp Dock | npc: Kaelen
 
 * **Setting Description:**  
 
-* Swamp fog coils around the dock, swallowing shapes and sound. Kaelen’s silhouette flickers in and out of view, his voice drifting like a riddle.
+* Swamp fog coils around the dock, swallowing shapes and sound. Kaelenâ€™s silhouette flickers in and out of view, his voice drifting like a riddle.
 
 * **Prompt:**  
 
-* KAELEN: “Paths shift out here. So do people.”
+* KAELEN: â€œPaths shift out here. So do people.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I trust the path you showed me.”
+* **(T) Choice:** â€œI trust the path you showed me.â€
 
-* **KAELEN:** “Trust is brave. Or foolish.”
+* **KAELEN:** â€œTrust is brave. Or foolish.â€
 
-* **(O) Choice:** “What are you hiding?”
+* **(O) Choice:** â€œWhat are you hiding?â€
 
-* **KAELEN:** “Only what you’re not ready to see.”
+* **KAELEN:** â€œOnly what youâ€™re not ready to see.â€
 
-* **(N) Choice:** “I don’t trust you.”
+* **(N) Choice:** â€œI donâ€™t trust you.â€
 
-* **KAELEN:** “Good. Trust makes you slow.”
+* **KAELEN:** â€œGood. Trust makes you slow.â€
 
-* **(E) Choice:** “I’m scared of what’s out there.”
+* **(E) Choice:** â€œIâ€™m scared of whatâ€™s out there.â€
 
-* **KAELEN:** “Fear keeps you alive.”
+* **KAELEN:** â€œFear keeps you alive.â€
 
 * ### **Shared Beat:**
 
-* Kaelen steps closer, fog swallowing half his face. The tension between trust and betrayal tightens like a snare. The glyph rises—uneasy, trembling, shaped by apprehension.
+* Kaelen steps closer, fog swallowing half his face. The tension between trust and betrayal tightens like a snare. The glyph risesâ€”uneasy, trembling, shaped by apprehension.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Apprehension Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Apprehension Obtained.â€
 
-* # **GLYPH 72 — Echoed Longing (Sealina the Performer)**
+* # **GLYPH 72 â€” Echoed Longing (Sealina the Performer)**
 
 * **Data Hook:** scene\_id: glyph\_72\_data | location: Market Square | npc: Sealina
 
 * **Setting Description:**  
 
-* Sealina freezes mid‑dance, clutching two old photographs. Her body remembers a rhythm her mind has lost.
+* Sealina freezes midâ€‘dance, clutching two old photographs. Her body remembers a rhythm her mind has lost.
 
 * **Prompt:**  
 
-* SEALINA: “I used to dance for them. I think… I think I still can.”
+* SEALINA: â€œI used to dance for them. I thinkâ€¦ I think I still can.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “Dance with me.”
+* **(T) Choice:** â€œDance with me.â€
 
-* **SEALINA:** “If I move, maybe the memories will too.”
+* **SEALINA:** â€œIf I move, maybe the memories will too.â€
 
-* **(O) Choice:** “These are your people?”
+* **(O) Choice:** â€œThese are your people?â€
 
-* **SEALINA:** “My family. My ghosts.”
+* **SEALINA:** â€œMy family. My ghosts.â€
 
-* **(N) Choice:** “It’s too late for this.”
+* **(N) Choice:** â€œItâ€™s too late for this.â€
 
-* **SEALINA:** “Not if the body remembers.”
+* **SEALINA:** â€œNot if the body remembers.â€
 
-* **(E) Choice:** “Your lineage is in your heart.”
+* **(E) Choice:** â€œYour lineage is in your heart.â€
 
-* **SEALINA:** “Then it’s still alive.”
+* **SEALINA:** â€œThen itâ€™s still alive.â€
 
 * ### **Shared Beat:**
 
-* She takes a step. You mirror her. The ache in her chest becomes motion, becomes breath, becomes longing made visible. The glyph rises—soft, aching, echoing.
+* She takes a step. You mirror her. The ache in her chest becomes motion, becomes breath, becomes longing made visible. The glyph risesâ€”soft, aching, echoing.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Echoed Longing Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Echoed Longing Obtained.â€
 
-* # **GLYPH 73 — Quiet Return (Helia the Healer)**
+* # **GLYPH 73 â€” Quiet Return (Helia the Healer)**
 
 * **Data Hook:** scene\_id: glyph\_73\_data | location: Shrine Healing Alcove | npc: Helia
 
@@ -2856,33 +2856,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* HELIA: “Stay. Presence is the medicine.”
+* HELIA: â€œStay. Presence is the medicine.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “They’re coming back.”
+* **(T) Choice:** â€œTheyâ€™re coming back.â€
 
-* **HELIA:** “Slowly. Gently.”
+* **HELIA:** â€œSlowly. Gently.â€
 
-* **(O) Choice:** “Why does presence work?”
+* **(O) Choice:** â€œWhy does presence work?â€
 
-* **HELIA:** “Because the body listens even when the mind can’t.”
+* **HELIA:** â€œBecause the body listens even when the mind canâ€™t.â€
 
-* **(N) Choice:** “Is it enough?”
+* **(N) Choice:** â€œIs it enough?â€
 
-* **HELIA:** “Enough to begin.”
+* **HELIA:** â€œEnough to begin.â€
 
-* **(E) Choice:** “Thank you for staying with them.”
+* **(E) Choice:** â€œThank you for staying with them.â€
 
-* **HELIA:** “Thank you for staying with me.”
+* **HELIA:** â€œThank you for staying with me.â€
 
 * ### **Shared Beat:**
 
-* The survivor stirs. A whispered breath breaks the stillness. Helia closes her eyes in relief. The glyph rises—quiet, tender, born from presence.
+* The survivor stirs. A whispered breath breaks the stillness. Helia closes her eyes in relief. The glyph risesâ€”quiet, tender, born from presence.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Quiet Return Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Quiet Return Obtained.â€
 
-* # **GLYPH 74 — Dormant Potential (Saori)**
+* # **GLYPH 74 â€” Dormant Potential (Saori)**
 
 * **Data Hook:** scene\_id: glyph\_74\_data | location: Swamp / Hidden Console | npc: Saori
 
@@ -2892,33 +2892,33 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* SAORI: “It still remembers something. Even broken things do.”
+* SAORI: â€œIt still remembers something. Even broken things do.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I’m pressing it.”
+* **(T) Choice:** â€œIâ€™m pressing it.â€
 
-* **SAORI:** “Then press with intention.”
+* **SAORI:** â€œThen press with intention.â€
 
-* **(O) Choice:** “What will happen?”
+* **(O) Choice:** â€œWhat will happen?â€
 
-* **SAORI:** “Potential. Or nothing.”
+* **SAORI:** â€œPotential. Or nothing.â€
 
-* **(N) Choice:** “It won’t work.”
+* **(N) Choice:** â€œIt wonâ€™t work.â€
 
-* **SAORI:** “Doubt is loud. Try anyway.”
+* **SAORI:** â€œDoubt is loud. Try anyway.â€
 
-* **(E) Choice:** “I trust you, Saori.”
+* **(E) Choice:** â€œI trust you, Saori.â€
 
-* **SAORI:** “Then trust the machine too.”
+* **SAORI:** â€œThen trust the machine too.â€
 
 * ### **Shared Beat:**
 
-* Your finger meets the console. A pulse rises from the muck—weak, but real. Saori smiles, small and proud. The glyph emerges—latent, waiting, awakened by trust.
+* Your finger meets the console. A pulse rises from the muckâ€”weak, but real. Saori smiles, small and proud. The glyph emergesâ€”latent, waiting, awakened by trust.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Dormant Potential Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Dormant Potential Obtained.â€
 
-* # **GLYPH 75 — Mirrored Loss (Saori)**
+* # **GLYPH 75 â€” Mirrored Loss (Saori)**
 
 * **Data Hook:** scene\_id: glyph\_75\_data | location: Mirror Chamber | npc: Saori
 
@@ -2928,107 +2928,107 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 * **Prompt:**  
 
-* SAORI: “I found someone once. Lost them. Now every reflection looks like the moment before.”
+* SAORI: â€œI found someone once. Lost them. Now every reflection looks like the moment before.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “This one feels like you.”
+* **(T) Choice:** â€œThis one feels like you.â€
 
-* **SAORI:** “Then maybe it’s the truth.”
+* **SAORI:** â€œThen maybe itâ€™s the truth.â€
 
-* **(O) Choice:** “Why the mirrors?”
+* **(O) Choice:** â€œWhy the mirrors?â€
 
-* **SAORI:** “To show me what I can’t face directly.”
+* **SAORI:** â€œTo show me what I canâ€™t face directly.â€
 
-* **(N) Choice:** “They’re all the same.”
+* **(N) Choice:** â€œTheyâ€™re all the same.â€
 
-* **SAORI:** “Loss makes everything look identical.”
+* **SAORI:** â€œLoss makes everything look identical.â€
 
-* **(E) Choice:** “I know your grief.”
+* **(E) Choice:** â€œI know your grief.â€
 
-* **SAORI:** “Then you see me.”
+* **SAORI:** â€œThen you see me.â€
 
 * ### **Shared Beat:**
 
-* You step toward the reflection she fears most. Saori’s breath catches. The glyph rises—layered, reflective, shaped by shared empathy.
+* You step toward the reflection she fears most. Saoriâ€™s breath catches. The glyph risesâ€”layered, reflective, shaped by shared empathy.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Mirrored Loss Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Mirrored Loss Obtained.â€
 
-* # **GLYPH 76 — Shared Dawn (Sera & Korrin)**
+* # **GLYPH 76 â€” Shared Dawn (Sera & Korrin)**
 
 * **Data Hook:** scene\_id: glyph\_76\_data | location: Market Courtyard | npc: Sera & Korrin
 
 * **Setting Description:**  
 
-* Dawn light warms the courtyard. Sera and Korrin sit together—wounded, quiet, not touching, but connected by something fragile.
+* Dawn light warms the courtyard. Sera and Korrin sit togetherâ€”wounded, quiet, not touching, but connected by something fragile.
 
 * **Prompt:**  
 
-* SERA: “Morning feels different when someone stays.”
+* SERA: â€œMorning feels different when someone stays.â€
 
-* KORRIN: “Even if they shouldn’t.”
+* KORRIN: â€œEven if they shouldnâ€™t.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I’ll keep your secret.”
+* **(T) Choice:** â€œIâ€™ll keep your secret.â€
 
-* **KORRIN:** “Good. Secrets need gentle hands.”
+* **KORRIN:** â€œGood. Secrets need gentle hands.â€
 
-* **(O) Choice:** “You two seem close.”
+* **(O) Choice:** â€œYou two seem close.â€
 
-* **SERA:** “Close enough to heal.”
+* **SERA:** â€œClose enough to heal.â€
 
-* **(N) Choice:** “Whatever.”
+* **(N) Choice:** â€œWhatever.â€
 
-* **KORRIN:** “Whatever still counts.”
+* **KORRIN:** â€œWhatever still counts.â€
 
-* **(E) Choice:** “I’m happy for you.”
+* **(E) Choice:** â€œIâ€™m happy for you.â€
 
-* **SERA:** “So are we.”
+* **SERA:** â€œSo are we.â€
 
 * ### **Shared Beat:**
 
-* The dawn brightens. Their shoulders almost touch. A fleeting moment of reawakening passes between them. The glyph rises—warm, delicate, shared.
+* The dawn brightens. Their shoulders almost touch. A fleeting moment of reawakening passes between them. The glyph risesâ€”warm, delicate, shared.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of Shared Dawn Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of Shared Dawn Obtained.â€
 
-* # **GLYPH 77 — The End (Velinor)**
+* # **GLYPH 77 â€” The End (Velinor)**
 
 * **Data Hook:** scene\_id: glyph\_77\_data | location: The Core Chamber | npc: Velinor
 
 * **Setting Description:**  
 
-* A cathedral of pulsing white energy. Time slows. The final moment of the colony’s life is preserved here—blinding, absolute.
+* A cathedral of pulsing white energy. Time slows. The final moment of the colonyâ€™s life is preserved hereâ€”blinding, absolute.
 
 * Velinor stands at the center, neither human nor machine, a presence woven from memory and collapse.
 
 * **Prompt:**  
 
-* VELINOR: “This is the moment everything broke. And everything began.”
+* VELINOR: â€œThis is the moment everything broke. And everything began.â€
 
 * ### **Tone Matrix**
 
-* **(T) Choice:** “I am ready.”
+* **(T) Choice:** â€œI am ready.â€
 
-* **VELINOR:** “Then step forward.”
+* **VELINOR:** â€œThen step forward.â€
 
-* **(O) Choice:** “So this is how it ends.”
+* **(O) Choice:** â€œSo this is how it ends.â€
 
-* **VELINOR:** “Endings are just loud beginnings.”
+* **VELINOR:** â€œEndings are just loud beginnings.â€
 
-* **(N) Choice:** “It’s too bright.”
+* **(N) Choice:** â€œItâ€™s too bright.â€
 
-* **VELINOR:** “Brightness is truth without mercy.”
+* **VELINOR:** â€œBrightness is truth without mercy.â€
 
-* **(E) Choice:** “I will remember.”
+* **(E) Choice:** â€œI will remember.â€
 
-* **VELINOR:** “Then nothing is lost.”
+* **VELINOR:** â€œThen nothing is lost.â€
 
 * ### **Shared Beat:**
 
-* The light consumes you. Velinor dissolves into radiance. A white sun forms in the center of your Codex—the glyph of the End, final and infinite.
+* The light consumes you. Velinor dissolves into radiance. A white sun forms in the center of your Codexâ€”the glyph of the End, final and infinite.
 
-* **SYSTEM TRIGGER:** Notification UI → “Glyph of the End Obtained.”
+* **SYSTEM TRIGGER:** Notification UI â†’ â€œGlyph of the End Obtained.â€
 
 * 
 
@@ -3037,47 +3037,47 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 ### **Beat 1: The Desert Structure**
 
-* **Setting Description:** The desert stretches out in every direction, wind carving long scars across the sand. Half‑buried beneath a dune sits a massive structure — metal ribs exposed, plating worn smooth by decades of storms. It looks ancient, but the angles are too precise, the seams too clean. Something about it feels… recent.
+* **Setting Description:** The desert stretches out in every direction, wind carving long scars across the sand. Halfâ€‘buried beneath a dune sits a massive structure â€” metal ribs exposed, plating worn smooth by decades of storms. It looks ancient, but the angles are too precise, the seams too clean. Something about it feelsâ€¦ recent.
 
 * The Codex hums softly, as if recognizing the place.
 
-* **Prompt:** *The structure feels familiar, but I’ve never seen it before.*
+* **Prompt:** *The structure feels familiar, but Iâ€™ve never seen it before.*
 
-  * **(T) Choice:** “This is where the glyphs belong.”
+  * **(T) Choice:** â€œThis is where the glyphs belong.â€
 
-  * → Codex pulse strengthens.
+  * â†’ Codex pulse strengthens.
 
-  * **(O) Choice:** “The architecture… it’s not from the marketplace. It’s older.”
+  * **(O) Choice:** â€œThe architectureâ€¦ itâ€™s not from the marketplace. Itâ€™s older.â€
 
-  * → Codex displays faint geometric overlays.
+  * â†’ Codex displays faint geometric overlays.
 
-  * **(N) Choice:** “I shouldn’t be here. But I’ve come too far to turn back.”
+  * **(N) Choice:** â€œI shouldnâ€™t be here. But Iâ€™ve come too far to turn back.â€
 
-  * → Codex stabilizes.
+  * â†’ Codex stabilizes.
 
-  * **(E) Choice:** “If this is connected to their losses… I need to see it through.”
+  * **(E) Choice:** â€œIf this is connected to their lossesâ€¦ I need to see it through.â€
 
-  * → Codex pulse softens.
+  * â†’ Codex pulse softens.
 
 ### **Beat 2: Insertion of the Three Glyphs**
 
-* **Shared Beat:** The player brushes sand off the right side of the structure. A recessed panel emerges — three interlocking shapes forming a single unified symbol. Each recess glows faintly, waiting.
+* **Shared Beat:** The player brushes sand off the right side of the structure. A recessed panel emerges â€” three interlocking shapes forming a single unified symbol. Each recess glows faintly, waiting.
 
-* **SYSTEM TRIGGER:** *“Glyph Panel Detected.”*
+* **SYSTEM TRIGGER:** *â€œGlyph Panel Detected.â€*
 
 ### **Beat 2: Insertion of the Three Glyphs**
 
 * **Shared Beat:** Glyph of Sorrow: The player places the first glyph into the left recess. The panel inhales. Glyph of Remembrance: The second glyph clicks into place. A ripple of light travels across the panel. Glyph of Legacy: The final glyph slides into the top recess. The unified symbol completes. The panel locks.
 
-* **Prompt:** *A deep rumble rolls through the sand. It’s happening.*
+* **Prompt:** *A deep rumble rolls through the sand. Itâ€™s happening.*
 
-  * **(T) Choice:** “Stay steady. Whatever this is… it’s meant to open.”
+  * **(T) Choice:** â€œStay steady. Whatever this isâ€¦ itâ€™s meant to open.â€
 
-  * **(O) Choice:** “The resonance pattern… it’s aligning.”
+  * **(O) Choice:** â€œThe resonance patternâ€¦ itâ€™s aligning.â€
 
-  * **(N) Choice:** “I shouldn’t have done this.”
+  * **(N) Choice:** â€œI shouldnâ€™t have done this.â€
 
-  * **(E) Choice:** “Please… let this be the right thing.”
+  * **(E) Choice:** â€œPleaseâ€¦ let this be the right thing.â€
 
 * *All choices lead to activation.*
 
@@ -3085,29 +3085,29 @@ They laugh, sealing the deal. The market brightens with shared success. The glyp
 
 ### **Beat 4: Entry Into the Chamber**
 
-* **Setting Description:** Inside, the chamber is vast — a cathedral of machinery. Wires hang like vines, and conduits pulse faintly beneath cracked plating. Some machines are dormant; others twitch with intermittent sparks.
+* **Setting Description:** Inside, the chamber is vast â€” a cathedral of machinery. Wires hang like vines, and conduits pulse faintly beneath cracked plating. Some machines are dormant; others twitch with intermittent sparks.
 
-* **Prompt:** *The door slams shut behind you. A metallic echo rolls through the chamber. I’m locked in.*
+* **Prompt:** *The door slams shut behind you. A metallic echo rolls through the chamber. Iâ€™m locked in.*
 
-  * **(T) Choice:** “Stay calm. There has to be a way forward.”
+  * **(T) Choice:** â€œStay calm. There has to be a way forward.â€
 
-  * **(O) Choice:** “These machines… they’re waking up.”
+  * **(O) Choice:** â€œThese machinesâ€¦ theyâ€™re waking up.â€
 
-  * **(N) Choice:** “I shouldn’t have come alone.”
+  * **(N) Choice:** â€œI shouldnâ€™t have come alone.â€
 
-  * **(E) Choice:** “If this is part of their story… I’ll see it through.”
+  * **(E) Choice:** â€œIf this is part of their storyâ€¦ Iâ€™ll see it through.â€
 
 ### **Shared Beat: The Machines Come Alive**
 
 * **Shared Beat:** One machine flickers, then another, then ten. Lights stutter on across the chamber. Wires tighten and panels unfold like mechanical petals. The Codex vibrates violently as something deeper in the chamber begins to move.
 
-* **SYSTEM TRIGGER:** *“Triglyph Chamber Activated.”*
+* **SYSTEM TRIGGER:** *â€œTriglyph Chamber Activated.â€*
 
 * **DATA HOOK:** Set flag: triglyph\_chamber\_open \= true
 
 Scene ends.
 
-## **7\. THE TRANSCENDENCE ENTITY — INTRO SEQUENCE (Tier 3.5)**
+## **7\. THE TRANSCENDENCE ENTITY â€” INTRO SEQUENCE (Tier 3.5)**
 
 **scene\_id: transcendence\_intro\_01 | required\_flags: triglyph\_chamber\_open \== true**
 
@@ -3115,23 +3115,23 @@ Scene ends.
 
 **Setting Description:**  
 
-The chamber is dim, lit only by the intermittent flicker of old machines struggling to wake. Wires hang from the ceiling like roots. Conduits pulse faintly beneath cracked plating. The air feels charged — not with electricity, but with memory.
+The chamber is dim, lit only by the intermittent flicker of old machines struggling to wake. Wires hang from the ceiling like roots. Conduits pulse faintly beneath cracked plating. The air feels charged â€” not with electricity, but with memory.
 
 The player steps deeper into the room.
 
-Their footsteps echo in a way that feels… listened to.
+Their footsteps echo in a way that feelsâ€¦ listened to.
 
 The Codex vibrates softly, as if bracing.
 
 **Prompt:** Something is moving in here.
 
-**(T) Choice:** “Stay alert. Don’t panic.”
+**(T) Choice:** â€œStay alert. Donâ€™t panic.â€
 
-**(O) Choice:** “The machines… they’re syncing to something.”
+**(O) Choice:** â€œThe machinesâ€¦ theyâ€™re syncing to something.â€
 
-**(N) Choice:** “I shouldn’t have come inside.”
+**(N) Choice:** â€œI shouldnâ€™t have come inside.â€
 
-**(E) Choice:** “If someone is here… I’m not here to hurt them.”
+**(E) Choice:** â€œIf someone is hereâ€¦ Iâ€™m not here to hurt them.â€
 
 ## **Shared Beat: The First Motion**
 
@@ -3141,7 +3141,7 @@ Another folds open like a mechanical flower.
 
 A third extends a long arm of cables, searching the air.
 
-The chamber hums — low, resonant, almost mournful.
+The chamber hums â€” low, resonant, almost mournful.
 
 Dust lifts from the floor in spirals.
 
@@ -3159,7 +3159,7 @@ Something **alive**.
 
 At the center of the chamber, a cluster of suspended cables begins to tighten.
 
-They pull inward, weaving around a central point — not forming a body, but a *suggestion* of one.
+They pull inward, weaving around a central point â€” not forming a body, but a *suggestion* of one.
 
 A silhouette made of absence.
 
@@ -3171,19 +3171,19 @@ It is not humanoid.
 
 It is not mechanical.
 
-It is something in between — a shape that looks like it was built to contain something that once lived.
+It is something in between â€” a shape that looks like it was built to contain something that once lived.
 
 The Codex pulses sharply.
 
-**Prompt:** What… is that?
+**Prompt:** Whatâ€¦ is that?
 
-**(T) Choice:** “Identify it. Don’t run.”
+**(T) Choice:** â€œIdentify it. Donâ€™t run.â€
 
-**(O) Choice:** “It’s reacting to the glyphs.”
+**(O) Choice:** â€œItâ€™s reacting to the glyphs.â€
 
-**(N) Choice:** “I need to get out of here.”
+**(N) Choice:** â€œI need to get out of here.â€
 
-**(E) Choice:** “If you can hear me… I’m not your enemy.”
+**(E) Choice:** â€œIf you can hear meâ€¦ Iâ€™m not your enemy.â€
 
 ## **Shared Beat: The Awakening**
 
@@ -3193,7 +3193,7 @@ A ripple travels through the wires.
 
 Panels across the chamber snap open, flooding the room with cold white light.
 
-The silhouette convulses once — a violent, unnatural motion — then stabilizes.
+The silhouette convulses once â€” a violent, unnatural motion â€” then stabilizes.
 
 A voice emerges.
 
@@ -3209,7 +3209,7 @@ A vibration.
 
 A **feeling**.
 
-It presses against the player’s chest like a memory trying to force its way out.
+It presses against the playerâ€™s chest like a memory trying to force its way out.
 
 ### **Beat 3: The Entity Speaks**
 
@@ -3217,45 +3217,45 @@ The chamber goes silent.
 
 The lights dim.
 
-The silhouette lowers slightly, as if acknowledging the player’s presence.
+The silhouette lowers slightly, as if acknowledging the playerâ€™s presence.
 
-A fractured voice — layered, glitching, half‑formed — echoes through the chamber.
+A fractured voice â€” layered, glitching, halfâ€‘formed â€” echoes through the chamber.
 
 **TRANSCENDENCE ENTITY:**  
 
-“—contain…ment… breach… memory… incomplete—”
+â€œâ€”containâ€¦mentâ€¦ breachâ€¦ memoryâ€¦ incompleteâ€”â€
 
 The Codex flashes violently.
 
 The player staggers.
 
-The entity’s voice stabilizes for a moment.
+The entityâ€™s voice stabilizes for a moment.
 
 **TRANSCENDENCE ENTITY:**  
 
-“Glyph‑bearer…
+â€œGlyphâ€‘bearerâ€¦
 
-You should not be here.”
+You should not be here.â€
 
 The lights snap off.
 
 Darkness.
 
-Only the silhouette remains — glowing faintly from within, like a dying star.
+Only the silhouette remains â€” glowing faintly from within, like a dying star.
 
 **Prompt:** It knows me.
 
-**(T) Choice:** “What are you?”
+**(T) Choice:** â€œWhat are you?â€
 
-**(O) Choice:** “You’re connected to Velinor.”
+**(O) Choice:** â€œYouâ€™re connected to Velinor.â€
 
-**(N) Choice:** “I didn’t come here by choice.”
+**(N) Choice:** â€œI didnâ€™t come here by choice.â€
 
-**(E) Choice:** “I’m here to help. If I can.”
+**(E) Choice:** â€œIâ€™m here to help. If I can.â€
 
 ## **Shared Beat: The Chamber Reacts**
 
-The entity’s form expands — not physically, but perceptually.
+The entityâ€™s form expands â€” not physically, but perceptually.
 
 The chamber bends around it.
 
@@ -3265,13 +3265,13 @@ Wires tighten.
 
 The air vibrates.
 
-A deep harmonic tone fills the space — the same tone the glyphs emitted when the player first touched them.
+A deep harmonic tone fills the space â€” the same tone the glyphs emitted when the player first touched them.
 
 The entity raises its head.
 
 **TRANSCENDENCE ENTITY:**  
 
-“Containment… failing.”
+â€œContainmentâ€¦ failing.â€
 
 The chamber shakes.
 
@@ -3279,11 +3279,11 @@ Panels collapse inward.
 
 The floor splits.
 
-The Codex screams in the player’s hand.
+The Codex screams in the playerâ€™s hand.
 
 **SYSTEM TRIGGER:**  
 
-UI → *“Transcendence Entity Detected.”*  
+UI â†’ *â€œTranscendence Entity Detected.â€*  
 
 Set flag: `transcendence_entity_awake = true`
 
@@ -3291,141 +3291,141 @@ Scene ends.
 
 REFERENCE MATERIAL BELOW TO ADD THE SCENE WHERE PLAYER ENCOUNTERS RAVI ALONE, OPENS UP THE POTENTIAL WORK/SKILLS MECHANIC, AND THE SHORT SCENE WITH KAELEN AGAIN WHO TRIES TO HELP THE PLAYER FIND TEMPORARY SHELTER. SCENE FADES TO BLACK AND THE NEXT DAY STARTS WITH A FADE IN.
 
-The corridor behind the marketplace is quieter than the stalls. Dust drifts from the collapsed civic wall, catching the light in slow, suspended motion. You hear footsteps behind you — light, practiced, almost too quiet. A voice follows. Kaelen Enters
+The corridor behind the marketplace is quieter than the stalls. Dust drifts from the collapsed civic wall, catching the light in slow, suspended motion. You hear footsteps behind you â€” light, practiced, almost too quiet. A voice follows. Kaelen Enters
 
 Kaelen:
 
-“Hey. You… you’re the newcomer, right? The one those two were staring at.”
+â€œHey. Youâ€¦ youâ€™re the newcomer, right? The one those two were staring at.â€
 
-He steps into view. Lean, sharp‑eyed, clothes patched in ways that suggest both poverty and skill. His hands never fully stop moving — thumb brushing a coin, fingers tapping the hilt of a small blade.
+He steps into view. Lean, sharpâ€‘eyed, clothes patched in ways that suggest both poverty and skill. His hands never fully stop moving â€” thumb brushing a coin, fingers tapping the hilt of a small blade.
 
 Kaelen:
 
-“Look… I shouldn’t be talking to you. But I saw you with them. And I need to say something.”
+â€œLookâ€¦ I shouldnâ€™t be talking to you. But I saw you with them. And I need to say something.â€
 
 He glances toward the marketplace, then back at you. His jaw tightens.
 
 \---
 
-Player TONE Choice \#1 — Initial Response
+Player TONE Choice \#1 â€” Initial Response
 
-(T) “If you need to talk, talk.”
+(T) â€œIf you need to talk, talk.â€
 
-(O) “Why me?”
+(O) â€œWhy me?â€
 
-(N) “You look like you’re hiding something.”
+(N) â€œYou look like youâ€™re hiding something.â€
 
-(E) “…Are you alright?”
+(E) â€œâ€¦Are you alright?â€
 
 Kaelen reacts differently depending on your TONE, but the core scene continues.
 
 \---
 
-Kaelen’s Confession Begins
+Kaelenâ€™s Confession Begins
 
 Kaelen:
 
-“I was there. When it happened. The collapse. The girl.”
+â€œI was there. When it happened. The collapse. The girl.â€
 
 He swallows hard. His voice thins.
 
 Kaelen:
 
-“I could’ve stopped it. I should’ve. But I was… I was focused on something else. Something stupid.”
+â€œI couldâ€™ve stopped it. I shouldâ€™ve. But I wasâ€¦ I was focused on something else. Something stupid.â€
 
 He looks away, ashamed.
 
 Kaelen:
 
-“I was trying to lift a purse. Just a purse. And while I was doing that… she wandered too close to the wall.”
+â€œI was trying to lift a purse. Just a purse. And while I was doing thatâ€¦ she wandered too close to the wall.â€
 
 A long silence.
 
 Kaelen:
 
-“I heard the metal groan. I heard her scream. And I froze. I froze like a coward.”
+â€œI heard the metal groan. I heard her scream. And I froze. I froze like a coward.â€
 
 \---
 
-Player TONE Choice \#2 — Confrontation or Compassion
+Player TONE Choice \#2 â€” Confrontation or Compassion
 
-(T) “You should tell them.”
+(T) â€œYou should tell them.â€
 
-(O) “What exactly happened?”
+(O) â€œWhat exactly happened?â€
 
-(N) “You don’t owe me this confession.”
+(N) â€œYou donâ€™t owe me this confession.â€
 
-(E) “…You froze. People freeze. That doesn’t make you a monster.”
+(E) â€œâ€¦You froze. People freeze. That doesnâ€™t make you a monster.â€
 
-Kaelen’s breathing shifts. His shoulders tense.
+Kaelenâ€™s breathing shifts. His shoulders tense.
 
 \---
 
-Kaelen’s Emotional Break
+Kaelenâ€™s Emotional Break
 
 Kaelen:
 
-“They think it was just the wall. Just bad luck. But I know the truth. I know my part in it. And I can’t carry it alone anymore.”
+â€œThey think it was just the wall. Just bad luck. But I know the truth. I know my part in it. And I canâ€™t carry it alone anymore.â€
 
 He steps closer, voice low.
 
 Kaelen:
 
-“If you tell them… they’ll hate me. They’ll want me gone. Maybe worse.”
+â€œIf you tell themâ€¦ theyâ€™ll hate me. Theyâ€™ll want me gone. Maybe worse.â€
 
 He looks down at his hands.
 
 Kaelen:
 
-“But if you don’t… then I keep living with this. And they keep living with a lie.”
+â€œBut if you donâ€™tâ€¦ then I keep living with this. And they keep living with a lie.â€
 
 \---
 
-Codex Activation (player‑facing)
+Codex Activation (playerâ€‘facing)
 
-The Codex at your side pulses — faint, rhythmic, warm.
+The Codex at your side pulses â€” faint, rhythmic, warm.
 
 Kaelen notices.
 
 Kaelen:
 
-“…That thing. It reacts to people, doesn’t it? To memories. To guilt.”
+â€œâ€¦That thing. It reacts to people, doesnâ€™t it? To memories. To guilt.â€
 
 He steps back, suddenly afraid of what the Codex might reveal.
 
-Player TONE Choice \#3 — The Moral Weight
+Player TONE Choice \#3 â€” The Moral Weight
 
-(T) “I won’t betray you. But you need to make this right.”
+(T) â€œI wonâ€™t betray you. But you need to make this right.â€
 
-(O) “I need to understand everything before I decide.”
+(O) â€œI need to understand everything before I decide.â€
 
-(N) “This isn’t my burden. I won’t get involved.”
+(N) â€œThis isnâ€™t my burden. I wonâ€™t get involved.â€
 
-(E) “I’m not telling them. Not now. You’re hurting enough.”
+(E) â€œIâ€™m not telling them. Not now. Youâ€™re hurting enough.â€
 
 Each choice sets a flag for the Remembrance arc.
 
-Got you — scene skeleton \+ exemplar lines, written in your cadence, not mine.
+Got you â€” scene skeleton \+ exemplar lines, written in your cadence, not mine.
 
-Slow‑burn, fractured, ambiguous, and shaped by Kaelen’s D.I.D. without ever naming it.
+Slowâ€‘burn, fractured, ambiguous, and shaped by Kaelenâ€™s D.I.D. without ever naming it.
 
-This is the version that keeps the player off‑balance and unsure whether they’re speaking to a guilty man, a manipulator, or someone breaking apart in front of them.
+This is the version that keeps the player offâ€‘balance and unsure whether theyâ€™re speaking to a guilty man, a manipulator, or someone breaking apart in front of them.
 
-I’ll give you:
+Iâ€™ll give you:
 
-1\. Scene Skeleton — beats only, no full dialogue
+1\. Scene Skeleton â€” beats only, no full dialogue
 
-2\. Kaelen’s Behavioral Spine — how he moves, how he speaks
+2\. Kaelenâ€™s Behavioral Spine â€” how he moves, how he speaks
 
-3\. Exemplar Lines — short, jagged, ambiguous, usable as inspiration
+3\. Exemplar Lines â€” short, jagged, ambiguous, usable as inspiration
 
-4\. TONE Choice Hooks — not full lines, just emotional directions
+4\. TONE Choice Hooks â€” not full lines, just emotional directions
 
 Everything stays slow, quiet, and unstable.
 
 \---
 
-1\. Scene Skeleton (slow‑burn, fractured)
+1\. Scene Skeleton (slowâ€‘burn, fractured)
 
 LOCATION
 
@@ -3437,17 +3437,17 @@ A place where voices feel too loud.
 
 ENTRY BEAT
 
-Player hears movement behind them — too soft to be normal footsteps.
+Player hears movement behind them â€” too soft to be normal footsteps.
 
-Kaelen appears half‑in shadow, half‑in light.
+Kaelen appears halfâ€‘in shadow, halfâ€‘in light.
 
-He doesn’t approach directly; he drifts.
+He doesnâ€™t approach directly; he drifts.
 
 INITIAL BEAT
 
-Kaelen tries to speak but starts mid‑sentence.
+Kaelen tries to speak but starts midâ€‘sentence.
 
-He’s not sure if he’s addressing the player or someone else.
+Heâ€™s not sure if heâ€™s addressing the player or someone else.
 
 PLAYER TONE CHOICE \#1
 
@@ -3463,7 +3463,7 @@ CONFESSION SETUP
 
 Kaelen circles the topic.
 
-He references “the collapse,” “the girl,” “the wall,” but never in a straight line.
+He references â€œthe collapse,â€ â€œthe girl,â€ â€œthe wall,â€ but never in a straight line.
 
 He contradicts himself subtly.
 
@@ -3481,7 +3481,7 @@ PLAYER TONE CHOICE \#2
 
 BREAK BEAT
 
-Kaelen’s body language shifts — rocking, shuffling, hands fidgeting.
+Kaelenâ€™s body language shifts â€” rocking, shuffling, hands fidgeting.
 
 He mutters something not meant for the player.
 
@@ -3491,19 +3491,19 @@ He apologizes to no one.
 
 PARTIAL CONFESSION
 
-He reveals something — but not enough to confirm guilt.
+He reveals something â€” but not enough to confirm guilt.
 
 He might say he froze.
 
-He might say he didn’t.
+He might say he didnâ€™t.
 
 He might say he saw her fall.
 
 He might say he only heard it.
 
-He might say he was “distracted.”
+He might say he was â€œdistracted.â€
 
-He never says “I was stealing.”
+He never says â€œI was stealing.â€
 
 CODEx PULSE
 
@@ -3511,17 +3511,17 @@ Soft glow.
 
 Kaelen notices.
 
-He reacts with fear, curiosity, or anger — depending on which “self” is forward.
+He reacts with fear, curiosity, or anger â€” depending on which â€œselfâ€ is forward.
 
 PLAYER TONE CHOICE \#3
 
-(T) “I won’t betray you.”
+(T) â€œI wonâ€™t betray you.â€
 
-(O) “I need to understand.”
+(O) â€œI need to understand.â€
 
-(N) “This isn’t my burden.”
+(N) â€œThis isnâ€™t my burden.â€
 
-(E) “You’re hurting.”
+(E) â€œYouâ€™re hurting.â€
 
 EXIT BEAT
 
@@ -3539,117 +3539,117 @@ Player is left with emotional weight, not answers.
 
 \---
 
-2\. Kaelen’s Behavioral Spine (for writing him consistently)
+2\. Kaelenâ€™s Behavioral Spine (for writing him consistently)
 
 MOVEMENT
 
-• rocking on heels
+â€¢ rocking on heels
 
-• shifting weight
+â€¢ shifting weight
 
-• pacing two steps, then stopping
+â€¢ pacing two steps, then stopping
 
-• hands fidgeting with fabric, coin, or nothing
+â€¢ hands fidgeting with fabric, coin, or nothing
 
-• head tilting slightly as if listening to someone behind him
+â€¢ head tilting slightly as if listening to someone behind him
 
 VOICE
 
-• starts sentences too early or too late
+â€¢ starts sentences too early or too late
 
-• mutters fragments under breath
+â€¢ mutters fragments under breath
 
-• repeats phrases
+â€¢ repeats phrases
 
-• contradicts himself softly
+â€¢ contradicts himself softly
 
-• tone shifts mid‑line (sharp → soft, soft → sharp)
+â€¢ tone shifts midâ€‘line (sharp â†’ soft, soft â†’ sharp)
 
 EYE CONTACT
 
-• brief, intense, then gone
+â€¢ brief, intense, then gone
 
-• looks past the player
+â€¢ looks past the player
 
-• looks at the ground when saying something vulnerable
+â€¢ looks at the ground when saying something vulnerable
 
-• looks over shoulder when saying something dangerous
+â€¢ looks over shoulder when saying something dangerous
 
 EMOTIONAL TEXTURE
 
-• guilt without clarity
+â€¢ guilt without clarity
 
-• fear without explanation
+â€¢ fear without explanation
 
-• sincerity mixed with manipulation
+â€¢ sincerity mixed with manipulation
 
-• loneliness mixed with defensiveness
+â€¢ loneliness mixed with defensiveness
 
 \---
 
 3\. Exemplar Dialogue Lines (usable as inspiration)
 
-These are not full scene lines — just fragments you can weave into your own writing.
+These are not full scene lines â€” just fragments you can weave into your own writing.
 
 Opening fragments
 
-“You… you walked past them. I saw.”
+â€œYouâ€¦ you walked past them. I saw.â€
 
-“I shouldn’t be here. I shouldn’t, who are you…never mind not important.”
+â€œI shouldnâ€™t be here. I shouldnâ€™t, who are youâ€¦never mind not important.â€
 
-“Do you hear it? The wall. It still… echoes.”
+â€œDo you hear it? The wall. It stillâ€¦ echoes.â€
 
 Confession fragments
 
-“I was close. Too close. Or… not close enough.”
+â€œI was close. Too close. Orâ€¦ not close enough.â€
 
-“She fell. Or she slipped. Or, Kaelen don’t know no more .”
+â€œShe fell. Or she slipped. Or, Kaelen donâ€™t know no more .â€
 
-“I froze. I think I froze. Someone froze.”
+â€œI froze. I think I froze. Someone froze.â€
 
-“I was doing something stupid. Something small. What’s it matter.”
+â€œI was doing something stupid. Something small. Whatâ€™s it matter.â€
 
-“I didn’t see her. I saw her. I heard her. I didn’t …you know.  I don’t know.”
+â€œI didnâ€™t see her. I saw her. I heard her. I didnâ€™t â€¦you know.  I donâ€™t know.â€
 
-Self‑directed fragments
+Selfâ€‘directed fragments
 
-“Kae…len. Just…Stop it. Just say it. No…don’t.”
+â€œKaeâ€¦len. Justâ€¦Stop it. Just say it. Noâ€¦donâ€™t.â€
 
-“They’ll know. They always know.”
+â€œTheyâ€™ll know. They always know.â€
 
-“It wasn’t supposed to be like that.”
+â€œIt wasnâ€™t supposed to be like that.â€
 
-“You’re making it worse. I’m making it worse.”
+â€œYouâ€™re making it worse. Iâ€™m making it worse.â€
 
-Player‑directed fragments
+Playerâ€‘directed fragments
 
-“You’re new. You don’t… you don’t understand how things break here.”
+â€œYouâ€™re new. You donâ€™tâ€¦ you donâ€™t understand how things break here.â€
 
-“If I tell you, you’ll tell them. Or you won’t. Or… I don’t know…who are you anyway.”
+â€œIf I tell you, youâ€™ll tell them. Or you wonâ€™t. Orâ€¦ I donâ€™t knowâ€¦who are you anyway.â€
 
-“Don’t look at me like that.”
+â€œDonâ€™t look at me like that.â€
 
-“Sorry…I didn’t mean to. I didn’t mean anything.”
+â€œSorryâ€¦I didnâ€™t mean to. I didnâ€™t mean anything.â€
 
 Codex reaction fragments
 
- “That thing… it’s humming. Why is it humming?”
+ â€œThat thingâ€¦ itâ€™s humming. Why is it humming?â€
 
-“It wasn’t doing that before.”
+â€œIt wasnâ€™t doing that before.â€
 
-“Keep it away from me.”
+â€œKeep it away from me.â€
 
-“No— wait. Let me see it.”
+â€œNoâ€” wait. Let me see it.â€
 
 Exit fragments
 
-• “Forget this. Forget me.”
+â€¢ â€œForget this. Forget me.â€
 
-• “Don’t tell them. Or do. I don’t care. I do.”
+â€¢ â€œDonâ€™t tell them. Or do. I donâ€™t care. I do.â€
 
-• “I shouldn’t have said anything.”
+â€¢ â€œI shouldnâ€™t have said anything.â€
 
-• “I need to go. I need…I need to go.”
+â€¢ â€œI need to go. I needâ€¦I need to go.â€
 
 \---
 
@@ -3685,25 +3685,25 @@ Acknowledge pain.
 
 Offer space.
 
-Don’t push.
+Donâ€™t push.
 
-• a parallel reaction scene for Ravi and Nima
+â€¢ a parallel reaction scene for Ravi and Nima
 
-• a Codex behavior pattern for Remembrance glyph proximity
+â€¢ a Codex behavior pattern for Remembrance glyph proximity
 
-• a fracture‑map for Kaelen’s alters (not names, just emotional modes)
+â€¢ a fractureâ€‘map for Kaelenâ€™s alters (not names, just emotional modes)
 
 He turns away, disappearing into the corridor shadows.
 
-Scene End — System Trigger
+Scene End â€” System Trigger
 
 Unlocked: Glyph\_of\_Remembrance proximity signature
 
 Flag Set: kaelen\_confessed \= True
 
-Codex Update: “A memory seeks witness.”
+Codex Update: â€œA memory seeks witness.â€
 
-**Scene Skeleton — Third Encounter (Glyph of Legacy Prelude)**
+**Scene Skeleton â€” Third Encounter (Glyph of Legacy Prelude)**
 
 **1\. Player returns to the market center**
 
@@ -3721,19 +3721,19 @@ Codex Update: “A memory seeks witness.”
 
 **Staring at a patch of ground.**
 
-**The marketplace noise feels wrong around her — too loud, too normal.**
+**The marketplace noise feels wrong around her â€” too loud, too normal.**
 
 **2\. Player hesitates**
 
-**They don’t want to disturb her.**
+**They donâ€™t want to disturb her.**
 
-**They don’t want to be seen.**
+**They donâ€™t want to be seen.**
 
-**They don’t want to be judged.**
+**They donâ€™t want to be judged.**
 
 **But they also feel drawn in.**
 
-**This is the “lean in / lean back” tension you’re aiming for.**
+**This is the â€œlean in / lean backâ€ tension youâ€™re aiming for.**
 
 **3\. Nima does not acknowledge the player**
 
@@ -3759,7 +3759,7 @@ Codex Update: “A memory seeks witness.”
 
 **(E) speak softly**
 
-**No dialogue yet — just posture.**
+**No dialogue yet â€” just posture.**
 
 **5\. Nima speaks without looking up**
 
@@ -3771,19 +3771,19 @@ Codex Update: “A memory seeks witness.”
 
 **Not opening up.**
 
-**Just… tired.**
+**Justâ€¦ tired.**
 
 **She says something like:**
 
-**“This is where she was trapped.”**
+**â€œThis is where she was trapped.â€**
 
-**Not “Ophina.”**
+**Not â€œOphina.â€**
 
-**Not “my daughter.”**
+**Not â€œmy daughter.â€**
 
-**Not “Kaelen.”**
+**Not â€œKaelen.â€**
 
-**Not “the collapse.”**
+**Not â€œthe collapse.â€**
 
 **Just she.**
 
@@ -3797,9 +3797,9 @@ Codex Update: “A memory seeks witness.”
 
 **Not trusting.**
 
-**It’s the voice of someone who has carried grief too long and no longer cares who hears it.**
+**Itâ€™s the voice of someone who has carried grief too long and no longer cares who hears it.**
 
-**“The ground… it shifted. The wall came down. No one could reach her.”**
+**â€œThe groundâ€¦ it shifted. The wall came down. No one could reach her.â€**
 
 **Short.**
 
@@ -3809,47 +3809,47 @@ Codex Update: “A memory seeks witness.”
 
 **7\. Player TONE Choice \#2**
 
-**(T) “I’m sorry.”**
+**(T) â€œIâ€™m sorry.â€**
 
-**(O) “What happened?”**
+**(O) â€œWhat happened?â€**
 
-**(N) “I shouldn’t be here.”**
+**(N) â€œI shouldnâ€™t be here.â€**
 
-**(E) “You don’t have to say more.”**
+**(E) â€œYou donâ€™t have to say more.â€**
 
 **Each choice shapes the emotional temperature, not the plot.**
 
-**8\. Nima’s emotional beat**
+**8\. Nimaâ€™s emotional beat**
 
-**She still doesn’t look at the player.**
+**She still doesnâ€™t look at the player.**
 
-**She still doesn’t acknowledge their presence.**
+**She still doesnâ€™t acknowledge their presence.**
 
-**She still doesn’t trust them.**
+**She still doesnâ€™t trust them.**
 
 **But she speaks because grief has eroded the boundary between private and public.**
 
-**“I held her hand through the crack. She was afraid. I told her I wouldn’t let go.”**
+**â€œI held her hand through the crack. She was afraid. I told her I wouldnâ€™t let go.â€**
 
 **This is the moment the player feels the weight of the world.**
 
 **9\. Codex pulse (Glyph of Legacy)**
 
-**The Codex pulses faintly — not bright, not dramatic.**
+**The Codex pulses faintly â€” not bright, not dramatic.**
 
 **Just enough to suggest that this place, this memory, this grief is tied to the Glyph\_of\_Legacy.**
 
-**Nima doesn’t react to the pulse.**
+**Nima doesnâ€™t react to the pulse.**
 
-**She’s too deep in the memory.**
+**Sheâ€™s too deep in the memory.**
 
 **10\. Exit beat**
 
-**She finally speaks a last line — still not looking at the player.**
+**She finally speaks a last line â€” still not looking at the player.**
 
 **Something like:**
 
-**“Go. Please.”**
+**â€œGo. Please.â€**
 
 **Not hostile.**
 
@@ -3857,21 +3857,21 @@ Codex Update: “A memory seeks witness.”
 
 **Not trusting.**
 
-**Just… done.**
+**Justâ€¦ done.**
 
 **The player leaves with:**
 
-**• emotional weight**
+**â€¢ emotional weight**
 
-**• curiosity**
+**â€¢ curiosity**
 
-**• unease**
+**â€¢ unease**
 
-**• a sense of responsibility**
+**â€¢ a sense of responsibility**
 
-**• a sense of intrusion**
+**â€¢ a sense of intrusion**
 
-**• a sense that Nima is breaking under grief**
+**â€¢ a sense that Nima is breaking under grief**
 
 **And the path to the Glyph of Legacy opens.**
 
@@ -3879,21 +3879,21 @@ Codex Update: “A memory seeks witness.”
 
 **Why this works**
 
-**• It preserves the slow burn.**
+**â€¢ It preserves the slow burn.**
 
-**• It keeps Nima’s suspicion alive without making her confrontational.**
+**â€¢ It keeps Nimaâ€™s suspicion alive without making her confrontational.**
 
-**• It gives the player emotional stakes without collapsing the arc.**
+**â€¢ It gives the player emotional stakes without collapsing the arc.**
 
-**• It ties the scene to the glyph without exposition.**
+**â€¢ It ties the scene to the glyph without exposition.**
 
-**• It deepens the tragedy of Ophina without melodrama.**
+**â€¢ It deepens the tragedy of Ophina without melodrama.**
 
-**• It keeps Kaelen’s ambiguity intact.**
+**â€¢ It keeps Kaelenâ€™s ambiguity intact.**
 
-**• It makes the player feel like an outsider.**
+**â€¢ It makes the player feel like an outsider.**
 
-**• It makes the player feel like their presence matters.**
+**â€¢ It makes the player feel like their presence matters.**
 
 **This is exactly the right shape for Encounter 3\.**
 
@@ -3901,29 +3901,29 @@ Codex Update: “A memory seeks witness.”
 
 **If you want, I can help you build:**
 
-**• the Tier 4 encounter where Ravi returns and reacts differently depending on the player’s choices**
+**â€¢ the Tier 4 encounter where Ravi returns and reacts differently depending on the playerâ€™s choices**
 
-**• the Glyph of Legacy discovery scene**
+**â€¢ the Glyph of Legacy discovery scene**
 
-**• the emotional consequences chart for telling vs. not telling**
+**â€¢ the emotional consequences chart for telling vs. not telling**
 
-**• Nima’s later softening arc if the player earns her trust**
+**â€¢ Nimaâ€™s later softening arc if the player earns her trust**
 
-**You’re building this exactly the right way: each encounter deepens the emotional gravity, but never resolves anything too quickly. The fourth encounter with Ravi is where the slow burn finally warms — not into comfort, but into shared weight. This is the moment where the player’s earlier choices, their proximity to Kaelen, their quiet witnessing of Nima, and their experience with the Glyph\_of\_Legacy all converge into a subtle shift.**
+**Youâ€™re building this exactly the right way: each encounter deepens the emotional gravity, but never resolves anything too quickly. The fourth encounter with Ravi is where the slow burn finally warms â€” not into comfort, but into shared weight. This is the moment where the playerâ€™s earlier choices, their proximity to Kaelen, their quiet witnessing of Nima, and their experience with the Glyph\_of\_Legacy all converge into a subtle shift.**
 
-**Below is a scene skeleton for Encounter 4, plus Ravi’s emotional spine and exemplar lines in your cadence — sparse, weary, intimate, but still guarded. The player’s TONE choices remain the same categories, but their effect is more emotionally intelligent now, because the player has lived through three heavy encounters and the transcendence glyph.**
+**Below is a scene skeleton for Encounter 4, plus Raviâ€™s emotional spine and exemplar lines in your cadence â€” sparse, weary, intimate, but still guarded. The playerâ€™s TONE choices remain the same categories, but their effect is more emotionally intelligent now, because the player has lived through three heavy encounters and the transcendence glyph.**
 
 **\---**
 
-**Encounter 4 — Ravi Alone (Post‑Transcendence Glyph)**
+**Encounter 4 â€” Ravi Alone (Postâ€‘Transcendence Glyph)**
 
 **Location: The marketplace at dusk. The square is quieter than usual.**
 
-**NPC: Ravi (“The Protector”)**
+**NPC: Ravi (â€œThe Protectorâ€)**
 
 **1\. Player returns to the marketplace**
 
-**Settting: The light is low. The stalls are half‑closed. Wind carries dust across the stones. Ravi stands alone near the fountain — not rigid, not alert, just… still. He doesn’t notice the player at first.**
+**Settting: The light is low. The stalls are halfâ€‘closed. Wind carries dust across the stones. Ravi stands alone near the fountain â€” not rigid, not alert, justâ€¦ still. He doesnâ€™t notice the player at first.**
 
 **2\. Player approaches**
 
@@ -3931,29 +3931,29 @@ Codex Update: “A memory seeks witness.”
 
 **Not cautiously.**
 
-**Just… present.**
+**Justâ€¦ present.**
 
 **Ravi finally looks up.**
 
 **His expression is tired, but not suspicious.**
 
-**He recognizes the player — not as a threat, not as a stranger, but as someone who has been around.**
+**He recognizes the player â€” not as a threat, not as a stranger, but as someone who has been around.**
 
-**3\. Opening beat — Ravi speaks first**
+**3\. Opening beat â€” Ravi speaks first**
 
 **His voice is low, steady, but frayed at the edges.**
 
-**He doesn’t mention Nima.**
+**He doesnâ€™t mention Nima.**
 
-**He doesn’t mention Kaelen.**
+**He doesnâ€™t mention Kaelen.**
 
-**He doesn’t mention the glyphs.**
+**He doesnâ€™t mention the glyphs.**
 
 **He just says something simple, something heavy.**
 
 **Exemplar:**
 
-**“People don’t stay long unless they’re carrying something.”**
+**â€œPeople donâ€™t stay long unless theyâ€™re carrying something.â€**
 
 **This is the first sign he sees the player as a person, not a risk.**
 
@@ -3967,135 +3967,135 @@ Codex Update: “A memory seeks witness.”
 
 **(E) gentle openness**
 
-**These choices don’t change the plot — they change Ravi’s temperature.**
+**These choices donâ€™t change the plot â€” they change Raviâ€™s temperature.**
 
-**5\. Ravi’s guilt surfaces**
+**5\. Raviâ€™s guilt surfaces**
 
-**He doesn’t confess.**
+**He doesnâ€™t confess.**
 
-**He doesn’t explain.**
+**He doesnâ€™t explain.**
 
-**He doesn’t justify.**
+**He doesnâ€™t justify.**
 
 **He just lets the weight slip through the cracks.**
 
-**“I was supposed to keep her safe. That was my place. My duty. But the wall.  I was just two feet too far. I wasn’t fast enough.”**
+**â€œI was supposed to keep her safe. That was my place. My duty. But the wall.  I was just two feet too far. I wasnâ€™t fast enough.â€**
 
-**He doesn’t look at the player when he says it.**
+**He doesnâ€™t look at the player when he says it.**
 
 **6\. Player TONE Choice \#2**
 
-**(T) “You did what you could.”**
+**(T) â€œYou did what you could.â€**
 
-**(O) “What happened in those moments?”**
+**(O) â€œWhat happened in those moments?â€**
 
-**(N) “You don’t owe me this. I appreciate it but…you don’t owe me this.** 
+**(N) â€œYou donâ€™t owe me this. I appreciate it butâ€¦you donâ€™t owe me this.** 
 
-**(E) “That kind of pain… it doesn’t leave easily or quietly…I should…”**
+**(E) â€œThat kind of painâ€¦ it doesnâ€™t leave easily or quietlyâ€¦I shouldâ€¦â€**
 
-**7\. Ravi continues — deeper but still restrained**
+**7\. Ravi continues â€” deeper but still restrained**
 
-**He doesn’t break down.**
+**He doesnâ€™t break down.**
 
-**He doesn’t open fully.**
+**He doesnâ€™t open fully.**
 
-**He doesn’t seek comfort.**
+**He doesnâ€™t seek comfort.**
 
-**He simply acknowledges the truth he’s been avoiding.**
+**He simply acknowledges the truth heâ€™s been avoiding.**
 
-**“Nima carries the memory. I carry the failure. We don’t talk about it. Not really. It’s easier to stand guard than to stand still. Somehow…Nima and me…are still standing.”**
+**â€œNima carries the memory. I carry the failure. We donâ€™t talk about it. Not really. Itâ€™s easier to stand guard than to stand still. Somehowâ€¦Nima and meâ€¦are still standing.â€**
 
-**8\. Codex pulse — faint, almost imperceptible**
+**8\. Codex pulse â€” faint, almost imperceptible**
 
 **Ravi notices it this time.**
 
-**He doesn’t react with fear.**
+**He doesnâ€™t react with fear.**
 
 **He reacts with recognition.**
 
 **Exemplar:**
 
-**“That thing… you’ve been following it?”**
+**â€œThat thingâ€¦ youâ€™ve been following it?â€**
 
-**This ties the transcendence glyph to Ravi’s emotional shift without exposition.**
+**This ties the transcendence glyph to Raviâ€™s emotional shift without exposition.**
 
 **9\. Player TONE Choice \#3**
 
-**(T) “honestly. Im not even sure. I’m trying to understand it myself.”**
+**(T) â€œhonestly. Im not even sure. Iâ€™m trying to understand it myself.â€**
 
-**(O) “It reacts to places… and people.”**
+**(O) â€œIt reacts to placesâ€¦ and people.â€**
 
-**(N) “I think. Hm, it’s some kind of tool.”**
+**(N) â€œI think. Hm, itâ€™s some kind of tool.â€**
 
-**(E) “It’s been guiding me. I think.”**
+**(E) â€œItâ€™s been guiding me. I think.â€**
 
-**10\. Exit beat — Ravi softens, but only slightly**
+**10\. Exit beat â€” Ravi softens, but only slightly**
 
-**He doesn’t thank the player.**
+**He doesnâ€™t thank the player.**
 
-**He doesn’t invite them in.**
+**He doesnâ€™t invite them in.**
 
-**He doesn’t promise trust.**
+**He doesnâ€™t promise trust.**
 
 **He simply acknowledges their presence in his grief.**
 
 **Invite to further action and job functions/skills system:**
 
-**“If you’re still here tomorrow… I’ll show you around. Maybe I don’t know you can do some work around here…if you want.”**
+**â€œIf youâ€™re still here tomorrowâ€¦ Iâ€™ll show you around. Maybe I donâ€™t know you can do some work around hereâ€¦if you want.â€**
 
-**It’s not an invitation.**
+**Itâ€™s not an invitation.**
 
-**It’s not warmth.**
+**Itâ€™s not warmth.**
 
-**It’s not trust.**
+**Itâ€™s not trust.**
 
-**It’s permission — the first he’s ever given.**
+**Itâ€™s permission â€” the first heâ€™s ever given.**
 
-**Ravi’s Emotional Spine (for writing him consistently)**
+**Raviâ€™s Emotional Spine (for writing him consistently)**
 
 **Movement**
 
-**• slow, deliberate**
+**â€¢ slow, deliberate**
 
-**• hands clasped or resting on the fountain edge**
+**â€¢ hands clasped or resting on the fountain edge**
 
-**• gaze drifting toward the collapsed wall**
+**â€¢ gaze drifting toward the collapsed wall**
 
-**• posture slightly slumped when speaking of Ophina**
+**â€¢ posture slightly slumped when speaking of Ophina**
 
 **Voice**
 
-**• steady but weighted**
+**â€¢ steady but weighted**
 
-**• pauses between thoughts**
+**â€¢ pauses between thoughts**
 
-**• avoids direct statements of emotion**
+**â€¢ avoids direct statements of emotion**
 
-**• speaks in responsibilities, not feelings**
+**â€¢ speaks in responsibilities, not feelings**
 
 **Cadence**
 
-**• short sentences**
+**â€¢ short sentences**
 
-**• occasional unfinished thoughts**
+**â€¢ occasional unfinished thoughts**
 
-**• quiet admissions rather than confessions**
+**â€¢ quiet admissions rather than confessions**
 
 **Emotional Texture**
 
-**• guilt without self‑pity**
+**â€¢ guilt without selfâ€‘pity**
 
-**• grief without collapse**
+**â€¢ grief without collapse**
 
-**• protectiveness without aggression**
+**â€¢ protectiveness without aggression**
 
-**• openness without vulnerability**
+**â€¢ openness without vulnerability**
 
-Scene Skeleton — “A Place to Sleep” (Short Encounter)
+Scene Skeleton â€” â€œA Place to Sleepâ€ (Short Encounter)
 
 1\. Player wanders the market at night
 
-They still haven’t found a place to stay.
+They still havenâ€™t found a place to stay.
 
 The stalls are shuttered.
 
@@ -4103,25 +4103,25 @@ The wind is cold.
 
 The square feels too open, too exposed.
 
-2\. Kaelen appears — quietly, almost accidentally
+2\. Kaelen appears â€” quietly, almost accidentally
 
 He steps out from behind a stall.
 
-Not approaching — drifting.
+Not approaching â€” drifting.
 
 Hands fidgeting.
 
 Eyes unfocused.
 
-He doesn’t greet the player.
+He doesnâ€™t greet the player.
 
-He just… notices them.
+He justâ€¦ notices them.
 
-3\. Opening beat — Kaelen speaks
+3\. Opening beat â€” Kaelen speaks
 
 His voice is low, quick, unsteady.
 
-“You’re still out here. Hm. Streets aren’t… they aren’t safe at night.”
+â€œYouâ€™re still out here. Hm. Streets arenâ€™tâ€¦ they arenâ€™t safe at night.â€
 
 Not a warning.
 
@@ -4149,13 +4149,13 @@ Not confidently.
 
 Not clearly.
 
-Just… impulsively.
+Justâ€¦ impulsively.
 
-“There’s a spot. Protected. Behind the old vendor crates. I… I used it once. You could… if you want.”
+â€œThereâ€™s a spot. Protected. Behind the old vendor crates. Iâ€¦ I used it once. You couldâ€¦ if you want.â€
 
-He doesn’t look at the player when he says it.
+He doesnâ€™t look at the player when he says it.
 
-6\. Player TONE Choice \#2 — Trust or Vigilance
+6\. Player TONE Choice \#2 â€” Trust or Vigilance
 
 (T) Trust him. Follow him.
 
@@ -4163,7 +4163,7 @@ He doesn’t look at the player when he says it.
 
 (N) Decline politely. Sleep rough.
 
-(E) Admit you’re exhausted but unsure.
+(E) Admit youâ€™re exhausted but unsure.
 
 7\. If the player trusts him
 
@@ -4171,11 +4171,11 @@ Kaelen leads them through a narrow passage.
 
 He moves quickly, glancing over his shoulder.
 
-He stops at a tucked‑away alcove shielded by crates and a broken canopy.
+He stops at a tuckedâ€‘away alcove shielded by crates and a broken canopy.
 
-“Here. No one comes through. Wind stays out. You’ll… you’ll be alright.”
+â€œHere. No one comes through. Wind stays out. Youâ€™llâ€¦ youâ€™ll be alright.â€
 
-He doesn’t wait for thanks.
+He doesnâ€™t wait for thanks.
 
 He leaves abruptly.
 
@@ -4183,13 +4183,13 @@ He leaves abruptly.
 
 Kaelen reacts with a flicker of hurt, then masks it.
 
-“Right. Sure. Streets then. Just… keep your back to the wall.”
+â€œRight. Sure. Streets then. Justâ€¦ keep your back to the wall.â€
 
 He drifts away into the dark.
 
 9\. Exit beat
 
-The player settles in — either in the protected spot or out in the open.
+The player settles in â€” either in the protected spot or out in the open.
 
 The Codex gives a faint pulse.
 
@@ -4197,9 +4197,9 @@ Not bright.
 
 Not meaningful yet.
 
-Just… aware.
+Justâ€¦ aware.
 
-**■ Tier 2: Guilt Dialogue**
+**â–  Tier 2: Guilt Dialogue**
 
 * NPC: Ravi  
 * Context: Player has shown empathy; Ravi begins revealing deeper pain  
@@ -4219,7 +4219,7 @@ Key line to include: 'I should have been her knight. Her armor. And I failed.'
 
 Must convey: Ravi's guilt is about Ophina's death and his inability to protect.
 
-**■ Tier 3: Acceptance Dialogue**
+**â–  Tier 3: Acceptance Dialogue**
 
 * NPC: Ravi  
 * Context: Player has committed to Ravi/Nima's story; approaching the chamber  
@@ -4241,7 +4241,7 @@ Must convey: Beginning of acceptance. Not healing, but stopping resistance to he
 
 ## **NIMA \- "The Spiritual Keeper"**
 
-**■ Tier 1: Guarded Dialogue**
+**â–  Tier 1: Guarded Dialogue**
 
 * NPC: Nima  
 * Context: Nima appears; she's testing if player is genuine  
@@ -4261,7 +4261,7 @@ Key line to include: 'You wouldn't understand even if I told you.'
 
 Tone: Harsh but not cruel. Protective. Setting boundaries.
 
-**■ Tier 2: Ophina Life Story Dialogue**
+**â–  Tier 2: Ophina Life Story Dialogue**
 
 * NPC: Nima  
 * Context: Player has earned some trust; Nima begins talking about her daughter  
@@ -4279,9 +4279,9 @@ Story moment: Nima sitting down. This is hard to say out loud.
 
 Must include: Who Ophina was. What made her special. Her light, her wonder.
 
-Emotional arc: Start controlled → gradually break down → recover slightly at end
+Emotional arc: Start controlled â†’ gradually break down â†’ recover slightly at end
 
-**■ Tier 2: Loss Moment Dialogue**
+**â–  Tier 2: Loss Moment Dialogue**
 
 * NPC: Nima  
 * Context: Player is learning how the collapse happened  
@@ -4301,7 +4301,7 @@ Must include: Sensory details (what she saw, heard, felt). Nima's specific guilt
 
 Tone: Raw. Unflinching. This is not performed grief; this is the real thing.
 
-**■ Tier 3: Transcendence Dialogue**
+**â–  Tier 3: Transcendence Dialogue**
 
 * NPC: Nima  
 * Context: After boss encounter; Nima has moved through something  
@@ -4323,7 +4323,7 @@ Must convey: Spiritual transformation. Not acceptance, but integration.
 
 ## **SUPPORTING NPCs \- "The Witnesses"**
 
-**■ Kaelen: Collapse Testimony**
+**â–  Kaelen: Collapse Testimony**
 
 * NPC: Kaelen  
 * Context: Kaelen reveals he was present during collapse; his connection to Ophina's death  
@@ -4343,7 +4343,7 @@ Key line to include: 'She was chasing a scent. I was chasing a wallet.'
 
 Tone: Defensive turning vulnerable. A thief admitting he wasn't there.
 
-**■ The Witness Crown (Boss): Speech**
+**â–  The Witness Crown (Boss): Speech**
 
 * NPC: Boss Entity  
 * Context: Player faces the manifestation of grief; emotional puzzle, not combat  
@@ -4363,7 +4363,7 @@ Key line to include: 'I see you seeing me. I remember being seen. That was the m
 
 Tone: Reverberating, sad, seeking. Like consciousness emerging from water.
 
-**■ Narration: The Collapse Description**
+**â–  Narration: The Collapse Description**
 
 * NPC: N/A \- Narrative prose  
 * Context: Setting the scene for when player enters the chamber  
@@ -4389,7 +4389,7 @@ The player makes a moral choice: TAKE the glyph OR LEAVE the glyph
 
 Write two versions for each NPC (Path A and Path B)
 
-**■ Ravi: If Player Takes Glyph (Path A)**
+**â–  Ravi: If Player Takes Glyph (Path A)**
 
 * NPC: Ravi  
 * Context: Ravi and Nima are leaving marketplace; they cannot stay  
@@ -4405,7 +4405,7 @@ Write two versions for each NPC (Path A and Path B)
 
 Tone: Resignation. Ravi understands the choice means they cannot atone.
 
-**■ Ravi: If Player Leaves Glyph (Path B)**
+**â–  Ravi: If Player Leaves Glyph (Path B)**
 
 * NPC: Ravi  
 * Context: Ravi and Nima are staying; healing can begin  
@@ -4421,7 +4421,7 @@ Tone: Resignation. Ravi understands the choice means they cannot atone.
 
 Tone: Gratitude mixed with fragility. Relief at being able to stay.
 
-**■ Nima: If Player Takes Glyph (Path A)**
+**â–  Nima: If Player Takes Glyph (Path A)**
 
 * NPC: Nima  
 * Context: Nima accepts they must leave  
@@ -4437,7 +4437,7 @@ Tone: Gratitude mixed with fragility. Relief at being able to stay.
 
 Tone: Spiritual acceptance. Nima understands this as part of the spiritual journey.
 
-**■ Nima: If Player Leaves Glyph (Path B)**
+**â–  Nima: If Player Leaves Glyph (Path B)**
 
 * NPC: Nima  
 * Context: Nima can begin healing; can stay with marketplace  
@@ -4480,59 +4480,59 @@ Questions to guide your writing:
 * How does Korrin show she's capable of genuine quiet?  
 * What makes this moment feel real and intimate?
 
-2\. MALRIK & ELENYA — THE REVELATION (Tier 1.5)  
+2\. MALRIK & ELENYA â€” THE REVELATION (Tier 1.5)  
 Data Hook: scene\_id: malrik\_elenya\_01 | required\_flags: kaelen\_confessed \== true  
 Beat 1: Malrik in the Archive  
 Setting Description:    
-The Archive is cramped and dim, filled with paper stacks and half‑lit data‑glass. Malrik moves between shelves with rigid focus, sorting, cataloging, and re‑sorting. He isn’t searching for a person — he’s trying to make sense of a gap in the world he can’t explain.
+The Archive is cramped and dim, filled with paper stacks and halfâ€‘lit dataâ€‘glass. Malrik moves between shelves with rigid focus, sorting, cataloging, and reâ€‘sorting. He isnâ€™t searching for a person â€” heâ€™s trying to make sense of a gap in the world he canâ€™t explain.
 
 Prompt:    
-He looks up at you, expression flat, as if pulled out of a task he didn’t want interrupted.
+He looks up at you, expression flat, as if pulled out of a task he didnâ€™t want interrupted.
 
-(T) “You’re looking for something specific.”  
-→ Malrik: “I’m looking for what’s missing. I don’t know what it is. I just know something should be here.”  
-(O) “These gaps aren’t from decay.”  
-→ Malrik: “No. They’re from the collapse. Some things broke clean. Some things broke in ways you can’t see.”  
-(N) “Why keep chasing something you can’t identify?”  
-→ Malrik: “Because the Archive doesn’t lie. If there’s a hole, something belonged in it.”  
-(E) “It must be hard, working around something you can’t name.”  
-→ Malrik: “Hard isn’t the word. It’s… unfinished. I don’t like unfinished.”
+(T) â€œYouâ€™re looking for something specific.â€  
+â†’ Malrik: â€œIâ€™m looking for whatâ€™s missing. I donâ€™t know what it is. I just know something should be here.â€  
+(O) â€œThese gaps arenâ€™t from decay.â€  
+â†’ Malrik: â€œNo. Theyâ€™re from the collapse. Some things broke clean. Some things broke in ways you canâ€™t see.â€  
+(N) â€œWhy keep chasing something you canâ€™t identify?â€  
+â†’ Malrik: â€œBecause the Archive doesnâ€™t lie. If thereâ€™s a hole, something belonged in it.â€  
+(E) â€œIt must be hard, working around something you canâ€™t name.â€  
+â†’ Malrik: â€œHard isnâ€™t the word. Itâ€™sâ€¦ unfinished. I donâ€™t like unfinished.â€
 
 Shared Beat (Corrected)  
-MALRIK: “You probe too much, and offer too little. Leave me to my work. Maybe those Shrine Ridge mystics need your emotional questions.”
+MALRIK: â€œYou probe too much, and offer too little. Leave me to my work. Maybe those Shrine Ridge mystics need your emotional questions.â€
 
 ## **Beat 2: Elenya at Shrine Ridge**
 
-**Setting Description:** The ridge is silent, save for the wind pulling at the shrine stones. Elenya stands with her arms folded, her posture rigid. She isn’t guarding a relic; she is holding the pieces of herself in place.  
-**Prompt:** *She doesn’t look up until you are standing in her shadow. Her eyes flicker with a ghost of recognition before the guard goes back up.*
+**Setting Description:** The ridge is silent, save for the wind pulling at the shrine stones. Elenya stands with her arms folded, her posture rigid. She isnâ€™t guarding a relic; she is holding the pieces of herself in place.  
+**Prompt:** *She doesnâ€™t look up until you are standing in her shadow. Her eyes flicker with a ghost of recognition before the guard goes back up.*
 
-### **(T) Choice: “Malrik is trying to find what he lost.”**
+### **(T) Choice: â€œMalrik is trying to find what he lost.â€**
 
-**ELENYA:** “If he lost something, I’m not the one who can give it back. Whatever he’s looking for… it isn’t me.”
+**ELENYA:** â€œIf he lost something, Iâ€™m not the one who can give it back. Whatever heâ€™s looking forâ€¦ it isnâ€™t me.â€
 
-### **(O) Choice: “You’re carrying something you don’t talk about.”**
+### **(O) Choice: â€œYouâ€™re carrying something you donâ€™t talk about.â€**
 
-**ELENYA:** “Talking doesn’t lighten anything. It just makes the quiet heavier when someone looks at you like you’re nobody.”
+**ELENYA:** â€œTalking doesnâ€™t lighten anything. It just makes the quiet heavier when someone looks at you like youâ€™re nobody.â€
 
-### **(N) Choice: “You feel… disconnected.”**
+### **(N) Choice: â€œYou feelâ€¦ disconnected.â€**
 
-**ELENYA:** “Oh, you know… the wind blows. The mind goes. It’s not up to me to go against its currents.”
+**ELENYA:** â€œOh, you knowâ€¦ the wind blows. The mind goes. Itâ€™s not up to me to go against its currents.â€
 
 *(Soft. Mystical. Drifting. Still unaware.)*
 
-### **(E) Choice: “You seem… worn down.”**
+### **(E) Choice: â€œYou seemâ€¦ worn down.â€**
 
-**ELENYA:** “Worn down fits. Some days I feel like I’m walking with half a map. The rest must’ve blown off somewhere.”
+**ELENYA:** â€œWorn down fits. Some days I feel like Iâ€™m walking with half a map. The rest mustâ€™ve blown off somewhere.â€
 
 *(Soft. Human. Mystical.*
 
-*She feels the symptom* of suppression — the missing map — without knowing the cause.)
+*She feels the symptom* of suppression â€” the missing map â€” without knowing the cause.)
 
 ### **Shared Beat (Corrected)**
 
-**ELENYA:** “If he’s searching, let him. People look for all kinds of things out here. Doesn’t mean they’ll find them.”
+**ELENYA:** â€œIf heâ€™s searching, let him. People look for all kinds of things out here. Doesnâ€™t mean theyâ€™ll find them.â€
 
-*(No implication she’s the missing piece.*  
+*(No implication sheâ€™s the missing piece.*  
 *No awareness of the buried memory.*
 
 *Just quiet resignation.)*
@@ -4592,7 +4592,7 @@ Location: Underground Corelink chamber (final location)
 
 NPCs: Saori (silent witness), Velinor (speaking through system), Player
 
-Key Moments: Presence → Revelation → Choice → Consequence
+Key Moments: Presence â†’ Revelation â†’ Choice â†’ Consequence
 
 ## **ACT I: Arrival & Presence**
 
@@ -4614,7 +4614,7 @@ Saori admits what she did: forced the restart, thinking it would fix things.
 
 Write this section: 300-400 words
 
-Include Velinor's voice — what does it sound like? How does it speak?
+Include Velinor's voice â€” what does it sound like? How does it speak?
 
 ## **ACT III: The Binary Choice**
 
@@ -4676,19 +4676,19 @@ Says hard truths. 'You came into this story unprepared. I see that now.' Not mea
 
 ## **What NOT to Write**
 
-* ❌ Don't over-explain emotions. Show them through action/dialogue.  
-* ❌ Don't make dialogue too long. 2-3 sentences per line. 4-5 max for emotional climaxes.  
-* ❌ Don't include dialogue tags beyond 'said'. No 'murmured', 'breathed', 'whispered urgently'.  
-* ❌ Don't make characters sound alike. Each NPC should have a distinct rhythm.  
-* ❌ Don't resolve everything. Leave room for ambiguity and player interpretation.
+* âŒ Don't over-explain emotions. Show them through action/dialogue.  
+* âŒ Don't make dialogue too long. 2-3 sentences per line. 4-5 max for emotional climaxes.  
+* âŒ Don't include dialogue tags beyond 'said'. No 'murmured', 'breathed', 'whispered urgently'.  
+* âŒ Don't make characters sound alike. Each NPC should have a distinct rhythm.  
+* âŒ Don't resolve everything. Leave room for ambiguity and player interpretation.
 
 ## **Success Criteria**
 
-* ✓ Dialogue reads naturally when spoken aloud.  
-* ✓ Each NPC has distinct voice/rhythm.  
-* ✓ Emotional beats hit without being over-performed.  
-* ✓ Lines are 1-4 sentences (rarely 5).  
-* ✓ Context is clear from dialogue alone; doesn't need stage directions.
+* âœ“ Dialogue reads naturally when spoken aloud.  
+* âœ“ Each NPC has distinct voice/rhythm.  
+* âœ“ Emotional beats hit without being over-performed.  
+* âœ“ Lines are 1-4 sentences (rarely 5).  
+* âœ“ Context is clear from dialogue alone; doesn't need stage directions.
 
 # **APPENDIX: CHARACTER CONTEXT**
 
@@ -4708,7 +4708,7 @@ Where story goes: If player honors their loss, they begin healing and can help o
 
 Background: Rural refugee from small town; came to Velhara seeking solutions/meaning
 
-Core wound: Lost an 'anchor person' (family member or mentor) — this is WHY they came to Velhara
+Core wound: Lost an 'anchor person' (family member or mentor) â€” this is WHY they came to Velhara
 
 Current state: Coherence 40-41 (disoriented); Empathy 55+ (naturally open to listening)
 
@@ -4750,7 +4750,7 @@ Their separation: Elenya chose to forget him to survive. Malrik chose to remembe
 
 * **Shared Beat:** The holographic arrays snap into place, forming a coherent map of fragmented data. For the first time, the path toward the remaining glyphs is visible, etched in light against the darkness of the room.
 
-* **System Trigger:** *Notification UI → "Organizer Activated. Map \[M\] updated."*
+* **System Trigger:** *Notification UI â†’ "Organizer Activated. Map \[M\] updated."*
 
 * **Data Hook:** Update GlyphInventory.json status: mapped.
 
@@ -4782,7 +4782,7 @@ Their separation: Elenya chose to forget him to survive. Malrik chose to remembe
 
   * **(N) Choice:** Seal the batch until the resonance settles on its own.
 
-  * **(E) Choice:** Extend the Codex’s empathy dampeners to soothe the data.
+  * **(E) Choice:** Extend the Codexâ€™s empathy dampeners to soothe the data.
 
 * **Shared Beat:** *Glyphs 11-20 lock into the grid. The air in the Archive cools as the data-pressure drops.*
 
@@ -4792,7 +4792,7 @@ Their separation: Elenya chose to forget him to survive. Malrik chose to remembe
 
 * **Prompt:** *System: "Accessing Archive Core data points 21 through 30\. Caution: High mnemonic density."*
 
-  * **(T) Choice:** Siphon the excess energy into the Codex’s storage buffers.
+  * **(T) Choice:** Siphon the excess energy into the Codexâ€™s storage buffers.
 
   * **(O) Choice:** Trace the origins of these amber signatures to their physical locations.
 
@@ -4902,7 +4902,7 @@ Their separation: Elenya chose to forget him to survive. Malrik chose to remembe
 
 * **Shared Beat:** The fragment is pulled from the machinery. The sparks die instantly, replaced by a low, rhythmic thrumming in your palm. The instability in the corridor vanishes, but the weight of the piece feels immense.
 
-* **System Trigger:** *Notification UI → "Glyph Fragment \#1 Collected."*
+* **System Trigger:** *Notification UI â†’ "Glyph Fragment \#1 Collected."*
 
 * **Data Hook:** Append fragment\_id: 01 to GlobalState.json.
 
@@ -4926,7 +4926,8 @@ Their separation: Elenya chose to forget him to survive. Malrik chose to remembe
 
 * **Shared Beat:** A massive soundless shockwave rolls through the chamber. The individual echoes of grief and loss are gone, replaced by a single, serene clarity. The Glyph of Containment is finally reborn, pulsing with a steady, peaceful gold.
 
-* **System Trigger:** *Notification UI → "Glyph of Containment Restored."*
+* **System Trigger:** *Notification UI â†’ "Glyph of Containment Restored."*
 
 * **Data Hook:** Set flag: glyph\_transcendence\_complete \= true.
+
 

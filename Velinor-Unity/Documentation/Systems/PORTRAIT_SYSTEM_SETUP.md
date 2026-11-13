@@ -1,4 +1,4 @@
-# Portrait System Setup Guide
+﻿# Portrait System Setup Guide
 
 ## Overview
 The portrait system is now fully integrated into the dialogue system. Portraits will automatically:
@@ -27,7 +27,7 @@ The portrait system is now fully integrated into the dialogue system. Portraits 
 
 ### 1. **Clear the Portrait Image Component** (Manual - Requires Editor)
 In the Desert_Saori_Meeting scene, select the **NPCImage** component in the DialoguePanel:
-- **Inspector → Image Component → Source Image: [None]**
+- **Inspector â†’ Image Component â†’ Source Image: [None]**
 - This ensures the portrait starts empty instead of showing Saori's test image
 - The portrait will now populate automatically when dialogue plays
 
@@ -37,22 +37,22 @@ Place portrait images in: `Assets/Resources/Portraits/{NpcName}/{NpcName}_{expre
 **Folder Structure (Already Created):**
 ```
 Assets/Resources/Portraits/
-├── Ravi/
-├── Nima/
-├── Saori/          ← Saori_neutral.png already here
-├── Elenya/
-├── Malrik/
-├── Sanor/
-├── Elka/
-├── Veynar/
-├── Coren/
-├── Drossel/
-├── Kaelen/
-├── Thoran/
-├── Kiv/
-├── Helia/
-├── Nordia/
-└── Inodora/
+â”œâ”€â”€ Ravi/
+â”œâ”€â”€ Nima/
+â”œâ”€â”€ Saori/          â† Saori_neutral.png already here
+â”œâ”€â”€ Elenya/
+â”œâ”€â”€ Malrik/
+â”œâ”€â”€ Sanor/
+â”œâ”€â”€ Elka/
+â”œâ”€â”€ Veynar/
+â”œâ”€â”€ Cal/
+â”œâ”€â”€ Drossel/
+â”œâ”€â”€ Kaelen/
+â”œâ”€â”€ Thoran/
+â”œâ”€â”€ Kiv/
+â”œâ”€â”€ Helia/
+â”œâ”€â”€ Nordia/
+â””â”€â”€ Inodora/
 ```
 
 **Recommended Expressions (9 per NPC):**
@@ -164,14 +164,14 @@ Once Ravi/Nima marketplace scene is tested and working:
 - **System falls back to "neutral"** if expression not found (should see fallback warning)
 
 ### Portrait Takes Too Long to Load
-- **PortraitManager caches sprites** after first load—subsequent beats load instantly
+- **PortraitManager caches sprites** after first loadâ€”subsequent beats load instantly
 - **First portrait in a dialogue** may have slight frame-time cost (normal)
 
 ## Performance Notes
 - Sprites are cached in memory after first load
 - No visible performance impact until 20+ unique portraits
-- Each portrait should be optimized (512×512 or similar size)
-- Total VRAM for 40 NPCs × 9 expressions ≈ 20-40 MB (negligible on modern systems)
+- Each portrait should be optimized (512Ã—512 or similar size)
+- Total VRAM for 40 NPCs Ã— 9 expressions â‰ˆ 20-40 MB (negligible on modern systems)
 
 ## Next Development Stages
 
@@ -188,7 +188,7 @@ Once Ravi/Nima marketplace scene is tested and working:
 
 ### Stage 3: Authority & Underworld
 - [ ] Veynar
-- [ ] Coren
+- [ ] Cal
 - [ ] Drossel
 - [ ] Kaelen
 
@@ -206,15 +206,16 @@ All remaining NPCs from MASTER_NPC_ROSTER.md
 
 | Component | Purpose | Status |
 |-----------|---------|--------|
-| PortraitManager.cs | Load & display sprites with caching | ✅ Complete |
-| DialogueManager.cs | Call PortraitManager on beat display | ✅ Complete |
-| DialogueUIController.cs | Auto-detect NPCImage component | ✅ Complete |
-| BeatData.cs | portrait_expression JSON field | ✅ Complete |
-| Portrait Folder Structure | Ready for image files | ✅ Complete |
-| Scene NPCImage Setup | Manual: Clear source image in Editor | ⏳ Pending |
-| Portrait Image Files | Needs creation/sourcing | ⏳ Pending |
-| JSON portrait_expression Fields | Needs addition to dialogue files | ⏳ Pending |
+| PortraitManager.cs | Load & display sprites with caching | âœ… Complete |
+| DialogueManager.cs | Call PortraitManager on beat display | âœ… Complete |
+| DialogueUIController.cs | Auto-detect NPCImage component | âœ… Complete |
+| BeatData.cs | portrait_expression JSON field | âœ… Complete |
+| Portrait Folder Structure | Ready for image files | âœ… Complete |
+| Scene NPCImage Setup | Manual: Clear source image in Editor | â³ Pending |
+| Portrait Image Files | Needs creation/sourcing | â³ Pending |
+| JSON portrait_expression Fields | Needs addition to dialogue files | â³ Pending |
 
 ---
 
 **Ready to test?** Follow the "Test in Desert_Saori_Meeting" section above!
+

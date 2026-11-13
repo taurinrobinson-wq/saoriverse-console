@@ -1,6 +1,6 @@
-# PHASE 3 IMPLEMENTATION COMPLETE
+﻿# PHASE 3 IMPLEMENTATION COMPLETE
 
-**Status**: ✅ Complete and tested  
+**Status**: âœ… Complete and tested  
 **Commit**: `7d85e059`  
 **Duration**: Single session  
 **Tests**: 14/14 passing  
@@ -29,7 +29,7 @@ separation.
 EventTimeline:
   - Tracks in-game day progression (1-7+)
   - Manages 8 distinct collapse phases
-  - Tracks building structural integrity (100% → 0%)
+  - Tracks building structural integrity (100% â†’ 0%)
   - Manages NPC stress levels (0-100)
   - Records player interventions
   - Determines aftermath path based on intervention count
@@ -56,7 +56,7 @@ AftermathPath enum:
 - **Day-by-day event progression** with phase transitions triggered by time
 - **Building deterioration** with visual indicators (cracks, water damage, roof sagging, debris)
 - **NPC stress progression** (Malrik/Elenya stress increases each phase)
-- **NPC cooperation decay** (from 100 → 0 as conflict escalates)
+- **NPC cooperation decay** (from 100 â†’ 0 as conflict escalates)
 - **Player intervention tracking** (cumulative: each intervention +15 rebuild potential)
 - **Collapse trigger** at building stability 0% (day 15 approximately)
 - **Aftermath path determination** based on player interventions during days 1-7 post-collapse
@@ -68,8 +68,8 @@ AftermathPath enum:
 |--------|-------|----------|---------------|---------------|-------------|--------|
 | 1-2 | PRE_COLLAPSE | 100% | 0 | 0 | 100 | None |
 | 3-5 | SUBTLE_DETERIORATION | 70-100% | 0-15 | 0-10 | 85-100 | Cracks visible |
-| 6-10 | ESCALATING_CONFLICT | 30-70% | 15-35 | 10-30 | 50-85 | Argument frequency ↑ |
-| 10-15 | FINAL_WARNING | 10-30% | 35-50 | 30-45 | 30-50 | Coren warning given |
+| 6-10 | ESCALATING_CONFLICT | 30-70% | 15-35 | 10-30 | 50-85 | Argument frequency â†‘ |
+| 10-15 | FINAL_WARNING | 10-30% | 35-50 | 30-45 | 30-50 | Cal warning given |
 | 15+ | COLLAPSE_TRIGGER | 0% | 40+ | 40+ | 0-50 | BUILDING DESTROYED |
 | +1-3 | IMMEDIATE_AFTERMATH | 0% | 30 | 30 | 0-30 | Factions separate |
 | +4-7 | AFTERMATH_RESOLUTION | 0% | 10-30 | 10-30 | 0-50 | Path determined |
@@ -85,14 +85,14 @@ CollapseTriggerScene:
   - get_structural_failure_narration()  # Building breaking sequence
   - get_malrik_reaction()  # Malrik's emotional response
   - get_elenya_reaction()  # Elenya's emotional response
-  - get_coren_reaction()  # Coren's response
+  - get_Cal_reaction()  # Cal's response
   - get_post_collapse_dialogue()  # Full dialogue exchange
 
 ImmediateAftermathScene:
   - get_separation_narration()  # Factions withdraw
   - get_malrik_isolation_dialogue()  # Malrik's crisis state
   - get_elenya_isolation_dialogue()  # Elenya's crisis state
-  - get_coren_exhaustion_dialogue()  # Coren's mediation attempts
+  - get_Cal_exhaustion_dialogue()  # Cal's mediation attempts
   - get_malrik_response_to_intervention(type)
   - get_elenya_response_to_intervention(type)
 
@@ -109,7 +109,7 @@ AftermathPathDivergence:
 **Narration Features**:
 
 - **Collapse sequence**: Building doesn't explode - it breaks (intimate failure)
-- **NPC reactions**: Malrik devastated over lost archive, Elenya searching for people, Coren helping evacuate
+- **NPC reactions**: Malrik devastated over lost archive, Elenya searching for people, Cal helping evacuate
 - **Post-collapse dialogue**: Blame exchange, Elenya's frustration, Malrik's realization
 - **Isolation scenes**: Both NPCs withdraw, showing individual emotional arcs
 - **Intervention responses**: 4 response types each for Malrik/Elenya based on player's specific intervention
@@ -121,28 +121,28 @@ AftermathPathDivergence:
 **New Methods Added**:
 
 ```python
-advance_game_day() → Dict
+advance_game_day() â†’ Dict
   Progresses timeline, triggers events
 
-set_marketplace_conclusion(coherence, primary_trait) → None
-  Bridges Phase 2 → Phase 3
+set_marketplace_conclusion(coherence, primary_trait) â†’ None
+  Bridges Phase 2 â†’ Phase 3
 
-trigger_collapse_event() → Dict
+trigger_collapse_event() â†’ Dict
   Activates collapse sequence
 
-record_post_collapse_intervention(npc_name, choice) → Dict
+record_post_collapse_intervention(npc_name, choice) â†’ Dict
   Logs player intervention, updates rebuild potential
 
-get_aftermath_narration(phase) → str
+get_aftermath_narration(phase) â†’ str
   Returns phase-specific narration
 
-get_npc_response_to_intervention(npc_name, type) → str
+get_npc_response_to_intervention(npc_name, type) â†’ str
   NPC response based on player intervention
 
-resolve_aftermath_path() → Dict
+resolve_aftermath_path() â†’ Dict
   Determines which path player ended up on
 
-get_phase3_status() → Dict
+get_phase3_status() â†’ Dict
   Complete game state for UI (14 fields)
 ```
 
@@ -154,25 +154,25 @@ get_phase3_status() → Dict
 
 ```
 1. Call orchestrator.advance_game_day()
-   ↓
+   â†“
 2. EventTimeline.advance_day() checks:
    - Current phase duration
    - Trigger conditions (day >= threshold)
    - Building deterioration
    - NPC stress increases
    - Cooperation decay
-   ↓
+   â†“
 3. If phase transition triggers:
    - Transition to next phase
    - Fire relevant events (collapse_triggered, path_unlocked, etc.)
-   ↓
+   â†“
 4. Return events dict with:
    - Current day
    - Current phase
    - Building description
    - NPC stress descriptions
    - Game state snapshot
-   ↓
+   â†“
 5. UI displays results to player
 ```
 
@@ -206,50 +206,50 @@ Each intervention:
 - Position recorded (pro_malrik, pro_elenya, or neutral)
 
 Rebuild potential at day 7:
-- If >= 65% → REBUILD_TOGETHER path
-- If 35-65% → STALEMATE path
-- If < 35% → COMPLETE_SEPARATION path
+- If >= 65% â†’ REBUILD_TOGETHER path
+- If 35-65% â†’ STALEMATE path
+- If < 35% â†’ COMPLETE_SEPARATION path
 ```
 
 ### Aftermath Path Determination
 
 ```
 PATH A: REBUILD_TOGETHER (Rebuild Potential >= 65%)
-├─ Trigger: 4+ player interventions
-├─ Setup: Malrik approaches Elenya at ruins
-├─ Dialogue: "Then we'll have to learn something new. Together."
-├─ Progression: Joint design sessions, productive disagreement
-├─ Consequence: Factions unite, morale improves
-├─ Malrik/Elenya cooperation: 50%+ (healing)
-├─ Endings Unlocked: 1 (Synthesis), 4 (New Vision)
-└─ World State: LEAN_SYNTHESIS
+â”œâ”€ Trigger: 4+ player interventions
+â”œâ”€ Setup: Malrik approaches Elenya at ruins
+â”œâ”€ Dialogue: "Then we'll have to learn something new. Together."
+â”œâ”€ Progression: Joint design sessions, productive disagreement
+â”œâ”€ Consequence: Factions unite, morale improves
+â”œâ”€ Malrik/Elenya cooperation: 50%+ (healing)
+â”œâ”€ Endings Unlocked: 1 (Synthesis), 4 (New Vision)
+â””â”€ World State: LEAN_SYNTHESIS
 
 PATH B: STALEMATE (Rebuild Potential 35-65%)
-├─ Trigger: 1-3 player interventions
-├─ Setup: Both find separate solutions
-├─ Dialogue: "We've found separate solutions. It's working."
-├─ Progression: Functional but diminished factions
-├─ Consequence: Dormant but stable relationship
-├─ Malrik/Elenya cooperation: 20-40% (dormant)
-├─ Endings Unlocked: 5 (Ambiguity), 6 (Resignation)
-└─ World State: NEUTRAL
+â”œâ”€ Trigger: 1-3 player interventions
+â”œâ”€ Setup: Both find separate solutions
+â”œâ”€ Dialogue: "We've found separate solutions. It's working."
+â”œâ”€ Progression: Functional but diminished factions
+â”œâ”€ Consequence: Dormant but stable relationship
+â”œâ”€ Malrik/Elenya cooperation: 20-40% (dormant)
+â”œâ”€ Endings Unlocked: 5 (Ambiguity), 6 (Resignation)
+â””â”€ World State: NEUTRAL
 
 PATH C: COMPLETE_SEPARATION (Rebuild Potential < 35%)
-├─ Trigger: 0 player interventions
-├─ Setup: Both accept the fracture
-├─ Dialogue: "I suppose some things can't be fixed."
-├─ Progression: Complete isolation, no contact
-├─ Consequence: Fractured factions, hope diminished
-├─ Malrik/Elenya cooperation: 0-20% (broken)
-├─ Endings Unlocked: 2 (Isolation), 3 (Collapse)
-└─ World State: LEAN_FRAGMENTATION
+â”œâ”€ Trigger: 0 player interventions
+â”œâ”€ Setup: Both accept the fracture
+â”œâ”€ Dialogue: "I suppose some things can't be fixed."
+â”œâ”€ Progression: Complete isolation, no contact
+â”œâ”€ Consequence: Fractured factions, hope diminished
+â”œâ”€ Malrik/Elenya cooperation: 0-20% (broken)
+â”œâ”€ Endings Unlocked: 2 (Isolation), 3 (Collapse)
+â””â”€ World State: LEAN_FRAGMENTATION
 ```
 
 ---
 
 ## Quality Gates Passed
 
-✅ **All Quality Gates Achieved**:
+âœ… **All Quality Gates Achieved**:
 - [x] EventTimeline initializes correctly
 - [x] Day progression with phase transitions works
 - [x] Building deteriorates with visual indicators
@@ -269,23 +269,23 @@ PATH C: COMPLETE_SEPARATION (Rebuild Potential < 35%)
 
 ## Test Results
 
-**14/14 Tests Passing** ✅:
+**14/14 Tests Passing** âœ…:
 
 ```
-✓ TEST 1: EventTimeline Creation
-✓ TEST 2: Game Day Progression
-✓ TEST 3: Building Deterioration
-✓ TEST 4: Collapse Trigger
-✓ TEST 5: NPC Stress Progression
-✓ TEST 6: Player Intervention Recording
-✓ TEST 7: Aftermath Path Determination
-✓ TEST 8: Collapse Scene Narration
-✓ TEST 9: Aftermath Scene Narration
-✓ TEST 10: Aftermath Path Narrations
-✓ TEST 11: Ending Connection
-✓ TEST 12: Orchestrator Phase 3 Integration
-✓ TEST 13: Coherence and Traits Phase 3
-✓ TEST 14: Game State Persistence
+âœ“ TEST 1: EventTimeline Creation
+âœ“ TEST 2: Game Day Progression
+âœ“ TEST 3: Building Deterioration
+âœ“ TEST 4: Collapse Trigger
+âœ“ TEST 5: NPC Stress Progression
+âœ“ TEST 6: Player Intervention Recording
+âœ“ TEST 7: Aftermath Path Determination
+âœ“ TEST 8: Collapse Scene Narration
+âœ“ TEST 9: Aftermath Scene Narration
+âœ“ TEST 10: Aftermath Path Narrations
+âœ“ TEST 11: Ending Connection
+âœ“ TEST 12: Orchestrator Phase 3 Integration
+âœ“ TEST 13: Coherence and Traits Phase 3
+âœ“ TEST 14: Game State Persistence
 ```
 
 ---
@@ -313,7 +313,7 @@ PATH C: COMPLETE_SEPARATION (Rebuild Potential < 35%)
 ```bash
 python test_phase3_integration.py
 ```
-Expected: All 14 tests pass ✅
+Expected: All 14 tests pass âœ…
 
 ### Use in Game Loop
 ```python
@@ -348,100 +348,100 @@ status = orchestrator.get_phase3_status()
 PHASE 3 ARCHITECTURE:
 
 EventTimeline (Core System)
-├─ Day Tracking (1-7+ in-game days)
-├─ Phase Progression (8 distinct phases)
-├─ Building Status
-│  └─ Stability tracking (100% → 0%)
-│  └─ Visual indicators (cracks, water, sagging, debris)
-├─ NPC States
-│  ├─ Malrik stress (0-100)
-│  ├─ Elenya stress (0-100)
-│  └─ Cooperation level (0-100)
-├─ Player Interventions
-│  └─ Rebuild potential calculation
-└─ Event Triggers
-   ├─ Collapse (day 15 or manual)
-   ├─ Phase transitions
-   └─ Aftermath path determination
+â”œâ”€ Day Tracking (1-7+ in-game days)
+â”œâ”€ Phase Progression (8 distinct phases)
+â”œâ”€ Building Status
+â”‚  â””â”€ Stability tracking (100% â†’ 0%)
+â”‚  â””â”€ Visual indicators (cracks, water, sagging, debris)
+â”œâ”€ NPC States
+â”‚  â”œâ”€ Malrik stress (0-100)
+â”‚  â”œâ”€ Elenya stress (0-100)
+â”‚  â””â”€ Cooperation level (0-100)
+â”œâ”€ Player Interventions
+â”‚  â””â”€ Rebuild potential calculation
+â””â”€ Event Triggers
+   â”œâ”€ Collapse (day 15 or manual)
+   â”œâ”€ Phase transitions
+   â””â”€ Aftermath path determination
 
 Collapse Scenes (Narration System)
-├─ CollapseTriggerScene
-│  ├─ Initial rumble narration
-│  ├─ Structural failure narration
-│  ├─ NPC reaction narrations
-│  └─ Post-collapse dialogue
-├─ ImmediateAftermathScene
-│  ├─ Separation narration
-│  ├─ NPC isolation states
-│  └─ Intervention response trees
-└─ AftermathPathDivergence
-   ├─ Path A: Rebuild Together (setup + progression)
-   ├─ Path B: Stalemate (setup + resolution)
-   ├─ Path C: Complete Separation (setup + aftermath)
-   └─ Ending connections for each path
+â”œâ”€ CollapseTriggerScene
+â”‚  â”œâ”€ Initial rumble narration
+â”‚  â”œâ”€ Structural failure narration
+â”‚  â”œâ”€ NPC reaction narrations
+â”‚  â””â”€ Post-collapse dialogue
+â”œâ”€ ImmediateAftermathScene
+â”‚  â”œâ”€ Separation narration
+â”‚  â”œâ”€ NPC isolation states
+â”‚  â””â”€ Intervention response trees
+â””â”€ AftermathPathDivergence
+   â”œâ”€ Path A: Rebuild Together (setup + progression)
+   â”œâ”€ Path B: Stalemate (setup + resolution)
+   â”œâ”€ Path C: Complete Separation (setup + aftermath)
+   â””â”€ Ending connections for each path
 
 Orchestrator Integration
-├─ advance_game_day()
-├─ trigger_collapse_event()
-├─ record_post_collapse_intervention()
-├─ resolve_aftermath_path()
-└─ get_phase3_status()
+â”œâ”€ advance_game_day()
+â”œâ”€ trigger_collapse_event()
+â”œâ”€ record_post_collapse_intervention()
+â”œâ”€ resolve_aftermath_path()
+â””â”€ get_phase3_status()
 ```
 
 ---
 
 ## Design Principles Maintained
 
-✅ **Systems collapse without human connection**: Building mirrors Malrik/Elenya fracture ✅
-**Patterns matter, not individual choices**: Interventions accumulate toward rebuild potential ✅
-**Coherence is consequence**: Player authenticity affects aftermath trajectory ✅ **People matter
-more than systems**: NPC relationships determine outcomes ✅ **Multiple valid paths**: All 3
-aftermath paths lead to valid endings ✅ **Player agency respected**: No forced choices, consequences
-flow from authenticity ✅ **Echo of Velhara**: Collapse event echoes Velhara's original
+âœ… **Systems collapse without human connection**: Building mirrors Malrik/Elenya fracture âœ…
+**Patterns matter, not individual choices**: Interventions accumulate toward rebuild potential âœ…
+**Coherence is consequence**: Player authenticity affects aftermath trajectory âœ… **People matter
+more than systems**: NPC relationships determine outcomes âœ… **Multiple valid paths**: All 3
+aftermath paths lead to valid endings âœ… **Player agency respected**: No forced choices, consequences
+flow from authenticity âœ… **Echo of Velhara**: Collapse event echoes Velhara's original
 civilizational failure
 
 ---
 
 ## Phase Continuity
 
-### Phase 1 → Phase 2 → Phase 3 Flow
+### Phase 1 â†’ Phase 2 â†’ Phase 3 Flow
 
 ```
 PHASE 1: Trait System Foundation
-├─ TraitProfiler tracks choices
-├─ CoherenceCalculator measures authenticity
-└─ NPCResponseEngine maps compatibility
+â”œâ”€ TraitProfiler tracks choices
+â”œâ”€ CoherenceCalculator measures authenticity
+â””â”€ NPCResponseEngine maps compatibility
 
 PHASE 2: Orchestrator Integration + Marketplace
-├─ Trait system wired to game loop
-├─ Marketplace debate scene with branching
-├─ Coherence affects dialogue depth
-└─ NPC compatibility determines available paths
+â”œâ”€ Trait system wired to game loop
+â”œâ”€ Marketplace debate scene with branching
+â”œâ”€ Coherence affects dialogue depth
+â””â”€ NPC compatibility determines available paths
 
 PHASE 3: Building Collapse Event
-├─ Phase 2 coherence level affects NPC cooperation
-├─ Phase 2 primary trait affects conflict baseline
-├─ Trait profiler continues tracking interventions
-├─ Coherence level affects NPC stress responses
-└─ Outcome: 3 aftermath paths, each unlocking distinct endings
+â”œâ”€ Phase 2 coherence level affects NPC cooperation
+â”œâ”€ Phase 2 primary trait affects conflict baseline
+â”œâ”€ Trait profiler continues tracking interventions
+â”œâ”€ Coherence level affects NPC stress responses
+â””â”€ Outcome: 3 aftermath paths, each unlocking distinct endings
 ```
 
 ---
 
 ## What's Working
 
-✅ EventTimeline day/phase progression ✅ Building deterioration with indicators ✅ NPC
-stress/cooperation tracking ✅ Collapse trigger at proper threshold ✅ Player intervention recording ✅
-Aftermath path determination by intervention count ✅ Collapse scene narrations ✅ Aftermath scene
-narrations (all 3 paths distinct) ✅ Ending connections to aftermath paths ✅ Orchestrator Phase 3
-integration ✅ Phase 2 → Phase 3 continuity ✅ Game state serialization
+âœ… EventTimeline day/phase progression âœ… Building deterioration with indicators âœ… NPC
+stress/cooperation tracking âœ… Collapse trigger at proper threshold âœ… Player intervention recording âœ…
+Aftermath path determination by intervention count âœ… Collapse scene narrations âœ… Aftermath scene
+narrations (all 3 paths distinct) âœ… Ending connections to aftermath paths âœ… Orchestrator Phase 3
+integration âœ… Phase 2 â†’ Phase 3 continuity âœ… Game state serialization
 
 ---
 
 ## What's Not Yet Implemented
 
-❌ Phase 4: Ending System (6 distinct endings with gating) ❌ Phase 5: Save/Load Persistence ❌ Phase
-6: API Layer ❌ Phase 7: Web UI
+âŒ Phase 4: Ending System (6 distinct endings with gating) âŒ Phase 5: Save/Load Persistence âŒ Phase
+6: API Layer âŒ Phase 7: Web UI
 
 ---
 
@@ -462,11 +462,11 @@ states reflecting outcome 5. **Corelink Resolution**: Final decision about the a
 - Ending 6 (Resignation): Stalemate + High Skepticism
 
 **Estimated**: 5-7 days  
-**Foundation**: ✅ Phase 1, 2, 3 complete
+**Foundation**: âœ… Phase 1, 2, 3 complete
 
 ---
 
-**Status**: Phase 3 Complete ✅ — Ready for Phase 4 🚀
+**Status**: Phase 3 Complete âœ… â€” Ready for Phase 4 ðŸš€
 
 ---
 
@@ -489,30 +489,31 @@ states reflecting outcome 5. **Corelink Resolution**: Final decision about the a
 PLAYER JOURNEY (Full Game Flow):
 
 1. Start Game
-   ↓
+   â†“
 2. Enter Marketplace (Phase 2)
-   ├─ Meet Malrik (archivalist)
-   ├─ Meet Elenya (mystic)
-   ├─ Meet Coren (mediator)
-   └─ Make trait-based choices → Exit with coherence score
-   ↓
+   â”œâ”€ Meet Malrik (archivalist)
+   â”œâ”€ Meet Elenya (mystic)
+   â”œâ”€ Meet Cal (mediator)
+   â””â”€ Make trait-based choices â†’ Exit with coherence score
+   â†“
 3. Building Collapse Event (Phase 3)
-   ├─ Day 1-2: Normal exploration
-   ├─ Day 3-5: Building shows cracks
-   ├─ Day 6-10: Faction conflict escalates
-   ├─ Day 10-15: Final warning from Coren
-   ├─ Day 15: COLLAPSE OCCURS
-   ├─ Day 16-18: Aftermath phase
-   │   └─ Record 0-5+ interventions
-   ├─ Day 19-23: Path resolution
-   └─ Day 24: Aftermath path locked in
-   ↓
+   â”œâ”€ Day 1-2: Normal exploration
+   â”œâ”€ Day 3-5: Building shows cracks
+   â”œâ”€ Day 6-10: Faction conflict escalates
+   â”œâ”€ Day 10-15: Final warning from Cal
+   â”œâ”€ Day 15: COLLAPSE OCCURS
+   â”œâ”€ Day 16-18: Aftermath phase
+   â”‚   â””â”€ Record 0-5+ interventions
+   â”œâ”€ Day 19-23: Path resolution
+   â””â”€ Day 24: Aftermath path locked in
+   â†“
 4. Ending (Phase 4)
-   ├─ Read ending narration (1,000+ words)
-   ├─ See NPC final states
-   ├─ View world transformation
-   └─ Possible continuation hook
+   â”œâ”€ Read ending narration (1,000+ words)
+   â”œâ”€ See NPC final states
+   â”œâ”€ View world transformation
+   â””â”€ Possible continuation hook
 ```
 
 This architecture ensures that every player choice compounds, every trait pattern matters, and every
 coherence level affects outcomes.
+

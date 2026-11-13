@@ -1,4 +1,4 @@
-# Velinor: Narrative Spine & Story Structure
+﻿# Velinor: Narrative Spine & Story Structure
 
 ## Overview
 Velinor uses a **fixed spine with fluid limbs** narrative architecture. Three structural anchors
@@ -74,7 +74,7 @@ player-responsive.
 - The player reaches the Corelink chamber with Saori and Velinor
 - They face the core question: Can we restart this system, or must we rebuild from human connection first?
 - The player's accumulated choices shape which of the six endings plays out
-- The ending is not *whether* the Corelink restarts—it's *whether the people chose synthesis first*
+- The ending is not *whether* the Corelink restartsâ€”it's *whether the people chose synthesis first*
 
 **Player Impact:**
 - Final choice resolves the game's central question
@@ -83,7 +83,7 @@ player-responsive.
 
 ---
 
-## The Semi-Fixed Hinge: Malrik, Elenya & Coren Convergence
+## The Semi-Fixed Hinge: Malrik, Elenya & Cal Convergence
 
 ### **Marketplace Debate (Semi-Structured: Act II)**
 **Location:** The Marketplace Square  
@@ -100,7 +100,7 @@ player-responsive.
 A shared archive building that both factions need:
 - **Malrik's position:** "Records must be preserved and organized. Structure first."
 - **Elenya's position:** "Spiritual memory matters. People are forgetting the old ways."
-- **Coren's position:** "Both sides are right. Both must have access. We must negotiate."
+- **Cal's position:** "Both sides are right. Both must have access. We must negotiate."
 
 **What Leaks Through (Love Story):**
 - The way Elenya's frustration is tinged with hurt
@@ -112,7 +112,7 @@ A shared archive building that both factions need:
 The player can return to the building multiple times and witness:
 - Malrik complaining that Elenya's group is "misplacing" records
 - Elenya venting that Malrik's archivists "hog the quiet hours"
-- Coren negotiating new time-sharing arrangements
+- Cal negotiating new time-sharing arrangements
 - The tension evolving as the player's presence impacts factional dynamics
 
 ---
@@ -133,7 +133,7 @@ The player can return to the building multiple times and witness:
 "Will you rebuild this together, or will you walk away because it's too hard to hold both truths?"
 
 **Two Possible Paths:**
-1. **Rebuild Together** → Symbol of integration, healing, synthesis possible 2. **Abandon It** →
+1. **Rebuild Together** â†’ Symbol of integration, healing, synthesis possible 2. **Abandon It** â†’
 Scar on the city, warning of what happens when people cling to their own truth
 
 **Connection to Velhara's Downfall:**
@@ -149,7 +149,7 @@ scale.
 ### **The Triad Convergence Scene**
 **When:** After player has explored, seen NPC dynamics, witnessed building collapse  
 **Where:** Location varies based on player choices (could be ruins of building, council chamber, or neutral ground)  
-**Participants:** Malrik, Elenya, Coren (the three voices)  
+**Participants:** Malrik, Elenya, Cal (the three voices)  
 **Function:** Player affirms one philosophy; shapes trajectory to ending
 
 **What Happens:**
@@ -196,24 +196,24 @@ The player's journey is learning this truth across all three scales simultaneous
 
 ```
 ACT I (Fixed Spine)
-├─ Saori Encounter (codex + onboarding)
-└─ Ravi & Nima (emotional calibration)
+â”œâ”€ Saori Encounter (codex + onboarding)
+â””â”€ Ravi & Nima (emotional calibration)
 
 ACT II (Semi-Fixed Hinge)
-├─ Marketplace Debate (ideologies introduced)
-└─ Recurrence Scenes (tension deepens)
+â”œâ”€ Marketplace Debate (ideologies introduced)
+â””â”€ Recurrence Scenes (tension deepens)
 
 ACT III (Fluid Exploration + Turning Point)
-├─ NPC Meetings (player-driven order)
-├─ Trait Shifts (fluid, responsive)
-├─ Factional Dynamics (world evolving)
-└─ Building Collapse (question crystallized)
+â”œâ”€ NPC Meetings (player-driven order)
+â”œâ”€ Trait Shifts (fluid, responsive)
+â”œâ”€ Factional Dynamics (world evolving)
+â””â”€ Building Collapse (question crystallized)
 
 ACT IV (Structured Convergence)
-└─ Triad Convergence (player affirms voice)
+â””â”€ Triad Convergence (player affirms voice)
 
 ACT V (Fixed Culmination)
-└─ Corelink Chamber (final choice, ending determined)
+â””â”€ Corelink Chamber (final choice, ending determined)
 ```
 
 ---
@@ -225,3 +225,4 @@ ACT V (Fixed Culmination)
 **Organs:** Breathe and respond to player presence  
 
 The structure holds the meaning. The fluidity holds the world alive.
+

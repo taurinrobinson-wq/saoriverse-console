@@ -1,4 +1,4 @@
-# Velinor: Building Collapse Event - Trigger, Progression & Aftermath
+﻿# Velinor: Building Collapse Event - Trigger, Progression & Aftermath
 
 ## Event Overview
 
@@ -27,7 +27,7 @@ The player begins noticing infrastructure problems at the archive building:
 **NPC Dialogue:**
 - Malrik (if player visits): *"The city's infrastructure is failing everywhere. We've put in repairs, but without proper materials... I don't know how much longer this will hold."*
 - Elenya (if player visits): *"The building's been deteriorating for months. I've asked Malrik if we should have contingency plans, but he says we're secure. I'm not sure I believe him."*
-- Coren (if player asks): *"I've been worried about that building for a while. Both factions have invested so much meaning in it, and it's literally crumbling. That's going to hurt."*
+- Cal (if player asks): *"I've been worried about that building for a while. Both factions have invested so much meaning in it, and it's literally crumbling. That's going to hurt."*
 
 **Mechanical Tracking:**
 - Building Stability: 70% (decreasing over time)
@@ -41,13 +41,13 @@ As the building deteriorates, the factional tension actually worsens:
 **Return Visit Dialogue:**
 - Malrik: *"We need to reinforce the eastern wall. That's going to require diverting resources from archival work."*
 - Elenya: *"Which means less funding for our preparation space. Of course that's the solution you choose."*
-- Coren: *"Stop. Both of you. Let's focus on the immediate structural issue—"*
+- Cal: *"Stop. Both of you. Let's focus on the immediate structural issueâ€”"*
 - Malrik: *"The structure is failing because of inadequate maintenance. Resources have been divided when they should have been unified under archival protocols."*
 - Elenya: *"Of course you blame us. We're not the ones who decided to hoard materials."*
 
 **Mechanical Tracking:**
 - Malrik/Elenya Cooperation: Declining (argument frequency +2)
-- Coren Exhaustion: Visible
+- Cal Exhaustion: Visible
 - Building Stability: 50% (visibly deteriorating now)
 - Player can intervene to reduce tension or watch it escalate
 
@@ -58,15 +58,15 @@ As the building deteriorates, the factional tension actually worsens:
 
 #### **Phase 1c: Final Warning (Day 5)**
 
-Coren approaches the player privately:
+Cal approaches the player privately:
 
-**Coren:**
-*"The building's going to fail. Soon. Maybe a few days, maybe a week. And when it does, Malrik and Elenya are going to break. Not the structure—them. They'll blame each other. They'll give up on ever finding common ground."*
+**Cal:**
+*"The building's going to fail. Soon. Maybe a few days, maybe a week. And when it does, Malrik and Elenya are going to break. Not the structureâ€”them. They'll blame each other. They'll give up on ever finding common ground."*
 
 **Player Options:**
-- *"Can't you warn them?"* → Coren: *"I've tried. Malrik thinks it's manageable. Elenya thinks it's a trap. They're both scared."*
-- *"What should I do?"* → Coren: *"Be here when it happens. Don't let them walk away from each other completely."*
-- *"Maybe they should just rebuild separately."* → Coren: *"[Sadly] Maybe. But I think they'd both regret it."*
+- *"Can't you warn them?"* â†’ Cal: *"I've tried. Malrik thinks it's manageable. Elenya thinks it's a trap. They're both scared."*
+- *"What should I do?"* â†’ Cal: *"Be here when it happens. Don't let them walk away from each other completely."*
+- *"Maybe they should just rebuild separately."* â†’ Cal: *"[Sadly] Maybe. But I think they'd both regret it."*
 
 **Mechanical Tracking:**
 - Building Stability: 25%
@@ -87,7 +87,7 @@ The collapse happens when:
 
 **[Player is in the marketplace or approaching the archive building]**
 
-**Audio:** A deep creaking sound. Then cracking. Not dramatic—intimate.
+**Audio:** A deep creaking sound. Then cracking. Not dramaticâ€”intimate.
 
 **Visuals:**
 - The eastern wall develops a visible crack that spreads
@@ -96,12 +96,12 @@ The collapse happens when:
 - Dust and debris fall into the courtyard
 - The eastern half of the building becomes visibly unstable
 
-**[The collapse is not a explosion. It's a slow failure. The building doesn't fall—it breaks.]**
+**[The collapse is not a explosion. It's a slow failure. The building doesn't fallâ€”it breaks.]**
 
 **NPC Reactions:**
 - Malrik emerges from the building, covered in dust, face pale
-- Elenya runs toward the building, screaming a name (Coren? A fellow mystic?)
-- Coren is standing in the courtyard, helping evacuate people
+- Elenya runs toward the building, screaming a name (Cal? A fellow mystic?)
+- Cal is standing in the courtyard, helping evacuate people
 
 **Dialogue After Collapse:**
 
@@ -111,33 +111,33 @@ The collapse happens when:
 **Elenya:** [Frantically looking around]
 *"Where's Soren? Where's Soren? Is anyone hurt?"*
 
-**Coren:** [To player, voice shaking]
+**Cal:** [To player, voice shaking]
 *"Everyone got out. But the building... it's structurally unsound now. Half of it's unusable."*
 
 **Malrik:** [To Elenya, accusatory]
-*"You knew the roof was weakening. You said you wanted to 'renovate' the space. If we'd consolidated operations instead of trying to accommodate both—"*
+*"You knew the roof was weakening. You said you wanted to 'renovate' the space. If we'd consolidated operations instead of trying to accommodate bothâ€”"*
 
 **Elenya:** [Stepping toward him, voice rising]
 *"You knew. You KNEW and you did nothing because admitting the building wasn't perfect meant admitting your system doesn't work. You'd rather watch it fail than actually collaborate."*
 
 **Malrik:**
-*"That's not—"*
+*"That's notâ€”"*
 
 **Elenya:**
 *"Yes it is. And now look at us. The building is destroyed, and you're STILL finding a way to blame me."*
 
 **[She walks away. Malrik stands frozen, staring at the ruins.]**
 
-**[Coren looks at player, then at the collapsed building, then back at player.]**
+**[Cal looks at player, then at the collapsed building, then back at player.]**
 
-**Coren:**
+**Cal:**
 *"This is where they decide. Rebuild or walk away. The building was the only thing holding their worlds together. Now they have to figure out if they will."*
 
 **Mechanical Effects:**
 - Archive Building: Destroyed (70% of structure damaged, unusable)
 - Malrik: In crisis state (depressed, angry, defensive)
 - Elenya: In crisis state (grieving, frustrated, withdrawing)
-- Coren: Hopeful that this might be a catalyst, but terrified it might be the end
+- Cal: Hopeful that this might be a catalyst, but terrified it might be the end
 - Both Factions: Demoralized, questioning leadership
 
 **Player Emotional OS Response:**
@@ -156,7 +156,7 @@ Both Malrik and Elenya withdraw into their respective factions.
 **Malrik's Reaction:**
 - Closes himself off in an auxiliary archival space
 - Focuses on salvaging records from the ruined building
-- Refuses to see Elenya or Coren
+- Refuses to see Elenya or Cal
 - Other archivists report: *"He's working obsessively. Won't sleep. It's like he's punishing himself."*
 
 **Elenya's Reaction:**
@@ -164,31 +164,31 @@ Both Malrik and Elenya withdraw into their respective factions.
 - Is visibly grieving, not just about the building but about the relationship
 - Other mystics report: *"She's been alone a lot. Crying. Not her usual self."*
 
-**Coren's Attempted Mediation:**
+**Cal's Attempted Mediation:**
 - Goes to Malrik: *"She didn't mean what she said. She was scared."*
 - Malrik: *"Everything she said was true. I should have listened."*
 - Goes to Elenya: *"He's blaming himself entirely. He would take it all back if he could."*
 - Elenya: *"If he would take it back, then why hasn't he come to see me?"*
 
-**[Coren is torn between two people who love each other but can't find their way back.]**
+**[Cal is torn between two people who love each other but can't find their way back.]**
 
 **Mechanical Tracking:**
 - Malrik/Elenya Separation: Complete
 - Malrik/Elenya Relationship: Critical (-50% cooperation)
 - Both faction moods: Pessimistic
-- Coren's Stress: Maxed out
+- Cal's Stress: Maxed out
 
 #### **Player Intervention Point 1 (Day 1-2):**
 
 **To Malrik:**
-- *"This wasn't your fault."* → Malrik: *"Wasn't it? I should have maintained the structure better. I should have listened to her."*
-- *"What would it take to rebuild?"* → Malrik: *"Why would she want to rebuild with me after everything that's happened?"*
-- *"She's grieving too."* → Malrik: [Long pause] *"Then I should be with her. Not here. With her."*
+- *"This wasn't your fault."* â†’ Malrik: *"Wasn't it? I should have maintained the structure better. I should have listened to her."*
+- *"What would it take to rebuild?"* â†’ Malrik: *"Why would she want to rebuild with me after everything that's happened?"*
+- *"She's grieving too."* â†’ Malrik: [Long pause] *"Then I should be with her. Not here. With her."*
 
 **To Elenya:**
-- *"He's suffering."* → Elenya: *"So am I. But suffering together isn't the same as understanding."*
-- *"Maybe the collapse was the only way to make real change."* → Elenya: *"Or maybe it's just the final proof that we can't make it work."*
-- *"He's asking how to rebuild."* → Elenya: [Surprised] *"Really? Even after..."*
+- *"He's suffering."* â†’ Elenya: *"So am I. But suffering together isn't the same as understanding."*
+- *"Maybe the collapse was the only way to make real change."* â†’ Elenya: *"Or maybe it's just the final proof that we can't make it work."*
+- *"He's asking how to rebuild."* â†’ Elenya: [Surprised] *"Really? Even after..."*
 
 **Mechanical Effects:**
 - Player Empathy toward either character +1
@@ -202,7 +202,7 @@ Both factions face a practical problem:
 - The mystic preparation space that was in the building is now gone
 - Both groups are homeless and desperate
 
-**Coren proposes:** *"We could rebuild together. Share the space again, but differently. Design it together from the beginning."*
+**Cal proposes:** *"We could rebuild together. Share the space again, but differently. Design it together from the beginning."*
 
 **Malrik's Response:**
 - If player has NOT intervened: *"I don't think she wants to work with me."* [Withdrawal]
@@ -242,7 +242,7 @@ The game now branches based on Malrik/Elenya's relationship state and player's c
 **Elenya:**
 *"Then at least we'll fail honestly."*
 
-**[They stand looking at the ruins. Coren, nearby, exhales with relief.]**
+**[They stand looking at the ruins. Cal, nearby, exhales with relief.]**
 
 **Days 5-7:** Planning begins for a new shared archive
 
@@ -267,9 +267,9 @@ The game now branches based on Malrik/Elenya's relationship state and player's c
 - They're functionally separated but still in the city
 - Both are diminished but stable
 
-**Day 6:** Coren brings them together one more time
+**Day 6:** Cal brings them together one more time
 
-**Coren:** 
+**Cal:** 
 *"You could still rebuild. Together."*
 
 **Malrik:**
@@ -300,9 +300,9 @@ The game now branches based on Malrik/Elenya's relationship state and player's c
 - Malrik becomes more rigid, more isolated in his archival work
 - Elenya becomes more spiritual, more withdrawn from the city
 - They're no longer in conflict because they're no longer in contact
-- Coren is devastated
+- Cal is devastated
 
-**Coren:** [To player, privately]
+**Cal:** [To player, privately]
 *"I thought you might help them. But I suppose some things can't be fixed."*
 
 **Days 5-7:** The building remains a ruin
@@ -343,7 +343,7 @@ The collapse is not punishment. It's a mirror.
 **What the collapse reflects:**
 - Malrik's need for control
 - Elenya's need to be valued
-- Coren's exhaustion with mediation
+- Cal's exhaustion with mediation
 - The city's fragility
 - The player's role (are they a catalyst or a bystander?)
 
@@ -365,21 +365,21 @@ The collapse is not punishment. It's a mirror.
 - Archive Building: Reconstruction begins (will be completed before Corelink chamber)
 - Malrik/Elenya Relationship: Healing (visible progress in shared space)
 - Both Factions: United, morale improving
-- Coren: Relieved, hopeful
+- Cal: Relieved, hopeful
 - World State: Leaning toward synthesis
 
 ### **If Stalemate:**
 - Archive Building: Remains ruined, becomes historical site
 - Malrik/Elenya Relationship: Dormant, unresolved
 - Both Factions: Functional but separate
-- Coren: Resigned, but still present
+- Cal: Resigned, but still present
 - World State: Neutral, open to either future
 
 ### **If Complete Separation:**
 - Archive Building: Remains ruined, becomes symbol of failure
 - Malrik/Elenya Relationship: Fractured, possibly beyond repair
 - Both Factions: Isolated, morale declining
-- Coren: Heartbroken, questioning his mediating ability
+- Cal: Heartbroken, questioning his mediating ability
 - World State: Leaning toward fragmentation
 
 ---
@@ -410,7 +410,7 @@ The collapse is not punishment. It's a mirror.
 
 **Post-Reconstruction:** *"We're learning to hold each other's truth. It's harder than I thought, but it's real."*
 
-### **Coren's Evolution:**
+### **Cal's Evolution:**
 
 **Pre-Collapse:** *"I keep trying to fix them, but they have to want to fix themselves."*
 
@@ -442,7 +442,7 @@ influence the trajectory of Malrik/Elenya's relationship and the ending they unl
 - Endings 2, 3 become more likely
 - NPCs don't reference player's role
 
-The collapse event is designed to make the player feel the weight of choice—not in a controlling
+The collapse event is designed to make the player feel the weight of choiceâ€”not in a controlling
 way, but in an authentic way. The player cannot force Malrik and Elenya to rebuild. But they can
 provide support, encouragement, or perspective that helps them find their own way.
 
@@ -463,6 +463,7 @@ cooperation, the building becomes a symbol of integration.
 The ending of the game depends on whether the people learned the lesson Velhara failed to learn:
 that structures are only as strong as the human connections they're built upon.
 
-The player's entire emotional OS journey is learning to see this truth—from the personal scale
+The player's entire emotional OS journey is learning to see this truthâ€”from the personal scale
 (Malrik/Elenya) to the communal scale (the city) to the civilizational scale (the Corelink choice at
 the end).
+

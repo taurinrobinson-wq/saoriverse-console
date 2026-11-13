@@ -1,4 +1,4 @@
-# Velinor: Comprehensive Implementation Audit & Roadmap
+﻿# Velinor: Comprehensive Implementation Audit & Roadmap
 
 **Date:** January 7, 2026  
 **Status:** Design complete, partial implementation exists, needs full game build
@@ -7,7 +7,7 @@
 
 ## What Exists (Current Implementation)
 
-### ✅ Backend/Engine Layer
+### âœ… Backend/Engine Layer
 
 **Location:** `velinor/engine/`
 
@@ -46,13 +46,13 @@
 
 5. **scene_manager.py** - Scene system
    - SceneModule, SceneRenderer, SceneBuilder
-   - Scene progression (DISTANT → APPROACH → CLOSE → DIALOGUE → CHOICES)
+   - Scene progression (DISTANT â†’ APPROACH â†’ CLOSE â†’ DIALOGUE â†’ CHOICES)
    - Asset management (background/foreground layering)
    - Glyph resonance display
    - Player choice capture
    - **Status:** COMPLETE (but not integrated into main game)
 
-### ✅ Frontend/Web Layer
+### âœ… Frontend/Web Layer
 
 **Location:** `velinor-web/`
 
@@ -61,7 +61,7 @@
 - Styling setup (PostCSS)
 - **Status:** SKELETON ONLY - no game UI implemented yet
 
-### ✅ Test/Demo Layer
+### âœ… Test/Demo Layer
 
 **Location:** `velinor/` root
 
@@ -72,7 +72,7 @@
   - Dialogue history
   - **Status:** WORKS but demo-only
 
-### ✅ Assets
+### âœ… Assets
 
 **Location:** `velinor/`
 
@@ -85,7 +85,7 @@
 
 **Status:** COMPREHENSIVE collection
 
-### ✅ Documentation
+### âœ… Documentation
 
 **Location:** `velinor/markdowngameinstructions/`
 
@@ -103,7 +103,7 @@
 
 ## What's Missing (Needed for Full Game)
 
-### ❌ Critical: Core Game Loop Integration
+### âŒ Critical: Core Game Loop Integration
 
 **Missing:** Nothing wires the new design to the existing engine
 
@@ -116,9 +116,9 @@ accessible
 
 **Impact:** Game is currently playable but doesn't reflect the narrative design
 
-### ❌ Critical: Marketplace Debate Scene (Act II)
+### âŒ Critical: Marketplace Debate Scene (Act II)
 
-**Missing:** The first major player choice - Malrik/Elenya/Coren debate
+**Missing:** The first major player choice - Malrik/Elenya/Cal debate
 
 **What's needed:**
 1. Scene implementation using `scene_manager.py` 2. 3 entry points (direct, faction introduction,
@@ -128,19 +128,19 @@ Potential tracking) 7. Recurrence mechanics (returning to building shows evoluti
 
 **Impact:** Can't test early relationship state or trait tests
 
-### ❌ Critical: Building Collapse Event (Act III)
+### âŒ Critical: Building Collapse Event (Act III)
 
 **Missing:** The mid-game turning point that locks in ending trajectory
 
 **What's needed:**
-1. 7-day timeline progression system 2. Visual deterioration sequence (crack → larger cracks →
-collapse) 3. NPC state transitions (independence → stress → separation/reunion) 4. Player
+1. 7-day timeline progression system 2. Visual deterioration sequence (crack â†’ larger cracks â†’
+collapse) 3. NPC state transitions (independence â†’ stress â†’ separation/reunion) 4. Player
 intervention points (Days 1, 2, 3) 5. Three divergent paths with different NPC outcomes 6.
 Relationship state locking
 
 **Impact:** Can't test how early choices affect endings
 
-### ❌ Critical: Corelink Chamber Scene (Act V)
+### âŒ Critical: Corelink Chamber Scene (Act V)
 
 **Missing:** Final choice between system restart and people-first approach
 
@@ -151,18 +151,18 @@ logic 6. Ending cinematics
 
 **Impact:** Game has no actual ending yet
 
-### ❌ Major: Trait-Based Dialogue Variation
+### âŒ Major: Trait-Based Dialogue Variation
 
 **Missing:** NPC dialogue responds to player trait profile
 
 **What's needed:**
 1. Dialogue option system with trait tags (already partially in scene_manager) 2. NPC response
-lookup engine (trait profile → response selection) 3. Dialogue variants for all major scenes 4.
+lookup engine (trait profile â†’ response selection) 3. Dialogue variants for all major scenes 4.
 Dynamic dialogue that references player's pattern of choices
 
 **Impact:** World feels static, not responsive
 
-### ❌ Major: Save/Load System
+### âŒ Major: Save/Load System
 
 **Missing:** Player persistence
 
@@ -172,7 +172,7 @@ Dynamic dialogue that references player's pattern of choices
 
 **Impact:** Can't resume games
 
-### ❌ Major: Next.js Web Interface
+### âŒ Major: Next.js Web Interface
 
 **Missing:** Actual game UI (velinor-web is empty skeleton)
 
@@ -183,9 +183,9 @@ Settings/save menu
 
 **Impact:** No playable interface yet
 
-### ❌ Major: API Integration
+### âŒ Major: API Integration
 
-**Missing:** Backend ↔ Frontend communication
+**Missing:** Backend â†” Frontend communication
 
 **What's needed:**
 1. Game state endpoint (`/api/game/state`) 2. Action submission endpoint (`/api/game/action`) 3.
@@ -193,7 +193,7 @@ Save endpoint (`/api/game/save`) 4. Load endpoint (`/api/game/load`) 5. Session 
 
 **Impact:** Web UI can't control game
 
-### ❌ Minor: Optional Side Content
+### âŒ Minor: Optional Side Content
 
 **Missing but not critical:**
 - Crime wave investigation arc
@@ -210,16 +210,16 @@ Save endpoint (`/api/game/save`) 4. Load endpoint (`/api/game/load`) 5. Session 
 
 ```
 velinor/engine/ (5 modules)
-├─ core.py (game state)
-├─ npc_system.py (NPC dialogue)
-├─ twine_adapter.py (story loading)
-├─ orchestrator.py (main loop)
-└─ scene_manager.py (scene rendering)
+â”œâ”€ core.py (game state)
+â”œâ”€ npc_system.py (NPC dialogue)
+â”œâ”€ twine_adapter.py (story loading)
+â”œâ”€ orchestrator.py (main loop)
+â””â”€ scene_manager.py (scene rendering)
 
 velinor_scenes_test.py (Streamlit demo)
 
 velinor-web/ (Next.js skeleton)
-    └─ (no connection to engine)
+    â””â”€ (no connection to engine)
 ```
 
 **Problem:** Modules exist but don't interconnect for the new design. Orchestrator handles Twine stories, not emotional OS trait system.
@@ -228,31 +228,31 @@ velinor-web/ (Next.js skeleton)
 
 ```
 velinor/engine/ (9 modules)
-├─ core.py (game state) ✓
-├─ npc_system.py (NPC dialogue) ✓
-├─ twine_adapter.py (deprecated or archived)
-├─ orchestrator.py (game loop) ✓ (needs modification)
-├─ scene_manager.py (scene rendering) ✓
-├─ trait_system.py (NEW - trait tracking & patterns)
-├─ coherence_calculator.py (NEW - emotional authenticity)
-├─ npc_response_engine.py (NEW - trait → dialogue mapping)
-├─ state_progression.py (NEW - timeline tracking)
-└─ ending_calculator.py (NEW - ending eligibility)
+â”œâ”€ core.py (game state) âœ“
+â”œâ”€ npc_system.py (NPC dialogue) âœ“
+â”œâ”€ twine_adapter.py (deprecated or archived)
+â”œâ”€ orchestrator.py (game loop) âœ“ (needs modification)
+â”œâ”€ scene_manager.py (scene rendering) âœ“
+â”œâ”€ trait_system.py (NEW - trait tracking & patterns)
+â”œâ”€ coherence_calculator.py (NEW - emotional authenticity)
+â”œâ”€ npc_response_engine.py (NEW - trait â†’ dialogue mapping)
+â”œâ”€ state_progression.py (NEW - timeline tracking)
+â””â”€ ending_calculator.py (NEW - ending eligibility)
 
-velinor_scenes_test.py (Streamlit demo) ✓
-    └─ Connected to trait_system + orchestrator
+velinor_scenes_test.py (Streamlit demo) âœ“
+    â””â”€ Connected to trait_system + orchestrator
 
 velinor-web/ (Next.js with API)
-    ├─ /api/game/state (NEW)
-    ├─ /api/game/action (NEW)
-    ├─ /api/game/save (NEW)
-    ├─ /api/game/load (NEW)
-    └─ Components for rendering game (NEW)
-        ├─ SceneRenderer
-        ├─ DialogueDisplay
-        ├─ TraitMeter
-        ├─ NPCRelationship
-        └─ Navigation
+    â”œâ”€ /api/game/state (NEW)
+    â”œâ”€ /api/game/action (NEW)
+    â”œâ”€ /api/game/save (NEW)
+    â”œâ”€ /api/game/load (NEW)
+    â””â”€ Components for rendering game (NEW)
+        â”œâ”€ SceneRenderer
+        â”œâ”€ DialogueDisplay
+        â”œâ”€ TraitMeter
+        â”œâ”€ NPCRelationship
+        â””â”€ Navigation
 ```
 
 ---
@@ -359,7 +359,7 @@ Create load/restore logic 5. Test: Save at key points, verify accurate restorati
 
 ### **Phase 6: API Layer (3-4 days)**
 
-Goal: Backend ↔ Frontend communication
+Goal: Backend â†” Frontend communication
 
 **Tasks:**
 1. Create Flask/FastAPI endpoints for game actions 2. Implement `/api/game/state` - get current game
@@ -417,10 +417,10 @@ browser
 
 If you want a playable prototype ASAP:
 
-1. **Phase 1 (Trait System)** → Game responds to player traits ✓ 2. **Phase 2 (Marketplace Debate)**
-→ First major choice works ✓ 3. **Phase 3 (Collapse)** → Story arc is complete ✓ 4. **Skip Phase 5
-(Save/Load)** → No persistence yet 5. **Phase 6 (API)** → Minimal endpoints only 6. **Phase 7 (Web
-UI)** → Streamlit demo interface only
+1. **Phase 1 (Trait System)** â†’ Game responds to player traits âœ“ 2. **Phase 2 (Marketplace Debate)**
+â†’ First major choice works âœ“ 3. **Phase 3 (Collapse)** â†’ Story arc is complete âœ“ 4. **Skip Phase 5
+(Save/Load)** â†’ No persistence yet 5. **Phase 6 (API)** â†’ Minimal endpoints only 6. **Phase 7 (Web
+UI)** â†’ Streamlit demo interface only
 
 **Result:** Full story playable in Streamlit in ~12-16 days
 
@@ -466,3 +466,4 @@ reinforces that synthesis requires human connection, not infrastructure
 Verify marketplace_intro scene responds to traits 4. Then move to Phase 2 - Marketplace Debate
 
 Want to start there?
+

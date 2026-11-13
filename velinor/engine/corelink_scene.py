@@ -1,4 +1,4 @@
-"""
+﻿"""
 Corelink Chamber Scene - Player's Final Choice
 Where the player makes the decision that determines their ending
 """
@@ -20,7 +20,7 @@ class CoreLinkScene:
         return """
 [THE CORELINK CHAMBER]
 
-You ascend the final spiral. The chamber is exactly as you left it—the massive console that 
+You ascend the final spiral. The chamber is exactly as you left itâ€”the massive console that 
 once kept Velinor in an iron grip, now dark and waiting.
 
 Saori stands by the main control panel, her hand resting gently on the activation sequence. 
@@ -29,7 +29,7 @@ but something more like a presence. A companion.
 
 The city spreads below you, visible through the chamber's translucent walls. You can see the 
 building that houses Malrik and Elenya's archive, now being rebuilt. You can see the marketplace 
-where Coren still stands, still reaching out to the scattered factions.
+where Cal still stands, still reaching out to the scattered factions.
 
 Everything has led to this moment.
 
@@ -71,13 +71,13 @@ The choice is yours.
         return {
             "restart": {
                 "label": "RESTART THE CORELINK SYSTEM",
-                "description": "The system will wake up, supporting the integration happening below. It will no longer impose—only mirror and amplify what the people choose.",
+                "description": "The system will wake up, supporting the integration happening below. It will no longer imposeâ€”only mirror and amplify what the people choose.",
                 "consequence_preview": "The machine's power will serve synthesis instead of hierarchy."
             },
             "abandon": {
                 "label": "LET THE CORELINK REST",
                 "description": "The system will remain dormant. The people will build their future without artificial guidance or support.",
-                "consequence_preview": "The people will be free to determine their own path—harder, but entirely their own."
+                "consequence_preview": "The people will be free to determine their own pathâ€”harder, but entirely their own."
             }
         }
     
@@ -107,7 +107,7 @@ You place your hands on the activation sequence.
 "We're restarting it," you say quietly. "But different this time. It will listen before it 
 decides."
 
-Saori nods. There's trust in that nod—trust in you, trust in the system, trust that maybe, 
+Saori nods. There's trust in that nodâ€”trust in you, trust in the system, trust that maybe, 
 just maybe, things can be different.
 
 Velinor brightens. The console begins to glow.
@@ -131,7 +131,7 @@ You pull your hands back from the console.
 
 "Let it rest," you say. "They can figure this out on their own."
 
-Saori's expression is complicated—it's not approval or disapproval, just recognition of what 
+Saori's expression is complicatedâ€”it's not approval or disapproval, just recognition of what 
 you're choosing. A commitment to trust the people completely. No safety net. No system guidance.
 
 The console remains dark. Velinor settles into quietness.
@@ -140,14 +140,14 @@ As the chamber stays dark, you feel something shift. The system powering down, r
 grip on the city, trusting the people to carry forward what they've begun.
 
 The city below continues its work. The archive glows with candle-light and determination. The 
-marketplace bustles with people making their own choices. Coren moves between communities.
+marketplace bustles with people making their own choices. Cal moves between communities.
 
 No system. No guidance. No artificial manager.
 
 Just the people, learning to live together without the machine to mediate.
 
 The choice has been made. The system will rest. And now, everything depends on whether the 
-people can do what the system never could—love each other into coherence.
+people can do what the system never couldâ€”love each other into coherence.
 """
     
     def get_after_choice_reflection(self, choice: str) -> str:
@@ -180,3 +180,4 @@ Velinor fades into the background.
 
 The real work is just beginning.
 """
+

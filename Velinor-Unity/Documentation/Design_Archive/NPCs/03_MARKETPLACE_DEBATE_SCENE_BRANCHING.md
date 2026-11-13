@@ -1,9 +1,9 @@
-# Velinor: Marketplace Debate Scene - Branching Dialogue Map
+﻿# Velinor: Marketplace Debate Scene - Branching Dialogue Map
 
 ## Scene Overview
 **Location:** Marketplace Square (center, near archive building)  
 **Trigger:** Player exploring marketplace after Ravi/Nima encounter  
-**NPCs Present:** Malrik, Elenya, Coren  
+**NPCs Present:** Malrik, Elenya, Cal  
 **Narrative Function:** Factional introduction + love story seeding + ideological framework  
 **Duration:** 8-15 minutes depending on player choices
 
@@ -18,7 +18,7 @@ Player walks toward the archive building and witnesses the debate already in pro
 
 **Scene State:**
 - Malrik and Elenya are standing 10 feet apart
-- Coren is between them, arms raised
+- Cal is between them, arms raised
 - Voices are raised, but not quite shouting
 - Other marketplace NPCs are giving them space
 
@@ -30,7 +30,7 @@ Player walks toward the archive building and witnesses the debate already in pro
 ### **Entry Point B: Directed Introduction**
 A marketplace NPC (Tariq, Tessa, or another faction member) notices the player and says:
 
-*"Hey, new face. Looks like the council's having one of their fights again. Malrik and Elenya can't stop arguing about the archive. You should probably stay clear—Coren's trying to mediate, but nobody's listening."*
+*"Hey, new face. Looks like the council's having one of their fights again. Malrik and Elenya can't stop arguing about the archive. You should probably stay clearâ€”Cal's trying to mediate, but nobody's listening."*
 
 **Player Approach:**
 - Can ask for context before approaching
@@ -59,7 +59,7 @@ If the player has already met a faction member (Malrik's archivist or Elenya's m
 ### **Malrik's Opening Statement**
 
 **[ARCHIVAL COLD]**
-*"Records must be preserved. Organized. Catalogued. Stored with precision. This requires structure, climate control, careful organization. The mystics' approach—leaving things scattered about, handling artifacts without proper documentation—this isn't spirituality, it's negligence. We need dedicated space. That building is the only structure in this city capable of holding what must be held."*
+*"Records must be preserved. Organized. Catalogued. Stored with precision. This requires structure, climate control, careful organization. The mystics' approachâ€”leaving things scattered about, handling artifacts without proper documentationâ€”this isn't spirituality, it's negligence. We need dedicated space. That building is the only structure in this city capable of holding what must be held."*
 
 **Physical Language:**
 - Standing rigid, arms crossed
@@ -73,11 +73,11 @@ Fear that everything will be lost. Control as a proxy for preventing disaster.
 ### **Elenya's Counter**
 
 **[MYSTICAL RESONANT]**
-*"And when do we preserve the memory of what those records mean? When do we teach people to feel the weight of history, not just read about it? Every day, people forget. They lose connection to what came before. Your archives are tombs—beautiful tombs, but tombs nonetheless. The mystics need space too. We need to keep the knowledge alive in people's hearts, not just in your classified stacks."*
+*"And when do we preserve the memory of what those records mean? When do we teach people to feel the weight of history, not just read about it? Every day, people forget. They lose connection to what came before. Your archives are tombsâ€”beautiful tombs, but tombs nonetheless. The mystics need space too. We need to keep the knowledge alive in people's hearts, not just in your classified stacks."*
 
 **Physical Language:**
 - Standing with open posture, hands gesturing
-- Eyes moving between Coren and the player (seeking witnesses)
+- Eyes moving between Cal and the player (seeking witnesses)
 - Voice carrying emotion, almost breaking on "tombs"
 - Frequently glancing at Malrik, checking his reaction
 
@@ -85,7 +85,7 @@ Fear that everything will be lost. Control as a proxy for preventing disaster.
 Grief that the old ways are dying. Frustration that her contributions aren't valued. Longing for
 Malrik to understand her.
 
-### **Coren's Attempted Bridge**
+### **Cal's Attempted Bridge**
 
 **[MEDIATIVE REASONABLE]**
 *"You're both right, though. We need preserved records. And we need people who understand their significance. Neither of you can do this alone. What if we arranged time-sharing? The building has multiple wings..."*
@@ -96,29 +96,29 @@ Malrik to understand her.
 **Elenya's Response:**
 *"And why should we keep squeezing into the margins of his building? Why isn't there a dedicated space for what we do? Because you've convinced everyone that only preservation matters. Spirituality doesn't matter."*
 
-**Coren's Frustration:**
+**Cal's Frustration:**
 *"Because the city is collapsing. Because we have limited resources. Because both of you are too stubborn to accept that you need each other."*
 
-**[Long silence. Coren looks between them. Elenya's eyes are shining. Malrik's jaw is tighter.]**
+**[Long silence. Cal looks between them. Elenya's eyes are shining. Malrik's jaw is tighter.]**
 
 ---
 
 ## Player Dialogue Branch Points
 
-### **BRANCH 1: Player Enters During Coren's Attempted Mediation**
+### **BRANCH 1: Player Enters During Cal's Attempted Mediation**
 
-#### **Option 1A: [EMPATHY PATH] Support Coren's Integration Vision**
+#### **Option 1A: [EMPATHY PATH] Support Cal's Integration Vision**
 
 **Player:**
 *"Why can't it be both? The records matter AND the spiritual interpretation matters. What if you two designed the space together?"*
 
 **Malrik's Response:**
-*"The design is already optimal for archival purposes. Adding mystic elements would compromise—"*
+*"The design is already optimal for archival purposes. Adding mystic elements would compromiseâ€”"*
 
 **Elenya's Response:**
 *"See? He won't even consider that there's value in what I do."*
 
-**Coren:**
+**Cal:**
 *"[To player] You understand. Thank you. But convincing them is another matter."*
 
 **Reaction Flags:**
@@ -138,7 +138,7 @@ Malrik to understand her.
 **Elenya's Response:**
 *"Easy for you to say when you already have space. You always do."*
 
-**Coren:**
+**Cal:**
 *"And that's why they can't work together. You're right that it's practical, but it's also emotional. Both things are true."*
 
 **Reaction Flags:**
@@ -158,12 +158,12 @@ Malrik to understand her.
 *"I... yes. That's..."*
 
 **Malrik:**
-*"That's not relevant to the structural requirements—"*
+*"That's not relevant to the structural requirementsâ€”"*
 
 **Elenya:**
 *"It's completely relevant, and you know it."*
 
-**Coren:**
+**Cal:**
 *"[To player, quietly] You see it. Most people don't."*
 
 **Reaction Flags:**
@@ -171,18 +171,18 @@ Malrik to understand her.
 - Emotional Perception +1
 - Malrik: Defensive, but listening
 - Elenya: Seen, validated, hopeful
-- Coren: Recognizes a potential catalyst
+- Cal: Recognizes a potential catalyst
 
 ---
 
 ### **BRANCH 2: Player Enters as Outsider, Takes No Initial Side**
 
-#### **Option 2A: Ask Coren to Explain**
+#### **Option 2A: Ask Cal to Explain**
 
 **Player:**
 *"What's actually at stake here?"*
 
-**Coren:**
+**Cal:**
 *"Power, resources, and the value of different ways of knowing. Malrik believes in systematic preservation. Elenya believes in living tradition. They're both right. They're both needed. But the city only has one suitable building."*
 
 **Elenya:**
@@ -215,7 +215,7 @@ Malrik to understand her.
 **Elenya:**
 *"With what? You have the resources. You have institutional power. You have his respect."*
 
-**[She glances at Coren, then away.]**
+**[She glances at Cal, then away.]**
 
 **Reaction Flags:**
 - Observation +1
@@ -228,21 +228,21 @@ Malrik to understand her.
 *"What's the issue from your perspective?"*
 
 **Elenya:**
-*"We're trying to keep the old ways alive. Not just as data in a database—as living practice. As meaning. Every day, people forget. We lose another elder. We lose another tradition. The archive preserves the words, but it doesn't preserve the soul. And Malrik doesn't think that matters."*
+*"We're trying to keep the old ways alive. Not just as data in a databaseâ€”as living practice. As meaning. Every day, people forget. We lose another elder. We lose another tradition. The archive preserves the words, but it doesn't preserve the soul. And Malrik doesn't think that matters."*
 
 **Malrik:**
-*"I never said that. I said that the archive requires a specialized space because—"*
+*"I never said that. I said that the archive requires a specialized space becauseâ€”"*
 
 **Elenya:**
 *"You always say 'I never said' and then you explain why my work is less important. Again and again."*
 
-**Coren:**
+**Cal:**
 *"[Quietly, to player] They've been doing this for months."*
 
 **Reaction Flags:**
 - Observation +1
 - Access to Elenya's sense of invisibility
-- Hint that Coren is tired of mediating
+- Hint that Cal is tired of mediating
 
 ---
 
@@ -256,12 +256,12 @@ Malrik to understand her.
 **[Immediate, awkward silence.]**
 
 **Malrik:**
-*"That's not—"*
+*"That's notâ€”"*
 
 **Elenya:**
 *"It's complicated."*
 
-**Coren:**
+**Cal:**
 *"Very complicated. And yes, it colors everything."*
 
 **Elenya:**
@@ -290,14 +290,14 @@ Malrik to understand her.
 **Elenya:**
 *"We've been asking for six months. He keeps saying 'we'll work it out' and then nothing changes."*
 
-**Coren:**
+**Cal:**
 *"They've been at this for longer than six months, honestly. This building just made it concrete."*
 
 **Elenya:**
 *"[To Malrik] You keep waiting for everything to change. But nothing will unless you decide it's worth changing."*
 
 **Malrik:**
-*"I decide what's worth changing based on risk assessment, not—"*
+*"I decide what's worth changing based on risk assessment, notâ€”"*
 
 **Elenya:**
 *"Not on love. I know."*
@@ -310,12 +310,12 @@ Malrik to understand her.
 - Elenya's hope is fading
 - Malrik is increasingly isolated
 
-#### **Option 3C: Ask About Coren's Role**
+#### **Option 3C: Ask About Cal's Role**
 
 **Player:**
 *"How long have you been mediating?"*
 
-**Coren:**
+**Cal:**
 *"Too long. They're good people. Both of them. But they can't hear each other anymore. Or they can, and they're too scared to actually respond."*
 
 **Malrik:**
@@ -324,13 +324,13 @@ Malrik to understand her.
 **Elenya:**
 *"It's not. And that's why you're terrified. Because if you admit it's personal, you have to admit that your structure can't solve it."*
 
-**Coren:**
+**Cal:**
 *"[To player] Do you see why I keep trying?"*
 
 **Reaction Flags:**
 - Wisdom +1
 - Synthesis +1
-- Coren's exhaustion visible
+- Cal's exhaustion visible
 - Core of conflict now apparent
 
 ---
@@ -344,7 +344,7 @@ Malrik to understand her.
 **Player:**
 *"You two need to build something together. Not as a compromise. As something new."*
 
-**Coren:**
+**Cal:**
 *"That's what I've been trying to say for months."*
 
 **Elenya:**
@@ -362,7 +362,7 @@ Malrik to understand her.
 **Elenya:**
 *"[Stepping closer] I'm willing."*
 
-**[Coren exhales. Looks at player with gratitude.]**
+**[Cal exhales. Looks at player with gratitude.]**
 
 **Mechanical Result:**
 - Malrik/Elenya: Rebuild Potential +50%
@@ -384,7 +384,7 @@ Malrik to understand her.
 **Elenya:**
 *"Of course he agrees with you. Because it's simpler to ignore the real problem."*
 
-**Coren:**
+**Cal:**
 *"The real problem is both of you are too stubborn to try."*
 
 **[Debate continues without resolution. But a time-sharing schedule is proposed.]**
@@ -401,14 +401,14 @@ Malrik to understand her.
 
 **If Player Remained Neutral or Left:**
 
-**Coren:**
+**Cal:**
 *"I thought you might help. But I suppose it's not your fight."*
 
 **Malrik and Elenya continue arguing. The scene ends without conclusion.**
 
 **Mechanical Result:**
 - Malrik/Elenya: Rebuild Potential unchanged
-- Coren: Slight disappointment toward player
+- Cal: Slight disappointment toward player
 - Scene will recur, with same or escalated tension
 
 ---
@@ -418,20 +418,20 @@ Malrik to understand her.
 ### **After Integration Path:**
 - Malrik and Elenya begin joint planning sessions
 - Both can be found at the archive building discussing designs
-- Coren becomes friendlier to player
+- Cal becomes friendlier to player
 - Future visits to the building show visible progress
 - Other NPCs comment on the shift: *"Didn't think Malrik and Elenya would actually work together. But here we are."*
 
 ### **After Skepticism Path:**
 - Time-sharing schedule is implemented but imperfectly
 - Both factions are frustrated
-- Coren continues mediating between resentful parties
+- Cal continues mediating between resentful parties
 - Future visits to the building show tension ("Mystics left the scrolls out again!" / "Archivists won't give us the good hours!")
 - Sets up the collapse event with higher stakes
 
 ### **After Neutral Path:**
 - Scene repeats or escalates
-- Coren may pull player aside: *"You could help them, you know. They listen to you."*
+- Cal may pull player aside: *"You could help them, you know. They listen to you."*
 - Tension builds toward the collapse event
 
 ---
@@ -454,16 +454,16 @@ After this initial encounter, the player can return to the archive building and 
 - Elenya: *"The archivists won't let us access the space during daylight hours."*
 - Player can mediate again or take a side
 
-### **Return Visit 3: Coren's Reflection**
-- Coren standing alone in the building, thinking
+### **Return Visit 3: Cal's Reflection**
+- Cal standing alone in the building, thinking
 - Player can ask about Malrik and Elenya's future
-- Coren: *"I think they could be good together. If they'd let themselves."*
+- Cal: *"I think they could be good together. If they'd let themselves."*
 
 ### **Return Visit 4: Pre-Collapse Tension**
 *[Approaching the collapse event]*
 - Subtle infrastructure problems visible (cracked beam, water staining)
 - Both factions arguing more intensely because conditions are worsening
-- Coren notices the player and says: *"This building is getting worse. I'm worried about what happens if it fails."*
+- Cal notices the player and says: *"This building is getting worse. I'm worried about what happens if it fails."*
 
 ---
 
@@ -503,7 +503,7 @@ into control?
 **Heartbroken:** Realizing Malrik might not meet her halfway 4. **Resilient:** But still believing
 synthesis is possible 5. **Choice Point:** Will she keep trying, or give up on him?
 
-### **Coren's Inner Arc (Across Scene)**
+### **Cal's Inner Arc (Across Scene)**
 1. **Tired:** Exhausted from endless mediation 2. **Hopeful:** Player might be someone who
 understands 3. **Realistic:** Skepticism that anything will change 4. **Catalyzed:** If player takes
 active role, renewed hope 5. **Grateful:** Recognition that someone else is helping
@@ -521,3 +521,4 @@ active role, renewed hope 5. **Grateful:** Recognition that someone else is help
 - **Can they understand that some conflicts require time, not solutions?**
 
 The player's approach here sets a baseline for their entire emotional OS journey through Velinor.
+

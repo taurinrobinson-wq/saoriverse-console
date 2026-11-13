@@ -1,4 +1,4 @@
-# Velinor: Complete Design Integration Index
+﻿# Velinor: Complete Design Integration Index
 
 ## Overview
 
@@ -12,8 +12,8 @@ the game's architecture.
 ### **Foundation Layer**
 
 **01_NARRATIVE_SPINE_AND_STRUCTURE.md** (You are here)
-- Defines the fixed spine: Saori → Ravi/Nima → Marketplace Debate → Building Collapse → Corelink Chamber
-- Explains semi-fixed hinge: Malrik, Elenya, Coren convergence
+- Defines the fixed spine: Saori â†’ Ravi/Nima â†’ Marketplace Debate â†’ Building Collapse â†’ Corelink Chamber
+- Explains semi-fixed hinge: Malrik, Elenya, Cal convergence
 - Establishes principle: Fixed spine + fluid limbs
 
 *Used by:*
@@ -120,7 +120,7 @@ the game's architecture.
 
 ---
 
-### **Medium-Term (Act II → Act III)**
+### **Medium-Term (Act II â†’ Act III)**
 
 **Players see:** Recurring scenes, NPC mood shifts, world state changes
 
@@ -217,7 +217,7 @@ options exist and function 3. Test **Event Timeline** triggers (does collapse ha
 ## Key Design Principles (Across All Documents)
 
 ### **1. Spine + Limbs**
-- **Fixed (Spine):** Saori → Ravi/Nima → Marketplace Debate → Building Collapse → Corelink Chamber
+- **Fixed (Spine):** Saori â†’ Ravi/Nima â†’ Marketplace Debate â†’ Building Collapse â†’ Corelink Chamber
 - **Semi-Fixed (Hinge):** Malrik/Elenya scene (must happen, details vary)
 - **Fluid (Limbs):** NPC meeting order, exploration sequence, side conversations
 
@@ -227,7 +227,7 @@ options exist and function 3. Test **Event Timeline** triggers (does collapse ha
 - Player's "true" trait profile emerges from hundreds of small choices
 
 ### **3. Consequences Cascade**
-- Every choice affects: NPC relationships → factional attitudes → rebuild trajectory → ending state
+- Every choice affects: NPC relationships â†’ factional attitudes â†’ rebuild trajectory â†’ ending state
 - No choice is isolated; all feed into long-term consequences
 - By the time player reaches Corelink Chamber, the ending is largely determined by their journey
 
@@ -252,16 +252,16 @@ options exist and function 3. Test **Event Timeline** triggers (does collapse ha
 
 ```
 NARRATIVE_SPINE_AND_STRUCTURE.md (foundation)
-├─ MARKETPLACE_DEBATE_SCENE_BRANCHING.md (first major choice)
-│  ├─ BUILDING_COLLAPSE_TIMELINE.md (consequence: rebuild potential set)
-│  │  └─ SIX_ENDINGS_EXPLICIT_MAP.md (final consequence: ending unlocked)
-│  │     └─ EMOTIONAL_OS_MECHANICS_INTEGRATION.md (why that ending?)
-│  │
-│  └─ EMOTIONAL_OS_MECHANICS_INTEGRATION.md (how player traits shape response)
-│     └─ SIX_ENDINGS_EXPLICIT_MAP.md (trait profile determines ending quality)
-│
-└─ EMOTIONAL_OS_MECHANICS_INTEGRATION.md (throughout game)
-   └─ All dialogue, all NPC reactions
+â”œâ”€ MARKETPLACE_DEBATE_SCENE_BRANCHING.md (first major choice)
+â”‚  â”œâ”€ BUILDING_COLLAPSE_TIMELINE.md (consequence: rebuild potential set)
+â”‚  â”‚  â””â”€ SIX_ENDINGS_EXPLICIT_MAP.md (final consequence: ending unlocked)
+â”‚  â”‚     â””â”€ EMOTIONAL_OS_MECHANICS_INTEGRATION.md (why that ending?)
+â”‚  â”‚
+â”‚  â””â”€ EMOTIONAL_OS_MECHANICS_INTEGRATION.md (how player traits shape response)
+â”‚     â””â”€ SIX_ENDINGS_EXPLICIT_MAP.md (trait profile determines ending quality)
+â”‚
+â””â”€ EMOTIONAL_OS_MECHANICS_INTEGRATION.md (throughout game)
+   â””â”€ All dialogue, all NPC reactions
 ```
 
 ---
@@ -278,7 +278,7 @@ matches the intended design
 
 ### **Test 2: Trace an NPC's Response**
 
-Pick an NPC (e.g., Coren) and a scene (e.g., Building Collapse Day 3): 1. What's Coren's emotional
+Pick an NPC (e.g., Cal) and a scene (e.g., Building Collapse Day 3): 1. What's Cal's emotional
 state? (from Collapse Timeline) 2. What trait profile does this player have? (from Emotional OS
 Mechanics) 3. What's the expected dialogue? (from Collapse Timeline + Emotional OS Mechanics) 4.
 Does it affect rebuild trajectory? (from Collapse Timeline) 5. Verify it connects to ending
@@ -360,3 +360,4 @@ emotional systems. They'll feel like they're in a world that understands them, r
 authentically, and reflects their choices back to them in meaningful ways.
 
 That's the goal. That's Velinor.
+

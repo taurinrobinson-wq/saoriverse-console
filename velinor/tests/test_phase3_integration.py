@@ -1,4 +1,4 @@
-"""
+﻿"""
 Phase 3 Integration Tests - Building Collapse Event System
 Tests for EventTimeline, collapse trigger, aftermath paths, and orchestrator integration
 """
@@ -33,7 +33,7 @@ def test_event_timeline_creation():
     assert timeline.building_status.stability_percent == 100
     assert not timeline.collapse_triggered
     
-    print("✓ TEST 1: EventTimeline Creation - PASSED")
+    print("âœ“ TEST 1: EventTimeline Creation - PASSED")
     return True
 
 
@@ -50,7 +50,7 @@ def test_game_day_progression():
     # After day 3, should transition to subtle deterioration
     assert timeline.current_phase in [CollapsePhase.PRE_COLLAPSE, CollapsePhase.SUBTLE_DETERIORATION]
     
-    print("✓ TEST 2: Game Day Progression - PASSED")
+    print("âœ“ TEST 2: Game Day Progression - PASSED")
     return True
     
     # Advance through subtle deterioration
@@ -61,7 +61,7 @@ def test_game_day_progression():
     # Should be in escalating conflict
     assert timeline.current_phase == CollapsePhase.ESCALATING_CONFLICT
     
-    print("✓ TEST 2: Game Day Progression - PASSED")
+    print("âœ“ TEST 2: Game Day Progression - PASSED")
     return True
 
 
@@ -88,7 +88,7 @@ def test_building_deterioration():
     description = timeline.get_building_description()
     assert len(description) > 0
     
-    print("✓ TEST 3: Building Deterioration - PASSED")
+    print("âœ“ TEST 3: Building Deterioration - PASSED")
     return True
 
 
@@ -112,7 +112,7 @@ def test_collapse_trigger():
     assert timeline.malrik_state.stress_level > 30
     assert timeline.elenya_state.stress_level > 30
     
-    print("✓ TEST 4: Collapse Trigger - PASSED")
+    print("âœ“ TEST 4: Collapse Trigger - PASSED")
     return True
 
 
@@ -134,7 +134,7 @@ def test_npc_stress_progression():
         assert timeline.malrik_state.stress_level >= 40
         assert timeline.elenya_state.stress_level >= 40
     
-    print("✓ TEST 5: NPC Stress Progression - PASSED")
+    print("âœ“ TEST 5: NPC Stress Progression - PASSED")
     return True
 
 
@@ -162,13 +162,13 @@ def test_player_intervention_recording():
     rebuild_potential = timeline.player_interventions.get_rebuild_potential()
     assert rebuild_potential > 10  # Base without interventions
     
-    print("✓ TEST 6: Player Intervention Recording - PASSED")
+    print("âœ“ TEST 6: Player Intervention Recording - PASSED")
     return True
 
 
 def test_aftermath_path_determination():
     """TEST 7: Aftermath path determined by interventions and coherence"""
-    # Test high interventions → Rebuild Together
+    # Test high interventions â†’ Rebuild Together
     timeline_rebuild = EventTimeline()
     timeline_rebuild.set_marketplace_state(coherence=80.0, primary_tone="empathy", malrik_elenya_cooperation=90)
     timeline_rebuild.trigger_collapse()
@@ -188,7 +188,7 @@ def test_aftermath_path_determination():
     # Should be rebuild together (high rebuild potential)
     assert timeline_rebuild.aftermath_path in [AftermathPath.REBUILD_TOGETHER, AftermathPath.STALEMATE]
     
-    # Test low interventions → Separation
+    # Test low interventions â†’ Separation
     timeline_sep = EventTimeline()
     timeline_sep.set_marketplace_state(coherence=40.0, primary_tone="skepticism", malrik_elenya_cooperation=50)
     timeline_sep.trigger_collapse()
@@ -201,7 +201,7 @@ def test_aftermath_path_determination():
     # Should be complete separation or stalemate
     assert timeline_sep.aftermath_path in [AftermathPath.COMPLETE_SEPARATION, AftermathPath.STALEMATE]
     
-    print("✓ TEST 7: Aftermath Path Determination - PASSED")
+    print("âœ“ TEST 7: Aftermath Path Determination - PASSED")
     return True
 
 
@@ -225,14 +225,14 @@ def test_collapse_scene_narration():
     elenya_reaction = scene.get_elenya_reaction()
     assert "elenya" in elenya_reaction.lower()
     
-    coren_reaction = scene.get_coren_reaction()
-    assert "coren" in coren_reaction.lower()
+    Cal_reaction = scene.get_Cal_reaction()
+    assert "Cal" in Cal_reaction.lower()
     
     dialogue = scene.get_post_collapse_dialogue()
     assert len(dialogue) > 0
     assert "malrik" in dialogue.lower() and "elenya" in dialogue.lower()
     
-    print("✓ TEST 8: Collapse Scene Narration - PASSED")
+    print("âœ“ TEST 8: Collapse Scene Narration - PASSED")
     return True
 
 
@@ -260,7 +260,7 @@ def test_aftermath_scene_narration():
     elenya_response_suffering = aftermath.get_elenya_response_to_intervention("he_is_suffering")
     assert len(elenya_response_suffering) > 0
     
-    print("✓ TEST 9: Aftermath Scene Narration - PASSED")
+    print("âœ“ TEST 9: Aftermath Scene Narration - PASSED")
     return True
 
 
@@ -292,7 +292,7 @@ def test_aftermath_path_narrations():
     assert len(separation_aftermath) > 0
     assert "ruin" in separation_aftermath.lower() or "cemetery" in separation_aftermath.lower()
     
-    print("✓ TEST 10: Aftermath Path Narrations - PASSED")
+    print("âœ“ TEST 10: Aftermath Path Narrations - PASSED")
     return True
 
 
@@ -313,7 +313,7 @@ def test_ending_connection():
     assert separation_connection["world_state"] == "lean_fragmentation"
     assert len(separation_connection["ending_paths_unlocked"]) > 0
     
-    print("✓ TEST 11: Ending Connection - PASSED")
+    print("âœ“ TEST 11: Ending Connection - PASSED")
     return True
 
 
@@ -362,11 +362,11 @@ def test_orchestrator_phase3_integration():
         assert "aftermath_path" in status
         assert "building_stability" in status
         
-        print("✓ TEST 12: Orchestrator Phase 3 Integration - PASSED")
+        print("âœ“ TEST 12: Orchestrator Phase 3 Integration - PASSED")
         return True
     
     except Exception as e:
-        print(f"✗ TEST 12: Orchestrator Phase 3 Integration - FAILED: {e}")
+        print(f"âœ— TEST 12: Orchestrator Phase 3 Integration - FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -403,11 +403,11 @@ def test_coherence_and_traits_phase3():
         rebuild_potential = orchestrator.event_timeline.player_interventions.get_rebuild_potential()
         assert rebuild_potential > 25  # Should be higher due to interventions
         
-        print("✓ TEST 13: Coherence and Traits Phase 3 - PASSED")
+        print("âœ“ TEST 13: Coherence and Traits Phase 3 - PASSED")
         return True
     
     except Exception as e:
-        print(f"✗ TEST 13: Coherence and Traits Phase 3 - FAILED: {e}")
+        print(f"âœ— TEST 13: Coherence and Traits Phase 3 - FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -438,7 +438,7 @@ def test_game_state_persistence():
     assert state["building_stability"] < 100
     assert state["building_stability"] >= 0
     
-    print("✓ TEST 14: Game State Persistence - PASSED")
+    print("âœ“ TEST 14: Game State Persistence - PASSED")
     return True
 
 
@@ -475,13 +475,14 @@ if __name__ == "__main__":
             else:
                 failed += 1
         except Exception as e:
-            print(f"✗ {test_func.__name__} - FAILED: {e}")
+            print(f"âœ— {test_func.__name__} - FAILED: {e}")
             failed += 1
     
     print("\n" + "="*60)
     print(f"RESULTS: {passed}/{len(tests)} tests passed")
     if failed == 0:
-        print("✅ ALL TESTS PASSED!")
+        print("âœ… ALL TESTS PASSED!")
     else:
-        print(f"❌ {failed} tests failed")
+        print(f"âŒ {failed} tests failed")
     print("="*60 + "\n")
+

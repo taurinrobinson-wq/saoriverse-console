@@ -1,4 +1,4 @@
-"""
+﻿"""
 Compare fixed vs emergent influence models for REMNANTS NPCs.
 Generates CSVs and per-NPC plots into velinor/analysis/saturation_plots/compare_{seq}_*.png
 """
@@ -12,7 +12,7 @@ from velinor.engine.npc_manager import NPCManager, create_marketplace_npcs, crea
 out_dir = os.path.join('velinor', 'analysis', 'saturation_plots')
 os.makedirs(out_dir, exist_ok=True)
 
-watch = ["Ravi","Nima","Mariel","Tovren","Dalen","Archivist Malrik","High Seer Elenya","Coren the Mediator"]
+watch = ["Ravi","Nima","Mariel","Tovren","Dalen","Archivist Malrik","High Seer Elenya","Cal the Mediator"]
 traits = ['empathy','trust','skepticism','resolve','need','memory','nuance','authority']
 
 steps = 200
@@ -86,3 +86,4 @@ for seq_name, tone_fn in sequences.items():
         plt.close()
 
 print('\nComparison complete. Outputs in', out_dir)
+

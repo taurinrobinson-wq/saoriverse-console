@@ -1,7 +1,7 @@
-npc_name,found,matched_files
+﻿npc_name,found,matched_files
 Archivist Malrik,no,
 Captain Veynar,yes,velinor\npcs\Captain_Veynar_sitting_nobg.png;velinor\npcs\Captain_Veynar_standing_nobg.png;velinor\npcs\original\Captain_Veynar.png;velinor\npcs\original\Captain_Veynar_standing.png;velinor-web\assets\npcs\Captain_Veynar_sitting_nobg.png;velinor-web\assets\npcs\Captain_Veynar_standing_nobg.png;velinor-web\assets\npcs\original\Captain_Veynar.png;velinor-web\assets\npcs\original\Captain_Veynar_standing.png;velinor\npcs\original\Captain_Veynar.png;velinor\npcs\original\Captain_Veynar_standing.png
-Coren the Mediator,no,
+Cal the Mediator,no,
 Dakrin,no,
 Dalen the Rusted Guide,yes,velinor\npcs\Dalen.png;velinor-web\assets\npcs\Dalen.png
 Drossel the Cloaked,yes,velinor\npcs\Drossel_left.png;velinor\npcs\Drossel_right.png;velinor-web\assets\npcs\Drossel_left.png;velinor-web\assets\npcs\Drossel_right.png
@@ -38,3 +38,4 @@ Thoran,no,
 Tovren the Cartwright,yes,velinor\npcs\Tovren_color_corrected_left.png;velinor\npcs\Tovren_color_corrected_right.png;velinor-web\assets\npcs\Tovren_color_corrected_left.png;velinor-web\assets\npcs\Tovren_color_corrected_right.png
 Saori,yes,velinor\npcs\Saori_device_nobg_left.png;velinor\npcs\Saori_device_nobg_right.png;velinor\npcs\Saori_paper_nobg.png;velinor\npcs\Saori_stick_nobg_left.png;velinor\npcs\Saori_stick_nobg_right.png;velinor\npcs\Saori_Worried_nobg.png;velinor-web\assets\npcs\Saori_device_nobg_left.png;velinor-web\assets\npcs\Saori_device_nobg_right.png;velinor-web\assets\npcs\Saori_paper_nobg.png;velinor-web\assets\npcs\Saori_stick_nobg_left.png;velinor-web\assets\npcs\Saori_stick_nobg_right.png;velinor-web\assets\npcs\Saori_Worried_nobg.png
 Velka,no,
+

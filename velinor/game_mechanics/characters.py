@@ -1,4 +1,4 @@
-"""
+﻿"""
 Simple mechanics implementation for Velinor characters and tone system.
 This module loads the JSON export and provides small classes to apply mini-game choices
 and update player tone stats and NPC correlations.
@@ -10,7 +10,7 @@ import os
 
 
 ROOT = os.path.dirname(__file__)  # velinor/game_mechanics
-DATA_PATH = os.path.join(os.path.dirname(ROOT), 'markdowngameinstructions', 'malrik_elenya_coren.json')
+DATA_PATH = os.path.join(os.path.dirname(ROOT), 'markdowngameinstructions', 'malrik_elenya_Cal.json')
 
 
 def load_data(path: str = DATA_PATH) -> Dict:
@@ -71,3 +71,4 @@ if __name__ == '__main__':
     print('After empathy choice:', gm.tone.as_dict())
     print('Attunement:', gm.attunement)
     print('Malrik/Elenya correlation:', gm.malrik_elenya_correlation())
+

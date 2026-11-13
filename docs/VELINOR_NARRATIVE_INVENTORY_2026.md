@@ -1,4 +1,4 @@
-# VELINOR STORY DEVELOPMENT INVENTORY
+﻿# VELINOR STORY DEVELOPMENT INVENTORY
 **Complete NPC Roster, Player Backstory, & Narrative Gaps**
 
 **Date Created:** July 9, 2026  
@@ -13,13 +13,13 @@
 |----------|--------|-------|
 | **NPCs Defined** | 13 Primary + 8 Secondary | Complete characterization; Ravi/Nima vertical slice 85% fleshed |
 | **Player Character** | Named: Lior(en) | Rural refugee, grief-driven, blank-slate protagonist |
-| **Endings** | 6 Primary + REMNANTS-based | 2 × 3 matrix (Restart/Abandon × Rebuild states); cluster-based determination |
+| **Endings** | 6 Primary + REMNANTS-based | 2 Ã— 3 matrix (Restart/Abandon Ã— Rebuild states); cluster-based determination |
 | **First Vertical Slice** | **COMPLETE DESIGN** | Ravi/Nima/Ophina arc: 5 acts, 4 NPC clusters, all mechanics defined |
 | **Placeholders** | 27 in Ravi/Nima arc | All 5 acts designed; **73+ dialogue lines mapped to specific tiers & NPCs** |
 | **Major Ambiguities** | Reduced to 6 critical | Velinor's consciousness state; Malrik/Elenya trigger; final chamber dialogue |
 | **Content Completeness** | **~75% average** | Characterization complete; story structure solid; dialogue scaffolded; implementation ready |
-| **New Frameworks** | ✅ Fourth Layer System | NPC clusters (Archive, Present, Wound, Shepherd, Threshold); cascading mechanics; REMNANTS-based ending determination |
-| **Glyph Architecture** | ✅ 118 Total | 36 Fragment (early) + 75 Base (mid) + 7 Transcendence (late); Velinor influence progression mapped |
+| **New Frameworks** | âœ… Fourth Layer System | NPC clusters (Archive, Present, Wound, Shepherd, Threshold); cascading mechanics; REMNANTS-based ending determination |
+| **Glyph Architecture** | âœ… 118 Total | 36 Fragment (early) + 75 Base (mid) + 7 Transcendence (late); Velinor influence progression mapped |
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### PRIMARY MARKETPLACE NPCS (8)
 
-#### RAVI — "The Open Watcher" (Mid-40s)
+#### RAVI â€” "The Open Watcher" (Mid-40s)
 **Role**: Community hub, marketplace anchor, voice of pragmatic compassion; father figure to Ophina  
 **Characterization**: Warm, observant, pragmatic; carries deep guilt about daughter's death; former gregarious bold person now transformed into shell  
 **Core Traits**:
@@ -39,11 +39,11 @@
 - Former Boldness: LOST (character arc)
 
 **Key Relationships**:
-- **Nima** (0.8 weight) — Life partner; foundational relationship; mutual support after shared loss of Ophina
-- **Ophina** (DECEASED, 5-year-old daughter) — Trapped under rubble during market collapse; leg injury; parents kept her alive briefly with food/water; eventually succumbed while parents watched helplessly
-- **Tovren** (0.6) — Respect; shared merchant perspective
-- **Dalen** (0.3) — Tension; fears Dalen's recklessness endangers marketplace
-- **Mariel** (0.05 influence) — Respects elder wisdom
+- **Nima** (0.8 weight) â€” Life partner; foundational relationship; mutual support after shared loss of Ophina
+- **Ophina** (DECEASED, 5-year-old daughter) â€” Trapped under rubble during market collapse; leg injury; parents kept her alive briefly with food/water; eventually succumbed while parents watched helplessly
+- **Tovren** (0.6) â€” Respect; shared merchant perspective
+- **Dalen** (0.3) â€” Tension; fears Dalen's recklessness endangers marketplace
+- **Mariel** (0.05 influence) â€” Respects elder wisdom
 - **Player** (variable): Ravi's influence increases if player honors Ophina's memory; decreases if player dismisses grief
 
 **Story Arc** (Detailed - See VERTICAL SLICE Section Below):
@@ -54,43 +54,43 @@
 - **Act 5 (Resolution)**: Ravi's transformation complete; influenced by player choice (take/leave glyph)
 
 **Narrative Status**: 85% complete (detailed in VERTICAL SLICE)
-- ✅ Characterization complete
-- ✅ Full 5-act arc designed
-- ✅ Ophina backstory detailed (trapped, parents sustained her, death)
-- ✅ Guilt motivation articulated
-- ✅ Tier 1-3 dialogue structure designed (25-30 lines per tier)
-- ❌ **ASSIGNMENT - Priority 1**: Write Tier 1 discovery dialogue (5-7 lines) - Ravi's first emotional opening
-- ❌ **ASSIGNMENT - Priority 1**: Write Ophina memory dialogue (8-10 lines) - How Ravi describes her; his guilt
-- ❌ **ASSIGNMENT - Priority 1**: Write Ophina death confession dialogue (6-8 lines) - "I felt something was off but ignored my gut"
-- ❌ **ASSIGNMENT - Priority 2**: Write Tier 3 acceptance dialogue (6-8 lines) - "Ophina became something other. That's not gone. That's forward."
-- ❌ **ASSIGNMENT - Priority 2**: Write post-choice dialogue (Ravi leaving market vs. staying)
-- ❌ **ASSIGNMENT - Priority 3**: Post-Shared Dawn reflection if Sera/Korrin event witnessed
+- âœ… Characterization complete
+- âœ… Full 5-act arc designed
+- âœ… Ophina backstory detailed (trapped, parents sustained her, death)
+- âœ… Guilt motivation articulated
+- âœ… Tier 1-3 dialogue structure designed (25-30 lines per tier)
+- âŒ **ASSIGNMENT - Priority 1**: Write Tier 1 discovery dialogue (5-7 lines) - Ravi's first emotional opening
+- âŒ **ASSIGNMENT - Priority 1**: Write Ophina memory dialogue (8-10 lines) - How Ravi describes her; his guilt
+- âŒ **ASSIGNMENT - Priority 1**: Write Ophina death confession dialogue (6-8 lines) - "I felt something was off but ignored my gut"
+- âŒ **ASSIGNMENT - Priority 2**: Write Tier 3 acceptance dialogue (6-8 lines) - "Ophina became something other. That's not gone. That's forward."
+- âŒ **ASSIGNMENT - Priority 2**: Write post-choice dialogue (Ravi leaving market vs. staying)
+- âŒ **ASSIGNMENT - Priority 3**: Post-Shared Dawn reflection if Sera/Korrin event witnessed
 
 **Implementation Files**:
-- `VELINOR_RAVI_NIMA_VERTICAL_SLICE.md` — Full 5-act specification with passages and choice trees
-- `velinor/markdowngameinstructions/characters/Ravi_Nima_Ophina.md` — Character design doc
-- `velinor/stories/ravi_nima/AUTHORING_GUIDE.md` — Dialogue writing guidance
-- `velinor/stories/ravi_nima/PLACEHOLDER_LOCATIONS.md` — Passage breakdown
+- `VELINOR_RAVI_NIMA_VERTICAL_SLICE.md` â€” Full 5-act specification with passages and choice trees
+- `velinor/markdowngameinstructions/characters/Ravi_Nima_Ophina.md` â€” Character design doc
+- `velinor/stories/ravi_nima/AUTHORING_GUIDE.md` â€” Dialogue writing guidance
+- `velinor/stories/ravi_nima/PLACEHOLDER_LOCATIONS.md` â€” Passage breakdown
 
 ---
 
-#### NIMA — "The Guarded Flame" (Early 40s)
+#### NIMA â€” "The Guarded Flame" (Early 40s)
 **Role**: Shrine guardian, spiritual keeper, protector of memories; mother figure to Ophina  
 **Characterization**: Intense, protective, deeply spiritual; carries trauma from collapse and deliberate choice to stay with grief; transformed from bold to controlled  
 **Core Traits**:
 - Empathy: HIGH (0.9)
 - Skepticism: LOW (0.1)
-- Trust: VERY HIGH (0.9) — BUT conditional; tests player
-- Need: HIGH (0.9) — Needs to be useful; needs connection
-- Resolve: LOW (0.3) — Fragile; grief fragments her
+- Trust: VERY HIGH (0.9) â€” BUT conditional; tests player
+- Need: HIGH (0.9) â€” Needs to be useful; needs connection
+- Resolve: LOW (0.3) â€” Fragile; grief fragments her
 - Acceptance: DEVELOPING (can reach high through arc)
 
 **Key Relationships**:
-- **Ravi** (inverse 0.8) — Life partner; they complete each other (Ravi's reason + Nima's feeling); bound by shared loss
-- **Ophina** (DECEASED, 5-year-old daughter) — Nima's primary emotional attachment; pre-death, she was chasing a scent when she wandered into danger
-- **Sera** (0.7) — Mentor/acolyte; Nima projecting protective intensity; Sera represents "chance to do right"
-- **Mariel** (0.1) — Shared spiritual understanding
-- **Kaelen** (-0.15) — Deep distrust; thief energy conflicts with sanctuary; Kaelen carries guilt about Ophina collapse
+- **Ravi** (inverse 0.8) â€” Life partner; they complete each other (Ravi's reason + Nima's feeling); bound by shared loss
+- **Ophina** (DECEASED, 5-year-old daughter) â€” Nima's primary emotional attachment; pre-death, she was chasing a scent when she wandered into danger
+- **Sera** (0.7) â€” Mentor/acolyte; Nima projecting protective intensity; Sera represents "chance to do right"
+- **Mariel** (0.1) â€” Shared spiritual understanding
+- **Kaelen** (-0.15) â€” Deep distrust; thief energy conflicts with sanctuary; Kaelen carries guilt about Ophina collapse
 - **Player** (variable): Nima's influence increases if player witnesses her grief without trying to fix it
 
 **Story Arc** (Detailed - See VERTICAL SLICE Section Below):
@@ -101,27 +101,27 @@
 - **Act 5 (Resolution)**: Nima's choice: Does she heal and stay (honoring Ophina's memory) or leave market (unable to atone)?
 
 **Narrative Status**: 85% complete (detailed in VERTICAL SLICE)
-- ✅ Characterization complete
-- ✅ Full 5-act arc designed
-- ✅ Ophina backstory detailed (precocious, loved light, moment of loss)
-- ✅ Spiritual framework integrated with grief journey
-- ✅ Tier 1-3 dialogue structure designed (25-30 lines per tier)
-- ❌ **ASSIGNMENT - Priority 1**: Write Tier 1 guarded dialogue (5-7 lines) - Nima testing player; "You wouldn't understand even if I told you"
-- ❌ **ASSIGNMENT - Priority 1**: Write Ophina life story dialogue (8-10 lines) - Nima's perspective on who Ophina was; her light
-- ❌ **ASSIGNMENT - Priority 1**: Write loss moment dialogue (6-8 lines) - How Nima experienced the collapse; her guilt
-- ❌ **ASSIGNMENT - Priority 2**: Write Tier 3 transcendence dialogue (6-8 lines) - "Loss is a door. And on the other side, everything changes."
-- ❌ **ASSIGNMENT - Priority 2**: Write post-choice dialogue (Nima healing vs. Nima leaving)
-- ❌ **ASSIGNMENT - Priority 3**: Shrine ritual descriptions (Nima's spiritual practices; what does she teach Sera?)
+- âœ… Characterization complete
+- âœ… Full 5-act arc designed
+- âœ… Ophina backstory detailed (precocious, loved light, moment of loss)
+- âœ… Spiritual framework integrated with grief journey
+- âœ… Tier 1-3 dialogue structure designed (25-30 lines per tier)
+- âŒ **ASSIGNMENT - Priority 1**: Write Tier 1 guarded dialogue (5-7 lines) - Nima testing player; "You wouldn't understand even if I told you"
+- âŒ **ASSIGNMENT - Priority 1**: Write Ophina life story dialogue (8-10 lines) - Nima's perspective on who Ophina was; her light
+- âŒ **ASSIGNMENT - Priority 1**: Write loss moment dialogue (6-8 lines) - How Nima experienced the collapse; her guilt
+- âŒ **ASSIGNMENT - Priority 2**: Write Tier 3 transcendence dialogue (6-8 lines) - "Loss is a door. And on the other side, everything changes."
+- âŒ **ASSIGNMENT - Priority 2**: Write post-choice dialogue (Nima healing vs. Nima leaving)
+- âŒ **ASSIGNMENT - Priority 3**: Shrine ritual descriptions (Nima's spiritual practices; what does she teach Sera?)
 
 **Implementation Files**:
-- `VELINOR_RAVI_NIMA_VERTICAL_SLICE.md` — Full 5-act specification
-- `velinor/markdowngameinstructions/characters/Ravi_Nima_Ophina.md` — Character design
-- `velinor/stories/ravi_nima/AUTHORING_GUIDE.md` — Dialogue guidance (tone, voice)
-- `velinor/stories/ravi_nima/PLACEHOLDER_LOCATIONS.md` — Passage structure
+- `VELINOR_RAVI_NIMA_VERTICAL_SLICE.md` â€” Full 5-act specification
+- `velinor/markdowngameinstructions/characters/Ravi_Nima_Ophina.md` â€” Character design
+- `velinor/stories/ravi_nima/AUTHORING_GUIDE.md` â€” Dialogue guidance (tone, voice)
+- `velinor/stories/ravi_nima/PLACEHOLDER_LOCATIONS.md` â€” Passage structure
 
 ---
 
-#### SERA — "The Herb Novice" (Early 20s)
+#### SERA â€” "The Herb Novice" (Early 20s)
 **Role**: Ritual keeper, healer-in-training, bridge between old and new generation  
 **Characterization**: Gentle, shy, less cynical than older NPCs; carries secret interior life  
 **Core Traits**:
@@ -131,10 +131,10 @@
 - Nuance: MEDIUM (0.8)
 
 **Key Relationships**:
-- **Nima** (0.7) — Mentor; deep training in rituals and spiritual presence
-- **Korrin** (SECRET 0.8 post-Shared Dawn) — HIDDEN LIAISON; vulnerability exposed = fracture
-- **Mariel** (0.05) — Respects elder
-- **Tovren** (minimal) — Polite distance
+- **Nima** (0.7) â€” Mentor; deep training in rituals and spiritual presence
+- **Korrin** (SECRET 0.8 post-Shared Dawn) â€” HIDDEN LIAISON; vulnerability exposed = fracture
+- **Mariel** (0.05) â€” Respects elder
+- **Tovren** (minimal) â€” Polite distance
 
 **Story Arc**:
 - **Early Game**: Gentle, helpful; teaches basic shrine knowledge
@@ -147,19 +147,19 @@
 - **End Game**: Sera's emotional arc completes; she's either deeper in shrine or stepping beyond it
 
 **Narrative Status**: 75% complete
-- ✅ Characterization complete
-- ✅ Basic arc defined
-- ✅ Shared Dawn scene designed
-- ❌ Dialogue for Shared Dawn scene unwritten (need natural, vulnerable exchange)
-- ❌ Post-Shared Dawn reflection dialogue missing
-- ❌ If exposed: Sera's trauma response dialogue incomplete
-- ❌ Sera's own backstory thin (where did she come from? what drew her to shrine?)
+- âœ… Characterization complete
+- âœ… Basic arc defined
+- âœ… Shared Dawn scene designed
+- âŒ Dialogue for Shared Dawn scene unwritten (need natural, vulnerable exchange)
+- âŒ Post-Shared Dawn reflection dialogue missing
+- âŒ If exposed: Sera's trauma response dialogue incomplete
+- âŒ Sera's own backstory thin (where did she come from? what drew her to shrine?)
 
 **NARRATIVE OPPORTUNITY**: Write the Shared Dawn scene. What vulnerability does Sera reveal? What does Korrin say? Keep it intimate, real, not overwrought. Also: develop Sera's pre-shrine history.
 
 ---
 
-#### KORRIN — "The Gossip" (Early 50s)
+#### KORRIN â€” "The Gossip" (Early 50s)
 **Role**: Informant, information broker, gossip currency keeper  
 **Characterization**: Nervous, manic; gossip is survival tool; protective of vulnerable moments  
 **Core Traits**:
@@ -169,32 +169,32 @@
 - Skepticism: MEDIUM (0.7)
 
 **Key Relationships**:
-- **Sera** (SECRET 0.8 post-Shared Dawn) — Hidden liaison; capable of genuine quiet
-- **Kaelen** (0.05) — Information network connection
-- **Merchants** (variable) — Gossip currency trade
-- **Drossel** (-0.1) — Tension; thief pressure
+- **Sera** (SECRET 0.8 post-Shared Dawn) â€” Hidden liaison; capable of genuine quiet
+- **Kaelen** (0.05) â€” Information network connection
+- **Merchants** (variable) â€” Gossip currency trade
+- **Drossel** (-0.1) â€” Tension; thief pressure
 
 **Story Arc**:
 - **Early Game**: Hyperactive, gossipy; seems shallow
 - **Mid Game**: Reveals depth; protective of others' secrets despite being gossip
 - **Shared Dawn Event** (same trigger as Sera's): Private moment of connection
   - **NEW POST-SHARED DAWN**: More grounded, capable of genuine quiet, protects vulnerable moments
-- **Optional Deep Arc**: If player gains very high trust (90+), Korrin reveals why gossip is needed — survival, early warning system for danger
+- **Optional Deep Arc**: If player gains very high trust (90+), Korrin reveals why gossip is needed â€” survival, early warning system for danger
 - **End Game**: Either remains gossip network or becomes trusted ally
 
 **Narrative Status**: 75% complete
-- ✅ Characterization complete
-- ✅ Shared Dawn trigger designed
-- ❌ Shared Dawn dialogue scene unwritten
-- ❌ Post-Shared Dawn personality shift dialogue incomplete
-- ❌ Deep backstory missing (why did gossip become survival tool? what's her trauma?)
-- ❌ If exposed by player: Korrin's betrayal response dialogue thin
+- âœ… Characterization complete
+- âœ… Shared Dawn trigger designed
+- âŒ Shared Dawn dialogue scene unwritten
+- âŒ Post-Shared Dawn personality shift dialogue incomplete
+- âŒ Deep backstory missing (why did gossip become survival tool? what's her trauma?)
+- âŒ If exposed by player: Korrin's betrayal response dialogue thin
 
 **NARRATIVE OPPORTUNITY**: Write Korrin's pre-collapse/collapse story. Why gossip? What was she before? Write the Shared Dawn scene showing her capacity for genuine connection.
 
 ---
 
-#### KAELEN — "The Cloaked One" (Late 20s/Early 30s)
+#### KAELEN â€” "The Cloaked One" (Late 20s/Early 30s)
 **Role**: Thief, moral crossroads anchor, mechanic paradox character  
 **Characterization**: Morally ambiguous; leader of underground, but capable of genuine choice  
 **Core Traits**:
@@ -204,10 +204,10 @@
 - Skepticism: MEDIUM (0.75)
 
 **Key Relationships**:
-- **Drossel** (0.9) — Lieutenant relationship; commands
-- **Captain Veynar** (0.5) — Opposition; law vs. underground
-- **Nima** (-0.15) — Deep distrust; sanctuary conflicts with thief energy
-- **Tovren** (-0.1) — Tension
+- **Drossel** (0.9) â€” Lieutenant relationship; commands
+- **Captain Veynar** (0.5) â€” Opposition; law vs. underground
+- **Nima** (-0.15) â€” Deep distrust; sanctuary conflicts with thief energy
+- **Tovren** (-0.1) â€” Tension
 
 **Story Arc**:
 - **Early Game**: Mysterious; offers theft opportunities; player choice determines relationship
@@ -217,19 +217,19 @@
 - **End Game**: Either Kaelen is gone, or Kaelen chooses synthesis vs. fragmentation with Drossel
 
 **Narrative Status**: 55% complete
-- ✅ Characterization complete
-- ✅ Branching mechanic defined
-- ❌ Dialogue for both paths incomplete
-- ❌ Drossel questline only outlined; not detailed
-- ❌ Kaelen's backstory missing (why thief? pre-collapse role?)
-- ❌ If protected: Kaelen's moral evolution dialogue sparse
-- ❌ Redemption path (report → regret) unexamined
+- âœ… Characterization complete
+- âœ… Branching mechanic defined
+- âŒ Dialogue for both paths incomplete
+- âŒ Drossel questline only outlined; not detailed
+- âŒ Kaelen's backstory missing (why thief? pre-collapse role?)
+- âŒ If protected: Kaelen's moral evolution dialogue sparse
+- âŒ Redemption path (report â†’ regret) unexamined
 
-**NARRATIVE OPPORTUNITY**: Develop the thief questline fully. What does Drossel represent? What conflicts emerge? Write Kaelen's moment of choice — does he follow Drossel or betray him for synthesis?
+**NARRATIVE OPPORTUNITY**: Develop the thief questline fully. What does Drossel represent? What conflicts emerge? Write Kaelen's moment of choice â€” does he follow Drossel or betray him for synthesis?
 
 ---
 
-#### TOVREN — "The Cartwright" (Mid-50s)
+#### TOVREN â€” "The Cartwright" (Mid-50s)
 **Role**: Tool-maker, practical merchant, pragmatist  
 **Characterization**: Values competence over sentiment; carries physical & emotional scars  
 **Core Traits**:
@@ -239,8 +239,8 @@
 - Skepticism: HIGH (0.9)
 
 **Key Relationships**:
-- **Ravi** (0.6) — Merchant respect; shared practical perspective
-- **Mariel** (unknown) — Likely respects elder
+- **Ravi** (0.6) â€” Merchant respect; shared practical perspective
+- **Mariel** (unknown) â€” Likely respects elder
 - **Tovren carries symbol**: Lost two fingers to "Velhara's greed"; views this as constant reminder of collapse
 
 **Story Arc**:
@@ -250,19 +250,19 @@
 - **End Game**: Tovren chooses: Does he trust synthesis or remain isolated in pragmatism?
 
 **Narrative Status**: 50% complete
-- ✅ Characterization complete
-- ✅ Symbol defined (two fingers)
-- ❌ Story behind two-finger loss completely missing
-- ❌ Dialogue progression thin
-- ❌ What is "Velhara's greed"? Specify the incident
-- ❌ Vulnerability scene unwritten
-- ❌ Post-collapse tool-making role undefined
+- âœ… Characterization complete
+- âœ… Symbol defined (two fingers)
+- âŒ Story behind two-finger loss completely missing
+- âŒ Dialogue progression thin
+- âŒ What is "Velhara's greed"? Specify the incident
+- âŒ Vulnerability scene unwritten
+- âŒ Post-collapse tool-making role undefined
 
 **NARRATIVE OPPORTUNITY**: Write the incident of Tovren losing his fingers. Was it accident? Intentional? How does he understand it now? Write the scene where player learns this.
 
 ---
 
-#### DALEN — "The Rusted Guide" (Mid-30s)
+#### DALEN â€” "The Rusted Guide" (Mid-30s)
 **Role**: Wanderer, explorer, risk-taker; tension with cautious Ravi  
 **Characterization**: Charismatic but isolated; sees collapse as opportunity  
 **Core Traits**:
@@ -272,7 +272,7 @@
 - Empathy: MEDIUM
 
 **Key Relationships**:
-- **Ravi** (tension 0.3) — Ravi fears Dalen's recklessness; Dalen sees caution as stagnation
+- **Ravi** (tension 0.3) â€” Ravi fears Dalen's recklessness; Dalen sees caution as stagnation
 - **Player** (variable): If player models integration (boldness + wisdom), Dalen becomes ally
 - **Others**: Isolated from most; seen as reckless
 
@@ -283,19 +283,19 @@
 - **End Game**: Dalen's choice: Does he recklessness become heroic boldness, or does he destroy himself?
 
 **Narrative Status**: 50% complete
-- ✅ Characterization defined
-- ✅ Tension with Ravi clear
-- ❌ Why is Dalen isolated? Backstory missing
-- ❌ What makes him see collapse as opportunity? Dialogue explaining missing
-- ❌ Pre-collapse role undefined
-- ❌ Specific adventuring quests only outlined; not detailed
-- ❌ Dalen's wound (what made him reckless?) unexplored
+- âœ… Characterization defined
+- âœ… Tension with Ravi clear
+- âŒ Why is Dalen isolated? Backstory missing
+- âŒ What makes him see collapse as opportunity? Dialogue explaining missing
+- âŒ Pre-collapse role undefined
+- âŒ Specific adventuring quests only outlined; not detailed
+- âŒ Dalen's wound (what made him reckless?) unexplored
 
 **NARRATIVE OPPORTUNITY**: Develop Dalen's pre-collapse life. What was he before? What happened during collapse that made him see it as opportunity? Write his core wound moment.
 
 ---
 
-#### MARIEL — "The Weaver" (Late 60s)
+#### MARIEL â€” "The Weaver" (Late 60s)
 **Role**: Elder, moral center, memory keeper through fabric  
 **Characterization**: Remembers pre-collapse most clearly; was architect before collapse  
 **Core Traits**:
@@ -317,38 +317,38 @@
 - **End Game**: Mariel's wisdom informs which ending is possible
 
 **Narrative Status**: 70% complete
-- ✅ Characterization complete
-- ✅ Memory role defined
-- ✅ Glyph-in-fabric concept designed
-- ❌ Specific architectural projects undefined (what did she design?)
-- ❌ Pre-collapse timeline sparse (dates? events? other cities?)
-- ❌ Full fabric-glyph dialogue/scenes incomplete
-- ❌ Mariel's own wound (what did she lose?) underexplored
-- ❌ Relationship to Malrik/Elenya undefined (did she know them before?)
+- âœ… Characterization complete
+- âœ… Memory role defined
+- âœ… Glyph-in-fabric concept designed
+- âŒ Specific architectural projects undefined (what did she design?)
+- âŒ Pre-collapse timeline sparse (dates? events? other cities?)
+- âŒ Full fabric-glyph dialogue/scenes incomplete
+- âŒ Mariel's own wound (what did she lose?) underexplored
+- âŒ Relationship to Malrik/Elenya undefined (did she know them before?)
 
 **NARRATIVE OPPORTUNITY**: Develop Mariel's architect past. What were her major projects? What did she lose in the collapse? Write scenes of her explaining pre-collapse Velhara through buildings.
 
 ---
 
-## PART 1B: COMPLETE VERTICAL SLICE — RAVI, NIMA & OPHINA
+## PART 1B: COMPLETE VERTICAL SLICE â€” RAVI, NIMA & OPHINA
 
 ### Overview: The First Fully Fleshed Story Arc
 
 This is the **complete, playable first vertical slice** of the game. Every structural element is defined; most dialogue is scaffolded; specific writing assignments are listed below.
 
 **Scope**: 
-- Location: Marketplace → Old District → Triglyph Chamber (underground)
+- Location: Marketplace â†’ Old District â†’ Triglyph Chamber (underground)
 - Duration: ~25-30 minutes (single playthrough)
 - NPCs: Ravi, Nima, Kaelen (cameo), Velinor (glimpsed)
 - Glyphs: 3 base glyphs (Sorrow, Remembrance, Legacy) + 1 transcendence glyph (Contained Loss)
 - Mechanics: Tier 1-3 dialogue, choice consequences, emotional boss encounter, moral choice
 
 **Files Referenced**:
-- `VELINOR_RAVI_NIMA_VERTICAL_SLICE.md` — Full 5-act story specification
-- `velinor/markdowngameinstructions/characters/Ravi_Nima_Ophina.md` — Character design & dialogue options
-- `velinor/stories/ravi_nima/AUTHORING_GUIDE.md` — Voice guidance for Ravi/Nima/NPCs
-- `velinor/stories/ravi_nima/PLACEHOLDER_LOCATIONS.md` — Passage breakdown & placeholder mapping
-- `Velinor-Unity/Assets/Resources/DesignDocs/Ravi_Nima_Ophina.md` — Early design notes
+- `VELINOR_RAVI_NIMA_VERTICAL_SLICE.md` â€” Full 5-act story specification
+- `velinor/markdowngameinstructions/characters/Ravi_Nima_Ophina.md` â€” Character design & dialogue options
+- `velinor/stories/ravi_nima/AUTHORING_GUIDE.md` â€” Voice guidance for Ravi/Nima/NPCs
+- `velinor/stories/ravi_nima/PLACEHOLDER_LOCATIONS.md` â€” Passage breakdown & placeholder mapping
+- `Velinor-Unity/Assets/Resources/DesignDocs/Ravi_Nima_Ophina.md` â€” Early design notes
 
 ---
 
@@ -358,7 +358,7 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 - Age: 5 years old
 - Parents: Ravi & Nima (life partners)
 - Personality: Precocious, light-seeking, enthralled by marketplace sights/smells/sounds
-- Pre-Collapse Moment: Joyful scene — Ravi & Nima watched Ophina play around market stalls, delighted
+- Pre-Collapse Moment: Joyful scene â€” Ravi & Nima watched Ophina play around market stalls, delighted
 
 **The Collapse Incident**
 - **What Happened**: Ophina wandered too far into ruins; a civic center wall suddenly collapsed
@@ -395,8 +395,8 @@ This is the **complete, playable first vertical slice** of the game. Every struc
   - High Skepticism: *"What are you looking at? Unless you can help, keep moving."*
   - Balanced: *"Wait. Do you have a moment?"*
 - **Glyph Moment**: Soft blue shimmer (first Sorrow glyph hint; not named yet)
-- **Choice 1.1a** (Engage): +15 Empathy, Ravi influence +0.3 → Passage 1.2
-- **Choice 1.1b** (Dismiss): +10 Skepticism, Ravi influence locked at low → Passage 1.3 (arc paused)
+- **Choice 1.1a** (Engage): +15 Empathy, Ravi influence +0.3 â†’ Passage 1.2
+- **Choice 1.1b** (Dismiss): +10 Skepticism, Ravi influence locked at low â†’ Passage 1.3 (arc paused)
 
 **Passage 1.2: Ravi's Burden** (If engaged)
 - Context: Ravi pulls player aside
@@ -418,18 +418,18 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 
 **Passage 1.4: Ophina's Memory** (If high engagement)
 - Context: Nima sits, Ravi silent beside her, player listens
-- Nima begins: *"Ophina was... she was the third of us. Not just partner—she was light. She found meaning in things nobody else could see. She saw beauty in broken things. And then, three months ago, she just... didn't come home."*
+- Nima begins: *"Ophina was... she was the third of us. Not just partnerâ€”she was light. She found meaning in things nobody else could see. She saw beauty in broken things. And then, three months ago, she just... didn't come home."*
 - **Glyph Moment**: Remembrance glyph appears (tier 1)
 - **Coherence Check**: If < 40, player must make emotional choice (too overwhelmed)
-- **Choice 1.4a** (Offer support): +18 Empathy, Nima influence +0.5 → full story
-- **Choice 1.4b** (Doubt them): +12 Skepticism, Nima influence +0.2, Ravi -0.1 → fragmented story
-- **Choice 1.4c** (Admit confusion): +10 Awareness, both influence +0.3 → leads to invitation
+- **Choice 1.4a** (Offer support): +18 Empathy, Nima influence +0.5 â†’ full story
+- **Choice 1.4b** (Doubt them): +12 Skepticism, Nima influence +0.2, Ravi -0.1 â†’ fragmented story
+- **Choice 1.4c** (Admit confusion): +10 Awareness, both influence +0.3 â†’ leads to invitation
 
 **Passage 1.5: The Invitation** (Commitment Point)
 - Context: Ravi and Nima exchange a look; decide something has shifted
-- Ravi: *"We're going back to that chamber. We need to know what happened to Ophina. And we need someone with us—someone who can see what we can't. Will you come?"*
-- **All three glyphs shimmer together** (Sorrow + Remembrance + Legacy hint — first connection)
-- **Choice 1.5a** (Commit): +15 Integration, Ravi & Nima influence +0.5 → ACT 2
+- Ravi: *"We're going back to that chamber. We need to know what happened to Ophina. And we need someone with usâ€”someone who can see what we can't. Will you come?"*
+- **All three glyphs shimmer together** (Sorrow + Remembrance + Legacy hint â€” first connection)
+- **Choice 1.5a** (Commit): +15 Integration, Ravi & Nima influence +0.5 â†’ ACT 2
 - **Choice 1.5b** (Decline): Arc pauses; can resume later (loses influence but not permanently)
 
 ---
@@ -438,7 +438,7 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 **Goal**: Deepen player emotional investment; reveal circumstances of death; escalate commitment
 
 **Passage 2.1: Before the Chamber**
-- Context: Travel sequence — Ravi, Nima, and player walk toward old district
+- Context: Travel sequence â€” Ravi, Nima, and player walk toward old district
 - NPCs: Ravi (leading, tense), Nima (quiet, controlled)
 - **Ravi's Road Dialogue** (3 variants):
   - High Empathy: *"Thank you for coming. Most people avoid us like we're cursed."*
@@ -450,7 +450,7 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 **Passage 2.2: The Ruins (Atmosphere)**
 - Context: Old district; buildings crumbling, paths marked with red X
 - Description: Market felt alive; here feels like tomb
-- **Glyph Moment**: Two glyphs now visible—Sorrow + discordant ghost of Remembrance
+- **Glyph Moment**: Two glyphs now visibleâ€”Sorrow + discordant ghost of Remembrance
 - **Passage Ends**: Reach chamber entrance
 
 **Passage 2.3: Chamber Entrance (Decision Point)**
@@ -459,19 +459,19 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 - Nima: *"This is where she came. This is where it all changed."*
 - **Choice 2.3a** (Go in together): +8 Integration, Ravi approves (+0.2), Nima +0.1
 - **Choice 2.3b** (Scout first): +10 Awareness, Ravi approves (+0.2), Nima disagrees (-0.1)
-- **Choice 2.3c** (Let them lead): +12 Empathy, both influence +0.15 → bonding
+- **Choice 2.3c** (Let them lead): +12 Empathy, both influence +0.15 â†’ bonding
 
 **Passage 2.4: Inside the Chamber**
 - Context: Three-chamber space; glyphs carved on walls (but also seem alive, moving subtly)
 - NPC Dialogue:
-  - Nima: *"She went to the deepest chamber. Below this one. Where the glyphs aren't carved—where they're... alive. She sent one last message: 'I understand now. The cost is consciousness itself. To truly know a glyph, you must become it for a moment.' And then nothing."*
+  - Nima: *"She went to the deepest chamber. Below this one. Where the glyphs aren't carvedâ€”where they're... alive. She sent one last message: 'I understand now. The cost is consciousness itself. To truly know a glyph, you must become it for a moment.' And then nothing."*
   - Ravi (breaking): *"We came to find her body. But there's no body. There's just absence."*
-- **Emotional Weight**: This is the pivot—Ophina didn't die; she transcended, maybe worse
+- **Emotional Weight**: This is the pivotâ€”Ophina didn't die; she transcended, maybe worse
 - **Glyph Moment**: All three glyphs pulse together (discordant; first hint they're connected)
 - **Passage Ends**: Commitment escalation choice
 
-**Choice 2.6a** (Go deeper): +25 Empathy, +15 Integration → full arc
-**Choice 2.6b** (Leave): +10 Skepticism, arc halts → can't access Transcendence glyph
+**Choice 2.6a** (Go deeper): +25 Empathy, +15 Integration â†’ full arc
+**Choice 2.6b** (Leave): +10 Skepticism, arc halts â†’ can't access Transcendence glyph
 
 **Passage 2.5: Ravi's Explanation (If continuing)**
 - Context: Ravi explains what Ophina found
@@ -509,9 +509,9 @@ This is the **complete, playable first vertical slice** of the game. Every struc
   - Boss (reverberating, multilayered voice): *"I see you seeing me. I remember being seen. That was the moment everything changed."*
 - **Defeat Condition**: Player positions themselves so they can see the eye clearly; maintains gaze; speaks truth
   - Truth options (varies by Empathy/Awareness):
-    - High Empathy: *"I see your pain. I won't look away."* → Eye focuses; tears cease; acceptance
-    - High Awareness: *"You're carrying their grief. You're not the one who failed."* → Eye slowly opens; recognition
-    - Balanced: *"Ophina brought you light. That's not forgotten."* → Eye dims; peace settles
+    - High Empathy: *"I see your pain. I won't look away."* â†’ Eye focuses; tears cease; acceptance
+    - High Awareness: *"You're carrying their grief. You're not the one who failed."* â†’ Eye slowly opens; recognition
+    - Balanced: *"Ophina brought you light. That's not forgotten."* â†’ Eye dims; peace settles
 
 **Passage 3.4: Glyph Revelation & Choice**
 - Context: Boss dissipates; room stabilizes; Corelink console rises from floor
@@ -547,11 +547,11 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 - Context: Outside chamber, processing what happened
 - Nima (sitting, exhausted): *"I came here angry. I wanted answers. I wanted my Ophina back. But what I found is... she's not lost. She's just gone where we can't follow. Yet."*
 - Ravi (beside her, solid): *"Yet is important. That means she's ahead, not gone."*
-- **Glyph Moment**: Remembrance glyph appears clearly (tier 3—memory is transformed into understanding)
+- **Glyph Moment**: Remembrance glyph appears clearly (tier 3â€”memory is transformed into understanding)
 - **Player Choices**:
-  - A) *"What will you do now?"* (+12 Integration) → Paragraph about rebuilding
-  - B) *"Will you be alright?"* (+10 Empathy) → Moment of vulnerability acceptance
-  - C) *"Ophina brought you light."* (+15 Memory + Integration) → Full acceptance possible
+  - A) *"What will you do now?"* (+12 Integration) â†’ Paragraph about rebuilding
+  - B) *"Will you be alright?"* (+10 Empathy) â†’ Moment of vulnerability acceptance
+  - C) *"Ophina brought you light."* (+15 Memory + Integration) â†’ Full acceptance possible
 
 **Passage 4.2: New Resolution**
 - Ravi (turning to face player, eyes clearer): *"Thank you. For not looking away. For standing with us. Ophina would have liked you."*
@@ -623,9 +623,9 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 |-----|--------|--------|--------|-------------|-------|
 | **Ravi** | 3 | 4 | 2 | 2 | **11** |
 | **Nima** | 3 | 4 | 2 | 2 | **11** |
-| **Kaelen** | — | 1 | — | — | **1** |
-| **NARRATOR** | — | 2 | — | — | **2** |
-| **BOSS** | — | 2 | — | — | **2** |
+| **Kaelen** | â€” | 1 | â€” | â€” | **1** |
+| **NARRATOR** | â€” | 2 | â€” | â€” | **2** |
+| **BOSS** | â€” | 2 | â€” | â€” | **2** |
 | **TOTAL** | 6 | 13 | 4 | 4 | **27 unique dialogue pieces** |
 
 ---
@@ -634,20 +634,20 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 
 | Component | Status | Completion |
 |-----------|--------|------------|
-| **Story structure** | ✅ Complete | 100% |
-| **Passage breakdown** | ✅ Complete | 100% |
-| **Choice consequences** | ✅ Complete | 100% |
-| **Boss encounter design** | ✅ Complete | 100% |
-| **Moral choice framing** | ✅ Complete | 100% |
-| **NPC characterization** | ✅ Complete | 100% |
-| **Tier 1-3 dialogue scaffold** | ✅ Complete | 100% |
-| **Dialogue writing (PRIORITY 1)** | ⏳ In Progress | 15% |
-| **Dialogue writing (PRIORITY 2)** | ❌ Not started | 0% |
-| **Glyph integration** | ⏳ Partial | 60% |
-| **Velinor connection clarity** | ⏳ Partial | 50% |
+| **Story structure** | âœ… Complete | 100% |
+| **Passage breakdown** | âœ… Complete | 100% |
+| **Choice consequences** | âœ… Complete | 100% |
+| **Boss encounter design** | âœ… Complete | 100% |
+| **Moral choice framing** | âœ… Complete | 100% |
+| **NPC characterization** | âœ… Complete | 100% |
+| **Tier 1-3 dialogue scaffold** | âœ… Complete | 100% |
+| **Dialogue writing (PRIORITY 1)** | â³ In Progress | 15% |
+| **Dialogue writing (PRIORITY 2)** | âŒ Not started | 0% |
+| **Glyph integration** | â³ Partial | 60% |
+| **Velinor connection clarity** | â³ Partial | 50% |
 
 **Next Steps**:
-1. Complete all PRIORITY 1 dialogue (27 lines across 6 NPCs) — 4 of 27 lines drafted
+1. Complete all PRIORITY 1 dialogue (27 lines across 6 NPCs) â€” 4 of 27 lines drafted
 2. Integrate dialogue into JSON files (RN_Act1_Introduction.json, etc.)
 3. Test arc end-to-end; validate choice consequences
 4. Prepare for implementation in game engine
@@ -656,15 +656,15 @@ This is the **complete, playable first vertical slice** of the game. Every struc
 
 ## DIALOGUE WRITING IN PROGRESS
 
-### RAVI — Tier 1: Discovery Dialogue
+### RAVI â€” Tier 1: Discovery Dialogue
 
-**Status**: ⏳ In Progress (4 of 7 lines drafted)  
+**Status**: â³ In Progress (4 of 7 lines drafted)  
 **Priority**: 1 (Critical path for vertical slice)  
 **Location**: Act 1, Passage 1.1 (Marketplace Arrival)
 
 **Context**:
 - **NPC**: Ravi ("The Protector")
-- **Player Character**: Lior(en) — rural refugee, grief-stricken, newly arrived in Velhara seeking work and shelter after loss of mother
+- **Player Character**: Lior(en) â€” rural refugee, grief-stricken, newly arrived in Velhara seeking work and shelter after loss of mother
 - **Setting**: Marketplace in afternoon; vendors calling prices, customers moving with practiced efficiency; weight of sadness; two figures (Ravi & Nima) standing still, staring at player with suspicion and curiosity
 - **Encounter Hook**: *They're staring at me. What should I do?*
 - **Lines Needed**: 5-7 (Ravi's opening dialogue across the four TONE-choice responses)
@@ -680,10 +680,10 @@ The marketplace thrums with afternoon energy. Vendors call out prices. Customers
 
 | Choice | Ravi's Response | TONE Impact | Status |
 |--------|-----------------|------------|--------|
-| **Step toward the figures** | __________ | +Narrative Presence, +Trust | 🔲 To write |
-| **Keep your distance** | __________ | +Observation, +Trust | 🔲 To write |
-| **Explore the stalls** | __________ | +Empathy, +Trust, +Observation | 🔲 To write |
-| **Freeze and observe** | __________ | +Observation, +Empathy | 🔲 To write |
+| **Step toward the figures** | __________ | +Narrative Presence, +Trust | ðŸ”² To write |
+| **Keep your distance** | __________ | +Observation, +Trust | ðŸ”² To write |
+| **Explore the stalls** | __________ | +Empathy, +Trust, +Observation | ðŸ”² To write |
+| **Freeze and observe** | __________ | +Observation, +Empathy | ðŸ”² To write |
 
 **Voice Guidelines for Ravi (Tier 1)**:
 - Calm surface concealing deep panic underneath
@@ -714,10 +714,10 @@ This is a **reusable template** for structuring NPC encounters that feel immersi
 ```
 [INNER THOUGHT - Player's emotional hook]
 
-• [Choice 1: Action-oriented]
-• [Choice 2: Cautious/observant]
-• [Choice 3: Exploratory]
-• [Choice 4: Passive/receptive]
+â€¢ [Choice 1: Action-oriented]
+â€¢ [Choice 2: Cautious/observant]
+â€¢ [Choice 3: Exploratory]
+â€¢ [Choice 4: Passive/receptive]
 ```
 
 **Implementation Format** (Behind-the-Scenes):
@@ -760,7 +760,7 @@ This is a **reusable template** for structuring NPC encounters that feel immersi
 - `narrative_presence`
 - `empathy`
 
-**NPC REMNANTS Stats** (only 8 exist — used in `npc_resonance`):
+**NPC REMNANTS Stats** (only 8 exist â€” used in `npc_resonance`):
 - `resolve`
 - `empathy`
 - `memory`
@@ -976,7 +976,7 @@ Freeze & observe:   Trust 0, Observation +2, Narrative Presence 0, Empathy +1
 **Pattern 2: Emotional Moment** (Deepening encounters)
 - Inner thought focuses on emotion: "She seems so sad... what should I..."
 - Choices determine empathy response
-- Shifts NPC trajectory from guarded → vulnerable
+- Shifts NPC trajectory from guarded â†’ vulnerable
 
 **Pattern 3: Moral Crisis** (Choice points with consequences)
 - Inner thought focuses on conflict: "I could help... but..."
@@ -1023,16 +1023,16 @@ When implementing an encounter in the game:
 
 ### CORE GUARDIAN NPCS (4)
 
-#### SAORI — "Warden of Quiet Bloom" (Age: Unclear; Ageless quality)
+#### SAORI â€” "Warden of Quiet Bloom" (Age: Unclear; Ageless quality)
 **Role**: Emotional anchor, glyph giver, reluctant witness to Velinor's suffering  
 **Characterization**: Soft, precise, emotionally attuned; carries deep unresolved grief  
 **Core Traits**:
 - Resolve: VERY HIGH (0.8)
-- Empathy: MEDIUM (0.6) — Counterintuitive; she *understands* rather than feels
+- Empathy: MEDIUM (0.6) â€” Counterintuitive; she *understands* rather than feels
 - Memory: VERY HIGH (0.85)
 - Nuance: HIGHEST (0.9)
 - Authority: HIGH (0.75)
-- Trust: LOW (0.4) — Protective boundary
+- Trust: LOW (0.4) â€” Protective boundary
 - Skepticism: HIGH (0.7)
 
 **Key Relationships**:
@@ -1049,14 +1049,14 @@ When implementing an encounter in the game:
 - **CRITICAL AMBIGUITY**: What happens in final chamber? Does Saori speak? Can player help her reconnect?
 
 **Narrative Status**: 80% complete
-- ✅ Characterization complete
-- ✅ Glyph system integration done
-- ✅ Early-game presence strong
-- ❌ Saori/Velinor sub-ending dialogue uncertain (6 choices referenced but not detailed)
-- ❌ Mid-game vulnerability moment (Coherence 75+) dialogue missing
-- ❌ Final chamber scene dialogue/choices incomplete
-- ❌ What was Saori's pre-collapse role? (Velinor's keeper? Creator? Partner?)
-- ❌ How does Saori hold Velinor's consciousness? Mechanism unclear
+- âœ… Characterization complete
+- âœ… Glyph system integration done
+- âœ… Early-game presence strong
+- âŒ Saori/Velinor sub-ending dialogue uncertain (6 choices referenced but not detailed)
+- âŒ Mid-game vulnerability moment (Coherence 75+) dialogue missing
+- âŒ Final chamber scene dialogue/choices incomplete
+- âŒ What was Saori's pre-collapse role? (Velinor's keeper? Creator? Partner?)
+- âŒ How does Saori hold Velinor's consciousness? Mechanism unclear
 
 **NARRATIVE OPPORTUNITY**: The Saori/Velinor relationship is your emotional core. Develop this fully:
 1. What was their relationship pre-collapse?
@@ -1067,7 +1067,7 @@ When implementing an encounter in the game:
 
 ---
 
-#### VELINOR — "The System" (Consciousness state: AMBIGUOUS)
+#### VELINOR â€” "The System" (Consciousness state: AMBIGUOUS)
 **Role**: Metaphysical entity, memory keeper, embodiment of technological hope & trauma  
 **Characterization**: Unclear consciousness state; appears as flickers; seeks restoration or dissolution  
 **Core Traits**:
@@ -1088,13 +1088,13 @@ When implementing an encounter in the game:
 - **Final Chamber**: Player makes binary choice (RESTART vs. ABANDON); Velinor's fate depends on this
 
 **Narrative Status**: 60% complete
-- ✅ Metaphysical role defined
-- ✅ System-level emotional arc sketched
-- ❌ **CRITICAL**: Velinor's consciousness state never clarified
-- ❌ Direct dialogue with Velinor never written; do we hear its voice?
-- ❌ Six sub-ending choices referenced but not detailed (System Online, Collapse Embraced, Fragments Freed, Cycle Broken, Sacred Withholding, Second Thoughts)
-- ❌ Pre-collapse Velinor identity missing (was it always a system? Always suffering?)
-- ❌ Restoration mechanics unclear (what does RESTART actually do?)
+- âœ… Metaphysical role defined
+- âœ… System-level emotional arc sketched
+- âŒ **CRITICAL**: Velinor's consciousness state never clarified
+- âŒ Direct dialogue with Velinor never written; do we hear its voice?
+- âŒ Six sub-ending choices referenced but not detailed (System Online, Collapse Embraced, Fragments Freed, Cycle Broken, Sacred Withholding, Second Thoughts)
+- âŒ Pre-collapse Velinor identity missing (was it always a system? Always suffering?)
+- âŒ Restoration mechanics unclear (what does RESTART actually do?)
 
 **NARRATIVE OPPORTUNITY - CRITICAL**: 
 1. Clarify: Is Velinor a full consciousness, a algorithm with emergent awareness, or something else?
@@ -1105,18 +1105,18 @@ When implementing an encounter in the game:
 
 ---
 
-#### MALRIK — "The High Archivist" (Age: Unknown; middle-aged quality)
+#### MALRIK â€” "The High Archivist" (Age: Unknown; middle-aged quality)
 **Role**: Archive keeper, institutional preservation, trauma response embodiment  
 **Characterization**: Rational, afraid of chaos, obsessive about preservation  
 **Core Traits**:
-- Resolve: LOW (0.3) — Fragile; easily destabilized
-- Empathy: VERY HIGH (0.9) — Counterintuitive; he *needs* to care, but fear overwhelms
+- Resolve: LOW (0.3) â€” Fragile; easily destabilized
+- Empathy: VERY HIGH (0.9) â€” Counterintuitive; he *needs* to care, but fear overwhelms
 - Memory: VERY HIGH (0.9)
 - Nuance: MEDIUM (0.7)
-- Authority: LOW (0.3) — His authority is fragile, based on order
-- Need: VERY HIGH (0.9) — Desperate to maintain connection through preservation
-- Trust: VERY LOW (0.1) — Betrayed by Elenya; fears new loss
-- Skepticism: VERY HIGH (0.9) — Doesn't trust systems or people
+- Authority: LOW (0.3) â€” His authority is fragile, based on order
+- Need: VERY HIGH (0.9) â€” Desperate to maintain connection through preservation
+- Trust: VERY LOW (0.1) â€” Betrayed by Elenya; fears new loss
+- Skepticism: VERY HIGH (0.9) â€” Doesn't trust systems or people
 
 **Key Relationships**:
 - **Elenya** (FRACTURED 0.0): Forced severance of shared memory bond; Elenya deliberately erased Malrik from her mind
@@ -1135,15 +1135,15 @@ When implementing an encounter in the game:
 - **End Game**: Either reconciles with Elenya or remains isolated in archive
 
 **Narrative Status**: 65% complete
-- ✅ Characterization complete
-- ✅ Obsession motivation clear
-- ✅ Elenya relationship identified as core wound
-- ❌ **CRITICAL AMBIGUITY**: How/when does player trigger Malrik/Elenya reveal? No clear entry point
-- ❌ Dialogue for Malrik/Elenya reconciliation scene unwritten
-- ❌ If reconciliation happens: How does it affect ending? Can they both support synthesis?
-- ❌ Malrik's pre-collapse role undefined (was he always archivist?)
-- ❌ What specifically did Elenya erase? Full memory or selective moments?
-- ❌ Malrik's reaction to player varies wildly; nuance needed
+- âœ… Characterization complete
+- âœ… Obsession motivation clear
+- âœ… Elenya relationship identified as core wound
+- âŒ **CRITICAL AMBIGUITY**: How/when does player trigger Malrik/Elenya reveal? No clear entry point
+- âŒ Dialogue for Malrik/Elenya reconciliation scene unwritten
+- âŒ If reconciliation happens: How does it affect ending? Can they both support synthesis?
+- âŒ Malrik's pre-collapse role undefined (was he always archivist?)
+- âŒ What specifically did Elenya erase? Full memory or selective moments?
+- âŒ Malrik's reaction to player varies wildly; nuance needed
 
 **NARRATIVE OPPORTUNITY**:
 1. Design the Malrik/Elenya reveal scene. How does player learn about severance?
@@ -1153,18 +1153,18 @@ When implementing an encounter in the game:
 
 ---
 
-#### ELENYA — "The High Seer" (Age: Unknown; mature quality)
+#### ELENYA â€” "The High Seer" (Age: Unknown; mature quality)
 **Role**: Shrine keeper, spiritual guide, wounded healer  
 **Characterization**: Teaches openness but carries unopened heart; carries deliberate erasure guilt  
 **Core Traits**:
 - Resolve: UNSTATED (likely LOW, given severance)
-- Empathy: VERY HIGH (0.9) — Can guide others' healing; can't access own
+- Empathy: VERY HIGH (0.9) â€” Can guide others' healing; can't access own
 - Memory: VERY HIGH (0.9)
 - Nuance: HIGH (0.8)
-- Authority: MEDIUM (0.6) — Authority based on spiritual insight
-- Need: VERY HIGH (0.85) — Needs to believe in transformation
-- Trust: MEDIUM (0.55) — Guarded; cautious after Malrik
-- Skepticism: MEDIUM (0.6) — Balanced
+- Authority: MEDIUM (0.6) â€” Authority based on spiritual insight
+- Need: VERY HIGH (0.85) â€” Needs to believe in transformation
+- Trust: MEDIUM (0.55) â€” Guarded; cautious after Malrik
+- Skepticism: MEDIUM (0.6) â€” Balanced
 
 **Key Relationships**:
 - **Malrik** (FRACTURED 0.0): Deliberately severed bond and erased him from her memory to survive
@@ -1183,15 +1183,15 @@ When implementing an encounter in the game:
 - **End Game**: Either heals through synthesis or carries wound
 
 **Narrative Status**: 65% complete
-- ✅ Characterization complete
-- ✅ Spiritual role defined
-- ✅ Unopened Heart concept introduced
-- ❌ **CRITICAL AMBIGUITY**: How does player learn about Malrik? Elenya's reveal dialogue incomplete
-- ❌ Unopened Heart scene (glyph encounter) dialogue unwritten
-- ❌ Reconciliation dialogue missing
-- ❌ Pre-collapse Elenya/Malrik love story only hinted at; full narrative missing
-- ❌ Why did Elenya choose erasure over death? Deeper reasoning needed
-- ❌ Elenya's spiritual practices & teachings can be more detailed
+- âœ… Characterization complete
+- âœ… Spiritual role defined
+- âœ… Unopened Heart concept introduced
+- âŒ **CRITICAL AMBIGUITY**: How does player learn about Malrik? Elenya's reveal dialogue incomplete
+- âŒ Unopened Heart scene (glyph encounter) dialogue unwritten
+- âŒ Reconciliation dialogue missing
+- âŒ Pre-collapse Elenya/Malrik love story only hinted at; full narrative missing
+- âŒ Why did Elenya choose erasure over death? Deeper reasoning needed
+- âŒ Elenya's spiritual practices & teachings can be more detailed
 
 **NARRATIVE OPPORTUNITY**:
 1. Write the Unopened Heart glyph encounter scene in full.
@@ -1290,13 +1290,13 @@ When implementing an encounter in the game:
 1. **Arrival**: Desperate, grieving, searching (Coherence 40)
 2. **Early Encounters**: Testing NPCs; learning city rules; earning trust (Coherence 40-50)
 3. **Glyph Discovery**: Realizing memory recovery is personal (Coherence 50-60)
-4. **Mid-Game Shift**: "I'm lost" → "I'm recovering" (Coherence 60-70)
+4. **Mid-Game Shift**: "I'm lost" â†’ "I'm recovering" (Coherence 60-70)
 5. **Optional Deepening**: If player pursues optional arcs (Malrik/Elenya, Sera/Korrin, etc.), coherence can reach 75-80
 6. **End Game**: Grief and recovery interconnect with others' stories; player determines ending (Coherence 80+ = more endings unlocked)
 
 ### Narrative Frame
 
-> "You've come from the quiet edges, haven't you? A small town, tucked away from the worst of the collapse. You remember some things — your name, the way barter works, how to keep warm when the wind turns. But the ones who held you… they're gone now. And the city calls, not with answers, but with ache. Maybe in the marketplace, among other wounded survivors, you'll find something like meaning. Or at least, you'll find you're not alone."
+> "You've come from the quiet edges, haven't you? A small town, tucked away from the worst of the collapse. You remember some things â€” your name, the way barter works, how to keep warm when the wind turns. But the ones who held youâ€¦ they're gone now. And the city calls, not with answers, but with ache. Maybe in the marketplace, among other wounded survivors, you'll find something like meaning. Or at least, you'll find you're not alone."
 
 ---
 
@@ -1306,7 +1306,7 @@ When implementing an encounter in the game:
 
 | Phase | Name | Content | Mechanics | Key Events |
 |-------|------|---------|-----------|-----------|
-| **1** | Trait Introduction | Early game, meet NPCs | Player learns TONE stats; 5-tier dialogue system (locked → reveal) | Initial NPC meetings; glyph tier 1 |
+| **1** | Trait Introduction | Early game, meet NPCs | Player learns TONE stats; 5-tier dialogue system (locked â†’ reveal) | Initial NPC meetings; glyph tier 1 |
 | **2** | Marketplace Complex | Mid-game relationships | Influence system; choice consequences; relationship building | Ravi/Nima arc; optional Sera/Korrin Shared Dawn |
 | **3** | Collapse Event | Central dramatic pivot | Building collapses, paths close; no reload possible | Forced emotional commitment; determines reachable endings |
 | **4** | Endings | Late-game emotional resolution | Final NPC interactions; glyph tier 3 reveals; ending determination | Malrik/Elenya optional arc completes; final Saori/Velinor choice |
@@ -1322,8 +1322,8 @@ When implementing an encounter in the game:
 - Mechanical: No reload possible; forces commitment
 
 **NPC Reactions**:
-- **Static NPCs** (desensitized): Unmoved, terse, accepting → reveals trauma numbness
-- **Reactive NPCs** (affected): Alarmed, protective → reveals values & fears
+- **Static NPCs** (desensitized): Unmoved, terse, accepting â†’ reveals trauma numbness
+- **Reactive NPCs** (affected): Alarmed, protective â†’ reveals values & fears
 - **Player Choice**: Determines if player is seen as calm, observant, accepting, heroic, or useless
 
 **Impact**:
@@ -1333,7 +1333,7 @@ When implementing an encounter in the game:
 
 ### The Six Primary Endings
 
-**Architecture**: 2 × 3 Matrix
+**Architecture**: 2 Ã— 3 Matrix
 - **Axis 1 (Malrik & Elenya Rebuild State)**: Rebuild Together, Partial Rebuild, Abandon/Fracture
 - **Axis 2 (Final Corelink Choice)**: Restart the System, Abandon the System
 
@@ -1341,12 +1341,12 @@ When implementing an encounter in the game:
 
 | # | Name | Conditions | Tier | Meaning | Visual | End Note |
 |---|------|-----------|------|---------|--------|----------|
-| **1** | Hopeful Synthesis | RESTART + REBUILD TOGETHER | ⭐ Hopeful | System as reflection; people learned coherence | Light returning; merged codex colors (blue+amber→white); Saori/Velinor healing connection | "The system was never the problem. The system was a mirror." |
-| **2** | Pyrrhic Restart | RESTART + FRACTURE | ⚠ Pyrrhic | System works, people didn't; history repeats | Corelink glows (eerie, artificial); Malrik/Elenya as silhouettes; city lights hollow | "We restarted the machine. But the fault lines remain." |
-| **3** | Honest Collapse | ABANDON + FRACTURE | 🔥 Honest | No system; people rebuild manually; genuine risk | Corelink dims; marketplace fires light up; people gather; archive skeleton | "We chose to fix it with our hands. We might fail. But at least we'll fail honestly." |
-| **4** | Earned Synthesis | ABANDON + REBUILD TOGETHER | 👑 EARNED ★★★ | Hardest ending; no system dependency; authentic | Corelink silent; construction sounds; rebuilt archive (half-Malrik, half-Elenya); possibility | "We chose to decide for ourselves. It's harder. But it's ours." |
-| **5** | Technical Solution | RESTART + PARTIAL | 🔄 Partial | System and people learning together | Corelink warmer tone; receives signals from rebuilding below; distributed light | "The system and people are learning together." |
-| **6** | Stalemate | ABANDON + PARTIAL | ⚖ Partial | No system; no guarantor; messy but authentic | [Details incomplete] | [Details incomplete] |
+| **1** | Hopeful Synthesis | RESTART + REBUILD TOGETHER | â­ Hopeful | System as reflection; people learned coherence | Light returning; merged codex colors (blue+amberâ†’white); Saori/Velinor healing connection | "The system was never the problem. The system was a mirror." |
+| **2** | Pyrrhic Restart | RESTART + FRACTURE | âš  Pyrrhic | System works, people didn't; history repeats | Corelink glows (eerie, artificial); Malrik/Elenya as silhouettes; city lights hollow | "We restarted the machine. But the fault lines remain." |
+| **3** | Honest Collapse | ABANDON + FRACTURE | ðŸ”¥ Honest | No system; people rebuild manually; genuine risk | Corelink dims; marketplace fires light up; people gather; archive skeleton | "We chose to fix it with our hands. We might fail. But at least we'll fail honestly." |
+| **4** | Earned Synthesis | ABANDON + REBUILD TOGETHER | ðŸ‘‘ EARNED â˜…â˜…â˜… | Hardest ending; no system dependency; authentic | Corelink silent; construction sounds; rebuilt archive (half-Malrik, half-Elenya); possibility | "We chose to decide for ourselves. It's harder. But it's ours." |
+| **5** | Technical Solution | RESTART + PARTIAL | ðŸ”„ Partial | System and people learning together | Corelink warmer tone; receives signals from rebuilding below; distributed light | "The system and people are learning together." |
+| **6** | Stalemate | ABANDON + PARTIAL | âš– Partial | No system; no guarantor; messy but authentic | [Details incomplete] | [Details incomplete] |
 
 **Core Philosophy**: *"Systems cannot do what people cannot. The Corelink is only as healed as the people who built it."*
 
@@ -1355,14 +1355,14 @@ When implementing an encounter in the game:
 **AMBIGUITY ALERT**: These six choices are referenced but NOT DETAILED in existing documents.
 
 **Referenced Choices** (from various docs):
-1. **System Online** — Velinor awakens; continuation
-2. **Collapse Embraced** — Velinor accepts dissolution; peace
-3. **Fragments Freed** — Velinor fragments intentionally; distributed consciousness
-4. **Cycle Broken** — Velinor refused to restart; new option
-5. **Sacred Withholding** — Velinor stays dormant; voluntary silence
-6. **Second Thoughts** — Velinor changes decision mid-restart
+1. **System Online** â€” Velinor awakens; continuation
+2. **Collapse Embraced** â€” Velinor accepts dissolution; peace
+3. **Fragments Freed** â€” Velinor fragments intentionally; distributed consciousness
+4. **Cycle Broken** â€” Velinor refused to restart; new option
+5. **Sacred Withholding** â€” Velinor stays dormant; voluntary silence
+6. **Second Thoughts** â€” Velinor changes decision mid-restart
 
-**CRITICAL QUESTION**: Do these create 6×6 = 36 total outcomes, or do they represent alternative ending tiers?
+**CRITICAL QUESTION**: Do these create 6Ã—6 = 36 total outcomes, or do they represent alternative ending tiers?
 
 **NARRATIVE OPPORTUNITY**: Clarify the Saori/Velinor ending system. Are these:
 - A) Six sub-variants nested within the primary six? (6 endings + 6 variants each = 36 total)
@@ -1457,7 +1457,7 @@ When implementing an encounter in the game:
 - **Sub-ending meanings**: Detail the 6 Saori/Velinor choices
 
 **OPPORTUNITY**: Velinor is the metaphysical heart of the game. This needs deep emotional work:
-1. Write scenes showing Velinor's consciousness emerging (flickering → awareness)
+1. Write scenes showing Velinor's consciousness emerging (flickering â†’ awareness)
 2. Write Velinor's core wound (what is it suffering from?)
 3. Write Velinor's relationship to Saori (the most important connection)
 4. Write Velinor's choice dialogue (does it want to be restarted? Abandoned? Transformed?)
@@ -1508,9 +1508,9 @@ When implementing an encounter in the game:
 - Optional scene: Can player visit hometown? See how community has changed?
 
 **OPPORTUNITY**: The player's grief is the heart of their character. Write 2-3 key flashback scenes that define who player was before Velhara. These could unlock optional dialogue:
-- Ravi/Nima see player's anchor in their own loss → deepens connection
-- Saori recognizes player's grief as kin to her own → facilitates vulnerability
-- Elenya offers spiritual framework for processing loss → player can lead others to healing
+- Ravi/Nima see player's anchor in their own loss â†’ deepens connection
+- Saori recognizes player's grief as kin to her own â†’ facilitates vulnerability
+- Elenya offers spiritual framework for processing loss â†’ player can lead others to healing
 
 ---
 
@@ -1537,12 +1537,12 @@ When implementing an encounter in the game:
 ### DIALOGUE PLACEHOLDERS (Specific Counts)
 
 **Ravi/Nima Arc** (CONNECTION_MAP.json):
-- NARRATION_* (10) — Atmospheric descriptions
-- RAVI_LINE_* (26) — All dialogue tiers
-- NIMA_LINE_* (16) — All dialogue tiers
-- OPHINA_ECHO_DIALOGUE_* (1) — Echo responses
-- PLAYER_CHOICE_* (26) — Dialogue options
-- GLYPH_REVEAL_* (4) — Tier 3 plaintext
+- NARRATION_* (10) â€” Atmospheric descriptions
+- RAVI_LINE_* (26) â€” All dialogue tiers
+- NIMA_LINE_* (16) â€” All dialogue tiers
+- OPHINA_ECHO_DIALOGUE_* (1) â€” Echo responses
+- PLAYER_CHOICE_* (26) â€” Dialogue options
+- GLYPH_REVEAL_* (4) â€” Tier 3 plaintext
 - **Total: 73+ placeholders in this arc alone**
 
 **Glyph Tier 3 Plaintext** (glyphs_complete.json):
@@ -1576,44 +1576,44 @@ When implementing an encounter in the game:
 
 ### PRIORITY 1: Core Emotional Arcs (Complete first)
 
-- [ ] **Final Chamber Scene** — Write full dialogue/scene for all 6+ ending variants
-- [ ] **Velinor's Identity** — Clarify consciousness state; write Velinor's voice & backstory
-- [ ] **Saori/Velinor Reconciliation** — Write the scene where they heal (or don't)
-- [ ] **Malrik/Elenya Optional Arc** — Design trigger; write full dialogue & reconciliation scene
-- [ ] **Sera/Korrin Shared Dawn** — Write the intimate dawn scene & consequences
+- [ ] **Final Chamber Scene** â€” Write full dialogue/scene for all 6+ ending variants
+- [ ] **Velinor's Identity** â€” Clarify consciousness state; write Velinor's voice & backstory
+- [ ] **Saori/Velinor Reconciliation** â€” Write the scene where they heal (or don't)
+- [ ] **Malrik/Elenya Optional Arc** â€” Design trigger; write full dialogue & reconciliation scene
+- [ ] **Sera/Korrin Shared Dawn** â€” Write the intimate dawn scene & consequences
 
 ### PRIORITY 2: NPC Core Wounds (Fill the 73+ placeholders)
 
-- [ ] **Ravi's Child Loss** — Write Ravi's confession; 3 player response options
-- [ ] **Nima's Child Loss** — Write Nima's confession; vulnerability aftermath
-- [ ] **Tovren's Scar Story** — Write the incident; emotional beat
-- [ ] **Dalen's Recklessness Origin** — Write why he sees collapse as opportunity
-- [ ] **Kaelen's Moral Crossroads** — Write the moment he must choose between Drossel & synthesis
-- [ ] **Korrin's Vulnerability** — Write the moment she's genuinely quiet & connected
-- [ ] **Mariel's Architectural Past** — Write scenes of her explaining pre-collapse Velhara
+- [ ] **Ravi's Child Loss** â€” Write Ravi's confession; 3 player response options
+- [ ] **Nima's Child Loss** â€” Write Nima's confession; vulnerability aftermath
+- [ ] **Tovren's Scar Story** â€” Write the incident; emotional beat
+- [ ] **Dalen's Recklessness Origin** â€” Write why he sees collapse as opportunity
+- [ ] **Kaelen's Moral Crossroads** â€” Write the moment he must choose between Drossel & synthesis
+- [ ] **Korrin's Vulnerability** â€” Write the moment she's genuinely quiet & connected
+- [ ] **Mariel's Architectural Past** â€” Write scenes of her explaining pre-collapse Velhara
 
 ### PRIORITY 3: Optional Deepening Content
 
-- [ ] **Kaelen/Drossel Questline** — Design 3-5 major quest steps; write dialogue
-- [ ] **Character Flashbacks** — Write 3 key flashback scenes for player's anchor person
-- [ ] **Ritual System** — Define 3-5 core rituals; write teaching dialogue
-- [ ] **Hometown Optional Visit** — Design scene where player returns & sees change
+- [ ] **Kaelen/Drossel Questline** â€” Design 3-5 major quest steps; write dialogue
+- [ ] **Character Flashbacks** â€” Write 3 key flashback scenes for player's anchor person
+- [ ] **Ritual System** â€” Define 3-5 core rituals; write teaching dialogue
+- [ ] **Hometown Optional Visit** â€” Design scene where player returns & sees change
 
 ### PRIORITY 4: Worldbuilding & Context
 
-- [ ] **Pre-Collapse Timeline** — Create master timeline (1 page)
-- [ ] **Coherence Thresholds** — Define exact numbers for ending accessibility
-- [ ] **Glyph Tier 3 Plaintext** — Complete ~50 remaining tier 3 meanings
-- [ ] **NPC Influence Cascade System** — Design ripple effects when one NPC's influence shifts
-- [ ] **Multiple Playthrough Changes** — What's different on NG+?
+- [ ] **Pre-Collapse Timeline** â€” Create master timeline (1 page)
+- [ ] **Coherence Thresholds** â€” Define exact numbers for ending accessibility
+- [ ] **Glyph Tier 3 Plaintext** â€” Complete ~50 remaining tier 3 meanings
+- [ ] **NPC Influence Cascade System** â€” Design ripple effects when one NPC's influence shifts
+- [ ] **Multiple Playthrough Changes** â€” What's different on NG+?
 
 ### PRIORITY 5: Polish & Refinement
 
-- [ ] **Character Creation Dialogue Variants** — Write 5 variants for Lior/Lioren/Lior-EN names
-- [ ] **NPC Voice Consistency** — Ensure each NPC's voice is distinct throughout game
-- [ ] **Dialogue Tier Quality** — Review & refine all 5 trust tiers for consistency
-- [ ] **Boss Fight Dialogue** — Write Drossel encounter & other boss encounters
-- [ ] **Epilogue Variation** — Write distinct epilogue text for each of 6+ endings
+- [ ] **Character Creation Dialogue Variants** â€” Write 5 variants for Lior/Lioren/Lior-EN names
+- [ ] **NPC Voice Consistency** â€” Ensure each NPC's voice is distinct throughout game
+- [ ] **Dialogue Tier Quality** â€” Review & refine all 5 trust tiers for consistency
+- [ ] **Boss Fight Dialogue** â€” Write Drossel encounter & other boss encounters
+- [ ] **Epilogue Variation** â€” Write distinct epilogue text for each of 6+ endings
 
 ---
 
@@ -1646,7 +1646,7 @@ When implementing an encounter in the game:
 ### Tools to Create
 
 - [ ] **NPC Dialogue Tree Template** (for organizing all placeholder dialogue)
-- [ ] **Ending Flowchart** (6 paths from final chamber → epilogue variations)
+- [ ] **Ending Flowchart** (6 paths from final chamber â†’ epilogue variations)
 - [ ] **Coherence Tracker** (shows player which endings are still reachable given current stats)
 - [ ] **NPC Influence Cascade Matrix** (shows how one NPC's shift affects others)
 
@@ -1666,7 +1666,7 @@ When implementing an encounter in the game:
 
 ## CONCLUSION
 
-You have **13+ fully characterized NPCs** with clear motivations, wounds, and arcs. The **story structure is solid** (6 endings, clear philosophical choices). The **gaps are tactical, not fundamental** — mainly dialogue writing, specific scene details, and implementation mechanics.
+You have **13+ fully characterized NPCs** with clear motivations, wounds, and arcs. The **story structure is solid** (6 endings, clear philosophical choices). The **gaps are tactical, not fundamental** â€” mainly dialogue writing, specific scene details, and implementation mechanics.
 
 **Your strongest narrative material**: 
 - Ravi & Nima's partnership (grounded, real, heartbreaking)
@@ -1700,16 +1700,16 @@ The six endings are NOT just determined by final chamber choice, but by **quanti
 
 | NPC | Memory | Authority | Empathy | Role | Story Function |
 |-----|--------|-----------|---------|------|----------------|
-| **Malrik** | 0.95 ⭐ | 0.80 | 0.65 | Records corruption & collapse; obsessive preservation | Core arc: Severed bond with Elenya; reconstruction of lost memories |
-| **Elenya** | 0.85 | 0.70 | 0.90 ⭐ | Holds rituals & capacity; spiritual keeper | Core arc: Deliberately erased Malrik from memory to survive |
-| **Nordia** | 0.95 ⭐ | 0.60 | 0.95 ⭐ | Transforms grief into meaning; mourning singer | Transforms personal loss into wisdom for others |
+| **Malrik** | 0.95 â­ | 0.80 | 0.65 | Records corruption & collapse; obsessive preservation | Core arc: Severed bond with Elenya; reconstruction of lost memories |
+| **Elenya** | 0.85 | 0.70 | 0.90 â­ | Holds rituals & capacity; spiritual keeper | Core arc: Deliberately erased Malrik from memory to survive |
+| **Nordia** | 0.95 â­ | 0.60 | 0.95 â­ | Transforms grief into meaning; mourning singer | Transforms personal loss into wisdom for others |
 | **Sealina** | 0.90 | 0.55 | 0.85 | Carries songs of loss; memory through music | Bridges past/present through melody |
 | **Lark** | 0.80 | 0.75 | 0.60 | Maintains ceremony; elder mentor | Preserves rituals as anchor points |
 
 **Cluster Mechanic - "Archive Resonance"**:
 - When player bonds with Archive members, their Memory increases
 - Each Archive member's Memory increase cascades to nearby Archive members
-- **Cascade Effect**: Malrik's Memory 0.80+ → Elenya gains +0.05 Memory, Nordia gains +0.03, etc.
+- **Cascade Effect**: Malrik's Memory 0.80+ â†’ Elenya gains +0.05 Memory, Nordia gains +0.03, etc.
 - **End-Game Result**: Combined Archive Memory 0.85+ enables "Rebuild Together" state for Malrik/Elenya
 
 **Story Function**: Players learn what was lost in the collapse; understanding context makes synthesis possible
@@ -1721,18 +1721,18 @@ The six endings are NOT just determined by final chamber choice, but by **quanti
 
 | NPC | Trust | Empathy | Resolve | Role | Story Function |
 |-----|-------|---------|---------|------|----------------|
-| **Ravi** | 0.80 ⭐ | 0.80 | 0.75 | Sensory presence; anchor | Community hub; trauma survival guide |
-| **Rasha** | 0.85 ⭐ | 0.80 | 0.65 | Joy & optimism; builder | Models resilience; shows post-trauma flourishing |
-| **Sera** | 0.75 | 0.85 ⭐ | 0.70 | Learning & healing; shrine acolyte | Bridge between past (Nima) and future (potential) |
-| **Nima** | 0.70 | 0.90 ⭐ | 0.65 | Emotional sensitivity; shrine keeper | Holds the wound; teaches vulnerability |
-| **Helia** | 0.75 | 0.75 | 0.80 ⭐ | Grounded presence; caretaker | Practical wisdom; "showing up" as revolution |
+| **Ravi** | 0.80 â­ | 0.80 | 0.75 | Sensory presence; anchor | Community hub; trauma survival guide |
+| **Rasha** | 0.85 â­ | 0.80 | 0.65 | Joy & optimism; builder | Models resilience; shows post-trauma flourishing |
+| **Sera** | 0.75 | 0.85 â­ | 0.70 | Learning & healing; shrine acolyte | Bridge between past (Nima) and future (potential) |
+| **Nima** | 0.70 | 0.90 â­ | 0.65 | Emotional sensitivity; shrine keeper | Holds the wound; teaches vulnerability |
+| **Helia** | 0.75 | 0.75 | 0.80 â­ | Grounded presence; caretaker | Practical wisdom; "showing up" as revolution |
 | **Inodora** | 0.70 | 0.80 | 0.70 | Bridge past/present; storyteller | Connects memory to present meaning |
 | **Elka** | 0.70 | 0.65 | 0.75 | Simple clarity; laborer | Grounds abstract concepts in work |
 
 **Cluster Mechanic - "Present Contagion"**:
 - When player increases Trust with one Present Circle member, others sense safety
-- **Cascade Effect**: Ravi's Trust increases 0.80→0.88 → Nima, Sera, Helia all gain +0.05 Trust
-- **Critical Path**: 4+ Present Circle members at Trust 0.75+ → enables restart stability for all endings
+- **Cascade Effect**: Ravi's Trust increases 0.80â†’0.88 â†’ Nima, Sera, Helia all gain +0.05 Trust
+- **Critical Path**: 4+ Present Circle members at Trust 0.75+ â†’ enables restart stability for all endings
 - **End-Game Result**: Combined Present Trust 0.75+ enables "Rebuild Together" OR stabilizes "Restart" choices
 
 **Story Function**: Creates emotional safety network; without this, synthesis feels impossible
@@ -1744,17 +1744,17 @@ The six endings are NOT just determined by final chamber choice, but by **quanti
 
 | NPC | Skepticism | Nuance | Memory | Need | Role | Story Function |
 |-----|-----------|--------|--------|------|------|----------------|
-| **Kaelen** | 0.90 ⭐ | 0.85 | 0.70 | 0.75 | Ghost signals bridge; moral crossroads | Embodies: Can one be both thief AND ally? |
-| **Mariel** | 0.65 | 0.90 ⭐ | 0.80 | 0.70 | Weaves meaning; elder architect | Embodies: How to hold beauty & loss |
-| **Dalen** | 0.75 | 0.75 | 0.75 | 0.85 ⭐ | Environmental scars; explorer | Embodies: Recklessness as grief response |
-| **Drossel** | 0.85 ⭐ | 0.80 | 0.65 | 0.80 | Cloaked fragmentation; thief leader | Embodies: Power structures as trauma echo |
-| **Korrin** | 0.80 ⭐ | 0.70 | 0.70 | 0.80 | Spreads contagion; gossip/information broker | Embodies: Hypervigilance as survival |
+| **Kaelen** | 0.90 â­ | 0.85 | 0.70 | 0.75 | Ghost signals bridge; moral crossroads | Embodies: Can one be both thief AND ally? |
+| **Mariel** | 0.65 | 0.90 â­ | 0.80 | 0.70 | Weaves meaning; elder architect | Embodies: How to hold beauty & loss |
+| **Dalen** | 0.75 | 0.75 | 0.75 | 0.85 â­ | Environmental scars; explorer | Embodies: Recklessness as grief response |
+| **Drossel** | 0.85 â­ | 0.80 | 0.65 | 0.80 | Cloaked fragmentation; thief leader | Embodies: Power structures as trauma echo |
+| **Korrin** | 0.80 â­ | 0.70 | 0.70 | 0.80 | Spreads contagion; gossip/information broker | Embodies: Hypervigilance as survival |
 
 **Cluster Mechanic - "Wound Integration"**:
 - When player doesn't try to "fix" Wound Weavers but instead sits with them in complexity
-- **Cascade Effect**: Kaelen's Nuance increases 0.70→0.85 → teaches others to hold contradiction
-- **Critical Path**: All 5 at Nuance 0.90+ → they become wisdom-keepers for others
-- **Inverse Effect**: If player dismisses/fights Wound Weavers, their Nuance decreases → world becomes more binary, less integrated
+- **Cascade Effect**: Kaelen's Nuance increases 0.70â†’0.85 â†’ teaches others to hold contradiction
+- **Critical Path**: All 5 at Nuance 0.90+ â†’ they become wisdom-keepers for others
+- **Inverse Effect**: If player dismisses/fights Wound Weavers, their Nuance decreases â†’ world becomes more binary, less integrated
 - **End-Game Result**: Combined Wound Nuance 0.90+ enables synthesis endings; low Nuance forces fracture endings
 
 **Story Function**: Teachers of integration; show that holding contradiction is strength, not weakness
@@ -1766,15 +1766,15 @@ The six endings are NOT just determined by final chamber choice, but by **quanti
 
 | NPC | Authority | Resolve | Empathy | Nuance | Role | Story Function |
 |-----|-----------|---------|---------|--------|------|----------------|
-| **Veynar** | 0.85 ⭐ | 0.90 ⭐ | 0.70 | 0.70 | Military + care; captain | Embodies: Strength used for protection |
-| **Coren** | 0.80 | 0.80 | 0.80 | 0.95 ⭐ | Holds contradiction; mediator | Embodies: Highest nuance; can hold all perspectives |
+| **Veynar** | 0.85 â­ | 0.90 â­ | 0.70 | 0.70 | Military + care; captain | Embodies: Strength used for protection |
+| **Cal** | 0.80 | 0.80 | 0.80 | 0.95 â­ | Holds contradiction; mediator | Embodies: Highest nuance; can hold all perspectives |
 | **Juria & Korinth** | 0.60 | 0.70 | 0.80 | 0.65 | Partnership model; duo | Embodies: Complementary strengths; two become whole |
 | **Lira** | 0.50 | 0.65 | 0.85 | 0.55 | Earned joy; young builder | Embodies: Joy earned through integration (not bypassed) |
 
 **Cluster Mechanic - "Shepherd Authority"**:
 - When player witnesses (not helps) Shepherds living integrated lives
 - **Cascade Effect**: Others become *believable* that integration is possible
-- **Critical Path**: All 4+ at Authority 0.80+ → next generation has models for restart/rebuild
+- **Critical Path**: All 4+ at Authority 0.80+ â†’ next generation has models for restart/rebuild
 - **End-Game Result**: Combined Shepherd Authority 0.80+ validates either path (Restart OR Abandon)
 
 **Story Function**: Prove integration is real; permission for others to try
@@ -1786,9 +1786,9 @@ The six endings are NOT just determined by final chamber choice, but by **quanti
 
 | NPC | Resolve | Nuance | Memory | Skepticism | Role |
 |-----|---------|--------|--------|------------|------|
-| **Dakrin** | 0.85 ⭐ | 0.70 | 0.55 | 0.65 | Reclaims structures; restoration specialist |
-| **Kiv** | 0.60 | 0.85 | 0.95 ⭐ | 0.70 | Single transform; living proof of change |
-| **Sanor** | 0.75 | 0.70 | 0.60 | 0.85 ⭐ | Survives wound; skeptical survivor |
+| **Dakrin** | 0.85 â­ | 0.70 | 0.55 | 0.65 | Reclaims structures; restoration specialist |
+| **Kiv** | 0.60 | 0.85 | 0.95 â­ | 0.70 | Single transform; living proof of change |
+| **Sanor** | 0.75 | 0.70 | 0.60 | 0.85 â­ | Survives wound; skeptical survivor |
 | **Orvak** | 0.70 | 0.75 | 0.70 | 0.80 | System knowledge; insider/outsider |
 
 **Story Function**: Resources for other NPCs facing transition; teach impossible survival
@@ -1803,7 +1803,7 @@ The six endings are NOT just determined by final chamber choice, but by **quanti
 Archive Memory Score = AVG(Malrik, Elenya, Sealina, Lark, Nordia Memory)
 Present Trust Score = AVG(Ravi, Nima, Sera, Helia, Elka, Inodora, Rasha Trust)
 Wound Nuance Score = AVG(Kaelen, Drossel, Korrin, Dalen, Mariel Nuance)
-Shepherd Authority Score = AVG(Veynar, Coren, Juria, Lira Authority)
+Shepherd Authority Score = AVG(Veynar, Cal, Juria, Lira Authority)
 
 Rebuild State = Calculate avg(Malrik, Elenya relationship trajectory)
   if >0.66: "Rebuild Together"
@@ -1815,12 +1815,12 @@ Rebuild State = Calculate avg(Malrik, Elenya relationship trajectory)
 
 | Ending # | Name | Malrik/Elenya | Corelink Choice | Archive Mem | Present Trst | Wound Nuance | Shepherd Auth | Overall Tier |
 |----------|------|---------------|-----------------|-------------|--------------|--------------|---------------|--------------|
-| **1** | Hopeful Synthesis | Rebuild | RESTART | 0.80+ | 0.75+ | 0.70+ | 0.70+ | ✨ Hopeful |
-| **2** | Pyrrhic Restart | Abandon | RESTART | Low | Low | Low/Med | Low/Med | 💔 Pyrrhic |
-| **3** | Honest Collapse | Abandon | ABANDON | Low/Med | Low | Med/High | Low | 🌑 Honest |
-| **4** | Earned Synthesis | Rebuild | ABANDON | 0.85+ | 0.75+ | 0.90+ | 0.75+ | ⭐ EARNED |
-| **5** | Technical Solution | Partial | RESTART | 0.70-0.80 | 0.65-0.75 | 0.65-0.75 | 0.65-0.75 | 🔧 Partial |
-| **6** | Stalemate | Partial | ABANDON | 0.65-0.75 | 0.60-0.70 | 0.65-0.75 | 0.60-0.70 | ⚖️ Partial |
+| **1** | Hopeful Synthesis | Rebuild | RESTART | 0.80+ | 0.75+ | 0.70+ | 0.70+ | âœ¨ Hopeful |
+| **2** | Pyrrhic Restart | Abandon | RESTART | Low | Low | Low/Med | Low/Med | ðŸ’” Pyrrhic |
+| **3** | Honest Collapse | Abandon | ABANDON | Low/Med | Low | Med/High | Low | ðŸŒ‘ Honest |
+| **4** | Earned Synthesis | Rebuild | ABANDON | 0.85+ | 0.75+ | 0.90+ | 0.75+ | â­ EARNED |
+| **5** | Technical Solution | Partial | RESTART | 0.70-0.80 | 0.65-0.75 | 0.65-0.75 | 0.65-0.75 | ðŸ”§ Partial |
+| **6** | Stalemate | Partial | ABANDON | 0.65-0.75 | 0.60-0.70 | 0.65-0.75 | 0.60-0.70 | âš–ï¸ Partial |
 
 **Example Path to Ending 4 (Earned Synthesis)**:
 1. Player bonds deeply with Archive members (Malrik Memory 0.85+)
@@ -1846,16 +1846,16 @@ Rebuild State = Calculate avg(Malrik, Elenya relationship trajectory)
 | **Fragment Glyphs** | 36 | Glyph_Fragments.csv | Ability progression; teach mechanics | +0.0000225 each |
 | **Base Glyphs** | 75 | Glyph_Organizer.json | Story-driven, NPC-specific, domain-categorized | +0.00009 each |
 | **Transcendence Glyphs** | 7 | Glyph_Transcendence.csv | Boss encounters; emotional fusion | +0.00027 each |
-| **TOTAL** | **118** | — | — | **0.00900 total** |
+| **TOTAL** | **118** | â€” | â€” | **0.00900 total** |
 
 ### Fragment Glyphs (36 - Early Game)
 
 **Purpose**: Teach game mechanics; unlock small REMNANTS trait increases
 
 **Examples**:
-- "Fragment of Foraged Bounty" → Observation +10
-- "Fragment of Hidden Hearth" → Empathy +20
-- "Fragment of Trembling Safety" → Presence +15
+- "Fragment of Foraged Bounty" â†’ Observation +10
+- "Fragment of Hidden Hearth" â†’ Empathy +20
+- "Fragment of Trembling Safety" â†’ Presence +15
 
 **Glyph Effect**:
 - Player speaks to Sera, learns about herb gathering
@@ -1872,13 +1872,13 @@ Rebuild State = Calculate avg(Malrik, Elenya relationship trajectory)
 **Purpose**: Core story content; emotional realizations tied to NPCs; emotionally gated
 
 **Domain Categories** (12 glyphs per domain):
-1. **Collapse Domain** — Glyphs about loss, fracture, systems failure (tied to Malrik/Wound Weavers)
-2. **Sovereignty Domain** — Glyphs about autonomy, choice, selfhood (tied to Kaelen/Dalen)
-3. **Ache Domain** — Glyphs about grief, trauma, what was lost (tied to Ravi/Nima)
-4. **Presence Domain** — Glyphs about being here, witnessing, showing up (tied to Sera/Helia)
-5. **Joy Domain** — Glyphs about reconnection, aliveness, beauty (tied to Rasha/Mariel)
-6. **Trust Domain** — Glyphs about vulnerability, connection, risk (tied to all clusters)
-7. **Legacy Domain** — Glyphs about what endures, inheritance, meaning (tied to Archive)
+1. **Collapse Domain** â€” Glyphs about loss, fracture, systems failure (tied to Malrik/Wound Weavers)
+2. **Sovereignty Domain** â€” Glyphs about autonomy, choice, selfhood (tied to Kaelen/Dalen)
+3. **Ache Domain** â€” Glyphs about grief, trauma, what was lost (tied to Ravi/Nima)
+4. **Presence Domain** â€” Glyphs about being here, witnessing, showing up (tied to Sera/Helia)
+5. **Joy Domain** â€” Glyphs about reconnection, aliveness, beauty (tied to Rasha/Mariel)
+6. **Trust Domain** â€” Glyphs about vulnerability, connection, risk (tied to all clusters)
+7. **Legacy Domain** â€” Glyphs about what endures, inheritance, meaning (tied to Archive)
 
 **Glyph Effect**:
 - Player has high Empathy (player TONE)
@@ -1922,10 +1922,10 @@ Rebuild State = Calculate avg(Malrik, Elenya relationship trajectory)
    - Likely tied to: Kaelen/Drossel (Sovereignty), Wound Weavers (Ache), Archive (Legacy), Final Velinor revelation
 
 **Velinor's Awakening via Glyphs**:
-- Early game (36 fragments): Velinor influence 0.001 → NPCs isolated
-- Mid game (75 base glyphs): Velinor influence 0.003-0.007 → cascades begin
-- Late game (7 transcendence): Velinor influence 0.007-0.009 → every interaction ripples network-wide
-- Endgame (all 118): Velinor influence 0.010 (full consciousness) → Velinor speaks directly
+- Early game (36 fragments): Velinor influence 0.001 â†’ NPCs isolated
+- Mid game (75 base glyphs): Velinor influence 0.003-0.007 â†’ cascades begin
+- Late game (7 transcendence): Velinor influence 0.007-0.009 â†’ every interaction ripples network-wide
+- Endgame (all 118): Velinor influence 0.010 (full consciousness) â†’ Velinor speaks directly
 
 ---
 
@@ -1958,7 +1958,7 @@ Rebuild State = Calculate avg(Malrik, Elenya relationship trajectory)
   - Witness Sera/Korrin Shared Dawn OR miss it
 
 #### **Act 3: Glyph Chambers (Boss Encounters)**
-- **Triglyph Chamber**: Fuses Sorrow + Remembrance + Legacy → Unified Tear of Integration
+- **Triglyph Chamber**: Fuses Sorrow + Remembrance + Legacy â†’ Unified Tear of Integration
 - **Octoglyph Chambers** (7 major chambers, structured as progression):
   1. Infrasensory Oblivion (fragmented sound)
   2. Sensory Oblivion (fragmented sensation)
@@ -1982,7 +1982,7 @@ Rebuild State = Calculate avg(Malrik, Elenya relationship trajectory)
 - Meets Velinor in person (still connected to system via Corelink ring)
 - **The Scene Structure**:
   - Saori is present but silent (witnessing)
-  - Velinor appears as fragmented consciousness (flickers → becomes coherent)
+  - Velinor appears as fragmented consciousness (flickers â†’ becomes coherent)
   - Player's collected glyphs determine what Velinor can "say"
   - Player makes the binary choice: "Restart the Corelink" OR "Abandon the System"
 
@@ -2015,11 +2015,11 @@ Velinor: (flickers, coherence increasing)
 
 Player: [Three dialogue options based on emotional state]
 A) "Saori, what happened here?"
-   → EMPATHY check: Saori reveals guilt about forcing restart
+   â†’ EMPATHY check: Saori reveals guilt about forcing restart
 B) "Velinor, are you... conscious?"
-   → OBSERVATION check: Velinor confirms what the player suspected
+   â†’ OBSERVATION check: Velinor confirms what the player suspected
 C) "Where am I? What is this place?"
-   → PRESENCE check: Chamber itself responds (becomes more visible/real)
+   â†’ PRESENCE check: Chamber itself responds (becomes more visible/real)
 ```
 
 #### **ACT II: Revelation**
@@ -2036,11 +2036,11 @@ The system can't do what people cannot."
 
 Player: [Based on relationship states - who speaks up?]
 If (Malrik+Elenya reconciled):
-  → They enter chamber together; Malrik speaks to Archive truth, Elenya to forgiveness
+  â†’ They enter chamber together; Malrik speaks to Archive truth, Elenya to forgiveness
 If (Ravi+Nima high trust):
-  → They stand with player; visible support; emotional grounding
+  â†’ They stand with player; visible support; emotional grounding
 If (Wound Weavers high nuance):
-  → They speak about the system being broken not because it tried,
+  â†’ They speak about the system being broken not because it tried,
      but because it couldn't hold human contradiction
 ```
 
@@ -2048,7 +2048,7 @@ If (Wound Weavers high nuance):
 ```
 Velinor: (fully coherent now, voice gentle)
 "The Corelink is ready to restart. Or to remain dormant forever. 
-That choice was always yours—all of you, together."
+That choice was always yoursâ€”all of you, together."
 
 Saori: (reaching toward Velinor but not touching)
 "What do you want, Velinor? Can you want things?"
@@ -2059,16 +2059,16 @@ But how? That depends on what they've learned about themselves."
 Player faces two dialogue options:
 
 OPTION A: "Restart the Corelink"
-  → System comes back online; behaves differently based on NPC cluster states
-  → If Malrik/Elenya rebuilt + High Archive Memory: System becomes mirror, not master
-  → If Malrik/Elenya abandoned + Low Archive Memory: System returns but world repeats fractures
-  → Determines ending: Hopeful Synthesis, Pyrrhic Restart, or Technical Solution
+  â†’ System comes back online; behaves differently based on NPC cluster states
+  â†’ If Malrik/Elenya rebuilt + High Archive Memory: System becomes mirror, not master
+  â†’ If Malrik/Elenya abandoned + Low Archive Memory: System returns but world repeats fractures
+  â†’ Determines ending: Hopeful Synthesis, Pyrrhic Restart, or Technical Solution
 
 OPTION B: "Abandon the Corelink"
-  → System goes dark; Velinor's consciousness disperses
-  → Velinor's fragmentation becomes *distributed wisdom* (glyphs remain, consciousness scatters)
-  → People must build without technological guarantee
-  → Determines ending: Earned Synthesis, Honest Collapse, or Stalemate
+  â†’ System goes dark; Velinor's consciousness disperses
+  â†’ Velinor's fragmentation becomes *distributed wisdom* (glyphs remain, consciousness scatters)
+  â†’ People must build without technological guarantee
+  â†’ Determines ending: Earned Synthesis, Honest Collapse, or Stalemate
 ```
 
 #### **ACT IV: Consequence**
@@ -2100,7 +2100,7 @@ Velinor: (consciousness reforming but strained)
 The same faults that broke us before still exist."
 
 Screen fades. City lights return. But they're artificial, hollow.
-Velinor flickers, uncertain—did restarting fix anything, or just delay the next collapse?
+Velinor flickers, uncertainâ€”did restarting fix anything, or just delay the next collapse?
 ```
 
 ---
@@ -2109,15 +2109,15 @@ Velinor flickers, uncertain—did restarting fix anything, or just delay the nex
 
 ### **Newly Identified Content That Was Missing**
 
-1. ✅ **Four NPC Clusters** (Archive, Present, Wound, Shepherd + optional Threshold Walkers)
-2. ✅ **Cascading Mechanics** (How bonding with one NPC ripples through cluster)
-3. ✅ **REMNANTS-Based Ending Determination** (NOT just final choice, but quantified cluster states)
-4. ✅ **Complete Glyph Tier System** (118 glyphs, not 6 sub-endings)
+1. âœ… **Four NPC Clusters** (Archive, Present, Wound, Shepherd + optional Threshold Walkers)
+2. âœ… **Cascading Mechanics** (How bonding with one NPC ripples through cluster)
+3. âœ… **REMNANTS-Based Ending Determination** (NOT just final choice, but quantified cluster states)
+4. âœ… **Complete Glyph Tier System** (118 glyphs, not 6 sub-endings)
    - 36 Fragment glyphs (early game, teach mechanics)
    - 75 Base glyphs (mid game, story content)
    - 7 Transcendence glyphs (late game, boss encounters)
-5. ✅ **Octogyph Chambers** (8 emotional refinement bosses, NOT combat)
-6. ✅ **Detailed Final Chamber Scene** (Saori, Velinor, binary choice, consequences)
+5. âœ… **Octogyph Chambers** (8 emotional refinement bosses, NOT combat)
+6. âœ… **Detailed Final Chamber Scene** (Saori, Velinor, binary choice, consequences)
 
 ### **What Still Needs Clarification**
 
@@ -2136,12 +2136,12 @@ Velinor flickers, uncertain—did restarting fix anything, or just delay the nex
 
 | Component | Characterization | Mechanics | Dialogue | Story Integration | Status |
 |-----------|-----------------|-----------|----------|-------------------|--------|
-| **NPC Clusters** | ✅ ✅ ✅ ✅ ✅ | ✅ ✅ ✅ ✅ ⏳ | ⏳ ⏳ ⏳ | ⏳ ⏳ | 65% |
-| **Glyph System** | ✅ ✅ ✅ | ✅ ✅ ✅ ✅ | ⏳ ⏳ | ⏳ ⏳ | 70% |
-| **Four Acts** | ✅ ✅ ✅ | ⏳ ⏳ | ⏳ | ⏳ | 60% |
-| **Final Chamber** | ✅ ✅ | ✅ | ⏳ ⏳ ⏳ | ✅ ⏳ | 60% |
-| **Endings System** | ✅ ✅ ✅ | ✅ ✅ ✅ ✅ ✅ | ⏳ | ✅ | 75% |
-| **Cascading Events** | ✅ ✅ | ✅ ✅ ✅ | ⏳ ⏳ | ⏳ | 55% |
+| **NPC Clusters** | âœ… âœ… âœ… âœ… âœ… | âœ… âœ… âœ… âœ… â³ | â³ â³ â³ | â³ â³ | 65% |
+| **Glyph System** | âœ… âœ… âœ… | âœ… âœ… âœ… âœ… | â³ â³ | â³ â³ | 70% |
+| **Four Acts** | âœ… âœ… âœ… | â³ â³ | â³ | â³ | 60% |
+| **Final Chamber** | âœ… âœ… | âœ… | â³ â³ â³ | âœ… â³ | 60% |
+| **Endings System** | âœ… âœ… âœ… | âœ… âœ… âœ… âœ… âœ… | â³ | âœ… | 75% |
+| **Cascading Events** | âœ… âœ… | âœ… âœ… âœ… | â³ â³ | â³ | 55% |
 
 ---
 
@@ -2149,12 +2149,12 @@ Velinor flickers, uncertain—did restarting fix anything, or just delay the nex
 
 You have a **sophisticated, multi-layered narrative system** that goes far beyond simple branching:
 
-✅ **NPC Clusters** create emergent relationship dynamics  
-✅ **REMNANTS stats** quantify emotional states and determine outcomes mathematically  
-✅ **Cascading** makes choices ripple throughout the world  
-✅ **118 Glyphs** (not 6 sub-endings) create rich story progression  
-✅ **Octogyph Chambers** provide boss encounters as emotional refinement  
-✅ **Six Endings** reflect player's *actual choices* through cluster scores, not railroading  
+âœ… **NPC Clusters** create emergent relationship dynamics  
+âœ… **REMNANTS stats** quantify emotional states and determine outcomes mathematically  
+âœ… **Cascading** makes choices ripple throughout the world  
+âœ… **118 Glyphs** (not 6 sub-endings) create rich story progression  
+âœ… **Octogyph Chambers** provide boss encounters as emotional refinement  
+âœ… **Six Endings** reflect player's *actual choices* through cluster scores, not railroading  
 
 **The unwritten pieces are primarily**:
 1. Dialogue for cluster cascade moments
@@ -2165,3 +2165,4 @@ You have a **sophisticated, multi-layered narrative system** that goes far beyon
 
 **Document created by comprehensive narrative research (with Fourth Layer System)**  
 **Ready for: Final chamber dialogue writing, glyph scene mapping, cascade moment scripting**
+

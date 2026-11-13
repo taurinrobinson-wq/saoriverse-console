@@ -1,4 +1,4 @@
-"""
+﻿"""
 Event Timeline System for Velinor
 Tracks game progression across in-game days, phases, and collapse events
 """
@@ -126,7 +126,7 @@ class EventTimeline:
         
         # Event triggers
         self.collapse_triggered: bool = False
-        self.coren_warning_given: bool = False
+        self.Cal_warning_given: bool = False
         self.immediate_aftermath_started: bool = False
         
         # Marketplace connection
@@ -178,8 +178,8 @@ class EventTimeline:
             
             if self.current_day >= 10:
                 self.transition_to_phase(CollapsePhase.FINAL_WARNING)
-                events["triggered_events"].append("coren_gives_warning")
-                self.coren_warning_given = True
+                events["triggered_events"].append("Cal_gives_warning")
+                self.Cal_warning_given = True
         
         elif self.current_phase == CollapsePhase.FINAL_WARNING:
             self.building_status.deteriorate(15)  # Rapid deterioration before collapse
@@ -299,11 +299,11 @@ class EventTimeline:
             "complete_separation": separation_prob / total
         }
     
-    def should_offer_coren_warning(self) -> bool:
-        """Determine if Coren should give the final warning"""
+    def should_offer_Cal_warning(self) -> bool:
+        """Determine if Cal should give the final warning"""
         return (
             self.current_phase == CollapsePhase.FINAL_WARNING
-            and not self.coren_warning_given
+            and not self.Cal_warning_given
             and self.building_status.stability_percent <= 30
         )
     
@@ -350,7 +350,8 @@ class EventTimeline:
             "elenya_stress": self.elenya_state.stress_level,
             "malrik_elenya_cooperation": self.malrik_state.cooperation_level,
             "collapse_triggered": self.collapse_triggered,
-            "coren_warning_given": self.coren_warning_given,
+            "Cal_warning_given": self.Cal_warning_given,
             "player_interventions": len(self.player_interventions.interventions),
             "rebuild_potential": self.player_interventions.get_rebuild_potential()
         }
+

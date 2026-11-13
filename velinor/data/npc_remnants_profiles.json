@@ -1,4 +1,4 @@
-{
+﻿{
   "npc_profiles": {
     "Archivist Malrik": {
       "cluster": "Archive Network",
@@ -363,7 +363,7 @@
       },
       "description": "Military precision meeting emotional need, protects space for healing"
     },
-    "Coren the Mediator": {
+    "Cal the Mediator": {
       "cluster": "Future Shepherds",
       "temporal_role": "Future Shepherd",
       "domains": [
@@ -668,7 +668,7 @@
         "trust": 0.4,
         "skepticism": 0.7
       },
-      "description": "Saori, the Oracle—a persistent presence whose remnants stats shift with player decisions."
+      "description": "Saori, the Oracleâ€”a persistent presence whose remnants stats shift with player decisions."
     }
   },
   "clusters": {
@@ -705,7 +705,7 @@
     ],
     "Future Shepherds": [
       "Captain Veynar",
-      "Coren the Mediator",
+      "Cal the Mediator",
       "Juria & Korinth",
       "Lira"
     ],

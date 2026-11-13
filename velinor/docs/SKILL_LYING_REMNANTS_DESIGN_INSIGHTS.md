@@ -1,18 +1,18 @@
-# Key Design Insights: Skill-Lying-REMNANTS System
+﻿# Key Design Insights: Skill-Lying-REMNANTS System
 
 ## The Core Design Principle: "Visible Self, Invisible World"
 
 This system elegantly separates what the player experiences from what NPCs experience:
 
 ### Player's Perspective
-✅ **See:** Own TONE stats (Trust, Observation, Narrative Presence, Empathy) ❌ **Don't See:** NPC
-REMNANTS, game systems, mechanical rules 📍 **Learn:** NPC state ONLY through dialogue shifts and
+âœ… **See:** Own TONE stats (Trust, Observation, Narrative Presence, Empathy) âŒ **Don't See:** NPC
+REMNANTS, game systems, mechanical rules ðŸ“ **Learn:** NPC state ONLY through dialogue shifts and
 social consequences
 
 ### NPC's Perspective (Hidden)
-✅ **Have:** REMNANTS traits that evolve based on player actions ✅ **Know:** When player is lying
-(through discovery mechanics) ✅ **Remember:** Past deceptions (Memory trait + Korrin's
-rumor-spreading) ❌ **Cannot:** Block access or create narrative lockouts
+âœ… **Have:** REMNANTS traits that evolve based on player actions âœ… **Know:** When player is lying
+(through discovery mechanics) âœ… **Remember:** Past deceptions (Memory trait + Korrin's
+rumor-spreading) âŒ **Cannot:** Block access or create narrative lockouts
 
 ---
 
@@ -38,10 +38,10 @@ Unlike games with binary trust meters that lock content:
 ### 3. Ripple Effects Create Organic Community Dynamics
 
 When player lies to Kaelen:
-- Kaelen becomes skeptical ✅ (expected)
-- Torvren hears about it → also skeptical ✅ (social learning)
-- Korrin weaponizes the lie → becomes rumor-spreader ✅ (personality-driven)
-- Drossel's caution increases ✅ (through Korrin's network)
+- Kaelen becomes skeptical âœ… (expected)
+- Torvren hears about it â†’ also skeptical âœ… (social learning)
+- Korrin weaponizes the lie â†’ becomes rumor-spreader âœ… (personality-driven)
+- Drossel's caution increases âœ… (through Korrin's network)
 
 Result: A living social ecosystem where consequences ripple naturally.
 
@@ -50,14 +50,14 @@ Result: A living social ecosystem where consequences ripple naturally.
 Korrin's enhanced rumor-spreading creates narrative tension:
 
 ```
-Player lies once          → Kaelen skeptical
-Player lies twice         → Korrin starts spreading rumors
-                          → Community grows suspicious
-                          → Same task, different dialogue tone
+Player lies once          â†’ Kaelen skeptical
+Player lies twice         â†’ Korrin starts spreading rumors
+                          â†’ Community grows suspicious
+                          â†’ Same task, different dialogue tone
 ```
 
 This incentivizes *some* honesty, but doesn't enforce it. The player can continue lying and facing
-escalating social friction—the choice remains theirs.
+escalating social frictionâ€”the choice remains theirs.
 
 ---
 
@@ -66,33 +66,33 @@ escalating social friction—the choice remains theirs.
 The implementation elegantly separates concerns:
 
 ```
-┌─────────────────────────────────────────────────────┐
-│ Game State (High Level)                             │
-│ - Player TONE stats visible                         │
-│ - NPC dialogue context generated                    │
-│ - Dialogue options filtered/shown dynamically       │
-└─────────────────────────────────────────────────────┘
-                        ↕ (apply_skill_task_outcome)
-┌─────────────────────────────────────────────────────┐
-│ NPC Manager (REMNANTS Layer)                        │
-│ - apply_skill_task_outcome() bridges systems        │
-│ - _propagate_lie_discovery() spreads skepticism     │
-│ - Influence map defines community structure         │
-└─────────────────────────────────────────────────────┘
-                        ↕ (SkillTaskOutcome.get_remnants_effects())
-┌─────────────────────────────────────────────────────┐
-│ Skill System (Outcome Layer)                        │
-│ - SkillClaim determines lie likelihood              │
-│ - SkillTaskOutcome calculates consequences          │
-│ - get_remnants_effects() translates to trait deltas │
-└─────────────────────────────────────────────────────┘
-                        ↕ (NPCDialogueContext)
-┌─────────────────────────────────────────────────────┐
-│ Dialogue System (Presentation Layer)                │
-│ - Reads NPC REMNANTS state                          │
-│ - Generates DialogueStyle (TRUSTING/SUSPICIOUS)     │
-│ - Filters options based on trust/skepticism         │
-└─────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Game State (High Level)                             â”‚
+â”‚ - Player TONE stats visible                         â”‚
+â”‚ - NPC dialogue context generated                    â”‚
+â”‚ - Dialogue options filtered/shown dynamically       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                        â†• (apply_skill_task_outcome)
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ NPC Manager (REMNANTS Layer)                        â”‚
+â”‚ - apply_skill_task_outcome() bridges systems        â”‚
+â”‚ - _propagate_lie_discovery() spreads skepticism     â”‚
+â”‚ - Influence map defines community structure         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                        â†• (SkillTaskOutcome.get_remnants_effects())
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Skill System (Outcome Layer)                        â”‚
+â”‚ - SkillClaim determines lie likelihood              â”‚
+â”‚ - SkillTaskOutcome calculates consequences          â”‚
+â”‚ - get_remnants_effects() translates to trait deltas â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                        â†• (NPCDialogueContext)
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Dialogue System (Presentation Layer)                â”‚
+â”‚ - Reads NPC REMNANTS state                          â”‚
+â”‚ - Generates DialogueStyle (TRUSTING/SUSPICIOUS)     â”‚
+â”‚ - Filters options based on trust/skepticism         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Each layer has a single responsibility:
@@ -100,24 +100,24 @@ Each layer has a single responsibility:
 - **NPC Manager**: Update state based on outcome
 - **Dialogue System**: Render state as dialogue
 
-No layer knows about the others' internals—only the APIs.
+No layer knows about the others' internalsâ€”only the APIs.
 
 ---
 
 ## The Lying Mechanics: Discovery Confidence
 
-When a player lies about having a skill, the lie isn't binary—it's graduated:
+When a player lies about having a skill, the lie isn't binaryâ€”it's graduated:
 
 ```
-Player's Actual Skill Level    → Discovery Confidence
-─────────────────────────────────────────────────────
-0.0 (novice)                   → 0.95 (VERY obvious lie)
-0.3 (novice+)                  → 0.88 (obvious)
-0.6 (apprentice)               → 0.69 (suspicious)
-0.8 (journeyman)               → 0.61 (plausible)
-0.95 (master)                  → 0.52 (barely detectable)
+Player's Actual Skill Level    â†’ Discovery Confidence
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+0.0 (novice)                   â†’ 0.95 (VERY obvious lie)
+0.3 (novice+)                  â†’ 0.88 (obvious)
+0.6 (apprentice)               â†’ 0.69 (suspicious)
+0.8 (journeyman)               â†’ 0.61 (plausible)
+0.95 (master)                  â†’ 0.52 (barely detectable)
 
-Formula: discovery_confidence = 0.95 - (player_level × 0.43)
+Formula: discovery_confidence = 0.95 - (player_level Ã— 0.43)
 ```
 
 This means:
@@ -145,7 +145,7 @@ Option("I learned from my mistakes", is_redemption=True)
                    (Can't redeem with someone who completely distrusts you)
 ```
 
-Result: NPC dialogue feels intelligent—they don't offer obviously unbelievable options.
+Result: NPC dialogue feels intelligentâ€”they don't offer obviously unbelievable options.
 
 ---
 
@@ -155,18 +155,18 @@ Unlike many games, broken trust isn't permanent:
 
 ```
 Initial state: Sera trusts you (Trust 0.7)
-                    ↓
+                    â†“
 Player lies, caught
-                    ↓
+                    â†“
 Broken: Sera is disappointed (Trust 0.2)
-                    ↓
+                    â†“
 Player learns actual skill
-                    ↓
+                    â†“
 Player encounters Sera again
 Redemption option appears: "Last time I wasn't ready..."
-                    ↓
+                    â†“
 Player succeeds honestly
-                    ↓
+                    â†“
 Partial recovery: Sera still cautious (Trust 0.3) but less hostile
 ```
 
@@ -186,13 +186,13 @@ The influence map defines how information spreads:
 
 ```
 Kaelen (lies to me about Tracking)
-    ↓
-    ├→ Torvren (my friend, tells him I'm deceptive)
-    ├→ Korrin (she LOVES gossip, tells everyone)
-    └→ Drossel (connected through Kaelen)
+    â†“
+    â”œâ†’ Torvren (my friend, tells him I'm deceptive)
+    â”œâ†’ Korrin (she LOVES gossip, tells everyone)
+    â””â†’ Drossel (connected through Kaelen)
 
-Result: Lie to one NPC → community learns about it → 
-        everyone becomes more skeptical → 
+Result: Lie to one NPC â†’ community learns about it â†’ 
+        everyone becomes more skeptical â†’ 
         player's reputation precedes them
 ```
 
@@ -233,16 +233,16 @@ content
 Game Designer's Intent: "Sera teaches Herbalism"
 
 Traditional Approach:
-  - If trust too low: NPC refuses to teach → narrative fork
-  - Creates branching story → content multiplication
+  - If trust too low: NPC refuses to teach â†’ narrative fork
+  - Creates branching story â†’ content multiplication
 
 This System's Approach:
   - Sera always teaches Herbalism (she's kind-hearted, never refuses)
   - Lesson scope/complexity reflects REMNANTS state:
     * High trust: "I'm delighted to teach you."
-      → Complex lesson on ingestible anti-viral
+      â†’ Complex lesson on ingestible anti-viral
     * Low trust: "I'm a little busy so I'll have to give you a quick lesson."
-      → Simple lesson on making a basic salve
+      â†’ Simple lesson on making a basic salve
   - Same character, different scope
   - Different scope creates authentic game consequence without personality shift
 ```
@@ -262,16 +262,16 @@ NPC Arc (Building Debate):
   - Player can claim skills to help (mediation, observation, etc.)
   
 Glyph Obtained:
-  - Glyph 22: Coren's "Held Ache" at archive
+  - Glyph 22: Cal's "Held Ache" at archive
   - Triggers when player demonstrates empathy/nuance
   
 REMNANTS Shift:
-  - Player's Empathy claim (honest) → Coren's Empathy ↑
-  - Or: Player's Trust claim (lie) → Coren's Skepticism ↑
+  - Player's Empathy claim (honest) â†’ Cal's Empathy â†‘
+  - Or: Player's Trust claim (lie) â†’ Cal's Skepticism â†‘
   
 Dialogue Ripple:
-  - Malrik hears Coren is skeptical → assumes player is untrustworthy
-  - Elenya becomes more cautious → less open in future discussions
+  - Malrik hears Cal is skeptical â†’ assumes player is untrustworthy
+  - Elenya becomes more cautious â†’ less open in future discussions
 ```
 
 Glyphs and skills work orthogonally:
@@ -294,3 +294,4 @@ effects and community dynamics feel alive
 
 The result is a system where the player doesn't solve a puzzle (get trust to X, get skill to Y) but
 rather navigates a social ecosystem where their choices matter and consequences ripple naturally.
+

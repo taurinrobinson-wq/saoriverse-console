@@ -1,4 +1,4 @@
-# Fourth Layer & Six Endings Integration Guide
+﻿# Fourth Layer & Six Endings Integration Guide
 
 *How the REMNANTS cascading system determines which of the six endings the player can achieve*
 
@@ -14,7 +14,7 @@
 Archive Memory Score = AVG(Malrik, Elenya, Sealina, Lark, Nordia Memory)
 Present Trust Score = AVG(Ravi, Nima, Sera, Helia, Elka, Inodora, Rasha Trust)
 Wound Nuance Score = AVG(Kaelen, Drossel, Korrin, Dalen, Mariel Nuance)
-Shepherd Authority Score = AVG(Veynar, Coren, Juria, Lira Authority)
+Shepherd Authority Score = AVG(Veynar, Cal, Juria, Lira Authority)
 ```
 
 **Then check Malrik/Elenya Rebuild State** (tracked throughout game):
@@ -29,7 +29,7 @@ Shepherd Authority Score = AVG(Veynar, Coren, Juria, Lira Authority)
 
 ## The Six Endings & Their REMNANTS Requirements
 
-### **Ending 1: The Hopeful Synthesis** ✨
+### **Ending 1: The Hopeful Synthesis** âœ¨
 **Ending Matrix:** Restart + Rebuild Together
 
 **Preferred REMNANTS Profile:**
@@ -48,11 +48,11 @@ Shepherd Authority Score = AVG(Veynar, Coren, Juria, Lira Authority)
 
 **Why it works:**
 The system returns as a *tool*, not a controller. The people have already learned synthesis, so the
-system can reflect that. Everyone wins—but it's a hopeful, not earned, victory.
+system can reflect that. Everyone winsâ€”but it's a hopeful, not earned, victory.
 
 ---
 
-### **Ending 2: The Pyrrhic Restart** 💔
+### **Ending 2: The Pyrrhic Restart** ðŸ’”
 **Ending Matrix:** Restart + Abandon/Fracture
 
 **Typical REMNANTS Profile:**
@@ -64,7 +64,7 @@ system can reflect that. Everyone wins—but it's a hopeful, not earned, victory
 
 **What this looks like in-game:**
 - Player has some understanding of history and emotional dynamics
-- But hasn't built deep bonds—relationships are surface-level
+- But hasn't built deep bondsâ€”relationships are surface-level
 - Malrik and Elenya never find their way back to each other
 - Player notices the separation but doesn't actively intervene
 - Player chooses: "Restart the Corelink"
@@ -76,14 +76,14 @@ ending.
 
 ---
 
-### **Ending 3: The Honest Collapse** 🌑
+### **Ending 3: The Honest Collapse** ðŸŒ‘
 **Ending Matrix:** Abandon + Abandon/Fracture
 
 **Typical REMNANTS Profile:**
-- Archive Memory: Low (0.40-0.60) — fragmented understanding
-- Present Trust: Low (0.40-0.60) — people remain defensive
-- Wound Nuance: Medium (0.60-0.75) — some skepticism about easy answers
-- Shepherd Authority: Low (0.40-0.60) — no clear leaders
+- Archive Memory: Low (0.40-0.60) â€” fragmented understanding
+- Present Trust: Low (0.40-0.60) â€” people remain defensive
+- Wound Nuance: Medium (0.60-0.75) â€” some skepticism about easy answers
+- Shepherd Authority: Low (0.40-0.60) â€” no clear leaders
 - **Malrik/Elenya relationship:** Complete separation, no rebuilding
 
 **What this looks like in-game:**
@@ -99,7 +99,7 @@ by hand. This ending says: "We don't have answers, but at least we're real about
 
 ---
 
-### **Ending 4: The Earned Synthesis** ⭐ HARDEST
+### **Ending 4: The Earned Synthesis** â­ HARDEST
 **Ending Matrix:** Abandon + Rebuild Together
 
 **Required REMNANTS Profile:**
@@ -124,7 +124,7 @@ faith in technology.
 
 ---
 
-### **Ending 5: The Technical Solution** 🔧
+### **Ending 5: The Technical Solution** ðŸ”§
 **Ending Matrix:** Restart + Partial Rebuild
 
 **Typical REMNANTS Profile:**
@@ -143,11 +143,11 @@ faith in technology.
 
 **Why it works:**
 The system and people co-learn. System provides support as people do the emotional work. Realistic
-middle ground—not perfect, but promising. The system becomes a partner, not a savior.
+middle groundâ€”not perfect, but promising. The system becomes a partner, not a savior.
 
 ---
 
-### **Ending 6: The Stalemate** ⚖️
+### **Ending 6: The Stalemate** âš–ï¸
 **Ending Matrix:** Abandon + Partial Rebuild
 
 **Typical REMNANTS Profile:**
@@ -175,7 +175,7 @@ doesn't know its own future.
 
 ### **If you want players to achieve Ending 4 (The Earned Synthesis):**
 - Make Archive NPCs dialogue-rich and emotionally rewarding
-- Have Coren explicitly note when player is modeling synthesis
+- Have Cal explicitly note when player is modeling synthesis
 - Show Malrik/Elenya's separation after collapse as a turning point where player *must* intervene
 - Make player choose "Abandon the Corelink" feel empowering, not terrifying
 - Show post-game that people *did* succeed without the system
@@ -196,43 +196,43 @@ doesn't know its own future.
 - Design game so mixed choices are natural and reasonable
 - Show Malrik/Elenya partially rebuilding without system
 - Make both "Restart" and "Abandon" feel uncertain
-- Show that uncertainty itself is authentic—no clear right answer
+- Show that uncertainty itself is authenticâ€”no clear right answer
 
 ---
 
 ## Cascading Effects That Support Endings
 
-### **Archive Network Cascade → Supports Endings 1, 4, 5**
+### **Archive Network Cascade â†’ Supports Endings 1, 4, 5**
 When player bonds with Malrik, his Memory increases. He influences other Archive members. Their
 combined clarity makes Malrik/Elenya rebuild more likely.
 
 **Implementation:**
-- Malrik Memory 0.80+ → can articulate what Elenya feared
-- Elenya Empathy 0.85+ → can feel Malrik's guilt
+- Malrik Memory 0.80+ â†’ can articulate what Elenya feared
+- Elenya Empathy 0.85+ â†’ can feel Malrik's guilt
 - When both reach these levels, "Rebuild Together" becomes possible
 
-### **Present Circle Cascade → Supports Endings 1, 4, 5**
+### **Present Circle Cascade â†’ Supports Endings 1, 4, 5**
 When player builds Trust with one Dweller, others sense safety. Stable community makes people
 capable of witnessing healing relationships.
 
 **Implementation:**
-- Ravi Trust 0.80+ → others feel grounded
-- Rasha Trust 0.85+ → joy becomes contagious
+- Ravi Trust 0.80+ â†’ others feel grounded
+- Rasha Trust 0.85+ â†’ joy becomes contagious
 - When circle reaches avg 0.75+, Malrik/Elenya rebuilding is believable to community
 
-### **Wound Weavers Cascade → Supports All Endings (Different Ways)**
+### **Wound Weavers Cascade â†’ Supports All Endings (Different Ways)**
 When player helps integrate fragmentation, Wound Bearers become wisdom-keepers.
 
 **For Endings 1, 4, 5:** Nuance 0.90+ means they can teach synthesis
 **For Ending 3:** Skepticism 0.80+ means they'll support honest collapse
 **For Ending 6:** Nuance 0.75+ means they'll work in uncertainty
 
-### **Shepherd Cascade → Supports Endings 1, 4**
+### **Shepherd Cascade â†’ Supports Endings 1, 4**
 Leaders who model integrated possibility make others believe restoration is possible.
 
 **Implementation:**
-- Veynar Authority 0.85+ → can organize reconstruction efforts
-- Coren Nuance 0.95+ → can mediate between Malrik/Elenya authentically
+- Veynar Authority 0.85+ â†’ can organize reconstruction efforts
+- Cal Nuance 0.95+ â†’ can mediate between Malrik/Elenya authentically
 - When both present strongly, "Rebuild Together" outcome becomes more likely
 
 ---
@@ -256,9 +256,9 @@ All six endings express the core Fourth Layer truth:
 
 **"Systems cannot do what people cannot."**
 
-- **Endings 1 & 4** explore what happens when people *can* (synthesis) — system is secondary
-- **Endings 2 & 3** explore what happens when people *can't* (fracture) — system is irrelevant  
-- **Endings 5 & 6** explore what happens when people *are learning* (partial) — system is partner or burden
+- **Endings 1 & 4** explore what happens when people *can* (synthesis) â€” system is secondary
+- **Endings 2 & 3** explore what happens when people *can't* (fracture) â€” system is irrelevant  
+- **Endings 5 & 6** explore what happens when people *are learning* (partial) â€” system is partner or burden
 
 The player's job isn't to "win" an ending. It's to discover which philosophy they embodied through
 their choices, and see that philosophy reflected in the world's transformation.
@@ -266,3 +266,4 @@ their choices, and see that philosophy reflected in the world's transformation.
 ---
 
 *All six are genuine. None is "wrong." Each is a mirror.*
+

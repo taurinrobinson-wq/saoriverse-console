@@ -1,4 +1,4 @@
-# Velinor: Comprehensive Worldbuilding Development Document
+﻿# Velinor: Comprehensive Worldbuilding Development Document
 
 **Status:** Core lore and timeline finalized  
 **Last Updated:** 2026-07-06  
@@ -10,14 +10,14 @@
 
 Velinor is a game about **memory loss and emotional fragmentation** set in a world where humanity's attempt to save itself paradoxically saves the planet by removing itself from the equation.
 
-**Core Insight:** The world isn't broken because of climate catastrophe — it's broken because people forgot how to maintain the systems that protected them from it. When the infrastructure collapses, nature reclaims everything, and survivors must relearn how to exist in a world they have no memory of.
+**Core Insight:** The world isn't broken because of climate catastrophe â€” it's broken because people forgot how to maintain the systems that protected them from it. When the infrastructure collapses, nature reclaims everything, and survivors must relearn how to exist in a world they have no memory of.
 
 ---
 
 ## Part 1: Emotional Foundation
 
 ### The Inciting Incident
-Saori and Velinor, both early 20s, complete the Corelink system — a neural-cognitive network designed to unite humanity through shared emotional and memory states. The goal: solve climate change by solving human nature itself. Eliminate individual self-interest. Achieve global coherence.
+Saori and Velinor, both early 20s, complete the Corelink system â€” a neural-cognitive network designed to unite humanity through shared emotional and memory states. The goal: solve climate change by solving human nature itself. Eliminate individual self-interest. Achieve global coherence.
 
 The system works. 
 
@@ -25,9 +25,9 @@ Then it fails catastrophically.
 
 ### The Emotional Physics
 **The world itself mirrors the human condition:**
-- **Fragmentation** — both psychological and physical
-- **Decay** — infrastructure rotting in real time, consciousness fragmenting simultaneously
-- **Loss of coherence** — systems designed to hold civilization together instead accelerate its collapse
+- **Fragmentation** â€” both psychological and physical
+- **Decay** â€” infrastructure rotting in real time, consciousness fragmenting simultaneously
+- **Loss of coherence** â€” systems designed to hold civilization together instead accelerate its collapse
 
 This is not a story about environmental collapse.  
 This is a story about **what happens when a society built entirely on engineered stability suddenly becomes unstable.**
@@ -52,19 +52,19 @@ How do you collapse a world fast enough that:
 - But the world isn't a scorched hellscape
 - And you avoid a geriatric population
 
-**Initial conflict:** Standard building decay takes 50–100 years. Fast nature reclamation takes 30–50 years. But memory loss would require everyone to be at most in their 20s at game start if collapse happened only 20–30 years ago.
+**Initial conflict:** Standard building decay takes 50â€“100 years. Fast nature reclamation takes 30â€“50 years. But memory loss would require everyone to be at most in their 20s at game start if collapse happened only 20â€“30 years ago.
 
 ### The Solution: Arcology Failure, Not Climate Catastrophe
 
 **Velhara is not a normal city.** It's a sealed, hyper-engineered arcology built to withstand catastrophic climate conditions.
 
-Structures don't decay like normal buildings — **they decay when the systems that keep them stable fail.**
+Structures don't decay like normal buildings â€” **they decay when the systems that keep them stable fail.**
 
-#### Why a 20–30 Year Collapse Is Realistic
+#### Why a 20â€“30 Year Collapse Is Realistic
 
 Velhara's integrity depends on:
-- Humidity control (±2% tolerance)
-- Temperature regulation (±3°C tolerance)
+- Humidity control (Â±2% tolerance)
+- Temperature regulation (Â±3Â°C tolerance)
 - Air filtration (constant)
 - Corrosion inhibitors (automated)
 - Pressure membrane integrity (maintained by active systems)
@@ -72,19 +72,19 @@ Velhara's integrity depends on:
 
 **When Corelink collapses, cognitive ability fractures. Maintenance stops. Cascading failures begin.**
 
-##### Phase 1: System Degradation (Years 1–5)
-- Humidity spikes → mold, rot, structural swelling
-- Temperature fluctuations → microfractures in glass and composites
-- Air filtration fails → corrosive salt/dust/pollution speeds decay
-- Pressure membranes begin to fail → localized breaches
+##### Phase 1: System Degradation (Years 1â€“5)
+- Humidity spikes â†’ mold, rot, structural swelling
+- Temperature fluctuations â†’ microfractures in glass and composites
+- Air filtration fails â†’ corrosive salt/dust/pollution speeds decay
+- Pressure membranes begin to fail â†’ localized breaches
 
-##### Phase 2: Maintenance Collapse (Years 5–15)
+##### Phase 2: Maintenance Collapse (Years 5â€“15)
 - Automated systems can't compensate without human intervention
-- Cooling systems fail → residual heat accelerates plant growth
+- Cooling systems fail â†’ residual heat accelerates plant growth
 - Interior environments become uninhabitable
 - People abandon the arcology for natural shelters (caves, basements, tunnels)
 
-##### Phase 3: Nature Reclamation (Years 15–25)
+##### Phase 3: Nature Reclamation (Years 15â€“25)
 - Pressure membranes fail completely
 - Nature invades through:
   - Broken pressure seals
@@ -94,7 +94,7 @@ Velhara's integrity depends on:
   - Cracked skylights
   - Failed ventilation shafts
 
-**Result:** A beautiful, haunting world where nature reclaims technology — not a wasteland, but a world remembering itself.
+**Result:** A beautiful, haunting world where nature reclaims technology â€” not a wasteland, but a world remembering itself.
 
 ---
 
@@ -117,7 +117,7 @@ Velhara was constructed as:
 - Magnetic segments cycle around the outer tube like a chain of tiny wheels
 - Shipments move at high speed in small batches (micro-freight)
 - System replaces traditional trucks/heavy transport
-- **Cultural significance:** Ring shadows flicker overhead constantly — the heartbeat of the city
+- **Cultural significance:** Ring shadows flicker overhead constantly â€” the heartbeat of the city
 - **Sensory experience:** Nearly silent to people inside insulated walkways; outside is electric noise pollution
 - **Philosophical purpose:** A city that solved logistics so thoroughly that movement became invisible
 
@@ -125,8 +125,8 @@ Velhara was constructed as:
 
 **Physics Principle:** Inertial frame stabilization  
 People inside the tubes experience:
-- Acceleration spread over long distances → no felt jerk
-- No momentum sensation → feels like standing still
+- Acceleration spread over long distances â†’ no felt jerk
+- No momentum sensation â†’ feels like standing still
 - Visual movement only (world whizzing by)
 - Arrival feels instantaneous despite travel across the city
 
@@ -194,19 +194,19 @@ They stumble into the tubes without knowing what they are. They arrive in unfami
 - Dissociative episodes
 - Lost time
 
-### Phase 2: System Degradation (Days 1–30)
+### Phase 2: System Degradation (Days 1â€“30)
 
-Screens begin switching from **comfort protocols** → **emergency sustainability protocols:**
+Screens begin switching from **comfort protocols** â†’ **emergency sustainability protocols:**
 
 - Personalized displays flicker and fail
 - Diagnostic overlays activate
 - Screens go dark
 - Tubes become dark, humming, vibrating
-- No longer emotionally soothing — now dysregulating
+- No longer emotionally soothing â€” now dysregulating
 
 People avoid the transit system because it feels haunted.
 
-### Phase 3: Transit System Failure (Weeks 1–12)
+### Phase 3: Transit System Failure (Weeks 1â€“12)
 
 **Magnetic drift phase:**
 - Magnets misalign
@@ -238,7 +238,7 @@ People avoid the transit system because it feels haunted.
 
 **Result:** Transit hubs isolated. Supply chains severed. Climate control offline. The arcology becomes a glass oven.
 
-### Phase 4: Mass Exodus (Weeks 4–8)
+### Phase 4: Mass Exodus (Weeks 4â€“8)
 
 People discover emergency exits and flee into the outside world.
 
@@ -277,15 +277,15 @@ Humanity becomes a low-impact species overnight.
 
 ### Recovery Timeline
 
-**Years 1–3:** Air quality improves, smog clears, particulate matter drops, ozone stabilizes
+**Years 1â€“3:** Air quality improves, smog clears, particulate matter drops, ozone stabilizes
 
-**Years 5–10:** Temperatures plateau, ocean acidification slows, ecosystems rebound, invasive species decline, forests begin regrowing, wildlife returns
+**Years 5â€“10:** Temperatures plateau, ocean acidification slows, ecosystems rebound, invasive species decline, forests begin regrowing, wildlife returns
 
 **Years 15:** Temperatures become survivable, storms decrease, humidity stabilizes, heat waves become less lethal
 
-**Years 10–15:** People emerge from caves and natural shelters
+**Years 10â€“15:** People emerge from caves and natural shelters
 
-### The "Dark Age" Period (Years 10–20)
+### The "Dark Age" Period (Years 10â€“20)
 
 Humans survive in natural shelters but aren't truly living:
 - Feral psychology (not biology)
@@ -333,9 +333,9 @@ Humans survive in natural shelters but aren't truly living:
 
 ### Why No Geriatric Society
 
-- **Early-20s at collapse (Year 0)** → mid-40s to early-50s at game start (Year 25)
-- **Collapse-born generation (Years 0–25)** → 20–40 years old at game start
-- **Those 30–40 at collapse (Year 0)** → 70–80 at game start (most don't survive harsh decades)
+- **Early-20s at collapse (Year 0)** â†’ mid-40s to early-50s at game start (Year 25)
+- **Collapse-born generation (Years 0â€“25)** â†’ 20â€“40 years old at game start
+- **Those 30â€“40 at collapse (Year 0)** â†’ 70â€“80 at game start (most don't survive harsh decades)
 - **Result:** Population naturally skews toward young adults and midlife survivors
 
 ### Character Aging Through Weathering, Not Chronology
@@ -358,10 +358,10 @@ Humans survive in natural shelters but aren't truly living:
 - Labor-shaped posture (from carrying water, resources, etc.)
 - Sun spots and wind-burned skin (environmental, not chronological)
 
-Characters look like they've lived through decades of collapse — because they have — but they're not old. They're **carrying the collapse in their bodies.**
+Characters look like they've lived through decades of collapse â€” because they have â€” but they're not old. They're **carrying the collapse in their bodies.**
 
 ### NPC Demographics
-- **20–50 year olds:** Core population
+- **20â€“50 year olds:** Core population
 - **60+ survivors:** Rare, mythic figures (those few who made it through harsh decades)
 - **Children and teens:** "New memoryless generation" (no memory of Corelink or sealed world)
 
@@ -391,7 +391,7 @@ The player learns that:
 - Meaning emerges from fragmentation, not unity
 
 ### The Glyph System
-Glyphs aren't just symbols — they're the language of a species trying to remember itself. They represent:
+Glyphs aren't just symbols â€” they're the language of a species trying to remember itself. They represent:
 - Emotional states that can't be articulated in simplified language
 - Collective memory of the pre-collapse world
 - Attempts to encode meaning without centralized cognition
@@ -444,7 +444,7 @@ Narrative: As the player's emotional coherence falters, the world around them de
 
 - **Barrier:** Vines block passages, roots destabilize floor, overgrown corridors are impassable
 - **Path:** Players use vines to climb, root systems to navigate, dense forest to access elevated structures
-- **Both:** Nature is neither enemy nor ally — it's the world reclaiming itself, and survivors learning to move through it
+- **Both:** Nature is neither enemy nor ally â€” it's the world reclaiming itself, and survivors learning to move through it
 
 ### The Inertial Travel Echo
 
@@ -458,27 +458,27 @@ Post-collapse transport:
 
 ## Key Design Principles
 
-1. **Realism reinforces emotion.** Concrete actually fails at 30–50 years. Your instinct about structural decay was physics-accurate.
+1. **Realism reinforces emotion.** Concrete actually fails at 30â€“50 years. Your instinct about structural decay was physics-accurate.
 
-2. **Infrastructure is character.** Velhara's systems are sentient through their design. When they fail, it's not mechanical — it's psychological.
+2. **Infrastructure is character.** Velhara's systems are sentient through their design. When they fail, it's not mechanical â€” it's psychological.
 
 3. **Environment is metaphor.** Don't use climate change to tell a climate story. Use it to show what happens when systems designed to hold society together collapse simultaneously.
 
 4. **Weathering is not aging.** Visual markers of post-collapse life are environmental, not chronological.
 
-5. **The collapse is slow and cascading.** Not a single moment but a 20–30 year process of systems failing, humans fleeing, nature returning.
+5. **The collapse is slow and cascading.** Not a single moment but a 20â€“30 year process of systems failing, humans fleeing, nature returning.
 
 6. **The human drama stays center stage.** Survival is mechanic. Memory loss is story. Emotional incoherence is theme.
 
 ---
 
-## 🜁 Glyph System Overview
+## ðŸœ Glyph System Overview
 
-Glyphs are the **emotional operating system** of the post-collapse world — a symbolic language that emerged organically from survivors who could no longer rely on pre-collapse cognition, memory, or linguistic coherence. They are not magic. They are not artifacts. They are **emotional logic made visible**, the natural evolution of a species trying to rebuild meaning after the Corelink shattered their minds.
+Glyphs are the **emotional operating system** of the post-collapse world â€” a symbolic language that emerged organically from survivors who could no longer rely on pre-collapse cognition, memory, or linguistic coherence. They are not magic. They are not artifacts. They are **emotional logic made visible**, the natural evolution of a species trying to rebuild meaning after the Corelink shattered their minds.
 
 Glyphs encode **emotional states**, **cognitive patterns**, **survival strategies**, and **communal rituals**. They are the bridge between the fractured past and the emerging future.
 
-### 🜁 1. What Glyphs Are
+### ðŸœ 1. What Glyphs Are
 
 Glyphs are **emotional constructs** that manifest when a survivor (or the player) reaches a moment of emotional clarity, resonance, or recognition. They are:
 
@@ -505,7 +505,7 @@ They appear when the player:
 
 Glyphs are the **new language of Velinor**, born from collapse-born survivors who needed a way to communicate emotional truths when memory and speech became unreliable.
 
-### 🜁 2. Why Glyphs Emerged
+### ðŸœ 2. Why Glyphs Emerged
 
 Glyphs emerged because the Corelink collapse destroyed:
 
@@ -535,19 +535,19 @@ But their minds could no longer hold full sentences, histories, or narratives. G
 
 Glyphs are the **post-collapse emotional OS**, replacing the Corelink's failed network with a decentralized, human-driven system.
 
-### 🜁 3. The Seven Glyph Categories
+### ðŸœ 3. The Seven Glyph Categories
 
 Each glyph belongs to one of seven emotional categories. These categories map directly onto Velinor's emotional physics and collapse psychology.
 
 #### Collapse
 Memory distortion, fear, fracture, unreliability of perception.  
 Glyphs: Fractured Memory, Mirage Echo, Hollow Pact, Shattered Corridor, Stolen Memory, Quiet Collapse, etc.  
-NPCs: Archivist Malrik, Drossel, Kaelen, Orvak, Coren, Dalen.
+NPCs: Archivist Malrik, Drossel, Kaelen, Orvak, Cal, Dalen.
 
 #### Sovereignty
 Boundaries, choice, clarity, restraint, personal agency.  
 Glyphs: Measured Step, Boundary Stone, Iron Boundary, Interruptive Restraint, Hidden Passage, etc.  
-NPCs: Malrik, Veynar, Coren, Drossel, Dalen.
+NPCs: Malrik, Veynar, Cal, Drossel, Dalen.
 
 #### Presence
 Touch, silence, witness, emotional anchoring.  
@@ -576,7 +576,7 @@ NPCs: Veynar, Elenya, Mariel, Korrin, Kaelen, Rasha.
 
 These categories are the **emotional architecture** of Velinor.
 
-### 🜁 4. How Glyphs Manifest
+### ðŸœ 4. How Glyphs Manifest
 
 Glyphs manifest when the player reaches an emotional threshold. This threshold is defined by:
 
@@ -616,9 +616,9 @@ When a glyph manifests, the world reacts:
 
 Glyphs are **felt first**, then seen.
 
-### 🜁 5. Glyphs as Gameplay Systems
+### ðŸœ 5. Glyphs as Gameplay Systems
 
-Glyphs are not collectibles — they are **mechanics**.
+Glyphs are not collectibles â€” they are **mechanics**.
 
 #### Glyph Functions
 
@@ -634,7 +634,7 @@ Glyphs are not collectibles — they are **mechanics**.
 
 Glyphs are the player's primary tool for navigating Velinor's emotional and physical instability.
 
-### 🜁 6. NPC Glyph Roles
+### ðŸœ 6. NPC Glyph Roles
 
 Every glyph is tied to an NPC whose emotional arc embodies the glyph's meaning.
 
@@ -654,27 +654,27 @@ NPC glyph arcs provide:
 - Settlement dynamics
 - Relational consequences
 
-NPCs do not "give" glyphs — they **reveal** them when the player reaches resonance.
+NPCs do not "give" glyphs â€” they **reveal** them when the player reaches resonance.
 
-### 🜁 7. Glyph Progression
+### ðŸœ 7. Glyph Progression
 
 Glyph progression is nonlinear and emotional.
 
 #### Progression Pathways
 
-- **Collapse → Sovereignty**
-- **Ache → Presence**
-- **Legacy → Trust**
-- **Joy → Trust**
-- **Collapse → Ache → Legacy**
+- **Collapse â†’ Sovereignty**
+- **Ache â†’ Presence**
+- **Legacy â†’ Trust**
+- **Joy â†’ Trust**
+- **Collapse â†’ Ache â†’ Legacy**
 
 Glyphs form **emotional constellations**, not skill trees.
 
 The player's emotional journey determines which glyphs appear and in what order.
 
-### 🜁 8. Glyphs and the Relic Grid
+### ðŸœ 8. Glyphs and the Relic Grid
 
-Glyphs interface with the Relic Grid — Velinor's attempt to restore coherence.
+Glyphs interface with the Relic Grid â€” Velinor's attempt to restore coherence.
 
 Glyphs allow the player to:
 
@@ -687,17 +687,17 @@ Glyphs allow the player to:
 
 Glyphs are the **key** to understanding Velinor's decades-long struggle to fix what broke.
 
-### 🜁 9. Glyphs and the Collapse Timeline
+### ðŸœ 9. Glyphs and the Collapse Timeline
 
 Glyphs map directly onto the collapse timeline:
 
-- **Years 0–5:** Collapse glyphs dominate
-- **Years 5–15:** Ache, Presence, Sovereignty emerge
-- **Years 15–25:** Legacy, Trust, Joy flourish
+- **Years 0â€“5:** Collapse glyphs dominate
+- **Years 5â€“15:** Ache, Presence, Sovereignty emerge
+- **Years 15â€“25:** Legacy, Trust, Joy flourish
 
 This mirrors the emotional evolution of survivors.
 
-### 🜁 10. Glyphs as Emotional Physics
+### ðŸœ 10. Glyphs as Emotional Physics
 
 Glyphs are the visible expression of Velinor's emotional physics:
 
@@ -726,3 +726,4 @@ Glyphs are the **laws of emotional motion** in Velinor.
 ---
 
 **End Document**
+

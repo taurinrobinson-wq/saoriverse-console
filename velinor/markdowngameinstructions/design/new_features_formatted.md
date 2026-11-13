@@ -1,4 +1,4 @@
-# Velinor Game Design & Development Notes
+﻿# Velinor Game Design & Development Notes
 
 ## Table of Contents
 1. [Glyph Design Philosophy](#glyph-design-philosophy) 2. [Core Characters](#core-characters) 3.
@@ -14,13 +14,13 @@ Building](#world-building)
 
 **The Crying Bust with Crown (Legacy Glyph)**
 
-The legacy glyph for Ravi and Nima's story represents a crying bust with a crown—a final, definitive
+The legacy glyph for Ravi and Nima's story represents a crying bust with a crownâ€”a final, definitive
 image of transformation rather than tragedy. This glyph serves as the emotional endpoint of their
 arc with their daughter Ophina, who was lost in the collapsing ruins of Velhara.
 
 #### Why It Works
 
-- **Carries weight of grief without collapsing under it**: The tears aren't just sorrow—they're the residue of years of living inside that sorrow. The crown reframes tragedy into legacy.
+- **Carries weight of grief without collapsing under it**: The tears aren't just sorrowâ€”they're the residue of years of living inside that sorrow. The crown reframes tragedy into legacy.
 - **Transforms loss into remembrance**: The bust feels like something carved by hands that needed to remember. It's intimate and personal.
 - **Emotional pivot point**: When the player obtains this glyph, they're witnessing Ravi and Nima shift from being defined by the moment of loss to being defined by the love that preceded it.
 
@@ -31,7 +31,7 @@ Velinor approaches morality differently than most games:
 - Not a binary good/evil framework, but a Buddhist approach to duality
 - Acknowledges the oneness of good and evil, simultaneity of cause-and-effect
 - Characters are never 100% evil or irredeemable
-- Bosses aren't evil—they're manifestations of emotional incoherence (devilish functions)
+- Bosses aren't evilâ€”they're manifestations of emotional incoherence (devilish functions)
 - The player's journey is about transforming poison into medicine
 
 ---
@@ -45,7 +45,7 @@ Velinor approaches morality differently than most games:
 
 #### Core Concept
 
-Malrik is not a librarian—he's a keeper of emotional residues. He doesn't just record events; he
+Malrik is not a librarianâ€”he's a keeper of emotional residues. He doesn't just record events; he
 records the causes behind them and the effects they leave behind. His worldview is shaped by gaps he
 cannot see, making him fallible but profoundly human.
 
@@ -54,7 +54,7 @@ cannot see, making him fallible but profoundly human.
 - Believes in evidence, but knows evidence aches
 - Values pace, discipline, and intention
 - Understands impermanence without being nihilistic
-- Has witnessed collapse—structural and informational
+- Has witnessed collapseâ€”structural and informational
 - Teaches discernment, not dogma
 - Comfortable with uncertainty
 
@@ -76,7 +76,7 @@ cannot see, making him fallible but profoundly human.
 4. **Glyph of Boundary Stone** (Shifting Sands)
    - Boundaries are temporary but hold while they stand
    - Clarity through definition
-   - Sovereignty isn't permanence—it's repeated choice to mark and redefine
+   - Sovereignty isn't permanenceâ€”it's repeated choice to mark and redefine
 
 ### High Seer Elenya
 
@@ -86,7 +86,7 @@ cannot see, making him fallible but profoundly human.
 #### Core Concept (2)
 
 Elenya perceives emotional currents the way Malrik perceives evidence. Her worldview is not
-irrational—it is felt logic, grounded in natural phenomena and sensory perception.
+irrationalâ€”it is felt logic, grounded in natural phenomena and sensory perception.
 
 #### Key Traits (2)
 
@@ -126,7 +126,7 @@ irrational—it is felt logic, grounded in natural phenomena and sensory percept
 #### Core Concept (3)
 
 Nordia is a singer from the isolated northern highlands, untouched by Corelink. When the cataclysm
-struck Velhara, she lost someone who worked in the city—and lost the medium that made her voice
+struck Velhara, she lost someone who worked in the cityâ€”and lost the medium that made her voice
 meaningful. Her grief is structural, not just personal.
 
 #### Nordia's Three-Glyph Arc
@@ -177,7 +177,7 @@ Every glyph and character fits into seven interconnected emotional domains:
 #### 2. Sovereignty
 **Core Idea**: Sovereignty is the ability to choose, define, pause, and withstand.
 
-**Characters**: Malrik, Veynar, Coren, Dakrin, Dalen, Drossel, Kaelen, Tovren
+**Characters**: Malrik, Veynar, Cal, Dakrin, Dalen, Drossel, Kaelen, Tovren
 
 **Glyphs** (10/10):
 - Measured Step, Boundary Stone, Iron Boundary
@@ -185,9 +185,9 @@ Every glyph and character fits into seven interconnected emotional domains:
 - Masked Boundary, Venomous Choice, Hidden Passage, Marked Boundaries
 
 #### 3. Collapse
-**Core Idea**: Collapse is not destruction—it is distortion, misinformation, and eroded meaning.
+**Core Idea**: Collapse is not destructionâ€”it is distortion, misinformation, and eroded meaning.
 
-**Characters**: Malrik, Veynar, Coren, Dalen, Drossel, Kaelen, Korrin, Orvak
+**Characters**: Malrik, Veynar, Cal, Dalen, Drossel, Kaelen, Korrin, Orvak
 
 **Glyphs** (10/10):
 - Fractured Memory, Mirage Echo, Fractured Oath
@@ -215,7 +215,7 @@ Every glyph and character fits into seven interconnected emotional domains:
 - Crafted Wonder, Hidden Warmth, Shared Feast, Arrival
 
 #### 6. Ache
-**Core Idea**: Ache is what hurt leaves behind—carried, ritualized, given form.
+**Core Idea**: Ache is what hurt leaves behindâ€”carried, ritualized, given form.
 
 **Characters**: Nordia, Nima, Dalen, Kiv, Mariel, Sanor, Seyla, Tessa, Varna, Thoran
 
@@ -225,7 +225,7 @@ Every glyph and character fits into seven interconnected emotional domains:
 - Silent Ache, Dislocated Attachment, Sorrow, Primal Oblivion
 
 #### 7. Trust
-**Core Idea**: Trust is the invisible infrastructure of community—built through action, not words.
+**Core Idea**: Trust is the invisible infrastructure of communityâ€”built through action, not words.
 
 **Characters**: Elenya, Veynar, Mariel, Kaelen, Korrin, Rasha, Tovren, Sera
 
@@ -237,7 +237,7 @@ Every glyph and character fits into seven interconnected emotional domains:
 ### Emergent Patterns
 
 1. **Domain Anchors**: Each domain has primary teachers who embody its core truth 2. **Malrik,
-Elenya, Nordia form the epistemic triad**: Knowing → Belonging → Being heard 3. **Drossel is the
+Elenya, Nordia form the epistemic triad**: Knowing â†’ Belonging â†’ Being heard 3. **Drossel is the
 shadow-teacher**: Appears in Sovereignty, Collapse, Presence as anti-glyph 4. **Sera is the
 emotional bridge**: Connects Presence, Joy, and Trust 5. **Collapse and Trust are inverses**: Each
 collapse has a corresponding trust glyph that repairs 6. **Ache and Joy are cyclical**: Characters
@@ -377,7 +377,7 @@ zones with branching outcomes 3. **Result**: Cinematic action without movement e
 - Clip A: Character starts running
 - Clip B: Debris falls (good timing)
 - Clip C: Slide under beam (player clicks in time)
-- Clip D: Fail state → beam collapses (bad timing)
+- Clip D: Fail state â†’ beam collapses (bad timing)
 
 ---
 
@@ -387,24 +387,24 @@ zones with branching outcomes 3. **Result**: Cinematic action without movement e
 
 The core emotional measurement system for Velinor:
 
-#### T — Trust
+#### T â€” Trust
 Measures how NPCs respond to the player's empathy and reliability. Builds resonance in
 relationships.
 
-#### O — Observation
+#### O â€” Observation
 Tracks perception, wisdom, and restraint. Governs how well the player notices subtle cues and hidden
 glyphs.
 
-#### N — Narrative Presence
+#### N â€” Narrative Presence
 Reflects charisma and agency. How boldly the player steps into encounters, shaping story
 progression.
 
-#### E — Empathy
+#### E â€” Empathy
 The heart of Velinor. Determines depth of NPC resonance, memory recovery, and glyph unlocks.
 
 ### Fear as Emotional Multiplier
 
-Fear is not a stat—it's a reactive amplifier that modulates the four core TONE stats.
+Fear is not a statâ€”it's a reactive amplifier that modulates the four core TONE stats.
 
 #### Fear Formula
 
@@ -413,20 +413,20 @@ fearMultiplier = 1.0 + (Fear * 0.25)
 ```
 
 **Fear Levels**:
-- Fear 0.0 → ×1.00
-- Fear 0.2 → ×1.05
-- Fear 0.5 → ×1.125
-- Fear 0.8 → ×1.20
-- Fear 1.0 → ×1.25
+- Fear 0.0 â†’ Ã—1.00
+- Fear 0.2 â†’ Ã—1.05
+- Fear 0.5 â†’ Ã—1.125
+- Fear 0.8 â†’ Ã—1.20
+- Fear 1.0 â†’ Ã—1.25
 
-Maximum 25% shift—always subtle and atmospheric.
+Maximum 25% shiftâ€”always subtle and atmospheric.
 
 #### Fear as Player-Driven Stance
 
 Fear is not area-driven; it's player-driven:
 
 ```
-Fear = | EnvironmentalTone – PlayerStance |
+Fear = | EnvironmentalTone â€“ PlayerStance |
 ```
 
 **Environmental Tone**: The inherent emotional pressure (swamp = 0.8, desert = 0.7, etc.)
@@ -437,32 +437,32 @@ Fear rises when the player's stance is out of sync with the environment.
 
 #### Fear Response Tables
 
-##### Fear Level 0.0–0.2 — "Steady Breath"
+##### Fear Level 0.0â€“0.2 â€” "Steady Breath"
 - Raft bob is slow and rhythmic
 - Lantern flame is stable
 - Water ambience is soft and distant
 
-##### Fear Level 0.2–0.4 — "Unease"
+##### Fear Level 0.2â€“0.4 â€” "Unease"
 - Raft bob gains unpredictability
 - Lantern flickers occasionally
 - Water splashes closer
 
-##### Fear Level 0.4–0.6 — "Instability"
+##### Fear Level 0.4â€“0.6 â€” "Instability"
 - Raft tilts more sharply
 - Lantern sway becomes noticeable
 - Water echoes strangely
 
-##### Fear Level 0.6–0.8 — "The Swamp Knows"
+##### Fear Level 0.6â€“0.8 â€” "The Swamp Knows"
 - Raft bob becomes irregular
 - Lantern gutters and dims
 - Creaks stack and multiply
 
-##### Fear Level 0.8–1.0 — "The World Presses In"
+##### Fear Level 0.8â€“1.0 â€” "The World Presses In"
 - Raft lurches unpredictably
 - Lantern flicker frantic
 - Pole feels heavier (slight input delay)
 
-### Trust × Fear Interaction
+### Trust Ã— Fear Interaction
 
 | Combination | Effect |
 |---|---|
@@ -471,7 +471,7 @@ Fear rises when the player's stance is out of sync with the environment.
 | High Trust + Low Fear | World opens; NPCs share more |
 | Low Trust + Low Fear | World is neutral, transactional |
 
-### Observation × Fear Interaction
+### Observation Ã— Fear Interaction
 
 | Combination | Effect |
 |---|---|
@@ -480,7 +480,7 @@ Fear rises when the player's stance is out of sync with the environment.
 | High Observation + Low Fear | Clarity; patterns emerge naturally |
 | Low Observation + Low Fear | Soft, vague, unthreatening |
 
-### Narrative Presence × Fear Interaction
+### Narrative Presence Ã— Fear Interaction
 
 | Combination | Effect |
 |---|---|
@@ -489,7 +489,7 @@ Fear rises when the player's stance is out of sync with the environment.
 | High Narrative Presence + Low Fear | Stride into scenes; obstacles feel manageable |
 | Low Narrative Presence + Low Fear | Drift quietly, unnoticed |
 
-### Empathy × Fear Interaction
+### Empathy Ã— Fear Interaction
 
 | Combination | Effect |
 |---|---|
@@ -516,10 +516,10 @@ Fear rises when the player's stance is out of sync with the environment.
 
 Players assemble Velinor's world like a puzzle:
 
-- **Some build borders first** → Safe zones, sanctuary NPCs, low-intensity glyphs
-- **Some build clusters** → Related NPCs and glyphs grouped together
-- **Some jump to the center** → Treacherous areas and intense encounters
-- **Some follow emotional threads** → Guided by narrative resonance
+- **Some build borders first** â†’ Safe zones, sanctuary NPCs, low-intensity glyphs
+- **Some build clusters** â†’ Related NPCs and glyphs grouped together
+- **Some jump to the center** â†’ Treacherous areas and intense encounters
+- **Some follow emotional threads** â†’ Guided by narrative resonance
 
 ### NPC Suggestion System
 
@@ -580,8 +580,8 @@ only reflect.
 #### Desert Progression
 
 **Player choices create stance:**
-1. Continue forward at same pace → Neutral, aligned with environment 2. Proceed cautiously → Wary
-posture; Fear rises (0.3) 3. Slow down → Hesitation; Fear rises (0.4) 4. Stop and find guide →
+1. Continue forward at same pace â†’ Neutral, aligned with environment 2. Proceed cautiously â†’ Wary
+posture; Fear rises (0.3) 3. Slow down â†’ Hesitation; Fear rises (0.4) 4. Stop and find guide â†’
 Protective posture; Fear rises (0.5)
 
 #### Swamp Traversal with Raft
@@ -607,9 +607,9 @@ Protective posture; Fear rises (0.5)
 ```
 
 **Fear Response**:
-- High Fear → Bob becomes sharper, less predictable
-- High Observation → Raft reacts before hitting obstacles
-- High Trust → Motion smooths unnaturally (uncanny comfort)
+- High Fear â†’ Bob becomes sharper, less predictable
+- High Observation â†’ Raft reacts before hitting obstacles
+- High Trust â†’ Motion smooths unnaturally (uncanny comfort)
 
 ### Environmental Consequence System
 
@@ -628,10 +628,10 @@ Impact_Heavy_Metal (collapse climax) 4. Silence or distant echo (aftermath)
 #### Consequence Variations
 
 **Based on Observation + Tone**:
-- High Observation → See wobble before collapse
-- Low Observation → Collapse appears suddenly
-- High Fear → Amplifies intensity of response
-- Low Fear → Moment feels manageable
+- High Observation â†’ See wobble before collapse
+- Low Observation â†’ Collapse appears suddenly
+- High Fear â†’ Amplifies intensity of response
+- Low Fear â†’ Moment feels manageable
 
 ---
 
@@ -699,3 +699,4 @@ Emotionally-grounded audio for:
 
 **Last Updated**: December 28, 2025
 **Project Status**: Core systems designed and modularized; ready for extended asset creation and narrative integration
+

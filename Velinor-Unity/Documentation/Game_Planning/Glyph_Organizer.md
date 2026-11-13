@@ -1,4 +1,4 @@
-# Glyph Organizer - Game Planning
+﻿# Glyph Organizer - Game Planning
 
 This document details all glyphs in the Velinor storyline, their associated NPCs, locations, and storyline implementations.
 
@@ -6,7 +6,7 @@ This document details all glyphs in the Velinor storyline, their associated NPCs
 
 ## Rewritten Glyphs
 
-### Coren - Mediator
+### Cal - Mediator
 
 **Category**: Collapse
 
@@ -19,7 +19,7 @@ This document details all glyphs in the Velinor storyline, their associated NPCs
 **Location**: Mystics Encampment
 
 **Storyline**:
-Coren notices Elenya’s guarded behavior around Malrik, but the player senses he is actually reacting to his own buried fracture. Her discomfort mirrors the player’s unresolved ache over losing her parents—an abandonment shaped not by loss, but by the absence they carried. This glyph marks Stage 5: the instinct to sever ties before being hurt again. Coren’s withdrawal from Elenya and Malrik echoes the player’s own impulse to retreat from connection, revealing how both carry wounds that make sanctuary feel dangerous..
+Cal notices Elenyaâ€™s guarded behavior around Malrik, but the player senses he is actually reacting to his own buried fracture. Her discomfort mirrors the playerâ€™s unresolved ache over losing her parentsâ€”an abandonment shaped not by loss, but by the absence they carried. This glyph marks Stage 5: the instinct to sever ties before being hurt again. Calâ€™s withdrawal from Elenya and Malrik echoes the playerâ€™s own impulse to retreat from connection, revealing how both carry wounds that make sanctuary feel dangerous..
 
 **Status**: Yes
 
@@ -38,9 +38,9 @@ Coren notices Elenya’s guarded behavior around Malrik, but the player senses h
 **Location**: Mountain communal hearth or alpine shelter.
 
 **Storyline**:
-Elenya guides the player to a mountain shelter where a small group prepares for an incoming cold front. There is no ceremony — just practical cooperation. Someone gathers wood. Someone checks the vents. Someone shares dried fruit. Elenya hands the player a thermal coil to place near the wall seam, trusting her to reinforce the shelter’s weakest point.
+Elenya guides the player to a mountain shelter where a small group prepares for an incoming cold front. There is no ceremony â€” just practical cooperation. Someone gathers wood. Someone checks the vents. Someone shares dried fruit. Elenya hands the player a thermal coil to place near the wall seam, trusting her to reinforce the shelterâ€™s weakest point.
 
-The glyph activates when the player feels the quiet truth of the moment: survival is not a solitary act. It is built from small exchanges of trust — relying on others and being relied upon. The warmth of the hearth echoes the warmth she once felt working alongside her parents, each person doing their part without needing to speak it aloud.
+The glyph activates when the player feels the quiet truth of the moment: survival is not a solitary act. It is built from small exchanges of trust â€” relying on others and being relied upon. The warmth of the hearth echoes the warmth she once felt working alongside her parents, each person doing their part without needing to speak it aloud.
 
 **Status**: Yes
 
@@ -61,7 +61,7 @@ The glyph activates when the player feels the quiet truth of the moment: surviva
 **Storyline**:
 After a harsh season, Elenya leads the player along a narrow alpine path where small flowers have begun to bloom in cracks of stone. She explains nothing; she simply walks, letting the player notice how life returns in places that looked barren weeks before.
 
-The glyph activates when the player feels the quiet lift in her chest — the same lift she felt when new shoots appeared on the farm after winter. Joy is not a burst; it is a returning. A promise that the path continues even after long cold stretches.
+The glyph activates when the player feels the quiet lift in her chest â€” the same lift she felt when new shoots appeared on the farm after winter. Joy is not a burst; it is a returning. A promise that the path continues even after long cold stretches.
 
 **Status**: Yes
 
@@ -77,13 +77,13 @@ The glyph activates when the player feels the quiet lift in her chest — the sa
 
 **Transcendance Glyph**: 
 
-**Location**: The North Overlook — a high ledge where the ruins shift visibly over time.
+**Location**: The North Overlook â€” a high ledge where the ruins shift visibly over time.
 
 **Storyline**:
-Elka leads the player to a high overlook where she sketches the shifting ruins below each morning—not for the settlement, but to anchor herself against her fading memory. She hands the player charcoal to trace a familiar ridgeline. When finished, Elka quietly reveals that the player’s stroke doesn’t match her previous sketches, and her past maps don’t match each other either. For the first time, she admits aloud that she no longer knows which version is real.
-The realization strikes deep: the collapse fractured internal perception just as severely as stone. The Glyph of Quiet Bearing manifests from this shared truth—that presence is not passive observing, but holding steady before what is shifting inside oneself.
+Elka leads the player to a high overlook where she sketches the shifting ruins below each morningâ€”not for the settlement, but to anchor herself against her fading memory. She hands the player charcoal to trace a familiar ridgeline. When finished, Elka quietly reveals that the playerâ€™s stroke doesnâ€™t match her previous sketches, and her past maps donâ€™t match each other either. For the first time, she admits aloud that she no longer knows which version is real.
+The realization strikes deep: the collapse fractured internal perception just as severely as stone. The Glyph of Quiet Bearing manifests from this shared truthâ€”that presence is not passive observing, but holding steady before what is shifting inside oneself.
 Mechanic Unlocked: Overworld Markers
-The player can now place permanent charcoal survey marks on the map that persist through terrain shifts, anchoring points of reference that Elka’s records can no longer hold alone.
+The player can now place permanent charcoal survey marks on the map that persist through terrain shifts, anchoring points of reference that Elkaâ€™s records can no longer hold alone.
 
 **Status**: Yes
 
@@ -99,11 +99,11 @@ The player can now place permanent charcoal survey marks on the map that persist
 
 **Transcendance Glyph**: 
 
-**Location**: Elka’s Map Alcove — a small room off the marketplace where she stores her sketches.
+**Location**: Elkaâ€™s Map Alcove â€” a small room off the marketplace where she stores her sketches.
 
 **Storyline**:
 Elka guides the player to a wall crowded with overlapping maps, where layered routes have worn the paper translucent from repeated tracing. She keeps every version, even when they contradict. She admits she cannot remember why these corridors mattered, only that an instinctual urge compels her to redraw them every time she returns.
-She lifts down a fragile parchment, its edges softened by countless passes of her fingertips. The trail leads into uncharted ruins, its destination long forgotten, yet the pull remains undeniable. She turns to the player and asks them to walk the route together one day, "so at least one of us will remember what’s at the end."
+She lifts down a fragile parchment, its edges softened by countless passes of her fingertips. The trail leads into uncharted ruins, its destination long forgotten, yet the pull remains undeniable. She turns to the player and asks them to walk the route together one day, "so at least one of us will remember whatâ€™s at the end."
 Standing beside her, the player recognizes the quiet paradox: holding multiple, conflicting memories of someone you love, none flawless, yet all undeniably true. The Glyph of the Worn Path manifests in the realization that legacy is not measured by pristine accuracy, but by the quiet devotion of what refuses to fade.
 
 **Status**: Yes
@@ -124,8 +124,8 @@ Standing beside her, the player recognizes the quiet paradox: holding multiple, 
 
 **Storyline**:
 Elka halts at the perimeter where a fractured stone walkway drops off into open sand. Her parchment here is completely blank. She confesses she has approached this precipice dozens of times, but each attempt ends in a cognitive blackout: she forgets what she intended to draw, how she arrived, or why the void matters. She cannot tell if the empty expanse is real, or merely where her mind refuses to go.
-She asks the player to survey the drop for her. Stepping to the precipice, the player confronts the raw ache of reaching for lost fragments—the same hollow helplessness felt watching a loved one's recollections slip away. The player marks the exact line of the shear into the stone. Elka carefully traces the contour onto her blank parchment with trembling fingers.
-The Glyph of the Unmarked Edge manifests from confronting the quiet terror of an erased past—facing the void without demanding it immediately make sense.
+She asks the player to survey the drop for her. Stepping to the precipice, the player confronts the raw ache of reaching for lost fragmentsâ€”the same hollow helplessness felt watching a loved one's recollections slip away. The player marks the exact line of the shear into the stone. Elka carefully traces the contour onto her blank parchment with trembling fingers.
+The Glyph of the Unmarked Edge manifests from confronting the quiet terror of an erased pastâ€”facing the void without demanding it immediately make sense.
 Mechanic Unlocked: Memory Anchors
 This allows any areas that are unmarked to be automatically mapped and re-mapped as the player moves through them to help keep an up todate map. 
 
@@ -184,7 +184,7 @@ The player meets Kaelen who shares his memory of his involvement in Ophina's dea
 **Location**: Swamp Outskirts
 
 **Storyline**:
-When Drossel rejects Kaelen’s growing closeness to the player, Kaelen feels abandoned by the one person who never judged him. His first impulse is to sever ties and retreat to the life he knows, but he holds that reaction. This glyph marks Stage 6: the discipline to feel the ache without acting on it. Kaelen’s restraint mirrors the player’s own struggle with abandonment after losing her parents—both learning to pause instead of fleeing from connection.
+When Drossel rejects Kaelenâ€™s growing closeness to the player, Kaelen feels abandoned by the one person who never judged him. His first impulse is to sever ties and retreat to the life he knows, but he holds that reaction. This glyph marks Stage 6: the discipline to feel the ache without acting on it. Kaelenâ€™s restraint mirrors the playerâ€™s own struggle with abandonment after losing her parentsâ€”both learning to pause instead of fleeing from connection.
 
 **Status**: Yes
 
@@ -205,7 +205,7 @@ When Drossel rejects Kaelen’s growing closeness to the player, Kaelen feels ab
 **Storyline**:
 Beneath a collapsed transit hub, Kiv grinds mineral slurry and scavenged resins on a stone slab, curing composite cylinders inside a salvaged sun-mirror. A former master artisan who shaped vacuum-grade seals by touch rather than sensor arrays, memory loss has reduced his craft to an unyielding compulsion: each vessel hardens, spiders with micro-fractures under the solar heat, and is broken with practiced grief.
 
-Activating the glyph pedestal beside his bench reveals that Kiv’s chemical mixtures are intentionally flawed—an unconscious loop to recreate the day he fractured during the Corelink collapse, trying to forge a vessel that can hold what he feels himself leaking. This mirrors the player’s own guilt over abandoning her family farm after her mother’s death, quietly framing boundaries not as what endures unbroken, but as what takes shape around the break.
+Activating the glyph pedestal beside his bench reveals that Kivâ€™s chemical mixtures are intentionally flawedâ€”an unconscious loop to recreate the day he fractured during the Corelink collapse, trying to forge a vessel that can hold what he feels himself leaking. This mirrors the playerâ€™s own guilt over abandoning her family farm after her motherâ€™s death, quietly framing boundaries not as what endures unbroken, but as what takes shape around the break.
 
 **Status**: Yes
 
@@ -224,7 +224,7 @@ Activating the glyph pedestal beside his bench reveals that Kiv’s chemical mix
 **Location**: Civic Center Ruins Amphitheater
 
 **Storyline**:
-The player finds Nordia searching desperately for any trace of her sister, who vanished after the Corelink collapse. Though her family perished in the northern catastrophe, Nordia feels abandoned by them, as if their deaths left her behind. This glyph marks Stage 3: the moment the ache becomes fully real. As Nordia allows her grief to surface, the player feels her own buried wound—the sense that her parents’ deaths were not just loss, but a kind of abandonment she never dared name.
+The player finds Nordia searching desperately for any trace of her sister, who vanished after the Corelink collapse. Though her family perished in the northern catastrophe, Nordia feels abandoned by them, as if their deaths left her behind. This glyph marks Stage 3: the moment the ache becomes fully real. As Nordia allows her grief to surface, the player feels her own buried woundâ€”the sense that her parentsâ€™ deaths were not just loss, but a kind of abandonment she never dared name.
 
 **Status**: Yes
 
@@ -243,11 +243,11 @@ The player finds Nordia searching desperately for any trace of her sister, who v
 **Location**: Tomb of Echoes, cavern where wind moves like ancestral sighs
 
 **Storyline**:
-Nordia brings the player to a quiet alcove where she keeps small objects left behind by people she’s sung for — a broken instrument string, a scrap of fabric, a chipped mug. She explains that she keeps these not as relics, but as reminders of what each person taught her: a melody, a kindness, a joke, a way of seeing the world.
+Nordia brings the player to a quiet alcove where she keeps small objects left behind by people sheâ€™s sung for â€” a broken instrument string, a scrap of fabric, a chipped mug. She explains that she keeps these not as relics, but as reminders of what each person taught her: a melody, a kindness, a joke, a way of seeing the world.
 
-She asks the player what her parents taught her — not in words, but in habits, gestures, ways of moving through the day. The player feels a familiar warmth as she remembers small things: how her mother checked the soil with her fingers, how her father hummed while repairing tools.
+She asks the player what her parents taught her â€” not in words, but in habits, gestures, ways of moving through the day. The player feels a familiar warmth as she remembers small things: how her mother checked the soil with her fingers, how her father hummed while repairing tools.
 
-The glyph activates when the player realizes that legacy is not ancestry or ritual — it is continuity. It is carrying forward the small truths someone gave you, even after they’re gone.
+The glyph activates when the player realizes that legacy is not ancestry or ritual â€” it is continuity. It is carrying forward the small truths someone gave you, even after theyâ€™re gone.
 
 **Status**: Yes
 
@@ -308,7 +308,7 @@ The player first learns fragmented information about the loss of Ravi and Nima's
 **Location**: Market Border with Old Velhara
 
 **Storyline**:
-At the edge of Old Velhara, the player meets Saori—disheveled, distant, and unwilling to acknowledge the young woman seen in the Triglyph chamber. Her denial is absolute; the truth has no name, no sound, no witness. This glyph marks Stage 1 of abandonment: the ache exists but cannot be felt. The player senses a faint echo of her own loss, but she is still an outsider struggling for food, shelter, and work. Survival demands numbness, so the feeling is dismissed before it can surface.
+At the edge of Old Velhara, the player meets Saoriâ€”disheveled, distant, and unwilling to acknowledge the young woman seen in the Triglyph chamber. Her denial is absolute; the truth has no name, no sound, no witness. This glyph marks Stage 1 of abandonment: the ache exists but cannot be felt. The player senses a faint echo of her own loss, but she is still an outsider struggling for food, shelter, and work. Survival demands numbness, so the feeling is dismissed before it can surface.
 
 **Status**: Yes
 
@@ -327,9 +327,9 @@ At the edge of Old Velhara, the player meets Saori—disheveled, distant, and un
 **Location**: Shrine garden at first light.
 
 **Storyline**:
-Sera brings the player to a small garden behind the shrine where certain blossoms open only at dawn. She shows how to cup the petals gently so they do not bruise, how to gather them before the heat closes them again. There is no ritual — just care, attention, and shared quiet.
+Sera brings the player to a small garden behind the shrine where certain blossoms open only at dawn. She shows how to cup the petals gently so they do not bruise, how to gather them before the heat closes them again. There is no ritual â€” just care, attention, and shared quiet.
 
-The glyph activates when the player feels the tenderness of the moment — the same tenderness she felt helping her parents harvest delicate crops at sunrise. Joy is fleeting, but tending it together makes it last long enough to matter.
+The glyph activates when the player feels the tenderness of the moment â€” the same tenderness she felt helping her parents harvest delicate crops at sunrise. Joy is fleeting, but tending it together makes it last long enough to matter.
 
 **Status**: Yes
 
@@ -348,9 +348,9 @@ The glyph activates when the player feels the tenderness of the moment — the s
 **Location**: Shrine keeper?s hut.
 
 **Storyline**:
-Inside the hut, Sera asks the player to help her tend a villager’s injured arm. She mixes herbs while the player holds the bandage steady. The villager winces, then relaxes. Sera’s hands move with practiced calm; the player’s hands learn to mirror that steadiness.
+Inside the hut, Sera asks the player to help her tend a villagerâ€™s injured arm. She mixes herbs while the player holds the bandage steady. The villager winces, then relaxes. Seraâ€™s hands move with practiced calm; the playerâ€™s hands learn to mirror that steadiness.
 
-The glyph activates when the player feels the weight of the villager’s trust — the same weight she felt when her parents relied on her during difficult seasons. Presence is not dramatic. It is the quiet act of showing up when someone needs steady hands.
+The glyph activates when the player feels the weight of the villagerâ€™s trust â€” the same weight she felt when her parents relied on her during difficult seasons. Presence is not dramatic. It is the quiet act of showing up when someone needs steady hands.
 
 **Status**: Yes
 
@@ -371,13 +371,13 @@ The glyph activates when the player feels the weight of the villager’s trust �
 **Storyline**:
 The player rounds a corner in the market courtyard at dawn and finds Sera and Korrin sitting close, sharing a quiet moment neither expected. Their hands hover near each other but do not touch. Sera looks grounded and full; Korrin looks brighter, less guarded. Nothing is spoken, but the morning light makes the truth clear: two wounded people have reawakened something gentle in each other.
 
-The glyph activates when the player witnesses this moment and feels a small, familiar warmth rise in her chest — the same warmth she once felt tending the farm with her parents at first light. It is not nostalgia; it is the recognition that hope can return quietly, without ceremony, in the simple act of two people choosing to be present. Renewal begins in moments like this, where grief softens just enough for dawn to enter.
+The glyph activates when the player witnesses this moment and feels a small, familiar warmth rise in her chest â€” the same warmth she once felt tending the farm with her parents at first light. It is not nostalgia; it is the recognition that hope can return quietly, without ceremony, in the simple act of two people choosing to be present. Renewal begins in moments like this, where grief softens just enough for dawn to enter.
 
 **Status**: Yes
 
 ---
 
-### Seyla – Field Technician
+### Seyla â€“ Field Technician
 
 **Category**: Ache
 
@@ -390,7 +390,7 @@ The glyph activates when the player witnesses this moment and feels a small, fam
 **Location**: Hall of Ancestral Echoes (desert tomb)
 
 **Storyline**:
-Seyla lives in a crowded shelter on the edge of Old Velhara, instinctively helping newcomers find their footing without knowing why she feels compelled to do so. Her role places her in close, emotionally charged relationships with people who rely on her but never fully let her in, leaving her feeling abandoned by those who are still present. The meaning of that ache is fragmented—she wants closeness and distance at the same time. This glyph marks Stage 4: attachment split between longing and fear. Seyla’s conflicted response mirrors the player’s own unresolved feelings about her parents’ deaths—love and abandonment pulling in opposite directions, neither able to fully settle.
+Seyla lives in a crowded shelter on the edge of Old Velhara, instinctively helping newcomers find their footing without knowing why she feels compelled to do so. Her role places her in close, emotionally charged relationships with people who rely on her but never fully let her in, leaving her feeling abandoned by those who are still present. The meaning of that ache is fragmentedâ€”she wants closeness and distance at the same time. This glyph marks Stage 4: attachment split between longing and fear. Seylaâ€™s conflicted response mirrors the playerâ€™s own unresolved feelings about her parentsâ€™ deathsâ€”love and abandonment pulling in opposite directions, neither able to fully settle.
 
 **Status**: Yes
 
@@ -409,9 +409,9 @@ Seyla lives in a crowded shelter on the edge of Old Velhara, instinctively helpi
 **Location**: Shrine of Loss (Desert Temple)
 
 **Storyline**:
-Tessa sits alone in the desert shelter where she last saw her partner alive. She doesn’t sing or perform rituals; she simply talks to the player about the moment she realized she couldn’t stop what was happening. She remembers reaching out, calling out, trying to hold on — and feeling the terrible stillness when she understood she was too late.
+Tessa sits alone in the desert shelter where she last saw her partner alive. She doesnâ€™t sing or perform rituals; she simply talks to the player about the moment she realized she couldnâ€™t stop what was happening. She remembers reaching out, calling out, trying to hold on â€” and feeling the terrible stillness when she understood she was too late.
 
-The glyph activates when the player feels the same quiet ache in her chest — the ache she felt when her parents slipped away in their final days, when she realized love cannot always prevent loss. Renewal begins when she understands that parting is not a failure; it is a moment that asks to be acknowledged, not solved.
+The glyph activates when the player feels the same quiet ache in her chest â€” the ache she felt when her parents slipped away in their final days, when she realized love cannot always prevent loss. Renewal begins when she understands that parting is not a failure; it is a moment that asks to be acknowledged, not solved.
 
 **Status**: Yes
 
@@ -430,7 +430,7 @@ The glyph activates when the player feels the same quiet ache in her chest — t
 **Location**: Repair Alcove, Old Velhara Market Fringe
 
 **Storyline**:
-Thalma works with fine gears, coiled wire, and cold bronze, where precision feels safer than people. Before the collapse she had quietly clicked with another engineer, sensing the connection only through the absence of friction; when they were reassigned, the loss registered as a bodily disturbance she never understood. Now, in her alcove, human interaction still triggers that faint echo. When the player hesitates or pulls back, Thalma’s fingers lock around her tools and a hollow thud settles behind her ribs—the involuntary brace of someone expecting to be left. This glyph marks Stage 2: abandonment sensed as a subtle bodily signal, felt but not yet named. The player mirrors this early ache, experiencing her parents’ absence as a flicker beneath awareness.
+Thalma works with fine gears, coiled wire, and cold bronze, where precision feels safer than people. Before the collapse she had quietly clicked with another engineer, sensing the connection only through the absence of friction; when they were reassigned, the loss registered as a bodily disturbance she never understood. Now, in her alcove, human interaction still triggers that faint echo. When the player hesitates or pulls back, Thalmaâ€™s fingers lock around her tools and a hollow thud settles behind her ribsâ€”the involuntary brace of someone expecting to be left. This glyph marks Stage 2: abandonment sensed as a subtle bodily signal, felt but not yet named. The player mirrors this early ache, experiencing her parentsâ€™ absence as a flicker beneath awareness.
 
 **Status**: Yes
 
@@ -451,7 +451,7 @@ Thalma works with fine gears, coiled wire, and cold bronze, where precision feel
 **Storyline**:
 After the player returns from the triglyph chamber and reveals how the marketplace quietly supported Nima, Ophina, and Ravi, Nima is overwhelmed by guilt. Once a central pillar of community life, she now feels undeserving of belonging after shutting everyone out in her grief. The codex updates, directing the player to seek the Glyph of Quiet Return.
 
-Even after the player recovers and brings it to her, Nima remains convinced she has forfeited her place. Nearby, a distraught stranger refuses comfort from anyone in the crowd, yet keeps glancing toward Nima. Recognizing the same hollow ache she carried for a year, Nima instinctively sits beside them in silence. The stranger finally speaks, confiding their loss. In that quiet exchange, Nima understands that her grief does not disqualify her mission — it deepens it. Watching her, the player senses their own path toward belonging may be unfolding as well.
+Even after the player recovers and brings it to her, Nima remains convinced she has forfeited her place. Nearby, a distraught stranger refuses comfort from anyone in the crowd, yet keeps glancing toward Nima. Recognizing the same hollow ache she carried for a year, Nima instinctively sits beside them in silence. The stranger finally speaks, confiding their loss. In that quiet exchange, Nima understands that her grief does not disqualify her mission â€” it deepens it. Watching her, the player senses their own path toward belonging may be unfolding as well.
 
 **Status**: Yes
 
@@ -461,7 +461,7 @@ Even after the player recovers and brings it to her, Nima remains convinced she 
 
 The following glyphs have placeholder or unfinished storylines that need to be rewritten with your own narrative.
 
-### Coren - Mediator
+### Cal - Mediator
 
 **Category**: Sovereignty
 
@@ -474,7 +474,7 @@ The following glyphs have placeholder or unfinished storylines that need to be r
 **Location**: Market Concourse (Marketplace)
 
 **Storyline**:
-Coren the Mediator stands between disputants in the marketplace???survivors arguing over resources, paths, survival strategies. She teaches co-witnessing: the ability to see both sides' pain without forcing resolution. She holds space for the ache itself. The glyph manifests when the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief on both sides. This is sovereignty as the refusal to collapse another's sorrow into your own certainty.
+Cal the Mediator stands between disputants in the marketplace???survivors arguing over resources, paths, survival strategies. She teaches co-witnessing: the ability to see both sides' pain without forcing resolution. She holds space for the ache itself. The glyph manifests when the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief on both sides. This is sovereignty as the refusal to collapse another's sorrow into your own certainty.
 
 **Status**: No
 
@@ -626,7 +626,7 @@ The player enters a cavern where sound is swallowed by stone. Here, silence is n
 **Location**: The Shared Archive Building (Central Chamber with Shrine Space)
 
 **Storyline**:
-Elenya gathers the community in the archive building's central chamber to light the Covenant Flame â€” a ritual that demonstrates the archive's role as a living, shared space rather than a sealed vault. After the collapse the flame becomes a focal point for rebuild decisions: does the community preserve records in exclusive custody, or does it tend memory together? The glyph manifests when the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual.
+Elenya gathers the community in the archive building's central chamber to light the Covenant Flame Ã¢â‚¬â€ a ritual that demonstrates the archive's role as a living, shared space rather than a sealed vault. After the collapse the flame becomes a focal point for rebuild decisions: does the community preserve records in exclusive custody, or does it tend memory together? The glyph manifests when the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual.
 
 **Status**: No
 
@@ -651,7 +651,7 @@ A healer tends the wounded survivors in the shrines???not with potions alone, bu
 
 ---
 
-### Inodora – Storyteller & Folk Chronicler
+### Inodora â€“ Storyteller & Folk Chronicler
 
 **Category**: Legacy
 
@@ -670,7 +670,7 @@ Families gather to pass flame from elder to child while Inodora narrates. The gl
 
 ---
 
-### Inodora – Storyteller & Folk Chronicler
+### Inodora â€“ Storyteller & Folk Chronicler
 
 **Category**: Presence
 
@@ -778,7 +778,7 @@ Kaelen demonstrates his loyalty to Drossel which he states is not dependent on w
 **Location**: Swamp Dock
 
 **Storyline**:
-The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and ï¿½paths that shift when watched.ï¿½ He sends the player to retrieve a glyph he claims is ï¿½caught between fear and faith.ï¿½ When the player finds it, the Glyph of Apprehension reveals itself ï¿½ a symbol of the uneasy tension between trusting someone and fearing betrayal. If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead.
+The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and Ã¯Â¿Â½paths that shift when watched.Ã¯Â¿Â½ He sends the player to retrieve a glyph he claims is Ã¯Â¿Â½caught between fear and faith.Ã¯Â¿Â½ When the player finds it, the Glyph of Apprehension reveals itself Ã¯Â¿Â½ a symbol of the uneasy tension between trusting someone and fearing betrayal. If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead.
 
 **Status**: No
 
@@ -879,7 +879,7 @@ Korrin recalls promises made in haste and broken in silence. The player must dec
 
 ---
 
-### Lark – Canopy Scout & Overgrowth Tracker
+### Lark â€“ Canopy Scout & Overgrowth Tracker
 
 **Category**: Legacy
 
@@ -930,7 +930,7 @@ A skilled boatmaker takes pride in their craft, building vessels from reclaimed 
 **Location**: Archive Chamber (Ruins Where Inscriptions Blur)
 
 **Storyline**:
-Malrik shows the player chambers where the Corelink system stored emotional data â€” now corrupted, glitching, displaying fragments of millions of private moments. After the archive collapse the glyph becomes central to salvage options: choices to rescue, reconstruct, or abandon records influence rebuild potential and Malrik/Elenya's relationship. The glyph manifests when the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning from fragments.
+Malrik shows the player chambers where the Corelink system stored emotional data Ã¢â‚¬â€ now corrupted, glitching, displaying fragments of millions of private moments. After the archive collapse the glyph becomes central to salvage options: choices to rescue, reconstruct, or abandon records influence rebuild potential and Malrik/Elenya's relationship. The glyph manifests when the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning from fragments.
 
 **Status**: No
 
@@ -949,7 +949,7 @@ Malrik shows the player chambers where the Corelink system stored emotional data
 **Location**: Archive Interior (Reclaimed Chambers)
 
 **Storyline**:
-Malrik navigates the archive building's interior with the player, each step deliberate and measured. The glyph now integrates archive collapse context: when the building fails this motif signals the tension between preservation and ritualâ€”choices here influence Malrik/Elenya reconciliation and rebuild potential. The glyph manifests when the player moves through the chambers and recognizes discipline as both protection and a barrier to intimacy.
+Malrik navigates the archive building's interior with the player, each step deliberate and measured. The glyph now integrates archive collapse context: when the building fails this motif signals the tension between preservation and ritualÃ¢â‚¬â€choices here influence Malrik/Elenya reconciliation and rebuild potential. The glyph manifests when the player moves through the chambers and recognizes discipline as both protection and a barrier to intimacy.
 
 **Status**: No
 
@@ -1158,7 +1158,7 @@ The player must discern which is the true Saori among a multitude of convincing 
 **Location**: Market Square
 
 **Storyline**:
-By finding scattered photographs of Sealinaï¿½s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity.
+By finding scattered photographs of SealinaÃ¯Â¿Â½s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity.
 
 **Status**: No
 
@@ -1177,7 +1177,7 @@ By finding scattered photographs of Sealinaï¿½s mother, grandmother, and her 
 **Location**: Market Square
 
 **Storyline**:
-Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother ï¿½ dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost
+Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother Ã¯Â¿Â½ dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost
 
 **Status**: No
 
@@ -1386,7 +1386,7 @@ Veynar teaches that sovereignty is law ? boundaries enforced through weary vigil
 **Location**: The Shared Archive Building (Entrance)
 
 **Storyline**:
-Malrik stands at the archive building's entrance, inscribing preservation boundaries. He argues that records must be sealed and organizedâ€”that structure is the only way to honor memory. After collapse, this boundary becomes contentious: will the rebuilt archive be a sealed repository or a shared ritual space? The glyph manifests when the player helps mark preservation zones and recognizes the cost of rigid boundaries.
+Malrik stands at the archive building's entrance, inscribing preservation boundaries. He argues that records must be sealed and organizedÃ¢â‚¬â€that structure is the only way to honor memory. After collapse, this boundary becomes contentious: will the rebuilt archive be a sealed repository or a shared ritual space? The glyph manifests when the player helps mark preservation zones and recognizes the cost of rigid boundaries.
 
 **Status**: No
 
@@ -1433,4 +1433,5 @@ The player is prompted to find the Glyph of Ceaseless Vigilance. On return she m
 **Status**: No
 
 ---
+
 

@@ -1,10 +1,10 @@
-# Malrik — Graphic Novel Canon Notes
+﻿# Malrik â€” Graphic Novel Canon Notes
 
 ## GN-Specific Profile Updates
 
 This document contains **graphic novel-specific notes** for Malrik's character in *Velinor: The Archivist and the Seer*.
 
-For the comprehensive Malrik profile (game + general lore), see `velinor/markdowngameinstructions/characters/malrik_elenya_coren.md`.
+For the comprehensive Malrik profile (game + general lore), see `velinor/markdowngameinstructions/characters/malrik_elenya_Cal.md`.
 
 ---
 
@@ -41,7 +41,7 @@ In the graphic novel, Malrik is the central POV character for Volume 1. However,
 
 ### Why This Dismissal Matters (Foreshadowing)
 - Later readers will realize: Malrik dismissed the very object that carries the memory of his love
-- He was wrong. The artifact *did* choose—it chose Lior
+- He was wrong. The artifact *did* chooseâ€”it chose Lior
 - His institutional logic, for all its precision, missed what matters most
 - This becomes a point of quiet regret that unfolds across later volumes
 
@@ -191,7 +191,7 @@ In the graphic novel, Malrik is the central POV character for Volume 1. However,
 ### The Codex Dismissal (Chapter 3)
 - He glances at it, turns it over, sets it down
 - His expression: mild professional interest, nothing more
-- The gesture is quick, definitive, final—he has categorized and moved on
+- The gesture is quick, definitive, finalâ€”he has categorized and moved on
 - Later, this moment should feel like a missed opportunity, a chance he didn't take
 
 ---
@@ -199,10 +199,10 @@ In the graphic novel, Malrik is the central POV character for Volume 1. However,
 ## Thematic Role (Volume 1)
 
 Malrik represents:
-1. **The limit of institutions** – Systems cannot hold what is most human
-2. **The cost of control** – Emotional suppression as a defense against chaos
-3. **The hidden subject** – His grief drives his philosophy, though he doesn't know it
-4. **The man who must unlearn** – By Volume 2, he must learn that precision cannot preserve love
+1. **The limit of institutions** â€“ Systems cannot hold what is most human
+2. **The cost of control** â€“ Emotional suppression as a defense against chaos
+3. **The hidden subject** â€“ His grief drives his philosophy, though he doesn't know it
+4. **The man who must unlearn** â€“ By Volume 2, he must learn that precision cannot preserve love
 
 His arc across the volumes:
 - **Volume 1**: Unknowing keeper of lost memory
@@ -224,3 +224,4 @@ These questions shape the development of Malrik's character in volumes 2 and bey
 ---
 
 This completes the GN-specific character notes for Malrik.
+

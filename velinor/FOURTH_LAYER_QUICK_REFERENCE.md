@@ -1,4 +1,4 @@
-# Fourth Layer Quick Reference
+﻿# Fourth Layer Quick Reference
 
 **A cheat sheet for implementing Velinor's temporal cascading system**
 
@@ -8,12 +8,12 @@
 
 ```
 PAST (Saori)          PRESENT (The People)      FUTURE (The Player)
-    ↓                     ↓                             ↓
+    â†“                     â†“                             â†“
 Memory intact         Living without history    Capacity to move between states
 Frozen by guilt       Unaware of context        Can bridge & heal
 Cannot move forward   Forced into perpetual now Can restore coherence
 
-                  ← THE WOUND (Velinor) →
+                  â† THE WOUND (Velinor) â†’
             Fragmented consciousness across all three
 ```
 
@@ -42,9 +42,9 @@ Abandon/Fracture 2. **Player's Corelink choice**: Restart the System or Abandon 
 
 | Name | Memory | Authority | Empathy | Role |
 |------|--------|-----------|---------|------|
-| **Malrik** | 0.95 ⭐ | 0.80 | 0.65 | Records corruption & collapse |
-| **Elenya** | 0.85 | 0.70 | 0.90 ⭐ | Holds rituals & capacity |
-| **Nordia** | 0.95 ⭐ | 0.60 | 0.95 ⭐ | Transforms grief into meaning |
+| **Malrik** | 0.95 â­ | 0.80 | 0.65 | Records corruption & collapse |
+| **Elenya** | 0.85 | 0.70 | 0.90 â­ | Holds rituals & capacity |
+| **Nordia** | 0.95 â­ | 0.60 | 0.95 â­ | Transforms grief into meaning |
 | **Sealina** | 0.90 | 0.55 | 0.85 | Carries songs of loss |
 | **Lark** | 0.80 | 0.75 | 0.60 | Maintains ceremony |
 
@@ -58,11 +58,11 @@ Abandon/Fracture 2. **Player's Corelink choice**: Restart the System or Abandon 
 
 | Name | Trust | Empathy | Resolve | Role |
 |------|-------|---------|---------|------|
-| **Ravi** | 0.80 ⭐ | 0.80 | 0.75 | Sensory presence |
-| **Rasha** | 0.85 ⭐ | 0.80 | 0.65 | Joy & optimism |
-| **Sera** | 0.75 | 0.85 ⭐ | 0.70 | Learning & healing |
-| **Nima** | 0.70 | 0.90 ⭐ | 0.65 | Emotional sensitivity |
-| **Helia** | 0.75 | 0.75 | 0.80 ⭐ | Grounded presence |
+| **Ravi** | 0.80 â­ | 0.80 | 0.75 | Sensory presence |
+| **Rasha** | 0.85 â­ | 0.80 | 0.65 | Joy & optimism |
+| **Sera** | 0.75 | 0.85 â­ | 0.70 | Learning & healing |
+| **Nima** | 0.70 | 0.90 â­ | 0.65 | Emotional sensitivity |
+| **Helia** | 0.75 | 0.75 | 0.80 â­ | Grounded presence |
 | **Inodora** | 0.70 | 0.80 | 0.70 | Bridge past/present |
 | **Elka** | 0.70 | 0.65 | 0.75 | Simple clarity |
 
@@ -77,15 +77,15 @@ Abandon/Fracture 2. **Player's Corelink choice**: Restart the System or Abandon 
 
 | Name | Skepticism | Nuance | Memory | Need | Role |
 |------|-----------|--------|--------|------|------|
-| **Kaelen** | 0.90 ⭐ | 0.85 | 0.70 | 0.75 | Ghost signals bridge |
-| **Mariel** | 0.65 | 0.90 ⭐ | 0.80 | 0.70 | Weaves meaning |
-| **Dalen** | 0.75 | 0.75 | 0.75 | 0.85 ⭐ | Environmental scars |
-| **Drossel** | 0.85 ⭐ | 0.80 | 0.65 | 0.80 | Cloaked fragmentation |
-| **Korrin** | 0.80 ⭐ | 0.70 | 0.70 | 0.80 | Spreads contagion |
+| **Kaelen** | 0.90 â­ | 0.85 | 0.70 | 0.75 | Ghost signals bridge |
+| **Mariel** | 0.65 | 0.90 â­ | 0.80 | 0.70 | Weaves meaning |
+| **Dalen** | 0.75 | 0.75 | 0.75 | 0.85 â­ | Environmental scars |
+| **Drossel** | 0.85 â­ | 0.80 | 0.65 | 0.80 | Cloaked fragmentation |
+| **Korrin** | 0.80 â­ | 0.70 | 0.70 | 0.80 | Spreads contagion |
 
 **Bond strategy**: Don't try to "fix" them. Help them integrate contradiction.
 **Cascade effect**: When Nuance increases, they teach others to hold complexity.
-**Critical path**: Get all 5 to Nuance 0.90+ → they become complexity-keepers.
+**Critical path**: Get all 5 to Nuance 0.90+ â†’ they become complexity-keepers.
 
 ---
 
@@ -94,14 +94,14 @@ Abandon/Fracture 2. **Player's Corelink choice**: Restart the System or Abandon 
 
 | Name | Authority | Resolve | Empathy | Nuance | Role |
 |------|-----------|---------|---------|--------|------|
-| **Veynar** | 0.85 ⭐ | 0.90 ⭐ | 0.70 | 0.70 | Military + care |
-| **Coren** | 0.80 | 0.80 | 0.80 | 0.95 ⭐ | Holds contradiction |
+| **Veynar** | 0.85 â­ | 0.90 â­ | 0.70 | 0.70 | Military + care |
+| **Cal** | 0.80 | 0.80 | 0.80 | 0.95 â­ | Holds contradiction |
 | **Juria & Korinth** | 0.60 | 0.70 | 0.80 | 0.65 | Partnership model |
 | **Lira** | 0.50 | 0.65 | 0.85 | 0.55 | Earned joy |
 
-**Bond strategy**: Don't "help" them—witness their integration, let it inspire others.
+**Bond strategy**: Don't "help" themâ€”witness their integration, let it inspire others.
 **Cascade effect**: Their Authority makes integrated states *believable* to others.
-**Critical path**: All 4+ at Authority 0.80+ → generation has leaders for restart.
+**Critical path**: All 4+ at Authority 0.80+ â†’ generation has leaders for restart.
 
 ---
 
@@ -110,43 +110,43 @@ Abandon/Fracture 2. **Player's Corelink choice**: Restart the System or Abandon 
 
 | Name | Resolve | Nuance | Memory | Skepticism | Role |
 |------|---------|--------|--------|------------|------|
-| **Dakrin** | 0.85 ⭐ | 0.70 | 0.55 | 0.65 | Reclaims structures |
-| **Kiv** | 0.60 | 0.85 | 0.95 ⭐ | 0.70 | Single transform |
-| **Sanor** | 0.75 | 0.70 | 0.60 | 0.85 ⭐ | Survives wound |
+| **Dakrin** | 0.85 â­ | 0.70 | 0.55 | 0.65 | Reclaims structures |
+| **Kiv** | 0.60 | 0.85 | 0.95 â­ | 0.70 | Single transform |
+| **Sanor** | 0.75 | 0.70 | 0.60 | 0.85 â­ | Survives wound |
 | **Orvak** | 0.70 | 0.75 | 0.70 | 0.80 | System knowledge |
 
 **Bond strategy**: Learn from them how to survive in impossible spaces.
-**Cascade effect**: They model adaptation—others learn it's possible to move.
+**Cascade effect**: They model adaptationâ€”others learn it's possible to move.
 **Critical path**: They're resources for other NPCs facing transition.
 
 ---
 
 ## Cascading Effects Cheat Sheet
 
-### **Past Resonance** (Player → History)
+### **Past Resonance** (Player â†’ History)
 When player bonds with **Present Dwellers** or **Wound Weavers**:
 - Saori's guilt becomes more *specific*
 - Archive members gain clearer fragments
 - Memory restoration becomes possible
 
-**Example**: Help Nordia process grief → Saori can feel "I failed Nordia specifically" (not vague)
+**Example**: Help Nordia process grief â†’ Saori can feel "I failed Nordia specifically" (not vague)
 
-### **Present Contagion** (Player → Network)
+### **Present Contagion** (Player â†’ Network)
 When player increases NPC trait:
 - Nearby cluster members sense the shift
 - Their same trait increases (reduced amount)
 - Emotional safety spreads
 
-**Example**: Ravi's Trust increases 0.8→0.88 → Nima/Sera/Helia all gain +0.05 Trust
+**Example**: Ravi's Trust increases 0.8â†’0.88 â†’ Nima/Sera/Helia all gain +0.05 Trust
 
-### **Future Propulsion** (Player → Restart Outcome)
+### **Future Propulsion** (Player â†’ Restart Outcome)
 Each bond determines restart possibility:
 - **Archive** bonds = Past can be integrated
 - **Present** bonds = Current world stable enough to hold memory
 - **Wound** bonds = Fragmentation can be taught through nuance
 - **Shepherd** bonds = Leaders exist to guide forward
 
-**Example**: Help Kaelen integrate skepticism + trust → teaches next generation discernment
+**Example**: Help Kaelen integrate skepticism + trust â†’ teaches next generation discernment
 
 ---
 
@@ -156,11 +156,11 @@ Each bond determines restart possibility:
 - [ ] Load npc_remnants_profiles.json on app start
 - [ ] Add contagion affinities (Archive members resonate together, etc)
 - [ ] Track player bond depth per NPC in state
-- [ ] Map bond_depth (1-5) → trait increases (0.05-0.25)
+- [ ] Map bond_depth (1-5) â†’ trait increases (0.05-0.25)
 
 ### **Phase 2: Cascading**
-- [ ] Implement Past Resonance: player action → increases "memory_clarity" variable
-- [ ] Implement Present Contagion: one NPC trait increase → cluster members gain reduced increases
+- [ ] Implement Past Resonance: player action â†’ increases "memory_clarity" variable
+- [ ] Implement Present Contagion: one NPC trait increase â†’ cluster members gain reduced increases
 - [ ] Implement Future Propulsion: track Restoration Score = Archive Memory + Present Trust + Wound Nuance + Shepherd Authority
 
 ### **Phase 3: Memory & Archive**
@@ -183,23 +183,23 @@ Each bond determines restart possibility:
 
 ## Quick Lookup: What Each Cluster Does
 
-**Archive Network** → Restores *what was*
+**Archive Network** â†’ Restores *what was*
 - Bond with them = player gains clarity about collapse
 - Their Memory increase = world's past becomes coherent
 
-**Present Circle** → Stabilizes *what is*
+**Present Circle** â†’ Stabilizes *what is*
 - Bond with them = player gains presence & belonging
 - Their Trust increase = world becomes safe enough to remember
 
-**Wound Weavers** → Teaches *how to integrate*
+**Wound Weavers** â†’ Teaches *how to integrate*
 - Bond with them = player learns to hold contradiction
 - Their Nuance increase = world gains nuance and depth, not just healing
 
-**Future Shepherds** → Models *what's possible*
+**Future Shepherds** â†’ Models *what's possible*
 - Witness them = player believes integration is real
 - Their Authority increase = next generation has guides
 
-**Threshold Walkers** → Teaches *transformation itself*
+**Threshold Walkers** â†’ Teaches *transformation itself*
 - Learn from them = player gains adaptability
 - They're the bridge between wound & healing
 
@@ -263,11 +263,12 @@ But only through bonds.
 
 ## Files to Reference During Implementation
 
-- **FOURTH_LAYER_TEMPORAL_ARCHITECTURE.md** — Full system documentation
-- **npc_remnants_profiles.json** — Baseline REMNANTS for all 25 NPCs
-- **VELINOR_STREAMLIT_IMPLEMENTATION_GUIDE.md** — Technical architecture
-- **VELINOR_NARRATIVE_SOURCE_MATERIAL.md** — Dialogue & character arcs
+- **FOURTH_LAYER_TEMPORAL_ARCHITECTURE.md** â€” Full system documentation
+- **npc_remnants_profiles.json** â€” Baseline REMNANTS for all 25 NPCs
+- **VELINOR_STREAMLIT_IMPLEMENTATION_GUIDE.md** â€” Technical architecture
+- **VELINOR_NARRATIVE_SOURCE_MATERIAL.md** â€” Dialogue & character arcs
 
 ---
 
 *Time is a field. Memory is continuity. Bonds are causality. The restart is reintegration.*
+

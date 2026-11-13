@@ -1,10 +1,10 @@
-"""
+﻿"""
 Extract glyph manifestation moments and build authoritative cipher_seeds.json
 
 This script:
 1. Parses Glyph_Organizer.csv
 2. Extracts the "manifestation moment" (plaintext truth) from each glyph's storyline
-3. Creates 3-layer cipher seeds (hint → fragment → plaintext)
+3. Creates 3-layer cipher seeds (hint â†’ fragment â†’ plaintext)
 4. Maps emotional gates to glyph categories
 5. Generates full cipher_seeds.json integrated with the game
 """
@@ -30,7 +30,7 @@ CATEGORY_TO_GATES = {
 NPC_ALIASES = {
     "Archivist Malrik": "Malrik",
     "Captain Veynar": "Veynar",
-    "Coren the Mediator": "Coren",
+    "Cal the Mediator": "Cal",
     "Dakrin - Trial Warden": "Dakrin",
     "Dalen the Rusted Guide": "Dalen",
     "Drossel the Cloaked": "Drossel",
@@ -100,7 +100,7 @@ def create_fragments(plaintext: str, npc_name: str, category: str) -> Tuple[str,
     words = plaintext.split()[:15]
     fragment_0 = " ".join(words)
     if len(plaintext.split()) > 15:
-        fragment_0 += "…"
+        fragment_0 += "â€¦"
 
     # Layer 1: NPC-perspective fragment (based on category and NPC voice)
     npc_voices = {
@@ -155,7 +155,7 @@ def parse_glyphs(csv_path: Path) -> List[Dict]:
             # Extract manifestation moment (plaintext)
             plaintext = extract_manifestation(storyline)
             if not plaintext:
-                print(f"⚠ Could not extract manifestation from: {glyph_name}")
+                print(f"âš  Could not extract manifestation from: {glyph_name}")
                 continue
 
             # Track index per category
@@ -199,13 +199,13 @@ def main():
     csv_path = Path("velinor/markdowngameinstructions/glyphs/Glyph_Organizer.csv")
     
     if not csv_path.exists():
-        print(f"❌ CSV not found: {csv_path}")
+        print(f"âŒ CSV not found: {csv_path}")
         return
 
-    print("📖 Parsing Glyph_Organizer.csv...")
+    print("ðŸ“– Parsing Glyph_Organizer.csv...")
     seeds = parse_glyphs(csv_path)
     
-    print(f"✓ Extracted {len(seeds)} glyphs")
+    print(f"âœ“ Extracted {len(seeds)} glyphs")
 
     # Build output structure
     output = {
@@ -223,7 +223,7 @@ def main():
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"✓ Wrote {output_path}")
+    print(f"âœ“ Wrote {output_path}")
     
     # Summary by category
     by_category = {}
@@ -231,14 +231,15 @@ def main():
         cat = seed["category"]
         by_category[cat] = by_category.get(cat, 0) + 1
 
-    print("\n📊 Seeds by Category:")
+    print("\nðŸ“Š Seeds by Category:")
     for cat in sorted(by_category.keys()):
         count = by_category[cat]
         gates = CATEGORY_TO_GATES.get(cat, [])
-        print(f"  {cat:15} {count:2d} glyphs  →  {', '.join(gates)}")
+        print(f"  {cat:15} {count:2d} glyphs  â†’  {', '.join(gates)}")
 
-    print("\n✓ Integration complete: cipher_seeds.json now maps to glyph system")
+    print("\nâœ“ Integration complete: cipher_seeds.json now maps to glyph system")
 
 
 if __name__ == "__main__":
     main()
+

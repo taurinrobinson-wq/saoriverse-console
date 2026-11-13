@@ -1,4 +1,4 @@
-# Velinor: Canonical Six Endings - Consolidated Reference
+﻿# Velinor: Canonical Six Endings - Consolidated Reference
 
 *Resolving inconsistencies between ending systems and establishing a single authoritative source*
 
@@ -22,9 +22,9 @@ This is determined throughout the game by player choices, NPC relationship track
 Collapse Timeline sequence.
 
 **States:**
-- **Rebuild Together** (Full synthesis) — Happens when player advocates consistently and intervenes with empathy
-- **Partial Rebuild** (In-progress synthesis) — Happens when player shows some advocacy or mixed signals
-- **Abandon/Fracture** (No synthesis) — Happens when player doesn't intervene or sides with one faction
+- **Rebuild Together** (Full synthesis) â€” Happens when player advocates consistently and intervenes with empathy
+- **Partial Rebuild** (In-progress synthesis) â€” Happens when player shows some advocacy or mixed signals
+- **Abandon/Fracture** (No synthesis) â€” Happens when player doesn't intervene or sides with one faction
 
 ### **Axis 2: The Final Corelink Choice**
 This happens in the final chamber with Saori and Velinor.
@@ -40,7 +40,7 @@ This happens in the final chamber with Saori and Velinor.
 
 ## The Six Primary Endings (02_SIX_ENDINGS_EXPLICIT_MAP.md - Canonical)
 
-These are created by the **2×3 matrix**: (Restart vs. Abandon) × (Rebuild Together, Partial Rebuild,
+These are created by the **2Ã—3 matrix**: (Restart vs. Abandon) Ã— (Rebuild Together, Partial Rebuild,
 Abandon/Fracture)
 
 ### **Ending 1: The Hopeful Synthesis**
@@ -51,9 +51,9 @@ Abandon/Fracture)
 
 **Meaning:**
 The people of Velhara have learned to hold multiple truths. The system restarts as a *mirror* of
-what they've already chosen—not a controller, but a reflection of their own coherence.
+what they've already chosenâ€”not a controller, but a reflection of their own coherence.
 
-**Visual/Emotional:** Light returning, merged codex colors (blues + ambers → white), healing connection between Saori and Velinor.
+**Visual/Emotional:** Light returning, merged codex colors (blues + ambers â†’ white), healing connection between Saori and Velinor.
 
 **End Note:** *"The system was never the problem. The system was a mirror. Now that we've learned to hold each other, the mirror can show us what we're capable of."*
 
@@ -71,7 +71,7 @@ what they've already chosen—not a controller, but a reflection of their own co
 
 **Meaning:**
 The player understood the philosophy but couldn't make it happen. The system restarts anyway, hoping
-technology can solve what people couldn't. It succeeds technically but fails emotionally—history
+technology can solve what people couldn't. It succeeds technically but fails emotionallyâ€”history
 repeats.
 
 **Visual/Emotional:** Corelink glows with eerie, artificial quality. Malrik and Elenya walk away as silhouettes. City lights return but feel hollow.
@@ -112,9 +112,9 @@ genuinely broken, but people face it honestly without illusions of technological
 
 **Meaning:**
 The hardest ending. The player refuses the technological shortcut. The people choose to build
-coherence themselves. It's not finished—it may never be—but it's earned.
+coherence themselves. It's not finishedâ€”it may never beâ€”but it's earned.
 
-**Visual/Emotional:** Corelink fades into silence. From above comes sound of construction. Rebuilt archive is half-Malrik, half-Elenya. Saori and Velinor's connection healing. Marketplace alive with possibility. Coren stands as friend, not mediator.
+**Visual/Emotional:** Corelink fades into silence. From above comes sound of construction. Rebuilt archive is half-Malrik, half-Elenya. Saori and Velinor's connection healing. Marketplace alive with possibility. Cal stands as friend, not mediator.
 
 **End Note:** *"We chose not to let the machine decide anymore. So now we have to be brave enough to decide for ourselves. It's harder. But it's ours."*
 
@@ -132,9 +132,9 @@ coherence themselves. It's not finished—it may never be—but it's earned.
 
 **Meaning:**
 The system and people are in dialogue. System restarts as Malrik and Elenya begin rebuilding. They
-learn from each other in real time—not perfect, but calibrating together.
+learn from each other in real timeâ€”not perfect, but calibrating together.
 
-**Visual/Emotional:** Corelink restarts with warmer tone. As it powers up, receives signals from the rebuilding archive below—two factions' voices intertwining in data. Softer, more distributed city light.
+**Visual/Emotional:** Corelink restarts with warmer tone. As it powers up, receives signals from the rebuilding archive belowâ€”two factions' voices intertwining in data. Softer, more distributed city light.
 
 **End Note:** *"The system and the people are learning together. It's not perfect yet. But it's a beginning."*
 
@@ -151,10 +151,10 @@ learn from each other in real time—not perfect, but calibrating together.
 - Player path: Detachment from factional dynamics
 
 **Meaning:**
-No system. No guarantor. But there is movement—people rebuilding imperfectly, without institutional
+No system. No guarantor. But there is movementâ€”people rebuilding imperfectly, without institutional
 support. Messy, uncertain, but authentic.
 
-**Visual/Emotional:** Corelink goes dark. City dim, lit by small fires and bioluminescence. Archive work is tentative and uncertain. Coren mediates without institutional power. Saori and Velinor connection healing slowly.
+**Visual/Emotional:** Corelink goes dark. City dim, lit by small fires and bioluminescence. Archive work is tentative and uncertain. Cal mediates without institutional power. Saori and Velinor connection healing slowly.
 
 **End Note:** *"We chose not to let the machine decide anymore. Now we're learning to work together without it. It's harder than we thought. But we're trying."*
 
@@ -211,21 +211,21 @@ FRACTURE          The Pyrrhic Restart         The Honest Collapse
 - Early choices: Show empathy and understanding with Ravi/Nima
 - Collapse sequence: Intervene with compassion when archive building collapses
 - Post-collapse: Advocate for synthesis between Malrik and Elenya
-- Coren's observation: Player models integration consistently
+- Cal's observation: Player models integration consistently
 - Result: **Probability ~60-80%** (if player follows synthesis path actively)
 
 ### **To Trigger "Partial Rebuild"**
 - Mixed choices: Some empathy, some skepticism throughout
 - Collapse sequence: Some intervention, some distance
 - Post-collapse: Acknowledge both perspectives without strong advocacy
-- Coren's observation: Player is thoughtful but not actively catalyzing
+- Cal's observation: Player is thoughtful but not actively catalyzing
 - Result: **Probability ~40-60%** (if player takes middle path)
 
 ### **To Trigger "Abandon/Fracture"**
 - Skepticism path: Challenge assumptions, maintain distance
 - Collapse sequence: Don't intervene or side with one faction
 - Post-collapse: Ignore Malrik/Elenya relationship or passively accept separation
-- Coren's observation: Player is independent but doesn't model synthesis
+- Cal's observation: Player is independent but doesn't model synthesis
 - Result: **Probability ~20-40%** (if player takes skeptical/detached path)
 
 ---
@@ -233,20 +233,20 @@ FRACTURE          The Pyrrhic Restart         The Honest Collapse
 ## Ending Quality Ranking
 
 **Tier 1: Earned & Genuine**
-- **Ending 4** — Full synthesis without system dependency
+- **Ending 4** â€” Full synthesis without system dependency
 
 **Tier 2: Hopeful & Supported**
-- **Ending 1** — Synthesis with system as reflection/tool
+- **Ending 1** â€” Synthesis with system as reflection/tool
 
 **Tier 3: Partial & Realistic**
-- **Ending 5** — System and people learning together
-- **Ending 6** — People working without system's help
+- **Ending 5** â€” System and people learning together
+- **Ending 6** â€” People working without system's help
 
 **Tier 4: Honest & Unflinching**
-- **Ending 3** — Collapse acknowledged, rebuilding happens manually
+- **Ending 3** â€” Collapse acknowledged, rebuilding happens manually
 
 **Tier 5: Pyrrhic & Hollow**
-- **Ending 2** — System works but people didn't learn
+- **Ending 2** â€” System works but people didn't learn
 
 ---
 
@@ -260,7 +260,7 @@ The six endings all illustrate this principle:
 - Endings 5 & 6 show the in-between state (system and people co-learning or struggling)
 
 The real ending isn't determined by the Corelink choice. It's determined by whether Malrik and
-Elenya—and by extension, the community—chose synthesis or fracture.
+Elenyaâ€”and by extension, the communityâ€”chose synthesis or fracture.
 
 ---
 
@@ -282,7 +282,7 @@ Elenya—and by extension, the community—chose synthesis or fracture.
 1. **Are the Saori/Velinor sub-paths (6 branches from VELINOR_SAORI_FINAL_ARC.md) separate from or
 nested within the primary six endings?**
    - Option A: They replace the primary six (primary doc is outdated)
-   - Option B: They nest within (3 primary paths × 2 Saori choices = 6 variations)
+   - Option B: They nest within (3 primary paths Ã— 2 Saori choices = 6 variations)
    - Option C: They're parallel branching (player gets two sequential choices)
 
 2. **How much does the specific Saori/Velinor choice weight against the Malrik/Elenya state?**
@@ -308,3 +308,4 @@ This gives:
 ---
 
 *All six endings are genuine. None is "correct." Each is a philosophical mirror of the player's choices.*
+

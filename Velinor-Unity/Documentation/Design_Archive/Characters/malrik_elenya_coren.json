@@ -1,6 +1,6 @@
-{
+﻿{
     "meta": {
-        "source": "velinor/markdowngameinstructions/malrik_elenya_coren.md",
+        "source": "velinor/markdowngameinstructions/malrik_elenya_Cal.md",
         "generated": "2026-01-02",
         "notes": "Extracted character profiles, glyphs, mini-game and mechanics."
     },
@@ -118,9 +118,9 @@
             ]
         },
         {
-            "id": "coren",
+            "id": "Cal",
             "role": "Mediator",
-            "displayName": "Coren the Mediator",
+            "displayName": "Cal the Mediator",
             "traits": [
                 "mediator",
                 "adaptive",
@@ -164,13 +164,13 @@
             ],
             "choiceSets": {
                 "trust": [
-                    "They’re just doing their usual thing.",
+                    "Theyâ€™re just doing their usual thing.",
                     "They always stand far apart like this.",
-                    "Elenya’s silence probably means she’s annoyed again.",
+                    "Elenyaâ€™s silence probably means sheâ€™s annoyed again.",
                     "Malrik is focused. Nothing unusual here."
                 ],
                 "observation": [
-                    "The diagram he’s drawing looks intricate…",
+                    "The diagram heâ€™s drawing looks intricateâ€¦",
                     "Her hand placement is interesting.",
                     "The wind is pushing her hair toward him.",
                     "The terrain blends in a strange way."
@@ -179,13 +179,13 @@
                     "This looks like the setup for something important.",
                     "Their positions feel symbolic somehow.",
                     "Is this a turning point between them?",
-                    "The world feels like it’s framing them on purpose."
+                    "The world feels like itâ€™s framing them on purpose."
                 ],
                 "empathy": [
-                    "She’s feeling something for him.",
-                    "Her hand on her gut… that’s emotion, not thought.",
-                    "He doesn’t see her — and that hurts a little.",
-                    "They’re meeting in the same landscape for the first time."
+                    "Sheâ€™s feeling something for him.",
+                    "Her hand on her gutâ€¦ thatâ€™s emotion, not thought.",
+                    "He doesnâ€™t see her â€” and that hurts a little.",
+                    "Theyâ€™re meeting in the same landscape for the first time."
                 ]
             },
             "toneShifts": {

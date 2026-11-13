@@ -1,4 +1,4 @@
-## Malrik, Elenya, and Coren — Cleaned Design Notes
+﻿## Malrik, Elenya, and Cal â€” Cleaned Design Notes
 
 This file is a concise, cleaned extract of the original character and mechanics material.
 
@@ -22,18 +22,18 @@ Gameplay/Mechanical hooks:
 Gameplay/Mechanical hooks:
 - Participation and presence mechanics (join revelry, remain silent at shrine, tend covenant flame).
 
-### Coren the Mediator
+### Cal the Mediator
 - Role: Mediator with two aspects (Collapse / Sovereignty)
 - Glyphs: Preemptive Severance (cult encampment), Held Ache (market concourse)
 
-Mechanic: Coren's aspect/glyph depends on player orientation; teaches either severance or
+Mechanic: Cal's aspect/glyph depends on player orientation; teaches either severance or
 co-witnessing.
 
 ### Observational Mini-Game (Sand Diagram Scene)
 - Anchors: Elenya watching, hand on gut; Malrik drawing and unaware
 - Orientations: trust, observation, narrative, empathy
 - Choice menus vary by orientation; each choice applies micro-shifts to tone stats
-- Tone stats: trust, observation, narrative, empathy (0.0–1.0)
+- Tone stats: trust, observation, narrative, empathy (0.0â€“1.0)
 - Shifts range between +0.01 and +0.04; small counterweights can be applied to keep realism
 
 ### Systems
@@ -44,8 +44,8 @@ co-witnessing.
 - NPC correlation example: Ravi/Nima mirrored at 50% of player shift by design
 
 ### Files generated
-- JSON: malrik_elenya_coren.json (structured data for engines)
-- YAML: malrik_elenya_coren.yaml (human-friendly export)
+- JSON: malrik_elenya_Cal.json (structured data for engines)
+- YAML: malrik_elenya_Cal.yaml (human-friendly export)
 - Python: velinor/game_mechanics/characters.py (loader and simple mechanics)
 - TypeScript: velinor/game_mechanics/characters.ts (frontend counterpart)
 
@@ -53,3 +53,4 @@ If you want, I can now:
 - Hook the Python module into a small unit test showing several player choices
 - Add UI mockups for the mini-game choice menus
 - Convert the YAML into an in-engine config loader
+

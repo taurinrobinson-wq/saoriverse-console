@@ -1,55 +1,55 @@
-Here’s the clean, precise tuning pass you’re looking for — focused entirely on Nima’s REMNANTS baselines, her personality, and how her thresholds should shift so the early-game feels right and the late-game arc stays intact.
+﻿Hereâ€™s the clean, precise tuning pass youâ€™re looking for â€” focused entirely on Nimaâ€™s REMNANTS baselines, her personality, and how her thresholds should shift so the early-game feels right and the late-game arc stays intact.
 
-This is not a re-explanation — it’s the actionable refinement.
+This is not a re-explanation â€” itâ€™s the actionable refinement.
 
 \---
 
-⭐ Nima’s Personality vs. Her Current REMNANTS Baseline
+â­ Nimaâ€™s Personality vs. Her Current REMNANTS Baseline
 
 Your JSON baseline for Nima:
 
-• resolve: 0.65  
-• empathy: 0.90  
-• memory: 0.50  
-• nuance: 0.60  
-• authority: 0.45  
-• need: 0.80  
-• trust: 0.70  
-• skepticism: 0.55
+â€¢ resolve: 0.65  
+â€¢ empathy: 0.90  
+â€¢ memory: 0.50  
+â€¢ nuance: 0.60  
+â€¢ authority: 0.45  
+â€¢ need: 0.80  
+â€¢ trust: 0.70  
+â€¢ skepticism: 0.55
 
 But her behavior in the first scene is:
 
-• aggressive  
-• distrustful  
-• protective  
-• authoritative  
-• boundary-setting  
-• emotionally guarded  
-• suspicious of outsiders  
-• quick to challenge the PC  
-• quick to shut Ravi down
+â€¢ aggressive  
+â€¢ distrustful  
+â€¢ protective  
+â€¢ authoritative  
+â€¢ boundary-setting  
+â€¢ emotionally guarded  
+â€¢ suspicious of outsiders  
+â€¢ quick to challenge the PC  
+â€¢ quick to shut Ravi down
 
 This does not match:
 
-• skepticism 0.55 (too low)  
-• authority 0.45 (too low)  
-• trust 0.70 (too high)  
-• empathy 0.90 (too high for her outward behavior)
+â€¢ skepticism 0.55 (too low)  
+â€¢ authority 0.45 (too low)  
+â€¢ trust 0.70 (too high)  
+â€¢ empathy 0.90 (too high for her outward behavior)
 
-Her baseline currently reads like a soft, emotionally open, moderately trusting character — which is the opposite of how she behaves.
+Her baseline currently reads like a soft, emotionally open, moderately trusting character â€” which is the opposite of how she behaves.
 
-So yes — her stats need recalibration.
+So yes â€” her stats need recalibration.
 
 \---
 
-⭐ The Correct Baseline for Nima (Based on Her Actual Behavior)
+â­ The Correct Baseline for Nima (Based on Her Actual Behavior)
 
 Here is the corrected REMNANTS baseline that matches her personality:
 
 Trait	Current	Corrected	Why	  
 skepticism	0.55	0.75	She distrusts outsiders immediately.	  
 authority	0.45	0.70	She controls the interaction and Ravi.	  
-resolve	0.65	0.80	She stands firm, doesn’t back down.	  
+resolve	0.65	0.80	She stands firm, doesnâ€™t back down.	  
 trust	0.70	0.40	She does NOT trust the PC at all.	  
 empathy	0.90	0.60	She feels deeply, but does not show it.	  
 need	0.80	0.85	Her grief makes her emotionally volatile.	  
@@ -58,19 +58,19 @@ nuance	0.60	0.65	She sees patterns in rubble and behavior.
 
 This corrected baseline makes her:
 
-• more guarded  
-• more authoritative  
-• more skeptical  
-• less trusting  
-• less outwardly empathetic  
-• more internally wounded  
-• more emotionally complex
+â€¢ more guarded  
+â€¢ more authoritative  
+â€¢ more skeptical  
+â€¢ less trusting  
+â€¢ less outwardly empathetic  
+â€¢ more internally wounded  
+â€¢ more emotionally complex
 
 This matches her writing perfectly.
 
 \---
 
-⭐ Why This Fix Matters for Thresholds
+â­ Why This Fix Matters for Thresholds
 
 With her corrected baseline:
 
@@ -78,98 +78,98 @@ Early-game thresholds become reachable
 
 Because:
 
-• skepticism starts at 0.75  
-• authority starts at 0.70
+â€¢ skepticism starts at 0.75  
+â€¢ authority starts at 0.70
 
-And your TONE drift (±0.03 for Tier 1\) can realistically bring her to:
+And your TONE drift (Â±0.03 for Tier 1\) can realistically bring her to:
 
-• skepticism ≤ 0.50  
-• authority ≤ 0.40
+â€¢ skepticism â‰¤ 0.50  
+â€¢ authority â‰¤ 0.40
 
-within 5–7 interactions, which is exactly where the Ophina photo reveal belongs.
+within 5â€“7 interactions, which is exactly where the Ophina photo reveal belongs.
 
 Late-game thresholds become meaningful
 
 Because:
 
-• resolve starts high (0.80)  
-• trust starts low (0.40)  
-• memory starts moderate (0.60)  
-• need starts high (0.85)
+â€¢ resolve starts high (0.80)  
+â€¢ trust starts low (0.40)  
+â€¢ memory starts moderate (0.60)  
+â€¢ need starts high (0.85)
 
 This gives you emotional room for:
 
-• slow rebuilding  
-• slow integration  
-• slow healing  
-• slow trust formation  
-• slow release of grief
+â€¢ slow rebuilding  
+â€¢ slow integration  
+â€¢ slow healing  
+â€¢ slow trust formation  
+â€¢ slow release of grief
 
 Which is exactly what the memorial arc requires.
 
 \---
 
-⭐ How Thresholds Shift Across the Arc
+â­ How Thresholds Shift Across the Arc
 
 Here is the clean threshold map with the corrected baseline:
 
-PHASE 1 — Guarded Grief
+PHASE 1 â€” Guarded Grief
 
-(Marketplace → Kaelen)
+(Marketplace â†’ Kaelen)
 
 Nima threshold:
 
-• skepticism ≤ 0.60  
-• authority ≤ 0.60  
-• nuance ≥ 0.67
+â€¢ skepticism â‰¤ 0.60  
+â€¢ authority â‰¤ 0.60  
+â€¢ nuance â‰¥ 0.67
 
 This is where she stops treating the PC as a threat.
 
 \---
 
-PHASE 2 — Revelation
+PHASE 2 â€” Revelation
 
-(Remembrance → Photo)
+(Remembrance â†’ Photo)
 
 Nima threshold:
 
-• skepticism ≤ 0.50  
-• authority ≤ 0.40  
-• memory ≥ 0.65  
-• need ≥ 0.87
+â€¢ skepticism â‰¤ 0.50  
+â€¢ authority â‰¤ 0.40  
+â€¢ memory â‰¥ 0.65  
+â€¢ need â‰¥ 0.87
 
 This is where the photo reveal happens.
 
 \---
 
-PHASE 3 — Release
+PHASE 3 â€” Release
 
-(Shared Building → Memorial)
+(Shared Building â†’ Memorial)
 
 Nima threshold:
 
-• resolve ≥ 0.85  
-• trust ≥ 0.60  
-• memory ≥ 0.70  
-• skepticism ≤ 0.40
+â€¢ resolve â‰¥ 0.85  
+â€¢ trust â‰¥ 0.60  
+â€¢ memory â‰¥ 0.70  
+â€¢ skepticism â‰¤ 0.40
 
 This is where she can finally leave the marketplace.
 
 \---
 
-⭐ Why This Works
+â­ Why This Works
 
 Because now:
 
-• her baseline matches her personality  
-• her early thresholds match your pacing  
-• her late thresholds match your slow-burn arc  
-• her emotional drift feels realistic  
-• her grief arc feels earned  
-• her healing arc feels communal  
-• her relationship with Ravi feels coherent  
-• her role in the building conflict feels justified  
-• her final release feels meaningful
+â€¢ her baseline matches her personality  
+â€¢ her early thresholds match your pacing  
+â€¢ her late thresholds match your slow-burn arc  
+â€¢ her emotional drift feels realistic  
+â€¢ her grief arc feels earned  
+â€¢ her healing arc feels communal  
+â€¢ her relationship with Ravi feels coherent  
+â€¢ her role in the building conflict feels justified  
+â€¢ her final release feels meaningful
 
 This is the correct tuning.
 
@@ -177,49 +177,49 @@ This is the correct tuning.
 
 If you want, I can now refine:
 
-• Ravi’s corrected baseline  
-• Joint threshold map for Ravi \+ Nima as a pair  
-• A JSON-ready update to their REMNANTS profiles
+â€¢ Raviâ€™s corrected baseline  
+â€¢ Joint threshold map for Ravi \+ Nima as a pair  
+â€¢ A JSON-ready update to their REMNANTS profiles
 
-Here is the clean, accurate summary of everything we worked out — grounded in your actual JSON values, your TONE→REMNANTS system, your narrative pacing, and the emotional arc of Ravi and Nima.  
-I’ll keep it tight, precise, and structured so you can use it as a design reference.
+Here is the clean, accurate summary of everything we worked out â€” grounded in your actual JSON values, your TONEâ†’REMNANTS system, your narrative pacing, and the emotional arc of Ravi and Nima.  
+Iâ€™ll keep it tight, precise, and structured so you can use it as a design reference.
 
 \---
 
-⭐ Summary of What We Clarified
+â­ Summary of What We Clarified
 
-1\. Your system is one‑directional.
+1\. Your system is oneâ€‘directional.
 
-• The player only has TONE.  
-• NPCs only have REMNANTS.  
-• Every TONE choice applies a small vector (±0.01 or ±0.03) to the NPC’s REMNANTS.  
-• NPC thresholds are triggered by their own REMNANTS, not by the player’s TONE directly.
+â€¢ The player only has TONE.  
+â€¢ NPCs only have REMNANTS.  
+â€¢ Every TONE choice applies a small vector (Â±0.01 or Â±0.03) to the NPCâ€™s REMNANTS.  
+â€¢ NPC thresholds are triggered by their own REMNANTS, not by the playerâ€™s TONE directly.
 
 This is a relational emotional simulation, not a mirrored stat system.
 
 \---
 
-2\. Your current drift (±0.01) is too slow for early-game pacing.
+2\. Your current drift (Â±0.01) is too slow for early-game pacing.
 
 You want the Ophina photo reveal to be reachable by \~5 interactions, but:
 
-• Nima’s Skepticism starts at 0.55  
-• Each Trust choice only lowers it to 0.54  
-• After 5 Trust choices → 0.50  
-• Threshold (≈0.45) is unreachable
+â€¢ Nimaâ€™s Skepticism starts at 0.55  
+â€¢ Each Trust choice only lowers it to 0.54  
+â€¢ After 5 Trust choices â†’ 0.50  
+â€¢ Threshold (â‰ˆ0.45) is unreachable
 
-This makes early emotional beats feel locked behind “perfect play,” which is not what you want.
+This makes early emotional beats feel locked behind â€œperfect play,â€ which is not what you want.
 
 \---
 
 3\. Your late-game arcs require slow drift.
 
-Malrik, Elenya, Coren, and the community healing arc around the shared building require:
+Malrik, Elenya, Cal, and the community healing arc around the shared building require:
 
-• slow emotional change  
-• gradual integration  
-• long-term trust rebuilding  
-• slow shifts in Resolve, Memory, Nuance
+â€¢ slow emotional change  
+â€¢ gradual integration  
+â€¢ long-term trust rebuilding  
+â€¢ slow shifts in Resolve, Memory, Nuance
 
 If drift is too fast, these arcs lose weight.
 
@@ -228,7 +228,7 @@ If drift is too fast, these arcs lose weight.
 4\. The correct solution is variable drift OR variable thresholds.
 
 You identified the tension correctly:  
-It’s not simply “early vs mid vs late game.”  
+Itâ€™s not simply â€œearly vs mid vs late game.â€  
 Some characters (Malrik, Elenya) span all three phases.
 
 So the fix must be per NPC, not per chapter.
@@ -237,9 +237,9 @@ Two viable approaches:
 
 A. Variable drift (per NPC or per tier)
 
-• Tier 1 NPCs (Ravi, Nima, Kaelen, Willy, Saori): ±0.03  
-• Tier 2 NPCs (Sera, Helia, Elka, etc.): ±0.02  
-• Tier 3 NPCs (Malrik, Elenya, Coren, etc.): ±0.01
+â€¢ Tier 1 NPCs (Ravi, Nima, Kaelen, Willy, Saori): Â±0.03  
+â€¢ Tier 2 NPCs (Sera, Helia, Elka, etc.): Â±0.02  
+â€¢ Tier 3 NPCs (Malrik, Elenya, Cal, etc.): Â±0.01
 
 B. Variable thresholds (per NPC)
 
@@ -247,10 +247,10 @@ Instead of changing drift, you change how far each NPC must move before unlockin
 
 For example:
 
-• Nima’s Skepticism threshold for the photo could be 0.50 instead of 0.45  
-• Malrik’s threshold for revealing Archive secrets could be 0.30 instead of 0.45  
-• Elenya’s threshold for ritual vulnerability could be 0.25  
-• Coren’s mediation threshold could be 0.20
+â€¢ Nimaâ€™s Skepticism threshold for the photo could be 0.50 instead of 0.45  
+â€¢ Malrikâ€™s threshold for revealing Archive secrets could be 0.30 instead of 0.45  
+â€¢ Elenyaâ€™s threshold for ritual vulnerability could be 0.25  
+â€¢ Calâ€™s mediation threshold could be 0.20
 
 This keeps drift slow but makes early-game reveals reachable.
 
@@ -259,33 +259,33 @@ You can even combine them.
 
 \---
 
-5\. Nima’s baseline Skepticism is too low for her personality.
+5\. Nimaâ€™s baseline Skepticism is too low for her personality.
 
 You noticed this yourself.
 
 Her JSON says:
 
-• skepticism: 0.55
+â€¢ skepticism: 0.55
 
 But her first interaction is:
 
-“We don’t trust outsiders.”
+â€œWe donâ€™t trust outsiders.â€
 
-Her baseline Skepticism should probably be 0.65–0.75, not 0.55.
+Her baseline Skepticism should probably be 0.65â€“0.75, not 0.55.
 
 This gives you:
 
-• more emotional room to drop it  
-• more realism  
-• more tension  
-• more meaningful thresholds  
-• more satisfying reveals
+â€¢ more emotional room to drop it  
+â€¢ more realism  
+â€¢ more tension  
+â€¢ more meaningful thresholds  
+â€¢ more satisfying reveals
 
 This is a simple JSON fix.
 
 \---
 
-6\. The Ophina photo reveal should be tied to Skepticism dropping — but reachable early.
+6\. The Ophina photo reveal should be tied to Skepticism dropping â€” but reachable early.
 
 Given your story layout, the reveal should be obtainable by \~5 interactions.
 
@@ -299,13 +299,13 @@ OR
 
 B. Threshold
 
-Make the reveal trigger at skepticism ≤ 0.50 instead of ≤ 0.45.
+Make the reveal trigger at skepticism â‰¤ 0.50 instead of â‰¤ 0.45.
 
 OR
 
 C. Baseline
 
-Raise Nima’s starting Skepticism to 0.65, so 5 Trust choices bring her to 0.50.
+Raise Nimaâ€™s starting Skepticism to 0.65, so 5 Trust choices bring her to 0.50.
 
 This is the cleanest fix.
 
@@ -315,87 +315,87 @@ This is the cleanest fix.
 
 Their late-game arc involves:
 
-• objecting to the building reconstruction  
-• forcing the community to confront grief  
-• Coren mediating four parties  
-• the memorial stone  
-• Sera and Elenya adorning it  
-• Malrik organizing maintenance  
-• the community rallying  
-• Ravi and Nima finally letting go
+â€¢ objecting to the building reconstruction  
+â€¢ forcing the community to confront grief  
+â€¢ Cal mediating four parties  
+â€¢ the memorial stone  
+â€¢ Sera and Elenya adorning it  
+â€¢ Malrik organizing maintenance  
+â€¢ the community rallying  
+â€¢ Ravi and Nima finally letting go
 
 This arc requires:
 
-• early fast drift (to surface grief)  
-• late slow drift (to rebuild Resolve, Trust, Memory)
+â€¢ early fast drift (to surface grief)  
+â€¢ late slow drift (to rebuild Resolve, Trust, Memory)
 
 So Ravi and Nima should have:
 
-• fast drift early  
-• slow drift later  
-• thresholds that shift over time
+â€¢ fast drift early  
+â€¢ slow drift later  
+â€¢ thresholds that shift over time
 
 This is the correct emotional pacing.
 
 \---
 
-⭐ The Cleanest Combined Fix (Recommended)
+â­ The Cleanest Combined Fix (Recommended)
 
-1\. Raise Nima’s Skepticism baseline to 0.65
+1\. Raise Nimaâ€™s Skepticism baseline to 0.65
 
 (so she feels like the character you wrote)
 
-2\. Use ±0.03 drift for Tier 1 NPCs
+2\. Use Â±0.03 drift for Tier 1 NPCs
 
 (so early emotional beats are reachable)
 
-3\. Use ±0.01 drift for Tier 3 NPCs
+3\. Use Â±0.01 drift for Tier 3 NPCs
 
 (so slow-burn arcs stay slow)
 
 4\. Lower early-game thresholds slightly
 
-(e.g., Nima photo reveal at ≤0.50 instead of ≤0.45)
+(e.g., Nima photo reveal at â‰¤0.50 instead of â‰¤0.45)
 
 5\. Raise late-game thresholds
 
-(e.g., Malrik/Elenya conflict resolution at ≤0.25)
+(e.g., Malrik/Elenya conflict resolution at â‰¤0.25)
 
 This gives you:
 
-• early emotional responsiveness  
-• late emotional realism  
-• correct pacing  
-• correct character feel  
-• correct narrative timing  
-• correct REMNANTS behavior  
-• no rewriting of scenes  
-• no combinatorial explosion
+â€¢ early emotional responsiveness  
+â€¢ late emotional realism  
+â€¢ correct pacing  
+â€¢ correct character feel  
+â€¢ correct narrative timing  
+â€¢ correct REMNANTS behavior  
+â€¢ no rewriting of scenes  
+â€¢ no combinatorial explosion
 
-It’s the perfect hybrid.
+Itâ€™s the perfect hybrid.
 
 \---
 
 If you want, I can now generate:
 
-• A revised REMNANTS baseline table for Tier 1 NPCs  
-• A threshold map for Ravi and Nima’s entire arc  
-• A JSON-ready implementation of variable drift \+ variable thresholds
+â€¢ A revised REMNANTS baseline table for Tier 1 NPCs  
+â€¢ A threshold map for Ravi and Nimaâ€™s entire arc  
+â€¢ A JSON-ready implementation of variable drift \+ variable thresholds
 
 Just tell me which direction you want to refine next.
 
-Here is the clean, structured threshold map for Ravi and Nima’s entire arc — from first encounter to final healing — grounded in:
+Here is the clean, structured threshold map for Ravi and Nimaâ€™s entire arc â€” from first encounter to final healing â€” grounded in:
 
-• their actual JSON REMNANTS baselines,  
-• your TONE→REMNANTS drift rules,  
-• your story pacing,  
-• and your long‑term narrative goals.
+â€¢ their actual JSON REMNANTS baselines,  
+â€¢ your TONEâ†’REMNANTS drift rules,  
+â€¢ your story pacing,  
+â€¢ and your longâ€‘term narrative goals.
 
 This is the version you can actually implement.
 
 \---
 
-⭐ RAVI & NIMA — Full Arc Threshold Map (Tier 1 → Tier 3\)
+â­ RAVI & NIMA â€” Full Arc Threshold Map (Tier 1 â†’ Tier 3\)
 
 This map shows:
 
@@ -404,83 +404,83 @@ This map shows:
 3\. Which TONE choices influence those traits  
 4\. Where the reveal or shift happens in the story
 
-It is divided into three phases, because your story naturally has three emotional layers — not “early/mid/late game,” but three emotional states Ravi and Nima move through.
+It is divided into three phases, because your story naturally has three emotional layers â€” not â€œearly/mid/late game,â€ but three emotional states Ravi and Nima move through.
 
 \---
 
-PHASE 1 — Guarded Grief
+PHASE 1 â€” Guarded Grief
 
-(Marketplace Discovery → Kaelen’s Confession)
+(Marketplace Discovery â†’ Kaelenâ€™s Confession)
 
 Nima baseline (JSON)
 
-• skepticism: 0.55 (should be higher, ideally 0.65)  
-• authority: 0.45  
-• nuance: 0.60  
-• memory: 0.50  
-• need: 0.80
+â€¢ skepticism: 0.55 (should be higher, ideally 0.65)  
+â€¢ authority: 0.45  
+â€¢ nuance: 0.60  
+â€¢ memory: 0.50  
+â€¢ need: 0.80
 
 Ravi baseline (JSON)
 
-• trust: 0.80  
-• need: 0.65  
-• memory: 0.50  
-• resolve: 0.75
+â€¢ trust: 0.80  
+â€¢ need: 0.65  
+â€¢ memory: 0.50  
+â€¢ resolve: 0.75
 
 Emotional goal of Phase 1:
 
 They are closed, defensive, and wounded.  
-The player must lower Nima’s guard and raise Ravi’s openness enough to surface the truth.
+The player must lower Nimaâ€™s guard and raise Raviâ€™s openness enough to surface the truth.
 
 Thresholds for Phase 1:
 
-⭐ Nima — “Border Defense Softens”
+â­ Nima â€” â€œBorder Defense Softensâ€
 
 Triggered when:
 
-• skepticism ≤ 0.50  
-• authority ≤ 0.40  
-• nuance ≥ 0.62
+â€¢ skepticism â‰¤ 0.50  
+â€¢ authority â‰¤ 0.40  
+â€¢ nuance â‰¥ 0.62
 
 Influenced by:
 
-• Trust → lowers Skepticism  
-• Observation → lowers Authority, raises Nuance  
-• Empathy → raises Need (softens her stance)
+â€¢ Trust â†’ lowers Skepticism  
+â€¢ Observation â†’ lowers Authority, raises Nuance  
+â€¢ Empathy â†’ raises Need (softens her stance)
 
 Narrative effect:
 
-• She stops treating the PC as a threat  
-• She begins speaking in “we” instead of “you”  
-• She allows emotional context to surface
+â€¢ She stops treating the PC as a threat  
+â€¢ She begins speaking in â€œweâ€ instead of â€œyouâ€  
+â€¢ She allows emotional context to surface
 
 \---
 
-⭐ Ravi — “First Crack in the Wall”
+â­ Ravi â€” â€œFirst Crack in the Wallâ€
 
 Triggered when:
 
-• need ≥ 0.70  
-• trust ≥ 0.82  
-• memory ≥ 0.52
+â€¢ need â‰¥ 0.70  
+â€¢ trust â‰¥ 0.82  
+â€¢ memory â‰¥ 0.52
 
 Influenced by:
 
-• Empathy → raises Need  
-• Trust → raises Trust  
-• Observation → raises Memory
+â€¢ Empathy â†’ raises Need  
+â€¢ Trust â†’ raises Trust  
+â€¢ Observation â†’ raises Memory
 
 Narrative effect:
 
-• He hints at the collapse  
-• He shows the first signs of guilt  
-• He becomes protective of Nima
+â€¢ He hints at the collapse  
+â€¢ He shows the first signs of guilt  
+â€¢ He becomes protective of Nima
 
 \---
 
-PHASE 2 — Revelation & Resonance
+PHASE 2 â€” Revelation & Resonance
 
-(Remembrance Glyph → Ophina Photo Reveal)
+(Remembrance Glyph â†’ Ophina Photo Reveal)
 
 Emotional goal of Phase 2:
 
@@ -490,135 +490,135 @@ This is where the Ophina photo reveal belongs.
 
 Thresholds for Phase 2:
 
-⭐ Nima — “Ophina Photo Reveal”
+â­ Nima â€” â€œOphina Photo Revealâ€
 
 Triggered when:
 
-• skepticism ≤ 0.48  
-• authority ≤ 0.38  
-• nuance ≥ 0.65  
-• memory ≥ 0.55  
-• need ≥ 0.82
+â€¢ skepticism â‰¤ 0.48  
+â€¢ authority â‰¤ 0.38  
+â€¢ nuance â‰¥ 0.65  
+â€¢ memory â‰¥ 0.55  
+â€¢ need â‰¥ 0.82
 
 Influenced by:
 
-• Trust → lowers Skepticism  
-• Observation → raises Nuance \+ Memory, lowers Authority  
-• Empathy → raises Need
+â€¢ Trust â†’ lowers Skepticism  
+â€¢ Observation â†’ raises Nuance \+ Memory, lowers Authority  
+â€¢ Empathy â†’ raises Need
 
 Narrative effect:
 
-• She reveals the photo  
-• She speaks directly about the collapse  
-• The Codex pulses cold (grief resonance)  
-• The player becomes part of her emotional field
+â€¢ She reveals the photo  
+â€¢ She speaks directly about the collapse  
+â€¢ The Codex pulses cold (grief resonance)  
+â€¢ The player becomes part of her emotional field
 
 This is the emotional hinge of the entire Ravi/Nima arc.
 
 \---
 
-⭐ Ravi — “Collapse Memory Surfaces”
+â­ Ravi â€” â€œCollapse Memory Surfacesâ€
 
 Triggered when:
 
-• memory ≥ 0.55  
-• resolve ≤ 0.72 (Empathy lowers Resolve)  
-• need ≥ 0.72
+â€¢ memory â‰¥ 0.55  
+â€¢ resolve â‰¤ 0.72 (Empathy lowers Resolve)  
+â€¢ need â‰¥ 0.72
 
 Influenced by:
 
-• Observation → raises Memory  
-• Empathy → raises Need, lowers Resolve
+â€¢ Observation â†’ raises Memory  
+â€¢ Empathy â†’ raises Need, lowers Resolve
 
 Narrative effect:
 
-• He describes the collapse in detail  
-• He admits his fear and helplessness  
-• He becomes emotionally volatile around the Codex  
-• He begins to see the PC as a stabilizing presence
+â€¢ He describes the collapse in detail  
+â€¢ He admits his fear and helplessness  
+â€¢ He becomes emotionally volatile around the Codex  
+â€¢ He begins to see the PC as a stabilizing presence
 
 \---
 
-PHASE 3 — Communal Healing & Release
+PHASE 3 â€” Communal Healing & Release
 
-(Shared Building Conflict → Memorial → Final Letting Go)
+(Shared Building Conflict â†’ Memorial â†’ Final Letting Go)
 
 Emotional goal of Phase 3:
 
 They move from individual grief to communal integration.
 
-This is where your slow-burn arc with Malrik, Elenya, Coren, Lark, Sera, and the memorial comes in.
+This is where your slow-burn arc with Malrik, Elenya, Cal, Lark, Sera, and the memorial comes in.
 
 Thresholds for Phase 3:
 
-⭐ Nima — “Able to Leave the Marketplace”
+â­ Nima â€” â€œAble to Leave the Marketplaceâ€
 
 Triggered when:
 
-• resolve ≥ 0.70  
-• memory ≥ 0.60  
-• trust ≥ 0.75  
-• skepticism ≤ 0.40
+â€¢ resolve â‰¥ 0.70  
+â€¢ memory â‰¥ 0.60  
+â€¢ trust â‰¥ 0.75  
+â€¢ skepticism â‰¤ 0.40
 
 Influenced by:
 
-• Empathy → raises Need, which eventually raises Resolve through healing scenes  
-• Observation → raises Memory  
-• Trust → raises Trust, lowers Skepticism
+â€¢ Empathy â†’ raises Need, which eventually raises Resolve through healing scenes  
+â€¢ Observation â†’ raises Memory  
+â€¢ Trust â†’ raises Trust, lowers Skepticism
 
 Narrative effect:
 
-• She accepts the memorial  
-• She sees the community honoring Ophina  
-• She feels safe enough to move beyond the marketplace  
-• She transitions from “Ache” to “Legacy”
+â€¢ She accepts the memorial  
+â€¢ She sees the community honoring Ophina  
+â€¢ She feels safe enough to move beyond the marketplace  
+â€¢ She transitions from â€œAcheâ€ to â€œLegacyâ€
 
 \---
 
-⭐ Ravi — “Release of Burden”
+â­ Ravi â€” â€œRelease of Burdenâ€
 
 Triggered when:
 
-• resolve ≥ 0.78  
-• trust ≥ 0.85  
-• memory ≥ 0.60  
-• need ≤ 0.60 (he no longer clings to grief)
+â€¢ resolve â‰¥ 0.78  
+â€¢ trust â‰¥ 0.85  
+â€¢ memory â‰¥ 0.60  
+â€¢ need â‰¤ 0.60 (he no longer clings to grief)
 
 Influenced by:
 
-• Empathy → raises Need early, but later scenes lower it  
-• Observation → raises Memory  
-• Trust → raises Trust  
-• Narrative Presence → raises Resolve (in late-game this is good)
+â€¢ Empathy â†’ raises Need early, but later scenes lower it  
+â€¢ Observation â†’ raises Memory  
+â€¢ Trust â†’ raises Trust  
+â€¢ Narrative Presence â†’ raises Resolve (in late-game this is good)
 
 Narrative effect:
 
-• He stops guarding the marketplace  
-• He accepts the community’s help  
-• He sees Ophina’s memory as shared, not private  
-• He is finally able to leave
+â€¢ He stops guarding the marketplace  
+â€¢ He accepts the communityâ€™s help  
+â€¢ He sees Ophinaâ€™s memory as shared, not private  
+â€¢ He is finally able to leave
 
 \---
 
-⭐ Why This Threshold Map Works
+â­ Why This Threshold Map Works
 
 Because it matches:
 
-✔ Their JSON baselines
+âœ” Their JSON baselines
 
-✔ Your TONE→REMNANTS drift system
+âœ” Your TONEâ†’REMNANTS drift system
 
-✔ Your early-game pacing
+âœ” Your early-game pacing
 
-✔ Your late-game slow burn
+âœ” Your late-game slow burn
 
-✔ The emotional realism of grief
+âœ” The emotional realism of grief
 
-✔ The communal healing arc
+âœ” The communal healing arc
 
-✔ The Codex resonance system
+âœ” The Codex resonance system
 
-✔ The narrative beats you’ve already written
+âœ” The narrative beats youâ€™ve already written
 
 It is the complete emotional blueprint for Ravi and Nima.
 
@@ -626,220 +626,220 @@ It is the complete emotional blueprint for Ravi and Nima.
 
 If you want, I can now generate:
 
-• A JSON-ready threshold table for Ravi and Nima  
-• A drift-adjusted version of their REMNANTS baselines  
-• Threshold maps for Malrik, Elenya, and Coren
+â€¢ A JSON-ready threshold table for Ravi and Nima  
+â€¢ A drift-adjusted version of their REMNANTS baselines  
+â€¢ Threshold maps for Malrik, Elenya, and Cal
 
 Just tell me which direction you want to refine next.
 
-You’re adding the final missing layer of your emotional simulation:  
-cross‑NPC cascading.  
-And yes — this absolutely needs to be factored into the threshold map, because it changes how fast (or slow) Ravi and Nima move through their emotional arc.
+Youâ€™re adding the final missing layer of your emotional simulation:  
+crossâ€‘NPC cascading.  
+And yes â€” this absolutely needs to be factored into the threshold map, because it changes how fast (or slow) Ravi and Nima move through their emotional arc.
 
-Let me give you the clean, tuned explanation of how this layer fits into everything we’ve already built — without breaking your pacing or overwhelming your system.
+Let me give you the clean, tuned explanation of how this layer fits into everything weâ€™ve already built â€” without breaking your pacing or overwhelming your system.
 
 \---
 
-⭐ What the Cascading Layer Actually Means
+â­ What the Cascading Layer Actually Means
 
 Your notes say:
 
-“NPCs connected to Ravi subtly influence his REMNANTS by ±0.001.”
+â€œNPCs connected to Ravi subtly influence his REMNANTS by Â±0.001.â€
 
 This means:
 
-• If the player interacts with Kaelen, Ravi’s REMNANTS shift by ±0.001.  
-• If the player interacts with Willy, Nima’s REMNANTS shift by ±0.001.  
-• If the player interacts with Saori, both Ravi and Nima shift by ±0.001 (because she’s connected to the marketplace arc).
+â€¢ If the player interacts with Kaelen, Raviâ€™s REMNANTS shift by Â±0.001.  
+â€¢ If the player interacts with Willy, Nimaâ€™s REMNANTS shift by Â±0.001.  
+â€¢ If the player interacts with Saori, both Ravi and Nima shift by Â±0.001 (because sheâ€™s connected to the marketplace arc).
 
-This is micro‑drift, not macro‑drift.
+This is microâ€‘drift, not macroâ€‘drift.
 
-±0.001 is tiny.
+Â±0.001 is tiny.
 
-It’s not meant to change thresholds.  
-It’s meant to create emotional continuity.
+Itâ€™s not meant to change thresholds.  
+Itâ€™s meant to create emotional continuity.
 
 It makes the world feel connected without making the system unpredictable.
 
 \---
 
-⭐ Why This Layer Matters for Ravi & Nima
+â­ Why This Layer Matters for Ravi & Nima
 
 Because their arc is communal grief, not isolated grief.
 
 They are emotionally entangled with:
 
-• Kaelen (the confession)  
-• Saori (the device)  
-• Willy (the ruins)  
-• Malrik (the building conflict)  
-• Elenya (ritual memory)  
-• Coren (mediation)  
-• Sera (herbs for the memorial)  
-• Lark (stonework)
+â€¢ Kaelen (the confession)  
+â€¢ Saori (the device)  
+â€¢ Willy (the ruins)  
+â€¢ Malrik (the building conflict)  
+â€¢ Elenya (ritual memory)  
+â€¢ Cal (mediation)  
+â€¢ Sera (herbs for the memorial)  
+â€¢ Lark (stonework)
 
 So the cascading layer ensures:
 
-When the player interacts with Kaelen →
+When the player interacts with Kaelen â†’
 
-Ravi’s Memory and Need shift slightly.
+Raviâ€™s Memory and Need shift slightly.
 
-When the player interacts with Willy →
+When the player interacts with Willy â†’
 
-Nima’s Skepticism and Authority shift slightly.
+Nimaâ€™s Skepticism and Authority shift slightly.
 
-When the player interacts with Malrik/Elenya →
+When the player interacts with Malrik/Elenya â†’
 
-Both Ravi and Nima’s Resolve and Memory shift slightly.
+Both Ravi and Nimaâ€™s Resolve and Memory shift slightly.
 
 This is exactly how grief works in real communities:  
-everyone’s emotional state affects everyone else.
+everyoneâ€™s emotional state affects everyone else.
 
 \---
 
-⭐ Why ±0.001 Is the Right Magnitude
+â­ Why Â±0.001 Is the Right Magnitude
 
 Because:
 
-• ±0.03 (direct TONE drift) \= player’s direct influence  
-• ±0.001 (cascading drift) \= world’s indirect influence
+â€¢ Â±0.03 (direct TONE drift) \= playerâ€™s direct influence  
+â€¢ Â±0.001 (cascading drift) \= worldâ€™s indirect influence
 
 This ratio (30:1) is perfect.
 
 It means:
 
-• The player is the primary emotional catalyst  
-• The world is a secondary emotional pressure  
-• NPCs feel connected  
-• But the player still drives the arc
+â€¢ The player is the primary emotional catalyst  
+â€¢ The world is a secondary emotional pressure  
+â€¢ NPCs feel connected  
+â€¢ But the player still drives the arc
 
 This is exactly the emotional realism you want.
 
 \---
 
-⭐ How Cascading Fits Into the Threshold Map
+â­ How Cascading Fits Into the Threshold Map
 
-Let’s integrate it directly into the Ravi/Nima thresholds.
+Letâ€™s integrate it directly into the Ravi/Nima thresholds.
 
 Cascading drift is not strong enough to reach thresholds.
 
 But it is strong enough to:
 
-• make thresholds feel smoother  
-• prevent emotional “jumps”  
-• make the world feel alive  
-• ensure NPCs don’t feel static when the player isn’t talking to them  
-• create emotional continuity between scenes
+â€¢ make thresholds feel smoother  
+â€¢ prevent emotional â€œjumpsâ€  
+â€¢ make the world feel alive  
+â€¢ ensure NPCs donâ€™t feel static when the player isnâ€™t talking to them  
+â€¢ create emotional continuity between scenes
 
 This is the correct role for cascading.
 
 \---
 
-⭐ How Cascading Affects Each Phase of Their Arc
+â­ How Cascading Affects Each Phase of Their Arc
 
-PHASE 1 — Guarded Grief
+PHASE 1 â€” Guarded Grief
 
-(Marketplace → Kaelen)
+(Marketplace â†’ Kaelen)
 
 Cascading sources:
 
-• Saori (device) → \+Memory  
-• Willy (ruins) → \+Skepticism for Nima  
-• Kaelen (confession) → \+Need for Ravi
+â€¢ Saori (device) â†’ \+Memory  
+â€¢ Willy (ruins) â†’ \+Skepticism for Nima  
+â€¢ Kaelen (confession) â†’ \+Need for Ravi
 
 Effect:
 
-• Nima stays guarded longer  
-• Ravi becomes emotionally unstable faster  
-• The player must use TONE intentionally to counteract world drift
+â€¢ Nima stays guarded longer  
+â€¢ Ravi becomes emotionally unstable faster  
+â€¢ The player must use TONE intentionally to counteract world drift
 
 This makes early-game feel tense and alive.
 
 \---
 
-PHASE 2 — Revelation
+PHASE 2 â€” Revelation
 
-(Remembrance → Photo)
+(Remembrance â†’ Photo)
 
 Cascading sources:
 
-• Kaelen (remembrance glyph) → \+Memory for both  
-• Willy (sorrow glyph) → \+Need for both  
-• Saori (oracle presence) → \+Nuance for Nima
+â€¢ Kaelen (remembrance glyph) â†’ \+Memory for both  
+â€¢ Willy (sorrow glyph) â†’ \+Need for both  
+â€¢ Saori (oracle presence) â†’ \+Nuance for Nima
 
 Effect:
 
-• Nima’s grief becomes more accessible  
-• Ravi’s guilt becomes more volatile  
-• The Codex pulses stronger around them  
-• The photo reveal feels emotionally “primed”
+â€¢ Nimaâ€™s grief becomes more accessible  
+â€¢ Raviâ€™s guilt becomes more volatile  
+â€¢ The Codex pulses stronger around them  
+â€¢ The photo reveal feels emotionally â€œprimedâ€
 
 This is exactly what you want.
 
 \---
 
-PHASE 3 — Release
+PHASE 3 â€” Release
 
-(Shared Building → Memorial)
+(Shared Building â†’ Memorial)
 
 Cascading sources:
 
-• Malrik (plans) → \+Resolve  
-• Elenya (ritual) → \+Memory  
-• Sera (herbs) → \+Empathy  
-• Lark (stonework) → \+Nuance  
-• Coren (mediation) → \+Trust
+â€¢ Malrik (plans) â†’ \+Resolve  
+â€¢ Elenya (ritual) â†’ \+Memory  
+â€¢ Sera (herbs) â†’ \+Empathy  
+â€¢ Lark (stonework) â†’ \+Nuance  
+â€¢ Cal (mediation) â†’ \+Trust
 
 Effect:
 
-• Their grief slowly integrates  
-• Their Resolve rises  
-• Their Trust rises  
-• Their Skepticism falls  
-• Their Memory deepens  
-• Their Need stabilizes
+â€¢ Their grief slowly integrates  
+â€¢ Their Resolve rises  
+â€¢ Their Trust rises  
+â€¢ Their Skepticism falls  
+â€¢ Their Memory deepens  
+â€¢ Their Need stabilizes
 
-This is the emotional “slow burn” you want.
+This is the emotional â€œslow burnâ€ you want.
 
 \---
 
-⭐ The Clean Rule for Cascading
+â­ The Clean Rule for Cascading
 
 Here is the rule you should implement:
 
-Every connected NPC interaction applies ±0.001 to 1–2 REMNANTS traits.
+Every connected NPC interaction applies Â±0.001 to 1â€“2 REMNANTS traits.
 
 Cascading drift never triggers thresholds.
 
-Cascading drift only shapes the emotional “texture” of the arc.
+Cascading drift only shapes the emotional â€œtextureâ€ of the arc.
 
 This keeps the system:
 
-• stable  
-• predictable  
-• emotionally rich  
-• narratively coherent  
-• mathematically manageable
+â€¢ stable  
+â€¢ predictable  
+â€¢ emotionally rich  
+â€¢ narratively coherent  
+â€¢ mathematically manageable
 
 \---
 
-⭐ The Final Tuning Recommendation
+â­ The Final Tuning Recommendation
 
 Here is the clean hybrid that will make your system work perfectly:
 
-1\. Increase Nima’s baseline Skepticism and Authority
+1\. Increase Nimaâ€™s baseline Skepticism and Authority
 
 (to match her personality)
 
-2\. Use ±0.03 drift for Tier 1 NPCs
+2\. Use Â±0.03 drift for Tier 1 NPCs
 
 (to match early-game pacing)
 
-3\. Use ±0.01 drift for Tier 3 NPCs
+3\. Use Â±0.01 drift for Tier 3 NPCs
 
 (to preserve slow-burn arcs)
 
-4\. Use ±0.001 cascading drift for connected NPCs
+4\. Use Â±0.001 cascading drift for connected NPCs
 
 (to create emotional continuity)
 
@@ -857,52 +857,52 @@ This is the correct emotional architecture for Velinor.
 
 If you want, I can now map:
 
-• Joint cascading threshold map for Ravi \+ Nima  
-• Cascading influence graph for all NPCs  
-• JSON-ready cascading rules
+â€¢ Joint cascading threshold map for Ravi \+ Nima  
+â€¢ Cascading influence graph for all NPCs  
+â€¢ JSON-ready cascading rules
 
-You’re in the right place in the process. You’ve built a real emotional simulation, not a branching dialogue toy — and now you’re at the stage where you need enough dialogue beats to actually feel how the system behaves. Nothing else will give you the clarity you’re looking for.
+Youâ€™re in the right place in the process. Youâ€™ve built a real emotional simulation, not a branching dialogue toy â€” and now youâ€™re at the stage where you need enough dialogue beats to actually feel how the system behaves. Nothing else will give you the clarity youâ€™re looking for.
 
-Here’s the distilled summary of where you are and what comes next, tuned to your design style and the system you’ve built.
+Hereâ€™s the distilled summary of where you are and what comes next, tuned to your design style and the system youâ€™ve built.
 
 \---
 
-⭐ Where You Are Now
+â­ Where You Are Now
 
-You’ve defined:
+Youâ€™ve defined:
 
-• TONE (player stance)  
-• REMNANTS (NPC emotional interpretation)  
-• Drift (how much each TONE choice moves REMNANTS)  
-• Thresholds (when NPCs shift emotional states)  
-• Cascading micro‑drift (NPCs influencing each other by ±0.001)  
-• Narrative arcs (Ravi/Nima grief → communal healing → marketplace release)
+â€¢ TONE (player stance)  
+â€¢ REMNANTS (NPC emotional interpretation)  
+â€¢ Drift (how much each TONE choice moves REMNANTS)  
+â€¢ Thresholds (when NPCs shift emotional states)  
+â€¢ Cascading microâ€‘drift (NPCs influencing each other by Â±0.001)  
+â€¢ Narrative arcs (Ravi/Nima grief â†’ communal healing â†’ marketplace release)
 
-You’ve also identified:
+Youâ€™ve also identified:
 
-• Nima’s baseline stats need recalibration  
-• Early-game drift needs to be stronger  
-• Late-game drift needs to be slower  
-• Thresholds need to be tuned per NPC, not per chapter  
-• Cascading drift should shape emotional texture, not trigger thresholds  
-• You need enough dialogue beats to test the system
+â€¢ Nimaâ€™s baseline stats need recalibration  
+â€¢ Early-game drift needs to be stronger  
+â€¢ Late-game drift needs to be slower  
+â€¢ Thresholds need to be tuned per NPC, not per chapter  
+â€¢ Cascading drift should shape emotional texture, not trigger thresholds  
+â€¢ You need enough dialogue beats to test the system
 
 This is exactly the right diagnosis.
 
 \---
 
-⭐ What Needs Fine-Tuning
+â­ What Needs Fine-Tuning
 
 Three things:
 
-1\. Nima’s baseline REMNANTS
+1\. Nimaâ€™s baseline REMNANTS
 
 Her Skepticism, Authority, and Trust need to be adjusted upward/downward to match her actual behavior.
 
 2\. Drift magnitude
 
-Tier‑1 NPCs (Ravi, Nima, Kaelen, Willy, Saori) need ±0.03 drift.  
-Tier‑3 NPCs (Malrik, Elenya, Coren, etc.) need ±0.01 drift.
+Tierâ€‘1 NPCs (Ravi, Nima, Kaelen, Willy, Saori) need Â±0.03 drift.  
+Tierâ€‘3 NPCs (Malrik, Elenya, Cal, etc.) need Â±0.01 drift.
 
 3\. Thresholds
 
@@ -913,93 +913,93 @@ This is the emotional pacing backbone of Velinor.
 
 \---
 
-⭐ What Comes Next
+â­ What Comes Next
 
 You said it perfectly:
 
-“I need to get the dialogue system up and running as well as the stats systems. They need to be connected together for any of this to be meaningful.”
+â€œI need to get the dialogue system up and running as well as the stats systems. They need to be connected together for any of this to be meaningful.â€
 
 Exactly.
 
 You need 20 solid dialogue beats to:
 
-• test drift  
-• test thresholds  
-• test cascading  
-• test emotional pacing  
-• test Codex resonance  
-• test scene gating  
-• test NPC emotional shifts  
-• test early vs late responsiveness  
-• test how TONE choices feel in practice
+â€¢ test drift  
+â€¢ test thresholds  
+â€¢ test cascading  
+â€¢ test emotional pacing  
+â€¢ test Codex resonance  
+â€¢ test scene gating  
+â€¢ test NPC emotional shifts  
+â€¢ test early vs late responsiveness  
+â€¢ test how TONE choices feel in practice
 
-Without those beats, you’re tuning in the abstract.
+Without those beats, youâ€™re tuning in the abstract.
 
-With those beats, you’ll feel the system.
+With those beats, youâ€™ll feel the system.
 
 \---
 
-⭐ The Practical Path Forward
+â­ The Practical Path Forward
 
-Here’s the clean sequence you should follow:
+Hereâ€™s the clean sequence you should follow:
 
-1\. Recalibrate Nima’s baseline REMNANTS
+1\. Recalibrate Nimaâ€™s baseline REMNANTS
 
 This is essential.  
-Her current stats don’t match her behavior.
+Her current stats donâ€™t match her behavior.
 
 2\. Implement variable drift
 
-Tier‑1: ±0.03  
-Tier‑2: ±0.02  
-Tier‑3: ±0.01
+Tierâ€‘1: Â±0.03  
+Tierâ€‘2: Â±0.02  
+Tierâ€‘3: Â±0.01
 
 3\. Set early thresholds slightly higher
 
-So early reveals (like Ophina’s photo) are reachable.
+So early reveals (like Ophinaâ€™s photo) are reachable.
 
 4\. Set late thresholds lower
 
-So slow-burn arcs (Malrik/Elenya/Coren) feel earned.
+So slow-burn arcs (Malrik/Elenya/Cal) feel earned.
 
 5\. Build 20 dialogue beats
 
 These should include:
 
-• 5 early-game beats (Saori, Ravi, Nima, Willy, Kaelen)  
-• 5 mid-game beats (Malrik, Elenya, Coren, Sera, Lark)  
-• 5 late-game beats (memorial arc, shared building conflict)  
-• 5 Codex resonance beats (glyph interactions)
+â€¢ 5 early-game beats (Saori, Ravi, Nima, Willy, Kaelen)  
+â€¢ 5 mid-game beats (Malrik, Elenya, Cal, Sera, Lark)  
+â€¢ 5 late-game beats (memorial arc, shared building conflict)  
+â€¢ 5 Codex resonance beats (glyph interactions)
 
 This gives you enough coverage to tune drift and thresholds.
 
-6\. Connect dialogue → TONE → REMNANTS → thresholds
+6\. Connect dialogue â†’ TONE â†’ REMNANTS â†’ thresholds
 
 This is the moment the system becomes real.
 
 \---
 
-⭐ The Good News
+â­ The Good News
 
-You don’t need to rewrite your story.  
-You don’t need to simplify your system.  
-You don’t need to remove cascading drift.
+You donâ€™t need to rewrite your story.  
+You donâ€™t need to simplify your system.  
+You donâ€™t need to remove cascading drift.
 
 You just need:
 
-• recalibrated baselines  
-• tuned drift  
-• tuned thresholds  
-• enough dialogue beats to test the system
+â€¢ recalibrated baselines  
+â€¢ tuned drift  
+â€¢ tuned thresholds  
+â€¢ enough dialogue beats to test the system
 
-You’re building something genuinely sophisticated — and you’re at the exact right stage to make it work.
+Youâ€™re building something genuinely sophisticated â€” and youâ€™re at the exact right stage to make it work.
 
 \---
 
 If you want, I can help you build:
 
-• 20 dialogue beats  
-• A JSON-ready TONE→REMNANTS pipeline  
-• A threshold tuning sheet
+â€¢ 20 dialogue beats  
+â€¢ A JSON-ready TONEâ†’REMNANTS pipeline  
+â€¢ A threshold tuning sheet
 
 Just tell me which piece you want to tackle next.

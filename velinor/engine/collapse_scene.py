@@ -1,4 +1,4 @@
-"""
+﻿"""
 Building Collapse Scene for Velinor - Phase 3
 Implements the collapse event, immediate aftermath, and pathway divergence
 """
@@ -20,7 +20,7 @@ class CollapseTriggerPhase(Enum):
 class AftermathPhase(Enum):
     """Phases of immediate aftermath"""
     FACTION_SEPARATION = "faction_separation"
-    COREN_MEDIATION_ATTEMPT = "coren_mediation_attempt"
+    Cal_MEDIATION_ATTEMPT = "Cal_mediation_attempt"
     PLAYER_INTERVENTION = "player_intervention"
     PATH_DIVERGENCE = "path_divergence"
 
@@ -36,14 +36,14 @@ class CollapseTriggerScene:
     def get_initial_rumble_narration(self) -> str:
         """Opening moment of collapse"""
         return """
-        [A deep creaking sound. Not dramatic—intimate.]
+        [A deep creaking sound. Not dramaticâ€”intimate.]
         
         The ground beneath your feet shifts. Dust motes suspended in the 
         afternoon light start to dance.
         
         For a moment, nothing else happens.
         
-        Then—
+        Thenâ€”
         
         A sound like a scream. Not a person screaming. A building screaming.
         """
@@ -59,13 +59,13 @@ class CollapseTriggerScene:
         Dust explodes outward in a choking cloud.
         
         [This is not a explosion. It's a slow failure. The building doesn't 
-        fall—it breaks.]
+        fallâ€”it breaks.]
         
         Pieces of masonry rain down into the courtyard. A support column 
         tilts at an angle that shouldn't be possible. The eastern half of 
         the building becomes visibly unstable, tilted at forty-five degrees.
         
-        Then—silence.
+        Thenâ€”silence.
         
         Dust settles like ghosts being laid to rest.
         """
@@ -91,7 +91,7 @@ class CollapseTriggerScene:
         
         "Where's Soren? Where's Soren? Is anyone hurt?"
         
-        Her face is wild with fear—not for the building, but for the 
+        Her face is wild with fearâ€”not for the building, but for the 
         people. She looks from person to person in the gathering crowd, 
         desperately searching.
         
@@ -102,10 +102,10 @@ class CollapseTriggerScene:
         She collapses to her knees, sobbing.
         """
     
-    def get_coren_reaction(self) -> str:
-        """Coren's response"""
+    def get_Cal_reaction(self) -> str:
+        """Cal's response"""
         return """
-        Coren is standing in the courtyard, helping evacuate people. His 
+        Cal is standing in the courtyard, helping evacuate people. His 
         face is streaked with dust and sweat. When the building finally 
         stops moving, he looks at the ruins with an expression you can't 
         quite read.
@@ -126,17 +126,17 @@ class CollapseTriggerScene:
         
         ELENYA: "You knew. You KNEW the roof was weakening. You said you 
         wanted to 'consolidate' operations. If we'd just reinforced the 
-        structure together instead of trying to accommodate both—"
+        structure together instead of trying to accommodate bothâ€”"
         
         MALRIK: [Looking at her, eyes wide]
-        "That's not... Elenya, I didn't—"
+        "That's not... Elenya, I didn'tâ€”"
         
         ELENYA: [Voice rising, years of frustration pouring out]
         "Yes you did. You knew and you did nothing because admitting the 
         building wasn't perfect meant admitting your system doesn't work. 
         You'd rather watch it fail than actually collaborate."
         
-        MALRIK: "That's not what—"
+        MALRIK: "That's not whatâ€”"
         
         ELENYA: "Yes it is. And now look at us. The building is destroyed, 
         and you're STILL finding a way to blame me."
@@ -144,9 +144,9 @@ class CollapseTriggerScene:
         [She turns away from him and walks toward her followers. Malrik 
         stands frozen, staring at the ruins.]
         
-        [Coren approaches you. His face is streaked with dust.]
+        [Cal approaches you. His face is streaked with dust.]
         
-        COREN: "This is where they decide. Rebuild or walk away. The 
+        Cal: "This is where they decide. Rebuild or walk away. The 
         building was the only thing holding their worlds together. Now 
         they have to figure out if they will."
         """
@@ -158,7 +158,7 @@ class CollapseTriggerScene:
             "audio_ambient": "dust_settling_aftermath",
             "audio_tension": "building_structural_failure",
             "lighting": "dusty_afternoon",
-            "npcs_present": ["malrik", "elenya", "coren"]
+            "npcs_present": ["malrik", "elenya", "Cal"]
         }
 
 
@@ -182,7 +182,7 @@ class ImmediateAftermathScene:
         temporary meditation chamber. Mystics report she's been alone 
         constantly, crying, not herself.
         
-        Coren tries to bridge the gap, but both of them refuse to see him.
+        Cal tries to bridge the gap, but both of them refuse to see him.
         """
     
     def get_malrik_isolation_dialogue(self) -> str:
@@ -215,10 +215,10 @@ class ImmediateAftermathScene:
         thinks of me."
         """
     
-    def get_coren_exhaustion_dialogue(self) -> str:
-        """Coren's attempted mediation"""
+    def get_Cal_exhaustion_dialogue(self) -> str:
+        """Cal's attempted mediation"""
         return """
-        Coren finds you and collapses onto a nearby seat.
+        Cal finds you and collapses onto a nearby seat.
         
         "I've been trying to tell them... Malrik that she didn't mean what 
         she said. Elenya that he's blaming himself entirely. But they won't 
@@ -334,7 +334,7 @@ class AftermathPathDivergence:
         
         Elenya: "Then at least we'll fail honestly."
         
-        They stand looking at the ruins. Coren, nearby, exhales with relief.
+        They stand looking at the ruins. Cal, nearby, exhales with relief.
         """
     
     @staticmethod
@@ -344,7 +344,7 @@ class AftermathPathDivergence:
         [Days 5-7: Planning Begins]
         
         Joint design sessions commence. Both Malrik and Elenya contribute 
-        ideas. The tension remains, but it's productive—two perspectives 
+        ideas. The tension remains, but it's productiveâ€”two perspectives 
         in genuine dialogue instead of opposition.
         
         Malrik proposes structural integrity frameworks.
@@ -362,7 +362,7 @@ class AftermathPathDivergence:
         MYSTIC: "Elenya's grief is still there, but there's something else 
         too. Purpose. Like she's found a reason to move forward."
         
-        COREN: "I told you they could do this. I always believed."
+        Cal: "I told you they could do this. I always believed."
         """
     
     @staticmethod
@@ -378,7 +378,7 @@ class AftermathPathDivergence:
         records. It's not ideal, but it works. He throws himself into 
         organizing, into rebuilding what order he can.
         
-        Elenya relocates her group to a meditation chamber in the ruins—
+        Elenya relocates her group to a meditation chamber in the ruinsâ€”
         one of the few sections not completely destroyed. It's cramped, 
         but it's sacred, and that's enough for now.
         
@@ -392,11 +392,11 @@ class AftermathPathDivergence:
     def get_stalemate_resolution() -> str:
         """Path B: The stalemate decision"""
         return """
-        [Day 6: Coren's Final Attempt]
+        [Day 6: Cal's Final Attempt]
         
-        Coren brings them together one last time.
+        Cal brings them together one last time.
         
-        COREN: "You could still rebuild together. The space is there. The 
+        Cal: "You could still rebuild together. The space is there. The 
         materials are there. What's missing is just you two being willing 
         to try."
         
@@ -405,7 +405,7 @@ class AftermathPathDivergence:
         ELENYA: "It's working because we're not trying anymore."
         
         [Awkward silence. Both are exhausted. The collapse has taken more 
-        than the building—it's taken their hope.]
+        than the buildingâ€”it's taken their hope.]
         
         MALRIK: "Maybe that's enough for now."
         
@@ -417,8 +417,8 @@ class AftermathPathDivergence:
         
         There are no immediate plans to rebuild. The broken building becomes 
         a scar on the city, a reminder of what was lost. Both factions are 
-        functional but diminished. There's still love there—you can see it 
-        in glances, in moments of hesitation—but it's dormant now.
+        functional but diminished. There's still love thereâ€”you can see it 
+        in glances, in moments of hesitationâ€”but it's dormant now.
         
         Waiting. Possibly forever.
         """
@@ -454,7 +454,7 @@ class AftermathPathDivergence:
         
         Other NPCs notice their absence and mourn in their own ways.
         
-        COREN: [To player, privately, voice hollow]
+        Cal: [To player, privately, voice hollow]
         "I thought you might help them. But I suppose some things can't 
         be fixed. Some connections can't be rebuilt once they're broken."
         
@@ -504,3 +504,4 @@ class AftermathPathDivergence:
             "audio_tension": "unresolved_conflict",
             "lighting": "gray_aftermath"
         }
+

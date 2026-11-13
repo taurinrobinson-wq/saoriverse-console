@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/InsideMarket_00_01.unity
     guid: 3003fc9ab3398b043a462db46fb1b7f3
   - enabled: 1
+    path: Assets/Scenes/Marketplace_LeftFork_01b.unity
+    guid: acd43b46bde0daa438b890557514ce63
+  - enabled: 1
     path: Assets/Scenes/InsideMarket_00_02.unity
     guid: da36891b6615fb645898bddc436506dc
   - enabled: 1

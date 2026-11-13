@@ -1,4 +1,4 @@
-"""
+﻿"""
 Marketplace Debate Scene - Phase 2 Implementation
 
 This scene implements the first major branching dialogue from the narrative spine.
@@ -31,7 +31,7 @@ class MarketplaceDebateScene:
     """
     Complete marketplace debate scene with branching dialogue.
     
-    NPCs: Malrik (skeptical merchant), Elenya (empathetic mystic), Coren (integrator mediator)
+    NPCs: Malrik (skeptical merchant), Elenya (empathetic mystic), Cal (integrator mediator)
     Player choices map to trait types and affect:
     - NPC perception
     - Coherence level
@@ -44,7 +44,7 @@ class MarketplaceDebateScene:
         self.npc_state = {
             'malrik': {'perceived_player': None, 'openness': 0.5},
             'elenya': {'perceived_player': None, 'openness': 0.5},
-            'coren': {'perceived_player': None, 'openness': 0.5},
+            'Cal': {'perceived_player': None, 'openness': 0.5},
         }
     
     def get_intro_narration(self) -> str:
@@ -54,10 +54,10 @@ class MarketplaceDebateScene:
         children chase each other between stalls. But near the archive building,
         a small crowd has formed, giving space to three figures locked in debate.
         
-        Malrik stands rigid, arms crossed. His merchants respect him—they respect
+        Malrik stands rigid, arms crossed. His merchants respect himâ€”they respect
         power, structure, things you can calculate. Elenya is across from him,
         her hands moving as she speaks. Her followers whisper between each other.
-        And between them, Coren is trying to hold the line, though the cracks
+        And between them, Cal is trying to hold the line, though the cracks
         are starting to show.
         
         The debate has been going on for months. Everyone in Velhara knows about it.
@@ -73,9 +73,9 @@ class MarketplaceDebateScene:
         """
         return [
             {
-                'text': 'Walk directly to Coren - you want to understand',
-                'choice_id': 'entry_direct_coren',
-                'npc_response': 'Coren looks relieved to see someone new. "Maybe you can help me make sense of this."',
+                'text': 'Walk directly to Cal - you want to understand',
+                'choice_id': 'entry_direct_Cal',
+                'npc_response': 'Cal looks relieved to see someone new. "Maybe you can help me make sense of this."',
                 'next_phase': MarketplaceDebatePhase.SETUP,
                 'tone_choice': None,  # Entry doesn't commit TONE
             },
@@ -90,7 +90,7 @@ class MarketplaceDebateScene:
             {
                 'text': 'Ask a marketplace NPC what this is about - get context',
                 'choice_id': 'entry_ask_context',
-                'npc_response': 'A merchant laughs. "They\'ve been at it for months. Archive space. Malrik wants his records organized. Elenya wants mystical practice. Coren thinks they can share. I think they\'re wasting breath."',
+                'npc_response': 'A merchant laughs. "They\'ve been at it for months. Archive space. Malrik wants his records organized. Elenya wants mystical practice. Cal thinks they can share. I think they\'re wasting breath."',
                 'next_phase': MarketplaceDebatePhase.SETUP,
                 'tone_choice': TONE_EMPATHY,  # Questioning builds empathy-based understanding
                 'tone_weight': 0.15,
@@ -103,19 +103,19 @@ class MarketplaceDebateScene:
         As you approach, the debate intensifies. Malrik's voice rises slightly.
         
         "Records must be preserved. Organized. Catalogued. Stored with precision.
-        The mystics' approach—leaving things scattered about, handling artifacts
-        without proper documentation—this isn't spirituality, it's negligence."
+        The mystics' approachâ€”leaving things scattered about, handling artifacts
+        without proper documentationâ€”this isn't spirituality, it's negligence."
         
         Elenya's hands grip the edge of her shawl.
         
         "And when do we preserve the memory of what those records mean? When do we
         teach people to feel the weight of history, not just read about it? Your
-        archives are tombs—beautiful tombs, but tombs nonetheless."
+        archives are tombsâ€”beautiful tombs, but tombs nonetheless."
         
-        Coren looks between them, frustration building.
+        Cal looks between them, frustration building.
         
         "You're both right. We need preserved records AND people who understand their
-        significance. What if we arranged time-sharing? Multiple wings—"
+        significance. What if we arranged time-sharing? Multiple wingsâ€”"
         
         "Time-sharing means compromise," Malrik says, not unkindly. "And compromise
         means neither approach works."
@@ -136,20 +136,20 @@ class MarketplaceDebateScene:
         Args:
             coherence_level: Player's current coherence (0-100)
             player_primary_trait: Player's dominant trait pattern
-            npc_conflicts: Dict of NPC → conflict_level ("ally", "neutral", "opposed")
+            npc_conflicts: Dict of NPC â†’ conflict_level ("ally", "neutral", "opposed")
         """
         choices = []
         
         # ========== EMPATHY PATH ==========
         # Always available
         choices.append({
-            'text': 'Support Coren\'s integration vision: "Why can\'t it be both?"',
+            'text': 'Support Cal\'s integration vision: "Why can\'t it be both?"',
             'choice_id': 'branch_empathy_synthesis',
             'primary_trait': TONE_EMPATHY,
             'secondary_trait': TONE_NARRATIVE_PRESENCE,
             'trait_weight': 0.3,
             'secondary_weight': 0.2,
-            'npc_name': 'Coren',
+            'npc_name': 'Cal',
             'scene_name': 'marketplace_debate',
             'response': '"[To player] You understand. Thank you. But convincing them is another matter." [Malrik nods slightly. Elenya looks hopeful.]',
             'consequence': 'You\'ve positioned yourself as a bridge-builder. The factions will look to you.',
@@ -164,7 +164,7 @@ class MarketplaceDebateScene:
             'trait_weight': 0.3,
             'npc_name': 'Malrik',
             'scene_name': 'marketplace_debate',
-            'response': '"[Malrik nods] Finally, someone who understands. [Elenya looks hurt.] This isn\'t about deeper truth—it\'s functional."',
+            'response': '"[Malrik nods] Finally, someone who understands. [Elenya looks hurt.] This isn\'t about deeper truthâ€”it\'s functional."',
             'consequence': 'Malrik respects your clarity. Elenya feels dismissed.',
         })
         
@@ -180,7 +180,7 @@ class MarketplaceDebateScene:
                 'secondary_weight': 0.3,
                 'npc_name': 'Elenya',
                 'scene_name': 'marketplace_debate',
-                'response': '"[Silence. Elenya\'s eyes widen.] You... yes. That\'s... [Malrik\'s rigid posture softens.] [Coren quietly] You see it. Most people don\'t."',
+                'response': '"[Silence. Elenya\'s eyes widen.] You... yes. That\'s... [Malrik\'s rigid posture softens.] [Cal quietly] You see it. Most people don\'t."',
                 'consequence': 'You\'ve touched something deeper. Both factions recognize you understand them.',
                 'coherence_locked': True,  # This response only works if player is being authentic
             })
@@ -195,7 +195,7 @@ class MarketplaceDebateScene:
                 'secondary_trait': TONE_OBSERVATION,
                 'trait_weight': 0.35,
                 'secondary_weight': 0.2,
-                'npc_name': 'Coren',
+                'npc_name': 'Cal',
                 'scene_name': 'marketplace_debate',
                 'response': '"Power, resources, and the value of different ways of knowing. They\'re both right. They\'re both needed."',
                 'consequence': 'You\'ve established yourself as someone who sees beneath surface conflicts.',
@@ -245,8 +245,8 @@ class MarketplaceDebateScene:
             
             Over the next days, people start talking about you as someone who "understands both sides."
             
-            Coren returns to you often, wanting to talk through the problem. Malrik watches you with
-            calculation—is there value in knowing someone trusted by the mystics? Elenya seeks you out,
+            Cal returns to you often, wanting to talk through the problem. Malrik watches you with
+            calculationâ€”is there value in knowing someone trusted by the mystics? Elenya seeks you out,
             hoping you might help Malrik see the spiritual dimension of preservation.
             
             But the archive building remains contested. And tensions continue to rise.
@@ -273,13 +273,13 @@ class MarketplaceDebateScene:
             return f"""
             {consequence}
             
-            That night, Malrik and Elenya actually talk. Not about the archive building—about why they
+            That night, Malrik and Elenya actually talk. Not about the archive buildingâ€”about why they
             care so much. Malrik confesses his fear of losing everything. Elenya confesses her grief at
             feeling erased. It's not a resolution. But it's a beginning.
             
             They don't solve the archive problem. But they start understanding each other.
             
-            Coren seems lighter than he has been in months.
+            Cal seems lighter than he has been in months.
             
             Then, the building shows signs of structural damage. And the factions must actually decide
             what to do together.
@@ -290,7 +290,7 @@ class MarketplaceDebateScene:
             {consequence}
             
             By asking the right questions, you've positioned yourself as someone worth listening to.
-            All three of them—Malrik, Elenya, and Coren—start seeking your input on decisions.
+            All three of themâ€”Malrik, Elenya, and Calâ€”start seeking your input on decisions.
             
             You become something like a counselor to the factions. It's an unusual position for someone
             so new to Velhara. Some people resent it. Others appreciate it.
@@ -303,7 +303,7 @@ class MarketplaceDebateScene:
             {consequence}
             
             The debate continues. Malrik and Elenya are more entrenched than before.
-            Coren looks increasingly tired.
+            Cal looks increasingly tired.
             
             Then, the building shows signs of structural failure.
             """
@@ -313,12 +313,12 @@ class MarketplaceDebateScene:
         return """
         The crowd around the debaters begins to disperse. People have work to do.
         Malrik walks away, still thinking. Elenya stands in the square a moment longer.
-        Coren approaches you before leaving.
+        Cal approaches you before leaving.
         
         "Whatever you did here, thank you. Or I'll thank you when this is all over."
         
         As the marketplace returns to normal commerce, you realize something has shifted.
-        The factions know who you are now. And when the next crisis comes—and it will—
+        The factions know who you are now. And when the next crisis comesâ€”and it willâ€”
         they'll remember how you responded to this one.
         """
     
@@ -351,5 +351,6 @@ def create_marketplace_debate_scene() -> Dict:
         'get_resolution_narration': scene.get_resolution_narration,
         'exit_narration': scene.get_exit_narration(),
         'assets': scene.get_scene_assets(),
-        'npcs': ['Malrik', 'Elenya', 'Coren'],
+        'npcs': ['Malrik', 'Elenya', 'Cal'],
     }
+

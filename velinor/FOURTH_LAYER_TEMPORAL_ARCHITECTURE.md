@@ -1,6 +1,6 @@
-# The Fourth Layer: Temporal Architecture & REMNANTS Cascades
+﻿# The Fourth Layer: Temporal Architecture & REMNANTS Cascades
 
-*A system where every player action is a simultaneous cause across past, present, and future — encoded through memory, emotional coherence, and NPC REMNANTS propagation.*
+*A system where every player action is a simultaneous cause across past, present, and future â€” encoded through memory, emotional coherence, and NPC REMNANTS propagation.*
 
 ## Core Temporal Structure
 
@@ -12,7 +12,7 @@ context. 3. **The Future** (The Player): The only consciousness capable of movin
 with agency. 4. **The Wound** (Velinor): The collapse itself, existing as fragmented consciousness
 across all three states.
 
-**The Fourth Layer Insight**: Time isn't a line — it's a field. The player moves through this field with intent, and every action ripples through all three temporal states *simultaneously*.
+**The Fourth Layer Insight**: Time isn't a line â€” it's a field. The player moves through this field with intent, and every action ripples through all three temporal states *simultaneously*.
 
 ---
 
@@ -25,14 +25,14 @@ across all three states.
 *See [CANONICAL_ENDINGS_CONSOLIDATION.md](CANONICAL_ENDINGS_CONSOLIDATION.md) for complete ending details.*
 
 ### **Synthesis Path** (Player advocated for integration)
-- **Ending 1: The Hopeful Synthesis** (Restart + Rebuild Together) — System becomes mirror of people's coherence
-- **Ending 4: The Earned Synthesis** (Abandon + Rebuild Together) — People build without system dependency
-- **Ending 5: The Technical Solution** (Restart + Partial Rebuild) — System and people learn together
+- **Ending 1: The Hopeful Synthesis** (Restart + Rebuild Together) â€” System becomes mirror of people's coherence
+- **Ending 4: The Earned Synthesis** (Abandon + Rebuild Together) â€” People build without system dependency
+- **Ending 5: The Technical Solution** (Restart + Partial Rebuild) â€” System and people learn together
 
 ### **Skeptical Path** (Player maintained critical distance)
-- **Ending 2: The Pyrrhic Restart** (Restart + Abandon/Fracture) — System works but people didn't learn
-- **Ending 3: The Honest Collapse** (Abandon + Abandon/Fracture) — Honest rebuilding without illusion
-- **Ending 6: The Stalemate** (Abandon + Partial Rebuild) — People work without system, slowly and uncertain
+- **Ending 2: The Pyrrhic Restart** (Restart + Abandon/Fracture) â€” System works but people didn't learn
+- **Ending 3: The Honest Collapse** (Abandon + Abandon/Fracture) â€” Honest rebuilding without illusion
+- **Ending 6: The Stalemate** (Abandon + Partial Rebuild) â€” People work without system, slowly and uncertain
 
 ---
 
@@ -113,7 +113,7 @@ itself.
 | **Dalen the Rusted Guide** | Ache, Collapse, Sovereignty | Carries environmental scars as visible wounds, teaches through fragmentation | Memory (0.75), Skepticism (0.75), Need (0.85), Authority (0.65), Empathy (0.7) |
 | **Mariel the Weaver** | Ache, Trust (and Legacy variant) | Weaves meaning from ghost signals and memory echoes | Memory (0.8), Nuance (0.9), Empathy (0.75), Skepticism (0.65), Need (0.7) |
 
-**Temporal role**: These NPCs *are* the fragmentation made visible. Player bonds with them don't "fix" them immediately — instead, the player helps them integrate their contradiction. They become bridges between the wound and coherence.
+**Temporal role**: These NPCs *are* the fragmentation made visible. Player bonds with them don't "fix" them immediately â€” instead, the player helps them integrate their contradiction. They become bridges between the wound and coherence.
 
 **REMNANTS effect**: High Skepticism + Nuance means they see through surface meaning. When the player helps them, they gain the ability to teach others how to hold complexity. This is crucial for emotional coherence.
 
@@ -127,7 +127,7 @@ state the entire world is trying to reach.
 |-----|-----------|------|-------------|
 | **Captain Veynar** | Collapse, Sovereignty, Trust | Military precision meeting emotional need, protects space for healing | Authority (0.85), Resolve (0.9), Trust (0.75), Empathy (0.7), Need (0.6) |
 | **Juria & Korinth** | Joy | Model functioning partnership, teach what restored relationship looks like | Trust (0.85), Empathy (0.8), Resolve (0.7), Authority (0.6), Nuance (0.65) |
-| **Coren the Mediator** | Collapse, Sovereignty | Holds space between contradiction, teaches integration | Nuance (0.95), Authority (0.8), Empathy (0.8), Trust (0.7), Memory (0.65) |
+| **Cal the Mediator** | Collapse, Sovereignty | Holds space between contradiction, teaches integration | Nuance (0.95), Authority (0.8), Empathy (0.8), Trust (0.7), Memory (0.65) |
 | **Lira** | Joy | Uncomplicated joy, teaches what happiness freed from trauma looks like | Empathy (0.85), Trust (0.8), Resolve (0.65), Nuance (0.55), Authority (0.5) |
 
 **Temporal role**: These NPCs show what restoration looks like. Player bonds with them create *models of coherence* that other NPCs can learn from. They are proof that integration is possible.
@@ -137,7 +137,7 @@ state the entire world is trying to reach.
 ---
 
 ### **Liminal Keepers** (Transition, Threshold)
-These NPCs exist at boundaries — between domains, between states, between past and present.
+These NPCs exist at boundaries â€” between domains, between states, between past and present.
 
 | NPC | Domain Span | Role | Key REMNANTS |
 |-----|-----------|------|-------------|
@@ -179,7 +179,7 @@ directions simultaneously:
 The action reaches backward through the NPC's connection to Saori and archived memory.
 
 **Example: Player helps Nordia process grief**
-- Nordia's Memory increases (0.85 → 0.92)
+- Nordia's Memory increases (0.85 â†’ 0.92)
 - This resonates with Malrik's Archive (they share legacy domain)
 - Malrik gains access to clearer memory fragments about Nordia's past
 - Saori's guilt about the people she lost becomes more *specific and healable* (not vague cosmic regret, but "I failed Nordia specifically")
@@ -188,10 +188,10 @@ The action reaches backward through the NPC's connection to Saori and archived m
 ### **Present Contagion** (REMNANTS Network Layer)
 The action immediately affects nearby NPCs through emotional resonance.
 
-**Example: Player increases Ravi's Trust (0.8 → 0.88)**
-- Ravi's Empathy increases by proxy (0.8 → 0.84) — trust creates emotional safety
+**Example: Player increases Ravi's Trust (0.8 â†’ 0.88)**
+- Ravi's Empathy increases by proxy (0.8 â†’ 0.84) â€” trust creates emotional safety
 - Nearby Present Dwellers (Nima, Sera, Helia) sense this shift
-- Their Trust values increase slightly (0.65-0.75 → 0.68-0.78)
+- Their Trust values increase slightly (0.65-0.75 â†’ 0.68-0.78)
 - The player notices NPCs are less defended, more open to dialogue
 - If player helped Ravi in a public space, the effect is stronger and spreads further
 
@@ -199,7 +199,7 @@ The action immediately affects nearby NPCs through emotional resonance.
 The action determines what state becomes possible in the restart.
 
 **Example: Player helps Kaelen (Wound Bearer) integrate their skepticism with trust**
-- Kaelen's Skepticism doesn't decrease — instead, their Trust increases (0.6 → 0.75)
+- Kaelen's Skepticism doesn't decrease â€” instead, their Trust increases (0.6 â†’ 0.75)
 - This is critical: Kaelen is now a bridge between doubt and belief
 - In the Restoration ending, Kaelen becomes one of the few who can explain to younger generations *why* skepticism about systems is necessary
 - In the Neutral ending, Kaelen teaches the next generation to question inherited systems
@@ -240,7 +240,7 @@ integrated
 **Example cascade**:
 1. Player spends time with Ravi (building Trust) 2. Ravi's Empathy increases as he feels safer 3.
 Nima feels Ravi's emotional shift (through Empathy contagion) 4. Nima's Need decreases (fewer "why
-am I so sad?" questions) — replaced by community feeling 5. Sera notices and becomes bolder in her
+am I so sad?" questions) â€” replaced by community feeling 5. Sera notices and becomes bolder in her
 own choices 6. The entire circle becomes more coherent
 
 ### **Cluster: The Wound Weavers**
@@ -254,7 +254,7 @@ own choices 6. The entire circle becomes more coherent
 
 **Example cascade**:
 1. Player helps Kaelen see their ghostly signals as actual information 2. Kaelen's Skepticism
-becomes wisdom (still questioning, but productive) 3. Drossel feels this shift — stops seeing
+becomes wisdom (still questioning, but productive) 3. Drossel feels this shift â€” stops seeing
 conspiracy, starts seeing pattern 4. Korrin's gossip becomes more accurate (Skepticism + Memory) 5.
 Dalen teaches others to read environmental scars as maps, not wounds 6. Mariel weaves these insights
 into a new form of meaning-making
@@ -262,16 +262,16 @@ into a new form of meaning-making
 ### **Cluster: The Emergence Circle**
 *Future Shepherds who model integrated possibility*
 
-**Core members**: Veynar, Coren, Juria & Korinth, Lira
+**Core members**: Veynar, Cal, Juria & Korinth, Lira
 - Shared trait: Authority 0.7+, showing or teaching integrated states
 - Shared resonance: They hold the "after" that the world is trying to become
 - Cascading dynamic: They inspire. When they are strong, others believe integration is possible
-- Critical path: They don't need to be "helped" — rather, other NPCs need to witness them and believe
+- Critical path: They don't need to be "helped" â€” rather, other NPCs need to witness them and believe
 
 **Example cascade**:
 1. Player witnesses Veynar's Authority (decisive action from compassion) 2. Veynar's presence
-increases the player's own Resolve 3. Coren's Nuance becomes visible as necessary (complexity +
-care) 4. Juria & Korinth's Trust in each other spreads — people see it's possible 5. Lira's joy
+increases the player's own Resolve 3. Cal's Nuance becomes visible as necessary (complexity +
+care) 4. Juria & Korinth's Trust in each other spreads â€” people see it's possible 5. Lira's joy
 becomes contagious (not fake, but earned) 6. The world shifts: "This is what we're trying to become"
 
 ### **Cluster: The Threshold Walkers**
@@ -281,7 +281,7 @@ becomes contagious (not fake, but earned) 6. The world shifts: "This is what we'
 - Shared trait: Live in impossible spaces, still survive
 - Shared resonance: They teach adaptation to change, not resistance
 - Cascading dynamic: They are resources for anyone attempting transformation
-- Critical path: They don't form a tight network — instead, each serves as a teacher-guide for different types of NPC transitions
+- Critical path: They don't form a tight network â€” instead, each serves as a teacher-guide for different types of NPC transitions
 
 **Example cascade**:
 1. Player helps Orvak navigate broken corelink without being broken by it 2. Orvak's Resolve
@@ -337,8 +337,8 @@ player determines what becomes possible after the restart
 - [ ] Create relational distance/affinity map (Archive members resonate together, Wound Bearers resonate together, etc)
 - [ ] Implement contagion logic: when one NPC's trait increases, nearby aligned NPCs gain reduced increases
 - [ ] Track player bond depth for each NPC (tracked in streamlit_state.py as npc_bonds dictionary)
-- [ ] Map bond depth to REMNANTS increases (bond_level 1-5 → trait increase of 0.05-0.25)
-- [ ] Create past resonance system: player actions on Present/Wound → Saori memory clarity increases
+- [ ] Map bond depth to REMNANTS increases (bond_level 1-5 â†’ trait increase of 0.05-0.25)
+- [ ] Create past resonance system: player actions on Present/Wound â†’ Saori memory clarity increases
 - [ ] Create restart outcome calculator: sum Archive Memory + Present Trust + Wound Nuance + Shepherd Authority
 - [ ] Implement three-path narrative: Restoration (high scores), Failure (low scores), Neutral (medium/uncompleted)
 - [ ] Create NPC state persistence: REMNANTS values carry forward if Restoration ending is chosen
@@ -400,7 +400,7 @@ became necessary for survival"
 1. "How to honor what was without being trapped by it" 2. "The ceremonial space for integration"
 
 These fragments, when collected, form a complete emotional archaeology of the collapse. The player
-doesn't "solve" the collapse history — but they can *understand* it, feel its weight, and help
+doesn't "solve" the collapse history â€” but they can *understand* it, feel its weight, and help
 others integrate it.
 
 ---
@@ -464,3 +464,4 @@ And the player is the catalyst that makes integration possible.
 ---
 
 *This is the system where memory is time, bonds are causality, and every moment contains all three states at once.*
+

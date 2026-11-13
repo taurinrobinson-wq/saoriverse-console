@@ -24,3 +24,45 @@ When she died, rain ticking against the farmhouse roof, she gripped Lioren's wri
 Those were her last words.
 
 Lioren carried them east, through rain and dry wind and hunger, until she reached Velhara—a city being eaten by trees, where towers leaned like old bones and the market huddled beneath broken stone. She arrived wiry and weather‑toughened, wearing her mother's coat, carrying the ache of two parents who survived collapse not through memory, but through instinct. And now she stood beneath towers she did not understand, guided only by the land‑born knowledge her parents had given her, and the faint pulse of the codex at her wrist—a device pressed into her hand only five days earlier by Saori, a woman who had planted a field of questions that bore no answers, not yet.
+
+---
+
+## Lioren's Unique Position: The Unimplanted
+
+### Why She Was Never Implanted
+
+Lioren was only **three years old** when the Corelink system collapsed. The minimum age for implantation was five—thought to be the developmental threshold where the mind gained greater organization and permanence. By the time neurotechnicians believed an implant could be safely integrated, the collapse had already occurred.
+
+**This single fact makes Lioren the only person the codex could ever work with.**
+
+### Why This Matters
+
+Everyone else in Velhara—her parents included—carried neural implants that:
+- Directly connected them to the Corelink network
+- Suffered catastrophic fragmentation when the system failed
+- Left them unable to understand complex systems or maintain procedural memory
+- Made them unable to access or interface with Corelink-connected nodes
+
+Lioren, by accident of age, was spared from implantation. She entered the world with an unconnected mind—a cognitive isolation that would later make her invaluable.
+
+### The Cost of Survival
+
+Lioren was raised by two cognitively fractured people. Her parents had skills their bodies remembered—how to farm, how to cook, how to survive—but minds that couldn't hold abstract thought, maintain continuous memory, or plan beyond immediate need.
+
+This mirrors real-world experiences with dementia and Alzheimer's. They were her caregivers, but she was managing a household shaped by their cognitive absence. She learned:
+- How to interpret fragmented speech as meaning
+- How to function in a home that didn't operate on logic
+- How to carry weight that wasn't hers to carry
+- How to survive through observation, not instruction
+
+When her mother died, Lioren inherited the ache of losing someone twice—once to the collapse, and again to death itself.
+
+### Forced into the Marketplace
+
+With both parents gone, Lioren couldn't survive alone on the farmland. The marketplace—chaotic, violent, and full of fractured minds—became her only option. She arrived with nothing but:
+- The embodied knowledge her parents had given her
+- The trauma of their cognitive absence
+- An unimplanted mind that could still think clearly in a world of fragmentation
+- Questions she had no way to answer
+
+This is who Saori found when she pressed the codex into Lioren's hand.

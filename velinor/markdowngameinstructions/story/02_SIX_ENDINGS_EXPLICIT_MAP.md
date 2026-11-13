@@ -1,4 +1,4 @@
-# Velinor: Six Endings Explicit Map
+﻿# Velinor: Six Endings Explicit Map
 
 ## Core Design Philosophy
 
@@ -13,7 +13,7 @@ archive together.
 Because: **Systems cannot do what people cannot.**
 
 If the people of Velhara have not learned synthesis, restarting the Corelink will only amplify their
-incoherence again. If they have learned synthesis, they don't need the Corelink—they can build
+incoherence again. If they have learned synthesis, they don't need the Corelinkâ€”they can build
 coherence themselves.
 
 ---
@@ -30,7 +30,7 @@ The six endings are created by two axes:
 - **Rebuild Together** (Chose synthesis, integration)
 - **Abandon the Building** (Chose fracture, separation)
 
-This creates a 2×3 matrix (2 player choices × 3 intermediate states) that gives six distinct
+This creates a 2Ã—3 matrix (2 player choices Ã— 3 intermediate states) that gives six distinct
 narrative endings.
 
 ---
@@ -45,7 +45,7 @@ narrative endings.
 
 **Narrative Arc:**
 The player's journey through Velinor has modeled the possibility of holding multiple truths. When
-the player reaches the Corelink with Saori and Velinor, they propose restarting the system—but this
+the player reaches the Corelink with Saori and Velinor, they propose restarting the systemâ€”but this
 time with a difference. The rebuilt archive in the city becomes a literal mirror of what the
 Corelink should do: hold contradictory perspectives in dialogue, not hierarchy.
 
@@ -76,12 +76,12 @@ It amplifies coherence that the people have already chosen for themselves.
 - Player's accumulated choices showed intellectual understanding but emotional distance
 
 **Narrative Arc:**
-The player has understood the philosophy—that synthesis is possible—but the people of Velhara didn't
+The player has understood the philosophyâ€”that synthesis is possibleâ€”but the people of Velhara didn't
 follow. When the player reaches the Corelink, they choose to restart it anyway, hoping the system
 will succeed where the people failed.
 
 But at the edge of the city, Malrik and Elenya walk away from the ruins of their archive. They
-couldn't find common ground. The Corelink restarts, and the city lights up again—but the light is
+couldn't find common ground. The Corelink restarts, and the city lights up againâ€”but the light is
 hollow. The fractures remain.
 
 The system hums with power, but the people are still divided. History is repeating.
@@ -110,7 +110,7 @@ The system hums with power, but the people are still divided. History is repeati
 
 **Narrative Arc:**
 The player and Velinor stand in the chamber, looking at the Corelink. The player chooses not to
-restart it. They choose to let it rest. Saori and Velinor are aligned in this—no more manufactured
+restart it. They choose to let it rest. Saori and Velinor are aligned in thisâ€”no more manufactured
 solutions.
 
 But the city is still broken. Malrik and Elenya never found their way to collaboration. The people
@@ -122,7 +122,7 @@ It's difficult. It's honest. It's not hopeful, but it's real.
 - The Corelink dims, then goes dark
 - The chamber becomes silent and cold
 - Velhara's lights go out, one by one
-- But in the marketplace, small fires light up—people gathering, rebuilding by hand
+- But in the marketplace, small fires light upâ€”people gathering, rebuilding by hand
 - Malrik's archive is a skeleton of what it was
 - Elenya's mystics scatter into the ruins
 
@@ -148,7 +148,7 @@ The player, Saori, and Velinor stand in the chamber. The choice is clear: don't 
 Let the people build what comes next.
 
 Above, in the city, Malrik and Elenya have already chosen to rebuild their archive together. It's
-not finished—it may never be finished. But they're doing the work, side by side, learning to hold
+not finishedâ€”it may never be finished. But they're doing the work, side by side, learning to hold
 each other's truths.
 
 The Corelink goes dark, and for a moment there's silence. Then, from the city above, comes the sound
@@ -161,10 +161,10 @@ most real.
 **Visual/Thematic Language:**
 - The Corelink glows one last time, then fades into silence
 - The chamber becomes a memorial, not a control center
-- Above, the rebuilt archive is half-Malrik, half-Elenya—a physical manifestation of integration
+- Above, the rebuilt archive is half-Malrik, half-Elenyaâ€”a physical manifestation of integration
 - Saori and Velinor's connection is healing
 - The marketplace is chaotic but alive with possibility
-- Coren stands between Malrik and Elenya, no longer as mediator, but as friend
+- Cal stands between Malrik and Elenya, no longer as mediator, but as friend
 
 **End Monologue:**
 *"We chose not to let the machine decide anymore. So now we have to be brave enough to decide for ourselves. It's harder. But it's ours."*
@@ -185,17 +185,17 @@ most real.
 
 **Narrative Arc:**
 The player reaches the Corelink as news arrives: Malrik and Elenya have started rebuilding their
-archive together. It's slow, tentative, incomplete—but it's happening.
+archive together. It's slow, tentative, incompleteâ€”but it's happening.
 
 The player chooses to restart the Corelink. The system comes back online, and it feels different
 this time. Not perfect, but better. The Corelink picks up signals from the rebuilding archive
-below—it learns, in real time, what synthesis looks like.
+belowâ€”it learns, in real time, what synthesis looks like.
 
 The system and the people are in dialogue now, slowly calibrating together.
 
 **Visual/Thematic Language:**
 - The Corelink restarts with a warmer tone than before
-- As it powers up, it receives signals from the archive—the two factions' voices intertwining in the data
+- As it powers up, it receives signals from the archiveâ€”the two factions' voices intertwining in the data
 - Malrik and Elenya are visible in the distance, still working, still figuring it out
 - Saori and Velinor's connection is healing, slowly
 - The city lights up, but with a softer, more distributed light
@@ -219,7 +219,7 @@ The system and the people are in dialogue now, slowly calibrating together.
 
 **Narrative Arc:**
 The player chooses not to restart the Corelink. The system goes dark. But this time, it's
-different—there's movement in the city. Malrik and Elenya are rebuilding their archive, slowly,
+differentâ€”there's movement in the city. Malrik and Elenya are rebuilding their archive, slowly,
 imperfectly, without any system to guide them.
 
 It's messy. It's uncertain. The factions remain distinct and sometimes in conflict. But there's no
@@ -232,7 +232,7 @@ comes next.
 - The Corelink goes dark
 - The city below is dim, lit only by small fires and bioluminescent plants
 - Malrik and Elenya work in the archive, but it's tentative, uncertain
-- Coren moves between them, still trying to mediate, but without institutional power
+- Cal moves between them, still trying to mediate, but without institutional power
 - The ruins are dark and quiet
 - Saori and Velinor's connection is healing slightly, but slowly
 
@@ -257,7 +257,7 @@ comes next.
 - Marketplace debates: Advocate for shared solutions
 - Other NPC interactions: Demonstrate consistent pattern of integration
 
-→ **Unlocks:** Endings 1, 4, 5 (synthesis-leaning)
+â†’ **Unlocks:** Endings 1, 4, 5 (synthesis-leaning)
 
 **Player's Path to Skepticism (Critical Distance)**
 - Early choices with Ravi/Nima: Challenge their assumptions
@@ -265,22 +265,22 @@ comes next.
 - Glyph research: Investigate system design critically
 - Other NPC interactions: Maintain independence
 
-→ **Unlocks:** Endings 2, 3, 6 (skeptical-leaning)
+â†’ **Unlocks:** Endings 2, 3, 6 (skeptical-leaning)
 
 **Player's Path to Synthesis + Skepticism (True Synthesis)**
 - Mix of empathy and critical thinking
 - Respect for perspectives + holding them accountable
 - Understanding both system failures AND human capability
-- Consistent pattern of integration without naïveté
+- Consistent pattern of integration without naÃ¯vetÃ©
 
-→ **Unlocks:** Ending 4 (The Earned Synthesis - if Malrik/Elenya rebuild)
+â†’ **Unlocks:** Ending 4 (The Earned Synthesis - if Malrik/Elenya rebuild)
 
 ### **Malrik & Elenya's Rebuild State**
 
 **Rebuild Together**
 - Triggered when player has advocated for integration consistently
 - Triggered when player mediated during building collapse
-- Triggered when Coren sees player modeling synthesis
+- Triggered when Cal sees player modeling synthesis
 - Results in Endings 1, 4
 
 **Abandon/Stalemate**
@@ -345,3 +345,4 @@ This mirrors the core philosophy: **Systems cannot do what people cannot.**
 
 The endings aren't rewards for playing correctly. They're mirrors for the player to see what
 philosophy they actually embodied through the game.
+

@@ -1,4 +1,4 @@
-{
+﻿{
   "glyphs": [
     {
       "domain": "Collapse",
@@ -17,7 +17,7 @@
       },
       "glyph_name": "Glyph of Fractured Memory",
       "location": "Archive Chamber (Ruins Where Inscriptions Blur)",
-      "storyline_summary": "Malrik shows the player chambers where the Corelink system stored emotional data — now corrupted, glitching, displaying fragments of millions of private moments. After the archive collapse the glyph becomes central to salvage options: choices to rescue, reconstruct, or abandon records influence rebuild potential and Malrik/Elenya's relationship. The glyph manifests when the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning from fragments.",
+      "storyline_summary": "Malrik shows the player chambers where the Corelink system stored emotional data â€” now corrupted, glitching, displaying fragments of millions of private moments. After the archive collapse the glyph becomes central to salvage options: choices to rescue, reconstruct, or abandon records influence rebuild potential and Malrik/Elenya's relationship. The glyph manifests when the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning from fragments.",
       "story_seed": "",
       "tone_integration": [
         "fragmented",
@@ -226,7 +226,7 @@
       },
       "glyph_name": "Glyph of Measured Step",
       "location": "Archive Interior (Reclaimed Chambers)",
-      "storyline_summary": "Malrik navigates the archive building's interior with the player, each step deliberate and measured. The glyph now integrates archive collapse context: when the building fails this motif signals the tension between preservation and ritual—choices here influence Malrik/Elenya reconciliation and rebuild potential. The glyph manifests when the player moves through the chambers and recognizes discipline as both protection and a barrier to intimacy.",
+      "storyline_summary": "Malrik navigates the archive building's interior with the player, each step deliberate and measured. The glyph now integrates archive collapse context: when the building fails this motif signals the tension between preservation and ritualâ€”choices here influence Malrik/Elenya reconciliation and rebuild potential. The glyph manifests when the player moves through the chambers and recognizes discipline as both protection and a barrier to intimacy.",
       "story_seed": "Malrik walks the player through the archive building, demonstrating his archival precision. The tension with Elenya's spiritual approach becomes visible.",
       "tone_integration": [
         "contemplative",
@@ -273,7 +273,7 @@
         "path_a": "Affirm Malrik's archival discipline as valid",
         "path_b": "Point out that his method is slowly breaking him"
       },
-      "original_storyline_text": "Malrik navigates the archive building's interior with the player, each step deliberate and measured. He catalogs, he pauses, he explains the logic of placement. But as they walk, the player sees evidence of Elenya everywhere: dried flowers left on shelves, ritual marks on walls, songs scratched into corners, spaces where she's tried to sanctify what he's trying to organize. Malrik moves with discipline through this contested space. His jaw is tight. His explanations are precise. But the player notices something: where his eyes linger on her offerings. He never removes them. In the quiet chambers, Malrik's measured step becomes visible as what it truly is: a way of loving someone while refusing to admit it. The glyph manifests when the player walks through the building and recognizes that his discipline isn't just method—it's a cage he built to contain his own longing. This is sovereignty as the power to move forward while holding someone else's vision close to your chest, even as you argue against it.",
+      "original_storyline_text": "Malrik navigates the archive building's interior with the player, each step deliberate and measured. He catalogs, he pauses, he explains the logic of placement. But as they walk, the player sees evidence of Elenya everywhere: dried flowers left on shelves, ritual marks on walls, songs scratched into corners, spaces where she's tried to sanctify what he's trying to organize. Malrik moves with discipline through this contested space. His jaw is tight. His explanations are precise. But the player notices something: where his eyes linger on her offerings. He never removes them. In the quiet chambers, Malrik's measured step becomes visible as what it truly is: a way of loving someone while refusing to admit it. The glyph manifests when the player walks through the building and recognizes that his discipline isn't just methodâ€”it's a cage he built to contain his own longing. This is sovereignty as the power to move forward while holding someone else's vision close to your chest, even as you argue against it.",
       "glyph_images": [
         "velinor/overlays/Glyph_Codex_tablet.png",
         "velinor/overlays/Glyph_Codex2.svg",
@@ -297,7 +297,7 @@
       },
       "glyph_name": "Glyph of Boundary Stone",
       "location": "The Shared Archive Building (Entrance)",
-      "storyline_summary": "Malrik stands at the archive building's entrance, inscribing preservation boundaries. He argues that records must be sealed and organized—that structure is the only way to honor memory. After collapse, this boundary becomes contentious: will the rebuilt archive be a sealed repository or a shared ritual space? The glyph manifests when the player helps mark preservation zones and recognizes the cost of rigid boundaries.",
+      "storyline_summary": "Malrik stands at the archive building's entrance, inscribing preservation boundaries. He argues that records must be sealed and organizedâ€”that structure is the only way to honor memory. After collapse, this boundary becomes contentious: will the rebuilt archive be a sealed repository or a shared ritual space? The glyph manifests when the player helps mark preservation zones and recognizes the cost of rigid boundaries.",
       "story_seed": "Malrik and Elenya argue over how to use the newly reclaimed archive building.",
       "tone_integration": [
         "contemplative",
@@ -344,7 +344,7 @@
         "path_a": "Support Malrik's preservation logic",
         "path_b": "Question whether boundaries must be so absolute"
       },
-      "original_storyline_text": "Malrik stands at the archive building's entrance, inscribing preservation boundaries into stone. He argues that records must be sealed and organized—that structure is the only way to honor memory. But Elenya's voices echo from within: arguing for spiritual activation. Malrik's boundaries are firm, even rigid. The player senses his fear beneath: that if they open this space to ritual and ambiguity, the records will be lost. His dedication to memory-keeping masks a deeper fear: fear of losing her vision, of watching her dismiss his life's work. The glyph manifests when the player helps Malrik mark the building's preservation zones, but recognizes the cost of his rigidity. This is sovereignty as the painful act of saying 'no,' without understanding that every 'no' pushes her further away.",
+      "original_storyline_text": "Malrik stands at the archive building's entrance, inscribing preservation boundaries into stone. He argues that records must be sealed and organizedâ€”that structure is the only way to honor memory. But Elenya's voices echo from within: arguing for spiritual activation. Malrik's boundaries are firm, even rigid. The player senses his fear beneath: that if they open this space to ritual and ambiguity, the records will be lost. His dedication to memory-keeping masks a deeper fear: fear of losing her vision, of watching her dismiss his life's work. The glyph manifests when the player helps Malrik mark the building's preservation zones, but recognizes the cost of his rigidity. This is sovereignty as the painful act of saying 'no,' without understanding that every 'no' pushes her further away.",
       "glyph_images": [
         "velinor/glyph_images/codex_glyphs/glyph_CL_iron_boundary.PNG",
         "velinor/overlays/Glyph_Codex_tablet.png",
@@ -506,10 +506,10 @@
       "id": 61,
       "theme": "Memory distortion, fear, the fracture",
       "npc": {
-        "name": "Coren the Mediator",
+        "name": "Cal the Mediator",
         "role": "",
         "npc_images": [
-          "npcs/coren_the_mediator.png"
+          "npcs/Cal_the_mediator.png"
         ],
         "background_images": [
           "backgrounds/old_city_center_forest.png",
@@ -518,7 +518,7 @@
       },
       "glyph_name": "Glyph of Preemptive Severance",
       "location": "Cult Encampment (Mountain Fortress)",
-      "storyline_summary": "Coren the Mediator leads a group that practices preemptive severance???severing all emotional bonds before they can betray you. They teach: if you cut ties first, the abandonment can't touch you. The player encounters their community and must choose: join them in their defense, or challenge their lo...",
+      "storyline_summary": "Cal the Mediator leads a group that practices preemptive severance???severing all emotional bonds before they can betray you. They teach: if you cut ties first, the abandonment can't touch you. The player encounters their community and must choose: join them in their defense, or challenge their lo...",
       "story_seed": "",
       "tone_integration": [
         "fragmented"
@@ -546,7 +546,7 @@
         "the"
       ],
       "alignment_paths": null,
-      "original_storyline_text": "Coren the Mediator leads a group that practices preemptive severance???severing all emotional bonds before they can betray you. They teach: if you cut ties first, the abandonment can't touch you. The player encounters their community and must choose: join them in their defense, or challenge their logic. The glyph manifests when the player realizes that this is a response to trauma???a broken logic that protects by destroying. Understanding this fracture in reasoning reveals the glyph's truth: fear creates false choices. This is the collapse of empathy under pressure.",
+      "original_storyline_text": "Cal the Mediator leads a group that practices preemptive severance???severing all emotional bonds before they can betray you. They teach: if you cut ties first, the abandonment can't touch you. The player encounters their community and must choose: join them in their defense, or challenge their logic. The glyph manifests when the player realizes that this is a response to trauma???a broken logic that protects by destroying. Understanding this fracture in reasoning reveals the glyph's truth: fear creates false choices. This is the collapse of empathy under pressure.",
       "glyph_images": [
         "velinor/overlays/Glyph_Codex_tablet.png",
         "velinor/overlays/Glyph_Codex2.svg",
@@ -558,10 +558,10 @@
       "id": 22,
       "theme": "Boundaries, choice, clarity",
       "npc": {
-        "name": "Coren the Mediator",
+        "name": "Cal the Mediator",
         "role": "",
         "npc_images": [
-          "npcs/coren_the_mediator.png"
+          "npcs/Cal_the_mediator.png"
         ],
         "background_images": [
           "backgrounds/old_city_center_forest.png",
@@ -570,8 +570,8 @@
       },
       "glyph_name": "Glyph of Held Ache",
       "location": "The Shared Archive Building (Concourse)",
-      "storyline_summary": "Coren stands in the archive building's central chamber, between Malrik and Elenya. They are locked in debate: preservation vs. activation. Malrik speaks of disciplined records; Elenya speaks of spiritual belonging. Coren does not choose. Instead, she holds both truths without collapsing them into compromise. She teaches the player that co-witnessing means accepting that both people are right, and that integration requires holding the paradox. The glyph manifests when the player recognizes that Coren's gift isn't solving the conflict—it's refusing to let it fracture the city. Both visions have validity. The building can hold both.",
-      "story_seed": "Coren mediates between Malrik and Elenya's competing visions for the shared archive building.",
+      "storyline_summary": "Cal stands in the archive building's central chamber, between Malrik and Elenya. They are locked in debate: preservation vs. activation. Malrik speaks of disciplined records; Elenya speaks of spiritual belonging. Cal does not choose. Instead, she holds both truths without collapsing them into compromise. She teaches the player that co-witnessing means accepting that both people are right, and that integration requires holding the paradox. The glyph manifests when the player recognizes that Cal's gift isn't solving the conflictâ€”it's refusing to let it fracture the city. Both visions have validity. The building can hold both.",
+      "story_seed": "Cal mediates between Malrik and Elenya's competing visions for the shared archive building.",
       "tone_integration": [
         "contemplative",
         "paradoxical",
@@ -585,18 +585,18 @@
       "player_choices": [
         "support_malrik_or_elenya",
         "embrace_paradox",
-        "mediate_with_coren",
+        "mediate_with_Cal",
         "observe_without_choosing"
       ],
       "narrative_triggers": [
         "archive_building_debate",
         "both_sides_present",
-        "coren_intervenes"
+        "Cal_intervenes"
       ],
       "memory_fragments": [
         "malrik_standing_firm.png",
         "elenya_arms_open.png",
-        "coren_between_them.png"
+        "Cal_between_them.png"
       ],
       "tags": [
         "boundaries",
@@ -611,10 +611,10 @@
         "integration"
       ],
       "alignment_paths": {
-        "path_a": "Coren's way: hold both truths simultaneously",
+        "path_a": "Cal's way: hold both truths simultaneously",
         "path_b": "Choose one vision over the other"
       },
-      "original_storyline_text": "Coren stands in the archive building's central chamber, between Malrik and Elenya. They are locked in debate: preservation versus activation. Malrik speaks of disciplined records, of history that must be sealed against the chaos of interpretation. Elenya speaks of spiritual belonging, of community gathering in spaces that breathe with ritual and song. They are not wrong. Both are necessary. Coren does not choose sides. Instead, she holds both truths without collapsing them into false compromise. She teaches the player that mediation isn't about finding the middle ground—it's about accepting that some paradoxes cannot be resolved, only honored. The building can preserve records AND serve as a shrine. Both functions strengthen each other. The glyph manifests when the player recognizes that Coren's gift isn't solving the conflict—it's refusing to let it fracture the city. She shows that holding paradox is not weakness but the deepest strength. This is sovereignty as the power to stand between opposing truths and refuse to betray either one.",
+      "original_storyline_text": "Cal stands in the archive building's central chamber, between Malrik and Elenya. They are locked in debate: preservation versus activation. Malrik speaks of disciplined records, of history that must be sealed against the chaos of interpretation. Elenya speaks of spiritual belonging, of community gathering in spaces that breathe with ritual and song. They are not wrong. Both are necessary. Cal does not choose sides. Instead, she holds both truths without collapsing them into false compromise. She teaches the player that mediation isn't about finding the middle groundâ€”it's about accepting that some paradoxes cannot be resolved, only honored. The building can preserve records AND serve as a shrine. Both functions strengthen each other. The glyph manifests when the player recognizes that Cal's gift isn't solving the conflictâ€”it's refusing to let it fracture the city. She shows that holding paradox is not weakness but the deepest strength. This is sovereignty as the power to stand between opposing truths and refuse to betray either one.",
       "glyph_images": [
         "velinor/overlays/Glyph_Codex_tablet.png",
         "velinor/overlays/Glyph_Codex2.svg",
@@ -1336,7 +1336,7 @@
       },
       "glyph_name": "Glyph of Covenant Flame",
       "location": "The Shared Archive Building (Central Chamber with Shrine Space)",
-      "storyline_summary": "Elenya gathers the community in the archive building's central chamber to light the Covenant Flame — a ritual that demonstrates the archive's role as a living, shared space rather than a sealed vault. After the collapse the flame becomes a focal point for rebuild decisions: does the community preserve records in exclusive custody, or does it tend memory together? The glyph manifests when the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual.",
+      "storyline_summary": "Elenya gathers the community in the archive building's central chamber to light the Covenant Flame â€” a ritual that demonstrates the archive's role as a living, shared space rather than a sealed vault. After the collapse the flame becomes a focal point for rebuild decisions: does the community preserve records in exclusive custody, or does it tend memory together? The glyph manifests when the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual.",
       "story_seed": "Elenya transforms the archive building into a ritual space, lighting the Covenant Flame to demonstrate that spiritual use strengthens rather than threatens preservation.",
       "tone_integration": [
         "hopeful",
@@ -1386,7 +1386,7 @@
         "path_a": "Support Elenya's vision of shared activation",
         "path_b": "Question whether the building can truly serve both purposes"
       },
-      "original_storyline_text": "Elenya gathers the community in the archive building's central chamber to light the Covenant Flame—a fire that will only survive through collective tending. She argues passionately: this is why the building matters. Not as a sealed vault of dead records, but as a living gathering place where the community tends the flame of shared memory and ritual. Each person adds fuel; each guards it against wind. Each shares its warmth. But Malrik's shadow is felt throughout: his worry that fire and paper cannot coexist, his conviction that spiritual use will compromise the records. And Elenya's hurt is visible too: the way her shoulders tense, the way she avoids looking at him. She's tried so hard to show him that her vision doesn't diminish his. That activation and preservation can strengthen each other. The glyph manifests when the player joins the ritual and recognizes that Elenya's activation isn't destruction—it's the deepest form of honoring memory: through presence, through gathering, through the willingness to tend what matters collectively. This is trust as the faith that shared care makes things sacred, not fragile.",
+      "original_storyline_text": "Elenya gathers the community in the archive building's central chamber to light the Covenant Flameâ€”a fire that will only survive through collective tending. She argues passionately: this is why the building matters. Not as a sealed vault of dead records, but as a living gathering place where the community tends the flame of shared memory and ritual. Each person adds fuel; each guards it against wind. Each shares its warmth. But Malrik's shadow is felt throughout: his worry that fire and paper cannot coexist, his conviction that spiritual use will compromise the records. And Elenya's hurt is visible too: the way her shoulders tense, the way she avoids looking at him. She's tried so hard to show him that her vision doesn't diminish his. That activation and preservation can strengthen each other. The glyph manifests when the player joins the ritual and recognizes that Elenya's activation isn't destructionâ€”it's the deepest form of honoring memory: through presence, through gathering, through the willingness to tend what matters collectively. This is trust as the faith that shared care makes things sacred, not fragile.",
       "glyph_images": [
         "velinor/glyph_images/codex_glyphs/glyph_CL_covenant_flame.PNG",
         "velinor/overlays/Glyph_Codex_tablet.png"
@@ -1409,7 +1409,7 @@
       },
       "glyph_name": "Glyph of Shared Survival",
       "location": "The Shared Archive Building (During Crisis or Time-Sharing Arrangement)",
-      "storyline_summary": "After the building debate deepens, Elenya proposes a survival rite: both communities must tend the space together. Some hours belong to the archive keepers; some hours belong to the shrine-tenders. Each must contribute their best effort; each must rely on the other's care. The player participates in this negotiated coexistence, watching Malrik and Elenya navigate mutual dependence. There are moments of resistance, moments of grace. The glyph manifests when the player recognizes that Shared Survival means giving up the fantasy of total control—both must sacrifice for the space to live.",
+      "storyline_summary": "After the building debate deepens, Elenya proposes a survival rite: both communities must tend the space together. Some hours belong to the archive keepers; some hours belong to the shrine-tenders. Each must contribute their best effort; each must rely on the other's care. The player participates in this negotiated coexistence, watching Malrik and Elenya navigate mutual dependence. There are moments of resistance, moments of grace. The glyph manifests when the player recognizes that Shared Survival means giving up the fantasy of total controlâ€”both must sacrifice for the space to live.",
       "story_seed": "Elenya and Malrik negotiate a shared use agreement for the archive building, requiring both communities to invest in mutual care.",
       "tone_integration": [
         "hopeful",
@@ -1453,7 +1453,7 @@
         "path_a": "Support the time-sharing arrangement",
         "path_b": "Question whether integration can truly work"
       },
-      "original_storyline_text": "After the building debate deepens and neither side will concede, Elenya proposes a survival rite: both communities must learn to tend the space together. Some hours belong to the archive keepers (sealed, quiet, ordered); some hours belong to the shrine-tenders (open, vocal, ritualized). Each community must contribute their best effort; each must genuinely rely on the other's care and respect. The player participates in this negotiated coexistence, watching Malrik and Elenya navigate the strange alchemy of mutual dependence. There are moments of resistance—a shelf moved without permission, a ritual disrupting carefully organized sections. There are moments of grace—Malrik preserving a sacred space for Elenya's ceremonies, Elenya protecting an archive section when a new collapse threatens. The glyph manifests when the player recognizes that Shared Survival means surrendering the fantasy of total control. Both must sacrifice; both must trust. Neither vision is diminished by sharing space with the other. If anything, they deepen each other. This is the most mature form of integration: not compromise, but genuine interdependence built through daily, visible acts of care.",
+      "original_storyline_text": "After the building debate deepens and neither side will concede, Elenya proposes a survival rite: both communities must learn to tend the space together. Some hours belong to the archive keepers (sealed, quiet, ordered); some hours belong to the shrine-tenders (open, vocal, ritualized). Each community must contribute their best effort; each must genuinely rely on the other's care and respect. The player participates in this negotiated coexistence, watching Malrik and Elenya navigate the strange alchemy of mutual dependence. There are moments of resistanceâ€”a shelf moved without permission, a ritual disrupting carefully organized sections. There are moments of graceâ€”Malrik preserving a sacred space for Elenya's ceremonies, Elenya protecting an archive section when a new collapse threatens. The glyph manifests when the player recognizes that Shared Survival means surrendering the fantasy of total control. Both must sacrifice; both must trust. Neither vision is diminished by sharing space with the other. If anything, they deepen each other. This is the most mature form of integration: not compromise, but genuine interdependence built through daily, visible acts of care.",
       "glyph_images": [
         "velinor/glyph_images/codex_glyphs/glyph_CL_shared_burden.PNG",
         "velinor/overlays/Glyph_Codex_tablet.png"
@@ -2263,7 +2263,7 @@
       },
       "glyph_name": "Glyph of Apprehension",
       "location": "Swamp Dock",
-      "storyline_summary": "The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and �paths that shift when watched.� He sends the player to retrieve a glyph he claims is �caught between fear and faith.� When the player finds it, the Glyph of Apprehensio...",
+      "storyline_summary": "The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and ï¿½paths that shift when watched.ï¿½ He sends the player to retrieve a glyph he claims is ï¿½caught between fear and faith.ï¿½ When the player finds it, the Glyph of Apprehensio...",
       "story_seed": "",
       "tone_integration": [
         "eerie",
@@ -2289,7 +2289,7 @@
         "trust"
       ],
       "alignment_paths": null,
-      "original_storyline_text": "The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and �paths that shift when watched.� He sends the player to retrieve a glyph he claims is �caught between fear and faith.� When the player finds it, the Glyph of Apprehension reveals itself � a symbol of the uneasy tension between trusting someone and fearing betrayal. If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead.",
+      "original_storyline_text": "The player encounters Kaelen in his trickster persona, half?hidden in the swamp fog. He speaks in riddles about trust, danger, and ï¿½paths that shift when watched.ï¿½ He sends the player to retrieve a glyph he claims is ï¿½caught between fear and faith.ï¿½ When the player finds it, the Glyph of Apprehension reveals itself ï¿½ a symbol of the uneasy tension between trusting someone and fearing betrayal. If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead.",
       "glyph_images": [
         "velinor/overlays/Glyph_Codex_tablet.png",
         "velinor/overlays/Glyph_Codex2.svg",
@@ -2901,7 +2901,7 @@
       },
       "glyph_name": "Glyph of Hopeful Transmission",
       "location": "Market Square",
-      "storyline_summary": "By finding scattered photographs of Sealina�s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming lo...",
+      "storyline_summary": "By finding scattered photographs of Sealinaï¿½s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming lo...",
       "story_seed": "",
       "tone_integration": [
         "somber",
@@ -2930,7 +2930,7 @@
         "ritual"
       ],
       "alignment_paths": null,
-      "original_storyline_text": "By finding scattered photographs of Sealina�s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity.",
+      "original_storyline_text": "By finding scattered photographs of Sealinaï¿½s mother, grandmother, and her younger self, the player restores her lost lineage. When the images resonate through the Corelink, the glyph emerges. Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity.",
       "glyph_images": [
         "velinor/overlays/Glyph_Codex_tablet.png",
         "velinor/overlays/Glyph_Codex2.svg",
@@ -2953,7 +2953,7 @@
       },
       "glyph_name": "Glyph of Echoed Longing",
       "location": "Market Square",
-      "storyline_summary": "Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother � dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her b...",
+      "storyline_summary": "Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother ï¿½ dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her b...",
       "story_seed": "",
       "tone_integration": [
         "somber",
@@ -2981,7 +2981,7 @@
         "memory-loss"
       ],
       "alignment_paths": null,
-      "original_storyline_text": "Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother � dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost",
+      "original_storyline_text": "Sealina forgets the steps of her dance mid?performance and retreats, confused. When the player follows, she reveals two faded photos of her mother and grandmother ï¿½ dancers she no longer remembers. The glyph manifests as the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost",
       "glyph_images": [
         "velinor/glyph_images/codex_glyphs/glyph_CL_echoed_breath.PNG",
         "velinor/overlays/Glyph_Codex_tablet.png"
@@ -3619,7 +3619,7 @@
       },
       "glyph_name": "Glyph of Infrasensory Oblivion",
       "location": "Chamber of Delayed Echoes (swamp underground)",
-      "storyline_summary": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. Saori appears—scarred, weathered, yet still watching the boundaries of the old city. She teaches that abandonment sometimes arrives late: the soul doesn't feel the cut until long after the severance. The glyph manifests when the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named. This is the seed of loss, the latency of loneliness.",
+      "storyline_summary": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. Saori appearsâ€”scarred, weathered, yet still watching the boundaries of the old city. She teaches that abandonment sometimes arrives late: the soul doesn't feel the cut until long after the severance. The glyph manifests when the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named. This is the seed of loss, the latency of loneliness.",
       "story_seed": "",
       "tone_integration": [
         "somber"
@@ -3647,7 +3647,7 @@
         "loss"
       ],
       "alignment_paths": null,
-      "original_storyline_text": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. Saori appears—scarred, weathered, yet still watching the boundaries of the old city. She teaches that abandonment sometimes arrives late: the soul doesn't feel the cut until long after the severance. The glyph manifests when the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named. This is the seed of loss, the latency of loneliness.",
+      "original_storyline_text": "The player descends into a sunken chamber where bioluminescent flora pulse faintly. A central pedestal holds a dark void surrounded by eight rippling rings of pale gold and indigo. Saori appearsâ€”scarred, weathered, yet still watching the boundaries of the old city. She teaches that abandonment sometimes arrives late: the soul doesn't feel the cut until long after the severance. The glyph manifests when the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named. This is the seed of loss, the latency of loneliness.",
       "glyph_images": []
     },
     {
@@ -3713,7 +3713,7 @@
       },
       "glyph_name": "Glyph of Quiet Return",
       "location": "Shrine Healing Alcove",
-      "storyline_summary": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence — not action — is what brings people back to themselves.",
+      "storyline_summary": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence â€” not action â€” is what brings people back to themselves.",
       "story_seed": "",
       "tone_integration": [
         "intimate",
@@ -3740,7 +3740,7 @@
         "witness"
       ],
       "alignment_paths": null,
-      "original_storyline_text": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence — not action — is what brings people back to themselves.",
+      "original_storyline_text": "Helia tends to an unconscious survivor and doubts whether her presence matters. When the player quietly sits with them, the survivor briefly awakens, whispering for someone to stay. The glyph manifests as Helia realizes that presence â€” not action â€” is what brings people back to themselves.",
       "glyph_images": [
         "velinor/overlays/Glyph_Codex_tablet.png",
         "velinor/overlays/Glyph_Codex2.svg"
@@ -3857,7 +3857,7 @@
       },
       "glyph_name": "Glyph of Shared Dawn",
       "location": "Market courtyard at first light",
-      "storyline_summary": "The player rounds a corner in the market courtyard at dawn and finds Sera and Korrin sitting close, sharing a quiet moment neither expected. Their hands hover near each other but don't touch—held back by fear that gossip spreads quickly. Sera looks grounded and full. Korrin looks brighter, less jaded. The player doesn't need to be told what happened; the morning light shows it. The glyph manifests when the player witnesses this moment and understands that healing isn't only solemn ritual and grief-work—sometimes it emerges from a single fleeting encounter where two wounded people reawaken something in each other.",
+      "storyline_summary": "The player rounds a corner in the market courtyard at dawn and finds Sera and Korrin sitting close, sharing a quiet moment neither expected. Their hands hover near each other but don't touchâ€”held back by fear that gossip spreads quickly. Sera looks grounded and full. Korrin looks brighter, less jaded. The player doesn't need to be told what happened; the morning light shows it. The glyph manifests when the player witnesses this moment and understands that healing isn't only solemn ritual and grief-workâ€”sometimes it emerges from a single fleeting encounter where two wounded people reawaken something in each other.",
       "story_seed": "catalytic_tryst_encounter",
       "tone_integration": [
         "tender",
@@ -3916,7 +3916,7 @@
           "consequence": "both_become_guarded"
         }
       },
-      "original_storyline_text": "The player rounds a corner in the market courtyard at dawn and finds Sera and Korrin sitting close, sharing a quiet moment neither expected. Their hands hover near each other but don't touch—held back by fear that gossip spreads quickly. Sera looks grounded and full. Korrin looks brighter, less jaded. The player doesn't need to be told what happened; the morning light shows it. The glyph manifests when the player witnesses this moment and understands that healing isn't only solemn ritual and grief-work—sometimes it emerges from a single fleeting encounter where two wounded people reawaken something in each other. This is not romance; this is catalysis. A shared dawn where neither person expected to find warmth. If the player mentions it, both NPCs become guarded (gossip is a threat to what they share). If the player honors their silence, both gain influence, and new dialogue branches unlock exploring what this moment means for each of them.",
+      "original_storyline_text": "The player rounds a corner in the market courtyard at dawn and finds Sera and Korrin sitting close, sharing a quiet moment neither expected. Their hands hover near each other but don't touchâ€”held back by fear that gossip spreads quickly. Sera looks grounded and full. Korrin looks brighter, less jaded. The player doesn't need to be told what happened; the morning light shows it. The glyph manifests when the player witnesses this moment and understands that healing isn't only solemn ritual and grief-workâ€”sometimes it emerges from a single fleeting encounter where two wounded people reawaken something in each other. This is not romance; this is catalysis. A shared dawn where neither person expected to find warmth. If the player mentions it, both NPCs become guarded (gossip is a threat to what they share). If the player honors their silence, both gain influence, and new dialogue branches unlock exploring what this moment means for each of them.",
       "glyph_images": [
         "velinor/overlays/Glyph_Codex_tablet.png",
         "velinor/overlays/Glyph_Codex2.svg",
@@ -3991,9 +3991,9 @@
               "I thought she was afraid.",
               "I pushed too far.",
               "She thought I chose the system over her.",
-              "I didn’t want to lose her.",
+              "I didnâ€™t want to lose her.",
               "We stopped listening.",
-              "I thought she’d understand."
+              "I thought sheâ€™d understand."
             ]
           },
           {
@@ -4003,16 +4003,16 @@
               "She came back for me.",
               "She broke to save me, to save them.",
               "I heard every scream.",
-              "I didn’t mean for any of this."
+              "I didnâ€™t mean for any of this."
             ]
           },
           {
             "name": "Saori's Longing (The 25-Year Vigil)",
             "phrases": [
-              "Why won’t you wake up.",
+              "Why wonâ€™t you wake up.",
               "You always were so stubborn.",
               "Come on, stop sleeping in, you lazy bum.",
-              "Please, I’m sorry.",
+              "Please, Iâ€™m sorry.",
               "I just want you back.",
               "Please come back to me."
             ]
@@ -4028,7 +4028,7 @@
           {
             "name": "Saori's Fears (The Present-Day Conflict)",
             "phrases": [
-              "What if I’m wrong again.",
+              "What if Iâ€™m wrong again.",
               "What if she hates me.",
               "What if she dissolves.",
               "What if the world breaks again."
@@ -4047,7 +4047,7 @@
             "name": "Saori's Resentments (The Unspoken Truths)",
             "phrases": [
               "Why did you leave me.",
-              "Why didn’t you stop me.",
+              "Why didnâ€™t you stop me.",
               "Why did you say no."
             ]
           },
@@ -4057,7 +4057,7 @@
               "I can let you go.",
               "I will carry you.",
               "You were right.",
-              "I’m sorry I wasn’t.",
+              "Iâ€™m sorry I wasnâ€™t.",
               "Goodbye, my friend."
             ]
           }

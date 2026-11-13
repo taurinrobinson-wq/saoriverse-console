@@ -1,4 +1,4 @@
-"""
+﻿"""
 NPC Response Engine for Velinor: Remnants of the Tone
 
 This module handles NPC dialogue and behavior in response to player traits.
@@ -308,7 +308,7 @@ class NPCResponseEngine:
         """
         Initialize dialogue profiles for all NPCs.
         
-        This creates the mapping from NPC → how they respond to different traits.
+        This creates the mapping from NPC â†’ how they respond to different traits.
         """
         # Saori - Integrator, values synthesis and awareness
         saori_profile = NPCDialogueProfile(
@@ -350,13 +350,13 @@ class NPCResponseEngine:
         )
         self.npc_profiles["Elenya"] = elenya_profile
         
-        # Coren - Aware, pattern-seeker
-        coren_profile = NPCDialogueProfile(
+        # Cal - Aware, pattern-seeker
+        Cal_profile = NPCDialogueProfile(
             personality_type=NPCPersonalityType.AWARE,
             preferred_traits=[TONE_OBSERVATION, TONE_NARRATIVE_PRESENCE],
             uncomfortable_traits=[],
         )
-        self.npc_profiles["Coren"] = coren_profile
+        self.npc_profiles["Cal"] = Cal_profile
 
 
 def get_npc_response_for_trait(
@@ -388,3 +388,4 @@ def should_npc_reveal_hidden_goal(profiler: ToneProfiler, npc_name: str) -> bool
     
     report = engine.calculator.get_coherence_report()
     return report.overall_coherence > 70
+

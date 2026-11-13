@@ -1,39 +1,39 @@
-# Quick Reference: Building Debate Glyphs Integration
+﻿# Quick Reference: Building Debate Glyphs Integration
 
-## Status: ✅ COMPLETE
+## Status: âœ… COMPLETE
 
 All five glyphs have been successfully modified to integrate the archive building debate, Malrik &
-Elenya's love story, and Coren's paradox-holding role.
+Elenya's love story, and Cal's paradox-holding role.
 
 ---
 
 ## The Five Glyphs (ID | Name | NPC | What Changed)
 
-### 1️⃣ ID 24 | Glyph of Boundary Stone | Malrik
+### 1ï¸âƒ£ ID 24 | Glyph of Boundary Stone | Malrik
 - **Old Location:** Shifting Sands (Desert Archive)
 - **New Location:** The Shared Archive Building (Marketplace)
 - **Story:** Malrik inscribes preservation boundaries. His rigidity masks fear of losing Elenya's vision.
 - **Love Subtext:** "His love for memory-keeping masks fear of losing her vision"
 
-### 2️⃣ ID 23 | Glyph of Measured Step | Malrik  
+### 2ï¸âƒ£ ID 23 | Glyph of Measured Step | Malrik  
 - **Old Location:** Desert Trial Grounds (Archive Chamber)
 - **New Location:** The Shared Archive Building (Inside Chambers)
 - **Story:** Malrik navigates the interior while Elenya's offerings (flowers, marks, songs) surround him. He never removes them.
 - **Love Subtext:** "Where his eyes linger on her offerings... his discipline is a cage he built to contain his own longing"
 
-### 3️⃣ ID 22 | Glyph of Held Ache | Coren the Mediator ⭐ **CENTERPIECE**
+### 3ï¸âƒ£ ID 22 | Glyph of Held Ache | Cal the Mediator â­ **CENTERPIECE**
 - **Old Location:** Market Concourse (generic disputes)
-- **New Location:** The Shared Archive Building (Concourse) — Central Chamber
-- **Story:** Coren stands between Malrik and Elenya holding BOTH truths without compromise or collapse
+- **New Location:** The Shared Archive Building (Concourse) â€” Central Chamber
+- **Story:** Cal stands between Malrik and Elenya holding BOTH truths without compromise or collapse
 - **Player Understanding:** "Holding paradox is not weakness but the deepest strength"
 
-### 4️⃣ ID 51 | Glyph of Covenant Flame | Elenya
+### 4ï¸âƒ£ ID 51 | Glyph of Covenant Flame | Elenya
 - **Old Location:** Communal fire (mountain shrine, generic)
 - **New Location:** The Shared Archive Building (Central Chamber with Shrine Space)
 - **Story:** Elenya lights the Covenant Flame to show activation strengthens, not threatens preservation
 - **Love Subtext:** "Elenya's hurt is visible: the way her shoulders tense, the way she avoids looking at him"
 
-### 5️⃣ ID 52 | Glyph of Shared Survival | Elenya
+### 5ï¸âƒ£ ID 52 | Glyph of Shared Survival | Elenya
 - **Old Location:** Mountain communal hearth (abstract survival rite)
 - **New Location:** The Shared Archive Building (During Time-Sharing Arrangement)
 - **Story:** Both communities must tend the space together. Both must sacrifice. Integration through daily acts of care.
@@ -45,24 +45,24 @@ Elenya's love story, and Coren's paradox-holding role.
 
 ```
 ACT II: DEBATE EMERGES
-├─ Boundary Stone: Malrik establishes position (fear hidden)
-├─ Measured Step: Player sees internal conflict (love revealed through gaze)
-└─ Held Ache begins: Coren appears to mediate
+â”œâ”€ Boundary Stone: Malrik establishes position (fear hidden)
+â”œâ”€ Measured Step: Player sees internal conflict (love revealed through gaze)
+â””â”€ Held Ache begins: Cal appears to mediate
 
 ACT II-III: LOVE STORY CRYSTALLIZES
-├─ Player witnesses Malrik's yearning for her offerings
-├─ Player sees Elenya's hurt at dismissal
-└─ Understanding: This isn't philosophical—it's personal
+â”œâ”€ Player witnesses Malrik's yearning for her offerings
+â”œâ”€ Player sees Elenya's hurt at dismissal
+â””â”€ Understanding: This isn't philosophicalâ€”it's personal
 
 ACT III: VISION CONTEST
-├─ Covenant Flame: Elenya demonstrates sacred vision
-├─ Held Ache continues: Coren holds paradox steady
-└─ Shared Survival begins: Time-sharing proposed
+â”œâ”€ Covenant Flame: Elenya demonstrates sacred vision
+â”œâ”€ Held Ache continues: Cal holds paradox steady
+â””â”€ Shared Survival begins: Time-sharing proposed
 
 ACT III/IV: INTEGRATION CHALLENGE
-├─ BUILDING COLLAPSE (from Narrative Spine)
-├─ Shared Survival completes: Do they rebuild together?
-└─ Triad Convergence: Player's choice shapes ending
+â”œâ”€ BUILDING COLLAPSE (from Narrative Spine)
+â”œâ”€ Shared Survival completes: Do they rebuild together?
+â””â”€ Triad Convergence: Player's choice shapes ending
 ```
 
 ---
@@ -72,17 +72,17 @@ ACT III/IV: INTEGRATION CHALLENGE
 ### Malrik's Glyphs
 - "His love for memory-keeping masks a deeper fear"
 - "Where his eyes linger on her offerings. He never removes them."
-- "His discipline isn't just method—it's a cage he built to contain his own longing"
+- "His discipline isn't just methodâ€”it's a cage he built to contain his own longing"
 - "Every 'no' pushes her further away"
 
 ### Elenya's Glyphs
 - "Elenya's frustration is visible: her hurt that he refuses to see beauty in what she's building"
 - "The way her shoulders tense, the way she avoids looking at him"
-- "Activation isn't destruction—it's honoring memory through presence"
+- "Activation isn't destructionâ€”it's honoring memory through presence"
 - "She's tried so hard to show him their visions can strengthen each other"
 
-### Coren's Glyph
-- "Coren does not choose sides... she holds both truths without collapsing them"
+### Cal's Glyph
+- "Cal does not choose sides... she holds both truths without collapsing them"
 - "Holding paradox is not weakness but the deepest strength"
 - "Refusing to let it fracture the city"
 - "The building can preserve records AND serve as a shrine. Both functions strengthen each other."
@@ -97,8 +97,8 @@ ACT III/IV: INTEGRATION CHALLENGE
 - **Connection:** Glyphs are the *emotional embodiment* of story beats; Narrative Spine is the *structural skeleton*
 
 ### VELINOR_COMPLETE_DESIGN.md
-- **Needs Update:** Expand Coren's section to emphasize her paradox-holding philosophy
-- **Suggested Addition:** "Coren the Paradox Holder" subsection explaining how she teaches integration without compromise
+- **Needs Update:** Expand Cal's section to emphasize her paradox-holding philosophy
+- **Suggested Addition:** "Cal the Paradox Holder" subsection explaining how she teaches integration without compromise
 
 ### Glyph_Organizer.json
 - **Updated:** 5 out of 68 glyphs
@@ -119,19 +119,19 @@ ACT III/IV: INTEGRATION CHALLENGE
 - Glyphs need visual representations at archive building locations:
   - Malrik's inscriptions (boundary markers)
   - Elenya's offerings (dried flowers, ritual marks)
-  - Coren standing between them (mediation pose/frame)
+  - Cal standing between them (mediation pose/frame)
 
 ### For Ending Logic
 These glyphs feed into the **Six Endings Decision Tree:**
 
 ```
 QUESTION 1: Does the Corelink restart?
-├─ YES → System solution
-└─ NO → Human connection required
+â”œâ”€ YES â†’ System solution
+â””â”€ NO â†’ Human connection required
 
 QUESTION 2: Did Malrik & Elenya rebuild together?
-├─ YES → Integration achieved
-└─ NO → Fracture persists
+â”œâ”€ YES â†’ Integration achieved
+â””â”€ NO â†’ Fracture persists
 
 COMBINATIONS:
 System + Synthesis = Hope, integration possible
@@ -145,13 +145,13 @@ No System + Fracture = Authentic failure, honest collapse
 ## Files Modified
 
 ### Created/Updated
-- ✅ `velinor/markdowngameinstructions/Glyph_Organizer.json` — 5 glyphs updated (lines: 23, 24, 22, 51, 52)
-- ✅ `velinor/markdowngameinstructions/BUILDING_DEBATE_INTEGRATION_SUMMARY.md` — Comprehensive documentation
-- ✅ `scripts/integrate_building_debate_glyphs.py` — Automation script
+- âœ… `velinor/markdowngameinstructions/Glyph_Organizer.json` â€” 5 glyphs updated (lines: 23, 24, 22, 51, 52)
+- âœ… `velinor/markdowngameinstructions/BUILDING_DEBATE_INTEGRATION_SUMMARY.md` â€” Comprehensive documentation
+- âœ… `scripts/integrate_building_debate_glyphs.py` â€” Automation script
 
 ### Ready for Enhancement (Optional)
-- `velinor/markdowngameinstructions/VELINOR_COMPLETE_DESIGN.md` — Add Coren depth section
-- `velinor/markdowngameinstructions/01_NARRATIVE_SPINE_AND_STRUCTURE.md` — Already strong; consider adding ending determination logic
+- `velinor/markdowngameinstructions/VELINOR_COMPLETE_DESIGN.md` â€” Add Cal depth section
+- `velinor/markdowngameinstructions/01_NARRATIVE_SPINE_AND_STRUCTURE.md` â€” Already strong; consider adding ending determination logic
 
 ---
 
@@ -168,23 +168,23 @@ Malrik/Elenya choice + System choice
 visual assets (malrik_inscription_photo.png, etc.)
 
 ### Lower Priority
-7. Update VELINOR_COMPLETE_DESIGN.md with Coren's expanded role 8. Add tests to verify glyph tag
+7. Update VELINOR_COMPLETE_DESIGN.md with Cal's expanded role 8. Add tests to verify glyph tag
 consistency 9. Document dialogue patterns for subtext-driven love story
 
 ---
 
 ## Validation Checklist
 
-- ✅ All 5 glyphs now reference "The Shared Archive Building"
-- ✅ All 5 glyphs include "building", "debate", "love-story" in tags
-- ✅ All 5 glyphs have aligned tone_integration to match emotional beats
-- ✅ Malrik's glyphs include love story subtext (fear, longing, yielding to her offerings)
-- ✅ Elenya's glyphs include love story subtext (hurt, avoidance, effort to integrate)
-- ✅ Coren's glyph is the paradox-holding centerpiece
-- ✅ Player_choices support multiple branches (support, challenge, mediate, observe)
-- ✅ Narrative_triggers align with act/scene progression
-- ✅ Memory_fragments added for visual evidence
-- ✅ Alignment_paths include third-option paradox acceptance
+- âœ… All 5 glyphs now reference "The Shared Archive Building"
+- âœ… All 5 glyphs include "building", "debate", "love-story" in tags
+- âœ… All 5 glyphs have aligned tone_integration to match emotional beats
+- âœ… Malrik's glyphs include love story subtext (fear, longing, yielding to her offerings)
+- âœ… Elenya's glyphs include love story subtext (hurt, avoidance, effort to integrate)
+- âœ… Cal's glyph is the paradox-holding centerpiece
+- âœ… Player_choices support multiple branches (support, challenge, mediate, observe)
+- âœ… Narrative_triggers align with act/scene progression
+- âœ… Memory_fragments added for visual evidence
+- âœ… Alignment_paths include third-option paradox acceptance
 
 ---
 
@@ -193,7 +193,7 @@ consistency 9. Document dialogue patterns for subtext-driven love story
 1. **Dialogue:** Should the building debate happen in a single scene, or recur with escalating
 tension? 2. **Collapse Mechanics:** Should the collapse be partially caused by their conflict, or is
 it independent? 3. **Ending Quality:** Should the player's empathy for Malrik/Elenya's love story
-affect which ending they can achieve? 4. **Coren's Arc:** Does Coren have her own 3-glyph arc
+affect which ending they can achieve? 4. **Cal's Arc:** Does Cal have her own 3-glyph arc
 showing her becoming a true paradox-holder, or is she already whole? 5. **Building Symbol:** Is the
 building itself a character (with memory/feeling), or purely a stage for human conflict?
 
@@ -202,3 +202,4 @@ building itself a character (with memory/feeling), or purely a stage for human c
 **Last Updated:** 2026-01-08  
 **Status:** Integration Complete  
 **Next Review:** Upon dialogue implementation
+

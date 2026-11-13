@@ -1,4 +1,4 @@
-"""
+﻿"""
 Velinor Game Engine + Twine/FirstPerson Integration
 ====================================================
 
@@ -324,7 +324,7 @@ class VelinorTwineOrchestrator:
             },
             'npc_conflicts': {
                 npc: self.npc_response_engine.get_npc_conflict_level(npc)
-                for npc in ['Saori', 'Ravi', 'Nima', 'Malrik', 'Elenya', 'Coren']
+                for npc in ['Saori', 'Ravi', 'Nima', 'Malrik', 'Elenya', 'Cal']
             }
         }
         """
@@ -575,7 +575,7 @@ class VelinorTwineOrchestrator:
             ],
             'heavy': [
                 f"{npc_name}: I hear the weight in that.",
-                f"{npc_name}: The gravity of it—I feel it too.",
+                f"{npc_name}: The gravity of itâ€”I feel it too.",
             ],
             'reflective': [
                 f"{npc_name}: There's something to sit with there.",
@@ -594,7 +594,7 @@ class VelinorTwineOrchestrator:
         # Middle section acknowledges specific themes
         theme_acknowledgments = {
             'grief': "Loss shapes us in ways words sometimes can't reach.",
-            'joy': "Joy that's felt this deeply—that matters.",
+            'joy': "Joy that's felt this deeplyâ€”that matters.",
             'general': "What you're feeling is real.",
         }
         
@@ -790,8 +790,8 @@ class VelinorTwineOrchestrator:
             return self.aftermath_scene.get_malrik_isolation_dialogue()
         elif phase == "elenya_isolation":
             return self.aftermath_scene.get_elenya_isolation_dialogue()
-        elif phase == "coren_exhaustion":
-            return self.aftermath_scene.get_coren_exhaustion_dialogue()
+        elif phase == "Cal_exhaustion":
+            return self.aftermath_scene.get_Cal_exhaustion_dialogue()
         return ""
     
     def get_npc_response_to_intervention(
@@ -1197,3 +1197,4 @@ class VelinorTwineOrchestrator:
                 "input_processed": False,
                 "error": str(e),
             }
+

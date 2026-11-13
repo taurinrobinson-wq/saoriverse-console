@@ -1,4 +1,4 @@
-"""
+﻿"""
 Phase 2 Integration Test: Trait System + Orchestrator + Marketplace Scene
 
 Validates:
@@ -48,10 +48,10 @@ def test_orchestrator_trait_integration():
     assert 'coherence_report' in status
     assert 'npc_conflicts' in status
     
-    print(f"✓ Orchestrator initialized with trait systems")
-    print(f"✓ Player name: {orchestrator.trait_profiler.player_name}")
-    print(f"✓ Trait status retrievable")
-    print("✓ PASSED\n")
+    print(f"âœ“ Orchestrator initialized with trait systems")
+    print(f"âœ“ Player name: {orchestrator.trait_profiler.player_name}")
+    print(f"âœ“ Trait status retrievable")
+    print("âœ“ PASSED\n")
 
 
 def test_trait_recording():
@@ -78,11 +78,11 @@ def test_trait_recording():
     )
     
     assert result['trait_profile']['choices_made'] == 1
-    print(f"✓ Choice recorded: {result['trait_profile']['choices_made']} total")
+    print(f"âœ“ Choice recorded: {result['trait_profile']['choices_made']} total")
     
     # Check coherence updated
     assert result['coherence_report']['overall_coherence'] > 0
-    print(f"✓ Coherence: {result['coherence_report']['overall_coherence']}")
+    print(f"âœ“ Coherence: {result['coherence_report']['overall_coherence']}")
     
     # Record skeptical choice
     result = orchestrator.record_trait_choice(
@@ -95,9 +95,9 @@ def test_trait_recording():
     )
     
     assert result['trait_profile']['choices_made'] == 2
-    print(f"✓ Second choice recorded: {result['trait_profile']['choices_made']} total")
-    print(f"✓ Primary trait: {result['trait_profile']['primary_trait']}")
-    print("✓ PASSED\n")
+    print(f"âœ“ Second choice recorded: {result['trait_profile']['choices_made']} total")
+    print(f"âœ“ Primary trait: {result['trait_profile']['primary_trait']}")
+    print("âœ“ PASSED\n")
 
 
 def test_marketplace_scene_creation():
@@ -113,14 +113,14 @@ def test_marketplace_scene_creation():
     assert len(scene['npcs']) == 3
     assert 'Malrik' in scene['npcs']
     assert 'Elenya' in scene['npcs']
-    assert 'Coren' in scene['npcs']
+    assert 'Cal' in scene['npcs']
     
-    print(f"✓ Scene created: {scene['name']}")
-    print(f"✓ NPCs: {', '.join(scene['npcs'])}")
-    print(f"✓ Entry choices: {len(scene['intro_choices'])}")
-    print(f"✓ Intro narration: {len(scene['intro_narration'])} chars")
-    print(f"✓ Setup narration: {len(scene['setup_narration'])} chars")
-    print("✓ PASSED\n")
+    print(f"âœ“ Scene created: {scene['name']}")
+    print(f"âœ“ NPCs: {', '.join(scene['npcs'])}")
+    print(f"âœ“ Entry choices: {len(scene['intro_choices'])}")
+    print(f"âœ“ Intro narration: {len(scene['intro_narration'])} chars")
+    print(f"âœ“ Setup narration: {len(scene['setup_narration'])} chars")
+    print("âœ“ PASSED\n")
 
 
 def test_marketplace_branching():
@@ -187,7 +187,7 @@ def test_marketplace_branching():
         npc_conflicts = {
             'Malrik': 'neutral',
             'Elenya': 'neutral',
-            'Coren': 'neutral',
+            'Cal': 'neutral',
         }
         
         # Get branching choices
@@ -202,10 +202,10 @@ def test_marketplace_branching():
         print(f"  Available choices: {len(choices)}")
         for choice in choices:
             locked = choice.get('coherence_locked', False)
-            print(f"    - {choice['text'][:50]}... {'🔒' if locked else '✓'}")
+            print(f"    - {choice['text'][:50]}... {'ðŸ”’' if locked else 'âœ“'}")
 
 
-    print("\n✓ PASSED\n")
+    print("\nâœ“ PASSED\n")
 
 
 def test_coherence_gating():
@@ -250,7 +250,7 @@ def test_coherence_gating():
     report_low = calc_low.get_coherence_report()
     
     # Get choices for both
-    npc_conflicts = {'Malrik': 'neutral', 'Elenya': 'neutral', 'Coren': 'neutral'}
+    npc_conflicts = {'Malrik': 'neutral', 'Elenya': 'neutral', 'Cal': 'neutral'}
     
     choices_high = scene['get_branching_choices'](
         coherence_level=report_high.overall_coherence,
@@ -275,8 +275,8 @@ def test_coherence_gating():
     print(f"  Locked choices (require coherence): {locked_count_low}")
     
     assert len(choices_high) >= len(choices_low), "High coherence should unlock more choices"
-    print("\n✓ Coherence gating working correctly")
-    print("✓ PASSED\n")
+    print("\nâœ“ Coherence gating working correctly")
+    print("âœ“ PASSED\n")
 
 
 def test_npc_compatibility():
@@ -326,13 +326,13 @@ def test_npc_compatibility():
     assert emp_nima in ['ally', 'neutral'], f"Expected ally/neutral, got {emp_nima}"
     assert skep_ravi in ['ally', 'neutral'], f"Expected ally/neutral, got {skep_ravi}"
     
-    print("\n✓ Compatibility systems working")
-    print("✓ PASSED\n")
+    print("\nâœ“ Compatibility systems working")
+    print("âœ“ PASSED\n")
 
 
 if __name__ == "__main__":
     print("\n" + "=" * 60)
-    print("🧪 PHASE 2 INTEGRATION TESTS")
+    print("ðŸ§ª PHASE 2 INTEGRATION TESTS")
     print("=" * 60 + "\n")
     
     try:
@@ -344,18 +344,19 @@ if __name__ == "__main__":
         test_npc_compatibility()
         
         print("=" * 60)
-        print("✓ ALL PHASE 2 TESTS PASSED")
+        print("âœ“ ALL PHASE 2 TESTS PASSED")
         print("=" * 60)
-        print("\n📊 Phase 2 Status:")
-        print("  ✓ Orchestrator trait integration: WORKING")
-        print("  ✓ Trait recording: WORKING")
-        print("  ✓ Marketplace scene: WORKING")
-        print("  ✓ Branching dialogue: WORKING")
-        print("  ✓ Coherence gating: WORKING")
-        print("  ✓ NPC compatibility: WORKING")
-        print("\n🚀 Ready for Streamlit testing!")
+        print("\nðŸ“Š Phase 2 Status:")
+        print("  âœ“ Orchestrator trait integration: WORKING")
+        print("  âœ“ Trait recording: WORKING")
+        print("  âœ“ Marketplace scene: WORKING")
+        print("  âœ“ Branching dialogue: WORKING")
+        print("  âœ“ Coherence gating: WORKING")
+        print("  âœ“ NPC compatibility: WORKING")
+        print("\nðŸš€ Ready for Streamlit testing!")
         
     except Exception as e:
-        print(f"\n❌ TEST FAILED: {e}")
+        print(f"\nâŒ TEST FAILED: {e}")
         import traceback
         traceback.print_exc()
+

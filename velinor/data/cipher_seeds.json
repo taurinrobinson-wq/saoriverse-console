@@ -1,4 +1,4 @@
-{
+﻿{
   "metadata": {
     "version": "2.0",
     "source": "Glyph_Organizer.csv",
@@ -24,7 +24,7 @@
         "malrik"
       ],
       "fragments": {
-        "layer_0": "the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning…",
+        "layer_0": "the player recognizes the human cost of institutional failure and the possibility of rebuilding meaningâ€¦",
         "layer_1": "Archives hold what memory refuses.",
         "layer_2": "the player recognizes the human cost of institutional failure and the possibility of rebuilding meaning from fragments"
       }
@@ -116,7 +116,7 @@
         "malrik"
       ],
       "fragments": {
-        "layer_0": "the player moves through the chambers and recognizes discipline as both protection and a barrier…",
+        "layer_0": "the player moves through the chambers and recognizes discipline as both protection and a barrierâ€¦",
         "layer_1": "Archives hold what memory refuses.",
         "layer_2": "the player moves through the chambers and recognizes discipline as both protection and a barrier to intimacy"
       }
@@ -162,7 +162,7 @@
         "veynar"
       ],
       "fragments": {
-        "layer_0": "the player recognizes that fracture is not only in stone or steel but in the…",
+        "layer_0": "the player recognizes that fracture is not only in stone or steel but in theâ€¦",
         "layer_1": "Authority without trust is only shadow.",
         "layer_2": "the player recognizes that fracture is not only in stone or steel but in the vows that once bound a community together"
       }
@@ -216,7 +216,7 @@
     {
       "id": "velinor-coll-004",
       "glyph_name": "Glyph of Preemptive Severance",
-      "npc": "Coren",
+      "npc": "Cal",
       "category": "Collapse",
       "location": "Cult Encampment (Mountain Fortress)",
       "layer": 2,
@@ -228,10 +228,10 @@
       ],
       "tags": [
         "collapse",
-        "coren"
+        "Cal"
       ],
       "fragments": {
-        "layer_0": "the player realizes that this is a response to trauma'a broken logic that protects by…",
+        "layer_0": "the player realizes that this is a response to trauma'a broken logic that protects byâ€¦",
         "layer_1": "Fracture arrives quietly, unannounced.",
         "layer_2": "the player realizes that this is a response to trauma'a broken logic that protects by destroying"
       }
@@ -239,7 +239,7 @@
     {
       "id": "velinor-sove-004",
       "glyph_name": "Glyph of Held Ache",
-      "npc": "Coren",
+      "npc": "Cal",
       "category": "Sovereignty",
       "location": "Market Concourse (Marketplace)",
       "layer": 2,
@@ -251,10 +251,10 @@
       ],
       "tags": [
         "sovereignty",
-        "coren"
+        "Cal"
       ],
       "fragments": {
-        "layer_0": "the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief…",
+        "layer_0": "the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate griefâ€¦",
         "layer_1": "Clarity is choosing what you will and won't hold.",
         "layer_2": "the player mediates a conflict, refusing to 'fix' it but simply acknowledging the legitimate grief on both sides"
       }
@@ -277,7 +277,7 @@
         "dakrin"
       ],
       "fragments": {
-        "layer_0": "the player faces their own trial'a moment where anger or despair threatens to overwhelm'and chooses…",
+        "layer_0": "the player faces their own trial'a moment where anger or despair threatens to overwhelm'and choosesâ€¦",
         "layer_1": "Clarity is choosing what you will and won't hold.",
         "layer_2": "the player faces their own trial'a moment where anger or despair threatens to overwhelm'and chooses to breathe, to stop, to contain"
       }
@@ -300,7 +300,7 @@
         "dalen"
       ],
       "fragments": {
-        "layer_0": "Dalen trusts the player enough to show his scars, to say: I was betrayed, and…",
+        "layer_0": "Dalen trusts the player enough to show his scars, to say: I was betrayed, andâ€¦",
         "layer_1": "Scars are proof we survived.",
         "layer_2": "Dalen trusts the player enough to show his scars, to say: I was betrayed, and I'm still here"
       }
@@ -369,7 +369,7 @@
         "drossel"
       ],
       "fragments": {
-        "layer_0": "the player realizes that a pact without trust is only a hollow shell, an echo…",
+        "layer_0": "the player realizes that a pact without trust is only a hollow shell, an echoâ€¦",
         "layer_1": "Fracture arrives quietly, unannounced.",
         "layer_2": "the player realizes that a pact without trust is only a hollow shell, an echo of connection that cannot endure"
       }
@@ -484,7 +484,7 @@
         "elka"
       ],
       "fragments": {
-        "layer_0": "the player accepts that presence can mean touching the edge of what's gone, honoring its…",
+        "layer_0": "the player accepts that presence can mean touching the edge of what's gone, honoring itsâ€¦",
         "layer_1": "To witness is to honor without changing.",
         "layer_2": "the player accepts that presence can mean touching the edge of what's gone, honoring its memory through contact"
       }
@@ -507,7 +507,7 @@
         "helia"
       ],
       "fragments": {
-        "layer_0": "the player joins her in this practice: sitting beside someone in ache, offering nothing but…",
+        "layer_0": "the player joins her in this practice: sitting beside someone in ache, offering nothing butâ€¦",
         "layer_1": "To witness is to honor without changing.",
         "layer_2": "the player joins her in this practice: sitting beside someone in ache, offering nothing but attention"
       }
@@ -530,7 +530,7 @@
         "elenya"
       ],
       "fragments": {
-        "layer_0": "the player participates fully, showing that joy is a divine blessing that restores morale and…",
+        "layer_0": "the player participates fully, showing that joy is a divine blessing that restores morale andâ€¦",
         "layer_1": "The sacred emerges when we stop forcing it.",
         "layer_2": "the player participates fully, showing that joy is a divine blessing that restores morale and strengthens bonds"
       }
@@ -553,7 +553,7 @@
         "elenya"
       ],
       "fragments": {
-        "layer_0": "that joy is not fleeting ' it is the spark of life returning, a promise…",
+        "layer_0": "that joy is not fleeting ' it is the spark of life returning, a promiseâ€¦",
         "layer_1": "The sacred emerges when we stop forcing it.",
         "layer_2": "that joy is not fleeting ' it is the spark of life returning, a promise that the path continues"
       }
@@ -576,7 +576,7 @@
         "elenya"
       ],
       "fragments": {
-        "layer_0": "In this moment, Presence is understood as trust in silence itself: a divine witness that…",
+        "layer_0": "In this moment, Presence is understood as trust in silence itself: a divine witness thatâ€¦",
         "layer_1": "The sacred emerges when we stop forcing it.",
         "layer_2": "In this moment, Presence is understood as trust in silence itself: a divine witness that holds ache without judgment"
       }
@@ -599,7 +599,7 @@
         "elenya"
       ],
       "fragments": {
-        "layer_0": "the player joins the ritual and recognizes that activation can be a form of preservation,…",
+        "layer_0": "the player joins the ritual and recognizes that activation can be a form of preservation,â€¦",
         "layer_1": "The sacred emerges when we stop forcing it.",
         "layer_2": "the player joins the ritual and recognizes that activation can be a form of preservation, enabling reconciliation between preservation and ritual"
       }
@@ -622,7 +622,7 @@
         "elenya"
       ],
       "fragments": {
-        "layer_0": "The glyph is revealed when the player demonstrates willingness to rely on others and be…",
+        "layer_0": "The glyph is revealed when the player demonstrates willingness to rely on others and beâ€¦",
         "layer_1": "The sacred emerges when we stop forcing it.",
         "layer_2": "The glyph is revealed when the player demonstrates willingness to rely on others and be relied upon"
       }
@@ -668,7 +668,7 @@
         "inodora"
       ],
       "fragments": {
-        "layer_0": "the player spends an entire night listening to stories and holds silent vigil, preventing the…",
+        "layer_0": "the player spends an entire night listening to stories and holds silent vigil, preventing theâ€¦",
         "layer_1": "To witness is to honor without changing.",
         "layer_2": "the player spends an entire night listening to stories and holds silent vigil, preventing the community's fear from spreading"
       }
@@ -691,7 +691,7 @@
         "juria"
       ],
       "fragments": {
-        "layer_0": "the player joins a celebration after a successful trade caravan arrives, understanding that joy can…",
+        "layer_0": "the player joins a celebration after a successful trade caravan arrives, understanding that joy canâ€¦",
         "layer_1": "Liberation lives in small renewals.",
         "layer_2": "the player joins a celebration after a successful trade caravan arrives, understanding that joy can exist even in transactional relationships"
       }
@@ -714,7 +714,7 @@
         "kaelen"
       ],
       "fragments": {
-        "layer_0": "the player sees that stolen memory is not absence but distortion, a ledger altered in…",
+        "layer_0": "the player sees that stolen memory is not absence but distortion, a ledger altered inâ€¦",
         "layer_1": "Fracture arrives quietly, unannounced.",
         "layer_2": "the player sees that stolen memory is not absence but distortion, a ledger altered in secret, a fracture that poisons the roots of belonging"
       }
@@ -760,7 +760,7 @@
         "kaelen"
       ],
       "fragments": {
-        "layer_0": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it…",
+        "layer_0": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether itâ€¦",
         "layer_1": "Bonds are forged through reliable action.",
         "layer_2": "Kaelen demonstrates his loyalty to Drossel which he states is not dependent on whether it is returned"
       }
@@ -783,7 +783,7 @@
         "kiv"
       ],
       "fragments": {
-        "layer_0": "the player helps him craft a new vessel and watches him break it, understanding the…",
+        "layer_0": "the player helps him craft a new vessel and watches him break it, understanding theâ€¦",
         "layer_1": "Grief becomes wisdom only when fully felt.",
         "layer_2": "the player helps him craft a new vessel and watches him break it, understanding the ritual: creation, connection, fracture, and beginning again"
       }
@@ -806,7 +806,7 @@
         "korrin"
       ],
       "fragments": {
-        "layer_0": "the player realizes that collapse can begin with sound alone, echoes that fracture trust until…",
+        "layer_0": "the player realizes that collapse can begin with sound alone, echoes that fracture trust untilâ€¦",
         "layer_1": "Fracture arrives quietly, unannounced.",
         "layer_2": "the player realizes that collapse can begin with sound alone, echoes that fracture trust until community itself unravels"
       }
@@ -829,7 +829,7 @@
         "korrin"
       ],
       "fragments": {
-        "layer_0": "Presence manifests when the player resists the urge to answer, realizing silence itself is witness…",
+        "layer_0": "Presence manifests when the player resists the urge to answer, realizing silence itself is witnessâ€¦",
         "layer_1": "To witness is to honor without changing.",
         "layer_2": "Presence manifests when the player resists the urge to answer, realizing silence itself is witness ? observation stronger than speech"
       }
@@ -875,7 +875,7 @@
         "korrin"
       ],
       "fragments": {
-        "layer_0": "trust is shown to be fragile ' promises are only as strong as the witness…",
+        "layer_0": "trust is shown to be fragile ' promises are only as strong as the witnessâ€¦",
         "layer_1": "Bonds are forged through reliable action.",
         "layer_2": "trust is shown to be fragile ' promises are only as strong as the witness who holds them"
       }
@@ -898,7 +898,7 @@
         "korrin"
       ],
       "fragments": {
-        "layer_0": "trust is revealed as discernment ' survival depends on knowing when speech heals and when…",
+        "layer_0": "trust is revealed as discernment ' survival depends on knowing when speech heals and whenâ€¦",
         "layer_1": "Bonds are forged through reliable action.",
         "layer_2": "trust is revealed as discernment ' survival depends on knowing when speech heals and when it poisons"
       }
@@ -1013,7 +1013,7 @@
         "kaelen"
       ],
       "fragments": {
-        "layer_0": "If the player aligns with Kaelen, he rewards them with the true route through the…",
+        "layer_0": "If the player aligns with Kaelen, he rewards them with the true route through theâ€¦",
         "layer_1": "Bonds are forged through reliable action.",
         "layer_2": "If the player aligns with Kaelen, he rewards them with the true route through the swamp; if not, he quietly leads them toward the maze instead"
       }
@@ -1105,7 +1105,7 @@
         "nordia the mourning singer (secondary arc)"
       ],
       "fragments": {
-        "layer_0": "the player realizes that inheritance is not only names or records, but the living act…",
+        "layer_0": "the player realizes that inheritance is not only names or records, but the living actâ€¦",
         "layer_1": "The living carry forward what breath can hold.",
         "layer_2": "the player realizes that inheritance is not only names or records, but the living act of breathing together, ancestors sustained in every breath drawn by the living"
       }
@@ -1151,7 +1151,7 @@
         "orvak"
       ],
       "fragments": {
-        "layer_0": "the player joins the Watcher in these fragile repairs, realizing that collapse can be softened…",
+        "layer_0": "the player joins the Watcher in these fragile repairs, realizing that collapse can be softenedâ€¦",
         "layer_1": "Fracture arrives quietly, unannounced.",
         "layer_2": "the player joins the Watcher in these fragile repairs, realizing that collapse can be softened but never erased, held back only by steady hands and shared ritual"
       }
@@ -1174,7 +1174,7 @@
         "rasha"
       ],
       "fragments": {
-        "layer_0": "the player witnesses and honors these arrivals, understanding that joy is often the flip side…",
+        "layer_0": "the player witnesses and honors these arrivals, understanding that joy is often the flip sideâ€¦",
         "layer_1": "Liberation lives in small renewals.",
         "layer_2": "the player witnesses and honors these arrivals, understanding that joy is often the flip side of survival"
       }
@@ -1197,7 +1197,7 @@
         "rasha - ferry operator"
       ],
       "fragments": {
-        "layer_0": "the player realizes that some bonds are built not through words but through reliable action,…",
+        "layer_0": "the player realizes that some bonds are built not through words but through reliable action,â€¦",
         "layer_1": "Bonds are forged through reliable action.",
         "layer_2": "the player realizes that some bonds are built not through words but through reliable action, day after day"
       }
@@ -1243,7 +1243,7 @@
         "ravi"
       ],
       "fragments": {
-        "layer_0": "that legacy isn't just inheritance of memory; it's the burden of witnessing loss and choosing…",
+        "layer_0": "that legacy isn't just inheritance of memory; it's the burden of witnessing loss and choosingâ€¦",
         "layer_1": "Sometimes bearing witness is all we can offer.",
         "layer_2": "that legacy isn't just inheritance of memory; it's the burden of witnessing loss and choosing to stay present afterward"
       }
@@ -1266,7 +1266,7 @@
         "sanor"
       ],
       "fragments": {
-        "layer_0": "the player sits with her in complete silence for as long as they can bear,…",
+        "layer_0": "the player sits with her in complete silence for as long as they can bear,â€¦",
         "layer_1": "Fracture arrives quietly, unannounced.",
         "layer_2": "the player sits with her in complete silence for as long as they can bear, discovering that presence doesn't require words"
       }
@@ -1289,7 +1289,7 @@
         "sealina"
       ],
       "fragments": {
-        "layer_0": "Returning it to Sealina allows her to remember her family and complete her inherited dance,…",
+        "layer_0": "Returning it to Sealina allows her to remember her family and complete her inherited dance,â€¦",
         "layer_1": "The living carry forward what breath can hold.",
         "layer_2": "Returning it to Sealina allows her to remember her family and complete her inherited dance, transforming loss into continuity"
       }
@@ -1312,7 +1312,7 @@
         "sealina"
       ],
       "fragments": {
-        "layer_0": "the player witnesses her struggle to reconnect with the ache of a lineage her body…",
+        "layer_0": "the player witnesses her struggle to reconnect with the ache of a lineage her bodyâ€¦",
         "layer_1": "Grief becomes wisdom only when fully felt.",
         "layer_2": "the player witnesses her struggle to reconnect with the ache of a lineage her body recalls but her mind has lost"
       }
@@ -1427,7 +1427,7 @@
         "sera"
       ],
       "fragments": {
-        "layer_0": "Trust manifests when care is given and received ? survival depends on hands extended in…",
+        "layer_0": "Trust manifests when care is given and received ? survival depends on hands extended inâ€¦",
         "layer_1": "To witness is to honor without changing.",
         "layer_2": "Trust manifests when care is given and received ? survival depends on hands extended in empathy"
       }
@@ -1450,7 +1450,7 @@
         "seyla"
       ],
       "fragments": {
-        "layer_0": "the player helps the Archivist piece together one family's story, realizing that inheritance isn't just…",
+        "layer_0": "the player helps the Archivist piece together one family's story, realizing that inheritance isn't justâ€¦",
         "layer_1": "Grief becomes wisdom only when fully felt.",
         "layer_2": "the player helps the Archivist piece together one family's story, realizing that inheritance isn't just blood'it's the terrible knowledge of being known, and the ache of being suddenly unknown"
       }
@@ -1473,7 +1473,7 @@
         "sybil"
       ],
       "fragments": {
-        "layer_0": "the player returns to sing the melody back, and the loner actually smiles'a rare, fleeting…",
+        "layer_0": "the player returns to sing the melody back, and the loner actually smiles'a rare, fleetingâ€¦",
         "layer_1": "Liberation lives in small renewals.",
         "layer_2": "the player returns to sing the melody back, and the loner actually smiles'a rare, fleeting expression of joy"
       }
@@ -1496,7 +1496,7 @@
         "tala"
       ],
       "fragments": {
-        "layer_0": "the player realizes that joy often comes not from grand celebration, but from the simple…",
+        "layer_0": "the player realizes that joy often comes not from grand celebration, but from the simpleâ€¦",
         "layer_1": "Liberation lives in small renewals.",
         "layer_2": "the player realizes that joy often comes not from grand celebration, but from the simple act of breaking bread with others"
       }
@@ -1519,7 +1519,7 @@
         "tessa"
       ],
       "fragments": {
-        "layer_0": "the player joins her song, understanding that some griefs are meant to be transmitted, not…",
+        "layer_0": "the player joins her song, understanding that some griefs are meant to be transmitted, notâ€¦",
         "layer_1": "Grief becomes wisdom only when fully felt.",
         "layer_2": "the player joins her song, understanding that some griefs are meant to be transmitted, not contained"
       }
@@ -1565,7 +1565,7 @@
         "thoran"
       ],
       "fragments": {
-        "layer_0": "the player commissions a mask that shows their true ache, then wears it publicly, allowing…",
+        "layer_0": "the player commissions a mask that shows their true ache, then wears it publicly, allowingâ€¦",
         "layer_1": "Grief becomes wisdom only when fully felt.",
         "layer_2": "the player commissions a mask that shows their true ache, then wears it publicly, allowing others to witness"
       }
@@ -1634,7 +1634,7 @@
         "saori"
       ],
       "fragments": {
-        "layer_0": "the player aligns light and shadow, understanding that the deepest ache is the one that…",
+        "layer_0": "the player aligns light and shadow, understanding that the deepest ache is the one thatâ€¦",
         "layer_1": "Presence speaks louder than words.",
         "layer_2": "the player aligns light and shadow, understanding that the deepest ache is the one that hasn't yet been named"
       }
@@ -1657,7 +1657,7 @@
         "velka"
       ],
       "fragments": {
-        "layer_0": "the player honors the remains, realizing legacy is covenant ' the living bound to remember…",
+        "layer_0": "the player honors the remains, realizing legacy is covenant ' the living bound to rememberâ€¦",
         "layer_1": "The living carry forward what breath can hold.",
         "layer_2": "the player honors the remains, realizing legacy is covenant ' the living bound to remember the dead"
       }
@@ -1669,7 +1669,7 @@
       "category": "Presence",
       "location": "Shrine Healing Alcove",
       "layer": 2,
-      "phrase": "Helia realizes that presence — not action — is what brings people back to themselves",
+      "phrase": "Helia realizes that presence â€” not action â€” is what brings people back to themselves",
       "required_gates": [
         "witness",
         "touch",
@@ -1680,9 +1680,9 @@
         "helia"
       ],
       "fragments": {
-        "layer_0": "Helia realizes that presence — not action — is what brings people back to themselves",
+        "layer_0": "Helia realizes that presence â€” not action â€” is what brings people back to themselves",
         "layer_1": "To witness is to honor without changing.",
-        "layer_2": "Helia realizes that presence — not action — is what brings people back to themselves"
+        "layer_2": "Helia realizes that presence â€” not action â€” is what brings people back to themselves"
       }
     },
     {
@@ -1703,7 +1703,7 @@
         "saori"
       ],
       "fragments": {
-        "layer_0": "the player chooses trust over fear and presses the console's cracked face, revealing latent potential…",
+        "layer_0": "the player chooses trust over fear and presses the console's cracked face, revealing latent potentialâ€¦",
         "layer_1": "Presence speaks louder than words.",
         "layer_2": "the player chooses trust over fear and presses the console's cracked face, revealing latent potential in memory fragments"
       }

@@ -1,4 +1,4 @@
-# Before & After: Glyph Transformation
+﻿# Before & After: Glyph Transformation
 
 ## Overview
 Rather than creating new glyphs, five existing glyphs were **recontextualized** to become
@@ -48,13 +48,13 @@ Player Role:    Participant in abstract archival journey
 ```
 Location:        The Shared Archive Building (Inside Chambers)
 Tone:           contemplative, tense, YEARNING
-Story:          Malrik navigates interior while Elenya's offerings are everywhere—
+Story:          Malrik navigates interior while Elenya's offerings are everywhereâ€”
                 dried flowers, ritual marks, songs. He mutters about the mess
                 to visitors and grumbles when dust settles, but he never disturbs
                 her placements; instead he catalogs and preserves them carefully.
                 He deliberately steps around each offering, almost tiptoeing
                 so as not to shift a single petal, ribbon, or scrap of paper.
-                To some players this measured caution reads as pure precision—
+                To some players this measured caution reads as pure precisionâ€”
                 an obsessive fastidiousness that values order over people.
                 To more empathetic players, the same behavior reads as
                 reverent care: though he complains aloud, his actions betray
@@ -62,7 +62,7 @@ Story:          Malrik navigates interior while Elenya's offerings are everywher
                 His eyes linger. His measured step IS his longing.
 Lesson:         Method can be armor; discipline can contain ache
 Player Role:    Detective noticing what he doesn't consciously acknowledge
-Love Subtext:   His measured pace isn't just method—it's a cage he built to
+Love Subtext:   His measured pace isn't just methodâ€”it's a cage he built to
                  contain his own longing, and yet the gentle care in his steps
                  suggests a reverence he won't admit aloud.
 ```
@@ -71,13 +71,13 @@ Love Subtext:   His measured pace isn't just method—it's a cage he built to
 
 ---
 
-## GLYPH 22: Glyph of Held Ache (Coren the Mediator) ⭐
+## GLYPH 22: Glyph of Held Ache (Cal the Mediator) â­
 
 ### BEFORE (3)
 ```
 Location:        Market Concourse (Marketplace)
 Tone:           ritualistic
-Story:          Generic marketplace disputes. Coren stands between disputants.
+Story:          Generic marketplace disputes. Cal stands between disputants.
 Lesson:         Co-witnessing = holding space without forcing resolution
 Player Role:    Learning mediation technique from various conflicts
 Emphasis:       Practical problem-solving
@@ -85,18 +85,18 @@ Emphasis:       Practical problem-solving
 
 ### AFTER (3)
 ```
-Location:        The Shared Archive Building (Concourse Central Chamber) ⭐
+Location:        The Shared Archive Building (Concourse Central Chamber) â­
 Tone:           contemplative, PARADOXICAL, HOLDING
-Story:          THE CENTERPIECE. Coren stands between Malrik and Elenya in the
-                archive building's central chamber. Not a generic dispute—THE dispute.
+Story:          THE CENTERPIECE. Cal stands between Malrik and Elenya in the
+                archive building's central chamber. Not a generic disputeâ€”THE dispute.
                 Malrik: "Records must be sealed." Elenya: "Space must breathe."
-                Coren: "Both are right. Both must coexist here."
-Lesson:         Paradox is not failure—it's wisdom. Integration ≠ compromise.
+                Cal: "Both are right. Both must coexist here."
+Lesson:         Paradox is not failureâ€”it's wisdom. Integration â‰  compromise.
 Player Role:    Understanding what true mediation means (not solving, but holding)
-Emphasis:       Philosophical depth—this is where the game's core teaching lives
+Emphasis:       Philosophical depthâ€”this is where the game's core teaching lives
 ```
 
-**Key Addition:** This glyph becomes the **thematic heart** of the game. Not just any mediation—THIS mediation.
+**Key Addition:** This glyph becomes the **thematic heart** of the game. Not just any mediationâ€”THIS mediation.
 
 ---
 
@@ -119,7 +119,7 @@ Tone:           hopeful, mythic, TENDER, HURT
 Story:          Elenya deliberately uses the archive building's central chamber
                 for the Covenant Flame. A direct statement: "This building should
                 be alive, not sealed. We should gather here." Malrik's shadow is
-                felt—his worry that fire threatens paper. Her hurt that he won't see.
+                feltâ€”his worry that fire threatens paper. Her hurt that he won't see.
 Lesson:         Activation honors memory as much as preservation does
 Player Role:    Witnessing her vision AND her pain at his rejection
 Emphasis:       Joy underlaid with ache; ritual as emotional statement
@@ -153,7 +153,7 @@ Story:          After the debate deadlocks, Elenya proposes survival rite SPECIF
                 records during ceremonies. Neither gives up; both sacrifice.
 Lesson:         Integration means daily acts of care, not ideological compromise
 Player Role:    Witnessing difficult negotiation AND grace moments that emerge
-Emphasis:       Mature, earned, specific—THIS building, THIS conflict
+Emphasis:       Mature, earned, specificâ€”THIS building, THIS conflict
 ```
 
 **Key Addition:** New tones "difficult" and "mature"; concrete time-sharing model; grace moments
@@ -168,10 +168,10 @@ Emphasis:       Mature, earned, specific—THIS building, THIS conflict
 | **Conflict** | Abstract principles | Specific debate: Preservation vs. Activation |
 | **Emotional Weight** | Instructional | Personal stakes (love story woven in) |
 | **Character Interaction** | NPCs teaching player | NPCs in conflict with each other; player witnesses |
-| **Love Story** | Absent | Woven through: fear (Malrik), hurt (Elenya), holding (Coren) |
+| **Love Story** | Absent | Woven through: fear (Malrik), hurt (Elenya), holding (Cal) |
 | **Player Agency** | Observation/learning | Multiple choice branches (support/challenge/mediate) |
 | **Narrative Purpose** | Standalone glyph lessons | Chapters of one unfolding arc |
-| **Connection to Ending** | Loose thematic link | Direct: Malrik/Elenya rebuild choice → Ending quality |
+| **Connection to Ending** | Loose thematic link | Direct: Malrik/Elenya rebuild choice â†’ Ending quality |
 
 ---
 
@@ -185,7 +185,7 @@ Emphasis:       Mature, earned, specific—THIS building, THIS conflict
 
 ### Why Recontextualization Works
 
-1. **Character Consistency:** Malrik's philosophy about boundaries/steps doesn't change—just where
+1. **Character Consistency:** Malrik's philosophy about boundaries/steps doesn't changeâ€”just where
 it manifests 2. **Thematic Coherence:** The game's lesson (systems cannot do what people cannot)
 lives in HOW these glyphs interconnect 3. **Scope Preservation:** Stays within the 68-glyph frame,
 making the design more elegant 4. **Narrative Depth:** Five glyphs tell a *story* rather than five
@@ -196,17 +196,17 @@ principle becomes pain
 
 ```
 Malrik teaches Boundary Stone:  "Sovereignty is saying 'no'"
-↓
+â†“
 Malrik teaches Measured Step:   "My 'no' contains my longing"
-↓
-Coren teaches Held Ache:        "Both 'yes' and 'no' are valid"
-↓
+â†“
+Cal teaches Held Ache:        "Both 'yes' and 'no' are valid"
+â†“
 Elenya teaches Covenant Flame:  "My 'yes' honors your memory"
-↓
+â†“
 Elenya teaches Shared Survival: "We can say yes AND no together"
-↓
+â†“
 BUILDING COLLAPSE: "What happens when people won't hold paradox?"
-↓
+â†“
 PLAYER CHOICE: "Will they rebuild? Can I help them integrate?"
 ```
 
@@ -224,8 +224,8 @@ All five glyphs are *present in this arc*. None are wasted.
 - Player sees the evidence: her offerings, his lingering gaze
 - Revelation: He loves her and it terrifies him
 
-### Glyph 22: Love Story Is Mediated (By Coren)
-- Coren sees what they won't admit
+### Glyph 22: Love Story Is Mediated (By Cal)
+- Cal sees what they won't admit
 - Teaching: Love and disagreement can coexist
 
 ### Glyph 51: Love Story Is Felt (Her Hurt)
@@ -244,8 +244,9 @@ These five glyphs now form an **integrated love story** wrapped around a **philo
 about how to honor memory. Rather than diluting the design with new glyphs, recontextualizing
 existing ones:
 
-✅ Maintains design elegance ✅ Deepens character relationships ✅ Makes the game's core lesson
-concrete ✅ Gives players multiple meaningful choices ✅ Creates a path from principle to personal
+âœ… Maintains design elegance âœ… Deepens character relationships âœ… Makes the game's core lesson
+concrete âœ… Gives players multiple meaningful choices âœ… Creates a path from principle to personal
 stakes to synthesis
 
 The building isn't just a setting. It's where theory meets love.
+

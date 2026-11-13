@@ -1,9 +1,9 @@
-"""
+﻿"""
 NPC Manager: REMNANTS System
 =============================
 
 Manages NPC personality evolution through the REMNANTS trait system.
-Implements TONE → REMNANTS correlations and multi-NPC ripple effects.
+Implements TONE â†’ REMNANTS correlations and multi-NPC ripple effects.
 
 REMNANTS Traits:
 - Resolve: Firmness, conviction, backbone
@@ -15,11 +15,11 @@ REMNANTS Traits:
 - Trust: Confidence in others
 - Skepticism: Doubt, caution, suspicion
 
-TONE → REMNANTS Correlation:
-- Trust (player) → raises Trust, Resolve; lowers Skepticism
-- Observation (player) → raises Nuance, Memory; lowers Authority
-- Narrative Presence (player) → raises Authority, Resolve; lowers Nuance
-- Empathy (player) → raises Empathy, Need; lowers Resolve
+TONE â†’ REMNANTS Correlation:
+- Trust (player) â†’ raises Trust, Resolve; lowers Skepticism
+- Observation (player) â†’ raises Nuance, Memory; lowers Authority
+- Narrative Presence (player) â†’ raises Authority, Resolve; lowers Nuance
+- Empathy (player) â†’ raises Empathy, Need; lowers Resolve
 """
 
 from typing import Dict, List, Tuple, Optional
@@ -102,10 +102,10 @@ class NPCProfile:
 
 class NPCManager:
     """
-    Manages all NPCs and applies TONE → REMNANTS correlations and ripple effects.
+    Manages all NPCs and applies TONE â†’ REMNANTS correlations and ripple effects.
     """
     
-    # TONE → REMNANTS correlation map
+    # TONE â†’ REMNANTS correlation map
     TONE_CORRELATION = {
         "trust": {
             "raise": ["trust", "resolve"],
@@ -165,7 +165,7 @@ class NPCManager:
         Args:
             tone_effects: dict of TONE stat changes, e.g. {"empathy": 0.2, "trust": -0.1}
         """
-        # Step 1: Apply direct TONE → REMNANTS correlations to each NPC
+        # Step 1: Apply direct TONE â†’ REMNANTS correlations to each NPC
         for npc in self.npcs.values():
             for tone_stat, delta in tone_effects.items():
                 if tone_stat in self.TONE_CORRELATION:
@@ -304,7 +304,7 @@ class NPCManager:
         """
         When a lie is discovered, propagate skepticism through social network.
         
-        Korrin is special — she actively spreads rumors about lies.
+        Korrin is special â€” she actively spreads rumors about lies.
         """
         # Connected NPCs lose trust in player (through the source NPC's skepticism)
         connected_npcs = self.influence_map.get(source_npc, {})
@@ -485,7 +485,7 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "skepticism": 0.2    # Mystics inspire faith, lower skepticism
         })
         ,
-        # Saori: Oracle — measured, reflective, paradoxical (persistent presence)
+        # Saori: Oracle â€” measured, reflective, paradoxical (persistent presence)
         NPCProfile("Saori", {
             "resolve": 0.8,
             "empathy": 0.6,
@@ -496,8 +496,8 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "trust": 0.4,
             "skepticism": 0.7
         }),
-        # Coren: Mediator - bridges opposing factions, high nuance and trust
-        NPCProfile("Coren the Mediator", {
+        # Cal: Mediator - bridges opposing factions, high nuance and trust
+        NPCProfile("Cal the Mediator", {
             "resolve": 0.6,
             "empathy": 0.65,
             "memory": 0.6,
@@ -758,7 +758,7 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
             "Archivist Malrik": -0.1,
             "Saori": 0.05
         },
-        "Coren the Mediator": {
+        "Cal the Mediator": {
             "Archivist Malrik": 0.1,
             "High Seer Elenya": 0.1,
             "Mariel": 0.05,
@@ -772,3 +772,4 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
             "Mariel": 0.04
         }
     }
+

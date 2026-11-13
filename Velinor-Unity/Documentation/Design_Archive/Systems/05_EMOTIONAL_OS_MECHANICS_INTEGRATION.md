@@ -1,13 +1,13 @@
-# Velinor: Emotional OS Mechanics Integration
+﻿# Velinor: Emotional OS Mechanics Integration
 
 ## Overview
 
 Velinor's emotional OS is not separate from the story. It *is* the story.
 
 Every mechanic in the emotional OS is designed to make the player feel the consequences of choosing
-synthesis, skepticism, or empathy—not as abstract stats, but as ripples through the world.
+synthesis, skepticism, or empathyâ€”not as abstract stats, but as ripples through the world.
 
-The narrative spine (Saori → Ravi/Nima → Marketplace Debate → Collapse → Corelink) exists to test
+The narrative spine (Saori â†’ Ravi/Nima â†’ Marketplace Debate â†’ Collapse â†’ Corelink) exists to test
 the player's emotional coherence repeatedly at increasing scales.
 
 ---
@@ -106,13 +106,13 @@ These are measured continuously, updated after every significant NPC interaction
 **If Integration < 50 & Empathy < 50:**
 - Player takes a side (Malrik's or Elenya's)
 - This reinforces the factional divide
-- Coren notices: *"You're making this worse, actually."*
+- Cal notices: *"You're making this worse, actually."*
 - Sets up for a more severe collapse event
 
 **If Awareness > 70:**
 - Player notices Malrik's fingers tapping (nervous energy)
 - Player notices Elenya's eyes on Malrik when he's not looking
-- Player notices Coren's exhaustion
+- Player notices Cal's exhaustion
 - These observations unlock dialogue options that show the player sees the love underneath
 
 **If Grief > 60 (from Ravi/Nima encounter):**
@@ -122,7 +122,7 @@ These are measured continuously, updated after every significant NPC interaction
 
 **Mechanical Effect:**
 - Malrik/Elenya: Rebuild Potential is determined by player's trait combination
-- Coren: Relationship shifts based on whether player helps or hinders
+- Cal: Relationship shifts based on whether player helps or hinders
 - Factional Affiliations: Player begins to be perceived as aligned or neutral
 - Future NPC Interactions: Factions will reference player's stance in the debate
 
@@ -155,7 +155,7 @@ These are measured continuously, updated after every significant NPC interaction
 **If Awareness < 50:**
 - Player misses the subtext of the collapse (that it mirrors their relationship)
 - Player might suggest practical solutions only (storage, logistics)
-- Coren notices: *"You're missing the real crisis here."*
+- Cal notices: *"You're missing the real crisis here."*
 - Player's interventions are less effective
 
 **If Hope > 70:**
@@ -172,7 +172,7 @@ These are measured continuously, updated after every significant NPC interaction
 **Mechanical Effect:**
 - Malrik/Elenya: Relationship state shifts based on player's emotional tone
 - Rebuild Potential: Final determination happens here
-- Coren: Recognizes player's role in helping or hindering
+- Cal: Recognizes player's role in helping or hindering
 - Ending Trajectory: The collapse result locks in which ending pathways are available
 
 ---
@@ -231,7 +231,7 @@ These are measured continuously, updated after every significant NPC interaction
 - More honest about her fears and hopes
 - Trusts the player to understand nuance
 
-### **Coren's Responses by Trait Profile**
+### **Cal's Responses by Trait Profile**
 
 **To High Empathy + Integration Players:**
 - Sees the player as a potential successor mediator
@@ -372,7 +372,7 @@ Traits become nearly fixed; player's choices are validated rather than shifted:
 ### **Act II: Trait Testing**
 - Marketplace Debate: Player's traits face their first real test
 - Recurrence Scenes: Traits determine whether conflicts escalate or resolve
-- Player learns: *"My traits shape how people respond. They don't change me—but they change how the world sees me."*
+- Player learns: *"My traits shape how people respond. They don't change meâ€”but they change how the world sees me."*
 
 ### **Act III: Trait Crisis**
 - Building Collapse: Player's traits face maximum test
@@ -423,7 +423,7 @@ If the player makes 10 empathy-leaning choices followed by 10 empathy-leaning ch
 
 ### **How Faction Perception Works**
 
-Each faction (Archivists, Mystics) and mediator (Coren) has their own trait preference:
+Each faction (Archivists, Mystics) and mediator (Cal) has their own trait preference:
 
 **Malrik's Archivists value:**
 - Skepticism > Integration (questions systems) + Awareness (understands complexity)
@@ -433,7 +433,7 @@ Each faction (Archivists, Mystics) and mediator (Coren) has their own trait pref
 - Integration > Skepticism + Empathy > Awareness (feels truth of relationship)
 - Can respect Skepticism if paired with Empathy (person cares but asks hard questions)
 
-**Coren values:**
+**Cal values:**
 - Integration above all (sees multiple truths as valid)
 - Respects Awareness (person notices what's really happening)
 - Frustrated by pure Skepticism (distancing without engagement)
@@ -453,14 +453,14 @@ Each faction (Archivists, Mystics) and mediator (Coren) has their own trait pref
 **Coherence measures:** The consistency between player's trait profile and their actual choices.
 
 **What creates Coherence:**
-- High Empathy player keeps making empathetic choices → Coherence increases
-- High Integration player keeps advocating for synthesis → Coherence increases
-- Mixed traits with mixed choices → Coherence remains stable
+- High Empathy player keeps making empathetic choices â†’ Coherence increases
+- High Integration player keeps advocating for synthesis â†’ Coherence increases
+- Mixed traits with mixed choices â†’ Coherence remains stable
 
 **What breaks Coherence:**
-- High Empathy player suddenly dismisses someone's pain → Coherence drops
-- High Skepticism player suddenly trusts without questioning → Coherence drops
-- Player's words and actions don't match → Coherence drops
+- High Empathy player suddenly dismisses someone's pain â†’ Coherence drops
+- High Skepticism player suddenly trusts without questioning â†’ Coherence drops
+- Player's words and actions don't match â†’ Coherence drops
 
 **How Coherence Affects the Story:**
 - High Coherence: NPCs trust the player completely; all dialogue feels authentic
@@ -470,7 +470,7 @@ Each faction (Archivists, Mystics) and mediator (Coren) has their own trait pref
 **Why Coherence Matters:**
 The entire emotional OS is built on the idea that **emotional authenticity matters**.
 
-If the player is incoherent—saying one thing but doing another—the world notices and responds
+If the player is incoherentâ€”saying one thing but doing anotherâ€”the world notices and responds
 accordingly.
 
 This is why Ending 4 (The Earned Synthesis) is the "truest" ending: it requires the highest
@@ -495,7 +495,7 @@ every scale:
 If coherence has been maintained, the ending feels inevitable. Not because the game forced it, but
 because the player recognizes themselves in it.
 
-If coherence has been broken, the ending feels surprising, even conflicted—which is also authentic,
+If coherence has been broken, the ending feels surprising, even conflictedâ€”which is also authentic,
 because it reflects a player who changed their mind along the way.
 
 Either way, the emotional OS has done its job: it's shown the player what they actually believe
@@ -517,12 +517,13 @@ through hundreds of choices, not told them what they should believe through a si
 
 ### **For Narrative Designers:**
 - Remember that the player's traits determine HOW the story unfolds, not WHETHER
-- The spine is fixed (Saori → Ravi/Nima → Collapse → Corelink)
+- The spine is fixed (Saori â†’ Ravi/Nima â†’ Collapse â†’ Corelink)
 - The ribs are variable (how each encounter happens depends on traits)
 - The organs breathe (NPC behavior and world state respond to traits)
 
 ### **For Players:**
 - There is no "correct" trait profile
-- But there is authentic trait profile—what you actually choose, consistently
+- But there is authentic trait profileâ€”what you actually choose, consistently
 - The game reflects that authenticity back to you in the ending
 - Replayability comes from exploring different kinds of authenticity, not finding the "best" path
+

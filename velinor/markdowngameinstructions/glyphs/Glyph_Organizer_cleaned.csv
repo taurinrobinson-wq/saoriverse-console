@@ -1,12 +1,12 @@
-Category,Count,Theme,NPC Giver,Glyph,Location,Storyline
+﻿Category,Count,Theme,NPC Giver,Glyph,Location,Storyline
 Legacy,2,"Family, ancestry, ritual inheritance",Archivist Malrik,Glyph of Ancestral Record,Desert tomb archives,Inheritance rationalized as historical evidence.
-Legacy,5,"Family, ancestry, ritual inheritance",Archivist Malrik,Glyph of Sand Memories,Desert archive chamber,"Malrik insists legacy is record, not myth. Names etched in dust reveal identity’s fragile persistence."
+Legacy,5,"Family, ancestry, ritual inheritance",Archivist Malrik,Glyph of Sand Memories,Desert archive chamber,"Malrik insists legacy is record, not myth. Names etched in dust reveal identityâ€™s fragile persistence."
 Sovereignty,17,"Boundaries, choice, clarity",Archivist Malrik,Glyph of Measured Step,Archive Interior,Malrik teaches disciplined movement through unstable chambers; discipline protects but can isolate.
 Sovereignty,18,"Boundaries, choice, clarity",Archivist Malrik,Glyph of Boundary Stone,Archive Entrance,"The player helps mark preservation zones, learning the cost of rigid boundaries."
 Sovereignty,21,"Boundaries, choice, clarity",Captain Veynar,Glyph of Iron Boundary,Testing Grounds,Veynar teaches that boundaries enforced through vigilance maintain stability.
 Trust,39,"Community, restoration, interdependence",Captain Veynar,Glyph of Weary Justice,Market Concourse,Justice requires vigilance even when weary.
-Collapse,44,"Memory distortion, fear, the fracture",Coren,Glyph of Preemptive Severance,Mountain Encampment,Cutting ties first becomes a defensive logic born of trauma.
-Sovereignty,16,"Boundaries, choice, clarity",Coren the Mediator,Glyph of Held Ache,Market Concourse,The player mediates conflict by acknowledging pain without forcing resolution.
+Collapse,44,"Memory distortion, fear, the fracture",Cal,Glyph of Preemptive Severance,Mountain Encampment,Cutting ties first becomes a defensive logic born of trauma.
+Sovereignty,16,"Boundaries, choice, clarity",Cal the Mediator,Glyph of Held Ache,Market Concourse,The player mediates conflict by acknowledging pain without forcing resolution.
 Sovereignty,60,"Boundaries, choice, clarity",Dakrin,Glyph of Interruptive Restraint,Testing Grounds,The impulse is held; the ache acknowledged but not acted upon.
 Sovereignty,15,"Boundaries, choice, clarity",Dakrin - Safety Overseer,Glyph of Emotional Pause,Testing Grounds,Dakrin teaches interruption: the ability to pause before acting on anger or despair.
 Collapse,47,"Memory distortion, fear, the fracture",Dalen,Glyph of Shattered Corridor,Unstable Ruins,Collapse fractures memory through reckless survival.
@@ -34,23 +34,23 @@ Sovereignty,22,"Boundaries, choice, clarity",Kaelen the Suspected Thief,Glyph of
 Trust,41,"Community, restoration, interdependence",Korrin,Glyph of Whispered Pact,Market Alcove,Secrets bind merchants; restraint builds trust.
 Trust,42,"Community, restoration, interdependence",Korrin,Glyph of Broken Promise,Merchant Alcove,Promises break easily; trust is fragile.
 Collapse,52,"Memory distortion, fear, the fracture",Korrin,Glyph of Fractured Rumor,Market Square,Rumors distort truth until community unravels.
-Presence,27,"Touch, silence, witness",Korrin the Gossip,Glyph of Listening Silence,Informant’s Alcove,"Korrin’s quiet presence draws out truths people never meant to share. He listens without speaking, collecting fragments that slip through the cracks of conversation. His silence unsettles some, comforts others, but always reveals more than anyone intended.."
-Legacy,3,"Family, ancestry, ritual inheritance",Lark - Community Mason,Glyph of Shared Weight,River bridge,"A collapsed bridge traps children; the player helps rescue them, recalling Ravi and Nima’s story and feeling a sense of rebalancing."
-Joy,34,"Play, reunion, creative spark",Lira - Skilled Boatmaker,Glyph of Crafted Wonder,Boatwright’s Workshop,Launching a new boat reveals joy born from repaired materials.
+Presence,27,"Touch, silence, witness",Korrin the Gossip,Glyph of Listening Silence,Informantâ€™s Alcove,"Korrinâ€™s quiet presence draws out truths people never meant to share. He listens without speaking, collecting fragments that slip through the cracks of conversation. His silence unsettles some, comforts others, but always reveals more than anyone intended.."
+Legacy,3,"Family, ancestry, ritual inheritance",Lark - Community Mason,Glyph of Shared Weight,River bridge,"A collapsed bridge traps children; the player helps rescue them, recalling Ravi and Nimaâ€™s story and feeling a sense of rebalancing."
+Joy,34,"Play, reunion, creative spark",Lira - Skilled Boatmaker,Glyph of Crafted Wonder,Boatwrightâ€™s Workshop,Launching a new boat reveals joy born from repaired materials.
 Collapse,45,"Memory distortion, fear, the fracture",Malrik,Glyph of Fractured Memory,Archive Ruins,Corrupted emotional data reveals institutional failure.
 Collapse,46,"Memory distortion, fear, the fracture",Malrik,Glyph of Mirage Echo,Desert Heat,False signals create uncertainty; survival requires accepting the unknown.
-Legacy,4,"Family, ancestry, ritual inheritance",Mariel the Weaver,Glyph of Worn Cloth,Community Alcove,The player learns to appreciate the warmth provided by cloth woven by others’ hands.
+Legacy,4,"Family, ancestry, ritual inheritance",Mariel the Weaver,Glyph of Worn Cloth,Community Alcove,The player learns to appreciate the warmth provided by cloth woven by othersâ€™ hands.
 Ache,13,"Loss, grief, betrayal",Mariel the Weaver,Glyph of Repairing Loss,Community Weaving Workshop,Mariel weaves salvaged threads into memorial cloth. Grief becomes care when shared.
 Trust,38,"Community, restoration, interdependence",Mariel the Weaver,Glyph of Binding Cloth,Community Alcove,Threads bind lives together through shared weaving.
 Presence,25,"Touch, silence, witness",Nima,Glyph of Remembrance,Market Overlook,The shrine hums with aching resonance; memories flood the player.
 Collapse,53,"Memory distortion, fear, the fracture",Orvak,Glyph of Quiet Collapse,Collapsed Watchtower,Small routines of survival reveal slow erosion.
 Trust,43,"Community, restoration, interdependence",Rasha,Glyph of Mutual Passage,Harbor Dock,Wordless coordination reveals earned interdependence.
 Joy,33,"Play, reunion, creative spark",Rasha - Ferry Operator,Glyph of Arrival,Harbor Dock,Arrival after danger brings relief and joy.
-Ache,9,"Loss, grief, betrayal",Ravi & Nima,Glyph of Sorrow,Market Square,Ophina died in a collapse; the pedestal reacts to grief and slows the player’s movement.
-Collapse,12,"Loss, grief, betrayal",Sanor - Silent Elder,Glyph of Silent Ache,Abandoned Shelter,Sanor hasn’t spoken since collapse; silence reveals the ache of words that will never be said.
+Ache,9,"Loss, grief, betrayal",Ravi & Nima,Glyph of Sorrow,Market Square,Ophina died in a collapse; the pedestal reacts to grief and slows the playerâ€™s movement.
+Collapse,12,"Loss, grief, betrayal",Sanor - Silent Elder,Glyph of Silent Ache,Abandoned Shelter,Sanor hasnâ€™t spoken since collapse; silence reveals the ache of words that will never be said.
 Ache,7,"Loss, grief, betrayal",Saori,Glyph of Infrasensory Oblivion,Chamber of Delayed Echoes,A dark void surrounded by faint rings teaches that abandonment sometimes arrives before it is felt.
 Presence,55,"Touch, silence, witness",Saori,Glyph of Dormant Potential,Hidden Console,Pressing the cracked console reveals latent memory potential.
-Ache,56,"Loss, grief, betrayal",Saori,Glyph of Mirrored Loss,Mirror Chamber,The player discerns Saori’s real expression among distortions.
+Ache,56,"Loss, grief, betrayal",Saori,Glyph of Mirrored Loss,Mirror Chamber,The player discerns Saoriâ€™s real expression among distortions.
 Ache,58,"Loss, grief, betrayal",Saori,Glyph of Sensory Oblivion,Chamber of Delayed Echoes,Abandonment subtly sensed but unclear.
 Joy,57,"Longing, creative spark, quiet intimacy",Sera & Korrin,Glyph of Shared Dawn,Market Courtyard,A quiet moment reveals unexpected connection.
 Presence,26,"Touch, silence, witness",Sera the Herb Novice,Glyph of Healing Presence,Herb Alcove,Sera lacks confidence in herself and sometimes feels like there's something she's forgetting. Collecting this glyph causes her so feel a greater sense of resolve.
@@ -65,3 +65,4 @@ Ache,14,"Loss, grief, betrayal",Thoran - Market Artisan,Glyph of Honest Expressi
 Sovereignty,19,"Boundaries, choice, clarity",Tovren the Cartwright,Glyph of Marked Boundaries,Collapsing Trade Route,The player marks unstable paths with chalk; clarity protects travelers.
 Trust,37,"Community, restoration, interdependence",Tovren the Cartwright,Glyph of Shared Burden,Merchant Caravan,Survival depends on bearing weight together.
 Collapse,48,"Memory distortion, fear, the fracture",Captain Veynar,Glyph of Fractured Oath,Guard Barracks,Promises dissolve under collapse; authority erodes.
+

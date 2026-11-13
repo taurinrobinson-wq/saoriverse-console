@@ -1,4 +1,4 @@
-"""
+﻿"""
 Game State Serialization - Phase 5
 Captures the complete game state from all phases (1-4)
 """
@@ -137,7 +137,7 @@ class GameStateBuilder:
         snapshot.npc_compatibility = {
             'malrik': 75.0 if orchestrator.npc_response_engine.should_npc_trust_player('malrik') else 25.0,
             'elenya': 75.0 if orchestrator.npc_response_engine.should_npc_trust_player('elenya') else 25.0,
-            'coren': 50.0,  # Coren is a neutral observer
+            'Cal': 50.0,  # Cal is a neutral observer
         }
         
         # Phase 3: Collapse Event
@@ -305,3 +305,4 @@ class GameStateValidator:
             errors.append("Game marked completed but no ending recorded")
         
         return errors
+

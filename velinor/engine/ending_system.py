@@ -1,4 +1,4 @@
-"""
+﻿"""
 Ending System for Velinor - Phase 4
 Implements 6 distinct endings based on aftermath path + Corelink decision
 """
@@ -119,7 +119,7 @@ The Corelink chamber glows with soft light. You stand with Saori and Velinor, lo
 massive console that once nearly destroyed a civilization.
 
 In the city below, you can see movement. Construction. Malrik and Elenya stand together at the 
-ruins of the archive, surrounded by workers—archivists and mystics working side by side. It's 
+ruins of the archive, surrounded by workersâ€”archivists and mystics working side by side. It's 
 not perfect. There's still tension, still disagreement. But they're working together, learning 
 to hold each other's truths.
 
@@ -134,7 +134,7 @@ might be possible after all.
 Saori nods. She understands. Velinor, finally beginning to heal, agrees.
 
 The Corelink restarts with a sound like breath returning to a sleeping body. Light floods the 
-chamber—but it's not the harsh, controlling light of before. It's warm. Alive. The console 
+chamberâ€”but it's not the harsh, controlling light of before. It's warm. Alive. The console 
 picks up signals from the city below: the voices of Malrik and Elenya, now intertwined in the 
 data. The archive is sending new information, different from before. Not orders. Not control. 
 A conversation between two ways of knowing, finally learning to listen to each other.
@@ -142,7 +142,7 @@ A conversation between two ways of knowing, finally learning to listen to each o
 The codex glows with balanced colors. Malrik's archival blues merging with Elenya's mystical 
 ambers, creating something new: white light. The light of synthesis.
 
-Saori's face transforms. For the first time since you've known her, she smiles—not the uncertain 
+Saori's face transforms. For the first time since you've known her, she smilesâ€”not the uncertain 
 smile of someone in pain, but the genuine smile of someone seeing a possibility.
 
 "They did it," she whispers. "They actually did it."
@@ -156,9 +156,9 @@ manufacture consensus. No longer imposing a single way of being.
 It's supporting what the people want to build.
 
 Below, in the marketplace, you see the factions beginning to gather. Not to debate. Not to fight. 
-To share. To build. Coren stands between Malrik and Elenya, but no longer as mediator. As friend.
+To share. To build. Cal stands between Malrik and Elenya, but no longer as mediator. As friend.
 
-From this moment forward, Velhara will be different. Harder in some ways—the people will no 
+From this moment forward, Velhara will be different. Harder in some waysâ€”the people will no 
 longer have a system to blame when things go wrong. But infinitely more alive.
 
 The people learned synthesis. And the system finally learned to serve.
@@ -179,7 +179,7 @@ competing philosophies. But as a city, finally learning to think with more than 
 [THE PYRRHIC RESTART]
 
 The Corelink chamber hums with the familiar sound of resurrection. You've chosen to restart 
-the system. It felt like the right choice—the safe choice. The familiar choice.
+the system. It felt like the right choiceâ€”the safe choice. The familiar choice.
 
 But as the console powers up, you notice something wrong. The light it produces is too bright. 
 Too artificial. Too clean.
@@ -205,7 +205,7 @@ across the divide the way Malrik and Elenya were asking you to.
 
 And so the system is restarting to manage a problem that has never actually been solved. The 
 factions will operate more efficiently under system guidance. But the synthesis that would have 
-made the system unnecessary—that's not happening.
+made the system unnecessaryâ€”that's not happening.
 
 The Corelink glows, but it glows over unhealed wounds. It illuminates fractures rather than 
 bridging them. The system is running, but running on borrowed time. The cracks are still there, 
@@ -215,14 +215,14 @@ From the chamber window, you watch Malrik and Elenya disappear into their respec
 the city. Two brilliant people, learning to live apart because the world asked them to be one or 
 the other, not both at once.
 
-And now the system—the very thing that couldn't hold them together—is restarting to govern the 
+And now the systemâ€”the very thing that couldn't hold them togetherâ€”is restarting to govern the 
 result.
 
 ---
 
 **THE MONOLOGUE**
 
-"We restarted the machine. The city glows again. We did everything right—except the one thing 
+"We restarted the machine. The city glows again. We did everything rightâ€”except the one thing 
 that mattered. We saved the system. But we didn't save the people. And the system alone has 
 never been enough."
 """
@@ -242,11 +242,11 @@ This is the end of an era. The end of managed equilibrium. The end of systems th
 can hold a civilization together through calculation alone.
 
 Outside, Velhara begins to go dark as well. The centralized systems that controlled the city's 
-lights, the water, the shared spaces—all offline. The city will have to learn to function 
+lights, the water, the shared spacesâ€”all offline. The city will have to learn to function 
 without them.
 
 Malrik and Elenya never found their way back to each other. The archive lies in ruins, 
-unclaimed by either faction. They're scattered now—archivists trying to preserve what remains, 
+unclaimed by either faction. They're scattered nowâ€”archivists trying to preserve what remains, 
 mystics retreating to places of peace and prayer. Both groups grieving, both groups alone.
 
 There is no easy path forward. The city is broken. The people are fractured. There is no system 
@@ -254,14 +254,14 @@ to fall back on, no machine to manage the disorder.
 
 But for the first time, the disorder is *honest*.
 
-Small fires light up across the city—not system-managed light, but human light. People gathering 
+Small fires light up across the cityâ€”not system-managed light, but human light. People gathering 
 in groups. Families, communities, friends. They're figuring it out themselves. It's slower. It's 
 messier. People are scared.
 
 But nobody's pretending anymore. Nobody's hiding behind system logic. Nobody's believing the 
 machine knows better than their own hearts.
 
-Coren moves through the city, still trying to help people connect, but without the benefit of 
+Cal moves through the city, still trying to help people connect, but without the benefit of 
 institutional power. He's smaller now. Less important. Just one person, reaching out.
 
 And somehow, that makes what he does matter more.
@@ -300,17 +300,17 @@ And above, in the city, you hear the sound that matters: construction. Voices. L
 with frustration. The sound of people building something together.
 
 Malrik and Elenya have chosen to rebuild their archive. It's not finished. It may never be 
-finished—there's no system guiding the work, no central plan to follow. But they're doing it 
+finishedâ€”there's no system guiding the work, no central plan to follow. But they're doing it 
 anyway, side by side, learning to hold each other's truth in their hands.
 
 The archive that emerges is unlike anything in Velinor's history. Half archival precision, half 
 mystical intuition. Shelves of carefully catalogued records next to spaces designed for 
 meditation and contemplation. It's chaotic. It's beautiful. It's theirs.
 
-Coren stands between them, but not as a mediator anymore. As a friend. A witness. A believer 
+Cal stands between them, but not as a mediator anymore. As a friend. A witness. A believer 
 in the possibility that people can choose synthesis when systems stop forcing fracture.
 
-The marketplace below is alive with possibility. The factions remain distinct—Malrik's people 
+The marketplace below is alive with possibility. The factions remain distinctâ€”Malrik's people 
 still value order, Elenya's people still value intuition. But they're mixing now. Intermarrying. 
 Creating new families that hold both truths.
 
@@ -356,7 +356,7 @@ You look at Saori. "Then we should let them have the system's support."
 She nods. Together, you restart the Corelink.
 
 It comes online with a different feel than before. As the console powers up, it begins receiving 
-signals from the city below—from the archive that's being rebuilt. Two factions' voices, 
+signals from the city belowâ€”from the archive that's being rebuilt. Two factions' voices, 
 intertwining in the data. The system picks up the signal of integration happening and learns from 
 it.
 
@@ -373,7 +373,7 @@ Malrik and Elenya continue their work. It's still uncertain. There are still mom
 But the Corelink is there, supporting rather than imposing. The system is learning to serve 
 instead of dominate.
 
-Coren moves between the factions, but now he's not working against a system that pulls people 
+Cal moves between the factions, but now he's not working against a system that pulls people 
 apart. He's working with a system that's learning to hold complexity.
 
 Saori and Velinor's connection is healing. Slowly but genuinely.
@@ -388,7 +388,7 @@ The city continues to change. Slowly. Imperfectly. But together.
 **THE MONOLOGUE**
 
 "The system and the people are learning together. It's not perfect yet. But it's a beginning. 
-And a beginning where both the system and the people are listening to each other—that's 
+And a beginning where both the system and the people are listening to each otherâ€”that's 
 something Velinor has never had before."
 """
     
@@ -413,7 +413,7 @@ The city begins to organize itself differently. Small communities form around th
 in the archive. People gathering voluntarily, drawn by the possibility of what Malrik and Elenya 
 are building together.
 
-Coren moves between the factions—not as a mediator backed by systems power, but as a human 
+Cal moves between the factionsâ€”not as a mediator backed by systems power, but as a human 
 being reaching out. It's smaller. It's more intimate. It matters differently.
 
 Malrik and Elenya continue their work in the archive, lit by candles and determination. It's 
@@ -495,8 +495,8 @@ class NPCFinalStates:
                     final_location="archive",
                     final_dialogue="I didn't think it was possible. But here we are. Building together."
                 ),
-                "coren": NPCFinalState(
-                    name="Coren",
+                "Cal": NPCFinalState(
+                    name="Cal",
                     position="rebuilt_together",
                     emotional_state="hopeful",
                     final_location="archive",
@@ -520,8 +520,8 @@ class NPCFinalStates:
                     final_location="monastery",
                     final_dialogue="We tried. Sometimes trying isn't enough."
                 ),
-                "coren": NPCFinalState(
-                    name="Coren",
+                "Cal": NPCFinalState(
+                    name="Cal",
                     position="abandoned",
                     emotional_state="grieving",
                     final_location="marketplace",
@@ -545,8 +545,8 @@ class NPCFinalStates:
                     final_location="monastery",
                     final_dialogue="I'm learning to find meaning without the system's guidance."
                 ),
-                "coren": NPCFinalState(
-                    name="Coren",
+                "Cal": NPCFinalState(
+                    name="Cal",
                     position="abandoned",
                     emotional_state="determined",
                     final_location="marketplace",
@@ -570,8 +570,8 @@ class NPCFinalStates:
                     final_location="archive",
                     final_dialogue="This is the hardest thing I've ever done. And the most meaningful."
                 ),
-                "coren": NPCFinalState(
-                    name="Coren",
+                "Cal": NPCFinalState(
+                    name="Cal",
                     position="rebuilt_together",
                     emotional_state="honored",
                     final_location="archive",
@@ -586,7 +586,7 @@ class NPCFinalStates:
                     position="rebuilt_together",
                     emotional_state="hopeful",
                     final_location="archive",
-                    final_dialogue="The system is supporting what we're building. It feels different this time—like partnership."
+                    final_dialogue="The system is supporting what we're building. It feels different this timeâ€”like partnership."
                 ),
                 "elenya": NPCFinalState(
                     name="Elenya",
@@ -595,8 +595,8 @@ class NPCFinalStates:
                     final_location="archive",
                     final_dialogue="We're rebuilding slowly. With system support. And it's working."
                 ),
-                "coren": NPCFinalState(
-                    name="Coren",
+                "Cal": NPCFinalState(
+                    name="Cal",
                     position="rebuilt_together",
                     emotional_state="hopeful",
                     final_location="archive",
@@ -620,8 +620,8 @@ class NPCFinalStates:
                     final_location="archive",
                     final_dialogue="It's uncertain. But that feels more honest than any system guarantee could be."
                 ),
-                "coren": NPCFinalState(
-                    name="Coren",
+                "Cal": NPCFinalState(
+                    name="Cal",
                     position="uncertain",
                     emotional_state="hopeful",
                     final_location="marketplace",
@@ -701,3 +701,4 @@ class EndingManager:
             "player_coherence": self.calculator.player_coherence,
             "player_primary_trait": self.calculator.player_primary_trait,
         }
+

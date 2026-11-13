@@ -1,10 +1,10 @@
-# Design Archive Index
+﻿# Design Archive Index
 
 A comprehensive archive of game design documentation, lore, systems design, and development notes for Velinor.
 
 ---
 
-## 📚 Directory Structure
+## ðŸ“š Directory Structure
 
 ### Core Design Documents
 - **[Design_Documents/](./Design_Documents/)** - Master design specifications and overviews
@@ -26,7 +26,7 @@ A comprehensive archive of game design documentation, lore, systems design, and 
 ### Characters
 - **[Characters/](./Characters/)** - Character profiles and relationships
   - `Ravi_Nima_Ophina.md` - Side character arcs
-  - `malrik_elenya_coren.md` - Main character relationships
+  - `malrik_elenya_Cal.md` - Main character relationships
 
 ### NPC & Dialogue
 - **[NPCs/](./NPCs/)** - NPC systems and dialogue documentation
@@ -110,7 +110,7 @@ A comprehensive archive of game design documentation, lore, systems design, and 
 
 ---
 
-## 🎯 How to Use This Archive
+## ðŸŽ¯ How to Use This Archive
 
 ### For New Developers
 1. Start with `Design_Documents/EXECUTIVE_SUMMARY_AND_QUICKSTART.md`
@@ -118,11 +118,11 @@ A comprehensive archive of game design documentation, lore, systems design, and 
 3. Check relevant sections for your task (NPCs, Systems, Story, etc.)
 
 ### For Adding Content
-- Dialogue/story content? → Check `Story/` and `NPCs/`
-- Adding game mechanics? → Check `Systems/`
-- Creating NPCs? → Check `NPCs/` and `Characters/`
-- Adding glyphs? → Check `Glyphs/`
-- UI/Visual work? → Check `Visual/` and `Graphic_Novel/`
+- Dialogue/story content? â†’ Check `Story/` and `NPCs/`
+- Adding game mechanics? â†’ Check `Systems/`
+- Creating NPCs? â†’ Check `NPCs/` and `Characters/`
+- Adding glyphs? â†’ Check `Glyphs/`
+- UI/Visual work? â†’ Check `Visual/` and `Graphic_Novel/`
 
 ### For Implementation
 - Check the relevant system documentation in `Systems/`
@@ -132,7 +132,7 @@ A comprehensive archive of game design documentation, lore, systems design, and 
 
 ---
 
-## 📋 Key Documents
+## ðŸ“‹ Key Documents
 
 | Document | Purpose | Location |
 |----------|---------|----------|
@@ -145,7 +145,7 @@ A comprehensive archive of game design documentation, lore, systems design, and 
 
 ---
 
-## 📝 Notes
+## ðŸ“ Notes
 
 - This archive preserves all original design documentation
 - Files are organized by category for easy discovery
@@ -158,3 +158,4 @@ A comprehensive archive of game design documentation, lore, systems design, and 
 **Last Updated:** 2026-09-29  
 **Archive Version:** 1.0  
 **Source:** `velinor/markdowngameinstructions/`
+

@@ -1,10 +1,10 @@
-# Building Debate Integration: Glyphs Modified
+﻿# Building Debate Integration: Glyphs Modified
 
 ## Overview
 
 Five key glyphs from the JSON Glyph_Organizer have been modified to weave together: 1. **The archive
 building debate** (from Narrative Spine) as the central conflict 2. **The love story between Malrik
-and Elenya** (subtle, subtext-driven) 3. **Coren's role as the paradox-holder** (mediation as true
+and Elenya** (subtle, subtext-driven) 3. **Cal's role as the paradox-holder** (mediation as true
 strength)
 
 Rather than creating new glyphs, existing glyphs were recontextualized to become chapters of this
@@ -46,11 +46,11 @@ integrated narrative arc.
 
 **Story Beat in Narrative:**
 - **Act II/III:** Recurrence scenes where the player can witness Malrik's internal conflict
-- **Thematic Core:** His method isn't just philosophy—it's armor. And it's slowly breaking him.
+- **Thematic Core:** His method isn't just philosophyâ€”it's armor. And it's slowly breaking him.
 
 ---
 
-### **Glyph 22: Glyph of Held Ache** (Coren the Mediator - Sovereignty Domain)
+### **Glyph 22: Glyph of Held Ache** (Cal the Mediator - Sovereignty Domain)
 
 **From:** Market Concourse (generic marketplace disputes)  
 **To:** The Shared Archive Building (Central Chamber) - **This is the centerpiece**
@@ -60,9 +60,9 @@ integrated narrative arc.
 - **The Debate Made Explicit:** 
   - Malrik: "Records must be preserved and organized. Structure first."
   - Elenya: "Spiritual memory matters. People are forgetting the old ways."
-  - Coren: "Both sides are right. Both must have access. We must negotiate."
-- **Coren's Teaching:** She doesn't choose or compromise. She holds both truths simultaneously.
-- **Player Understanding:** "The player recognizes that Coren's gift isn't solving the conflict—it's refusing to let it fracture the city."
+  - Cal: "Both sides are right. Both must have access. We must negotiate."
+- **Cal's Teaching:** She doesn't choose or compromise. She holds both truths simultaneously.
+- **Player Understanding:** "The player recognizes that Cal's gift isn't solving the conflictâ€”it's refusing to let it fracture the city."
 - **Tone Shift:** From generic mediation to paradox-holding as sacred work
 - **New Alignment Path:** "Embrace paradox" as a third option
 
@@ -83,7 +83,7 @@ integrated narrative arc.
 - **Love Story Subtext:** "Elenya's hurt is visible: the way her shoulders tense, the way she avoids looking at him"
 - **Her Frustration:** Expressed in how Malrik's worry overshadows her ceremony
 - **Tone Shift:** Added "tender" and "hurt" to accompany "hopeful, mythic"
-- **Player Insight:** "Activation isn't destruction—it's honoring memory through presence"
+- **Player Insight:** "Activation isn't destructionâ€”it's honoring memory through presence"
 
 **Story Beat in Narrative:**
 - **Act II-III:** Elenya demonstrates her vision is about communal tending, not destruction
@@ -98,7 +98,7 @@ integrated narrative arc.
 
 **What Changed:**
 - **Setting:** Becomes the literal negotiation of shared space
-- **The Rite:** Both communities must tend the building together—some hours for archives, some for shrine
+- **The Rite:** Both communities must tend the building togetherâ€”some hours for archives, some for shrine
 - **The Sacrifice:** "Both must give up the fantasy of total control"
 - **Grace Moments:** Malrik preserving space for Elenya's ceremonies; Elenya protecting records during collapse
 - **Tone:** Added "difficult" and "mature" to show this isn't easy
@@ -113,22 +113,22 @@ integrated narrative arc.
 ## The Narrative Arc These Glyphs Create
 
 ### **Act II: The Debate Emerges**
-1. **Boundary Stone** — Malrik establishes his position with fear hidden beneath rigidity 2.
-**Measured Step** — The player walks through the contested space and sees his internal conflict 3.
-**Held Ache** (begins) — Coren appears to mediate
+1. **Boundary Stone** â€” Malrik establishes his position with fear hidden beneath rigidity 2.
+**Measured Step** â€” The player walks through the contested space and sees his internal conflict 3.
+**Held Ache** (begins) â€” Cal appears to mediate
 
 ### **Act II-III: The Love Story Crystallizes**
 - The player witnesses Malrik's eyes lingering on Elenya's offerings
 - The player sees Elenya's hurt at being dismissed
-- The player understands that this isn't philosophical disagreement—it's personal
+- The player understands that this isn't philosophical disagreementâ€”it's personal
 
 ### **Act III: The Vision Contest**
-4. **Covenant Flame** — Elenya demonstrates her vision is sacred, not destructive 5. **Held Ache**
-(continues) — Coren holds the paradox steady 6. **Shared Survival** (begins) — Time-sharing
+4. **Covenant Flame** â€” Elenya demonstrates her vision is sacred, not destructive 5. **Held Ache**
+(continues) â€” Cal holds the paradox steady 6. **Shared Survival** (begins) â€” Time-sharing
 arrangement proposed
 
 ### **Act III/IV: The Integration Challenge**
-7. **Shared Survival** (completes) — Both communities learn to tend together
+7. **Shared Survival** (completes) â€” Both communities learn to tend together
 - **Building Collapse** (from Narrative Spine) forces the question: Will they rebuild this together, or walk away?
 
 ---
@@ -159,7 +159,7 @@ The love story is **not overt**. It's embedded in:
 - The way she avoids his eye
 - Her persistent effort to show him their visions can coexist
 
-**Coren's Role:**
+**Cal's Role:**
 - She sees what they won't admit to each other
 - She holds the space where integration becomes possible
 - She teaches that paradox is where love actually lives
@@ -171,12 +171,12 @@ The love story is **not overt**. It's embedded in:
 
 ---
 
-## Building → Collapse → Reconstruction as Fractal
+## Building â†’ Collapse â†’ Reconstruction as Fractal
 
 All three modified Malrik/Elenya glyphs ripple toward the **Building Collapse** turning point:
 
-1. **Boundary Stone** — Establishes what will be lost if the building falls 2. **Measured Step** —
-Shows the emotional infrastructure that will crumble 3. **Covenant Flame** — Demonstrates what could
+1. **Boundary Stone** â€” Establishes what will be lost if the building falls 2. **Measured Step** â€”
+Shows the emotional infrastructure that will crumble 3. **Covenant Flame** â€” Demonstrates what could
 be preserved if they rebuild together
 
 When the building collapses in Act III:
@@ -190,17 +190,17 @@ When the building collapses in Act III:
 
 For each glyph, the following fields were modified:
 
-- `location` — Now explicitly set at The Shared Archive Building
-- `storyline_summary` — Recontextualized with building debate and love story
-- `story_seed` — Added to clarify the specific conflict
-- `tone_integration` — Shifted from generic to "contemplative, tense, personal/tender/yearning"
-- `remnants_integration` — Changed to "reclaimed_structure, shared_resource, dual_purpose_space"
-- `player_choices` — Added building-specific choices (support_malrik, embrace_paradox, mediate_tension, etc.)
-- `narrative_triggers` — Added building-specific triggers (archive_discovered, both_sides_present, etc.)
-- `memory_fragments` — Added visual references (malrik_inscription_photo.png, dried_flowers.png, etc.)
-- `tags` — Added "building", "debate", "love-story", "paradox", "integration"
-- `alignment_paths` — Added third-option paths for player choice
-- `original_storyline_text` — Full narrative integration with subtext
+- `location` â€” Now explicitly set at The Shared Archive Building
+- `storyline_summary` â€” Recontextualized with building debate and love story
+- `story_seed` â€” Added to clarify the specific conflict
+- `tone_integration` â€” Shifted from generic to "contemplative, tense, personal/tender/yearning"
+- `remnants_integration` â€” Changed to "reclaimed_structure, shared_resource, dual_purpose_space"
+- `player_choices` â€” Added building-specific choices (support_malrik, embrace_paradox, mediate_tension, etc.)
+- `narrative_triggers` â€” Added building-specific triggers (archive_discovered, both_sides_present, etc.)
+- `memory_fragments` â€” Added visual references (malrik_inscription_photo.png, dried_flowers.png, etc.)
+- `tags` â€” Added "building", "debate", "love-story", "paradox", "integration"
+- `alignment_paths` â€” Added third-option paths for player choice
+- `original_storyline_text` â€” Full narrative integration with subtext
 
 ---
 
@@ -217,7 +217,7 @@ ending combinations based on System Restart + Synthesis questions
 4. Link these glyphs to ending determination logic
 
 ### Design Docs
-1. Update VELINOR_COMPLETE_DESIGN.md with Coren's expanded role 2. Add building collapse sequence to
+1. Update VELINOR_COMPLETE_DESIGN.md with Cal's expanded role 2. Add building collapse sequence to
 Narrative Spine 3. Document the six endings based on Malrik/Elenya rebuild choice + System restart
 choice
 
@@ -240,10 +240,11 @@ can Velhara truly be restored.
 
 ## Files Modified
 
-- ✅ `velinor/markdowngameinstructions/Glyph_Organizer.json` — 5 glyphs updated
-- ✅ `scripts/integrate_building_debate_glyphs.py` — Automation script created
+- âœ… `velinor/markdowngameinstructions/Glyph_Organizer.json` â€” 5 glyphs updated
+- âœ… `scripts/integrate_building_debate_glyphs.py` â€” Automation script created
 
 ## Files Ready for Update (Optional)
 
-- `velinor/markdowngameinstructions/VELINOR_COMPLETE_DESIGN.md` — Add Coren's paradox-holding philosophy
-- `velinor/markdowngameinstructions/01_NARRATIVE_SPINE_AND_STRUCTURE.md` — Already contains the building debate/collapse; consider adding ending determination logic
+- `velinor/markdowngameinstructions/VELINOR_COMPLETE_DESIGN.md` â€” Add Cal's paradox-holding philosophy
+- `velinor/markdowngameinstructions/01_NARRATIVE_SPINE_AND_STRUCTURE.md` â€” Already contains the building debate/collapse; consider adding ending determination logic
+

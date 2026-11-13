@@ -1,4 +1,4 @@
-"""
+﻿"""
 NPC Dialogue Generation System
 
 Each NPC has:
@@ -22,7 +22,7 @@ from typing import Dict, List, Tuple
 
 LEXICONS = {
     "Ravi": {
-        "description": "Merchant leader — warmth + pragmatism",
+        "description": "Merchant leader â€” warmth + pragmatism",
         "trust_high": ["believe in", "stand with", "rely on", "partner with"],
         "trust_low": ["doubt", "hesitate", "question", "distrust"],
         "authority_high": ["lead", "guide", "command", "direct"],
@@ -32,7 +32,7 @@ LEXICONS = {
     },
     
     "Nima": {
-        "description": "Observer + Skeptic — cunning, perceptive",
+        "description": "Observer + Skeptic â€” cunning, perceptive",
         "skepticism_high": ["suspicion", "shadow", "hidden truth", "careful eye"],
         "skepticism_low": ["clarity", "open path", "trust", "transparency"],
         "memory_high": ["recall", "know history", "remember", "weave past"],
@@ -42,7 +42,7 @@ LEXICONS = {
     },
     
     "Kaelen": {
-        "description": "Thief + Potential Redeemer — cunning but conflicted",
+        "description": "Thief + Potential Redeemer â€” cunning but conflicted",
         "empathy_high": ["redeem", "listen", "share", "connect", "heal"],
         "empathy_low": ["scheme", "trick", "steal", "deceive", "exploit"],
         "skepticism_high": ["doubt", "whisper", "hidden", "mask", "shadow"],
@@ -54,7 +54,7 @@ LEXICONS = {
     },
     
     "Tovren": {
-        "description": "Practical merchant — steady, measured",
+        "description": "Practical merchant â€” steady, measured",
         "resolve_high": ["firm", "unyielding", "steady", "grounded"],
         "resolve_low": ["uncertain", "hesitant", "fragile", "shaken"],
         "authority_high": ["command respect", "lead by example", "clear path"],
@@ -64,7 +64,7 @@ LEXICONS = {
     },
     
     "Sera": {
-        "description": "Herb Novice + Healer — ephemeral, bubbly, nature-infused",
+        "description": "Herb Novice + Healer â€” ephemeral, bubbly, nature-infused",
         "empathy_high": ["bloom", "soften", "sprout", "gentle", "nurture"],
         "empathy_low": ["fragile", "flicker", "fade", "wilt", "wither"],
         "need_high": ["grow", "reach toward", "unfold", "open"],
@@ -73,7 +73,7 @@ LEXICONS = {
         "trust_low": ["shadow", "drought", "barren", "adrift"]
     },
     "Saori": {
-        "description": "Oracle — measured, reflective, paradoxical",
+        "description": "Oracle â€” measured, reflective, paradoxical",
         "nuance_high": ["layered", "paradox", "mirror", "rift"],
         "nuance_low": ["plain", "flat", "surface", "simple"],
         "memory_high": ["recall", "echo", "archive", "remember"],
@@ -93,7 +93,7 @@ LEXICONS = {
     },
     
     "Dalen": {
-        "description": "Wanderer + Adventurer — bold, reckless, free-spirited",
+        "description": "Wanderer + Adventurer â€” bold, reckless, free-spirited",
         "authority_high": ["bold", "reckless", "charge", "leap", "seize"],
         "authority_low": ["pause", "consider", "wait", "hesitate", "reflect"],
         "resolve_high": ["steel", "fire", "determination", "unstoppable"],
@@ -103,7 +103,7 @@ LEXICONS = {
     },
     
     "Mariel": {
-        "description": "Bridge Figure + Wise Woman — remembers, weaves, binds",
+        "description": "Bridge Figure + Wise Woman â€” remembers, weaves, binds",
         "memory_high": ["remember", "bind", "weave", "thread", "restore"],
         "memory_low": ["forget", "loosen", "fade", "drift", "scatter"],
         "empathy_high": ["understand", "hold", "honor", "cherish"],
@@ -113,7 +113,7 @@ LEXICONS = {
     },
     
     "Korrin": {
-        "description": "Gossip + Informant — rumors, layers, alleys",
+        "description": "Gossip + Informant â€” rumors, layers, alleys",
         "nuance_high": ["whisper", "rumor", "layer upon layer", "intricate"],
         "nuance_low": ["plain", "direct", "simple truth", "straightforward"],
         "memory_high": ["recall every detail", "know everyone's secrets", "never forget"],
@@ -123,7 +123,7 @@ LEXICONS = {
     },
     
     "Drossel": {
-        "description": "Thieves' Leader — Slavic/French hybrid, charming yet dangerous",
+        "description": "Thieves' Leader â€” Slavic/French hybrid, charming yet dangerous",
         "trust_high": ["mon ami", "deal struck", "coin exchanged", "handshake sealed"],
         "trust_low": ["bratva", "shadow deal", "knife in back", "betrayal looms"],
         "authority_high": ["command respect", "lead from shadow", "organize the chaos"],
@@ -133,7 +133,7 @@ LEXICONS = {
     },
     
     "Captain Veynar": {
-        "description": "Guard Captain — weary authority, scarred by justice",
+        "description": "Guard Captain â€” weary authority, scarred by justice",
         "authority_high": ["law", "duty", "command", "justice", "order"],
         "authority_low": ["doubt", "strain", "weariness", "shadow", "burden"],
         "resolve_high": ["stand firm", "unyielding", "steel", "guard", "defend"],
@@ -148,95 +148,95 @@ LEXICONS = {
 # Additional Tier-2 NPC lexicons (concise pools)
 LEXICONS.update({
     "Sealina": {
-        "description": "Singer of Loss — elegiac, mnemonic",
+        "description": "Singer of Loss â€” elegiac, mnemonic",
         "memory_high": ["song", "lament", "echo", "remember"],
         "memory_low": ["quiet", "blank", "hush", "gone"],
         "empathy_high": ["hold", "mourn", "tend", "share"],
         "empathy_low": ["turn away", "harden", "deflect"]
     },
     "Lark": {
-        "description": "Ritual keeper — formal, steady",
+        "description": "Ritual keeper â€” formal, steady",
         "authority_high": ["ceremony", "rite", "order", "bind"],
         "authority_low": ["loose", "open", "invite", "suggest"],
         "memory_high": ["archive", "record", "mark", "inscribe"]
     },
     "Nordia the Mourning Singer": {
-        "description": "Mourning singer — melodic grief",
+        "description": "Mourning singer â€” melodic grief",
         "empathy_high": ["wail", "lament", "weave", "carry"],
         "nuance_high": ["layered", "tonal", "undertone"]
     },
     "Helia": {
-        "description": "Embodied presence — steady, warm",
+        "description": "Embodied presence â€” steady, warm",
         "presence_high": ["grounded", "breath", "stance", "footing"],
         "trust_high": ["trust", "open heart", "welcome"]
     },
     "Elka": {
-        "description": "Clear, present — plainspoken",
+        "description": "Clear, present â€” plainspoken",
         "nuance_low": ["plain", "simple", "direct"],
         "empathy_high": ["listen", "notice", "attend"]
     },
     "Inodora": {
-        "description": "Bridge keeper — story-minded",
+        "description": "Bridge keeper â€” story-minded",
         "memory_high": ["recall", "weave", "thread", "archive"],
         "nuance_high": ["layer", "connect", "splice"]
     },
     "Rasha": {
-        "description": "Optimist — joyful, trusting",
+        "description": "Optimist â€” joyful, trusting",
         "trust_high": ["believe", "welcome", "offer"],
         "empathy_high": ["celebrate", "smile", "share joy"]
     },
-    "Coren the Mediator": {
-        "description": "Mediator — paradox holder",
+    "Cal the Mediator": {
+        "description": "Mediator â€” paradox holder",
         "nuance_high": ["hold both", "paradox", "balance", "weave"],
         "authority_high": ["guide", "hold space", "mediate"]
     },
     "Juria & Korinth": {
-        "description": "Pair — cooperative, warm",
+        "description": "Pair â€” cooperative, warm",
         "trust_high": ["together", "us", "partnership", "bond"],
         "joy_high": ["laugh", "share", "play"]
     },
     "Lira": {
-        "description": "Boatmaker — practical warmth",
+        "description": "Boatmaker â€” practical warmth",
         "authority_high": ["craft", "shape", "measure", "finish"],
         "empathy_high": ["teach", "guide", "show"]
     },
     "Orvak": {
-        "description": "Liminal keeper — wary, observant",
+        "description": "Liminal keeper â€” wary, observant",
         "skepticism_high": ["probe", "watch", "guard"],
         "memory_high": ["map", "track", "trace"]
     },
     "Sanor": {
-        "description": "Wound-dweller — hardened, pragmatic",
+        "description": "Wound-dweller â€” hardened, pragmatic",
         "skepticism_high": ["survive", "harden", "endure"],
         "need_high": ["shelter", "supply", "sustain"]
     },
     "Dakrin": {
-        "description": "Reclaimer — resolute, restorative",
+        "description": "Reclaimer â€” resolute, restorative",
         "resolve_high": ["reclaim", "restore", "repair", "forge"],
         "authority_high": ["lead", "command", "organize"]
     },
     "Kiv": {
-        "description": "Memory-bearer — quiet, intense",
+        "description": "Memory-bearer â€” quiet, intense",
         "memory_high": ["echo", "single note", "anchor", "relic"],
         "nuance_high": ["subtle", "thin thread", "trace"]
     },
     "Seyla": {
-        "description": "Archivist of Lineage — formal, exact",
+        "description": "Archivist of Lineage â€” formal, exact",
         "memory_high": ["lineage", "record", "register", "chronicle"],
         "authority_high": ["record", "preserve", "codify"]
     },
     "Velka": {
-        "description": "Bone Keeper — solemn, ritual",
+        "description": "Bone Keeper â€” solemn, ritual",
         "memory_high": ["bones", "remains", "honor", "rest"],
         "nuance_high": ["quiet", "soft edge", "echo"]
     },
     "Tala": {
-        "description": "Market cook — warm, jovial",
+        "description": "Market cook â€” warm, jovial",
         "joy_high": ["spice", "share", "warmth", "hearth"],
         "trust_high": ["welcome", "invite", "offer"]
     },
     "Tessa": {
-        "description": "Desert widow — resilient, quiet",
+        "description": "Desert widow â€” resilient, quiet",
         "empathy_high": ["soft sorrow", "tend", "remember"],
         "resolve_high": ["endure", "persist", "stand"]
     }
@@ -261,9 +261,9 @@ def apply_temperament(npc_name: str, text: str, remnants: Dict[str, float]) -> s
     
     elif npc_name == "Nima":
         if remnants.get("skepticism", 0.8) > 0.75:
-            return f"{text} — always watching, always wary."
+            return f"{text} â€” always watching, always wary."
         else:
-            return f"{text} — eyes narrowing with thought."
+            return f"{text} â€” eyes narrowing with thought."
     
     elif npc_name == "Kaelen":
         if remnants.get("empathy", 0.3) > 0.6:
@@ -294,9 +294,9 @@ def apply_temperament(npc_name: str, text: str, remnants: Dict[str, float]) -> s
     
     elif npc_name == "Drossel":
         if remnants.get("trust", 0.1) > 0.5:
-            return f"{text}, mon cher — a deal is a deal."
+            return f"{text}, mon cher â€” a deal is a deal."
         else:
-            return f"{text}, mon cher — but shadows linger."
+            return f"{text}, mon cher â€” but shadows linger."
     
     elif npc_name == "Captain Veynar":
         if remnants.get("resolve", 0.8) > 0.75:
@@ -305,67 +305,67 @@ def apply_temperament(npc_name: str, text: str, remnants: Dict[str, float]) -> s
             return f"{text}. His voice carries the weight of impossible choices."
 
     elif npc_name == "Saori":
-        # Saori speaks in layered, patient phrasing — varies by nuance and skepticism
+        # Saori speaks in layered, patient phrasing â€” varies by nuance and skepticism
         if remnants.get("nuance", 0.5) > 0.8:
-            return f"{text} — Saori's voice echoes, layered and patient."
+            return f"{text} â€” Saori's voice echoes, layered and patient."
         if remnants.get("skepticism", 0.5) > 0.65:
-            return f"{text} — she tilts her head, measuring each word."
-        return f"{text} — spoken with quiet, watchful clarity."
+            return f"{text} â€” she tilts her head, measuring each word."
+        return f"{text} â€” spoken with quiet, watchful clarity."
     
     elif npc_name == "Tessa":
         if remnants.get("empathy", 0.5) > 0.7:
-            return f"{text} — her voice is soft, carrying long memory."
-        return f"{text} — said with desert-worn quiet and steady resolve."
+            return f"{text} â€” her voice is soft, carrying long memory."
+        return f"{text} â€” said with desert-worn quiet and steady resolve."
 
     elif npc_name == "Sealina":
-        return f"{text} — sung gently, like a remembered lament."
+        return f"{text} â€” sung gently, like a remembered lament."
 
-    elif npc_name == "Coren the Mediator":
+    elif npc_name == "Cal the Mediator":
         if remnants.get("nuance", 0.5) > 0.8:
-            return f"{text} — Coren holds both sides in a single breath."
-        return f"{text} — offered as an invitation to see more than one truth."
+            return f"{text} â€” Cal holds both sides in a single breath."
+        return f"{text} â€” offered as an invitation to see more than one truth."
 
     elif npc_name == "Lira":
-        return f"{text} — practical, warm, and shaped with careful hands."
+        return f"{text} â€” practical, warm, and shaped with careful hands."
 
     elif npc_name == "Orvak":
-        return f"{text} — said in a low, watchful tone, as if mapping the room."
+        return f"{text} â€” said in a low, watchful tone, as if mapping the room."
 
     elif npc_name == "Sanor":
-        return f"{text} — blunt, survivable, and not given to softness."
+        return f"{text} â€” blunt, survivable, and not given to softness."
 
     elif npc_name == "Dakrin":
-        return f"{text} — resolute and focused on repair; a steady call to action."
+        return f"{text} â€” resolute and focused on repair; a steady call to action."
 
     elif npc_name == "Kiv":
-        return f"{text} — quiet as an echo, heavy with a single remembered thing."
+        return f"{text} â€” quiet as an echo, heavy with a single remembered thing."
 
     elif npc_name == "Tala":
-        return f"{text} — offered with a warm laugh and an inviting hand."
+        return f"{text} â€” offered with a warm laugh and an inviting hand."
 
     elif npc_name == "Lark":
-        return f"{text} — ceremonially stated, as if in a small ritual." 
+        return f"{text} â€” ceremonially stated, as if in a small ritual." 
 
     elif npc_name == "Nordia the Mourning Singer":
-        return f"{text} — carried in a melodic, elegiac cadence."
+        return f"{text} â€” carried in a melodic, elegiac cadence."
 
     elif npc_name == "Helia":
-        return f"{text} — steady, present, and quietly grounding."
+        return f"{text} â€” steady, present, and quietly grounding."
 
     elif npc_name == "Elka":
-        return f"{text} — plainspoken and clear."
+        return f"{text} â€” plainspoken and clear."
 
     elif npc_name == "Inodora":
-        return f"{text} — told as if weaving a story between past and now."
+        return f"{text} â€” told as if weaving a story between past and now."
 
     elif npc_name == "Rasha":
-        return f"{text} — bright, trusting, and likely to smile."
+        return f"{text} â€” bright, trusting, and likely to smile."
 
     elif npc_name == "Juria & Korinth":
-        return f"{text} — spoken in easy duet, two voices braided together."
+        return f"{text} â€” spoken in easy duet, two voices braided together."
 
     elif npc_name == "Seyla" or npc_name == "Velka":
-        return f"{text} — catalogued carefully, said with archival precision."
+        return f"{text} â€” catalogued carefully, said with archival precision."
     
     else:
         return text
@@ -490,3 +490,4 @@ def generate_choices(npc_name: str, remnants: Dict[str, float],
         })
     
     return choices
+

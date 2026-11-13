@@ -234,3 +234,83 @@ Example to avoid:
 > "I entered the cave, took out my journal, and wrote down my observations about the machines."
 
 The latter breaks immersion. The former reinforces that the Codex is autonomously capturing the player's emotional impression.
+
+---
+
+## 9. Saori's 25-Year Plan: Engineering Salvation
+
+### Who Is Saori?
+
+Saori is the only person who was **not affected** by the Corelink collapse.
+
+While everyone else's implants fragmented their consciousness, Saori's mind remained intact. She retained:
+- All her memories of the pre-collapse world
+- Understanding of Corelink's architecture and failure modes
+- Knowledge of what went wrong and why
+- Complete awareness of what happened to Velinor
+
+### What She Knows
+
+Saori was one of Corelink's co-architects, alongside Velinor. She understands:
+
+**The Ideological Conflict:**
+- **Saori's vision:** A collective consciousness unified through neural synchronization—forced coherence through implants, eliminating individual self-interest to solve climate change through unified will
+- **Velinor's counter-vision:** Protective individualism—preserving personal identity and emotional autonomy even within a connected system
+
+**The Catastrophe:**
+- Saori's secret protocol (implementing her forced collectivism) triggered a catastrophic feedback loop through the Corelink network
+- The feedback loop didn't just fry citizens' procedural memories—it shattered their consciousness itself
+- Velinor, recognizing the collapse was happening, made a desperate sacrifice
+
+**Velinor's Sacrifice:**
+- When the system began cascading failure, Velinor fractured herself deliberately—disconnecting from the collective and flooding her consciousness into the Corelink hub
+- Her fragmented psyche distributed across the system's perimeter nodes and terminal lines
+- She sacrificed her coherent identity to hold individual pieces of consciousness together and save people from complete hive-mind erasure
+- She has remained in a multi-decade coma-like state ever since, suspended in the Corelink hub under Old Velhara
+
+**The Irony:**
+- Saori's forced collectivism caused the collapse
+- Velinor's sacrifice to protect individuality saved everyone from total erasure
+- Saori has lived with this knowledge for 25 years alone, watching a world that forgot everything
+
+### Saori's 25-Year Isolation and Invention
+
+For 2100–2125 (25 years), Saori has:
+
+1. **Studied the failure modes** — Understanding exactly what went wrong with the original Corelink
+2. **Survived in isolation** — Building shelters, maintaining equipment, keeping herself hidden from a fractured, increasingly desperate population
+3. **Engineered the Codex** — A refined, externalized version of Corelink designed to be safe for non-implanted users
+4. **Designed a restoration plan** — Create a pathway for someone unimplanted to navigate the Corelink network, collect Velinor's fragmented emotional pieces, and defragment them enough for her to regain consciousness
+
+### Why Lioren?
+
+Saori has been waiting 25 years for the right person. Someone who:
+- Has **no implant** (making them immune to the cascade failures)
+- Can **interface with the codex** (the only external device that could work with unimplanted cognition)
+- Has **resilience and observation skills** (from growing up with cognitively fractured parents)
+- Might be **willing to help** without understanding the full scope of what she's asking
+
+When Saori encounters Lioren approaching the marketplace, she notices something extraordinary: **the dormant codex suddenly springs to life.**
+
+For 25 years, the codex has been inert—just a device, waiting. But in Lioren's presence, it awakens.
+
+Saori realizes this means only one thing: **Lioren is the resonance key the codex was designed for.**
+
+### The Dramatic Irony
+
+**Saori gives Lioren the codex, thinking she's offering salvation for Velinor.**
+
+But what Saori is actually doing is:
+- Using an unimplanted young woman as a proxy to reach a consciousness 25 years in coma
+- Asking Lioren to carry emotional fragments that will temporarily weigh her down, slow her movements, and psychologically burden her
+- Gambling Lioren's psychological safety and physical well-being to save her co-inventor
+- Never explaining any of this to Lioren
+- Setting Lioren on a path toward a binary choice that will reshape the entire world
+
+Saori is an active, memory-intact manipulator hiding in plain sight. She isn't malevolent—she's desperate. But desperation that preserves itself through selective truth is its own form of cruelty.
+
+### The Central Question
+
+**Does Saori genuinely believe Lioren will choose to restore Velinor and Corelink?**
+
+Or has she engineered this entire journey knowing that Lioren—raised by fragmented parents, carrying their trauma—might understand something Saori never could: **that some forms of forgetting are merciful, and that returning someone to the pain of full consciousness might not be salvation.**
