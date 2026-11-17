@@ -5646,7 +5646,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3608168406071225141}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9963107
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6822,7 +6822,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2367389919566848680}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3885253397d08de48b3ef61a3a337492, type: 3}
   m_Name: 
@@ -6873,6 +6873,7 @@ MonoBehaviour:
   tabActiveColor: {r: 0.5, g: 0.5, b: 0.7, a: 1}
   tabInactiveColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   schematicDatabase: []
+  populateTestDataAtStart: 1
 --- !u!1 &2379427926116215539
 GameObject:
   m_ObjectHideFlags: 0
@@ -10982,7 +10983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -99.99998}
+  m_AnchoredPosition: {x: 0, y: -99.99951}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6854025228995388970
@@ -11128,6 +11129,7 @@ GameObject:
   - component: {fileID: 1105206376162485334}
   - component: {fileID: 5039626241353944313}
   - component: {fileID: 3464344505623092089}
+  - component: {fileID: 9999999999999999991}
   m_Layer: 0
   m_Name: ToolsTab
   m_TagString: Untagged
@@ -11237,6 +11239,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &9999999999999999991
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4733363122874435707}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &4771360482991726603
 GameObject:
   m_ObjectHideFlags: 0
@@ -15388,7 +15402,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7499422421914097718}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9963104
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16066,6 +16080,7 @@ GameObject:
   - component: {fileID: 9001997684022894949}
   - component: {fileID: 6882889681957237072}
   - component: {fileID: 5266954675468903121}
+  - component: {fileID: 9999999999999999992}
   m_Layer: 0
   m_Name: MaterialsTab
   m_TagString: Untagged
@@ -16175,6 +16190,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &9999999999999999992
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7225589318423187779}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7230764655803421306
 GameObject:
   m_ObjectHideFlags: 0
@@ -18706,7 +18733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -99.99979}
+  m_AnchoredPosition: {x: 0, y: -99.9995}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &973736057480878226
