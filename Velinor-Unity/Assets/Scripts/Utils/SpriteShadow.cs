@@ -13,21 +13,17 @@ namespace Velinor.Utils
         [SerializeField] private Color shadowColor = new Color(0, 0, 0, 0.4f);
         [SerializeField] private string sortingLayerName = "";
         [SerializeField] private int sortingOrderOffset = -1;
-
-        [Header("Transform (Drives the Shadow Visual)")]
-        [Tooltip("Local offset from character root. Use Z to stay behind character.")]
-        [SerializeField] private Vector3 shadowOffset = new Vector3(-0.3f, 0f, 0.05f);
         
-        [Tooltip("Skew multiplier relative to character scale. Y usually small for 'flat' look.")]
-        [SerializeField] private Vector3 shadowScale = new Vector3(2.5f, 0.5f, 1f);
-        
-        [Tooltip("Rotation for sun angle skewing.")]
-        [SerializeField] private Vector3 shadowRotation = new Vector3(0, 0, -45f);
+        [Header("Shadow Transform (Scene-Specific)")]
+        [SerializeField] private bool useCustomTransform = false;
+        [SerializeField] private Vector3 shadowLocalPosition = Vector3.zero;
+        [SerializeField] private Vector3 shadowLocalScale = Vector3.one;
 
         private SpriteRenderer sourceRenderer;
         private SpriteRenderer shadowRenderer;
         private GameObject shadowObject;
         private Material shadowMaterial;
+        private bool initialized = false;
 
         private void OnEnable()
         {
@@ -36,6 +32,8 @@ namespace Velinor.Utils
 
         private void Initialize()
         {
+            if (initialized) return;
+            
             sourceRenderer = GetComponent<SpriteRenderer>();
             if (sourceRenderer == null) sourceRenderer = GetComponentInChildren<SpriteRenderer>();
             
@@ -53,6 +51,19 @@ namespace Velinor.Utils
                 {
                     shadowObject = new GameObject("SpriteShadow_Visual");
                     shadowObject.transform.SetParent(transform);
+                    
+                    // Apply custom transform only on creation
+                    if (useCustomTransform)
+                    {
+                        shadowObject.transform.localPosition = shadowLocalPosition;
+                        shadowObject.transform.localScale = shadowLocalScale;
+                    }
+                    else
+                    {
+                        // Default shadow positioning
+                        shadowObject.transform.localPosition = Vector3.zero;
+                        shadowObject.transform.localScale = Vector3.one;
+                    }
                 }
             }
 
@@ -75,13 +86,21 @@ namespace Velinor.Utils
 
             if (shadowMaterial != null) shadowRenderer.sharedMaterial = shadowMaterial;
             
+            initialized = true;
             UpdateShadow();
         }
 
         private void LateUpdate()
         {
+            if (!initialized)
+            {
+                Initialize();
+                return;
+            }
+
             if (sourceRenderer == null || shadowRenderer == null || shadowObject == null)
             {
+                initialized = false;
                 Initialize();
                 return;
             }
@@ -108,25 +127,18 @@ namespace Velinor.Utils
             mpb.SetColor("_BaseColor", shadowColor);
             shadowRenderer.SetPropertyBlock(mpb);
 
-            // 4. Sync Transform
-            // We use the inspector fields as the source of truth for the child object.
-            // This 'locks' the child object's transform to whatever you type in the inspector,
-            // which prevents prefab/scene drift while giving you full control.
-            
-            Vector3 characterScale = sourceRenderer.transform.localScale;
-            shadowObject.transform.localScale = new Vector3(
-                characterScale.x * shadowScale.x,
-                characterScale.y * shadowScale.y,
-                1f
-            );
-
-            shadowObject.transform.localPosition = new Vector3(
-                sourceRenderer.transform.localPosition.x + shadowOffset.x,
-                shadowOffset.y,
-                shadowOffset.z
-            );
-
-            shadowObject.transform.localRotation = Quaternion.Euler(shadowRotation);
+            // 4. PRESERVE custom transform if enabled - do NOT reset it
+            if (useCustomTransform)
+            {
+                // Only update transform on initial setup, not every frame
+                if (shadowObject.transform.localPosition != shadowLocalPosition || 
+                    shadowObject.transform.localScale != shadowLocalScale)
+                {
+                    // This only updates if the inspector values changed, not every frame
+                    shadowObject.transform.localPosition = shadowLocalPosition;
+                    shadowObject.transform.localScale = shadowLocalScale;
+                }
+            }
         }
 
         private void OnDisable()

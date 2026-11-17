@@ -47,7 +47,7 @@ Materials are only collectible **after an NPC teaches Lioren where and how to fi
 
 **Examples**:
 - **Herbs** - Sera teaches Lioren to look in forest patches → thereafter herbs glow when player approaches
-- **Stone/Copper Wire** - Cal or Veynar mentions where to salvage from ruins → become collectible
+- **Stone/Copper Wire** - Willy or Lira mentions where to salvage from ruins → become collectible
 - **Bone/Leather** - Korrin shows how to source from slaughter/tanning → unlocks collection from specific location
 
 ### No Infinite Respawns
