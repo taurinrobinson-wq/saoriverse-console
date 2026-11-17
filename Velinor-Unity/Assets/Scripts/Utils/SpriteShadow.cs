@@ -6,8 +6,8 @@ namespace Velinor.Utils
     /// Creates a grounded silhouette shadow based on a SpriteRenderer's current sprite.
     /// Values are driven via the inspector to allow for scene-specific light angle adjustments.
     /// 
-    /// IMPORTANT: This script only operates in EDIT MODE to set up the shadow.
-    /// In PLAY MODE, it goes dormant to preserve your manually-set transforms.
+    /// IMPORTANT: This script disables itself at runtime to preserve manually-set shadow transforms.
+    /// All setup happens in the editor only.
     /// </summary>
     [ExecuteAlways]
     public class SpriteShadow : MonoBehaviour
@@ -22,15 +22,26 @@ namespace Velinor.Utils
         private GameObject shadowObject;
         private Material shadowMaterial;
 
+        private void Awake()
+        {
+            // Disable this script immediately in play mode - we don't want it running at runtime
+            if (Application.isPlaying)
+            {
+                this.enabled = false;
+                return;
+            }
+        }
+
         private void OnEnable()
         {
-            // Only initialize in edit mode, not during play
-            #if UNITY_EDITOR
-            if (!Application.isPlaying)
+            // Safety check: if we somehow got enabled in play mode, disable immediately
+            if (Application.isPlaying)
             {
-                Initialize();
+                this.enabled = false;
+                return;
             }
-            #endif
+
+            Initialize();
         }
 
         private void Initialize()
@@ -52,7 +63,6 @@ namespace Velinor.Utils
                 {
                     shadowObject = new GameObject("SpriteShadow_Visual");
                     shadowObject.transform.SetParent(transform);
-                    // Let user manually position it - we don't touch transform
                 }
             }
 
@@ -87,20 +97,21 @@ namespace Velinor.Utils
 
         private void LateUpdate()
         {
-            // Only run updates in edit mode
-            #if UNITY_EDITOR
-            if (!Application.isPlaying)
+            // Safety: if running and not disabled yet, disable now
+            if (Application.isPlaying)
             {
-                // Reinitialize only if components are missing
-                if (shadowObject == null || sourceRenderer == null || shadowRenderer == null)
-                {
-                    Initialize();
-                    return;
-                }
-
-                UpdateShadow();
+                this.enabled = false;
+                return;
             }
-            #endif
+
+            // Reinitialize only if components are missing
+            if (shadowObject == null || sourceRenderer == null || shadowRenderer == null)
+            {
+                Initialize();
+                return;
+            }
+
+            UpdateShadow();
         }
 
         private void UpdateShadow()
