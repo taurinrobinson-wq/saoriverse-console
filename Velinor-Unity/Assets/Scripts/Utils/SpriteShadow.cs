@@ -6,8 +6,8 @@ namespace Velinor.Utils
     /// Creates a grounded silhouette shadow based on a SpriteRenderer's current sprite.
     /// Values are driven via the inspector to allow for scene-specific light angle adjustments.
     /// 
-    /// IMPORTANT: Manually set the shadow's transform in the editor. This script will NOT
-    /// override it. It only manages sprite, material, and sorting layer.
+    /// IMPORTANT: This script only operates in EDIT MODE to set up the shadow.
+    /// In PLAY MODE, it goes dormant to preserve your manually-set transforms.
     /// </summary>
     [ExecuteAlways]
     public class SpriteShadow : MonoBehaviour
@@ -24,7 +24,13 @@ namespace Velinor.Utils
 
         private void OnEnable()
         {
-            Initialize();
+            // Only initialize in edit mode, not during play
+            #if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                Initialize();
+            }
+            #endif
         }
 
         private void Initialize()
@@ -81,14 +87,20 @@ namespace Velinor.Utils
 
         private void LateUpdate()
         {
-            // Reinitialize only if components are missing
-            if (shadowObject == null || sourceRenderer == null || shadowRenderer == null)
+            // Only run updates in edit mode
+            #if UNITY_EDITOR
+            if (!Application.isPlaying)
             {
-                Initialize();
-                return;
-            }
+                // Reinitialize only if components are missing
+                if (shadowObject == null || sourceRenderer == null || shadowRenderer == null)
+                {
+                    Initialize();
+                    return;
+                }
 
-            UpdateShadow();
+                UpdateShadow();
+            }
+            #endif
         }
 
         private void UpdateShadow()
