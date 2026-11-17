@@ -79,9 +79,16 @@ public class DialogueUIController : MonoBehaviour
 
     private void Awake()
     {
-        // Mark this controller as persistent across scenes
-        DontDestroyOnLoad(gameObject);
-        Debug.Log("[UI] DialogueUIController marked as persistent across scenes");
+        // Only mark as DontDestroyOnLoad if this is a root GameObject
+        if (transform.parent == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("[UI] DialogueUIController marked as persistent across scenes");
+        }
+        else
+        {
+            Debug.LogWarning("[UI] DialogueUIController is not a root GameObject - skipping DontDestroyOnLoad");
+        }
 
         // Find DialoguePanel in UI_Canvas
         Canvas[] allCanvases = FindObjectsByType<Canvas>();

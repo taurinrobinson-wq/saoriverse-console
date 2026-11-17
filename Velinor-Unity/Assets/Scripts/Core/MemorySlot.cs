@@ -25,6 +25,7 @@ namespace Velinor.Core
         // Double-click detection: Manual timing with Invoke()
         private float doubleClickInterval = 0.25f;
         private bool isSingleClickPending = false;
+        private bool componentCheckDone = false;  // Prevent repeated initialization warnings
 
         public bool IsFilled => isFilled;
         public MemoryFragment MemoryFragment => memoryFragment;
@@ -39,6 +40,11 @@ namespace Velinor.Core
 
         public void EnsureComponentsInitialized()
         {
+            if (componentCheckDone)
+                return;
+            
+            componentCheckDone = true;
+
             // Auto-find Image if not assigned
             if (slotImage == null)
             {

@@ -33,8 +33,16 @@ public class NotificationPanelController : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        Debug.Log("[Notification] NotificationPanelController marked as persistent across scenes");
+        // Only mark as DontDestroyOnLoad if this is a root GameObject
+        if (transform.parent == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("[Notification] NotificationPanelController marked as persistent across scenes");
+        }
+        else
+        {
+            Debug.LogWarning("[Notification] NotificationPanelController is not a root GameObject - skipping DontDestroyOnLoad");
+        }
 
         Canvas[] allCanvases = FindObjectsByType<Canvas>();
         foreach (Canvas c in allCanvases)

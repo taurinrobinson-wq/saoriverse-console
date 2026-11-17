@@ -65,6 +65,7 @@ public class CodexController : MonoBehaviour
     private int _currentCodexPage = 0;
     private const int SlotsPerPage = 9;
     private bool isCodexOpen = false;  // Explicit state to track open/closed status
+    private bool triglyphPanelMissingWarningLogged = false;  // Prevent spam logging
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction _toggleCodexAction;
@@ -266,9 +267,10 @@ public class CodexController : MonoBehaviour
             {
                 Debug.Log("[Codex] Auto-discovered TriglyphPuzzlePanel in scene");
             }
-            else
+            else if (!triglyphPanelMissingWarningLogged)
             {
                 Debug.LogWarning("[Codex] TriglyphPuzzlePanel not found in scene - puzzle mode may not work correctly");
+                triglyphPanelMissingWarningLogged = true;
             }
         }
     }

@@ -56,10 +56,9 @@ public class GlyphPickup : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Safety: If anything changed our position, reset it immediately
-        if (hasStoredOriginalPosition && transform.position != originalWorldPosition)
+        // Safety: If anything changed our position significantly, reset it immediately
+        if (hasStoredOriginalPosition && Vector3.Distance(transform.position, originalWorldPosition) > 0.001f)
         {
-            Debug.LogWarning($"[GlyphPickup] {gameObject.name} position was modified! Resetting to {originalWorldPosition}");
             transform.position = originalWorldPosition;
         }
     }

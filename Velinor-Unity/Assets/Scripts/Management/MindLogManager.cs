@@ -30,8 +30,16 @@ namespace Velinor.Management
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
-                Debug.Log("[MindLogManager] Initialized as singleton.");
+                // Only mark as DontDestroyOnLoad if this is a root GameObject
+                if (transform.parent == null)
+                {
+                    DontDestroyOnLoad(gameObject);
+                    Debug.Log("[MindLogManager] Initialized as singleton and marked as persistent across scenes");
+                }
+                else
+                {
+                    Debug.LogWarning("[MindLogManager] Instance is not a root GameObject - skipping DontDestroyOnLoad");
+                }
             }
         }
 
