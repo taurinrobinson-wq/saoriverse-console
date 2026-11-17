@@ -361,6 +361,169 @@
           "system_triggers": []
         }
       ],
+      "next_beat_id": 2.5,
+      "system_triggers": []
+    },
+    {
+      "id": 2.5,
+      "type": "npc_turn",
+      "active_speaker": "Willy",
+      "display_name": "Willy",
+      "portrait_expression": "neutral",
+      "setting_description": "",
+      "prompt": "Oh, and if ya find any more useful junk out there, don't just leave it lyin' around. Copper wire, motor parts, old circuitry... stuff like that. Bring it to me. Might be worth a few Bits.",
+      "audio_clip": "",
+      "shared_beat": "",
+      "tone_choices": [
+        {
+          "tone": "T",
+          "label": "Trust",
+          "text": "All right. I'll keep an eye out for you.",
+          "audio_clip_on_choice": "",
+          "result_text": "Small Trust increase with Willy.",
+          "show_result_in_notification": true,
+          "npc_response": "Knew ya were the helpful type.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0.01
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "trust",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "O",
+          "label": "Observation",
+          "text": "Copper wire, motor parts, old circuitry. Anything else?",
+          "audio_clip_on_choice": "",
+          "result_text": "Small Observation/Nuance increase.",
+          "show_result_in_notification": true,
+          "npc_response": "Heh. Start with that. You'll figure out what's worth carryin' soon enough.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0.02
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "nuance",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "N",
+          "label": "Narrative",
+          "text": "So that's how things work around here. Find something useful, find someone who needs it.",
+          "audio_clip_on_choice": "",
+          "result_text": "Small Narrative/Authority increase.",
+          "show_result_in_notification": true,
+          "npc_response": "Now you're catchin' on. Ain't much use havin' something if nobody wants it.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0.02
+            },
+            {
+              "stat": "empathy",
+              "delta": 0
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "authority",
+              "delta": 0.02
+            }
+          ],
+          "system_triggers": []
+        },
+        {
+          "tone": "E",
+          "label": "Empathy",
+          "text": "I'll bring you what I can. Sounds like you actually need the stuff.",
+          "audio_clip_on_choice": "",
+          "result_text": "Small Empathy increase.",
+          "show_result_in_notification": true,
+          "npc_response": "There ya go again. Don't make it charity. I'm payin' for it.",
+          "audio_clip_on_response": "",
+          "portrait_expression_on_response": "neutral",
+          "tone_effects": [
+            {
+              "stat": "trust",
+              "delta": 0
+            },
+            {
+              "stat": "observation",
+              "delta": 0
+            },
+            {
+              "stat": "narrative",
+              "delta": 0
+            },
+            {
+              "stat": "empathy",
+              "delta": 0.02
+            }
+          ],
+          "remnants_effects": [
+            {
+              "target": "Willy",
+              "stat": "empathy",
+              "delta": 0.01
+            }
+          ],
+          "system_triggers": []
+        }
+      ],
       "next_beat_id": 3,
       "system_triggers": [
         {
@@ -382,7 +545,7 @@
           "type": "system_notification",
           "data": [
             "Inventory Unlocked",
-            "Useful materials can be collected while exploring.",
+            "Useful materials can be collected while exploring and may be valuable to others.",
             "Press I to view your Inventory"
           ]
         }
