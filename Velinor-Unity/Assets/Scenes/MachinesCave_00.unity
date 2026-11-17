@@ -5470,6 +5470,7 @@ GameObject:
   - component: {fileID: 2010433752}
   - component: {fileID: 2010433751}
   - component: {fileID: 2010433750}
+  - component: {fileID: 2010433756}
   m_Layer: 0
   m_Name: GlyphPickup_Sorrow
   m_TagString: Untagged
@@ -5500,7 +5501,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -10945,3 +10946,16 @@ SceneRoots:
   - {fileID: 1491386006}
   - {fileID: 466228132}
   - {fileID: 3874979746628526789}
+
+--- !u!114 &2010433756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010433749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1a3c8e4d6b2a1f9e7c5b3a1d9e7c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

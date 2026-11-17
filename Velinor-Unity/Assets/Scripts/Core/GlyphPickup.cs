@@ -11,9 +11,17 @@ public class GlyphPickup : MonoBehaviour
     [SerializeField] private GlyphData glyphData;
     [SerializeField] private bool hasBeenCollected = false;
     private string glyphCollectionFlag = ""; // Set based on glyphData
+    
+    // Store original position to prevent any external modifications
+    private Vector3 originalWorldPosition;
+    private bool hasStoredOriginalPosition = false;
 
     private void Start()
     {
+        // Store the original position so we can reset it if something changes it
+        originalWorldPosition = transform.position;
+        hasStoredOriginalPosition = true;
+
         // Create flag name based on glyph data
         if (glyphData != null)
         {
@@ -43,6 +51,16 @@ public class GlyphPickup : MonoBehaviour
         {
             coreTransform.gameObject.AddComponent<GlyphVisualEffect>();
             Debug.Log($"[GlyphPickup] Added GlyphVisualEffect to {coreTransform.gameObject.name}");
+        }
+    }
+
+    private void LateUpdate()
+    {
+        // Safety: If anything changed our position, reset it immediately
+        if (hasStoredOriginalPosition && transform.position != originalWorldPosition)
+        {
+            Debug.LogWarning($"[GlyphPickup] {gameObject.name} position was modified! Resetting to {originalWorldPosition}");
+            transform.position = originalWorldPosition;
         }
     }
 
