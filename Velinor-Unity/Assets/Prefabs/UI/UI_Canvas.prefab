@@ -11129,7 +11129,7 @@ GameObject:
   - component: {fileID: 1105206376162485334}
   - component: {fileID: 5039626241353944313}
   - component: {fileID: 3464344505623092089}
-  - component: {fileID: 9999999999999999991}
+  - component: {fileID: 8888888888888888881}
   m_Layer: 0
   m_Name: ToolsTab
   m_TagString: Untagged
@@ -11239,7 +11239,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!225 &9999999999999999991
+--- !u!225 &8888888888888888881
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16080,7 +16080,7 @@ GameObject:
   - component: {fileID: 9001997684022894949}
   - component: {fileID: 6882889681957237072}
   - component: {fileID: 5266954675468903121}
-  - component: {fileID: 9999999999999999992}
+  - component: {fileID: 8888888888888888882}
   m_Layer: 0
   m_Name: MaterialsTab
   m_TagString: Untagged
@@ -16190,7 +16190,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!225 &9999999999999999992
+--- !u!225 &8888888888888888882
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
