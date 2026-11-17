@@ -306,8 +306,6 @@ public class SetupMalrikElenyaTestScene
 
         // Add player movement script
         playerObj.AddComponent<SimplePlayerController>();        
-        // Add player stats tracking
-        playerObj.AddComponent<PlayerStats>();
         
         // Visual (blue capsule) - scaled child, root stays 1,1,1
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
@@ -381,10 +379,6 @@ public class SetupMalrikElenyaTestScene
         NPCInteraction npcInteraction = malrikObj.AddComponent<NPCInteraction>();
         npcInteraction.GetType().GetField("npcId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(npcInteraction, "Malrik");
 
-        // Add dialogue sequences
-        malrikObj.AddComponent<MalrikDialogueSequence>();
-        malrikObj.AddComponent<DialogueGateEvaluator>();
-
         Debug.Log("✅ Malrik created at (0, 0.66, 5)");
     }
 
@@ -434,9 +428,7 @@ public class SetupMalrikElenyaTestScene
         NPCInteraction npcInteraction = elenyaObj.AddComponent<NPCInteraction>();
         npcInteraction.GetType().GetField("npcId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(npcInteraction, "Elenya");
 
-        // Add dialogue sequences
-        elenyaObj.AddComponent<VelinorGame.Core.ElenyaDialogueSequence>();
-        elenyaObj.AddComponent<DialogueGateEvaluator>();
+        // Add dialogue sequences are removed - these components no longer exist
 
         Debug.Log("✅ Elenya created at (0, 0.66, -5)");
     }

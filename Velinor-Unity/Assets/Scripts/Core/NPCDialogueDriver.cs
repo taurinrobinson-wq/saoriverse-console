@@ -500,7 +500,7 @@ if (dialogueData.passages != null && dialogueData.passages.Length > 0)
             // If it's a multi-NPC scene, try to find the others
             if (isMultiNpcScene)
             {
-                NPCDialogueDriver[] allDrivers = Object.FindObjectsByType<NPCDialogueDriver>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                NPCDialogueDriver[] allDrivers = Object.FindObjectsByType<NPCDialogueDriver>(FindObjectsInactive.Include);
                 foreach (var driver in allDrivers)
                 {
                     if (driver.completionFlag == this.completionFlag)

@@ -30,7 +30,6 @@ public class ShadowDecal : MonoBehaviour
     [SerializeField] private float bounceSensitivity = 0.5f; // How much jump/bounce affects opacity
     [SerializeField] private float strideSensitivity = 1.2f; // How much leg spread affects shadow width
     [SerializeField] private float minAlpha = 0.2f;
-    [SerializeField] private float maxAlpha = 0.5f;
 
     private GameObject shadowObj;
     private SpriteRenderer shadowRenderer;
@@ -53,7 +52,7 @@ public class ShadowDecal : MonoBehaviour
     private static void FindMainLight()
     {
         // Find the most intense directional light
-        Light[] lights = Object.FindObjectsByType<Light>(FindObjectsSortMode.None);
+        Light[] lights = Object.FindObjectsByType<Light>();
         float maxIntensity = -1f;
         foreach (var l in lights)
         {

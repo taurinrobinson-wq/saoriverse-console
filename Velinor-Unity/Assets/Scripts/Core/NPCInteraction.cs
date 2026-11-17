@@ -63,7 +63,4 @@ public class NPCInteraction : MonoBehaviour, IInteractable
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactionRadius);
     }
-    
-    // LEGACY FIELDS FOR COMPATIBILITY
-    public NPCStats raviStats, malrikStats, elenyaStats, saoriStats;
 }

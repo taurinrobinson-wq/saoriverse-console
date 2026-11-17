@@ -25,8 +25,6 @@ namespace Velinor.Inventory
         [SerializeField] private InventoryItemEntryUI itemEntryPrefab;
 
         [Header("Display Settings")]
-        [SerializeField] private bool showEmptyCategories = false;
-        [SerializeField] private float visibilityDuration = 0.3f;  // Alpha fade duration
 
         private Dictionary<string, InventoryItemEntryUI> activeEntries = new Dictionary<string, InventoryItemEntryUI>();
         private bool isVisible = false;

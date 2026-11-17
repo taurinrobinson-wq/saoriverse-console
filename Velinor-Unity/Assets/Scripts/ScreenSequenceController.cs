@@ -29,7 +29,6 @@ public class ScreenSequenceController : MonoBehaviour
     
     [Header("Sequence Configuration")]
     [SerializeField] private int sequenceStageID = 1;  // Which stage (1-4)
-    [SerializeField] private bool requireAllHotspotsClicked = false;
     [SerializeField] private string completionMindLogText = "Story concluded...";
     
     [Header("Scene Teleportation")]

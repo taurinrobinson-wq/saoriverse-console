@@ -312,8 +312,6 @@ public class SetupVelinorTestScene
 
         // Add player movement script
         playerObj.AddComponent<SimplePlayerController>();        
-        // Add player stats tracking
-        playerObj.AddComponent<PlayerStats>();
         // Visual (blue capsule) - scaled child, root stays 1,1,1
         GameObject visualObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         visualObj.name = "Visual";
