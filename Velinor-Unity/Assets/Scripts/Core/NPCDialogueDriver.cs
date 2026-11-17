@@ -305,11 +305,22 @@ if (dialogueData.passages != null && dialogueData.passages.Length > 0)
                 }
             }
 
+            // Update glow based on player range (independent of notification state)
+            if (interactionGlow != null)
+            {
+                if (playerInRange && !interactionGlow.activeInHierarchy)
+                {
+                    interactionGlow.SetActive(true);
+                }
+                else if (!playerInRange && interactionGlow.activeInHierarchy)
+                {
+                    interactionGlow.SetActive(false);
+                }
+            }
+
             // Show notification when entering range
             if (playerInRange && !notificationShown)
             {
-                if (interactionGlow != null) interactionGlow.SetActive(true);
-                
                 NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
                 if (notificationPanel != null)
                 {
@@ -324,8 +335,6 @@ if (dialogueData.passages != null && dialogueData.passages.Length > 0)
             // Hide notification when leaving range
             if (!playerInRange && notificationShown)
             {
-                if (interactionGlow != null) interactionGlow.SetActive(false);
-                
                 NotificationPanelController notificationPanel = FindAnyObjectByType<NotificationPanelController>();
                 if (notificationPanel != null)
                 {
