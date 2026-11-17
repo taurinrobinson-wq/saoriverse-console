@@ -23,7 +23,6 @@ namespace Velinor.Utils
         private SpriteRenderer shadowRenderer;
         private GameObject shadowObject;
         private Material shadowMaterial;
-        private bool initialized = false;
 
         private void OnEnable()
         {
@@ -32,8 +31,6 @@ namespace Velinor.Utils
 
         private void Initialize()
         {
-            if (initialized) return;
-            
             sourceRenderer = GetComponent<SpriteRenderer>();
             if (sourceRenderer == null) sourceRenderer = GetComponentInChildren<SpriteRenderer>();
             
@@ -86,21 +83,14 @@ namespace Velinor.Utils
 
             if (shadowMaterial != null) shadowRenderer.sharedMaterial = shadowMaterial;
             
-            initialized = true;
             UpdateShadow();
         }
 
         private void LateUpdate()
         {
-            if (!initialized)
+            // Check if shadow object is still valid; reinitialize if lost
+            if (shadowObject == null || sourceRenderer == null || shadowRenderer == null)
             {
-                Initialize();
-                return;
-            }
-
-            if (sourceRenderer == null || shadowRenderer == null || shadowObject == null)
-            {
-                initialized = false;
                 Initialize();
                 return;
             }
@@ -110,6 +100,8 @@ namespace Velinor.Utils
 
         private void UpdateShadow()
         {
+            if (shadowRenderer == null || sourceRenderer == null) return;
+
             // 1. Sync Visuals
             shadowRenderer.sprite = sourceRenderer.sprite;
             shadowRenderer.flipX = sourceRenderer.flipX;
@@ -127,14 +119,13 @@ namespace Velinor.Utils
             mpb.SetColor("_BaseColor", shadowColor);
             shadowRenderer.SetPropertyBlock(mpb);
 
-            // 4. PRESERVE custom transform if enabled - do NOT reset it
+            // 4. PRESERVE custom transform if enabled - do NOT reset it every frame
             if (useCustomTransform)
             {
-                // Only update transform on initial setup, not every frame
+                // Only update transform if inspector values changed
                 if (shadowObject.transform.localPosition != shadowLocalPosition || 
                     shadowObject.transform.localScale != shadowLocalScale)
                 {
-                    // This only updates if the inspector values changed, not every frame
                     shadowObject.transform.localPosition = shadowLocalPosition;
                     shadowObject.transform.localScale = shadowLocalScale;
                 }
