@@ -1877,9 +1877,6 @@ MonoBehaviour:
   shadowColor: {r: 0.01, g: 0.01, b: 0.04, a: 0.35}
   sortingLayerName: Default
   sortingOrderOffset: -1
-  shadowOffset: {x: 0.83, y: -0.29, z: -3.72}
-  shadowScale: {x: 4.13, y: -0.59, z: 1.29}
-  shadowRotation: {x: 434.5, y: -113.5, z: -13.05}
 --- !u!1 &7321452328568054883
 GameObject:
   m_ObjectHideFlags: 0
