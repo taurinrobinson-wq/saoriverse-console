@@ -3110,21 +3110,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1149857058739159780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f9c2cd328b3764c8b11fa212f83937, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 110, y: 110}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlSize: 1
+  m_ChildScaleSize: 0
+  m_Spacing: 5
+  m_ChildLayoutWidth: 1
+  m_ChildLayoutHeight: 1
+  m_ReverseArrangement: 0
 --- !u!114 &1881910427078803902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4641,21 +4643,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1620053916348885140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f9c2cd328b3764c8b11fa212f83937, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 110, y: 110}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlSize: 1
+  m_ChildScaleSize: 0
+  m_Spacing: 5
+  m_ChildLayoutWidth: 1
+  m_ChildLayoutHeight: 1
+  m_ReverseArrangement: 0
 --- !u!114 &4666525764437290064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9233,21 +9237,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3469888935823461522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f9c2cd328b3764c8b11fa212f83937, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 110, y: 110}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlSize: 1
+  m_ChildScaleSize: 0
+  m_Spacing: 5
+  m_ChildLayoutWidth: 1
+  m_ChildLayoutHeight: 1
+  m_ReverseArrangement: 0
 --- !u!114 &628748941770146909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12795,21 +12801,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5487484212475636479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f9c2cd328b3764c8b11fa212f83937, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 110, y: 110}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlSize: 1
+  m_ChildScaleSize: 0
+  m_Spacing: 5
+  m_ChildLayoutWidth: 1
+  m_ChildLayoutHeight: 1
+  m_ReverseArrangement: 0
 --- !u!114 &6703356722197395085
 MonoBehaviour:
   m_ObjectHideFlags: 0
