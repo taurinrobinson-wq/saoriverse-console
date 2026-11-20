@@ -185,7 +185,7 @@ private bool isInventoryOpen = false;
         private void SetTabVisibility(GameObject tab, bool visible)
         {
             if (tab == null) return;
-            tab.SetActive(true);
+            tab.SetActive(visible);
             var cg = tab.GetComponent<CanvasGroup>();
             if (cg == null) cg = tab.AddComponent<CanvasGroup>();
             cg.alpha = visible ? 1f : 0f;
