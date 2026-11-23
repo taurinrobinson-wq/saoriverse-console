@@ -2170,21 +2170,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 822124241769348691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f9c2cd328b3764c8b11fa212f83937, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 110, y: 110}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlSize: 1
+  m_ChildScaleSize: 0
+  m_Spacing: 10
+  m_ChildLayoutWidth: 1
+  m_ChildLayoutHeight: 1
+  m_ReverseArrangement: 0
 --- !u!114 &8911190232935639604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4789,21 +4791,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1720837828521238432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f8143b3bccf3f46bb2547636c1a157, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 110, y: 110}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildAlignment: 1
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlSize: 1
+  m_ChildScaleSize: 0
+  m_Spacing: 10
+  m_ChildLayoutWidth: 1
+  m_ChildLayoutHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &6365428264728810295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10938,13 +10942,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7338221417021937588}
+  - component: {fileID: 4509435062595836351}
   m_Layer: 0
   m_Name: ToolsItemsTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7338221417021937588
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10968,6 +10973,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &4509435062595836351
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509435062595836350}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &4527378290126970333
 GameObject:
   m_ObjectHideFlags: 0
@@ -11621,21 +11638,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4923038117609095107}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f9c2cd328b3764c8b11fa212f83937, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 10
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 110, y: 110}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlSize: 1
+  m_ChildScaleSize: 0
+  m_Spacing: 10
+  m_ChildLayoutWidth: 1
+  m_ChildLayoutHeight: 1
+  m_ReverseArrangement: 0
 --- !u!114 &7253604401223415775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15821,6 +15840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4005598463746895230}
+  - component: {fileID: 7041937210332316405}
   m_Layer: 0
   m_Name: MaterialsSchematicsTab
   m_TagString: Untagged
@@ -15849,6 +15869,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &7041937210332316405
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041937210332316404}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &7066695828224906780
 GameObject:
   m_ObjectHideFlags: 0
