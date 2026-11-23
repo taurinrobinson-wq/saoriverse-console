@@ -6227,7 +6227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7268360499519187533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11148,7 +11148,6 @@ GameObject:
   - component: {fileID: 1105206376162485334}
   - component: {fileID: 5039626241353944313}
   - component: {fileID: 3464344505623092089}
-  - component: {fileID: 9999999999999999991}
   m_Layer: 0
   m_Name: ToolsTab
   m_TagString: Untagged
@@ -11258,18 +11257,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!225 &9999999999999999991
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4733363122874435707}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &4771360482991726603
 GameObject:
   m_ObjectHideFlags: 0
@@ -16101,7 +16088,6 @@ GameObject:
   - component: {fileID: 9001997684022894949}
   - component: {fileID: 6882889681957237072}
   - component: {fileID: 5266954675468903121}
-  - component: {fileID: 9999999999999999992}
   m_Layer: 0
   m_Name: MaterialsTab
   m_TagString: Untagged
@@ -16211,18 +16197,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!225 &9999999999999999992
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7225589318423187779}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &7230764655803421306
 GameObject:
   m_ObjectHideFlags: 0
