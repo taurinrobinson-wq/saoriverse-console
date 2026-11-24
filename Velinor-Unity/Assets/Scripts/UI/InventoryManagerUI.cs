@@ -35,9 +35,9 @@ namespace Velinor.UI
         [SerializeField] private TextMeshProUGUI bitsValueText;
 
         [Header("Visual Settings")]
-        [SerializeField] private Color buttonActiveColor = new Color(0.2f, 0.8f, 0.2f, 1f);
-        [SerializeField] private Color buttonInactiveColor = new Color(0.3f, 0.3f, 0.3f, 1f);
-        [SerializeField] private Color tabActiveColor = new Color(0.5f, 0.5f, 0.7f, 1f);
+        [SerializeField] private Color buttonActiveColor = new Color(0f, 0.9f, 0f, 1f); // Bright Green
+        [SerializeField] private Color buttonInactiveColor = new Color(0.2f, 0.2f, 0.2f, 0.8f); // Dark Gray
+[SerializeField] private Color tabActiveColor = new Color(0.5f, 0.5f, 0.7f, 1f);
         [SerializeField] private Color tabInactiveColor = new Color(0.2f, 0.2f, 0.2f, 1f);
 
         [Header("Database")]
@@ -105,8 +105,20 @@ private bool isInventoryOpen = false;
             if (inventory == null) return;
             
             // Materials
-            string[] materials = { "material_scrap", "material_glass", "material_energycell", "material_circuitry", "material_rubber" };
-            foreach (var m in materials) inventory.Add(m, 10);
+            inventory.Add("material_scrap", 4);
+            inventory.Add("material_glass", 9);
+            inventory.Add("material_energycell", 7);
+            inventory.Add("material_circuitry", 9);
+            inventory.Add("material_rubber", 5);
+
+            // Tools
+            inventory.Add("tool_scanner", 1);
+            inventory.Add("tool_welder", 1);
+            inventory.Add("tool_flashlight", 1);
+
+            // Items
+            inventory.Add("item_stim", 1);
+            inventory.Add("item_ration", 1);
 
             // Schematics
             string[] schematics = { 
@@ -115,7 +127,7 @@ private bool isInventoryOpen = false;
             };
             foreach (var s in schematics) inventory.Add(s, 1);
             
-            Debug.Log("[InventoryManagerUI] Auto-populated test items for Play Mode.");
+            Debug.Log("[InventoryManagerUI] Auto-populated test items matching Nov 11 state.");
         }
 
         private void HandleInventoryChanged(string id, int qty) => RefreshAll();
@@ -132,13 +144,12 @@ private bool isInventoryOpen = false;
 
         private void Update()
         {
-            bool iPressed = false;
-            if (toggleAction != null && toggleAction.WasPressedThisFrame()) iPressed = true;
-            
-            var keyboard = Keyboard.current;
-            if (keyboard != null && keyboard.iKey.wasPressedThisFrame) iPressed = true;
+            if (Keyboard.current == null) return;
 
-            if (iPressed) ToggleInventory();
+            if (Keyboard.current.iKey.wasPressedThisFrame)
+            {
+                ToggleInventory();
+            }
         }
 
         public void ToggleInventory()
@@ -322,8 +333,10 @@ private bool isInventoryOpen = false;
                 if (entry == null) continue;
                 var schematic = schematicDatabase.Find(s => s.SchematicItem.ItemId == entry.Item.ItemId);
                 if (schematic == null) continue;
+                
                 bool canAssemble = schematic.CanAssemble(currentSelection);
-                entry.SetGrayedOut(!canAssemble);
+                entry.SetReadyForAssembly(canAssemble);
+                entry.SetGrayedOut(!canAssemble && selectedMaterialIds.Count > 0); // Gray out non-matching schematics if we have materials selected
             }
         }
 

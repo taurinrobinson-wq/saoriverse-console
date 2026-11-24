@@ -108,8 +108,17 @@ namespace Velinor.Inventory
             UpdateSelectionVisual();
         }
 
-        public void SetGrayedOut(bool grayed)
+        public void SetReadyForAssembly(bool ready)
         {
+            if (itemNameText != null)
+            {
+                // Bright Neon Green for ready blueprints
+                itemNameText.color = ready ? new Color(0.2f, 1f, 0.2f, 1f) : Color.white;
+            }
+        }
+
+        public void SetGrayedOut(bool grayed)
+{
             if (itemIcon != null) itemIcon.color = grayed ? new Color(0.5f, 0.5f, 0.5f, 0.5f) : Color.white;
             if (itemNameText != null) itemNameText.color = grayed ? Color.gray : Color.white;
         }
@@ -132,7 +141,7 @@ namespace Velinor.Inventory
         {
             if (itemQuantityText != null)
             {
-                itemQuantityText.text = currentQuantity > 1 ? $"x{currentQuantity}" : "";
+                itemQuantityText.text = $"x{currentQuantity}";
             }
         }
 
