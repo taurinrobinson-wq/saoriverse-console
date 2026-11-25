@@ -24,16 +24,71 @@ namespace Velinor.Interactions
         public string EquippedToolId => equippedToolId;
         public ToolDefinition EquippedTool => equippedToolDefinition;
 
+        private InventoryService inventory;
+
+        public static ToolSystem EnsureInstance(InventoryService inventoryService)
+        {
+            if (Instance == null) Instance = FindAnyObjectByType<ToolSystem>();
+            if (Instance == null)
+            {
+                var root = new GameObject("ToolSystem_Runtime");
+                root.SetActive(false);
+                Instance = root.AddComponent<ToolSystem>();
+                root.SetActive(true);
+            }
+            Instance.BindInventory(inventoryService);
+            return Instance;
+        }
+
         private void Awake()
         {
-            if (Instance != null)
+            if (Instance != null && Instance != this)
             {
-                Destroy(gameObject);
+                Destroy(this);
                 return;
             }
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnEnable()
+        {
+            if (Instance == this) BindInventory(InventoryService.ExistingInstance);
+        }
+
+        private void BindInventory(InventoryService inventoryService)
+        {
+            if (inventory == inventoryService) return;
+            UnbindInventory();
+            inventory = inventoryService;
+            if (inventory == null) return;
+            inventory.OnInventoryChanged += OnInventoryChanged;
+            inventory.OnInventoryCleared += UnequipTool;
+            if (equippedToolId != null && !inventory.Contains(equippedToolId)) UnequipTool();
+        }
+
+        private void OnInventoryChanged(string itemId, int quantity)
+        {
+            if (itemId == equippedToolId && quantity <= 0) UnequipTool();
+        }
+
+        private void UnbindInventory()
+        {
+            if (inventory != null)
+            {
+                inventory.OnInventoryChanged -= OnInventoryChanged;
+                inventory.OnInventoryCleared -= UnequipTool;
+            }
+            inventory = null;
+        }
+
+        private void OnDisable() => UnbindInventory();
+
+        private void OnDestroy()
+        {
+            UnbindInventory();
+            if (Instance == this) Instance = null;
         }
 
         /// <summary>
@@ -63,11 +118,13 @@ namespace Velinor.Interactions
             }
 
             var toolDef = GetToolDefinition(toolId);
-            if (toolDef == null)
+            var item = inventory != null ? inventory.GetItemDefinition(toolId) : InventoryService.Instance.GetItemDefinition(toolId);
+            if (toolDef == null && (item == null || item.Category != ItemCategory.Tool))
             {
-                Debug.LogWarning($"Unknown tool definition: {toolId}");
+                Debug.LogWarning($"Not a tool: {toolId}");
                 return false;
             }
+            if (equippedToolId == toolId) return true;
 
             equippedToolId = toolId;
             equippedToolDefinition = toolDef;

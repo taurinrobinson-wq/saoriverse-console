@@ -15,9 +15,11 @@ namespace Velinor.Inventory
         
         // Core inventory state: itemId → quantity
         private Dictionary<string, int> quantities = new Dictionary<string, int>();
+        private HashSet<string> learnedSchematicIds = new HashSet<string>();
 
         // Events for UI and other systems
         public event Action<string, int> OnInventoryChanged;  // (itemId, newQuantity)
+        public event Action<string> OnSchematicLearned;
         public event Action OnInventoryCleared;
 
         private static InventoryService instance;
@@ -37,21 +39,68 @@ namespace Velinor.Inventory
             }
         }
 
+        public static InventoryService ExistingInstance => instance;
+
+        public static InventoryService EnsureInstance(ItemDatabase database)
+        {
+            if (instance == null)
+                instance = FindAnyObjectByType<InventoryService>();
+            if (instance == null)
+            {
+                var root = new GameObject("InventoryService_Runtime");
+                root.SetActive(false);
+                var service = root.AddComponent<InventoryService>();
+                service.itemDatabase = database;
+                instance = service;
+                root.SetActive(true);
+            }
+            else if (instance.itemDatabase == null)
+            {
+                instance.itemDatabase = database;
+            }
+            return instance;
+        }
+
         public ItemDatabase ItemDatabase => itemDatabase;
+
+        /// <summary>
+        /// Learn a schematic recipe permanently
+        /// </summary>
+        public void LearnSchematic(string schematicItemId)
+        {
+            if (learnedSchematicIds.Add(schematicItemId))
+            {
+                Debug.Log($"[InventoryService] Learned schematic: {schematicItemId}");
+                OnSchematicLearned?.Invoke(schematicItemId);
+            }
+        }
+
+        /// <summary>
+        /// Check if a schematic has been learned
+        /// </summary>
+        public bool IsSchematicLearned(string schematicItemId)
+        {
+            return learnedSchematicIds.Contains(schematicItemId);
+        }
+
+        /// <summary>
+        /// Get all learned schematic IDs
+        /// </summary>
+        public IEnumerable<string> GetLearnedSchematics() => learnedSchematicIds;
 
         private void Awake()
         {
-            // Singleton pattern with duplicate prevention
-            if (instance == null)
+            if (instance == null || instance == this)
             {
                 instance = this;
                 DontDestroyOnLoad(gameObject);
                 Debug.Log("[InventoryService] Initialized and marked persistent");
             }
-            else if (instance != this)
+            else
             {
-                Debug.LogWarning("[InventoryService] Duplicate instance destroyed");
-                Destroy(gameObject);
+                // A scene's Managers object may contain unrelated gameplay systems.
+                Debug.LogWarning("[InventoryService] Duplicate component removed");
+                Destroy(this);
                 return;
             }
 
@@ -59,6 +108,11 @@ namespace Velinor.Inventory
             {
                 Debug.LogError("[InventoryService] ItemDatabase not assigned!");
             }
+        }
+
+        private void OnDestroy()
+        {
+            if (instance == this) instance = null;
         }
 
         /// <summary>

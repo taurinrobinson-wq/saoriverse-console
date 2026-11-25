@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57eef9bcf45c69b40a3c7ce8a17a2504, type: 3}
+  m_Name: Cutting_Tool_Recipe
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Inventory.SchematicDefinition
+  schematicItem: {fileID: 11400000, guid: 255dab8feeed471479ba8db7c82f0bb5, type: 2}
+  ingredients:
+  - item: {fileID: 11400000, guid: e9f85fc539fb7b74190e1cdf01f8a98e, type: 2}
+    quantity: 2
+  - item: {fileID: 11400000, guid: aa4c40ba3e9c40545a4d84faefa8e98e, type: 2}
+    quantity: 1
+  resultItem: {fileID: 11400000, guid: 157aeb1b9c13a29479a4a8789dcbcdd2, type: 2}
+  resultQuantity: 1

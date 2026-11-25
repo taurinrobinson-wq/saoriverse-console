@@ -8,20 +8,33 @@ public class UIPersistenceManager : MonoBehaviour
 {
     private static UIPersistenceManager _instance;
 
-    private void Awake()
+    public bool EnsureOwnership()
     {
-        // If this is the first instance, keep it and mark it as persistent
         if (_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+        return _instance == this;
+    }
+
+    private void Awake()
+    {
+        if (EnsureOwnership())
+        {
             Debug.Log("[UI] UI_Canvas marked as persistent across scenes");
         }
         else
         {
-            // If a persistent UI_Canvas already exists, destroy this duplicate
+            // Prevent child OnEnable handlers running on a doomed duplicate.
+            gameObject.SetActive(false);
             Debug.Log("[UI] Duplicate UI_Canvas detected - destroying");
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance == this) _instance = null;
     }
 }

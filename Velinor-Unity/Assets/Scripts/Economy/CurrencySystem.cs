@@ -40,21 +40,46 @@ namespace Velinor.Economy
 
         private const string BITS_SAVE_KEY = "velinor_bits_total";
 
+        private bool initialized;
+
+        public static CurrencySystem EnsureInstance()
+        {
+            if (Instance == null)
+                Instance = FindAnyObjectByType<CurrencySystem>();
+            if (Instance == null)
+            {
+                var root = new GameObject("CurrencySystem_Runtime");
+                Instance = root.AddComponent<CurrencySystem>();
+            }
+            Instance.Initialize();
+            return Instance;
+        }
+
         private void Awake()
         {
-            if (Instance != null)
+            if (Instance != null && Instance != this)
             {
-                Destroy(gameObject);
+                // Never destroy other components sharing this service's host.
+                Destroy(this);
                 return;
             }
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Initialize();
         }
 
-        private void Start()
+        private void Initialize()
         {
+            if (initialized) return;
+            initialized = true;
             LoadBits();
+            OnBitsChanged?.Invoke(CurrentBits);
+        }
+
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
         }
 
         /// <summary>

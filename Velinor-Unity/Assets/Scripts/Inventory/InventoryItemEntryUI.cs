@@ -33,9 +33,13 @@ namespace Velinor.Inventory
         private int currentQuantity;
         private bool isSelected = false;
         private System.Action<InventoryItemEntryUI> onClickedCallback;
+        private UnityEngine.UI.LayoutElement rowLayout;
+        private float headerHeight;
 
-        private void Start()
+        private void Awake()
         {
+            rowLayout = GetComponent<UnityEngine.UI.LayoutElement>();
+            headerHeight = rowLayout != null ? rowLayout.preferredHeight : ((RectTransform)transform).rect.height;
             if (entryButton != null)
             {
                 entryButton.onClick.AddListener(OnEntryClicked);
@@ -79,26 +83,49 @@ namespace Velinor.Inventory
             if (ingredientContainer == null) return;
             foreach (Transform child in ingredientContainer) Destroy(child.gameObject);
             if (ingredientRoot != null) ingredientRoot.SetActive(false);
+            UpdateExpandedHeight();
         }
 
-        public void AddIngredient(string name, int qty, bool satisfied)
+        public void AddIngredient(Sprite icon, string name, int requiredQty, int ownedQty, bool satisfied)
         {
             if (ingredientEntryPrefab == null || ingredientContainer == null) return;
             if (ingredientRoot != null) ingredientRoot.SetActive(true);
             
             var entry = Instantiate(ingredientEntryPrefab, ingredientContainer);
+            
+            var iconImg = entry.GetComponentInChildren<UnityEngine.UI.Image>();
+            if (iconImg != null)
+            {
+                iconImg.sprite = icon;
+                iconImg.enabled = icon != null;
+            }
+
             var texts = entry.GetComponentsInChildren<TextMeshProUGUI>();
             if (texts.Length >= 2)
             {
                 texts[0].text = name;
-                texts[1].text = $"x{qty}";
+                texts[1].text = ownedQty + " / " + requiredQty;
                 texts[1].color = satisfied ? Color.green : Color.red;
             }
+            UpdateExpandedHeight();
         }
 
-        public void SetQuantity(int quantity)
+    private void UpdateExpandedHeight()
+    {
+        if (rowLayout == null) return;
+        float height = headerHeight;
+        if (ingredientRoot != null && ingredientRoot.activeSelf)
         {
-            currentQuantity = quantity;
+            var rect = (RectTransform)ingredientRoot.transform;
+            UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+            height += UnityEngine.UI.LayoutUtility.GetPreferredHeight(rect);
+        }
+        rowLayout.preferredHeight = height;
+    }
+
+    public void SetQuantity(int quantity)
+    {
+        currentQuantity = quantity;
             UpdateQuantityDisplay();
         }
 

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57eef9bcf45c69b40a3c7ce8a17a2504, type: 3}
+  m_Name: Medicinal_Salve_Recipe
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Inventory.SchematicDefinition
+  schematicItem: {fileID: 11400000, guid: 1f4c875f38cf7064eb5859848539f4e2, type: 2}
+  ingredients:
+  - item: {fileID: 11400000, guid: 27eeedbf250a97d4193d89f9c6adcf3a, type: 2}
+    quantity: 2
+  - item: {fileID: 11400000, guid: 17f95df6c3dc97043bc2711456b6c974, type: 2}
+    quantity: 1
+  resultItem: {fileID: 11400000, guid: 2bc29d3b37ae63747a5748df3ca24e17, type: 2}
+  resultQuantity: 1

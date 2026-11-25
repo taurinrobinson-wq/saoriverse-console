@@ -44,21 +44,31 @@ public class NotificationPanelController : MonoBehaviour
             Debug.LogWarning("[Notification] NotificationPanelController is not a root GameObject - skipping DontDestroyOnLoad");
         }
 
-        Canvas[] allCanvases = FindObjectsByType<Canvas>();
-        foreach (Canvas c in allCanvases)
+        if (notificationPanel == null || notificationText == null)
         {
-            if (c.gameObject.name == "UI_Canvas")
+            Canvas[] allCanvases = FindObjectsByType<Canvas>();
+            foreach (Canvas c in allCanvases)
             {
-                _cachedCanvas = c;
-                
-                Transform notifPanelT = FindPanelRecursive(c.transform, "NotificationPanel");
-                if (notifPanelT != null)
+                if (c.gameObject.name == "UI_Canvas")
                 {
-                    notificationPanel = notifPanelT.GetComponent<CanvasGroup>();
-                    notificationText = notifPanelT.Find("NotificationText")?.GetComponent<TextMeshProUGUI>();
-                    Debug.Log("[Notification] NotificationPanel found and assigned");
+                    _cachedCanvas = c;
+                    
+                    if (notificationPanel == null)
+                    {
+                        Transform notifPanelT = FindPanelRecursive(c.transform, "NotificationPanel");
+                        if (notifPanelT != null)
+                            notificationPanel = notifPanelT.GetComponent<CanvasGroup>();
+                    }
+
+                    if (notificationText == null && notificationPanel != null)
+                    {
+                        notificationText = notificationPanel.transform.Find("NotificationText")?.GetComponent<TextMeshProUGUI>();
+                    }
+
+                    if (notificationPanel != null)
+                        Debug.Log("[Notification] NotificationPanel found and assigned via search");
+                    break;
                 }
-                break;
             }
         }
     }
@@ -79,7 +89,7 @@ public class NotificationPanelController : MonoBehaviour
 
     private void Start()
     {
-        if (notificationPanel != null)
+        if (notificationPanel != null && (notificationPanel.alpha > 0.01f) == false)
         {
             notificationPanel.alpha = 0f;
             notificationPanel.blocksRaycasts = false;

@@ -34,6 +34,9 @@ namespace Velinor.UI
         [SerializeField] private TextMeshProUGUI actionButtonText;
         [SerializeField] private TextMeshProUGUI bitsValueText;
 
+        [Header("Action Feedback")]
+        [SerializeField] private NotificationPanelController notificationController;
+
         [Header("Visual Settings")]
         [SerializeField] private Color buttonActiveColor = new Color(0f, 0.9f, 0f, 1f); // Bright Green
         [SerializeField] private Color buttonInactiveColor = new Color(0.2f, 0.2f, 0.2f, 0.8f); // Dark Gray
@@ -57,80 +60,109 @@ private bool isInventoryOpen = false;
         private HashSet<string> selectedMaterialIds = new();
         private SchematicDefinition selectedSchematic;
         private InventoryItemEntryUI selectedToolOrItem;
+        private string selectedToolOrItemId;
+        private Velinor.Interactions.ToolSystem toolSystem;
         private bool isMaterialsTab = true;
 
         private void Awake()
         {
             mainCanvasGroup = GetComponent<CanvasGroup>();
-            toggleAction = new InputAction("ToggleInventory", binding: "<Keyboard>/i");
+            bootstrap = GetComponentInParent<InventoryUIBootstrap>();
+            toggleAction = new UnityEngine.InputSystem.InputAction("ToggleInventory", binding: "<Keyboard>/i");
+            toggleAction.performed += OnTogglePerformed;
         }
+
+        private InventoryUIBootstrap bootstrap;
+        private CurrencySystem currency;
+        private bool attemptedTestPopulation;
 
         private void OnEnable()
         {
-            inventory = InventoryService.Instance;
-            if (inventory != null)
+            if (bootstrap != null && !bootstrap.EnsureReady()) return;
+            if (mainCanvasGroup == null || materialsTabButton == null || toolsTabButton == null ||
+                materialsSchematicsTab == null || toolsItemsTab == null || materialsContainer == null ||
+                schematicsContainer == null || toolsContainer == null || itemsContainer == null ||
+                itemEntryPrefab == null || actionButton == null || actionButtonText == null)
             {
-                inventory.OnInventoryChanged += HandleInventoryChanged;
-                inventory.OnInventoryCleared += RefreshAll;
-
-                // Temporary test population
-                if (populateTestDataAtStart && inventory.GetAll().Count == 0)
-                {
-                    PopulateInitialTestItems();
-                }
+                Debug.LogError("[InventoryManagerUI] Inventory UI references are incomplete.", this);
+                return;
             }
+            inventory = InventoryService.Instance;
+            if (inventory == null) return;
+            toolSystem = Velinor.Interactions.ToolSystem.EnsureInstance(inventory);
+            if (notificationController == null)
+            {
+                var canvas = GetComponentInParent<Canvas>();
+                if (canvas != null) notificationController = canvas.GetComponentInChildren<NotificationPanelController>(true);
+            }
+            toolSystem.OnToolEquipped += HandleToolEquipped;
+            toolSystem.OnToolUnequipped += UpdateActionButton;
 
-            if (materialsTabButton != null) materialsTabButton.onClick.AddListener(() => SwitchTab(true));
-            if (toolsTabButton != null) toolsTabButton.onClick.AddListener(() => SwitchTab(false));
-            if (actionButton != null) actionButton.onClick.AddListener(OnActionClicked);
+            if (!attemptedTestPopulation)
+            {
+                attemptedTestPopulation = true;
+                if (populateTestDataAtStart && inventory.GetAll().Count == 0)
+                    PopulateInitialTestItems();
+            }
+            inventory.OnInventoryChanged += HandleInventoryChanged;
+            inventory.OnInventoryCleared += RefreshAll;
+            inventory.OnSchematicLearned += HandleSchematicLearned;
+            materialsTabButton.onClick.AddListener(OnMaterialsTabClicked);
+            toolsTabButton.onClick.AddListener(OnToolsTabClicked);
+            actionButton.onClick.AddListener(OnActionClicked);
 
-            var currency = CurrencySystem.Instance;
+            currency = CurrencySystem.Instance;
             if (currency != null)
             {
                 currency.OnBitsChanged += UpdateBitsDisplay;
                 UpdateBitsDisplay(currency.CurrentBits);
             }
-
-            if (toggleAction != null) toggleAction.Enable();
-
-            isMaterialsTab = true;
-            SwitchTab(true);
-            
+            toggleAction.Enable();
             CloseInventory();
-            RefreshAll();
+            SwitchTab(true);
         }
+
+        private void OnMaterialsTabClicked() => SwitchTab(true);
+        private void OnToolsTabClicked() => SwitchTab(false);
+        private void OnTogglePerformed(UnityEngine.InputSystem.InputAction.CallbackContext context) => ToggleInventory();
 
         private void PopulateInitialTestItems()
         {
             if (inventory == null) return;
             
-            // Materials
-            inventory.Add("material_scrap", 4);
-            inventory.Add("material_glass", 9);
-            inventory.Add("material_energycell", 7);
-            inventory.Add("material_circuitry", 9);
-            inventory.Add("material_rubber", 5);
+            // Basic Materials
+            inventory.Add("scrap_metal", 15);
+            inventory.Add("wire", 10);
+            inventory.Add("polymer", 8);
+            inventory.Add("glass", 5);
+            inventory.Add("fabric", 12);
+            inventory.Add("electronic_parts", 6);
+            inventory.Add("power_cell", 4);
+            inventory.Add("mechanical_parts", 7);
+            inventory.Add("sealant", 9);
 
-            // Tools
-            inventory.Add("tool_scanner", 1);
-            inventory.Add("tool_welder", 1);
-            inventory.Add("tool_flashlight", 1);
+            // Herbs & Organic
+            inventory.Add("medicinal_herbs", 10);
+            inventory.Add("antiseptic_herbs", 8);
+            inventory.Add("soothing_herbs", 5);
+            inventory.Add("plant_oil", 6);
+            inventory.Add("roots", 10);
+            inventory.Add("greens", 8);
+            inventory.Add("vegetables", 12);
+            inventory.Add("fruit", 15);
+            inventory.Add("culinary_herbs", 20);
 
-            // Items
-            inventory.Add("item_stim", 1);
-            inventory.Add("item_ration", 1);
+            // Some starter schematics
+            inventory.Add("schematic_portable_light", 1);
+            inventory.Add("schematic_pry_tool", 1);
+            inventory.Add("schematic_bandage", 1);
 
-            // Schematics
-            string[] schematics = { 
-                "schematic_scanner", "schematic_welder", "schematic_flashlight", 
-                "schematic_stim", "schematic_filter", "schematic_ration" 
-            };
-            foreach (var s in schematics) inventory.Add(s, 1);
-            
-            Debug.Log("[InventoryManagerUI] Auto-populated test items matching Nov 11 state.");
+            Debug.Log("[InventoryManagerUI] Auto-populated test items matching canonical Velinor taxonomy.");
         }
 
         private void HandleInventoryChanged(string id, int qty) => RefreshAll();
+        private void HandleToolEquipped(string id) => UpdateActionButton();
+        private void HandleSchematicLearned(string id) => RefreshAll();
 
         private void OnDisable()
         {
@@ -138,17 +170,26 @@ private bool isInventoryOpen = false;
             {
                 inventory.OnInventoryChanged -= HandleInventoryChanged;
                 inventory.OnInventoryCleared -= RefreshAll;
+                inventory.OnSchematicLearned -= HandleSchematicLearned;
             }
+            if (currency != null) currency.OnBitsChanged -= UpdateBitsDisplay;
+            if (toolSystem != null)
+            {
+                toolSystem.OnToolEquipped -= HandleToolEquipped;
+                toolSystem.OnToolUnequipped -= UpdateActionButton;
+            }
+            if (materialsTabButton != null) materialsTabButton.onClick.RemoveListener(OnMaterialsTabClicked);
+            if (toolsTabButton != null) toolsTabButton.onClick.RemoveListener(OnToolsTabClicked);
+            if (actionButton != null) actionButton.onClick.RemoveListener(OnActionClicked);
             if (toggleAction != null) toggleAction.Disable();
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (Keyboard.current == null) return;
-
-            if (Keyboard.current.iKey.wasPressedThisFrame)
+            if (toggleAction != null)
             {
-                ToggleInventory();
+                toggleAction.performed -= OnTogglePerformed;
+                toggleAction.Dispose();
             }
         }
 
@@ -223,35 +264,60 @@ private bool isInventoryOpen = false;
             var allItems = inventory.GetAll();
             var materialMap = allItems.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
+            // 1. Populate Materials (from inventory)
+            foreach (var kvp in allItems)
+            {
+                var def = inventory.GetItemDefinition(kvp.Key);
+                if (def == null || def.Category != ItemCategory.Material) continue;
+                CreateEntry(materialsContainer, materialEntries, def, kvp.Value, OnMaterialClicked);
+            }
+
+            // 2. Populate Recipes (from learned schematics)
+            // If the player has a schematic item in inventory, they should learn it
+            foreach (var kvp in allItems)
+            {
+                var def = inventory.GetItemDefinition(kvp.Key);
+                if (def != null && def.Category == ItemCategory.Schematic)
+                {
+                    inventory.LearnSchematic(def.ItemId);
+                    inventory.Remove(def.ItemId, kvp.Value); // Consume the item to learn the knowledge
+                }
+            }
+
+            foreach (var schematicId in inventory.GetLearnedSchematics())
+            {
+                var def = inventory.GetItemDefinition(schematicId);
+                if (def == null) continue;
+                var entry = CreateEntryWithReturn(schematicsContainer, schematicEntries, def, 1, OnSchematicClicked);
+                PopulateSchematicIngredients(entry, def, materialMap);
+            }
+
+            // 3. Populate Tools and Items (from inventory)
             foreach (var kvp in allItems)
             {
                 var def = inventory.GetItemDefinition(kvp.Key);
                 if (def == null) continue;
 
-                switch (def.Category)
-                {
-                    case ItemCategory.Material:
-                        CreateEntry(materialsContainer, materialEntries, def, kvp.Value, OnMaterialClicked);
-                        break;
-                    case ItemCategory.Schematic:
-                        var entry = CreateEntryWithReturn(schematicsContainer, schematicEntries, def, kvp.Value, OnSchematicClicked);
-                        PopulateSchematicIngredients(entry, def, materialMap);
-                        break;
-                    case ItemCategory.Tool:
-                        CreateEntry(toolsContainer, toolEntries, def, kvp.Value, OnToolItemClicked);
-                        break;
-                    case ItemCategory.CraftedItem:
-                    case ItemCategory.Food:
-                        CreateEntry(itemsContainer, itemEntries, def, kvp.Value, OnToolItemClicked);
-                        break;
-                }
+                if (def.Category == ItemCategory.Tool)
+                    CreateEntry(toolsContainer, toolEntries, def, kvp.Value, OnToolItemClicked);
+                else if (def.Category == ItemCategory.Item)
+                    CreateEntry(itemsContainer, itemEntries, def, kvp.Value, OnToolItemClicked);
             }
             
             foreach (var entry in materialEntries) if(entry != null) entry.SetSelected(selectedMaterialIds.Contains(entry.Item.ItemId));
             if (selectedSchematic != null) 
-                foreach (var entry in schematicEntries) if(entry != null) entry.SetSelected(entry.Item.ItemId == selectedSchematic.SchematicItem.ItemId);
-            if (selectedToolOrItem != null)
-                foreach (var entry in toolEntries.Concat(itemEntries)) if(entry != null) entry.SetSelected(entry == selectedToolOrItem);
+            {
+                // Verify we still "know" the selected schematic
+                if (!inventory.IsSchematicLearned(selectedSchematic.SchematicItem.ItemId))
+                    selectedSchematic = null;
+                else
+                    foreach (var entry in schematicEntries) if(entry != null) entry.SetSelected(entry.Item.ItemId == selectedSchematic.SchematicItem.ItemId);
+            }
+
+            if (selectedToolOrItemId != null && !inventory.Contains(selectedToolOrItemId))
+                selectedToolOrItemId = null;
+            foreach (var entry in toolEntries.Concat(itemEntries))
+                if (entry != null) entry.SetSelected(entry.Item.ItemId == selectedToolOrItemId);
 
             UpdateSchematicStates();
             UpdateActionButton();
@@ -264,8 +330,9 @@ private bool isInventoryOpen = false;
             entry.ClearIngredients();
             foreach (var ing in schematic.Ingredients)
             {
-                bool hasEnough = available.TryGetValue(ing.item.ItemId, out int qty) && qty >= ing.quantity;
-                entry.AddIngredient(ing.item.DisplayName, ing.quantity, hasEnough);
+                int owned = available.TryGetValue(ing.item.ItemId, out int qty) ? qty : 0;
+                bool hasEnough = owned >= ing.quantity;
+                entry.AddIngredient(ing.item.Icon, ing.item.DisplayName, ing.quantity, owned, hasEnough);
             }
         }
 
@@ -319,9 +386,10 @@ private bool isInventoryOpen = false;
 
         private void OnToolItemClicked(InventoryItemEntryUI entry)
         {
-            if (selectedToolOrItem == entry) selectedToolOrItem = null;
-            else selectedToolOrItem = entry;
-            foreach (var t in toolEntries.Concat(itemEntries)) if(t != null) t.SetSelected(t == selectedToolOrItem);
+            string id = entry.Item.ItemId;
+            selectedToolOrItemId = selectedToolOrItemId == id ? null : id;
+            foreach (var row in toolEntries.Concat(itemEntries))
+                if (row != null) row.SetSelected(row.Item.ItemId == selectedToolOrItemId);
             UpdateActionButton();
         }
 
@@ -343,33 +411,126 @@ private bool isInventoryOpen = false;
         private void UpdateActionButton()
         {
             bool active = false;
-            if (isMaterialsTab) {
+            if (isMaterialsTab)
+            {
                 actionButtonText.text = "Assemble";
-                if (inventory != null) active = selectedSchematic != null && selectedSchematic.CanAssemble(selectedMaterialIds.ToDictionary(id => id, id => inventory.GetQuantity(id)));
-            } else {
-                if (selectedToolOrItem != null) {
-                    actionButtonText.text = selectedToolOrItem.Item.Category == ItemCategory.Tool ? "Equip" : "Use";
-                    active = true;
-                } else {
+                if (inventory != null && selectedSchematic != null)
+                {
+                    var selection = selectedMaterialIds.ToDictionary(id => id, id => inventory.GetQuantity(id));
+                    bool hasIngredients = selectedSchematic.CanAssemble(selection);
+                    
+                    // Rule: Prevent duplicate permanent tools
+                    bool alreadyOwned = selectedSchematic.ResultItem.Category == ItemCategory.Tool && inventory.Contains(selectedSchematic.ResultItem.ItemId);
+                    
+                    if (alreadyOwned)
+                    {
+                        actionButtonText.text = "Already Owned";
+                        active = false;
+                    }
+                    else
+                    {
+                        active = hasIngredients;
+                    }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(selectedToolOrItemId))
+                {
+                    var def = inventory.GetItemDefinition(selectedToolOrItemId);
+                    if (def != null)
+                    {
+                        if (def.Category == ItemCategory.Tool)
+                        {
+                            bool isEquipped = toolSystem != null && toolSystem.IsToolEquipped(selectedToolOrItemId);
+                            actionButtonText.text = isEquipped ? "Unequip" : "Equip";
+                            active = true;
+                        }
+                        else
+                        {
+                            actionButtonText.text = "Use";
+                            active = true;
+                        }
+                    }
+                }
+                else
+                {
                     actionButtonText.text = "Equip";
                     active = false;
                 }
             }
             actionButton.interactable = active;
-            if (actionButton.TryGetComponent<Image>(out var btnImg)) btnImg.color = active ? buttonActiveColor : buttonInactiveColor;
+            if (actionButton.TryGetComponent<Image>(out var btnImg))
+                btnImg.color = active ? buttonActiveColor : buttonInactiveColor;
         }
 
         private void OnActionClicked()
         {
-            if (isMaterialsTab) {
-                if (selectedSchematic != null) {
-                    foreach (var ingredient in selectedSchematic.Ingredients) inventory.Remove(ingredient.item.ItemId, ingredient.quantity);
-                    inventory.Add(selectedSchematic.ResultItem.ItemId, selectedSchematic.ResultQuantity);
-                    RefreshAll();
+            if (isMaterialsTab)
+            {
+                if (selectedSchematic != null)
+                {
+                    // Double check tool uniqueness rule
+                    if (selectedSchematic.ResultItem.Category == ItemCategory.Tool && inventory.Contains(selectedSchematic.ResultItem.ItemId))
+                    {
+                        Notify("You already have a " + selectedSchematic.ResultItem.DisplayName);
+                        return;
+                    }
+
+                    // Double check ingredients
+                    var currentInventory = inventory.GetAll();
+                    if (selectedSchematic.CanAssemble(currentInventory))
+                    {
+                        foreach (var ingredient in selectedSchematic.Ingredients)
+                            inventory.Remove(ingredient.item.ItemId, ingredient.quantity);
+                        
+                        inventory.Add(selectedSchematic.ResultItem.ItemId, selectedSchematic.ResultQuantity);
+                        Notify(selectedSchematic.ResultItem.DisplayName + " assembled");
+                        RefreshAll();
+                    }
+                    else
+                    {
+                        Notify("Missing materials for " + selectedSchematic.ResultItem.DisplayName);
+                    }
                 }
-            } else {
-                if (selectedToolOrItem != null) Debug.Log($"Used {selectedToolOrItem.Item.DisplayName}");
             }
+            else if (!string.IsNullOrEmpty(selectedToolOrItemId))
+            {
+                var def = inventory.GetItemDefinition(selectedToolOrItemId);
+                if (def == null) return;
+
+                if (def.Category == ItemCategory.Tool)
+                {
+                    if (toolSystem == null) return;
+                    bool isEquipped = toolSystem.IsToolEquipped(selectedToolOrItemId);
+                    if (isEquipped)
+                    {
+                        toolSystem.UnequipTool();
+                        Notify(def.DisplayName + " has been unequipped");
+                    }
+                    else
+                    {
+                        if (toolSystem.EquipTool(selectedToolOrItemId))
+                            Notify(def.DisplayName + " has been equipped");
+                    }
+                }
+                else
+                {
+                    if (inventory.Remove(selectedToolOrItemId, 1))
+                    {
+                        Notify(def.DisplayName + " has been used");
+                        RefreshAll();
+                    }
+                }
+            }
+        }
+
+        private void Notify(string message)
+        {
+            if (notificationController != null)
+                notificationController.ShowNotification(message);
+            else
+                Debug.Log("[Inventory] " + message);
         }
 
         private void UpdateBitsDisplay(int amount)

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57eef9bcf45c69b40a3c7ce8a17a2504, type: 3}
+  m_Name: Burn_Cream_Recipe
+  m_EditorClassIdentifier: Assembly-CSharp::Velinor.Inventory.SchematicDefinition
+  schematicItem: {fileID: 11400000, guid: 87f605c77c7c20444b9058b68cee60ce, type: 2}
+  ingredients:
+  - item: {fileID: 11400000, guid: 22499053df2f351439d06714775b9e4c, type: 2}
+    quantity: 2
+  - item: {fileID: 11400000, guid: 17f95df6c3dc97043bc2711456b6c974, type: 2}
+    quantity: 1
+  resultItem: {fileID: 11400000, guid: a3086eb7f30280a49b6078140f08cfa2, type: 2}
+  resultQuantity: 1

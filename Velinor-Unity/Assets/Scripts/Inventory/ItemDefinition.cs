@@ -65,10 +65,7 @@ namespace Velinor.Inventory
     {
         Material,
         Tool,
-        CraftedItem,
-        Food,
-        PersonalItem,
-        KeyItem,
+        Item,
         Schematic
     }
 
