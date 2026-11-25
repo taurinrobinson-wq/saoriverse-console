@@ -7517,11 +7517,14 @@ MonoBehaviour:
   openingSceneAsset: {fileID: 102900000, guid: a6ae80d59e39c464dad8283c585c74f5, type: 3}
   targetScene: Desert_Saori_Meeting
   characterOverlayImage: {fileID: 1698336738}
-  eyesPartOpenSprite: {fileID: 21300000, guid: 73cbd0f6c0866b74a8b4af3d375f5e42, type: 3}
-  eyesOpenSprite: {fileID: 21300000, guid: d7a9ae73372d48847bf3fa91e859d5ae, type: 3}
+  eyesClosedSprite: {fileID: 21300000, guid: 72fcd7f8d4d22f044b4ddc3ff5fd10f3, type: 3}
+  eyesPartOpenSprite: {fileID: 21300000, guid: 78d78684e2a33c34d88f5724f4d0c49a, type: 3}
+  eyesOpenSprite: {fileID: 21300000, guid: ca629dcabf5319e4aa14d54eeb071634, type: 3}
+  eyesPartOpenDuration: 0.2
+  eyesOpenDuration: 0.3
   startButtonSound: {fileID: 8300000, guid: e44f26c350ce6cf499a3da6706436b69, type: 3}
   mainMenuPanel: {fileID: 1351616029}
-  settingsPanel: {fileID: 0}
+  settingsPanel: {fileID: 1810523595}
 --- !u!114 &1599864798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7908,7 +7911,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e85027650b00754b80446486c8cc0c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 21f1711613d240f4d9b9ffe4cd3ec675, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8075,7 +8078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6221d84efa6735a4cadfffdcb135be54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 72fcd7f8d4d22f044b4ddc3ff5fd10f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

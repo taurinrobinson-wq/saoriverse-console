@@ -14,9 +14,18 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private string targetScene = "MachinesCave_01";
 
     [Header("--- EYE ANIMATION ---")]
-    [SerializeField] private UnityEngine.UI.Image characterOverlayImage;
-    [SerializeField] private Sprite eyesPartOpenSprite;
-    [SerializeField] private Sprite eyesOpenSprite;
+    [Tooltip("The Image component that covers the character's face.")]
+    public UnityEngine.UI.Image characterOverlayImage;
+    [Tooltip("The sprite to show when eyes are closed (initial state).")]
+    public Sprite eyesClosedSprite;
+    [Tooltip("The sprite to show when eyes are partially open.")]
+    public Sprite eyesPartOpenSprite;
+    [Tooltip("The sprite to show when eyes are fully open.")]
+    public Sprite eyesOpenSprite;
+    [Tooltip("Duration to show the partially open eyes.")]
+    public float eyesPartOpenDuration = 0.15f;
+    [Tooltip("Duration to show the fully open eyes.")]
+    public float eyesOpenDuration = 0.2f;
 
     [Header("--- AUDIO ---")]
     [SerializeField] private AudioClip startButtonSound;
@@ -42,6 +51,11 @@ public class TitleScreenManager : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false;
+        }
+
+        if (characterOverlayImage != null && eyesClosedSprite != null)
+        {
+            characterOverlayImage.sprite = eyesClosedSprite;
         }
 
         if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
@@ -75,13 +89,13 @@ public class TitleScreenManager : MonoBehaviour
             if (eyesPartOpenSprite != null)
             {
                 characterOverlayImage.sprite = eyesPartOpenSprite;
-                yield return new WaitForSeconds(0.15f);
+                yield return new WaitForSeconds(eyesPartOpenDuration);
             }
             
             if (eyesOpenSprite != null)
             {
                 characterOverlayImage.sprite = eyesOpenSprite;
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(eyesOpenDuration);
             }
         }
         // --- EYE SEQUENCE END ---
