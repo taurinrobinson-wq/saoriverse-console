@@ -15,6 +15,7 @@ namespace Velinor.Inventory
         [SerializeField] private string displayName;
         [TextArea(2, 4)] [SerializeField] private string description;
         [SerializeField] private Sprite icon;
+        [SerializeField] private Sprite[] spriteVariants;  // Wire_01, Wire_02, etc. for visual variety
         [SerializeField] private GameObject worldPrefab;  // Optional: 3D model for world pickup
 
         [Header("Classification")]
@@ -34,6 +35,23 @@ namespace Velinor.Inventory
         public IReadOnlyList<ItemTag> Tags => tags;
         public int MaxStackSize => maxStackSize;
         public int BaseValue => baseValue;
+
+        /// <summary>
+        /// Get a random sprite variant for display in the world.
+        /// If variants are defined, picks randomly from them. Otherwise returns Icon.
+        /// Useful for scrappy aesthetic: 9 different wire sprites that all count as "wire"
+        /// </summary>
+        public Sprite GetDisplaySprite()
+        {
+            if (spriteVariants != null && spriteVariants.Length > 0)
+            {
+                int randomIndex = Random.Range(0, spriteVariants.Length);
+                Sprite selected = spriteVariants[randomIndex];
+                if (selected != null)
+                    return selected;
+            }
+            return icon;
+        }
 
         /// <summary>
         /// Check if this item has a specific tag (for NPC preferences, crafting, etc.)

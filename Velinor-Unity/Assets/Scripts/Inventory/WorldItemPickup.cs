@@ -33,6 +33,16 @@ namespace Velinor.Inventory
                 return;
             }
 
+            // Apply random sprite variant for scrappy aesthetic
+            if (itemDefinition != null)
+            {
+                SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.sprite = itemDefinition.GetDisplaySprite();
+                }
+            }
+
             Debug.Log($"[WorldItemPickup] {pickupId} ready for collection ({quantity}x {itemDefinition.DisplayName})");
         }
 
