@@ -366,17 +366,27 @@ public class DialogueUIController : MonoBehaviour
                 }
                 break;
             case "system_notification":
-                // Handle system notifications with flexible format: ["Title", "Subtitle", ...]
+                // Handle system notifications with flexible format: ["Text"] or ["Line1", "Line2"]
                 if (diaryEntries != null && diaryEntries.Length >= 1)
                 {
-                    string title = diaryEntries[0];
-                    string subtitle = diaryEntries.Length >= 2 ? diaryEntries[1] : "";
+                    string notificationText;
+                    
+                    if (diaryEntries.Length >= 2 && !string.IsNullOrEmpty(diaryEntries[1]))
+                    {
+                        // Two-line format: combine title + subtitle
+                        notificationText = $"{diaryEntries[0]}\n{diaryEntries[1]}";
+                    }
+                    else
+                    {
+                        // Single line
+                        notificationText = diaryEntries[0];
+                    }
                     
                     var notificationController = FindAnyObjectByType<NotificationPanelController>();
                     if (notificationController != null)
                     {
-                        notificationController.ShowNotification(title, subtitle);
-                        Debug.Log($"[UI] EVENT: System notification - {title}" + (string.IsNullOrEmpty(subtitle) ? "" : $": {subtitle}"));
+                        notificationController.ShowNotification(notificationText);
+                        Debug.Log($"[UI] EVENT: System notification - {notificationText}");
                     }
                     else
                     {
