@@ -6,44 +6,47 @@ namespace Velinor.Inventory
     /// <summary>
     /// WorldItemPickup: Represents a collectible item placed in a scene.
     /// 
-    /// Tracks:
+    /// Uses ItemPickupData for modular configuration:
     /// - pickupId: Stable identifier for persistence
-    /// - itemId: Which item type this is
+    /// - itemDefinition: Which item type this is
     /// - quantity: How many to add when collected
+    /// - spriteVariants: Environment-specific sprite options (can be different per pickup location)
     /// - Collected status: Prevents respawn after scene reload
     /// </summary>
     public class WorldItemPickup : MonoBehaviour, IInteractable
     {
-        [SerializeField] private string pickupId;  // Unique ID in this scene (e.g., "market_wire_01")
-        [SerializeField] private ItemDefinition itemDefinition;
-        [Min(1)] [SerializeField] private int quantity = 1;
+        [SerializeField] private ItemPickupData pickupData;
 
         private string pickupCollectionFlag;  // GameFlags key for persistence
 
         private void Start()
         {
+            if (pickupData == null)
+            {
+                Debug.LogError($"[WorldItemPickup] No ItemPickupData assigned to {gameObject.name}!");
+                return;
+            }
+
             // Generate persistence flag
-            pickupCollectionFlag = $"pickup_collected_{pickupId}";
+            pickupCollectionFlag = $"pickup_collected_{pickupData.PickupId}";
 
             // Check if already collected
             if (GameFlags.Get(pickupCollectionFlag))
             {
-                Debug.Log($"[WorldItemPickup] {pickupId} already collected, hiding");
+                Debug.Log($"[WorldItemPickup] {pickupData.PickupId} already collected, hiding");
                 gameObject.SetActive(false);
                 return;
             }
 
             // Apply random sprite variant for scrappy aesthetic
-            if (itemDefinition != null)
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
             {
-                SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.sprite = itemDefinition.GetDisplaySprite();
-                }
+                spriteRenderer.sprite = pickupData.GetDisplaySprite();
+                Debug.Log($"[WorldItemPickup] {pickupData.PickupId} assigned sprite variant");
             }
 
-            Debug.Log($"[WorldItemPickup] {pickupId} ready for collection ({quantity}x {itemDefinition.DisplayName})");
+            Debug.Log($"[WorldItemPickup] {pickupData.PickupId} ready for collection ({pickupData.Quantity}x {pickupData.ItemDefinition.DisplayName})");
         }
 
         /// <summary>
@@ -51,22 +54,28 @@ namespace Velinor.Inventory
         /// </summary>
         public void Collect()
         {
-            if (GameFlags.Get(pickupCollectionFlag))
+            if (pickupData == null)
             {
-                Debug.LogWarning($"[WorldItemPickup] {pickupId} was already collected");
+                Debug.LogError($"[WorldItemPickup] No ItemPickupData assigned!");
                 return;
             }
 
-            if (itemDefinition == null)
+            if (GameFlags.Get(pickupCollectionFlag))
             {
-                Debug.LogError($"[WorldItemPickup] {pickupId} has no ItemDefinition assigned!");
+                Debug.LogWarning($"[WorldItemPickup] {pickupData.PickupId} was already collected");
+                return;
+            }
+
+            if (pickupData.ItemDefinition == null)
+            {
+                Debug.LogError($"[WorldItemPickup] {pickupData.PickupId} has no ItemDefinition assigned!");
                 return;
             }
 
             // Add to inventory
-            if (InventoryService.Instance.Add(itemDefinition.ItemId, quantity))
+            if (InventoryService.Instance.Add(pickupData.ItemDefinition.ItemId, pickupData.Quantity))
             {
-                Debug.Log($"[WorldItemPickup] Collected {quantity}x {itemDefinition.DisplayName}");
+                Debug.Log($"[WorldItemPickup] Collected {pickupData.Quantity}x {pickupData.ItemDefinition.DisplayName}");
 
                 // Mark as collected in persistent state
                 GameFlags.Set(pickupCollectionFlag, true);
@@ -76,7 +85,7 @@ namespace Velinor.Inventory
             }
             else
             {
-                Debug.LogWarning($"[WorldItemPickup] Failed to add {itemDefinition.DisplayName} to inventory");
+                Debug.LogWarning($"[WorldItemPickup] Failed to add {pickupData.ItemDefinition.DisplayName} to inventory");
             }
         }
 
@@ -93,11 +102,7 @@ namespace Velinor.Inventory
         /// </summary>
         private void OnValidate()
         {
-            // Auto-generate pickupId if empty
-            if (string.IsNullOrWhiteSpace(pickupId))
-            {
-                pickupId = gameObject.name.ToLower().Replace(" ", "_");
-            }
+            // Validation happens in ItemPickupData
         }
     }
 }
