@@ -850,6 +850,87 @@ public class DialogueManager : MonoBehaviour
                 continue;
             }
 
+            // Handle unlock_system: persist system unlock (e.g., inventory) as a flag
+            if (trigger.type == "unlock_system")
+            {
+                if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    string systemName = trigger.data[0];
+                    string flagKey = $"system_unlocked_{systemName}";
+                    GameFlags.Set(flagKey, true);
+                    Debug.Log($"[DialogueManager] System unlocked: {systemName} (flag: {flagKey})");
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] unlock_system trigger has no system name specified");
+                }
+                continue;
+            }
+
+            // Handle unlock_npc_preference: unlock NPC material preferences
+            if (trigger.type == "unlock_npc_preference")
+            {
+                if (trigger.data != null && trigger.data.Length >= 2)
+                {
+                    string npcName = trigger.data[0];
+                    List<string> preferredItems = new List<string>();
+                    for (int i = 1; i < trigger.data.Length; i++)
+                    {
+                        preferredItems.Add(trigger.data[i]);
+                    }
+                    Debug.Log($"[DialogueManager] NPC preference unlocked: {npcName} prefers [{string.Join(", ", preferredItems)}]");
+                    // Note: NPC preference system would be implemented in a separate NPC preference manager
+                    // For now, we just log it. The game can query this via GameFlags if needed.
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] unlock_npc_preference trigger needs NPC name and at least one item");
+                }
+                continue;
+            }
+
+            // Handle learn_schematic: unlock a crafting schematic
+            if (trigger.type == "learn_schematic")
+            {
+                if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    string schematicItemId = trigger.data[0];
+                    var inventoryService = Velinor.Inventory.InventoryService.Instance;
+                    if (inventoryService != null)
+                    {
+                        inventoryService.LearnSchematic(schematicItemId);
+                        Debug.Log($"[DialogueManager] Schematic learned: {schematicItemId}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[DialogueManager] InventoryService not found - cannot learn schematic");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] learn_schematic trigger has no schematic ID specified");
+                }
+                continue;
+            }
+
+            // Handle system_notification: show UI notification with simplified format
+            if (trigger.type == "system_notification")
+            {
+                if (trigger.data != null && trigger.data.Length >= 1)
+                {
+                    // system_notification data format: ["Title", "Subtitle", ...]
+                    // If 2+ elements, show as title + subtitle
+                    // If 1 element, show as title only
+                    dialogueUI.TriggerSystemEvent("system_notification", trigger.data);
+                    Debug.Log($"[DialogueManager] System notification triggered: {trigger.data[0]}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[DialogueManager] system_notification trigger has no message specified");
+                }
+                continue;
+            }
+
             // Handle other custom triggers by passing type as event
             dialogueUI.TriggerSystemEvent(trigger.type, trigger.data);
             Debug.Log($"[DialogueManager] System trigger executed: {trigger.type}");

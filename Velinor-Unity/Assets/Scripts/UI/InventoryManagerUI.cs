@@ -6,6 +6,7 @@ using System.Linq;
 using Velinor.Inventory;
 using Velinor.Economy;
 using UnityEngine.InputSystem;
+using Velinor.Core;
 
 namespace Velinor.UI
 {
@@ -195,12 +196,22 @@ private bool isInventoryOpen = false;
 
         public void ToggleInventory()
         {
+            if (!IsInventoryUnlocked())
+            {
+                Debug.LogWarning("[InventoryManagerUI] Inventory is locked - cannot open");
+                return;
+            }
             if (isInventoryOpen) CloseInventory();
             else OpenInventory();
         }
 
         public void OpenInventory()
         {
+            if (!IsInventoryUnlocked())
+            {
+                Debug.LogWarning("[InventoryManagerUI] Inventory is locked - cannot open");
+                return;
+            }
             isInventoryOpen = true;
             SetPanelVisibility(true);
             RefreshAll();
@@ -210,6 +221,11 @@ private bool isInventoryOpen = false;
         {
             isInventoryOpen = false;
             SetPanelVisibility(false);
+        }
+
+        private bool IsInventoryUnlocked()
+        {
+            return GameFlags.Get("system_unlocked_inventory", false);
         }
 
         private void SetPanelVisibility(bool visible)

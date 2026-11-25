@@ -371,7 +371,7 @@
       "display_name": "Willy",
       "portrait_expression": "neutral",
       "setting_description": "",
-      "prompt": "Oh, and if ya find any more useful junk out there, don't just leave it lyin' around. Copper wire, motor parts, old circuitry... stuff like that. Bring it to me. Might be worth a few Bits.",
+      "prompt": "Oh, and if ya find any useful junk out there, don't just leave it lyin' around. Electronic Parts, Power Cells, Wire... stuff like that. Bring it to me. Might be worth a few Bits.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
@@ -415,7 +415,7 @@
         {
           "tone": "O",
           "label": "Observation",
-          "text": "Copper wire, motor parts, old circuitry. Anything else?",
+          "text": "Electronic Parts, Power Cell, and Wire. Anything else?",
           "audio_clip_on_choice": "",
           "result_text": "Small Observation/Nuance increase.",
           "show_result_in_notification": true,
@@ -536,17 +536,16 @@
           "type": "unlock_npc_preference",
           "data": [
             "Willy",
-            "copper_wire",
-            "motor_parts",
-            "old_circuitry"
+            "electronic_parts",
+            "power_cell",
+            "wire"
           ]
         },
         {
           "type": "system_notification",
           "data": [
             "Inventory Unlocked",
-            "Useful materials can be collected while exploring and may be valuable to others.",
-            "Press I to view your Inventory"
+            "Press I to access Inventory"
           ]
         }
       ]
@@ -555,22 +554,17 @@
       "id": 3,
       "type": "npc_turn",
       "active_speaker": "Willy",
-      "display_name": "Older Man",
+      "display_name": "Willy",
       "portrait_expression": "neutral",
       "setting_description": "",
-      "prompt_source": {
-        "type": "previous_choice_response",
-        "beat_id": 2,
-        "choice_field": "npc_response"
-      },
-      "prompt": "",
+      "prompt": "Actually... here. Found this old schematic a while back. Never bothered makin' another one. Portable light. Electronic Parts, Power Cell, little Wire. Ain't pretty, but it'll keep ya from walkin' face-first into a wall.",
       "audio_clip": "",
       "shared_beat": "",
       "tone_choices": [
         {
           "tone": "T",
           "label": "Continue",
-          "text": "Continue",
+          "text": "Thanks, Willy. This could be useful.",
           "audio_clip_on_choice": "",
           "result_text": "",
           "show_result_in_notification": false,
@@ -600,7 +594,21 @@
         }
       ],
       "next_beat_id": 4,
-      "system_triggers": []
+      "system_triggers": [
+        {
+          "type": "learn_schematic",
+          "data": [
+            "schematic_portable_light"
+          ]
+        },
+        {
+          "type": "system_notification",
+          "data": [
+            "Schematic Acquired",
+            "Portable Light"
+          ]
+        }
+      ]
     },
     {
       "id": 4,

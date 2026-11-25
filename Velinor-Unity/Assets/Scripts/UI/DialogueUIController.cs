@@ -365,6 +365,29 @@ public class DialogueUIController : MonoBehaviour
                     Debug.LogWarning("[UI] CodexController not found in scene!");
                 }
                 break;
+            case "system_notification":
+                // Handle system notifications with flexible format: ["Title", "Subtitle", ...]
+                if (diaryEntries != null && diaryEntries.Length >= 1)
+                {
+                    string title = diaryEntries[0];
+                    string subtitle = diaryEntries.Length >= 2 ? diaryEntries[1] : "";
+                    
+                    var notificationController = FindAnyObjectByType<NotificationPanelController>();
+                    if (notificationController != null)
+                    {
+                        notificationController.ShowNotification(title, subtitle);
+                        Debug.Log($"[UI] EVENT: System notification - {title}" + (string.IsNullOrEmpty(subtitle) ? "" : $": {subtitle}"));
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[UI] NotificationPanelController not found in scene!");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("[UI] system_notification triggered but no message provided");
+                }
+                break;
             case "diary_update":
                 if (diaryEntries != null && diaryEntries.Length > 0)
                 {
