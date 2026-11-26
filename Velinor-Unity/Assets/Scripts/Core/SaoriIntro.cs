@@ -54,6 +54,12 @@ public class SaoriIntro : MonoBehaviour
         // Clean up dialogue
         HideDialogue();
         dialogueActive = false;
+
+        // Establish first valid continue point
+        if (Velinor.Persistence.SaveCoordinator.Instance != null)
+        {
+            Velinor.Persistence.SaveCoordinator.Instance.CreateFirstValidCheckpoint();
+        }
     }
 
     private IEnumerator WalkAway()

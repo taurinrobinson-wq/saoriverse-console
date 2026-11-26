@@ -24,6 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Marketplace_LeftFork_01b.unity
     guid: acd43b46bde0daa438b890557514ce63
   - enabled: 1
+    path: Assets/Scenes/Marketplace_LeftFork_01b-01.unity
+    guid: e8a2ae1996f896349ae73fd9d8f0fb1a
+  - enabled: 1
+    path: Assets/Scenes/TalasRoom.unity
+    guid: 9474ed64d6af73740907076117508d4e
+  - enabled: 1
     path: Assets/Scenes/InsideMarket_00_02.unity
     guid: da36891b6615fb645898bddc436506dc
   - enabled: 1
@@ -35,6 +41,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InsideMarket_01_02.unity
     guid: 17c7c7d7fdd57cf4a825063b8fa19af5
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_RF_LeftFork_00.unity
+    guid: 866b10f604d0c9a468080851e76932fe
+  - enabled: 1
+    path: Assets/Scenes/InsideMarket_RF_LeftFork_01_OVGate.unity
+    guid: a5ad3c1cd7c82e046920786eb5c1160f
   - enabled: 1
     path: Assets/Scenes/InsideMarket_02.unity
     guid: 34818071c367c5a4d8216635be20d219

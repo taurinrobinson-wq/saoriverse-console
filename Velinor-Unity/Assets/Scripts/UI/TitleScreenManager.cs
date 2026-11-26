@@ -36,7 +36,20 @@ public class TitleScreenManager : MonoBehaviour
 
     [Header("--- UI PANELS ---")]
     [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject overlayRoot;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject profilePanel;
+    [SerializeField] private GameObject profileEntryPanel;
+    [SerializeField] private GameObject overwriteWarningPanel;
+    [SerializeField] private GameObject deleteProfileWarningPanel;
+    [SerializeField] private GameObject displayConfirmationPanel;
+    [SerializeField] private GameObject extrasPanel;
+
+    [Header("--- MAIN MENU BUTTONS ---")]
+    [SerializeField] private Button newGameButton;
+    [SerializeField] private Button continueButton;
+
+    private int selectedSlotIndex = -1;
 
     private void Start()
     {
@@ -58,32 +71,94 @@ public class TitleScreenManager : MonoBehaviour
             characterOverlayImage.sprite = eyesClosedSprite;
         }
 
+        // Initialize Persistence
+        if (Velinor.Persistence.SettingsManager.Instance != null)
+        {
+            Velinor.Persistence.SettingsManager.Instance.LoadSettings();
+        }
+
+        if (Velinor.Persistence.ProfileManager.Instance != null)
+        {
+            Velinor.Persistence.ProfileManager.Instance.ClearActiveProfile();
+        }
+
+        RefreshMenuState();
+
         if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
-        if (settingsPanel != null) settingsPanel.SetActive(false);
+        if (overlayRoot != null) overlayRoot.SetActive(false);
+        
+        HideAllOverlays();
+    }
+
+    public void RefreshMenuState()
+    {
+        var pm = Velinor.Persistence.ProfileManager.Instance;
+        if (pm == null) return;
+
+        bool hasActiveContinue = pm.ActiveProfile != null && pm.ActiveProfile.hasValidContinuePoint;
+
+        if (continueButton != null) continueButton.gameObject.SetActive(hasActiveContinue);
+        if (newGameButton != null) newGameButton.gameObject.SetActive(!hasActiveContinue);
     }
 
     public void StartGame()
     {
         if (transitioning) return;
-        
-        if (audioSource != null && startButtonSound != null)
+
+        var pm = Velinor.Persistence.ProfileManager.Instance;
+        if (pm == null) return;
+
+        if (pm.ActiveProfile == null)
         {
-            audioSource.PlayOneShot(startButtonSound);
+            int firstEmpty = -1;
+            for (int i = 0; i < 3; i++)
+            {
+                if (pm.GetSlot(i) == null) { firstEmpty = i; break; }
+            }
+
+            if (firstEmpty != -1) OpenProfileEntry(firstEmpty);
+            else OpenProfile();
+            return;
         }
 
-        Debug.Log($"[TitleScreenManager] StartGame button pressed. Transitioning to {targetScene}...");
-        StartCoroutine(GlitchTransition());
+        if (pm.ActiveProfile.hasValidContinuePoint) HandleContinue();
+        else HandleNewGame();
     }
 
-    private IEnumerator GlitchTransition()
+    private void HandleContinue()
     {
-        transitioning = true;
-        
-        // Start loading the scene in the background as soon as we press start
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetScene);
-        asyncLoad.allowSceneActivation = false;
+        if (audioSource != null && startButtonSound != null) audioSource.PlayOneShot(startButtonSound);
+        Velinor.Persistence.SaveCoordinator.Instance.RestoreFromSnapshot();
+        StartCoroutine(GlitchTransition(Velinor.Persistence.ProfileManager.Instance.ActiveProfile.lastSavedScene));
+    }
 
-        // --- EYE SEQUENCE START ---
+    private void HandleNewGame()
+    {
+        var pm = Velinor.Persistence.ProfileManager.Instance;
+        if (pm.ActiveProfile != null && pm.ActiveProfile.gameStarted)
+        {
+            ShowOverlay(overwriteWarningPanel);
+            return;
+        }
+
+        if (audioSource != null && startButtonSound != null) audioSource.PlayOneShot(startButtonSound);
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
+        StartCoroutine(NewGameSequence());
+    }
+
+    public void ConfirmOverwrite()
+    {
+        if (overlayRoot != null) overlayRoot.SetActive(false);
+        StartCoroutine(NewGameSequence());
+    }
+
+    public void CancelOverwrite() => OpenProfile();
+
+    private IEnumerator NewGameSequence()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+        // Eye Opening
         if (characterOverlayImage != null)
         {
             if (eyesPartOpenSprite != null)
@@ -98,52 +173,131 @@ public class TitleScreenManager : MonoBehaviour
                 yield return new WaitForSeconds(eyesOpenDuration);
             }
         }
-        // --- EYE SEQUENCE END ---
+
+        StartCoroutine(GlitchTransition(targetScene));
+    }
+
+    private IEnumerator GlitchTransition(string sceneToLoad)
+    {
+        transitioning = true;
+        
+        // Start loading the scene in the background
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad);
+        asyncLoad.allowSceneActivation = false;
 
         float glitchDuration = 0.5f;
         float elapsed = 0f;
 
-        // Glitch effect - random color flashes and scale
         while (elapsed < glitchDuration)
         {
             elapsed += Time.deltaTime;
-            
-            // Random color flashes
             if (canvasGroup != null) canvasGroup.alpha = Random.Range(0.3f, 1f);
-            
-            // Random rotation/scale for glitch
             transform.localScale = Vector3.one * Random.Range(0.98f, 1.02f);
-            
             yield return new WaitForEndOfFrame();
         }
 
-        // Reset state
         if (canvasGroup != null) canvasGroup.alpha = 1f;
         transform.localScale = Vector3.one;
 
-        // If we have a SceneTransitionManager, we can use its fade out before activating the scene
         if (SceneTransitionManager.Instance != null)
         {
-            // Trigger a quick fade out to black
             yield return StartCoroutine(FadeToBlack(0.3f));
-            
-            // The scene should be almost loaded by now
-            while (asyncLoad.progress < 0.9f)
-            {
-                yield return null;
-            }
-            
+            while (asyncLoad.progress < 0.9f) yield return null;
             asyncLoad.allowSceneActivation = true;
         }
         else
         {
-            // Fallback: just wait for load and activate
-            while (asyncLoad.progress < 0.9f)
-            {
-                yield return null;
-            }
+            while (asyncLoad.progress < 0.9f) yield return null;
             asyncLoad.allowSceneActivation = true;
         }
+    }
+
+    private void HideAllOverlays()
+    {
+        if (settingsPanel != null) settingsPanel.SetActive(false);
+        if (profilePanel != null) profilePanel.SetActive(false);
+        if (profileEntryPanel != null) profileEntryPanel.SetActive(false);
+        if (overwriteWarningPanel != null) overwriteWarningPanel.SetActive(false);
+        if (deleteProfileWarningPanel != null) deleteProfileWarningPanel.SetActive(false);
+        if (displayConfirmationPanel != null) displayConfirmationPanel.SetActive(false);
+        if (extrasPanel != null) extrasPanel.SetActive(false);
+    }
+
+    private void ShowOverlay(GameObject panel)
+    {
+        if (overlayRoot != null)
+        {
+            overlayRoot.SetActive(true);
+            overlayRoot.transform.SetAsLastSibling();
+            
+            var canvas = overlayRoot.GetComponent<Canvas>();
+            if (canvas != null)
+            {
+                canvas.overrideSorting = true;
+                canvas.sortingOrder = 999;
+            }
+
+            var rootImg = overlayRoot.GetComponent<UnityEngine.UI.Image>();
+            if (rootImg != null)
+            {
+                rootImg.color = new Color(0, 0, 0, 0.9f);
+                rootImg.raycastTarget = true;
+            }
+        }
+        HideAllOverlays();
+        if (panel != null) panel.SetActive(true);
+    }
+
+    private void CloseCurrentOverlay()
+    {
+        HideAllOverlays();
+        if (overlayRoot != null) overlayRoot.SetActive(false);
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+        RefreshMenuState();
+    }
+
+    public void OpenSettings() => ShowOverlay(settingsPanel);
+    public void CloseSettings() => CloseCurrentOverlay();
+
+    public void OpenProfile() => ShowOverlay(profilePanel);
+    public void CloseProfile() => CloseCurrentOverlay();
+
+    public void OpenExtras() => ShowOverlay(extrasPanel);
+    public void CloseExtras() => CloseCurrentOverlay();
+
+    public void OpenDeleteWarning() => ShowOverlay(deleteProfileWarningPanel);
+    public void CloseDeleteWarning() => ShowOverlay(profilePanel);
+
+    public void OpenDisplayConfirmation() => ShowOverlay(displayConfirmationPanel);
+    public void CloseDisplayConfirmation() => ShowOverlay(settingsPanel);
+
+    private void OpenProfileEntry(int slotIndex)
+    {
+        selectedSlotIndex = slotIndex;
+        ShowOverlay(profileEntryPanel);
+    }
+
+    public void ConfirmProfileCreation()
+    {
+        if (selectedSlotIndex == -1) return;
+
+        var input = profileEntryPanel.GetComponentInChildren<TMPro.TMP_InputField>();
+        string profileName = (input != null && !string.IsNullOrEmpty(input.text)) ? input.text : "Explorer";
+
+        Velinor.Persistence.ProfileManager.Instance.CreateProfile(selectedSlotIndex, profileName);
+        Velinor.Persistence.ProfileManager.Instance.SetActiveProfile(selectedSlotIndex);
+
+        if (profileEntryPanel != null) profileEntryPanel.SetActive(false);
+        if (overlayRoot != null) overlayRoot.SetActive(false);
+        HandleNewGame();
+    }
+
+    public void CancelProfileCreation()
+    {
+        if (profileEntryPanel != null) profileEntryPanel.SetActive(false);
+        if (overlayRoot != null) overlayRoot.SetActive(false);
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+        selectedSlotIndex = -1;
     }
 
     private IEnumerator FadeToBlack(float duration)
@@ -156,18 +310,6 @@ public class TitleScreenManager : MonoBehaviour
             yield return null;
         }
         if (canvasGroup != null) canvasGroup.alpha = 0f;
-    }
-
-    public void OpenSettings()
-{
-        if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
-        if (settingsPanel != null) settingsPanel.SetActive(true);
-    }
-
-    public void CloseSettings()
-    {
-        if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
-        if (settingsPanel != null) settingsPanel.SetActive(false);
     }
 
     public void QuitGame()

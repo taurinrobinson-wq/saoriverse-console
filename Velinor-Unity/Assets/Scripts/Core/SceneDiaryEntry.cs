@@ -102,14 +102,14 @@ public class SceneDiaryEntry : MonoBehaviour
         }
 
         // Check if this should only trigger once
-        if (triggerCondition == "first_visit_only" && PlayerPrefs.HasKey(FlagKey))
+        if (triggerCondition == "first_visit_only" && GameFlags.HasFlag(FlagKey))
         {
             Debug.Log($"[SceneDiaryEntry] Entry '{diaryEntryKey}' already triggered in {gameObject.scene.name}. Skipping.");
             return;
         }
 
         // Check required flag condition if specified
-        if (!string.IsNullOrEmpty(requiredFlag) && !PlayerPrefs.HasKey(requiredFlag))
+        if (!string.IsNullOrEmpty(requiredFlag) && !GameFlags.Get(requiredFlag))
         {
             Debug.Log($"[SceneDiaryEntry] Required flag '{requiredFlag}' not met. Skipping entry '{diaryEntryKey}'.");
             return;
@@ -137,8 +137,7 @@ public class SceneDiaryEntry : MonoBehaviour
         // Mark as triggered
         if (triggerCondition == "first_visit_only")
         {
-            PlayerPrefs.SetInt(FlagKey, 1);
-            PlayerPrefs.Save();
+            GameFlags.Set(FlagKey, true);
             Debug.Log($"[SceneDiaryEntry] Saved trigger flag: {FlagKey}");
         }
     }
@@ -149,15 +148,10 @@ public class SceneDiaryEntry : MonoBehaviour
     /// </summary>
     public void ResetFlag()
     {
-        if (PlayerPrefs.HasKey(FlagKey))
+        if (GameFlags.HasFlag(FlagKey))
         {
-            PlayerPrefs.DeleteKey(FlagKey);
-            PlayerPrefs.Save();
+            GameFlags.Set(FlagKey, false);
             Debug.Log($"[SceneDiaryEntry] Reset flag for '{diaryEntryKey}' in scene '{gameObject.scene.name}'");
-        }
-        else
-        {
-            Debug.Log($"[SceneDiaryEntry] No flag to reset for '{diaryEntryKey}' in scene '{gameObject.scene.name}'");
         }
     }
 
@@ -167,10 +161,9 @@ public class SceneDiaryEntry : MonoBehaviour
     public static void ResetFlagByKey(string sceneName, string entryKey)
     {
         string flagKey = $"{sceneName}_diary_{entryKey}_triggered";
-        if (PlayerPrefs.HasKey(flagKey))
+        if (GameFlags.HasFlag(flagKey))
         {
-            PlayerPrefs.DeleteKey(flagKey);
-            PlayerPrefs.Save();
+            GameFlags.Set(flagKey, false);
             Debug.Log($"[SceneDiaryEntry] Reset flag: {flagKey}");
         }
     }
@@ -180,15 +173,7 @@ public class SceneDiaryEntry : MonoBehaviour
     /// </summary>
     public static void ResetAllDiaryFlags()
     {
-        string[] allKeys = PlayerPrefs.GetString("_diary_keys", "").Split(',');
-        foreach (string key in allKeys)
-        {
-            if (!string.IsNullOrEmpty(key) && key.Contains("_diary_"))
-            {
-                PlayerPrefs.DeleteKey(key);
-            }
-        }
-        PlayerPrefs.Save();
-        Debug.Log("[SceneDiaryEntry] Reset all diary trigger flags");
+        // Handled by GameFlags.Clear()
+        Debug.Log("[SceneDiaryEntry] Reset all diary trigger flags (Migrated to GameFlags)");
     }
 }

@@ -30,7 +30,7 @@ public class DiaryManager : MonoBehaviour
         if (Application.isPlaying) DontDestroyOnLoad(gameObject);
 
         diaryPath = Path.Combine(Application.persistentDataPath, "PlayerDiary.json");
-        LoadDiary();
+        // LoadDiary(); // Persistence now handled by SaveCoordinator
     }
 
     public void AddEntry(string content)
@@ -41,7 +41,7 @@ public class DiaryManager : MonoBehaviour
             content = content
         };
         diaryData.entries.Add(entry);
-        SaveDiary();
+        // SaveDiary();
         Debug.Log($"[DiaryManager] Entry Added: {content}");
 
         // Show notification
@@ -81,6 +81,15 @@ public class DiaryManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError($"[DiaryManager] Load Error: {e.Message}");
+        }
+    }
+
+    public void RestoreEntries(List<Velinor.Persistence.DiaryEntryData> data)
+    {
+        diaryData.entries.Clear();
+        foreach (var entry in data)
+        {
+            diaryData.entries.Add(new DiaryEntry { timestamp = entry.timestamp, content = entry.content });
         }
     }
 

@@ -80,7 +80,8 @@ namespace Velinor.Inventory
         /// </summary>
         public bool IsSchematicLearned(string schematicItemId)
         {
-            return learnedSchematicIds.Contains(schematicItemId);
+            bool hasProduction = learnedSchematicIds.Contains(schematicItemId);
+            return Velinor.Persistence.EffectiveState.IsSchematicLearned(schematicItemId, hasProduction);
         }
 
         /// <summary>

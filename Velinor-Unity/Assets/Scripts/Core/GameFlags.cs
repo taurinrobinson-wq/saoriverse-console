@@ -30,7 +30,8 @@ public static class GameFlags
         if (string.IsNullOrWhiteSpace(key))
             return defaultValue;
 
-        return flags.TryGetValue(key, out var value) ? value : defaultValue;
+        bool production = flags.TryGetValue(key, out var value) ? value : defaultValue;
+        return Velinor.Persistence.EffectiveState.GetFlag(key, production);
     }
 
     public static bool HasFlag(string key)

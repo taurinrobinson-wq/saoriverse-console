@@ -150,12 +150,15 @@ namespace Velinor.Economy
 
         private void SaveBits()
         {
-            PlayerPrefs.SetInt(BITS_SAVE_KEY, CurrentBits);
-            PlayerPrefs.Save();
+            // Persistence is now handled by SaveCoordinator
+            // PlayerPrefs.SetInt(BITS_SAVE_KEY, CurrentBits);
+            // PlayerPrefs.Save();
         }
 
         private void LoadBits()
         {
+            // Initialized via SaveCoordinator RestoreFromSnapshot
+            /*
             if (PlayerPrefs.HasKey(BITS_SAVE_KEY))
             {
                 CurrentBits = PlayerPrefs.GetInt(BITS_SAVE_KEY);
@@ -165,8 +168,10 @@ namespace Velinor.Economy
                 CurrentBits = initialBits;
                 SaveBits();
             }
+            */
+            CurrentBits = initialBits;
 
-            Debug.Log($"[CurrencySystem] Initialized with {CurrentBits} bits");
+            Debug.Log($"[CurrencySystem] Initialized with {CurrentBits} bits (Wait for Profile restoration)");
         }
 
         /// <summary>
